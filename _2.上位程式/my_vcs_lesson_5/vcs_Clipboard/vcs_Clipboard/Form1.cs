@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace vcs_Clipboard
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //把資料放到系統剪貼簿裏
+            //System.Windows.Forms.Clipboard.SetDataObject(DateTime.Now.ToString());
+
+            //把系統剪貼簿裏的資料拿出來
+            System.Windows.Forms.IDataObject dataObject = System.Windows.Forms.Clipboard.GetDataObject();
+
+            if (dataObject.GetData(typeof(string)) != null)
+                richTextBox1.Text += dataObject.GetData(typeof(string)).ToString();
+            else
+                richTextBox1.Text += "no data\n";
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //string poem = "唐王翰涼州詞\n葡萄美酒夜光杯，欲飲琵琶馬上催。醉臥沙場君莫笑，古來征戰幾人回。\n";
+            //Clipboard.SetDataObject(poem);  //將poem字串填到Clipboard裏。
+
+            //從Clipboard取出資料
+            IDataObject tmpdata = Clipboard.GetDataObject();
+
+            if (tmpdata.GetDataPresent(DataFormats.Text))
+            {
+                richTextBox1.Text += tmpdata.GetData(DataFormats.Text);
+            }
+            else
+            {
+                richTextBox1.Text += "can not get data from clipboard.\n";
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //(C#)取得剪貼簿Clipboard的內容
+            IDataObject data = Clipboard.GetDataObject();
+            if (data.GetDataPresent(DataFormats.Text))  //純文字類
+            {
+                richTextBox1.Text += "取得文字, 內容：\n";
+                richTextBox1.Text += data.GetData(DataFormats.Text).ToString();
+            }
+            else if (data.GetDataPresent(DataFormats.Bitmap))  //圖片類
+            {
+                richTextBox1.Text += "取得圖片\n";
+                pictureBox1.Image = (System.Drawing.Image)data.GetData(DataFormats.Bitmap);
+            }
+
+
+        }
+    }
+}
