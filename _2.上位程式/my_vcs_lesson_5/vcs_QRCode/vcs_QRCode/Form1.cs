@@ -66,7 +66,7 @@ namespace vcs_QRCode
             ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
 
             //讀取要解碼的圖片
-            FileStream fs = new FileStream(@"C:\lion1.temp.png", FileMode.Open);
+            FileStream fs = new FileStream(@"C:\______test_vcs\temp.png", FileMode.Open);
             Byte[] data = new Byte[fs.Length];
             // 把檔案讀取到位元組陣列
             fs.Read(data, 0, data.Length);
