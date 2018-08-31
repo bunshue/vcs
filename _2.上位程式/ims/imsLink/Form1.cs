@@ -6124,6 +6124,113 @@ namespace imsLink
 
         }
 
+        private void button133_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 5; //lion
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+        }
+
+        private void button132_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 0; //clear
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button135_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 1; //step_1
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+        }
+
+        private void button134_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 2; //step_2
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button137_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 3; //step_3
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button136_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 4; //ims_logo
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button138_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 6; //lion 2
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button139_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 7; //lion 3
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button140_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 20; //gdispImageDraw
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button141_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 8; //test new pic
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button142_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 21; //lion test position
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+        private void button143_Click(object sender, EventArgs e)
+        {
+            xx = 2; //picture
+            yy = 22; //lion test position
+            zz = 0;
+            Send_IMS_Data(0xD0, xx, yy, zz);
+
+        }
+
+
     }
 }
 
