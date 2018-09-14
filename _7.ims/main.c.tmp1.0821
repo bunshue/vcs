@@ -59,7 +59,7 @@ void parse_uart_command(void);
 void parse_uart_esc_command(void);
 void get_system_up_time(void);
 
-static const char last_command[] = "uptime";
+static const char last_command[] = "help";
 
 // *****************************************************
 // Main program entry point
@@ -76,6 +76,7 @@ int main()
 
 	p_Image = &myImage;
 	update_dongle_status = 0;
+	update_usb_status = 0;
 
 	// Setup UART and caches
     init_platform();
@@ -283,7 +284,6 @@ void main_loop()
 	uint32_t value = 0;
 	int i;
 	uint32_t status;
-
 
 	// Main loop
 	while (1)
@@ -980,6 +980,8 @@ void parse_uart_command(void)
 {
 	int status;
 	uint32_t value = 0;
+	uint8_t reg;
+	uint8_t val = 0;
 
 	if(length == 8)
 	{
@@ -1141,20 +1143,21 @@ void parse_uart_command(void)
 			xil_printf("\n\r");
 			xil_printf("Type `help' to see help list.\n\r");
 		}
-		else if((buffer[0] == 'v')&&(buffer[1] == 'r'))
+		else if((buffer[0] == 'd')&&(buffer[1] == 'e'))
 		{
-
+			xil_printf("Xil_DCacheEnable()\n\r");
+			Xil_DCacheEnable();
+		}
+		else if((buffer[0] == 'd')&&(buffer[1] == 'd'))
+		{
+			xil_printf("Xil_DCacheDisable()\n\r");
+			Xil_DCacheDisable();
 		}
 	}
 	else if(length == 2)
 	{
 		xil_printf("\n\r");
-		if(buffer[0] == 'p')
-		{
-
-		}
-
-		else if(buffer[0] == '1')
+		if(buffer[0] == '1')
 		{
 			xil_printf("Enabling/bypassing Layer 1.\n\r");
 			status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);

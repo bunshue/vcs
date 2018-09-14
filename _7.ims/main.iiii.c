@@ -13,6 +13,7 @@
 #include "mixer.h"
 #include "gpio.h"
 #include "ulpi.h"
+#include "gfx.h"
 
 /* global timer registers*/
 #define SCU_GLOBAL_TIMER_COUNT_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR)
@@ -52,14 +53,21 @@ static pixel_t* surface_2;
 //static GDisplay* pixmap_3;
 //static pixel_t* surface_3;
 
-static void createWidgets(void);
-void main_loop(void);
+// The handle for our console
+static GHandle	GW;
+GWindowInit		wic;
 
+static void createWidgets(void);
+static void createConsoleWidgets(void);
+static void updateConsoleWidgets(void);
+void main_loop(void);
+void get_usb_descriptor(void);
+void reset_usb(void);
 void parse_uart_command(void);
 void parse_uart_esc_command(void);
 void get_system_up_time(void);
 
-static const char last_command[] = "uptime";
+static const char last_command[] = "help";
 
 // *****************************************************
 // Main program entry point
@@ -76,6 +84,10 @@ int main()
 
 	p_Image = &myImage;
 	update_dongle_status = 0;
+	update_usb_status = 0;
+	update_usb_descriptor_status;
+	vendor_id_tmp = 0;
+	product_id_tmp = 0;
 
 	// Setup UART and caches
     init_platform();
@@ -258,6 +270,10 @@ int main()
 	Xil_DCacheFlush(); // Flush DCache after USB Init();
 	//Xil_DCacheInvalidate();
 	Xil_DCacheDisable();
+
+	// create the widget
+	createConsoleWidgets();
+
 	main_loop();
 
     cleanup_platform();
@@ -283,7 +299,6 @@ void main_loop()
 	uint32_t value = 0;
 	int i;
 	uint32_t status;
-
 
 	// Main loop
 	while (1)
@@ -386,6 +401,16 @@ void main_loop()
 			}
 			psuart0_exposure(g_exposure);
 		}
+		}
+		else if(update_usb_status == 1)
+		{
+			update_usb_status = 0;
+			updateConsoleWidgets();
+		}
+		else if(update_usb_descriptor_status == 1)
+		{
+			update_usb_descriptor_status = 0;
+			get_usb_descriptor();
 		}
 
 		//  Run USB Host Task Handlers
@@ -702,7 +727,74 @@ void main_loop()
 	}
 }
 
+int cnt = 0;
 
+static void updateConsoleWidgets(void) {
+	/* Set a font */
+	gwinSetDefaultFont(gdispOpenFont("*"));
+
+	/* create the console window */
+	//GWindowInit		wic;
+
+	uint8_t reg;
+	uint8_t val = 0;
+	int i;
+
+	//get_usb_descriptor();
+
+	reg = ULPI_FC_CTRL;
+	val = 0;
+	val = ulpi_ReadReg(reg);
+	//xil_printf("read value : %02X\n\r", val);
+
+	//gwinPrintf(GW, "System up time : %d seconds\n", g_ms_uptime / 500);
+
+	gwinPrintf(GW, "\nULPI_FC=0x%x   vid=0x%x   pid=0x%x", val, vendor_id_tmp, product_id_tmp);
+	cnt++;
+	if(cnt == 1000)
+	{
+		cnt = 0;
+		gwinSetColor(GW, Red);
+		for(i = 0; i < 10; i++)
+		{
+			gwinPrintf(GW, "\nUSB FAIL, RESET USB");
+			usleep(100000);
+		}
+		reset_usb();
+		gwinSetColor(GW, White);
+	}
+
+
+}
+
+static void createConsoleWidgets(void) {
+	/* Set a font */
+	gwinSetDefaultFont(gdispOpenFont("*"));
+
+	/* create the console window */
+	//GWindowInit		wic;
+
+	gwinClearInit(&wic);
+	wic.show = TRUE;
+	wic.x = gdispGetWidth() / 2 - 250;
+	wic.y = gdispGetHeight() - 140;
+	wic.width = 800;
+	wic.height = 120;
+
+	xil_printf("W = %d, H = %d\n\r", wic.width, wic.height);
+	GW = gwinConsoleCreate(0, &wic);
+
+	/* Set the fore- and background colors for the console */
+	gwinSetColor(GW, White);
+	gwinSetBgColor(GW, Purple);
+	gwinClear(GW);
+
+	//gwinPrintf(GW, "gwinConsoleCreate size = %d X %d\n", wi.width, wi.height);
+
+	gwinPrintf(GW, "Insight Medical Solutions Inc.\n");
+	gwinPrintf(GW, "August-23-2018\n");
+	gwinPrintf(GW, "--------------------------------------\n");
+}
 
 static void createWidgets(void) {
 	GWidgetInit	wi;
@@ -980,6 +1072,8 @@ void parse_uart_command(void)
 {
 	int status;
 	uint32_t value = 0;
+	uint8_t reg;
+	uint8_t val = 0;
 
 	if(length == 8)
 	{
@@ -1141,20 +1235,21 @@ void parse_uart_command(void)
 			xil_printf("\n\r");
 			xil_printf("Type `help' to see help list.\n\r");
 		}
-		else if((buffer[0] == 'v')&&(buffer[1] == 'r'))
+		else if((buffer[0] == 'd')&&(buffer[1] == 'e'))
 		{
-
+			xil_printf("Xil_DCacheEnable()\n\r");
+			Xil_DCacheEnable();
+		}
+		else if((buffer[0] == 'd')&&(buffer[1] == 'd'))
+		{
+			xil_printf("Xil_DCacheDisable()\n\r");
+			Xil_DCacheDisable();
 		}
 	}
 	else if(length == 2)
 	{
 		xil_printf("\n\r");
-		if(buffer[0] == 'p')
-		{
-
-		}
-
-		else if(buffer[0] == '1')
+		if(buffer[0] == '1')
 		{
 			xil_printf("Enabling/bypassing Layer 1.\n\r");
 			status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);

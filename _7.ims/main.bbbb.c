@@ -30,8 +30,6 @@ static const char step_3[] = "step3.png";
 
 void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy);
 
-
-volatile uint32_t g_ms_uptime = 0;
 volatile uint32_t g_ms_tick = 0;
 uint32_t g_nn = 0;
 uint32_t g_dongle_plugged = 0;
@@ -42,7 +40,7 @@ uint32_t g_conn_status = 2;
 GListener	gl;
 GHandle		ghLabel1, ghLabel2, ghLabel3, ghLabel4, ghLabel5, ghLabel6, ghLabel7;
 
-uint32_t esc_mode = 0;
+
 
 static gdispImage myImage;
 static GDisplay* pixmap_1;
@@ -54,12 +52,6 @@ static pixel_t* surface_2;
 
 static void createWidgets(void);
 void main_loop(void);
-
-void parse_uart_command(void);
-void parse_uart_esc_command(void);
-void get_system_up_time(void);
-
-static const char last_command[] = "uptime";
 
 // *****************************************************
 // Main program entry point
@@ -75,12 +67,23 @@ int main()
 	GEvent* pe;
 
 	p_Image = &myImage;
-	update_dongle_status = 0;
 
 	// Setup UART and caches
     init_platform();
 
-    xil_printf("Aries Main Program\n\r");
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+
+
+    //xil_printf("\n\n\n\nAries Main Program %s:%s(%d) ST\n\r",__FILE__,__func__,__LINE__);
+    xil_printf("\n\n\n\nAries Main Program\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
 
     // Initialize peripherals
     status = periphs_init
@@ -148,7 +151,9 @@ int main()
 	// Set up IO for our image
 	//g_nn = 1;
 	status = gdispImageOpenFile(p_Image, ims_logo);
-	//xil_printf("status mainopen: %d\r\n", status);
+	xil_printf("status main open: %d\r\n", status);
+
+
 //	p_byte = (uint8_t *)p_Image->priv;
 //	xil_printf("status: %d\r\n", status);
 //	xil_printf("p_Image->type: %d\r\n", p_Image->type);
@@ -199,11 +204,14 @@ int main()
 //	}
 
 	// Detect Dongle status and draw image
+
+	xil_printf("\n\r\n\rcall psuart0_dongle_ping\n\r");
 	g_conn_status = psuart0_dongle_ping();
+	xil_printf("call psuart0_dongle_ping, result : %d\t", g_conn_status);
 
 	if(g_conn_status == 2)
 	{
-			xil_printf("no dongle or camera\n\r");
+			xil_printf("no dongle or camera 2\n\r");	//no dongle
 			// Set Flags
 			g_dongle_plugged = 0;
 			g_camera_plugged = 0;
@@ -214,8 +222,9 @@ int main()
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 	}
-	else if (g_conn_status == 1){
-			xil_printf("dongle only\n\r");
+	else if (g_conn_status == 1)
+	{
+			xil_printf("dongle only 1\n\r");	//use dongle, no camera
 			// Set Flags
 			g_dongle_plugged = 1;
 			g_camera_plugged = 0;
@@ -226,8 +235,9 @@ int main()
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 	}
-	else {
-			xil_printf("dongle+camera\n\r");
+	else
+	{
+			xil_printf("dongle+camera 0\n\r");	//use dongle, camera is connected.
 			// Set Flags
 			g_dongle_plugged = 1;
 			g_camera_plugged = 1;
@@ -239,21 +249,28 @@ int main()
 			gdispImageClose(p_Image);
 			XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 	}
+	xil_printf("\n\r\n\r");
 
 	Xil_DCacheFlush();
 
+	xil_printf("main() call psuart0_exposure ST\r\n");
 	psuart0_exposure(3);
+	xil_printf("main() call psuart0_exposure SP\r\n");
 
 	// Set up Mixer Layers
 	//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
 
 	// USB Init
-	ulpi_init();
-	ulpi_set_vbus(TRUE);
+	//ulpi_init();
+	//ulpi_set_vbus(TRUE);
 
+	xil_printf("\n\rmain() call tusb_init ST\r\n");
 	tusb_init(); // initialize tinyusb stack
+	xil_printf("main() call tusb_init SP\r\n\n\r");
 
+	xil_printf("main() call keyboard_host_app_init ST\r\n");
 	keyboard_host_app_init(); // Keyboard Host Init
+	xil_printf("main() call keyboard_host_app_init SP\r\n");
 	//mouse_host_app_init(); // Mouse Host Init
 	Xil_DCacheFlush(); // Flush DCache after USB Init();
 	//Xil_DCacheInvalidate();
@@ -264,48 +281,37 @@ int main()
     return 0;
 }
 
-#define RELEASE_INFO "Insight Medical Solutions Inc., August-17-2018\n"
-#define PROMPT "[aries@ims]# "
-#define UART_BUFFER_LEN 10
-u8 buffer[UART_BUFFER_LEN];
-u8 esc_buffer[3];
-u8 ptr = 0;
-u8 esc_ptr = 0;
-u8 length = 0;
-
 void main_loop()
 {
 	// Local variables
 	char c[1]  = {0};
-	//int  ii = 0;
-	//unsigned int status = 0;
+	int  ii = 0;
+	unsigned int status = 0;
 	gdispImage *p_Image;
-	uint32_t value = 0;
-	int i;
-	uint32_t status;
-
 
 	// Main loop
 	while (1)
 	{
+		uint32_t status;
 
-		//xil_printf("What would you like to do? Press 'p' to print available commands.\n\r");
+		//xil_printf("\n\rWhat would you like to do? Press 'p' to print available commands.\t");
+		//							0xE0001000
 		c[0] = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-		//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
+		xil_printf("%c\n\r",c[0]);
+			//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
 		
-
-		if(update_dongle_status == 1)
-		{
-			update_dongle_status = 0;
 		//xil_printf("ping.\n\r");
 		g_conn_status = psuart0_dongle_ping();
 		if(g_conn_status == 2) // Nothing is plugged in
 		{
-			if(g_procedure_started) { // Procedure not started
+			if(g_procedure_started)	// Procedure not started
+			{
 
 			}
-			else {
-				if(g_dongle_plugged || g_camera_plugged){
+			else
+			{
+				if(g_dongle_plugged || g_camera_plugged)
+				{
 					// Update Flags
 					g_dongle_plugged = 0;
 					g_camera_plugged = 0;
@@ -322,13 +328,16 @@ void main_loop()
 				}
 			}
 		}
-		else if(g_conn_status == 1){ // Only dongle is plugged in
-
-			if(g_procedure_started){ // Procedure started
+		else if(g_conn_status == 1)	// Only dongle is plugged in
+		{
+			if(g_procedure_started)	// Procedure started
+			{
 
 			}
-			else { // Procedure hasn't started
-				if(g_dongle_plugged == 0 || g_camera_plugged){
+			else	// Procedure hasn't started
+			{
+				if(g_dongle_plugged == 0 || g_camera_plugged)
+				{
 					// Update Flags
 					g_dongle_plugged = 1;
 					g_camera_plugged = 0;
@@ -344,12 +353,16 @@ void main_loop()
 				}
 			}
 		}
-		else { // Everything is plugged in
-			if(g_procedure_started) { // Procedure not started
+		else	// Everything is plugged in
+		{
+			if(g_procedure_started)		// Procedure not started
+			{
 
 			}
-			else {
-				if(g_dongle_plugged == 0 || g_camera_plugged == 0){
+			else
+			{
+				if(g_dongle_plugged == 0 || g_camera_plugged == 0)
+				{
 					// Update Flags
 					g_dongle_plugged = 1;
 					g_camera_plugged = 1;
@@ -363,19 +376,22 @@ void main_loop()
 					Xil_DCacheFlush();
 					gdispImageClose(p_Image);
 				}
-
 			}
 		}
 
-		if(g_updated) {
+		if(g_updated)
+		{
+			xil_printf("david0628: %s:%s(%d) g_updated = 1\n",__FILE__,__func__,__LINE__);
 			g_updated = 0;
-			if(g_procedure_started) { // Remove all pictures
+			if(g_procedure_started)	// Remove all pictures
+			{
 				xil_printf("update remove picture\r\n");
 				pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
 				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 				Xil_DCacheFlush();
 			}
-			else { // Add back picture
+			else	// Add back picture
+			{
 				xil_printf("update add picture\r\n");
 				p_Image = &myImage;
 				status = gdispImageOpenFile(p_Image, step_3);
@@ -386,7 +402,6 @@ void main_loop()
 			}
 			psuart0_exposure(g_exposure);
 		}
-		}
 
 		//  Run USB Host Task Handlers
 		tusb_task_runner(); // USB House Keeping
@@ -394,78 +409,7 @@ void main_loop()
 	    //mouse_host_app_task(NULL); // Mouse Tasks
 		//Xil_DCacheFlush();
 
-		if(c[0] == 0)
-			continue;
-
-		buffer[ptr] = c[0];
-		esc_buffer[esc_ptr] = c[0];
-		ptr++;
-
-		if(c[0] == 0x0d)	//Enter
-		{
-			/*
-			for(i=0;i<ptr;i++)
-			{
-				xil_printf("0x%x ", buffer[i]);
-			}
-			xil_printf("\n\r");
-			*/
-
-			length = ptr;
-			ptr = 0;
-			/*
-			//for(i = 0 ; i < (length - 1); i++)
-				//xil_printf("%c", 0x18);
-			for(i = 0 ; i < (length - 1); i++)
-				xil_printf("%c", 0x7F);
-			xil_printf("---");
-			*/
-			parse_uart_command();
-			xil_printf("\n\r%s", PROMPT);
-		}
-		else
-		{
-			if(c[0] == 0x1B)
-			{
-				esc_mode = 1;
-				buffer[0] = c[0];
-				ptr = 1;
-				continue;
-			}
-			else if(c[0] == 0x7F)
-			{
-				if(ptr >= 2)
-				{
-					xil_printf("%c", 0x7F);
-					//xil_printf(".");
-					ptr -= 2;
-				}
-				else
-					ptr--;
-
-				continue;
-			}
-
-			if(esc_mode == 1)
-			{
-				if(ptr == 3)
-				{
-					//ptr = 0;
-					parse_uart_esc_command();
-					esc_mode = 0;
-				}
-				continue;
-			}
-
-			if(isprint(c[0]))
-				xil_printf("%c", c[0]);
-			else
-				xil_printf("0x%x", c[0]);
-		}
-
-
-/*
-		switch (c[0])
+	    switch (c[0])
 		{
 			case 'p':
 				xil_printf("\n\r");
@@ -519,10 +463,6 @@ void main_loop()
 //				xil_printf("Using old scaler datapath.\n\r");
 //				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_OLD_SCALER);
 //				break;
-
-
-*/
-/*
 			case 't':
 				xil_printf("Enabling/bypassing camera TPG.\n\r");
 				//periphs_toggle_camera_tpg(&periphs_inst);
@@ -531,69 +471,21 @@ void main_loop()
 				xil_printf("Enabling/bypassing GUI TPG.\n\r");
 				periphs_toggle_GUI_tpg(&periphs_inst);
 				break;
-*/
-/*
-
 			case 'u':
 				xil_printf("Park/Unpark Camera Freeze VDMA.\n\r");
 				periphs_toggle_camera_freeze_vdma(&periphs_inst);
 				// Determine if we're in TPG or passthrough mode
 				if (periphs_inst.enable_camera_freeze_vdma == PERIPHS_SEL_ENABLE_PARK)
 				{
+					xil_printf("Park, XVMix_LayerEnable\n\r");
 					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
 				}
 				else
 				{
+					xil_printf("Unpark, XVMix_LayerDisable\n\r");
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
 				}
-				break;
-
-			case 'r':
-				read_usb_registers();
-				break;
-			case 'w':
-				xil_printf("port_connect_status_change_isr\n\r");
-				port_connect_status_change_isr(0);
-				break;
-			case 'q':
-				//xil_printf("ulpi_WriteReg 0x24\n\r");
-
-				value = ulpi_ReadReg(ULPI_FC_CTRL);	//0x16
-				value |= 0x20;
-				value = 0x60;
-				ulpi_WriteReg(value, ULPI_FC_CTRL);	//0x16
-				xil_printf("ulpi_WriteReg 0x%x\n\r", value);
-				break;
-			case 's':
-				xil_printf("reset usb 3\n\r");
-				psusb0_hal_controller_reset(0);
-				break;
-			case 'e':
-				xil_printf("ulpi_init  will cause a crash\n\r");
-				ulpi_init();
-				break;
-			case 't':
-				xil_printf("tusb_init\n\r");
-				tusb_init(); // initialize tinyusb stack
-				break;
-			case 'v':
-				xil_printf("tusb_isr\n\r");
-				// Handle USB Related Interrupts
-				tusb_isr(0);
-				break;
-			case 'a':
-				xil_printf("all\n\r");
-				tusb_init(); // initialize tinyusb stack
-				value = 0x60;
-				ulpi_WriteReg(value, ULPI_FC_CTRL);	//0x16
-				port_connect_status_change_isr(0);
-				tusb_isr(0);
-				break;
-			case 'b':
-				xil_printf("get usb data\n\r");
-				get_usb_data();
-
-
+				xil_printf("\n\r");
 
 				break;
 //			case 'd':
@@ -674,41 +566,22 @@ void main_loop()
 //					}
 //				}
 //				break;
+			case 'd':
+				xil_printf("david debug\n\r");
 
-			case 0:
-				break;
-			case 0x0D:
-			case ' ':
-				xil_printf("\n\r\n\r\n\r\n\r");
 				break;
 			default:
-				xil_printf("\n\r---- unknown ---- c[0] = 0x%x", c[0]);
-				if(isprint(c[0]))
-					xil_printf("\t%c\n\r", c[0]);
-				else
-					xil_printf("\n\r");
-
-				//p_periphs_inst222 = &periphs_inst;
-				//p_gpio = p_periphs_inst222->p_ps_gpio_inst;
-				//DataRead = XGpioPs_Read(p_gpio, XGPIOPS_BANK2);	//read bank 2 data, seems useless
-				//xil_printf("DataRead = 0x%x\n\r", DataRead);
-				//usleep(200000);
-
 				//xil_printf("ERROR! Illegal character. Try again.\n\r");
 				break;
-
 		}
-*/
 	}
 }
 
-
-
-static void createWidgets(void) {
+static void createWidgets(void)
+{
 	GWidgetInit	wi;
 
-	coord_t wide = 600;
-	coord_t thick = 40;
+	xil_printf("\r\ncreateWidgets\r\n");
 
 	// Apply some default values for GWIN
 	gwinWidgetClearInit(&wi);
@@ -717,49 +590,39 @@ static void createWidgets(void) {
 	gwinSetDefaultFont(gdispOpenFont("iskpota232"));
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 0;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 0;
 	wi.text = "ID NO:";
 	ghLabel1 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 1;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 40;
 	wi.text = "NAME:";
 	ghLabel2 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 3;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 120;
 	wi.text = "SEX:";
 	ghLabel3 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 4;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 160;
 	wi.text = "AGE:";
 	ghLabel4 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 5;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 200;
 	wi.text = "D.O.BIRTH:";
 	ghLabel5 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 7;
-	wi.text = "06/03/2017";
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 280;
+	wi.text = "06/28/2018";
 	ghLabel4 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 8;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 320;
 	wi.text = "00:00:00";
 	ghLabel5 = gwinLabelCreate(0, &wi);
-
-
-	/*
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = 1920/6, wi.g.y =600;
-	wi.text = "XXXXXXXXXXXXXXXXXXXXXxx";
-	ghLabel5 = gwinLabelCreate(0, &wi);
-	*/
-
-
 
 
 }
@@ -890,356 +753,4 @@ uint32_t tusb_tick_get(void)
   //return system_ticks;
   return g_ms_tick;
 }
-
-void parse_uart_esc_command(void)
-{
-	int i;
-	if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 'A'))
-	{
-		//xil_printf("Up\t");
-		xil_printf("\r%s", PROMPT);
-		xil_printf("%s", last_command);
-		ptr = sizeof(last_command) - 1;
-		for(i = 0; i < ptr; i++)
-		{
-			buffer[i] = last_command[i];
-		}
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 'B'))
-	{
-		//xil_printf("Down\t");
-		xil_printf("\r%s", PROMPT);
-		xil_printf("%s", last_command);
-		ptr = sizeof(last_command) - 1;
-		for(i = 0; i < ptr; i++)
-		{
-			buffer[i] = last_command[i];
-		}
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 'C'))
-	{
-		//xil_printf("Right\t");
-		xil_printf("\r%s", PROMPT);
-		xil_printf("%s", last_command);
-		ptr = sizeof(last_command) - 1;
-		for(i = 0; i < ptr; i++)
-		{
-			buffer[i] = last_command[i];
-		}
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 'D'))
-	{
-		//xil_printf("Left\t");
-		// not very good
-		if(ptr >= 2)
-		{
-			xil_printf("%c", 0x08);
-			//xil_printf(".");
-			ptr -= 2;
-		}
-		else
-			ptr--;
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 0x35))
-	{
-		xil_printf("PageUp\t");
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 0x5B))
-	{
-		xil_printf("PageDown\t");
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 0x31))
-	{
-		xil_printf("Home\t");
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 0x32))
-	{
-		xil_printf("Insert\t");
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 0x33))
-	{
-		xil_printf("Delete\t");
-	}
-	else if((buffer[0] == 0x1B)&&(buffer[1] == '[')&&(buffer[2] == 0x34))
-	{
-		xil_printf("End\t");
-	}
-	else
-	{
-		xil_printf("XXXX\t");
-		for( i = 0; i<3; i++)
-		{
-			xil_printf("0x%x ", buffer[i]);
-		}
-		xil_printf("\t");
-	}
-}
-
-
-void parse_uart_command(void)
-{
-	int status;
-	uint32_t value = 0;
-
-	if(length == 8)
-	{
-		if((buffer[0] == 't')&&(buffer[1] == ' '))
-		{
-		}
-	}
-	else if(length == 7)
-	{
-		if((buffer[0] == 'u')&&(buffer[1] == 'p')&&(buffer[2] == 't')&&(buffer[3] == 'i')&&(buffer[4] == 'm')&&(buffer[5] == 'e'))
-		{
-			//Get System Up time
-			get_system_up_time();
-		}
-		else if((buffer[0] == 's')&&(buffer[1] == 'e')&&(buffer[2] == 'n')&&(buffer[3] == 's')&&(buffer[4] == 'o')&&(buffer[5] == 'r'))
-		{
-		}
-		else if((buffer[0] == 't')&&(buffer[1] == ' '))
-		{
-		}
-	}
-	else if(length == 6)
-	{
-		if((buffer[0] == 'c')&&(buffer[1] == 'l')&&(buffer[2] == 'o')&&(buffer[3] == 'c')&&(buffer[4] == 'k'))
-		{
-		}
-		else if((buffer[0] == 'p')&&(buffer[1] == 'r')&&(buffer[2] == 'i')&&(buffer[3] == 'n')&&(buffer[4] == 't'))
-		{
-			xil_printf("ABCDEFGHIJKLMNOPQ");
-			sleep(3);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("%c", 0x08);
-			xil_printf("abcdefg");
-			sleep(3);
-			xil_printf("\r");
-			xil_printf("-------");
-
-		}
-		else if((buffer[0] == 'b')&&(buffer[1] == 'r')&&(buffer[2] == 'a')&&(buffer[3] == 'k')&&(buffer[4] == 'e'))
-		{
-		}
-		else if((buffer[0] == 't')&&(buffer[1] == ' '))
-		{
-		}
-	}
-	else if(length == 5)
-	{
-		if((buffer[0] == 'h')&&(buffer[1] == 'e')&&(buffer[2] == 'l')&&(buffer[3] == 'p'))
-		{
-			xil_printf("\n\rIMS command prompt, ");
-			xil_printf(RELEASE_INFO);
-			xil_printf("\n\r");
-			xil_printf("------------- Aries Demo -------------\n\r");
-			xil_printf("1:\tToggle Layer 1\n\r");
-			xil_printf("2:\tToggle Layer 2\n\r");
-			xil_printf("3:\tToggle Layer 3\n\r");
-			//xil_printf("'n' = Set to new scaler datapath\n\r");
-			xil_printf("t:\tEnable/bypass camera TPG\n\r");
-			xil_printf("y:\tEnable/bypass GUI TPG\n\r");
-			xil_printf("u:\tPark Camera Freeze VDMA\n\r");
-			//xil_printf("'s' = Set output frame size\n\r");
-			//xil_printf("'p' = Print this menu\n\r");
-			xil_printf("usb:\tread USB registers\n\r");
-			xil_printf("usbr:\tUSB reset\n\r");
-			xil_printf("dd:\tDCache Disable\n\r");
-			xil_printf("de:\tDCache Enable\n\r");
-			xil_printf("help:\thelp menu\n\r");
-			xil_printf("---------------------------------------\n\r");
-		}
-		else if((buffer[0] == 'u')&&(buffer[1] == 's')&&(buffer[2] == 'b')&&(buffer[3] == 'r'))
-		{
-			xil_printf("usb reset\n\r");
-			tusb_init(); // initialize tinyusb stack
-			value = 0x60;
-			ulpi_WriteReg(value, ULPI_FC_CTRL);	//0x16
-			port_connect_status_change_isr(0);
-			tusb_isr(0);
-		}
-		else if((buffer[0] == 's')&&(buffer[1] == 'l')&&(buffer[2] == 'o')&&(buffer[3] == 'w'))
-		{
-		}
-		else if((buffer[0] == 'l')&&(buffer[1] == 'o')&&(buffer[2] == 'c')&&(buffer[3] == 'k'))
-		{
-		}
-		else if((buffer[0] == 's')&&(buffer[1] == ' '))
-		{
-			if((buffer[2] < 0x30) || (buffer[2] > 0x39) || (buffer[3] < 0x30) || (buffer[3] > 0x39))
-			{
-				xil_printf("\nIllegal parameters.\n");
-				return;
-			}
-			//PWM_start_duty = (buffer[2] - 0x30) * 10 + (buffer[3] - 0x30);
-			//xil_printf("\nPWM_start_duty: ");printd(PWM_start_duty);xil_printf("\n\r");
-		}
-		else if((buffer[0] == 'd')&&(buffer[1] == ' '))
-		{
-			if((buffer[2] < 0x30) || (buffer[2] > 0x39) || (buffer[3] < 0x30) || (buffer[3] > 0x39))
-			{
-				xil_printf("\nIllegal parameters.\n");
-				return;
-			}
-			//PWM_duty = (buffer[2] - 0x30) * 10 + (buffer[3] - 0x30);
-			//xil_printf("\nPWM_duty: ");printd(PWM_duty);xil_printf("\n\r");
-		}
-		else if((buffer[0] == 't')&&(buffer[1] == ' '))
-		{
-			if((buffer[2] < 0x30) || (buffer[2] > 0x39) || (buffer[3] < 0x30) || (buffer[3] > 0x39))
-			{
-				xil_printf("\nIllegal parameters.\n\r");
-				return;
-			}
-			//target_speed_tmp = (buffer[2] - 0x30) * 10 + (buffer[3] - 0x30);
-			//SETUP_target_speed(target_speed_tmp);
-			//xil_printf("\nTarget_speed: ");printd(target_speed);xil_printf("\n\r");
-		}
-	}
-	else if(length == 4)
-	{
-		if((buffer[0] == 'u')&&(buffer[1] == 's')&&(buffer[2] == 'b'))
-		{
-			read_usb_registers();
-		}
-		else if((buffer[0] == 't')&&(buffer[1] == 'i')&&(buffer[2] == 'c'))
-		{
-			g_ms_tick = 0;
-		}
-		else if((buffer[0] == 't')&&(buffer[1] == 'o')&&(buffer[2] == 'c'))
-		{
-			uint32_t tt = g_ms_tick;
-			uint32_t hh;
-			uint32_t mm;
-			uint32_t ss;
-			uint32_t dd;
-
-			dd = tt % 500 * 2;
-			ss = (tt / 500) % 60;
-			mm = ((tt / 500) / 60) % 60;
-			hh = ((tt / 500) / 60) / 60;
-
-			xil_printf("\n\rElasped time is %02d:%02d:%02d.%03d\n\r", hh, mm, ss, dd);
-		}
-		else if((buffer[0] == 'i')&&(buffer[1] == 'f')&&(buffer[2] == 'b'))
-		{
-
-		}
-	}
-	else if(length == 3)
-	{
-		if(((buffer[0] == 'l')&&(buffer[1] == 's'))||(buffer[0] == 'l')&&(buffer[1] == 'l'))
-		{
-			xil_printf("\n\r");
-			xil_printf("Type `help' to see help list.\n\r");
-		}
-		else if((buffer[0] == 'v')&&(buffer[1] == 'r'))
-		{
-
-		}
-	}
-	else if(length == 2)
-	{
-		xil_printf("\n\r");
-		if(buffer[0] == 'p')
-		{
-
-		}
-
-		else if(buffer[0] == '1')
-		{
-			xil_printf("Enabling/bypassing Layer 1.\n\r");
-			status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-			if(status) { // Enabled
-				XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-			} else {
-				XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-			}
-		}
-		else if(buffer[0] == '2')
-		{
-			xil_printf("Enabling/bypassing Layer 2.\n\r");
-			status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-			if(status) { // Enabled
-				XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-			} else {
-				XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-			}
-		}
-		else if(buffer[0] == '3')
-		{
-			xil_printf("Enabling/bypassing Layer 3.\n\r");
-			status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-			if(status) { // Enabled
-				XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-			} else {
-				XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-			}
-		}
-		else if(buffer[0] == 't')
-		{
-			xil_printf("Enabling/bypassing camera TPG.\n\r");
-			periphs_toggle_camera_tpg(&periphs_inst);
-		}
-		else if(buffer[0] == 'y')
-		{
-			xil_printf("Enabling/bypassing GUI TPG.\n\r");
-			periphs_toggle_GUI_tpg(&periphs_inst);
-		}
-		else if(buffer[0] == 'u')
-		{
-			xil_printf("Park/Unpark Camera Freeze VDMA.\n\r");
-			periphs_toggle_camera_freeze_vdma(&periphs_inst);
-			// Determine if we're in TPG or passthrough mode
-			if (periphs_inst.enable_camera_freeze_vdma == PERIPHS_SEL_ENABLE_PARK)
-			{
-				XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-			}
-			else
-			{
-				XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-			}
-		}
-		else if(buffer[0] == 'r')
-		{
-			read_usb_registers();
-		}
-		else if(buffer[0] == 'd')
-		{
-			xil_printf("david debug\n\r");
-
-			xil_printf("size of last_command is %d\n\r", sizeof(last_command));
-		}
-		else
-		{
-			xil_printf("Invalid command : %c\n\r", buffer[0]);
-		}
-	}
-	length = 0;
-}
-
-void get_system_up_time(void)
-{
-	uint32_t tt = g_ms_uptime;
-	uint32_t hh;
-	uint32_t mm;
-	uint32_t ss;
-	uint32_t dd;
-
-	dd = tt % 500 * 2;
-	ss = (tt / 500) % 60;
-	mm = ((tt / 500) / 60) % 60;
-	hh = ((tt / 500) / 60) / 60;
-
-	xil_printf("\n\rSystem up time is %02d:%02d:%02d.%03d\n\r", hh, mm, ss, dd);
-}
-
 

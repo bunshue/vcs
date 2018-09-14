@@ -14,11 +14,6 @@
 #include "gpio.h"
 #include "ulpi.h"
 
-
-#include "../host/ehci/ehci.h"
-
-#include "../host/usbh.h"
-
 /* global timer registers*/
 #define SCU_GLOBAL_TIMER_COUNT_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR)
 #define SCU_GLOBAL_TIMER_COUNT_U32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x04)
@@ -32,6 +27,14 @@ static const char ims_logo[] = "ims-small-logo.png";
 static const char step_1[] = "step1.png";
 static const char step_2[] = "step2.png";
 static const char step_3[] = "step3.png";
+static const char lion[] = "lion.png";
+static const char lion2[] = "lion2.png";
+
+static const char pic1[] = "pic1.png";
+static const char pic2[] = "pic2.png";
+static const char pic3[] = "pic3.png";
+static const char pic4[] = "pic4.png";
+
 
 void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy);
 
@@ -45,7 +48,13 @@ uint32_t g_conn_status = 2;
 GListener	gl;
 GHandle		ghLabel1, ghLabel2, ghLabel3, ghLabel4, ghLabel5, ghLabel6, ghLabel7;
 
+#define USE_IMSLINK
 
+#ifdef USE_IMSLINK
+u8 gui_cmd[5] = {0};
+u8 gui_cmd_index = 0;
+u8 start_data = 0;
+#endif
 
 static gdispImage myImage;
 static GDisplay* pixmap_1;
@@ -55,7 +64,6 @@ static pixel_t* surface_2;
 //static GDisplay* pixmap_3;
 //static pixel_t* surface_3;
 
-static void createWidgets(void);
 void main_loop(void);
 
 // *****************************************************
@@ -76,7 +84,21 @@ int main()
 	// Setup UART and caches
     init_platform();
 
-    xil_printf("Aries Main Program\n\r");
+
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+
+
+    //xil_printf("\n\n\n\nAries Main Program %s:%s(%d) ST\n\r",__FILE__,__func__,__LINE__);
+    xil_printf("\n\n\n\nAries Main Program\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
 
     // Initialize peripherals
     status = periphs_init
@@ -123,12 +145,16 @@ int main()
 	xil_printf("Initialization complete. Switching to background process.\n\r");
 
 	// Set up pixmap for layer 1
+	//								1216		912
     pixmap_1 = gdispPixmapCreate(LAYER1_WIDTH, LAYER1_HEIGHT);
     surface_1 = gdispPixmapGetBits(pixmap_1);
+
     // Draw transparency required on layer 1
+    //									1216		912
     pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
 
 	// Set up pixmap for layer 2
+    //								640				480
     pixmap_2 = gdispPixmapCreate(LAYER2_WIDTH, LAYER2_HEIGHT);
     surface_2 = gdispPixmapGetBits(pixmap_2);
     // Draw transparency required on layer 2
@@ -143,7 +169,10 @@ int main()
 
 	// Set up IO for our image
 	//g_nn = 1;
+
+	xil_printf("david0807: %s:%s(%d) open ims_logo\r\n",__FILE__,__func__,__LINE__);
 	status = gdispImageOpenFile(p_Image, ims_logo);
+
 	//xil_printf("status mainopen: %d\r\n", status);
 //	p_byte = (uint8_t *)p_Image->priv;
 //	xil_printf("status: %d\r\n", status);
@@ -159,6 +188,8 @@ int main()
 //	xil_printf("p_Image->priv->bpp: %x\r\n", p_byte[3]);
 
 	//g_nn = 1;
+
+	xil_printf("david0807: %s:%s(%d) ImageDraw X=%d Y=%d W=%d H=%d\r\n",__FILE__,__func__,__LINE__,swidth-p_Image->width-BORDER_X*2, sheight-p_Image->height-BORDER_Y*2, p_Image->width, p_Image->height);
 	status = gdispImageDraw(p_Image, swidth-p_Image->width-BORDER_X*2, sheight-p_Image->height-BORDER_Y*2, p_Image->width, p_Image->height, 0, 0);
 	//g_nn = 0;
 	//xil_printf("status maindraw: %d\r\n", status);
@@ -166,9 +197,13 @@ int main()
 
 	// Blit surface_1 to the real display at the new position
 	//g_nn =1;
+
+	xil_printf("david0807: %s:%s(%d) Blit X=%d Y=%d W=%d H=%d\r\n",__FILE__,__func__,__LINE__,LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT);
 	gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 
 	// Blit surface_2 to the real display at the new position
+
+	xil_printf("david0807: %s:%s(%d) Blit X=%d Y=%d W=%d H=%d\r\n",__FILE__,__func__,__LINE__,BORDER_X, LAYER0_HEIGHT-LAYER2_HEIGHT-BORDER_Y, LAYER2_WIDTH, LAYER2_HEIGHT);
 	gdispBlitArea(BORDER_X, LAYER0_HEIGHT-LAYER2_HEIGHT-BORDER_Y, LAYER2_WIDTH, LAYER2_HEIGHT, surface_2);
 
 	Xil_DCacheFlush();
@@ -181,19 +216,6 @@ int main()
 	gwinSetDefaultStyle(&BlackWidgetStyle, FALSE);
 	//gdispClear(White);
 
-	// create the widget
-	//g_nn =1;
-	createWidgets();
-
-//	// We want to listen for widget events
-//	geventListenerInit(&gl);
-//	gwinAttachListener(&gl);
-//
-//	while(1) {
-//		// Get an Event
-//		pe = geventEventWait(&gl, TIME_INFINITE);
-//	}
-
 	// Detect Dongle status and draw image
 	g_conn_status = psuart0_dongle_ping();
 
@@ -205,6 +227,7 @@ int main()
 			g_camera_plugged = 0;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0807: %s:%s(%d) open step_1\r\n",__FILE__,__func__,__LINE__);
 			status = gdispImageOpenFile(p_Image, step_1);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -217,6 +240,7 @@ int main()
 			g_camera_plugged = 0;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0807: %s:%s(%d) open step_2\r\n",__FILE__,__func__,__LINE__);
 			status = gdispImageOpenFile(p_Image, step_2);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -229,6 +253,7 @@ int main()
 			g_camera_plugged = 1;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0807: %s:%s(%d) open step_3\r\n",__FILE__,__func__,__LINE__);
 			status = gdispImageOpenFile(p_Image, step_3);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -247,17 +272,15 @@ int main()
 	//ulpi_init();
 	//ulpi_set_vbus(TRUE);
 
-	xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-
 	tusb_init(); // initialize tinyusb stack
 
 	keyboard_host_app_init(); // Keyboard Host Init
 	//mouse_host_app_init(); // Mouse Host Init
 	Xil_DCacheFlush(); // Flush DCache after USB Init();
 	//Xil_DCacheInvalidate();
-	Xil_DCacheDisable();
 
-	xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
+	//Xil_DCacheDisable();	//Enable DCache fast, but USB fail, so, disable it.
+
 	main_loop();
 
     cleanup_platform();
@@ -272,22 +295,26 @@ void main_loop()
 	unsigned int status = 0;
 	gdispImage *p_Image;
 
-	uint8_t hostid;
-	uint32_t int_status;
-	ehci_registers_t* regs;
 
+	#ifdef USE_IMSLINK
+	unsigned int DongleAddr;
+	unsigned char DongleData;
 	int i;
-
+	u8 xx, yy, zz;
+	#endif
 
 	// Main loop
 	while (1)
 	{
 		uint32_t status;
 		//xil_printf("What would you like to do? Press 'p' to print available commands.\n\r");
+		//c = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
 		c[0] = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
 		//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
 		
 		//xil_printf("ping.\n\r");
+
+
 		g_conn_status = psuart0_dongle_ping();
 		if(g_conn_status == 2) // Nothing is plugged in
 		{
@@ -304,6 +331,7 @@ void main_loop()
 					// Show Message to plug in dongle
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
+					xil_printf("david0807: %s:%s(%d) open step_1\r\n",__FILE__,__func__,__LINE__);
 					status = gdispImageOpenFile(p_Image, step_1);
 					pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 					gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -326,6 +354,7 @@ void main_loop()
 					xil_printf("dongle plugged\n\r");
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
+					xil_printf("david0807: %s:%s(%d) open step_2\r\n",__FILE__,__func__,__LINE__);
 					status = gdispImageOpenFile(p_Image, step_2);
 					pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 					gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -347,6 +376,7 @@ void main_loop()
 					xil_printf("all plugged\n\r");
 					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
+					xil_printf("david0807: %s:%s(%d) open step_3\r\n",__FILE__,__func__,__LINE__);
 					status = gdispImageOpenFile(p_Image, step_3);
 					pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 					gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -362,17 +392,20 @@ void main_loop()
 
 
 
+
+
 		if(g_updated) {
 			g_updated = 0;
 			if(g_procedure_started) { // Remove all pictures
-				xil_printf("update remove picture\r\n");
+				xil_printf("press start, update remove picture\r\n");
 				pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
 				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 				Xil_DCacheFlush();
 			}
 			else { // Add back picture
-				xil_printf("update add picture\r\n");
+				xil_printf("press start, update add picture\r\n");
 				p_Image = &myImage;
+				xil_printf("david0807: %s:%s(%d) open step_3\r\n",__FILE__,__func__,__LINE__);
 				status = gdispImageOpenFile(p_Image, step_3);
 				pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -388,390 +421,196 @@ void main_loop()
 	    //mouse_host_app_task(NULL); // Mouse Tasks
 		//Xil_DCacheFlush();
 
-
-		switch (c[0])
+		if((start_data == 0) && ((c[0] == 0xA0) ||(c[0] == 0xA1) ||(c[0] == 0xB0) ||(c[0] == 0xB1) ||(c[0] == 0xD0)))
 		{
-			case 'p':
-				xil_printf("\n\r");
-				xil_printf("------------- Aries Demo -------------\n\r");
-				xil_printf("'1' = Toggle Layer 1\n\r");
-				xil_printf("'2' = Toggle Layer 2\n\r");
-				xil_printf("'3' = Toggle Layer 3\n\r");
-				xil_printf("'n' = Set to new scaler datapath\n\r");
-//				xil_printf("'o' = Set to old scaler datapath\n\r");
-				xil_printf("'t' = Enable/bypass camera TPG\n\r");
-				xil_printf("'y' = Enable/bypass GUI TPG\n\r");
-//				xil_printf("'d' = Detect or set input frame size\n\r");
-				xil_printf("'u' = Park Camera Freeze VDMA\n\r");
-				xil_printf("'s' = Set output frame size\n\r");
-				xil_printf("'p' = Print this menu\n\r");
-				xil_printf("---------------------------------------\n\r");
-				xil_printf("\n\r");
-				break;
-			case '1':
-				xil_printf("Enabling/bypassing Layer 1.\n\r");
-				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-				if(status) { // Enabled
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-				} else {
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-				}
-				break;
-			case '2':
-				xil_printf("Enabling/bypassing Layer 2.\n\r");
-				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				if(status) { // Enabled
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				} else {
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				}
-				break;
-			case '3':
-				xil_printf("Enabling/bypassing Layer 3.\n\r");
-				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-				if(status) { // Enabled
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-				} else {
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-				}
-				break;
-//			case 'n':
-//				xil_printf("Using new VPSS-based scaler datapath.\n\r");
-//				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_NEW_SCALER);
-//				break;
-//			case 'o':
-//				xil_printf("Using old scaler datapath.\n\r");
-//				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_OLD_SCALER);
-//				break;
-			case 't':
-				//xil_printf("Enabling/bypassing camera TPG.\n\r");
-				//periphs_toggle_camera_tpg(&periphs_inst);
-
-
-				xil_printf("david0810: %s:%s(%d) sizeof(ehci_registers_t) = %d\r\n",__FILE__,__func__,__LINE__, sizeof(ehci_registers_t));
-
-
-				hostid = 0;
-
-				  //regs = get_operational_register(hostid);
-				/*
-
-				STATIC_ INLINE_ ehci_registers_t* get_operational_register(uint8_t hostid)
-				{
-				#if (TUSB_CFG_MCU == MCU_LPC43XX || TUSB_CFG_MCU == MCU_LPC18XX)
-				  return (ehci_registers_t*) (hostid ? (&LPC_USB1->USBCMD_H) : (&LPC_USB0->USBCMD_H) );
-				#elif (TUSB_CFG_MCU == MCU_ZYNQ7015)
-				  //xil_printf("ehci get_operation_register\r\n");
-				  return (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
-				#endif
-				}
-				*/
-
-				  ehci_registers_t* regs = (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
-
-				  uint32_t int_cmd = regs->usb_cmd;
-				  uint32_t int_sts = regs->usb_sts;
-				  uint32_t int_inten = regs->usb_int_enable;
-				  uint32_t int_portsc = regs->portsc;
-
-				  hal_interrupt_disable(0);
-
-				  sleep(1);
-
-					/* Enable System wide interrupts in the Processor. */
-					//Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
-				  hal_interrupt_enable(0);
-
-
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-
-				  //xil_printf("\r\nhcd_isr usb_sts: %x\r\n", int_status);
-				  xil_printf("\r\nhcd_isr usb_cmd: %x\r\n", int_cmd);
-				  xil_printf("hcd_isr usb_sts: %x\r\n", int_sts);
-				  xil_printf("hcd_isr usb_inten: %x\r\n", int_inten);
-				  xil_printf("hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-
-				  xil_printf("\r\naaaaaaaaaaaaaaaabbcc\r\n");
-
-				  //ehci_registers_t* const regs2 = (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
-
-				  regs->usb_cmd_bit.reset = 1;
-
-				  for(i = 0; i < 20;i ++)
-				  {
-					  int_cmd = regs->usb_cmd;
-					  //xil_printf("hcd_isr usb_cmd: %x\r\n", int_cmd);
-					  xil_printf("%x\t", int_cmd);
-					  //usleep(1);
-				  }
-
-				  xil_printf("\n\r");
-
-				  hal_interrupt_disable(0);
-
-				  sleep(1);
-
-					/* Enable System wide interrupts in the Processor. */
-					//Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
-				  hal_interrupt_enable(0);
-
-
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-				  hal_interrupt_disable(0);
-
-				  sleep(1);
-
-					/* Enable System wide interrupts in the Processor. */
-					//Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
-				  hal_interrupt_enable(0);
-
-				  //xil_printf("hcd_isr usb_int_enable: %x\r\n", regs->usb_int_enable);
-
-
-
-
-				  /*
-
-				  //int_status = regs->usb_sts;
-				  xil_printf("\r\nhcd_isr usb_sts: 0x%x\r\n", int_status);
-				  xil_printf("hcd_isr usb_int_enable: 0x%x\r\n", regs->usb_int_enable);
-				  //int_status &= regs->usb_int_enable;
-				  xil_printf("\r\nhcd_isr int_status: id = %d status = 0x%x\r\n", hostid, int_status);
-
-*/
-
-				//xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-				xil_printf("tinyusb initial\n\r");
-
-				sleep(1);
-
-				tusb_init(); // initialize tinyusb stack
-
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-
-
-
-				keyboard_host_app_init(); // Keyboard Host Init
-				//mouse_host_app_init(); // Mouse Host Init
-				Xil_DCacheFlush(); // Flush DCache after USB Init();
-				//Xil_DCacheInvalidate();
-				Xil_DCacheDisable();
-
-
-				xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-				//enumeration_body_subtask2();
-				//enumeration_body_subtask();
-
-				xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-
-
-				break;
-			case 'y':
-				xil_printf("Enabling/bypassing GUI TPG.\n\r");
-				periphs_toggle_GUI_tpg(&periphs_inst);
-				break;
-			case 'u':
-				xil_printf("Park/Unpark Camera Freeze VDMA.\n\r");
-				periphs_toggle_camera_freeze_vdma(&periphs_inst);
-				// Determine if we're in TPG or passthrough mode
-				if (periphs_inst.enable_camera_freeze_vdma == PERIPHS_SEL_ENABLE_PARK)
-				{
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				}
-				else
-				{
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				}
-
-
-
-
-				break;
-//			case 'd':
-//				if (periphs_get_fmc_status(&periphs_inst))
-//				{
-//					xil_printf("FMC IMAGEON card is connected. Detecting input frame size.\n\r");
-//					//periphs_detect_input_fsize(&periphs_inst);
-//				}
-//				else
-//				{
-//					while (1)
-//					{
-//						xil_printf("FMC IMAGEON card is not connected. Using internal TPG as video source. Please select a resolution to set it to. Press 'p' to print available resolutions.\n\r");
-//						c = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-//						if (c == 'p')
-//						{
-//							xil_printf("\n\r");
-//							xil_printf("------------- Resolutions -------------\n\r");
-//							for (ii = 0; ii < NUM_VIDEO_RESOLUTIONS; ii++)
-//							{
-//								xil_printf("%d = %s\n\r", ii, vres_get_name(ii));
-//							}
-//							xil_printf("'p' = Print this menu\n\r");
-//							xil_printf("'q' = Quit\n\r");
-//							xil_printf("---------------------------------------\n\r");
-//							xil_printf("\n\r");
-//						}
-//						else if ((c == '0')||(c == '1')||(c == '2')||(c == '3')||(c == '4') ||
-//								 (c == '5')||(c == '6')||(c == '7')||(c == '8'))
-//						{
-//							//periphs_set_input_fsize(&periphs_inst, (c-'0'));
-//							break;
-//						}
-//						else if (c == 'q')
-//						{
-//							break;
-//						}
-//						else
-//						{
-//							xil_printf("ERROR! Illegal character. Try again.\n\r");
-//						}
-//					}
-//					break;
-//				}
-//				break;
-//			case 's':
-//				while (1)
-//				{
-//					xil_printf("Setting output frame size. What resolution would you like? Press 'p' to print available resolutions.\n\r");
-//					c = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-//
-//					if (c == 'p')
-//					{
-//						xil_printf("\n\r");
-//						xil_printf("------------- Resolutions -------------\n\r");
-//						for (ii = 0; ii < NUM_VIDEO_RESOLUTIONS; ii++)
-//						{
-//							xil_printf("%d = %s\n\r", ii, vres_get_name(ii));
-//						}
-//						xil_printf("'p' = Print this menu\n\r");
-//						xil_printf("'q' = Quit\n\r");
-//						xil_printf("---------------------------------------\n\r");
-//						xil_printf("\n\r");
-//					}
-//					else if ((c == '0')||(c == '1')||(c == '2')||(c == '3')||(c == '4') ||
-//							 (c == '5')||(c == '6')||(c == '7')||(c == '8'))
-//					{
-//						//periphs_update_output_fsize(&periphs_inst, (c-'0'));
-//						break;
-//					}
-//					else if (c == 'q')
-//					{
-//						break;
-//					}
-//					else
-//					{
-//						xil_printf("ERROR! Illegal character. Try again.\n\r");
-//					}
-//				}
-//				break;
-
-			case 0x0D:
-			case ' ':
-				xil_printf("\n\r\n\r\n\r\n\r");
-				break;
-			default:
-				//xil_printf("\n\r---- unknown ---- c[0] = 0x%x\n\r", c[0]);
-				/*
-				p_periphs_inst222 = &periphs_inst;
-				p_gpio = p_periphs_inst222->p_ps_gpio_inst;
-				DataRead = XGpioPs_Read(p_gpio, XGPIOPS_BANK2);	//read bank 2 data, seems useless
-				xil_printf("DataRead = 0x%x\n\r", DataRead);
-				usleep(200000);
-				*/
-
-				//xil_printf("ERROR! Illegal character. Try again.\n\r");
-				break;
-
+			start_data = 1;
+			gui_cmd[gui_cmd_index] = c[0];
+			gui_cmd_index++;
 		}
+		else if(start_data == 1)
+		{
+			gui_cmd[gui_cmd_index] = c[0];
+			gui_cmd_index++;
+			if(gui_cmd_index == 5)
+			{
+				gui_cmd_index = 0;
+				start_data = 0;
+
+				if(gui_cmd[0] == 0xA0)
+				{
+					//xil_printf("cmd ok %2x %2x %2x %2x %2x\n", gui_cmd[0], gui_cmd[1], gui_cmd[2], gui_cmd[3], gui_cmd[4]);
+					DongleAddr = gui_cmd[1] << 8 | gui_cmd[2];
+					DongleData = gui_cmd[3];
+
+					dongle_write_data(DongleAddr, DongleData);
+				}
+				else if(gui_cmd[0] == 0xD0)
+				{
+					xx = gui_cmd[1];
+					yy = gui_cmd[2];
+					zz = gui_cmd[3];
+					xil_printf("cmd ok %2x %2x %2x %2x %2x\n", gui_cmd[0], xx, yy, zz, gui_cmd[4]);
+					if(zz == 0xff)
+					{
+						xil_printf("david0806: %s:%s(%d) get layer status\r\n",__FILE__,__func__,__LINE__);
+
+						for(i = 0 ;i <= 7; i++)
+						{
+							status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, i);
+							xil_printf("layer %d, status = %d\n\r", i, status);
+						}
+						xil_printf("david0806: %s:%s(%d) get layer status OK\r\n",__FILE__,__func__,__LINE__);
+
+						// Mixer Debug
+						xil_printf("\n\rdavid0806: %s:%s(%d) ST call XVMix_DbgReportStatus\r\n",__FILE__,__func__,__LINE__);
+						XVMix_DbgReportStatus(periphs_inst.p_vid_output_mixer_l2_inst);
+
+						xil_printf("\n\rdavid0806: %s:%s(%d) ST call XVMix_DbgLayerInfo\r\n",__FILE__,__func__,__LINE__);
+						for(i = 0 ;i <= 6; i++)
+						{
+							xil_printf("-------------------------------------------------------------\n\r");
+							XVMix_DbgLayerInfo(periphs_inst.p_vid_output_mixer_l2_inst, i);
+						}
+						xil_printf("-------------------------------------------------------------\n\r");
+
+					}
+					else if(xx == 0)	//write
+					{
+						xil_printf("david0806: %s:%s(%d) write data = 0x%x\r\n",__FILE__,__func__,__LINE__, yy);
+						//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
+						XV_mix_WriteReg(periphs_inst.p_vid_output_mixer_l2_inst->Mix.Config.BaseAddress, XV_MIX_CTRL_ADDR_HWREG_LAYERENABLE_DATA, yy);
+					}
+					else if(xx == 2)	//picture
+					{
+						if(yy == 0)	//clear
+						{
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 1)	//step_1
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, step_1);
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 2)	//step_2
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, step_2);
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 3)	//step_3
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, step_3);
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 4)	//logo
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, ims_logo);
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 5)	//lion
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, lion);
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 6)	//lion
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, lion);
+							pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH/2, LAYER1_HEIGHT/2, p_Image, 0, 0, 0, 0);
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 7)	//lion
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, lion);
+							pixmap_draw(pixmap_1, surface_1, 0 + p_Image->width, 0 + p_Image->height, p_Image, 0, 0, 0, 0);
+
+
+							xil_printf("david0808: %s:%s(%d) x=%d y=%d w=%d h=%d\r\n",__FILE__,__func__,__LINE__,LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT);
+							//				1920	  -		1216   -  16	    16		  1216			912
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 8)	//pic
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, pic1);
+							pixmap_draw(pixmap_1, surface_1, 0 + p_Image->width, 0 + p_Image->height, p_Image, 0, 0, 0, 0);
+
+
+							xil_printf("david0808: %s:%s(%d) x=%d y=%d w=%d h=%d\r\n",__FILE__,__func__,__LINE__,LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT);
+							//				1920	  -		1216   -  16	    16		  1216			912
+							gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 20)	//test gistImageDraw
+						{
+							xil_printf("david0807: %s:%s(%d) open lion\r\n",__FILE__,__func__,__LINE__);
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, lion);
+							//xil_printf("david0807: %s:%s(%d) ImageDraw X=%d Y=%d W=%d H=%d\r\n",__FILE__,__func__,__LINE__,swidth-p_Image->width-BORDER_X*2, sheight-p_Image->height-BORDER_Y*2, p_Image->width, p_Image->height);
+							status = gdispImageDraw(p_Image, 1920/2, 1080/2, p_Image->width, p_Image->height, 0, 0);
+							//g_nn = 0;
+							//xil_printf("status maindraw: %d\r\n", status);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 21)	//specified position
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, lion);
+							//									1216			912
+							pixmap_draw(pixmap_1, surface_1, p_Image->width+60, p_Image->height+60, p_Image, 0, 0, 0, 0);
+							//				1920		1216		16			16		1216			912
+							//gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispBlitArea(0, 0, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+						else if(yy == 22)	//specified position
+						{
+							p_Image = &myImage;
+							status = gdispImageOpenFile(p_Image, lion2);
+							//									1216			912
+							pixmap_draw(pixmap_1, surface_1, p_Image->width+60, p_Image->height+600, p_Image, 0, 0, 0, 0);
+							//				1920		1216		16			16		1216			912
+							//gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispBlitArea(0, 0, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+							gdispImageClose(p_Image);
+							Xil_DCacheFlush();
+						}
+
+					}
+				}
+			}
+		}
+
 	}
-}
-
-
-
-static void createWidgets(void) {
-	GWidgetInit	wi;
-
-	coord_t wide = 600;
-	coord_t thick = 40;
-
-	// Apply some default values for GWIN
-	gwinWidgetClearInit(&wi);
-	wi.g.show = TRUE;
-
-	gwinSetDefaultFont(gdispOpenFont("iskpota232"));
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 0;
-	wi.text = "ID NO:";
-	ghLabel1 = gwinLabelCreate(0, &wi);
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 1;
-	wi.text = "NAME:";
-	ghLabel2 = gwinLabelCreate(0, &wi);
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 3;
-	wi.text = "SEX:";
-	ghLabel3 = gwinLabelCreate(0, &wi);
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 4;
-	wi.text = "AGE:";
-	ghLabel4 = gwinLabelCreate(0, &wi);
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 5;
-	wi.text = "D.O.BIRTH:";
-	ghLabel5 = gwinLabelCreate(0, &wi);
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 7;
-	wi.text = "06/03/2017";
-	ghLabel4 = gwinLabelCreate(0, &wi);
-
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 8;
-	wi.text = "00:00:00";
-	ghLabel5 = gwinLabelCreate(0, &wi);
-
-
-	/*
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = 1920/6, wi.g.y =600;
-	wi.text = "XXXXXXXXXXXXXXXXXXXXXxx";
-	ghLabel5 = gwinLabelCreate(0, &wi);
-	*/
-
-
-
-
 }
 
 void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy)
@@ -779,7 +618,11 @@ void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t p
 	uint32_t i, j, status;
 	color_t color = 0;
 
-	//xil_printf("enter pixmap_draw\r\n");
+
+	xil_printf("david0807: %s:%s(%d) ST W=%d H = %d psx = %d psy = %d isx = %d isy = %d\r\n",__FILE__,__func__,__LINE__,pm_width,pm_height,pm_sx,pm_sy,img_sx,img_sy);
+
+
+	xil_printf("enter pixmap_draw\t");
 	// Clear pixmap with 0
 	memset(surface, 0, pm_width*pm_height*4); // Clear buffer
 
@@ -787,8 +630,10 @@ void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t p
 	if(p_Image != NULL) {
 		// Load image
 		status = gdispGImageDraw(pixmap, p_Image, (pm_width-p_Image->width) >> 1, (pm_height-p_Image->height) >> 1, p_Image->width, p_Image->height, 0, 0);
-		//xil_printf("status draw: %d\r\n", status);
+		xil_printf("status draw: %d\r\n", status);
 	}
+	else
+		xil_printf("image is null\n\r");
 
     // Draw transparency required on layer 1
     for(j = 0; j < pm_height; j++) {
@@ -900,3 +745,4 @@ uint32_t tusb_tick_get(void)
   //return system_ticks;
   return g_ms_tick;
 }
+

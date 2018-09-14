@@ -13,11 +13,8 @@
 #include "mixer.h"
 #include "gpio.h"
 #include "ulpi.h"
-
-
-#include "../host/ehci/ehci.h"
-
-#include "../host/usbh.h"
+#include "xiicps.h"
+#include "sleep.h"
 
 /* global timer registers*/
 #define SCU_GLOBAL_TIMER_COUNT_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR)
@@ -36,16 +33,22 @@ static const char step_3[] = "step3.png";
 void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy);
 
 volatile uint32_t g_ms_tick = 0;
+volatile uint32_t g_ms_tick_old = 0;
+volatile uint32_t g_ms_tick_diff = 0;
 uint32_t g_nn = 0;
 uint32_t g_dongle_plugged = 0;
 uint32_t g_camera_plugged = 0;
 
 uint32_t g_conn_status = 2;
 
+u8 gui_cmd[5] = {0};
+u8 gui_cmd_index = 0;
+u8 start_data = 0;
+
+
+
 GListener	gl;
 GHandle		ghLabel1, ghLabel2, ghLabel3, ghLabel4, ghLabel5, ghLabel6, ghLabel7;
-
-
 
 static gdispImage myImage;
 static GDisplay* pixmap_1;
@@ -61,6 +64,8 @@ void main_loop(void);
 // *****************************************************
 // Main program entry point
 // *****************************************************
+
+
 int main()
 {
 	// Local variables
@@ -69,14 +74,40 @@ int main()
 	gdispImage *p_Image;
 	uint8_t *p_byte, byte;
 	uint32_t i,j, Index;
-	GEvent* pe;
+	//GEvent* pe;
+
+	//XIicPs *IicPs;
+	//u16 DeviceId = 0;
+
+
+	//g_ms_tick = 0;
+
+	u32 ClkRate = 100000;
+
 
 	p_Image = &myImage;
 
 	// Setup UART and caches
     init_platform();
 
-    xil_printf("Aries Main Program\n\r");
+
+
+
+
+
+
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+
+    //xil_printf("\n\n\n\nAries Main Program %s:%s(%d) ST\n\r",__FILE__,__func__,__LINE__);
+    xil_printf("\n\n\n\nAries Main Program\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
 
     // Initialize peripherals
     status = periphs_init
@@ -85,11 +116,11 @@ int main()
     	//XPAR_CONTROL_PATH_AXI_GPIO_0_DEVICE_ID,
     	//XPAR_CONTROL_PATH_AXI_IIC_0_BASEADDR,
 		//XPAR_XIICPS_0_DEVICE_ID,
-		XPAR_PS7_GPIO_0_DEVICE_ID,
+		XPAR_PS7_GPIO_0_DEVICE_ID,		//0
 		XPAR_VIDEO_PATH_VIDEO_OUT_VIDEO_LOCK_MONITOR_DEVICE_ID,
 		XPAR_PS7_SCUGIC_0_DEVICE_ID,
-		XPAR_PS7_SCUTIMER_0_DEVICE_ID,
-		XPAR_PS7_UART_0_DEVICE_ID,
+		XPAR_PS7_SCUTIMER_0_DEVICE_ID,	//0
+		XPAR_PS7_UART_0_DEVICE_ID,		//0
 		//XPAR_VIDEO_PATH_CAMERA_IN_V_TC_VTD_DEVICE_ID,
     	//XPAR_VIDEO_PATH_TPG_OLD_TPG_OLD_DEVICE_ID,
 		XPAR_VIDEO_PATH_V_TPG_0_DEVICE_ID,
@@ -106,17 +137,21 @@ int main()
 		FRAMEBUFFER_CAMERA_FREEZE_START_ADDR,
 		FRAMEBUFFER_GUI_START_ADDR
     );
+    xil_printf("\n\rg_ms_tick = %d aaa\n\r\n\r", g_ms_tick);
 	if (status != 0)
 	{
 		xil_printf("Initialization failed.\n\r");
 		return -1;
 	}
 
+
+	//xil_printf("david0725: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
 	// Set up Mixer Layers
 	//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
 
     // Initialize uGFX
 	//g_nn = 1;
+	xil_printf("\n\rdavid0726: %s:%s(%d) ST call gfxInit()\r\n",__FILE__,__func__,__LINE__);
     gfxInit();
     xil_printf("gfxInit() complete\r\n");
 	// Background process
@@ -143,8 +178,11 @@ int main()
 
 	// Set up IO for our image
 	//g_nn = 1;
+	xil_printf("david0725: %s:%s(%d) open file : %s\r\n",__FILE__,__func__,__LINE__, ims_logo);
 	status = gdispImageOpenFile(p_Image, ims_logo);
-	//xil_printf("status mainopen: %d\r\n", status);
+	xil_printf("status main open: %d\r\n", status);
+
+
 //	p_byte = (uint8_t *)p_Image->priv;
 //	xil_printf("status: %d\r\n", status);
 //	xil_printf("p_Image->type: %d\r\n", p_Image->type);
@@ -195,50 +233,62 @@ int main()
 //	}
 
 	// Detect Dongle status and draw image
+
+	xil_printf("\n\r\n\rcall psuart0_dongle_ping\n\r");
 	g_conn_status = psuart0_dongle_ping();
+	xil_printf("call psuart0_dongle_ping, result : %d\t", g_conn_status);
 
 	if(g_conn_status == 2)
 	{
-			xil_printf("no dongle or camera\n\r");
+			xil_printf("no dongle or camera 2\n\r");	//no dongle
 			// Set Flags
 			g_dongle_plugged = 0;
 			g_camera_plugged = 0;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_1);
 			status = gdispImageOpenFile(p_Image, step_1);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 	}
-	else if (g_conn_status == 1){
-			xil_printf("dongle only\n\r");
+	else if (g_conn_status == 1)
+	{
+			xil_printf("dongle only 1\n\r");	//use dongle, no camera
 			// Set Flags
 			g_dongle_plugged = 1;
 			g_camera_plugged = 0;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_2);
 			status = gdispImageOpenFile(p_Image, step_2);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 	}
-	else {
-			xil_printf("dongle+camera\n\r");
+	else
+	{
+			xil_printf("dongle+camera 0\n\r");	//use dongle, camera is connected.
 			// Set Flags
 			g_dongle_plugged = 1;
 			g_camera_plugged = 1;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_3);
 			status = gdispImageOpenFile(p_Image, step_3);
+			xil_printf("david0628: %s:%s(%d) status = %d\r\n",__FILE__,__func__,__LINE__,status);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 			XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 	}
+	xil_printf("\n\r\n\r");
 
 	Xil_DCacheFlush();
 
+	xil_printf("main() call psuart0_exposure ST\r\n");
 	psuart0_exposure(3);
+	xil_printf("main() call psuart0_exposure SP\r\n");
 
 	// Set up Mixer Layers
 	//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
@@ -247,17 +297,29 @@ int main()
 	//ulpi_init();
 	//ulpi_set_vbus(TRUE);
 
-	xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-
+	xil_printf("\n\rmain() call tusb_init ST\r\n");
 	tusb_init(); // initialize tinyusb stack
+	xil_printf("main() call tusb_init SP\r\n\n\r");
 
+	xil_printf("main() call keyboard_host_app_init ST\r\n");
 	keyboard_host_app_init(); // Keyboard Host Init
+	xil_printf("main() call keyboard_host_app_init SP\r\n");
+
 	//mouse_host_app_init(); // Mouse Host Init
 	Xil_DCacheFlush(); // Flush DCache after USB Init();
 	//Xil_DCacheInvalidate();
 	Xil_DCacheDisable();
 
-	xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
+
+
+
+	//iic_init(IicPs, DeviceId, ClkRate);
+
+    //test_gpio(&periphs_inst);		ok
+	xil_printf("\n\rg_ms_tick = %d bbb\n\r\n\r", g_ms_tick);
+
+
+
 	main_loop();
 
     cleanup_platform();
@@ -268,34 +330,118 @@ void main_loop()
 {
 	// Local variables
 	char c[1]  = {0};
-	int  ii = 0;
+	//int  ii = 0;
 	unsigned int status = 0;
 	gdispImage *p_Image;
+	//unsigned int dw;
+	//unsigned int cl;
+	//periphs_t*   p_periphs_inst222;
+	//XGpioPs*	  p_gpio;
 
-	uint8_t hostid;
-	uint32_t int_status;
-	ehci_registers_t* regs;
+	//u32 DataRead;
+
+	unsigned int DongleAddr;
+	unsigned char DongleData;
+	unsigned char cnt = 0;
+	//unsigned char DongleDataArray[10];
 
 	int i;
+	u8 xx, yy, zz;
 
+	u32 RegValue;
 
 	// Main loop
 	while (1)
 	{
 		uint32_t status;
-		//xil_printf("What would you like to do? Press 'p' to print available commands.\n\r");
+
+		//xil_printf("\n\rWhat would you like to do? Press 'p' to print available commands.\t");
+		//							0xE0001000
 		c[0] = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-		//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
-		
-		//xil_printf("ping.\n\r");
+		//xil_printf("%c\n\r",c[0]);
+
+					//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
+					//xil_printf("ping.\n\r");
+
+		if((start_data == 0) && ((c[0] == 0xA0) ||(c[0] == 0xA1) ||(c[0] == 0xB0) ||(c[0] == 0xB1) ||(c[0] == 0xD0)))
+		{
+			start_data = 1;
+			gui_cmd[gui_cmd_index] = c[0];
+			gui_cmd_index++;
+		}
+		else if(start_data == 1)
+		{
+			gui_cmd[gui_cmd_index] = c[0];
+			gui_cmd_index++;
+			if(gui_cmd_index == 5)
+			{
+				gui_cmd_index = 0;
+				start_data = 0;
+
+				if(gui_cmd[0] == 0xA0)
+				{
+					//xil_printf("cmd ok %2x %2x %2x %2x %2x\n", gui_cmd[0], gui_cmd[1], gui_cmd[2], gui_cmd[3], gui_cmd[4]);
+					DongleAddr = gui_cmd[1] << 8 | gui_cmd[2];
+					DongleData = gui_cmd[3];
+
+					dongle_write_data(DongleAddr, DongleData);
+				}
+				else if(gui_cmd[0] == 0xD0)
+				{
+					xx = gui_cmd[1];
+					yy = gui_cmd[2];
+					zz = gui_cmd[3];
+					xil_printf("cmd ok %2x %2x %2x %2x %2x\n", gui_cmd[0], xx, yy, zz, gui_cmd[4]);
+					if(zz == 0xff)
+					{
+						xil_printf("david0806: %s:%s(%d) get layer status\r\n",__FILE__,__func__,__LINE__);
+
+						for(i = 0 ;i <= 7; i++)
+						{
+							status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, i);
+							xil_printf("layer %d, status = %d\n\r", i, status);
+						}
+						xil_printf("david0806: %s:%s(%d) get layer status OK\r\n",__FILE__,__func__,__LINE__);
+
+					    // Mixer Debug
+					    xil_printf("\n\rdavid0806: %s:%s(%d) ST call XVMix_DbgReportStatus\r\n",__FILE__,__func__,__LINE__);
+					    XVMix_DbgReportStatus(periphs_inst.p_vid_output_mixer_l2_inst);
+
+					    xil_printf("\n\rdavid0806: %s:%s(%d) ST call XVMix_DbgLayerInfo\r\n",__FILE__,__func__,__LINE__);
+					    for(i = 0 ;i <= 6; i++)
+					    {
+					    	xil_printf("-------------------------------------------------------------\n\r");
+					    	XVMix_DbgLayerInfo(periphs_inst.p_vid_output_mixer_l2_inst, i);
+					    }
+					    xil_printf("-------------------------------------------------------------\n\r");
+
+					}
+					else if(xx == 0)	//write
+					{
+						xil_printf("david0806: %s:%s(%d) write data = 0x%x\r\n",__FILE__,__func__,__LINE__, yy);
+						//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
+						XV_mix_WriteReg(periphs_inst.p_vid_output_mixer_l2_inst->Mix.Config.BaseAddress, XV_MIX_CTRL_ADDR_HWREG_LAYERENABLE_DATA, yy);
+					}
+				}
+			}
+		}
+
+
+
+
+
+
 		g_conn_status = psuart0_dongle_ping();
 		if(g_conn_status == 2) // Nothing is plugged in
 		{
-			if(g_procedure_started) { // Procedure not started
-
+			if(g_procedure_started)	// Procedure not started
+			{
+				xil_printf("david0629: %s:%s(%d) ST g_procedure_started = %d xxx1\r\n",__FILE__,__func__,__LINE__, g_procedure_started);
 			}
-			else {
-				if(g_dongle_plugged || g_camera_plugged){
+			else
+			{
+				if(g_dongle_plugged || g_camera_plugged)
+				{
 					// Update Flags
 					g_dongle_plugged = 0;
 					g_camera_plugged = 0;
@@ -304,6 +450,7 @@ void main_loop()
 					// Show Message to plug in dongle
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
+					xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_1);
 					status = gdispImageOpenFile(p_Image, step_1);
 					pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 					gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -312,20 +459,24 @@ void main_loop()
 				}
 			}
 		}
-		else if(g_conn_status == 1){ // Only dongle is plugged in
-
-			if(g_procedure_started){ // Procedure started
-
+		else if(g_conn_status == 1)	// Only dongle is plugged in
+		{
+			if(g_procedure_started)	// Procedure started
+			{
+				xil_printf("david0629: %s:%s(%d) ST g_procedure_started = %d xxx2\r\n",__FILE__,__func__,__LINE__, g_procedure_started);
 			}
-			else { // Procedure hasn't started
-				if(g_dongle_plugged == 0 || g_camera_plugged){
+			else	// Procedure hasn't started
+			{
+				if(g_dongle_plugged == 0 || g_camera_plugged)
+				{
 					// Update Flags
 					g_dongle_plugged = 1;
 					g_camera_plugged = 0;
 					// Dongle plugged
-					xil_printf("dongle plugged\n\r");
+					xil_printf("dongle plugged only dongle\n\r");
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
+					xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_2);
 					status = gdispImageOpenFile(p_Image, step_2);
 					pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 					gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
@@ -334,51 +485,56 @@ void main_loop()
 				}
 			}
 		}
-		else { // Everything is plugged in
-			if(g_procedure_started) { // Procedure not started
-
+		else	// Everything is plugged in
+		{
+			if(g_procedure_started)		// Procedure not started
+			{
+				//xil_printf("david0629: %s:%s(%d) ST g_procedure_started = %d xxx3\r\n",__FILE__,__func__,__LINE__, g_procedure_started);
 			}
-			else {
-				if(g_dongle_plugged == 0 || g_camera_plugged == 0){
+			else
+			{
+				if(g_dongle_plugged == 0 || g_camera_plugged == 0)
+				{
 					// Update Flags
 					g_dongle_plugged = 1;
 					g_camera_plugged = 1;
 					// Dongle plugged
-					xil_printf("all plugged\n\r");
+					xil_printf("all plugged, dongle + camera\n\r");
 					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
+					xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_3);
 					status = gdispImageOpenFile(p_Image, step_3);
 					pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 					gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 					Xil_DCacheFlush();
 					gdispImageClose(p_Image);
 				}
-
 			}
-
 		}
 
-
-
-
-
-		if(g_updated) {
+		if(g_updated)
+		{
+			xil_printf("david0628: %s:%s(%d) g_updated = 1\r\n",__FILE__,__func__,__LINE__);
 			g_updated = 0;
-			if(g_procedure_started) { // Remove all pictures
+			if(g_procedure_started)	// Remove all pictures
+			{
 				xil_printf("update remove picture\r\n");
 				pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
 				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 				Xil_DCacheFlush();
 			}
-			else { // Add back picture
+			else	// Add back picture
+			{
 				xil_printf("update add picture\r\n");
 				p_Image = &myImage;
+				xil_printf("david0628: %s:%s(%d) openfile : %s\r\n",__FILE__,__func__,__LINE__,step_3);
 				status = gdispImageOpenFile(p_Image, step_3);
 				pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 				gdispImageClose(p_Image);
 				Xil_DCacheFlush();
 			}
+			xil_printf("david0703: %s:%s(%d) call psuart0_exposure g_exposure=%d\r\n",__FILE__,__func__,__LINE__,g_exposure);
 			psuart0_exposure(g_exposure);
 		}
 
@@ -387,338 +543,14 @@ void main_loop()
 	    keyboard_host_app_task(NULL); // Keyboard tasks
 	    //mouse_host_app_task(NULL); // Mouse Tasks
 		//Xil_DCacheFlush();
-
-
-		switch (c[0])
-		{
-			case 'p':
-				xil_printf("\n\r");
-				xil_printf("------------- Aries Demo -------------\n\r");
-				xil_printf("'1' = Toggle Layer 1\n\r");
-				xil_printf("'2' = Toggle Layer 2\n\r");
-				xil_printf("'3' = Toggle Layer 3\n\r");
-				xil_printf("'n' = Set to new scaler datapath\n\r");
-//				xil_printf("'o' = Set to old scaler datapath\n\r");
-				xil_printf("'t' = Enable/bypass camera TPG\n\r");
-				xil_printf("'y' = Enable/bypass GUI TPG\n\r");
-//				xil_printf("'d' = Detect or set input frame size\n\r");
-				xil_printf("'u' = Park Camera Freeze VDMA\n\r");
-				xil_printf("'s' = Set output frame size\n\r");
-				xil_printf("'p' = Print this menu\n\r");
-				xil_printf("---------------------------------------\n\r");
-				xil_printf("\n\r");
-				break;
-			case '1':
-				xil_printf("Enabling/bypassing Layer 1.\n\r");
-				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-				if(status) { // Enabled
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-				} else {
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
-				}
-				break;
-			case '2':
-				xil_printf("Enabling/bypassing Layer 2.\n\r");
-				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				if(status) { // Enabled
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				} else {
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				}
-				break;
-			case '3':
-				xil_printf("Enabling/bypassing Layer 3.\n\r");
-				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-				if(status) { // Enabled
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-				} else {
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
-				}
-				break;
-//			case 'n':
-//				xil_printf("Using new VPSS-based scaler datapath.\n\r");
-//				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_NEW_SCALER);
-//				break;
-//			case 'o':
-//				xil_printf("Using old scaler datapath.\n\r");
-//				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_OLD_SCALER);
-//				break;
-			case 't':
-				//xil_printf("Enabling/bypassing camera TPG.\n\r");
-				//periphs_toggle_camera_tpg(&periphs_inst);
-
-
-				xil_printf("david0810: %s:%s(%d) sizeof(ehci_registers_t) = %d\r\n",__FILE__,__func__,__LINE__, sizeof(ehci_registers_t));
-
-
-				hostid = 0;
-
-				  //regs = get_operational_register(hostid);
-				/*
-
-				STATIC_ INLINE_ ehci_registers_t* get_operational_register(uint8_t hostid)
-				{
-				#if (TUSB_CFG_MCU == MCU_LPC43XX || TUSB_CFG_MCU == MCU_LPC18XX)
-				  return (ehci_registers_t*) (hostid ? (&LPC_USB1->USBCMD_H) : (&LPC_USB0->USBCMD_H) );
-				#elif (TUSB_CFG_MCU == MCU_ZYNQ7015)
-				  //xil_printf("ehci get_operation_register\r\n");
-				  return (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
-				#endif
-				}
-				*/
-
-				  ehci_registers_t* regs = (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
-
-				  uint32_t int_cmd = regs->usb_cmd;
-				  uint32_t int_sts = regs->usb_sts;
-				  uint32_t int_inten = regs->usb_int_enable;
-				  uint32_t int_portsc = regs->portsc;
-
-				  hal_interrupt_disable(0);
-
-				  sleep(1);
-
-					/* Enable System wide interrupts in the Processor. */
-					//Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
-				  hal_interrupt_enable(0);
-
-
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("before reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-
-				  //xil_printf("\r\nhcd_isr usb_sts: %x\r\n", int_status);
-				  xil_printf("\r\nhcd_isr usb_cmd: %x\r\n", int_cmd);
-				  xil_printf("hcd_isr usb_sts: %x\r\n", int_sts);
-				  xil_printf("hcd_isr usb_inten: %x\r\n", int_inten);
-				  xil_printf("hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-
-				  xil_printf("\r\naaaaaaaaaaaaaaaabbcc\r\n");
-
-				  //ehci_registers_t* const regs2 = (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
-
-				  regs->usb_cmd_bit.reset = 1;
-
-				  for(i = 0; i < 20;i ++)
-				  {
-					  int_cmd = regs->usb_cmd;
-					  //xil_printf("hcd_isr usb_cmd: %x\r\n", int_cmd);
-					  xil_printf("%x\t", int_cmd);
-					  //usleep(1);
-				  }
-
-				  xil_printf("\n\r");
-
-				  hal_interrupt_disable(0);
-
-				  sleep(1);
-
-					/* Enable System wide interrupts in the Processor. */
-					//Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
-				  hal_interrupt_enable(0);
-
-
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-				  sleep(1);int_portsc = regs->portsc;xil_printf("after reset hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-				  hal_interrupt_disable(0);
-
-				  sleep(1);
-
-					/* Enable System wide interrupts in the Processor. */
-					//Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
-				  hal_interrupt_enable(0);
-
-				  //xil_printf("hcd_isr usb_int_enable: %x\r\n", regs->usb_int_enable);
-
-
-
-
-				  /*
-
-				  //int_status = regs->usb_sts;
-				  xil_printf("\r\nhcd_isr usb_sts: 0x%x\r\n", int_status);
-				  xil_printf("hcd_isr usb_int_enable: 0x%x\r\n", regs->usb_int_enable);
-				  //int_status &= regs->usb_int_enable;
-				  xil_printf("\r\nhcd_isr int_status: id = %d status = 0x%x\r\n", hostid, int_status);
-
-*/
-
-				//xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-				xil_printf("tinyusb initial\n\r");
-
-				sleep(1);
-
-				tusb_init(); // initialize tinyusb stack
-
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-				sleep(1);int_portsc = regs->portsc;xil_printf("after usb_init hcd_isr usb_portsc: %x\r\n", int_portsc);
-
-
-
-
-				keyboard_host_app_init(); // Keyboard Host Init
-				//mouse_host_app_init(); // Mouse Host Init
-				Xil_DCacheFlush(); // Flush DCache after USB Init();
-				//Xil_DCacheInvalidate();
-				Xil_DCacheDisable();
-
-
-				xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-				//enumeration_body_subtask2();
-				//enumeration_body_subtask();
-
-				xil_printf("david0810: %s:%s(%d) ST\r\n",__FILE__,__func__,__LINE__);
-
-
-				break;
-			case 'y':
-				xil_printf("Enabling/bypassing GUI TPG.\n\r");
-				periphs_toggle_GUI_tpg(&periphs_inst);
-				break;
-			case 'u':
-				xil_printf("Park/Unpark Camera Freeze VDMA.\n\r");
-				periphs_toggle_camera_freeze_vdma(&periphs_inst);
-				// Determine if we're in TPG or passthrough mode
-				if (periphs_inst.enable_camera_freeze_vdma == PERIPHS_SEL_ENABLE_PARK)
-				{
-					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				}
-				else
-				{
-					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
-				}
-
-
-
-
-				break;
-//			case 'd':
-//				if (periphs_get_fmc_status(&periphs_inst))
-//				{
-//					xil_printf("FMC IMAGEON card is connected. Detecting input frame size.\n\r");
-//					//periphs_detect_input_fsize(&periphs_inst);
-//				}
-//				else
-//				{
-//					while (1)
-//					{
-//						xil_printf("FMC IMAGEON card is not connected. Using internal TPG as video source. Please select a resolution to set it to. Press 'p' to print available resolutions.\n\r");
-//						c = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-//						if (c == 'p')
-//						{
-//							xil_printf("\n\r");
-//							xil_printf("------------- Resolutions -------------\n\r");
-//							for (ii = 0; ii < NUM_VIDEO_RESOLUTIONS; ii++)
-//							{
-//								xil_printf("%d = %s\n\r", ii, vres_get_name(ii));
-//							}
-//							xil_printf("'p' = Print this menu\n\r");
-//							xil_printf("'q' = Quit\n\r");
-//							xil_printf("---------------------------------------\n\r");
-//							xil_printf("\n\r");
-//						}
-//						else if ((c == '0')||(c == '1')||(c == '2')||(c == '3')||(c == '4') ||
-//								 (c == '5')||(c == '6')||(c == '7')||(c == '8'))
-//						{
-//							//periphs_set_input_fsize(&periphs_inst, (c-'0'));
-//							break;
-//						}
-//						else if (c == 'q')
-//						{
-//							break;
-//						}
-//						else
-//						{
-//							xil_printf("ERROR! Illegal character. Try again.\n\r");
-//						}
-//					}
-//					break;
-//				}
-//				break;
-//			case 's':
-//				while (1)
-//				{
-//					xil_printf("Setting output frame size. What resolution would you like? Press 'p' to print available resolutions.\n\r");
-//					c = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-//
-//					if (c == 'p')
-//					{
-//						xil_printf("\n\r");
-//						xil_printf("------------- Resolutions -------------\n\r");
-//						for (ii = 0; ii < NUM_VIDEO_RESOLUTIONS; ii++)
-//						{
-//							xil_printf("%d = %s\n\r", ii, vres_get_name(ii));
-//						}
-//						xil_printf("'p' = Print this menu\n\r");
-//						xil_printf("'q' = Quit\n\r");
-//						xil_printf("---------------------------------------\n\r");
-//						xil_printf("\n\r");
-//					}
-//					else if ((c == '0')||(c == '1')||(c == '2')||(c == '3')||(c == '4') ||
-//							 (c == '5')||(c == '6')||(c == '7')||(c == '8'))
-//					{
-//						//periphs_update_output_fsize(&periphs_inst, (c-'0'));
-//						break;
-//					}
-//					else if (c == 'q')
-//					{
-//						break;
-//					}
-//					else
-//					{
-//						xil_printf("ERROR! Illegal character. Try again.\n\r");
-//					}
-//				}
-//				break;
-
-			case 0x0D:
-			case ' ':
-				xil_printf("\n\r\n\r\n\r\n\r");
-				break;
-			default:
-				//xil_printf("\n\r---- unknown ---- c[0] = 0x%x\n\r", c[0]);
-				/*
-				p_periphs_inst222 = &periphs_inst;
-				p_gpio = p_periphs_inst222->p_ps_gpio_inst;
-				DataRead = XGpioPs_Read(p_gpio, XGPIOPS_BANK2);	//read bank 2 data, seems useless
-				xil_printf("DataRead = 0x%x\n\r", DataRead);
-				usleep(200000);
-				*/
-
-				//xil_printf("ERROR! Illegal character. Try again.\n\r");
-				break;
-
-		}
 	}
 }
 
-
-
-static void createWidgets(void) {
+static void createWidgets(void)
+{
 	GWidgetInit	wi;
 
-	coord_t wide = 600;
-	coord_t thick = 40;
+	xil_printf("\r\ncreateWidgets\r\n");
 
 	// Apply some default values for GWIN
 	gwinWidgetClearInit(&wi);
@@ -727,57 +559,47 @@ static void createWidgets(void) {
 	gwinSetDefaultFont(gdispOpenFont("iskpota232"));
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 0;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 0;
 	wi.text = "ID NO:";
 	ghLabel1 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 1;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 40;
 	wi.text = "NAME:";
 	ghLabel2 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 3;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 120;
 	wi.text = "SEX:";
 	ghLabel3 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 4;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 160;
 	wi.text = "AGE:";
 	ghLabel4 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 5;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 200;
 	wi.text = "D.O.BIRTH:";
 	ghLabel5 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 7;
-	wi.text = "06/03/2017";
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 280;
+	wi.text = "06/28/2018";
 	ghLabel4 = gwinLabelCreate(0, &wi);
 
 	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 8;
+	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 320;
 	wi.text = "00:00:00";
 	ghLabel5 = gwinLabelCreate(0, &wi);
-
-
-	/*
-	// Create label
-	wi.g.width = wide; wi.g.height = thick; wi.g.x = 1920/6, wi.g.y =600;
-	wi.text = "XXXXXXXXXXXXXXXXXXXXXxx";
-	ghLabel5 = gwinLabelCreate(0, &wi);
-	*/
-
-
-
 
 }
 
 void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy)
 {
 	uint32_t i, j, status;
-	color_t color = 0;
+
+	//color_t color = 0;
 
 	//xil_printf("enter pixmap_draw\r\n");
 	// Clear pixmap with 0
@@ -886,17 +708,24 @@ void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t p
 // uGFX SystemTick
 systemticks_t gfxSystemTicks(void)
 {
+	//xil_printf("david0724: %s:%s(%d) ST xxxxxxxxxxxxxxx\r\n",__FILE__,__func__,__LINE__);
+	//many calls
 	return g_ms_tick;
 }
 
 systemticks_t gfxMillisecondsToTicks(delaytime_t ms)
 {
+	//xil_printf("david0726: %s:%s(%d) ST xxxxxxxxxxxxxxxxxx\r\n",__FILE__,__func__,__LINE__);
+	//some calls this, not known
 	return ms;
 }
 /////////////////////////////////////
 
 uint32_t tusb_tick_get(void)
 {
+	//xil_printf("david0724: %s:%s(%d) ST xxxxxxxxxxxxxxx\r\n",__FILE__,__func__,__LINE__);
+	//many
   //return system_ticks;
   return g_ms_tick;
 }
+

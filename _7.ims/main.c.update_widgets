@@ -884,12 +884,3 @@ uint32_t tusb_tick_get(void)
   return g_ms_tick;
 }
 
-void tick_get(void)
-{
-	xil_printf("t=%d\n\r", g_ms_tick);
-}
-
-void tick_set(uint32_t tick)
-{
-	g_ms_tick = tick;
-}

@@ -13,6 +13,7 @@
 #include "mixer.h"
 #include "gpio.h"
 #include "ulpi.h"
+#include "xiicps.h"
 
 /* global timer registers*/
 #define SCU_GLOBAL_TIMER_COUNT_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR)
@@ -56,6 +57,7 @@ void main_loop(void);
 // *****************************************************
 // Main program entry point
 // *****************************************************
+
 int main()
 {
 	// Local variables
@@ -66,12 +68,29 @@ int main()
 	uint32_t i,j, Index;
 	GEvent* pe;
 
+	XIicPs *IicPs;
+	u16 DeviceId = 0;
+	u32 ClkRate = 100000;
+
+
 	p_Image = &myImage;
 
 	// Setup UART and caches
     init_platform();
 
-    xil_printf("Aries Main Program\n\r");
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+    usleep(200000);
+
+
+    //xil_printf("\n\n\n\nAries Main Program %s:%s(%d) ST\n\r",__FILE__,__func__,__LINE__);
+    xil_printf("\n\n\n\nAries Main Program\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
 
     // Initialize peripherals
     status = periphs_init
@@ -139,7 +158,9 @@ int main()
 	// Set up IO for our image
 	//g_nn = 1;
 	status = gdispImageOpenFile(p_Image, ims_logo);
-	//xil_printf("status mainopen: %d\r\n", status);
+	xil_printf("status main open: %d\r\n", status);
+
+
 //	p_byte = (uint8_t *)p_Image->priv;
 //	xil_printf("status: %d\r\n", status);
 //	xil_printf("p_Image->type: %d\r\n", p_Image->type);
@@ -190,11 +211,14 @@ int main()
 //	}
 
 	// Detect Dongle status and draw image
+
+	xil_printf("\n\r\n\rcall psuart0_dongle_ping\n\r");
 	g_conn_status = psuart0_dongle_ping();
+	xil_printf("call psuart0_dongle_ping, result : %d\t", g_conn_status);
 
 	if(g_conn_status == 2)
 	{
-			xil_printf("no dongle or camera\n\r");
+			xil_printf("no dongle or camera 2\n\r");	//no dongle
 			// Set Flags
 			g_dongle_plugged = 0;
 			g_camera_plugged = 0;
@@ -205,8 +229,9 @@ int main()
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 	}
-	else if (g_conn_status == 1){
-			xil_printf("dongle only\n\r");
+	else if (g_conn_status == 1)
+	{
+			xil_printf("dongle only 1\n\r");	//use dongle, no camera
 			// Set Flags
 			g_dongle_plugged = 1;
 			g_camera_plugged = 0;
@@ -217,23 +242,29 @@ int main()
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 	}
-	else {
-			xil_printf("dongle+camera\n\r");
+	else
+	{
+			xil_printf("dongle+camera 0\n\r");	//use dongle, camera is connected.
 			// Set Flags
 			g_dongle_plugged = 1;
 			g_camera_plugged = 1;
 			// Show Message
 			p_Image = &myImage;
+			xil_printf("david0628: %s:%s(%d) openfile step 3\r\n",__FILE__,__func__,__LINE__);
 			status = gdispImageOpenFile(p_Image, step_3);
+			xil_printf("david0628: %s:%s(%d) status = %d\r\n",__FILE__,__func__,__LINE__,status);
 			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
 			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 			gdispImageClose(p_Image);
 			XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 	}
+	xil_printf("\n\r\n\r");
 
 	Xil_DCacheFlush();
 
+	xil_printf("main() call psuart0_exposure ST\r\n");
 	psuart0_exposure(3);
+	xil_printf("main() call psuart0_exposure SP\r\n");
 
 	// Set up Mixer Layers
 	//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
@@ -242,13 +273,23 @@ int main()
 	//ulpi_init();
 	//ulpi_set_vbus(TRUE);
 
+	xil_printf("\n\rmain() call tusb_init ST\r\n");
 	tusb_init(); // initialize tinyusb stack
+	xil_printf("main() call tusb_init SP\r\n\n\r");
 
+	xil_printf("main() call keyboard_host_app_init ST\r\n");
 	keyboard_host_app_init(); // Keyboard Host Init
+	xil_printf("main() call keyboard_host_app_init SP\r\n");
 	//mouse_host_app_init(); // Mouse Host Init
 	Xil_DCacheFlush(); // Flush DCache after USB Init();
 	//Xil_DCacheInvalidate();
 	Xil_DCacheDisable();
+
+
+	//iic_init(IicPs, DeviceId, ClkRate);
+
+    //test_gpio(&periphs_inst);		ok
+
 	main_loop();
 
     cleanup_platform();
@@ -262,24 +303,32 @@ void main_loop()
 	int  ii = 0;
 	unsigned int status = 0;
 	gdispImage *p_Image;
+	unsigned int dw;
+	unsigned int cl;
 
 	// Main loop
 	while (1)
 	{
 		uint32_t status;
-		//xil_printf("What would you like to do? Press 'p' to print available commands.\n\r");
-		//c = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
-		//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
-		
+
+		xil_printf("\n\rWhat would you like to do? Press 'p' to print available commands.\t");
+		c[0] = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
+		xil_printf("%c\n\r",c[0]);
+
+			//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
+
 		//xil_printf("ping.\n\r");
 		g_conn_status = psuart0_dongle_ping();
 		if(g_conn_status == 2) // Nothing is plugged in
 		{
-			if(g_procedure_started) { // Procedure not started
+			if(g_procedure_started)	// Procedure not started
+			{
 
 			}
-			else {
-				if(g_dongle_plugged || g_camera_plugged){
+			else
+			{
+				if(g_dongle_plugged || g_camera_plugged)
+				{
 					// Update Flags
 					g_dongle_plugged = 0;
 					g_camera_plugged = 0;
@@ -296,18 +345,21 @@ void main_loop()
 				}
 			}
 		}
-		else if(g_conn_status == 1){ // Only dongle is plugged in
-
-			if(g_procedure_started){ // Procedure started
+		else if(g_conn_status == 1)	// Only dongle is plugged in
+		{
+			if(g_procedure_started)	// Procedure started
+			{
 
 			}
-			else { // Procedure hasn't started
-				if(g_dongle_plugged == 0 || g_camera_plugged){
+			else	// Procedure hasn't started
+			{
+				if(g_dongle_plugged == 0 || g_camera_plugged)
+				{
 					// Update Flags
 					g_dongle_plugged = 1;
 					g_camera_plugged = 0;
 					// Dongle plugged
-					xil_printf("dongle plugged\n\r");
+					xil_printf("dongle plugged only dongle\n\r");
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
 					status = gdispImageOpenFile(p_Image, step_2);
@@ -318,17 +370,21 @@ void main_loop()
 				}
 			}
 		}
-		else { // Everything is plugged in
-			if(g_procedure_started) { // Procedure not started
+		else	// Everything is plugged in
+		{
+			if(g_procedure_started)		// Procedure not started
+			{
 
 			}
-			else {
-				if(g_dongle_plugged == 0 || g_camera_plugged == 0){
+			else
+			{
+				if(g_dongle_plugged == 0 || g_camera_plugged == 0)
+				{
 					// Update Flags
 					g_dongle_plugged = 1;
 					g_camera_plugged = 1;
 					// Dongle plugged
-					xil_printf("all plugged\n\r");
+					xil_printf("all plugged, dongle + camera\n\r");
 					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
 					p_Image = &myImage;
 					status = gdispImageOpenFile(p_Image, step_3);
@@ -337,24 +393,22 @@ void main_loop()
 					Xil_DCacheFlush();
 					gdispImageClose(p_Image);
 				}
-
 			}
-
 		}
 
-
-
-
-
-		if(g_updated) {
+		if(g_updated)
+		{
+			xil_printf("david0628: %s:%s(%d) g_updated = 1\r\n",__FILE__,__func__,__LINE__);
 			g_updated = 0;
-			if(g_procedure_started) { // Remove all pictures
+			if(g_procedure_started)	// Remove all pictures
+			{
 				xil_printf("update remove picture\r\n");
 				pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
 				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
 				Xil_DCacheFlush();
 			}
-			else { // Add back picture
+			else	// Add back picture
+			{
 				xil_printf("update add picture\r\n");
 				p_Image = &myImage;
 				status = gdispImageOpenFile(p_Image, step_3);
@@ -372,8 +426,7 @@ void main_loop()
 	    //mouse_host_app_task(NULL); // Mouse Tasks
 		//Xil_DCacheFlush();
 
-
-		switch (c[0])
+	    switch (c[0])
 		{
 			case 'p':
 				xil_printf("\n\r");
@@ -441,15 +494,15 @@ void main_loop()
 				// Determine if we're in TPG or passthrough mode
 				if (periphs_inst.enable_camera_freeze_vdma == PERIPHS_SEL_ENABLE_PARK)
 				{
+					xil_printf("Park, XVMix_LayerEnable\n\r");
 					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
 				}
 				else
 				{
+					xil_printf("Unpark, XVMix_LayerDisable\n\r");
 					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
 				}
-
-
-
+				xil_printf("\n\r");
 
 				break;
 //			case 'd':
@@ -530,6 +583,14 @@ void main_loop()
 //					}
 //				}
 //				break;
+
+			case 'd':
+				xil_printf("david debug\n\r");
+
+				break;
+			case ' ':
+				xil_printf("\n\r\n\r\n\r\n\r");
+				break;
 			default:
 				//xil_printf("ERROR! Illegal character. Try again.\n\r");
 				break;
@@ -537,10 +598,11 @@ void main_loop()
 	}
 }
 
-
-
-static void createWidgets(void) {
+static void createWidgets(void)
+{
 	GWidgetInit	wi;
+
+	xil_printf("\r\ncreateWidgets\r\n");
 
 	// Apply some default values for GWIN
 	gwinWidgetClearInit(&wi);
@@ -575,7 +637,7 @@ static void createWidgets(void) {
 
 	// Create label
 	wi.g.width = 600; wi.g.height = 40; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + 280;
-	wi.text = "06/03/2017";
+	wi.text = "06/28/2018";
 	ghLabel4 = gwinLabelCreate(0, &wi);
 
 	// Create label

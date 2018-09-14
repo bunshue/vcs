@@ -53,8 +53,6 @@ static pixel_t* surface_2;
 static void createWidgets(void);
 void main_loop(void);
 
-void read_usb_registers(void);
-
 // *****************************************************
 // Main program entry point
 // *****************************************************
@@ -73,7 +71,13 @@ int main()
 	// Setup UART and caches
     init_platform();
 
-    xil_printf("Aries Main Program\n\r");
+
+
+
+    //xil_printf("\n\n\n\nAries Main Program %s:%s(%d) ST\n\r",__FILE__,__func__,__LINE__);
+    xil_printf("\n\n\n\nAries Main Program\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
 
     // Initialize peripherals
     status = periphs_init
@@ -141,7 +145,9 @@ int main()
 	// Set up IO for our image
 	//g_nn = 1;
 	status = gdispImageOpenFile(p_Image, ims_logo);
-	//xil_printf("status mainopen: %d\r\n", status);
+	xil_printf("status main open: %d\r\n", status);
+
+
 //	p_byte = (uint8_t *)p_Image->priv;
 //	xil_printf("status: %d\r\n", status);
 //	xil_printf("p_Image->type: %d\r\n", p_Image->type);
@@ -456,9 +462,6 @@ void main_loop()
 				}
 				break;
 
-			case 'r':
-				read_usb_registers();
-				break;
 			case 'w':
 				xil_printf("port_connect_status_change_isr\n\r");
 				port_connect_status_change_isr(0);
@@ -799,47 +802,3 @@ uint32_t tusb_tick_get(void)
   return g_ms_tick;
 }
 
-void tick_get(void)
-{
-	xil_printf("t=%d\n\r", g_ms_tick);
-}
-
-void tick_set(uint32_t tick)
-{
-	g_ms_tick = tick;
-}
-
-void read_usb_registers(void)
-{
-	uint32_t value = 0;
-	uint8_t i;
-
-	xil_printf("\n\rRead usb registers\n\r");
-	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0);xil_printf("%08X ", value);
-	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 4);xil_printf("%08X ", value);
-	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 8);xil_printf("%08X ", value);
-	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0xc);xil_printf("%08X ", value);
-	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0x10);xil_printf("%08X ", value);
-	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0x14);xil_printf("%08X\n\r", value);
-
-	xil_printf("\n\rRead ulpi registers\n\r");
-	/*
-	for(i = 0; i < 8; i++)
-	{
-		xil_printf("0x%02X ", i);
-	}
-	xil_printf("\n");
-	*/
-
-	for(i = 0; i < 64; i++)
-	{
-		value = ulpi_ReadReg(i);	//0x16
-		xil_printf("%02X", value);
-		if((i%8) == 7)
-			xil_printf("\n\r");
-		else
-			xil_printf("  ");
-	}
-	xil_printf("\n\r");
-	xil_printf("\n\r");
-}

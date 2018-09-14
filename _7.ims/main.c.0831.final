@@ -13,6 +13,7 @@
 #include "mixer.h"
 #include "gpio.h"
 #include "ulpi.h"
+#include "gfx.h"
 
 /* global timer registers*/
 #define SCU_GLOBAL_TIMER_COUNT_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR)
@@ -27,12 +28,20 @@ static const char ims_logo[] = "ims-small-logo.png";
 static const char step_1[] = "step1.png";
 static const char step_2[] = "step2.png";
 static const char step_3[] = "step3.png";
+static const char chicken_3[] = "chicken.png";
+static const char pic11[] = "pic1.png";
+static const char pic22[] = "pic2.png";
+static const char pic33[] = "pic3.png";
+static const char pic44[] = "pic4.png";
+static const char pic55[] = "pic5.png";
+static const char pic66[] = "pic6.png";
 
 void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy);
 
 
 volatile uint32_t g_ms_uptime = 0;
 volatile uint32_t g_ms_tick = 0;
+volatile uint32_t g_ms_tick_wait = 0;
 uint32_t g_nn = 0;
 uint32_t g_dongle_plugged = 0;
 uint32_t g_camera_plugged = 0;
@@ -52,14 +61,23 @@ static pixel_t* surface_2;
 //static GDisplay* pixmap_3;
 //static pixel_t* surface_3;
 
-static void createWidgets(void);
-void main_loop(void);
+// The handle for our console
+static GHandle	GW;
+GWindowInit		wic;
 
+static void createWidgets(void);
+static void createConsoleWidgets(void);
+static void updateConsoleWidgets(void);
+void main_loop(void);
+void get_usb_descriptor(void);
+void read_usb_registers(void);
 void parse_uart_command(void);
 void parse_uart_esc_command(void);
 void get_system_up_time(void);
 
-static const char last_command[] = "uptime";
+static const char last_command[] = "help";
+
+int flag_get_usb_descriptor_done = 0;
 
 // *****************************************************
 // Main program entry point
@@ -76,11 +94,23 @@ int main()
 
 	p_Image = &myImage;
 	update_dongle_status = 0;
+	update_usb_status = 0;
+	update_usb_descriptor_status = 0;
+	usb_reset_status = 0;
+	usb_reset_status_old = 0;
+	flag_updateConsoleWidgets = 0;
+	flag_updateConsoleWidgets_old = 0;
+	flag_is_keyboard_mounted = 0;
+	vendor_id_tmp = 0;
+	product_id_tmp = 0;
 
 	// Setup UART and caches
     init_platform();
 
-    xil_printf("Aries Main Program\n\r");
+    //xil_printf("\n\n\n\nAries Main Program %s:%s(%d) ST\n\r",__FILE__,__func__,__LINE__);
+    xil_printf("\n\n\n\nAries Main Program\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
 
     // Initialize peripherals
     status = periphs_init
@@ -258,6 +288,10 @@ int main()
 	Xil_DCacheFlush(); // Flush DCache after USB Init();
 	//Xil_DCacheInvalidate();
 	Xil_DCacheDisable();
+
+	// create the widget
+	createConsoleWidgets();
+
 	main_loop();
 
     cleanup_platform();
@@ -272,6 +306,7 @@ u8 esc_buffer[3];
 u8 ptr = 0;
 u8 esc_ptr = 0;
 u8 length = 0;
+u8 vid_error_cnt = 0;
 
 void main_loop()
 {
@@ -283,7 +318,7 @@ void main_loop()
 	uint32_t value = 0;
 	int i;
 	uint32_t status;
-
+	uint32_t skip_usb_check_cnt = 0;
 
 	// Main loop
 	while (1)
@@ -386,6 +421,80 @@ void main_loop()
 			}
 			psuart0_exposure(g_exposure);
 		}
+		}
+		else if(update_usb_status == 1)
+		{
+			update_usb_status = 0;
+
+			//xil_printf("david0823: %s:%s(%d) ST usb_reset_status = %d\r\n",__FILE__,__func__,__LINE__,usb_reset_status);
+
+			if((usb_reset_status_old == 0) && (usb_reset_status == 1))
+			{
+				xil_printf("A");
+				skip_usb_check_cnt++;
+				g_ms_tick_wait = g_ms_tick;
+				usb_reset_status_old = 1;
+			}
+			else if((usb_reset_status_old == 1) && (usb_reset_status == 1))
+			{
+				xil_printf("B %d ", skip_usb_check_cnt);
+				skip_usb_check_cnt++;
+				//xil_printf("david0823: %s:%s(%d) wait %d\r\n",__FILE__,__func__,__LINE__,skip_usb_check_cnt);
+				if(skip_usb_check_cnt > 3)
+				{
+					xil_printf("C");
+					//xil_printf("david0823: %s:%s(%d) OK\r\n",__FILE__,__func__,__LINE__);
+					skip_usb_check_cnt = 0;
+					usb_reset_status = 0;
+					usb_reset_status_old = 0;
+				}
+			}
+			else
+			{
+				//xil_printf("U");
+				updateConsoleWidgets();
+			}
+		}
+		else if((flag_is_keyboard_mounted == 1) && (flag_get_usb_descriptor_done == 0))
+		{
+			//First time get usb descriptor
+			xil_printf("1111\r\n");
+			flag_get_usb_descriptor_done = 1;
+			get_usb_descriptor();
+		}
+		else if((update_usb_descriptor_status == 1) && (flag_get_usb_descriptor_done == 1) && (g_ms_tick > 6000) && (usb_reset_status == 0))
+		{
+			//Get usb descriptor when keyboard is mounted
+			//xil_printf("2222\r\n");
+			update_usb_descriptor_status = 0;
+			//xil_printf("F");
+			//get_usb_descriptor();
+
+			psusb0_hal_interrupt_disable(0);
+			hal_interrupt_disable(0);
+			get_usb_descriptor();
+			hal_interrupt_enable(0);
+			psusb0_hal_interrupt_enable(0);
+
+		}
+		else if((update_usb_descriptor_status == 1) && (flag_is_keyboard_mounted == 0) && (g_ms_tick > 6000) && (usb_reset_status == 0))
+		{
+			//Get usb descriptor when keyboard is un-mounted
+			//xil_printf("\n\r3333\t");
+			update_usb_descriptor_status = 0;
+			//get_usb_descriptor();
+			//xil_printf("f");
+
+			psusb0_hal_interrupt_disable(0);
+			hal_interrupt_disable(0);
+			get_usb_descriptor();
+			hal_interrupt_enable(0);
+			psusb0_hal_interrupt_enable(0);
+
+		}
+		else if(flag_is_keyboard_mounted == 0)
+		{
+			flag_get_usb_descriptor_done = 0;
 		}
 
 		//  Run USB Host Task Handlers
@@ -702,7 +811,171 @@ void main_loop()
 	}
 }
 
+static void updateConsoleWidgets(void) {
+	/* Set a font */
+	gwinSetDefaultFont(gdispOpenFont("*"));
 
+	/* create the console window */
+	//GWindowInit		wic;
+
+	uint8_t reg;
+	uint8_t val0 = 0;
+	uint8_t val1 = 0;
+	uint8_t val2 = 0;
+	uint8_t val3 = 0;
+	uint8_t val4 = 0;
+	uint8_t val5 = 0;
+	uint8_t val6 = 0;
+	uint8_t val7 = 0;
+	uint8_t val8 = 0;
+	uint8_t val9 = 0;
+	int i;
+	uint32_t value = 0;
+
+	reg = ULPI_FC_CTRL;					val0 = ulpi_ReadReg(reg);
+	reg = ULPI_IFC_CTRL;				val1 = ulpi_ReadReg(reg);
+	reg = ULPI_OTG_CTRL;				val2 = ulpi_ReadReg(reg);
+	reg = ULPI_USB_INT_EN_RISE;			val3 = ulpi_ReadReg(reg);
+	reg = ULPI_USB_INT_EN_FALL;			val4 = ulpi_ReadReg(reg);
+
+	reg = ULPI_USB_INT_STS;				val5 = ulpi_ReadReg(reg);
+	reg = ULPI_USB_INT_LATCH;			val6 = ulpi_ReadReg(reg);
+	reg = ULPI_HS_TX_BOOST;				val7 = ulpi_ReadReg(reg);
+	reg = ULPI_VENDOR_RID_CONVERSION;	val8 = ulpi_ReadReg(reg);
+	reg = ULPI_USB_IO_POWER_MAN;		val9 = ulpi_ReadReg(reg);
+
+	//xil_printf("read value : %02X\n\r", val0);
+
+
+	if((flag_updateConsoleWidgets == 0) && (flag_updateConsoleWidgets_old == 1))
+	{
+		flag_updateConsoleWidgets_old = 0;
+		gwinSetBgColor(GW, Black);
+		gwinClear(GW);
+	}
+
+	//gwinPrintf(GW, "System up time : %d seconds\n", g_ms_uptime / 500);
+	gwinSetBgColor(GW, Purple);
+	if(vendor_id_tmp != 0x0426)
+	{
+		if(vid_error_cnt < 3)
+		{
+			if(flag_updateConsoleWidgets == 1)
+			{
+			gwinPrintf(GW, "\n%02X  %02X  %02X  %02X  %02X  %02X  %02X  %02X  %02X  %02X  %d %04X %04X ", val0, val1, val2, val3, val4, val5, val6, val7, val8, val9, flag_is_keyboard_mounted,vendor_id_tmp, product_id_tmp);
+			gwinSetColor(GW, Red);
+			gwinPrintf(GW, "FAIL");
+			gwinSetColor(GW, White);
+			}
+		}
+		else
+		{
+			if(flag_updateConsoleWidgets == 1)
+			{
+				gwinSetColor(GW, Red);
+				gwinPrintf(GW, "\n\r U S B    F A I L ,   R E S E T   U S B        %d", vid_error_cnt - 2);
+				gwinSetColor(GW, White);
+			}
+			if(vid_error_cnt > 3)
+			{
+				vid_error_cnt = 0;
+
+				if(flag_updateConsoleWidgets == 1)
+				{
+					gwinSetColor(GW, Red);
+					gwinPrintf(GW, "\nU S B   R e s e t t i n g . . . . . . . . . . . . . ");
+					gwinSetColor(GW, White);
+
+					gwinSetColor(GW, Red);
+					gwinPrintf(GW, "\nU S B   R e s e t t i n g . . . . . . . . . . . . . ");
+					gwinPrintf(GW, "\nU S B   R e s e t t i n g . . . . . . . . . . . . . ");
+					gwinPrintf(GW, "\nU S B   R e s e t t i n g . . . . . . . . . . . . . ");
+					gwinPrintf(GW, "\nU S B   R e s e t t i n g . . . . . . . . . . . . . ");
+					gwinPrintf(GW, "\nU S B   R e s e t t i n g . . . . . . . . . . . . . ");
+				}
+
+				xil_printf("\n\rusb HW reset\n\r");
+				reset_usb();
+
+				xil_printf("\n\rusb SW reset\n\r");
+				tusb_init(); // initialize tinyusb stack
+				value = 0x60;
+				ulpi_WriteReg(value, ULPI_FC_CTRL);	//0x16
+				port_connect_status_change_isr(0);
+				tusb_isr(0);
+
+				if(flag_updateConsoleWidgets == 1)
+				{
+					gwinSetColor(GW, White);
+					//gwinSetBgColor(GW, Black);
+					//gwinClear(GW);
+				}
+			}
+		}
+		vid_error_cnt++;
+	}
+	else
+	{
+		if(flag_updateConsoleWidgets == 1)
+		{
+			gwinPrintf(GW, "\n%02X  %02X  %02X  %02X  %02X  %02X  %02X  %02X  %02X  %02X   %d   %04X %04X   O K", val0, val1, val2, val3, val4, val5, val6, val7, val8, val9, flag_is_keyboard_mounted,vendor_id_tmp, product_id_tmp);
+		}
+		vid_error_cnt = 0;
+	}
+	flag_updateConsoleWidgets_old = flag_updateConsoleWidgets;
+
+	if(val0 != 0x40)
+	{
+		if(flag_updateConsoleWidgets == 1)
+		{
+			gwinSetColor(GW, Red);
+			for(i = 0; i < 10; i++)
+			{
+				gwinPrintf(GW, "\nUSB FAIL, RESET USB");
+				usleep(100000);
+			}
+		}
+		reset_usb();
+		if(flag_updateConsoleWidgets == 1)
+		{
+			gwinSetColor(GW, White);
+			gwinSetBgColor(GW, Black);
+			gwinClear(GW);
+		}
+	}
+}
+
+static void createConsoleWidgets(void) {
+	/* Set a font */
+	gwinSetDefaultFont(gdispOpenFont("*"));
+
+	/* create the console window */
+	//GWindowInit		wic;
+
+	gwinClearInit(&wic);
+	wic.show = TRUE;
+	wic.x = gdispGetWidth() / 2 - 290;
+	wic.y = gdispGetHeight() - 140;
+	wic.width = 950;
+	wic.height = 120;
+
+	xil_printf("W = %d, H = %d\n\r", wic.width, wic.height);
+	GW = gwinConsoleCreate(0, &wic);
+
+	/* Set the fore- and background colors for the console */
+	gwinSetColor(GW, White);
+	//gwinSetBgColor(GW, Purple);
+	gwinSetBgColor(GW, Black);
+	gwinClear(GW);
+
+	//gwinPrintf(GW, "gwinConsoleCreate size = %d X %d\n", wi.width, wi.height);
+
+	/*
+	gwinPrintf(GW, "Insight Medical Solutions Inc.\n");
+	gwinPrintf(GW, "August-23-2018\n");
+	gwinPrintf(GW, "----------------------------------\n");
+	*/
+}
 
 static void createWidgets(void) {
 	GWidgetInit	wi;
@@ -743,7 +1016,7 @@ static void createWidgets(void) {
 
 	// Create label
 	wi.g.width = wide; wi.g.height = thick; wi.g.x = BORDER_X, wi.g.y = BORDER_Y + thick * 7;
-	wi.text = "06/03/2017";
+	wi.text = "08/30/2018";
 	ghLabel4 = gwinLabelCreate(0, &wi);
 
 	// Create label
@@ -891,6 +1164,107 @@ uint32_t tusb_tick_get(void)
   return g_ms_tick;
 }
 
+void tick_get(void)
+{
+	xil_printf("t=%d\n\r", g_ms_tick);
+}
+
+void tick_set(uint32_t tick)
+{
+	g_ms_tick = tick;
+}
+
+void reset_usb(void)
+{
+	uint8_t reg;
+	uint8_t val = 0;
+
+	usb_reset_status = 1;
+	usb_reset_status_old = 0;
+	//xil_printf("david0823: %s:%s(%d) ST usb_reset_status = %d\r\n",__FILE__,__func__,__LINE__,usb_reset_status);
+
+	xil_printf("usb reset\n\r");
+	reg = ULPI_OTG_CTRL;
+	val = 0;
+	val = ulpi_ReadReg(reg);
+	xil_printf("read value : %02X\n\r", val);
+
+	val &= 0xDF;
+	xil_printf("set value : %02X\n\r", val);
+	ulpi_WriteReg(val, reg);
+
+	usleep(500000);
+
+	val |= 0x20;
+	xil_printf("set value : %02X\n\r", val);
+	ulpi_WriteReg(val, reg);
+}
+
+void get_usb_descriptor(void)
+{
+	//xil_printf("\n\rGet usb descriptor\n\r");
+	uint16_t vid_tmp = 0;
+	uint16_t pid_tmp = 0;
+	uint8_t ret = 0;
+	ret = usb_command(&vid_tmp, &pid_tmp);
+
+	if(ret == TUSB_ERROR_NONE)
+	{
+		vendor_id_tmp = vid_tmp;
+		product_id_tmp = pid_tmp;
+	}
+	else
+	{
+		xil_printf("fail\n\r");
+	}
+}
+
+void read_usb_registers(void)
+{
+	uint32_t value = 0;
+	uint8_t i;
+
+	xil_printf("\n\rRead usb registers\n\r");
+	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0);xil_printf("%08X ", value);
+	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 4);xil_printf("%08X ", value);
+	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 8);xil_printf("%08X ", value);
+	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0xc);xil_printf("%08X ", value);
+	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0x10);xil_printf("%08X ", value);
+	value = XUsbPs_ReadReg(XPAR_XUSBPS_0_BASEADDR, 0x14);xil_printf("%08X\n\r", value);
+
+	xil_printf("\n\rRead ulpi registers\n\r");
+	/*
+	for(i = 0; i < 8; i++)
+	{
+		xil_printf("0x%02X ", i);
+	}
+	xil_printf("\n");
+	*/
+
+	for(i = 0; i < 64; i++)
+	{
+		value = ulpi_ReadReg(i);	//0x16
+		xil_printf("%02X", value);
+		if((i%8) == 7)
+			xil_printf("\n\r");
+		else
+			xil_printf("  ");
+	}
+	xil_printf("\n\r");
+	xil_printf("\n\r");
+
+	xil_printf("Keyboard : ");
+	if(flag_is_keyboard_mounted == 1)
+	{
+		xil_printf("mounted\n\r");
+	}
+	else
+	{
+		xil_printf("unmounted\n\r");
+	}
+	xil_printf("\n\r");
+}
+
 void parse_uart_esc_command(void)
 {
 	int i;
@@ -979,11 +1353,54 @@ void parse_uart_esc_command(void)
 void parse_uart_command(void)
 {
 	int status;
+	int i;
+	int j;
 	uint32_t value = 0;
+	uint8_t reg;
+	uint8_t val = 0;
 
 	if(length == 8)
 	{
-		if((buffer[0] == 't')&&(buffer[1] == ' '))
+		if((buffer[0] == 'c')&&(buffer[1] == 'o')&&(buffer[2] == 'n')&&(buffer[3] == 's')&&(buffer[4] == 'o')&&(buffer[5] == 'l')&&(buffer[6] == 'e'))
+		{
+			/* initialize and clear the display */
+			//gfxInit();
+
+			/* Set a font */
+			gwinSetDefaultFont(gdispOpenFont("*"));
+
+			/* create the console window */
+			GWindowInit		wi;
+
+			gwinClearInit(&wi);
+			wi.show = TRUE;
+			wi.x = gdispGetWidth() / 2 - 200;
+			wi.y = gdispGetHeight()-140;
+			wi.width = 600;
+			wi.height = 120;
+
+			xil_printf("W = %d, H = %d\n\r", wi.width, wi.height);
+			GW = gwinConsoleCreate(0, &wi);
+
+			/* Set the fore- and background colors for the console */
+			gwinSetColor(GW, White);
+			gwinSetBgColor(GW, Purple);
+			gwinClear(GW);
+
+			gwinPrintf(GW, "gwinConsoleCreate size = %d X %d\n", wi.width, wi.height);
+
+			gwinPrintf(GW, "AAAAAAAAAAAAAAA\n");
+			gwinPrintf(GW, "BBBBBBBBBBBBBBBB\n");
+			gwinPrintf(GW, "\n");
+
+			for(i = 0; i < 25 ; i++)
+			{
+				gwinPrintf(GW, "CCCCCCCCCCCCC %2d\n", i);
+				sleep(1);
+			}
+
+		}
+		else if((buffer[0] == 't')&&(buffer[1] == ' '))
 		{
 		}
 	}
@@ -1003,8 +1420,9 @@ void parse_uart_command(void)
 	}
 	else if(length == 6)
 	{
-		if((buffer[0] == 'c')&&(buffer[1] == 'l')&&(buffer[2] == 'o')&&(buffer[3] == 'c')&&(buffer[4] == 'k'))
+		if((buffer[0] == 'b')&&(buffer[1] == 'l')&&(buffer[2] == 'a')&&(buffer[3] == 'c')&&(buffer[4] == 'k'))
 		{
+			gdispClear(Black);
 		}
 		else if((buffer[0] == 'p')&&(buffer[1] == 'r')&&(buffer[2] == 'i')&&(buffer[3] == 'n')&&(buffer[4] == 't'))
 		{
@@ -1026,8 +1444,19 @@ void parse_uart_command(void)
 			xil_printf("-------");
 
 		}
-		else if((buffer[0] == 'b')&&(buffer[1] == 'r')&&(buffer[2] == 'a')&&(buffer[3] == 'k')&&(buffer[4] == 'e'))
+		else if((buffer[0] == 'u')&&(buffer[1] == 's')&&(buffer[2] == 'b')&&(buffer[3] == 'r')&&(buffer[4] == '1'))
 		{
+			xil_printf("\n\rusb HW reset\n\r");
+			reset_usb();
+		}
+		else if((buffer[0] == 'u')&&(buffer[1] == 's')&&(buffer[2] == 'b')&&(buffer[3] == 'r')&&(buffer[4] == '2'))
+		{
+			xil_printf("\n\rusb SW reset\n\r");
+			tusb_init(); // initialize tinyusb stack
+			value = 0x60;
+			ulpi_WriteReg(value, ULPI_FC_CTRL);	//0x16
+			port_connect_status_change_isr(0);
+			tusb_isr(0);
 		}
 		else if((buffer[0] == 't')&&(buffer[1] == ' '))
 		{
@@ -1051,7 +1480,9 @@ void parse_uart_command(void)
 			//xil_printf("'s' = Set output frame size\n\r");
 			//xil_printf("'p' = Print this menu\n\r");
 			xil_printf("usb:\tread USB registers\n\r");
-			xil_printf("usbr:\tUSB reset\n\r");
+			xil_printf("r:\tread USB registers\n\r");
+			xil_printf("usbr1:\tUSB HW reset\n\r");
+			xil_printf("usbr2:\tUSB SW reset\n\r");
 			xil_printf("dd:\tDCache Disable\n\r");
 			xil_printf("de:\tDCache Enable\n\r");
 			xil_printf("help:\thelp menu\n\r");
@@ -1059,14 +1490,9 @@ void parse_uart_command(void)
 		}
 		else if((buffer[0] == 'u')&&(buffer[1] == 's')&&(buffer[2] == 'b')&&(buffer[3] == 'r'))
 		{
-			xil_printf("usb reset\n\r");
-			tusb_init(); // initialize tinyusb stack
-			value = 0x60;
-			ulpi_WriteReg(value, ULPI_FC_CTRL);	//0x16
-			port_connect_status_change_isr(0);
-			tusb_isr(0);
+			xil_printf("\n\rPlease use 'usbr1' or 'usbr2'\n\r");
 		}
-		else if((buffer[0] == 's')&&(buffer[1] == 'l')&&(buffer[2] == 'o')&&(buffer[3] == 'w'))
+		else if((buffer[0] == 't')&&(buffer[1] == 'i')&&(buffer[2] == 'm')&&(buffer[3] == 'e'))
 		{
 		}
 		else if((buffer[0] == 'l')&&(buffer[1] == 'o')&&(buffer[2] == 'c')&&(buffer[3] == 'k'))
@@ -1141,16 +1567,234 @@ void parse_uart_command(void)
 			xil_printf("\n\r");
 			xil_printf("Type `help' to see help list.\n\r");
 		}
-		else if((buffer[0] == 'v')&&(buffer[1] == 'r'))
+		else if((buffer[0] == 'd')&&(buffer[1] == 'e'))
 		{
+			xil_printf("Xil_DCacheEnable()\n\r");
+			Xil_DCacheEnable();
+		}
+		else if((buffer[0] == 'd')&&(buffer[1] == 'd'))
+		{
+			xil_printf("Xil_DCacheDisable()\n\r");
+			Xil_DCacheDisable();
+		}
+		else if((buffer[0] == 'u')&&(buffer[1] == '0'))
+		{
+			xil_printf("USB Hub Power Down\n\r");
+			reg = ULPI_OTG_CTRL;
+			val = 0;
+			val = ulpi_ReadReg(reg);
+			xil_printf("read value : %02X\n\r", val);
+
+			sleep(1);
+
+			val &= 0xDF;
+			xil_printf("set value : %02X\n\r", val);
+			ulpi_WriteReg(val, reg);
+
+			sleep(1);
+
+			val = 0;
+			val = ulpi_ReadReg(reg);
+			xil_printf("read value : %02X\n\r", val);
+		}
+		else if((buffer[0] == 'u')&&(buffer[1] == '1'))
+		{
+			xil_printf("USB Hub Power Up\n\r");
+			reg = ULPI_OTG_CTRL;
+			val = 0;
+			val = ulpi_ReadReg(reg);
+			xil_printf("read value : %02X\n\r", val);
+
+			sleep(1);
+
+			val |= 0x20;
+			xil_printf("set value : %02X\n\r", val);
+			ulpi_WriteReg(val, reg);
+
+			sleep(1);
+
+			val = 0;
+			val = ulpi_ReadReg(reg);
+			xil_printf("read value : %02X\n\r", val);
+		}
+		else if((buffer[0] == 'w')&&(buffer[1] == '1'))
+		{
+			xil_printf("widget test 1\n\r");
+
+
+            /* initialize and clear the display */
+            //gfxInit();
+
+            /* Set a font */
+            gwinSetDefaultFont(gdispOpenFont("*"));
+
+            // We want to listen for keyboard events
+            geventListenerInit(&gl);
+            geventAttachSource(&gl, ginputGetKeyboard(0), GLISTEN_KEYTRANSITIONS|GLISTEN_KEYUP);
+
+            /* create the console window */
+            GWindowInit             wi;
+
+            gwinClearInit(&wi);
+            wi.show = TRUE;
+            wi.x = 100; wi.y = 100; wi.width = gdispGetWidth()-200; wi.height = gdispGetHeight()-200;
+
+            xil_printf("W = %d, H = %d\n\r", wi.width, wi.height);
+            GW = gwinConsoleCreate(0, &wi);
+
+            /* Set the fore- and background colors for the console */
+            gwinSetColor(GW, Yellow);
+            gwinSetBgColor(GW, Pink);
+            gwinClear(GW);
+
+            gwinPrintf(GW, "gwinConsoleCreate size = %d X %d\n", wi.width, wi.height);
+
+            gwinPrintf(GW, "AAAAAAAAAAAAAAAAAAA\n");
+            gwinPrintf(GW, "BBBBBBBBBBBBBBBBBBBBB\n");
+            gwinPrintf(GW, "\n");
+
+            for(i = 0; i < 25 ; i++)
+            {
+                    gwinPrintf(GW, "CCCCCCCCCCCCCCCCCCCCCCCC %2d\n", i);
+                    sleep(1);
+            }
 
 		}
+		else if((buffer[0] == 'd')&&(buffer[1] == '0'))
+		{
+			xil_printf("Draw test 0\n\r");
+			gdispClear(White);
+			sleep(3);
+			gdispClear(Blue);
+			sleep(3);
+			gdispClear(Purple);
+			sleep(3);
+			gdispClear(Red);
+			sleep(3);
+			gdispClear(Black);
+		}
+		else if((buffer[0] == 'd')&&(buffer[1] == '1'))
+		{
+			xil_printf("Draw test 1\n\r");
+
+            // Initialize and clear the display
+            //gfxInit();
+
+			// Get the screen size
+			coord_t width, height;
+			width = gdispGetWidth();
+			height = gdispGetHeight();
+
+			xil_printf("width: %d\r\n", width);
+			xil_printf("height: %d\r\n", height);
+
+            gdispDrawBox(100, 100, width-100*2, height-100*2, Yellow);
+            gdispFillArea(300, 300, width-300*2, height-300*2, Lime);
+
+            gdispDrawLine(100, 100, width-100, height-100, Red);
+            gdispDrawLine(width - 100, height - 100, 100, 100, Red);
+            gdispDrawLine(width/2, 100, width/2, height-100, Red);
+            gdispDrawLine(100, height/2, width-100, height/2, Red);
+
+            for(i = 5, j = 0; i < width && j < height; i += 7, j += i/20)
+                    gdispDrawPixel(i, j, White);
+
+		}
+
 	}
 	else if(length == 2)
 	{
 		xil_printf("\n\r");
 		if(buffer[0] == 'p')
 		{
+			xil_printf("show picture_old\n\r");
+			gdispImage *p_Image;
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, step_3);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			gdispImageClose(p_Image);
+			Xil_DCacheFlush();
+		}
+		else if(buffer[0] == 'q')
+		{
+			xil_printf("show picture_new\n\r");
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			gdispImage *p_Image;
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, chicken_3);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+		}
+		else if(buffer[0] == 's')
+		{
+			xil_printf("show picture_new my png\n\r");
+
+			gdispImage *p_Image;
+
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, pic11);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+
+			sleep(1);
+
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, pic22);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+
+			sleep(1);
+
+
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, pic33);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+
+			sleep(1);
+
+
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			status = gdispImageOpenFile(p_Image, pic44);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+
+			sleep(1);
+
+
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, pic55);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+
+			sleep(1);
+
+
+			XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+			p_Image = &myImage;
+			status = gdispImageOpenFile(p_Image, pic66);
+			pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+			gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+			Xil_DCacheFlush();
+			gdispImageClose(p_Image);
+
 
 		}
 
@@ -1210,13 +1854,44 @@ void parse_uart_command(void)
 		}
 		else if(buffer[0] == 'r')
 		{
-			read_usb_registers();
+		}
+		else if(buffer[0] == 'R')
+		{
+
+		}
+		else if(buffer[0] == 'f')
+		{
+			//psusb0_hal_interrupt_disable(0);
+			//hal_interrupt_disable(0);
+			get_usb_descriptor();
+			//hal_interrupt_enable(0);
+			//psusb0_hal_interrupt_enable(0);
+
+		}
+		else if(buffer[0] == 'm')
+		{
+			xil_printf("METER\r\n");
+
+			if(flag_updateConsoleWidgets == 0)
+				flag_updateConsoleWidgets = 1;
+			else
+				flag_updateConsoleWidgets = 0;
 		}
 		else if(buffer[0] == 'd')
 		{
-			xil_printf("david debug\n\r");
-
-			xil_printf("size of last_command is %d\n\r", sizeof(last_command));
+			xil_printf("disable USB interrupt\n\r");
+			psusb0_hal_interrupt_disable(0);
+			hal_interrupt_disable(0);
+		}
+		else if(buffer[0] == 'e')
+		{
+			xil_printf("enable USB interrupt\n\r");
+			hal_interrupt_enable(0);
+			psusb0_hal_interrupt_enable(0);
+		}
+		else if(buffer[0] == 'g')
+		{
+			xil_printf("get info\n\r");
 		}
 		else
 		{
@@ -1241,5 +1916,15 @@ void get_system_up_time(void)
 
 	xil_printf("\n\rSystem up time is %02d:%02d:%02d.%03d\n\r", hh, mm, ss, dd);
 }
+
+
+
+
+
+
+
+
+
+
 
 

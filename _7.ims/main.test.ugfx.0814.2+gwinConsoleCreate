@@ -43,8 +43,6 @@ uint32_t g_conn_status = 2;
 //GListener	gl;
 GHandle		ghLabel1, ghLabel2, ghLabel3, ghLabel4, ghLabel5, ghLabel6, ghLabel7;
 
-
-
 // The handle for our console
 static GHandle GW;
 
@@ -62,6 +60,10 @@ static pixel_t* surface_2;
 
 static void createWidgets(void);
 void main_loop(void);
+
+//static GListener gl;
+static GHandle   ghButton1;
+
 
 // *****************************************************
 // Main program entry point
