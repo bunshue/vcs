@@ -8,8 +8,8 @@
     <ProjectGuid>{3B6A68E8-DCD3-4065-87DF-31C1E9D03875}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>监测当前网络连接状态</RootNamespace>
-    <AssemblyName>监测当前网络连接状态</AssemblyName>
+    <RootNamespace>nnnnn</RootNamespace>
+    <AssemblyName>nnnnn</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

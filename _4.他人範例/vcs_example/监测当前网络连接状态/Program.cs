@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 监测当前网络连接状态
+namespace nnnnn
 {
     static class Program
     {

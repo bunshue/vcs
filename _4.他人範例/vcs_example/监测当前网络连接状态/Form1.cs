@@ -10,7 +10,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Net;
 using System.Runtime.InteropServices;
-namespace 监测当前网络连接状态
+namespace nnnnn
 {
     public partial class Form1 : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace 监测当前网络连接状态
+﻿namespace nnnnn
 {
     partial class Form1
     {
@@ -75,7 +75,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::监测当前网络连接状态.Properties.Resources._1;
+            this.pictureBox1.Image = global::nnnnn.Properties.Resources._1;
             this.pictureBox1.Location = new System.Drawing.Point(32, 31);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(35, 34);
