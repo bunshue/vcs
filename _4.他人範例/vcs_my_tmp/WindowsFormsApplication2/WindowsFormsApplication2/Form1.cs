@@ -65,17 +65,6 @@ namespace WindowsFormsApplication2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            int P;
-            P = richTextBox1.Text.IndexOf(textBox1.Text, richTextBox1.SelectionStart);
-            if (P < 0)
-            {
-                richTextBox2.Text += "未發現字串\n";
-            }
-            else 
-            {
-                richTextBox1.SelectionStart = P;
-                richTextBox1.sel
-            }
             
         }
 
