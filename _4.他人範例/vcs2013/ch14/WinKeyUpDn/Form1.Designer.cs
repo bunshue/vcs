@@ -86,7 +86,7 @@
             // 
             // picTank
             // 
-            this.picTank.Location = new System.Drawing.Point(127, 93);
+            this.picTank.Location = new System.Drawing.Point(125, 106);
             this.picTank.Margin = new System.Windows.Forms.Padding(4);
             this.picTank.Name = "picTank";
             this.picTank.Size = new System.Drawing.Size(74, 64);
@@ -141,7 +141,7 @@
             this.Controls.Add(this.picTankL);
             this.Controls.Add(this.picTankU);
             this.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

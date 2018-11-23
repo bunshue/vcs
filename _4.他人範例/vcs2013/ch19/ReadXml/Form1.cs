@@ -20,10 +20,21 @@ namespace ReadXml
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             DataSet ds = new DataSet();	//建立ds屬於DataSet物件
             ds.ReadXml("person.xml");		//讀入person.xml文件檔
             //在dataGridView1控制項上顯示person.xml文件檔的所有資料
-            //dataGridView1.DataSource = ds.Tables["學生"];
+            dataGridView1.DataSource = ds.Tables["學生"];
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();	//建立ds屬於DataSet物件
+            ds.ReadXml("person.xml");		//讀入person.xml文件檔
+            //在dataGridView1控制項上顯示person.xml文件檔的所有資料
             dataGridView1.DataSource = ds.Tables["老師"];
         }
     }
