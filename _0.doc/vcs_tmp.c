@@ -1,4 +1,137 @@
 
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            pictureBox1.Width = this.ClientSize.Width - 20;
+            pictureBox1.Height = this.ClientSize.Height - 20;
+        }
+
+
+
+            DrawCircle(200, 200, 100);
+
+            Graphics g = pictureBox1.CreateGraphics();
+            Pen pen;
+            Font font;
+            Brush brush;
+
+            pen = new Pen(Color.Black, 3);	// 設定畫筆為黑色、粗細為 3 點。
+            font = new Font("標楷體", 16);
+            brush = new SolidBrush(Color.Black);
+
+            g.DrawLine(pen, new Point(1, 1), new Point(300, 100));
+            g.DrawRectangle(pen, new Rectangle(50, 50, 100, 100));
+            g.DrawString("Hello! 你好！", font, brush, new PointF(150.0F, 150.0F));
+            g.DrawString("Hello! 你好！", font, brush, 50.0F, 50.0F);
+
+
+        private void DrawCircle(int center_x, int center_y, int radius)
+        {
+            int linewidth = 5;
+            // Create a Graphics object for the Control.
+            Graphics g = pictureBox1.CreateGraphics();
+            // Create a new pen.
+            Pen PenStyle = new Pen(Color.Red, 5);
+            // Set the pen's width.
+            PenStyle.Width = linewidth;
+            // Draw the circle
+            g.DrawEllipse(PenStyle, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+            //Dispose of the pen.
+            PenStyle.Dispose();
+        }
+
+
+
+
+PictureBoxSizeMode
+
+                case 0: pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize; break;
+                case 1: pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage; break;
+                case 2: pictureBox1.SizeMode = PictureBoxSizeMode.Normal; break;
+                case 3: pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; break;
+                case 4: pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; break;
+
+
+建立畫布
+
+Graphics 畫布物件變數;
+畫布物件變數 = 控制項名稱.CreateGraphics();
+
+例如：在表單上建立畫布g：
+Graphics g;
+g = this.CreateGraphics();
+
+
+例如：在圖片方塊pictureBox1上建立畫布g：
+Graphics g;
+g = pictureBox1.CreateGraphics();
+
+畫筆Pen物件
+
+Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
+Pen p = new Pen(Color.Blue, 5);
+p.Color = Color.Red;
+p.Width = 2;
+
+筆刷物件（單色S、圖案T、花紋H、漸層L）
+
+筆刷類別
+SolidBrush		建立單一顏色的筆刷
+	SolidBrush sb = new SolidBrush(Color.Red);
+	Pen p = new Pen(sb, 2);
+TextureBrush		建立以圖形物件當作圖案的筆刷
+	TextureBrush tb = new TextureBrush("bmp1.bmp");
+	Pen p = new Pen(tb, 2);
+HatchBrush		建立花紋筆刷
+	HatchBrush 花紋筆刷變數 = new HatchBrush(花紋筆刷, 前景顏色, 背景顏色);
+	HatchBrush hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Red);
+	Pen p = new Pen(hb, 10);
+	(要先加入：using System.Drawing.Drawing2D;)
+LinearGradienBrush	建立漸層筆刷
+	LinearGradientBrush 漸層筆刷變數 = new LinearGradientBrush(漸層矩形區域, 前景顏色, 背景顏色, 漸層傾斜角度);
+	
+	Rectangle rect1 = new Rectangle(0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+	LinearGradientBrush lgb = new LinearGradientBrush(rect1, Color.Blue, Color.Red, 90);
+	Pen p = new Pen(lgb, 10);
+	(要先加入：using System.Drawing.Drawing2D;)
+
+
+Pen 畫筆 = new Pen(畫筆顏色, 畫筆粗細);
+
+
+
+
+
+
+設定顏色的方法	呼叫靜態函式：Color.FromArgb()
+
+ex:
+Color red= Color.FromArgb(255,0,0)
+this.BackColor=Color.White;
+
+
+Pen只有一類
+Brush有四類
+
+Pen用於告訴Graphics如何繪製線條
+Brush用於填充區域
+
+Point的用法
+Point b=new Point(20,10);
+Point a=new Point();
+a.X=20;
+a.Y=10;
+
+
+繪製虛線，可設定Pen的DashStyle屬性為Dash,Dot,DashDot或者DashDotDot等
+改變直線端點的形狀，可以設定StartCap和EndCap屬性
+
+blackPen.StartCap=LineCap.ArrowAnchor;
+
+
+
+
+
+
 
 自己繪製bitmap圖片保存,生成ico文件或者對象
 今天回答一個問題的時候的隨筆
@@ -303,6 +436,7 @@ using System.Security.Cryptography; //for MD5
 
 
 -------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
