@@ -1,28 +1,46 @@
 
+
+DrawImage(bmp, 0, 0);
+DrawImage(bmp, 0, 0); // 在表單上顯示 bmp 記憶體圖像
+
+this.Refresh() ; //執行 Form1_Paint()
+
+
+Bitmap bmp =new Bitmap(@"D:\bear.jpg");
+pictureBox1.SizeMode = pictureBoxSizeMode.AutoSize; //自動調整大小
+pictureBox1.Image = bmp; //顯示在 pictureBox1 圖片控制項中
+
+// bmp 的大小和pictureBox1 相同
+Bitmap bmp = new Bitmap(this.PictureBox1.Width,
+this.PictureBox1.Height);
+// 以記憶體圖像 bmp 建立 myDraw 記憶體畫布
+Graphics myDraw = Graphics.FromImage(bmp);
+MyDraw.Clear(this.pictureBox1.BackColor); //畫布背景色
+MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可以繪圖了
+
+
+
+
+
+
+繪製圖形物件的方法
+
+Graphics類別GDI+提供下列方法來繪製上述清單中的項目： 
+
+
+DrawLines
+
+DrawCurve
+DrawClosedCurve
+
+
         private void Form1_Resize(object sender, EventArgs e)
         {
             pictureBox1.Width = this.ClientSize.Width - 20;
             pictureBox1.Height = this.ClientSize.Height - 20;
         }
 
-
-
-            DrawCircle(200, 200, 100);
-
-            Graphics g = pictureBox1.CreateGraphics();
-            Pen pen;
-            Font font;
-            Brush brush;
-
-            pen = new Pen(Color.Black, 3);	// 設定畫筆為黑色、粗細為 3 點。
-            font = new Font("標楷體", 16);
-            brush = new SolidBrush(Color.Black);
-
-            g.DrawLine(pen, new Point(1, 1), new Point(300, 100));
-            g.DrawRectangle(pen, new Rectangle(50, 50, 100, 100));
-            g.DrawString("Hello! 你好！", font, brush, new PointF(150.0F, 150.0F));
-            g.DrawString("Hello! 你好！", font, brush, 50.0F, 50.0F);
-
+	DrawCircle(200, 200, 100);
 
         private void DrawCircle(int center_x, int center_y, int radius)
         {
@@ -40,6 +58,11 @@
         }
 
 
+	private void DrawPixel(int xx, int yy)
+	{
+		
+	}
+	
 
 
 PictureBoxSizeMode

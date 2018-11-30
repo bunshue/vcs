@@ -9,61 +9,9 @@ protected override void OnPaint(PaintEventArgs e)
 private void Form1_Paint(object sender, PaintEventArgs e)
 
 
-畫多個矩形
-
-private Rectangle[] walls;
-this.walls = new Rectangle[4] {
-	new Rectangle(10, 10, 10, 240),
-	new Rectangle(360, 10, 10, 240),
-	new Rectangle(20, 10, 340, 10),
-	new Rectangle(20, 240, 340, 10)
-}
-
-g.DrawRectangles(this.p, this.walls);
-
-
-
-
-Rectangle r = new Rectangle(10, 10, 250, 150);
-
-
 框線繪圖，用Pen
-DrawLine
-DrawRectangle
-DrawEllipse
-DrawArc
-DrawPie
-DrawPolygon	//畫多邊形(3邊以上)
-
-Pen p = new Pen(Color.Black);
-Point[] points = new Point[3];
-points[0] = new Point(10, 10);
-points[1] = new Point(300, 30);
-points[2] = new Point(70, 150);
-g.DrawPolygon(p, points);
-
 
 區域繪圖，用Brush
-
-
-
-
-Brush yellow_b, green_b, red_b;
-yellow_b = new SolidBrush(Color.Yellow);
-green_b = new SolidBrush(Color.Green);
-red_b = new SolidBrush(Color.Red);
-
-
-FillRectangle
-FillEllipse
-FillPie
-FillPolygon
-
-
-Brush b = new SolidBrush(Color.Blue);
-g.FillRectangle(b, 10, 10, 250, 150);
-
-
 
 
 good draw article:
