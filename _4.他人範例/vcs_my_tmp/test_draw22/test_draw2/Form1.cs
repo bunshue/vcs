@@ -17,45 +17,10 @@ namespace test_draw2
         int PointCounter = 0;
         Point[] arrayPoint = new Point[99];
 
-
         public Form1()
         {
             InitializeComponent();
             g = this.CreateGraphics();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SolidBrush brush = new SolidBrush(Color.Blue);
-            Font font = new Font("標楷體", 20);
-            g.DrawString("想要寫的文字", font, brush, 20, 20);
-            g.DrawString("想要寫的文字", font, brush, 50, 50);
-            g.DrawString("想要寫的文字", font, brush, 80, 80);
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            p = new Pen(Color.Blue, 5);
-            g.DrawLine(p, 100, 100, 400, 100);
-            g.DrawLine(p, 100, 150, 400, 150);
-            g.DrawLine(p, 100, 200, 400, 200);
-            g.DrawLine(p, 100, 250, 400, 250);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Point[] arrayPoint = new Point[20];
-            p = new Pen(Color.Blue, 5);
-            double zz;
-
-            for (int i = 0; i < 20; i++)
-            {
-                zz = Math.Sin(Math.PI * i * 30 / 180) * 200 + 200;
-                arrayPoint[i].X = i * 20;
-                arrayPoint[i].Y = (int)zz;
-            }
-            g.DrawLines(p, arrayPoint);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

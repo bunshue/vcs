@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Security.Cryptography;
+using System.Security.Cryptography; //for MD5
 
 namespace vcs_test_all_23_MD5_SHA
 {
@@ -194,6 +194,27 @@ namespace vcs_test_all_23_MD5_SHA
                     richTextBox1.Text += "SHA1 result : " + Convert.ToBase64String(sha.ComputeHash(fs));
                 }
             }
+
+        }
+
+        public string Encrypt(string strPwd)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();   //創建MD5對象
+            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//將字串編碼為一個Byte序列
+            byte[] md5data = md5.ComputeHash(data);//計算dataByte的Hash值
+            md5.Clear();    //清空MD5對象
+            string str = "";//定義一個變量，用來記錄加密後的密碼
+            for (int i = 0; i < md5data.Length - 1; i++)//遍歷byte數組
+            {
+                str += md5data[i].ToString("x").PadLeft(2, '0');//對遍歷到的Byte進行加密
+            }
+            return str;//返回得到的加密字串
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string P_str_Code = "ABCDEFG";
+            richTextBox1.Text += "使用MD5加密後的結果為：" + Encrypt(P_str_Code) + "\n";
 
         }
     }
