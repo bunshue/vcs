@@ -1,6 +1,97 @@
 
 
 
+Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
+DrawImage(bmp, 0, 0);
+DrawImage(bmp, 0, 0); // 在表單上顯示 bmp 記憶體圖像
+this.Refresh() ; //執行 Form1_Paint()
+
+
+Bitmap bmp =new Bitmap(@"D:\bear.jpg");
+
+
+pictureBox1.SizeMode = pictureBoxSizeMode.AutoSize; //自動調整大小
+pictureBox1.Image = bmp; //顯示在 pictureBox1 圖片控制項中
+
+// bmp 的大小和pictureBox1 相同
+Bitmap bmp = new Bitmap(this.PictureBox1.Width,
+this.PictureBox1.Height);
+// 以記憶體圖像 bmp 建立 myDraw 記憶體畫布
+Graphics myDraw = Graphics.FromImage(bmp);
+MyDraw.Clear(this.pictureBox1.BackColor); //畫布背景色
+MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可
+
+
+
+王濬樓船下益州，金陵王氣黯然收。
+千尋鐵鎖沉江底，一片降幡出石頭。
+人世幾回傷往事，山形依舊枕寒流。
+今逢四海為家日，故壘蕭蕭蘆荻秋。
+朱雀橋邊野草花，烏衣巷口夕陽斜。
+舊時王謝堂前燕，飛入尋常百姓家。
+吾愛孟夫子，風流天下聞。紅顏棄軒冕，白首臥鬆雲。
+醉月頻中聖，迷花不事君。高山安可仰，徒此揖清芬。
+寥落古行宮，宮花寂寞紅。
+白頭宮女在，閒坐說玄宗。
+功蓋三分國，名成八陣圖。
+江流石不轉，遺恨失吞吳。
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+char[] bbv={'江','一','人'};
+
+王濬樓船下益州，金陵王氣黯然收。
+千尋鐵鎖沉江底，一片降幡出石頭。
+人世幾回傷往事，山形依舊枕寒流。
+今逢四海為家日，故壘蕭蕭蘆荻秋。";
+
+
+
+            char[] bbv={'蕭','一','樓'};
+            string abc = "王濬樓船下益州，金陵王氣黯然收。千尋鐵鎖沉江底，一片降幡出石頭。人世幾回傷往事，山形依舊枕寒流。今逢四海為家日，故壘蕭蕭蘆荻秋。";
+       
+            int aa = abc.IndexOfAny(bbv);
+            int bb = abc.IndexOfAny(bbv, 32);
+            int cc = abc.IndexOfAny(bbv, 32, 10);
+            int dd = abc.IndexOfAny(bbv, 32, 20);
+            int ee = abc.IndexOfAny(bbv, 32, 30);
+
+            richTextBox2.Text += "length of abc = " + abc.Length.ToString() + "\n";
+            richTextBox2.Text += "aa = " + aa.ToString() + "\n";
+            richTextBox2.Text += "bb = " + bb.ToString() + "\n";
+            richTextBox2.Text += "cc = " + cc.ToString() + "\n";
+            richTextBox2.Text += "dd = " + dd.ToString() + "\n";
+            richTextBox2.Text += "ee = " + ee.ToString() + "\n";
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+this.richTextBox1.Size = new System.Drawing.Size(382, 594);
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.Text = "當前滑鼠位置為(" + e.X + "，" + e.Y + ")";
+        }
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -8,47 +99,6 @@
 ------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-
-
-            Pen pen = new Pen(Color.Black, 8);
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
-
-            g.DrawLine(pen, 50, 400, 50, 100);  //畫出X軸及y軸
-            g.DrawLine(pen, 50, 400, 350, 400);
-
-            pen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
-            //pp.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; //DashStyle設定線條 點
-            //pp.StartCap = System.Drawing.Drawing2D.LineCap.RoundAnchor; //設定為圓頭
-
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-
-            //gg.DrawLine(pp, 50, 50, 250, 250);//只畫一條
-            g.DrawLines(pen, new Point[] {//一次畫好多條
-            new Point(70,350),
-            new Point(100,280),
-            new Point(120,300),
-            new Point(200,220),
-            new Point(250,260),
-            new Point(340,150)});
 
 
 
@@ -80,68 +130,12 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 
-
-            Point[] pt = new Point[360];    //一維陣列內有360個Point
-            int angle;
-            int amplitude = 100;
-            for (angle = 0; angle < 360; angle += 1)
-            {
-                pt[angle].X = angle;
-                pt[angle].Y = y_positon - (int)(amplitude * Math.Sin(angle*3 * Math.PI / 180));
-
-            }
-            g.DrawLines(new Pen(Brushes.Red, 3), pt);
+------------------------------------------------------------------------------------------------------------------------
 
 
 ------------------------------------------------------------------------------------------------------------------------
 
 
-
-            Point[] arrayPoint = new Point[20];
-            p = new Pen(Color.Blue, 5);
-            double zz;
-
-            for (int i = 0; i < 20; i++)
-            {
-                zz = Math.Sin(Math.PI * i * 30 / 180) * 200 + 200;
-                arrayPoint[i].X = i * 20;
-                arrayPoint[i].Y = (int)zz;
-            }
-            g.DrawLines(p, arrayPoint);
-
-------------------------------------------------------------------------------------------------------------------------
-
-            SolidBrush brush = new SolidBrush(Color.Blue);
-            Font font = new Font("標楷體", 20);
-            g.DrawString("想要寫的文字", font, brush, 20, 20);
-            g.DrawString("想要寫的文字", font, brush, 50, 50);
-            g.DrawString("想要寫的文字", font, brush, 80, 80);
-
-
-------------------------------------------------------------------------------------------------------------------------
-
-
-
-            // 以紅色繪正弦波
-            Graphics g = this.CreateGraphics();
-            Pen p = new Pen(Color.Red, 2);
-            int h = 100;
-            int y1 = 100;
-            double angle, y;
-            float tmpy, tmpx;
-            for (double x = 0; x <= 360; x++)
-            {
-                angle = x / 180 * Math.PI;
-                y = Convert.ToDouble(y1) + Math.Sin(angle) * h;
-                tmpx = Convert.ToSingle(x);
-                tmpy = Convert.ToSingle(y);
-                g.DrawEllipse(p, tmpx, tmpy, 1, 1); //繪製紅色圓點
-            }
-
-            g.DrawEllipse(p, 260, 260, 100, 100); //繪製紅色圓點
-
-            SolidBrush sb = new SolidBrush(Color.Green);
-            g.FillEllipse(sb, 360, 360, 100, 100); //繪製紅色圓點
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -180,91 +174,12 @@
 
 ------------------------------------------------------------
 
-            int[] x = new int[10];
-            double[] y = new double[10];
-            int[] yy = new int[10];
-            //int x[10] = 0;
-            //float y[10] = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                x[i] = i * 40;
-                y[i] = Math.Sin(x[i] * Math.PI / 180) * 200 + 200;
-                yy[i] = (int)y[i];
-                richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-
-            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
-
-            // Create points that define curve.
-            Point point0 = new Point(x[0], yy[0]);
-            Point point1 = new Point(x[1], yy[1]);
-            Point point2 = new Point(x[2], yy[2]);
-            Point point3 = new Point(x[3], yy[3]);
-            Point point4 = new Point(x[4], yy[4]);
-            Point point5 = new Point(x[5], yy[5]);
-            Point point6 = new Point(x[6], yy[6]);
-            Point point7 = new Point(x[7], yy[7]);
-            Point point8 = new Point(x[8], yy[8]);
-            Point point9 = new Point(x[9], yy[9]);
-
-            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9 };
-
-            g.DrawCurve(greenPen, curvePoints); //畫曲線
-            g.DrawLines(greenPen, curvePoints);   //畫直線
 
 
 
 -----------------------------------------
 
-            Point[] pt = new Point[360];    //一維陣列內有360個Point
-            int angle;
-            int amplitude = 100;
-            for (angle = 0; angle < 360; angle += 1)
-            {
-                pt[angle].X = angle;
-                pt[angle].Y = (int)(amplitude * Math.Sin(angle * 3 * Math.PI / 180)) + amplitude;
 
-            }
-            g.DrawLines(new Pen(Brushes.Red, 3), pt);
-
-
-		//同心圓
-            g.DrawString("這是一組同心圓", this.Font, Brushes.Black, 10, 20);
-            Pen p1 = new Pen(Color.Red);
-            Pen p2 = new Pen(Color.Purple);
-            Pen p3 = new Pen(Color.Blue);
-            Pen p4 = new Pen(Color.Green);
-            g.DrawEllipse(p1, 120 - 80, 120 - 80, 80 * 2, 80 * 2);
-            g.DrawEllipse(p2, 120 - 60, 120 - 60, 60 * 2, 60 * 2);
-            g.DrawEllipse(p3, 120 - 40, 120 - 40, 40 * 2, 40 * 2);
-            g.DrawEllipse(p4, 120 - 20, 120 - 20, 20 * 2, 20 * 2);
-
-
-            //畫曲線
-            Point[] pts = new Point[5];
-            pts[0].X = 10;
-            pts[0].Y = 10;
-            pts[1].X = 20;
-            pts[1].Y = 60;
-            pts[2].X = 30;
-            pts[2].Y = 10;
-            pts[3].X = 40;
-            pts[3].Y = 60;
-            pts[4].X = 50;
-            pts[4].Y = 10;
-            g.DrawCurve(new Pen(Color.Black), pts);
-
-
-
-            //畫多個Rectangles
-            Rectangle[] R = new Rectangle[25];
-            int i;
-            for (i = 0; i <= 24; i++)
-            {
-                //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
-                R[i] = new Rectangle(i * 10 , i * 5, i*30, i*15);
-            }
-            g.DrawRectangles(new Pen(Brushes.Red, 3), R);
 
 
 

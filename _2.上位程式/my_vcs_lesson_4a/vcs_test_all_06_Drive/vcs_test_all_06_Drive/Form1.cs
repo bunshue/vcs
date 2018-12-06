@@ -46,6 +46,7 @@ namespace vcs_test_all_06_Drive
             */
 
             //法二
+            comboBox_drive.Items.Clear();
             SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
             foreach (ManagementObject disk in searcher.Get())

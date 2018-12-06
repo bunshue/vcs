@@ -29,7 +29,7 @@ namespace vcs_test_all_06_System
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒";
+            richTextBox1.Text += "開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒" + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -151,8 +151,6 @@ namespace vcs_test_all_06_System
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-
             //1. 參考 -> 加入參考 -> .NET/Microsoft.VisualBasic
             //2. using Microsoft.VisualBasic.Devices;
 
@@ -298,7 +296,7 @@ namespace vcs_test_all_06_System
         {
             //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString();
+            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -409,6 +407,11 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
             richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
     }

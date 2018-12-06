@@ -499,33 +499,8 @@ namespace vcs_test_all_11_Draw
 
         }
 
-        private void DrawCircle(int center_x, int center_y, int radius)
-        {
-            int linewidth = (int)numericUpDown_linewidth2.Value;
-            // Create a Graphics object for the Control.
-            //Graphics g = pictureBox1.CreateGraphics();
-
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen PenStyle = new Pen(bt_color2.BackColor);
-            // Set the pen's width.
-            //PenStyle.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen PenStyle = new Pen(bt_color2.BackColor, linewidth);
-
-            // Draw the circle
-            g.DrawEllipse(PenStyle, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
-            //Dispose of the pen.
-            PenStyle.Dispose();
-        }
-
         private void button31_Click(object sender, EventArgs e)
         {
-            int center_x = int.Parse(tb_x2.Text);
-            int center_y = int.Parse(tb_y2.Text);
-            int radius = int.Parse(tb_radius.Text);
-            DrawCircle(center_x, center_y, radius);
         }
 
         private void button22_Click_1(object sender, EventArgs e)
@@ -539,26 +514,8 @@ namespace vcs_test_all_11_Draw
 
         }
 
-        private void DrawPacman(int center_x, int center_y, int radius)
-        {
-            // Create a Graphics object for the Control.
-            //Graphics g = pictureBox1.CreateGraphics();
-
-            // Create a new brush.
-            Brush brush = new SolidBrush(bt_color2.BackColor);
-            
-            g.FillPie(brush, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2), 320, -280);
-
-            //Dispose of the brush.
-            brush.Dispose();
-        }
-
         private void button22_Click_2(object sender, EventArgs e)
         {
-            int center_x = int.Parse(tb_x2.Text);
-            int center_y = int.Parse(tb_y2.Text);
-            int radius = int.Parse(tb_radius.Text);
-            DrawPacman(center_x, center_y, radius);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

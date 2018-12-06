@@ -56,6 +56,11 @@ namespace vcs_test_all_01_Richtextbox
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
 
     }
 }
