@@ -56,7 +56,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(737, 104);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 67);
+            this.button1.Size = new System.Drawing.Size(126, 45);
             this.button1.TabIndex = 1;
             this.button1.Text = "load file";
             this.button1.UseVisualStyleBackColor = true;
@@ -74,9 +74,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(737, 363);
+            this.button3.Location = new System.Drawing.Point(737, 300);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 67);
+            this.button3.Size = new System.Drawing.Size(126, 45);
             this.button3.TabIndex = 3;
             this.button3.Text = "改變表單大小";
             this.button3.UseVisualStyleBackColor = true;
@@ -84,9 +84,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(737, 276);
+            this.button4.Location = new System.Drawing.Point(737, 236);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(126, 67);
+            this.button4.Size = new System.Drawing.Size(126, 45);
             this.button4.TabIndex = 4;
             this.button4.Text = "搜尋關鍵字1";
             this.button4.UseVisualStyleBackColor = true;
@@ -94,9 +94,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(737, 190);
+            this.button5.Location = new System.Drawing.Point(737, 172);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(126, 67);
+            this.button5.Size = new System.Drawing.Size(126, 45);
             this.button5.TabIndex = 5;
             this.button5.Text = "搜尋子目錄內的所有檔案";
             this.button5.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(737, 448);
+            this.button6.Location = new System.Drawing.Point(736, 364);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(126, 67);
+            this.button6.Size = new System.Drawing.Size(126, 45);
             this.button6.TabIndex = 9;
             this.button6.Text = "改變表單位置";
             this.button6.UseVisualStyleBackColor = true;

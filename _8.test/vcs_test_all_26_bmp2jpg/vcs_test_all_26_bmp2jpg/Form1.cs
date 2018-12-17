@@ -91,11 +91,16 @@ namespace vcs_test_all_26_bmp2jpg
         {
             if (bitmap1 != null)
             {
-                bitmap1.Save(@"C:\______test_vcs\\_transform_to_jpg.jpg", ImageFormat.Jpeg);
-                bitmap1.Save(@"C:\______test_vcs\\_transform_to_bmp.bmp", ImageFormat.Bmp);
-                bitmap1.Save(@"C:\______test_vcs\\_transform_to_png.png", ImageFormat.Png);
-                richTextBox1.Text += "轉換成功\n";
+                bitmap1.Save(@"C:\______test_vcs\\my_picture.jpg", ImageFormat.Jpeg);
+                bitmap1.Save(@"C:\______test_vcs\\my_picture.bmp", ImageFormat.Bmp);
+                bitmap1.Save(@"C:\______test_vcs\\my_picture.png", ImageFormat.Png);
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.jpg\n";
+                richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.png\n";
+                richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.bmp\n";
             }
+            else
+                richTextBox1.Text += "無檔可轉\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -149,6 +154,21 @@ namespace vcs_test_all_26_bmp2jpg
 
             g = Graphics.FromImage(bitmap1);
             g.DrawRectangle(p, 50, 50, 100, 100);
+            pictureBox2.Image = bitmap1;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+            bitmap1 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 130, 0, 0));
+                }
+            }
             pictureBox2.Image = bitmap1;
         }
     }

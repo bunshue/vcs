@@ -166,8 +166,9 @@ namespace vcs_make_picture
             bmp.Save("C:\\______test_vcs\\my_picture.png", ImageFormat.Png);
             bmp.Save("C:\\______test_vcs\\my_picture.bmp", ImageFormat.Bmp);
 
-
-
+            richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.jpg\n";
+            richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.png\n";
+            richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.bmp\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
