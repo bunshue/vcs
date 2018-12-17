@@ -1,5 +1,19 @@
 
 
+改變pictureBox大小改變表單位置
+
+pictureBox1.Image.Save(@"D:\bbbbb.jpg");
+
+
+
+
+改變部分字體顏色
+            richTextBox1.SelectionStart = 10;
+            richTextBox1.SelectionLength = 5;
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.SelectionBackColor = Color.Green;
+
+
 
 Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 DrawImage(bmp, 0, 0);

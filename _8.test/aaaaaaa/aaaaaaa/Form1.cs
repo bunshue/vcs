@@ -144,18 +144,11 @@ namespace aaaaaaa
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
         {
-            // 將RichTextBox中選取的文字，透過 FontFamily 類別 
-            // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
-            Font MyFont = new Font(new FontFamily("標楷體"), 18, FontStyle.Bold | FontStyle.Italic);
-            //this.richTextBox1.Font = DefaultFont; fail
-            this.richTextBox1.SelectionFont = MyFont;
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            richTextBox2.Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -176,16 +169,6 @@ namespace aaaaaaa
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             label2.Text = "(" + System.Windows.Forms.Cursor.Position.X.ToString() + ", " + System.Windows.Forms.Cursor.Position.Y.ToString() + ")";
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -221,24 +204,6 @@ namespace aaaaaaa
 
         }
         
-
-        /*
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Graphics m_graphics = pictureBox1.CreateGraphics();
-            m_graphics.Clear(Color.Purple);
-
-            Pen pen = new Pen(Color.Red, 5); //畫筆
-
-            m_graphics.DrawRectangle(pen, 50, 50, 100, 100);  //繪製100×100矩形
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            Graphics m_graphics = this.CreateGraphics();
-            m_graphics.Clear(Color.Red);
-        }
-        */
 
   
     }

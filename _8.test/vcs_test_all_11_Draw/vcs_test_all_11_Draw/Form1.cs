@@ -790,5 +790,74 @@ namespace vcs_test_all_11_Draw
             DrawPacman(center_x, center_y, radius);
 
         }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            Bitmap bmp;
+            SolidBrush brush;
+            Pen pen;
+
+            float ratio_x, ratio_y;
+            float wid, hei;
+            float x0, x1, y0, y1;
+
+            //----畫筆顏色----
+            pen = new Pen(Color.Black);
+            brush = new SolidBrush(pen.Color);
+            //----取得picturebox寬度與高度----
+            wid = pictureBox1.Width;
+            hei = pictureBox1.Height;
+            //----是否有上一次的圖片，如果有就清除----
+            if (pictureBox1.Image != null)
+                pictureBox1.Image = null;
+            //if (bmp != null)
+            //  bmp.Dispose();
+            //----轉換使用者輸入的資料----
+            x0 = (float)10;
+            y0 = (float)10;
+            x1 = (float)-5;
+            y1 = (float)-9;
+            //----計算放大倍率----
+            ratio_x = (wid - 50) / 20;
+            ratio_y = (hei - 50) / 20;
+            //----開新的Bitmap----
+            bmp = new Bitmap((int)wid, (int)hei);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bmp);
+            //----清除Bitmap為某顏色----
+            g.Clear(Color.White);
+            //----更改原點位置----
+            g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
+            //----畫坐標軸----
+            g.DrawLine(pen, -1000, 0, 1000, 0);//x軸
+            g.DrawLine(pen, 0, -1000, 0, 1000);//y軸
+            g.DrawString("X", this.Font, brush, wid / 2 - 20, 20);
+            g.DrawString("Y", this.Font, brush, 20, -hei / 2);
+            g.DrawLine(pen, wid / 2, 0, wid / 2 - 10, 5);//x軸箭頭
+            g.DrawLine(pen, wid / 2, 0, wid / 2 - 10, -5);
+            g.DrawLine(pen, 0, -hei / 2, 5, -hei / 2 + 10);//y軸箭頭
+            g.DrawLine(pen, 0, -hei / 2, -5, -hei / 2 + 10);
+            for (int i = -10; i <= 10; i++)//畫X Y軸座標位置
+            {
+                g.DrawLine(pen, i * ratio_x, -5, i * ratio_x, 5);
+                g.DrawString(i.ToString().PadLeft(2, ' '), this.Font, brush, i * ratio_x - 9, 10);
+                g.DrawLine(pen, -5, i * ratio_y, 5, i * ratio_y);
+                if (i != 0)
+                    g.DrawString(i.ToString(), this.Font, brush, 15, i * ratio_y - 8);
+            }
+            //----換顏色----
+            pen = new Pen(Color.Red);
+            brush = new SolidBrush(pen.Color);
+            //----畫線----
+            g.DrawLine(pen, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
+            //----畫兩點----
+            g.FillEllipse(brush, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
+            g.FillEllipse(brush, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
+            //----釋放Graphics資源----
+            g.Dispose();
+            //----將Bitmap顯示在Picture上
+            pictureBox1.Image = bmp;
+
+        }
     }
 }

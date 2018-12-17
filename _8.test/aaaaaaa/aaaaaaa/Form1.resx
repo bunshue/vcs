@@ -647,17 +647,4 @@
         2R/y58aT7EjeZs/Ic/Nl9lJ9oa35D5vL/wAP4fr5VWX/2Q==
 </value>
   </data>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>
-int tm_sec 代表目前秒數，正常範圍為0-59，但允許至61秒
-int tm_min 代表目前分數，範圍0-59
-int tm_hour 從午夜算起的時數，範圍為0-23
-int tm_mday 目前月份的日數，範圍01-31
-int tm_mon 代表目前月份，從一月算起，範圍從0-11
-int tm_year 從1900 年算起至今的年數
-int tm_wday 一星期的日數，從星期一算起，範圍為0-6
-int tm_yday 從今年1月1日算起至今的天數，範圍為0-365
-int tm_isdst 日光節約時間的旗標
-此函數返回的時間日期未經時區轉換，而是UTC時間。</value>
-  </data>
 </root>
