@@ -1,5 +1,76 @@
 
 
+
+
+
+vcs開啟一個純文字檔到richtextbox裡面
+目前沒辦法處理正中、簡中、日文同時存在的純文字檔
+
+
+//開啟檔案
+FileStream myFile = File.Open(@"C:\myWriter.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+BinaryReader myReader = new BinaryReader(myFile);
+
+int dl = System.Convert.ToInt16(myFile.Length);
+//讀取位元陣列
+
+byte[] myData = myReader.ReadBytes(dl);
+//釋放資源
+
+myReader.Close();
+
+myFile.Close();
+
+
+
+ImageViewer	研究選單架構
+
+
+
+//-------------------------------------------------------------------------------------
+
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+
+
+
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
+
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
+
+
+            
+
+        //----選到textbox時，選取全部文字
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.SelectAll();
+        }
+
+
+
+        //縮小pictureBox1
+        //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;/*AutoSize可能無法縮小圖片*/
+        //先改成等比例縮小圖片SizeMode
+        pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+
+
+
+
+
+
+
+
+
+
+
 改變pictureBox大小改變表單位置
 
 pictureBox1.Image.Save(@"D:\bbbbb.jpg");
