@@ -1,0 +1,33 @@
+
+
+extern bit PID_change_flag;
+extern bit power_change_flag;
+//extern bit print_power_data;
+//extern bit print_debug_data;9JVy82drRmvxlDbTIArQ
+https://mega.nz/#!zAsH3Zpa!S9M2_xTox_fYUuww33s7h5pYZOzSiegKObm8ymBKRkM
+https://mega.nz/#!mU9yySqa!P9Zg8nJt18p4q3C5UgikDXcUROq282BSbvPq2FP88FU
+https://mega.nz/#!TRt3ACLK!CUesIgiJLKuloYflraFdHBOAGn
+extern bit check_vdc_flag;
+extern bit check_vr_flag;
+extern bit check_lock_rotor_flag;
+9JVy82drRmvxlDbTIArQ
+https://mega.nz/#!zAsH3Zpa!S9M2_xTox_fYUuww33s7h5pYZOzSiegKObm8ymBKRkM
+https://mega.nz/#!mU9yySqa!P9Zg8nJt18p4q3C5UgikDXcUROq282BSbvPq2FP88FU
+https://mega.nz/#!TRt3ACLK!CUesIgiJLKuloYflraFdHBOAGn
+зяжибG
+
+flag_check_pid
+flag_check_power
+flag_check_vdc9JVy82drRmvxlDbTIArQ
+https://mega.nz/#!zAsH3Zpa!S9M2_xTox_fYUuww33s7h5pYZOzSiegKObm8ymBKRkM
+https://mega.nz/#!mU9yySqa!P9Zg8nJt18p4q3C5UgikDXcUROq282BSbvPq2FP88FU
+https://mega.nz/#!TRt3ACLK!CUesIgiJLKuloYflraFdHBOAGn9JVy82drRmvxlDbTIArQ
+https://mega.nz/#!zAsH3Zpa!S9M2_xTox_fYUuww33s7h5pYZOzSiegKObm8ymBKRkM
+https://mega.nz/#!mU9yySqa!P9Zg8nJt18p4q3C5UgikDXcUROq282BSbvPq2FP88FU
+https://mega.nz/#!TRt3ACLK!CUesIgiJLKuloYflraFdHBOAGn
+
+
+flag_check_power
+flag_check_power
+
+

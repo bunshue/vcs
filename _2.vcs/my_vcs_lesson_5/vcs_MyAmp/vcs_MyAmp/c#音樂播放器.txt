@@ -1,0 +1,409 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+
+namespace MusicPlayer
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        string[] musicPath = new string[100]; //¥Î¤_«O¦sºq¦±¥Ø‰£
+
+        int musicCount = 0;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            myPlyer.BeginInit(); //ªì©l¤Æ
+            myPlyer.settings.autoStart = true; //¦Ûƒð¼½©ñ
+            myPlyer.settings.setMode("shuffle", false); //…¦§Ç¼½©ñ
+            myPlyer.settings.enableErrorDialogs = true;
+            myPlyer.settings.balance = 0;
+            myPlyer.settings.mute = false;
+            myPlyer.settings.volume = 100; //ŠR­µ„¦ƒo³Ì¤j
+            btnBack.Enabled = false; //ŠR­µ¤£†Á
+            btnForward.Enabled = false; //ŠR­µ¤£†Á
+            btnBE.Enabled = false; //ÆÓªk‡Ü°±©M…{©l
+
+            //ReplayToolStripMenuItem.Enabled = false;
+            if (File.Exists("listbox.txt")) //¦pªG¦s¦b¼½©ñ¦Cªí¡A¨º¤\¥[†^¼½©ñ¦Cªí
+            {
+                StreamReader reader = new StreamReader("listbox.txt");
+                try
+                {
+                    while (reader.Peek() != -1)
+                    {
+                        string filepath = reader.ReadLine();
+                        if (File.Exists(filepath))
+                        {
+                            musicPath[musicCount++] = filepath;
+                            string filename = Path.GetFileName(filepath);
+                            listView1.Items.Add(filename); //listbox¥ÎƒSF¥Üºq¦±¦W
+                            myPlyer.currentPlaylist.insertItem(myPlyer.currentPlaylist.count, myPlyer.newMedia(filepath));
+                        }
+                    }
+                    listView1.SelectedIndex = 0;
+                }
+                catch (Exception)
+                {
+                    listView1.SelectedIndex = -1;
+                    MessageBox.Show("¥[†^¼½©ñ¦Cªí¥¢„P©ÎªÌ¦CªíƒoªÅ!", "´£¥Ü", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    reader.Close();
+                }
+            }
+        }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e) //¥´…{­µ‡ä¤å¥ó¡A¦ý¤£¥[¤J¨ì¼½©ñ¦Cªí¤¤
+        {
+            DialogResult dr = openFileDialog1.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                myPlyer.URL = openFileDialog1.FileName;
+            }
+        }
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e) //…C§ôµ{§Ç¡A¦ýƒo¤°¤\¤£°_§@¥Î¡H¦Ó¦@¨É¦¹ƒð§@ªºbtnExitƒj¦³§@¥Î¡H
+        {
+            myPlyer.Ctlcontrols.stop();
+            myPlyer.close();
+            Application.Exit();
+        }
+        private void AddSingleToolStripMenuItem_Click(object sender, EventArgs e) //²K¥[„Ë­ººq¦±¨ì¼½©ñ¦Cªí¤¤,"²K¥["«ö…r¦@¨É¦¹¨Æ¥ó
+        {
+            DialogResult dr = openFileDialog1.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string filepath = openFileDialog1.FileName;
+                string filename = Path.GetFileName(filepath);
+                listView1.Items.Add(filename);
+                musicPath[musicCount++] = filepath;
+                myPlyer.currentPlaylist.insertItem(myPlyer.currentPlaylist.count, myPlyer.newMedia(filepath));
+            }
+        }
+
+        private void AddMoreToolStripMenuItem_Click(object sender, EventArgs e) //²K¥[‰u¤¤ªº¤å¥óƒH¤¤ªºmp3¤å¥ó¨ì¼½©ñ¦Cªí¤¤
+        {
+            DialogResult dr = folderBrowserDialog1.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string[] filepath = Directory.GetFiles(folderBrowserDialog1.SelectedPath); foreach (string s in filepath)
+                {
+                    if (Path.GetExtension(s) == ".mp3")
+                    {
+                        string filename = Path.GetFileName(s);
+                        listView1.Items.Add(filename);
+                        musicPath[musicCount++] = s;
+                        myPlyer.currentPlaylist.insertItem(myPlyer.currentPlaylist.count, myPlyer.newMedia(s));
+                    }
+                }
+            }
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e) //¼½©ñ¦Cªí¤¤‰u¤¤ªººq¦±,’úÉó¼½©ñƒ]†È¤U¤£°_§@¥Î
+        {
+            int j = listView1.SelectedIndex;
+            if (listView1.Items.Count > 0)
+            {
+                myPlyer.Ctlcontrols.playItem(myPlyer.currentPlaylist.get_Item(j));
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) //°h¥Xµ{§Çªºƒð§@
+        {
+            myPlyer.Ctlcontrols.stop();
+            myPlyer.close(); //‹×„¸¼½©ñ¾¹
+            StreamWriter writer = new StreamWriter("listbox.txt", false,
+            Encoding.Unicode); //«O¦s¼½©ñ¦Cªí
+            for (int i = 0; i <= musicCount - 1; i++)
+            {
+                if (musicPath[i] != string.Empty)
+                {
+                    writer.WriteLine(musicPath[i]);
+                }
+            }
+            writer.Close();
+        }
+
+        private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e) //F¥Ü¼½©ñƒ]†È
+        {
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                label1.Text = "¥¿¦b¼½©ñ " + myPlyer.currentMedia.sourceURL + " " + myPlyer.currentMedia.durationString;
+                string s = myPlyer.currentMedia.sourceURL;
+                for (int i = 0; i < myPlyer.currentPlaylist.count; i++)
+                {
+                    if (listView1.Items[i].ToString() == Path.GetFileName(s))
+                    {
+                        listView1.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsBuffering)
+            {
+                label1.Text = "¥¿¦bˆGƒL " + myPlyer.currentMedia.sourceURL;
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPaused)
+            {
+                label1.Text = "‡Ü°±¼½©ñ " + myPlyer.currentMedia.sourceURL;
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsWaiting)
+            {
+                label1.Text = "¥¿¦bµ¥«Ý";
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsStopped)
+            {
+                label1.Text = "¼½©ñ°±¤î";
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsReady)
+            {
+                label1.Text = "­ã„Â´N‡C";
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsScanForward)
+            {
+                label1.Text = "¥¿¦b§Ö…n " + myPlyer.currentMedia.sourceURL;
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsScanReverse)
+            {
+                label1.Text = "¥¿¦b§Ö°h " + myPlyer.currentMedia.sourceURL;
+            }
+        }
+
+        private void btnBE_Click(object sender, EventArgs e)    //‡Ü°±/…{©l,¤£°_§@¥Î
+        {
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                myPlyer.Ctlcontrols.pause();
+            }
+
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPaused)
+            {
+                myPlyer.Ctlcontrols.play();
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e) //°±¤î¼½©ñ
+        {
+            myPlyer.Ctlcontrols.stop();
+        }
+
+        private void btnSlient_Click(object sender, EventArgs e) //“C­µ
+        {
+            if (myPlyer.settings.mute == false)
+            {
+                myPlyer.settings.mute = true;
+            }
+            else
+            {
+                myPlyer.settings.mute = false;
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e) //§Ö°h,ŠR­µ¤£†Á
+        {
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                myPlyer.Ctlcontrols.fastReverse();
+            }
+        }
+
+        private void btnForward_Click(object sender, EventArgs e) //§Ö…n,ŠR­µ¤£†Á
+        {
+            if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+            {
+                myPlyer.Ctlcontrols.fastForward();
+            }
+        }
+
+        private void btnPre_Click(object sender, EventArgs e) //¤W¤@¦±
+        {
+            if (listView1.SelectedIndex != 0)
+            {
+                myPlyer.Ctlcontrols.previous();
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e) //¤U¤@¦±
+        {
+            if (listView1.SelectedIndex != listView1.Items.Count - 1)
+            {
+                myPlyer.Ctlcontrols.next();
+            }
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e) //‹Z‰Û¼½©ñ¦Cªí¤¤‰u¤¤ªººq¦±
+        {
+            if (listView1.Items.Count > 0 && listView1.SelectedIndex >= 0)
+            {
+                myPlyer.Ctlcontrols.playItem(myPlyer.currentPlaylist.get_Item(listView1.SelectedIndex));
+            }
+        }
+
+        private void btRemove_Click(object sender, EventArgs e) //’â‰u¤¤ªººq¦±²¾¥X¼½©ñ¦Cªí
+        {
+            int i = listView1.SelectedIndex;
+            for (int j = 0; j < musicCount; j++)
+            {
+                if (Path.GetFileName(musicPath[j]) == listView1.Items[i].ToString())
+                {
+                    musicPath[j] = "";
+                }
+            }
+            if (listView1.Items.Count > 0)
+            {
+                for (int j = 0; j < myPlyer.currentPlaylist.count; j++)
+                {
+                    if (listView1.Items[i].ToString() == Path.GetFileName(myPlyer.currentPlaylist.get_Item(j).sourceURL))
+                        myPlyer.currentPlaylist.removeItem(myPlyer.currentPlaylist.get_Item(j));
+                }
+                listView1.Items.RemoveAt(i);
+            }
+            if (i == listView1.Items.Count)
+            {
+                listView1.SelectedIndex = listView1.Items.Count - 1;
+            }
+            else
+            {
+                listView1.SelectedIndex = i;
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) //¦P¤W¡A¦}f°£¥»¦aªº­µ‡ä¤å¥ó
+        {
+            if (MessageBox.Show("ÚÌ©w­nf°£¤å¥ó…º¡H", "´£¥Ü", MessageBoxButtons.YesNo, "http://www.51wendang.comrmation") == DialogResult.Yes)
+            {
+                int i = listView1.SelectedIndex;
+                string s = myPlyer.currentPlaylist.get_Item(i).sourceURL;
+                for (int j = 0; j < musicCount; j++)
+                {
+                    if (Path.GetFileName(musicPath[j]) == listView1.Items[i].ToString())
+                    {
+                        musicPath[j] = "";
+                    }
+                }
+
+                if (listView1.Items.Count > 0)
+                {
+                    for (int j = 0; j < myPlyer.currentPlaylist.count; j++)
+                    {
+                        if (listView1.Items[i].ToString() == Path.GetFileName(myPlyer.currentPlaylist.get_Item(j).sourceURL))
+                            myPlyer.currentPlaylist.removeItem(myPlyer.currentPlaylist.get_Item(j));
+                    }
+                    listView1.Items.RemoveAt(i);
+                }
+                if (i == listView1.Items.Count)
+                {
+                    listView1.SelectedIndex = listView1.Items.Count - 1;
+                }
+                else
+                {
+                    listView1.SelectedIndex = i;
+                }
+
+                try
+                {
+                    File.Delete(s);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("f°£¤å¥ó¥¢„P!", "´£¥Ü", MessageBoxButtons.OK, "http://www.51wendang.comrmation");
+                }
+            }
+        }
+
+        private void delAllToolStripMenuItem_Click(object sender, EventArgs e) //²MªÅ¼½©ñ¦Cªí
+        {
+            myPlyer.Ctlcontrols.stop(); //¥ý°±¤î¼½©ñ¾¹
+            listView1.Items.Clear(); //²MªÅlistbox
+            myPlyer.currentPlaylist.clear(); //²MªÅ¼½©ñ¦Cªí
+            for (int j = 0; j < musicCount; j++)
+            {
+                musicPath[j] = "";
+            }
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.Equals(e.KeyChar, ' '))
+            {
+                if (myPlyer.playState == WMPLib.WMPPlayState.wmppsPlaying)
+                {
+                    myPlyer.Ctlcontrols.pause();
+                }
+            }
+        }
+
+        private void SToolStripMenuItem_Click(object sender, EventArgs e) //…¦§Ç¼½©ñ,Àq‡P
+        {
+            myPlyer.settings.playCount = 1;
+            myPlyer.currentPlaylist.clear();
+            for (int j = 0; j < musicCount; j++)
+            {
+                if (musicPath[j] != string.Empty)
+                {
+                    myPlyer.currentPlaylist.insertItem(myPlyer.currentPlaylist.count, myPlyer.newMedia(musicPath[j]));
+                }
+            }
+            myPlyer.settings.setMode("shuffle", false);
+            myPlyer.Ctlcontrols.playItem(myPlyer.currentPlaylist.get_Item(0));
+        }
+
+        private void ReplayToolStripMenuItem_Click(object sender, EventArgs e) //„Ë¦±´`‰ø
+        {
+            myPlyer.Ctlcontrols.stop();
+            myPlyer.currentPlaylist.clear();
+            if (listView1.SelectedIndex != -1 && listView1.Items.Count > 0)
+            {
+                int k = listView1.SelectedIndex;
+                for (int i = 0; i < 100; i++)
+                {
+                    myPlyer.currentPlaylist.insertItem(myPlyer.currentPlaylist.count, myPlyer.newMedia(musicPath[k]));
+                }
+            }
+            myPlyer.Ctlcontrols.playItem(myPlyer.currentPlaylist.get_Item(0));
+        }
+
+        private void RandomToolStripMenuItem_Click(object sender, EventArgs e) //’úÉó¼½©ñ,­«·s«Ø¥ß…å«e¼½©ñ¦Cªí
+        {
+            myPlyer.settings.playCount = 1;
+            myPlyer.Ctlcontrols.stop();
+            myPlyer.currentPlaylist.clear();
+            Random rd = new Random(DateTime.Now.Millisecond);
+            for (int i = 0; i < 1000; i++)
+            {
+                int j = rd.Next(0, musicCount);
+                if (musicPath[j] != string.Empty)
+                {
+                    myPlyer.currentPlaylist.insertItem(myPlyer.currentPlaylist.count, myPlyer.newMedia(musicPath[j]));
+                }
+            }
+            myPlyer.Ctlcontrols.playItem(myPlyer.currentPlaylist.get_Item(0));
+        }
+
+        private void ExitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            myPlyer.Ctlcontrols.stop();
+            myPlyer.close();
+            Application.Exit();
+        }
+    }
+}
+
+
+

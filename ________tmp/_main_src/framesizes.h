@@ -1,0 +1,85 @@
+/*
+ * framesizes.h
+ *
+ *  Created on: Dez, 10th 2014
+ *      Author: serbrich
+ */
+
+#ifndef FRAMESIZES_H_
+#define FRAMESIZES_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// 4.4 mm scope
+#define SCOPE_4_4MM_H_ACTIVE             640
+#define SCOPE_4_4MM_V_ACTIVE             480
+#define SCOPE_4_4MM_H_TOTAL              910
+#define SCOPE_4_4MM_V_TOTAL              525
+#define SCOPE_4_4MM_CLOCK_FREQUENCY      SCOPE_4_4MM_H_TOTAL*SCOPE_4_4MM_V_TOTAL*60/1.001
+
+// 6 mm scope
+#define SCOPE_6MM_H_ACTIVE               1280
+#define SCOPE_6MM_V_ACTIVE               720
+#define SCOPE_6MM_H_TOTAL                1650
+#define SCOPE_6MM_V_TOTAL                750
+#define SCOPE_6MM_CLOCK_FREQUENCY        SCOPE_6MM_H_TOTAL*SCOPE_6MM_V_TOTAL*60/1.001
+
+// HD Camera
+#define CAMERA_HD_H_ACTIVE               1920
+#define CAMERA_HD_V_ACTIVE               1080
+#define CAMERA_HD_H_TOTAL                2200
+#define CAMERA_HD_V_TOTAL                1125
+#define CAMERA_HD_CLOCK_FREQUENCY        CAMERA_HD_H_TOTAL*CAMERA_HD_V_TOTAL*60/1.001
+
+#define SENSOR_FRAME_HORIZONTAL_LEN      SCOPE_6MM_H_ACTIVE
+#define SENSOR_FRAME_VERTICAL_LEN        SCOPE_6MM_V_ACTIVE
+#define SENSOR_TOTAL_HORIZONTAL_LEN      SCOPE_6MM_H_TOTAL
+#define SENSOR_TOTAL_VERTICAL_LEN        SCOPE_6MM_V_TOTAL
+
+
+#define HD_FRAME_HORIZONTAL_LEN          1920  // 1920 active pixels per line
+#define HD_FRAME_VERTICAL_LEN            1080  // 1080 lines
+#define HD_TOTAL_HORIZONTAL_LEN          2200  // 2200 total pixel per line incl. hor. blanking
+#define HD_TOTAL_VERTICAL_LEN            1125  // 1125 total lines per frame incl. vert. blanking
+
+
+#define WVGA_FRAME_HORIZONTAL_LEN        800   // 800 active pixels per line
+#define WVGA_FRAME_VERTICAL_LEN          480   // 480 lines
+#define WVGA_TOTAL_HORIZONTAL_LEN        1056  // 1056 total pixel per line incl. hor. blanking
+#define WVGA_TOTAL_VERTICAL_LEN          525   // 525 total lines per frame incl. vert. blanking
+
+
+
+
+
+
+#define INPUT_FRAME_HORIZONTAL_LEN       SENSOR_FRAME_HORIZONTAL_LEN
+#define INPUT_FRAME_VERTICAL_LEN         SENSOR_FRAME_VERTICAL_LEN
+
+#define EXT_OUT_FRAME_HORIZONTAL_LEN     HD_FRAME_HORIZONTAL_LEN
+#define EXT_OUT_FRAME_VERTICAL_LEN       HD_FRAME_VERTICAL_LEN
+#define EXT_OUT_TOTAL_HORIZONTAL_LEN     HD_TOTAL_HORIZONTAL_LEN
+#define EXT_OUT_TOTAL_VERTICAL_LEN       HD_TOTAL_VERTICAL_LEN
+
+
+#define INT_OUT_FRAME_HORIZONTAL_LEN     WVGA_FRAME_HORIZONTAL_LEN
+#define INT_OUT_FRAME_VERTICAL_LEN       WVGA_FRAME_VERTICAL_LEN
+#define INT_OUT_TOTAL_HORIZONTAL_LEN     WVGA_TOTAL_HORIZONTAL_LEN
+#define INT_OUT_TOTAL_VERTICAL_LEN       WVGA_TOTAL_VERTICAL_LEN
+
+#define INT_OUT_FRAME_HORIZONTAL_LEN     WVGA_FRAME_HORIZONTAL_LEN
+#define INT_OUT_FRAME_VERTICAL_LEN       WVGA_FRAME_VERTICAL_LEN
+
+#define EXT_PIP_HORIZONTAL_LEN           (EXT_OUT_FRAME_HORIZONTAL_LEN/4)
+#define EXT_PIP_VERTICAL_LEN             (EXT_OUT_FRAME_VERTICAL_LEN/4)
+
+#define INT_PIP_HORIZONTAL_LEN           (INT_OUT_FRAME_HORIZONTAL_LEN/4)
+#define INT_PIP_VERTICAL_LEN             (INT_OUT_FRAME_VERTICAL_LEN/4)
+
+#define EXT_PIP_POS_H					 (EXT_OUT_FRAME_HORIZONTAL_LEN/10)
+#define EXT_PIP_POS_V					 (EXT_OUT_FRAME_VERTICAL_LEN - EXT_OUT_FRAME_VERTICAL_LEN/10 - EXT_PIP_VERTICAL_LEN)
+#define INT_PIP_POS_H					 (INT_OUT_FRAME_HORIZONTAL_LEN/10)
+#define INT_PIP_POS_V					 (INT_OUT_FRAME_VERTICAL_LEN - INT_OUT_FRAME_VERTICAL_LEN/10 - INT_PIP_VERTICAL_LEN)
+
+#endif /* FRAMESIZES_H_ */

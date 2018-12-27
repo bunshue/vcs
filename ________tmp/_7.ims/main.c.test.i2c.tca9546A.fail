@@ -1,0 +1,430 @@
+
+
+// *****************************************************
+// Dependencies
+// *****************************************************
+#include <stdio.h>
+#include <stdlib.h>
+#include "xil_cache.h"
+#include "platform.h"
+#include "main.h"
+#include "xuartps_hw.h"
+#include "periphs.h"
+#include "mixer.h"
+#include "gpio.h"
+#include "ulpi.h"
+#include "xiicps.h"
+#include "sleep.h"
+
+#include "xparameters.h"
+#include "xiicps.h"
+#include "xil_printf.h"
+
+#define IIC_DEVICE_ID		XPAR_XIICPS_0_DEVICE_ID
+
+#define IIC_SLAVE_ADDR		0x70	//TCA9546A
+//#define IIC_SLAVE_ADDR	0x68	//RTC DS1308
+#define IIC_SCLK_RATE		100000
+
+#define I2C_BUFFER_SIZE		1
+#define INFO_BUFFER_SIZE	56
+
+int IicPsMasterPolledExample(u16 DeviceId);
+XIicPs Iic;							/**< Instance of the IIC Device */
+
+u8 SendBuffer[I2C_BUFFER_SIZE];		/**< Buffer for Transmitting Data */
+u8 RecvBuffer[I2C_BUFFER_SIZE];		/**< Buffer for Receiving Data */
+
+u8 SetInfoBuffer[INFO_BUFFER_SIZE + 1];	//data and offset
+u8 GetInfoBuffer[INFO_BUFFER_SIZE];
+
+int XIicPs_SetDate(XIicPs *InstancePtr, u32 year, u8 month, u8 date, u8 day, u8 hour, u8 minutes, u8 seconds);
+void ShowDateInfo(u8 *RecvBuffer);
+int XIicPs_SetInfo(XIicPs *InstancePtr);
+int XIicPs_GetInfo(XIicPs *InstancePtr);
+
+//----------------------------------------------------
+// MAIN FUNCTION
+//----------------------------------------------------
+
+int main()
+{
+
+    usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+
+    xil_printf("\n\n\n\nTest TCA9546A\n\r");
+    xil_printf("Compiled time: %s %s\n\r", __DATE__, __TIME__);
+    xil_printf("%s:%s(%d)\n\r\n\r",__FILE__,__func__,__LINE__);
+
+    int Status;
+
+	xil_printf("IIC Master Polled Example Test \r\n");
+
+	/*
+	 * Run the Iic polled example in master mode, specify the Device
+	 * ID that is specified in xparameters.h.
+	 */
+	Status = IicPsMasterPolledExample(IIC_DEVICE_ID);
+	if (Status != XST_SUCCESS) {
+		xil_printf("IIC Master Polled Example Test Failed\r\n");
+		return XST_FAILURE;
+	}
+	xil_printf("Successfully ran IIC Master Polled Example Test\r\n");
+	return XST_SUCCESS;
+}
+
+int IicPsMasterPolledExample(u16 DeviceId)
+{
+	int Status;
+	XIicPs_Config *Config;
+	int Index;
+
+	/*
+	 * Initialize the IIC driver so that it's ready to use
+	 * Look up the configuration in the config table,
+	 * then initialize it.
+	 */
+	Config = XIicPs_LookupConfig(DeviceId);
+	if (NULL == Config) {
+		return XST_FAILURE;
+	}
+
+	Status = XIicPs_CfgInitialize(&Iic, Config, Config->BaseAddress);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Perform a self-test to ensure that the hardware was built correctly.
+	 */
+	Status = XIicPs_SelfTest(&Iic);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Set the IIC serial clock rate.
+	 */
+	XIicPs_SetSClk(&Iic, IIC_SCLK_RATE);
+
+	//XIicPs_SetDate(&Iic, 2018, 7, 20, 5, 11, 39, 30);
+	usleep(2000);
+	//XIicPs_SetInfo(&Iic);
+	usleep(2000);
+
+	xil_printf("\n\r\n\r");
+
+	while(1)
+	{
+		SendBuffer[0] = 0;
+
+		for (Index = 0; Index < I2C_BUFFER_SIZE; Index++) {
+			RecvBuffer[Index] = 0;
+		}
+
+		/*
+		 * Send the buffer using the IIC and ignore the number of bytes sent
+		 * as the return value since we are using it in interrupt mode.
+		 */
+
+		Status = XIicPs_MasterSendPolled(&Iic, SendBuffer,
+				1, IIC_SLAVE_ADDR);
+
+		if (Status != XST_SUCCESS) {
+			xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+			return XST_FAILURE;
+		}
+
+		/*
+		 * Wait until bus is idle to start another transfer.
+		 */
+		while (XIicPs_BusIsBusy(&Iic)) {
+			/* NOP */
+		}
+
+		Status = XIicPs_MasterRecvPolled(&Iic, RecvBuffer,
+				I2C_BUFFER_SIZE, IIC_SLAVE_ADDR);
+		if (Status != XST_SUCCESS) {
+			return XST_FAILURE;
+		}
+
+		xil_printf("data: 0x%2x\n", RecvBuffer[0]);
+
+
+		//ShowDateInfo(RecvBuffer);
+
+		usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+		usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+		usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+		//XIicPs_GetInfo(&Iic);
+		usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+		usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+		usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+	}
+	return XST_SUCCESS;
+}
+
+int XIicPs_SetDate(XIicPs *InstancePtr, u32 year, u8 month, u8 date, u8 day, u8 hour, u8 minutes, u8 seconds)
+{
+	/*	debug
+    int j;
+
+	for(j = 0; j < 7; j++)
+	{
+		SendBuffer[0] = j;	//offset
+		SendBuffer[1] = 6;	//data
+		Status = XIicPs_MasterSendPolled(&Iic, SendBuffer,
+				 2, IIC_SLAVE_ADDR);
+		if (Status != XST_SUCCESS) {
+			xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+			return XST_FAILURE;
+		}
+	}
+	*/
+
+	int Status;
+	xil_printf("raw data: %d/%d/%d %d %d:%d:%d\r\n", year, month, date, day, hour, minutes, seconds);
+
+	seconds = ((seconds/10)<<4) + (seconds % 10);
+	minutes = ((minutes/10)<<4) + (minutes % 10);
+	hour = ((hour/10)<<4) + (hour % 10);
+	date = ((date/10)<<4) + (date % 10);
+	month = ((month/10)<<4) + (month % 10);
+	year = (((year-1970)/10)<<4) + ((year-1970) % 10);
+
+	xil_printf("new data: %d/%d/%d %d %d:%d:%d\r\n", year, month, date, day, hour, minutes, seconds);
+
+	SendBuffer[0] = 0;			//offset
+	SendBuffer[1] = seconds;	//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	SendBuffer[0] = 1;			//offset
+	SendBuffer[1] = minutes;	//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	SendBuffer[0] = 2;			//offset
+	SendBuffer[1] = hour;		//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	SendBuffer[0] = 3;			//offset
+	SendBuffer[1] = day;		//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	SendBuffer[0] = 4;			//offset
+	SendBuffer[1] = date;		//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	SendBuffer[0] = 5;			//offset
+	SendBuffer[1] = month;		//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	SendBuffer[0] = 6;			//offset
+	SendBuffer[1] = year;		//data
+	Status = XIicPs_MasterSendPolled(InstancePtr, SendBuffer,
+			 2, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+	return XST_SUCCESS;
+}
+
+int XIicPs_SetInfo(XIicPs *InstancePtr)
+{
+	int Status;
+	int i;
+	//char ims_info[] = "ims-v1.0.0.3 sn:12345";
+	char ims_info[] = "iiiiimmmmmsssss15";
+
+	for(i = 0; i < (INFO_BUFFER_SIZE + 1); i++)
+	{
+		if(i == 0)
+			SetInfoBuffer[i] = '-';			//data
+		else if(i <= 26)
+			SetInfoBuffer[i] = 'A' - 1 + i;	//data
+		else if(i == 27)
+			SetInfoBuffer[i] = '{';			//data
+		else if(i == 28)
+			SetInfoBuffer[i] = '}';			//data
+		else if(i <= 54)
+			SetInfoBuffer[i] = 'a' - 29 + i;//data
+		else if(i == 55)
+			SetInfoBuffer[i] = '(';			//data
+		else if(i == 56)
+			SetInfoBuffer[i] = ')';			//data
+		else
+			SetInfoBuffer[i] = '~';			//data
+	}
+
+	xil_printf("old data: ");
+	for(i = 0; i < (INFO_BUFFER_SIZE + 1); i++)
+	{
+		xil_printf("%c", SetInfoBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	xil_printf("size of ims-info is %d\n\r", sizeof(ims_info));
+
+	for(i = 0; i < (sizeof(ims_info) - 1); i++)
+	{
+		SetInfoBuffer[i+1] = ims_info[i];	//data
+	}
+
+	xil_printf("new data: ");
+	for(i = 0; i < (INFO_BUFFER_SIZE + 1); i++)
+	{
+		xil_printf("%c", SetInfoBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	SetInfoBuffer[0] = 0x08;			//offset
+
+	xil_printf("    data:  ");
+	for(i = 1; i < (INFO_BUFFER_SIZE + 1); i++)
+	{
+		xil_printf("%c",SetInfoBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	Status = XIicPs_MasterSendPolled(InstancePtr, SetInfoBuffer,
+			(INFO_BUFFER_SIZE + 1), IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	return XST_SUCCESS;
+}
+
+int XIicPs_GetInfo(XIicPs *InstancePtr)
+{
+	int Status;
+	int Index;
+
+	for (Index = 0; Index < INFO_BUFFER_SIZE; Index++) {
+		GetInfoBuffer[Index] = '-';
+	}
+
+	SendBuffer[0] = 0x08;	//offset
+	/*
+	 * Send the buffer using the IIC and ignore the number of bytes sent
+	 * as the return value since we are using it in interrupt mode.
+	 */
+
+	Status = XIicPs_MasterSendPolled(&Iic, SendBuffer,
+			1, IIC_SLAVE_ADDR);
+
+	if (Status != XST_SUCCESS) {
+		xil_printf("david0719: %s:%s(%d) ffff b\r\n",__FILE__,__func__,__LINE__);
+		return XST_FAILURE;
+	}
+
+	/*
+	 * Wait until bus is idle to start another transfer.
+	 */
+	while (XIicPs_BusIsBusy(&Iic)) {
+		/* NOP */
+	}
+
+	Status = XIicPs_MasterRecvPolled(&Iic, GetInfoBuffer,
+			INFO_BUFFER_SIZE, IIC_SLAVE_ADDR);
+	if (Status != XST_SUCCESS) {
+		return XST_FAILURE;
+	}
+
+	for (Index = 0; Index < INFO_BUFFER_SIZE; Index++) {
+		if(isprint(GetInfoBuffer[Index]))
+			xil_printf("%c", GetInfoBuffer[Index]);
+		else
+			xil_printf("^");
+	}
+	xil_printf("+++++\n\r");
+
+	return XST_SUCCESS;
+}
+
+void ShowDateInfo(u8 *RecvBuffer)
+{
+	/*	debug
+	int i;
+	xil_printf("i=%d\tdata: \t", i++);
+	for (Index = 0; Index < (I2C_BUFFER_SIZE-1); Index++) {
+		xil_printf("%X\t",RecvBuffer[I2C_BUFFER_SIZE-1-Index-1]);
+	}
+	xil_printf("\n\r");
+	*/
+
+	u8 seconds = (((RecvBuffer[0] >> 4) & 0x07) * 10) + (RecvBuffer[0] & 0x0f);
+	u8 minutes = (((RecvBuffer[1] >> 4) & 0x07) * 10) + (RecvBuffer[1] & 0x0f);
+	u8 hour = (((RecvBuffer[2] >> 4) & 0x07) * 10) + (RecvBuffer[2] & 0x0f);
+	u8 day = RecvBuffer[3] & 0x07;
+	u8 date = (((RecvBuffer[4] >> 4) & 0x03) * 10) + (RecvBuffer[4] & 0x0f);
+	u8 month = (((RecvBuffer[5] >> 4) & 0x01) * 10) + (RecvBuffer[5] & 0x0f);
+	u32 year = (((RecvBuffer[6] >> 4) & 0x0f) * 10) + (RecvBuffer[6] & 0x0f) +1970;
+
+	//xil_printf("raw data: %d/%d/%d %d %d:%d:%d\r\n", RecvBuffer[6], RecvBuffer[5], RecvBuffer[4], RecvBuffer[3], RecvBuffer[2], RecvBuffer[1], RecvBuffer[0]);
+	//xil_printf("new data: %d/%d/%d %d %d:%d:%d\r\n", year, month, date, day, hour, minutes, seconds);
+	xil_printf("Date: %d/%d/%d ", year, month, date);
+	switch(day)
+	{
+	case 0:		xil_printf("Sun");	break;
+	case 1:		xil_printf("Mon");	break;
+	case 2:		xil_printf("Tue");	break;
+	case 3:		xil_printf("Wed");	break;
+	case 4:		xil_printf("Thu");	break;
+	case 5:		xil_printf("Fri");	break;
+	case 6:		xil_printf("Sat");	break;
+	default:	xil_printf("xxx");	break;
+	}
+
+	xil_printf(" %d:%d:%d\t\t", hour, minutes, seconds);
+
+}
+
+systemticks_t gfxSystemTicks(void)
+{
+	return g_ms_tick;
+}
+
+systemticks_t gfxMillisecondsToTicks(delaytime_t ms)
+{
+	return ms;
+}
+/////////////////////////////////////
+
+uint32_t tusb_tick_get(void)
+{
+  //return system_ticks;
+  return g_ms_tick;
+}
+

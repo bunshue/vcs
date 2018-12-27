@@ -1,0 +1,397 @@
+
+
+// *****************************************************
+// Dependencies
+// *****************************************************
+#include <stdio.h>
+#include <stdlib.h>
+#include "xil_cache.h"
+#include "platform.h"
+#include "main.h"
+#include "xuartps_hw.h"
+#include "periphs.h"
+#include "mixer.h"
+#include "gpio.h"
+#include "ulpi.h"
+#include "gfx.h"
+
+
+
+/* global timer registers*/
+#define SCU_GLOBAL_TIMER_COUNT_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR)
+#define SCU_GLOBAL_TIMER_COUNT_U32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x04)
+#define SCU_GLOBAL_TIMER_CONTROL	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x08)
+#define SCU_GLOBAL_TIMER_ISR		(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x0C)
+#define SCU_GLOBAL_TIMER_COMP_L32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x10)
+#define SCU_GLOBAL_TIMER_COMP_U32	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x14)
+#define SCU_GLOBAL_TIMER_AUTO_INC	(XPAR_PS7_GLOBALTIMER_0_S_AXI_BASEADDR+0x18)
+
+static const char ims_logo[] = "ims-small-logo.png";
+static const char step_1[] = "step1.png";
+static const char step_2[] = "step2.png";
+static const char step_3[] = "step3.png";
+
+void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t pm_sx, uint32_t pm_sy, uint32_t img_sx, uint32_t img_sy);
+
+volatile uint32_t g_ms_tick = 0;
+uint32_t g_nn = 0;
+uint32_t g_dongle_plugged = 0;
+uint32_t g_camera_plugged = 0;
+
+uint32_t g_conn_status = 2;
+
+//GListener	gl;
+GHandle		ghLabel1, ghLabel2, ghLabel3, ghLabel4, ghLabel5, ghLabel6, ghLabel7;
+
+// The handle for our console
+static GHandle GW;
+
+// THe listener
+static GListener	gl;
+
+
+static gdispImage myImage;
+static GDisplay* pixmap_1;
+static pixel_t* surface_1;
+static GDisplay* pixmap_2;
+static pixel_t* surface_2;
+//static GDisplay* pixmap_3;
+//static pixel_t* surface_3;
+
+static void createWidgets(void);
+void main_loop(void);
+
+//static GListener gl;
+static GHandle   ghButton1;
+
+
+// *****************************************************
+// Main program entry point
+// *****************************************************
+int main()
+{
+	// Local variables
+	int status = 0;
+	coord_t swidth, sheight;
+	gdispImage *p_Image;
+	uint8_t *p_byte, byte;
+	uint32_t i,j, Index;
+	GEvent* pe;
+
+	p_Image = &myImage;
+
+	// Setup UART and caches
+    init_platform();
+
+    for(i = 0; i < BUF_LENGTH; i++)
+    {
+    	input_buffer[i] = '-';
+    }
+	input_buffer_index = 0;
+	flag_updata_input_buffer = 0;
+
+    xil_printf("Aries Main Program\n\r");
+
+    // Initialize peripherals
+    status = periphs_init
+    (
+    	&periphs_inst,
+    	//XPAR_CONTROL_PATH_AXI_GPIO_0_DEVICE_ID,
+    	//XPAR_CONTROL_PATH_AXI_IIC_0_BASEADDR,
+		//XPAR_XIICPS_0_DEVICE_ID,
+		XPAR_PS7_GPIO_0_DEVICE_ID,
+		XPAR_VIDEO_PATH_VIDEO_OUT_VIDEO_LOCK_MONITOR_DEVICE_ID,
+		XPAR_PS7_SCUGIC_0_DEVICE_ID,
+		XPAR_PS7_SCUTIMER_0_DEVICE_ID,
+		XPAR_PS7_UART_0_DEVICE_ID,
+		//XPAR_VIDEO_PATH_CAMERA_IN_V_TC_VTD_DEVICE_ID,
+    	//XPAR_VIDEO_PATH_TPG_OLD_TPG_OLD_DEVICE_ID,
+		XPAR_VIDEO_PATH_V_TPG_0_DEVICE_ID,
+		//XPAR_VIDEO_PATH_CAMERA_SCALER_V_PROC_SS_1_DEVICE_ID,
+		XPAR_VIDEO_PATH_CAMERA_SCALER_FREEZE_V_PROC_SS_1_DEVICE_ID,
+		XPAR_VIDEO_PATH_FRAMEBUFFER_AXI_VDMA_CAMERA_DEVICE_ID,
+		XPAR_VIDEO_PATH_FRAMEBUFFER_AXI_VDMA_CAMERA_FREEZE_DEVICE_ID,
+		//XPAR_VIDEO_PATH_FRAMEBUFFER_OUTPUT_AXI_VDMA_GUI_DEVICE_ID,
+		XPAR_VIDEO_PATH_OUTPUT_MIXER_V_MIX_0_DEVICE_ID,
+		XPAR_VIDEO_PATH_VIDEO_OUT_V_TC_TFP410_DEVICE_ID,
+		XPAR_VIDEO_PATH_VIDEO_OUT_V_TC_CH7038_DEVICE_ID,
+		XPAR_PS7_USB_0_DEVICE_ID,
+    	FRAMEBUFFER_CAMERA_START_ADDR,
+		FRAMEBUFFER_CAMERA_FREEZE_START_ADDR,
+		FRAMEBUFFER_GUI_START_ADDR
+    );
+	if (status != 0)
+	{
+		xil_printf("Initialization failed.\n\r");
+		return -1;
+	}
+
+	// Set up Mixer Layers
+	//RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
+
+    // Initialize uGFX
+	//g_nn = 1;
+    gfxInit();
+    xil_printf("gfxInit() complete\r\n");
+	// Background process
+	xil_printf("Initialization complete. Switching to background process.\n\r");
+
+	// Set up pixmap for layer 1
+    pixmap_1 = gdispPixmapCreate(LAYER1_WIDTH, LAYER1_HEIGHT);
+    surface_1 = gdispPixmapGetBits(pixmap_1);
+    // Draw transparency required on layer 1
+    pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0);
+
+	// Set up pixmap for layer 2
+    pixmap_2 = gdispPixmapCreate(LAYER2_WIDTH, LAYER2_HEIGHT);
+    surface_2 = gdispPixmapGetBits(pixmap_2);
+    // Draw transparency required on layer 2
+    pixmap_draw(pixmap_2, surface_2, LAYER2_WIDTH, LAYER2_HEIGHT, NULL, 0, 0, 0, 0);
+
+	// Open image for layer 3
+	// Get the display dimensions
+	swidth = gdispGetWidth();
+	xil_printf("swidth: %d\r\n", swidth);
+	sheight = gdispGetHeight();
+	xil_printf("sheight: %d\r\n", sheight);
+
+	// Set up IO for our image
+	//g_nn = 1;
+	status = gdispImageOpenFile(p_Image, ims_logo);
+	//xil_printf("status mainopen: %d\r\n", status);
+//	p_byte = (uint8_t *)p_Image->priv;
+//	xil_printf("status: %d\r\n", status);
+//	xil_printf("p_Image->type: %d\r\n", p_Image->type);
+//	xil_printf("p_Image->flags: %x\r\n", p_Image->flags);
+//	xil_printf("p_Image->bgcolor: %x\r\n", p_Image->bgcolor);
+//	xil_printf("p_Image->memused: %d\r\n", p_Image->memused);
+//	xil_printf("p_Image->maxmemused: %d\r\n", p_Image->maxmemused);
+//
+//	xil_printf("p_Image->priv->flags: %x\r\n", p_byte[0]);
+//	xil_printf("p_Image->priv->bitdepth: %x\r\n", p_byte[1]);
+//	xil_printf("p_Image->priv->mode: %x\r\n", p_byte[2]);
+//	xil_printf("p_Image->priv->bpp: %x\r\n", p_byte[3]);
+
+	//g_nn = 1;
+	status = gdispImageDraw(p_Image, swidth-p_Image->width-BORDER_X*2, sheight-p_Image->height-BORDER_Y*2, p_Image->width, p_Image->height, 0, 0);
+	//g_nn = 0;
+	//xil_printf("status maindraw: %d\r\n", status);
+	gdispImageClose(p_Image);
+
+	// Blit surface_1 to the real display at the new position
+	//g_nn =1;
+	gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+
+	// Blit surface_2 to the real display at the new position
+	gdispBlitArea(BORDER_X, LAYER0_HEIGHT-LAYER2_HEIGHT-BORDER_Y, LAYER2_WIDTH, LAYER2_HEIGHT, surface_2);
+
+	Xil_DCacheFlush();
+
+	// Set up Mixer Layers
+	RunMixer(periphs_inst.p_vid_output_mixer_l2_inst);
+
+	/*
+	// Set the widget defaults
+	gwinSetDefaultFont(gdispOpenFont("*"));
+	gwinSetDefaultStyle(&BlackWidgetStyle, FALSE);
+	//gdispClear(White);
+
+	// create the widget
+	//g_nn =1;
+	createWidgets();
+	*/
+
+//	// We want to listen for widget events
+//	geventListenerInit(&gl);
+//	gwinAttachListener(&gl);
+//
+//	while(1) {
+//		// Get an Event
+//		pe = geventEventWait(&gl, TIME_INFINITE);
+//	}
+
+	// Detect Dongle status and draw image
+	g_conn_status = psuart0_dongle_ping();
+
+	//xil_printf("no dongle or camera\n\r");	
+	// Show Message
+	p_Image = &myImage;
+	status = gdispImageOpenFile(p_Image, step_1);
+	pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, p_Image, 0, 0, 0, 0);
+	gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+	gdispImageClose(p_Image);
+
+	Xil_DCacheFlush();
+
+	psuart0_exposure(3);
+
+
+
+
+
+
+	tusb_init(); // initialize tinyusb stack
+
+	keyboard_host_app_init(); // Keyboard Host Init
+	//mouse_host_app_init(); // Mouse Host Init
+	Xil_DCacheFlush(); // Flush DCache after USB Init();
+	//Xil_DCacheInvalidate();
+	Xil_DCacheDisable();
+	main_loop();
+
+    cleanup_platform();
+    return 0;
+}
+
+void main_loop()
+{
+	// Local variables
+	char c[1]  = {0};
+	int  ii = 0;
+	int i;
+	int j;
+	unsigned int status = 0;
+	gdispImage *p_Image;
+
+	GEventKeyboard *pk;
+
+
+	coord_t width;
+	coord_t height;
+
+
+	// Main loop
+	while (1)
+	{
+		uint32_t status;
+		//xil_printf("What would you like to do? Press 'p' to print available commands.\n\r");
+		c[0] = XUartPs_RecvByte(XPAR_PS7_UART_1_BASEADDR);
+		//XUartPs_Recv(g_psuart1_config->BaseAddress, &c[0], 1);
+		
+		//xil_printf("ping.\n\r");
+		g_conn_status = psuart0_dongle_ping();
+
+		//  Run USB Host Task Handlers
+		tusb_task_runner(); // USB House Keeping
+	    keyboard_host_app_task(NULL); // Keyboard tasks
+	    //mouse_host_app_task(NULL); // Mouse Tasks
+		//Xil_DCacheFlush();
+
+		switch (c[0])
+		{
+			case 'p':
+				xil_printf("\n\r");
+				xil_printf("------------- Aries Demo -------------\n\r");
+				xil_printf("'1' = Toggle Layer 1\n\r");
+				xil_printf("'2' = Toggle Layer 2\n\r");
+				xil_printf("'3' = Toggle Layer 3\n\r");
+				xil_printf("'n' = Set to new scaler datapath\n\r");
+//				xil_printf("'o' = Set to old scaler datapath\n\r");
+				xil_printf("'t' = Enable/bypass camera TPG\n\r");
+				xil_printf("'y' = Enable/bypass GUI TPG\n\r");
+//				xil_printf("'d' = Detect or set input frame size\n\r");
+				xil_printf("'u' = Park Camera Freeze VDMA\n\r");
+				xil_printf("'s' = Set output frame size\n\r");
+				xil_printf("'p' = Print this menu\n\r");
+				xil_printf("---------------------------------------\n\r");
+				xil_printf("\n\r");
+				break;
+			case '1':
+				xil_printf("Enabling/bypassing Layer 1.\n\r");
+				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+				if(status) { // Enabled
+					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+				} else {
+					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_1);
+				}
+				break;
+			case '2':
+				xil_printf("Enabling/bypassing Layer 2.\n\r");
+				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
+				if(status) { // Enabled
+					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
+				} else {
+					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
+				}
+				break;
+			case '3':
+				xil_printf("Enabling/bypassing Layer 3.\n\r");
+				status = XVMix_IsLayerEnabled(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
+				if(status) { // Enabled
+					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
+				} else {
+					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_3);
+				}
+				break;
+//			case 'n':
+//				xil_printf("Using new VPSS-based scaler datapath.\n\r");
+//				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_NEW_SCALER);
+//				break;
+//			case 'o':
+//				xil_printf("Using old scaler datapath.\n\r");
+//				periphs_select_scaler(&periphs_inst, PERIPHS_SEL_OLD_SCALER);
+//				break;
+			case 't':
+				xil_printf("Enabling/bypassing camera TPG.\n\r");
+				//periphs_toggle_camera_tpg(&periphs_inst);
+				break;
+			case 'y':
+				xil_printf("Enabling/bypassing GUI TPG.\n\r");
+				periphs_toggle_GUI_tpg(&periphs_inst);
+				break;
+			case 'u':
+				xil_printf("Park/Unpark Camera Freeze VDMA.\n\r");
+				periphs_toggle_camera_freeze_vdma(&periphs_inst);
+				// Determine if we're in TPG or passthrough mode
+				if (periphs_inst.enable_camera_freeze_vdma == PERIPHS_SEL_ENABLE_PARK)
+				{
+					XVMix_LayerEnable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
+				}
+				else
+				{
+					XVMix_LayerDisable(periphs_inst.p_vid_output_mixer_l2_inst, XVMIX_LAYER_2);
+				}
+
+
+
+
+				break;
+
+			case 's':
+				xil_printf("\n\rshow result idx=%d\t", input_buffer_index);
+				for(i = 0; i < BUF_LENGTH; i++)
+				{
+			        if(isprint(input_buffer[i]))
+			        	xil_printf("%c", input_buffer[i]);
+			        else if(input_buffer[i] == 0x09)
+			        	xil_printf("\t", input_buffer[i]);
+			        else if(input_buffer[i] == 0x0D)
+			        	xil_printf("\n\r", input_buffer[i]);
+			        else
+			        	xil_printf("0x%x ", input_buffer[i]);
+				}
+				xil_printf("\n\r");
+
+				break;
+			case 0x0D:
+			case ' ':
+				xil_printf("\n\r\n\r\n\r\n\r");
+				break;
+			default:
+				//xil_printf("\n\r---- unknown ---- c[0] = 0x%x\n\r", c[0]);
+				/*
+				p_periphs_inst222 = &periphs_inst;
+				p_gpio = p_periphs_inst222->p_ps_gpio_inst;
+				DataRead = XGpioPs_Read(p_gpio, XGPIOPS_BANK2);	//read bank 2 data, seems useless
+				xil_printf("DataRead = 0x%x\n\r", DataRead);
+				usleep(200000);
+				*/
+
+				//xil_printf("ERROR! Illegal character. Try again.\n\r");
+				break;
+
+		}
+	}
+}
+
+
