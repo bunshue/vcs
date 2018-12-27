@@ -1,5 +1,48 @@
 
 
+vcs history
+大scale
+小scale
+可置換table
+處理BC數字
+
+
+VCS到某區域內，鼠標換成滴管，這樣用來檢測每個點的RGB值
+
+C#	w/ XML分析
+
+
+
+vcs
+richtextbox裡，如何知道目前游標所在的line與position
+
+bmp
+如何把bmp檔讀出所有點 直接去改裡面數字 另存新檔
+看能不能做到顏色平移的效果
+
+
+
+vcs
+ImageViewer is from _Yusuf Shakeel_CSharp
+
+
+
+            
+            
+            
+"
+Bitmap Image (.bmp)|*.bmp|
+Gif Image (.gif)|*.gif|
+JPEG Image (.jpeg)|*.jpeg|
+Png Image (.png)|*.png|
+Tiff Image (.tiff)|*.tiff|
+Wmf Image (.wmf)|*.wmf
+
+";
+
+
+
+
 
 
 
@@ -25,6 +68,43 @@ myFile.Close();
 
 
 ImageViewer	研究選單架構
+
+
+using System.Drawing.Imaging;
+
+           Bitmap mimg = new Bitmap(width * 2, height);
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
+                {
+                    cnt++;
+                    //get source pixel value
+                    Color p = simg.GetPixel(lx, y);
+                    if ((cnt % 10000) == 0)
+                    {
+                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + "  ";
+                        //richTextBox1.Text += p.A.ToString() + p.R.ToString() + p.G.ToString() + p.B.ToString() + "  ";
+                    }
+
+                    //set mirror pixel value
+                    mimg.SetPixel(lx, y, p);
+                    mimg.SetPixel(rx, y, p);
+                }
+            }
+
+            //load mirror image in picturebox2
+            pictureBox2.Image = mimg;
+
+            //save (write) mirror image
+            //mimg.Save("C:\\MirrorImage.png");
+            mimg.Save("C:\\MirrorImage.jpg", ImageFormat.Jpeg);
+            mimg.Save("C:\\MirrorImage.png", ImageFormat.Png);
+            mimg.Save("C:\\MirrorImage.bmp", ImageFormat.Bmp);
+
+
+vcs不可畫點，用畫橢圓取代
+
 
 
 
