@@ -1,0 +1,301 @@
+
+
+
+
+
+
+
+
+
+
+Aries Main Program
+
+Compiled time: Sep 20 2018 16:29:21
+
+../src/main.c:main(167)
+
+
+Initializing Video Input/Output interface.
+
+Checking for FMC IMAGEON card.
+
+Initializing peripheral drivers.
+
+Initializing PS GPIO.
+
+Initializing video lock monitor GPIO.
+
+Initializing GUI TPG.
+
+Initializing Camera Freeze Scaler.
+
+Initializing Camera VDMA.
+
+Initializing Camera Freeze VDMA.
+
+Initializing Video Mixer.
+
+Initializing VTG_0.
+
+Initializing VTG_1.
+
+Bringing up input pipeline.
+
+Reset camera/camera freeze VDMA write channel (VGA).
+
+Resetting VDMA ...
+Resetting VDMA ...
+Set up camera/camera freeze write channel (VGA).
+
+Run camera/camera freeze write channel (VGA).
+
+Bringing up output pipeline.
+
+Reset VTG 0/1.
+
+Reset camera/camera freeze VDMA read channel (VGA).
+
+Resetting VDMA ...
+Resetting VDMA ...
+Configure VTG 0 and VTG 1.
+
+	Video Resolution = 1080P
+
+	VTC Generator Configuration
+
+		Horizontal Timing:
+
+			HActive = 0
+			HFrontPorch 1920
+			HSync 2008
+			HBackPorch 2052
+			HTotal = 2200
+		Vertical Timing:
+
+			V0Active 0
+			V0FrontPorch 1080
+			V0Sync 1084
+			V0BackPorch 1089
+			V0Total 1125
+	Video Resolution = 1080P
+
+	VTC Generator Configuration
+
+		Horizontal Timing:
+
+			HActive = 0
+			HFrontPorch 1920
+			HSync 2008
+			HBackPorch 2052
+			HTotal = 2200
+		Vertical Timing:
+
+			V0Active 0
+			V0FrontPorch 1080
+			V0Sync 1084
+			V0BackPorch 1089
+			V0Total 1125
+Initialize Video Mixer and settings.
+
+INFO: Mixer configured for TPG image
+
+
+----->MIXER STATUS<----
+Pixels Per Clock: 1
+Color Depth:      8
+Number of Layers: 4
+Control Reg:      0x81
+Layer Enable Reg: 0x1
+
+Layer Master: Enabled
+Layer 1     : Disabled
+Layer 2     : Disabled
+Layer 3     : Disabled
+Layer 4     : Disabled
+Layer 5     : Disabled
+Layer 6     : Disabled
+Layer 7     : Disabled
+Layer Logo  : Disabled
+
+Background Color Y/R: 0
+Background Color U/G: 0
+Background Color V/B: 255
+
+
+
+----->Master Layer Status<----
+State: Enabled
+Color Format: RGB
+
+Resolution: 1920 x 1080
+Stream Info->
+	Color Format:     RGB
+	Color Depth:      8
+	Pixels Per Clock: 1
+	Mode:             Progressive
+	3D Format:        Frame Packing
+	Frame Rate:       60Hz
+	Resolution:       1920x1080@60Hz
+	Pixel Clock:      148500000
+Initialize GUI TPG to 1080P.
+
+Setting up Camera Freeze scaler.
+
+
+------ SUBSYSTEM INPUT/OUTPUT CONFIG ------
+->INPUT
+	Color Format:     YUV_422
+	Color Depth:      8
+	Pixels Per Clock: 1
+	Mode:             Progressive
+	Frame Rate:       60Hz
+	Resolution:       640x480@60Hz
+	Pixel Clock:      25200000
+
+->OUTPUT
+	The stream ID (147) is not supported.
+
+Set up camera/camera freeze read channel (VGA).
+
+Run GUI TPG (1080P).
+
+Run camera/camera freeze read channel (VGA).
+
+Set up PS GPIO.
+
+Set up Video Lock Monitor.
+
+lock_monitor: FFFFFFFF
+In gdisp_lld_init()
+&frame0: 8
+&frame1: C
+*frame0: 1E13F8
+*frame1: B41400
+Reset Background to all black
+In board_init()
+board_init set layer 3 buffer addr to 0x1E13F8
+gfxInit() complete
+Initialization complete. Switching to background process.
+
+swidth: 1920
+sheight: 1080
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(114) ST
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(123) ST 111
+david0906: ../src/gdisp/gdisp_image_jpg.c:gdispImageOpen_JPG(69)
+david0906: ../src/gdisp/gdisp_image_jpg.c:gdispImageOpen_JPG(81) return GDISP_IMAGE_ERR_BADFORMAT bbbb
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(139) ST 222
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(123) ST 111
+david0906: ../src/gdisp/gdisp_image_png.c:gdispImageOpen_PNG(1149)
+david0906: ../src/gdisp/gdisp_image_png.c:gdispImageOpen_PNG(1168) ST setup GDISP_IMAGE_TYPE_PNG
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(133) SP bbb
+
+Layer 3 Buffer Addr: 0x1E13F8
+
+Layer 1 Color Format: YUV_422
+Set Layer 1 Window (688,  16, 1216, 912): Done
+Set Layer 1 Alpha to 256: (Disabled in HW)
+
+
+----->Layer 1 Status<----
+State: Disabled
+Type : Stream
+
+Layer 2 Color Format: YUV_422
+Set Layer 2 Window ( 16, 584, 640, 480): Done
+Set Layer 2 Alpha to 256: (Disabled in HW)
+
+
+----->Layer 2 Status<----
+State: Disabled
+Type : Stream
+
+Layer 3 Color Format: RGBA8
+Set Layer 3 Window (  0,   0, 1920, 1080): <ERR:: Command Failed>: 4096
+Set Layer 3 Alpha to 256: Done
+Enable Layer 3: Done
+
+
+----->Layer 3 Status<----
+State: Enabled
+Type : Memory
+Addr : 0x1E13F8
+Chroma Addr : 0x0
+Alpha: 256
+Scale: Disabled
+Color Format: RGBA8
+
+Window Data: 
+    X    = 0
+    Y    = 0
+   Win Width  = 0
+   Win Height = 0
+   Win Stride = 0
+check dongle status ST
+
+check dongle status SP
+
+dongle+camera
+
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(114) ST
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(123) ST 111
+david0906: ../src/gdisp/gdisp_image_jpg.c:gdispImageOpen_JPG(69)
+david0906: ../src/gdisp/gdisp_image_jpg.c:gdispImageOpen_JPG(81) return GDISP_IMAGE_ERR_BADFORMAT bbbb
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(139) ST 222
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(123) ST 111
+david0906: ../src/gdisp/gdisp_image_png.c:gdispImageOpen_PNG(1149)
+david0906: ../src/gdisp/gdisp_image_png.c:gdispImageOpen_PNG(1168) ST setup GDISP_IMAGE_TYPE_PNG
+david0906: ../src/gdisp/gdisp_image.c:gdispImageOpenGFile(133) SP bbb
+ulpi_init()
+ulpi_write_data - reg: 16, data: 55
+ulpi_write_data - reg: 16, data: AA
+ULPI integrity check: passed.
+ulpi_set_flags()
+ulpi_set_otg_flags()
+ulpi_write_data - reg: A, data: 6
+ulpi_set_ic_flags()
+ulpi_write_data - reg: 7, data: 10
+ulpi_set_fc_flags()
+ulpi_write_data - reg: 4, data: 45
+ulpl_set_vbus
+set_vbus flags initial: 6
+ulpi_write_data - reg: A, data: 26
+
+
+
+david0827: ../tusb.c:tusb_init(45) ST
+hal_init
+usb_cmd pre: 0x80000
+Reset Controller 0
+hal_controller_reset
+psusb0_hal_controller_reset
+psusb0 reset success
+Set Idle Mode
+USBMODE: 0, should be 0x00 for idle mode
+Set Host Mode
+USBMODE: 3, should be 0x03
+
+
+
+david0827: ../host/usbh.c:usbh_init(147) ST
+hcd_controller_init
+usb_int_enable: 0
+usb_sts: 1000
+usb_int_enable: C0026
+async_list_base: 1D7000
+periodic_list_base: 1D8000
+tt_control: 0
+hcd_controller_init usb_cmd before: 80B00
+hcd_controller_init usb_cmd after: 88B3D
+portsc: 0x8C001000
+hub_init
+david0827: ../host/usbh.c:usbh_init(179) ST
+
+
+david0827: ../tusb.c:tusb_init(69) ST
+
+
+
+W = 950, H = 120
+
+Successfully ran IicPsMasterInit
+

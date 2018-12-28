@@ -361,7 +361,6 @@ namespace vcs_MyPaint
 
             g.DrawRectangle(p, 100, 100, width-200 - 1, height-200 - 1);
 
-
             SolidBrush sb;
             Font f;
             sb = new SolidBrush(Color.Blue);
@@ -387,5 +386,174 @@ namespace vcs_MyPaint
         {
             Application.Exit();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            int width;
+            int height;
+
+            string filename = "C:\\______test_vcs\\step2.png";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+            bitmap2 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap2;
+
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            //pictureBox1.Size = new Size(1, 1);
+            pictureBox2.Size = new Size(width, height);
+            pictureBox2.Location = new Point(0, 0);
+            pictureBox2.Image = bitmap1;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            SolidBrush sb;
+            Font f;
+
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("標楷體", 20);
+
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+
+            sb = new SolidBrush(Color.Red);
+            g = Graphics.FromImage(bitmap1);
+            //g.FillRectangle(sb, 75, 75, 200, 75);
+
+            g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 110.0F));
+            g.DrawString("請更換", f, sb, new PointF(240.0F, 200.0F));
+
+            pictureBox2.Image = bitmap1;
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            int width;
+            int height;
+
+            string filename = "C:\\______test_vcs\\sample.png";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+            bitmap2 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap2;
+
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            //pictureBox1.Size = new Size(1, 1);
+            pictureBox2.Size = new Size(width, height);
+            pictureBox2.Location = new Point(0, 0);
+
+
+            pictureBox2.Image = bitmap1;
+            richTextBox1.Text += "\n";
+
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            int LAYER0_WIDTH = 1920;
+            int LAYER0_HEIGHT = 1080;
+            int LAYER1_WIDTH = 1216;
+            int LAYER1_HEIGHT = 912;
+            int LAYER2_WIDTH = 640;
+            int LAYER2_HEIGHT = 480;
+            int LAYER3_WIDTH = 1920;
+            int LAYER3_HEIGHT = 1080;
+            int BORDER_X = 16;
+            int BORDER_Y = 16;
+
+            int LAYER1_START_X = (LAYER0_WIDTH - LAYER1_WIDTH - BORDER_X);
+            int LAYER1_START_Y = BORDER_Y;
+
+            int WIDTH1 = 150;		//for ID NO, NAME
+            int WIDTH2 = 370;		//for Doraemon, 9/3/2112
+            int WIDTH3 = 430;		//for SN : 2DCF-XXXXXX
+            int WIDTH4 = 180;
+            int WIDTH5 = 80;	//for Sun, Mon
+            int THICK1 = 40;
+
+            int x;
+            int y;
+            SolidBrush sb;
+            Font f;
+            sb = new SolidBrush(Color.Black);
+            f = new Font("Times New Roman", 20);
+            g = Graphics.FromImage(bitmap1);
+
+            g.FillRectangle(sb, 0, 0, 500, 800);
+
+
+            //在指定位置畫上一圖
+            // Create image.
+            //Image newImage = Image.FromFile(@"C:\______test_vcs\step3.png");
+
+            string filename = "C:\\______test_vcs\\step3.png";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            Bitmap bitmap3 = new Bitmap(filename);
+
+            richTextBox1.Text += "W = " + bitmap3.Width.ToString() + " H = " + bitmap3.Height.ToString() + "\n";
+
+            // Create coordinates for upper-left corner of image.
+            int dx = 228;
+            int dy = 264;
+
+            // Draw image to screen.
+            g.DrawImage(bitmap3, LAYER1_START_X + dx, LAYER1_START_Y + dy, bitmap3.Width, bitmap3.Height);
+
+            sb = new SolidBrush(Color.White);
+            
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 0;
+            g.DrawString("ID NO:", f, sb, new PointF(x, y));
+
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 1;
+            g.DrawString("NAME:", f, sb, new PointF(x, y));
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 3;
+            g.DrawString("SEX:", f, sb, new PointF(x, y));
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 4;
+            g.DrawString("AGE:", f, sb, new PointF(x, y));
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 5;
+            g.DrawString("Birthday:", f, sb, new PointF(x, y));
+
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 7;
+            g.DrawString("12/28/2018 Fri", f, sb, new PointF(x, y));
+
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 8;
+            g.DrawString("16:33:32", f, sb, new PointF(x, y));
+
+
+            pictureBox2.Image = bitmap1;
+        }
     }
 }
+
+
+
