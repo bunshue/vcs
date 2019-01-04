@@ -15,8 +15,12 @@ namespace vcs_MyPaint
     {
         Graphics g;
         Pen p;
+        SolidBrush sb;
         Bitmap bitmap1;
         Bitmap bitmap2;
+
+        int flag_eraser_mode = 0;
+        int enable_erase = 0;
 
         public Form1()
         {
@@ -91,13 +95,19 @@ namespace vcs_MyPaint
         {
             if (bitmap1 != null)
             {
-                bitmap1.Save(@"C:\______test_vcs\\my_picture.jpg", ImageFormat.Jpeg);
-                bitmap1.Save(@"C:\______test_vcs\\my_picture.bmp", ImageFormat.Bmp);
-                bitmap1.Save(@"C:\______test_vcs\\my_picture.png", ImageFormat.Png);
+                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file1 = file + ".jpg";
+                String file2 = file + ".bmp";
+                String file3 = file + ".png";
+
+                bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(@file2, ImageFormat.Bmp);
+                bitmap1.Save(@file3, ImageFormat.Png);
+
                 richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.jpg\n";
-                richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.png\n";
-                richTextBox1.Text += "已存檔C:\\______test_vcs\\my_picture.bmp\n";
+                richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + file2 + "\n";
+                richTextBox1.Text += "已存檔 : " + file3 + "\n";
             }
             else
                 richTextBox1.Text += "無圖可存\n";
@@ -551,6 +561,78 @@ namespace vcs_MyPaint
 
 
             pictureBox2.Image = bitmap1;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    byte rrr = bitmap1.GetPixel(xx, yy).R;
+                    byte ggg = bitmap1.GetPixel(xx, yy).G;
+                    byte bbb = bitmap1.GetPixel(xx, yy).B;
+
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bitmap1.SetPixel(xx, yy, zz);
+                }
+            }
+
+            pictureBox2.Image = bitmap1;
+            
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (flag_eraser_mode == 0)
+            {
+                flag_eraser_mode = 1;
+                richTextBox1.Text += "flag_eraser_mode = 1\n";
+            }
+            else
+            {
+                flag_eraser_mode = 0;
+                richTextBox1.Text += "flag_eraser_mode = 0\n";
+            }
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "Mouse Down\n";
+            enable_erase = 1;
+
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "Mouse Up\n";
+            enable_erase = 0;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+
+            g = Graphics.FromImage(bitmap1);
+            
+            label1.Text = e.X.ToString() + ", " + e.Y.ToString();
+
+            if ((flag_eraser_mode == 1) && (enable_erase == 1))
+            {
+                richTextBox1.Text += "a";
+                sb = new SolidBrush(Color.White);
+                g.FillEllipse(sb, e.X, e.Y, 10, 10);
+            }
+
+            pictureBox2.Image = bitmap1;
+        
         }
     }
 }

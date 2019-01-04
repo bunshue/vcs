@@ -1,0 +1,39 @@
+C:\Practise\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.exe
+C:\Practise\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.pdb
+C:\Practise\ControlFormMove\ControlFormMove\obj\Debug\ResolveAssemblyReference.cache
+C:\Practise\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Form1.resources
+C:\Practise\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Properties.Resources.resources
+C:\Practise\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.csproj.GenerateResource.Cache
+C:\Practise\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.exe
+C:\Practise\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.pdb
+F:\Practise\006\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.exe
+F:\Practise\006\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.pdb
+F:\Practise\006\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.exe
+F:\Practise\006\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.pdb
+F:\Practise\006\ControlFormMove\ControlFormMove\obj\Debug\ResolveAssemblyReference.cache
+F:\Practise\006\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Form1.resources
+F:\Practise\006\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Properties.Resources.resources
+F:\Practise\006\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.csproj.GenerateResource.Cache
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.exe
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.pdb
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.exe
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.pdb
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\obj\Debug\ResolveAssemblyReference.cache
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Frm_Main.resources
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Properties.Resources.resources
+E:\源码\C#范例大全（卷二）\09\011\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.csproj.GenerateResource.Cache
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.exe
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.pdb
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Frm_Main.resources
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Properties.Resources.resources
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.csproj.GenerateResource.Cache
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.exe
+F:\工作\源码\开发实战1200例（第二卷）\C#开发实战1200例（第二卷）\MR\02\031\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.pdb
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.exe
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\bin\Debug\ControlFormMove.pdb
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.csprojResolveAssemblyReference.cache
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Frm_Main.resources
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.Properties.Resources.resources
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.csproj.GenerateResource.Cache
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.exe
+C:\Users\MR\Desktop\200例\源程序\第4章  系统及注册表操作\实例031  使用键盘控制窗体或控件的移动\ControlFormMove\ControlFormMove\obj\Debug\ControlFormMove.pdb
