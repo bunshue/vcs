@@ -24,6 +24,8 @@ namespace vcs_MouseKeyboard
             label6.Text = "";
             label7.Text = "";
             label8.Text = "";
+            label9.Text = "";
+            label10.Text = "";
             g = this.CreateGraphics();
         }
 
@@ -38,7 +40,15 @@ namespace vcs_MouseKeyboard
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label1.Text = "目前滑鼠位置: " + "x:" + System.Windows.Forms.Cursor.Position.X + " y:" + System.Windows.Forms.Cursor.Position.Y + "\n";
+            label1.Text = "目前滑鼠在整個桌面的位置: " + "x:" + System.Windows.Forms.Cursor.Position.X + " y:" + System.Windows.Forms.Cursor.Position.Y;
+
+            label11.Text = "目前滑鼠在整個桌面的位置: " + "x:" + Control.MousePosition.X + " y:" + Control.MousePosition.Y;
+
+            Point pt = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+
+            //Color cl = GetColor(pt);	//創建Point對象, 使用Color結構獲取顏色
+            //panel1.BackColor = cl;
+
             if ((label2.Text != "") && (need_clear == 0))
             {
                 need_clear = 1;
@@ -232,7 +242,14 @@ namespace vcs_MouseKeyboard
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            label2.Text = "MouseMove " + e.X + " : " + e.Y;
+            label10.Text = "目前滑鼠在這個表單的位置: " + "x:" + e.X + " y:" + e.Y;
+
+            Point pt = new Point(e.X, e.Y);
+
+            //Color cl = GetColor(pt);	//創建Point對象, 使用Color結構獲取顏色
+            //panel2.BackColor = cl;
+
+            label2.Text = "MouseMove ";
 
             if (flag_mouse_down == 1)
             {

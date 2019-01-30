@@ -118,22 +118,6 @@ namespace vcs_tmp_all
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //改變表單大小
-            this.Size = new Size(1920 / 2, 1080 / 2);
-
-
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //改變表單位置
-            this.Location = new Point(1920 / 2, 0);
-
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             richTextBox2.Clear();

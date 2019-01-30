@@ -63,6 +63,10 @@ namespace vcs_PictureBox
                 richTextBox1.Text += "\n";
                 Image loadedImage = Image.FromFile(openFileDialog1.FileName);
                 pictureBox1.Image = loadedImage;
+
+                //the same
+                //pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+
             }
         }
 

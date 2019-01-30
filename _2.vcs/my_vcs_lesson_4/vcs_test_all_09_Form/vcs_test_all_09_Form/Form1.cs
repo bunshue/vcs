@@ -325,7 +325,53 @@ namespace vcs_test_all_09_Form
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));
+            g.DrawRectangle(new Pen(Color.Green), new Rectangle(00, 00, this.ClientSize.Width - 1, this.ClientSize.Height - 1));
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(1000, 700);
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(1200, 900);
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            button33.Size = new Size(button33.Size.Width + 5, button33.Size.Height + 5);
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            button33.Size = new Size(button33.Size.Width + 5, button33.Size.Height + 5);
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            button33.Size = new Size(button33.Size.Width - 5, button33.Size.Height - 5);
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Form Size : w = " + this.Width.ToString() + " h = " + this.Height.ToString() + "\n";
+            richTextBox1.Text += "Form ClientSize : w = " + this.ClientSize.Width.ToString() + " h = " + this.ClientSize.Height.ToString() + "\n";
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            //改變表單大小
+            this.Size = new Size(1920 / 2, 1080 / 2);
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            //改變表單位置
+            this.Location = new Point(1920 / 2, 0);
+
         }
 
     }

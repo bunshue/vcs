@@ -1,5 +1,21 @@
 
 
+label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
+
+
+根據時間建立文件
+File.Create("C:\\______test_vcs\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg");//建立文件
+
+
+vcs人物分類
+帝王類
+其他
+
+
+vcs照片+文字、照片+浮水印
+
+
+
 vcs history
 大scale
 小scale
@@ -245,10 +261,7 @@ this.richTextBox1.Size = new System.Drawing.Size(382, 594);
 
 ------------------------------------------------------------------------------------------------------------------------
 
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.Text = "當前滑鼠位置為(" + e.X + "，" + e.Y + ")";
-        }
+
 
 
 ------------------------------------------------------------------------------------------------------------------------

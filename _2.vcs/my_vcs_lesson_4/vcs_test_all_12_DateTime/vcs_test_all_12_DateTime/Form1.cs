@@ -12,6 +12,9 @@ namespace vcs_test_all_12_DateTime
 {
     public partial class Form1 : Form
     {
+        int flag_timer_counter_down_enable = 0;
+        int wait_seconds = 0;
+        System.DateTime dt_timer_st = System.DateTime.Now;
         DateTime start_time = DateTime.Now;
         public Form1()
         {
@@ -25,8 +28,8 @@ namespace vcs_test_all_12_DateTime
             //DateTime dt = new DateTime(年, 月, 日);
             //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒);
             //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒, 毫秒);
-            DateTime dt1 = new DateTime(2006, 3, 11, 9, 15, 0);
-            DateTime dt2 = new DateTime(2015, 10, 11, 12, 13, 14, 15);
+            DateTime dt1 = new DateTime(2019, 1, 1, 0, 0, 0);
+            DateTime dt2 = new DateTime(2037, 12, 30, 12, 34, 56, 15);
             DateTime dt3 = DateTime.Now;
 
             //TimeSpan 取時間差，只能取到天數，不能算月數、年數
@@ -34,13 +37,15 @@ namespace vcs_test_all_12_DateTime
             TimeSpan ts2 = dt3 - dt1;
 
             richTextBox1.Text += "兩個時間相距：" + ts1.ToString() + "\n";
-            richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
+            richTextBox1.Text += "兩個時間相距：" + ts1.TotalSeconds.ToString() + " 秒\n";
 
+            richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
+            richTextBox1.Text += "與現在相距：" + ts2.TotalSeconds.ToString() + " 秒\n";
             TimeSpan interval = DateTime.Now - DateTime.Now.Date;
             //richTextBox1.Text += DateTime.Now.ToString() + "\n";
             //richTextBox1.Text += DateTime.Now.Date.ToString() + "\n";
             richTextBox1.Text += "今天經過時間 "+ interval.ToString() + "\n";
-
+            richTextBox1.Text += "今天經過時間 " + interval.TotalSeconds.ToString() + " 秒\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -496,7 +501,7 @@ namespace vcs_test_all_12_DateTime
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            timer1.Interval = 100;
+            timer1.Interval = 1000;
             timer1.Enabled = true;
 
         }
@@ -511,6 +516,32 @@ namespace vcs_test_all_12_DateTime
             label2.Text = DateTime.Now.ToString("yyyy/MM/dd", cuinfo);
             label3.Text = DateTime.Now.ToString("HH:mm:ss");
             label4.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+
+            if (flag_timer_counter_down_enable == 1)
+            {
+                //DateTime dt3 = DateTime.Now;
+                //TimeSpan ts2 = dt3 - dt_timer_st;
+                TimeSpan interval = DateTime.Now - dt_timer_st;
+
+                //richTextBox1.Text += "與現在相距：" + ts2.ToString() + "\n";
+
+
+                //TimeSpan interval = DateTime.Now - DateTime.Now.Date;
+                //richTextBox1.Text += DateTime.Now.ToString() + "\n";
+                //richTextBox1.Text += DateTime.Now.Date.ToString() + "\n";
+                //richTextBox1.Text += "xxx " + interval.TotalSeconds.ToString();// +"\n";
+                label5.Text = interval.TotalSeconds.ToString();
+
+                if (interval.TotalSeconds > wait_seconds)
+                {
+                    this.TopMost = true;
+                    label5.Text += "yyyy";
+                }
+
+
+            }
+
 
         }
 
@@ -665,14 +696,14 @@ namespace vcs_test_all_12_DateTime
 
         private void button37_Click(object sender, EventArgs e)
         {
-            DateTime MyEndDate = new DateTime(2019, 01, 01, 00, 00, 00);
+            DateTime MyEndDate = new DateTime(2020, 01, 01, 00, 00, 00);
             DateTime MyStartDate = DateTime.Now;
             TimeSpan MySpan = MyEndDate.Subtract(MyStartDate);
             string diffDay = Convert.ToString(MySpan.Days);
             string diffHour = Convert.ToString(MySpan.Hours);
             string diffMin = Convert.ToString(MySpan.Minutes);
             string diffSec = Convert.ToString(MySpan.Seconds);
-            String MyInfo = "距離2019新年還有 " + diffDay + " 天 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒 ";
+            String MyInfo = "距離2020新年還有 " + diffDay + " 天 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒 ";
             MessageBox.Show(MyInfo, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
@@ -708,6 +739,27 @@ namespace vcs_test_all_12_DateTime
             richTextBox1.Text += "登出時間： " + LogoffTime.ToString() + "\n";
             StayTime = LogoffTime.Subtract(LoginTime);
             richTextBox1.Text += "您在此停留了" + StayTime.Hours + "小時" + StayTime.Minutes + "分鐘" + StayTime.Seconds + "秒" + "\n";
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+            if (flag_timer_counter_down_enable == 1)
+            {
+                flag_timer_counter_down_enable = 0;
+                button34.Text = "倒數";
+            }
+            else
+            {
+                flag_timer_counter_down_enable = 1;
+                button34.Text = "停止";
+
+                dt_timer_st = System.DateTime.Now;
+                wait_seconds = int.Parse(textBox2.Text) * 60;
+                richTextBox1.Text += "等待時間： " + wait_seconds.ToString() + Environment.NewLine;
+            }
+
 
         }
    

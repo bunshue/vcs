@@ -435,8 +435,12 @@ namespace vcs_MyPaint
             g = Graphics.FromImage(bitmap1);
             //g.FillRectangle(sb, 75, 75, 200, 75);
 
-            g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 110.0F));
-            g.DrawString("請更換", f, sb, new PointF(240.0F, 200.0F));
+            //g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 110.0F));
+            //g.DrawString("請更換", f, sb, new PointF(240.0F, 200.0F));
+
+            g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 70.0F));
+            g.DrawString("請更換", f, sb, new PointF(240.0F, 160.0F));
+            g.DrawString("拔除時間太久 30分", f, sb, new PointF(10.0F, 250.0F));
 
             pictureBox2.Image = bitmap1;
 

@@ -23,28 +23,10 @@ namespace test_paint
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            g = this.CreateGraphics();
-            p = new Pen(Color.Red, 10);
-            bmp = new Bitmap(this.Width, this.Height);
-            Draw = Graphics.FromImage(bmp);
-            Draw.Clear(BackColor);
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            g.DrawImage(bmp, 0, 0);
-            g.DrawLine(p, 100, 100, 300, 300);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //g.DrawImage(bmp, 0, 0);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            bmp.Save(@"D:\ssss.jpg");
         }
 
         private void button3_Click(object sender, EventArgs e)

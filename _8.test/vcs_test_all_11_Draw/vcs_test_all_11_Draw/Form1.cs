@@ -18,6 +18,8 @@ namespace vcs_test_all_11_Draw
         SolidBrush sb;
         Font f;
 
+        bool flag_eraser = false;
+
         Point[] p_Array = { new Point(150, 50), new Point(100, 400), new Point(450, 400), new Point(400, 50) };
 
         public Form1()
@@ -33,6 +35,7 @@ namespace vcs_test_all_11_Draw
             f = new Font("標楷體", 16);
 
             g.Clear(Color.Red);             //useless??
+            pictureBox1.BackColor = Color.Pink;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -142,14 +145,14 @@ namespace vcs_test_all_11_Draw
 
 
             // Create string to draw.
-            String drawString = "測試文字";
+            String drawString = "江山如畫一時多少豪傑";
 
             // Create font and brush.
-            Font drawFont = new Font("Arial", 16);
+            Font drawFont = new Font("標楷體", 36, FontStyle.Italic|FontStyle.Underline|FontStyle.Strikeout);
             SolidBrush drawBrush = new SolidBrush(Color.Black);
 
             // Create point for upper-left corner of drawing.
-            PointF drawPoint = new PointF(250.0F, 250.0F);
+            PointF drawPoint = new PointF(50.0F, 250.0F);
 
             // Draw string to screen.
             g.DrawString(drawString, drawFont, drawBrush, drawPoint);
@@ -858,6 +861,55 @@ namespace vcs_test_all_11_Draw
             //----將Bitmap顯示在Picture上
             pictureBox1.Image = bmp;
 
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            if (flag_eraser == true)
+            {
+                flag_eraser = false;
+                button42.BackColor = BackColor;
+            }
+            else
+            {
+                flag_eraser = true;
+                button42.BackColor = Color.Red;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePosition.Y.ToString() + ")";
+            if (flag_mouse_down == 1)
+            {
+                label2.Text = "1";
+                sb = new SolidBrush(Color.White);
+                //g.FillEllipse(sb, Control.MousePosition.X, Control.MousePosition.Y, Control.MousePosition.X + 10, Control.MousePosition.Y + 10);
+
+
+        }
+            else
+                label2.Text = "0";
+        }
+
+        int flag_mouse_down = 0;
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = 1;
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = 0;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((flag_eraser == true) && (flag_mouse_down == 1))
+            {
+                sb = new SolidBrush(Color.White);
+                g.FillEllipse(sb, e.X - 5, e.Y - 5, 10, 10);
+            }
         }
     }
 }
