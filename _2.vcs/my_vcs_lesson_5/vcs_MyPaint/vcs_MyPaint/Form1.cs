@@ -28,7 +28,7 @@ namespace vcs_MyPaint
             comboBox1.SelectedIndex = 1;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            p = new Pen(Color.Red, 5);
+            p = new Pen(Color.Red, 3);
 
         }
 
@@ -426,7 +426,8 @@ namespace vcs_MyPaint
             Font f;
 
             sb = new SolidBrush(Color.Blue);
-            f = new Font("標楷體", 20);
+			//f = new Font("標楷體", 20);
+            f = new Font("標楷體", 16);
 
             if (bitmap1 == null)
                 bitmap1 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
@@ -438,9 +439,15 @@ namespace vcs_MyPaint
             //g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 110.0F));
             //g.DrawString("請更換", f, sb, new PointF(240.0F, 200.0F));
 
-            g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 70.0F));
-            g.DrawString("請更換", f, sb, new PointF(240.0F, 160.0F));
-            g.DrawString("拔除時間太久 30分", f, sb, new PointF(10.0F, 250.0F));
+            //g.DrawString("內視鏡時效已過", f, sb, new PointF(120.0F, 70.0F));
+            //g.DrawString("請更換", f, sb, new PointF(270.0F, 160.0F));
+            //g.DrawString("相機非全新且不同", f, sb, new PointF(90.0F, 250.0F));
+
+            g.DrawString("內視鏡時效已過", f, sb, new PointF(120.0F, 60.0F));
+            g.DrawString("請更換", f, sb, new PointF(270.0F, 150.0F));
+            f = new Font("標楷體", 14);
+            g.DrawString("關機太久", f, sb, new PointF(250.0F, 220.0F));
+            g.DrawString("(使用<30分，關機>30分)", f, sb, new PointF(50.0F, 290.0F));
 
             pictureBox2.Image = bitmap1;
 
@@ -562,6 +569,78 @@ namespace vcs_MyPaint
             x = BORDER_X;
             y = BORDER_Y + THICK1 * 8;
             g.DrawString("16:33:32", f, sb, new PointF(x, y));
+
+            p = new Pen(Color.Gray, 5);
+
+            g.DrawRectangle(p, LAYER1_START_X, LAYER1_START_Y, LAYER1_WIDTH - 1, LAYER1_HEIGHT - 1);
+
+            p = new Pen(Color.Blue, 5);
+
+            int R = 170;
+
+            Point[] myPointArray = { 
+                new Point(LAYER1_START_X + R, BORDER_Y),
+                new Point(LAYER1_START_X + LAYER1_WIDTH - R, BORDER_Y),
+                new Point(LAYER1_START_X + LAYER1_WIDTH, BORDER_Y + R),
+                new Point(LAYER1_START_X + LAYER1_WIDTH, BORDER_Y + LAYER1_HEIGHT - R),
+                new Point(LAYER1_START_X + LAYER1_WIDTH - R, BORDER_Y + LAYER1_HEIGHT),
+                new Point(LAYER1_START_X + R, BORDER_Y + LAYER1_HEIGHT),
+                new Point(LAYER1_START_X, BORDER_Y + LAYER1_HEIGHT - R),
+                new Point(LAYER1_START_X, BORDER_Y + R)
+                                   };
+            g.DrawPolygon(p, myPointArray);
+
+            p = new Pen(Color.Red, 5);
+
+            R = 250;
+
+            Point[] myPointArray2 = { 
+                new Point(LAYER1_START_X + R, BORDER_Y),
+                new Point(LAYER1_START_X + LAYER1_WIDTH - R, BORDER_Y),
+                new Point(LAYER1_START_X + LAYER1_WIDTH, BORDER_Y + R),
+                new Point(LAYER1_START_X + LAYER1_WIDTH, BORDER_Y + LAYER1_HEIGHT - R),
+                new Point(LAYER1_START_X + LAYER1_WIDTH - R, BORDER_Y + LAYER1_HEIGHT),
+                new Point(LAYER1_START_X + R, BORDER_Y + LAYER1_HEIGHT),
+                new Point(LAYER1_START_X, BORDER_Y + LAYER1_HEIGHT - R),
+                new Point(LAYER1_START_X, BORDER_Y + R)
+                                   };
+            g.DrawPolygon(p, myPointArray2);
+
+
+            p = new Pen(Color.Red, 5);
+            g.DrawArc(p, LAYER1_START_X, LAYER1_START_Y, R * 2, R * 2, 180, 90);
+            g.DrawArc(p, LAYER1_START_X + LAYER1_WIDTH - R * 2, LAYER1_START_Y, R * 2, R * 2, 270, 90);
+            g.DrawArc(p, LAYER1_START_X, LAYER1_START_Y + LAYER1_HEIGHT - R * 2, R * 2, R * 2, 90, 90);
+            g.DrawArc(p, LAYER1_START_X + LAYER1_WIDTH - R * 2, LAYER1_START_Y + LAYER1_HEIGHT - R * 2, R * 2, R * 2, 0, 90);
+
+
+            R = 350;
+            p = new Pen(Color.Yellow, 5);
+            g.DrawArc(p, LAYER1_START_X, LAYER1_START_Y, R * 2, R * 2, 180, 90);
+            g.DrawArc(p, LAYER1_START_X + LAYER1_WIDTH - R * 2, LAYER1_START_Y, R * 2, R * 2, 270, 90);
+            g.DrawArc(p, LAYER1_START_X, LAYER1_START_Y + LAYER1_HEIGHT - R * 2, R * 2, R * 2, 90, 90);
+            g.DrawArc(p, LAYER1_START_X + LAYER1_WIDTH - R * 2, LAYER1_START_Y + LAYER1_HEIGHT - R * 2, R * 2, R * 2, 0, 90);
+
+            Point[] myPointArray3 = { 
+                new Point(LAYER1_START_X + R, BORDER_Y),
+                new Point(LAYER1_START_X + LAYER1_WIDTH - R, BORDER_Y),
+                new Point(LAYER1_START_X + LAYER1_WIDTH, BORDER_Y + R),
+                new Point(LAYER1_START_X + LAYER1_WIDTH, BORDER_Y + LAYER1_HEIGHT - R),
+                new Point(LAYER1_START_X + LAYER1_WIDTH - R, BORDER_Y + LAYER1_HEIGHT),
+                new Point(LAYER1_START_X + R, BORDER_Y + LAYER1_HEIGHT),
+                new Point(LAYER1_START_X, BORDER_Y + LAYER1_HEIGHT - R),
+                new Point(LAYER1_START_X, BORDER_Y + R)
+                                   };
+            g.DrawPolygon(p, myPointArray3);
+
+
+            //SolidBrush sb;
+            //Font f;
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("標楷體", 20);
+
+
+            g.DrawString("0          170    200    250", f, sb, new PointF(LAYER1_START_X - 10, BORDER_Y + LAYER1_HEIGHT + 15));
 
 
             pictureBox2.Image = bitmap1;
