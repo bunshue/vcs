@@ -447,7 +447,9 @@ namespace vcs_MyPaint
             g.DrawString("請更換", f, sb, new PointF(270.0F, 150.0F));
             f = new Font("標楷體", 14);
             g.DrawString("關機太久", f, sb, new PointF(250.0F, 220.0F));
-            g.DrawString("(使用<30分，關機>30分)", f, sb, new PointF(50.0F, 290.0F));
+
+            f = new Font("標楷體", 12);
+            g.DrawString("(使用<30分，累計關機>30分)", f, sb, new PointF(40.0F, 290.0F));
 
             pictureBox2.Image = bitmap1;
 

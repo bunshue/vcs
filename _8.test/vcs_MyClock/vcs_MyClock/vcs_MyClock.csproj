@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{49A96210-B909-4273-839F-244A942AA02A}</ProjectGuid>
+    <ProjectGuid>{2ACB41FF-3356-4726-9431-7675D157FCE2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>vcs_MyClock</RootNamespace>
@@ -49,7 +49,7 @@
     <Compile Include="A1Panel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="A1Panel.designer.cs">
+    <Compile Include="A1Panel.Designer.cs">
       <DependentUpon>A1Panel.cs</DependentUpon>
     </Compile>
     <Compile Include="A1PanelGraphics.cs" />

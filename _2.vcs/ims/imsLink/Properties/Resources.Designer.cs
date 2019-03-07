@@ -113,9 +113,9 @@ namespace imsLink.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
-        internal static System.Drawing.Bitmap Myson_Logo {
+        internal static System.Drawing.Bitmap open_log {
             get {
-                object obj = ResourceManager.GetObject("Myson_Logo", resourceCulture);
+                object obj = ResourceManager.GetObject("open_log", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,29 @@ namespace imsLink.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
-        internal static System.Drawing.Bitmap open_log {
+        internal static System.Drawing.Bitmap recorder_fail {
             get {
-                object obj = ResourceManager.GetObject("open_log", resourceCulture);
+                object obj = ResourceManager.GetObject("recorder_fail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recorder_none {
+            get {
+                object obj = ResourceManager.GetObject("recorder_none", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recorder_ok {
+            get {
+                object obj = ResourceManager.GetObject("recorder_ok", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
