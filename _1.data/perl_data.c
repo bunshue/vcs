@@ -4,52 +4,10 @@
 
 
 
+perl
 
-
-
-----------------pppp perl test ST----------------
-
-chomp()：由於使用者輸入數字之後需要按"Enter"鍵，因此變數 a、b、和 c 內的字串最後都有"跳行"的控制字元；因此我們需要使用 chomp() 把"跳行"的控制字元去除。
-狀態 || 敘述：這個敘述的意思是"如果狀態為 false，則執行 || 後的敘述。"
-die 的用法是將其後面的字串顯示出來之後，把程式結束掉。
-
-找出最近5個svn check in檔案
-
-
-Perl 教學網站：
-一、http://web.nchu.edu.tw/~jlu/cyut/perl.shtml
-二、http://www.sinica.edu.tw/~andyliu/tc/Perl/perl.html
-三、http://linux.tnc.edu.tw/techdoc/perl_intro/
-參考資料
-網路
-
-perl筆記
-http://irw.ncut.edu.tw/peterju/perl.html
-
-可否用perl分析一個log裏面的資料？
-
-qq是什麼意思
-
-perl software
-http://www.perl.org/
-http://www.perl.org/get.html
-http://www.perl.org/get.html#win32
-
-perl debug
-perl -d test.pl
-s: step
-p: print  p $a
-q: quit
-h: help
-perl之printf與C相同。
-print
-%4d  25 =>   25
-%04d 25 => 0025
-
-
-----------------pppp perl test SP----------------
-
-
+http://web.nchu.edu.tw/~jlu/cyut/perl-simple.shtml
+http://www.fido.net.tw/
 
 
 
@@ -103,6 +61,56 @@ say()， 類似 print()，如果不給予參數的話，會印出 $_的內容。
 
 
 Perl 的內建序式 sort 可以直接排序陣列，這不另人意外。而其最簡明的使用形式，便是傳入一個陣列，它好會傳回排好的新陣列：@sorted = sort @original。
+
+
+
+
+
+
+
+
+原本記事本kilo上的資料
+----------------pppp perl test ST----------------
+
+chomp()：由於使用者輸入數字之後需要按"Enter"鍵，因此變數 a、b、和 c 內的字串最後都有"跳行"的控制字元；因此我們需要使用 chomp() 把"跳行"的控制字元去除。
+狀態 || 敘述：這個敘述的意思是"如果狀態為 false，則執行 || 後的敘述。"
+die 的用法是將其後面的字串顯示出來之後，把程式結束掉。
+
+找出最近5個svn check in檔案
+
+
+Perl 教學網站：
+一、http://web.nchu.edu.tw/~jlu/cyut/perl.shtml
+二、http://www.sinica.edu.tw/~andyliu/tc/Perl/perl.html
+三、http://linux.tnc.edu.tw/techdoc/perl_intro/
+參考資料
+網路
+
+perl筆記
+http://irw.ncut.edu.tw/peterju/perl.html
+
+可否用perl分析一個log裏面的資料？
+
+qq是什麼意思
+
+perl software
+http://www.perl.org/
+http://www.perl.org/get.html
+http://www.perl.org/get.html#win32
+
+perl debug
+perl -d test.pl
+s: step
+p: print  p $a
+q: quit
+h: help
+perl之printf與C相同。
+print
+%4d  25 =>   25
+%04d 25 => 0025
+
+
+----------------pppp perl test SP----------------
 
 
 

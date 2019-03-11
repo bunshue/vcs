@@ -32,6 +32,7 @@ while ($i < 10)
 print "Array1:\t";
 print @array1;
 print "\n";
+print "Array1 has ".@array1." members.\n";
 
 # 啟動 big5 字串解析; 標準輸出入及標準錯誤都設為 big5 編碼
 #use encoding 'big5', STDIN => 'big5', STDOUT => 'big5';
