@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>MySon_ICON.ico</ApplicationIcon>
+    <ApplicationIcon>ims.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>1A6387C8417C9D1AF9C678F8622D23C629E65293</ManifestCertificateThumbprint>
@@ -98,19 +98,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -121,19 +121,16 @@
     <None Include="img\1431440286_folder_open.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ims.ico" />
     <None Include="recorder_ok.png" />
     <None Include="recorder_none.png" />
     <None Include="recorder_fail.png" />
-    <None Include="img\Myson_Logo.jpg" />
-    <None Include="img\CCW.jpg" />
-    <None Include="img\CW.jpg" />
     <None Include="img\calculator.jpg" />
     <None Include="img\1431440241_save.png" />
     <Content Include="img\close_log.jpg" />
     <Content Include="img\open_log.jpg" />
     <None Include="img\settings.png" />
     <Content Include="img\timer.png" />
-    <Content Include="MySon_ICON.ico" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Scripting">

@@ -73,29 +73,9 @@ namespace imsLink.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
-        internal static System.Drawing.Bitmap CCW {
-            get {
-                object obj = ResourceManager.GetObject("CCW", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
         internal static System.Drawing.Bitmap close_log {
             get {
                 object obj = ResourceManager.GetObject("close_log", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap CW {
-            get {
-                object obj = ResourceManager.GetObject("CW", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -57,7 +57,6 @@ namespace vcs_MyClock
         private void Form1_Load(object sender, EventArgs e)
         {
             digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
-            lb_date.Text = "";
             lb_mesg.Text = "";
             //this.FormBorderStyle = FormBorderStyle.None;
             time_pause_start = DateTime.Now;
@@ -67,11 +66,13 @@ namespace vcs_MyClock
             time_sp = DateTime.Now;
             time_diff = time_sp - time_st;
             time_diff_total = time_diff;
+            this.Height = 161;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             DateTime dt_now = DateTime.Now;
+            toolStripStatusLabel1.Text = dt_now.ToString();
             if ((flag_mode == _MODE_CLOCK) && (flag_state == _MODE_CLOCK_STATE_0))
             {
                 digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
@@ -88,7 +89,6 @@ namespace vcs_MyClock
                     this.WindowState = FormWindowState.Normal;
                     digitalDisplayControl1.DigitColor = Color.Purple;
                     digitalDisplayControl1.DigitText = "00.00";
-                    lb_date.Text = "";
                 }
                 else
                 {
@@ -110,8 +110,6 @@ namespace vcs_MyClock
                         digitalDisplayControl1.DigitText = remain2.ToString("00:00.00");
                     else
                         digitalDisplayControl1.DigitText = remain2.ToString("00.00");
-
-                    lb_date.Text = dt_now.ToString();
                 }
             }
             else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_1))
@@ -134,50 +132,71 @@ namespace vcs_MyClock
                     digitalDisplayControl1.DigitText = count2.ToString("00:00.00");
                 else
                     digitalDisplayControl1.DigitText = count2.ToString("00.00");
-
-                lb_date.Text = dt_now.ToString();
-
             }
             else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_2))
             {
-                lb_date.Text = dt_now.ToString();
+
             }
             else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_3))
             {
                 digitalDisplayControl1.DigitText = "00.00";
-                lb_date.Text = dt_now.ToString();
             }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = 0;
             flag_mode = _MODE_CLOCK;
             flag_state = _MODE_CLOCK_STATE_0;
             lb_mesg.Text = "時鐘模式";
+
+            if (show_setup_panel == 1)
+            {
+                show_setup_panel = 0;
+                update_show_setup_panel(show_setup_panel);
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = 1;
             flag_mode = _MODE_COUNTR;
             flag_state = _MODE_COUNTR_STATE_0;
             digitalDisplayControl1.DigitText = "00.00";
             lb_mesg.Text = "正數模式";
+            if (show_setup_panel == 0)
+            {
+                show_setup_panel = 1;
+                update_show_setup_panel(show_setup_panel);
+            }
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = 2;
             flag_mode = _MODE_TIMER;
             flag_state = _MODE_TIMER_STATE_0;
             digitalDisplayControl1.DigitText = "00.00";
             lb_mesg.Text = "倒數模式";
+            if (show_setup_panel == 0)
+            {
+                show_setup_panel = 1;
+                update_show_setup_panel(show_setup_panel);
+            }
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
+            tabControl1.SelectedIndex = 3;
             flag_mode = _MODE_ALARM;
             flag_state = _MODE_ALARM_STATE_0;
             //digitalDisplayControl1.DigitText = "00.00";
             lb_mesg.Text = "鬧鐘模式";
+            if (show_setup_panel == 0)
+            {
+                show_setup_panel = 1;
+                update_show_setup_panel(show_setup_panel);
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -269,7 +288,7 @@ namespace vcs_MyClock
                 int mm = (int)numericUpDown2.Value;
                 int ss = (int)numericUpDown3.Value;
                 total_count_down_sec = hh * 60 * 60 + mm * 60 + ss;
-                //richTextBox1.Text += "total_count_down_sec = " + total_count_down_sec.ToString() + "\n";
+                richTextBox1.Text += "total_count_down_sec = " + total_count_down_sec.ToString() + "\n";
 
 
                 System.DateTime dt = System.DateTime.Now;
@@ -280,7 +299,6 @@ namespace vcs_MyClock
                 time_stop = dt.AddSeconds(total_count_down_sec);
                 //richTextBox1.Text += "現在時間加" + total_count_down_sec.ToString() + "秒： " + time_stop.ToLongTimeString() + Environment.NewLine;
                 //timer1.Enabled = true;
-                lb_date.Text = dt.ToString();
                 richTextBox1.Text += "1111111111\n";
             }
             //else if ((flag_mode == _MODE_TIMER) && ((flag_state == _MODE_TIMER_STATE_1) || (flag_state == _MODE_TIMER_STATE_3)))
@@ -326,7 +344,6 @@ namespace vcs_MyClock
                 time_stop = dt.AddSeconds(total_count_down_sec);
                 //richTextBox1.Text += "現在時間加" + total_count_down_sec.ToString() + "秒： " + time_stop.ToLongTimeString() + Environment.NewLine;
                 //timer1.Enabled = true;
-                lb_date.Text = dt.ToString();
                 richTextBox1.Text += "1111111111\n";
                 */
 
@@ -372,6 +389,46 @@ namespace vcs_MyClock
 
             }
 
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 0)
+                radioButton1.Checked = true;
+            else if (tabControl1.SelectedIndex == 1)
+                radioButton2.Checked = true;
+            else if (tabControl1.SelectedIndex == 2)
+                radioButton3.Checked = true;
+            else if (tabControl1.SelectedIndex == 3)
+                radioButton4.Checked = true;
+        }
+
+        int show_setup_panel = 0;
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (show_setup_panel == 0)
+            {
+                show_setup_panel = 1;
+            }
+            else
+            {
+                show_setup_panel = 0;
+            }
+            update_show_setup_panel(show_setup_panel);
+        }
+
+        void update_show_setup_panel(int show_setup_panel)
+        {
+            if (show_setup_panel == 1)
+            {
+                button4.BackgroundImage = vcs_MyClock.Properties.Resources.close;
+                this.Height += 295;
+            }
+            else
+            {
+                button4.BackgroundImage = vcs_MyClock.Properties.Resources.open;
+                this.Height -= 295;
+            }
         }
 
 
