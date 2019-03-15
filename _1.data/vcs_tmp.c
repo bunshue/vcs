@@ -1,5 +1,96 @@
 
 
+//Wait
+System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
+
+
+//Read text from clipboard 
+string cliptext = System.String.Empty;
+if ( System.Windows.Forms.Clipboard.ContainsText( ) )
+{
+	clipText = System.Windows.Forms.Clipboard.GetText( );
+}
+
+
+//Take a screenshot 
+
+// Take a screenshot
+// By Ali Hamdar (http://alihamdar.com/)
+// http://social.msdn.microsoft.com/Forums/en/csharpgeneral/thread/79efecc4-fa6d-4078-afe4-bb1379bb968b
+
+// Default values for full screen
+int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+int top = 0;
+int left = 0;
+
+System.Drawing.Bitmap printscreen = new System.Drawing.Bitmap( width, height );
+System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage( printscreen as Image );
+graphics.CopyFromScreen( top, left, 0, 0, printscreen.Size );
+printscreen.Save( outputfile, imagetype );
+
+
+
+
+
+
+邊框黑白點
+            if (yy == 0)
+            { 
+                if((xx%2) == 0)
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                else
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+            }
+            else if (yy == (height - 1))
+            {
+                if ((xx % 2) == 1)
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                else
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+            }
+            else if (xx == 0)
+            {
+                if ((yy % 2) == 0)
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                else
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+            }
+            else if (xx == (width - 1))
+            {
+                if ((yy % 2) == 0)
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                else
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+            }
+            else
+                bitmap1.SetPixel(xx, yy, Color.Gray);
+
+
+
+
+
+
+
+PNG 轉 BMP
+using System.Drawing.Imaging;   //for PixelFormat
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Drawing.Image PngImg = System.Drawing.Image.FromFile(@"C:\______test_vcs\sample.png");
+            Bitmap myImage = new Bitmap(PngImg.Width, PngImg.Height, PixelFormat.Format32bppRgb);
+            using (Graphics g = Graphics.FromImage(myImage))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                g.DrawImage(PngImg, 0, 0);
+            }
+            PngImg.Save(@"C:\______test_vcs\sample.bmp", ImageFormat.Bmp);
+        }
+
+
+
 label 之 cursor 可以改變游標指到label時，會改變的滑鼠游標。
 
 

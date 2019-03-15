@@ -92,7 +92,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown1.Location = new System.Drawing.Point(6, 55);
+            this.numericUpDown1.Location = new System.Drawing.Point(6, 89);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             24,
             0,
@@ -106,7 +106,7 @@
             // numericUpDown2
             // 
             this.numericUpDown2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown2.Location = new System.Drawing.Point(69, 55);
+            this.numericUpDown2.Location = new System.Drawing.Point(69, 89);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             60,
             0,
@@ -125,7 +125,7 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown3.Location = new System.Drawing.Point(132, 56);
+            this.numericUpDown3.Location = new System.Drawing.Point(132, 90);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             60,
             0,
@@ -216,9 +216,9 @@
             // 
             this.groupBox2.Controls.Add(this.button18);
             this.groupBox2.Controls.Add(this.button17);
-            this.groupBox2.Location = new System.Drawing.Point(15, 38);
+            this.groupBox2.Location = new System.Drawing.Point(15, 14);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(189, 61);
+            this.groupBox2.Size = new System.Drawing.Size(189, 102);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             // 
@@ -229,7 +229,7 @@
             this.button18.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.Location = new System.Drawing.Point(101, 22);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(45, 30);
+            this.button18.Size = new System.Drawing.Size(60, 60);
             this.button18.TabIndex = 20;
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
@@ -241,7 +241,7 @@
             this.button17.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.Location = new System.Drawing.Point(9, 21);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(45, 30);
+            this.button17.Size = new System.Drawing.Size(60, 60);
             this.button17.TabIndex = 17;
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
@@ -255,7 +255,7 @@
             this.groupBox3.Controls.Add(this.numericUpDown3);
             this.groupBox3.Location = new System.Drawing.Point(21, 15);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(198, 115);
+            this.groupBox3.Size = new System.Drawing.Size(198, 135);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             // 
@@ -266,7 +266,7 @@
             this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(113, 22);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(45, 30);
+            this.button2.Size = new System.Drawing.Size(60, 60);
             this.button2.TabIndex = 22;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -278,7 +278,7 @@
             this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(16, 21);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(45, 30);
+            this.button3.Size = new System.Drawing.Size(60, 60);
             this.button3.TabIndex = 21;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -406,7 +406,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 101);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(267, 179);
+            this.tabControl1.Size = new System.Drawing.Size(259, 179);
             this.tabControl1.TabIndex = 20;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -415,7 +415,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(259, 153);
+            this.tabPage1.Size = new System.Drawing.Size(251, 153);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "時鐘";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -427,7 +427,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(259, 153);
+            this.tabPage2.Size = new System.Drawing.Size(251, 153);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "碼表";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -437,7 +437,7 @@
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(259, 153);
+            this.tabPage3.Size = new System.Drawing.Size(251, 153);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "倒數";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -447,7 +447,7 @@
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(259, 153);
+            this.tabPage4.Size = new System.Drawing.Size(251, 153);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "鬧鐘";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -456,7 +456,7 @@
             // 
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(259, 153);
+            this.tabPage5.Size = new System.Drawing.Size(251, 153);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "About";
             this.tabPage5.UseVisualStyleBackColor = true;

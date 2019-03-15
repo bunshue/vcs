@@ -97,10 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\close.bmp" />
+    <None Include="img\folder_open.png" />
     <Content Include="img\ims.ico" />
     <None Include="img\open.bmp" />
     <None Include="img\play_pause.bmp" />
     <None Include="img\stop.bmp" />
+    <None Include="img\save.png" />
     <Content Include="ims.ico" />
   </ItemGroup>
   <ItemGroup />

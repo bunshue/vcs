@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 
+using System.IO;        //for File
+
 namespace vcs_MyIcon
 {
     public partial class Form1 : Form
@@ -17,6 +19,8 @@ namespace vcs_MyIcon
         Pen p;
         SolidBrush sb;
         Bitmap bitmap1;
+
+        string FileName = "";
 
         public Form1()
         {
@@ -34,29 +38,31 @@ namespace vcs_MyIcon
             int xx;
             int yy;
 
-            width = 30;
-            height = 20;
+            width = 128;
+            height = 128;
             bitmap1 = new Bitmap(width, height);
+
+            //background
             for (yy = 0; yy < height; yy++)
             {
                 for (xx = 0; xx < width; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, Color.Gray);
+                    bitmap1.SetPixel(xx, yy, Color.White);
                 }
             }
+
+            g = Graphics.FromImage(bitmap1);
+            sb = new SolidBrush(Color.Red);
 
             //open
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    if((xx > (5+yy/2))&&(xx<25-yy/2))
-                        bitmap1.SetPixel(xx, yy, Color.Red);
-                }
-            }
-            pictureBox1.Image = bitmap1;
+            Point[] points = new Point[3];
+            points[0] = new Point(width / 8, height / 8);
+            points[1] = new Point(width * 7 / 8, height / 8);
+            points[2] = new Point(width / 2, height * 7 / 8);
+            g.FillPolygon(sb, points);
 
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -90,27 +96,29 @@ namespace vcs_MyIcon
             int xx;
             int yy;
 
-            width = 30;
-            height = 20;
+            width = 128;
+            height = 128;
             bitmap1 = new Bitmap(width, height);
+
+            //background
             for (yy = 0; yy < height; yy++)
             {
                 for (xx = 0; xx < width; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, Color.Gray);
+                    bitmap1.SetPixel(xx, yy, Color.White);
                 }
             }
 
+            g = Graphics.FromImage(bitmap1);
+            sb = new SolidBrush(Color.Red);
+
             //close
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    if ((xx < (15 + (yy + 1) / 2)) && (xx > 15 - (yy + 1) / 2))
-                        bitmap1.SetPixel(xx, yy, Color.Red);
-                }
-            }
+            Point[] points = new Point[3];
+            points[0] = new Point(width / 2, height / 8);
+            points[1] = new Point(width * 7 / 8, height * 7 / 8);
+            points[2] = new Point(width / 8, height * 7 / 8);
+            g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
 
@@ -125,34 +133,33 @@ namespace vcs_MyIcon
             int xx;
             int yy;
 
-            width = 45;
-            height = 30;
+            width = 128;
+            height = 128;
             bitmap1 = new Bitmap(width, height);
+
+            //background
             for (yy = 0; yy < height; yy++)
             {
                 for (xx = 0; xx < width; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, Color.Gray);
+                    bitmap1.SetPixel(xx, yy, Color.White);
                 }
             }
 
             g = Graphics.FromImage(bitmap1);
-
             sb = new SolidBrush(Color.Red);
 
+            //play-pause
             Point[] points = new Point[3];
-            points[0] = new Point(5, 5);
-            points[1] = new Point(20, 15);
-            points[2] = new Point(5, 25);
+            points[0] = new Point(width / 8, height * 2 / 8);
+            points[1] = new Point(width / 2, height / 2);
+            points[2] = new Point(width / 8, height * 6 / 8);
             g.FillPolygon(sb, points);
 
-            g.FillRectangle(sb, new Rectangle(25, 5, 5, 20));
-
-            g.FillRectangle(sb, new Rectangle(35, 5, 5, 20));
-
+            g.FillRectangle(sb, new Rectangle(width / 2, height * 2 / 8, width / 8, height / 2));
+            g.FillRectangle(sb, new Rectangle(width / 2 + width * 2 / 8, height * 2 / 8, width / 8, height / 2));
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -163,27 +170,17 @@ namespace vcs_MyIcon
             int xx;
             int yy;
 
-            width = 30;
-            height = 20;
+            width = 128;
+            height = 128;
             bitmap1 = new Bitmap(width, height);
+
+            //background
             for (yy = 0; yy < height; yy++)
             {
                 for (xx = 0; xx < width; xx++)
                 {
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    bitmap1.SetPixel(xx, yy, Color.Gray);
-                }
-            }
-
-            //stop
-            width = 45;
-            height = 30;
-            bitmap1 = new Bitmap(width, height);
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    bitmap1.SetPixel(xx, yy, Color.Gray);
+                    bitmap1.SetPixel(xx, yy, Color.White);
                 }
             }
 
@@ -192,10 +189,9 @@ namespace vcs_MyIcon
             sb = new SolidBrush(Color.Red);
 
             // stop
-            g.FillRectangle(sb, new Rectangle(12, 5, 20, 20));
+            g.FillRectangle(sb, new Rectangle(width / 8, height / 8, width * 6 / 8, height * 6 / 8));
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -206,10 +202,11 @@ namespace vcs_MyIcon
             int xx;
             int yy;
 
-            width = 150;
-            height = 150;
+            width = 128;
+            height = 128;
             bitmap1 = new Bitmap(width, height);
 
+            //background
             for (yy = 0; yy < height; yy++)
             {
                 for (xx = 0; xx < width; xx++)
@@ -224,19 +221,95 @@ namespace vcs_MyIcon
             Font f;
 
 
-            int t = 10;
-            int z = 30;
+            int t = 5;
+            int z = 20;
             Point point1a = new Point(5 + t, 5 + t + z);
-            Point point2a = new Point(5 + 138 - t, 5 + 138 - t - z);
+            Point point2a = new Point(5 + 115 - t, 5 + 115 - t - z);
             g.DrawLine(p, point1a, point2a);     // Draw line to screen.
 
             sb = new SolidBrush(Color.Black);
-            f = new Font("Arial", 100);
+            f = new Font("Arial", 88);
 
-            g.DrawString("2", f, sb, new PointF(14, 0));
+            g.DrawString("2", f, sb, new PointF(10, 0));
             
             pictureBox1.Image = bitmap1;
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "無圖片資料\n";
+                return;
+            }
+
+            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
+            Size size = new Size(128, 128);
+            //獲得原始圖片文件
+            //using (Bitmap bm = new Bitmap(FileName))
+            {
+                //從現有的圖像縮小, 為了得到合適的icon文件
+                using (Bitmap iconBm = new Bitmap(bitmap1, size))
+                {
+                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
+                    {
+                        string icon_filename = "C://______test_vcs//" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".ico";
+                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
+                        {
+                            icon.Save(stream);
+                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
+                        }
+                    }
+                }
+            }
+
+        
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
+            //openFileDialog1.Filter = "BMP|*.bmp|JPG|*.jpg|PNG|*.png|GIF|*.gif";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                FileName = this.openFileDialog1.FileName.Trim();
+                richTextBox1.Text += FileName + "\n";
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (FileName == "")
+            {
+                richTextBox1.Text += "未選取圖片\n";
+                return;
+            }
+            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
+            Size size = new Size(256,256);
+            //獲得原始圖片文件
+            using (Bitmap bm = new Bitmap(FileName))
+            {
+                //從現有的圖像縮小, 為了得到合適的icon文件
+                using (Bitmap iconBm = new Bitmap(bm, size))    //硬是把大圖縮成小圖
+                {
+                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
+                    {
+                        string icon_filename = "C://______test_vcs//" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".ico";
+                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
+                        {
+                            icon.Save(stream);
+                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
+                        }
+                    }
+                }
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("C://______test_vcs//");
         }
     }
 }

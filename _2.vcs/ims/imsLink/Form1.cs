@@ -10,6 +10,9 @@ using System.IO;                //for file read/write
 using System.IO.Ports;          //for serial ports
 using System.Diagnostics;       //for Process
 
+using AForge.Video;
+using AForge.Video.DirectShow;
+
 namespace imsLink
 {
     public partial class Form1 : Form
@@ -56,7 +59,9 @@ namespace imsLink
         int[] camera_serial_data = new int[16];
         byte[] sn_data_send2 = new byte[16];
 
-        
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
+
         void Write_Log_File(string input)
         {
             log_file_tmp_length += input.Length;
@@ -1691,7 +1696,39 @@ namespace imsLink
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.tb_sn2.Focus();
+            if (tabControl1.SelectedIndex == 3)
+            {
+                USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                {
+                    button12.Enabled = true;
+                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
+                    //Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                }
+                else
+                {
+                    button12.Enabled = false;
+                    richTextBox1.Text += "無影像裝置\n";
+                }
+            }
+            else
+            {
+                if (Cam != null)
+                {
+                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                    {
+                        Cam.Stop();   // WebCam stops capturing images.
+                    }
+                }
+
+                this.tb_sn2.Focus();
+            }
+        }
+
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -1995,6 +2032,35 @@ namespace imsLink
             groupBox10.BackColor = System.Drawing.SystemColors.ControlLightLight;
             flag_need_confirm = 0;
             bt_confirm.Visible = false;
+
+        }
+
+        int camera_start = 0;
+        private void button12_Click_1(object sender, EventArgs e)
+        {
+            if (camera_start == 0)
+            {
+                camera_start = 1;
+                button12.Text = "Stop";
+                Cam.Start();   // WebCam starts capturing images.
+            }
+            else
+            {
+                camera_start = 0;
+                button12.Text = "Start";
+                Cam.Stop();  // WebCam stops capturing images.
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                }
+            }
 
         }
 

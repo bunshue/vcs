@@ -73,6 +73,8 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button64 = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.lb_warning = new System.Windows.Forms.Label();
+            this.bt_confirm = new System.Windows.Forms.Button();
             this.tb_fix_length = new System.Windows.Forms.TextBox();
             this.cb_fix_length = new System.Windows.Forms.CheckBox();
             this.tb_sn3 = new System.Windows.Forms.TextBox();
@@ -166,8 +168,9 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.scanner_timer = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.bt_confirm = new System.Windows.Forms.Button();
-            this.lb_warning = new System.Windows.Forms.Label();
+            this.USB = new System.Windows.Forms.TabPage();
+            this.button12 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -185,6 +188,8 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -294,6 +299,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.Serial);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.USB);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -676,6 +682,28 @@
             this.groupBox10.TabIndex = 59;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Serial";
+            // 
+            // lb_warning
+            // 
+            this.lb_warning.AutoSize = true;
+            this.lb_warning.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_warning.Location = new System.Drawing.Point(452, 231);
+            this.lb_warning.Name = "lb_warning";
+            this.lb_warning.Size = new System.Drawing.Size(30, 23);
+            this.lb_warning.TabIndex = 64;
+            this.lb_warning.Text = "----";
+            // 
+            // bt_confirm
+            // 
+            this.bt_confirm.BackColor = System.Drawing.Color.Red;
+            this.bt_confirm.ForeColor = System.Drawing.Color.Green;
+            this.bt_confirm.Location = new System.Drawing.Point(348, 230);
+            this.bt_confirm.Name = "bt_confirm";
+            this.bt_confirm.Size = new System.Drawing.Size(80, 30);
+            this.bt_confirm.TabIndex = 63;
+            this.bt_confirm.Text = "確認";
+            this.bt_confirm.UseVisualStyleBackColor = false;
+            this.bt_confirm.Click += new System.EventHandler(this.button12_Click);
             // 
             // tb_fix_length
             // 
@@ -1652,27 +1680,34 @@
             this.timer3.Enabled = true;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // bt_confirm
+            // USB
             // 
-            this.bt_confirm.BackColor = System.Drawing.Color.Red;
-            this.bt_confirm.ForeColor = System.Drawing.Color.Green;
-            this.bt_confirm.Location = new System.Drawing.Point(348, 230);
-            this.bt_confirm.Name = "bt_confirm";
-            this.bt_confirm.Size = new System.Drawing.Size(80, 30);
-            this.bt_confirm.TabIndex = 63;
-            this.bt_confirm.Text = "確認";
-            this.bt_confirm.UseVisualStyleBackColor = false;
-            this.bt_confirm.Click += new System.EventHandler(this.button12_Click);
+            this.USB.Controls.Add(this.pictureBox1);
+            this.USB.Controls.Add(this.button12);
+            this.USB.Location = new System.Drawing.Point(4, 26);
+            this.USB.Name = "USB";
+            this.USB.Size = new System.Drawing.Size(940, 586);
+            this.USB.TabIndex = 22;
+            this.USB.Text = "USB";
+            this.USB.UseVisualStyleBackColor = true;
             // 
-            // lb_warning
+            // button12
             // 
-            this.lb_warning.AutoSize = true;
-            this.lb_warning.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_warning.Location = new System.Drawing.Point(452, 231);
-            this.lb_warning.Name = "lb_warning";
-            this.lb_warning.Size = new System.Drawing.Size(30, 23);
-            this.lb_warning.TabIndex = 64;
-            this.lb_warning.Text = "----";
+            this.button12.Location = new System.Drawing.Point(788, 60);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 0;
+            this.button12.Text = "Start";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(44, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -1702,6 +1737,7 @@
             this.Name = "Form1";
             this.Text = "imsLink";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1728,6 +1764,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.USB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1873,6 +1911,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button bt_confirm;
         private System.Windows.Forms.Label lb_warning;
+        private System.Windows.Forms.TabPage USB;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button12;
     }
 }
 

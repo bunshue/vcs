@@ -15,7 +15,7 @@ void* child(void* data) {
 // 主程式
 int main() {
   pthread_t t; // 宣告 pthread 變數
-  pthread_create(&t, NULL, child, "Child"); // 建立子執行緒
+  pthread_create(&t, NULL, child, "one child thread"); // 建立子執行緒
 
   // 主執行緒工作
   for(int i = 0;i < 3;++i) {
@@ -23,8 +23,10 @@ int main() {
     sleep(1);
   }
 
+	printf("main thread ends, wait others to finish\n");
 
   pthread_join(t, NULL); // 等待子執行緒執行完成
+	printf("every thread ends, .... finish\n");
   return 0;
 }
 
