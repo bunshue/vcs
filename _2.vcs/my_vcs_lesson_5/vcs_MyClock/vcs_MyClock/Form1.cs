@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for Stopwatch
+
 namespace vcs_MyClock
 {
     public partial class Form1 : Form
@@ -16,8 +18,10 @@ namespace vcs_MyClock
             InitializeComponent();
         }
 
+        Stopwatch sw = new Stopwatch();
+
         private const int _MODE_CLOCK = 0;  //一般
-        private const int _MODE_COUNTR = 1;  //正數
+        private const int _MODE_STOPWATCH = 1;  //正數、碼表、stopwatch
         private const int _MODE_TIMER = 2;  //倒數
         private const int _MODE_ALARM = 3;  //鬧鐘
 
@@ -25,10 +29,10 @@ namespace vcs_MyClock
         private const int _MODE_CLOCK_STATE_0 = 0;  //一般
 
         //正數
-        private const int _MODE_COUNTR_STATE_0 = 0;  //正數準備中
-        private const int _MODE_COUNTR_STATE_1 = 1;  //正數中、正數繼續
-        private const int _MODE_COUNTR_STATE_2 = 2;  //正數暫停
-        private const int _MODE_COUNTR_STATE_3 = 3;  //正數暫停歸零中
+        private const int _MODE_STOPWATCH_STATE_0 = 0;  //正數準備中
+        private const int _MODE_STOPWATCH_STATE_1 = 1;  //正數中、正數繼續
+        private const int _MODE_STOPWATCH_STATE_2 = 2;  //正數暫停
+        private const int _MODE_STOPWATCH_STATE_3 = 3;  //正數暫停歸零中
 
         //倒數
         private const int _MODE_TIMER_STATE_0 = 0;  //倒數準備中
@@ -44,7 +48,6 @@ namespace vcs_MyClock
 
         int total_count_down_sec = 0;
         System.DateTime time_stop;
-        System.DateTime time_start;
         System.DateTime time_pause_start;
         System.DateTime time_pause_stop;
 
@@ -54,6 +57,18 @@ namespace vcs_MyClock
         TimeSpan time_diff;
         TimeSpan time_diff_total;
 
+
+        //for ananog clock
+        //int WIDTH = 300, HEIGHT = 300, secHAND = 140, minHAND = 110, hrHAND = 80;
+        int WIDTH = 150, HEIGHT = 150, secHAND = 70, minHAND = 55, hrHAND = 40;
+
+        //center
+        int cx, cy;
+
+        Bitmap bmp;
+        Graphics g;
+
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
@@ -67,6 +82,18 @@ namespace vcs_MyClock
             time_diff = time_sp - time_st;
             time_diff_total = time_diff;
             this.Height = 161;
+
+            //for analog clock
+            //this.ClientSize = new Size(WIDTH + 20, HEIGHT + 20);
+            //create bitmap
+            bmp = new Bitmap(WIDTH + 1, HEIGHT + 1);
+            //center
+            cx = WIDTH / 2;
+            cy = HEIGHT / 2;
+
+            //backcolor
+            //this.BackColor = Color.White;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -112,34 +139,24 @@ namespace vcs_MyClock
                         digitalDisplayControl1.DigitText = remain2.ToString("00.00");
                 }
             }
-            else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_1))
+            else if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_1))
             {
-                TimeSpan ts2 = dt_now - time_start;
-                double count1 = Convert.ToDouble(ts2.TotalSeconds) - Convert.ToDouble(time_diff_total.TotalSeconds);
-                double count2;
-                int hh;
-                int mm;
-                int ss;
-                double ms;
-                hh = (int)count1 / 3600;
-                mm = (int)(count1 % 3600) / 60;
-                ss = (int)count1 % 60;
-                ms = count1 % 1;
-                count2 = hh * 10000 + mm * 100 + ss + ms;
-                if (count2 >= 3600)
-                    digitalDisplayControl1.DigitText = count2.ToString("00:00:00.00");
-                else if (count2 >= 60)
-                    digitalDisplayControl1.DigitText = count2.ToString("00:00.00");
-                else
-                    digitalDisplayControl1.DigitText = count2.ToString("00.00");
-            }
-            else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_2))
-            {
+                double ms = sw.ElapsedMilliseconds;
 
+                TimeSpan ts = sw.Elapsed;
+
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                            ts.Hours, ts.Minutes, ts.Seconds,
+                            ts.Milliseconds / 10);
+                digitalDisplayControl1.DigitText = elapsedTime;
             }
-            else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_3))
+            else if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_2))
             {
-                digitalDisplayControl1.DigitText = "00.00";
+                //正數暫停中，不做事
+            }
+            else if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_3))
+            {
+                //正數暫停歸零中，不做事
             }
         }
 
@@ -160,9 +177,9 @@ namespace vcs_MyClock
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             tabControl1.SelectedIndex = 1;
-            flag_mode = _MODE_COUNTR;
-            flag_state = _MODE_COUNTR_STATE_0;
-            digitalDisplayControl1.DigitText = "00.00";
+            flag_mode = _MODE_STOPWATCH;
+            flag_state = _MODE_STOPWATCH_STATE_0;
+            digitalDisplayControl1.DigitText = "00:00:00.00";
             lb_mesg.Text = "正數模式";
             if (show_setup_panel == 0)
             {
@@ -206,72 +223,54 @@ namespace vcs_MyClock
 
         private void button17_Click(object sender, EventArgs e)
         {
-            if ((flag_mode == _MODE_COUNTR) && ((flag_state == _MODE_COUNTR_STATE_0) || (flag_state == _MODE_COUNTR_STATE_3)))
+            if ((flag_mode == _MODE_STOPWATCH) && ((flag_state == _MODE_STOPWATCH_STATE_0) || (flag_state == _MODE_STOPWATCH_STATE_3)))
             {
-                flag_state = _MODE_COUNTR_STATE_1;
-                time_start = DateTime.Now;
+                sw.Start();
+                flag_state = _MODE_STOPWATCH_STATE_1;
                 lb_mesg.Text = "正數中";
-                time_pause_stop = time_pause_start;
             }
-            else if ((flag_mode == _MODE_COUNTR) && ((flag_state == _MODE_COUNTR_STATE_1) || (flag_state == _MODE_COUNTR_STATE_3)))
+            else if ((flag_mode == _MODE_STOPWATCH) && ((flag_state == _MODE_STOPWATCH_STATE_1) || (flag_state == _MODE_STOPWATCH_STATE_3)))
             {
-                flag_state = _MODE_COUNTR_STATE_2;
+                sw.Stop();
+                flag_state = _MODE_STOPWATCH_STATE_2;
                 lb_mesg.Text = "正數暫停";
-                time_pause_start = DateTime.Now;
-                time_st = DateTime.Now;
-
             }
-            else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_2))
+            else if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_2))
             {
-                flag_state = _MODE_COUNTR_STATE_1;
+                sw.Start();
+                flag_state = _MODE_STOPWATCH_STATE_1;
                 lb_mesg.Text = "正數繼續";
-                time_pause_stop = DateTime.Now;
-
-                time_sp = DateTime.Now;
-                time_diff = time_sp - time_st;
-                time_diff_total += time_diff;
-                //richTextBox1.Text += "SP diff = " + Convert.ToInt32(time_diff.TotalSeconds).ToString() + " diff_total = " + Convert.ToInt32(time_diff_total.TotalSeconds).ToString() + "\n";
             }
             richTextBox1.Text += "b17, flag_state = " + flag_state.ToString() + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_0))
+            if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_0))
             {
                 //開始準備中、暫停中、停止中按停止，把數字歸零
-                flag_mode = _MODE_COUNTR;
-                flag_state = _MODE_COUNTR_STATE_0;
-                digitalDisplayControl1.DigitText = "00.00";
-                time_st = DateTime.Now;
-                time_sp = DateTime.Now;
-                time_diff = time_sp - time_st;
-                time_diff_total = time_diff;
-                time_pause_stop = time_pause_start;
+                flag_mode = _MODE_STOPWATCH;
+                flag_state = _MODE_STOPWATCH_STATE_0;
+                digitalDisplayControl1.DigitText = "00:00:00.00";
+                lb_mesg.Text = "歸零";
+                sw.Reset();
             }
-            else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_1))
+            else if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_1))
             {
                 //正數中按停止，數字停止
-                flag_mode = _MODE_COUNTR;
-                flag_state = _MODE_COUNTR_STATE_0;
-                //digitalDisplayControl1.DigitText = "00.00";
-                time_st = DateTime.Now;
-                time_sp = DateTime.Now;
-                time_diff = time_sp - time_st;
-                time_diff_total = time_diff;
-                time_pause_stop = time_pause_start;
+                flag_mode = _MODE_STOPWATCH;
+                flag_state = _MODE_STOPWATCH_STATE_0;
+                lb_mesg.Text = "正數停止";
+                sw.Stop();
             }
-            else if ((flag_mode == _MODE_COUNTR) && (flag_state == _MODE_COUNTR_STATE_2))
+            else if ((flag_mode == _MODE_STOPWATCH) && (flag_state == _MODE_STOPWATCH_STATE_2))
             {
                 //暫停中、停止中按停止，把數字歸零
-                flag_mode = _MODE_COUNTR;
-                flag_state = _MODE_COUNTR_STATE_0;
-                digitalDisplayControl1.DigitText = "00.00";
-                time_st = DateTime.Now;
-                time_sp = DateTime.Now;
-                time_diff = time_sp - time_st;
-                time_diff_total = time_diff;
-                time_pause_stop = time_pause_start;
+                flag_mode = _MODE_STOPWATCH;
+                flag_state = _MODE_STOPWATCH_STATE_0;
+                digitalDisplayControl1.DigitText = "00:00:00.00";
+                lb_mesg.Text = "歸零";
+                sw.Reset();
             }
 
         }
@@ -412,6 +411,12 @@ namespace vcs_MyClock
             }
             else
             {
+                if (show_comport_log_panel == 1)
+                {
+                    show_comport_log_panel = 0;
+                    update_show_comport_log_panel(show_comport_log_panel);
+                }
+
                 show_setup_panel = 0;
             }
             update_show_setup_panel(show_setup_panel);
@@ -422,14 +427,150 @@ namespace vcs_MyClock
             if (show_setup_panel == 1)
             {
                 button4.BackgroundImage = vcs_MyClock.Properties.Resources.close;
-                this.Height += 295;
+                this.Height += 220;
             }
             else
             {
                 button4.BackgroundImage = vcs_MyClock.Properties.Resources.open;
-                this.Height -= 295;
+                this.Height -= 220;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (sw.IsRunning == true)
+            {
+                sw.Restart();
+                digitalDisplayControl1.DigitText = "00:00:00.00";
+                lb_mesg.Text = "正數重數";
+            }
+            else
+            {
+                sw.Reset();
+                digitalDisplayControl1.DigitText = "00:00:00.00";
+                lb_mesg.Text = "歸零";
+            }
+        }
+
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            //create graphics
+            g = Graphics.FromImage(bmp);
+
+            //get time
+            int ss = DateTime.Now.Second;
+            int mm = DateTime.Now.Minute;
+            int hh = DateTime.Now.Hour;
+
+            int[] handCoord = new int[2];
+
+            //clear
+            g.Clear(Color.White);
+
+            //draw circle
+            g.DrawEllipse(new Pen(Color.Black, 1f), 0, 0, WIDTH, HEIGHT);
+
+            //draw figure
+            g.DrawString("12", new Font("Arial", 12), Brushes.Black, new PointF(64, 1));
+            g.DrawString("3", new Font("Arial", 12), Brushes.Black, new PointF(138, 68));
+            g.DrawString("6", new Font("Arial", 12), Brushes.Black, new PointF(68, 133));
+            g.DrawString("9", new Font("Arial", 12), Brushes.Black, new PointF(0, 68));
+
+            //second hand
+            handCoord = msCoord(ss, secHAND);
+            g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+            //minute hand
+            handCoord = msCoord(mm, minHAND);
+            g.DrawLine(new Pen(Color.Black, 2f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+            //hour hand
+            handCoord = hrCoord(hh % 12, mm, hrHAND);
+            g.DrawLine(new Pen(Color.Gray, 3f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+            //load bmp in picturebox1
+            pictureBox1.Image = bmp;
+
+            //disp time
+            //this.Text = "Analog Clock -  " + hh + ":" + mm + ":" + ss;
+            this.Text = "ims_Clock - " + hh + ":" + mm + ":" + ss;
+
+            //dispose
+            g.Dispose();
+
+        }
+
+        //coord for minute and second hand
+        private int[] msCoord(int val, int hlen)
+        {
+            int[] coord = new int[2];
+            val *= 6;   //each minute and second make 6 degree
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            else
+            {
+                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            return coord;
+        }
+
+        //coord for hour hand
+        private int[] hrCoord(int hval, int mval, int hlen)
+        {
+            int[] coord = new int[2];
+
+            //each hour makes 30 degree
+            //each min makes 0.5 degree
+            int val = (int)((hval * 30) + (mval * 0.5));
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            else
+            {
+                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            return coord;
+        }
+
+        int show_comport_log_panel = 0;
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (show_comport_log_panel == 0)
+            {
+                show_comport_log_panel = 1;
+            }
+            else
+            {
+                show_comport_log_panel = 0;
+            }
+            update_show_comport_log_panel(show_comport_log_panel);
+
+        }
+
+        void update_show_comport_log_panel(int show_comport_log_panel)
+        {
+            if (show_comport_log_panel == 1)
+            {
+                button5.BackgroundImage = vcs_MyClock.Properties.Resources.close;
+                this.Height += 143;
+            }
+            else
+            {
+                button5.BackgroundImage = vcs_MyClock.Properties.Resources.open;
+                this.Height -= 143;
+            }
+        }
+
 
 
     }

@@ -32,46 +32,6 @@ printscreen.Save( outputfile, imagetype );
 
 
 
-
-
-邊框黑白點
-            if (yy == 0)
-            { 
-                if((xx%2) == 0)
-                    bitmap1.SetPixel(xx, yy, Color.White);
-                else
-                    bitmap1.SetPixel(xx, yy, Color.Black);
-            }
-            else if (yy == (height - 1))
-            {
-                if ((xx % 2) == 1)
-                    bitmap1.SetPixel(xx, yy, Color.White);
-                else
-                    bitmap1.SetPixel(xx, yy, Color.Black);
-            }
-            else if (xx == 0)
-            {
-                if ((yy % 2) == 0)
-                    bitmap1.SetPixel(xx, yy, Color.White);
-                else
-                    bitmap1.SetPixel(xx, yy, Color.Black);
-            }
-            else if (xx == (width - 1))
-            {
-                if ((yy % 2) == 0)
-                    bitmap1.SetPixel(xx, yy, Color.White);
-                else
-                    bitmap1.SetPixel(xx, yy, Color.Black);
-            }
-            else
-                bitmap1.SetPixel(xx, yy, Color.Gray);
-
-
-
-
-
-
-
 PNG 轉 BMP
 using System.Drawing.Imaging;   //for PixelFormat
 

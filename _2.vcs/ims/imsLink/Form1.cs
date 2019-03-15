@@ -59,6 +59,9 @@ namespace imsLink
         int[] camera_serial_data = new int[16];
         byte[] sn_data_send2 = new byte[16];
 
+        //參考
+        //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+        //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 

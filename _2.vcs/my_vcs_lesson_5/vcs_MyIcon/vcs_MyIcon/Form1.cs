@@ -311,5 +311,89 @@ namespace vcs_MyIcon
         {
             System.Diagnostics.Process.Start("C://______test_vcs//");
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            // refresh
+            p = new Pen(Color.Red, 25);
+            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            g.DrawArc(p, 20, 20, 90, 90, 25, 335);
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //加上標記
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+
+            //邊框黑白點
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    if (yy == 0)
+                    {
+                        if ((xx % 2) == 0)
+                            bitmap1.SetPixel(xx, yy, Color.White);
+                        else
+                            bitmap1.SetPixel(xx, yy, Color.Black);
+                    }
+                    else if (yy == (height - 1))
+                    {
+                        if ((xx % 2) == 1)
+                            bitmap1.SetPixel(xx, yy, Color.White);
+                        else
+                            bitmap1.SetPixel(xx, yy, Color.Black);
+                    }
+                    else if (xx == 0)
+                    {
+                        if ((yy % 2) == 0)
+                            bitmap1.SetPixel(xx, yy, Color.White);
+                        else
+                            bitmap1.SetPixel(xx, yy, Color.Black);
+                    }
+                    else if (xx == (width - 1))
+                    {
+                        if ((yy % 2) == 1)
+                            bitmap1.SetPixel(xx, yy, Color.White);
+                        else
+                            bitmap1.SetPixel(xx, yy, Color.Black);
+                    }
+                }
+            }
+
+            p = new Pen(Color.Blue, 1);
+            g.DrawRectangle(p, new Rectangle(width / 8, height / 8, width * 6 / 8, height * 6 / 8));
+            pictureBox1.Image = bitmap1;
+        }
     }
 }
