@@ -57,6 +57,13 @@
             this.button16 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lb_ww = new System.Windows.Forms.Panel();
+            this.lb_yy = new System.Windows.Forms.Label();
+            this.lb_weekday = new System.Windows.Forms.Label();
+            this.lb_dd2 = new System.Windows.Forms.Label();
+            this.lb_mm2 = new System.Windows.Forms.Label();
+            this.lb_dd1 = new System.Windows.Forms.Label();
+            this.lb_mm1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -68,14 +75,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.button5 = new System.Windows.Forms.Button();
-            this.lb_ww = new System.Windows.Forms.Panel();
-            this.lb_mm1 = new System.Windows.Forms.Label();
-            this.lb_dd1 = new System.Windows.Forms.Label();
-            this.lb_mm2 = new System.Windows.Forms.Label();
-            this.lb_dd2 = new System.Windows.Forms.Label();
-            this.lb_weekday = new System.Windows.Forms.Label();
             this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
-            this.lb_yy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -88,12 +88,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.lb_ww.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.lb_ww.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -427,6 +427,82 @@
             this.tabPage1.Text = "時鐘";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lb_ww
+            // 
+            this.lb_ww.BackColor = System.Drawing.Color.White;
+            this.lb_ww.Controls.Add(this.lb_yy);
+            this.lb_ww.Controls.Add(this.lb_weekday);
+            this.lb_ww.Controls.Add(this.lb_dd2);
+            this.lb_ww.Controls.Add(this.lb_mm2);
+            this.lb_ww.Controls.Add(this.lb_dd1);
+            this.lb_ww.Controls.Add(this.lb_mm1);
+            this.lb_ww.Location = new System.Drawing.Point(29, 19);
+            this.lb_ww.Name = "lb_ww";
+            this.lb_ww.Size = new System.Drawing.Size(175, 135);
+            this.lb_ww.TabIndex = 27;
+            // 
+            // lb_yy
+            // 
+            this.lb_yy.AutoSize = true;
+            this.lb_yy.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_yy.Location = new System.Drawing.Point(119, 13);
+            this.lb_yy.Name = "lb_yy";
+            this.lb_yy.Size = new System.Drawing.Size(54, 24);
+            this.lb_yy.TabIndex = 26;
+            this.lb_yy.Text = "2019";
+            // 
+            // lb_weekday
+            // 
+            this.lb_weekday.AutoSize = true;
+            this.lb_weekday.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_weekday.Location = new System.Drawing.Point(49, 99);
+            this.lb_weekday.Name = "lb_weekday";
+            this.lb_weekday.Size = new System.Drawing.Size(82, 24);
+            this.lb_weekday.TabIndex = 31;
+            this.lb_weekday.Text = "星期一";
+            // 
+            // lb_dd2
+            // 
+            this.lb_dd2.AutoSize = true;
+            this.lb_dd2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dd2.ForeColor = System.Drawing.Color.Red;
+            this.lb_dd2.Location = new System.Drawing.Point(15, 59);
+            this.lb_dd2.Name = "lb_dd2";
+            this.lb_dd2.Size = new System.Drawing.Size(21, 24);
+            this.lb_dd2.TabIndex = 30;
+            this.lb_dd2.Text = "1";
+            // 
+            // lb_mm2
+            // 
+            this.lb_mm2.AutoSize = true;
+            this.lb_mm2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_mm2.Location = new System.Drawing.Point(6, 25);
+            this.lb_mm2.Name = "lb_mm2";
+            this.lb_mm2.Size = new System.Drawing.Size(45, 24);
+            this.lb_mm2.TabIndex = 29;
+            this.lb_mm2.Text = "1月";
+            // 
+            // lb_dd1
+            // 
+            this.lb_dd1.AutoSize = true;
+            this.lb_dd1.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dd1.ForeColor = System.Drawing.Color.Red;
+            this.lb_dd1.Location = new System.Drawing.Point(65, 32);
+            this.lb_dd1.Name = "lb_dd1";
+            this.lb_dd1.Size = new System.Drawing.Size(43, 48);
+            this.lb_dd1.TabIndex = 28;
+            this.lb_dd1.Text = "1";
+            // 
+            // lb_mm1
+            // 
+            this.lb_mm1.AutoSize = true;
+            this.lb_mm1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_mm1.Location = new System.Drawing.Point(127, 43);
+            this.lb_mm1.Name = "lb_mm1";
+            this.lb_mm1.Size = new System.Drawing.Size(45, 24);
+            this.lb_mm1.TabIndex = 27;
+            this.lb_mm1.Text = "1月";
+            // 
             // tabPage2
             // 
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -532,72 +608,6 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // lb_ww
-            // 
-            this.lb_ww.BackColor = System.Drawing.Color.White;
-            this.lb_ww.Controls.Add(this.lb_yy);
-            this.lb_ww.Controls.Add(this.lb_weekday);
-            this.lb_ww.Controls.Add(this.lb_dd2);
-            this.lb_ww.Controls.Add(this.lb_mm2);
-            this.lb_ww.Controls.Add(this.lb_dd1);
-            this.lb_ww.Controls.Add(this.lb_mm1);
-            this.lb_ww.Location = new System.Drawing.Point(29, 19);
-            this.lb_ww.Name = "lb_ww";
-            this.lb_ww.Size = new System.Drawing.Size(175, 135);
-            this.lb_ww.TabIndex = 27;
-            // 
-            // lb_mm1
-            // 
-            this.lb_mm1.AutoSize = true;
-            this.lb_mm1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mm1.Location = new System.Drawing.Point(127, 43);
-            this.lb_mm1.Name = "lb_mm1";
-            this.lb_mm1.Size = new System.Drawing.Size(45, 24);
-            this.lb_mm1.TabIndex = 27;
-            this.lb_mm1.Text = "1月";
-            // 
-            // lb_dd1
-            // 
-            this.lb_dd1.AutoSize = true;
-            this.lb_dd1.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dd1.ForeColor = System.Drawing.Color.Red;
-            this.lb_dd1.Location = new System.Drawing.Point(65, 32);
-            this.lb_dd1.Name = "lb_dd1";
-            this.lb_dd1.Size = new System.Drawing.Size(43, 48);
-            this.lb_dd1.TabIndex = 28;
-            this.lb_dd1.Text = "1";
-            // 
-            // lb_mm2
-            // 
-            this.lb_mm2.AutoSize = true;
-            this.lb_mm2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_mm2.Location = new System.Drawing.Point(6, 25);
-            this.lb_mm2.Name = "lb_mm2";
-            this.lb_mm2.Size = new System.Drawing.Size(45, 24);
-            this.lb_mm2.TabIndex = 29;
-            this.lb_mm2.Text = "1月";
-            // 
-            // lb_dd2
-            // 
-            this.lb_dd2.AutoSize = true;
-            this.lb_dd2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dd2.ForeColor = System.Drawing.Color.Red;
-            this.lb_dd2.Location = new System.Drawing.Point(15, 59);
-            this.lb_dd2.Name = "lb_dd2";
-            this.lb_dd2.Size = new System.Drawing.Size(21, 24);
-            this.lb_dd2.TabIndex = 30;
-            this.lb_dd2.Text = "1";
-            // 
-            // lb_weekday
-            // 
-            this.lb_weekday.AutoSize = true;
-            this.lb_weekday.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_weekday.Location = new System.Drawing.Point(49, 99);
-            this.lb_weekday.Name = "lb_weekday";
-            this.lb_weekday.Size = new System.Drawing.Size(82, 24);
-            this.lb_weekday.TabIndex = 31;
-            this.lb_weekday.Text = "星期一";
-            // 
             // digitalDisplayControl1
             // 
             this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
@@ -608,16 +618,10 @@
             this.digitalDisplayControl1.Name = "digitalDisplayControl1";
             this.digitalDisplayControl1.Size = new System.Drawing.Size(429, 99);
             this.digitalDisplayControl1.TabIndex = 0;
-            // 
-            // lb_yy
-            // 
-            this.lb_yy.AutoSize = true;
-            this.lb_yy.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_yy.Location = new System.Drawing.Point(119, 13);
-            this.lb_yy.Name = "lb_yy";
-            this.lb_yy.Size = new System.Drawing.Size(54, 24);
-            this.lb_yy.TabIndex = 26;
-            this.lb_yy.Text = "2019";
+            this.digitalDisplayControl1.DoubleClick += new System.EventHandler(this.digitalDisplayControl1_DoubleClick);
+            this.digitalDisplayControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.digitalDisplayControl1_MouseDown);
+            this.digitalDisplayControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.digitalDisplayControl1_MouseMove);
+            this.digitalDisplayControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.digitalDisplayControl1_MouseUp);
             // 
             // Form1
             // 
@@ -635,6 +639,7 @@
             this.Controls.Add(this.lb_mesg);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.digitalDisplayControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "ims_Clock";
@@ -652,6 +657,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.lb_ww.ResumeLayout(false);
+            this.lb_ww.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -659,8 +666,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.lb_ww.ResumeLayout(false);
-            this.lb_ww.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

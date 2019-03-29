@@ -86,7 +86,7 @@ namespace vcs_MyClock
             time_sp = DateTime.Now;
             time_diff = time_sp - time_st;
             time_diff_total = time_diff;
-            this.Height = 161;
+            this.Height = 161 - 38;
 
             //for analog clock
             //this.ClientSize = new Size(WIDTH + 20, HEIGHT + 20);
@@ -98,6 +98,14 @@ namespace vcs_MyClock
 
             //backcolor
             //this.BackColor = Color.White;
+
+            //明確指定Form表單的起始點位置
+            //this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(1920 - this.Width, 60);
+            //this.Location = new System.Drawing.Point(this.Right, this.Top);
+
+
 
         }
 
@@ -666,6 +674,51 @@ namespace vcs_MyClock
             lb_alarm_target.Text = "";
             this.TopMost = false;
         }
+
+        private void digitalDisplayControl1_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();                             //關閉視窗
+            //this.WindowState = FormWindowState.Minimized; //最小化視窗
+        }
+
+
+        //***********************
+        private Point mouseOffset;//记录鼠标坐标
+        private bool isMouseDown = false;//是否按下鼠标
+        //***********************
+
+        #region 移动无边框窗体
+        private void digitalDisplayControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int xOffset;
+            int yOffset;
+            if (e.Button == MouseButtons.Left)
+            {
+                xOffset = -e.X;
+                yOffset = -e.Y;
+                mouseOffset = new Point(xOffset, yOffset);
+                isMouseDown = true;
+            }
+        }
+
+        private void digitalDisplayControl1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+                Location = mousePos;
+            }
+        }
+
+        private void digitalDisplayControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
+        }
+        #endregion
 
 
 

@@ -1,5 +1,80 @@
 
 
+
+ID3格式
+
+
+開頭 	3 	「TAG」，標籤。
+標題 	30 	歌曲標題，最多30個英文字元。
+藝術家 	30 	作曲或演唱者的名字，最多30個英文字元。
+專輯 	30 	專輯名稱，最多30個英文字元。
+年分 	4 	西元年分，四個數字。
+評論 	28[3]或30 	就是評論。
+零位元組[3] 	1 	如果有儲存曲目，那麼這個位元組會儲存一個二進位的0。
+曲目[3] 	1 	這首歌在該專輯中的曲目，或者為0。若前一個位元組非零，則此欄內容無效。
+藝術類型 
+
+
+header 	3 	"TAG"
+title 	30 	30 characters of the title
+artist 	30 	30 characters of the artist name
+album 	30 	30 characters of the album name
+year 	4 	A four-digit year
+comment 	28[7] or 30 	The comment.
+zero-byte[7] 	1 	If a track number is stored, this byte contains a binary 0.
+track[7] 	1 	The number of the track on the album, or 0. Invalid, if previous byte is not a binary 0.
+genre 	1 	Index in a list of genres, or 255 
+
+
+
+
+
+
+
+
+
+
+
+
+看範例學C# 系列
+https://ithelp.ithome.com.tw/users/20044155/ironman/241
+
+
+
+wmp改變視窗大小
+https://blog.csdn.net/ivan_ljf/article/details/9774231
+axWindowsMediaPlayer1.DisplaySize　　　　　　　?置播放?象大小  
+　　　　1-MpDefaultSize　　　　　　　　　原始大小  
+　　　　2-MpHalfSize　　　　　　　　　　 原始大小的一半  
+　　　　3-MpDoubleSize　　　　　　　　　 原始大小的?倍  
+　　　　4-MpFullScreen　　　　　　　　　 全屏  
+　　　　5-MpOneSixteenthScreen　　　　　 屏幕大小的1/16  
+　　　　6-MpOneFourthScreen　　　　　　　屏幕大小的1/4  
+　　　　7-MpOneHalfScreen　　　　　　　　屏幕大小的1/2  
+
+axWindowsMediaPlayer1.settings.balance = 1; 伴唱
+axWindowsMediaPlayer1.settings.balance = -1;原唱
+
+
+
+
+
+windows media player
+在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
+         private void ResizeOriginal()
+         {
+             int intWidth = axWindowsMediaPlayer1.currentMedia.imageSourceWidth;
+             int intHeight = axWindowsMediaPlayer1.currentMedia.imageSourceHeight;
+             axWindowsMediaPlayer1.Width = intWidth + 2;
+             axWindowsMediaPlayer1.Height = intHeight + 2;
+         }
+         
+         
+         
+         
+
+
+
 //Wait
 System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
 
