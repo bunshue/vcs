@@ -41,15 +41,19 @@ namespace vcs_MyClock
         private const int _MODE_TIMER_STATE_3 = 3;  //倒數時間到
 
         //鬧鐘
-        private const int _MODE_ALARM_STATE_0 = 0;  //鬧鐘
+        private const int _MODE_ALARM_STATE_0 = 0;  //鬧鐘準備中、時間到
+        private const int _MODE_ALARM_STATE_1 = 1;  //鬧鐘開始
+        //private const int _MODE_ALARM_STATE_2 = 2;  //鬧鐘時間到
 
         int flag_mode = _MODE_CLOCK;    //0:時鐘、1:正數、2:倒數、3:鬧鐘
         int flag_state = _MODE_CLOCK_STATE_0;
 
         int total_count_down_sec = 0;
-        System.DateTime time_stop;
-        System.DateTime time_pause_start;
-        System.DateTime time_pause_stop;
+        DateTime time_stop;
+        DateTime time_pause_start;
+        DateTime time_pause_stop;
+
+        DateTime alarm_target;
 
         //int status = 0;
         System.DateTime time_sp;
@@ -73,6 +77,7 @@ namespace vcs_MyClock
         {
             digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
             lb_mesg.Text = "";
+            lb_alarm_target.Text = "";
             //this.FormBorderStyle = FormBorderStyle.None;
             time_pause_start = DateTime.Now;
             time_pause_stop = time_pause_start;
@@ -158,6 +163,10 @@ namespace vcs_MyClock
             {
                 //正數暫停歸零中，不做事
             }
+            else if (flag_mode == _MODE_ALARM)
+            {
+                digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -213,6 +222,7 @@ namespace vcs_MyClock
             {
                 show_setup_panel = 1;
                 update_show_setup_panel(show_setup_panel);
+                update_alarm_time();
             }
         }
 
@@ -399,7 +409,10 @@ namespace vcs_MyClock
             else if (tabControl1.SelectedIndex == 2)
                 radioButton3.Checked = true;
             else if (tabControl1.SelectedIndex == 3)
+            {
                 radioButton4.Checked = true;
+                update_alarm_time();
+            }
         }
 
         int show_setup_panel = 0;
@@ -428,12 +441,38 @@ namespace vcs_MyClock
             {
                 button4.BackgroundImage = vcs_MyClock.Properties.Resources.close;
                 this.Height += 220;
+                update_calendar();
             }
             else
             {
                 button4.BackgroundImage = vcs_MyClock.Properties.Resources.open;
                 this.Height -= 220;
             }
+        }
+
+        void update_calendar()
+        {
+            DateTime dt = DateTime.Now;
+            lb_yy.Text = dt.Year.ToString();
+
+            string[] Month_name = new string[] { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
+            string month = Month_name[Convert.ToInt32(dt.Month.ToString("d"))].ToString();
+
+            //lb_mm1.Text = dt.Month.ToString();
+            lb_mm1.Text = month;
+            lb_dd1.Text = dt.Day.ToString();
+
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            lb_weekday.Text = week;
+
+            System.Globalization.TaiwanLunisolarCalendar TA = new System.Globalization.TaiwanLunisolarCalendar();
+            lb_mm2.Text = TA.GetMonth(dt).ToString();
+            lb_dd2.Text = TA.GetDayOfMonth(dt).ToString();
+
+            
+        
+        
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -498,6 +537,30 @@ namespace vcs_MyClock
 
             //dispose
             g.Dispose();
+
+            if ((flag_mode == _MODE_ALARM) && (flag_state == _MODE_ALARM_STATE_1))
+            {
+                if (alarm_target > DateTime.Now)
+                {
+                    if ((ss % 2) == 0)
+                    {
+                        lb_alarm_target.Text = alarm_target.ToString();
+                    }
+                    else
+                    {
+                        lb_alarm_target.Text = "";
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "時間到";
+                    flag_state = _MODE_ALARM_STATE_0;
+                    this.TopMost = true;
+                }
+
+
+            }
+
 
         }
 
@@ -569,6 +632,39 @@ namespace vcs_MyClock
                 button5.BackgroundImage = vcs_MyClock.Properties.Resources.open;
                 this.Height -= 143;
             }
+        }
+
+        void update_alarm_time()
+        {
+            DateTime dt = DateTime.Now;
+            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\t";
+            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\t";
+            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            numericUpDown4.Value = dt.Hour;
+            numericUpDown5.Value = dt.Minute;
+            numericUpDown6.Value = dt.Second;
+
+        
+        
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "dt1 = " + alarm_target.ToString() + "\n";
+            alarm_target = new DateTime(2019, 3, 18, (int)numericUpDown4.Value, (int)numericUpDown5.Value, (int)numericUpDown6.Value);
+            //richTextBox1.Text += "dt1 = " + alarm_target.ToString() + "\n";
+            flag_mode = _MODE_ALARM;
+            flag_state = _MODE_ALARM_STATE_1;
+            lb_alarm_target.Text = alarm_target.ToString();
+            this.TopMost = false;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            flag_mode = _MODE_ALARM;
+            flag_state = _MODE_ALARM_STATE_0;
+            lb_alarm_target.Text = "";
+            this.TopMost = false;
         }
 
 

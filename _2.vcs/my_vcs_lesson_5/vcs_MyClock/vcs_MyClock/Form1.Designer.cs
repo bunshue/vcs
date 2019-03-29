@@ -46,15 +46,13 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.button15 = new System.Windows.Forms.Button();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.button16 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -62,6 +60,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lb_alarm_target = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -69,7 +68,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.button5 = new System.Windows.Forms.Button();
+            this.lb_ww = new System.Windows.Forms.Panel();
+            this.lb_mm1 = new System.Windows.Forms.Label();
+            this.lb_dd1 = new System.Windows.Forms.Label();
+            this.lb_mm2 = new System.Windows.Forms.Label();
+            this.lb_dd2 = new System.Windows.Forms.Label();
+            this.lb_weekday = new System.Windows.Forms.Label();
             this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
+            this.lb_yy = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -81,11 +87,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lb_ww.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -277,18 +285,6 @@
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(115, 66);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(60, 60);
-            this.button2.TabIndex = 22;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button3
             // 
             this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
@@ -301,67 +297,48 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button2
+            // 
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(115, 66);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(60, 60);
+            this.button2.TabIndex = 22;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.button12);
-            this.groupBox4.Controls.Add(this.button13);
-            this.groupBox4.Controls.Add(this.button14);
-            this.groupBox4.Controls.Add(this.button15);
             this.groupBox4.Controls.Add(this.numericUpDown4);
             this.groupBox4.Controls.Add(this.numericUpDown5);
+            this.groupBox4.Controls.Add(this.button15);
             this.groupBox4.Controls.Add(this.numericUpDown6);
-            this.groupBox4.Location = new System.Drawing.Point(12, 14);
+            this.groupBox4.Location = new System.Drawing.Point(13, 45);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(227, 115);
+            this.groupBox4.Size = new System.Drawing.Size(227, 103);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             // 
             // button12
             // 
             this.button12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(168, 21);
+            this.button12.Location = new System.Drawing.Point(126, 63);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(48, 28);
+            this.button12.Size = new System.Drawing.Size(60, 30);
             this.button12.TabIndex = 16;
             this.button12.Text = "停止";
             this.button12.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(114, 21);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(48, 28);
-            this.button13.TabIndex = 15;
-            this.button13.Text = "歸零";
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // button14
-            // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(60, 21);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(48, 28);
-            this.button14.TabIndex = 14;
-            this.button14.Text = "暫停";
-            this.button14.UseVisualStyleBackColor = true;
-            // 
-            // button15
-            // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(6, 21);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(48, 28);
-            this.button15.TabIndex = 13;
-            this.button15.Text = "開始";
-            this.button15.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // numericUpDown4
             // 
             this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown4.Location = new System.Drawing.Point(6, 55);
+            this.numericUpDown4.Location = new System.Drawing.Point(25, 21);
             this.numericUpDown4.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});
@@ -373,9 +350,9 @@
             // numericUpDown5
             // 
             this.numericUpDown5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown5.Location = new System.Drawing.Point(72, 55);
+            this.numericUpDown5.Location = new System.Drawing.Point(91, 21);
             this.numericUpDown5.Maximum = new decimal(new int[] {
-            60,
+            59,
             0,
             0,
             0});
@@ -389,12 +366,23 @@
             0,
             0});
             // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Location = new System.Drawing.Point(38, 63);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(60, 30);
+            this.button15.TabIndex = 13;
+            this.button15.Text = "開始";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // numericUpDown6
             // 
             this.numericUpDown6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown6.Location = new System.Drawing.Point(138, 56);
+            this.numericUpDown6.Location = new System.Drawing.Point(157, 22);
             this.numericUpDown6.Maximum = new decimal(new int[] {
-            60,
+            59,
             0,
             0,
             0});
@@ -430,6 +418,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lb_ww);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -462,6 +451,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.lb_alarm_target);
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -469,6 +459,17 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "鬧鐘";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lb_alarm_target
+            // 
+            this.lb_alarm_target.AutoSize = true;
+            this.lb_alarm_target.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_alarm_target.ForeColor = System.Drawing.Color.Red;
+            this.lb_alarm_target.Location = new System.Drawing.Point(14, 16);
+            this.lb_alarm_target.Name = "lb_alarm_target";
+            this.lb_alarm_target.Size = new System.Drawing.Size(135, 21);
+            this.lb_alarm_target.TabIndex = 26;
+            this.lb_alarm_target.Text = "lb_alarm_target";
             // 
             // tabPage5
             // 
@@ -531,6 +532,72 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // lb_ww
+            // 
+            this.lb_ww.BackColor = System.Drawing.Color.White;
+            this.lb_ww.Controls.Add(this.lb_yy);
+            this.lb_ww.Controls.Add(this.lb_weekday);
+            this.lb_ww.Controls.Add(this.lb_dd2);
+            this.lb_ww.Controls.Add(this.lb_mm2);
+            this.lb_ww.Controls.Add(this.lb_dd1);
+            this.lb_ww.Controls.Add(this.lb_mm1);
+            this.lb_ww.Location = new System.Drawing.Point(29, 19);
+            this.lb_ww.Name = "lb_ww";
+            this.lb_ww.Size = new System.Drawing.Size(175, 135);
+            this.lb_ww.TabIndex = 27;
+            // 
+            // lb_mm1
+            // 
+            this.lb_mm1.AutoSize = true;
+            this.lb_mm1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_mm1.Location = new System.Drawing.Point(127, 43);
+            this.lb_mm1.Name = "lb_mm1";
+            this.lb_mm1.Size = new System.Drawing.Size(45, 24);
+            this.lb_mm1.TabIndex = 27;
+            this.lb_mm1.Text = "1月";
+            // 
+            // lb_dd1
+            // 
+            this.lb_dd1.AutoSize = true;
+            this.lb_dd1.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dd1.ForeColor = System.Drawing.Color.Red;
+            this.lb_dd1.Location = new System.Drawing.Point(65, 32);
+            this.lb_dd1.Name = "lb_dd1";
+            this.lb_dd1.Size = new System.Drawing.Size(43, 48);
+            this.lb_dd1.TabIndex = 28;
+            this.lb_dd1.Text = "1";
+            // 
+            // lb_mm2
+            // 
+            this.lb_mm2.AutoSize = true;
+            this.lb_mm2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_mm2.Location = new System.Drawing.Point(6, 25);
+            this.lb_mm2.Name = "lb_mm2";
+            this.lb_mm2.Size = new System.Drawing.Size(45, 24);
+            this.lb_mm2.TabIndex = 29;
+            this.lb_mm2.Text = "1月";
+            // 
+            // lb_dd2
+            // 
+            this.lb_dd2.AutoSize = true;
+            this.lb_dd2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dd2.ForeColor = System.Drawing.Color.Red;
+            this.lb_dd2.Location = new System.Drawing.Point(15, 59);
+            this.lb_dd2.Name = "lb_dd2";
+            this.lb_dd2.Size = new System.Drawing.Size(21, 24);
+            this.lb_dd2.TabIndex = 30;
+            this.lb_dd2.Text = "1";
+            // 
+            // lb_weekday
+            // 
+            this.lb_weekday.AutoSize = true;
+            this.lb_weekday.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_weekday.Location = new System.Drawing.Point(49, 99);
+            this.lb_weekday.Name = "lb_weekday";
+            this.lb_weekday.Size = new System.Drawing.Size(82, 24);
+            this.lb_weekday.TabIndex = 31;
+            this.lb_weekday.Text = "星期一";
+            // 
             // digitalDisplayControl1
             // 
             this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
@@ -541,6 +608,16 @@
             this.digitalDisplayControl1.Name = "digitalDisplayControl1";
             this.digitalDisplayControl1.Size = new System.Drawing.Size(429, 99);
             this.digitalDisplayControl1.TabIndex = 0;
+            // 
+            // lb_yy
+            // 
+            this.lb_yy.AutoSize = true;
+            this.lb_yy.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_yy.Location = new System.Drawing.Point(119, 13);
+            this.lb_yy.Name = "lb_yy";
+            this.lb_yy.Size = new System.Drawing.Size(54, 24);
+            this.lb_yy.TabIndex = 26;
+            this.lb_yy.Text = "2019";
             // 
             // Form1
             // 
@@ -574,12 +651,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.lb_ww.ResumeLayout(false);
+            this.lb_ww.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -603,8 +684,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.NumericUpDown numericUpDown5;
@@ -627,6 +706,14 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label lb_alarm_target;
+        private System.Windows.Forms.Panel lb_ww;
+        private System.Windows.Forms.Label lb_dd2;
+        private System.Windows.Forms.Label lb_mm2;
+        private System.Windows.Forms.Label lb_dd1;
+        private System.Windows.Forms.Label lb_mm1;
+        private System.Windows.Forms.Label lb_weekday;
+        private System.Windows.Forms.Label lb_yy;
     }
 }
 

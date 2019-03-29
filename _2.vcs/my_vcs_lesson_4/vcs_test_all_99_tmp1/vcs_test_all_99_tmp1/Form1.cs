@@ -24,23 +24,6 @@ namespace vcs_test_all_99_tmp1
             toolTip1.SetToolTip(button26, "顯示提示訊息");
         }
 
-        //C# 使用 Stopwatch 测量代码运行时间
-        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "ST\n";
-            sw.Start();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            sw.Stop();
-            richTextBox1.Text += "SP\n";
-            richTextBox1.Text += "Elapsed milliseconds: " + sw.ElapsedMilliseconds.ToString() + "\n";
-            richTextBox1.Text += "Elapsed time: " + sw.Elapsed.ToString() + "\n";
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             int j = 0;
@@ -58,28 +41,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "開始計時\n";
-            // Create stopwatch
-            Stopwatch stopwatch = new Stopwatch();
-            // Begin timing
-            stopwatch.Start();
-
-            // Do something
-            Application.DoEvents();         //執行某一事件，以達到延遲效果。
-            for (int j = 0; j < 123; j++)
-                System.Threading.Thread.Sleep(1);
-
-            // Stop timing
-            stopwatch.Stop();
-
-            // Write result
-            richTextBox1.Text += "停止計時\n";
-            richTextBox1.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
 
         }
 
@@ -456,24 +417,6 @@ namespace vcs_test_all_99_tmp1
             this.Text = "Mouse Down：" + e.X + " : " + e.Y;
         }
 
-        DateTime LoginTime;
-        DateTime LogoffTime;
-        TimeSpan StayTime = new TimeSpan();
-        private void button10_Click_1(object sender, EventArgs e)
-        {
-            LoginTime = DateTime.Now; //取得目前登入的時間
-            richTextBox1.Text +="登入時間： " + LoginTime + "\n";
-
-        }
-
-        private void button9_Click_1(object sender, EventArgs e)
-        {
-            LogoffTime = DateTime.Now;
-            richTextBox1.Text += "登入時間： " + LogoffTime + "\n";
-            StayTime = LogoffTime.Subtract(LoginTime);
-            richTextBox1.Text += "您在此停留了" + StayTime.Hours + "小時" + StayTime.Minutes + "分鐘" + StayTime.Seconds + "秒\n";
-        }
-
         private void button34_Click_1(object sender, EventArgs e)
         {
 
@@ -665,6 +608,7 @@ namespace vcs_test_all_99_tmp1
             if (t.TotalMilliseconds <= 200) //如果小於200豪秒就全選
                 richTextBox1.SelectAll();
         }
+
 
     }
 }
