@@ -1,6 +1,88 @@
 
 
 
+vs2010ªºc#§ä¤£¨ìCalendar±±¥ó
+
+
+
+
+
+2011/5/8(SUN)
+2011/5/8(¤é) 20:28 µÛ«H
+
+
+string»PString¦³¦ó¤£¦P¡H
+
+
+
+vcs§ì¿Ã¹õµe­±¡A¦p¦ó°Ï¤À¥ş¿Ã¹õ©Mactiveµe­±¡H
+
+
+bmp.Save(@"D:\ssss.jpg");
+
+
+vcs_WMP
+richTextBox1.Text += " ºq¦±¦W†ï¡G" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
+
+mute & un-mute
+        private void pictureBox7_Click(object sender, EventArgs e)//“C­µ
+        {
+            if (MM)
+            {
+                pictureBox7.Image = (Image)Properties.Resources.­µ¶q«ö…r@¦â;
+                axWindowsMediaPlayer1.settings.mute = true;
+                MM = false;
+            }
+            else
+            {
+                pictureBox7.Image = (Image)Properties.Resources.­µ¶q«ö…r;
+                axWindowsMediaPlayer1.settings.mute = false;
+                MM = true;
+            }
+        }
+
+
+°Ñ¦Ò
+063_¨Ï¥ÎC#¾Ş§@INI¤å¥ó
+µ¹vcs_WMP ³]©w±`¥Îªºmp3¸ê®Æ§¨
+
+vcs_WMP­n§ï¦¨¥i¥H¦h¿ïÀÉ®×  ©Î¿ï¾ã­Ó©Î¦h­Ó¸ê®Æ§¨ ¤@°_¼½©ñ
+
+
+
+
+
+C# ¦p¦ó¨ú±o¨â­Ó DateTime ¤é´Á¤§¶¡ªº¤Ñ¼Æ
+
+¨ú±o¨â­Ó¤é´Á¤§¶¡ªº¡u¤Ñ¼Æ¡v¡]¤£¨¬¤@¤ÑªÌ±Ä¡uµL±ø¥ó§R¥hªk¡v¡^ 
+
+    new TimeSpan(date1.Ticks - date2.Ticks).Days
+
+¨ú±o¨â­Ó¤é´Á¤§¶¡ªº¡u¤Ñ¼Æ¡v¡]¦^¶Ç«¬§O¬° double Âùºë½T«×¡^
+
+    new TimeSpan(date1.Ticks - date2.Ticks).TotalDays
+
+¨ú±o¨â­Ó¤é´Á¤§¶¡ªº¡u¤p®É¼Æ¡v¡]¦^¶Ç«¬§O¬° double Âùºë½T«×¡^
+
+    new TimeSpan(date1.Ticks - date2.Ticks).TotalHours
+
+¨ú±o¨â­Ó¤é´Á¤§¶¡ªº¡u¤ÀÄÁ¼Æ¡v¡]¦^¶Ç«¬§O¬° double Âùºë½T«×¡^ 
+
+    new TimeSpan(date1.Ticks - date2.Ticks).TotalMinutes
+
+
+
+
+DateTime date1 = new DateTime(2008, 12,31, 23,59,59, DateTimeKind.Local);
+DateTime date2 = new DateTime(2003, 2,13, 23,59,59, DateTimeKind.Local);
+TimeSpan s = new TimeSpan(date1.Ticks - date2.Ticks);    
+
+
+
+
+
+
+
 ID3®æ¦¡
 
 

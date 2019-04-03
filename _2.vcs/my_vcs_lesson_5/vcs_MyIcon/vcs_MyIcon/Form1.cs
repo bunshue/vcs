@@ -747,5 +747,73 @@ namespace vcs_MyIcon
             pictureBox1.Image = bitmap1;
 
         }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            int i;
+            int j;
+            int W = 640;
+            int H = 480;
+
+            int width;
+            int height;
+
+            Pen p1;
+            Pen p2;
+
+            width = W;
+            height = H;
+
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);
+
+            p1 = new Pen(Color.Black, 1);
+            p2 = new Pen(Color.Pink, 1);
+
+            // Draw transparency required on layer 1
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    if ((j > (1.5 * (H >> 3) - 1)) && (j < (H - 1.5 * (H >> 3))))
+                    {
+                        g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點
+                    }
+                    else
+                    {
+
+                        if (j < 1.5 * (H >> 3))
+                        { // Top lines
+                            if ((i < (1.5 * (H >> 3) - j)) || (i > ((W - 1.5 * (H >> 3)) - 1 + j)))
+                            {
+                                g.DrawEllipse(p1, i, j, 1, 1); //繪製黑色圓點
+                            }
+                            else
+                            {
+                                g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點
+                            }
+                        }
+                        else
+                        { // Bottom lines
+                            if ((i < (j + 1.5 * (H >> 3) - H)) || i > ((W - (1.5 * (H >> 3) - (H - j))) - 1))
+                            {
+                                g.DrawEllipse(p1, i, j, 1, 1); //繪製黑色圓點
+                            }
+                            else
+                            {
+                                g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+
+            pictureBox1.Image = bitmap1;
+
+        }
     }
 }

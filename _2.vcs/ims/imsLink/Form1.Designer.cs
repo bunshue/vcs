@@ -73,6 +73,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button64 = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.lb_warning = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
             this.tb_fix_length = new System.Windows.Forms.TextBox();
@@ -117,6 +118,9 @@
             this.tb_info_a = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.USB = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.button27 = new System.Windows.Forms.Button();
@@ -168,9 +172,6 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.scanner_timer = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.USB = new System.Windows.Forms.TabPage();
-            this.button12 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -181,6 +182,8 @@
             this.groupBox10.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -188,8 +191,6 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            this.USB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -602,6 +603,7 @@
             // Serial
             // 
             this.Serial.BackColor = System.Drawing.SystemColors.Control;
+            this.Serial.Controls.Add(this.label1);
             this.Serial.Controls.Add(this.panel1);
             this.Serial.Controls.Add(this.groupBox11);
             this.Serial.Controls.Add(this.groupBox10);
@@ -683,6 +685,15 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Serial";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(42, 475);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 23);
+            this.label1.TabIndex = 65;
+            // 
             // lb_warning
             // 
             this.lb_warning.AutoSize = true;
@@ -734,7 +745,7 @@
             this.tb_sn3.Name = "tb_sn3";
             this.tb_sn3.Size = new System.Drawing.Size(490, 32);
             this.tb_sn3.TabIndex = 59;
-            this.tb_sn3.Text = "2019-0225-1234-5678-ABCD-DCBA-AABB-CCDD";
+            this.tb_sn3.Text = "2019-0402-1234-5678-ABCD-DCBA-AABB-CCDD";
             this.tb_sn3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lb_sn3
@@ -1152,6 +1163,35 @@
             this.button5.Text = "清除";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // USB
+            // 
+            this.USB.Controls.Add(this.pictureBox1);
+            this.USB.Controls.Add(this.button12);
+            this.USB.Location = new System.Drawing.Point(4, 26);
+            this.USB.Name = "USB";
+            this.USB.Size = new System.Drawing.Size(940, 586);
+            this.USB.TabIndex = 22;
+            this.USB.Text = "USB";
+            this.USB.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(44, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(788, 60);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 0;
+            this.button12.Text = "Start";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
             // tabPage2
             // 
@@ -1680,35 +1720,6 @@
             this.timer3.Enabled = true;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // USB
-            // 
-            this.USB.Controls.Add(this.pictureBox1);
-            this.USB.Controls.Add(this.button12);
-            this.USB.Location = new System.Drawing.Point(4, 26);
-            this.USB.Name = "USB";
-            this.USB.Size = new System.Drawing.Size(940, 586);
-            this.USB.TabIndex = 22;
-            this.USB.Text = "USB";
-            this.USB.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(788, 60);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
-            this.button12.TabIndex = 0;
-            this.button12.Text = "Start";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click_1);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(44, 60);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1746,6 +1757,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.Serial.ResumeLayout(false);
+            this.Serial.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -1753,6 +1765,8 @@
             this.tabPage5.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.USB.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
@@ -1764,8 +1778,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.USB.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1914,6 +1926,7 @@
         private System.Windows.Forms.TabPage USB;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label1;
     }
 }
 

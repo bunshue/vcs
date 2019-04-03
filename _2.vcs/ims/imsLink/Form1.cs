@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;                //for file read/write
 using System.IO.Ports;          //for serial ports
-using System.Diagnostics;       //for Process
+using System.Diagnostics;       //for Process, Stopwatch
 
 using AForge.Video;
 using AForge.Video.DirectShow;
@@ -46,6 +46,7 @@ namespace imsLink
         byte zz;
         int flag_command_fail = 0;
         int flag_write_serial_to_camera = 0;
+        int flag_write_serial_to_camera_old = 0;
         int flag_wait_receive_data = 0;
         int flag_receive_camera_serial = 0;
         int flag_receive_camera_flash_data = 0;
@@ -58,6 +59,8 @@ namespace imsLink
 		int g_conn_status = CAMERA_UNKNOWN;
         int[] camera_serial_data = new int[16];
         byte[] sn_data_send2 = new byte[16];
+
+        Stopwatch stopwatch = new Stopwatch();
 
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -453,6 +456,22 @@ namespace imsLink
 
         private void SerialPortTimer100ms_Tick(object sender, EventArgs e)
         {
+            if ((flag_write_serial_to_camera == 1) && (flag_write_serial_to_camera_old == 0))
+            {
+                label1.Text = "ST ";
+                richTextBox1.Text += "ST: " + DateTime.Now.ToString() + "\n";
+                flag_write_serial_to_camera_old = flag_write_serial_to_camera;
+            }
+            else if ((flag_write_serial_to_camera == 0) && (flag_write_serial_to_camera_old == 1))
+            {
+                label1.Text += " SP " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
+                richTextBox1.Text += "SP: " + DateTime.Now.ToString() + "\n";
+                flag_write_serial_to_camera_old = flag_write_serial_to_camera;
+            }
+
+
+
+
             if (serialPort1.IsOpen)
             {
                 //計算serialPort1中有多少位元組 
@@ -516,6 +535,7 @@ namespace imsLink
                                     }
                                     if (flag_same_serial == 1)
                                     {
+                                        label1.Text += "完成";
                                         richTextBox1.Text += "驗證完成, 序號相同\n";
                                         lb_sn3.Text = "驗證完成, 序號相同  ";
                                         tb_result.Text = "OK";
@@ -532,6 +552,10 @@ namespace imsLink
                                         groupBox10.BackColor = Color.Pink;
                                     }
                                     flag_write_serial_to_camera = 0;    //寫序號完成
+
+                                    // Stop timing
+                                    stopwatch.Stop();
+                                    richTextBox1.Text += "燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
                                 }
                             }
                             else if (flag_receive_camera_flash_data == 1)
@@ -1856,6 +1880,10 @@ namespace imsLink
                     tb_result.ForeColor = Color.White;
                     tb_result.BackColor = Color.Gray;
 
+                    //開始計時
+                    stopwatch.Reset();
+                    stopwatch.Start();
+
                     lb_sn1.Text = "序號 : " + tb_sn2.Text + "       len = " + tb_sn2.Text.Length.ToString() + ",   寫入資料中.......";
 
                     //tb_sn2.Text = "0011-2233-4455-6677-8899-aabb-ccdd-eeff";
@@ -1979,16 +2007,24 @@ namespace imsLink
                 cnt2++;
                 if (cnt2 == 6)
                 {
+                    label1.Text += "讀" + cnt2.ToString();
+
+                    richTextBox1.Text += "驗證開始時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+
+
                     tb_sn2.Clear();
                     lb_sn2.Text = "驗證中";
-                    richTextBox1.Text += "讀相機序號回來\n";
+                    richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString() + "\n";
                     //flag_verify_serial_data = 1;
                     Get_IMS_Data(0, 0xAA, 0xAA);
                 }
                 else if (cnt2 == 9)
                 {
                     cnt2 = 0;
+                    label1.Text += "y" + cnt2.ToString();
                 }
+                else
+                    label1.Text += "z" + cnt2.ToString();
             }
         }
 
