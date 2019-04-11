@@ -103,6 +103,16 @@ namespace imsLink.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap play_pause {
+            get {
+                object obj = ResourceManager.GetObject("play_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap recorder_fail {
             get {
                 object obj = ResourceManager.GetObject("recorder_fail", resourceCulture);
@@ -126,6 +136,16 @@ namespace imsLink.Properties {
         internal static System.Drawing.Bitmap recorder_ok {
             get {
                 object obj = ResourceManager.GetObject("recorder_ok", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh {
+            get {
+                object obj = ResourceManager.GetObject("refresh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -778,7 +778,7 @@ namespace vcs_MyIcon
                 {
                     if ((j > (1.5 * (H >> 3) - 1)) && (j < (H - 1.5 * (H >> 3))))
                     {
-                        g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點
+                        g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點 中段
                     }
                     else
                     {
@@ -787,22 +787,22 @@ namespace vcs_MyIcon
                         { // Top lines
                             if ((i < (1.5 * (H >> 3) - j)) || (i > ((W - 1.5 * (H >> 3)) - 1 + j)))
                             {
-                                g.DrawEllipse(p1, i, j, 1, 1); //繪製黑色圓點
+                                g.DrawEllipse(p1, i, j, 1, 1); //繪製黑色圓點 上段的左右
                             }
                             else
                             {
-                                g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點
+                                g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點 上段的中間
                             }
                         }
                         else
                         { // Bottom lines
                             if ((i < (j + 1.5 * (H >> 3) - H)) || i > ((W - (1.5 * (H >> 3) - (H - j))) - 1))
                             {
-                                g.DrawEllipse(p1, i, j, 1, 1); //繪製黑色圓點
+                                g.DrawEllipse(p1, i, j, 1, 1); //繪製黑色圓點 下段的左右
                             }
                             else
                             {
-                                g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點
+                                g.DrawEllipse(p2, i, j, 1, 1); //繪製粉紅色圓點 下段的中間
                             }
                         }
                     }

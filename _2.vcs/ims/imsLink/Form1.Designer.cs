@@ -59,21 +59,23 @@
             this.button119 = new System.Windows.Forms.Button();
             this.button118 = new System.Windows.Forms.Button();
             this.button117 = new System.Windows.Forms.Button();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label62 = new System.Windows.Forms.Label();
             this.button125 = new System.Windows.Forms.Button();
             this.button126 = new System.Windows.Forms.Button();
             this.button127 = new System.Windows.Forms.Button();
             this.button128 = new System.Windows.Forms.Button();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.Serial = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.lb_mesg3 = new System.Windows.Forms.Label();
+            this.lb_mesg2 = new System.Windows.Forms.Label();
+            this.lb_mesg = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button64 = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.lb_warning = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
             this.tb_fix_length = new System.Windows.Forms.TextBox();
@@ -90,7 +92,6 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.lb_a = new System.Windows.Forms.Label();
             this.tb_info_f2 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
@@ -119,7 +120,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.USB = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button12 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -154,15 +154,11 @@
             this.label58 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
-            this.button33 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
-            this.button72 = new System.Windows.Forms.Button();
-            this.button73 = new System.Windows.Forms.Button();
             this.button74 = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.button70 = new System.Windows.Forms.Button();
@@ -172,25 +168,36 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.scanner_timer = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
+            this.button15 = new System.Windows.Forms.Button();
+            this.button73 = new System.Windows.Forms.Button();
+            this.button72 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.Serial.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.USB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -530,16 +537,6 @@
             this.button117.UseVisualStyleBackColor = true;
             this.button117.Click += new System.EventHandler(this.button117_Click);
             // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(19, 15);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(760, 196);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 0;
-            this.pictureBox7.TabStop = false;
-            // 
             // label62
             // 
             this.label62.AutoSize = true;
@@ -590,37 +587,84 @@
             this.button128.UseVisualStyleBackColor = true;
             this.button128.Click += new System.EventHandler(this.button128_Click);
             // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(20, 217);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(760, 196);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox9.TabIndex = 43;
-            this.pictureBox9.TabStop = false;
-            // 
             // Serial
             // 
             this.Serial.BackColor = System.Drawing.SystemColors.Control;
+            this.Serial.Controls.Add(this.button14);
+            this.Serial.Controls.Add(this.button13);
+            this.Serial.Controls.Add(this.lb_mesg3);
+            this.Serial.Controls.Add(this.lb_mesg2);
+            this.Serial.Controls.Add(this.lb_mesg);
             this.Serial.Controls.Add(this.label1);
-            this.Serial.Controls.Add(this.panel1);
             this.Serial.Controls.Add(this.groupBox11);
             this.Serial.Controls.Add(this.groupBox10);
+            this.Serial.Controls.Add(this.panel1);
             this.Serial.Location = new System.Drawing.Point(4, 26);
             this.Serial.Name = "Serial";
             this.Serial.Size = new System.Drawing.Size(940, 586);
             this.Serial.TabIndex = 13;
             this.Serial.Text = "Serial";
             // 
-            // panel1
+            // button14
             // 
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(648, 497);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(293, 77);
-            this.panel1.TabIndex = 64;
+            this.button14.BackColor = System.Drawing.Color.Green;
+            this.button14.Location = new System.Drawing.Point(587, 535);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(70, 35);
+            this.button14.TabIndex = 68;
+            this.button14.Text = "Test ST";
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(587, 485);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(70, 35);
+            this.button13.TabIndex = 65;
+            this.button13.Text = "Start";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // lb_mesg3
+            // 
+            this.lb_mesg3.AutoSize = true;
+            this.lb_mesg3.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_mesg3.Location = new System.Drawing.Point(446, 497);
+            this.lb_mesg3.Name = "lb_mesg3";
+            this.lb_mesg3.Size = new System.Drawing.Size(49, 23);
+            this.lb_mesg3.TabIndex = 67;
+            this.lb_mesg3.Text = "mesg";
+            // 
+            // lb_mesg2
+            // 
+            this.lb_mesg2.AutoSize = true;
+            this.lb_mesg2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_mesg2.Location = new System.Drawing.Point(446, 538);
+            this.lb_mesg2.Name = "lb_mesg2";
+            this.lb_mesg2.Size = new System.Drawing.Size(49, 23);
+            this.lb_mesg2.TabIndex = 66;
+            this.lb_mesg2.Text = "mesg";
+            // 
+            // lb_mesg
+            // 
+            this.lb_mesg.AutoSize = true;
+            this.lb_mesg.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_mesg.Location = new System.Drawing.Point(42, 538);
+            this.lb_mesg.Name = "lb_mesg";
+            this.lb_mesg.Size = new System.Drawing.Size(49, 23);
+            this.lb_mesg.TabIndex = 65;
+            this.lb_mesg.Text = "mesg";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(42, 497);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 23);
+            this.label1.TabIndex = 65;
+            this.label1.Text = "mesg";
             // 
             // groupBox11
             // 
@@ -684,15 +728,6 @@
             this.groupBox10.TabIndex = 59;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Serial";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(42, 475);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 23);
-            this.label1.TabIndex = 65;
             // 
             // lb_warning
             // 
@@ -885,15 +920,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(80, 80);
             this.panel3.TabIndex = 79;
-            // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel2.Location = new System.Drawing.Point(764, 468);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(132, 62);
-            this.panel2.TabIndex = 65;
             // 
             // lb_a
             // 
@@ -1166,6 +1192,7 @@
             // 
             // USB
             // 
+            this.USB.Controls.Add(this.button15);
             this.USB.Controls.Add(this.pictureBox1);
             this.USB.Controls.Add(this.button12);
             this.USB.Location = new System.Drawing.Point(4, 26);
@@ -1175,21 +1202,13 @@
             this.USB.Text = "USB";
             this.USB.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(44, 60);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // button12
             // 
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button12.Location = new System.Drawing.Point(788, 60);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.Size = new System.Drawing.Size(60, 60);
             this.button12.TabIndex = 0;
-            this.button12.Text = "Start";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
@@ -1573,17 +1592,6 @@
             this.label60.TabIndex = 9;
             this.label60.Text = "電話:   (03) 5631166";
             // 
-            // pictureBox8
-            // 
-            this.pictureBox8.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.ErrorImage")));
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(61, 18);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(720, 480);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 7;
-            this.pictureBox8.TabStop = false;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1605,19 +1613,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button33
-            // 
-            this.button33.BackgroundImage = global::imsLink.Properties.Resources.open_log;
-            this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button33.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button33.ForeColor = System.Drawing.Color.Green;
-            this.button33.Location = new System.Drawing.Point(922, 4);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(30, 58);
-            this.button33.TabIndex = 28;
-            this.button33.UseVisualStyleBackColor = true;
-            this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
             // button34
             // 
             this.button34.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -1629,32 +1624,6 @@
             this.button34.Text = "font";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
-            // 
-            // button72
-            // 
-            this.button72.BackgroundImage = global::imsLink.Properties.Resources.save;
-            this.button72.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button72.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button72.ForeColor = System.Drawing.Color.Black;
-            this.button72.Location = new System.Drawing.Point(960, 19);
-            this.button72.Name = "button72";
-            this.button72.Size = new System.Drawing.Size(40, 40);
-            this.button72.TabIndex = 32;
-            this.button72.UseVisualStyleBackColor = true;
-            this.button72.Click += new System.EventHandler(this.button72_Click);
-            // 
-            // button73
-            // 
-            this.button73.BackgroundImage = global::imsLink.Properties.Resources.folder_open;
-            this.button73.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button73.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button73.ForeColor = System.Drawing.Color.Black;
-            this.button73.Location = new System.Drawing.Point(1006, 19);
-            this.button73.Name = "button73";
-            this.button73.Size = new System.Drawing.Size(40, 40);
-            this.button73.TabIndex = 33;
-            this.button73.UseVisualStyleBackColor = true;
-            this.button73.Click += new System.EventHandler(this.button73_Click);
             // 
             // button74
             // 
@@ -1720,6 +1689,117 @@
             this.timer3.Enabled = true;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // timer4
+            // 
+            this.timer4.Interval = 8000;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
+            // 
+            // button15
+            // 
+            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button15.Location = new System.Drawing.Point(788, 147);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(60, 60);
+            this.button15.TabIndex = 2;
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button73
+            // 
+            this.button73.BackgroundImage = global::imsLink.Properties.Resources.folder_open;
+            this.button73.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button73.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button73.ForeColor = System.Drawing.Color.Black;
+            this.button73.Location = new System.Drawing.Point(1006, 19);
+            this.button73.Name = "button73";
+            this.button73.Size = new System.Drawing.Size(40, 40);
+            this.button73.TabIndex = 33;
+            this.button73.UseVisualStyleBackColor = true;
+            this.button73.Click += new System.EventHandler(this.button73_Click);
+            // 
+            // button72
+            // 
+            this.button72.BackgroundImage = global::imsLink.Properties.Resources.save;
+            this.button72.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button72.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button72.ForeColor = System.Drawing.Color.Black;
+            this.button72.Location = new System.Drawing.Point(960, 19);
+            this.button72.Name = "button72";
+            this.button72.Size = new System.Drawing.Size(40, 40);
+            this.button72.TabIndex = 32;
+            this.button72.UseVisualStyleBackColor = true;
+            this.button72.Click += new System.EventHandler(this.button72_Click);
+            // 
+            // button33
+            // 
+            this.button33.BackgroundImage = global::imsLink.Properties.Resources.open_log;
+            this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button33.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button33.ForeColor = System.Drawing.Color.Green;
+            this.button33.Location = new System.Drawing.Point(922, 4);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(30, 58);
+            this.button33.TabIndex = 28;
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(19, 15);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(760, 196);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 0;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(20, 217);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(760, 196);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 43;
+            this.pictureBox9.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Location = new System.Drawing.Point(675, 497);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 77);
+            this.panel1.TabIndex = 64;
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel2.Location = new System.Drawing.Point(764, 468);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(132, 62);
+            this.panel2.TabIndex = 65;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(44, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.ErrorImage")));
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(61, 18);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(720, 480);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 7;
+            this.pictureBox8.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1754,8 +1834,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.Serial.ResumeLayout(false);
             this.Serial.PerformLayout();
             this.groupBox11.ResumeLayout(false);
@@ -1766,7 +1844,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.USB.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
@@ -1775,9 +1852,12 @@
             this.groupBox8.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1927,6 +2007,13 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.Label lb_mesg;
+        private System.Windows.Forms.Label lb_mesg2;
+        private System.Windows.Forms.Label lb_mesg3;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
     }
 }
 
