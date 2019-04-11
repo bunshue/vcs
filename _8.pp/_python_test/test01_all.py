@@ -49,7 +49,7 @@ a = 0;
 while a < 5:
     a += 1;
     print("hello")
-    time.sleep(1)
+    time.sleep(0.5)
 
 
 number = int(input("Please input a number : "))
