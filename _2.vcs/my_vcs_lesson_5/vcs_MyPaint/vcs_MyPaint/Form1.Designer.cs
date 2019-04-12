@@ -48,6 +48,7 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button16 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -266,11 +267,23 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "label1";
             // 
+            // button16
+            // 
+            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Location = new System.Drawing.Point(1012, 108);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(102, 42);
+            this.button16.TabIndex = 22;
+            this.button16.Text = "顏色名稱";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 706);
+            this.ClientSize = new System.Drawing.Size(1125, 706);
+            this.Controls.Add(this.button16);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
@@ -325,6 +338,7 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button16;
     }
 }
 
