@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;                //for file read/write
 using System.IO.Ports;          //for serial ports
 using System.Diagnostics;       //for Process, Stopwatch
+using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;
 using AForge.Video.DirectShow;
@@ -1019,24 +1020,29 @@ namespace imsLink
 
             button12.BackgroundImage = imsLink.Properties.Resources.refresh;
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
+            button17.BackgroundImage = imsLink.Properties.Resources.plus;
+            button18.BackgroundImage = imsLink.Properties.Resources.minus;
+
+            button19.Visible = false;       //還未完成
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
-                button12.Enabled = false;
+                //button12.Enabled = false;
                 Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
                 Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+
                 Cam.Start();   // WebCam starts capturing images.
                 flag_camera_start = 1;
                 richTextBox1.Text += "有影像裝置\n";
             }
             else
             {
-                button12.Enabled = true;
+                //button12.Enabled = true;
                 flag_camera_start = 0;
                 richTextBox1.Text += "無影像裝置\n";
             }
-
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2247,9 +2253,9 @@ namespace imsLink
         //int camera_start = 0;
         private void button12_Click_1(object sender, EventArgs e)
         {
-            if (flag_camera_start == 1)
+            if ((flag_camera_start == 1) && (Cam.IsRunning == true))
             {
-                richTextBox1.Text += "USB影像傳輸中";
+                richTextBox1.Text += "USB影像傳輸中\n";
             }
             else
             {
@@ -2257,7 +2263,7 @@ namespace imsLink
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
                 if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
                 {
-                    button12.Enabled = false;
+                    //button12.Enabled = false;
                     Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
                     Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
                     Cam.Start();   // WebCam starts capturing images.
@@ -2266,7 +2272,7 @@ namespace imsLink
                 }
                 else
                 {
-                    button12.Enabled = true;
+                    //button12.Enabled = true;
                     flag_camera_start = 0;
                     richTextBox1.Text += "無影像裝置\n";
                 }
@@ -2420,15 +2426,71 @@ namespace imsLink
                 {
                     Cam.Stop();
                     flag_camera_is_stopped = 1;
+                    richTextBox1.Text += "停止\n";
                 }
                 else
                 {
                     Cam.Start();
                     flag_camera_is_stopped = 0;
+                    richTextBox1.Text += "繼續\n";
                 }
             }
             
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                String file = "ims_picture_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file1 = file + ".jpg";
+                String file2 = file + ".bmp";
+                String file3 = file + ".png";
+
+                bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(@file2, ImageFormat.Bmp);
+                bitmap1.Save(@file3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + file2 + "\n";
+                richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+
+        }
+
+        int step = 20;
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Size.Width < 820)
+            {
+                pictureBox1.Size = new Size(pictureBox1.Size.Width + step, pictureBox1.Size.Height + step * 3 / 4);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Size.Width > 240)
+            {
+                pictureBox1.Size = new Size(pictureBox1.Size.Width - step, pictureBox1.Size.Height - step * 3 / 4);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.TopMost = true;
+
+        }
+
     }
 }
 

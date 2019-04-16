@@ -1,3 +1,28 @@
+
+
+matplotlib
+
+https://medium.com/jameslearningnote/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90-%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%AC%AC2-5%E8%AC%9B-%E8%B3%87%E6%96%99%E8%A6%96%E8%A6%BA%E5%8C%96-matplotlib-seaborn-plotly-75cd353d6d3f
+
+
+
+在Windows下安裝Python套件
+
+windows command line下:
+
+
+>pip list	//查看目前有安裝的Python套件
+
+
+>pip3 install matplotlib	//安裝matplotlib
+>pip3 install pygame		//安裝pygame
+
+
+python -m pip install -U pip
+python -m pip install -U matplotlib
+
+
+
 /**********************************************************
  * Filename	:	python_data.c
  * Description	:	python相關資料與片段程式
