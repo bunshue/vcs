@@ -1,4 +1,8 @@
 
+https://matplotlib.org/gallery/lines_bars_and_markers/simple_plot.html#sphx-glr-gallery-lines-bars-and-markers-simple-plot-py
+
+
+
 ¦³‹×Matplotlibªº¤@¨Ç§Þ¥©
 
 http://www.yeolar.com/note/2011/04/28/matplotlib-tips/

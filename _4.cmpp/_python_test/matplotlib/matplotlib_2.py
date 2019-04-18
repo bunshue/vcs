@@ -1,16 +1,26 @@
-import math
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-#a = np.linspace(0,1,100)
-a = np.linspace(-360,360,100)
-#b = np.exp(-a)
-b = np.sin(2*math.pi*a/360)
-c = np.cos(2*math.pi*a/360)
-d = np.sinc(2*math.pi*a/360)
-plt.plot(a,b)
-plt.plot(a,c)
-plt.plot(a,d)
+
+# Data for plotting
+t = np.arange(-2.0*np.pi, 2.0*np.pi, 0.01)
+a = np.sin(t)
+b = np.cos(t)
+c = np.sinc(t)
+
+fig, ax1 = plt.subplots()
+ax1.plot(t, a)
+
+fig, ax2 = plt.subplots()
+ax2.plot(t, b)
+
+fig, ax3 = plt.subplots()
+ax3.plot(t, c)
+
+#plt.plot(t, a)
+#plt.plot(t, b)
+#plt.plot(t, c)
+
 
 #plt.axis('off') #座標軸關閉
 myfont = matplotlib.font_manager.FontProperties(fname=r'C:/Windows/Fonts/msyh.ttf')
