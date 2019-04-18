@@ -1,1 +1,0 @@
-Visual C# course lesson 1

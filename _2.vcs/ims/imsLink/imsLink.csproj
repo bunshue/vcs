@@ -131,6 +131,9 @@
     <None Include="img\refresh.bmp" />
     <None Include="img\minus.bmp" />
     <None Include="img\plus.bmp" />
+    <None Include="img\power.bmp" />
+    <None Include="img\full_screen.bmp" />
+    <None Include="img\normal_screen.bmp" />
     <Content Include="ims.ico" />
     <None Include="recorder_ok.png" />
     <None Include="recorder_none.png" />

@@ -1022,8 +1022,11 @@ namespace imsLink
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
             button17.BackgroundImage = imsLink.Properties.Resources.plus;
             button18.BackgroundImage = imsLink.Properties.Resources.minus;
+            button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+            button20.BackgroundImage = imsLink.Properties.Resources.power;
 
-            button19.Visible = false;       //還未完成
+            button17.Visible = false;   //no use
+            button18.Visible = false;   //no use
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -1078,6 +1081,16 @@ namespace imsLink
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    richTextBox1.Text += "先關閉camera\n";
+                }
+            }
+            */
         }
 
         bool show_comport_log = SHOW_COMPORT_LOG;
@@ -2444,7 +2457,7 @@ namespace imsLink
 
             if (bitmap1 != null)
             {
-                String file = "ims_picture_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file = "ims_image_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -2460,13 +2473,12 @@ namespace imsLink
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-
         }
 
-        int step = 20;
+        int step = 50;
         private void button17_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Size.Width < 820)
+            if (pictureBox1.Size.Width < 1500)
             {
                 pictureBox1.Size = new Size(pictureBox1.Size.Width + step, pictureBox1.Size.Height + step * 3 / 4);
                 //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -2483,12 +2495,57 @@ namespace imsLink
 
         }
 
+        int flag_fullscreen = 0;
+        //Size tab_size = tabcontrol
         private void button19_Click(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.TopMost = true;
+            if (flag_fullscreen == 0)
+            {
+                flag_fullscreen = 1;
+                button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
+                richTextBox1.Visible = false;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                this.TopMost = true;
+                tabControl1.Size = new Size(1600, 1010);
+                pictureBox1.Location = new Point(170, 15);
+                //pictureBox1.Size = new Size(1120, 840);
+                pictureBox1.Size = new Size(640 * 2, 480 * 2);
+            }
+            else
+            {
+                flag_fullscreen = 0;
+                button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+                richTextBox1.Visible = true;
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+                this.TopMost = false;
+                tabControl1.Size = new Size(948, 616);
+                pictureBox1.Location = new Point(170, 50);
+                pictureBox1.Size = new Size(640, 480);
+            }
 
+
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    richTextBox1.Text += "先關閉camera\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "camera is null\n";
+            }
+
+            richTextBox1.Text += "關閉程式\n";
+            Application.Exit();
         }
 
     }

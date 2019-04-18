@@ -59,6 +59,15 @@
             this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.button35 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,7 +111,7 @@
             // 
             this.button3.BackgroundImage = global::vcs_MyIcon.Properties.Resources.save;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.Location = new System.Drawing.Point(558, 277);
+            this.button3.Location = new System.Drawing.Point(553, 277);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(60, 60);
             this.button3.TabIndex = 4;
@@ -156,7 +165,7 @@
             // button8
             // 
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button8.Location = new System.Drawing.Point(488, 277);
+            this.button8.Location = new System.Drawing.Point(487, 277);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(60, 60);
             this.button8.TabIndex = 9;
@@ -166,7 +175,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(488, 343);
+            this.button9.Location = new System.Drawing.Point(487, 343);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(60, 60);
             this.button9.TabIndex = 10;
@@ -180,7 +189,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(558, 343);
+            this.button10.Location = new System.Drawing.Point(553, 343);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(60, 60);
             this.button10.TabIndex = 11;
@@ -213,7 +222,7 @@
             // button13
             // 
             this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button13.Location = new System.Drawing.Point(673, 343);
+            this.button13.Location = new System.Drawing.Point(619, 481);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(60, 60);
             this.button13.TabIndex = 14;
@@ -268,7 +277,7 @@
             // button18
             // 
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button18.Location = new System.Drawing.Point(673, 277);
+            this.button18.Location = new System.Drawing.Point(619, 415);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(60, 28);
             this.button18.TabIndex = 19;
@@ -279,7 +288,7 @@
             // button19
             // 
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button19.Location = new System.Drawing.Point(673, 309);
+            this.button19.Location = new System.Drawing.Point(619, 447);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(60, 28);
             this.button19.TabIndex = 20;
@@ -345,7 +354,7 @@
             // button25
             // 
             this.button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button25.Location = new System.Drawing.Point(673, 409);
+            this.button25.Location = new System.Drawing.Point(619, 547);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(60, 60);
             this.button25.TabIndex = 26;
@@ -364,11 +373,119 @@
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
+            // button27
+            // 
+            this.button27.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button27.BackgroundImage")));
+            this.button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button27.Location = new System.Drawing.Point(685, 404);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(60, 60);
+            this.button27.TabIndex = 29;
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button28.BackgroundImage")));
+            this.button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button28.Location = new System.Drawing.Point(685, 277);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(60, 60);
+            this.button28.TabIndex = 28;
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button29.BackgroundImage")));
+            this.button29.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button29.Location = new System.Drawing.Point(619, 343);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(60, 60);
+            this.button29.TabIndex = 30;
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button30
+            // 
+            this.button30.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button30.BackgroundImage")));
+            this.button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button30.Location = new System.Drawing.Point(751, 343);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(60, 60);
+            this.button30.TabIndex = 31;
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button31
+            // 
+            this.button31.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button31.BackgroundImage")));
+            this.button31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button31.Location = new System.Drawing.Point(685, 343);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(60, 60);
+            this.button31.TabIndex = 32;
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button32
+            // 
+            this.button32.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button32.BackgroundImage")));
+            this.button32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button32.Location = new System.Drawing.Point(685, 481);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(60, 60);
+            this.button32.TabIndex = 33;
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button33
+            // 
+            this.button33.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button33.BackgroundImage")));
+            this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button33.Location = new System.Drawing.Point(685, 78);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(60, 60);
+            this.button33.TabIndex = 34;
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button34
+            // 
+            this.button34.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button34.BackgroundImage")));
+            this.button34.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button34.Location = new System.Drawing.Point(685, 547);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(60, 60);
+            this.button34.TabIndex = 35;
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // button35
+            // 
+            this.button35.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button35.BackgroundImage")));
+            this.button35.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button35.Location = new System.Drawing.Point(751, 547);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(60, 60);
+            this.button35.TabIndex = 36;
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(829, 631);
+            this.Controls.Add(this.button35);
+            this.Controls.Add(this.button34);
+            this.Controls.Add(this.button33);
+            this.Controls.Add(this.button32);
+            this.Controls.Add(this.button31);
+            this.Controls.Add(this.button30);
+            this.Controls.Add(this.button29);
+            this.Controls.Add(this.button27);
+            this.Controls.Add(this.button28);
             this.Controls.Add(this.button26);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button21);
@@ -436,6 +553,15 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
+        private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button button35;
     }
 }
 
