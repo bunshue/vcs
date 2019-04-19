@@ -15,7 +15,8 @@ fig, ax2 = plt.subplots()
 ax2.plot(t, b)
 
 fig, ax3 = plt.subplots()
-ax3.plot(t, c)
+#ax3.plot(t, c)
+ax3.fill(t, c)
 
 #plt.plot(t, a)
 #plt.plot(t, b)

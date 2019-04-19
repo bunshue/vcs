@@ -1256,5 +1256,196 @@ namespace vcs_MyIcon
 
 
         }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 160;
+            height = 160;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 25);
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+
+            Point pointa;
+            Point pointb;
+
+            pointa = new Point(width * 1 / 4, height * 3 / 16);
+            pointb = new Point(width * 1 / 4, height * 7 / 8);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 1 / 4, height * 3 / 16);
+            pointb = new Point(width * 3 / 4, height * 3 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 1 / 4, height * 8 / 16);
+            pointb = new Point(width * 11 / 16, height * 8 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+
+            pictureBox1.Image = bitmap1;
+
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 160;
+            height = 160;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 25);
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+
+            Point pointa;
+            Point pointb;
+
+            pointa = new Point(width * 3 / 4, height * 3 / 16);
+            pointb = new Point(width * 3 / 4, height * 7 / 8);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 5 / 16, height * 3 / 16);
+            pointb = new Point(width * 3 / 4, height * 3 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 3 / 4, height * 8 / 16);
+            pointb = new Point(width * 5 / 16, height * 8 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+
+            pictureBox1.Image = bitmap1;
+
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 160;
+            height = 160;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 25);
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+
+            Point pointa;
+            Point pointb;
+
+            pointa = new Point(width * 1 / 4, height * 3 / 16);
+            pointb = new Point(width * 1 / 4, height * 7 / 8);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 1 / 4, height * 13 / 16);
+            pointb = new Point(width * 3 / 4, height * 13 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 1 / 4, height * 8 / 16);
+            pointb = new Point(width * 11 / 16, height * 8 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 160;
+            height = 160;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 25);
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+
+            Point pointa;
+            Point pointb;
+
+            pointa = new Point(width * 3 / 4, height * 3 / 16);
+            pointb = new Point(width * 3 / 4, height * 7 / 8 + 3);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 5 / 16, height * 13 / 16);
+            pointb = new Point(width * 3 / 4, height * 13 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 3 / 4, height * 8 / 16);
+            pointb = new Point(width * 5 / 16, height * 8 / 16);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+
+            pictureBox1.Image = bitmap1;
+
+
+        }
     }
 }
