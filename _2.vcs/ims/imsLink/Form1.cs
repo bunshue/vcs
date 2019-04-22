@@ -75,6 +75,7 @@ namespace imsLink
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 
+
         void Write_Log_File(string input)
         {
             log_file_tmp_length += input.Length;
@@ -1032,8 +1033,9 @@ namespace imsLink
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
                 //button12.Enabled = false;
-                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
-                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                Cam.VideoResolution = Cam.VideoCapabilities[0];
+                Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
 
                 Cam.Start();   // WebCam starts capturing images.
                 flag_camera_start = 1;
@@ -1046,6 +1048,7 @@ namespace imsLink
                 richTextBox1.Text += "無影像裝置\n";
             }
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1086,7 +1089,9 @@ namespace imsLink
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
                 {
-                    Cam.Stop();   // WebCam stops capturing images.
+                    //Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
                     richTextBox1.Text += "先關閉camera\n";
                 }
             }
@@ -1921,7 +1926,9 @@ namespace imsLink
                 {
                     if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
                     {
-                        Cam.Stop();   // WebCam stops capturing images.
+                        //Cam.Stop();   // WebCam stops capturing images.
+                        Cam.SignalToStop();
+                        Cam.WaitForStop();
                     }
                 }
                 */
@@ -1930,9 +1937,32 @@ namespace imsLink
             }
         }
 
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+            bm = (Bitmap)eventArgs.Frame.Clone();
+            pictureBox1.Image = bm;
+
+            /*  寫字的功能還不完備
+            IntPtr pHdc;
+            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+            Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            pHdc = g.GetHdc();
+
+            //int xPos = pictureBox1.Image.Width - (pictureBox1.Image.Width - 15);
+            int xPos = 10;
+            int yPos = 10;
+            string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            g.ReleaseHdc();
+            g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+            g.Dispose();
+            */
+
+            GC.Collect();       //回收資源
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -2303,7 +2333,9 @@ namespace imsLink
             {
                 camera_start = 0;
                 button12.Text = "Start";
-                Cam.Stop();  // WebCam stops capturing images.
+                //Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
             }
             */
         }
@@ -2314,7 +2346,9 @@ namespace imsLink
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
                 {
-                    Cam.Stop();   // WebCam stops capturing images.
+                    //Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
                 }
             }
 
@@ -2437,7 +2471,9 @@ namespace imsLink
             {
                 if (flag_camera_is_stopped == 0)
                 {
-                    Cam.Stop();
+                    //Cam.Stop();
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
                     flag_camera_is_stopped = 1;
                     richTextBox1.Text += "停止\n";
                 }
@@ -2457,7 +2493,7 @@ namespace imsLink
 
             if (bitmap1 != null)
             {
-                String file = "ims_image_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -2535,7 +2571,9 @@ namespace imsLink
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
                 {
-                    Cam.Stop();   // WebCam stops capturing images.
+                    //Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
                     richTextBox1.Text += "先關閉camera\n";
                 }
             }

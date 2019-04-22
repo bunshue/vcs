@@ -1,0 +1,1175 @@
+Model {
+  Name			  "CH3_2"
+  Version		  5.0
+  Description		  "高苑科技大學 電機系\n電力電子實驗室"
+  SaveDefaultBlockParams  on
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ExecutionOrder	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Wed Dec 16 10:56:18 1998"
+  Creator		  "徐瑞隆老師"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "ELECTRONIC"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Mar 09 13:25:39 2009"
+  ModelVersionFormat	  "1.%<AutoIncrement:51>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "oneshot"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  off
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  BufferReuse		  on
+  RTWExpressionDepthLimit 5
+  SimulationMode	  "normal"
+  Solver		  "ode15s"
+  SolverMode		  "SingleTasking"
+  StartTime		  "0.0"
+  StopTime		  "3/60"
+  MaxOrder		  4
+  MaxStep		  "auto"
+  MinStep		  "auto"
+  MaxNumMinSteps	  "-1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  RelTol		  "1e-3"
+  AbsTol		  "1e-3"
+  OutputOption		  "RefineOutputTimes"
+  OutputTimes		  "[]"
+  Refine		  "1"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveTime		  on
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  on
+  OutputSaveName	  "yout"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  SaveFormat		  "Array"
+  Decimation		  "1"
+  LimitDataPoints	  off
+  MaxDataPoints		  "1000"
+  SignalLoggingName	  "sigsOut"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  RTWInlineParameters	  off
+  BlockReductionOpt	  off
+  BooleanDataType	  off
+  ConditionallyExecuteInputs on
+  ParameterPooling	  on
+  OptimizeBlockIOStorage  on
+  ZeroCross		  on
+  AssertionControl	  "UseLocalSettings"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWTemplateMakefile	  "grt_unix.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      ComplexToMagnitudeAngle
+      Output		      "Magnitude and angle"
+    }
+    Block {
+      BlockType		      ComplexToRealImag
+      Output		      "Real and imag"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      ShowAdditionalParam     off
+      OutDataTypeMode	      "Inherit from 'Constant value'"
+      OutDataType	      "sfix(16)"
+      ConRadixGroup	      "Use specified scaling"
+      OutScaling	      "2^0"
+    }
+    Block {
+      BlockType		      DiscreteIntegrator
+      IntegratorMethod	      "Forward Euler"
+      ExternalReset	      "none"
+      InitialConditionSource  "internal"
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit    "inf"
+      LowerSaturationLimit    "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      SampleTime	      "1"
+      RTWStateStorageClass    "Auto"
+    }
+    Block {
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      EnablePort
+      StatesWhenEnabling      "held"
+      ShowOutputPort	      off
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      From
+    }
+    Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ShowAdditionalParam     off
+      ParameterDataTypeMode   "Same as input"
+      ParameterDataType	      "sfix(16)"
+      ParameterScalingMode    "Best Precision: Matrix-wise"
+      ParameterScaling	      "2^0"
+      OutDataTypeMode	      "Same as input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Goto
+    }
+    Block {
+      BlockType		      Ground
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      ShowAdditionalParam     off
+      LatchInput	      off
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Product
+      Inputs		      "2"
+      Multiplication	      "Element-wise(.*)"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      Selector
+      InputType		      "Vector"
+      ElementSrc	      "Internal"
+      Elements		      "1"
+      RowSrc		      "Internal"
+      Rows		      "1"
+      ColumnSrc		      "Internal"
+      Columns		      "1"
+      InputPortWidth	      "-1"
+    }
+    Block {
+      BlockType		      Sin
+      SineType		      "Time based"
+      Amplitude		      "1"
+      Bias		      "0"
+      Frequency		      "1"
+      Phase		      "0"
+      Samples		      "10"
+      Offset		      "0"
+      SampleTime	      "-1"
+      VectorParams1D	      on
+    }
+    Block {
+      BlockType		      Step
+      Time		      "1"
+      Before		      "0"
+      After		      "1"
+      SampleTime	      "-1"
+      VectorParams1D	      on
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Sum
+      IconShape		      "rectangular"
+      Inputs		      "++"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Switch
+      Criteria		      "u2 >= Threshold"
+      Threshold		      "0"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Inherit via internal rule"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      Terminator
+    }
+    Block {
+      BlockType		      UnitDelay
+      X0		      "0"
+      SampleTime	      "1"
+      RTWStateStorageClass    "Auto"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "CH3_2"
+    Location		    [2, 82, 773, 519]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Reference
+      Name		      "12 v\n60 Hz\n輸入電壓"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [158, 285, 182, 320]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Electrical\nSources/AC Voltage Source"
+      SourceType	      "AC Voltage Source"
+      A			      "12"
+      P			      "45"
+      F			      "60"
+      stime		      "0"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "C"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [320, 381, 390, 399]
+      Orientation	      "left"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "0"
+      b			      "0e-3"
+      c			      "2600e-6"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "I電流\n"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [294, 250, 321, 270]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+    }
+    Block {
+      BlockType		      Product
+      Name		      "Product1"
+      Ports		      [2, 1]
+      Position		      [340, 94, 365, 116]
+      InputSameDT	      off
+      Port {
+	PortNumber		1
+	Name			"瞬時功率 1"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "R\n\n"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [296, 285, 324, 360]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "4"
+      b			      "0e-3"
+      c			      "inf"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "R1"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [396, 265, 424, 340]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "2"
+      b			      "0e-3"
+      c			      "inf"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "T connector"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1, 1]
+      Position		      [300, 380, 320, 400]
+      Orientation	      "left"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/T connector"
+      SourceType	      "Bus Bar"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "平均功率_3"
+      Ports		      [1]
+      Position		      [670, 285, 760, 315]
+      BackgroundColor	      "lightBlue"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "平均功率__1"
+      Ports		      [1]
+      Position		      [665, 90, 755, 120]
+      BackgroundColor	      "lightBlue"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "平均功率__2"
+      Ports		      [1]
+      Position		      [665, 180, 755, 210]
+      BackgroundColor	      "lightBlue"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "平均值\n1"
+      Ports		      [1, 1]
+      Position		      [555, 174, 595, 216]
+      AncestorBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nMean value"
+      SourceBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nMean value"
+      SourceType	      "Discrete Mean value"
+      Freq		      "60"
+      Vinit		      "0"
+      Ts		      "50e-6"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "平均值\n2"
+      Ports		      [1, 1]
+      Position		      [610, 279, 650, 321]
+      AncestorBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nMean value"
+      SourceBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nMean value"
+      SourceType	      "Discrete Mean value"
+      Freq		      "60"
+      Vinit		      "0"
+      Ts		      "50e-6"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "計算平均值\n"
+      Ports		      [1, 1]
+      Position		      [450, 84, 490, 126]
+      AncestorBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nMean value"
+      TreatAsAtomicUnit	      off
+      MaskType		      "Discrete Mean value"
+      MaskDescription	      "This block computes the mean value of the input"
+" signal over a running window of one cycle of the specified fundamental frequ"
+"ency.\nFor the first cycle of simulation, the ouput is held constant to the v"
+"alue specified by the parameter \"Initial input\"."
+      MaskPromptString	      "Fundamental frequency (Hz):|Initial input (DC c"
+"omponent):|Sample time:"
+      MaskStyleString	      "edit,edit,edit"
+      MaskTunableValueString  "on,on,on"
+      MaskCallbackString      "||"
+      MaskEnableString	      "on,on,on"
+      MaskVisibilityString    "on,on,on"
+      MaskToolTipString	      "on,on,on"
+      MaskVarAliasString      ",,"
+      MaskVariables	      "Freq=@1;Vinit=@2;Ts=@3;"
+      MaskInitialization      "SamplesPerCycle=1/Freq/Ts;\nRoundSamplesPerCycl"
+"e=ceil(SamplesPerCycle);\nDelay=RoundSamplesPerCycle*Ts;\nCorr1=(SamplesPerCy"
+"cle-RoundSamplesPerCycle)/2;\nCorr2=(SamplesPerCycle-RoundSamplesPerCycle)/Sa"
+"mplesPerCycle;\nK1=Corr1*Corr2;\nK2=Corr2 + Corr1*Corr2;\n"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "60|0|50e-6"
+      System {
+	Name			"計算平均值\n"
+	Location		[-10, 67, 761, 560]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In"
+	  Position		  [25, 158, 55, 172]
+	  Port {
+	    PortNumber		    1
+	    Name		    "In"
+	    PropagatedSignals	    "瞬時功率 1"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  Position		  [615, 254, 650, 276]
+	  ShowName		  off
+	  Value			  "Vinit"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Discrete Variable\nTransport Delay"
+	  Ports			  [2, 1]
+	  Position		  [235, 153, 275, 197]
+	  NamePlacement		  "alternate"
+	  SourceBlock		  "powerlib_extras/Discrete \nControl Blocks/D"
+"iscrete Variable\nTransport Delay"
+	  SourceType		  "Discrete variable transport delay"
+	  MaxDelay		  "Delay+Ts"
+	  InitialValue		  "0"
+	  Ts			  "Ts"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  Position		  [170, 355, 210, 385]
+	  ShowName		  off
+	  Gain			  "K1"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain1"
+	  Position		  [170, 310, 210, 340]
+	  ShowName		  off
+	  Gain			  "K2"
+	}
+	Block {
+	  BlockType		  DiscreteIntegrator
+	  Name			  "Integ4"
+	  Ports			  [1, 1]
+	  Position		  [105, 147, 150, 183]
+	  ShowName		  off
+	  IntegratorMethod	  "Trapezoidal"
+	  ExternalReset		  "none"
+	  InitialConditionSource  "internal"
+	  SampleTime		  "Ts"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "K1"
+	  Position		  [155, 235, 195, 255]
+	  ShowName		  off
+	  Value			  "Delay"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "K2"
+	  Position		  [240, 230, 280, 250]
+	  ShowName		  off
+	  Value			  "Freq"
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product"
+	  Ports			  [2, 1]
+	  Position		  [370, 173, 405, 262]
+	  ShowName		  off
+	  Port {
+	    PortNumber		    1
+	    Name		    "Mean value"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Step
+	  Name			  "Step"
+	  Position		  [620, 168, 640, 192]
+	  Time			  "1/Freq"
+	  SampleTime		  "Ts"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum1"
+	  Ports			  [2, 1]
+	  Position		  [245, 304, 270, 391]
+	  ShowName		  off
+	  Inputs		  "+-"
+	  Port {
+	    PortNumber		    1
+	    Name		    "Correction"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum5"
+	  Ports			  [2, 1]
+	  Position		  [555, 203, 580, 267]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum7"
+	  Ports			  [2, 1]
+	  Position		  [315, 155, 340, 230]
+	  ShowName		  off
+	  Inputs		  "-+"
+	}
+	Block {
+	  BlockType		  Switch
+	  Name			  "Switch"
+	  Position		  [695, 225, 715, 275]
+	  ShowName		  off
+	  Threshold		  "0.5"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  UnitDelay
+	  Name			  "Unit Delay"
+	  Position		  [120, 358, 140, 382]
+	  ShowName		  off
+	  SampleTime		  "Ts"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Mean"
+	  Position		  [750, 243, 780, 257]
+	}
+	Line {
+	  Name			  "Mean value"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "Sum5"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sum7"
+	  SrcPort		  1
+	  DstBlock		  "Product"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Integ4"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  Branch {
+	    DstBlock		    "Discrete Variable\nTransport Delay"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 45]
+	    DstBlock		    "Sum7"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "K2"
+	  SrcPort		  1
+	  DstBlock		  "Product"
+	  DstPort		  2
+	}
+	Line {
+	  Name			  "In"
+	  SrcBlock		  "In"
+	  SrcPort		  1
+	  Points		  [10, 0]
+	  Branch {
+	    DstBlock		    "Integ4"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 160]
+	    Branch {
+	      DstBlock		      "Gain1"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [0, 45]
+	      DstBlock		      "Unit Delay"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Line {
+	  SrcBlock		  "Sum5"
+	  SrcPort		  1
+	  DstBlock		  "Switch"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Step"
+	  SrcPort		  1
+	  Points		  [15, 0; 0, 70]
+	  DstBlock		  "Switch"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Switch"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Switch"
+	  SrcPort		  1
+	  DstBlock		  "Mean"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Discrete Variable\nTransport Delay"
+	  SrcPort		  1
+	  DstBlock		  "Sum7"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "K1"
+	  SrcPort		  1
+	  Points		  [10, 0; 0, -60]
+	  DstBlock		  "Discrete Variable\nTransport Delay"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Gain1"
+	  SrcPort		  1
+	  DstBlock		  "Sum1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Unit Delay"
+	  SrcPort		  1
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  DstBlock		  "Sum1"
+	  DstPort		  2
+	}
+	Line {
+	  Name			  "Correction"
+	  Labels		  [3, 0]
+	  SrcBlock		  "Sum1"
+	  SrcPort		  1
+	  Points		  [70, 0; 0, -55; 190, 0; 0, -45]
+	  DstBlock		  "Sum5"
+	  DstPort		  2
+	}
+	Annotation {
+	  Name			  "Pierre Giroux, Gilbert Sybille\nPower Syste"
+"m Simulation Laboratory\nIREQ, Hydro-Quebc"
+	  Position		  [107, 61]
+	}
+	Annotation {
+	  Name			  "Discrete Mean Value"
+	  Position		  [81, 28]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Position		  [107, 51]
+	}
+	Annotation {
+	  Position		  [81, 18]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Name			  "電力電子電腦輔助分析與設計  新文京出版設社"
+"\n高苑科技大學電機系 \n電力電子實驗室\n徐瑞隆 著\n"
+	  Position		  [500, 461]
+	}
+      }
+    }
+    Block {
+      BlockType		      Product
+      Name		      "乘積"
+      Ports		      [2, 1]
+      Position		      [415, 184, 440, 206]
+      InputSameDT	      off
+      Port {
+	PortNumber		1
+	Name			"瞬時功率 2"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Product
+      Name		      "乘積Product"
+      Ports		      [2, 1]
+      Position		      [545, 289, 570, 311]
+      InputSameDT	      off
+      Port {
+	PortNumber		1
+	Name			"瞬時功率  3"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "電流\n1"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [350, 218, 375, 242]
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "電壓V"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [2, 1]
+      Position		      [335, 169, 365, 196]
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Measurements/Voltage Measurement"
+      SourceType	      "Voltage Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "0"
+      PSBequivalent	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "電壓_"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [2, 1]
+      Position		      [470, 289, 500, 316]
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Measurements/Voltage Measurement"
+      SourceType	      "Voltage Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "0"
+      PSBequivalent	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "輸入電流"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [230, 213, 255, 237]
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+    }
+    Line {
+      SrcBlock		      "計算平均值\n"
+      SrcPort		      1
+      DstBlock		      "平均功率__1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "12 v\n60 Hz\n輸入電壓"
+      SrcPort		      1
+      Points		      [0, -55]
+      DstBlock		      "輸入電流"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "輸入電流"
+      SrcPort		      2
+      Points		      [45, 0]
+      Branch {
+	DstBlock		"I電流\n"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"電流\n1"
+	DstPort			1
+      }
+      Branch {
+	Points			[15, 0]
+	DstBlock		"電壓V"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "I電流\n"
+      SrcPort		      2
+      DstBlock		      "R\n\n"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "電流\n1"
+      SrcPort		      2
+      Points		      [30, 0]
+      Branch {
+	DstBlock		"R1"
+	DstPort			1
+      }
+      Branch {
+	Points			[45, 0]
+	DstBlock		"電壓_"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "T connector"
+      SrcPort		      1
+      Points		      [-25, 0]
+      Branch {
+	Points			[-100, 0]
+	DstBlock		"12 v\n60 Hz\n輸入電壓"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -200]
+	DstBlock		"電壓V"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "C"
+      SrcPort		      1
+      DstBlock		      "T connector"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "輸入電流"
+      SrcPort		      1
+      Points		      [0, -110]
+      DstBlock		      "Product1"
+      DstPort		      2
+    }
+    Line {
+      Name		      "瞬時功率 1"
+      Labels		      [0, 0]
+      SrcBlock		      "Product1"
+      SrcPort		      1
+      DstBlock		      "計算平均值\n"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "電壓V"
+      SrcPort		      1
+      Points		      [15, 0]
+      Branch {
+	Points			[0, 5]
+	DstBlock		"乘積"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, -35; -70, 0; 0, -50]
+	DstBlock		"Product1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "I電流\n"
+      SrcPort		      1
+      Points		      [-15, 0; 0, -75]
+      DstBlock		      "乘積"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "電壓_"
+      SrcPort		      1
+      DstBlock		      "乘積Product"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "電流\n1"
+      SrcPort		      1
+      Points		      [145, 0; 0, 70]
+      DstBlock		      "乘積Product"
+      DstPort		      1
+    }
+    Line {
+      Name		      "瞬時功率 2"
+      Labels		      [0, 0]
+      SrcBlock		      "乘積"
+      SrcPort		      1
+      DstBlock		      "平均值\n1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "平均值\n1"
+      SrcPort		      1
+      DstBlock		      "平均功率__2"
+      DstPort		      1
+    }
+    Line {
+      Name		      "瞬時功率  3"
+      Labels		      [0, 0]
+      SrcBlock		      "乘積Product"
+      SrcPort		      1
+      DstBlock		      "平均值\n2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "平均值\n2"
+      SrcPort		      1
+      DstBlock		      "平均功率_3"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "R\n\n"
+      SrcPort		      1
+      DstBlock		      "T connector"
+      DstPort		      enable
+    }
+    Line {
+      SrcBlock		      "R1"
+      SrcPort		      1
+      Points		      [0, 0]
+      Branch {
+	Points			[0, 45]
+	DstBlock		"C"
+	DstPort			1
+      }
+      Branch {
+	Points			[45, 0]
+	DstBlock		"電壓_"
+	DstPort			2
+      }
+    }
+    Annotation {
+      Name		      "電力電子電腦輔助分析與設計  新文京出版設社\n"
+      Position		      [631, 789]
+      FontName		      "Arial"
+      FontSize		      12
+      FontWeight	      "bold"
+    }
+  }
+}

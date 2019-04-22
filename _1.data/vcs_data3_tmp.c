@@ -7,6 +7,371 @@ vs2010ªºc#§ä¤£¨ìCalendar±±¥ó
 
 
 
+
+[C#] DrawRoundRetangle
+Ã¸»s¶ê¨¤¯x§Î
+private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius) {
+            GraphicsPath roundedRect = new GraphicsPath();
+            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+        
+        
+        
+
+[SDK] ©ó C#.net Àô¹Ò¤U, ¦p¦ó±N¬Û¾÷¼v¹³Ã¸»s©ó PictureBox ¤¤?
+https://www.aisys.com.tw/web/tech/tech.php?question_id=127
+[SDK] ©ó C#.net Àô¹Ò¤U, ¦p¦ó±N¬Û¾÷¼v¹³Ã¸»s©ó PictureBox ¤¤?
+
+[«Å§i]
+Graphics G;  //¦s©ñ Control.CreateGraphics «Ø¥ßªºª«¥ó
+IntPtr pHdc; //¦s©ñ Graphics.GetHdc ¦^¶Çªº hdc ¦ì§}
+
+[ªì©l¤Æ]
+G = pictureBox1.CreateGraphics(); //¨Ï¥Î pictureBox1 «Ø¥ß¤@Graphicsª«¥ó
+
+[Ã¸»s¼v¹³]
+private void axAxAltairU1_OnSurfaceDraw(object sender, AxAxAltairUDrv.IAxAltairUEvents_OnSurfaceDrawEvent e)
+{   // AltairU::OnSurfaceDraw ¨Æ¥ó
+    pHdc = G.GetHdc(); //¨ú±o Hdc
+    axAxAltairU1.DrawSurface(e.surfaceHandle, pHdc.ToInt32(), 1, 1, 0, 0); //Ã¸»s¼v¹³©ó Hdc
+    G.ReleaseHdc();    //ÄÀ©ñ Hdc
+}
+
+
+´ú·sª©ªºvisual studio	¬Ý¦³µL®Ñªþ¥úºÐ
+
+
+
+
+vcs
+string»PString¦³¦ó¤£¦P¡H
+
+
+
+vcs§ì¿Ã¹õµe­±¡A¦p¦ó°Ï¤À¥þ¿Ã¹õ©Mactiveµe­±¡H
+
+
+
+
+
+
+ÀÉ®×¡GD://Xilinx_SDK_2018.3_1207_2324_Win64.exe,	
+
+
+MD5¡G			0E83E8251D76B51B5D311EEA2B2FB8FC
+MD5 SUM Value : 	0e83e8251d76b51b5d311eea2b2fb8fc    
+			0E83E8251D76B51B5D311EEA2B2FB8FC
+
+vcs_MD5
+
+D:\Xilinx_SDK_2018.3_1207_2324_Win64.exe :   0E83E8251D76B51B5D311EEA2B2FB8FC
+
+D:\Xilinx_SDK_2018.3_1207_2324_Win64.exe :   0E83E8251D76B51B5D311EEA2B2FB8FC
+
+
+
+
+¤£¨¬¦ì¤¸¸É¹s ¤Q¶i¦ì¤Î¤Q¤»¶i¦ì
+
+byte byteValue = 254;
+
+// Display integer values by calling the ToString method.
+richTextBox1.Text += byteValue.ToString("D8").ToString() + "\t" + byteValue.ToString("X8") + "\n";
+
+
+
+
+
+
+vcs AForge
+
+    ¥[¤J¤F°Ñ¦ÒAForge.Video.FFMPEG¡A½sÄ¶ÁÙ¬O¤£¹L
+
+ª`·N¤@¤U¦³¨S¦³¥[¶iFFMPEGªº°Ñ¦Ò¡Aª½±µ¦bVisual Studio¸Ì¥[¬O¤£¦æªº¡A·|³ø¿ù¡C
+­nª½±µ§â¥Ø¿ý¤UªºÀÉ®×½Æ»s¨ì¿é¥X¥Ø¿ý¡C
+
+https://dahao.blogspot.com/2016/08/caforgenet.html
+
+
+
+°ò¤_C#©MAforge.net¹ê²{¹Ï¹³¯À´y®ÄªG
+
+https://blog.csdn.net/dark00800/article/details/41651499
+
+
+¦UºØwebcamµ{¦¡¤ñ¸û
+http://www.cnblogs.com/xrwang/archive/2010/02/13/HowToCaptureCameraVideoViaDotNet.html
+
+
+AForge±Ò°Êwebcam
+http://www.voidcn.com/article/p-kvujrudv-ru.html
+
+
+
+       
+
+vcs_WMP
+richTextBox1.Text += " ºq¦±¦W†ï¡G" + axWindowsMediaPlayer1.currentMedia.getItemInfo("Title");
+
+mute & un-mute
+        private void pictureBox7_Click(object sender, EventArgs e)//“C­µ
+        {
+            if (MM)
+            {
+                pictureBox7.Image = (Image)Properties.Resources.­µ¶q«ö…r@¦â;
+                axWindowsMediaPlayer1.settings.mute = true;
+                MM = false;
+            }
+            else
+            {
+                pictureBox7.Image = (Image)Properties.Resources.­µ¶q«ö…r;
+                axWindowsMediaPlayer1.settings.mute = false;
+                MM = true;
+            }
+        }
+
+
+°Ñ¦Ò
+063_¨Ï¥ÎC#¾Þ§@INI¤å¥ó
+µ¹vcs_WMP ³]©w±`¥Îªºmp3¸ê®Æ§¨
+
+vcs_WMP­n§ï¦¨¥i¥H¦h¿ïÀÉ®×  ©Î¿ï¾ã­Ó©Î¦h­Ó¸ê®Æ§¨ ¤@°_¼½©ñ
+
+
+
+
+
+
+
+
+vcs
+
+¬P´Á´X
+            string[] Day = new string[] { "¬P´Á¤é", "¬P´Á¤@", "¬P´Á¤G", "¬P´Á¤T", "¬P´Á¥|", "¬P´Á¤­", "¬P´Á¤»" };
+            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            richTextBox1.Text += week + "\n";
+
+
+
+vcs
+ex069	Åª¨ú¥¿¤¤¡BÂ²¤¤¡B¤é¤å¡A¬O§_±µOK¡H
+ex062	½Æ»s¤å¥ó®ÉÅã¥Ü½Æ»s¶i«×¡AÀ³¥ÎºC³tU½L¨Ó´ú
+
+
+
+string color
+color_r
+color_g
+color_b
+
+
+
+
+[C#]¦p¦ó§ì¨úGoogle Static Map
+https://dotblogs.com.tw/larrynung/2013/01/06/86807
+
+Supalogo-§K¶Oªº½u¤WLogo¹Ï¤ù²£¥Í¾¹
+https://dotblogs.com.tw/larrynung/2010/07/15/16580
+
+[C#]­ì¤l¯à©e­û·|¿ç®gºÊ±±«D©x¤èAPI
+https://dotblogs.com.tw/larrynung/2011/03/17/21890
+
+
+
+
+[C#] QRCode Generator & Reader 
+http://foxktr560.blogspot.com/2013/08/c-qrcode-generator-reader.html
+
+
+vcs
+vcsªºQR code½s½X¸Ñ½X
+°Ñ¦Ò¡Ghttp://foxktr560.blogspot.com/2013/08/c-qrcode-generator-reader.html
+§â zxing.dll ¥[¤J°Ñ¦Ò
+
+¥ý¤U¸ü¤@­Ó¶}©ñªº¨ç¥Ü®w(DLL) "Zxing"
+http://zxingnet.codeplex.com/
+
+
+
+C#¤¤¨Ï¥ÎSendMessage¶i¦æ¶iµ{³q«Hªº¹ê¨Ò
+https://blog.csdn.net/yl2isoft/article/details/20227421
+
+
+(C#)WinAPIªºSendMessage¶Ç°e
+
+[DllImport("user32.dll")]
+
+public static extern long SendMessage(int hWnd, uint msg, uint wparam, string text);
+
+public const uint WM_SETTEXT = 0x0c;
+public const uint WM_GETTEXT = 0x0d;
+public const uint WM_LBUTTONUP = 0x0202;
+public const uint WM_LBUTTONDOWN = 0x0201;
+
+SendMessage(¿é¤JÄæ¦ìªºHandle, WM_SETTEXT, 0, "§A­n°eªº¦r¦ê" );
+
+¹ï«ö¶s«ö¤U¥hªº°T¸¹¡G
+
+SendMessage(«ö¶sªºHandle, WM_LBUTTONDOWN, 0, null);
+
+SendMessage(«ö¶sªºHandle, WM_LBUTTONUP, 0, null);
+
+
+¨â­Ó°õ¦æÀÉ¶¡¼Æ­Èªº¶Ç»¼»P±µ¦¬
+
+
+
+vcs ¤§ WebCam ¨Ï¥Î¤j¶°¦¨
+
+
+
+
+
+
+
+
+
+
+/**
+* @brief   Convert a 6 digit HTML code (hex) into a color value.
+*/
+#define HTML2COLOR(h)		((color_t)((((h) & 0xF80000)>>8) | (((h) & 0x00FC00)>>5) | (((h) & 0x0000F8)>>3)))
+#define HTML2COLOR(h)		((COLOR_TYPE)(HTML2COLOR_R(h) | HTML2COLOR_G(h) | HTML2COLOR_B(h)))
+#define HTML2COLOR(h)		((COLOR_TYPE)(((((h)&0xFF0000)>>16)+(((h)&0x00FF00)>>7)+((h)&0x0000FF)) >> (10-COLOR_BITS)))
+
+#define COLOR_BITS		16
+#define COLOR_TYPE		uint16_t
+#define COLOR_TYPE_BITS		16
+
+
+		
+/**
+ * @name   Some basic colors
+ * @{
+ */
+#define White			HTML2COLOR(0xFFFFFF)
+#define Black			HTML2COLOR(0x000000)
+#define Gray			HTML2COLOR(0x808080)
+#define Grey			Gray
+#define Blue			HTML2COLOR(0x0000FF)
+#define Red			HTML2COLOR(0xFF0000)
+#define Fuchsia			HTML2COLOR(0xFF00FF)
+#define Magenta			Fuchsia
+#define Green			HTML2COLOR(0x008000)
+#define Yellow			HTML2COLOR(0xFFFF00)
+#define Aqua			HTML2COLOR(0x00FFFF)
+#define Cyan			Aqua
+#define Lime			HTML2COLOR(0x00FF00)
+#define Maroon			HTML2COLOR(0x800000)
+#define Navy			HTML2COLOR(0x000080)
+#define Olive			HTML2COLOR(0x808000)
+#define Purple			HTML2COLOR(0x800080)
+#define Silver			HTML2COLOR(0xC0C0C0)
+#define Teal			HTML2COLOR(0x008080)
+#define Orange			HTML2COLOR(0xFFA500)
+#define Pink			HTML2COLOR(0xFFC0CB)
+#define SkyBlue			HTML2COLOR(0x87CEEB)
+/** @} */
+      
+
+
+vcs ¨ú±oWebCam¼v¹³¡G		¨Ï¥ÎEmgu
+
+°Ñ¦Ò¡G
+C# ±±¨î Webcam ¡iusing Emgu¡j 
+http://blog.kenyang.net/2012/03/04/c-webcam-using-emgu
+[C#] ¨ú±oWebCam¼v¹³
+http://foxktr560.blogspot.com/2013/08/c-webcam.html
+
+OpenCV¬O¤@®M±j¤jªº¼v¹³³B²zlibrary¡A¥ÑINTEL¶}µo¡A
+«D±`±j¤j¡A¬Æ¦Ü§A¥i¥H§Q¥ÎOpenCV¥h°µ¨ìOCR¡A«Ü¤è«K¡C
+¤]¥Ñ©óOpenCV¨S¦³¤ä´©C#¡A¨ºC#­n«ç»ò¨Ï¥ÎOpenCV©O?
+´N¬O¾aEmgu¡AEmgu¬O¤@®M¤¹³\OpenCVªºfunction¦bC#µ¥»y¨¥¤¤³Q¨Ï¥Î¡C
+
+¶}±Òvcs±M®×¡A©Ô¤@­ÓpictureBox¡A·Ç³ÆÅã¥ÜWebCam¦^¶Çªº¼v¹³
+
+±M®×¥[¤J°Ñ¦Ò¡G
+C:/Emgu/emgucv-windows-x86 2.3.0.1416/bin/ ¦³4­Ódll
+
+    Emgu.CV.dll
+    Emgu.CV.ML.dll
+    Emgu.CV.UI.dll
+    Emgu.Util.dll
+    
+¥[¤J¥H«á¡A½Ð¥ýÀx¦s§Aªº±M®×¡A
+«þ¨©¥H¤U2­Ódll
+    opencv_core231.dll
+    opencv_highgui231.dll
+©ñ¨ì±M®×ªº/bin/Debug/©³¤U
+
+¦]¬°Emgu.CV.dll·|¨Ï¥Î¨ì¤W­z¨â­Ódll¡C
+
+
+¥ýimport·|¨Ï¥Î¨ìªºlib¡A¦p¤U:
+
+	using Emgu.CV;
+	using Emgu.CV.Structure;
+
+¥ý«Å§i¤@­ÓCaptureª«¥ó¡A¦p¤U:
+
+	private Capture cap = null;                 // Webcamª«¥ó
+
+³o­Óª«¥ó´N¬O¥Î¨Ó³sµ²¨ì§Aªºwebcam¡C
+
+
+
+Form1_Load event¡A
+³sµ²¨ìÄá¼v¾÷¥H¤Î«Ø¥ß¤@­Óevent¥Î¨Ó§ì¨úµe­±¡A¦p¤U:
+
+private void Form1_Load(object sender, EventArgs e)
+{
+     cap = new Capture(0); // ³sµ²¨ìÄá¼v¾÷0¡A¦pªG§A¦³¨â¥xÄá¼v¾÷¡A²Ä¤G¥x´N¬O1
+     Application.Idle += new EventHandler(Application_Idle); // ¦bIdleªºevent¤U¡A§âµe­±³]©w¨ìpictureBox¤W(·íµM§A¤]¥i¥H¥Îtimer¨Æ¥ó)
+}
+
+
+±µ¤U¨Ó­n¼g§ì¨úµe­±eventªºcode¡A
+
+void Application_Idle(object sender, EventArgs e)
+{
+     Image<Bgr, Byte> frame = cap.QueryFrame(); // ¥hquery¸Óµe­±
+     pictureBox1.Image = frame.ToBitmap(); // §âµe­±Âà´«¦¨bitmap«¬ºA¡A¦AÁýµ¹pictureBox¤¸¥ó
+}
+
+        
+
+
+¥[¤J¥|­Ó°Ñ¦Ò 
+Emgu.CV.dll
+Emgu.CV.ML.dll
+Emgu.CV.UI.dll
+Emgu.Util.dll
+ (¸Ódll©ñ©óEmguCV¦w¸Ë§¹ªºbin©³¤U)
+
+
+
+
+3.2 ±`¥Î±µ¤f‡S©ú
+caputure
+        public Capture();			//Create a capture using the default camera
+        public Capture(int camIndex);		//†Á‰ØŒs¹³‰³ªºŠD¼v, „G0…{©l
+        public Capture(string fileName);	//The name of a file, or an url pointed to a stream.
+        
+
+
+
+
+
 2011/5/8(SUN)
 2011/5/8(¤é) 20:28 µÛ«H
 

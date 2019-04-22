@@ -23,3 +23,19 @@ def randomAnimal():
 for count in range(10):
     print(randomAnimal())
 
+from random import randint
+print("1到6選一個")
+for count in range(10):
+    print(randint(1, 6))
+
+
+import random as R
+print("1到6選一個")
+for count in range(10):
+    print(R.randint(1, 6))
+
+print("任選一個")
+for count in range(10):
+    print(random.choice(['a', 'b', 'c']))
+
+

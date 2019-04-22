@@ -102,7 +102,7 @@ namespace vcs_MyClock
             //明確指定Form表單的起始點位置
             //this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(1920 - this.Width, 60);
+            this.Location = new System.Drawing.Point(1920 - this.Width, 75);
             //this.Location = new System.Drawing.Point(this.Right, this.Top);
 
 

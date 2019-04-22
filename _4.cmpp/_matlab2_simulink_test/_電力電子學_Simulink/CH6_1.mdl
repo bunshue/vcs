@@ -1,0 +1,1097 @@
+Model {
+  Name			  "CH6_1"
+  Version		  5.0
+  Description		  "高苑科技大學 電機系\n電力電子實驗室"
+  SaveDefaultBlockParams  on
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ExecutionOrder	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Fri Jun 18 09:13:08 1999"
+  Creator		  "徐瑞隆老師"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "ELECTRONIC"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Mar 09 13:21:30 2009"
+  ModelVersionFormat	  "1.%<AutoIncrement:55>"
+  ConfigurationManager	  "none"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "oneshot"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  off
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  BufferReuse		  on
+  RTWExpressionDepthLimit 5
+  SimulationMode	  "normal"
+  Solver		  "ode23tb"
+  SolverMode		  "SingleTasking"
+  StartTime		  "0.0"
+  StopTime		  "0.03"
+  MaxOrder		  5
+  MaxStep		  "auto"
+  MinStep		  "auto"
+  MaxNumMinSteps	  "-1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  RelTol		  "1e-5"
+  AbsTol		  "auto"
+  OutputOption		  "RefineOutputTimes"
+  OutputTimes		  "[]"
+  Refine		  "1"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveTime		  on
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  on
+  OutputSaveName	  "yout"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  SaveFormat		  "Array"
+  Decimation		  "1"
+  LimitDataPoints	  off
+  MaxDataPoints		  "1000"
+  SignalLoggingName	  "sigsOut"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  RTWInlineParameters	  off
+  BlockReductionOpt	  on
+  BooleanDataType	  off
+  ConditionallyExecuteInputs on
+  ParameterPooling	  on
+  OptimizeBlockIOStorage  on
+  ZeroCross		  on
+  AssertionControl	  "UseLocalSettings"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWTemplateMakefile	  "grt_unix.tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      ComplexToMagnitudeAngle
+      Output		      "Magnitude and angle"
+    }
+    Block {
+      BlockType		      ComplexToRealImag
+      Output		      "Real and imag"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      ShowAdditionalParam     off
+      OutDataTypeMode	      "Inherit from 'Constant value'"
+      OutDataType	      "sfix(16)"
+      ConRadixGroup	      "Use specified scaling"
+      OutScaling	      "2^0"
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      EnablePort
+      StatesWhenEnabling      "held"
+      ShowOutputPort	      off
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      From
+    }
+    Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ShowAdditionalParam     off
+      ParameterDataTypeMode   "Same as input"
+      ParameterDataType	      "sfix(16)"
+      ParameterScalingMode    "Best Precision: Matrix-wise"
+      ParameterScaling	      "2^0"
+      OutDataTypeMode	      "Same as input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Goto
+    }
+    Block {
+      BlockType		      Ground
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      ShowAdditionalParam     off
+      LatchInput	      off
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Scope
+      Floating		      off
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Selector
+      InputType		      "Vector"
+      ElementSrc	      "Internal"
+      Elements		      "1"
+      RowSrc		      "Internal"
+      Rows		      "1"
+      ColumnSrc		      "Internal"
+      Columns		      "1"
+      InputPortWidth	      "-1"
+    }
+    Block {
+      BlockType		      Sin
+      SineType		      "Time based"
+      Amplitude		      "1"
+      Bias		      "0"
+      Frequency		      "1"
+      Phase		      "0"
+      Samples		      "10"
+      Offset		      "0"
+      SampleTime	      "-1"
+      VectorParams1D	      on
+    }
+    Block {
+      BlockType		      Step
+      Time		      "1"
+      Before		      "0"
+      After		      "1"
+      SampleTime	      "-1"
+      VectorParams1D	      on
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Switch
+      Criteria		      "u2 >= Threshold"
+      Threshold		      "0"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Inherit via internal rule"
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      Terminator
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "CH6_1"
+    Location		    [2, 82, 781, 519]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Reference
+      Name		      "\n負載\n\n\n"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [510, 225, 540, 285]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "20"
+      b			      "0"
+      c			      "inf"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "C"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [470, 215, 500, 275]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "0"
+      b			      "0"
+      c			      "100e-6"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Demux
+      Name		      "Demux"
+      Ports		      [1, 2]
+      Position		      [230, 171, 235, 209]
+      BackgroundColor	      "black"
+      ShowName		      off
+      Outputs		      "2"
+      Port {
+	PortNumber		1
+	Name			"Iak"
+	PropagatedSignals	"current"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+      Port {
+	PortNumber		2
+	Name			"Vak"
+	PropagatedSignals	"IGBT voltage"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Diode"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [328, 175, 352, 205]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"二極體ID"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "FW 二極體"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 2]
+      Position		      [335, 235, 375, 290]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Power\nElectronics/Diode"
+      SourceType	      "Diode"
+      Ron		      "0.01"
+      Lon		      "1e-6"
+      Vf		      "0"
+      IC		      "0"
+      Rs		      "1000"
+      Cs		      "0.1e-6"
+      PSBOutputType	      "10"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Ground"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1]
+      Position		      [470, 325, 500, 355]
+      Orientation	      "down"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (input)"
+      SourceType	      "Ground"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Ground (input)"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1]
+      Position		      [510, 325, 540, 355]
+      Orientation	      "down"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (input)"
+      SourceType	      "Ground"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Ic"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [470, 165, 490, 200]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"電容電流Ic"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Is"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [48, 125, 72, 155]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"輸入電流Iin"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "L"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [420, 135, 465, 165]
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "0"
+      b			      "400e-6"
+      c			      "inf"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "L current"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [370, 123, 395, 147]
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"電感電流IL"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Subsystem7"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1, 1]
+      Position		      [335, 125, 355, 145]
+      NamePlacement	      "alternate"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/T connector"
+      SourceType	      "Bus Bar"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Terminator
+      Name		      "Terminator"
+      Position		      [360, 195, 380, 215]
+      Orientation	      "up"
+      NamePlacement	      "alternate"
+      ShowName		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "VDC\n48V"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [50, 245, 70, 280]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Electrical\nSources/DC Voltage Source"
+      SourceType	      "DC Voltage Source"
+      V			      "48"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "output Ground2"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [0, 1]
+      Position		      [44, 325, 76, 355]
+      Orientation	      "up"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (output)"
+      SourceType	      "Ground"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "output Ground3"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [0, 1]
+      Position		      [339, 325, 371, 355]
+      Orientation	      "up"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (output)"
+      SourceType	      "Ground"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "vc"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [2, 1]
+      Position		      [575, 188, 600, 212]
+      SourceBlock	      "powerlib2/Measurements/Voltage Measurement"
+      SourceType	      "Voltage Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "0"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"電容電壓Vc"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "功率電晶體"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [2, 2]
+      Position		      [160, 125, 205, 160]
+      SourceBlock	      "powerlib2/Power\nElectronics/IGBT"
+      SourceType	      "IGBT"
+      Ron		      "0.001"
+      Lon		      "1e-6"
+      Vf		      "0"
+      Tf		      "1e-6"
+      Tt		      "2e-6"
+      IC		      "0"
+      Rs		      "inf"
+      Cs		      "0"
+      PSBOutputType	      "10"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "功率電晶體波形"
+      Ports		      [2]
+      Position		      [270, 169, 300, 211]
+      BackgroundColor	      "lightBlue"
+      Location		      [5, 60, 805, 573]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+      }
+      TimeRange		      "0.01"
+      YMin		      "0~0"
+      YMax		      "60~300"
+      DataFormat	      "Array"
+      LimitDataPoints	      off
+      MaxDataPoints	      "500000"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "波形分析"
+      Ports		      [4]
+      Position		      [640, 60, 670, 110]
+      BackgroundColor	      "lightBlue"
+      Location		      [6, 60, 806, 543]
+      Open		      on
+      NumInputPorts	      "4"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+	axes3			"%<SignalLabel>"
+	axes4			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+	axes3			""
+	axes4			""
+      }
+      TimeRange		      "0.01"
+      YMin		      "-50~-100~-5~-5"
+      YMax		      "50~200~5~5"
+      DataFormat	      "Array"
+      MaxDataPoints	      "1500"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "脈波產生器"
+      Ports		      [0, 1]
+      Position		      [80, 152, 115, 178]
+      TreatAsAtomicUnit	      off
+      MaskType		      "Pulse Generator"
+      MaskDescription	      "Pulse Generator"
+      MaskHelp		      "Pulse generator which ensures pulse transitions"
+" are hit. Provides a vector of pulses when the height is entered as a vector."
+"  Unmask to see how it works."
+      MaskPromptString	      "Period (secs):|Duty cycle (% of period):|Amplit"
+"ude:|Start time:"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "period=@1;duty=@2;amplitude=@3;start=@4;"
+      MaskInitialization      "\n"
+      MaskDisplay	      "plot(0,0,100,100,[95,90,90,75,75,60,60,45,45,30"
+",30,15,15,5],[25,25,75,75,25,25,75,75,25,25,75,75,25,25]); \n                "
+"                                                                             "
+"             \n                                                              "
+"                                            "
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "1/20000|40|1|0"
+      Port {
+	PortNumber		1
+	Name			"PMM"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+      System {
+	Name			"脈波產生器"
+	Location		[200, 343, 539, 534]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant1"
+	  Position		  [40, 135, 60, 155]
+	  Value			  "0"
+	}
+	Block {
+	  BlockType		  Sin
+	  Name			  "Sine Wave"
+	  Position		  [35, 83, 65, 107]
+	  SineType		  "Time based"
+	  Frequency		  "2*pi./period"
+	  Phase			  "-2*pi*(start./period + duty/200 - 1/4)"
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Step
+	  Name			  "Step"
+	  Position		  [35, 27, 65, 53]
+	  Time			  "start"
+	  After			  "amplitude"
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Switch
+	  Name			  "Switch"
+	  Position		  [120, 65, 155, 125]
+	  Threshold		  "sin(pi*(0.5 - duty/100))"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out1"
+	  Position		  [250, 88, 280, 102]
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Step"
+	  SrcPort		  1
+	  Points		  [20, 0; 0, 35]
+	  DstBlock		  "Switch"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant1"
+	  SrcPort		  1
+	  Points		  [25, 0; 0, -30]
+	  DstBlock		  "Switch"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Switch"
+	  SrcPort		  1
+	  DstBlock		  "out1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sine Wave"
+	  SrcPort		  1
+	  Points		  [5, 0; 20, 0]
+	  DstBlock		  "Switch"
+	  DstPort		  2
+	}
+      }
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "電容波形分析"
+      Ports		      [2]
+      Position		      [685, 197, 715, 233]
+      BackgroundColor	      "lightBlue"
+      Location		      [5, 60, 805, 543]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+      }
+      TimeRange		      "0.01"
+      YMin		      "-50~-100"
+      YMax		      "50~200"
+      SaveName		      "ScopeData1"
+      DataFormat	      "Array"
+    }
+    Line {
+      SrcBlock		      "output Ground3"
+      SrcPort		      1
+      DstBlock		      "FW 二極體"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "C"
+      SrcPort		      1
+      DstBlock		      "Ground"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "output Ground2"
+      SrcPort		      1
+      DstBlock		      "VDC\n48V"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Subsystem7"
+      SrcPort		      1
+      DstBlock		      "L current"
+      DstPort		      1
+    }
+    Line {
+      Name		      "PMM"
+      Labels		      [0, 0]
+      SrcBlock		      "脈波產生器"
+      SrcPort		      1
+      Points		      [0, 0; 0, -10]
+      Branch {
+	Points			[25, 0]
+	DstBlock		"功率電晶體"
+	DstPort			2
+      }
+      Branch {
+	Labels			[2, 0]
+	Points			[0, -85]
+	DstBlock		"波形分析"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "功率電晶體"
+      SrcPort		      1
+      DstBlock		      "Subsystem7"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "FW 二極體"
+      SrcPort		      2
+      DstBlock		      "Terminator"
+      DstPort		      1
+    }
+    Line {
+      Name		      "Iak"
+      Labels		      [0, 0]
+      SrcBlock		      "Demux"
+      SrcPort		      1
+      DstBlock		      "功率電晶體波形"
+      DstPort		      1
+    }
+    Line {
+      Name		      "Vak"
+      Labels		      [0, 0]
+      SrcBlock		      "Demux"
+      SrcPort		      2
+      DstBlock		      "功率電晶體波形"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "L current"
+      SrcPort		      2
+      Points		      [0, 10]
+      DstBlock		      "L"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "L"
+      SrcPort		      1
+      Points		      [0, -10; 5, 0]
+      Branch {
+	Points			[50, 0]
+	Branch {
+	  DstBlock		  "\n負載\n\n\n"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [15, 0; 0, 55]
+	  DstBlock		  "vc"
+	  DstPort		  1
+	}
+      }
+      Branch {
+	Points			[0, 10]
+	DstBlock		"Ic"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "\n負載\n\n\n"
+      SrcPort		      1
+      Points		      [0, 0; 0, 10]
+      Branch {
+	DstBlock		"Ground (input)"
+	DstPort			1
+      }
+      Branch {
+	Points			[20, 0; 0, -95]
+	DstBlock		"vc"
+	DstPort			2
+      }
+    }
+    Line {
+      SrcBlock		      "功率電晶體"
+      SrcPort		      2
+      Points		      [0, 40]
+      DstBlock		      "Demux"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Diode"
+      SrcPort		      2
+      DstBlock		      "Subsystem7"
+      DstPort		      enable
+    }
+    Line {
+      SrcBlock		      "FW 二極體"
+      SrcPort		      1
+      Points		      [0, -10]
+      DstBlock		      "Diode"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Ic"
+      SrcPort		      2
+      DstBlock		      "C"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "VDC\n48V"
+      SrcPort		      1
+      DstBlock		      "Is"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Is"
+      SrcPort		      2
+      Points		      [75, 0; 0, 15]
+      DstBlock		      "功率電晶體"
+      DstPort		      1
+    }
+    Line {
+      Name		      "輸入電流Iin"
+      Labels		      [0, 0]
+      SrcBlock		      "Is"
+      SrcPort		      1
+      Points		      [0, -40]
+      DstBlock		      "波形分析"
+      DstPort		      2
+    }
+    Line {
+      Name		      "二極體ID"
+      Labels		      [0, 0]
+      SrcBlock		      "Diode"
+      SrcPort		      1
+      Points		      [0, -70]
+      DstBlock		      "波形分析"
+      DstPort		      4
+    }
+    Line {
+      Name		      "電感電流IL"
+      Labels		      [0, 0]
+      SrcBlock		      "L current"
+      SrcPort		      1
+      Points		      [10, 0; 0, -40]
+      DstBlock		      "波形分析"
+      DstPort		      3
+    }
+    Line {
+      Name		      "電容電壓Vc"
+      Labels		      [0, 0]
+      SrcBlock		      "vc"
+      SrcPort		      1
+      Points		      [65, 0]
+      DstBlock		      "電容波形分析"
+      DstPort		      1
+    }
+    Line {
+      Name		      "電容電流Ic"
+      Labels		      [0, 0]
+      SrcBlock		      "Ic"
+      SrcPort		      1
+      Points		      [0, 20]
+      DstBlock		      "電容波形分析"
+      DstPort		      2
+    }
+    Annotation {
+      Name		      "電力電子電腦輔助分析與設計  新文京出版設社\n"
+      Position		      [205, 617]
+      FontName		      "Arial"
+      FontSize		      12
+      FontWeight	      "bold"
+    }
+  }
+}

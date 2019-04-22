@@ -1,4 +1,34 @@
 
+
+
+內建轉換函式
+str
+int
+float
+
+
+int("1010", 2)
+int("A0A0", 16)
+
+
+
+python
+
+使用matplotlib繪圖
+http://me1237guy.pixnet.net/blog/post/64496047
+http://me1237guy.pixnet.net/blog/post/64496047
+
+https://matplotlib.org/index.html
+
+https://matplotlib.org/gallery/index.html
+
+https://matplotlib.org/api/cbook_api.html#matplotlib.cbook.get_sample_data
+
+https://matplotlib.org/api/cbook_api.html#matplotlib.cbook.get_sample_data
+
+
+
+
 https://matplotlib.org/gallery/lines_bars_and_markers/simple_plot.html#sphx-glr-gallery-lines-bars-and-markers-simple-plot-py
 
 

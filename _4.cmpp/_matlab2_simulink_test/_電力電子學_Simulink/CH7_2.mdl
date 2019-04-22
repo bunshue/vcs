@@ -1,0 +1,2218 @@
+Model {
+  Name			  "CH7_2"
+  Version		  5.0
+  Description		  "高苑科技大學 電機系\n電力電子實驗室"
+  SaveDefaultBlockParams  on
+  SampleTimeColors	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  off
+  ShowLineDimensions	  off
+  ShowPortDataTypes	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ExecutionOrder	  off
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  DataTypeOverride	  "UseLocalSettings"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  BlockNameDataTip	  off
+  BlockParametersDataTip  off
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks off
+  BrowserLookUnderMasks	  off
+  Created		  "Tue Feb 05 21:20:32 2008"
+  Creator		  "徐瑞隆老師"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "ELECTRONIC"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Mon Mar 09 13:19:10 2009"
+  ModelVersionFormat	  "1.%<AutoIncrement:48>"
+  ConfigurationManager	  "None"
+  SimParamPage		  "Solver"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  on
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  on
+  ExtModeAutoUpdateStatusClock on
+  BufferReuse		  on
+  RTWExpressionDepthLimit 5
+  SimulationMode	  "normal"
+  Solver		  "ode23tb"
+  SolverMode		  "Auto"
+  StartTime		  "0.0"
+  StopTime		  "8/60"
+  MaxOrder		  5
+  MaxStep		  "1e-5"
+  MinStep		  "auto"
+  MaxNumMinSteps	  "-1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  RelTol		  "1e-5"
+  AbsTol		  "1e-5"
+  OutputOption		  "RefineOutputTimes"
+  OutputTimes		  "[]"
+  Refine		  "1"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveTime		  on
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  on
+  OutputSaveName	  "yout"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  SaveFormat		  "Array"
+  Decimation		  "1"
+  LimitDataPoints	  on
+  MaxDataPoints		  "1000"
+  SignalLoggingName	  "sigsOut"
+  ConsistencyChecking	  "none"
+  ArrayBoundsChecking	  "none"
+  AlgebraicLoopMsg	  "warning"
+  BlockPriorityViolationMsg "warning"
+  MinStepSizeMsg	  "warning"
+  InheritedTsInSrcMsg	  "warning"
+  DiscreteInheritContinuousMsg "warning"
+  MultiTaskRateTransMsg	  "error"
+  SingleTaskRateTransMsg  "none"
+  CheckForMatrixSingularity "none"
+  IntegerOverflowMsg	  "warning"
+  Int32ToFloatConvMsg	  "warning"
+  ParameterDowncastMsg	  "error"
+  ParameterOverflowMsg	  "error"
+  ParameterPrecisionLossMsg "warning"
+  UnderSpecifiedDataTypeMsg "none"
+  UnnecessaryDatatypeConvMsg "none"
+  VectorMatrixConversionMsg "none"
+  InvalidFcnCallConnMsg	  "error"
+  SignalLabelMismatchMsg  "none"
+  UnconnectedInputMsg	  "warning"
+  UnconnectedOutputMsg	  "warning"
+  UnconnectedLineMsg	  "warning"
+  SfunCompatibilityCheckMsg "none"
+  RTWInlineParameters	  off
+  BlockReductionOpt	  on
+  BooleanDataType	  on
+  ConditionallyExecuteInputs on
+  ParameterPooling	  on
+  OptimizeBlockIOStorage  on
+  ZeroCross		  on
+  AssertionControl	  "UseLocalSettings"
+  ProdHWDeviceType	  "Microprocessor"
+  ProdHWWordLengths	  "8,16,32,32"
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWTemplateMakefile	  "grt_default_tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  RTWRetainRTWFile	  off
+  TLCProfiler		  off
+  TLCDebug		  off
+  TLCCoverage		  off
+  TLCAssertion		  off
+  BlockDefaults {
+    Orientation		    "right"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      ComplexToMagnitudeAngle
+      Output		      "Magnitude and angle"
+    }
+    Block {
+      BlockType		      ComplexToRealImag
+      Output		      "Real and imag"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      ShowAdditionalParam     off
+      OutDataTypeMode	      "Inherit from 'Constant value'"
+      OutDataType	      "sfix(16)"
+      ConRadixGroup	      "Use specified scaling"
+      OutScaling	      "2^0"
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      DigitalClock
+      SampleTime	      "1"
+    }
+    Block {
+      BlockType		      DiscretePulseGenerator
+      PulseType		      "Sample based"
+      Amplitude		      "1"
+      Period		      "2"
+      PulseWidth	      "1"
+      PhaseDelay	      "0"
+      SampleTime	      "1"
+      VectorParams1D	      on
+    }
+    Block {
+      BlockType		      Display
+      Format		      "short"
+      Decimation	      "10"
+      Floating		      off
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      EnablePort
+      StatesWhenEnabling      "held"
+      ShowOutputPort	      off
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      From
+    }
+    Block {
+      BlockType		      Gain
+      Gain		      "1"
+      Multiplication	      "Element-wise(K.*u)"
+      ShowAdditionalParam     off
+      ParameterDataTypeMode   "Same as input"
+      ParameterDataType	      "sfix(16)"
+      ParameterScalingMode    "Best Precision: Matrix-wise"
+      ParameterScaling	      "2^0"
+      OutDataTypeMode	      "Same as input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Goto
+    }
+    Block {
+      BlockType		      Ground
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      PortDimensions	      "-1"
+      SampleTime	      "-1"
+      ShowAdditionalParam     off
+      LatchInput	      off
+      DataType		      "auto"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Math
+      Operator		      "exp"
+      OutputSignalType	      "auto"
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      Product
+      Inputs		      "2"
+      Multiplication	      "Element-wise(.*)"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Reference
+    }
+    Block {
+      BlockType		      Saturate
+      UpperLimit	      "0.5"
+      LowerLimit	      "-0.5"
+      LinearizeAsGain	      on
+      ZeroCross		      on
+    }
+    Block {
+      BlockType		      Scope
+      Floating		      off
+      ModelBased	      off
+      TickLabels	      "OneTimeTick"
+      ZoomMode		      "on"
+      Grid		      "on"
+      TimeRange		      "auto"
+      YMin		      "-5"
+      YMax		      "5"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitDataPoints	      on
+      MaxDataPoints	      "5000"
+      Decimation	      "1"
+      SampleInput	      off
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Selector
+      InputType		      "Vector"
+      ElementSrc	      "Internal"
+      Elements		      "1"
+      RowSrc		      "Internal"
+      Rows		      "1"
+      ColumnSrc		      "Internal"
+      Columns		      "1"
+      InputPortWidth	      "-1"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      on
+      Permissions	      "ReadWrite"
+      RTWSystemCode	      "Auto"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      MinMaxOverflowLogging   "UseLocalSettings"
+    }
+    Block {
+      BlockType		      Sum
+      IconShape		      "rectangular"
+      Inputs		      "++"
+      ShowAdditionalParam     off
+      InputSameDT	      on
+      OutDataTypeMode	      "Same as first input"
+      OutDataType	      "sfix(16)"
+      OutScaling	      "2^0"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+    }
+    Block {
+      BlockType		      Terminator
+    }
+    Block {
+      BlockType		      Trigonometry
+      Operator		      "sin"
+      OutputSignalType	      "auto"
+    }
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  System {
+    Name		    "CH7_2"
+    Location		    [2, 82, 773, 506]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    200
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "A4"
+    PaperUnits		    "centimeters"
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    Block {
+      BlockType		      Reference
+      Name		      "\n\n\n功率電晶體\nS2"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [2, 2]
+      Position		      [469, 190, 516, 230]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Power\nElectronics/IGBT"
+      SourceType	      "IGBT"
+      Ron		      "0.01"
+      Lon		      "1e-6"
+      Vf		      "0"
+      Tf		      "1e-6"
+      Tt		      "1e-6"
+      IC		      "0"
+      Rs		      "10000"
+      Cs		      "inf"
+      PSBOutputType	      "10"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "0_IN"
+      Position		      [720, 315, 740, 335]
+      Value		      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "D 1"
+      Ports		      [2]
+      Position		      [470, 271, 500, 304]
+      BackgroundColor	      "lightBlue"
+      Location		      [110, 239, 639, 518]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+      }
+      TimeRange		      "0.1"
+      YMin		      "0~-5"
+      YMax		      "20~5"
+      SaveName		      "V2X"
+      DataFormat	      "Array"
+      LimitDataPoints	      off
+      SampleInput	      on
+      SampleTime	      "10e-6"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "D2"
+      Ports		      [2]
+      Position		      [475, 321, 505, 354]
+      BackgroundColor	      "lightBlue"
+      Location		      [110, 239, 639, 518]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+      }
+      TimeRange		      "0.1"
+      YMin		      "0~-5"
+      YMax		      "20~5"
+      SaveName		      "V2X1"
+      DataFormat	      "Array"
+      LimitDataPoints	      off
+      SampleInput	      on
+      SampleTime	      "10e-6"
+    }
+    Block {
+      BlockType		      Demux
+      Name		      "Demux"
+      Ports		      [1, 2]
+      Position		      [420, 271, 425, 304]
+      BackgroundColor	      "black"
+      Outputs		      "2"
+      Port {
+	PortNumber		1
+	Name			"二極體iD1"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Demux
+      Name		      "Demux2"
+      Ports		      [1, 2]
+      Position		      [550, 271, 555, 304]
+      BackgroundColor	      "black"
+      Outputs		      "2"
+      Port {
+	PortNumber		1
+	Name			"功率電晶體is1"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Display
+      Name		      "Display"
+      Ports		      [1]
+      Position		      [865, 225, 955, 255]
+      BackgroundColor	      "lightBlue"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Ground"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1]
+      Position		      [646, 210, 674, 235]
+      Orientation	      "down"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (input)"
+      SourceType	      "Ground"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Ground3"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1]
+      Position		      [290, 140, 310, 160]
+      NamePlacement	      "alternate"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (input)"
+      SourceType	      "Ground"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "I2"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [1, 2]
+      Position		      [550, 73, 575, 97]
+      SourceBlock	      "powerlib2/Measurements/Current Measurement"
+      SourceType	      "Current Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "01"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"負載電流Io"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      DiscretePulseGenerator
+      Name		      "Pulse2"
+      Position		      [245, 335, 295, 365]
+      NamePlacement	      "alternate"
+      PulseType		      "Time based"
+      Period		      "1/60"
+      PulseWidth	      "50"
+      PhaseDelay	      "1/120"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "RL\n\n\n"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [643, 130, 677, 170]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Elements/Series RLC Branch"
+      SourceType	      "Series RLC Branch"
+      a			      "10"
+      b			      "50e-03"
+      c			      "inf"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "S1"
+      Ports		      [2]
+      Position		      [610, 271, 640, 304]
+      BackgroundColor	      "lightBlue"
+      Location		      [110, 239, 639, 518]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+      }
+      TimeRange		      "0.1"
+      YMin		      "0~-5"
+      YMax		      "20~5"
+      SaveName		      "V2X2"
+      DataFormat	      "Array"
+      LimitDataPoints	      off
+      SampleInput	      on
+      SampleTime	      "10e-6"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "S2"
+      Ports		      [2]
+      Position		      [610, 321, 640, 354]
+      BackgroundColor	      "lightBlue"
+      Location		      [110, 239, 639, 518]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      TimeRange		      "0.1"
+      YMin		      "0~-5"
+      YMax		      "20~5"
+      SaveName		      "V2X3"
+      DataFormat	      "Array"
+      LimitDataPoints	      off
+      SampleInput	      on
+      SampleTime	      "10e-6"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "T connector"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1, 1]
+      Position		      [395, 55, 415, 75]
+      NamePlacement	      "alternate"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/T connector"
+      SourceType	      "Bus Bar"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "T connector1"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1, 1]
+      Position		      [445, 140, 465, 160]
+      Orientation	      "down"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/T connector"
+      SourceType	      "Bus Bar"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "T connector2"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1, 1]
+      Position		      [445, 135, 465, 155]
+      Orientation	      "down"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/T connector"
+      SourceType	      "Bus Bar"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Terminator
+      Name		      "Terminator1"
+      Position		      [860, 450, 870, 460]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+    }
+    Block {
+      BlockType		      Terminator
+      Name		      "Terminator2"
+      Position		      [860, 355, 870, 365]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      ShowName		      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "V2"
+      Tag		      "PoWeRsYsTeMmEaSuReMeNt"
+      Ports		      [2, 1]
+      Position		      [690, 133, 715, 157]
+      SourceBlock	      "powerlib2/Measurements/Voltage Measurement"
+      SourceType	      "Voltage Measurement"
+      PhasorSimulation	      off
+      OutputType	      "Magnitude"
+      PSBOutputType	      "0"
+      PSBequivalent	      "0"
+      Port {
+	PortNumber		1
+	Name			"負載電壓Vo"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Vdc = 50 V"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [250, 85, 270, 120]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Electrical\nSources/DC Voltage Source"
+      SourceType	      "DC Voltage Source"
+      V			      "50"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Vdc = 50 V "
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 1]
+      Position		      [250, 165, 270, 200]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Electrical\nSources/DC Voltage Source"
+      SourceType	      "DC Voltage Source"
+      V			      "50"
+      mesure		      "None"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "n=1 基本波峰值電壓\nFundamental"
+      Ports		      [1]
+      Position		      [870, 396, 950, 424]
+      BackgroundColor	      "lightBlue"
+      Decimation	      "1"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "output Ground4"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [0, 1]
+      Position		      [662, 180, 688, 205]
+      Orientation	      "up"
+      ShowName		      off
+      SourceBlock	      "powerlib2/Connectors/Ground (output)"
+      SourceType	      "Ground"
+      PSBOutputType	      "1"
+    }
+    Block {
+      BlockType		      Demux
+      Name		      "二極體\n波形分析"
+      Ports		      [1, 2]
+      Position		      [420, 321, 425, 354]
+      BackgroundColor	      "black"
+      Outputs		      "2"
+      Port {
+	PortNumber		1
+	Name			"二極體ID2"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "二極體2"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 2]
+      Position		      [369, 190, 416, 230]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Power\nElectronics/Diode"
+      SourceType	      "Diode"
+      Ron		      "0.01"
+      Lon		      "0"
+      Vf		      "0.8"
+      IC		      "0"
+      Rs		      "10"
+      Cs		      "0.01e-6"
+      PSBOutputType	      "10"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "二極體D1"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [1, 2]
+      Position		      [380, 95, 420, 130]
+      Orientation	      "up"
+      SourceBlock	      "powerlib2/Power\nElectronics/Diode"
+      SourceType	      "Diode"
+      Ron		      "0.01"
+      Lon		      "0"
+      Vf		      "0.8"
+      IC		      "0"
+      Rs		      "10"
+      Cs		      "0.01e-6"
+      PSBOutputType	      "10"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "功率電晶體\nS1"
+      Tag		      "PoWeRsYsTeMbLoCk"
+      Ports		      [2, 2]
+      Position		      [464, 80, 511, 120]
+      Orientation	      "down"
+      NamePlacement	      "alternate"
+      SourceBlock	      "powerlib2/Power\nElectronics/IGBT"
+      SourceType	      "IGBT"
+      Ron		      "0.01"
+      Lon		      "1e-6"
+      Vf		      "0"
+      Tf		      "1e-6"
+      Tt		      "1e-6"
+      IC		      "0"
+      Rs		      "10000"
+      Cs		      "inf"
+      PSBOutputType	      "10"
+    }
+    Block {
+      BlockType		      Demux
+      Name		      "功率電晶體\n波形分析\n"
+      Ports		      [1, 2]
+      Position		      [550, 321, 555, 354]
+      BackgroundColor	      "black"
+      Outputs		      "2"
+      Port {
+	PortNumber		1
+	Name			"功率電晶體is2"
+	TestPoint		off
+	LinearAnalysisOutput	off
+	LinearAnalysisInput	off
+	RTWStorageClass		"Auto"
+	DataLogging		off
+	DataLoggingNameMode	"SignalName"
+	DataLoggingDecimateData	off
+	DataLoggingDecimation	"2"
+	DataLoggingLimitDataPoints off
+	DataLoggingMaxPoints	"5000"
+      }
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "波形分析"
+      Ports		      [2]
+      Position		      [870, 68, 905, 117]
+      BackgroundColor	      "lightBlue"
+      Location		      [5, 60, 805, 573]
+      Open		      off
+      NumInputPorts	      "2"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+      }
+      TimeRange		      "0.0333333"
+      YMin		      "-22.5~-350"
+      YMax		      "22.5~350"
+      SaveToWorkspace	      on
+      SaveName		      "psb1phPWM2_str"
+      DataFormat	      "StructureWithTime"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "波形分析1"
+      Ports		      [6]
+      Position		      [705, 367, 740, 443]
+      BackgroundColor	      "lightBlue"
+      Location		      [6, 60, 806, 543]
+      Open		      on
+      NumInputPorts	      "6"
+      ZoomMode		      "xonly"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+	axes2			"%<SignalLabel>"
+	axes3			"%<SignalLabel>"
+	axes4			"%<SignalLabel>"
+	axes5			"%<SignalLabel>"
+	axes6			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+	axes2			""
+	axes3			""
+	axes4			""
+	axes5			""
+	axes6			""
+      }
+      TimeRange		      "0.0333333"
+      YMin		      "-22.5~-350~-5~-5~-5~-5"
+      YMax		      "22.5~350~5~5~5~5"
+      SaveToWorkspace	      on
+      SaveName		      "psb1phPWM2_str1"
+      DataFormat	      "StructureWithTime"
+      MaxDataPoints	      "30000"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "計算電壓Vo\n均方根值\nRMS value"
+      Ports		      [1, 1]
+      Position		      [800, 218, 845, 262]
+      AncestorBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nRMS value"
+      TreatAsAtomicUnit	      off
+      MaskType		      "Discrete RMS value"
+      MaskDescription	      "This discrete block measures the root mean squa"
+"re value of instantaneous current or voltage signal connected to the input of"
+" the block. The RMS value is calculated over a running window of one cycle of"
+" the specified fundamental frequency.\nFor the first cycle of simulation, the"
+" ouput is held constant to the RMS value of the specified magnitude of initia"
+"l input."
+      MaskPromptString	      "Fundamental frequency (Hz):|Initial magnitude o"
+"f input:|Sample time:"
+      MaskStyleString	      "edit,edit,edit"
+      MaskTunableValueString  "on,on,on"
+      MaskCallbackString      "||"
+      MaskEnableString	      "on,on,on"
+      MaskVisibilityString    "on,on,on"
+      MaskToolTipString	      "on,on,on"
+      MaskVarAliasString      ",,"
+      MaskVariables	      "Freq=@1;Mag_Init=@2;Ts=@3;"
+      MaskIconFrame	      on
+      MaskIconOpaque	      off
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "60|0|50e-6"
+      System {
+	Name			"計算電壓Vo\n均方根值\nRMS value"
+	Location		[52, 111, 696, 366]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In"
+	  Position		  [40, 110, 60, 130]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Discrete \nMean value"
+	  Ports			  [1, 1]
+	  Position		  [225, 100, 280, 160]
+	  AncestorBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nMean value"
+	  SourceBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nMean value"
+	  SourceType		  "Discrete Mean value"
+	  Freq			  "Freq"
+	  Vinit			  "sqrt(Mag_Init)"
+	  Ts			  "Ts"
+	}
+	Block {
+	  BlockType		  Math
+	  Name			  "Math\nFunction1"
+	  Ports			  [1, 1]
+	  Position		  [420, 115, 450, 145]
+	  ShowName		  off
+	  Operator		  "sqrt"
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product"
+	  Ports			  [2, 1]
+	  Position		  [110, 111, 135, 149]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Saturate
+	  Name			  "Saturation\nAjout P.B\npour eviter \nsqrt(n"
+"egatif)"
+	  Position		  [345, 115, 375, 145]
+	  BackgroundColor	  "red"
+	  UpperLimit		  "Inf"
+	  LowerLimit		  "0"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "RMS"
+	  Position		  [490, 120, 510, 140]
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Saturation\nAjout P.B\npour eviter \nsqrt(n"
+"egatif)"
+	  SrcPort		  1
+	  DstBlock		  "Math\nFunction1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Discrete \nMean value"
+	  SrcPort		  1
+	  DstBlock		  "Saturation\nAjout P.B\npour eviter \nsqrt(n"
+"egatif)"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "Discrete \nMean value"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Math\nFunction1"
+	  SrcPort		  1
+	  DstBlock		  "RMS"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "In"
+	  SrcPort		  1
+	  Points		  [10, 0]
+	  Branch {
+	    DstBlock		    "Product"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 20]
+	    DstBlock		    "Product"
+	    DstPort		    2
+	  }
+	}
+	Annotation {
+	  Name			  "Discrete RMS value"
+	  Position		  [96, 18]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Name			  "Gilbert Sybille, Pierre Giroux\nPower Syste"
+"m Simulation Laboratory\nIREQ, Hydro-Quebc"
+	  Position		  [107, 51]
+	}
+	Annotation {
+	  Position		  [106, 18]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Position		  [117, 51]
+	}
+	Annotation {
+	  Name			  "電力電子電腦輔助分析與設計  新文京出版設社"
+"\n高苑科技大學電機系 \n電力電子實驗室\n徐瑞隆 著\n"
+	  Position		  [417, 25]
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "計算總諧波失真 THD\nTotal  Harmonic\nDistorsion"
+      Ports		      [1, 1]
+      Position		      [795, 130, 845, 180]
+      AncestorBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nTotal  Harmonic\nDistorsion"
+      TreatAsAtomicUnit	      off
+      MaskType		      "Discret Total Harmonic Distortion "
+      MaskDescription	      "This discrete block measures the total harmonic"
+" distortion  (THD ) of a periodic instantaneous voltage or current connected "
+"to the input.\nThe THD is defined as:\n\n                  THD = Uh/U1\nwhere"
+":\n   Uh = rms value of the harmonics\n         = sqrt(U2^2 + U3^2 + ....+ Un"
+"^2 +...)\n   U1 = rms value of the fundamental component"
+      MaskPromptString	      "Fundamental frequency (Hz):|Sample time:"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskCallbackString      "|"
+      MaskEnableString	      "on,on"
+      MaskVisibilityString    "on,on"
+      MaskToolTipString	      "on,on"
+      MaskVarAliasString      ","
+      MaskVariables	      "Freq=@1;Ts=@2;"
+      MaskInitialization      "\n"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "60|50e-6"
+      System {
+	Name			"計算總諧波失真 THD\nTotal  Harmonic\nDistorsi"
+"on"
+	Location		[-69, 195, 698, 688]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "signal"
+	  Position		  [30, 133, 60, 147]
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  Position		  [430, 263, 460, 287]
+	  ShowName		  off
+	  Value			  "1e-6"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Discrete \nFourier"
+	  Ports			  [1, 2]
+	  Position		  [135, 200, 190, 260]
+	  SourceBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nFourier"
+	  SourceType		  "Discrete Fourier"
+	  Freq			  "Freq"
+	  n			  "1"
+	  Par_Init		  "[0 0]"
+	  Ts			  "Ts"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Discrete \nRMS value"
+	  Ports			  [1, 1]
+	  Position		  [140, 114, 190, 166]
+	  SourceBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nRMS value"
+	  SourceType		  "Discrete RMS value"
+	  Freq			  "Freq"
+	  Mag_Init		  "0"
+	  Ts			  "Ts"
+	  Port {
+	    PortNumber		    1
+	    Name		    "Urms"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Math
+	  Name			  "Math\nFunction2"
+	  Ports			  [1, 1]
+	  Position		  [480, 165, 510, 195]
+	  ShowName		  off
+	  Operator		  "sqrt"
+	  Port {
+	    PortNumber		    1
+	    Name		    "Uhrms"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product"
+	  Ports			  [2, 1]
+	  Position		  [585, 172, 615, 203]
+	  ShowName		  off
+	  Inputs		  "*/"
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product1"
+	  Ports			  [2, 1]
+	  Position		  [340, 131, 365, 169]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product2"
+	  Ports			  [2, 1]
+	  Position		  [340, 206, 365, 244]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum"
+	  Ports			  [2, 1]
+	  Position		  [410, 162, 435, 193]
+	  ShowName		  off
+	  Inputs		  "+-"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum1"
+	  Ports			  [2, 1]
+	  Position		  [500, 244, 525, 286]
+	  ShowName		  off
+	  Inputs		  "+-"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  Position		  [230, 257, 245, 273]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "peak2rms"
+	  Position		  [225, 200, 245, 230]
+	  Gain			  "1/sqrt(2)"
+	  Port {
+	    PortNumber		    1
+	    Name		    "U1 rms"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "THD"
+	  Position		  [655, 183, 685, 197]
+	}
+	Line {
+	  SrcBlock		  "Discrete \nFourier"
+	  SrcPort		  2
+	  Points		  [10, 0; 0, 20]
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "U1 rms"
+	  Labels		  [1, 1]
+	  SrcBlock		  "peak2rms"
+	  SrcPort		  1
+	  Points		  [65, 0]
+	  Branch {
+	    DstBlock		    "Product2"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 20]
+	    Branch {
+	      Points		      [0, 20]
+	      DstBlock		      "Sum1"
+	      DstPort		      1
+	    }
+	    Branch {
+	      DstBlock		      "Product2"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Line {
+	  SrcBlock		  "Discrete \nFourier"
+	  SrcPort		  1
+	  DstBlock		  "peak2rms"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "THD"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "Uhrms"
+	  Labels		  [1, 1]
+	  SrcBlock		  "Math\nFunction2"
+	  SrcPort		  1
+	  DstBlock		  "Product"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Product2"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  DstBlock		  "Sum"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Product1"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  DstBlock		  "Sum"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Sum"
+	  SrcPort		  1
+	  DstBlock		  "Math\nFunction2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "signal"
+	  SrcPort		  1
+	  Points		  [40, 0]
+	  Branch {
+	    DstBlock		    "Discrete \nRMS value"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 90]
+	    DstBlock		    "Discrete \nFourier"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  Name			  "Urms"
+	  Labels		  [1, 1]
+	  SrcBlock		  "Discrete \nRMS value"
+	  SrcPort		  1
+	  Points		  [105, 0]
+	  Branch {
+	    DstBlock		    "Product1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 20]
+	    DstBlock		    "Product1"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Sum1"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Sum1"
+	  SrcPort		  1
+	  Points		  [40, 0]
+	  DstBlock		  "Product"
+	  DstPort		  2
+	}
+	Annotation {
+	  Name			  "THD= Uhrms /U1rms"
+	  Position		  [155, 334]
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "where:"
+	  Position		  [120, 354]
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "U1rms =  rms value of the fundamenrtal comp"
+"onent"
+	  Position		  [240, 394]
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Uhrms =  rms value of harmonics = sqrt( U2^"
+"2 + U3^2 + U4^2....) =  sqrt( Urms^2 -U1rms^2)"
+	  Position		  [350, 374]
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Urms = true rms value including harmonics"
+	  Position		  [215, 414]
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "THD= Uhrms /U1rms"
+	  Position		  [235, 299]
+	  FontSize		  12
+	}
+	Annotation {
+	  Name			  "Discrete Total Harmonic Distortion (THD)"
+	  Position		  [141, 23]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Name			  "Pierre Giroux, Gilbert Sybille\nPower Syste"
+"m Simulation Laboratory\nIREQ, Hydro-Quebc"
+	  Position		  [122, 51]
+	}
+	Annotation {
+	  Position		  [260, 329]
+	  FontSize		  12
+	}
+	Annotation {
+	  Position		  [225, 349]
+	  FontSize		  12
+	}
+	Annotation {
+	  Position		  [345, 389]
+	  FontSize		  12
+	}
+	Annotation {
+	  Position		  [455, 369]
+	  FontSize		  12
+	}
+	Annotation {
+	  Position		  [320, 409]
+	  FontSize		  12
+	}
+	Annotation {
+	  Position		  [340, 294]
+	  FontSize		  12
+	}
+	Annotation {
+	  Position		  [141, 18]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Position		  [122, 46]
+	}
+	Annotation {
+	  Name			  "電力電子電腦輔助分析與設計  新文京出版設社"
+"\n高苑科技大學電機系 \n電力電子實驗室\n徐瑞隆 著\n"
+	  Position		  [505, 88]
+	}
+      }
+    }
+    Block {
+      BlockType		      DiscretePulseGenerator
+      Name		      "脈波產生器11"
+      Position		      [245, 285, 295, 315]
+      NamePlacement	      "alternate"
+      PulseType		      "Time based"
+      Period		      "1/60"
+      PulseWidth	      "50"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "傅立葉分析 \nFourier"
+      Ports		      [1, 2]
+      Position		      [815, 400, 845, 440]
+      AncestorBlock	      "powerlib_extras/Discrete\nMeasurements/Discrete"
+" \nFourier"
+      TreatAsAtomicUnit	      off
+      MaskType		      "Discrete Fourier"
+      MaskDescription	      "This block computes the fundamental value of th"
+"e input signal over a running window of one cycle of the specified fundamenta"
+"l frequency. First and second outputs return respectively the magnitude and p"
+"hase (degrees) of the fundamental.\nFor the first cycle of simulation, the ou"
+"puts are held constant to the value specified by the parameter \"Initial inpu"
+"t\"."
+      MaskPromptString	      "Fundamental frequency (Hz):|Harmonic n (0=DC; 1"
+"=fundamental; 2=2nd harm;  ...):|Initial input: [ Mag  Phase(degrees) ]|Sampl"
+"e time:"
+      MaskStyleString	      "edit,edit,edit,edit"
+      MaskTunableValueString  "on,on,on,on"
+      MaskCallbackString      "|||"
+      MaskEnableString	      "on,on,on,on"
+      MaskVisibilityString    "on,on,on,on"
+      MaskToolTipString	      "on,on,on,on"
+      MaskVarAliasString      ",,,"
+      MaskVariables	      "Freq=@1;n=@2;Par_Init=@3;Ts=@4;"
+      MaskInitialization      "k=2-(n==0);\nSamplesPerCycle=1/Freq/Ts;\nRoundS"
+"amplesPerCycle=round(SamplesPerCycle);\nDelay=RoundSamplesPerCycle*Ts - Ts/2;"
+"\nCorrection=SamplesPerCycle/RoundSamplesPerCycle - 1;\nReal_Init=Par_Init(1)"
+"*cos(pi/180*Par_Init(2));\nImag_Init=Par_Init(1)*sin(pi/180*Par_Init(2));\n\n"
+"\n"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "60|1|[0 0]|50e-6"
+      System {
+	Name			"傅立葉分析 \nFourier"
+	Location		[-100, 271, 688, 702]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "In"
+	  Position		  [155, 133, 185, 147]
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Cartesian to\nPolar"
+	  Ports			  [2, 2]
+	  Position		  [610, 174, 660, 221]
+	  SourceBlock		  "simulink_extras/Transformations/Cartesian t"
+"o\nPolar"
+	  SourceType		  "Cart2Polar"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 2]
+	  Position		  [420, 181, 425, 219]
+	  BackgroundColor	  "black"
+	  ShowName		  off
+	  Outputs		  "2"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Discrete \nMean value1"
+	  Ports			  [1, 1]
+	  Position		  [490, 129, 545, 181]
+	  AncestorBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nMean value"
+	  SourceBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nMean value"
+	  SourceType		  "Discrete Mean value"
+	  Freq			  "Freq"
+	  Vinit			  "Real_Init"
+	  Ts			  "Ts"
+	  Port {
+	    PortNumber		    1
+	    Name		    "Real"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Discrete \nMean value2"
+	  Ports			  [1, 1]
+	  Position		  [490, 219, 545, 271]
+	  AncestorBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nMean value"
+	  SourceBlock		  "powerlib_extras/Discrete\nMeasurements/Disc"
+"rete \nMean value"
+	  SourceType		  "Discrete Mean value"
+	  Freq			  "Freq"
+	  Vinit			  "Imag_Init"
+	  Ts			  "Ts"
+	  Port {
+	    PortNumber		    1
+	    Name		    "Imag"
+	    TestPoint		    off
+	    LinearAnalysisOutput    off
+	    LinearAnalysisInput	    off
+	    RTWStorageClass	    "Auto"
+	    DataLogging		    off
+	    DataLoggingNameMode	    "SignalName"
+	    DataLoggingDecimateData off
+	    DataLoggingDecimation   "2"
+	    DataLoggingLimitDataPoints off
+	    DataLoggingMaxPoints    "5000"
+	  }
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  Position		  [75, 200, 155, 250]
+	  ShowName		  off
+	  Gain			  "2*pi*n*Freq"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain1"
+	  Position		  [280, 204, 310, 236]
+	  ShowName		  off
+	  Gain			  "k"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  Ports			  [2, 1]
+	  Position		  [250, 189, 255, 251]
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product"
+	  Ports			  [2, 1]
+	  Position		  [345, 160, 380, 240]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Rad->Deg."
+	  Position		  [710, 215, 750, 255]
+	  Gain			  "180/pi"
+	}
+	Block {
+	  BlockType		  Trigonometry
+	  Name			  "Trigonometric\nFunction"
+	  Ports			  [1, 1]
+	  Position		  [195, 193, 225, 217]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Trigonometry
+	  Name			  "Trigonometric\nFunction1"
+	  Ports			  [1, 1]
+	  Position		  [195, 223, 225, 247]
+	  ShowName		  off
+	  Operator		  "cos"
+	}
+	Block {
+	  BlockType		  DigitalClock
+	  Name			  "t"
+	  Position		  [25, 214, 60, 236]
+	  SampleTime		  "Ts"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Mag"
+	  Position		  [775, 178, 805, 192]
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Phase"
+	  Position		  [775, 228, 805, 242]
+	  Port			  "2"
+	}
+	Line {
+	  SrcBlock		  "Rad->Deg."
+	  SrcPort		  1
+	  DstBlock		  "Phase"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Cartesian to\nPolar"
+	  SrcPort		  1
+	  DstBlock		  "Mag"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Cartesian to\nPolar"
+	  SrcPort		  2
+	  Points		  [20, 0; 0, 25]
+	  DstBlock		  "Rad->Deg."
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "Imag"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Discrete \nMean value2"
+	  SrcPort		  1
+	  Points		  [30, 0; 0, -35]
+	  DstBlock		  "Cartesian to\nPolar"
+	  DstPort		  2
+	}
+	Line {
+	  Name			  "Real"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Discrete \nMean value1"
+	  SrcPort		  1
+	  Points		  [30, 0; 0, 30]
+	  DstBlock		  "Cartesian to\nPolar"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [30, 0; 0, 35]
+	  DstBlock		  "Discrete \nMean value2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  Points		  [30, 0; 0, -35]
+	  DstBlock		  "Discrete \nMean value1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain1"
+	  SrcPort		  1
+	  DstBlock		  "Product"
+	  DstPort		  2
+	}
+	Line {
+	  Labels		  [0, 0]
+	  SrcBlock		  "In"
+	  SrcPort		  1
+	  Points		  [125, 0; 0, 40]
+	  DstBlock		  "Product"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "Gain1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Trigonometric\nFunction1"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Trigonometric\nFunction"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  Points		  [10, 0]
+	  Branch {
+	    Points		    [0, 10]
+	    DstBlock		    "Trigonometric\nFunction1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -20]
+	    DstBlock		    "Trigonometric\nFunction"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "t"
+	  SrcPort		  1
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "Pierre Giroux, Gilbert Sybille\nPower Syste"
+"m Simulation Laboratory\nIREQ, Hydro-Quebc"
+	  Position		  [107, 66]
+	}
+	Annotation {
+	  Name			  "Discrete Fourier "
+	  Position		  [111, 33]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Position		  [117, 56]
+	}
+	Annotation {
+	  Position		  [121, 23]
+	  FontSize		  12
+	  FontWeight		  "bold"
+	}
+	Annotation {
+	  Name			  "電力電子電腦輔助分析與設計  新文京出版設社"
+"\n高苑科技大學電機系 \n電力電子實驗室\n徐瑞隆 著\n"
+	  Position		  [425, 72]
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "傅立葉分析FFT"
+      Ports		      [3, 2]
+      Position		      [795, 300, 850, 350]
+      SourceBlock	      "powerlib_extras/Discrete\nMeasurements/FFT"
+      SourceType	      "Fast Fourier by Matlab Function"
+      f1		      "60"
+      Ts		      "200e-6"
+      TsFFT		      "0.1"
+      base		      "[1 1  1] "
+      nDec		      "0"
+      mask		      "[1 -1 1]"
+      figure_N		      "1"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "頻譜分析"
+      Ports		      [1]
+      Position		      [890, 299, 920, 331]
+      BackgroundColor	      "lightBlue"
+      Location		      [198, 264, 522, 503]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      List {
+	ListType		SelectedSignals
+	axes1			""
+      }
+      SaveName		      "ScopeData2"
+      DataFormat	      "StructureWithTime"
+    }
+    Block {
+      BlockType		      Display
+      Name		      "總諧波失真THD"
+      Ports		      [1]
+      Position		      [860, 140, 950, 170]
+      BackgroundColor	      "lightBlue"
+      Decimation	      "1"
+    }
+    Line {
+      SrcBlock		      "Pulse2"
+      SrcPort		      1
+      Points		      [75, 0; 0, -175]
+      DstBlock		      "\n\n\n功率電晶體\nS2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "脈波產生器11"
+      SrcPort		      1
+      Points		      [50, 0; 0, -255; 150, 0]
+      DstBlock		      "功率電晶體\nS1"
+      DstPort		      2
+    }
+    Line {
+      Name		      "負載電流Io"
+      Labels		      [0, 0]
+      SrcBlock		      "I2"
+      SrcPort		      1
+      Points		      [45, 0]
+      Branch {
+	Labels			[1, 1]
+	DstBlock		"波形分析"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 175; 25, 0; 0, 135]
+	DstBlock		"波形分析1"
+	DstPort			2
+      }
+    }
+    Line {
+      Name		      "負載電壓Vo"
+      Labels		      [0, 0]
+      SrcBlock		      "V2"
+      SrcPort		      1
+      Points		      [0, 0; 30, 0]
+      Branch {
+	Labels			[1, 1]
+	Points			[0, -40; 15, 0]
+	Branch {
+	  DstBlock		  "波形分析"
+	  DstPort		  2
+	}
+	Branch {
+	  Points		  [0, 55]
+	  Branch {
+	    Points		    [15, 0]
+	    DstBlock		    "計算總諧波失真 THD\nTotal  Harmonic\nDist"
+"orsion"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 65]
+	    Branch {
+	      Points		      [20, 0]
+	      DstBlock		      "計算電壓Vo\n均方根值\nRMS value"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [0, 195]
+	      DstBlock		      "傅立葉分析 \nFourier"
+	      DstPort		      1
+	    }
+	  }
+	}
+      }
+      Branch {
+	Points			[0, 85]
+	Branch {
+	  Points		  [0, 80]
+	  DstBlock		  "傅立葉分析FFT"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [-80, 0; 0, 150]
+	  DstBlock		  "波形分析1"
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "I2"
+      SrcPort		      2
+      Points		      [0, 5; 80, 0]
+      Branch {
+	DstBlock		"RL\n\n\n"
+	DstPort			1
+      }
+      Branch {
+	Points			[15, 0]
+	DstBlock		"V2"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Vdc = 50 V "
+      SrcPort		      1
+      Points		      [0, -10]
+      Branch {
+	DstBlock		"Vdc = 50 V"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Ground3"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "RL\n\n\n"
+      SrcPort		      1
+      DstBlock		      "Ground"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "output Ground4"
+      SrcPort		      1
+      DstBlock		      "V2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "\n\n\n功率電晶體\nS2"
+      SrcPort		      1
+      Points		      [0, 15; -85, 0]
+      Branch {
+	Points			[-135, 0]
+	DstBlock		"Vdc = 50 V "
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"二極體2"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "T connector"
+      SrcPort		      1
+      DstBlock		      "功率電晶體\nS1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "二極體D1"
+      SrcPort		      1
+      Points		      [0, -10; 15, 0]
+      DstBlock		      "T connector"
+      DstPort		      enable
+    }
+    Line {
+      SrcBlock		      "Vdc = 50 V"
+      SrcPort		      1
+      Points		      [0, -15]
+      DstBlock		      "T connector"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "功率電晶體\nS1"
+      SrcPort		      1
+      DstBlock		      "T connector1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "T connector1"
+      SrcPort		      1
+      Points		      [0, 0]
+      Branch {
+	Points			[0, 10]
+	DstBlock		"\n\n\n功率電晶體\nS2"
+	DstPort			1
+      }
+      Branch {
+	Points			[80, 0]
+	DstBlock		"I2"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "二極體2"
+      SrcPort		      1
+      Points		      [0, -35; 20, 0]
+      Branch {
+	DstBlock		"T connector1"
+	DstPort			enable
+      }
+      Branch {
+	DstBlock		"二極體D1"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "二極體D1"
+      SrcPort		      2
+      Points		      [10, 0; 0, -15; -90, 0; 0, 215]
+      DstBlock		      "Demux"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "二極體2"
+      SrcPort		      2
+      Points		      [5, 0; 0, -25; -90, 0; 0, 180]
+      DstBlock		      "二極體\n波形分析"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "計算電壓Vo\n均方根值\nRMS value"
+      SrcPort		      1
+      DstBlock		      "Display"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "傅立葉分析 \nFourier"
+      SrcPort		      1
+      DstBlock		      "n=1 基本波峰值電壓\nFundamental"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "傅立葉分析FFT"
+      SrcPort		      1
+      DstBlock		      "頻譜分析"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "計算總諧波失真 THD\nTotal  Harmonic\nDistorsion"
+      SrcPort		      1
+      DstBlock		      "總諧波失真THD"
+      DstPort		      1
+    }
+    Line {
+      Name		      "二極體iD1"
+      Labels		      [0, 0]
+      SrcBlock		      "Demux"
+      SrcPort		      1
+      Points		      [10, 0]
+      Branch {
+	DstBlock		"D 1"
+	DstPort			1
+      }
+      Branch {
+	Labels			[2, 0]
+	Points			[0, 150]
+	DstBlock		"波形分析1"
+	DstPort			6
+      }
+    }
+    Line {
+      SrcBlock		      "Demux"
+      SrcPort		      2
+      DstBlock		      "D 1"
+      DstPort		      2
+    }
+    Line {
+      Name		      "二極體ID2"
+      Labels		      [0, 0]
+      SrcBlock		      "二極體\n波形分析"
+      SrcPort		      1
+      Points		      [25, 0]
+      Branch {
+	DstBlock		"D2"
+	DstPort			1
+      }
+      Branch {
+	Labels			[2, 0]
+	Points			[0, 90]
+	DstBlock		"波形分析1"
+	DstPort			5
+      }
+    }
+    Line {
+      SrcBlock		      "二極體\n波形分析"
+      SrcPort		      2
+      DstBlock		      "D2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "功率電晶體\nS1"
+      SrcPort		      2
+      Points		      [0, 20; 20, 0; 0, 145]
+      DstBlock		      "Demux2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "傅立葉分析FFT"
+      SrcPort		      2
+      DstBlock		      "Terminator2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "\n\n\n功率電晶體\nS2"
+      SrcPort		      2
+      Points		      [0, 10; 5, 0; 0, 95]
+      DstBlock		      "功率電晶體\n波形分析\n"
+      DstPort		      1
+    }
+    Line {
+      Name		      "功率電晶體is1"
+      Labels		      [0, 0]
+      SrcBlock		      "Demux2"
+      SrcPort		      1
+      Points		      [15, 0]
+      Branch {
+	DstBlock		"S1"
+	DstPort			1
+      }
+      Branch {
+	Labels			[2, 0]
+	Points			[0, 120]
+	DstBlock		"波形分析1"
+	DstPort			3
+      }
+    }
+    Line {
+      SrcBlock		      "Demux2"
+      SrcPort		      2
+      DstBlock		      "S1"
+      DstPort		      2
+    }
+    Line {
+      Name		      "功率電晶體is2"
+      Labels		      [0, 0]
+      SrcBlock		      "功率電晶體\n波形分析\n"
+      SrcPort		      1
+      Points		      [5, 0]
+      Branch {
+	DstBlock		"S2"
+	DstPort			1
+      }
+      Branch {
+	Labels			[2, 0]
+	Points			[0, 80]
+	DstBlock		"波形分析1"
+	DstPort			4
+      }
+    }
+    Line {
+      SrcBlock		      "功率電晶體\n波形分析\n"
+      SrcPort		      2
+      DstBlock		      "S2"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "0_IN"
+      SrcPort		      1
+      Points		      [10, 0]
+      Branch {
+	DstBlock		"傅立葉分析FFT"
+	DstPort			2
+      }
+      Branch {
+	Points			[0, 15]
+	DstBlock		"傅立葉分析FFT"
+	DstPort			3
+      }
+    }
+    Line {
+      SrcBlock		      "傅立葉分析 \nFourier"
+      SrcPort		      2
+      Points		      [15, 0]
+      DstBlock		      "Terminator1"
+      DstPort		      1
+    }
+    Annotation {
+      Name		      "電力電子電腦輔助分析與設計  新文京出版設社\n高"
+"苑科技大學電機系 \n電力電子實驗室\n徐瑞隆 著\n"
+      Position		      [110, 717]
+    }
+  }
+}
