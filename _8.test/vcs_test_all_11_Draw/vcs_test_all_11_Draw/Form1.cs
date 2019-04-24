@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;     //for GraphicsPath
 
 namespace vcs_test_all_11_Draw
 {
@@ -910,6 +910,88 @@ namespace vcs_test_all_11_Draw
                 sb = new SolidBrush(Color.White);
                 g.FillEllipse(sb, e.X - 5, e.Y - 5, 10, 10);
             }
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            //DrawRoundRect(100, 100, 300, 200, 20);
+
+            GraphicsPath myPath1 = DrawRoundRect(100, 100, 200, 100, 30);
+            g.FillPath(sb, myPath1);
+
+            GraphicsPath myPath2 = DrawRoundRect(100, 250, 400, 300, 50);
+            g.DrawPath(p, myPath2);
+
+        }
+
+        //繪製圓角矩形
+        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            GraphicsPath myGraphicsPath = new GraphicsPath();
+            myGraphicsPath.AddLine(0, 0, 300, 200);
+            myGraphicsPath.AddEllipse(100, 100, 20, 40);
+            myGraphicsPath.AddBezier(130, 160, 170, 160, 150, 130, 300, 110);
+            g.DrawPath(p, myGraphicsPath);
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            GraphicsPath myGraphicsPath = new GraphicsPath();
+
+            Point[] myPointArray = {
+new Point(5, 30), 
+new Point(20, 40), 
+new Point(50, 30)};
+
+            FontFamily myFontFamily = new FontFamily("Times New Roman");
+            PointF myPointF = new PointF(50, 20);
+            StringFormat myStringFormat = new StringFormat();
+
+            myGraphicsPath.AddArc(0, 0, 30, 20, -90, 180);
+            myGraphicsPath.StartFigure();
+            myGraphicsPath.AddCurve(myPointArray);
+            myGraphicsPath.AddString("a string in a path", myFontFamily,
+               0, 24, myPointF, myStringFormat);
+            myGraphicsPath.AddPie(230, 10, 40, 40, 40, 110);
+            g.DrawPath(p, myGraphicsPath);
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            // Create a GraphicsPath object.
+            GraphicsPath myPath = new GraphicsPath();
+            // Set up all the string parameters.
+            string stringText = "Sample Text";
+            FontFamily family = new FontFamily("Arial");
+            int fontStyle = (int)FontStyle.Italic;
+            int emSize = 26;
+            Point origin = new Point(20, 20);
+            StringFormat format = StringFormat.GenericDefault;
+            // Add the string to the path.
+            myPath.AddString(stringText,
+              family,
+              fontStyle,
+              emSize,
+              origin,
+              format);
+            //Draw the path to the screen.
+            g.FillPath(Brushes.Black, myPath);
         }
     }
 }

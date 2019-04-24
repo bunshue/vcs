@@ -1,15 +1,29 @@
 
 
 
+C#初體驗，畫圖的讀、寫、顯示 
+https://darkblack01.blogspot.com/2014/03/c.html
+
+
+
 vs2010的c#找不到Calendar控件
 
 
 
 
+C# 程式學習 系列	30篇
+https://ithelp.ithome.com.tw/users/20023570/ironman/110
+
+
+很多C#範例
+http://fecbob.pixnet.net/blog/post/38088065-c%23-%E5%9C%93%E8%A7%92-panel
+
+
+複製部分圖片
 
 
 [C#] DrawRoundRetangle
-繪製圓角矩形
+//繪製圓角矩形
 private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius) {
             GraphicsPath roundedRect = new GraphicsPath();
             Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);

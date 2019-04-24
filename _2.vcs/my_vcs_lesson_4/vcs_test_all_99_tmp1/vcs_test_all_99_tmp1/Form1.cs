@@ -133,6 +133,20 @@ namespace vcs_test_all_99_tmp1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //依字串長度改變控件大小
+            //AutoSizeControl
+            int textPadding = 10;   //表示要套用至控制項所有邊緣的填補量
+            button18.Text = "012345678901234567890123456789012345";
+            Graphics g = button2.CreateGraphics();      //// Create a Graphics object for the Control.
+            // Get the Size needed to accommodate the formatted Text.
+            Size preferredSize = g.MeasureString(button18.Text, button18.Font).ToSize();
+            richTextBox1.Text += "size W = " + preferredSize.Width.ToString() + "\n";
+            richTextBox1.Text += "size H = " + preferredSize.Height.ToString() + "\n";
+            // Pad the text and resize the control.
+            button18.ClientSize = new Size(
+                preferredSize.Width + (textPadding * 2),
+                preferredSize.Height + (textPadding * 2));
+            g.Dispose();    // Clean up the Graphics object.
 
         }
 
@@ -372,10 +386,6 @@ namespace vcs_test_all_99_tmp1
         private void richTextBox1_MouseDown(object sender, MouseEventArgs e)
         {
 
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
         }
 
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)

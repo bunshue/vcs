@@ -1948,6 +1948,7 @@ namespace imsLink
             /*  寫字的功能還不完備
             IntPtr pHdc;
             Graphics g = Graphics.FromImage(pictureBox1.Image);
+            Pen p = new Pen(Color.Red, 1);
             SolidBrush drawBrush = new SolidBrush(Color.Yellow);
             Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
             pHdc = g.GetHdc();
@@ -1959,8 +1960,30 @@ namespace imsLink
 
             g.ReleaseHdc();
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+
+            if (pictureBox1.Width == 1280)
+            {
+                //g.DrawRectangle(p, 8, 6, 640 - 8 * 2, 480 - 6 * 2);
+                int ww = 50;
+                for (int i = 0; i < 5; i++)
+                {
+                    g.DrawRectangle(p, 8 + ww * i, 6 + ww * i, 640 - 8 * 2 - ww * i * 2, 480 - 6 * 2 - ww * i * 2);
+                
+                }
+                p = new Pen(Color.Purple, 1);
+                ww = 2;
+                for (int i = 0; i < 5; i++)
+                {
+                    g.DrawRectangle(p, 8 + ww * i, 6 + ww * i, 640 - 8 * 2 - ww * i * 2, 480 - 6 * 2 - ww * i * 2);
+
+                }
+
+            }
+
             g.Dispose();
-            */
+            //richTextBox1.Text += "W = " + pictureBox1.Width.ToString() + ", H = " + pictureBox1.Height.ToString() + "\n";
+			*/
 
             GC.Collect();       //回收資源
         }

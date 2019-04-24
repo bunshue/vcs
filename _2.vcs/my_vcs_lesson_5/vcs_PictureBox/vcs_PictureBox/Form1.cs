@@ -198,5 +198,27 @@ namespace vcs_PictureBox
 
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //複製部分圖片
+            // Create a Bitmap object from a file.
+            Bitmap myBitmap = new Bitmap(@"C:/______test_vcs/bear.jpg");
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = myBitmap;
+
+            // Clone a portion of the Bitmap object.
+            RectangleF cloneRect = new RectangleF(530, 30, 200, 200);
+            System.Drawing.Imaging.PixelFormat format =
+                myBitmap.PixelFormat;
+            Bitmap cloneBitmap = myBitmap.Clone(cloneRect, format);
+
+            // Draw the cloned portion of the Bitmap object.
+            Graphics g = pictureBox2.CreateGraphics();
+            g.DrawImage(cloneBitmap, 0, 0);
+
+
+        }
     }
 }

@@ -122,6 +122,7 @@ mycnt4(5, 15)
 print("函數返回值")
 
 def mysum(n1, n2):
+    "函數的說明"
     return n1 + n2
 
 print(mysum(10, 20))

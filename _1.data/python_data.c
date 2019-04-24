@@ -1,5 +1,13 @@
 
+而中文的處理，我們可以透過unicode的編解碼來處理
 
+!!!注意中文的檔案要加上# encoding: utf-8
+
+單行註解為#,多行註解則用"""開頭與結尾
+"""
+這是一個簡單的python程式
+介紹基本的語法
+"""
 
 內建轉換函式
 str
@@ -10,6 +18,10 @@ float
 int("1010", 2)
 int("A0A0", 16)
 
+Python - 十分鐘入門 
+http://tech-marsw.logdown.com/blog/2014/09/03/getting-started-with-python-in-ten-minute
+
+http://tech-marsw.logdown.com/blog/2016/01/10/crawler-index
 
 
 python
@@ -57,6 +69,9 @@ windows command line下:
 >pip3 install matplotlib	//安裝matplotlib
 >pip3 install pygame		//安裝pygame
 
+可用要安裝的:
+requests	bs4	selenium
+
 
 python -m pip install -U pip
 python -m pip install -U matplotlib
@@ -74,6 +89,9 @@ python -m pip install -U matplotlib
 >>> import tkinter
 >>> tkinter._test()
 >>> 
+
+[第 18 天] 資料視覺化 matplotlib
+https://ithelp.ithome.com.tw/articles/10186484
 
 tkinter教學
 http://effbot.org/tkinterbook/

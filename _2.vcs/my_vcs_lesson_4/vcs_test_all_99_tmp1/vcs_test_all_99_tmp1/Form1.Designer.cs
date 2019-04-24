@@ -51,7 +51,6 @@
             this.button30 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btn2 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
@@ -198,12 +197,12 @@
             // 
             // button18
             // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.Location = new System.Drawing.Point(172, 598);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(154, 42);
             this.button18.TabIndex = 19;
-            this.button18.Text = "xxx";
+            this.button18.Text = "依字串長度改變控件大小";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -327,17 +326,6 @@
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // button37
-            // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button37.Location = new System.Drawing.Point(332, 596);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(154, 42);
-            this.button37.TabIndex = 36;
-            this.button37.Text = "xxx";
-            this.button37.UseVisualStyleBackColor = true;
-            this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
             // btn2
             // 
@@ -667,7 +655,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button37);
             this.Controls.Add(this.button33);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button28);
@@ -724,7 +711,6 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button btn1;
-        private System.Windows.Forms.Button button37;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn3;
