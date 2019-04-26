@@ -1,13 +1,94 @@
 
-而中文的處理，我們可以透過unicode的編解碼來處理
 
-!!!注意中文的檔案要加上# encoding: utf-8
+ Python列表：	//操作方式很像字串
+ 
+list1 = ['physics', 'chemistry', 1997, 2000];
+list2 = [1, 2, 3, 4, 5, 6, 7 ];
+list3 = ["a", "b", "c", "d"];
 
-單行註解為#,多行註解則用"""開頭與結尾
-"""
-這是一個簡單的python程式
-介紹基本的語法
-"""
+print "list1[0]: ", list1[0]
+print "list2[1:5]: ", list2[1:5]
+ 
+
+刪除列表中的元素：
+
+要刪除列表的元素，可以使用del語句，如果知道哪些元素要刪除；或如果你不知道那麼使用remove()方法。例子：
+
+list1 = ['physics', 'chemistry', 1997, 2000];
+print list1;
+del list1[2];
+print "After deleting value at index 2 : "
+print list1;
+
+基本列表操作：
+Python 表達式 	結果 				描述
+len([1, 2, 3]) 	3 				長度
+[1, 2, 3] + [4, 5, 6] 	[1, 2, 3, 4, 5, 6] 	串聯
+['Hi!'] * 4 	['Hi!', 'Hi!', 'Hi!', 'Hi!'] 	重複
+3 in [1, 2, 3] 	True 				成員
+for x in [1, 2, 3]: print x, 	1 2 3 		迭代
+
+
+內置函數列表及方法：
+
+Python中包括下麵的列表函數功能：
+SN 	函數及描述
+1 	cmp(list1, list2)	比較兩個列表的元素
+2 	len(list)		給出列表的總長度
+3 	max(list)		從列表中，項目的最大值
+4 	min(list)		從列表中，項目的最小值
+5 	list(seq)		一個元組到列表的轉換
+
+Python中包括下麵的列表的方法
+SN 	方法及描述
+1 	list.append(obj)	添加obj對象到列表
+2 	list.count(obj)		計算返回obj出現在列表的次數
+3 	list.extend(seq)	附加序列seq內容到列表
+4 	list.index(obj)		返回列表中出現obj的最小索引
+5 	list.insert(index, obj)	插入obj對象在列表偏移索引位置
+6 	list.pop(obj=list[-1])	移除並返回列表最後一個對象或obj
+7 	list.remove(obj)	從列表中移除obj對象
+8 	list.reverse()		反轉列表的對象
+9 	list.sort([func])	排序列表中的對象，使用func比較（如果給定）
+
+
+字典
+dict = {'Name': 'Zara', 'Age': 7, 'Class': 'First'};
+
+dict['Age'] = 8; # update existing entry
+dict['School'] = "DPS School"; # Add new entry
+
+
+print("dict['Age']: ", dict['Age'])
+print("dict['School']: ", dict['School'])
+
+
+
+ython使用單引號和雙引號來表示字符串是一樣的。
+
+例如：
+var1 = 'Hello World!'
+var2 = "Python Programming"
+
+print "var1[0]: ", var1[0]
+print "var2[1:5]: ", var2[1:5]
+
+字符串格式化操作
+print "My name is %s and weight is %d kg!" % ('Zara', 21) 
+
+可用%c %s %d %u %x %X %f
+
+
+數據類型轉換：
+函數 			描述
+int(x [,base])		將x轉換為一個整數。基數指定為base，如果x是一個字符串。
+long(x [,base] )	將x轉換為一個長整數。基數指定為base，如果x是一個字符串。
+float(x)		將x轉換到一個浮點數。
+complex(real [,imag])	創建一個複數。
+str(x)			轉換對象x為字符串表示形式。
+chr(x)			整數轉換為一個字符。
+unichr(x)		整數轉換為一個Unicode字符。
+hex(x)			將整數轉換為十六進製字符串。
 
 內建轉換函式
 str
@@ -17,6 +98,79 @@ float
 
 int("1010", 2)
 int("A0A0", 16)
+
+
+Python包括以下執行數學計算的函數。
+函數 		返回（描述）
+abs(x)		x的絕對值：x和零之間的（正極）的距離。
+ceil(x)		x的上限：最小整數不小於x
+cmp(x, y)	-1 if x < y, 0 if x == y, 或1 if x > y
+exp(x)		x的指數: ex
+fabs(x) 	x的絕對值
+floor(x) 	x的地板：最大的整數不大於x
+log(x)		x的自然對數，對於x> 0時
+log10(x) 	以10為底的對數，X>0。
+max(x1, x2,...) 它最大的參數：值最接近正無窮大
+min(x1, x2,...) 它的最小參數：值最接近負無窮大
+modf(x) 	x的兩個項元組的整數和小數部分。這兩個元素具有相同的x符號。整數部分返回一個浮點數。
+pow(x, y) 	x**y 的值
+round(x [,n]) 	x在小數點四舍五入到n位數字。 Python遠離零點決定：round(0.5) 是1.0 而round(0.5) 為-1.0。
+sqrt(x) 	x的平方根（x>0）
+
+用於遊戲，模擬，測試，安全性和保密性的應用的隨機數。Python包括常用以下函數。
+函數 		描述
+choice(seq) 	從列表，元組或字符串隨機項。
+randrange ([start,] stop [,step]) 	從範圍隨機選擇的元素（啟動，停止，步驟）
+random() 	隨機浮點數r，使得0是小於或等於r，r小於1
+seed([x]) 	設置生成隨機數使用整數開始值。調用任何其他隨機模塊函數之前調用這個函數。返回None。
+shuffle(lst) 	隨機化代替列表中的項。返回None。
+uniform(x, y) 	隨機浮點數r，使得x小於或等於r，r小於y
+
+
+
+degrees(x) 	從弧度到度角 x 的轉換
+radians(x) 	從角度到弧度角 x 的轉換
+
+
+
+
+python特有的運算             
+
+** 	指數冪- 執行運算符的指數（冪）計算 	a**b = 10 的 20 次冪
+// 	Floor Division - Floor除法 - 操作數相除，其結果的小數點後的數字將被刪除。 	9//2 = 4 ， 9.0//2.0 = 4.0
+
+指數
+地板除
+
+**=
+//=
+
+
+a = 0011 1100
+
+b = 0000 1101
+
+-----------------
+
+a&b = 0000 1100
+
+a|b = 0011 1101
+
+a^b = 0011 0001
+
+~a  = 1100 0011
+
+
+             
+而中文的處理，我們可以透過unicode的編解碼來處理
+
+!!!注意中文的檔案要加上# encoding: utf-8
+
+單行註解為#,多行註解則用"""開頭與結尾
+"""
+這是一個簡單的python程式
+介紹基本的語法
+"""
 
 Python - 十分鐘入門 
 http://tech-marsw.logdown.com/blog/2014/09/03/getting-started-with-python-in-ten-minute

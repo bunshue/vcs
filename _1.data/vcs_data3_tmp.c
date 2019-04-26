@@ -1,5 +1,113 @@
 
 
+tmp code
+
+
+            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
+            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
+            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
+            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
+            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
+            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
+            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
+            richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
+            richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
+
+            System.Globalization.TaiwanCalendar TC = new System.Globalization.TaiwanCalendar();
+            System.Globalization.TaiwanLunisolarCalendar TA = new System.Globalization.TaiwanLunisolarCalendar();
+
+            DateTime dt = DateTime.Now;
+            string message = "";
+            message += string.Format("{0}", dt.Year) + "\n";
+            message += ("西元年:" + dt.Year.ToString()) + "\n";
+            message += ("民國年:" + TC.GetYear(dt)) + "\n";
+            message += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
+            message += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
+            message += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
+
+
+
+            System.DateTime dt = System.DateTime.Now;
+            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + Environment.NewLine;
+            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + Environment.NewLine;
+
+            //現在日期加天數寫法(本例為加5天):
+            System.DateTime Add5Day = dt.AddDays(5);
+            richTextBox1.Text += "現在日期加5天： " + Add5Day.ToLongDateString() + Environment.NewLine;
+
+            //現在時間加小時寫法(本例為加12個小時):
+            System.DateTime Add12Hours = dt.AddHours(12);
+            richTextBox1.Text += "現在時間加12小時： " + Add12Hours.ToLongTimeString() + Environment.NewLine;
+
+            //現在時間減分鐘寫法(本例為減30分鐘):
+            System.DateTime Minus30Minutes = dt.AddMinutes(-30);
+            richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
+        }
+        
+        
+        
+星期一        
+
+
+
+
+
+
+
+openFileDialog1.Filter = "XML設定檔|*.xml";
+
+
+
+C# 取得檔案版本資訊
+using System.Diagnostics;
+            richTextBox1.Text += "data : " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n"; 
+data : 10.0.17134.220 (WinBuild.160101.0800)
+
+
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            /*
+            //測試沒有標題沒有邊框的Form
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            */
+
+        }
+        
+
+ 取得目前可用字型，顯示於ListBox。
+
+	this.listBox1.Items.AddRange(FontFamily.Families);
+
+
+this.Cursor = System.Windows.Forms.Cursors.Hand;
+
+
+改變鼠標
+
+        private void panel1_MouseHover(object sender, EventArgs e)
+        {
+            this.Cursor = System.Windows.Forms.Cursors.VSplit;
+        }
+
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+        }
+        
+21. 變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
+1             this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
+        
+
+
+
+
+
 
 C#初體驗，畫圖的讀、寫、顯示 
 https://darkblack01.blogspot.com/2014/03/c.html

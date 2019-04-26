@@ -2516,6 +2516,23 @@ namespace imsLink
 
             if (bitmap1 != null)
             {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                //int xPos = pictureBox1.Image.Width - (pictureBox1.Image.Width - 15);
+                int xPos = 10;
+                int yPos = 10;
+                string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                g.ReleaseHdc();
+                g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+                g.Dispose();
+
                 String file = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
@@ -2607,6 +2624,11 @@ namespace imsLink
 
             richTextBox1.Text += "關閉程式\n";
             Application.Exit();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.insighteyes.com/");
         }
 
     }
