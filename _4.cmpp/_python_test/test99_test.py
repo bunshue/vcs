@@ -38,3 +38,25 @@ johnbirthday = datetime(1978, 4, 5, 12, 0)
 
 print(relativedelta(NOW, johnbirthday))
 
+
+#使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
+#該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
+
+import math
+content = dir(math)
+print(content)
+
+
+
+
+
+Money = 2000
+def AddMoney():
+   # Uncomment the following line to fix the code:
+   #global Money
+   Money = Money + 1
+
+print(Money)
+AddMoney()
+print(Money)
+

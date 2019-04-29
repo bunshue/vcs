@@ -1,0 +1,11 @@
+#! /usr/bin/perl
+
+# 檔名: hello.pl
+# 用途: 這是一支簡單的 Perl 示範程式
+#
+# 第一列以 #! 開頭，表示告訴 Shell 要用 /usr/bin/perl 程式來執行這個 script 檔
+#
+# 其它以 # 開頭，則為註解，Perl 不予處理。
+#
+
+print "Hello Perl !!\n";
