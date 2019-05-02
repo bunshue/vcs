@@ -209,9 +209,9 @@
             // button19
             // 
             this.button19.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(332, 108);
+            this.button19.Location = new System.Drawing.Point(351, 692);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(154, 42);
+            this.button19.Size = new System.Drawing.Size(125, 42);
             this.button19.TabIndex = 20;
             this.button19.Text = "轉換格式";
             this.button19.UseVisualStyleBackColor = true;
@@ -551,7 +551,7 @@
             // button41
             // 
             this.button41.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button41.Location = new System.Drawing.Point(332, 550);
+            this.button41.Location = new System.Drawing.Point(332, 112);
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(154, 42);
             this.button41.TabIndex = 58;

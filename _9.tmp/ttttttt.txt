@@ -1,0 +1,54 @@
+1>------ 已開始建置: 專案: zzzzzzz, 組態: Debug Win32 ------
+1>  stdafx.cpp
+1>  zzzzzzz.cpp
+1>LINK : fatal error LNK1123: 轉換成 COFF 時失敗: 檔案無效或損毀
+========== 建置: 0 成功、1 失敗、0 最新、0 略過 ==========
+
+
+-----------------------------------------------------------------------------------------------------
+
+這個問題幾乎都是因為在同一個系統中，同時安裝了兩套 Visual Studio 而導致的。（例如同時安裝 Visual Studio 2010 以及 Visual Studio 2012 ）
+
+錯誤訊息的來源是由於有一個名為 " cvtres " 的檔案在 Visual Studio 新舊版本的安裝位置不同，所以互相衝突所造成的。
+
+
+新版本的 " cvtres " 檔案可在以下路徑找到：
+
+電腦 > 本機磁碟 C  > Windows > Microsoft.NET > Framework > v4.0.30319
+
+而舊版本的 " cvtres " 檔案可在以下路徑找到：
+
+電腦 > 本機磁碟 C > Program Files (x86) > Microsoft Visual Studio 10.0 > VC > bin
+
+由於錯誤訊息是因為這兩個 " cvtres " 檔案互相衝突才出現的，所以只要把舊版本的 " cvtres " 檔案按右鍵刪除掉，問題就可以解決了！
+
+
+-----------------------------------------------------------------------------------------------------
+
+◆ From: 49.219.124.146
+→ bdvstg:你有裝2012嗎? 03/21 17:39
+推 damody:遇過了 刪掉你所有visual studio 一個個重灌 03/21 19:37
+推 es8603: 把Microsoft Visual Studio 10.0\VC\bin 裡面的cvtres.exe 10/03 04:06
+→ es8603: 改名字 ex:cvtres_.exe 就可以編譯過了 今天遇到一樣的問 10/03 04:07
+→ es8603: 題 查到的解法  好像跟同時灌新舊版本有關
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+電腦裡面, WIN7 x64, Visual Studio 2010, Visual Studio 2012 都有
+
+以下3個資料夾, 都同時存在一個檔案 cvtres.exe,
+
+C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin 最舊
+
+C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin 最新
+
+C:\Windows\Microsoft.NET\Framework\v4.0.30319 版次中間
+
+因為原來的方案是VS2010的，所以就以VS2010的來改。
+
+只要把 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin 裡面的 cvtres.exe 改名字, 問題就解決了, 因為這個版本是 10.00.xxx, 比較老的.
+
+-----------------------------------------------------------------------------------------------------
+

@@ -274,8 +274,9 @@ namespace vcs_test_all_99_tmp1
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
             //this.pictureBox1.Image = image;
-            image.Save("c:\\aabbcc.jpeg");    //把圖片存起來
-            richTextBox1.Text += "已截圖存檔完成\n";
+            string filename = "C:\\______test_vcs" + "\\" + "IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            image.Save(filename, ImageFormat.Jpeg); //把圖片存起來
+            richTextBox1.Text += "已截圖存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -330,12 +331,13 @@ namespace vcs_test_all_99_tmp1
             g.ReleaseHdc(dc1);
             //將裁切出的矩形存成JPG圖檔。
             Image imgCanvas = (Image)bmpCanvas;
-            string str = System.Windows.Forms.Application.StartupPath;
-            imgCanvas.Save(str + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpg", ImageFormat.Jpeg);
+            //string str = System.Windows.Forms.Application.StartupPath;
+            //string str = "C:\\______test_vcs";
+            string filename = "C:\\______test_vcs" + "\\" + "IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //imgCanvas.Save(str + "\\" + "IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", ImageFormat.Jpeg);
+            imgCanvas.Save(filename, ImageFormat.Jpeg);
 
-            richTextBox1.Text += "已截圖存檔完成\n";
-
-
+            richTextBox1.Text += "已截圖存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button30_Click(object sender, EventArgs e)

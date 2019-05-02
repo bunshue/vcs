@@ -1,5 +1,64 @@
 
 
+¦³‹×Matplotlibªº¤@¨Ç§Þ¥©
+
+http://www.yeolar.com/note/2011/04/28/matplotlib-tips/
+
+
+
+
+
+
+
+import¤§¥Îªk
+¤@¡B	Åª¤@­Ó®M¥ó
+import numpy
+y = numpy.sin(2*numpy.pi*t)
+
+
+
+¤G¡B	Åª¤@­Ó®M¥ó¡Bµ¹­ÓÂ²³æªº¥N¸¹
+import numpy as np
+
+
+¤T¡B	³æ¿W­n¬Y¤@­Ó¨ç¼Æ
+from numpy import sin
+
+¥|¡B	¬Y­Ó®M¥ó®wªº¨ç¼Æ¥þ­n
+from numpy import *
+
+
+
+#¥Ñ¼Ð·Ç±`ºA¤À¥¬ÀH¾÷¨ú100­Ó¼Æ¡C
+
+plt.plot(np.random.randn(100))
+
+
+plt.show()
+
+
+#±q0¨ì10,«Ü§¡¤Ãªº§ä¥X100­ÓÂI¡C
+
+x = np.linspace(0, 10, 100)
+
+
+A = np.arange(10)
+¿é¥X:array([1, 2, ¡K, 10])
+
+
+
+
+
+
+
+>>> type(data)
+<class 'str'>
+>>> 
+>>> type(a)
+<class 'int'>
+
+
+
  Python¦Cªí¡G	//¾Þ§@¤è¦¡«Ü¹³¦r¦ê
  
 list1 = ['physics', 'chemistry', 1997, 2000];
