@@ -26,6 +26,23 @@ namespace vcs_FolderFileName
         Int64 total_size = 0;
         Int64 total_files = 0;
 
+        public class MyFileInfo
+        {
+            public string filename;
+            public long size;
+            public MyFileInfo(string n, long s)
+            {
+                this.filename = n;
+                this.size = s;
+            }
+        }
+
+        //不用宣告長度的陣列(Array)
+        // 宣告fileinfos 為List
+        // 以下List 裡為MyFileInfo 型態
+
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+
         private void button2_Click(object sender, EventArgs e)
         {
             if (path != String.Empty)
@@ -139,6 +156,7 @@ namespace vcs_FolderFileName
                     //richTextBox1.Text += fi.Directory + "\n";
                     //richTextBox1.Text += fi.DirectoryName + "\n";
 
+                    /*
                     ListViewItem i1 = new ListViewItem(fi.FullName);
 
                     i1.UseItemStyleForSubItems = false;
@@ -156,6 +174,11 @@ namespace vcs_FolderFileName
                     listView1.Items.Add(i1);
                     //設置ListView最後一行可見
                     listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+                    */
+
+                    fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
+                    //fileinfos.Add(new MyFileInfo(fi.FullName.ToString(), fi.Length));
+                    //fileinfos.Add(new MyFileInfo("aaaaaaa", 12345));
 
 
                 }
@@ -169,6 +192,40 @@ namespace vcs_FolderFileName
                 richTextBox1.Text += fi.Name + "\n";
             }
         }
+
+        void show_file_info()
+        {
+            listView1.View = View.Details;
+            listView1.Clear();
+            listView1.Columns.Add("檔名", 600, HorizontalAlignment.Center);
+            listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
+
+            //排序 由大到小
+            fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+
+            for (int i = 0; i < fileinfos.Count; i++)
+            {
+                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
+        
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -185,11 +242,6 @@ namespace vcs_FolderFileName
                 richTextBox1.Text += fi.Name + "\n";
             }
             */
-
-            listView1.View = View.Details;
-            listView1.Clear();
-            listView1.Columns.Add("檔名", 600, HorizontalAlignment.Center);
-            listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
 
             total_size = 0;
             total_files = 0;
@@ -210,6 +262,7 @@ namespace vcs_FolderFileName
                 // This path is a directory
                 ProcessDirectory(path);
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                show_file_info();
             }
             else
             {
@@ -247,6 +300,7 @@ namespace vcs_FolderFileName
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            listView1.Clear();
         }
 
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量

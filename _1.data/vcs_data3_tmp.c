@@ -1,5 +1,12 @@
 
 
+C#語言下路徑指定方式有兩種:
+
+    是使用兩個斜線，例如    "C:\\Test.txt"
+    第二種是在路徑前加上@符號，例如    @"C:\Test.txt"
+
+
+
 取得硬碟資訊
             System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
             richTextBox1.Text += "TotalFreeSpace : " + di.TotalFreeSpace.ToString() + "\n";

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.IO;    //for Directory, File
+
 namespace vcs_Console_1
 {
     class Program
@@ -15,6 +17,21 @@ namespace vcs_Console_1
             // Specify the starting folder on the command line, or in 
             // Visual Studio in the Project > Properties > Debug pane.
             TraverseTree(path);
+
+            if (File.Exists(path))
+            {
+                // This path is a file
+                ProcessFile(path);
+            }
+            else if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessDirectory(path);
+            }
+            else
+            {
+                Console.WriteLine("{0} is not a valid file or directory.", path);
+            }
 
             Console.WriteLine("Press any key");
             Console.ReadKey();
@@ -103,6 +120,34 @@ namespace vcs_Console_1
                 foreach (string str in subDirs)
                     dirs.Push(str);
             }
+        }
+
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public static void ProcessDirectory(string targetDirectory)
+        {
+            // Process the list of files found in the directory.
+            try
+            {
+                string[] fileEntries = Directory.GetFiles(targetDirectory);
+                foreach (string fileName in fileEntries)
+                    ProcessFile(fileName);
+
+                // Recurse into subdirectories of this directory.
+                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                foreach (string subdirectory in subdirectoryEntries)
+                    ProcessDirectory(subdirectory);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        // Insert logic for processing found files here.
+        public static void ProcessFile(string path)
+        {
+            Console.WriteLine("Processed file '{0}'.", path);
         }
     }
 }
