@@ -144,7 +144,7 @@ namespace vcs_MyPlayer2
         {
             int selNdx;
             string all_filename = string.Empty;
-            string player_path = @"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe";
+            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
                 return;
 

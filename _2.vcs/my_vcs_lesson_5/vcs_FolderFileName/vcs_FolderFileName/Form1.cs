@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for FileInfo DirectoryInfo
+using System.Diagnostics;
 
 namespace vcs_FolderFileName
 {
@@ -57,35 +58,62 @@ namespace vcs_FolderFileName
         int step = 0;
         public void ProcessDirectory(string targetDirectory)
         {
-            //richTextBox1.Text += targetDirectory + "\n\n";
-            //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-            //richTextBox1.Text += di.Name + "\n\n";
-
-            // Process the list of files found in the directory.
-            string[] fileEntries = Directory.GetFiles(targetDirectory);
-            Array.Sort(fileEntries);
-            foreach (string fileName in fileEntries)
+            try
             {
-                ProcessFile(fileName, step);
-            }
+                //richTextBox1.Text += targetDirectory + "\n\n";
+                //DirectoryInfo di = new DirectoryInfo(targetDirectory);
+                //richTextBox1.Text += di.Name + "\n\n";
 
-            // Recurse into subdirectories of this directory.
-            string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-            Array.Sort(subdirectoryEntries);
-            foreach (string subdirectory in subdirectoryEntries)
-            {
-                DirectoryInfo di = new DirectoryInfo(subdirectory);
-                if (checkBox1.Checked == false)
+                // Process the list of files found in the directory.
+                try
                 {
-                    richTextBox1.Text += "\n";
-                    //for (int i = 0; i < step * 2; i++)
-                    //richTextBox1.Text += " ";
-                    richTextBox1.Text += di.Name + "\n";
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    Array.Sort(fileEntries);
+                    foreach (string fileName in fileEntries)
+                    {
+                        ProcessFile(fileName, step);
+                    }
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    Array.Sort(subdirectoryEntries);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        if (checkBox1.Checked == false)
+                        {
+                            richTextBox1.Text += "\n";
+                            //for (int i = 0; i < step * 2; i++)
+                            //richTextBox1.Text += " ";
+                            richTextBox1.Text += di.Name + "\n";
+                        }
+                        step++;
+                        ProcessDirectory(subdirectory);
+                    }
+                    step = 0;
                 }
-                step++;
-                ProcessDirectory(subdirectory);
+                catch (UnauthorizedAccessException ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                    /*
+                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
+                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+                    if ((attr & FileAttributes.ReadOnly) > 0)
+                        Console.Write("The file is read-only.");
+                    */
+                }
             }
-            step = 0;
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                /*
+                Console.WriteLine(
+                    "{0}: The write operation could not " +
+                    "be performed because the specified " +
+                    "part of the file is locked.",
+                    e.GetType().Name);
+                */
+            }
         }
 
         // Insert logic for processing found files here.
@@ -106,10 +134,30 @@ namespace vcs_FolderFileName
                     //richTextBox1.Text += fi.Name + " len = " + fi.Length.ToString() + "\n";
                     //richTextBox1.Text += filename + "\n";
                     //richTextBox1.Text += fi.Name + "\n";
-                    richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                    //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                     //richTextBox1.Text += fi.Directory + "\n";
                     //richTextBox1.Text += fi.DirectoryName + "\n";
+
+                    ListViewItem i1 = new ListViewItem(fi.FullName);
+
+                    i1.UseItemStyleForSubItems = false;
+
+                    ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                    //sub_i1a.Text = fi.Length.ToString();
+                    sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fi.Length));
+                    i1.SubItems.Add(sub_i1a);
+                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                    sub_i1a.Font = new System.Drawing.Font(
+                        "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                    listView1.Items.Add(i1);
+                    //設置ListView最後一行可見
+                    listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+
                 }
             }
             else
@@ -137,6 +185,11 @@ namespace vcs_FolderFileName
                 richTextBox1.Text += fi.Name + "\n";
             }
             */
+
+            listView1.View = View.Details;
+            listView1.Clear();
+            listView1.Columns.Add("檔名", 600, HorizontalAlignment.Center);
+            listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
 
             total_size = 0;
             total_files = 0;
@@ -209,6 +262,15 @@ namespace vcs_FolderFileName
                 return (Math.Round(KSize / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
             else
                 return KSize.ToString() + "Byte";//顯示Byte值
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+            //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
+            System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
         }
 
 

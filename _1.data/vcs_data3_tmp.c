@@ -1,5 +1,48 @@
 
 
+取得硬碟資訊
+            System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
+            richTextBox1.Text += "TotalFreeSpace : " + di.TotalFreeSpace.ToString() + "\n";
+            richTextBox1.Text += "VolumeLabel : " + di.VolumeLabel + "\n";
+
+
+
+
+         Bitmap myImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height); 
+            Graphics g = Graphics.FromImage(myImage); 
+            g.CopyFromScreen(new Point(0,0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height)); 
+            IntPtr dc1 = g.GetHdc(); 
+            g.ReleaseHdc(dc1); 
+            myImage.Save(@"c:\screen0.jpg");
+            
+            
+
+
+
+
+ 瞭解程式執行時間 
+
+using System.Diagnostics;
+//-------------------------------------------
+Stopwatch sw = new Stopwatch();
+long num = 0;
+sw.Reset();
+sw = Stopwatch.StartNew();
+//要測速的程式放這裡
+sw.Stop();
+TimeSpan el = sw.Elapsed;
+Console.WriteLine("花費 {0} ", el);
+long ms = sw.ElapsedMilliseconds;
+Console.WriteLine("花費 {0} 毫秒", ms);
+
+補充說明: 不一定每次測到的時間都相同喔!
+建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
+
+
+
+
+
+
 tmp code
 
 
