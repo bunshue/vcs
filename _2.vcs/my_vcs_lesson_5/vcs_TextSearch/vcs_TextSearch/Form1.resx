@@ -118,34 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>李白 越中覽古
-越王勾踐破吳歸，
-戰士還家盡錦衣。
-宮女如花滿春殿，
-只今唯有鷓鴣飛。
+    <value>閭
+ㄌㄩ
+ˊ
+左
+ㄗㄨㄛ
+ˇ
 
+    居於里門左側的平民。秦代以居閭左為貧弱，閭右為富強。貧弱者須執勞役及戍守。《史記·卷四八·陳涉世家》：「二世元年七月，發閭左適戍漁陽，九百人屯大澤鄉。」唐·司馬貞·索隱：「閭左謂居閭里之左也。秦時復除者居閭左，今力役凡在閭左者盡發之也。」
 
-BinaryReader	以特定編碼方式用 二進位   形式 讀取檔案
-BinaryWriter	以特定編碼方式用 二進位   形式 將資料寫入檔案
-StreamReader	以特定編碼方式用 字元串流 形式 讀取檔案
-StreamWriter	以特定編碼方式用 字元串流 形式 將資料寫入檔案
+閭
+ㄌㄩ
+ˊ
+左
+ㄗㄨㄛ
+ˇ
 
-StreamReader的方法：
-Read		自檔案中讀取一個字元，並回傳該字元的字元碼(ascii值)。
-ReadLine	自檔案中讀取一列字串，以換行符號為字串結尾，並回傳該字串。
-ReadToEnd	將檔案中的文字全部讀取，並全部以字串型態回傳。
-Close		關閉檔案，並解除檔案的寫入鎖定，方便其他程式使用。
+    居於里門左側的平民。秦代以居閭左為貧弱，閭右為富強。貧弱者須執勞役及戍守。《史記·卷四八·陳涉世家》：「二世元年七月，發閭左適戍漁陽，九百人屯大澤鄉。」唐·司馬貞·索隱：「閭左謂居閭里之左也。秦時復除者居閭左，今力役凡在閭左者盡發之也。」
 
-StreamWriter的方法：
-Write		將資料寫入到緩衝(buffer)中，可直接傳入大部分的資料型態。
-WriteLine	將資料寫入到緩衝(buffer)中，並自動換行。
-Flush		將緩衝中的目前的資料寫入到檔案中。
 </value>
   </data>
-  <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="fontDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>159, 17</value>
-  </metadata>
 </root>

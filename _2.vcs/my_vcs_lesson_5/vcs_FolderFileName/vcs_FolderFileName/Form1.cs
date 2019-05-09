@@ -111,6 +111,7 @@ namespace vcs_FolderFileName
                 }
                 catch (UnauthorizedAccessException ex)
                 {
+                    richTextBox1.Text += ex.Message + "\n";
                     //MessageBox.Show(ex.Message);
                     /*
                     FileAttributes attr = (new FileInfo(filePath)).Attributes;
@@ -144,7 +145,8 @@ namespace vcs_FolderFileName
 
             if (checkBox1.Checked == true)
             {
-                if (fi.Length > 2 * 1024 * 1024)
+                int min_size_mb = int.Parse(textBox1.Text);
+                if (fi.Length > min_size_mb * 1024 * 1024)
                 {
                     for (int i = 0; i < step * 2; i++)
                         richTextBox1.Text += " ";
@@ -200,8 +202,11 @@ namespace vcs_FolderFileName
             listView1.Columns.Add("檔名", 600, HorizontalAlignment.Center);
             listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
 
-            //排序 由大到小
-            fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+            if (checkBox2.Checked == true)
+            {
+                //排序 由大到小
+                fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+            }
 
             for (int i = 0; i < fileinfos.Count; i++)
             {

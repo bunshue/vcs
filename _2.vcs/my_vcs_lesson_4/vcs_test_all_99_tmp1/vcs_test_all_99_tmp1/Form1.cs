@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;                        //for StreamReader
 using System.Diagnostics;               //for process, FileVersionInfo, Stopwatch
 using System.Runtime.InteropServices;   //for DllImport
-using System.Drawing.Imaging;   //for bmp2jpg ImageFormat
+using System.Drawing.Imaging;   //for bmp2jpg
 using System.Net;           //for WebClient
 
 namespace vcs_test_all_99_tmp1
@@ -41,6 +41,18 @@ namespace vcs_test_all_99_tmp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //string input = "Hello World!";
+            string input = "基本運算制作USB启动盘ウィキペディア???世?生?????概?表????";
+            char[] values = input.ToCharArray();
+            foreach (char letter in values)
+            {
+                // Get the integral value of the character.
+                int value = Convert.ToInt32(letter);
+                // Convert the integer value to a hexadecimal value in string form.
+
+                //Console.WriteLine($"Hexadecimal value of {letter} is {value:X}");
+                richTextBox1.Text += "Hexadecimal value of " + letter + " is " + value.ToString("X4") + "\n";
+            }
 
         }
 
@@ -266,17 +278,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //抓螢幕某區塊為檔案
-            Image image = new Bitmap(410, 410);   //宣告Image類別
-            Graphics g = Graphics.FromImage(image);
-            g.CopyFromScreen(new Point(340, 255), new Point(0, 0), new Size(410, 410));
-            //取得螢幕上x=340 y=255為左上角，長寬為410的區域
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-            //this.pictureBox1.Image = image;
-            string filename = "C:\\______test_vcs" + "\\" + "IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            image.Save(filename, ImageFormat.Jpeg); //把圖片存起來
-            richTextBox1.Text += "已截圖存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -322,22 +323,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //建立空白畫布
-            Bitmap bmpCanvas = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            //取得畫布的繪圖物件用以繪圖。
-            Graphics g = Graphics.FromImage(bmpCanvas);
-            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-            //將裁切出的矩形存成JPG圖檔。
-            Image imgCanvas = (Image)bmpCanvas;
-            //string str = System.Windows.Forms.Application.StartupPath;
-            //string str = "C:\\______test_vcs";
-            string filename = "C:\\______test_vcs" + "\\" + "IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //imgCanvas.Save(str + "\\" + "IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg", ImageFormat.Jpeg);
-            imgCanvas.Save(filename, ImageFormat.Jpeg);
-
-            richTextBox1.Text += "已截圖存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -512,11 +497,6 @@ namespace vcs_test_all_99_tmp1
 
         }
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button40_Click(object sender, EventArgs e)
         {
             //Form.Controls 屬性是用來取得這張Form的控制項
@@ -554,11 +534,6 @@ namespace vcs_test_all_99_tmp1
                     i++;
                 }
             }
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -619,6 +594,43 @@ namespace vcs_test_all_99_tmp1
 
             if (t.TotalMilliseconds <= 200) //如果小於200豪秒就全選
                 richTextBox1.SelectAll();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string random_string = GetRandomString(16);
+            richTextBox1.Text += "產生任意字串 : " + random_string + "\n";
+        }
+
+        public static string GetRandomString(int length)
+        {
+            var str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            var next = new Random();
+            var builder = new StringBuilder();
+            for (var i = 0; i < length; i++)
+            {
+                builder.Append(str[next.Next(0, str.Length)]);
+            }
+            return builder.ToString();
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            PictureBox pb_new = new PictureBox();
+            Button bt_new = new Button();
+            this.Controls.Add(pb_new);
+            this.Controls.Add(bt_new);
+            bt_new.Location = new Point(332, 502);
+            bt_new.Size = new Size(154, 42);
+            bt_new.BackColor = Color.Red;
+            bt_new.Text = "新增控件";
+            bt_new.Click += new EventHandler(bt_new_Click);
+
+        }
+
+        private void bt_new_Click(System.Object sender, System.EventArgs e)
+        {
+            richTextBox1.Text += "你按了這個新控件\n";
         }
 
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_test_all_01_Richtextbox
+namespace vcs_TextSearch
 {
     public partial class Form1 : Form
     {
@@ -18,45 +18,10 @@ namespace vcs_test_all_01_Richtextbox
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.BackColor = Color.Pink;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.BackColor = Color.FromName("Control");
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            colorDialog1.AllowFullOpen = true;
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionBackColor = colorDialog1.Color;
-            }
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            fontDialog1.ShowApply = true;
-            fontDialog1.ShowColor = true;
-            fontDialog1.ShowEffects = true;
-            fontDialog1.ShowHelp = true;
-            if (fontDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.SelectionFont = fontDialog1.Font;
-                richTextBox1.SelectionColor = fontDialog1.Color;
-                //richTextBox1.SelectionBackColor
-            }
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
             int start = 0;
-            String pattern1 = "方式";
-            String pattern2 = "字";
-            String pattern3 = "的";
+            String pattern1 = "閭左";
+            String pattern2 = "居，";
+            String pattern3 = "，";
             int end1 = richTextBox1.Text.LastIndexOf(pattern1);
             int end2 = richTextBox1.Text.LastIndexOf(pattern2);
             int end3 = richTextBox1.Text.LastIndexOf(pattern3);
@@ -100,9 +65,7 @@ namespace vcs_test_all_01_Richtextbox
                 start = richTextBox1.Text.IndexOf(pattern3, start) + 1;
             }
 
-            
+
         }
-
-
     }
 }

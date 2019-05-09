@@ -195,9 +195,6 @@ namespace vcs_test_all_06_System
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //開啟程式
-            //System.Diagnostics.Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-            System.Diagnostics.Process.Start("winver.exe ");              //--打开Windows版本信息
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -301,15 +298,11 @@ namespace vcs_test_all_06_System
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
-            Process.Start(@"C:\WINDOWS\system32\calc.exe");
 
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            //呼叫系統內建小鍵盤
-            System.Diagnostics.Process.Start("" + System.Environment.SystemDirectory + "/osk.exe");
 
         }
 
@@ -412,6 +405,29 @@ namespace vcs_test_all_06_System
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //呼叫系統內建小鍵盤     fail
+            //System.Diagnostics.Process.Start("" + System.Environment.SystemDirectory + "/osk.exe");
+
+            //開啟特定程式
+            //Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
+
+            //開啟計算機程式
+            //Process.Start(@"C:\WINDOWS\system32\calc.exe");
+
+            //開啟檔案 由預設程式開啟
+            //System.Diagnostics.Process.Start("C:\\______test_vcs\\my_text_file.txt");
+            
+            //開啟記事本程式
+            //System.Diagnostics.Process.Start("notepad.exe");
+
+            //開啟程式
+            //System.Diagnostics.Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
+            System.Diagnostics.Process.Start("winver.exe ");              //--打开Windows版本信息
+
         }
 
     }
