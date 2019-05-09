@@ -1,5 +1,15 @@
 
 
+
+'''
+¦h¦æµù¸Ñªº¼gªk¡A¤T­Ó '
+'''
+
+
+import math
+math.sin(math.pi * i / 2)
+
+
 ¦³‹×Matplotlibªº¤@¨Ç§Þ¥©
 
 http://www.yeolar.com/note/2011/04/28/matplotlib-tips/

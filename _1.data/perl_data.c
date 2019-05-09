@@ -1,7 +1,7 @@
 
 
-
-
+Perl ( Practical Extraction and Report Language，實務操作抽取與報告語言 )
+1987 年，Larry Wall 先生融合 AWK、Sed、C、shell 等語言的特色，創造了 Perl
 
 
 perl

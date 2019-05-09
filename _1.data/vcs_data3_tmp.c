@@ -1,19 +1,60 @@
 
+C# axWindowsMediaPlayer制作播放器
+http://www.mamicode.com/info-detail-986551.html
+
+
+AxWindowsMediaPlayer媒体文件主要方法屬性
+https://blog.csdn.net/ivan_ljf/article/details/9774231
+
+
+AForge Webcam 錄影
+https://blog.csdn.net/m_buddy/article/details/62417912
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            /*
+            Random 亂數 = new Random();//亂數種子
+            int i = 亂數.Next(0, 100);//回傳0-99的亂數
+            如果用for 或其它回圈抓亂數，一定要把 Random 亂數 = new Random();//亂數種子 放在回圈外面。
+            */
+
+
+            Random 亂數 = new Random();//亂數種子
+            for (int i = 0; i < 100; i++)
+            {
+                int j = 亂數.Next(0, 100);
+                richTextBox1.Text += j.ToString() + "  ";
+            }
+            richTextBox1.Text += "\n";
+
+
+        }
+
+        //C# 是否為JPG檔案 record
+
+        private bool 是否為JPG檔案(string 檔案)
+        {
+            if (!File.Exists(檔案))
+                return false;
+
+            using (System.Drawing.Image img = System.Drawing.Image.FromFile(檔案))
+            {
+                if (img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
+                    return true;
+            }
+            return false;
+        }
+
+
+
+一些vcs資料
+http://createps.pixnet.net/blog/category/1630969/2
 
 g.DrawString("直接設定字型與大小", new Font("宋体", 30), Brushes.Red, 10, 10);
 
 
-
-
-vcs排序
-所以如果要將分數是由高到底排序，則在 return 的地方加個「負號」即可。
-
-
 C# - 取得隨機字串的快速方法 
-
-
-
-
 
 
 C#語言下路徑指定方式有兩種:
