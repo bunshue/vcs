@@ -815,6 +815,152 @@ namespace vcs_MyPaint
 
 
         }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            int width;
+            int height;
+
+            string filename = "C:\\______test_vcs\\win10.jpg";
+
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+
+            richTextBox1.Text += "檔案大小 W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            pictureBox1.Image = bitmap1;
+            richTextBox1.Text += "\n";
+
+            SolidBrush sb;
+            Font f;
+            sb = new SolidBrush(Color.Purple);
+            f = new Font("Times New Roman", 30);
+            //f = new Font("標楷體", 20);
+            g = Graphics.FromImage(bitmap1);
+
+            //g.DrawRectangle(p, 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+            //g.DrawRectangle(p, 100, 100, bitmap1.Width - 1 - 200, bitmap1.Height - 1 - 200);
+
+            p = new Pen(Color.Purple, 5);
+
+            /*
+            g.DrawLine(p, 0, bitmap1.Height / 2, bitmap1.Width - 1, bitmap1.Height / 2);
+            g.DrawLine(p, bitmap1.Width / 2, 0, bitmap1.Width / 2, bitmap1.Height - 1);
+            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 2 - 35));
+            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 1 - 35));
+            */
+
+            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 210, bitmap1.Height / 1 - 150));
+
+            pictureBox1.Image = bitmap1;
+
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+            if (bitmap1 != null)
+            {
+                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file1 = file + ".jpg";
+                String file2 = file + ".bmp";
+                String file3 = file + ".png";
+
+                bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(@file2, ImageFormat.Bmp);
+                bitmap1.Save(@file3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + file2 + "\n";
+                richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            int width = 1920;
+            int height = 1080;
+
+            richTextBox1.Text += "FullHD點圖 ST\n";
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            bitmap1 = new Bitmap(width, height);
+
+            var random = new Random();
+            int xx;
+            int yy;
+            int rr;
+            int gg;
+            int bb;
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    rr = random.Next(0, 256);
+                    gg = random.Next(0, 256);
+                    bb = random.Next(0, 256);
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(0xFF, (rr) % 256, (gg) % 256, (bb) % 256));
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+            g.DrawRectangle(p, 0, 0, width - 1, height - 1);
+
+            g.DrawRectangle(p, 50, 50, width - 100 - 1, height - 100 - 1);
+
+            g.DrawRectangle(p, 100, 100, width - 200 - 1, height - 200 - 1);
+
+            /*
+            SolidBrush sb;
+            Font f;
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("標楷體", 36);
+
+
+            g.DrawString("1920 X 1080", f, sb, new PointF(width - 500, height - 300));
+            */
+
+            pictureBox1.Image = bitmap1;
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+
+            if (bitmap1 != null)
+            {
+                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file1 = file + ".jpg";
+                String file2 = file + ".bmp";
+                String file3 = file + ".png";
+
+                bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(@file2, ImageFormat.Bmp);
+                bitmap1.Save(@file3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + file2 + "\n";
+                richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+
+            richTextBox1.Text += "FullHD點圖 SP\n";
+        }
     }
 }
 

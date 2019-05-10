@@ -51,6 +51,7 @@ namespace vcs_test_all_10_Math
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "未完成\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -72,6 +73,16 @@ namespace vcs_test_all_10_Math
             richTextBox1.Text += "取10~20的亂數值：" + result3 + "\n";
             richTextBox1.Text += "取0.0~1.0的亂數值：" + result4 + "\n";
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "未完成\n";
         }
     }
 }

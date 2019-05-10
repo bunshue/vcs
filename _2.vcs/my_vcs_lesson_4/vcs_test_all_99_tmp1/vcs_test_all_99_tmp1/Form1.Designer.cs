@@ -162,7 +162,7 @@
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(12, 348);
+            this.button15.Location = new System.Drawing.Point(12, 59);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(154, 42);
             this.button15.TabIndex = 16;
@@ -471,7 +471,7 @@
             // button35
             // 
             this.button35.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button35.Location = new System.Drawing.Point(12, 400);
+            this.button35.Location = new System.Drawing.Point(12, 106);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(154, 42);
             this.button35.TabIndex = 54;
@@ -545,7 +545,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 60);
+            this.button1.Location = new System.Drawing.Point(12, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 42);
             this.button1.TabIndex = 66;
@@ -566,7 +566,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(12, 108);
+            this.button6.Location = new System.Drawing.Point(12, 400);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(154, 42);
             this.button6.TabIndex = 64;

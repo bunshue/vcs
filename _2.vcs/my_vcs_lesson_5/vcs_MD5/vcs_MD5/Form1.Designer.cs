@@ -82,6 +82,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Verify";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -97,9 +98,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(34, 241);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(165, 12);
+            this.label3.Size = new System.Drawing.Size(207, 12);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Original file MD5 checksum value";
+            this.label3.Text = "Original file MD5 checksum value of File 1";
             // 
             // openFileDialog1
             // 

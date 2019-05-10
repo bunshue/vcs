@@ -92,5 +92,23 @@ namespace vcs_MD5
         {
             label_compare.Text = "";
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == null)
+            {
+                label4.Text = "未選取檔案";
+                return;
+            }
+            if (textBox3.Text == null)
+            {
+                label4.Text = "未填入MD5值";
+                return;
+            }
+            if (textBox1.Text.ToLower() == textBox3.Text.ToLower())
+                label4.Text = "檔案驗證正確";
+            else
+                label4.Text = "檔案驗證錯誤";
+        }
     }
 }

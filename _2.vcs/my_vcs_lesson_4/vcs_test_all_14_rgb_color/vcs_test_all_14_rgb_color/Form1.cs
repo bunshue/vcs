@@ -36,15 +36,16 @@ namespace vcs_test_all_14_rgb_color
 
         private void SetupRandonColor()
         {
-            Random r = new Random();
+            var random = new Random();
+            int rr;
+            int gg;
+            int bb;
+            rr = random.Next(0, 256);
+            gg = random.Next(0, 256);
+            bb = random.Next(0, 256);
 
-            int color_r = r.Next(10);
-            int color_g = r.Next(10);
-            int color_b = r.Next(10);
-
-            panel5.BackColor = Color.FromArgb(color_r * 255 / 10, color_g * 255 / 10, color_b * 255 / 10);
-            label4.Text = (color_r * 255 / 10).ToString() + " " + (color_g * 255 / 10).ToString() + " " + (color_b * 255 / 10).ToString();
-
+            panel5.BackColor = Color.FromArgb(rr, gg, bb);
+            label4.Text = (rr).ToString() + " " + (gg).ToString() + " " + (bb).ToString();
         }
 
         private void panel5_Click(object sender, EventArgs e)
