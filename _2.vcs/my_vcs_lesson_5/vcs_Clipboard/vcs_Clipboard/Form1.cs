@@ -72,5 +72,48 @@ namespace vcs_Clipboard
 
 
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            //Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            Clipboard.SetDataObject("新增一些資料" + "\n");      //建議用此
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿 累計
+            //Clipboard.SetData(DataFormats.Text, Clipboard.GetData(DataFormats.Text) + richTextBox1.Text + "\n");
+            //Clipboard.SetDataObject(Clipboard.GetText() + richTextBox1.Text + "\n");      //建議用此
+            Clipboard.SetDataObject(Clipboard.GetText() + "累計新增一些資料" + "\n");      //建議用此
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //C# – 貼上剪貼簿
+            //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
+            richTextBox1.Text += Clipboard.GetText();   //建議用此
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //C# – 清除剪貼簿
+            Clipboard.Clear();
+
+        }
+
+        //Read text from clipboard
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string clipText = System.String.Empty;
+            if (System.Windows.Forms.Clipboard.ContainsText())
+            {
+                clipText = System.Windows.Forms.Clipboard.GetText();
+                richTextBox1.Text += clipText + "\n";
+            }
+        }
     }
 }

@@ -1,4 +1,37 @@
 
+
+
+在Windows上，[路徑]必須<248拜，[檔名加路徑]名必須<260拜
+
+	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
+
+	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
+
+1維list宣告
+	List<string> myLists = new List<string>();
+	
+	myLists.Add("A001");
+	myLists.Add("A002");
+	myLists.Add("A003"); 
+
+2維list宣告
+	List<List<string>> myLists = new List<List<string>>();
+
+	myLists.Add(new List<string>() { "A001", "David" });
+	myLists.Add(new List<string>() { "A002", "John" });
+	myLists.Add(new List<string>() { "A003", "Tom" });             
+             
+             
+             
+             
+             
+bmp
+https://www.pcschool.com.tw/campus/share/lib/160/
+http://crazycat1130.pixnet.net/blog/post/1345538-%E9%BB%9E%E9%99%A3%E5%9C%96%EF%BC%88bitmap%EF%BC%89%E6%AA%94%E6%A1%88%E6%A0%BC%E5%BC%8F
+
+[C#] List 的用法
+http://frank1025.pixnet.net/blog/post/347251643-%5Bc%23%5D-list
+
 C# axWindowsMediaPlayer制作播放器
 http://www.mamicode.com/info-detail-986551.html
 
@@ -754,13 +787,6 @@ windows media player
 //Wait
 System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
 
-
-//Read text from clipboard 
-string cliptext = System.String.Empty;
-if ( System.Windows.Forms.Clipboard.ContainsText( ) )
-{
-	clipText = System.Windows.Forms.Clipboard.GetText( );
-}
 
 
 //Take a screenshot 

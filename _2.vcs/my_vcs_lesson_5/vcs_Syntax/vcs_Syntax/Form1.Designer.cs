@@ -216,8 +216,9 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(154, 42);
             this.button13.TabIndex = 14;
-            this.button13.Text = "xxx";
+            this.button13.Text = "二維List Add";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -226,8 +227,9 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(154, 42);
             this.button14.TabIndex = 15;
-            this.button14.Text = "xxx";
+            this.button14.Text = "二維List Show";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button15
             // 

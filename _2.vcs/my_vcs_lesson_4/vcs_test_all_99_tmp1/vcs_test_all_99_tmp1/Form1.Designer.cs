@@ -96,9 +96,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 692);
+            this.button2.Location = new System.Drawing.Point(350, 697);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 42);
+            this.button2.Size = new System.Drawing.Size(126, 42);
             this.button2.TabIndex = 2;
             this.button2.Text = "clear";
             this.button2.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(154, 42);
             this.button8.TabIndex = 8;
-            this.button8.Text = "來電震動視窗2";
+            this.button8.Text = "xxx";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -166,7 +166,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(154, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "產生亂數的方式";
+            this.button15.Text = "xxx";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -206,7 +206,7 @@
             // button19
             // 
             this.button19.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(351, 692);
+            this.button19.Location = new System.Drawing.Point(185, 697);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(125, 42);
             this.button19.TabIndex = 20;
@@ -287,7 +287,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(154, 42);
             this.button28.TabIndex = 29;
-            this.button28.Text = "xxx";
+            this.button28.Text = "網路下載純文字檔案";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -385,7 +385,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(178, 692);
+            this.textBox1.Location = new System.Drawing.Point(12, 698);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 36);
             this.textBox1.TabIndex = 44;
@@ -396,7 +396,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(284, 695);
+            this.label1.Location = new System.Drawing.Point(118, 701);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 24);
             this.label1.TabIndex = 45;
@@ -486,7 +486,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(154, 42);
             this.button36.TabIndex = 62;
-            this.button36.Text = "來電震動視窗1";
+            this.button36.Text = "xxx";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click_1);
             // 
@@ -559,7 +559,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(154, 42);
             this.button5.TabIndex = 65;
-            this.button5.Text = "產生任意字串";
+            this.button5.Text = "xxx";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

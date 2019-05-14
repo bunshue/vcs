@@ -311,6 +311,32 @@ namespace vcs_Syntax
 
         }
 
+        private class myList
+        {
+            public string ID { get; set; }
+            public string Name { get; set; }
+            public string Level { get; set; }
+        }
+
+        List<myList> myLists = new List<myList>();
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            myLists.Add(new myList { ID = "A001", Name = "David", Level = "A" });
+            myLists.Add(new myList { ID = "A002", Name = "John" });
+            myLists.Add(new myList { ID = "A003", Name = "Tom", Level = "A" });
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            foreach (var showlist in myLists)
+            {
+                richTextBox1.Text += "ID : " + showlist.ID + "\tName : " + showlist.Name + "\tLevel : " + showlist.Level + "\n";
+                //Console.WriteLine(showlist.ID + "->" + showlist.Name + "->" + showlist.Level); //column[0] & column[1]
+            }
+        }
+
 
     }
 }
