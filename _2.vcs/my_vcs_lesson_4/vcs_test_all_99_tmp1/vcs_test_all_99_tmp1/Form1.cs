@@ -82,10 +82,6 @@ namespace vcs_test_all_99_tmp1
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
 
@@ -179,25 +175,6 @@ namespace vcs_test_all_99_tmp1
             {
                 richTextBox1.Text += filename + "\n";
             }
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            Uri urlCheck = new Uri("http://tw.yahoo.com");
-            System.Net.WebRequest request = System.Net.WebRequest.Create(urlCheck);
-            System.Net.WebResponse response;
-            try
-            {
-                response = request.GetResponse();
-                //Response.Write("OK");
-                richTextBox1.Text += "網頁存在\n";
-            }
-            catch (Exception)
-            {
-                //Response.Write("Error");
-                richTextBox1.Text += "網頁不存在\n";
-            }
-
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -306,18 +283,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button28_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //下載純文字
-                WebClient wc = new WebClient();
-                string somestring = wc.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
-                richTextBox1.Text += somestring;
-            }
-            catch (WebException we)
-            {
-                // add some kind of error processing
-                MessageBox.Show(we.ToString());
-            }
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -417,18 +382,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button35_Click_1(object sender, EventArgs e)
         {
-            //[C#] 產生一組亂數
-            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
-
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[8];
-            var random = new Random();
-            for (int i = 0; i < stringChars.Length; i++)
-            {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
-            var finalString = new String(stringChars);
-            richTextBox1.Text += "產生8位數亂數：" + finalString + "\n";
         }
 
         private void button23_Click_1(object sender, EventArgs e)
@@ -436,16 +389,6 @@ namespace vcs_test_all_99_tmp1
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             MessageBox.Show("螢幕解析度為 " + screenWidth.ToString() + "*" + screenHeight.ToString());
-
-        }
-
-        private void button29_Click_1(object sender, EventArgs e)
-        {
-            //[c#] 取得src內的網址
-            string s = "<img src=\"http://www.yahoo.com.tw/1.gif\"/>";
-            System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(s, "\"(.*?)\"");
-            string res = m.Groups[1].Value;
-            richTextBox1.Text += res;
 
         }
 
@@ -549,11 +492,6 @@ namespace vcs_test_all_99_tmp1
         }
 
 
-        private void button36_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button11_Click_1(object sender, EventArgs e)
         {
 
@@ -597,6 +535,7 @@ namespace vcs_test_all_99_tmp1
         {
             richTextBox1.Text += "你按了這個新控件\n";
         }
+
 
 
     }

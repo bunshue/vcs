@@ -152,5 +152,22 @@ namespace vcs_test_all_10_Math_Random
             }
 
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //[C#] 產生一組亂數
+            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[8];
+            var random = new Random();
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+            var finalString = new String(stringChars);
+            richTextBox1.Text += "產生8位數亂數：" + finalString + "\n";
+
+        }
     }
 }

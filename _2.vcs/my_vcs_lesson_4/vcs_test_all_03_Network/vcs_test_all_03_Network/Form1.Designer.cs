@@ -145,13 +145,14 @@
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button8.Location = new System.Drawing.Point(12, 300);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(217, 42);
             this.button8.TabIndex = 8;
-            this.button8.Text = "xxx";
+            this.button8.Text = "判斷網頁是否存在";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
@@ -160,8 +161,9 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(217, 42);
             this.button9.TabIndex = 9;
-            this.button9.Text = "xxx";
+            this.button9.Text = "網路下載純文字檔案";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -170,8 +172,9 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(217, 42);
             this.button10.TabIndex = 11;
-            this.button10.Text = "xxx";
+            this.button10.Text = "取得src內的網址";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 

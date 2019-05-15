@@ -130,6 +130,52 @@ namespace vcs_test_all_03_Network
 
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Uri urlCheck = new Uri("http://tw.yahoo.com");
+            System.Net.WebRequest request = System.Net.WebRequest.Create(urlCheck);
+            System.Net.WebResponse response;
+            try
+            {
+                response = request.GetResponse();
+                //Response.Write("OK");
+                richTextBox1.Text += "網頁存在\n";
+            }
+            catch (Exception)
+            {
+                //Response.Write("Error");
+                richTextBox1.Text += "網頁不存在\n";
+            }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //下載純文字
+                WebClient wc = new WebClient();
+                string somestring = wc.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
+                richTextBox1.Text += somestring;
+            }
+            catch (WebException we)
+            {
+                // add some kind of error processing
+                MessageBox.Show(we.ToString());
+            }
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //[c#] 取得src內的網址
+            string s = "<img src=\"http://www.yahoo.com.tw/1.gif\"/>";
+            System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(s, "\"(.*?)\"");
+            string res = m.Groups[1].Value;
+            richTextBox1.Text += res;
+
+        }
+
 
     }
 }

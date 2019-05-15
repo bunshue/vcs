@@ -1,5 +1,13 @@
 
 
+string my_string = "   歡迎來到Myson Century!   ";
+
+string str2 = "ON-C";
+bool res;
+res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
+richTextBox1.Text += "result = " + res.ToString() + "\n";
+
+
 
 在Windows上，[路徑]必須<248拜，[檔名加路徑]名必須<260拜
 
