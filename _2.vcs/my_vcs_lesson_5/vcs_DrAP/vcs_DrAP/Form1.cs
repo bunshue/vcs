@@ -27,6 +27,7 @@ namespace vcs_DrAP
         Int64 total_files = 0;
         int step = 0;
         int flag_search_mode = 0;
+        int flag_search_done = 0;
 
         public class MyFileInfo
         {
@@ -47,6 +48,7 @@ namespace vcs_DrAP
 
         private void button2_Click(object sender, EventArgs e)
         {
+            fileinfos.Clear();
             if (path != String.Empty)
             {
                 //只撈一層的所有檔案
@@ -61,8 +63,8 @@ namespace vcs_DrAP
             total_files = 0;
 
             if (path == String.Empty)
-                //path = "C:\\______test_vcs";
-                path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+                path = "C:\\______test_vcs";
+                //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
 
             richTextBox1.Text += path + "\n\n";
 
@@ -71,7 +73,7 @@ namespace vcs_DrAP
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile(path, 0);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
             }
             else if (Directory.Exists(path))
             {
@@ -123,13 +125,15 @@ namespace vcs_DrAP
 
 
 
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 show_file_info();
+                flag_search_done = 1;
             }
             else
             {
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案\n";
+                flag_search_done = 0;
             }     
 
 
@@ -147,7 +151,7 @@ namespace vcs_DrAP
             {
                 richTextBox1.Text = "未選取資料夾\n";
             }
-
+            flag_search_done = 0;
         }
 
         // Process all files in the directory passed in, recurse on any directories 
@@ -229,7 +233,14 @@ namespace vcs_DrAP
                 {
                     if (flag_search_mode == 1)
                     {
-
+                        bool res;
+                        res = fi.FullName.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                        if (res == false)
+                            return;
+                        else
+                        {
+                            richTextBox1.Text += "get file : " + fi.FullName + "\n";
+                        }
                     }
 
                     for (int i = 0; i < step * 2; i++)
@@ -284,8 +295,8 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("檔名", 700, HorizontalAlignment.Center);
-            listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 700, HorizontalAlignment.Center);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
             if (checkBox2.Checked == true)
@@ -300,6 +311,18 @@ namespace vcs_DrAP
             for (int i = 0; i < fileinfos.Count; i++)
             {
                 ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+
+                if (flag_search_mode == 1)
+                {
+                    bool res;
+                    res = i1.Name.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                    if (res == false)
+                        continue;
+                    else
+                    {
+                        richTextBox1.Text += "aaaa get file : " + i1.Name + "\n";
+                    }
+                }
 
                 i1.UseItemStyleForSubItems = false;
 
@@ -317,12 +340,68 @@ namespace vcs_DrAP
                 //設置ListView最後一行可見
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
-        
         }
 
+        void show_file_info2()
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.Clear();
+            //設置列名稱
+            listView1.Columns.Add("名稱", 700, HorizontalAlignment.Center);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
+            listView1.Visible = true;
+
+            if (checkBox2.Checked == true)
+            {
+                //排序 由小到大
+                //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
+
+                //排序 由大到小  在return的地方多個負號
+                fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+            }
+
+            richTextBox2.Text += "cnt = " + fileinfos.Count.ToString() + "\n";
+            for (int i = 0; i < fileinfos.Count; i++)
+            {
+                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+
+                bool res;
+                res = fileinfos[i].filename.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                if (res == false)
+                    continue;
+                else
+                {
+                    richTextBox2.Text += "get file : " + fileinfos[i].filename + "\n";
+                }
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox2.Text += "開始計時\n";
+            // Create stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+            // Begin timing
+            stopwatch.Start();
+
+            fileinfos.Clear();
             /*  無法依子目錄排序 廢棄
             if (path == String.Empty)
                 path = "C:\\______test_vcs";
@@ -341,8 +420,8 @@ namespace vcs_DrAP
             total_files = 0;
 
             if (path == String.Empty)
-                //path = "C:\\______test_vcs";
-                path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+                path = "C:\\______test_vcs";
+                //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
 
             richTextBox1.Text += path + "\n\n";
             if (File.Exists(path))
@@ -350,20 +429,32 @@ namespace vcs_DrAP
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
                 ProcessFile(path, 0);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                flag_search_done = 1;
             }
             else if (Directory.Exists(path))
             {
                 // This path is a directory
                 ProcessDirectory(path);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t容量 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                show_file_info();
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                if(flag_search_mode == 1)
+                    show_file_info2();
+                else
+                    show_file_info();
+                flag_search_done = 1;
             }
             else
             {
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案\n";
-            }     
+                flag_search_done = 0;
+            }
+
+            // Stop timing
+            stopwatch.Stop();
+            // Write result
+            richTextBox2.Text += "停止計時\t";
+            richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -389,8 +480,10 @@ namespace vcs_DrAP
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            fileinfos.Clear();
             listView1.Clear();
+            richTextBox1.Clear();
+            richTextBox2.Clear();
         }
 
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -568,15 +661,11 @@ namespace vcs_DrAP
 
             for (int i = 0; i < listView1.Items.Count; i++)
             {
-                richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+                //richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
 
                 //C# – 複製資料到剪貼簿 累計
                 Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
             }
-
-
-
-
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -588,10 +677,44 @@ namespace vcs_DrAP
 
         private void button4_Click(object sender, EventArgs e)
         {
-            flag_search_mode = 1;
-            button1_Click(sender, e);
-            flag_search_mode = 0;
+            if (flag_search_done == 1)
+            {
+                flag_search_mode = 1;
+                show_file_info2();
+                flag_search_mode = 0;
+            }
+            else
+            {
+                richTextBox2.Text += "111";
+                flag_search_mode = 1;
+                button1_Click(sender, e);
+                flag_search_mode = 0;
+            }
+
+
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox1.Text += listView1.SelectedItems[i] + "\n";
+            }
+
+            richTextBox1.Text += "刪除\n";
+
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox1.Text += "刪除檔案: " + listView1.SelectedItems[i].Name + "\n";
+                //File.SetAttributes(listView1.SelectedItems[i].Name, FileAttributes.Normal);
+                //File.Delete(listView1.SelectedItems[i].ToString());
+            }
+
+
+
+        }
+
 
 
     }
