@@ -48,6 +48,9 @@ namespace vcs_DrAP
 
         private void button2_Click(object sender, EventArgs e)
         {
+            flag_search_mode = 0;
+            flag_search_done = 0;
+
             fileinfos.Clear();
             if (path != String.Empty)
             {
@@ -225,69 +228,57 @@ namespace vcs_DrAP
             total_size += fi.Length;
             total_files++;
             //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
-
-            if (checkBox1.Checked == true)
+            int min_size_mb = int.Parse(textBox1.Text);
+            if (((checkBox1.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (checkBox1.Checked == false))
             {
-                int min_size_mb = int.Parse(textBox1.Text);
-                if (fi.Length > min_size_mb * 1024 * 1024)
+                if (flag_search_mode == 1)
                 {
-                    if (flag_search_mode == 1)
+                    bool res;
+                    res = fi.FullName.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
+                    if (res == false)
+                        return;
+                    else
                     {
-                        bool res;
-                        res = fi.FullName.ToLower().Replace(" ", "").Contains(textBox2.Text.ToLower().Replace("-", ""));
-                        if (res == false)
-                            return;
-                        else
-                        {
-                            richTextBox1.Text += "get file : " + fi.FullName + "\n";
-                        }
+                        richTextBox1.Text += "get file : " + fi.FullName + "\n";
                     }
-
-                    for (int i = 0; i < step * 2; i++)
-                        richTextBox1.Text += " ";
-                    //richTextBox1.Text += fi.Name + " len = " + fi.Length.ToString() + "\n";
-                    //richTextBox1.Text += filename + "\n";
-                    //richTextBox1.Text += fi.Name + "\n";
-                    //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                    richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                    //richTextBox1.Text += fi.Directory + "\n";
-                    //richTextBox1.Text += fi.DirectoryName + "\n";
-
-                    /*
-                    ListViewItem i1 = new ListViewItem(fi.FullName);
-
-                    i1.UseItemStyleForSubItems = false;
-
-                    ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-
-                    //sub_i1a.Text = fi.Length.ToString();
-                    sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fi.Length));
-                    i1.SubItems.Add(sub_i1a);
-                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
-
-                    sub_i1a.Font = new System.Drawing.Font(
-                        "Times New Roman", 10, System.Drawing.FontStyle.Bold);
-
-                    listView1.Items.Add(i1);
-                    //設置ListView最後一行可見
-                    listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-                    */
-
-                    fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
-                    //fileinfos.Add(new MyFileInfo(fi.FullName.ToString(), fi.Length));
-                    //fileinfos.Add(new MyFileInfo("aaaaaaa", 12345));
-
-
                 }
-            }
-            else
-            {
+
                 for (int i = 0; i < step * 2; i++)
                     richTextBox1.Text += " ";
                 //richTextBox1.Text += fi.Name + " len = " + fi.Length.ToString() + "\n";
                 //richTextBox1.Text += filename + "\n";
-                richTextBox1.Text += fi.Name + "\n";
+                //richTextBox1.Text += fi.Name + "\n";
+                //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //richTextBox1.Text += fi.Directory + "\n";
+                //richTextBox1.Text += fi.DirectoryName + "\n";
+
+                /*
+                ListViewItem i1 = new ListViewItem(fi.FullName);
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fi.Length));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+                */
+
+                fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
+                //fileinfos.Add(new MyFileInfo(fi.FullName.ToString(), fi.Length));
+                //fileinfos.Add(new MyFileInfo("aaaaaaa", 12345));
+
             }
+
         }
 
         void show_file_info()
@@ -295,7 +286,7 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 700, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 900, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -308,6 +299,7 @@ namespace vcs_DrAP
                 fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
             }
 
+            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
             for (int i = 0; i < fileinfos.Count; i++)
             {
                 ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
@@ -347,7 +339,7 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 700, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 900, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -401,6 +393,9 @@ namespace vcs_DrAP
             // Begin timing
             stopwatch.Start();
 
+            flag_search_mode = 0;
+            flag_search_done = 0;
+
             fileinfos.Clear();
             /*  無法依子目錄排序 廢棄
             if (path == String.Empty)
@@ -437,7 +432,7 @@ namespace vcs_DrAP
                 // This path is a directory
                 ProcessDirectory(path);
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
-                if(flag_search_mode == 1)
+                if (flag_search_mode == 1)
                     show_file_info2();
                 else
                     show_file_info();
@@ -713,6 +708,19 @@ namespace vcs_DrAP
 
 
 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.Size = new Size(1920, 1080);
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
 

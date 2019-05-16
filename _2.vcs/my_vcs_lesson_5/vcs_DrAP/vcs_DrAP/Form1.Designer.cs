@@ -47,6 +47,7 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -134,9 +135,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 352);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 577);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(762, 272);
+            this.richTextBox1.Size = new System.Drawing.Size(953, 272);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
@@ -156,7 +157,7 @@
             // 
             this.listView1.Location = new System.Drawing.Point(12, 56);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1006, 290);
+            this.listView1.Size = new System.Drawing.Size(1200, 515);
             this.listView1.TabIndex = 14;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -196,7 +197,7 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(780, 352);
+            this.richTextBox2.Location = new System.Drawing.Point(971, 577);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(238, 272);
             this.richTextBox2.TabIndex = 19;
@@ -221,6 +222,18 @@
             this.button4.Text = "搜尋";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button11
+            // 
+            this.button11.BackgroundImage = global::vcs_DrAP.Properties.Resources.power;
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button11.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(1164, 9);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(45, 45);
+            this.button11.TabIndex = 23;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button10
             // 
@@ -274,7 +287,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1030, 628);
+            this.ClientSize = new System.Drawing.Size(1784, 861);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox2);
@@ -297,6 +311,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "檔案名稱轉出程式";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,6 +341,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
 
