@@ -14,10 +14,52 @@ namespace vcs_DrAP
 {
     public partial class Form1 : Form
     {
+        void Read_Setup_File()
+        {
+            int i;
+            if (System.IO.File.Exists(drap_setup_filename) == false)
+            {
+                //MessageBox.Show("檔案 " + drap_setup_filename + " 不存在，製作一個。");
+                StreamWriter sw = File.CreateText(drap_setup_filename);
+                string content = "";
+                //content += SelectedLanguage.ToString();
+                content += "\n";
+                //content += ezisp_path;
+                content += "\n";
+
+                sw.WriteLine(content);
+                sw.Close();
+            }
+            else
+            {
+                //MessageBox.Show("檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定");
+
+                string line;
+                StreamReader sr = new StreamReader(drap_setup_filename);
+                for (i = 0; i < 2; i++)
+                {
+                    line = sr.ReadLine();
+                    //MessageBox.Show(line);
+                    if (i == 0)
+                    {
+                        //SelectedLanguage = int.Parse(line);
+                        //comboBox3.SelectedIndex = SelectedLanguage;
+                        //Update_Language(SelectedLanguage);
+                    }
+                    if (i == 1)
+                    {
+                        //ezisp_path = line;
+                    }
+                }
+                sr.Close();
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
+            Read_Setup_File();
         }
 
         string path = String.Empty;
@@ -25,9 +67,12 @@ namespace vcs_DrAP
         string filetype2 = String.Empty;
         Int64 total_size = 0;
         Int64 total_files = 0;
+        Int64 folder_size = 0;
+        Int64 folder_files = 0;
         int step = 0;
         int flag_search_mode = 0;
         int flag_search_done = 0;
+        string drap_setup_filename = "drap_setup.ini";
 
         public class MyFileInfo
         {
@@ -172,10 +217,16 @@ namespace vcs_DrAP
                 {
                     string[] fileEntries = Directory.GetFiles(targetDirectory);
                     Array.Sort(fileEntries);
+                    folder_size = 0;
+                    folder_files = 0;
                     foreach (string fileName in fileEntries)
                     {
                         ProcessFile(fileName, step);
                     }
+                    richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
+                    richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+                    richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+
 
                     // Recurse into subdirectories of this directory.
                     string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
@@ -227,6 +278,9 @@ namespace vcs_DrAP
             FileInfo fi = new FileInfo(path);
             total_size += fi.Length;
             total_files++;
+            folder_size += fi.Length;
+            folder_files++;
+
             //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
             int min_size_mb = int.Parse(textBox1.Text);
             if (((checkBox1.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (checkBox1.Checked == false))

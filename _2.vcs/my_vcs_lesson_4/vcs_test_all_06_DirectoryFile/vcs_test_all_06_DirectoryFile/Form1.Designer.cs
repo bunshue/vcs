@@ -697,13 +697,14 @@
             // 
             // button43
             // 
-            this.button43.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button43.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button43.Location = new System.Drawing.Point(9, 250);
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(185, 40);
             this.button43.TabIndex = 39;
-            this.button43.Text = "xxx";
+            this.button43.Text = "測試ReadAllBytes和WriteAllBytes";
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
             // button44
             // 

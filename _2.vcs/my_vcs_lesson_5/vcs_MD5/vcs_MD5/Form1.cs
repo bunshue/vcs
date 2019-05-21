@@ -95,17 +95,17 @@ namespace vcs_MD5
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == null)
+            if (textBox1.Text == "")
             {
                 label4.Text = "未選取檔案";
                 return;
             }
-            if (textBox3.Text == null)
+            if (textBox3.Text == "")
             {
                 label4.Text = "未填入MD5值";
                 return;
             }
-            if (textBox1.Text.ToLower() == textBox3.Text.ToLower())
+            if (FirstFileMD5.Trim().ToLower() == textBox3.Text.Trim().ToLower())
                 label4.Text = "檔案驗證正確";
             else
                 label4.Text = "檔案驗證錯誤";

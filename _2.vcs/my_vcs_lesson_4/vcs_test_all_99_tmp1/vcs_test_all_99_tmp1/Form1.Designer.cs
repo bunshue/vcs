@@ -436,7 +436,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(154, 42);
             this.button35.TabIndex = 54;
-            this.button35.Text = "xxx";
+            this.button35.Text = "parse bmp";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click_1);
             // 
@@ -522,6 +522,7 @@
             this.button10.TabIndex = 67;
             this.button10.Text = "xxx";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click_1);
             // 
             // Form1
             // 

@@ -1,4 +1,20 @@
 
+----------------many ST----------------
+
+richTextBox1.Text += System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+2019/05/21 14:52:41
+
+richTextBox1.Text += DateTime.Now.ToString() + "\n";
+2019/5/21 下午 02:52:42
+
+----------------many SP----------------
+
+using System.Windows.Media.Imaging要引用PresentationCore
+
+只需要在引用-->程序集-->框架-->PresentationCore
+
+
+
 
 string my_string = "   歡迎來到Myson Century!   ";
 
