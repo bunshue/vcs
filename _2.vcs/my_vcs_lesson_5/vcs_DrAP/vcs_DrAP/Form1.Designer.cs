@@ -47,11 +47,13 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -157,7 +159,7 @@
             // 
             this.listView1.Location = new System.Drawing.Point(12, 56);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1200, 515);
+            this.listView1.Size = new System.Drawing.Size(1437, 515);
             this.listView1.TabIndex = 14;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -223,12 +225,21 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(1232, 22);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(60, 22);
+            this.textBox3.TabIndex = 24;
+            this.textBox3.Text = "vcs";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // button11
             // 
             this.button11.BackgroundImage = global::vcs_DrAP.Properties.Resources.power;
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button11.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(1164, 9);
+            this.button11.Location = new System.Drawing.Point(1404, 6);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(45, 45);
             this.button11.TabIndex = 23;
@@ -283,11 +294,25 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button13
+            // 
+            this.button13.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
+            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button13.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Location = new System.Drawing.Point(1298, 7);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(45, 45);
+            this.button13.TabIndex = 26;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 861);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button4);
@@ -342,6 +367,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button13;
     }
 }
 

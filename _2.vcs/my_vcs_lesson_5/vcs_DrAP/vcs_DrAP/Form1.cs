@@ -72,6 +72,7 @@ namespace vcs_DrAP
         int step = 0;
         int flag_search_mode = 0;
         int flag_search_done = 0;
+        int flag_search_vcs_pattern = 0;
         string drap_setup_filename = "drap_setup.ini";
 
         public class MyFileInfo
@@ -223,9 +224,13 @@ namespace vcs_DrAP
                     {
                         ProcessFile(fileName, step);
                     }
-                    richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
-                    richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
-                    richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+                    //richTextBox1.Text += "folder_name = " + targetDirectory + "\n";
+                    //richTextBox1.Text += "folder_files = " + folder_files.ToString() + "\n";
+                    //richTextBox1.Text += "folder_size = " + folder_size.ToString() + "\n";
+                    if (folder_files == 0)
+                    {
+                        //richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
+                    }
 
 
                     // Recurse into subdirectories of this directory.
@@ -775,6 +780,17 @@ namespace vcs_DrAP
         private void button11_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (textBox3.Text == "")
+            {
+                richTextBox2.Text += "未輸入搜尋內容\n";
+                return;
+            }
+            flag_search_vcs_pattern = 1;
+
         }
 
 

@@ -113,7 +113,7 @@ for x in [1, 2, 3]: print x, 	1 2 3 		
 
 ず竚ㄧ计のよ猭
 
-Pythonい珹难ㄧ计
+Pythonい珹ㄧ计
 SN 	ㄧ计の磞瓃
 1 	cmp(list1, list2)	ゑ耕ㄢじ
 2 	len(list)		倒羆
@@ -121,7 +121,7 @@ SN 	ㄧ计の磞瓃
 4 	min(list)		眖い兜ヘ程
 5 	list(seq)		じ舱锣传
 
-Pythonい珹难よ猭
+Pythonい珹よ猭
 SN 	よ猭の磞瓃
 1 	list.append(obj)	睰obj癸禜
 2 	list.count(obj)		璸衡obj瞷Ω计

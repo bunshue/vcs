@@ -32,8 +32,8 @@ namespace vcs_Clock
             minHAND = 55 * WIDTH / 150;
             hrHAND = 40 * WIDTH / 150;
 
-            pictureBox1.Size = new Size(WIDTH * 164 / 150 + 300, HEIGHT * 164 / 150);
-            this.Size = new Size(WIDTH * 164 / 150 + 30 + 300, HEIGHT * 164 / 150 + 40);
+            pictureBox1.Size = new Size(WIDTH * 164 / 150, HEIGHT * 164 / 150);
+            this.Size = new Size(WIDTH * 164 / 150 + 30, HEIGHT * 164 / 150 + 40);
 
             //create bitmap
             bmp = new Bitmap(WIDTH + 1, HEIGHT + 1);
@@ -50,13 +50,11 @@ namespace vcs_Clock
 
 
             //get time
-            int ms = DateTime.Now.Millisecond;
             int ss = DateTime.Now.Second;
             int mm = DateTime.Now.Minute;
             int hh = DateTime.Now.Hour;
 
             int[] handCoord = new int[2];
-            float[] handCoordf = new float[2];
 
             //clear
             g.Clear(Color.White);
@@ -76,9 +74,8 @@ namespace vcs_Clock
             g.DrawString("9", new Font("Arial", 12), Brushes.Black, new PointF(0 * WIDTH / 150, 68 * HEIGHT / 150));
 
             //second hand
-            handCoordf = msCoordf(ss, ms, secHAND);
-            g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point((int)handCoordf[0], (int)handCoordf[1]));
-            richTextBox1.Text += "(" + (handCoordf[0] - cx).ToString() + ", " + (handCoordf[1] - cy).ToString() + ")\n";
+            handCoord = msCoord(ss, secHAND);
+            g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
 
             //minute hand
             handCoord = msCoord(mm, minHAND);
@@ -116,40 +113,6 @@ namespace vcs_Clock
             {
                 coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
                 coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
-            }
-            return coord;
-        }
-
-        //coord for minute and second hand
-        private float[] msCoordf(int val1, int val2, int hlen)
-        {
-            float[] coord = new float[2];
-            if (hlen == 70 * WIDTH / 150)
-            {
-                //richTextBox1.Text += "sec val = " + val.ToString() + "\t";
-            }
-            float val;
-            val = (float)val1 + (float)val2 / 1000;
-
-            val *= 6;   //each minute and second make 6 degree
-
-            if (val >= 0 && val <= 180)
-            {
-                coord[0] = cx + (float)(hlen * Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
-                if (hlen == 70 * WIDTH / 150)
-                {
-                    richTextBox1.Text += "111 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
-                }
-            }
-            else
-            {
-                coord[0] = cx - (float)(hlen * -Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
-                if (hlen == 70 * WIDTH / 150)
-                {
-                    richTextBox1.Text += "222 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
-                }
             }
             return coord;
         }

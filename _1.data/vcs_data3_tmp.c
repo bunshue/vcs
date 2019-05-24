@@ -1,4 +1,10 @@
 
+
+            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+            g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
+
+
 ----------------many ST----------------
 
 richTextBox1.Text += System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
@@ -218,9 +224,6 @@ tmp code
 
 
 
-
-
-openFileDialog1.Filter = "XML設定檔|*.xml";
 
 
 
@@ -982,7 +985,8 @@ vcs不可畫點，用畫橢圓取代
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
 
 
-
+openFileDialog1.Filter = "XML設定檔|*.xml";
+openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.wmf";
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";

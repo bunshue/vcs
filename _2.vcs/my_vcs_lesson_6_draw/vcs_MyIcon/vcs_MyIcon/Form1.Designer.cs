@@ -73,6 +73,7 @@
             this.button38 = new System.Windows.Forms.Button();
             this.button39 = new System.Windows.Forms.Button();
             this.button40 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -532,11 +533,23 @@
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
+            // button41
+            // 
+            this.button41.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button41.BackgroundImage")));
+            this.button41.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button41.Location = new System.Drawing.Point(817, 144);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(60, 60);
+            this.button41.TabIndex = 42;
+            this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 631);
+            this.Controls.Add(this.button41);
             this.Controls.Add(this.button40);
             this.Controls.Add(this.button39);
             this.Controls.Add(this.button38);
@@ -632,6 +645,7 @@
         private System.Windows.Forms.Button button38;
         private System.Windows.Forms.Button button39;
         private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Button button41;
     }
 }
 
