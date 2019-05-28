@@ -1571,6 +1571,44 @@ namespace vcs_test_all_06_DirectoryFile
             richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
 
         }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            string fileName1 = "c:\\______test_vcs\\test_ReadAllBytes.bmp";
+            string fileName2 = "c:\\______test_vcs\\test_ReadAllBytes_half.bmp";
+
+            //讀取資料
+            byte[] data_read = File.ReadAllBytes(fileName1);
+            richTextBox1.Text += "讀取檔案" + fileName1 + "\t";
+            richTextBox1.Text += "len = " + data_read.Length.ToString() + "\n";
+
+            byte[] data_write = new byte[data_read.Length / 2];
+
+            for (int i = 0; i < data_read.Length / 2; i++)
+            {
+                data_write[i] = data_read[i];
+
+            }
+
+            /*
+            打印資料
+            string data_read_result = string.Empty;
+            foreach (byte b in data_read)
+            {
+                data_read_result += b.ToString("X2");
+            }
+            richTextBox1.Text += data_read_result;
+            */
+
+
+            //寫資料
+            //File.WriteAllBytes(fileName2, data_write);
+            string zzz = Convert.ToString(data_write);
+            File.WriteAllText(fileName2, zzz);
+            richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
+
+        }
+
     }
 }
 

@@ -117,28 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>------------------------------------------------------------
-請先設定欲轉出檔名的目錄
-以及欲轉出檔案的類型，
-
-若要連子目錄下所有目錄檔案全部轉出，
-請按下右鍵中"轉出全部"項
-或按下工具列之"轉出鍵"；
-
-若只需轉出該目錄下之檔案及目錄名稱、
-不包含子目錄，請按下右鍵中"轉出一層"項
-或按下工具列之"轉出一層鍵"；
-
-即可將設定目錄下之目錄名稱及檔名
-變為純文字轉出至此編輯區。
-------------------------------------------------------------
-</value>
-  </data>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>195, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>55</value>
   </metadata>
 </root>

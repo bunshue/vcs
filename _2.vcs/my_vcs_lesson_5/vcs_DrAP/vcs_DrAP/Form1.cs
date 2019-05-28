@@ -96,6 +96,7 @@ namespace vcs_DrAP
         {
             flag_search_mode = 0;
             flag_search_done = 0;
+            flag_search_vcs_pattern = 0;
 
             fileinfos.Clear();
             if (path != String.Empty)
@@ -345,7 +346,7 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 900, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 1200, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -398,7 +399,7 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 900, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 1200, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -441,6 +442,38 @@ namespace vcs_DrAP
                 //設置ListView最後一行可見
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
+        }
+
+        void show_file_info3()
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.Clear();
+            //設置列名稱
+            listView1.Columns.Add("名稱", 1200, HorizontalAlignment.Center);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
+            listView1.Visible = true;
+
+            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
+            for (int i = 0; i < fileinfos.Count; i++)
+            {
+                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+            }
 
         }
 
@@ -454,6 +487,7 @@ namespace vcs_DrAP
 
             flag_search_mode = 0;
             flag_search_done = 0;
+            flag_search_vcs_pattern = 0;
 
             fileinfos.Clear();
             /*  無法依子目錄排序 廢棄
@@ -538,6 +572,7 @@ namespace vcs_DrAP
             listView1.Clear();
             richTextBox1.Clear();
             richTextBox2.Clear();
+            flag_search_vcs_pattern = 0;
         }
 
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -561,7 +596,10 @@ namespace vcs_DrAP
             listView1.Items[selNdx].Selected = true;    //選到的項目
             //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
             richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
-            System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
+            if(flag_search_vcs_pattern == 0)
+                System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
+            else
+                System.Diagnostics.Process.Start("uedit32.exe", listView1.Items[selNdx].Text);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -731,6 +769,7 @@ namespace vcs_DrAP
 
         private void button4_Click(object sender, EventArgs e)
         {
+            flag_search_vcs_pattern = 0;
             if (flag_search_done == 1)
             {
                 flag_search_mode = 1;
@@ -744,8 +783,6 @@ namespace vcs_DrAP
                 button1_Click(sender, e);
                 flag_search_mode = 0;
             }
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -771,7 +808,10 @@ namespace vcs_DrAP
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //設定執行後的表單大小
             this.Size = new Size(1920, 1080);
+
+            //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 
@@ -782,6 +822,98 @@ namespace vcs_DrAP
             Application.Exit();
         }
 
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessDirectoryS(string targetDirectory)
+        {
+            try
+            {
+                // Process the list of files found in the directory.
+                try
+                {
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    Array.Sort(fileEntries);
+                    foreach (string fileName in fileEntries)
+                    {
+                        ProcessFileS(fileName);
+                    }
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    Array.Sort(subdirectoryEntries);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        ProcessDirectoryS(subdirectory);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+            }
+        }
+
+        // Insert logic for processing found files here.
+        public void ProcessFileS(string path)
+        {
+            FileInfo fi = new FileInfo(path);
+            //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
+            bool res;
+            string pattern = "Form1.cs";
+            res = fi.FullName.ToLower().Replace(" ", "").Contains(pattern.ToLower());
+
+            if (res == true)
+            {
+                //richTextBox1.Text += fi.FullName + "\n";
+
+                StreamReader sr = new StreamReader(fi.FullName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+                int flag_pattern_match = 0;
+                int i = 0;
+                String line;
+
+                //寫法一
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    i++;
+                    line = sr.ReadLine();            // 讀取文字到 line 變數
+                    res = line.ToLower().Replace(" ", "").Contains(textBox3.Text.ToLower().Replace(" ", ""));
+                    if (res == true)
+                    {
+                        //richTextBox1.Text += "第" + i.ToString() + "行： " + line + "\n";
+                        richTextBox2.Text += line + "\n";
+                        flag_pattern_match = 1;
+                    }
+                }
+                if (flag_pattern_match == 1)
+                {
+                    richTextBox1.Text += fi.FullName + "\n";
+                    fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
+                }
+
+                sr.Close();
+
+
+
+
+
+
+
+
+
+
+            }
+            else
+            {
+                return;
+            }
+        }
+
         private void button13_Click(object sender, EventArgs e)
         {
             if (textBox3.Text == "")
@@ -789,9 +921,37 @@ namespace vcs_DrAP
                 richTextBox2.Text += "未輸入搜尋內容\n";
                 return;
             }
+
+            fileinfos.Clear();
+
+            string path = @"D:\___source_code\_git\part3\vcs\_2.vcs";
+
+            if (path == String.Empty)
+                path = "C:\\______test_vcs";
+
+            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            if (File.Exists(path))
+            {
+                // This path is a file
+                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
+                ProcessFileS(path);
+            }
+            else if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessDirectoryS(path);
+            }
+            show_file_info3();
             flag_search_vcs_pattern = 1;
+            return;
+
+
+
+
+
 
         }
+
 
 
 

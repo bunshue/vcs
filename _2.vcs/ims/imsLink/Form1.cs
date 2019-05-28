@@ -28,9 +28,10 @@ namespace imsLink
         private const int VIDEO_FORBID_ALL = 1;
         private const int VIDEO_FORBID_DIFFERENT_CAMERA = 2;
         private const int VIDEO_FORBID_POWEROFF_LONG_1M = 3;
-        private const int VIDEO_FORBID_POWEROFF_LONG_30M = 4;
-        private const int VIDEO_FORBID_PULL_OUT_LONG_1M = 5;
-        private const int VIDEO_FORBID_PULL_OUT_LONG_30M = 6;
+        private const int VIDEO_FORBID_POWEROFF_LONG_1M30M = 4;
+        private const int VIDEO_FORBID_POWEROFF_LONG_30M = 5;
+        private const int VIDEO_FORBID_PULL_OUT_LONG_1M = 6;
+        private const int VIDEO_FORBID_PULL_OUT_LONG_30M = 7;
         string imslink_log_filename = "imslink.log";
         string RxString = "";
         string[] COM_Ports_NameArr;
@@ -288,7 +289,8 @@ namespace imsLink
         {
             switch (flag_request_item)
             {
-                case 0x9:
+                //case 0x9:
+                case 0xa:
                 case 0xb:
                 case 0xd:
                 case 0xf:
@@ -318,9 +320,16 @@ namespace imsLink
                         richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
 
 
-                        if (flag_request_item == 0x9)
+                        if (flag_request_item == 0xa)
                         {
                             lb_a.Text = "Product : " + month.ToString("00") + "/"
+                                + mday.ToString("00") + "/"
+                                + year.ToString("0000") + " "
+                                + wday.ToString() + " "
+                                + hour.ToString("00") + ":"
+                                + minutes.ToString("00") + ":"
+                                + seconds.ToString("00");
+                            lb_aa.Text = "Product : " + month.ToString("00") + "/"
                                 + mday.ToString("00") + "/"
                                 + year.ToString("0000") + " "
                                 + wday.ToString() + " "
@@ -441,14 +450,15 @@ namespace imsLink
                     }
                     switch (flag_video_status)
                     {
-                        case VIDEO_OK:                          lb_e.Text = "VIDEO_OK"; break;
-                        case VIDEO_FORBID_ALL:                  lb_e.Text = "VIDEO_FORBID_ALL"; break;
-                        case VIDEO_FORBID_DIFFERENT_CAMERA:     lb_e.Text = "VIDEO_FORBID_DIFFERENT_CAMERA"; break;
-                        case VIDEO_FORBID_POWEROFF_LONG_1M:     lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_1M"; break;
-                        case VIDEO_FORBID_POWEROFF_LONG_30M:    lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_30M"; break;
-                        case VIDEO_FORBID_PULL_OUT_LONG_1M:     lb_e.Text = "VIDEO_FORBID_PULL_OUT_LONG_1M"; break;
-                        case VIDEO_FORBID_PULL_OUT_LONG_30M:    lb_e.Text = "VIDEO_FORBID_PULL_OUT_LONG_30M"; break;
-                        default:                                lb_e.Text = "unknown video status : " + flag_video_status.ToString(); break;
+                        case VIDEO_OK: lb_e.Text = "VIDEO_OK"; break;
+                        case VIDEO_FORBID_ALL: lb_e.Text = "VIDEO_FORBID_ALL"; break;
+                        case VIDEO_FORBID_DIFFERENT_CAMERA: lb_e.Text = "VIDEO_FORBID_DIFFERENT_CAMERA"; break;
+                        case VIDEO_FORBID_POWEROFF_LONG_1M: lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_1M"; break;
+                        case VIDEO_FORBID_POWEROFF_LONG_1M30M: lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_1M30M"; break;
+                        case VIDEO_FORBID_POWEROFF_LONG_30M: lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_30M"; break;
+                        case VIDEO_FORBID_PULL_OUT_LONG_1M: lb_e.Text = "VIDEO_FORBID_PULL_OUT_LONG_1M"; break;
+                        case VIDEO_FORBID_PULL_OUT_LONG_30M: lb_e.Text = "VIDEO_FORBID_PULL_OUT_LONG_30M"; break;
+                        default: lb_e.Text = "unknown video status : " + flag_video_status.ToString(); break;
                     }
                     if (flag_video_status == VIDEO_OK)
                         tb_info_e2.BackColor = Color.White;
@@ -1004,6 +1014,7 @@ namespace imsLink
             //Comport_Scan();
             label1.Text = "";
             lb_a.Text = "";
+            lb_aa.Text = "";
             lb_b.Text = "";
             lb_c.Text = "";
             lb_d.Text = "";
@@ -1049,6 +1060,9 @@ namespace imsLink
             }
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(100, 100);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1686,6 +1700,7 @@ namespace imsLink
 
         private void button8_Click(object sender, EventArgs e)
         {
+            button8.BackColor = Color.Red;
             textBox7.Clear();
             textBox7.BackColor = Color.Gray;
             panel3.BackgroundImage = null;
@@ -1696,6 +1711,7 @@ namespace imsLink
             if (!serialPort1.IsOpen)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                button8.BackColor = System.Drawing.SystemColors.ControlLight;
                 return;
             }
             g_conn_status = CAMERA_UNKNOWN;
@@ -1722,11 +1738,43 @@ namespace imsLink
                 tb_sn1.Text = "有連接器, 有相機";
                 tb_sn1.BackColor = Color.White;
                 Get_IMS_Data(0, 0xAA, 0xAA);
+
+                byte page;
+                /*
+                Get_IMS_Data(0, 0xAA, 0xAA);
+                while (flag_wait_receive_data == 1)
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+
+                page = 0x9;
+                Get_IMS_Data(1, page, 0xAA);
+                while (flag_wait_receive_data == 1)
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+                */
+
+                page = 0xa;
+                Get_IMS_Data(1, page, 0xAA);
+                while (flag_wait_receive_data == 1)
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+
+
+
+
+
             }
             else
             {
                 tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
             }
+            button8.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1747,6 +1795,7 @@ namespace imsLink
 
         private void button64_Click(object sender, EventArgs e)
         {
+            button64.BackColor = Color.Red;
             textBox7.Clear();
             textBox7.BackColor = Color.Gray;
             panel3.BackgroundImage = null;
@@ -1755,11 +1804,13 @@ namespace imsLink
             if (!serialPort1.IsOpen)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                button64.BackColor = System.Drawing.SystemColors.ControlLight;
                 return;
             }
             Send_IMS_Data(0xFF, 0, 0, 0);
 
             this.tb_sn2.Focus();
+            button64.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1779,6 +1830,7 @@ namespace imsLink
         private void button4_Click(object sender, EventArgs e)
         {
             byte page;
+            button4.BackColor = Color.Red;
 
             tb_sn2.Clear();
             tb_info_a.BackColor = Color.White;
@@ -1789,6 +1841,7 @@ namespace imsLink
             tb_info_e.Clear();
             tb_info_f.Clear();
             lb_a.Text = "";
+            lb_aa.Text = "";
             lb_b.Text = "";
             lb_c.Text = "";
             lb_d.Text = "";
@@ -1816,7 +1869,7 @@ namespace imsLink
 
             while (g_conn_status == CAMERA_UNKNOWN)
             {
-                richTextBox1.Text += "-2";
+                richTextBox1.Text += "-2xx";
                 delay(100);
             }
             if (g_conn_status == DONGLE_NONE)
@@ -1846,7 +1899,17 @@ namespace imsLink
                     delay(100);
                 }
 
+                /*
                 page = 0x9;
+                Get_IMS_Data(1, page, 0xAA);
+                while (flag_wait_receive_data == 1)
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+                */
+
+                page = 0xa;
                 Get_IMS_Data(1, page, 0xAA);
                 while (flag_wait_receive_data == 1)
                 {
@@ -1898,6 +1961,7 @@ namespace imsLink
             {
                 tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
             }
+            button4.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -2286,6 +2350,7 @@ namespace imsLink
             tb_info_e.Clear();
             tb_info_f.Clear();
             lb_a.Text = "";
+            lb_aa.Text = "";
             lb_b.Text = "";
             lb_c.Text = "";
             lb_d.Text = "";

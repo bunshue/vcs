@@ -160,6 +160,7 @@
             this.cb_1 = new System.Windows.Forms.CheckBox();
             this.cb_0 = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
@@ -184,7 +185,7 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lb_aa = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -735,6 +736,7 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.lb_aa);
             this.groupBox10.Controls.Add(this.lb_warning);
             this.groupBox10.Controls.Add(this.bt_confirm);
             this.groupBox10.Controls.Add(this.tb_fix_length);
@@ -844,7 +846,7 @@
             // tb_sn2
             // 
             this.tb_sn2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_sn2.Location = new System.Drawing.Point(21, 98);
+            this.tb_sn2.Location = new System.Drawing.Point(21, 102);
             this.tb_sn2.Name = "tb_sn2";
             this.tb_sn2.Size = new System.Drawing.Size(623, 32);
             this.tb_sn2.TabIndex = 56;
@@ -873,7 +875,7 @@
             // tb_sn1
             // 
             this.tb_sn1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_sn1.Location = new System.Drawing.Point(21, 42);
+            this.tb_sn1.Location = new System.Drawing.Point(21, 35);
             this.tb_sn1.Name = "tb_sn1";
             this.tb_sn1.Size = new System.Drawing.Size(623, 32);
             this.tb_sn1.TabIndex = 52;
@@ -882,7 +884,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(678, 42);
+            this.button8.Location = new System.Drawing.Point(678, 33);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 40);
             this.button8.TabIndex = 49;
@@ -1669,6 +1671,19 @@
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(6, 33);
+            this.linkLabel1.Location = new System.Drawing.Point(537, 472);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(241, 25);
+            this.linkLabel1.TabIndex = 13;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "網址:   https://www.insighteyes.com/";
+            this.linkLabel1.UseCompatibleTextRendering = true;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // label57
             // 
             this.label57.AutoSize = true;
@@ -1873,18 +1888,15 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // linkLabel1
+            // lb_aa
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(6, 33);
-            this.linkLabel1.Location = new System.Drawing.Point(537, 472);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(241, 25);
-            this.linkLabel1.TabIndex = 13;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "網址:   https://www.insighteyes.com/";
-            this.linkLabel1.UseCompatibleTextRendering = true;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.lb_aa.AutoSize = true;
+            this.lb_aa.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_aa.Location = new System.Drawing.Point(21, 74);
+            this.lb_aa.Name = "lb_aa";
+            this.lb_aa.Size = new System.Drawing.Size(70, 24);
+            this.lb_aa.TabIndex = 79;
+            this.lb_aa.Text = "lb_aa";
             // 
             // Form1
             // 
@@ -2107,6 +2119,7 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label lb_aa;
     }
 }
 
