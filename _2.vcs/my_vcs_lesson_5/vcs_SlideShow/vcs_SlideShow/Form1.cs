@@ -16,8 +16,8 @@ namespace vcs_SlideShow
             InitializeComponent();
         }
 
+        bool flag_no_fix_position = false;
         int cnt = 0;
-        string filename;
         private void timer1_Tick(object sender, EventArgs e)
         {
             cnt++;
@@ -41,6 +41,8 @@ namespace vcs_SlideShow
             pictureBox1.Width = pictureBox1.Image.Width / 8;
             pictureBox1.Height = pictureBox1.Image.Height / 8;
             this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+            if(flag_no_fix_position == false)
+                this.Location = new System.Drawing.Point(1920 - pictureBox1.Width, 100);
 
         }
 
@@ -48,7 +50,7 @@ namespace vcs_SlideShow
         {
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(1920 - 400, 100);
+            this.Location = new System.Drawing.Point(1920 - 800, 100);
 
             this.FormBorderStyle = FormBorderStyle.None;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -61,5 +63,44 @@ namespace vcs_SlideShow
             //Application.Exit();
             timer1_Tick(sender, e);
         }
+
+        //***********************
+        private Point mouseOffset;//记录鼠标坐标
+        private bool isMouseDown = false;//是否按下鼠标
+        //***********************
+
+        #region 移动无边框窗体
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int xOffset;
+            int yOffset;
+            if (e.Button == MouseButtons.Left)
+            {
+                xOffset = -e.X;
+                yOffset = -e.Y;
+                mouseOffset = new Point(xOffset, yOffset);
+                isMouseDown = true;
+            }
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+                Location = mousePos;
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+                flag_no_fix_position = true;
+            }
+        }
+        #endregion
     }
 }
