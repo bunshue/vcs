@@ -141,6 +141,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(953, 419);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // checkBox1
             // 
@@ -206,6 +207,7 @@
             this.richTextBox2.Size = new System.Drawing.Size(694, 419);
             this.richTextBox2.TabIndex = 19;
             this.richTextBox2.Text = "";
+            this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);
             // 
             // textBox2
             // 

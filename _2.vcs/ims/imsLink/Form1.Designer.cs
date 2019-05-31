@@ -78,6 +78,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button64 = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.lb_aa = new System.Windows.Forms.Label();
             this.lb_warning = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
             this.tb_fix_length = new System.Windows.Forms.TextBox();
@@ -185,7 +186,8 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.lb_aa = new System.Windows.Forms.Label();
+            this.lb_time1 = new System.Windows.Forms.Label();
+            this.lb_time2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -757,6 +759,16 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Serial";
             // 
+            // lb_aa
+            // 
+            this.lb_aa.AutoSize = true;
+            this.lb_aa.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_aa.Location = new System.Drawing.Point(21, 74);
+            this.lb_aa.Name = "lb_aa";
+            this.lb_aa.Size = new System.Drawing.Size(70, 24);
+            this.lb_aa.TabIndex = 79;
+            this.lb_aa.Text = "lb_aa";
+            // 
             // lb_warning
             // 
             this.lb_warning.AutoSize = true;
@@ -1094,7 +1106,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(40, 32);
             this.textBox2.TabIndex = 66;
-            this.textBox2.Text = "A";
+            this.textBox2.Text = "9";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lb_f
@@ -1332,6 +1344,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.lb_time2);
+            this.tabPage2.Controls.Add(this.lb_time1);
             this.tabPage2.Controls.Add(this.groupBox9);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.button122);
@@ -1363,6 +1377,7 @@
             this.button27.TabIndex = 56;
             this.button27.Text = "寫入";
             this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // textBox5
             // 
@@ -1392,10 +1407,11 @@
             this.button28.TabIndex = 54;
             this.button28.Text = "讀取";
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(33, 102);
+            this.button3.Location = new System.Drawing.Point(33, 131);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(119, 46);
             this.button3.TabIndex = 6;
@@ -1405,7 +1421,7 @@
             // 
             // button122
             // 
-            this.button122.Location = new System.Drawing.Point(33, 30);
+            this.button122.Location = new System.Drawing.Point(33, 39);
             this.button122.Name = "button122";
             this.button122.Size = new System.Drawing.Size(119, 46);
             this.button122.TabIndex = 5;
@@ -1888,15 +1904,25 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // lb_aa
+            // lb_time1
             // 
-            this.lb_aa.AutoSize = true;
-            this.lb_aa.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_aa.Location = new System.Drawing.Point(21, 74);
-            this.lb_aa.Name = "lb_aa";
-            this.lb_aa.Size = new System.Drawing.Size(70, 24);
-            this.lb_aa.TabIndex = 79;
-            this.lb_aa.Text = "lb_aa";
+            this.lb_time1.AutoSize = true;
+            this.lb_time1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_time1.Location = new System.Drawing.Point(179, 29);
+            this.lb_time1.Name = "lb_time1";
+            this.lb_time1.Size = new System.Drawing.Size(106, 24);
+            this.lb_time1.TabIndex = 79;
+            this.lb_time1.Text = "lb_time1";
+            // 
+            // lb_time2
+            // 
+            this.lb_time2.AutoSize = true;
+            this.lb_time2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_time2.Location = new System.Drawing.Point(179, 74);
+            this.lb_time2.Name = "lb_time2";
+            this.lb_time2.Size = new System.Drawing.Size(106, 24);
+            this.lb_time2.TabIndex = 80;
+            this.lb_time2.Text = "lb_time2";
             // 
             // Form1
             // 
@@ -1947,6 +1973,7 @@
             this.USB.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.tabPage4.ResumeLayout(false);
@@ -2120,6 +2147,8 @@
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label lb_aa;
+        private System.Windows.Forms.Label lb_time1;
+        private System.Windows.Forms.Label lb_time2;
     }
 }
 

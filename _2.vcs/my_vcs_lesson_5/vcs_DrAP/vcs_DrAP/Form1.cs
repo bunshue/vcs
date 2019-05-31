@@ -922,6 +922,20 @@ namespace vcs_DrAP
                 button13_Click(sender, e);
             }
         }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox2.SelectionStart = richTextBox2.TextLength;
+            richTextBox2.ScrollToCaret();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.ScrollToCaret();
+        }
     }
 }
 

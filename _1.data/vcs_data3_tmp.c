@@ -1,5 +1,26 @@
 
 
+        private void nudgeWindow()
+        {
+            // 記錄視窗舊位置
+            int oldLeft = Left;
+            int oldTop = Top;
+            // 變動位置
+            Random r = new Random();
+            for (int i = 0; i <= 500; i++)
+            {
+                int left = r.Next(Left - 20, Left + 20);
+                Left = left;
+                int top = r.Next(Top - 20, Top + 20);
+                Top = top;
+                Left = oldLeft;
+                Top = oldTop;
+            }
+        }
+
+
+
+
 
  [C#]pictureBox隨滑鼠滾輪滾動改變大小
 寫滑鼠事件

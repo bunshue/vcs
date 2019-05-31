@@ -51,6 +51,7 @@ namespace imsLink
         int flag_wait_receive_data = 0;
         int flag_receive_camera_serial = 0;
         int flag_receive_camera_flash_data = 0;
+        int flag_receive_ims_rtc_data = 0;
         int flag_request_item = 0;
         int flag_verify_serial_data = 0;
         int flag_need_confirm = 0;
@@ -683,7 +684,7 @@ namespace imsLink
                             }
                             else if (flag_receive_camera_flash_data == 1)
                             {
-                                richTextBox1.Text += "tttBytesToRead = " + BytesToRead.ToString() + "\n";
+                                richTextBox1.Text += "BytesToRead = " + BytesToRead.ToString() + "\n";
                                 //if (BytesToRead == 16)
                                 {
 
@@ -747,9 +748,13 @@ namespace imsLink
 
 
                             }
+                            else if (flag_receive_ims_rtc_data == 1)
+                            {
+                                flag_receive_ims_rtc_data = 0;
+                                flag_wait_receive_data = 0;
 
-
-
+                                lb_time2.Text = "ims時間 : " + ((int)input[0] + 1900).ToString() + "/" + ((int)input[1] + 1).ToString() + "/" + ((int)input[2]).ToString() + " " + ((int)input[4]).ToString() + ":" + ((int)input[5]).ToString() + ":" + ((int)input[6]).ToString();
+                            }
                         }
                         else
                         {
@@ -914,6 +919,11 @@ namespace imsLink
                         flag_receive_camera_flash_data = 1;
                         flag_request_item = input[2];
                     }
+                    else if (input[1] == 0xB1)
+                    {
+                        flag_receive_ims_rtc_data = 1;
+                        flag_request_item = input[2];
+                    }
                     else if (input[1] == 0xFF)
                     {
                         g_conn_status = input[2];
@@ -1029,6 +1039,8 @@ namespace imsLink
             this.tb_sn2.Focus();
             bt_confirm.Visible = false;
             lb_warning.Text = "";
+            lb_time1.Text = "";
+            lb_time2.Text = "";
 
             button12.BackgroundImage = imsLink.Properties.Resources.refresh;
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
@@ -1155,6 +1167,10 @@ namespace imsLink
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
         }
 
         private void button73_Click(object sender, EventArgs e)
@@ -1420,6 +1436,7 @@ namespace imsLink
 
         private void button122_Click(object sender, EventArgs e)
         {
+            lb_time2.Text = "";
             richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString() + "\n");
             System.DateTime dt = System.DateTime.Now;
             richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
@@ -1430,6 +1447,14 @@ namespace imsLink
             richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
             richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
             richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString();
+
+            Get_IMS_Data(3, 0xAA, 0xAA);    //read RTC data
+            while (flag_wait_receive_data == 1)
+            {
+                richTextBox1.Text += "+";
+                delay(100);
+            }
         }
 
         private void button123_Click(object sender, EventArgs e)
@@ -1703,6 +1728,7 @@ namespace imsLink
             button8.BackColor = Color.Red;
             textBox7.Clear();
             textBox7.BackColor = Color.Gray;
+            lb_aa.Text = "";
             panel3.BackgroundImage = null;
             panel4.BackgroundImage = null;
             tb_sn1.Clear();
@@ -1739,6 +1765,12 @@ namespace imsLink
                 tb_sn1.BackColor = Color.White;
                 Get_IMS_Data(0, 0xAA, 0xAA);
 
+                while (flag_wait_receive_data == 1)
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+
                 byte page;
                 /*
                 Get_IMS_Data(0, 0xAA, 0xAA);
@@ -1764,11 +1796,6 @@ namespace imsLink
                     richTextBox1.Text += "+";
                     delay(100);
                 }
-
-
-
-
-
             }
             else
             {
@@ -2694,6 +2721,11 @@ namespace imsLink
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.insighteyes.com/");
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
