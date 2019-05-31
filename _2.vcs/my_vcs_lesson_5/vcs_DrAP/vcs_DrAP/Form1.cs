@@ -610,13 +610,16 @@ namespace vcs_DrAP
             {
                 richTextBox1.Text += listView1.SelectedItems[i] + "\n";
             }
-
             richTextBox1.Text += "播放\n";
             */
 
             int selNdx;
             string all_filename = string.Empty;
-            string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            string player_path;
+            if (flag_search_vcs_pattern == 0)
+                player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            else
+                player_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
             {
                 richTextBox1.Text += "無檔可播\n";
@@ -653,8 +656,6 @@ namespace vcs_DrAP
                 p.StartInfo = pInfo;
                 p.Start();
             }
-           
-
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -678,61 +679,9 @@ namespace vcs_DrAP
 
             if (e.KeyCode == Keys.Enter)
             {
-                //等同於 button9_Click , 以後要改成只是呼叫函數
-
-                /*
-                richTextBox1.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-                for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-                {
-                    richTextBox1.Text += listView1.SelectedItems[i] + "\n";
-                }
-
-                richTextBox1.Text += "播放\n";
-                */
-
-                int selNdx;
-                string all_filename = string.Empty;
-                string player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-                if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
-                {
-                    richTextBox1.Text += "無檔可播\n";
-                    return;
-                }
-
-                //richTextBox1.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-                //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
-                for (int i = 0; i < listView1.SelectedItems.Count; i++)
-                {
-                    selNdx = listView1.SelectedIndices[i];
-                    listView1.Items[selNdx].Selected = true;    //選到的項目
-                    //richTextBox1.Text += listView1.Items[selNdx].Text + "\n";
-                    all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
-                }
-
-                //指定應用程式路徑
-                //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-                string target = player_path;
-
-                //方法一
-                //Process.Start(target, "參數");
-                //Process.Start(target, all_filename);
-
-                //方法二
-                ProcessStartInfo pInfo = new ProcessStartInfo(target);
-                pInfo.Arguments = all_filename;
-
-                richTextBox1.Text += "target : " + target + "\n";
-                richTextBox1.Text += "all_filename : " + all_filename + "\n";
-
-                using (Process p = new Process())
-                {
-                    p.StartInfo = pInfo;
-                    p.Start();
-                }
-
+                //按Enter 等同於 button9_Click
+                button9_Click(sender, e);
             }
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -762,9 +711,28 @@ namespace vcs_DrAP
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //C# 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == (Char)13)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            /*
             //C# 限制textbox只能輸入數字
             if(e.KeyChar.CompareTo('0')<0 || e.KeyChar.CompareTo('9')>0) //比較輸入值的範圍是否超出數字
                 e.Handled = true;// Handled 為是否鎖住輸入
+            */
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -945,16 +913,15 @@ namespace vcs_DrAP
             flag_search_vcs_pattern = 1;
             return;
 
-
-
-
-
-
         }
 
-
-
-
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)      //Enter
+            {
+                button13_Click(sender, e);
+            }
+        }
     }
 }
 

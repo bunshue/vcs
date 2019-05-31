@@ -81,36 +81,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="peony\peony01.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony02.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony03.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony04.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony05.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony06.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony07.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony08.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony09.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="peony\peony10.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="icon.ico" />
     <None Include="img\chingming.bmp" />
   </ItemGroup>

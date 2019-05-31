@@ -1,5 +1,28 @@
 
 
+
+ [C#]pictureBox隨滑鼠滾輪滾動改變大小
+寫滑鼠事件
+ void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            var t = pictureBox1.Size;
+            t.Width += e.Delta;
+            t.Height += e.Delta;
+            pictureBox1.Size = t;
+        }
+
+
+pictureBox的Sizemode屬性設為Zoom
+
+再添加事件
+   this.MouseWheel += new MouseEventHandler(Form1_MouseWheel); 
+   
+   
+   
+   
+   
+
+
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
             g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);

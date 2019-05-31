@@ -237,6 +237,7 @@
             this.textBox3.TabIndex = 24;
             this.textBox3.Text = "listview";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // button13
             // 
@@ -339,7 +340,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "檔案名稱轉出程式";
+            this.Text = "DrAP";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

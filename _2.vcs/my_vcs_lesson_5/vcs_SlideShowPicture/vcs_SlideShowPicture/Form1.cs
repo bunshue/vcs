@@ -73,6 +73,8 @@ namespace vcs_SlideShowPicture
 
             pictureBox1.Image = cropImage(bmp, new Rectangle(bmp.Width - 100, 0, 100, 300));
             this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+
+            this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -133,6 +135,17 @@ namespace vcs_SlideShowPicture
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                if (timer1.Interval > 5)
+                    timer1.Interval -= 5;
+            }
+            else
+                timer1.Interval += 10;
         }
     }
 }
