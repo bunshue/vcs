@@ -66,6 +66,7 @@ namespace imsLink
 		int g_conn_status = CAMERA_UNKNOWN;
         int[] camera_serial_data = new int[16];
         byte[] sn_data_send2 = new byte[16];
+        byte[] rtc_data_send = new byte[7];
         int total_burn_cnt = 0;
         int flag_timer4_status = 0;
 
@@ -162,7 +163,7 @@ namespace imsLink
 
             Comport_Mode = 0;
             this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-            this.richTextBox1.Size = new System.Drawing.Size(382, 594);
+            this.richTextBox1.Size = new System.Drawing.Size(500, 586);
 
             if (isCommandLog == 1)
             {
@@ -1043,6 +1044,7 @@ namespace imsLink
             lb_warning.Text = "";
             lb_time1.Text = "";
             lb_time2.Text = "";
+            lb_rtc.Text = "";
 
             button12.BackgroundImage = imsLink.Properties.Resources.refresh;
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
@@ -1133,13 +1135,13 @@ namespace imsLink
             {
                 show_comport_log = true;
                 button33.BackgroundImage = imsLink.Properties.Resources.close_log;
-                this.Width += 400;
+                this.Width += 520;
             }
             else
             {
                 show_comport_log = false;
                 button33.BackgroundImage = imsLink.Properties.Resources.open_log;
-                this.Width -= 400;
+                this.Width -= 520;
             }
         }
 
@@ -1169,10 +1171,6 @@ namespace imsLink
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-            //C# – 複製資料到剪貼簿
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
-            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
         }
 
         private void button73_Click(object sender, EventArgs e)
@@ -1221,7 +1219,7 @@ namespace imsLink
             richTextBox1.AppendText("[PC]: imsLink mode\n");
             Comport_Mode = 0;
             this.richTextBox1.Location = new System.Drawing.Point(958, 67);
-            this.richTextBox1.Size = new System.Drawing.Size(382, 594);
+            this.richTextBox1.Size = new System.Drawing.Size(500, 586);
         }
 
         private void button87_Click(object sender, EventArgs e)
@@ -1454,7 +1452,7 @@ namespace imsLink
             string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
             richTextBox1.Text += weekday + "\n";
             lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
-            Get_IMS_Data(3, 0xAA, 0xAA);    //read RTC data
+            Get_IMS_Data(3, 0x11, 0xAA);    //read RTC data
             int cnt = 0;
             while ((flag_wait_receive_data == 1) && (cnt++ < 20))
             {
@@ -2755,12 +2753,48 @@ namespace imsLink
 
         private void button21_Click(object sender, EventArgs e)
         {
+            lb_rtc.Text = "";
+            button21.BackColor = Color.Red;
             richTextBox1.Text += "更新系統時間\n";
             richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString() + "\n";
 
+            System.DateTime dt = System.DateTime.Now;
+            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
+            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
+            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
+            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
+            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
+            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
+            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            //richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
 
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            richTextBox1.Text += weekday + "\n";
+            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
 
+            Send_IMS_Data(0xB0, 0x12, 0x34, 0x56);      //RTC write
+
+            rtc_data_send[0] = (byte)(dt.Year - 1900);
+            rtc_data_send[1] = (byte)dt.Month;
+            rtc_data_send[2] = (byte)dt.Day;
+            rtc_data_send[3] = (byte)dt.DayOfWeek;
+            rtc_data_send[4] = (byte)dt.Hour;
+            rtc_data_send[5] = (byte)dt.Minute;
+            rtc_data_send[6] = (byte)dt.Second;
+
+            serialPort1.Write(rtc_data_send, 0, 7);
+            lb_rtc.Text = "已更新RTC時間";
+            button21.BackColor = System.Drawing.SystemColors.ControlLight;
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
         }
     }
 }
