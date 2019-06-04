@@ -753,7 +753,9 @@ namespace imsLink
                                 flag_receive_ims_rtc_data = 0;
                                 flag_wait_receive_data = 0;
 
-                                lb_time2.Text = "ims時間 : " + ((int)input[0] + 1900).ToString() + "/" + ((int)input[1] + 1).ToString() + "/" + ((int)input[2]).ToString() + " " + ((int)input[4]).ToString() + ":" + ((int)input[5]).ToString() + ":" + ((int)input[6]).ToString();
+                                string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+                                string weekday = Day[input[3]].ToString();
+                                lb_time2.Text = "ims時間 : " + ((int)input[0] + 1900).ToString() + "/" + ((int)input[1] + 1).ToString("00") + "/" + ((int)input[2]).ToString("00") + " " + weekday + " " +((int)input[4]).ToString("00") + ":" + ((int)input[5]).ToString("00") + ":" + ((int)input[6]).ToString("00");
                             }
                         }
                         else
@@ -1447,14 +1449,19 @@ namespace imsLink
             richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
             richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
             richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
-            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString();
 
+            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            richTextBox1.Text += weekday + "\n";
+            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
             Get_IMS_Data(3, 0xAA, 0xAA);    //read RTC data
-            while (flag_wait_receive_data == 1)
+            int cnt = 0;
+            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
             {
                 richTextBox1.Text += "+";
                 delay(100);
             }
+            flag_wait_receive_data = 0;
         }
 
         private void button123_Click(object sender, EventArgs e)
@@ -1547,7 +1554,7 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
+        private void tb_3_TextChanged(object sender, EventArgs e)
         {
             if (tb_3.Text.Length == 0)
             {
@@ -1765,11 +1772,13 @@ namespace imsLink
                 tb_sn1.BackColor = Color.White;
                 Get_IMS_Data(0, 0xAA, 0xAA);
 
-                while (flag_wait_receive_data == 1)
+                int cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
                     richTextBox1.Text += "+";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 byte page;
                 /*
@@ -1791,11 +1800,13 @@ namespace imsLink
 
                 page = 0xa;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
                     richTextBox1.Text += "+";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
             }
             else
             {
@@ -1920,11 +1931,13 @@ namespace imsLink
                 tb_info_a.Text = "有連接器, 有相機";
                 tb_info_a.BackColor = Color.White;
                 Get_IMS_Data(0, 0xAA, 0xAA);
-                while (flag_wait_receive_data == 1)
+                int cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
                     richTextBox1.Text += "+";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 /*
                 page = 0x9;
@@ -1938,51 +1951,63 @@ namespace imsLink
 
                 page = 0xa;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
-                    richTextBox1.Text += "+";
+                    richTextBox1.Text += "a";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 page = 0xb;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
-                    richTextBox1.Text += "+";
+                    richTextBox1.Text += "b";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 page = 0xc;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
-                    richTextBox1.Text += "+";
+                    richTextBox1.Text += "c";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 page = 0xd;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
-                    richTextBox1.Text += "+";
+                    richTextBox1.Text += "d";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 page = 0xe;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
-                    richTextBox1.Text += "+";
+                    richTextBox1.Text += "e";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
 
                 page = 0xf;
                 Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
-                    richTextBox1.Text += "+";
+                    richTextBox1.Text += "f";
                     delay(100);
                 }
+                flag_wait_receive_data = 0;
             }
             else
             {
@@ -2728,6 +2753,15 @@ namespace imsLink
 
         }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "更新系統時間\n";
+            richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString() + "\n";
+
+
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+        }
     }
 }
 
