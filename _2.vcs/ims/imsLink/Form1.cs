@@ -26,12 +26,16 @@ namespace imsLink
         private const int CAMERA_UNKNOWN = 3;	//dongle camera unknown status
         private const int VIDEO_OK = 0;
         private const int VIDEO_FORBID_ALL = 1;
-        private const int VIDEO_FORBID_DIFFERENT_CAMERA = 2;
-        private const int VIDEO_FORBID_POWEROFF_LONG_1M = 3;
-        private const int VIDEO_FORBID_POWEROFF_LONG_1M30M = 4;
-        private const int VIDEO_FORBID_POWEROFF_LONG_30M = 5;
-        private const int VIDEO_FORBID_PULL_OUT_LONG_1M = 6;
-        private const int VIDEO_FORBID_PULL_OUT_LONG_30M = 7;
+        private const int VIDEO_FORBID_USE_2HR = 2;
+
+        private const int MODEL_PAGE = 0x08;	//model
+        private const int SN_PAGE = 0x09;	    //serial
+        private const int DATE_PAGE0 = 0x0A;	//serial date, product time
+        private const int DATE_PAGE1 = 0x0B;	//use 1 minute
+        private const int DATE_PAGE3 = 0x0D;	//use 2 hrs
+        private const int ERROR_PAGE = 0x0E;	//error code
+        private const int ERROR_DATE = 0x0F;	//error date
+
         string imslink_log_filename = "imslink.log";
         string RxString = "";
         string[] COM_Ports_NameArr;
@@ -291,118 +295,9 @@ namespace imsLink
         {
             switch (flag_request_item)
             {
-                //case 0x9:
-                case 0xa:
-                case 0xb:
-                case 0xd:
-                case 0xf:
-                    if ((input[12] == 0xAA) && (input[13] == 0xBB) && (input[14] == 0xCC) && (input[15] == 0xDD))
-                    {
-                        int year;
-                        int month;
-                        int mday;
-                        int wday;
-                        int hour;
-                        int minutes;
-                        int seconds;
-                        year = (int)input[0] + 1900;
-                        month = (int)input[1];
-                        mday = (int)input[2];
-                        wday = (int)input[3];
-                        hour = (int)input[4];
-                        minutes = (int)input[5];
-                        seconds = (int)input[6];
-                        richTextBox1.Text += "year = " + year.ToString("00") + "\n";
-                        richTextBox1.Text += "month = " + month.ToString("00") + "\n";
-                        richTextBox1.Text += "mday = " + mday.ToString("0000") + "\n";
-                        richTextBox1.Text += "wday = " + wday.ToString() + "\n";
-                        richTextBox1.Text += "hour = " + hour.ToString("00") + "\n";
-                        richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
-                        richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
-                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-
-                        if (flag_request_item == 0xa)
-                        {
-                            lb_a.Text = "Product : " + month.ToString("00") + "/"
-                                + mday.ToString("00") + "/"
-                                + year.ToString("0000") + " "
-                                + wday.ToString() + " "
-                                + hour.ToString("00") + ":"
-                                + minutes.ToString("00") + ":"
-                                + seconds.ToString("00");
-                            lb_aa.Text = "Product : " + month.ToString("00") + "/"
-                                + mday.ToString("00") + "/"
-                                + year.ToString("0000") + " "
-                                + wday.ToString() + " "
-                                + hour.ToString("00") + ":"
-                                + minutes.ToString("00") + ":"
-                                + seconds.ToString("00");
-                        }
-                        else if (flag_request_item == 0xb)
-                        {
-                            lb_b.Text = "1MIN : " + month.ToString("00") + "/"
-                                + mday.ToString("00") + "/"
-                                + year.ToString("0000") + " "
-                                + wday.ToString() + " "
-                                + hour.ToString("00") + ":"
-                                + minutes.ToString("00") + ":"
-                                + seconds.ToString("00");
-                        }
-                        else if (flag_request_item == 0xd)
-                        {
-                            lb_d.Text = "30MIN : " + month.ToString("00") + "/"
-                                + mday.ToString("00") + "/"
-                                + year.ToString("0000") + " "
-                                + wday.ToString() + " "
-                                + hour.ToString("00") + ":"
-                                + minutes.ToString("00") + ":"
-                                + seconds.ToString("00");
-                        }
-                        else if (flag_request_item == 0xf)
-                        {
-                            lb_f.Text = "Expired : " + month.ToString("00") + "/"
-                                + mday.ToString("00") + "/"
-                                + year.ToString("0000") + " "
-                                + wday.ToString() + " "
-                                + hour.ToString("00") + ":"
-                                + minutes.ToString("00") + ":"
-                                + seconds.ToString("00");
-                            tb_info_f2.BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
-                        }
-
-
-
-
-                    }
-                    else
-                    {
-                        if (flag_request_item == 0xb)
-                        {
-                            lb_b.Text = "1MIN : ----------------------------------";
-                        }
-                        else if (flag_request_item == 0xd)
-                        {
-                            lb_d.Text = "30MIN : ----------------------------------";
-                        }
-                        else if (flag_request_item == 0xf)
-                        {
-                            lb_f.Text = "----- : ----------------------------------";
-                            tb_info_f2.BackColor = Color.White;
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
-                        }
-                    
-                    }
-
-                    break;
-                case 0xc:
+                case MODEL_PAGE:
+                    //TBD for camera model
+                    /*
                     int i;
                     int use_time;
 
@@ -433,10 +328,116 @@ namespace imsLink
 		                    use_time = i * 2;
 	                    }
                     }
-                    lb_c.Text = "USE : " + use_time.ToString() + " minutes";
+                    */
 
                     break;
-                case 0xe:
+                //case SN_PAGE:
+                case DATE_PAGE0:
+                case DATE_PAGE1:
+                case DATE_PAGE3:
+                case ERROR_DATE:
+                    if ((input[12] == 0xAA) && (input[13] == 0xBB) && (input[14] == 0xCC) && (input[15] == 0xDD))
+                    {
+                        int year;
+                        int month;
+                        int mday;
+                        int wday;
+                        int hour;
+                        int minutes;
+                        int seconds;
+                        year = (int)input[0] + 1900;
+                        month = (int)input[1];
+                        mday = (int)input[2];
+                        wday = (int)input[3];
+                        hour = (int)input[4];
+                        minutes = (int)input[5];
+                        seconds = (int)input[6];
+                        richTextBox1.Text += "year = " + year.ToString("00") + "\n";
+                        richTextBox1.Text += "month = " + month.ToString("00") + "\n";
+                        richTextBox1.Text += "mday = " + mday.ToString("0000") + "\n";
+                        richTextBox1.Text += "wday = " + wday.ToString() + "\n";
+                        richTextBox1.Text += "hour = " + hour.ToString("00") + "\n";
+                        richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
+                        richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
+                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+
+                        if (flag_request_item == DATE_PAGE0)
+                        {
+                            lb_a.Text = "Product : " + month.ToString("00") + "/"
+                                + mday.ToString("00") + "/"
+                                + year.ToString("0000") + " "
+                                + wday.ToString() + " "
+                                + hour.ToString("00") + ":"
+                                + minutes.ToString("00") + ":"
+                                + seconds.ToString("00");
+                            lb_aa.Text = "Product : " + month.ToString("00") + "/"
+                                + mday.ToString("00") + "/"
+                                + year.ToString("0000") + " "
+                                + wday.ToString() + " "
+                                + hour.ToString("00") + ":"
+                                + minutes.ToString("00") + ":"
+                                + seconds.ToString("00");
+                        }
+                        else if (flag_request_item == DATE_PAGE1)
+                        {
+                            lb_b.Text = "1MIN : " + month.ToString("00") + "/"
+                                + mday.ToString("00") + "/"
+                                + year.ToString("0000") + " "
+                                + wday.ToString() + " "
+                                + hour.ToString("00") + ":"
+                                + minutes.ToString("00") + ":"
+                                + seconds.ToString("00");
+                        }
+                        else if (flag_request_item == DATE_PAGE3)
+                        {
+                            lb_d.Text = "2HR : " + month.ToString("00") + "/"
+                                + mday.ToString("00") + "/"
+                                + year.ToString("0000") + " "
+                                + wday.ToString() + " "
+                                + hour.ToString("00") + ":"
+                                + minutes.ToString("00") + ":"
+                                + seconds.ToString("00");
+                        }
+                        else if (flag_request_item == ERROR_DATE)
+                        {
+                            lb_f.Text = "Expired : " + month.ToString("00") + "/"
+                                + mday.ToString("00") + "/"
+                                + year.ToString("0000") + " "
+                                + wday.ToString() + " "
+                                + hour.ToString("00") + ":"
+                                + minutes.ToString("00") + ":"
+                                + seconds.ToString("00");
+                            tb_info_f2.BackColor = Color.Red;
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
+                        }
+                    }
+                    else
+                    {
+                        if (flag_request_item == DATE_PAGE1)
+                        {
+                            lb_b.Text = "1MIN : ----------------------------------";
+                        }
+                        else if (flag_request_item == DATE_PAGE3)
+                        {
+                            lb_d.Text = "2HR : ----------------------------------";
+                        }
+                        else if (flag_request_item == ERROR_DATE)
+                        {
+                            lb_f.Text = "----- : ----------------------------------";
+                            tb_info_f2.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
+                        }
+                    
+                    }
+                    break;
+                case ERROR_PAGE:
                     int flag_video_status = 0;
                     if (((int)input[0] == 0xEE) && ((int)input[1] == 0xCC) && ((int)input[2] == 0xDD) && ((int)input[3] == 0xEE))
                     {
@@ -454,12 +455,7 @@ namespace imsLink
                     {
                         case VIDEO_OK: lb_e.Text = "VIDEO_OK"; break;
                         case VIDEO_FORBID_ALL: lb_e.Text = "VIDEO_FORBID_ALL"; break;
-                        case VIDEO_FORBID_DIFFERENT_CAMERA: lb_e.Text = "VIDEO_FORBID_DIFFERENT_CAMERA"; break;
-                        case VIDEO_FORBID_POWEROFF_LONG_1M: lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_1M"; break;
-                        case VIDEO_FORBID_POWEROFF_LONG_1M30M: lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_1M30M"; break;
-                        case VIDEO_FORBID_POWEROFF_LONG_30M: lb_e.Text = "VIDEO_FORBID_POWEROFF_LONG_30M"; break;
-                        case VIDEO_FORBID_PULL_OUT_LONG_1M: lb_e.Text = "VIDEO_FORBID_PULL_OUT_LONG_1M"; break;
-                        case VIDEO_FORBID_PULL_OUT_LONG_30M: lb_e.Text = "VIDEO_FORBID_PULL_OUT_LONG_30M"; break;
+                        case VIDEO_FORBID_USE_2HR: lb_e.Text = "VIDEO_FORBID_USE_2HR"; break;
                         default: lb_e.Text = "unknown video status : " + flag_video_status.ToString(); break;
                     }
                     if (flag_video_status == VIDEO_OK)
@@ -707,31 +703,34 @@ namespace imsLink
 
                                     switch (flag_request_item)
                                     {
-                                        case 0xb:
+                                        case MODEL_PAGE:
+                                            //TBD
+                                            /*
+                                        tb_info_8.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                            + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                            + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                            + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
+                                            */
+                                            break;
+                                        case DATE_PAGE1:
                                             tb_info_b.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                                 + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             break;
-                                        case 0xc:
-                                            tb_info_c.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
-                                                + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
-                                                + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
-                                                + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
-                                            break;
-                                        case 0xd:
+                                        case DATE_PAGE3:
                                             tb_info_d.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                                 + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             break;
-                                        case 0xe:
+                                        case ERROR_PAGE:
                                             tb_info_e.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                                 + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             break;
-                                        case 0xf:
+                                        case ERROR_DATE:
                                             tb_info_f.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                                 + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
@@ -1029,7 +1028,6 @@ namespace imsLink
             lb_a.Text = "";
             lb_aa.Text = "";
             lb_b.Text = "";
-            lb_c.Text = "";
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
@@ -1872,20 +1870,19 @@ namespace imsLink
             tb_info_a.BackColor = Color.White;
             tb_info_a.Clear();
             tb_info_b.Clear();
-            tb_info_c.Clear();
+            tb_info_8.Clear();
             tb_info_d.Clear();
             tb_info_e.Clear();
             tb_info_f.Clear();
             lb_a.Text = "";
             lb_aa.Text = "";
             lb_b.Text = "";
-            lb_c.Text = "";
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
             tb_info_a2.BackColor = Color.White;
             tb_info_b2.BackColor = Color.White;
-            tb_info_c2.BackColor = Color.White;
+            tb_info_82.BackColor = Color.White;
             tb_info_d2.BackColor = Color.White;
             tb_info_e2.BackColor = Color.White;
             tb_info_f2.BackColor = Color.White;
@@ -1926,8 +1923,12 @@ namespace imsLink
             {
                 tb_sn1.Text = "有連接器, 有相機";
                 tb_sn1.BackColor = Color.White;
-                tb_info_a.Text = "有連接器, 有相機";
-                tb_info_a.BackColor = Color.White;
+                tb_info_8.Text = "有連接器, 有相機";
+                tb_info_8.BackColor = Color.White;
+
+                tb_info_8.Text = "[Model]: Opal 1.0.0";
+
+
                 Get_IMS_Data(0, 0xAA, 0xAA);
                 int cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -1937,8 +1938,8 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
-                /*
-                page = 0x9;
+                /*  TBD for reading camera model
+                page = MODEL_PAGE;
                 Get_IMS_Data(1, page, 0xAA);
                 while (flag_wait_receive_data == 1)
                 {
@@ -1947,7 +1948,7 @@ namespace imsLink
                 }
                 */
 
-                page = 0xa;
+                page = DATE_PAGE0;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -1957,7 +1958,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
-                page = 0xb;
+                page = DATE_PAGE1;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -1967,17 +1968,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
-                page = 0xc;
-                Get_IMS_Data(1, page, 0xAA);
-                cnt = 0;
-                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
-                {
-                    richTextBox1.Text += "c";
-                    delay(100);
-                }
-                flag_wait_receive_data = 0;
-
-                page = 0xd;
+                page = DATE_PAGE3;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -1987,7 +1978,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
-                page = 0xe;
+                page = ERROR_PAGE;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -1997,7 +1988,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
-                page = 0xf;
+                page = ERROR_DATE;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -2395,20 +2386,19 @@ namespace imsLink
             tb_sn2.Clear();
             tb_info_a.Clear();
             tb_info_b.Clear();
-            tb_info_c.Clear();
+            tb_info_8.Clear();
             tb_info_d.Clear();
             tb_info_e.Clear();
             tb_info_f.Clear();
             lb_a.Text = "";
             lb_aa.Text = "";
             lb_b.Text = "";
-            lb_c.Text = "";
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
             tb_info_a2.BackColor = Color.White;
             tb_info_b2.BackColor = Color.White;
-            tb_info_c2.BackColor = Color.White;
+            tb_info_82.BackColor = Color.White;
             tb_info_d2.BackColor = Color.White;
             tb_info_e2.BackColor = Color.White;
             tb_info_f2.BackColor = Color.White;

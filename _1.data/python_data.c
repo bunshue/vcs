@@ -1,5 +1,7 @@
 
 
+
+
 ----------------many ST----------------
 
 
@@ -9,6 +11,31 @@
 ----------------many SP----------------
 
   
+
+
+
+Python的套件管理程式	PIP
+
+python -m pip install -U matplotlib	//Windows
+pip install -U matplotlib		//Linux
+ 
+ 
+#產生連續的整數
+for num in range(10):
+    print(num)
+
+for num in range(2, 7):
+    print(num)
+
+import sys
+import sys as s#幫模組取個別名
+
+print (sys.argv)
+print (s.argv)
+
+
+
+
 
 
 

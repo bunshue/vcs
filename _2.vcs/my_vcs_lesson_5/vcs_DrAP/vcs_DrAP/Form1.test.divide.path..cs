@@ -79,10 +79,12 @@ namespace vcs_DrAP
         public class MyFileInfo
         {
             public string filename;
+            public string filepath;
             public long size;
-            public MyFileInfo(string n, long s)
+            public MyFileInfo(string n, string p, long s)
             {
                 this.filename = n;
+                this.filepath = p;
                 this.size = s;
             }
         }
@@ -339,7 +341,7 @@ namespace vcs_DrAP
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
                 */
 
-                fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
+                fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Length));
                 //fileinfos.Add(new MyFileInfo(fi.FullName.ToString(), fi.Length));
                 //fileinfos.Add(new MyFileInfo("aaaaaaa", 12345));
 
@@ -352,7 +354,8 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 1200, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 300, HorizontalAlignment.Center);
+            listView1.Columns.Add("路徑", 900, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -385,13 +388,21 @@ namespace vcs_DrAP
                 i1.UseItemStyleForSubItems = false;
 
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
 
-                //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1a.Text = fileinfos[i].filepath;
                 i1.SubItems.Add(sub_i1a);
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1b);
+
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                sub_i1b.ForeColor = System.Drawing.Color.Blue;
 
                 sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                sub_i1b.Font = new System.Drawing.Font(
                     "Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
@@ -405,7 +416,8 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 1200, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 300, HorizontalAlignment.Center);
+            listView1.Columns.Add("路徑", 900, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -435,13 +447,18 @@ namespace vcs_DrAP
                 i1.UseItemStyleForSubItems = false;
 
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
 
-                //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1a.Text = fileinfos[i].filepath;
                 i1.SubItems.Add(sub_i1a);
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
-
+                sub_i1b.ForeColor = System.Drawing.Color.Blue;
                 sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1b.Font = new System.Drawing.Font(
                     "Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
@@ -455,7 +472,8 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
-            listView1.Columns.Add("名稱", 1200, HorizontalAlignment.Center);
+            listView1.Columns.Add("名稱", 300, HorizontalAlignment.Center);
+            listView1.Columns.Add("路徑", 900, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Center);
             listView1.Visible = true;
 
@@ -467,13 +485,20 @@ namespace vcs_DrAP
                 i1.UseItemStyleForSubItems = false;
 
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+
+                sub_i1a.Text = fileinfos[i].filepath;
+                i1.SubItems.Add(sub_i1a);
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
-                i1.SubItems.Add(sub_i1a);
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                sub_i1b.ForeColor = System.Drawing.Color.Blue;
 
                 sub_i1a.Font = new System.Drawing.Font(
+                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1b.Font = new System.Drawing.Font(
                     "Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
@@ -602,11 +627,16 @@ namespace vcs_DrAP
             int selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
             //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-            richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\tindex = " + selNdx.ToString() + "\n";
+            //listView1.Items[selNdx].SubItems.
+
+
+            /*
             if(flag_search_vcs_pattern == 0)
                 System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
             else
                 System.Diagnostics.Process.Start("uedit32.exe", listView1.Items[selNdx].Text);
+            */
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -868,7 +898,7 @@ namespace vcs_DrAP
                 if (flag_pattern_match == 1)
                 {
                     richTextBox1.Text += fi.FullName + "\n";
-                    fileinfos.Add(new MyFileInfo(fi.FullName, fi.Length));
+                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Length));
                 }
 
                 sr.Close();

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace my_vcs_22_listView
+namespace vcs_test_all_13_ListView
 {
     public partial class Form1 : Form
     {
@@ -16,7 +16,21 @@ namespace my_vcs_22_listView
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            listView1.View = View.Details;  //把 listView1 的 View 屬性設成 Details
+        }
+
         private void button1_Click(object sender, EventArgs e)
+        {
+            //設置列名稱、大小與對齊
+            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("容量", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("日期", 200, HorizontalAlignment.Center);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             ListViewItem i1 = new ListViewItem("File1.txt");
             ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
@@ -47,20 +61,14 @@ namespace my_vcs_22_listView
             listView1.Items.Add(i3);
 
             //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count-1].EnsureVisible();
-       
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            //設置列名稱、大小與對齊
-            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("容量", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("日期", 200, HorizontalAlignment.Center);
-        }
+            richTextBox1.Text += "共有 : " + listView1.Items.Count.ToString() + " 個項目\n";
 
-        private void button2_Click(object sender, EventArgs e)
-        {
             if (listView1.Items.Count <= 0)
             {
                 richTextBox1.Text += "listView無內容\n";
@@ -86,9 +94,18 @@ namespace my_vcs_22_listView
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
                 richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\t" + listView1.SelectedItems[i].SubItems[1].Text + "\t" + listView1.SelectedItems[i].SubItems[2].Text + "\n";
             }
+
+
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listView1.Clear();
+            richTextBox1.Clear();
+
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
         {
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
                 return;
@@ -101,36 +118,35 @@ namespace my_vcs_22_listView
             //ListViewItem t = listView1.Items[selNdx]; //相同寫法
             //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
             richTextBox1.Text += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            listView1.Clear();
-            richTextBox1.Clear();
-        }
+            int selNdx;
+            int selCount;
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //測試中
-            ListViewItem i1 = new ListViewItem("File_add.txt");
-            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-            sub_i1a.Text = "3333";
-            i1.SubItems.Add(sub_i1a);
-            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-            sub_i1b.Text = "2016/5/25 02:10上午";
-            i1.SubItems.Add(sub_i1b);
+            selCount = listView1.SelectedIndices.Count;
+            if (selCount <= 0)  //總共選擇的個數
+            {
+                richTextBox1.Text += "未選擇要刪除的項目\n";
+                return;
+            }
+            richTextBox1.Text += "共選擇 " + selCount.ToString() + " 個項目, 分別是\n";
+            for (int i = (selCount - 1); i >= 0; i--)
+            {
+                selNdx = listView1.SelectedItems[i].Index;
+                richTextBox1.Text += "item : " + listView1.SelectedItems[i].Text + " index = " + selNdx.ToString() + "\n";
+                listView1.Items.RemoveAt(selNdx);
+            }
 
-            listView1.Items.Add(i1);
 
-            //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "目前共有 " + listView1.Items.Count.ToString() + " 個項目\n";
-            if (listView1.Items.Count > 5)
-                listView1.Items.RemoveAt(5);
+
+            return;
+
+
+
         }
 
     }

@@ -1,5 +1,24 @@
 
 
+從第5項填資料到ListView
+            //測試中
+            ListViewItem i1 = new ListViewItem("File_add.txt");
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            sub_i1a.Text = "3333";
+            i1.SubItems.Add(sub_i1a);
+            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+            sub_i1b.Text = "2016/5/25 02:10上午";
+            i1.SubItems.Add(sub_i1b);
+
+            listView1.Items.Add(i1);
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+
+
+
+
         private void nudgeWindow()
         {
             // 記錄視窗舊位置
