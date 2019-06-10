@@ -24,41 +24,70 @@ namespace vcs_test_all_13_ListView
         private void button1_Click(object sender, EventArgs e)
         {
             //設置列名稱、大小與對齊
-            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("容量", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("日期", 200, HorizontalAlignment.Center);
+            listView1.Columns.Add("姓名", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("國文", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("英文", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("數學", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("總分", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("平均", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("名次", 100, HorizontalAlignment.Center);
 
+        }
+
+        public static string GetRandomString2(int length)
+        {
+            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            //var next = new Random();
+            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+            var builder = new StringBuilder();
+            for (var i = 0; i < length; i++)
+            {
+                builder.Append(str[Rnd.Next(0, str.Length)]);
+            }
+            return builder.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ListViewItem i1 = new ListViewItem("File1.txt");
-            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-            sub_i1a.Text = "1234";
-            i1.SubItems.Add(sub_i1a);
-            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-            sub_i1b.Text = "2016/5/25 02:10上午";
-            i1.SubItems.Add(sub_i1b);
+            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+            string name_string;
+            int score_chi;
+            int score_eng;
+            int score_math;
 
-            ListViewItem i2 = new ListViewItem("File2.txt");
-            ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
-            sub_i2a.Text = "5678";
-            i2.SubItems.Add(sub_i2a);
-            ListViewItem.ListViewSubItem sub_i2b = new ListViewItem.ListViewSubItem();
-            sub_i2b.Text = "2016/5/25 02:10上午";
-            i2.SubItems.Add(sub_i2b);
 
-            ListViewItem i3 = new ListViewItem("File3.txt");
-            ListViewItem.ListViewSubItem sub_i3a = new ListViewItem.ListViewSubItem();
-            sub_i3a.Text = "3388";
-            i3.SubItems.Add(sub_i3a);
-            ListViewItem.ListViewSubItem sub_i3b = new ListViewItem.ListViewSubItem();
-            sub_i3b.Text = "2016/5/25 02:10上午";
-            i3.SubItems.Add(sub_i3b);
+            for (int i = 0; i < 10; i++)
+            {
+                var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                //var next = new Random();
+                //Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+                var builder = new StringBuilder();
+                int length = 5;
+                int j;
+                for (j = 0; j < length; j++)
+                {
+                    builder.Append(str[Rnd.Next(0, str.Length)]);
+                }
+                name_string = builder.ToString();
 
-            listView1.Items.Add(i1);
-            listView1.Items.Add(i2);
-            listView1.Items.Add(i3);
+                score_chi = Rnd.Next(80, 100) + 1;
+                score_eng = Rnd.Next(70, 100) + 1;
+                score_math = Rnd.Next(60, 100) + 1;
+
+                ListViewItem i1 = new ListViewItem(name_string);
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                sub_i1a.Text = score_chi.ToString();
+                i1.SubItems.Add(sub_i1a);
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                sub_i1b.Text = score_eng.ToString();
+                i1.SubItems.Add(sub_i1b);
+                ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
+                sub_i1c.Text = score_math.ToString();
+                i1.SubItems.Add(sub_i1c);
+
+                listView1.Items.Add(i1);
+
+            }
 
             //設置ListView最後一行可見
             listView1.Items[listView1.Items.Count - 1].EnsureVisible();
@@ -80,11 +109,11 @@ namespace vcs_test_all_13_ListView
             {
                 //ListViewItem t = listView1.Items[i];  //相同寫法
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\n";
+                richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\t" + listView1.Items[i].SubItems[3].Text + "\n";
             }
             if (listView1.SelectedItems.Count <= 0)
             {
-                richTextBox1.Text += "未選擇listView項目\n";
+                //richTextBox1.Text += "未選擇listView項目\n";
                 return;
             }
             richTextBox1.Text += "選擇" + listView1.SelectedItems.Count.ToString() + "個項目，分別是：\n";
@@ -92,7 +121,7 @@ namespace vcs_test_all_13_ListView
             {
                 //ListViewItem t = listView1.SelectedItems[i];  //相同寫法
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\t" + listView1.SelectedItems[i].SubItems[1].Text + "\t" + listView1.SelectedItems[i].SubItems[2].Text + "\n";
+                richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\t" + listView1.SelectedItems[i].SubItems[1].Text + "\t" + listView1.SelectedItems[i].SubItems[2].Text + listView1.SelectedItems[i].SubItems[3].Text + "\n";
             }
 
 
@@ -139,12 +168,37 @@ namespace vcs_test_all_13_ListView
                 richTextBox1.Text += "item : " + listView1.SelectedItems[i].Text + " index = " + selNdx.ToString() + "\n";
                 listView1.Items.RemoveAt(selNdx);
             }
-
-
-
-
             return;
+        }
 
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            richTextBox1.Text += "你按了 " + e.Column.ToString() + " Column\t";
+
+            switch (e.Column)
+            {
+                case 0:
+                    richTextBox1.Text += "依姓名排序\n";
+                    break;
+                case 1:
+                    richTextBox1.Text += "依國文成績排序\n";
+                    break;
+                case 2:
+                    richTextBox1.Text += "依英文成績排序\n";
+                    break;
+                case 3:
+                    richTextBox1.Text += "依數學成績排序\n";
+                    break;
+                case 4:
+                    richTextBox1.Text += "依總分排序\n";
+                    break;
+                case 5:
+                    richTextBox1.Text += "依平均分數排序\n";
+                    break;
+                default:
+                    richTextBox1.Text += "\n";
+                    break;
+            }
 
 
         }

@@ -42,16 +42,17 @@
             // 
             this.listView1.Location = new System.Drawing.Point(12, 55);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(677, 569);
+            this.listView1.Size = new System.Drawing.Size(728, 569);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(695, 55);
+            this.richTextBox1.Location = new System.Drawing.Point(746, 55);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(483, 569);
+            this.richTextBox1.Size = new System.Drawing.Size(432, 569);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -73,7 +74,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 37);
             this.button2.TabIndex = 3;
-            this.button2.Text = "新增資料";
+            this.button2.Text = "加入10筆資料";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
