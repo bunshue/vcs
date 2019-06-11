@@ -42,7 +42,7 @@
             // 
             this.listView1.Location = new System.Drawing.Point(12, 55);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(728, 569);
+            this.listView1.Size = new System.Drawing.Size(829, 569);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
@@ -50,9 +50,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(746, 55);
+            this.richTextBox1.Location = new System.Drawing.Point(847, 55);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(432, 569);
+            this.richTextBox1.Size = new System.Drawing.Size(331, 569);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -118,8 +118,9 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 37);
             this.button6.TabIndex = 5;
-            this.button6.Text = "xxx";
+            this.button6.Text = "製作成績";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 

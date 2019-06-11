@@ -48,26 +48,32 @@ namespace vcs_test_all_37_sorting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int[] myKeys = new int[] { 90, 60, 50, 70, 80 };
-            //string[] myValues = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
-            string[] myValues = { "Mary", "Jack", "Tom", "David", "Grace" };
+            int[] scores = new int[] { 80, 50, 60, 90, 70 };
+            //string[] names = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
+            string[] names = { "Mary", "Jack", "Tom", "David", "Grace" };
 
             richTextBox1.Text += "排序前：\n";
-            for (int i = 0; i < myKeys.Length; i++)
+            for (int i = 0; i < scores.Length; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + myValues[i] + "\t" + myKeys[i] + "\n";
+                richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
             }
-            Array.Sort(myKeys, myValues);   //以myKeys為準排序，myValues跟著
-            richTextBox1.Text += "排序後：\n";
-            for (int i = 0; i < myKeys.Length; i++)
-            {
-                richTextBox1.Text += i.ToString() + "\t" + myValues[i] + "\t" + myKeys[i] + "\n";
-            }
-
-
             richTextBox1.Text += "\n";
 
+            Array.Sort(names, scores);   //以names為準排序，scores跟著
+            richTextBox1.Text += "依姓名排序：\n";
+            for (int i = 0; i < scores.Length; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+            }
+            richTextBox1.Text += "\n";
 
+            Array.Sort(scores, names);   //以scores為準排序，names跟著
+            richTextBox1.Text += "依成績排序：\n";
+            for (int i = 0; i < scores.Length; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -100,6 +106,7 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
+            richTextBox1.Text += "\n";
 
             richTextBox1.Text += "依Name_C排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
@@ -111,6 +118,7 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
+            richTextBox1.Text += "\n";
 
             richTextBox1.Text += "依Name_E排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
@@ -122,6 +130,7 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
+            richTextBox1.Text += "\n";
 
             richTextBox1.Text += "依Name_N排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
@@ -133,6 +142,7 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
+            richTextBox1.Text += "\n";
 
             richTextBox1.Text += "依Age排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
@@ -144,6 +154,7 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
+            richTextBox1.Text += "\n";
 
             richTextBox1.Text += "依Weight排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
@@ -155,7 +166,7 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
-
+            richTextBox1.Text += "\n";
 
             richTextBox1.Text += "依Birthday排序, ";
             Array.Sort(AnimalDataArray, delegate(AnimalData s1, AnimalData s2)
@@ -167,27 +178,11 @@ namespace vcs_test_all_37_sorting
             {
                 richTextBox1.Text += str.Name_C + "\t" + str.Name_E + "\t" + str.Name_N + "\t" + str.Age + "\t" + str.Weight + "\t" + str.Birthday + "\n";
             }
-
-
+            richTextBox1.Text += "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            int[] tall = new int[] { 10, 20, 30, 40, 50 };
-            int sum = 0;
-            foreach (int height in tall)
-            {
-                sum += height;
-            }
-            richTextBox1.Text += "Sum = " + sum.ToString() + "\n";
-
-            String[] animal = new String[] { "lion", "mouse", "cat", "dog", "elephant" };
-            foreach (String name in animal)
-            {
-                richTextBox1.Text += name + "\n";
-            }
-            richTextBox1.Text += "\n";
-
             int[] Scores = new int[] { 89, 65, 31, 89, 92, 46 };
             richTextBox1.Text += "原成績：\t";
             foreach (int s in Scores)
@@ -260,6 +255,54 @@ namespace vcs_test_all_37_sorting
             }
             richTextBox1.Text += "\n";
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //排名次
+            int i;
+            int j;
+            int[] scores = new int[] { 80, 50, 60, 90, 80 };
+            int[] scores_new = new int[5];
+            int[] rank = new int[5];
+            //string[] names = new string[] {"Mary", "Jack", "Tom", "David", "Grace" };  //寫法同下
+            string[] names = { "Mary", "Jack", "Tom", "David", "Grace" };
+
+            richTextBox1.Text += "排序前：\n";
+            for (i = 0; i < scores.Length; i++)
+            {
+                richTextBox1.Text += (i+1).ToString() + "\t" + names[i] + "\t" + scores[i] + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            Array.Copy(scores, scores_new, scores.Length);
+            Array.Sort(scores_new);
+            Array.Reverse(scores_new);
+
+            int score_last = -1;
+            for (i = 0; i < scores_new.Length; i++)
+            {
+                if (scores_new[i] == score_last)
+                    continue;
+                else
+                    score_last = scores_new[i];
+
+                //richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores_new[i] + "\n";
+                for (j = 0; j < scores_new.Length; j++)
+                {
+                    if (scores[j] == scores_new[i])
+                    {
+                        //richTextBox1.Text += "match i = " + i.ToString() + " j = " + j.ToString() + " s = " + scores_new[i].ToString() + "\n";
+                        rank[j] = i;
+                    }
+                }
+            }
+            richTextBox1.Text += "排名次：\n";
+            for (i = 0; i < scores.Length; i++)
+            {
+                richTextBox1.Text += (i + 1).ToString() + "\t" + names[i] + "\t" + scores[i] + "\t" + (rank[i] + 1).ToString() + "\n";
+            }
+            richTextBox1.Text += "\n";
         }
     }
 }

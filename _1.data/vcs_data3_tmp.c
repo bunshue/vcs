@@ -1,4 +1,27 @@
 
+string_test.txt
+
+            int[] tall = new int[] { 10, 20, 30, 40, 50 };
+            int sum = 0;
+            foreach (int height in tall)
+            {
+                sum += height;
+            }
+            richTextBox1.Text += "Sum = " + sum.ToString() + "\n";
+
+
+
+            String[] animal = new String[] { "lion", "mouse", "cat", "dog", "elephant" };
+            foreach (String name in animal)
+            {
+                richTextBox1.Text += name + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+
+
+
+
 
 從第5項填資料到ListView
             //測試中

@@ -445,7 +445,7 @@ namespace vcs_MyPaint
 
             f = new Font("標楷體", 24);
             g.DrawString("主機電池失效", f, sb, new PointF(60.0F, 90.0F));
-            g.DrawString("請更換", f, sb, new PointF(220.0F, 200.0F));
+            g.DrawString("請更換與校時", f, sb, new PointF(60.0F, 200.0F));
 
             //f = new Font("標楷體", 12);
             //g.DrawString("(使用<30分，累計關機>30分)", f, sb, new PointF(40.0F, 290.0F));
