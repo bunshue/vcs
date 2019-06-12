@@ -1,5 +1,13 @@
 
-string_test.txt
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.AppendText("¿Ã¹õ¸ÑªR«× : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
+
+
+
+
+
+
 
             int[] tall = new int[] { 10, 20, 30, 40, 50 };
             int sum = 0;

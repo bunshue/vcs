@@ -61,8 +61,8 @@ namespace vcs_MyIcon
             //open
             Point[] points = new Point[3];
             points[0] = new Point(width / 8, height / 8);
-            points[1] = new Point(width * 7 / 8, height / 8);
-            points[2] = new Point(width / 2, height * 7 / 8);
+            points[1] = new Point(width * 7 / 8, height * 1 / 8);
+            points[2] = new Point(width * 1 / 2, height * 7 / 8);
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
@@ -119,7 +119,7 @@ namespace vcs_MyIcon
             Point[] points = new Point[3];
             points[0] = new Point(width / 2, height / 8);
             points[1] = new Point(width * 7 / 8, height * 7 / 8);
-            points[2] = new Point(width / 8, height * 7 / 8);
+            points[2] = new Point(width * 1 / 8, height * 7 / 8);
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
@@ -1556,6 +1556,91 @@ namespace vcs_MyIcon
             f = new Font("Arial", 80);
 
             g.DrawString("A", f, sb, new PointF(10, 5));
+
+            g.DrawRectangle(p, new Rectangle(width / 8, height / 8, width * 6 / 8, height * 6 / 8));
+
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            //home
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 160;
+            height = 160;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 25);
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+
+
+            //close
+            Point[] points = new Point[3];
+            points[0] = new Point(width / 2, height / 8);
+            points[1] = new Point(width * 7 / 8, height * 4 / 8);
+            points[2] = new Point(width * 1 / 8, height * 4 / 8);
+            g.FillPolygon(sb, points);
+
+            g.FillRectangle(sb, new Rectangle(width * 2 / 8, height * 4 / 8, width * 4 / 8, height * 3 / 8));
+
+            p = new Pen(Color.White, 2);
+            g.DrawRectangle(p, new Rectangle(width * 6 / 16, height * 9 / 16, width * 4 / 16, height * 7 / 16));
+
+
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            Font f;
+
+            sb = new SolidBrush(Color.Red);
+            f = new Font("標楷體", 65);
+
+            g.DrawString("詞", f, sb, new PointF(10, 20));
 
             g.DrawRectangle(p, new Rectangle(width / 8, height / 8, width * 6 / 8, height * 6 / 8));
 

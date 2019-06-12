@@ -603,7 +603,7 @@ namespace vcs_DrAP
             listView1.Items[selNdx].Selected = true;    //選到的項目
             //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
             richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
-            if(flag_search_vcs_pattern == 0)
+            if (flag_search_vcs_pattern == 0)
                 System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
             else
                 System.Diagnostics.Process.Start("uedit32.exe", listView1.Items[selNdx].Text);
