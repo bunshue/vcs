@@ -54,6 +54,7 @@ namespace imsLink
         int flag_write_serial_to_camera_old = 0;
         int flag_wait_receive_data = 0;
         int flag_receive_camera_serial = 0;
+        int flag_receive_camera_model = 0;
         int flag_receive_camera_flash_data = 0;
         int flag_receive_ims_rtc_data = 0;
         int flag_request_item = 0;
@@ -71,6 +72,7 @@ namespace imsLink
         int[] camera_serial_data = new int[16];
         byte[] sn_data_send2 = new byte[16];
         byte[] rtc_data_send = new byte[7];
+        byte[] camera_model_data_send = new byte[16];
         int total_burn_cnt = 0;
         int flag_timer4_status = 0;
 
@@ -296,40 +298,6 @@ namespace imsLink
             switch (flag_request_item)
             {
                 case MODEL_PAGE:
-                    //TBD for camera model
-                    /*
-                    int i;
-                    int use_time;
-
-                    for(i = 0; i < 0x10; i++)
-                    {
-	                    if((int)input[i] == 0x00)
-	                    {
-		                    break;
-	                    }
-                    }
-                    if(i == 0)
-                    {
-	                    //xil_printf("use time : 0 minute\n\r");
-	                    use_time = 0;
-                    }
-                    else
-                    {
-	                    if(i == 16)
-		                    i = 15;
-	                    if((int)input[i - 1] == 0x0A)
-	                    {
-		                    //xil_printf("use time : %d minutes\n\r", i * 2 -1);
-		                    use_time = i * 2 -1;
-	                    }
-	                    else
-	                    {
-		                    //xil_printf("use time : %d minutes\n\r", i * 2);
-		                    use_time = i * 2;
-	                    }
-                    }
-                    */
-
                     break;
                 //case SN_PAGE:
                 case DATE_PAGE0:
@@ -696,21 +664,26 @@ namespace imsLink
                                         + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n");
                                     richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
 
+                                    /*
                                     textBox5.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                         + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                         + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                         + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
+                                    */
 
                                     switch (flag_request_item)
                                     {
                                         case MODEL_PAGE:
-                                            //TBD
-                                            /*
-                                        tb_info_8.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
-                                            + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
-                                            + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
-                                            + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
-                                            */
+                                            tb_info_8.Text = "[Model]: ";
+                                            for (int i = 0; i < 16; i++)
+                                            {
+                                                if (((int)input[i] < 32) || ((int)input[i] > 126))
+                                                {
+                                                }
+                                                else
+                                                    tb_info_8.Text += (char)input[i];
+                                            }
+                                            lb_camera_model.Text = tb_info_8.Text;
                                             break;
                                         case DATE_PAGE1:
                                             tb_info_b.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
@@ -921,6 +894,11 @@ namespace imsLink
                         flag_receive_camera_flash_data = 1;
                         flag_request_item = input[2];
                     }
+                    else if (input[1] == 0xE1)
+                    {
+                        flag_receive_camera_flash_data = 1;
+                        flag_request_item = MODEL_PAGE;
+                    }
                     else if (input[1] == 0xB1)
                     {
                         flag_receive_ims_rtc_data = 1;
@@ -935,6 +913,7 @@ namespace imsLink
                             textBox7.BackColor = Color.Red;
                             panel3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
                         else if (g_conn_status == CAMERA_NONE)
                         {
@@ -942,6 +921,7 @@ namespace imsLink
                             textBox7.BackColor = Color.Red;
                             panel3.BackgroundImage = imsLink.Properties.Resources.recorder_none;
                             panel4.BackgroundImage = imsLink.Properties.Resources.recorder_none;
+                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_none;
 
                         }
                         else if (g_conn_status == CAMERA_OK)
@@ -950,6 +930,7 @@ namespace imsLink
                             textBox7.BackColor = Color.White;
                             panel3.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                             panel4.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
+                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                         }
                         else
                         {
@@ -957,6 +938,7 @@ namespace imsLink
                             textBox7.BackColor = Color.Red;
                             panel3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
                     }
 
@@ -1043,6 +1025,8 @@ namespace imsLink
             lb_time1.Text = "";
             lb_time2.Text = "";
             lb_rtc.Text = "";
+            lb_camera_model.Text = "";
+            lb_main_board_model.Text = "";
 
             button12.BackgroundImage = imsLink.Properties.Resources.refresh;
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
@@ -1275,7 +1259,7 @@ namespace imsLink
             DongleAddr_h = 0x38;
             DongleAddr_l = 0x20;
             DongleData = (byte)(0x10 | (cnt1 << 2));
-            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData); 
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
         }
 
         private void button117_Click(object sender, EventArgs e)
@@ -1734,6 +1718,7 @@ namespace imsLink
             lb_aa.Text = "";
             panel3.BackgroundImage = null;
             panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_a.Clear();
@@ -1834,6 +1819,7 @@ namespace imsLink
             textBox7.BackColor = Color.Gray;
             panel3.BackgroundImage = null;
             panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
             tb_sn1.Clear();
             if (!serialPort1.IsOpen)
             {
@@ -1874,6 +1860,7 @@ namespace imsLink
             tb_info_d.Clear();
             tb_info_e.Clear();
             tb_info_f.Clear();
+            lb_camera_model.Text = "";
             lb_a.Text = "";
             lb_aa.Text = "";
             lb_b.Text = "";
@@ -1890,6 +1877,7 @@ namespace imsLink
             textBox7.BackColor = Color.Gray;
             panel3.BackgroundImage = null;
             panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             if (!serialPort1.IsOpen)
@@ -1927,7 +1915,6 @@ namespace imsLink
                 tb_info_8.BackColor = Color.White;
 
                 tb_info_8.Text = "[Model]: Opal 1.0.0";
-
 
                 Get_IMS_Data(0, 0xAA, 0xAA);
                 int cnt = 0;
@@ -2114,6 +2101,7 @@ namespace imsLink
             textBox7.BackColor = Color.Gray;
             panel3.BackgroundImage = null;
             panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_a.Clear();
@@ -2396,6 +2384,7 @@ namespace imsLink
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
+            lb_camera_model.Text = "";
             tb_info_a2.BackColor = Color.White;
             tb_info_b2.BackColor = Color.White;
             tb_info_82.BackColor = Color.White;
@@ -2504,6 +2493,7 @@ namespace imsLink
             textBox7.BackColor = Color.Gray;
             panel3.BackgroundImage = null;
             panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_a.Clear();
@@ -2785,6 +2775,186 @@ namespace imsLink
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
             richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            byte page;
+            button24.BackColor = Color.Red;
+
+            tb_info_8.Clear();
+            lb_camera_model.Text = "";
+            tb_info_82.BackColor = Color.White;
+
+            panel3.BackgroundImage = null;
+            panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
+
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            g_conn_status = CAMERA_UNKNOWN;
+            Send_IMS_Data(0xFF, 0, 0, 0);
+
+            while (g_conn_status == CAMERA_UNKNOWN)
+            {
+                richTextBox1.Text += "-2xx";
+                delay(100);
+            }
+            if (g_conn_status == DONGLE_NONE)
+            {
+                tb_sn1.Text = "無連接器";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_a.Text = "無連接器";
+                tb_info_a.BackColor = Color.Red;
+            }
+            else if (g_conn_status == CAMERA_NONE)
+            {
+                tb_sn1.Text = "有連接器, 無相機";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_a.Text = "有連接器, 無相機";
+                tb_info_a.BackColor = Color.Red;
+            }
+            else if (g_conn_status == CAMERA_OK)
+            {
+                tb_info_8.Text = "有連接器, 有相機";
+                tb_info_8.BackColor = Color.White;
+
+                //tb_info_83.Text = "有連接器, 有相機";
+                //tb_info_83.BackColor = Color.White;
+
+                tb_info_8.Text = "[Model]: ---------------------";
+                lb_camera_model.Text = "[Model]: ---------------------";
+
+                //Send_IMS_Data(0xE1, 0xAB, 0xCD, 0xEF);
+
+                int cnt = 0;
+
+                /*
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+                flag_wait_receive_data = 0;
+                */
+
+                page = MODEL_PAGE;
+                Get_IMS_Data(1, page, 0xAA);
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
+                {
+                    richTextBox1.Text += "m";
+                    delay(100);
+                }
+                flag_wait_receive_data = 0;
+
+            }
+            else
+            {
+                tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
+            }
+            button24.BackColor = System.Drawing.SystemColors.ControlLight;
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "相機型號長度 : " + tb_info_83.Text.Length.ToString() + "\n";
+            if ((tb_info_83.Text.Length <= 0) || (tb_info_83.Text.Length > 16))
+            {
+                richTextBox1.Text += "相機型號長度錯誤, 長度 : " + tb_info_83.Text.Length.ToString() + "\n";
+                return;
+            }
+
+            byte page;
+            button23.BackColor = Color.Red;
+
+            panel3.BackgroundImage = null;
+            panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
+
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            g_conn_status = CAMERA_UNKNOWN;
+            Send_IMS_Data(0xFF, 0, 0, 0);
+
+            while (g_conn_status == CAMERA_UNKNOWN)
+            {
+                richTextBox1.Text += "-2xx";
+                delay(100);
+            }
+            if (g_conn_status == DONGLE_NONE)
+            {
+                tb_sn1.Text = "無連接器";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_a.Text = "無連接器";
+                tb_info_a.BackColor = Color.Red;
+            }
+            else if (g_conn_status == CAMERA_NONE)
+            {
+                tb_sn1.Text = "有連接器, 無相機";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_a.Text = "有連接器, 無相機";
+                tb_info_a.BackColor = Color.Red;
+            }
+            else if (g_conn_status == CAMERA_OK)
+            {
+                tb_info_8.Text = "有連接器, 有相機";
+                tb_info_8.BackColor = Color.White;
+
+                //tb_info_83.Text = "有連接器, 有相機";
+                //tb_info_83.BackColor = Color.White;
+
+                //tb_info_8.Text = "[Model]: ---------------------";
+                //tb_info_83.Text = "[Model]: ---------------------";
+
+                //Send_IMS_Data(0xE1, 0xAB, 0xCD, 0xEF);
+
+                int cnt = 0;
+
+                /*
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
+                {
+                    richTextBox1.Text += "+";
+                    delay(100);
+                }
+                flag_wait_receive_data = 0;
+                */
+
+
+                int i;
+                for (i = 0; i < 16; i++)
+                {
+                    camera_model_data_send[i] = 0;
+                }
+                for (i = 0; i < tb_info_83.Text.Length; i++)
+                {
+                    camera_model_data_send[i] = (byte)tb_info_83.Text[i];
+                }
+
+                Send_IMS_Data(0xE0, 0x12, 0x34, 0x56);   //camera model write
+
+                serialPort1.Write(camera_model_data_send, 0, 16);
+
+
+            }
+            else
+            {
+                tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
+            }
+            button24.BackColor = System.Drawing.SystemColors.ControlLight;
+
+
+
+
+
+
         }
     }
 }

@@ -124,6 +124,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_camera_model = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.button26 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.tb_info_83 = new System.Windows.Forms.TextBox();
+            this.button24 = new System.Windows.Forms.Button();
             this.lb_rtc = new System.Windows.Forms.Label();
             this.button21 = new System.Windows.Forms.Button();
             this.lb_time2 = new System.Windows.Forms.Label();
@@ -190,6 +197,12 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.lb_main_board_model = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -201,6 +214,7 @@
             this.tabPage5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.USB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -209,6 +223,7 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -1241,13 +1256,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.lb_rtc);
-            this.tabPage2.Controls.Add(this.button21);
-            this.tabPage2.Controls.Add(this.lb_time2);
-            this.tabPage2.Controls.Add(this.lb_time1);
+            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox9);
-            this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.button122);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(940, 586);
@@ -1255,11 +1266,83 @@
             this.tabPage2.Text = "System";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lb_camera_model);
+            this.groupBox2.Controls.Add(this.panel5);
+            this.groupBox2.Controls.Add(this.button26);
+            this.groupBox2.Controls.Add(this.button23);
+            this.groupBox2.Controls.Add(this.tb_info_83);
+            this.groupBox2.Controls.Add(this.button24);
+            this.groupBox2.Location = new System.Drawing.Point(32, 215);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(848, 164);
+            this.groupBox2.TabIndex = 60;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "相機型號";
+            // 
+            // lb_camera_model
+            // 
+            this.lb_camera_model.AutoSize = true;
+            this.lb_camera_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_camera_model.Location = new System.Drawing.Point(122, 97);
+            this.lb_camera_model.Name = "lb_camera_model";
+            this.lb_camera_model.Size = new System.Drawing.Size(82, 24);
+            this.lb_camera_model.TabIndex = 81;
+            this.lb_camera_model.Text = "label2";
+            // 
+            // panel5
+            // 
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Location = new System.Drawing.Point(21, 73);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(80, 80);
+            this.panel5.TabIndex = 80;
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(751, 113);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(80, 40);
+            this.button26.TabIndex = 57;
+            this.button26.Text = "清除";
+            this.button26.UseVisualStyleBackColor = true;
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(751, 67);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(80, 40);
+            this.button23.TabIndex = 56;
+            this.button23.Text = "寫入";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // tb_info_83
+            // 
+            this.tb_info_83.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info_83.Location = new System.Drawing.Point(21, 26);
+            this.tb_info_83.Name = "tb_info_83";
+            this.tb_info_83.Size = new System.Drawing.Size(623, 32);
+            this.tb_info_83.TabIndex = 55;
+            this.tb_info_83.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(751, 21);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(80, 40);
+            this.button24.TabIndex = 54;
+            this.button24.Text = "讀取";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
             // lb_rtc
             // 
             this.lb_rtc.AutoSize = true;
             this.lb_rtc.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rtc.Location = new System.Drawing.Point(681, 135);
+            this.lb_rtc.Location = new System.Drawing.Point(552, 120);
             this.lb_rtc.Name = "lb_rtc";
             this.lb_rtc.Size = new System.Drawing.Size(47, 23);
             this.lb_rtc.TabIndex = 69;
@@ -1267,9 +1350,9 @@
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(600, 126);
+            this.button21.Location = new System.Drawing.Point(568, 68);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(75, 46);
+            this.button21.Size = new System.Drawing.Size(75, 40);
             this.button21.TabIndex = 68;
             this.button21.Text = "更新";
             this.button21.UseVisualStyleBackColor = true;
@@ -1279,7 +1362,7 @@
             // 
             this.lb_time2.AutoSize = true;
             this.lb_time2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time2.Location = new System.Drawing.Point(179, 160);
+            this.lb_time2.Location = new System.Drawing.Point(278, 115);
             this.lb_time2.Name = "lb_time2";
             this.lb_time2.Size = new System.Drawing.Size(68, 23);
             this.lb_time2.TabIndex = 67;
@@ -1289,7 +1372,7 @@
             // 
             this.lb_time1.AutoSize = true;
             this.lb_time1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time1.Location = new System.Drawing.Point(179, 126);
+            this.lb_time1.Location = new System.Drawing.Point(278, 81);
             this.lb_time1.Name = "lb_time1";
             this.lb_time1.Size = new System.Drawing.Size(68, 23);
             this.lb_time1.TabIndex = 66;
@@ -1301,16 +1384,16 @@
             this.groupBox9.Controls.Add(this.textBox5);
             this.groupBox9.Controls.Add(this.textBox6);
             this.groupBox9.Controls.Add(this.button28);
-            this.groupBox9.Location = new System.Drawing.Point(70, 286);
+            this.groupBox9.Location = new System.Drawing.Point(32, 400);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(800, 164);
+            this.groupBox9.Size = new System.Drawing.Size(848, 164);
             this.groupBox9.TabIndex = 59;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Flash";
+            this.groupBox9.Text = "相機Flash";
             // 
             // button27
             // 
-            this.button27.Location = new System.Drawing.Point(678, 110);
+            this.button27.Location = new System.Drawing.Point(751, 107);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(80, 40);
             this.button27.TabIndex = 56;
@@ -1330,7 +1413,7 @@
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(678, 26);
+            this.textBox6.Location = new System.Drawing.Point(751, 23);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(80, 32);
             this.textBox6.TabIndex = 57;
@@ -1339,7 +1422,7 @@
             // 
             // button28
             // 
-            this.button28.Location = new System.Drawing.Point(678, 64);
+            this.button28.Location = new System.Drawing.Point(751, 61);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(80, 40);
             this.button28.TabIndex = 54;
@@ -1348,7 +1431,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(32, 36);
+            this.button3.Location = new System.Drawing.Point(21, 87);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(119, 46);
             this.button3.TabIndex = 6;
@@ -1358,7 +1441,7 @@
             // 
             // button122
             // 
-            this.button122.Location = new System.Drawing.Point(32, 126);
+            this.button122.Location = new System.Drawing.Point(146, 87);
             this.button122.Name = "button122";
             this.button122.Size = new System.Drawing.Size(119, 46);
             this.button122.TabIndex = 5;
@@ -1948,6 +2031,72 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lb_main_board_model);
+            this.groupBox3.Controls.Add(this.button25);
+            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.button29);
+            this.groupBox3.Controls.Add(this.lb_rtc);
+            this.groupBox3.Controls.Add(this.button30);
+            this.groupBox3.Controls.Add(this.button21);
+            this.groupBox3.Controls.Add(this.lb_time2);
+            this.groupBox3.Controls.Add(this.button3);
+            this.groupBox3.Controls.Add(this.button122);
+            this.groupBox3.Controls.Add(this.lb_time1);
+            this.groupBox3.Location = new System.Drawing.Point(32, 28);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(848, 164);
+            this.groupBox3.TabIndex = 60;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "主機資訊";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Location = new System.Drawing.Point(21, 26);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(325, 32);
+            this.textBox3.TabIndex = 55;
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(751, 114);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(80, 40);
+            this.button25.TabIndex = 84;
+            this.button25.Text = "清除";
+            this.button25.UseVisualStyleBackColor = true;
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(751, 68);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(80, 40);
+            this.button29.TabIndex = 83;
+            this.button29.Text = "寫入";
+            this.button29.UseVisualStyleBackColor = true;
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(751, 22);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(80, 40);
+            this.button30.TabIndex = 82;
+            this.button30.Text = "讀取";
+            this.button30.UseVisualStyleBackColor = true;
+            // 
+            // lb_main_board_model
+            // 
+            this.lb_main_board_model.AutoSize = true;
+            this.lb_main_board_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_board_model.Location = new System.Drawing.Point(376, 34);
+            this.lb_main_board_model.Name = "lb_main_board_model";
+            this.lb_main_board_model.Size = new System.Drawing.Size(82, 24);
+            this.lb_main_board_model.TabIndex = 82;
+            this.lb_main_board_model.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1996,7 +2145,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.USB.ResumeLayout(false);
@@ -2009,6 +2159,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2176,6 +2328,19 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Label lb_rtc;
         private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.TextBox tb_info_83;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label lb_camera_model;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label lb_main_board_model;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.Button button30;
     }
 }
 

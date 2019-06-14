@@ -13,6 +13,10 @@ namespace vcs_SlideShowString
 {
     public partial class Form1 : Form
     {
+        bool flag_debug_mode = true;
+        //bool flag_need_author = true;
+        //bool flag_need_title = true;
+
         Bitmap bmp;
         //bool flag_pause = false;
         //int cnt = 0;
@@ -81,7 +85,7 @@ namespace vcs_SlideShowString
                 while (!sr.EndOfStream)
                 {               // 每次讀取一行，直到檔尾
                     i++;
-                    line = sr.ReadLine();            // 讀取文字到 line 變數
+                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
                     richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
                     if(line.Length > 0)
                         strings.Add(line);
@@ -110,15 +114,28 @@ namespace vcs_SlideShowString
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             richTextBox1.Text += "目前解析度  " + screenWidth.ToString() + " X " + screenHeight.ToString() + "\n";
 
+            /*
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(screenWidth - 250, 200);
+
+            if (flag_debug_mode == false)
+            {
+                this.Location = new System.Drawing.Point(screenWidth - 250, 200);
+            }
+            */
+
 
             this.FormBorderStyle = FormBorderStyle.None;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 
-            this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+            if (flag_debug_mode == false)
+            {
+                //設定執行後的表單起始位置
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = new System.Drawing.Point(screenWidth - 250, 200);
+                this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+            }
 
             loadTextData();
 
@@ -206,7 +223,7 @@ namespace vcs_SlideShowString
                         }
                     }
                 }
-                string0 = str_author + " " + str_title;
+                string0 = "【" + str_author + "‧" + str_title + "】";
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
 
                 show_string0 = string0;
@@ -427,6 +444,11 @@ namespace vcs_SlideShowString
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -87,11 +87,6 @@ namespace vcs_test_all_99_tmp1
 
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
         }
