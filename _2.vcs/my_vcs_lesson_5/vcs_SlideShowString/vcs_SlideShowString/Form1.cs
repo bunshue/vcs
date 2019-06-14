@@ -82,26 +82,45 @@ namespace vcs_SlideShowString
                 StreamReader sr = new StreamReader(filepath, Encoding.Default);
 
                 i = 0;
+                lyrics_count = 0;
                 while (!sr.EndOfStream)
                 {               // 每次讀取一行，直到檔尾
                     i++;
                     line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
+                    if (line.Length <= 0)
+                        continue;
+                    if (line[0] == '@')
+                    {
+                        //richTextBox1.Text += "get author" + line + "\n";
+                    }
+                    else if (line[0] == '#')
+                    {
+                        //richTextBox1.Text += "get title" + line + "\n";
+                    }
+                    else if (line[0] == '$')
+                    {
+                        //richTextBox1.Text += "get serial" + line + "\n";
+                        continue;
+                    }
+                    else if (line[0] == '%')
+                    {
+                        //richTextBox1.Text += "get comment" + line + "\n";
+                        continue;
+                    }
+                    else if (line[0] == '&')
+                    {
+                        //richTextBox1.Text += "get text start" + line + "\n";
+                        line = line.Remove(0, 1);
+                        lyrics_count++;
+                    }
+
                     richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
-                    if(line.Length > 0)
-                        strings.Add(line);
+                    strings.Add(line);
                 }
                 strings_count = strings.Count;
                 sr.Close();
             }
-            lyrics_count = 0;
-            for (i = 0; i < strings.Count; i++)
-            {
-                if (strings[i][0] == '@')
-                {
-                    richTextBox1.Text += "get poem " + strings[i] + "\n";
-                    lyrics_count++;
-                }
-            }
+
             richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
             richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
             show_lyrics_index = 0;
@@ -185,10 +204,23 @@ namespace vcs_SlideShowString
                         if (flag_get_lyrics_index == show_lyrics_index)
                         {
                             flag_get_text_data = 1;
+
+                            str_author = String.Empty;
+                            str_title = String.Empty;
+                            str_serial = String.Empty;
+                            str_text = String.Empty;
+
+                            show_string0 = String.Empty;
+                            show_string1 = String.Empty;
+                            show_string2 = String.Empty;
+
                             str_author = strings[i].Remove(0, 1);
                         }
                         else
+                        {
                             flag_get_lyrics_index++;
+
+                        }
                     }
                     else if (strings[i][0] == '#')
                         str_title = strings[i].Remove(0, 1);
@@ -225,6 +257,7 @@ namespace vcs_SlideShowString
                 }
                 string0 = "【" + str_author + "‧" + str_title + "】";
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
+                richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, title : " + str_title + "\n";
 
                 show_string0 = string0;
                 show_string1 = string1;

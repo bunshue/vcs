@@ -34,11 +34,13 @@ namespace my_vcs_20_List
 
         }
 
-        int cnt = 0;
+        Random r = new Random();
         private void button1_Click(object sender, EventArgs e)
         {
-            cnt++;
-            strings.Add("add string " + cnt.ToString());
+            string new_string;
+            new_string = "string" + r.Next(100).ToString("D3");
+            richTextBox1.Text += "加入新資料進List " + new_string + "\n";
+            strings.Add(new_string);
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
@@ -68,6 +70,35 @@ namespace my_vcs_20_List
         {
             points.Clear();
             strings.Clear();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (strings.Count < 5)
+            {
+                richTextBox1.Text += "count not enough, abort\n";
+                return;
+            }
+            //richTextBox1.Text += "capacity : " + strings.Capacity.ToString() + "\n";
+            //strings.RemoveAt(3);
+            strings.RemoveRange(3, 5);
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            strings.Reverse();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            strings.Sort();
         }
     }
 }
