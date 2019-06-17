@@ -1,4 +1,19 @@
 
+
+
+C# StreamReader 讀取時，中文字部分變成亂碼的解決方法 
+ 因此只要指定編碼方式即可解決
+	// 不指定 Encoding，其 Encodeing 為 Unicode
+	System.IO.StreamReader srNoEncode = new System.IO.StreamReader("DataFile.txt");
+	txtNoEncode.Text = srNoEncode.ReadToEnd();
+	
+	// 指定 Encoding 為 System.Text.Encoding.Default (作業系統目前 ANSI 字碼頁的編碼方式)
+	System.IO.StreamReader srDefault = new System.IO.StreamReader("DataFile.txt",System.Text.Encoding.Default);
+	txtsrDefault.Text = srDefault.ReadToEnd();
+	
+            
+            
+            
             Random r = new Random();
             string result1 = "";
             string result2 = "";
@@ -17,24 +32,6 @@
             richTextBox1.Text += "取0.0~1.0的亂數值：" + result4 + "\n";
 
 
-                if ((str_author != String.Empty) && (str_title != String.Empty))
-                {
-                    string0 = "【" + str_author + "‧" + str_title + "】";
-                }
-                else if (str_author == String.Empty)
-                {
-                    string0 = "【" + str_title + "】";
-                }
-                else if (str_title == String.Empty)
-                {
-                    string0 = "【" + str_author + "】";
-                }
-                else
-                {
-                    //TBD, no author and no title
-                    //string0 = "【" + str_author + "‧" + str_title + "】";
-                    string0 = "XXXXXXXXXXXXXX";
-                }
 
 
 

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using System.IO;    //for FileInfo DirectoryInfo
 using System.Diagnostics;
 
@@ -19,12 +18,15 @@ namespace vcs_DrAP
             int i;
             if (System.IO.File.Exists(drap_setup_filename) == false)
             {
-                //MessageBox.Show("檔案 " + drap_setup_filename + " 不存在，製作一個。");
+                richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
                 StreamWriter sw = File.CreateText(drap_setup_filename);
                 string content = "";
-                //content += SelectedLanguage.ToString();
-                content += "\n";
-                //content += ezisp_path;
+                content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+                content += "C:\\\\______test_vcs\n";
+                content += SelectedLanguage.ToString();
                 content += "\n";
 
                 sw.WriteLine(content);
@@ -32,23 +34,36 @@ namespace vcs_DrAP
             }
             else
             {
-                //MessageBox.Show("檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定");
+                richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
 
                 string line;
                 StreamReader sr = new StreamReader(drap_setup_filename);
-                for (i = 0; i < 2; i++)
+                for (i = 0; i < 6; i++)
                 {
                     line = sr.ReadLine();
-                    //MessageBox.Show(line);
-                    if (i == 0)
+                    richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
+                    switch (i)
                     {
-                        //SelectedLanguage = int.Parse(line);
-                        //comboBox3.SelectedIndex = SelectedLanguage;
-                        //Update_Language(SelectedLanguage);
-                    }
-                    if (i == 1)
-                    {
-                        //ezisp_path = line;
+                        case 0:
+                            video_player_path = line;
+                            break;
+                        case 1:
+                            audio_player_path = line;
+                            break;
+                        case 2:
+                            picture_viewer_path = line;
+                            break;
+                        case 3:
+                            text_editor_path = line;
+                            break;
+                        case 4:
+                            search_path = line;
+                            break;
+                        case 5:
+                            SelectedLanguage = int.Parse(line);
+                            break;
+                        default:
+                            break;
                     }
                 }
                 sr.Close();
@@ -73,8 +88,16 @@ namespace vcs_DrAP
         int flag_search_mode = 0;
         int flag_search_done = 0;
         int flag_search_vcs_pattern = 0;
+        int SelectedLanguage = 0;
         string drap_setup_filename = "drap_setup.ini";
         string FolederName;
+
+        string video_player_path = String.Empty;
+        string audio_player_path = String.Empty;
+        string picture_viewer_path = String.Empty;
+        string text_editor_path = String.Empty;
+        string search_path = String.Empty;
+
 
         public class MyFileInfo
         {
@@ -114,7 +137,7 @@ namespace vcs_DrAP
             total_files = 0;
 
             if (path == String.Empty)
-                path = "C:\\______test_vcs";
+                path = search_path;
                 //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
 
             FolederName = path;
@@ -193,7 +216,7 @@ namespace vcs_DrAP
 
         private void button8_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_vcs";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 path = folderBrowserDialog1.SelectedPath;
@@ -498,7 +521,7 @@ namespace vcs_DrAP
             fileinfos.Clear();
             /*  無法依子目錄排序 廢棄
             if (path == String.Empty)
-                path = "C:\\______test_vcs";
+                path = search_path;
 
             //C# 取得資料夾下的所有檔案(包括子目錄)
             string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
@@ -514,7 +537,7 @@ namespace vcs_DrAP
             total_files = 0;
 
             if (path == String.Empty)
-                path = "C:\\______test_vcs";
+                path = search_path;
                 //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
 
             richTextBox1.Text += path + "\n\n";
@@ -604,7 +627,10 @@ namespace vcs_DrAP
             //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
             richTextBox1.Text += "你選擇了\t" + listView1.Items[selNdx].Text + "\n";
             if (flag_search_vcs_pattern == 0)
-                System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
+            {
+                //System.Diagnostics.Process.Start(listView1.Items[selNdx].Text);
+                System.Diagnostics.Process.Start(video_player_path, listView1.Items[selNdx].Text);
+            }
             else
                 System.Diagnostics.Process.Start("uedit32.exe", listView1.Items[selNdx].Text);
         }
@@ -622,11 +648,7 @@ namespace vcs_DrAP
 
             int selNdx;
             string all_filename = string.Empty;
-            string player_path;
-            if (flag_search_vcs_pattern == 0)
-                player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            else
-                player_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
             {
                 richTextBox1.Text += "無檔可播\n";
@@ -644,14 +666,23 @@ namespace vcs_DrAP
             }
 
             //指定應用程式路徑
-            //string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-            string target = player_path;
+            string target = String.Empty;
 
             //方法一
             //Process.Start(target, "參數");
             //Process.Start(target, all_filename);
 
             //方法二
+
+            if (flag_search_vcs_pattern == 0)
+            {
+                target = video_player_path;
+            }
+            else
+            {
+                target = text_editor_path;
+            }
+
             ProcessStartInfo pInfo = new ProcessStartInfo(target);
             pInfo.Arguments = all_filename;
 
@@ -902,7 +933,7 @@ namespace vcs_DrAP
             string path = @"D:\___source_code\_git\part3\vcs\_2.vcs";
 
             if (path == String.Empty)
-                path = "C:\\______test_vcs";
+                path = search_path;
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
             if (File.Exists(path))

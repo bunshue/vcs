@@ -297,6 +297,7 @@ namespace imsLink
 
         private void show_info(int item)
         {
+            //richTextBox1.Text += "show_info item = " + item.ToString() + "\n";
             switch (flag_request_item)
             {
                 case MODEL_PAGE:
@@ -382,12 +383,16 @@ namespace imsLink
                         }
                         else
                         {
-                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
+                            richTextBox1.Text += "unknown data for flag_request_item = " + flag_request_item.ToString() + "\n";
                         }
                     }
                     else
                     {
-                        if (flag_request_item == DATE_PAGE1)
+                        if (flag_request_item == DATE_PAGE0)
+                        {
+                            lb_aa.Text = "Product : ----------------------------------";
+                        }
+                        else if (flag_request_item == DATE_PAGE1)
                         {
                             lb_b.Text = "1MIN : ----------------------------------";
                         }
@@ -699,6 +704,8 @@ namespace imsLink
                                             }
                                             lb_camera_model.Text = tb_info_8.Text;
                                             break;
+                                        case DATE_PAGE0:
+                                            break;
                                         case DATE_PAGE1:
                                             tb_info_b.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                                 + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
@@ -991,6 +998,7 @@ namespace imsLink
                             panel4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
+                        button64.BackColor = System.Drawing.SystemColors.ControlLight;
                     }
 
                 }
@@ -1807,7 +1815,7 @@ namespace imsLink
             {
                 tb_sn1.Text = "有連接器, 有相機";
                 tb_sn1.BackColor = Color.White;
-                Get_IMS_Data(0, 0xAA, 0xAA);
+                Get_IMS_Data(0, 0xAA, 0xAA);    //camera serial read
 
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -1818,25 +1826,8 @@ namespace imsLink
                 flag_wait_receive_data = 0;
 
                 byte page;
-                /*
-                Get_IMS_Data(0, 0xAA, 0xAA);
-                while (flag_wait_receive_data == 1)
-                {
-                    richTextBox1.Text += "+";
-                    delay(100);
-                }
-
-                page = 0x9;
-                Get_IMS_Data(1, page, 0xAA);
-                while (flag_wait_receive_data == 1)
-                {
-                    richTextBox1.Text += "+";
-                    delay(100);
-                }
-                */
-
                 page = 0xa;
-                Get_IMS_Data(1, page, 0xAA);
+                Get_IMS_Data(1, page, 0xAA);    //read camera page 10 for product time
                 cnt = 0;
                 while ((flag_wait_receive_data == 1) && (cnt++ < 20))
                 {
@@ -1886,7 +1877,7 @@ namespace imsLink
             Send_IMS_Data(0xFF, 0, 0, 0);
 
             this.tb_sn2.Focus();
-            button64.BackColor = System.Drawing.SystemColors.ControlLight;
+            //button64.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1975,8 +1966,8 @@ namespace imsLink
                 tb_info_8.Text = "有連接器, 有相機";
                 tb_info_8.BackColor = Color.White;
 
-                tb_info_8.Text = "[Model]: ---------------------";
-                lb_camera_model.Text = "[Model]: ---------------------";
+                tb_info_8.Text = "[Model]:";
+                lb_camera_model.Text = "[Model]:";
                 //Send_IMS_Data(0xE1, 0xAB, 0xCD, 0xEF);
 
                 //get camera model
@@ -2892,8 +2883,8 @@ namespace imsLink
                 //tb_info_83.Text = "有連接器, 有相機";
                 //tb_info_83.BackColor = Color.White;
 
-                tb_info_8.Text = "[Model]: ---------------------";
-                lb_camera_model.Text = "[Model]: ---------------------";
+                tb_info_8.Text = "[Model]:";
+                lb_camera_model.Text = "[Model]:";
 
                 //Send_IMS_Data(0xE1, 0xAB, 0xCD, 0xEF);
 

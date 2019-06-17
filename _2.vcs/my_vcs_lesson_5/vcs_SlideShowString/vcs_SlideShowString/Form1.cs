@@ -25,7 +25,7 @@ namespace vcs_SlideShowString
         int H;
         int i = 0;
 
-        string filepath = "C:\\______test_vcs\\string_test.txt";
+        string filepath = "C:\\______test_vcs\\poetry.txt";
 
         List<String> strings = new List<String>();
         int strings_count = 0;
@@ -72,11 +72,11 @@ namespace vcs_SlideShowString
         {
             if (System.IO.File.Exists(filepath) == false)
             {
-                richTextBox1.Text += "檔案 " + filepath + " 不存在，離開。";
+                richTextBox1.Text += "檔案 " + filepath + " 不存在，離開。\n";
             }
             else
             {
-                richTextBox1.Text += "檔案 " + filepath + " 存在, 開啟，並讀入文字資料";
+                richTextBox1.Text += "檔案 " + filepath + " 存在, 開啟，並讀入文字資料\n";
 
                 string line;
                 StreamReader sr = new StreamReader(filepath, Encoding.Default);
@@ -110,11 +110,11 @@ namespace vcs_SlideShowString
                     else if (line[0] == '&')
                     {
                         //richTextBox1.Text += "get text start" + line + "\n";
-                        line = line.Remove(0, 1);
+                        //line = line.Remove(0, 1);
                         lyrics_count++;
                     }
 
-                    richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
+                    //richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
                     strings.Add(line);
                 }
                 strings_count = strings.Count;
@@ -129,6 +129,8 @@ namespace vcs_SlideShowString
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lyrics_index.Text = "";
+
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             richTextBox1.Text += "目前解析度  " + screenWidth.ToString() + " X " + screenHeight.ToString() + "\n";
@@ -191,19 +193,60 @@ namespace vcs_SlideShowString
             String show_string1 = String.Empty;
             String show_string2 = String.Empty;
 
+
+            lyrics_index.Text = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
+
             if (flag_playing == 0)
             {
+                //richTextBox1.Text += "flag_get_lyrics_index = " + flag_get_lyrics_index.ToString() + "\n";
+                //richTextBox1.Text += "show_lyrics_index = " + show_lyrics_index.ToString() + "\n";
+                //richTextBox1.Text += "strings_count = " + strings_count.ToString() + "\n";
+
+
                 //從頭播起
                 for (i = 0; i < strings_count; i++)
                 {
-                    if (strings[i][0] == '@')
+                    //richTextBox1.Text += "i = " + i.ToString() + " first = " + strings[i][0] + "\n";
+                    if (strings[i][0] == '@')   //author
                     {
                         if (flag_get_text_data == 1)
+                        {
+                            flag_get_text_data = 0;
                             break;
-
+                        }
+                        str_author = strings[i].Remove(0, 1);
+                    }
+                    else if (strings[i][0] == '#')  //title
+                    {
+                        if (flag_get_text_data == 1)
+                        {
+                            flag_get_text_data = 0;
+                            break;
+                        }
+                        str_title = strings[i].Remove(0, 1);
+                    }
+                    else if (strings[i][0] == '&')  //text
+                    {
                         if (flag_get_lyrics_index == show_lyrics_index)
                         {
+                            richTextBox1.Text += "let flag_get_text_data = 1\n";
                             flag_get_text_data = 1;
+                            cnt = 0;
+                            string1 = String.Empty;
+                            string2 = String.Empty;
+                            string3 = String.Empty;
+                            string4 = String.Empty;
+                            string5 = String.Empty;
+                            string6 = String.Empty;
+                            string7 = String.Empty;
+                            string8 = String.Empty;
+                            string9 = String.Empty;
+                            string10 = String.Empty;
+                            string11 = String.Empty;
+                        }
+                        else
+                        {
+                            flag_get_lyrics_index++;
 
                             str_author = String.Empty;
                             str_title = String.Empty;
@@ -213,51 +256,60 @@ namespace vcs_SlideShowString
                             show_string0 = String.Empty;
                             show_string1 = String.Empty;
                             show_string2 = String.Empty;
-
-                            str_author = strings[i].Remove(0, 1);
-                        }
-                        else
-                        {
-                            flag_get_lyrics_index++;
-
                         }
                     }
-                    else if (strings[i][0] == '#')
-                        str_title = strings[i].Remove(0, 1);
-                    else
+
+                    if (flag_get_text_data == 1)
                     {
-                        if (flag_get_text_data == 1)
+                        cnt++;
+                        richTextBox1.Text += "get data cnt = " + cnt.ToString() + "\n";
+                        if (cnt == 1)
                         {
-                            cnt++;
-                            if (cnt == 1)
-                                string1 = strings[i];
-                            else if (cnt == 2)
-                                string2 = strings[i];
-                            else if (cnt == 3)
-                                string3 = strings[i];
-                            else if (cnt == 4)
-                                string4 = strings[i];
-                            else if (cnt == 5)
-                                string5 = strings[i];
-                            else if (cnt == 6)
-                                string6 = strings[i];
-                            else if (cnt == 7)
-                                string7 = strings[i];
-                            else if (cnt == 8)
-                                string8 = strings[i];
-                            else if (cnt == 9)
-                                string9 = strings[i];
-                            else if (cnt == 10)
-                                string10 = strings[i];
-                            else if (cnt == 11)
-                                string11 = strings[i];
-                            lines_in_this_lyrics = cnt;
+                            string1 = strings[i].Remove(0, 1);
                         }
+                        else if (cnt == 2)
+                            string2 = strings[i];
+                        else if (cnt == 3)
+                            string3 = strings[i];
+                        else if (cnt == 4)
+                            string4 = strings[i];
+                        else if (cnt == 5)
+                            string5 = strings[i];
+                        else if (cnt == 6)
+                            string6 = strings[i];
+                        else if (cnt == 7)
+                            string7 = strings[i];
+                        else if (cnt == 8)
+                            string8 = strings[i];
+                        else if (cnt == 9)
+                            string9 = strings[i];
+                        else if (cnt == 10)
+                            string10 = strings[i];
+                        else if (cnt == 11)
+                            string11 = strings[i];
+                        lines_in_this_lyrics = cnt;
                     }
                 }
-                string0 = "【" + str_author + "‧" + str_title + "】";
+
+                if ((str_author != String.Empty) && (str_title != String.Empty))
+                {
+                    string0 = "【" + str_author + "‧" + str_title + "】";
+                }
+                else if ((str_author == String.Empty) && (str_title != String.Empty))
+                {
+                    string0 = "【" + str_title + "】";
+                }
+                else if ((str_author != String.Empty) && (str_title == String.Empty))
+                {
+                    string0 = "【" + str_author + "】";
+                }
+                else
+                {
+                    string0 = "【        】";
+                }
+
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
-                richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, title : " + str_title + "\n";
+                richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, author : " + str_author + " , title : " + str_title + "\n";
 
                 show_string0 = string0;
                 show_string1 = string1;

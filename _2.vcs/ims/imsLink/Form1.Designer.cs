@@ -125,6 +125,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lb_write_mb_model = new System.Windows.Forms.Label();
             this.lb_main_board_model = new System.Windows.Forms.Label();
             this.button25 = new System.Windows.Forms.Button();
             this.tb_main_board_model = new System.Windows.Forms.TextBox();
@@ -137,6 +138,7 @@
             this.button122 = new System.Windows.Forms.Button();
             this.lb_time1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_write_camera_model = new System.Windows.Forms.Label();
             this.lb_camera_model = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button26 = new System.Windows.Forms.Button();
@@ -144,6 +146,8 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.lb_write_camera_serial = new System.Windows.Forms.Label();
+            this.button31 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -203,10 +207,6 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.lb_write_camera_model = new System.Windows.Forms.Label();
-            this.button31 = new System.Windows.Forms.Button();
-            this.lb_write_camera_serial = new System.Windows.Forms.Label();
-            this.lb_write_mb_model = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1291,6 +1291,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "主機資訊";
             // 
+            // lb_write_mb_model
+            // 
+            this.lb_write_mb_model.AutoSize = true;
+            this.lb_write_mb_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_write_mb_model.Location = new System.Drawing.Point(418, 28);
+            this.lb_write_mb_model.Name = "lb_write_mb_model";
+            this.lb_write_mb_model.Size = new System.Drawing.Size(145, 23);
+            this.lb_write_mb_model.TabIndex = 86;
+            this.lb_write_mb_model.Text = "lb_write_mb_model";
+            // 
             // lb_main_board_model
             // 
             this.lb_main_board_model.AutoSize = true;
@@ -1415,6 +1425,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "相機型號";
             // 
+            // lb_write_camera_model
+            // 
+            this.lb_write_camera_model.AutoSize = true;
+            this.lb_write_camera_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_write_camera_model.Location = new System.Drawing.Point(506, 97);
+            this.lb_write_camera_model.Name = "lb_write_camera_model";
+            this.lb_write_camera_model.Size = new System.Drawing.Size(176, 23);
+            this.lb_write_camera_model.TabIndex = 85;
+            this.lb_write_camera_model.Text = "lb_write_camera_model";
+            // 
             // lb_camera_model
             // 
             this.lb_camera_model.AutoSize = true;
@@ -1486,6 +1506,26 @@
             this.groupBox9.TabIndex = 59;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "相機Flash";
+            // 
+            // lb_write_camera_serial
+            // 
+            this.lb_write_camera_serial.AutoSize = true;
+            this.lb_write_camera_serial.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_write_camera_serial.Location = new System.Drawing.Point(173, 113);
+            this.lb_write_camera_serial.Name = "lb_write_camera_serial";
+            this.lb_write_camera_serial.Size = new System.Drawing.Size(170, 23);
+            this.lb_write_camera_serial.TabIndex = 86;
+            this.lb_write_camera_serial.Text = "lb_write_camera_serial";
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(21, 107);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(135, 40);
+            this.button31.TabIndex = 58;
+            this.button31.Text = "相機寫任意序號";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // button27
             // 
@@ -2106,46 +2146,6 @@
             this.button33.TabIndex = 28;
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
-            // lb_write_camera_model
-            // 
-            this.lb_write_camera_model.AutoSize = true;
-            this.lb_write_camera_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_camera_model.Location = new System.Drawing.Point(509, 84);
-            this.lb_write_camera_model.Name = "lb_write_camera_model";
-            this.lb_write_camera_model.Size = new System.Drawing.Size(176, 23);
-            this.lb_write_camera_model.TabIndex = 85;
-            this.lb_write_camera_model.Text = "lb_write_camera_model";
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(21, 107);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(135, 40);
-            this.button31.TabIndex = 58;
-            this.button31.Text = "相機寫任意序號";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // lb_write_camera_serial
-            // 
-            this.lb_write_camera_serial.AutoSize = true;
-            this.lb_write_camera_serial.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_camera_serial.Location = new System.Drawing.Point(173, 113);
-            this.lb_write_camera_serial.Name = "lb_write_camera_serial";
-            this.lb_write_camera_serial.Size = new System.Drawing.Size(170, 23);
-            this.lb_write_camera_serial.TabIndex = 86;
-            this.lb_write_camera_serial.Text = "lb_write_camera_serial";
-            // 
-            // lb_write_mb_model
-            // 
-            this.lb_write_mb_model.AutoSize = true;
-            this.lb_write_mb_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_mb_model.Location = new System.Drawing.Point(418, 28);
-            this.lb_write_mb_model.Name = "lb_write_mb_model";
-            this.lb_write_mb_model.Size = new System.Drawing.Size(145, 23);
-            this.lb_write_mb_model.TabIndex = 86;
-            this.lb_write_mb_model.Text = "lb_write_mb_model";
             // 
             // Form1
             // 
