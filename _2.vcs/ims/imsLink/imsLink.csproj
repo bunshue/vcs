@@ -96,11 +96,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_Start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Start.Designer.cs">
+      <DependentUpon>Frm_Start.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Start.resx">
+      <DependentUpon>Frm_Start.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -135,6 +144,9 @@
     <None Include="img\full_screen.bmp" />
     <None Include="img\normal_screen.bmp" />
     <None Include="img\clipboard.png" />
+    <None Include="img\setup.png" />
+    <None Include="img\console.png" />
+    <None Include="img\ims3.bmp" />
     <Content Include="ims.ico" />
     <None Include="recorder_ok.png" />
     <None Include="recorder_none.png" />

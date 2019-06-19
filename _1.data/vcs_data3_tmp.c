@@ -1,6 +1,100 @@
 
 
+picturebox顯示圖檔
+            Image img = Image.FromFile("1.png");
+            pictureBox1.Image = img;
 
+
+
+            string filename = @"C:\______test_vcs\07    都???--妻戀道中(他鄉思妻兒).mp3";
+            FileInfo f = new FileInfo(filename);
+
+            //C# 取得檔案建立日期,及最後修改日期 
+            richTextBox1.Text += "檔案建立日期" + f.CreationTime.ToString() + "\n";
+            richTextBox1.Text += "檔案最後修改日期" + f.LastWriteTime.ToString() + "\n";
+
+
+            //C# 取得檔案路徑、副檔名、檔案大小
+            richTextBox1.Text += "檔案路徑： " + filename.ToString() + "\n";
+            richTextBox1.Text += "副檔名： " + filename.Substring(filename.LastIndexOf(".") + 1, filename.Length - filename.LastIndexOf(".") - 1) + "\n";    //取得副檔名
+            richTextBox1.Text += "檔案大小： " + File.Open(filename, FileMode.Open).Length.ToString() + " 位元組\n";
+
+
+
+
+
+除去換行符號
+            //置換換行符號為空白，讓messagebox秀出輸入的字串
+            String a = textBox1.Text;
+            a = a.Replace("\r\n", "");
+            a = a.Replace("\n", "");
+            a = a.Replace("\r", "");
+            MessageBox.Show(a);
+        
+        
+        
+ C# 根據桌面大小調整視窗大小 
+             int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
+            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width = Convert.ToInt32(DeskWidth * 0.8);
+            this.Height = Convert.ToInt32(DeskHeight * 0.8);
+
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
+
+
+
+
+
+
+[C#]WinForm利用Bitmap的MakeTransparent將圖片某些顏色透明化
+            Bitmap bmp2 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
+            bmp2.MakeTransparent(Color.White);//將圖片白色部分透明化;
+            this.pictureBox2.Image = bmp2;
+            
+            bit = new Bitmap("picture1.jpg");  //圖片放在debug內
+            bit.MakeTransparent(Color.White);  //將視窗中白色的部份變為透明
+            
+            
+
+vcs抓網路上的檔案
+
+            try
+            {
+                //抓現在時間
+                DateTime dt = DateTime.Now;
+                string filetime = dt.ToString("yyyy-MM-dd-HHmm");  //將檔案寫入現在時間
+
+                WebClient wc = new WebClient();
+                wc.DownloadFile("http://data.taipei/bus/PathDetail",    //抓取檔案網址
+                "C:\\TEMP\\1_PathDetail\\PathDetail_" + filetime + ".gz");    //寫入本機的路徑
+            }
+            catch
+            {
+                Environment.Exit(0);    //如果抓不到檔案就離開程式，沒這行程式會一直卡在這如果沒抓到檔案的話…
+            }
+        
+C# 讓視窗背景顯示GIF動畫 
+private void Form1_Load(object sender, EventArgs e)
+        {
+            bit = new Bitmap("1.gif");
+            this.pictureBox1.Image = bit;
+        }        
+        註：1.gif一樣是放在專案資料夾下：WindowsFormsApp1\WindowsFormsApp1\bin\Debug
+
+ C# 限定textbox只能輸入數字 
+ 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+ 
+ 
 C# StreamReader 讀取時，中文字部分變成亂碼的解決方法 
  因此只要指定編碼方式即可解決
 	// 不指定 Encoding，其 Encodeing 為 Unicode
@@ -33,12 +127,6 @@ C# StreamReader 讀取時，中文字部分變成亂碼的解決方法
 
 
 
-
-
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
 
 
 

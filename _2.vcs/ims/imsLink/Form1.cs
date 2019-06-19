@@ -1000,6 +1000,26 @@ namespace imsLink
                         }
                         button64.BackColor = System.Drawing.SystemColors.ControlLight;
                     }
+                    else if (input[1] == 0x99)
+                    {
+                        if ((input[2] == 0x00) && (input[3] == 0x00))
+                        {
+                            button36.BackgroundImage = imsLink.Properties.Resources.console;
+                            button36.BackColor = System.Drawing.SystemColors.ControlLight;
+                            button37.BackColor = System.Drawing.SystemColors.ControlLight;
+                        }
+                        else if ((input[2] == 0x11) && (input[3] == 0x11))
+                        {
+                            button36.BackgroundImage = imsLink.Properties.Resources.ims3;
+                            button35.BackColor = System.Drawing.SystemColors.ControlLight;
+                            button36.BackColor = System.Drawing.SystemColors.ControlLight;
+                            button37.BackColor = System.Drawing.SystemColors.ControlLight;
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "unknown status\n";
+                        }
+                    }
 
                 }
                 else if (input[0] == 0xC2)
@@ -1096,6 +1116,8 @@ namespace imsLink
             button18.BackgroundImage = imsLink.Properties.Resources.minus;
             button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
             button20.BackgroundImage = imsLink.Properties.Resources.power;
+            button32.BackgroundImage = imsLink.Properties.Resources.console;
+            button35.BackgroundImage = imsLink.Properties.Resources.ims3;
 
             button17.Visible = false;   //no use
             button18.Visible = false;   //no use
@@ -1121,8 +1143,17 @@ namespace imsLink
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(100, 100);
+            //this.StartPosition = FormStartPosition.Manual;
+            //this.Location = new System.Drawing.Point(100, 100);
+
+            // C# 設定視窗載入位置 
+            this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+            //C# 軟體啟動、版權宣告視窗 
+            Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示Form2視窗
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -3116,6 +3147,73 @@ namespace imsLink
             lb_write_mb_model.Text = "寫入主機型號完成";
 
             button29.BackColor = System.Drawing.SystemColors.ControlLight;
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            richTextBox1.Text += "離開IMS Link，進入putty mode\n";
+            Send_IMS_Data(0xFF, 0x11, 0x66, 0x88);
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            button35.BackColor = Color.Red;
+            richTextBox1.Text += "離開putty mode，進入IMS Link\n";
+
+            byte[] data = new byte[8];
+
+            data[0] = (byte)'i';
+            data[1] = (byte)'m';
+            data[2] = (byte)'s';
+            data[3] = (byte)'l';
+            data[4] = (byte)'i';
+            data[5] = (byte)'n';
+            data[6] = (byte)'k';
+            data[7] = 0x0d;
+
+            delay(100);
+            serialPort1.Write(data, 0, 8);
+            delay(100);
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                button64.BackColor = System.Drawing.SystemColors.ControlLight;
+                return;
+            }
+
+            button37.BackColor = Color.Red;
+            button36.BackgroundImage = null;
+            button36.BackColor = Color.Red;
+            Send_IMS_Data(0x99, 0, 0, 0x0D);
+            button36.BackgroundImage = imsLink.Properties.Resources.console;
+        
+            /* reserved
+            byte[] data = new byte[4];
+
+            data[0] = 0x99;
+            data[1] = 0x00;
+            data[2] = 0x00;
+            data[3] = 0x0D;
+
+            delay(100);
+            serialPort1.Write(data, 0, 4);
+            delay(100);
+            */
 
         }
     }
