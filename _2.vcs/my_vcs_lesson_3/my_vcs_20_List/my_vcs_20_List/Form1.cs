@@ -82,8 +82,7 @@ namespace my_vcs_20_List
             //richTextBox1.Text += "capacity : " + strings.Capacity.ToString() + "\n";
             //strings.RemoveAt(3);
             strings.RemoveRange(3, 5);
-
-
+            richTextBox1.Text += "刪除此List之第3項開始的5項";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -99,6 +98,28 @@ namespace my_vcs_20_List
         private void button7_Click(object sender, EventArgs e)
         {
             strings.Sort();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (strings.Count < 5)
+            {
+                richTextBox1.Text += "count not enough, abort\n";
+                return;
+            }
+            strings.RemoveAt(3);
+            richTextBox1.Text += "刪除此List之第3項";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (strings.Count < 5)
+            {
+                richTextBox1.Text += "count not enough, abort\n";
+                return;
+            }
+            strings.Insert(3, "xxxxxxxxxxxxxxxx");
+            richTextBox1.Text += "添加一項在第3項";
         }
     }
 }

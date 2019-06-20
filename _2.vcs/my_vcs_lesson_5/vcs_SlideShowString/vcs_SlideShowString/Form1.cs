@@ -27,7 +27,9 @@ namespace vcs_SlideShowString
 
         string filepath = "C:\\______test_vcs\\poetry.txt";
 
-        List<String> strings = new List<String>();
+        List<String> all_strings = new List<String>();
+        List<String> current_strings = new List<String>();  //new List<string>物件
+
         int strings_count = 0;
         int lyrics_count = 0;
 
@@ -113,11 +115,10 @@ namespace vcs_SlideShowString
                         //line = line.Remove(0, 1);
                         lyrics_count++;
                     }
-
                     //richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
-                    strings.Add(line);
+                    all_strings.Add(line);
                 }
-                strings_count = strings.Count;
+                strings_count = all_strings.Count;
                 sr.Close();
             }
 
@@ -129,8 +130,6 @@ namespace vcs_SlideShowString
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            lyrics_index.Text = "";
-
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             richTextBox1.Text += "目前解析度  " + screenWidth.ToString() + " X " + screenHeight.ToString() + "\n";
@@ -194,10 +193,13 @@ namespace vcs_SlideShowString
             String show_string2 = String.Empty;
 
 
-            lyrics_index.Text = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
+            string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
+            g.DrawString(show_play_info, f, sb, new PointF(40, pictureBox1.Height - 50));
 
+            richTextBox1.Text += "現在要播放 第 " + show_lyrics_index.ToString() + " 首" + "\t";
             if (flag_playing == 0)
             {
+                richTextBox1.Text += "從頭播起\n";
                 //richTextBox1.Text += "flag_get_lyrics_index = " + flag_get_lyrics_index.ToString() + "\n";
                 //richTextBox1.Text += "show_lyrics_index = " + show_lyrics_index.ToString() + "\n";
                 //richTextBox1.Text += "strings_count = " + strings_count.ToString() + "\n";
@@ -207,25 +209,25 @@ namespace vcs_SlideShowString
                 for (i = 0; i < strings_count; i++)
                 {
                     //richTextBox1.Text += "i = " + i.ToString() + " first = " + strings[i][0] + "\n";
-                    if (strings[i][0] == '@')   //author
+                    if (all_strings[i][0] == '@')   //author
                     {
                         if (flag_get_text_data == 1)
                         {
                             flag_get_text_data = 0;
                             break;
                         }
-                        str_author = strings[i].Remove(0, 1);
+                        str_author = all_strings[i].Remove(0, 1);
                     }
-                    else if (strings[i][0] == '#')  //title
+                    else if (all_strings[i][0] == '#')  //title
                     {
                         if (flag_get_text_data == 1)
                         {
                             flag_get_text_data = 0;
                             break;
                         }
-                        str_title = strings[i].Remove(0, 1);
+                        str_title = all_strings[i].Remove(0, 1);
                     }
-                    else if (strings[i][0] == '&')  //text
+                    else if (all_strings[i][0] == '&')  //text
                     {
                         if (flag_get_lyrics_index == show_lyrics_index)
                         {
@@ -243,6 +245,7 @@ namespace vcs_SlideShowString
                             string9 = String.Empty;
                             string10 = String.Empty;
                             string11 = String.Empty;
+                            current_strings.Clear();
                         }
                         else
                         {
@@ -265,29 +268,31 @@ namespace vcs_SlideShowString
                         richTextBox1.Text += "get data cnt = " + cnt.ToString() + "\n";
                         if (cnt == 1)
                         {
-                            string1 = strings[i].Remove(0, 1);
+                            all_strings[i] = all_strings[i].Remove(0, 1);
+                            string1 = all_strings[i];
                         }
                         else if (cnt == 2)
-                            string2 = strings[i];
+                            string2 = all_strings[i];
                         else if (cnt == 3)
-                            string3 = strings[i];
+                            string3 = all_strings[i];
                         else if (cnt == 4)
-                            string4 = strings[i];
+                            string4 = all_strings[i];
                         else if (cnt == 5)
-                            string5 = strings[i];
+                            string5 = all_strings[i];
                         else if (cnt == 6)
-                            string6 = strings[i];
+                            string6 = all_strings[i];
                         else if (cnt == 7)
-                            string7 = strings[i];
+                            string7 = all_strings[i];
                         else if (cnt == 8)
-                            string8 = strings[i];
+                            string8 = all_strings[i];
                         else if (cnt == 9)
-                            string9 = strings[i];
+                            string9 = all_strings[i];
                         else if (cnt == 10)
-                            string10 = strings[i];
+                            string10 = all_strings[i];
                         else if (cnt == 11)
-                            string11 = strings[i];
+                            string11 = all_strings[i];
                         lines_in_this_lyrics = cnt;
+                        current_strings.Add(all_strings[i]);
                     }
                 }
 
@@ -307,6 +312,7 @@ namespace vcs_SlideShowString
                 {
                     string0 = "【        】";
                 }
+                current_strings.Insert(0, string0);
 
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, author : " + str_author + " , title : " + str_title + "\n";
@@ -326,6 +332,7 @@ namespace vcs_SlideShowString
             }
             else
             {
+                richTextBox1.Text += "接著播\n";
                 //接著之前的資料
                 flag_playing_step++;
                 if(flag_playing_step == 1)
@@ -511,12 +518,12 @@ namespace vcs_SlideShowString
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "共有 " + strings.Count.ToString() + " 個字串\n";
+            richTextBox1.Text += "共有 " + all_strings.Count.ToString() + " 個字串\n";
 
 
-            for (int i = 0; i < strings.Count; i++)
+            for (int i = 0; i < all_strings.Count; i++)
             {
-                richTextBox1.Text += strings[i] + "\n";
+                richTextBox1.Text += all_strings[i] + "\n";
             }
 
         }
@@ -534,6 +541,14 @@ namespace vcs_SlideShowString
         private void button4_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < current_strings.Count; i++)
+            {
+                richTextBox1.Text += current_strings[i] + "\n";
+            }
         }
     }
 }

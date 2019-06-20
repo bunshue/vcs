@@ -40,9 +40,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 363);
+            this.ClientSize = new System.Drawing.Size(704, 441);
             this.Name = "Frm_Start";
-            this.Text = "Frm_Start";
+            this.Text = "InsightEyes EGD System";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Frm_Start_FormClosed);
             this.Load += new System.EventHandler(this.Frm_Start_Load);
             this.ResumeLayout(false);

@@ -538,6 +538,7 @@ namespace imsLink
                         {
                             if (receive_buffer[0] == 0xA1)
                             {
+                                //richTextBox1.Text += "red 111 here\n";
                                 groupBox10.BackColor = Color.Red;
                                 //timer4.Enabled = false;
                                 flag_save_data = 1;
@@ -624,7 +625,6 @@ namespace imsLink
                                         tb_result.Text = "FAIL";
                                         tb_result.ForeColor = Color.Black;
                                         tb_result.BackColor = Color.Red;
-                                        groupBox10.BackColor = Color.Pink;
                                         groupBox10.BackColor = Color.Red;
                                         timer4.Enabled = false;
                                     }
@@ -635,7 +635,7 @@ namespace imsLink
                                     stopwatch.Stop();
                                     richTextBox1.Text += "燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
 
-                                    if (stopwatch.ElapsedMilliseconds > 6000)
+                                    if (stopwatch.ElapsedMilliseconds > 7000)
                                     {
                                         flag_burn_long_cnt++;
                                         lb_mesg2.Text = "耗時太久 " + flag_burn_long_cnt.ToString() + " 次";
@@ -2001,6 +2001,7 @@ namespace imsLink
                 lb_camera_model.Text = "[Model]:";
                 //Send_IMS_Data(0xE1, 0xAB, 0xCD, 0xEF);
 
+                richTextBox1.Text += "\n\n\nread MODEL_PAGE\n";
                 //get camera model
                 page = MODEL_PAGE;
                 Get_IMS_Data(1, page, 0xAA);
@@ -2012,6 +2013,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
+                richTextBox1.Text += "\n\nread camera serial\n";
                 //get camera serial
                 Get_IMS_Data(0, 0xAA, 0xAA);
                 cnt = 0;
@@ -2022,6 +2024,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
+                richTextBox1.Text += "\n\nread DATE_PAGE0\n";
                 //get camera date_page0 product time
                 page = DATE_PAGE0;
                 Get_IMS_Data(1, page, 0xAA);
@@ -2033,6 +2036,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
+                richTextBox1.Text += "\n\nread DATE_PAGE1\n";
                 page = DATE_PAGE1;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
@@ -2043,6 +2047,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
+                richTextBox1.Text += "\n\nread DATE_PAGE3\n";
                 page = DATE_PAGE3;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
@@ -2053,6 +2058,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
+                richTextBox1.Text += "\n\nread ERROR_PAGE\n";
                 page = ERROR_PAGE;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
@@ -2063,6 +2069,7 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
 
+                richTextBox1.Text += "\n\nread ERROR_DATE\n";
                 page = ERROR_DATE;
                 Get_IMS_Data(1, page, 0xAA);
                 cnt = 0;
@@ -2072,6 +2079,7 @@ namespace imsLink
                     delay(100);
                 }
                 flag_wait_receive_data = 0;
+                richTextBox1.Text += "\n\n";
             }
             else
             {
@@ -2082,6 +2090,15 @@ namespace imsLink
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (tabControl1.SelectedIndex == 1)
+            {
+                scanner_timer.Enabled = true;
+            }
+            else
+            {
+                scanner_timer.Enabled = false;
+            }
+
             if (tabControl1.SelectedIndex == 3)
             {
                 /*
@@ -2408,9 +2425,14 @@ namespace imsLink
                         //richTextBox1.Text += "i = " + i.ToString() + "\t" + sn_data_send[i].ToString("X2") + "\n";
                     }
 
+                    //richTextBox1.Text += "\n[insLink] issue write command and data\n\n";
+
+                    delay(100);
                     Send_IMS_Data(0xC0, 0x12, 0x34, 0x56);   //camera serial write
 
                     serialPort1.Write(sn_data_send2, 0, 16);
+                    delay(100);
+
                     flag_verify_serial_data = 1;
 
                     //richTextBox1.Text += "序號 : " + tb_sn2.Text + ",       len = " + tb_sn2.Text.Length.ToString() + ",   寫入資料中.......\n";
@@ -2428,7 +2450,7 @@ namespace imsLink
             else if ((flag_write_serial_to_camera == 1) && (flag_verify_serial_data == 1))
             {
                 cnt2++;
-                if (cnt2 == 6)
+                if (cnt2 == 10)
                 {
                     label1.Text += "讀" + cnt2.ToString();
 
@@ -2441,7 +2463,7 @@ namespace imsLink
                     //flag_verify_serial_data = 1;
                     Get_IMS_Data(0, 0xAA, 0xAA);
                 }
-                else if (cnt2 == 9)
+                else if (cnt2 == 13)
                 {
                     cnt2 = 0;
                     label1.Text += "y" + cnt2.ToString();
@@ -2479,6 +2501,9 @@ namespace imsLink
             tb_info_d2.BackColor = Color.White;
             tb_info_e2.BackColor = Color.White;
             tb_info_f2.BackColor = Color.White;
+            panel3.BackgroundImage = null;
+            panel4.BackgroundImage = null;
+            panel5.BackgroundImage = null;
 
         }
 
@@ -2561,6 +2586,11 @@ namespace imsLink
 
         private void timer4_Tick(object sender, EventArgs e)
         {
+            if (flag_verify_serial_data == 1)
+            {
+                return;
+            }
+
             label1.Text = "ST1 ";
             richTextBox1.Text += "ST1: " + DateTime.Now.ToString() + "\n";
             if (flag_need_confirm == 1)
@@ -3185,6 +3215,7 @@ namespace imsLink
             delay(100);
             serialPort1.Write(data, 0, 8);
             delay(100);
+            button35.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -3215,6 +3246,11 @@ namespace imsLink
             delay(100);
             */
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            button72_Click(sender, e);
         }
     }
 }
