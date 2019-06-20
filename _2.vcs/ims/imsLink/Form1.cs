@@ -77,6 +77,8 @@ namespace imsLink
         byte[] main_board_model_data_send = new byte[16];
         int total_burn_cnt = 0;
         int flag_timer4_status = 0;
+        string camera_serial_old = String.Empty;
+        string camera_serial_enw = String.Empty;
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -2297,6 +2299,10 @@ namespace imsLink
                         if (valid_data_len != int.Parse(tb_fix_length.Text))
                         {
                             richTextBox1.Text += "序號長度錯誤\n";
+
+                            //richTextBox1.Text += "valid_data_len = " + valid_data_len.ToString() + "\n";
+                            //richTextBox1.Text += "parse = " + int.Parse(tb_fix_length.Text).ToString() + "\n";
+
                             tb_sn2.Text = "";
 
                             tb_result.Text = "序號長度錯誤";
@@ -2323,6 +2329,25 @@ namespace imsLink
                     //開始計時
                     stopwatch.Reset();
                     stopwatch.Start();
+
+                    /*
+                    //製造任意序號資料
+                    //[C#] 產生一組亂數
+                    //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+                    //var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    var chars = "ABCDEF0123456789";
+                    var stringChars = new char[32];
+                    var random = new Random();
+                    for (i = 0; i < stringChars.Length; i++)
+                    {
+                        stringChars[i] = chars[random.Next(chars.Length)];
+                    }
+                    camera_serial_old = new String(stringChars);
+                    richTextBox1.Text += "產生8位數亂數：" + camera_serial_old + "\n";
+
+                    tb_sn2.Text = camera_serial_old;
+                    tb_sn3.Text = camera_serial_old;
+                    */
 
                     lb_sn1.Text = "序號 : " + tb_sn2.Text + "       len = " + tb_sn2.Text.Length.ToString() + ",   寫入資料中.......";
 
@@ -2688,6 +2713,7 @@ namespace imsLink
                 timer4.Enabled = true;
                 button14.Text = "Test SP";
                 button14.BackColor = Color.Red;
+                richTextBox1.Clear();
                 richTextBox1.Text += "自動測試開始\n";
             }
             else
@@ -2696,7 +2722,7 @@ namespace imsLink
                 timer4.Enabled = false;
                 button14.Text = "Test ST";
                 button14.BackColor = Color.Green;
-                richTextBox1.Text += "自動測試結束\n";
+                richTextBox1.Text += "\n自動測試結束\n";
             }
         }
 

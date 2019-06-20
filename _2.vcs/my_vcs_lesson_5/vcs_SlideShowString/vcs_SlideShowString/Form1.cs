@@ -45,21 +45,15 @@ namespace vcs_SlideShowString
         string str_text = String.Empty;
 
         string string0 = String.Empty;
-        string string1 = String.Empty;
-        string string2 = String.Empty;
-        string string3 = String.Empty;
-        string string4 = String.Empty;
-        string string5 = String.Empty;
-        string string6 = String.Empty;
-        string string7 = String.Empty;
-        string string8 = String.Empty;
-        string string9 = String.Empty;
-        string string10 = String.Empty;
-        string string11 = String.Empty;
 
         Graphics g;
         SolidBrush sb;
         Font f;
+        int show_head_size = 0;
+        int show_waist_size = 0;
+        int show_max_width_size = 0;
+        int show_max_height_size = 0;
+
 
         public Form1()
         {
@@ -178,10 +172,6 @@ namespace vcs_SlideShowString
             }
 
             int i;
-            int head;
-            int waist;
-            int max_width = 0;
-            int max_height = 0;
 
             int flag_get_lyrics_index = 0;
             int flag_get_text_data = 0;
@@ -199,13 +189,12 @@ namespace vcs_SlideShowString
             richTextBox1.Text += "現在要播放 第 " + show_lyrics_index.ToString() + " 首" + "\t";
             if (flag_playing == 0)
             {
-                richTextBox1.Text += "從頭播起\n";
                 //richTextBox1.Text += "flag_get_lyrics_index = " + flag_get_lyrics_index.ToString() + "\n";
                 //richTextBox1.Text += "show_lyrics_index = " + show_lyrics_index.ToString() + "\n";
                 //richTextBox1.Text += "strings_count = " + strings_count.ToString() + "\n";
 
-
-                //從頭播起
+                //從頭播起 要更新 current_strings 資料
+                richTextBox1.Text += "從頭播起 從大List裡找出第 " + show_lyrics_index.ToString() + "首的內容\n";
                 for (i = 0; i < strings_count; i++)
                 {
                     //richTextBox1.Text += "i = " + i.ToString() + " first = " + strings[i][0] + "\n";
@@ -229,23 +218,15 @@ namespace vcs_SlideShowString
                     }
                     else if (all_strings[i][0] == '&')  //text
                     {
+                        richTextBox1.Text += "got & now = " + all_strings[i] + " A = " + flag_get_lyrics_index.ToString() + " B = " + show_lyrics_index.ToString() + "\n";
+
                         if (flag_get_lyrics_index == show_lyrics_index)
                         {
                             richTextBox1.Text += "let flag_get_text_data = 1\n";
                             flag_get_text_data = 1;
                             cnt = 0;
-                            string1 = String.Empty;
-                            string2 = String.Empty;
-                            string3 = String.Empty;
-                            string4 = String.Empty;
-                            string5 = String.Empty;
-                            string6 = String.Empty;
-                            string7 = String.Empty;
-                            string8 = String.Empty;
-                            string9 = String.Empty;
-                            string10 = String.Empty;
-                            string11 = String.Empty;
                             current_strings.Clear();
+                            richTextBox1.Text += "開始抓內容, now = " + all_strings[i] + "\n";
                         }
                         else
                         {
@@ -266,31 +247,6 @@ namespace vcs_SlideShowString
                     {
                         cnt++;
                         richTextBox1.Text += "get data cnt = " + cnt.ToString() + "\n";
-                        if (cnt == 1)
-                        {
-                            all_strings[i] = all_strings[i].Remove(0, 1);
-                            string1 = all_strings[i];
-                        }
-                        else if (cnt == 2)
-                            string2 = all_strings[i];
-                        else if (cnt == 3)
-                            string3 = all_strings[i];
-                        else if (cnt == 4)
-                            string4 = all_strings[i];
-                        else if (cnt == 5)
-                            string5 = all_strings[i];
-                        else if (cnt == 6)
-                            string6 = all_strings[i];
-                        else if (cnt == 7)
-                            string7 = all_strings[i];
-                        else if (cnt == 8)
-                            string8 = all_strings[i];
-                        else if (cnt == 9)
-                            string9 = all_strings[i];
-                        else if (cnt == 10)
-                            string10 = all_strings[i];
-                        else if (cnt == 11)
-                            string11 = all_strings[i];
                         lines_in_this_lyrics = cnt;
                         current_strings.Add(all_strings[i]);
                     }
@@ -317,9 +273,9 @@ namespace vcs_SlideShowString
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
                 richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, author : " + str_author + " , title : " + str_title + "\n";
 
-                show_string0 = string0;
-                show_string1 = string1;
-                show_string2 = string2;
+                show_string0 = current_strings[0];
+                show_string1 = current_strings[1].Remove(0, 1); //remove '&'
+                show_string2 = current_strings[2];
 
                 if (lines_in_this_lyrics > 2)
                     flag_playing = 1;
@@ -329,6 +285,55 @@ namespace vcs_SlideShowString
                     flag_playing_step = 0;
                     show_lyrics_index++;
                 }
+                //更新全首的畫圖邊界
+                /*
+                int show_head_size;
+                int show_waist_size;
+                int show_max_width_size = 0;
+                int show_max_height_size = 0;
+                */
+
+                lines_in_this_lyrics = current_strings.Count;
+                richTextBox1.Text += "current_strings 內容\tcount = " + current_strings.Count.ToString() + " (lines)\n";
+                for (i = 0; i < current_strings.Count; i++)
+                {
+                    richTextBox1.Text += current_strings[i] + "\n";
+                }
+
+                Size sss;
+                show_head_size = 0;
+                show_waist_size = 0;
+                show_max_width_size = 0;
+                show_max_height_size = 0;
+
+                for (i = 0; i < current_strings.Count; i++)
+                {
+                    sss = g.MeasureString(current_strings[i], f).ToSize();
+                    richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
+                    richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
+                    richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
+                    //g.DrawRectangle(p, 150, 50, sss.Height - 1, sss.Width);
+
+                    if (show_max_width_size < sss.Width)
+                        show_max_width_size = sss.Width;
+                    if (show_max_height_size < sss.Height)
+                        show_max_height_size = sss.Height;
+                }
+
+                if (show_max_width_size < pictureBox1.Height)
+                    show_head_size = (pictureBox1.Height - show_max_width_size) / 2;
+                else
+                    show_head_size = 0;
+
+                if (show_max_height_size * 3 < pictureBox1.Width)
+                    show_waist_size = (pictureBox1.Width - show_max_height_size * 3) / 4;
+                else
+                    show_waist_size = 0;
+
+                richTextBox1.Text += "show_head_size = " + show_head_size.ToString() + "\t";
+                richTextBox1.Text += "show_waist_size = " + show_waist_size.ToString() + "\n";
+                richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\t";
+                richTextBox1.Text += "show_max_height_size = " + show_max_height_size.ToString() + "\n";
             }
             else
             {
@@ -337,30 +342,30 @@ namespace vcs_SlideShowString
                 flag_playing_step++;
                 if(flag_playing_step == 1)
                 {
-                    if(lines_in_this_lyrics >= 3)
-                        show_string0 = string3;
-                    if(lines_in_this_lyrics >= 4)
-                        show_string1 = string4;
-                    if(lines_in_this_lyrics >= 5)
-                        show_string2 = string5;
+                    if(lines_in_this_lyrics > 3)
+                        show_string0 = current_strings[3];
+                    if(lines_in_this_lyrics > 4)
+                        show_string1 = current_strings[4];
+                    if (lines_in_this_lyrics > 5)
+                        show_string2 = current_strings[5];
                 }
                 else if(flag_playing_step == 2)
                 {
-                    if(lines_in_this_lyrics >= 6)
-                        show_string0 = string6;
-                    if(lines_in_this_lyrics >= 7)
-                        show_string1 = string7;
-                    if(lines_in_this_lyrics >= 8)
-                        show_string2 = string8;
+                    if(lines_in_this_lyrics > 6)
+                        show_string0 = current_strings[6];
+                    if(lines_in_this_lyrics > 7)
+                        show_string1 = current_strings[7];
+                    if (lines_in_this_lyrics > 8)
+                        show_string2 = current_strings[8];
                 }
                 else if(flag_playing_step == 3)
                 {
-                    if(lines_in_this_lyrics >= 9)
-                        show_string0 = string9;
-                    if(lines_in_this_lyrics >= 10)
-                        show_string1 = string10;
-                    if(lines_in_this_lyrics >= 11)
-                        show_string2 = string11;
+                    if(lines_in_this_lyrics > 9)
+                        show_string0 = current_strings[9];
+                    if(lines_in_this_lyrics > 10)
+                        show_string1 = current_strings[10];
+                    if(lines_in_this_lyrics > 11)
+                        show_string2 = current_strings[11];
                 }
 
                 if (lines_in_this_lyrics <= (flag_playing_step * 3 + 2))
@@ -378,74 +383,20 @@ namespace vcs_SlideShowString
             }
 
 
-
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
-
-            richTextBox1.Text += "pictureBox W = " + pictureBox1.Width.ToString() + "\t";
-            richTextBox1.Text += "H = " + pictureBox1.Height.ToString() + "\n";
+            //richTextBox1.Text += "pictureBox W = " + pictureBox1.Width.ToString() + "\t";
+            //richTextBox1.Text += "H = " + pictureBox1.Height.ToString() + "\n";
 
             Pen p;
             p = new Pen(Color.Red, 3);
 
             g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height);
 
-            Size sss;
-
-            sss = g.MeasureString(show_string0, f).ToSize();
-            richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
-            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
-            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
-            //g.DrawRectangle(p, 150, 50, sss.Height - 1, sss.Width);
-
-            if (max_width < sss.Width)
-                max_width = sss.Width;
-            if (max_height < sss.Height)
-                max_height = sss.Height;
-
-            sss = g.MeasureString(show_string1, f).ToSize();
-            richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
-            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
-            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
-            //g.DrawRectangle(p, 100, 50, sss.Height - 1, sss.Width);
-
-            if (max_width < sss.Width)
-                max_width = sss.Width;
-            if (max_height < sss.Height)
-                max_height = sss.Height;
-
-            sss = g.MeasureString(show_string2, f).ToSize();
-            richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
-            richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
-            richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
-            //g.DrawRectangle(p, 50, 50, sss.Height - 1, sss.Width);
-
-            if (max_width < sss.Width)
-                max_width = sss.Width;
-            if (max_height < sss.Height)
-                max_height = sss.Height;
-
-            richTextBox1.Text += "max_width = " + max_width.ToString() + "\t";
-            richTextBox1.Text += "max_height = " + max_height.ToString() + "\n";
-
-            if (max_width < pictureBox1.Height)
-                head = (pictureBox1.Height - max_width) / 2;
-            else
-                head = 0;
-
-            if (max_height * 3 < pictureBox1.Width)
-                waist = (pictureBox1.Width - max_height * 3) / 4;
-            else
-                waist = 0;
-
-            richTextBox1.Text += "head = " + head.ToString() + "\t";
-            richTextBox1.Text += "waist = " + waist.ToString() + "\n";
-
-            g.DrawString(show_string0, f, new SolidBrush(Color.Black), 0 + waist * 3 + max_height * 2, head, drawFormat);
-            g.DrawString(show_string1, f, new SolidBrush(Color.Black), 0 + waist * 2 + max_height, head, drawFormat);
-            g.DrawString(show_string2, f, new SolidBrush(Color.Black), 0 + waist, head, drawFormat);
-
+            g.DrawString(show_string0, f, new SolidBrush(Color.Black), 0 + show_waist_size * 3 + show_max_height_size * 2, show_head_size, drawFormat);
+            g.DrawString(show_string1, f, new SolidBrush(Color.Black), 0 + show_waist_size * 2 + show_max_height_size, show_head_size, drawFormat);
+            g.DrawString(show_string2, f, new SolidBrush(Color.Black), 0 + show_waist_size, show_head_size, drawFormat);
 
             pictureBox1.Image = bmp;
         }

@@ -651,7 +651,6 @@
             // 
             this.Serial.BackColor = System.Drawing.SystemColors.Control;
             this.Serial.Controls.Add(this.button14);
-            this.Serial.Controls.Add(this.button13);
             this.Serial.Controls.Add(this.lb_mesg3);
             this.Serial.Controls.Add(this.lb_mesg2);
             this.Serial.Controls.Add(this.lb_mesg);
@@ -678,12 +677,15 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(585, 485);
+            this.button13.BackColor = System.Drawing.Color.Black;
+            this.button13.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.ForeColor = System.Drawing.Color.Gold;
+            this.button13.Location = new System.Drawing.Point(513, 5);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(70, 35);
+            this.button13.Size = new System.Drawing.Size(60, 60);
             this.button13.TabIndex = 65;
-            this.button13.Text = "Start";
-            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Text = "START";
+            this.button13.UseVisualStyleBackColor = false;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // lb_mesg3
@@ -2245,6 +2247,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1461, 686);
             this.Controls.Add(this.button35);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.button32);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button20);
