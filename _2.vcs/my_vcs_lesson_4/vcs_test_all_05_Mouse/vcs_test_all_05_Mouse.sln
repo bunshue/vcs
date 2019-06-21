@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_mouse_slide", "test_mouse_slide\test_mouse_slide.csproj", "{EBE1C2FE-E35C-471A-ADA9-EAA605103A58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_05_Mouse", "vcs_test_all_05_Mouse\vcs_test_all_05_Mouse.csproj", "{EBE1C2FE-E35C-471A-ADA9-EAA605103A58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("my_vcs_20_鍵盤滑鼠事件")]
+[assembly: AssemblyTitle("vcs_test_all_05_Mouse")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("my_vcs_20_鍵盤滑鼠事件")]
-[assembly: AssemblyCopyright("Copyright © Home 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_test_all_05_Mouse")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("281ece6d-d3ca-478f-8fda-cff7b8fb636e")]
+[assembly: Guid("f2f4436e-5930-405a-931f-3d90748a42f8")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

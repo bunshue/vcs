@@ -67,8 +67,6 @@
             this.button128 = new System.Windows.Forms.Button();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.Serial = new System.Windows.Forms.TabPage();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
             this.lb_mesg3 = new System.Windows.Forms.Label();
             this.lb_mesg2 = new System.Windows.Forms.Label();
             this.lb_mesg = new System.Windows.Forms.Label();
@@ -93,6 +91,7 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Serial_Auto = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -125,13 +124,13 @@
             this.button5 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lb_write_mb_model = new System.Windows.Forms.Label();
+            this.lb_main_board_model = new System.Windows.Forms.Label();
             this.button39 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.tb_main_board_model = new System.Windows.Forms.TextBox();
             this.button30 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lb_write_mb_model = new System.Windows.Forms.Label();
-            this.lb_main_board_model = new System.Windows.Forms.Label();
             this.lb_rtc = new System.Windows.Forms.Label();
             this.button21 = new System.Windows.Forms.Button();
             this.lb_time2 = new System.Windows.Forms.Label();
@@ -192,6 +191,7 @@
             this.label59 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.button13 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -214,6 +214,7 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -345,6 +346,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.Serial);
+            this.tabControl1.Controls.Add(this.Serial_Auto);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.USB);
@@ -664,30 +666,6 @@
             this.Serial.TabIndex = 13;
             this.Serial.Text = "Serial";
             // 
-            // button14
-            // 
-            this.button14.BackColor = System.Drawing.Color.Green;
-            this.button14.Location = new System.Drawing.Point(585, 535);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(70, 35);
-            this.button14.TabIndex = 68;
-            this.button14.Text = "Test ST";
-            this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button13
-            // 
-            this.button13.BackColor = System.Drawing.Color.Black;
-            this.button13.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.ForeColor = System.Drawing.Color.Gold;
-            this.button13.Location = new System.Drawing.Point(513, 5);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(60, 60);
-            this.button13.TabIndex = 65;
-            this.button13.Text = "START";
-            this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // lb_mesg3
             // 
             this.lb_mesg3.AutoSize = true;
@@ -945,6 +923,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 77);
             this.panel1.TabIndex = 64;
+            // 
+            // Serial_Auto
+            // 
+            this.Serial_Auto.Location = new System.Drawing.Point(4, 26);
+            this.Serial_Auto.Name = "Serial_Auto";
+            this.Serial_Auto.Size = new System.Drawing.Size(940, 586);
+            this.Serial_Auto.TabIndex = 24;
+            this.Serial_Auto.Text = "Auto";
+            this.Serial_Auto.UseVisualStyleBackColor = true;
             // 
             // tabPage5
             // 
@@ -1298,6 +1285,26 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "主機型號";
             // 
+            // lb_write_mb_model
+            // 
+            this.lb_write_mb_model.AutoSize = true;
+            this.lb_write_mb_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_write_mb_model.Location = new System.Drawing.Point(506, 97);
+            this.lb_write_mb_model.Name = "lb_write_mb_model";
+            this.lb_write_mb_model.Size = new System.Drawing.Size(145, 23);
+            this.lb_write_mb_model.TabIndex = 86;
+            this.lb_write_mb_model.Text = "lb_write_mb_model";
+            // 
+            // lb_main_board_model
+            // 
+            this.lb_main_board_model.AutoSize = true;
+            this.lb_main_board_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_board_model.Location = new System.Drawing.Point(29, 97);
+            this.lb_main_board_model.Name = "lb_main_board_model";
+            this.lb_main_board_model.Size = new System.Drawing.Size(82, 24);
+            this.lb_main_board_model.TabIndex = 82;
+            this.lb_main_board_model.Text = "label2";
+            // 
             // button39
             // 
             this.button39.Location = new System.Drawing.Point(751, 113);
@@ -1350,26 +1357,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "主機資訊";
             // 
-            // lb_write_mb_model
-            // 
-            this.lb_write_mb_model.AutoSize = true;
-            this.lb_write_mb_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_mb_model.Location = new System.Drawing.Point(506, 97);
-            this.lb_write_mb_model.Name = "lb_write_mb_model";
-            this.lb_write_mb_model.Size = new System.Drawing.Size(145, 23);
-            this.lb_write_mb_model.TabIndex = 86;
-            this.lb_write_mb_model.Text = "lb_write_mb_model";
-            // 
-            // lb_main_board_model
-            // 
-            this.lb_main_board_model.AutoSize = true;
-            this.lb_main_board_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_board_model.Location = new System.Drawing.Point(29, 97);
-            this.lb_main_board_model.Name = "lb_main_board_model";
-            this.lb_main_board_model.Size = new System.Drawing.Size(82, 24);
-            this.lb_main_board_model.TabIndex = 82;
-            this.lb_main_board_model.Text = "label2";
-            // 
             // lb_rtc
             // 
             this.lb_rtc.AutoSize = true;
@@ -1406,7 +1393,7 @@
             this.button122.Name = "button122";
             this.button122.Size = new System.Drawing.Size(119, 46);
             this.button122.TabIndex = 5;
-            this.button122.Text = "設定系統時間";
+            this.button122.Text = "取得主機時間";
             this.button122.UseVisualStyleBackColor = true;
             this.button122.Click += new System.EventHandler(this.button122_Click);
             // 
@@ -2050,6 +2037,19 @@
             this.pictureBox8.TabIndex = 7;
             this.pictureBox8.TabStop = false;
             // 
+            // button13
+            // 
+            this.button13.BackColor = System.Drawing.Color.Black;
+            this.button13.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.ForeColor = System.Drawing.Color.Gold;
+            this.button13.Location = new System.Drawing.Point(572, 5);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(60, 60);
+            this.button13.TabIndex = 65;
+            this.button13.Text = "START";
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2239,6 +2239,17 @@
             this.button33.TabIndex = 28;
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.Color.Green;
+            this.button14.Location = new System.Drawing.Point(585, 535);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(70, 35);
+            this.button14.TabIndex = 68;
+            this.button14.Text = "Test ST";
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // Form1
             // 
@@ -2457,7 +2468,6 @@
         private System.Windows.Forms.Label lb_mesg2;
         private System.Windows.Forms.Label lb_mesg3;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
@@ -2501,6 +2511,8 @@
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.TextBox tb_main_board_model;
         private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.TabPage Serial_Auto;
+        private System.Windows.Forms.Button button14;
     }
 }
 

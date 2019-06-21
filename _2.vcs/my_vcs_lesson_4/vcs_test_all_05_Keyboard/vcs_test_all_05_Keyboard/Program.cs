@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_mouse_slide
+namespace vcs_test_all_05_Keyboard
 {
     static class Program
     {

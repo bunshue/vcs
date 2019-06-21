@@ -18,6 +18,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
+        bool flag_release_mode = false;
         private const bool SHOW_COMPORT_LOG = false;
         private const int UART_BUF_LENGTH = 5;
         private const int CAMERA_OK = 0;	//dongle + camera
@@ -122,7 +123,6 @@ namespace imsLink
             InitializeComponent();
             Reset_imsLink_Setting();
 
-            tabControl1.SelectedIndex = 1;              //接跳到第1頁。
             textBox1.Text = trackBar6.Value.ToString();
 
             if (comboBox1.Text.Length == 0)
@@ -165,8 +165,17 @@ namespace imsLink
 
         private void Reset_imsLink_Setting()
         {
+            if (flag_release_mode == true)
+            {
+                this.tabPage1.Parent = null;    //camera
+                this.Serial_Auto.Parent = null; //serial write auto
+                this.tabPage6.Parent = null;    //Test
+                this.tabPage4.Parent = null;    //Layer
+                tabControl1.SelectedIndex = 1;      //程式啟動時，直接跳到info那頁。
+            }
+            else
+                tabControl1.SelectedIndex = 3;      //程式啟動時，直接跳到info那頁。
 
-            tabControl1.SelectedIndex = 1;      //程式啟動時，直接跳到某一頁。
 
             this.Width = 960;
             show_comport_log = SHOW_COMPORT_LOG;
@@ -186,6 +195,7 @@ namespace imsLink
                 button74.ForeColor = Color.Green;
             }
             richTextBox1.Font = new Font("Courier New", 10);
+            button33.BackgroundImage = imsLink.Properties.Resources.open_log;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1155,12 +1165,16 @@ namespace imsLink
             Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
             frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
             frm.ShowDialog();   //顯示Form2視窗
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = DateTime.Now.ToString();
+
+            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            //richTextBox1.Text += weekday + "\n";
+            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
         }
 
         public double hex2dec(string hex_data)
@@ -1515,21 +1529,7 @@ namespace imsLink
         {
             lb_rtc.Text = "";
             lb_time2.Text = "";
-            richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString() + "\n");
-            System.DateTime dt = System.DateTime.Now;
-            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
-            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
-            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
-            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
-            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
-            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
-            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
-            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
 
-            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += weekday + "\n";
-            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
             Get_IMS_Data(3, 0x11, 0xAA);    //read RTC data
             int cnt = 0;
             while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -2880,6 +2880,7 @@ namespace imsLink
             lb_rtc.Text = "";
             button21.BackColor = Color.Red;
             richTextBox1.Text += "更新系統時間\n";
+
             richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString() + "\n";
 
             System.DateTime dt = System.DateTime.Now;
@@ -2892,11 +2893,6 @@ namespace imsLink
             richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
             richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
             //richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += weekday + "\n";
-            lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
 
             Send_IMS_Data(0xB0, 0x12, 0x34, 0x56);      //RTC write
 

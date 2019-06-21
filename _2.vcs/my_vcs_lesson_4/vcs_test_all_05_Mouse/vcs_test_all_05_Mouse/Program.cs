@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_20_鍵盤滑鼠事件
+namespace vcs_test_all_05_Mouse
 {
     static class Program
     {

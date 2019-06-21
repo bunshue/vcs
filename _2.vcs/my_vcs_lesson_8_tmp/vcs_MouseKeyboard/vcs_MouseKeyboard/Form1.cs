@@ -76,124 +76,14 @@ namespace vcs_MouseKeyboard
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            label3.Text = "KeyDown";
-            switch (e.KeyCode)   //根據e.KeyCode分別執行
-            {
-                case Keys.A:
-                    if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                    {
-                        label7.Text = "Ctrl + A";
-                    }
-                    else if ((Control.ModifierKeys & Keys.Alt) == Keys.Alt)
-                    {
-                        label7.Text = "Alt + A";
-                    }
-                    else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-                    {
-                        label7.Text = "Shift + A";
-                    }
-                    else
-                    {
-                        label7.Text = "A";
-                    }
-                    break;
-                case Keys.Up:
-                    if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                    {
-                        label7.Text = "Ctrl + 上";
-                    }
-                    else
-                    {
-                        label7.Text = "上";
-                    }
-                    this.Refresh();
-                    break;
-                case Keys.Down:
-                    if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                    {
-                        label7.Text = "Ctrl + 下";
-                    }
-                    else
-                    {
-                        label7.Text = "下";
-                    }
-                    this.Refresh();
-                    break;
-                case Keys.Left:
-                    if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                    {
-                        label7.Text = "Ctrl + 左";
-                    }
-                    else
-                    {
-                        label7.Text = "左";
-                    }
-                    break;
-                case Keys.Right:
-                    if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
-                    {
-                        label7.Text = "Ctrl + 右";
-                    }
-                    else
-                    {
-                        label7.Text = "右";
-                    }
-                    break;
-                case Keys.Add:
-                    label7.Text = "+";
-                    break;
-                case Keys.Subtract:
-                    label7.Text = "-";
-                    break;
-                case Keys.PageUp:
-                    label7.Text = "PageUp";
-                    break;
-                case Keys.PageDown:
-                    label7.Text = "PageDown";
-                    break;
-                case Keys.X:
-                    label7.Text = "X";
-                    Application.Exit();
-                    break;
-                default:
-                    //label7.Text = "KeyCode: " + e.KeyCode.ToString();
-                    label7.Text = e.KeyCode.ToString();
-                    break;
-            }
-            if (e.Alt == true)
-            {
-                label8.Text = "Alt + ";
-                //if (e.KeyCode == Keys.D)
-                  //  label7.Text = "Alt + D";
-            }
-            if (e.Control == true)
-            {
-                label8.Text = "Ctrl + ";
-                //if (e.KeyCode == Keys.D)
-                  //  label7.Text = "Ctrl + D";
-            }
-            if (e.Shift == true)
-            {
-                label8.Text = "Shift + ";
-                /*
-                if (e.KeyCode == Keys.D)
-                {
-                    label7.Text = "Shift + D";
-                    e.Handled = true;   //已處理此事件
-                }
-                */
-            }
-
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            label3.Text = "KeyPress";
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            label3.Text = "KeyUp";
         }
 
         private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -203,41 +93,22 @@ namespace vcs_MouseKeyboard
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            label2.Text = "MouseDown\t" + e.X + " : " + e.Y;
 
             flag_mouse_down = 1;
             mouse_down_position_x = e.X;
             mouse_down_position_y = e.Y;
-
-            if (e.Button == MouseButtons.Left)
-                label6.Text = "你按了滑鼠左鍵";
-            else if (e.Button == MouseButtons.Right)
-                label6.Text = "你按了滑鼠右鍵";
-            else if (e.Button == MouseButtons.Middle)
-                label6.Text = "你按了滑鼠中鍵";
-            else if (e.Button == MouseButtons.XButton1)
-                label6.Text = "你按了滑鼠XButton1";
-            else if (e.Button == MouseButtons.XButton2)
-                label6.Text = "你按了滑鼠XButton2";
-            else if (e.Button == MouseButtons.None)
-                label6.Text = "你按了滑鼠None";
-            else
-                label6.Text = "你按了滑鼠其他鍵";
         }
 
         private void Form1_MouseEnter(object sender, EventArgs e)
         {
-            label2.Text = "MouseEnter";
         }
 
         private void Form1_MouseHover(object sender, EventArgs e)
         {
-            label2.Text = "MouseHover";
         }
 
         private void Form1_MouseLeave(object sender, EventArgs e)
         {
-            label2.Text = "MouseLeave";
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)

@@ -24,13 +24,12 @@ namespace my_vcs_20_List
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "共有 " + points.Count.ToString() + " 個點\n";
-            richTextBox1.Text += "共有 " + strings.Count.ToString() + " 個字串\n";
 
-
-            for (int i = 0; i < strings.Count; i++)
+            for (int i = 0; i < points.Count; i++)
             {
-                richTextBox1.Text += strings[i] + "\n";
+                richTextBox1.Text += "(" + points[i].X.ToString() + "," + points[i].Y.ToString() + ") ";
             }
+            richTextBox1.Text += "\n";
 
         }
 
@@ -69,7 +68,6 @@ namespace my_vcs_20_List
         private void button4_Click(object sender, EventArgs e)
         {
             points.Clear();
-            strings.Clear();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -120,6 +118,75 @@ namespace my_vcs_20_List
             }
             strings.Insert(3, "xxxxxxxxxxxxxxxx");
             richTextBox1.Text += "添加一項在第3項";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //二維List for string
+            List<string[]> MyList1 = new List<string[]>();
+            MyList1.Add(new string[] { "AAA", "BBB" });
+            MyList1.Add(new string[] { "CCC", "DDD" });
+            MyList1.Add(new string[] { "CCC", "DDD" });
+            richTextBox1.Text += "Result : " + MyList1[1][1].ToString() + "\n";
+            richTextBox1.Text += "Count : " + MyList1.Count.ToString() + "\n";
+
+
+
+            //二維List for int
+            List<List<int>> MyList2 = new List<List<int>>();
+            List<int> sublist = new List<int>();
+            sublist.Add(0);
+            sublist.Add(0);
+            MyList2.Add(sublist);
+            MyList2.Add(sublist);
+            MyList2.Add(sublist);
+            MyList2.Add(sublist);
+            MyList2.Add(sublist);
+
+            int i;
+            for (i = 0; i < MyList2.Count; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\n";
+                MyList2[i][0] = i;
+                MyList2[i][1] = MyList2.Count - i;
+
+            }
+
+            for (i = 0; i < MyList2.Count; i++)
+            {
+                richTextBox1.Text += "MyList2[" + i.ToString() + "][0] = " + MyList2[i][0].ToString() + " MyList2[" + i.ToString() + "][1] = " + MyList2[i][1].ToString() + "\n";
+
+            }
+
+            List<List<string>> MyList3 = new List<List<string>>();
+            MyList3.Add(new List<string>() { "0,0 : Mike", "0, 1: Jane" });
+            MyList3.Add(new List<string>() { "1,0 : Jack", "1, 1: John" });
+
+            MyList3[0][0] = "0,0: Kyle";
+
+            richTextBox1.Text += "result : " + MyList3[0][0] + "\n"; // 輸出: 0,0: Kyle
+            richTextBox1.Text += "result : " + MyList3[0][1] + "\n"; // 輸出: 0,1: Jane
+            richTextBox1.Text += "result : " + MyList3[1][0] + "\n"; // 輸出: 1,0: Jack
+            richTextBox1.Text += "result : " + MyList3[1][1] + "\n"; // 輸出: 1,1: John
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            strings.Clear();
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "共有 " + strings.Count.ToString() + " 個字串\n";
+
+
+            for (int i = 0; i < strings.Count; i++)
+            {
+                richTextBox1.Text += strings[i] + "\n";
+            }
+
         }
     }
 }

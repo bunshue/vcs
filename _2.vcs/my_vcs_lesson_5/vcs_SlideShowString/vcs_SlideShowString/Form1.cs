@@ -13,7 +13,7 @@ namespace vcs_SlideShowString
 {
     public partial class Form1 : Form
     {
-        bool flag_debug_mode = true;
+        bool flag_release_mode = false;
         //bool flag_need_author = true;
         //bool flag_need_title = true;
 
@@ -25,7 +25,8 @@ namespace vcs_SlideShowString
         int H;
         int i = 0;
 
-        string filepath = "C:\\______test_vcs\\poetry.txt";
+        //string filepath = "C:\\______test_vcs\\poetry.txt";
+        string filepath = "poetry.txt";
 
         List<String> all_strings = new List<String>();
         List<String> current_strings = new List<String>();  //new List<string>物件
@@ -64,11 +65,12 @@ namespace vcs_SlideShowString
             f = new Font("標楷體", 24);
         }
 
-        void loadTextData()
+        bool loadTextData()
         {
             if (System.IO.File.Exists(filepath) == false)
             {
                 richTextBox1.Text += "檔案 " + filepath + " 不存在，離開。\n";
+                return false;
             }
             else
             {
@@ -114,12 +116,12 @@ namespace vcs_SlideShowString
                 }
                 strings_count = all_strings.Count;
                 sr.Close();
-            }
 
-            richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
-            richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
-            show_lyrics_index = 0;
-            return;
+                richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
+                richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
+                show_lyrics_index = 0;
+                return true;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -128,32 +130,78 @@ namespace vcs_SlideShowString
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             richTextBox1.Text += "目前解析度  " + screenWidth.ToString() + " X " + screenHeight.ToString() + "\n";
 
-            /*
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-
-            if (flag_debug_mode == false)
-            {
-                this.Location = new System.Drawing.Point(screenWidth - 250, 200);
-            }
-            */
-
-
             this.FormBorderStyle = FormBorderStyle.None;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 
-            if (flag_debug_mode == false)
+            if (flag_release_mode == true)
             {
                 //設定執行後的表單起始位置
                 this.StartPosition = FormStartPosition.Manual;
-                this.Location = new System.Drawing.Point(screenWidth - 250, 200);
+                this.Location = new System.Drawing.Point(screenWidth - pictureBox1.Width, 200);
                 this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
             }
 
-            loadTextData();
+            bool result;
+            result = loadTextData();
+            if (result == true)
+                timer1_Tick(sender, e);
+            else
+                timer1.Enabled = false;
+        }
 
-            timer1_Tick(sender, e);
+        int calculate_picturebox_parameters()
+        {
+
+            lines_in_this_lyrics = current_strings.Count;
+            richTextBox1.Text += "current_strings 內容\tcount = " + current_strings.Count.ToString() + " (lines)\n";
+            for (i = 0; i < current_strings.Count; i++)
+            {
+                richTextBox1.Text += current_strings[i] + "\n";
+            }
+
+            Size sss;
+            show_head_size = 0;
+            show_waist_size = 0;
+            show_max_width_size = 0;
+            show_max_height_size = 0;
+
+            for (i = 0; i < current_strings.Count; i++)
+            {
+                sss = g.MeasureString(current_strings[i], f).ToSize();
+                richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
+                richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
+                richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
+                //g.DrawRectangle(p, 150, 50, sss.Height - 1, sss.Width);
+
+                if (show_max_width_size < sss.Width)
+                    show_max_width_size = sss.Width;
+                if (show_max_height_size < sss.Height)
+                    show_max_height_size = sss.Height;
+            }
+
+            if (show_max_width_size < pictureBox1.Height)
+                show_head_size = (pictureBox1.Height - show_max_width_size) / 2;
+            else
+                show_head_size = 0;
+
+            if (show_max_height_size * 3 < pictureBox1.Width)
+                show_waist_size = (pictureBox1.Width - show_max_height_size * 3) / 4;
+            else
+                show_waist_size = 0;
+
+            richTextBox1.Text += "show_head_size = " + show_head_size.ToString() + "\t";
+            richTextBox1.Text += "show_waist_size = " + show_waist_size.ToString() + "\n";
+            richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\t";
+            richTextBox1.Text += "show_max_height_size = " + show_max_height_size.ToString() + "\n";
+
+            richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + " 90% W = " + (pictureBox1.Height * 90 / 100).ToString() + "\n";
+
+            if (show_max_width_size < (pictureBox1.Height * 90 / 100))
+                return 0;
+            else
+                return -1;
+
         }
 
         void slide_show_string()
@@ -184,7 +232,7 @@ namespace vcs_SlideShowString
 
 
             string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
-            g.DrawString(show_play_info, f, sb, new PointF(40, pictureBox1.Height - 50));
+            g.DrawString(show_play_info, new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(40, pictureBox1.Height - 25));
 
             richTextBox1.Text += "現在要播放 第 " + show_lyrics_index.ToString() + " 首" + "\t";
             if (flag_playing == 0)
@@ -275,7 +323,8 @@ namespace vcs_SlideShowString
 
                 show_string0 = current_strings[0];
                 show_string1 = current_strings[1].Remove(0, 1); //remove '&'
-                show_string2 = current_strings[2];
+                if(lines_in_this_lyrics > 1)
+                    show_string2 = current_strings[2];
 
                 if (lines_in_this_lyrics > 2)
                     flag_playing = 1;
@@ -285,55 +334,24 @@ namespace vcs_SlideShowString
                     flag_playing_step = 0;
                     show_lyrics_index++;
                 }
+
+                f = new Font("標楷體", 24);
                 //更新全首的畫圖邊界
-                /*
-                int show_head_size;
-                int show_waist_size;
-                int show_max_width_size = 0;
-                int show_max_height_size = 0;
-                */
-
-                lines_in_this_lyrics = current_strings.Count;
-                richTextBox1.Text += "current_strings 內容\tcount = " + current_strings.Count.ToString() + " (lines)\n";
-                for (i = 0; i < current_strings.Count; i++)
+                int result = -1;
+                while (result == -1)
                 {
-                    richTextBox1.Text += current_strings[i] + "\n";
+                    result = calculate_picturebox_parameters();
+                    if (result == -1)
+                    {
+                        float fontsize;
+                        fontsize = f.Size;
+                        if (fontsize > 2)
+                            fontsize -= 1;
+                        f = new Font("標楷體", fontsize);
+                        richTextBox1.Text += "縮小字型為 " + fontsize.ToString() + "\n";
+                    }
                 }
 
-                Size sss;
-                show_head_size = 0;
-                show_waist_size = 0;
-                show_max_width_size = 0;
-                show_max_height_size = 0;
-
-                for (i = 0; i < current_strings.Count; i++)
-                {
-                    sss = g.MeasureString(current_strings[i], f).ToSize();
-                    richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
-                    richTextBox1.Text += "size W = " + sss.Width.ToString() + "\t";
-                    richTextBox1.Text += "size H = " + sss.Height.ToString() + "\n";
-                    //g.DrawRectangle(p, 150, 50, sss.Height - 1, sss.Width);
-
-                    if (show_max_width_size < sss.Width)
-                        show_max_width_size = sss.Width;
-                    if (show_max_height_size < sss.Height)
-                        show_max_height_size = sss.Height;
-                }
-
-                if (show_max_width_size < pictureBox1.Height)
-                    show_head_size = (pictureBox1.Height - show_max_width_size) / 2;
-                else
-                    show_head_size = 0;
-
-                if (show_max_height_size * 3 < pictureBox1.Width)
-                    show_waist_size = (pictureBox1.Width - show_max_height_size * 3) / 4;
-                else
-                    show_waist_size = 0;
-
-                richTextBox1.Text += "show_head_size = " + show_head_size.ToString() + "\t";
-                richTextBox1.Text += "show_waist_size = " + show_waist_size.ToString() + "\n";
-                richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\t";
-                richTextBox1.Text += "show_max_height_size = " + show_max_height_size.ToString() + "\n";
             }
             else
             {
@@ -392,7 +410,15 @@ namespace vcs_SlideShowString
             Pen p;
             p = new Pen(Color.Red, 3);
 
-            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height);
+            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+
+            /*
+            g.DrawRectangle(p, pictureBox1.Width * 5 / 100, pictureBox1.Height * 5 / 100, pictureBox1.Width * 90 / 100 - 1, pictureBox1.Height * 90 / 100 - 1);
+            g.DrawRectangle(p, pictureBox1.Width * 10 / 100, pictureBox1.Height * 10 / 100, pictureBox1.Width * 80 / 100 - 1, pictureBox1.Height * 80 / 100 - 1);
+            g.DrawRectangle(p, pictureBox1.Width * 20 / 100, pictureBox1.Height * 20 / 100, pictureBox1.Width * 60 / 100 - 1, pictureBox1.Height * 60 / 100 - 1);
+            g.DrawRectangle(p, pictureBox1.Width * 30 / 100, pictureBox1.Height * 30 / 100, pictureBox1.Width * 40 / 100 - 1, pictureBox1.Height * 40 / 100 - 1);
+            g.DrawRectangle(p, pictureBox1.Width * 40 / 100, pictureBox1.Height * 40 / 100, pictureBox1.Width * 20 / 100 - 1, pictureBox1.Height * 20 / 100 - 1);
+            */
 
             g.DrawString(show_string0, f, new SolidBrush(Color.Black), 0 + show_waist_size * 3 + show_max_height_size * 2, show_head_size, drawFormat);
             g.DrawString(show_string1, f, new SolidBrush(Color.Black), 0 + show_waist_size * 2 + show_max_height_size, show_head_size, drawFormat);
