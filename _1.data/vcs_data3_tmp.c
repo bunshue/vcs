@@ -5,20 +5,40 @@ picturebox顯示圖檔
             pictureBox1.Image = img;
 
 
+	//C# 取得資料夾下的所有檔案(包括子目錄)
+	//顯示每個檔案的資訊
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string path = String.Empty;
+            string filetype = String.Empty;
+            filetype = "*.*";
 
-            string filename = @"C:\______test_vcs\07    都???--妻戀道中(他鄉思妻兒).mp3";
-            FileInfo f = new FileInfo(filename);
+            //path = @"D:\_DATA2\_VIDEO_全為備份\百家??_清十二帝疑案";
+            path = @"C:\______test_vcs";
 
-            //C# 取得檔案建立日期,及最後修改日期 
-            richTextBox1.Text += "檔案建立日期" + f.CreationTime.ToString() + "\n";
-            richTextBox1.Text += "檔案最後修改日期" + f.LastWriteTime.ToString() + "\n";
+            //C# 取得資料夾下的所有檔案(包括子目錄)
+            string[] files = System.IO.Directory.GetFiles(path, filetype, System.IO.SearchOption.AllDirectories);
+            foreach (string filename in files)
+            {
+                richTextBox1.Text += "原撈到的檔案 : " + filename + "\n";
+                FileInfo fi = new FileInfo(filename);
+                richTextBox1.Text += "Name :" + fi.Name + "\n";
+                richTextBox1.Text += "FullName :" + fi.FullName + "\n";
+                richTextBox1.Text += "Directory :" + fi.Directory + "\n";
+                richTextBox1.Text += "DirectoryName :" + fi.DirectoryName + "\n";
+                richTextBox1.Text += "Extension :" + fi.Extension + "\n";
+                richTextBox1.Text += "Length :" + fi.Length.ToString() + "\n";
+                //C# 取得檔案建立日期,及最後修改日期 
+                richTextBox1.Text += "檔案建立日期" + fi.CreationTime.ToString() + "\n";
+                richTextBox1.Text += "檔案最後修改日期" + fi.LastWriteTime.ToString() + "\n";
+                //C# 取得檔案路徑、副檔名、檔案大小
+                richTextBox1.Text += "檔案路徑： " + filename.ToString() + "\n";
+                richTextBox1.Text += "副檔名： " + filename.Substring(filename.LastIndexOf(".") + 1, filename.Length - filename.LastIndexOf(".") - 1) + "\n";    //取得副檔名
+                richTextBox1.Text += "檔案大小： " + File.Open(filename, FileMode.Open).Length.ToString() + " 位元組\n";
+                richTextBox1.Text += "\n";
+            }
 
-
-            //C# 取得檔案路徑、副檔名、檔案大小
-            richTextBox1.Text += "檔案路徑： " + filename.ToString() + "\n";
-            richTextBox1.Text += "副檔名： " + filename.Substring(filename.LastIndexOf(".") + 1, filename.Length - filename.LastIndexOf(".") - 1) + "\n";    //取得副檔名
-            richTextBox1.Text += "檔案大小： " + File.Open(filename, FileMode.Open).Length.ToString() + " 位元組\n";
-
+        }
 
 
 
