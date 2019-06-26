@@ -13,34 +13,53 @@ namespace vcs_DrAP
 {
     public partial class Form1 : Form
     {
+        void update_setup_file()
+        {
+            richTextBox2.Text += "update_setup_file ST\n";
+            richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
+
+
+            StreamWriter sw = File.CreateText(drap_setup_filename);
+            string content = "";
+            content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+            content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+            content += SelectedLanguage.ToString() + "\n";
+            if (old_search_path.Count == 0)
+                content += "C:\\\\______test_vcs\n";
+            else
+            {
+                foreach (string sss in old_search_path)
+                {
+                    richTextBox2.Text += sss + "\n";
+                    content += sss + "\n";
+                }
+            }
+            content += "\n";
+
+            sw.WriteLine(content);
+            sw.Close();
+
+        }
+
         void Read_Setup_File()
         {
             int i;
             if (System.IO.File.Exists(drap_setup_filename) == false)
             {
                 richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
-                StreamWriter sw = File.CreateText(drap_setup_filename);
-                string content = "";
-                content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
-                content += "C:\\\\______test_vcs\n";
-                content += SelectedLanguage.ToString();
-                content += "\n";
-
-                sw.WriteLine(content);
-                sw.Close();
+                update_setup_file();
             }
             else
             {
                 richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
-
                 string line;
-                StreamReader sr = new StreamReader(drap_setup_filename);
-                for (i = 0; i < 6; i++)
-                {
-                    line = sr.ReadLine();
+                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.Default);
+                i = 0;
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
                     richTextBox2.Text += "第 " + i.ToString() + " 行資料 : " + line + "\n";
                     switch (i)
                     {
@@ -57,14 +76,27 @@ namespace vcs_DrAP
                             text_editor_path = line;
                             break;
                         case 4:
-                            search_path = line;
+                            SelectedLanguage = int.Parse(line);
                             break;
                         case 5:
-                            SelectedLanguage = int.Parse(line);
+                            search_path = line;
                             break;
                         default:
                             break;
                     }
+                    if (i >= 5)
+                    {
+                        if (line.Length > 0)
+                        {
+                            richTextBox2.Text += "加入路徑 : " + line + "\n";
+                            old_search_path.Add(line);
+                        }
+                        else
+                        {
+                            richTextBox2.Text += "空行\n";
+                        }
+                    }
+                    i++;
                 }
                 sr.Close();
             }
@@ -98,6 +130,7 @@ namespace vcs_DrAP
         string text_editor_path = String.Empty;
         string search_path = String.Empty;
 
+        List<String> old_search_path = new List<String>();
 
         public class MyFileInfo
         {
@@ -358,8 +391,7 @@ namespace vcs_DrAP
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
@@ -423,11 +455,8 @@ namespace vcs_DrAP
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
-
-                sub_i1b.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
@@ -482,10 +511,8 @@ namespace vcs_DrAP
                 i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
-                sub_i1a.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                sub_i1b.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
@@ -524,10 +551,8 @@ namespace vcs_DrAP
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                sub_i1b.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
@@ -673,7 +698,6 @@ namespace vcs_DrAP
 
             if (flag_search_vcs_pattern == 0)
             {
-
                 richTextBox2.Text += "11111 fullname = " + fullname + "\n";
 
                 FileInfo fi = new FileInfo(fullname);
@@ -722,7 +746,7 @@ namespace vcs_DrAP
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].Text + "\"";
+                all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
             }
 
             //指定應用程式路徑
@@ -866,8 +890,11 @@ namespace vcs_DrAP
             {
                 richTextBox2.Text += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
 
+                richTextBox1.Text += "目前不支援直接刪除檔案\n";
+                /*  直接刪除檔案
                 File.SetAttributes(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text, FileAttributes.Normal);
                 File.Delete(listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text);
+                */
                 listView1.SelectedItems[i].Remove();
             }
         }
@@ -883,12 +910,43 @@ namespace vcs_DrAP
             this.listBox1.BorderStyle = BorderStyle.Fixed3D;
 
             //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
-            this.listBox1.Items.Add(search_path);
+            //this.listBox1.Items.Add(search_path);
+            // 可用foreach 取出List 裡的值
+            //richTextBox2.Text += "\n可用foreach 取出List 裡的值\n";
+            this.listBox1.Items.Clear();
+            foreach (string sss in old_search_path)
+            {
+                //richTextBox1.Text += sss + "\n";
+                this.listBox1.Items.Add(sss);
+            }
+
             this.listView1.GridLines = true;
+
+
+            //C# 提示視窗 ToolTip 
+            //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
+            ToolTip toolTip1 = new ToolTip();
+            //SetToolTip：定義控制項會跳出提示的文字
+            toolTip1.SetToolTip(button14, "Add Directory");
+            toolTip1.SetToolTip(button15, "Delete Directory");
+            toolTip1.SetToolTip(button16, "Delete All Directory");
+
+            //以下為提示視窗的設定(通常會設定的部分)
+            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
+            toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            //ForeColor：前景顏色
+            toolTip1.ForeColor = Color.Blue;
+            //BackColor：背景顏色
+            toolTip1.BackColor = Color.Gray;
+            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
+            toolTip1.AutoPopDelay = 5000;
+            //ToolTipTitle：設定提示視窗的標題。
+            toolTip1.ToolTipTitle = "提示訊息";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "離開時儲存最後選擇的路徑\n";
             Application.Exit();
         }
 
@@ -1103,8 +1161,7 @@ namespace vcs_DrAP
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font(
-                    "Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                 */
 
 
@@ -1121,6 +1178,7 @@ namespace vcs_DrAP
                 //path = folderBrowserDialog1.SelectedPath;
                 richTextBox2.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
                 listBox1.Items.Add(folderBrowserDialog1.SelectedPath);
+                old_search_path.Add(folderBrowserDialog1.SelectedPath);
             }
             else
             {
@@ -1133,11 +1191,19 @@ namespace vcs_DrAP
         private void button15_Click(object sender, EventArgs e)
         {
             listBox1.Items.Remove(listBox1.SelectedItem);
+            old_search_path.Remove(folderBrowserDialog1.SelectedPath);
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
+            old_search_path.Clear();
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            update_setup_file();
+
         }
 
     }

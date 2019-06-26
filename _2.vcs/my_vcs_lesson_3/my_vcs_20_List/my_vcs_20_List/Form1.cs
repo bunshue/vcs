@@ -181,11 +181,21 @@ namespace my_vcs_20_List
         {
             richTextBox1.Text += "共有 " + strings.Count.ToString() + " 個字串\n";
 
-
+            // 取出單一個List 裡的值，如同陣列(Array)用法
             for (int i = 0; i < strings.Count; i++)
             {
                 richTextBox1.Text += strings[i] + "\n";
             }
+
+
+            // 可用foreach 取出List 裡的值
+            richTextBox1.Text += "\n可用foreach 取出List 裡的值\n";
+            foreach (string sss in strings)
+            {
+                richTextBox1.Text += sss + "\n";
+            }
+
+
 
         }
     }
