@@ -83,6 +83,15 @@ namespace imsLink
 
         Stopwatch stopwatch = new Stopwatch();
 
+        int zoom_cnt = 0;
+        int zoom_cnt_max = 15;
+        int zoom_step = 40;
+        int usb_camera_width = 0;
+        int usb_camera_height = 0;
+
+        int btn_down_up_cnt = 0;
+        int btn_right_left_cnt = 0;
+
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
         //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
@@ -1121,6 +1130,7 @@ namespace imsLink
             lb_write_camera_model.Text = "";
             lb_write_camera_serial.Text = "";
             lb_write_mb_model.Text = "";
+            lb_zoom.Text = "1.00 X";
 
             button12.BackgroundImage = imsLink.Properties.Resources.refresh;
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
@@ -1130,9 +1140,11 @@ namespace imsLink
             button20.BackgroundImage = imsLink.Properties.Resources.power;
             button32.BackgroundImage = imsLink.Properties.Resources.console;
             button35.BackgroundImage = imsLink.Properties.Resources.ims3;
-
-            button17.Visible = false;   //no use
-            button18.Visible = false;   //no use
+            btnUp.BackgroundImage = imsLink.Properties.Resources.up;
+            btnDown.BackgroundImage = imsLink.Properties.Resources.down;
+            btnLeft.BackgroundImage = imsLink.Properties.Resources.left;
+            btnRight.BackgroundImage = imsLink.Properties.Resources.right;
+            btnCenter.BackgroundImage = imsLink.Properties.Resources.stop;
 
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -2142,7 +2154,22 @@ namespace imsLink
         {
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
             bm = (Bitmap)eventArgs.Frame.Clone();
-            pictureBox1.Image = bm;
+            //pictureBox1.Image = bm;
+
+            int w = bm.Width;
+            int h = bm.Height;
+
+            //RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2, zoom_step * zoom_cnt * 3 / 4 / 2, w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
+
+            //RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * (btn_right_cnt - btn_left_cnt) / 2, zoom_step * zoom_cnt * 3 / 4 / 2, w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
+            RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2,
+                                             (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
+                                             w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
+
+            pictureBox1.Image = bm.Clone(rect, PixelFormat.Format32bppArgb);
+
+            usb_camera_width = w;
+            usb_camera_height = h;
 
             /*  寫字的功能還不完備
             IntPtr pHdc;
@@ -2790,24 +2817,81 @@ namespace imsLink
                 richTextBox1.Text += "無圖可存\n";
         }
 
-        int step = 50;
         private void button17_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Size.Width < 1500)
+            if (zoom_cnt < zoom_cnt_max)
             {
-                pictureBox1.Size = new Size(pictureBox1.Size.Width + step, pictureBox1.Size.Height + step * 3 / 4);
+                zoom_cnt++;
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width + zoom_step, pictureBox1.Size.Height + zoom_step * 3 / 4);
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
                 //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                int w = usb_camera_width;
+                int h = usb_camera_height;
+                richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\tx_st = " + (zoom_step * zoom_cnt / 2).ToString() + "\ty_st = " + (zoom_step * zoom_cnt / 2 * 3 / 4).ToString()
+                    + "\tW = " + (w - zoom_step * zoom_cnt).ToString() + "\tH = " + (h - zoom_step * zoom_cnt * 3 / 4).ToString() + "\n";
+
+                float ratio;
+                ratio = 640 / (float)(w - zoom_step * zoom_cnt);
+                lb_zoom.Text = ratio.ToString("#0.00") + " X";
             }
+            else
+                richTextBox1.Text += "已達最大放大倍率\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Size.Width > 240)
+            if (zoom_cnt > 0)
             {
-                pictureBox1.Size = new Size(pictureBox1.Size.Width - step, pictureBox1.Size.Height - step * 3 / 4);
-                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
+                int w = usb_camera_width;
+                int h = usb_camera_height;
+                int x_st =  zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
+                int y_st = (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
+                int W = w - zoom_step * zoom_cnt;
+                int H = h - zoom_step * zoom_cnt * 3 / 4;
+                //richTextBox1.Text += "原抓取位置 x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + " W = " + W.ToString() + " H = " + H.ToString() + "\n";
 
+                int x_st_next = zoom_step * (zoom_cnt - 1) / 2 + zoom_step * btn_right_left_cnt / 2;
+                int y_st_next = (zoom_step * (zoom_cnt - 1) / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
+                int W2 = w - zoom_step * (zoom_cnt - 1) + x_st_next;
+                int H2 = h - zoom_step * (zoom_cnt - 1) * 3 / 4 + y_st_next;
+
+                //richTextBox1.Text += "x_st_next = " + x_st_next.ToString() + " y_st_next = " + y_st_next.ToString() + "\n";
+                if ((x_st_next < 0) || (y_st_next < 0))
+                {
+                    richTextBox1.Text += "已到邊界, 不動作111\n";
+                }
+                else if ((W2 > 640) || (H2 > 480))
+                {
+                    richTextBox1.Text += "已到邊界, 不動作222\n";
+                }
+                else
+                {
+                    zoom_cnt--;
+                    x_st = zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
+                    y_st = (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;
+                    W = w - zoom_step * zoom_cnt;
+                    H = h - zoom_step * zoom_cnt * 3 / 4;
+                    //richTextBox1.Text += "後抓取位置 x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + " W = " + W.ToString() + " H = " + H.ToString() + "\n";
+                }
+
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width - zoom_step, pictureBox1.Size.Height - zoom_step * 3 / 4);
+                //pictureBox1.Size = new Size(pictureBox1.Size.Width, pictureBox1.Size.Height);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                //int w = usb_camera_width;
+                //int h = usb_camera_height;
+
+                /*
+                richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\tx_st = " + (zoom_step * zoom_cnt / 2).ToString() + "\ty_st = " + (zoom_step * zoom_cnt / 2 * 3 / 4).ToString()
+                    + "\tW = " + (w - zoom_step * zoom_cnt).ToString() + "\tH = " + (h - zoom_step * zoom_cnt * 3 / 4).ToString() + "\n";
+                */
+                float ratio;
+                ratio = 640 / (float)(w - zoom_step * zoom_cnt);
+                lb_zoom.Text = ratio.ToString("#0.00") + " X";
+            }
+            else
+                richTextBox1.Text += "已達最小放大倍率\n";
         }
 
         int flag_fullscreen = 0;
@@ -2839,9 +2923,6 @@ namespace imsLink
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
             }
-
-
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -3273,6 +3354,66 @@ namespace imsLink
         private void button6_Click(object sender, EventArgs e)
         {
             button72_Click(sender, e);
+        }
+
+        private void btnLeft_Click(object sender, EventArgs e)
+        {
+            if (btn_right_left_cnt > -zoom_cnt)
+            {
+                btn_right_left_cnt--;
+                //richTextBox1.Text += "Rt-Lt = " + btn_right_left_cnt.ToString() + "\tDn-Up = " + btn_down_up_cnt.ToString() + "\n";
+            }
+            else
+                richTextBox1.Text += "已達邊界最左\n";
+        }
+
+        private void btnRight_Click(object sender, EventArgs e)
+        {
+            if (btn_right_left_cnt < zoom_cnt)
+            {
+                btn_right_left_cnt++;
+                //richTextBox1.Text += "Rt-Lt = " + btn_right_left_cnt.ToString() + "\tDn-Up = " + btn_down_up_cnt.ToString() + "\n";
+            }
+            else
+                richTextBox1.Text += "已達邊界最右\n";
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            if (btn_down_up_cnt > -zoom_cnt)
+            {
+                btn_down_up_cnt--;
+                //richTextBox1.Text += "Rt-Lt = " + btn_right_left_cnt.ToString() + "\tDn-Up = " + btn_down_up_cnt.ToString() + "\n";
+            }
+            else
+                richTextBox1.Text += "已達邊界最上\n";
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            if (btn_down_up_cnt < zoom_cnt)
+            {
+                btn_down_up_cnt++;
+                //richTextBox1.Text += "Rt-Lt = " + btn_right_left_cnt.ToString() + "\tDn-Up = " + btn_down_up_cnt.ToString() + "\n";
+            }
+            else
+                richTextBox1.Text += "已達邊界最下\n";
+        }
+
+        private void btnCenter_Click(object sender, EventArgs e)
+        {
+            zoom_cnt = 0;
+            btn_down_up_cnt = 0;
+            btn_right_left_cnt = 0;
+            lb_zoom.Text = "1.00 X";
+            richTextBox1.Text += "恢復置中\n";
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.ScrollToCaret();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_18_跑馬燈
+namespace vcs_test_all_02_ASCII
 {
     static class Program
     {

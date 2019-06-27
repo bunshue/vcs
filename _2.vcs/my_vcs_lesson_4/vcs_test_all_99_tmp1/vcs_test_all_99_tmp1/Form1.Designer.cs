@@ -105,7 +105,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(154, 42);
             this.button3.TabIndex = 3;
-            this.button3.Text = "ASCII";
+            this.button3.Text = "xxx";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -116,7 +116,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(154, 42);
             this.button4.TabIndex = 4;
-            this.button4.Text = "把字串用ascii顯示出來2";
+            this.button4.Text = "xxx";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -138,7 +138,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(154, 42);
             this.button12.TabIndex = 13;
-            this.button12.Text = "把字串用ascii顯示出來1";
+            this.button12.Text = "xxx";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

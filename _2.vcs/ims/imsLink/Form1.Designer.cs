@@ -67,6 +67,7 @@
             this.button128 = new System.Windows.Forms.Button();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.Serial = new System.Windows.Forms.TabPage();
+            this.button14 = new System.Windows.Forms.Button();
             this.lb_mesg3 = new System.Windows.Forms.Label();
             this.lb_mesg2 = new System.Windows.Forms.Label();
             this.lb_mesg = new System.Windows.Forms.Label();
@@ -145,6 +146,12 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.USB = new System.Windows.Forms.TabPage();
+            this.lb_zoom = new System.Windows.Forms.Label();
+            this.btnCenter = new System.Windows.Forms.Button();
+            this.btnRight = new System.Windows.Forms.Button();
+            this.btnLeft = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
@@ -214,7 +221,6 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -270,6 +276,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(500, 586);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
             this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
@@ -665,6 +672,17 @@
             this.Serial.Size = new System.Drawing.Size(940, 586);
             this.Serial.TabIndex = 13;
             this.Serial.Text = "Serial";
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.Color.Green;
+            this.button14.Location = new System.Drawing.Point(585, 535);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(70, 35);
+            this.button14.TabIndex = 68;
+            this.button14.Text = "Test ST";
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // lb_mesg3
             // 
@@ -1492,6 +1510,12 @@
             // 
             // USB
             // 
+            this.USB.Controls.Add(this.lb_zoom);
+            this.USB.Controls.Add(this.btnCenter);
+            this.USB.Controls.Add(this.btnRight);
+            this.USB.Controls.Add(this.btnLeft);
+            this.USB.Controls.Add(this.btnDown);
+            this.USB.Controls.Add(this.btnUp);
             this.USB.Controls.Add(this.button19);
             this.USB.Controls.Add(this.button18);
             this.USB.Controls.Add(this.button17);
@@ -1505,6 +1529,78 @@
             this.USB.TabIndex = 22;
             this.USB.Text = "USB";
             this.USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_zoom
+            // 
+            this.lb_zoom.AutoSize = true;
+            this.lb_zoom.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_zoom.ForeColor = System.Drawing.Color.Red;
+            this.lb_zoom.Location = new System.Drawing.Point(56, 268);
+            this.lb_zoom.Name = "lb_zoom";
+            this.lb_zoom.Size = new System.Drawing.Size(77, 24);
+            this.lb_zoom.TabIndex = 47;
+            this.lb_zoom.Text = "1.00 X";
+            this.lb_zoom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnCenter
+            // 
+            this.btnCenter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCenter.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnCenter.ForeColor = System.Drawing.Color.Black;
+            this.btnCenter.Location = new System.Drawing.Point(67, 349);
+            this.btnCenter.Name = "btnCenter";
+            this.btnCenter.Size = new System.Drawing.Size(40, 40);
+            this.btnCenter.TabIndex = 46;
+            this.btnCenter.UseVisualStyleBackColor = true;
+            this.btnCenter.Click += new System.EventHandler(this.btnCenter_Click);
+            // 
+            // btnRight
+            // 
+            this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRight.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnRight.ForeColor = System.Drawing.Color.Black;
+            this.btnRight.Location = new System.Drawing.Point(113, 348);
+            this.btnRight.Name = "btnRight";
+            this.btnRight.Size = new System.Drawing.Size(40, 40);
+            this.btnRight.TabIndex = 45;
+            this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            // 
+            // btnLeft
+            // 
+            this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLeft.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnLeft.ForeColor = System.Drawing.Color.Black;
+            this.btnLeft.Location = new System.Drawing.Point(21, 348);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(40, 40);
+            this.btnLeft.TabIndex = 44;
+            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            // 
+            // btnDown
+            // 
+            this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDown.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnDown.ForeColor = System.Drawing.Color.Black;
+            this.btnDown.Location = new System.Drawing.Point(67, 395);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(40, 40);
+            this.btnDown.TabIndex = 43;
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // btnUp
+            // 
+            this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnUp.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnUp.ForeColor = System.Drawing.Color.Black;
+            this.btnUp.Location = new System.Drawing.Point(67, 303);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(40, 40);
+            this.btnUp.TabIndex = 42;
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // button19
             // 
@@ -1523,7 +1619,7 @@
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button18.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.ForeColor = System.Drawing.Color.Black;
-            this.button18.Location = new System.Drawing.Point(57, 314);
+            this.button18.Location = new System.Drawing.Point(94, 198);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(60, 60);
             this.button18.TabIndex = 40;
@@ -1535,7 +1631,7 @@
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button17.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.ForeColor = System.Drawing.Color.Black;
-            this.button17.Location = new System.Drawing.Point(57, 248);
+            this.button17.Location = new System.Drawing.Point(22, 198);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(60, 60);
             this.button17.TabIndex = 39;
@@ -1545,7 +1641,7 @@
             // button15
             // 
             this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button15.Location = new System.Drawing.Point(57, 116);
+            this.button15.Location = new System.Drawing.Point(22, 116);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(60, 60);
             this.button15.TabIndex = 2;
@@ -1555,7 +1651,7 @@
             // button12
             // 
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button12.Location = new System.Drawing.Point(57, 50);
+            this.button12.Location = new System.Drawing.Point(22, 50);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(60, 60);
             this.button12.TabIndex = 0;
@@ -1577,7 +1673,7 @@
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button16.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button16.ForeColor = System.Drawing.Color.Black;
-            this.button16.Location = new System.Drawing.Point(57, 182);
+            this.button16.Location = new System.Drawing.Point(94, 50);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(60, 60);
             this.button16.TabIndex = 38;
@@ -2240,17 +2336,6 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // button14
-            // 
-            this.button14.BackColor = System.Drawing.Color.Green;
-            this.button14.Location = new System.Drawing.Point(585, 535);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(70, 35);
-            this.button14.TabIndex = 68;
-            this.button14.Text = "Test ST";
-            this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2309,6 +2394,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.USB.ResumeLayout(false);
+            this.USB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
@@ -2513,6 +2599,12 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.TabPage Serial_Auto;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button btnRight;
+        private System.Windows.Forms.Button btnLeft;
+        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnCenter;
+        private System.Windows.Forms.Label lb_zoom;
     }
 }
 

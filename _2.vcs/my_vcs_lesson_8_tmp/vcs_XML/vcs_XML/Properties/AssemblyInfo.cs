@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("my_vcs_18_跑馬燈")]
+[assembly: AssemblyTitle("vcs_XML")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("my_vcs_18_跑馬燈")]
-[assembly: AssemblyCopyright("Copyright © Home 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_XML")]
+[assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("ddf9e3a7-b016-413d-a082-d89f7d57608f")]
+[assembly: Guid("6886f896-b620-47bc-9719-b2709da2fb8f")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

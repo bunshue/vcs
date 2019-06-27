@@ -26,6 +26,12 @@ namespace vcs_DrAP
             content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
             content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
             content += SelectedLanguage.ToString() + "\n";
+
+            video_player_path = "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            audio_player_path = "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+            picture_viewer_path = "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+            text_editor_path = "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+
             if (old_search_path.Count == 0)
                 content += "C:\\\\______test_vcs\n";
             else
@@ -710,6 +716,8 @@ namespace vcs_DrAP
                 }
                 else
                 {
+                    richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
+                    richTextBox2.Text += "fullname = " + fullname + "\n";
                     System.Diagnostics.Process.Start(video_player_path, fullname);
                 }
             }

@@ -61,6 +61,53 @@ namespace vcs_test_all_01_Richtextbox
             richTextBox1.Clear();
         }
 
+        int value1 = 12345;
+        double value2 = 123.456;
+        double value3 = 1234.5678;
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("D");
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("D8");
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("X");
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("X8");
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value2.ToString("F4");
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value3.ToString("#0.0");         //格式化，小數點後留1位
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
+        }
+
+        //C# richTextBox 按ctrl+a全選
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
+                ((RichTextBox)sender).SelectAll();
+
+        }
+
 
     }
 }

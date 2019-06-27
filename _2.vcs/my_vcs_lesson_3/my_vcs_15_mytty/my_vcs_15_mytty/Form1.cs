@@ -131,5 +131,13 @@ namespace my_vcs_15_mytty
                 richTextBox1.Font = fontDialog1.Font;
             }
         }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.ScrollToCaret();
+
+        }
     }
 }

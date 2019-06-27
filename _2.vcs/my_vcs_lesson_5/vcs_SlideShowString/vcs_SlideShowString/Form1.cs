@@ -527,5 +527,10 @@ namespace vcs_SlideShowString
                 richTextBox1.Text += current_strings[i] + "\n";
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Opacity = " + this.Opacity.ToString() + "\n";
+        }
     }
 }

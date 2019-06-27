@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_21_NumberFormat
+namespace vcs_XML
 {
     static class Program
     {
