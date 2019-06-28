@@ -53,12 +53,22 @@ namespace vcs_test_all_01_Richtextbox
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            //Hex mode顯示內容
+            string data = "Hex mode顯示內容\n";
+            string result = "";
+            for (int i = 0; i < data.Length; i++)
+            {
+                result += ((int)data[i]).ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.AppendText(result);     //打印一般文字訊息
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            richTextBox2.Clear();
         }
 
         int value1 = 12345;
@@ -100,11 +110,116 @@ namespace vcs_test_all_01_Richtextbox
             textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
         }
 
-        //C# richTextBox 按ctrl+a全選
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
+            /*  像是沒需要 本來就有
+            //C# richTextBox 按ctrl+a全選
             if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
                 ((RichTextBox)sender).SelectAll();
+            */
+
+
+            if (tb_search.Text == "")
+                richTextBox2.Text += "未輸入搜尋內容\n";
+            if (e.KeyCode == Keys.F3)
+            {
+                richTextBox2.Text += "F3\n";
+
+                // 使用System.Text.RegularExpressions來搜尋指定字串
+
+                string strTxt = richTextBox1.Text;  // 準備要搜尋的來源字串
+                string strKey = tb_search.Text;     // 指定字串
+
+                richTextBox2.Text += "strKey = " + strKey + "\tLength = " + strKey.Length.ToString() + "\n";
+
+                //richTextBox2.Text += "strTxt = " + strTxt + "\n";
+                //richTextBox2.Text += "strKey = " + strKey + "\n";
+
+
+                System.Text.RegularExpressions.MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(strTxt, strKey);
+                foreach (System.Text.RegularExpressions.Match m in matches)
+                {
+                    //lstIndex.Items.Add(m.Index);  // 將搜尋結果index顯示於ListBox中
+                    richTextBox2.Text += "aaa" + m.Index.ToString() + "\n";
+                    richTextBox1.SelectionStart = m.Index;
+                    richTextBox1.SelectionLength = strKey.Length;
+                }
+
+            }
+
+
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            int j = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                if ((i < 32) || (i > 126))
+                    j = '-';
+                else
+                    j = i;
+                richTextBox1.Text += i.ToString() + "\t" + (char)j + "\n";
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            int j = 0;
+            for (int i = 0x41; i < 0x5B; i++)
+            {
+                if ((i < 32) || (i > 126))
+                    j = '-';
+                else
+                    j = i;
+                richTextBox1.Text += i.ToString() + "\t0x" + i.ToString("X2") + "\t" + (char)j + "\n";
+
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //string test_string = "ABC可否開啟檔案總管？";
+            string test_string = "如果用MysonLink，就要燒錄mega上放的韌體。";
+            string test_string2 = "ABCDE";
+            /*
+            int j = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                if ((i < 32) || (i > 126))
+                    j = '-';
+                else
+                    j = i;
+                richTextBox1.Text += i.ToString() + "\t" + (char)j + "\n";
+
+            }
+            */
+            for (int i = 0; i < test_string.Length; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + test_string[i] + "\t" + Convert.ToString(((int)test_string[i]), 16) + "\n";
+            }
+            for (int i = 0; i < test_string2.Length; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + test_string2[i] + "\t" + Convert.ToString(((int)test_string2[i]), 16) + "\n";
+            }
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //string input = "Hello World!";
+            string input = "基本運算制作USB启动盘ウィキペディア???世?生?????概?表????";
+            char[] values = input.ToCharArray();
+            foreach (char letter in values)
+            {
+                // Get the integral value of the character.
+                int value = Convert.ToInt32(letter);
+                // Convert the integer value to a hexadecimal value in string form.
+
+                //Console.WriteLine($"Hexadecimal value of {letter} is {value:X}");
+                richTextBox1.Text += "Hexadecimal value of " + letter + " is " + value.ToString("X4") + "\n";
+            }
 
         }
 

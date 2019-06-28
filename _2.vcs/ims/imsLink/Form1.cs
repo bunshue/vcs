@@ -176,10 +176,10 @@ namespace imsLink
         {
             if (flag_release_mode == true)
             {
-                this.tabPage1.Parent = null;    //camera
-                this.Serial_Auto.Parent = null; //serial write auto
-                this.tabPage6.Parent = null;    //Test
-                this.tabPage4.Parent = null;    //Layer
+                this.tp_Camera.Parent = null;    //camera
+                this.tp_Serial_Auto.Parent = null; //serial write auto
+                this.tp_Test.Parent = null;    //Test
+                this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectedIndex = 1;      //程式啟動時，直接跳到info那頁。
             }
             else
@@ -767,8 +767,10 @@ namespace imsLink
                             {
                                 richTextBox1.Text += "BytesToRead = " + BytesToRead.ToString() + "\n";
                                 bool flag_no_mb_model = true;
+                                bool flag_no_mb_serial = true;
                                 lb_main_board_model.Text = "[Model]: ";
-                                for (int i = 0; i < 16; i++)
+                                lb_main_board_serial.Text = "[Serial]: ";
+                                for (int i = 0; i < 8; i++)
                                 {
                                     if (((int)input[i] < 32) || ((int)input[i] > 126))
                                     {
@@ -783,14 +785,30 @@ namespace imsLink
                                         flag_no_mb_model = false;
                                     }
                                 }
+                                for (int i = 8; i < 16; i++)
+                                {
+                                    if (((int)input[i] < 32) || ((int)input[i] > 126))
+                                    {
+                                        if ((int)input[i] != 0)
+                                        {
+                                            flag_no_mb_serial = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        lb_main_board_serial.Text += (char)input[i];
+                                        flag_no_mb_serial = false;
+                                    }
+                                }
+
                                 if (flag_no_mb_model == true)
                                 {
                                     lb_main_board_model.Text = "[Model]: 無主機型號資料";
                                 }
-
-
-
-
+                                if (flag_no_mb_serial == true)
+                                {
+                                    lb_main_board_model.Text = "[Model]: 無主機序號資料";
+                                }
 
                                 flag_receive_mb_model_data = 0;
                                 flag_wait_receive_data = 0;
@@ -1127,6 +1145,7 @@ namespace imsLink
             lb_rtc.Text = "";
             lb_camera_model.Text = "";
             lb_main_board_model.Text = "";
+            lb_main_board_serial.Text = "";
             lb_write_camera_model.Text = "";
             lb_write_camera_serial.Text = "";
             lb_write_mb_model.Text = "";
@@ -2857,15 +2876,27 @@ namespace imsLink
                 int H2 = h - zoom_step * (zoom_cnt - 1) * 3 / 4 + y_st_next;
 
                 //richTextBox1.Text += "x_st_next = " + x_st_next.ToString() + " y_st_next = " + y_st_next.ToString() + "\n";
-                if ((x_st_next < 0) || (y_st_next < 0))
+                if (x_st_next < 0)
                 {
-                    richTextBox1.Text += "已到邊界, 不動作111\n";
+                    richTextBox1.Text += "已到左邊界, 不動作left, 回走, 向右一步\n";
+                    btn_right_left_cnt++;
                 }
-                else if ((W2 > 640) || (H2 > 480))
+                if (y_st_next < 0)
                 {
-                    richTextBox1.Text += "已到邊界, 不動作222\n";
+                    richTextBox1.Text += "已到上邊界, 不動作up, 回走, 向下一步\n";
+                    btn_down_up_cnt++;
                 }
-                else
+                if (W2 > 640)
+                {
+                    richTextBox1.Text += "已到右邊界, 不動作right, 回走, 向左一步\n";
+                    btn_right_left_cnt--;
+                }
+                if (H2 > 480)
+                {
+                    richTextBox1.Text += "已到下邊界, 不動作down, 回走, 向上一步\n";
+                    btn_down_up_cnt--;
+                }
+
                 {
                     zoom_cnt--;
                     x_st = zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
@@ -3004,7 +3035,7 @@ namespace imsLink
             button24.BackColor = Color.Red;
 
             tb_info_8.Clear();
-            lb_camera_model.Text = "";
+            lb_camera_model.Text = "相機型號讀取中...";
             tb_info_82.BackColor = Color.White;
 
             panel3.BackgroundImage = null;
@@ -3082,6 +3113,7 @@ namespace imsLink
 
         private void button23_Click(object sender, EventArgs e)
         {
+            lb_camera_model.Text = "";
             lb_write_camera_model.Text = "準備中";
             richTextBox1.Text += "相機型號長度 : " + tb_info_83.Text.Length.ToString() + "\n";
             if ((tb_info_83.Text.Length <= 0) || (tb_info_83.Text.Length > 16))
@@ -3220,7 +3252,8 @@ namespace imsLink
         private void button30_Click(object sender, EventArgs e)
         {
             lb_write_mb_model.Text = "";
-            lb_main_board_model.Text = "";
+            lb_main_board_model.Text = "主機型號讀取中...";
+            lb_main_board_serial.Text = "主機序號讀取中...";
             button30.BackColor = Color.Red;
 
             if (!serialPort1.IsOpen)
@@ -3246,12 +3279,27 @@ namespace imsLink
 
         private void button29_Click(object sender, EventArgs e)
         {
+            lb_main_board_model.Text = "";
+            lb_main_board_serial.Text = "";
             lb_write_mb_model.Text = "準備中";
             richTextBox1.Text += "主機型號長度 : " + tb_main_board_model.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "主機序號長度 : " + tb_main_board_serial.Text.Length.ToString() + "\n";
             if ((tb_main_board_model.Text.Length <= 0) || (tb_main_board_model.Text.Length > 16))
             {
                 richTextBox1.Text += "主機型號長度錯誤, 長度 : " + tb_main_board_model.Text.Length.ToString() + "\n";
                 lb_write_mb_model.Text = "主機型號長度錯誤";
+                return;
+            }
+            if ((tb_main_board_serial.Text.Length <= 0) || (tb_main_board_serial.Text.Length > 16))
+            {
+                richTextBox1.Text += "主機序號長度錯誤, 長度 : " + tb_main_board_serial.Text.Length.ToString() + "\n";
+                lb_write_mb_model.Text = "主機序號長度錯誤";
+                return;
+            }
+            if ((tb_main_board_model.Text.Length + tb_main_board_serial.Text.Length) > 16)
+            {
+                richTextBox1.Text += "主機型號序號總長度錯誤, 長度 : " + (tb_main_board_model.Text.Length + tb_main_board_serial.Text.Length).ToString() + "\n";
+                lb_write_mb_model.Text = "主機型號序號總長度錯誤";
                 return;
             }
 
@@ -3264,23 +3312,26 @@ namespace imsLink
                 return;
             }
 
+            string total_data = tb_main_board_model.Text + tb_main_board_serial.Text;
+            richTextBox1.Text += "total_data len = " + total_data.Length.ToString() + "\n";
+
             int i;
             for (i = 0; i < 16; i++)
             {
                 main_board_model_data_send[i] = 0;
             }
-            for (i = 0; i < tb_main_board_model.Text.Length; i++)
+            for (i = 0; i < total_data.Length; i++)
             {
-                main_board_model_data_send[i] = (byte)tb_main_board_model.Text[i];
+                main_board_model_data_send[i] = (byte)total_data[i];
             }
 
             Send_IMS_Data(0xF0, 0x12, 0x34, 0x56);   //main board model write
 
             serialPort1.Write(main_board_model_data_send, 0, 16);
+            delay(300);
             lb_write_mb_model.Text = "寫入主機型號完成";
 
             button29.BackColor = System.Drawing.SystemColors.ControlLight;
-
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -3414,6 +3465,34 @@ namespace imsLink
             //RichTextBox顯示訊息自動捲動 顯示最後一行
             richTextBox1.SelectionStart = richTextBox1.TextLength;
             richTextBox1.ScrollToCaret();
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            tb_main_board_model.Text = "";
+            tb_main_board_serial.Text = "";
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            tb_info_83.Text = "";
+        }
+
+        private void scanner_timer2_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "X";
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                scanner_timer2.Enabled = true;
+            }
+            else
+            {
+                scanner_timer2.Enabled = false;
+            }
         }
     }
 }

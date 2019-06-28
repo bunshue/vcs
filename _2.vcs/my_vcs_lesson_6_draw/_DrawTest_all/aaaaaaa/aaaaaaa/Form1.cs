@@ -111,42 +111,6 @@ namespace aaaaaaa
             bm.Save(@"D:\aaaaaaa.png", ImageFormat.Png);
         }
 
-        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            //richTextBox2.Text += "you pressed" + Keys.F3
-            if (e.KeyCode == Keys.F3)
-            {
-                richTextBox2.Text += "F3\n";
-
-
-                // 使用System.Text.RegularExpressions來搜尋指定字串
-
-                string strTxt = richTextBox1.Text;   // 準備要搜尋的來源字串
-                string strKey = "範圍";              // 指定字串
-
-                richTextBox2.Text += "strKey = " + strKey + "\tLength = " + strKey.Length.ToString() + "\n";
-
-                //richTextBox2.Text += "strTxt = " + strTxt + "\n";
-                //richTextBox2.Text += "strKey = " + strKey + "\n";
-
-
-                System.Text.RegularExpressions.MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(strTxt, strKey);
-                foreach (System.Text.RegularExpressions.Match m in matches)
-                {
-                    //lstIndex.Items.Add(m.Index);  // 將搜尋結果index顯示於ListBox中
-                    richTextBox2.Text += "aaa" + m.Index.ToString() + "\n";
-                    richTextBox1.SelectionStart = m.Index;
-                    richTextBox1.SelectionLength = strKey.Length;
-                }
-
-            }
-        }
-
-        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
         }

@@ -27,13 +27,16 @@ namespace vcs_DrAP
             content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
             content += SelectedLanguage.ToString() + "\n";
 
-            video_player_path = "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-            audio_player_path = "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-            picture_viewer_path = "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-            text_editor_path = "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+            video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
+            picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
+            text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
 
             if (old_search_path.Count == 0)
+            {
                 content += "C:\\\\______test_vcs\n";
+                old_search_path.Add("C:\\\\______test_vcs");
+            }
             else
             {
                 foreach (string sss in old_search_path)
@@ -955,6 +958,7 @@ namespace vcs_DrAP
         private void button11_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "離開時儲存最後選擇的路徑\n";
+            update_setup_file();
             Application.Exit();
         }
 
@@ -1077,10 +1081,13 @@ namespace vcs_DrAP
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //改用KeyDown
+            /*
             if (e.KeyChar == (Char)13)      //Enter
             {
                 button13_Click(sender, e);
             }
+            */
         }
 
         private void richTextBox2_TextChanged(object sender, EventArgs e)
@@ -1210,8 +1217,28 @@ namespace vcs_DrAP
 
         private void button18_Click(object sender, EventArgs e)
         {
-            update_setup_file();
+            
 
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //按Enter 等同於 button13_Click
+                button13_Click(sender, e);
+            }
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
         }
 
     }

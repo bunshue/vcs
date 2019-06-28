@@ -41,7 +41,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button10 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tp_Camera = new System.Windows.Forms.TabPage();
             this.button129 = new System.Windows.Forms.Button();
             this.tb_4 = new System.Windows.Forms.TextBox();
             this.label61 = new System.Windows.Forms.Label();
@@ -66,7 +66,7 @@
             this.button127 = new System.Windows.Forms.Button();
             this.button128 = new System.Windows.Forms.Button();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.Serial = new System.Windows.Forms.TabPage();
+            this.tp_Serial = new System.Windows.Forms.TabPage();
             this.button14 = new System.Windows.Forms.Button();
             this.lb_mesg3 = new System.Windows.Forms.Label();
             this.lb_mesg2 = new System.Windows.Forms.Label();
@@ -92,8 +92,8 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Serial_Auto = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tp_Serial_Auto = new System.Windows.Forms.TabPage();
+            this.tp_Info = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -123,7 +123,7 @@
             this.tb_info_a = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tp_System = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lb_write_mb_model = new System.Windows.Forms.Label();
             this.lb_main_board_model = new System.Windows.Forms.Label();
@@ -137,15 +137,7 @@
             this.lb_time2 = new System.Windows.Forms.Label();
             this.button122 = new System.Windows.Forms.Button();
             this.lb_time1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lb_write_camera_model = new System.Windows.Forms.Label();
-            this.lb_camera_model = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.tb_info_83 = new System.Windows.Forms.TextBox();
-            this.button24 = new System.Windows.Forms.Button();
-            this.USB = new System.Windows.Forms.TabPage();
+            this.tp_USB = new System.Windows.Forms.TabPage();
             this.lb_zoom = new System.Windows.Forms.Label();
             this.btnCenter = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
@@ -159,7 +151,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button16 = new System.Windows.Forms.Button();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tp_Test = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -171,7 +163,7 @@
             this.button28 = new System.Windows.Forms.Button();
             this.button37 = new System.Windows.Forms.Button();
             this.button36 = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tp_Layer = new System.Windows.Forms.TabPage();
             this.button143 = new System.Windows.Forms.Button();
             this.button142 = new System.Windows.Forms.Button();
             this.button141 = new System.Windows.Forms.Button();
@@ -191,7 +183,7 @@
             this.cb_2 = new System.Windows.Forms.CheckBox();
             this.cb_1 = new System.Windows.Forms.CheckBox();
             this.cb_0 = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tp_About = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
@@ -221,29 +213,46 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
+            this.tp_Camera_Model = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_write_camera_model = new System.Windows.Forms.Label();
+            this.lb_camera_model = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.button26 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.tb_info_83 = new System.Windows.Forms.TextBox();
+            this.button24 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tb_main_board_serial = new System.Windows.Forms.TextBox();
+            this.lb_main_board_serial = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.scanner_timer2 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            this.Serial.SuspendLayout();
+            this.tp_Serial.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.tp_Info.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tp_System.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.USB.SuspendLayout();
+            this.tp_USB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabPage6.SuspendLayout();
+            this.tp_Test.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tp_Layer.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tp_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.tp_Camera_Model.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -351,15 +360,16 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.Serial);
-            this.tabControl1.Controls.Add(this.Serial_Auto);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.USB);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tp_Camera);
+            this.tabControl1.Controls.Add(this.tp_Serial);
+            this.tabControl1.Controls.Add(this.tp_Serial_Auto);
+            this.tabControl1.Controls.Add(this.tp_Info);
+            this.tabControl1.Controls.Add(this.tp_System);
+            this.tabControl1.Controls.Add(this.tp_Camera_Model);
+            this.tabControl1.Controls.Add(this.tp_USB);
+            this.tabControl1.Controls.Add(this.tp_Test);
+            this.tabControl1.Controls.Add(this.tp_Layer);
+            this.tabControl1.Controls.Add(this.tp_About);
             this.tabControl1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tabControl1.Location = new System.Drawing.Point(4, 45);
             this.tabControl1.Name = "tabControl1";
@@ -368,38 +378,38 @@
             this.tabControl1.TabIndex = 22;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tp_Camera
             // 
-            this.tabPage1.Controls.Add(this.button129);
-            this.tabPage1.Controls.Add(this.tb_4);
-            this.tabPage1.Controls.Add(this.label61);
-            this.tabPage1.Controls.Add(this.tb_3);
-            this.tabPage1.Controls.Add(this.tb_2);
-            this.tabPage1.Controls.Add(this.comboBox5);
-            this.tabPage1.Controls.Add(this.button123);
-            this.tabPage1.Controls.Add(this.tb_1);
-            this.tabPage1.Controls.Add(this.button124);
-            this.tabPage1.Controls.Add(this.label56);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.button121);
-            this.tabPage1.Controls.Add(this.trackBar6);
-            this.tabPage1.Controls.Add(this.button120);
-            this.tabPage1.Controls.Add(this.button119);
-            this.tabPage1.Controls.Add(this.button118);
-            this.tabPage1.Controls.Add(this.button117);
-            this.tabPage1.Controls.Add(this.pictureBox7);
-            this.tabPage1.Controls.Add(this.label62);
-            this.tabPage1.Controls.Add(this.button125);
-            this.tabPage1.Controls.Add(this.button126);
-            this.tabPage1.Controls.Add(this.button127);
-            this.tabPage1.Controls.Add(this.button128);
-            this.tabPage1.Controls.Add(this.pictureBox9);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(940, 586);
-            this.tabPage1.TabIndex = 17;
-            this.tabPage1.Text = "Camera";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tp_Camera.Controls.Add(this.button129);
+            this.tp_Camera.Controls.Add(this.tb_4);
+            this.tp_Camera.Controls.Add(this.label61);
+            this.tp_Camera.Controls.Add(this.tb_3);
+            this.tp_Camera.Controls.Add(this.tb_2);
+            this.tp_Camera.Controls.Add(this.comboBox5);
+            this.tp_Camera.Controls.Add(this.button123);
+            this.tp_Camera.Controls.Add(this.tb_1);
+            this.tp_Camera.Controls.Add(this.button124);
+            this.tp_Camera.Controls.Add(this.label56);
+            this.tp_Camera.Controls.Add(this.textBox1);
+            this.tp_Camera.Controls.Add(this.button121);
+            this.tp_Camera.Controls.Add(this.trackBar6);
+            this.tp_Camera.Controls.Add(this.button120);
+            this.tp_Camera.Controls.Add(this.button119);
+            this.tp_Camera.Controls.Add(this.button118);
+            this.tp_Camera.Controls.Add(this.button117);
+            this.tp_Camera.Controls.Add(this.pictureBox7);
+            this.tp_Camera.Controls.Add(this.label62);
+            this.tp_Camera.Controls.Add(this.button125);
+            this.tp_Camera.Controls.Add(this.button126);
+            this.tp_Camera.Controls.Add(this.button127);
+            this.tp_Camera.Controls.Add(this.button128);
+            this.tp_Camera.Controls.Add(this.pictureBox9);
+            this.tp_Camera.Location = new System.Drawing.Point(4, 26);
+            this.tp_Camera.Name = "tp_Camera";
+            this.tp_Camera.Size = new System.Drawing.Size(940, 586);
+            this.tp_Camera.TabIndex = 17;
+            this.tp_Camera.Text = "Camera";
+            this.tp_Camera.UseVisualStyleBackColor = true;
             // 
             // button129
             // 
@@ -656,22 +666,22 @@
             this.pictureBox9.TabIndex = 43;
             this.pictureBox9.TabStop = false;
             // 
-            // Serial
+            // tp_Serial
             // 
-            this.Serial.BackColor = System.Drawing.SystemColors.Control;
-            this.Serial.Controls.Add(this.button14);
-            this.Serial.Controls.Add(this.lb_mesg3);
-            this.Serial.Controls.Add(this.lb_mesg2);
-            this.Serial.Controls.Add(this.lb_mesg);
-            this.Serial.Controls.Add(this.label1);
-            this.Serial.Controls.Add(this.groupBox11);
-            this.Serial.Controls.Add(this.groupBox10);
-            this.Serial.Controls.Add(this.panel1);
-            this.Serial.Location = new System.Drawing.Point(4, 26);
-            this.Serial.Name = "Serial";
-            this.Serial.Size = new System.Drawing.Size(940, 586);
-            this.Serial.TabIndex = 13;
-            this.Serial.Text = "Serial";
+            this.tp_Serial.BackColor = System.Drawing.SystemColors.Control;
+            this.tp_Serial.Controls.Add(this.button14);
+            this.tp_Serial.Controls.Add(this.lb_mesg3);
+            this.tp_Serial.Controls.Add(this.lb_mesg2);
+            this.tp_Serial.Controls.Add(this.lb_mesg);
+            this.tp_Serial.Controls.Add(this.label1);
+            this.tp_Serial.Controls.Add(this.groupBox11);
+            this.tp_Serial.Controls.Add(this.groupBox10);
+            this.tp_Serial.Controls.Add(this.panel1);
+            this.tp_Serial.Location = new System.Drawing.Point(4, 26);
+            this.tp_Serial.Name = "tp_Serial";
+            this.tp_Serial.Size = new System.Drawing.Size(940, 586);
+            this.tp_Serial.TabIndex = 13;
+            this.tp_Serial.Text = "Serial";
             // 
             // button14
             // 
@@ -942,24 +952,24 @@
             this.panel1.Size = new System.Drawing.Size(260, 77);
             this.panel1.TabIndex = 64;
             // 
-            // Serial_Auto
+            // tp_Serial_Auto
             // 
-            this.Serial_Auto.Location = new System.Drawing.Point(4, 26);
-            this.Serial_Auto.Name = "Serial_Auto";
-            this.Serial_Auto.Size = new System.Drawing.Size(940, 586);
-            this.Serial_Auto.TabIndex = 24;
-            this.Serial_Auto.Text = "Auto";
-            this.Serial_Auto.UseVisualStyleBackColor = true;
+            this.tp_Serial_Auto.Location = new System.Drawing.Point(4, 26);
+            this.tp_Serial_Auto.Name = "tp_Serial_Auto";
+            this.tp_Serial_Auto.Size = new System.Drawing.Size(940, 586);
+            this.tp_Serial_Auto.TabIndex = 24;
+            this.tp_Serial_Auto.Text = "Auto";
+            this.tp_Serial_Auto.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // tp_Info
             // 
-            this.tabPage5.Controls.Add(this.groupBox1);
-            this.tabPage5.Location = new System.Drawing.Point(4, 26);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(940, 586);
-            this.tabPage5.TabIndex = 21;
-            this.tabPage5.Text = "Info";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tp_Info.Controls.Add(this.groupBox1);
+            this.tp_Info.Location = new System.Drawing.Point(4, 26);
+            this.tp_Info.Name = "tp_Info";
+            this.tp_Info.Size = new System.Drawing.Size(940, 586);
+            this.tp_Info.TabIndex = 21;
+            this.tp_Info.Text = "Info";
+            this.tp_Info.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -1276,38 +1286,42 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // tabPage2
+            // tp_System
             // 
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Controls.Add(this.groupBox3);
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(940, 586);
-            this.tabPage2.TabIndex = 18;
-            this.tabPage2.Text = "System";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tp_System.Controls.Add(this.groupBox4);
+            this.tp_System.Controls.Add(this.groupBox3);
+            this.tp_System.Location = new System.Drawing.Point(4, 26);
+            this.tp_System.Name = "tp_System";
+            this.tp_System.Size = new System.Drawing.Size(940, 586);
+            this.tp_System.TabIndex = 18;
+            this.tp_System.Text = "System";
+            this.tp_System.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.lb_main_board_serial);
+            this.groupBox4.Controls.Add(this.tb_main_board_serial);
+            this.groupBox4.Controls.Add(this.checkBox1);
             this.groupBox4.Controls.Add(this.lb_write_mb_model);
             this.groupBox4.Controls.Add(this.lb_main_board_model);
             this.groupBox4.Controls.Add(this.button39);
             this.groupBox4.Controls.Add(this.button29);
             this.groupBox4.Controls.Add(this.tb_main_board_model);
             this.groupBox4.Controls.Add(this.button30);
-            this.groupBox4.Location = new System.Drawing.Point(32, 224);
+            this.groupBox4.Location = new System.Drawing.Point(32, 261);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(850, 170);
+            this.groupBox4.Size = new System.Drawing.Size(850, 296);
             this.groupBox4.TabIndex = 86;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "主機型號";
+            this.groupBox4.Text = "主機型號/序號";
             // 
             // lb_write_mb_model
             // 
             this.lb_write_mb_model.AutoSize = true;
             this.lb_write_mb_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_mb_model.Location = new System.Drawing.Point(506, 97);
+            this.lb_write_mb_model.Location = new System.Drawing.Point(501, 171);
             this.lb_write_mb_model.Name = "lb_write_mb_model";
             this.lb_write_mb_model.Size = new System.Drawing.Size(145, 23);
             this.lb_write_mb_model.TabIndex = 86;
@@ -1317,7 +1331,7 @@
             // 
             this.lb_main_board_model.AutoSize = true;
             this.lb_main_board_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_board_model.Location = new System.Drawing.Point(29, 97);
+            this.lb_main_board_model.Location = new System.Drawing.Point(27, 148);
             this.lb_main_board_model.Name = "lb_main_board_model";
             this.lb_main_board_model.Size = new System.Drawing.Size(82, 24);
             this.lb_main_board_model.TabIndex = 82;
@@ -1331,6 +1345,7 @@
             this.button39.TabIndex = 57;
             this.button39.Text = "清除";
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button29
             // 
@@ -1345,10 +1360,11 @@
             // tb_main_board_model
             // 
             this.tb_main_board_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_main_board_model.Location = new System.Drawing.Point(21, 26);
+            this.tb_main_board_model.Location = new System.Drawing.Point(101, 39);
             this.tb_main_board_model.Name = "tb_main_board_model";
             this.tb_main_board_model.Size = new System.Drawing.Size(623, 32);
             this.tb_main_board_model.TabIndex = 55;
+            this.tb_main_board_model.Text = "IMS-FG01";
             this.tb_main_board_model.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button30
@@ -1370,7 +1386,7 @@
             this.groupBox3.Controls.Add(this.lb_time1);
             this.groupBox3.Location = new System.Drawing.Point(32, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(850, 170);
+            this.groupBox3.Size = new System.Drawing.Size(850, 212);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "主機資訊";
@@ -1379,7 +1395,7 @@
             // 
             this.lb_rtc.AutoSize = true;
             this.lb_rtc.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rtc.Location = new System.Drawing.Point(494, 90);
+            this.lb_rtc.Location = new System.Drawing.Point(491, 98);
             this.lb_rtc.Name = "lb_rtc";
             this.lb_rtc.Size = new System.Drawing.Size(47, 23);
             this.lb_rtc.TabIndex = 69;
@@ -1399,7 +1415,7 @@
             // 
             this.lb_time2.AutoSize = true;
             this.lb_time2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time2.Location = new System.Drawing.Point(157, 89);
+            this.lb_time2.Location = new System.Drawing.Point(157, 125);
             this.lb_time2.Name = "lb_time2";
             this.lb_time2.Size = new System.Drawing.Size(68, 23);
             this.lb_time2.TabIndex = 67;
@@ -1407,7 +1423,7 @@
             // 
             // button122
             // 
-            this.button122.Location = new System.Drawing.Point(25, 61);
+            this.button122.Location = new System.Drawing.Point(25, 86);
             this.button122.Name = "button122";
             this.button122.Size = new System.Drawing.Size(119, 46);
             this.button122.TabIndex = 5;
@@ -1419,116 +1435,33 @@
             // 
             this.lb_time1.AutoSize = true;
             this.lb_time1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time1.Location = new System.Drawing.Point(157, 55);
+            this.lb_time1.Location = new System.Drawing.Point(157, 69);
             this.lb_time1.Name = "lb_time1";
             this.lb_time1.Size = new System.Drawing.Size(68, 23);
             this.lb_time1.TabIndex = 66;
             this.lb_time1.Text = "lb_time1";
             // 
-            // groupBox2
+            // tp_USB
             // 
-            this.groupBox2.Controls.Add(this.lb_write_camera_model);
-            this.groupBox2.Controls.Add(this.lb_camera_model);
-            this.groupBox2.Controls.Add(this.panel5);
-            this.groupBox2.Controls.Add(this.button26);
-            this.groupBox2.Controls.Add(this.button23);
-            this.groupBox2.Controls.Add(this.tb_info_83);
-            this.groupBox2.Controls.Add(this.button24);
-            this.groupBox2.Location = new System.Drawing.Point(32, 400);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(850, 170);
-            this.groupBox2.TabIndex = 60;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "相機型號";
-            // 
-            // lb_write_camera_model
-            // 
-            this.lb_write_camera_model.AutoSize = true;
-            this.lb_write_camera_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_camera_model.Location = new System.Drawing.Point(506, 97);
-            this.lb_write_camera_model.Name = "lb_write_camera_model";
-            this.lb_write_camera_model.Size = new System.Drawing.Size(176, 23);
-            this.lb_write_camera_model.TabIndex = 85;
-            this.lb_write_camera_model.Text = "lb_write_camera_model";
-            // 
-            // lb_camera_model
-            // 
-            this.lb_camera_model.AutoSize = true;
-            this.lb_camera_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_camera_model.Location = new System.Drawing.Point(122, 97);
-            this.lb_camera_model.Name = "lb_camera_model";
-            this.lb_camera_model.Size = new System.Drawing.Size(82, 24);
-            this.lb_camera_model.TabIndex = 81;
-            this.lb_camera_model.Text = "label2";
-            // 
-            // panel5
-            // 
-            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(21, 73);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(80, 80);
-            this.panel5.TabIndex = 80;
-            // 
-            // button26
-            // 
-            this.button26.Location = new System.Drawing.Point(751, 113);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(80, 40);
-            this.button26.TabIndex = 57;
-            this.button26.Text = "清除";
-            this.button26.UseVisualStyleBackColor = true;
-            // 
-            // button23
-            // 
-            this.button23.Location = new System.Drawing.Point(751, 67);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(80, 40);
-            this.button23.TabIndex = 56;
-            this.button23.Text = "寫入";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // tb_info_83
-            // 
-            this.tb_info_83.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info_83.Location = new System.Drawing.Point(21, 26);
-            this.tb_info_83.Name = "tb_info_83";
-            this.tb_info_83.Size = new System.Drawing.Size(623, 32);
-            this.tb_info_83.TabIndex = 55;
-            this.tb_info_83.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button24
-            // 
-            this.button24.Location = new System.Drawing.Point(751, 21);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(80, 40);
-            this.button24.TabIndex = 54;
-            this.button24.Text = "讀取";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // USB
-            // 
-            this.USB.Controls.Add(this.lb_zoom);
-            this.USB.Controls.Add(this.btnCenter);
-            this.USB.Controls.Add(this.btnRight);
-            this.USB.Controls.Add(this.btnLeft);
-            this.USB.Controls.Add(this.btnDown);
-            this.USB.Controls.Add(this.btnUp);
-            this.USB.Controls.Add(this.button19);
-            this.USB.Controls.Add(this.button18);
-            this.USB.Controls.Add(this.button17);
-            this.USB.Controls.Add(this.button15);
-            this.USB.Controls.Add(this.button12);
-            this.USB.Controls.Add(this.pictureBox1);
-            this.USB.Controls.Add(this.button16);
-            this.USB.Location = new System.Drawing.Point(4, 26);
-            this.USB.Name = "USB";
-            this.USB.Size = new System.Drawing.Size(940, 586);
-            this.USB.TabIndex = 22;
-            this.USB.Text = "USB";
-            this.USB.UseVisualStyleBackColor = true;
+            this.tp_USB.Controls.Add(this.lb_zoom);
+            this.tp_USB.Controls.Add(this.btnCenter);
+            this.tp_USB.Controls.Add(this.btnRight);
+            this.tp_USB.Controls.Add(this.btnLeft);
+            this.tp_USB.Controls.Add(this.btnDown);
+            this.tp_USB.Controls.Add(this.btnUp);
+            this.tp_USB.Controls.Add(this.button19);
+            this.tp_USB.Controls.Add(this.button18);
+            this.tp_USB.Controls.Add(this.button17);
+            this.tp_USB.Controls.Add(this.button15);
+            this.tp_USB.Controls.Add(this.button12);
+            this.tp_USB.Controls.Add(this.pictureBox1);
+            this.tp_USB.Controls.Add(this.button16);
+            this.tp_USB.Location = new System.Drawing.Point(4, 26);
+            this.tp_USB.Name = "tp_USB";
+            this.tp_USB.Size = new System.Drawing.Size(940, 586);
+            this.tp_USB.TabIndex = 22;
+            this.tp_USB.Text = "USB";
+            this.tp_USB.UseVisualStyleBackColor = true;
             // 
             // lb_zoom
             // 
@@ -1680,19 +1613,19 @@
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
-            // tabPage6
+            // tp_Test
             // 
-            this.tabPage6.Controls.Add(this.button3);
-            this.tabPage6.Controls.Add(this.button38);
-            this.tabPage6.Controls.Add(this.groupBox9);
-            this.tabPage6.Controls.Add(this.button37);
-            this.tabPage6.Controls.Add(this.button36);
-            this.tabPage6.Location = new System.Drawing.Point(4, 26);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(940, 586);
-            this.tabPage6.TabIndex = 23;
-            this.tabPage6.Text = "Test";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.tp_Test.Controls.Add(this.button3);
+            this.tp_Test.Controls.Add(this.button38);
+            this.tp_Test.Controls.Add(this.groupBox9);
+            this.tp_Test.Controls.Add(this.button37);
+            this.tp_Test.Controls.Add(this.button36);
+            this.tp_Test.Location = new System.Drawing.Point(4, 26);
+            this.tp_Test.Name = "tp_Test";
+            this.tp_Test.Size = new System.Drawing.Size(940, 586);
+            this.tp_Test.TabIndex = 23;
+            this.tp_Test.Text = "Test";
+            this.tp_Test.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -1811,27 +1744,27 @@
             this.button36.TabIndex = 46;
             this.button36.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // tp_Layer
             // 
-            this.tabPage4.Controls.Add(this.button143);
-            this.tabPage4.Controls.Add(this.button142);
-            this.tabPage4.Controls.Add(this.button141);
-            this.tabPage4.Controls.Add(this.button140);
-            this.tabPage4.Controls.Add(this.button139);
-            this.tabPage4.Controls.Add(this.button138);
-            this.tabPage4.Controls.Add(this.button136);
-            this.tabPage4.Controls.Add(this.button137);
-            this.tabPage4.Controls.Add(this.button134);
-            this.tabPage4.Controls.Add(this.button135);
-            this.tabPage4.Controls.Add(this.button132);
-            this.tabPage4.Controls.Add(this.button133);
-            this.tabPage4.Controls.Add(this.groupBox8);
-            this.tabPage4.Location = new System.Drawing.Point(4, 26);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(940, 586);
-            this.tabPage4.TabIndex = 20;
-            this.tabPage4.Text = "Layer";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tp_Layer.Controls.Add(this.button143);
+            this.tp_Layer.Controls.Add(this.button142);
+            this.tp_Layer.Controls.Add(this.button141);
+            this.tp_Layer.Controls.Add(this.button140);
+            this.tp_Layer.Controls.Add(this.button139);
+            this.tp_Layer.Controls.Add(this.button138);
+            this.tp_Layer.Controls.Add(this.button136);
+            this.tp_Layer.Controls.Add(this.button137);
+            this.tp_Layer.Controls.Add(this.button134);
+            this.tp_Layer.Controls.Add(this.button135);
+            this.tp_Layer.Controls.Add(this.button132);
+            this.tp_Layer.Controls.Add(this.button133);
+            this.tp_Layer.Controls.Add(this.groupBox8);
+            this.tp_Layer.Location = new System.Drawing.Point(4, 26);
+            this.tp_Layer.Name = "tp_Layer";
+            this.tp_Layer.Size = new System.Drawing.Size(940, 586);
+            this.tp_Layer.TabIndex = 20;
+            this.tp_Layer.Text = "Layer";
+            this.tp_Layer.UseVisualStyleBackColor = true;
             // 
             // button143
             // 
@@ -2054,20 +1987,20 @@
             this.cb_0.Text = "Layer 0, Background";
             this.cb_0.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tp_About
             // 
-            this.tabPage3.Controls.Add(this.linkLabel1);
-            this.tabPage3.Controls.Add(this.label57);
-            this.tabPage3.Controls.Add(this.label58);
-            this.tabPage3.Controls.Add(this.label59);
-            this.tabPage3.Controls.Add(this.label60);
-            this.tabPage3.Controls.Add(this.pictureBox8);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(940, 586);
-            this.tabPage3.TabIndex = 19;
-            this.tabPage3.Text = "About";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tp_About.Controls.Add(this.linkLabel1);
+            this.tp_About.Controls.Add(this.label57);
+            this.tp_About.Controls.Add(this.label58);
+            this.tp_About.Controls.Add(this.label59);
+            this.tp_About.Controls.Add(this.label60);
+            this.tp_About.Controls.Add(this.pictureBox8);
+            this.tp_About.Location = new System.Drawing.Point(4, 26);
+            this.tp_About.Name = "tp_About";
+            this.tp_About.Size = new System.Drawing.Size(940, 586);
+            this.tp_About.TabIndex = 19;
+            this.tp_About.Text = "About";
+            this.tp_About.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
@@ -2138,7 +2071,7 @@
             this.button13.BackColor = System.Drawing.Color.Black;
             this.button13.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.ForeColor = System.Drawing.Color.Gold;
-            this.button13.Location = new System.Drawing.Point(572, 5);
+            this.button13.Location = new System.Drawing.Point(614, 5);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(60, 60);
             this.button13.TabIndex = 65;
@@ -2336,6 +2269,168 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
+            // tp_Camera_Model
+            // 
+            this.tp_Camera_Model.Controls.Add(this.groupBox2);
+            this.tp_Camera_Model.Location = new System.Drawing.Point(4, 26);
+            this.tp_Camera_Model.Name = "tp_Camera_Model";
+            this.tp_Camera_Model.Size = new System.Drawing.Size(940, 586);
+            this.tp_Camera_Model.TabIndex = 25;
+            this.tp_Camera_Model.Text = "Camera";
+            this.tp_Camera_Model.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.lb_write_camera_model);
+            this.groupBox2.Controls.Add(this.lb_camera_model);
+            this.groupBox2.Controls.Add(this.panel5);
+            this.groupBox2.Controls.Add(this.button26);
+            this.groupBox2.Controls.Add(this.button23);
+            this.groupBox2.Controls.Add(this.tb_info_83);
+            this.groupBox2.Controls.Add(this.button24);
+            this.groupBox2.Location = new System.Drawing.Point(23, 37);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(850, 209);
+            this.groupBox2.TabIndex = 61;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "相機型號";
+            // 
+            // lb_write_camera_model
+            // 
+            this.lb_write_camera_model.AutoSize = true;
+            this.lb_write_camera_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_write_camera_model.Location = new System.Drawing.Point(506, 97);
+            this.lb_write_camera_model.Name = "lb_write_camera_model";
+            this.lb_write_camera_model.Size = new System.Drawing.Size(176, 23);
+            this.lb_write_camera_model.TabIndex = 85;
+            this.lb_write_camera_model.Text = "lb_write_camera_model";
+            // 
+            // lb_camera_model
+            // 
+            this.lb_camera_model.AutoSize = true;
+            this.lb_camera_model.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_camera_model.Location = new System.Drawing.Point(126, 97);
+            this.lb_camera_model.Name = "lb_camera_model";
+            this.lb_camera_model.Size = new System.Drawing.Size(82, 24);
+            this.lb_camera_model.TabIndex = 81;
+            this.lb_camera_model.Text = "label2";
+            // 
+            // panel5
+            // 
+            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Location = new System.Drawing.Point(21, 73);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(80, 80);
+            this.panel5.TabIndex = 80;
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(751, 113);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(80, 40);
+            this.button26.TabIndex = 57;
+            this.button26.Text = "清除";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(751, 67);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(80, 40);
+            this.button23.TabIndex = 56;
+            this.button23.Text = "寫入";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // tb_info_83
+            // 
+            this.tb_info_83.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info_83.Location = new System.Drawing.Point(21, 26);
+            this.tb_info_83.Name = "tb_info_83";
+            this.tb_info_83.Size = new System.Drawing.Size(623, 32);
+            this.tb_info_83.TabIndex = 55;
+            this.tb_info_83.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(751, 21);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(80, 40);
+            this.button24.TabIndex = 54;
+            this.button24.Text = "讀取";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox1.Location = new System.Drawing.Point(21, 237);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(274, 31);
+            this.checkBox1.TabIndex = 87;
+            this.checkBox1.Text = "使用掃瞄機寫入資料";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // tb_main_board_serial
+            // 
+            this.tb_main_board_serial.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_main_board_serial.Location = new System.Drawing.Point(101, 93);
+            this.tb_main_board_serial.Name = "tb_main_board_serial";
+            this.tb_main_board_serial.Size = new System.Drawing.Size(623, 32);
+            this.tb_main_board_serial.TabIndex = 88;
+            this.tb_main_board_serial.Text = "19020033";
+            this.tb_main_board_serial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_main_board_serial
+            // 
+            this.lb_main_board_serial.AutoSize = true;
+            this.lb_main_board_serial.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_board_serial.Location = new System.Drawing.Point(27, 190);
+            this.lb_main_board_serial.Name = "lb_main_board_serial";
+            this.lb_main_board_serial.Size = new System.Drawing.Size(82, 24);
+            this.lb_main_board_serial.TabIndex = 89;
+            this.lb_main_board_serial.Text = "label2";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(26, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 24);
+            this.label2.TabIndex = 90;
+            this.label2.Text = "型號";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(26, 96);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 24);
+            this.label3.TabIndex = 91;
+            this.label3.Text = "序號";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(196, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(250, 24);
+            this.label4.TabIndex = 86;
+            this.label4.Text = "相機型號僅可一次寫入";
+            // 
+            // scanner_timer2
+            // 
+            this.scanner_timer2.Interval = 500;
+            this.scanner_timer2.Tick += new System.EventHandler(this.scanner_timer2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2372,41 +2467,42 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tp_Camera.ResumeLayout(false);
+            this.tp_Camera.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            this.Serial.ResumeLayout(false);
-            this.Serial.PerformLayout();
+            this.tp_Serial.ResumeLayout(false);
+            this.tp_Serial.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
+            this.tp_Info.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tp_System.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.USB.ResumeLayout(false);
-            this.USB.PerformLayout();
+            this.tp_USB.ResumeLayout(false);
+            this.tp_USB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabPage6.ResumeLayout(false);
+            this.tp_Test.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.tp_Layer.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tp_About.ResumeLayout(false);
+            this.tp_About.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tp_Camera_Model.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2429,7 +2525,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Timer timer1;
         private System.DirectoryServices.DirectoryEntry directoryEntry1;
-        private System.Windows.Forms.TabPage Serial;
+        private System.Windows.Forms.TabPage tp_Serial;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button34;
         private System.Windows.Forms.Button button72;
@@ -2439,9 +2535,9 @@
         private System.Windows.Forms.Button button70;
         private System.Windows.Forms.Button button87;
         private System.Windows.Forms.Button button88;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tp_Camera;
+        private System.Windows.Forms.TabPage tp_System;
+        private System.Windows.Forms.TabPage tp_About;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.Button button118;
         private System.Windows.Forms.Button button117;
@@ -2473,7 +2569,7 @@
         private System.Windows.Forms.Button button127;
         private System.Windows.Forms.Button button128;
         private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tp_Layer;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button button131;
         private System.Windows.Forms.Button button130;
@@ -2501,7 +2597,7 @@
         private System.Windows.Forms.Button button64;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tp_Info;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox tb_info_a;
@@ -2545,7 +2641,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button bt_confirm;
         private System.Windows.Forms.Label lb_warning;
-        private System.Windows.Forms.TabPage USB;
+        private System.Windows.Forms.TabPage tp_USB;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label1;
@@ -2567,23 +2663,15 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Label lb_rtc;
         private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.TextBox tb_info_83;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label lb_camera_model;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label lb_main_board_model;
-        private System.Windows.Forms.Label lb_write_camera_model;
         private System.Windows.Forms.Label lb_write_mb_model;
         private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button35;
         private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.Button button38;
-        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tp_Test;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.Label lb_write_camera_serial;
@@ -2597,7 +2685,7 @@
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.TextBox tb_main_board_model;
         private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.TabPage Serial_Auto;
+        private System.Windows.Forms.TabPage tp_Serial_Auto;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnLeft;
@@ -2605,6 +2693,22 @@
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.Button btnCenter;
         private System.Windows.Forms.Label lb_zoom;
+        private System.Windows.Forms.TabPage tp_Camera_Model;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lb_write_camera_model;
+        private System.Windows.Forms.Label lb_camera_model;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.TextBox tb_info_83;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label lb_main_board_serial;
+        private System.Windows.Forms.TextBox tb_main_board_serial;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer scanner_timer2;
     }
 }
 
