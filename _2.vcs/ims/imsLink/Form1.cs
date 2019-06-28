@@ -768,8 +768,9 @@ namespace imsLink
                                 richTextBox1.Text += "BytesToRead = " + BytesToRead.ToString() + "\n";
                                 bool flag_no_mb_model = true;
                                 bool flag_no_mb_serial = true;
-                                lb_main_board_model.Text = "[Model]: ";
-                                lb_main_board_serial.Text = "[Serial]: ";
+                                lb_machine_serial.Text = "[主機序號]: ";
+                                lb_mb_big_serial.Text = "[大PCBA序號]: ";
+                                lb_mb_small_serial.Text = "[小PCBA序號]: ";
                                 for (int i = 0; i < 8; i++)
                                 {
                                     if (((int)input[i] < 32) || ((int)input[i] > 126))
@@ -781,7 +782,7 @@ namespace imsLink
                                     }
                                     else
                                     {
-                                        lb_main_board_model.Text += (char)input[i];
+                                        lb_machine_serial.Text += (char)input[i];
                                         flag_no_mb_model = false;
                                     }
                                 }
@@ -796,18 +797,18 @@ namespace imsLink
                                     }
                                     else
                                     {
-                                        lb_main_board_serial.Text += (char)input[i];
+                                        lb_mb_big_serial.Text += (char)input[i];
                                         flag_no_mb_serial = false;
                                     }
                                 }
 
                                 if (flag_no_mb_model == true)
                                 {
-                                    lb_main_board_model.Text = "[Model]: 無主機型號資料";
+                                    lb_machine_serial.Text = "[Model]: 無主機型號資料";
                                 }
                                 if (flag_no_mb_serial == true)
                                 {
-                                    lb_main_board_model.Text = "[Model]: 無主機序號資料";
+                                    lb_machine_serial.Text = "[Model]: 無主機序號資料";
                                 }
 
                                 flag_receive_mb_model_data = 0;
@@ -1144,8 +1145,9 @@ namespace imsLink
             lb_time2.Text = "";
             lb_rtc.Text = "";
             lb_camera_model.Text = "";
-            lb_main_board_model.Text = "";
-            lb_main_board_serial.Text = "";
+            lb_machine_serial.Text = "";
+            lb_mb_big_serial.Text = "";
+            lb_mb_small_serial.Text = "";
             lb_write_camera_model.Text = "";
             lb_write_camera_serial.Text = "";
             lb_write_mb_model.Text = "";
@@ -2131,6 +2133,23 @@ namespace imsLink
             {
                 scanner_timer.Enabled = false;
             }
+            if (tabControl1.SelectedIndex == 4)
+            {
+                scanner_timer2.Enabled = true;
+            }
+            else
+            {
+                scanner_timer2.Enabled = false;
+            }
+
+            if (tabControl1.SelectedIndex == 6)
+            {
+                richTextBox1.Text += "進入USB WebCam\n";
+            }
+            else
+            {
+                richTextBox1.Text += "離開USB WebCam\n";
+            }
 
             if (tabControl1.SelectedIndex == 3)
             {
@@ -2318,6 +2337,7 @@ namespace imsLink
 
         private void scanner_timer_Tick(object sender, EventArgs e)
         {
+            richTextBox1.Text += "A";
             if((cnt3 % 1) == 0)
             {
                 this.tb_sn2.Focus();
@@ -3252,8 +3272,9 @@ namespace imsLink
         private void button30_Click(object sender, EventArgs e)
         {
             lb_write_mb_model.Text = "";
-            lb_main_board_model.Text = "主機型號讀取中...";
-            lb_main_board_serial.Text = "主機序號讀取中...";
+            lb_machine_serial.Text = "主機序號 讀取中...";
+            lb_mb_big_serial.Text = "大PCBA序號 讀取中...";
+            lb_mb_small_serial.Text = "小PCBA序號 讀取中...";
             button30.BackColor = Color.Red;
 
             if (!serialPort1.IsOpen)
@@ -3279,26 +3300,27 @@ namespace imsLink
 
         private void button29_Click(object sender, EventArgs e)
         {
-            lb_main_board_model.Text = "";
-            lb_main_board_serial.Text = "";
+            lb_machine_serial.Text = "";
+            lb_mb_big_serial.Text = "";
+            lb_mb_small_serial.Text = "";
             lb_write_mb_model.Text = "準備中";
-            richTextBox1.Text += "主機型號長度 : " + tb_main_board_model.Text.Length.ToString() + "\n";
-            richTextBox1.Text += "主機序號長度 : " + tb_main_board_serial.Text.Length.ToString() + "\n";
-            if ((tb_main_board_model.Text.Length <= 0) || (tb_main_board_model.Text.Length > 16))
+            richTextBox1.Text += "主機型號長度 : " + tb_machine_serial.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "主機序號長度 : " + tb_mb_big_serial.Text.Length.ToString() + "\n";
+            if ((tb_machine_serial.Text.Length <= 0) || (tb_machine_serial.Text.Length > 16))
             {
-                richTextBox1.Text += "主機型號長度錯誤, 長度 : " + tb_main_board_model.Text.Length.ToString() + "\n";
+                richTextBox1.Text += "主機型號長度錯誤, 長度 : " + tb_machine_serial.Text.Length.ToString() + "\n";
                 lb_write_mb_model.Text = "主機型號長度錯誤";
                 return;
             }
-            if ((tb_main_board_serial.Text.Length <= 0) || (tb_main_board_serial.Text.Length > 16))
+            if ((tb_mb_big_serial.Text.Length <= 0) || (tb_mb_big_serial.Text.Length > 16))
             {
-                richTextBox1.Text += "主機序號長度錯誤, 長度 : " + tb_main_board_serial.Text.Length.ToString() + "\n";
+                richTextBox1.Text += "主機序號長度錯誤, 長度 : " + tb_mb_big_serial.Text.Length.ToString() + "\n";
                 lb_write_mb_model.Text = "主機序號長度錯誤";
                 return;
             }
-            if ((tb_main_board_model.Text.Length + tb_main_board_serial.Text.Length) > 16)
+            if ((tb_machine_serial.Text.Length + tb_mb_big_serial.Text.Length) > 16)
             {
-                richTextBox1.Text += "主機型號序號總長度錯誤, 長度 : " + (tb_main_board_model.Text.Length + tb_main_board_serial.Text.Length).ToString() + "\n";
+                richTextBox1.Text += "主機型號序號總長度錯誤, 長度 : " + (tb_machine_serial.Text.Length + tb_mb_big_serial.Text.Length).ToString() + "\n";
                 lb_write_mb_model.Text = "主機型號序號總長度錯誤";
                 return;
             }
@@ -3312,7 +3334,7 @@ namespace imsLink
                 return;
             }
 
-            string total_data = tb_main_board_model.Text + tb_main_board_serial.Text;
+            string total_data = tb_machine_serial.Text + tb_mb_big_serial.Text;
             richTextBox1.Text += "total_data len = " + total_data.Length.ToString() + "\n";
 
             int i;
@@ -3469,8 +3491,8 @@ namespace imsLink
 
         private void button39_Click(object sender, EventArgs e)
         {
-            tb_main_board_model.Text = "";
-            tb_main_board_serial.Text = "";
+            tb_machine_serial.Text = "";
+            tb_mb_big_serial.Text = "";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -3478,22 +3500,149 @@ namespace imsLink
             tb_info_83.Text = "";
         }
 
-        private void scanner_timer2_Tick(object sender, EventArgs e)
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            richTextBox1.Text += "X";
+            richTextBox1.Text += "pictureBox double click at x = " + MousePosition.X.ToString() + " y = " + MousePosition.Y.ToString() + "\n";
+
+            //MouseButtons.
+            //MouseButtons.Left
+
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        bool flag_ok_machine_serial = false;
+        bool flag_ok_mb_big_serial = false;
+        bool flag_ok_mb_small_serial = false;
+        bool flag_ok_to_write_data = false;
+        private void scanner_timer2_Tick(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+            richTextBox1.Text += "B";
+            if ((cnt3 % 1) == 0)
             {
-                scanner_timer2.Enabled = true;
+                this.tb_wait_data.Focus();
             }
-            else
+            if (tb_wait_data.Text.Length > 0)
             {
-                scanner_timer2.Enabled = false;
+                int i;
+                bool flag_incorrect_data = false;
+                if (tb_wait_data.Text.Length == 13)
+                {
+                    if ((tb_wait_data.Text[7] == '-') && (tb_wait_data.Text[8] == 'B'))
+                    {
+                        for (i = 0; i < 13; i++)
+                        {
+                            if ((i == 7) || (i == 8))
+                                continue;
+                            if ((tb_wait_data.Text[i] < '0') || (tb_wait_data.Text[i] > '9'))
+                            {
+                                flag_incorrect_data = true;
+                            }
+                        }
+
+                        if (flag_incorrect_data == false)
+                        {
+                            richTextBox1.Text += "取得 主機序號 : " + tb_wait_data + "\n";
+                            tb_machine_serial.Text = tb_wait_data.Text;
+                            tb_wait_data.Text = "";
+                            flag_ok_machine_serial = true;
+                        }
+                    }
+                    else
+                    {
+                        for (i = 0; i < 13; i++)
+                        {
+                            if ((tb_wait_data.Text[i] < '0') || (tb_wait_data.Text[i] > '9'))
+                            {
+                                flag_incorrect_data = true;
+                            }
+                        }
+
+                        if (flag_incorrect_data == false)
+                        {
+                            richTextBox1.Text += "取得 大PCBA序號 : " + tb_wait_data + "\n";
+                            tb_mb_big_serial.Text = tb_wait_data.Text;
+                            tb_wait_data.Text = "";
+                            flag_ok_mb_big_serial = true;
+                        }
+                    }
+                }
+                else if (tb_wait_data.Text.Length == 24)
+                {
+                    for (i = 0; i < 24; i++)
+                    {
+                        if (((tb_wait_data.Text[i] < '0') || (tb_wait_data.Text[i] > '9')) && (tb_wait_data.Text[i] != ' '))
+                        {
+                            flag_incorrect_data = true;
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        richTextBox1.Text += "取得 小PCBA序號 : " + tb_wait_data + "\n";
+                        tb_mb_small_serial.Text = tb_wait_data.Text;
+                        tb_wait_data.Text = "";
+                        flag_ok_mb_small_serial = true;
+                    }
+                }
+                else if (tb_wait_data.Text.Length == 14)
+                {
+                    if (flag_ok_to_write_data == true)
+                    {
+                        if (tb_wait_data.Text == "IMS EGD SYSTEM")
+                        {
+                            flag_incorrect_data = false;
+                            richTextBox1.Text += "'資料正確, 開始燒錄\n";
+                        }
+                        else
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "'資料錯誤\n";
+                        }
+                    }
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                }
+
+                if (flag_incorrect_data == true)
+                {
+                    richTextBox1.Text += "資料錯誤,長度 " + tb_wait_data.Text.Length.ToString() + "\t內容 " + tb_wait_data.Text + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "資料正確,長度 " + tb_wait_data.Text.Length.ToString() + "\t內容 " + tb_wait_data.Text + "\n";
+                    //bool flag_ok_machine_serial = false;
+                    //bool flag_ok_mb_big_serial = false;
+                    //bool flag_ok_mb_small_serial = false;
+                    if (flag_ok_machine_serial == false)
+                    {
+                        tb_machine_serial.Text = "";
+                        panel6.BackgroundImage = null;
+                    }
+                    if (flag_ok_mb_big_serial == false)
+                    {
+                        tb_mb_big_serial.Text = "";
+                        panel6.BackgroundImage = null;
+                    }
+                    if (flag_ok_mb_small_serial == false)
+                    {
+                        tb_mb_small_serial.Text = "";
+                        panel6.BackgroundImage = null;
+                    }
+                    if ((flag_ok_machine_serial == true) && (flag_ok_mb_big_serial == true) && (flag_ok_mb_small_serial == true))
+                    {
+                        richTextBox1.Text += "準備燒錄\n";
+                        flag_ok_to_write_data = true;
+                        panel6.BackgroundImage = imsLink.Properties.Resources.ims_egd_system;
+                    }
+
+
+
+                }
+                tb_wait_data.Text = "";
             }
         }
+
     }
 }
 

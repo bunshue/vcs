@@ -13,6 +13,17 @@ namespace vcs_ZoomPicture
     {
         Graphics g;	//設定一個畫布g
         int ratio = 100;
+
+        bool flag_mouse_down = false;
+        int mouse_down_position_x = 0;
+        int mouse_down_position_y = 0;
+        int mouse_up_position_x = 0;
+        int mouse_up_position_y = 0;
+        int move_x;
+        int move_y;
+        int picture_start_position_x = 0;
+        int picture_start_position_y = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +38,18 @@ namespace vcs_ZoomPicture
             int height = image.Height;
             Bitmap bmp = new Bitmap(image, width * ratio / 100, height * ratio / 100);
             //g.DrawImage(bmp, 50, 50);
-            g.DrawImage(bmp, this.ClientSize.Width / 2 - width * ratio / 100 / 2, this.ClientSize.Height / 2 - height * ratio / 100 / 2);
+            //g.DrawImage(bmp, this.ClientSize.Width / 2 - width * ratio / 100 / 2, this.ClientSize.Height / 2 - height * ratio / 100 / 2);
+
+            if (flag_mouse_down == false)
+            {
+                move_x = mouse_up_position_x - mouse_down_position_x;
+                move_y = mouse_up_position_y - mouse_down_position_y;
+                picture_start_position_x += move_x;
+                picture_start_position_y += move_y;
+                g.DrawImage(bmp, this.ClientSize.Width / 2 - width * ratio / 100 / 2 + picture_start_position_x, this.ClientSize.Height / 2 - height * ratio / 100 / 2 + picture_start_position_y);
+            }
+
+            //g.DrawImage(bmp, 0, 0);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -44,9 +66,65 @@ namespace vcs_ZoomPicture
                         ratio -= 10;
                     this.Refresh();
                     break;
+                case Keys.Up:
+                    picture_start_position_y -= 100;
+                    this.Refresh();
+                    break;
+                case Keys.Down:
+                    picture_start_position_y += 100;
+                    this.Refresh();
+                    break;
+                case Keys.Left:
+                    picture_start_position_x -= 100;
+                    this.Refresh();
+                    break;
+                case Keys.Right:
+                    picture_start_position_x += 100;
+                    this.Refresh();
+                    break;
+                case Keys.NumPad0:
+                    ratio = 100;
+                    mouse_down_position_x = 0;
+                    mouse_down_position_y = 0;
+                    mouse_up_position_x = 0;
+                    mouse_up_position_y = 0;
+                    move_x = 0;
+                    move_y = 0;
+                    picture_start_position_x = 0;
+                    picture_start_position_y = 0;
+                    this.Refresh();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = true;
+            mouse_down_position_x = e.X;
+            mouse_down_position_y = e.Y;
+
+            label2.Text = "MouseDown   (" + e.X.ToString() + ", " + e.Y + ")";
+
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouse_up_position_x = e.X;
+            mouse_up_position_y = e.Y;
+
+            label2.Text += "  MouseUp   (" + e.X.ToString() + ", " + e.Y + ") ";
+            flag_mouse_down = false;
+            this.Refresh();
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //label2.Text += "  MouseMove";
+
+            //this.Refresh();
+
         }
     }
 }
