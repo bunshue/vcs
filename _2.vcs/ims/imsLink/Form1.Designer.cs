@@ -59,11 +59,13 @@
             this.button119 = new System.Windows.Forms.Button();
             this.button118 = new System.Windows.Forms.Button();
             this.button117 = new System.Windows.Forms.Button();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label62 = new System.Windows.Forms.Label();
             this.button125 = new System.Windows.Forms.Button();
             this.button126 = new System.Windows.Forms.Button();
             this.button127 = new System.Windows.Forms.Button();
             this.button128 = new System.Windows.Forms.Button();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.tp_Serial = new System.Windows.Forms.TabPage();
             this.button14 = new System.Windows.Forms.Button();
             this.lb_mesg3 = new System.Windows.Forms.Label();
@@ -89,10 +91,12 @@
             this.button11 = new System.Windows.Forms.Button();
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tp_Serial_Auto = new System.Windows.Forms.TabPage();
             this.tp_Info = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.lb_a = new System.Windows.Forms.Label();
             this.tb_info_f2 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
@@ -164,6 +168,8 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button16 = new System.Windows.Forms.Button();
             this.tp_Test = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
@@ -202,6 +208,7 @@
             this.label58 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.button13 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -226,16 +233,12 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button16 = new System.Windows.Forms.Button();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.button25 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tp_Serial.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -247,16 +250,14 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tp_Test.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tp_Layer.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tp_About.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -600,6 +601,16 @@
             this.button117.UseVisualStyleBackColor = true;
             this.button117.Click += new System.EventHandler(this.button117_Click);
             // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(19, 15);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(760, 196);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 0;
+            this.pictureBox7.TabStop = false;
+            // 
             // label62
             // 
             this.label62.AutoSize = true;
@@ -649,6 +660,16 @@
             this.button128.Text = "1";
             this.button128.UseVisualStyleBackColor = true;
             this.button128.Click += new System.EventHandler(this.button128_Click);
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(20, 217);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(760, 196);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox9.TabIndex = 43;
+            this.pictureBox9.TabStop = false;
             // 
             // tp_Serial
             // 
@@ -927,6 +948,15 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Location = new System.Drawing.Point(673, 497);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(260, 77);
+            this.panel1.TabIndex = 64;
+            // 
             // tp_Serial_Auto
             // 
             this.tp_Serial_Auto.Location = new System.Drawing.Point(4, 26);
@@ -991,6 +1021,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(80, 80);
             this.panel3.TabIndex = 79;
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel2.Location = new System.Drawing.Point(764, 468);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(132, 62);
+            this.panel2.TabIndex = 65;
             // 
             // lb_a
             // 
@@ -1265,6 +1304,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button25);
             this.groupBox4.Controls.Add(this.tb_wait_data);
             this.groupBox4.Controls.Add(this.panel6);
             this.groupBox4.Controls.Add(this.lb_mb_small_serial);
@@ -1280,9 +1320,9 @@
             this.groupBox4.Controls.Add(this.button29);
             this.groupBox4.Controls.Add(this.tb_machine_serial);
             this.groupBox4.Controls.Add(this.button30);
-            this.groupBox4.Location = new System.Drawing.Point(32, 183);
+            this.groupBox4.Location = new System.Drawing.Point(32, 159);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(850, 387);
+            this.groupBox4.Size = new System.Drawing.Size(850, 412);
             this.groupBox4.TabIndex = 86;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "序號";
@@ -1290,25 +1330,25 @@
             // tb_wait_data
             // 
             this.tb_wait_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_data.Location = new System.Drawing.Point(340, 165);
+            this.tb_wait_data.Location = new System.Drawing.Point(510, 169);
             this.tb_wait_data.Name = "tb_wait_data";
-            this.tb_wait_data.Size = new System.Drawing.Size(396, 32);
+            this.tb_wait_data.Size = new System.Drawing.Size(226, 32);
             this.tb_wait_data.TabIndex = 96;
             this.tb_wait_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel6
             // 
             this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel6.Location = new System.Drawing.Point(340, 236);
+            this.panel6.Location = new System.Drawing.Point(247, 280);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(396, 131);
+            this.panel6.Size = new System.Drawing.Size(380, 122);
             this.panel6.TabIndex = 95;
             // 
             // lb_mb_small_serial
             // 
             this.lb_mb_small_serial.AutoSize = true;
             this.lb_mb_small_serial.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mb_small_serial.Location = new System.Drawing.Point(27, 252);
+            this.lb_mb_small_serial.Location = new System.Drawing.Point(19, 241);
             this.lb_mb_small_serial.Name = "lb_mb_small_serial";
             this.lb_mb_small_serial.Size = new System.Drawing.Size(226, 24);
             this.lb_mb_small_serial.TabIndex = 94;
@@ -1331,7 +1371,6 @@
             this.tb_mb_small_serial.Name = "tb_mb_small_serial";
             this.tb_mb_small_serial.Size = new System.Drawing.Size(581, 32);
             this.tb_mb_small_serial.TabIndex = 92;
-            this.tb_mb_small_serial.Text = "4000104 1404 000335 1836";
             this.tb_mb_small_serial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
@@ -1358,7 +1397,7 @@
             // 
             this.lb_mb_big_serial.AutoSize = true;
             this.lb_mb_big_serial.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mb_big_serial.Location = new System.Drawing.Point(27, 216);
+            this.lb_mb_big_serial.Location = new System.Drawing.Point(19, 204);
             this.lb_mb_big_serial.Name = "lb_mb_big_serial";
             this.lb_mb_big_serial.Size = new System.Drawing.Size(202, 24);
             this.lb_mb_big_serial.TabIndex = 89;
@@ -1371,14 +1410,13 @@
             this.tb_mb_big_serial.Name = "tb_mb_big_serial";
             this.tb_mb_big_serial.Size = new System.Drawing.Size(581, 32);
             this.tb_mb_big_serial.TabIndex = 88;
-            this.tb_mb_big_serial.Text = "19030033";
             this.tb_mb_big_serial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lb_write_mb_model
             // 
             this.lb_write_mb_model.AutoSize = true;
             this.lb_write_mb_model.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_mb_model.Location = new System.Drawing.Point(501, 204);
+            this.lb_write_mb_model.Location = new System.Drawing.Point(524, 225);
             this.lb_write_mb_model.Name = "lb_write_mb_model";
             this.lb_write_mb_model.Size = new System.Drawing.Size(145, 23);
             this.lb_write_mb_model.TabIndex = 86;
@@ -1388,7 +1426,7 @@
             // 
             this.lb_machine_serial.AutoSize = true;
             this.lb_machine_serial.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_machine_serial.Location = new System.Drawing.Point(27, 181);
+            this.lb_machine_serial.Location = new System.Drawing.Point(19, 167);
             this.lb_machine_serial.Name = "lb_machine_serial";
             this.lb_machine_serial.Size = new System.Drawing.Size(214, 24);
             this.lb_machine_serial.TabIndex = 82;
@@ -1421,7 +1459,6 @@
             this.tb_machine_serial.Name = "tb_machine_serial";
             this.tb_machine_serial.Size = new System.Drawing.Size(581, 32);
             this.tb_machine_serial.TabIndex = 55;
-            this.tb_machine_serial.Text = "ims-0001";
             this.tb_machine_serial.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button30
@@ -1443,7 +1480,7 @@
             this.groupBox3.Controls.Add(this.lb_time1);
             this.groupBox3.Location = new System.Drawing.Point(32, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(850, 153);
+            this.groupBox3.Size = new System.Drawing.Size(850, 133);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "主機資訊";
@@ -1452,7 +1489,7 @@
             // 
             this.lb_rtc.AutoSize = true;
             this.lb_rtc.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rtc.Location = new System.Drawing.Point(491, 83);
+            this.lb_rtc.Location = new System.Drawing.Point(506, 85);
             this.lb_rtc.Name = "lb_rtc";
             this.lb_rtc.Size = new System.Drawing.Size(47, 23);
             this.lb_rtc.TabIndex = 69;
@@ -1472,7 +1509,7 @@
             // 
             this.lb_time2.AutoSize = true;
             this.lb_time2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time2.Location = new System.Drawing.Point(157, 110);
+            this.lb_time2.Location = new System.Drawing.Point(157, 85);
             this.lb_time2.Name = "lb_time2";
             this.lb_time2.Size = new System.Drawing.Size(68, 23);
             this.lb_time2.TabIndex = 67;
@@ -1480,7 +1517,7 @@
             // 
             // button122
             // 
-            this.button122.Location = new System.Drawing.Point(25, 71);
+            this.button122.Location = new System.Drawing.Point(25, 46);
             this.button122.Name = "button122";
             this.button122.Size = new System.Drawing.Size(119, 46);
             this.button122.TabIndex = 5;
@@ -1492,7 +1529,7 @@
             // 
             this.lb_time1.AutoSize = true;
             this.lb_time1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time1.Location = new System.Drawing.Point(157, 54);
+            this.lb_time1.Location = new System.Drawing.Point(157, 29);
             this.lb_time1.Name = "lb_time1";
             this.lb_time1.Size = new System.Drawing.Size(68, 23);
             this.lb_time1.TabIndex = 66;
@@ -1752,6 +1789,29 @@
             this.button12.TabIndex = 0;
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(170, 50);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            // 
+            // button16
+            // 
+            this.button16.BackgroundImage = global::imsLink.Properties.Resources.save;
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button16.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.ForeColor = System.Drawing.Color.Black;
+            this.button16.Location = new System.Drawing.Point(94, 50);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(60, 60);
+            this.button16.TabIndex = 38;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // tp_Test
             // 
@@ -2195,6 +2255,17 @@
             this.label60.TabIndex = 9;
             this.label60.Text = "電話:   (03) 5631166";
             // 
+            // pictureBox8
+            // 
+            this.pictureBox8.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.ErrorImage")));
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(61, 18);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(720, 480);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox8.TabIndex = 7;
+            this.pictureBox8.TabStop = false;
+            // 
             // button13
             // 
             this.button13.BackColor = System.Drawing.Color.Black;
@@ -2402,77 +2473,16 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // pictureBox7
+            // button25
             // 
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(19, 15);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(760, 196);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 0;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(20, 217);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(760, 196);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox9.TabIndex = 43;
-            this.pictureBox9.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(673, 497);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 77);
-            this.panel1.TabIndex = 64;
-            // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel2.Location = new System.Drawing.Point(764, 468);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(132, 62);
-            this.panel2.TabIndex = 65;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(170, 50);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
-            // 
-            // button16
-            // 
-            this.button16.BackgroundImage = global::imsLink.Properties.Resources.save;
-            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button16.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.ForeColor = System.Drawing.Color.Black;
-            this.button16.Location = new System.Drawing.Point(94, 50);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(60, 60);
-            this.button16.TabIndex = 38;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox8.ErrorImage")));
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(61, 18);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(720, 480);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 7;
-            this.pictureBox8.TabStop = false;
+            this.button25.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button25.Location = new System.Drawing.Point(751, 161);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(80, 40);
+            this.button25.TabIndex = 97;
+            this.button25.Text = "到修改模式";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // Form1
             // 
@@ -2513,6 +2523,8 @@
             this.tp_Camera.ResumeLayout(false);
             this.tp_Camera.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tp_Serial.ResumeLayout(false);
             this.tp_Serial.PerformLayout();
             this.groupBox11.ResumeLayout(false);
@@ -2532,6 +2544,7 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tp_Test.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
@@ -2540,12 +2553,9 @@
             this.groupBox8.PerformLayout();
             this.tp_About.ResumeLayout(false);
             this.tp_About.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2756,6 +2766,7 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Timer scanner_timer2;
         private System.Windows.Forms.TextBox tb_wait_data;
+        private System.Windows.Forms.Button button25;
     }
 }
 
