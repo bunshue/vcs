@@ -18,7 +18,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = false;
+        bool flag_release_mode = true;
         private const bool SHOW_COMPORT_LOG = false;
         private const int UART_BUF_LENGTH = 5;
         private const int CAMERA_OK = 0;	//dongle + camera
@@ -141,6 +141,7 @@ namespace imsLink
 
             textBox1.Text = trackBar6.Value.ToString();
 
+            /*
             if (comboBox1.Text.Length == 0)
             {
                 MessageBox.Show("No comport selected.");
@@ -177,21 +178,20 @@ namespace imsLink
                 button2.Enabled = true;
                 richTextBox1.ReadOnly = false;
             }
+            */
         }
 
         private void Reset_imsLink_Setting()
         {
             if (flag_release_mode == true)
             {
-                this.tp_Camera.Parent = null;    //camera
-                this.tp_Serial_Auto.Parent = null; //serial write auto
-                this.tp_Test.Parent = null;    //Test
+                this.tp_Camera.Parent = null;   //camera
+                this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-                tabControl1.SelectedIndex = 1;      //程式啟動時，直接跳到info那頁。
+                tabControl1.SelectedIndex = 1;      //程式啟動時，直接跳到Connection那頁。
             }
             else
-                tabControl1.SelectedIndex = 3;      //程式啟動時，直接跳到info那頁。
-
+                tabControl1.SelectedIndex = 2;      //程式啟動時，直接跳到Connection那頁。
 
             this.Width = 960;
             show_comport_log = SHOW_COMPORT_LOG;
@@ -249,6 +249,7 @@ namespace imsLink
                 button1.Enabled = false;
                 button2.Enabled = true;
                 richTextBox1.ReadOnly = false;
+                this.BackColor = System.Drawing.SystemColors.ControlLight;
             }
         }
 
@@ -567,7 +568,7 @@ namespace imsLink
                             if (receive_buffer[0] == 0xA1)
                             {
                                 //richTextBox1.Text += "red 111 here\n";
-                                groupBox10.BackColor = Color.Red;
+                                //groupBox10.BackColor = Color.Red;
                                 //timer4.Enabled = false;
                                 flag_save_data = 1;
                             }
@@ -1167,7 +1168,7 @@ namespace imsLink
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //Comport_Scan();
+            Comport_Scan();
         }
 
         private void Comport_Scan()
@@ -1190,7 +1191,7 @@ namespace imsLink
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Comport_Scan();
+            Comport_Scan();
             label1.Text = "";
             lb_a.Text = "";
             lb_aa.Text = "";
@@ -1270,6 +1271,9 @@ namespace imsLink
             Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
             frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
             frm.ShowDialog();   //顯示Form2視窗
+
+            this.BackColor = Color.Pink;
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2197,65 +2201,136 @@ namespace imsLink
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 1)
-            {
-                scanner_timer.Enabled = true;
-            }
-            else
-            {
-                scanner_timer.Enabled = false;
-            }
-            if (tabControl1.SelectedIndex == 4)
-            {
-                scanner_timer2.Enabled = true;
-            }
-            else
-            {
-                scanner_timer2.Enabled = false;
-            }
+            flag_auto_scan_mode = true;
+            button25.Text = "到修改模式";
+            button40.Text = "到修改模式";
 
-            if (tabControl1.SelectedIndex == 6)
+            if (flag_release_mode == true)
             {
-                richTextBox1.Text += "進入USB WebCam\n";
-            }
-            else
-            {
-                richTextBox1.Text += "離開USB WebCam\n";
-            }
-
-            if (tabControl1.SelectedIndex == 3)
-            {
-                /*
-                USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                if (tabControl1.SelectedIndex == 3)
                 {
-                    button12.Enabled = true;
-                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
-                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                    scanner_timer.Enabled = true;
                 }
                 else
                 {
-                    button12.Enabled = false;
-                    richTextBox1.Text += "無影像裝置\n";
+                    scanner_timer.Enabled = false;
                 }
-                */
+                if (tabControl1.SelectedIndex == 2)
+                {
+                    scanner_timer2.Enabled = true;
+                }
+                else
+                {
+                    scanner_timer2.Enabled = false;
+                }
+
+                if (tabControl1.SelectedIndex == 5)
+                {
+                    richTextBox1.Text += "進入USB WebCam\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "離開USB WebCam\n";
+                }
+
+                if (tabControl1.SelectedIndex == 5)
+                {
+                    /*
+                    USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                    if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                    {
+                        button12.Enabled = true;
+                        Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
+                        Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                    }
+                    else
+                    {
+                        button12.Enabled = false;
+                        richTextBox1.Text += "無影像裝置\n";
+                    }
+                    */
+                }
+                else
+                {
+                    /*
+                    if (Cam != null)
+                    {
+                        if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                        {
+                            //Cam.Stop();   // WebCam stops capturing images.
+                            Cam.SignalToStop();
+                            Cam.WaitForStop();
+                        }
+                    }
+                    */
+
+                    this.tb_sn2.Focus();
+                }
             }
             else
             {
-                /*
-                if (Cam != null)
+                if (tabControl1.SelectedIndex == 4)
                 {
-                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                    {
-                        //Cam.Stop();   // WebCam stops capturing images.
-                        Cam.SignalToStop();
-                        Cam.WaitForStop();
-                    }
+                    scanner_timer.Enabled = true;
                 }
-                */
+                else
+                {
+                    scanner_timer.Enabled = false;
+                }
+                if (tabControl1.SelectedIndex == 3)
+                {
+                    scanner_timer2.Enabled = true;
+                }
+                else
+                {
+                    scanner_timer2.Enabled = false;
+                }
 
-                this.tb_sn2.Focus();
+                if (tabControl1.SelectedIndex == 6)
+                {
+                    richTextBox1.Text += "進入USB WebCam\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "離開USB WebCam\n";
+                }
+
+                if (tabControl1.SelectedIndex == 6)
+                {
+                    /*
+                    USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                    if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                    {
+                        button12.Enabled = true;
+                        Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
+                        Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                    }
+                    else
+                    {
+                        button12.Enabled = false;
+                        richTextBox1.Text += "無影像裝置\n";
+                    }
+                    */
+                }
+                else
+                {
+                    /*
+                    if (Cam != null)
+                    {
+                        if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                        {
+                            //Cam.Stop();   // WebCam stops capturing images.
+                            Cam.SignalToStop();
+                            Cam.WaitForStop();
+                        }
+                    }
+                    */
+
+                    this.tb_sn2.Focus();
+                }
+
             }
+
         }
 
         public Bitmap bm = null;
@@ -2589,6 +2664,12 @@ namespace imsLink
                     }
 
                     //richTextBox1.Text += "\n[insLink] issue write command and data\n\n";
+
+                    if (!serialPort1.IsOpen)
+                    {
+                        richTextBox1.Text += "未連線comport, abort\n";
+                        return;
+                    }
 
                     delay(100);
                     Send_IMS_Data(0xC0, 0x12, 0x34, 0x56);   //camera serial write
@@ -3676,6 +3757,13 @@ namespace imsLink
                     {
                         if (tb_wait_data.Text == "IMS EGD SYSTEM")
                         {
+                            if (!serialPort1.IsOpen)
+                            {
+                                richTextBox1.Text += "未連線comport, abort\n";
+                                tb_wait_data.Text = "";
+                                return;
+                            }
+
                             flag_incorrect_data = false;
                             richTextBox1.Text += "資料正確, 開始燒錄\n";
                             panel6.BackgroundImage = null;
@@ -3781,6 +3869,22 @@ namespace imsLink
                 scanner_timer2.Enabled = true;
                 flag_auto_scan_mode = true;
                 button25.Text = "到修改模式";
+            }
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            if (flag_auto_scan_mode == true)
+            {
+                scanner_timer.Enabled = false;
+                flag_auto_scan_mode = false;
+                button40.Text = "到自動模式";
+            }
+            else
+            {
+                scanner_timer.Enabled = true;
+                flag_auto_scan_mode = true;
+                button40.Text = "到修改模式";
             }
         }
 
