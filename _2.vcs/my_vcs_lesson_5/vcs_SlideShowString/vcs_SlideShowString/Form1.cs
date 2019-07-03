@@ -14,15 +14,14 @@ namespace vcs_SlideShowString
     public partial class Form1 : Form
     {
         bool flag_release_mode = false;
-        //bool flag_need_author = true;
-        //bool flag_need_title = true;
-
-        Bitmap bmp;
         //bool flag_pause = false;
-        //int cnt = 0;
-        //int total = 100;
-        int W;
-        int H;
+
+        Graphics g;
+        Font f;
+        Bitmap bmp;
+
+        int W;      //final pictureBox1.Width for display
+        int H;      //final pictureBox1.Height for display
         int i = 0;
 
         //string filepath = "C:\\______test_vcs\\poetry.txt";
@@ -37,8 +36,6 @@ namespace vcs_SlideShowString
         int lines_in_this_lyrics = 0;
 
         int show_lyrics_index = 0;
-        int flag_playing = 0;
-        int flag_playing_step = 0;
 
         string str_author = String.Empty;
         string str_title = String.Empty;
@@ -47,22 +44,22 @@ namespace vcs_SlideShowString
 
         string string0 = String.Empty;
 
-        Graphics g;
-        SolidBrush sb;
-        Font f;
+        Size sss;
         int show_head_size = 0;
         int show_waist_size = 0;
         int show_max_width_size = 0;
         int show_max_height_size = 0;
+        int timer1_cnt = 0;
+        int do_mouse_wheel_cnt = 0;
+        int timer2_cnt = 0;
+        int align_direction = 0;
+        int play_sequence = 0;
 
+        Random r = new Random();
 
         public Form1()
         {
             InitializeComponent();
-            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bmp);
-            sb = new SolidBrush(Color.Blue);
-            f = new Font("標楷體", 24);
         }
 
         bool loadTextData()
@@ -90,6 +87,26 @@ namespace vcs_SlideShowString
                     if (line[0] == '@')
                     {
                         //richTextBox1.Text += "get author" + line + "\n";
+                    }
+                    else if (line[0] == '^')
+                    {
+                        align_direction = line[1];
+                        //richTextBox1.Text += "value = " + align_direction.ToString() + "\n";
+                        richTextBox1.Text += "設定對齊方向" + "\t";
+                        if (align_direction == '0')
+                            richTextBox1.Text += "靠右\n";
+                        else
+                            richTextBox1.Text += "靠左\n";
+                    }
+                    else if (line[0] == '~')
+                    {
+                        play_sequence = line[1];
+                        //richTextBox1.Text += "value = " + play_sequence.ToString() + "\n";
+                        richTextBox1.Text += "設定播放順序" + "\t";
+                        if (play_sequence == '0')
+                            richTextBox1.Text += "依序\n";
+                        else
+                            richTextBox1.Text += "隨機\n";
                     }
                     else if (line[0] == '#')
                     {
@@ -119,39 +136,70 @@ namespace vcs_SlideShowString
 
                 richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
                 richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
-                show_lyrics_index = 0;
+
+                //show_lyrics_index = 0;
+                show_lyrics_index = get_next_show_lyrics_index(-1);
                 return true;
+            }
+        }
+
+        private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (lyrics_count == 1)
+            {
+                richTextBox1.Text += "只有一首, 不動作\n";
+                return;
+            }
+
+            if ((timer2_cnt - do_mouse_wheel_cnt) < 6)
+            {
+                //richTextBox1.Text += "太接近\n";
+                return;
+            }
+
+            richTextBox1.Text += e.Delta.ToString() + " ";
+            if (e.Delta < 0)
+            {
+                richTextBox1.Text += "下一首\n";
+                slide_show_string();
+                do_mouse_wheel_cnt = timer2_cnt;
+            }
+            else
+            {
+                richTextBox1.Text += "上一首\n";
+                if (show_lyrics_index > 0)
+                    show_lyrics_index--;
+                else
+                    show_lyrics_index = lyrics_count - 1;
+                if (show_lyrics_index > 0)
+                    show_lyrics_index--;
+                else
+                    show_lyrics_index = lyrics_count - 1;
+                slide_show_string();
+                do_mouse_wheel_cnt = timer2_cnt;
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.Text += "目前解析度  " + screenWidth.ToString() + " X " + screenHeight.ToString() + "\n";
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Location = new System.Drawing.Point(0, 0);
-
-            if (flag_release_mode == true)
-            {
-                //設定執行後的表單起始位置
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = new System.Drawing.Point(screenWidth - pictureBox1.Width, 200);
-                this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
-            }
-
+            this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
             bool result;
             result = loadTextData();
             if (result == true)
-                timer1_Tick(sender, e);
+            {
+                slide_show_string();
+                timer1.Enabled = true;
+            }
             else
                 timer1.Enabled = false;
         }
 
         int calculate_picturebox_parameters()
         {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            int screenHeight_max = screenHeight * 70 / 100;
 
             lines_in_this_lyrics = current_strings.Count;
             richTextBox1.Text += "current_strings 內容\tcount = " + current_strings.Count.ToString() + " (lines)\n";
@@ -160,7 +208,6 @@ namespace vcs_SlideShowString
                 richTextBox1.Text += current_strings[i] + "\n";
             }
 
-            Size sss;
             show_head_size = 0;
             show_waist_size = 0;
             show_max_width_size = 0;
@@ -180,24 +227,19 @@ namespace vcs_SlideShowString
                     show_max_height_size = sss.Height;
             }
 
-            if (show_max_width_size < pictureBox1.Height)
-                show_head_size = (pictureBox1.Height - show_max_width_size) / 2;
+            if (show_max_width_size < screenHeight_max)
+                show_head_size = (screenHeight_max - show_max_width_size) / 2;
             else
                 show_head_size = 0;
-
-            if (show_max_height_size * 3 < pictureBox1.Width)
-                show_waist_size = (pictureBox1.Width - show_max_height_size * 3) / 4;
-            else
-                show_waist_size = 0;
 
             richTextBox1.Text += "show_head_size = " + show_head_size.ToString() + "\t";
             richTextBox1.Text += "show_waist_size = " + show_waist_size.ToString() + "\n";
             richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\t";
             richTextBox1.Text += "show_max_height_size = " + show_max_height_size.ToString() + "\n";
 
-            richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + " 90% W = " + (pictureBox1.Height * 90 / 100).ToString() + "\n";
+            richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + " screenHeight_max = " + screenHeight_max.ToString() + "\n";
 
-            if (show_max_width_size < (pictureBox1.Height * 90 / 100))
+            if (show_max_width_size < screenHeight_max)
                 return 0;
             else
                 return -1;
@@ -206,18 +248,15 @@ namespace vcs_SlideShowString
 
         void slide_show_string()
         {
-            //  畫背景色
-            W = pictureBox1.Width;
-            H = pictureBox1.Height;
-            int xx;
-            int yy;
-            for (yy = 0; yy < H; yy++)
-            {
-                for (xx = 0; xx < W; xx++)
-                {
-                    bmp.SetPixel(xx, yy, Color.FromArgb(30, 0x11, 0x33, 0x55));
-                }
-            }
+            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new System.Drawing.Point(0, 0);
+
+            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bmp);
 
             int i;
 
@@ -226,217 +265,238 @@ namespace vcs_SlideShowString
 
             int cnt = 0;
 
-            String show_string0 = String.Empty;
-            String show_string1 = String.Empty;
-            String show_string2 = String.Empty;
+            richTextBox1.Text += "現在要播放 第 " + show_lyrics_index.ToString() + " 首" + "\n";
 
+            //richTextBox1.Text += "flag_get_lyrics_index = " + flag_get_lyrics_index.ToString() + "\n";
+            //richTextBox1.Text += "show_lyrics_index = " + show_lyrics_index.ToString() + "\n";
+            //richTextBox1.Text += "strings_count = " + strings_count.ToString() + "\n";
 
-            string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
-            g.DrawString(show_play_info, new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(40, pictureBox1.Height - 25));
-
-            richTextBox1.Text += "現在要播放 第 " + show_lyrics_index.ToString() + " 首" + "\t";
-            if (flag_playing == 0)
+            //從頭播起 要更新 current_strings 資料
+            richTextBox1.Text += "從頭播起 從大List裡找出第 " + show_lyrics_index.ToString() + "首的內容\n";
+            for (i = 0; i < strings_count; i++)
             {
-                //richTextBox1.Text += "flag_get_lyrics_index = " + flag_get_lyrics_index.ToString() + "\n";
-                //richTextBox1.Text += "show_lyrics_index = " + show_lyrics_index.ToString() + "\n";
-                //richTextBox1.Text += "strings_count = " + strings_count.ToString() + "\n";
-
-                //從頭播起 要更新 current_strings 資料
-                richTextBox1.Text += "從頭播起 從大List裡找出第 " + show_lyrics_index.ToString() + "首的內容\n";
-                for (i = 0; i < strings_count; i++)
+                //richTextBox1.Text += "i = " + i.ToString() + " first = " + strings[i][0] + "\n";
+                if (all_strings[i][0] == '@')   //author
                 {
-                    //richTextBox1.Text += "i = " + i.ToString() + " first = " + strings[i][0] + "\n";
-                    if (all_strings[i][0] == '@')   //author
-                    {
-                        if (flag_get_text_data == 1)
-                        {
-                            flag_get_text_data = 0;
-                            break;
-                        }
-                        str_author = all_strings[i].Remove(0, 1);
-                    }
-                    else if (all_strings[i][0] == '#')  //title
-                    {
-                        if (flag_get_text_data == 1)
-                        {
-                            flag_get_text_data = 0;
-                            break;
-                        }
-                        str_title = all_strings[i].Remove(0, 1);
-                    }
-                    else if (all_strings[i][0] == '&')  //text
-                    {
-                        richTextBox1.Text += "got & now = " + all_strings[i] + " A = " + flag_get_lyrics_index.ToString() + " B = " + show_lyrics_index.ToString() + "\n";
-
-                        if (flag_get_lyrics_index == show_lyrics_index)
-                        {
-                            richTextBox1.Text += "let flag_get_text_data = 1\n";
-                            flag_get_text_data = 1;
-                            cnt = 0;
-                            current_strings.Clear();
-                            richTextBox1.Text += "開始抓內容, now = " + all_strings[i] + "\n";
-                        }
-                        else
-                        {
-                            flag_get_lyrics_index++;
-
-                            str_author = String.Empty;
-                            str_title = String.Empty;
-                            str_serial = String.Empty;
-                            str_text = String.Empty;
-
-                            show_string0 = String.Empty;
-                            show_string1 = String.Empty;
-                            show_string2 = String.Empty;
-                        }
-                    }
-
                     if (flag_get_text_data == 1)
                     {
-                        cnt++;
-                        richTextBox1.Text += "get data cnt = " + cnt.ToString() + "\n";
-                        lines_in_this_lyrics = cnt;
-                        current_strings.Add(all_strings[i]);
+                        flag_get_text_data = 0;
+                        break;
                     }
+                    str_author = all_strings[i].Remove(0, 1);
                 }
-
-                if ((str_author != String.Empty) && (str_title != String.Empty))
+                else if (all_strings[i][0] == '#')  //title
                 {
-                    string0 = "【" + str_author + "‧" + str_title + "】";
-                }
-                else if ((str_author == String.Empty) && (str_title != String.Empty))
-                {
-                    string0 = "【" + str_title + "】";
-                }
-                else if ((str_author != String.Empty) && (str_title == String.Empty))
-                {
-                    string0 = "【" + str_author + "】";
-                }
-                else
-                {
-                    string0 = "【        】";
-                }
-                current_strings.Insert(0, string0);
-
-                richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
-                richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, author : " + str_author + " , title : " + str_title + "\n";
-
-                show_string0 = current_strings[0];
-                show_string1 = current_strings[1].Remove(0, 1); //remove '&'
-                if(lines_in_this_lyrics > 1)
-                    show_string2 = current_strings[2];
-
-                if (lines_in_this_lyrics > 2)
-                    flag_playing = 1;
-                else
-                {
-                    flag_playing = 0;
-                    flag_playing_step = 0;
-                    show_lyrics_index++;
-                }
-
-                f = new Font("標楷體", 24);
-                //更新全首的畫圖邊界
-                int result = -1;
-                while (result == -1)
-                {
-                    result = calculate_picturebox_parameters();
-                    if (result == -1)
+                    if (flag_get_text_data == 1)
                     {
-                        float fontsize;
-                        fontsize = f.Size;
-                        if (fontsize > 2)
-                            fontsize -= 1;
-                        f = new Font("標楷體", fontsize);
-                        richTextBox1.Text += "縮小字型為 " + fontsize.ToString() + "\n";
+                        flag_get_text_data = 0;
+                        break;
+                    }
+                    str_title = all_strings[i].Remove(0, 1);
+                }
+                else if (all_strings[i][0] == '&')  //text
+                {
+                    richTextBox1.Text += "got & now = " + all_strings[i] + " A = " + flag_get_lyrics_index.ToString() + " B = " + show_lyrics_index.ToString() + "\n";
+
+                    if (flag_get_lyrics_index == show_lyrics_index)
+                    {
+                        richTextBox1.Text += "let flag_get_text_data = 1\n";
+                        flag_get_text_data = 1;
+                        cnt = 0;
+                        current_strings.Clear();
+                        richTextBox1.Text += "開始抓內容, now = " + all_strings[i] + "\n";
+                    }
+                    else
+                    {
+                        flag_get_lyrics_index++;
+
+                        str_author = String.Empty;
+                        str_title = String.Empty;
+                        str_serial = String.Empty;
+                        str_text = String.Empty;
                     }
                 }
 
+                if (flag_get_text_data == 1)
+                {
+                    cnt++;
+                    richTextBox1.Text += "get data cnt = " + cnt.ToString() + "\n";
+                    lines_in_this_lyrics = cnt;
+                    current_strings.Add(all_strings[i]);
+                }
+            }
+
+            if ((str_author != String.Empty) && (str_title != String.Empty))
+            {
+                string0 = "【" + str_author + "‧" + str_title + "】";
+            }
+            else if ((str_author == String.Empty) && (str_title != String.Empty))
+            {
+                string0 = "【" + str_title + "】";
+            }
+            else if ((str_author != String.Empty) && (str_title == String.Empty))
+            {
+                string0 = "【" + str_author + "】";
             }
             else
             {
-                richTextBox1.Text += "接著播\n";
-                //接著之前的資料
-                flag_playing_step++;
-                if(flag_playing_step == 1)
-                {
-                    if(lines_in_this_lyrics > 3)
-                        show_string0 = current_strings[3];
-                    if(lines_in_this_lyrics > 4)
-                        show_string1 = current_strings[4];
-                    if (lines_in_this_lyrics > 5)
-                        show_string2 = current_strings[5];
-                }
-                else if(flag_playing_step == 2)
-                {
-                    if(lines_in_this_lyrics > 6)
-                        show_string0 = current_strings[6];
-                    if(lines_in_this_lyrics > 7)
-                        show_string1 = current_strings[7];
-                    if (lines_in_this_lyrics > 8)
-                        show_string2 = current_strings[8];
-                }
-                else if(flag_playing_step == 3)
-                {
-                    if(lines_in_this_lyrics > 9)
-                        show_string0 = current_strings[9];
-                    if(lines_in_this_lyrics > 10)
-                        show_string1 = current_strings[10];
-                    if(lines_in_this_lyrics > 11)
-                        show_string2 = current_strings[11];
-                }
+                string0 = "【        】";
+            }
+            current_strings.Insert(0, string0);
 
-                if (lines_in_this_lyrics <= (flag_playing_step * 3 + 2))
+            richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
+            richTextBox1.Text += "第 " + show_lyrics_index.ToString() + " 首, author : " + str_author + " , title : " + str_title + "\n";
+
+            f = new Font("標楷體", 20);
+
+            //更新全首的畫圖邊界
+            int result = -1;
+            while (result == -1)
+            {
+                result = calculate_picturebox_parameters();
+                if (result == -1)
                 {
-                    flag_playing = 0;
-                    show_lyrics_index++;
-                    flag_playing_step = 0;
-                    //if (show_lyrics_index > lyrics_count)
-                        //richTextBox1.Text += "顯示完畢\n";
-                    if (show_lyrics_index >= lyrics_count)
-                    {
-                        show_lyrics_index = 0;
-                    }
+                    float fontsize;
+                    fontsize = f.Size;
+                    if (fontsize > 2)
+                        fontsize -= 1;
+                    f = new Font("標楷體", fontsize);
+                    richTextBox1.Text += "縮小字型為 " + fontsize.ToString() + "\n";
                 }
             }
 
+            int N = current_strings.Count;
+            int p = 0;
+            int sky = 50;
+            int earth = 30;
+            int border = 10;
 
-            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
-            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+            pictureBox1.Width = show_max_height_size * N + p * (N * 2) + border * 2;
+            pictureBox1.Height = show_max_width_size + sky + earth;
 
-            //richTextBox1.Text += "pictureBox W = " + pictureBox1.Width.ToString() + "\t";
-            //richTextBox1.Text += "H = " + pictureBox1.Height.ToString() + "\n";
+            W = pictureBox1.Width;
+            H = pictureBox1.Height;
 
-            Pen p;
-            p = new Pen(Color.Red, 3);
+            richTextBox1.Text += "W = " + pictureBox1.Width.ToString() + ", H = " + pictureBox1.Height.ToString() + "\n";
+            richTextBox1.Text += "w = " + show_max_width_size.ToString() + ", h = " + show_max_height_size.ToString() + "\n";
+            richTextBox1.Text += "p = " + p.ToString() + "\n";
 
-            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bmp);
 
-            /*
-            g.DrawRectangle(p, pictureBox1.Width * 5 / 100, pictureBox1.Height * 5 / 100, pictureBox1.Width * 90 / 100 - 1, pictureBox1.Height * 90 / 100 - 1);
-            g.DrawRectangle(p, pictureBox1.Width * 10 / 100, pictureBox1.Height * 10 / 100, pictureBox1.Width * 80 / 100 - 1, pictureBox1.Height * 80 / 100 - 1);
-            g.DrawRectangle(p, pictureBox1.Width * 20 / 100, pictureBox1.Height * 20 / 100, pictureBox1.Width * 60 / 100 - 1, pictureBox1.Height * 60 / 100 - 1);
-            g.DrawRectangle(p, pictureBox1.Width * 30 / 100, pictureBox1.Height * 30 / 100, pictureBox1.Width * 40 / 100 - 1, pictureBox1.Height * 40 / 100 - 1);
-            g.DrawRectangle(p, pictureBox1.Width * 40 / 100, pictureBox1.Height * 40 / 100, pictureBox1.Width * 20 / 100 - 1, pictureBox1.Height * 20 / 100 - 1);
-            */
-
-            g.DrawString(show_string0, f, new SolidBrush(Color.Black), 0 + show_waist_size * 3 + show_max_height_size * 2, show_head_size, drawFormat);
-            g.DrawString(show_string1, f, new SolidBrush(Color.Black), 0 + show_waist_size * 2 + show_max_height_size, show_head_size, drawFormat);
-            g.DrawString(show_string2, f, new SolidBrush(Color.Black), 0 + show_waist_size, show_head_size, drawFormat);
-
+            g.Clear(Color.SandyBrown);
             pictureBox1.Image = bmp;
+
+            int x_st;
+            int y_st;
+
+            current_strings[1] = current_strings[1].Remove(0, 1); //remove '&'
+
+            for (i = 0; i < current_strings.Count; i++)
+            {
+                x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
+                y_st = sky;
+                if (i != 0)
+                    g.DrawString(current_strings[i], f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
+                g.DrawRectangle(new Pen(Color.Red, 1), border + x_st, y_st, show_max_height_size, show_max_width_size);
+            }
+            x_st = 0;
+            y_st = sky;
+
+            g.DrawRectangle(new Pen(Color.Red, 5), border + x_st - 5, y_st - 5, show_max_height_size * N + p * (N * 2) + 10, show_max_width_size + 10);
+
+            int down1 = 50;
+            int down2 = 12;
+            int down3 = 6;
+
+            i = 0;
+            x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
+            y_st = sky;
+
+            Point[] pts = new Point[5];
+            pts[0].X = border + x_st;
+            pts[0].Y = y_st + down1;
+            pts[1].X = border + x_st + show_max_height_size;
+            pts[1].Y = y_st + down1;
+            pts[2].X = border + x_st + show_max_height_size;
+            pts[2].Y = y_st + down1 + down2;
+            pts[3].X = border + x_st + show_max_height_size / 2;
+            pts[3].Y = y_st + down1 + down3;
+            pts[4].X = border + x_st;
+            pts[4].Y = y_st + down1 + down2;
+            g.FillPolygon(new SolidBrush(Color.Red), pts);
+
+            i = 0;
+            x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
+            y_st = sky + down1 + down2 + down3;
+            g.DrawString(str_title, f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
+
+            sss = g.MeasureString(str_title, f).ToSize();
+
+            g.DrawString(str_author, f, new SolidBrush(Color.Black), border + x_st, y_st + sss.Width + down1 + down2 + down3, drawFormat);
+
+
+            y_st = sky + down1 + down2 + down3 + sss.Width + down3 + down2;
+
+            pts[0].X = border + x_st;
+            pts[0].Y = y_st;
+            pts[1].X = border + x_st + show_max_height_size;
+            pts[1].Y = y_st;
+            pts[2].X = border + x_st + show_max_height_size;
+            pts[2].Y = y_st - down2;
+            pts[3].X = border + x_st + show_max_height_size / 2;
+            pts[3].Y = y_st - down3;
+            pts[4].X = border + x_st;
+            pts[4].Y = y_st - down2; ;
+            g.FillPolygon(new SolidBrush(Color.Red), pts);
+
+            string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
+            sss = g.MeasureString(show_play_info, new Font("標楷體", 16)).ToSize();
+
+            g.DrawString(show_play_info, new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF((W - sss.Width) / 2, H - sss.Height + 2));
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            if (flag_release_mode == true)
+            {
+                //設定執行後的表單起始位置
+                this.StartPosition = FormStartPosition.Manual;
+                if (align_direction == '0')
+                {   //靠右
+                    this.Location = new System.Drawing.Point(screenWidth - pictureBox1.Width, (screenHeight - pictureBox1.Height) / 2);
+                }
+                else
+                {   //靠左
+                    this.Location = new System.Drawing.Point(0, (screenHeight - pictureBox1.Height) / 2);
+                }
+                this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+            }
+
+            show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
+
+            timer1_cnt = 0;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            slide_show_string();
+            if (lyrics_count == 1)
+            {
+                //richTextBox1.Text += "只有一首, 不動作\n";
+                return;
+            }
+
+            timer1_cnt++;
+            if (timer1_cnt > 3)
+            {
+                timer1_cnt = 0;
+                slide_show_string();
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            timer1_Tick(sender, e);
-
-            /*
+            /*  不是很好用
             if (flag_pause == false)
             {
                 flag_pause = true;
@@ -490,7 +550,12 @@ namespace vcs_SlideShowString
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            //Application.Exit();
+            if (lyrics_count == 1)
+            {
+                richTextBox1.Text += "只有一首, 不動作\n";
+                return;
+            }
+            slide_show_string();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -507,7 +572,12 @@ namespace vcs_SlideShowString
 
         private void button2_Click(object sender, EventArgs e)
         {
-            timer1_Tick(sender, e);
+            if (lyrics_count == 1)
+            {
+                richTextBox1.Text += "只有一首, 不動作\n";
+                return;
+            }
+            slide_show_string();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -528,9 +598,61 @@ namespace vcs_SlideShowString
             }
         }
 
+        int get_next_show_lyrics_index(int current_show_lyrics_index)
+        {
+            if (play_sequence == '0')
+            {   //依序
+                if (show_lyrics_index < (lyrics_count - 1))
+                    show_lyrics_index++;
+                else
+                    show_lyrics_index = 0;
+                if(current_show_lyrics_index == -1)
+                    show_lyrics_index = 0;
+                return show_lyrics_index;
+            }
+            else
+            {   //隨機
+                int next_show_lyrics_index = 0;
+                if (lyrics_count == 1)
+                    return 0;
+                else
+                {
+                    do
+                    {
+                        next_show_lyrics_index = r.Next(lyrics_count);
+                        //richTextBox1.Text += "get " + next_show_lyrics_index.ToString() + "\n";
+                    } while (current_show_lyrics_index == next_show_lyrics_index);
+                    return next_show_lyrics_index;
+                }
+            }
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Opacity = " + this.Opacity.ToString() + "\n";
+            //richTextBox1.Text += "Opacity = " + this.Opacity.ToString() + "\n";
+            /*
+            string result2 = "";
+            for (int i = 0; i < 30; i++)
+            {
+                result2 += r.Next(lyrics_count).ToString() + " ";
+            }
+            richTextBox1.Text += "取0~lyrics_count的亂數值：" + result2 + "\n";
+            */
+
+            int next;
+            next = get_next_show_lyrics_index(show_lyrics_index);
+
+            richTextBox1.Text += "current = " + show_lyrics_index.ToString() + " next = " + next.ToString() + "\n";
+
+
+
+
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            timer2_cnt++;
         }
     }
 }

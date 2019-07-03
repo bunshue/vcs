@@ -101,12 +101,11 @@
             this.lb_rtc = new System.Windows.Forms.Label();
             this.button21 = new System.Windows.Forms.Button();
             this.lb_time2 = new System.Windows.Forms.Label();
-            this.button122 = new System.Windows.Forms.Button();
             this.lb_time1 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button64 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tp_System = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -127,12 +126,14 @@
             this.tb_machine_serial = new System.Windows.Forms.TextBox();
             this.button30 = new System.Windows.Forms.Button();
             this.tp_Serial_Auto = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.button14 = new System.Windows.Forms.Button();
             this.lb_mesg3 = new System.Windows.Forms.Label();
             this.lb_mesg2 = new System.Windows.Forms.Label();
             this.lb_mesg = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.button40 = new System.Windows.Forms.Button();
             this.lb_aa = new System.Windows.Forms.Label();
             this.lb_warning = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
@@ -148,6 +149,7 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tp_Camera_Model = new System.Windows.Forms.TabPage();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lb_write_camera_model = new System.Windows.Forms.Label();
@@ -234,7 +236,8 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.button40 = new System.Windows.Forms.Button();
+            this.timer_rtc = new System.Windows.Forms.Timer(this.components);
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1012,14 +1015,14 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.progressBar2);
             this.groupBox3.Controls.Add(this.lb_rtc);
             this.groupBox3.Controls.Add(this.button21);
             this.groupBox3.Controls.Add(this.lb_time2);
-            this.groupBox3.Controls.Add(this.button122);
             this.groupBox3.Controls.Add(this.lb_time1);
-            this.groupBox3.Location = new System.Drawing.Point(25, 293);
+            this.groupBox3.Location = new System.Drawing.Point(25, 279);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(850, 166);
+            this.groupBox3.Size = new System.Drawing.Size(850, 200);
             this.groupBox3.TabIndex = 65;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "主機時間";
@@ -1028,7 +1031,7 @@
             // 
             this.lb_rtc.AutoSize = true;
             this.lb_rtc.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rtc.Location = new System.Drawing.Point(506, 100);
+            this.lb_rtc.Location = new System.Drawing.Point(545, 122);
             this.lb_rtc.Name = "lb_rtc";
             this.lb_rtc.Size = new System.Drawing.Size(47, 23);
             this.lb_rtc.TabIndex = 69;
@@ -1036,9 +1039,9 @@
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(510, 38);
+            this.button21.Location = new System.Drawing.Point(561, 64);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(75, 40);
+            this.button21.Size = new System.Drawing.Size(80, 32);
             this.button21.TabIndex = 68;
             this.button21.Text = "更新";
             this.button21.UseVisualStyleBackColor = true;
@@ -1048,27 +1051,17 @@
             // 
             this.lb_time2.AutoSize = true;
             this.lb_time2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time2.Location = new System.Drawing.Point(157, 103);
+            this.lb_time2.Location = new System.Drawing.Point(61, 122);
             this.lb_time2.Name = "lb_time2";
             this.lb_time2.Size = new System.Drawing.Size(68, 23);
             this.lb_time2.TabIndex = 67;
             this.lb_time2.Text = "lb_time2";
             // 
-            // button122
-            // 
-            this.button122.Location = new System.Drawing.Point(25, 64);
-            this.button122.Name = "button122";
-            this.button122.Size = new System.Drawing.Size(119, 46);
-            this.button122.TabIndex = 5;
-            this.button122.Text = "取得主機時間";
-            this.button122.UseVisualStyleBackColor = true;
-            this.button122.Click += new System.EventHandler(this.button122_Click);
-            // 
             // lb_time1
             // 
             this.lb_time1.AutoSize = true;
             this.lb_time1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time1.Location = new System.Drawing.Point(157, 47);
+            this.lb_time1.Location = new System.Drawing.Point(61, 66);
             this.lb_time1.Name = "lb_time1";
             this.lb_time1.Size = new System.Drawing.Size(68, 23);
             this.lb_time1.TabIndex = 66;
@@ -1076,21 +1069,28 @@
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.progressBar1);
             this.groupBox11.Controls.Add(this.panel4);
             this.groupBox11.Controls.Add(this.textBox7);
-            this.groupBox11.Controls.Add(this.button64);
-            this.groupBox11.Location = new System.Drawing.Point(25, 61);
+            this.groupBox11.Location = new System.Drawing.Point(25, 51);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(850, 166);
+            this.groupBox11.Size = new System.Drawing.Size(850, 200);
             this.groupBox11.TabIndex = 60;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "相機狀態";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(690, 162);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(154, 32);
+            this.progressBar1.TabIndex = 62;
             // 
             // panel4
             // 
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Location = new System.Drawing.Point(594, 42);
+            this.panel4.Location = new System.Drawing.Point(561, 61);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(80, 80);
             this.panel4.TabIndex = 61;
@@ -1098,22 +1098,12 @@
             // textBox7
             // 
             this.textBox7.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(21, 42);
+            this.textBox7.Location = new System.Drawing.Point(23, 83);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(504, 32);
             this.textBox7.TabIndex = 52;
             this.textBox7.Text = "--";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button64
-            // 
-            this.button64.Location = new System.Drawing.Point(718, 65);
-            this.button64.Name = "button64";
-            this.button64.Size = new System.Drawing.Size(80, 40);
-            this.button64.TabIndex = 49;
-            this.button64.Text = "讀取";
-            this.button64.UseVisualStyleBackColor = true;
-            this.button64.Click += new System.EventHandler(this.button64_Click);
             // 
             // panel1
             // 
@@ -1316,6 +1306,7 @@
             // 
             // tp_Serial_Auto
             // 
+            this.tp_Serial_Auto.Controls.Add(this.panel7);
             this.tp_Serial_Auto.Controls.Add(this.button14);
             this.tp_Serial_Auto.Controls.Add(this.lb_mesg3);
             this.tp_Serial_Auto.Controls.Add(this.lb_mesg2);
@@ -1328,6 +1319,15 @@
             this.tp_Serial_Auto.TabIndex = 24;
             this.tp_Serial_Auto.Text = "Camera";
             this.tp_Serial_Auto.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
+            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel7.Location = new System.Drawing.Point(672, 497);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(260, 77);
+            this.panel7.TabIndex = 75;
             // 
             // button14
             // 
@@ -1403,6 +1403,17 @@
             this.groupBox10.TabIndex = 69;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "相機序號";
+            // 
+            // button40
+            // 
+            this.button40.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button40.Location = new System.Drawing.Point(714, 176);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(80, 40);
+            this.button40.TabIndex = 98;
+            this.button40.Text = "到修改模式";
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
             // lb_aa
             // 
@@ -1549,6 +1560,7 @@
             // 
             // tp_Camera_Model
             // 
+            this.tp_Camera_Model.Controls.Add(this.panel8);
             this.tp_Camera_Model.Controls.Add(this.groupBox2);
             this.tp_Camera_Model.Location = new System.Drawing.Point(4, 26);
             this.tp_Camera_Model.Name = "tp_Camera_Model";
@@ -1556,6 +1568,15 @@
             this.tp_Camera_Model.TabIndex = 25;
             this.tp_Camera_Model.Text = "Camera";
             this.tp_Camera_Model.UseVisualStyleBackColor = true;
+            // 
+            // panel8
+            // 
+            this.panel8.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel8.BackgroundImage")));
+            this.panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel8.Location = new System.Drawing.Point(668, 497);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(260, 77);
+            this.panel8.TabIndex = 65;
             // 
             // groupBox2
             // 
@@ -2485,16 +2506,18 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // button40
+            // timer_rtc
             // 
-            this.button40.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button40.Location = new System.Drawing.Point(714, 176);
-            this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(80, 40);
-            this.button40.TabIndex = 98;
-            this.button40.Text = "到修改模式";
-            this.button40.UseVisualStyleBackColor = true;
-            this.button40.Click += new System.EventHandler(this.button40_Click);
+            this.timer_rtc.Enabled = true;
+            this.timer_rtc.Interval = 500;
+            this.timer_rtc.Tick += new System.EventHandler(this.timer_rtc_Tick);
+            // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(690, 162);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(154, 32);
+            this.progressBar2.TabIndex = 63;
             // 
             // Form1
             // 
@@ -2656,7 +2679,6 @@
         private System.Windows.Forms.Button button143;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Button button64;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TabPage tp_Info;
@@ -2778,9 +2800,13 @@
         private System.Windows.Forms.Label lb_rtc;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Label lb_time2;
-        private System.Windows.Forms.Button button122;
         private System.Windows.Forms.Label lb_time1;
         private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Timer timer_rtc;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBar2;
     }
 }
 

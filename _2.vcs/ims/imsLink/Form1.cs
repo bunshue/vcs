@@ -81,6 +81,8 @@ namespace imsLink
         string camera_serial_old = String.Empty;
         string camera_serial_enw = String.Empty;
         bool flag_auto_scan_mode = true;
+        bool flag_read_connection_again = true;
+        bool flag_comport_ok = false;
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -188,10 +190,9 @@ namespace imsLink
                 this.tp_Camera.Parent = null;   //camera
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-                tabControl1.SelectedIndex = 1;      //程式啟動時，直接跳到Connection那頁。
             }
-            else
-                tabControl1.SelectedIndex = 2;      //程式啟動時，直接跳到Connection那頁。
+            //tabControl1.SelectedTab = tp_Connection;    //程式啟動時，直接跳到Connection那頁。
+            tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
 
             this.Width = 960;
             show_comport_log = SHOW_COMPORT_LOG;
@@ -250,24 +251,27 @@ namespace imsLink
                 button2.Enabled = true;
                 richTextBox1.ReadOnly = false;
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
+                flag_comport_ok = true;
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
+            if (flag_comport_ok == true)
             {
                 serialPort1.Close();
                 button1.Enabled = true;
                 button2.Enabled = false;
                 richTextBox1.ReadOnly = true;
+                flag_comport_ok = false;
             }
         }
 
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // If the port is closed, don't try to send a character.
-            if (!serialPort1.IsOpen) return;
+            if (flag_comport_ok == false)
+                return;
 
             // If the port is Open, declare a char[] array with one element.
             char[] buff = new char[1];
@@ -504,10 +508,7 @@ namespace imsLink
                 lb_mesg.Text = "燒錄 " + total_burn_cnt.ToString() + " 次, 存檔 " + flag_save_data_cnt.ToString() + " 次";
             }
 
-
-
-
-            if (serialPort1.IsOpen)
+            if (flag_comport_ok == true)
             {
                 //計算serialPort1中有多少位元組 
                 BytesToRead = serialPort1.BytesToRead;
@@ -519,11 +520,13 @@ namespace imsLink
                     BytesToRead_tmp = BytesToRead;
                     flag_need_to_merge_data = 1;
                     //groupBox10.BackColor = Color.Red;
+                    /*
                     richTextBox1.Text += "[debug] BytesToRead = " + BytesToRead.ToString() + ", backup data\tdata:\t";
                     for (int i = 0; i < BytesToRead_tmp; i++)
                     {
                         richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
                     }
+                    */
                     /*
                     for (int i = 0; i < BytesToRead_tmp; i++)
                     {
@@ -536,7 +539,7 @@ namespace imsLink
                     }
                     */
 
-                    richTextBox1.Text += "\n";
+                    //richTextBox1.Text += "\n";
                     return;
                 }
                 else if (BytesToRead > 0)
@@ -547,21 +550,23 @@ namespace imsLink
                         if (BytesToRead == 21)
                         {
                             //directly use new data.....
-                            richTextBox1.Text += "[debug] BytesToRead = " + BytesToRead.ToString() + ", use new data\n";
+                            //richTextBox1.Text += "[debug] BytesToRead = " + BytesToRead.ToString() + ", use new data\n";
                             //serialPort1.Read(放置的位元陣列 , 從第幾個位置開始存放 , 共需存放多少位元)
                             serialPort1.Read(receive_buffer, 0, BytesToRead);
                         }
                         else
                         {
+                            /*
                             richTextBox1.Text += "[debug] BytesToRead = " + BytesToRead.ToString() + ", restore data\n";
                             for (int i = 0; i < BytesToRead_tmp; i++)
                             {
                                 receive_buffer[i] = receive_buffer_tmp[i];
                             }
+                            */
                             //serialPort1.Read(放置的位元陣列 , 從第幾個位置開始存放 , 共需存放多少位元)
                             serialPort1.Read(receive_buffer, BytesToRead_tmp, BytesToRead);
                             BytesToRead += BytesToRead_tmp;
-                            richTextBox1.Text += "[debug] BytesToRead_new = " + BytesToRead.ToString() + "\n";
+                            //richTextBox1.Text += "[debug] BytesToRead_new = " + BytesToRead.ToString() + "\n";
                         }
                         if (BytesToRead == 21)
                         {
@@ -585,12 +590,14 @@ namespace imsLink
                             SpyMonitorRX();
                         else if (BytesToRead == 21) // 5 + 16
                         {
+                            /*
                             richTextBox1.Text += "BytesToRead = 21 Bytes, data\t";
                             for (int i = 0; i < BytesToRead; i++)
                             {
                                 richTextBox1.Text += receive_buffer[i].ToString("X2") + " ";
                             }
                             richTextBox1.Text += "\n";
+                            */
 
                             SpyMonitorRX();
 
@@ -830,6 +837,10 @@ namespace imsLink
                                 string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
                                 string weekday = Day[input[3]].ToString();
                                 lb_time2.Text = "ims時間 : " + ((int)input[0] + 1900).ToString() + "/" + ((int)input[1] + 1).ToString("00") + "/" + ((int)input[2]).ToString("00") + " " + weekday + " " +((int)input[4]).ToString("00") + ":" + ((int)input[5]).ToString("00") + ":" + ((int)input[6]).ToString("00");
+                                //richTextBox1.Text += ((int)input[6]).ToString("00") + " ";
+                                flag_read_connection_again = true;
+
+                                progressBar2.Value = 100;
                             }
                         }
                         else if (BytesToRead == 55) // 5 + 50
@@ -1018,6 +1029,10 @@ namespace imsLink
                 {
                     richTextBox1.AppendText("[checksum fail]: " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " "
                         + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "  chk: " + ((int)data[4]).ToString("X2") + ", abort\n");
+
+                    if (flag_read_connection_again == false)
+                        flag_read_connection_again = true;
+
                     return;
                 }
 
@@ -1025,7 +1040,7 @@ namespace imsLink
 
                 if (isCommandLog == 1)
                 {
-                    richTextBox1.AppendText("[RX]: " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "\n");
+                    //richTextBox1.AppendText("[RX]: " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "\n");
                     richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
                 }
 
@@ -1105,7 +1120,8 @@ namespace imsLink
                             panel4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
-                        button64.BackColor = System.Drawing.SystemColors.ControlLight;
+                        flag_read_connection_again = true;
+                        progressBar1.Value = 100;
                     }
                     else if (input[1] == 0x99)
                     {
@@ -1468,7 +1484,7 @@ namespace imsLink
 
         private void button118_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1482,7 +1498,7 @@ namespace imsLink
 
         private void button117_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1504,9 +1520,9 @@ namespace imsLink
             data[3] = zz;
             data[4] = CalcCheckSum(data, 4);
 
-            richTextBox1.AppendText("[TX]: " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+            //richTextBox1.AppendText("[TX]: " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
 
-            if (serialPort1.IsOpen)
+            if (flag_comport_ok == true)
             {
                 serialPort1.Write(data, 0, data.Length);
             }
@@ -1528,9 +1544,9 @@ namespace imsLink
             data[3] = zz;
             data[4] = CalcCheckSum(data, 4);
 
-            richTextBox1.AppendText("[TX]: " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+            //richTextBox1.AppendText("[TX]: " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
 
-            if (serialPort1.IsOpen)
+            if (flag_comport_ok == true)
             {
                 serialPort1.Write(data, 0, data.Length);
                 flag_wait_receive_data = 1;
@@ -1562,7 +1578,7 @@ namespace imsLink
 
         private void button119_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1577,7 +1593,7 @@ namespace imsLink
 
         private void button120_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1592,7 +1608,7 @@ namespace imsLink
 
         private void button121_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1634,26 +1650,11 @@ namespace imsLink
 
         }
 
-        private void button122_Click(object sender, EventArgs e)
-        {
-            lb_rtc.Text = "";
-            lb_time2.Text = "";
-
-            Get_IMS_Data(3, 0x11, 0xAA);    //read RTC data
-            int cnt = 0;
-            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
-            {
-                richTextBox1.Text += "+";
-                delay(100);
-            }
-            flag_wait_receive_data = 0;
-        }
-
         private void button123_Click(object sender, EventArgs e)
         {
             if (comboBox5.SelectedIndex == 0)
             {
-                if (!serialPort1.IsOpen)
+                if (flag_comport_ok == false)
                 {
                     MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -1670,7 +1671,7 @@ namespace imsLink
 
         private void button128_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1684,7 +1685,7 @@ namespace imsLink
 
         private void button127_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1699,7 +1700,7 @@ namespace imsLink
 
         private void button126_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1713,7 +1714,7 @@ namespace imsLink
 
         private void button125_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1727,7 +1728,7 @@ namespace imsLink
 
         private void button129_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1777,7 +1778,7 @@ namespace imsLink
 
         private void button131_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1927,7 +1928,7 @@ namespace imsLink
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_a.Clear();
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 button8.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -1988,7 +1989,7 @@ namespace imsLink
         private void button28_Click(object sender, EventArgs e)
         {
             textBox5.Clear();
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1996,30 +1997,6 @@ namespace imsLink
 
             int page = Convert.ToInt32(textBox6.Text, 16);
             Send_IMS_Data(0xD1, (byte)page, 0, 0); 
-
-
-
-        }
-
-        private void button64_Click(object sender, EventArgs e)
-        {
-            button64.BackColor = Color.Red;
-            textBox7.Clear();
-            textBox7.BackColor = Color.Gray;
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
-            tb_sn1.Clear();
-            if (!serialPort1.IsOpen)
-            {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                button64.BackColor = System.Drawing.SystemColors.ControlLight;
-                return;
-            }
-            Send_IMS_Data(0xFF, 0, 0, 0);
-
-            this.tb_sn2.Focus();
-            //button64.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -2073,7 +2050,7 @@ namespace imsLink
             panel5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -2205,132 +2182,73 @@ namespace imsLink
             button25.Text = "到修改模式";
             button40.Text = "到修改模式";
 
-            if (flag_release_mode == true)
+            if (tabControl1.SelectedTab == tp_Connection)
             {
-                if (tabControl1.SelectedIndex == 3)
-                {
-                    scanner_timer.Enabled = true;
-                }
-                else
-                {
-                    scanner_timer.Enabled = false;
-                }
-                if (tabControl1.SelectedIndex == 2)
-                {
-                    scanner_timer2.Enabled = true;
-                }
-                else
-                {
-                    scanner_timer2.Enabled = false;
-                }
-
-                if (tabControl1.SelectedIndex == 5)
-                {
-                    richTextBox1.Text += "進入USB WebCam\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "離開USB WebCam\n";
-                }
-
-                if (tabControl1.SelectedIndex == 5)
-                {
-                    /*
-                    USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                    if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
-                    {
-                        button12.Enabled = true;
-                        Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
-                        Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                    }
-                    else
-                    {
-                        button12.Enabled = false;
-                        richTextBox1.Text += "無影像裝置\n";
-                    }
-                    */
-                }
-                else
-                {
-                    /*
-                    if (Cam != null)
-                    {
-                        if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                        {
-                            //Cam.Stop();   // WebCam stops capturing images.
-                            Cam.SignalToStop();
-                            Cam.WaitForStop();
-                        }
-                    }
-                    */
-
-                    this.tb_sn2.Focus();
-                }
+                timer_rtc.Enabled = true;
             }
             else
             {
-                if (tabControl1.SelectedIndex == 4)
-                {
-                    scanner_timer.Enabled = true;
-                }
-                else
-                {
-                    scanner_timer.Enabled = false;
-                }
-                if (tabControl1.SelectedIndex == 3)
-                {
-                    scanner_timer2.Enabled = true;
-                }
-                else
-                {
-                    scanner_timer2.Enabled = false;
-                }
-
-                if (tabControl1.SelectedIndex == 6)
-                {
-                    richTextBox1.Text += "進入USB WebCam\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "離開USB WebCam\n";
-                }
-
-                if (tabControl1.SelectedIndex == 6)
-                {
-                    /*
-                    USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-                    if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
-                    {
-                        button12.Enabled = true;
-                        Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
-                        Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
-                    }
-                    else
-                    {
-                        button12.Enabled = false;
-                        richTextBox1.Text += "無影像裝置\n";
-                    }
-                    */
-                }
-                else
-                {
-                    /*
-                    if (Cam != null)
-                    {
-                        if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                        {
-                            //Cam.Stop();   // WebCam stops capturing images.
-                            Cam.SignalToStop();
-                            Cam.WaitForStop();
-                        }
-                    }
-                    */
-
-                    this.tb_sn2.Focus();
-                }
-
+                timer_rtc.Enabled = false;
+            }
+            if (tabControl1.SelectedTab == tp_Serial_Auto)
+            {
+                scanner_timer.Enabled = true;
+            }
+            else
+            {
+                scanner_timer.Enabled = false;
+            }
+            if (tabControl1.SelectedTab == tp_System)
+            {
+                scanner_timer2.Enabled = true;
+            }
+            else
+            {
+                scanner_timer2.Enabled = false;
             }
 
+            if (tabControl1.SelectedTab == tp_USB)
+            {
+                richTextBox1.Text += "進入USB WebCam\n";
+            }
+            else
+            {
+                richTextBox1.Text += "離開USB WebCam\n";
+            }
+
+            if (tabControl1.SelectedTab == tp_USB)
+            {
+                /*
+                USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                {
+                    button12.Enabled = true;
+                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);
+                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                }
+                else
+                {
+                    button12.Enabled = false;
+                    richTextBox1.Text += "無影像裝置\n";
+                }
+                */
+            }
+            else
+            {
+                /*
+                if (Cam != null)
+                {
+                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                    {
+                        //Cam.Stop();   // WebCam stops capturing images.
+                        Cam.SignalToStop();
+                        Cam.WaitForStop();
+                    }
+                }
+                */
+
+                this.tb_sn2.Focus();
+            }
         }
 
         public Bitmap bm = null;
@@ -2424,7 +2342,7 @@ namespace imsLink
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_a.Clear();
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -2484,7 +2402,10 @@ namespace imsLink
 
         private void scanner_timer_Tick(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "A";
+            if (flag_comport_ok == false)
+                return;
+
+            richTextBox1.Text += "A";
             if((cnt3 % 1) == 0)
             {
                 this.tb_sn2.Focus();
@@ -2665,7 +2586,7 @@ namespace imsLink
 
                     //richTextBox1.Text += "\n[insLink] issue write command and data\n\n";
 
-                    if (!serialPort1.IsOpen)
+                    if (flag_comport_ok == false)
                     {
                         richTextBox1.Text += "未連線comport, abort\n";
                         return;
@@ -2859,7 +2780,7 @@ namespace imsLink
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_a.Clear();
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -2916,7 +2837,7 @@ namespace imsLink
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -3162,13 +3083,20 @@ namespace imsLink
 
         private void button21_Click(object sender, EventArgs e)
         {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             lb_rtc.Text = "";
             button21.BackColor = Color.Red;
-            richTextBox1.Text += "更新系統時間\n";
+            //richTextBox1.Text += "更新系統時間\n";
 
-            richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString() + "\n";
+            //richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString() + "\n";
 
             System.DateTime dt = System.DateTime.Now;
+            /*
             richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
             richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
             richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
@@ -3177,6 +3105,7 @@ namespace imsLink
             richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
             richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
             richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            */
             //richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
 
             Send_IMS_Data(0xB0, 0x12, 0x34, 0x56);      //RTC write
@@ -3189,7 +3118,18 @@ namespace imsLink
             rtc_data_send[5] = (byte)dt.Minute;
             rtc_data_send[6] = (byte)dt.Second;
 
+            if (rtc_data_send[5] < 59)
+            {
+                rtc_data_send[6] += 2;
+                if (rtc_data_send[6] > 59)
+                {
+                    rtc_data_send[6] -= 60;
+                    rtc_data_send[5]++;
+                }
+            }
             serialPort1.Write(rtc_data_send, 0, 7);
+            delay(300);
+
             lb_rtc.Text = "已更新RTC時間";
             button21.BackColor = System.Drawing.SystemColors.ControlLight;
         }
@@ -3215,7 +3155,7 @@ namespace imsLink
             panel4.BackgroundImage = null;
             panel5.BackgroundImage = null;
 
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -3303,7 +3243,7 @@ namespace imsLink
             panel4.BackgroundImage = null;
             panel5.BackgroundImage = null;
 
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -3373,7 +3313,7 @@ namespace imsLink
             panel4.BackgroundImage = null;
             panel5.BackgroundImage = null;
 
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -3431,7 +3371,7 @@ namespace imsLink
             lb_mb_small_serial.Text = "小PCBA序號 讀取中...";
             button30.BackColor = Color.Red;
 
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 button30.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -3485,7 +3425,7 @@ namespace imsLink
 
             button29.BackColor = Color.Red;
 
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 button29.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -3517,7 +3457,7 @@ namespace imsLink
 
         private void button32_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -3528,7 +3468,7 @@ namespace imsLink
 
         private void button35_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -3555,10 +3495,9 @@ namespace imsLink
 
         private void button37_Click(object sender, EventArgs e)
         {
-            if (!serialPort1.IsOpen)
+            if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                button64.BackColor = System.Drawing.SystemColors.ControlLight;
                 return;
             }
 
@@ -3676,7 +3615,10 @@ namespace imsLink
         bool flag_ok_to_write_data = false;
         private void scanner_timer2_Tick(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "B";
+            if (flag_comport_ok == false)
+                return;
+
+            richTextBox1.Text += "B";
             if ((cnt3 % 1) == 0)
             {
                 this.tb_wait_data.Focus();
@@ -3757,7 +3699,7 @@ namespace imsLink
                     {
                         if (tb_wait_data.Text == "IMS EGD SYSTEM")
                         {
-                            if (!serialPort1.IsOpen)
+                            if (flag_comport_ok == false)
                             {
                                 richTextBox1.Text += "未連線comport, abort\n";
                                 tb_wait_data.Text = "";
@@ -3886,6 +3828,67 @@ namespace imsLink
                 flag_auto_scan_mode = true;
                 button40.Text = "到修改模式";
             }
+        }
+
+        int read_connection_cnt = 0;
+        int read_connection_fail_cnt = 0;
+        private void timer_rtc_Tick(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+                return;
+
+            //richTextBox1.Text += "C";
+            if (flag_read_connection_again == true)
+            {
+                read_connection_fail_cnt = 0;
+                read_connection_cnt++;
+
+                flag_read_connection_again = false;
+
+                if (read_connection_cnt == 4)
+                {
+                    read_connection_cnt = 0;
+                    //richTextBox1.Text += "\nread camera status.......\t";
+                    progressBar1.Value = 0;
+
+                    textBox7.Clear();
+                    textBox7.BackColor = Color.Gray;
+                    panel3.BackgroundImage = null;
+                    panel4.BackgroundImage = null;
+                    panel5.BackgroundImage = null;
+                    Send_IMS_Data(0xFF, 0, 0, 0);
+                }
+                else
+                {
+                    //richTextBox1.Text += "\nread rtc.......\t";
+                    progressBar2.Value = 0;
+                    Get_IMS_Data(3, 0x11, 0xAA);    //read RTC data
+                }
+                int cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
+                {
+                    //richTextBox1.Text += "+" + cnt.ToString() + " ";
+                    delay(100);
+                    if (cnt == 20)
+                    {
+                        flag_read_connection_again = true;
+                    }
+                }
+                flag_wait_receive_data = 0;
+            }
+            else
+            {
+                read_connection_fail_cnt++;
+                richTextBox1.Text += " F " + read_connection_fail_cnt.ToString();
+                if (read_connection_fail_cnt == 5)
+                {
+                    richTextBox1.Text += "fail cnt = 5, let flag - true\t";
+                    read_connection_fail_cnt = 0;
+                    flag_read_connection_again = true;
+                }
+
+            }
+
         }
 
     }
