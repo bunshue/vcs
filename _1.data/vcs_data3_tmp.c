@@ -126,31 +126,6 @@ C# StreamReader 讀取時，中文字部分變成亂碼的解決方法
 	txtsrDefault.Text = srDefault.ReadToEnd();
 	
             
-            
-            
-            Random r = new Random();
-            string result1 = "";
-            string result2 = "";
-            string result3 = "";
-            string result4 = "";
-            for (int i = 0; i < 5; i++)
-            {
-                result1 += r.Next().ToString() + " ";
-                result2 += r.Next(10).ToString() + " ";
-                result3 += r.Next(10, 20).ToString() + " ";
-                result4 += r.NextDouble().ToString() + " ";
-            }
-            richTextBox1.Text += "取>=0的亂數值：" + result1 + "\n";
-            richTextBox1.Text += "取0~10的亂數值：" + result2 + "\n";
-            richTextBox1.Text += "取10~20的亂數值：" + result3 + "\n";
-            richTextBox1.Text += "取0.0~1.0的亂數值：" + result4 + "\n";
-
-
-
-
-
-
-
 
 
 

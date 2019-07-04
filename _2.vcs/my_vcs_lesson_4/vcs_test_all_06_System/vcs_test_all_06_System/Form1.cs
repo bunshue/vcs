@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;   //for DllImport
 using System.Diagnostics;   //for process
-using Microsoft.Win32;  //for Registry
 using Microsoft.VisualBasic.Devices;    //for Computer
 using System.Drawing.Text;  //for InstalledFontCollection
 using System.Reflection;        //for Assembly
@@ -51,13 +50,6 @@ namespace vcs_test_all_06_System
 
         private void button4_Click(object sender, EventArgs e)
         {
-            RegistryKey mreg;
-            mreg = Registry.LocalMachine;
-            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
-            string IEVersion = "目前IE瀏覽器的版本訊息：" + (String)mreg.GetValue("Version");
-            mreg.Close();
-            richTextBox1.Text += IEVersion + "\n";
-
         }
 
         private void button5_Click(object sender, EventArgs e)

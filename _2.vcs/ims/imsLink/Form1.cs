@@ -95,6 +95,11 @@ namespace imsLink
         int btn_down_up_cnt = 0;
         int btn_right_left_cnt = 0;
 
+        //C# 提示視窗 ToolTip 
+        //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
+        ToolTip toolTip1 = new ToolTip();
+        //SetToolTip：定義控制項會跳出提示的文字
+
         Graphics g;
 
         //參考
@@ -213,6 +218,7 @@ namespace imsLink
             }
             richTextBox1.Font = new Font("Courier New", 10);
             button33.BackgroundImage = imsLink.Properties.Resources.open_log;
+            toolTip1.SetToolTip(button33, "log on");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1288,7 +1294,42 @@ namespace imsLink
             frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
             frm.ShowDialog();   //顯示Form2視窗
 
-            this.BackColor = Color.Pink;
+            this.BackColor = Color.Yellow;
+
+            toolTip1.SetToolTip(button17, "Zoom in");
+            toolTip1.SetToolTip(button18, "Zoom out");
+            toolTip1.SetToolTip(button12, "Refresh");
+            toolTip1.SetToolTip(button16, "Save");
+            toolTip1.SetToolTip(button15, "Play/Pause");
+            toolTip1.SetToolTip(button19, "2X");
+            toolTip1.SetToolTip(btnUp, "Up");
+            toolTip1.SetToolTip(btnDown, "Down");
+            toolTip1.SetToolTip(btnLeft, "Left");
+            toolTip1.SetToolTip(btnRight, "Right");
+            toolTip1.SetToolTip(btnCenter, "Default");
+
+            toolTip1.SetToolTip(button10, "Comport Scan");
+            toolTip1.SetToolTip(button1, "Comport Connect");
+            toolTip1.SetToolTip(button2, "Comport Disconnect");
+            toolTip1.SetToolTip(button9, "Reset");
+            toolTip1.SetToolTip(button13, "START");
+            toolTip1.SetToolTip(button35, "To imsLink Mode");
+            toolTip1.SetToolTip(button32, "To PuTTy Mode");
+            toolTip1.SetToolTip(button20, "Exit");
+            toolTip1.SetToolTip(button33, "log on");
+
+
+            //以下為提示視窗的設定(通常會設定的部分)
+            //ToolTipIcon：設定顯示在提示視窗的圖示類型。
+            //toolTip1.ToolTipIcon = ToolTipIcon.Info;
+            //ForeColor：前景顏色
+            toolTip1.ForeColor = Color.Blue;
+            //BackColor：背景顏色
+            toolTip1.BackColor = Color.Gray;
+            //AutoPopDelay：當游標停滯在控制項，顯示提示視窗的時間。(以毫秒為單位)
+            toolTip1.AutoPopDelay = 5000;
+            //ToolTipTitle：設定提示視窗的標題。
+            //toolTip1.ToolTipTitle = "提示訊息";
             
         }
 
@@ -1351,12 +1392,14 @@ namespace imsLink
             {
                 show_comport_log = true;
                 button33.BackgroundImage = imsLink.Properties.Resources.close_log;
+                toolTip1.SetToolTip(button33, "log off");
                 this.Width += 520;
             }
             else
             {
                 show_comport_log = false;
                 button33.BackgroundImage = imsLink.Properties.Resources.open_log;
+                toolTip1.SetToolTip(button33, "log on");
                 this.Width -= 520;
             }
         }
@@ -3035,6 +3078,7 @@ namespace imsLink
                 pictureBox1.Location = new Point(170, 15);
                 //pictureBox1.Size = new Size(1120, 840);
                 pictureBox1.Size = new Size(640 * 2, 480 * 2);
+                toolTip1.SetToolTip(button19, "1X");
             }
             else
             {
@@ -3047,6 +3091,7 @@ namespace imsLink
                 tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
+                toolTip1.SetToolTip(button19, "2X");
             }
         }
 
