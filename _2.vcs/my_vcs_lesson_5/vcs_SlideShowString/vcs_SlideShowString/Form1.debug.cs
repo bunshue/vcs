@@ -13,7 +13,7 @@ namespace vcs_SlideShowString
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = true;
+        bool flag_release_mode = false;
         //bool flag_pause = false;
 
         Graphics g;
@@ -25,8 +25,8 @@ namespace vcs_SlideShowString
         int i = 0;
 
         //string filepath = "C:\\______test_vcs\\poetry.txt";
-        //string filepath = "poetry_debug.txt";
-        string filepath = "poetry.txt";
+        string filepath = "poetry_debug.txt";
+        //string filepath = "poetry.txt";
 
         List<String> all_strings = new List<String>();
         List<String> current_strings = new List<String>();  //new List<string>物件
@@ -306,7 +306,7 @@ namespace vcs_SlideShowString
             //total_title_author_height = sky + down1 + down2 + down3 + title_width + down1 + down2 + down3 + author_width + earth;
             total_title_author_height = sky + down1 + down2 + down3 + title_width + down1 + author_width + earth;
 
-            //richTextBox1.Text += "total_title_author_height = " + total_title_author_height.ToString() + "\n";
+            richTextBox1.Text += "total_title_author_height = " + total_title_author_height.ToString() + "\n";
             if (total_title_author_height > screenHeight_max)
             {
                 richTextBox1.Text += "length too long, return fail........";
@@ -480,8 +480,11 @@ namespace vcs_SlideShowString
                 x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
                 y_st = sky;
                 if (i != 0)
+                {
                     g.DrawString(current_strings[i], f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
-                g.DrawRectangle(new Pen(Color.Red, 1), border + x_st, y_st, show_max_height_size, show_max_width_size);
+                    g.DrawRectangle(new Pen(Color.Green, 1), border + x_st, y_st, show_max_height_size, show_max_width_size);
+                }
+                //g.DrawRectangle(new Pen(Color.Red, 1), border + x_st, y_st, show_max_height_size, show_max_width_size);
             }
             x_st = 0;
             y_st = sky;
@@ -516,12 +519,42 @@ namespace vcs_SlideShowString
 
             title_width = g.MeasureString(str_title, f).ToSize().Width;
             author_width = g.MeasureString(str_author, f).ToSize().Width;
+            g.DrawRectangle(new Pen(Color.Green, 1), border + x_st, y_st, g.MeasureString(str_title, f).ToSize().Height, g.MeasureString(str_title, f).ToSize().Width);
+
+
             int dd = down1 + down2 + down3;
             int y_st_title = 0;
 
             y_st_title = sky + dd + title_width + dd + (show_max_width_size - dd * 2 - title_width - author_width) / 2;
 
             g.DrawString(str_author, f, new SolidBrush(Color.Black), border + x_st, y_st_title, drawFormat);
+            
+            g.DrawRectangle(new Pen(Color.Green, 1), border + x_st, y_st_title, g.MeasureString(str_author, f).ToSize().Height, g.MeasureString(str_author, f).ToSize().Width);
+
+            //g.DrawRectangle(new Pen(Color.Blue, 1), border + x_st + 5, 0, g.MeasureString(str_author, f).ToSize().Height - 10, g.MeasureString(str_author, f).ToSize().Width);
+            int hhh1;
+            int hhh2;
+            //hhh = sky + dd + title_width + dd + author_width;
+            hhh1 = 0;
+            hhh2 = sky;// +dd + title_width + dd;// +author_width;
+            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(border + x_st + 2, hhh1, g.MeasureString(str_author, f).ToSize().Height - 4, hhh2));
+
+            hhh1 = 0;
+            hhh2 = sky + dd; // + title_width + dd;// +author_width;
+            g.FillRectangle(new SolidBrush(Color.Navy), new Rectangle(border + x_st + 4, hhh1, g.MeasureString(str_author, f).ToSize().Height - 8, hhh2));
+
+            hhh1 = 0;
+            hhh2 = sky + dd + title_width;// + dd;// +author_width;
+            g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(border + x_st + 6, hhh1, g.MeasureString(str_author, f).ToSize().Height - 12, hhh2));
+
+            hhh1 = 0;
+            hhh2 = sky + dd + title_width + dd;// +author_width;
+            g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(border + x_st + 6, hhh1, g.MeasureString(str_author, f).ToSize().Height - 12, hhh2));
+
+            hhh1 = 0;
+            hhh2 = sky + dd + title_width + dd + author_width;
+            g.FillRectangle(new SolidBrush(Color.Violet), new Rectangle(border + x_st + 8, hhh1, g.MeasureString(str_author, f).ToSize().Height - 16, hhh2));
+
 
             y_st = sky + down1 + down2 + down3 + title_width + down3 + down2;
 
