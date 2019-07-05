@@ -14,11 +14,13 @@ using System.Drawing.Imaging;   //for ImageFormat
 using AForge.Video;
 using AForge.Video.DirectShow;
 
+using System.Runtime.InteropServices;   //for dll
+
 namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = true;
+        bool flag_release_mode = false;
         private const bool SHOW_COMPORT_LOG = false;
         private const int UART_BUF_LENGTH = 5;
         private const int CAMERA_OK = 0;	//dongle + camera
@@ -3934,6 +3936,49 @@ namespace imsLink
 
             }
 
+        }
+
+        [DllImport("gdi32.dll")]
+        static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
+        [DllImport("gdi32.dll")]
+        static public extern IntPtr CreateDC(string driverName, string deviceName, string output, IntPtr lpinitData);
+        [DllImport("gdi32.dll")]
+        static public extern bool DeleteDC(IntPtr DC);
+        static public byte GetRValue(uint color)
+        {
+            return (byte)color;
+        }
+        static public byte GetGValue(uint color)
+        {
+            return ((byte)(((short)(color)) >> 8));
+        }
+        static public byte GetBValue(uint color)
+        {
+            return ((byte)((color) >> 16));
+        }
+        static public byte GetAValue(uint color)
+        {
+            return ((byte)((color) >> 24));
+        }
+
+        public Color GetColor(Point screenPoint)
+        {
+            IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+            uint colorref = GetPixel(displayDC, screenPoint.X, screenPoint.Y);
+            DeleteDC(displayDC);
+            byte Red = GetRValue(colorref);
+            byte Green = GetGValue(colorref);
+            byte Blue = GetBValue(colorref);
+            return Color.FromArgb(Red, Green, Blue);
+        }  
+
+        private void timer_get_rgb_Tick(object sender, EventArgs e)
+        {
+            //txtPoint.Text = Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString();
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            Color cl = GetColor(pt);
+            panel1.BackColor = cl;
+            lb_rgb.Text = cl.R + ", " + cl.G + ", " + cl.B;
         }
 
     }

@@ -14,7 +14,7 @@ namespace vcs_SlideShowString
     public partial class Form1 : Form
     {
         bool flag_release_mode = true;
-        //bool flag_pause = false;
+        bool flag_pause = false;
 
         Graphics g;
         Font f;
@@ -22,6 +22,9 @@ namespace vcs_SlideShowString
 
         int W;      //final pictureBox1.Width for display
         int H;      //final pictureBox1.Height for display
+        int w;      //final string width for display
+        int h;      //final string height for display
+
         int i = 0;
 
         //string filepath = "C:\\______test_vcs\\poetry.txt";
@@ -30,6 +33,14 @@ namespace vcs_SlideShowString
 
         List<String> all_strings = new List<String>();
         List<String> current_strings = new List<String>();  //new List<string>物件
+
+        private const int SKY = 50;
+        private const int EARTH = 30;
+        private const int BORDER = 10;
+        private const int D1 = 30;
+        private const int D2 = 12;
+        private const int D3 = 6;
+
 
         int strings_count = 0;
         int lyrics_count = 0;
@@ -56,6 +67,7 @@ namespace vcs_SlideShowString
         int default_font_size = 0;
         int user_font_size = 0;
         int slide_show_interval = 0;
+        bool flag_top_most = false;
         int total_title_author_height = 0;
         int title_width = 0;
         int author_width = 0;
@@ -71,6 +83,7 @@ namespace vcs_SlideShowString
 
         bool loadTextData()
         {
+            bool flag_skip_comment = false;
             if (System.IO.File.Exists(filepath) == false)
             {
                 richTextBox1.Text += "檔案 " + filepath + " 不存在，離開。\n";
@@ -89,9 +102,27 @@ namespace vcs_SlideShowString
                 {               // 每次讀取一行，直到檔尾
                     i++;
                     line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
-                    if (line.Length <= 0)
+                    if (line.Length < 2)
                         continue;
-                    if (line[0] == '@')
+
+                    if ((line[line.Length - 2] == '*') && (line[line.Length - 1] == '/'))
+                    {
+                        richTextBox1.Text += "got comment SP : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        flag_skip_comment = false;
+                        continue;
+                    }
+                    else if (flag_skip_comment == true)
+                    {
+                        richTextBox1.Text += "got comment : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        continue;
+                    }
+                    else if ((line[0] == '/') && (line[1] == '*'))
+                    {
+                        flag_skip_comment = true;
+                        richTextBox1.Text += "got comment ST : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        continue;
+                    }
+                    else if (line[0] == '@')
                     {
                         //richTextBox1.Text += "get author" + line + "\n";
                     }
@@ -145,6 +176,19 @@ namespace vcs_SlideShowString
                         slide_show_interval = int.Parse(line.Remove(0, 1));
                         richTextBox1.Text += "播放速度: " + slide_show_interval.ToString() + " 秒\n";
                     }
+                    else if (line[0] == '[')
+                    {
+                        if (line[1] == '0')
+                        {
+                            flag_top_most = false;
+                            richTextBox1.Text += "設定非最上層顯示\n";
+                        }
+                        else if (line[1] == '1')
+                        {
+                            flag_top_most = true;
+                            richTextBox1.Text += "設定最上層顯示\n";
+                        }
+                    }
                     else if (line[0] == '#')
                     {
                         //richTextBox1.Text += "get title" + line + "\n";
@@ -156,6 +200,13 @@ namespace vcs_SlideShowString
                     }
                     else if (line[0] == '%')
                     {
+                        //comment
+                        //richTextBox1.Text += "get comment" + line + "\n";
+                        continue;
+                    }
+                    else if ((line[0] == '/')&&(line[1] == '/'))
+                    {
+                        //comment
                         //richTextBox1.Text += "get comment" + line + "\n";
                         continue;
                     }
@@ -264,7 +315,11 @@ namespace vcs_SlideShowString
 
             for (i = 0; i < current_strings.Count; i++)
             {
-                tmp_width = g.MeasureString(current_strings[i], f).ToSize().Width;
+                if(i == 1)
+                    tmp_width = g.MeasureString(current_strings[i].Remove(0, 1), f).ToSize().Width;
+                else
+                    tmp_width = g.MeasureString(current_strings[i], f).ToSize().Width;
+                //richTextBox1.Text += "i = " + i.ToString() + " tmp_width = " + tmp_width.ToString() + " " + current_strings[i] + "\n";
                 tmp_height = g.MeasureString(current_strings[i], f).ToSize().Height;
                 //richTextBox1.Text += "size f = " + f.Size.ToString() + "\t";
                 //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "\t";
@@ -294,17 +349,17 @@ namespace vcs_SlideShowString
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            int sky = 50;
-            int earth = 30;
-            int down1 = 30;
-            int down2 = 12;
-            int down3 = 6;
+            int sky = SKY;
+            int earth = EARTH;
+            int d1 = D1;
+            int d2 = D2;
+            int d3 = D3;
 
             title_width = g.MeasureString(str_title, f).ToSize().Width;
             author_width = g.MeasureString(str_author, f).ToSize().Width;
 
-            //total_title_author_height = sky + down1 + down2 + down3 + title_width + down1 + down2 + down3 + author_width + earth;
-            total_title_author_height = sky + down1 + down2 + down3 + title_width + down1 + author_width + earth;
+            //total_title_author_height = sky + d1 + d2 + d3 + title_width + d1 + d2 + d3 + author_width + earth;
+            total_title_author_height = sky + d1 + d2 + d3 + title_width + d2 + d3 + author_width + earth;
 
             //richTextBox1.Text += "total_title_author_height = " + total_title_author_height.ToString() + "\n";
             if (total_title_author_height > screenHeight_max)
@@ -314,7 +369,11 @@ namespace vcs_SlideShowString
             }
 
             if (show_max_width_size < screenHeight_max)
+            {
+                //show_max_width_size -= 8;
+                //richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\n";
                 return 0;
+            }
             else
                 return -1;
 
@@ -442,9 +501,9 @@ namespace vcs_SlideShowString
 
             int N = current_strings.Count;
             int p = 0;
-            int sky = 50;
-            int earth = 30;
-            int border = 10;
+            int sky = SKY;
+            int earth = EARTH;
+            int border = BORDER;
 
             pictureBox1.Width = show_max_height_size * N + p * (N * 2) + border * 2;
             pictureBox1.Height = show_max_width_size + sky + earth;
@@ -480,7 +539,15 @@ namespace vcs_SlideShowString
                 x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
                 y_st = sky;
                 if (i != 0)
+                {
                     g.DrawString(current_strings[i], f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
+                    /*
+                    int www = g.MeasureString(current_strings[i], f).ToSize().Width;
+                    richTextBox1.Text += "www = " + www.ToString() + "  str = " + current_strings[i] + "\n";
+                    g.DrawRectangle(new Pen(Color.Green, 1), border + x_st+1, y_st+1, show_max_height_size, www);
+                    */
+
+                }
                 g.DrawRectangle(new Pen(Color.Red, 1), border + x_st, y_st, show_max_height_size, show_max_width_size);
             }
             x_st = 0;
@@ -488,9 +555,9 @@ namespace vcs_SlideShowString
 
             g.DrawRectangle(new Pen(Color.Red, 5), border + x_st - 5, y_st - 5, show_max_height_size * N + p * (N * 2) + 10, show_max_width_size + 10);
 
-            int down1 = 30;
-            int down2 = 12;
-            int down3 = 6;
+            int d1 = D1;
+            int d2 = D2;
+            int d3 = D3;
 
             i = 0;
             x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
@@ -498,43 +565,55 @@ namespace vcs_SlideShowString
 
             Point[] pts = new Point[5];
             pts[0].X = border + x_st;
-            pts[0].Y = y_st + down1;
+            pts[0].Y = y_st + d1;
             pts[1].X = border + x_st + show_max_height_size;
-            pts[1].Y = y_st + down1;
+            pts[1].Y = y_st + d1;
             pts[2].X = border + x_st + show_max_height_size;
-            pts[2].Y = y_st + down1 + down2;
+            pts[2].Y = y_st + d1 + d2;
             pts[3].X = border + x_st + show_max_height_size / 2;
-            pts[3].Y = y_st + down1 + down3;
+            pts[3].Y = y_st + d1 + d3;
             pts[4].X = border + x_st;
-            pts[4].Y = y_st + down1 + down2;
+            pts[4].Y = y_st + d1 + d2;
             g.FillPolygon(new SolidBrush(Color.Red), pts);
 
             i = 0;
             x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
-            y_st = sky + down1 + down2 + down3;
+            y_st = sky + d1 + d2 + d3;
             g.DrawString(str_title, f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
 
             title_width = g.MeasureString(str_title, f).ToSize().Width;
             author_width = g.MeasureString(str_author, f).ToSize().Width;
-            int dd = down1 + down2 + down3;
             int y_st_title = 0;
+            int dd = (show_max_width_size - d1 - d2 - d3 - title_width - d3 - d2 - author_width) / 2;
 
-            y_st_title = sky + dd + title_width + dd + (show_max_width_size - dd * 2 - title_width - author_width) / 2;
+            y_st_title = sky + d1 + d2 + d3 + title_width + d3 + d2 + dd;
 
             g.DrawString(str_author, f, new SolidBrush(Color.Black), border + x_st, y_st_title, drawFormat);
 
-            y_st = sky + down1 + down2 + down3 + title_width + down3 + down2;
+            /*  debug
+            int yy1;
+            int yy2;
+            yy1 = 0;
+            yy2 = sky + d1 + d2 + d3 + title_width + d3 + d2;
+            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(border + x_st + 10 - 20, yy1, g.MeasureString(str_author, f).ToSize().Height - 20, yy2));
+
+            yy1 = sky;
+            yy2 = show_max_width_size;
+            g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(border + x_st + 10 - 50, yy1, g.MeasureString(str_author, f).ToSize().Height - 20, yy2));
+            */
+
+            y_st = sky + d1 + d2 + d3 + title_width + d3 + d2;
 
             pts[0].X = border + x_st;
             pts[0].Y = y_st;
             pts[1].X = border + x_st + show_max_height_size;
             pts[1].Y = y_st;
             pts[2].X = border + x_st + show_max_height_size;
-            pts[2].Y = y_st - down2;
+            pts[2].Y = y_st - d2;
             pts[3].X = border + x_st + show_max_height_size / 2;
-            pts[3].Y = y_st - down3;
+            pts[3].Y = y_st - d3;
             pts[4].X = border + x_st;
-            pts[4].Y = y_st - down2; ;
+            pts[4].Y = y_st - d2; ;
             g.FillPolygon(new SolidBrush(Color.Red), pts);
 
             if (flag_release_mode == false)
@@ -562,10 +641,16 @@ namespace vcs_SlideShowString
                 }
                 this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
             }
+            this.Text = str_title;
 
             show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
 
             timer1_cnt = 0;
+
+            if (flag_top_most == true)
+                this.TopMost = true;
+            else
+                this.TopMost = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -573,6 +658,12 @@ namespace vcs_SlideShowString
             if (lyrics_count == 1)
             {
                 //richTextBox1.Text += "只有一首, 不動作\n";
+                return;
+            }
+
+            if (slide_show_interval == 0)
+            {
+                //richTextBox1.Text += "停止自動播放\n";
                 return;
             }
 
@@ -586,18 +677,20 @@ namespace vcs_SlideShowString
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            /*  不是很好用
             if (flag_pause == false)
             {
+                g.FillRectangle(new SolidBrush(Color.SaddleBrown), new Rectangle(0, 0, W, 30));
+                pictureBox1.Image = bmp;
                 flag_pause = true;
                 timer1.Enabled = false;
             }
             else
             {
+                g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle(0, 0, W, 30));
+                pictureBox1.Image = bmp;
                 flag_pause = false;
                 timer1.Enabled = true;
             }
-            */
         }
 
         //***********************

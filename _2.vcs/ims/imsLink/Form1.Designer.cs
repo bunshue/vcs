@@ -98,6 +98,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.tp_Connection = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.lb_rtc = new System.Windows.Forms.Label();
             this.button21 = new System.Windows.Forms.Button();
             this.lb_time2 = new System.Windows.Forms.Label();
@@ -237,7 +238,8 @@
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.timer_rtc = new System.Windows.Forms.Timer(this.components);
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.lb_rgb = new System.Windows.Forms.Label();
+            this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1027,6 +1029,13 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "主機時間";
             // 
+            // progressBar2
+            // 
+            this.progressBar2.Location = new System.Drawing.Point(690, 162);
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(154, 32);
+            this.progressBar2.TabIndex = 63;
+            // 
             // lb_rtc
             // 
             this.lb_rtc.AutoSize = true;
@@ -1675,6 +1684,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.lb_rgb);
             this.tp_USB.Controls.Add(this.lb_zoom);
             this.tp_USB.Controls.Add(this.btnCenter);
             this.tp_USB.Controls.Add(this.btnRight);
@@ -1772,7 +1782,7 @@
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button19.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button19.ForeColor = System.Drawing.Color.Black;
-            this.button19.Location = new System.Drawing.Point(57, 470);
+            this.button19.Location = new System.Drawing.Point(60, 459);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(60, 60);
             this.button19.TabIndex = 41;
@@ -2512,12 +2522,20 @@
             this.timer_rtc.Interval = 500;
             this.timer_rtc.Tick += new System.EventHandler(this.timer_rtc_Tick);
             // 
-            // progressBar2
+            // lb_rgb
             // 
-            this.progressBar2.Location = new System.Drawing.Point(690, 162);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(154, 32);
-            this.progressBar2.TabIndex = 63;
+            this.lb_rgb.AutoSize = true;
+            this.lb_rgb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_rgb.Location = new System.Drawing.Point(18, 544);
+            this.lb_rgb.Name = "lb_rgb";
+            this.lb_rgb.Size = new System.Drawing.Size(62, 21);
+            this.lb_rgb.TabIndex = 48;
+            this.lb_rgb.Text = "lb_rgb";
+            // 
+            // timer_get_rgb
+            // 
+            this.timer_get_rgb.Enabled = true;
+            this.timer_get_rgb.Tick += new System.EventHandler(this.timer_get_rgb_Tick);
             // 
             // Form1
             // 
@@ -2807,6 +2825,8 @@
         private System.Windows.Forms.Timer timer_rtc;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Label lb_rgb;
+        private System.Windows.Forms.Timer timer_get_rgb;
     }
 }
 
