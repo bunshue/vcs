@@ -20,10 +20,10 @@ namespace vcs_SlideShowString
         Font f;
         Bitmap bmp;
 
-        int W;      //final pictureBox1.Width for display
-        int H;      //final pictureBox1.Height for display
-        int w;      //final string width for display
-        int h;      //final string height for display
+        int W = 0;      //final pictureBox1.Width for display
+        int H = 0;      //final pictureBox1.Height for display
+        int w = 0;      //final string width for display
+        int h = 0;      //final string height for display
 
         int i = 0;
 
@@ -56,9 +56,6 @@ namespace vcs_SlideShowString
 
         string string0 = String.Empty;
 
-        int show_head_size = 0;
-        int show_max_width_size = 0;
-        int show_max_height_size = 0;
         int timer1_cnt = 0;
         int do_mouse_wheel_cnt = 0;
         int timer2_cnt = 0;
@@ -133,8 +130,10 @@ namespace vcs_SlideShowString
                         richTextBox1.Text += "設定對齊方向" + "\t";
                         if (align_direction == '0')
                             richTextBox1.Text += "靠右\n";
+                        else if (align_direction == '1')
+                            richTextBox1.Text += "靠右\n";
                         else
-                            richTextBox1.Text += "靠左\n";
+                            richTextBox1.Text += "正中\n";
                     }
                     else if (line[0] == '~')
                     {
@@ -148,7 +147,11 @@ namespace vcs_SlideShowString
                     }
                     else if (line[0] == '<')
                     {
-                        if (line[1] == 'L')
+                        if (line[1] == 'X')
+                        {
+                            default_font_size = 36;
+                        }
+                        else if (line[1] == 'L')
                         {
                             default_font_size = 24;
                         }
@@ -309,9 +312,8 @@ namespace vcs_SlideShowString
             }
             */
 
-            show_head_size = 0;
-            show_max_width_size = 0;
-            show_max_height_size = 0;
+            w = 0;
+            h = 0;
 
             for (i = 0; i < current_strings.Count; i++)
             {
@@ -326,22 +328,16 @@ namespace vcs_SlideShowString
                 //richTextBox1.Text += "tmp_height = " + tmp_height.ToString() + "\n";
                 //g.DrawRectangle(p, 150, 50, tmp_height - 1, tmp_width);
 
-                if (show_max_width_size < tmp_width)
-                    show_max_width_size = tmp_width;
-                if (show_max_height_size < tmp_height)
-                    show_max_height_size = tmp_height;
+                if (w < tmp_width)
+                    w = tmp_width;
+                if (h < tmp_height)
+                    h = tmp_height;
             }
 
-            if (show_max_width_size < screenHeight_max)
-                show_head_size = (screenHeight_max - show_max_width_size) / 2;
-            else
-                show_head_size = 0;
-
             /*
-            richTextBox1.Text += "show_head_size = " + show_head_size.ToString() + "\t";
-            richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\t";
-            richTextBox1.Text += "show_max_height_size = " + show_max_height_size.ToString() + "\n";
-            richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + " screenHeight_max = " + screenHeight_max.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + "\t";
+            richTextBox1.Text += "h = " + h.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + " screenHeight_max = " + screenHeight_max.ToString() + "\n";
             */
 
             //especially calculate title + author
@@ -368,10 +364,10 @@ namespace vcs_SlideShowString
                 return -1;
             }
 
-            if (show_max_width_size < screenHeight_max)
+            if (w < screenHeight_max)
             {
-                //show_max_width_size -= 8;
-                //richTextBox1.Text += "show_max_width_size = " + show_max_width_size.ToString() + "\n";
+                //w -= 8;
+                //richTextBox1.Text += "w = " + w.ToString() + "\n";
                 return 0;
             }
             else
@@ -388,11 +384,7 @@ namespace vcs_SlideShowString
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 
-            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bmp);
-
             int i;
-
             int flag_get_lyrics_index = 0;
             int flag_get_text_data = 0;
 
@@ -483,6 +475,9 @@ namespace vcs_SlideShowString
 
             f = new Font("標楷體", default_font_size);
 
+            bmp = new Bitmap(100, 100);     //initial W, H
+            g = Graphics.FromImage(bmp);
+
             //更新全首的畫圖邊界
             int result = -1;
             while (result == -1)
@@ -505,22 +500,22 @@ namespace vcs_SlideShowString
             int earth = EARTH;
             int border = BORDER;
 
-            pictureBox1.Width = show_max_height_size * N + p * (N * 2) + border * 2;
-            pictureBox1.Height = show_max_width_size + sky + earth;
+            W = h * N + p * (N * 2) + border * 2;
+            H = w + sky + earth;
 
-            W = pictureBox1.Width;
-            H = pictureBox1.Height;
+            pictureBox1.Width = W;
+            pictureBox1.Height = H;
 
             /*
-            richTextBox1.Text += "W = " + pictureBox1.Width.ToString() + ", H = " + pictureBox1.Height.ToString() + "\n";
-            richTextBox1.Text += "w = " + show_max_width_size.ToString() + ", h = " + show_max_height_size.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
             richTextBox1.Text += "p = " + p.ToString() + "\n";
             */
 
             if (H < total_title_author_height)
             {
                 H = total_title_author_height;
-                show_max_width_size = total_title_author_height - sky - earth;
+                w = total_title_author_height - sky - earth;
             }
 
             bmp = new Bitmap(W, H);
@@ -536,7 +531,7 @@ namespace vcs_SlideShowString
 
             for (i = 0; i < current_strings.Count; i++)
             {
-                x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
+                x_st = p * (2 * (N - i) - 1) + h * (N - i - 1);
                 y_st = sky;
                 if (i != 0)
                 {
@@ -544,47 +539,47 @@ namespace vcs_SlideShowString
                     /*
                     int www = g.MeasureString(current_strings[i], f).ToSize().Width;
                     richTextBox1.Text += "www = " + www.ToString() + "  str = " + current_strings[i] + "\n";
-                    g.DrawRectangle(new Pen(Color.Green, 1), border + x_st+1, y_st+1, show_max_height_size, www);
+                    g.DrawRectangle(new Pen(Color.Green, 1), border + x_st+1, y_st+1, h, www);
                     */
 
                 }
-                g.DrawRectangle(new Pen(Color.Red, 1), border + x_st, y_st, show_max_height_size, show_max_width_size);
+                g.DrawRectangle(new Pen(Color.Red, 1), border + x_st, y_st, h, w);
             }
             x_st = 0;
             y_st = sky;
 
-            g.DrawRectangle(new Pen(Color.Red, 5), border + x_st - 5, y_st - 5, show_max_height_size * N + p * (N * 2) + 10, show_max_width_size + 10);
+            g.DrawRectangle(new Pen(Color.Red, 5), border + x_st - 5, y_st - 5, h * N + p * (N * 2) + 10, w + 10);
 
             int d1 = D1;
             int d2 = D2;
             int d3 = D3;
 
             i = 0;
-            x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
+            x_st = p * (2 * (N - i) - 1) + h * (N - i - 1);
             y_st = sky;
 
             Point[] pts = new Point[5];
             pts[0].X = border + x_st;
             pts[0].Y = y_st + d1;
-            pts[1].X = border + x_st + show_max_height_size;
+            pts[1].X = border + x_st + h;
             pts[1].Y = y_st + d1;
-            pts[2].X = border + x_st + show_max_height_size;
+            pts[2].X = border + x_st + h;
             pts[2].Y = y_st + d1 + d2;
-            pts[3].X = border + x_st + show_max_height_size / 2;
+            pts[3].X = border + x_st + h / 2;
             pts[3].Y = y_st + d1 + d3;
             pts[4].X = border + x_st;
             pts[4].Y = y_st + d1 + d2;
             g.FillPolygon(new SolidBrush(Color.Red), pts);
 
             i = 0;
-            x_st = p * (2 * (N - i) - 1) + show_max_height_size * (N - i - 1);
+            x_st = p * (2 * (N - i) - 1) + h * (N - i - 1);
             y_st = sky + d1 + d2 + d3;
             g.DrawString(str_title, f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
 
             title_width = g.MeasureString(str_title, f).ToSize().Width;
             author_width = g.MeasureString(str_author, f).ToSize().Width;
             int y_st_title = 0;
-            int dd = (show_max_width_size - d1 - d2 - d3 - title_width - d3 - d2 - author_width) / 2;
+            int dd = (w - d1 - d2 - d3 - title_width - d3 - d2 - author_width) / 2;
 
             y_st_title = sky + d1 + d2 + d3 + title_width + d3 + d2 + dd;
 
@@ -598,7 +593,7 @@ namespace vcs_SlideShowString
             g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(border + x_st + 10 - 20, yy1, g.MeasureString(str_author, f).ToSize().Height - 20, yy2));
 
             yy1 = sky;
-            yy2 = show_max_width_size;
+            yy2 = w;
             g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(border + x_st + 10 - 50, yy1, g.MeasureString(str_author, f).ToSize().Height - 20, yy2));
             */
 
@@ -606,11 +601,11 @@ namespace vcs_SlideShowString
 
             pts[0].X = border + x_st;
             pts[0].Y = y_st;
-            pts[1].X = border + x_st + show_max_height_size;
+            pts[1].X = border + x_st + h;
             pts[1].Y = y_st;
-            pts[2].X = border + x_st + show_max_height_size;
+            pts[2].X = border + x_st + h;
             pts[2].Y = y_st - d2;
-            pts[3].X = border + x_st + show_max_height_size / 2;
+            pts[3].X = border + x_st + h / 2;
             pts[3].Y = y_st - d3;
             pts[4].X = border + x_st;
             pts[4].Y = y_st - d2; ;
@@ -633,13 +628,17 @@ namespace vcs_SlideShowString
                 this.StartPosition = FormStartPosition.Manual;
                 if (align_direction == '0')
                 {   //靠右
-                    this.Location = new System.Drawing.Point(screenWidth - pictureBox1.Width, (screenHeight - pictureBox1.Height) / 2);
+                    this.Location = new System.Drawing.Point(screenWidth - W, (screenHeight - H) / 2);
                 }
-                else
+                else if (align_direction == '1')
                 {   //靠左
-                    this.Location = new System.Drawing.Point(0, (screenHeight - pictureBox1.Height) / 2);
+                    this.Location = new System.Drawing.Point(0, (screenHeight - H) / 2);
                 }
-                this.Size = new Size(pictureBox1.Width, pictureBox1.Height);
+                else if (align_direction == '2')
+                {   //正中
+                    this.Location = new System.Drawing.Point((screenWidth - W) / 2, (screenHeight - H) / 2);
+                }
+                this.Size = new Size(W, H);
             }
             this.Text = str_title;
 
@@ -679,14 +678,14 @@ namespace vcs_SlideShowString
         {
             if (flag_pause == false)
             {
-                g.FillRectangle(new SolidBrush(Color.SaddleBrown), new Rectangle(0, 0, W, 30));
+                g.FillRectangle(new SolidBrush(Color.SaddleBrown), new Rectangle(0, H - EARTH / 2, W, EARTH / 2));
                 pictureBox1.Image = bmp;
                 flag_pause = true;
                 timer1.Enabled = false;
             }
             else
             {
-                g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle(0, 0, W, 30));
+                g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle(0, H - EARTH / 2, W, EARTH / 2));
                 pictureBox1.Image = bmp;
                 flag_pause = false;
                 timer1.Enabled = true;
