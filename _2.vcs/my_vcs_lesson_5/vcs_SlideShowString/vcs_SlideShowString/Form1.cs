@@ -263,16 +263,24 @@ namespace vcs_SlideShowString
             if (e.Delta < 0)
             {
                 richTextBox1.Text += "下一首\n";
+                show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
                 slide_show_string();
                 do_mouse_wheel_cnt = timer2_cnt;
             }
             else
             {
+                if (lyrics_count == 1)
+                {
+                    richTextBox1.Text += "只有一首, 不動作\n";
+                    return;
+                }
+
                 richTextBox1.Text += "上一首\n";
-                if (show_lyrics_index > 0)
-                    show_lyrics_index--;
-                else
-                    show_lyrics_index = lyrics_count - 1;
+
+                flag_pause = true;
+                timer1.Enabled = false;
+                this.TopMost = false;
+
                 if (show_lyrics_index > 0)
                     show_lyrics_index--;
                 else
@@ -282,9 +290,118 @@ namespace vcs_SlideShowString
             }
         }
 
+        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.PageDown) || (e.KeyCode == Keys.Space))
+            {
+                richTextBox1.Text += "下一首\n";
+                if (lyrics_count == 1)
+                {
+                    richTextBox1.Text += "只有一首, 不動作\n";
+                    return;
+                }
+                show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
+                flag_pause = false;
+                slide_show_string();
+                timer1.Enabled = true;
+                timer1_cnt = 0;
+                if (flag_top_most == true)
+                    this.TopMost = true;
+                else
+                    this.TopMost = false;
+
+            }
+            else if (e.KeyCode == Keys.PageUp)
+            {
+                if (lyrics_count == 1)
+                {
+                    richTextBox1.Text += "只有一首, 不動作\n";
+                    return;
+                }
+
+                richTextBox1.Text += "上一首\n";
+
+                flag_pause = true;
+                timer1.Enabled = false;
+                this.TopMost = false;
+
+                if (show_lyrics_index > 0)
+                    show_lyrics_index--;
+                else
+                    show_lyrics_index = lyrics_count - 1;
+                slide_show_string();
+                timer2_cnt = 0;
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                richTextBox1.Text += "Up\n";
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                richTextBox1.Text += "Down\n";
+            }
+            else if (e.KeyCode == Keys.Left)
+            {
+                richTextBox1.Text += "Left\n";
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                richTextBox1.Text += "Right\n";
+            }
+            else if (e.KeyCode == Keys.Home)
+            {
+                richTextBox1.Text += "Home\n";
+                if (lyrics_count == 1)
+                {
+                    richTextBox1.Text += "只有一首, 不動作\n";
+                    return;
+                }
+                show_lyrics_index = 0;
+                flag_pause = false;
+                slide_show_string();
+                timer1.Enabled = true;
+                timer1_cnt = 0;
+            }
+            else if (e.KeyCode == Keys.End)
+            {
+                richTextBox1.Text += "End\n";
+                if (lyrics_count == 1)
+                {
+                    richTextBox1.Text += "只有一首, 不動作\n";
+                    return;
+                }
+                show_lyrics_index = lyrics_count - 1;
+                flag_pause = false;
+                slide_show_string();
+                timer1.Enabled = true;
+                timer1_cnt = 0;
+            }
+            else if (e.KeyCode == Keys.Add)
+            {
+                if (default_font_size < 100)
+                    default_font_size++;
+                richTextBox1.Text += "Add, font size = " + default_font_size.ToString() + "\n";
+                slide_show_string();
+            }
+            else if (e.KeyCode == Keys.Subtract)
+            {
+                if (default_font_size > 5)
+                    default_font_size--;
+                richTextBox1.Text += "Subtract, font size = " + default_font_size.ToString() + "\n";
+                slide_show_string();
+            }
+            else if (e.KeyCode == Keys.X)
+            {
+                Application.Exit();
+            }
+        } 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+
             bool result;
             result = loadTextData();
             if (result == true)
@@ -354,8 +471,7 @@ namespace vcs_SlideShowString
             title_width = g.MeasureString(str_title, f).ToSize().Width;
             author_width = g.MeasureString(str_author, f).ToSize().Width;
 
-            //total_title_author_height = sky + d1 + d2 + d3 + title_width + d1 + d2 + d3 + author_width + earth;
-            total_title_author_height = sky + d1 + d2 + d3 + title_width + d2 + d3 + author_width + earth;
+            total_title_author_height = sky + d1 + d2 + d3 + title_width + d2 + d3 + author_width + earth;      //H - dd * 2
 
             //richTextBox1.Text += "total_title_author_height = " + total_title_author_height.ToString() + "\n";
             if (total_title_author_height > screenHeight_max)
@@ -487,8 +603,8 @@ namespace vcs_SlideShowString
                 {
                     float fontsize;
                     fontsize = f.Size;
-                    if (fontsize > 2)
-                        fontsize -= 1;
+                    if (fontsize > 5)
+                        fontsize -= 1;      //這個地方要考慮 若是字串超長 永遠無法滿足 該要如何處理例外
                     f = new Font("標楷體", fontsize);
                     richTextBox1.Text += "縮小字型為 " + fontsize.ToString() + "\n";
                 }
@@ -611,6 +727,8 @@ namespace vcs_SlideShowString
             pts[4].Y = y_st - d2; ;
             g.FillPolygon(new SolidBrush(Color.Red), pts);
 
+            draw_pause_border();
+
             if (flag_release_mode == false)
             {
                 string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
@@ -642,14 +760,13 @@ namespace vcs_SlideShowString
             }
             this.Text = str_title;
 
-            show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
-
             timer1_cnt = 0;
 
             if (flag_top_most == true)
                 this.TopMost = true;
             else
                 this.TopMost = false;
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -665,31 +782,64 @@ namespace vcs_SlideShowString
                 //richTextBox1.Text += "停止自動播放\n";
                 return;
             }
+            richTextBox1.Text += "T";
 
             timer1_cnt++;
             if (timer1_cnt > slide_show_interval)
             {
                 timer1_cnt = 0;
+                show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
                 slide_show_string();
             }
+        }
+
+        bool flag_show_pause_border = false;
+
+        void draw_pause_border()
+        {
+            if (flag_pause == true)
+            {
+                richTextBox1.Text += "畫邊框\n";
+                g.FillRectangle(new SolidBrush(Color.SaddleBrown), new Rectangle(0, H - EARTH / 2, W, EARTH / 2));
+                g.FillRectangle(new SolidBrush(Color.SaddleBrown), new Rectangle(0, 0, W, EARTH / 2));
+                g.DrawRectangle(new Pen(Color.SaddleBrown, 2), 1, 1, W - 2, H - 2);
+                flag_show_pause_border = true;
+            }
+            else if ((flag_pause == false) && (flag_show_pause_border == true))
+            {
+                richTextBox1.Text += "取消邊框\n";
+                g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle(0, H - EARTH / 2, W, EARTH / 2));
+                g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle(0, 0, W, EARTH / 2));
+                g.DrawRectangle(new Pen(Color.SandyBrown, 2), 1, 1, W - 2, H - 2);
+                flag_show_pause_border = false;
+            }
+            else
+            {
+                richTextBox1.Text += "不動作\n";
+            }
+            pictureBox1.Image = bmp;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             if (flag_pause == false)
             {
-                g.FillRectangle(new SolidBrush(Color.SaddleBrown), new Rectangle(0, H - EARTH / 2, W, EARTH / 2));
-                pictureBox1.Image = bmp;
                 flag_pause = true;
                 timer1.Enabled = false;
+                this.TopMost = false;
             }
             else
             {
-                g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle(0, H - EARTH / 2, W, EARTH / 2));
-                pictureBox1.Image = bmp;
                 flag_pause = false;
                 timer1.Enabled = true;
+                timer1_cnt = 0;
+                if (flag_top_most == true)
+                    this.TopMost = true;
+                else
+                    this.TopMost = false;
             }
+            draw_pause_border();
+            pictureBox1.Focus();
         }
 
         //***********************
@@ -737,6 +887,7 @@ namespace vcs_SlideShowString
                 richTextBox1.Text += "只有一首, 不動作\n";
                 return;
             }
+            show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
             slide_show_string();
         }
 
@@ -759,6 +910,7 @@ namespace vcs_SlideShowString
                 richTextBox1.Text += "只有一首, 不動作\n";
                 return;
             }
+            show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
             slide_show_string();
         }
 
@@ -831,6 +983,14 @@ namespace vcs_SlideShowString
         private void timer2_Tick(object sender, EventArgs e)
         {
             timer2_cnt++;
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //RichTextBox顯示訊息自動捲動 顯示最後一行
+            richTextBox1.SelectionStart = richTextBox1.TextLength;
+            richTextBox1.ScrollToCaret();
+
         }
     }
 }
