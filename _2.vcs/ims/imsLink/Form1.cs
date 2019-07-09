@@ -2477,14 +2477,13 @@ namespace imsLink
 
                             flag_incorrect_data = false;
                             richTextBox1.Text += "資料正確, 開始燒錄\n";
-                            panel6.BackgroundImage = null;
-                            g.Clear(BackColor);
+                            panel9.BackgroundImage = null;
+                            g2.Clear(BackColor);
                             button11_Click(sender, e);  //執行燒錄按鍵
                             tb_wait_camera_data.Text = "";
                             flag_incorrect_data = true;
-                            flag_ok_machine_serial = false;
-                            flag_ok_mb_big_serial = false;
-                            flag_ok_mb_small_serial = false;
+                            flag_ok_camera_serial1 = false;
+                            flag_ok_camera_serial2 = false;
                             flag_ok_to_write_data = false;
                             return;
                         }
@@ -2498,7 +2497,7 @@ namespace imsLink
                     {
                         richTextBox1.Text += "資料未齊全, 忽略\n";
                         tb_wait_camera_data.Text = "";
-                        lb_write_mb_model.Text = "";
+                        lb_write_camera_serial2.Text = "";
 
                         if (flag_ok_camera_serial1 == false)
                         {
@@ -2508,7 +2507,7 @@ namespace imsLink
                         {
                             tb_sn2.Text = "";
                         }
-                        g.Clear(BackColor);
+                        g2.Clear(BackColor);
                         return;
                     }
                 }
@@ -2528,17 +2527,17 @@ namespace imsLink
 
                     if (flag_ok_camera_serial1 == false)
                     {
-                        //tb_sn1.Text = "";
-                        lb_write_camera_serial2.Text = "";
+                        tb_sn1.Text = "";
+                        //lb_write_camera_serial2.Text = "";
                         panel9.BackgroundImage = null;
-                        g.Clear(BackColor);
+                        g2.Clear(BackColor);
                     }
                     if (flag_ok_camera_serial2 == false)
                     {
-                        //tb_sn2.Text = "";
-                        lb_write_camera_serial2.Text = "";
+                        tb_sn2.Text = "";
+                        //lb_write_camera_serial2.Text = "";
                         panel9.BackgroundImage = null;
-                        g.Clear(BackColor);
+                        g2.Clear(BackColor);
                     }
                     if ((flag_ok_camera_serial1 == true) && (flag_ok_camera_serial2 == true))
                     {
@@ -3209,6 +3208,8 @@ namespace imsLink
         private void button29_Click(object sender, EventArgs e)
         {
             g.Clear(BackColor);
+            g.DrawString("燒錄中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            button29.BackColor = Color.Red;
             lb_machine_serial.Text = "";
             lb_mb_big_serial.Text = "";
             lb_mb_small_serial.Text = "";
@@ -3237,8 +3238,6 @@ namespace imsLink
                 return;
             }
 
-            button29.BackColor = Color.Red;
-
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3266,6 +3265,7 @@ namespace imsLink
             lb_write_mb_model.Text = "寫入主機型號完成";
             lb_write_mb_model.ForeColor = Color.Black;
             button29.BackColor = System.Drawing.SystemColors.ControlLight;
+            g.Clear(BackColor);
             g.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
         }
 
@@ -3765,7 +3765,11 @@ namespace imsLink
 
         private void button11_Click(object sender, EventArgs e)
         {
+            g2.Clear(BackColor);
+            g2.DrawString("燒錄中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            button11.BackColor = Color.Red;
             lb_write_camera_serial2.Text = "燒錄資料進行中.....";
+            lb_write_camera_serial2.ForeColor = Color.Red;
             richTextBox1.Text += "相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
             richTextBox1.Text += "相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
             if (tb_sn1.Text.Length != 9)
@@ -3788,6 +3792,7 @@ namespace imsLink
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                button11.BackColor = System.Drawing.SystemColors.ControlLight;
                 return;
             }
             g_conn_status = CAMERA_UNKNOWN;
@@ -3846,14 +3851,15 @@ namespace imsLink
 
                 richTextBox1.Text += "序號 : 寫入資料  完成\n";
 
-                lb_write_camera_serial2.Text = "寫入";
-                delay(1000);
+                lb_write_camera_serial2.Text = "寫入1";
+                //delay(1000);
 
-                lb_write_camera_serial2.Text = "寫入相機序號完成";
+                lb_write_camera_serial2.Text = "寫入2相機序號完成";
                 lb_write_camera_serial2.ForeColor = Color.Black;
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                g2.Clear(BackColor);
                 g2.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
-
+                button11.BackColor = System.Drawing.SystemColors.ControlLight;
             }
             else
             {
