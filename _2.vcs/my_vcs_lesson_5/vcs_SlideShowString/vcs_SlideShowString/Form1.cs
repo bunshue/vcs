@@ -378,17 +378,21 @@ namespace vcs_SlideShowString
             }
             else if (e.KeyCode == Keys.Add)
             {
-                if (default_font_size < 100)
+                if (default_font_size < 50)
+                {
                     default_font_size++;
-                richTextBox1.Text += "Add, font size = " + default_font_size.ToString() + "\n";
-                slide_show_string();
+                    richTextBox1.Text += "Add, font size = " + default_font_size.ToString() + "\n";
+                    slide_show_string();
+                }
             }
             else if (e.KeyCode == Keys.Subtract)
             {
-                if (default_font_size > 5)
+                if (default_font_size > 10)
+                {
                     default_font_size--;
-                richTextBox1.Text += "Subtract, font size = " + default_font_size.ToString() + "\n";
-                slide_show_string();
+                    richTextBox1.Text += "Subtract, font size = " + default_font_size.ToString() + "\n";
+                    slide_show_string();
+                }
             }
             else if (e.KeyCode == Keys.X)
             {
@@ -737,6 +741,12 @@ namespace vcs_SlideShowString
                 g.DrawString(show_play_info, new Font("標楷體", default_font_size * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
             }
 
+            tmp_width = g.MeasureString(default_font_size.ToString(), new Font("標楷體", default_font_size * 2 / 3)).ToSize().Width;
+            tmp_height = g.MeasureString(default_font_size.ToString(), new Font("標楷體", default_font_size * 2 / 3)).ToSize().Height;
+            g.DrawString(default_font_size.ToString(), new Font("標楷體", default_font_size * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
+
+
+
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
@@ -785,6 +795,18 @@ namespace vcs_SlideShowString
             richTextBox1.Text += "T";
 
             timer1_cnt++;
+
+
+            tmp_width = g.MeasureString(timer1_cnt.ToString(), new Font("標楷體", default_font_size * 2 / 3)).ToSize().Width;
+            tmp_height = g.MeasureString(timer1_cnt.ToString(), new Font("標楷體", default_font_size * 2 / 3)).ToSize().Height;
+
+            g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle((W - tmp_width) - 10, 0, tmp_width, tmp_height));
+            
+
+            g.DrawString(timer1_cnt.ToString(), new Font("標楷體", default_font_size * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, 0));
+            pictureBox1.Image = bmp;
+
+
             if (timer1_cnt > slide_show_interval)
             {
                 timer1_cnt = 0;
