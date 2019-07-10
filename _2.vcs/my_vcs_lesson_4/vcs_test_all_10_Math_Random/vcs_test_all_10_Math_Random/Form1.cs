@@ -213,5 +213,51 @@ namespace vcs_test_all_10_Math_Random
                 richTextBox1.Text += "Name : " + name_string + "\t" + score_chi.ToString() + "\t" + score_eng.ToString() + "\t" + score_math.ToString() + "\n";
             }
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Random r = new Random();
+
+            int[] cards = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int tmp;
+
+            for (int i = 0; i < cards.Length; i++)
+            {
+                int n = r.Next(cards.Length);
+                //richTextBox1.Text += "第" + i.ToString() + "項和第" + n.ToString() + "項交換\n";
+                tmp = cards[i];
+                cards[i] = cards[n];
+                cards[n] = tmp;
+            }
+            richTextBox1.Text += "方法一結果：";
+            for (int i = 0; i < cards.Length; i++)
+            {
+                richTextBox1.Text += cards[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            for (int i = 0; i < cards.Length; i++)
+            {
+                cards[i] = i;
+            }
+
+            for (int i = cards.Length - 1; i > 0; i--)
+            {
+                int n = r.Next(i + 1);
+                //richTextBox1.Text += "第" + i.ToString() + "項和第" + n.ToString() + "項交換\n";
+                tmp = cards[i];
+                cards[i] = cards[n];
+                cards[n] = tmp;
+            }
+
+            richTextBox1.Text += "方法二結果：";
+            for (int i = 0; i < cards.Length; i++)
+            {
+                richTextBox1.Text += cards[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+
+        }
     }
 }

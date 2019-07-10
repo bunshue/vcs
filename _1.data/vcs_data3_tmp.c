@@ -1,5 +1,39 @@
 
 
+
+用方向鍵移動picturebox在form上的位置
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+        }
+
+        bool bIsEnterKeyPressed = false;
+        private void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                bIsEnterKeyPressed = true;
+            }
+            if (!bIsEnterKeyPressed)
+            {
+                int x = pictureBox1.Location.X;
+                int y = pictureBox1.Location.Y;
+
+                {
+                    if (e.KeyCode == Keys.Right) x += 50;
+                    else if (e.KeyCode == Keys.Left) x -= 50;
+                    else if (e.KeyCode == Keys.Up) y -= 50;
+                    else if (e.KeyCode == Keys.Down) y += 50;
+                    pictureBox1.Location = new Point(x, y);
+                }
+            }
+        }
+
+
+
+
 picturebox顯示圖檔
             Image img = Image.FromFile("1.png");
             pictureBox1.Image = img;
