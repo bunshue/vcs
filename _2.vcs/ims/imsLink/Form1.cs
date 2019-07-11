@@ -136,6 +136,8 @@ namespace imsLink
         {
             InitializeComponent();
 
+            Form1.CheckForIllegalCrossThreadCalls = false;
+
             g = panel6.CreateGraphics();
             g.Clear(BackColor);
 
@@ -1138,34 +1140,38 @@ namespace imsLink
                         {
                             textBox7.Text = "無連接器";
                             textBox7.BackColor = Color.Red;
-                            panel3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
-                            panel4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
-                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
                         else if (g_conn_status == CAMERA_NONE)
                         {
                             textBox7.Text = "有連接器, 無相機";
                             textBox7.BackColor = Color.Red;
-                            panel3.BackgroundImage = imsLink.Properties.Resources.recorder_none;
-                            panel4.BackgroundImage = imsLink.Properties.Resources.recorder_none;
-                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_none;
+                            panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_none;
+                            panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_none;
+                            panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_none;
+                            panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_none;
 
                         }
                         else if (g_conn_status == CAMERA_OK)
                         {
                             textBox7.Text = "有連接器, 有相機";
                             textBox7.BackColor = Color.White;
-                            panel3.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
-                            panel4.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
-                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
+                            panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
+                            panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
+                            panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
+                            panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                         }
                         else
                         {
                             textBox7.Text = "狀態不明, status = " + g_conn_status.ToString();
                             textBox7.BackColor = Color.Red;
-                            panel3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
-                            panel4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
-                            panel5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
                         flag_read_connection_again = true;
                         progressBar1.Value = 100;
@@ -2001,13 +2007,15 @@ namespace imsLink
 
         private void button8_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
             g2.Clear(BackColor);
             button8.BackColor = Color.Red;
             textBox7.Clear();
             textBox7.BackColor = Color.Gray;
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_aa1.Clear();
@@ -2104,6 +2112,8 @@ namespace imsLink
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+
             byte page;
             button4.BackColor = Color.Red;
 
@@ -2135,9 +2145,10 @@ namespace imsLink
             tb_info_f2.BackColor = Color.White;
             textBox7.Clear();
             textBox7.BackColor = Color.Gray;
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             if (flag_comport_ok == false)
@@ -2341,10 +2352,51 @@ namespace imsLink
             }
         }
 
+
+        int frame_cnt = 0;
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            frame_cnt++;
+            if (frame_cnt == 5)
+            {
+                //label8.Text = "A";
+                frame_cnt = 0;
+
+                Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                int WW = bitmap1.Width;
+                int HH = bitmap1.Height;
+                int ww = 64;
+                int hh = 64;
+                int i;
+                int j;
+                Color pt;
+                int x_st = WW / 2 - ww / 2;
+                int y_st = HH / 2 - hh / 2;
+                int total_R = 0;
+                int total_G = 0;
+                int total_B = 0;
+
+                for (j = 0; j < hh; j++)
+                {
+                    for (i = 0; i < ww; i++)
+                    {
+                        pt = bitmap1.GetPixel(x_st + i, y_st + j);
+                        total_R += pt.R;
+                        total_G += pt.G;
+                        total_B += pt.B;
+                    }
+                }
+                GC.Collect();       //回收資源
+                //label8.Text = (total_R / (ww * hh)).ToString() + " " + (total_G / (ww * hh)).ToString() + " " + (total_B / (ww * hh)).ToString();
+                label8.Text = (total_R / (ww * hh)).ToString() + " " + (total_G / (ww * hh)).ToString() + " " + (total_B / (ww * hh)).ToString()
+                    + "   " + (total_R).ToString() + " " + (total_G).ToString() + " " + (total_B).ToString();
+
+
+            }
+
+
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
             bm = (Bitmap)eventArgs.Frame.Clone();
             //pictureBox1.Image = bm;
@@ -2437,8 +2489,9 @@ namespace imsLink
 
                     if (flag_incorrect_data == false)
                     {
-                        richTextBox1.Text += "取得 SN1序號 : " + tb_wait_camera_data + "\n";
+                        richTextBox1.Text += "取得 SN1序號 : " + tb_wait_camera_data.Text + "\n";
                         tb_sn1.Text = tb_wait_camera_data.Text;
+                        tb_sn1.BackColor = Color.White;
                         tb_wait_camera_data.Text = "";
                         flag_ok_camera_serial1 = true;
                     }
@@ -2456,8 +2509,9 @@ namespace imsLink
 
                     if (flag_incorrect_data == false)
                     {
-                        richTextBox1.Text += "取得 SN2序號 : " + tb_wait_camera_data + "\n";
+                        richTextBox1.Text += "取得 SN2序號 : " + tb_wait_camera_data.Text + "\n";
                         tb_sn2.Text = tb_wait_camera_data.Text;
+                        tb_sn2.BackColor = Color.White;
                         tb_wait_camera_data.Text = "";
                         flag_ok_camera_serial2 = true;
                     }
@@ -2549,14 +2603,8 @@ namespace imsLink
                     }
                 }
                 tb_wait_camera_data.Text = "";
+                button11.BackColor = System.Drawing.SystemColors.ControlLight;
             }
-        
-        
-        
-        
-        
-        
-        
         }
 
         private void timer3_Tick(object sender, EventArgs e)
@@ -2587,10 +2635,10 @@ namespace imsLink
             tb_info_d2.BackColor = Color.White;
             tb_info_e2.BackColor = Color.White;
             tb_info_f2.BackColor = Color.White;
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
-
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -2964,9 +3012,10 @@ namespace imsLink
             lb_camera_model.Text = "相機型號讀取中...";
             tb_info_82.BackColor = Color.White;
 
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -3052,9 +3101,10 @@ namespace imsLink
             //byte page;
             button23.BackColor = Color.Red;
 
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -3122,9 +3172,10 @@ namespace imsLink
             //byte page;
             button31.BackColor = Color.Red;
 
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -3671,9 +3722,10 @@ namespace imsLink
 
                     textBox7.Clear();
                     textBox7.BackColor = Color.Gray;
-                    panel3.BackgroundImage = null;
-                    panel4.BackgroundImage = null;
-                    panel5.BackgroundImage = null;
+                    panel_camera_status1.BackgroundImage = null;
+                    panel_camera_status2.BackgroundImage = null;
+                    panel_camera_status3.BackgroundImage = null;
+                    panel_camera_status4.BackgroundImage = null;
                     Send_IMS_Data(0xFF, 0, 0, 0);
                 }
                 else
@@ -3785,9 +3837,10 @@ namespace imsLink
                 return;
             }
 
-            panel3.BackgroundImage = null;
-            panel4.BackgroundImage = null;
-            panel5.BackgroundImage = null;
+            panel_camera_status1.BackgroundImage = null;
+            panel_camera_status2.BackgroundImage = null;
+            panel_camera_status3.BackgroundImage = null;
+            panel_camera_status4.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {

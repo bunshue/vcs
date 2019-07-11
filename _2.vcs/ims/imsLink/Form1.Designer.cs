@@ -71,7 +71,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.tb_info_aa1 = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel_camera_status1 = new System.Windows.Forms.Panel();
             this.lb_a = new System.Windows.Forms.Label();
             this.tb_info_f2 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
@@ -107,7 +107,7 @@
             this.lb_time1 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel_camera_status2 = new System.Windows.Forms.Panel();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tp_System = new System.Windows.Forms.TabPage();
@@ -131,6 +131,7 @@
             this.button30 = new System.Windows.Forms.Button();
             this.tp_Serial_Auto = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.panel_camera_status3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.lb_write_camera_serial2 = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
@@ -155,7 +156,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lb_write_camera_model = new System.Windows.Forms.Label();
             this.lb_camera_model = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel_camera_status4 = new System.Windows.Forms.Panel();
             this.button26 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.tb_info_83 = new System.Windows.Forms.TextBox();
@@ -239,6 +240,7 @@
             this.button33 = new System.Windows.Forms.Button();
             this.timer_rtc = new System.Windows.Forms.Timer(this.components);
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -692,7 +694,7 @@
             this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.tb_info_aa1);
-            this.groupBox1.Controls.Add(this.panel3);
+            this.groupBox1.Controls.Add(this.panel_camera_status1);
             this.groupBox1.Controls.Add(this.lb_a);
             this.groupBox1.Controls.Add(this.tb_info_f2);
             this.groupBox1.Controls.Add(this.textBox16);
@@ -756,14 +758,14 @@
             this.tb_info_aa1.Text = "---------------------------------------";
             this.tb_info_aa1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // panel3
+            // panel_camera_status1
             // 
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(799, 272);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(80, 80);
-            this.panel3.TabIndex = 79;
+            this.panel_camera_status1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel_camera_status1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_camera_status1.Location = new System.Drawing.Point(799, 272);
+            this.panel_camera_status1.Name = "panel_camera_status1";
+            this.panel_camera_status1.Size = new System.Drawing.Size(80, 80);
+            this.panel_camera_status1.TabIndex = 79;
             // 
             // lb_a
             // 
@@ -1101,7 +1103,7 @@
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.progressBar1);
-            this.groupBox11.Controls.Add(this.panel4);
+            this.groupBox11.Controls.Add(this.panel_camera_status2);
             this.groupBox11.Controls.Add(this.textBox7);
             this.groupBox11.Location = new System.Drawing.Point(25, 51);
             this.groupBox11.Name = "groupBox11";
@@ -1117,14 +1119,14 @@
             this.progressBar1.Size = new System.Drawing.Size(154, 32);
             this.progressBar1.TabIndex = 62;
             // 
-            // panel4
+            // panel_camera_status2
             // 
-            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Location = new System.Drawing.Point(561, 61);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(80, 80);
-            this.panel4.TabIndex = 61;
+            this.panel_camera_status2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel_camera_status2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel_camera_status2.Location = new System.Drawing.Point(561, 61);
+            this.panel_camera_status2.Name = "panel_camera_status2";
+            this.panel_camera_status2.Size = new System.Drawing.Size(80, 80);
+            this.panel_camera_status2.TabIndex = 61;
             // 
             // textBox7
             // 
@@ -1357,6 +1359,7 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.panel_camera_status3);
             this.groupBox10.Controls.Add(this.panel7);
             this.groupBox10.Controls.Add(this.lb_write_camera_serial2);
             this.groupBox10.Controls.Add(this.bt_confirm);
@@ -1377,10 +1380,19 @@
             this.groupBox10.Controls.Add(this.button8);
             this.groupBox10.Location = new System.Drawing.Point(25, 19);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(826, 546);
+            this.groupBox10.Size = new System.Drawing.Size(848, 546);
             this.groupBox10.TabIndex = 69;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "相機序號";
+            // 
+            // panel_camera_status3
+            // 
+            this.panel_camera_status3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel_camera_status3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_camera_status3.Location = new System.Drawing.Point(626, 39);
+            this.panel_camera_status3.Name = "panel_camera_status3";
+            this.panel_camera_status3.Size = new System.Drawing.Size(80, 80);
+            this.panel_camera_status3.TabIndex = 106;
             // 
             // panel7
             // 
@@ -1449,13 +1461,13 @@
             this.tb_wait_camera_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_wait_camera_data.Location = new System.Drawing.Point(482, 233);
             this.tb_wait_camera_data.Name = "tb_wait_camera_data";
-            this.tb_wait_camera_data.Size = new System.Drawing.Size(312, 32);
+            this.tb_wait_camera_data.Size = new System.Drawing.Size(335, 32);
             this.tb_wait_camera_data.TabIndex = 103;
             this.tb_wait_camera_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(714, 131);
+            this.button14.Location = new System.Drawing.Point(737, 125);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(80, 40);
             this.button14.TabIndex = 102;
@@ -1465,7 +1477,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(714, 85);
+            this.button11.Location = new System.Drawing.Point(737, 79);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(80, 40);
             this.button11.TabIndex = 101;
@@ -1496,7 +1508,7 @@
             // button40
             // 
             this.button40.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button40.Location = new System.Drawing.Point(714, 176);
+            this.button40.Location = new System.Drawing.Point(737, 170);
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(80, 40);
             this.button40.TabIndex = 98;
@@ -1554,7 +1566,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(714, 39);
+            this.button8.Location = new System.Drawing.Point(737, 33);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 40);
             this.button8.TabIndex = 49;
@@ -1587,7 +1599,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.lb_write_camera_model);
             this.groupBox2.Controls.Add(this.lb_camera_model);
-            this.groupBox2.Controls.Add(this.panel5);
+            this.groupBox2.Controls.Add(this.panel_camera_status4);
             this.groupBox2.Controls.Add(this.button26);
             this.groupBox2.Controls.Add(this.button23);
             this.groupBox2.Controls.Add(this.tb_info_83);
@@ -1629,14 +1641,14 @@
             this.lb_camera_model.TabIndex = 81;
             this.lb_camera_model.Text = "label2";
             // 
-            // panel5
+            // panel_camera_status4
             // 
-            this.panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(21, 73);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(80, 80);
-            this.panel5.TabIndex = 80;
+            this.panel_camera_status4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel_camera_status4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_camera_status4.Location = new System.Drawing.Point(21, 73);
+            this.panel_camera_status4.Name = "panel_camera_status4";
+            this.panel_camera_status4.Size = new System.Drawing.Size(80, 80);
+            this.panel_camera_status4.TabIndex = 80;
             // 
             // button26
             // 
@@ -1679,6 +1691,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.label8);
             this.tp_USB.Controls.Add(this.lb_rgb);
             this.tp_USB.Controls.Add(this.lb_zoom);
             this.tp_USB.Controls.Add(this.btnCenter);
@@ -2527,6 +2540,16 @@
             this.timer_get_rgb.Enabled = true;
             this.timer_get_rgb.Tick += new System.EventHandler(this.timer_get_rgb_Tick);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(344, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(22, 24);
+            this.label8.TabIndex = 79;
+            this.label8.Text = "A";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2687,7 +2710,7 @@
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel_camera_status2;
         private System.Windows.Forms.TabPage tp_Info;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button6;
@@ -2719,7 +2742,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lb_a;
         private System.Windows.Forms.Timer timer3;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel_camera_status1;
         private System.Windows.Forms.TabPage tp_USB;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button12;
@@ -2764,7 +2787,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lb_write_camera_model;
         private System.Windows.Forms.Label lb_camera_model;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel_camera_status4;
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.TextBox tb_info_83;
@@ -2815,6 +2838,8 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label lb_write_camera_serial2;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel_camera_status3;
+        private System.Windows.Forms.Label label8;
     }
 }
 

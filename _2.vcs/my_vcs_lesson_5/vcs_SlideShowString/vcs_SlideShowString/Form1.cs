@@ -446,7 +446,10 @@ namespace vcs_SlideShowString
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
-            int screenHeight_max = screenHeight * 80 / 100;
+            int screenHeight_max = screenHeight * 75 / 100;
+            int screenWidth_max = screenWidth * 15 / 100;
+
+            //richTextBox1.Text += "SW X SH = " + screenWidth_max.ToString() + " X " + screenHeight_max.ToString() + "\n";
 
             lines_in_this_lyrics = current_strings.Count;
             /*
@@ -502,21 +505,37 @@ namespace vcs_SlideShowString
             setda = sky + d1 + d2 + d3 + title_width + d2 + d3 + author_width + earth;      //H - dd * 2
             //richTextBox1.Text += "setda = " + setda.ToString() + "\n";
 
+
+            int N = current_strings.Count;
+            int p = 0;
+            int border = BORDER;
+
+            int tmp_W = h * N + p * (N * 2) + border * 2;
+
+            richTextBox1.Text += "字型 " + f.Size.ToString() + "\t總寬度 = " + tmp_W.ToString() + "\t標題行長度 = " + setda.ToString() + "\t內文最長長度 = " + w.ToString() + "\t單行寬度 = " + h.ToString() + "\n";
+
+            //richTextBox1.Text += "tmp_W = " + tmp_W.ToString() + "\n";
+
+            if (tmp_W > screenWidth_max)
+            {
+                richTextBox1.Text += "總寬度太寬\n";
+                return -1;
+            }
+
             if (setda > screenHeight_max)
             {
-                richTextBox1.Text += "length too long, return fail........";
+                richTextBox1.Text += "標題行太長\n";
                 return -1;
             }
 
-            if (w < screenHeight_max)
+            if (w > screenHeight_max)
             {
-                //w -= 8;
-                //richTextBox1.Text += "w = " + w.ToString() + "\n";
-                return 0;
+                richTextBox1.Text += "內文太長\n";
+				return -1;
             }
-            else
-                return -1;
 
+            //richTextBox1.Text += "OK\n";
+            return 0;
         }
 
         void slide_show_string()
@@ -615,12 +634,24 @@ namespace vcs_SlideShowString
             }
             current_strings.Insert(0, string0);
 
-            richTextBox1.Text += "第 " + (show_lyrics_index + 1).ToString() + " 首, " + str_author + " " + str_title + ", 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
+            //richTextBox1.Clear();
+            richTextBox1.Text += "\n\n第 " + (show_lyrics_index + 1).ToString() + " 首, " + str_author + " " + str_title + ", 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
 
             f = new Font("標楷體", font_size_default);
 
             bmp = new Bitmap(100, 100);     //initial W, H
             g = Graphics.FromImage(bmp);
+
+            richTextBox1.Text += "開始字型為 " + font_size_default.ToString() + "\n";
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            int screenHeight_max = screenHeight * 80 / 100;
+            int screenWidth_max = screenWidth * 15 / 100;
+
+            richTextBox1.Text += "最大邊界 SW X SH = " + screenWidth_max.ToString() + " X " + screenHeight_max.ToString() + "\n";
+
 
             //更新全首的畫圖邊界
             int result = -1;
@@ -761,38 +792,42 @@ namespace vcs_SlideShowString
             if (flag_release_mode == false)
             {
                 string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
-                tmp_width = g.MeasureString(show_play_info, new Font("標楷體", font_size_default * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(show_play_info, new Font("標楷體", font_size_default * 2 / 3)).ToSize().Height;
-                g.DrawString(show_play_info, new Font("標楷體", font_size_default * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
+                tmp_width = g.MeasureString(show_play_info, new Font("標楷體", font_size_current * 2 / 3)).ToSize().Width;
+                tmp_height = g.MeasureString(show_play_info, new Font("標楷體", font_size_current * 2 / 3)).ToSize().Height;
+                g.DrawString(show_play_info, new Font("標楷體", font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
             }
 
-            tmp_width = g.MeasureString(font_size_default.ToString(), new Font("標楷體", font_size_default * 2 / 3)).ToSize().Width;
-            tmp_height = g.MeasureString(font_size_default.ToString(), new Font("標楷體", font_size_default * 2 / 3)).ToSize().Height;
-            g.DrawString(font_size_default.ToString(), new Font("標楷體", font_size_default * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            tmp_width = g.MeasureString(font_size_current.ToString(), new Font("標楷體", font_size_current * 2 / 3)).ToSize().Width;
+            tmp_height = g.MeasureString(font_size_current.ToString(), new Font("標楷體", font_size_current * 2 / 3)).ToSize().Height;
+            g.DrawString(font_size_current.ToString(), new Font("標楷體", font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
 
             if (flag_release_mode == true)
             {
                 //設定執行後的表單起始位置
                 this.StartPosition = FormStartPosition.Manual;
                 if (align_direction == '0')
-                {   //靠右
+                {   //靠右置中
                     //this.Location = new System.Drawing.Point(screenWidth - W, (screenHeight - H) / 2);
                     this.Location = new System.Drawing.Point(screenWidth - W + flag_right_left_cnt * 50, (screenHeight - H) / 2 + flag_down_up_cnt * 50);
                 }
                 else if (align_direction == '1')
-                {   //靠左
+                {   //靠左置中
                     //this.Location = new System.Drawing.Point(0, (screenHeight - H) / 2);
                     this.Location = new System.Drawing.Point(0 + flag_right_left_cnt * 50, (screenHeight - H) / 2 + flag_down_up_cnt * 50);
                 }
                 else if (align_direction == '2')
-                {   //正中
+                {   //正中置中
                     //this.Location = new System.Drawing.Point((screenWidth - W) / 2, (screenHeight - H) / 2);
                     this.Location = new System.Drawing.Point((screenWidth - W) / 2 + flag_right_left_cnt * 50, (screenHeight - H) / 2 + flag_down_up_cnt * 50);
                 }
                 this.Size = new Size(W, H);
+            }
+            else
+            {
+                pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * 50, (this.Size.Height - H) / 2 + flag_down_up_cnt * 50);
+                //設定執行後的表單起始位置
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = new System.Drawing.Point(0, 0);
             }
             this.Text = str_title;
 
