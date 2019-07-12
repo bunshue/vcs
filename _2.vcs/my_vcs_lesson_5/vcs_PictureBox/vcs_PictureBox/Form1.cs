@@ -22,11 +22,13 @@ namespace vcs_PictureBox
         {
             richTextBox1.Clear();
             pictureBox1.Image = null;
+            pictureBox2.Image = null;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
+            pictureBox2.Image = null;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -219,6 +221,154 @@ namespace vcs_PictureBox
             g.DrawImage(cloneBitmap, 0, 0);
 
 
+        }
+
+        bool flag_mouse_down = false;
+        int mouse_down_position_x = 0;
+        int mouse_down_position_y = 0;
+        int mouse_up_position_x = 0;
+        int mouse_up_position_y = 0;
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+            flag_mouse_down = true;
+            mouse_down_position_x = e.X;
+            mouse_down_position_y = e.Y;
+
+            richTextBox1.Text += "MouseDown   (" + e.X.ToString() + ", " + e.Y + ")\n";
+
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+            if (flag_mouse_down == true)
+            {
+                //g.DrawRectangle(new Pen(Color.Black), new Rectangle(mouse_down_position_x, mouse_down_position_y, e.X - mouse_down_position_x, e.Y - mouse_down_position_y));
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+
+            mouse_up_position_x = e.X;
+            mouse_up_position_y = e.Y;
+
+            if ((mouse_down_position_x < 0) || (mouse_down_position_y < 0) || (mouse_up_position_x < 0) || (mouse_up_position_y < 0))
+                return;
+
+            richTextBox1.Text += "MouseUp   (" + e.X.ToString() + ", " + e.Y + ") 畫矩形\n";
+            //g.DrawRectangle(new Pen(Color.Black), new Rectangle(mouse_down_position_x, mouse_down_position_y, mouse_up_position_x - mouse_down_position_x, mouse_up_position_y - mouse_down_position_y));
+            //pictureBox2.Image = pictureBox1.Image.Clone(
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            richTextBox1.Text += "圖片大小 W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int ww = 0;
+            int hh = 0;
+            Rectangle cropArea;
+
+            bool flag_crop_area_valid = true;
+
+            if (mouse_up_position_x > mouse_down_position_x)        //往右
+            {
+                ww = mouse_up_position_x - mouse_down_position_x;
+                if (mouse_up_position_y > mouse_down_position_y)//往下
+                {
+                    hh = mouse_up_position_y - mouse_down_position_y;
+                    cropArea = new Rectangle(mouse_down_position_x, mouse_down_position_y, ww, hh);
+                    if ((mouse_down_position_x + ww) > W)
+                        flag_crop_area_valid = false;
+                    if ((mouse_down_position_y + hh) > H)
+                        flag_crop_area_valid = false;
+                }
+                else//往上
+                {
+                    hh = mouse_down_position_y - mouse_up_position_y;
+                    cropArea = new Rectangle(mouse_down_position_x, mouse_up_position_y, ww, hh);
+                    if ((mouse_down_position_x + ww) > W)
+                        flag_crop_area_valid = false;
+                    if ((mouse_up_position_y + hh) > H)
+                        flag_crop_area_valid = false;
+                }
+            }
+            else//往左
+            {
+                ww = mouse_down_position_x - mouse_up_position_x;
+                if (mouse_up_position_y > mouse_down_position_y)//往下
+                {
+                    hh = mouse_up_position_y - mouse_down_position_y;
+                    cropArea = new Rectangle(mouse_up_position_x, mouse_down_position_y, ww, hh);
+                    if ((mouse_up_position_x + ww) > W)
+                        flag_crop_area_valid = false;
+                    if ((mouse_down_position_y + hh) > H)
+                        flag_crop_area_valid = false;
+                }
+                else//往上
+                {
+                    hh = mouse_down_position_y - mouse_up_position_y;
+                    cropArea = new Rectangle(mouse_up_position_x, mouse_up_position_y, ww, hh);
+                    if ((mouse_up_position_x + ww) > W)
+                        flag_crop_area_valid = false;
+                    if ((mouse_up_position_y + hh) > H)
+                        flag_crop_area_valid = false;
+                }
+            }
+            if (ww <= 0)
+                return;
+            if (hh <= 0)
+                return;
+
+            if (flag_crop_area_valid == true)
+            {
+                richTextBox1.Text += "x_st = " + cropArea.X.ToString() + " y_st = " + cropArea.Y.ToString() + " w = " + cropArea.Width.ToString() + " h = " + cropArea.Height.ToString() + "\n";
+
+                Image zoomImage = new Bitmap(ww, hh) as Image;
+                zoomImage = bitmap1.Clone(cropArea, zoomImage.PixelFormat);
+
+                pictureBox2.Image = zoomImage;
+            }
+
+
+
+
+            //            Bitmap bmpImage = new Bitmap(img);
+            //return bmpImage.Clone(cropArea, bmpImage.PixelFormat);
+
+            //Bitmap bmpImage = pictureBox1.Image;
+
+
+            //Graphics g = Graphics.FromImage(targetbitmap);
+
+            //Image loadedImage = Image.FromFile(openFileDialog1.FileName);
+            //pictureBox1.Image = loadedImage;
+            /*
+            Image zoomImage = new Bitmap(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2) as Image;
+            //準備繪製新的影像
+            Graphics graphics0 = Graphics.FromImage(zoomImage);
+            //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的1/2
+            graphics0.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
+            graphics0.Dispose();
+
+
+            */
+
+
+
+
+
+            flag_mouse_down = false;
         }
     }
 }

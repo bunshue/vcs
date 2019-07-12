@@ -136,7 +136,6 @@
             this.lb_write_camera_serial2 = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.tb_result = new System.Windows.Forms.TextBox();
             this.tb_wait_camera_data = new System.Windows.Forms.TextBox();
             this.button14 = new System.Windows.Forms.Button();
@@ -1363,7 +1362,6 @@
             this.groupBox10.Controls.Add(this.lb_write_camera_serial2);
             this.groupBox10.Controls.Add(this.bt_confirm);
             this.groupBox10.Controls.Add(this.panel9);
-            this.groupBox10.Controls.Add(this.label1);
             this.groupBox10.Controls.Add(this.tb_result);
             this.groupBox10.Controls.Add(this.tb_wait_camera_data);
             this.groupBox10.Controls.Add(this.button14);
@@ -1416,9 +1414,9 @@
             // 
             this.bt_confirm.BackColor = System.Drawing.Color.Red;
             this.bt_confirm.ForeColor = System.Drawing.Color.Green;
-            this.bt_confirm.Location = new System.Drawing.Point(157, 485);
+            this.bt_confirm.Location = new System.Drawing.Point(744, 401);
             this.bt_confirm.Name = "bt_confirm";
-            this.bt_confirm.Size = new System.Drawing.Size(80, 30);
+            this.bt_confirm.Size = new System.Drawing.Size(91, 30);
             this.bt_confirm.TabIndex = 63;
             this.bt_confirm.Text = "確認";
             this.bt_confirm.UseVisualStyleBackColor = false;
@@ -1432,22 +1430,12 @@
             this.panel9.Size = new System.Drawing.Size(380, 122);
             this.panel9.TabIndex = 104;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 444);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 23);
-            this.label1.TabIndex = 71;
-            this.label1.Text = "mesg";
-            // 
             // tb_result
             // 
             this.tb_result.BackColor = System.Drawing.Color.Green;
             this.tb_result.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_result.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            this.tb_result.Location = new System.Drawing.Point(24, 485);
+            this.tb_result.Location = new System.Drawing.Point(647, 401);
             this.tb_result.Name = "tb_result";
             this.tb_result.Size = new System.Drawing.Size(91, 30);
             this.tb_result.TabIndex = 60;
@@ -2792,7 +2780,6 @@
         private System.Windows.Forms.Timer scanner_timer2;
         private System.Windows.Forms.TextBox tb_wait_data;
         private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button bt_confirm;
         private System.Windows.Forms.Label lb_sn3;

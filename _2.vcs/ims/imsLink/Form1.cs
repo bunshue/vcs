@@ -11,6 +11,7 @@ using System.IO.Ports;          //for serial ports
 using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;   //for ImageFormat
 
+using System.Threading;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
@@ -626,7 +627,6 @@ namespace imsLink
                                     }
                                     if (flag_same_serial == 1)
                                     {
-                                        label1.Text += "完成";
                                         richTextBox1.Text += "驗證完成, 序號相同\n";
                                         lb_sn3.Text = "驗證完成, 序號相同  ";
                                         tb_result.Text = "OK";
@@ -884,6 +884,78 @@ namespace imsLink
                             {
                                 lb_sn2.Text = tb_info_aa2.Text;
                             }
+
+                            if (flag_verify_serial_data == 1)
+                            {
+                                flag_verify_serial_data = 0;
+
+                                richTextBox1.Text += "AAAAAAAAAAAAAAAAAA flag_verify_serial_data AAAAAAAAAAAAAAAAAAAAAAa\n";
+
+                                int flag_same_serial = 1;
+                                for (i = 0; i < 9; i++)
+                                {
+                                    if (tb_sn1.Text[i] != input[i])
+                                    {
+                                        flag_same_serial = 0;
+                                        break;
+                                    }
+                                }
+                                if (flag_same_serial == 1)
+                                {
+                                    for (i = 16; i < (16 + 11); i++)
+                                    {
+                                        if (tb_sn2.Text[i - 16] != input[i])
+                                        {
+                                            flag_same_serial = 0;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (flag_same_serial == 1)
+                                {
+                                    richTextBox1.Text += "驗證完成, 序號相同\n";
+                                    tb_result.Text = "驗證完成";
+                                    tb_result.ForeColor = System.Drawing.Color.MediumSpringGreen;
+                                    tb_result.BackColor = Color.Green;
+                                    g2.Clear(BackColor);
+                                    g2.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+
+                                }
+                                else
+                                {
+                                    richTextBox1.Text += "驗證失敗, 序號不同\n";
+                                    tb_result.Text = "驗證失敗";
+                                    tb_result.ForeColor = Color.Black;
+                                    tb_result.BackColor = Color.Red;
+                                    groupBox10.BackColor = Color.Red;
+                                    g2.Clear(BackColor);
+                                    g2.DrawString("驗證失敗", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+
+                                }
+                                //lb_sn2.Text = "";
+
+                                // Stop timing
+                                stopwatch.Stop();
+                                richTextBox1.Text += "燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+
+                                if (stopwatch.ElapsedMilliseconds > 7000)
+                                {
+                                    flag_burn_long_cnt++;
+                                    ////lb_mesg2.Text = "耗時太久 " + flag_burn_long_cnt.ToString() + " 次";
+                                }
+
+                                ////lb_mesg3.Text = stopwatch.ElapsedMilliseconds.ToString() + " msec";
+
+                            }
+
+
+
+
+
+
+
+
 
 
 
@@ -1263,7 +1335,6 @@ namespace imsLink
         private void Form1_Load(object sender, EventArgs e)
         {
             Comport_Scan();
-            label1.Text = "";
             lb_a.Text = "";
             lb_b.Text = "";
             lb_d.Text = "";
@@ -3934,7 +4005,9 @@ namespace imsLink
                 richTextBox1.Text += "序號 : 寫入資料  完成\n";
 
                 lb_write_camera_serial2.Text = "寫入1";
+
                 //delay(1000);
+                Thread.Sleep(3000);
 
                 lb_write_camera_serial2.Text = "寫入2相機序號完成";
                 lb_write_camera_serial2.ForeColor = Color.Black;
@@ -3942,6 +4015,21 @@ namespace imsLink
                 g2.Clear(BackColor);
                 g2.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
+
+                Thread.Sleep(1000);
+
+                //驗證資料
+                lb_write_camera_serial2.Text += "\t驗證中";
+                lb_write_camera_serial2.ForeColor = Color.Red;
+                richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString() + "\n";
+
+                g2.Clear(BackColor);
+                g2.DrawString("驗證中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+
+                flag_verify_serial_data = 1;
+                Get_IMS_Data(0, 0xAA, 0xAA);
+
             }
             else
             {

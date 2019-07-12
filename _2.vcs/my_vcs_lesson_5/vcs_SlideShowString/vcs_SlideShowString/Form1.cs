@@ -59,6 +59,7 @@ namespace vcs_SlideShowString
         int timer2_cnt = 0;
         int align_direction = 0;
         int play_sequence = 0;
+        string font_type = String.Empty;
         int font_size_default = 0;
         int font_size_user = 0;
         float font_size_current;
@@ -188,6 +189,11 @@ namespace vcs_SlideShowString
                         font_size_user = int.Parse(line.Remove(0, 1));
                         richTextBox1.Text += "自訂字型大小: " + font_size_user.ToString() + "\n";
                     }
+                    else if (line[0] == '?')
+                    {
+                        font_type = line.Remove(0, 1);
+                        richTextBox1.Text += "字型: " + font_type + "\n";
+                    }
                     else if (line[0] == '{')
                     {
                         slide_show_interval = int.Parse(line.Remove(0, 1));
@@ -251,6 +257,13 @@ namespace vcs_SlideShowString
                 }
 
                 richTextBox1.Text += "設定字型大小: " + font_size_default.ToString() + "\n";
+
+
+                if (font_type == string.Empty)
+                {
+                    font_type = "標楷體";
+                }
+                richTextBox1.Text += "設定字型: " + font_type + "\n";
 
                 return true;
             }
@@ -710,7 +723,7 @@ namespace vcs_SlideShowString
             //richTextBox1.Clear();
             richTextBox1.Text += "\n\n第 " + (show_lyrics_index + 1).ToString() + " 首, " + str_author + " " + str_title + ", 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
 
-            f = new Font("標楷體", font_size_default);
+            f = new Font(font_type, font_size_default);
 
             bmp = new Bitmap(100, 100);     //initial W, H
             g = Graphics.FromImage(bmp);
@@ -737,7 +750,7 @@ namespace vcs_SlideShowString
                     fontsize = f.Size;
                     if (fontsize > 5)
                         fontsize -= 1;      //這個地方要考慮 若是字串超長 永遠無法滿足 該要如何處理例外
-                    f = new Font("標楷體", fontsize);
+                    f = new Font(font_type, fontsize);
                     richTextBox1.Text += "縮小字型為 " + fontsize.ToString() + "\n";
                 }
             }
@@ -865,16 +878,16 @@ namespace vcs_SlideShowString
             if (flag_release_mode == false)
             {
                 string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
-                tmp_width = g.MeasureString(show_play_info, new Font("標楷體", font_size_current * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(show_play_info, new Font("標楷體", font_size_current * 2 / 3)).ToSize().Height;
-                g.DrawString(show_play_info, new Font("標楷體", font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
+                tmp_width = g.MeasureString(show_play_info, new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
+                tmp_height = g.MeasureString(show_play_info, new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
+                g.DrawString(show_play_info, new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
             }
 
             if (flag_debug_message == true) //顯示目前字型大小
             {
-                tmp_width = g.MeasureString(font_size_current.ToString(), new Font("標楷體", font_size_current * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(font_size_current.ToString(), new Font("標楷體", font_size_current * 2 / 3)).ToSize().Height;
-                g.DrawString(font_size_current.ToString(), new Font("標楷體", font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
+                tmp_width = g.MeasureString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
+                tmp_height = g.MeasureString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
+                g.DrawString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
             }
 
             if (flag_release_mode == true)
@@ -942,10 +955,10 @@ namespace vcs_SlideShowString
 
             if (flag_debug_message == true)     //顯示要換首的剩餘時間
             {
-                tmp_width = g.MeasureString((slide_show_interval - timer1_cnt).ToString(), new Font("標楷體", font_size_default * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString((slide_show_interval - timer1_cnt).ToString(), new Font("標楷體", font_size_default * 2 / 3)).ToSize().Height;
+                tmp_width = g.MeasureString((slide_show_interval - timer1_cnt).ToString(), new Font(font_type, font_size_default * 2 / 3)).ToSize().Width;
+                tmp_height = g.MeasureString((slide_show_interval - timer1_cnt).ToString(), new Font(font_type, font_size_default * 2 / 3)).ToSize().Height;
                 g.FillRectangle(new SolidBrush(Color.SandyBrown), new Rectangle((W - tmp_width) - 10, 10, tmp_width, tmp_height));
-                g.DrawString((slide_show_interval - timer1_cnt).ToString(), new Font("標楷體", font_size_default * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, 10));
+                g.DrawString((slide_show_interval - timer1_cnt).ToString(), new Font(font_type, font_size_default * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, 10));
             }
             pictureBox1.Image = bmp;
         }
