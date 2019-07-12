@@ -21,6 +21,8 @@ namespace imsLink
     public partial class Form1 : Form
     {
         bool flag_release_mode = false;
+        bool flag_awb_debug = true;
+
         private const bool SHOW_COMPORT_LOG = false;
         private const int UART_BUF_LENGTH = 5;
         private const int CAMERA_OK = 0;	//dongle + camera
@@ -2017,6 +2019,7 @@ namespace imsLink
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
             tb_sn1.Clear();
+            tb_sn2.Clear();
             tb_sn1.BackColor = Color.Gray;
             tb_info_aa1.Clear();
             tb_info_aa2.Clear();
@@ -2352,50 +2355,61 @@ namespace imsLink
             }
         }
 
+        //寫字的功能
+        //畫框的功能
+        Graphics gg;
+        SolidBrush drawBrush;
+        Font drawFont;
+        string drawDate;
+        int total_R = 0;
+        int total_G = 0;
+        int total_B = 0;
 
         int frame_cnt = 0;
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            frame_cnt++;
-            if (frame_cnt == 5)
+            int x_st = 0;
+            int y_st = 0;
+            int ww = 64;
+            int hh = 64;
+
+            if (flag_awb_debug == true)
             {
-                //label8.Text = "A";
-                frame_cnt = 0;
 
-                Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-                int WW = bitmap1.Width;
-                int HH = bitmap1.Height;
-                int ww = 64;
-                int hh = 64;
-                int i;
-                int j;
-                Color pt;
-                int x_st = WW / 2 - ww / 2;
-                int y_st = HH / 2 - hh / 2;
-                int total_R = 0;
-                int total_G = 0;
-                int total_B = 0;
-
-                for (j = 0; j < hh; j++)
+                frame_cnt++;
+                if (frame_cnt == 3)
                 {
-                    for (i = 0; i < ww; i++)
+                    frame_cnt = 0;
+
+                    //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+                    Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone();
+
+                    int WW = bitmap1.Width;
+                    int HH = bitmap1.Height;
+                    int i;
+                    int j;
+                    Color pt;
+                    x_st = WW / 2 - ww / 2;
+                    y_st = HH / 2 - hh / 2;
+                    total_R = 0;
+                    total_G = 0;
+                    total_B = 0;
+
+                    for (j = 0; j < hh; j++)
                     {
-                        pt = bitmap1.GetPixel(x_st + i, y_st + j);
-                        total_R += pt.R;
-                        total_G += pt.G;
-                        total_B += pt.B;
+                        for (i = 0; i < ww; i++)
+                        {
+                            pt = bitmap1.GetPixel(x_st + i, y_st + j);
+                            total_R += pt.R;
+                            total_G += pt.G;
+                            total_B += pt.B;
+                        }
                     }
+                    GC.Collect();       //回收資源
                 }
-                GC.Collect();       //回收資源
-                //label8.Text = (total_R / (ww * hh)).ToString() + " " + (total_G / (ww * hh)).ToString() + " " + (total_B / (ww * hh)).ToString();
-                label8.Text = (total_R / (ww * hh)).ToString() + " " + (total_G / (ww * hh)).ToString() + " " + (total_B / (ww * hh)).ToString()
-                    + "   " + (total_R).ToString() + " " + (total_G).ToString() + " " + (total_B).ToString();
-
-
             }
-
 
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
             bm = (Bitmap)eventArgs.Frame.Clone();
@@ -2411,50 +2425,61 @@ namespace imsLink
                                              (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
                                              w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
 
+            //寫字的功能
+            //畫框的功能
+            gg = Graphics.FromImage(bm);
+
+            drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            drawBrush = new SolidBrush(Color.Yellow);
+            drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+
+            x_st = 10;
+            y_st = 10;
+            gg.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
+
+            if (flag_awb_debug == true)
+            {
+                x_st = w / 2 - ww / 2;
+                y_st = h / 2 - hh / 2;
+                gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+
+                string rgb_value;
+                x_st = 10;
+                y_st = 250;
+                drawBrush = new SolidBrush(Color.Red);
+                rgb_value = (total_R / (ww * hh)).ToString();
+                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                y_st = 290;
+                drawBrush = new SolidBrush(Color.Green);
+                rgb_value = (total_G / (ww * hh)).ToString();
+                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                y_st = 330;
+                drawBrush = new SolidBrush(Color.Blue);
+                rgb_value = (total_B / (ww * hh)).ToString();
+                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                y_st = 370;
+                drawBrush = new SolidBrush(Color.Red);
+                rgb_value = (total_R).ToString();
+                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                y_st = 410;
+                drawBrush = new SolidBrush(Color.Green);
+                rgb_value = (total_G).ToString();
+                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                y_st = 450;
+                drawBrush = new SolidBrush(Color.Blue);
+                rgb_value = (total_B).ToString();
+                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+            }
+
             pictureBox1.Image = bm.Clone(rect, PixelFormat.Format32bppArgb);
 
             usb_camera_width = w;
             usb_camera_height = h;
-
-            /*  寫字的功能還不完備
-            IntPtr pHdc;
-            Graphics g = Graphics.FromImage(pictureBox1.Image);
-            Pen p = new Pen(Color.Red, 1);
-            SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-            Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-            pHdc = g.GetHdc();
-
-            //int xPos = pictureBox1.Image.Width - (pictureBox1.Image.Width - 15);
-            int xPos = 10;
-            int yPos = 10;
-            string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            g.ReleaseHdc();
-            g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-
-
-            if (pictureBox1.Width == 1280)
-            {
-                //g.DrawRectangle(p, 8, 6, 640 - 8 * 2, 480 - 6 * 2);
-                int ww = 50;
-                for (int i = 0; i < 5; i++)
-                {
-                    g.DrawRectangle(p, 8 + ww * i, 6 + ww * i, 640 - 8 * 2 - ww * i * 2, 480 - 6 * 2 - ww * i * 2);
-                
-                }
-                p = new Pen(Color.Purple, 1);
-                ww = 2;
-                for (int i = 0; i < 5; i++)
-                {
-                    g.DrawRectangle(p, 8 + ww * i, 6 + ww * i, 640 - 8 * 2 - ww * i * 2, 480 - 6 * 2 - ww * i * 2);
-
-                }
-
-            }
-
-            g.Dispose();
-            //richTextBox1.Text += "W = " + pictureBox1.Width.ToString() + ", H = " + pictureBox1.Height.ToString() + "\n";
-			*/
 
             GC.Collect();       //回收資源
         }
@@ -2889,7 +2914,7 @@ namespace imsLink
                 richTextBox1.Visible = false;
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
+                //this.TopMost = true;
                 tabControl1.Size = new Size(1600, 1010);
                 pictureBox1.Location = new Point(170, 15);
                 //pictureBox1.Size = new Size(1120, 840);
@@ -2903,7 +2928,7 @@ namespace imsLink
                 richTextBox1.Visible = true;
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.WindowState = FormWindowState.Normal;
-                this.TopMost = false;
+                //this.TopMost = false;
                 tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
@@ -3011,6 +3036,7 @@ namespace imsLink
             tb_info_8.Clear();
             lb_camera_model.Text = "相機型號讀取中...";
             tb_info_82.BackColor = Color.White;
+            tb_info_83.Text = "";
 
             panel_camera_status1.BackgroundImage = null;
             panel_camera_status2.BackgroundImage = null;
@@ -3234,6 +3260,9 @@ namespace imsLink
             lb_mb_big_serial.Text = "大PCBA序號 讀取中...";
             lb_mb_small_serial.Text = "小PCBA序號 讀取中...";
             button30.BackColor = Color.Red;
+            tb_machine_serial.Text = "";
+            tb_mb_big_serial.Text = "";
+            tb_mb_small_serial.Text = "";
 
             if (flag_comport_ok == false)
             {
