@@ -91,6 +91,10 @@ namespace imsLink
 
         int btn_down_up_cnt = 0;
         int btn_right_left_cnt = 0;
+        int flag_down_up_cnt = 0;
+        int flag_right_left_cnt = 0;
+        int awb_step = 10;
+        int awb_range = 64;
 
         //C# 提示視窗 ToolTip 
         //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -1334,6 +1338,8 @@ namespace imsLink
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
             Comport_Scan();
             lb_a.Text = "";
             lb_b.Text = "";
@@ -1398,6 +1404,17 @@ namespace imsLink
                 richTextBox1.Text += "無影像裝置\n";
             }
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            lb_0x1.Visible = false;
+            lb_0x2.Visible = false;
+            lb_addr.Visible = false;
+            lb_data.Visible = false;
+            tb_1a.Visible = false;
+            tb_2a.Visible = false;
+            tb_3a.Visible = false;
+            tb_4a.Visible = false;
+            bt_read.Visible = false;
+            bt_write.Visible = false;
 
             g.Clear(BackColor);
 
@@ -2351,6 +2368,7 @@ namespace imsLink
             button4.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
+        bool flag_expand_usb_window = false;
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             flag_auto_scan_mode = true;
@@ -2385,10 +2403,21 @@ namespace imsLink
             if (tabControl1.SelectedTab == tp_USB)
             {
                 richTextBox1.Text += "進入USB WebCam\n";
+                timer_webcam.Enabled = true;
+                flag_expand_usb_window = true;
+                richTextBox1.Text += "放大\n";
+                this.Size = new Size(this.Size.Width, this.Size.Height + 100);
             }
             else
             {
                 richTextBox1.Text += "離開USB WebCam\n";
+                timer_webcam.Enabled = false;
+                if (flag_expand_usb_window == true)
+                {
+                    flag_expand_usb_window = false;
+                    richTextBox1.Text += "縮小\n";
+                    this.Size = new Size(this.Size.Width, this.Size.Height - 100);
+                }
             }
 
             if (tabControl1.SelectedTab == tp_USB)
@@ -2443,12 +2472,11 @@ namespace imsLink
         {
             int x_st = 0;
             int y_st = 0;
-            int ww = 64;
-            int hh = 64;
+            int ww = awb_range;
+            int hh = awb_range;
 
             if (flag_awb_debug == true)
             {
-
                 frame_cnt++;
                 if (frame_cnt == 3)
                 {
@@ -2462,8 +2490,18 @@ namespace imsLink
                     int i;
                     int j;
                     Color pt;
-                    x_st = WW / 2 - ww / 2;
-                    y_st = HH / 2 - hh / 2;
+                    x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step;
+                    if (x_st < 0)
+                        x_st = 0;
+                    if ((x_st + ww) > WW)
+                        x_st = WW - ww;
+
+                    y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step;
+                    if (y_st < 0)
+                        y_st = 0;
+                    if ((y_st + hh) > HH)
+                        y_st = HH - hh;
+
                     total_R = 0;
                     total_G = 0;
                     total_B = 0;
@@ -2510,8 +2548,18 @@ namespace imsLink
 
             if (flag_awb_debug == true)
             {
-                x_st = w / 2 - ww / 2;
-                y_st = h / 2 - hh / 2;
+                x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step;
+                if (x_st < 0)
+                    x_st = 0;
+                if ((x_st + ww) > w)
+                    x_st = w - ww;
+
+                y_st = h / 2 - hh / 2 + flag_down_up_cnt * awb_step;
+                if (y_st < 0)
+                    y_st = 0;
+                if ((y_st + hh) > h)
+                    y_st = h - hh;
+
                 gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
 
                 string rgb_value;
@@ -2991,6 +3039,34 @@ namespace imsLink
                 //pictureBox1.Size = new Size(1120, 840);
                 pictureBox1.Size = new Size(640 * 2, 480 * 2);
                 toolTip1.SetToolTip(button19, "1X");
+
+                lb_0x1.Visible = true;
+                lb_0x2.Visible = true;
+                lb_addr.Visible = true;
+                lb_data.Visible = true;
+                tb_1a.Visible = true;
+                tb_2a.Visible = true;
+                tb_3a.Visible = true;
+                tb_4a.Visible = true;
+                bt_read.Visible = true;
+                bt_write.Visible = true;
+
+
+                lb_addr.Location = new Point(30, 620);
+                lb_0x1.Location = new Point(5, 650);
+                tb_1a.Location = new Point(30, 650);
+                tb_2a.Location = new Point(100, 650);
+
+                lb_0x2.Location = new Point(5, 750);
+                lb_data.Location = new Point(30, 720);
+                tb_3a.Location = new Point(30, 750);
+                tb_4a.Location = new Point(100, 750);
+
+
+
+                bt_read.Location = new Point(30, 850);
+                bt_write.Location = new Point(100, 850);
+
             }
             else
             {
@@ -3004,6 +3080,19 @@ namespace imsLink
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
                 toolTip1.SetToolTip(button19, "2X");
+
+                lb_0x1.Visible = false;
+                lb_0x2.Visible = false;
+                lb_addr.Visible = false;
+                lb_data.Visible = false;
+                tb_1a.Visible = false;
+                tb_2a.Visible = false;
+                tb_3a.Visible = false;
+                tb_4a.Visible = false;
+                bt_read.Visible = false;
+                bt_write.Visible = false;
+
+
             }
         }
 
@@ -4043,6 +4132,413 @@ namespace imsLink
 
         }
 
+        void pictureBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            int x_st_old = 0;
+            int y_st_old = 0;
+            int ww = awb_range;
+            int hh = awb_range;
+
+            int WW = 640;
+            int HH = 480;
+
+            int flag_down_up_cnt_old = flag_down_up_cnt;
+            int flag_right_left_cnt_old = flag_right_left_cnt;
+
+            x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step;
+            y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt_old * awb_step;
+
+            richTextBox1.Text += "flag_right_left_cnt_old = " + flag_right_left_cnt_old.ToString() + " flag_down_up_cnt_old = " + flag_down_up_cnt_old.ToString() + "\n";
+            richTextBox1.Text += "x_st_old = " + x_st_old.ToString() + " y_st_old = " + y_st_old.ToString() + "\n";
+
+            if ((e.KeyCode == Keys.PageDown) || (e.KeyCode == Keys.Space))
+            {
+                richTextBox1.Text += "下一首\n";
+            }
+            else if (e.KeyCode == Keys.PageUp)
+            {
+                richTextBox1.Text += "上一首\n";
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                richTextBox1.Text += "Up\n";
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                richTextBox1.Text += "Down\n";
+            }
+            else if (e.KeyCode == Keys.NumPad8)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (y_st_old > 0)
+                    {
+                        y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step - awb_step;
+                        if (y_st_old > 0)
+                        {
+                            flag_down_up_cnt -= 2;
+                            richTextBox1.Text += "Up2\n";
+                        }
+                        else
+                        {
+                            flag_down_up_cnt--;
+                            richTextBox1.Text += "Up1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (y_st_old > 0)
+                    {
+                        flag_down_up_cnt--;
+                        richTextBox1.Text += "Up1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad9)
+            {
+                richTextBox1.Text += "Up-Right\n";
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (y_st_old > 0)
+                    {
+                        y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step - awb_step;
+                        if (y_st_old > 0)
+                        {
+                            flag_down_up_cnt -= 2;
+                            richTextBox1.Text += "Up2\n";
+                        }
+                        else
+                        {
+                            flag_down_up_cnt--;
+                            richTextBox1.Text += "Up1\n";
+                        }
+                    }
+                    if (x_st_old < (WW - ww))
+                    {
+                        x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt_old * awb_step + awb_step;
+                        if (x_st_old < (WW - ww))
+                        {
+                            flag_right_left_cnt += 2;
+                            richTextBox1.Text += "Right2\n";
+                        }
+                        else
+                        {
+                            flag_right_left_cnt++;
+                            richTextBox1.Text += "Right1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (y_st_old > 0)
+                    {
+                        flag_down_up_cnt--;
+                        richTextBox1.Text += "Up1\n";
+                    }
+                    if (x_st_old < (WW - ww))
+                    {
+                        flag_right_left_cnt++;
+                        richTextBox1.Text += "Right1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad2)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (y_st_old < (HH - hh))
+                    {
+                        y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + awb_step;
+                        if (y_st_old < (HH - hh))
+                        {
+                            flag_down_up_cnt += 2;
+                            richTextBox1.Text += "Down2\n";
+                        }
+                        else
+                        {
+                            flag_down_up_cnt++;
+                            richTextBox1.Text += "Down1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (y_st_old < (HH - hh))
+                    {
+                        flag_down_up_cnt++;
+                        richTextBox1.Text += "Down1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad1)
+            {
+                richTextBox1.Text += "Down-Left\n";
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (y_st_old < (HH - hh))
+                    {
+                        y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + awb_step;
+                        if (y_st_old < (HH - hh))
+                        {
+                            flag_down_up_cnt += 2;
+                            richTextBox1.Text += "Down2\n";
+                        }
+                        else
+                        {
+                            flag_down_up_cnt++;
+                            richTextBox1.Text += "Down1\n";
+                        }
+                    }
+                    if (x_st_old > 0)
+                    {
+                        x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt_old * awb_step - awb_step;
+                        if (x_st_old > 0)
+                        {
+                            flag_right_left_cnt -= 2;
+                            richTextBox1.Text += "Left2\n";
+                        }
+                        else
+                        {
+                            flag_right_left_cnt--;
+                            richTextBox1.Text += "Left1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (y_st_old < (HH - hh))
+                    {
+                        flag_down_up_cnt++;
+                        richTextBox1.Text += "Down1\n";
+                    }
+                    if (x_st_old > 0)
+                    {
+                        flag_right_left_cnt--;
+                        richTextBox1.Text += "Left1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad4)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (x_st_old > 0)
+                    {
+                        x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt_old * awb_step - awb_step;
+                        if (x_st_old > 0)
+                        {
+                            flag_right_left_cnt -= 2;
+                            richTextBox1.Text += "Left2\n";
+                        }
+                        else
+                        {
+                            flag_right_left_cnt--;
+                            richTextBox1.Text += "Left1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (x_st_old > 0)
+                    {
+                        flag_right_left_cnt--;
+                        richTextBox1.Text += "Left1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad7)
+            {
+                richTextBox1.Text += "Up-Left\n";
+
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (x_st_old > 0)
+                    {
+                        x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt_old * awb_step - awb_step;
+                        if (x_st_old > 0)
+                        {
+                            flag_right_left_cnt -= 2;
+                            richTextBox1.Text += "Left2\n";
+                        }
+                        else
+                        {
+                            flag_right_left_cnt--;
+                            richTextBox1.Text += "Left1\n";
+                        }
+                    }
+                    if (y_st_old > 0)
+                    {
+                        y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step - awb_step;
+                        if (y_st_old > 0)
+                        {
+                            flag_down_up_cnt -= 2;
+                            richTextBox1.Text += "Up2\n";
+                        }
+                        else
+                        {
+                            flag_down_up_cnt--;
+                            richTextBox1.Text += "Up1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (x_st_old > 0)
+                    {
+                        flag_right_left_cnt--;
+                        richTextBox1.Text += "Left1\n";
+                    }
+                    if (y_st_old > 0)
+                    {
+                        flag_down_up_cnt--;
+                        richTextBox1.Text += "Up1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad6)
+            {
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (x_st_old < (WW - ww))
+                    {
+                        x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt_old * awb_step + awb_step;
+                        if (x_st_old < (WW - ww))
+                        {
+                            flag_right_left_cnt += 2;
+                            richTextBox1.Text += "Right2\n";
+                        }
+                        else
+                        {
+                            flag_right_left_cnt++;
+                            richTextBox1.Text += "Right1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (x_st_old < (WW - ww))
+                    {
+                        flag_right_left_cnt++;
+                        richTextBox1.Text += "Right1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad3)
+            {
+                richTextBox1.Text += "Down-Right\n";
+                //2
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (y_st_old < (HH - hh))
+                    {
+                        y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + awb_step;
+                        if (y_st_old < (HH - hh))
+                        {
+                            flag_down_up_cnt += 2;
+                            richTextBox1.Text += "Down2\n";
+                        }
+                        else
+                        {
+                            flag_down_up_cnt++;
+                            richTextBox1.Text += "Down1\n";
+                        }
+                    }
+                    if (x_st_old < (WW - ww))
+                    {
+                        x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt_old * awb_step + awb_step;
+                        if (x_st_old < (WW - ww))
+                        {
+                            flag_right_left_cnt += 2;
+                            richTextBox1.Text += "Right2\n";
+                        }
+                        else
+                        {
+                            flag_right_left_cnt++;
+                            richTextBox1.Text += "Right1\n";
+                        }
+                    }
+                }
+                else
+                {
+                    if (y_st_old < (HH - hh))
+                    {
+                        flag_down_up_cnt++;
+                        richTextBox1.Text += "Down1\n";
+                    }
+                    if (x_st_old < (WW - ww))
+                    {
+                        flag_right_left_cnt++;
+                        richTextBox1.Text += "Right1\n";
+                    }
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad5)
+            {
+                richTextBox1.Text += "Center\n";
+                flag_right_left_cnt = 0;
+                flag_down_up_cnt = 0;
+                awb_range = 64;
+            }
+            else if (e.KeyCode == Keys.Home)
+            {
+                richTextBox1.Text += "Home\n";
+            }
+            else if (e.KeyCode == Keys.End)
+            {
+                richTextBox1.Text += "End\n";
+            }
+            else if (e.KeyCode == Keys.Add)
+            {
+                if(awb_range < 300)
+                    awb_range += 5;
+                richTextBox1.Text += "awb_range = " + awb_range.ToString() + "\n";
+            }
+            else if (e.KeyCode == Keys.Subtract)
+            {
+                if (awb_range > 8)
+                    awb_range -= 5;
+                richTextBox1.Text += "awb_range = " + awb_range.ToString() + "\n";
+            }
+            else if (e.KeyCode == Keys.X)
+            {
+            }
+            else if (e.KeyCode == Keys.F1)
+            {
+                richTextBox1.Text += "F1 : Help\n";
+            }
+            else if (e.KeyCode == Keys.F10)
+            {
+                richTextBox1.Text += "F10 : Setup\n";
+            }
+            else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+            {
+                if (e.KeyCode == Keys.W)
+                {
+                }
+                else if (e.KeyCode == Keys.H)
+                {
+                }
+            }
+            else if (e.KeyCode == Keys.W)
+            {
+            }
+            else if (e.KeyCode == Keys.H)
+            {
+            }
+            else
+            {
+                richTextBox1.Text += "你按了" + e.KeyCode.ToString() + "\n";
+            }
+
+
+
+        }
+
+        private void timer_webcam_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox1.Focus();
+        } 
 
     }
 }

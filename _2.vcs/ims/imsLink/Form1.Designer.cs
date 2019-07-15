@@ -239,6 +239,17 @@
             this.button33 = new System.Windows.Forms.Button();
             this.timer_rtc = new System.Windows.Forms.Timer(this.components);
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
+            this.timer_webcam = new System.Windows.Forms.Timer(this.components);
+            this.tb_4a = new System.Windows.Forms.TextBox();
+            this.lb_addr = new System.Windows.Forms.Label();
+            this.tb_3a = new System.Windows.Forms.TextBox();
+            this.tb_2a = new System.Windows.Forms.TextBox();
+            this.tb_1a = new System.Windows.Forms.TextBox();
+            this.lb_0x1 = new System.Windows.Forms.Label();
+            this.lb_data = new System.Windows.Forms.Label();
+            this.bt_write = new System.Windows.Forms.Button();
+            this.bt_read = new System.Windows.Forms.Button();
+            this.lb_0x2 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1678,6 +1689,14 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_write);
+            this.tp_USB.Controls.Add(this.bt_read);
+            this.tp_USB.Controls.Add(this.lb_data);
+            this.tp_USB.Controls.Add(this.tb_4a);
+            this.tp_USB.Controls.Add(this.lb_addr);
+            this.tp_USB.Controls.Add(this.tb_3a);
+            this.tp_USB.Controls.Add(this.tb_2a);
+            this.tp_USB.Controls.Add(this.tb_1a);
             this.tp_USB.Controls.Add(this.lb_rgb);
             this.tp_USB.Controls.Add(this.lb_zoom);
             this.tp_USB.Controls.Add(this.btnCenter);
@@ -1692,6 +1711,8 @@
             this.tp_USB.Controls.Add(this.button12);
             this.tp_USB.Controls.Add(this.pictureBox1);
             this.tp_USB.Controls.Add(this.button16);
+            this.tp_USB.Controls.Add(this.lb_0x2);
+            this.tp_USB.Controls.Add(this.lb_0x1);
             this.tp_USB.Location = new System.Drawing.Point(4, 26);
             this.tp_USB.Name = "tp_USB";
             this.tp_USB.Size = new System.Drawing.Size(940, 586);
@@ -1703,7 +1724,7 @@
             // 
             this.lb_rgb.AutoSize = true;
             this.lb_rgb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_rgb.Location = new System.Drawing.Point(18, 544);
+            this.lb_rgb.Location = new System.Drawing.Point(27, 467);
             this.lb_rgb.Name = "lb_rgb";
             this.lb_rgb.Size = new System.Drawing.Size(62, 21);
             this.lb_rgb.TabIndex = 48;
@@ -1714,7 +1735,7 @@
             this.lb_zoom.AutoSize = true;
             this.lb_zoom.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_zoom.ForeColor = System.Drawing.Color.Red;
-            this.lb_zoom.Location = new System.Drawing.Point(56, 268);
+            this.lb_zoom.Location = new System.Drawing.Point(55, 217);
             this.lb_zoom.Name = "lb_zoom";
             this.lb_zoom.Size = new System.Drawing.Size(77, 24);
             this.lb_zoom.TabIndex = 47;
@@ -1726,7 +1747,7 @@
             this.btnCenter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCenter.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnCenter.ForeColor = System.Drawing.Color.Black;
-            this.btnCenter.Location = new System.Drawing.Point(67, 349);
+            this.btnCenter.Location = new System.Drawing.Point(66, 298);
             this.btnCenter.Name = "btnCenter";
             this.btnCenter.Size = new System.Drawing.Size(40, 40);
             this.btnCenter.TabIndex = 46;
@@ -1738,7 +1759,7 @@
             this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRight.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnRight.ForeColor = System.Drawing.Color.Black;
-            this.btnRight.Location = new System.Drawing.Point(113, 348);
+            this.btnRight.Location = new System.Drawing.Point(112, 297);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(40, 40);
             this.btnRight.TabIndex = 45;
@@ -1750,7 +1771,7 @@
             this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLeft.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnLeft.ForeColor = System.Drawing.Color.Black;
-            this.btnLeft.Location = new System.Drawing.Point(21, 348);
+            this.btnLeft.Location = new System.Drawing.Point(20, 297);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(40, 40);
             this.btnLeft.TabIndex = 44;
@@ -1762,7 +1783,7 @@
             this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDown.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnDown.ForeColor = System.Drawing.Color.Black;
-            this.btnDown.Location = new System.Drawing.Point(67, 395);
+            this.btnDown.Location = new System.Drawing.Point(66, 344);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(40, 40);
             this.btnDown.TabIndex = 43;
@@ -1774,7 +1795,7 @@
             this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnUp.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnUp.ForeColor = System.Drawing.Color.Black;
-            this.btnUp.Location = new System.Drawing.Point(67, 303);
+            this.btnUp.Location = new System.Drawing.Point(66, 252);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(40, 40);
             this.btnUp.TabIndex = 42;
@@ -1786,7 +1807,7 @@
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button19.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button19.ForeColor = System.Drawing.Color.Black;
-            this.button19.Location = new System.Drawing.Point(60, 459);
+            this.button19.Location = new System.Drawing.Point(59, 390);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(60, 60);
             this.button19.TabIndex = 41;
@@ -1798,7 +1819,7 @@
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button18.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.ForeColor = System.Drawing.Color.Black;
-            this.button18.Location = new System.Drawing.Point(94, 198);
+            this.button18.Location = new System.Drawing.Point(94, 151);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(60, 60);
             this.button18.TabIndex = 40;
@@ -1810,7 +1831,7 @@
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button17.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.ForeColor = System.Drawing.Color.Black;
-            this.button17.Location = new System.Drawing.Point(22, 198);
+            this.button17.Location = new System.Drawing.Point(20, 151);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(60, 60);
             this.button17.TabIndex = 39;
@@ -1820,7 +1841,7 @@
             // button15
             // 
             this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button15.Location = new System.Drawing.Point(22, 116);
+            this.button15.Location = new System.Drawing.Point(22, 85);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(60, 60);
             this.button15.TabIndex = 2;
@@ -1830,7 +1851,7 @@
             // button12
             // 
             this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button12.Location = new System.Drawing.Point(22, 50);
+            this.button12.Location = new System.Drawing.Point(22, 19);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(60, 60);
             this.button12.TabIndex = 0;
@@ -1853,7 +1874,7 @@
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button16.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button16.ForeColor = System.Drawing.Color.Black;
-            this.button16.Location = new System.Drawing.Point(94, 50);
+            this.button16.Location = new System.Drawing.Point(94, 19);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(60, 60);
             this.button16.TabIndex = 38;
@@ -2526,6 +2547,116 @@
             this.timer_get_rgb.Enabled = true;
             this.timer_get_rgb.Tick += new System.EventHandler(this.timer_get_rgb_Tick);
             // 
+            // timer_webcam
+            // 
+            this.timer_webcam.Enabled = true;
+            this.timer_webcam.Interval = 500;
+            this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
+            // 
+            // tb_4a
+            // 
+            this.tb_4a.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_4a.Location = new System.Drawing.Point(528, 539);
+            this.tb_4a.Name = "tb_4a";
+            this.tb_4a.Size = new System.Drawing.Size(58, 32);
+            this.tb_4a.TabIndex = 53;
+            this.tb_4a.Text = "0";
+            this.tb_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_addr
+            // 
+            this.lb_addr.AutoSize = true;
+            this.lb_addr.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_addr.Location = new System.Drawing.Point(18, 542);
+            this.lb_addr.Name = "lb_addr";
+            this.lb_addr.Size = new System.Drawing.Size(134, 23);
+            this.lb_addr.TabIndex = 52;
+            this.lb_addr.Text = "Addr_H     Addr_L";
+            // 
+            // tb_3a
+            // 
+            this.tb_3a.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_3a.Location = new System.Drawing.Point(458, 539);
+            this.tb_3a.Name = "tb_3a";
+            this.tb_3a.Size = new System.Drawing.Size(58, 32);
+            this.tb_3a.TabIndex = 51;
+            this.tb_3a.Text = "00";
+            this.tb_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_2a
+            // 
+            this.tb_2a.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_2a.Location = new System.Drawing.Point(352, 539);
+            this.tb_2a.Name = "tb_2a";
+            this.tb_2a.Size = new System.Drawing.Size(58, 32);
+            this.tb_2a.TabIndex = 50;
+            this.tb_2a.Text = "20";
+            this.tb_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_1a
+            // 
+            this.tb_1a.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_1a.Location = new System.Drawing.Point(266, 539);
+            this.tb_1a.Name = "tb_1a";
+            this.tb_1a.Size = new System.Drawing.Size(58, 32);
+            this.tb_1a.TabIndex = 49;
+            this.tb_1a.Text = "38";
+            this.tb_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_0x1
+            // 
+            this.lb_0x1.AutoSize = true;
+            this.lb_0x1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0x1.Location = new System.Drawing.Point(242, 543);
+            this.lb_0x1.Name = "lb_0x1";
+            this.lb_0x1.Size = new System.Drawing.Size(27, 23);
+            this.lb_0x1.TabIndex = 54;
+            this.lb_0x1.Text = "0x";
+            // 
+            // lb_data
+            // 
+            this.lb_data.AutoSize = true;
+            this.lb_data.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_data.Location = new System.Drawing.Point(180, 542);
+            this.lb_data.Name = "lb_data";
+            this.lb_data.Size = new System.Drawing.Size(42, 23);
+            this.lb_data.TabIndex = 55;
+            this.lb_data.Text = "Data";
+            // 
+            // bt_write
+            // 
+            this.bt_write.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_write.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_write.ForeColor = System.Drawing.Color.Black;
+            this.bt_write.Location = new System.Drawing.Point(707, 538);
+            this.bt_write.Name = "bt_write";
+            this.bt_write.Size = new System.Drawing.Size(58, 32);
+            this.bt_write.TabIndex = 57;
+            this.bt_write.Text = "Write";
+            this.bt_write.UseVisualStyleBackColor = false;
+            // 
+            // bt_read
+            // 
+            this.bt_read.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_read.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_read.ForeColor = System.Drawing.Color.Black;
+            this.bt_read.Location = new System.Drawing.Point(614, 538);
+            this.bt_read.Name = "bt_read";
+            this.bt_read.Size = new System.Drawing.Size(58, 32);
+            this.bt_read.TabIndex = 56;
+            this.bt_read.Text = "Read";
+            this.bt_read.UseVisualStyleBackColor = false;
+            // 
+            // lb_0x2
+            // 
+            this.lb_0x2.AutoSize = true;
+            this.lb_0x2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0x2.Location = new System.Drawing.Point(242, 563);
+            this.lb_0x2.Name = "lb_0x2";
+            this.lb_0x2.Size = new System.Drawing.Size(100, 23);
+            this.lb_0x2.TabIndex = 58;
+            this.lb_0x2.Text = "0x                =";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2814,6 +2945,17 @@
         private System.Windows.Forms.Label lb_write_camera_serial2;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel_camera_status3;
+        private System.Windows.Forms.Timer timer_webcam;
+        private System.Windows.Forms.Label lb_data;
+        private System.Windows.Forms.TextBox tb_4a;
+        private System.Windows.Forms.Label lb_addr;
+        private System.Windows.Forms.TextBox tb_3a;
+        private System.Windows.Forms.TextBox tb_2a;
+        private System.Windows.Forms.TextBox tb_1a;
+        private System.Windows.Forms.Label lb_0x1;
+        private System.Windows.Forms.Button bt_write;
+        private System.Windows.Forms.Button bt_read;
+        private System.Windows.Forms.Label lb_0x2;
     }
 }
 
