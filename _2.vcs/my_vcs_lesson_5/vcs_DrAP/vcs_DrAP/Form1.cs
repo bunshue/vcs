@@ -1241,6 +1241,113 @@ namespace vcs_DrAP
             richTextBox2.Clear();
         }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.Clear();
+            //設置列名稱
+            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+            listView1.Visible = true;
+
+            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
+            for (int i = 0; i < (fileinfos.Count - 1); i++)
+            {
+                string filename1 = fileinfos[i].filename;
+                //richTextBox1.Text += "filename1 : " + fileinfos[i].filename + "\n";
+
+                for (int j = i + 1; j < fileinfos.Count; j++)
+                {
+                    string filename2 = fileinfos[j].filename;
+                    richTextBox1.Text += "filename2 : " + fileinfos[j].filename + "\n";
+
+                    richTextBox1.Text += "str1 = " + filename1.ToLower().Replace(" ", "").Replace("-", "") + "\n";
+                    richTextBox1.Text += "str2 = " + filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0,6) + "\n";
+
+
+                    bool ret;
+
+                    ret = filename1.ToLower().Replace(" ", "").Replace("-", "").Contains(filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0,6));
+                    if (ret == true)
+                    {
+                        richTextBox1.Text += "YYYYYYYY\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "NNNNNNNNN\n";
+                    }
+
+
+
+
+                    if (fileinfos[i].size == fileinfos[j].size)
+                    {
+                        /*
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].size)) + "\n";
+
+                        ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+                        i1.UseItemStyleForSubItems = false;
+
+                        ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                        i1.SubItems.Add(fileinfos[i].filepath);
+                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        i1.SubItems.Add(sub_i1a);
+                        i1.SubItems.Add(fileinfos[i].extension);
+                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                        listView1.Items.Add(i1);
+
+                        ListViewItem i2 = new ListViewItem(fileinfos[j].filename);
+                        i2.UseItemStyleForSubItems = false;
+
+                        ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
+                        i2.SubItems.Add(fileinfos[j].filepath);
+                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].size));
+                        i2.SubItems.Add(sub_i2a);
+                        i2.SubItems.Add(fileinfos[j].extension);
+                        sub_i2a.ForeColor = System.Drawing.Color.Blue;
+                        sub_i2a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                        listView1.Items.Add(i2);
+                        */
+
+
+
+
+                        //設置ListView最後一行可見
+                        //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+
+                    }
+
+                }
+
+                /*
+                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                */
+
+
+            }
+
+
+        }
+
     }
 }
 

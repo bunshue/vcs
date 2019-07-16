@@ -80,6 +80,9 @@ namespace imsLink
         bool flag_auto_scan_mode = true;
         bool flag_read_connection_again = true;
         bool flag_comport_ok = false;
+        bool flag_already_write_system_data = false;
+        bool flag_fullscreen = false;
+
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -153,7 +156,9 @@ namespace imsLink
 
             Reset_imsLink_Setting();
 
-            textBox1.Text = trackBar6.Value.ToString();
+            tb_exposure.Text = trackBar6.Value.ToString();
+            tb_expo.Text = trackBar_expo.Value.ToString();
+            tb_gain.Text = trackBar_gain.Value.ToString();
 
             /*
             if (comboBox1.Text.Length == 0)
@@ -561,7 +566,8 @@ namespace imsLink
                     else
                     {
                         //serialPort1.Read(放置的位元陣列 , 從第幾個位置開始存放 , 共需存放多少位元)
-                        serialPort1.Read(receive_buffer, 0, BytesToRead);
+                        //if (BytesToRead <= 2048)
+                            serialPort1.Read(receive_buffer, 0, BytesToRead);
                     }
                     if (Comport_Mode == 0)  //imsLink mode
                     {
@@ -631,26 +637,20 @@ namespace imsLink
                                     }
                                     if (flag_same_serial == 1)
                                     {
-                                        richTextBox1.Text += "驗證完成, 序號相同\n";
-                                        lb_sn3.Text = "驗證完成, 序號相同  ";
-                                        tb_result.Text = "OK";
-                                        tb_result.ForeColor = System.Drawing.Color.MediumSpringGreen;
-                                        tb_result.BackColor = Color.Green;
+                                        richTextBox1.Text += "xxxxxxx 驗證完成, 序號相同\n";
+                                        lb_sn3.Text = "xxxxxxx 驗證完成, 序號相同  ";
                                     }
                                     else
                                     {
-                                        richTextBox1.Text += "驗證失敗, 序號不同\n";
-                                        lb_sn3.Text = "驗證失敗, 序號不同  ";
-                                        tb_result.Text = "FAIL";
-                                        tb_result.ForeColor = Color.Black;
-                                        tb_result.BackColor = Color.Red;
+                                        richTextBox1.Text += "xxxxxx驗證失敗, 序號不同\n";
+                                        lb_sn3.Text = "xxxxx驗證失敗, 序號不同  ";
                                         groupBox10.BackColor = Color.Red;
                                     }
                                     lb_sn2.Text = "";
 
                                     // Stop timing
                                     stopwatch.Stop();
-                                    richTextBox1.Text += "燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+                                    richTextBox1.Text += "xxxxxxxxxxxxx 燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
 
                                     if (stopwatch.ElapsedMilliseconds > 7000)
                                     {
@@ -919,9 +919,8 @@ namespace imsLink
                                 if (flag_same_serial == 1)
                                 {
                                     richTextBox1.Text += "驗證完成, 序號相同\n";
-                                    tb_result.Text = "驗證完成";
-                                    tb_result.ForeColor = System.Drawing.Color.MediumSpringGreen;
-                                    tb_result.BackColor = Color.Green;
+                                    lb_write_camera_serial2.Text += "    驗證完成";
+                                    lb_write_camera_serial2.ForeColor = Color.Black;
                                     g2.Clear(BackColor);
                                     g2.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
 
@@ -929,12 +928,12 @@ namespace imsLink
                                 else
                                 {
                                     richTextBox1.Text += "驗證失敗, 序號不同\n";
-                                    tb_result.Text = "驗證失敗";
-                                    tb_result.ForeColor = Color.Black;
-                                    tb_result.BackColor = Color.Red;
-                                    groupBox10.BackColor = Color.Red;
+                                    lb_write_camera_serial2.Text += "    驗證失敗";
+                                    lb_write_camera_serial2.ForeColor = Color.Red;
+                                    //groupBox10.BackColor = Color.Red;
                                     g2.Clear(BackColor);
-                                    g2.DrawString("驗證失敗", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                                    g2.DrawString("驗證失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
+                                    bt_confirm.Visible = true;
 
                                 }
                                 //lb_sn2.Text = "";
@@ -1029,7 +1028,7 @@ namespace imsLink
                                 flag_wait_receive_data = 0;
                             }
                         }
-                        else
+                        else// if(BytesToRead <= 2048)
                         {
                             /*
                             //for UART debug
@@ -1186,6 +1185,14 @@ namespace imsLink
                         flag_receive_camera_serial = 0;
                         flag_receive_camera_flash_data = 0;
                     }
+                    else if (input[1] == 0xA1)
+                    {
+                        int dd = (int)input[2];
+                        tb_3.Text = dd.ToString("X2");
+                        tb_4.Text = dd.ToString();
+                        tb_3a.Text = dd.ToString("X2");
+                        tb_4a.Text = dd.ToString();
+                    }
                     else if (input[1] == 0xC1)
                     {
                         flag_receive_camera_serial = 1;
@@ -1338,6 +1345,7 @@ namespace imsLink
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(640, 480);
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
             Comport_Scan();
@@ -1363,7 +1371,7 @@ namespace imsLink
             lb_write_mb_model.Text = "";
             lb_write_camera_serial2.Text = "";
             lb_zoom.Text = "1.00 X";
-
+            lb_rtc2.Text = "";
             tb_machine_serial.Text = "0000000-B0000";
             tb_mb_big_serial.Text = "0000000000000";
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
@@ -1413,8 +1421,18 @@ namespace imsLink
             tb_2a.Visible = false;
             tb_3a.Visible = false;
             tb_4a.Visible = false;
-            bt_read.Visible = false;
-            bt_write.Visible = false;
+            bt_read2.Visible = false;
+            bt_write2.Visible = false;
+
+            bt_awb.Visible = false;
+            lb_expo.Visible = false;
+            trackBar_expo.Visible = false;
+            tb_expo.Visible = false;
+            bt_setup_expo.Visible = false;
+            lb_gain.Visible = false;
+            trackBar_gain.Visible = false;
+            tb_gain.Visible = false;
+            bt_setup_gain.Visible = false;
 
             g.Clear(BackColor);
 
@@ -1782,7 +1800,6 @@ namespace imsLink
             DongleAddr_l = 0x20;
             DongleData = (byte)(0x10 | (cnt1 << 2));
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData); 
-
         }
 
         private void button121_Click(object sender, EventArgs e)
@@ -1799,22 +1816,31 @@ namespace imsLink
             DongleAddr_h = 0x3A;
             DongleAddr_l = 0x04;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData); 
-
         }
 
         private void trackBar6_Scroll(object sender, EventArgs e)
         {
-            textBox1.Text = trackBar6.Value.ToString();
+            tb_exposure.Text = trackBar6.Value.ToString();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void trackBar_expo_Scroll(object sender, EventArgs e)
+        {
+            tb_expo.Text = trackBar_expo.Value.ToString();
+        }
+
+        private void trackBar_gain_Scroll(object sender, EventArgs e)
+        {
+            tb_gain.Text = trackBar_gain.Value.ToString();
+        }
+
+        private void tb_exposure_TextChanged(object sender, EventArgs e)
         {
             int exposure = 0;
 
-            if (textBox1.Text.Length == 0)
+            if (tb_exposure.Text.Length == 0)
                 return;
 
-            exposure = int.Parse(textBox1.Text);
+            exposure = int.Parse(tb_exposure.Text);
 
             if ((exposure >= 0) && (exposure <= 255))
             {
@@ -1823,27 +1849,55 @@ namespace imsLink
             else
             {
                 richTextBox1.Text += "數字不合法，abort....\n";
-                textBox1.Text = trackBar6.Value.ToString();
+                tb_exposure.Text = trackBar6.Value.ToString();
                 return;
             }
-
         }
 
-        private void button123_Click(object sender, EventArgs e)
+        private void bt_write_Click(object sender, EventArgs e)
         {
-            if (comboBox5.SelectedIndex == 0)
+            if (flag_comport_ok == false)
             {
-                if (flag_comport_ok == false)
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (tabControl1.SelectedTab == tp_Camera)
+            {
+                if (comboBox5.SelectedIndex == 0)
                 {
-                    MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (tb_1.Text.Length <= 0)
+                        return;
+                    if (tb_2.Text.Length <= 0)
+                        return;
+                    if (tb_3.Text.Length <= 0)
+                        return;
+                    if (tb_4.Text.Length <= 0)
+                        return;
+                    cnt1 = 0;   //???
+                    int addr_h = Convert.ToInt32(tb_1.Text, 16);
+                    int addr_l = Convert.ToInt32(tb_2.Text, 16);
+                    DongleAddr_h = (byte)addr_h;
+                    DongleAddr_l = (byte)addr_l;
+                    DongleData = (byte)int.Parse(tb_4.Text);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
                 }
-                cnt1 = 0;
-                int addr_h = Convert.ToInt32(tb_1.Text, 16);
-                int addr_l = Convert.ToInt32(tb_2.Text, 16);
+            }
+            else if (tabControl1.SelectedTab == tp_USB)
+            {
+                if (tb_1a.Text.Length <= 0)
+                    return;
+                if (tb_2a.Text.Length <= 0)
+                    return;
+                if (tb_3a.Text.Length <= 0)
+                    return;
+                if (tb_4a.Text.Length <= 0)
+                    return;
+                cnt1 = 0;   //???
+                int addr_h = Convert.ToInt32(tb_1a.Text, 16);
+                int addr_l = Convert.ToInt32(tb_2a.Text, 16);
                 DongleAddr_h = (byte)addr_h;
                 DongleAddr_l = (byte)addr_l;
-                DongleData = (byte)int.Parse(tb_4.Text);
+                DongleData = (byte)int.Parse(tb_4a.Text);
                 Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
             }
         }
@@ -1931,7 +1985,19 @@ namespace imsLink
             tb_4.Text = value.ToString();
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
+        private void tb_3a_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_3a.Text.Length == 0)
+            {
+                tb_4a.Text = "";
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_3a.Text, 16);
+            tb_4a.Text = value.ToString();
+        }
+
+        private void tb_4_TextChanged(object sender, EventArgs e)
         {
             if (tb_4.Text.Length == 0)
             {
@@ -1948,11 +2014,62 @@ namespace imsLink
                 tb_3.Text = Convert.ToString(value, 16).ToUpper();
         }
 
-        private void button124_Click(object sender, EventArgs e)
+        private void tb_4a_TextChanged(object sender, EventArgs e)
         {
-            tb_4.Text = "";
-            tb_3.Text = "";
+            if (tb_4a.Text.Length == 0)
+            {
+                tb_3a.Text = "";
+                return;
+            }
+            int value = int.Parse(tb_4a.Text);
+            if ((value < 0) || (value > 255))
+            {
+                tb_4a.Text = "";
+                tb_3a.Text = "";
+            }
+            else
+                tb_3a.Text = Convert.ToString(value, 16).ToUpper();
+        }
 
+        private void bt_read_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (tabControl1.SelectedTab == tp_Camera)
+            {
+                if (comboBox5.SelectedIndex == 0)
+                {
+                    if (tb_1.Text.Length <= 0)
+                        return;
+                    if (tb_2.Text.Length <= 0)
+                        return;
+                    tb_3.Text = "";
+                    tb_4.Text = "";
+
+                    int addr_h = Convert.ToInt32(tb_1.Text, 16);
+                    int addr_l = Convert.ToInt32(tb_2.Text, 16);
+                    DongleAddr_h = (byte)addr_h;
+                    DongleAddr_l = (byte)addr_l;
+                    Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+                }
+            }
+            else if (tabControl1.SelectedTab == tp_USB)
+            {
+                if (tb_1a.Text.Length <= 0)
+                    return;
+                if (tb_2a.Text.Length <= 0)
+                    return;
+                tb_3a.Text = "";
+                tb_4a.Text = "";
+                int addr_h = Convert.ToInt32(tb_1a.Text, 16);
+                int addr_l = Convert.ToInt32(tb_2a.Text, 16);
+                DongleAddr_h = (byte)addr_h;
+                DongleAddr_l = (byte)addr_l;
+                Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+            }
         }
 
         private void button131_Click(object sender, EventArgs e)
@@ -2368,7 +2485,6 @@ namespace imsLink
             button4.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
-        bool flag_expand_usb_window = false;
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             flag_auto_scan_mode = true;
@@ -2404,19 +2520,47 @@ namespace imsLink
             {
                 richTextBox1.Text += "進入USB WebCam\n";
                 timer_webcam.Enabled = true;
-                flag_expand_usb_window = true;
-                richTextBox1.Text += "放大\n";
-                this.Size = new Size(this.Size.Width, this.Size.Height + 100);
             }
             else
             {
                 richTextBox1.Text += "離開USB WebCam\n";
                 timer_webcam.Enabled = false;
-                if (flag_expand_usb_window == true)
+
+                if (flag_fullscreen == true)
                 {
-                    flag_expand_usb_window = false;
-                    richTextBox1.Text += "縮小\n";
-                    this.Size = new Size(this.Size.Width, this.Size.Height - 100);
+                    flag_fullscreen = false;
+                    button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+                    richTextBox1.Visible = true;
+                    this.richTextBox1.Location = new System.Drawing.Point(958, 67);
+                    this.richTextBox1.Size = new System.Drawing.Size(500, 586);
+                    this.FormBorderStyle = FormBorderStyle.Sizable;
+                    this.WindowState = FormWindowState.Normal;
+                    //this.TopMost = false;
+                    tabControl1.Size = new Size(948, 616);
+                    pictureBox1.Location = new Point(170, 50);
+                    pictureBox1.Size = new Size(640, 480);
+                    toolTip1.SetToolTip(button19, "2X");
+
+                    lb_0x1.Visible = false;
+                    lb_0x2.Visible = false;
+                    lb_addr.Visible = false;
+                    lb_data.Visible = false;
+                    tb_1a.Visible = false;
+                    tb_2a.Visible = false;
+                    tb_3a.Visible = false;
+                    tb_4a.Visible = false;
+                    bt_read2.Visible = false;
+                    bt_write2.Visible = false;
+
+                    bt_awb.Visible = false;
+                    lb_expo.Visible = false;
+                    trackBar_expo.Visible = false;
+                    tb_expo.Visible = false;
+                    bt_setup_expo.Visible = false;
+                    lb_gain.Visible = false;
+                    trackBar_gain.Visible = false;
+                    tb_gain.Visible = false;
+                    bt_setup_gain.Visible = false;
                 }
             }
 
@@ -2450,7 +2594,6 @@ namespace imsLink
                     }
                 }
                 */
-
                 this.tb_sn2.Focus();
             }
         }
@@ -2673,12 +2816,12 @@ namespace imsLink
                                 return;
                             }
 
+                            tb_wait_camera_data.Text = "";
                             flag_incorrect_data = false;
                             richTextBox1.Text += "資料正確, 開始燒錄\n";
                             panel9.BackgroundImage = null;
                             g2.Clear(BackColor);
                             button11_Click(sender, e);  //執行燒錄按鍵
-                            tb_wait_camera_data.Text = "";
                             flag_incorrect_data = true;
                             flag_ok_camera_serial1 = false;
                             flag_ok_camera_serial2 = false;
@@ -2787,14 +2930,16 @@ namespace imsLink
 
         private void button12_Click(object sender, EventArgs e)
         {
+            lb_write_camera_serial2.Text = "";
             lb_sn1.Text = "";
-            tb_sn2.Text = "";
+            lb_sn2.Text = "";
+            lb_sn3.Text = "";
             tb_sn1.Text = "";
             tb_sn2.Text = "";
-            tb_result.Text = "----";
-            tb_result.ForeColor = System.Drawing.Color.MediumSpringGreen;
-            tb_result.BackColor = Color.Green;
-            groupBox10.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            //groupBox10.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            lb_write_camera_serial2.Text += "";
+            lb_write_camera_serial2.ForeColor = Color.Black;
+
             bt_confirm.Visible = false;
         }
 
@@ -3022,20 +3167,22 @@ namespace imsLink
                 richTextBox1.Text += "已達最小放大倍率\n";
         }
 
-        int flag_fullscreen = 0;
-        //Size tab_size = tabcontrol
         private void button19_Click(object sender, EventArgs e)
         {
-            if (flag_fullscreen == 0)
+            if (flag_fullscreen == false)
             {
-                flag_fullscreen = 1;
+                flag_fullscreen = true;
                 button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
-                richTextBox1.Visible = false;
+                //richTextBox1.Visible = false;
+
+                this.richTextBox1.Location = new System.Drawing.Point(170, 100);
+                this.richTextBox1.Size = new System.Drawing.Size(400, 570);
+
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
                 //this.TopMost = true;
-                tabControl1.Size = new Size(1600, 1010);
-                pictureBox1.Location = new Point(170, 15);
+                tabControl1.Size = new Size(1600 + 300, 1010);
+                pictureBox1.Location = new Point(170 + 400, 15);
                 //pictureBox1.Size = new Size(1120, 840);
                 pictureBox1.Size = new Size(640 * 2, 480 * 2);
                 toolTip1.SetToolTip(button19, "1X");
@@ -3048,31 +3195,59 @@ namespace imsLink
                 tb_2a.Visible = true;
                 tb_3a.Visible = true;
                 tb_4a.Visible = true;
-                bt_read.Visible = true;
-                bt_write.Visible = true;
+                bt_read2.Visible = true;
+                bt_write2.Visible = true;
 
+                bt_awb.Visible = true;
+                lb_expo.Visible = true;
+                trackBar_expo.Visible = true;
+                tb_expo.Visible = true;
+                bt_setup_expo.Visible = true;
+                lb_gain.Visible = true;
+                trackBar_gain.Visible = true;
+                tb_gain.Visible = true;
+                bt_setup_gain.Visible = true;
 
                 lb_addr.Location = new Point(30, 620);
                 lb_0x1.Location = new Point(5, 650);
                 tb_1a.Location = new Point(30, 650);
                 tb_2a.Location = new Point(100, 650);
 
-                lb_0x2.Location = new Point(5, 750);
-                lb_data.Location = new Point(30, 720);
-                tb_3a.Location = new Point(30, 750);
-                tb_4a.Location = new Point(100, 750);
+                lb_data.Location = new Point(30 + 200, 620);
+                lb_0x2.Location = new Point(5 + 200, 650);
+                tb_3a.Location = new Point(30 + 200, 650);
+                tb_4a.Location = new Point(100 + 200, 650);
+
+                bt_read2.Location = new Point(410, 650);
+                bt_write2.Location = new Point(480, 650);
+
+                bt_awb.Location = new Point(30, 550);
+
+                lb_expo.Location = new Point(30, 720);
+                trackBar_expo.Location = new Point(30, 750);
+                tb_expo.Location = new Point(410, 750);
+                bt_setup_expo.Location = new Point(480, 750);
+
+
+                lb_gain.Location = new Point(30, 720 + 100);
+                trackBar_gain.Location = new Point(30, 750 + 100);
+                tb_gain.Location = new Point(410, 750 + 100);
+                bt_setup_gain.Location = new Point(480, 750 + 100);
 
 
 
-                bt_read.Location = new Point(30, 850);
-                bt_write.Location = new Point(100, 850);
 
+
+
+            
             }
             else
             {
-                flag_fullscreen = 0;
+                flag_fullscreen = false;
                 button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
                 richTextBox1.Visible = true;
+                this.richTextBox1.Location = new System.Drawing.Point(958, 67);
+                this.richTextBox1.Size = new System.Drawing.Size(500, 586);
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.WindowState = FormWindowState.Normal;
                 //this.TopMost = false;
@@ -3089,10 +3264,18 @@ namespace imsLink
                 tb_2a.Visible = false;
                 tb_3a.Visible = false;
                 tb_4a.Visible = false;
-                bt_read.Visible = false;
-                bt_write.Visible = false;
+                bt_read2.Visible = false;
+                bt_write2.Visible = false;
 
-
+                bt_awb.Visible = false;
+                lb_expo.Visible = false;
+                trackBar_expo.Visible = false;
+                tb_expo.Visible = false;
+                bt_setup_expo.Visible = false;
+                lb_gain.Visible = false;
+                trackBar_gain.Visible = false;
+                tb_gain.Visible = false;
+                bt_setup_gain.Visible = false;
             }
         }
 
@@ -3447,8 +3630,14 @@ namespace imsLink
 
         private void button29_Click(object sender, EventArgs e)
         {
+            if (flag_already_write_system_data == true)
+            {
+                MessageBox.Show("已經燒錄過主機資料");
+                return;
+            }
+
             g.Clear(BackColor);
-            g.DrawString("燒錄中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            g.DrawString("燒錄中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(60, 20));
             button29.BackColor = Color.Red;
             lb_machine_serial.Text = "";
             lb_mb_big_serial.Text = "";
@@ -3501,12 +3690,13 @@ namespace imsLink
             Send_IMS_Data(0xF0, 0x12, 0x34, 0x56);   //main board model write
 
             serialPort1.Write(main_board_model_data_send, 0, main_board_model_data_send.Length);
-            delay(800);
+            delay(200);
             lb_write_mb_model.Text = "寫入主機型號完成";
             lb_write_mb_model.ForeColor = Color.Black;
             button29.BackColor = System.Drawing.SystemColors.ControlLight;
             g.Clear(BackColor);
             g.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
+            flag_already_write_system_data = true;
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -4007,7 +4197,7 @@ namespace imsLink
         private void button11_Click(object sender, EventArgs e)
         {
             g2.Clear(BackColor);
-            g2.DrawString("燒錄中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            g2.DrawString("燒錄中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(60, 20));
             button11.BackColor = Color.Red;
             lb_write_camera_serial2.Text = "燒錄資料進行中.....";
             lb_write_camera_serial2.ForeColor = Color.Red;
@@ -4096,24 +4286,37 @@ namespace imsLink
                 lb_write_camera_serial2.Text = "寫入1";
 
                 //delay(1000);
-                Thread.Sleep(3000);
+                Thread.Sleep(300);
 
-                lb_write_camera_serial2.Text = "寫入2相機序號完成";
+                lb_write_camera_serial2.Text = "寫入相機序號完成";
                 lb_write_camera_serial2.ForeColor = Color.Black;
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
                 g2.Clear(BackColor);
                 g2.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                lb_write_camera_serial2.Text += "    燒錄完成";
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
 
                 //驗證資料
-                lb_write_camera_serial2.Text += "\t驗證中";
-                lb_write_camera_serial2.ForeColor = Color.Red;
+                lb_write_camera_serial2.Text += "    驗證中";
+                lb_write_camera_serial2.ForeColor = Color.Blue;
                 richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString() + "\n";
 
+                Font f = new Font("標楷體", 60);
+                int tmp_width = 0;
+                int tmp_height = 0;
+                string str = "驗證中";
+
+                tmp_width = g.MeasureString(str, f).ToSize().Width;
+                tmp_height = g.MeasureString(str, f).ToSize().Height;
+
+                richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+                richTextBox1.Text += "W = " + panel9.Width.ToString() + "  H = " + panel9.Height.ToString() + "\n";
+
                 g2.Clear(BackColor);
-                g2.DrawString("驗證中", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(60, 20));
+                //g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF((panel9.Width - tmp_width) / 2, (panel9.Height - tmp_height) / 2));
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
 
                 flag_verify_serial_data = 1;
@@ -4124,11 +4327,6 @@ namespace imsLink
             {
                 tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
             }
-
-        }
-
-        private void tb_result_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -4538,8 +4736,175 @@ namespace imsLink
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
             this.pictureBox1.Focus();
-        } 
+        }
 
+        private void bt_setup_expo_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_expo.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x01;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x02;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+        }
+
+        private void tb_expo_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+
+            if (tb_expo.Text.Length == 0)
+                return;
+
+            value = int.Parse(tb_expo.Text);
+
+            if ((value >= 0) && (value <= 511))
+            {
+                trackBar_expo.Value = value;
+            }
+            else
+            {
+                richTextBox1.Text += "數字不合法，abort....\n";
+                tb_expo.Text = trackBar_expo.Value.ToString();
+                return;
+            }
+        }
+
+        bool flag_awb_mode = false;
+        private void bt_awb_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (flag_awb_mode == false)
+            {
+                lb_rgb.Text = "";
+                flag_awb_mode = true;
+                timer_webcam.Enabled = false;
+                bt_awb.Text = "To Auto";
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+            }
+            else
+            {
+                flag_awb_mode = false;
+                timer_webcam.Enabled = true;
+                bt_awb.Text = "To Manual";
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+
+            }
+        }
+
+        private void bt_setup_gain_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_gain.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x0A;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x0B;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+        }
+
+        private void tb_gain_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+
+            if (tb_gain.Text.Length == 0)
+                return;
+
+            value = int.Parse(tb_gain.Text);
+
+            if ((value >= 0) && (value <= 511))
+            {
+                trackBar_gain.Value = value;
+            }
+            else
+            {
+                richTextBox1.Text += "數字不合法，abort....\n";
+                tb_gain.Text = trackBar_gain.Value.ToString();
+                return;
+            }
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xFF, 0xCC, 0xBB, 0xAA);
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            System.DateTime dt = System.DateTime.Now;
+            /*
+            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
+            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
+            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
+            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
+            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
+            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
+            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            */
+            //richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+            Send_IMS_Data(0xB0, 0x12, 0x34, 0x56);      //RTC write
+
+            rtc_data_send[0] = (byte)(dt.Year - 1900);
+            rtc_data_send[1] = (byte)(dt.Month - 3);
+            rtc_data_send[2] = (byte)dt.Day;
+            rtc_data_send[3] = (byte)dt.DayOfWeek;
+            rtc_data_send[4] = (byte)dt.Hour;
+            rtc_data_send[5] = (byte)dt.Minute;
+            rtc_data_send[6] = (byte)dt.Second;
+
+            if (rtc_data_send[5] < 59)
+            {
+                rtc_data_send[6] += 2;
+                if (rtc_data_send[6] > 59)
+                {
+                    rtc_data_send[6] -= 60;
+                    rtc_data_send[5]++;
+                }
+            }
+            serialPort1.Write(rtc_data_send, 0, 7);
+            delay(300);
+
+            lb_rtc2.Text = "已設定錯誤時間";
+        } 
     }
 }
 
