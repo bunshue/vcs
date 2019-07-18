@@ -83,6 +83,16 @@ namespace imsLink
         bool flag_already_write_system_data = false;
         bool flag_fullscreen = false;
 
+        byte data_expo_h = 0;
+        byte data_expo_l = 0;
+        byte data_gain_h = 0;
+        byte data_gain_l = 0;
+        byte data_R_h = 0;
+        byte data_R_l = 0;
+        byte data_G_h = 0;
+        byte data_G_l = 0;
+        byte data_B_h = 0;
+        byte data_B_l = 0;
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -146,7 +156,7 @@ namespace imsLink
         {
             InitializeComponent();
 
-            Form1.CheckForIllegalCrossThreadCalls = false;
+            Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
             g = panel6.CreateGraphics();
             g.Clear(BackColor);
@@ -159,6 +169,9 @@ namespace imsLink
             tb_exposure.Text = trackBar6.Value.ToString();
             tb_expo.Text = trackBar_expo.Value.ToString();
             tb_gain.Text = trackBar_gain.Value.ToString();
+            tb_R.Text = trackBar_R.Value.ToString();
+            tb_G.Text = trackBar_G.Value.ToString();
+            tb_B.Text = trackBar_B.Value.ToString();
 
             /*
             if (comboBox1.Text.Length == 0)
@@ -1187,6 +1200,7 @@ namespace imsLink
                     }
                     else if (input[1] == 0xA1)
                     {
+                        //here
                         int dd = (int)input[2];
                         tb_3.Text = dd.ToString("X2");
                         tb_4.Text = dd.ToString();
@@ -1415,6 +1429,8 @@ namespace imsLink
 
             lb_0x1.Visible = false;
             lb_0x2.Visible = false;
+            lb_0x3.Visible = false;
+            lb_0x4.Visible = false;
             lb_addr.Visible = false;
             lb_data.Visible = false;
             tb_1a.Visible = false;
@@ -1425,14 +1441,45 @@ namespace imsLink
             bt_write2.Visible = false;
 
             bt_awb.Visible = false;
+            lb_range_1.Visible = false;
+            lb_range_2.Visible = false;
             lb_expo.Visible = false;
             trackBar_expo.Visible = false;
             tb_expo.Visible = false;
+            tb_expo2.Visible = false;
             bt_setup_expo.Visible = false;
             lb_gain.Visible = false;
             trackBar_gain.Visible = false;
             tb_gain.Visible = false;
+            tb_gain2.Visible = false;
             bt_setup_gain.Visible = false;
+
+            //R
+            lb_R.Visible = false;
+            lb_0xR.Visible = false;
+            lb_range_3.Visible = false;
+            trackBar_R.Visible = false;
+            tb_R.Visible = false;
+            tb_R2.Visible = false;
+            bt_setup_R.Visible = false;
+
+            //G
+            lb_G.Visible = false;
+            lb_0xG.Visible = false;
+            lb_range_4.Visible = false;
+            trackBar_G.Visible = false;
+            tb_G.Visible = false;
+            tb_G2.Visible = false;
+            bt_setup_G.Visible = false;
+
+            //B
+            lb_BB.Visible = false;
+            lb_0xB.Visible = false;
+            lb_range_5.Visible = false;
+            trackBar_B.Visible = false;
+            tb_B.Visible = false;
+            tb_B2.Visible = false;
+            bt_setup_B.Visible = false;
 
             g.Clear(BackColor);
 
@@ -1443,10 +1490,13 @@ namespace imsLink
             // C# 設定視窗載入位置 
             this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-            //C# 軟體啟動、版權宣告視窗 
-            Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
-            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-            frm.ShowDialog();   //顯示Form2視窗
+            if (flag_release_mode == true)
+            {
+                //C# 軟體啟動、版權宣告視窗 
+                Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
+                frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                frm.ShowDialog();   //顯示Form2視窗
+            }
 
             this.BackColor = Color.Yellow;
 
@@ -2543,6 +2593,8 @@ namespace imsLink
 
                     lb_0x1.Visible = false;
                     lb_0x2.Visible = false;
+                    lb_0x3.Visible = false;
+                    lb_0x4.Visible = false;
                     lb_addr.Visible = false;
                     lb_data.Visible = false;
                     tb_1a.Visible = false;
@@ -2553,14 +2605,45 @@ namespace imsLink
                     bt_write2.Visible = false;
 
                     bt_awb.Visible = false;
+                    lb_range_1.Visible = false;
+                    lb_range_2.Visible = false;
                     lb_expo.Visible = false;
                     trackBar_expo.Visible = false;
                     tb_expo.Visible = false;
+                    tb_expo2.Visible = false;
                     bt_setup_expo.Visible = false;
                     lb_gain.Visible = false;
                     trackBar_gain.Visible = false;
                     tb_gain.Visible = false;
+                    tb_gain2.Visible = false;
                     bt_setup_gain.Visible = false;
+
+                    //R
+                    lb_R.Visible = false;
+                    lb_0xR.Visible = false;
+                    lb_range_3.Visible = false;
+                    trackBar_R.Visible = false;
+                    tb_R.Visible = false;
+                    tb_R2.Visible = false;
+                    bt_setup_R.Visible = false;
+
+                    //G
+                    lb_G.Visible = false;
+                    lb_0xG.Visible = false;
+                    lb_range_4.Visible = false;
+                    trackBar_G.Visible = false;
+                    tb_G.Visible = false;
+                    tb_G2.Visible = false;
+                    bt_setup_G.Visible = false;
+
+                    //B
+                    lb_BB.Visible = false;
+                    lb_0xB.Visible = false;
+                    lb_range_5.Visible = false;
+                    trackBar_B.Visible = false;
+                    tb_B.Visible = false;
+                    tb_B2.Visible = false;
+                    bt_setup_B.Visible = false;
                 }
             }
 
@@ -3173,73 +3256,154 @@ namespace imsLink
             {
                 flag_fullscreen = true;
                 button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
-                //richTextBox1.Visible = false;
-
-                this.richTextBox1.Location = new System.Drawing.Point(170, 100);
-                this.richTextBox1.Size = new System.Drawing.Size(400, 570);
-
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
                 //this.TopMost = true;
                 tabControl1.Size = new Size(1600 + 300, 1010);
-                pictureBox1.Location = new Point(170 + 400, 15);
+                pictureBox1.Location = new Point(170 + 400 + 30, 15);
                 //pictureBox1.Size = new Size(1120, 840);
                 pictureBox1.Size = new Size(640 * 2, 480 * 2);
                 toolTip1.SetToolTip(button19, "1X");
 
-                lb_0x1.Visible = true;
-                lb_0x2.Visible = true;
-                lb_addr.Visible = true;
-                lb_data.Visible = true;
-                tb_1a.Visible = true;
-                tb_2a.Visible = true;
-                tb_3a.Visible = true;
-                tb_4a.Visible = true;
-                bt_read2.Visible = true;
-                bt_write2.Visible = true;
+                if (flag_awb_debug == true)
+                {
+                    this.richTextBox1.Location = new System.Drawing.Point(170, 90);
+                    this.richTextBox1.Size = new System.Drawing.Size(400 + 30, 470);
+                    lb_0x1.Visible = true;
+                    lb_0x2.Visible = true;
+                    lb_0x3.Visible = true;
+                    lb_0x4.Visible = true;
+                    lb_addr.Visible = true;
+                    lb_data.Visible = true;
+                    tb_1a.Visible = true;
+                    tb_2a.Visible = true;
+                    tb_3a.Visible = true;
+                    tb_4a.Visible = true;
+                    bt_read2.Visible = true;
+                    bt_write2.Visible = true;
 
-                bt_awb.Visible = true;
-                lb_expo.Visible = true;
-                trackBar_expo.Visible = true;
-                tb_expo.Visible = true;
-                bt_setup_expo.Visible = true;
-                lb_gain.Visible = true;
-                trackBar_gain.Visible = true;
-                tb_gain.Visible = true;
-                bt_setup_gain.Visible = true;
+                    bt_awb.Visible = true;
+                    lb_range_1.Visible = true;
+                    lb_range_2.Visible = true;
+                    lb_expo.Visible = true;
+                    trackBar_expo.Visible = true;
+                    tb_expo.Visible = true;
+                    tb_expo2.Visible = true;
+                    bt_setup_expo.Visible = true;
+                    lb_gain.Visible = true;
+                    trackBar_gain.Visible = true;
+                    tb_gain.Visible = true;
+                    tb_gain2.Visible = true;
+                    bt_setup_gain.Visible = true;
 
-                lb_addr.Location = new Point(30, 620);
-                lb_0x1.Location = new Point(5, 650);
-                tb_1a.Location = new Point(30, 650);
-                tb_2a.Location = new Point(100, 650);
+                    //R
+                    lb_R.Visible = true;
+                    lb_0xR.Visible = true;
+                    lb_range_3.Visible = true;
+                    trackBar_R.Visible = true;
+                    tb_R.Visible = true;
+                    tb_R2.Visible = true;
+                    bt_setup_R.Visible = true;
 
-                lb_data.Location = new Point(30 + 200, 620);
-                lb_0x2.Location = new Point(5 + 200, 650);
-                tb_3a.Location = new Point(30 + 200, 650);
-                tb_4a.Location = new Point(100 + 200, 650);
+                    //G
+                    lb_G.Visible = true;
+                    lb_0xG.Visible = true;
+                    lb_range_4.Visible = true;
+                    trackBar_G.Visible = true;
+                    tb_G.Visible = true;
+                    tb_G2.Visible = true;
+                    bt_setup_G.Visible = true;
 
-                bt_read2.Location = new Point(410, 650);
-                bt_write2.Location = new Point(480, 650);
+                    //B
+                    lb_BB.Visible = true;
+                    lb_0xB.Visible = true;
+                    lb_range_5.Visible = true;
+                    trackBar_B.Visible = true;
+                    tb_B.Visible = true;
+                    tb_B2.Visible = true;
+                    bt_setup_B.Visible = true;
 
-                bt_awb.Location = new Point(30, 550);
+                    bt_awb.Location = new Point(410 + 45, 650 - 100 - 50);
 
-                lb_expo.Location = new Point(30, 720);
-                trackBar_expo.Location = new Point(30, 750);
-                tb_expo.Location = new Point(410, 750);
-                bt_setup_expo.Location = new Point(480, 750);
+                    lb_addr.Location = new Point(30, 620 - 100);
+                    lb_0x1.Location = new Point(5, 650 + 3 - 100);
+                    tb_1a.Location = new Point(30, 650 - 100);
+                    tb_2a.Location = new Point(100, 650 - 100);
 
+                    lb_data.Location = new Point(30 + 200, 620 - 100);
+                    lb_0x2.Location = new Point(5 + 200, 650 + 3 - 100);
+                    tb_3a.Location = new Point(30 + 200, 650 - 100);
+                    tb_4a.Location = new Point(100 + 200, 650 - 100);
 
-                lb_gain.Location = new Point(30, 720 + 100);
-                trackBar_gain.Location = new Point(30, 750 + 100);
-                tb_gain.Location = new Point(410, 750 + 100);
-                bt_setup_gain.Location = new Point(480, 750 + 100);
-
-
-
-
+                    bt_read2.Location = new Point(410 + 45, 650 - 100);
+                    bt_write2.Location = new Point(480 + 45, 650 - 100);
 
 
-            
+                    lb_awb_result1.Location = new Point(30 / 2, 720 - 120);
+                    lb_awb_result1.Text = "aaaaaaaaaaaaaaaa";
+                    lb_awb_result2.Location = new Point(30 / 2, 720 - 120 + 30);
+                    lb_awb_result2.Text = "bbbbbbbbbbbbbbbb";
+
+                    bt_get_setup.Location = new Point(30 / 2 + 300, 720 - 120 + 15);
+
+
+                    //EXPO
+                    lb_expo.Location = new Point(30 / 2, 720 - 120 + 60);
+                    lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 60);
+                    lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 60);
+                    lb_range_1.Text = "0~1FF           0~511";
+                    trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 60);
+                    tb_expo.Location = new Point(410 + 45, 750 - 130 + 60);
+                    tb_expo2.Location = new Point(410 + 45 - 80, 750 - 130 + 60);
+                    bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 60);
+
+                    //GAIN
+                    lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50);
+                    lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50);
+                    lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50);
+                    lb_range_2.Text = "0~1FF           0~511";
+                    trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50);
+                    tb_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50);
+                    tb_gain2.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50);
+                    bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50);
+
+                    //R
+                    lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30);
+                    lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30);
+                    lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50);
+                    lb_range_3.Text = "0~FFF          0~4095";
+                    trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30);
+                    tb_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30);
+                    tb_R2.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30);
+                    bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30);
+
+                    //G
+                    lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20);
+                    lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20);
+                    lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40+30 + 20);
+                    lb_range_4.Text = "0~FFF          0~4095";
+                    trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    tb_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    tb_G2.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+
+                    //B
+                    lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10);
+                    lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10);
+                    lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20+30 + 10);
+                    lb_range_5.Text = "0~FFF          0~4095";
+                    trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10);
+                    tb_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
+                    tb_B2.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10);
+                    bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
+
+
+
+                }
+                else
+                {
+                    richTextBox1.Visible = false;
+                }
             }
             else
             {
@@ -3256,26 +3420,63 @@ namespace imsLink
                 pictureBox1.Size = new Size(640, 480);
                 toolTip1.SetToolTip(button19, "2X");
 
-                lb_0x1.Visible = false;
-                lb_0x2.Visible = false;
-                lb_addr.Visible = false;
-                lb_data.Visible = false;
-                tb_1a.Visible = false;
-                tb_2a.Visible = false;
-                tb_3a.Visible = false;
-                tb_4a.Visible = false;
-                bt_read2.Visible = false;
-                bt_write2.Visible = false;
+                if (flag_awb_debug == true)
+                {
+                    lb_0x1.Visible = false;
+                    lb_0x2.Visible = false;
+                    lb_0x3.Visible = false;
+                    lb_0x4.Visible = false;
+                    lb_addr.Visible = false;
+                    lb_data.Visible = false;
+                    tb_1a.Visible = false;
+                    tb_2a.Visible = false;
+                    tb_3a.Visible = false;
+                    tb_4a.Visible = false;
+                    bt_read2.Visible = false;
+                    bt_write2.Visible = false;
 
-                bt_awb.Visible = false;
-                lb_expo.Visible = false;
-                trackBar_expo.Visible = false;
-                tb_expo.Visible = false;
-                bt_setup_expo.Visible = false;
-                lb_gain.Visible = false;
-                trackBar_gain.Visible = false;
-                tb_gain.Visible = false;
-                bt_setup_gain.Visible = false;
+                    bt_awb.Visible = false;
+                    lb_range_1.Visible = false;
+                    lb_range_2.Visible = false;
+                    lb_expo.Visible = false;
+                    trackBar_expo.Visible = false;
+                    tb_expo.Visible = false;
+                    tb_expo2.Visible = false;
+                    bt_setup_expo.Visible = false;
+                    lb_gain.Visible = false;
+                    trackBar_gain.Visible = false;
+                    tb_gain.Visible = false;
+                    tb_gain2.Visible = false;
+                    bt_setup_gain.Visible = false;
+
+                    //R
+                    lb_R.Visible = false;
+                    lb_0xR.Visible = false;
+                    lb_range_3.Visible = false;
+                    trackBar_R.Visible = false;
+                    tb_R.Visible = false;
+                    tb_R2.Visible = false;
+                    bt_setup_R.Visible = false;
+
+                    //G
+                    lb_G.Visible = false;
+                    lb_0xG.Visible = false;
+                    lb_range_4.Visible = false;
+                    trackBar_G.Visible = false;
+                    tb_G.Visible = false;
+                    tb_G2.Visible = false;
+                    bt_setup_G.Visible = false;
+
+                    //B
+                    lb_BB.Visible = false;
+                    lb_0xB.Visible = false;
+                    lb_range_5.Visible = false;
+                    trackBar_B.Visible = false;
+                    tb_B.Visible = false;
+                    tb_B2.Visible = false;
+                    bt_setup_B.Visible = false;
+
+                }
             }
         }
 
@@ -4332,6 +4533,9 @@ namespace imsLink
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (flag_awb_debug == false)
+                return;
+
             int x_st_old = 0;
             int y_st_old = 0;
             int ww = awb_range;
@@ -4735,6 +4939,8 @@ namespace imsLink
 
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
+            if (flag_awb_debug == false)
+                return;
             this.pictureBox1.Focus();
         }
 
@@ -4762,20 +4968,24 @@ namespace imsLink
         private void tb_expo_TextChanged(object sender, EventArgs e)
         {
             int value = 0;
-
             if (tb_expo.Text.Length == 0)
+            {
+                tb_expo2.Text = "";
                 return;
+            }
 
             value = int.Parse(tb_expo.Text);
 
             if ((value >= 0) && (value <= 511))
             {
                 trackBar_expo.Value = value;
+                tb_expo2.Text = Convert.ToString(value, 16).ToUpper();
             }
             else
             {
                 richTextBox1.Text += "數字不合法，abort....\n";
                 tb_expo.Text = trackBar_expo.Value.ToString();
+                tb_expo2.Text = "";
                 return;
             }
         }
@@ -4831,23 +5041,26 @@ namespace imsLink
         private void tb_gain_TextChanged(object sender, EventArgs e)
         {
             int value = 0;
-
             if (tb_gain.Text.Length == 0)
+            {
+                tb_gain2.Text = "";
                 return;
+            }
 
             value = int.Parse(tb_gain.Text);
 
             if ((value >= 0) && (value <= 511))
             {
                 trackBar_gain.Value = value;
+                tb_gain2.Text = Convert.ToString(value, 16).ToUpper();
             }
             else
             {
                 richTextBox1.Text += "數字不合法，abort....\n";
                 tb_gain.Text = trackBar_gain.Value.ToString();
+                tb_gain2.Text = "";
                 return;
             }
-
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -4904,7 +5117,489 @@ namespace imsLink
             delay(300);
 
             lb_rtc2.Text = "已設定錯誤時間";
-        } 
+        }
+
+        private void tb_expo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_expo_Click(sender, e);
+            }
+        }
+
+        private void tb_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_gain_Click(sender, e);
+            }
+        }
+
+        private void tb_expo2_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_expo2.Text.Length == 0)
+            {
+                tb_expo.Text = "";
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_expo2.Text, 16);
+            tb_expo.Text = value.ToString();
+        }
+
+        private void tb_gain2_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_gain2.Text.Length == 0)
+            {
+                tb_gain.Text = "";
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_gain2.Text, 16);
+            tb_gain.Text = value.ToString();
+        }
+
+        private void tb_expo2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_expo_Click(sender, e);
+            }
+
+        }
+
+        private void tb_gain2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_gain_Click(sender, e);
+            }
+
+        }
+
+        private void trackBar_R_Scroll(object sender, EventArgs e)
+        {
+            tb_R.Text = trackBar_R.Value.ToString();
+        }
+
+        private void trackBar_G_Scroll(object sender, EventArgs e)
+        {
+            tb_G.Text = trackBar_G.Value.ToString();
+        }
+
+        private void trackBar_B_Scroll(object sender, EventArgs e)
+        {
+            tb_B.Text = trackBar_B.Value.ToString();
+        }
+
+        private void tb_R2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_R_Click(sender, e);
+            }
+
+        }
+
+        private void tb_R2_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_R2.Text.Length == 0)
+            {
+                tb_R.Text = "";
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_R2.Text, 16);
+            tb_R.Text = value.ToString();
+
+        }
+
+        private void tb_R_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_R_Click(sender, e);
+            }
+        }
+
+        private void tb_R_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (tb_R.Text.Length == 0)
+            {
+                tb_R2.Text = "";
+                return;
+            }
+
+            value = int.Parse(tb_R.Text);
+
+            if ((value >= 0) && (value <= 4095))
+            {
+                trackBar_R.Value = value;
+                tb_R2.Text = Convert.ToString(value, 16).ToUpper();
+            }
+            else
+            {
+                richTextBox1.Text += "數字不合法，abort....\n";
+                tb_R.Text = trackBar_R.Value.ToString();
+                tb_R2.Text = "";
+                return;
+            }
+
+        }
+
+        private void bt_setup_R_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_R.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1A;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1B;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+        }
+
+        private void tb_G2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_G_Click(sender, e);
+            }
+
+        }
+
+        private void tb_G2_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_G2.Text.Length == 0)
+            {
+                tb_G.Text = "";
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_G2.Text, 16);
+            tb_G.Text = value.ToString();
+
+        }
+
+        private void tb_G_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_G_Click(sender, e);
+            }
+        }
+
+        private void tb_G_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (tb_G.Text.Length == 0)
+            {
+                tb_G2.Text = "";
+                return;
+            }
+
+            value = int.Parse(tb_G.Text);
+
+            if ((value >= 0) && (value <= 4095))
+            {
+                trackBar_G.Value = value;
+                tb_G2.Text = Convert.ToString(value, 16).ToUpper();
+            }
+            else
+            {
+                richTextBox1.Text += "數字不合法，abort....\n";
+                tb_G.Text = trackBar_G.Value.ToString();
+                tb_G2.Text = "";
+                return;
+            }
+
+        }
+
+        private void bt_setup_G_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_G.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1C;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1D;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+        }
+
+        private void tb_B2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_B_Click(sender, e);
+            }
+
+        }
+
+        private void tb_B2_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_B2.Text.Length == 0)
+            {
+                tb_B.Text = "";
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_B2.Text, 16);
+            tb_B.Text = value.ToString();
+
+        }
+
+        private void tb_B_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)
+            {
+                bt_setup_B_Click(sender, e);
+            }
+        }
+
+        private void tb_B_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+            if (tb_B.Text.Length == 0)
+            {
+                tb_B2.Text = "";
+                return;
+            }
+
+            value = int.Parse(tb_B.Text);
+
+            if ((value >= 0) && (value <= 4095))
+            {
+                trackBar_B.Value = value;
+                tb_B2.Text = Convert.ToString(value, 16).ToUpper();
+            }
+            else
+            {
+                richTextBox1.Text += "數字不合法，abort....\n";
+                tb_B.Text = trackBar_B.Value.ToString();
+                tb_B2.Text = "";
+                return;
+            }
+
+        }
+
+        private void bt_setup_B_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_B.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1E;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1F;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+        }
     }
 }
 

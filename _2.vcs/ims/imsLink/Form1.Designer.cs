@@ -160,12 +160,33 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
-            this.lb_gain = new System.Windows.Forms.Label();
+            this.tb_B = new System.Windows.Forms.TextBox();
+            this.tb_B2 = new System.Windows.Forms.TextBox();
+            this.tb_G = new System.Windows.Forms.TextBox();
+            this.tb_G2 = new System.Windows.Forms.TextBox();
+            this.trackBar_B = new System.Windows.Forms.TrackBar();
+            this.trackBar_G = new System.Windows.Forms.TrackBar();
+            this.lb_0xB = new System.Windows.Forms.Label();
+            this.lb_0xG = new System.Windows.Forms.Label();
+            this.lb_BB = new System.Windows.Forms.Label();
+            this.bt_setup_B = new System.Windows.Forms.Button();
+            this.lb_G = new System.Windows.Forms.Label();
+            this.bt_setup_G = new System.Windows.Forms.Button();
+            this.tb_R = new System.Windows.Forms.TextBox();
+            this.tb_R2 = new System.Windows.Forms.TextBox();
+            this.trackBar_R = new System.Windows.Forms.TrackBar();
+            this.lb_0xR = new System.Windows.Forms.Label();
+            this.lb_R = new System.Windows.Forms.Label();
+            this.bt_setup_R = new System.Windows.Forms.Button();
             this.tb_gain = new System.Windows.Forms.TextBox();
+            this.tb_expo = new System.Windows.Forms.TextBox();
+            this.tb_gain2 = new System.Windows.Forms.TextBox();
+            this.tb_expo2 = new System.Windows.Forms.TextBox();
+            this.bt_LED = new System.Windows.Forms.Button();
+            this.lb_gain = new System.Windows.Forms.Label();
             this.bt_setup_gain = new System.Windows.Forms.Button();
             this.trackBar_gain = new System.Windows.Forms.TrackBar();
             this.lb_expo = new System.Windows.Forms.Label();
-            this.tb_expo = new System.Windows.Forms.TextBox();
             this.bt_setup_expo = new System.Windows.Forms.Button();
             this.trackBar_expo = new System.Windows.Forms.TrackBar();
             this.bt_awb = new System.Windows.Forms.Button();
@@ -193,8 +214,11 @@
             this.button16 = new System.Windows.Forms.Button();
             this.lb_0x2 = new System.Windows.Forms.Label();
             this.lb_0x1 = new System.Windows.Forms.Label();
+            this.lb_0x4 = new System.Windows.Forms.Label();
+            this.lb_0x3 = new System.Windows.Forms.Label();
             this.tp_Test = new System.Windows.Forms.TabPage();
-            this.button41 = new System.Windows.Forms.Button();
+            this.lb_rtc2 = new System.Windows.Forms.Label();
+            this.button42 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -259,8 +283,14 @@
             this.timer_rtc = new System.Windows.Forms.Timer(this.components);
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
-            this.button42 = new System.Windows.Forms.Button();
-            this.lb_rtc2 = new System.Windows.Forms.Label();
+            this.lb_range_1 = new System.Windows.Forms.Label();
+            this.lb_range_2 = new System.Windows.Forms.Label();
+            this.lb_range_3 = new System.Windows.Forms.Label();
+            this.lb_range_4 = new System.Windows.Forms.Label();
+            this.lb_range_5 = new System.Windows.Forms.Label();
+            this.lb_awb_result1 = new System.Windows.Forms.Label();
+            this.lb_awb_result2 = new System.Windows.Forms.Label();
+            this.bt_get_setup = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -278,6 +308,9 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_G)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_expo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -1688,13 +1721,33 @@
             // 
             // tp_USB
             // 
-            this.tp_USB.Controls.Add(this.button41);
-            this.tp_USB.Controls.Add(this.lb_gain);
+            this.tp_USB.Controls.Add(this.bt_get_setup);
+            this.tp_USB.Controls.Add(this.lb_awb_result2);
+            this.tp_USB.Controls.Add(this.lb_awb_result1);
+            this.tp_USB.Controls.Add(this.tb_B2);
+            this.tp_USB.Controls.Add(this.tb_G2);
+            this.tp_USB.Controls.Add(this.tb_R2);
+            this.tp_USB.Controls.Add(this.tb_B);
+            this.tp_USB.Controls.Add(this.tb_G);
+            this.tp_USB.Controls.Add(this.trackBar_B);
+            this.tp_USB.Controls.Add(this.trackBar_G);
+            this.tp_USB.Controls.Add(this.lb_BB);
+            this.tp_USB.Controls.Add(this.bt_setup_B);
+            this.tp_USB.Controls.Add(this.lb_G);
+            this.tp_USB.Controls.Add(this.bt_setup_G);
+            this.tp_USB.Controls.Add(this.tb_R);
+            this.tp_USB.Controls.Add(this.trackBar_R);
+            this.tp_USB.Controls.Add(this.lb_R);
+            this.tp_USB.Controls.Add(this.bt_setup_R);
             this.tp_USB.Controls.Add(this.tb_gain);
+            this.tp_USB.Controls.Add(this.tb_expo);
+            this.tp_USB.Controls.Add(this.tb_gain2);
+            this.tp_USB.Controls.Add(this.tb_expo2);
+            this.tp_USB.Controls.Add(this.bt_LED);
+            this.tp_USB.Controls.Add(this.lb_gain);
             this.tp_USB.Controls.Add(this.bt_setup_gain);
             this.tp_USB.Controls.Add(this.trackBar_gain);
             this.tp_USB.Controls.Add(this.lb_expo);
-            this.tp_USB.Controls.Add(this.tb_expo);
             this.tp_USB.Controls.Add(this.bt_setup_expo);
             this.tp_USB.Controls.Add(this.trackBar_expo);
             this.tp_USB.Controls.Add(this.bt_awb);
@@ -1722,6 +1775,16 @@
             this.tp_USB.Controls.Add(this.button16);
             this.tp_USB.Controls.Add(this.lb_0x2);
             this.tp_USB.Controls.Add(this.lb_0x1);
+            this.tp_USB.Controls.Add(this.lb_range_5);
+            this.tp_USB.Controls.Add(this.lb_range_4);
+            this.tp_USB.Controls.Add(this.lb_range_3);
+            this.tp_USB.Controls.Add(this.lb_range_2);
+            this.tp_USB.Controls.Add(this.lb_range_1);
+            this.tp_USB.Controls.Add(this.lb_0xB);
+            this.tp_USB.Controls.Add(this.lb_0xG);
+            this.tp_USB.Controls.Add(this.lb_0xR);
+            this.tp_USB.Controls.Add(this.lb_0x4);
+            this.tp_USB.Controls.Add(this.lb_0x3);
             this.tp_USB.Location = new System.Drawing.Point(4, 26);
             this.tp_USB.Name = "tp_USB";
             this.tp_USB.Size = new System.Drawing.Size(940, 586);
@@ -1729,31 +1792,282 @@
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
-            // lb_gain
+            // tb_B
             // 
-            this.lb_gain.AutoSize = true;
-            this.lb_gain.Location = new System.Drawing.Point(228, 412);
-            this.lb_gain.Name = "lb_gain";
-            this.lb_gain.Size = new System.Drawing.Size(46, 16);
-            this.lb_gain.TabIndex = 67;
-            this.lb_gain.Text = "GAIN";
+            this.tb_B.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_B.Location = new System.Drawing.Point(710, 487);
+            this.tb_B.Name = "tb_B";
+            this.tb_B.Size = new System.Drawing.Size(58, 32);
+            this.tb_B.TabIndex = 85;
+            this.tb_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_B.TextChanged += new System.EventHandler(this.tb_B_TextChanged);
+            this.tb_B.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_B_KeyPress);
+            // 
+            // tb_B2
+            // 
+            this.tb_B2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_B2.Location = new System.Drawing.Point(612, 488);
+            this.tb_B2.Name = "tb_B2";
+            this.tb_B2.Size = new System.Drawing.Size(58, 32);
+            this.tb_B2.TabIndex = 87;
+            this.tb_B2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_B2.TextChanged += new System.EventHandler(this.tb_B2_TextChanged);
+            this.tb_B2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_B2_KeyPress);
+            // 
+            // tb_G
+            // 
+            this.tb_G.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_G.Location = new System.Drawing.Point(709, 423);
+            this.tb_G.Name = "tb_G";
+            this.tb_G.Size = new System.Drawing.Size(58, 32);
+            this.tb_G.TabIndex = 80;
+            this.tb_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_G.TextChanged += new System.EventHandler(this.tb_G_TextChanged);
+            this.tb_G.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_G_KeyPress);
+            // 
+            // tb_G2
+            // 
+            this.tb_G2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_G2.Location = new System.Drawing.Point(611, 424);
+            this.tb_G2.Name = "tb_G2";
+            this.tb_G2.Size = new System.Drawing.Size(58, 32);
+            this.tb_G2.TabIndex = 82;
+            this.tb_G2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_G2.TextChanged += new System.EventHandler(this.tb_G2_TextChanged);
+            this.tb_G2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_G2_KeyPress);
+            // 
+            // trackBar_B
+            // 
+            this.trackBar_B.LargeChange = 1;
+            this.trackBar_B.Location = new System.Drawing.Point(229, 488);
+            this.trackBar_B.Maximum = 4095;
+            this.trackBar_B.Name = "trackBar_B";
+            this.trackBar_B.Size = new System.Drawing.Size(324, 45);
+            this.trackBar_B.TabIndex = 83;
+            this.trackBar_B.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar_B.Value = 1024;
+            this.trackBar_B.Scroll += new System.EventHandler(this.trackBar_B_Scroll);
+            // 
+            // trackBar_G
+            // 
+            this.trackBar_G.LargeChange = 1;
+            this.trackBar_G.Location = new System.Drawing.Point(228, 424);
+            this.trackBar_G.Maximum = 4095;
+            this.trackBar_G.Name = "trackBar_G";
+            this.trackBar_G.Size = new System.Drawing.Size(324, 45);
+            this.trackBar_G.TabIndex = 78;
+            this.trackBar_G.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar_G.Value = 1024;
+            this.trackBar_G.Scroll += new System.EventHandler(this.trackBar_G_Scroll);
+            // 
+            // lb_0xB
+            // 
+            this.lb_0xB.AutoSize = true;
+            this.lb_0xB.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0xB.Location = new System.Drawing.Point(778, 153);
+            this.lb_0xB.Name = "lb_0xB";
+            this.lb_0xB.Size = new System.Drawing.Size(104, 23);
+            this.lb_0xB.TabIndex = 89;
+            this.lb_0xB.Text = "0x                 =";
+            // 
+            // lb_0xG
+            // 
+            this.lb_0xG.AutoSize = true;
+            this.lb_0xG.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0xG.Location = new System.Drawing.Point(778, 113);
+            this.lb_0xG.Name = "lb_0xG";
+            this.lb_0xG.Size = new System.Drawing.Size(104, 23);
+            this.lb_0xG.TabIndex = 88;
+            this.lb_0xG.Text = "0x                 =";
+            // 
+            // lb_BB
+            // 
+            this.lb_BB.AutoSize = true;
+            this.lb_BB.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_BB.ForeColor = System.Drawing.Color.Blue;
+            this.lb_BB.Location = new System.Drawing.Point(227, 469);
+            this.lb_BB.Name = "lb_BB";
+            this.lb_BB.Size = new System.Drawing.Size(19, 16);
+            this.lb_BB.TabIndex = 86;
+            this.lb_BB.Text = "B";
+            // 
+            // bt_setup_B
+            // 
+            this.bt_setup_B.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_setup_B.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup_B.ForeColor = System.Drawing.Color.Blue;
+            this.bt_setup_B.Location = new System.Drawing.Point(803, 487);
+            this.bt_setup_B.Name = "bt_setup_B";
+            this.bt_setup_B.Size = new System.Drawing.Size(58, 32);
+            this.bt_setup_B.TabIndex = 84;
+            this.bt_setup_B.Text = "確定";
+            this.bt_setup_B.UseVisualStyleBackColor = false;
+            this.bt_setup_B.Click += new System.EventHandler(this.bt_setup_B_Click);
+            // 
+            // lb_G
+            // 
+            this.lb_G.AutoSize = true;
+            this.lb_G.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_G.ForeColor = System.Drawing.Color.Green;
+            this.lb_G.Location = new System.Drawing.Point(226, 405);
+            this.lb_G.Name = "lb_G";
+            this.lb_G.Size = new System.Drawing.Size(20, 16);
+            this.lb_G.TabIndex = 81;
+            this.lb_G.Text = "G";
+            // 
+            // bt_setup_G
+            // 
+            this.bt_setup_G.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_setup_G.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup_G.ForeColor = System.Drawing.Color.Blue;
+            this.bt_setup_G.Location = new System.Drawing.Point(802, 423);
+            this.bt_setup_G.Name = "bt_setup_G";
+            this.bt_setup_G.Size = new System.Drawing.Size(58, 32);
+            this.bt_setup_G.TabIndex = 79;
+            this.bt_setup_G.Text = "確定";
+            this.bt_setup_G.UseVisualStyleBackColor = false;
+            this.bt_setup_G.Click += new System.EventHandler(this.bt_setup_G_Click);
+            // 
+            // tb_R
+            // 
+            this.tb_R.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_R.Location = new System.Drawing.Point(708, 363);
+            this.tb_R.Name = "tb_R";
+            this.tb_R.Size = new System.Drawing.Size(58, 32);
+            this.tb_R.TabIndex = 74;
+            this.tb_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_R.TextChanged += new System.EventHandler(this.tb_R_TextChanged);
+            this.tb_R.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_R_KeyPress);
+            // 
+            // tb_R2
+            // 
+            this.tb_R2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_R2.Location = new System.Drawing.Point(610, 364);
+            this.tb_R2.Name = "tb_R2";
+            this.tb_R2.Size = new System.Drawing.Size(58, 32);
+            this.tb_R2.TabIndex = 76;
+            this.tb_R2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_R2.TextChanged += new System.EventHandler(this.tb_R2_TextChanged);
+            this.tb_R2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_R2_KeyPress);
+            // 
+            // trackBar_R
+            // 
+            this.trackBar_R.LargeChange = 1;
+            this.trackBar_R.Location = new System.Drawing.Point(227, 364);
+            this.trackBar_R.Maximum = 4095;
+            this.trackBar_R.Name = "trackBar_R";
+            this.trackBar_R.Size = new System.Drawing.Size(324, 45);
+            this.trackBar_R.TabIndex = 72;
+            this.trackBar_R.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.trackBar_R.Value = 1024;
+            this.trackBar_R.Scroll += new System.EventHandler(this.trackBar_R_Scroll);
+            // 
+            // lb_0xR
+            // 
+            this.lb_0xR.AutoSize = true;
+            this.lb_0xR.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0xR.Location = new System.Drawing.Point(778, 70);
+            this.lb_0xR.Name = "lb_0xR";
+            this.lb_0xR.Size = new System.Drawing.Size(104, 23);
+            this.lb_0xR.TabIndex = 77;
+            this.lb_0xR.Text = "0x                 =";
+            // 
+            // lb_R
+            // 
+            this.lb_R.AutoSize = true;
+            this.lb_R.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_R.ForeColor = System.Drawing.Color.Red;
+            this.lb_R.Location = new System.Drawing.Point(225, 345);
+            this.lb_R.Name = "lb_R";
+            this.lb_R.Size = new System.Drawing.Size(19, 16);
+            this.lb_R.TabIndex = 75;
+            this.lb_R.Text = "R";
+            // 
+            // bt_setup_R
+            // 
+            this.bt_setup_R.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_setup_R.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup_R.ForeColor = System.Drawing.Color.Blue;
+            this.bt_setup_R.Location = new System.Drawing.Point(801, 363);
+            this.bt_setup_R.Name = "bt_setup_R";
+            this.bt_setup_R.Size = new System.Drawing.Size(58, 32);
+            this.bt_setup_R.TabIndex = 73;
+            this.bt_setup_R.Text = "確定";
+            this.bt_setup_R.UseVisualStyleBackColor = false;
+            this.bt_setup_R.Click += new System.EventHandler(this.bt_setup_R_Click);
             // 
             // tb_gain
             // 
             this.tb_gain.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_gain.Location = new System.Drawing.Point(575, 403);
+            this.tb_gain.Location = new System.Drawing.Point(708, 300);
             this.tb_gain.Name = "tb_gain";
             this.tb_gain.Size = new System.Drawing.Size(58, 32);
             this.tb_gain.TabIndex = 66;
             this.tb_gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_gain.TextChanged += new System.EventHandler(this.tb_gain_TextChanged);
+            this.tb_gain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_gain_KeyPress);
+            // 
+            // tb_expo
+            // 
+            this.tb_expo.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_expo.Location = new System.Drawing.Point(708, 213);
+            this.tb_expo.Name = "tb_expo";
+            this.tb_expo.Size = new System.Drawing.Size(58, 32);
+            this.tb_expo.TabIndex = 62;
+            this.tb_expo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_expo.TextChanged += new System.EventHandler(this.tb_expo_TextChanged);
+            this.tb_expo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_expo_KeyPress);
+            // 
+            // tb_gain2
+            // 
+            this.tb_gain2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_gain2.Location = new System.Drawing.Point(610, 301);
+            this.tb_gain2.Name = "tb_gain2";
+            this.tb_gain2.Size = new System.Drawing.Size(58, 32);
+            this.tb_gain2.TabIndex = 69;
+            this.tb_gain2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_gain2.TextChanged += new System.EventHandler(this.tb_gain2_TextChanged);
+            this.tb_gain2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_gain2_KeyPress);
+            // 
+            // tb_expo2
+            // 
+            this.tb_expo2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_expo2.Location = new System.Drawing.Point(610, 214);
+            this.tb_expo2.Name = "tb_expo2";
+            this.tb_expo2.Size = new System.Drawing.Size(58, 32);
+            this.tb_expo2.TabIndex = 68;
+            this.tb_expo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_expo2.TextChanged += new System.EventHandler(this.tb_expo2_TextChanged);
+            this.tb_expo2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_expo2_KeyPress);
+            // 
+            // bt_LED
+            // 
+            this.bt_LED.BackColor = System.Drawing.Color.Black;
+            this.bt_LED.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_LED.ForeColor = System.Drawing.Color.Gold;
+            this.bt_LED.Location = new System.Drawing.Point(20, 390);
+            this.bt_LED.Name = "bt_LED";
+            this.bt_LED.Size = new System.Drawing.Size(60, 60);
+            this.bt_LED.TabIndex = 66;
+            this.bt_LED.Text = "LED";
+            this.bt_LED.UseVisualStyleBackColor = false;
+            this.bt_LED.Click += new System.EventHandler(this.button41_Click);
+            // 
+            // lb_gain
+            // 
+            this.lb_gain.AutoSize = true;
+            this.lb_gain.Location = new System.Drawing.Point(225, 273);
+            this.lb_gain.Name = "lb_gain";
+            this.lb_gain.Size = new System.Drawing.Size(46, 16);
+            this.lb_gain.TabIndex = 67;
+            this.lb_gain.Text = "GAIN";
             // 
             // bt_setup_gain
             // 
             this.bt_setup_gain.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_gain.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_gain.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_gain.Location = new System.Drawing.Point(670, 402);
+            this.bt_setup_gain.Location = new System.Drawing.Point(801, 300);
             this.bt_setup_gain.Name = "bt_setup_gain";
             this.bt_setup_gain.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_gain.TabIndex = 65;
@@ -1764,10 +2078,10 @@
             // trackBar_gain
             // 
             this.trackBar_gain.LargeChange = 1;
-            this.trackBar_gain.Location = new System.Drawing.Point(231, 442);
+            this.trackBar_gain.Location = new System.Drawing.Point(227, 292);
             this.trackBar_gain.Maximum = 511;
             this.trackBar_gain.Name = "trackBar_gain";
-            this.trackBar_gain.Size = new System.Drawing.Size(355, 45);
+            this.trackBar_gain.Size = new System.Drawing.Size(324, 45);
             this.trackBar_gain.TabIndex = 64;
             this.trackBar_gain.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBar_gain.Value = 59;
@@ -1776,28 +2090,18 @@
             // lb_expo
             // 
             this.lb_expo.AutoSize = true;
-            this.lb_expo.Location = new System.Drawing.Point(228, 294);
+            this.lb_expo.Location = new System.Drawing.Point(224, 190);
             this.lb_expo.Name = "lb_expo";
             this.lb_expo.Size = new System.Drawing.Size(47, 16);
             this.lb_expo.TabIndex = 63;
             this.lb_expo.Text = "EXPO";
-            // 
-            // tb_expo
-            // 
-            this.tb_expo.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_expo.Location = new System.Drawing.Point(575, 285);
-            this.tb_expo.Name = "tb_expo";
-            this.tb_expo.Size = new System.Drawing.Size(58, 32);
-            this.tb_expo.TabIndex = 62;
-            this.tb_expo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_expo.TextChanged += new System.EventHandler(this.tb_expo_TextChanged);
             // 
             // bt_setup_expo
             // 
             this.bt_setup_expo.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_expo.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_expo.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_expo.Location = new System.Drawing.Point(670, 284);
+            this.bt_setup_expo.Location = new System.Drawing.Point(801, 214);
             this.bt_setup_expo.Name = "bt_setup_expo";
             this.bt_setup_expo.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_expo.TabIndex = 61;
@@ -1808,10 +2112,10 @@
             // trackBar_expo
             // 
             this.trackBar_expo.LargeChange = 1;
-            this.trackBar_expo.Location = new System.Drawing.Point(231, 324);
+            this.trackBar_expo.Location = new System.Drawing.Point(227, 220);
             this.trackBar_expo.Maximum = 511;
             this.trackBar_expo.Name = "trackBar_expo";
-            this.trackBar_expo.Size = new System.Drawing.Size(355, 45);
+            this.trackBar_expo.Size = new System.Drawing.Size(324, 45);
             this.trackBar_expo.TabIndex = 60;
             this.trackBar_expo.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.trackBar_expo.Value = 134;
@@ -1837,7 +2141,7 @@
             this.bt_write2.ForeColor = System.Drawing.Color.Black;
             this.bt_write2.Location = new System.Drawing.Point(707, 538);
             this.bt_write2.Name = "bt_write2";
-            this.bt_write2.Size = new System.Drawing.Size(58, 32);
+            this.bt_write2.Size = new System.Drawing.Size(64, 32);
             this.bt_write2.TabIndex = 54;
             this.bt_write2.Text = "Write";
             this.bt_write2.UseVisualStyleBackColor = false;
@@ -1850,7 +2154,7 @@
             this.bt_read2.ForeColor = System.Drawing.Color.Black;
             this.bt_read2.Location = new System.Drawing.Point(614, 538);
             this.bt_read2.Name = "bt_read2";
-            this.bt_read2.Size = new System.Drawing.Size(58, 32);
+            this.bt_read2.Size = new System.Drawing.Size(64, 32);
             this.bt_read2.TabIndex = 53;
             this.bt_read2.Text = "Read";
             this.bt_read2.UseVisualStyleBackColor = false;
@@ -2061,7 +2365,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(170, 50);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(308, 204);
+            this.pictureBox1.Size = new System.Drawing.Size(308, 126);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
@@ -2099,6 +2403,26 @@
             this.lb_0x1.TabIndex = 54;
             this.lb_0x1.Text = "0x";
             // 
+            // lb_0x4
+            // 
+            this.lb_0x4.AutoSize = true;
+            this.lb_0x4.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0x4.Location = new System.Drawing.Point(607, 165);
+            this.lb_0x4.Name = "lb_0x4";
+            this.lb_0x4.Size = new System.Drawing.Size(104, 23);
+            this.lb_0x4.TabIndex = 71;
+            this.lb_0x4.Text = "0x                 =";
+            // 
+            // lb_0x3
+            // 
+            this.lb_0x3.AutoSize = true;
+            this.lb_0x3.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_0x3.Location = new System.Drawing.Point(607, 113);
+            this.lb_0x3.Name = "lb_0x3";
+            this.lb_0x3.Size = new System.Drawing.Size(104, 23);
+            this.lb_0x3.TabIndex = 70;
+            this.lb_0x3.Text = "0x                 =";
+            // 
             // tp_Test
             // 
             this.tp_Test.Controls.Add(this.lb_rtc2);
@@ -2115,18 +2439,25 @@
             this.tp_Test.Text = "Test";
             this.tp_Test.UseVisualStyleBackColor = true;
             // 
-            // button41
+            // lb_rtc2
             // 
-            this.button41.BackColor = System.Drawing.Color.Black;
-            this.button41.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button41.ForeColor = System.Drawing.Color.Gold;
-            this.button41.Location = new System.Drawing.Point(20, 390);
-            this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(60, 60);
-            this.button41.TabIndex = 66;
-            this.button41.Text = "LED";
-            this.button41.UseVisualStyleBackColor = false;
-            this.button41.Click += new System.EventHandler(this.button41_Click);
+            this.lb_rtc2.AutoSize = true;
+            this.lb_rtc2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rtc2.Location = new System.Drawing.Point(502, 139);
+            this.lb_rtc2.Name = "lb_rtc2";
+            this.lb_rtc2.Size = new System.Drawing.Size(56, 23);
+            this.lb_rtc2.TabIndex = 70;
+            this.lb_rtc2.Text = "lb_rtc2";
+            // 
+            // button42
+            // 
+            this.button42.Location = new System.Drawing.Point(526, 67);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(119, 46);
+            this.button42.TabIndex = 62;
+            this.button42.Text = "設定錯誤時間";
+            this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // button3
             // 
@@ -2783,28 +3114,90 @@
             // timer_webcam
             // 
             this.timer_webcam.Enabled = true;
-            this.timer_webcam.Interval = 500;
+            this.timer_webcam.Interval = 1500;
             this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
             // 
-            // button42
+            // lb_range_1
             // 
-            this.button42.Location = new System.Drawing.Point(526, 67);
-            this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(119, 46);
-            this.button42.TabIndex = 62;
-            this.button42.Text = "設定錯誤時間";
-            this.button42.UseVisualStyleBackColor = true;
-            this.button42.Click += new System.EventHandler(this.button42_Click);
+            this.lb_range_1.AutoSize = true;
+            this.lb_range_1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_range_1.Location = new System.Drawing.Point(538, 35);
+            this.lb_range_1.Name = "lb_range_1";
+            this.lb_range_1.Size = new System.Drawing.Size(43, 20);
+            this.lb_range_1.TabIndex = 90;
+            this.lb_range_1.Text = "range";
             // 
-            // lb_rtc2
+            // lb_range_2
             // 
-            this.lb_rtc2.AutoSize = true;
-            this.lb_rtc2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rtc2.Location = new System.Drawing.Point(502, 139);
-            this.lb_rtc2.Name = "lb_rtc2";
-            this.lb_rtc2.Size = new System.Drawing.Size(56, 23);
-            this.lb_rtc2.TabIndex = 70;
-            this.lb_rtc2.Text = "lb_rtc2";
+            this.lb_range_2.AutoSize = true;
+            this.lb_range_2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_range_2.Location = new System.Drawing.Point(538, 58);
+            this.lb_range_2.Name = "lb_range_2";
+            this.lb_range_2.Size = new System.Drawing.Size(43, 20);
+            this.lb_range_2.TabIndex = 91;
+            this.lb_range_2.Text = "range";
+            // 
+            // lb_range_3
+            // 
+            this.lb_range_3.AutoSize = true;
+            this.lb_range_3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_range_3.Location = new System.Drawing.Point(538, 85);
+            this.lb_range_3.Name = "lb_range_3";
+            this.lb_range_3.Size = new System.Drawing.Size(43, 20);
+            this.lb_range_3.TabIndex = 92;
+            this.lb_range_3.Text = "range";
+            // 
+            // lb_range_4
+            // 
+            this.lb_range_4.AutoSize = true;
+            this.lb_range_4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_range_4.Location = new System.Drawing.Point(538, 108);
+            this.lb_range_4.Name = "lb_range_4";
+            this.lb_range_4.Size = new System.Drawing.Size(43, 20);
+            this.lb_range_4.TabIndex = 93;
+            this.lb_range_4.Text = "range";
+            // 
+            // lb_range_5
+            // 
+            this.lb_range_5.AutoSize = true;
+            this.lb_range_5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_range_5.Location = new System.Drawing.Point(538, 131);
+            this.lb_range_5.Name = "lb_range_5";
+            this.lb_range_5.Size = new System.Drawing.Size(43, 20);
+            this.lb_range_5.TabIndex = 94;
+            this.lb_range_5.Text = "range";
+            // 
+            // lb_awb_result1
+            // 
+            this.lb_awb_result1.AutoSize = true;
+            this.lb_awb_result1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb_result1.Location = new System.Drawing.Point(608, 19);
+            this.lb_awb_result1.Name = "lb_awb_result1";
+            this.lb_awb_result1.Size = new System.Drawing.Size(45, 23);
+            this.lb_awb_result1.TabIndex = 95;
+            this.lb_awb_result1.Text = "AWB";
+            // 
+            // lb_awb_result2
+            // 
+            this.lb_awb_result2.AutoSize = true;
+            this.lb_awb_result2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb_result2.Location = new System.Drawing.Point(610, 50);
+            this.lb_awb_result2.Name = "lb_awb_result2";
+            this.lb_awb_result2.Size = new System.Drawing.Size(45, 23);
+            this.lb_awb_result2.TabIndex = 96;
+            this.lb_awb_result2.Text = "AWB";
+            // 
+            // bt_get_setup
+            // 
+            this.bt_get_setup.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_get_setup.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_get_setup.ForeColor = System.Drawing.Color.Blue;
+            this.bt_get_setup.Location = new System.Drawing.Point(805, 23);
+            this.bt_get_setup.Name = "bt_get_setup";
+            this.bt_get_setup.Size = new System.Drawing.Size(58, 32);
+            this.bt_get_setup.TabIndex = 97;
+            this.bt_get_setup.Text = "Get";
+            this.bt_get_setup.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -2866,6 +3259,9 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_B)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_G)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_gain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_expo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -3116,9 +3512,39 @@
         private System.Windows.Forms.TextBox tb_gain;
         private System.Windows.Forms.Button bt_setup_gain;
         private System.Windows.Forms.TrackBar trackBar_gain;
-        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button bt_LED;
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Label lb_rtc2;
+        private System.Windows.Forms.TextBox tb_gain2;
+        private System.Windows.Forms.TextBox tb_expo2;
+        private System.Windows.Forms.Label lb_0x4;
+        private System.Windows.Forms.Label lb_0x3;
+        private System.Windows.Forms.TextBox tb_R;
+        private System.Windows.Forms.TextBox tb_R2;
+        private System.Windows.Forms.Label lb_R;
+        private System.Windows.Forms.Button bt_setup_R;
+        private System.Windows.Forms.TrackBar trackBar_R;
+        private System.Windows.Forms.Label lb_0xR;
+        private System.Windows.Forms.TextBox tb_B;
+        private System.Windows.Forms.TextBox tb_B2;
+        private System.Windows.Forms.TrackBar trackBar_B;
+        private System.Windows.Forms.Label lb_BB;
+        private System.Windows.Forms.Button bt_setup_B;
+        private System.Windows.Forms.TextBox tb_G;
+        private System.Windows.Forms.TextBox tb_G2;
+        private System.Windows.Forms.TrackBar trackBar_G;
+        private System.Windows.Forms.Label lb_G;
+        private System.Windows.Forms.Button bt_setup_G;
+        private System.Windows.Forms.Label lb_0xB;
+        private System.Windows.Forms.Label lb_0xG;
+        private System.Windows.Forms.Label lb_range_5;
+        private System.Windows.Forms.Label lb_range_4;
+        private System.Windows.Forms.Label lb_range_3;
+        private System.Windows.Forms.Label lb_range_2;
+        private System.Windows.Forms.Label lb_range_1;
+        private System.Windows.Forms.Label lb_awb_result1;
+        private System.Windows.Forms.Label lb_awb_result2;
+        private System.Windows.Forms.Button bt_get_setup;
     }
 }
 
