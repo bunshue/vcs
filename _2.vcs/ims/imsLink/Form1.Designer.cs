@@ -160,6 +160,10 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.comboBox_temperature = new System.Windows.Forms.ComboBox();
+            this.numericUpDown_TG_B = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_TG_G = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_TG_R = new System.Windows.Forms.NumericUpDown();
             this.bt_awb_test_init = new System.Windows.Forms.Button();
             this.bt_awb_test = new System.Windows.Forms.Button();
             this.numericUpDown_B = new System.Windows.Forms.NumericUpDown();
@@ -297,6 +301,7 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -314,6 +319,9 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_B)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_G)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).BeginInit();
@@ -332,6 +340,7 @@
             this.tp_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -1732,6 +1741,11 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.pictureBox2);
+            this.tp_USB.Controls.Add(this.comboBox_temperature);
+            this.tp_USB.Controls.Add(this.numericUpDown_TG_B);
+            this.tp_USB.Controls.Add(this.numericUpDown_TG_G);
+            this.tp_USB.Controls.Add(this.numericUpDown_TG_R);
             this.tp_USB.Controls.Add(this.bt_awb_test_init);
             this.tp_USB.Controls.Add(this.bt_awb_test);
             this.tp_USB.Controls.Add(this.numericUpDown_B);
@@ -1807,6 +1821,68 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_temperature
+            // 
+            this.comboBox_temperature.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_temperature.FormattingEnabled = true;
+            this.comboBox_temperature.Items.AddRange(new object[] {
+            "6500K",
+            "7500K"});
+            this.comboBox_temperature.Location = new System.Drawing.Point(688, 334);
+            this.comboBox_temperature.Name = "comboBox_temperature";
+            this.comboBox_temperature.Size = new System.Drawing.Size(110, 29);
+            this.comboBox_temperature.TabIndex = 113;
+            this.comboBox_temperature.Text = "6500K";
+            this.comboBox_temperature.SelectedIndexChanged += new System.EventHandler(this.comboBox_temperature_SelectedIndexChanged);
+            // 
+            // numericUpDown_TG_B
+            // 
+            this.numericUpDown_TG_B.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_TG_B.ForeColor = System.Drawing.Color.Blue;
+            this.numericUpDown_TG_B.Location = new System.Drawing.Point(820, 179);
+            this.numericUpDown_TG_B.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_TG_B.Name = "numericUpDown_TG_B";
+            this.numericUpDown_TG_B.Size = new System.Drawing.Size(110, 53);
+            this.numericUpDown_TG_B.TabIndex = 112;
+            this.numericUpDown_TG_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_TG_B.ValueChanged += new System.EventHandler(this.numericUpDown_TG_B_ValueChanged);
+            // 
+            // numericUpDown_TG_G
+            // 
+            this.numericUpDown_TG_G.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_TG_G.ForeColor = System.Drawing.Color.Green;
+            this.numericUpDown_TG_G.Location = new System.Drawing.Point(642, 179);
+            this.numericUpDown_TG_G.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_TG_G.Name = "numericUpDown_TG_G";
+            this.numericUpDown_TG_G.Size = new System.Drawing.Size(110, 53);
+            this.numericUpDown_TG_G.TabIndex = 111;
+            this.numericUpDown_TG_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_TG_G.ValueChanged += new System.EventHandler(this.numericUpDown_TG_G_ValueChanged);
+            // 
+            // numericUpDown_TG_R
+            // 
+            this.numericUpDown_TG_R.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_TG_R.ForeColor = System.Drawing.Color.Red;
+            this.numericUpDown_TG_R.Location = new System.Drawing.Point(406, 179);
+            this.numericUpDown_TG_R.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_TG_R.Name = "numericUpDown_TG_R";
+            this.numericUpDown_TG_R.Size = new System.Drawing.Size(110, 53);
+            this.numericUpDown_TG_R.TabIndex = 110;
+            this.numericUpDown_TG_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_TG_R.ValueChanged += new System.EventHandler(this.numericUpDown_TG_R_ValueChanged);
             // 
             // bt_awb_test_init
             // 
@@ -3305,6 +3381,14 @@
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(320, 19);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox2.TabIndex = 114;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3366,6 +3450,9 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_B)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_G)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_R)).EndInit();
@@ -3389,6 +3476,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3663,6 +3751,11 @@
         private System.Windows.Forms.Button bt_awb_test;
         private System.Windows.Forms.Button bt_awb_test_init;
         private System.Windows.Forms.Button bt_goto_awb;
+        private System.Windows.Forms.NumericUpDown numericUpDown_TG_B;
+        private System.Windows.Forms.NumericUpDown numericUpDown_TG_G;
+        private System.Windows.Forms.NumericUpDown numericUpDown_TG_R;
+        private System.Windows.Forms.ComboBox comboBox_temperature;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

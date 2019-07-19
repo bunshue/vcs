@@ -15,7 +15,7 @@ namespace vcs_SlideShowString
     {
         bool flag_release_mode = true;
 
-        bool flag_debug_mode = true;    //print some message, font size, timer cnt, index.....
+        bool flag_debug_mode = false;    //print some message, font size, timer cnt, index.....
 
         string filepath_setup = "poetry.ini";
         string filepath_poetry = "poetry.txt";
@@ -746,10 +746,18 @@ namespace vcs_SlideShowString
             else if (e.KeyCode == Keys.F1)
             {
                 richTextBox1.Text += "F1 : Help\n";
+                this.TopMost = false;
+                Form_Help help = new Form_Help();   //實體化Form_Help視窗物件
+                help.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                help.ShowDialog();                  //顯示Form_Help視窗
             }
             else if (e.KeyCode == Keys.F10)
             {
                 richTextBox1.Text += "F10 : Setup\n";
+                this.TopMost = false;
+                Form_Setup setup = new Form_Setup();   //實體化Form_Setup視窗物件
+                setup.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                setup.ShowDialog();                  //顯示Form_Setup視窗
             }
             else if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
             {
@@ -771,6 +779,29 @@ namespace vcs_SlideShowString
                     richTextBox1.Text += "display height = " + display_height.ToString() + " %\n";
                     slide_show_string();
                 }
+                else if (e.KeyCode == Keys.T)
+                {
+                    flag_top_most = true;
+                    richTextBox1.Text += "設定最上層顯示\n";
+                }
+                else if (e.KeyCode == Keys.R)
+                {
+                    richTextBox1.Text += "靠右\n";
+                    align_direction = '0';
+                    reload_slide_show_string();
+                }
+                else if (e.KeyCode == Keys.L)
+                {
+                    richTextBox1.Text += "靠左\n";
+                    align_direction = '1';
+                    reload_slide_show_string();
+                }
+                else if (e.KeyCode == Keys.C)
+                {
+                    richTextBox1.Text += "正中\n";
+                    align_direction = '2';
+                    reload_slide_show_string();
+                }
             }
             else if (e.KeyCode == Keys.W)
             {
@@ -788,6 +819,35 @@ namespace vcs_SlideShowString
                     display_height--;
                 }
                 richTextBox1.Text += "display height = " + display_height.ToString() + " %\n";
+                slide_show_string();
+            }
+            else if (e.KeyCode == Keys.T)
+            {
+                flag_top_most = false;
+                richTextBox1.Text += "設定非最上層顯示\n";
+            }
+            else if (e.KeyCode == Keys.F)
+            {
+                if (slide_show_interval > 1)
+                    slide_show_interval--;
+                richTextBox1.Text += "加速, " + slide_show_interval.ToString() + " 秒\n";
+            }
+            else if (e.KeyCode == Keys.S)
+            {
+                slide_show_interval++;
+                richTextBox1.Text += "減速, " + slide_show_interval.ToString() + " 秒\n";
+            }
+            else if (e.KeyCode == Keys.D)
+            {
+                if (flag_debug_mode == true)
+                {
+                    flag_debug_mode = false;
+                    
+                }
+                else
+                {
+                    flag_debug_mode = true;
+                }
                 slide_show_string();
             }
             else
@@ -1293,9 +1353,15 @@ namespace vcs_SlideShowString
             timer1_cnt = 0;
 
             if (flag_top_most == true)
+            {
                 this.TopMost = true;
+                g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
+            }
             else
+            {
                 this.TopMost = false;
+                g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
+            }
         }
 
 
@@ -1514,9 +1580,15 @@ namespace vcs_SlideShowString
             timer1_cnt = 0;
 
             if (flag_top_most == true)
+            {
                 this.TopMost = true;
+                g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
+            }
             else
+            {
                 this.TopMost = false;
+                g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1598,9 +1670,15 @@ namespace vcs_SlideShowString
                 timer1.Enabled = true;
                 timer1_cnt = 0;
                 if (flag_top_most == true)
+                {
                     this.TopMost = true;
+                    g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
+                }
                 else
+                {
                     this.TopMost = false;
+                    g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
+                }
             }
             draw_pause_border();
             pictureBox1.Focus();
