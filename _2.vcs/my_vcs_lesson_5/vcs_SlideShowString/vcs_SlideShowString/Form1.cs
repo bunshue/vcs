@@ -15,9 +15,10 @@ namespace vcs_SlideShowString
     {
         bool flag_release_mode = true;
 
+        bool flag_debug_mode = true;    //print some message, font size, timer cnt, index.....
+
         //string filepath = "poetry_debug.txt";
         string filepath = "poetry.txt";
-        bool flag_debug_message = true;
 
         Graphics g;
         Font f;
@@ -974,19 +975,18 @@ namespace vcs_SlideShowString
 
             draw_pause_border();
 
-            if (flag_release_mode == false)
+            if (flag_debug_mode == true)
             {
-                string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
-                tmp_width = g.MeasureString(show_play_info, new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(show_play_info, new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
-                g.DrawString(show_play_info, new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
-            }
+                string str;
+                //顯示曲目
+                str = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
+                tmp_width = g.MeasureString(str, new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
+                tmp_height = g.MeasureString(str, new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
+                g.DrawString(str, new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
 
-            if (flag_debug_message == true) //顯示目前字型大小
-            {
-                tmp_width = g.MeasureString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
-                g.DrawString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
+                //顯示目前字型大小
+                str = font_size_current.ToString() + "/" + display_width.ToString() + "/" + display_height.ToString();
+                g.DrawString(str, new Font(font_type, font_size_default * 2 / 3), new SolidBrush(Color.Blue), new PointF(10, 10));
             }
 
             if (flag_release_mode == true)
@@ -1196,19 +1196,18 @@ namespace vcs_SlideShowString
 
             draw_pause_border();
 
-            if (flag_release_mode == false)
+            if (flag_debug_mode == true)
             {
-                string show_play_info = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
-                tmp_width = g.MeasureString(show_play_info, new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(show_play_info, new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
-                g.DrawString(show_play_info, new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
-            }
+                string str;
+                //顯示曲目
+                str = (show_lyrics_index + 1).ToString() + " / " + lyrics_count.ToString();
+                tmp_width = g.MeasureString(str, new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
+                tmp_height = g.MeasureString(str, new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
+                g.DrawString(str, new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) / 2, H - tmp_height));
 
-            if (flag_debug_message == true) //顯示目前字型大小
-            {
-                tmp_width = g.MeasureString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3)).ToSize().Width;
-                tmp_height = g.MeasureString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3)).ToSize().Height;
-                g.DrawString(font_size_current.ToString(), new Font(font_type, font_size_current * 2 / 3), new SolidBrush(Color.Blue), new PointF((W - tmp_width) - 10, H - tmp_height));
+                //顯示目前字型大小
+                str = font_size_current.ToString() + "/" + display_width.ToString() + "/" + display_height.ToString();
+                g.DrawString(str, new Font(font_type, font_size_default * 2 / 3), new SolidBrush(Color.Blue), new PointF(10, 10));
             }
 
             if (flag_release_mode == true)
@@ -1286,7 +1285,7 @@ namespace vcs_SlideShowString
             }
             else
             {
-                if (flag_debug_message == true)     //顯示要換首的剩餘時間
+                if (flag_debug_mode == true)     //顯示要換首的剩餘時間
                 {
                     tmp_width = g.MeasureString((slide_show_interval - timer1_cnt).ToString(), new Font(font_type, font_size_default * 2 / 3)).ToSize().Width;
                     tmp_height = g.MeasureString((slide_show_interval - timer1_cnt).ToString(), new Font(font_type, font_size_default * 2 / 3)).ToSize().Height;
