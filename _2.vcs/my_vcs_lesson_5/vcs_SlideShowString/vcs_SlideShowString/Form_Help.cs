@@ -24,11 +24,12 @@ namespace vcs_SlideShowString
             label1.Text += "PageUp/PageDown   上一首/下一首\n";
             label1.Text += "T/t               設定/取消最上層顯示\n";
             label1.Text += "L/C/R             靠左/置中/靠右\n";
+            label1.Text += "~                 切換依序/隨機播放\n";
             label1.Text += "F1                幫助畫面\n";
             label1.Text += "F10               設定畫面\n";
 
 
-
+            label1.Text += "\n\n\n";
             label1.Text += "x                 離開\n";
         }
 

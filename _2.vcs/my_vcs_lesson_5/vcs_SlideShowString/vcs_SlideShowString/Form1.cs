@@ -802,6 +802,50 @@ namespace vcs_SlideShowString
                     align_direction = '2';
                     reload_slide_show_string();
                 }
+                else if (e.KeyCode == Keys.F)
+                {
+                    if (slide_show_interval > 1)
+                        slide_show_interval--;
+                    richTextBox1.Text += "加速, " + slide_show_interval.ToString() + " 秒\n";
+                }
+                else if (e.KeyCode == Keys.S)
+                {
+                    slide_show_interval++;
+                    richTextBox1.Text += "減速, " + slide_show_interval.ToString() + " 秒\n";
+                }
+                else if (e.KeyCode == Keys.Oemtilde)    //~
+                {
+                    if (play_sequence == PLAYMODE_SEQUENCE)
+                    {   //依序 -> 隨機 從頭
+                        richTextBox1.Text += "依序 -> 隨機 從頭\n";
+                        play_sequence = PLAYMODE_RANDOM;
+                        show_lyrics_index = random_play_sequence[0];
+                    }
+                    else if (play_sequence == PLAYMODE_RANDOM)
+                    {   //隨機 -> 依序 從頭
+                        richTextBox1.Text += "隨機 -> 依序 從頭\n";
+                        play_sequence = PLAYMODE_SEQUENCE;
+                        show_lyrics_index = 0;
+                    }
+                    else
+                    {   //依序 從頭
+                        richTextBox1.Text += "-> 依序 從頭\n";
+                        play_sequence = PLAYMODE_SEQUENCE;
+                        show_lyrics_index = 0;
+                    }
+                    slide_show_string();
+                }
+                else if (e.KeyCode == Keys.N)
+                {
+                    richTextBox1.Text += "念經模式, 字很大 佔很多 放中間\n";
+                    display_width = 90;
+                    display_height = 88;
+                    font_size_default = 50;
+
+                    align_direction = '2';  //正中
+
+                    slide_show_string();
+                }
             }
             else if (e.KeyCode == Keys.W)
             {
@@ -882,6 +926,7 @@ namespace vcs_SlideShowString
                 random_play_sequence[i] = i;
             }
 
+            /*
             richTextBox1.Text += "原陣列 : ";
             for (i = 0; i < lyrics_count; i++)
             {
@@ -889,7 +934,7 @@ namespace vcs_SlideShowString
 
             }
             richTextBox1.Text += "\n";
-
+            */
 
             for (i = lyrics_count - 1; i > 0; i--)
             {
@@ -900,23 +945,11 @@ namespace vcs_SlideShowString
                 random_play_sequence[n] = tmp;
             }
 
-            //debug
+            //debug, 改成原數字反相
             for (i = 0; i < lyrics_count; i++)
             {
-                random_play_sequence[i] = lyrics_count - i - 1;
-                /*
-                if (i < lyrics_count / 2)
-                {
-                    random_play_sequence[i] = (i * 2) % lyrics_count;
-                }
-                else
-                {
-                    random_play_sequence[i] = 3;
-                    //random_play_sequence[i] = (i * 2) % lyrics_count + 1;
-                }
-                */
+                //random_play_sequence[i] = lyrics_count - i - 1;
             }
-
 
             richTextBox1.Text += "不重覆亂數：";
             for (i = 0; i < lyrics_count; i++)
