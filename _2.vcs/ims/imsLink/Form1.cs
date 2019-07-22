@@ -107,6 +107,7 @@ namespace imsLink
         bool flag_R_OK = false;
         bool flag_G_OK = false;
         bool flag_B_OK = false;
+        bool flag_break = false;
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -1600,6 +1601,8 @@ namespace imsLink
             bt_awb.Visible = false;
             bt_awb_test.Visible = false;
             bt_awb_test_init.Visible = false;
+            bt_break.Visible = false;
+            pictureBox2.Visible = false;
             lb_range_1.Visible = false;
             lb_range_2.Visible = false;
             lb_expo.Visible = false;
@@ -2778,6 +2781,8 @@ namespace imsLink
                     bt_awb.Visible = false;
                     bt_awb_test.Visible = false;
                     bt_awb_test_init.Visible = false;
+                    bt_break.Visible = false;
+                    pictureBox2.Visible = false;
                     lb_range_1.Visible = false;
                     lb_range_2.Visible = false;
                     lb_expo.Visible = false;
@@ -2971,7 +2976,7 @@ namespace imsLink
                 if ((y_st + hh) > h)
                     y_st = h - hh;
 
-                gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+                gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
 
                 RGB_R = total_R / (ww * hh);
                 RGB_G = total_G / (ww * hh);
@@ -3506,6 +3511,8 @@ namespace imsLink
                     bt_awb.Visible = true;
                     bt_awb_test.Visible = true;
                     bt_awb_test_init.Visible = true;
+                    bt_break.Visible = true;
+                    pictureBox2.Visible = true;
                     lb_range_1.Visible = true;
                     lb_range_2.Visible = true;
                     lb_expo.Visible = true;
@@ -3561,6 +3568,9 @@ namespace imsLink
                     bt_awb.Location = new Point(410 + 45, 650 - 100 - 50);
                     bt_awb_test.Location = new Point(410 + 45-80, 650 - 100 - 50);
                     bt_awb_test_init.Location = new Point(410 + 45 - 80 - 80, 650 - 100 - 50);
+
+                    bt_break.Location = new Point(410 + 45 - 80, 650 - 100);
+
 
                     lb_addr.Location = new Point(30, 620 - 100);
                     lb_0x1.Location = new Point(5, 650 + 3 - 100);
@@ -3686,6 +3696,8 @@ namespace imsLink
                     bt_awb.Visible = false;
                     bt_awb_test.Visible = false;
                     bt_awb_test_init.Visible = false;
+                    bt_break.Visible = false;
+                    pictureBox2.Visible = false;
                     lb_range_1.Visible = false;
                     lb_range_2.Visible = false;
                     lb_expo.Visible = false;
@@ -5843,6 +5855,43 @@ namespace imsLink
             }
         }
 
+        void test_RGB_saturation()
+        {
+            int ret = 0;
+
+            //for (int i = 0; i < 15; i++)
+            int rgb_ok_cnt = 0;
+            while (true)
+            {
+                //richTextBox1.Text += "test saturation " + i.ToString() + "\n";
+                richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
+                if ((RGB_R < 255) && (RGB_G < 255) && (RGB_B < 255))
+                {
+                    delay(100);
+                    rgb_ok_cnt++;
+                }
+                else
+                {
+                    ret = get_rgb_data();
+                    delay(500);
+                    richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
+                    check_RGB_saturation();
+                    delay(500);
+                    richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
+                }
+                if (rgb_ok_cnt == 5)
+                    break;
+                if (flag_break == true)
+                {
+                    richTextBox1.Text += "收到break\n";
+                    break;
+                }
+            }
+            richTextBox1.Text += "RGB皆未飽和\n";
+
+
+        }
+
         private void bt_awb_test_Click(object sender, EventArgs e)
         {
             if (flag_comport_ok == false)
@@ -5861,6 +5910,7 @@ namespace imsLink
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
             }
 
+            flag_break = false;
             richTextBox1.Clear();
             richTextBox1.Text += "AWB test ST write 0x3503 as 0x83\n";
 
@@ -5874,7 +5924,7 @@ namespace imsLink
             Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
             Send_IMS_Data(0xA0, 0x35, 0x0B, 0x40);
 
-            delay(1000);
+            test_RGB_saturation();
 
             int ret = 0;
             flag_update_RGB_scrollbar = true;
@@ -5891,7 +5941,7 @@ namespace imsLink
                 ret = get_rgb_data();
             }
 
-            if (ret == 0)
+            if ((ret == 0) && (flag_break == false))
             {
                 richTextBox1.Text += "AWB setup R G B = " + data_R.ToString() + " " + data_G.ToString() + " " + data_B.ToString() + "\n";
 
@@ -5963,6 +6013,13 @@ namespace imsLink
                         break;
                     }
 
+                    if (flag_break == true)
+                    {
+                        flag_break = false;
+                        richTextBox1.Text += "收到break\n";
+                        break;
+                    }
+
                 }
 
             }
@@ -5974,8 +6031,8 @@ namespace imsLink
 
             // Write result
             richTextBox1.Text += "\n停止計時\t";
-            richTextBox1.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-
+            richTextBox1.Text += "總時間: " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + "." + ((stopwatch.ElapsedMilliseconds % 1000) / 100).ToString() + " 秒\n";
+            flag_break = false;
         }
 
         int check_RGB_value()
@@ -6085,9 +6142,11 @@ namespace imsLink
         {
             if (RGB_R >= 255)
             {
-                richTextBox1.Text += "飽和 目前 data_R = " + data_R.ToString() + " 減一些\n";
-
                 int SendData = data_R - 100;
+                richTextBox1.Text += "飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
+
+                if (SendData > 500)
+                    numericUpDown_R.Value = SendData;
                 byte dd;
 
                 dd = (byte)(SendData / 256);
@@ -6105,9 +6164,11 @@ namespace imsLink
 
             if (RGB_B >= 255)
             {
-                richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些\n";
-
                 int SendData = data_B - 100;
+                richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
+
+                if(SendData > 500)
+                    numericUpDown_B.Value = SendData;
                 byte dd;
 
                 dd = (byte)(SendData / 256);
@@ -6124,6 +6185,122 @@ namespace imsLink
                 //richTextBox1.Text += "B 未飽和\n";
         }
 
+
+        void check_RGB_saturation()
+        {
+            if (RGB_R >= 255)
+            {
+                if (data_R == -1)
+                {
+                    richTextBox1.Text += "讀資料錯誤 跳過\n";
+                }
+                else
+                {
+                    int SendData = data_R - 100;
+                    richTextBox1.Text += "\n飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
+
+                    if (SendData > 500)
+                        numericUpDown_R.Value = SendData;
+                    byte dd;
+
+                    dd = (byte)(SendData / 256);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1A;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1B;
+
+                    dd = (byte)(SendData % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                }
+            }
+            //else
+            //richTextBox1.Text += "R 未飽和\n";
+
+            if (RGB_G >= 255)
+            {
+                int ret;
+                ret = get_expo_data();
+
+                if (ret == 0)
+                {
+                    richTextBox1.Text += "飽和 目前 expo = " + data_expo.ToString() + " 減一些 減成 " + (data_expo - 10).ToString() + "\n";
+
+
+                    if ((data_expo < 0) || (data_expo > 511))
+                    {
+                        richTextBox1.Text += "impossible data_expo " + data_expo.ToString() + "\n";
+                        richTextBox1.Text += "讀資料錯誤 跳過\n";
+                    }
+                    else if (data_expo == 0)
+                    {
+                        richTextBox1.Text += "reach expo min\n";
+                        richTextBox1.Text += "跳過\n";
+                    }
+                    else
+                    {
+                        data_expo -= 10;
+                        richTextBox1.Text += "G dec " + data_expo.ToString() + " ";
+
+                        if (data_expo < 0)
+                            data_expo = 0;
+
+                        if ((data_expo < 0) || (data_expo > 511))
+                            richTextBox1.Text += "xxxxxxxxxxxxxxxx  data_expo " + data_expo.ToString() + "\n";
+                        else
+                        {
+                            numericUpDown_expo.Value = data_expo;
+
+                            int SendData = data_expo;
+                            byte dd;
+
+                            dd = (byte)(SendData / 256);
+                            DongleAddr_h = 0x35;
+                            DongleAddr_l = 0x01;
+                            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                            DongleAddr_h = 0x35;
+                            DongleAddr_l = 0x02;
+
+                            dd = (byte)(SendData % 256);
+                            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                        }
+                    }
+                }
+                Thread.Sleep(300);
+            }
+            //else
+            //richTextBox1.Text += "R 未飽和\n";
+
+            if (RGB_B >= 255)
+            {
+                if (data_B == -1)
+                {
+                    richTextBox1.Text += "讀資料錯誤 跳過\n";
+                }
+                else
+                {
+                    int SendData = data_B - 100;
+                    richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
+
+                    if (SendData > 500)
+                        numericUpDown_B.Value = SendData;
+                    byte dd;
+
+                    dd = (byte)(SendData / 256);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1E;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1F;
+
+                    dd = (byte)(SendData % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                }
+            }
+            //else
+            //richTextBox1.Text += "B 未飽和\n";
+        }
 
         void check_RB_data(object sender, EventArgs e)
         {
@@ -6235,6 +6412,8 @@ namespace imsLink
                 return;
             }
 
+            richTextBox1.Text += "回復初始值\n";
+
             int SendData = 134;
             byte dd;
 
@@ -6248,7 +6427,7 @@ namespace imsLink
             dd = (byte)(SendData % 256);
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
 
-            SendData = 121;
+            SendData = 5;
 
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
@@ -6395,6 +6574,9 @@ namespace imsLink
 
         void refresh_picturebox2()
         {
+            if (flag_awb_debug == false)
+                return;
+
             int x_st = 0;
             int y_st = 0;
             int ww = awb_range;
@@ -6450,9 +6632,15 @@ namespace imsLink
             }
 
             g = Graphics.FromImage(bmp);
-            g.DrawRectangle(new Pen(Color.Blue, 2), 1, 1, ww - 2, hh - 2);
+            g.DrawRectangle(new Pen(Color.Silver, 2), 1, 1, ww - 2, hh - 2);
 
             pictureBox2.Image = bmp;
+        }
+
+        private void bt_break_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "BREAK\n";
+            flag_break = true;
         }
     }
 }

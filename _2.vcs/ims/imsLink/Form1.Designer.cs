@@ -160,6 +160,8 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_break = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.comboBox_temperature = new System.Windows.Forms.ComboBox();
             this.numericUpDown_TG_B = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_TG_G = new System.Windows.Forms.NumericUpDown();
@@ -301,7 +303,6 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -319,6 +320,7 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).BeginInit();
@@ -340,7 +342,6 @@
             this.tp_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -1741,6 +1742,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_break);
             this.tp_USB.Controls.Add(this.pictureBox2);
             this.tp_USB.Controls.Add(this.comboBox_temperature);
             this.tp_USB.Controls.Add(this.numericUpDown_TG_B);
@@ -1821,6 +1823,27 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_break
+            // 
+            this.bt_break.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_break.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_break.ForeColor = System.Drawing.Color.Black;
+            this.bt_break.Location = new System.Drawing.Point(866, 365);
+            this.bt_break.Name = "bt_break";
+            this.bt_break.Size = new System.Drawing.Size(64, 32);
+            this.bt_break.TabIndex = 115;
+            this.bt_break.Text = "break";
+            this.bt_break.UseVisualStyleBackColor = false;
+            this.bt_break.Click += new System.EventHandler(this.bt_break_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(320, 19);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox2.TabIndex = 114;
+            this.pictureBox2.TabStop = false;
             // 
             // comboBox_temperature
             // 
@@ -3381,14 +3404,6 @@
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(320, 19);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox2.TabIndex = 114;
-            this.pictureBox2.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3450,6 +3465,7 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).EndInit();
@@ -3476,7 +3492,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3756,6 +3771,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_TG_R;
         private System.Windows.Forms.ComboBox comboBox_temperature;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button bt_break;
     }
 }
 
