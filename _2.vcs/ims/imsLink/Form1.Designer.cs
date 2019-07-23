@@ -303,6 +303,7 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
+            this.bt_disable_timer_webcam = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -346,9 +347,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(273, 7);
+            this.button1.Location = new System.Drawing.Point(261, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 33);
+            this.button1.Size = new System.Drawing.Size(64, 33);
             this.button1.TabIndex = 0;
             this.button1.Text = "Connect";
             this.button1.UseVisualStyleBackColor = true;
@@ -356,9 +357,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(337, 7);
+            this.button2.Location = new System.Drawing.Point(331, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(67, 33);
+            this.button2.Size = new System.Drawing.Size(64, 33);
             this.button2.TabIndex = 1;
             this.button2.Text = "Disconnect";
             this.button2.UseVisualStyleBackColor = true;
@@ -405,7 +406,7 @@
             this.button9.BackColor = System.Drawing.Color.Black;
             this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(410, 6);
+            this.button9.Location = new System.Drawing.Point(401, 6);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(64, 33);
             this.button9.TabIndex = 18;
@@ -441,7 +442,7 @@
             // 
             this.button10.Location = new System.Drawing.Point(191, 7);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(74, 33);
+            this.button10.Size = new System.Drawing.Size(64, 33);
             this.button10.TabIndex = 21;
             this.button10.Text = "COM Scan";
             this.button10.UseVisualStyleBackColor = true;
@@ -1742,6 +1743,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_disable_timer_webcam);
             this.tp_USB.Controls.Add(this.bt_break);
             this.tp_USB.Controls.Add(this.pictureBox2);
             this.tp_USB.Controls.Add(this.comboBox_temperature);
@@ -1947,6 +1949,7 @@
             this.numericUpDown_B.TabIndex = 107;
             this.numericUpDown_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_B.ValueChanged += new System.EventHandler(this.numericUpDown_B_ValueChanged);
+            this.numericUpDown_B.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_B_KeyPress);
             // 
             // numericUpDown_G
             // 
@@ -1962,6 +1965,7 @@
             this.numericUpDown_G.TabIndex = 106;
             this.numericUpDown_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_G.ValueChanged += new System.EventHandler(this.numericUpDown_G_ValueChanged);
+            this.numericUpDown_G.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_G_KeyPress);
             // 
             // numericUpDown_R
             // 
@@ -1977,6 +1981,7 @@
             this.numericUpDown_R.TabIndex = 105;
             this.numericUpDown_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_R.ValueChanged += new System.EventHandler(this.numericUpDown_R_ValueChanged);
+            this.numericUpDown_R.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_R_KeyPress);
             // 
             // numericUpDown_gain
             // 
@@ -2322,9 +2327,9 @@
             this.bt_awb.ForeColor = System.Drawing.Color.Black;
             this.bt_awb.Location = new System.Drawing.Point(805, 539);
             this.bt_awb.Name = "bt_awb";
-            this.bt_awb.Size = new System.Drawing.Size(90, 32);
+            this.bt_awb.Size = new System.Drawing.Size(64, 32);
             this.bt_awb.TabIndex = 59;
-            this.bt_awb.Text = "To Manual";
+            this.bt_awb.Text = "Manual";
             this.bt_awb.UseVisualStyleBackColor = false;
             this.bt_awb.Click += new System.EventHandler(this.bt_awb_Click);
             // 
@@ -3404,6 +3409,19 @@
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
             // 
+            // bt_disable_timer_webcam
+            // 
+            this.bt_disable_timer_webcam.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_disable_timer_webcam.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_disable_timer_webcam.ForeColor = System.Drawing.Color.Black;
+            this.bt_disable_timer_webcam.Location = new System.Drawing.Point(866, 425);
+            this.bt_disable_timer_webcam.Name = "bt_disable_timer_webcam";
+            this.bt_disable_timer_webcam.Size = new System.Drawing.Size(64, 32);
+            this.bt_disable_timer_webcam.TabIndex = 116;
+            this.bt_disable_timer_webcam.Text = "timer";
+            this.bt_disable_timer_webcam.UseVisualStyleBackColor = false;
+            this.bt_disable_timer_webcam.Click += new System.EventHandler(this.bt_disable_timer_webcam_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3772,6 +3790,7 @@
         private System.Windows.Forms.ComboBox comboBox_temperature;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button bt_break;
+        private System.Windows.Forms.Button bt_disable_timer_webcam;
     }
 }
 

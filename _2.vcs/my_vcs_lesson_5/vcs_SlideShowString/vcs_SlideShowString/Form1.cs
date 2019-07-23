@@ -151,19 +151,19 @@ namespace vcs_SlideShowString
 
                     if ((line[line.Length - 2] == '*') && (line[line.Length - 1] == '/'))
                     {
-                        richTextBox1.Text += "got comment SP : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        //richTextBox1.Text += "got comment SP : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
                         flag_skip_comment = false;
                         continue;
                     }
                     else if (flag_skip_comment == true)
                     {
-                        richTextBox1.Text += "got comment : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        //richTextBox1.Text += "got comment : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
                         continue;
                     }
                     else if ((line[0] == '/') && (line[1] == '*'))
                     {
                         flag_skip_comment = true;
-                        richTextBox1.Text += "got comment ST : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        //richTextBox1.Text += "got comment ST : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
                         continue;
                     }
                     else if (line[0] == '@')
@@ -362,19 +362,19 @@ namespace vcs_SlideShowString
 
                     if ((line[line.Length - 2] == '*') && (line[line.Length - 1] == '/'))
                     {
-                        richTextBox1.Text += "got comment SP : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        //richTextBox1.Text += "got comment SP : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
                         flag_skip_comment = false;
                         continue;
                     }
                     else if (flag_skip_comment == true)
                     {
-                        richTextBox1.Text += "got comment : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        //richTextBox1.Text += "got comment : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
                         continue;
                     }
                     else if ((line[0] == '/') && (line[1] == '*'))
                     {
                         flag_skip_comment = true;
-                        richTextBox1.Text += "got comment ST : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        //richTextBox1.Text += "got comment ST : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
                         continue;
                     }
                     else if (line[0] == '@')
@@ -591,7 +591,34 @@ namespace vcs_SlideShowString
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.PageDown) || (e.KeyCode == Keys.Space))
+            if (e.KeyCode == Keys.Space)
+            {
+                if (flag_pause == false)
+                {
+                    flag_pause = true;
+                    timer1.Enabled = false;
+                    this.TopMost = false;
+                }
+                else
+                {
+                    flag_pause = false;
+                    timer1.Enabled = true;
+                    timer1_cnt = 0;
+                    if (flag_top_most == true)
+                    {
+                        this.TopMost = true;
+                        g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
+                    }
+                    else
+                    {
+                        this.TopMost = false;
+                        g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
+                    }
+                }
+                draw_pause_border();
+                pictureBox1.Focus();
+            }
+            else if (e.KeyCode == Keys.PageDown)
             {
                 richTextBox1.Text += "下一首\n";
                 if (lyrics_count == 1)
@@ -639,7 +666,7 @@ namespace vcs_SlideShowString
             {
                 richTextBox1.Text += "Up\n";
                 flag_down_up_cnt--;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad9)
             {
@@ -647,13 +674,13 @@ namespace vcs_SlideShowString
                 flag_down_up_cnt--;
                 richTextBox1.Text += "Right\n";
                 flag_right_left_cnt++;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad6)
             {
                 richTextBox1.Text += "Right\n";
                 flag_right_left_cnt++;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad3)
             {
@@ -661,13 +688,13 @@ namespace vcs_SlideShowString
                 flag_right_left_cnt++;
                 richTextBox1.Text += "Down\n";
                 flag_down_up_cnt++;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad2)
             {
                 richTextBox1.Text += "Down\n";
                 flag_down_up_cnt++;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad1)
             {
@@ -675,13 +702,13 @@ namespace vcs_SlideShowString
                 flag_down_up_cnt++;
                 richTextBox1.Text += "Left\n";
                 flag_right_left_cnt--;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad4)
             {
                 richTextBox1.Text += "Left\n";
                 flag_right_left_cnt--;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad7)
             {
@@ -689,14 +716,14 @@ namespace vcs_SlideShowString
                 flag_right_left_cnt--;
                 richTextBox1.Text += "Up\n";
                 flag_down_up_cnt--;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.NumPad5)
             {
                 richTextBox1.Text += "Restore position\n";
                 flag_right_left_cnt = 0;
                 flag_down_up_cnt = 0;
-                reload_slide_show_string();
+                slide_show_string();
             }
             else if (e.KeyCode == Keys.Home)
             {
@@ -795,19 +822,19 @@ namespace vcs_SlideShowString
                 {
                     richTextBox1.Text += "靠右\n";
                     align_direction = '0';
-                    reload_slide_show_string();
+                    slide_show_string();
                 }
                 else if (e.KeyCode == Keys.L)
                 {
                     richTextBox1.Text += "靠左\n";
                     align_direction = '1';
-                    reload_slide_show_string();
+                    slide_show_string();
                 }
                 else if (e.KeyCode == Keys.C)
                 {
                     richTextBox1.Text += "正中\n";
                     align_direction = '2';
-                    reload_slide_show_string();
+                    slide_show_string();
                 }
                 else if (e.KeyCode == Keys.F)
                 {
@@ -998,17 +1025,51 @@ namespace vcs_SlideShowString
             //richTextBox1.Text += "SW X SH = " + screenWidth_max.ToString() + " X " + screenHeight_max.ToString() + "\n";
 
             lines_in_this_lyrics = current_strings.Count;
+
             /*
-            richTextBox1.Text += "current_strings 內容\tcount = " + current_strings.Count.ToString() + " (lines)\n";
+            richTextBox1.Text += "\ncurrent_strings 內容\tcount = " + current_strings.Count.ToString() + " (lines)\n";
             for (i = 0; i < current_strings.Count; i++)
             {
                 richTextBox1.Text += current_strings[i] + "\n";
             }
             */
 
+            int longest_length = 0;
+            int longest_index = 0;
+            int len = 0;
+            for (i = 1; i < current_strings.Count; i++)
+            {
+                if (i == 1)
+                {
+                    //richTextBox1.Text += "第 " + i.ToString() + " 行 內容 " + current_strings[i] + " len = " + (current_strings[i].Length - 1).ToString() + "\n";
+                    len = current_strings[i].Length - 1;
+
+                }
+                else
+                {
+                    //richTextBox1.Text += "第 " + i.ToString() + " 行 內容 " + current_strings[i] + " len = " + current_strings[i].Length.ToString() + "\n";
+                    len = current_strings[i].Length;
+                }
+                if (longest_length < len)
+                {
+                    longest_length = len;
+                    longest_index = i;
+                }
+            }
+            richTextBox1.Text += "最長行 第 " + longest_index.ToString() + " 行 長度 " + longest_length.ToString() + "\n";
+
             w = 0;
             h = 0;
 
+            if (longest_index == 1)
+                w = g.MeasureString(current_strings[longest_index].Remove(0, 1), f).ToSize().Width;
+            else
+                w = g.MeasureString(current_strings[longest_index], f).ToSize().Width;
+
+            h = g.MeasureString(current_strings[longest_index], f).ToSize().Height;
+
+
+            /*
             for (i = 0; i < current_strings.Count; i++)
             {
                 if(i == 1)
@@ -1027,6 +1088,7 @@ namespace vcs_SlideShowString
                 if (h < tmp_height)
                     h = tmp_height;
             }
+            */
 
             /*
             richTextBox1.Text += "w = " + w.ToString() + "\t";
@@ -1629,8 +1691,17 @@ namespace vcs_SlideShowString
                     y_st = screenHeight - H;
                 this.Location = new System.Drawing.Point(x_st, y_st);
 
-
                 this.Size = new Size(W, H);
+
+                richTextBox1.Visible = false;
+                button1.Visible = false;
+                button2.Visible = false;
+                button3.Visible = false;
+                button4.Visible = false;
+                button5.Visible = false;
+                button6.Visible = false;
+                button7.Visible = false;
+                button8.Visible = false;
             }
             else
             {
@@ -1723,61 +1794,6 @@ namespace vcs_SlideShowString
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (flag_pause == false)
-            {
-                flag_pause = true;
-                timer1.Enabled = false;
-                this.TopMost = false;
-            }
-            else
-            {
-                flag_pause = false;
-                timer1.Enabled = true;
-                timer1_cnt = 0;
-                if (flag_top_most == true)
-                {
-                    this.TopMost = true;
-                    g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
-                }
-                else
-                {
-                    this.TopMost = false;
-                    g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
-                }
-            }
-            draw_pause_border();
-            pictureBox1.Focus();
-
-            /*
-            int W = 0;      //final pictureBox1.Width for display
-            int H = 0;      //final pictureBox1.Height for display
-            */
-            /*
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-            int screenHeight_max = screenHeight * display_height / 100;
-            int screenWidth_max = screenWidth * display_width / 100;
-
-            richTextBox1.Text += "最大邊界 SW X SH = " + screenWidth_max.ToString() + " X " + screenHeight_max.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-            richTextBox1.Text += "X = " + MousePosition.X.ToString() + " Y = " + MousePosition.Y.ToString() + "\n";
-            richTextBox1.Text += "px = " + (pictureBox1.Location.X).ToString() + " py = " + (pictureBox1.Location.Y).ToString() + "\n";
-            */
-
-            //取得滑鼠在pictureBox1內的座標
-            int px = MousePosition.X - pictureBox1.Location.X;
-            int py = MousePosition.Y - pictureBox1.Location.Y;
-            richTextBox1.Text += "px = " + px.ToString() + " py = " + py.ToString() + "\n";
-            if (px < (W / 3))
-                richTextBox1.Text += "左\n";
-            else if (px > (W * 2 / 3))
-                richTextBox1.Text += "右\n";
-            else
-                richTextBox1.Text += "中\n";
-
-
         }
 
         //***********************
@@ -1820,6 +1836,7 @@ namespace vcs_SlideShowString
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
+            /*
             if (lyrics_count == 1)
             {
                 richTextBox1.Text += "只有一首, 不動作\n";
@@ -1827,6 +1844,105 @@ namespace vcs_SlideShowString
             }
             show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
             slide_show_string();
+            */
+
+            /*  old pause method
+            if (flag_pause == false)
+            {
+                flag_pause = true;
+                timer1.Enabled = false;
+                this.TopMost = false;
+            }
+            else
+            {
+                flag_pause = false;
+                timer1.Enabled = true;
+                timer1_cnt = 0;
+                if (flag_top_most == true)
+                {
+                    this.TopMost = true;
+                    g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
+                }
+                else
+                {
+                    this.TopMost = false;
+                    g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
+                }
+            }
+            draw_pause_border();
+            pictureBox1.Focus();
+            */
+
+            /*
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            int screenHeight_max = screenHeight * display_height / 100;
+            int screenWidth_max = screenWidth * display_width / 100;
+
+            richTextBox1.Text += "最大邊界 SW X SH = " + screenWidth_max.ToString() + " X " + screenHeight_max.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
+            richTextBox1.Text += "X = " + MousePosition.X.ToString() + " Y = " + MousePosition.Y.ToString() + "\n";
+            richTextBox1.Text += "px = " + (pictureBox1.Location.X).ToString() + " py = " + (pictureBox1.Location.Y).ToString() + "\n";
+            */
+
+            //取得滑鼠在pictureBox1內的座標
+            //int px = MousePosition.X - pictureBox1.Location.X;
+            //int py = MousePosition.Y - pictureBox1.Location.Y;
+
+            int px = MousePosition.X - pictureBox1.Location.X - this.Location.X;
+            int py = MousePosition.Y - pictureBox1.Location.Y - this.Location.Y;
+            /*
+            richTextBox1.Text += "MousePosition.X = " + MousePosition.X.ToString() + " MousePosition.Y = " + MousePosition.Y.ToString() + "\n";
+            richTextBox1.Text += "this.Location.X = " + this.Location.X.ToString() + " this.Location.Y = " + this.Location.Y.ToString() + "\n";
+            richTextBox1.Text += "pictureBox1.Location.X = " + pictureBox1.Location.X.ToString() + " pictureBox1.Location.Y = " + pictureBox1.Location.Y.ToString() + "\n";
+            richTextBox1.Text += "px = " + px.ToString() + " py = " + py.ToString() + "\n";
+
+            if (px < (W / 3))
+                richTextBox1.Text += "左\n";
+            else if (px > (W * 2 / 3))
+                richTextBox1.Text += "右\n";
+            else
+                richTextBox1.Text += "中\n";
+            */
+            if ((px > (W - BORDER - h)) && (px < W - BORDER) && (py > SKY) && (py < (SKY + D1)))
+            {
+                //g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(100, 100, 100, 100));
+                int x_st = W - BORDER - h + pictureBox1.Location.X + this.Location.X;
+                int y_st = SKY + pictureBox1.Location.Y + this.Location.X;
+                //int ww = h;
+                //int hh = D1;
+                richTextBox1.Text += "PAUSE\n";
+                //richTextBox1.Text += "x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + "\n";
+                //richTextBox1.Text += "ww = " + ww.ToString() + " hh = " + hh.ToString() + "\n";
+                //g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, ww, hh));
+
+                if (flag_pause == false)
+                {
+                    flag_pause = true;
+                    timer1.Enabled = false;
+                    this.TopMost = false;
+                }
+                else
+                {
+                    flag_pause = false;
+                    timer1.Enabled = true;
+                    timer1_cnt = 0;
+                    if (flag_top_most == true)
+                    {
+                        this.TopMost = true;
+                        g.DrawLine(new Pen(Brushes.SaddleBrown, 3), 0, H - 2, W - 1, H - 2);
+                    }
+                    else
+                    {
+                        this.TopMost = false;
+                        g.DrawLine(new Pen(Brushes.SandyBrown, 3), 0, H - 2, W - 1, H - 2);
+                    }
+                }
+                draw_pause_border();
+                pictureBox1.Focus();
+            }
+       
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -2029,6 +2145,14 @@ namespace vcs_SlideShowString
                 }
             }
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
         }
     }
 }

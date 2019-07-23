@@ -736,9 +736,9 @@ namespace vcs_DrAP
             richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {
-                richTextBox2.Text += listView1.SelectedItems[i] + "\n";
+                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
-            richTextBox2.Text += "播放\n";
+            richTextBox2.Text += "開啟\n";
             */
 
             int selNdx;
@@ -746,7 +746,7 @@ namespace vcs_DrAP
 
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
             {
-                richTextBox2.Text += "無檔可播\n";
+                richTextBox2.Text += "無檔案\n";
                 return;
             }
 
@@ -778,16 +778,23 @@ namespace vcs_DrAP
                 target = text_editor_path;
             }
 
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
-
-            richTextBox2.Text += "target : " + target + "\n";
-            richTextBox2.Text += "all_filename : " + all_filename + "\n";
-
-            using (Process p = new Process())
+            if (flag_search_vcs_pattern == 0)
             {
-                p.StartInfo = pInfo;
-                p.Start();
+                ProcessStartInfo pInfo = new ProcessStartInfo(target);
+                pInfo.Arguments = all_filename;
+
+                richTextBox2.Text += "target : " + target + "\n";
+                richTextBox2.Text += "all_filename : " + all_filename + "\n";
+
+                using (Process p = new Process())
+                {
+                    p.StartInfo = pInfo;
+                    p.Start();
+                }
+            }
+            else
+            {
+                System.Diagnostics.Process.Start("uedit32.exe", all_filename);
             }
         }
 
@@ -888,7 +895,7 @@ namespace vcs_DrAP
 
         private void button10_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "bbb你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
 
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {

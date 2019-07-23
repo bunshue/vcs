@@ -1601,6 +1601,7 @@ namespace imsLink
             bt_awb.Visible = false;
             bt_awb_test.Visible = false;
             bt_awb_test_init.Visible = false;
+            bt_disable_timer_webcam.Visible = false;
             bt_break.Visible = false;
             pictureBox2.Visible = false;
             lb_range_1.Visible = false;
@@ -1836,12 +1837,25 @@ namespace imsLink
             }
         }
 
+        /* old  delay 10000 約 17.2秒
         private void delay(int delay)
         {
             Application.DoEvents();         //執行某一事件，以達到延遲效果。
             for (int j = 0; j < delay; j++)
                 System.Threading.Thread.Sleep(1);
         }
+        */
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        } 
 
         private void button70_Click(object sender, EventArgs e)
         {
@@ -1940,6 +1954,15 @@ namespace imsLink
             data[2] = yy;
             data[3] = zz;
             data[4] = CalcCheckSum(data, 4);
+
+            if ((xx == 0x35) && (yy == 0x01))
+            {
+                richTextBox1.AppendText("xxxxxxxxxxx  [TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+            }
+            if ((xx == 0x35) && (yy == 0x0A))
+            {
+                richTextBox1.AppendText("yyyyyyyyyyy  [TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+            }
 
             //richTextBox1.AppendText("[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
 
@@ -2781,6 +2804,7 @@ namespace imsLink
                     bt_awb.Visible = false;
                     bt_awb_test.Visible = false;
                     bt_awb_test_init.Visible = false;
+                    bt_disable_timer_webcam.Visible = false;
                     bt_break.Visible = false;
                     pictureBox2.Visible = false;
                     lb_range_1.Visible = false;
@@ -3326,6 +3350,7 @@ namespace imsLink
         int flag_camera_is_stopped = 0;
         private void button15_Click(object sender, EventArgs e)
         {
+            /*
             if (flag_camera_start == 1)
             {
                 if (flag_camera_is_stopped == 0)
@@ -3343,7 +3368,22 @@ namespace imsLink
                     richTextBox1.Text += "繼續\n";
                 }
             }
-            
+            */
+            if (flag_camera_start == 1)
+            {
+                if (flag_camera_is_stopped == 0)
+                {
+                    flag_camera_is_stopped = 1;
+                    richTextBox1.Text += "停止\n";
+                    enable_camera_streaming(false);
+                }
+                else
+                {
+                    flag_camera_is_stopped = 0;
+                    richTextBox1.Text += "繼續\n";
+                    enable_camera_streaming(true);
+                }
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -3511,6 +3551,7 @@ namespace imsLink
                     bt_awb.Visible = true;
                     bt_awb_test.Visible = true;
                     bt_awb_test_init.Visible = true;
+                    bt_disable_timer_webcam.Visible = true;
                     bt_break.Visible = true;
                     pictureBox2.Visible = true;
                     lb_range_1.Visible = true;
@@ -3571,6 +3612,7 @@ namespace imsLink
 
                     bt_break.Location = new Point(410 + 45 - 80, 650 - 100);
 
+                    bt_disable_timer_webcam.Location = new Point(480 + 45, 650 - 100 - 50);
 
                     lb_addr.Location = new Point(30, 620 - 100);
                     lb_0x1.Location = new Point(5, 650 + 3 - 100);
@@ -3696,6 +3738,7 @@ namespace imsLink
                     bt_awb.Visible = false;
                     bt_awb_test.Visible = false;
                     bt_awb_test_init.Visible = false;
+                    bt_disable_timer_webcam.Visible = false;
                     bt_break.Visible = false;
                     pictureBox2.Visible = false;
                     lb_range_1.Visible = false;
@@ -3717,6 +3760,11 @@ namespace imsLink
                     lb_awb_result_G.Visible = false;
                     lb_awb_result_B.Visible = false;
                     bt_get_setup.Visible = false;
+
+                    comboBox_temperature.Visible = false;
+                    numericUpDown_TG_R.Visible = false;
+                    numericUpDown_TG_G.Visible = false;
+                    numericUpDown_TG_B.Visible = false;
 
                     //R
                     lb_R.Visible = false;
@@ -5223,7 +5271,7 @@ namespace imsLink
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x01;
-            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x02;
 
@@ -5240,21 +5288,21 @@ namespace imsLink
                 return;
             }
 
-            if (flag_awb_mode == false)
+            if(bt_awb.Text == "Manual")
             {
+                bt_awb.Text = "Auto";
                 lb_rgb.Text = "";
                 flag_awb_mode = true;
                 timer_webcam.Enabled = false;
-                bt_awb.Text = "To Auto";
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+                //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
             }
             else
             {
+                bt_awb.Text = "Manual";
                 flag_awb_mode = false;
                 timer_webcam.Enabled = true;
-                bt_awb.Text = "To Manual";
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
-
             }
         }
 
@@ -5271,7 +5319,7 @@ namespace imsLink
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x0A;
-            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x0B;
 
@@ -5766,7 +5814,7 @@ namespace imsLink
 
             int cnt = 0;
             flag_wait_receive_data = 1;
-            while ((flag_wait_receive_data == 1) && (cnt++ < 10))
+            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
             {
                 //richTextBox1.Text += "e";
                 delay(100);
@@ -5836,7 +5884,7 @@ namespace imsLink
 
             int cnt = 0;
             flag_wait_receive_data = 1;
-            while ((flag_wait_receive_data == 1) && (cnt++ < 10))
+            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
             {
                 //richTextBox1.Text += "a";
                 delay(100);
@@ -5905,7 +5953,7 @@ namespace imsLink
                 lb_rgb.Text = "";
                 flag_awb_mode = true;
                 timer_webcam.Enabled = false;
-                bt_awb.Text = "To Auto";
+                bt_awb.Text = "Auto";
                 richTextBox1.Text += "send disable auto command\n";
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
             }
@@ -5920,9 +5968,9 @@ namespace imsLink
             // Begin timing
             stopwatch.Start();
 
-            richTextBox1.Text += "setup gain to 0x40 = 64 (1X)\n";
-            Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
-            Send_IMS_Data(0xA0, 0x35, 0x0B, 0x40);
+            richTextBox1.Text += "setup gain to 0x7f = 127\n";
+            //Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
+            Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);
 
             test_RGB_saturation();
 
@@ -6257,7 +6305,7 @@ namespace imsLink
                             dd = (byte)(SendData / 256);
                             DongleAddr_h = 0x35;
                             DongleAddr_l = 0x01;
-                            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
                             DongleAddr_h = 0x35;
                             DongleAddr_l = 0x02;
 
@@ -6420,7 +6468,7 @@ namespace imsLink
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x01;
-            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x02;
 
@@ -6432,7 +6480,7 @@ namespace imsLink
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x0A;
-            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x0B;
 
@@ -6642,6 +6690,129 @@ namespace imsLink
             richTextBox1.Text += "BREAK\n";
             flag_break = true;
         }
+
+        private void numericUpDown_R_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_R_Click(sender, e);
+            }
+        }
+
+        private void numericUpDown_G_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_G_Click(sender, e);
+            }
+        }
+
+        private void numericUpDown_B_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_B_Click(sender, e);
+            }
+        }
+
+        void enable_camera_streaming(bool enable)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte dd;
+            if (enable == true)
+            {
+                dd = 1;     //Streaming
+            }
+            else
+            {
+                dd = 0;     //Sleep
+            }
+            DongleAddr_h = 0x01;
+            DongleAddr_l = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+        }
+
+        void to_awb_auto_mode()
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //flag_awb_mode = false;
+            //timer_webcam.Enabled = true;
+            bt_awb.Text = "Manual";
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+        }
+
+        void to_awb_manual_mode()
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //flag_awb_mode = true;
+            //timer_webcam.Enabled = false;
+            bt_awb.Text = "Auto";
+            //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+        }
+
+        private void bt_disable_timer_webcam_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Disable Timer WebCam\n";
+            timer_webcam.Enabled = false;
+        }
+
     }
 }
 
