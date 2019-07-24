@@ -1396,7 +1396,7 @@ namespace vcs_SlideShowString
 
             draw_pause_border();
 
-            if (flag_debug_mode == true)
+            if ((flag_debug_mode == true) || (flag_release_mode == false))
             {
                 string str;
 
@@ -1456,10 +1456,26 @@ namespace vcs_SlideShowString
             }
             else
             {
-                pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * move_step, (this.Size.Height - H) / 2 + flag_down_up_cnt * move_step);
+                //pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * move_step, (this.Size.Height - H) / 2 + flag_down_up_cnt * move_step);
+                pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * move_step, 0 + flag_down_up_cnt * move_step);
                 //設定執行後的表單起始位置
                 this.StartPosition = FormStartPosition.Manual;
                 this.Location = new System.Drawing.Point(0, 0);
+                richTextBox1.Text += "目前W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+                richTextBox1.Size = new System.Drawing.Size(W * 3, H);
+                richTextBox1.Location = new Point(W * 1 + 120, 0);
+
+                button1.Location = new Point(W * 1 + 10, 10);
+                button2.Location = new Point(W * 1 + 10, 50);
+                button3.Location = new Point(W * 1 + 10, 90);
+                button4.Location = new Point(W * 1 + 10, 130);
+                button5.Location = new Point(W * 1 + 10, 170);
+                button6.Location = new Point(W * 1 + 10, 210);
+                button7.Location = new Point(W * 1 + 10, 250);
+                button8.Location = new Point(W * 1 + 10, 290);
+
+                this.Size = new Size(W * 4 + 120, H);
             }
             this.Text = str_title;
 
@@ -1635,7 +1651,7 @@ namespace vcs_SlideShowString
 
             draw_pause_border();
 
-            if (flag_debug_mode == true)
+            if ((flag_debug_mode == true) || (flag_release_mode == false))
             {
                 string str;
 
@@ -1751,7 +1767,7 @@ namespace vcs_SlideShowString
             }
             else
             {
-                if (flag_debug_mode == true)     //顯示要換首的剩餘時間
+                if ((flag_debug_mode == true) || (flag_release_mode == false))  //顯示要換首的剩餘時間
                 {
                     int fs = EARTH * 2 / 5;
                     string str = (slide_show_interval - timer1_cnt).ToString() + "/" + slide_show_interval.ToString();
