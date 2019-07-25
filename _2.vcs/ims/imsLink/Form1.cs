@@ -122,7 +122,7 @@ namespace imsLink
         int flag_down_up_cnt = 0;
         int flag_right_left_cnt = 0;
         int awb_step = 10;
-        int awb_range = 64;
+        int awb_block = 64;     //AWB block size width, height
 
         int TARGET_AWB_R = 255;
         int TARGET_AWB_G = 249;
@@ -131,6 +131,17 @@ namespace imsLink
         int RGB_R = 0;
         int RGB_G = 0;
         int RGB_B = 0;
+
+        int total_RGB_R = 0;
+        int total_RGB_G = 0;
+        int total_RGB_B = 0;
+
+        int total_RGB_R_max = 0;
+        int total_RGB_R_min = 0;
+        int total_RGB_G_max = 0;
+        int total_RGB_G_min = 0;
+        int total_RGB_B_max = 0;
+        int total_RGB_B_min = 0;
 
         //C# 提示視窗 ToolTip 
         //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -618,7 +629,9 @@ namespace imsLink
                     if (Comport_Mode == 0)  //imsLink mode
                     {
                         if (BytesToRead == UART_BUF_LENGTH)
+                        {
                             SpyMonitorRX();
+                        }
                         else if (BytesToRead == 21) // 5 + 16
                         {
                             /*
@@ -854,7 +867,7 @@ namespace imsLink
 
                                 string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
                                 string weekday = Day[input[3]].ToString();
-                                lb_time2.Text = "ims時間 : " + ((int)input[0] + 1900).ToString() + "/" + ((int)input[1] + 1).ToString("00") + "/" + ((int)input[2]).ToString("00") + " " + weekday + " " +((int)input[4]).ToString("00") + ":" + ((int)input[5]).ToString("00") + ":" + ((int)input[6]).ToString("00");
+                                lb_time2.Text = "ims時間 : " + ((int)input[0] + 1900).ToString() + "/" + ((int)input[1] + 1).ToString("00") + "/" + ((int)input[2]).ToString("00") + " " + weekday + " " + ((int)input[4]).ToString("00") + ":" + ((int)input[5]).ToString("00") + ":" + ((int)input[6]).ToString("00");
                                 //richTextBox1.Text += ((int)input[6]).ToString("00") + " ";
                                 flag_read_connection_again = true;
 
@@ -884,7 +897,7 @@ namespace imsLink
                                 richTextBox1.Text += ((int)input[i]).ToString("X2") + " ";
                             }
                             richTextBox1.Text += "\n";
-                            
+
                             bool flag_no_camera_serial1 = true;
                             bool flag_no_camera_serial2 = true;
                             tb_info_aa1.Text = "[S/N] : ";
@@ -903,7 +916,7 @@ namespace imsLink
                                     flag_no_camera_serial1 = false;
                                 }
                             }
-                            
+
                             for (i = 16; i < (16 + 11); i++)
                             {
                                 if (((int)input[i] < '0') || ((int)input[i] > '9'))
@@ -1013,7 +1026,7 @@ namespace imsLink
                                 flag_receive_camera_serial = 0;
                                 flag_wait_receive_data = 0;
                             }
-                            
+
                         }
                         else if (BytesToRead == 55) // 5 + 50
                         {
@@ -1217,8 +1230,8 @@ namespace imsLink
 
                 if (isCommandLog == 1)
                 {
-                    //richTextBox1.AppendText("[RX] : " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "\n");
-                    richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+                    //richTextBox1.AppendText("[RX] : " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "  ");
+                    //richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
                 }
 
                 if (input[0] == 0xDD)
@@ -1246,7 +1259,7 @@ namespace imsLink
 
                         //richTextBox1.Text += "cmd : " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + "\n";
 
-                        if ((input[1] == 0x35) || (input[1] == 0x52))
+                        if ((input[1] == 0x35) || (input[1] == 0x52) || (input[1] == 0x3A))
                         {
                             if (input[1] == 0x35)
                             {
@@ -1349,6 +1362,18 @@ namespace imsLink
                                     }
                                 }
                             }
+                            else if (input[1] == 0x3A)
+                            {
+                                if (input[2] == 0x03)
+                                {
+                                    numericUpDown_wpt.Value = input[3];
+                                }
+                                else if (input[2] == 0x04)
+                                {
+                                    numericUpDown_bpt.Value = input[3];
+                                }
+                            }
+                            //richTextBox1.Text += "\n";
                         }
                     }
                     else if (input[1] == 0xA1)
@@ -1543,8 +1568,16 @@ namespace imsLink
             tb_mb_big_serial.Text = "0000000000000";
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
 
-            tb_sn1.Text = "AA0000000";
-            tb_sn2.Text = "00000000000";
+            if (flag_release_mode == true)
+            {
+                tb_sn1.Text = "AA0000000";
+                tb_sn2.Text = "00000000000";
+            }
+            else
+            {
+                tb_sn1.Text = "AA1234567";
+                tb_sn2.Text = "12345678901";
+            }
 
             button12.BackgroundImage = imsLink.Properties.Resources.refresh;
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
@@ -1655,6 +1688,20 @@ namespace imsLink
             tb_B.Visible = false;
             numericUpDown_B.Visible = false;
             bt_setup_B.Visible = false;
+
+            //WPT
+            lb_wpt.Visible = false;
+            tb_wpt.Visible = false;
+            numericUpDown_wpt.Visible = false;
+            bt_read_wpt.Visible = false;
+            bt_write_wpt.Visible = false;
+
+            //BPT
+            lb_bpt.Visible = false;
+            tb_bpt.Visible = false;
+            numericUpDown_bpt.Visible = false;
+            bt_read_bpt.Visible = false;
+            bt_write_bpt.Visible = false;
 
             g.Clear(BackColor);
 
@@ -1850,6 +1897,7 @@ namespace imsLink
         //C# 不lag的延遲時間
         private void delay(int delay_milliseconds)
         {
+            delay_milliseconds *= 2;
             DateTime time_before = DateTime.Now;
             while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
             {
@@ -1955,6 +2003,7 @@ namespace imsLink
             data[3] = zz;
             data[4] = CalcCheckSum(data, 4);
 
+            /*
             if ((xx == 0x35) && (yy == 0x01))
             {
                 richTextBox1.AppendText("xxxxxxxxxxx  [TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
@@ -1963,6 +2012,7 @@ namespace imsLink
             {
                 richTextBox1.AppendText("yyyyyyyyyyy  [TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
             }
+            */
 
             //richTextBox1.AppendText("[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
 
@@ -2858,6 +2908,20 @@ namespace imsLink
                     tb_B.Visible = false;
                     numericUpDown_B.Visible = false;
                     bt_setup_B.Visible = false;
+
+                    //WPT
+                    lb_wpt.Visible = false;
+                    tb_wpt.Visible = false;
+                    numericUpDown_wpt.Visible = false;
+                    bt_read_wpt.Visible = false;
+                    bt_write_wpt.Visible = false;
+
+                    //BPT
+                    lb_bpt.Visible = false;
+                    tb_bpt.Visible = false;
+                    numericUpDown_bpt.Visible = false;
+                    bt_read_bpt.Visible = false;
+                    bt_write_bpt.Visible = false;
                 }
             }
 
@@ -2912,8 +2976,8 @@ namespace imsLink
         {
             int x_st = 0;
             int y_st = 0;
-            int ww = awb_range;
-            int hh = awb_range;
+            int ww = awb_block;
+            int hh = awb_block;
 
             if (flag_awb_debug == true)
             {
@@ -2964,30 +3028,33 @@ namespace imsLink
             bm = (Bitmap)eventArgs.Frame.Clone();
             //pictureBox1.Image = bm;
 
+            gg = Graphics.FromImage(bm);
+
             int w = bm.Width;
             int h = bm.Height;
 
+            //設定要抓取的區域
             //RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2, zoom_step * zoom_cnt * 3 / 4 / 2, w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
-
             //RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * (btn_right_cnt - btn_left_cnt) / 2, zoom_step * zoom_cnt * 3 / 4 / 2, w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
             RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2,
                                              (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
                                              w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
 
             //寫字的功能
-            //畫框的功能
-            gg = Graphics.FromImage(bm);
-
             drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             drawBrush = new SolidBrush(Color.Yellow);
             drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-
             x_st = 10;
             y_st = 10;
             gg.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
 
-            if (flag_awb_debug == true)
+            if ((flag_awb_debug == true) && (flag_fullscreen == true))
             {
+
+            //畫框的功能
+
+            //if (flag_awb_debug == true)
+            //{
                 x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step;
                 if (x_st < 0)
                     x_st = 0;
@@ -3005,6 +3072,24 @@ namespace imsLink
                 RGB_R = total_R / (ww * hh);
                 RGB_G = total_G / (ww * hh);
                 RGB_B = total_B / (ww * hh);
+                total_RGB_R = total_R;
+                total_RGB_G = total_G;
+                total_RGB_B = total_B;
+
+                if (total_RGB_R_max < total_RGB_R)
+                    total_RGB_R_max = total_RGB_R;
+                if (total_RGB_R_min > total_RGB_R)
+                    total_RGB_R_min = total_RGB_R;
+
+                if (total_RGB_G_max < total_RGB_G)
+                    total_RGB_G_max = total_RGB_G;
+                if (total_RGB_G_min > total_RGB_G)
+                    total_RGB_G_min = total_RGB_G;
+
+                if (total_RGB_B_max < total_RGB_B)
+                    total_RGB_B_max = total_RGB_B;
+                if (total_RGB_B_min > total_RGB_B)
+                    total_RGB_B_min = total_RGB_B;
 
                 string rgb_value;
                 x_st = 10;
@@ -3055,24 +3140,23 @@ namespace imsLink
 
                 y_st = 370;
                 drawBrush = new SolidBrush(Color.Red);
-                rgb_value = total_R.ToString();
+                rgb_value = total_R.ToString() + "   " + (((float)total_R) / awb_block / awb_block).ToString("F3");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
 
                 y_st = 410;
                 drawBrush = new SolidBrush(Color.Green);
-                rgb_value = total_G.ToString();
+                rgb_value = total_G.ToString() + "   " + (((float)total_G) / awb_block / awb_block).ToString("F3");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
 
                 y_st = 450;
                 drawBrush = new SolidBrush(Color.Blue);
-                rgb_value = total_B.ToString();
+                rgb_value = total_B.ToString() + "   " + (((float)total_B) / awb_block / awb_block).ToString("F3");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
             }
-
-            pictureBox1.Image = bm.Clone(rect, PixelFormat.Format32bppArgb);
-
             usb_camera_width = w;
             usb_camera_height = h;
+            pictureBox1.Image = bm.Clone(rect, PixelFormat.Format32bppArgb);
 
             GC.Collect();       //回收資源
         }
@@ -3606,6 +3690,20 @@ namespace imsLink
                     numericUpDown_B.Visible = true;
                     bt_setup_B.Visible = true;
 
+                    //WPT
+                    lb_wpt.Visible = true;
+                    tb_wpt.Visible = true;
+                    numericUpDown_wpt.Visible = true;
+                    bt_read_wpt.Visible = true;
+                    bt_write_wpt.Visible = true;
+
+                    //BPT
+                    lb_bpt.Visible = true;
+                    tb_bpt.Visible = true;
+                    numericUpDown_bpt.Visible = true;
+                    bt_read_bpt.Visible = true;
+                    bt_write_bpt.Visible = true;
+
                     bt_awb.Location = new Point(410 + 45, 650 - 100 - 50);
                     bt_awb_test.Location = new Point(410 + 45-80, 650 - 100 - 50);
                     bt_awb_test_init.Location = new Point(410 + 45 - 80 - 80, 650 - 100 - 50);
@@ -3692,10 +3790,25 @@ namespace imsLink
                     tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10);
                     bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
 
+                    //TARGET RGB
                     comboBox_temperature.Location = new Point(170 + 400 + 30 + 120, 15 + 230 * 2);
                     numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120, 15 + 250 * 2);
                     numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120, 15 + 290 * 2);
                     numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120, 15 + 330 * 2);
+
+                    //WPT
+                    lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 15);
+                    tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    numericUpDown_wpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    bt_read_wpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    bt_write_wpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+
+                    //BPT
+                    lb_bpt.Location = new Point(410 + 5 + 400 + 20 + 200, lb_wpt.Location.Y + 60);
+                    tb_bpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, tb_wpt.Location.Y + 60);
+                    numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, numericUpDown_wpt.Location.Y + 60);
+                    bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, bt_read_wpt.Location.Y + 60);
+                    bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, bt_write_wpt.Location.Y + 60);
 
                     refresh_picturebox2();
                 }
@@ -3792,6 +3905,21 @@ namespace imsLink
                     tb_B.Visible = false;
                     numericUpDown_B.Visible = false;
                     bt_setup_B.Visible = false;
+
+                    //WPT
+                    lb_wpt.Visible = false;
+                    tb_wpt.Visible = false;
+                    numericUpDown_wpt.Visible = false;
+                    bt_read_wpt.Visible = false;
+                    bt_write_wpt.Visible = false;
+
+                    //BPT
+                    lb_bpt.Visible = false;
+                    tb_bpt.Visible = false;
+                    numericUpDown_bpt.Visible = false;
+                    bt_read_bpt.Visible = false;
+                    bt_write_bpt.Visible = false;
+
                 }
             }
         }
@@ -4703,8 +4831,16 @@ namespace imsLink
         private void button14_Click(object sender, EventArgs e)
         {
             g.Clear(BackColor);
-            tb_sn1.Text = "AA0000000";
-            tb_sn2.Text = "00000000000";
+            if (flag_release_mode == true)
+            {
+                tb_sn1.Text = "AA0000000";
+                tb_sn2.Text = "00000000000";
+            }
+            else
+            {
+                tb_sn1.Text = "AA1234567";
+                tb_sn2.Text = "12345678901";
+            }
             lb_write_camera_serial2.Text = "";
             lb_sn1.Text = "";
             lb_sn2.Text = "";
@@ -4854,8 +4990,8 @@ namespace imsLink
 
             int x_st_old = 0;
             int y_st_old = 0;
-            int ww = awb_range;
-            int hh = awb_range;
+            int ww = awb_block;
+            int hh = awb_block;
 
             int WW = 640;
             int HH = 480;
@@ -4866,8 +5002,8 @@ namespace imsLink
             x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step;
             y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt_old * awb_step;
 
-            richTextBox1.Text += "flag_right_left_cnt_old = " + flag_right_left_cnt_old.ToString() + " flag_down_up_cnt_old = " + flag_down_up_cnt_old.ToString() + "\n";
-            richTextBox1.Text += "x_st_old = " + x_st_old.ToString() + " y_st_old = " + y_st_old.ToString() + "\n";
+            //richTextBox1.Text += "flag_right_left_cnt_old = " + flag_right_left_cnt_old.ToString() + " flag_down_up_cnt_old = " + flag_down_up_cnt_old.ToString() + "\n";
+            //richTextBox1.Text += "x_st_old = " + x_st_old.ToString() + " y_st_old = " + y_st_old.ToString() + "\n";
 
             if ((e.KeyCode == Keys.PageDown) || (e.KeyCode == Keys.Space))
             {
@@ -5196,7 +5332,7 @@ namespace imsLink
                 richTextBox1.Text += "Center\n";
                 flag_right_left_cnt = 0;
                 flag_down_up_cnt = 0;
-                awb_range = 64;
+                awb_block = 64;
             }
             else if (e.KeyCode == Keys.Home)
             {
@@ -5208,15 +5344,15 @@ namespace imsLink
             }
             else if (e.KeyCode == Keys.Add)
             {
-                if(awb_range < 300)
-                    awb_range += 5;
-                richTextBox1.Text += "awb_range = " + awb_range.ToString() + "\n";
+                if (awb_block < 300)
+                    awb_block += 5;
+                richTextBox1.Text += "awb_block = " + awb_block.ToString() + "\n";
             }
             else if (e.KeyCode == Keys.Subtract)
             {
-                if (awb_range > 8)
-                    awb_range -= 5;
-                richTextBox1.Text += "awb_range = " + awb_range.ToString() + "\n";
+                if (awb_block > 8)
+                    awb_block -= 5;
+                richTextBox1.Text += "awb_block = " + awb_block.ToString() + "\n";
             }
             else if (e.KeyCode == Keys.X)
             {
@@ -5251,11 +5387,29 @@ namespace imsLink
             refresh_picturebox2();
         }
 
+        int timer_webcam_cnt = 0;
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
             if (flag_awb_debug == false)
                 return;
             this.pictureBox1.Focus();
+
+            /*
+            if ((timer_webcam_cnt % 10) == 0)
+            {
+                richTextBox1.Text += "d_R " + (total_RGB_R_max - total_RGB_R_min).ToString() + "    " + (((float)(total_RGB_R_max - total_RGB_R_min)) / awb_block / awb_block).ToString("F3")
+                    + "       d_G " + (total_RGB_G_max - total_RGB_G_min).ToString() + "    " + (((float)(total_RGB_G_max - total_RGB_G_min)) / awb_block / awb_block).ToString("F3")
+                    + "       d_B " + (total_RGB_B_max - total_RGB_B_min).ToString() + "    " + (((float)(total_RGB_B_max - total_RGB_B_min)) / awb_block / awb_block).ToString("F3") + "\n";
+
+               
+                total_RGB_R_max = 0;
+                total_RGB_R_min = 255 * awb_block * awb_block;
+                total_RGB_G_max = 0;
+                total_RGB_G_min = 255 * awb_block * awb_block;
+                total_RGB_B_max = 0;
+                total_RGB_B_min = 255 * awb_block * awb_block;
+            }
+            */
         }
 
         private void bt_setup_expo_Click(object sender, EventArgs e)
@@ -5955,7 +6109,8 @@ namespace imsLink
                 timer_webcam.Enabled = false;
                 bt_awb.Text = "Auto";
                 richTextBox1.Text += "send disable auto command\n";
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+                //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
             }
 
             flag_break = false;
@@ -5970,7 +6125,7 @@ namespace imsLink
 
             richTextBox1.Text += "setup gain to 0x7f = 127\n";
             //Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
-            Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);
+            //Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);	//no change gain....
 
             test_RGB_saturation();
 
@@ -6071,6 +6226,9 @@ namespace imsLink
                 }
 
             }
+
+            //richTextBox1.Text += "AGC auto, EXPO auto\n";
+            //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
             richTextBox1.Text += "AWB test SP\n";
 
@@ -6188,59 +6346,72 @@ namespace imsLink
 
         void check_RB_saturation()
         {
-            if (RGB_R >= 255)
+            if (total_RGB_R == 255 * awb_block * awb_block)
             {
-                int SendData = data_R - 100;
-                richTextBox1.Text += "飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
+                if (data_R == -1)
+                {
+                    richTextBox1.Text += "讀資料R錯誤 跳過\n";
+                }
+                else
+                {
+                    int SendData = data_R - 100;
+                    richTextBox1.Text += "飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
 
-                if (SendData > 500)
-                    numericUpDown_R.Value = SendData;
-                byte dd;
+                    if (SendData > 500)
+                        numericUpDown_R.Value = SendData;
+                    byte dd;
 
-                dd = (byte)(SendData / 256);
-                DongleAddr_h = 0x52;
-                DongleAddr_l = 0x1A;
-                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
-                DongleAddr_h = 0x52;
-                DongleAddr_l = 0x1B;
+                    dd = (byte)(SendData / 256);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1A;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1B;
 
-                dd = (byte)(SendData % 256);
-                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    dd = (byte)(SendData % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                }
             }
             //else
                 //richTextBox1.Text += "R 未飽和\n";
 
-            if (RGB_B >= 255)
+            if (total_RGB_B == 255 * awb_block * awb_block)
             {
-                int SendData = data_B - 100;
-                richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
+                if (data_B == -1)
+                {
+                    richTextBox1.Text += "讀資料B錯誤 跳過\n";
+                }
+                else
+                {
+                    int SendData = data_B - 100;
+                    richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
 
-                if(SendData > 500)
-                    numericUpDown_B.Value = SendData;
-                byte dd;
+                    if (SendData > 500)
+                        numericUpDown_B.Value = SendData;
+                    byte dd;
 
-                dd = (byte)(SendData / 256);
-                DongleAddr_h = 0x52;
-                DongleAddr_l = 0x1E;
-                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
-                DongleAddr_h = 0x52;
-                DongleAddr_l = 0x1F;
+                    dd = (byte)(SendData / 256);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1E;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1F;
 
-                dd = (byte)(SendData % 256);
-                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    dd = (byte)(SendData % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                }
             }
             //else
                 //richTextBox1.Text += "B 未飽和\n";
         }
 
-
         void check_RGB_saturation()
         {
-            if (RGB_R >= 255)
+            if (total_RGB_R == 255 * awb_block * awb_block)
             {
                 if (data_R == -1)
                 {
-                    richTextBox1.Text += "讀資料錯誤 跳過\n";
+                    richTextBox1.Text += "讀資料錯誤 跳過1\n";
                 }
                 else
                 {
@@ -6265,7 +6436,7 @@ namespace imsLink
             //else
             //richTextBox1.Text += "R 未飽和\n";
 
-            if (RGB_G >= 255)
+            if (total_RGB_G == 255 * awb_block * awb_block)
             {
                 int ret;
                 ret = get_expo_data();
@@ -6278,7 +6449,7 @@ namespace imsLink
                     if ((data_expo < 0) || (data_expo > 511))
                     {
                         richTextBox1.Text += "impossible data_expo " + data_expo.ToString() + "\n";
-                        richTextBox1.Text += "讀資料錯誤 跳過\n";
+                        richTextBox1.Text += "讀資料錯誤 跳過2\n";
                     }
                     else if (data_expo == 0)
                     {
@@ -6320,11 +6491,11 @@ namespace imsLink
             //else
             //richTextBox1.Text += "R 未飽和\n";
 
-            if (RGB_B >= 255)
+            if (total_RGB_B == 255 * awb_block * awb_block)
             {
                 if (data_B == -1)
                 {
-                    richTextBox1.Text += "讀資料錯誤 跳過\n";
+                    richTextBox1.Text += "讀資料錯誤 跳過3\n";
                 }
                 else
                 {
@@ -6627,8 +6798,8 @@ namespace imsLink
 
             int x_st = 0;
             int y_st = 0;
-            int ww = awb_range;
-            int hh = awb_range;
+            int ww = awb_block;
+            int hh = awb_block;
 
 
             int WW = 640 * 1;
@@ -6813,6 +6984,356 @@ namespace imsLink
             timer_webcam.Enabled = false;
         }
 
+        private void tb_3a_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_Click(sender, e);
+            }
+        }
+
+        private void tb_4a_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_Click(sender, e);
+            }
+        }
+
+        private void tb_1a_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_read_Click(sender, e);
+            }
+        }
+
+        private void tb_2a_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_read_Click(sender, e);
+            }
+
+        }
+
+        private void numericUpDown_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_gain_Click(sender, e);
+            }
+        }
+
+        private void numericUpDown_expo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_expo_Click(sender, e);
+            }
+        }
+
+        private void bt_read_wpt_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x03;
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+        }
+
+        private void bt_read_bpt_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x04;
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+        }
+
+        private void numericUpDown_wpt_ValueChanged(object sender, EventArgs e)
+        {
+            tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
+
+
+
+        }
+
+        private void numericUpDown_bpt_ValueChanged(object sender, EventArgs e)
+        {
+            tb_bpt.Text = Convert.ToString((Int32)numericUpDown_bpt.Value, 16).ToUpper();
+        }
+
+        private void tb_wpt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_wpt_Click(sender, e);
+            }
+
+        }
+
+        private void tb_bpt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                e.Handled = false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_bpt_Click(sender, e);
+            }
+
+        }
+
+        private void tb_wpt_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_wpt.Text.Length == 0)
+            {
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_wpt.Text, 16);
+            if ((value < 0) || (value > 255))
+            {
+                tb_wpt.Text = "";
+                return;
+            }
+            numericUpDown_wpt.Value = value;
+        }
+
+        private void tb_bpt_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_bpt.Text.Length == 0)
+            {
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_bpt.Text, 16);
+            if ((value < 0) || (value > 255))
+            {
+                tb_gain.Text = "";
+                return;
+            }
+            numericUpDown_bpt.Value = value;
+        }
+
+        private void bt_write_wpt_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte SendData = (byte)numericUpDown_wpt.Value;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x03;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        }
+
+        private void bt_write_bpt_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte SendData = (byte)numericUpDown_bpt.Value;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x04;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        }
+
+        private void numericUpDown_wpt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_wpt_Click(sender, e);
+            }
+        }
+
+        private void numericUpDown_bpt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_bpt_Click(sender, e);
+            }
+
+        }
     }
 }
 

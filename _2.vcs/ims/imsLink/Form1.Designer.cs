@@ -160,6 +160,17 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.tb_bpt = new System.Windows.Forms.TextBox();
+            this.bt_write_bpt = new System.Windows.Forms.Button();
+            this.bt_read_bpt = new System.Windows.Forms.Button();
+            this.numericUpDown_bpt = new System.Windows.Forms.NumericUpDown();
+            this.lb_bpt = new System.Windows.Forms.Label();
+            this.bt_write_wpt = new System.Windows.Forms.Button();
+            this.bt_read_wpt = new System.Windows.Forms.Button();
+            this.numericUpDown_wpt = new System.Windows.Forms.NumericUpDown();
+            this.tb_wpt = new System.Windows.Forms.TextBox();
+            this.lb_wpt = new System.Windows.Forms.Label();
+            this.bt_disable_timer_webcam = new System.Windows.Forms.Button();
             this.bt_break = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.comboBox_temperature = new System.Windows.Forms.ComboBox();
@@ -303,7 +314,6 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
-            this.bt_disable_timer_webcam = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -321,6 +331,8 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).BeginInit();
@@ -1743,6 +1755,14 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.tb_bpt);
+            this.tp_USB.Controls.Add(this.tb_wpt);
+            this.tp_USB.Controls.Add(this.numericUpDown_bpt);
+            this.tp_USB.Controls.Add(this.numericUpDown_wpt);
+            this.tp_USB.Controls.Add(this.bt_write_bpt);
+            this.tp_USB.Controls.Add(this.bt_read_bpt);
+            this.tp_USB.Controls.Add(this.bt_write_wpt);
+            this.tp_USB.Controls.Add(this.bt_read_wpt);
             this.tp_USB.Controls.Add(this.bt_disable_timer_webcam);
             this.tp_USB.Controls.Add(this.bt_break);
             this.tp_USB.Controls.Add(this.pictureBox2);
@@ -1805,7 +1825,6 @@
             this.tp_USB.Controls.Add(this.button17);
             this.tp_USB.Controls.Add(this.button15);
             this.tp_USB.Controls.Add(this.button12);
-            this.tp_USB.Controls.Add(this.pictureBox1);
             this.tp_USB.Controls.Add(this.button16);
             this.tp_USB.Controls.Add(this.lb_0x2);
             this.tp_USB.Controls.Add(this.lb_0x1);
@@ -1819,12 +1838,154 @@
             this.tp_USB.Controls.Add(this.lb_0xR);
             this.tp_USB.Controls.Add(this.lb_0x4);
             this.tp_USB.Controls.Add(this.lb_0x3);
+            this.tp_USB.Controls.Add(this.lb_bpt);
+            this.tp_USB.Controls.Add(this.lb_wpt);
+            this.tp_USB.Controls.Add(this.pictureBox1);
             this.tp_USB.Location = new System.Drawing.Point(4, 26);
             this.tp_USB.Name = "tp_USB";
             this.tp_USB.Size = new System.Drawing.Size(940, 586);
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // tb_bpt
+            // 
+            this.tb_bpt.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_bpt.Location = new System.Drawing.Point(246, 155);
+            this.tb_bpt.Name = "tb_bpt";
+            this.tb_bpt.Size = new System.Drawing.Size(58, 32);
+            this.tb_bpt.TabIndex = 122;
+            this.tb_bpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_bpt.TextChanged += new System.EventHandler(this.tb_bpt_TextChanged);
+            this.tb_bpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_bpt_KeyPress);
+            // 
+            // bt_write_bpt
+            // 
+            this.bt_write_bpt.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_write_bpt.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_write_bpt.ForeColor = System.Drawing.Color.Black;
+            this.bt_write_bpt.Location = new System.Drawing.Point(476, 156);
+            this.bt_write_bpt.Name = "bt_write_bpt";
+            this.bt_write_bpt.Size = new System.Drawing.Size(64, 32);
+            this.bt_write_bpt.TabIndex = 126;
+            this.bt_write_bpt.Text = "Write";
+            this.bt_write_bpt.UseVisualStyleBackColor = false;
+            this.bt_write_bpt.Click += new System.EventHandler(this.bt_write_bpt_Click);
+            // 
+            // bt_read_bpt
+            // 
+            this.bt_read_bpt.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_read_bpt.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_read_bpt.ForeColor = System.Drawing.Color.Black;
+            this.bt_read_bpt.Location = new System.Drawing.Point(406, 155);
+            this.bt_read_bpt.Name = "bt_read_bpt";
+            this.bt_read_bpt.Size = new System.Drawing.Size(64, 32);
+            this.bt_read_bpt.TabIndex = 125;
+            this.bt_read_bpt.Text = "Read";
+            this.bt_read_bpt.UseVisualStyleBackColor = false;
+            this.bt_read_bpt.Click += new System.EventHandler(this.bt_read_bpt_Click);
+            // 
+            // numericUpDown_bpt
+            // 
+            this.numericUpDown_bpt.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_bpt.Location = new System.Drawing.Point(324, 155);
+            this.numericUpDown_bpt.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_bpt.Name = "numericUpDown_bpt";
+            this.numericUpDown_bpt.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_bpt.TabIndex = 124;
+            this.numericUpDown_bpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_bpt.ValueChanged += new System.EventHandler(this.numericUpDown_bpt_ValueChanged);
+            this.numericUpDown_bpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_bpt_KeyPress);
+            // 
+            // lb_bpt
+            // 
+            this.lb_bpt.AutoSize = true;
+            this.lb_bpt.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_bpt.Location = new System.Drawing.Point(200, 158);
+            this.lb_bpt.Name = "lb_bpt";
+            this.lb_bpt.Size = new System.Drawing.Size(149, 23);
+            this.lb_bpt.TabIndex = 123;
+            this.lb_bpt.Text = "BPT  0x                 =  ";
+            // 
+            // bt_write_wpt
+            // 
+            this.bt_write_wpt.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_write_wpt.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_write_wpt.ForeColor = System.Drawing.Color.Black;
+            this.bt_write_wpt.Location = new System.Drawing.Point(476, 114);
+            this.bt_write_wpt.Name = "bt_write_wpt";
+            this.bt_write_wpt.Size = new System.Drawing.Size(64, 32);
+            this.bt_write_wpt.TabIndex = 121;
+            this.bt_write_wpt.Text = "Write";
+            this.bt_write_wpt.UseVisualStyleBackColor = false;
+            this.bt_write_wpt.Click += new System.EventHandler(this.bt_write_wpt_Click);
+            // 
+            // bt_read_wpt
+            // 
+            this.bt_read_wpt.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_read_wpt.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_read_wpt.ForeColor = System.Drawing.Color.Black;
+            this.bt_read_wpt.Location = new System.Drawing.Point(406, 113);
+            this.bt_read_wpt.Name = "bt_read_wpt";
+            this.bt_read_wpt.Size = new System.Drawing.Size(64, 32);
+            this.bt_read_wpt.TabIndex = 120;
+            this.bt_read_wpt.Text = "Read";
+            this.bt_read_wpt.UseVisualStyleBackColor = false;
+            this.bt_read_wpt.Click += new System.EventHandler(this.bt_read_wpt_Click);
+            // 
+            // numericUpDown_wpt
+            // 
+            this.numericUpDown_wpt.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_wpt.Location = new System.Drawing.Point(324, 113);
+            this.numericUpDown_wpt.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_wpt.Name = "numericUpDown_wpt";
+            this.numericUpDown_wpt.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_wpt.TabIndex = 119;
+            this.numericUpDown_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_wpt.ValueChanged += new System.EventHandler(this.numericUpDown_wpt_ValueChanged);
+            this.numericUpDown_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_wpt_KeyPress);
+            // 
+            // tb_wpt
+            // 
+            this.tb_wpt.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wpt.Location = new System.Drawing.Point(246, 113);
+            this.tb_wpt.Name = "tb_wpt";
+            this.tb_wpt.Size = new System.Drawing.Size(58, 32);
+            this.tb_wpt.TabIndex = 117;
+            this.tb_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_wpt.TextChanged += new System.EventHandler(this.tb_wpt_TextChanged);
+            this.tb_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_wpt_KeyPress);
+            // 
+            // lb_wpt
+            // 
+            this.lb_wpt.AutoSize = true;
+            this.lb_wpt.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_wpt.Location = new System.Drawing.Point(200, 116);
+            this.lb_wpt.Name = "lb_wpt";
+            this.lb_wpt.Size = new System.Drawing.Size(150, 23);
+            this.lb_wpt.TabIndex = 118;
+            this.lb_wpt.Text = "WPT  0x                =  ";
+            // 
+            // bt_disable_timer_webcam
+            // 
+            this.bt_disable_timer_webcam.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_disable_timer_webcam.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_disable_timer_webcam.ForeColor = System.Drawing.Color.Black;
+            this.bt_disable_timer_webcam.Location = new System.Drawing.Point(866, 425);
+            this.bt_disable_timer_webcam.Name = "bt_disable_timer_webcam";
+            this.bt_disable_timer_webcam.Size = new System.Drawing.Size(64, 32);
+            this.bt_disable_timer_webcam.TabIndex = 116;
+            this.bt_disable_timer_webcam.Text = "timer";
+            this.bt_disable_timer_webcam.UseVisualStyleBackColor = false;
+            this.bt_disable_timer_webcam.Click += new System.EventHandler(this.bt_disable_timer_webcam_Click);
             // 
             // bt_break
             // 
@@ -1997,6 +2158,7 @@
             this.numericUpDown_gain.TabIndex = 104;
             this.numericUpDown_gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_gain.ValueChanged += new System.EventHandler(this.numericUpDown_gain_ValueChanged);
+            this.numericUpDown_gain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_gain_KeyPress);
             // 
             // numericUpDown_expo
             // 
@@ -2012,6 +2174,7 @@
             this.numericUpDown_expo.TabIndex = 103;
             this.numericUpDown_expo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_expo.ValueChanged += new System.EventHandler(this.numericUpDown_expo_ValueChanged);
+            this.numericUpDown_expo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_expo_KeyPress);
             // 
             // lb_awb_result_B
             // 
@@ -2379,6 +2542,7 @@
             this.tb_4a.Text = "0";
             this.tb_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_4a.TextChanged += new System.EventHandler(this.tb_4a_TextChanged);
+            this.tb_4a.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_4a_KeyPress);
             // 
             // lb_addr
             // 
@@ -2400,6 +2564,7 @@
             this.tb_3a.Text = "00";
             this.tb_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_3a.TextChanged += new System.EventHandler(this.tb_3a_TextChanged);
+            this.tb_3a.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_3a_KeyPress);
             // 
             // tb_2a
             // 
@@ -2410,6 +2575,7 @@
             this.tb_2a.TabIndex = 50;
             this.tb_2a.Text = "20";
             this.tb_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_2a.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_2a_KeyPress);
             // 
             // tb_1a
             // 
@@ -2420,6 +2586,7 @@
             this.tb_1a.TabIndex = 49;
             this.tb_1a.Text = "38";
             this.tb_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_1a.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_1a_KeyPress);
             // 
             // lb_rgb
             // 
@@ -2564,7 +2731,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(170, 50);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(308, 126);
+            this.pictureBox1.Size = new System.Drawing.Size(308, 56);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
@@ -3409,19 +3576,6 @@
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
             // 
-            // bt_disable_timer_webcam
-            // 
-            this.bt_disable_timer_webcam.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_disable_timer_webcam.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_disable_timer_webcam.ForeColor = System.Drawing.Color.Black;
-            this.bt_disable_timer_webcam.Location = new System.Drawing.Point(866, 425);
-            this.bt_disable_timer_webcam.Name = "bt_disable_timer_webcam";
-            this.bt_disable_timer_webcam.Size = new System.Drawing.Size(64, 32);
-            this.bt_disable_timer_webcam.TabIndex = 116;
-            this.bt_disable_timer_webcam.Text = "timer";
-            this.bt_disable_timer_webcam.UseVisualStyleBackColor = false;
-            this.bt_disable_timer_webcam.Click += new System.EventHandler(this.bt_disable_timer_webcam_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3483,6 +3637,8 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).EndInit();
@@ -3791,6 +3947,16 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button bt_break;
         private System.Windows.Forms.Button bt_disable_timer_webcam;
+        private System.Windows.Forms.Button bt_write_wpt;
+        private System.Windows.Forms.Button bt_read_wpt;
+        private System.Windows.Forms.NumericUpDown numericUpDown_wpt;
+        private System.Windows.Forms.TextBox tb_wpt;
+        private System.Windows.Forms.Label lb_wpt;
+        private System.Windows.Forms.Button bt_write_bpt;
+        private System.Windows.Forms.Button bt_read_bpt;
+        private System.Windows.Forms.NumericUpDown numericUpDown_bpt;
+        private System.Windows.Forms.TextBox tb_bpt;
+        private System.Windows.Forms.Label lb_bpt;
     }
 }
 
