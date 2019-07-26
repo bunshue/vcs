@@ -68,6 +68,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tb_search = new System.Windows.Forms.TextBox();
+            this.button32 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -475,11 +476,24 @@
             this.tb_search.Text = "雨";
             this.tb_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // button32
+            // 
+            this.button32.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Location = new System.Drawing.Point(438, 397);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(329, 41);
+            this.button32.TabIndex = 58;
+            this.button32.Text = "貨幣單位";
+            this.button32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.Controls.Add(this.button32);
             this.Controls.Add(this.tb_search);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.label2);
@@ -567,6 +581,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TextBox tb_search;
+        private System.Windows.Forms.Button button32;
     }
 }
 

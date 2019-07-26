@@ -11,7 +11,6 @@ using System.IO.Ports;          //for serial ports
 using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;   //for ImageFormat
 
-using System.Threading;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
@@ -98,6 +97,15 @@ namespace imsLink
         byte data_B_h = 0;
         byte data_B_l = 0;
 
+        private const int SENSOR_EXPO = 0x01;	//camera sensor expo
+        private const int SENSOR_GAIN = 0x02;	//camera sensor gain
+        private const int SENSOR_RGB_R = 0x03;	//camera sensor R
+        private const int SENSOR_RGB_G = 0x04;	//camera sensor G
+        private const int SENSOR_RGB_B = 0x05;	//camera sensor B
+        private const int SENSOR_WPT = 0x06;	//camera sensor white point
+        private const int SENSOR_BPT = 0x07;	//camera sensor black point
+
+        int flag_wait_data_cmd = 0;
         bool flag_awb_update_expo = false;
         bool flag_awb_update_gain = false;
         bool flag_awb_update_R = false;
@@ -1268,6 +1276,8 @@ namespace imsLink
                                     data_expo_h = (byte)input[3];
                                     flag_awb_update_expo = true;
                                     //richTextBox1.Text += "eH  ";
+                                    if (flag_wait_data_cmd == SENSOR_EXPO)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x02)
                                 {
@@ -1280,12 +1290,16 @@ namespace imsLink
                                         data_expo = (int)data_expo_h * 256 + (int)data_expo_l;
                                         flag_wait_receive_data = 0;
                                     }
+                                    if (flag_wait_data_cmd == SENSOR_EXPO)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x0A)
                                 {
                                     data_gain_h = (byte)input[3];
                                     flag_awb_update_gain = true;
                                     //richTextBox1.Text += "gH  ";
+                                    if (flag_wait_data_cmd == SENSOR_GAIN)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x0B)
                                 {
@@ -1296,6 +1310,8 @@ namespace imsLink
                                         flag_awb_update_gain = false;
                                         lb_awb_result_gain.Text = "0x" + (data_gain_h * 256 + data_gain_l).ToString("X2") + " " + (data_gain_h * 256 + data_gain_l).ToString("D3");
                                     }
+                                    if (flag_wait_data_cmd == SENSOR_GAIN)
+                                        flag_wait_data_cmd = 0;
                                 }
                             }
                             else if (input[1] == 0x52)
@@ -1305,6 +1321,8 @@ namespace imsLink
                                     data_R_h = (byte)input[3];
                                     flag_awb_update_R = true;
                                     //richTextBox1.Text += "RH  ";
+                                    if (flag_wait_data_cmd == SENSOR_RGB_R)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x1B)
                                 {
@@ -1318,12 +1336,16 @@ namespace imsLink
                                         if (flag_update_RGB_scrollbar == true)
                                             numericUpDown_R.Value = data_R;
                                     }
+                                    if (flag_wait_data_cmd == SENSOR_RGB_R)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x1C)
                                 {
                                     data_G_h = (byte)input[3];
                                     flag_awb_update_G = true;
                                     //richTextBox1.Text += "GH  ";
+                                    if (flag_wait_data_cmd == SENSOR_RGB_G)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x1D)
                                 {
@@ -1337,12 +1359,16 @@ namespace imsLink
                                         if (flag_update_RGB_scrollbar == true)
                                             numericUpDown_G.Value = data_G;
                                     }
+                                    if (flag_wait_data_cmd == SENSOR_RGB_G)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x1E)
                                 {
                                     data_B_h = (byte)input[3];
                                     flag_awb_update_B = true;
                                     //richTextBox1.Text += "BH  ";
+                                    if (flag_wait_data_cmd == SENSOR_RGB_B)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x1F)
                                 {
@@ -1360,6 +1386,8 @@ namespace imsLink
                                             numericUpDown_B.Value = data_B;
                                         }
                                     }
+                                    if (flag_wait_data_cmd == SENSOR_RGB_B)
+                                        flag_wait_data_cmd = 0;
                                 }
                             }
                             else if (input[1] == 0x3A)
@@ -1367,10 +1395,16 @@ namespace imsLink
                                 if (input[2] == 0x03)
                                 {
                                     numericUpDown_wpt.Value = input[3];
+                                    tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
+                                    if (flag_wait_data_cmd == SENSOR_WPT)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x04)
                                 {
                                     numericUpDown_bpt.Value = input[3];
+                                    tb_bpt.Text = Convert.ToString((Int32)numericUpDown_bpt.Value, 16).ToUpper();
+                                    if (flag_wait_data_cmd == SENSOR_BPT)
+                                        flag_wait_data_cmd = 0;
                                 }
                             }
                             //richTextBox1.Text += "\n";
@@ -3094,45 +3128,69 @@ namespace imsLink
                 string rgb_value;
                 x_st = 10;
                 y_st = 250;
+                //if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - 1 * ww * hh / 2)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + 1 * ww * hh / 2)))
                 if ((RGB_R >= (TARGET_AWB_R - 1)) && (RGB_R <= (TARGET_AWB_R + 1)))
                 {
-                    flag_R_OK = true;
                     drawBrush = new SolidBrush(Color.Gray);
                 }
                 else
                 {
-                    flag_R_OK = false;
                     drawBrush = new SolidBrush(Color.Red);
+                }
+                if ((RGB_R >= (TARGET_AWB_R - 1)) && (RGB_R <= (TARGET_AWB_R + 1)))
+                {
+                    flag_R_OK = true;
+                }
+                else
+                {
+                    flag_R_OK = false;
                 }
                 //rgb_value = RGB_R.ToString() + "   " + TARGET_AWB_R.ToString();
                 rgb_value = RGB_R.ToString();
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
 
                 y_st = 290;
+                //if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - 1 * ww * hh / 2)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + 1 * ww * hh / 2)))
                 if ((RGB_G >= (TARGET_AWB_G - 1)) && (RGB_G <= (TARGET_AWB_G + 1)))
                 {
-                    flag_G_OK = true;
                     drawBrush = new SolidBrush(Color.Gray);
                 }
                 else
                 {
-                    flag_G_OK = false;
                     drawBrush = new SolidBrush(Color.Green);
+                }
+                if ((RGB_G >= (TARGET_AWB_G - 1)) && (RGB_G <= (TARGET_AWB_G + 1)))
+                {
+                    flag_G_OK = true;
+                }
+                else
+                {
+                    flag_G_OK = false;
                 }
                 //rgb_value = RGB_G.ToString() + "   " + TARGET_AWB_G.ToString();
                 rgb_value = RGB_G.ToString();
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
 
                 y_st = 330;
+                //if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - (1 * ww * hh / 1))) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + (1 * ww * hh / 1))))
+
+                //if ((RGB_B * ww * hh >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (RGB_B * ww * hh <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
+                //if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
                 if ((RGB_B >= (TARGET_AWB_B - 1)) && (RGB_B <= (TARGET_AWB_B + 1)))
                 {
-                    flag_B_OK = true;
                     drawBrush = new SolidBrush(Color.Gray);
                 }
                 else
                 {
-                    flag_B_OK = false;
                     drawBrush = new SolidBrush(Color.Blue);
+                }
+                if ((RGB_B >= (TARGET_AWB_B - 1)) && (RGB_B <= (TARGET_AWB_B + 1)))
+                {
+                    flag_B_OK = true;
+                }
+                else
+                {
+                    flag_B_OK = false;
                 }
                 //rgb_value = RGB_B.ToString() + "   " + TARGET_AWB_B.ToString();
                 rgb_value = RGB_B.ToString();
@@ -4938,8 +4996,7 @@ namespace imsLink
 
                 lb_write_camera_serial2.Text = "寫入1";
 
-                //delay(1000);
-                Thread.Sleep(300);
+                delay(500);
 
                 lb_write_camera_serial2.Text = "寫入相機序號完成";
                 lb_write_camera_serial2.ForeColor = Color.Black;
@@ -4949,7 +5006,7 @@ namespace imsLink
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
                 lb_write_camera_serial2.Text += "    燒錄完成";
 
-                Thread.Sleep(100);
+                delay(200);
 
                 //驗證資料
                 lb_write_camera_serial2.Text += "    驗證中";
@@ -5395,6 +5452,43 @@ namespace imsLink
             this.pictureBox1.Focus();
 
             /*
+            int ret;
+            ret = check_RGB_value();
+            if (ret == 0)
+                richTextBox1.Text += "AWB OK\n";
+            else
+                richTextBox1.Text += "AWB FAIL\n";
+
+            int ww = 64;
+            int hh = 64;
+            //if ((RGB_B * ww * hh >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (RGB_B * ww * hh <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
+            if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
+            //if ((RGB_B >= (TARGET_AWB_B - 1)) && (RGB_B <= (TARGET_AWB_B + 1)))
+            {
+                richTextBox1.Text += " a ";
+            }
+            else
+            {
+                richTextBox1.Text += " b ";
+
+                if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) == true)
+                    richTextBox1.Text += " t1 ";
+                else
+                    richTextBox1.Text += " f1 ";
+
+                if ((total_RGB_B <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)) == true)
+                    richTextBox1.Text += " t2 ";
+                else
+                    richTextBox1.Text += " f2 ";
+                richTextBox1.Text += "total_RGB_B = " + total_RGB_B.ToString() + "\n";
+                richTextBox1.Text += "TG = " + (TARGET_AWB_B).ToString() + "\n";
+                richTextBox1.Text += "right = " + (TARGET_AWB_B * ww * hh + 1 * ww * hh).ToString() + "\n";
+
+            }
+            */
+
+
+            /*
             if ((timer_webcam_cnt % 10) == 0)
             {
                 richTextBox1.Text += "d_R " + (total_RGB_R_max - total_RGB_R_min).ToString() + "    " + (((float)(total_RGB_R_max - total_RGB_R_min)) / awb_block / awb_block).ToString("F3")
@@ -5571,27 +5665,7 @@ namespace imsLink
 
         private void tb_expo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -5601,27 +5675,7 @@ namespace imsLink
 
         private void tb_gain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -5646,27 +5700,7 @@ namespace imsLink
 
         private void tb_R_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -5713,27 +5747,7 @@ namespace imsLink
 
         private void tb_G_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -5780,27 +5794,7 @@ namespace imsLink
 
         private void tb_B_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -5845,9 +5839,126 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
         }
 
+        bool read_camera_sensor0(int cmd, byte DongleAddr_h, byte DongleAddr_l)
+        {
+            flag_wait_data_cmd = cmd;
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            int cnt = 0;
+            int cnt_max = 30;
+
+            cnt = 0;
+            while ((flag_wait_data_cmd != 0) && (cnt < cnt_max))
+            {
+                cnt++;
+                //richTextBox1.Text += "e";
+                //richTextBox1.Text += "e" + cnt.ToString() + " ";
+                delay(10);
+            }
+
+            flag_wait_data_cmd = 0;
+
+            //richTextBox1.Text += "wait result ok cnt = " + cnt.ToString() + "\n";
+            if (cnt == cnt_max)
+            {
+                richTextBox1.Text += "Fail " + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\n";
+                return false;
+            }
+            else
+            {
+                //richTextBox1.Text += "OK " + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\n";
+                return true;
+            }
+        }
+
+        void read_camera_sensor(int cmd)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            byte DongleAddr_h1 = 0;
+            byte DongleAddr_l1 = 0;
+            byte DongleAddr_h2 = 0;
+            byte DongleAddr_l2 = 0;
+
+            if (cmd == SENSOR_EXPO)
+            {
+                DongleAddr_h1 = 0x35;
+                DongleAddr_l1 = 0x01;
+                DongleAddr_h2 = 0x35;
+                DongleAddr_l2 = 0x02;
+            }
+            else if (cmd == SENSOR_GAIN)
+            {
+                DongleAddr_h1 = 0x35;
+                DongleAddr_l1 = 0x0A;
+                DongleAddr_h2 = 0x35;
+                DongleAddr_l2 = 0x0B;
+            }
+            else if (cmd == SENSOR_RGB_R)
+            {
+                DongleAddr_h1 = 0x52;
+                DongleAddr_l1 = 0x1A;
+                DongleAddr_h2 = 0x52;
+                DongleAddr_l2 = 0x1B;
+            }
+            else if (cmd == SENSOR_RGB_G)
+            {
+                DongleAddr_h1 = 0x52;
+                DongleAddr_l1 = 0x1C;
+                DongleAddr_h2 = 0x52;
+                DongleAddr_l2 = 0x1D;
+            }
+            else if (cmd == SENSOR_RGB_B)
+            {
+                DongleAddr_h1 = 0x52;
+                DongleAddr_l1 = 0x1E;
+                DongleAddr_h2 = 0x52;
+                DongleAddr_l2 = 0x1F;
+            }
+            else if (cmd == SENSOR_WPT)
+            {
+                DongleAddr_h1 = 0x3A;
+                DongleAddr_l1 = 0x03;
+                DongleAddr_h2 = 0x00;   //no use
+                DongleAddr_l2 = 0x00;   //no use
+            }
+            else if (cmd == SENSOR_BPT)
+            {
+                DongleAddr_h1 = 0x3A;
+                DongleAddr_l1 = 0x04;
+                DongleAddr_h2 = 0x00;   //no use
+                DongleAddr_l2 = 0x00;   //no use
+            }
+            else
+            {
+                richTextBox1.Text += "unknown cmd = " + cmd.ToString() + ", abort\n";
+                return;
+            }
+
+            while (read_camera_sensor0(cmd, DongleAddr_h1, DongleAddr_l1) == false)
+            {
+                richTextBox1.Text += "read again " + DongleAddr_h1.ToString("X2") + DongleAddr_l1.ToString("X2") + "\n";
+                delay(10);
+            }
+
+            if ((DongleAddr_h2 == 0x00) && (DongleAddr_l2 == 0x00))
+            {
+                return;
+            }
+
+            while (read_camera_sensor0(cmd, DongleAddr_h2, DongleAddr_l2) == false)
+            {
+                richTextBox1.Text += "read again " + DongleAddr_h2.ToString("X2") + DongleAddr_l2.ToString("X2") + "\n";
+                delay(10);
+            }
+        }
+
         private void bt_get_setup_Click(object sender, EventArgs e)
         {
-            int dd = 3;
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -5856,7 +5967,7 @@ namespace imsLink
             lb_awb_result_expo.Text = "";
             lb_awb_result_gain.Text = "";
             lb_awb_result_R.Text = "";
-            //lb_awb_result_G.Text = "";
+            lb_awb_result_G.Text = "--------";
             lb_awb_result_B.Text = "";
             flag_awb_update_expo = false;
             flag_awb_update_gain = false;
@@ -5864,56 +5975,16 @@ namespace imsLink
             flag_awb_update_G = false;
             flag_awb_update_B = false;
 
-            DongleAddr_h = 0x35;
-            DongleAddr_l = 0x01;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
+            read_camera_sensor(SENSOR_EXPO);
 
-            DongleAddr_h = 0x35;
-            DongleAddr_l = 0x02;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
+            read_camera_sensor(SENSOR_GAIN);
 
-            DongleAddr_h = 0x35;
-            DongleAddr_l = 0x0A;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
+            read_camera_sensor(SENSOR_RGB_R);
 
-            DongleAddr_h = 0x35;
-            DongleAddr_l = 0x0B;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
+            read_camera_sensor(SENSOR_RGB_G);
 
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1A;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
+            read_camera_sensor(SENSOR_RGB_B);
 
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1B;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
-
-            /*
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1C;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
-
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1D;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
-            */
-
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1E;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(dd);
-
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1F;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
         }
 
         private void numericUpDown_expo_ValueChanged(object sender, EventArgs e)
@@ -5948,32 +6019,11 @@ namespace imsLink
 
         int get_expo_data()
         {
-            if (flag_comport_ok == false)
-            {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return 1;
-            }
             data_expo = -1;
             lb_awb_result_expo.Text = "";
             flag_awb_update_expo = false;
 
-            DongleAddr_h = 0x35;
-            DongleAddr_l = 0x01;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(30);
-
-            DongleAddr_h = 0x35;
-            DongleAddr_l = 0x02;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-
-            int cnt = 0;
-            flag_wait_receive_data = 1;
-            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
-            {
-                //richTextBox1.Text += "e";
-                delay(100);
-            }
-            flag_wait_receive_data = 0;
+            read_camera_sensor(SENSOR_EXPO);
 
             if (data_expo != -1)
             {
@@ -6005,45 +6055,11 @@ namespace imsLink
             flag_awb_update_G = false;
             flag_awb_update_B = false;
 
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1A;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(30);
+            read_camera_sensor(SENSOR_RGB_R);
 
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1B;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(30);
+            //read_camera_sensor(SENSOR_RGB_G);
 
-            /*
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1C;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(30);
-
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1D;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(30);
-            */
-
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1E;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-            delay(30);
-
-            DongleAddr_h = 0x52;
-            DongleAddr_l = 0x1F;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
-
-            int cnt = 0;
-            flag_wait_receive_data = 1;
-            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
-            {
-                //richTextBox1.Text += "a";
-                delay(100);
-            }
-            flag_wait_receive_data = 0;
+            read_camera_sensor(SENSOR_RGB_B);
 
             //if ((data_R != -1) && (data_G != -1) && (data_B != -1))
             if ((data_R != -1) && (data_B != -1))
@@ -6108,14 +6124,14 @@ namespace imsLink
                 flag_awb_mode = true;
                 timer_webcam.Enabled = false;
                 bt_awb.Text = "Auto";
-                richTextBox1.Text += "send disable auto command\n";
+                richTextBox1.Text += "\nTo Auto mode\n";
                 //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
             }
 
             flag_break = false;
-            richTextBox1.Clear();
-            richTextBox1.Text += "AWB test ST write 0x3503 as 0x83\n";
+            richTextBox1.Text += "\n\n\n\n";
+            richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
 
             richTextBox1.Text += "開始計時\n";
             // Create stopwatch
@@ -6123,9 +6139,10 @@ namespace imsLink
             // Begin timing
             stopwatch.Start();
 
-            richTextBox1.Text += "setup gain to 0x7f = 127\n";
+            //no change gain.....
+            //richTextBox1.Text += "setup gain to 0x7f = 127\n";
             //Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
-            //Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);	//no change gain....
+            //Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);
 
             test_RGB_saturation();
 
@@ -6197,7 +6214,7 @@ namespace imsLink
                             break;
                         }
                     }
-                    Thread.Sleep(100);
+                    delay(200);
                     check_RB_saturation();
                     ret = check_RGB_value();
                     if (ret == 0)
@@ -6207,7 +6224,8 @@ namespace imsLink
                     }
                     check_RB_saturation();
                     check_G_exposure(sender, e, RGB_G);
-                    Thread.Sleep(100);
+
+                    delay(100);
                     check_RB_saturation();
                     ret = check_RGB_value();
                     if (ret == 0)
@@ -6296,7 +6314,7 @@ namespace imsLink
                             bt_setup_expo_Click(sender, e);
                         }
                     }
-                    Thread.Sleep(300);
+                    delay(500);
                     rgb_g = RGB_G;
                     check_RB_saturation();
                 }
@@ -6336,7 +6354,7 @@ namespace imsLink
                             bt_setup_expo_Click(sender, e);
                         }
                     }
-                    Thread.Sleep(300);
+                    delay(500);
                     rgb_g = RGB_G;
                     check_RB_saturation();
                 }
@@ -6486,7 +6504,7 @@ namespace imsLink
                         }
                     }
                 }
-                Thread.Sleep(300);
+                delay(500);
             }
             //else
             //richTextBox1.Text += "R 未飽和\n";
@@ -6864,19 +6882,7 @@ namespace imsLink
 
         private void numericUpDown_R_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -6886,19 +6892,7 @@ namespace imsLink
 
         private void numericUpDown_G_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -6908,19 +6902,7 @@ namespace imsLink
 
         private void numericUpDown_B_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -6986,27 +6968,7 @@ namespace imsLink
 
         private void tb_3a_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -7016,19 +6978,7 @@ namespace imsLink
 
         private void tb_4a_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -7038,27 +6988,7 @@ namespace imsLink
 
         private void tb_1a_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -7068,42 +6998,17 @@ namespace imsLink
 
         private void tb_2a_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 bt_read_Click(sender, e);
             }
-
         }
 
         private void numericUpDown_gain_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -7113,19 +7018,7 @@ namespace imsLink
 
         private void numericUpDown_expo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -7135,34 +7028,19 @@ namespace imsLink
 
         private void bt_read_wpt_Click(object sender, EventArgs e)
         {
-            if (flag_comport_ok == false)
-            {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            DongleAddr_h = 0x3A;
-            DongleAddr_l = 0x03;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+            tb_wpt.Text = "";
+            read_camera_sensor(SENSOR_WPT);
         }
 
         private void bt_read_bpt_Click(object sender, EventArgs e)
         {
-            if (flag_comport_ok == false)
-            {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            DongleAddr_h = 0x3A;
-            DongleAddr_l = 0x04;
-            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+            tb_bpt.Text = "";
+            read_camera_sensor(SENSOR_BPT);
         }
 
         private void numericUpDown_wpt_ValueChanged(object sender, EventArgs e)
         {
             tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
-
-
-
         }
 
         private void numericUpDown_bpt_ValueChanged(object sender, EventArgs e)
@@ -7172,64 +7050,22 @@ namespace imsLink
 
         private void tb_wpt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 bt_write_wpt_Click(sender, e);
             }
-
         }
 
         private void tb_bpt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                e.Handled = false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_hexadecimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 bt_write_bpt_Click(sender, e);
             }
-
         }
 
         private void tb_wpt_TextChanged(object sender, EventArgs e)
@@ -7292,19 +7128,7 @@ namespace imsLink
 
         private void numericUpDown_wpt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            e.Handled = check_textbox_decimal(e);
 
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
@@ -7314,6 +7138,16 @@ namespace imsLink
 
         private void numericUpDown_bpt_KeyPress(object sender, KeyPressEventArgs e)
         {
+            e.Handled = check_textbox_decimal(e);
+            
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_bpt_Click(sender, e);
+            }
+        }
+
+        bool check_textbox_decimal(KeyPressEventArgs e)
+        {
             // 限制 TextBox只能輸入十進位碼、Backspace、Enter
             // e.KeyChar == (Char)48 ~ 57 -----> 0~9
             // e.KeyChar == (Char)8 -----------> Backspace
@@ -7321,18 +7155,37 @@ namespace imsLink
 
             if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
             {
-                e.Handled = false;
+                return false;
             }
             else
             {
-                e.Handled = true;
+                return true;
             }
+        }
 
-            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+        bool check_textbox_hexadecimal(KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
             {
-                bt_write_bpt_Click(sender, e);
+                return false;
             }
-
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

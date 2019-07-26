@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Globalization;//for CultureInfo
 
 namespace vcs_test_all_01_Richtextbox
 {
@@ -220,6 +221,19 @@ namespace vcs_test_all_01_Richtextbox
                 //Console.WriteLine($"Hexadecimal value of {letter} is {value:X}");
                 richTextBox1.Text += "Hexadecimal value of " + letter + " is " + value.ToString("X4") + "\n";
             }
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            int money = 1234;
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += money.ToString("C") + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CurrentCulture) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("da-DK")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
 
         }
 

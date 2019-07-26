@@ -15,7 +15,7 @@ namespace vcs_SlideShowString
     {
         bool flag_release_mode = true;
 
-        bool flag_debug_mode = false;    //print some message, font size, timer cnt, index.....
+        bool flag_debug_message = true;    //print some message, font size, timer cnt, index.....
 
         string filepath_setup = "poetry.ini";
         string filepath_poetry = "poetry.txt";
@@ -773,7 +773,7 @@ namespace vcs_SlideShowString
                     slide_show_string();
                 }
             }
-            else if (e.KeyCode == Keys.X)
+            else if ((e.KeyCode == Keys.X) || (e.KeyCode == Keys.Escape))
             {
                 Application.Exit();
             }
@@ -797,7 +797,7 @@ namespace vcs_SlideShowString
             {
                 if (e.KeyCode == Keys.W)
                 {
-                    if(display_width < 100)
+                    if (display_width < 100)
                     {
                         display_width++;
                     }
@@ -917,13 +917,13 @@ namespace vcs_SlideShowString
             }
             else if (e.KeyCode == Keys.D)
             {
-                if (flag_debug_mode == true)
+                if (flag_debug_message == true)
                 {
-                    flag_debug_mode = false;
+                    flag_debug_message = false;
                 }
                 else
                 {
-                    flag_debug_mode = true;
+                    flag_debug_message = true;
                 }
                 slide_show_string();
             }
@@ -1012,6 +1012,31 @@ namespace vcs_SlideShowString
             }
             else
                 timer1.Enabled = false;
+
+            if (flag_release_mode == true)
+            {
+                richTextBox1.Visible = false;
+                button1.Visible = false;
+                button2.Visible = false;
+                button3.Visible = false;
+                button4.Visible = false;
+                button5.Visible = false;
+                button6.Visible = false;
+                button7.Visible = false;
+                button8.Visible = false;
+            }
+            else
+            {
+                richTextBox1.Visible = true;
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
+                button4.Visible = true;
+                button5.Visible = true;
+                button6.Visible = true;
+                button7.Visible = true;
+                button8.Visible = true;
+            }
         }
 
         int calculate_picturebox_parameters()
@@ -1072,7 +1097,7 @@ namespace vcs_SlideShowString
             /*
             for (i = 0; i < current_strings.Count; i++)
             {
-                if(i == 1)
+                if (i == 1)
                     tmp_width = g.MeasureString(current_strings[i].Remove(0, 1), f).ToSize().Width;
                 else
                     tmp_width = g.MeasureString(current_strings[i], f).ToSize().Width;
@@ -1396,7 +1421,7 @@ namespace vcs_SlideShowString
 
             draw_pause_border();
 
-            if ((flag_debug_mode == true) || (flag_release_mode == false))
+            if ((flag_debug_message == true) || (flag_release_mode == false))
             {
                 string str;
 
@@ -1651,7 +1676,7 @@ namespace vcs_SlideShowString
 
             draw_pause_border();
 
-            if ((flag_debug_mode == true) || (flag_release_mode == false))
+            if ((flag_debug_message == true) || (flag_release_mode == false))
             {
                 string str;
 
@@ -1708,16 +1733,6 @@ namespace vcs_SlideShowString
                 this.Location = new System.Drawing.Point(x_st, y_st);
 
                 this.Size = new Size(W, H);
-
-                richTextBox1.Visible = false;
-                button1.Visible = false;
-                button2.Visible = false;
-                button3.Visible = false;
-                button4.Visible = false;
-                button5.Visible = false;
-                button6.Visible = false;
-                button7.Visible = false;
-                button8.Visible = false;
             }
             else
             {
@@ -1767,7 +1782,7 @@ namespace vcs_SlideShowString
             }
             else
             {
-                if ((flag_debug_mode == true) || (flag_release_mode == false))  //顯示要換首的剩餘時間
+                if ((flag_debug_message == true) || (flag_release_mode == false))  //顯示要換首的剩餘時間
                 {
                     int fs = EARTH * 2 / 5;
                     string str = (slide_show_interval - timer1_cnt).ToString() + "/" + slide_show_interval.ToString();

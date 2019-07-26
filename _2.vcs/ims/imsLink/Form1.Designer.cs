@@ -161,15 +161,13 @@
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
             this.tb_bpt = new System.Windows.Forms.TextBox();
+            this.tb_wpt = new System.Windows.Forms.TextBox();
+            this.numericUpDown_bpt = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_wpt = new System.Windows.Forms.NumericUpDown();
             this.bt_write_bpt = new System.Windows.Forms.Button();
             this.bt_read_bpt = new System.Windows.Forms.Button();
-            this.numericUpDown_bpt = new System.Windows.Forms.NumericUpDown();
-            this.lb_bpt = new System.Windows.Forms.Label();
             this.bt_write_wpt = new System.Windows.Forms.Button();
             this.bt_read_wpt = new System.Windows.Forms.Button();
-            this.numericUpDown_wpt = new System.Windows.Forms.NumericUpDown();
-            this.tb_wpt = new System.Windows.Forms.TextBox();
-            this.lb_wpt = new System.Windows.Forms.Label();
             this.bt_disable_timer_webcam = new System.Windows.Forms.Button();
             this.bt_break = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -232,7 +230,6 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button16 = new System.Windows.Forms.Button();
             this.lb_0x2 = new System.Windows.Forms.Label();
             this.lb_0x1 = new System.Windows.Forms.Label();
@@ -246,6 +243,9 @@
             this.lb_0xR = new System.Windows.Forms.Label();
             this.lb_0x4 = new System.Windows.Forms.Label();
             this.lb_0x3 = new System.Windows.Forms.Label();
+            this.lb_bpt = new System.Windows.Forms.Label();
+            this.lb_wpt = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tp_Test = new System.Windows.Forms.TabPage();
             this.lb_rtc2 = new System.Windows.Forms.Label();
             this.button42 = new System.Windows.Forms.Button();
@@ -1859,6 +1859,49 @@
             this.tb_bpt.TextChanged += new System.EventHandler(this.tb_bpt_TextChanged);
             this.tb_bpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_bpt_KeyPress);
             // 
+            // tb_wpt
+            // 
+            this.tb_wpt.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wpt.Location = new System.Drawing.Point(246, 113);
+            this.tb_wpt.Name = "tb_wpt";
+            this.tb_wpt.Size = new System.Drawing.Size(58, 32);
+            this.tb_wpt.TabIndex = 117;
+            this.tb_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_wpt.TextChanged += new System.EventHandler(this.tb_wpt_TextChanged);
+            this.tb_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_wpt_KeyPress);
+            // 
+            // numericUpDown_bpt
+            // 
+            this.numericUpDown_bpt.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_bpt.Location = new System.Drawing.Point(324, 155);
+            this.numericUpDown_bpt.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_bpt.Name = "numericUpDown_bpt";
+            this.numericUpDown_bpt.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_bpt.TabIndex = 124;
+            this.numericUpDown_bpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_bpt.ValueChanged += new System.EventHandler(this.numericUpDown_bpt_ValueChanged);
+            this.numericUpDown_bpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_bpt_KeyPress);
+            // 
+            // numericUpDown_wpt
+            // 
+            this.numericUpDown_wpt.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_wpt.Location = new System.Drawing.Point(324, 113);
+            this.numericUpDown_wpt.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_wpt.Name = "numericUpDown_wpt";
+            this.numericUpDown_wpt.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_wpt.TabIndex = 119;
+            this.numericUpDown_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_wpt.ValueChanged += new System.EventHandler(this.numericUpDown_wpt_ValueChanged);
+            this.numericUpDown_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_wpt_KeyPress);
+            // 
             // bt_write_bpt
             // 
             this.bt_write_bpt.BackColor = System.Drawing.SystemColors.Control;
@@ -1885,32 +1928,6 @@
             this.bt_read_bpt.UseVisualStyleBackColor = false;
             this.bt_read_bpt.Click += new System.EventHandler(this.bt_read_bpt_Click);
             // 
-            // numericUpDown_bpt
-            // 
-            this.numericUpDown_bpt.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_bpt.Location = new System.Drawing.Point(324, 155);
-            this.numericUpDown_bpt.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_bpt.Name = "numericUpDown_bpt";
-            this.numericUpDown_bpt.Size = new System.Drawing.Size(64, 32);
-            this.numericUpDown_bpt.TabIndex = 124;
-            this.numericUpDown_bpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_bpt.ValueChanged += new System.EventHandler(this.numericUpDown_bpt_ValueChanged);
-            this.numericUpDown_bpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_bpt_KeyPress);
-            // 
-            // lb_bpt
-            // 
-            this.lb_bpt.AutoSize = true;
-            this.lb_bpt.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_bpt.Location = new System.Drawing.Point(200, 158);
-            this.lb_bpt.Name = "lb_bpt";
-            this.lb_bpt.Size = new System.Drawing.Size(149, 23);
-            this.lb_bpt.TabIndex = 123;
-            this.lb_bpt.Text = "BPT  0x                 =  ";
-            // 
             // bt_write_wpt
             // 
             this.bt_write_wpt.BackColor = System.Drawing.SystemColors.Control;
@@ -1936,43 +1953,6 @@
             this.bt_read_wpt.Text = "Read";
             this.bt_read_wpt.UseVisualStyleBackColor = false;
             this.bt_read_wpt.Click += new System.EventHandler(this.bt_read_wpt_Click);
-            // 
-            // numericUpDown_wpt
-            // 
-            this.numericUpDown_wpt.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_wpt.Location = new System.Drawing.Point(324, 113);
-            this.numericUpDown_wpt.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_wpt.Name = "numericUpDown_wpt";
-            this.numericUpDown_wpt.Size = new System.Drawing.Size(64, 32);
-            this.numericUpDown_wpt.TabIndex = 119;
-            this.numericUpDown_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_wpt.ValueChanged += new System.EventHandler(this.numericUpDown_wpt_ValueChanged);
-            this.numericUpDown_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_wpt_KeyPress);
-            // 
-            // tb_wpt
-            // 
-            this.tb_wpt.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wpt.Location = new System.Drawing.Point(246, 113);
-            this.tb_wpt.Name = "tb_wpt";
-            this.tb_wpt.Size = new System.Drawing.Size(58, 32);
-            this.tb_wpt.TabIndex = 117;
-            this.tb_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_wpt.TextChanged += new System.EventHandler(this.tb_wpt_TextChanged);
-            this.tb_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_wpt_KeyPress);
-            // 
-            // lb_wpt
-            // 
-            this.lb_wpt.AutoSize = true;
-            this.lb_wpt.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_wpt.Location = new System.Drawing.Point(200, 116);
-            this.lb_wpt.Name = "lb_wpt";
-            this.lb_wpt.Size = new System.Drawing.Size(150, 23);
-            this.lb_wpt.TabIndex = 118;
-            this.lb_wpt.Text = "WPT  0x                =  ";
             // 
             // bt_disable_timer_webcam
             // 
@@ -2192,9 +2172,9 @@
             this.lb_awb_result_G.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_awb_result_G.Location = new System.Drawing.Point(735, 23);
             this.lb_awb_result_G.Name = "lb_awb_result_G";
-            this.lb_awb_result_G.Size = new System.Drawing.Size(26, 24);
+            this.lb_awb_result_G.Size = new System.Drawing.Size(66, 24);
             this.lb_awb_result_G.TabIndex = 101;
-            this.lb_awb_result_G.Text = "G";
+            this.lb_awb_result_G.Text = "--------";
             // 
             // lb_awb_result_R
             // 
@@ -2726,16 +2706,6 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(170, 50);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(308, 56);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
-            // 
             // button16
             // 
             this.button16.BackgroundImage = global::imsLink.Properties.Resources.save;
@@ -2868,6 +2838,36 @@
             this.lb_0x3.Size = new System.Drawing.Size(104, 23);
             this.lb_0x3.TabIndex = 70;
             this.lb_0x3.Text = "0x                 =";
+            // 
+            // lb_bpt
+            // 
+            this.lb_bpt.AutoSize = true;
+            this.lb_bpt.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_bpt.Location = new System.Drawing.Point(200, 158);
+            this.lb_bpt.Name = "lb_bpt";
+            this.lb_bpt.Size = new System.Drawing.Size(149, 23);
+            this.lb_bpt.TabIndex = 123;
+            this.lb_bpt.Text = "BPT  0x                 =  ";
+            // 
+            // lb_wpt
+            // 
+            this.lb_wpt.AutoSize = true;
+            this.lb_wpt.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_wpt.Location = new System.Drawing.Point(200, 116);
+            this.lb_wpt.Name = "lb_wpt";
+            this.lb_wpt.Size = new System.Drawing.Size(150, 23);
+            this.lb_wpt.TabIndex = 118;
+            this.lb_wpt.Text = "WPT  0x                =  ";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(170, 50);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(308, 56);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // tp_Test
             // 
