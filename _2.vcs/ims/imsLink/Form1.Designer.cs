@@ -160,6 +160,8 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_test = new System.Windows.Forms.Button();
+            this.bt_awb_test2 = new System.Windows.Forms.Button();
             this.tb_bpt = new System.Windows.Forms.TextBox();
             this.tb_wpt = new System.Windows.Forms.TextBox();
             this.numericUpDown_bpt = new System.Windows.Forms.NumericUpDown();
@@ -434,7 +436,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(89, 27);
             this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "COM6";
+            this.comboBox1.Text = "COM8";
             // 
             // comboBox2
             // 
@@ -1755,6 +1757,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_test);
+            this.tp_USB.Controls.Add(this.bt_awb_test2);
             this.tp_USB.Controls.Add(this.tb_bpt);
             this.tp_USB.Controls.Add(this.tb_wpt);
             this.tp_USB.Controls.Add(this.numericUpDown_bpt);
@@ -1847,6 +1851,32 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_test
+            // 
+            this.bt_test.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_test.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_test.ForeColor = System.Drawing.Color.Red;
+            this.bt_test.Location = new System.Drawing.Point(702, 390);
+            this.bt_test.Name = "bt_test";
+            this.bt_test.Size = new System.Drawing.Size(64, 32);
+            this.bt_test.TabIndex = 128;
+            this.bt_test.Text = "Test";
+            this.bt_test.UseVisualStyleBackColor = false;
+            this.bt_test.Click += new System.EventHandler(this.bt_test_Click);
+            // 
+            // bt_awb_test2
+            // 
+            this.bt_awb_test2.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_awb_test2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_awb_test2.ForeColor = System.Drawing.Color.Black;
+            this.bt_awb_test2.Location = new System.Drawing.Point(866, 487);
+            this.bt_awb_test2.Name = "bt_awb_test2";
+            this.bt_awb_test2.Size = new System.Drawing.Size(64, 32);
+            this.bt_awb_test2.TabIndex = 127;
+            this.bt_awb_test2.Text = "Check";
+            this.bt_awb_test2.UseVisualStyleBackColor = false;
+            this.bt_awb_test2.Click += new System.EventHandler(this.bt_awb_test2_Click);
             // 
             // tb_bpt
             // 
@@ -1993,8 +2023,11 @@
             this.comboBox_temperature.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_temperature.FormattingEnabled = true;
             this.comboBox_temperature.Items.AddRange(new object[] {
+            "5500K",
             "6500K",
-            "7500K"});
+            "7500K",
+            "8500K",
+            "9500K"});
             this.comboBox_temperature.Location = new System.Drawing.Point(688, 334);
             this.comboBox_temperature.Name = "comboBox_temperature";
             this.comboBox_temperature.Size = new System.Drawing.Size(110, 29);
@@ -3560,7 +3593,7 @@
             // timer_webcam
             // 
             this.timer_webcam.Enabled = true;
-            this.timer_webcam.Interval = 1500;
+            this.timer_webcam.Interval = 1000;
             this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
             // 
             // bt_goto_awb
@@ -3957,6 +3990,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_bpt;
         private System.Windows.Forms.TextBox tb_bpt;
         private System.Windows.Forms.Label lb_bpt;
+        private System.Windows.Forms.Button bt_awb_test2;
+        private System.Windows.Forms.Button bt_test;
     }
 }
 

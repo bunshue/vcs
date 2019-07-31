@@ -136,10 +136,6 @@ namespace imsLink
         int TARGET_AWB_G = 249;
         int TARGET_AWB_B = 253;
 
-        int RGB_R = 0;
-        int RGB_G = 0;
-        int RGB_B = 0;
-
         int total_RGB_R = 0;
         int total_RGB_G = 0;
         int total_RGB_B = 0;
@@ -150,6 +146,27 @@ namespace imsLink
         int total_RGB_G_min = 0;
         int total_RGB_B_max = 0;
         int total_RGB_B_min = 0;
+
+        private const int CHECK_SATURATION_FRAME = 100;
+        bool flag_check_rgb_saturation = false;
+        int rgb_saturation_check_cnt = 30000;
+        int rgb_r_saturation_cnt = 0;
+        int rgb_g_saturation_cnt = 0;
+        int rgb_b_saturation_cnt = 0;
+
+        private const int CHECK_AWB_FRAME = 100;
+        bool flag_check_rgb = false;
+        int rgb_check_cnt = 30000;
+        int rgb_r_ok_cnt = 0;
+        int rgb_g_ok_cnt = 0;
+        int rgb_b_ok_cnt = 0;
+        int rgb_r_fail_high_cnt = 0;
+        int rgb_r_fail_low_cnt = 0;
+        int rgb_g_fail_high_cnt = 0;
+        int rgb_g_fail_low_cnt = 0;
+        int rgb_b_fail_high_cnt = 0;
+        int rgb_b_fail_low_cnt = 0;
+
 
         //C# 提示視窗 ToolTip 
         //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -215,7 +232,7 @@ namespace imsLink
             numericUpDown_R.Value = trackBar_R.Value;
             numericUpDown_G.Value = trackBar_G.Value;
             numericUpDown_B.Value = trackBar_B.Value;
-            comboBox_temperature.SelectedIndex = 0;
+            comboBox_temperature.SelectedIndex = 1; //6500K
             numericUpDown_TG_R.Value = TARGET_AWB_R;
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
@@ -2052,7 +2069,21 @@ namespace imsLink
 
             if (flag_comport_ok == true)
             {
-                serialPort1.Write(data, 0, data.Length);
+                //serialPort1.Write(data, 0, data.Length);
+                try
+                {   //可能會產生錯誤的程式區段
+                    serialPort1.Write(data, 0, data.Length);
+                }
+                /*
+                catch (Exception ex)
+                {   //定義產生錯誤時的例外處理程式碼
+                    MessageBox.Show(ex.Message);
+                }
+                */
+                finally
+                {
+                    //一定會被執行的程式區段
+                }
             }
             else
             {
@@ -2998,6 +3029,7 @@ namespace imsLink
         Graphics gg;
         SolidBrush drawBrush;
         Font drawFont;
+        Font drawFont2;
         string drawDate;
         int total_R = 0;
         int total_G = 0;
@@ -3016,7 +3048,7 @@ namespace imsLink
             if (flag_awb_debug == true)
             {
                 frame_cnt++;
-                if (frame_cnt == 3)
+                if (frame_cnt == 5)
                 {
                     frame_cnt = 0;
 
@@ -3078,6 +3110,7 @@ namespace imsLink
             drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             drawBrush = new SolidBrush(Color.Yellow);
             drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
             x_st = 10;
             y_st = 10;
             gg.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
@@ -3103,9 +3136,6 @@ namespace imsLink
 
                 gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
 
-                RGB_R = total_R / (ww * hh);
-                RGB_G = total_G / (ww * hh);
-                RGB_B = total_B / (ww * hh);
                 total_RGB_R = total_R;
                 total_RGB_G = total_G;
                 total_RGB_B = total_B;
@@ -3127,17 +3157,41 @@ namespace imsLink
 
                 string rgb_value;
                 x_st = 10;
+
                 y_st = 250;
-                //if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - 1 * ww * hh / 2)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + 1 * ww * hh / 2)))
-                if ((RGB_R >= (TARGET_AWB_R - 1)) && (RGB_R <= (TARGET_AWB_R + 1)))
+                if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - 1 * ww * hh)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + 1 * ww * hh)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
+                    rgb_value = ((float)total_RGB_R / (ww * hh)).ToString("F2");
+                    if (rgb_check_cnt < CHECK_AWB_FRAME)
+                    {
+                        rgb_r_ok_cnt++;
+                    }
                 }
                 else
                 {
-                    drawBrush = new SolidBrush(Color.Red);
+                    //drawBrush = new SolidBrush(Color.Red);
+                    if (total_RGB_R < (TARGET_AWB_R * ww * hh - 1 * ww * hh))
+                    {
+                        rgb_value = ((float)total_RGB_R / (ww * hh)).ToString("F2") + "-";
+                        drawBrush = new SolidBrush(Color.Pink);
+                        if (rgb_check_cnt < CHECK_AWB_FRAME)
+                        {
+                            rgb_r_fail_low_cnt++;
+                        }
+                    }
+                    else
+                    {
+                        rgb_value = ((float)total_RGB_R / (ww * hh)).ToString("F2") + "+";
+                        drawBrush = new SolidBrush(Color.DarkRed);
+                        if (rgb_check_cnt < CHECK_AWB_FRAME)
+                        {
+                            rgb_r_fail_high_cnt++;
+                        }
+                    }
                 }
-                if ((RGB_R >= (TARGET_AWB_R - 1)) && (RGB_R <= (TARGET_AWB_R + 1)))
+
+                if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - 1 * ww * hh)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + 1 * ww * hh)))
                 {
                     flag_R_OK = true;
                 }
@@ -3145,21 +3199,50 @@ namespace imsLink
                 {
                     flag_R_OK = false;
                 }
-                //rgb_value = RGB_R.ToString() + "   " + TARGET_AWB_R.ToString();
-                rgb_value = RGB_R.ToString();
+                //rgb_value = ((float)total_RGB_R / (ww * hh)).ToString("F2");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
 
+                if (TARGET_AWB_R < 255)
+                    rgb_value = ((float)TARGET_AWB_R + 0.99).ToString("F2");
+                else
+                    rgb_value = ((float)TARGET_AWB_R).ToString("F2");
+                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Red), x_st + 92, y_st - 2);
+                rgb_value = ((float)TARGET_AWB_R - 1).ToString("F2");
+                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Red), x_st + 92, y_st + 16);
+
                 y_st = 290;
-                //if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - 1 * ww * hh / 2)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + 1 * ww * hh / 2)))
-                if ((RGB_G >= (TARGET_AWB_G - 1)) && (RGB_G <= (TARGET_AWB_G + 1)))
+                if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - 1 * ww * hh)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + 1 * ww * hh)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
+                    rgb_value = ((float)total_RGB_G / (ww * hh)).ToString("F2");
+                    if (rgb_check_cnt < CHECK_AWB_FRAME)
+                    {
+                        rgb_g_ok_cnt++;
+                    }
                 }
                 else
                 {
-                    drawBrush = new SolidBrush(Color.Green);
+                    //drawBrush = new SolidBrush(Color.Green);
+                    if (total_RGB_G < (TARGET_AWB_G * ww * hh - 1 * ww * hh))
+                    {
+                        rgb_value = ((float)total_RGB_G / (ww * hh)).ToString("F2") + "-";
+                        drawBrush = new SolidBrush(Color.LightGreen);
+                        if (rgb_check_cnt < CHECK_AWB_FRAME)
+                        {
+                            rgb_g_fail_low_cnt++;
+                        }
+                    }
+                    else
+                    {
+                        rgb_value = ((float)total_RGB_G / (ww * hh)).ToString("F2") + "+";
+                        drawBrush = new SolidBrush(Color.DarkGreen);
+                        if (rgb_check_cnt < CHECK_AWB_FRAME)
+                        {
+                            rgb_g_fail_high_cnt++;
+                        }
+                    }
                 }
-                if ((RGB_G >= (TARGET_AWB_G - 1)) && (RGB_G <= (TARGET_AWB_G + 1)))
+                if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - 1 * ww * hh)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + 1 * ww * hh)))
                 {
                     flag_G_OK = true;
                 }
@@ -3167,24 +3250,60 @@ namespace imsLink
                 {
                     flag_G_OK = false;
                 }
-                //rgb_value = RGB_G.ToString() + "   " + TARGET_AWB_G.ToString();
-                rgb_value = RGB_G.ToString();
+                //rgb_value = ((float)total_RGB_G / (ww * hh)).ToString("F2");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
 
-                y_st = 330;
-                //if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - (1 * ww * hh / 1))) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + (1 * ww * hh / 1))))
+                if (TARGET_AWB_G < 255)
+                    rgb_value = ((float)TARGET_AWB_G + 0.99).ToString("F2");
+                else
+                    rgb_value = ((float)TARGET_AWB_G).ToString("F2");
+                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Green), x_st + 92, y_st - 2);
+                rgb_value = ((float)TARGET_AWB_G - 1).ToString("F2");
+                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Green), x_st + 92, y_st + 16);
 
-                //if ((RGB_B * ww * hh >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (RGB_B * ww * hh <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
-                //if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
-                if ((RGB_B >= (TARGET_AWB_B - 1)) && (RGB_B <= (TARGET_AWB_B + 1)))
+                y_st = 330;
+                if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
+                    rgb_value = ((float)total_RGB_B / (ww * hh)).ToString("F2");
+                    if (rgb_check_cnt < CHECK_AWB_FRAME)
+                    {
+                        rgb_check_cnt++;
+                        rgb_b_ok_cnt++;
+                    }
                 }
                 else
                 {
-                    drawBrush = new SolidBrush(Color.Blue);
+                    //drawBrush = new SolidBrush(Color.Blue);
+                    if (total_RGB_B < (TARGET_AWB_B * ww * hh - 1 * ww * hh))
+                    {
+                        rgb_value = ((float)total_RGB_B / (ww * hh)).ToString("F2") + "-";
+                        drawBrush = new SolidBrush(Color.LightBlue);
+                        if (rgb_check_cnt < CHECK_AWB_FRAME)
+                        {
+                            rgb_check_cnt++;
+                            rgb_b_fail_low_cnt++;
+                        }
+                    }
+                    else
+                    {
+                        rgb_value = ((float)total_RGB_B / (ww * hh)).ToString("F2") + "+";
+                        drawBrush = new SolidBrush(Color.DarkBlue);
+                        if (rgb_check_cnt < CHECK_AWB_FRAME)
+                        {
+                            rgb_check_cnt++;
+                            rgb_b_fail_high_cnt++;
+                        }
+                    }
                 }
-                if ((RGB_B >= (TARGET_AWB_B - 1)) && (RGB_B <= (TARGET_AWB_B + 1)))
+                if (rgb_check_cnt == CHECK_AWB_FRAME)
+                {
+                    rgb_check_cnt++;
+                    flag_check_rgb = false;
+                    richTextBox1.Text += "already " + CHECK_AWB_FRAME.ToString() + " frames\n";
+                }
+
+                if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - 1 * ww * hh)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + 1 * ww * hh)))
                 {
                     flag_B_OK = true;
                 }
@@ -3192,9 +3311,16 @@ namespace imsLink
                 {
                     flag_B_OK = false;
                 }
-                //rgb_value = RGB_B.ToString() + "   " + TARGET_AWB_B.ToString();
-                rgb_value = RGB_B.ToString();
+                //rgb_value = ((float)total_RGB_B / (ww * hh)).ToString("F2");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                if (TARGET_AWB_B < 255)
+                    rgb_value = ((float)TARGET_AWB_B + 0.99).ToString("F2");
+                else
+                    rgb_value = ((float)TARGET_AWB_B).ToString("F2");
+                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Blue), x_st + 92, y_st - 2);
+                rgb_value = ((float)TARGET_AWB_B - 1).ToString("F2");
+                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Blue), x_st + 92, y_st + 16);
 
                 y_st = 370;
                 drawBrush = new SolidBrush(Color.Red);
@@ -3210,6 +3336,33 @@ namespace imsLink
                 drawBrush = new SolidBrush(Color.Blue);
                 rgb_value = total_B.ToString() + "   " + (((float)total_B) / awb_block / awb_block).ToString("F3");
                 gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+
+                if (flag_check_rgb_saturation == true)
+                {
+                    if (rgb_saturation_check_cnt < CHECK_SATURATION_FRAME)
+                    {
+                        rgb_saturation_check_cnt++;
+
+                        if (total_RGB_R == 255 * awb_block * awb_block)
+                        {
+                            rgb_r_saturation_cnt++;
+                        }
+                        if (total_RGB_G == 255 * awb_block * awb_block)
+                        {
+                            rgb_g_saturation_cnt++;
+                        }
+                        if (total_RGB_B == 255 * awb_block * awb_block)
+                        {
+                            rgb_b_saturation_cnt++;
+                        }
+                    }
+                    if (rgb_saturation_check_cnt == CHECK_SATURATION_FRAME)
+                    {
+                        rgb_saturation_check_cnt++;
+                        flag_check_rgb_saturation = false;
+                        richTextBox1.Text += "already " + CHECK_SATURATION_FRAME.ToString() + " frames\n";
+                    }
+                }
 
             }
             usb_camera_width = w;
@@ -3762,33 +3915,33 @@ namespace imsLink
                     bt_read_bpt.Visible = true;
                     bt_write_bpt.Visible = true;
 
-                    bt_awb.Location = new Point(410 + 45, 650 - 100 - 50);
-                    bt_awb_test.Location = new Point(410 + 45-80, 650 - 100 - 50);
-                    bt_awb_test_init.Location = new Point(410 + 45 - 80 - 80, 650 - 100 - 50);
 
-                    bt_break.Location = new Point(410 + 45 - 80, 650 - 100);
+                    bt_awb_test_init.Location = new Point(170, 500);
+                    bt_awb_test.Location = new Point(170 + 70, 500);
+                    bt_awb_test2.Location = new Point(170 + 70 * 2, 500);
+                    bt_break.Location = new Point(170 + 70 * 3, 500);
+                    bt_awb.Location = new Point(170 + 70 * 4, 500);
+                    bt_disable_timer_webcam.Location = new Point(170 + 70 * 5, 500);
+                    bt_test.Location = new Point(170 + 70 * 5, 500 + 40);
 
-                    bt_disable_timer_webcam.Location = new Point(480 + 45, 650 - 100 - 50);
+                    lb_addr.Location = new Point(30, 620 - 100 + 30);
+                    lb_0x1.Location = new Point(5, 650 + 3 - 100 + 30);
+                    tb_1a.Location = new Point(30, 650 - 100 + 30);
+                    tb_2a.Location = new Point(100, 650 - 100 + 30);
 
-                    lb_addr.Location = new Point(30, 620 - 100);
-                    lb_0x1.Location = new Point(5, 650 + 3 - 100);
-                    tb_1a.Location = new Point(30, 650 - 100);
-                    tb_2a.Location = new Point(100, 650 - 100);
+                    lb_data.Location = new Point(30 + 200, 620 - 100 + 30);
+                    lb_0x2.Location = new Point(5 + 200, 650 + 3 - 100 + 30);
+                    tb_3a.Location = new Point(30 + 200, 650 - 100 + 30);
+                    tb_4a.Location = new Point(100 + 200, 650 - 100 + 30);
 
-                    lb_data.Location = new Point(30 + 200, 620 - 100);
-                    lb_0x2.Location = new Point(5 + 200, 650 + 3 - 100);
-                    tb_3a.Location = new Point(30 + 200, 650 - 100);
-                    tb_4a.Location = new Point(100 + 200, 650 - 100);
+                    bt_read2.Location = new Point(410 + 45 - 80, 650 - 100 + 30);
+                    bt_write2.Location = new Point(480 + 45 - 80, 650 - 100 + 30);
 
-                    bt_read2.Location = new Point(410 + 45, 650 - 100);
-                    bt_write2.Location = new Point(480 + 45, 650 - 100);
-
-                    lb_awb_result_expo.Location = new Point(5 + 102 * 0, 720 - 120 + 15);
-                    //lb_awb_result_gain.Location = new Point(5 + 102 * 1, 720 - 120 + 15);
-                    lb_awb_result_gain.Location = new Point(5 + 102 * 1 + 10, 720 - 120 + 15);
-                    lb_awb_result_R.Location = new Point(5 + 102 * 2 + 10, 720 - 120 + 15);
-                    lb_awb_result_G.Location = new Point(5 + 102 * 3 + 28*1 + 10, 720 - 120 + 15);
-                    lb_awb_result_B.Location = new Point(5 + 102 * 4 + 28*2, 720 - 120 + 15);
+                    lb_awb_result_expo.Location = new Point(5 + 102 * 0, 720 - 120 + 30);
+                    lb_awb_result_gain.Location = new Point(5 + 102 * 1 + 10, 720 - 120 + 30);
+                    lb_awb_result_R.Location = new Point(5 + 102 * 2 + 10, 720 - 120 + 30);
+                    lb_awb_result_G.Location = new Point(5 + 102 * 3 + 28*1 + 10, 720 - 120 + 30);
+                    lb_awb_result_B.Location = new Point(5 + 102 * 4 + 28*2, 720 - 120 + 30);
 
                     lb_awb_result_expo.ForeColor = Color.Silver;
                     lb_awb_result_gain.ForeColor = Color.Gold;
@@ -3796,7 +3949,7 @@ namespace imsLink
                     lb_awb_result_G.ForeColor = Color.Green;
                     lb_awb_result_B.ForeColor = Color.Blue;
 
-                    bt_get_setup.Location = new Point(480 + 45, 720 - 120 + 15 + 25);
+                    bt_get_setup.Location = new Point(480 + 45, 720 - 120 + 15 - 20);
 
                     //EXPO
                     lb_expo.Location = new Point(30 / 2, 720 - 120 + 60);
@@ -3849,10 +4002,10 @@ namespace imsLink
                     bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
 
                     //TARGET RGB
-                    comboBox_temperature.Location = new Point(170 + 400 + 30 + 120, 15 + 230 * 2);
-                    numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120, 15 + 250 * 2);
-                    numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120, 15 + 290 * 2);
-                    numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120, 15 + 330 * 2);
+                    comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 160, 15 + 230 * 2);
+                    numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 160, 15 + 250 * 2);
+                    numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 160, 15 + 290 * 2);
+                    numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 160, 15 + 330 * 2);
 
                     //WPT
                     lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 15);
@@ -5487,13 +5640,22 @@ namespace imsLink
             }
             */
 
-
-            /*
-            if ((timer_webcam_cnt % 10) == 0)
+            timer_webcam_cnt++;
+            if ((timer_webcam_cnt % 1) == 0)
             {
+                /*
                 richTextBox1.Text += "d_R " + (total_RGB_R_max - total_RGB_R_min).ToString() + "    " + (((float)(total_RGB_R_max - total_RGB_R_min)) / awb_block / awb_block).ToString("F3")
                     + "       d_G " + (total_RGB_G_max - total_RGB_G_min).ToString() + "    " + (((float)(total_RGB_G_max - total_RGB_G_min)) / awb_block / awb_block).ToString("F3")
                     + "       d_B " + (total_RGB_B_max - total_RGB_B_min).ToString() + "    " + (((float)(total_RGB_B_max - total_RGB_B_min)) / awb_block / awb_block).ToString("F3") + "\n";
+
+                richTextBox1.Text += "d_R " + (total_RGB_R_max - total_RGB_R_min).ToString() + "    " + (((float)(total_RGB_R_max - total_RGB_R_min)) / awb_block / awb_block).ToString("F3")
+                    + "       d_G " + (total_RGB_G_max - total_RGB_G_min).ToString() + "    " + (((float)(total_RGB_G_max - total_RGB_G_min)) / awb_block / awb_block).ToString("F3")
+                    + "       d_B " + (total_RGB_B_max - total_RGB_B_min).ToString() + "    " + (((float)(total_RGB_B_max - total_RGB_B_min)) / awb_block / awb_block).ToString("F3") + "\n";
+                */
+
+                richTextBox1.Text += "R_max(" + (timer_webcam_cnt / 1).ToString() + ")=" + total_RGB_R_max.ToString() + ";R_min(" + (timer_webcam_cnt / 1).ToString() + ")=" + total_RGB_R_min.ToString() + ";";
+                richTextBox1.Text += "G_max(" + (timer_webcam_cnt / 1).ToString() + ")=" + total_RGB_G_max.ToString() + ";G_min(" + (timer_webcam_cnt / 1).ToString() + ")=" + total_RGB_G_min.ToString() + ";";
+                richTextBox1.Text += "B_max(" + (timer_webcam_cnt / 1).ToString() + ")=" + total_RGB_B_max.ToString() + ";B_min(" + (timer_webcam_cnt / 1).ToString() + ")=" + total_RGB_B_min.ToString() + ";\n";
 
                
                 total_RGB_R_max = 0;
@@ -5503,7 +5665,6 @@ namespace imsLink
                 total_RGB_B_max = 0;
                 total_RGB_B_min = 255 * awb_block * awb_block;
             }
-            */
         }
 
         private void bt_setup_expo_Click(object sender, EventArgs e)
@@ -5519,7 +5680,7 @@ namespace imsLink
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x01;
-            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             DongleAddr_h = 0x35;
             DongleAddr_l = 0x02;
 
@@ -5841,6 +6002,12 @@ namespace imsLink
 
         bool read_camera_sensor0(int cmd, byte DongleAddr_h, byte DongleAddr_l)
         {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
             flag_wait_data_cmd = cmd;
             Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
 
@@ -6073,17 +6240,71 @@ namespace imsLink
             }
         }
 
+        int get_r_data()
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 1;
+            }
+            data_R = -1;
+            lb_awb_result_R.Text = "";
+            flag_awb_update_R = false;
+            read_camera_sensor(SENSOR_RGB_R);
+
+            if (data_R != -1)
+            {
+                return 0;
+            }
+            else
+            {
+                richTextBox1.Text += "資料不完整r\n";
+                return 1;
+            }
+        }
+
+        int get_b_data()
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 1;
+            }
+            data_B = -1;
+            lb_awb_result_B.Text = "";
+            flag_awb_update_B = false;
+            read_camera_sensor(SENSOR_RGB_B);
+
+            if (data_B != -1)
+            {
+                return 0;
+            }
+            else
+            {
+                richTextBox1.Text += "資料不完整b\n";
+                return 1;
+            }
+        }
+        
         void test_RGB_saturation()
         {
             int ret = 0;
 
-            //for (int i = 0; i < 15; i++)
+            ret = precheck_RGB_saturation();
+            if (ret == 0)
+            {
+                richTextBox1.Text += "RGB皆未飽和\n";
+                return;
+            }
+            else
+                richTextBox1.Text += "RGB有飽和\n";
+
             int rgb_ok_cnt = 0;
             while (true)
             {
                 //richTextBox1.Text += "test saturation " + i.ToString() + "\n";
-                richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
-                if ((RGB_R < 255) && (RGB_G < 255) && (RGB_B < 255))
+                //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
+                if ((total_RGB_R < 255 * awb_block * awb_block) && (total_RGB_G < 255 * awb_block * awb_block) && (total_RGB_B < 255 * awb_block * awb_block))
                 {
                     delay(100);
                     rgb_ok_cnt++;
@@ -6091,11 +6312,11 @@ namespace imsLink
                 else
                 {
                     ret = get_rgb_data();
-                    delay(500);
-                    richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
+                    delay(300);
+                    richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
                     check_RGB_saturation();
-                    delay(500);
-                    richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
+                    delay(300);
+                    richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
                 }
                 if (rgb_ok_cnt == 5)
                     break;
@@ -6130,7 +6351,7 @@ namespace imsLink
             }
 
             flag_break = false;
-            richTextBox1.Text += "\n\n\n\n";
+            richTextBox1.Text += "\n\n\n";
             richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
 
             richTextBox1.Text += "開始計時\n";
@@ -6150,9 +6371,9 @@ namespace imsLink
             flag_update_RGB_scrollbar = true;
             ret = get_rgb_data();
 
-            richTextBox1.Text += "Current R G B = " + RGB_R.ToString() + " " + RGB_G.ToString() + " " + RGB_B.ToString() + "\n";
+            richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
 
-            check_G_exposure(sender, e, RGB_G);
+            check_G_exposure(sender, e, total_RGB_G);
 
             flag_update_RGB_scrollbar = true;
             ret = get_rgb_data();
@@ -6165,39 +6386,11 @@ namespace imsLink
             {
                 richTextBox1.Text += "AWB setup R G B = " + data_R.ToString() + " " + data_G.ToString() + " " + data_B.ToString() + "\n";
 
-                /*
-                if (RGB_R > (TARGET_AWB_R + 1))
-                {
-                    richTextBox1.Text += "R太大\n";
-                }
-                else if (RGB_R < (TARGET_AWB_R - 1))
-                {
-                    richTextBox1.Text += "R太小\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "R已在目標內\n";
-                }
-
-                if (RGB_B > (TARGET_AWB_B + 1))
-                {
-                    richTextBox1.Text += "B太大\n";
-                }
-                else if (RGB_B < (TARGET_AWB_B - 1))
-                {
-                    richTextBox1.Text += "B太小\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "B已在目標內\n";
-                }
-                */
-
                 check_RB_saturation();
 
                 int i;
 
-                for (i = 0; i < 10; i++)
+                for (i = 0; i < 30; i++)
                 {
                     richTextBox1.Text += "\ni = " + i.ToString() + "\t";
                     flag_update_RGB_scrollbar = true;
@@ -6210,7 +6403,7 @@ namespace imsLink
                         ret = check_RGB_value();
                         if (ret == 0)
                         {
-                            richTextBox1.Text += "RGB皆符合, break\n";
+                            richTextBox1.Text += "\nRGB皆符合, 完成\n";
                             break;
                         }
                     }
@@ -6219,18 +6412,18 @@ namespace imsLink
                     ret = check_RGB_value();
                     if (ret == 0)
                     {
-                        richTextBox1.Text += "RGB皆符合, break\n";
+                        richTextBox1.Text += "\nRGB皆符合, 完成\n";
                         break;
                     }
                     check_RB_saturation();
-                    check_G_exposure(sender, e, RGB_G);
+                    check_G_exposure(sender, e, total_RGB_G);
 
                     delay(100);
                     check_RB_saturation();
                     ret = check_RGB_value();
                     if (ret == 0)
                     {
-                        richTextBox1.Text += "RGB皆符合, break\n";
+                        richTextBox1.Text += "\nRGB皆符合, 完成\n";
                         break;
                     }
 
@@ -6248,13 +6441,15 @@ namespace imsLink
             //richTextBox1.Text += "AGC auto, EXPO auto\n";
             //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
-            richTextBox1.Text += "AWB test SP\n";
+            richTextBox1.Text += "\nTarget  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
+            richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
+
+            richTextBox1.Text += "\nAWB test SP\n";
 
             // Stop timing
             stopwatch.Stop();
 
             // Write result
-            richTextBox1.Text += "\n停止計時\t";
             richTextBox1.Text += "總時間: " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + "." + ((stopwatch.ElapsedMilliseconds % 1000) / 100).ToString() + " 秒\n";
             flag_break = false;
         }
@@ -6262,31 +6457,37 @@ namespace imsLink
         int check_RGB_value()
         {
             if ((flag_R_OK == true) && (flag_G_OK == true) && (flag_B_OK == true))
+            {
                 return 0;
+            }
             else
+            {
                 return 1;
+            }
         }
 
         void check_G_exposure(object sender, EventArgs e, int rgb_g)
         {
             int ret = 0;
             int diff = 0;
-            richTextBox1.Text += "check G expo : RGB_G = " + rgb_g.ToString() + "  RGB_G = " + TARGET_AWB_G.ToString() + "\t";
-            if ((rgb_g >= (TARGET_AWB_G - 1)) && (rgb_g <= (TARGET_AWB_G + 1)))
+
+            //rgb_g = rgb_g / awb_block / awb_block;
+
+            richTextBox1.Text += "check G expo : rgb_g = " + rgb_g.ToString() + " RGB_G = " + (rgb_g / (awb_block * awb_block)).ToString() + "  TG_G = " + TARGET_AWB_G.ToString() + "\t";
+            if ((rgb_g >= (TARGET_AWB_G * awb_block * awb_block - 1 * awb_block * awb_block)) && (rgb_g <= (TARGET_AWB_G * awb_block * awb_block + 1 * awb_block * awb_block)))
             {
                 richTextBox1.Text += "G已在目標內\n";
                 return;
             }
 
-            if (rgb_g < (TARGET_AWB_G - 1))
+            if (rgb_g < (TARGET_AWB_G * awb_block * awb_block - 1 * awb_block * awb_block))
             {
-                while (rgb_g < (TARGET_AWB_G - 1))
+                richTextBox1.Text += "G太小 要增加expo\n";
+                while (rgb_g < (TARGET_AWB_G * awb_block * awb_block - 1 * awb_block * awb_block))
                 {
                     ret = get_expo_data();
                     if (ret == 0)
                     {
-                        diff = TARGET_AWB_G - rgb_g;
-
                         if ((data_expo < 0) || (data_expo > 500))
                         {
                             richTextBox1.Text += "impossible data_expo " + data_expo.ToString() + "\n";
@@ -6298,10 +6499,15 @@ namespace imsLink
                             richTextBox1.Text += "reach expo max\n";
                             return;
                         }
+                        diff = TARGET_AWB_G * awb_block * awb_block - rgb_g;
+                        //diff = diff * 10 / 4;
+                        diff = diff * 1 / (awb_block * awb_block);
+                        if (diff > 50)
+                            diff = 50;
 
-                        data_expo += diff * 10 / 4;
+                        data_expo += diff;
 
-                        richTextBox1.Text += "G inc " + (diff * 10 / 4).ToString() + " ";
+                        richTextBox1.Text += "E 增加 " + diff.ToString() + " ";
 
                         if (data_expo > 500)
                             data_expo = 500;
@@ -6315,19 +6521,18 @@ namespace imsLink
                         }
                     }
                     delay(500);
-                    rgb_g = RGB_G;
+                    rgb_g = total_RGB_G;
                     check_RB_saturation();
                 }
             }
             else
             {
-                while (rgb_g > (TARGET_AWB_G + 1))
+                while (rgb_g > (TARGET_AWB_G * awb_block * awb_block + 1 * awb_block * awb_block))
                 {
+                    richTextBox1.Text += "G太大 要減少expo\n";
                     ret = get_expo_data();
                     if (ret == 0)
                     {
-                        diff = rgb_g - TARGET_AWB_G;
-
                         if ((data_expo < 0) || (data_expo > 511))
                         {
                             richTextBox1.Text += "impossible data_expo " + data_expo.ToString() + "\n";
@@ -6339,9 +6544,14 @@ namespace imsLink
                             richTextBox1.Text += "reach expo min\n";
                             return;
                         }
-
-                        data_expo -= diff * 10 / 4;
-                        richTextBox1.Text += "G dec " + (diff * 10 / 4).ToString() + " ";
+                        diff = rgb_g - TARGET_AWB_G * awb_block * awb_block;
+                        //diff = diff * 10 / 4;
+                        diff = diff * 1 / (awb_block * awb_block);
+                        if (diff > 50)
+                            diff = 50;
+                        
+                        data_expo -= diff;
+                        richTextBox1.Text += "E 減少 " + diff.ToString() + " ";
 
                         if (data_expo < 0)
                             data_expo = 0;
@@ -6355,11 +6565,11 @@ namespace imsLink
                         }
                     }
                     delay(500);
-                    rgb_g = RGB_G;
+                    rgb_g = total_RGB_G;
                     check_RB_saturation();
                 }
             }
-            richTextBox1.Text += "抵達目標 目前 " + rgb_g.ToString() + " 目標 " + TARGET_AWB_G.ToString() + "\n\n";
+            richTextBox1.Text += "G抵達目標 目前 " + (rgb_g / (awb_block * awb_block)).ToString() + " 目標 " + TARGET_AWB_G.ToString() + "\n\n";
         }
 
         void check_RB_saturation()
@@ -6504,7 +6714,7 @@ namespace imsLink
                         }
                     }
                 }
-                delay(500);
+                delay(200);
             }
             //else
             //richTextBox1.Text += "R 未飽和\n";
@@ -6543,14 +6753,23 @@ namespace imsLink
         {
             int diff = 0;
 
-            richTextBox1.Text += "RGB_R = " + RGB_R.ToString() + "\tTG_AWB_R = " + TARGET_AWB_R.ToString() + "\t";
-            if (RGB_R > (TARGET_AWB_R + 1))
+            //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
+
+            richTextBox1.Text += "RGB_R = " + (total_RGB_R / awb_block / awb_block).ToString() + "\tTG_AWB_R = " + TARGET_AWB_R.ToString() + "\t";
+            //if ((total_RGB_R / awb_block / awb_block) > (TARGET_AWB_R + 1))
+            if (total_RGB_R > (TARGET_AWB_R * awb_block * awb_block + 1 * awb_block * awb_block))
             {
-                diff = RGB_R - (TARGET_AWB_R + 1);
-                diff *= 16;
+                //diff = (total_RGB_R / awb_block / awb_block) - (TARGET_AWB_R + 1);
+                //diff = (total_RGB_R / awb_block / awb_block) - (TARGET_AWB_R + 1);
+                diff = total_RGB_R - (TARGET_AWB_R * awb_block * awb_block + 1 * awb_block * awb_block);
+                diff = diff * 16 / (awb_block * awb_block);
+                if (diff > 50)
+                    diff = 50;
+
+                richTextBox1.Text += "\ntotal_RGB_R = " + total_RGB_R.ToString() + ", TARGET_AWB_R = " + TARGET_AWB_R.ToString() + "\n";
                 richTextBox1.Text += "R太大 減低R_data, 目前data_R = " + data_R.ToString() + ", 減 " + diff.ToString() + "\n";
 
-                int SendData = data_R - 50;
+                int SendData = data_R - diff;
                 //trackBar_R.Value = SendData;
                 numericUpDown_R.Value = SendData;
                 byte dd;
@@ -6565,13 +6784,18 @@ namespace imsLink
                 dd = (byte)(SendData % 256);
                 Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             }
-            else if (RGB_R < (TARGET_AWB_R - 1))
+            //else if ((total_RGB_R / awb_block / awb_block) < (TARGET_AWB_R - 1))
+            else if (total_RGB_R < (TARGET_AWB_R * awb_block * awb_block - 1 * awb_block * awb_block))
             {
-                diff = (TARGET_AWB_R - 1) - RGB_R;
-                diff *= 16;
+                diff = (TARGET_AWB_R * awb_block * awb_block - 1 * awb_block * awb_block) - total_RGB_R;
+                diff = diff * 16 / (awb_block * awb_block);
+                if (diff > 50)
+                    diff = 50;
+
+                richTextBox1.Text += "\ntotal_RGB_R = " + total_RGB_R.ToString() + ", TARGET_AWB_R = " + TARGET_AWB_R.ToString() + "\n";
                 richTextBox1.Text += "R太小 增加R_data, 目前data_R = " + data_R.ToString() + ", 加 " + diff.ToString() + "\n";
 
-                int SendData = data_R + 50;
+                int SendData = data_R + diff;
                 //trackBar_R.Value = SendData;
                 numericUpDown_R.Value = SendData;
                 byte dd;
@@ -6591,14 +6815,17 @@ namespace imsLink
                 richTextBox1.Text += "R已在目標內\n";
             }
 
-            richTextBox1.Text += "RGB_B = " + RGB_B.ToString() + "\tTG_AWB_B = " + TARGET_AWB_B.ToString() + "\t";
-            if (RGB_B > (TARGET_AWB_B + 1))
+            richTextBox1.Text += "RGB_B = " + (total_RGB_B / awb_block / awb_block).ToString() + "\tTG_AWB_B = " + TARGET_AWB_B.ToString() + "\t";
+            if (total_RGB_B > (TARGET_AWB_B * awb_block * awb_block + 1 * awb_block * awb_block))
             {
-                diff = RGB_B - (TARGET_AWB_B + 1);
-                diff *= 16;
+                diff = total_RGB_B - (TARGET_AWB_B * awb_block * awb_block + 1 * awb_block * awb_block);
+                diff = diff * 16 / (awb_block * awb_block);
+                if (diff > 50)
+                    diff = 50;
+
                 richTextBox1.Text += "B太大 減低B_data, 目前data_B = " + data_B.ToString() + ", 減 " + diff.ToString() + "\n";
 
-                int SendData = data_B - 50;
+                int SendData = data_B - diff;
                 //trackBar_B.Value = SendData;
                 numericUpDown_B.Value = SendData;
                 byte dd;
@@ -6613,13 +6840,16 @@ namespace imsLink
                 dd = (byte)(SendData % 256);
                 Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
             }
-            else if (RGB_B < (TARGET_AWB_B - 1))
+            else if (total_RGB_B < (TARGET_AWB_B * awb_block * awb_block - 1 * awb_block * awb_block))
             {
-                diff = (TARGET_AWB_B - 1) - RGB_B;
-                diff *= 16;
+                diff = (TARGET_AWB_B * awb_block * awb_block - 1 * awb_block * awb_block) - total_RGB_B;
+                diff = diff * 16 / (awb_block * awb_block);
+                if (diff > 50)
+                    diff = 50;
+
                 richTextBox1.Text += "B太小 增加B_data, 目前data_B = " + data_B.ToString() + ", 加 " + diff.ToString() + "\n";
 
-                int SendData = data_B + 50;
+                int SendData = data_B + diff;
                 //trackBar_B.Value = SendData;
                 numericUpDown_B.Value = SendData;
                 byte dd;
@@ -6717,7 +6947,7 @@ namespace imsLink
 
         private void bt_goto_awb_Click(object sender, EventArgs e)
         {
-            comboBox1.Text = "COM6";
+            comboBox1.Text = "COM8";
 
             if (comboBox1.Text.Length == 0)
             {
@@ -6785,28 +7015,46 @@ namespace imsLink
         {
             if (comboBox_temperature.SelectedIndex == 0)
             {
+                richTextBox1.Text += "5500K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 236;
+                TARGET_AWB_B = 224;
+            }
+            else if (comboBox_temperature.SelectedIndex == 1)
+            {
                 richTextBox1.Text += "6500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 249;
                 TARGET_AWB_B = 253;
-                numericUpDown_TG_R.Value = TARGET_AWB_R;
-                numericUpDown_TG_G.Value = TARGET_AWB_G;
-                numericUpDown_TG_B.Value = TARGET_AWB_B;
-                refresh_picturebox2();
             }
-            else if (comboBox_temperature.SelectedIndex == 1)
+            else if (comboBox_temperature.SelectedIndex == 2)
             {
                 richTextBox1.Text += "7500K\n";
                 TARGET_AWB_R = 235;
                 TARGET_AWB_G = 238;
                 TARGET_AWB_B = 255;
-                numericUpDown_TG_R.Value = TARGET_AWB_R;
-                numericUpDown_TG_G.Value = TARGET_AWB_G;
-                numericUpDown_TG_B.Value = TARGET_AWB_B;
-                refresh_picturebox2();
+            }
+            else if (comboBox_temperature.SelectedIndex == 3)
+            {
+                richTextBox1.Text += "8500K\n";
+                TARGET_AWB_R = 220;
+                TARGET_AWB_G = 229;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 4)
+            {
+                richTextBox1.Text += "9500K\n";
+                TARGET_AWB_R = 208;
+                TARGET_AWB_G = 222;
+                TARGET_AWB_B = 255;
             }
             else
                 richTextBox1.Text += "XXXXXXXXXX\n";
+
+            numericUpDown_TG_R.Value = TARGET_AWB_R;
+            numericUpDown_TG_G.Value = TARGET_AWB_G;
+            numericUpDown_TG_B.Value = TARGET_AWB_B;
+            refresh_picturebox2();
         }
 
         void refresh_picturebox2()
@@ -6962,8 +7210,18 @@ namespace imsLink
 
         private void bt_disable_timer_webcam_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Disable Timer WebCam\n";
-            timer_webcam.Enabled = false;
+            if (timer_webcam.Enabled == true)
+            {
+                richTextBox1.Text += "Disable Timer WebCam\n";
+                timer_webcam.Enabled = false;
+            }
+            else
+            {
+                richTextBox1.Text += "Enable Timer WebCam\n";
+                timer_webcam.Enabled = true;
+                timer_webcam_cnt = 0;
+
+            }
         }
 
         private void tb_3a_KeyPress(object sender, KeyPressEventArgs e)
@@ -7186,6 +7444,133 @@ namespace imsLink
             {
                 return true;
             }
+        }
+
+        private void bt_awb_test2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "AWB check ST\n";
+            flag_check_rgb = true;
+            rgb_check_cnt = 0;
+            rgb_r_ok_cnt = 0;
+            rgb_g_ok_cnt = 0;
+            rgb_b_ok_cnt = 0;
+            rgb_r_fail_high_cnt = 0;
+            rgb_r_fail_low_cnt = 0;
+            rgb_g_fail_high_cnt = 0;
+            rgb_g_fail_low_cnt = 0;
+            rgb_b_fail_high_cnt = 0;
+            rgb_b_fail_low_cnt = 0;
+
+            while (flag_check_rgb == true)
+            {
+                richTextBox1.Text += " .";
+                delay(200);
+            }
+            richTextBox1.Text += "R_ok = " + rgb_r_ok_cnt.ToString() + " R_fail_high = " + rgb_r_fail_high_cnt.ToString() + " R_fail_low = " + rgb_r_fail_low_cnt.ToString() + "\n";
+            richTextBox1.Text += "G_ok = " + rgb_g_ok_cnt.ToString() + " G_fail_high = " + rgb_g_fail_high_cnt.ToString() + " G_fail_low = " + rgb_g_fail_low_cnt.ToString() + "\n";
+            richTextBox1.Text += "B_ok = " + rgb_b_ok_cnt.ToString() + " B_fail_high = " + rgb_b_fail_high_cnt.ToString() + " B_fail_low = " + rgb_b_fail_low_cnt.ToString() + "\n";
+
+            int ret;
+            int data_new;
+
+            if (rgb_g_ok_cnt != CHECK_AWB_FRAME)
+            {
+                ret = get_expo_data();
+                if (ret == 0)
+                {
+                    data_new = data_expo - (rgb_g_fail_high_cnt - rgb_g_fail_low_cnt) / 2;
+                    richTextBox1.Text += "\ndata_expo_old = " + data_expo.ToString() + ", data_expo_new = " + data_new.ToString() + "\n";
+
+                    numericUpDown_expo.Value = data_new;
+                    byte dd;
+
+                    dd = (byte)(data_expo / 256);
+                    DongleAddr_h = 0x35;
+                    DongleAddr_l = 0x01;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x35;
+                    DongleAddr_l = 0x02;
+
+                    dd = (byte)(data_expo % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+                }
+            }
+
+            if (rgb_r_ok_cnt != CHECK_AWB_FRAME)
+            {
+                ret = get_r_data();
+                if (ret == 0)
+                {
+                    data_new = data_R - (rgb_r_fail_high_cnt - rgb_r_fail_low_cnt) / 3;
+                    richTextBox1.Text += "\ndata_R_old = " + data_R.ToString() + ", data_R_new = " + data_new.ToString() + "\n";
+
+                    numericUpDown_R.Value = data_new;
+                    byte dd;
+
+                    dd = (byte)(data_new / 256);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1A;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1B;
+
+                    dd = (byte)(data_new % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                }
+            }
+            if (rgb_b_ok_cnt != CHECK_AWB_FRAME)
+            {
+                ret = get_b_data();
+                if (ret == 0)
+                {
+                    data_new = data_B - (rgb_b_fail_high_cnt - rgb_b_fail_low_cnt) / 3;
+                    richTextBox1.Text += "\ndata_B_old = " + data_B.ToString() + ", data_B_new = " + data_new.ToString() + "\n";
+
+                    numericUpDown_B.Value = data_new;
+                    byte dd;
+
+                    dd = (byte)(data_new / 256);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1E;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                    DongleAddr_h = 0x52;
+                    DongleAddr_l = 0x1F;
+
+                    dd = (byte)(data_new % 256);
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+                }
+            }
+
+
+        }
+
+        int precheck_RGB_saturation()
+        {
+            richTextBox1.Text += "precheck RGB saturation ST\n";
+            rgb_saturation_check_cnt = 0;
+            rgb_r_saturation_cnt = 0;
+            rgb_g_saturation_cnt = 0;
+            rgb_b_saturation_cnt = 0;
+            flag_check_rgb_saturation = true;
+
+            while (flag_check_rgb_saturation == true)
+            {
+                richTextBox1.Text += " .";
+                delay(200);
+            }
+            richTextBox1.Text += "R_saturation = " + rgb_r_saturation_cnt.ToString() + "\n";
+            richTextBox1.Text += "G_saturation = " + rgb_g_saturation_cnt.ToString() + "\n";
+            richTextBox1.Text += "B_saturation = " + rgb_b_saturation_cnt.ToString() + "\n";
+            if ((rgb_r_saturation_cnt == 0) && (rgb_g_saturation_cnt == 0) && (rgb_b_saturation_cnt == 0))
+                return 0;
+            else
+                return 1;
+        }
+
+        private void bt_test_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "none\n";
         }
     }
 }
