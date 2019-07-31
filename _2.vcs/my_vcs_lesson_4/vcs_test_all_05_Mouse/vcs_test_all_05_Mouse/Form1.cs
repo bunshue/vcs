@@ -216,5 +216,25 @@ namespace vcs_test_all_05_Mouse
         {
             richTextBox1.Clear();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (SystemInformation.MousePresent)  // 是否安裝滑鼠
+                richTextBox1.Text += "是否安裝滑鼠 : 是\n";
+            else
+                richTextBox1.Text += "是否安裝滑鼠 : 否\n";
+
+            // 滑鼠按鈕的數目
+            richTextBox1.Text += "滑鼠按鈕的數目 : " + SystemInformation.MouseButtons.ToString() + "\n";
+
+            if (SystemInformation.MouseWheelPresent) // 滑鼠是否有滾輪
+                richTextBox1.Text += "滑鼠是否有滾輪 : 是\n";
+            else
+                richTextBox1.Text += "滑鼠是否有滾輪 : 否\n";
+
+            // 滑鼠速度 (1 ~ 20)
+            richTextBox1.Text += "滑鼠速度 (1 ~ 20) : " + SystemInformation.MouseSpeed.ToString() + "\n";
+
+        }
     }
 }

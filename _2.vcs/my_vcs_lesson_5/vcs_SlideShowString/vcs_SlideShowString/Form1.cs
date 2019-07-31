@@ -16,6 +16,7 @@ namespace vcs_SlideShowString
         bool flag_release_mode = true;
 
         bool flag_debug_message = true;    //print some message, font size, timer cnt, index.....
+        bool flag_debug_richtextbox = false;    //use richtextbox in release mode
 
         string filepath_setup = "poetry.ini";
         string filepath_poetry = "poetry.txt";
@@ -1015,7 +1016,10 @@ namespace vcs_SlideShowString
 
             if (flag_release_mode == true)
             {
-                richTextBox1.Visible = false;
+                if (flag_debug_richtextbox == true)
+                    richTextBox1.Visible = true;
+                else
+                    richTextBox1.Visible = false;
                 button1.Visible = false;
                 button2.Visible = false;
                 button3.Visible = false;
@@ -1311,20 +1315,14 @@ namespace vcs_SlideShowString
             W = h * N + p * (N * 2) + border * 2;
             H = w + sky + earth;
 
-            pictureBox1.Width = W;
-            pictureBox1.Height = H;
-
-            /*
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
-            richTextBox1.Text += "p = " + p.ToString() + "\n";
-            */
-
             if (H < setda)
             {
-                H = setda;
                 w = setda - sky - earth;
+                H = w + sky + earth;
             }
+
+            pictureBox1.Width = W;
+            pictureBox1.Height = H;
 
             bmp = new Bitmap(W, H);
             g = Graphics.FromImage(bmp);
@@ -1477,7 +1475,15 @@ namespace vcs_SlideShowString
                     y_st = screenHeight - H;
                 this.Location = new System.Drawing.Point(x_st, y_st);
 
-                this.Size = new Size(W, H);
+                if (flag_debug_richtextbox == true)
+                {
+                    this.Size = new Size(W+richTextBox1.Width, H * 1 + 0);
+                    richTextBox1.Location = new Point(W * 1 + 0, 0);
+                }
+                else
+                {
+                    this.Size = new Size(W, H);
+                }
             }
             else
             {

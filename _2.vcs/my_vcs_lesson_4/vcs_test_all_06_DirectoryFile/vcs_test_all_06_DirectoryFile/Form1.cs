@@ -714,7 +714,19 @@ namespace vcs_test_all_06_DirectoryFile
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //ReadAllText 讀取文件
+            //使用ReadAllText可以直接讀取文件中的內容，格式為:
+            //File.ReadAllText(檔案位置及名稱);
+            //建立檔案 & 讀取檔案 範例:
 
+            //建立檔案
+            string x = "Hello text";
+            File.WriteAllText("myfilename.txt", x);
+            richTextBox1.Text += "寫檔完成\n";
+
+            //讀取檔案
+            string y = File.ReadAllText("myfilename.txt");
+            richTextBox1.Text += "檔案內容 : " + y + "\n";
         }
 
         //刪除資料夾，recursive為True時，直接刪除資料夾及其資料夾下所有文件或資料夾;recursive為False時，需先將資料夾下所有文件或資料夾刪除
@@ -1607,6 +1619,29 @@ namespace vcs_test_all_06_DirectoryFile
             File.WriteAllText(fileName2, zzz);
             richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
 
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+            //WriteAllText 寫入/建立檔案
+            //透過WriteAllText可以將文字寫入檔案(如果檔案不存在，會自動建立)，格式為:
+            //File.WriteAllText(檔案位置及名稱, 字串);
+
+            string x = "Hello text";
+            File.WriteAllText("myfilename.txt", x);
+            richTextBox1.Text += "寫檔完成\n";
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+            //AppendAllText 插入文字
+            //C# 將字串插入文件內容尾端
+            richTextBox1.Text += "寫一筆資料到檔案尾端\n";
+            File.AppendAllText("myfilename.txt", " append text to the end.");
+
+            //讀取檔案
+            string y = File.ReadAllText("myfilename.txt");
+            richTextBox1.Text += "檔案內容 : " + y + "\n";
         }
 
     }
