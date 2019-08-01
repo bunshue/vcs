@@ -160,6 +160,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.bt_test = new System.Windows.Forms.Button();
             this.bt_awb_test2 = new System.Windows.Forms.Button();
             this.tb_bpt = new System.Windows.Forms.TextBox();
@@ -436,7 +437,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(89, 27);
             this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "COM8";
+            this.comboBox1.Text = "COM6";
             // 
             // comboBox2
             // 
@@ -1757,6 +1758,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_clear);
             this.tp_USB.Controls.Add(this.bt_test);
             this.tp_USB.Controls.Add(this.bt_awb_test2);
             this.tp_USB.Controls.Add(this.tb_bpt);
@@ -1851,6 +1853,19 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_clear.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_clear.ForeColor = System.Drawing.Color.Black;
+            this.bt_clear.Location = new System.Drawing.Point(865, 327);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(64, 32);
+            this.bt_clear.TabIndex = 129;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = false;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // bt_test
             // 
@@ -3992,6 +4007,7 @@
         private System.Windows.Forms.Label lb_bpt;
         private System.Windows.Forms.Button bt_awb_test2;
         private System.Windows.Forms.Button bt_test;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 
