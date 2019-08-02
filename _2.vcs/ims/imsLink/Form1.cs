@@ -43,6 +43,7 @@ namespace imsLink
         private const int DATE_PAGE3 = 0x0D;	//use 2 hrs
         private const int ERROR_PAGE = 0x0E;	//error code
         private const int ERROR_DATE = 0x0F;	//error date
+        private const int AWB_PAGE = 0x10;	//awb data
 
         string imslink_log_filename = "imslink.log";
         string RxString = "";
@@ -76,6 +77,7 @@ namespace imsLink
         byte[] rtc_data_send = new byte[7];
         byte[] camera_model_data_send = new byte[16];
         byte[] main_board_model_data_send = new byte[50];
+        byte[] awb_data_send = new byte[4];
         string camera_serial_old = String.Empty;
         string camera_serial_enw = String.Empty;
         bool flag_auto_scan_mode = true;
@@ -186,7 +188,6 @@ namespace imsLink
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
 
-
         void Write_Log_File(string input)
         {
             log_file_tmp_length += input.Length;
@@ -236,7 +237,7 @@ namespace imsLink
             numericUpDown_R.Value = trackBar_R.Value;
             numericUpDown_G.Value = trackBar_G.Value;
             numericUpDown_B.Value = trackBar_B.Value;
-            comboBox_temperature.SelectedIndex = 1; //6500K
+            comboBox_temperature.SelectedIndex = 5; //6500K
             numericUpDown_TG_R.Value = TARGET_AWB_R;
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
@@ -1648,6 +1649,9 @@ namespace imsLink
             btnRight.BackgroundImage = imsLink.Properties.Resources.right;
             btnCenter.BackgroundImage = imsLink.Properties.Resources.stop;
 
+            check_webcam();
+
+            /*
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
@@ -1666,6 +1670,8 @@ namespace imsLink
                 flag_camera_start = 0;
                 richTextBox1.Text += "無影像裝置\n";
             }
+            */
+
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             if (flag_awb_debug == true)
@@ -1691,6 +1697,7 @@ namespace imsLink
             bt_awb_test2.Visible = false;
             bt_awb_test_init.Visible = false;
             bt_disable_timer_webcam.Visible = false;
+            bt_erase.Visible = false;
             bt_test.Visible = false;
             bt_clear.Visible = false;
             bt_break.Visible = false;
@@ -1716,6 +1723,7 @@ namespace imsLink
             bt_get_setup.Visible = false;
 
             comboBox_temperature.Visible = false;
+            //comboBox_webcam.Visible = false;
             numericUpDown_TG_R.Visible = false;
             numericUpDown_TG_G.Visible = false;
             numericUpDown_TG_B.Visible = false;
@@ -1814,6 +1822,8 @@ namespace imsLink
             toolTip1.AutoPopDelay = 5000;
             //ToolTipTitle：設定提示視窗的標題。
             //toolTip1.ToolTipTitle = "提示訊息";
+
+            comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
             
         }
 
@@ -2908,6 +2918,7 @@ namespace imsLink
                     tabControl1.Size = new Size(948, 616);
                     pictureBox1.Location = new Point(170, 50);
                     pictureBox1.Size = new Size(640, 480);
+                    comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
                     toolTip1.SetToolTip(button19, "2X");
 
                     lb_0x1.Visible = false;
@@ -2928,6 +2939,7 @@ namespace imsLink
                     bt_awb_test2.Visible = false;
                     bt_awb_test_init.Visible = false;
                     bt_disable_timer_webcam.Visible = false;
+                    bt_erase.Visible = false;
                     bt_test.Visible = false;
                     bt_clear.Visible = false;
                     bt_break.Visible = false;
@@ -2953,6 +2965,7 @@ namespace imsLink
                     bt_get_setup.Visible = false;
 
                     comboBox_temperature.Visible = false;
+                    //comboBox_webcam.Visible = false;
                     numericUpDown_TG_R.Visible = false;
                     numericUpDown_TG_G.Visible = false;
                     numericUpDown_TG_B.Visible = false;
@@ -3682,8 +3695,6 @@ namespace imsLink
                     flag_camera_start = 0;
                     richTextBox1.Text += "無影像裝置\n";
                 }
-            
-            
             }
             /*
             if (camera_start == 0)
@@ -3908,6 +3919,7 @@ namespace imsLink
                 tabControl1.Size = new Size(1600 + 300, 1010);
                 //pictureBox1.Size = new Size(1120, 840);
                 pictureBox1.Size = new Size(640 * 2, 480 * 2);
+                comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
                 toolTip1.SetToolTip(button19, "1X");
 
                 if (flag_awb_debug == true)
@@ -3933,6 +3945,7 @@ namespace imsLink
                     bt_awb_test2.Visible = true;
                     bt_awb_test_init.Visible = true;
                     bt_disable_timer_webcam.Visible = true;
+                    bt_erase.Visible = true;
                     bt_test.Visible = true;
                     bt_clear.Visible = true;
                     bt_break.Visible = true;
@@ -3958,6 +3971,7 @@ namespace imsLink
                     bt_get_setup.Visible = true;
 
                     comboBox_temperature.Visible = true;
+                    //comboBox_webcam.Visible = true;
                     numericUpDown_TG_R.Visible = true;
                     numericUpDown_TG_G.Visible = true;
                     numericUpDown_TG_B.Visible = true;
@@ -4010,6 +4024,7 @@ namespace imsLink
                     bt_break.Location = new Point(170 + 70 * 3, 500);
                     bt_awb.Location = new Point(170 + 70 * 4, 500);
                     bt_disable_timer_webcam.Location = new Point(170 + 70 * 5, 500);
+                    bt_erase.Location = new Point(170 + 70 * 2, 500 + 40);
                     bt_test.Location = new Point(170 + 70 * 4, 500 + 40);
                     bt_clear.Location = new Point(170 + 70 * 5, 500 + 40);
 
@@ -4109,6 +4124,7 @@ namespace imsLink
                     numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, numericUpDown_wpt.Location.Y + 60);
                     bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, bt_read_wpt.Location.Y + 60);
                     bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, bt_write_wpt.Location.Y + 60);
+                    comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
 
                     refresh_picturebox2();
                 }
@@ -4131,6 +4147,7 @@ namespace imsLink
                 tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
+                comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
                 toolTip1.SetToolTip(button19, "2X");
 
                 if (flag_awb_debug == true)
@@ -4153,6 +4170,7 @@ namespace imsLink
                     bt_awb_test2.Visible = false;
                     bt_awb_test_init.Visible = false;
                     bt_disable_timer_webcam.Visible = false;
+                    bt_erase.Visible = false;
                     bt_test.Visible = false;
                     bt_clear.Visible = false;
                     bt_break.Visible = false;
@@ -4178,6 +4196,7 @@ namespace imsLink
                     bt_get_setup.Visible = false;
 
                     comboBox_temperature.Visible = false;
+                    //comboBox_webcam.Visible = false;
                     numericUpDown_TG_R.Visible = false;
                     numericUpDown_TG_G.Visible = false;
                     numericUpDown_TG_B.Visible = false;
@@ -6456,7 +6475,7 @@ namespace imsLink
 
                 int i;
 
-                for (i = 0; i < 30; i++)
+                for (i = 0; i < 50; i++)
                 {
                     richTextBox1.Text += "\ni = " + i.ToString() + "\t";
                     flag_update_RGB_scrollbar = true;
@@ -6543,8 +6562,15 @@ namespace imsLink
 
             richTextBox1.Text += "AWB check SP\n";
 
-            richTextBox1.Text += "目前時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            bt_awb.Text = "Manual";
+            flag_awb_mode = false;
+            timer_webcam.Enabled = true;
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
+            //do not write data to camera
+            //write_awb_data_to_camera(data_R, data_B);
+
+            richTextBox1.Text += "目前時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
 
             // Stop timing
             stopwatch.Stop();
@@ -7059,34 +7085,37 @@ namespace imsLink
 
         private void bt_goto_awb_Click(object sender, EventArgs e)
         {
-            comboBox1.Text = "COM6";
-
-            if (comboBox1.Text.Length == 0)
+            if (flag_release_mode == false)
             {
-                MessageBox.Show("No comport selected.");
-                return;
-            }
-            serialPort1.PortName = comboBox1.Text;
-            serialPort1.BaudRate = int.Parse(comboBox2.Text);
+                comboBox1.Text = "COM6";
 
-            //serialPort1.Open(); //原本是這一行，改成以下18行。
-            try
-            {   //可能會產生錯誤的程式區段
-                serialPort1.Open();
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-                if (serialPort1.IsOpen)
+                if (comboBox1.Text.Length == 0)
                 {
-                    //MessageBox.Show("已經連上" + serialPort1.PortName);
+                    MessageBox.Show("No comport selected.");
+                    return;
                 }
-                else
-                    MessageBox.Show("無法連上Comport, 請重新連線");
+                serialPort1.PortName = comboBox1.Text;
+                serialPort1.BaudRate = int.Parse(comboBox2.Text);
+
+                //serialPort1.Open(); //原本是這一行，改成以下18行。
+                try
+                {   //可能會產生錯誤的程式區段
+                    serialPort1.Open();
+                }
+                catch (Exception ex)
+                {   //定義產生錯誤時的例外處理程式碼
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    //一定會被執行的程式區段
+                    if (serialPort1.IsOpen)
+                    {
+                        //MessageBox.Show("已經連上" + serialPort1.PortName);
+                    }
+                    else
+                        MessageBox.Show("無法連上Comport, 請重新連線");
+                }
             }
 
             if (serialPort1.IsOpen)
@@ -7127,33 +7156,89 @@ namespace imsLink
         {
             if (comboBox_temperature.SelectedIndex == 0)
             {
+                richTextBox1.Text += "3800K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 204;
+                TARGET_AWB_B = 153;
+            }
+            else if (comboBox_temperature.SelectedIndex == 1)
+            {
+                richTextBox1.Text += "5500K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 213;
+                TARGET_AWB_B = 173;
+            }
+            else if (comboBox_temperature.SelectedIndex == 2)
+            {
+                richTextBox1.Text += "5500K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 221;
+                TARGET_AWB_B = 190;
+            }
+            else if (comboBox_temperature.SelectedIndex == 3)
+            {
                 richTextBox1.Text += "5500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 236;
                 TARGET_AWB_B = 224;
             }
-            else if (comboBox_temperature.SelectedIndex == 1)
+            else if (comboBox_temperature.SelectedIndex == 4)
+            {
+                richTextBox1.Text += "5700K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 239;
+                TARGET_AWB_B = 230;
+            }
+            else if (comboBox_temperature.SelectedIndex == 5)
             {
                 richTextBox1.Text += "6500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 249;
                 TARGET_AWB_B = 253;
             }
-            else if (comboBox_temperature.SelectedIndex == 2)
+            else if (comboBox_temperature.SelectedIndex == 6)
+            {
+                richTextBox1.Text += "6700K\n";
+                TARGET_AWB_R = 252;
+                TARGET_AWB_G = 247;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 7)
+            {
+                richTextBox1.Text += "6900K\n";
+                TARGET_AWB_R = 247;
+                TARGET_AWB_G = 245;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 8)
+            {
+                richTextBox1.Text += "7100K\n";
+                TARGET_AWB_R = 243;
+                TARGET_AWB_G = 242;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 9)
+            {
+                richTextBox1.Text += "7300K\n";
+                TARGET_AWB_R = 239;
+                TARGET_AWB_G = 240;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 10)
             {
                 richTextBox1.Text += "7500K\n";
                 TARGET_AWB_R = 235;
                 TARGET_AWB_G = 238;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 3)
+            else if (comboBox_temperature.SelectedIndex == 11)
             {
                 richTextBox1.Text += "8500K\n";
                 TARGET_AWB_R = 220;
                 TARGET_AWB_G = 229;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 4)
+            else if (comboBox_temperature.SelectedIndex == 12)
             {
                 richTextBox1.Text += "9500K\n";
                 TARGET_AWB_R = 208;
@@ -7779,15 +7864,195 @@ namespace imsLink
                 return S_FALSE;
         }
 
+        void write_awb_data_to_camera(int data_r, int data_b)
+        {
+            richTextBox1.Text += "wrtie awb data to AWB_PAGE\n";
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int i;
+            for (i = 0; i < 4; i++)
+            {
+                awb_data_send[i] = 0;
+            }
+            awb_data_send[0] = (byte)(data_r / 256);
+            awb_data_send[1] = (byte)(data_r % 256);
+            awb_data_send[2] = (byte)(data_b / 256);
+            awb_data_send[3] = (byte)(data_b % 256);
+
+            Send_IMS_Data(0xE2, 0x12, 0x34, 0x56);   //camera awb write
+            serialPort1.Write(awb_data_send, 0, 4);
+            richTextBox1.Text += "寫入AWB資料完成\n";
+        }
+
         private void bt_test_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "none\n";
+            //richTextBox1.Text += "none\n";
+            //write_awb_data_to_camera(data_R, data_B);
+
+            //check_webcam();
+
+            check_comport();
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        private void bt_erase_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "erase all camera flash data\n";
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
+        }
+
+        int check_webcam()
+        {
+            comboBox_webcam.Items.Clear();
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            VideoCaptureDevice Cam_tmp = null;
+
+            richTextBox1.Text += "check_webcam ST\n";
+
+            //USBWebcams2 = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                richTextBox1.Text += "There are " + USBWebcams.Count.ToString() + " camera(s)\n";
+                for (int i = 0; i < USBWebcams.Count; i++)
+                {
+                    richTextBox1.Text += "camera " + i.ToString() + "\n";
+                    richTextBox1.Text += "name : " + USBWebcams[i].Name + "\n";
+                    richTextBox1.Text += "MonikerString: " + USBWebcams[i].MonikerString + "\n";
+
+                    Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
+                    Cam_tmp.VideoResolution = Cam_tmp.VideoCapabilities[0];
+
+
+                    richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + "\n";
+                    //richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].FrameRate.ToString();
+                    richTextBox1.Text += "W = " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + "\n";
+                    richTextBox1.Text += "H = " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + "\n";
+                    /*
+                    richTextBox1.Text += "BitCount = " + Cam_tmp.VideoCapabilities[0].BitCount.ToString() + "\n";
+                    richTextBox1.Text += "FR_max = " + Cam_tmp.VideoCapabilities[0].MaximumFrameRate.ToString() + "\n";
+                    richTextBox1.Text += "ProvideSnapshots = " + Cam_tmp.ProvideSnapshots.ToString() + "\n";
+                    if (Cam_tmp.ProvideSnapshots == true)
+                    {
+                        richTextBox1.Text += "Snapshot len = " + Cam_tmp.SnapshotCapabilities.Length.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot W = " + Cam_tmp.SnapshotResolution.FrameSize.Width.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot H = " + Cam_tmp.SnapshotResolution.FrameSize.Height.ToString() + "\n";
+                        richTextBox1.Text += "Snapshot FR = " + Cam_tmp.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
+                    }
+                    richTextBox1.Text += "Cam.Source = " + Cam_tmp.Source.ToString() + "\n";
+                    richTextBox1.Text += "Cam.Source.Length = " + Cam_tmp.Source.Length.ToString() + "\n";
+                    richTextBox1.Text += "FrameRate = " + Cam_tmp.VideoResolution.FrameRate.ToString() + "\n";    //old
+                    richTextBox1.Text += "FrameSize.W = " + Cam_tmp.VideoResolution.FrameSize.Width.ToString() + "\n";
+                    richTextBox1.Text += "FrameSize.H = " + Cam_tmp.VideoResolution.FrameSize.Height.ToString() + "\n";
+                    */
+
+                    string webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+
+                    comboBox_webcam.Items.Add(webcam_name);
+                    richTextBox1.Text += webcam_name + "\n";
+
+                    richTextBox1.Text += "\n";
+
+
+                }
+
+                for (int i = 0; i < USBWebcams.Count; i++)
+                {
+                    if (USBWebcams[i].Name == "InsightEyes")
+                    {
+                        richTextBox1.Text += "有InsightEyes影像裝置 在 i = " + i.ToString() + "\n";
+
+                        Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
+                        Cam.VideoResolution = Cam.VideoCapabilities[0];
+                        Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
+
+                        Cam.Start();   // WebCam starts capturing images.
+                        flag_camera_start = 1;
+
+                        comboBox_webcam.Text = comboBox_webcam.Items[i].ToString();
+                        break;
+                    }
+
+                }
+
+                if (flag_camera_start != 1)     //若是找不到InsightEyes, 用第1個
+                {
+                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+                    Cam.VideoResolution = Cam.VideoCapabilities[0];
+                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
+
+                    Cam.Start();   // WebCam starts capturing images.
+                    flag_camera_start = 1;
+                    richTextBox1.Text += "有影像裝置\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無影像裝置\n";
+                return S_FALSE;
+            }
+            return S_OK;
+        }
+
+        private void comboBox_webcam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你選取了" + comboBox_webcam.SelectedItem.ToString() + "\n";
+            richTextBox1.Text += "SelectedIndex = " + comboBox_webcam.SelectedIndex.ToString() + "\n";
+
+            flag_camera_start = 0;
+            //Cam.Stop();  // WebCam stops capturing images.
+            Cam.SignalToStop();
+            Cam.WaitForStop();
+
+            Cam = new VideoCaptureDevice(USBWebcams[comboBox_webcam.SelectedIndex].MonikerString);
+            Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+            Cam.Start();   // WebCam starts capturing images.
+            flag_camera_start = 1;
+
+        }
+
+        void check_comport()
+        {
+            richTextBox1.Text += "check_comport ST\n";
+            string[] tempString = SerialPort.GetPortNames();
+            
+            foreach (string aaa in tempString)
+            {
+                richTextBox1.Text += "get comport : " + aaa + "\n";
+            }
+
+
+            /*
+            Array.Resize(ref COM_Ports_NameArr, tempString.Length);
+            tempString.CopyTo(COM_Ports_NameArr, 0);
+
+            foreach (string port in COM_Ports_NameArr)
+            {
+                richTextBox1.Text += "get comport : " + port + "\n";
+                richTextBox1.Text += "port.Length : " + port.Length.ToString() + "\n";
+
+            }
+            */
+
+
+
+        }
+
     }
 }
 

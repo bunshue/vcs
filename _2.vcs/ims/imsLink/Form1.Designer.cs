@@ -317,6 +317,8 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
+            this.bt_erase = new System.Windows.Forms.Button();
+            this.comboBox_webcam = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1758,6 +1760,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.comboBox_webcam);
+            this.tp_USB.Controls.Add(this.bt_erase);
             this.tp_USB.Controls.Add(this.bt_clear);
             this.tp_USB.Controls.Add(this.bt_test);
             this.tp_USB.Controls.Add(this.bt_awb_test2);
@@ -2038,8 +2042,16 @@
             this.comboBox_temperature.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_temperature.FormattingEnabled = true;
             this.comboBox_temperature.Items.AddRange(new object[] {
+            "3800K",
+            "4200K",
+            "4600K",
             "5500K",
+            "5700K",
             "6500K",
+            "6700K",
+            "6900K",
+            "7100K",
+            "7300K",
             "7500K",
             "8500K",
             "9500K"});
@@ -3608,7 +3620,7 @@
             // timer_webcam
             // 
             this.timer_webcam.Enabled = true;
-            this.timer_webcam.Interval = 1000;
+            this.timer_webcam.Interval = 5000;
             this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
             // 
             // bt_goto_awb
@@ -3623,6 +3635,29 @@
             this.bt_goto_awb.Text = "AWB";
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
+            // 
+            // bt_erase
+            // 
+            this.bt_erase.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_erase.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_erase.ForeColor = System.Drawing.Color.Red;
+            this.bt_erase.Location = new System.Drawing.Point(702, 300);
+            this.bt_erase.Name = "bt_erase";
+            this.bt_erase.Size = new System.Drawing.Size(64, 32);
+            this.bt_erase.TabIndex = 130;
+            this.bt_erase.Text = "ERASE";
+            this.bt_erase.UseVisualStyleBackColor = false;
+            this.bt_erase.Click += new System.EventHandler(this.bt_erase_Click);
+            // 
+            // comboBox_webcam
+            // 
+            this.comboBox_webcam.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_webcam.FormattingEnabled = true;
+            this.comboBox_webcam.Location = new System.Drawing.Point(385, 334);
+            this.comboBox_webcam.Name = "comboBox_webcam";
+            this.comboBox_webcam.Size = new System.Drawing.Size(297, 27);
+            this.comboBox_webcam.TabIndex = 131;
+            this.comboBox_webcam.SelectedIndexChanged += new System.EventHandler(this.comboBox_webcam_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -4008,6 +4043,8 @@
         private System.Windows.Forms.Button bt_awb_test2;
         private System.Windows.Forms.Button bt_test;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_erase;
+        private System.Windows.Forms.ComboBox comboBox_webcam;
     }
 }
 
