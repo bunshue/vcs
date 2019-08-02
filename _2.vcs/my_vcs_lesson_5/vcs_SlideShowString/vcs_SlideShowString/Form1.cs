@@ -21,6 +21,7 @@ namespace vcs_SlideShowString
         string filepath_setup = "poetry.ini";
         string filepath_poetry = "poetry.txt";
         //string filepath_poetry = "poetry_debug.txt";
+        //string filepath_poetry = "poetry_new.txt";
 
         Graphics g;
         Font f;
