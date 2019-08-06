@@ -160,6 +160,8 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.comboBox_webcam = new System.Windows.Forms.ComboBox();
+            this.bt_erase = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_test = new System.Windows.Forms.Button();
             this.bt_awb_test2 = new System.Windows.Forms.Button();
@@ -317,8 +319,6 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
-            this.bt_erase = new System.Windows.Forms.Button();
-            this.comboBox_webcam = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1858,6 +1858,29 @@
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // comboBox_webcam
+            // 
+            this.comboBox_webcam.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_webcam.FormattingEnabled = true;
+            this.comboBox_webcam.Location = new System.Drawing.Point(385, 334);
+            this.comboBox_webcam.Name = "comboBox_webcam";
+            this.comboBox_webcam.Size = new System.Drawing.Size(297, 27);
+            this.comboBox_webcam.TabIndex = 131;
+            this.comboBox_webcam.SelectedIndexChanged += new System.EventHandler(this.comboBox_webcam_SelectedIndexChanged);
+            // 
+            // bt_erase
+            // 
+            this.bt_erase.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_erase.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_erase.ForeColor = System.Drawing.Color.Red;
+            this.bt_erase.Location = new System.Drawing.Point(702, 300);
+            this.bt_erase.Name = "bt_erase";
+            this.bt_erase.Size = new System.Drawing.Size(64, 32);
+            this.bt_erase.TabIndex = 130;
+            this.bt_erase.Text = "ERASE";
+            this.bt_erase.UseVisualStyleBackColor = false;
+            this.bt_erase.Click += new System.EventHandler(this.bt_erase_Click);
+            // 
             // bt_clear
             // 
             this.bt_clear.BackColor = System.Drawing.SystemColors.Control;
@@ -2057,7 +2080,7 @@
             "9500K"});
             this.comboBox_temperature.Location = new System.Drawing.Point(688, 334);
             this.comboBox_temperature.Name = "comboBox_temperature";
-            this.comboBox_temperature.Size = new System.Drawing.Size(110, 29);
+            this.comboBox_temperature.Size = new System.Drawing.Size(100, 29);
             this.comboBox_temperature.TabIndex = 113;
             this.comboBox_temperature.Text = "6500K";
             this.comboBox_temperature.SelectedIndexChanged += new System.EventHandler(this.comboBox_temperature_SelectedIndexChanged);
@@ -2073,7 +2096,7 @@
             0,
             0});
             this.numericUpDown_TG_B.Name = "numericUpDown_TG_B";
-            this.numericUpDown_TG_B.Size = new System.Drawing.Size(110, 53);
+            this.numericUpDown_TG_B.Size = new System.Drawing.Size(100, 53);
             this.numericUpDown_TG_B.TabIndex = 112;
             this.numericUpDown_TG_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_TG_B.ValueChanged += new System.EventHandler(this.numericUpDown_TG_B_ValueChanged);
@@ -2089,7 +2112,7 @@
             0,
             0});
             this.numericUpDown_TG_G.Name = "numericUpDown_TG_G";
-            this.numericUpDown_TG_G.Size = new System.Drawing.Size(110, 53);
+            this.numericUpDown_TG_G.Size = new System.Drawing.Size(100, 53);
             this.numericUpDown_TG_G.TabIndex = 111;
             this.numericUpDown_TG_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_TG_G.ValueChanged += new System.EventHandler(this.numericUpDown_TG_G_ValueChanged);
@@ -2105,7 +2128,7 @@
             0,
             0});
             this.numericUpDown_TG_R.Name = "numericUpDown_TG_R";
-            this.numericUpDown_TG_R.Size = new System.Drawing.Size(110, 53);
+            this.numericUpDown_TG_R.Size = new System.Drawing.Size(100, 53);
             this.numericUpDown_TG_R.TabIndex = 110;
             this.numericUpDown_TG_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_TG_R.ValueChanged += new System.EventHandler(this.numericUpDown_TG_R_ValueChanged);
@@ -3635,29 +3658,6 @@
             this.bt_goto_awb.Text = "AWB";
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
-            // 
-            // bt_erase
-            // 
-            this.bt_erase.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_erase.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_erase.ForeColor = System.Drawing.Color.Red;
-            this.bt_erase.Location = new System.Drawing.Point(702, 300);
-            this.bt_erase.Name = "bt_erase";
-            this.bt_erase.Size = new System.Drawing.Size(64, 32);
-            this.bt_erase.TabIndex = 130;
-            this.bt_erase.Text = "ERASE";
-            this.bt_erase.UseVisualStyleBackColor = false;
-            this.bt_erase.Click += new System.EventHandler(this.bt_erase_Click);
-            // 
-            // comboBox_webcam
-            // 
-            this.comboBox_webcam.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox_webcam.FormattingEnabled = true;
-            this.comboBox_webcam.Location = new System.Drawing.Point(385, 334);
-            this.comboBox_webcam.Name = "comboBox_webcam";
-            this.comboBox_webcam.Size = new System.Drawing.Size(297, 27);
-            this.comboBox_webcam.TabIndex = 131;
-            this.comboBox_webcam.SelectedIndexChanged += new System.EventHandler(this.comboBox_webcam_SelectedIndexChanged);
             // 
             // Form1
             // 

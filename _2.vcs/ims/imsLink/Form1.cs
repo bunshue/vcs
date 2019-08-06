@@ -120,6 +120,7 @@ namespace imsLink
         bool flag_G_OK = false;
         bool flag_B_OK = false;
         bool flag_break = false;
+        bool flag_do_awb = false;
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -172,7 +173,9 @@ namespace imsLink
         int rgb_g_fail_low_cnt = 0;
         int rgb_b_fail_high_cnt = 0;
         int rgb_b_fail_low_cnt = 0;
-
+        int diff_r = 0;
+        int diff_g = 0;
+        int diff_b = 0;
 
         //C# 提示視窗 ToolTip 
         //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -1823,7 +1826,7 @@ namespace imsLink
             //ToolTipTitle：設定提示視窗的標題。
             //toolTip1.ToolTipTitle = "提示訊息";
 
-            comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
+            comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
             
         }
 
@@ -2918,7 +2921,7 @@ namespace imsLink
                     tabControl1.Size = new Size(948, 616);
                     pictureBox1.Location = new Point(170, 50);
                     pictureBox1.Size = new Size(640, 480);
-                    comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
+                    comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
                     toolTip1.SetToolTip(button19, "2X");
 
                     lb_0x1.Visible = false;
@@ -3051,8 +3054,9 @@ namespace imsLink
         //畫框的功能
         Graphics gg;
         SolidBrush drawBrush;
-        Font drawFont;
+        Font drawFont1;
         Font drawFont2;
+        Font drawFont3;
         string drawDate;
         int total_R = 0;
         int total_G = 0;
@@ -3132,15 +3136,21 @@ namespace imsLink
             //寫字的功能
             drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             drawBrush = new SolidBrush(Color.Yellow);
-            drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-            drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            //drawFont2 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+            drawFont3 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
             x_st = 10;
             y_st = 10;
-            gg.DrawString(drawDate, drawFont, drawBrush, x_st, y_st);
+            gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
 
             if ((flag_awb_debug == true) && (flag_fullscreen == true))
             {
                 int hhh = 0;
+
+                int ss = 10;
+                int x_st2 = 0;
+                int y_st2 = 0;
+                Point[] points = new Point[3];
 
             //畫框的功能
 
@@ -3196,7 +3206,7 @@ namespace imsLink
 
                 tolerance = ww * hh / tolerance_ratio;
                 string rgb_value;
-                x_st = 10;
+                x_st = 0;
 
                 y_st = 250;
                 if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - tolerance)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + tolerance)))
@@ -3240,9 +3250,37 @@ namespace imsLink
                     flag_R_OK = false;
                 }
                 //rgb_value = ((float)total_RGB_R / (ww * hh)).ToString("F2");
-                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+                gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
 
-                gg.DrawRectangle(new Pen(Color.Red, 1), x_st + 96 - 2, y_st + 1, 8, 24);
+                if (flag_do_awb == true)
+                {
+                    if (diff_r > 0)
+                    {
+                        x_st2 = x_st + 100 - ss;
+                        y_st2 = y_st + 6 + 3;
+                        points[0] = new Point(x_st2 + ss / 2, y_st2);
+                        points[1] = new Point(x_st2 + ss, y_st2 + ss);
+                        points[2] = new Point(x_st2 + 0, y_st2 + ss);
+                        gg.FillPolygon(new SolidBrush(Color.Red), points);
+
+                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        gg.DrawString(diff_r.ToString(), drawFont2, new SolidBrush(Color.Red), x_st + 98, y_st + 7);
+                    }
+                    else if (diff_r < 0)
+                    {
+                        x_st2 = x_st + 100 - ss;
+                        y_st2 = y_st + 6 + 3;
+                        points[2] = new Point(x_st2 + 0, y_st2);
+                        points[1] = new Point(x_st2 + ss, y_st2);
+                        points[0] = new Point(x_st2 + ss / 2, y_st2 + ss);
+                        gg.FillPolygon(new SolidBrush(Color.Green), points);
+
+                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        gg.DrawString((-diff_r).ToString(), drawFont2, new SolidBrush(Color.Green), x_st + 98, y_st + 7);
+                    }
+                }
+
+                gg.DrawRectangle(new Pen(Color.Red, 1), x_st + 96 + 20, y_st + 1, 8, 24);
                 if (TARGET_AWB_R < 255)
                 {
                     hhh = (int)((24 * (total_RGB_R - (TARGET_AWB_R - 1 / (float)tolerance_ratio) * ww * hh)) / (tolerance * 2));
@@ -3259,15 +3297,15 @@ namespace imsLink
                 {
                     hhh = 24 + 5;
                 }
-                gg.DrawLine(new Pen(Color.Red, 1), x_st + 96 - 2 - 4, y_st + 1 + 24 - hhh, x_st + 96 - 2 + 12, y_st + 1 + 24 - hhh);
+                gg.DrawLine(new Pen(Color.Red, 1), x_st + 96 - 2 + 18, y_st + 1 + 24 - hhh, x_st + 96 - 2 + 34, y_st + 1 + 24 - hhh);
 
                 if (TARGET_AWB_R < 255)
                     rgb_value = ((float)TARGET_AWB_R + (1 - 0.01) / tolerance_ratio).ToString("F2");
                 else
                     rgb_value = ((float)TARGET_AWB_R).ToString("F2");
-                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Red), x_st + 92 + 20, y_st - 2);
+                gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Red), x_st + 92 + 38, y_st - 2);
                 rgb_value = ((float)TARGET_AWB_R - 1 / (float)tolerance_ratio).ToString("F2");
-                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Red), x_st + 92 + 20, y_st + 16);
+                gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Red), x_st + 92 + 38, y_st + 16);
 
                 y_st = 290;
                 if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - tolerance)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + tolerance)))
@@ -3310,9 +3348,37 @@ namespace imsLink
                     flag_G_OK = false;
                 }
                 //rgb_value = ((float)total_RGB_G / (ww * hh)).ToString("F2");
-                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+                gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
 
-                gg.DrawRectangle(new Pen(Color.Green, 1), x_st + 96 - 2, y_st + 1, 8, 24);
+                if(flag_do_awb == true)
+                {
+                    if (diff_g > 0)
+                    {
+                        x_st2 = x_st + 100 - ss;
+                        y_st2 = y_st + 6 + 3;
+                        points[0] = new Point(x_st2 + ss / 2, y_st2);
+                        points[1] = new Point(x_st2 + ss, y_st2 + ss);
+                        points[2] = new Point(x_st2 + 0, y_st2 + ss);
+                        gg.FillPolygon(new SolidBrush(Color.Red), points);
+
+                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        gg.DrawString(diff_g.ToString(), drawFont2, new SolidBrush(Color.Red), x_st + 98, y_st + 7);
+                    }
+                    else if (diff_g < 0)
+                    {
+                        x_st2 = x_st + 100 - ss;
+                        y_st2 = y_st + 6 + 3;
+                        points[2] = new Point(x_st2 + 0, y_st2);
+                        points[1] = new Point(x_st2 + ss, y_st2);
+                        points[0] = new Point(x_st2 + ss / 2, y_st2 + ss);
+                        gg.FillPolygon(new SolidBrush(Color.Green), points);
+
+                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        gg.DrawString((-diff_g).ToString(), drawFont2, new SolidBrush(Color.Green), x_st + 98, y_st + 7);
+                    }
+                }
+
+                gg.DrawRectangle(new Pen(Color.Green, 1), x_st + 96 + 20, y_st + 1, 8, 24);
                 if (TARGET_AWB_G < 255)
                 {
                     hhh = (int)((24 * (total_RGB_G - (TARGET_AWB_G - 1 / (float)tolerance_ratio) * ww * hh)) / (tolerance * 2));
@@ -3329,15 +3395,15 @@ namespace imsLink
                 {
                     hhh = 24 + 5;
                 }
-                gg.DrawLine(new Pen(Color.Green, 1), x_st + 96 - 2 - 4, y_st + 1 + 24 - hhh, x_st + 96 - 2 + 12, y_st + 1 + 24 - hhh);
+                gg.DrawLine(new Pen(Color.Green, 1), x_st + 96 - 2 + 18, y_st + 1 + 24 - hhh, x_st + 96 - 2 + 34, y_st + 1 + 24 - hhh);
 
                 if (TARGET_AWB_G < 255)
                     rgb_value = ((float)TARGET_AWB_G + (1 - 0.01) / tolerance_ratio).ToString("F2");
                 else
                     rgb_value = ((float)TARGET_AWB_G).ToString("F2");
-                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Green), x_st + 92 + 20, y_st - 2);
+                gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Green), x_st + 92 + 38, y_st - 2);
                 rgb_value = ((float)TARGET_AWB_G - 1 / (float)tolerance_ratio).ToString("F2");
-                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Green), x_st + 92 + 20, y_st + 16);
+                gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Green), x_st + 92 + 38, y_st + 16);
 
                 y_st = 330;
                 if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - tolerance)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + tolerance)))
@@ -3390,9 +3456,37 @@ namespace imsLink
                     flag_B_OK = false;
                 }
                 //rgb_value = ((float)total_RGB_B / (ww * hh)).ToString("F2");
-                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+                gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
 
-                gg.DrawRectangle(new Pen(Color.Blue, 1), x_st + 96 - 2, y_st + 1, 8, 24);
+                if (flag_do_awb == true)
+                {
+                    if (diff_b > 0)
+                    {
+                        x_st2 = x_st + 100 - ss;
+                        y_st2 = y_st + 6 + 3;
+                        points[0] = new Point(x_st2 + ss / 2, y_st2);
+                        points[1] = new Point(x_st2 + ss, y_st2 + ss);
+                        points[2] = new Point(x_st2 + 0, y_st2 + ss);
+                        gg.FillPolygon(new SolidBrush(Color.Red), points);
+
+                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        gg.DrawString(diff_b.ToString(), drawFont2, new SolidBrush(Color.Red), x_st + 98, y_st + 7);
+                    }
+                    else if (diff_b < 0)
+                    {
+                        x_st2 = x_st + 100 - ss;
+                        y_st2 = y_st + 6 + 3;
+                        points[2] = new Point(x_st2 + 0, y_st2);
+                        points[1] = new Point(x_st2 + ss, y_st2);
+                        points[0] = new Point(x_st2 + ss / 2, y_st2 + ss);
+                        gg.FillPolygon(new SolidBrush(Color.Green), points);
+
+                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        gg.DrawString((-diff_b).ToString(), drawFont2, new SolidBrush(Color.Green), x_st + 98, y_st + 7);
+                    }
+                }
+
+                gg.DrawRectangle(new Pen(Color.Blue, 1), x_st + 96 + 20, y_st + 1, 8, 24);
                 if (TARGET_AWB_B < 255)
                 {
                     hhh = (int)((24 * (total_RGB_B - (TARGET_AWB_B - 1 / (float)tolerance_ratio) * ww * hh)) / (tolerance * 2));
@@ -3410,30 +3504,30 @@ namespace imsLink
                 {
                     hhh = 24 + 5;
                 }
-                gg.DrawLine(new Pen(Color.Blue, 1), x_st + 96 - 2 - 4, y_st + 1 + 24 - hhh, x_st + 96 - 2 + 12, y_st + 1 + 24 - hhh);
+                gg.DrawLine(new Pen(Color.Blue, 1), x_st + 96 - 2 + 18, y_st + 1 + 24 - hhh, x_st + 96 - 2 + 34, y_st + 1 + 24 - hhh);
 
                 if (TARGET_AWB_B < 255)
                     rgb_value = ((float)TARGET_AWB_B + (1 - 0.01) / tolerance_ratio).ToString("F2");
                 else
                     rgb_value = ((float)TARGET_AWB_B).ToString("F2");
-                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Blue), x_st + 92 + 20, y_st - 2);
+                gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Blue), x_st + 92 + 38, y_st - 2);
                 rgb_value = ((float)TARGET_AWB_B - 1 / (float)tolerance_ratio).ToString("F2");
-                gg.DrawString(rgb_value, drawFont2, new SolidBrush(Color.Blue), x_st + 92 + 20, y_st + 16);
+                gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Blue), x_st + 92 + 38, y_st + 16);
 
                 y_st = 370;
                 drawBrush = new SolidBrush(Color.Red);
                 rgb_value = total_R.ToString() + "   " + (((float)total_R) / awb_block / awb_block).ToString("F3");
-                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+                gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
 
                 y_st = 410;
                 drawBrush = new SolidBrush(Color.Green);
                 rgb_value = total_G.ToString() + "   " + (((float)total_G) / awb_block / awb_block).ToString("F3");
-                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+                gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
 
                 y_st = 450;
                 drawBrush = new SolidBrush(Color.Blue);
                 rgb_value = total_B.ToString() + "   " + (((float)total_B) / awb_block / awb_block).ToString("F3");
-                gg.DrawString(rgb_value, drawFont, drawBrush, x_st, y_st);
+                gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
 
                 if (flag_check_rgb_saturation == true)
                 {
@@ -4106,10 +4200,10 @@ namespace imsLink
                     bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
 
                     //TARGET RGB
-                    comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 200, 15 + 230 * 2);
-                    numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 200, 15 + 250 * 2);
-                    numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 200, 15 + 290 * 2);
-                    numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 200, 15 + 330 * 2);
+                    comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2);
+                    numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 250 * 2);
+                    numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 290 * 2);
+                    numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 330 * 2);
 
                     //WPT
                     lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 15);
@@ -4124,8 +4218,6 @@ namespace imsLink
                     numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, numericUpDown_wpt.Location.Y + 60);
                     bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, bt_read_wpt.Location.Y + 60);
                     bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, bt_write_wpt.Location.Y + 60);
-                    comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
-
                     refresh_picturebox2();
                 }
                 else
@@ -4133,6 +4225,7 @@ namespace imsLink
                     pictureBox1.Location = new Point(170 + 160 + 30, 15);
                     richTextBox1.Visible = false;
                 }
+                comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
             }
             else
             {
@@ -4147,7 +4240,7 @@ namespace imsLink
                 tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
-                comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
+                comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
                 toolTip1.SetToolTip(button19, "2X");
 
                 if (flag_awb_debug == true)
@@ -6433,6 +6526,7 @@ namespace imsLink
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
             }
 
+            flag_do_awb = true;
             flag_break = false;
             richTextBox1.Text += "\n\n\n";
             richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
@@ -6578,6 +6672,7 @@ namespace imsLink
             // Write result
             richTextBox1.Text += "總時間: " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + "." + ((stopwatch.ElapsedMilliseconds % 1000) / 100).ToString() + " 秒\n";
             flag_break = false;
+            flag_do_awb = false;
         }
 
         int check_RGB_value()
@@ -6632,6 +6727,7 @@ namespace imsLink
                             diff = 50;
 
                         data_expo += diff;
+                        diff_g = diff;
                         richTextBox1.Text += "E+" + diff.ToString() + " ";
 
                         if (data_expo > 500)
@@ -6650,7 +6746,7 @@ namespace imsLink
                     check_RB_saturation();
                 }
             }
-            else
+            else if (rgb_g > (TARGET_AWB_G * awb_block * awb_block + 1 * awb_block * awb_block))
             {
                 while (rgb_g > (TARGET_AWB_G * awb_block * awb_block + 1 * awb_block * awb_block))
                 {
@@ -6676,6 +6772,7 @@ namespace imsLink
                             diff = 50;
                         
                         data_expo -= diff;
+                        diff_g = -diff;
                         richTextBox1.Text += "E-" + diff.ToString() + " ";
 
                         if (data_expo < 0)
@@ -6694,6 +6791,8 @@ namespace imsLink
                     check_RB_saturation();
                 }
             }
+            else
+                diff_g =0;
             //richTextBox1.Text += "G抵達目標 目前 " + (rgb_g / (awb_block * awb_block)).ToString() + " 目標 " + TARGET_AWB_G.ToString() + "\n\n";
             return S_OK;
         }
@@ -6896,6 +6995,8 @@ namespace imsLink
                 if (diff > 50)
                     diff = 50;
 
+                diff_r = -diff;
+
                 //richTextBox1.Text += "\ntotal_RGB_R = " + total_RGB_R.ToString() + ", TARGET_AWB_R = " + TARGET_AWB_R.ToString() + "\n";
                 //richTextBox1.Text += "R太大 減低R_data, 目前data_R = " + data_R.ToString() + ", 減 " + diff.ToString() + "\n";
                 richTextBox1.Text += "R-" + diff.ToString() + " ";
@@ -6923,6 +7024,8 @@ namespace imsLink
                 if (diff > 50)
                     diff = 50;
 
+                diff_r = diff;
+
                 //richTextBox1.Text += "\ntotal_RGB_R = " + total_RGB_R.ToString() + ", TARGET_AWB_R = " + TARGET_AWB_R.ToString() + "\n";
                 //richTextBox1.Text += "R太小 增加R_data, 目前data_R = " + data_R.ToString() + ", 加 " + diff.ToString() + "\n";
                 richTextBox1.Text += "R+" + diff.ToString() + " ";
@@ -6946,6 +7049,7 @@ namespace imsLink
             {
                 //richTextBox1.Text += "R已在目標內\n";
                 R_OK = 1;
+                diff_r = 0;
             }
 
             //richTextBox1.Text += "RGB_B = " + (total_RGB_B / awb_block / awb_block).ToString() + "\tTG_AWB_B = " + TARGET_AWB_B.ToString() + "\t";
@@ -6955,6 +7059,8 @@ namespace imsLink
                 diff = diff * 16 / (awb_block * awb_block);
                 if (diff > 50)
                     diff = 50;
+
+                diff_b = -diff;
 
                 //richTextBox1.Text += "B太大 減低B_data, 目前data_B = " + data_B.ToString() + ", 減 " + diff.ToString() + "\n";
                 richTextBox1.Text += "B-" + diff.ToString() + " ";
@@ -6981,6 +7087,8 @@ namespace imsLink
                 if (diff > 50)
                     diff = 50;
 
+                diff_b = diff;
+
                 //richTextBox1.Text += "B太小 增加B_data, 目前data_B = " + data_B.ToString() + ", 加 " + diff.ToString() + "\n";
                 richTextBox1.Text += "B+" + diff.ToString() + " ";
 
@@ -7003,6 +7111,7 @@ namespace imsLink
             {
                 //richTextBox1.Text += "B已在目標內\n";
                 B_OK = 1;
+                diff_b = 0;
             }
             if ((R_OK == 1) && (B_OK == 1))
                 richTextBox1.Text += "\n";
