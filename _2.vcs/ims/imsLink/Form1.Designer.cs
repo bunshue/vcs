@@ -160,6 +160,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.lb_save_message = new System.Windows.Forms.Label();
             this.comboBox_webcam = new System.Windows.Forms.ComboBox();
             this.bt_erase = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -319,6 +320,7 @@
             this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
+            this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -443,6 +445,7 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.Enabled = false;
             this.comboBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
@@ -1760,6 +1763,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.lb_save_message);
             this.tp_USB.Controls.Add(this.comboBox_webcam);
             this.tp_USB.Controls.Add(this.bt_erase);
             this.tp_USB.Controls.Add(this.bt_clear);
@@ -1857,6 +1861,16 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_save_message
+            // 
+            this.lb_save_message.AutoSize = true;
+            this.lb_save_message.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_save_message.Location = new System.Drawing.Point(581, 19);
+            this.lb_save_message.Name = "lb_save_message";
+            this.lb_save_message.Size = new System.Drawing.Size(64, 24);
+            this.lb_save_message.TabIndex = 132;
+            this.lb_save_message.Text = "SAVE";
             // 
             // comboBox_webcam
             // 
@@ -3659,6 +3673,10 @@
             this.bt_goto_awb.UseVisualStyleBackColor = false;
             this.bt_goto_awb.Click += new System.EventHandler(this.bt_goto_awb_Click);
             // 
+            // timer_display
+            // 
+            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4045,6 +4063,8 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_erase;
         private System.Windows.Forms.ComboBox comboBox_webcam;
+        private System.Windows.Forms.Timer timer_display;
+        private System.Windows.Forms.Label lb_save_message;
     }
 }
 
