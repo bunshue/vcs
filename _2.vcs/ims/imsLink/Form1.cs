@@ -3854,6 +3854,7 @@ namespace imsLink
             }
             else
             {
+                check_webcam();
                 richTextBox1.Text += "重新抓取USB影像\t";
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
                 if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -4097,16 +4098,40 @@ namespace imsLink
 
         private void button19_Click(object sender, EventArgs e)
         {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            //richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
+
             if (flag_fullscreen == false)
             {
                 flag_fullscreen = true;
                 button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.WindowState = FormWindowState.Maximized;
                 //this.TopMost = true;
-                tabControl1.Size = new Size(1600 + 300, 1010);
-                //pictureBox1.Size = new Size(1120, 840);
-                pictureBox1.Size = new Size(640 * 2, 480 * 2);
+
+                if (screenWidth < 1920)
+                {
+                    //this.FormBorderStyle = FormBorderStyle.None;
+                    this.WindowState = FormWindowState.Normal;
+                    //richTextBox1.Text += "this.Size W = " + this.Size.Width.ToString() + " H = " + this.Size.Height.ToString() + "\n";
+                    this.Size = new Size(this.Size.Width + 200, 750);
+                    tabControl1.Size = new Size(1600 + 200, 1010);
+                    //pictureBox1.Size = new Size(1120, 840);
+                    pictureBox1.Size = new Size(640 * 5 / 4, 480 * 5 / 4);
+
+                    //設定執行後的表單起始位置
+                    this.StartPosition = FormStartPosition.Manual;
+                    this.Location = new System.Drawing.Point(0, 0);
+                }
+                else
+                {
+                    this.FormBorderStyle = FormBorderStyle.None;
+                    this.WindowState = FormWindowState.Maximized;
+                    tabControl1.Size = new Size(1600 + 300, 1010);
+                    //pictureBox1.Size = new Size(1120, 840);
+                    pictureBox1.Size = new Size(640 * 2, 480 * 2);
+                    this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+                }
+
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
                 toolTip1.SetToolTip(button19, "1X");
 
@@ -4317,7 +4342,7 @@ namespace imsLink
                 }
                 else
                 {
-                    pictureBox1.Location = new Point(170 + 160 + 30, 15);
+                    pictureBox1.Location = new Point(170 + 90, 10);
                     richTextBox1.Visible = false;
                     lb_save_message.Visible = true;
                 }
@@ -4332,6 +4357,8 @@ namespace imsLink
                 this.richTextBox1.Size = new System.Drawing.Size(500, 586);
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.WindowState = FormWindowState.Normal;
+                if (screenWidth < 1920)
+                    this.Size = new Size(this.Size.Width - 200, 750);
                 //this.TopMost = false;
                 tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
@@ -8209,33 +8236,41 @@ namespace imsLink
                     richTextBox1.Text += "name : " + USBWebcams[i].Name + "\n";
                     richTextBox1.Text += "MonikerString: " + USBWebcams[i].MonikerString + "\n";
 
-                    Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
-                    Cam_tmp.VideoResolution = Cam_tmp.VideoCapabilities[0];
-
-
-                    richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + "\n";
-                    //richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].FrameRate.ToString();
-                    richTextBox1.Text += "W = " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + "\n";
-                    richTextBox1.Text += "H = " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + "\n";
-                    /*
-                    richTextBox1.Text += "BitCount = " + Cam_tmp.VideoCapabilities[0].BitCount.ToString() + "\n";
-                    richTextBox1.Text += "FR_max = " + Cam_tmp.VideoCapabilities[0].MaximumFrameRate.ToString() + "\n";
-                    richTextBox1.Text += "ProvideSnapshots = " + Cam_tmp.ProvideSnapshots.ToString() + "\n";
-                    if (Cam_tmp.ProvideSnapshots == true)
+                    string webcam_name;
+                    if (USBWebcams[i].Name.Contains("Virtual"))
                     {
-                        richTextBox1.Text += "Snapshot len = " + Cam_tmp.SnapshotCapabilities.Length.ToString() + "\n";
-                        richTextBox1.Text += "Snapshot W = " + Cam_tmp.SnapshotResolution.FrameSize.Width.ToString() + "\n";
-                        richTextBox1.Text += "Snapshot H = " + Cam_tmp.SnapshotResolution.FrameSize.Height.ToString() + "\n";
-                        richTextBox1.Text += "Snapshot FR = " + Cam_tmp.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
+                        richTextBox1.Text += "跳過 Virtual\n";
+                        webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name;
                     }
-                    richTextBox1.Text += "Cam.Source = " + Cam_tmp.Source.ToString() + "\n";
-                    richTextBox1.Text += "Cam.Source.Length = " + Cam_tmp.Source.Length.ToString() + "\n";
-                    richTextBox1.Text += "FrameRate = " + Cam_tmp.VideoResolution.FrameRate.ToString() + "\n";    //old
-                    richTextBox1.Text += "FrameSize.W = " + Cam_tmp.VideoResolution.FrameSize.Width.ToString() + "\n";
-                    richTextBox1.Text += "FrameSize.H = " + Cam_tmp.VideoResolution.FrameSize.Height.ToString() + "\n";
-                    */
+                    else
+                    {
+                        Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
+                        Cam_tmp.VideoResolution = Cam_tmp.VideoCapabilities[0];
 
-                    string webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                        richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + "\n";
+                        //richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].FrameRate.ToString();
+                        richTextBox1.Text += "W = " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + "\n";
+                        richTextBox1.Text += "H = " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + "\n";
+                        /*
+                        richTextBox1.Text += "BitCount = " + Cam_tmp.VideoCapabilities[0].BitCount.ToString() + "\n";
+                        richTextBox1.Text += "FR_max = " + Cam_tmp.VideoCapabilities[0].MaximumFrameRate.ToString() + "\n";
+                        richTextBox1.Text += "ProvideSnapshots = " + Cam_tmp.ProvideSnapshots.ToString() + "\n";
+                        if (Cam_tmp.ProvideSnapshots == true)
+                        {
+                            richTextBox1.Text += "Snapshot len = " + Cam_tmp.SnapshotCapabilities.Length.ToString() + "\n";
+                            richTextBox1.Text += "Snapshot W = " + Cam_tmp.SnapshotResolution.FrameSize.Width.ToString() + "\n";
+                            richTextBox1.Text += "Snapshot H = " + Cam_tmp.SnapshotResolution.FrameSize.Height.ToString() + "\n";
+                            richTextBox1.Text += "Snapshot FR = " + Cam_tmp.SnapshotResolution.MaximumFrameRate.ToString() + "\n";
+                        }
+                        richTextBox1.Text += "Cam.Source = " + Cam_tmp.Source.ToString() + "\n";
+                        richTextBox1.Text += "Cam.Source.Length = " + Cam_tmp.Source.Length.ToString() + "\n";
+                        richTextBox1.Text += "FrameRate = " + Cam_tmp.VideoResolution.FrameRate.ToString() + "\n";    //old
+                        richTextBox1.Text += "FrameSize.W = " + Cam_tmp.VideoResolution.FrameSize.Width.ToString() + "\n";
+                        richTextBox1.Text += "FrameSize.H = " + Cam_tmp.VideoResolution.FrameSize.Height.ToString() + "\n";
+                        */
+
+                        webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                    }
 
                     comboBox_webcam.Items.Add(webcam_name);
                     richTextBox1.Text += webcam_name + "\n";

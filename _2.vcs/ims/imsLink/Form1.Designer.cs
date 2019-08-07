@@ -439,9 +439,8 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(7, 7);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(89, 27);
+            this.comboBox1.Size = new System.Drawing.Size(88, 27);
             this.comboBox1.TabIndex = 19;
-            this.comboBox1.Text = "COM6";
             // 
             // comboBox2
             // 
@@ -452,7 +451,7 @@
             "9600",
             "19600",
             "115200"});
-            this.comboBox2.Location = new System.Drawing.Point(97, 8);
+            this.comboBox2.Location = new System.Drawing.Point(97, 7);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(88, 27);
             this.comboBox2.TabIndex = 20;
@@ -1866,6 +1865,7 @@
             // 
             this.lb_save_message.AutoSize = true;
             this.lb_save_message.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_save_message.ForeColor = System.Drawing.Color.Red;
             this.lb_save_message.Location = new System.Drawing.Point(581, 19);
             this.lb_save_message.Name = "lb_save_message";
             this.lb_save_message.Size = new System.Drawing.Size(64, 24);
