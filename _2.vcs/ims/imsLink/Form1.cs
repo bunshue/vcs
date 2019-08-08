@@ -167,14 +167,14 @@ namespace imsLink
         int tolerance = 0;
         int tolerance_ratio = 1;
 
-        private const int CHECK_SATURATION_FRAME = 30;
+        private const int CHECK_SATURATION_FRAME = 10;
         bool flag_check_rgb_saturation = false;
         int rgb_saturation_check_cnt = 30000;
         int rgb_r_saturation_cnt = 0;
         int rgb_g_saturation_cnt = 0;
         int rgb_b_saturation_cnt = 0;
 
-        private const int CHECK_AWB_FRAME = 30;
+        private const int CHECK_AWB_FRAME = 10;
         bool flag_check_rgb = false;
         int rgb_check_cnt = 30000;
         int rgb_r_ok_cnt = 0;
@@ -323,12 +323,14 @@ namespace imsLink
             {
                 tabControl1.SelectTab(tp_USB);       //程式啟動時，直接跳到USB那頁。
                 timer_rtc.Enabled = false;
+                timer_get_rgb.Enabled = true;
             }
             else
             {
                 //tabControl1.SelectedTab = tp_Connection;    //程式啟動時，直接跳到Connection那頁。
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
                 timer_rtc.Enabled = true;
+                timer_get_rgb.Enabled = false;
             }
 
             this.Width = 960;
@@ -1306,9 +1308,10 @@ namespace imsLink
 
                 if (data[4] != input[4])
                 {
+                    /*
                     richTextBox1.AppendText("[checksum fail] : " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " "
                         + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + "  chk: " + ((int)data[4]).ToString("X2") + ", abort\n");
-
+                    */
                     if (flag_read_connection_again == false)
                         flag_read_connection_again = true;
 
@@ -1728,7 +1731,7 @@ namespace imsLink
 
             check_webcam();
 
-            Comport_Scan();
+            //Comport_Scan();
             this.BackColor = Color.Yellow;
 
             /*
@@ -1889,7 +1892,14 @@ namespace imsLink
             toolTip1.SetToolTip(button12, "Refresh");
             toolTip1.SetToolTip(button16, "Save");
             toolTip1.SetToolTip(button15, "Play/Pause");
-            toolTip1.SetToolTip(button19, "2X");
+            if (Screen.PrimaryScreen.Bounds.Width < 1920)
+            {
+                toolTip1.SetToolTip(button19, "1.25X");
+            }
+            else
+            {
+                toolTip1.SetToolTip(button19, "2X");
+            }
             toolTip1.SetToolTip(btnUp, "Up");
             toolTip1.SetToolTip(btnDown, "Down");
             toolTip1.SetToolTip(btnLeft, "Left");
@@ -1921,6 +1931,11 @@ namespace imsLink
 
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
             lb_save_message.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y - comboBox_webcam.Height);
+
+            if (flag_awb_debug == true)
+            {
+                bt_goto_awb_Click(sender, e);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -3023,11 +3038,13 @@ namespace imsLink
             {
                 richTextBox1.Text += "進入USB WebCam\n";
                 timer_webcam.Enabled = true;
+                timer_get_rgb.Enabled = true;
             }
             else
             {
                 richTextBox1.Text += "離開USB WebCam\n";
                 timer_webcam.Enabled = false;
+                timer_get_rgb.Enabled = false;
 
                 if (flag_fullscreen == true)
                 {
@@ -3043,7 +3060,15 @@ namespace imsLink
                     pictureBox1.Location = new Point(170, 50);
                     pictureBox1.Size = new Size(640, 480);
                     comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
-                    toolTip1.SetToolTip(button19, "2X");
+
+                    if (Screen.PrimaryScreen.Bounds.Width < 1920)
+                    {
+                        toolTip1.SetToolTip(button19, "1.25X");
+                    }
+                    else
+                    {
+                        toolTip1.SetToolTip(button19, "2X");
+                    }
 
                     lb_0x1.Visible = false;
                     lb_0x2.Visible = false;
@@ -4441,7 +4466,14 @@ namespace imsLink
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
-                toolTip1.SetToolTip(button19, "2X");
+                if (Screen.PrimaryScreen.Bounds.Width < 1920)
+                {
+                    toolTip1.SetToolTip(button19, "1.25X");
+                }
+                else
+                {
+                    toolTip1.SetToolTip(button19, "2X");
+                }
                 lb_save_message.Visible = true;
 
                 if (flag_awb_debug == true)
@@ -5458,8 +5490,12 @@ namespace imsLink
             byte Green = GetGValue(colorref);
             byte Blue = GetBValue(colorref);
             return Color.FromArgb(Red, Green, Blue);
-        }  
+        }
 
+        int cccc = 0;
+        int total_RGB_R_old = -1;
+        int total_RGB_G_old = -1;
+        int total_RGB_B_old = -1;
         private void timer_get_rgb_Tick(object sender, EventArgs e)
         {
             //txtPoint.Text = Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString();
@@ -5467,6 +5503,23 @@ namespace imsLink
             Color cl = GetColor(pt);
             panel1.BackColor = cl;
             lb_rgb.Text = cl.R + ", " + cl.G + ", " + cl.B;
+
+            cccc++;
+            if ((cccc % 50) == 0)
+            {
+                //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
+                if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
+                {
+                    richTextBox1.Text += "refresh webcam\n";
+                    button12_Click_1(sender, e);
+                }
+                else
+                {
+                    total_RGB_R_old = total_RGB_R;
+                    total_RGB_G_old = total_RGB_G;
+                    total_RGB_B_old = total_RGB_B;
+                }
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -6437,7 +6490,7 @@ namespace imsLink
             //richTextBox1.Text += "wait result ok cnt = " + cnt.ToString() + "\n";
             if (cnt == cnt_max)
             {
-                richTextBox1.Text += "Fail " + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\n";
+                richTextBox1.Text += "Fail " + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t";
                 return false;
             }
             else
@@ -6517,8 +6570,8 @@ namespace imsLink
 
             while (read_camera_sensor0(cmd, DongleAddr_h1, DongleAddr_l1) == false)
             {
-                richTextBox1.Text += "read again " + DongleAddr_h1.ToString("X2") + DongleAddr_l1.ToString("X2") + "\n";
-                delay(10);
+                richTextBox1.Text += "read again " + DongleAddr_h1.ToString("X2") + DongleAddr_l1.ToString("X2") + "\t";
+                delay(20);
             }
 
             if ((DongleAddr_h2 == 0x00) && (DongleAddr_l2 == 0x00))
@@ -6528,18 +6581,13 @@ namespace imsLink
 
             while (read_camera_sensor0(cmd, DongleAddr_h2, DongleAddr_l2) == false)
             {
-                richTextBox1.Text += "read again " + DongleAddr_h2.ToString("X2") + DongleAddr_l2.ToString("X2") + "\n";
-                delay(10);
+                richTextBox1.Text += "read again " + DongleAddr_h2.ToString("X2") + DongleAddr_l2.ToString("X2") + "\t";
+                delay(20);
             }
         }
 
         private void bt_get_setup_Click(object sender, EventArgs e)
         {
-            if (flag_comport_ok == false)
-            {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             lb_awb_result_expo.Text = "";
             lb_awb_result_gain.Text = "";
             lb_awb_result_R.Text = "";
@@ -6551,16 +6599,11 @@ namespace imsLink
             flag_awb_update_G = false;
             flag_awb_update_B = false;
 
-            read_camera_sensor(SENSOR_EXPO);
-
-            read_camera_sensor(SENSOR_GAIN);
-
-            read_camera_sensor(SENSOR_RGB_R);
-
-            read_camera_sensor(SENSOR_RGB_G);
-
-            read_camera_sensor(SENSOR_RGB_B);
-
+            get_expo_data();
+            get_gain_data();
+            get_r_data();
+            get_g_data();
+            get_b_data();
         }
 
         private void numericUpDown_expo_ValueChanged(object sender, EventArgs e)
@@ -6593,14 +6636,16 @@ namespace imsLink
             tb_B.Text = Convert.ToString(trackBar_B.Value, 16).ToUpper();
         }
 
-        int ccccc = 0;
         int get_expo_data()
         {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return S_FALSE;
+            }
             data_expo = -1;
             lb_awb_result_expo.Text = "";
             flag_awb_update_expo = false;
-
-            richTextBox1.Text += "send cmd read sensor expo\n";
             read_camera_sensor(SENSOR_EXPO);
 
             if (data_expo != -1)
@@ -6609,36 +6654,33 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "資料不完整1" + (ccccc++).ToString() + "\n";
-
+                richTextBox1.Text += "資料不完整expo\t";
                 return S_FALSE;
             }
         }
 
-        /* seperated to 3 functions
-        int get_rgb_data()
+        int get_gain_data()
         {
-            int ret;
-
-            ret = get_r_data();
-            if (ret == S_FALSE)
+            if (flag_comport_ok == false)
             {
-                richTextBox1.Text += "資料不完整\n";
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return S_FALSE;
             }
+            data_gain = -1;
+            lb_awb_result_gain.Text = "";
+            flag_awb_update_gain = false;
+            read_camera_sensor(SENSOR_GAIN);
 
-            //skip g
-
-            ret = get_b_data();
-            if (ret == S_FALSE)
+            if (data_gain != -1)
             {
-                richTextBox1.Text += "資料不完整\n";
+                return S_OK;
+            }
+            else
+            {
+                richTextBox1.Text += "資料不完整gain\t";
                 return S_FALSE;
             }
-
-            return S_OK;
         }
-        */
 
         int get_r_data()
         {
@@ -6658,7 +6700,7 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "資料不完整r\n";
+                richTextBox1.Text += "資料不完整r\t";
                 return S_FALSE;
             }
         }
@@ -6681,7 +6723,7 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "資料不完整r\n";
+                richTextBox1.Text += "資料不完整g\t";
                 return S_FALSE;
             }
         }
@@ -6704,7 +6746,7 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "資料不完整b\n";
+                richTextBox1.Text += "資料不完整b\t";
                 return S_FALSE;
             }
         }
@@ -6720,7 +6762,7 @@ namespace imsLink
                 return;
             }
             else
-                richTextBox1.Text += "RGB有飽和\n";
+                richTextBox1.Text += "RGB有飽和\t";
 
             int rgb_ok_cnt = 0;
             while (true)
@@ -6769,7 +6811,7 @@ namespace imsLink
                 flag_awb_mode = true;
                 timer_webcam.Enabled = false;
                 bt_awb.Text = "Auto";
-                richTextBox1.Text += "\nTo Auto mode\n";
+                //richTextBox1.Text += "\nTo Auto mode\n";
                 //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
             }
@@ -6777,14 +6819,13 @@ namespace imsLink
             timer_display.Enabled = true;
             flag_do_awb = true;
             flag_break = false;
-            richTextBox1.Text += "\n\n\n";
-            richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
+            //richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
 
-            richTextBox1.Text += "開始計時\n";
             // Create stopwatch
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing
             stopwatch.Start();
+            richTextBox1.Text += "\nAWB 開始\t檢查飽和 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
 
             //no change gain.....
             //richTextBox1.Text += "setup gain to 0x7f = 127\n";
@@ -6793,7 +6834,7 @@ namespace imsLink
 
             test_RGB_saturation();
 
-            richTextBox1.Text += "目前時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "檢查飽和 SP\t粗調 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
 
             int ret = 0;
             flag_update_RGB_scrollbar = true;
@@ -6831,7 +6872,7 @@ namespace imsLink
 
                 for (i = 0; i < 50; i++)
                 {
-                    richTextBox1.Text += "\ni = " + i.ToString() + "\t";
+                    //richTextBox1.Text += "\ni = " + i.ToString() + "\t";
                     flag_update_RGB_scrollbar = true;
 
                     ret = get_r_data();
@@ -6848,11 +6889,11 @@ namespace imsLink
                         ret = check_RGB_value();
                         if (ret == S_OK)
                         {
-                            richTextBox1.Text += "\nRGB皆符合, 完成a\n";
+                            richTextBox1.Text += "RGB皆符合, 完成a\n";
                             break;
                         }
                     }
-                    delay(20);
+                    delay(10);
                     check_RB_saturation();
                     ret = check_RGB_value();
                     if (ret == S_OK)
@@ -6864,7 +6905,7 @@ namespace imsLink
 
                     ret = check_G_exposure(sender, e, total_RGB_G);
 
-                    delay(20);
+                    delay(10);
                     check_RB_saturation();
                     ret = check_RGB_value();
                     if (ret == S_OK)
@@ -6887,20 +6928,17 @@ namespace imsLink
             //richTextBox1.Text += "AGC auto, EXPO auto\n";
             //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
-            richTextBox1.Text += "Target  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
-            richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
+            //richTextBox1.Text += "Target  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
+            //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
 
-            richTextBox1.Text += "\nAWB test SP\n";
+            richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
 
-            richTextBox1.Text += "目前時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
-
-            richTextBox1.Text += "AWB check ST\n";
             int ok_cnt = 0;
             int check_cnt = 0;
             while(true)
             {
                 check_cnt++;
-                richTextBox1.Text += "i = " + check_cnt.ToString() + "    ";
+                //richTextBox1.Text += "i = " + check_cnt.ToString() + "    ";
                 if(check_cnt < 5)
                     tolerance_ratio = 2;
                 else if (check_cnt < 10)
@@ -6911,32 +6949,33 @@ namespace imsLink
                 if (ret == S_OK)
                 {
                     ok_cnt++;
-                    richTextBox1.Text += "S_OK " + ok_cnt.ToString() + "\n";
+                    richTextBox1.Text += "S_OK " + ok_cnt.ToString() + " ";
                     if (ok_cnt == 3)
                         break;
                 }
                 else
                     ok_cnt = 0;
             }
+            richTextBox1.Text += "細調 SP : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
             tolerance_ratio = 1;
 
-            richTextBox1.Text += "AWB check SP\n";
-
+            //切換回自動模式
+            /*
             bt_awb.Text = "Manual";
             flag_awb_mode = false;
             timer_webcam.Enabled = true;
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+            */
 
             //do not write data to camera
+            //寫資料進相機裡
             //write_awb_data_to_camera(data_R, data_B);
-
-            richTextBox1.Text += "目前時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
 
             // Stop timing
             stopwatch.Stop();
 
             // Write result
-            richTextBox1.Text += "總時間: " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + "." + ((stopwatch.ElapsedMilliseconds % 1000) / 100).ToString() + " 秒\n";
+            richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
             flag_break = false;
             flag_do_awb = false;
             timer_display.Enabled = false;
@@ -6973,7 +7012,7 @@ namespace imsLink
                 //richTextBox1.Text += "G太小 要增加expo\n";
                 while (rgb_g < (TARGET_AWB_G * awb_block * awb_block - 1 * awb_block * awb_block))
                 {
-                    richTextBox1.Text += "call get_expo_data\t";
+                    //richTextBox1.Text += "call get_expo_data\t";
                     ret = get_expo_data();
                     if (ret == S_OK)
                     {
@@ -6991,8 +7030,8 @@ namespace imsLink
                         diff = TARGET_AWB_G * awb_block * awb_block - rgb_g;
                         //diff = diff * 10 / 4;
                         diff = diff * 1 / (awb_block * awb_block);
-                        if (diff > 20)
-                            diff = 20;
+                        if (diff > 10)
+                            diff = 10;
 
                         data_expo += diff;
                         diff_g = diff;
@@ -7042,8 +7081,8 @@ namespace imsLink
                         diff = rgb_g - TARGET_AWB_G * awb_block * awb_block;
                         //diff = diff * 10 / 4;
                         diff = diff * 1 / (awb_block * awb_block);
-                        if (diff > 20)
-                            diff = 20;
+                        if (diff > 10)
+                            diff = 10;
                         
                         data_expo -= diff;
                         diff_g = -diff;
@@ -7157,7 +7196,7 @@ namespace imsLink
                         return;
 
                     //richTextBox1.Text += "\n飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
-                    richTextBox1.Text += "R飽和 -99\n";
+                    richTextBox1.Text += "R飽和 -99\t";
 
                     if (SendData > 500)
                         numericUpDown_R.Value = SendData;
@@ -7185,7 +7224,7 @@ namespace imsLink
                 if (ret == S_OK)
                 {
                     //richTextBox1.Text += "飽和 目前 expo = " + data_expo.ToString() + " 減一些 減成 " + (data_expo - 10).ToString() + "\n";
-                    richTextBox1.Text += "G飽和 -10\n";
+                    richTextBox1.Text += "G飽和 -10\t";
 
                     if ((data_expo < 0) || (data_expo > 511))
                     {
@@ -7252,7 +7291,7 @@ namespace imsLink
                         return;
 
                     //richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
-                    richTextBox1.Text += "B飽和 -99\n";
+                    richTextBox1.Text += "B飽和 -99\t";
 
                     if (SendData > 500)
                         numericUpDown_B.Value = SendData;
@@ -7289,8 +7328,8 @@ namespace imsLink
                 //diff = (total_RGB_R / awb_block / awb_block) - (TARGET_AWB_R + 1);
                 diff = total_RGB_R - (TARGET_AWB_R * awb_block * awb_block + 1 * awb_block * awb_block);
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 40)
-                    diff = 40;
+                if (diff > 20)
+                    diff = 20;
 
                 diff_r = -diff;
                 timer_display_r_count = 0;
@@ -7322,8 +7361,8 @@ namespace imsLink
             {
                 diff = (TARGET_AWB_R * awb_block * awb_block - 1 * awb_block * awb_block) - total_RGB_R;
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 40)
-                    diff = 40;
+                if (diff > 20)
+                    diff = 20;
 
                 diff_r = diff;
                 timer_display_r_count = 0;
@@ -7362,8 +7401,8 @@ namespace imsLink
             {
                 diff = total_RGB_B - (TARGET_AWB_B * awb_block * awb_block + 1 * awb_block * awb_block);
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 40)
-                    diff = 40;
+                if (diff > 20)
+                    diff = 20;
 
                 diff_b = -diff;
                 timer_display_b_count = 0;
@@ -7393,8 +7432,8 @@ namespace imsLink
             {
                 diff = (TARGET_AWB_B * awb_block * awb_block - 1 * awb_block * awb_block) - total_RGB_B;
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 40)
-                    diff = 40;
+                if (diff > 20)
+                    diff = 20;
 
                 diff_b = diff;
                 timer_display_b_count = 0;
@@ -8261,39 +8300,19 @@ namespace imsLink
                 return S_OK;
             else
             {
-                richTextBox1.Text += "\n";
+                //richTextBox1.Text += "\n";
                 return S_FALSE;
             }
         }
 
         private void bt_awb_test2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "AWB check ST\n";
-            tolerance_ratio = 2;
-            int i;
-            int ok_cnt = 0;
-            int ret;
-            for (i = 0; i < 20; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "  ";
-                ret = awb_modify();
-                if (ret == S_OK)
-                {
-                    ok_cnt++;
-                    richTextBox1.Text += "S_OK " + ok_cnt.ToString() + "\n";
-                    if (ok_cnt == 3)
-                        break;
-                }
-                else
-                    ok_cnt = 0;
-            }
-            tolerance_ratio = 1;
-            richTextBox1.Text += "AWB check SP\n";
+            richTextBox1.Text += "none\n";
         }
 
         int precheck_RGB_saturation()
         {
-            richTextBox1.Text += "precheck RGB saturation ST\n";
+            //richTextBox1.Text += "precheck RGB saturation ST\n";
             rgb_saturation_check_cnt = 0;
             rgb_r_saturation_cnt = 0;
             rgb_g_saturation_cnt = 0;
@@ -8374,7 +8393,7 @@ namespace imsLink
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             VideoCaptureDevice Cam_tmp = null;
 
-            richTextBox1.Text += "check_webcam ST\n";
+            //richTextBox1.Text += "check_webcam ST\n";
 
             //USBWebcams2 = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -8546,10 +8565,10 @@ namespace imsLink
                     lb_save_message.Text = "";
             }
 
-            if (timer_display_connect_comport_count < 30)
+            if (timer_display_connect_comport_count < 50)
             {
                 timer_display_connect_comport_count++;
-                if (timer_display_connect_comport_count == 30)
+                if (timer_display_connect_comport_count == 50)
                     lb_connect_comport.Text = "";
             }
         

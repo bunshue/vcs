@@ -253,6 +253,7 @@
             this.lb_wpt = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tp_Test = new System.Windows.Forms.TabPage();
+            this.button41 = new System.Windows.Forms.Button();
             this.lb_rtc2 = new System.Windows.Forms.Label();
             this.button42 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -321,7 +322,6 @@
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.button41 = new System.Windows.Forms.Button();
             this.lb_connect_comport = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
@@ -1878,9 +1878,9 @@
             // 
             this.comboBox_webcam.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_webcam.FormattingEnabled = true;
-            this.comboBox_webcam.Location = new System.Drawing.Point(385, 334);
+            this.comboBox_webcam.Location = new System.Drawing.Point(362, 334);
             this.comboBox_webcam.Name = "comboBox_webcam";
-            this.comboBox_webcam.Size = new System.Drawing.Size(297, 27);
+            this.comboBox_webcam.Size = new System.Drawing.Size(320, 27);
             this.comboBox_webcam.TabIndex = 131;
             this.comboBox_webcam.SelectedIndexChanged += new System.EventHandler(this.comboBox_webcam_SelectedIndexChanged);
             // 
@@ -2985,6 +2985,19 @@
             this.tp_Test.Text = "Test";
             this.tp_Test.UseVisualStyleBackColor = true;
             // 
+            // button41
+            // 
+            this.button41.BackColor = System.Drawing.SystemColors.Control;
+            this.button41.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button41.ForeColor = System.Drawing.Color.Red;
+            this.button41.Location = new System.Drawing.Point(242, 237);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(64, 32);
+            this.button41.TabIndex = 129;
+            this.button41.Text = "Test";
+            this.button41.UseVisualStyleBackColor = false;
+            this.button41.Click += new System.EventHandler(this.button41_Click_1);
+            // 
             // lb_rtc2
             // 
             this.lb_rtc2.AutoSize = true;
@@ -3653,7 +3666,6 @@
             // 
             // timer_get_rgb
             // 
-            this.timer_get_rgb.Enabled = true;
             this.timer_get_rgb.Tick += new System.EventHandler(this.timer_get_rgb_Tick);
             // 
             // timer_webcam
@@ -3679,29 +3691,16 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
-            // button41
-            // 
-            this.button41.BackColor = System.Drawing.SystemColors.Control;
-            this.button41.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button41.ForeColor = System.Drawing.Color.Red;
-            this.button41.Location = new System.Drawing.Point(242, 237);
-            this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(64, 32);
-            this.button41.TabIndex = 129;
-            this.button41.Text = "Test";
-            this.button41.UseVisualStyleBackColor = false;
-            this.button41.Click += new System.EventHandler(this.button41_Click_1);
-            // 
             // lb_connect_comport
             // 
             this.lb_connect_comport.AutoSize = true;
             this.lb_connect_comport.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_connect_comport.ForeColor = System.Drawing.Color.Red;
-            this.lb_connect_comport.Location = new System.Drawing.Point(481, 12);
+            this.lb_connect_comport.Location = new System.Drawing.Point(475, 12);
             this.lb_connect_comport.Name = "lb_connect_comport";
-            this.lb_connect_comport.Size = new System.Drawing.Size(64, 24);
+            this.lb_connect_comport.Size = new System.Drawing.Size(58, 24);
             this.lb_connect_comport.TabIndex = 133;
-            this.lb_connect_comport.Text = "SAVE";
+            this.lb_connect_comport.Text = "COM";
             // 
             // Form1
             // 
@@ -3736,7 +3735,7 @@
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "imsLink";
+            this.Text = "imsLink A03";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
