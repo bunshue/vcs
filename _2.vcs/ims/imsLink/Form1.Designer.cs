@@ -321,6 +321,8 @@
             this.timer_webcam = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
+            this.button41 = new System.Windows.Forms.Button();
+            this.lb_connect_comport = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -366,7 +368,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(261, 6);
+            this.button1.Location = new System.Drawing.Point(261, 7);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(64, 33);
             this.button1.TabIndex = 0;
@@ -376,7 +378,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(331, 5);
+            this.button2.Location = new System.Drawing.Point(331, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(64, 33);
             this.button2.TabIndex = 1;
@@ -425,7 +427,7 @@
             this.button9.BackColor = System.Drawing.Color.Black;
             this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(401, 6);
+            this.button9.Location = new System.Drawing.Point(401, 7);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(64, 33);
             this.button9.TabIndex = 18;
@@ -2968,6 +2970,7 @@
             // 
             // tp_Test
             // 
+            this.tp_Test.Controls.Add(this.button41);
             this.tp_Test.Controls.Add(this.lb_rtc2);
             this.tp_Test.Controls.Add(this.button42);
             this.tp_Test.Controls.Add(this.button3);
@@ -3555,7 +3558,7 @@
             this.button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button20.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button20.ForeColor = System.Drawing.Color.Black;
-            this.button20.Location = new System.Drawing.Point(855, 6);
+            this.button20.Location = new System.Drawing.Point(855, 5);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(60, 60);
             this.button20.TabIndex = 42;
@@ -3636,7 +3639,7 @@
             this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button33.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button33.ForeColor = System.Drawing.Color.Green;
-            this.button33.Location = new System.Drawing.Point(918, 6);
+            this.button33.Location = new System.Drawing.Point(918, 5);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(30, 60);
             this.button33.TabIndex = 28;
@@ -3645,7 +3648,6 @@
             // 
             // timer_rtc
             // 
-            this.timer_rtc.Enabled = true;
             this.timer_rtc.Interval = 500;
             this.timer_rtc.Tick += new System.EventHandler(this.timer_rtc_Tick);
             // 
@@ -3665,7 +3667,7 @@
             this.bt_goto_awb.BackColor = System.Drawing.Color.Maroon;
             this.bt_goto_awb.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_goto_awb.ForeColor = System.Drawing.Color.Gold;
-            this.bt_goto_awb.Location = new System.Drawing.Point(592, 8);
+            this.bt_goto_awb.Location = new System.Drawing.Point(592, 7);
             this.bt_goto_awb.Name = "bt_goto_awb";
             this.bt_goto_awb.Size = new System.Drawing.Size(60, 35);
             this.bt_goto_awb.TabIndex = 66;
@@ -3677,12 +3679,37 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
+            // button41
+            // 
+            this.button41.BackColor = System.Drawing.SystemColors.Control;
+            this.button41.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button41.ForeColor = System.Drawing.Color.Red;
+            this.button41.Location = new System.Drawing.Point(242, 237);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(64, 32);
+            this.button41.TabIndex = 129;
+            this.button41.Text = "Test";
+            this.button41.UseVisualStyleBackColor = false;
+            this.button41.Click += new System.EventHandler(this.button41_Click_1);
+            // 
+            // lb_connect_comport
+            // 
+            this.lb_connect_comport.AutoSize = true;
+            this.lb_connect_comport.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_connect_comport.ForeColor = System.Drawing.Color.Red;
+            this.lb_connect_comport.Location = new System.Drawing.Point(481, 12);
+            this.lb_connect_comport.Name = "lb_connect_comport";
+            this.lb_connect_comport.Size = new System.Drawing.Size(64, 24);
+            this.lb_connect_comport.TabIndex = 133;
+            this.lb_connect_comport.Text = "SAVE";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1461, 686);
+            this.Controls.Add(this.lb_connect_comport);
             this.Controls.Add(this.bt_goto_awb);
             this.Controls.Add(this.button35);
             this.Controls.Add(this.button13);
@@ -4065,6 +4092,8 @@
         private System.Windows.Forms.ComboBox comboBox_webcam;
         private System.Windows.Forms.Timer timer_display;
         private System.Windows.Forms.Label lb_save_message;
+        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Label lb_connect_comport;
     }
 }
 

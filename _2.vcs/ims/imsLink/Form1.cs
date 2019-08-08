@@ -86,6 +86,7 @@ namespace imsLink
         bool flag_auto_scan_mode = true;
         bool flag_read_connection_again = true;
         bool flag_comport_ok = false;
+        bool flag_comport_connection_ok = false;
         bool flag_already_write_system_data = false;
         bool flag_fullscreen = false;
 
@@ -126,6 +127,7 @@ namespace imsLink
         bool flag_break = false;
         bool flag_do_awb = false;
         int timer_display_save_count = 0;
+        int timer_display_connect_comport_count = 0;
         int timer_display_r_count = 0;
         int timer_display_g_count = 0;
         int timer_display_b_count = 0;
@@ -320,11 +322,13 @@ namespace imsLink
             if (flag_us_debug == true)
             {
                 tabControl1.SelectTab(tp_USB);       //程式啟動時，直接跳到USB那頁。
+                timer_rtc.Enabled = false;
             }
             else
             {
                 //tabControl1.SelectedTab = tp_Connection;    //程式啟動時，直接跳到Connection那頁。
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
+                timer_rtc.Enabled = true;
             }
 
             this.Width = 960;
@@ -351,6 +355,23 @@ namespace imsLink
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int ret;
+            ret = try_connect_comport();
+            if (ret == S_OK)
+            {
+                richTextBox1.Text += "已連上IMS EGD System\n";
+                lb_connect_comport.Text = "已連線";
+            }
+            else
+            {
+                richTextBox1.Text += "連線失敗\n";
+                this.BackColor = Color.Pink;
+                lb_connect_comport.Text = "連線失敗";
+            }
+            timer_display.Enabled = true;
+            timer_display_connect_comport_count = 0;
+
+            /*
             if (comboBox1.Text.Length == 0)
             {
                 MessageBox.Show("No comport selected.");
@@ -376,7 +397,9 @@ namespace imsLink
                     //MessageBox.Show("已經連上" + serialPort1.PortName);
                 }
                 else
+                {
                     MessageBox.Show("無法連上Comport, 請重新連線");
+                }
             }
             
             if (serialPort1.IsOpen)
@@ -387,6 +410,7 @@ namespace imsLink
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 flag_comport_ok = true;
             }
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -394,6 +418,7 @@ namespace imsLink
             if (flag_comport_ok == true)
             {
                 serialPort1.Close();
+                this.BackColor = Color.Yellow;
                 button1.Enabled = true;
                 button2.Enabled = false;
                 richTextBox1.ReadOnly = true;
@@ -1313,6 +1338,11 @@ namespace imsLink
                         flag_receive_camera_serial = 0;
                         flag_receive_camera_flash_data = 0;
                     }
+                    else if ((input[1] == 0x11) && (input[2] == 0x52) && (input[3] == 0x00))
+                    {
+                        //richTextBox1.Text += "get uart response from aries egd system.\n";
+                        flag_comport_connection_ok = true;
+                    }
                     else if (input[1] <= 0x58)  //ims send camera sensor data
                     {
                         int dd = (int)input[3];
@@ -1642,7 +1672,6 @@ namespace imsLink
             pictureBox1.Size = new Size(640, 480);
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
-            Comport_Scan();
             lb_a.Text = "";
             lb_b.Text = "";
             lb_d.Text = "";
@@ -1670,6 +1699,7 @@ namespace imsLink
             tb_mb_big_serial.Text = "0000000000000";
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
             lb_save_message.Text = "";
+            lb_connect_comport.Text = "";
 
             if (flag_release_mode == true)
             {
@@ -1697,6 +1727,27 @@ namespace imsLink
             btnCenter.BackgroundImage = imsLink.Properties.Resources.stop;
 
             check_webcam();
+
+            Comport_Scan();
+            this.BackColor = Color.Yellow;
+
+            /*
+            int ret;
+            ret = try_connect_comport();
+            if (ret == S_OK)
+            {
+                richTextBox1.Text += "已連上IMS EGD System\n";
+                lb_connect_comport.Text = "已連線";
+            }
+            else
+            {
+                richTextBox1.Text += "連線失敗\n";
+                this.BackColor = Color.Pink;
+                lb_connect_comport.Text = "連線失敗";
+            }
+            timer_display.Enabled = true;
+            timer_display_connect_comport_count = 0;
+            */
 
             /*
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -1832,8 +1883,6 @@ namespace imsLink
                 frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
                 frm.ShowDialog();   //顯示Form2視窗
             }
-
-            this.BackColor = Color.Yellow;
 
             toolTip1.SetToolTip(button17, "Zoom in");
             toolTip1.SetToolTip(button18, "Zoom out");
@@ -2106,6 +2155,34 @@ namespace imsLink
             DongleAddr_l = 0x20;
             DongleData = (byte)(0x10 | (cnt1 << 2));
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData); 
+        }
+
+        public bool Send_IMS_Data0(byte cc, byte xx, byte yy, byte zz)  //directly send data
+        {
+            byte[] data = new byte[5];
+
+            data[0] = cc;
+            data[1] = xx;
+            data[2] = yy;
+            data[3] = zz;
+            data[4] = CalcCheckSum(data, 4);
+
+            //serialPort1.Write(data, 0, data.Length);
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort1.Write(data, 0, data.Length);
+            }
+            /*
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                MessageBox.Show(ex.Message);
+            }
+            */
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+            return true;
         }
 
         public bool Send_IMS_Data(byte cc, byte xx, byte yy, byte zz)
@@ -5262,11 +5339,36 @@ namespace imsLink
             }
         }
 
+        bool flag_try_connect_comport = false;
         int read_connection_cnt = 0;
         int read_connection_fail_cnt = 0;
         private void timer_rtc_Tick(object sender, EventArgs e)
         {
+            if (flag_try_connect_comport == false)
+            {
+                flag_try_connect_comport = true;
+
+                int ret;
+                ret = try_connect_comport();
+                if (ret == S_OK)
+                {
+                    richTextBox1.Text += "已連上IMS EGD System\n";
+                    lb_connect_comport.Text = "已連線";
+                }
+                else
+                {
+                    richTextBox1.Text += "連線失敗\n";
+                    this.BackColor = Color.Pink;
+                    lb_connect_comport.Text = "連線失敗";
+                }
+                timer_display.Enabled = true;
+                timer_display_connect_comport_count = 0;
+            }
+
             if (flag_comport_ok == false)
+                return;
+
+            if (flag_comport_connection_ok == false)
                 return;
 
             //richTextBox1.Text += "C";
@@ -6981,6 +7083,9 @@ namespace imsLink
                 else
                 {
                     int SendData = data_R - 100;
+                    if ((SendData < 100) || (SendData > 4000))
+                        return;
+
                     richTextBox1.Text += "飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
 
                     if (SendData > 500)
@@ -7010,6 +7115,9 @@ namespace imsLink
                 else
                 {
                     int SendData = data_B - 100;
+                    if ((SendData < 100) || (SendData > 4000))
+                        return;
+
                     richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
 
                     if (SendData > 500)
@@ -7045,6 +7153,9 @@ namespace imsLink
                     timer_display_r_count = 0;
 
                     int SendData = data_R - 99;
+                    if ((SendData < 100) || (SendData > 4000))
+                        return;
+
                     //richTextBox1.Text += "\n飽和 目前 data_R = " + data_R.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
                     richTextBox1.Text += "R飽和 -99\n";
 
@@ -7103,6 +7214,9 @@ namespace imsLink
                             numericUpDown_expo.Value = data_expo;
 
                             int SendData = data_expo;
+                            if ((SendData < 10) || (SendData > 1000))
+                                return;
+
                             byte dd;
 
                             dd = (byte)(SendData / 256);
@@ -7134,6 +7248,9 @@ namespace imsLink
                     diff_b = -99;
                     timer_display_b_count = 0;
                     int SendData = data_B - 99;
+                    if ((SendData < 100) || (SendData > 4000))
+                        return;
+
                     //richTextBox1.Text += "飽和 目前 data_B = " + data_B.ToString() + " 減一些 減成 " + SendData.ToString() + "\n";
                     richTextBox1.Text += "B飽和 -99\n";
 
@@ -7183,6 +7300,9 @@ namespace imsLink
                 richTextBox1.Text += "R-" + diff.ToString() + " ";
 
                 int SendData = data_R - diff;
+                if ((SendData < 100) || (SendData > 4000))
+                    return;
+
                 //trackBar_R.Value = SendData;
                 numericUpDown_R.Value = SendData;
                 byte dd;
@@ -7213,6 +7333,9 @@ namespace imsLink
                 richTextBox1.Text += "R+" + diff.ToString() + " ";
 
                 int SendData = data_R + diff;
+                if ((SendData < 100) || (SendData > 4000))
+                    return;
+
                 //trackBar_R.Value = SendData;
                 numericUpDown_R.Value = SendData;
                 byte dd;
@@ -7249,6 +7372,9 @@ namespace imsLink
                 richTextBox1.Text += "B-" + diff.ToString() + " ";
 
                 int SendData = data_B - diff;
+                if ((SendData < 100) || (SendData > 4000))
+                    return;
+
                 //trackBar_B.Value = SendData;
                 numericUpDown_B.Value = SendData;
                 byte dd;
@@ -7277,6 +7403,9 @@ namespace imsLink
                 richTextBox1.Text += "B+" + diff.ToString() + " ";
 
                 int SendData = data_B + diff;
+                if ((SendData < 100) || (SendData > 4000))
+                    return;
+
                 //trackBar_B.Value = SendData;
                 numericUpDown_B.Value = SendData;
                 byte dd;
@@ -7380,6 +7509,26 @@ namespace imsLink
         {
             if (flag_release_mode == false)
             {
+                if (flag_comport_connection_ok == false)
+                {
+                    int ret;
+                    ret = try_connect_comport();
+                    if (ret == S_OK)
+                    {
+                        richTextBox1.Text += "已連上IMS EGD System\n";
+                        lb_connect_comport.Text = "已連線";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "連線失敗\n";
+                        this.BackColor = Color.Pink;
+                        lb_connect_comport.Text = "連線失敗";
+                    }
+                    timer_display.Enabled = true;
+                    timer_display_connect_comport_count = 0;
+                }
+
+                /*
                 if (comboBox1.Text.Length == 0)
                 {
                     MessageBox.Show("No comport selected.");
@@ -7407,6 +7556,7 @@ namespace imsLink
                     else
                         MessageBox.Show("無法連上Comport, 請重新連線");
                 }
+                */
             }
 
             if (serialPort1.IsOpen)
@@ -8192,12 +8342,12 @@ namespace imsLink
 
         private void bt_test_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "none\n";
+            richTextBox1.Text += "none\n";
             //write_awb_data_to_camera(data_R, data_B);
 
             //check_webcam();
 
-            check_comport();
+            //check_comport();
 
         }
 
@@ -8395,6 +8545,173 @@ namespace imsLink
                 if (timer_display_save_count == 10)
                     lb_save_message.Text = "";
             }
+
+            if (timer_display_connect_comport_count < 30)
+            {
+                timer_display_connect_comport_count++;
+                if (timer_display_connect_comport_count == 30)
+                    lb_connect_comport.Text = "";
+            }
+        
+        }
+
+        private void button41_Click_1(object sender, EventArgs e)
+        {
+            int ret;
+            ret = try_connect_comport();
+            if (ret == S_OK)
+            {
+                richTextBox1.Text += "已連上IMS EGD System\n";
+                lb_connect_comport.Text = "已連線";
+            }
+            else
+            {
+                richTextBox1.Text += "連線失敗\n";
+                this.BackColor = Color.Pink;
+                lb_connect_comport.Text = "連線失敗";
+            }
+            timer_display.Enabled = true;
+            timer_display_connect_comport_count = 0;
+        }
+
+        int try_connect_comport()
+        {
+            int ret = S_FALSE;
+            //if (flag_comport_ok == true)  always close any comport
+            {
+                serialPort1.Close();
+                this.BackColor = Color.Yellow;
+                button1.Enabled = true;
+                button2.Enabled = false;
+                richTextBox1.ReadOnly = true;
+                flag_comport_ok = false;
+            }
+
+            comboBox1.Items.Clear();    //Clear All items in Combobox
+            richTextBox1.Text += "check_comport ST\n";
+
+            string[] tempString = SerialPort.GetPortNames();
+            Array.Resize(ref COM_Ports_NameArr, tempString.Length);
+            tempString.CopyTo(COM_Ports_NameArr, 0);
+
+            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\n";
+            foreach (string port in COM_Ports_NameArr)
+            {
+                richTextBox1.Text += port + "\n";
+                comboBox1.Items.Add(port);
+            }
+
+            if (COM_Ports_NameArr.Length == 0)
+            {
+                richTextBox1.Text += "沒有comport\n";
+                flag_comport_ok = false;
+                return S_FALSE;
+            }
+            else if (COM_Ports_NameArr.Length == 1)
+            {
+                comboBox1.Text = COM_Ports_NameArr[0];
+            }
+            else
+            {
+                comboBox1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+            }
+
+            if (COM_Ports_NameArr.Length == 1)
+            {
+                richTextBox1.Text += "只有一個comport, try 一次\n";
+                ret = connect_comport(comboBox1.Text);
+            }
+            else
+            {
+                richTextBox1.Text += "多個comport\n";
+
+                int try_index;
+                for (int i = 0; i < COM_Ports_NameArr.Length; i++)
+                {
+                    try_index = (i + COM_Ports_NameArr.Length - 2) % COM_Ports_NameArr.Length;  //從倒數第二個找起
+
+                    //richTextBox1.Text += "try_index = " + try_index.ToString() + "\n";
+
+                    comboBox1.Text = COM_Ports_NameArr[try_index];
+
+                    serialPort1.Close();
+                    this.BackColor = Color.Yellow;
+                    button1.Enabled = true;
+                    button2.Enabled = false;
+                    richTextBox1.ReadOnly = true;
+                    flag_comport_ok = false;
+
+                    ret = connect_comport(COM_Ports_NameArr[try_index]);
+                    if (ret == S_OK)
+                    {
+                        richTextBox1.Text += "找到可以連線到IMS EGD System的comport, 在 " + COM_Ports_NameArr[try_index] + "\n";
+                        break;
+                    }
+                }
+            }
+            
+            if (ret == S_OK)
+                return S_OK;
+            else
+                return S_FALSE;
+        }
+
+        int connect_comport(string comport)
+        {
+            serialPort1.PortName = comport;
+            serialPort1.BaudRate = int.Parse(comboBox2.Text);
+
+            //serialPort1.Open(); //原本是這一行，改成以下18行。
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort1.Open();
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+                if (serialPort1.IsOpen)
+                {
+                    //MessageBox.Show("已經連上" + serialPort1.PortName);
+                }
+                else
+                {
+                    MessageBox.Show("無法連上Comport, 請重新連線");
+                }
+            }
+
+            flag_comport_ok = true;
+            flag_comport_connection_ok = false;
+            Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
+
+            int cnt = 0;
+            while ((flag_comport_connection_ok == false) && (cnt++ < 10))
+            {
+                richTextBox1.Text += ".";
+                delay(100);
+            }
+            //richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+            flag_comport_ok = false;
+
+            if (flag_comport_connection_ok == true)
+            {
+                if (serialPort1.IsOpen)
+                {
+                    button1.Enabled = false;
+                    button2.Enabled = true;
+                    richTextBox1.ReadOnly = false;
+                    this.BackColor = System.Drawing.SystemColors.ControlLight;
+                    flag_comport_ok = true;
+                    return S_OK;
+                }
+            }
+            else
+                flag_comport_ok = false;
+
+            return S_FALSE;
         }
     }
 }
