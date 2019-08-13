@@ -160,6 +160,11 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.cb_5X5 = new System.Windows.Forms.CheckBox();
+            this.cb_4X4 = new System.Windows.Forms.CheckBox();
+            this.cb_3X3 = new System.Windows.Forms.CheckBox();
+            this.cb_show_grid = new System.Windows.Forms.CheckBox();
+            this.cb_show_time = new System.Windows.Forms.CheckBox();
             this.lb_save_message = new System.Windows.Forms.Label();
             this.comboBox_webcam = new System.Windows.Forms.ComboBox();
             this.bt_erase = new System.Windows.Forms.Button();
@@ -323,6 +328,7 @@
             this.bt_goto_awb = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_connect_comport = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -364,13 +370,14 @@
             this.tp_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(261, 7);
+            this.button1.Location = new System.Drawing.Point(248, 15);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 33);
+            this.button1.Size = new System.Drawing.Size(58, 33);
             this.button1.TabIndex = 0;
             this.button1.Text = "Connect";
             this.button1.UseVisualStyleBackColor = true;
@@ -378,7 +385,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(331, 7);
+            this.button2.Location = new System.Drawing.Point(308, 15);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(64, 33);
             this.button2.TabIndex = 1;
@@ -391,7 +398,7 @@
             this.richTextBox1.BackColor = System.Drawing.Color.Black;
             this.richTextBox1.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(957, 71);
+            this.richTextBox1.Location = new System.Drawing.Point(961, 84);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(500, 586);
             this.richTextBox1.TabIndex = 2;
@@ -427,7 +434,7 @@
             this.button9.BackColor = System.Drawing.Color.Black;
             this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(401, 7);
+            this.button9.Location = new System.Drawing.Point(385, 12);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(64, 33);
             this.button9.TabIndex = 18;
@@ -439,7 +446,7 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 7);
+            this.comboBox1.Location = new System.Drawing.Point(6, 18);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(88, 27);
             this.comboBox1.TabIndex = 19;
@@ -453,7 +460,7 @@
             "9600",
             "19600",
             "115200"});
-            this.comboBox2.Location = new System.Drawing.Point(97, 7);
+            this.comboBox2.Location = new System.Drawing.Point(100, 18);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(88, 27);
             this.comboBox2.TabIndex = 20;
@@ -461,11 +468,11 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(191, 7);
+            this.button10.Location = new System.Drawing.Point(194, 15);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(64, 33);
+            this.button10.Size = new System.Drawing.Size(49, 33);
             this.button10.TabIndex = 21;
-            this.button10.Text = "COM Scan";
+            this.button10.Text = "Scan";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -482,7 +489,7 @@
             this.tabControl1.Controls.Add(this.tp_Layer);
             this.tabControl1.Controls.Add(this.tp_About);
             this.tabControl1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tabControl1.Location = new System.Drawing.Point(3, 45);
+            this.tabControl1.Location = new System.Drawing.Point(3, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(948, 616);
@@ -1764,6 +1771,11 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.cb_5X5);
+            this.tp_USB.Controls.Add(this.cb_4X4);
+            this.tp_USB.Controls.Add(this.cb_3X3);
+            this.tp_USB.Controls.Add(this.cb_show_grid);
+            this.tp_USB.Controls.Add(this.cb_show_time);
             this.tp_USB.Controls.Add(this.lb_save_message);
             this.tp_USB.Controls.Add(this.comboBox_webcam);
             this.tp_USB.Controls.Add(this.bt_erase);
@@ -1863,6 +1875,69 @@
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // cb_5X5
+            // 
+            this.cb_5X5.AutoSize = true;
+            this.cb_5X5.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_5X5.Location = new System.Drawing.Point(118, 530);
+            this.cb_5X5.Name = "cb_5X5";
+            this.cb_5X5.Size = new System.Drawing.Size(47, 17);
+            this.cb_5X5.TabIndex = 137;
+            this.cb_5X5.Text = "5X5";
+            this.cb_5X5.UseVisualStyleBackColor = true;
+            this.cb_5X5.CheckedChanged += new System.EventHandler(this.cb_5X5_CheckedChanged);
+            // 
+            // cb_4X4
+            // 
+            this.cb_4X4.AutoSize = true;
+            this.cb_4X4.Checked = true;
+            this.cb_4X4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_4X4.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_4X4.Location = new System.Drawing.Point(74, 530);
+            this.cb_4X4.Name = "cb_4X4";
+            this.cb_4X4.Size = new System.Drawing.Size(47, 17);
+            this.cb_4X4.TabIndex = 136;
+            this.cb_4X4.Text = "4X4";
+            this.cb_4X4.UseVisualStyleBackColor = true;
+            this.cb_4X4.CheckedChanged += new System.EventHandler(this.cb_4X4_CheckedChanged);
+            // 
+            // cb_3X3
+            // 
+            this.cb_3X3.AutoSize = true;
+            this.cb_3X3.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_3X3.Location = new System.Drawing.Point(30, 530);
+            this.cb_3X3.Name = "cb_3X3";
+            this.cb_3X3.Size = new System.Drawing.Size(47, 17);
+            this.cb_3X3.TabIndex = 135;
+            this.cb_3X3.Text = "3X3";
+            this.cb_3X3.UseVisualStyleBackColor = true;
+            this.cb_3X3.CheckedChanged += new System.EventHandler(this.cb_3X3_CheckedChanged);
+            // 
+            // cb_show_grid
+            // 
+            this.cb_show_grid.AutoSize = true;
+            this.cb_show_grid.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_grid.Location = new System.Drawing.Point(30, 504);
+            this.cb_show_grid.Name = "cb_show_grid";
+            this.cb_show_grid.Size = new System.Drawing.Size(113, 25);
+            this.cb_show_grid.TabIndex = 134;
+            this.cb_show_grid.Text = "顯示格線";
+            this.cb_show_grid.UseVisualStyleBackColor = true;
+            this.cb_show_grid.CheckedChanged += new System.EventHandler(this.cb_show_grid_CheckedChanged);
+            // 
+            // cb_show_time
+            // 
+            this.cb_show_time.AutoSize = true;
+            this.cb_show_time.Checked = true;
+            this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_time.Location = new System.Drawing.Point(30, 476);
+            this.cb_show_time.Name = "cb_show_time";
+            this.cb_show_time.Size = new System.Drawing.Size(113, 25);
+            this.cb_show_time.TabIndex = 133;
+            this.cb_show_time.Text = "顯示時間";
+            this.cb_show_time.UseVisualStyleBackColor = true;
+            // 
             // lb_save_message
             // 
             this.lb_save_message.AutoSize = true;
@@ -1878,9 +1953,9 @@
             // 
             this.comboBox_webcam.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_webcam.FormattingEnabled = true;
-            this.comboBox_webcam.Location = new System.Drawing.Point(362, 334);
+            this.comboBox_webcam.Location = new System.Drawing.Point(246, 334);
             this.comboBox_webcam.Name = "comboBox_webcam";
-            this.comboBox_webcam.Size = new System.Drawing.Size(320, 27);
+            this.comboBox_webcam.Size = new System.Drawing.Size(436, 27);
             this.comboBox_webcam.TabIndex = 131;
             this.comboBox_webcam.SelectedIndexChanged += new System.EventHandler(this.comboBox_webcam_SelectedIndexChanged);
             // 
@@ -1889,7 +1964,7 @@
             this.bt_erase.BackColor = System.Drawing.SystemColors.Control;
             this.bt_erase.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_erase.ForeColor = System.Drawing.Color.Red;
-            this.bt_erase.Location = new System.Drawing.Point(702, 300);
+            this.bt_erase.Location = new System.Drawing.Point(618, 446);
             this.bt_erase.Name = "bt_erase";
             this.bt_erase.Size = new System.Drawing.Size(64, 32);
             this.bt_erase.TabIndex = 130;
@@ -1902,7 +1977,7 @@
             this.bt_clear.BackColor = System.Drawing.SystemColors.Control;
             this.bt_clear.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_clear.ForeColor = System.Drawing.Color.Black;
-            this.bt_clear.Location = new System.Drawing.Point(865, 327);
+            this.bt_clear.Location = new System.Drawing.Point(758, 446);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(64, 32);
             this.bt_clear.TabIndex = 129;
@@ -1915,7 +1990,7 @@
             this.bt_test.BackColor = System.Drawing.SystemColors.Control;
             this.bt_test.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_test.ForeColor = System.Drawing.Color.Red;
-            this.bt_test.Location = new System.Drawing.Point(702, 390);
+            this.bt_test.Location = new System.Drawing.Point(688, 446);
             this.bt_test.Name = "bt_test";
             this.bt_test.Size = new System.Drawing.Size(64, 32);
             this.bt_test.TabIndex = 128;
@@ -1928,7 +2003,7 @@
             this.bt_awb_test2.BackColor = System.Drawing.SystemColors.Control;
             this.bt_awb_test2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_awb_test2.ForeColor = System.Drawing.Color.Black;
-            this.bt_awb_test2.Location = new System.Drawing.Point(866, 487);
+            this.bt_awb_test2.Location = new System.Drawing.Point(752, 369);
             this.bt_awb_test2.Name = "bt_awb_test2";
             this.bt_awb_test2.Size = new System.Drawing.Size(64, 32);
             this.bt_awb_test2.TabIndex = 127;
@@ -2047,7 +2122,7 @@
             this.bt_disable_timer_webcam.BackColor = System.Drawing.SystemColors.Control;
             this.bt_disable_timer_webcam.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_disable_timer_webcam.ForeColor = System.Drawing.Color.Black;
-            this.bt_disable_timer_webcam.Location = new System.Drawing.Point(866, 425);
+            this.bt_disable_timer_webcam.Location = new System.Drawing.Point(828, 407);
             this.bt_disable_timer_webcam.Name = "bt_disable_timer_webcam";
             this.bt_disable_timer_webcam.Size = new System.Drawing.Size(64, 32);
             this.bt_disable_timer_webcam.TabIndex = 116;
@@ -2060,7 +2135,7 @@
             this.bt_break.BackColor = System.Drawing.SystemColors.Control;
             this.bt_break.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_break.ForeColor = System.Drawing.Color.Black;
-            this.bt_break.Location = new System.Drawing.Point(866, 365);
+            this.bt_break.Location = new System.Drawing.Point(822, 371);
             this.bt_break.Name = "bt_break";
             this.bt_break.Size = new System.Drawing.Size(64, 32);
             this.bt_break.TabIndex = 115;
@@ -2081,6 +2156,13 @@
             this.comboBox_temperature.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_temperature.FormattingEnabled = true;
             this.comboBox_temperature.Items.AddRange(new object[] {
+            "1000K",
+            "1400K",
+            "1800K",
+            "2200K",
+            "2600K",
+            "3000K",
+            "3400K",
             "3800K",
             "4200K",
             "4600K",
@@ -2154,7 +2236,7 @@
             this.bt_awb_test_init.BackColor = System.Drawing.SystemColors.Control;
             this.bt_awb_test_init.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_awb_test_init.ForeColor = System.Drawing.Color.Black;
-            this.bt_awb_test_init.Location = new System.Drawing.Point(702, 437);
+            this.bt_awb_test_init.Location = new System.Drawing.Point(612, 369);
             this.bt_awb_test_init.Name = "bt_awb_test_init";
             this.bt_awb_test_init.Size = new System.Drawing.Size(64, 32);
             this.bt_awb_test_init.TabIndex = 109;
@@ -2167,7 +2249,7 @@
             this.bt_awb_test.BackColor = System.Drawing.SystemColors.Control;
             this.bt_awb_test.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_awb_test.ForeColor = System.Drawing.Color.Black;
-            this.bt_awb_test.Location = new System.Drawing.Point(702, 487);
+            this.bt_awb_test.Location = new System.Drawing.Point(682, 371);
             this.bt_awb_test.Name = "bt_awb_test";
             this.bt_awb_test.Size = new System.Drawing.Size(64, 32);
             this.bt_awb_test.TabIndex = 108;
@@ -2308,11 +2390,11 @@
             // bt_get_setup
             // 
             this.bt_get_setup.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_get_setup.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_get_setup.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_get_setup.ForeColor = System.Drawing.Color.Blue;
-            this.bt_get_setup.Location = new System.Drawing.Point(805, 23);
+            this.bt_get_setup.Location = new System.Drawing.Point(799, 490);
             this.bt_get_setup.Name = "bt_get_setup";
-            this.bt_get_setup.Size = new System.Drawing.Size(58, 32);
+            this.bt_get_setup.Size = new System.Drawing.Size(64, 32);
             this.bt_get_setup.TabIndex = 97;
             this.bt_get_setup.Text = "Get";
             this.bt_get_setup.UseVisualStyleBackColor = false;
@@ -2321,7 +2403,7 @@
             // tb_B
             // 
             this.tb_B.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_B.Location = new System.Drawing.Point(612, 488);
+            this.tb_B.Location = new System.Drawing.Point(487, 489);
             this.tb_B.Name = "tb_B";
             this.tb_B.Size = new System.Drawing.Size(58, 32);
             this.tb_B.TabIndex = 87;
@@ -2332,7 +2414,7 @@
             // tb_G
             // 
             this.tb_G.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_G.Location = new System.Drawing.Point(611, 424);
+            this.tb_G.Location = new System.Drawing.Point(486, 425);
             this.tb_G.Name = "tb_G";
             this.tb_G.Size = new System.Drawing.Size(58, 32);
             this.tb_G.TabIndex = 82;
@@ -2343,7 +2425,7 @@
             // tb_R
             // 
             this.tb_R.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_R.Location = new System.Drawing.Point(610, 364);
+            this.tb_R.Location = new System.Drawing.Point(485, 365);
             this.tb_R.Name = "tb_R";
             this.tb_R.Size = new System.Drawing.Size(58, 32);
             this.tb_R.TabIndex = 76;
@@ -2354,7 +2436,7 @@
             // trackBar_B
             // 
             this.trackBar_B.LargeChange = 1;
-            this.trackBar_B.Location = new System.Drawing.Point(229, 488);
+            this.trackBar_B.Location = new System.Drawing.Point(157, 488);
             this.trackBar_B.Maximum = 4095;
             this.trackBar_B.Name = "trackBar_B";
             this.trackBar_B.Size = new System.Drawing.Size(324, 45);
@@ -2366,7 +2448,7 @@
             // trackBar_G
             // 
             this.trackBar_G.LargeChange = 1;
-            this.trackBar_G.Location = new System.Drawing.Point(228, 424);
+            this.trackBar_G.Location = new System.Drawing.Point(156, 424);
             this.trackBar_G.Maximum = 4095;
             this.trackBar_G.Name = "trackBar_G";
             this.trackBar_G.Size = new System.Drawing.Size(324, 45);
@@ -2380,7 +2462,7 @@
             this.lb_BB.AutoSize = true;
             this.lb_BB.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_BB.ForeColor = System.Drawing.Color.Blue;
-            this.lb_BB.Location = new System.Drawing.Point(227, 469);
+            this.lb_BB.Location = new System.Drawing.Point(155, 469);
             this.lb_BB.Name = "lb_BB";
             this.lb_BB.Size = new System.Drawing.Size(19, 16);
             this.lb_BB.TabIndex = 86;
@@ -2391,7 +2473,7 @@
             this.bt_setup_B.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_B.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_B.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_B.Location = new System.Drawing.Point(803, 487);
+            this.bt_setup_B.Location = new System.Drawing.Point(551, 489);
             this.bt_setup_B.Name = "bt_setup_B";
             this.bt_setup_B.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_B.TabIndex = 84;
@@ -2404,7 +2486,7 @@
             this.lb_G.AutoSize = true;
             this.lb_G.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_G.ForeColor = System.Drawing.Color.Green;
-            this.lb_G.Location = new System.Drawing.Point(226, 405);
+            this.lb_G.Location = new System.Drawing.Point(154, 405);
             this.lb_G.Name = "lb_G";
             this.lb_G.Size = new System.Drawing.Size(20, 16);
             this.lb_G.TabIndex = 81;
@@ -2415,7 +2497,7 @@
             this.bt_setup_G.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_G.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_G.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_G.Location = new System.Drawing.Point(802, 423);
+            this.bt_setup_G.Location = new System.Drawing.Point(549, 425);
             this.bt_setup_G.Name = "bt_setup_G";
             this.bt_setup_G.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_G.TabIndex = 79;
@@ -2426,7 +2508,7 @@
             // trackBar_R
             // 
             this.trackBar_R.LargeChange = 1;
-            this.trackBar_R.Location = new System.Drawing.Point(227, 364);
+            this.trackBar_R.Location = new System.Drawing.Point(155, 364);
             this.trackBar_R.Maximum = 4095;
             this.trackBar_R.Name = "trackBar_R";
             this.trackBar_R.Size = new System.Drawing.Size(324, 45);
@@ -2440,7 +2522,7 @@
             this.lb_R.AutoSize = true;
             this.lb_R.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_R.ForeColor = System.Drawing.Color.Red;
-            this.lb_R.Location = new System.Drawing.Point(225, 345);
+            this.lb_R.Location = new System.Drawing.Point(153, 345);
             this.lb_R.Name = "lb_R";
             this.lb_R.Size = new System.Drawing.Size(19, 16);
             this.lb_R.TabIndex = 75;
@@ -2451,7 +2533,7 @@
             this.bt_setup_R.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_R.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_R.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_R.Location = new System.Drawing.Point(801, 363);
+            this.bt_setup_R.Location = new System.Drawing.Point(549, 367);
             this.bt_setup_R.Name = "bt_setup_R";
             this.bt_setup_R.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_R.TabIndex = 73;
@@ -2462,7 +2544,7 @@
             // tb_gain
             // 
             this.tb_gain.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_gain.Location = new System.Drawing.Point(610, 301);
+            this.tb_gain.Location = new System.Drawing.Point(556, 296);
             this.tb_gain.Name = "tb_gain";
             this.tb_gain.Size = new System.Drawing.Size(58, 32);
             this.tb_gain.TabIndex = 69;
@@ -2473,7 +2555,7 @@
             // tb_expo
             // 
             this.tb_expo.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_expo.Location = new System.Drawing.Point(610, 214);
+            this.tb_expo.Location = new System.Drawing.Point(558, 217);
             this.tb_expo.Name = "tb_expo";
             this.tb_expo.Size = new System.Drawing.Size(58, 32);
             this.tb_expo.TabIndex = 68;
@@ -2486,7 +2568,7 @@
             this.bt_LED.BackColor = System.Drawing.Color.Black;
             this.bt_LED.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_LED.ForeColor = System.Drawing.Color.Gold;
-            this.bt_LED.Location = new System.Drawing.Point(20, 390);
+            this.bt_LED.Location = new System.Drawing.Point(20, 384);
             this.bt_LED.Name = "bt_LED";
             this.bt_LED.Size = new System.Drawing.Size(60, 60);
             this.bt_LED.TabIndex = 66;
@@ -2497,7 +2579,7 @@
             // lb_gain
             // 
             this.lb_gain.AutoSize = true;
-            this.lb_gain.Location = new System.Drawing.Point(225, 273);
+            this.lb_gain.Location = new System.Drawing.Point(153, 273);
             this.lb_gain.Name = "lb_gain";
             this.lb_gain.Size = new System.Drawing.Size(46, 16);
             this.lb_gain.TabIndex = 67;
@@ -2508,7 +2590,7 @@
             this.bt_setup_gain.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_gain.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_gain.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_gain.Location = new System.Drawing.Point(801, 300);
+            this.bt_setup_gain.Location = new System.Drawing.Point(620, 296);
             this.bt_setup_gain.Name = "bt_setup_gain";
             this.bt_setup_gain.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_gain.TabIndex = 65;
@@ -2519,7 +2601,7 @@
             // trackBar_gain
             // 
             this.trackBar_gain.LargeChange = 1;
-            this.trackBar_gain.Location = new System.Drawing.Point(227, 292);
+            this.trackBar_gain.Location = new System.Drawing.Point(155, 292);
             this.trackBar_gain.Maximum = 511;
             this.trackBar_gain.Name = "trackBar_gain";
             this.trackBar_gain.Size = new System.Drawing.Size(324, 45);
@@ -2531,7 +2613,7 @@
             // lb_expo
             // 
             this.lb_expo.AutoSize = true;
-            this.lb_expo.Location = new System.Drawing.Point(224, 190);
+            this.lb_expo.Location = new System.Drawing.Point(152, 190);
             this.lb_expo.Name = "lb_expo";
             this.lb_expo.Size = new System.Drawing.Size(47, 16);
             this.lb_expo.TabIndex = 63;
@@ -2542,7 +2624,7 @@
             this.bt_setup_expo.BackColor = System.Drawing.SystemColors.Control;
             this.bt_setup_expo.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup_expo.ForeColor = System.Drawing.Color.Blue;
-            this.bt_setup_expo.Location = new System.Drawing.Point(801, 214);
+            this.bt_setup_expo.Location = new System.Drawing.Point(622, 218);
             this.bt_setup_expo.Name = "bt_setup_expo";
             this.bt_setup_expo.Size = new System.Drawing.Size(58, 32);
             this.bt_setup_expo.TabIndex = 61;
@@ -2553,7 +2635,7 @@
             // trackBar_expo
             // 
             this.trackBar_expo.LargeChange = 1;
-            this.trackBar_expo.Location = new System.Drawing.Point(227, 220);
+            this.trackBar_expo.Location = new System.Drawing.Point(155, 220);
             this.trackBar_expo.Maximum = 511;
             this.trackBar_expo.Name = "trackBar_expo";
             this.trackBar_expo.Size = new System.Drawing.Size(324, 45);
@@ -2567,7 +2649,7 @@
             this.bt_awb.BackColor = System.Drawing.SystemColors.Control;
             this.bt_awb.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_awb.ForeColor = System.Drawing.Color.Black;
-            this.bt_awb.Location = new System.Drawing.Point(805, 539);
+            this.bt_awb.Location = new System.Drawing.Point(752, 407);
             this.bt_awb.Name = "bt_awb";
             this.bt_awb.Size = new System.Drawing.Size(64, 32);
             this.bt_awb.TabIndex = 59;
@@ -2580,7 +2662,7 @@
             this.bt_write2.BackColor = System.Drawing.SystemColors.Control;
             this.bt_write2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_write2.ForeColor = System.Drawing.Color.Black;
-            this.bt_write2.Location = new System.Drawing.Point(707, 538);
+            this.bt_write2.Location = new System.Drawing.Point(707, 495);
             this.bt_write2.Name = "bt_write2";
             this.bt_write2.Size = new System.Drawing.Size(64, 32);
             this.bt_write2.TabIndex = 54;
@@ -2593,7 +2675,7 @@
             this.bt_read2.BackColor = System.Drawing.SystemColors.Control;
             this.bt_read2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_read2.ForeColor = System.Drawing.Color.Black;
-            this.bt_read2.Location = new System.Drawing.Point(614, 538);
+            this.bt_read2.Location = new System.Drawing.Point(614, 495);
             this.bt_read2.Name = "bt_read2";
             this.bt_read2.Size = new System.Drawing.Size(64, 32);
             this.bt_read2.TabIndex = 53;
@@ -2671,7 +2753,7 @@
             // 
             this.lb_rgb.AutoSize = true;
             this.lb_rgb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_rgb.Location = new System.Drawing.Point(27, 467);
+            this.lb_rgb.Location = new System.Drawing.Point(27, 447);
             this.lb_rgb.Name = "lb_rgb";
             this.lb_rgb.Size = new System.Drawing.Size(62, 21);
             this.lb_rgb.TabIndex = 48;
@@ -2694,7 +2776,7 @@
             this.btnCenter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCenter.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnCenter.ForeColor = System.Drawing.Color.Black;
-            this.btnCenter.Location = new System.Drawing.Point(66, 298);
+            this.btnCenter.Location = new System.Drawing.Point(66, 292);
             this.btnCenter.Name = "btnCenter";
             this.btnCenter.Size = new System.Drawing.Size(40, 40);
             this.btnCenter.TabIndex = 46;
@@ -2706,7 +2788,7 @@
             this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRight.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnRight.ForeColor = System.Drawing.Color.Black;
-            this.btnRight.Location = new System.Drawing.Point(112, 297);
+            this.btnRight.Location = new System.Drawing.Point(112, 291);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(40, 40);
             this.btnRight.TabIndex = 45;
@@ -2718,7 +2800,7 @@
             this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLeft.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnLeft.ForeColor = System.Drawing.Color.Black;
-            this.btnLeft.Location = new System.Drawing.Point(20, 297);
+            this.btnLeft.Location = new System.Drawing.Point(20, 291);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(40, 40);
             this.btnLeft.TabIndex = 44;
@@ -2730,7 +2812,7 @@
             this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDown.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnDown.ForeColor = System.Drawing.Color.Black;
-            this.btnDown.Location = new System.Drawing.Point(66, 344);
+            this.btnDown.Location = new System.Drawing.Point(66, 338);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(40, 40);
             this.btnDown.TabIndex = 43;
@@ -2742,7 +2824,7 @@
             this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnUp.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnUp.ForeColor = System.Drawing.Color.Black;
-            this.btnUp.Location = new System.Drawing.Point(66, 252);
+            this.btnUp.Location = new System.Drawing.Point(66, 246);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(40, 40);
             this.btnUp.TabIndex = 42;
@@ -2754,7 +2836,7 @@
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button19.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button19.ForeColor = System.Drawing.Color.Black;
-            this.button19.Location = new System.Drawing.Point(90, 390);
+            this.button19.Location = new System.Drawing.Point(90, 384);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(60, 60);
             this.button19.TabIndex = 41;
@@ -3474,7 +3556,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 664);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 682);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1461, 22);
             this.statusStrip1.TabIndex = 23;
@@ -3679,9 +3761,9 @@
             this.bt_goto_awb.BackColor = System.Drawing.Color.Maroon;
             this.bt_goto_awb.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_goto_awb.ForeColor = System.Drawing.Color.Gold;
-            this.bt_goto_awb.Location = new System.Drawing.Point(592, 7);
+            this.bt_goto_awb.Location = new System.Drawing.Point(586, 12);
             this.bt_goto_awb.Name = "bt_goto_awb";
-            this.bt_goto_awb.Size = new System.Drawing.Size(60, 35);
+            this.bt_goto_awb.Size = new System.Drawing.Size(64, 33);
             this.bt_goto_awb.TabIndex = 66;
             this.bt_goto_awb.Text = "AWB";
             this.bt_goto_awb.UseVisualStyleBackColor = false;
@@ -3696,18 +3778,32 @@
             this.lb_connect_comport.AutoSize = true;
             this.lb_connect_comport.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_connect_comport.ForeColor = System.Drawing.Color.Red;
-            this.lb_connect_comport.Location = new System.Drawing.Point(475, 12);
+            this.lb_connect_comport.Location = new System.Drawing.Point(460, 16);
             this.lb_connect_comport.Name = "lb_connect_comport";
             this.lb_connect_comport.Size = new System.Drawing.Size(58, 24);
             this.lb_connect_comport.TabIndex = 133;
             this.lb_connect_comport.Text = "COM";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.comboBox1);
+            this.groupBox5.Controls.Add(this.comboBox2);
+            this.groupBox5.Controls.Add(this.button10);
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Controls.Add(this.button2);
+            this.groupBox5.Location = new System.Drawing.Point(5, -3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(375, 58);
+            this.groupBox5.TabIndex = 135;
+            this.groupBox5.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1461, 686);
+            this.ClientSize = new System.Drawing.Size(1461, 704);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lb_connect_comport);
             this.Controls.Add(this.bt_goto_awb);
             this.Controls.Add(this.button35);
@@ -3727,12 +3823,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "imsLink A03";
@@ -3793,6 +3884,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4093,6 +4185,12 @@
         private System.Windows.Forms.Label lb_save_message;
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Label lb_connect_comport;
+        private System.Windows.Forms.CheckBox cb_show_time;
+        private System.Windows.Forms.CheckBox cb_show_grid;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.CheckBox cb_5X5;
+        private System.Windows.Forms.CheckBox cb_4X4;
+        private System.Windows.Forms.CheckBox cb_3X3;
     }
 }
 

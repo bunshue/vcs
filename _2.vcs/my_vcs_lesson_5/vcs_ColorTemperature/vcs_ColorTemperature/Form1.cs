@@ -365,6 +365,25 @@ namespace vcs_ColorTemperature
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "rgbinfos.Count = " + rgbinfos.Count.ToString() + "\n";
+            for (int i = 0; i < rgbinfos.Count; i++)
+            {
+                richTextBox1.Text += "temperature = " + rgbinfos[i].temperature + "\t";
+                richTextBox1.Text += "R = " + rgbinfos[i].r.ToString() + "  G = " + rgbinfos[i].g.ToString() + "  B = " + rgbinfos[i].b.ToString() + "\n";
+                //" R = " + rgbinfos[i].r.ToString() + " G = " + rgbinfos[i].g.ToString() + " B = " + rgbinfos[i].b.ToString() + "\n";
+
+
+            }
+
+        }
+
 
     }
 }

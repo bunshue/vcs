@@ -22,9 +22,9 @@ namespace imsLink
     {
         bool flag_release_mode = false;
 
-        bool flag_awb_debug = true;
+        bool flag_awb_debug = false;
 
-        bool flag_us_debug = false;
+        bool flag_usb_mode = true;  //for webcam
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
@@ -253,7 +253,7 @@ namespace imsLink
             numericUpDown_R.Value = trackBar_R.Value;
             numericUpDown_G.Value = trackBar_G.Value;
             numericUpDown_B.Value = trackBar_B.Value;
-            comboBox_temperature.SelectedIndex = 5; //6500K
+            comboBox_temperature.SelectedIndex = 12; //6500K
             numericUpDown_TG_R.Value = TARGET_AWB_R;
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
@@ -307,7 +307,7 @@ namespace imsLink
                 this.tp_Layer.Parent = null;    //Layer
             }
 
-            if (flag_us_debug == true)
+            if (flag_usb_mode == true)
             {
                 this.tp_Info.Parent = null;
                 this.tp_Connection.Parent = null;
@@ -317,17 +317,14 @@ namespace imsLink
                 this.tp_Serial_Auto.Parent = null;
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-            }
-
-            if (flag_us_debug == true)
-            {
-                tabControl1.SelectTab(tp_USB);       //程式啟動時，直接跳到USB那頁。
+                tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
                 timer_rtc.Enabled = false;
                 timer_get_rgb.Enabled = true;
+                Comport_Scan();
             }
             else
             {
-                //tabControl1.SelectedTab = tp_Connection;    //程式啟動時，直接跳到Connection那頁。
+                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
                 timer_rtc.Enabled = true;
                 timer_get_rgb.Enabled = false;
@@ -366,9 +363,9 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "連線失敗\n";
+                richTextBox1.Text += "未連線\n";
                 this.BackColor = Color.Pink;
-                lb_connect_comport.Text = "連線失敗";
+                lb_connect_comport.Text = "未連線";
             }
             timer_display.Enabled = true;
             timer_display_connect_comport_count = 0;
@@ -1744,9 +1741,9 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "連線失敗\n";
+                richTextBox1.Text += "未連線\n";
                 this.BackColor = Color.Pink;
-                lb_connect_comport.Text = "連線失敗";
+                lb_connect_comport.Text = "未連線";
             }
             timer_display.Enabled = true;
             timer_display_connect_comport_count = 0;
@@ -1879,7 +1876,7 @@ namespace imsLink
             // C# 設定視窗載入位置 
             this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-            if ((flag_release_mode == true) || (flag_us_debug == true))
+            if ((flag_release_mode == true) || (flag_usb_mode == true))
             {
                 //C# 軟體啟動、版權宣告視窗 
                 Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
@@ -1935,6 +1932,12 @@ namespace imsLink
             if (flag_awb_debug == true)
             {
                 bt_goto_awb_Click(sender, e);
+            }
+            if (cb_show_grid.Checked == false)
+            {
+                cb_3X3.Visible = false;
+                cb_4X4.Visible = false;
+                cb_5X5.Visible = false;
             }
         }
 
@@ -3279,18 +3282,39 @@ namespace imsLink
                                              (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
                                              w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
 
-            if (flag_us_debug == true)
-            {
+            if (cb_show_grid.Checked == true)
+            {   //顯示格線
                 int i;
-                for (i = 1; i <= 3; i++)
+                int j;
+
+                j = 0;
+                if (cb_3X3.Checked == true)
                 {
-                    gg.DrawLine(new Pen(Color.Silver, 1), w * i / 4, 0, w * i / 4, h);
-                    gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / 4, w, h * i / 4);
+                    j = 3;
                 }
+                else if (cb_4X4.Checked == true)
+                {
+                    j = 4;
+                }
+                else if (cb_5X5.Checked == true)
+                {
+                    j = 5;
+                }
+
+                if (j >= 2)
+                {
+                    for (i = 1; i <= (j - 1); i++)
+                    {
+                        gg.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
+                        gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
+                    }
+                }
+
+
             }
-            else
-            {
-                //寫字的功能
+
+            if (cb_show_time.Checked == true)
+            {   //顯示時間
                 drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 drawBrush = new SolidBrush(Color.Yellow);
                 drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
@@ -4069,8 +4093,8 @@ namespace imsLink
                 Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                 pHdc = g.GetHdc();
 
-                if (flag_us_debug == false)
-                {
+                if (cb_show_time.Checked == true)
+                {   //顯示時間
                     int xPos = 10;
                     int yPos = 10;
                     string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -4332,16 +4356,23 @@ namespace imsLink
                     bt_read_bpt.Visible = true;
                     bt_write_bpt.Visible = true;
 
-
-                    bt_awb_test_init.Location = new Point(170, 500);
-                    bt_awb_test.Location = new Point(170 + 70, 500);
+                    //第一排button
+                    bt_awb_test_init.Location = new Point(170 + 70 * 0, 500);
+                    bt_awb_test.Location = new Point(170 + 70 * 1, 500);
                     bt_awb_test2.Location = new Point(170 + 70 * 2, 500);
                     bt_break.Location = new Point(170 + 70 * 3, 500);
                     bt_awb.Location = new Point(170 + 70 * 4, 500);
                     bt_disable_timer_webcam.Location = new Point(170 + 70 * 5, 500);
+
+                    //第二排button
                     bt_erase.Location = new Point(170 + 70 * 2, 500 + 40);
                     bt_test.Location = new Point(170 + 70 * 4, 500 + 40);
                     bt_clear.Location = new Point(170 + 70 * 5, 500 + 40);
+
+                    //第三排button
+                    bt_read2.Location = new Point(170 + 70 * 3, 500 + 40 * 2);
+                    bt_write2.Location = new Point(170 + 70 * 4, 500 + 40 * 2);
+                    bt_get_setup.Location = new Point(170 + 70 * 5, 500 + 40 * 2);
 
                     lb_addr.Location = new Point(30, 620 - 100 + 30);
                     lb_0x1.Location = new Point(5, 650 + 3 - 100 + 30);
@@ -4353,14 +4384,11 @@ namespace imsLink
                     tb_3a.Location = new Point(30 + 200, 650 - 100 + 30);
                     tb_4a.Location = new Point(100 + 200, 650 - 100 + 30);
 
-                    bt_read2.Location = new Point(410 + 45 - 80, 650 - 100 + 30);
-                    bt_write2.Location = new Point(480 + 45 - 80, 650 - 100 + 30);
-
-                    lb_awb_result_expo.Location = new Point(5 + 102 * 0, 720 - 120 + 30);
-                    lb_awb_result_gain.Location = new Point(5 + 102 * 1 + 10, 720 - 120 + 30);
-                    lb_awb_result_R.Location = new Point(5 + 102 * 2 + 10, 720 - 120 + 30);
-                    lb_awb_result_G.Location = new Point(5 + 102 * 3 + 28*1 + 10, 720 - 120 + 30);
-                    lb_awb_result_B.Location = new Point(5 + 102 * 4 + 28*2, 720 - 120 + 30);
+                    lb_awb_result_expo.Location = new Point(5 + 102 * 0, 720 - 120 + 20);
+                    lb_awb_result_gain.Location = new Point(5 + 102 * 1 + 10, 720 - 120 + 20);
+                    lb_awb_result_R.Location = new Point(5 + 102 * 2 + 10, 720 - 120 + 20);
+                    lb_awb_result_G.Location = new Point(5 + 102 * 3 + 28*1 + 10, 720 - 120 + 20);
+                    lb_awb_result_B.Location = new Point(5 + 102 * 4 + 28*2, 720 - 120 + 20);
 
                     lb_awb_result_expo.ForeColor = Color.Silver;
                     lb_awb_result_gain.ForeColor = Color.Gold;
@@ -4368,57 +4396,55 @@ namespace imsLink
                     lb_awb_result_G.ForeColor = Color.Green;
                     lb_awb_result_B.ForeColor = Color.Blue;
 
-                    bt_get_setup.Location = new Point(480 + 45, 720 - 120 + 15 - 20);
-
                     //EXPO
-                    lb_expo.Location = new Point(30 / 2, 720 - 120 + 60);
-                    lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 60);
-                    lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 60);
+                    lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
+                    lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
+                    lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 45);
                     lb_range_1.Text = "0~1FF           0~511";
-                    trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 60);
-                    numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 60);
-                    tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 60);
-                    bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 60);
+                    trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 45);
+                    numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 45);
+                    tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 45);
+                    bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 45);
 
                     //GAIN
-                    lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50);
-                    lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50);
-                    lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50);
+                    lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50 - 15);
+                    lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50 - 15);
+                    lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50 - 15);
                     lb_range_2.Text = "0~1FF           0~511";
-                    trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50);
-                    numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50);
-                    tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50);
-                    bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50);
+                    trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                    numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                    tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                    bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
 
                     //R
-                    lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30);
-                    lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30);
-                    lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50);
+                    lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30 - 15);
+                    lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30 - 15);
+                    lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 - 15);
                     lb_range_3.Text = "0~FFF          0~4095";
-                    trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30);
-                    numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30);
-                    tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30);
-                    bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30);
+                    trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                    numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                    tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                    bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
 
                     //G
-                    lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20);
-                    lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20);
-                    lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40+30 + 20);
+                    lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20 - 15);
+                    lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20 - 15);
+                    lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40 + 30 + 20 - 15);
                     lb_range_4.Text = "0~FFF          0~4095";
-                    trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-                    numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-                    tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-                    bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                    trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                    numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                    tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                    bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
 
                     //B
-                    lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10);
-                    lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10);
-                    lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20+30 + 10);
+                    lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10 - 15);
+                    lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10 - 15);
+                    lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20 + 30 + 10 - 15);
                     lb_range_5.Text = "0~FFF          0~4095";
-                    trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10);
-                    numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
-                    tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10);
-                    bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10);
+                    trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                    numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                    tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                    bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
 
                     //TARGET RGB
                     comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2);
@@ -4574,6 +4600,16 @@ namespace imsLink
 
         private void button20_Click(object sender, EventArgs e)
         {
+            if (flag_comport_ok == true)
+            {
+                serialPort1.Close();
+                this.BackColor = Color.Yellow;
+                button1.Enabled = true;
+                button2.Enabled = false;
+                richTextBox1.ReadOnly = true;
+                flag_comport_ok = false;
+            }
+
             if (Cam != null)
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
@@ -5389,9 +5425,9 @@ namespace imsLink
                 }
                 else
                 {
-                    richTextBox1.Text += "連線失敗\n";
+                    richTextBox1.Text += "未連線\n";
                     this.BackColor = Color.Pink;
-                    lb_connect_comport.Text = "連線失敗";
+                    lb_connect_comport.Text = "未連線";
                 }
                 timer_display.Enabled = true;
                 timer_display_connect_comport_count = 0;
@@ -5492,10 +5528,11 @@ namespace imsLink
             return Color.FromArgb(Red, Green, Blue);
         }
 
-        int cccc = 0;
+        /*int cccc = 0;
         int total_RGB_R_old = -1;
         int total_RGB_G_old = -1;
         int total_RGB_B_old = -1;
+        */
         private void timer_get_rgb_Tick(object sender, EventArgs e)
         {
             //txtPoint.Text = Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString();
@@ -5504,22 +5541,27 @@ namespace imsLink
             panel1.BackColor = cl;
             lb_rgb.Text = cl.R + ", " + cl.G + ", " + cl.B;
 
-            cccc++;
-            if ((cccc % 50) == 0)
+            /*
+            if (flag_awb_debug == true)
             {
-                //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
-                if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
+                cccc++;
+                if ((cccc % 50) == 0)
                 {
-                    richTextBox1.Text += "refresh webcam\n";
-                    button12_Click_1(sender, e);
-                }
-                else
-                {
-                    total_RGB_R_old = total_RGB_R;
-                    total_RGB_G_old = total_RGB_G;
-                    total_RGB_B_old = total_RGB_B;
+                    //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
+                    if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
+                    {
+                        richTextBox1.Text += "refresh webcam\n";
+                        button12_Click_1(sender, e);
+                    }
+                    else
+                    {
+                        total_RGB_R_old = total_RGB_R;
+                        total_RGB_G_old = total_RGB_G;
+                        total_RGB_B_old = total_RGB_B;
+                    }
                 }
             }
+            */
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -5680,7 +5722,7 @@ namespace imsLink
         {
             if (flag_awb_debug == false)
                 return;
-            if (flag_us_debug == true)
+            if (flag_usb_mode == true)
                 return;
 
             int x_st_old = 0;
@@ -6087,7 +6129,7 @@ namespace imsLink
         {
             if (flag_awb_debug == false)
                 return;
-            if (flag_us_debug == true)
+            if (flag_usb_mode == true)
                 return;
 
             this.pictureBox1.Focus();
@@ -7559,9 +7601,9 @@ namespace imsLink
                     }
                     else
                     {
-                        richTextBox1.Text += "連線失敗\n";
+                        richTextBox1.Text += "未連線\n";
                         this.BackColor = Color.Pink;
-                        lb_connect_comport.Text = "連線失敗";
+                        lb_connect_comport.Text = "未連線";
                     }
                     timer_display.Enabled = true;
                     timer_display_connect_comport_count = 0;
@@ -7636,89 +7678,138 @@ namespace imsLink
         {
             if (comboBox_temperature.SelectedIndex == 0)
             {
+                richTextBox1.Text += "1000K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 56;
+                TARGET_AWB_B = 0;
+            }
+            else if (comboBox_temperature.SelectedIndex == 1)
+            {
+                richTextBox1.Text += "1400K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 101;
+                TARGET_AWB_B = 0;
+            }
+            else if (comboBox_temperature.SelectedIndex == 2)
+            {
+                richTextBox1.Text += "1800K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 126;
+                TARGET_AWB_B = 0;
+            }
+            else if (comboBox_temperature.SelectedIndex == 3)
+            {
+                richTextBox1.Text += "2200K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 147;
+                TARGET_AWB_B = 44;
+            }
+            else if (comboBox_temperature.SelectedIndex == 4)
+            {
+                richTextBox1.Text += "2600K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 165;
+                TARGET_AWB_B = 79;
+            }
+            else if (comboBox_temperature.SelectedIndex == 5)
+            {
+                richTextBox1.Text += "3000K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 180;
+                TARGET_AWB_B = 107;
+            }
+            else if (comboBox_temperature.SelectedIndex == 6)
+            {
+                richTextBox1.Text += "3400K\n";
+                TARGET_AWB_R = 255;
+                TARGET_AWB_G = 193;
+                TARGET_AWB_B = 132;
+            }
+            else if (comboBox_temperature.SelectedIndex == 7)
+            {
                 richTextBox1.Text += "3800K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 204;
                 TARGET_AWB_B = 153;
             }
-            else if (comboBox_temperature.SelectedIndex == 1)
+            else if (comboBox_temperature.SelectedIndex == 8)
             {
                 richTextBox1.Text += "5500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 213;
                 TARGET_AWB_B = 173;
             }
-            else if (comboBox_temperature.SelectedIndex == 2)
+            else if (comboBox_temperature.SelectedIndex == 9)
             {
                 richTextBox1.Text += "5500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 221;
                 TARGET_AWB_B = 190;
             }
-            else if (comboBox_temperature.SelectedIndex == 3)
+            else if (comboBox_temperature.SelectedIndex == 10)
             {
                 richTextBox1.Text += "5500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 236;
                 TARGET_AWB_B = 224;
             }
-            else if (comboBox_temperature.SelectedIndex == 4)
+            else if (comboBox_temperature.SelectedIndex == 11)
             {
                 richTextBox1.Text += "5700K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 239;
                 TARGET_AWB_B = 230;
             }
-            else if (comboBox_temperature.SelectedIndex == 5)
+            else if (comboBox_temperature.SelectedIndex == 12)
             {
                 richTextBox1.Text += "6500K\n";
                 TARGET_AWB_R = 255;
                 TARGET_AWB_G = 249;
                 TARGET_AWB_B = 253;
             }
-            else if (comboBox_temperature.SelectedIndex == 6)
+            else if (comboBox_temperature.SelectedIndex == 13)
             {
                 richTextBox1.Text += "6700K\n";
                 TARGET_AWB_R = 252;
                 TARGET_AWB_G = 247;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 7)
+            else if (comboBox_temperature.SelectedIndex == 14)
             {
                 richTextBox1.Text += "6900K\n";
                 TARGET_AWB_R = 247;
                 TARGET_AWB_G = 245;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 8)
+            else if (comboBox_temperature.SelectedIndex == 15)
             {
                 richTextBox1.Text += "7100K\n";
                 TARGET_AWB_R = 243;
                 TARGET_AWB_G = 242;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 9)
+            else if (comboBox_temperature.SelectedIndex == 16)
             {
                 richTextBox1.Text += "7300K\n";
                 TARGET_AWB_R = 239;
                 TARGET_AWB_G = 240;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 10)
+            else if (comboBox_temperature.SelectedIndex == 17)
             {
                 richTextBox1.Text += "7500K\n";
                 TARGET_AWB_R = 235;
                 TARGET_AWB_G = 238;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 11)
+            else if (comboBox_temperature.SelectedIndex == 18)
             {
                 richTextBox1.Text += "8500K\n";
                 TARGET_AWB_R = 220;
                 TARGET_AWB_G = 229;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 12)
+            else if (comboBox_temperature.SelectedIndex == 19)
             {
                 richTextBox1.Text += "9500K\n";
                 TARGET_AWB_R = 208;
@@ -7738,7 +7829,7 @@ namespace imsLink
         {
             if (flag_awb_debug == false)
                 return;
-            if (flag_us_debug == true)
+            if (flag_usb_mode == true)
                 return;
 
             int x_st = 0;
@@ -8308,6 +8399,40 @@ namespace imsLink
         private void bt_awb_test2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "none\n";
+            richTextBox1.Text += "微調\n";
+
+            richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+
+            int ret;
+            int ok_cnt = 0;
+            int check_cnt = 0;
+            while (true)
+            {
+                check_cnt++;
+                if (check_cnt < 10)
+                    tolerance_ratio = 5;
+                else if (check_cnt < 15)
+                    tolerance_ratio = 3;
+                else if (check_cnt < 20)
+                    tolerance_ratio = 2;
+                else
+                    tolerance_ratio = 1;
+                richTextBox1.Text += "i = " + check_cnt.ToString() + ", t = " + tolerance_ratio.ToString() + " ";
+                ret = awb_modify();
+                if (ret == S_OK)
+                {
+                    ok_cnt++;
+                    richTextBox1.Text += "S_OK " + ok_cnt.ToString() + " ";
+                    if (ok_cnt == 3)
+                        break;
+                }
+                else
+                    ok_cnt = 0;
+            }
+            richTextBox1.Text += "細調 SP : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            tolerance_ratio = 1;
+
+
         }
 
         int precheck_RGB_saturation()
@@ -8477,6 +8602,11 @@ namespace imsLink
                     Cam.Start();   // WebCam starts capturing images.
                     flag_camera_start = 1;
                     richTextBox1.Text += "有影像裝置\n";
+
+                    //string webcam_name;
+                    int i = 0;
+                    //webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                    comboBox_webcam.Text = comboBox_webcam.Items[i].ToString();
                 }
             }
             else
@@ -8585,9 +8715,9 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "連線失敗\n";
+                richTextBox1.Text += "未連線\n";
                 this.BackColor = Color.Pink;
-                lb_connect_comport.Text = "連線失敗";
+                lb_connect_comport.Text = "未連線";
             }
             timer_display.Enabled = true;
             timer_display_connect_comport_count = 0;
@@ -8731,6 +8861,49 @@ namespace imsLink
                 flag_comport_ok = false;
 
             return S_FALSE;
+        }
+
+        private void cb_show_grid_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_show_grid.Checked == true)
+            {
+                cb_3X3.Visible = true;
+                cb_4X4.Visible = true;
+                cb_5X5.Visible = true;
+            }
+            else
+            {
+                cb_3X3.Visible = false;
+                cb_4X4.Visible = false;
+                cb_5X5.Visible = false;
+            }
+        }
+
+        private void cb_3X3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_3X3.Checked == true)
+            {
+                cb_4X4.Checked = false;
+                cb_5X5.Checked = false;
+            }
+        }
+
+        private void cb_4X4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_4X4.Checked == true)
+            {
+                cb_3X3.Checked = false;
+                cb_5X5.Checked = false;
+            }
+        }
+
+        private void cb_5X5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_5X5.Checked == true)
+            {
+                cb_3X3.Checked = false;
+                cb_4X4.Checked = false;
+            }
         }
     }
 }
