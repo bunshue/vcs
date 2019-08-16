@@ -20,11 +20,12 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = false;
+        bool flag_release_mode = true;
 
-        bool flag_awb_debug = false;
+        bool flag_awb_debug = true;
 
-        bool flag_usb_mode = true;  //for webcam
+        bool flag_usb_mode = false;  //for webcam
+        bool flag_check_webcam_signal = false;
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
@@ -72,6 +73,8 @@ namespace imsLink
         int flag_need_to_merge_data = 0;
         int flag_burn_long_cnt = 0;
         int flag_camera_start = 0;
+        int flag_camera_use_insighteyes = 0;
+        int flag_camera_already_have_serial = 0;
         byte cnt1 = 0;
         int cnt3 = 0;
 		int g_conn_status = CAMERA_UNKNOWN;
@@ -167,14 +170,14 @@ namespace imsLink
         int tolerance = 0;
         int tolerance_ratio = 1;
 
-        private const int CHECK_SATURATION_FRAME = 10;
+        private const int CHECK_SATURATION_FRAME = 3;
         bool flag_check_rgb_saturation = false;
         int rgb_saturation_check_cnt = 30000;
         int rgb_r_saturation_cnt = 0;
         int rgb_g_saturation_cnt = 0;
         int rgb_b_saturation_cnt = 0;
 
-        private const int CHECK_AWB_FRAME = 10;
+        private const int CHECK_AWB_FRAME = 3;
         bool flag_check_rgb = false;
         int rgb_check_cnt = 30000;
         int rgb_r_ok_cnt = 0;
@@ -253,7 +256,8 @@ namespace imsLink
             numericUpDown_R.Value = trackBar_R.Value;
             numericUpDown_G.Value = trackBar_G.Value;
             numericUpDown_B.Value = trackBar_B.Value;
-            comboBox_temperature.SelectedIndex = 12; //6500K
+            //comboBox_temperature.SelectedIndex = 12; //6500K
+            comboBox_temperature.SelectedIndex = 29; //7700K modified
             numericUpDown_TG_R.Value = TARGET_AWB_R;
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
@@ -303,6 +307,7 @@ namespace imsLink
             if (flag_release_mode == true)
             {
                 this.tp_Camera.Parent = null;   //camera
+                this.tp_Camera_Model.Parent = null;   //camera model
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
             }
@@ -592,7 +597,7 @@ namespace imsLink
                         }
                         else
                         {
-                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
+                            richTextBox1.Text += "a unknown flag_request_item = " + flag_request_item.ToString() + "\n";
                         }
                     
                     }
@@ -624,8 +629,14 @@ namespace imsLink
                         tb_info_e2.BackColor = Color.Red;
 
                     break;
+                case AWB_PAGE:
+                    richTextBox1.Text += "AWB Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                        + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                        + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                        + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n";
+                    break;
                 default:
-                    richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
+                    richTextBox1.Text += "b unknown flag_request_item = " + flag_request_item.ToString() + "\n";
                     break;
 
             }
@@ -885,8 +896,29 @@ namespace imsLink
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             break;
+                                        case AWB_PAGE:
+                                            int data_r = input[0] * 256 + input[1];
+                                            int data_b = input[2] * 256 + input[3];
+                                            richTextBox1.Text += "camera AWB data R : 0x" + data_r.ToString("X2") + "  B : 0x" + data_b.ToString("X2") + "\n";
+
+                                            if ((data_r == 0) && (data_b == 0))
+                                            {
+                                                lb_awb_data.Text = "無AWB資料";
+
+                                            }
+                                            else
+                                            {
+                                                //lb_awb_data.Text = "R : 0x" + data_r.ToString("X4") + "  B : 0x" + data_b.ToString("X4");
+                                                lb_awb_data.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
+                                            }
+
+                                            richTextBox1.Text += "AWB raw Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                                + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                                + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                                + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n";
+                                            break;
                                         default:
-                                            richTextBox1.Text += "unknown flag_request_item = " + flag_request_item.ToString() + "\n";
+                                            richTextBox1.Text += "c unknown flag_request_item = " + flag_request_item.ToString() + "\n";
                                             break;
 
                                     }
@@ -1070,7 +1102,6 @@ namespace imsLink
                                     lb_write_camera_serial2.ForeColor = Color.Black;
                                     g2.Clear(BackColor);
                                     g2.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
-
                                 }
                                 else
                                 {
@@ -1081,7 +1112,6 @@ namespace imsLink
                                     g2.Clear(BackColor);
                                     g2.DrawString("驗證失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
                                     bt_confirm.Visible = true;
-
                                 }
                                 //lb_sn2.Text = "";
 
@@ -1098,16 +1128,6 @@ namespace imsLink
                                 ////lb_mesg3.Text = stopwatch.ElapsedMilliseconds.ToString() + " msec";
 
                             }
-
-
-
-
-
-
-
-
-
-
 
                             if (flag_receive_camera_serial == 1)
                             {
@@ -1337,6 +1357,19 @@ namespace imsLink
                         flag_wait_receive_data = 0;
                         flag_receive_camera_serial = 0;
                         flag_receive_camera_flash_data = 0;
+                    }
+                    else if ((input[1] == 0xEE) && (input[2] == 0xEE))
+                    {
+                        if (input[3] == 0x00)
+                        {
+                            flag_camera_already_have_serial = 0;
+                            richTextBox1.Text += "aries says no camera serial.........\n";
+                        }
+                        else
+                        {
+                            flag_camera_already_have_serial = 1;
+                            richTextBox1.Text += "aries says already have camera serial.........\n";
+                        }
                     }
                     else if ((input[1] == 0x11) && (input[2] == 0x52) && (input[3] == 0x00))
                     {
@@ -1700,6 +1733,7 @@ namespace imsLink
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
             lb_save_message.Text = "";
             lb_connect_comport.Text = "";
+            lb_awb_data.Text = "";
 
             if (flag_release_mode == true)
             {
@@ -1792,10 +1826,13 @@ namespace imsLink
 
             bt_awb.Visible = false;
             bt_awb_test.Visible = false;
+            progressBar_awb.Visible = false;
             bt_awb_test2.Visible = false;
             bt_awb_test_init.Visible = false;
             bt_disable_timer_webcam.Visible = false;
             bt_erase.Visible = false;
+            bt_read_awb.Visible = false;
+            lb_awb_data.Visible = false;
             bt_test.Visible = false;
             bt_clear.Visible = false;
             bt_break.Visible = false;
@@ -3088,10 +3125,13 @@ namespace imsLink
 
                     bt_awb.Visible = false;
                     bt_awb_test.Visible = false;
+                    progressBar_awb.Visible = false;
                     bt_awb_test2.Visible = false;
                     bt_awb_test_init.Visible = false;
                     bt_disable_timer_webcam.Visible = false;
                     bt_erase.Visible = false;
+                    bt_read_awb.Visible = false;
+                    lb_awb_data.Visible = false;
                     bt_test.Visible = false;
                     bt_clear.Visible = false;
                     bt_break.Visible = false;
@@ -3221,7 +3261,7 @@ namespace imsLink
             int ww = awb_block;
             int hh = awb_block;
 
-            if (flag_awb_debug == true)
+            if ((flag_awb_debug == true) || (flag_check_webcam_signal == true))
             {
                 frame_cnt++;
                 if (frame_cnt == 5)
@@ -3263,6 +3303,10 @@ namespace imsLink
                         }
                     }
                     GC.Collect();       //回收資源
+
+                    total_RGB_R = total_R;
+                    total_RGB_G = total_G;
+                    total_RGB_B = total_B;
                 }
             }
 
@@ -4224,6 +4268,11 @@ namespace imsLink
 
         private void button19_Click(object sender, EventArgs e)
         {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             //richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
@@ -4263,9 +4312,11 @@ namespace imsLink
 
                 if (flag_awb_debug == true)
                 {
-                    pictureBox1.Location = new Point(170 + 400 + 30, 15);
-                    this.richTextBox1.Location = new System.Drawing.Point(170, 90);
-                    this.richTextBox1.Size = new System.Drawing.Size(400 + 30, 470);
+                    pictureBox1.Location = new Point(170 + 400 + 30, 7);
+                   
+                    this.richTextBox1.Location = new System.Drawing.Point(150, 90);
+                    this.richTextBox1.Size = new System.Drawing.Size(400 + 30 + 20, 250);
+
                     lb_0x1.Visible = true;
                     lb_0x2.Visible = true;
                     lb_0x3.Visible = true;
@@ -4281,10 +4332,13 @@ namespace imsLink
 
                     bt_awb.Visible = true;
                     bt_awb_test.Visible = true;
+                    progressBar_awb.Visible = true;
                     bt_awb_test2.Visible = true;
                     bt_awb_test_init.Visible = true;
                     bt_disable_timer_webcam.Visible = true;
                     bt_erase.Visible = true;
+                    bt_read_awb.Visible = true;
+                    lb_awb_data.Visible = true;
                     bt_test.Visible = true;
                     bt_clear.Visible = true;
                     bt_break.Visible = true;
@@ -4356,39 +4410,64 @@ namespace imsLink
                     bt_read_bpt.Visible = true;
                     bt_write_bpt.Visible = true;
 
+                    bt_awb_test.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200);
+                    bt_awb_test.Size = new Size(380, 97);
+
+                    progressBar_awb.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200 + 100);
+
+                    //button
+                    x_st = 140;
+                    y_st = 415;
+                    dx = 70;
+                    dy = 40;
+
+                    //第零排button
+                    bt_read_awb.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+                    bt_erase.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+                    lb_awb_data.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 4);
+                    bt_get_setup.Location = new Point(x_st + dx * 6 - 5, y_st + dy * 0);
+
                     //第一排button
-                    bt_awb_test_init.Location = new Point(170 + 70 * 0, 500);
-                    bt_awb_test.Location = new Point(170 + 70 * 1, 500);
-                    bt_awb_test2.Location = new Point(170 + 70 * 2, 500);
-                    bt_break.Location = new Point(170 + 70 * 3, 500);
-                    bt_awb.Location = new Point(170 + 70 * 4, 500);
-                    bt_disable_timer_webcam.Location = new Point(170 + 70 * 5, 500);
+                    bt_awb_test_init.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+                    //bt_awb_test.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+                    bt_awb_test2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+                    bt_break.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+                    bt_awb.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+                    bt_disable_timer_webcam.Location = new Point(x_st + dx * 5, y_st + dy * 1);
 
                     //第二排button
-                    bt_erase.Location = new Point(170 + 70 * 2, 500 + 40);
-                    bt_test.Location = new Point(170 + 70 * 4, 500 + 40);
-                    bt_clear.Location = new Point(170 + 70 * 5, 500 + 40);
+                    bt_test.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+                    bt_clear.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
-                    //第三排button
-                    bt_read2.Location = new Point(170 + 70 * 3, 500 + 40 * 2);
-                    bt_write2.Location = new Point(170 + 70 * 4, 500 + 40 * 2);
-                    bt_get_setup.Location = new Point(170 + 70 * 5, 500 + 40 * 2);
+                    //讀寫相機暫存器
+                    x_st = 140;
+                    y_st = 520;
+                    dx = 170;
 
-                    lb_addr.Location = new Point(30, 620 - 100 + 30);
-                    lb_0x1.Location = new Point(5, 650 + 3 - 100 + 30);
-                    tb_1a.Location = new Point(30, 650 - 100 + 30);
-                    tb_2a.Location = new Point(100, 650 - 100 + 30);
+                    lb_addr.Location = new Point(30, y_st + 5);
+                    lb_0x1.Location = new Point(5, y_st + 3 + 30);
+                    tb_1a.Location = new Point(30, y_st + 30);
+                    tb_2a.Location = new Point(100, y_st + 30);
 
-                    lb_data.Location = new Point(30 + 200, 620 - 100 + 30);
-                    lb_0x2.Location = new Point(5 + 200, 650 + 3 - 100 + 30);
-                    tb_3a.Location = new Point(30 + 200, 650 - 100 + 30);
-                    tb_4a.Location = new Point(100 + 200, 650 - 100 + 30);
+                    lb_data.Location = new Point(30 + dx, y_st + 5);
+                    lb_0x2.Location = new Point(5 + dx, y_st + 3 + 30);
+                    tb_3a.Location = new Point(30 + dx, y_st + 30);
+                    tb_4a.Location = new Point(100 + dx, y_st + 30);
 
-                    lb_awb_result_expo.Location = new Point(5 + 102 * 0, 720 - 120 + 20);
-                    lb_awb_result_gain.Location = new Point(5 + 102 * 1 + 10, 720 - 120 + 20);
-                    lb_awb_result_R.Location = new Point(5 + 102 * 2 + 10, 720 - 120 + 20);
-                    lb_awb_result_G.Location = new Point(5 + 102 * 3 + 28*1 + 10, 720 - 120 + 20);
-                    lb_awb_result_B.Location = new Point(5 + 102 * 4 + 28*2, 720 - 120 + 20);
+                    x_st = 140;
+                    dx = 70;
+                    bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
+                    bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
+
+                    //EXPO GAIN R G B
+                    x_st = 140;
+                    y_st = 390;
+                    dx = 80;
+                    lb_awb_result_expo.Location = new Point(x_st + dx * 0, y_st);
+                    lb_awb_result_gain.Location = new Point(x_st + dx * 1, y_st);
+                    lb_awb_result_R.Location = new Point(x_st + dx * 2, y_st);
+                    lb_awb_result_G.Location = new Point(x_st + dx * 3 + 20, y_st);
+                    lb_awb_result_B.Location = new Point(x_st + dx * 4 + 40, y_st);
 
                     lb_awb_result_expo.ForeColor = Color.Silver;
                     lb_awb_result_gain.ForeColor = Color.Gold;
@@ -4470,7 +4549,7 @@ namespace imsLink
                 }
                 else
                 {
-                    pictureBox1.Location = new Point(170 + 90, 10);
+                    pictureBox1.Location = new Point(170 + 90, 7);
                     richTextBox1.Visible = false;
                     lb_save_message.Visible = true;
                 }
@@ -4519,10 +4598,13 @@ namespace imsLink
 
                     bt_awb.Visible = false;
                     bt_awb_test.Visible = false;
+                    progressBar_awb.Visible = false;
                     bt_awb_test2.Visible = false;
                     bt_awb_test_init.Visible = false;
                     bt_disable_timer_webcam.Visible = false;
                     bt_erase.Visible = false;
+                    bt_read_awb.Visible = false;
+                    lb_awb_data.Visible = false;
                     bt_test.Visible = false;
                     bt_clear.Visible = false;
                     bt_break.Visible = false;
@@ -5528,11 +5610,11 @@ namespace imsLink
             return Color.FromArgb(Red, Green, Blue);
         }
 
-        /*int cccc = 0;
+        int cccc = 0;
         int total_RGB_R_old = -1;
         int total_RGB_G_old = -1;
         int total_RGB_B_old = -1;
-        */
+
         private void timer_get_rgb_Tick(object sender, EventArgs e)
         {
             //txtPoint.Text = Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString();
@@ -5541,8 +5623,7 @@ namespace imsLink
             panel1.BackColor = cl;
             lb_rgb.Text = cl.R + ", " + cl.G + ", " + cl.B;
 
-            /*
-            if (flag_awb_debug == true)
+            if (flag_check_webcam_signal == true)
             {
                 cccc++;
                 if ((cccc % 50) == 0)
@@ -5561,7 +5642,6 @@ namespace imsLink
                     }
                 }
             }
-            */
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -5670,46 +5750,71 @@ namespace imsLink
 
                 serialPort1.Write(sn_data_tmp, 0, 20);
 
-                richTextBox1.Text += "序號 : 寫入資料  完成\n";
+                flag_camera_already_have_serial = 1;
+                cnt = 0;
+                int cnt_max = 30;
+                while ((flag_camera_already_have_serial == 1) && (cnt < cnt_max))
+                {
+                    cnt++;
+                    richTextBox1.Text += "s";
+                    //richTextBox1.Text += "e" + cnt.ToString() + " ";
+                    delay(10);
+                }
 
-                lb_write_camera_serial2.Text = "寫入1";
+                if (flag_camera_already_have_serial == 1)
+                {
+                    richTextBox1.Text += "相機已有序號, break\n";
+                    lb_write_camera_serial2.Text = "相機已有序號, 中斷";
 
-                delay(500);
+                    g2.Clear(BackColor);
+                    g2.DrawString("燒錄失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
+                    bt_confirm.Visible = true;
 
-                lb_write_camera_serial2.Text = "寫入相機序號完成";
-                lb_write_camera_serial2.ForeColor = Color.Black;
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
-                g2.Clear(BackColor);
-                g2.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
-                lb_write_camera_serial2.Text += "    燒錄完成";
+                }
+                else
+                {
+                    richTextBox1.Text += "相機無序號, continue\n";
 
-                delay(200);
+                    richTextBox1.Text += "序號 : 寫入資料  完成\n";
 
-                //驗證資料
-                lb_write_camera_serial2.Text += "    驗證中";
-                lb_write_camera_serial2.ForeColor = Color.Blue;
-                richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString() + "\n";
+                    lb_write_camera_serial2.Text = "寫入1";
 
-                Font f = new Font("標楷體", 60);
-                int tmp_width = 0;
-                int tmp_height = 0;
-                string str = "驗證中";
+                    delay(500);
 
-                tmp_width = g.MeasureString(str, f).ToSize().Width;
-                tmp_height = g.MeasureString(str, f).ToSize().Height;
+                    lb_write_camera_serial2.Text = "寫入相機序號完成";
+                    lb_write_camera_serial2.ForeColor = Color.Black;
+                    button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                    g2.Clear(BackColor);
+                    g2.DrawString("燒錄完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(15, 20));
+                    button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                    lb_write_camera_serial2.Text += "    燒錄完成";
 
-                richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-                richTextBox1.Text += "W = " + panel9.Width.ToString() + "  H = " + panel9.Height.ToString() + "\n";
+                    delay(200);
 
-                g2.Clear(BackColor);
-                g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(60, 20));
-                //g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF((panel9.Width - tmp_width) / 2, (panel9.Height - tmp_height) / 2));
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                    //驗證資料
+                    lb_write_camera_serial2.Text += "    驗證中";
+                    lb_write_camera_serial2.ForeColor = Color.Blue;
+                    richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString() + "\n";
 
-                flag_verify_serial_data = 1;
-                Get_IMS_Data(0, 0xAA, 0xAA);
+                    Font f = new Font("標楷體", 60);
+                    int tmp_width = 0;
+                    int tmp_height = 0;
+                    string str = "驗證中";
 
+                    tmp_width = g.MeasureString(str, f).ToSize().Width;
+                    tmp_height = g.MeasureString(str, f).ToSize().Height;
+
+                    richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+                    richTextBox1.Text += "W = " + panel9.Width.ToString() + "  H = " + panel9.Height.ToString() + "\n";
+
+                    g2.Clear(BackColor);
+                    g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(60, 20));
+                    //g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF((panel9.Width - tmp_width) / 2, (panel9.Height - tmp_height) / 2));
+                    button11.BackColor = System.Drawing.SystemColors.ControlLight;
+
+                    flag_verify_serial_data = 1;
+                    Get_IMS_Data(0, 0xAA, 0xAA);
+                }
             }
             else
             {
@@ -6847,6 +6952,29 @@ namespace imsLink
                 return;
             }
 
+            if (flag_camera_use_insighteyes == 0)
+            {
+                MessageBox.Show("No Insighteyes Camera", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Create stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+            // Begin timing
+            stopwatch.Start();
+
+            richTextBox1.Text += "\nAWB 開始 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            bt_awb_test.Text = "清除相機資料";
+            progressBar_awb.Value = 0;
+            //progressBar_awb.ForeColor = Color.Red;
+            //progressBar_awb.BackColor = Color.Red;
+            Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
+
+            delay(1000);
+            bt_awb_test.Text = "色彩校正開始";
+            progressBar_awb.Value = 10;
+            delay(500);
+
             //if (flag_awb_mode == false)
             {
                 lb_rgb.Text = "";
@@ -6863,11 +6991,9 @@ namespace imsLink
             flag_break = false;
             //richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
 
-            // Create stopwatch
-            Stopwatch stopwatch = new Stopwatch();
-            // Begin timing
-            stopwatch.Start();
-            richTextBox1.Text += "\nAWB 開始\t檢查飽和 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "檢查飽和 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            bt_awb_test.Text = "檢查飽和開始";
+            progressBar_awb.Value = 12;
 
             //no change gain.....
             //richTextBox1.Text += "setup gain to 0x7f = 127\n";
@@ -6876,7 +7002,12 @@ namespace imsLink
 
             test_RGB_saturation();
 
-            richTextBox1.Text += "檢查飽和 SP\t粗調 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "檢查飽和 SP\t粗調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            bt_awb_test.Text = "檢查飽和結束";
+            progressBar_awb.Value = 30;
+            delay(500);
+            bt_awb_test.Text = "粗調開始";
+            progressBar_awb.Value = 32;
 
             int ret = 0;
             flag_update_RGB_scrollbar = true;
@@ -6973,7 +7104,12 @@ namespace imsLink
             //richTextBox1.Text += "Target  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
             //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
 
-            richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            bt_awb_test.Text = "粗調結束";
+            progressBar_awb.Value = 52;
+            delay(500);
+            bt_awb_test.Text = "細調開始";
+            progressBar_awb.Value = 56;
 
             int ok_cnt = 0;
             int check_cnt = 0;
@@ -6998,26 +7134,39 @@ namespace imsLink
                 else
                     ok_cnt = 0;
             }
-            richTextBox1.Text += "細調 SP : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "\n細調 SP : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            bt_awb_test.Text = "細調結束";
+            progressBar_awb.Value = 90;
+            delay(500);
             tolerance_ratio = 1;
 
             //切換回自動模式
-            /*
             bt_awb.Text = "Manual";
             flag_awb_mode = false;
             timer_webcam.Enabled = true;
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
-            */
 
             //do not write data to camera
             //寫資料進相機裡
-            //write_awb_data_to_camera(data_R, data_B);
+            ret = get_r_data();
+            ret = get_b_data();
+
+            if (ret == S_FALSE)
+            {
+                ret = get_r_data();
+                ret = get_b_data();
+            }
+            write_awb_data_to_camera(data_R, data_B);
 
             // Stop timing
             stopwatch.Stop();
 
             // Write result
-            richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            bt_awb_test.Text = "色彩校正完成";
+            progressBar_awb.Value = 100;
+            //progressBar_awb.ForeColor = Color.Green;
+            //progressBar_awb.BackColor = Color.Green;
             flag_break = false;
             flag_do_awb = false;
             timer_display.Enabled = false;
@@ -7072,8 +7221,8 @@ namespace imsLink
                         diff = TARGET_AWB_G * awb_block * awb_block - rgb_g;
                         //diff = diff * 10 / 4;
                         diff = diff * 1 / (awb_block * awb_block);
-                        if (diff > 10)
-                            diff = 10;
+                        if (diff > 5)
+                            diff = 5;
 
                         data_expo += diff;
                         diff_g = diff;
@@ -7123,8 +7272,8 @@ namespace imsLink
                         diff = rgb_g - TARGET_AWB_G * awb_block * awb_block;
                         //diff = diff * 10 / 4;
                         diff = diff * 1 / (awb_block * awb_block);
-                        if (diff > 10)
-                            diff = 10;
+                        if (diff > 5)
+                            diff = 5;
                         
                         data_expo -= diff;
                         diff_g = -diff;
@@ -7535,7 +7684,7 @@ namespace imsLink
             dd = (byte)(SendData % 256);
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
 
-            SendData = 5;
+            SendData = 127;
 
             dd = (byte)(SendData / 256);
             DongleAddr_h = 0x35;
@@ -7804,16 +7953,86 @@ namespace imsLink
             }
             else if (comboBox_temperature.SelectedIndex == 18)
             {
+                richTextBox1.Text += "7700K\n";
+                TARGET_AWB_R = 231;
+                TARGET_AWB_G = 236;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 19)
+            {
+                richTextBox1.Text += "7900K\n";
+                TARGET_AWB_R = 228;
+                TARGET_AWB_G = 234;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 20)
+            {
+                richTextBox1.Text += "8100K\n";
+                TARGET_AWB_R = 225;
+                TARGET_AWB_G = 232;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 21)
+            {
+                richTextBox1.Text += "8300K\n";
+                TARGET_AWB_R = 222;
+                TARGET_AWB_G = 230;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 22)
+            {
                 richTextBox1.Text += "8500K\n";
                 TARGET_AWB_R = 220;
                 TARGET_AWB_G = 229;
                 TARGET_AWB_B = 255;
             }
-            else if (comboBox_temperature.SelectedIndex == 19)
+            else if (comboBox_temperature.SelectedIndex == 23)
+            {
+                richTextBox1.Text += "8700K\n";
+                TARGET_AWB_R = 217;
+                TARGET_AWB_G = 227;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 24)
+            {
+                richTextBox1.Text += "8900K\n";
+                TARGET_AWB_R = 215;
+                TARGET_AWB_G = 226;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 25)
+            {
+                richTextBox1.Text += "9100K\n";
+                TARGET_AWB_R = 212;
+                TARGET_AWB_G = 223;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 26)
+            {
+                richTextBox1.Text += "9300K\n";
+                TARGET_AWB_R = 210;
+                TARGET_AWB_G = 223;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 27)
             {
                 richTextBox1.Text += "9500K\n";
                 TARGET_AWB_R = 208;
                 TARGET_AWB_G = 222;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 28)
+            {
+                richTextBox1.Text += "10000K\n";
+                TARGET_AWB_R = 204;
+                TARGET_AWB_G = 219;
+                TARGET_AWB_B = 255;
+            }
+            else if (comboBox_temperature.SelectedIndex == 29)
+            {
+                richTextBox1.Text += "7700K modified\n";
+                TARGET_AWB_R = 231;
+                TARGET_AWB_G = 243;
                 TARGET_AWB_B = 255;
             }
             else
@@ -7823,6 +8042,7 @@ namespace imsLink
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
             refresh_picturebox2();
+            timer_webcam.Enabled = true;
         }
 
         void refresh_picturebox2()
@@ -8398,10 +8618,31 @@ namespace imsLink
 
         private void bt_awb_test2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "none\n";
-            richTextBox1.Text += "微調\n";
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            lb_rgb.Text = "";
+            flag_awb_mode = true;
+            timer_webcam.Enabled = false;
+            bt_awb.Text = "Auto";
+            //richTextBox1.Text += "\nTo Auto mode\n";
+            //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+
+            timer_display.Enabled = true;
+            flag_do_awb = true;
+            flag_break = false;
+
+            // Create stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+            // Begin timing
+            stopwatch.Start();
+
+            richTextBox1.Text += "none\n";
+            richTextBox1.Text += "\n微調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
 
             int ret;
             int ok_cnt = 0;
@@ -8429,7 +8670,7 @@ namespace imsLink
                 else
                     ok_cnt = 0;
             }
-            richTextBox1.Text += "細調 SP : " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds.ToString() + " 秒\n";
+            richTextBox1.Text += "細調 SP : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
             tolerance_ratio = 1;
 
 
@@ -8514,16 +8755,25 @@ namespace imsLink
 
         int check_webcam()
         {
+            flag_camera_use_insighteyes = 0;
             comboBox_webcam.Items.Clear();
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             VideoCaptureDevice Cam_tmp = null;
 
-            //richTextBox1.Text += "check_webcam ST\n";
+            richTextBox1.Text += "check_webcam ST\n";
 
             //USBWebcams2 = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
             {
-                richTextBox1.Text += "There are " + USBWebcams.Count.ToString() + " camera(s)\n";
+                if (USBWebcams.Count == 1)
+                {
+                    richTextBox1.Text += "There is " + USBWebcams.Count.ToString() + " camera\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "There are " + USBWebcams.Count.ToString() + " cameras\n";
+                }
+
                 for (int i = 0; i < USBWebcams.Count; i++)
                 {
                     richTextBox1.Text += "camera " + i.ToString() + "\n";
@@ -8568,10 +8818,6 @@ namespace imsLink
 
                     comboBox_webcam.Items.Add(webcam_name);
                     richTextBox1.Text += webcam_name + "\n";
-
-                    richTextBox1.Text += "\n";
-
-
                 }
 
                 for (int i = 0; i < USBWebcams.Count; i++)
@@ -8588,6 +8834,7 @@ namespace imsLink
                         flag_camera_start = 1;
 
                         comboBox_webcam.Text = comboBox_webcam.Items[i].ToString();
+                        flag_camera_use_insighteyes = 1;
                         break;
                     }
 
@@ -8904,6 +9151,40 @@ namespace imsLink
                 cb_3X3.Checked = false;
                 cb_4X4.Checked = false;
             }
+        }
+
+        private void comboBox_temperature_DropDown(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DropDown\n";
+            timer_webcam.Enabled = false;
+        }
+
+        private void comboBox_temperature_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //richTextBox1.Text += "PreviewKeyDown\n";
+        }
+
+        private void bt_read_awb_Click(object sender, EventArgs e)
+        {
+            lb_awb_data.Text = "";
+            byte page;
+            int cnt = 0;
+
+            richTextBox1.Text += "\n\nread camera awb data AWB_PAGE\n";
+            page = AWB_PAGE;
+            Get_IMS_Data(1, page, 0xAA);
+            cnt = 0;
+            while ((flag_wait_receive_data == 1) && (cnt++ < 20))
+            {
+                richTextBox1.Text += "a";
+                delay(100);
+            }
+            flag_wait_receive_data = 0;
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            bt_erase_Click(sender, e);
         }
     }
 }

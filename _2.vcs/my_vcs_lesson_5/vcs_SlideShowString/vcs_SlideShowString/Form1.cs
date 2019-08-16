@@ -43,6 +43,7 @@ namespace vcs_SlideShowString
         private const int D3 = 6;
         private const int PLAYMODE_SEQUENCE = 0;
         private const int PLAYMODE_RANDOM = 1;
+        private const int PLAYMODE_SEQUENCE_RANDOM = 2;
         private const int MOVE_STEP = 50;
 
         int strings_count = 0;
@@ -198,6 +199,11 @@ namespace vcs_SlideShowString
                         {
                             play_sequence = PLAYMODE_RANDOM;
                             richTextBox1.Text += "隨機\n";
+                        }
+                        else if (play_sequence == '2')
+                        {
+                            play_sequence = PLAYMODE_SEQUENCE_RANDOM;
+                            richTextBox1.Text += "依序隨機啟動\n";
                         }
                         else
                         {
@@ -409,6 +415,11 @@ namespace vcs_SlideShowString
                         {
                             play_sequence = PLAYMODE_RANDOM;
                             richTextBox1.Text += "隨機\n";
+                        }
+                        else if (play_sequence == '2')
+                        {
+                            play_sequence = PLAYMODE_SEQUENCE_RANDOM;
+                            richTextBox1.Text += "依序隨機啟動\n";
                         }
                         else
                         {
@@ -858,8 +869,14 @@ namespace vcs_SlideShowString
                         show_lyrics_index = random_play_sequence[0];
                     }
                     else if (play_sequence == PLAYMODE_RANDOM)
-                    {   //隨機 -> 依序 從頭
-                        richTextBox1.Text += "隨機 -> 依序 從頭\n";
+                    {   //隨機 -> 依序隨機啟動
+                        richTextBox1.Text += "隨機 -> 依序隨機啟動\n";
+                        play_sequence = PLAYMODE_SEQUENCE_RANDOM;
+                        show_lyrics_index = 0;
+                    }
+                    else if (play_sequence == PLAYMODE_SEQUENCE_RANDOM)
+                    {   //依序隨機啟動 -> 依序 從頭
+                        richTextBox1.Text += "依序隨機啟動 -> 依序 從頭\n";
                         play_sequence = PLAYMODE_SEQUENCE;
                         show_lyrics_index = 0;
                     }
@@ -1501,7 +1518,7 @@ namespace vcs_SlideShowString
                 button1.Location = new Point(W * 1 + 10, 10);
                 button2.Location = new Point(W * 1 + 10, 50);
                 button3.Location = new Point(W * 1 + 10, 90);
-                button4.Location = new Point(W * 1 + 10, 130);
+                button4.Location = new Point(W * 1 + 10, 370);
                 button5.Location = new Point(W * 1 + 10, 170);
                 button6.Location = new Point(W * 1 + 10, 210);
                 button7.Location = new Point(W * 1 + 10, 250);
