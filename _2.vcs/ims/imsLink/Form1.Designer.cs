@@ -268,6 +268,23 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.data_15 = new System.Windows.Forms.TextBox();
+            this.data_14 = new System.Windows.Forms.TextBox();
+            this.data_13 = new System.Windows.Forms.TextBox();
+            this.data_12 = new System.Windows.Forms.TextBox();
+            this.data_11 = new System.Windows.Forms.TextBox();
+            this.data_10 = new System.Windows.Forms.TextBox();
+            this.data_09 = new System.Windows.Forms.TextBox();
+            this.data_08 = new System.Windows.Forms.TextBox();
+            this.data_07 = new System.Windows.Forms.TextBox();
+            this.data_06 = new System.Windows.Forms.TextBox();
+            this.data_05 = new System.Windows.Forms.TextBox();
+            this.data_04 = new System.Windows.Forms.TextBox();
+            this.data_03 = new System.Windows.Forms.TextBox();
+            this.data_02 = new System.Windows.Forms.TextBox();
+            this.data_01 = new System.Windows.Forms.TextBox();
+            this.data_00 = new System.Windows.Forms.TextBox();
+            this.button44 = new System.Windows.Forms.Button();
             this.lb_write_camera_serial = new System.Windows.Forms.Label();
             this.button31 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
@@ -830,9 +847,9 @@
             this.groupBox1.Controls.Add(this.tb_info_aa2);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Location = new System.Drawing.Point(22, 26);
+            this.groupBox1.Location = new System.Drawing.Point(15, 18);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(895, 533);
+            this.groupBox1.Size = new System.Drawing.Size(905, 553);
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Camera Info";
@@ -3188,24 +3205,227 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.data_15);
+            this.groupBox9.Controls.Add(this.data_14);
+            this.groupBox9.Controls.Add(this.data_13);
+            this.groupBox9.Controls.Add(this.data_12);
+            this.groupBox9.Controls.Add(this.data_11);
+            this.groupBox9.Controls.Add(this.data_10);
+            this.groupBox9.Controls.Add(this.data_09);
+            this.groupBox9.Controls.Add(this.data_08);
+            this.groupBox9.Controls.Add(this.data_07);
+            this.groupBox9.Controls.Add(this.data_06);
+            this.groupBox9.Controls.Add(this.data_05);
+            this.groupBox9.Controls.Add(this.data_04);
+            this.groupBox9.Controls.Add(this.data_03);
+            this.groupBox9.Controls.Add(this.data_02);
+            this.groupBox9.Controls.Add(this.data_01);
+            this.groupBox9.Controls.Add(this.data_00);
+            this.groupBox9.Controls.Add(this.button44);
             this.groupBox9.Controls.Add(this.lb_write_camera_serial);
             this.groupBox9.Controls.Add(this.button31);
             this.groupBox9.Controls.Add(this.button27);
             this.groupBox9.Controls.Add(this.textBox5);
             this.groupBox9.Controls.Add(this.textBox6);
             this.groupBox9.Controls.Add(this.button28);
-            this.groupBox9.Location = new System.Drawing.Point(19, 398);
+            this.groupBox9.Location = new System.Drawing.Point(19, 309);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(848, 164);
+            this.groupBox9.Size = new System.Drawing.Size(848, 253);
             this.groupBox9.TabIndex = 60;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "相機Flash";
+            // 
+            // data_15
+            // 
+            this.data_15.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_15.Location = new System.Drawing.Point(680, 107);
+            this.data_15.Name = "data_15";
+            this.data_15.Size = new System.Drawing.Size(38, 32);
+            this.data_15.TabIndex = 103;
+            this.data_15.Text = "00";
+            this.data_15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_14
+            // 
+            this.data_14.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_14.Location = new System.Drawing.Point(636, 107);
+            this.data_14.Name = "data_14";
+            this.data_14.Size = new System.Drawing.Size(38, 32);
+            this.data_14.TabIndex = 102;
+            this.data_14.Text = "00";
+            this.data_14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_14.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_13
+            // 
+            this.data_13.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_13.Location = new System.Drawing.Point(592, 107);
+            this.data_13.Name = "data_13";
+            this.data_13.Size = new System.Drawing.Size(38, 32);
+            this.data_13.TabIndex = 101;
+            this.data_13.Text = "00";
+            this.data_13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_13.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_12
+            // 
+            this.data_12.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_12.Location = new System.Drawing.Point(548, 107);
+            this.data_12.Name = "data_12";
+            this.data_12.Size = new System.Drawing.Size(38, 32);
+            this.data_12.TabIndex = 100;
+            this.data_12.Text = "08";
+            this.data_12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_12.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_11
+            // 
+            this.data_11.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_11.Location = new System.Drawing.Point(504, 107);
+            this.data_11.Name = "data_11";
+            this.data_11.Size = new System.Drawing.Size(38, 32);
+            this.data_11.TabIndex = 99;
+            this.data_11.Text = "1F";
+            this.data_11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_10
+            // 
+            this.data_10.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_10.Location = new System.Drawing.Point(460, 107);
+            this.data_10.Name = "data_10";
+            this.data_10.Size = new System.Drawing.Size(38, 32);
+            this.data_10.TabIndex = 98;
+            this.data_10.Text = "52";
+            this.data_10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_09
+            // 
+            this.data_09.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_09.Location = new System.Drawing.Point(416, 107);
+            this.data_09.Name = "data_09";
+            this.data_09.Size = new System.Drawing.Size(38, 32);
+            this.data_09.TabIndex = 97;
+            this.data_09.Text = "07";
+            this.data_09.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_09.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_08
+            // 
+            this.data_08.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_08.Location = new System.Drawing.Point(372, 107);
+            this.data_08.Name = "data_08";
+            this.data_08.Size = new System.Drawing.Size(38, 32);
+            this.data_08.TabIndex = 96;
+            this.data_08.Text = "1E";
+            this.data_08.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_08.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_07
+            // 
+            this.data_07.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_07.Location = new System.Drawing.Point(329, 107);
+            this.data_07.Name = "data_07";
+            this.data_07.Size = new System.Drawing.Size(38, 32);
+            this.data_07.TabIndex = 95;
+            this.data_07.Text = "52";
+            this.data_07.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_07.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_06
+            // 
+            this.data_06.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_06.Location = new System.Drawing.Point(285, 107);
+            this.data_06.Name = "data_06";
+            this.data_06.Size = new System.Drawing.Size(38, 32);
+            this.data_06.TabIndex = 94;
+            this.data_06.Text = "D2";
+            this.data_06.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_06.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_05
+            // 
+            this.data_05.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_05.Location = new System.Drawing.Point(241, 107);
+            this.data_05.Name = "data_05";
+            this.data_05.Size = new System.Drawing.Size(38, 32);
+            this.data_05.TabIndex = 93;
+            this.data_05.Text = "1B";
+            this.data_05.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_05.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_04
+            // 
+            this.data_04.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_04.Location = new System.Drawing.Point(197, 107);
+            this.data_04.Name = "data_04";
+            this.data_04.Size = new System.Drawing.Size(38, 32);
+            this.data_04.TabIndex = 92;
+            this.data_04.Text = "52";
+            this.data_04.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_04.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_03
+            // 
+            this.data_03.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_03.Location = new System.Drawing.Point(153, 107);
+            this.data_03.Name = "data_03";
+            this.data_03.Size = new System.Drawing.Size(38, 32);
+            this.data_03.TabIndex = 91;
+            this.data_03.Text = "04";
+            this.data_03.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_03.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_02
+            // 
+            this.data_02.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_02.Location = new System.Drawing.Point(109, 107);
+            this.data_02.Name = "data_02";
+            this.data_02.Size = new System.Drawing.Size(38, 32);
+            this.data_02.TabIndex = 90;
+            this.data_02.Text = "1A";
+            this.data_02.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_02.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_01
+            // 
+            this.data_01.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_01.Location = new System.Drawing.Point(65, 107);
+            this.data_01.Name = "data_01";
+            this.data_01.Size = new System.Drawing.Size(38, 32);
+            this.data_01.TabIndex = 89;
+            this.data_01.Text = "52";
+            this.data_01.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_01.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // data_00
+            // 
+            this.data_00.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.data_00.Location = new System.Drawing.Point(21, 107);
+            this.data_00.Name = "data_00";
+            this.data_00.Size = new System.Drawing.Size(38, 32);
+            this.data_00.TabIndex = 88;
+            this.data_00.Text = "DA";
+            this.data_00.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.data_00.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.data_15_KeyPress);
+            // 
+            // button44
+            // 
+            this.button44.Location = new System.Drawing.Point(751, 168);
+            this.button44.Name = "button44";
+            this.button44.Size = new System.Drawing.Size(80, 40);
+            this.button44.TabIndex = 87;
+            this.button44.Text = "reset";
+            this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
             // lb_write_camera_serial
             // 
             this.lb_write_camera_serial.AutoSize = true;
             this.lb_write_camera_serial.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_write_camera_serial.Location = new System.Drawing.Point(173, 113);
+            this.lb_write_camera_serial.Location = new System.Drawing.Point(170, 197);
             this.lb_write_camera_serial.Name = "lb_write_camera_serial";
             this.lb_write_camera_serial.Size = new System.Drawing.Size(170, 23);
             this.lb_write_camera_serial.TabIndex = 86;
@@ -3213,7 +3433,7 @@
             // 
             // button31
             // 
-            this.button31.Location = new System.Drawing.Point(21, 107);
+            this.button31.Location = new System.Drawing.Point(18, 191);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(135, 40);
             this.button31.TabIndex = 58;
@@ -3229,11 +3449,12 @@
             this.button27.TabIndex = 56;
             this.button27.Text = "寫入";
             this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(21, 26);
+            this.textBox5.Location = new System.Drawing.Point(18, 48);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(623, 32);
             this.textBox5.TabIndex = 55;
@@ -3247,7 +3468,7 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(80, 32);
             this.textBox6.TabIndex = 57;
-            this.textBox6.Text = "A";
+            this.textBox6.Text = "12";
             this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button28
@@ -3258,6 +3479,7 @@
             this.button28.TabIndex = 54;
             this.button28.Text = "讀取";
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // button37
             // 
@@ -4260,6 +4482,23 @@
         private System.Windows.Forms.Label lb_awb_data;
         private System.Windows.Forms.Button button43;
         private System.Windows.Forms.ProgressBar progressBar_awb;
+        private System.Windows.Forms.Button button44;
+        private System.Windows.Forms.TextBox data_15;
+        private System.Windows.Forms.TextBox data_14;
+        private System.Windows.Forms.TextBox data_13;
+        private System.Windows.Forms.TextBox data_12;
+        private System.Windows.Forms.TextBox data_11;
+        private System.Windows.Forms.TextBox data_10;
+        private System.Windows.Forms.TextBox data_09;
+        private System.Windows.Forms.TextBox data_08;
+        private System.Windows.Forms.TextBox data_07;
+        private System.Windows.Forms.TextBox data_06;
+        private System.Windows.Forms.TextBox data_05;
+        private System.Windows.Forms.TextBox data_04;
+        private System.Windows.Forms.TextBox data_03;
+        private System.Windows.Forms.TextBox data_02;
+        private System.Windows.Forms.TextBox data_01;
+        private System.Windows.Forms.TextBox data_00;
     }
 }
 

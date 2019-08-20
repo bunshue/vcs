@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = true;
+        bool flag_release_mode = false;
 
         bool flag_awb_debug = true;
 
@@ -47,7 +47,9 @@ namespace imsLink
         private const int DATE_PAGE3 = 0x0D;	//use 2 hrs
         private const int ERROR_PAGE = 0x0E;	//error code
         private const int ERROR_DATE = 0x0F;	//error date
-        private const int AWB_PAGE = 0x10;	//awb data
+        private const int AWB_PAGE = 0x10;	    //awb data
+        private const int USER_PAGE1 = 0x11;	//UFM data
+        private const int USER_PAGE2 = 0x12;	//UFM data
 
         string imslink_log_filename = "imslink.log";
         string RxString = "";
@@ -63,6 +65,7 @@ namespace imsLink
         byte xx;
         byte yy;
         byte zz;
+        int flag_read_camera_raw_data = 0;
         int flag_wait_receive_data = 0;
         int flag_receive_camera_serial = 0;
         int flag_receive_camera_flash_data = 0;
@@ -823,7 +826,22 @@ namespace imsLink
                             else if (flag_receive_camera_flash_data == 1)
                             {
                                 richTextBox1.Text += "BytesToRead = " + BytesToRead.ToString() + "\n";
-                                //if (BytesToRead == 16)
+                                if (flag_read_camera_raw_data == 1)
+                                {
+                                    flag_read_camera_raw_data = 0;
+                                    richTextBox1.AppendText("[Data] : "
+                                        + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2") + "-"
+                                        + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2") + "-"
+                                        + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2") + "-"
+                                        + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n");
+                                    richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+                                    textBox5.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                        + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                        + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                        + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
+                                }
+                                else
                                 {
 
                                     //input = "";
@@ -836,13 +854,6 @@ namespace imsLink
                                         + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2") + "-"
                                         + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n");
                                     richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-                                    /*
-                                    textBox5.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
-                                        + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
-                                        + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
-                                        + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
-                                    */
 
                                     switch (flag_request_item)
                                     {
@@ -1976,6 +1987,77 @@ namespace imsLink
                 cb_4X4.Visible = false;
                 cb_5X5.Visible = false;
             }
+
+
+            int x_st = 20;
+            int y_st = 40;
+            int dx;
+            int dy;
+
+            dx = 0;
+            dy = 65;
+
+            textBox10.Location = new Point(x_st + dx, y_st + dy * 0);
+            textBox4.Location = new Point(x_st + dx, y_st + dy * 1);
+            textBox2.Location = new Point(x_st + dx, y_st + dy * 2);
+            textBox8.Location = new Point(x_st + dx, y_st + dy * 3);
+            textBox12.Location = new Point(x_st + dx, y_st + dy * 4);
+            textBox14.Location = new Point(x_st + dx, y_st + dy * 5);
+            textBox16.Location = new Point(x_st + dx, y_st + dy * 6);
+
+            dx = 60;
+            tb_info_82.Location = new Point(x_st + dx, y_st + dy * 0);
+            textBox3.Location = new Point(x_st + dx, y_st + dy * 1);
+            tb_info_a2.Location = new Point(x_st + dx, y_st + dy * 2);
+            tb_info_b2.Location = new Point(x_st + dx, y_st + dy * 3);
+            tb_info_d2.Location = new Point(x_st + dx, y_st + dy * 4);
+            tb_info_e2.Location = new Point(x_st + dx, y_st + dy * 5);
+            tb_info_f2.Location = new Point(x_st + dx, y_st + dy * 6);
+
+            dx = 180;
+            tb_info_8.Location = new Point(x_st + dx, y_st + dy * 0);
+            tb_info_aa1.Location = new Point(x_st + dx, y_st + dy * 1);
+            tb_info_aa2.Location = new Point(x_st + dx, y_st + dy * 2);
+            tb_info_b.Location = new Point(x_st + dx, y_st + dy * 3);
+            tb_info_d.Location = new Point(x_st + dx, y_st + dy * 4);
+            tb_info_e.Location = new Point(x_st + dx, y_st + dy * 5);
+            tb_info_f.Location = new Point(x_st + dx, y_st + dy * 6);
+
+
+            dx = 180;
+            lb_a.Location = new Point(x_st + dx, y_st + dy * 2 + 35);
+            lb_b.Location = new Point(x_st + dx, y_st + dy * 3 + 35);
+            lb_d.Location = new Point(x_st + dx, y_st + dy * 4 + 35);
+            lb_e.Location = new Point(x_st + dx, y_st + dy * 5 + 35);
+            lb_f.Location = new Point(x_st + dx, y_st + dy * 6 + 35);
+
+
+            x_st = 20;
+            y_st = 130;
+            dx = 40;
+            data_00.Location = new Point(x_st + dx * 0, y_st);
+            data_01.Location = new Point(x_st + dx * 1, y_st);
+            data_02.Location = new Point(x_st + dx * 2, y_st);
+            data_03.Location = new Point(x_st + dx * 3, y_st);
+            data_04.Location = new Point(x_st + dx * 4, y_st);
+            data_05.Location = new Point(x_st + dx * 5, y_st);
+            data_06.Location = new Point(x_st + dx * 6, y_st);
+            data_07.Location = new Point(x_st + dx * 7, y_st);
+            data_08.Location = new Point(x_st + dx * 8, y_st);
+            data_09.Location = new Point(x_st + dx * 9, y_st);
+            data_10.Location = new Point(x_st + dx * 10, y_st);
+            data_11.Location = new Point(x_st + dx * 11, y_st);
+            data_12.Location = new Point(x_st + dx * 12, y_st);
+            data_13.Location = new Point(x_st + dx * 13, y_st);
+            data_14.Location = new Point(x_st + dx * 14, y_st);
+            data_15.Location = new Point(x_st + dx * 15, y_st);
+
+
+            y_st = 50;
+            textBox5.Location = new Point(x_st + dx * 0, y_st);
+            textBox5.Size = new Size(dx * 15 + data_00.Width, textBox5.Size.Height);
+
+        
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2325,10 +2407,6 @@ namespace imsLink
             DongleData = (byte)(0x10 | (cnt1 << 2));
 
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData); 
-            
-
-
-
         }
 
         private void button119_Click(object sender, EventArgs e)
@@ -2851,6 +2929,7 @@ namespace imsLink
 
         private void button28_Click(object sender, EventArgs e)
         {
+            flag_read_camera_raw_data = 1;
             textBox5.Clear();
             if (flag_comport_ok == false)
             {
@@ -4020,9 +4099,14 @@ namespace imsLink
         {
             if ((flag_camera_start == 1) && (Cam.IsRunning == true))
             {
-                richTextBox1.Text += "USB影像傳輸中\n";
+                richTextBox1.Text += "USB影像傳輸中, 中斷重來\n";
+                flag_camera_start = 0;
+                //Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                comboBox_webcam.Items.Clear();
             }
-            else
+
             {
                 check_webcam();
                 richTextBox1.Text += "重新抓取USB影像\t";
@@ -4716,11 +4800,6 @@ namespace imsLink
             System.Diagnostics.Process.Start("https://www.insighteyes.com/");
         }
 
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button21_Click(object sender, EventArgs e)
         {
             if (flag_comport_ok == false)
@@ -5261,10 +5340,13 @@ namespace imsLink
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            richTextBox1.Text += "pictureBox double click at x = " + MousePosition.X.ToString() + " y = " + MousePosition.Y.ToString() + "\n";
+            //richTextBox1.Text += "pictureBox double click at x = " + MousePosition.X.ToString() + " y = " + MousePosition.Y.ToString() + "\n";
 
-            //MouseButtons.
-            //MouseButtons.Left
+            int x_st = MousePosition.X - pictureBox1.Location.X - tabControl1.Location.X;
+            int y_st = MousePosition.Y - pictureBox1.Location.Y - tabControl1.Location.Y - tabControl1.ItemSize.Height;
+
+            richTextBox1.Text += "x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + "\n";
+
 
         }
 
@@ -6946,6 +7028,7 @@ namespace imsLink
 
         private void bt_awb_test_Click(object sender, EventArgs e)
         {
+            int i;
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -6965,6 +7048,7 @@ namespace imsLink
 
             richTextBox1.Text += "\nAWB 開始 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
             bt_awb_test.Text = "清除相機資料";
+            bt_awb_test.BackColor = Color.Pink;
             progressBar_awb.Value = 0;
             //progressBar_awb.ForeColor = Color.Red;
             //progressBar_awb.BackColor = Color.Red;
@@ -7040,8 +7124,6 @@ namespace imsLink
                 //richTextBox1.Text += "AWB data R G B = " + data_R.ToString() + " " + data_G.ToString() + " " + data_B.ToString() + "\n";
 
                 check_RB_saturation();
-
-                int i;
 
                 for (i = 0; i < 50; i++)
                 {
@@ -7156,7 +7238,50 @@ namespace imsLink
                 ret = get_r_data();
                 ret = get_b_data();
             }
-            write_awb_data_to_camera(data_R, data_B);
+
+            //old method
+            //write_awb_data_to_camera(data_R, data_B);     old method
+
+            //new method
+            int page = USER_PAGE2;
+
+            for (i = 0; i < 16; i++)
+            {
+                user_flash_data[i] = 0;
+            }
+
+            //			ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+
+            user_flash_data[0] = 0xDA;
+
+            user_flash_data[1] = 0x52;
+            user_flash_data[2] = 0x1A;
+            user_flash_data[3] = (Byte)(data_R / 256);
+
+            user_flash_data[4] = 0x52;
+            user_flash_data[5] = 0x1B;
+            user_flash_data[6] = (Byte)(data_R % 256);
+
+            user_flash_data[7] = 0x52;
+            user_flash_data[8] = 0x1E;
+            user_flash_data[9] = (Byte)(data_B / 256);
+
+            user_flash_data[10] = 0x52;
+            user_flash_data[11] = 0x1F;
+            user_flash_data[12] = (Byte)(data_B % 256);
+
+            user_flash_data[13] = 0x00;
+            user_flash_data[14] = 0x00;
+            user_flash_data[15] = 0x00;
+
+
+            Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+
+            serialPort1.Write(user_flash_data, 0, 16);
+
+
+            richTextBox1.Text += "寫入資料  完成\n";
+
 
             // Stop timing
             stopwatch.Stop();
@@ -7164,6 +7289,7 @@ namespace imsLink
             // Write result
             richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
             bt_awb_test.Text = "色彩校正完成";
+            bt_awb_test.BackColor = Color.Lime;
             progressBar_awb.Value = 100;
             //progressBar_awb.ForeColor = Color.Green;
             //progressBar_awb.BackColor = Color.Green;
@@ -9186,6 +9312,295 @@ namespace imsLink
         {
             bt_erase_Click(sender, e);
         }
+
+        Byte[] user_flash_data = new Byte[16];
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(textBox6.Text, 16);
+
+            richTextBox1.Text += "位置 = " + page.ToString() + "\n";
+
+            if ((page < MODEL_PAGE) || (page > (USER_PAGE2 + 100)))
+            {
+                richTextBox1.Text += "不支援的flash位址 0x%" + page.ToString("X2") + "=" + page.ToString() + ", abort\n";
+                return;
+            }
+
+            //檢查資料
+            int ret = check_write_data();
+
+            if (ret == S_FALSE)
+            {
+                richTextBox1.Text += "檢查資料失敗, abort\n";
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "檢查資料OK, continue\n";
+
+            }
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                return;
+            }
+            g_conn_status = CAMERA_UNKNOWN;
+            Send_IMS_Data(0xFF, 0, 0, 0);
+
+            int cnt = 0;
+            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
+            {
+                richTextBox1.Text += "-2xx";
+                delay(100);
+            }
+            if (g_conn_status == DONGLE_NONE)
+            {
+                tb_sn1.Text = "無連接器";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_aa1.Text = "無連接器";
+                tb_info_aa1.BackColor = Color.Red;
+                lb_write_camera_serial2.Text = "無連接器";
+            }
+            else if (g_conn_status == CAMERA_NONE)
+            {
+                tb_sn1.Text = "有連接器, 無相機";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_aa1.Text = "有連接器, 無相機";
+                tb_info_aa1.BackColor = Color.Red;
+                lb_write_camera_serial2.Text = "有連接器, 無相機";
+            }
+            else if (g_conn_status == CAMERA_OK)
+            {
+                tb_info_8.Text = "有連接器, 有相機";
+                tb_info_8.BackColor = Color.White;
+                lb_write_camera_serial2.Text = "有連接器, 有相機, 寫入相機資料中...";
+
+                Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+
+                serialPort1.Write(user_flash_data, 0, 16);
+
+
+                richTextBox1.Text += "寫入資料  完成\n";
+
+            }
+            else
+            {
+                tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
+            }
+
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            textBox5.Text = "";
+            data_00.Text = "00";
+            data_01.Text = "00";
+            data_02.Text = "00";
+            data_03.Text = "00";
+            data_04.Text = "00";
+            data_05.Text = "00";
+            data_06.Text = "00";
+            data_07.Text = "00";
+            data_08.Text = "00";
+            data_09.Text = "00";
+            data_10.Text = "00";
+            data_11.Text = "00";
+            data_12.Text = "00";
+            data_13.Text = "00";
+            data_14.Text = "00";
+            data_15.Text = "00";
+        }
+
+        private void data_15_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+        }
+
+
+        int check_write_data()
+        {
+            int i;
+            int data;
+
+            for (i = 0; i < 16; i++)
+            {
+                user_flash_data[i] = 0;
+            }
+
+            data = Convert.ToInt32(data_00.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[0] = (Byte)data;
+            }
+
+            data = Convert.ToInt32(data_01.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[1] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_02.Text, 16);
+
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[2] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_03.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[3] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_04.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[4] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_05.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[5] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_06.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[6] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_07.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[7] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_08.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[8] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_09.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[9] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_10.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[10] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_11.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[11] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_12.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[12] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_13.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[13] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_14.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[14] = (Byte)data;
+            }
+            
+            data = Convert.ToInt32(data_15.Text, 16);
+            if ((data < 0) || (data > 255))
+            {
+                return S_FALSE;
+            }
+            else
+            {
+                user_flash_data[15] = (Byte)data;
+            }
+
+            return S_OK;
+
+
+        }
+
+
+
+
     }
 }
 
