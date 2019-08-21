@@ -89,6 +89,7 @@ namespace vcs_SlideShowString
         public Form1()
         {
             InitializeComponent();
+            this.Visible = false;
         }
 
         bool loadTextSetup()
@@ -954,6 +955,7 @@ namespace vcs_SlideShowString
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Visible = false;
             this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
@@ -1027,6 +1029,7 @@ namespace vcs_SlideShowString
             if (result == true)
             {
                 slide_show_string();
+                this.Visible = true;
                 timer1.Enabled = true;
             }
             else

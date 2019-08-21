@@ -47,9 +47,9 @@ namespace imsLink
         private const int DATE_PAGE3 = 0x0D;	//use 2 hrs
         private const int ERROR_PAGE = 0x0E;	//error code
         private const int ERROR_DATE = 0x0F;	//error date
-        private const int AWB_PAGE = 0x10;	    //awb data
-        private const int USER_PAGE1 = 0x11;	//UFM data
-        private const int USER_PAGE2 = 0x12;	//UFM data
+        private const int AWB_PAGE0 = 0x10;	    //awb data, old method
+        private const int AWB_PAGE1 = 0x11;	    //awb data, new method
+        private const int USER_PAGE = 0x12;	    //UFM data
 
         string imslink_log_filename = "imslink.log";
         string RxString = "";
@@ -632,7 +632,7 @@ namespace imsLink
                         tb_info_e2.BackColor = Color.Red;
 
                     break;
-                case AWB_PAGE:
+                case AWB_PAGE0:
                     richTextBox1.Text += "AWB Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                         + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                         + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
@@ -648,6 +648,9 @@ namespace imsLink
 
         private void SerialPortTimer100ms_Tick(object sender, EventArgs e)
         {
+            int data_r;
+            int data_b;
+
             if (flag_comport_ok == true)
             {
                 //計算serialPort1中有多少位元組 
@@ -840,6 +843,32 @@ namespace imsLink
                                         + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                         + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                         + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
+
+                                    if (flag_request_item == AWB_PAGE1)
+                                    {
+                                        //    0  1   2  3  4  5  6  7  8  9 10 11 12 13 14 15 
+                                        //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+
+                                        data_r = input[3] * 256 + input[6];
+                                        data_b = input[9] * 256 + input[12];
+                                        richTextBox1.Text += "camera AWB data R : 0x" + data_r.ToString("X2") + "  B : 0x" + data_b.ToString("X2") + "\n";
+
+                                        if ((data_r == 0) && (data_b == 0))
+                                        {
+                                            lb_awb_data.Text = "無AWB資料";
+
+                                        }
+                                        else
+                                        {
+                                            //lb_awb_data.Text = "R : 0x" + data_r.ToString("X4") + "  B : 0x" + data_b.ToString("X4");
+                                            lb_awb_data.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
+                                        }
+
+                                        richTextBox1.Text += "AWB raw Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                            + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                            + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                            + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n";
+                                    }
                                 }
                                 else
                                 {
@@ -907,9 +936,9 @@ namespace imsLink
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             break;
-                                        case AWB_PAGE:
-                                            int data_r = input[0] * 256 + input[1];
-                                            int data_b = input[2] * 256 + input[3];
+                                        case AWB_PAGE0:
+                                            data_r = input[0] * 256 + input[1];
+                                            data_b = input[2] * 256 + input[3];
                                             richTextBox1.Text += "camera AWB data R : 0x" + data_r.ToString("X2") + "  B : 0x" + data_b.ToString("X2") + "\n";
 
                                             if ((data_r == 0) && (data_b == 0))
@@ -1711,6 +1740,311 @@ namespace imsLink
             }
         }
 
+        void show_awb_item_visible(bool en)
+        {
+            lb_0x1.Visible = en;
+            lb_0x2.Visible = en;
+            lb_0x3.Visible = en;
+            lb_0x4.Visible = en;
+            lb_addr.Visible = en;
+            lb_data.Visible = en;
+            tb_1a.Visible = en;
+            tb_2a.Visible = en;
+            tb_3a.Visible = en;
+            tb_4a.Visible = en;
+            bt_read2.Visible = en;
+            bt_write2.Visible = en;
+
+            bt_awb.Visible = en;
+            bt_awb_test.Visible = en;
+            progressBar_awb.Visible = en;
+            bt_awb_test2.Visible = en;
+            bt_awb_test_init.Visible = en;
+            bt_disable_timer_webcam.Visible = en;
+            bt_erase.Visible = en;
+            bt_read_awb.Visible = en;
+            lb_awb_data.Visible = en;
+            bt_test.Visible = en;
+            bt_clear.Visible = en;
+            bt_break.Visible = en;
+            pictureBox2.Visible = en;
+            lb_range_1.Visible = en;
+            lb_range_2.Visible = en;
+            lb_expo.Visible = en;
+            trackBar_expo.Visible = en;
+            tb_expo.Visible = en;
+            numericUpDown_expo.Visible = en;
+            bt_setup_expo.Visible = en;
+            lb_gain.Visible = en;
+            trackBar_gain.Visible = en;
+            tb_gain.Visible = en;
+            numericUpDown_gain.Visible = en;
+            bt_setup_gain.Visible = en;
+
+            lb_awb_result_expo.Visible = en;
+            lb_awb_result_gain.Visible = en;
+            lb_awb_result_R.Visible = en;
+            lb_awb_result_G.Visible = en;
+            lb_awb_result_B.Visible = en;
+            bt_get_setup.Visible = en;
+
+            comboBox_temperature.Visible = en;
+            //comboBox_webcam.Visible = en;
+            numericUpDown_TG_R.Visible = en;
+            numericUpDown_TG_G.Visible = en;
+            numericUpDown_TG_B.Visible = en;
+
+            //R
+            lb_R.Visible = en;
+            lb_0xR.Visible = en;
+            lb_range_3.Visible = en;
+            trackBar_R.Visible = en;
+            tb_R.Visible = en;
+            numericUpDown_R.Visible = en;
+            bt_setup_R.Visible = en;
+
+            //G
+            lb_G.Visible = en;
+            lb_0xG.Visible = en;
+            lb_range_4.Visible = en;
+            trackBar_G.Visible = en;
+            tb_G.Visible = en;
+            numericUpDown_G.Visible = en;
+            bt_setup_G.Visible = en;
+
+            //B
+            lb_BB.Visible = en;
+            lb_0xB.Visible = en;
+            lb_range_5.Visible = en;
+            trackBar_B.Visible = en;
+            tb_B.Visible = en;
+            numericUpDown_B.Visible = en;
+            bt_setup_B.Visible = en;
+
+            //WPT
+            lb_wpt.Visible = en;
+            tb_wpt.Visible = en;
+            numericUpDown_wpt.Visible = en;
+            bt_read_wpt.Visible = en;
+            bt_write_wpt.Visible = en;
+
+            //BPT
+            lb_bpt.Visible = en;
+            tb_bpt.Visible = en;
+            numericUpDown_bpt.Visible = en;
+            bt_read_bpt.Visible = en;
+            bt_write_bpt.Visible = en;
+
+            return;
+        }
+
+        void show_item_location()
+        {
+            int x_st = 20;
+            int y_st = 40;
+            int dx;
+            int dy;
+
+            dx = 0;
+            dy = 65;
+
+            textBox10.Location = new Point(x_st + dx, y_st + dy * 0);
+            textBox4.Location = new Point(x_st + dx, y_st + dy * 1);
+            textBox2.Location = new Point(x_st + dx, y_st + dy * 2);
+            textBox8.Location = new Point(x_st + dx, y_st + dy * 3);
+            textBox12.Location = new Point(x_st + dx, y_st + dy * 4);
+            textBox14.Location = new Point(x_st + dx, y_st + dy * 5);
+            textBox16.Location = new Point(x_st + dx, y_st + dy * 6);
+
+            dx = 60;
+            tb_info_82.Location = new Point(x_st + dx, y_st + dy * 0);
+            textBox3.Location = new Point(x_st + dx, y_st + dy * 1);
+            tb_info_a2.Location = new Point(x_st + dx, y_st + dy * 2);
+            tb_info_b2.Location = new Point(x_st + dx, y_st + dy * 3);
+            tb_info_d2.Location = new Point(x_st + dx, y_st + dy * 4);
+            tb_info_e2.Location = new Point(x_st + dx, y_st + dy * 5);
+            tb_info_f2.Location = new Point(x_st + dx, y_st + dy * 6);
+
+            dx = 180;
+            tb_info_8.Location = new Point(x_st + dx, y_st + dy * 0);
+            tb_info_aa1.Location = new Point(x_st + dx, y_st + dy * 1);
+            tb_info_aa2.Location = new Point(x_st + dx, y_st + dy * 2);
+            tb_info_b.Location = new Point(x_st + dx, y_st + dy * 3);
+            tb_info_d.Location = new Point(x_st + dx, y_st + dy * 4);
+            tb_info_e.Location = new Point(x_st + dx, y_st + dy * 5);
+            tb_info_f.Location = new Point(x_st + dx, y_st + dy * 6);
+
+            dx = 180;
+            lb_a.Location = new Point(x_st + dx, y_st + dy * 2 + 35);
+            lb_b.Location = new Point(x_st + dx, y_st + dy * 3 + 35);
+            lb_d.Location = new Point(x_st + dx, y_st + dy * 4 + 35);
+            lb_e.Location = new Point(x_st + dx, y_st + dy * 5 + 35);
+            lb_f.Location = new Point(x_st + dx, y_st + dy * 6 + 35);
+
+            x_st = 20;
+            y_st = 130;
+            dx = 40;
+            data_00.Location = new Point(x_st + dx * 0, y_st);
+            data_01.Location = new Point(x_st + dx * 1, y_st);
+            data_02.Location = new Point(x_st + dx * 2, y_st);
+            data_03.Location = new Point(x_st + dx * 3, y_st);
+            data_04.Location = new Point(x_st + dx * 4, y_st);
+            data_05.Location = new Point(x_st + dx * 5, y_st);
+            data_06.Location = new Point(x_st + dx * 6, y_st);
+            data_07.Location = new Point(x_st + dx * 7, y_st);
+            data_08.Location = new Point(x_st + dx * 8, y_st);
+            data_09.Location = new Point(x_st + dx * 9, y_st);
+            data_10.Location = new Point(x_st + dx * 10, y_st);
+            data_11.Location = new Point(x_st + dx * 11, y_st);
+            data_12.Location = new Point(x_st + dx * 12, y_st);
+            data_13.Location = new Point(x_st + dx * 13, y_st);
+            data_14.Location = new Point(x_st + dx * 14, y_st);
+            data_15.Location = new Point(x_st + dx * 15, y_st);
+
+            y_st = 50;
+            textBox5.Location = new Point(x_st + dx * 0, y_st);
+            textBox5.Size = new Size(dx * 15 + data_00.Width, textBox5.Size.Height);
+
+            //AWB
+            bt_awb_test.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200);
+            bt_awb_test.Size = new Size(380, 97);
+            progressBar_awb.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200 + 100);
+
+            //button
+            x_st = 140;
+            y_st = 415;
+            dx = 70;
+            dy = 40;
+
+            //第零排button
+            bt_read_awb.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_erase.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            lb_awb_data.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 4);
+            bt_get_setup.Location = new Point(x_st + dx * 6 - 5, y_st + dy * 0);
+
+            //第一排button
+            bt_awb_test_init.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            //bt_awb_test.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_awb_test2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_break.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_awb.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_disable_timer_webcam.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+
+            //第二排button
+            bt_test.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            bt_clear.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+
+            //讀寫相機暫存器
+            x_st = 140;
+            y_st = 520;
+            dx = 170;
+
+            lb_addr.Location = new Point(30, y_st + 5);
+            lb_0x1.Location = new Point(5, y_st + 3 + 30);
+            tb_1a.Location = new Point(30, y_st + 30);
+            tb_2a.Location = new Point(100, y_st + 30);
+
+            lb_data.Location = new Point(30 + dx, y_st + 5);
+            lb_0x2.Location = new Point(5 + dx, y_st + 3 + 30);
+            tb_3a.Location = new Point(30 + dx, y_st + 30);
+            tb_4a.Location = new Point(100 + dx, y_st + 30);
+
+            x_st = 140;
+            dx = 70;
+            bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
+            bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
+
+            //EXPO GAIN R G B
+            x_st = 140;
+            y_st = 390;
+            dx = 80;
+            lb_awb_result_expo.Location = new Point(x_st + dx * 0, y_st);
+            lb_awb_result_gain.Location = new Point(x_st + dx * 1, y_st);
+            lb_awb_result_R.Location = new Point(x_st + dx * 2, y_st);
+            lb_awb_result_G.Location = new Point(x_st + dx * 3 + 20, y_st);
+            lb_awb_result_B.Location = new Point(x_st + dx * 4 + 40, y_st);
+
+            lb_awb_result_expo.ForeColor = Color.Silver;
+            lb_awb_result_gain.ForeColor = Color.Gold;
+            lb_awb_result_R.ForeColor = Color.Red;
+            lb_awb_result_G.ForeColor = Color.Green;
+            lb_awb_result_B.ForeColor = Color.Blue;
+
+            //EXPO
+            lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
+            lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
+            lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 45);
+            lb_range_1.Text = "0~1FF           0~511";
+            trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 45);
+            numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 45);
+            tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 45);
+            bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 45);
+
+            //GAIN
+            lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50 - 15);
+            lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50 - 15);
+            lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50 - 15);
+            lb_range_2.Text = "0~1FF           0~511";
+            trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+            numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+            tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+            bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+
+            //R
+            lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30 - 15);
+            lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30 - 15);
+            lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 - 15);
+            lb_range_3.Text = "0~FFF          0~4095";
+            trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+            numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+            tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+            bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+
+            //G
+            lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20 - 15);
+            lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20 - 15);
+            lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40 + 30 + 20 - 15);
+            lb_range_4.Text = "0~FFF          0~4095";
+            trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+            numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+            tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+            bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+
+            //B
+            lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10 - 15);
+            lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10 - 15);
+            lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20 + 30 + 10 - 15);
+            lb_range_5.Text = "0~FFF          0~4095";
+            trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+            numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+            tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+            bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+
+            //TARGET RGB
+            comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2);
+            numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 250 * 2);
+            numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 290 * 2);
+            numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 330 * 2);
+
+            //WPT
+            lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 15);
+            tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+            numericUpDown_wpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+            bt_read_wpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+            bt_write_wpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+
+            //BPT
+            lb_bpt.Location = new Point(410 + 5 + 400 + 20 + 200, lb_wpt.Location.Y + 60);
+            tb_bpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, tb_wpt.Location.Y + 60);
+            numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, numericUpDown_wpt.Location.Y + 60);
+            bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, bt_read_wpt.Location.Y + 60);
+            bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, bt_write_wpt.Location.Y + 60);
+            refresh_picturebox2();
+            lb_save_message.Visible = false;
+
+            return;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox1.Size = new Size(640, 480);
@@ -1822,99 +2156,7 @@ namespace imsLink
             else
                 bt_goto_awb.Visible = false;
 
-            lb_0x1.Visible = false;
-            lb_0x2.Visible = false;
-            lb_0x3.Visible = false;
-            lb_0x4.Visible = false;
-            lb_addr.Visible = false;
-            lb_data.Visible = false;
-            tb_1a.Visible = false;
-            tb_2a.Visible = false;
-            tb_3a.Visible = false;
-            tb_4a.Visible = false;
-            bt_read2.Visible = false;
-            bt_write2.Visible = false;
-
-            bt_awb.Visible = false;
-            bt_awb_test.Visible = false;
-            progressBar_awb.Visible = false;
-            bt_awb_test2.Visible = false;
-            bt_awb_test_init.Visible = false;
-            bt_disable_timer_webcam.Visible = false;
-            bt_erase.Visible = false;
-            bt_read_awb.Visible = false;
-            lb_awb_data.Visible = false;
-            bt_test.Visible = false;
-            bt_clear.Visible = false;
-            bt_break.Visible = false;
-            pictureBox2.Visible = false;
-            lb_range_1.Visible = false;
-            lb_range_2.Visible = false;
-            lb_expo.Visible = false;
-            trackBar_expo.Visible = false;
-            tb_expo.Visible = false;
-            numericUpDown_expo.Visible = false;
-            bt_setup_expo.Visible = false;
-            lb_gain.Visible = false;
-            trackBar_gain.Visible = false;
-            tb_gain.Visible = false;
-            numericUpDown_gain.Visible = false;
-            bt_setup_gain.Visible = false;
-
-            lb_awb_result_expo.Visible = false;
-            lb_awb_result_gain.Visible = false;
-            lb_awb_result_R.Visible = false;
-            lb_awb_result_G.Visible = false;
-            lb_awb_result_B.Visible = false;
-            bt_get_setup.Visible = false;
-
-            comboBox_temperature.Visible = false;
-            //comboBox_webcam.Visible = false;
-            numericUpDown_TG_R.Visible = false;
-            numericUpDown_TG_G.Visible = false;
-            numericUpDown_TG_B.Visible = false;
-
-            //R
-            lb_R.Visible = false;
-            lb_0xR.Visible = false;
-            lb_range_3.Visible = false;
-            trackBar_R.Visible = false;
-            tb_R.Visible = false;
-            numericUpDown_R.Visible = false;
-            bt_setup_R.Visible = false;
-
-            //G
-            lb_G.Visible = false;
-            lb_0xG.Visible = false;
-            lb_range_4.Visible = false;
-            trackBar_G.Visible = false;
-            tb_G.Visible = false;
-            numericUpDown_G.Visible = false;
-            bt_setup_G.Visible = false;
-
-            //B
-            lb_BB.Visible = false;
-            lb_0xB.Visible = false;
-            lb_range_5.Visible = false;
-            trackBar_B.Visible = false;
-            tb_B.Visible = false;
-            numericUpDown_B.Visible = false;
-            bt_setup_B.Visible = false;
-
-            //WPT
-            lb_wpt.Visible = false;
-            tb_wpt.Visible = false;
-            numericUpDown_wpt.Visible = false;
-            bt_read_wpt.Visible = false;
-            bt_write_wpt.Visible = false;
-
-            //BPT
-            lb_bpt.Visible = false;
-            tb_bpt.Visible = false;
-            numericUpDown_bpt.Visible = false;
-            bt_read_bpt.Visible = false;
-            bt_write_bpt.Visible = false;
-
+            show_awb_item_visible(false);   //111
             g.Clear(BackColor);
 
             //設定執行後的表單起始位置
@@ -1988,76 +2230,8 @@ namespace imsLink
                 cb_5X5.Visible = false;
             }
 
-
-            int x_st = 20;
-            int y_st = 40;
-            int dx;
-            int dy;
-
-            dx = 0;
-            dy = 65;
-
-            textBox10.Location = new Point(x_st + dx, y_st + dy * 0);
-            textBox4.Location = new Point(x_st + dx, y_st + dy * 1);
-            textBox2.Location = new Point(x_st + dx, y_st + dy * 2);
-            textBox8.Location = new Point(x_st + dx, y_st + dy * 3);
-            textBox12.Location = new Point(x_st + dx, y_st + dy * 4);
-            textBox14.Location = new Point(x_st + dx, y_st + dy * 5);
-            textBox16.Location = new Point(x_st + dx, y_st + dy * 6);
-
-            dx = 60;
-            tb_info_82.Location = new Point(x_st + dx, y_st + dy * 0);
-            textBox3.Location = new Point(x_st + dx, y_st + dy * 1);
-            tb_info_a2.Location = new Point(x_st + dx, y_st + dy * 2);
-            tb_info_b2.Location = new Point(x_st + dx, y_st + dy * 3);
-            tb_info_d2.Location = new Point(x_st + dx, y_st + dy * 4);
-            tb_info_e2.Location = new Point(x_st + dx, y_st + dy * 5);
-            tb_info_f2.Location = new Point(x_st + dx, y_st + dy * 6);
-
-            dx = 180;
-            tb_info_8.Location = new Point(x_st + dx, y_st + dy * 0);
-            tb_info_aa1.Location = new Point(x_st + dx, y_st + dy * 1);
-            tb_info_aa2.Location = new Point(x_st + dx, y_st + dy * 2);
-            tb_info_b.Location = new Point(x_st + dx, y_st + dy * 3);
-            tb_info_d.Location = new Point(x_st + dx, y_st + dy * 4);
-            tb_info_e.Location = new Point(x_st + dx, y_st + dy * 5);
-            tb_info_f.Location = new Point(x_st + dx, y_st + dy * 6);
-
-
-            dx = 180;
-            lb_a.Location = new Point(x_st + dx, y_st + dy * 2 + 35);
-            lb_b.Location = new Point(x_st + dx, y_st + dy * 3 + 35);
-            lb_d.Location = new Point(x_st + dx, y_st + dy * 4 + 35);
-            lb_e.Location = new Point(x_st + dx, y_st + dy * 5 + 35);
-            lb_f.Location = new Point(x_st + dx, y_st + dy * 6 + 35);
-
-
-            x_st = 20;
-            y_st = 130;
-            dx = 40;
-            data_00.Location = new Point(x_st + dx * 0, y_st);
-            data_01.Location = new Point(x_st + dx * 1, y_st);
-            data_02.Location = new Point(x_st + dx * 2, y_st);
-            data_03.Location = new Point(x_st + dx * 3, y_st);
-            data_04.Location = new Point(x_st + dx * 4, y_st);
-            data_05.Location = new Point(x_st + dx * 5, y_st);
-            data_06.Location = new Point(x_st + dx * 6, y_st);
-            data_07.Location = new Point(x_st + dx * 7, y_st);
-            data_08.Location = new Point(x_st + dx * 8, y_st);
-            data_09.Location = new Point(x_st + dx * 9, y_st);
-            data_10.Location = new Point(x_st + dx * 10, y_st);
-            data_11.Location = new Point(x_st + dx * 11, y_st);
-            data_12.Location = new Point(x_st + dx * 12, y_st);
-            data_13.Location = new Point(x_st + dx * 13, y_st);
-            data_14.Location = new Point(x_st + dx * 14, y_st);
-            data_15.Location = new Point(x_st + dx * 15, y_st);
-
-
-            y_st = 50;
-            textBox5.Location = new Point(x_st + dx * 0, y_st);
-            textBox5.Size = new Size(dx * 15 + data_00.Width, textBox5.Size.Height);
-
-        
+            show_item_location();
+            return;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2936,9 +3110,9 @@ namespace imsLink
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             int page = Convert.ToInt32(textBox6.Text, 16);
-            Send_IMS_Data(0xD1, (byte)page, 0, 0); 
+            Send_IMS_Data(0xD1, (byte)page, 0, 0);
+            return;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -3189,98 +3363,7 @@ namespace imsLink
                         toolTip1.SetToolTip(button19, "2X");
                     }
 
-                    lb_0x1.Visible = false;
-                    lb_0x2.Visible = false;
-                    lb_0x3.Visible = false;
-                    lb_0x4.Visible = false;
-                    lb_addr.Visible = false;
-                    lb_data.Visible = false;
-                    tb_1a.Visible = false;
-                    tb_2a.Visible = false;
-                    tb_3a.Visible = false;
-                    tb_4a.Visible = false;
-                    bt_read2.Visible = false;
-                    bt_write2.Visible = false;
-
-                    bt_awb.Visible = false;
-                    bt_awb_test.Visible = false;
-                    progressBar_awb.Visible = false;
-                    bt_awb_test2.Visible = false;
-                    bt_awb_test_init.Visible = false;
-                    bt_disable_timer_webcam.Visible = false;
-                    bt_erase.Visible = false;
-                    bt_read_awb.Visible = false;
-                    lb_awb_data.Visible = false;
-                    bt_test.Visible = false;
-                    bt_clear.Visible = false;
-                    bt_break.Visible = false;
-                    pictureBox2.Visible = false;
-                    lb_range_1.Visible = false;
-                    lb_range_2.Visible = false;
-                    lb_expo.Visible = false;
-                    trackBar_expo.Visible = false;
-                    tb_expo.Visible = false;
-                    numericUpDown_expo.Visible = false;
-                    bt_setup_expo.Visible = false;
-                    lb_gain.Visible = false;
-                    trackBar_gain.Visible = false;
-                    tb_gain.Visible = false;
-                    numericUpDown_gain.Visible = false;
-                    bt_setup_gain.Visible = false;
-
-                    lb_awb_result_expo.Visible = false;
-                    lb_awb_result_gain.Visible = false;
-                    lb_awb_result_R.Visible = false;
-                    lb_awb_result_G.Visible = false;
-                    lb_awb_result_B.Visible = false;
-                    bt_get_setup.Visible = false;
-
-                    comboBox_temperature.Visible = false;
-                    //comboBox_webcam.Visible = false;
-                    numericUpDown_TG_R.Visible = false;
-                    numericUpDown_TG_G.Visible = false;
-                    numericUpDown_TG_B.Visible = false;
-
-                    //R
-                    lb_R.Visible = false;
-                    lb_0xR.Visible = false;
-                    lb_range_3.Visible = false;
-                    trackBar_R.Visible = false;
-                    tb_R.Visible = false;
-                    numericUpDown_R.Visible = false;
-                    bt_setup_R.Visible = false;
-
-                    //G
-                    lb_G.Visible = false;
-                    lb_0xG.Visible = false;
-                    lb_range_4.Visible = false;
-                    trackBar_G.Visible = false;
-                    tb_G.Visible = false;
-                    numericUpDown_G.Visible = false;
-                    bt_setup_G.Visible = false;
-
-                    //B
-                    lb_BB.Visible = false;
-                    lb_0xB.Visible = false;
-                    lb_range_5.Visible = false;
-                    trackBar_B.Visible = false;
-                    tb_B.Visible = false;
-                    numericUpDown_B.Visible = false;
-                    bt_setup_B.Visible = false;
-
-                    //WPT
-                    lb_wpt.Visible = false;
-                    tb_wpt.Visible = false;
-                    numericUpDown_wpt.Visible = false;
-                    bt_read_wpt.Visible = false;
-                    bt_write_wpt.Visible = false;
-
-                    //BPT
-                    lb_bpt.Visible = false;
-                    tb_bpt.Visible = false;
-                    numericUpDown_bpt.Visible = false;
-                    bt_read_bpt.Visible = false;
-                    bt_write_bpt.Visible = false;
+                    show_awb_item_visible(false);   //222
                 }
             }
 
@@ -4352,11 +4435,6 @@ namespace imsLink
 
         private void button19_Click(object sender, EventArgs e)
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             //richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
@@ -4401,235 +4479,8 @@ namespace imsLink
                     this.richTextBox1.Location = new System.Drawing.Point(150, 90);
                     this.richTextBox1.Size = new System.Drawing.Size(400 + 30 + 20, 250);
 
-                    lb_0x1.Visible = true;
-                    lb_0x2.Visible = true;
-                    lb_0x3.Visible = true;
-                    lb_0x4.Visible = true;
-                    lb_addr.Visible = true;
-                    lb_data.Visible = true;
-                    tb_1a.Visible = true;
-                    tb_2a.Visible = true;
-                    tb_3a.Visible = true;
-                    tb_4a.Visible = true;
-                    bt_read2.Visible = true;
-                    bt_write2.Visible = true;
+                    show_awb_item_visible(true);    //333
 
-                    bt_awb.Visible = true;
-                    bt_awb_test.Visible = true;
-                    progressBar_awb.Visible = true;
-                    bt_awb_test2.Visible = true;
-                    bt_awb_test_init.Visible = true;
-                    bt_disable_timer_webcam.Visible = true;
-                    bt_erase.Visible = true;
-                    bt_read_awb.Visible = true;
-                    lb_awb_data.Visible = true;
-                    bt_test.Visible = true;
-                    bt_clear.Visible = true;
-                    bt_break.Visible = true;
-                    pictureBox2.Visible = true;
-                    lb_range_1.Visible = true;
-                    lb_range_2.Visible = true;
-                    lb_expo.Visible = true;
-                    trackBar_expo.Visible = true;
-                    tb_expo.Visible = true;
-                    numericUpDown_expo.Visible = true;
-                    bt_setup_expo.Visible = true;
-                    lb_gain.Visible = true;
-                    trackBar_gain.Visible = true;
-                    tb_gain.Visible = true;
-                    numericUpDown_gain.Visible = true;
-                    bt_setup_gain.Visible = true;
-
-                    lb_awb_result_expo.Visible = true;
-                    lb_awb_result_gain.Visible = true;
-                    lb_awb_result_R.Visible = true;
-                    lb_awb_result_G.Visible = true;
-                    lb_awb_result_B.Visible = true;
-                    bt_get_setup.Visible = true;
-
-                    comboBox_temperature.Visible = true;
-                    //comboBox_webcam.Visible = true;
-                    numericUpDown_TG_R.Visible = true;
-                    numericUpDown_TG_G.Visible = true;
-                    numericUpDown_TG_B.Visible = true;
-
-                    //R
-                    lb_R.Visible = true;
-                    lb_0xR.Visible = true;
-                    lb_range_3.Visible = true;
-                    trackBar_R.Visible = true;
-                    tb_R.Visible = true;
-                    numericUpDown_R.Visible = true;
-                    bt_setup_R.Visible = true;
-
-                    //G
-                    lb_G.Visible = true;
-                    lb_0xG.Visible = true;
-                    lb_range_4.Visible = true;
-                    trackBar_G.Visible = true;
-                    tb_G.Visible = true;
-                    numericUpDown_G.Visible = true;
-                    bt_setup_G.Visible = true;
-
-                    //B
-                    lb_BB.Visible = true;
-                    lb_0xB.Visible = true;
-                    lb_range_5.Visible = true;
-                    trackBar_B.Visible = true;
-                    tb_B.Visible = true;
-                    numericUpDown_B.Visible = true;
-                    bt_setup_B.Visible = true;
-
-                    //WPT
-                    lb_wpt.Visible = true;
-                    tb_wpt.Visible = true;
-                    numericUpDown_wpt.Visible = true;
-                    bt_read_wpt.Visible = true;
-                    bt_write_wpt.Visible = true;
-
-                    //BPT
-                    lb_bpt.Visible = true;
-                    tb_bpt.Visible = true;
-                    numericUpDown_bpt.Visible = true;
-                    bt_read_bpt.Visible = true;
-                    bt_write_bpt.Visible = true;
-
-                    bt_awb_test.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200);
-                    bt_awb_test.Size = new Size(380, 97);
-
-                    progressBar_awb.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200 + 100);
-
-                    //button
-                    x_st = 140;
-                    y_st = 415;
-                    dx = 70;
-                    dy = 40;
-
-                    //第零排button
-                    bt_read_awb.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-                    bt_erase.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-                    lb_awb_data.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 4);
-                    bt_get_setup.Location = new Point(x_st + dx * 6 - 5, y_st + dy * 0);
-
-                    //第一排button
-                    bt_awb_test_init.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-                    //bt_awb_test.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-                    bt_awb_test2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-                    bt_break.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-                    bt_awb.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-                    bt_disable_timer_webcam.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-
-                    //第二排button
-                    bt_test.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-                    bt_clear.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-
-                    //讀寫相機暫存器
-                    x_st = 140;
-                    y_st = 520;
-                    dx = 170;
-
-                    lb_addr.Location = new Point(30, y_st + 5);
-                    lb_0x1.Location = new Point(5, y_st + 3 + 30);
-                    tb_1a.Location = new Point(30, y_st + 30);
-                    tb_2a.Location = new Point(100, y_st + 30);
-
-                    lb_data.Location = new Point(30 + dx, y_st + 5);
-                    lb_0x2.Location = new Point(5 + dx, y_st + 3 + 30);
-                    tb_3a.Location = new Point(30 + dx, y_st + 30);
-                    tb_4a.Location = new Point(100 + dx, y_st + 30);
-
-                    x_st = 140;
-                    dx = 70;
-                    bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
-                    bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
-
-                    //EXPO GAIN R G B
-                    x_st = 140;
-                    y_st = 390;
-                    dx = 80;
-                    lb_awb_result_expo.Location = new Point(x_st + dx * 0, y_st);
-                    lb_awb_result_gain.Location = new Point(x_st + dx * 1, y_st);
-                    lb_awb_result_R.Location = new Point(x_st + dx * 2, y_st);
-                    lb_awb_result_G.Location = new Point(x_st + dx * 3 + 20, y_st);
-                    lb_awb_result_B.Location = new Point(x_st + dx * 4 + 40, y_st);
-
-                    lb_awb_result_expo.ForeColor = Color.Silver;
-                    lb_awb_result_gain.ForeColor = Color.Gold;
-                    lb_awb_result_R.ForeColor = Color.Red;
-                    lb_awb_result_G.ForeColor = Color.Green;
-                    lb_awb_result_B.ForeColor = Color.Blue;
-
-                    //EXPO
-                    lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
-                    lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
-                    lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 45);
-                    lb_range_1.Text = "0~1FF           0~511";
-                    trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 45);
-                    numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 45);
-                    tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 45);
-                    bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 45);
-
-                    //GAIN
-                    lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50 - 15);
-                    lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50 - 15);
-                    lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50 - 15);
-                    lb_range_2.Text = "0~1FF           0~511";
-                    trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-                    numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-                    tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-                    bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-
-                    //R
-                    lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30 - 15);
-                    lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30 - 15);
-                    lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 - 15);
-                    lb_range_3.Text = "0~FFF          0~4095";
-                    trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-                    numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-                    tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-                    bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-
-                    //G
-                    lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20 - 15);
-                    lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20 - 15);
-                    lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40 + 30 + 20 - 15);
-                    lb_range_4.Text = "0~FFF          0~4095";
-                    trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-                    numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-                    tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-                    bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-
-                    //B
-                    lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10 - 15);
-                    lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10 - 15);
-                    lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20 + 30 + 10 - 15);
-                    lb_range_5.Text = "0~FFF          0~4095";
-                    trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                    numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                    tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                    bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-
-                    //TARGET RGB
-                    comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2);
-                    numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 250 * 2);
-                    numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 290 * 2);
-                    numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 330 * 2);
-
-                    //WPT
-                    lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 15);
-                    tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-                    numericUpDown_wpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-                    bt_read_wpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-                    bt_write_wpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-
-                    //BPT
-                    lb_bpt.Location = new Point(410 + 5 + 400 + 20 + 200, lb_wpt.Location.Y + 60);
-                    tb_bpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, tb_wpt.Location.Y + 60);
-                    numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, numericUpDown_wpt.Location.Y + 60);
-                    bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, bt_read_wpt.Location.Y + 60);
-                    bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, bt_write_wpt.Location.Y + 60);
-                    refresh_picturebox2();
-                    lb_save_message.Visible = false;
                 }
                 else
                 {
@@ -4667,99 +4518,7 @@ namespace imsLink
 
                 if (flag_awb_debug == true)
                 {
-                    lb_0x1.Visible = false;
-                    lb_0x2.Visible = false;
-                    lb_0x3.Visible = false;
-                    lb_0x4.Visible = false;
-                    lb_addr.Visible = false;
-                    lb_data.Visible = false;
-                    tb_1a.Visible = false;
-                    tb_2a.Visible = false;
-                    tb_3a.Visible = false;
-                    tb_4a.Visible = false;
-                    bt_read2.Visible = false;
-                    bt_write2.Visible = false;
-
-                    bt_awb.Visible = false;
-                    bt_awb_test.Visible = false;
-                    progressBar_awb.Visible = false;
-                    bt_awb_test2.Visible = false;
-                    bt_awb_test_init.Visible = false;
-                    bt_disable_timer_webcam.Visible = false;
-                    bt_erase.Visible = false;
-                    bt_read_awb.Visible = false;
-                    lb_awb_data.Visible = false;
-                    bt_test.Visible = false;
-                    bt_clear.Visible = false;
-                    bt_break.Visible = false;
-                    pictureBox2.Visible = false;
-                    lb_range_1.Visible = false;
-                    lb_range_2.Visible = false;
-                    lb_expo.Visible = false;
-                    trackBar_expo.Visible = false;
-                    tb_expo.Visible = false;
-                    numericUpDown_expo.Visible = false;
-                    bt_setup_expo.Visible = false;
-                    lb_gain.Visible = false;
-                    trackBar_gain.Visible = false;
-                    tb_gain.Visible = false;
-                    numericUpDown_gain.Visible = false;
-                    bt_setup_gain.Visible = false;
-
-                    lb_awb_result_expo.Visible = false;
-                    lb_awb_result_gain.Visible = false;
-                    lb_awb_result_R.Visible = false;
-                    lb_awb_result_G.Visible = false;
-                    lb_awb_result_B.Visible = false;
-                    bt_get_setup.Visible = false;
-
-                    comboBox_temperature.Visible = false;
-                    //comboBox_webcam.Visible = false;
-                    numericUpDown_TG_R.Visible = false;
-                    numericUpDown_TG_G.Visible = false;
-                    numericUpDown_TG_B.Visible = false;
-
-                    //R
-                    lb_R.Visible = false;
-                    lb_0xR.Visible = false;
-                    lb_range_3.Visible = false;
-                    trackBar_R.Visible = false;
-                    tb_R.Visible = false;
-                    numericUpDown_R.Visible = false;
-                    bt_setup_R.Visible = false;
-
-                    //G
-                    lb_G.Visible = false;
-                    lb_0xG.Visible = false;
-                    lb_range_4.Visible = false;
-                    trackBar_G.Visible = false;
-                    tb_G.Visible = false;
-                    numericUpDown_G.Visible = false;
-                    bt_setup_G.Visible = false;
-
-                    //B
-                    lb_BB.Visible = false;
-                    lb_0xB.Visible = false;
-                    lb_range_5.Visible = false;
-                    trackBar_B.Visible = false;
-                    tb_B.Visible = false;
-                    numericUpDown_B.Visible = false;
-                    bt_setup_B.Visible = false;
-
-                    //WPT
-                    lb_wpt.Visible = false;
-                    tb_wpt.Visible = false;
-                    numericUpDown_wpt.Visible = false;
-                    bt_read_wpt.Visible = false;
-                    bt_write_wpt.Visible = false;
-
-                    //BPT
-                    lb_bpt.Visible = false;
-                    tb_bpt.Visible = false;
-                    numericUpDown_bpt.Visible = false;
-                    bt_read_bpt.Visible = false;
-                    bt_write_bpt.Visible = false;
-
+                    show_awb_item_visible(false);   //444
                 }
             }
         }
@@ -7239,49 +6998,45 @@ namespace imsLink
                 ret = get_b_data();
             }
 
-            //old method
+            //old method, write to AWB_PAGE0
             //write_awb_data_to_camera(data_R, data_B);     old method
 
-            //new method
-            int page = USER_PAGE2;
+            //new method, write to AWB_PAGE1
+            int page = AWB_PAGE1;
 
             for (i = 0; i < 16; i++)
             {
                 user_flash_data[i] = 0;
             }
 
-            //			ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+            //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
 
-            user_flash_data[0] = 0xDA;
+            user_flash_data[0] = 0xDA;  //header
 
-            user_flash_data[1] = 0x52;
-            user_flash_data[2] = 0x1A;
+            user_flash_data[1] = 0x52;  //AWB R H AH
+            user_flash_data[2] = 0x1A;  //AWB R H AL
             user_flash_data[3] = (Byte)(data_R / 256);
 
-            user_flash_data[4] = 0x52;
-            user_flash_data[5] = 0x1B;
+            user_flash_data[4] = 0x52;  //AWB R L AH
+            user_flash_data[5] = 0x1B;  //AWB R L AL
             user_flash_data[6] = (Byte)(data_R % 256);
 
-            user_flash_data[7] = 0x52;
-            user_flash_data[8] = 0x1E;
+            user_flash_data[7] = 0x52;  //AWB B H AH
+            user_flash_data[8] = 0x1E;  //AWB B H AL
             user_flash_data[9] = (Byte)(data_B / 256);
 
-            user_flash_data[10] = 0x52;
-            user_flash_data[11] = 0x1F;
+            user_flash_data[10] = 0x52; //AWB B L AH
+            user_flash_data[11] = 0x1F; //AWB B L AL
             user_flash_data[12] = (Byte)(data_B % 256);
 
-            user_flash_data[13] = 0x00;
-            user_flash_data[14] = 0x00;
-            user_flash_data[15] = 0x00;
-
+            user_flash_data[13] = 0x00; //dummy, no data
+            user_flash_data[14] = 0x00; //dummy, no data
+            user_flash_data[15] = 0x00; //dummy, no data
 
             Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
-
             serialPort1.Write(user_flash_data, 0, 16);
 
-
             richTextBox1.Text += "寫入資料  完成\n";
-
 
             // Stop timing
             stopwatch.Stop();
@@ -9292,12 +9047,13 @@ namespace imsLink
 
         private void bt_read_awb_Click(object sender, EventArgs e)
         {
+            //old method get awb data
             lb_awb_data.Text = "";
             byte page;
             int cnt = 0;
 
             richTextBox1.Text += "\n\nread camera awb data AWB_PAGE\n";
-            page = AWB_PAGE;
+            page = AWB_PAGE0;
             Get_IMS_Data(1, page, 0xAA);
             cnt = 0;
             while ((flag_wait_receive_data == 1) && (cnt++ < 20))
@@ -9306,6 +9062,12 @@ namespace imsLink
                 delay(100);
             }
             flag_wait_receive_data = 0;
+
+            //new method get awb data
+            flag_read_camera_raw_data = 1;
+            page = AWB_PAGE1;
+            Send_IMS_Data(0xD1, (byte)page, 0, 0);
+            return;
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -9321,7 +9083,7 @@ namespace imsLink
 
             richTextBox1.Text += "位置 = " + page.ToString() + "\n";
 
-            if ((page < MODEL_PAGE) || (page > (USER_PAGE2 + 100)))
+            if ((page < MODEL_PAGE) || (page > (USER_PAGE + 100)))
             {
                 richTextBox1.Text += "不支援的flash位址 0x%" + page.ToString("X2") + "=" + page.ToString() + ", abort\n";
                 return;
@@ -9344,7 +9106,6 @@ namespace imsLink
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                button11.BackColor = System.Drawing.SystemColors.ControlLight;
                 return;
             }
             g_conn_status = CAMERA_UNKNOWN;
@@ -9598,9 +9359,180 @@ namespace imsLink
 
         }
 
+        private void button45_Click(object sender, EventArgs e)
+        {
+            int i;
+            int page;
+            int index;
 
+            for (i = 0; i < 16; i++)
+            {
+                user_flash_data[i] = 0;
+            }
 
+            page = Convert.ToInt32(textBox1.Text, 16);
+            if ((page < USER_PAGE) || (page > (USER_PAGE + 10)))
+            {
+                richTextBox1.Text += "不支援的flash位址 0x%" + page.ToString("X2") + "=" + page.ToString() + ", abort\n";
+                return;
+            }
+            richTextBox1.Text += "寫入頁位置 = " + page.ToString() + "\n";
 
+            if ((rb_led_none.Checked == true) && (rb_meter_none.Checked == true) && (rb_brightness_none.Checked == true))
+            {
+                richTextBox1.Text += "無資料可寫\n";
+                return;
+            }
+
+            index = 0;
+            user_flash_data[0] = 0xDA;  //header
+
+            if (rb_led_none.Checked == false)
+            {
+                if (rb_led_on.Checked == true)
+                {
+                    richTextBox1.Text += "LED ON\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x00;
+                    user_flash_data[3 * index + 3] = 0x00;
+                    index++;
+                }
+                else if (rb_led_off.Checked == true)
+                {
+                    richTextBox1.Text += "LED OFF\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x00;
+                    user_flash_data[3 * index + 3] = 0x01;
+                    index++;
+                }
+            }
+
+            if (rb_meter_none.Checked == false)
+            {
+                if (rb_meter_cen.Checked == true)
+                {
+                    richTextBox1.Text += "Meter Center\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x01;
+                    user_flash_data[3 * index + 3] = 0x00;
+                    index++;
+                }
+                else if (rb_meter_avg.Checked == true)
+                {
+                    richTextBox1.Text += "Meter Average\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x01;
+                    user_flash_data[3 * index + 3] = 0x01;
+                    index++;
+                }
+                else if (rb_meter_auto.Checked == true)
+                {
+                    richTextBox1.Text += "Meter Auto\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x01;
+                    user_flash_data[3 * index + 3] = 0x02;
+                    index++;
+                }
+            }
+
+            if (rb_brightness_none.Checked == false)
+            {
+                if (rb_brightness_1.Checked == true)
+                {
+                    richTextBox1.Text += "LED_1\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x02;
+                    user_flash_data[3 * index + 3] = 0x01;
+                    index++;
+                }
+                else if (rb_brightness_2.Checked == true)
+                {
+                    richTextBox1.Text += "LED_2\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x02;
+                    user_flash_data[3 * index + 3] = 0x02;
+                    index++;
+                }
+                else if (rb_brightness_3.Checked == true)
+                {
+                    richTextBox1.Text += "LED_3\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x02;
+                    user_flash_data[3 * index + 3] = 0x03;
+                    index++;
+                }
+                else if (rb_brightness_4.Checked == true)
+                {
+                    richTextBox1.Text += "LED_4\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x02;
+                    user_flash_data[3 * index + 3] = 0x04;
+                    index++;
+                }
+                else if (rb_brightness_5.Checked == true)
+                {
+                    richTextBox1.Text += "LED_5\n";
+                    user_flash_data[3 * index + 1] = 0xFF;
+                    user_flash_data[3 * index + 2] = 0x02;
+                    user_flash_data[3 * index + 3] = 0x05;
+                    index++;
+                }
+            }
+
+            richTextBox1.Text += "Raw data : ";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += user_flash_data[i].ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "檢查資料OK, continue\n";
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            g_conn_status = CAMERA_UNKNOWN;
+            Send_IMS_Data(0xFF, 0, 0, 0);
+
+            int cnt = 0;
+            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
+            {
+                richTextBox1.Text += "-2xx";
+                delay(100);
+            }
+            if (g_conn_status == DONGLE_NONE)
+            {
+                tb_sn1.Text = "無連接器";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_aa1.Text = "無連接器";
+                tb_info_aa1.BackColor = Color.Red;
+                lb_write_camera_serial2.Text = "無連接器";
+            }
+            else if (g_conn_status == CAMERA_NONE)
+            {
+                tb_sn1.Text = "有連接器, 無相機";
+                tb_sn1.BackColor = Color.Red;
+                tb_info_aa1.Text = "有連接器, 無相機";
+                tb_info_aa1.BackColor = Color.Red;
+                lb_write_camera_serial2.Text = "有連接器, 無相機";
+            }
+            else if (g_conn_status == CAMERA_OK)
+            {
+                tb_info_8.Text = "有連接器, 有相機";
+                tb_info_8.BackColor = Color.White;
+                lb_write_camera_serial2.Text = "有連接器, 有相機, 寫入相機資料中...";
+
+                Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+
+                serialPort1.Write(user_flash_data, 0, 16);
+                richTextBox1.Text += "寫入資料  完成\n";
+            }
+            else
+            {
+                tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
+            }
+        }
     }
 }
 

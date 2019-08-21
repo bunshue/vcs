@@ -261,6 +261,25 @@
             this.lb_wpt = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tp_Test = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button45 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rb_brightness_4 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_2 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_5 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_3 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_1 = new System.Windows.Forms.RadioButton();
+            this.rb_meter_auto = new System.Windows.Forms.RadioButton();
+            this.rb_meter_avg = new System.Windows.Forms.RadioButton();
+            this.rb_meter_cen = new System.Windows.Forms.RadioButton();
+            this.rb_led_off = new System.Windows.Forms.RadioButton();
+            this.rb_led_on = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_none = new System.Windows.Forms.RadioButton();
+            this.rb_meter_none = new System.Windows.Forms.RadioButton();
+            this.rb_led_none = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.button43 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.lb_rtc2 = new System.Windows.Forms.Label();
@@ -350,6 +369,10 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_connect_comport = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -385,6 +408,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_expo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tp_Test.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tp_Layer.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -392,6 +416,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -3120,6 +3146,7 @@
             // 
             // tp_Test
             // 
+            this.tp_Test.Controls.Add(this.groupBox6);
             this.tp_Test.Controls.Add(this.button43);
             this.tp_Test.Controls.Add(this.button41);
             this.tp_Test.Controls.Add(this.lb_rtc2);
@@ -3136,12 +3163,219 @@
             this.tp_Test.Text = "Test";
             this.tp_Test.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label10);
+            this.groupBox6.Controls.Add(this.groupBox13);
+            this.groupBox6.Controls.Add(this.button45);
+            this.groupBox6.Controls.Add(this.textBox1);
+            this.groupBox6.Controls.Add(this.rb_led_off);
+            this.groupBox6.Controls.Add(this.rb_led_on);
+            this.groupBox6.Controls.Add(this.rb_led_none);
+            this.groupBox6.Controls.Add(this.label9);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Controls.Add(this.groupBox7);
+            this.groupBox6.Controls.Add(this.groupBox12);
+            this.groupBox6.Location = new System.Drawing.Point(378, 28);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(530, 283);
+            this.groupBox6.TabIndex = 133;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Camera UFM";
+            // 
+            // button45
+            // 
+            this.button45.Location = new System.Drawing.Point(392, 233);
+            this.button45.Name = "button45";
+            this.button45.Size = new System.Drawing.Size(80, 40);
+            this.button45.TabIndex = 104;
+            this.button45.Text = "寫入";
+            this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(113, 236);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(80, 32);
+            this.textBox1.TabIndex = 104;
+            this.textBox1.Text = "15";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // rb_brightness_4
+            // 
+            this.rb_brightness_4.AutoSize = true;
+            this.rb_brightness_4.Location = new System.Drawing.Point(232, 28);
+            this.rb_brightness_4.Name = "rb_brightness_4";
+            this.rb_brightness_4.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_4.TabIndex = 149;
+            this.rb_brightness_4.Text = "4";
+            this.rb_brightness_4.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_2
+            // 
+            this.rb_brightness_2.AutoSize = true;
+            this.rb_brightness_2.Location = new System.Drawing.Point(141, 26);
+            this.rb_brightness_2.Name = "rb_brightness_2";
+            this.rb_brightness_2.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_2.TabIndex = 148;
+            this.rb_brightness_2.Text = "2";
+            this.rb_brightness_2.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_5
+            // 
+            this.rb_brightness_5.AutoSize = true;
+            this.rb_brightness_5.Location = new System.Drawing.Point(278, 27);
+            this.rb_brightness_5.Name = "rb_brightness_5";
+            this.rb_brightness_5.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_5.TabIndex = 147;
+            this.rb_brightness_5.Text = "5";
+            this.rb_brightness_5.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_3
+            // 
+            this.rb_brightness_3.AutoSize = true;
+            this.rb_brightness_3.Location = new System.Drawing.Point(185, 27);
+            this.rb_brightness_3.Name = "rb_brightness_3";
+            this.rb_brightness_3.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_3.TabIndex = 146;
+            this.rb_brightness_3.Text = "3";
+            this.rb_brightness_3.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_1
+            // 
+            this.rb_brightness_1.AutoSize = true;
+            this.rb_brightness_1.Location = new System.Drawing.Point(101, 26);
+            this.rb_brightness_1.Name = "rb_brightness_1";
+            this.rb_brightness_1.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_1.TabIndex = 145;
+            this.rb_brightness_1.Text = "1";
+            this.rb_brightness_1.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_auto
+            // 
+            this.rb_meter_auto.AutoSize = true;
+            this.rb_meter_auto.Location = new System.Drawing.Point(275, 26);
+            this.rb_meter_auto.Name = "rb_meter_auto";
+            this.rb_meter_auto.Size = new System.Drawing.Size(68, 20);
+            this.rb_meter_auto.TabIndex = 144;
+            this.rb_meter_auto.Text = "AUTO";
+            this.rb_meter_auto.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_avg
+            // 
+            this.rb_meter_avg.AutoSize = true;
+            this.rb_meter_avg.Location = new System.Drawing.Point(182, 26);
+            this.rb_meter_avg.Name = "rb_meter_avg";
+            this.rb_meter_avg.Size = new System.Drawing.Size(63, 20);
+            this.rb_meter_avg.TabIndex = 143;
+            this.rb_meter_avg.Text = "AVG.";
+            this.rb_meter_avg.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_cen
+            // 
+            this.rb_meter_cen.AutoSize = true;
+            this.rb_meter_cen.Location = new System.Drawing.Point(98, 25);
+            this.rb_meter_cen.Name = "rb_meter_cen";
+            this.rb_meter_cen.Size = new System.Drawing.Size(60, 20);
+            this.rb_meter_cen.TabIndex = 142;
+            this.rb_meter_cen.Text = "CEN.";
+            this.rb_meter_cen.UseVisualStyleBackColor = true;
+            // 
+            // rb_led_off
+            // 
+            this.rb_led_off.AutoSize = true;
+            this.rb_led_off.Location = new System.Drawing.Point(274, 46);
+            this.rb_led_off.Name = "rb_led_off";
+            this.rb_led_off.Size = new System.Drawing.Size(42, 20);
+            this.rb_led_off.TabIndex = 141;
+            this.rb_led_off.Text = "關";
+            this.rb_led_off.UseVisualStyleBackColor = true;
+            // 
+            // rb_led_on
+            // 
+            this.rb_led_on.AutoSize = true;
+            this.rb_led_on.Location = new System.Drawing.Point(190, 45);
+            this.rb_led_on.Name = "rb_led_on";
+            this.rb_led_on.Size = new System.Drawing.Size(42, 20);
+            this.rb_led_on.TabIndex = 140;
+            this.rb_led_on.Text = "開";
+            this.rb_led_on.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_none
+            // 
+            this.rb_brightness_none.AutoSize = true;
+            this.rb_brightness_none.Checked = true;
+            this.rb_brightness_none.Location = new System.Drawing.Point(14, 26);
+            this.rb_brightness_none.Name = "rb_brightness_none";
+            this.rb_brightness_none.Size = new System.Drawing.Size(74, 20);
+            this.rb_brightness_none.TabIndex = 139;
+            this.rb_brightness_none.TabStop = true;
+            this.rb_brightness_none.Text = "不設定";
+            this.rb_brightness_none.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_none
+            // 
+            this.rb_meter_none.AutoSize = true;
+            this.rb_meter_none.Checked = true;
+            this.rb_meter_none.Location = new System.Drawing.Point(11, 26);
+            this.rb_meter_none.Name = "rb_meter_none";
+            this.rb_meter_none.Size = new System.Drawing.Size(74, 20);
+            this.rb_meter_none.TabIndex = 138;
+            this.rb_meter_none.TabStop = true;
+            this.rb_meter_none.Text = "不設定";
+            this.rb_meter_none.UseVisualStyleBackColor = true;
+            // 
+            // rb_led_none
+            // 
+            this.rb_led_none.AutoSize = true;
+            this.rb_led_none.Checked = true;
+            this.rb_led_none.Location = new System.Drawing.Point(103, 44);
+            this.rb_led_none.Name = "rb_led_none";
+            this.rb_led_none.Size = new System.Drawing.Size(74, 20);
+            this.rb_led_none.TabIndex = 137;
+            this.rb_led_none.TabStop = true;
+            this.rb_led_none.Text = "不設定";
+            this.rb_led_none.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(14, 177);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 23);
+            this.label9.TabIndex = 136;
+            this.label9.Text = "亮暗";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(14, 113);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 23);
+            this.label8.TabIndex = 135;
+            this.label8.Text = "測光";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 23);
+            this.label1.TabIndex = 134;
+            this.label1.Text = "LED開關";
+            // 
             // button43
             // 
             this.button43.BackColor = System.Drawing.SystemColors.Control;
             this.button43.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button43.ForeColor = System.Drawing.Color.Red;
-            this.button43.Location = new System.Drawing.Point(526, 213);
+            this.button43.Location = new System.Drawing.Point(279, 240);
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(80, 48);
             this.button43.TabIndex = 132;
@@ -3154,7 +3388,7 @@
             this.button41.BackColor = System.Drawing.SystemColors.Control;
             this.button41.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button41.ForeColor = System.Drawing.Color.Red;
-            this.button41.Location = new System.Drawing.Point(242, 237);
+            this.button41.Location = new System.Drawing.Point(184, 248);
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(64, 32);
             this.button41.TabIndex = 129;
@@ -3166,7 +3400,7 @@
             // 
             this.lb_rtc2.AutoSize = true;
             this.lb_rtc2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rtc2.Location = new System.Drawing.Point(502, 139);
+            this.lb_rtc2.Location = new System.Drawing.Point(192, 115);
             this.lb_rtc2.Name = "lb_rtc2";
             this.lb_rtc2.Size = new System.Drawing.Size(56, 23);
             this.lb_rtc2.TabIndex = 70;
@@ -3174,7 +3408,7 @@
             // 
             // button42
             // 
-            this.button42.Location = new System.Drawing.Point(526, 67);
+            this.button42.Location = new System.Drawing.Point(216, 43);
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(119, 46);
             this.button42.TabIndex = 62;
@@ -3184,7 +3418,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(37, 67);
+            this.button3.Location = new System.Drawing.Point(37, 43);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(119, 46);
             this.button3.TabIndex = 61;
@@ -4084,6 +4318,50 @@
             this.groupBox5.TabIndex = 135;
             this.groupBox5.TabStop = false;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Location = new System.Drawing.Point(92, 20);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(380, 61);
+            this.groupBox7.TabIndex = 150;
+            this.groupBox7.TabStop = false;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.rb_meter_none);
+            this.groupBox12.Controls.Add(this.rb_meter_cen);
+            this.groupBox12.Controls.Add(this.rb_meter_avg);
+            this.groupBox12.Controls.Add(this.rb_meter_auto);
+            this.groupBox12.Location = new System.Drawing.Point(92, 87);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(380, 61);
+            this.groupBox12.TabIndex = 151;
+            this.groupBox12.TabStop = false;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.rb_brightness_none);
+            this.groupBox13.Controls.Add(this.rb_brightness_1);
+            this.groupBox13.Controls.Add(this.rb_brightness_4);
+            this.groupBox13.Controls.Add(this.rb_brightness_3);
+            this.groupBox13.Controls.Add(this.rb_brightness_2);
+            this.groupBox13.Controls.Add(this.rb_brightness_5);
+            this.groupBox13.Location = new System.Drawing.Point(92, 155);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(380, 55);
+            this.groupBox13.TabIndex = 152;
+            this.groupBox13.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(14, 240);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(99, 23);
+            this.label10.TabIndex = 153;
+            this.label10.Text = "寫入頁   0x";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4161,6 +4439,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tp_Test.ResumeLayout(false);
             this.tp_Test.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.tp_Layer.ResumeLayout(false);
@@ -4172,6 +4452,10 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4499,6 +4783,29 @@
         private System.Windows.Forms.TextBox data_02;
         private System.Windows.Forms.TextBox data_01;
         private System.Windows.Forms.TextBox data_00;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button button45;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RadioButton rb_brightness_4;
+        private System.Windows.Forms.RadioButton rb_brightness_2;
+        private System.Windows.Forms.RadioButton rb_brightness_5;
+        private System.Windows.Forms.RadioButton rb_brightness_3;
+        private System.Windows.Forms.RadioButton rb_brightness_1;
+        private System.Windows.Forms.RadioButton rb_meter_auto;
+        private System.Windows.Forms.RadioButton rb_meter_avg;
+        private System.Windows.Forms.RadioButton rb_meter_cen;
+        private System.Windows.Forms.RadioButton rb_led_off;
+        private System.Windows.Forms.RadioButton rb_led_on;
+        private System.Windows.Forms.RadioButton rb_brightness_none;
+        private System.Windows.Forms.RadioButton rb_meter_none;
+        private System.Windows.Forms.RadioButton rb_led_none;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.GroupBox groupBox12;
     }
 }
 
