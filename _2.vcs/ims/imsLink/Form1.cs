@@ -50,6 +50,8 @@ namespace imsLink
         private const int AWB_PAGE0 = 0x10;	    //awb data, old method
         private const int AWB_PAGE1 = 0x11;	    //awb data, new method
         private const int USER_PAGE = 0x12;	    //UFM data
+        private const int DISPLAY_FHD = 0x00;	//screen size FHD
+        private const int DISPLAY_SD = 0x01;	//screen size SD
 
         string imslink_log_filename = "imslink.log";
         string RxString = "";
@@ -65,6 +67,7 @@ namespace imsLink
         byte xx;
         byte yy;
         byte zz;
+        int flag_display_mode = DISPLAY_FHD;
         int flag_read_camera_raw_data = 0;
         int flag_wait_receive_data = 0;
         int flag_receive_camera_serial = 0;
@@ -2047,6 +2050,15 @@ namespace imsLink
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (Screen.PrimaryScreen.Bounds.Width < 1920)
+            {
+                flag_display_mode = DISPLAY_SD;
+            }
+            else
+            {
+                flag_display_mode = DISPLAY_FHD;
+            }
+
             pictureBox1.Size = new Size(640, 480);
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
@@ -2179,7 +2191,8 @@ namespace imsLink
             toolTip1.SetToolTip(button12, "Refresh");
             toolTip1.SetToolTip(button16, "Save");
             toolTip1.SetToolTip(button15, "Play/Pause");
-            if (Screen.PrimaryScreen.Bounds.Width < 1920)
+
+            if (flag_display_mode == DISPLAY_SD)
             {
                 toolTip1.SetToolTip(button19, "1.25X");
             }
@@ -2187,6 +2200,7 @@ namespace imsLink
             {
                 toolTip1.SetToolTip(button19, "2X");
             }
+
             toolTip1.SetToolTip(btnUp, "Up");
             toolTip1.SetToolTip(btnDown, "Down");
             toolTip1.SetToolTip(btnLeft, "Left");
@@ -3122,9 +3136,7 @@ namespace imsLink
             richTextBox1.AppendText("作業系統版本 : " + OSv.ToString() + "\n");
             richTextBox1.AppendText("圖形介面版本 : A02\n");
             richTextBox1.AppendText("韌體版本 : F0" + fw_version.ToString() + "\n");
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
+            richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
             richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString() + "\n");
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
@@ -3354,7 +3366,7 @@ namespace imsLink
                     pictureBox1.Size = new Size(640, 480);
                     comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
 
-                    if (Screen.PrimaryScreen.Bounds.Width < 1920)
+                    if (flag_display_mode == DISPLAY_SD)
                     {
                         toolTip1.SetToolTip(button19, "1.25X");
                     }
@@ -4435,17 +4447,14 @@ namespace imsLink
 
         private void button19_Click(object sender, EventArgs e)
         {
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            //richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
-
+            //richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
             if (flag_fullscreen == false)
             {
                 flag_fullscreen = true;
                 button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
                 //this.TopMost = true;
 
-                if (screenWidth < 1920)
+                if (flag_display_mode == DISPLAY_SD)
                 {
                     //this.FormBorderStyle = FormBorderStyle.None;
                     this.WindowState = FormWindowState.Normal;
@@ -4459,7 +4468,7 @@ namespace imsLink
                     this.StartPosition = FormStartPosition.Manual;
                     this.Location = new System.Drawing.Point(0, 0);
                 }
-                else
+                else   //DISPLAY_FHD
                 {
                     this.FormBorderStyle = FormBorderStyle.None;
                     this.WindowState = FormWindowState.Maximized;
@@ -4499,14 +4508,17 @@ namespace imsLink
                 this.richTextBox1.Size = new System.Drawing.Size(500, 586);
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.WindowState = FormWindowState.Normal;
-                if (screenWidth < 1920)
+                if (flag_display_mode == DISPLAY_SD)
+                {
                     this.Size = new Size(this.Size.Width - 200, 750);
+                }
                 //this.TopMost = false;
                 tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
-                if (Screen.PrimaryScreen.Bounds.Width < 1920)
+
+                if (flag_display_mode == DISPLAY_SD)
                 {
                     toolTip1.SetToolTip(button19, "1.25X");
                 }
@@ -4514,6 +4526,7 @@ namespace imsLink
                 {
                     toolTip1.SetToolTip(button19, "2X");
                 }
+
                 lb_save_message.Visible = true;
 
                 if (flag_awb_debug == true)
@@ -5593,7 +5606,7 @@ namespace imsLink
 
                 flag_camera_already_have_serial = 1;
                 cnt = 0;
-                int cnt_max = 30;
+                int cnt_max = 50;
                 while ((flag_camera_already_have_serial == 1) && (cnt < cnt_max))
                 {
                     cnt++;

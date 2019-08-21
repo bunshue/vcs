@@ -6,6 +6,14 @@
 
 
 
+讀取html檔
+from urllib.request import urlopen
+html = urlopen("http://pythonscraping.com/pages/page1.html")
+print(html.read())
+
+
+
+
 
 
 ----------------many SP----------------
@@ -19,6 +27,27 @@ Python的套件管理程式	PIP
 python -m pip install -U matplotlib	//Windows
 pip install -U matplotlib		//Linux
  
+
+在Windows下安裝Python套件:
+用windows command line安裝 BeautifulSoup
+C:\Users\david>pip3 install beautifulsoup4
+
+windows command line下:
+
+>pip list	//查看目前有安裝的Python套件
+>pip3 install matplotlib	//安裝matplotlib
+>pip3 install pygame		//安裝pygame
+
+可用要安裝的:
+requests	bs4	selenium
+
+
+python -m pip install -U pip
+python -m pip install -U matplotlib
+
+
+
+
  
 #產生連續的整數
 for num in range(10):
@@ -318,26 +347,6 @@ http://www.yeolar.com/note/2011/04/28/matplotlib-tips/
 matplotlib
 
 https://medium.com/jameslearningnote/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90-%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E7%AC%AC2-5%E8%AC%9B-%E8%B3%87%E6%96%99%E8%A6%96%E8%A6%BA%E5%8C%96-matplotlib-seaborn-plotly-75cd353d6d3f
-
-
-
-在Windows下安裝Python套件
-
-windows command line下:
-
-
->pip list	//查看目前有安裝的Python套件
-
-
->pip3 install matplotlib	//安裝matplotlib
->pip3 install pygame		//安裝pygame
-
-可用要安裝的:
-requests	bs4	selenium
-
-
-python -m pip install -U pip
-python -m pip install -U matplotlib
 
 
 
