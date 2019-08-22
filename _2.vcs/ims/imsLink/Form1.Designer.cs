@@ -160,6 +160,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.cb_enable_awb = new System.Windows.Forms.CheckBox();
             this.progressBar_awb = new System.Windows.Forms.ProgressBar();
             this.lb_awb_data = new System.Windows.Forms.Label();
             this.bt_read_awb = new System.Windows.Forms.Button();
@@ -262,24 +263,28 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tp_Test = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button45 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.rb_brightness_none = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_1 = new System.Windows.Forms.RadioButton();
             this.rb_brightness_4 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_3 = new System.Windows.Forms.RadioButton();
             this.rb_brightness_2 = new System.Windows.Forms.RadioButton();
             this.rb_brightness_5 = new System.Windows.Forms.RadioButton();
-            this.rb_brightness_3 = new System.Windows.Forms.RadioButton();
-            this.rb_brightness_1 = new System.Windows.Forms.RadioButton();
-            this.rb_meter_auto = new System.Windows.Forms.RadioButton();
-            this.rb_meter_avg = new System.Windows.Forms.RadioButton();
-            this.rb_meter_cen = new System.Windows.Forms.RadioButton();
+            this.button45 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.rb_led_off = new System.Windows.Forms.RadioButton();
             this.rb_led_on = new System.Windows.Forms.RadioButton();
-            this.rb_brightness_none = new System.Windows.Forms.RadioButton();
-            this.rb_meter_none = new System.Windows.Forms.RadioButton();
             this.rb_led_none = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.rb_meter_none = new System.Windows.Forms.RadioButton();
+            this.rb_meter_cen = new System.Windows.Forms.RadioButton();
+            this.rb_meter_avg = new System.Windows.Forms.RadioButton();
+            this.rb_meter_auto = new System.Windows.Forms.RadioButton();
             this.button43 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.lb_rtc2 = new System.Windows.Forms.Label();
@@ -369,10 +374,6 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_connect_comport = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -409,6 +410,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tp_Test.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.tp_Layer.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -416,8 +419,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.groupBox13.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -1818,6 +1819,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.cb_enable_awb);
             this.tp_USB.Controls.Add(this.progressBar_awb);
             this.tp_USB.Controls.Add(this.lb_awb_data);
             this.tp_USB.Controls.Add(this.bt_read_awb);
@@ -1925,6 +1927,20 @@
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // cb_enable_awb
+            // 
+            this.cb_enable_awb.AutoSize = true;
+            this.cb_enable_awb.Checked = true;
+            this.cb_enable_awb.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_enable_awb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_enable_awb.Location = new System.Drawing.Point(607, 546);
+            this.cb_enable_awb.Name = "cb_enable_awb";
+            this.cb_enable_awb.Size = new System.Drawing.Size(159, 25);
+            this.cb_enable_awb.TabIndex = 141;
+            this.cb_enable_awb.Text = "AWB色彩校正";
+            this.cb_enable_awb.UseVisualStyleBackColor = true;
+            this.cb_enable_awb.CheckedChanged += new System.EventHandler(this.cb_enable_awb_CheckedChanged);
+            // 
             // progressBar_awb
             // 
             this.progressBar_awb.ForeColor = System.Drawing.Color.Green;
@@ -1961,7 +1977,7 @@
             // 
             this.cb_5X5.AutoSize = true;
             this.cb_5X5.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_5X5.Location = new System.Drawing.Point(111, 512);
+            this.cb_5X5.Location = new System.Drawing.Point(117, 512);
             this.cb_5X5.Name = "cb_5X5";
             this.cb_5X5.Size = new System.Drawing.Size(47, 17);
             this.cb_5X5.TabIndex = 137;
@@ -1975,7 +1991,7 @@
             this.cb_4X4.Checked = true;
             this.cb_4X4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_4X4.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_4X4.Location = new System.Drawing.Point(67, 512);
+            this.cb_4X4.Location = new System.Drawing.Point(70, 512);
             this.cb_4X4.Name = "cb_4X4";
             this.cb_4X4.Size = new System.Drawing.Size(47, 17);
             this.cb_4X4.TabIndex = 136;
@@ -2235,7 +2251,7 @@
             // 
             // comboBox_temperature
             // 
-            this.comboBox_temperature.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_temperature.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_temperature.FormattingEnabled = true;
             this.comboBox_temperature.Items.AddRange(new object[] {
             "1000K",
@@ -2270,7 +2286,7 @@
             "7700K m"});
             this.comboBox_temperature.Location = new System.Drawing.Point(688, 334);
             this.comboBox_temperature.Name = "comboBox_temperature";
-            this.comboBox_temperature.Size = new System.Drawing.Size(100, 29);
+            this.comboBox_temperature.Size = new System.Drawing.Size(100, 33);
             this.comboBox_temperature.TabIndex = 113;
             this.comboBox_temperature.Text = "6500K";
             this.comboBox_temperature.DropDown += new System.EventHandler(this.comboBox_temperature_DropDown);
@@ -3184,25 +3200,51 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Camera UFM";
             // 
-            // button45
+            // label10
             // 
-            this.button45.Location = new System.Drawing.Point(392, 233);
-            this.button45.Name = "button45";
-            this.button45.Size = new System.Drawing.Size(80, 40);
-            this.button45.TabIndex = 104;
-            this.button45.Text = "寫入";
-            this.button45.UseVisualStyleBackColor = true;
-            this.button45.Click += new System.EventHandler(this.button45_Click);
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(14, 240);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(99, 23);
+            this.label10.TabIndex = 153;
+            this.label10.Text = "寫入頁   0x";
             // 
-            // textBox1
+            // groupBox13
             // 
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(113, 236);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(80, 32);
-            this.textBox1.TabIndex = 104;
-            this.textBox1.Text = "15";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.groupBox13.Controls.Add(this.rb_brightness_none);
+            this.groupBox13.Controls.Add(this.rb_brightness_1);
+            this.groupBox13.Controls.Add(this.rb_brightness_4);
+            this.groupBox13.Controls.Add(this.rb_brightness_3);
+            this.groupBox13.Controls.Add(this.rb_brightness_2);
+            this.groupBox13.Controls.Add(this.rb_brightness_5);
+            this.groupBox13.Location = new System.Drawing.Point(92, 155);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(380, 55);
+            this.groupBox13.TabIndex = 152;
+            this.groupBox13.TabStop = false;
+            // 
+            // rb_brightness_none
+            // 
+            this.rb_brightness_none.AutoSize = true;
+            this.rb_brightness_none.Checked = true;
+            this.rb_brightness_none.Location = new System.Drawing.Point(14, 26);
+            this.rb_brightness_none.Name = "rb_brightness_none";
+            this.rb_brightness_none.Size = new System.Drawing.Size(74, 20);
+            this.rb_brightness_none.TabIndex = 139;
+            this.rb_brightness_none.TabStop = true;
+            this.rb_brightness_none.Text = "不設定";
+            this.rb_brightness_none.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_1
+            // 
+            this.rb_brightness_1.AutoSize = true;
+            this.rb_brightness_1.Location = new System.Drawing.Point(101, 26);
+            this.rb_brightness_1.Name = "rb_brightness_1";
+            this.rb_brightness_1.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_1.TabIndex = 145;
+            this.rb_brightness_1.Text = "1";
+            this.rb_brightness_1.UseVisualStyleBackColor = true;
             // 
             // rb_brightness_4
             // 
@@ -3213,6 +3255,16 @@
             this.rb_brightness_4.TabIndex = 149;
             this.rb_brightness_4.Text = "4";
             this.rb_brightness_4.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_3
+            // 
+            this.rb_brightness_3.AutoSize = true;
+            this.rb_brightness_3.Location = new System.Drawing.Point(185, 27);
+            this.rb_brightness_3.Name = "rb_brightness_3";
+            this.rb_brightness_3.Size = new System.Drawing.Size(34, 20);
+            this.rb_brightness_3.TabIndex = 146;
+            this.rb_brightness_3.Text = "3";
+            this.rb_brightness_3.UseVisualStyleBackColor = true;
             // 
             // rb_brightness_2
             // 
@@ -3234,55 +3286,25 @@
             this.rb_brightness_5.Text = "5";
             this.rb_brightness_5.UseVisualStyleBackColor = true;
             // 
-            // rb_brightness_3
+            // button45
             // 
-            this.rb_brightness_3.AutoSize = true;
-            this.rb_brightness_3.Location = new System.Drawing.Point(185, 27);
-            this.rb_brightness_3.Name = "rb_brightness_3";
-            this.rb_brightness_3.Size = new System.Drawing.Size(34, 20);
-            this.rb_brightness_3.TabIndex = 146;
-            this.rb_brightness_3.Text = "3";
-            this.rb_brightness_3.UseVisualStyleBackColor = true;
+            this.button45.Location = new System.Drawing.Point(392, 233);
+            this.button45.Name = "button45";
+            this.button45.Size = new System.Drawing.Size(80, 40);
+            this.button45.TabIndex = 104;
+            this.button45.Text = "寫入";
+            this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
-            // rb_brightness_1
+            // textBox1
             // 
-            this.rb_brightness_1.AutoSize = true;
-            this.rb_brightness_1.Location = new System.Drawing.Point(101, 26);
-            this.rb_brightness_1.Name = "rb_brightness_1";
-            this.rb_brightness_1.Size = new System.Drawing.Size(34, 20);
-            this.rb_brightness_1.TabIndex = 145;
-            this.rb_brightness_1.Text = "1";
-            this.rb_brightness_1.UseVisualStyleBackColor = true;
-            // 
-            // rb_meter_auto
-            // 
-            this.rb_meter_auto.AutoSize = true;
-            this.rb_meter_auto.Location = new System.Drawing.Point(275, 26);
-            this.rb_meter_auto.Name = "rb_meter_auto";
-            this.rb_meter_auto.Size = new System.Drawing.Size(68, 20);
-            this.rb_meter_auto.TabIndex = 144;
-            this.rb_meter_auto.Text = "AUTO";
-            this.rb_meter_auto.UseVisualStyleBackColor = true;
-            // 
-            // rb_meter_avg
-            // 
-            this.rb_meter_avg.AutoSize = true;
-            this.rb_meter_avg.Location = new System.Drawing.Point(182, 26);
-            this.rb_meter_avg.Name = "rb_meter_avg";
-            this.rb_meter_avg.Size = new System.Drawing.Size(63, 20);
-            this.rb_meter_avg.TabIndex = 143;
-            this.rb_meter_avg.Text = "AVG.";
-            this.rb_meter_avg.UseVisualStyleBackColor = true;
-            // 
-            // rb_meter_cen
-            // 
-            this.rb_meter_cen.AutoSize = true;
-            this.rb_meter_cen.Location = new System.Drawing.Point(98, 25);
-            this.rb_meter_cen.Name = "rb_meter_cen";
-            this.rb_meter_cen.Size = new System.Drawing.Size(60, 20);
-            this.rb_meter_cen.TabIndex = 142;
-            this.rb_meter_cen.Text = "CEN.";
-            this.rb_meter_cen.UseVisualStyleBackColor = true;
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(113, 236);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(80, 32);
+            this.textBox1.TabIndex = 104;
+            this.textBox1.Text = "15";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // rb_led_off
             // 
@@ -3303,30 +3325,6 @@
             this.rb_led_on.TabIndex = 140;
             this.rb_led_on.Text = "開";
             this.rb_led_on.UseVisualStyleBackColor = true;
-            // 
-            // rb_brightness_none
-            // 
-            this.rb_brightness_none.AutoSize = true;
-            this.rb_brightness_none.Checked = true;
-            this.rb_brightness_none.Location = new System.Drawing.Point(14, 26);
-            this.rb_brightness_none.Name = "rb_brightness_none";
-            this.rb_brightness_none.Size = new System.Drawing.Size(74, 20);
-            this.rb_brightness_none.TabIndex = 139;
-            this.rb_brightness_none.TabStop = true;
-            this.rb_brightness_none.Text = "不設定";
-            this.rb_brightness_none.UseVisualStyleBackColor = true;
-            // 
-            // rb_meter_none
-            // 
-            this.rb_meter_none.AutoSize = true;
-            this.rb_meter_none.Checked = true;
-            this.rb_meter_none.Location = new System.Drawing.Point(11, 26);
-            this.rb_meter_none.Name = "rb_meter_none";
-            this.rb_meter_none.Size = new System.Drawing.Size(74, 20);
-            this.rb_meter_none.TabIndex = 138;
-            this.rb_meter_none.TabStop = true;
-            this.rb_meter_none.Text = "不設定";
-            this.rb_meter_none.UseVisualStyleBackColor = true;
             // 
             // rb_led_none
             // 
@@ -3369,6 +3367,68 @@
             this.label1.Size = new System.Drawing.Size(80, 23);
             this.label1.TabIndex = 134;
             this.label1.Text = "LED開關";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Location = new System.Drawing.Point(92, 20);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(380, 61);
+            this.groupBox7.TabIndex = 150;
+            this.groupBox7.TabStop = false;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.rb_meter_none);
+            this.groupBox12.Controls.Add(this.rb_meter_cen);
+            this.groupBox12.Controls.Add(this.rb_meter_avg);
+            this.groupBox12.Controls.Add(this.rb_meter_auto);
+            this.groupBox12.Location = new System.Drawing.Point(92, 87);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(380, 61);
+            this.groupBox12.TabIndex = 151;
+            this.groupBox12.TabStop = false;
+            // 
+            // rb_meter_none
+            // 
+            this.rb_meter_none.AutoSize = true;
+            this.rb_meter_none.Checked = true;
+            this.rb_meter_none.Location = new System.Drawing.Point(11, 26);
+            this.rb_meter_none.Name = "rb_meter_none";
+            this.rb_meter_none.Size = new System.Drawing.Size(74, 20);
+            this.rb_meter_none.TabIndex = 138;
+            this.rb_meter_none.TabStop = true;
+            this.rb_meter_none.Text = "不設定";
+            this.rb_meter_none.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_cen
+            // 
+            this.rb_meter_cen.AutoSize = true;
+            this.rb_meter_cen.Location = new System.Drawing.Point(98, 25);
+            this.rb_meter_cen.Name = "rb_meter_cen";
+            this.rb_meter_cen.Size = new System.Drawing.Size(60, 20);
+            this.rb_meter_cen.TabIndex = 142;
+            this.rb_meter_cen.Text = "CEN.";
+            this.rb_meter_cen.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_avg
+            // 
+            this.rb_meter_avg.AutoSize = true;
+            this.rb_meter_avg.Location = new System.Drawing.Point(182, 26);
+            this.rb_meter_avg.Name = "rb_meter_avg";
+            this.rb_meter_avg.Size = new System.Drawing.Size(63, 20);
+            this.rb_meter_avg.TabIndex = 143;
+            this.rb_meter_avg.Text = "AVG.";
+            this.rb_meter_avg.UseVisualStyleBackColor = true;
+            // 
+            // rb_meter_auto
+            // 
+            this.rb_meter_auto.AutoSize = true;
+            this.rb_meter_auto.Location = new System.Drawing.Point(275, 26);
+            this.rb_meter_auto.Name = "rb_meter_auto";
+            this.rb_meter_auto.Size = new System.Drawing.Size(68, 20);
+            this.rb_meter_auto.TabIndex = 144;
+            this.rb_meter_auto.Text = "AUTO";
+            this.rb_meter_auto.UseVisualStyleBackColor = true;
             // 
             // button43
             // 
@@ -4079,7 +4139,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 682);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1461, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1466, 22);
             this.statusStrip1.TabIndex = 23;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -4318,56 +4378,12 @@
             this.groupBox5.TabIndex = 135;
             this.groupBox5.TabStop = false;
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Location = new System.Drawing.Point(92, 20);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(380, 61);
-            this.groupBox7.TabIndex = 150;
-            this.groupBox7.TabStop = false;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.rb_meter_none);
-            this.groupBox12.Controls.Add(this.rb_meter_cen);
-            this.groupBox12.Controls.Add(this.rb_meter_avg);
-            this.groupBox12.Controls.Add(this.rb_meter_auto);
-            this.groupBox12.Location = new System.Drawing.Point(92, 87);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(380, 61);
-            this.groupBox12.TabIndex = 151;
-            this.groupBox12.TabStop = false;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.rb_brightness_none);
-            this.groupBox13.Controls.Add(this.rb_brightness_1);
-            this.groupBox13.Controls.Add(this.rb_brightness_4);
-            this.groupBox13.Controls.Add(this.rb_brightness_3);
-            this.groupBox13.Controls.Add(this.rb_brightness_2);
-            this.groupBox13.Controls.Add(this.rb_brightness_5);
-            this.groupBox13.Location = new System.Drawing.Point(92, 155);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(380, 55);
-            this.groupBox13.TabIndex = 152;
-            this.groupBox13.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(14, 240);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(99, 23);
-            this.label10.TabIndex = 153;
-            this.label10.Text = "寫入頁   0x";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1461, 704);
+            this.ClientSize = new System.Drawing.Size(1466, 704);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lb_connect_comport);
             this.Controls.Add(this.bt_goto_awb);
@@ -4441,6 +4457,10 @@
             this.tp_Test.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.tp_Layer.ResumeLayout(false);
@@ -4452,10 +4472,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4806,6 +4822,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.CheckBox cb_enable_awb;
     }
 }
 

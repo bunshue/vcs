@@ -22,7 +22,7 @@ namespace imsLink
     {
         bool flag_release_mode = false;
 
-        bool flag_awb_debug = true;
+        bool flag_enaglb_awb_function = true;
 
         bool flag_usb_mode = false;  //for webcam
         bool flag_check_webcam_signal = false;
@@ -1843,11 +1843,26 @@ namespace imsLink
 
         void show_item_location()
         {
-            int x_st = 20;
-            int y_st = 40;
+            int x_st;
+            int y_st;
             int dx;
             int dy;
 
+            cb_enable_awb.Location = new Point(11, 489 + 65);
+
+            dx = 50;
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                button74.Location = new Point(button74.Location.X - dx, button74.Location.Y);
+                button88.Location = new Point(button88.Location.X - dx, button88.Location.Y);
+                button70.Location = new Point(button70.Location.X - dx, button70.Location.Y);
+                button87.Location = new Point(button87.Location.X - dx, button87.Location.Y);
+                button34.Location = new Point(button34.Location.X - dx, button34.Location.Y);
+                button7.Location = new Point(button7.Location.X - dx, button7.Location.Y);
+            }
+
+            x_st = 20;
+            y_st = 40;
             dx = 0;
             dy = 65;
 
@@ -1973,75 +1988,272 @@ namespace imsLink
             lb_awb_result_G.ForeColor = Color.Green;
             lb_awb_result_B.ForeColor = Color.Blue;
 
-            //EXPO
-            lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
-            lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
-            lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 45);
-            lb_range_1.Text = "0~1FF           0~511";
-            trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 45);
-            numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 45);
-            tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 45);
-            bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 45);
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                //EXPO
+                lb_expo.Size = new Size(lb_expo.Size.Width * 3 / 5, lb_expo.Height * 3 / 5);
+                lb_expo.Font = new Font("新細明體", lb_expo.Font.Size * 3 / 5);
+                lb_0x3.Size = new Size(lb_0x3.Size.Width * 3 / 5, lb_0x3.Height * 3 / 5);
+                lb_0x3.Font = new Font("新細明體", lb_0x3.Font.Size * 3 / 5);
+                lb_range_1.Size = new Size(lb_range_1.Size.Width * 3 / 5, lb_range_1.Height * 3 / 5);
+                lb_range_1.Font = new Font("新細明體", lb_range_1.Font.Size * 3 / 5);
 
-            //GAIN
-            lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50 - 15);
-            lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50 - 15);
-            lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50 - 15);
-            lb_range_2.Text = "0~1FF           0~511";
-            trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-            numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-            tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-            bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                trackBar_expo.Size = new Size(trackBar_expo.Size.Width * 3 / 5, trackBar_expo.Height * 3 / 5);
+                numericUpDown_expo.Size = new Size(numericUpDown_expo.Size.Width * 4 / 5, numericUpDown_expo.Height * 4 / 5);
+                numericUpDown_expo.Font = new Font("Arial", numericUpDown_expo.Font.Size * 3 / 5);
+                tb_expo.Size = new Size(tb_expo.Size.Width * 3 / 5, tb_expo.Height * 3 / 5);
+                tb_expo.Font = new Font("Arial", tb_expo.Font.Size * 3 / 5);
 
-            //R
-            lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30 - 15);
-            lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30 - 15);
-            lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 - 15);
-            lb_range_3.Text = "0~FFF          0~4095";
-            trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-            numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-            tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-            bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                x_st = 550;
+                y_st = 540;
+                dx = 0;
+                dy = 0;
 
-            //G
-            lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20 - 15);
-            lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20 - 15);
-            lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40 + 30 + 20 - 15);
-            lb_range_4.Text = "0~FFF          0~4095";
-            trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-            numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-            tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-            bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                trackBar_expo.Location = new Point(x_st + dx, y_st + dy);
+                lb_expo.Location = new Point(x_st + dx + 5, y_st + dy + 25);
+                lb_0x3.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
+                lb_0x3.Text = "0x                   =";
+                numericUpDown_expo.Location = new Point(x_st + dx + 220, y_st + dy + 5);
+                tb_expo.Location = new Point(x_st + dx + 280, y_st + dy + 5);
+                bt_setup_expo.Location = new Point(x_st + dx + 320, y_st + dy + 0);
+                lb_range_1.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
+                lb_range_1.Text = "0~1FF           0~511";
 
-            //B
-            lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10 - 15);
-            lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10 - 15);
-            lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20 + 30 + 10 - 15);
-            lb_range_5.Text = "0~FFF          0~4095";
-            trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-            numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-            tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-            bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                //GAIN
+                lb_gain.Size = new Size(lb_gain.Size.Width * 3 / 5, lb_gain.Height * 3 / 5);
+                lb_gain.Font = new Font("新細明體", lb_gain.Font.Size * 3 / 5);
+                lb_0x4.Size = new Size(lb_0x4.Size.Width * 3 / 5, lb_0x4.Height * 3 / 5);
+                lb_0x4.Font = new Font("新細明體", lb_0x4.Font.Size * 3 / 5);
+                lb_range_2.Size = new Size(lb_range_2.Size.Width * 3 / 5, lb_range_2.Height * 3 / 5);
+                lb_range_2.Font = new Font("新細明體", lb_range_2.Font.Size * 3 / 5);
+
+                trackBar_gain.Size = new Size(trackBar_gain.Size.Width * 3 / 5, trackBar_gain.Height * 3 / 5);
+                numericUpDown_gain.Size = new Size(numericUpDown_gain.Size.Width * 4 / 5, numericUpDown_gain.Height * 4 / 5);
+                numericUpDown_gain.Font = new Font("Arial", numericUpDown_gain.Font.Size * 3 / 5);
+                tb_gain.Size = new Size(tb_gain.Size.Width * 3 / 5, tb_gain.Height * 3 / 5);
+                tb_gain.Font = new Font("Arial", tb_gain.Font.Size * 3 / 5);
+
+                x_st = 550;
+                y_st = 600;
+                dx = 0;
+                dy = 0;
+
+                trackBar_gain.Location = new Point(x_st + dx, y_st + dy);
+                lb_gain.Location = new Point(x_st + dx + 5, y_st + dy + 25);
+                lb_0x4.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
+                lb_0x4.Text = "0x                   =";
+                numericUpDown_gain.Location = new Point(x_st + dx + 220, y_st + dy + 5);
+                tb_gain.Location = new Point(x_st + dx + 280, y_st + dy + 5);
+                bt_setup_gain.Location = new Point(x_st + dx + 320, y_st + dy + 0);
+                lb_range_2.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
+                lb_range_2.Text = "0~1FF           0~511";
+
+                //R
+                lb_R.Size = new Size(lb_R.Size.Width * 3 / 5, lb_R.Height * 3 / 5);
+                lb_R.Font = new Font("新細明體", lb_R.Font.Size * 3 / 5);
+                lb_0xR.Size = new Size(lb_0xR.Size.Width * 3 / 5, lb_0xR.Height * 3 / 5);
+                lb_0xR.Font = new Font("新細明體", lb_0xR.Font.Size * 3 / 5);
+                lb_range_3.Size = new Size(lb_range_3.Size.Width * 3 / 5, lb_range_3.Height * 3 / 5);
+                lb_range_3.Font = new Font("新細明體", lb_range_3.Font.Size * 3 / 5);
+
+                trackBar_R.Size = new Size(trackBar_R.Size.Width * 3 / 5, trackBar_R.Height * 3 / 5);
+                numericUpDown_R.Size = new Size(numericUpDown_R.Size.Width * 4 / 5, numericUpDown_R.Height * 4 / 5);
+                numericUpDown_R.Font = new Font("Arial", numericUpDown_R.Font.Size * 3 / 5);
+                tb_R.Size = new Size(tb_R.Size.Width * 3 / 5, tb_R.Height * 3 / 5);
+                tb_R.Font = new Font("Arial", tb_R.Font.Size * 3 / 5);
+
+                x_st = 580 + 370;
+                y_st = 540 - 2;
+                dx = 0;
+                dy = 0;
+
+                trackBar_R.Location = new Point(x_st + dx, y_st + dy);
+                lb_R.Location = new Point(x_st + dx + 5, y_st + dy + 25);
+                lb_0xR.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
+                lb_0xR.Text = "0x                   =";
+                numericUpDown_R.Location = new Point(x_st + dx + 220, y_st + dy + 5);
+                tb_R.Location = new Point(x_st + dx + 280, y_st + dy + 5);
+                bt_setup_R.Location = new Point(x_st + dx + 320, y_st + dy + 0);
+                lb_range_3.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
+                lb_range_3.Text = "0~FFF          0~4095";
+
+                //G
+                lb_G.Size = new Size(lb_G.Size.Width * 3 / 5, lb_G.Height * 3 / 5);
+                lb_G.Font = new Font("新細明體", lb_G.Font.Size * 3 / 5);
+                lb_0xG.Size = new Size(lb_0xG.Size.Width * 3 / 5, lb_0xG.Height * 3 / 5);
+                lb_0xG.Font = new Font("新細明體", lb_0xG.Font.Size * 3 / 5);
+                lb_range_4.Size = new Size(lb_range_4.Size.Width * 3 / 5, lb_range_4.Height * 3 / 5);
+                lb_range_4.Font = new Font("新細明體", lb_range_4.Font.Size * 3 / 5);
+
+                trackBar_G.Size = new Size(trackBar_G.Size.Width * 3 / 5, trackBar_G.Height * 3 / 5);
+                numericUpDown_G.Size = new Size(numericUpDown_G.Size.Width * 4 / 5, numericUpDown_G.Height * 4 / 5);
+                numericUpDown_G.Font = new Font("Arial", numericUpDown_G.Font.Size * 3 / 5);
+                tb_G.Size = new Size(tb_G.Size.Width * 3 / 5, tb_G.Height * 3 / 5);
+                tb_G.Font = new Font("Arial", tb_G.Font.Size * 3 / 5);
+
+                x_st = 580 + 370;
+                y_st = 540 + 40 - 3;
+                dx = 0;
+                dy = 0;
+
+                trackBar_G.Location = new Point(x_st + dx, y_st + dy);
+                lb_G.Location = new Point(x_st + dx + 5, y_st + dy + 25);
+                lb_0xG.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
+                lb_0xG.Text = "0x                   =";
+                numericUpDown_G.Location = new Point(x_st + dx + 220, y_st + dy + 5);
+                tb_G.Location = new Point(x_st + dx + 280, y_st + dy + 5);
+                bt_setup_G.Location = new Point(x_st + dx + 320, y_st + dy + 0);
+                lb_range_4.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
+                lb_range_4.Text = "0~FFF          0~4095";
+
+                //B
+                lb_BB.Size = new Size(lb_BB.Size.Width * 3 / 5, lb_BB.Height * 3 / 5);
+                lb_BB.Font = new Font("新細明體", lb_BB.Font.Size * 3 / 5);
+                lb_0xB.Size = new Size(lb_0xB.Size.Width * 3 / 5, lb_0xB.Height * 3 / 5);
+                lb_0xB.Font = new Font("新細明體", lb_0xB.Font.Size * 3 / 5);
+                lb_range_5.Size = new Size(lb_range_5.Size.Width * 3 / 5, lb_range_5.Height * 3 / 5);
+                lb_range_5.Font = new Font("新細明體", lb_range_5.Font.Size * 3 / 5);
+
+                trackBar_B.Size = new Size(trackBar_B.Size.Width * 3 / 5, trackBar_B.Height * 3 / 5);
+                numericUpDown_B.Size = new Size(numericUpDown_B.Size.Width * 4 / 5, numericUpDown_B.Height * 4 / 5);
+                numericUpDown_B.Font = new Font("Arial", numericUpDown_B.Font.Size * 3 / 5);
+                tb_B.Size = new Size(tb_B.Size.Width * 3 / 5, tb_B.Height * 3 / 5);
+                tb_B.Font = new Font("Arial", tb_B.Font.Size * 3 / 5);
+
+                x_st = 580 + 370;
+                y_st = 540 + 40 + 40- 5;
+                dx = 0;
+                dy = 0;
+
+                trackBar_B.Location = new Point(x_st + dx, y_st + dy);
+                lb_BB.Location = new Point(x_st + dx + 5, y_st + dy + 25);
+                lb_0xB.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
+                lb_0xB.Text = "0x                   =";
+                numericUpDown_B.Location = new Point(x_st + dx + 220, y_st + dy + 5);
+                tb_B.Location = new Point(x_st + dx + 280, y_st + dy + 5);
+                bt_setup_B.Location = new Point(x_st + dx + 320, y_st + dy + 0);
+                lb_range_5.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
+                lb_range_5.Text = "0~FFF          0~4095";
+
+            }
+            else
+            {
+                //EXPO
+                lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
+                lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
+                lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 45);
+                lb_range_1.Text = "0~1FF           0~511";
+                trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 45);
+                numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 45);
+                tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 45);
+                bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 45);
+
+                //GAIN
+                lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50 - 15);
+                lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50 - 15);
+                lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50 - 15);
+                lb_range_2.Text = "0~1FF           0~511";
+                trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+                bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
+
+                //R
+                lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30 - 15);
+                lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30 - 15);
+                lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 - 15);
+                lb_range_3.Text = "0~FFF          0~4095";
+                trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+                bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
+
+                //G
+                lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20 - 15);
+                lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20 - 15);
+                lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40 + 30 + 20 - 15);
+                lb_range_4.Text = "0~FFF          0~4095";
+                trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+                bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
+
+                //B
+                lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10 - 15);
+                lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10 - 15);
+                lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20 + 30 + 10 - 15);
+                lb_range_5.Text = "0~FFF          0~4095";
+                trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+            }
 
             //TARGET RGB
-            comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2);
-            numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 250 * 2);
-            numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 290 * 2);
-            numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 330 * 2);
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                comboBox_temperature.Size = new Size(comboBox_temperature.Size.Width * 3 / 4, comboBox_temperature.Height * 2 / 3);
+                comboBox_temperature.Font = new Font("Arial", comboBox_temperature.Font.Size * 3 / 5);
+                numericUpDown_TG_R.Size = new Size(numericUpDown_TG_R.Size.Width * 3 / 5, numericUpDown_TG_R.Height * 3 / 5);
+                numericUpDown_TG_R.Font = new Font("Arial", numericUpDown_TG_R.Font.Size * 3 / 5);
+                numericUpDown_TG_G.Size = new Size(numericUpDown_TG_G.Size.Width * 3 / 5, numericUpDown_TG_G.Height * 3 / 5);
+                numericUpDown_TG_G.Font = new Font("Arial", numericUpDown_TG_G.Font.Size * 3 / 5);
+                numericUpDown_TG_B.Size = new Size(numericUpDown_TG_B.Size.Width * 3 / 5, numericUpDown_TG_B.Height * 3 / 5);
+                numericUpDown_TG_B.Font = new Font("Arial", numericUpDown_TG_B.Font.Size * 3 / 5);
 
-            //WPT
-            lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 15);
-            tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-            numericUpDown_wpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-            bt_read_wpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
-            bt_write_wpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 230 * 11 / 10 + 115);
+                numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 250 * 11 / 10 + 120);
+                numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 290 * 11 / 10 + 120);
+                numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 330 * 11 / 10 + 120);
+            }
+            else
+            {
+                comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2 + 120 * 2 - 10);
+                numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 250 * 2 + 120 * 2 - 10);
+                numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 290 * 2 + 120 * 2 - 10);
+                numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 330 * 2 + 120 * 2 - 10);
+            }
 
-            //BPT
-            lb_bpt.Location = new Point(410 + 5 + 400 + 20 + 200, lb_wpt.Location.Y + 60);
-            tb_bpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200, tb_wpt.Location.Y + 60);
-            numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200, numericUpDown_wpt.Location.Y + 60);
-            bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200, bt_read_wpt.Location.Y + 60);
-            bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200, bt_write_wpt.Location.Y + 60);
+            //WPT BPT
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                x_st = 900;
+                y_st = 460;
+                dx = 100;
+                dy = 550;
+                //WPT
+                lb_wpt.Location = new Point(x_st + 2, y_st + 2);
+                tb_wpt.Location = new Point(x_st + 70, y_st);
+                numericUpDown_wpt.Location = new Point(x_st + 140, y_st);
+                bt_read_wpt.Location = new Point(x_st + 210, y_st);
+                bt_write_wpt.Location = new Point(x_st + 280, y_st);
+
+                y_st = 460 + 40;
+                //BPT
+                lb_bpt.Location = new Point(x_st + 2, y_st + 2);
+                tb_bpt.Location = new Point(x_st + 70, y_st);
+                numericUpDown_bpt.Location = new Point(x_st + 140, y_st);
+                bt_read_bpt.Location = new Point(x_st + 210, y_st);
+                bt_write_bpt.Location = new Point(x_st + 280, y_st);
+            }
+            else
+            {
+                dx = 20;
+                //WPT
+                lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 15);
+                tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                numericUpDown_wpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                bt_read_wpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+                bt_write_wpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20);
+
+                //BPT
+                lb_bpt.Location = new Point(410 + 5 + 400 + 20 + 200 + dx, lb_wpt.Location.Y + 60);
+                tb_bpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200 + dx, tb_wpt.Location.Y + 60);
+                numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200 + dx, numericUpDown_wpt.Location.Y + 60);
+                bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200 + dx, bt_read_wpt.Location.Y + 60);
+                bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200 + dx, bt_write_wpt.Location.Y + 60);
+            }
+
             refresh_picturebox2();
             lb_save_message.Visible = false;
 
@@ -2057,6 +2269,15 @@ namespace imsLink
             else
             {
                 flag_display_mode = DISPLAY_FHD;
+            }
+
+            if (flag_enaglb_awb_function == true)
+            {
+                cb_enable_awb.Checked = true;
+            }
+            else
+            {
+                cb_enable_awb.Checked = false;
             }
 
             pictureBox1.Size = new Size(640, 480);
@@ -2163,7 +2384,7 @@ namespace imsLink
 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            if (flag_awb_debug == true)
+            if (flag_enaglb_awb_function == true)
                 bt_goto_awb.Visible = true;
             else
                 bt_goto_awb.Visible = false;
@@ -2233,7 +2454,7 @@ namespace imsLink
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
             lb_save_message.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y - comboBox_webcam.Height);
 
-            if (flag_awb_debug == true)
+            if (flag_enaglb_awb_function == true)
             {
                 bt_goto_awb_Click(sender, e);
             }
@@ -2245,6 +2466,11 @@ namespace imsLink
             }
 
             show_item_location();
+
+            if (flag_enaglb_awb_function == true)
+            {
+                cb_enable_awb.Location = new Point(11, 489 + 110);
+            }
             return;
         }
 
@@ -3432,10 +3658,11 @@ namespace imsLink
         {
             int x_st = 0;
             int y_st = 0;
+            int dy = 40;
             int ww = awb_block;
             int hh = awb_block;
 
-            if ((flag_awb_debug == true) || (flag_check_webcam_signal == true))
+            if ((flag_enaglb_awb_function == true) || (flag_check_webcam_signal == true))
             {
                 frame_cnt++;
                 if (frame_cnt == 5)
@@ -3543,7 +3770,7 @@ namespace imsLink
                 gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
             }
 
-            if ((flag_awb_debug == true) && (flag_fullscreen == true))
+            if ((flag_enaglb_awb_function == true) && (flag_fullscreen == true))
             {
                 int hhh = 0;
 
@@ -3554,7 +3781,7 @@ namespace imsLink
 
             //畫框的功能
 
-            //if (flag_awb_debug == true)
+                //if (flag_enaglb_awb_function == true)
             //{
                 x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step;
                 if (x_st < 0)
@@ -3608,7 +3835,7 @@ namespace imsLink
                 string rgb_value;
                 x_st = 0;
 
-                y_st = 250;
+                y_st = 370;
                 if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - tolerance)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + tolerance)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
@@ -3707,7 +3934,7 @@ namespace imsLink
                 rgb_value = ((float)TARGET_AWB_R - 1 / (float)tolerance_ratio).ToString("F2");
                 gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Red), x_st + 92 + 38, y_st + 16);
 
-                y_st = 290;
+                y_st += dy;
                 if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - tolerance)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + tolerance)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
@@ -3805,7 +4032,7 @@ namespace imsLink
                 rgb_value = ((float)TARGET_AWB_G - 1 / (float)tolerance_ratio).ToString("F2");
                 gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Green), x_st + 92 + 38, y_st + 16);
 
-                y_st = 330;
+                y_st += dy;
                 if ((total_RGB_B >= (TARGET_AWB_B * ww * hh - tolerance)) && (total_RGB_B <= (TARGET_AWB_B * ww * hh + tolerance)))
                 {
                     drawBrush = new SolidBrush(Color.Gray);
@@ -3914,6 +4141,7 @@ namespace imsLink
                 rgb_value = ((float)TARGET_AWB_B - 1 / (float)tolerance_ratio).ToString("F2");
                 gg.DrawString(rgb_value, drawFont3, new SolidBrush(Color.Blue), x_st + 92 + 38, y_st + 16);
 
+                /* old debug
                 y_st = 370;
                 drawBrush = new SolidBrush(Color.Red);
                 rgb_value = total_R.ToString() + "   " + (((float)total_R) / awb_block / awb_block).ToString("F3");
@@ -3928,6 +4156,7 @@ namespace imsLink
                 drawBrush = new SolidBrush(Color.Blue);
                 rgb_value = total_B.ToString() + "   " + (((float)total_B) / awb_block / awb_block).ToString("F3");
                 gg.DrawString(rgb_value, drawFont1, drawBrush, x_st, y_st);
+                */
 
                 if (flag_check_rgb_saturation == true)
                 {
@@ -4454,36 +4683,36 @@ namespace imsLink
                 button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
                 //this.TopMost = true;
 
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+
+                //設定執行後的表單起始位置
+                this.StartPosition = FormStartPosition.Manual;
+                this.Location = new System.Drawing.Point(0, 0);
+
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    //this.FormBorderStyle = FormBorderStyle.None;
-                    this.WindowState = FormWindowState.Normal;
                     //richTextBox1.Text += "this.Size W = " + this.Size.Width.ToString() + " H = " + this.Size.Height.ToString() + "\n";
                     this.Size = new Size(this.Size.Width + 200, 750);
                     tabControl1.Size = new Size(1600 + 200, 1010);
-                    //pictureBox1.Size = new Size(1120, 840);
-                    pictureBox1.Size = new Size(640 * 5 / 4, 480 * 5 / 4);
+                    pictureBox1.Size = new Size(640 * 11 / 10, 480 * 11 / 10);
 
-                    //設定執行後的表單起始位置
-                    this.StartPosition = FormStartPosition.Manual;
-                    this.Location = new System.Drawing.Point(0, 0);
                 }
                 else   //DISPLAY_FHD
                 {
-                    this.FormBorderStyle = FormBorderStyle.None;
-                    this.WindowState = FormWindowState.Maximized;
                     tabControl1.Size = new Size(1600 + 300, 1010);
                     //pictureBox1.Size = new Size(1120, 840);
                     pictureBox1.Size = new Size(640 * 2, 480 * 2);
-                    this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
                 }
 
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
                 toolTip1.SetToolTip(button19, "1X");
 
-                if (flag_awb_debug == true)
+                if (flag_enaglb_awb_function == true)
                 {
                     pictureBox1.Location = new Point(170 + 400 + 30, 7);
+                    richTextBox1.Visible = true;
                    
                     this.richTextBox1.Location = new System.Drawing.Point(150, 90);
                     this.richTextBox1.Size = new System.Drawing.Size(400 + 30 + 20, 250);
@@ -4510,10 +4739,11 @@ namespace imsLink
                 this.WindowState = FormWindowState.Normal;
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    this.Size = new Size(this.Size.Width - 200, 750);
+                    this.Size = new Size(960, 743);
+                    tabControl1.Size = new Size(tabControl1.Size.Width - 200, 1010);
                 }
                 //this.TopMost = false;
-                tabControl1.Size = new Size(948, 616);
+                //tabControl1.Size = new Size(948, 616);
                 pictureBox1.Location = new Point(170, 50);
                 pictureBox1.Size = new Size(640, 480);
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
@@ -4529,10 +4759,11 @@ namespace imsLink
 
                 lb_save_message.Visible = true;
 
-                if (flag_awb_debug == true)
+                if (flag_enaglb_awb_function == true)
                 {
                     show_awb_item_visible(false);   //444
                 }
+                cb_enable_awb.Location = new Point(11, 489 + 65);
             }
         }
 
@@ -5679,7 +5910,7 @@ namespace imsLink
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (flag_awb_debug == false)
+            if (flag_enaglb_awb_function == false)
                 return;
             if (flag_usb_mode == true)
                 return;
@@ -6086,7 +6317,7 @@ namespace imsLink
         int timer_webcam_cnt = 0;
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
-            if (flag_awb_debug == false)
+            if (flag_enaglb_awb_function == false)
                 return;
             if (flag_usb_mode == true)
                 return;
@@ -6794,6 +7025,8 @@ namespace imsLink
                     richTextBox1.Text += "收到break\n";
                     break;
                 }
+                if (progressBar_awb.Value < (30 - 2))
+                    progressBar_awb.Value += 2;
             }
             richTextBox1.Text += "RGB皆未飽和b\n";
         }
@@ -6826,6 +7059,7 @@ namespace imsLink
             //progressBar_awb.BackColor = Color.Red;
             Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
 
+            progressBar_awb.Value = 5;
             delay(1000);
             bt_awb_test.Text = "色彩校正開始";
             progressBar_awb.Value = 10;
@@ -6948,6 +7182,8 @@ namespace imsLink
                         break;
                     }
 
+                    if (progressBar_awb.Value < (52 - 2))
+                        progressBar_awb.Value += 1;
                 }
 
             }
@@ -6978,6 +7214,10 @@ namespace imsLink
                 else
                     tolerance_ratio = 1;
                 ret = awb_modify();
+
+                if (progressBar_awb.Value < (90 - 2))
+                    progressBar_awb.Value += 1;
+
                 if (ret == S_OK)
                 {
                     ok_cnt++;
@@ -6992,6 +7232,7 @@ namespace imsLink
             bt_awb_test.Text = "細調結束";
             progressBar_awb.Value = 90;
             delay(500);
+            progressBar_awb.Value = 95;
             tolerance_ratio = 1;
 
             //切換回自動模式
@@ -7941,7 +8182,7 @@ namespace imsLink
 
         void refresh_picturebox2()
         {
-            if (flag_awb_debug == false)
+            if (flag_enaglb_awb_function == false)
                 return;
             if (flag_usb_mode == true)
                 return;
@@ -7967,12 +8208,24 @@ namespace imsLink
             if ((y_st + hh) > HH)
                 y_st = HH - hh;
 
-            x_st *= 2;
-            y_st *= 2;
-            ww *= 2;
-            hh *= 2;
-            ww++;
-            hh++;
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                x_st = x_st * 11 / 10;
+                y_st = y_st * 11 / 10;
+                ww = ww * 11 / 10;
+                hh = hh * 11 / 10;
+                ww++;
+                hh++;
+            }
+            else
+            {
+                x_st *= 2;
+                y_st *= 2;
+                ww *= 2;
+                hh *= 2;
+                ww++;
+                hh++;
+            }
 
             //richTextBox1.Text += "refresh_picturebox2 x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + " ww = " + ww.ToString() + " hh = " + hh.ToString() + "\n";
             //pictureBox2.Location = new Point(x_st, y_st + hh + 10);
@@ -9544,6 +9797,22 @@ namespace imsLink
             else
             {
                 tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
+            }
+        }
+
+        private void cb_enable_awb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_enable_awb.Checked == true)
+            {
+                flag_enaglb_awb_function = true;
+                flag_fullscreen = false;
+                button19_Click(sender, e);
+                cb_enable_awb.Location = new Point(11, 489 + 110);
+            }
+            else
+            {
+                flag_enaglb_awb_function = false;
+                show_awb_item_visible(false);
             }
         }
     }
