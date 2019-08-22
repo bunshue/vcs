@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1testdraw
+﻿namespace MyPaint_Rectangle
 {
     partial class Form1
     {
@@ -132,6 +132,7 @@
             this.button7.TabIndex = 7;
             this.button7.Text = "Circle";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -141,6 +142,7 @@
             this.button8.TabIndex = 8;
             this.button8.Text = "Rectangle";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 
@@ -158,6 +160,8 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);

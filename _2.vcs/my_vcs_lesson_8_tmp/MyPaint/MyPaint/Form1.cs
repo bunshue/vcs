@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 
 
-namespace WindowsFormsApplication1testdraw
+namespace MyPaint
 {
     public partial class Form1 : Form
     {
