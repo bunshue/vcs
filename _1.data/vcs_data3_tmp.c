@@ -1,5 +1,303 @@
 
 
+vcs
+http://cs0.wikidot.com/introduction
+https://jjnnykimo.pixnet.net/blog/category/1324785/9
+
+Simple way to Zip files with C# .NET (Framework 4.5 /4.6)
+https://coderwall.com/p/hgotua/simple-way-to-zip-files-with-c-net-framework-4-5-4-6
+C# UNIX Timestamp Creation
+https://coderwall.com/p/6mrs5a/c-unix-timestamp-creation
+
+【c#】 emgucv 設定
+https://debbiedbaby.pixnet.net/blog/post/426657881-%E3%80%90c%23%E3%80%91-emgucv-%E8%A8%AD%E5%AE%9A
+
+如何自訂右鍵工具選單
+http://davidhsu666.com/archives/context_menu/
+
+
+
+c# Delay 1秒鐘寫法
+
+using System.Threading;
+Thread.Sleep(1000); //Delay 1秒
+
+
+codepage
+http://www.lingoes.net/en/translator/codepage.htm
+
+使用預設編碼
+System.IO.StreamReader file = new System.IO.StreamReader(@"c:\test.txt", Encoding.Default);
+
+使用指定編碼
+System.IO.StreamReader file = new System.IO.StreamReader(@"c:\test.txt", Encoding.GetEncoding("big5"));
+
+
+相同
+Encoding.GetEncoding("big5")
+Encoding.GetEncoding(950)
+
+
+
+
+C# 提供了許多方法給string使用
+
+方法				說明 					格式
+Length				取得字串長度長度			x.Length
+IndexOf('關鍵字')		搜尋該關鍵字所在起始位置的索引值	x.IndexOf("H")
+Insert(索引, '關鍵字')		將關鍵字插入指定索引位置		x.Insert(3,"Hello")
+Remove(索引)			清除索引位置之後的字串			x.Remove(2)
+Replace('原字串', '新字串')	將原字串取代為新字串			x.Replace("Hi","Hello")
+Substring(索引, 長度)		從指定索引位置取得指定長度的字串	x.Substring(3,10)
+Contains('關鍵字')		判斷是否包含該關鍵字			x.Contains("Build")
+
+
+            string x = "My name is Tom";
+
+            int j = x.Length;
+            Console.WriteLine(j);//14
+
+            int p = x.IndexOf("me");
+            Console.WriteLine(p);//5
+
+            string k = x.Insert(0, "Hello! ");
+            Console.WriteLine(k);//Hello! My name is Tom
+
+            string l = x.Remove(10);
+            Console.WriteLine(l);//My name is
+
+            string m = x.Replace("Tom", "John");
+            Console.WriteLine(m);//My name is John
+
+            string i = x.Substring(3, 7);
+            Console.WriteLine(i);//name is
+
+            if (x.Contains("Tom"))
+            {
+                Console.WriteLine("Yes! You are Tom");
+            }else
+            {
+                Console.WriteLine("Who are you?");
+            }//Yes! You are Tom
+            
+
+另外，string跟array一樣，索引的起始值也是0
+因此，可以直接操作索引來取得字元
+範例
+
+string x = "Hello world";
+Console.WriteLine(x[4]); //o
+
+
+
+
+
+
+改變各種滑鼠屬標
+
+            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
+            pictureBox1.Cursor = Cursors.Help;
+            pictureBox1.Cursor = Cursors.HSplit;
+            pictureBox1.Cursor = Cursors.No;
+            
+            this.Cursor = System.Windows.Forms.Cursors.Help;
+            this.Cursor = Cursors.Help; 
+            
+            this.Cursor = Cursors.WaitCursor;	//等待標記
+            this.Cursor = Cursors.Default;	//預設
+            
+
+自定義滑鼠屬標
+this.Cursor = new Cursor("icon.ico");
+icon.ico要放在bin之下
+
+不用製作游標檔的做法:
+this.Cursor = new Cursor(new Bitmap(@"C:\______test_vcs\reuse.bmp").GetHicon());
+
+
+
+
+
+picturebox載入一圖
+
+            pictureBox1.Image = Image.FromFile("c:\\testImage.jpg");          
+            
+
+[C#] webBrowser如何判斷網頁是否讀取完成
+
+
+在Windows Mobile 6 上用C# 讀取圖片(如jpg)貼在畫面上 	畫上一圖
+Graphics g = this.CreateGraphics();
+
+//選擇您要貼的畫面的圖片位置
+Bitmap br = new Bitmap("My Documents\\我的圖片\\Waterfall.jpg");
+
+//放置您所指定的圖片
+//並指定圖片要放置的位置，(X,Y) = (0,0)
+g.DrawImage(br, 0, 0);
+
+
+
+在Windows Mobile 6 上用C# 讀取文字檔案
+
+using System.IO;
+
+FileStream fs = new FileStream("data.txt", FileMode.Open);
+StreamReader sr = new StreamReader(fs, Encoding.Default);
+string str = "";
+
+//讀取文字檔裡的每一列
+//直到沒有文字就停下來
+while( (str = sr.ReadLine()) != null)
+{
+      //若為空白列，則不顯示
+      if(str != "") textBox.Text += str + "\r\n";
+}
+
+
+
+在Windows Mobile 6 上用C# 畫點與點之間的線段，方法有二! 
+
+ 方法一：(兩點之間的線段)
+      Graphics g = this.CreateGraphics();
+      Pen pen = new Pen(Color.Blue, 2);     
+
+      //10, 10 為起始位置，20, 20 終點位置
+      g.DrawLine(pen, 10, 10, 20, 20);
+
+ 
+
+方法二：(多點之間的線段)
+      Graphics g = this.CreateGraphics();
+      Pen pen = new Pen(Color.Blue, 2);      
+
+      //定義一個陣列有三個點
+      //分別為(10,10)、(20,20)、(30,30)
+      Point[] points = 
+      {
+            new Point(10, 10),
+            new Point(20, 20),
+            new Point(30, 30)
+      };
+
+      g.DrawLines(pen, points);
+
+
+
+
+在Windows Mobile 6 上用C# 畫實心圓圈，就是把圈圈填滿，方法有二!
+
+
+方法一：(用圖片填滿圓圈)
+      Graphics g = this.CreateGraphics();
+      TextureBrush tb = new TextureBrush(new Bitmap(@"Program Files\\drawImage\\point.jpg"));
+     
+      //20, 20 為座標位置，10, 10 為圓的大小
+      g.FillEllipse(tb, 20, 20, 10, 10);
+
+ 
+
+方法二：(用筆刷填滿圓圈)
+      Graphics g = this.CreateGraphics();
+      SolidBrush sb = new SolidBrush(Color.Blue);
+      
+      //20, 20 為座標位置，10, 10 為圓的大小
+      g.FillEllipse(sb, 20, 20, 10, 10);
+
+
+
+
+在Windows Mobile 6 平臺上的PDA 寫一個抓取無線AP(無線區域網路)訊號強弱的小程式(使用C#在.NET Compact Framework 2.0上) 
+
+https://dreamtails.pixnet.net/blog/post/22318000
+
+
+
+
+韓戰
+1950年6月25日－1953年7月27日[註 19]
+（3年1個月又2天）
+
+
+
+記得在((TextBox)sender).SelectAll();後邊加上一句e.SuppressKeyPress = true;
+
+否則鍵盤消息還會繼續傳遞到基礎控件，傳出難听的“叮”一聲
+
+
+
+
+
+  uiMode:String; 播放器界面模式，可?Full, Mini, None, Invisible 
+  
+  
+  
+  
+  
+  
+  
+  
+   [C#]開啟EXE檔並輸入EXE檔的參數
+先USING System.Diagnostics;
+
+在程式裡放入下列程式
+System.Diagnostics.Process.Start("路徑", "參數"); 
+
+
+
+c# 首字母大寫 方法
+s.Substring(0,1).ToUpper()+s.Substring(1);
+
+
+
+
+
+
+DateTime類型中 DayOfWeek時的英文如何轉換成中文
+
+1.這是一种最笨的方法 
+
+Code highlighting produced by Actipro CodeHighlighter (freeware)http://www.CodeHighlighter.com/-->int   i=(int)DateTime.Today.DayOfWeek;  
+ switch(i)  
+ {  
+          case   0:  
+                      txtDate.Text="星期天"；  
+                      break；  
+          case   1:  
+                      txtDate.Text="星期一"；  
+                      break；  
+          case   2:  
+                      txtDate.Text="星期二"；  
+                      break；  
+          case   3:  
+                      txtDate.Text="星期三"；  
+                      break；  
+          case   4:  
+                      txtDate.Text="星期四"；  
+                      break；  
+          case   5:  
+                      txtDate.Text="星期五"；  
+                      break；  
+          case   6:  
+                      txtDate.Text="星期六"；  
+                      break；  
+          ……  
+ }
+ 
+ 
+ 
+2.聰明的方法：
+string strWeek = "星期"+"日一二三四五六".Substring((int)System.DateTime.Now.DayOfWeek,1); 
+
+
+3.最好的方法： 
+string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.Globalization.CultureInfo("zh-CN")); 
+
+
+
+
+
+
 
 用方向鍵移動picturebox在form上的位置
 

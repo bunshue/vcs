@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = false;
+        bool flag_release_mode = true;
 
         bool flag_enaglb_awb_function = true;
 
@@ -198,6 +198,7 @@ namespace imsLink
         int diff_r = 0;
         int diff_g = 0;
         int diff_b = 0;
+        int timer_awb_cnt = 0;
 
         //C# 提示視窗 ToolTip 
         //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -268,6 +269,8 @@ namespace imsLink
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
 
+            pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
+
             /*
             if (comboBox1.Text.Length == 0)
             {
@@ -316,6 +319,19 @@ namespace imsLink
                 this.tp_Camera_Model.Parent = null;   //camera model
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
+
+                bt_awb_test_init.Enabled = false;
+                bt_awb_test2.Enabled = false;
+                bt_break.Enabled = false;
+                bt_erase.Enabled = false;
+                bt_awb.Enabled = false;
+                bt_disable_timer_webcam.Enabled = false;
+                bt_test.Enabled = false;
+                comboBox_temperature.Enabled = false;
+
+                numericUpDown_TG_R.Enabled = false;
+                numericUpDown_TG_G.Enabled = false;
+                numericUpDown_TG_B.Enabled = false;
             }
 
             if (flag_usb_mode == true)
@@ -946,7 +962,7 @@ namespace imsLink
 
                                             if ((data_r == 0) && (data_b == 0))
                                             {
-                                                lb_awb_data.Text = "無AWB資料";
+                                                //lb_awb_data.Text = "無AWB資料";
 
                                             }
                                             else
@@ -1761,6 +1777,7 @@ namespace imsLink
             bt_awb.Visible = en;
             bt_awb_test.Visible = en;
             progressBar_awb.Visible = en;
+            lb_awb_time.Visible = en;
             bt_awb_test2.Visible = en;
             bt_awb_test_init.Visible = en;
             bt_disable_timer_webcam.Visible = en;
@@ -1838,6 +1855,11 @@ namespace imsLink
             bt_read_bpt.Visible = en;
             bt_write_bpt.Visible = en;
 
+            //note
+            lb_note1.Visible = en;
+            lb_note2.Visible = en;
+            lb_note3.Visible = en;
+
             return;
         }
 
@@ -1849,15 +1871,28 @@ namespace imsLink
             int dy;
 
             cb_enable_awb.Location = new Point(11, 489 + 65);
+            /*
+            lb_note1.Location = new Point(11 + 180, 489 + 65);
+            lb_note2.Location = new Point(11 + 180, 489 + 65 + 20);
+            lb_note3.Location = new Point(11 + 180, 489 + 65 + 40);
+            */
 
-            dx = 50;
             if (flag_display_mode == DISPLAY_SD)
             {
+                dx = 10;
+                button72.Location = new Point(button72.Location.X - dx, button72.Location.Y);
+                dx = 15;
+                button22.Location = new Point(button22.Location.X - dx, button22.Location.Y);
+                dx = 20;
+                button73.Location = new Point(button73.Location.X - dx, button73.Location.Y);
+
+                dx = 80;
                 button74.Location = new Point(button74.Location.X - dx, button74.Location.Y);
                 button88.Location = new Point(button88.Location.X - dx, button88.Location.Y);
                 button70.Location = new Point(button70.Location.X - dx, button70.Location.Y);
                 button87.Location = new Point(button87.Location.X - dx, button87.Location.Y);
                 button34.Location = new Point(button34.Location.X - dx, button34.Location.Y);
+                dx = 85;
                 button7.Location = new Point(button7.Location.X - dx, button7.Location.Y);
             }
 
@@ -1927,6 +1962,8 @@ namespace imsLink
             bt_awb_test.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200);
             bt_awb_test.Size = new Size(380, 97);
             progressBar_awb.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200 + 100);
+            //lb_awb_time.Location = new Point(170 + 70 * 0 + 330, 460 + 40 * 0 - 200 + 100 + 4);
+            lb_awb_time.Location = new Point(170 + 70 * 0 + 10, 460 + 40 * 0 - 200 + 100 + 4);
 
             //button
             x_st = 140;
@@ -2135,6 +2172,10 @@ namespace imsLink
                 lb_range_5.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
                 lb_range_5.Text = "0~FFF          0~4095";
 
+                //note
+                lb_note1.Font = new Font("標楷體", lb_note1.Font.Size * 5 / 6);
+                lb_note2.Font = new Font("標楷體", lb_note2.Font.Size * 5 / 6);
+                lb_note3.Font = new Font("標楷體", lb_note3.Font.Size * 5 / 6);
             }
             else
             {
@@ -2312,6 +2353,7 @@ namespace imsLink
             lb_save_message.Text = "";
             lb_connect_comport.Text = "";
             lb_awb_data.Text = "";
+            lb_awb_time.Text = "";
 
             if (flag_release_mode == true)
             {
@@ -2470,6 +2512,11 @@ namespace imsLink
             if (flag_enaglb_awb_function == true)
             {
                 cb_enable_awb.Location = new Point(11, 489 + 110);
+                /*
+                lb_note1.Location = new Point(11 + 180, 489 + 98);
+                lb_note2.Location = new Point(11 + 180, 489 + 98 + 25);
+                lb_note3.Location = new Point(11 + 180, 489 + 98 + 50);
+                */
             }
             return;
         }
@@ -4719,6 +4766,10 @@ namespace imsLink
 
                     show_awb_item_visible(true);    //333
 
+                    cb_enable_awb.Location = new Point(11, 489 + 110);
+                    lb_note1.Location = new Point(11 + 180, 489 + 98);
+                    lb_note2.Location = new Point(11 + 180, 489 + 98 + 25);
+                    lb_note3.Location = new Point(11 + 180, 489 + 98 + 50);
                 }
                 else
                 {
@@ -4763,7 +4814,14 @@ namespace imsLink
                 {
                     show_awb_item_visible(false);   //444
                 }
+
                 cb_enable_awb.Location = new Point(11, 489 + 65);
+                /*
+                lb_note1.Location = new Point(11 + 180, 489 + 65);
+                lb_note2.Location = new Point(11 + 180, 489 + 65 + 30);
+                lb_note3.Location = new Point(11 + 180, 489 + 65 + 30);
+                */
+
             }
         }
 
@@ -7050,6 +7108,9 @@ namespace imsLink
             Stopwatch stopwatch = new Stopwatch();
             // Begin timing
             stopwatch.Start();
+            lb_awb_time.Text = "0";
+            timer_awb_cnt = 0;
+            timer_awb.Enabled = true;
 
             richTextBox1.Text += "\nAWB 開始 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
             bt_awb_test.Text = "清除相機資料";
@@ -7294,6 +7355,7 @@ namespace imsLink
 
             // Stop timing
             stopwatch.Stop();
+            timer_awb.Enabled = false;
 
             // Write result
             richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
@@ -9814,6 +9876,12 @@ namespace imsLink
                 flag_enaglb_awb_function = false;
                 show_awb_item_visible(false);
             }
+        }
+
+        private void timer_awb_Tick(object sender, EventArgs e)
+        {
+            timer_awb_cnt++;
+            lb_awb_time.Text = (timer_awb_cnt / 10).ToString() + "." + (timer_awb_cnt % 10).ToString();
         }
     }
 }

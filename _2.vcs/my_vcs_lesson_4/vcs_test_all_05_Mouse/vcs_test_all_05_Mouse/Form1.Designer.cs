@@ -47,6 +47,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,9 +71,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 347);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 379);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1036, 265);
+            this.richTextBox1.Size = new System.Drawing.Size(1036, 233);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -230,11 +232,62 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "取得預設游標，通常為箭號游標",
+            "取得箭號游標",
+            "取得十字型游標",
+            "取得指示目前作業的特定區域無效的游標",
+            "取得等待游標，其形狀通常為沙漏形狀",
+            "取得手狀游標，通常在游標停留在 Web 連結上方時使用",
+            "取得由箭號和問號組成的說明游標",
+            "取得當滑鼠位在水平分割列上時出現的游標",
+            "取得應用程式啟動時出現的游標",
+            "取得 I 型游標，這個游標用來顯示當按一下滑鼠時文字游標出現的位置",
+            "取得當滑鼠不移動，但視窗可以水平和垂直方向捲動時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠不移動，但視窗可以水平方向捲動時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠不移動，但視窗可以垂直方向捲動時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動，而且視窗可水平捲動至右方時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動，而且視窗可水平和垂直捲動至上方和右方時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動，而且視窗可垂直捲動至上方時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動，而且視窗可水平和垂直捲動至上方和左方時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動，而且視窗可水平和垂直捲動至下方和右方時，滑鼠滾輪作業期間出現的游標;",
+            "取得當滑鼠移動，而且視窗可垂直捲動至下方時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動，而且視窗可水平和垂直捲動至下方和左方時，滑鼠滾輪作業期間出現的游標",
+            "取得當滑鼠移動而且視窗可水平捲動至左方時，滑鼠滾輪作業期間出現的游標",
+            "取得四頭調整大小游標，它是由四個連結的箭號 (分別指向北、南、東和西) 所組成",
+            "取得雙頭斜線 (東北/西南) 調整大小游標",
+            "取得雙頭垂直 (北/南) 調整大小游標",
+            "取得雙頭斜線 (西北/東南) 調整大小游標",
+            "取得雙頭水平 (西/東) 調整大小游標",
+            "取得向上箭號游標，通常用來辨認插入點",
+            "取得當滑鼠位在垂直分割列上方時出現的游標"});
+            this.comboBox1.Location = new System.Drawing.Point(628, 341);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(420, 27);
+            this.comboBox1.TabIndex = 19;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(444, 341);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(178, 24);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "改變滑鼠鼠標：";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1060, 621);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.button2);
@@ -282,6 +335,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

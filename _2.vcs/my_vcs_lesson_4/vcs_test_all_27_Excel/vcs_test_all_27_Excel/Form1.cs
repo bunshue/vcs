@@ -12,7 +12,7 @@ using System.IO;    //for File
 using Excel = Microsoft.Office.Interop.Excel;	//for excel write
 using System.Data.OleDb;                        //for excel read
 
-//加入參考/COM/Microsoft Excel 11.0 Object Library
+//方案總管/參考/加入參考/COM/Microsoft Excel 11.0 Object Library
 
 namespace vcs_test_all_27_Excel
 {

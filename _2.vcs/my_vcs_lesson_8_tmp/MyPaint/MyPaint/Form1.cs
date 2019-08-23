@@ -15,6 +15,13 @@ namespace MyPaint
     public partial class Form1 : Form
     {
         private Point startPoint, oldPoint; //繪圖時紀錄滑鼠位置
+        //枚举类型，各种绘图工具
+        private enum drawTools
+        {
+            Pen = 0, Line, Circle, Rectangle, String, Erase, None
+        };
+        //当前使用的工具
+        private drawTools drawTool = drawTools.Pen;
         private bool isDrawing = false;     //是否正在繪圖
         private Image theImage;             //進行操作的bitmap
         Graphics g;         //Graphics實例
@@ -46,10 +53,14 @@ namespace MyPaint
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if ((isDrawing = !isDrawing) == true)
+            if (e.Button == MouseButtons.Left)
             {
-                startPoint = new Point(e.X, e.Y);
-                oldPoint = new Point(e.X, e.Y);
+                //如果开始绘制，则开始记录鼠标位置
+                if ((isDrawing = !isDrawing) == true)
+                {
+                    startPoint = new Point(e.X, e.Y);
+                    oldPoint = new Point(e.X, e.Y);
+                }
             }
         }
 
@@ -57,16 +68,29 @@ namespace MyPaint
         {
             if (isDrawing)
             {
-                g.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
-                ig.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
-                oldPoint.X = e.X;
-                oldPoint.Y = e.Y;
+                if (drawTool == drawTools.Pen)
+                {
+                    g.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
+                    ig.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
+                    oldPoint.X = e.X;
+                    oldPoint.Y = e.Y;
+                }
+                else if (drawTool == drawTools.Rectangle)
+                {
+                    //首先恢复此次操作之前的图像，然后再添加Rectangle
+                    this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
+                    g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+                }
             }
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             isDrawing = false;
+            if (drawTool == drawTools.Rectangle)
+            {
+                ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -118,9 +142,40 @@ namespace MyPaint
             ig.DrawLine(PenStyle, p2, p1);
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
+            if (radioButton1.Checked == true)
+                drawTool = drawTools.Pen;
+            else if (radioButton2.Checked == true)
+                drawTool = drawTools.Line;
+            else if (radioButton3.Checked == true)
+                drawTool = drawTools.Rectangle;
+            else if (radioButton4.Checked == true)
+                drawTool = drawTools.Circle;
+            else if (radioButton5.Checked == true)
+                drawTool = drawTools.String;
+            else if (radioButton6.Checked == true)
+                drawTool = drawTools.Erase;
+            else
+                drawTool = drawTools.None;
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            //将Image中保存的图像，绘制出来
+            Graphics g = this.CreateGraphics();
+            if (theImage != null)
+            {
+                g.Clear(Color.White);
+                g.DrawImage(theImage, this.ClientRectangle);
+            }
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
 
         }
+
     }
 }

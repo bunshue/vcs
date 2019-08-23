@@ -1,6 +1,53 @@
 
 
 
+Python 傳送 email 的三種方式
+
+https://www.itread01.com/content/1541896623.html
+
+http://pythonscraping.com/pages/page1.html
+http://www.pythonscraping.com/pages/page3.html
+
+Web Scraping with Python - Collecting Data from the Modern Web
+https://github.com/REMitchell/python-scraping/tree/master/v1/chapter5
+https://github.com/REMitchell/python-scraping/tree/master/v1/chapter6
+https://github.com/REMitchell/python-scraping/tree/master/v1
+
+
+網站擷取：使用Python（二版）
+
+目錄
+前言
+
+第一部 建構擷取程序
+第一章 你的第一個擷取程序
+第二章 進階HTML解析
+第三章 撰寫網站爬行程序
+第四章 網站爬行模型
+第五章 Scrapy
+第六章 儲存資料
+
+第二部 儲存資料
+第七章 讀取文件
+第八章 清理髒資料
+第九章 讀寫自然語言
+第十章 表單與登入
+第十一章 與擷取相關的JavaScript
+第十二章 透過API 爬行
+第十三章 影像處理與文字辨識
+第十四章 避開擷取陷阱
+第十五章 以爬行程序測試你的網站
+第十六章 平行擷取網站
+第十七章 遠端擷取
+第十八章 網站擷取的法規與道德
+
+索引
+收回
+
+
+
+
+
 
 ----------------many ST----------------
 

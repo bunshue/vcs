@@ -160,6 +160,9 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.lb_note3 = new System.Windows.Forms.Label();
+            this.lb_note2 = new System.Windows.Forms.Label();
+            this.lb_note1 = new System.Windows.Forms.Label();
             this.cb_enable_awb = new System.Windows.Forms.CheckBox();
             this.progressBar_awb = new System.Windows.Forms.ProgressBar();
             this.lb_awb_data = new System.Windows.Forms.Label();
@@ -374,6 +377,8 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_connect_comport = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.timer_awb = new System.Windows.Forms.Timer(this.components);
+            this.lb_awb_time = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1819,6 +1824,10 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.lb_awb_time);
+            this.tp_USB.Controls.Add(this.lb_note3);
+            this.tp_USB.Controls.Add(this.lb_note2);
+            this.tp_USB.Controls.Add(this.lb_note1);
             this.tp_USB.Controls.Add(this.cb_enable_awb);
             this.tp_USB.Controls.Add(this.progressBar_awb);
             this.tp_USB.Controls.Add(this.lb_awb_data);
@@ -1926,6 +1935,39 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_note3
+            // 
+            this.lb_note3.AutoSize = true;
+            this.lb_note3.Font = new System.Drawing.Font("標楷體", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_note3.ForeColor = System.Drawing.Color.Red;
+            this.lb_note3.Location = new System.Drawing.Point(602, 124);
+            this.lb_note3.Name = "lb_note3";
+            this.lb_note3.Size = new System.Drawing.Size(215, 27);
+            this.lb_note3.TabIndex = 145;
+            this.lb_note3.Text = "不能重複寫序號";
+            // 
+            // lb_note2
+            // 
+            this.lb_note2.AutoSize = true;
+            this.lb_note2.Font = new System.Drawing.Font("標楷體", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_note2.ForeColor = System.Drawing.Color.Red;
+            this.lb_note2.Location = new System.Drawing.Point(607, 86);
+            this.lb_note2.Name = "lb_note2";
+            this.lb_note2.Size = new System.Drawing.Size(390, 27);
+            this.lb_note2.TabIndex = 143;
+            this.lb_note2.Text = "若需再校正顏色, 要重寫序號";
+            // 
+            // lb_note1
+            // 
+            this.lb_note1.AutoSize = true;
+            this.lb_note1.Font = new System.Drawing.Font("標楷體", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_note1.ForeColor = System.Drawing.Color.Red;
+            this.lb_note1.Location = new System.Drawing.Point(607, 54);
+            this.lb_note1.Name = "lb_note1";
+            this.lb_note1.Size = new System.Drawing.Size(303, 27);
+            this.lb_note1.TabIndex = 142;
+            this.lb_note1.Text = "先校正顏色, 後寫序號";
             // 
             // cb_enable_awb
             // 
@@ -4139,7 +4181,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 682);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1466, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1370, 22);
             this.statusStrip1.TabIndex = 23;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -4378,12 +4420,27 @@
             this.groupBox5.TabIndex = 135;
             this.groupBox5.TabStop = false;
             // 
+            // timer_awb
+            // 
+            this.timer_awb.Tick += new System.EventHandler(this.timer_awb_Tick);
+            // 
+            // lb_awb_time
+            // 
+            this.lb_awb_time.AutoSize = true;
+            this.lb_awb_time.BackColor = System.Drawing.Color.Transparent;
+            this.lb_awb_time.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb_time.Location = new System.Drawing.Point(440, 281);
+            this.lb_awb_time.Name = "lb_awb_time";
+            this.lb_awb_time.Size = new System.Drawing.Size(63, 15);
+            this.lb_awb_time.TabIndex = 146;
+            this.lb_awb_time.Text = "AWB_TIME";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1466, 704);
+            this.ClientSize = new System.Drawing.Size(1370, 704);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lb_connect_comport);
             this.Controls.Add(this.bt_goto_awb);
@@ -4823,6 +4880,11 @@
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.CheckBox cb_enable_awb;
+        private System.Windows.Forms.Label lb_note2;
+        private System.Windows.Forms.Label lb_note1;
+        private System.Windows.Forms.Timer timer_awb;
+        private System.Windows.Forms.Label lb_note3;
+        private System.Windows.Forms.Label lb_awb_time;
     }
 }
 

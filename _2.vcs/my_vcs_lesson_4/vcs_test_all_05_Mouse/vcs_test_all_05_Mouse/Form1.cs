@@ -236,5 +236,41 @@ namespace vcs_test_all_05_Mouse
             richTextBox1.Text += "滑鼠速度 (1 ~ 20) : " + SystemInformation.MouseSpeed.ToString() + "\n";
 
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 0: this.Cursor = Cursors.Default; break;
+                case 1: this.Cursor = Cursors.Arrow; break;
+                case 2: this.Cursor = Cursors.Cross; break;
+                case 3: this.Cursor = Cursors.No; break;
+                case 4: this.Cursor = Cursors.WaitCursor; break;
+                case 5: this.Cursor = Cursors.Hand; break;
+                case 6: this.Cursor = Cursors.Help; break;
+                case 7: this.Cursor = Cursors.HSplit; break;
+                case 8: this.Cursor = Cursors.AppStarting; break;
+                case 9: this.Cursor = Cursors.IBeam; break;
+                case 10: this.Cursor = Cursors.NoMove2D; break;
+                case 11: this.Cursor = Cursors.NoMoveHoriz; break;
+                case 12: this.Cursor = Cursors.NoMoveVert; break;
+                case 13: this.Cursor = Cursors.PanEast; break;
+                case 14: this.Cursor = Cursors.PanNE; break;
+                case 15: this.Cursor = Cursors.PanNorth; break;
+                case 16: this.Cursor = Cursors.PanNW; break;
+                case 17: this.Cursor = Cursors.PanSE; break;
+                case 18: this.Cursor = Cursors.PanSouth; break;
+                case 19: this.Cursor = Cursors.PanSW; break;
+                case 20: this.Cursor = Cursors.PanWest; break;
+                case 21: this.Cursor = Cursors.SizeAll; break;
+                case 22: this.Cursor = Cursors.SizeNESW; break;
+                case 23: this.Cursor = Cursors.SizeNS; break;
+                case 24: this.Cursor = Cursors.SizeNWSE; break;
+                case 25: this.Cursor = Cursors.SizeWE; break;
+                case 26: this.Cursor = Cursors.UpArrow; break;
+                case 27: this.Cursor = Cursors.VSplit; break;
+                default: break;
+            }
+        }
     }
 }
