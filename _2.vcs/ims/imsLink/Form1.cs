@@ -280,7 +280,7 @@ namespace imsLink
             serialPort1.PortName = comboBox1.Text;
             serialPort1.BaudRate = int.Parse(comboBox2.Text);
 
-            //serialPort1.Open(); //原本是這一行，改成以下18行。
+            //serialPort1.Open(); //原本是這一行，改寫成以下。
             try
             {   //可能會產生錯誤的程式區段
                 serialPort1.Open();
@@ -306,7 +306,6 @@ namespace imsLink
             {
                 button1.Enabled = false;
                 button2.Enabled = true;
-                richTextBox1.ReadOnly = false;
             }
             */
         }
@@ -406,7 +405,7 @@ namespace imsLink
             serialPort1.PortName = comboBox1.Text;
             serialPort1.BaudRate = int.Parse(comboBox2.Text);
 
-            //serialPort1.Open(); //原本是這一行，改成以下18行。
+            //serialPort1.Open(); //原本是這一行，改寫成以下。
             try
             {   //可能會產生錯誤的程式區段
                 serialPort1.Open();
@@ -432,7 +431,6 @@ namespace imsLink
             {
                 button1.Enabled = false;
                 button2.Enabled = true;
-                richTextBox1.ReadOnly = false;
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 flag_comport_ok = true;
             }
@@ -447,7 +445,6 @@ namespace imsLink
                 this.BackColor = Color.Yellow;
                 button1.Enabled = true;
                 button2.Enabled = false;
-                richTextBox1.ReadOnly = true;
                 flag_comport_ok = false;
             }
         }
@@ -1742,13 +1739,13 @@ namespace imsLink
 
             comboBox1.Items.Clear();    //Clear All items in Combobox
 
-            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\n";
-
+            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
             {
-                richTextBox1.Text += port + "\n";
+                richTextBox1.Text += port + "\t";
                 comboBox1.Items.Add(port);
             }
+            richTextBox1.Text += "\n";
 
             if (COM_Ports_NameArr.Length > 0)
                 comboBox1.Text = COM_Ports_NameArr[0];
@@ -4608,7 +4605,7 @@ namespace imsLink
 
                 g.Dispose();
 
-                String file = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 //String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 //String file3 = file + ".png";
@@ -4833,7 +4830,6 @@ namespace imsLink
                 this.BackColor = Color.Yellow;
                 button1.Enabled = true;
                 button2.Enabled = false;
-                richTextBox1.ReadOnly = true;
                 flag_comport_ok = false;
             }
 
@@ -5653,6 +5649,12 @@ namespace imsLink
                     richTextBox1.Text += "未連線\n";
                     this.BackColor = Color.Pink;
                     lb_connect_comport.Text = "未連線";
+
+                    serialPort1.Close();
+                    this.BackColor = Color.Yellow;
+                    button1.Enabled = true;
+                    button2.Enabled = false;
+                    flag_comport_ok = false;
                 }
                 timer_display.Enabled = true;
                 timer_display_connect_comport_count = 0;
@@ -7094,13 +7096,17 @@ namespace imsLink
             int i;
             if (flag_comport_ok == false)
             {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                bt_awb_test.Text = "無COM連線";
+                bt_awb_test.BackColor = Color.Red;
                 return;
             }
 
             if (flag_camera_use_insighteyes == 0)
             {
-                MessageBox.Show("No Insighteyes Camera", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("No Insighteyes Camera", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                bt_awb_test.Text = "無IMS相機";
+                bt_awb_test.BackColor = Color.Red;
                 return;
             }
 
@@ -7964,7 +7970,7 @@ namespace imsLink
                 serialPort1.PortName = comboBox1.Text;
                 serialPort1.BaudRate = int.Parse(comboBox2.Text);
 
-                //serialPort1.Open(); //原本是這一行，改成以下18行。
+                //serialPort1.Open(); //原本是這一行，改寫成以下。
                 try
                 {   //可能會產生錯誤的程式區段
                     serialPort1.Open();
@@ -7990,7 +7996,6 @@ namespace imsLink
             {
                 button1.Enabled = false;
                 button2.Enabled = true;
-                richTextBox1.ReadOnly = false;
                 this.BackColor = System.Drawing.SystemColors.ControlLight;
                 flag_comport_ok = true;
             }
@@ -9095,12 +9100,12 @@ namespace imsLink
             richTextBox1.Text += "check_comport ST\n";
             string[] tempString = SerialPort.GetPortNames();
 
-            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport\n";
+            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string aaa in tempString)
             {
-                richTextBox1.Text += "get comport : " + aaa + "\n";
+                richTextBox1.Text += "get comport : " + aaa + "\t";
             }
-
+            richTextBox1.Text += "\n";
 
             /*
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
@@ -9188,7 +9193,6 @@ namespace imsLink
                 this.BackColor = Color.Yellow;
                 button1.Enabled = true;
                 button2.Enabled = false;
-                richTextBox1.ReadOnly = true;
                 flag_comport_ok = false;
             }
 
@@ -9199,12 +9203,13 @@ namespace imsLink
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
             tempString.CopyTo(COM_Ports_NameArr, 0);
 
-            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\n";
+            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
             {
-                richTextBox1.Text += port + "\n";
+                richTextBox1.Text += port + "\t";
                 comboBox1.Items.Add(port);
             }
+            richTextBox1.Text += "\n";
 
             if (COM_Ports_NameArr.Length == 0)
             {
@@ -9243,10 +9248,10 @@ namespace imsLink
                     this.BackColor = Color.Yellow;
                     button1.Enabled = true;
                     button2.Enabled = false;
-                    richTextBox1.ReadOnly = true;
                     flag_comport_ok = false;
 
                     ret = connect_comport(COM_Ports_NameArr[try_index]);
+                    richTextBox1.Text += "\n";
                     if (ret == S_OK)
                     {
                         richTextBox1.Text += "找到可以連線到IMS EGD System的comport, 在 " + COM_Ports_NameArr[try_index] + "\n";
@@ -9263,17 +9268,20 @@ namespace imsLink
 
         int connect_comport(string comport)
         {
+            flag_comport_ok = false;
             serialPort1.PortName = comport;
             serialPort1.BaudRate = int.Parse(comboBox2.Text);
 
-            //serialPort1.Open(); //原本是這一行，改成以下18行。
+            //serialPort1.Open(); //原本是這一行，改寫成以下。
             try
             {   //可能會產生錯誤的程式區段
+                richTextBox1.Text += "try to open " + comport + "\n";
                 serialPort1.Open();
             }
             catch (Exception ex)
             {   //定義產生錯誤時的例外處理程式碼
-                MessageBox.Show(ex.Message);
+                richTextBox1.Text += "fail to open " + comport + ", reason : " + ex.Message + "\n";
+                //MessageBox.Show(ex.Message);
             }
             finally
             {
@@ -9281,42 +9289,51 @@ namespace imsLink
                 if (serialPort1.IsOpen)
                 {
                     //MessageBox.Show("已經連上" + serialPort1.PortName);
+
+                    flag_comport_ok = true;
+                    flag_comport_connection_ok = false;
+                    Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
+
+                    int cnt = 0;
+                    while ((flag_comport_connection_ok == false) && (cnt++ < 10))
+                    {
+                        richTextBox1.Text += ".";
+                        delay(100);
+                    }
+                    //richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+                    flag_comport_ok = false;
+
+                    if (flag_comport_connection_ok == true)
+                    {
+                        if (serialPort1.IsOpen)
+                        {
+                            button1.Enabled = false;
+                            button2.Enabled = true;
+                            this.BackColor = System.Drawing.SystemColors.ControlLight;
+                            flag_comport_ok = true;
+                        }
+                        else
+                        {
+                            button1.Enabled = true;
+                            button2.Enabled = false;
+                            this.BackColor = Color.Pink;
+                            flag_comport_ok = false;
+                        }
+                    }
+                    else
+                        flag_comport_ok = false;
                 }
                 else
                 {
-                    MessageBox.Show("無法連上Comport, 請重新連線");
+                    //MessageBox.Show("無法連上Comport, 請重新連線");
+                    richTextBox1.Text += "無法連上 " + comport + ", 請重新連線";
                 }
             }
 
-            flag_comport_ok = true;
-            flag_comport_connection_ok = false;
-            Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
-
-            int cnt = 0;
-            while ((flag_comport_connection_ok == false) && (cnt++ < 10))
-            {
-                richTextBox1.Text += ".";
-                delay(100);
-            }
-            //richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
-            flag_comport_ok = false;
-
-            if (flag_comport_connection_ok == true)
-            {
-                if (serialPort1.IsOpen)
-                {
-                    button1.Enabled = false;
-                    button2.Enabled = true;
-                    richTextBox1.ReadOnly = false;
-                    this.BackColor = System.Drawing.SystemColors.ControlLight;
-                    flag_comport_ok = true;
-                    return S_OK;
-                }
-            }
+            if(flag_comport_ok == true)
+                return S_OK;
             else
-                flag_comport_ok = false;
-
-            return S_FALSE;
+                return S_FALSE;
         }
 
         private void cb_show_grid_CheckedChanged(object sender, EventArgs e)
