@@ -864,6 +864,10 @@ namespace imsLink
                                     {
                                         //    0  1   2  3  4  5  6  7  8  9 10 11 12 13 14 15 
                                         //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+                                        tb_info_g4.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                            + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                            + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                            + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
 
                                         data_r = input[3] * 256 + input[6];
                                         data_b = input[9] * 256 + input[12];
@@ -871,13 +875,15 @@ namespace imsLink
 
                                         if ((data_r == 0) && (data_b == 0))
                                         {
-                                            lb_awb_data.Text = "無AWB資料";
+                                            lb_awb_data.Text = "無AWB1資料";
+                                            lb_awb1.Text = "無AWB1資料";
 
                                         }
                                         else
                                         {
                                             //lb_awb_data.Text = "R : 0x" + data_r.ToString("X4") + "  B : 0x" + data_b.ToString("X4");
                                             lb_awb_data.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
+                                            lb_awb1.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
                                         }
 
                                         richTextBox1.Text += "AWB raw Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
@@ -953,25 +959,58 @@ namespace imsLink
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             break;
                                         case AWB_PAGE0:
+                                            tb_info_g.Text = "Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                                + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                                + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                                + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
                                             data_r = input[0] * 256 + input[1];
                                             data_b = input[2] * 256 + input[3];
                                             richTextBox1.Text += "camera AWB data R : 0x" + data_r.ToString("X2") + "  B : 0x" + data_b.ToString("X2") + "\n";
 
                                             if ((data_r == 0) && (data_b == 0))
                                             {
-                                                //lb_awb_data.Text = "無AWB資料";
+                                                //lb_awb_data.Text = "無AWB0資料";
+                                                lb_awb0.Text = "無AWB0資料";
 
                                             }
                                             else
                                             {
                                                 //lb_awb_data.Text = "R : 0x" + data_r.ToString("X4") + "  B : 0x" + data_b.ToString("X4");
                                                 lb_awb_data.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
+                                                lb_awb0.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
                                             }
 
                                             richTextBox1.Text += "AWB raw Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
                                                 + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
                                                 + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
                                                 + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n";
+                                            break;
+                                        case AWB_PAGE1:
+                                            richTextBox1.Text += "xxxxxxxxxxxxxxxxxxxx AWB_PAGE1\n";
+                                            tb_info_g.Text = "xxData : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                                + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                                + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                                + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2");
+                                            data_r = input[3] * 256 + input[6];
+                                            data_b = input[9] * 256 + input[12];
+                                            if ((data_r == 0) && (data_b == 0))
+                                            {
+                                                //lb_awb_data.Text = "無AWB1資料";
+                                                lb_awb1.Text = "無AWB1資料aaaa";
+
+                                            }
+                                            else
+                                            {
+                                                //lb_awb_data.Text = "R : 0x" + data_r.ToString("X4") + "  B : 0x" + data_b.ToString("X4");
+                                                lb_awb_data.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
+                                                lb_awb1.Text = "R : " + data_r.ToString() + "   B : " + data_b.ToString();
+                                            }
+
+                                            richTextBox1.Text += "dddAWB raw Data : " + ((int)input[0]).ToString("X2") + ((int)input[1]).ToString("X2") + "-" + ((int)input[2]).ToString("X2") + ((int)input[3]).ToString("X2")
+                                                + "-" + ((int)input[4]).ToString("X2") + ((int)input[5]).ToString("X2") + "-" + ((int)input[6]).ToString("X2") + ((int)input[7]).ToString("X2")
+                                                + "-" + ((int)input[8]).ToString("X2") + ((int)input[9]).ToString("X2") + "-" + ((int)input[10]).ToString("X2") + ((int)input[11]).ToString("X2")
+                                                + "-" + ((int)input[12]).ToString("X2") + ((int)input[13]).ToString("X2") + "-" + ((int)input[14]).ToString("X2") + ((int)input[15]).ToString("X2") + "\n";
+
                                             break;
                                         default:
                                             richTextBox1.Text += "c unknown flag_request_item = " + flag_request_item.ToString() + "\n";
@@ -1894,9 +1933,9 @@ namespace imsLink
             }
 
             x_st = 20;
-            y_st = 40;
+            y_st = 30;
             dx = 0;
-            dy = 65;
+            dy = 60;
 
             textBox10.Location = new Point(x_st + dx, y_st + dy * 0);
             textBox4.Location = new Point(x_st + dx, y_st + dy * 1);
@@ -1905,6 +1944,8 @@ namespace imsLink
             textBox12.Location = new Point(x_st + dx, y_st + dy * 4);
             textBox14.Location = new Point(x_st + dx, y_st + dy * 5);
             textBox16.Location = new Point(x_st + dx, y_st + dy * 6);
+            textBox9.Location = new Point(x_st + dx, y_st + dy * 7);
+            textBox11.Location = new Point(x_st + dx, y_st + dy * 7 + 35);
 
             dx = 60;
             tb_info_82.Location = new Point(x_st + dx, y_st + dy * 0);
@@ -1914,6 +1955,8 @@ namespace imsLink
             tb_info_d2.Location = new Point(x_st + dx, y_st + dy * 4);
             tb_info_e2.Location = new Point(x_st + dx, y_st + dy * 5);
             tb_info_f2.Location = new Point(x_st + dx, y_st + dy * 6);
+            tb_info_g2.Location = new Point(x_st + dx, y_st + dy * 7);
+            tb_info_g3.Location = new Point(x_st + dx, y_st + dy * 7 + 35);
 
             dx = 180;
             tb_info_8.Location = new Point(x_st + dx, y_st + dy * 0);
@@ -1923,6 +1966,8 @@ namespace imsLink
             tb_info_d.Location = new Point(x_st + dx, y_st + dy * 4);
             tb_info_e.Location = new Point(x_st + dx, y_st + dy * 5);
             tb_info_f.Location = new Point(x_st + dx, y_st + dy * 6);
+            tb_info_g.Location =  new Point(x_st + dx, y_st + dy * 7);
+            tb_info_g4.Location = new Point(x_st + dx, y_st + dy * 7 + 35);
 
             dx = 180;
             lb_a.Location = new Point(x_st + dx, y_st + dy * 2 + 35);
@@ -1930,6 +1975,8 @@ namespace imsLink
             lb_d.Location = new Point(x_st + dx, y_st + dy * 4 + 35);
             lb_e.Location = new Point(x_st + dx, y_st + dy * 5 + 35);
             lb_f.Location = new Point(x_st + dx, y_st + dy * 6 + 35);
+            lb_awb0.Location = new Point(x_st + dx, y_st + dy * 8 + 10);
+            lb_awb1.Location = new Point(x_st + dx + 300, y_st + dy * 8 + 10);
 
             x_st = 20;
             y_st = 130;
@@ -2326,6 +2373,8 @@ namespace imsLink
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
+            lb_awb0.Text = "";
+            lb_awb1.Text = "";
             lb_sn1.Text = "";
             lb_sn2.Text = "";
             lb_sn3.Text = "";
@@ -3432,18 +3481,23 @@ namespace imsLink
             tb_info_d.Clear();
             tb_info_e.Clear();
             tb_info_f.Clear();
+            tb_info_g.Clear();
+            tb_info_g4.Clear();
             lb_camera_model.Text = "";
             lb_a.Text = "";
             lb_b.Text = "";
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
+            lb_awb0.Text = "";
+            lb_awb1.Text = "";
             tb_info_a2.BackColor = Color.White;
             tb_info_b2.BackColor = Color.White;
             tb_info_82.BackColor = Color.White;
             tb_info_d2.BackColor = Color.White;
             tb_info_e2.BackColor = Color.White;
             tb_info_f2.BackColor = Color.White;
+            tb_info_g2.BackColor = Color.White;
             textBox7.Clear();
             textBox7.BackColor = Color.Gray;
             panel_camera_status1.BackgroundImage = null;
@@ -3570,6 +3624,30 @@ namespace imsLink
                 }
                 flag_wait_receive_data = 0;
                 richTextBox1.Text += "\n\n";
+
+                //old method get awb data
+                lb_awb_data.Text = "";
+                cnt = 0;
+
+                richTextBox1.Text += "\n\nread AWB_PAGE0\n";
+                page = AWB_PAGE0;
+                Get_IMS_Data(1, page, 0xAA);
+                cnt = 0;
+                while ((flag_wait_receive_data == 1) && (cnt++ < 20))
+                {
+                    richTextBox1.Text += "a";
+                    delay(100);
+                }
+                flag_wait_receive_data = 0;
+
+                //new method get awb data
+                flag_read_camera_raw_data = 1;
+                richTextBox1.Text += "\n\nread AWB_PAGE1\n";
+                page = AWB_PAGE1;
+                Send_IMS_Data(0xD1, (byte)page, 0, 0);
+
+
+
             }
             else
             {

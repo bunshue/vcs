@@ -31,7 +31,7 @@ namespace vcs_test_all_28_ListAllProcess
                 if (!p.ProcessName.Equals("Idle"))
                 {
                     // 顯示程序的名稱及啟動時間
-                    listBox1.Items.Add(string.Format("{0} \t\t {1}", p.ProcessName, p.StartTime.ToString("yyyy/MM/dd hh:mm:ss")));
+                    listBox1.Items.Add(string.Format("{0} \t\t {1}", p.ProcessName, p.StartTime.ToString("yyyy/MM/dd HH:mm:ss")));
                 }
             }
         }

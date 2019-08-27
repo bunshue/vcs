@@ -68,6 +68,10 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.tp_Info = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lb_awb0 = new System.Windows.Forms.Label();
+            this.tb_info_g = new System.Windows.Forms.TextBox();
+            this.tb_info_g2 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.tb_info_aa1 = new System.Windows.Forms.TextBox();
@@ -160,6 +164,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.lb_awb_time = new System.Windows.Forms.Label();
             this.lb_note3 = new System.Windows.Forms.Label();
             this.lb_note2 = new System.Windows.Forms.Label();
             this.lb_note1 = new System.Windows.Forms.Label();
@@ -378,7 +383,10 @@
             this.lb_connect_comport = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.timer_awb = new System.Windows.Forms.Timer(this.components);
-            this.lb_awb_time = new System.Windows.Forms.Label();
+            this.tb_info_g3 = new System.Windows.Forms.TextBox();
+            this.lb_awb1 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.tb_info_g4 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -849,6 +857,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tb_info_g4);
+            this.groupBox1.Controls.Add(this.textBox11);
+            this.groupBox1.Controls.Add(this.lb_awb1);
+            this.groupBox1.Controls.Add(this.tb_info_g3);
+            this.groupBox1.Controls.Add(this.lb_awb0);
+            this.groupBox1.Controls.Add(this.tb_info_g);
+            this.groupBox1.Controls.Add(this.tb_info_g2);
+            this.groupBox1.Controls.Add(this.textBox9);
             this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.tb_info_aa1);
@@ -885,6 +901,46 @@
             this.groupBox1.TabIndex = 60;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Camera Info";
+            // 
+            // lb_awb0
+            // 
+            this.lb_awb0.AutoSize = true;
+            this.lb_awb0.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb0.Location = new System.Drawing.Point(210, 526);
+            this.lb_awb0.Name = "lb_awb0";
+            this.lb_awb0.Size = new System.Drawing.Size(58, 24);
+            this.lb_awb0.TabIndex = 86;
+            this.lb_awb0.Text = "lb_g";
+            // 
+            // tb_info_g
+            // 
+            this.tb_info_g.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info_g.Location = new System.Drawing.Point(207, 499);
+            this.tb_info_g.Name = "tb_info_g";
+            this.tb_info_g.Size = new System.Drawing.Size(571, 32);
+            this.tb_info_g.TabIndex = 85;
+            this.tb_info_g.Text = "---------------------------------------";
+            this.tb_info_g.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_info_g2
+            // 
+            this.tb_info_g2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info_g2.Location = new System.Drawing.Point(83, 473);
+            this.tb_info_g2.Name = "tb_info_g2";
+            this.tb_info_g2.Size = new System.Drawing.Size(106, 32);
+            this.tb_info_g2.TabIndex = 84;
+            this.tb_info_g2.Text = "AWB0資料";
+            this.tb_info_g2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Location = new System.Drawing.Point(24, 473);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(40, 32);
+            this.textBox9.TabIndex = 83;
+            this.textBox9.Text = "A0";
+            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox3
             // 
@@ -938,7 +994,7 @@
             // tb_info_f2
             // 
             this.tb_info_f2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info_f2.Location = new System.Drawing.Point(84, 457);
+            this.tb_info_f2.Location = new System.Drawing.Point(84, 431);
             this.tb_info_f2.Name = "tb_info_f2";
             this.tb_info_f2.Size = new System.Drawing.Size(106, 32);
             this.tb_info_f2.TabIndex = 77;
@@ -948,7 +1004,7 @@
             // textBox16
             // 
             this.textBox16.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox16.Location = new System.Drawing.Point(24, 457);
+            this.textBox16.Location = new System.Drawing.Point(24, 431);
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(40, 32);
             this.textBox16.TabIndex = 76;
@@ -958,7 +1014,7 @@
             // tb_info_e2
             // 
             this.tb_info_e2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info_e2.Location = new System.Drawing.Point(84, 382);
+            this.tb_info_e2.Location = new System.Drawing.Point(84, 377);
             this.tb_info_e2.Name = "tb_info_e2";
             this.tb_info_e2.Size = new System.Drawing.Size(106, 32);
             this.tb_info_e2.TabIndex = 75;
@@ -968,7 +1024,7 @@
             // textBox14
             // 
             this.textBox14.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox14.Location = new System.Drawing.Point(24, 382);
+            this.textBox14.Location = new System.Drawing.Point(24, 377);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(40, 32);
             this.textBox14.TabIndex = 74;
@@ -1059,7 +1115,7 @@
             // 
             this.lb_f.AutoSize = true;
             this.lb_f.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_f.Location = new System.Drawing.Point(210, 499);
+            this.lb_f.Location = new System.Drawing.Point(210, 473);
             this.lb_f.Name = "lb_f";
             this.lb_f.Size = new System.Drawing.Size(58, 24);
             this.lb_f.TabIndex = 64;
@@ -1069,7 +1125,7 @@
             // 
             this.lb_e.AutoSize = true;
             this.lb_e.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_e.Location = new System.Drawing.Point(210, 425);
+            this.lb_e.Location = new System.Drawing.Point(210, 409);
             this.lb_e.Name = "lb_e";
             this.lb_e.Size = new System.Drawing.Size(58, 24);
             this.lb_e.TabIndex = 63;
@@ -1098,7 +1154,7 @@
             // tb_info_f
             // 
             this.tb_info_f.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info_f.Location = new System.Drawing.Point(207, 457);
+            this.tb_info_f.Location = new System.Drawing.Point(207, 431);
             this.tb_info_f.Name = "tb_info_f";
             this.tb_info_f.Size = new System.Drawing.Size(571, 32);
             this.tb_info_f.TabIndex = 59;
@@ -1108,7 +1164,7 @@
             // tb_info_e
             // 
             this.tb_info_e.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_info_e.Location = new System.Drawing.Point(207, 382);
+            this.tb_info_e.Location = new System.Drawing.Point(207, 377);
             this.tb_info_e.Name = "tb_info_e";
             this.tb_info_e.Size = new System.Drawing.Size(571, 32);
             this.tb_info_e.TabIndex = 58;
@@ -1935,6 +1991,17 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_awb_time
+            // 
+            this.lb_awb_time.AutoSize = true;
+            this.lb_awb_time.BackColor = System.Drawing.Color.Transparent;
+            this.lb_awb_time.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb_time.Location = new System.Drawing.Point(440, 281);
+            this.lb_awb_time.Name = "lb_awb_time";
+            this.lb_awb_time.Size = new System.Drawing.Size(63, 15);
+            this.lb_awb_time.TabIndex = 146;
+            this.lb_awb_time.Text = "AWB_TIME";
             // 
             // lb_note3
             // 
@@ -4424,16 +4491,45 @@
             // 
             this.timer_awb.Tick += new System.EventHandler(this.timer_awb_Tick);
             // 
-            // lb_awb_time
+            // tb_info_g3
             // 
-            this.lb_awb_time.AutoSize = true;
-            this.lb_awb_time.BackColor = System.Drawing.Color.Transparent;
-            this.lb_awb_time.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_awb_time.Location = new System.Drawing.Point(440, 281);
-            this.lb_awb_time.Name = "lb_awb_time";
-            this.lb_awb_time.Size = new System.Drawing.Size(63, 15);
-            this.lb_awb_time.TabIndex = 146;
-            this.lb_awb_time.Text = "AWB_TIME";
+            this.tb_info_g3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info_g3.Location = new System.Drawing.Point(84, 511);
+            this.tb_info_g3.Name = "tb_info_g3";
+            this.tb_info_g3.Size = new System.Drawing.Size(106, 32);
+            this.tb_info_g3.TabIndex = 87;
+            this.tb_info_g3.Text = "AWB1資料";
+            this.tb_info_g3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_awb1
+            // 
+            this.lb_awb1.AutoSize = true;
+            this.lb_awb1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb1.Location = new System.Drawing.Point(387, 529);
+            this.lb_awb1.Name = "lb_awb1";
+            this.lb_awb1.Size = new System.Drawing.Size(58, 24);
+            this.lb_awb1.TabIndex = 88;
+            this.lb_awb1.Text = "lb_g";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox11.Location = new System.Drawing.Point(24, 515);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(40, 32);
+            this.textBox11.TabIndex = 89;
+            this.textBox11.Text = "A1";
+            this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_info_g4
+            // 
+            this.tb_info_g4.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_info_g4.Location = new System.Drawing.Point(207, 461);
+            this.tb_info_g4.Name = "tb_info_g4";
+            this.tb_info_g4.Size = new System.Drawing.Size(571, 32);
+            this.tb_info_g4.TabIndex = 90;
+            this.tb_info_g4.Text = "---------------------------------------";
+            this.tb_info_g4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
@@ -4885,6 +4981,14 @@
         private System.Windows.Forms.Timer timer_awb;
         private System.Windows.Forms.Label lb_note3;
         private System.Windows.Forms.Label lb_awb_time;
+        private System.Windows.Forms.Label lb_awb0;
+        private System.Windows.Forms.TextBox tb_info_g;
+        private System.Windows.Forms.TextBox tb_info_g2;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label lb_awb1;
+        private System.Windows.Forms.TextBox tb_info_g3;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox tb_info_g4;
     }
 }
 

@@ -95,7 +95,7 @@ namespace vcs_MyPaint
         {
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -867,7 +867,7 @@ namespace vcs_MyPaint
 
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -941,7 +941,7 @@ namespace vcs_MyPaint
 
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_hhmmss");
+                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";

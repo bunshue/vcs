@@ -104,8 +104,8 @@ namespace vcs_test_all_12_DateTime
 
         private void button7_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "\n";
-            richTextBox1.Text += DateTime.Now.ToString("yyyy" + '-' + "MM" + '-' + "dd" + " hh" + ':' + "mm" + ':' + "ss") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("yyyy" + '-' + "MM" + '-' + "dd" + " HH" + ':' + "mm" + ':' + "ss") + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
