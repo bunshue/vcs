@@ -135,8 +135,8 @@ namespace imsLink
         bool flag_B_OK = false;
         bool flag_break = false;
         bool flag_do_awb = false;
-        int timer_display_save_count = 0;
-        int timer_display_connect_comport_count = 0;
+        int timer_display_show_main_mesg_count = 0;
+        int timer_display_show_main_mesg_count_target = 0;
         int timer_display_r_count = 0;
         int timer_display_g_count = 0;
         int timer_display_b_count = 0;
@@ -199,6 +199,9 @@ namespace imsLink
         int diff_g = 0;
         int diff_b = 0;
         int timer_awb_cnt = 0;
+
+        //二維List for string
+        List<string[]> camera_serials = new List<string[]>();
 
         //C# 提示視窗 ToolTip 
         //ToolTip：當游標停滯在某個控制項時，就會跳出一個小視窗
@@ -380,61 +383,8 @@ namespace imsLink
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int ret;
-            ret = try_connect_comport();
-            if (ret == S_OK)
-            {
-                richTextBox1.Text += "已連上IMS EGD System\n";
-                lb_connect_comport.Text = "已連線";
-            }
-            else
-            {
-                richTextBox1.Text += "未連線\n";
-                this.BackColor = Color.Pink;
-                lb_connect_comport.Text = "未連線";
-            }
-            timer_display.Enabled = true;
-            timer_display_connect_comport_count = 0;
-
-            /*
-            if (comboBox1.Text.Length == 0)
-            {
-                MessageBox.Show("No comport selected.");
-                return;
-            }
-            serialPort1.PortName = comboBox1.Text;
-            serialPort1.BaudRate = int.Parse(comboBox2.Text);
-
-            //serialPort1.Open(); //原本是這一行，改寫成以下。
-            try
-            {   //可能會產生錯誤的程式區段
-                serialPort1.Open();
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-                if (serialPort1.IsOpen)
-                {
-                    //MessageBox.Show("已經連上" + serialPort1.PortName);
-                }
-                else
-                {
-                    MessageBox.Show("無法連上Comport, 請重新連線");
-                }
-            }
-            
-            if (serialPort1.IsOpen)
-            {
-                button1.Enabled = false;
-                button2.Enabled = true;
-                this.BackColor = System.Drawing.SystemColors.ControlLight;
-                flag_comport_ok = true;
-            }
-            */
+            richTextBox1.Text += "manually call connect_IMS_comport()\n";
+            connect_IMS_comport();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -446,6 +396,7 @@ namespace imsLink
                 button1.Enabled = true;
                 button2.Enabled = false;
                 flag_comport_ok = false;
+                show_main_message("COM未連線", S_FALSE, 100);
             }
         }
 
@@ -482,6 +433,7 @@ namespace imsLink
 
         private void button9_Click(object sender, EventArgs e)
         {
+            show_main_message("Reset", S_OK, 30);
             richTextBox1.AppendText("[PC] : Reset imsLink\n");
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
             Reset_imsLink_Setting();
@@ -1197,6 +1149,16 @@ namespace imsLink
                                     lb_write_camera_serial2.ForeColor = Color.Black;
                                     g2.Clear(BackColor);
                                     g2.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                                    playSound(S_OK);
+
+                                    //richTextBox1.Text += "把資料暫存起來\n";
+                                    camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString() });
+
+                                    if ((camera_serials.Count % 5) == 0)
+                                    {
+                                        richTextBox1.Text += "自動存檔\n";
+                                        exportCSV();
+                                    }
                                 }
                                 else
                                 {
@@ -1207,6 +1169,7 @@ namespace imsLink
                                     g2.Clear(BackColor);
                                     g2.DrawString("驗證失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
                                     bt_confirm.Visible = true;
+                                    playSound(S_FALSE);
                                 }
                                 //lb_sn2.Text = "";
 
@@ -1670,6 +1633,7 @@ namespace imsLink
                         {
                             textBox7.Text = "無連接器";
                             textBox7.BackColor = Color.Red;
+                            playSound(S_FALSE);
                             panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
@@ -1679,6 +1643,7 @@ namespace imsLink
                         {
                             textBox7.Text = "有連接器, 無相機";
                             textBox7.BackColor = Color.Red;
+                            playSound(S_FALSE);
                             panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_none;
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_none;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_none;
@@ -1698,6 +1663,7 @@ namespace imsLink
                         {
                             textBox7.Text = "狀態不明, status = " + g_conn_status.ToString();
                             textBox7.BackColor = Color.Red;
+                            playSound(S_FALSE);
                             panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
@@ -1768,6 +1734,7 @@ namespace imsLink
         private void button10_Click(object sender, EventArgs e)
         {
             Comport_Scan();
+            show_main_message("COM重抓", S_OK, 50);
         }
 
         private void Comport_Scan()
@@ -1813,6 +1780,7 @@ namespace imsLink
             bt_awb.Visible = en;
             bt_awb_test.Visible = en;
             progressBar_awb.Visible = en;
+            tb_awb_mesg.Visible = en;
             lb_awb_time.Visible = en;
             bt_awb_test2.Visible = en;
             bt_awb_test_init.Visible = en;
@@ -2003,11 +1971,15 @@ namespace imsLink
             textBox5.Size = new Size(dx * 15 + data_00.Width, textBox5.Size.Height);
 
             //AWB
-            bt_awb_test.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200);
-            bt_awb_test.Size = new Size(380, 97);
-            progressBar_awb.Location = new Point(170 + 70 * 0, 460 + 40 * 0 - 200 + 100);
+            bt_awb_test.Location = new Point(170 + 70 * 0 - 30, 460 + 40 * 0 - 200);
+            bt_awb_test.Size = new Size(200, 97);
+            bt_awb_test.BackColor = Color.Lime;
+            progressBar_awb.Location = new Point(170 + 70 * 0 - 30, 460 + 40 * 0 - 200 + 100);
             //lb_awb_time.Location = new Point(170 + 70 * 0 + 330, 460 + 40 * 0 - 200 + 100 + 4);
             lb_awb_time.Location = new Point(170 + 70 * 0 + 10, 460 + 40 * 0 - 200 + 100 + 4);
+
+            tb_awb_mesg.Location = new Point(170 + 70 * 0 - 30 + 205, 460 + 40 * 0 - 200 + 25);
+            tb_awb_mesg.Size = new Size(250, 150);
 
             //button
             x_st = 140;
@@ -2340,8 +2312,6 @@ namespace imsLink
             }
 
             refresh_picturebox2();
-            lb_save_message.Visible = false;
-
             return;
         }
 
@@ -2396,8 +2366,8 @@ namespace imsLink
             tb_machine_serial.Text = "0000000-B0000";
             tb_mb_big_serial.Text = "0000000000000";
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
-            lb_save_message.Text = "";
-            lb_connect_comport.Text = "";
+            tb_awb_mesg.Text = "";
+            lb_main_mesg.Text = "";
             lb_awb_data.Text = "";
             lb_awb_time.Text = "";
 
@@ -2425,29 +2395,16 @@ namespace imsLink
             btnLeft.BackgroundImage = imsLink.Properties.Resources.left;
             btnRight.BackgroundImage = imsLink.Properties.Resources.right;
             btnCenter.BackgroundImage = imsLink.Properties.Resources.stop;
+            button46.BackgroundImage = imsLink.Properties.Resources.excel;
+
+            camera_serials.Clear();
 
             check_webcam();
 
             //Comport_Scan();
             this.BackColor = Color.Yellow;
 
-            /*
-            int ret;
-            ret = try_connect_comport();
-            if (ret == S_OK)
-            {
-                richTextBox1.Text += "已連上IMS EGD System\n";
-                lb_connect_comport.Text = "已連線";
-            }
-            else
-            {
-                richTextBox1.Text += "未連線\n";
-                this.BackColor = Color.Pink;
-                lb_connect_comport.Text = "未連線";
-            }
-            timer_display.Enabled = true;
-            timer_display_connect_comport_count = 0;
-            */
+            //connect_IMS_comport();
 
             /*
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -2540,7 +2497,6 @@ namespace imsLink
             //toolTip1.ToolTipTitle = "提示訊息";
 
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
-            lb_save_message.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y - comboBox_webcam.Height);
 
             if (flag_enaglb_awb_function == true)
             {
@@ -4543,6 +4499,7 @@ namespace imsLink
         //int camera_start = 0;
         private void button12_Click_1(object sender, EventArgs e)
         {
+            show_main_message("影像重抓", S_OK, 30);
             if ((flag_camera_start == 1) && (Cam.IsRunning == true))
             {
                 richTextBox1.Text += "USB影像傳輸中, 中斷重來\n";
@@ -4644,12 +4601,14 @@ namespace imsLink
                     flag_camera_is_stopped = 1;
                     richTextBox1.Text += "停止\n";
                     enable_camera_streaming(false);
+                    show_main_message("影像停止", S_FALSE, 30);
                 }
                 else
                 {
                     flag_camera_is_stopped = 0;
                     richTextBox1.Text += "繼續\n";
                     enable_camera_streaming(true);
+                    show_main_message("影像繼續", S_OK, 30);
                 }
             }
         }
@@ -4696,15 +4655,13 @@ namespace imsLink
                 //richTextBox1.Text += "已存檔 : " + file1 + "\n";
                 richTextBox1.Text += "已存檔 : " + file2 + "\n";
                 //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                lb_save_message.Text = "已存檔";
+                show_main_message("已存檔BMP", S_OK, 30);
             }
             else
             {
                 richTextBox1.Text += "無圖可存\n";
-                lb_save_message.Text = "無圖可存";
+                show_main_message("無圖可存", S_FALSE, 30);
             }
-            timer_display.Enabled = true;
-            timer_display_save_count = 0;
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -4850,7 +4807,6 @@ namespace imsLink
                 {
                     pictureBox1.Location = new Point(170 + 90, 7);
                     richTextBox1.Visible = false;
-                    lb_save_message.Visible = true;
                 }
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
             }
@@ -4883,8 +4839,6 @@ namespace imsLink
                     toolTip1.SetToolTip(button19, "2X");
                 }
 
-                lb_save_message.Visible = true;
-
                 if (flag_enaglb_awb_function == true)
                 {
                     show_awb_item_visible(false);   //444
@@ -4909,6 +4863,8 @@ namespace imsLink
                 button1.Enabled = true;
                 button2.Enabled = false;
                 flag_comport_ok = false;
+                lb_main_mesg.Text = "COM未連線";
+                playSound(S_FALSE);
             }
 
             if (Cam != null)
@@ -5711,31 +5667,14 @@ namespace imsLink
         int read_connection_fail_cnt = 0;
         private void timer_rtc_Tick(object sender, EventArgs e)
         {
-            if (flag_try_connect_comport == false)
+            if (flag_release_mode == true)
             {
-                flag_try_connect_comport = true;
-
-                int ret;
-                ret = try_connect_comport();
-                if (ret == S_OK)
+                if (flag_try_connect_comport == false)
                 {
-                    richTextBox1.Text += "已連上IMS EGD System\n";
-                    lb_connect_comport.Text = "已連線";
+                    flag_try_connect_comport = true;
+                    richTextBox1.Text += "auto call connect_IMS_comport()\n";
+                    connect_IMS_comport();
                 }
-                else
-                {
-                    richTextBox1.Text += "未連線\n";
-                    this.BackColor = Color.Pink;
-                    lb_connect_comport.Text = "未連線";
-
-                    serialPort1.Close();
-                    this.BackColor = Color.Yellow;
-                    button1.Enabled = true;
-                    button2.Enabled = false;
-                    flag_comport_ok = false;
-                }
-                timer_display.Enabled = true;
-                timer_display_connect_comport_count = 0;
             }
 
             if (flag_comport_ok == false)
@@ -5899,12 +5838,14 @@ namespace imsLink
             {
                 richTextBox1.Text += "相機序號1長度錯誤, 長度 : " + tb_sn1.Text.Length.ToString() + "\n";
                 lb_write_camera_serial2.Text = "相機型號1長度錯誤";
+                playSound(S_FALSE);
                 return;
             }
             if (tb_sn2.Text.Length != 11)
             {
                 richTextBox1.Text += "相機序號2長度錯誤, 長度 : " + tb_sn2.Text.Length.ToString() + "\n";
                 lb_write_camera_serial2.Text = "相機型號2長度錯誤";
+                playSound(S_FALSE);
                 return;
             }
 
@@ -5917,13 +5858,15 @@ namespace imsLink
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 button11.BackColor = System.Drawing.SystemColors.ControlLight;
+                playSound(S_FALSE);
                 return;
             }
             g_conn_status = CAMERA_UNKNOWN;
+            delay(200);
             Send_IMS_Data(0xFF, 0, 0, 0);
 
             int cnt = 0;
-            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
+            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 30))
             {
                 richTextBox1.Text += "-2xx";
                 delay(100);
@@ -5935,6 +5878,7 @@ namespace imsLink
                 tb_info_aa1.Text = "無連接器";
                 tb_info_aa1.BackColor = Color.Red;
                 lb_write_camera_serial2.Text = "無連接器";
+                playSound(S_FALSE);
             }
             else if (g_conn_status == CAMERA_NONE)
             {
@@ -5943,6 +5887,7 @@ namespace imsLink
                 tb_info_aa1.Text = "有連接器, 無相機";
                 tb_info_aa1.BackColor = Color.Red;
                 lb_write_camera_serial2.Text = "有連接器, 無相機";
+                playSound(S_FALSE);
             }
             else if (g_conn_status == CAMERA_OK)
             {
@@ -5992,7 +5937,7 @@ namespace imsLink
                     g2.Clear(BackColor);
                     g2.DrawString("燒錄失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
                     bt_confirm.Visible = true;
-
+                    playSound(S_FALSE);
                 }
                 else
                 {
@@ -6043,7 +5988,6 @@ namespace imsLink
             {
                 tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
             }
-
         }
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)
@@ -7169,288 +7113,352 @@ namespace imsLink
             richTextBox1.Text += "RGB皆未飽和b\n";
         }
 
+        bool flag_doing_awb = false;
         private void bt_awb_test_Click(object sender, EventArgs e)
         {
+            if (flag_doing_awb == false)
+            {
+                tb_awb_mesg.Text = "";
+                flag_doing_awb = true;
+                bt_awb_test.Enabled = false;
+            }
+            else
+            {
+                richTextBox1.Text += "色彩校正 進行中, abort\n";
+                playSound(S_FALSE);
+                return;
+            }
+
             int i;
             if (flag_comport_ok == false)
             {
                 //MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                bt_awb_test.Text = "無COM連線";
+                //bt_awb_test.Text = "無COM連線";
+                tb_awb_mesg.Text = "無COM連線";
                 bt_awb_test.BackColor = Color.Red;
+                flag_doing_awb = false;
+                bt_awb_test.Enabled = true;
+                playSound(S_FALSE);
                 return;
             }
 
             if (flag_camera_use_insighteyes == 0)
             {
                 //MessageBox.Show("No Insighteyes Camera", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                bt_awb_test.Text = "無IMS相機";
+                //bt_awb_test.Text = "無IMS相機";
+                tb_awb_mesg.Text = "無IMS相機";
                 bt_awb_test.BackColor = Color.Red;
+                flag_doing_awb = false;
+                bt_awb_test.Enabled = true;
+                playSound(S_FALSE);
                 return;
             }
 
-            // Create stopwatch
-            Stopwatch stopwatch = new Stopwatch();
-            // Begin timing
-            stopwatch.Start();
-            lb_awb_time.Text = "0";
-            timer_awb_cnt = 0;
-            timer_awb.Enabled = true;
+            //開始檢查相機連線
+            g_conn_status = CAMERA_UNKNOWN;
+            Send_IMS_Data(0xFF, 0, 0, 0);
 
-            richTextBox1.Text += "\nAWB 開始 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-            bt_awb_test.Text = "清除相機資料";
-            bt_awb_test.BackColor = Color.Pink;
-            progressBar_awb.Value = 0;
-            //progressBar_awb.ForeColor = Color.Red;
-            //progressBar_awb.BackColor = Color.Red;
-            Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
-
-            progressBar_awb.Value = 5;
-            delay(1000);
-            bt_awb_test.Text = "色彩校正開始";
-            progressBar_awb.Value = 10;
-            delay(500);
-
-            //if (flag_awb_mode == false)
+            int cnt = 0;
+            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
             {
-                lb_rgb.Text = "";
-                flag_awb_mode = true;
-                timer_webcam.Enabled = false;
-                bt_awb.Text = "Auto";
-                //richTextBox1.Text += "\nTo Auto mode\n";
-                //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+                richTextBox1.Text += "-2xx";
+                delay(100);
             }
-
-            timer_display.Enabled = true;
-            flag_do_awb = true;
-            flag_break = false;
-            //richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
-
-            richTextBox1.Text += "檢查飽和 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-            bt_awb_test.Text = "檢查飽和開始";
-            progressBar_awb.Value = 12;
-
-            //no change gain.....
-            //richTextBox1.Text += "setup gain to 0x7f = 127\n";
-            //Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
-            //Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);
-
-            test_RGB_saturation();
-
-            richTextBox1.Text += "檢查飽和 SP\t粗調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-            bt_awb_test.Text = "檢查飽和結束";
-            progressBar_awb.Value = 30;
-            delay(500);
-            bt_awb_test.Text = "粗調開始";
-            progressBar_awb.Value = 32;
-
-            int ret = 0;
-            flag_update_RGB_scrollbar = true;
-
-            ret = get_r_data();
-            ret = get_b_data();
-
-            if (ret == S_FALSE)
+            if (g_conn_status == DONGLE_NONE)
             {
-                ret = get_r_data();
-                ret = get_b_data();
+                tb_awb_mesg.Text = "無連接器";
+                playSound(S_FALSE);
             }
-
-            //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
-
-            ret = check_G_exposure(sender, e, total_RGB_G);
-
-            flag_update_RGB_scrollbar = true;
-
-            ret = get_r_data();
-            ret = get_b_data();
-            if (ret == S_FALSE)
+            else if (g_conn_status == CAMERA_NONE)
             {
-                ret = get_r_data();
-                ret = get_b_data();
+                tb_awb_mesg.Text = "有連接器, 無相機";
+                playSound(S_FALSE);
             }
-
-            if ((ret == S_OK) && (flag_break == false))
+            else if (g_conn_status == CAMERA_OK)
             {
-                //richTextBox1.Text += "AWB data R G B = " + data_R.ToString() + " " + data_G.ToString() + " " + data_B.ToString() + "\n";
+                tb_awb_mesg.Text = "有連接器, 有相機";
+                playSound(S_OK);
 
-                check_RB_saturation();
+                // Create stopwatch
+                Stopwatch stopwatch = new Stopwatch();
+                // Begin timing
+                stopwatch.Start();
+                lb_awb_time.Text = "0";
+                timer_awb_cnt = 0;
+                timer_awb.Enabled = true;
 
-                for (i = 0; i < 50; i++)
+                richTextBox1.Text += "\nAWB 開始 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                //bt_awb_test.Text = "清除相機資料";
+                tb_awb_mesg.Text = "清除相機資料";
+                bt_awb_test.BackColor = Color.Pink;
+                progressBar_awb.Value = 0;
+                //progressBar_awb.ForeColor = Color.Red;
+                //progressBar_awb.BackColor = Color.Red;
+                Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
+
+                progressBar_awb.Value = 5;
+                delay(1000);
+                //bt_awb_test.Text = "色彩校正開始";
+                tb_awb_mesg.Text = "色彩校正開始";
+                progressBar_awb.Value = 10;
+                delay(500);
+
+                //if (flag_awb_mode == false)
                 {
-                    //richTextBox1.Text += "\ni = " + i.ToString() + "\t";
-                    flag_update_RGB_scrollbar = true;
+                    lb_rgb.Text = "";
+                    flag_awb_mode = true;
+                    timer_webcam.Enabled = false;
+                    bt_awb.Text = "Auto";
+                    //richTextBox1.Text += "\nTo Auto mode\n";
+                    //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+                    Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+                }
 
+                timer_display.Enabled = true;
+                flag_do_awb = true;
+                flag_break = false;
+                //richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
+
+                richTextBox1.Text += "檢查飽和 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                //bt_awb_test.Text = "檢查飽和開始";
+                tb_awb_mesg.Text = "檢查飽和開始";
+                progressBar_awb.Value = 12;
+
+                //no change gain.....
+                //richTextBox1.Text += "setup gain to 0x7f = 127\n";
+                //Send_IMS_Data(0xA0, 0x35, 0x0A, 0x00);
+                //Send_IMS_Data(0xA0, 0x35, 0x0B, 0x7f);
+
+                test_RGB_saturation();
+
+                richTextBox1.Text += "檢查飽和 SP\t粗調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                //bt_awb_test.Text = "檢查飽和結束";
+                tb_awb_mesg.Text = "檢查飽和結束";
+                progressBar_awb.Value = 30;
+                delay(500);
+                //bt_awb_test.Text = "粗調開始";
+                tb_awb_mesg.Text = "粗調開始";
+                progressBar_awb.Value = 32;
+
+                int ret = 0;
+                flag_update_RGB_scrollbar = true;
+
+                ret = get_r_data();
+                ret = get_b_data();
+
+                if (ret == S_FALSE)
+                {
                     ret = get_r_data();
                     ret = get_b_data();
-                    if (ret == S_FALSE)
+                }
+
+                //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
+
+                ret = check_G_exposure(sender, e, total_RGB_G);
+
+                flag_update_RGB_scrollbar = true;
+
+                ret = get_r_data();
+                ret = get_b_data();
+                if (ret == S_FALSE)
+                {
+                    ret = get_r_data();
+                    ret = get_b_data();
+                }
+
+                if ((ret == S_OK) && (flag_break == false))
+                {
+                    //richTextBox1.Text += "AWB data R G B = " + data_R.ToString() + " " + data_G.ToString() + " " + data_B.ToString() + "\n";
+
+                    check_RB_saturation();
+
+                    for (i = 0; i < 50; i++)
                     {
+                        //richTextBox1.Text += "\ni = " + i.ToString() + "\t";
+                        flag_update_RGB_scrollbar = true;
+
                         ret = get_r_data();
                         ret = get_b_data();
-                    }
+                        if (ret == S_FALSE)
+                        {
+                            ret = get_r_data();
+                            ret = get_b_data();
+                        }
 
-                    if (ret == S_OK)
-                    {
-                        check_RB_data(sender, e);
+                        if (ret == S_OK)
+                        {
+                            check_RB_data(sender, e);
+                            ret = check_RGB_value();
+                            if (ret == S_OK)
+                            {
+                                richTextBox1.Text += "RGB皆符合, 完成a\n";
+                                break;
+                            }
+                        }
+                        delay(10);
+                        check_RB_saturation();
                         ret = check_RGB_value();
                         if (ret == S_OK)
                         {
-                            richTextBox1.Text += "RGB皆符合, 完成a\n";
+                            richTextBox1.Text += "\nRGB皆符合, 完成b\n";
                             break;
                         }
-                    }
-                    delay(10);
-                    check_RB_saturation();
-                    ret = check_RGB_value();
-                    if (ret == S_OK)
-                    {
-                        richTextBox1.Text += "\nRGB皆符合, 完成b\n";
-                        break;
-                    }
-                    check_RB_saturation();
+                        check_RB_saturation();
 
-                    ret = check_G_exposure(sender, e, total_RGB_G);
+                        ret = check_G_exposure(sender, e, total_RGB_G);
 
-                    delay(10);
-                    check_RB_saturation();
-                    ret = check_RGB_value();
-                    if (ret == S_OK)
-                    {
-                        richTextBox1.Text += "\nRGB皆符合, 完成c\n";
-                        break;
-                    }
+                        delay(10);
+                        check_RB_saturation();
+                        ret = check_RGB_value();
+                        if (ret == S_OK)
+                        {
+                            richTextBox1.Text += "\nRGB皆符合, 完成c\n";
+                            break;
+                        }
 
-                    if (flag_break == true)
-                    {
-                        flag_break = false;
-                        richTextBox1.Text += "收到break\n";
-                        break;
+                        if (flag_break == true)
+                        {
+                            flag_break = false;
+                            richTextBox1.Text += "收到break\n";
+                            break;
+                        }
+
+                        if (progressBar_awb.Value < (52 - 2))
+                            progressBar_awb.Value += 1;
                     }
 
-                    if (progressBar_awb.Value < (52 - 2))
-                        progressBar_awb.Value += 1;
                 }
 
-            }
+                //richTextBox1.Text += "AGC auto, EXPO auto\n";
+                //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
-            //richTextBox1.Text += "AGC auto, EXPO auto\n";
-            //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+                //richTextBox1.Text += "Target  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
+                //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
 
-            //richTextBox1.Text += "Target  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
-            //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
+                richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                //bt_awb_test.Text = "粗調結束";
+                tb_awb_mesg.Text = "粗調結束";
+                progressBar_awb.Value = 52;
+                delay(500);
+                //bt_awb_test.Text = "細調開始";
+                tb_awb_mesg.Text = "細調開始";
+                progressBar_awb.Value = 56;
 
-            richTextBox1.Text += "粗調 SP\t細調 ST : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-            bt_awb_test.Text = "粗調結束";
-            progressBar_awb.Value = 52;
-            delay(500);
-            bt_awb_test.Text = "細調開始";
-            progressBar_awb.Value = 56;
-
-            int ok_cnt = 0;
-            int check_cnt = 0;
-            while(true)
-            {
-                check_cnt++;
-                //richTextBox1.Text += "i = " + check_cnt.ToString() + "    ";
-                if(check_cnt < 5)
-                    tolerance_ratio = 2;
-                else if (check_cnt < 10)
-                    tolerance_ratio = 2;
-                else
-                    tolerance_ratio = 1;
-                ret = awb_modify();
-
-                if (progressBar_awb.Value < (90 - 2))
-                    progressBar_awb.Value += 1;
-
-                if (ret == S_OK)
+                int ok_cnt = 0;
+                int check_cnt = 0;
+                while (true)
                 {
-                    ok_cnt++;
-                    richTextBox1.Text += "S_OK " + ok_cnt.ToString() + " ";
-                    if (ok_cnt == 3)
-                        break;
+                    check_cnt++;
+                    //richTextBox1.Text += "i = " + check_cnt.ToString() + "    ";
+                    if (check_cnt < 5)
+                        tolerance_ratio = 2;
+                    else if (check_cnt < 10)
+                        tolerance_ratio = 2;
+                    else
+                        tolerance_ratio = 1;
+                    ret = awb_modify();
+
+                    if (progressBar_awb.Value < (90 - 2))
+                        progressBar_awb.Value += 1;
+
+                    if (ret == S_OK)
+                    {
+                        ok_cnt++;
+                        richTextBox1.Text += "S_OK " + ok_cnt.ToString() + " ";
+                        if (ok_cnt == 3)
+                            break;
+                    }
+                    else
+                        ok_cnt = 0;
                 }
-                else
-                    ok_cnt = 0;
-            }
-            richTextBox1.Text += "\n細調 SP : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-            bt_awb_test.Text = "細調結束";
-            progressBar_awb.Value = 90;
-            delay(500);
-            progressBar_awb.Value = 95;
-            tolerance_ratio = 1;
+                richTextBox1.Text += "\n細調 SP : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                //bt_awb_test.Text = "細調結束";
+                tb_awb_mesg.Text = "細調結束";
+                progressBar_awb.Value = 90;
+                delay(500);
+                progressBar_awb.Value = 95;
+                tolerance_ratio = 1;
 
-            //切換回自動模式
-            bt_awb.Text = "Manual";
-            flag_awb_mode = false;
-            timer_webcam.Enabled = true;
-            Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+                //切換回自動模式
+                bt_awb.Text = "Manual";
+                flag_awb_mode = false;
+                timer_webcam.Enabled = true;
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
-            //do not write data to camera
-            //寫資料進相機裡
-            ret = get_r_data();
-            ret = get_b_data();
-
-            if (ret == S_FALSE)
-            {
+                //do not write data to camera
+                //寫資料進相機裡
                 ret = get_r_data();
                 ret = get_b_data();
+
+                if (ret == S_FALSE)
+                {
+                    ret = get_r_data();
+                    ret = get_b_data();
+                }
+
+                //old method, write to AWB_PAGE0
+                //write_awb_data_to_camera(data_R, data_B);     old method
+
+                //new method, write to AWB_PAGE1
+                int page = AWB_PAGE1;
+
+                for (i = 0; i < 16; i++)
+                {
+                    user_flash_data[i] = 0;
+                }
+
+                //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+
+                user_flash_data[0] = 0xDA;  //header
+
+                user_flash_data[1] = 0x52;  //AWB R H AH
+                user_flash_data[2] = 0x1A;  //AWB R H AL
+                user_flash_data[3] = (Byte)(data_R / 256);
+
+                user_flash_data[4] = 0x52;  //AWB R L AH
+                user_flash_data[5] = 0x1B;  //AWB R L AL
+                user_flash_data[6] = (Byte)(data_R % 256);
+
+                user_flash_data[7] = 0x52;  //AWB B H AH
+                user_flash_data[8] = 0x1E;  //AWB B H AL
+                user_flash_data[9] = (Byte)(data_B / 256);
+
+                user_flash_data[10] = 0x52; //AWB B L AH
+                user_flash_data[11] = 0x1F; //AWB B L AL
+                user_flash_data[12] = (Byte)(data_B % 256);
+
+                user_flash_data[13] = 0x00; //dummy, no data
+                user_flash_data[14] = 0x00; //dummy, no data
+                user_flash_data[15] = 0x00; //dummy, no data
+
+                Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+                serialPort1.Write(user_flash_data, 0, 16);
+
+                richTextBox1.Text += "寫入資料  完成\n";
+
+                // Stop timing
+                stopwatch.Stop();
+                timer_awb.Enabled = false;
+
+                // Write result
+                richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                //bt_awb_test.Text = "色彩校正完成";
+                tb_awb_mesg.Text = "色彩校正完成";
+                bt_awb_test.BackColor = Color.Lime;
+                progressBar_awb.Value = 100;
+                //progressBar_awb.ForeColor = Color.Green;
+                //progressBar_awb.BackColor = Color.Green;
+                flag_break = false;
+                flag_do_awb = false;
+                timer_display.Enabled = false;
+                playSound(S_OK);
             }
-
-            //old method, write to AWB_PAGE0
-            //write_awb_data_to_camera(data_R, data_B);     old method
-
-            //new method, write to AWB_PAGE1
-            int page = AWB_PAGE1;
-
-            for (i = 0; i < 16; i++)
+            else
             {
-                user_flash_data[i] = 0;
+                tb_awb_mesg.Text = "狀態不明, status = " + g_conn_status.ToString();
             }
-
-            //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
-
-            user_flash_data[0] = 0xDA;  //header
-
-            user_flash_data[1] = 0x52;  //AWB R H AH
-            user_flash_data[2] = 0x1A;  //AWB R H AL
-            user_flash_data[3] = (Byte)(data_R / 256);
-
-            user_flash_data[4] = 0x52;  //AWB R L AH
-            user_flash_data[5] = 0x1B;  //AWB R L AL
-            user_flash_data[6] = (Byte)(data_R % 256);
-
-            user_flash_data[7] = 0x52;  //AWB B H AH
-            user_flash_data[8] = 0x1E;  //AWB B H AL
-            user_flash_data[9] = (Byte)(data_B / 256);
-
-            user_flash_data[10] = 0x52; //AWB B L AH
-            user_flash_data[11] = 0x1F; //AWB B L AL
-            user_flash_data[12] = (Byte)(data_B % 256);
-
-            user_flash_data[13] = 0x00; //dummy, no data
-            user_flash_data[14] = 0x00; //dummy, no data
-            user_flash_data[15] = 0x00; //dummy, no data
-
-            Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
-            serialPort1.Write(user_flash_data, 0, 16);
-
-            richTextBox1.Text += "寫入資料  完成\n";
-
-            // Stop timing
-            stopwatch.Stop();
-            timer_awb.Enabled = false;
-
-            // Write result
-            richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
-            bt_awb_test.Text = "色彩校正完成";
-            bt_awb_test.BackColor = Color.Lime;
-            progressBar_awb.Value = 100;
-            //progressBar_awb.ForeColor = Color.Green;
-            //progressBar_awb.BackColor = Color.Green;
-            flag_break = false;
-            flag_do_awb = false;
-            timer_display.Enabled = false;
+            flag_doing_awb = false;
+            bt_awb_test.Enabled = true;
         }
 
         int check_RGB_value()
@@ -8022,52 +8030,9 @@ namespace imsLink
             {
                 if (flag_comport_connection_ok == false)
                 {
-                    int ret;
-                    ret = try_connect_comport();
-                    if (ret == S_OK)
-                    {
-                        richTextBox1.Text += "已連上IMS EGD System\n";
-                        lb_connect_comport.Text = "已連線";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "未連線\n";
-                        this.BackColor = Color.Pink;
-                        lb_connect_comport.Text = "未連線";
-                    }
-                    timer_display.Enabled = true;
-                    timer_display_connect_comport_count = 0;
+                    richTextBox1.Text += "awb call connect_IMS_comport()\n";
+                    connect_IMS_comport();
                 }
-
-                /*
-                if (comboBox1.Text.Length == 0)
-                {
-                    MessageBox.Show("No comport selected.");
-                    return;
-                }
-                serialPort1.PortName = comboBox1.Text;
-                serialPort1.BaudRate = int.Parse(comboBox2.Text);
-
-                //serialPort1.Open(); //原本是這一行，改寫成以下。
-                try
-                {   //可能會產生錯誤的程式區段
-                    serialPort1.Open();
-                }
-                catch (Exception ex)
-                {   //定義產生錯誤時的例外處理程式碼
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    //一定會被執行的程式區段
-                    if (serialPort1.IsOpen)
-                    {
-                        //MessageBox.Show("已經連上" + serialPort1.PortName);
-                    }
-                    else
-                        MessageBox.Show("無法連上Comport, 請重新連線");
-                }
-                */
             }
 
             if (serialPort1.IsOpen)
@@ -9227,39 +9192,12 @@ namespace imsLink
             else
                 flag_display_b_do_awb = false;
 
-            if (timer_display_save_count < 10)
+            if (timer_display_show_main_mesg_count < timer_display_show_main_mesg_count_target)      //display main message timeout
             {
-                timer_display_save_count++;
-                if (timer_display_save_count == 10)
-                    lb_save_message.Text = "";
+                timer_display_show_main_mesg_count++;
+                if (timer_display_show_main_mesg_count >= timer_display_show_main_mesg_count_target)
+                    lb_main_mesg.Text = "";
             }
-
-            if (timer_display_connect_comport_count < 50)
-            {
-                timer_display_connect_comport_count++;
-                if (timer_display_connect_comport_count == 50)
-                    lb_connect_comport.Text = "";
-            }
-        
-        }
-
-        private void button41_Click_1(object sender, EventArgs e)
-        {
-            int ret;
-            ret = try_connect_comport();
-            if (ret == S_OK)
-            {
-                richTextBox1.Text += "已連上IMS EGD System\n";
-                lb_connect_comport.Text = "已連線";
-            }
-            else
-            {
-                richTextBox1.Text += "未連線\n";
-                this.BackColor = Color.Pink;
-                lb_connect_comport.Text = "未連線";
-            }
-            timer_display.Enabled = true;
-            timer_display_connect_comport_count = 0;
         }
 
         int try_connect_comport()
@@ -9275,7 +9213,7 @@ namespace imsLink
             }
 
             comboBox1.Items.Clear();    //Clear All items in Combobox
-            richTextBox1.Text += "check_comport ST\n";
+            richTextBox1.Text += "try_connect_comport ST\n";
 
             string[] tempString = SerialPort.GetPortNames();
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
@@ -9370,6 +9308,7 @@ namespace imsLink
 
                     flag_comport_ok = true;
                     flag_comport_connection_ok = false;
+                    delay(100);
                     Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
 
                     int cnt = 0;
@@ -9471,7 +9410,7 @@ namespace imsLink
         private void bt_read_awb_Click(object sender, EventArgs e)
         {
             //old method get awb data
-            lb_awb_data.Text = "";
+            lb_awb_data.Text = "讀取相機資料中...";
             byte page;
             int cnt = 0;
 
@@ -9574,8 +9513,6 @@ namespace imsLink
             {
                 tb_sn1.Text = "狀態不明, status = " + g_conn_status.ToString();
             }
-
-
         }
 
         private void button44_Click(object sender, EventArgs e)
@@ -9977,6 +9914,92 @@ namespace imsLink
         {
             timer_awb_cnt++;
             lb_awb_time.Text = (timer_awb_cnt / 10).ToString() + "." + (timer_awb_cnt % 10).ToString();
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            exportCSV();
+        }
+
+        void exportCSV()
+        {
+            String filename = Application.StartupPath + "\\ims_camera_serial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
+            //StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
+            StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.UTF8);    //指名編碼格式
+
+            int i;
+            string content = "";
+
+            content += "Opal序號" + "," + "廠內生產製令序號" + "," + "燒錄時間" + "\n";
+            for (i = 0; i < camera_serials.Count; i++)
+            {
+                //richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString() + " camera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString() + "\n";
+                content += camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "\n";
+            }
+
+            sw.WriteLine(content);
+            sw.Close();
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+            show_main_message("已存檔CSV", S_OK, 20);
+        }
+
+        void playSound(int number)
+        {
+            //播放系統預設的音效
+            switch (number)
+            {
+                case S_OK:
+                    System.Media.SystemSounds.Hand.Play();
+                    break;
+                case S_FALSE:
+                    System.Media.SystemSounds.Beep.Play();
+                    break;
+                case 2:
+                    System.Media.SystemSounds.Asterisk.Play();
+                    break;
+                case 3:
+                    System.Media.SystemSounds.Exclamation.Play();
+                    break;
+                case 4:
+                    System.Media.SystemSounds.Question.Play();
+                    break;
+                default:
+                    System.Media.SystemSounds.Beep.Play();
+                    break;
+            }
+        }
+
+        void connect_IMS_comport()
+        {
+            int ret;
+            ret = try_connect_comport();
+            if (ret == S_OK)
+            {
+                richTextBox1.Text += "已連上IMS EGD System\n";
+                show_main_message("COM已連線", S_OK, 100);
+            }
+            else
+            {
+                richTextBox1.Text += "未連線\n";
+                this.BackColor = Color.Pink;
+                show_main_message("COM未連線", S_FALSE, 100);
+                
+                serialPort1.Close();
+                this.BackColor = Color.Yellow;
+                button1.Enabled = true;
+                button2.Enabled = false;
+                flag_comport_ok = false;
+            }
+        }
+
+        void show_main_message(string mesg, int number, int timeout)
+        {
+            lb_main_mesg.Text = mesg;
+            playSound(number);
+
+            timer_display_show_main_mesg_count = 0;
+            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
         }
     }
 }
