@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = true;
+        bool flag_release_mode = false;
 
         bool flag_enaglb_awb_function = true;
 
@@ -1776,6 +1776,7 @@ namespace imsLink
             tb_4a.Visible = en;
             bt_read2.Visible = en;
             bt_write2.Visible = en;
+            bt_script.Visible = en;
 
             bt_awb.Visible = en;
             bt_awb_test.Visible = en;
@@ -1984,7 +1985,7 @@ namespace imsLink
             //button
             x_st = 140;
             y_st = 415;
-            dx = 70;
+            dx = 65;
             dy = 40;
 
             //第零排button
@@ -2021,9 +2022,11 @@ namespace imsLink
             tb_4a.Location = new Point(100 + dx, y_st + 30);
 
             x_st = 140;
-            dx = 70;
+            dx = 65;
             bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
             bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
+            bt_script.Location = new Point(x_st + dx * 5, y_st + 30);
+            bt_cancel.Location = new Point(x_st + dx * 6, y_st + 30);
 
             //EXPO GAIN R G B
             x_st = 140;
@@ -2520,6 +2523,9 @@ namespace imsLink
                 lb_note3.Location = new Point(11 + 180, 489 + 98 + 50);
                 */
             }
+
+            richTextBox2.Visible = false;
+            bt_cancel.Visible = false;
             return;
         }
 
@@ -10001,6 +10007,97 @@ namespace imsLink
             timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
             timer_display.Enabled = true;
         }
+
+        bool flag_script_data_on = false;
+        private void bt_script_Click(object sender, EventArgs e)
+        {
+            if (flag_script_data_on == false)
+            {
+                flag_script_data_on = true;
+                richTextBox2.Visible = true;
+                bt_cancel.Visible = true;
+                bt_script.Text = "OK\n";
+
+                int x_st;
+                int y_st;
+                if (flag_display_mode == DISPLAY_SD)
+                {
+                    x_st = 550 + 50;
+                    y_st = 540;
+                    richTextBox2.Location = new Point(x_st, y_st);
+                    richTextBox2.Size = new System.Drawing.Size(340, 120);
+                }
+                else
+                {
+                    x_st = 191;
+                    y_st = 489 + 98;
+                    richTextBox2.Location = new Point(x_st, y_st);
+                    richTextBox2.Size = new System.Drawing.Size(400, 300);
+                }
+
+            }
+            else
+            {
+                flag_script_data_on = false;
+                richTextBox2.Visible = false;
+                bt_cancel.Visible = false;
+                bt_script.Text = "Script\n";
+
+                if (flag_comport_ok == false)
+                {
+                    MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                parse_script_command_and_send();
+            }
+
+
+        }
+
+        private void bt_cancel_Click(object sender, EventArgs e)
+        {
+            flag_script_data_on = false;
+            richTextBox2.Visible = false;
+            bt_cancel.Visible = false;
+            bt_script.Text = "Script\n";
+        }
+
+        void parse_script_command_and_send()
+        {
+            richTextBox1.Text += "parse_script_command_and_send\nrtb lines = " + richTextBox2.Lines.Length.ToString();
+            richTextBox1.Text += "rtb content : \n";// +richTextBox2.Lines.Length.ToString();
+            int i;
+            for (i = 0; i < richTextBox2.Lines.Length; i++)
+            {
+                if (richTextBox2.Lines[i].Trim().Length == 7)
+                {
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + richTextBox2.Lines[i].Trim() + "\tlen = \t" + richTextBox2.Lines[i].Trim().Length.ToString() + "\n";
+
+                    //richTextBox1.Text += "str2 = " + filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0,6) + "\n";
+
+                    int addr_h = Convert.ToInt32(richTextBox2.Lines[i].Trim().Substring(0, 2), 16);
+                    int addr_l = Convert.ToInt32(richTextBox2.Lines[i].Trim().Substring(2, 2), 16);
+                    int data = Convert.ToInt32(richTextBox2.Lines[i].Trim().Substring(5, 2), 16);
+
+                    richTextBox1.Text += " addr = " + addr_h.ToString("X2") + addr_l.ToString("X2") + " data = " + data.ToString("X2") + "\n";
+
+                    DongleAddr_h = (byte)addr_h;
+                    DongleAddr_l = (byte)addr_l;
+                    DongleData = (byte)data;
+
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+                    delay(100);
+
+                }
+
+
+            }
+
+
+        }
+
+
     }
 }
 

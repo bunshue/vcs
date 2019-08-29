@@ -1063,7 +1063,7 @@ namespace vcs_DrAP
 
             fileinfos.Clear();
 
-            string path = @"D:\___source_code\_git\part3\vcs\_2.vcs";
+            string path = @"D:\___source_code\_git\part1\vcs\_2.vcs";
 
             if (path == String.Empty)
                 path = search_path;

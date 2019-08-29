@@ -387,6 +387,9 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.bt_script = new System.Windows.Forms.Button();
+            this.bt_cancel = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1933,6 +1936,9 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_cancel);
+            this.tp_USB.Controls.Add(this.bt_script);
+            this.tp_USB.Controls.Add(this.richTextBox2);
             this.tp_USB.Controls.Add(this.tb_awb_mesg);
             this.tp_USB.Controls.Add(this.lb_awb_time);
             this.tp_USB.Controls.Add(this.lb_note3);
@@ -4529,6 +4535,41 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.Location = new System.Drawing.Point(218, 165);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox2.TabIndex = 149;
+            this.richTextBox2.Text = "5600 88\n5601 8a\n5602 03\n5603 1a\n\n5604 6e\n5605 89\n5612 1a\n5615 06\n";
+            // 
+            // bt_script
+            // 
+            this.bt_script.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_script.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_script.ForeColor = System.Drawing.Color.Black;
+            this.bt_script.Location = new System.Drawing.Point(826, 331);
+            this.bt_script.Name = "bt_script";
+            this.bt_script.Size = new System.Drawing.Size(64, 32);
+            this.bt_script.TabIndex = 150;
+            this.bt_script.Text = "Script";
+            this.bt_script.UseVisualStyleBackColor = false;
+            this.bt_script.Click += new System.EventHandler(this.bt_script_Click);
+            // 
+            // bt_cancel
+            // 
+            this.bt_cancel.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_cancel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_cancel.ForeColor = System.Drawing.Color.Black;
+            this.bt_cancel.Location = new System.Drawing.Point(826, 292);
+            this.bt_cancel.Name = "bt_cancel";
+            this.bt_cancel.Size = new System.Drawing.Size(64, 32);
+            this.bt_cancel.TabIndex = 151;
+            this.bt_cancel.Text = "Cancel";
+            this.bt_cancel.UseVisualStyleBackColor = false;
+            this.bt_cancel.Click += new System.EventHandler(this.bt_cancel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4987,6 +5028,9 @@
         private System.Windows.Forms.TextBox tb_info_g4;
         private System.Windows.Forms.Button button46;
         private System.Windows.Forms.TextBox tb_awb_mesg;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button bt_script;
+        private System.Windows.Forms.Button bt_cancel;
     }
 }
 
