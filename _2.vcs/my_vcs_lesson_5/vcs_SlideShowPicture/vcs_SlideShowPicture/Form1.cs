@@ -94,11 +94,11 @@ namespace vcs_SlideShowPicture
         }
 
         //***********************
-        private Point mouseOffset;//记录鼠标坐标
-        private bool isMouseDown = false;//是否按下鼠标
+        private Point mouseOffset;//記錄滑鼠座標
+        private bool isMouseDown = false;//是否按下滑鼠
         //***********************
 
-        #region 移动无边框窗体
+        #region 移動無邊框Form
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             int xOffset;
