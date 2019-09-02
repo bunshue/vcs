@@ -47,6 +47,7 @@
 //#define USE_DEBUG_VIDEO_OUTPUT
 //#define FREEZE_WHEN_STOP
 //#define USE_PREVENT_REUSE
+#define USE_COLOR_DEBUG
 #define USE_CORRECT_TIME
 #define USE_IMS_LINK
 
@@ -1027,7 +1028,9 @@ int main()
 	xil_printf("\n\r\n\r");
 #endif
 
-	//draw_color();
+#ifdef USE_COLOR_DEBUG
+	draw_color();
+#endif
 
 	xil_printf("tick(%d) = %d;\t%%%s:%s(%d) main_loop ST\r\n", tick_cnt++, g_ms_tick, __FILE__, __func__, __LINE__);
 	main_loop();
@@ -4221,7 +4224,9 @@ void parse_uart_command(void)
 		}
 		else if((buffer[0] == 'c')&&(buffer[1] == 'o')&&(buffer[2] == 'l')&&(buffer[3] == 'o')&&(buffer[4] == 'r'))
 		{
+#ifdef USE_COLOR_DEBUG
 			draw_color();
+#endif
 		}
 		else if((buffer[0] == 'w')&&(buffer[1] == 'h')&&(buffer[2] == 'i')&&(buffer[3] == 't')&&(buffer[4] == 'e'))
 		{
@@ -8792,6 +8797,9 @@ void print_surface_1c_data()
 
 void layer1_blit_corners(int frame)
 {
+#ifdef USE_COLOR_DEBUG
+	return;
+#else
 	int i;
 	coord_t W = LAYER1_WIDTH;
 	coord_t H = LAYER1_HEIGHT;
@@ -8837,6 +8845,7 @@ void layer1_blit_corners(int frame)
 		dma_copy((u32) addr0, addr2, length);
 	}
 	return;
+#endif
 }
 
 void draw_layer_boundary(void)
@@ -12321,9 +12330,7 @@ void apply_camera_ufm_data(void)
 	xil_printf("tick(%d) = %d;\t%%%s:%s(%d) UFM SP\r\n", tick_cnt++, g_ms_tick, __FILE__, __func__, __LINE__);
 }
 
-
-//-------------------- to remove
-
+#ifdef USE_COLOR_DEBUG
 void clear_layer1_allt(int frame)
 {
 	uint32_t i;
@@ -12371,39 +12378,8 @@ void clear_layer1_allt(int frame)
 
 
 
-	for(i = 0; i< length; i++)
+	for(i = 0; i < length; i++)
 	{
-		//f_ptr[i] = 0x00000000;	//100% transparent
-		//f_ptr[i] = 0xFFFF0000;	//100% blue
-		//			   A B G R
-		//f_ptr[i] = 0xFFFF0000;	//100% blue
-		//f_ptr[i] = 0xFFFF008B;	//100% bluexxxx
-		//f_ptr[i] = 0xFF84195E;	//100% purple
-		//f_ptr[i] = 0x00000000;	//100% transparent
-		//f_ptr[i] = 0xFFFF0000;	//100% blue
-
-		/*
-		f_ptr1[i] = 0xFF000000 + 0x00000001 * (int)(i / 2);	//Red
-		f_ptr2[i] = 0xFF000000 + 0x00000100 * (int)(i / 2);	//Green
-		f_ptr3[i] = 0xFF000000 + 0x00010000 * (int)(i / 2);	//Blue
-		f_ptr4[i] = 0xFF000000 + 0x00010101 * (int)(i / 2);	//Gray
-		if(i <= 255)
-		{
-			f_ptr1[i] = 0xFF000000 + 0x00000001 * (int)(255 - i);	//Red
-			f_ptr2[i] = 0xFF000000 + 0x00000100 * (int)(255 - i);	//Green
-			f_ptr3[i] = 0xFF000000 + 0x00010000 * (int)(255 - i);	//Blue
-			f_ptr4[i] = 0xFF000000 + 0x00010101 * (int)(255 - i);	//Gray
-
-		}
-		else
-		{
-			f_ptr1[i] = 0xFF000000 + 0x00000001 * (int)(i - 256);	//Red
-			f_ptr2[i] = 0xFF000000 + 0x00000100 * (int)(i - 256);	//Green
-			f_ptr3[i] = 0xFF000000 + 0x00010000 * (int)(i - 256);	//Blue
-			f_ptr4[i] = 0xFF000000 + 0x00010101 * (int)(i - 256);	//Gray
-
-		}
-		*/
 		f_ptr1[i] = 0xFF000000 + 0x00000001 * (int)(i % 256);	//Red
 		f_ptr2[i] = 0xFF000000 + 0x00000100 * (int)(i % 256);	//Green
 		f_ptr3[i] = 0xFF000000 + 0x00010000 * (int)(i % 256);	//Blue
@@ -12447,19 +12423,230 @@ void clear_layer1_allt(int frame)
 
 }
 
+void clear_layer1_allt2(int frame)
+{
+	uint32_t i;
+	uint32_t x_st;
+	uint32_t y_st;
+
+	//destination canvas
+	coord_t width = 512;
+	coord_t height = 100;
+
+	if((frame != FRAMEBUFFER0) && (frame != FRAMEBUFFER1))
+	{
+		xil_printf("clear_layer1_all fail, illegal frame = %d\n\r", frame);
+		return;
+	}
+
+	void* addr_r;
+	void* addr_g;
+	void* addr_b;
+	void* addr_gray;
+
+	uint32_t *f_ptr1;
+	uint32_t *f_ptr2;
+	uint32_t *f_ptr3;
+	uint32_t *f_ptr4;
+
+	uint32_t addr0;
+	uint32_t addr1;
+	uint32_t addr2;
+
+	addr1 = (uint32_t)gdispGetFrameBufferAddr(frame);
+
+	int length;
+	length = width;
+
+	addr_r = gfxAlloc(length * 4);
+	addr_g = gfxAlloc(length * 4);
+	addr_b = gfxAlloc(length * 4);
+	addr_gray = gfxAlloc(length * 4);
+
+	f_ptr1 = addr_r;
+	f_ptr2 = addr_g;
+	f_ptr3 = addr_b;
+	f_ptr4 = addr_gray;
+
+	for(i = 0; i < length; i++)
+	{
+		f_ptr1[i] = 0xFF000000 + 0x00000001 * (int)((i/16)*16 % 256);	//Red
+		f_ptr2[i] = 0xFF000000 + 0x00000100 * (int)((i/16)*16 % 256);	//Green
+		f_ptr3[i] = 0xFF000000 + 0x00010000 * (int)((i/16)*16 % 256);	//Blue
+		f_ptr4[i] = 0xFF000000 + 0x00010101 * (int)((i/16)*16 % 256);	//Gray
+	}
+
+	x_st = 50;
+	y_st = 120 + 110 * 0;
+	y_st += 500;
+	addr0 = (uint32_t)addr_r;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+	y_st = 120 + 110 * 1;
+	y_st += 500;
+	addr0 = (uint32_t)addr_g;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+
+	y_st = 120 + 110 * 2;
+	y_st += 500;
+
+	addr0 = (uint32_t)addr_b;
+
+
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+	y_st = 120 + 110 * 3;
+	y_st += 500;
+
+	addr0 = (uint32_t)addr_gray;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+
+	length = LAYER1_WIDTH;
+	int ww = length / 8;
+
+	void* addr_color;
+	uint32_t *f_ptr_color;
+	addr_color = gfxAlloc(length * 4);
+	f_ptr_color = addr_color;
+
+	for(i = 0; i < length; i++)
+	{
+		if((i/ww) == 0)
+			f_ptr_color[i] = 0xFFFFFFFF;	//ABGR
+		else if((i/ww) == 1)
+			f_ptr_color[i] = 0xFF00FFFF;
+		else if((i/ww) == 2)
+			f_ptr_color[i] = 0xFFFFFF00;
+		else if((i/ww) == 3)
+			f_ptr_color[i] = 0xFF00FF00;
+		else if((i/ww) == 4)
+			f_ptr_color[i] = 0xFFFF00FF;
+		else if((i/ww) == 5)
+			f_ptr_color[i] = 0xFF0000FF;
+		else if((i/ww) == 6)
+			f_ptr_color[i] = 0xFFFF0000;
+		else if((i/ww) == 7)
+			f_ptr_color[i] = 0xFF000000;
+		else
+			f_ptr_color[i] = 0xFF00FF00;
+	}
+
+	x_st = LAYER1_START_X;
+	y_st = 120 + 110 * 1;
+	y_st += 500;
+
+	addr0 = (uint32_t)addr_color;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+
+
+	length = 16 * 17 * 4;
+
+	void* addr_color2;
+	uint32_t *f_ptr_color2;
+	addr_color2 = gfxAlloc(length * 4);
+	f_ptr_color2 = addr_color2;
+	int hh = 50;
+
+	x_st = LAYER1_START_X;
+	height = hh - 2;
+
+	y_st = 120 + 110 * 2 + hh * 0;
+	y_st += 500;
+	for(i = 0; i < length; i++)
+	{
+		if(i >= (16*16*4))
+			f_ptr_color2[i] = 0xFF000000 + 0x000000FF;	//Red
+		else
+			f_ptr_color2[i] = 0xFF000000 + 0x00000001 * (int)(((i/4)/16)*16 % 256);	//Red
+	}
+	addr0 = (uint32_t)addr_color2;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+
+	y_st = 120 + 110 * 2 + hh * 1;
+	y_st += 500;
+	for(i = 0; i < length; i++)
+	{
+		if(i >= (16*16*4))
+			f_ptr_color2[i] = 0xFF000000 + 0x0000FF00;	//Green
+		else
+			f_ptr_color2[i] = 0xFF000000 + 0x00000100 * (int)(((i/4)/16)*16 % 256);	//Green
+	}
+	addr0 = (uint32_t)addr_color2;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+	y_st = 120 + 110 * 2 + hh * 2;
+	y_st += 500;
+	for(i = 0; i < length; i++)
+	{
+		if(i >= (16*16*4))
+			f_ptr_color2[i] = 0xFF000000 + 0x00FF0000;	//Blue
+		else
+			f_ptr_color2[i] = 0xFF000000 + 0x00010000 * (int)(((i/4)/16)*16 % 256);	//Blue
+	}
+	addr0 = (uint32_t)addr_color2;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+	y_st = 120 + 110 * 2 + hh * 3;
+	y_st += 500;
+	for(i = 0; i < length; i++)
+	{
+		if(i >= (16*16*4))
+			f_ptr_color2[i] = 0xFF000000 + 0x00FFFFFF;	//White
+		else
+			f_ptr_color2[i] = 0xFF000000 + 0x00010101 * (int)(((i/4)/16)*16 % 256);	//Gray
+	}
+	addr0 = (uint32_t)addr_color2;
+	for(i = 0; i < height; i++)
+	{
+		addr2 = (u32)(LAYER0_WIDTH * 4 * (y_st + i) + addr1 + 4 * x_st);
+		dma_copy((u32) addr0, addr2, length);
+	}
+
+}
+
 void draw_color0(void)
 {
 	coord_t width = 512;
 	coord_t height = 100;
 
-	int x_st = 50;
-	int y_st = 120;
+	int i;
+	int x_st;
+	int y_st;
+
+	x_st = 50;
+	y_st = 120;
 	gdispFillArea(x_st + width + 20, y_st + 110 * 0, 50, 100, Red);
 	gdispFillArea(x_st + width + 20, y_st + 110 * 1, 50, 100, Lime);
 	gdispFillArea(x_st + width + 20, y_st + 110 * 2, 50, 100, Blue);
 	gdispFillArea(x_st + width + 20, y_st + 110 * 3, 50, 100, White);
-
-	int i;
 
 	for(i = 0; i < 5; i++)
 	{
@@ -12467,7 +12654,32 @@ void draw_color0(void)
 	}
 
 
+	x_st = 50;
+	y_st = 620;
+	gdispFillArea(x_st + width + 20, y_st + 110 * 0, 50, 100, Red);
+	gdispFillArea(x_st + width + 20, y_st + 110 * 1, 50, 100, Lime);
+	gdispFillArea(x_st + width + 20, y_st + 110 * 2, 50, 100, Blue);
+	gdispFillArea(x_st + width + 20, y_st + 110 * 3, 50, 100, White);
 
+	for(i = 0; i < 5; i++)
+	{
+		gdispDrawBox(x_st - 10 + i, y_st - 10 + i, width + 20 - i * 2, height * 4 + 50 - i * 2, White);
+	}
+
+	x_st = 0;
+	y_st = 0;
+	for(i = 0; i < 10; i += 2)
+	{
+		y_st = 0;
+		gdispDrawLine(x_st + i, y_st, x_st + i, y_st + 1000, Red);
+
+		y_st = 1001;
+		gdispDrawLine(x_st + i, y_st, x_st + i, y_st + 78, Green);
+
+
+		y_st = 1079;
+		gdispDrawLine(x_st + i, y_st, x_st + i, y_st + 0, Blue);
+	}
 }
 
 void draw_color()
@@ -12476,11 +12688,16 @@ void draw_color()
 	if(flag_use_2_framebuffers == TRUE)
 		clear_layer1_allt(next_framebuffer);
 
+	clear_layer1_allt2(current_framebuffer);
+	if(flag_use_2_framebuffers == TRUE)
+		clear_layer1_allt2(next_framebuffer);
+
 	gdispSetuGFXFrameBufferAddr(gdispGetFrameBufferAddr(next_framebuffer));
 	draw_color0();
 	gdispSetuGFXFrameBufferAddr(gdispGetFrameBufferAddr(1 - next_framebuffer));
 	draw_color0();
+	return;
 }
-
+#endif
 
 

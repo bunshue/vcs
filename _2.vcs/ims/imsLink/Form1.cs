@@ -1777,6 +1777,7 @@ namespace imsLink
             bt_read2.Visible = en;
             bt_write2.Visible = en;
             bt_script.Visible = en;
+            bt_script_load.Visible = en;
 
             bt_awb.Visible = en;
             bt_awb_test.Visible = en;
@@ -1992,7 +1993,7 @@ namespace imsLink
             bt_read_awb.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_erase.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             lb_awb_data.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 4);
-            bt_get_setup.Location = new Point(x_st + dx * 6 - 5, y_st + dy * 0);
+            bt_get_setup.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
             //第一排button
             bt_awb_test_init.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -2026,7 +2027,8 @@ namespace imsLink
             bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
             bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
             bt_script.Location = new Point(x_st + dx * 5, y_st + 30);
-            bt_cancel.Location = new Point(x_st + dx * 6, y_st + 30);
+            bt_cancel.Location = new Point(x_st + dx * 6, y_st + 30);       //at the same place
+            bt_script_load.Location = new Point(x_st + dx * 6, y_st + 30);  //at the same place
 
             //EXPO GAIN R G B
             x_st = 140;
@@ -2525,6 +2527,7 @@ namespace imsLink
             }
 
             richTextBox2.Visible = false;
+            bt_script_save.Visible = false;
             bt_cancel.Visible = false;
             return;
         }
@@ -10015,6 +10018,7 @@ namespace imsLink
             {
                 flag_script_data_on = true;
                 richTextBox2.Visible = true;
+                bt_script_save.Visible = true;
                 bt_cancel.Visible = true;
                 bt_script.Text = "OK\n";
 
@@ -10033,6 +10037,7 @@ namespace imsLink
                     y_st = 489 + 98;
                     richTextBox2.Location = new Point(x_st, y_st);
                     richTextBox2.Size = new System.Drawing.Size(400, 300);
+                    bt_script_save.Location = new Point(x_st + 318, y_st + 2);
                 }
 
             }
@@ -10040,41 +10045,40 @@ namespace imsLink
             {
                 flag_script_data_on = false;
                 richTextBox2.Visible = false;
+                bt_script_save.Visible = false;
                 bt_cancel.Visible = false;
                 bt_script.Text = "Script\n";
+                bt_script_load.Visible = true;
 
                 if (flag_comport_ok == false)
                 {
                     MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
                 parse_script_command_and_send();
             }
-
-
         }
 
         private void bt_cancel_Click(object sender, EventArgs e)
         {
             flag_script_data_on = false;
             richTextBox2.Visible = false;
+            bt_script_save.Visible = false;
             bt_cancel.Visible = false;
+            bt_script_load.Visible = true;
             bt_script.Text = "Script\n";
         }
 
         void parse_script_command_and_send()
         {
-            richTextBox1.Text += "parse_script_command_and_send\nrtb lines = " + richTextBox2.Lines.Length.ToString();
-            richTextBox1.Text += "rtb content : \n";// +richTextBox2.Lines.Length.ToString();
+            richTextBox1.Text += "parse_script_command_and_send\trtb lines = " + richTextBox2.Lines.Length.ToString() + "\t";
+            richTextBox1.Text += "content : \n";// +richTextBox2.Lines.Length.ToString();
             int i;
             for (i = 0; i < richTextBox2.Lines.Length; i++)
             {
                 if (richTextBox2.Lines[i].Trim().Length == 7)
                 {
                     richTextBox1.Text += "i = " + i.ToString() + "\t" + richTextBox2.Lines[i].Trim() + "\tlen = \t" + richTextBox2.Lines[i].Trim().Length.ToString() + "\n";
-
-                    //richTextBox1.Text += "str2 = " + filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0,6) + "\n";
 
                     int addr_h = Convert.ToInt32(richTextBox2.Lines[i].Trim().Substring(0, 2), 16);
                     int addr_l = Convert.ToInt32(richTextBox2.Lines[i].Trim().Substring(2, 2), 16);
@@ -10088,13 +10092,104 @@ namespace imsLink
 
                     Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
                     delay(100);
-
                 }
+            }
+        }
+
+        private void bt_script_file_Click(object sender, EventArgs e)
+        {
+            bt_script_load.Text = "Open";
+            bt_cancel_Click(sender, e);
+
+            openFileDialog1.Title = "把Script寫進檔案";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+                flag_script_data_on = true;
+                richTextBox2.Visible = true;
+                bt_script_save.Visible = true;
+                bt_cancel.Visible = true;
+                bt_script.Text = "OK\n";
+
+                int x_st;
+                int y_st;
+                if (flag_display_mode == DISPLAY_SD)
+                {
+                    x_st = 550 + 50;
+                    y_st = 540;
+                    richTextBox2.Location = new Point(x_st, y_st);
+                    richTextBox2.Size = new System.Drawing.Size(340, 120);
+                }
+                else
+                {
+                    x_st = 191;
+                    y_st = 489 + 98;
+                    richTextBox2.Location = new Point(x_st, y_st);
+                    richTextBox2.Size = new System.Drawing.Size(400, 300);
+                    bt_script_save.Location = new Point(x_st + 318, y_st + 2);
+                }
+                richTextBox2.Clear();
+
+                //StreamReader sr = new StreamReader(openFileDialog1.FileName);
+                //StreamReader sr = new StreamReader(fileName, Encoding.Default);
+                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+                richTextBox2.Text += sr.ReadToEnd();
+                sr.Close();
+
+                bt_script_load.Visible = false;
+
 
 
             }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+            bt_script_load.Text = "File";
 
+            
 
+        }
+
+        private void bt_script_save_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Title = "把Script寫進檔案";
+            saveFileDialog1.FileName = "";
+            saveFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "get filename : " + saveFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "length : " + saveFileDialog1.FileName.Length.ToString() + "\n";
+
+                //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
+                //StreamReader sr = new StreamReader(fileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+                FileStream filestream = File.Open(saveFileDialog1.FileName, FileMode.Create);
+                StreamWriter str_writer = new StreamWriter(filestream);
+
+                str_writer.WriteLine(richTextBox2.Text);
+                // Dispose StreamWriter
+                str_writer.Dispose();
+                // Close FileStream
+                filestream.Close();
+
+                richTextBox1.Text += "儲存資料完畢111，檔案：" + saveFileDialog1.FileName + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+
+            }
         }
 
 

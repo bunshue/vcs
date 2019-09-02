@@ -1648,5 +1648,47 @@ namespace vcs_MyIcon
             pictureBox1.Image = bitmap1;
 
         }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            Font f;
+
+            int hh = 35;
+            f = new Font("Arial", 35);
+            sb = new SolidBrush(Color.Red);
+            g.DrawString("R", f, sb, new PointF(5, hh));
+            sb = new SolidBrush(Color.Green);
+            g.DrawString("G", f, sb, new PointF(38, hh));
+            sb = new SolidBrush(Color.Blue);
+            g.DrawString("B", f, sb, new PointF(76, hh));
+
+            g.DrawRectangle(p, new Rectangle(width / 16, height / 16, width * 14 / 16, height * 14 / 16));
+
+
+            pictureBox1.Image = bitmap1;
+
+        }
     }
 }

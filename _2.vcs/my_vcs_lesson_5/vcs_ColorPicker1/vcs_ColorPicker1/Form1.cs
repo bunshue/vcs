@@ -40,8 +40,10 @@ namespace vcs_ColorPicker1
 
                 //設定執行後的表單起始位置
                 this.StartPosition = FormStartPosition.Manual;
-                //this.Location = new System.Drawing.Point(x_st, y_st);
-                this.Location = new System.Drawing.Point(1200, 0);
+                if (Screen.PrimaryScreen.Bounds.Width < 1920)
+                    this.Location = new System.Drawing.Point(850, 0);  //SD
+                else
+                    this.Location = new System.Drawing.Point(1200, 0);  //FHD
 
                 this.FormBorderStyle = FormBorderStyle.None;
                 

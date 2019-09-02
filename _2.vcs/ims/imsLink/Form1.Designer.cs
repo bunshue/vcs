@@ -169,6 +169,10 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_script_load = new System.Windows.Forms.Button();
+            this.bt_cancel = new System.Windows.Forms.Button();
+            this.bt_script = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tb_awb_mesg = new System.Windows.Forms.TextBox();
             this.lb_awb_time = new System.Windows.Forms.Label();
             this.lb_note3 = new System.Windows.Forms.Label();
@@ -387,9 +391,9 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.bt_script = new System.Windows.Forms.Button();
-            this.bt_cancel = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.bt_script_save = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1936,6 +1940,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_script_save);
+            this.tp_USB.Controls.Add(this.bt_script_load);
             this.tp_USB.Controls.Add(this.bt_cancel);
             this.tp_USB.Controls.Add(this.bt_script);
             this.tp_USB.Controls.Add(this.richTextBox2);
@@ -2050,6 +2056,54 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "USB";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_script_load
+            // 
+            this.bt_script_load.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_script_load.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_script_load.ForeColor = System.Drawing.Color.Black;
+            this.bt_script_load.Location = new System.Drawing.Point(869, 490);
+            this.bt_script_load.Name = "bt_script_load";
+            this.bt_script_load.Size = new System.Drawing.Size(64, 32);
+            this.bt_script_load.TabIndex = 152;
+            this.bt_script_load.Text = "Load";
+            this.bt_script_load.UseVisualStyleBackColor = false;
+            this.bt_script_load.Click += new System.EventHandler(this.bt_script_file_Click);
+            // 
+            // bt_cancel
+            // 
+            this.bt_cancel.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_cancel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_cancel.ForeColor = System.Drawing.Color.Black;
+            this.bt_cancel.Location = new System.Drawing.Point(826, 292);
+            this.bt_cancel.Name = "bt_cancel";
+            this.bt_cancel.Size = new System.Drawing.Size(64, 32);
+            this.bt_cancel.TabIndex = 151;
+            this.bt_cancel.Text = "Cancel";
+            this.bt_cancel.UseVisualStyleBackColor = false;
+            this.bt_cancel.Click += new System.EventHandler(this.bt_cancel_Click);
+            // 
+            // bt_script
+            // 
+            this.bt_script.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_script.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_script.ForeColor = System.Drawing.Color.Black;
+            this.bt_script.Location = new System.Drawing.Point(826, 331);
+            this.bt_script.Name = "bt_script";
+            this.bt_script.Size = new System.Drawing.Size(64, 32);
+            this.bt_script.TabIndex = 150;
+            this.bt_script.Text = "Script";
+            this.bt_script.UseVisualStyleBackColor = false;
+            this.bt_script.Click += new System.EventHandler(this.bt_script_Click);
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.Location = new System.Drawing.Point(218, 165);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox2.TabIndex = 149;
+            this.richTextBox2.Text = "5600 88\n5601 8a\n5602 03\n5603 1a\n\n5604 6e\n5605 89\n5612 1a\n5615 06\n";
             // 
             // tb_awb_mesg
             // 
@@ -2663,7 +2717,7 @@
             this.bt_get_setup.ForeColor = System.Drawing.Color.Blue;
             this.bt_get_setup.Location = new System.Drawing.Point(799, 490);
             this.bt_get_setup.Name = "bt_get_setup";
-            this.bt_get_setup.Size = new System.Drawing.Size(40, 32);
+            this.bt_get_setup.Size = new System.Drawing.Size(64, 32);
             this.bt_get_setup.TabIndex = 97;
             this.bt_get_setup.Text = "Get";
             this.bt_get_setup.UseVisualStyleBackColor = false;
@@ -4535,40 +4589,22 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // richTextBox2
+            // openFileDialog1
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(218, 165);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox2.TabIndex = 149;
-            this.richTextBox2.Text = "5600 88\n5601 8a\n5602 03\n5603 1a\n\n5604 6e\n5605 89\n5612 1a\n5615 06\n";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // bt_script
+            // bt_script_save
             // 
-            this.bt_script.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_script.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_script.ForeColor = System.Drawing.Color.Black;
-            this.bt_script.Location = new System.Drawing.Point(826, 331);
-            this.bt_script.Name = "bt_script";
-            this.bt_script.Size = new System.Drawing.Size(64, 32);
-            this.bt_script.TabIndex = 150;
-            this.bt_script.Text = "Script";
-            this.bt_script.UseVisualStyleBackColor = false;
-            this.bt_script.Click += new System.EventHandler(this.bt_script_Click);
-            // 
-            // bt_cancel
-            // 
-            this.bt_cancel.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_cancel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_cancel.ForeColor = System.Drawing.Color.Black;
-            this.bt_cancel.Location = new System.Drawing.Point(826, 292);
-            this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.Size = new System.Drawing.Size(64, 32);
-            this.bt_cancel.TabIndex = 151;
-            this.bt_cancel.Text = "Cancel";
-            this.bt_cancel.UseVisualStyleBackColor = false;
-            this.bt_cancel.Click += new System.EventHandler(this.bt_cancel_Click);
+            this.bt_script_save.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_script_save.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_script_save.ForeColor = System.Drawing.Color.Black;
+            this.bt_script_save.Location = new System.Drawing.Point(869, 534);
+            this.bt_script_save.Name = "bt_script_save";
+            this.bt_script_save.Size = new System.Drawing.Size(64, 32);
+            this.bt_script_save.TabIndex = 153;
+            this.bt_script_save.Text = "Save";
+            this.bt_script_save.UseVisualStyleBackColor = false;
+            this.bt_script_save.Click += new System.EventHandler(this.bt_script_save_Click);
             // 
             // Form1
             // 
@@ -5031,6 +5067,10 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button bt_script;
         private System.Windows.Forms.Button bt_cancel;
+        private System.Windows.Forms.Button bt_script_load;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button bt_script_save;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
