@@ -152,20 +152,24 @@ namespace vcs_test_all_04_Font
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //字體變小
-            label1.Font = new Font("新細明體", 12);
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //字體變中
-            label1.Font = new Font("新細明體", 16);
+            float font_size = label1.Font.Size;
+            if (font_size > 5)
+            {
+                font_size--;
+                //字體變小
+                label1.Font = new Font("新細明體", font_size);
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //字體變大
-            label1.Font = new Font("新細明體", 18);
+            float font_size = label1.Font.Size;
+            if (font_size < 100)
+            {
+                font_size++;
+                //字體變大
+                label1.Font = new Font("新細明體", font_size);
+            }
         }
     }
 }

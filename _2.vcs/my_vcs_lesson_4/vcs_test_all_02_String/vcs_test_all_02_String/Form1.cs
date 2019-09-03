@@ -100,6 +100,11 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "新字串：" + new_string + " 長度：" + new_string.Length.ToString() + "\n";
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
 
     }
 }

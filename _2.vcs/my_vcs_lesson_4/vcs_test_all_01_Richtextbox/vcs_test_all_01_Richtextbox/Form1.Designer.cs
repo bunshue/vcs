@@ -150,13 +150,14 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button7.Location = new System.Drawing.Point(12, 252);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(217, 42);
             this.button7.TabIndex = 7;
-            this.button7.Text = "xxx";
+            this.button7.Text = "分析RichTextBox1的內容";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 

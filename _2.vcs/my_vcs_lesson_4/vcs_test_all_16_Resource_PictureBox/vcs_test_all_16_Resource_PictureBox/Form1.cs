@@ -14,13 +14,48 @@ namespace vcs_test_all_16_Resource_PictureBox
         public Form1()
         {
             InitializeComponent();
+            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+        }
+
+        /*
+         * [C#]pictureBox隨滑鼠滾輪滾動改變大小
+         * pictureBox的Sizemode屬性設為Zoom
+         * 再添加事件
+         * this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+         */
+
+        void Form1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            var t = pictureBox1.Size;
+            //t.Width += e.Delta;
+            //t.Height += e.Delta;
+            if (e.Delta > 0)
+            {
+                t.Width++;
+                t.Height++;
+            }
+            else
+            {
+                t.Width--;
+                t.Height--;
+            }
+            pictureBox1.Size = t;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = Resource1.bear;           //載入圖檔，由資源檔
+
+
+            //1. 載入圖檔，由資源檔
+            pictureBox1.Image = Resource1.bear;
+            
+            //2. picturebox載入一圖
             //pictureBox1.Image = Image.FromFile("c:\\______test_vcs\\picture1.jpg"); //載入圖檔，由檔案
+
+            //3. picturebox顯示圖檔
+            //Image img = Image.FromFile("c:\\______test_vcs\\picture1.jpg");
+            //pictureBox1.Image = img;
 
             //pictureBox1.Height = 800; 設定圖片高度和寬度
             //pictureBox1.Width = 600;

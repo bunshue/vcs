@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -49,11 +50,21 @@
             this.label2.Size = new System.Drawing.Size(0, 12);
             this.label2.TabIndex = 1;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 36);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "按上下左右移動圖片";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 873);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
@@ -72,6 +83,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

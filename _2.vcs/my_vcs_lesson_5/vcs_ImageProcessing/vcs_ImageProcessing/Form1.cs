@@ -12,7 +12,7 @@ namespace vcs_ImageProcessing
     public partial class Form1 : Form
     {
         string filename = @"C:\______test_vcs\_case1\\pic1.jpg";
-        Graphics g;
+        //Graphics g;
         Pen p;
         Bitmap bitmap1;
 
@@ -115,7 +115,7 @@ namespace vcs_ImageProcessing
             richTextBox1.Text += "處理中~~~~~~\n";
 
             bitmap1 = new Bitmap(filename);
-            g = Graphics.FromImage(bitmap1);
+            //g = Graphics.FromImage(bitmap1);
 
             ww = bitmap1.Width / 2;
             hh = bitmap1.Height / 2;
@@ -163,6 +163,101 @@ namespace vcs_ImageProcessing
         private void button6_Click(object sender, EventArgs e)
         {
             draw_picture(0, 0, 100);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+
+            richTextBox1.Text += "水平Mirror處理中~~~~~~\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = bitmap1.Width / 2;
+            hh = bitmap1.Height / 1;
+
+            for (yy = 0; yy < hh; yy++)
+            {
+                for (xx = 0; xx < ww; xx++)
+                {
+                    Color pp = bitmap1.GetPixel(bitmap1.Width - xx - 1, yy);
+                    bitmap1.SetPixel(bitmap1.Width - xx - 1, yy, bitmap1.GetPixel(xx, yy));
+                    bitmap1.SetPixel(xx, yy, pp);
+                }
+            }
+            pictureBox2.Image = bitmap1;
+            richTextBox1.Text += "處理完成\n";
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+
+            richTextBox1.Text += "垂直Mirror處理中~~~~~~\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = bitmap1.Width / 1;
+            hh = bitmap1.Height / 2;
+
+            for (xx = 0; xx < ww; xx++)
+            {
+                for (yy = 0; yy < hh; yy++)
+                {
+                    Color pp = bitmap1.GetPixel(xx, bitmap1.Height - yy - 1);
+                    bitmap1.SetPixel(xx, bitmap1.Height - yy - 1, bitmap1.GetPixel(xx, yy));
+                    bitmap1.SetPixel(xx, yy, pp);
+                }
+            }
+            pictureBox2.Image = bitmap1;
+            richTextBox1.Text += "處理完成\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+
+            richTextBox1.Text += "擷取其中一塊處理中~~~~~~\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = 300;
+            hh = 300;
+
+            Bitmap bitmap2 = new Bitmap(ww, hh);
+
+            int x_st = 450;
+            int y_st = 450;
+
+            for (xx = 0; xx < ww; xx++)
+            {
+                for (yy = 0; yy < hh; yy++)
+                {
+                    bitmap2.SetPixel(xx, yy, bitmap1.GetPixel(x_st + xx, y_st + yy));
+                }
+            }
+            pictureBox2.Image = bitmap2;
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;     //圖片Zoom的方法
+            richTextBox1.Text += "處理完成\n";
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

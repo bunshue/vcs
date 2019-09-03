@@ -115,14 +115,6 @@ icon.ico要放在bin之下
 this.Cursor = new Cursor(new Bitmap(@"C:\______test_vcs\reuse.bmp").GetHicon());
 
 
-
-
-
-picturebox載入一圖
-
-            pictureBox1.Image = Image.FromFile("c:\\testImage.jpg");          
-            
-
 [C#] webBrowser如何判斷網頁是否讀取完成
 
 
@@ -331,12 +323,6 @@ string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.G
 
 
 
-
-picturebox顯示圖檔
-            Image img = Image.FromFile("1.png");
-            pictureBox1.Image = img;
-
-
 	//C# 取得資料夾下的所有檔案(包括子目錄)
 	//顯示每個檔案的資訊
         private void button1_Click(object sender, EventArgs e)
@@ -520,30 +506,6 @@ C# StreamReader 讀取時，中文字部分變成亂碼的解決方法
             }
         }
 
-
-
-
-
- [C#]pictureBox隨滑鼠滾輪滾動改變大小
-寫滑鼠事件
- void Form1_MouseWheel(object sender, MouseEventArgs e)
-        {
-            var t = pictureBox1.Size;
-            t.Width += e.Delta;
-            t.Height += e.Delta;
-            pictureBox1.Size = t;
-        }
-
-
-pictureBox的Sizemode屬性設為Zoom
-
-再添加事件
-   this.MouseWheel += new MouseEventHandler(Form1_MouseWheel); 
-   
-   
-   
-   
-   
 
 
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();

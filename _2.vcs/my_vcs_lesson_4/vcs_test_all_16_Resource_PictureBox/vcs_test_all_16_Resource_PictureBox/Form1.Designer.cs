@@ -59,7 +59,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(811, 221);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "將圖檔加入資源檔及使用：\n\n專案/加入/新增項目/資源檔\n\nResource1.resx/加入資源/加入現有檔案(F) 或者 新增影像(I)/選取檔案\n\t\n加一個" +
-                "pictureBox物件\n使用：\n\tthis.pictureBox1.Image = Resource1.檔名;";
+                "pictureBox物件\n使用：\n\tthis.pictureBox1.Image = Resource1.檔名;\n\npictureBox隨滑鼠滾輪滾動改變大小";
             // 
             // button1
             // 

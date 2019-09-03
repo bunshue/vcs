@@ -237,6 +237,18 @@ namespace vcs_test_all_01_Richtextbox
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
+            richTextBox2.Text += "content : \n";
+            int i;
+            for (i = 0; i < richTextBox1.Lines.Length; i++)
+            {
+                richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
+            }
+
+        }
+
 
     }
 }
