@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = false;
+        bool flag_release_mode = true;
 
         bool flag_enaglb_awb_function = true;
 
@@ -330,6 +330,9 @@ namespace imsLink
                 bt_disable_timer_webcam.Enabled = false;
                 bt_test.Enabled = false;
                 comboBox_temperature.Enabled = false;
+                bt_script.Enabled = false;
+                bt_script_load.Enabled = false;
+                bt_script_save.Enabled = false;
 
                 numericUpDown_TG_R.Enabled = false;
                 numericUpDown_TG_G.Enabled = false;
@@ -397,6 +400,7 @@ namespace imsLink
                 button2.Enabled = false;
                 flag_comport_ok = false;
                 show_main_message("COM未連線", S_FALSE, 100);
+                pictureBox_comport.Image = imsLink.Properties.Resources.x;
             }
         }
 
@@ -1169,6 +1173,7 @@ namespace imsLink
                                     g2.Clear(BackColor);
                                     g2.DrawString("驗證失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
                                     bt_confirm.Visible = true;
+                                    scanner_timer.Enabled = false;
                                     playSound(S_FALSE);
                                 }
                                 //lb_sn2.Text = "";
@@ -2375,6 +2380,7 @@ namespace imsLink
             lb_main_mesg.Text = "";
             lb_awb_data.Text = "";
             lb_awb_time.Text = "";
+            bt_script_save.Visible = false;
 
             if (flag_release_mode == true)
             {
@@ -2404,8 +2410,6 @@ namespace imsLink
 
             camera_serials.Clear();
 
-            check_webcam();
-
             //Comport_Scan();
             this.BackColor = Color.Yellow;
 
@@ -2433,6 +2437,7 @@ namespace imsLink
             */
 
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox_comport.SizeMode = PictureBoxSizeMode.Zoom;
 
             if (flag_enaglb_awb_function == true)
                 bt_goto_awb.Visible = true;
@@ -2505,6 +2510,7 @@ namespace imsLink
 
             if (flag_enaglb_awb_function == true)
             {
+                richTextBox1.Text += "call bt_goto_awb_Click 111\n";
                 bt_goto_awb_Click(sender, e);
             }
             if (cb_show_grid.Checked == false)
@@ -2515,6 +2521,8 @@ namespace imsLink
             }
 
             show_item_location();
+
+            check_webcam();
 
             if (flag_enaglb_awb_function == true)
             {
@@ -4492,6 +4500,7 @@ namespace imsLink
 
         private void button12_Click(object sender, EventArgs e)
         {
+            tb_wait_camera_data.Clear();
             lb_write_camera_serial2.Text = "";
             lb_sn1.Text = "";
             lb_sn2.Text = "";
@@ -4501,8 +4510,11 @@ namespace imsLink
             //groupBox10.BackColor = System.Drawing.SystemColors.ControlLightLight;
             lb_write_camera_serial2.Text += "";
             lb_write_camera_serial2.ForeColor = Color.Black;
+            button11.BackColor = System.Drawing.SystemColors.ControlLight;
+            g2.Clear(BackColor);
 
             bt_confirm.Visible = false;
+            scanner_timer.Enabled = true;
         }
 
         //int camera_start = 0;
@@ -4519,8 +4531,8 @@ namespace imsLink
                 comboBox_webcam.Items.Clear();
             }
 
+            if (check_webcam() == S_OK)
             {
-                check_webcam();
                 richTextBox1.Text += "重新抓取USB影像\t";
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
                 if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
@@ -4539,6 +4551,7 @@ namespace imsLink
                     richTextBox1.Text += "無影像裝置\n";
                 }
             }
+
             /*
             if (camera_start == 0)
             {
@@ -4563,7 +4576,7 @@ namespace imsLink
             {
                 if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
                 {
-                    //Cam.Stop();   // WebCam stops capturing images.
+                    Cam.Stop();   // WebCam stops capturing images.
                     Cam.SignalToStop();
                     Cam.WaitForStop();
                 }
@@ -4865,6 +4878,7 @@ namespace imsLink
 
         private void button20_Click(object sender, EventArgs e)
         {
+            show_main_message("關閉程式", S_OK, 30);
             if (flag_comport_ok == true)
             {
                 serialPort1.Close();
@@ -4875,6 +4889,20 @@ namespace imsLink
                 lb_main_mesg.Text = "COM未連線";
                 playSound(S_FALSE);
             }
+
+            if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+            {
+                richTextBox1.Text += "USB影像傳輸中, 關閉\n";
+                flag_camera_start = 0;
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                comboBox_webcam.Items.Clear();
+            }
+            show_main_message("關閉程式", S_OK, 30);
+            richTextBox1.Text += "確認關閉ST\n";
+            delay(1000);
+            richTextBox1.Text += "確認關閉SP\n";
 
             if (Cam != null)
             {
@@ -4892,7 +4920,8 @@ namespace imsLink
             }
 
             richTextBox1.Text += "關閉程式\n";
-            Application.Exit();
+            //Application.Exit();
+            System.Environment.Exit(0);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -5946,6 +5975,7 @@ namespace imsLink
                     g2.Clear(BackColor);
                     g2.DrawString("燒錄失敗", new Font("標楷體", 60), new SolidBrush(Color.Red), new PointF(20, 20));
                     bt_confirm.Visible = true;
+                    scanner_timer.Enabled = false;
                     playSound(S_FALSE);
                 }
                 else
@@ -8035,6 +8065,7 @@ namespace imsLink
 
         private void bt_goto_awb_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "bt_goto_awb_Click ST\n";
             if (flag_release_mode == false)
             {
                 if (flag_comport_connection_ok == false)
@@ -8476,7 +8507,6 @@ namespace imsLink
                 richTextBox1.Text += "Enable Timer WebCam\n";
                 timer_webcam.Enabled = true;
                 timer_webcam_cnt = 0;
-
             }
         }
 
@@ -8999,6 +9029,19 @@ namespace imsLink
             //check_webcam();
 
             //check_comport();
+            richTextBox1.Text += "flag_camera_start = " + flag_camera_start.ToString() + "\n";
+            richTextBox1.Text += "Cam.IsRunning = " + Cam.IsRunning.ToString() + "\n";
+
+            //if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+            {
+                richTextBox1.Text += "USB影像傳輸中, 關閉\n";
+                flag_camera_start = 0;
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                comboBox_webcam.Items.Clear();
+            }
+
 
         }
 
@@ -9019,8 +9062,53 @@ namespace imsLink
             Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
         }
 
+        bool flag_doing_check_webcam = false;
         int check_webcam()
         {
+            if (flag_doing_check_webcam == false)
+            {
+                flag_doing_check_webcam = true;
+            }
+            else
+            {
+                richTextBox1.Text += "doing check_webcam, abort\n";
+                return S_FALSE;
+            }
+
+            richTextBox1.Text += "call check_webcam ST\n";
+            int i;
+            g_conn_status = CAMERA_UNKNOWN;
+            Send_IMS_Data(0xFF, 0, 0, 0);
+
+            int cnt = 0;
+            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
+            {
+                richTextBox1.Text += "-2xx";
+                delay(100);
+            }
+            if (g_conn_status == DONGLE_NONE)
+            {
+                richTextBox1.Text += "無連接器\n";
+                flag_doing_check_webcam = false;
+                return S_FALSE;
+            }
+            else if (g_conn_status == CAMERA_NONE)
+            {
+                richTextBox1.Text += "有連接器, 無相機\n";
+                flag_doing_check_webcam = false;
+                return S_FALSE;
+            }
+            else if (g_conn_status == CAMERA_OK)
+            {
+                richTextBox1.Text += "有連接器, 有相機\n";
+            }
+            else
+            {
+                richTextBox1.Text += "狀態不明, status = " + g_conn_status.ToString() + "\n";
+                flag_doing_check_webcam = false;
+                return S_FALSE;
+            }
+
             flag_camera_use_insighteyes = 0;
             comboBox_webcam.Items.Clear();
             USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -9040,7 +9128,7 @@ namespace imsLink
                     richTextBox1.Text += "There are " + USBWebcams.Count.ToString() + " cameras\n";
                 }
 
-                for (int i = 0; i < USBWebcams.Count; i++)
+                for (i = 0; i < USBWebcams.Count; i++)
                 {
                     richTextBox1.Text += "camera " + i.ToString() + "\n";
                     richTextBox1.Text += "name : " + USBWebcams[i].Name + "\n";
@@ -9086,7 +9174,7 @@ namespace imsLink
                     richTextBox1.Text += webcam_name + "\n";
                 }
 
-                for (int i = 0; i < USBWebcams.Count; i++)
+                for (i = 0; i < USBWebcams.Count; i++)
                 {
                     if (USBWebcams[i].Name == "InsightEyes")
                     {
@@ -9117,7 +9205,7 @@ namespace imsLink
                     richTextBox1.Text += "有影像裝置\n";
 
                     //string webcam_name;
-                    int i = 0;
+                    i = 0;
                     //webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                     comboBox_webcam.Text = comboBox_webcam.Items[i].ToString();
                 }
@@ -9125,8 +9213,10 @@ namespace imsLink
             else
             {
                 richTextBox1.Text += "無影像裝置\n";
+                flag_doing_check_webcam = false;
                 return S_FALSE;
             }
+            flag_doing_check_webcam = false;
             return S_OK;
         }
 
@@ -9939,11 +10029,11 @@ namespace imsLink
             int i;
             string content = "";
 
-            content += "Opal序號" + "," + "廠內生產製令序號" + "," + "燒錄時間" + "\n";
+            content += "編號" + "," + "Opal序號" + "," + "廠內生產製令序號" + "," + "燒錄時間" + "\n";
             for (i = 0; i < camera_serials.Count; i++)
             {
                 //richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString() + " camera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString() + "\n";
-                content += camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "\n";
+                content += (i + 1).ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "\n";
             }
 
             sw.WriteLine(content);
@@ -9986,12 +10076,14 @@ namespace imsLink
             {
                 richTextBox1.Text += "已連上IMS EGD System\n";
                 show_main_message("COM已連線", S_OK, 100);
+                pictureBox_comport.Image = imsLink.Properties.Resources.comport;
             }
             else
             {
                 richTextBox1.Text += "未連線\n";
                 this.BackColor = Color.Pink;
                 show_main_message("COM未連線", S_FALSE, 100);
+                pictureBox_comport.Image = imsLink.Properties.Resources.x;
                 
                 serialPort1.Close();
                 this.BackColor = Color.Yellow;

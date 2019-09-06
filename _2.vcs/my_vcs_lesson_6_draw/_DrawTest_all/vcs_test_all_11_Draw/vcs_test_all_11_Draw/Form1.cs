@@ -392,7 +392,7 @@ namespace vcs_test_all_11_Draw
             g.FillEllipse(hb, 450, 150, 200, 100);
 
             //紋理筆刷
-            Image myImage = Image.FromFile(@"D:\bear.jpg");
+            Image myImage = Image.FromFile(@"C:\______test_vcs\bear.jpg");
             TextureBrush tb = new TextureBrush(myImage);
             g.FillEllipse(tb, 50, 250, 300, 100);
 

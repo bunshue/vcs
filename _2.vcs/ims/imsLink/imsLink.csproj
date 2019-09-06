@@ -155,6 +155,8 @@
     <None Include="img\stop.bmp" />
     <None Include="img\ims_egd_system.png" />
     <None Include="img\excel.png" />
+    <None Include="img\comport.jpg" />
+    <None Include="img\x.bmp" />
     <Content Include="ims.ico" />
     <None Include="recorder_ok.png" />
     <None Include="recorder_none.png" />

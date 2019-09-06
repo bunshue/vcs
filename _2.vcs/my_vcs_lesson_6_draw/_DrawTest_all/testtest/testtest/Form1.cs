@@ -59,7 +59,7 @@ namespace testtest
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            TextureBrush tb = new TextureBrush(new Bitmap(@"D:\bear.jpg"));
+            TextureBrush tb = new TextureBrush(new Bitmap(@"C:\______test_vcs\bear.jpg"));
             p = new Pen(tb, 10);
             richTextBox1.Text += "TextureBrush\n";
         }

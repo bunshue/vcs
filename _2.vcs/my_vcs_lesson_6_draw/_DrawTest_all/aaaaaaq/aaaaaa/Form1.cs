@@ -31,13 +31,13 @@ namespace aaaaaa
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bmp.Save(@"D:\zzzzz.jpg");
+            bmp.Save(@"C:\______test_vcs\zzzzz.jpg");
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bmp = new Bitmap(@"D:\bear.jpg");
+            bmp = new Bitmap(@"C:\______test_vcs\bear.jpg");
             g = Graphics.FromImage(bmp);
             p = new Pen(Color.Red, 10);
             pictureBox1.Image = bmp;
@@ -52,7 +52,7 @@ namespace aaaaaa
 
         private void button5_Click(object sender, EventArgs e)
         {
-            bmp = new Bitmap(@"D:\bear.jpg");
+            bmp = new Bitmap(@"C:\______test_vcs\bear.jpg");
             g = Graphics.FromImage(bmp);
             pictureBox1.Image = bmp;
         }

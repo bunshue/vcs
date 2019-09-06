@@ -144,7 +144,7 @@ namespace vcs_test_all_zz_test
         {
             //從FTP下載檔案
             System.Net.WebClient webClient = new System.Net.WebClient();
-            //下載FTP檔案到D:\sample.txt
+            //下載FTP檔案到指定位置
             webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_vcs\fedora27.iso");
 
         }

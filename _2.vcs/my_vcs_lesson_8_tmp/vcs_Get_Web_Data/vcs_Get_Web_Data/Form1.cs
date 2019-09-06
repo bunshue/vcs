@@ -77,7 +77,7 @@ namespace vcs_Get_Web_Data
             byte[] buffer = new byte[8192];
 
             //FileStream fs = new FileStream("X:\\TEMP\\Darkthread.gif", FileMode.Create, FileAccess.Write);
-            FileStream fs = new FileStream("D:\\aaaaaaaa.gif", FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream("C:\\______test_vcs\\aaaaaaaa.gif", FileMode.Create, FileAccess.Write);
             int size = 0;
             do
             {

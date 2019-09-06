@@ -73,9 +73,9 @@ namespace aaaaaaa
             
             Bitmap bm = new Bitmap(width, height);
             panel1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
-            bm.Save(@"D:\aaaaaaa.jpg", ImageFormat.Jpeg);
-            bm.Save(@"D:\aaaaaaa.bmp", ImageFormat.Bmp);
-            bm.Save(@"D:\aaaaaaa.png", ImageFormat.Png);
+            bm.Save(@"C:\______test_vcs\aaaaaaa.jpg", ImageFormat.Jpeg);
+            bm.Save(@"C:\______test_vcs\aaaaaaa.bmp", ImageFormat.Bmp);
+            bm.Save(@"C:\______test_vcs\aaaaaaa.png", ImageFormat.Png);
 
         }
 
@@ -106,9 +106,9 @@ namespace aaaaaaa
 
             Bitmap bm = new Bitmap(width, height);
             panel1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
-            bm.Save(@"D:\aaaaaaa.jpg", ImageFormat.Jpeg);
-            bm.Save(@"D:\aaaaaaa.bmp", ImageFormat.Bmp);
-            bm.Save(@"D:\aaaaaaa.png", ImageFormat.Png);
+            bm.Save(@"C:\______test_vcs\aaaaaaa.jpg", ImageFormat.Jpeg);
+            bm.Save(@"C:\______test_vcs\aaaaaaa.bmp", ImageFormat.Bmp);
+            bm.Save(@"C:\______test_vcs\aaaaaaa.png", ImageFormat.Png);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace aaaaaaa
         private void button4_Click(object sender, EventArgs e)
         {
             // 原始影像，顯示於pictureBox1
-            Bitmap bmpOrg = new Bitmap("D:\\bear.jpg");
+            Bitmap bmpOrg = new Bitmap(@"C:\______test_vcs\bear.jpg");
             this.panel1.BackgroundImage = bmpOrg;
             // 擷取部份影像，顯示於pictureBox2，區域為(起點x座標20, 起點y座標20, 寬度50, 高度50)
             Bitmap bmpClone = bmpOrg.Clone(new Rectangle(200, 100, 50, 50), bmpOrg.PixelFormat);
