@@ -1,0 +1,20 @@
+
+DrAP要能分析兩個或多個子目錄
+DrAP列出小容量之資料夾
+搜尋相似檔名並羅列出來在Listview
+
+
+在picturebox中抓到上下左右鍵?
+
+
+
+vcs
+template + 如何把 Form1 改掉
+
+colorPicker	+ RGB logo
+		+ 依螢幕寬度 決定顯示位置
+		
+
+
+
+

@@ -4901,7 +4901,7 @@ namespace imsLink
             }
             show_main_message("關閉程式", S_OK, 30);
             richTextBox1.Text += "確認關閉ST\n";
-            delay(1000);
+            delay(100);
             richTextBox1.Text += "確認關閉SP\n";
 
             if (Cam != null)

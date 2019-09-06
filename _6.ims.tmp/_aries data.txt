@@ -1,0 +1,2485 @@
+
+
+¥Ø«e§âdebug consoleÃö±¼¡A¥u¬O§â¥\¯àÃö±¼¡Bµe­±¹Ï¶Â¦Ó¤w¡A¨ä¹ê¨Ã¤£¬O¯u¥¿²M°£¡C
+
+¤Hªº10¬í ­n¼gsleep(20)
+../src/main.c:parse_uart_command(4723) tick = 88902 test sleep 10 sec ST
+../src/main.c:parse_uart_command(4725) tick = 98908 test sleep 10 sec SP
+¸g¹Lg_ms_tick 10,000­Ó ¬G1­Óg_ms_tick¬°1ms
+
+
+
+
+Aries data
+
+
+
+
+
+
+Aries¥D¾÷
+Model : FG-270-0008
+§Ç¸¹ : 2700008-1812-0001
+	       ¦~¤ë    2
+		       3
+
+
+
+
+ugfx¥iµeÂI
+
+tmp dma data
+
+#define DMA_LENGTH	(1024*4*64+1023)	/* Length of the Dma Transfers */	//max ~1920*137.07
+
+
+Vivado¦p¦ó·j´MMakefile¤ºªº¤å¦r¡H
+Vivado·s¼W¤@­ÓC±M®×´ú¤@¤U standalone
+
+
+
+
+
+
+In order to perform a Write, Read or Erase operation with the NVCM, it is required that the interface is enabled
+using Command 0x74. Affected commands are noted in the Command Description as ¡§EN Required.¡¨ Once the
+modification operations are completed, the interface can be disabled using commands 0x26 and 0xFF
+
+
+
+
+
+Non-Volatile Configuration Memory (NVCM)
+User Flash Memory (UFM)
+
+
+
+The NVCM/Flash is organized in pages. The NVCM/Flash is not byte addressable. Each page has 128 bits (16 bytes).
+
+
+
+
+LCMXO3LF-1300C-5BG256C 
+
+User Flash Memory (UFM)
+
+Non-volatile storage up to 448 kbits = 56 KB
+each page has 128 bits (16 bytes)
+Write access is performed page-wise; each page has 128 bits (16 bytes)
+
+„h Non-volatile storage up to 448 kbits
+„h 100K write/erase cycles
+„h Write access is performed page-wise; each page has 128 bits (16 bytes)
+„h Auto-increment addressing
+„h WISHBONE interface
+
+
+
+
+
+usercode
+
+
+
+SVF Command Name
+
+Serial Vector Format (SVF)
+
+
+
+
+// Configure Video Lock - TODO
+xil_printf("Set up Video Lock Monitor.\n\r");
+// bit[3:0], Input
+// 0 - MMCM Locked
+// 1 - TFP410 Locked
+// 2 - CH7038 Locked
+// 3 - Matched K Code
+// Set the direction for all signals as inputs except the LED output */
+XGpio_SetDataDirection(p_lock, LOCK_MONITOR, 0xffff); // 0 = output, 1 = input
+
+
+Set up Video Lock Monitor.
+david1030: xgpio.c:XGpio_SetDataDirection(170) Channel = 1 DirectionMask = 0x0000FFFF
+david1030: xgpio.c:XGpio_SetDataDirection(172) BaseAddr = 0x41200000 offset= 0x00000004 data = 0x0000FFFF
+
+
+
+
+
+
+
+
+On-Chip Memory (ocm)
+
+VTC
+Video Timing Controller
+
+xil_printf("\tVideo Resolution = %s\n\r", vres_get_name(resolution_id));
+
+
+
+alpha blending
+
+
+Go to CEN & LED_1, long press Metering, then press Darken
+
+
+CNN Student News August English subtitle TCH learn english
+
+
+xil_printf("call gdispBlitArea
+
+xil_printf("david1122: %s:%s(%d) call gdispBlitArea\r\n", __FILE__, __func__, __LINE__);
+
+xil_printf("david1207: %s:%s(%d) ST\r\n", __FILE__, __func__, __LINE__);
+
+xil_printf("david1122: %s:%s(%d) BaseAddr = 0x%08x\r\n", __FILE__, __func__, __LINE__, InstancePtr->BaseAddr);
+
+xil_printf("david1207: %s:%s(%d) BaseAddr = 0x%08x offset= 0x%08x data = 0x%08x\r\n", __FILE__, __func__, __LINE__, 
+InstancePtr->Config.BaseAddress, XV_MIX_CTRL_ADDR_HWREG_BACKGROUND_U_G_DATA, Data);
+
+
+xil_printf("david1207: %s:%s(%d) ST xxxxxxxxxxxxxxxxxx\r\n", __FILE__, __func__, __LINE__);
+
+
+11:09:29 **** Build of configuration Release for project aries_main ****
+make pre-build main-build 
+a9-linaro-pre-build-step
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O2 -I"C:\iMS_Video\iMS_Video.sdk\aries_main" -I../../aries_bsp/ps7_cortexa9_0/include -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -I../../aries_bsp/ps7_cortexa9_0/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+../src/main.c: In function 'main':
+../src/main.c:14:5: warning: implicit declaration of function 'usleep' [-Wimplicit-function-declaration]
+     usleep(200000);usleep(200000);usleep(200000);usleep(200000);
+     ^~~~~~
+'Finished building: ../src/main.c'
+' '
+make: *** No rule to make target `gdisp_lld_framebuffer.o', needed by `aries_main.elf'.  Stop.
+
+11:09:29 Build Finished (took 336ms)
+
+
+
+
+
+//§ïÅÜ¹Ï¤ù¦ì¸m
+
+//¤¤¶¡¸m¤¤
+status = gdispGImageDraw(pixmap, p_Image, (pm_width-p_Image->width) >> 1, (pm_height-p_Image->height) >> 1, p_Image->width, p_Image->height, 0, 0);
+
+//¤¤¶¡¾a¥ª
+
+status = gdispGImageDraw(pixmap, p_Image, 0, (pm_height-p_Image->height) >> 1, p_Image->width, p_Image->height, 0, 0);
+
+//¤¤¶¡¾a¥k
+
+status = gdispGImageDraw(pixmap, p_Image, (pm_width-p_Image->width) >> 0, (pm_height-p_Image->height) >> 1, p_Image->width, p_Image->height, 0, 0);
+//xil_printf("status draw: %d\r\n", status);
+
+//¤¤¶¡¾a¤W
+
+status = gdispGImageDraw(pixmap, p_Image, (pm_width-p_Image->width) >> 1, 0, p_Image->width, p_Image->height, 0, 0);
+
+//¤¤¶¡¾a¤U
+
+status = gdispGImageDraw(pixmap, p_Image, (pm_width-p_Image->width) >> 1, (pm_height-p_Image->height) >> 0, p_Image->width, p_Image->height, 0, 0);
+
+
+
+¥i¥H§ïÅÜÅã¥Ü¤è¦V
+	int orientation;
+	orientation = gdispGetOrientation();
+
+	switch(orientation) {
+		case GDISP_ROTATE_0:
+			xil_printf("GDISP_ROTATE_0\n\r");
+			break;
+		case GDISP_ROTATE_90:
+			xil_printf("GDISP_ROTATE_90\n\r");
+			break;
+		case GDISP_ROTATE_180:
+			xil_printf("GDISP_ROTATE_180\n\r");
+			break;
+		case GDISP_ROTATE_270:
+			xil_printf("GDISP_ROTATE_270\n\r");
+			break;
+		default:
+			xil_printf("unknown\n\r");
+			break;
+	}
+
+	uint8_t backlight;
+	backlight = gdispGetBacklight();
+
+	uint8_t constrast;
+	constrast = gdispGetContrast();
+
+	xil_printf("david1005: %s:%s(%d) ST orientation = %d backlight = %d constrast = %d\r\n",__FILE__,__func__,__LINE__,orientation,backlight,constrast);
+
+
+	/*
+	gdispSetOrientation(GDISP_ROTATE_180);
+	*/
+	gdispSetBacklight(10);
+	gdispSetContrast(10);
+
+	orientation = gdispGetOrientation();
+	switch(orientation) {
+		case GDISP_ROTATE_0:
+			xil_printf("GDISP_ROTATE_0\n\r");
+			break;
+		case GDISP_ROTATE_90:
+			xil_printf("GDISP_ROTATE_90\n\r");
+			break;
+		case GDISP_ROTATE_180:
+			xil_printf("GDISP_ROTATE_180\n\r");
+			break;
+		case GDISP_ROTATE_270:
+			xil_printf("GDISP_ROTATE_270\n\r");
+			break;
+		default:
+			xil_printf("unknown\n\r");
+			break;
+	}
+
+	backlight = gdispGetBacklight();
+	constrast = gdispGetContrast();
+
+	xil_printf("david1005: %s:%s(%d) ST orientation = %d backlight = %d constrast = %d\r\n",__FILE__,__func__,__LINE__,orientation,backlight,constrast);
+
+
+
+
+
+¨ú±o¨C­Ólayerªº¦ì§}
+  baseaddr = XVMix_GetLayerBufferAddr(MixerPtr, XVMIX_LAYER_3);
+  xil_printf("\r\nLayer 3 Buffer Addr: 0x%08X\r\n", baseaddr);
+
+
+gdisp_lld_framebuffer.c:gdisp_lld_init()
+«Ø¥ßframebuffer0 framebuffer1 ¦U¬°2048*4*1200
+
+³]©wlayer3 ¨ì framebuffer0
+
+
+layer1 1216 X 912
+
+Addr of surface_1  is 0x01709418
+Addr of surface_10 is 0x01B44488
+Addr of surface_1a is 0x01F7F490
+Addr of surface_1b is 0x023BA498
+Addr of surface_1c is 0x027F54A0
+
+layer 2 640 X 480
+
+Layer 3 Buffer Addr: 0x00449400
+
+
+
+
+Layer 1 Color Format: YUV_422
+Set Layer 1 Window (688,  16, 1216, 912): Done
+Type : Stream
+
+Layer 2 Color Format: YUV_422
+Set Layer 2 Window ( 16, 584, 640, 480): Done
+Type : Stream
+
+Layer 3 Color Format: RGBA8
+Set Layer 3 Window (  0,   0, 1920, 1080): Done
+Type : Memory
+
+
+----->Layer 3 Status<----
+State: Enabled
+Type : Memory
+Addr : 0x449400
+Chroma Addr : 0x0
+Alpha: 256
+Scale: Disabled
+Color Format: RGBA8
+
+
+
+«Å§i¥|¶ô°O¾ÐÅé
+    surface_10 = gfxAlloc(LAYER1_WIDTH * LAYER1_HEIGHT * 4);
+    surface_1a = gfxAlloc(LAYER1_WIDTH * LAYER1_HEIGHT * 4);
+    surface_1b = gfxAlloc(LAYER1_WIDTH * LAYER1_HEIGHT * 4);
+    surface_1c = gfxAlloc(LAYER1_WIDTH * LAYER1_HEIGHT * 4);
+
+preload_picture_to_memory();
+
+
+
+
+ugfx¤Á¨ìframebuffer1, ¦bugfx¤Wµe¹Ï
+
+	gdispSetuGFXFrameBufferAddr(gdispGetFrameBufferAddr(1));
+
+		show_dongle_usage_count(dongle_usage_count);
+		createWidgets();
+		status = gdispImageOpenFile(p_Image, ims_logo);
+		status = gdispImageDraw(p_Image, swidth - p_Image->width - BORDER_X * 2, sheight - p_Image->height - BORDER_Y * 2, p_Image->width, p_Image->height, 0, 0);
+		gdispImageClose(p_Image);
+		draw_picture(CAMERA_OK);
+		draw_picture(KEYBOARD_OK);
+		clear_layer1_all(1);
+		//dma_restore_picture(0);
+		//layer1_blit(pic_sizes[0], 1);
+		layer1_blit_corners(1);
+		gdispDrawBox(LAYER0_WIDTH - LAYER1_WIDTH - BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, Blue);
+		pixmap_draw(pixmap_2, surface_2, LAYER2_WIDTH, LAYER2_HEIGHT, NULL, 0, 0, 0, 0, 0, POSITION_MIDDLE_CENTER);
+		// Blit surface_2 to the real display at the new position
+		gdispBlitArea(BORDER_X, LAYER0_HEIGHT - LAYER2_HEIGHT - BORDER_Y, LAYER2_WIDTH, LAYER2_HEIGHT, surface_2);
+
+ugfx¤Á¨ìframebuffer0, ¦bugfx¤Wµe¹Ï
+	gdispSetuGFXFrameBufferAddr(gdispGetFrameBufferAddr(0));
+
+
+
+
+
+	    board_init set layer 3 buffer addr to 0x00449400
+xil_printf("board_init set layer 3 buffer addr to 0x%08X\r\n", (UINTPTR)PRIV(g)->pixels);
+
+
+
+
+void gdispGSetuGFXFrameBufferAddr(GDisplay *g, uint32_t addr)
+{
+	//xil_printf("\n\rset addr = 0x%08x\r\n", addr);
+
+	PRIV(g)->pixels = (void*)addr;
+	return;
+}
+
+
+void switch_to_framebuffer(int frame)
+{
+	if((frame != 0) && (frame != 1))
+	{
+		xil_printf("switch_to_framebuffer fail, illegal frame = %d\n\r", frame);
+		return;
+	}
+	uint32_t addr;
+	addr = gdispGetFrameBufferAddr(frame);
+	Xil_Out32(0x43cc0440, addr);
+	//xil_printf("\n\ruse framebuffer %d\n\r", frame);
+	return;
+}
+
+
+
+
+
+void pixmap_draw(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t s_x, uint32_t s_y, uint32_t d_x, uint32_t d_y, u8 alpha, u8 position);
+void pixmap_draw_dma(GDisplay* pixmap, pixel_t* surface, coord_t pm_width, coord_t pm_height, gdispImage *p_Image, uint32_t s_x, uint32_t s_y, uint32_t d_x, uint32_t d_y, u8 alpha, u8 position);
+void clear_layer1_all(int frame);
+void clear_layer1(int frame);
+void layer1_blit(struct pic_size s, int frame);
+void layer1_blit_corners(int frame);
+void preload_picture_to_memory(void);
+void dma_restore_picture(int pic);
+
+
+
+
+
+
+«öÁä 'b0'¡B'b1'¡Aµe­±¤Á¨ìframebuffer0¡Bframebuffer1
+
+		else if((buffer[0] == 'b')&&(buffer[1] == '0'))
+		{
+			switch_to_framebuffer(0);
+		}
+		else if((buffer[0] == 'b')&&(buffer[1] == '1'))
+		{
+			switch_to_framebuffer(1);
+		}
+
+
+«öÁä 'ugfx0'¡B'ugfx1'¡Augfx¤Á¨ìframebuffer0¡Bframebuffer1¥hµe¹Ï
+
+		if(buffer[4]  == '0')
+		{
+			xil_printf("\n\rufgx 0\n\r");
+
+			uint32_t addr;
+			addr = gdispGetFrameBufferAddr(0);
+			xil_printf("frame buffer 0 addr = 0x%08x\n\r", addr);
+			gdispSetuGFXFrameBufferAddr(addr);
+			xil_printf("\n\rufgx 0 ok\n\r");
+		}
+		else if(buffer[4]  == '1')
+		{
+			xil_printf("\n\rufgx 1\n\r");
+
+			uint32_t addr;
+			addr = gdispGetFrameBufferAddr(1);
+			xil_printf("frame buffer 1 addr = 0x%08x\n\r", addr);
+
+			gdispSetuGFXFrameBufferAddr(addr);
+			xil_printf("\n\rufgx 1 ok\n\r");
+		}
+
+
+
+
+
+
+
+
+			case 'g':
+
+				//GWindowInit wi;
+
+				gwinClearInit(&wi);
+				wi.show = TRUE; wi.x = 20; wi.y = 10; wi.width = width/2; wi.height = height/2;
+				GW1 = gwinWindowCreate(0, &wi);
+
+				xil_printf(".............................gwinClear............................\n\r");
+
+				gwinSetBgColor(GW1, Black);
+
+				gwinClear(GW1);	//only gw1 area clear to black
+
+
+				sleep(5);
+
+				xil_printf(".............................gdispClear............................\n\r");
+
+				gdispClear(Purple);	//full screen white
+
+				break;
+			case 'h':
+				xil_printf("test blit\n\r");
+				pixel_t* surface_1;
+			    surface_1 = gdispPixmapGetBits(pixmap_1);
+			    // Draw transparency required on layer 1
+			    pixmap_draw(pixmap_1, surface_1, 300, 300, NULL, 0, 0, 0, 0);
+
+				// Blit surface_1 to the real display at the new position
+				gdispBlitArea(LAYER0_WIDTH-LAYER1_WIDTH-BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+
+				Xil_DCacheFlush();
+
+				break;
+
+from ugfx_test.ino
+
+#include <Wire.h>
+#include <SPI.h>
+#include <gfx.h>
+
+void setup() {
+  coord_t		width, height;
+  coord_t		i, j;
+
+  pinMode(13, OUTPUT);
+
+  // Initialize and clear the display
+  gfxInit();
+
+#if 1
+  // Get the screen size
+  width = gdispGetWidth();
+  height = gdispGetHeight();
+
+  // Code Here
+  gdispDrawBox(10, 10, width / 2, height / 2, Yellow);
+  gdispFillArea(width / 2, height / 2, width / 2 - 10, height / 2 - 10, Blue);
+  gdispDrawLine(5, 30, width - 50, height - 40, Red);
+
+  for (i = 5, j = 0; i < width && j < height; i += 7, j += i / 20)
+    gdispDrawPixel(i, j, White);
+#endif
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(500);
+  //gfxSleepMilliseconds(500);
+  digitalWrite(13, LOW);   // turn the LED on (HIGH is the voltage level)
+  delay(500);
+  //gfxSleepMilliseconds(500);
+}
+
+
+
+
+			case 'f':
+				xil_printf("gwinDrawLine\n\r");
+
+				GHandle GW1;
+				coord_t     i, j;
+				GWindowInit wi;
+
+				//gfxInit();
+				//gdispClear(White);
+
+				gwinClearInit(&wi);
+				wi.show = TRUE; wi.x = 20; wi.y = 10; wi.width = width/2; wi.height = height/2;
+				GW1 = gwinWindowCreate(0, &wi);
+
+				//wi.show = TRUE; wi.x = 50; wi.y = 190; wi.width = 150; wi.height = 100;
+
+				gwinSetColor(GW1, Blue);
+				gwinSetBgColor(GW1, Pink);
+				gwinClear(GW1);
+				gwinDrawLine(GW1, 0, 0, width/2, height/2);
+
+
+				gwinSetColor(GW1, Red);
+				for(i = 0 ; i < width/2; i += 10)
+				{
+					j = height/2 - i * height / width;
+					gwinDrawPixel(GW1, i, j);
+				}
+				gwinFillCircle(GW1, width/4, height/4, height/4);
+
+				gwinSetColor(GW1, Red);
+				gwinDrawCircle(GW1, width/8, height/4, height/8);
+
+				gwinSetColor(GW1, Green);
+				gwinDrawBox(GW1, width/16, height/16, width/16*6, height/16*6);
+
+				gwinSetColor(GW1, Orange);
+				gwinFillArea(GW1, width/32, height/32, width/16, height/16);
+
+
+
+
+				break;
+
+
+
+----------------------------------------------------------------------------------------
+
+			case 'f':
+				xil_printf("gwinDrawLine\n\r");
+
+				coord_t     i, j;
+				GWindowInit wi;
+
+				//gfxInit();
+				//gdispClear(White);
+
+				gwinClearInit(&wi);
+				wi.show = TRUE; wi.x = 20; wi.y = 10; wi.width = width/2; wi.height = height/2;
+				GW1 = gwinWindowCreate(0, &wi);
+
+				//wi.show = TRUE; wi.x = 50; wi.y = 190; wi.width = 150; wi.height = 100;
+
+				gwinSetColor(GW1, Blue);
+				gwinSetBgColor(GW1, Pink);
+				gwinClear(GW1);
+				gwinDrawLine(GW1, 0, 0, width/2, height/2);
+
+
+				gwinSetColor(GW1, Red);
+				for(i = 0 ; i < width/2; i += 10)
+				{
+					j = height/2 - i * height / width;
+					gwinDrawPixel(GW1, i, j);
+				}
+
+				gwinSetColor(GW1, Purple);
+				gwinFillCircle(GW1, width/4*3/2, height/4, height/8);
+
+				gwinSetColor(GW1, Red);
+				gwinDrawCircle(GW1, width/4, height/4, height/8);
+
+				gwinSetColor(GW1, Green);
+				gwinDrawBox(GW1, width/16, height/16, width/16*6, height/16*6);
+
+				gwinSetColor(GW1, Orange);
+				gwinFillArea(GW1, width/32, height/32, width/16, height/16);
+
+
+				gwinSetColor(GW1, Lime);
+				gwinFillDualCircle(GW1, width/16, height/4, 50, 80);
+
+				gwinSetColor(GW1, Green);
+				gwinDrawEllipse(GW1, width/4*3/2, height/5, 200, 100);
+
+				//gdispGFillEllipse(GW1, width/4, height/8*3, 100, 50, Magenta);	//fail
+
+				//gwinDrawArc(GW1, 200, 200, 100, 0, 90);
+
+
+				gwinSetColor(GW1, Navy);
+
+				coord_t x;
+				coord_t y;
+				coord_t cx;
+				coord_t cy;
+				char cc;
+
+				x = 50;y = 50; cc = 'A';
+				gwinDrawChar(GW1, x, y, cc);
+				x = 100;y = 100; cc = 'B';
+				gwinFillChar(GW1, x, y, cc);
+				x = 150;y = 150;
+				gwinDrawString(GW1, x, y, "How are you");
+				x = 200;y = 200;
+				gwinFillString(GW1, x, y, "I am fine");
+				x = 250;y = 250;
+				cx = x+500;cy = 290;
+				gwinDrawStringBox(GW1, x, y, cx, cy, "This is a cat", justifyMiddle);
+				x = 300;y = 300;
+				cx = x+500;cy = 340;
+				gwinFillStringBox(GW1, x, y, cx, cy, "This is a dog", justifyMiddle);
+
+				point  pt[8]= {{200, 100}, {300, 100}, {400, 200}, {400, 300}, {300, 400}, {200, 400}, {100, 300}, {100, 200}};
+				for(i = 0 ; i < 10; i++)
+				{
+					gwinDrawPoly(GW1, 0 + 15 * i, 0 + 12 * i, pt, 8);
+					sleep(1);
+				}
+
+				//point  pt[8]= {{200, 100}, {300, 100}, {400, 200}, {400, 300}, {300, 400}, {200, 400}, {100, 300}, {100, 200}};
+				for(i = 0 ; i < 1; i++)
+				{
+					gwinFillConvexPoly(GW1, 200 + 15 * i, 0 + 12 * i, pt, 8);
+					sleep(1);
+				}
+
+
+				gwinDrawThickLine(GW1, 50, 100, width/2 - 50, height/8*3, 5, 0);
+
+				gwinDrawThickLine(GW1, 50, 400, width/2 - 50, height/8*1, 8, 1);
+
+
+
+				/*	fail?
+				gdispImage *p_Image;
+
+				status = gdispImageOpenFile(p_Image, ims_logo);
+
+				gwinDrawImage(GW1, p_Image, 100, 100, 100, 100, 100,100);
+				*/
+
+
+				break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	static gdispImage myImage;
+	static GDisplay* pixmap_1;
+	static pixel_t* surface_1;
+
+	// Set up pixmap for layer 1
+	xil_printf("setup layer 1 create W = %d H = %d\n\r", LAYER1_WIDTH, LAYER1_HEIGHT);
+	pixmap_1 = gdispPixmapCreate(LAYER1_WIDTH, LAYER1_HEIGHT);
+	surface_1 = gdispPixmapGetBits(pixmap_1);
+	// Draw transparency required on layer 1
+	pixmap_draw(pixmap_1, surface_1, LAYER1_WIDTH, LAYER1_HEIGHT, NULL, 0, 0, 0, 0, 0, POSITION_MIDDLE_CENTER);
+	
+
+	// Blit surface_1 to the real display at the new position
+	//g_nn =1;
+	gdispBlitArea(LAYER0_WIDTH - LAYER1_WIDTH - BORDER_X, BORDER_Y, LAYER1_WIDTH, LAYER1_HEIGHT, surface_1);
+	               1920        - 1216         - 16           16        1216             912
+                          x_st = 688				y_st = 16    W               H
+§âsurface_1Å|¦X¨ìLayer0, ±qLayer0ªºx_st y_st¶}©l, ¼e«×W = 1216, °ª«×H = 912
+
+
+
+
+update add picture START step_3 my dma draw pixmap_draw3----------------
+david1003: ../src/gfile/gfile.c:gfileOpen(274) filename = step3.png
+picture step_3 W X H = 760 X 384
+
+pixmap_draw : w = 760, h = 384, sx = 0, sy = 0, sW =760, sH = 384, W = 1216, H = 912, dx = 228, dy = 264, dW = 760, dH = 384, alpha = 207, pos = 0
+gdispGImageDraw_PNG : sx = 0, sy = 0, dx = 228, dy = 264, dW = 760, dH = 384
+pic ok, time1 = 12, time2 = 1951, time3 = 1366
+
+	//xil_printf("enter pixmap_draw\r\n");
+	// Clear pixmap with 0
+
+	xil_printf("surface addr = 0x%08x\r\n", surface);
+
+	//memset(surface, 0, W * H * 4); // Clear buffer
+
+
+	// Overlay file is necessary
+	if(p_Image != NULL) {
+			dy = (H - h) >> 0;
+		xil_printf("pixmap_draw : w = %d, h = %d, sx = %d, sy = %d, sW =%d, sH = %d, W = %d, H = %d, dx = %d, dy = %d, dW = %d, dH = %d, alpha = %d, pos = %d\r\n", w, h, sx, sy, sWidth, sHeight, W, H, dx, dy, dWidth, dHeight, alpha, position);
+		//ex: step_3              w = 760, h = 384, sx = 0, sy = 0, sW =760, sH = 384, W = 1216, H = 912, dx = 0, dy = 0, dW =760, dH = 384(center)
+		//status = gdispGImageDraw(pixmap, p_Image, dx, dy, sWidth, sHeight, sx, sy);
+		//xil_printf("status draw: %d\r\n", status);
+	}
+	else
+	{
+		xil_printf("pixmap_draw : clear image\n\r");
+	}
+
+	int length;
+
+    // Draw transparency required on layer 1
+	length = 1216;
+    for(j = 0; j < H; j++)
+    {
+    	dma_copy(addr_empty_pic, (u32) surface + length * 4 * j, length);
+    }
+
+    length = 400;
+    for(j = dy; j < dy + h; j++)
+    {
+    	dma_copy(addr_tmp_pic, (u32) surface + 1216 * 4 * j + dx * 4, length);
+    }
+
+
+
+
+
+
+
+XPAR_SCUTIMER_INTR = 29
+
+XPAR_XGPIOPS_0_INTR = 52
+XPAR_XUSBPS_0_INTR = 53
+XPAR_XUARTPS_0_INTR = 59
+
+XPS_FPGA10_INT_ID = 86
+
+
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 29 BaseAddr = 0xF8F01000 offset= 0x00000100 data = 0x20000000 group = 0
+
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 52 BaseAddr = 0xF8F01000 offset= 0x00000104 data = 0x00100000 group = 1
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 53 BaseAddr = 0xF8F01000 offset= 0x00000104 data = 0x00200000 group = 1
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 59 BaseAddr = 0xF8F01000 offset= 0x00000104 data = 0x08000000 group = 1
+
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 86 BaseAddr = 0xF8F01000 offset= 0x00000108 data = 0x00400000 group = 2
+
+
+
+
+XPAR_SCUTIMER_INTR
+XPAR_XUARTPS_0_INTR
+XPAR_XGPIOPS_0_INTR
+XPS_FPGA10_INT_ID
+
+	// SCUTIMER - Connect the device driver handler that will be called when an interrupt for the device occurs
+	status = XScuGic_Connect(p_periphs_inst->p_scugic_inst, XPAR_SCUTIMER_INTR,
+				(Xil_ExceptionHandler)scutimer_IntrHandler, p_periphs_inst->p_scutimer_inst);
+
+	// psuart0 - Connect the device driver handler that will be called when an interrupt for the device occurs
+	// Print UART settings
+	status = XScuGic_Connect(p_periphs_inst->p_scugic_inst, XPAR_XUARTPS_0_INTR,
+				(Xil_ExceptionHandler)XUartPs_InterruptHandler, p_periphs_inst->p_psuart0_inst);
+
+	// GPIOPS - Connect the device driver handler that will be called when an interrupt for the device occurs
+	// The handler defined above performs the specific interrupt processing for the device.
+	status = XScuGic_Connect(p_periphs_inst->p_scugic_inst, XPAR_XGPIOPS_0_INTR,
+				(Xil_ExceptionHandler)XGpioPs_IntrHandler, p_periphs_inst->p_ps_gpio_inst);
+
+	// Lock Monitor - Connect the device driver handler that will be called when an interrupt for the device occurs
+	// The handler defined above performs the specific interrupt processing for the device.
+	// Use XPS define due to bug in generated x_parameter.h
+	status = XScuGic_Connect(p_periphs_inst->p_scugic_inst, XPS_FPGA10_INT_ID,
+				(Xil_ExceptionHandler)lock_monitor_IntrHandler, p_periphs_inst->p_lock_monitor_inst);
+
+	// Connect USB to SCUGIC
+	// Remaining parts are in TinyUSB HAL
+	status = XScuGic_Connect(p_periphs_inst->p_scugic_inst, XPAR_XUSBPS_0_INTR,
+				//(Xil_ExceptionHandler)XUsbPs_IntrHandler,
+				(Xil_ExceptionHandler)psusb0_IntrHandler,
+				(void *)p_periphs_inst->p_psusb0_inst);
+
+	// Enable the scugic interrupt for the scutimer.
+	XScuGic_Enable(p_periphs_inst->p_scugic_inst, XPAR_SCUTIMER_INTR);
+
+	/* Enable the interrupt for the device */
+	XScuGic_Enable(p_periphs_inst->p_scugic_inst, XPAR_XUARTPS_0_INTR);
+
+	// Enable the interrupt for the PS GPIO device.
+	XScuGic_Enable(p_periphs_inst->p_scugic_inst, XPAR_XGPIOPS_0_INTR);
+
+	// Enable the interrupt for the lock monitor device.
+	XScuGic_Enable(p_periphs_inst->p_scugic_inst, XPS_FPGA10_INT_ID);
+
+
+
+
+
+
+
+    xil_printf("setup VDMA framebuffer addresses\r\n");
+    xil_printf("fb_camera_start_addr \t\t= FRAMEBUFFER_CAMERA_START_ADDR \t= 0x%08x\tcamera vdma\r\n", FRAMEBUFFER_CAMERA_START_ADDR);
+    xil_printf("fb_camera_freeze_start_addr \t= FRAMEBUFFER_CAMERA_FREEZE_START_ADDR \t= 0x%08x\tcamera freeze vdma\r\n", FRAMEBUFFER_CAMERA_FREEZE_START_ADDR);
+    xil_printf("fb_GUI_start_addr \t\t= FRAMEBUFFER_GUI_START_ADDR \t\t= 0x%08x\tgui\r\n", FRAMEBUFFER_GUI_START_ADDR);
+
+
+
+	xil_printf("david1026: %s:%s(%d) XPAR_PS7_DDR_0_S_AXI_BASEADDR = 0x%08x\r\n", __FILE__, __func__, __LINE__, XPAR_PS7_DDR_0_S_AXI_BASEADDR);
+	xil_printf("david1026: %s:%s(%d) FRAMEBUFFER_GUI_START_ADDR = 0x%08x\r\n", __FILE__, __func__, __LINE__, FRAMEBUFFER_GUI_START_ADDR);
+	xil_printf("david1026: %s:%s(%d) FRAMEBUFFER_CAMERA_START_ADDR = 0x%08x\r\n", __FILE__, __func__, __LINE__, FRAMEBUFFER_CAMERA_START_ADDR);
+	xil_printf("david1026: %s:%s(%d) FRAMEBUFFER_CAMERA_FREEZE_START_ADDR = 0x%08x\r\n", __FILE__, __func__, __LINE__, FRAMEBUFFER_CAMERA_FREEZE_START_ADDR);
+david1026: ../src/periphs.c:periphs_init(437) XPAR_PS7_DDR_0_S_AXI_BASEADDR = 0x00100000
+david1026: ../src/periphs.c:periphs_init(438) FRAMEBUFFER_GUI_START_ADDR = 0x30100000
+david1026: ../src/periphs.c:periphs_init(439) FRAMEBUFFER_CAMERA_START_ADDR = 0x32100000
+david1026: ../src/periphs.c:periphs_init(440) FRAMEBUFFER_CAMERA_FREEZE_START_ADDR = 0x32500000
+
+
+
+VTD	Video Timing Detector
+TPG	Test Pattern Generator
+VTG	Video Timing Generator
+
+
+Initializing peripheral drivers.
+Initializing PS GPIO.
+Initializing video lock monitor GPIO. video_lock_device_id = 0
+david1029: xgpio.c:XGpio_CfgInitialize(138) BaseAddr = 0x41200000
+Initializing GUI TPG.
+Initializing Camera Freeze Scaler.
+david1029: xgpio.c:XGpio_CfgInitialize(138) BaseAddr = 0x43D10000
+
+
+
+Cell				Base Addr	High Addr
+PS7_RAM_0			0x0000_0000	0x0002_ffff
+PS7_DDR_0			0x0010_0000	0x3fff_ffff
+framebuffer_vdma_camera		0x4300_0000	0x4300_ffff
+framebuffer_vdma_camera_freeze	0x4303_0000	0x4303_ffff
+mixer				0x43cc_0000	0x43cf_ffff
+PS7_UART_0			0xe000_0000	0xe000_0fff
+PS7_UART_1			0xe000_1000	0xe000_1fff
+
+video_lock_monitor		0x4120_0000	0x4120_ffff
+
+vidwo_out_CH7038		0x43c8_0000	0x43c8_ffff
+vidwo_out_TFP410		0x43c9_0000	0x43c9_ffff
+mix_0				0x43cc_0000	0x43cf_ffff
+
+
+
+periphs_t periphs_inst;
+
+
+int main()
+{
+    // Initialize peripherals
+    status = periphs_init
+    (
+	&periphs_inst,
+	XPAR_PS7_GPIO_0_DEVICE_ID,
+	XPAR_VIDEO_PATH_VIDEO_OUT_VIDEO_LOCK_MONITOR_DEVICE_ID,
+	XPAR_PS7_SCUGIC_0_DEVICE_ID,
+	XPAR_PS7_SCUTIMER_0_DEVICE_ID,
+	XPAR_PS7_UART_0_DEVICE_ID,
+	XPAR_VIDEO_PATH_V_TPG_0_DEVICE_ID,
+	XPAR_VIDEO_PATH_CAMERA_SCALER_FREEZE_V_PROC_SS_1_DEVICE_ID,
+	XPAR_VIDEO_PATH_FRAMEBUFFER_AXI_VDMA_CAMERA_DEVICE_ID,
+	XPAR_VIDEO_PATH_FRAMEBUFFER_AXI_VDMA_CAMERA_FREEZE_DEVICE_ID,
+	XPAR_VIDEO_PATH_OUTPUT_MIXER_V_MIX_0_DEVICE_ID,
+	XPAR_VIDEO_PATH_VIDEO_OUT_V_TC_TFP410_DEVICE_ID,
+	XPAR_VIDEO_PATH_VIDEO_OUT_V_TC_CH7038_DEVICE_ID,
+	XPAR_PS7_USB_0_DEVICE_ID,
+	FRAMEBUFFER_CAMERA_START_ADDR,
+	FRAMEBUFFER_CAMERA_FREEZE_START_ADDR,
+	FRAMEBUFFER_GUI_START_ADDR
+    );
+
+typedef struct periphs
+{
+	XGpioPs*	p_ps_gpio_inst;
+	XGpio* 		p_lock_monitor_inst;
+	XScuGic*	p_scugic_inst;
+	XScuTimer*	p_scutimer_inst;
+	XUartPs*	p_psuart0_inst;
+	vid_io_intf_t*  p_vid_io_camera_inst;
+	vid_io_intf_t*  p_vid_io_camera_freeze_inst;
+	vid_io_intf_t*  p_vid_io_GUI_inst;
+	XV_tpg*         p_tpg_GUI_inst;
+	XVprocSs*       p_scaler_camera_inst;
+	XVprocSs*       p_scaler_camera_freeze_inst;
+	XAxiVdma*       p_vdma_camera_inst;
+	XAxiVdma*       p_vdma_camera_freeze_inst;
+	XAxiVdma*       p_vdma_GUI_inst;
+	XV_Mix_l2*	p_vid_output_mixer_l2_inst;
+	XVtc*           p_vtg_inst_0;
+	XVtc*           p_vtg_inst_1;
+	XUsbPs*		p_psusb0_inst;
+	
+	// Frame buffer addresses
+	unsigned int    fb_camera_start_addr;
+	unsigned int    fb_camera_freeze_start_addr;
+	unsigned int    fb_GUI_start_addr;
+	// Current scaler to use
+	scaler_option_t which_scaler;
+	
+	// Whether or not to bypass the TPG
+	tpg_option_t    bypass_GUI_tpg;
+
+	park_option_t	enable_camera_freeze_vdma;	//PERIPHS_SEL_DISABLE_PARK(0) or PERIPHS_SEL_ENABLE_PARK(1)
+
+} periphs_t;
+    
+typedef enum
+{
+	PERIPHS_SEL_DISABLE_PARK = 0,
+	PERIPHS_SEL_ENABLE_PARK = 1
+} park_option_t;
+
+
+
+
+						
+Åª¼gUSB¼È¦s¾¹¡G
+
+			case 'q':
+				u32 value;
+				value = Xil_In32((0xF8000000U) + (u32)(0x00000210));
+				xil_printf("value = 0x%x\n\r",value);
+				break;
+			case 'r':
+				xil_printf("reset 3\n\r");
+				value = 3;
+				Xil_Out32((0xF8000000U) + (u32)(0x00000210), value);
+
+				xil_printf("read\n\r");
+
+				//ehci_registers_t* const regs = get_operational_register(hostid);
+				ehci_registers_t* regs = (ehci_registers_t*) (XPAR_XUSBPS_0_BASEADDR+XUSBPS_CMD_OFFSET);
+
+				xil_printf("value1 = 0x%x\n\r",regs->usb_cmd_bit);
+				xil_printf("value2 = 0x%x\n\r",regs->usb_cmd_bit.run_stop);
+
+
+
+¦bmain.c©I¥sµ{¦¡¡G
+//iic_init(IicPs, DeviceId, ClkRate);
+//test_gpio(&periphs_inst);		ok
+
+
+
+//scu timer interrupts every 2 msec
+//scutimer base = 0xF8F00600
+
+	/*
+	 * Unlock SLCR for SLCR register write
+	 */
+	// SLCR: System Level Control Registers, XPS_SYS_CTRL_BASEADDR 0xF8000000U
+	SlcrUnlock();
+	
+				
+		else if(buffer[0] == 'o')
+		{
+			if(flag_updateConsoleWidgets == 1)
+			{
+				xil_printf("OSD test, turn off OSD\n\r");
+				flag_updateConsoleWidgets = 0;
+				gwinSetBgColor(GW, Black);
+				gwinClear(GW);
+			}
+			else
+			{
+				xil_printf("OSD test, turn on OSD\n\r");
+				flag_updateConsoleWidgets = 1;
+			}
+		}
+			
+
+
+			
+
+si570.h
+#define I2C_MUX_CHIP_ADDR    0xD0
+#define SI570_I2C_CHIP_ADDR  0xD0
+
+
+		/*
+		 *
+		fail to read 2 bytes by one command
+
+		DongleDataArray[0] = '0xff';
+		DongleDataArray[1] = '0xff';
+		DongleAddr = 0x300a;
+		DongleDataArray[0] = dongle_read_n_data(DongleAddr, 2);
+		//xil_printf("addr = 0x%x, data = 0x%x 0x%x\n\r", DongleAddr, DongleDataArray[0], DongleDataArray[1]);
+		*/
+
+
+psuart0.c
+
+
+						
+						xil_printf("\n\rRead registers\n\r");
+
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_CR = 0x%x\r\n",__FILE__,__func__,__LINE__,
+								XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_CR_OFFSET));
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_CR_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_CR = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_SR_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_SR = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_PARKPTR_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_PARKPTR = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_VERSION_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_VERSION = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_TX_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_TX = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_RX_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_RX = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_VSIZE_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_VSIZE = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_HSIZE_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_HSIZE = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_STRD_FRMDLY_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_STRD_FRMDLY = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_START_ADDR_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_START_ADDR = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_START_ADDR_LEN);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_START_ADDR_LEN = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						RegValue = XAxiVdma_ReadReg((&periphs_inst)->p_vdma_camera_inst->BaseAddr, XAXIVDMA_START_ADDR_MSB_OFFSET);
+						xil_printf("david0725: %s:%s(%d) XAXIVDMA_START_ADDR_MSB = 0x%x\r\n", __FILE__,__func__,__LINE__, RegValue);
+
+						
+						
+
+void ps_gpio_test(void *CallBackRef)
+{
+	XGpioPs *Gpio = (XGpioPs *)CallBackRef;
+	xil_printf("LED test ST\r\n");
+
+	XGpioPs_WritePin(Gpio, GPIO_LED_1, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_2, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_3, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_4, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_5, 0);
+	usleep(200000);
+    usleep(200000);
+
+	xil_printf("LED 1\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_1, 1);
+	usleep(200000);
+    usleep(200000);
+
+	xil_printf("LED 2\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_1, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_2, 1);
+	usleep(200000);
+    usleep(200000);
+
+	xil_printf("LED 3\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_2, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_3, 1);
+	usleep(200000);
+    usleep(200000);
+
+    xil_printf("LED 4\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_3, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_4, 1);
+	usleep(200000);
+    usleep(200000);
+
+    xil_printf("LED 5\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_4, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_5, 1);
+	usleep(200000);
+    usleep(200000);
+
+	xil_printf("LED 3\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_5, 0);
+	XGpioPs_WritePin(Gpio, GPIO_LED_3, 1);
+	usleep(200000);
+    usleep(200000);
+
+	xil_printf("RED LED ON\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_RED, 1);
+	usleep(200000);
+    usleep(200000);
+
+	xil_printf("RED LED OFF\r\n");
+	XGpioPs_WritePin(Gpio, GPIO_LED_RED, 0);
+	usleep(200000);
+    usleep(200000);
+
+    xil_printf("LED test SP\r\n");
+
+
+}
+
+
+						
+						
+
+
+
+
+
+
+
+asctimeªº°µªk:
+
+
+char *asctime(const struct tm *timeptr)
+{
+    static char wday_name[7][3] = {
+        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+    };
+    static char mon_name[12][3] = {
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
+    static char result[26];
+
+
+    sprintf(result, "%.3s %.3s%3d %.2d:%.2d:%.2d %d\n",
+        wday_name[timeptr->tm_wday],
+        mon_name[timeptr->tm_mon],
+        timeptr->tm_mday, timeptr->tm_hour,
+        timeptr->tm_min, timeptr->tm_sec,
+        1900 + timeptr->tm_year);
+    return result;
+}
+
+
+
+	uint32_t g_ms_tick_st;
+	uint32_t g_ms_tick_sp;
+	
+	g_ms_tick_st = g_ms_tick;
+	g_conn_status = psuart0_dongle_ping();
+	g_ms_tick_sp = g_ms_tick;
+	
+	xil_printf("%s:%s(%d) tick_st = %d\r\n",__FILE__,__func__,__LINE__,g_ms_tick_st);
+	xil_printf("%s:%s(%d) tick_sp = %d\r\n",__FILE__,__func__,__LINE__,g_ms_tick_sp);
+	xil_printf("%s:%s(%d) tick1_diff = %d\r\n",__FILE__,__func__,__LINE__,g_ms_tick_sp - g_ms_tick_st);
+	
+	
+	
+	
+
+
+
+Xilinx_Vivado_SDK_2016.4_0124_1		¬°64¦ì¤¸ª©¥»
+
+
+
+
+
+
+
+david1105: addr = 0	READ	TUSB_REQUEST_GET_DESCRIPTOR	wLength = 8	TUSB_DESC_TYPE_DEVICE	
+
+
+¼Ð·Ç¸Ë¸m­n¨D
+­n¨D«¬ºA		­n¨D		¼Æ­È		«ü¼Ð	ªø«×	¸ê®Æ
+BmRequestType		Request		wValue		wIndex	wLength	data
+0x80		GET_DESCRIPTOR(0x06)						=>	80 06 (00 01) (00 00) (00 12)
+0x00		SET_ADDRESS(0x05)	¸Ë¸m¦ì§}	0	0	µL
+
+		GET_STATUS(0x00)
+		SET_CONFIGURATION(0x09)
+		GET_INTERFACE(0x0A)
+		SET_FEATURE(0x03)
+		CLEAR_FEATURE(0x01)
+
+
+READ	TUSB_REQUEST_GET_STATUS		0x00
+READ	TUSB_REQUEST_GET_DESCRIPTOR	0x06
+
+WRITE	TUSB_REQUEST_SET_ADDRESS	0x05
+WRITE	TUSB_REQUEST_SET_CONFIGURATION	0x09
+WRITE	TUSB_REQUEST_GET_INTERFACE	0x0A
+WRITE	TUSB_REQUEST_SET_FEATURE	0x03
+WRITE	TUSB_REQUEST_CLEAR_FEATURE	0x01
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=0, bmRequestType=0x80, bRequest=0x06, wValue=256, wIndex=0, wLength=8
+david1105: addr = 0	READ	TUSB_REQUEST_GET_DESCRIPTOR	wLength = 8	TUSB_DESC_TYPE_DEVICE	
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+david1105: ../host/usbh.c:enumeration_body_subtask(744) call usbh_control_xfer_subtask set TUSB_REQUEST_SET_ADDRESS new_addr = 1
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=0, bmRequestType=0x00, bRequest=0x05, wValue=1, wIndex=0, wLength=0
+david1105: addr = 0	WRITE	TUSB_REQUEST_SET_ADDRESS	wValue = 1	
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+david1105: ../host/usbh.c:enumeration_body_subtask(864) call usbh_control_xfer_subtask TUSB_REQUEST_SET_CONFIGURATION set configure
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x00, bRequest=0x09, wValue=1, wIndex=0, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_CONFIGURATION	wValue = 1	
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+david1105: ../host/usbh.c:enumeration_body_subtask(606) call usbh_control_xfer_subtask HUB_REQUEST_GET_STATUS get port status addr = 1
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 1	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 1	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=3, bmRequestType=0x21, bRequest=0x0A, wValue=0, wIndex=0, wLength=0
+david1105: addr = 3	WRITE	TUSB_REQUEST_GET_INTERFACE	wValue = 0	
+set up
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=3, bmRequestType=0x21, bRequest=0x0A, wValue=0, wIndex=0, wLength=0
+david1105: addr = 3	WRITE	TUSB_REQUEST_GET_INTERFACE	wValue = 0	
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=1, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=1, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=2, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=2, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=3, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=3, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=4, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=1, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=4, wLength=0
+david1105: addr = 1	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+
+
+
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=1, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=1, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=2, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=2, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=4, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=8, wIndex=4, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 8	
+
+
+
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=4, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=4, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 4	
+
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x01, wValue=20, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_CLEAR_FEATURE	wValue = 20	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x01, wValue=20, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_CLEAR_FEATURE	wValue = 20	
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x01, wValue=20, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_CLEAR_FEATURE	wValue = 20	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x01, wValue=20, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_CLEAR_FEATURE	wValue = 20	
+
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x01, wValue=16, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_CLEAR_FEATURE	wValue = 16	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x01, wValue=16, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_CLEAR_FEATURE	wValue = 16	
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=4, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0x23, bRequest=0x03, wValue=4, wIndex=3, wLength=0
+david1105: addr = 2	WRITE	TUSB_REQUEST_SET_FEATURE	wValue = 4	
+
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(606) call usbh_control_xfer_subtask HUB_REQUEST_GET_STATUS get port status addr = 2
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+david1105: ../host/usbh.c:usbh_control_xfer_subtask(191) dev_addr=2, bmRequestType=0xA3, bRequest=0x00, wValue=0, wIndex=3, wLength=4
+david1105: addr = 2	READ	TUSB_REQUEST_GET_STATUS	wLength = 4	
+
+
+
+
+
+
+
+Aries Main Program
+Compiled time: Nov  6 2018 18:22:50
+../src/main.c:main(263)
+
+../src/main.c:main(264) tick = 0
+Initializing Video Input/Output interface.
+david1031: ../src/vid_io_intf.c:vid_io_intf_init(170) ST
+Checking for FMC IMAGEON card.
+david1031: ../src/vid_io_intf.c:vid_io_intf_init(262) FMC IMAGEON card not exist
+david1031: ../src/vid_io_intf.c:vid_io_intf_init(270) SP
+Initializing peripheral drivers.
+
+david1101: ../src/periphs.c:init_drivers(140) ST
+Initializing PS GPIO.
+Initializing video lock monitor GPIO. video_lock_device_id = 0
+david1029: xgpio.c:XGpio_CfgInitialize(138) BaseAddr = 0x41200000
+david1106: ../src/periphs.c:init_drivers(194) XScuTimer id = 0 base = 0xF8F00600
+david1102: xuartps.c:XUartPs_SetBaudRate(548) ST base = 0xE0000000 BaudRate = 115200
+Initializing GUI TPG.
+Initializing Camera Freeze Scaler. scaler_camera_freeze_device_id = 0
+Initializing Camera Freeze Scaler. base_addr = 0x43D00000
+XVprocSs_CfgInitialize. base_addr = 0x43D00000
+david1029: xvprocss.c:XVprocSs_CfgInitialize(417) ST
+david1029: xvprocss_coreinit.c:XVprocSs_SubcoreInitResetAxis(142) ST BaseAddress = 0x43D00000
+david1029: xvprocss_coreinit.c:ComputeSubcoreAbsAddr(103) ST subsys_baseaddr = 0x43D00000 subcore_offset = 0x00010000 absAddr = 0x43D10000
+david1029: xvprocss_coreinit.c:XVprocSs_SubcoreInitResetAxis(148) ST AbsAddr = 0x43D10000
+david1029: xgpio.c:XGpio_CfgInitialize(138) BaseAddr = 0x43D10000
+david1029: xvprocss.c:XVprocSs_CfgInitialize(427) ST
+david1029: xvprocss_coreinit.c:ComputeSubcoreAbsAddr(103) ST subsys_baseaddr = 0x43D00000 subcore_offset = 0x00000000 absAddr = 0x43D00000
+david1029: xvprocss_coreinit.c:ComputeSubcoreAbsAddr(103) ST subsys_baseaddr = 0x43D00000 subcore_offset = 0x00020000 absAddr = 0x43D20000
+david1102: xvprocss.c:XVprocSs_Reset(802) call XVprocSs_ResetBlock ptr = 0x0025B2F0
+david1102: xvprocss.c:XVprocSs_ResetBlock(240) ST channel = 1, ipBlock = 3
+david1102: xgpio.c:XGpio_DiscreteRead(229) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000000
+david1102: xgpio.c:XGpio_DiscreteWrite(261) channel = 1 XGPIO_CHAN_OFFSET = 8 XGPIO_DATA_OFFSET = 0
+david1102: xgpio.c:XGpio_DiscreteWrite(263) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000000
+david1102: xvprocss.c:XVprocSs_Reset(807) call XVprocSs_ResetBlock ptr = 0x00000000
+david1102: xvprocss.c:XVprocSs_ResetBlock(247) ST do nothing since pReset = null
+david1102: xvprocss.c:XVprocSs_EnableBlock(217) ST do nothing since pReset = null
+david1102: xvprocss.c:XVprocSs_EnableBlock(210) ST channel = 1, ipBlock = 2
+david1102: xgpio.c:XGpio_DiscreteRead(229) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000000
+david1102: xgpio.c:XGpio_DiscreteWrite(261) channel = 1 XGPIO_CHAN_OFFSET = 8 XGPIO_DATA_OFFSET = 0
+david1102: xgpio.c:XGpio_DiscreteWrite(263) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000002
+david1102: xvprocss.c:XVprocSs_EnableBlock(210) ST channel = 1, ipBlock = 3
+david1102: xgpio.c:XGpio_DiscreteRead(229) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000002
+david1102: xgpio.c:XGpio_DiscreteWrite(261) channel = 1 XGPIO_CHAN_OFFSET = 8 XGPIO_DATA_OFFSET = 0
+david1102: xgpio.c:XGpio_DiscreteWrite(263) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000003
+XVprocSs_CfgInitialize. base_addr = 0x43D00000
+
+Initializing Camera VDMA. id = 0
+david1029: xaxivdma_sinit.c:XAxiVdma_LookupConfig(90) ST use table DeviceId = 0
+david1029: xaxivdma.c:XAxiVdma_CfgInitialize(162) setup MaxNumFrames = 4
+david1026: xaxivdma.c:XAxiVdma_CfgInitialize(169) BaseAddr = 0x43000000 max = 4 width = 32
+david1101: xaxivdma.c:XAxiVdma_CfgInitialize(171) XAxiVdma_Major(InstancePtr) = 6
+setup RdChannel
+david1026: xaxivdma.c:XAxiVdma_CfgInitialize(202) RdChannel dir = 2, ChanBase = 0x43000000, InstanceBase = 0x43000000, StartAddrBase = 0x43000050
+call XAxiVdma_ChannelInit RdChannel
+call XAxiVdma_ChannelReset RdChannel
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43000000 offset = 0x00000000 data = 0x00000004
+setup WrChannel
+david1026: xaxivdma.c:XAxiVdma_CfgInitialize(289) WrChannel dir = 1, ChanBase = 0x43000030, InstanceBase = 0x43000000, StartAddrBase = 0x430000A0
+call XAxiVdma_ChannelInit WrChannel
+call XAxiVdma_ChannelReset WrChannel
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43000030 offset = 0x00000000 data = 0x00000004
+
+Initializing Camera Freeze VDMA. id = 1
+david1029: xaxivdma_sinit.c:XAxiVdma_LookupConfig(90) ST use table DeviceId = 1
+david1029: xaxivdma.c:XAxiVdma_CfgInitialize(162) setup MaxNumFrames = 4
+david1026: xaxivdma.c:XAxiVdma_CfgInitialize(169) BaseAddr = 0x43030000 max = 4 width = 32
+david1101: xaxivdma.c:XAxiVdma_CfgInitialize(171) XAxiVdma_Major(InstancePtr) = 6
+setup RdChannel
+david1026: xaxivdma.c:XAxiVdma_CfgInitialize(202) RdChannel dir = 2, ChanBase = 0x43030000, InstanceBase = 0x43030000, StartAddrBase = 0x43030050
+call XAxiVdma_ChannelInit RdChannel
+call XAxiVdma_ChannelReset RdChannel
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43030000 offset = 0x00000000 data = 0x00000004
+setup WrChannel
+david1026: xaxivdma.c:XAxiVdma_CfgInitialize(289) WrChannel dir = 1, ChanBase = 0x43030030, InstanceBase = 0x43030000, StartAddrBase = 0x430300A0
+call XAxiVdma_ChannelInit WrChannel
+call XAxiVdma_ChannelReset WrChannel
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43030030 offset = 0x00000000 data = 0x00000004
+
+
+david1023: ../src/periphs.c:init_drivers(316) ST Initializing Video Mixer.
+Initializing Video Mixer. vid_output_mixer_device_id = 0
+david1029: xv_mix_sinit.c:XV_mix_Initialize(45) DeviceId = 0 BaseAddr = 0x43CC0000 NumLayers = 4
+david1030: xv_mix_l2.c:XVMix_Initialize(132) call SetPowerOnDefaultState
+david1016: xv_mix_l2.c:SetPowerOnDefaultState(153) ST Base = 0x43CC0000
+disable XVMIX_LAYER_ALL base = 0x43CC0000
+LayerEnable status : 0x00000000
+david1031: xv_mix_l2.c:SetPowerOnDefaultState(172) call XVMix_SetVidStream VmId = XVIDC_VM_CUSTOM = 148
+david1030: xv_mix_l2.c:XVMix_SetVidStream(356) video mode = 148 FrameRate = 60 PixPerClk = 1 ColorDepth = 8
+david1019: xv_mix_l2.c:XVMix_SetVidStream(357) ST call XV_mix_Set_HwReg_width set 1920
+david1019: xv_mix_l2.c:XVMix_SetVidStream(358) ST call XV_mix_Set_HwReg_height set 1200
+david1030: xv_mix.c:XV_mix_Set_HwReg_width(106) BaseAddr = 0x43CC0000 offset= 0x00000010 data = 0x00000780 = 1920
+david1030: xv_mix.c:XV_mix_Set_HwReg_height(130) BaseAddr = 0x43CC0000 offset= 0x00000018 data = 0x000004B0 = 1200
+david1016: xv_mix_l2.c:SetPowerOnDefaultState(182) call XVMix_SetBackgndColor ST XVMIX_BKGND_RED
+david1030: xv_mix.c:XV_mix_Get_HwReg_video_format(170) BaseAddr = 0x43CC0000 offset= 0x00000020 data = 0x00000000
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(515) ST ColorId = 2 cfmt = 0 bpc = 8
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(523) r = 1, g = 0, b = 0 scale = 255
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(524) R = 255, G = 0, B = 0 scale = 255
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(536) Set Background Color (R, G, B) = (255, 0, 0)
+david1030: xv_mix.c:XV_mix_Set_HwReg_background_Y_R(181) BaseAddr = 0x43CC0000 offset= 0x00000028 data = 0x000000FF
+david1030: xv_mix.c:XV_mix_Set_HwReg_background_U_G(200) BaseAddr = 0x43CC0000 offset= 0x00000030 data = 0x00000000
+david1030: xv_mix.c:XV_mix_Set_HwReg_background_V_B(222) BaseAddr = 0x43CC0000 offset= 0x00000038 data = 0x00000000
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(540) SP ColorId = 2 cfmt = 0
+
+david1016: xv_mix_l2.c:SetPowerOnDefaultState(188) call XVMix_SetBackgndColor SP
+david1031: xv_mix_l2.c:SetPowerOnDefaultState(200) index = 1 LayerMaxWidth = 1920
+david1031: xv_mix_l2.c:SetPowerOnDefaultState(200) index = 2 LayerMaxWidth = 1920
+david1031: xv_mix_l2.c:SetPowerOnDefaultState(200) index = 3 LayerMaxWidth = 1920
+david1030: xv_mix_l2.c:XVMix_LayerEnable(389) ST NumLayers = 4, enable layer 0
+LayerEnable status : 0x00000001
+XVMix_InterruptDisable call XV_mix_EnableAutoRestart
+XV_mix_EnableAutoRestart
+david1016: xv_mix_l2.c:SetPowerOnDefaultState(209) SP Base = 0x43CC0000
+Initializing Video Mixer. OK
+david1105: ../src/periphs.c:init_drivers(325) NumLayers = 4
+
+
+david1023: ../src/periphs.c:init_drivers(327) ST Initializing VTG_0.
+Initializing VTG_0. vtg_device_id_0 = 1, for TFP410
+david1029: xvtc.c:XVtc_CfgInitialize(238) BaseAddr = 0x43C90000
+
+david1023: ../src/periphs.c:init_drivers(343) ST Initializing VTG_1.
+Initializing VTG_1. vtg_device_id_1 = 0, for CH7038
+david1029: ../src/periphs.c:init_drivers(352) BaseAddr = 0x43C80000
+david1029: xvtc.c:XVtc_CfgInitialize(238) BaseAddr = 0x43C80000
+
+david1101: ../src/periphs.c:init_drivers(374) SP
+
+
+david1023: ../src/periphs.c:periphs_init(494) Video Path Config ST
+
+Bringing up input pipeline.
+
+david1023: ../src/periphs.c:periphs_bring_up_input_pipeline(1197) ST
+
+call vdma_reset 1 camera vdma, base = 0x43000000
+Resetting VDMA ... base addr = 0x43000000 direction = 1	Camera VDMA		XAXIVDMA_WRITE
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43000030 offset = 0x00000000 data = 0x00000004
+david1026: xaxivdma.c:XAxiVdma_Reset(410) VDMA BaseAddr = 0x43000000 ChanBase = 0x43000030 dir = 1
+
+call vdma_reset 2 camera freeze vdma, base = 0x43030000
+Resetting VDMA ... base addr = 0x43030000 direction = 1	Camera Freeze VDMA	XAXIVDMA_WRITE
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43030030 offset = 0x00000000 data = 0x00000004
+david1026: xaxivdma.c:XAxiVdma_Reset(410) VDMA BaseAddr = 0x43030000 ChanBase = 0x43030030 dir = 1
+
+Set up camera vdma write channel call framebuffer_write, setup start_addr = 0x32100000
+david1026: ../src/framebuffer.c:framebuffer_write(292) framebuffer_write base = 0x43000000 bits_per_pixel = 16 hsize = 640 vsize = 480 buf_base_addr = 0x32100000 stride = 2048
+david1026: ../src/framebuffer.c:set_vdma_write(36) ST Base = 0x43000000 bits_per_pixel = 16 H = 640 V = 480 buf_base_addr = 0x32100000 stride = 2048
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelConfig(858) StartAddrBase = 0x430000A0 addr = 0x00000004 hsize = 0x00000500 = 1280
+david1026: ../src/framebuffer.c:set_vdma_write(60) MaxNumFrames = 4 Stride = 2048 VertSizeInput = 480 cur_fb_addr = 0x32100000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 0 write_setup_inst.FrameStoreStartAddr[0] = 0x32100000 cur_fb_addr = 0x32100000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 1 write_setup_inst.FrameStoreStartAddr[1] = 0x321F0000 cur_fb_addr = 0x321F0000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 2 write_setup_inst.FrameStoreStartAddr[2] = 0x322E0000 cur_fb_addr = 0x322E0000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 3 write_setup_inst.FrameStoreStartAddr[3] = 0x323D0000 cur_fb_addr = 0x323D0000
+david1026: ../src/framebuffer.c:set_vdma_write(79) call XAxiVdma_DmaSetBufferAddr dir = 1
+
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1080) Base = 0x43000000 ChanBase = 0x43000030 NumFrames = 4 Direction = 1	XAXIVDMA_WRITE
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1095) ST call XAxiVdma_ChannelSetBufferAddr
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430000A0 offset0 = 0x0000000C Loop16 = 0 offset1 = 0x0000000C data = 0x32100000 i = 0
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430000A0 offset0 = 0x0000000C Loop16 = 1 offset1 = 0x00000010 data = 0x321F0000 i = 1
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430000A0 offset0 = 0x0000000C Loop16 = 2 offset1 = 0x00000014 data = 0x322E0000 i = 2
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430000A0 offset0 = 0x0000000C Loop16 = 3 offset1 = 0x00000018 data = 0x323D0000 i = 3
+david1026: ../src/periphs.c:periphs_bring_up_input_pipeline(1228) framebuffer_write camera vdma HActive = 640 VActive = 480 start_addr = 0x32100000
+
+Set up camera freeze vdma write channel call framebuffer_write, setup start addr = 0x32500000
+david1026: ../src/framebuffer.c:framebuffer_write(292) framebuffer_write base = 0x43030000 bits_per_pixel = 16 hsize = 640 vsize = 480 buf_base_addr = 0x32500000 stride = 2048
+david1026: ../src/framebuffer.c:set_vdma_write(36) ST Base = 0x43030000 bits_per_pixel = 16 H = 640 V = 480 buf_base_addr = 0x32500000 stride = 2048
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelConfig(858) StartAddrBase = 0x430300A0 addr = 0x00000004 hsize = 0x00000500 = 1280
+david1026: ../src/framebuffer.c:set_vdma_write(60) MaxNumFrames = 4 Stride = 2048 VertSizeInput = 480 cur_fb_addr = 0x32500000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 0 write_setup_inst.FrameStoreStartAddr[0] = 0x32500000 cur_fb_addr = 0x32500000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 1 write_setup_inst.FrameStoreStartAddr[1] = 0x325F0000 cur_fb_addr = 0x325F0000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 2 write_setup_inst.FrameStoreStartAddr[2] = 0x326E0000 cur_fb_addr = 0x326E0000
+david1026: ../src/framebuffer.c:set_vdma_write(67) ii = 3 write_setup_inst.FrameStoreStartAddr[3] = 0x327D0000 cur_fb_addr = 0x327D0000
+david1026: ../src/framebuffer.c:set_vdma_write(79) call XAxiVdma_DmaSetBufferAddr dir = 1
+
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1080) Base = 0x43030000 ChanBase = 0x43030030 NumFrames = 4 Direction = 1	XAXIVDMA_WRITE
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1095) ST call XAxiVdma_ChannelSetBufferAddr
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430300A0 offset0 = 0x0000000C Loop16 = 0 offset1 = 0x0000000C data = 0x32500000 i = 0
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430300A0 offset0 = 0x0000000C Loop16 = 1 offset1 = 0x00000010 data = 0x325F0000 i = 1
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430300A0 offset0 = 0x0000000C Loop16 = 2 offset1 = 0x00000014 data = 0x326E0000 i = 2
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x430300A0 offset0 = 0x0000000C Loop16 = 3 offset1 = 0x00000018 data = 0x327D0000 i = 3
+david1026: ../src/periphs.c:periphs_bring_up_input_pipeline(1245) framebuffer_write camera freeze vdma HActive = 640 VActive = 480 start_addr = 0x32500000
+
+DMA start camera VDMA XAXIVDMA_WRITE
+david1026: xaxivdma.c:XAxiVdma_DmaStart(1134) BaseAddr = 0x43000000 ChanBase = 0x43000030 dir = XAXIVDMA_WRITE	call XAxiVdma_ChannelStart
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1062) Start DMA hardware, BaseAddr = 0x43000030 offset= 0x00000000 data = 0x0001808B
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1091) Start DMA transfers, StartAddrBase = 0x430000A0 addr= 0x00000000 vsize = 480, START the channel
+
+DMA start camera freeze VDMA XAXIVDMA_WRITE
+david1026: xaxivdma.c:XAxiVdma_DmaStart(1134) BaseAddr = 0x43030000 ChanBase = 0x43030030 dir = XAXIVDMA_WRITE	call XAxiVdma_ChannelStart
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1062) Start DMA hardware, BaseAddr = 0x43030030 offset= 0x00000000 data = 0x0001808B
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1091) Start DMA transfers, StartAddrBase = 0x430300A0 addr= 0x00000000 vsize = 480, START the channel
+david1023: ../src/periphs.c:periphs_bring_up_input_pipeline(1281) SP
+
+Bringing up output pipeline. vid = VIDEO_RESOLUTION_1080P = 7 fb_GUI_start_addr = 0x30100000
+
+david1023: ../src/periphs.c:periphs_bring_up_output_pipeline(1303) ST vid = 7 fb_GUI_start_addr = 0x30100000
+call vres_get_timing for vres_timing0, vid = 0 (VGA)
+
+vres_get_timing, ResolutionId = 0
+	pName = VGA
+	HActiveVideo = 640
+	HFrontPorch = 16
+	HSyncWidth = 96
+	HBackPorch = 48
+	HSyncPolarity = 0
+	VActiveVideo = 480
+	VFrontPorch = 10
+	VSyncWidth = 2
+	VBackPorch = 33
+	VSyncPolarity = 0
+
+call vres_get_timing for vres_timing1, vid = 7 (1080p)
+
+vres_get_timing, ResolutionId = 7
+	pName = 1080P
+	HActiveVideo = 1920
+	HFrontPorch = 88
+	HSyncWidth = 44
+	HBackPorch = 148
+	HSyncPolarity = 1
+	VActiveVideo = 1080
+	VFrontPorch = 4
+	VSyncWidth = 5
+	VBackPorch = 36
+	VSyncPolarity = 1
+
+Reset VTG 0/1.
+david1101: xvtc.c:XVtc_Disable(467) BaseAddr = 0x43C90000 offset= 0x00000000 data = 0x00000000
+david1101: xvtc.c:XVtc_Disable(467) BaseAddr = 0x43C80000 offset= 0x00000000 data = 0x00000000
+vtg_inst_0 base = 0x43C90000 VTG_0(TFP410)
+vtg_inst_1 base = 0x43C80000 VTG_1(CH7038)
+
+call vdma_reset 3 camera vdma, base = 0x43000000
+Resetting VDMA ... base addr = 0x43000000 direction = 2	Camera VDMA		XAXIVDMA_READ
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43000000 offset = 0x00000000 data = 0x00000004
+david1026: xaxivdma.c:XAxiVdma_Reset(410) VDMA BaseAddr = 0x43000000 ChanBase = 0x43000000 dir = 2
+
+call vdma_reset 4 camera freeze vdma, base = 0x43030000
+Resetting VDMA ... base addr = 0x43030000 direction = 2	Camera Freeze VDMA	XAXIVDMA_READ
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelReset(262) channel reset ChanBase = 0x43030000 offset = 0x00000000 data = 0x00000004
+david1026: xaxivdma.c:XAxiVdma_Reset(410) VDMA BaseAddr = 0x43030000 ChanBase = 0x43030000 dir = 2
+
+Configure VTG 0 and VTG 1, vid = 7
+david1101: ../src/vid_io_intf.c:vid_io_intf_update_output_fsize(361) call vres_get_timing, vid = 7
+
+vres_get_timing, ResolutionId = 7
+	pName = 1080P
+	HActiveVideo = 1920
+	HFrontPorch = 88
+	HSyncWidth = 44
+	HBackPorch = 148
+	HSyncPolarity = 1
+	VActiveVideo = 1080
+	VFrontPorch = 4
+	VSyncWidth = 5
+	VBackPorch = 36
+	VSyncPolarity = 1
+
+Set VTG_0 output timing, vid = 7 base = 0x43C90000 VTG_0(TFP410)
+
+david1031: ../src/vtiming_gen.c:vtiming_gen_config(168) ST vid = 7
+	Video Resolution = 1080P
+
+vres_get_timing, ResolutionId = 7
+	pName = 1080P
+	HActiveVideo = 1920
+	HFrontPorch = 88
+	HSyncWidth = 44
+	HBackPorch = 148
+	HSyncPolarity = 1
+	VActiveVideo = 1080
+	VFrontPorch = 4
+	VSyncWidth = 5
+	VBackPorch = 36
+	VSyncPolarity = 1
+
+	VTC Generator Configuration
+		Horizontal Timing:
+			HActiveStart = 0
+			HFrontPorchStart 1920
+			HSyncStart 2008
+			HBackPorchStart 2052
+			HTotal = 2200
+		Vertical Timing:
+			V0ActiveStart 0
+			V0FrontPorchStart 1080
+			V0SyncStart 1084
+			V0BackPorchStart 1089
+			V0Total 1125
+david1101: xvtc.c:XVtc_SetGenerator(1375) ST
+david1101: xvtc.c:XVtc_SetGeneratorHoriOffset(1189) ST
+david1101: xvtc.c:XVtc_SetSource(740) BaseAddr = 0x43C90000 offset= 0x00000000 data = 0x03F7EF00
+
+Set VTG_1 output timing, vid = 7 base = 0x43C80000 VTG_1(CH7038)
+
+david1031: ../src/vtiming_gen.c:vtiming_gen_config(168) ST vid = 7
+	Video Resolution = 1080P
+
+vres_get_timing, ResolutionId = 7
+	pName = 1080P
+	HActiveVideo = 1920
+	HFrontPorch = 88
+	HSyncWidth = 44
+	HBackPorch = 148
+	HSyncPolarity = 1
+	VActiveVideo = 1080
+	VFrontPorch = 4
+	VSyncWidth = 5
+	VBackPorch = 36
+	VSyncPolarity = 1
+
+	VTC Generator Configuration
+		Horizontal Timing:
+			HActiveStart = 0
+			HFrontPorchStart 1920
+			HSyncStart 2008
+			HBackPorchStart 2052
+			HTotal = 2200
+		Vertical Timing:
+			V0ActiveStart 0
+			V0FrontPorchStart 1080
+			V0SyncStart 1084
+			V0BackPorchStart 1089
+			V0Total 1125
+david1101: xvtc.c:XVtc_SetGenerator(1375) ST
+david1101: xvtc.c:XVtc_SetGeneratorHoriOffset(1189) ST
+david1101: xvtc.c:XVtc_SetSource(740) BaseAddr = 0x43C80000 offset= 0x00000000 data = 0x03F7EF00
+
+Initialize Video Mixer and settings.
+david1101: xv_mix_l2.c:XVMix_GetLayerColorFormat(1209) LayerId = 0 Cfmt = 0
+david1101: xvidc.c:XVidC_GetVideoModeId(451) Got VID = 101
+david1101: xvidc.c:XVidC_GetVideoModeId(458) Got VID = 101
+david1026: ../src/periphs.c:periphs_bring_up_output_pipeline(1361) resId = 101 XVIDC_VM_1920x1080_60_P = 101
+david1026: ../src/periphs.c:periphs_bring_up_output_pipeline(1374) vid = 101 HActive = 1920 VActive = 1080 ColorFormatId = 0
+
+configure mixer call ConfigMixer, base = 0x43CC0000 fb_GUI_start_addr = 0x30100000
+david1105: ../src/periphs.c:periphs_bring_up_output_pipeline(1402) NumLayers = 4
+david1030: ../src/mixer.c:ConfigMixer(31) ST base = 0x43CC0000 MemAddr = 0x30100000 vid = 101
+LayerEnable status : 0x00000000
+david1030: xv_mix_l2.c:XVMix_SetVidStream(356) video mode = 101 FrameRate = 60 PixPerClk = 1 ColorDepth = 8
+david1019: xv_mix_l2.c:XVMix_SetVidStream(357) ST call XV_mix_Set_HwReg_width set 1920
+david1019: xv_mix_l2.c:XVMix_SetVidStream(358) ST call XV_mix_Set_HwReg_height set 1080
+david1030: xv_mix.c:XV_mix_Set_HwReg_width(106) BaseAddr = 0x43CC0000 offset= 0x00000010 data = 0x00000780 = 1920
+david1030: xv_mix.c:XV_mix_Set_HwReg_height(130) BaseAddr = 0x43CC0000 offset= 0x00000018 data = 0x00000438 = 1080
+Set background color to XVMIX_BKGND_GREEN
+david1030: xv_mix.c:XV_mix_Get_HwReg_video_format(170) BaseAddr = 0x43CC0000 offset= 0x00000020 data = 0x00000000
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(515) ST ColorId = 3 cfmt = 0 bpc = 8
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(523) r = 0, g = 1, b = 0 scale = 255
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(524) R = 0, G = 255, B = 0 scale = 255
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(536) Set Background Color (R, G, B) = (0, 255, 0)
+david1030: xv_mix.c:XV_mix_Set_HwReg_background_Y_R(181) BaseAddr = 0x43CC0000 offset= 0x00000028 data = 0x00000000
+david1030: xv_mix.c:XV_mix_Set_HwReg_background_U_G(200) BaseAddr = 0x43CC0000 offset= 0x00000030 data = 0x000000FF
+david1030: xv_mix.c:XV_mix_Set_HwReg_background_V_B(222) BaseAddr = 0x43CC0000 offset= 0x00000038 data = 0x00000000
+david1016: xv_mix_l2.c:XVMix_SetBackgndColor(540) SP ColorId = 3 cfmt = 0
+
+david1030: xv_mix_l2.c:XVMix_LayerEnable(389) ST NumLayers = 4, enable layer 0
+LayerEnable status : 0x00000001
+XVMix_InterruptDisable call XV_mix_EnableAutoRestart
+XV_mix_EnableAutoRestart
+XVMix_Start
+david1031: xv_mix.c:XV_mix_Start(41) BaseAddr = 0x43CC0000 offset= 0x00000000 data = 0x00000081
+david1030: ../src/mixer.c:ConfigMixer(99) SP
+
+
+Mixer Debug	david1016: ../src/periphs.c:periphs_bring_up_output_pipeline(1416) call XVMix_DbgReportStatus
+
+XVMix_DbgReportStatus ----->MIXER STATUS<----
+Pixels Per Clock: 1
+Color Depth:      8
+Number of Layers: 4
+Control Reg:      0x00000081
+Layer Enable Reg: 0x00000001
+
+Layer Master: Enabled
+Layer 1     : Disabled
+Layer 2     : Disabled
+Layer 3     : Disabled
+david1016: xv_mix_l2.c:XVMix_DbgReportStatus(1672) Get Background Color R G B
+david1030: xv_mix.c:XV_mix_Get_HwReg_background_Y_R(192) BaseAddr = 0x43CC0000 offset= 0x00000028 data = 0x00000000
+Background Color Y/R: 0
+david1030: xv_mix.c:XV_mix_Get_HwReg_background_U_G(213) BaseAddr = 0x43CC0000 offset= 0x00000030 data = 0x000000FF
+Background Color U/G: 255
+david1030: xv_mix.c:XV_mix_Get_HwReg_background_V_B(233) BaseAddr = 0x43CC0000 offset= 0x00000038 data = 0x00000000
+Background Color V/B: 0
+
+david1016: ../src/periphs.c:periphs_bring_up_output_pipeline(1419) call XVMix_DbgLayerInfo
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 0
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1713) ST XVMIX_LAYER_MASTER
+
+
+----->Master Layer Status<----
+State: Enabled
+david1101: xv_mix_l2.c:XVMix_GetLayerColorFormat(1209) LayerId = 0 Cfmt = 0
+david1030: xv_mix.c:XV_mix_Get_HwReg_width(120)  BaseAddr = 0x43CC0000 offset= 0x00000010 data = 0x00000780 = 1920
+david1030: xv_mix.c:XV_mix_Get_HwReg_height(144) BaseAddr = 0x43CC0000 offset= 0x00000018 data = 0x00000438 = 1080
+Color Format: RGB
+
+Resolution: 1920 x 1080
+Stream Info->
+david1101: xvidc.c:XVidC_ReportStreamInfo(905) ST vid = 101
+	Color Format:     RGB
+	Color Depth:      8
+	Pixels Per Clock: 1
+	Mode:             Progressive
+	3D Format:        Frame Packing
+	Frame Rate:       60Hz
+	Resolution:       1920x1080@60Hz
+	Pixel Clock:      148500000
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 1
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 1
+
+----->Layer 1 Status<----
+State: Disabled
+Type : Stream
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 2
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 2
+
+----->Layer 2 Status<----
+State: Disabled
+Type : Stream
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 3
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 3
+
+----->Layer 3 Status<----
+State: Disabled
+Type : Memory
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 4
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 4
+
+----->Layer 4 Status<----
+State: Disabled
+Type : Memory
+
+
+
+Initialize GUI TPG to 1080P. bbb call test_pattern_gen_config, base = 0x43D40000 W = 1920 H = 1080
+david1023: ../src/test_pattern_gen.c:test_pattern_gen_config(56) w=1920 h = 1080 bypass = 0 blue=0 cfmt = 0 bg = 1 prt = 0
+background = 1	XTPG_BKGND_H_RAMP
+david1101: xv_tpg.c:XV_tpg_Set_bckgndId(136) BaseAddr = 0x43D40000 offset= 0x00000020 data = 0x00000001
+TPG offset 0x00 = 0x00000004
+TPG offset 0x10 = 0x00000438
+TPG offset 0x18 = 0x00000780
+TPG offset 0x20 = 0x00000001
+TPG offset 0x28 = 0x00000000
+TPG offset 0x30 = 0x00000000
+TPG offset 0x40 = 0x00000000
+TPG offset 0x98 = 0x00000000
+TPG offset 0xA0 = 0x00000000
+TPG offset 0xA8 = 0x00000000
+TPG offset 0xB0 = 0x00000000
+TPG offset 0xB8 = 0x00000000
+
+setup test pattern gen ok
+
+
+Setting up Camera Freeze scaler.  call scaler_new_set_size base = 0x43D00000
+
+base = 0x43D00000 input W = 640 H = 480, output W = 1216 H = 912
+david1023: ../src/scaler_new.c:scaler_new_set_size(111) set output stream, W = 1216 H = 912
+david1101: xvidc.c:XVidC_GetVideoModeId(455) Mode = XVIDC_VM_NOT_SUPPORTED = 147
+david1101: xvidc.c:XVidC_GetVideoModeId(458) Got VID = 147
+david1023: ../src/scaler_new.c:scaler_new_set_stream(38) dir = 1 W = 1216 H = 912 format = 2 fr = 60 int = 0 resId = 147
+SetVidStreamOut		XVIDC_VM_NOT_SUPPORTED 147	output stream
+david1023: ../src/scaler_new.c:scaler_new_set_size(127) set input stream, W = 640 H = 480
+david1101: xvidc.c:XVidC_GetVideoModeId(451) Got VID = 17
+david1101: xvidc.c:XVidC_GetVideoModeId(458) Got VID = 17
+david1023: ../src/scaler_new.c:scaler_new_set_stream(38) dir = 0 W = 640 H = 480 format = 2 fr = 60 int = 0 resId = 17
+SetVidStreamIn		XVIDC_VM_640x480_60_P	input stream
+david1101: xvprocss.c:XVprocSs_SetSubsystemConfig(1880) ST Base = 0x43D00000 XVprocSs_GetSubsystemTopology(InstancePtr) = 0
+david1101: xvprocss.c:ValidateScalerOnlyConfig(1188) OK
+david1101: xvprocss.c:SetupModeScalerOnly(1425) ST
+david1102: xvprocss.c:XVprocSs_Reset(802) call XVprocSs_ResetBlock ptr = 0x0025B2F0
+david1102: xvprocss.c:XVprocSs_ResetBlock(240) ST channel = 1, ipBlock = 3
+david1102: xgpio.c:XGpio_DiscreteRead(229) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000003
+david1102: xgpio.c:XGpio_DiscreteWrite(261) channel = 1 XGPIO_CHAN_OFFSET = 8 XGPIO_DATA_OFFSET = 0
+david1102: xgpio.c:XGpio_DiscreteWrite(263) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000000
+david1102: xvprocss.c:XVprocSs_Reset(807) call XVprocSs_ResetBlock ptr = 0x00000000
+david1102: xvprocss.c:XVprocSs_ResetBlock(247) ST do nothing since pReset = null
+david1102: xvprocss.c:XVprocSs_EnableBlock(217) ST do nothing since pReset = null
+david1102: xvprocss.c:XVprocSs_EnableBlock(210) ST channel = 1, ipBlock = 2
+david1102: xgpio.c:XGpio_DiscreteRead(229) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000000
+david1102: xgpio.c:XGpio_DiscreteWrite(261) channel = 1 XGPIO_CHAN_OFFSET = 8 XGPIO_DATA_OFFSET = 0
+david1102: xgpio.c:XGpio_DiscreteWrite(263) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000002
+david1102: xv_vscaler_l2.c:XV_VScalerSetup(404) HeightIn = 480 WidthIn = 640 HeightOut=912 LineRate = 34492 ColorFormat = 2
+david1102: xv_vscaler.c:XV_vscaler_Set_HwReg_HeightIn(92) BaseAddr = 0x43D20000 offset= 0x00000010 data = 480
+david1102: xv_vscaler.c:XV_vscaler_Set_HwReg_Width(114) BaseAddr = 0x43D20000 offset= 0x00000018 data = 640
+david1102: xv_vscaler.c:XV_vscaler_Set_HwReg_HeightOut(134) BaseAddr = 0x43D20000 offset= 0x00000020 data = 912
+david1102: xv_vscaler.c:XV_vscaler_Set_HwReg_LineRate(154) BaseAddr = 0x43D20000 offset= 0x00000028 data = 34492
+david1102: xv_vscaler.c:XV_vscaler_Set_HwReg_ColorMode(174) BaseAddr = 0x43D20000 offset= 0x00000030 data = 2
+david1102: xv_hscaler_l2.c:XV_HScalerSetup(595) HeightIn = 912 WidthIn = 640 WidthOut=1216 ColorFormatIn = 2 ColorFormatOut = 2 PixelRate = 34492
+david1102: xvprocss.c:XVprocSs_EnableBlock(210) ST channel = 1, ipBlock = 1
+david1102: xgpio.c:XGpio_DiscreteRead(229) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000002
+david1102: xgpio.c:XGpio_DiscreteWrite(261) channel = 1 XGPIO_CHAN_OFFSET = 8 XGPIO_DATA_OFFSET = 0
+david1102: xgpio.c:XGpio_DiscreteWrite(263) BaseAddr = 0x43D10000 offset= 0x00000000 data = 0x00000003
+david1101: xvprocss.c:XVprocSs_ReportSubsystemConfig(2775) ST base = 0x43D00000
+
+------ SUBSYSTEM INPUT/OUTPUT CONFIG ------
+->INPUT	 vid = 17
+david1101: xvidc.c:XVidC_ReportStreamInfo(905) ST vid = 17
+	Color Format:     YUV_422
+	Color Depth:      8
+	Pixels Per Clock: 1
+	Mode:             Progressive
+	Frame Rate:       60Hz
+	Resolution:       640x480@60Hz
+	Pixel Clock:      25200000
+
+->OUTPUT	 vid = 147
+david1101: xvidc.c:XVidC_ReportStreamInfo(905) ST vid = 147
+	The stream ID (147) is not supported.
+
+
+setup Camera Freeze scaler ok
+
+
+Setup camera vdma read channel, start_addr = 0x32100000
+
+Setup camera vdma read channel, start_addr = 0x32100000 H = 640 V = 480
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelConfig(858) StartAddrBase = 0x43000050 addr = 0x00000004 hsize = 0x00000500 = 1280
+david1026: ../src/framebuffer.c:set_vdma_read(146) call XAxiVdma_DmaSetBufferAddr
+
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1080) Base = 0x43000000 ChanBase = 0x43000000 NumFrames = 4 Direction = 2	XAXIVDMA_READ
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1095) ST call XAxiVdma_ChannelSetBufferAddr
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43000050 offset0 = 0x0000000C Loop16 = 0 offset1 = 0x0000000C data = 0x32100000 i = 0
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43000050 offset0 = 0x0000000C Loop16 = 1 offset1 = 0x00000010 data = 0x321F0000 i = 1
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43000050 offset0 = 0x0000000C Loop16 = 2 offset1 = 0x00000014 data = 0x322E0000 i = 2
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43000050 offset0 = 0x0000000C Loop16 = 3 offset1 = 0x00000018 data = 0x323D0000 i = 3
+
+Setup camera vdma read channel, start_addr = 0x32100000 OK
+
+Setup camera freeze vdma read channel, start_addr = 0x32500000
+
+Setup camera freeze vdma read channel, start_addr = 0x32500000 H = 640 V = 480
+david1026: xaxivdma_channel.c:XAxiVdma_ChannelConfig(858) StartAddrBase = 0x43030050 addr = 0x00000004 hsize = 0x00000500 = 1280
+david1026: ../src/framebuffer.c:set_vdma_read(146) call XAxiVdma_DmaSetBufferAddr
+
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1080) Base = 0x43030000 ChanBase = 0x43030000 NumFrames = 4 Direction = 2	XAXIVDMA_READ
+david1026: xaxivdma.c:XAxiVdma_DmaSetBufferAddr(1095) ST call XAxiVdma_ChannelSetBufferAddr
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43030050 offset0 = 0x0000000C Loop16 = 0 offset1 = 0x0000000C data = 0x32500000 i = 0
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43030050 offset0 = 0x0000000C Loop16 = 1 offset1 = 0x00000010 data = 0x325F0000 i = 1
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43030050 offset0 = 0x0000000C Loop16 = 2 offset1 = 0x00000014 data = 0x326E0000 i = 2
+XAxiVdma_ChannelSetBufferAddr StartAddrBase = 0x43030050 offset0 = 0x0000000C Loop16 = 3 offset1 = 0x00000018 data = 0x327D0000 i = 3
+
+Setup camera freeze vdma read channel, start_addr = 0x32500000 OK
+
+david1023: ../src/periphs.c:periphs_bring_up_output_pipeline(1550) VTG run p_vtg_inst_0 base = 0x43C90000
+david1023: ../src/periphs.c:periphs_bring_up_output_pipeline(1552) VTG run p_vtg_inst_1 base = 0x43C80000
+
+Run GUI TPG (1080P).
+david1102: xv_tpg.c:XV_tpg_EnableAutoRestart(82) BaseAddr = 0x43D40000 offset= 0x00000000 data = 0x00000080
+david1102: xv_tpg.c:XV_tpg_Start(40) BaseAddr = 0x43D40000 offset= 0x00000000 data = 0x00000081
+
+Run camera/camera freeze read channel (VGA).
+david1026: xaxivdma.c:XAxiVdma_DmaStart(1134) BaseAddr = 0x43000000 ChanBase = 0x43000000 dir = XAXIVDMA_READ	call XAxiVdma_ChannelStart
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1062) Start DMA hardware, BaseAddr = 0x43000000 offset= 0x00000000 data = 0x0001018B
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1091) Start DMA transfers, StartAddrBase = 0x43000050 addr= 0x00000000 vsize = 480, START the channel
+david1026: xaxivdma.c:XAxiVdma_DmaStart(1134) BaseAddr = 0x43030000 ChanBase = 0x43030000 dir = XAXIVDMA_READ	call XAxiVdma_ChannelStart
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1062) Start DMA hardware, BaseAddr = 0x43030000 offset= 0x00000000 data = 0x0001018B
+david1101: xaxivdma_channel.c:XAxiVdma_ChannelStart(1091) Start DMA transfers, StartAddrBase = 0x43030050 addr= 0x00000000 vsize = 480, START the channel
+
+david1023: ../src/periphs.c:periphs_bring_up_output_pipeline(1621) SP
+
+
+david1023: ../src/periphs.c:periphs_init(502) call periphs_configure_gpio_pins
+Set up PS GPIO.
+Set up Video Lock Monitor.
+david1030: xgpio.c:XGpio_SetDataDirection(170) Channel = 1 DirectionMask = 0x0000FFFF
+david1030: xgpio.c:XGpio_SetDataDirection(172) BaseAddr = 0x41200000 offset= 0x00000004 data = 0x0000FFFF
+
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 29 BaseAddr = 0xF8F01000 offset= 0x00000100 data = 0x20000000 group = 0
+david1102: xuartps.c:XUartPs_SetBaudRate(548) ST base = 0xE0000000 BaudRate = 115200
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 59 BaseAddr = 0xF8F01000 offset= 0x00000104 data = 0x08000000 group = 1
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 52 BaseAddr = 0xF8F01000 offset= 0x00000104 data = 0x00100000 group = 1
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 86 BaseAddr = 0xF8F01000 offset= 0x00000108 data = 0x00400000 group = 2
+david1102: ../src/periphs.c:periphs_init(665)  call read_vdma_regs
+
+Read side (MM2S)
+MM2S_VDMACR         (0x00) = 0x0001018B
+MM2S_VDMASR         (0x04) = 0x00010000
+MM2S_VSIZE          (0x50) = 0x000001E0
+MM2S_HSIZE          (0x54) = 0x00000500
+MM2S_FRMDLY_STRIDE  (0x58) = 0x00000800
+MM2S_START_ADDRESS0 (0x5C) = 0x32100000
+MM2S_START_ADDRESS1 (0x60) = 0x321F0000
+MM2S_START_ADDRESS2 (0x64) = 0x322E0000
+MM2S_START_ADDRESS3 (0x68) = 0x00000000
+
+Write side (S2MM)
+S2MM_VDMACR         (0x30) = 0x0001808B
+S2MM_VDMASR         (0x34) = 0x00015810
+S2MM_VSIZE          (0xA0) = 0x000001E0
+S2MM_HSIZE          (0xA4) = 0x00000500
+S2MM_FRMDLY_STRIDE  (0xA8) = 0x00000800
+S2MM_START_ADDRESS0 (0xAC) = 0x32100000
+S2MM_START_ADDRESS1 (0xB0) = 0x321F0000
+S2MM_START_ADDRESS2 (0xB4) = 0x322E0000
+S2MM_START_ADDRESS3 (0xB8) = 0x00000000
+
+Miscellaneous
+PARKPTR     (0x28) = 0x00000000
+VERSION     (0x2C) = 0x62000050
+david1102: ../src/periphs.c:periphs_init(668) SP
+
+../src/main.c:main(299) tick = 135
+Successfully ran IicPsMasterInit
+../src/main.c:main(324) tick = 141
+
+XIicPs_ReadEepromPage, page= 26
+dongle_usage_count = 201
+../src/main.c:main(329) tick = 245
+
+
+
+../src/main.c:main(336) tick = 245 call gfxInit ST
+david1009: ../src/gfx.c:gfxInit(89) ST
+david1024: ../src/gfx.c:gfxInit(134) call _gdispInit ST
+david1019: ../src/gdisp/gdisp.c:_gdispInit(567) ST
+david1024: ../src/gdisp/gdisp.c:_gdispInit(601) ST call gdriverRegister
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(35) ST
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(58) call init aaa
+david1019: ../src/gdisp/gdisp.c:_gdispInitDriver(645) ST
+
+david1009: ../src/gdisp/gdisp.c:_gdispInitDriver(656) call gdisp_lld_init ST
+
+In gdisp_lld_init()
+david1009: ../gdisp_lld_framebuffer.c:gdisp_lld_init(50) ST BUFFER_WIDTH = 8192, BUFFER_HEIGHT = 1200
+&frame0: 0x00000008
+&frame1: 0x0000000C
+*frame0: 0x002643F8
+*frame1: 0x00BC4400
+david1011: ../gdisp_lld_framebuffer.c:gdisp_lld_init(63) ST	Reset Background to all black
+david1024: ../gdisp_lld_framebuffer.c:gdisp_lld_init(97) call board_init W = 1920 H = 1080
+david1102: ../gdisp_lld_framebuffer.c:board_init(360) ST
+david1016: ../gdisp_lld_framebuffer.c:board_init(363) call XVMix_SetLayerBufferAddr Base = 0x43CC0000 Layer = 3 Addr = 0x002643F8
+david1016: xv_mix_l2.c:XVMix_SetLayerBufferAddr(1237) Layer = 3 Addr = 0x002643F8
+david1102: xv_mix_l2.c:XVMix_SetLayerBufferAddr(1270) LayerId = 3 XVMIX_REG_OFFSET = 0x00000100 BaseReg = 0x00000240 offset = 0x00000440
+david1024: xv_mix_l2.c:XVMix_SetLayerBufferAddr(1273) BaseAddr = 0x43CC0000 addr=0x00000440 data = 0x002643F8
+Set Layer[3] buffer addr = 0x002643F8
+board_init set layer 3 buffer addr to 0x002643F8
+In board_init() SP
+
+david1024: ../gdisp_lld_framebuffer.c:gdisp_lld_init(100) SP
+
+david1009: ../src/gdisp/gdisp.c:_gdispInitDriver(658) call gdisp_lld_init SP
+
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(65) call init bbb
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(73) ST
+david1019: ../src/gdisp/gdisp.c:_gdispPostInitDriver(668) ST
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(79) SP
+david1024: ../src/gfx.c:gfxInit(136) call _gdispInit SP
+../src/main.c:main(339) tick = 1628 call gfxInit SP
+gfxInit() complete, spend 1382 msec
+
+Initialization complete. Switching to background process.
+setup layer 1 create W = 1216 H = 912
+
+david1011: ../src/gdisp/gdisp_pixmap.c:gdispPixmapCreate(58) ST W=1216 H=912
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(35) ST
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(58) call init aaa
+david1019: ../src/gdisp/gdisp.c:_gdispInitDriver(645) ST
+
+david1009: ../src/gdisp/gdisp.c:_gdispInitDriver(656) call gdisp_lld_init ST
+david1030: ../src/gdisp/gdisp_pixmap.c:gdisp_lld_init(139) W = 1216 H = 912
+david1009: ../src/gdisp/gdisp.c:_gdispInitDriver(658) call gdisp_lld_init SP
+
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(65) call init bbb
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(73) ST
+david1019: ../src/gdisp/gdisp.c:_gdispPostInitDriver(668) ST
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(79) SP
+david1024: ../src/gdisp/gdisp_pixmap.c:gdispPixmapCreate(90) SP
+pixmap_draw : clear image
+setup layer 2 create W = 640 H = 480
+
+david1011: ../src/gdisp/gdisp_pixmap.c:gdispPixmapCreate(58) ST W=640 H=480
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(35) ST
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(58) call init aaa
+david1019: ../src/gdisp/gdisp.c:_gdispInitDriver(645) ST
+
+david1009: ../src/gdisp/gdisp.c:_gdispInitDriver(656) call gdisp_lld_init ST
+david1030: ../src/gdisp/gdisp_pixmap.c:gdisp_lld_init(139) W = 640 H = 480
+david1009: ../src/gdisp/gdisp.c:_gdispInitDriver(658) call gdisp_lld_init SP
+
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(65) call init bbb
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(73) ST
+david1019: ../src/gdisp/gdisp.c:_gdispPostInitDriver(668) ST
+david1024: ../src/gdriver/gdriver.c:gdriverRegister(79) SP
+david1024: ../src/gdisp/gdisp_pixmap.c:gdispPixmapCreate(90) SP
+pixmap_draw : clear image
+swidth: 1920
+sheight: 1080
+david1003: ../src/gfile/gfile.c:gfileOpen(274) filename = ims-small-logo.png
+gdispGImageDraw_PNG : sx = 0, sy = 0, dx = 1627, dy = 973, dW = 261, dH = 75
+david1022: ../src/mixer.c:RunMixer(112) ST
+david1016: xv_mix_l2.c:XVMix_GetLayerBufferAddr(1325) LayerId = 3 offset = 0x00000440 ReadVal = 0x002643F8
+
+Layer 3 Buffer Addr: 0x002643F8
+david1101: xv_mix_l2.c:XVMix_GetLayerColorFormat(1209) LayerId = 1 Cfmt = 2
+
+Layer 1 Color Format: YUV_422
+Set Layer 1 Window (688,  16, 1216, 912): david1102: xv_mix_l2.c:XVMix_SetLayerWindow(617) ST LayerId = 1
+david1016: xv_mix_l2.c:XVMix_SetLayerWindow(657) LayerId = 1 set X_st = 688 Y_st = 16 W = 1216 H = 912
+david1016: xv_mix_l2.c:XVMix_SetLayerWindow(658) XVMIX_REG_OFFSET = 0x00000100 Offset = 0x00000100 tmp1 = 0x00000108 tmp2 = 0x00000110 tmp3 = 0x00000118 tmp4 = 0x00000128
+david1102: xv_mix_l2.c:XVMix_SetLayerWindow(674) ST XVMIX_LAYER_TYPE_STREAM
+Done
+Set Layer 1 Alpha to 256: (Disabled in HW)
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 1
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 1
+
+----->Layer 1 Status<----
+State: Disabled
+Type : Stream
+david1101: xv_mix_l2.c:XVMix_GetLayerColorFormat(1209) LayerId = 2 Cfmt = 2
+
+Layer 2 Color Format: YUV_422
+Set Layer 2 Window ( 16, 584, 640, 480): david1102: xv_mix_l2.c:XVMix_SetLayerWindow(617) ST LayerId = 2
+david1016: xv_mix_l2.c:XVMix_SetLayerWindow(657) LayerId = 2 set X_st = 16 Y_st = 584 W = 640 H = 480
+david1016: xv_mix_l2.c:XVMix_SetLayerWindow(658) XVMIX_REG_OFFSET = 0x00000100 Offset = 0x00000200 tmp1 = 0x00000108 tmp2 = 0x00000110 tmp3 = 0x00000118 tmp4 = 0x00000128
+david1102: xv_mix_l2.c:XVMix_SetLayerWindow(674) ST XVMIX_LAYER_TYPE_STREAM
+Done
+Set Layer 2 Alpha to 256: (Disabled in HW)
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 2
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 2
+
+----->Layer 2 Status<----
+State: Disabled
+Type : Stream
+david1101: xv_mix_l2.c:XVMix_GetLayerColorFormat(1209) LayerId = 3 Cfmt = 13
+
+Layer 3 Color Format: RGBA8
+Set Layer 3 Window (  0,   0, 1920, 1080): david1102: xv_mix_l2.c:XVMix_SetLayerWindow(617) ST LayerId = 3
+david1016: xv_mix_l2.c:XVMix_SetLayerWindow(657) LayerId = 3 set X_st = 0 Y_st = 0 W = 1920 H = 1080
+david1016: xv_mix_l2.c:XVMix_SetLayerWindow(658) XVMIX_REG_OFFSET = 0x00000100 Offset = 0x00000300 tmp1 = 0x00000108 tmp2 = 0x00000110 tmp3 = 0x00000118 tmp4 = 0x00000128
+david1102: xv_mix_l2.c:XVMix_SetLayerWindow(668) ST XVMIX_LAYER_TYPE_MEMORY
+Done
+Set Layer 3 Alpha to 256: david1016: xv_mix_l2.c:XVMix_SetLayerAlpha(1011) ST LayerId = 3 Alpha = 256
+david1022: xv_mix_l2.c:XVMix_SetLayerAlpha(1041) BaseAddr = 0x43CC0000 offset = 0x400 alpha = 256
+david1016: xv_mix_l2.c:XVMix_SetLayerAlpha(1042) LayerId = 3 offset = 0x00000400 ReadVal = 256
+Done
+Enable Layer 3: david1030: xv_mix_l2.c:XVMix_LayerEnable(389) ST NumLayers = 4, enable layer 3
+LayerEnable status : 0x00000009
+Done
+
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1702) ST LayerId = 3
+david1019: xv_mix_l2.c:XVMix_DbgLayerInfo(1769) ST Layer 3
+
+----->Layer 3 Status<----
+State: Enabled
+Type : Memory
+david1016: xv_mix_l2.c:XVMix_GetLayerBufferAddr(1325) LayerId = 3 offset = 0x00000440 ReadVal = 0x002643F8
+Addr : 0x002643F8
+david1016: xv_mix_l2.c:XVMix_GetLayerChromaBufferAddr(1419) LayerId = 3 offset = 0x0000044C ReadVal = 0x00000000
+Chroma Addr : 0x00000000
+david1016: xv_mix_l2.c:XVMix_GetLayerAlpha(1095) LayerId = 3 offset = 0x00000400 ReadVal = 256
+david1016: xv_mix_l2.c:XVMix_GetLayerAlpha(1099) LayerId = 3 return alpha = 256
+Alpha: 256
+Scale: Disabled
+david1101: xv_mix_l2.c:XVMix_GetLayerColorFormat(1209) LayerId = 3 Cfmt = 13
+Color Format: RGBA8
+
+Window Data: 
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1808) LayerId = 3 Offset = 0x00000300
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1810) call XVMix_GetLayerWindow C
+david1016: xv_mix_l2.c:XVMix_GetLayerWindow(763) LayerId = 3 get X_st = 0 Y_st = 0 W = 1920 H = 1080
+david1016: xv_mix_l2.c:XVMix_GetLayerWindow(764) XVMIX_REG_OFFSET = 0x00000100 Offset = 0x00000300 tmp1 = 0x00000108 tmp2 = 0x00000110 tmp3 = 0x00000118 tmp4 = 0x00000128
+david1016: xv_mix_l2.c:XVMix_GetLayerWindow(768) LayerId = 3, X = 0, Y = 0, W = 1920, H = 1080
+david1016: xv_mix_l2.c:XVMix_GetLayerWindow(777) LayerId = 3, X = 0, Y = 0, W = 1920, H = 1080
+david1016: xv_mix_l2.c:XVMix_DbgLayerInfo(1812) call XVMix_GetLayerWindow c
+   Start X    = 0
+   Start Y    = 0
+   Win Width  = 1920
+   Win Height = 1080
+   Win Stride = 7680
+../src/main.c:main(420) tick = 2384
+check dongle status ST
+check dongle status SP
+../src/main.c:main(426) tick = 2386
+dongle+camera step_3
+david1003: ../src/gfile/gfile.c:gfileOpen(274) filename = step3.png
+pixmap_draw : w = 760, h = 384, sx = 0, sy = 0, sW =760, sH = 384, W = 1216, H = 912, dx = 228, dy = 264, dW = 760, dH = 384, alpha = 207, pos = 0
+gdispGImageDraw_PNG : sx = 0, sy = 0, dx = 228, dy = 264, dW = 760, dH = 384
+david1030: xv_mix_l2.c:XVMix_LayerEnable(389) ST NumLayers = 4, enable layer 1
+LayerEnable status : 0x0000000B
+../src/main.c:main(474) tick = 2751
+ulpi_init()
+ulpi_write_data - reg: 16, data: 55
+ulpi_read_data - reg: 16, data: 55
+ulpi_write_data - reg: 16, data: AA
+ulpi_read_data - reg: 16, data: AA
+ULPI integrity check: passed.
+ulpi_set_flags()
+ulpi_set_otg_flags()
+ulpi_write_data - reg: A, data: 6
+ulpi_set_ic_flags()
+ulpi_write_data - reg: 7, data: 10
+ulpi_set_fc_flags()
+ulpi_write_data - reg: 4, data: 45
+ulpl_set_vbus
+ulpi_read_data - reg: A, data: 6
+set_vbus flags initial: 6
+ulpi_write_data - reg: A, data: 26
+
+
+david0827: ../tusb.c:tusb_init(45) ST
+hal_init
+usb_cmd pre: 0x80000
+Reset Controller 0
+hal_controller_reset
+psusb0_hal_controller_reset
+psusb0 reset success
+Set Idle Mode
+USBMODE: 0, should be 0x00 for idle mode
+Set Host Mode
+USBMODE: 3, should be 0x03
+
+
+david0827: ../host/usbh.c:usbh_init(147) ST
+hcd_controller_init
+usb_int_enable: 0
+usb_sts: 1000
+usb_int_enable: C0026
+async_list_base: 25A000
+periodic_list_base: 25B000
+tt_control: 0
+hcd_controller_init usb_cmd before: 80B00
+hcd_controller_init usb_cmd after: 88B3D
+portsc: 0x8C001000
+hub_init
+david0827: ../host/usbh.c:usbh_init(179) ST
+
+
+hal_interrupt enable
+david1106: xscugic.c:XScuGic_Enable(547) Int_Id = 53 BaseAddr = 0xF8F01000 offset= 0x00000104 data = 0x00200000 group = 1
+david0827: ../tusb.c:tusb_init(69) ST
+
+
+W = 950, H = 120
+
+show CAMERA_OK
+david1003: ../src/gfile/gfile.c:gfileOpen(274) filename = recorder_ok.png
+gdispGImageDraw_PNG : sx = 0, sy = 0, dx = 1160, dy = 942, dW = 128, dH = 128
+../src/main.c:main(498) tick = 3213
+enumeration_body_subtask()
+properly entered enumeration_body_subtask()
+conn/discon root hub : connection
+			
+			david1105: ../host/usbh.c:enumeration_body_subtask(688) call usbh_control_xfer_subtask TUSB_REQUEST_GET_DESCRIPTOR get first 8 B data
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(697) ST bDescriptorType = 1
+Device Descriptor
+i = 0	0x12
+i = 1	0x01
+i = 2	0x00
+i = 3	0x02
+i = 4	0x09
+i = 5	0x00
+i = 6	0x01
+i = 7	0x40
+i = 8	0x00
+i = 9	0x00
+i = 10	0x00
+i = 11	0x00
+i = 12	0x00
+i = 13	0x00
+i = 14	0x00
+i = 15	0x00
+i = 16	0x00
+i = 17	0x00
+reset before set address roothub
+new_address: 1
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(777) bDescriptorType = 1 after xfer
+
+Device Descriptor result
+i = 0	0x12
+i = 1	0x01
+i = 2	0x00
+i = 3	0x02
+i = 4	0x09
+i = 5	0x00
+i = 6	0x01
+i = 7	0x40
+i = 8	0xE3
+i = 9	0x05
+i = 10	0x08
+i = 11	0x06
+i = 12	0x32
+i = 13	0x88
+i = 14	0x00
+i = 15	0x01
+i = 16	0x00
+i = 17	0x01
+
+david0821: ../host/usbh.c:enumeration_body_subtask(798) vendor_id = 0x05E3 = 1507, product_id = 0x0608 = 1544
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(815) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x19
+i = 3	0x00
+i = 4	0x01
+i = 5	0x01
+i = 6	0x00
+i = 7	0xE0
+i = 8	0x32
+
+david1105: ../host/usbh.c:enumeration_body_subtask(845) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x19
+i = 3	0x00
+i = 4	0x01
+i = 5	0x01
+i = 6	0x00
+i = 7	0xE0
+i = 8	0x32
+
+hub_open_subtask
+set up
+hub_open_subtask
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(697) ST bDescriptorType = 1
+Device Descriptor
+i = 0	0x12
+i = 1	0x01
+i = 2	0x00
+i = 3	0x02
+i = 4	0x09
+i = 5	0x00
+i = 6	0x01
+i = 7	0x40
+i = 8	0x32
+i = 9	0x09
+i = 10	0x04
+i = 11	0x00
+i = 12	0x00
+i = 13	0x01
+i = 14	0x09
+i = 15	0x00
+i = 16	0x00
+i = 17	0x00
+reset before set address roothub
+new_address: 2
+
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(777) bDescriptorType = 1 after xfer
+
+Device Descriptor result
+i = 0	0x12
+i = 1	0x01
+i = 2	0x00
+i = 3	0x02
+i = 4	0x09
+i = 5	0x00
+i = 6	0x01
+i = 7	0x40
+i = 8	0xE3
+i = 9	0x05
+i = 10	0x08
+i = 11	0x06
+i = 12	0x32
+i = 13	0x88
+i = 14	0x00
+i = 15	0x01
+i = 16	0x00
+i = 17	0x01
+
+david0821: ../host/usbh.c:enumeration_body_subtask(798) vendor_id = 0x05E3 = 1507, product_id = 0x0608 = 1544
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(815) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x19
+i = 3	0x00
+i = 4	0x01
+i = 5	0x01
+i = 6	0x00
+i = 7	0xE0
+i = 8	0x32
+
+david1105: ../host/usbh.c:enumeration_body_subtask(845) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x19
+i = 3	0x00
+i = 4	0x01
+i = 5	0x01
+i = 6	0x00
+i = 7	0xE0
+i = 8	0x32
+
+
+enumeration_body_subtask()
+properly entered enumeration_body_shub_isr
+ubtask()
+conn/discon ext hub
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(614) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x19
+i = 3	0x00
+Assert at ../host/usbh.c: enumeration_body_subtask: 629: TUSB_ERROR_USBH_XFER_FAILED
+hub_status_pipe_queue
+enumeration_body_subtask()
+properly entered enumeration_body_subtask()
+conn/discon ext hub
+
+
+
+sizeof(hub_port_status_response_t) = 4
+Conn ext hub event bbbb
+
+
+hub_status_pipe_queue
+new_address: 3
+
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(777) bDescriptorType = 1 after xfer
+
+Device Descriptor result
+i = 0	0x12
+i = 1	0x01
+i = 2	0x10
+i = 3	0x01
+i = 4	0x00
+i = 5	0x00
+i = 6	0x00
+i = 7	0x40
+i = 8	0x26
+i = 9	0x04
+i = 10	0x11
+i = 11	0x30
+i = 12	0x00
+i = 13	0x01
+i = 14	0x01
+i = 15	0x00
+i = 16	0x00
+i = 17	0x01
+
+david0821: ../host/usbh.c:enumeration_body_subtask(798) vendor_id = 0x0426 = 1062, product_id = 0x3011 = 12305
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(815) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x34
+i = 3	0x00
+i = 4	0x02
+i = 5	0x01
+i = 6	0x00
+i = 7	0xA0
+i = 8	0x80
+
+
+david1105: ../host/usbh.c:enumeration_body_subtask(845) ST bDescriptorType = 0
+Configuration Descriptor
+i = 0	0x09
+i = 1	0x02
+i = 2	0x34
+i = 3	0x00
+i = 4	0x02
+i = 5	0x01
+i = 6	0x00
+i = 7	0xA0
+i = 8	0x80
+
+
+a Keyboard device (address 3) is mounted, cnt = 1
+
+Assert at ../class/hid_host.c: hidh_open_subtask: 199: expected 5, actual 0
+1111
+------------------------usb_command------------------------
+set up
+	addr = 3 data :  12 01 10 01 00 00 00 40 26 04 11 30 00 01 01 00 00 01
+enumeration_body_subtask()
+
+show KEYBOARD_OK
+david1003: ../src/gfile/gfile.c:gfileOpen(274) filename = camera.png
+gdispGImageDraw_PNG : sx = 0, sy = 0, dx = 1332, dy = 928, dW = 256, dH = 256
+
+
+

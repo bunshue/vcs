@@ -1,5 +1,155 @@
 
 
+        Graphics g;
+        Pen p;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            p = new Pen(Color.Red, 6);
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            g = this.CreateGraphics();
+            g.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+
+        }
+
+
+
+
+richTextBox1.Text += "year = " + year.ToString("00") + "\n";
+richTextBox1.Text += "month = " + month.ToString("00") + "\n";
+richTextBox1.Text += "mday = " + mday.ToString("0000") + "\n";
+richTextBox1.Text += "wday = " + wday.ToString() + "\n";
+richTextBox1.Text += "hour = " + hour.ToString("00") + "\n";
+richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
+richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
+richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+
+richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
+
+string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+string filename = "imsLink_log.long." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
+
+string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
+
+
+string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
+
+
+                    else if (Comport_Mode == 2)  //hex mode
+                    {
+                        input = "";
+                        for (int i = 0; i < BytesToRead; i++)
+                        {
+                            input += ((int)receive_buffer[i]).ToString("X2") + " ";
+                        }
+                        richTextBox1.AppendText(input);     //打印一般文字訊息
+                        richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+                    }
+48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
+
+
+
+
+
+
+string和byte[]的轉換 (C#)
+
+string類型轉成byte[]：
+
+byte[] byteArray = System.Text.Encoding.Default.GetBytes ( str );
+
+反過來，byte[]轉成string：
+
+string str = System.Text.Encoding.Default.GetString ( byteArray );
+
+其它編碼方式的，如System.Text.UTF8Encoding，System.Text.UnicodeEncoding class等；例如：
+
+string類型轉成ASCII byte[]：（"01" 轉成 byte[] = new byte[]{ 0x30, 0x31}）
+
+byte[] byteArray = System.Text.Encoding.ASCII.GetBytes ( str );
+
+ASCII byte[] 轉成string：（byte[] = new byte[]{ 0x30, 0x31} 轉成 "01"）
+
+string str = System.Text.Encoding.ASCII.GetString ( byteArray );
+
+
+
+
+
+
+
+
+string text = "是不是漢字，ABC，keleyi.com";
+for (int i = 0; i < text.Length; i++)
+{
+	if (Regex.IsMatch(text[i].ToString(), @"[\u4e00-\u9fbb]+{1}quot;))
+		Console.WriteLine("是漢字");
+	else
+	Console.WriteLine("不是漢字");
+}
+
+3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
+	4E00～9FFFh：中日韓認同表意文字區，總計收容20,902個中日韓漢字。
+A000～A4FFh：彝族文字區，收容中國南方彝族文字和字根。
+AC00～D7FFh：韓文拼音組合字區，收容以韓文音符拼成的文字。
+F900～FAFFh：中日韓兼容表意文字區，總計收容302個中日韓漢字。
+FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來文、阿拉伯文、中日韓直式標點、小符號、半角符號、全角符號等。
+
+Hexadecimal value of 基 is 57FA
+Hexadecimal value of 本 is 672C
+Hexadecimal value of 運 is 904B
+Hexadecimal value of 算 is 7B97
+Hexadecimal value of 制 is 5236
+Hexadecimal value of 作 is 4F5C
+Hexadecimal value of U is 0055
+Hexadecimal value of S is 0053
+Hexadecimal value of B is 0042
+Hexadecimal value of ? is 542F
+Hexadecimal value of ? is 52A8
+Hexadecimal value of ? is 76D8
+Hexadecimal value of ? is 30A6
+Hexadecimal value of ? is 30A3
+Hexadecimal value of ? is 30AD
+Hexadecimal value of ? is 30DA
+Hexadecimal value of ? is 30C7
+Hexadecimal value of ? is 30A3
+Hexadecimal value of ? is 30A2
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of 世 is 4E16
+Hexadecimal value of ? is 003F
+Hexadecimal value of 生 is 751F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of 概 is 6982
+Hexadecimal value of ? is 003F
+Hexadecimal value of 表 is 8868
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+Hexadecimal value of ? is 003F
+
+
+
+'
+
 vcs
 http://cs0.wikidot.com/introduction
 https://jjnnykimo.pixnet.net/blog/category/1324785/9

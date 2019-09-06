@@ -1,4 +1,29 @@
 
+https://www.kancloud.cn/thinkphp/python-guide/39428
+
+http://www.codedata.com.tw/python/python-tutorial-the-1st-class-4-unicode-support-basic-input-output/
+http://www.runoob.com/python/python-chinese-encoding.html
+
+
+
+pip install numpy	安裝NumPy
+
+C:\Users\david>pip install pillow
+Collecting pillow
+
+#PIL：Python Imaging Library
+安裝Pillow
+>pip install pillow
+
+from PIL import Image, ImageFilter
+
+kitten = Image.open("ABP238.jpg")       #開啟檔案
+kitten.show()                           #顯示檔案
+
+blurryKitten = kitten.filter(ImageFilter.GaussianBlur)  #過濾波器
+blurryKitten.save("ABP238222.jpg")      #存檔
+blurryKitten.show()                     #顯示檔案
+
 
 
 Python 傳送 email 的三種方式
