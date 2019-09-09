@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1ball
         public Form1()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,12 +42,18 @@ namespace WindowsFormsApplication1ball
         {
             //if (x_st < 600)
             {
-                x_st += 50;
                 g.Clear(System.Drawing.SystemColors.ControlLight);
                 g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(x_st, 0, 50, 50));
-                if (x_st == 600)
+                if (x_st < 600)
+                    x_st += 30;
+                else
                     x_st = 0;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
         }
     }
 }

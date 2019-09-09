@@ -249,6 +249,7 @@ namespace imsLink
         {
             InitializeComponent();
 
+            //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
             g = panel6.CreateGraphics();
@@ -4922,6 +4923,9 @@ namespace imsLink
             richTextBox1.Text += "關閉程式\n";
             //Application.Exit();
             System.Environment.Exit(0);
+
+            //C# 強制關閉 Process
+            //Process.GetCurrentProcess().Kill();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -1,4 +1,7 @@
 
+[ C# ] WinForm 顯示於延伸螢幕之方法
+https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%96%bc%e5%bb%b6%e4%bc%b8%e8%9e%a2%e5%b9%95%e4%b9%8b%e6%96%b9%e6%b3%95/
+
 
         Graphics g;
         Pen p;

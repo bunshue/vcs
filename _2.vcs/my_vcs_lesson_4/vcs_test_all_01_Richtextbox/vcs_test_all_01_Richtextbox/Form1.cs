@@ -249,6 +249,52 @@ namespace vcs_test_all_01_Richtextbox
 
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            richTextBox1.Text += "文天祥過零丁洋\n";
+            richTextBox1.Text += "辛苦遭逢起一經\n";
+            richTextBox1.Text += "干戈寥落四周星\n";
+            richTextBox1.Text += "山河破碎風飄絮\n";
+            richTextBox1.Text += "身世浮沉雨打萍\n";
+            richTextBox1.Text += "惶恐灘頭說惶恐\n";
+            richTextBox1.Text += "零丁洋裏歎零丁\n";
+            richTextBox1.Text += "人生自古誰無死\n";
+            richTextBox1.Text += "留取丹心照汗青";
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //richTextBox2.Text += "There are " + richTextBox1.Lines.Length.ToString() + " lines in richtextBox1\n";
+            //Array.Sort(richTextBox1.Lines);   //useless
+            string[] temp = richTextBox1.Lines;
+            Array.Sort(temp);
+            richTextBox1.Lines = temp;
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string[] temp = richTextBox1.Lines;
+            double[] randomIndex = new double[temp.Length];
+            Random r = new Random();
+            for (int i = 0; i < temp.Length; i++)
+            {
+                randomIndex[i] = r.NextDouble();
+            }
+            Array.Sort(randomIndex, temp);
+            richTextBox1.Lines = temp;
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //RichTextBox 全選    TBD
+            //((RichTextBox)sender).SelectAll();
+            //richTextBox1.SelectAll();
+        }
+
 
     }
 }

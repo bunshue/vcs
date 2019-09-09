@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1tttt
         private void button1_Click(object sender, EventArgs e)
         {
             g = this.CreateGraphics();
-            g.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            g.DrawString("驗證完成c", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
 
 
         }
@@ -38,7 +38,7 @@ namespace WindowsFormsApplication1tttt
         {
             richTextBox1.Text += "draw_something ST\n";
             g = this.CreateGraphics();
-            g.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            g.DrawString("驗證完成b", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
             richTextBox1.Text += "draw_something SP\n";
 
         }
@@ -52,7 +52,7 @@ namespace WindowsFormsApplication1tttt
         {
             richTextBox1.Text += "paint ST\n";
             g = this.CreateGraphics();
-            g.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+            g.DrawString("驗證完成a", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
 
         }
     }
