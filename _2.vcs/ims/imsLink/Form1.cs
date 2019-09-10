@@ -334,6 +334,7 @@ namespace imsLink
                 bt_script.Enabled = false;
                 bt_script_load.Enabled = false;
                 bt_script_save.Enabled = false;
+                bt_write2.Enabled = false;
 
                 numericUpDown_TG_R.Enabled = false;
                 numericUpDown_TG_G.Enabled = false;
@@ -402,6 +403,7 @@ namespace imsLink
                 flag_comport_ok = false;
                 show_main_message("COM未連線", S_FALSE, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.x;
+                toolTip1.SetToolTip(pictureBox_comport, "COM未連線");
             }
         }
 
@@ -1772,8 +1774,6 @@ namespace imsLink
         {
             lb_0x1.Visible = en;
             lb_0x2.Visible = en;
-            lb_0x3.Visible = en;
-            lb_0x4.Visible = en;
             lb_addr.Visible = en;
             lb_data.Visible = en;
             tb_1a.Visible = en;
@@ -1800,18 +1800,6 @@ namespace imsLink
             bt_clear.Visible = en;
             bt_break.Visible = en;
             pictureBox2.Visible = en;
-            lb_range_1.Visible = en;
-            lb_range_2.Visible = en;
-            lb_expo.Visible = en;
-            trackBar_expo.Visible = en;
-            tb_expo.Visible = en;
-            numericUpDown_expo.Visible = en;
-            bt_setup_expo.Visible = en;
-            lb_gain.Visible = en;
-            trackBar_gain.Visible = en;
-            tb_gain.Visible = en;
-            numericUpDown_gain.Visible = en;
-            bt_setup_gain.Visible = en;
 
             lb_awb_result_expo.Visible = en;
             lb_awb_result_gain.Visible = en;
@@ -1826,46 +1814,128 @@ namespace imsLink
             numericUpDown_TG_G.Visible = en;
             numericUpDown_TG_B.Visible = en;
 
-            //R
-            lb_R.Visible = en;
-            lb_0xR.Visible = en;
-            lb_range_3.Visible = en;
-            trackBar_R.Visible = en;
-            tb_R.Visible = en;
-            numericUpDown_R.Visible = en;
-            bt_setup_R.Visible = en;
+            if (flag_release_mode == true)
+            {
+                //Expo
+                lb_expo.Visible = false;
+                lb_0x3.Visible = false;
+                lb_range_1.Visible = false;
+                trackBar_expo.Visible = false;
+                tb_expo.Visible = false;
+                numericUpDown_expo.Visible = false;
+                bt_setup_expo.Visible = false;
 
-            //G
-            lb_G.Visible = en;
-            lb_0xG.Visible = en;
-            lb_range_4.Visible = en;
-            trackBar_G.Visible = en;
-            tb_G.Visible = en;
-            numericUpDown_G.Visible = en;
-            bt_setup_G.Visible = en;
+                //Gain
+                lb_gain.Visible = false;
+                lb_0x4.Visible = false;
+                lb_range_2.Visible = false;
+                trackBar_gain.Visible = false;
+                tb_gain.Visible = false;
+                numericUpDown_gain.Visible = false;
+                bt_setup_gain.Visible = false;
 
-            //B
-            lb_BB.Visible = en;
-            lb_0xB.Visible = en;
-            lb_range_5.Visible = en;
-            trackBar_B.Visible = en;
-            tb_B.Visible = en;
-            numericUpDown_B.Visible = en;
-            bt_setup_B.Visible = en;
+                //R
+                lb_R.Visible = false;
+                lb_0xR.Visible = false;
+                lb_range_3.Visible = false;
+                trackBar_R.Visible = false;
+                tb_R.Visible = false;
+                numericUpDown_R.Visible = false;
+                bt_setup_R.Visible = false;
 
-            //WPT
-            lb_wpt.Visible = en;
-            tb_wpt.Visible = en;
-            numericUpDown_wpt.Visible = en;
-            bt_read_wpt.Visible = en;
-            bt_write_wpt.Visible = en;
+                //G
+                lb_G.Visible = false;
+                lb_0xG.Visible = false;
+                lb_range_4.Visible = false;
+                trackBar_G.Visible = false;
+                tb_G.Visible = false;
+                numericUpDown_G.Visible = false;
+                bt_setup_G.Visible = false;
 
-            //BPT
-            lb_bpt.Visible = en;
-            tb_bpt.Visible = en;
-            numericUpDown_bpt.Visible = en;
-            bt_read_bpt.Visible = en;
-            bt_write_bpt.Visible = en;
+                //B
+                lb_BB.Visible = false;
+                lb_0xB.Visible = false;
+                lb_range_5.Visible = false;
+                trackBar_B.Visible = false;
+                tb_B.Visible = false;
+                numericUpDown_B.Visible = false;
+                bt_setup_B.Visible = false;
+
+                //WPT
+                lb_wpt.Visible = false;
+                tb_wpt.Visible = false;
+                numericUpDown_wpt.Visible = false;
+                bt_read_wpt.Visible = false;
+                bt_write_wpt.Visible = false;
+
+                //BPT
+                lb_bpt.Visible = false;
+                tb_bpt.Visible = false;
+                numericUpDown_bpt.Visible = false;
+                bt_read_bpt.Visible = false;
+                bt_write_bpt.Visible = false;
+            }
+            else
+            {
+                //Expo
+                lb_expo.Visible = en;
+                lb_0x3.Visible = en;
+                lb_range_1.Visible = en;
+                trackBar_expo.Visible = en;
+                tb_expo.Visible = en;
+                numericUpDown_expo.Visible = en;
+                bt_setup_expo.Visible = en;
+
+                //Gain
+                lb_gain.Visible = en;
+                lb_0x4.Visible = en;
+                lb_range_2.Visible = en;
+                trackBar_gain.Visible = en;
+                tb_gain.Visible = en;
+                numericUpDown_gain.Visible = en;
+                bt_setup_gain.Visible = en;
+
+                //R
+                lb_R.Visible = en;
+                lb_0xR.Visible = en;
+                lb_range_3.Visible = en;
+                trackBar_R.Visible = en;
+                tb_R.Visible = en;
+                numericUpDown_R.Visible = en;
+                bt_setup_R.Visible = en;
+
+                //G
+                lb_G.Visible = en;
+                lb_0xG.Visible = en;
+                lb_range_4.Visible = en;
+                trackBar_G.Visible = en;
+                tb_G.Visible = en;
+                numericUpDown_G.Visible = en;
+                bt_setup_G.Visible = en;
+
+                //B
+                lb_BB.Visible = en;
+                lb_0xB.Visible = en;
+                lb_range_5.Visible = en;
+                trackBar_B.Visible = en;
+                tb_B.Visible = en;
+                numericUpDown_B.Visible = en;
+                bt_setup_B.Visible = en;
+
+                //WPT
+                lb_wpt.Visible = en;
+                tb_wpt.Visible = en;
+                numericUpDown_wpt.Visible = en;
+                bt_read_wpt.Visible = en;
+                bt_write_wpt.Visible = en;
+
+                //BPT
+                lb_bpt.Visible = en;
+                tb_bpt.Visible = en;
+                numericUpDown_bpt.Visible = en;
+                bt_read_bpt.Visible = en;
+                bt_write_bpt.Visible = en;
+            }
 
             //note
             lb_note1.Visible = en;
@@ -1882,12 +1952,15 @@ namespace imsLink
             int dx;
             int dy;
 
-            cb_enable_awb.Location = new Point(11, 489 + 65);
+            //cb_enable_awb.Location = new Point(11, 489 + 65);
             /*
             lb_note1.Location = new Point(11 + 180, 489 + 65);
             lb_note2.Location = new Point(11 + 180, 489 + 65 + 20);
             lb_note3.Location = new Point(11 + 180, 489 + 65 + 40);
             */
+            lb_rgb_r.Location = new Point(5, 489 + 65 + 45);
+            lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 45);
+            lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 45);
 
             if (flag_display_mode == DISPLAY_SD)
             {
@@ -2524,16 +2597,6 @@ namespace imsLink
             show_item_location();
 
             check_webcam();
-
-            if (flag_enaglb_awb_function == true)
-            {
-                cb_enable_awb.Location = new Point(11, 489 + 110);
-                /*
-                lb_note1.Location = new Point(11 + 180, 489 + 98);
-                lb_note2.Location = new Point(11 + 180, 489 + 98 + 25);
-                lb_note3.Location = new Point(11 + 180, 489 + 98 + 50);
-                */
-            }
 
             richTextBox2.Visible = false;
             bt_script_save.Visible = false;
@@ -4821,7 +4884,7 @@ namespace imsLink
 
                     show_awb_item_visible(true);    //333
 
-                    cb_enable_awb.Location = new Point(11, 489 + 110);
+                    //cb_enable_awb.Location = new Point(11, 489 + 110);
                     lb_note1.Location = new Point(11 + 180, 489 + 98);
                     lb_note2.Location = new Point(11 + 180, 489 + 98 + 25);
                     lb_note3.Location = new Point(11 + 180, 489 + 98 + 50);
@@ -4867,7 +4930,7 @@ namespace imsLink
                     show_awb_item_visible(false);   //444
                 }
 
-                cb_enable_awb.Location = new Point(11, 489 + 65);
+                //cb_enable_awb.Location = new Point(11, 489 + 65);
                 /*
                 lb_note1.Location = new Point(11 + 180, 489 + 65);
                 lb_note2.Location = new Point(11 + 180, 489 + 65 + 30);
@@ -5825,7 +5888,9 @@ namespace imsLink
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
             Color cl = GetColor(pt);
             panel1.BackColor = cl;
-            lb_rgb.Text = cl.R + ", " + cl.G + ", " + cl.B;
+            lb_rgb_r.Text = cl.R.ToString();
+            lb_rgb_g.Text = cl.G.ToString();
+            lb_rgb_b.Text = cl.B.ToString();
 
             if (flag_check_webcam_signal == true)
             {
@@ -6519,7 +6584,9 @@ namespace imsLink
             if(bt_awb.Text == "Manual")
             {
                 bt_awb.Text = "Auto";
-                lb_rgb.Text = "";
+                lb_rgb_r.Text = "";
+                lb_rgb_g.Text = "";
+                lb_rgb_b.Text = "";
                 flag_awb_mode = true;
                 timer_webcam.Enabled = false;
                 //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
@@ -7248,7 +7315,9 @@ namespace imsLink
 
                 //if (flag_awb_mode == false)
                 {
-                    lb_rgb.Text = "";
+                    lb_rgb_r.Text = "";
+                    lb_rgb_g.Text = "";
+                    lb_rgb_b.Text = "";
                     flag_awb_mode = true;
                     timer_webcam.Enabled = false;
                     bt_awb.Text = "Auto";
@@ -8924,7 +8993,9 @@ namespace imsLink
                 return;
             }
 
-            lb_rgb.Text = "";
+            lb_rgb_r.Text = "";
+            lb_rgb_g.Text = "";
+            lb_rgb_b.Text = "";
             flag_awb_mode = true;
             timer_webcam.Enabled = false;
             bt_awb.Text = "Auto";
@@ -10004,7 +10075,7 @@ namespace imsLink
                 flag_enaglb_awb_function = true;
                 flag_fullscreen = false;
                 button19_Click(sender, e);
-                cb_enable_awb.Location = new Point(11, 489 + 110);
+                //cb_enable_awb.Location = new Point(11, 489 + 110);
             }
             else
             {
@@ -10081,6 +10152,7 @@ namespace imsLink
                 richTextBox1.Text += "已連上IMS EGD System\n";
                 show_main_message("COM已連線", S_OK, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.comport;
+                toolTip1.SetToolTip(pictureBox_comport, "COM已連線");
             }
             else
             {
@@ -10088,6 +10160,7 @@ namespace imsLink
                 this.BackColor = Color.Pink;
                 show_main_message("COM未連線", S_FALSE, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.x;
+                toolTip1.SetToolTip(pictureBox_comport, "COM未連線");
                 
                 serialPort1.Close();
                 this.BackColor = Color.Yellow;

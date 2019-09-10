@@ -250,7 +250,7 @@
             this.tb_3a = new System.Windows.Forms.TextBox();
             this.tb_2a = new System.Windows.Forms.TextBox();
             this.tb_1a = new System.Windows.Forms.TextBox();
-            this.lb_rgb = new System.Windows.Forms.Label();
+            this.lb_rgb_r = new System.Windows.Forms.Label();
             this.lb_zoom = new System.Windows.Forms.Label();
             this.btnCenter = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
@@ -395,6 +395,8 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
+            this.lb_rgb_g = new System.Windows.Forms.Label();
+            this.lb_rgb_b = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1942,6 +1944,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.lb_rgb_b);
+            this.tp_USB.Controls.Add(this.lb_rgb_g);
             this.tp_USB.Controls.Add(this.bt_script_save);
             this.tp_USB.Controls.Add(this.bt_script_load);
             this.tp_USB.Controls.Add(this.bt_cancel);
@@ -2023,7 +2027,7 @@
             this.tp_USB.Controls.Add(this.tb_3a);
             this.tp_USB.Controls.Add(this.tb_2a);
             this.tp_USB.Controls.Add(this.tb_1a);
-            this.tp_USB.Controls.Add(this.lb_rgb);
+            this.tp_USB.Controls.Add(this.lb_rgb_r);
             this.tp_USB.Controls.Add(this.lb_zoom);
             this.tp_USB.Controls.Add(this.btnCenter);
             this.tp_USB.Controls.Add(this.btnRight);
@@ -2056,7 +2060,7 @@
             this.tp_USB.Name = "tp_USB";
             this.tp_USB.Size = new System.Drawing.Size(940, 586);
             this.tp_USB.TabIndex = 22;
-            this.tp_USB.Text = "顏色校正";
+            this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
             // bt_script_save
@@ -2180,11 +2184,11 @@
             this.cb_enable_awb.Checked = true;
             this.cb_enable_awb.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_enable_awb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_enable_awb.Location = new System.Drawing.Point(607, 546);
+            this.cb_enable_awb.Location = new System.Drawing.Point(11, 504);
             this.cb_enable_awb.Name = "cb_enable_awb";
-            this.cb_enable_awb.Size = new System.Drawing.Size(159, 25);
+            this.cb_enable_awb.Size = new System.Drawing.Size(113, 25);
             this.cb_enable_awb.TabIndex = 141;
-            this.cb_enable_awb.Text = "AWB色彩校正";
+            this.cb_enable_awb.Text = "色彩校正";
             this.cb_enable_awb.UseVisualStyleBackColor = true;
             this.cb_enable_awb.CheckedChanged += new System.EventHandler(this.cb_enable_awb_CheckedChanged);
             // 
@@ -2224,7 +2228,7 @@
             // 
             this.cb_5X5.AutoSize = true;
             this.cb_5X5.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_5X5.Location = new System.Drawing.Point(117, 512);
+            this.cb_5X5.Location = new System.Drawing.Point(117, 486);
             this.cb_5X5.Name = "cb_5X5";
             this.cb_5X5.Size = new System.Drawing.Size(47, 17);
             this.cb_5X5.TabIndex = 137;
@@ -2238,7 +2242,7 @@
             this.cb_4X4.Checked = true;
             this.cb_4X4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_4X4.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_4X4.Location = new System.Drawing.Point(70, 512);
+            this.cb_4X4.Location = new System.Drawing.Point(70, 486);
             this.cb_4X4.Name = "cb_4X4";
             this.cb_4X4.Size = new System.Drawing.Size(47, 17);
             this.cb_4X4.TabIndex = 136;
@@ -2250,7 +2254,7 @@
             // 
             this.cb_3X3.AutoSize = true;
             this.cb_3X3.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_3X3.Location = new System.Drawing.Point(23, 512);
+            this.cb_3X3.Location = new System.Drawing.Point(23, 486);
             this.cb_3X3.Name = "cb_3X3";
             this.cb_3X3.Size = new System.Drawing.Size(47, 17);
             this.cb_3X3.TabIndex = 135;
@@ -2262,7 +2266,7 @@
             // 
             this.cb_show_grid.AutoSize = true;
             this.cb_show_grid.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_show_grid.Location = new System.Drawing.Point(11, 489);
+            this.cb_show_grid.Location = new System.Drawing.Point(11, 462);
             this.cb_show_grid.Name = "cb_show_grid";
             this.cb_show_grid.Size = new System.Drawing.Size(113, 25);
             this.cb_show_grid.TabIndex = 134;
@@ -2276,7 +2280,7 @@
             this.cb_show_time.Checked = true;
             this.cb_show_time.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_show_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_show_time.Location = new System.Drawing.Point(11, 461);
+            this.cb_show_time.Location = new System.Drawing.Point(11, 433);
             this.cb_show_time.Name = "cb_show_time";
             this.cb_show_time.Size = new System.Drawing.Size(113, 25);
             this.cb_show_time.TabIndex = 133;
@@ -3087,15 +3091,16 @@
             this.tb_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_1a.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_1a_KeyPress);
             // 
-            // lb_rgb
+            // lb_rgb_r
             // 
-            this.lb_rgb.AutoSize = true;
-            this.lb_rgb.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_rgb.Location = new System.Drawing.Point(8, 432);
-            this.lb_rgb.Name = "lb_rgb";
-            this.lb_rgb.Size = new System.Drawing.Size(62, 21);
-            this.lb_rgb.TabIndex = 48;
-            this.lb_rgb.Text = "lb_rgb";
+            this.lb_rgb_r.AutoSize = true;
+            this.lb_rgb_r.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_r.ForeColor = System.Drawing.Color.Red;
+            this.lb_rgb_r.Location = new System.Drawing.Point(638, 545);
+            this.lb_rgb_r.Name = "lb_rgb_r";
+            this.lb_rgb_r.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_r.TabIndex = 48;
+            this.lb_rgb_r.Text = "R";
             // 
             // lb_zoom
             // 
@@ -4617,6 +4622,28 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
+            // lb_rgb_g
+            // 
+            this.lb_rgb_g.AutoSize = true;
+            this.lb_rgb_g.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_g.ForeColor = System.Drawing.Color.Green;
+            this.lb_rgb_g.Location = new System.Drawing.Point(676, 545);
+            this.lb_rgb_g.Name = "lb_rgb_g";
+            this.lb_rgb_g.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_g.TabIndex = 154;
+            this.lb_rgb_g.Text = "G";
+            // 
+            // lb_rgb_b
+            // 
+            this.lb_rgb_b.AutoSize = true;
+            this.lb_rgb_b.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_b.ForeColor = System.Drawing.Color.Blue;
+            this.lb_rgb_b.Location = new System.Drawing.Point(709, 545);
+            this.lb_rgb_b.Name = "lb_rgb_b";
+            this.lb_rgb_b.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_b.TabIndex = 155;
+            this.lb_rgb_b.Text = "B";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4912,7 +4939,7 @@
         private System.Windows.Forms.Timer timer_rtc;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ProgressBar progressBar2;
-        private System.Windows.Forms.Label lb_rgb;
+        private System.Windows.Forms.Label lb_rgb_r;
         private System.Windows.Forms.Timer timer_get_rgb;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
@@ -5084,6 +5111,8 @@
         private System.Windows.Forms.Button bt_script_save;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.PictureBox pictureBox_comport;
+        private System.Windows.Forms.Label lb_rgb_b;
+        private System.Windows.Forms.Label lb_rgb_g;
     }
 }
 
