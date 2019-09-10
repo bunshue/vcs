@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_27_Excel
+﻿namespace vcs_ReadWrite_EXCEL
 {
     partial class Form1
     {

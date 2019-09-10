@@ -1,19 +1,13 @@
 
-DrAP要能分析兩個或多個子目錄
+
 DrAP列出小容量之資料夾
 搜尋相似檔名並羅列出來在Listview
 
 
 在picturebox中抓到上下左右鍵?
 
-
-
 vcs
 template + 如何把 Form1 改掉
-
-colorPicker	+ RGB logo
-		+ 依螢幕寬度 決定顯示位置
-		
 
 演算法類
 1. 輾轉相除法
@@ -31,5 +25,47 @@ colorPicker	+ RGB logo
 
 3. 單字出現頻率統計程式
 
+
+小朋友讀唐詩
+
+
+目前已把設定檔分成兩檔
+poetry.txt  => poetry.ini and poetry.txt
+poetry.ini for setup
+poetry.txt for poetry content
+
+之後考慮用UI來修改設定檔
+	
+
+在debug mode做一個自動檢查新詩詞模式～～～～
+
+Sugar 滾輪有效～～～
+在picturebox上  上下左右無效  Form可以
+
+Kilo 滾輪無效	上下左右無效	突然又可以了～～～～++++
+Romeo滾輪有無效？！？！
+Julia滾輪有無效？！？！
+
+若是隨機模式，要記下所有播放過的詩詞順序，這樣才可以搜尋上一首下一首
+
+pictureBox Double Click後 判斷位置 
+
+改成靠右對齊、靠左對齊、置中對齊
+若是最右下方，則是關閉程式
+或者拉曳畫面至很右邊或很左邊 自動判斷成靠右對齊、靠左對齊，否則就顯示在使用者設定的位置
+
+
+目前有判斷最大高度	80％
+要同時判斷最大寬度	30％
+
+
+改成
+滑鼠滑向右	為下一首
+滑鼠滑向左	為上一首	像是翻書一樣
+
+
+
+
+作者的位置 應該要由底部往上找位置
 
 

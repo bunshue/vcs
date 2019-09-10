@@ -14,7 +14,7 @@ using System.Data.OleDb;                        //for excel read
 
 //方案總管/參考/加入參考/COM/Microsoft Excel 11.0 Object Library
 
-namespace vcs_test_all_27_Excel
+namespace vcs_ReadWrite_EXCEL
 {
     public partial class Form1 : Form
     {

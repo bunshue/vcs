@@ -34,8 +34,8 @@ namespace vcs_DrAP
 
             if (old_search_path.Count == 0)
             {
-                content += "C:\\\\______test_vcs\n";
-                old_search_path.Add("C:\\\\______test_vcs");
+                content += "C:\\______test_vcs\n";
+                old_search_path.Add("C:\\______test_vcs");
             }
             else
             {
@@ -123,6 +123,7 @@ namespace vcs_DrAP
         string filetype2 = String.Empty;
         Int64 total_size = 0;
         Int64 total_files = 0;
+        Int64 total_folders = 0;
         Int64 folder_size = 0;
         Int64 folder_files = 0;
         int step = 0;
@@ -138,6 +139,10 @@ namespace vcs_DrAP
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
         string search_path = String.Empty;
+
+        private const int SEARCH_MODE_VCS = 0x00;	//search vcs code
+        private const int SEARCH_MODE_PYTHON = 0x01;	//search python code
+        int search_mode = SEARCH_MODE_VCS;
 
         List<String> old_search_path = new List<String>();
 
@@ -156,11 +161,25 @@ namespace vcs_DrAP
             }
         }
 
+        public class MyFolderInfo
+        {
+            public string foldername;
+            public string folderpath;
+            public long size;
+            public MyFolderInfo(string n, string p, long s)
+            {
+                this.foldername = n;
+                this.folderpath = p;
+                this.size = s;
+            }
+        }
+
         //不用宣告長度的陣列(Array)
         // 宣告fileinfos 為List
         // 以下List 裡為MyFileInfo 型態
 
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -567,6 +586,53 @@ namespace vcs_DrAP
                 //設置ListView最後一行可見
                 //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
+
+        }
+
+
+        void show_file_info4()
+        {
+            richTextBox1.Text += "show_file_info4 ST\n";
+
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.Clear();
+            //設置列名稱
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+            listView1.Visible = true;
+
+            if (checkBox2.Checked == true)
+            {
+                //排序 由小到大
+                //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
+
+                //排序 由大到小  在return的地方多個負號       先不排序
+                //fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+            }
+
+            for (int i = 0; i < folderinfos.Count; i++)
+            {
+                richTextBox1.Text += "name : " + folderinfos[i].foldername + " path : " + folderinfos[i].folderpath + " size : " + folderinfos[i].size.ToString() + "\n";
+
+                ListViewItem i1 = new ListViewItem(folderinfos[i].foldername);
+
+                i1.UseItemStyleForSubItems = false;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(folderinfos[i].size));
+                i1.SubItems.Add(sub_i1a);
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+                listView1.Items.Add(i1);
+                //設置ListView最後一行可見
+                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+            }
+
 
         }
 
@@ -1011,7 +1077,16 @@ namespace vcs_DrAP
             FileInfo fi = new FileInfo(path);
             //richTextBox2.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
             bool res;
-            string pattern = "Form1.cs";
+            string pattern = string.Empty;// = "Form1.cs";
+
+
+            if(search_mode == SEARCH_MODE_VCS)
+                pattern = "Form1.cs";
+            else if (search_mode == SEARCH_MODE_PYTHON)
+                pattern = "py";
+            else
+                pattern = "Form1.cs";
+
             res = fi.FullName.ToLower().Replace(" ", "").Contains(pattern.ToLower());
 
             if (res == true)
@@ -1055,6 +1130,7 @@ namespace vcs_DrAP
 
         private void button13_Click(object sender, EventArgs e)
         {
+            search_mode = SEARCH_MODE_VCS;
             if (textBox3.Text == "")
             {
                 richTextBox2.Text += "未輸入搜尋內容\n";
@@ -1083,7 +1159,6 @@ namespace vcs_DrAP
             show_file_info3();
             flag_search_vcs_pattern = 1;
             return;
-
         }
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
@@ -1352,6 +1427,212 @@ namespace vcs_DrAP
 
             }
 
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            folderinfos.Clear();
+
+            total_size = 0;
+            total_files = 0;
+
+            path = "C:\\______test_vcs\\_case1";
+
+            richTextBox2.Text += "\n搜尋路徑 " + path + "\n";
+
+            total_folders = 0;
+
+            if (File.Exists(path))
+            {
+                // This path is a file
+                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
+                ProcessFile2(path, 0);
+                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                flag_search_done = 1;
+            }
+            else if (Directory.Exists(path))
+            {
+                // This path is a directory
+                FolederName = path;
+                ProcessDirectory2(path);
+
+                richTextBox1.Text += "\n類型: 檔案資料夾\n";
+                richTextBox1.Text += "位置: " + path + "\n";
+                richTextBox1.Text += "大小: " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "(" + total_size.ToString() + "位元組)\n";
+                richTextBox1.Text += "包含: " + total_files.ToString() + "個檔案，" + (total_folders - 1).ToString() + "個資料夾\n";
+
+                show_file_info4();
+            }
+            else
+            {
+                //Console.WriteLine("{0} is not a valid file or directory.", path);
+                richTextBox1.Text += "非合法路徑或檔案\n";
+                flag_search_done = 0;
+            }
+
+
+
+
+
+        }
+
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessDirectory2(string targetDirectory)
+        {
+            try
+            {
+                //richTextBox1.Text += targetDirectory + "\n\n";
+                //DirectoryInfo di = new DirectoryInfo(targetDirectory);
+                //richTextBox1.Text += di.Name + "\n\n";
+
+                // Process the list of files found in the directory.
+                try
+                {
+                    total_folders++;
+                    richTextBox1.Text += "\n開始處理資料夾 : " + targetDirectory + "\n";
+
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    Array.Sort(fileEntries);
+                    folder_size = 0;
+                    folder_files = 0;
+                    foreach (string fileName in fileEntries)
+                    {
+                        ProcessFile2(fileName, step);
+                    }
+
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    Array.Sort(subdirectoryEntries);
+
+                    //richTextBox1.Text += "共有 " + subdirectoryEntries.Length.ToString() + " 個子目錄\n";
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        richTextBox1.Text += "dir = " + subdirectory + "\n";
+                    }
+
+                    richTextBox1.Text += "資料夾 : " + targetDirectory + " ";
+                    richTextBox1.Text += "子目錄數 : " + subdirectoryEntries.Length.ToString() + "\t";
+                    richTextBox1.Text += "檔案數 : " + folder_files.ToString() + "\t";
+                    richTextBox1.Text += "檔案大小總計 : " + folder_size.ToString() + "\n";
+                    if (folder_files == 0)
+                    {
+                        richTextBox1.Text += "空資料夾 folder_name = " + targetDirectory + "\n";
+                    }
+
+                    if (subdirectoryEntries.Length == 0)
+                    {
+                        richTextBox1.Text += "資料夾 : " + targetDirectory + " 是最底層的資料夾\n";
+
+                        folderinfos.Add(new MyFolderInfo(targetDirectory, targetDirectory, folder_size));
+
+                        //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
+
+
+
+                    }
+
+
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        if (checkBox1.Checked == false)
+                        {
+                            richTextBox1.Text += "xxxxxxxxxxx\n";
+                            richTextBox1.Text += "\n";
+                            //for (int i = 0; i < step * 2; i++)
+                            //richTextBox1.Text += " ";
+                            richTextBox1.Text += di.Name + "\n";
+                        }
+                        step++;
+                        FolederName = subdirectory;
+                        ProcessDirectory2(subdirectory);
+                    }
+                    step = 0;
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                    //MessageBox.Show(ex.Message);
+                    /*
+                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
+                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
+                    if ((attr & FileAttributes.ReadOnly) > 0)
+                        Console.Write("The file is read-only.");
+                    */
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                /*
+                Console.WriteLine(
+                    "{0}: The write operation could not " +
+                    "be performed because the specified " +
+                    "part of the file is locked.",
+                    e.GetType().Name);
+                */
+            }
+            richTextBox1.Text += "處理資料夾 : " + targetDirectory + " 結束\n";
+            //此目錄狀況
+
+
+        }
+
+        // Insert logic for processing found files here.
+        public void ProcessFile2(string path, int step)
+        {
+            //richTextBox1.Text += path + "\n";
+            FileInfo fi = new FileInfo(path);
+
+            //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
+
+            total_size += fi.Length;
+            total_files++;
+            folder_size += fi.Length;
+            folder_files++;
+
+            //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
+            //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+            //fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
+
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            search_mode = SEARCH_MODE_PYTHON;
+            if (textBox3.Text == "")
+            {
+                richTextBox2.Text += "未輸入搜尋內容\n";
+                return;
+            }
+
+            fileinfos.Clear();
+
+            string path = @"D:\___source_code\_git\part1\vcs\_4.cmpp\_python_test";
+
+            if (path == String.Empty)
+                path = search_path;
+
+            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            if (File.Exists(path))
+            {
+                // This path is a file
+                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
+                ProcessFileS(path);
+            }
+            else if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessDirectoryS(path);
+            }
+            show_file_info3();
+            flag_search_vcs_pattern = 1;
+            return;
 
         }
 
