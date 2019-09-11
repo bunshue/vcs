@@ -2710,7 +2710,6 @@ namespace imsLink
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
             //開啟檔案總管
             System.Diagnostics.Process.Start(currentPath);
-
         }
 
         private void button74_Click(object sender, EventArgs e)

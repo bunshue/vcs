@@ -141,7 +141,6 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.button46 = new System.Windows.Forms.Button();
             this.panel_camera_status3 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.lb_write_camera_serial2 = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -169,6 +168,8 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.lb_rgb_b = new System.Windows.Forms.Label();
+            this.lb_rgb_g = new System.Windows.Forms.Label();
             this.bt_script_save = new System.Windows.Forms.Button();
             this.bt_script_load = new System.Windows.Forms.Button();
             this.bt_cancel = new System.Windows.Forms.Button();
@@ -395,8 +396,8 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.lb_rgb_g = new System.Windows.Forms.Label();
-            this.lb_rgb_b = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -1624,9 +1625,10 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.label12);
+            this.groupBox10.Controls.Add(this.label11);
             this.groupBox10.Controls.Add(this.button46);
             this.groupBox10.Controls.Add(this.panel_camera_status3);
-            this.groupBox10.Controls.Add(this.panel7);
             this.groupBox10.Controls.Add(this.lb_write_camera_serial2);
             this.groupBox10.Controls.Add(this.bt_confirm);
             this.groupBox10.Controls.Add(this.panel9);
@@ -1669,15 +1671,6 @@
             this.panel_camera_status3.Name = "panel_camera_status3";
             this.panel_camera_status3.Size = new System.Drawing.Size(80, 80);
             this.panel_camera_status3.TabIndex = 106;
-            // 
-            // panel7
-            // 
-            this.panel7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel7.BackgroundImage")));
-            this.panel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel7.Location = new System.Drawing.Point(557, 463);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(260, 77);
-            this.panel7.TabIndex = 75;
             // 
             // lb_write_camera_serial2
             // 
@@ -2062,6 +2055,28 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_rgb_b
+            // 
+            this.lb_rgb_b.AutoSize = true;
+            this.lb_rgb_b.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_b.ForeColor = System.Drawing.Color.Blue;
+            this.lb_rgb_b.Location = new System.Drawing.Point(709, 545);
+            this.lb_rgb_b.Name = "lb_rgb_b";
+            this.lb_rgb_b.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_b.TabIndex = 155;
+            this.lb_rgb_b.Text = "B";
+            // 
+            // lb_rgb_g
+            // 
+            this.lb_rgb_g.AutoSize = true;
+            this.lb_rgb_g.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_g.ForeColor = System.Drawing.Color.Green;
+            this.lb_rgb_g.Location = new System.Drawing.Point(676, 545);
+            this.lb_rgb_g.Name = "lb_rgb_g";
+            this.lb_rgb_g.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_g.TabIndex = 154;
+            this.lb_rgb_g.Text = "G";
             // 
             // bt_script_save
             // 
@@ -4622,27 +4637,27 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // lb_rgb_g
+            // label11
             // 
-            this.lb_rgb_g.AutoSize = true;
-            this.lb_rgb_g.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rgb_g.ForeColor = System.Drawing.Color.Green;
-            this.lb_rgb_g.Location = new System.Drawing.Point(676, 545);
-            this.lb_rgb_g.Name = "lb_rgb_g";
-            this.lb_rgb_g.Size = new System.Drawing.Size(25, 28);
-            this.lb_rgb_g.TabIndex = 154;
-            this.lb_rgb_g.Text = "G";
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(133, 470);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(260, 24);
+            this.label11.TabIndex = 143;
+            this.label11.Text = "不能重複燒錄相機序號";
             // 
-            // lb_rgb_b
+            // label12
             // 
-            this.lb_rgb_b.AutoSize = true;
-            this.lb_rgb_b.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rgb_b.ForeColor = System.Drawing.Color.Blue;
-            this.lb_rgb_b.Location = new System.Drawing.Point(709, 545);
-            this.lb_rgb_b.Name = "lb_rgb_b";
-            this.lb_rgb_b.Size = new System.Drawing.Size(25, 28);
-            this.lb_rgb_b.TabIndex = 155;
-            this.lb_rgb_b.Text = "B";
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(133, 503);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(610, 24);
+            this.label12.TabIndex = 144;
+            this.label12.Text = "若需改寫相機序號，需使用色彩校正把舊相機序號洗掉";
             // 
             // Form1
             // 
@@ -4952,7 +4967,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label lb_write_camera_serial2;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel_camera_status3;
         private System.Windows.Forms.Timer timer_webcam;
         private System.Windows.Forms.Label lb_data;
@@ -5113,6 +5127,8 @@
         private System.Windows.Forms.PictureBox pictureBox_comport;
         private System.Windows.Forms.Label lb_rgb_b;
         private System.Windows.Forms.Label lb_rgb_g;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
 
