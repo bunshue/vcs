@@ -25,10 +25,10 @@ namespace MD5Arithmetic
         {
             while (true)
             {
-                Console.Write("请输入密码：");
+                Console.Write("請輸入密碼 : ");
                 string P_str_Code = Console.ReadLine();//记录要加密的密码
                 Program program=new Program();//创建Program对象
-                Console.WriteLine("使用MD5加密后的结果为：" + program.Encrypt(P_str_Code));//输出加密后的字符串
+                Console.WriteLine("使用MD5加密後的結果為 : " + program.Encrypt(P_str_Code));//输出加密后的字符串
             }
         }
     }

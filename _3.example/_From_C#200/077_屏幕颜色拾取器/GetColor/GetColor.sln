@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetColor", "GetColor\GetColor.csproj", "{EE6C9862-22CB-402B-B0D2-11C696DA8EC6}"
 EndProject
 Global

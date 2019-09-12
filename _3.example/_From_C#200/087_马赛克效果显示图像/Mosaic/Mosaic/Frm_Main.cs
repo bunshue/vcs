@@ -19,9 +19,11 @@ namespace Mosaic
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.ShowDialog();
-            Image myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
-            this.BackgroundImage = myImage;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Image myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
+                this.BackgroundImage = myImage;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = true;
+        bool flag_release_mode = false;
 
         bool flag_enaglb_awb_function = true;
 
@@ -334,6 +334,7 @@ namespace imsLink
                 bt_script.Enabled = false;
                 bt_script_load.Enabled = false;
                 bt_script_save.Enabled = false;
+                bt_script_cancel.Enabled = false;
                 bt_write2.Enabled = false;
 
                 numericUpDown_TG_R.Enabled = false;
@@ -1814,6 +1815,15 @@ namespace imsLink
             numericUpDown_TG_G.Visible = en;
             numericUpDown_TG_B.Visible = en;
 
+            b7.Visible = en;
+            b6.Visible = en;
+            b5.Visible = en;
+            b4.Visible = en;
+            b3.Visible = en;
+            b2.Visible = en;
+            b1.Visible = en;
+            b0.Visible = en;
+
             if (flag_release_mode == true)
             {
                 //Expo
@@ -1958,9 +1968,9 @@ namespace imsLink
             lb_note2.Location = new Point(11 + 180, 489 + 65 + 20);
             lb_note3.Location = new Point(11 + 180, 489 + 65 + 40);
             */
-            lb_rgb_r.Location = new Point(5, 489 + 65 + 45);
-            lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 45);
-            lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 45);
+            lb_rgb_r.Location = new Point(5, 489 + 65 + 47);
+            lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47);
+            lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47);
 
             if (flag_display_mode == DISPLAY_SD)
             {
@@ -2101,13 +2111,26 @@ namespace imsLink
             tb_3a.Location = new Point(30 + dx, y_st + 30);
             tb_4a.Location = new Point(100 + dx, y_st + 30);
 
+            y_st = 521;
+            int dxx = 16;
+            b7.Location = new Point(30 + dx + dxx * 0, y_st + 30 + 35);
+            b6.Location = new Point(30 + dx + dxx * 1, y_st + 30 + 35);
+            b5.Location = new Point(30 + dx + dxx * 2, y_st + 30 + 35);
+            b4.Location = new Point(30 + dx + dxx * 3, y_st + 30 + 35);
+            b3.Location = new Point(30 + dx + dxx * 4 + 5, y_st + 30 + 35);
+            b2.Location = new Point(30 + dx + dxx * 5 + 5, y_st + 30 + 35);
+            b1.Location = new Point(30 + dx + dxx * 6 + 5, y_st + 30 + 35);
+            b0.Location = new Point(30 + dx + dxx * 7 + 5, y_st + 30 + 35);
+
             x_st = 140;
+            y_st = 510;
             dx = 65;
             bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
             bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
             bt_script.Location = new Point(x_st + dx * 5, y_st + 30);
-            bt_cancel.Location = new Point(x_st + dx * 6, y_st + 30);       //at the same place
-            bt_script_load.Location = new Point(x_st + dx * 6, y_st + 30);  //at the same place
+
+            bt_cancel.Location = new Point(x_st + dx * 5, y_st + 30 + 32);       //at the same place
+            bt_script_load.Location = new Point(x_st + dx * 5, y_st + 30 + 32);  //at the same place
 
             //EXPO GAIN R G B
             x_st = 140;
@@ -2455,6 +2478,7 @@ namespace imsLink
             lb_awb_data.Text = "";
             lb_awb_time.Text = "";
             bt_script_save.Visible = false;
+            bt_script_cancel.Visible = false;
 
             if (flag_release_mode == true)
             {
@@ -2600,6 +2624,7 @@ namespace imsLink
 
             richTextBox2.Visible = false;
             bt_script_save.Visible = false;
+            bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
             return;
         }
@@ -3088,10 +3113,10 @@ namespace imsLink
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            cnt1 = 1;
+            cnt1 = 0;
             DongleAddr_h = 0x50;
             DongleAddr_l = 0x80;
-            DongleData = (byte)(cnt1 + 128);
+            DongleData = (byte)(cnt1 * 4 + 128);
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
         }
 
@@ -3102,10 +3127,10 @@ namespace imsLink
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            cnt1 = 2;
+            cnt1 = 1;
             DongleAddr_h = 0x50;
             DongleAddr_l = 0x80;
-            DongleData = (byte)(cnt1 + 128);
+            DongleData = (byte)(cnt1 * 4 + 128);
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
 
         }
@@ -3117,10 +3142,10 @@ namespace imsLink
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            cnt1 = 3;
+            cnt1 = 2;
             DongleAddr_h = 0x50;
             DongleAddr_l = 0x80;
-            DongleData = (byte)(cnt1 + 128);
+            DongleData = (byte)(cnt1 * 4 + 128);
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
         }
 
@@ -3131,10 +3156,10 @@ namespace imsLink
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            cnt1 = 4;
+            cnt1 = 3;
             DongleAddr_h = 0x50;
             DongleAddr_l = 0x80;
-            DongleData = (byte)(cnt1 + 128);
+            DongleData = (byte)(cnt1 * 4 + 128);
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
         }
 
@@ -3174,6 +3199,8 @@ namespace imsLink
 
             int value = Convert.ToInt32(tb_3a.Text, 16);
             tb_4a.Text = value.ToString();
+
+            show_hex2bit(value);
         }
 
         private void tb_4_TextChanged(object sender, EventArgs e)
@@ -4884,9 +4911,9 @@ namespace imsLink
                     show_awb_item_visible(true);    //333
 
                     //cb_enable_awb.Location = new Point(11, 489 + 110);
-                    lb_note1.Location = new Point(11 + 180, 489 + 98);
-                    lb_note2.Location = new Point(11 + 180, 489 + 98 + 25);
-                    lb_note3.Location = new Point(11 + 180, 489 + 98 + 50);
+                    lb_note1.Location = new Point(11 + 180, 489 + 98 + 19);
+                    lb_note2.Location = new Point(11 + 180, 489 + 98 + 25 + 12);
+                    lb_note3.Location = new Point(11 + 180, 489 + 98 + 50 + 6);
                 }
                 else
                 {
@@ -10187,6 +10214,7 @@ namespace imsLink
                 flag_script_data_on = true;
                 richTextBox2.Visible = true;
                 bt_script_save.Visible = true;
+                bt_script_cancel.Visible = true;
                 bt_cancel.Visible = true;
                 bt_script.Text = "OK\n";
 
@@ -10202,10 +10230,11 @@ namespace imsLink
                 else
                 {
                     x_st = 191;
-                    y_st = 489 + 98;
+                    y_st = 489 + 98 + 20;
                     richTextBox2.Location = new Point(x_st, y_st);
                     richTextBox2.Size = new System.Drawing.Size(400, 300);
                     bt_script_save.Location = new Point(x_st + 318, y_st + 2);
+                    bt_script_cancel.Location = new Point(x_st + 318, y_st + 2 + 32);
                 }
 
             }
@@ -10214,6 +10243,7 @@ namespace imsLink
                 flag_script_data_on = false;
                 richTextBox2.Visible = false;
                 bt_script_save.Visible = false;
+                bt_script_cancel.Visible = false;
                 bt_cancel.Visible = false;
                 bt_script.Text = "Script\n";
                 bt_script_load.Visible = true;
@@ -10232,6 +10262,7 @@ namespace imsLink
             flag_script_data_on = false;
             richTextBox2.Visible = false;
             bt_script_save.Visible = false;
+            bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
             bt_script_load.Visible = true;
             bt_script.Text = "Script\n";
@@ -10283,6 +10314,7 @@ namespace imsLink
                 flag_script_data_on = true;
                 richTextBox2.Visible = true;
                 bt_script_save.Visible = true;
+                bt_script_cancel.Visible = true;
                 bt_cancel.Visible = true;
                 bt_script.Text = "OK\n";
 
@@ -10298,10 +10330,11 @@ namespace imsLink
                 else
                 {
                     x_st = 191;
-                    y_st = 489 + 98;
+                    y_st = 489 + 98 + 20;
                     richTextBox2.Location = new Point(x_st, y_st);
                     richTextBox2.Size = new System.Drawing.Size(400, 300);
                     bt_script_save.Location = new Point(x_st + 318, y_st + 2);
+                    bt_script_cancel.Location = new Point(x_st + 318, y_st + 2 + 32);
                 }
                 richTextBox2.Clear();
 
@@ -10320,10 +10353,7 @@ namespace imsLink
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
-            bt_script_load.Text = "File";
-
-            
-
+            bt_script_load.Text = "Load";
         }
 
         private void bt_script_save_Click(object sender, EventArgs e)
@@ -10360,7 +10390,67 @@ namespace imsLink
             }
         }
 
+        private void sensor_data_bit_change(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "sensor_data_bit_change\n";
+            int value = 0;
+            if (b7.Checked == true)
+                value |= (1 << 7);
+            if (b6.Checked == true)
+                value |= (1 << 6);
+            if (b5.Checked == true)
+                value |= (1 << 5);
+            if (b4.Checked == true)
+                value |= (1 << 4);
+            if (b3.Checked == true)
+                value |= (1 << 3);
+            if (b2.Checked == true)
+                value |= (1 << 2);
+            if (b1.Checked == true)
+                value |= (1 << 1);
+            if (b0.Checked == true)
+                value |= (1 << 0);
+            //richTextBox1.Text += "value = 0x " + value.ToString("X2") + " = " + value.ToString() + "\n";
+            tb_3a.Text = value.ToString("X2");
+            tb_4a.Text = value.ToString();
+        }
 
+        void show_hex2bit(int value)
+        {
+            //richTextBox1.Text += "show_hex2bit\n";
+            if (((value >> 7) & 0x01) == 0x01)
+                b7.Checked = true;
+            else
+                b7.Checked = false;
+            if (((value >> 6) & 0x01) == 0x01)
+                b6.Checked = true;
+            else
+                b6.Checked = false;
+            if (((value >> 5) & 0x01) == 0x01)
+                b5.Checked = true;
+            else
+                b5.Checked = false;
+            if (((value >> 4) & 0x01) == 0x01)
+                b4.Checked = true;
+            else
+                b4.Checked = false;
+            if (((value >> 3) & 0x01) == 0x01)
+                b3.Checked = true;
+            else
+                b3.Checked = false;
+            if (((value >> 2) & 0x01) == 0x01)
+                b2.Checked = true;
+            else
+                b2.Checked = false;
+            if (((value >> 1) & 0x01) == 0x01)
+                b1.Checked = true;
+            else
+                b1.Checked = false;
+            if (((value >> 0) & 0x01) == 0x01)
+                b0.Checked = true;
+            else
+                b0.Checked = false;
+        }
     }
 }
 
