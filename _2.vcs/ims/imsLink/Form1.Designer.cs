@@ -170,6 +170,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_script_cancel = new System.Windows.Forms.Button();
             this.b0 = new System.Windows.Forms.CheckBox();
             this.b1 = new System.Windows.Forms.CheckBox();
             this.b2 = new System.Windows.Forms.CheckBox();
@@ -406,7 +407,6 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.bt_script_cancel = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -2095,6 +2095,19 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_script_cancel
+            // 
+            this.bt_script_cancel.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_script_cancel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_script_cancel.ForeColor = System.Drawing.Color.Black;
+            this.bt_script_cancel.Location = new System.Drawing.Point(799, 545);
+            this.bt_script_cancel.Name = "bt_script_cancel";
+            this.bt_script_cancel.Size = new System.Drawing.Size(64, 32);
+            this.bt_script_cancel.TabIndex = 164;
+            this.bt_script_cancel.Text = "Cancel";
+            this.bt_script_cancel.UseVisualStyleBackColor = false;
+            this.bt_script_cancel.Click += new System.EventHandler(this.bt_script_cancel_Click);
             // 
             // b0
             // 
@@ -4756,18 +4769,6 @@
             this.button33.TabIndex = 28;
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
-            // bt_script_cancel
-            // 
-            this.bt_script_cancel.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_script_cancel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_script_cancel.ForeColor = System.Drawing.Color.Black;
-            this.bt_script_cancel.Location = new System.Drawing.Point(799, 545);
-            this.bt_script_cancel.Name = "bt_script_cancel";
-            this.bt_script_cancel.Size = new System.Drawing.Size(64, 32);
-            this.bt_script_cancel.TabIndex = 164;
-            this.bt_script_cancel.Text = "Cancel";
-            this.bt_script_cancel.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 

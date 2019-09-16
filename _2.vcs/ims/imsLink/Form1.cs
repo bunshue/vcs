@@ -10216,7 +10216,7 @@ namespace imsLink
                 bt_script_save.Visible = true;
                 bt_script_cancel.Visible = true;
                 bt_cancel.Visible = true;
-                bt_script.Text = "OK\n";
+                bt_script.Text = "Apply";
 
                 int x_st;
                 int y_st;
@@ -10245,7 +10245,7 @@ namespace imsLink
                 bt_script_save.Visible = false;
                 bt_script_cancel.Visible = false;
                 bt_cancel.Visible = false;
-                bt_script.Text = "Script\n";
+                bt_script.Text = "Script";
                 bt_script_load.Visible = true;
 
                 if (flag_comport_ok == false)
@@ -10265,7 +10265,7 @@ namespace imsLink
             bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
             bt_script_load.Visible = true;
-            bt_script.Text = "Script\n";
+            bt_script.Text = "Script";
         }
 
         void parse_script_command_and_send()
@@ -10316,7 +10316,7 @@ namespace imsLink
                 bt_script_save.Visible = true;
                 bt_script_cancel.Visible = true;
                 bt_cancel.Visible = true;
-                bt_script.Text = "OK\n";
+                bt_script.Text = "Apply";
 
                 int x_st;
                 int y_st;
@@ -10450,6 +10450,17 @@ namespace imsLink
                 b0.Checked = true;
             else
                 b0.Checked = false;
+        }
+
+        private void bt_script_cancel_Click(object sender, EventArgs e)
+        {
+            flag_script_data_on = false;
+            richTextBox2.Visible = false;
+            bt_script_save.Visible = false;
+            bt_script_cancel.Visible = false;
+            bt_cancel.Visible = false;
+            bt_script_load.Visible = true;
+            bt_script.Text = "Script";
         }
     }
 }

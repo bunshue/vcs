@@ -790,9 +790,17 @@ namespace vcs_DrAP
                 fullname = listView1.Items[selNdx].Text;
 
                 richTextBox1.Text += "開啟路徑: " + fullname + "\n";
+                /* old
                 //開啟檔案總管
-                //System.Diagnostics.Process.Start(fullname);
-                System.Diagnostics.Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
+                if (Directory.GetParent(fullname) == null)
+                    System.Diagnostics.Process.Start(fullname);             //若是跟目錄 不要擷取其父目錄的路徑
+                else
+                    System.Diagnostics.Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
+                */
+                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+                string file = @"C:\Windows\explorer.exe";
+                string argument = @"/select, " + fullname;
+                System.Diagnostics.Process.Start(file, argument);
 
                 return;
             }

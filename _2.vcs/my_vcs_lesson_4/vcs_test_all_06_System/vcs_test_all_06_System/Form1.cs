@@ -116,7 +116,14 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "UserInteractive: " + Environment.UserInteractive + "\n";
             richTextBox1.Text += "UserName: " + Environment.UserName + "\n";    //操作系統的登錄用户名
             richTextBox1.Text += "WorkingSet: " + Environment.WorkingSet + "\n";
+            richTextBox1.Text += "OSVersion: " + Environment.OSVersion.ToString() + "\n";
 
+            richTextBox1.Text += "GetFolderPath System: " + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
+            richTextBox1.Text += "GetFolderPath SendTo: " + Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\n";
+            richTextBox1.Text += "GetFolderPath StartMenu: " + Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\n";
+            richTextBox1.Text += "GetFolderPath Personal: " + Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\n";
+            richTextBox1.Text += "GetFolderPath MyMusic: " + Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\n";
+            richTextBox1.Text += "GetFolderPath MyComputer: " + Environment.GetFolderPath(Environment.SpecialFolder.MyComputer) + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
