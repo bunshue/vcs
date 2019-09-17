@@ -48,6 +48,9 @@
             this.label22 = new System.Windows.Forms.Label();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.button2 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
@@ -66,11 +69,12 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(601, 580);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(372, 557);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(60, 60);
             this.button1.TabIndex = 1;
-            this.button1.Text = "OK";
+            this.button1.Text = "離開";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -204,29 +208,59 @@
             // numericUpDown4
             // 
             this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown4.Location = new System.Drawing.Point(326, 170);
+            this.numericUpDown4.Location = new System.Drawing.Point(326, 169);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(88, 33);
             this.numericUpDown4.TabIndex = 16;
             this.numericUpDown4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown4.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // numericUpDown6
             // 
             this.numericUpDown6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.numericUpDown6.Location = new System.Drawing.Point(326, 228);
+            this.numericUpDown6.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(88, 33);
             this.numericUpDown6.TabIndex = 17;
             this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown6.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // numericUpDown7
             // 
             this.numericUpDown7.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.numericUpDown7.Location = new System.Drawing.Point(326, 292);
+            this.numericUpDown7.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.numericUpDown7.Name = "numericUpDown7";
             this.numericUpDown7.Size = new System.Drawing.Size(88, 33);
             this.numericUpDown7.TabIndex = 18;
             this.numericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown7.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // label22
             // 
@@ -247,12 +281,46 @@
             this.button2.TabIndex = 20;
             this.button2.Text = "修改";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(438, 324);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(255, 293);
+            this.richTextBox1.TabIndex = 21;
+            this.richTextBox1.Text = "";
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(306, 557);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(60, 60);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "儲存";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(240, 557);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(60, 60);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "恢復";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 629);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.numericUpDown7);
@@ -305,5 +373,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

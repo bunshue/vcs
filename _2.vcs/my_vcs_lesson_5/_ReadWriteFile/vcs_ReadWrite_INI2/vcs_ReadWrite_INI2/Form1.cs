@@ -46,35 +46,33 @@ namespace vcs_ReadWrite_INI2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            filename = Application.StartupPath + "\\ConnectString.ini";		//INI文件的物理地址
+            filename = Application.StartupPath + "\\readwritetest.ini";		//INI文件的物理地址
             richTextBox1.Text += "filename = " + filename + "\n";
             strOne = System.IO.Path.GetFileNameWithoutExtension(filename); 		//獲取INI文件的文件名
             if (File.Exists(filename)) 						//判斷是否存在該INI文件
             {
-                richTextBox1.Text += "服務器: " + ContentReader(strOne, "Data Source", "") + "\n";			//讀取INI文件中服務器節點的內容
-                richTextBox1.Text += "數據庫: " + ContentReader(strOne, "DataBase", "") + "\n";			    //讀取INI文件中數據庫節點的內容
-                richTextBox1.Text += "登錄身份: " + ContentReader(strOne, "Uid", "") + "\n";				//讀取INI文件中用戶節點的內容
-                richTextBox1.Text += "登錄密碼: " + ContentReader(strOne, "Pwd", "") + "\n";				//讀取INI文件中密碼節點的內容
+                richTextBox1.Text += "第1項: " + ContentReader(strOne, "第1項", "") + "\n";			//讀取INI文件中的第1項
+                richTextBox1.Text += "第2項: " + ContentReader(strOne, "第2項", "") + "\n";		    //讀取INI文件中的第2項
+                richTextBox1.Text += "第3項: " + ContentReader(strOne, "第3項", "") + "\n";			//讀取INI文件中的第3項
+                richTextBox1.Text += "第4項: " + ContentReader(strOne, "第4項", "") + "\n";			//讀取INI文件中的第4項
 
-                textBox1.Text = ContentReader(strOne, "Data Source", "");			//讀取INI文件中服務器節點的內容
-                textBox2.Text = ContentReader(strOne, "DataBase", "");			    //讀取INI文件中數據庫節點的內容
-                textBox3.Text = ContentReader(strOne, "Uid", "");   				//讀取INI文件中用戶節點的內容
-                textBox4.Text = ContentReader(strOne, "Pwd", "");	    			//讀取INI文件中密碼節點的內容
+                textBox1.Text = ContentReader(strOne, "第1項", "");       //讀取INI文件中的第1項
+                textBox2.Text = ContentReader(strOne, "第2項", "");       //讀取INI文件中的第2項
+                textBox3.Text = ContentReader(strOne, "第3項", "");       //讀取INI文件中的第3項
+                textBox4.Text = ContentReader(strOne, "第4項", "");       //讀取INI文件中的第4項
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            filename = Application.StartupPath + "\\ConnectString2.ini";		//INI文件的物理地址
+            filename = Application.StartupPath + "\\readwritetest2.ini";		//INI文件的物理地址
             //if (File.Exists(filename))											//判断是否存在INI文件
             {
-                WritePrivateProfileString(strOne, "Data Source", textBox1.Text, filename); 		//修改INI文件中服务器节点的内容
-                WritePrivateProfileString(strOne, "DataBase", textBox2.Text, filename); 		//修改INI文件中数据库节点的内容
-                WritePrivateProfileString(strOne, "Uid", textBox3.Text, filename); 			//修改INI文件中用户节点的内容
-                WritePrivateProfileString(strOne, "Pwd", textBox4.Text, filename); 			//修改INI文件中密码节点的内容
-                MessageBox.Show("恭喜你，修改成功！", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                WritePrivateProfileString(strOne, "第1項", textBox1.Text, filename); 		    //修改INI文件中的第1項
+                WritePrivateProfileString(strOne, "第2項", textBox2.Text, filename); 		    //修改INI文件中的第2項
+                WritePrivateProfileString(strOne, "第3項", textBox3.Text, filename); 			//修改INI文件中的第3項
+                WritePrivateProfileString(strOne, "第4項", textBox4.Text, filename); 			//修改INI文件中的第4項
+                richTextBox1.Text += "修改成功\n";
             }
             //else
             {
