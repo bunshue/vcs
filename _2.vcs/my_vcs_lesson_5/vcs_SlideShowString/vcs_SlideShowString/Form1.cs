@@ -41,9 +41,9 @@ namespace vcs_SlideShowString
         private const int D1 = 30;
         private const int D2 = 12;
         private const int D3 = 6;
-        private const int PLAYMODE_SEQUENCE = 0;
-        private const int PLAYMODE_RANDOM = 1;
-        private const int PLAYMODE_SEQUENCE_RANDOM = 2;
+        private const int PLAYMODE_SEQUENCE = 0;        //依序
+        private const int PLAYMODE_RANDOM = 1;          //隨機
+        private const int PLAYMODE_SEQUENCE_RANDOM = 2; //依序隨機啟動
         private const int MOVE_STEP = 50;
 
         int strings_count = 0;
@@ -66,10 +66,9 @@ namespace vcs_SlideShowString
         int align_direction = 0;
         int play_sequence = 0;
         string font_type = String.Empty;
-        int font_size_default = 0;
-        int font_size_user = 0;
+        int font_size_default = 20;
         float font_size_current;
-        float font_size_current_max;
+        float font_size_current_max;//reserved
         int display_width = 0;      //percentage
         int display_height = 0;     //percentage
         int slide_show_interval = 0;
@@ -212,35 +211,6 @@ namespace vcs_SlideShowString
                             richTextBox1.Text += "依序\n";
                         }
                     }
-                    else if (line[0] == '<')
-                    {
-                        if (line[1] == 'X')
-                        {
-                            font_size_default = 36;
-                        }
-                        else if (line[1] == 'L')
-                        {
-                            font_size_default = 24;
-                        }
-                        else if (line[1] == 'M')
-                        {
-                            font_size_default = 20;
-                        }
-                        else if (line[1] == 'S')
-                        {
-                            font_size_default = 16;
-                        }
-                        else if (line[1] == 'U')
-                        {
-                            font_size_default = -1;
-                        }
-                        richTextBox1.Text += "設定預設字型大小: " + font_size_default.ToString() + "\n";
-                    }
-                    else if (line[0] == '>')
-                    {
-                        font_size_user = int.Parse(line.Remove(0, 1));
-                        richTextBox1.Text += "自訂字型大小: " + font_size_user.ToString() + "\n";
-                    }
                     else if (line[0] == '?')
                     {
                         font_type = line.Remove(0, 1);
@@ -312,16 +282,7 @@ namespace vcs_SlideShowString
                 //richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
                 //richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
 
-                if (font_size_default <= 0)
-                {
-                    if (font_size_user > 0)
-                        font_size_default = font_size_user;
-                    else
-                        font_size_default = 16;
-                }
-
-                richTextBox1.Text += "設定字型大小: " + font_size_default.ToString() + "\n";
-
+                richTextBox1.Text += "設定預設字型大小: " + font_size_default.ToString() + "\n";
 
                 if (font_type == string.Empty)
                 {
@@ -428,35 +389,6 @@ namespace vcs_SlideShowString
                             richTextBox1.Text += "依序\n";
                         }
                     }
-                    else if (line[0] == '<')
-                    {
-                        if (line[1] == 'X')
-                        {
-                            font_size_default = 36;
-                        }
-                        else if (line[1] == 'L')
-                        {
-                            font_size_default = 24;
-                        }
-                        else if (line[1] == 'M')
-                        {
-                            font_size_default = 20;
-                        }
-                        else if (line[1] == 'S')
-                        {
-                            font_size_default = 16;
-                        }
-                        else if (line[1] == 'U')
-                        {
-                            font_size_default = -1;
-                        }
-                        richTextBox1.Text += "設定預設字型大小: " + font_size_default.ToString() + "\n";
-                    }
-                    else if (line[0] == '>')
-                    {
-                        font_size_user = int.Parse(line.Remove(0, 1));
-                        richTextBox1.Text += "自訂字型大小: " + font_size_user.ToString() + "\n";
-                    }
                     else if (line[0] == '?')
                     {
                         font_type = line.Remove(0, 1);
@@ -522,6 +454,8 @@ namespace vcs_SlideShowString
                     //richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
                     all_strings.Add(line);
                 }
+                richTextBox1.Text += "設定預設字型大小: " + font_size_default.ToString() + "\n";
+
                 strings_count = all_strings.Count;
                 sr.Close();
 
@@ -530,16 +464,6 @@ namespace vcs_SlideShowString
 
 
                 /*
-                if (font_size_default <= 0)
-                {
-                    if (font_size_user > 0)
-                        font_size_default = font_size_user;
-                    else
-                        font_size_default = 16;
-                }
-
-                richTextBox1.Text += "設定字型大小: " + font_size_default.ToString() + "\n";
-
 
                 if (font_type == string.Empty)
                 {
@@ -879,7 +803,8 @@ namespace vcs_SlideShowString
                     {   //依序隨機啟動 -> 依序 從頭
                         richTextBox1.Text += "依序隨機啟動 -> 依序 從頭\n";
                         play_sequence = PLAYMODE_SEQUENCE;
-                        show_lyrics_index = 0;
+                        Random r = new Random();
+                        show_lyrics_index = r.Next(lyrics_count);
                     }
                     else
                     {   //依序 從頭
@@ -1022,6 +947,10 @@ namespace vcs_SlideShowString
             else if (play_sequence == PLAYMODE_RANDOM)
             {   //隨機
                 show_lyrics_index = random_play_sequence[0];
+            }
+            else if (play_sequence == PLAYMODE_SEQUENCE_RANDOM)
+            {   //依序隨機啟動
+                show_lyrics_index = r.Next(lyrics_count);
             }
             else
                 show_lyrics_index = 0;
@@ -1568,7 +1497,6 @@ namespace vcs_SlideShowString
             richTextBox1.Text += "從頭播起 從大List裡找出第 " + show_lyrics_index.ToString() + "首的內容\n";
             */
 
-
             f = new Font(font_type, font_size_default);
 
             bmp = new Bitmap(100, 100);     //initial W, H
@@ -2087,7 +2015,7 @@ namespace vcs_SlideShowString
 
             int next_show_lyrics_index = 0;
 
-            if (play_sequence == PLAYMODE_SEQUENCE)
+            if ((play_sequence == PLAYMODE_SEQUENCE) || (play_sequence == PLAYMODE_SEQUENCE_RANDOM))
             {   //依序
                 if (current_show_lyrics_index < (lyrics_count - 1))
                     current_show_lyrics_index++;
@@ -2117,7 +2045,7 @@ namespace vcs_SlideShowString
 
             int prev_show_lyrics_index = 0;
 
-            if (play_sequence == PLAYMODE_SEQUENCE)
+            if ((play_sequence == PLAYMODE_SEQUENCE) || (play_sequence == PLAYMODE_SEQUENCE_RANDOM))
             {   //依序
                 if (current_show_lyrics_index > 0)
                     current_show_lyrics_index--;

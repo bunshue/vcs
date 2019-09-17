@@ -18,6 +18,15 @@ namespace vcs_SlideShowString
         private const int PLAYMODE_RANDOM = 1;
         private const int PLAYMODE_SEQUENCE_RANDOM = 2;
 
+        int align_direction = 0;
+        int play_sequence = 0;
+        string font_name = String.Empty;
+        int font_size_default = 0;
+        int slide_show_interval = 0;
+        int display_width = 0;      //percentage
+        int display_height = 0;     //percentage
+        bool flag_top_most = false;
+
         string filename = "";//該變量保存INI文件所在的具体物理位置
         string strOne = "";
 
@@ -53,27 +62,12 @@ namespace vcs_SlideShowString
             {
                 richTextBox1.Text += "Align: " + ContentReader(strOne, "Align", "") + "\n";			            //讀取INI文件中Align項
                 richTextBox1.Text += "PlaySequence: " + ContentReader(strOne, "PlaySequence", "") + "\n";			    //讀取INI文件中PlaySequence項
-                richTextBox1.Text += "FontType: " + ContentReader(strOne, "FontType", "") + "\n";				//讀取INI文件中FontType項
+                richTextBox1.Text += "FontName: " + ContentReader(strOne, "FontName", "") + "\n";				//讀取INI文件中FontName項
                 richTextBox1.Text += "FontSize: " + ContentReader(strOne, "FontSize", "") + "\n";				//讀取INI文件中FontSize項
-
-                richTextBox1.Text += "FontUserSize: " + ContentReader(strOne, "FontUserSize", "") + "\n";		//讀取INI文件中FontUserSize項
                 richTextBox1.Text += "PlaySpeed: " + ContentReader(strOne, "PlaySpeed", "") + "\n";				//讀取INI文件中PlaySpeed項
                 richTextBox1.Text += "TopMost: " + ContentReader(strOne, "TopMost", "") + "\n";				    //讀取INI文件中TopMost項
                 richTextBox1.Text += "RatioWidth: " + ContentReader(strOne, "RatioWidth", "") + "\n";			//讀取INI文件中RatioWidth項
                 richTextBox1.Text += "RatioHeight: " + ContentReader(strOne, "RatioHeight", "") + "\n";		//讀取INI文件中RatioHeight項
-
-                int align_direction = 0;
-                int play_sequence = 0;
-                string font_type = String.Empty;
-                int font_size_default = 0;
-                int font_size_user = 0;
-                float font_size_current;
-                float font_size_current_max;
-                int slide_show_interval = 0;
-                int display_width = 0;      //percentage
-                int display_height = 0;     //percentage
-                bool flag_top_most = false;
-                bool flag_pause = false;
 
                 align_direction = int.Parse(ContentReader(strOne, "Align", ""));
                 richTextBox1.Text += "value = " + align_direction.ToString() + "\n";
@@ -111,9 +105,15 @@ namespace vcs_SlideShowString
                 }
                 comboBox1.SelectedIndex = play_sequence;
 
-                font_size_user = int.Parse(ContentReader(strOne, "FontUserSize", ""));
-                richTextBox1.Text += "自訂字型大小: " + font_size_user.ToString() + "\n";
-                numericUpDown3.Value = font_size_user;
+                font_name = ContentReader(strOne, "FontName", "");
+                richTextBox1.Text += "字型: " + font_name.ToString() + "\n";
+
+                font_size_default = int.Parse(ContentReader(strOne, "FontSize", ""));
+                richTextBox1.Text += "字型大小: " + font_size_default.ToString() + "\n";
+                numericUpDown3.Value = font_size_default;
+
+                label22.Text = font_name + " " + font_size_default.ToString();
+                label22.Font = new Font(font_name, font_size_default);
 
                 slide_show_interval = int.Parse(ContentReader(strOne, "PlaySpeed", ""));
                 richTextBox1.Text += "播放速度: " + slide_show_interval.ToString() + " 秒\n";
@@ -155,9 +155,8 @@ namespace vcs_SlideShowString
         {
             InitializeComponent();
 
-
             int x_st = 50;
-            int y_st = 100;
+            int y_st = 50;
             int dy = 55;
             label0.Location = new Point(x_st, y_st + dy * 0);
             label1.Location = new Point(x_st, y_st + dy * 1);
@@ -204,14 +203,22 @@ namespace vcs_SlideShowString
             fontDialog1.ShowEffects = true;
             fontDialog1.ShowHelp = true;
 
-            //fontDialog1.Font = label1.Font;
-            //fontDialog1.Color = label1.ForeColor;
+            fontDialog1.Font = label22.Font;
+            fontDialog1.Color = label22.ForeColor;
+
 
             if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
                 label22.Font = fontDialog1.Font;
                 label22.ForeColor = fontDialog1.Color;
-                label22.Text = fontDialog1.Font.Name + " " + fontDialog1.Font.Size.ToString();
+                richTextBox1.Text += "color = " + fontDialog1.Color.Name + "\n";
+
+                font_name = fontDialog1.Font.Name;
+                font_size_default = (int)fontDialog1.Font.Size;
+                numericUpDown3.Value = font_size_default;
+
+                label22.Text = font_name + " " + font_size_default.ToString();
+
             }
 
         }
@@ -233,10 +240,9 @@ namespace vcs_SlideShowString
             {
                 WritePrivateProfileString(strOne, "Align", comboBox0.SelectedIndex.ToString(), filename); 		    //修改INI文件中的第1項
                 WritePrivateProfileString(strOne, "PlaySequence", comboBox1.SelectedIndex.ToString(), filename); 		    //修改INI文件中的第1項
-                //WritePrivateProfileString(strOne, "FontType", textBox1.Text, filename); 		    //修改INI文件中的第1項
-                //WritePrivateProfileString(strOne, "FontSize", textBox1.Text, filename); 		    //修改INI文件中的第1項
+                WritePrivateProfileString(strOne, "FontName", font_name, filename); 		    //修改INI文件中的第1項
+                WritePrivateProfileString(strOne, "FontSize", numericUpDown3.Value.ToString(), filename); 		    //修改INI文件中的第1項
 
-                WritePrivateProfileString(strOne, "FontUserSize", numericUpDown3.Value.ToString(), filename); 		    //修改INI文件中的第1項
                 WritePrivateProfileString(strOne, "PlaySpeed", numericUpDown4.Value.ToString(), filename); 		    //修改INI文件中的第1項
                 WritePrivateProfileString(strOne, "TopMost", comboBox5.SelectedIndex.ToString(), filename); 		    //修改INI文件中的第1項
                 WritePrivateProfileString(strOne, "RatioWidth", numericUpDown6.Value.ToString(), filename); 		    //修改INI文件中的第1項
@@ -252,6 +258,29 @@ namespace vcs_SlideShowString
 
 
         }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            font_size_default = (int)numericUpDown3.Value;
+            label22.Font = new Font(font_name, font_size_default);
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            slide_show_interval = (int)numericUpDown4.Value;
+        }
+
+        private void numericUpDown6_ValueChanged(object sender, EventArgs e)
+        {
+            display_width = (int)numericUpDown6.Value;
+        }
+
+
+        private void numericUpDown7_ValueChanged(object sender, EventArgs e)
+        {
+            display_height = (int)numericUpDown7.Value;
+        }
+
 
     }
 }

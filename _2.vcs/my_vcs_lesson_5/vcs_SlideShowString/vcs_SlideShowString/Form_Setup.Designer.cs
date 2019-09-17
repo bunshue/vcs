@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lb_setup = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,16 +55,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lb_setup
-            // 
-            this.lb_setup.AutoSize = true;
-            this.lb_setup.Font = new System.Drawing.Font("標楷體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_setup.Location = new System.Drawing.Point(34, 45);
-            this.lb_setup.Name = "lb_setup";
-            this.lb_setup.Size = new System.Drawing.Size(54, 21);
-            this.lb_setup.TabIndex = 0;
-            this.lb_setup.Text = "設定";
             // 
             // button1
             // 
@@ -204,13 +193,19 @@
             this.numericUpDown3.Size = new System.Drawing.Size(88, 33);
             this.numericUpDown3.TabIndex = 15;
             this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
             // 
             // numericUpDown4
             // 
             this.numericUpDown4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.numericUpDown4.Location = new System.Drawing.Point(326, 169);
             this.numericUpDown4.Maximum = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
@@ -223,6 +218,7 @@
             0,
             0,
             0});
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
             // 
             // numericUpDown6
             // 
@@ -238,10 +234,11 @@
             this.numericUpDown6.TabIndex = 17;
             this.numericUpDown6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown6.Value = new decimal(new int[] {
-            20,
+            75,
             0,
             0,
             0});
+            this.numericUpDown6.ValueChanged += new System.EventHandler(this.numericUpDown6_ValueChanged);
             // 
             // numericUpDown7
             // 
@@ -257,10 +254,11 @@
             this.numericUpDown7.TabIndex = 18;
             this.numericUpDown7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown7.Value = new decimal(new int[] {
-            20,
+            15,
             0,
             0,
             0});
+            this.numericUpDown7.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
             // 
             // label22
             // 
@@ -275,7 +273,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(72, 420);
+            this.button2.Location = new System.Drawing.Point(174, 557);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(60, 60);
             this.button2.TabIndex = 20;
@@ -285,9 +283,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(438, 324);
+            this.richTextBox1.Location = new System.Drawing.Point(438, 248);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(255, 293);
+            this.richTextBox1.Size = new System.Drawing.Size(255, 369);
             this.richTextBox1.TabIndex = 21;
             this.richTextBox1.Text = "";
             // 
@@ -339,9 +337,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.lb_setup);
             this.Name = "Form_Setup";
-            this.Text = "Form_Setup";
+            this.Text = "設定";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
@@ -353,7 +350,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lb_setup;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
