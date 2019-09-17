@@ -18,7 +18,7 @@ namespace vcs_SlideShowString
         bool flag_debug_message = true;    //print some message, font size, timer cnt, index.....
         bool flag_debug_richtextbox = false;    //use richtextbox in release mode
 
-        string filepath_setup = "poetry.ini";
+        string filepath_setup = "poetry.setup.txt";
         string filepath_poetry = "poetry.txt";
         //string filepath_poetry = "poetry_debug.txt";
         //string filepath_poetry = "poetry_new.txt";

@@ -252,6 +252,8 @@ namespace vcs_test_all_09_Form
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //在退出程序前彈出確認退出程序的對話框
+
             if (e.CloseReason != CloseReason.WindowsShutDown)
             {
                 if (MessageBox.Show("是否確定要關閉程式", "關閉程式", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -260,6 +262,13 @@ namespace vcs_test_all_09_Form
                 }
             }
 
+            /*
+            //或是
+            if (MessageBox.Show("真的要退出程序嗎？", "退出程序", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+            */
         }
 
         private void button27_Click(object sender, EventArgs e)
