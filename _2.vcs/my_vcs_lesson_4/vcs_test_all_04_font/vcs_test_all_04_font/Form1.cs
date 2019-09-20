@@ -171,5 +171,10 @@ namespace vcs_test_all_04_Font
                 label1.Font = new Font("新細明體", font_size);
             }
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            this.listBox1.Items.AddRange(FontFamily.Families);
+        }
     }
 }

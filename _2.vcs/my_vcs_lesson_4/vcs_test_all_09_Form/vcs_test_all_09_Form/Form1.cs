@@ -383,5 +383,17 @@ namespace vcs_test_all_09_Form
 
         }
 
+        private void button38_Click(object sender, EventArgs e)
+        {
+            this.Text = string.Empty;
+            this.ControlBox = false;
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            //表單不顯示在 Windows 工作列中
+            this.ShowInTaskbar = false;
+        }
+
     }
 }

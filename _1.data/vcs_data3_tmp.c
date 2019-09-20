@@ -1,4 +1,196 @@
 
+
+windows media player
+// ¼½©ñºq¦±
+            axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE »Å¨ì°©¤l¸Ì MY HAPPY ENDING.mp3";
+            // ³]©w­«½Æ¼½©ñ
+            //axWMP.settings.setMode("loop", true);
+            // ³]©wÀH¾÷¼½©ñ
+            //axWMP.settings.setMode("shuffle", true);
+            
+C# - ¦p¦óÅª¨ú¯S©w¦ì¸mRegistry Key
+https://barryhungmvp.pixnet.net/blog/post/88133155-c%23---%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96%E7%89%B9%E5%AE%9A%E4%BD%8D%E7%BD%AEregistry-key
+
+¥[¤@­ÓÅª¨úRegistryKeyªº½d¨Ò
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            RegistryKey mreg;
+            mreg = Registry.LocalMachine;
+            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
+            string IEVersion = "¥Ø«eIEÂsÄý¾¹ªºª©¥»°T®§¡G" + (String)mreg.GetValue("Version");
+            mreg.Close();
+            richTextBox1.Text += IEVersion + "\n";
+
+        }
+
+®à¥¬¦s©ñ¦ì¸m win7 romeo
+C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper.jpg
+
+¦p¦ó§ä¨ìWindows 10®à­±­I´º†¶¤ùªº¦ì¸m
+http://www.xstui.com/read/446
+
+
+
+ C# ®Ú¾Ú®à­±¤j¤p½Õ¾ãµøµ¡¤j¤p 
+ 
+ private void Form1_Load(object sender, EventArgs e)
+        {
+            int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen¬°¨ú±o¥DÅã¥Ü¾¹¡AWorkingArea¥i¨ú±oÅã¥Ü¾¹ªº¤u§@°Ï(¤£¥]§t¤u§@¦C¡Kµ¥)
+            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width = Convert.ToInt32(DeskWidth * 0.8);
+            this.Height = Convert.ToInt32(DeskHeight * 0.8);
+        }
+ 
+
+Ray's Working Note 
+http://ray19841984.blogspot.com/
+
+'
+
+
+
+
+
+¦rÅé°µ³±¼v®ÄªG ¦P¼Ë¦r©¹¥k¤U¼g¤@¹M ÃC¦â¤£¦P
+
+            string test_string = "ª÷³®¹Ï";
+            bmp = new Bitmap(500, 500);     //initial W, H
+            g = Graphics.FromImage(bmp);
+
+            font_type = "¼Ð·¢Åé";
+            font_size_default = 200;
+            
+            f = new Font(font_type, font_size_default);
+
+            g.DrawString(test_string, f, new SolidBrush(Color.Pink), new PointF(0, 0));
+
+
+            font_size_default = 200;
+
+            f = new Font(font_type, font_size_default);
+
+            g.DrawString(test_string, f, new SolidBrush(Color.Red), new PointF(5, 5));
+            
+            
+            pictureBox1.Image = bmp;
+
+
+picturebox + keydown
+https://zhidao.baidu.com/question/495903236489591124.html
+
+
+vcs
+https://jojosula001.pixnet.net/blog/category/2297573
+
+
+
+
+
+
+
+ 27. ³]©w¨â­Ó©Î¨â­Ó¥H¤Wªº¦r«¬¼Ë¦¡ (¨Ò¦p¤@¬q¤å¦r³]©w²ÊÅé¥[±×Åé)¡C
+
+°²¦p­n±N¤@¬q¤å¦r¡A¦P®É³]©w ²ÊÅé¤å¦r FontStyle.Bold »P ±×Åé¤å¦r FontStyle.Italic¡A«h»Ý³z¹L FontFamily Ãþ§O¡A³z¹L | °µ³sµ²
+
+	// ±NRichTextBox¤¤¿ï¨úªº¤å¦r¡A³z¹L FontFamily Ãþ§O 
+// ¦P®É³]©w ²ÊÅé¤å¦r FontStyle.Bold »P ±×Åé¤å¦r FontStyle.Italic 
+Font MyFont = new Font(new FontFamily("¼Ð·¢Åé"), 10, FontStyle.Bold | FontStyle.Italic); 
+this.richTextBox1.SelectionFont = MyFont;
+
+
+
+
+
+33. String Âà¬° Byte §Ç¦C»P Byte §Ç¦CÂà¬° String¡C
+
+¨Ï¥Î System.Text.Encoding Ãþ§O¤¤ªº³o¨â­Ó¤èªk¡A¶·ª`·N½s½X¤è¦¡ :
+
+Encoding.GetBytes ¤èªk : ±N¦r¤¸¶°½s½X¦¨¦ì¤¸²Õ§Ç¦C¡C
+
+Encoding.GetString ¤èªk : ±N¦ì¤¸²Õ§Ç¦C¸Ñ½X¦¨¦r¦ê¡C
+
+µ{¦¡½X
+
+	String strOrg = "12345";
+            // Encoding.GetBytes¤èªk¡A±N String Âà¬° Byte §Ç¦C
+            byte[] stringConvByte = Encoding.Default.GetBytes(strOrg);
+            // Encoding.GetString¤èªk¡A±N Byte §Ç¦C Âà¬° String
+            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
+
+
+// ¥[¤J TextBox ¨ì Form
+            TextBox tb1 = new TextBox();
+            tb1.Name = "tb1";
+            tb1.Location = new Point(10, 10);
+            this.Controls.Add(tb1);
+
+            // ¥[¤J TextBox ¨ì GroupBox
+            TextBox tb3 = new TextBox();
+            tb3.Name = "tb3";
+            tb3.Location = new Point(10, 10);
+            this.groupBox1.Controls.Add(tb3);
+            
+            // ¥[¤J TextBox ¨ì Panel
+            TextBox tb4 = new TextBox();
+            tb4.Name = "tb4";
+            tb4.Location = new Point(10, 10);
+            this.panel1.Controls.Add(tb4)
+            
+
+¤£¥ÎrichTextBoxªºdebug¤èªk            
+
+¼g
+System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+¨ì¡i¿é¥X¡jµøµ¡¬Ý¿é¥X¸ê®Æ
+
+¥ý¨ì±M®×/¥kÁä/ÄÝ©Ê/«Ø¸m ¤Ä¿ï ©w¸qDEBUG±`¼Æ
+
+
+
+
+
+ C# byte Âà ¤å¦r
+byteÂàchar©Î byteÂàstring
+
+Convert.ToChar¬O§âhexÂà¦¨¬Û¹ïÀ³ascii code
+¹³aªºascii code¬O0x61
+
+byte[] b = new byte[2] { 0x61,0x62 };
+string s=Convert.ToChar(b[0]); => s="a";
+string s=Convert.ToChar(b[1]); => s="b";
+
+¦pªG§A­n§âbyte codeÂà¦¨"¦r­±¤W"ªº¼Æ­È À³¸Ó³o¼Ë¼g
+
+byte[] b = new byte[2] { 0x61,0x62 };
+string s=b[0].ToString("X2"); => s="61";
+string s=b[1].ToString("X2"); => s="62";
+
+ToString("X2")³o­Ó®æ¦¡¤Æ¦r¦êÁÙÆZ¦n¥Îªº ¤@¤U´N¥i¥H§âbyteÂà¦¨¬Û¹ïÀ³ªº¤å¦r
+¥H«e§Ú­n§âbyteÂà¦¨¤å¦r³£¬O¥Î¤U­±³o¤èªk
+
+byte[] b = new byte[2] { 0x03,0x04 };
+string s= Convert.ToString(b[1], 16);
+if (s.Length == 1) //¤£º¡2¦ì­n¸É¤@­Ó¹s
+{
+s= "0"+s;
+}
+===> s="03";
+
+¤Ó³Â·Ð¤F ¨º»ò¦h¦æª½±µ¥Îb[0].ToString("X2")¤@¦æ´N¥i¥H¨ú¥N ÁÙ¤£¥Î¦Û¤v§PÂ_«e­±­n¤£­n¸É¹s 
+
+
+
+
+ÅÜ§ó·Æ¹«¹«¼Ð¹Ï®× ( ¦³®Ä½d³ò¦bForm¤º )¡C
+this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" §ï¦¨±zªº¹ÏÀÉ¡A±µ¨üªº¼v¹³®æ¦¡¬°cur»Pico
+
+
+
+
+
+
 [ C# ] WinForm Åã¥Ü©ó©µ¦ù¿Ã¹õ¤§¤èªk
 https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%96%bc%e5%bb%b6%e4%bc%b8%e8%9e%a2%e5%b9%95%e4%b9%8b%e6%96%b9%e6%b3%95/
 
