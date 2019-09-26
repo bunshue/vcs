@@ -170,6 +170,10 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_save_img = new System.Windows.Forms.Button();
+            this.bt_clear_serial = new System.Windows.Forms.Button();
+            this.lb_sn_opal = new System.Windows.Forms.Label();
+            this.tb_sn_opal = new System.Windows.Forms.TextBox();
             this.bt_script_cancel = new System.Windows.Forms.Button();
             this.b0 = new System.Windows.Forms.CheckBox();
             this.b1 = new System.Windows.Forms.CheckBox();
@@ -1968,6 +1972,10 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_save_img);
+            this.tp_USB.Controls.Add(this.bt_clear_serial);
+            this.tp_USB.Controls.Add(this.lb_sn_opal);
+            this.tp_USB.Controls.Add(this.tb_sn_opal);
             this.tp_USB.Controls.Add(this.bt_script_cancel);
             this.tp_USB.Controls.Add(this.b0);
             this.tp_USB.Controls.Add(this.b1);
@@ -2095,6 +2103,51 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_save_img
+            // 
+            this.bt_save_img.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_save_img.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save_img.ForeColor = System.Drawing.Color.Blue;
+            this.bt_save_img.Location = new System.Drawing.Point(352, 448);
+            this.bt_save_img.Name = "bt_save_img";
+            this.bt_save_img.Size = new System.Drawing.Size(58, 32);
+            this.bt_save_img.TabIndex = 168;
+            this.bt_save_img.Text = "存檔";
+            this.bt_save_img.UseVisualStyleBackColor = false;
+            this.bt_save_img.Click += new System.EventHandler(this.bt_save_img_Click);
+            // 
+            // bt_clear_serial
+            // 
+            this.bt_clear_serial.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_clear_serial.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_serial.ForeColor = System.Drawing.Color.Blue;
+            this.bt_clear_serial.Location = new System.Drawing.Point(352, 486);
+            this.bt_clear_serial.Name = "bt_clear_serial";
+            this.bt_clear_serial.Size = new System.Drawing.Size(58, 32);
+            this.bt_clear_serial.TabIndex = 167;
+            this.bt_clear_serial.Text = "清除";
+            this.bt_clear_serial.UseVisualStyleBackColor = false;
+            this.bt_clear_serial.Click += new System.EventHandler(this.bt_clear_serial_Click);
+            // 
+            // lb_sn_opal
+            // 
+            this.lb_sn_opal.AutoSize = true;
+            this.lb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_opal.Location = new System.Drawing.Point(7, 532);
+            this.lb_sn_opal.Name = "lb_sn_opal";
+            this.lb_sn_opal.Size = new System.Drawing.Size(106, 24);
+            this.lb_sn_opal.TabIndex = 166;
+            this.lb_sn_opal.Text = "Opal序號";
+            // 
+            // tb_sn_opal
+            // 
+            this.tb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sn_opal.Location = new System.Drawing.Point(179, 486);
+            this.tb_sn_opal.Name = "tb_sn_opal";
+            this.tb_sn_opal.Size = new System.Drawing.Size(125, 32);
+            this.tb_sn_opal.TabIndex = 165;
+            this.tb_sn_opal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // bt_script_cancel
             // 
@@ -4657,7 +4710,7 @@
             // timer_webcam
             // 
             this.timer_webcam.Enabled = true;
-            this.timer_webcam.Interval = 5000;
+            this.timer_webcam.Interval = 3000;
             this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
             // 
             // bt_goto_awb
@@ -5249,6 +5302,10 @@
         private System.Windows.Forms.CheckBox b6;
         private System.Windows.Forms.CheckBox b7;
         private System.Windows.Forms.Button bt_script_cancel;
+        private System.Windows.Forms.Label lb_sn_opal;
+        private System.Windows.Forms.TextBox tb_sn_opal;
+        private System.Windows.Forms.Button bt_clear_serial;
+        private System.Windows.Forms.Button bt_save_img;
     }
 }
 

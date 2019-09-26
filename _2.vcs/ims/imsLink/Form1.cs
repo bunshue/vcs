@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        bool flag_release_mode = false;
+        bool flag_release_mode = true;
 
         bool flag_enaglb_awb_function = true;
 
@@ -155,9 +155,9 @@ namespace imsLink
         int btn_down_up_cnt = 0;
         int btn_right_left_cnt = 0;
         int flag_down_up_cnt = 0;
-        int flag_right_left_cnt = 0;
+        int flag_right_left_cnt = 7;
         int awb_step = 10;
-        int awb_block = 64;     //AWB block size width, height
+        int awb_block = 32;     //AWB block size width, height
 
         int TARGET_AWB_R = 255;
         int TARGET_AWB_G = 249;
@@ -344,6 +344,7 @@ namespace imsLink
 
             if (flag_usb_mode == true)
             {
+                cb_show_grid.Checked = true;
                 this.tp_Info.Parent = null;
                 this.tp_Connection.Parent = null;
                 this.tp_System.Parent = null;
@@ -1754,7 +1755,7 @@ namespace imsLink
 
             comboBox1.Items.Clear();    //Clear All items in Combobox
 
-            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
+            richTextBox1.Text += "a共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
             {
                 richTextBox1.Text += port + "\t";
@@ -1961,16 +1962,6 @@ namespace imsLink
             int y_st;
             int dx;
             int dy;
-
-            //cb_enable_awb.Location = new Point(11, 489 + 65);
-            /*
-            lb_note1.Location = new Point(11 + 180, 489 + 65);
-            lb_note2.Location = new Point(11 + 180, 489 + 65 + 20);
-            lb_note3.Location = new Point(11 + 180, 489 + 65 + 40);
-            */
-            lb_rgb_r.Location = new Point(5, 489 + 65 + 47);
-            lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47);
-            lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47);
 
             if (flag_display_mode == DISPLAY_SD)
             {
@@ -2299,6 +2290,27 @@ namespace imsLink
                 lb_note1.Font = new Font("標楷體", lb_note1.Font.Size * 5 / 6);
                 lb_note2.Font = new Font("標楷體", lb_note2.Font.Size * 5 / 6);
                 lb_note3.Font = new Font("標楷體", lb_note3.Font.Size * 5 / 6);
+
+                if (flag_release_mode == true)
+                {
+                    lb_sn_opal.Text = "序號";
+                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2);
+                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65);
+                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65);
+                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65);
+                }
+                else
+                {
+                    lb_sn_opal.Text = "序號";
+                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2);
+                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65);
+                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65);
+                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65);
+                }
+
+                lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10);
+                lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10);
+                lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10);
             }
             else
             {
@@ -2351,6 +2363,28 @@ namespace imsLink
                 numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
                 tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
                 bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+
+                if (flag_release_mode == true)
+                {
+                    dy = 100;
+                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
+                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
+                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
+                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
+                }
+                else
+                {
+                    x_st = 1500;
+                    y_st = 930;
+                    lb_sn_opal.Location = new Point(x_st + 10, y_st + 5);
+                    tb_sn_opal.Location = new Point(x_st + 120, y_st);
+                    bt_save_img.Location = new Point(x_st + 250, y_st);
+                    bt_clear_serial.Location = new Point(x_st + 315, y_st);
+                }
+
+                lb_rgb_r.Location = new Point(5, 489 + 65 + 47);
+                lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47);
+                lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47);
             }
 
             //TARGET RGB
@@ -2563,7 +2597,7 @@ namespace imsLink
             toolTip1.SetToolTip(button17, "Zoom in");
             toolTip1.SetToolTip(button18, "Zoom out");
             toolTip1.SetToolTip(button12, "Refresh");
-            toolTip1.SetToolTip(button16, "Save");
+            toolTip1.SetToolTip(button16, "影像存檔");
             toolTip1.SetToolTip(button15, "Play/Pause");
 
             if (flag_display_mode == DISPLAY_SD)
@@ -2626,6 +2660,12 @@ namespace imsLink
             bt_script_save.Visible = false;
             bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
+
+            if (flag_usb_mode == true)
+            {
+                button19_Click(sender, e);
+            }
+
             return;
         }
 
@@ -4727,6 +4767,71 @@ namespace imsLink
 
         private void button16_Click(object sender, EventArgs e)
         {
+            int i;
+            bool flag_incorrect_data = false;
+
+            if (tb_sn_opal.Text.Length == 0)
+            {
+                show_main_message("未輸入相機序號", S_OK, 30);
+                flag_incorrect_data = true;
+            }
+            else if (tb_sn_opal.Text.Length == 9)
+            {
+                //檢查英文字母的正確性
+                if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
+                {
+                    flag_incorrect_data = false;
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "SN1格式不正確b0\n";
+                    show_main_message("序號格式不正確", S_OK, 30);
+                }
+
+                if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
+                {
+                    flag_incorrect_data = false;
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "SN1格式不正確b1\n";
+                    show_main_message("序號格式不正確", S_OK, 30);
+                }
+
+                for (i = 2; i < 9; i++)
+                {
+                    if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b\n";
+                        show_main_message("序號格式不正確", S_OK, 30);
+                    }
+                }
+
+                if (flag_incorrect_data == false)
+                {
+                    richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
+                }
+            }
+            else
+            {
+                flag_incorrect_data = true;
+                show_main_message("序號格式不正確", S_OK, 30);
+            }
+
+            if (flag_incorrect_data == true)
+            {
+                richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "資料正確\n";
+
+            }
+
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
 
             if (bitmap1 != null)
@@ -4754,7 +4859,8 @@ namespace imsLink
 
                 g.Dispose();
 
-                String file = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                //String file = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                String file = "D:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
                 //String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 //String file3 = file + ".png";
@@ -4768,6 +4874,7 @@ namespace imsLink
                 richTextBox1.Text += "已存檔 : " + file2 + "\n";
                 //richTextBox1.Text += "已存檔 : " + file3 + "\n";
                 show_main_message("已存檔BMP", S_OK, 30);
+                tb_sn_opal.Clear();
             }
             else
             {
@@ -4867,10 +4974,69 @@ namespace imsLink
 
         private void button19_Click(object sender, EventArgs e)
         {
+            /* debug
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "cb_enable_awb = " + cb_enable_awb.Checked.ToString() + "\n";
+            richTextBox1.Text += "flag_fullscreen = " + flag_fullscreen.ToString() + "\n";
+            if (flag_display_mode == DISPLAY_SD)
+                richTextBox1.Text += "DISPLAY_SD\n";
+            else if (flag_display_mode == DISPLAY_FHD)
+                richTextBox1.Text += "DISPLAY_FHD\n";
+            else
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXx\n";
+            richTextBox1.Text += "\n";
+             */
+
             //richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
             if (flag_fullscreen == false)
             {
                 flag_fullscreen = true;
+
+                if (flag_display_mode == DISPLAY_SD)
+                {
+                    int dy = 0;
+                    lb_sn_opal.Text = "序號";
+                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2 - dy);
+                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
+
+                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10 - dy);
+                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10 - dy);
+                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10 - dy);
+
+                }
+                else
+                {
+                    if (flag_release_mode == true)
+                    {
+                        int dy = 100;
+                        lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
+                        tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
+                        bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
+                        bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
+                    }
+                    else
+                    {
+                        int x_st = 1500;
+                        int y_st = 930;
+                        lb_sn_opal.Text = "Opal序號";
+                        lb_sn_opal.Location = new Point(x_st + 10, y_st + 5);
+                        tb_sn_opal.Location = new Point(x_st + 120, y_st);
+                        bt_save_img.Location = new Point(x_st + 250, y_st);
+                        bt_clear_serial.Location = new Point(x_st + 315, y_st);
+
+
+                        lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10);
+                        lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10);
+                        lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10);
+
+                    }
+                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47);
+                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47);
+                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47);
+                }
+
                 button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
                 //this.TopMost = true;
 
@@ -4910,10 +5076,24 @@ namespace imsLink
 
                     show_awb_item_visible(true);    //333
 
-                    //cb_enable_awb.Location = new Point(11, 489 + 110);
-                    lb_note1.Location = new Point(11 + 180, 489 + 98 + 19);
-                    lb_note2.Location = new Point(11 + 180, 489 + 98 + 25 + 12);
-                    lb_note3.Location = new Point(11 + 180, 489 + 98 + 50 + 6);
+                    if (flag_display_mode == DISPLAY_SD)
+                    {
+                        //lb_note1.Location = new Point(11 + 180 + 110, 489 + 98 + 19);
+                        //lb_note2.Location = new Point(11 + 180 + 110, 489 + 98 + 25 + 12);
+                        //lb_note3.Location = new Point(11 + 180 + 110, 489 + 98 + 50 + 6);
+                        lb_note1.Location = new Point(10 + 180 + 110, 489 + 98 + 19);
+                        lb_note2.Location = new Point(10 + 180 + 110, 489 + 98 + 25 + 12);
+                        lb_note3.Location = new Point(10 + 180 + 110, 489 + 98 + 50 + 6);
+                    }
+                    else
+                    {
+                        //lb_note1.Location = new Point(11 + 180 + 110, 489 + 98 + 19);
+                        //lb_note2.Location = new Point(11 + 180 + 110, 489 + 98 + 25 + 12);
+                        //lb_note3.Location = new Point(11 + 180 + 110, 489 + 98 + 50 + 6);
+                        lb_note1.Location = new Point(10 + 180 + 90, 489 + 98 + 19);
+                        lb_note2.Location = new Point(10 + 180 + 90, 489 + 98 + 25 + 12);
+                        lb_note3.Location = new Point(10 + 180 + 90, 489 + 98 + 50 + 6);
+                    }
                 }
                 else
                 {
@@ -4925,6 +5105,35 @@ namespace imsLink
             else
             {
                 flag_fullscreen = false;
+
+                if (flag_display_mode == DISPLAY_SD)
+                {
+                    int dy = 62;
+                    lb_sn_opal.Text = "序號";
+                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2 - dy);
+                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
+
+                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10 - dy);
+                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10 - dy);
+                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10 - dy);
+
+                }
+                else
+                {
+                    int dy = 62;
+                    lb_sn_opal.Text = "序號";
+                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2 - dy);
+                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
+
+                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10 - dy);
+                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10 - dy);
+                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10 - dy);
+                }
+
                 button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
                 richTextBox1.Visible = true;
                 this.richTextBox1.Location = new System.Drawing.Point(958, 67);
@@ -4955,14 +5164,6 @@ namespace imsLink
                 {
                     show_awb_item_visible(false);   //444
                 }
-
-                //cb_enable_awb.Location = new Point(11, 489 + 65);
-                /*
-                lb_note1.Location = new Point(11 + 180, 489 + 65);
-                lb_note2.Location = new Point(11 + 180, 489 + 65 + 30);
-                lb_note3.Location = new Point(11 + 180, 489 + 65 + 30);
-                */
-
             }
         }
 
@@ -6533,6 +6734,10 @@ namespace imsLink
         int timer_webcam_cnt = 0;
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
+            if (flag_usb_mode == true)
+            {
+                this.tb_sn_opal.Focus();
+            }
             if (flag_enaglb_awb_function == false)
                 return;
             if (flag_usb_mode == true)
@@ -9166,6 +9371,7 @@ namespace imsLink
         bool flag_doing_check_webcam = false;
         int check_webcam()
         {
+            int i;
             if (flag_doing_check_webcam == false)
             {
                 flag_doing_check_webcam = true;
@@ -9176,38 +9382,40 @@ namespace imsLink
                 return S_FALSE;
             }
 
-            richTextBox1.Text += "call check_webcam ST\n";
-            int i;
-            g_conn_status = CAMERA_UNKNOWN;
-            Send_IMS_Data(0xFF, 0, 0, 0);
+            if (flag_enaglb_awb_function == true)
+            {
+                richTextBox1.Text += "call check_webcam ST\n";
+                g_conn_status = CAMERA_UNKNOWN;
+                Send_IMS_Data(0xFF, 0, 0, 0);
 
-            int cnt = 0;
-            while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
-            {
-                richTextBox1.Text += "-2xx";
-                delay(100);
-            }
-            if (g_conn_status == DONGLE_NONE)
-            {
-                richTextBox1.Text += "無連接器\n";
-                flag_doing_check_webcam = false;
-                return S_FALSE;
-            }
-            else if (g_conn_status == CAMERA_NONE)
-            {
-                richTextBox1.Text += "有連接器, 無相機\n";
-                flag_doing_check_webcam = false;
-                return S_FALSE;
-            }
-            else if (g_conn_status == CAMERA_OK)
-            {
-                richTextBox1.Text += "有連接器, 有相機\n";
-            }
-            else
-            {
-                richTextBox1.Text += "狀態不明, status = " + g_conn_status.ToString() + "\n";
-                flag_doing_check_webcam = false;
-                return S_FALSE;
+                int cnt = 0;
+                while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
+                {
+                    richTextBox1.Text += "-2xx";
+                    delay(100);
+                }
+                if (g_conn_status == DONGLE_NONE)
+                {
+                    richTextBox1.Text += "無連接器\n";
+                    flag_doing_check_webcam = false;
+                    return S_FALSE;
+                }
+                else if (g_conn_status == CAMERA_NONE)
+                {
+                    richTextBox1.Text += "有連接器, 無相機\n";
+                    flag_doing_check_webcam = false;
+                    return S_FALSE;
+                }
+                else if (g_conn_status == CAMERA_OK)
+                {
+                    richTextBox1.Text += "有連接器, 有相機\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "狀態不明, status = " + g_conn_status.ToString() + "\n";
+                    flag_doing_check_webcam = false;
+                    return S_FALSE;
+                }
             }
 
             flag_camera_use_insighteyes = 0;
@@ -9343,7 +9551,7 @@ namespace imsLink
             richTextBox1.Text += "check_comport ST\n";
             string[] tempString = SerialPort.GetPortNames();
 
-            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
+            richTextBox1.Text += "b共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string aaa in tempString)
             {
                 richTextBox1.Text += "get comport : " + aaa + "\t";
@@ -9419,7 +9627,7 @@ namespace imsLink
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
             tempString.CopyTo(COM_Ports_NameArr, 0);
 
-            richTextBox1.Text += "共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
+            richTextBox1.Text += "c共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
             {
                 richTextBox1.Text += port + "\t";
@@ -10462,6 +10670,18 @@ namespace imsLink
             bt_script_load.Visible = true;
             bt_script.Text = "Script";
         }
+
+        private void bt_clear_serial_Click(object sender, EventArgs e)
+        {
+            tb_sn_opal.Clear();
+        }
+
+        private void bt_save_img_Click(object sender, EventArgs e)
+        {
+            button16_Click(sender, e);
+        }
+
+
     }
 }
 
