@@ -1,5 +1,4 @@
 
-
 windows media player
 // 播放歌曲
             axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";

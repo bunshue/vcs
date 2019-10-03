@@ -2148,6 +2148,7 @@
             this.tb_sn_opal.Size = new System.Drawing.Size(125, 32);
             this.tb_sn_opal.TabIndex = 165;
             this.tb_sn_opal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_sn_opal.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_sn_opal_MouseClick);
             // 
             // bt_script_cancel
             // 
@@ -4710,7 +4711,7 @@
             // timer_webcam
             // 
             this.timer_webcam.Enabled = true;
-            this.timer_webcam.Interval = 3000;
+            this.timer_webcam.Interval = 1000;
             this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
             // 
             // bt_goto_awb

@@ -1,0 +1,40 @@
+我與sing之差別
+
+C:\iMS_Video\iMS_Video.sdk\tinyusb
+ 
+boards
+  keyboard_host_app.c		必要修改
+
+host
+  usbh.c			修改很多
+  usbh.h			加一個 tusb_error_t usb_command(uint16_t* vid, uint16_t* pid);
+ 
+  ehci
+    ehci.c			差一個static	port_connect_status_change_isr
+ 
+        
+
+增加一個檔案:tusb_config.h
+#define TUSB_CFG_MCU 			MCU_ZYNQ7015
+#define TUSB_CFG_CONTROLLER_0_MODE 	TUSB_MODE_HOST
+#define TUSB_CFG_CONTROLLER_1_MODE 	TUSB_MODE_NONE
+#define BOARD 				BOARD_ZYNQ_ARIES
+
+
+
+在tusb_option.h加一個IC定義
+
+#define MCU_ZYNQ7015      10 ///< Xilinx Zynq 7015 family
+
+
+boards之下多了5個檔案 及 ims子目錄2個檔案
+app_os_prio.h
+keyboard_host_app.c
+keyboard_host_app.h
+mouse_host_app.c
+mouse_host_app.h
+
+ims/board_zynq_aries.c
+ims/board_zynq_aries.h
+
+

@@ -993,6 +993,7 @@ namespace vcs_DrAP
 
         private void button4_Click(object sender, EventArgs e)
         {
+            button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             min_size_mb = 0;
             bool conversionSuccessful = int.TryParse(textBox1.Text, out min_size_mb);    //out為必須
             if (conversionSuccessful == true)
@@ -1180,6 +1181,7 @@ namespace vcs_DrAP
 
         private void button13_Click(object sender, EventArgs e)
         {
+            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_VCS;
             if (textBox3.Text == "")
@@ -1671,6 +1673,7 @@ namespace vcs_DrAP
 
         private void button22_Click(object sender, EventArgs e)
         {
+            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_PYTHON;
             if (textBox3.Text == "")
@@ -1701,9 +1704,7 @@ namespace vcs_DrAP
             show_file_info3();
             flag_search_vcs_pattern = 1;
             return;
-
         }
-
 
         void find_and_show_big_files()
         {

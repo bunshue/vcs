@@ -295,6 +295,19 @@ namespace vcs_test_all_01_Richtextbox
             //richTextBox1.SelectAll();
         }
 
+        private void button33_Click(object sender, EventArgs e)
+        {
+            //double x = 1234567890;
+            int x = 12345;
+            richTextBox1.Text += "十進位\t" + x.ToString() + "\n";
+            richTextBox1.Text += "十六進位\t" + x.ToString("X2") + "\n";
+            richTextBox1.Text += "數值格式\t" + x.ToString("N0") + "\n";
+
+            double y = 123.456;
+            richTextBox1.Text += "數值格式\t" + y.ToString("N4") + "\n";
+
+        }
+
 
     }
 }

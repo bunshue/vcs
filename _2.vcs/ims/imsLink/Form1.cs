@@ -22,9 +22,9 @@ namespace imsLink
     {
         bool flag_release_mode = true;
 
-        bool flag_enaglb_awb_function = true;
+        bool flag_enaglb_awb_function = false;
+        bool flag_usb_mode = true;  //for webcam
 
-        bool flag_usb_mode = false;  //for webcam
         bool flag_check_webcam_signal = false;
 
         private const int S_OK = 0;     //system return OK
@@ -4767,69 +4767,76 @@ namespace imsLink
 
         private void button16_Click(object sender, EventArgs e)
         {
+            timer_webcam.Enabled = true;
+            this.pictureBox1.Focus();
+            show_main_message("存檔中...", S_OK, 10);
+            delay(10);
+
             int i;
             bool flag_incorrect_data = false;
 
-            if (tb_sn_opal.Text.Length == 0)
+            if (flag_release_mode == true)
             {
-                show_main_message("未輸入相機序號", S_OK, 30);
-                flag_incorrect_data = true;
-            }
-            else if (tb_sn_opal.Text.Length == 9)
-            {
-                //檢查英文字母的正確性
-                if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
+                if (tb_sn_opal.Text.Length == 0)
                 {
-                    flag_incorrect_data = false;
-                }
-                else
-                {
+                    show_main_message("未輸入相機序號", S_OK, 30);
                     flag_incorrect_data = true;
-                    richTextBox1.Text += "SN1格式不正確b0\n";
-                    show_main_message("序號格式不正確", S_OK, 30);
                 }
-
-                if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
+                else if (tb_sn_opal.Text.Length == 9)
                 {
-                    flag_incorrect_data = false;
-                }
-                else
-                {
-                    flag_incorrect_data = true;
-                    richTextBox1.Text += "SN1格式不正確b1\n";
-                    show_main_message("序號格式不正確", S_OK, 30);
-                }
-
-                for (i = 2; i < 9; i++)
-                {
-                    if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
+                    //檢查英文字母的正確性
+                    if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
+                    {
+                        flag_incorrect_data = false;
+                    }
+                    else
                     {
                         flag_incorrect_data = true;
-                        richTextBox1.Text += "SN1格式不正確b\n";
+                        richTextBox1.Text += "SN1格式不正確b0\n";
                         show_main_message("序號格式不正確", S_OK, 30);
                     }
-                }
 
-                if (flag_incorrect_data == false)
+                    if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
+                    {
+                        flag_incorrect_data = false;
+                    }
+                    else
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b1\n";
+                        show_main_message("序號格式不正確", S_OK, 30);
+                    }
+
+                    for (i = 2; i < 9; i++)
+                    {
+                        if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "SN1格式不正確b\n";
+                            show_main_message("序號格式不正確", S_OK, 30);
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
+                    }
+                }
+                else
                 {
-                    richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
+                    flag_incorrect_data = true;
+                    show_main_message("序號格式不正確", S_OK, 30);
                 }
-            }
-            else
-            {
-                flag_incorrect_data = true;
-                show_main_message("序號格式不正確", S_OK, 30);
-            }
 
-            if (flag_incorrect_data == true)
-            {
-                richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
-                return;
-            }
-            else
-            {
-                richTextBox1.Text += "資料正確\n";
-
+                if (flag_incorrect_data == true)
+                {
+                    richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
+                    return;
+                }
+                else
+                {
+                    richTextBox1.Text += "資料正確\n";
+                }
             }
 
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
@@ -4859,19 +4866,29 @@ namespace imsLink
 
                 g.Dispose();
 
-                //String file = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
-                String file = "D:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                String filename = string.Empty;
+                if (flag_release_mode == true)
+                {
+                    if (flag_usb_mode == true)
+                        filename = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                    else
+                        filename = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
+                }
+                else
+                {
+                    filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
                 //String file1 = file + ".jpg";
-                String file2 = file + ".bmp";
+                String filename2 = filename + ".bmp";
                 //String file3 = file + ".png";
 
                 //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(@file2, ImageFormat.Bmp);
+                bitmap1.Save(filename2, ImageFormat.Bmp);
                 //bitmap1.Save(@file3, ImageFormat.Png);
 
                 richTextBox1.Text += "存檔成功\n";
                 //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + file2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
                 //richTextBox1.Text += "已存檔 : " + file3 + "\n";
                 show_main_message("已存檔BMP", S_OK, 30);
                 tb_sn_opal.Clear();
@@ -5053,13 +5070,16 @@ namespace imsLink
                     //richTextBox1.Text += "this.Size W = " + this.Size.Width.ToString() + " H = " + this.Size.Height.ToString() + "\n";
                     this.Size = new Size(this.Size.Width + 200, 750);
                     tabControl1.Size = new Size(1600 + 200, 1010);
-                    pictureBox1.Size = new Size(640 * 11 / 10, 480 * 11 / 10);
-
+                    if (flag_enaglb_awb_function == true)
+                        pictureBox1.Size = new Size(640 * 11 / 10, 480 * 11 / 10);
+                    else
+                    {
+                        pictureBox1.Size = new Size(640 * 4 / 3, 480 * 4 / 3);
+                    }
                 }
                 else   //DISPLAY_FHD
                 {
                     tabControl1.Size = new Size(1600 + 300, 1010);
-                    //pictureBox1.Size = new Size(1120, 840);
                     pictureBox1.Size = new Size(640 * 2, 480 * 2);
                 }
 
@@ -5097,7 +5117,7 @@ namespace imsLink
                 }
                 else
                 {
-                    pictureBox1.Location = new Point(170 + 90, 7);
+                    pictureBox1.Location = new Point(170 + 90 + 80, 10);
                     richTextBox1.Visible = false;
                 }
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
@@ -5147,13 +5167,20 @@ namespace imsLink
                 }
                 //this.TopMost = false;
                 //tabControl1.Size = new Size(948, 616);
-                pictureBox1.Location = new Point(170, 50);
+                pictureBox1.Location = new Point(220, 60);
                 pictureBox1.Size = new Size(640, 480);
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
 
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    toolTip1.SetToolTip(button19, "1.25X");
+                    if (flag_enaglb_awb_function == true)
+                    {
+                        toolTip1.SetToolTip(button19, "1.10X");
+                    }
+                    else
+                    {
+                        toolTip1.SetToolTip(button19, "1.33X");
+                    }
                 }
                 else
                 {
@@ -10674,11 +10701,20 @@ namespace imsLink
         private void bt_clear_serial_Click(object sender, EventArgs e)
         {
             tb_sn_opal.Clear();
+            timer_webcam.Enabled = false;
+            this.tb_sn_opal.Focus();
         }
 
         private void bt_save_img_Click(object sender, EventArgs e)
         {
             button16_Click(sender, e);
+        }
+
+        private void tb_sn_opal_MouseClick(object sender, MouseEventArgs e)
+        {
+            timer_webcam.Enabled = false;
+
+
         }
 
 

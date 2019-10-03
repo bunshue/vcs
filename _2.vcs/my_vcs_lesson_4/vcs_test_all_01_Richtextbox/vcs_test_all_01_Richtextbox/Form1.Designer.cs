@@ -69,6 +69,7 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tb_search = new System.Windows.Forms.TextBox();
             this.button32 = new System.Windows.Forms.Button();
+            this.button33 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -447,7 +448,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(473, 462);
+            this.label1.Location = new System.Drawing.Point(449, 499);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(292, 24);
             this.label1.TabIndex = 54;
@@ -457,7 +458,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(473, 502);
+            this.label2.Location = new System.Drawing.Point(449, 539);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(257, 24);
             this.label2.TabIndex = 55;
@@ -474,7 +475,7 @@
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(555, 540);
+            this.tb_search.Location = new System.Drawing.Point(531, 577);
             this.tb_search.Name = "tb_search";
             this.tb_search.Size = new System.Drawing.Size(100, 33);
             this.tb_search.TabIndex = 57;
@@ -493,11 +494,24 @@
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
+            // button33
+            // 
+            this.button33.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button33.Location = new System.Drawing.Point(438, 445);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(329, 41);
+            this.button33.TabIndex = 59;
+            this.button33.Text = "數字顯示格式";
+            this.button33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.Controls.Add(this.button33);
             this.Controls.Add(this.button32);
             this.Controls.Add(this.tb_search);
             this.Controls.Add(this.richTextBox2);
@@ -587,6 +601,7 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button button32;
+        private System.Windows.Forms.Button button33;
     }
 }
 
