@@ -4,7 +4,26 @@ https://www.kancloud.cn/thinkphp/python-guide/39428
 http://www.codedata.com.tw/python/python-tutorial-the-1st-class-4-unicode-support-basic-input-output/
 http://www.runoob.com/python/python-chinese-encoding.html
 
+安裝pySimpleGUI
+	C:\Users\user>pip install pysimplegui
+	Collecting pysimplegui
+	  Downloading https://files.pythonhosted.org/packages/73/8f/1ef0e7b4c8dfafe7148dbdf4ae509884812f4c7c0834b1305a48e8ce5a36/PySimpleGUI-4.4.1-py3-none-any.whl (249kB)
+	    100% |████████████████████████████████| 256kB 272kB/s
+	Installing collected packages: pysimplegui
+	Successfully installed pysimplegui-4.4.1
+	You are using pip version 18.1, however version 19.2.3 is available.
+	You should consider upgrading via the 'python -m pip install --upgrade pip' command.
 
+安裝pySerial
+	C:\Users\user>pip install pyserial
+	Collecting pyserial
+	  Downloading https://files.pythonhosted.org/packages/0d/e4/2a744dd9e3be04a0c0907414e2a01a7c88bb3915cbe3c8cc06e209f59c30/pyserial-3.4-py2.py3-none-any.whl (193kB)
+	    100% |████████████████████████████████| 194kB 305kB/s
+	Installing collected packages: pyserial
+	Successfully installed pyserial-3.4
+	You are using pip version 18.1, however version 19.2.3 is available.
+	You should consider upgrading via the 'python -m pip install --upgrade pip' command.
+	
 
 pip install numpy	安裝NumPy
 

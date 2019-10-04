@@ -42,5 +42,26 @@ namespace vcs_ReadWrite_TXT
 
             richTextBox2.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //法一
+            // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
+            //richTextBox1.Text = System.IO.File.ReadAllText("pipa.txt", System.Text.Encoding.Default);
+
+            //法二
+            //讀取檔案
+            string y = File.ReadAllText("pipa.txt", System.Text.Encoding.Default);
+            richTextBox1.Text += "檔案內容 : " + y + "\n";
+            richTextBox1.Text += "長度：" + y.Length.ToString() + "\n";
+
+
+
+        }
     }
 }

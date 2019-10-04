@@ -1640,7 +1640,8 @@ namespace vcs_test_all_06_DirectoryFile
             File.AppendAllText("myfilename.txt", " append text to the end.");
 
             //讀取檔案
-            string y = File.ReadAllText("myfilename.txt");
+            // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
+            string y = File.ReadAllText("myfilename.txt", System.Text.Encoding.Default);
             richTextBox1.Text += "檔案內容 : " + y + "\n";
         }
 
