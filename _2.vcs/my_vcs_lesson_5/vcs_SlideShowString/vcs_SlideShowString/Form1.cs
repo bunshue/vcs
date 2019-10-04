@@ -20,6 +20,8 @@ namespace vcs_SlideShowString
 
         string filepath_setup = "poetry.setup.txt";
         string filepath_poetry = "poetry.txt";
+        string filepath_poetry_pipa = "pipa.txt";
+        string filepath_poetry_chang = "long.txt";
         //string filepath_poetry = "poetry_debug.txt";
         //string filepath_poetry = "poetry_new.txt";
 
@@ -486,6 +488,196 @@ namespace vcs_SlideShowString
             }
         }
 
+        bool loadTextData_long_poem(int item)
+        {
+            bool flag_skip_comment = false;
+
+
+            //string filepath_poetry = "poetry.txt";
+            //string filepath_poetry_pipa = "pipa.txt";
+            //string filepath_poetry_chang = "long.txt";
+            if (item == 1)
+                filepath_poetry = filepath_poetry_pipa;
+            else if (item == 2)
+                filepath_poetry = filepath_poetry_chang;
+
+            if (System.IO.File.Exists(filepath_poetry) == false)
+            {
+                richTextBox1.Text += "檔案 " + filepath_poetry + " 不存在，離開。\n";
+                return false;
+            }
+            else
+            {
+                richTextBox1.Text += "檔案 " + filepath_poetry + " 存在, 開啟，並讀入文字資料\n";
+
+                string line;
+                StreamReader sr = new StreamReader(filepath_poetry, Encoding.Default);
+
+                i = 0;
+                lyrics_count = 0;
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    i++;
+                    line = sr.ReadLine().Trim();            // 讀取文字到 line 變數
+                    if (line.Length < 2)
+                        continue;
+
+                    if ((line[line.Length - 2] == '*') && (line[line.Length - 1] == '/'))
+                    {
+                        //richTextBox1.Text += "got comment SP : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        flag_skip_comment = false;
+                        continue;
+                    }
+                    else if (flag_skip_comment == true)
+                    {
+                        //richTextBox1.Text += "got comment : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        continue;
+                    }
+                    else if ((line[0] == '/') && (line[1] == '*'))
+                    {
+                        flag_skip_comment = true;
+                        //richTextBox1.Text += "got comment ST : " + line + "\t len = " + line.Length.ToString() + "\tskip\n";
+                        continue;
+                    }
+                    else if (line[0] == '@')
+                    {
+                        //richTextBox1.Text += "get author" + line + "\n";
+                    }
+                    else if (line[0] == '^')
+                    {
+                        align_direction = line[1];
+                        //richTextBox1.Text += "value = " + align_direction.ToString() + "\n";
+                        richTextBox1.Text += "設定對齊方向" + "\t";
+                        if (align_direction == '0')
+                            richTextBox1.Text += "靠右\n";
+                        else if (align_direction == '1')
+                            richTextBox1.Text += "靠右\n";
+                        else
+                            richTextBox1.Text += "正中\n";
+                    }
+                    else if (line[0] == '~')
+                    {
+                        play_sequence = line[1];
+                        //richTextBox1.Text += "value = " + play_sequence.ToString() + "\n";
+                        richTextBox1.Text += "設定播放順序" + "\t";
+                        if (play_sequence == '0')
+                        {
+                            play_sequence = PLAYMODE_SEQUENCE;
+                            richTextBox1.Text += "依序\n";
+                        }
+                        else if (play_sequence == '1')
+                        {
+                            play_sequence = PLAYMODE_RANDOM;
+                            richTextBox1.Text += "隨機\n";
+                        }
+                        else if (play_sequence == '2')
+                        {
+                            play_sequence = PLAYMODE_SEQUENCE_RANDOM;
+                            richTextBox1.Text += "依序隨機啟動\n";
+                        }
+                        else
+                        {
+                            play_sequence = PLAYMODE_SEQUENCE;
+                            richTextBox1.Text += "依序\n";
+                        }
+                    }
+                    else if (line[0] == '?')
+                    {
+                        font_type = line.Remove(0, 1);
+                        richTextBox1.Text += "字型: " + font_type + "\n";
+                    }
+                    else if (line[0] == '{')
+                    {
+                        slide_show_interval = int.Parse(line.Remove(0, 1));
+                        richTextBox1.Text += "播放速度: " + slide_show_interval.ToString() + " 秒\n";
+                    }
+                    else if (line[0] == '[')
+                    {
+                        if (line[1] == '0')
+                        {
+                            flag_top_most = false;
+                            richTextBox1.Text += "設定非最上層顯示\n";
+                        }
+                        else if (line[1] == '1')
+                        {
+                            flag_top_most = true;
+                            richTextBox1.Text += "設定最上層顯示\n";
+                        }
+                    }
+                    else if (line[0] == '#')
+                    {
+                        //richTextBox1.Text += "get title" + line + "\n";
+                    }
+                    else if (line[0] == '$')
+                    {
+                        //richTextBox1.Text += "get serial" + line + "\n";
+                        continue;
+                    }
+                    else if (line[0] == '%')
+                    {
+                        //comment
+                        //richTextBox1.Text += "get comment" + line + "\n";
+                        continue;
+                    }
+                    else if ((line[0] == '/') && (line[1] == '/'))
+                    {
+                        //comment
+                        //richTextBox1.Text += "get comment" + line + "\n";
+                        continue;
+                    }
+                    else if (line[0] == '&')
+                    {
+                        //richTextBox1.Text += "get text start" + line + "\n";
+                        //line = line.Remove(0, 1);
+                        lyrics_count++;
+                    }
+                    else if (line.StartsWith("width"))
+                    {
+                        display_width = int.Parse(line.Remove(0, 6));
+                        richTextBox1.Text += "display width = " + display_width.ToString() + " %\n";
+                    }
+                    else if (line.StartsWith("height"))
+                    {
+                        display_height = int.Parse(line.Remove(0, 7));
+                        richTextBox1.Text += "display height = " + display_height.ToString() + " %\n";
+                    }
+
+
+                    //richTextBox1.Text += i.ToString() + "\t" + line + "\tlen = " + line.Length.ToString() + "\n";
+                    all_strings.Add(line);
+                }
+                richTextBox1.Text += "b設定預設字型大小: " + font_size_default.ToString() + "\n";
+
+                strings_count = all_strings.Count;
+                sr.Close();
+
+                richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
+                richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
+
+
+                /*
+
+                if (font_type == string.Empty)
+                {
+                    font_type = "標楷體";
+                }
+                richTextBox1.Text += "設定字型: " + font_type + "\n";
+
+                if ((display_width < 5) || (display_width > 100))
+                {
+                    display_width = 15;
+                }
+                if ((display_height < 5) || (display_height > 100))
+                {
+                    display_height = 70;
+                }
+                richTextBox1.Text += "顯示百分比: W = " + display_width.ToString() + " %, H = " + display_height.ToString() + " %\n";
+                */
+
+                return true;
+            }
+        }
+
         private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
             if (lyrics_count == 1)
@@ -710,6 +902,14 @@ namespace vcs_SlideShowString
                     richTextBox1.Text += "Subtract, font size = " + font_size_default.ToString() + "\n";
                     slide_show_string();
                 }
+            }
+            else if (e.KeyCode == Keys.P)
+            {
+                show_long_poem(1);
+            }
+            else if (e.KeyCode == Keys.C)
+            {
+                show_long_poem(2);
             }
             else if ((e.KeyCode == Keys.X) || (e.KeyCode == Keys.Escape))
             {
@@ -2142,6 +2342,40 @@ namespace vcs_SlideShowString
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
             richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+        }
+
+        void show_long_poem(int item)
+        {
+            bool result;
+
+            if(item == 1)
+                richTextBox1.Text += "\n顯示琵琶行\n\n";
+            else if (item == 2)
+                richTextBox1.Text += "\n顯示長恨歌\n\n";
+
+            strings_count = 0;
+            lyrics_count = 0;
+            lines_in_this_lyrics = 0;
+            show_lyrics_index = 0;
+
+            display_width = 100;
+            align_direction = '2';
+            font_size_default = 25;
+
+            all_strings.Clear();
+            current_strings.Clear();
+
+            result = loadTextData_long_poem(item);
+
+            if (result == false)
+                return;
+
+            slide_show_string();
+            //reload_slide_show_string();
+            this.Visible = true;
+            timer1.Enabled = true;
+
+
         }
     }
 }
