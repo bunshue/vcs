@@ -183,8 +183,9 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(217, 42);
             this.button11.TabIndex = 12;
-            this.button11.Text = "xxx";
+            this.button11.Text = "網路連線檢查";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -193,8 +194,9 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(217, 42);
             this.button12.TabIndex = 13;
-            this.button12.Text = "xxx";
+            this.button12.Text = "取得自己的 IP";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 

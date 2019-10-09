@@ -50,6 +50,10 @@ namespace vcs_test_all_06_System
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string str = System.Environment.GetEnvironmentVariable("SystemRoot");
+            richTextBox1.Text += "作業系統在" + str + "\n";
+            string dir = str.Substring(0, 2);
+            richTextBox1.Text += "作業系統在" + dir + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -426,6 +430,10 @@ namespace vcs_test_all_06_System
             //開啟程式
             //System.Diagnostics.Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
             System.Diagnostics.Process.Start("winver.exe ");              //--打开Windows版本信息
+
+            //開啟imsLink
+            //System.Diagnostics.Process.Start(@"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+
 
         }
 

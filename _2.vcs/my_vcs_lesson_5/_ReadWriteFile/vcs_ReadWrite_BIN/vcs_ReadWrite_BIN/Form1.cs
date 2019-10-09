@@ -20,7 +20,39 @@ namespace vcs_ReadWrite_BIN
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxxxxx";
+            string fileName2 = Application.StartupPath + "\\bin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
+
+
+            byte[] data_read = new byte[256];
+
+            /*
+            打印資料
+            string data_read_result = string.Empty;
+            foreach (byte b in data_read)
+            {
+                data_read_result += b.ToString("X2");
+            }
+            richTextBox1.Text += data_read_result;
+            */
+
+            //修改資料
+            for (int i = 0; i < data_read.Length; i++)
+            {
+                //data_read[i] = (byte)i;
+                if ((i % 2) == 0)
+                {
+                    data_read[i] = 0xA1;
+                }
+                else
+                    data_read[i] = 0x42;
+            }
+
+            //寫資料
+            File.WriteAllBytes(fileName2, data_read);
+            richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -1320,6 +1320,7 @@ namespace imsLink
                             input += ", len = " + BytesToRead.ToString() + "\n";
                             richTextBox1.AppendText(input);     //打印一般文字訊息
 
+                            richTextBox1.SelectionStart = richTextBox1.Text.Length;
                             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
                             Write_Log_File(input);
                         }

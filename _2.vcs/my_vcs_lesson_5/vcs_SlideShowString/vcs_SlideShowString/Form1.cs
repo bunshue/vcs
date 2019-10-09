@@ -20,8 +20,10 @@ namespace vcs_SlideShowString
 
         string filepath_setup = "poetry.setup.txt";
         string filepath_poetry = "poetry.txt";
-        string filepath_poetry_pipa = "pipa.txt";
-        string filepath_poetry_chang = "long.txt";
+        string filepath_poetry_normal = "poetry.txt";
+        string filepath_poetry_long = "poetry_long.txt";    //長篇
+        string filepath_poetry_pipa = "pipa.txt";           //琵琶行
+        string filepath_poetry_chang = "long.txt";          //長恨歌
         //string filepath_poetry = "poetry_debug.txt";
         //string filepath_poetry = "poetry_new.txt";
 
@@ -47,6 +49,10 @@ namespace vcs_SlideShowString
         private const int PLAYMODE_RANDOM = 1;          //隨機
         private const int PLAYMODE_SEQUENCE_RANDOM = 2; //依序隨機啟動
         private const int MOVE_STEP = 50;
+
+        private const int MODE_NORMAL = 0;
+        private const int MODE_LONG = 1;
+        private const int MODE_SPECIAL = 2;
 
         int strings_count = 0;
         int lyrics_count = 0;
@@ -74,6 +80,7 @@ namespace vcs_SlideShowString
         int display_width = 0;      //percentage
         int display_height = 0;     //percentage
         int slide_show_interval = 0;
+        int flag_operation_mode = MODE_NORMAL;
         bool flag_top_most = false;
         bool flag_pause = false;
         int setda = 0;  //setda = sky + earth + T + A + d1 + d2 + d3 + d2 + d3 = H - dd * 2
@@ -282,7 +289,7 @@ namespace vcs_SlideShowString
                 sr.Close();
 
                 //richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
-                //richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
+                //richTextBox1.Text += "c可用行數 " + strings_count.ToString() + "\n";
 
                 richTextBox1.Text += "設定預設字型大小: " + font_size_default.ToString() + "\n";
 
@@ -462,7 +469,7 @@ namespace vcs_SlideShowString
                 sr.Close();
 
                 richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
-                richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
+                richTextBox1.Text += "a可用行數 " + strings_count.ToString() + "\n";
 
 
                 /*
@@ -652,7 +659,7 @@ namespace vcs_SlideShowString
                 sr.Close();
 
                 richTextBox1.Text += "共有 " + lyrics_count.ToString() + " 首\n";
-                richTextBox1.Text += "可用行數 " + strings_count.ToString() + "\n";
+                richTextBox1.Text += "b可用行數 " + strings_count.ToString() + "\n";
 
 
                 /*
@@ -759,12 +766,15 @@ namespace vcs_SlideShowString
                 show_lyrics_index = get_next_show_lyrics_index(show_lyrics_index);
                 flag_pause = false;
                 slide_show_string();
-                timer1.Enabled = true;
-                timer1_cnt = 0;
-                if (flag_top_most == true)
-                    this.TopMost = true;
-                else
-                    this.TopMost = false;
+                if (flag_operation_mode != MODE_SPECIAL)
+                {
+                    timer1.Enabled = true;
+                    timer1_cnt = 0;
+                    if (flag_top_most == true)
+                        this.TopMost = true;
+                    else
+                        this.TopMost = false;
+                }
             }
             else if (e.KeyCode == Keys.PageUp)
             {
@@ -780,9 +790,12 @@ namespace vcs_SlideShowString
                 timer2_cnt = 0;
                 do_mouse_wheel_cnt = timer2_cnt;
 
-                flag_pause = true;
-                timer1.Enabled = false;
-                this.TopMost = false;
+                if (flag_operation_mode != MODE_SPECIAL)
+                {
+                    flag_pause = true;
+                    timer1.Enabled = false;
+                    this.TopMost = false;
+                }
             }
             else if (e.KeyCode == Keys.Up)
             {
@@ -903,13 +916,33 @@ namespace vcs_SlideShowString
                     slide_show_string();
                 }
             }
+            else if (e.KeyCode == Keys.N)
+            {
+                flag_operation_mode = MODE_NORMAL;
+                all_strings.Clear();
+                current_strings.Clear();
+                Form1_Load(sender, e);
+                timer1.Enabled = true;
+            }
+            else if (e.KeyCode == Keys.L)
+            {
+                flag_operation_mode = MODE_LONG;
+                all_strings.Clear();
+                current_strings.Clear();
+                Form1_Load(sender, e);
+                //timer1.Enabled = false;
+            }
             else if (e.KeyCode == Keys.P)
             {
+                flag_operation_mode = MODE_SPECIAL;
                 show_long_poem(1);
+                timer1.Enabled = false;
             }
             else if (e.KeyCode == Keys.C)
             {
+                flag_operation_mode = MODE_SPECIAL;
                 show_long_poem(2);
+                timer1.Enabled = false;
             }
             else if ((e.KeyCode == Keys.X) || (e.KeyCode == Keys.Escape))
             {
@@ -1094,6 +1127,25 @@ namespace vcs_SlideShowString
 
             if (result == false)
                 return;
+
+            if (flag_operation_mode == MODE_NORMAL)
+                filepath_poetry = filepath_poetry_normal;       //一般
+            else if (flag_operation_mode == MODE_LONG)
+                filepath_poetry = filepath_poetry_long;         //長篇
+            else
+                filepath_poetry = filepath_poetry_pipa;         //琵琶行
+
+            if (flag_operation_mode != MODE_NORMAL)     //長篇 與 特別的
+            {
+                display_width = 100;        //全滿框
+                align_direction = '2';      //中間置中
+                font_size_default = 35;     //大字體
+            }
+
+            if (flag_operation_mode == MODE_LONG)     //長篇
+            {
+                slide_show_interval *= 10;
+            }
 
             result = loadTextData();
 
@@ -1587,16 +1639,19 @@ namespace vcs_SlideShowString
                 str = font_size_current.ToString() + "/" + font_size_default.ToString() + "/" + display_width.ToString() + "/" + display_height.ToString();
                 g.DrawString(str, new Font(font_type, fs), new SolidBrush(Color.Blue), new PointF(3, 13));
 
-                //顯示曲目
-                if (lines_in_this_lyrics <= 3)
-                    fs = EARTH * 2 / 5;
-                else
-                    fs = EARTH * 2 / 5;
+                if (flag_operation_mode != MODE_SPECIAL)
+                {
+                    //顯示曲目
+                    if (lines_in_this_lyrics <= 3)
+                        fs = EARTH * 2 / 5;
+                    else
+                        fs = EARTH * 2 / 5;
 
-                str = (show_lyrics_index + 1).ToString() + "/" + lyrics_count.ToString();
-                tmp_width = g.MeasureString(str, new Font(font_type, fs)).ToSize().Width;
-                tmp_height = g.MeasureString(str, new Font(font_type, fs)).ToSize().Height;
-                g.DrawString(str, new Font(font_type, fs), new SolidBrush(Color.Blue), new PointF((W - tmp_width) * 2 / 3, H - tmp_height - 3));
+                    str = (show_lyrics_index + 1).ToString() + "/" + lyrics_count.ToString();
+                    tmp_width = g.MeasureString(str, new Font(font_type, fs)).ToSize().Width;
+                    tmp_height = g.MeasureString(str, new Font(font_type, fs)).ToSize().Height;
+                    g.DrawString(str, new Font(font_type, fs), new SolidBrush(Color.Blue), new PointF((W - tmp_width) * 2 / 3, H - tmp_height - 3));
+                }
             }
 
             if (flag_release_mode == true)

@@ -762,6 +762,96 @@ namespace vcs_test_all_12_DateTime
 
 
         }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            //比較兩個時間
+
+            DateTime date1 = new DateTime(2016, 12, 9, 0, 0, 0);
+            DateTime date2 = new DateTime(2016, 12, 9, 11, 0, 0);
+            int result = DateTime.Compare(date1, date2);
+            string relationship;
+
+            if (result < 0)
+                relationship = "is earlier than";
+            else if (result == 0)
+                relationship = "is the same time as";
+            else
+                relationship = "is later than";
+
+            //Console.WriteLine("{0} {1} {2}", date1, relationship, date2);
+            richTextBox1.Text += date1 + " " + relationship + " " + date2 + "\n";
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            //string st1 = "2010/05/30 12:13:50";
+            //string st2 = "2018/09/20 14:14:30";
+            string st1 = "2010/05/30";
+            string st2 = "2018/09/20";
+            DateTime dt1 = Convert.ToDateTime(st1);
+            DateTime dt2 = Convert.ToDateTime(st2);
+
+            if (DateTime.Compare(dt1, dt2) > 0)
+            {
+                richTextBox1.Text = st1 + " 晚於 " + st2 + "\n";
+            }
+            else
+            {
+                richTextBox1.Text = st1 + " 早於 " + st2 + "\n";
+            }
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            //計算兩個時間差值的函數，傳回時間差的絕對值
+            //計算兩個時間差值的函數，傳回時間差的絕對值
+
+            //韓戰	 1950年 6月25日	———————————————————1953年7月27日 簽署停戰協定	4yr
+            string st1 = "1950/6/25";
+            string st2 = "1953/7/27";
+            DateTime dt1 = Convert.ToDateTime(st1);
+            DateTime dt2 = Convert.ToDateTime(st2);
+
+            string result = DateDiff(dt1, dt2);
+            richTextBox1.Text += "result = " + result + "\n";
+
+        }
+
+        private string DateDiff(DateTime DateTime1, DateTime DateTime2)
+        {
+            string dateDiff = null;
+            try
+            {
+                TimeSpan ts1 = new TimeSpan(DateTime1.Ticks);
+                TimeSpan ts2 = new TimeSpan(DateTime2.Ticks);
+                TimeSpan ts = ts1.Subtract(ts2).Duration();
+                dateDiff = ts.Days.ToString() + "天"
+                + ts.Hours.ToString() + "小時"
+                + ts.Minutes.ToString() + "分鐘"
+                + ts.Seconds.ToString() + "秒";
+            }
+            catch
+            {
+
+            }
+            return dateDiff;
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            DateTime d = new DateTime(2019, 1, 1);
+
+            richTextBox1.Text += "2019/1/1 加一段時間後 : " + d.AddDays(3125).AddSeconds(14653 * 2).ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+
+            int yy = -280;
+            int dd = -1250;
+            richTextBox1.Text += "2019/1/1 減一段時間後 : " + d.AddYears(yy).AddDays(dd).AddSeconds(14653 * 2).ToString() + "\n";
+
+        }
+
    
     }
 }

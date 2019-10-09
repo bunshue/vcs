@@ -265,8 +265,9 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(197, 42);
             this.button17.TabIndex = 18;
-            this.button17.Text = "xxx";
+            this.button17.Text = "將數字前面補0";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 

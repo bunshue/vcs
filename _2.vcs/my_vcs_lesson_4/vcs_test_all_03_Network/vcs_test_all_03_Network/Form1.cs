@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Net;   //for DNS, WebRequest
+using System.Net;   //for DNS, WebRequest, IPAddress
+using System.Net.Sockets;   // for AddressFamily
 using System.Collections;   //for IEnumerator
 using System.Runtime.InteropServices;   //for DllImport
 using System.IO;    //for Stream
@@ -175,6 +176,41 @@ namespace vcs_test_all_03_Network
             richTextBox1.Text += res;
 
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //C# 可以實作 ping 網路連線檢查
+            //INIT PING OBJECT
+            System.Net.NetworkInformation.Ping objPing = new System.Net.NetworkInformation.Ping();
+
+            //設定測試連線及逾時時間
+            System.Net.NetworkInformation.PingReply PingResult = objPing.Send("www.google.com.tw", 5000);
+
+            //取得結果
+            string pingMsg = (PingResult.Status == System.Net.NetworkInformation.IPStatus.Success) ? "連線成功" : "無法連線";
+
+            richTextBox1.Text += pingMsg + "\n";
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            IPAddress ip = GetIP();
+            if (ip != null)
+            {
+                richTextBox1.Text += "IP : " + ip.ToString() + "\n";
+            }
+
+        }
+
+        IPAddress GetIP()
+        {
+            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    return ip;
+            return null;
+        }
+
 
 
     }

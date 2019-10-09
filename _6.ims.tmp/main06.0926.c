@@ -88,7 +88,7 @@
 
 #define ZOOM_CUT			8			//pixel
 #define CUT_PIXEL1			171			//cut = 1.5*(H >> 3) H = 912, cut1 = 171
-#define CUT_PIXEL2			90			//cut = 1.5*(H >> 3) H = 912, cut1 =  90
+#define CUT_PIXEL2			90			//cut = 1.5*(H >> 3) H = 480, cut1 =  90
 
 #define MODEL_PAGE			0x07		//model
 #define SN_PAGE				0x09		//serial
@@ -13362,7 +13362,10 @@ void Save_Image_To_SD()
 
     SD_Init();
 
-	reg = 0x32500000;
+	//reg = 0x32500000;
+	reg = (&periphs_inst)->fb_camera_freeze_start_addr;		//0x32500000;
+	//xil_printf("reg = 0x%08x\n\r", reg);
+
 	sprintf(filename_bmp, "IMG%02d%02d.bmp", rtc.tm_min, rtc.tm_sec);
 	//xil_printf("reg = 0x%08x\n\r", reg);
 

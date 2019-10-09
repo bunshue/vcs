@@ -308,6 +308,29 @@ namespace vcs_test_all_01_Richtextbox
 
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            // 將數字前面補0，補足長度為6 
+            String snum = "5";
+            String pnum = snum.PadLeft(5, '0');
+            String fnum = String.Format("{0:00000}", Convert.ToInt16(snum));
+            //MessageBox.Show("原始字串 : " + snum + "\n 透過 PadLeft : " + pnum + "\n 透過 String.Format : " + fnum);
+
+
+            int n = 123;
+            string zz1 = n.ToString().PadLeft(10, '0');
+            richTextBox1.Text += "\nzz1 = " + zz1 + "\n";
+
+            //string zz2 = Convert.ToInt32(n);
+            string zz2 = String.Format("{0:0000000000}", Convert.ToInt16(n));
+            richTextBox1.Text += "zz2 = " + zz2 + "\n";
+
+            string zz3 = n.ToString("D10");
+            richTextBox1.Text += "zz3 = " + zz3 + "\n";
+
+
+        }
+
 
     }
 }
