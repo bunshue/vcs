@@ -8,8 +8,8 @@
     <ProjectGuid>{E50ABCBA-EF4B-4577-9FDF-F906BA6A017C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WebCam_AForge</RootNamespace>
-    <AssemblyName>vcs_WebCam_AForge</AssemblyName>
+    <RootNamespace>vcs_WebCam_AForge1</RootNamespace>
+    <AssemblyName>vcs_WebCam_AForge1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -71,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -204,6 +204,7 @@ namespace vcs_test_all_01_Richtextbox
             {
                 richTextBox1.Text += i.ToString() + "\t" + test_string2[i] + "\t" + Convert.ToString(((int)test_string2[i]), 16) + "\n";
             }
+            richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
 
         }
 
@@ -221,7 +222,7 @@ namespace vcs_test_all_01_Richtextbox
                 //Console.WriteLine($"Hexadecimal value of {letter} is {value:X}");
                 richTextBox1.Text += "Hexadecimal value of " + letter + " is " + value.ToString("X4") + "\n";
             }
-
+            richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
         }
 
         private void button32_Click(object sender, EventArgs e)

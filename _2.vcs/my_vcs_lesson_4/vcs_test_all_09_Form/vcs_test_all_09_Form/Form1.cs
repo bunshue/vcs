@@ -395,5 +395,13 @@ namespace vcs_test_all_09_Form
             this.ShowInTaskbar = false;
         }
 
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //顯示桌面
+            Type shellType = Type.GetTypeFromProgID("Shell.Application");
+            object shellObject = System.Activator.CreateInstance(shellType);
+            shellType.InvokeMember("ToggleDesktop", System.Reflection.BindingFlags.InvokeMethod, null, shellObject, null); 
+        }
+
     }
 }

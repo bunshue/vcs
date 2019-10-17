@@ -320,8 +320,9 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(162, 45);
             this.button23.TabIndex = 23;
-            this.button23.Text = "xxx";
+            this.button23.Text = "顯示桌面";
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button24
             // 

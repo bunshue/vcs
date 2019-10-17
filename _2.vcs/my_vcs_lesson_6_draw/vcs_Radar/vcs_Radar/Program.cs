@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_WebCam_AForge
+namespace vcs_Radar
 {
     static class Program
     {
