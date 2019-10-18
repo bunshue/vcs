@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_INI
             InitializeComponent();
         }
 
-        private string _FilePath = "c:\\______test_vcs\\sample.ini";
+        private string _FilePath = "c:\\______test_files\\sample.ini";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool WritePrivateProfileString(
@@ -36,7 +36,7 @@ namespace vcs_ReadWrite_INI
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "write data to test_ini.ini.\n";
-            WritePrivateProfileString("Demo", "abc", "123", "c:\\______test_vcs\\test_ini.ini");
+            WritePrivateProfileString("Demo", "abc", "123", "c:\\______test_files\\test_ini.ini");
 
         }
 
@@ -44,7 +44,7 @@ namespace vcs_ReadWrite_INI
         {
             richTextBox1.Text += "read data from test_ini.ini.\n";
             StringBuilder temp = new StringBuilder();
-            GetPrivateProfileString("Demo", "abc", "", temp, 255, "c:\\______test_vcs\\test_ini.ini");
+            GetPrivateProfileString("Demo", "abc", "", temp, 255, "c:\\______test_files\\test_ini.ini");
             richTextBox1.Text += "get value = " + temp + "\n";
 
             //Console.WriteLine(temp);
@@ -81,8 +81,8 @@ namespace vcs_ReadWrite_INI
             int nAge;
             strName = "張三";
             nAge = 12;
-            WritePrivateProfileString("StudentInfo", "Name", strName, "c://______test_vcs//student.ini");
-            WritePrivateProfileString("StudentInfo", "Age", nAge.ToString(), "c://______test_vcs//student.ini");
+            WritePrivateProfileString("StudentInfo", "Name", strName, "c://______test_files//student.ini");
+            WritePrivateProfileString("StudentInfo", "Age", nAge.ToString(), "c://______test_files//student.ini");
 
 
         }

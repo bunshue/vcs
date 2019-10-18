@@ -20,14 +20,14 @@ namespace MirrorImage
         private void Form1_Load(object sender, EventArgs e)
         {
             //read source image
-            Bitmap simg = new Bitmap("C:\\______test_vcs\\_case1\\pic3.jpg");
+            Bitmap simg = new Bitmap("C:\\______test_files\\_case1\\pic3.jpg");
 
             //get source image dimension
             int width = simg.Width;
             int height = simg.Height;
 
             //load source image in picturebox1
-            pictureBox1.Image = Image.FromFile("C:\\______test_vcs\\_case1\\pic3.jpg");
+            pictureBox1.Image = Image.FromFile("C:\\______test_files\\_case1\\pic3.jpg");
 
             //mirror image
             Bitmap mimg = new Bitmap(width * 2, height);

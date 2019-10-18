@@ -22,7 +22,7 @@ namespace vcs_tmp_draw_all
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bmp = new Bitmap(@"C:\______test_vcs\bear.jpg");
+            bmp = new Bitmap(@"C:\______test_files\bear.jpg");
             g = Graphics.FromImage(bmp);
             p = new Pen(Color.Red, 10);
             pictureBox1.Image = bmp;
@@ -42,7 +42,7 @@ namespace vcs_tmp_draw_all
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bmp = new Bitmap(@"C:\______test_vcs\bear.jpg");
+            bmp = new Bitmap(@"C:\______test_files\bear.jpg");
             g = Graphics.FromImage(bmp);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = bmp; //顯示在 pictureBox1 圖片控制項中
@@ -67,7 +67,7 @@ namespace vcs_tmp_draw_all
 
         private void button5_Click(object sender, EventArgs e)
         {
-            bmp.Save(@"C:\______test_vcs\zzzzz.jpg");
+            bmp.Save(@"C:\______test_files\zzzzz.jpg");
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace vcs_tmp_draw_all
             myDraw.DrawLine(p, 100, 100, 300, 100);
             //MyDraw.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可以繪圖了
             g.DrawImage(bmp, 0, 0);
-            bmp.Save(@"C:\______test_vcs\3333.jpg");
+            bmp.Save(@"C:\______test_files\3333.jpg");
 
         }
 

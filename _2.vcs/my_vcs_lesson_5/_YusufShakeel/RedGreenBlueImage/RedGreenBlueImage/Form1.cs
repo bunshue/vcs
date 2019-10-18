@@ -20,7 +20,7 @@ namespace RedGreenBlueImage
         private void Form1_Load(object sender, EventArgs e)
         {
             //image path
-            string img = "C:\\______test_vcs\\_case1\\pic2.jpg";
+            string img = "C:\\______test_files\\_case1\\pic2.jpg";
 
             //read image
             Bitmap bmp = new Bitmap(img);

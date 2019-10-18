@@ -18,7 +18,7 @@ namespace vcs_ColorPicker2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Image myImage = System.Drawing.Image.FromFile("C:\\______test_vcs\\bear.bmp");
+            Image myImage = System.Drawing.Image.FromFile("C:\\______test_files\\bear.bmp");
             pictureBox1.Image = myImage;
         }
 

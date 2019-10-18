@@ -361,7 +361,7 @@ namespace vcs_test_all_06_System
         private void button25_Click(object sender, EventArgs e)
         {
             //用預設的程式開啟檔案
-            String pathname = "C:\\______test_vcs\\aaaaaaa.txt";
+            String pathname = "C:\\______test_files\\aaaaaaa.txt";
 
             if (File.Exists(pathname) == false)
             {
@@ -422,7 +422,7 @@ namespace vcs_test_all_06_System
             //Process.Start(@"C:\WINDOWS\system32\calc.exe");
 
             //開啟檔案 由預設程式開啟
-            //System.Diagnostics.Process.Start("C:\\______test_vcs\\my_text_file.txt");
+            //System.Diagnostics.Process.Start("C:\\______test_files\\my_text_file.txt");
             
             //開啟記事本程式
             //System.Diagnostics.Process.Start("notepad.exe");

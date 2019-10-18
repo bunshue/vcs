@@ -9,9 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 
-
-
-
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -67,7 +64,7 @@ namespace test_GetParent
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_vcs\_case1\pic1.jpg";
+            string filename = @"C:\______test_files\_case1\pic1.jpg";
             FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
             int filelength = 0;
             filelength = (int)fs.Length; //獲得檔長度

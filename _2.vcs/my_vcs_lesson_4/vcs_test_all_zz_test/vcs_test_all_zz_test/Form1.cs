@@ -123,7 +123,7 @@ namespace vcs_test_all_zz_test
 
         private void btn_test4_Click(object sender, EventArgs e)
         {
-            StreamWriter filewriter = new StreamWriter("C:\\______test_vcs\\poem.txt");
+            StreamWriter filewriter = new StreamWriter("C:\\______test_files\\poem.txt");
             filewriter.WriteLine("鳳凰臺上鳳凰遊，鳳去臺空江自流");
             filewriter.WriteLine("吳宮花草埋幽徑，晉代衣冠成古邱");
             filewriter.WriteLine("三山半落青又外，二水中分白鷺洲");
@@ -133,7 +133,7 @@ namespace vcs_test_all_zz_test
 
         private void btn_test5_Click(object sender, EventArgs e)
         {
-            string pdf_path = "C:\\______test_vcs\\A New Sensorless Starting Method for Brushless DC Motors without  Reversing Rotation 2007.pdf";
+            string pdf_path = "C:\\______test_files\\A New Sensorless Starting Method for Brushless DC Motors without  Reversing Rotation 2007.pdf";
             Process myProcess;
             myProcess = Process.Start(pdf_path);
             myProcess.WaitForExit();
@@ -145,7 +145,7 @@ namespace vcs_test_all_zz_test
             //從FTP下載檔案
             System.Net.WebClient webClient = new System.Net.WebClient();
             //下載FTP檔案到指定位置
-            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_vcs\fedora27.iso");
+            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
 
         }
 
@@ -153,11 +153,11 @@ namespace vcs_test_all_zz_test
         {
             //利用檔案的MD5碼比對兩個檔案是否相同
             //第一個檔案
-            string filename1 = "C:\\______test_vcs\\compare\\aaaa.txt";
+            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
             //第二個檔案
-            string filename2 = "C:\\______test_vcs\\compare\\bbbb.txt";
+            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
             //第三個檔案
-            string filename3 = "C:\\______test_vcs\\compare\\ssss.txt";
+            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
 
             //第一個檔案的MD5碼
             string FileMD5_1 = string.Empty;

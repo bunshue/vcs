@@ -31,7 +31,7 @@ namespace vcs_test_all_08_Media
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_vcs\aaaa.mp3";       //一定要有@
+            string filename = @"C:\______test_files\aaaa.mp3";       //一定要有@
             Mp3Info mp3_information;
             byte[] Info = getLast128(filename);
             mp3_information = getMp3Info(Info);
@@ -178,7 +178,7 @@ namespace vcs_test_all_08_Media
         {
             //法一
             //直接使用 System.Media.SoundPlayer 類別 播放.wav檔
-            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_vcs\WindowsShutdown.wav");
+            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\WindowsShutdown.wav");
 
             //法二, 直接使用 System.Media.SoundPlayer 類別
             //System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
@@ -186,12 +186,12 @@ namespace vcs_test_all_08_Media
 
             //法三
             //using System.Media;
-            //SoundPlayer sp = new SoundPlayer(@"C:\______test_vcs\WindowsShutdown.wav");
+            //SoundPlayer sp = new SoundPlayer(@"C:\______test_files\WindowsShutdown.wav");
             //sp.Play(); // 撥放
 
             //法四
             System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            player.SoundLocation = @"C:\______test_vcs\start.wav";
+            player.SoundLocation = @"C:\______test_files\start.wav";
             player.Play();
 
         }
@@ -200,7 +200,7 @@ namespace vcs_test_all_08_Media
         {
             //法一
             //直接使用 System.Media.SoundPlayer 類別
-            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_vcs\WindowsShutdown.wav");
+            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\WindowsShutdown.wav");
 
             //法二
             //System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
@@ -254,7 +254,7 @@ namespace vcs_test_all_08_Media
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += (GetMediaLen(@"C:\______test_vcs\WindowsShutdown.wav").ToString() + " 秒\n");
+            richTextBox1.Text += (GetMediaLen(@"C:\______test_files\WindowsShutdown.wav").ToString() + " 秒\n");
             //richTextBox1.Text += (GetMediaLen(@"C:\aaaa.mp3").ToString() + " 秒");
             //richTextBox1.Text += (GetMediaLen(@"F:\_______VIDEO_ALL_all1\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
         }
@@ -286,7 +286,7 @@ namespace vcs_test_all_08_Media
         //using WMPLib;
         private void button5_Click(object sender, EventArgs e)
         {
-            wplayer.URL = @"C:\______test_vcs\bbbb.mp3";
+            wplayer.URL = @"C:\______test_files\bbbb.mp3";
             wplayer.settings.setMode("loop", true);
             wplayer.controls.play();
             timer1.Enabled = true;

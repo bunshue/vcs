@@ -76,8 +76,7 @@ namespace vcs_ReadWrite_HTML
             System.IO.Stream dataStream = httpResponse.GetResponseStream();
             byte[] buffer = new byte[8192];
 
-            //FileStream fs = new FileStream("X:\\TEMP\\Darkthread.gif", FileMode.Create, FileAccess.Write);
-            FileStream fs = new FileStream("C:\\______test_vcs\\aaaaaaaa.gif", FileMode.Create, FileAccess.Write);
+            FileStream fs = new FileStream("C:\\______test_files\\aaaaaaaa.gif", FileMode.Create, FileAccess.Write);
             int size = 0;
             do
             {

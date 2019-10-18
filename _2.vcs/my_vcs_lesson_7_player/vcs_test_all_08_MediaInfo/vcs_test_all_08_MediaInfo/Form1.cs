@@ -19,8 +19,7 @@ namespace vcs_test_all_08_MediaInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //MediaFile mp4File = new MediaFile(@"C:\____手機來的圖\__影片\Lock_Mode.mp4");
-            MediaFile mp4File = new MediaFile(@"C:\______test_vcs\aaaa.mp3");
+            MediaFile mp4File = new MediaFile(@"C:\______test_files\aaaa.mp3");
             richTextBox1.Text += "File Name : " + mp4File.Name + "\n";
             richTextBox1.Text += "FileSize : "   + mp4File.FileSize.ToString() + " Bytes\n";
             richTextBox1.Text += "FrameCount : " + mp4File.FrameCount.ToString() + "\n";

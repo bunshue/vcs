@@ -39,7 +39,7 @@ namespace vcs_FolderInfo
             listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
-            string filePath = @"c:/______test_vcs/";
+            string filePath = @"c:/______test_files/";
 
             /*
             richTextBox1.Text += "轉出一層,獲得指定目錄下的所有文檔：\n";

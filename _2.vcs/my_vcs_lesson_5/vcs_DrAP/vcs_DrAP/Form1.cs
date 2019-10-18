@@ -34,8 +34,8 @@ namespace vcs_DrAP
 
             if (old_search_path.Count == 0)
             {
-                content += "C:\\______test_vcs\n";
-                old_search_path.Add("C:\\______test_vcs");
+                content += "C:\\______test_files\n";
+                old_search_path.Add("C:\\______test_files");
             }
             else
             {
@@ -1505,7 +1505,7 @@ namespace vcs_DrAP
             total_size = 0;
             total_files = 0;
 
-            path = "C:\\______test_vcs\\_case1";
+            path = "C:\\______test_files\\_case1";
 
             richTextBox2.Text += "\n搜尋路徑 " + path + "\n";
 

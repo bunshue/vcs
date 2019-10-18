@@ -31,7 +31,7 @@ namespace test_paint
 
         private void button3_Click(object sender, EventArgs e)
         {
-            bmp = new Bitmap(@"C:\______test_vcs\bear.jpg");
+            bmp = new Bitmap(@"C:\______test_files\bear.jpg");
             Draw = Graphics.FromImage(bmp);
             this.Size = bmp.Size;
             g = this.CreateGraphics();

@@ -23,13 +23,13 @@ namespace vcs_LoadPicture
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Image image1 = Image.FromFile("C:\\______test_vcs\\_case1\\pic1.jpg");
+            Image image1 = Image.FromFile("C:\\______test_files\\_case1\\pic1.jpg");
             pictureBox1.Image = image1;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Image image1 = new Bitmap(@"C:\______test_vcs\_case1\\pic2.jpg", true);
+            Image image1 = new Bitmap(@"C:\______test_files\_case1\\pic2.jpg", true);
             pictureBox1.Image = image1;
         }
 
@@ -37,16 +37,16 @@ namespace vcs_LoadPicture
         {
             //法一
             //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
-            //pictureBox1.ImageLocation = "C:\\______test_vcs\\_case1\\pic3.jpg";
+            //pictureBox1.ImageLocation = "C:\\______test_files\\_case1\\pic3.jpg";
 
             //法二
             //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
-            //string ImageLocation = "C:\\______test_vcs\\_case1\\pic3.jpg";
+            //string ImageLocation = "C:\\______test_files\\_case1\\pic3.jpg";
             //pictureBox1.Load(ImageLocation);
 
             //法三
             //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
-            pictureBox1.Load("C:\\______test_vcs\\_case1\\pic3.jpg");
+            pictureBox1.Load("C:\\______test_files\\_case1\\pic3.jpg");
         }
 
         private void button4_Click(object sender, EventArgs e)

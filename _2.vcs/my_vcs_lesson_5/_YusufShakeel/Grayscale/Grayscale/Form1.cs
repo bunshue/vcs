@@ -20,10 +20,10 @@ namespace Grayscale
         private void Form1_Load(object sender, EventArgs e)
         {
             //read image
-            Bitmap bmp = new Bitmap("C:\\______test_vcs\\_case1\\pic3.jpg");
+            Bitmap bmp = new Bitmap("C:\\______test_files\\_case1\\pic3.jpg");
 
             //load original image in picturebox1
-            pictureBox1.Image = Image.FromFile("C:\\______test_vcs\\_case1\\pic3.jpg");
+            pictureBox1.Image = Image.FromFile("C:\\______test_files\\_case1\\pic3.jpg");
 
             //get image dimension
             int width = bmp.Width;

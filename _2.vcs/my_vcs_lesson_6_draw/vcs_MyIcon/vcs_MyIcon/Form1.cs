@@ -72,7 +72,7 @@ namespace vcs_MyIcon
         {
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -253,7 +253,7 @@ namespace vcs_MyIcon
                 {
                     using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
                     {
-                        string icon_filename = "C://______test_vcs//" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
+                        string icon_filename = "C://______test_files//" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
                         using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
                         {
                             icon.Save(stream);
@@ -295,7 +295,7 @@ namespace vcs_MyIcon
                 {
                     using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
                     {
-                        string icon_filename = "C://______test_vcs//" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
+                        string icon_filename = "C://______test_files//" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
                         using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
                         {
                             icon.Save(stream);
@@ -308,7 +308,7 @@ namespace vcs_MyIcon
 
         private void button11_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("C://______test_vcs//");
+            System.Diagnostics.Process.Start("C://______test_files//");
         }
 
         private void button12_Click(object sender, EventArgs e)

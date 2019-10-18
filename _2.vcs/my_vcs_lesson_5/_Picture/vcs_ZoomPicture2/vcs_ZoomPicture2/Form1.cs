@@ -40,7 +40,7 @@ namespace vcs_ZoomPicture2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile("c:\\______test_vcs\\picture1.jpg"); //載入圖檔，由檔案
+            pictureBox1.Image = Image.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace vcs_ZoomPicture2
             Bitmap bitmap1;
             Bitmap bitmap2;
 
-            bitmap1 = new Bitmap("c:\\______test_vcs\\picture1.jpg");
+            bitmap1 = new Bitmap("c:\\______test_files\\picture1.jpg");
             bitmap2 = ImageResize.Resize(bitmap1, 2);
 
 
@@ -69,7 +69,7 @@ namespace vcs_ZoomPicture2
             Bitmap bitmap1;
             Bitmap bitmap2;
 
-            bitmap1 = new Bitmap("c:\\______test_vcs\\picture1.jpg");
+            bitmap1 = new Bitmap("c:\\______test_files\\picture1.jpg");
             bitmap2 = ImageResize.Resize(bitmap1, hScrollBar1.Value / 10);
 
 

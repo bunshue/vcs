@@ -18,8 +18,7 @@ namespace vcs_test_all_08_WindowsMediaPlayer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //axWindowsMediaPlayer1.URL = "C:\\____手機來的圖\\__影片\\VID_20170217_114050.3gp";
-            axWindowsMediaPlayer1.URL = "C:\\______test_vcs_video\\mmm.mp4";
+            axWindowsMediaPlayer1.URL = "C:\\______test_files_video\\mmm.mp4";
         }
 
         private void button2_Click(object sender, EventArgs e)

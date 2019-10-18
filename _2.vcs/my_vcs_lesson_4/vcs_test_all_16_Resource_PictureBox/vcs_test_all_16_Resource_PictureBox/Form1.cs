@@ -51,10 +51,10 @@ namespace vcs_test_all_16_Resource_PictureBox
             pictureBox1.Image = Resource1.bear;
             
             //2. picturebox載入一圖
-            //pictureBox1.Image = Image.FromFile("c:\\______test_vcs\\picture1.jpg"); //載入圖檔，由檔案
+            //pictureBox1.Image = Image.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
 
             //3. picturebox顯示圖檔
-            //Image img = Image.FromFile("c:\\______test_vcs\\picture1.jpg");
+            //Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
             //pictureBox1.Image = img;
 
             //pictureBox1.Height = 800; 設定圖片高度和寬度

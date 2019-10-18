@@ -71,7 +71,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string fileName1 = "c:\\______test_vcs\\test_ReadAllBytes.bmp";
+            string fileName1 = "c:\\______test_files\\test_ReadAllBytes.bmp";
 
             byte[] bmp_header = new byte[256];
             FileStream fs1 = new FileStream(fileName1, FileMode.Open);
@@ -102,7 +102,7 @@ namespace vcs_test_all_99_tmp1
         {
 
             //只撈一層的所有檔案
-            foreach (string fname in System.IO.Directory.GetFileSystemEntries("c:\\______test_vcs"))
+            foreach (string fname in System.IO.Directory.GetFileSystemEntries("c:\\______test_files"))
             {
                 richTextBox1.Text += fname + "\n";
             }
@@ -112,7 +112,7 @@ namespace vcs_test_all_99_tmp1
         private void button17_Click(object sender, EventArgs e)
         {
             //只撈一層的所有.txt檔案
-            foreach (string fname in System.IO.Directory.GetFileSystemEntries("c:\\______test_vcs", "*.txt"))
+            foreach (string fname in System.IO.Directory.GetFileSystemEntries("c:\\______test_files", "*.txt"))
             {
                 richTextBox1.Text += fname + "\n";
             }
@@ -167,7 +167,7 @@ namespace vcs_test_all_99_tmp1
         private void button20_Click(object sender, EventArgs e)
         {
              //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(@"C:\______test_vcs", "*.*", System.IO.SearchOption.AllDirectories);
+            string[] files = System.IO.Directory.GetFiles(@"C:\______test_files", "*.*", System.IO.SearchOption.AllDirectories);
             foreach (string filename in files)
             {
                 richTextBox1.Text += filename + "\n";
@@ -266,8 +266,8 @@ namespace vcs_test_all_99_tmp1
         private void button33_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            string fileName1 = "c:\\______test_vcs\\bear.bmp";
-            string fileName2 = "c:\\______test_vcs\\bear.bmp.jpg";
+            string fileName1 = "c:\\______test_files\\bear.bmp";
+            string fileName2 = "c:\\______test_files\\bear.bmp.jpg";
             bitmap = new Bitmap(fileName1);
             richTextBox1.Text += "width = " + bitmap.Width.ToString() + "\n";
             richTextBox1.Text += "height = " + bitmap.Height.ToString() + "\n";
@@ -356,8 +356,8 @@ namespace vcs_test_all_99_tmp1
 
         private void button35_Click_1(object sender, EventArgs e)
         {
-            string fileName1 = "c:\\______test_vcs\\test_ReadAllBytes.bmp";
-            string fileName2 = "c:\\______test_vcs\\test_WriteAllBytes.bmp";
+            string fileName1 = "c:\\______test_files\\test_ReadAllBytes.bmp";
+            string fileName2 = "c:\\______test_files\\test_WriteAllBytes.bmp";
 
             //讀取資料
             byte[] data_read = File.ReadAllBytes(fileName1);
@@ -417,7 +417,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button21_Click_1(object sender, EventArgs e)
         {
-            var pathstr = "C://______test_vcs";
+            var pathstr = "C://______test_files";
             if (Directory.Exists(pathstr))
             {
                 //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
@@ -425,7 +425,6 @@ namespace vcs_test_all_99_tmp1
                 DirectoryInfo pathinfo = new DirectoryInfo(pathstr);
                 foreach (DirectoryInfo paths in pathinfo.GetDirectories())
                 {
-                    //File.AppendAllText("E:\\Time\\新建文檔夾 (2)"+"/"+strname,DateTime.Now+"\r\n");
                     if (paths.CreationTime < Convert.ToDateTime(dt.AddDays(-(dt.Day) + 1)))
                     {
                         //paths.Delete();
@@ -435,7 +434,6 @@ namespace vcs_test_all_99_tmp1
             }
             else
                 richTextBox1.Text += "資料夾 " + pathstr + " 不存在\n";
-
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -480,10 +478,10 @@ namespace vcs_test_all_99_tmp1
 
         private void button38_Click(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo("c:\\______test_vcs");
+            DirectoryInfo dir = new DirectoryInfo("c:\\______test_files");
             if (!dir.Exists)
             {
-                dir = new DirectoryInfo("c:\\______test_vcs");
+                dir = new DirectoryInfo("c:\\______test_files");
             }
             FileInfo[] files = dir.GetFiles();
             StringBuilder sb = new StringBuilder();

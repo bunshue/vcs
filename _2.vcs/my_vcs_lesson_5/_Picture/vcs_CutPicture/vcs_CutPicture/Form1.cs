@@ -14,7 +14,7 @@ namespace vcs_CutPicture
         public Form1()
         {
             InitializeComponent();
-            Image img = Image.FromFile(@"C:\______test_vcs\picture1.jpg");
+            Image img = Image.FromFile(@"C:\______test_files\picture1.jpg");
 
             pictureBox_src.Image = img;
         }

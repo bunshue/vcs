@@ -49,9 +49,9 @@ namespace vcs_test_all_23_MD5_SHA
             //用MD5比較兩個檔案
 
             //第一個檔案
-            string FirstFilePath = "c://______test_vcs//bear.jpg";
+            string FirstFilePath = "c://______test_files//bear.jpg";
             //第二個檔案
-            string SecondFilePath = "c://______test_vcs//lion.jpg";
+            string SecondFilePath = "c://______test_files//lion.jpg";
             //第一個檔案的MD5碼
             string FirstFileMD5 = string.Empty;
             //建立MD5的演算法
@@ -86,7 +86,7 @@ namespace vcs_test_all_23_MD5_SHA
         private void button3_Click(object sender, EventArgs e)
         {
             //第一個檔案
-            string FirstFilePath = "c://______test_vcs//zzz.html";
+            string FirstFilePath = "c://______test_files//zzz.html";
             //第一個檔案的MD5碼
             string FirstFileMD5 = string.Empty;
             //建立MD5的演算法

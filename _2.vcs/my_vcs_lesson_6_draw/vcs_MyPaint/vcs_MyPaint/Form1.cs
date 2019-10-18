@@ -38,7 +38,7 @@ namespace vcs_MyPaint
             int xx;
             int yy;
 
-            string filename = "C:\\______test_vcs\\picture1.jpg";
+            string filename = "C:\\______test_files\\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -95,7 +95,7 @@ namespace vcs_MyPaint
         {
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -402,7 +402,7 @@ namespace vcs_MyPaint
             int width;
             int height;
 
-            string filename = "C:\\______test_vcs\\step2.png";
+            string filename = "C:\\______test_files\\step2.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -459,7 +459,7 @@ namespace vcs_MyPaint
             int width;
             int height;
 
-            string filename = "C:\\______test_vcs\\sample.png";
+            string filename = "C:\\______test_files\\sample.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -522,9 +522,9 @@ namespace vcs_MyPaint
 
             //在指定位置畫上一圖
             // Create image.
-            //Image newImage = Image.FromFile(@"C:\______test_vcs\step3.png");
+            //Image newImage = Image.FromFile(@"C:\______test_files\step3.png");
 
-            string filename = "C:\\______test_vcs\\step3.png";
+            string filename = "C:\\______test_files\\step3.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bitmap3 = new Bitmap(filename);
@@ -820,7 +820,7 @@ namespace vcs_MyPaint
             int width;
             int height;
 
-            string filename = "C:\\______test_vcs\\win10.jpg";
+            string filename = "C:\\______test_files\\win10.jpg";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -867,7 +867,7 @@ namespace vcs_MyPaint
 
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";
@@ -941,7 +941,7 @@ namespace vcs_MyPaint
 
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_vcs\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 String file1 = file + ".jpg";
                 String file2 = file + ".bmp";
                 String file3 = file + ".png";

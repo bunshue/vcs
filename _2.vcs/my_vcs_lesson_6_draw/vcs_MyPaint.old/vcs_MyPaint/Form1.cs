@@ -77,7 +77,7 @@ namespace vcs_MyPaint
             panel1.Height = height;
 
             // 原始影像，顯示於pictureBox1
-            Bitmap bmpOrg = new Bitmap(@"C:\______test_vcs\bear.jpg");
+            Bitmap bmpOrg = new Bitmap(@"C:\______test_files\bear.jpg");
             this.panel1.BackgroundImage = bmpOrg;
 
             richTextBox1.Text += "size of panel is " + panel1.Width.ToString() + " X " + panel1.Height.ToString() + "\n";
@@ -92,9 +92,9 @@ namespace vcs_MyPaint
         {
             Bitmap bm = new Bitmap(width, height);
             panel1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
-            bm.Save(@"C:\______test_vcs\aaaaaaa.jpg", ImageFormat.Jpeg);
-            bm.Save(@"C:\______test_vcs\aaaaaaa.bmp", ImageFormat.Bmp);
-            bm.Save(@"C:\______test_vcs\aaaaaaa.png", ImageFormat.Png);
+            bm.Save(@"C:\______test_files\aaaaaaa.jpg", ImageFormat.Jpeg);
+            bm.Save(@"C:\______test_files\aaaaaaa.bmp", ImageFormat.Bmp);
+            bm.Save(@"C:\______test_files\aaaaaaa.png", ImageFormat.Png);
         }
     }
 }

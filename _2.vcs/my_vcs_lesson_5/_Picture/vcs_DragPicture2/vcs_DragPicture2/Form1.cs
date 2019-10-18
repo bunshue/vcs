@@ -17,7 +17,7 @@ namespace vcs_DragPicture2
         public Form1()
         {
             InitializeComponent();
-            Image image = Image.FromFile("C:\\______test_vcs\\bear.jpg");
+            Image image = Image.FromFile("C:\\______test_files\\bear.jpg");
             int width = image.Width;
             int height = image.Height;
 

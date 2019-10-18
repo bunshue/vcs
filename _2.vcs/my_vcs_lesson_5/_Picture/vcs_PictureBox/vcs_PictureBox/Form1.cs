@@ -205,7 +205,7 @@ namespace vcs_PictureBox
         {
             //複製部分圖片
             // Create a Bitmap object from a file.
-            Bitmap myBitmap = new Bitmap(@"C:/______test_vcs/bear.jpg");
+            Bitmap myBitmap = new Bitmap(@"C:/______test_files/bear.jpg");
 
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = myBitmap;

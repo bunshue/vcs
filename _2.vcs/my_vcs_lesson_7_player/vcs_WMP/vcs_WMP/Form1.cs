@@ -30,7 +30,7 @@ namespace vcs_WMP
         private void Form1_Load(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.settings.autoStart = false;   //設定不自動撥放
-            axWindowsMediaPlayer1.URL = @"C:\______test_vcs\監獄風雲.mp3";
+            axWindowsMediaPlayer1.URL = @"C:\______test_files\監獄風雲.mp3";
             axWindowsMediaPlayer1.settings.rate = 1;    //播放速度
             //axWindowsMediaPlayer1.settings.getMode("loop"); //useless
         }

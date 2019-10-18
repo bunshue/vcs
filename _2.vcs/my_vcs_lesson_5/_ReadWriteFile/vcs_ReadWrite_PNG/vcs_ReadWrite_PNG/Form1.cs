@@ -121,7 +121,7 @@ namespace vcs_ReadWrite_PNG
 
 
             //顯示圖片
-            fs = File.OpenRead(@"C:\______test_vcs\ims-small-logo.png"); //OpenRead[二進位讀檔]
+            fs = File.OpenRead(@"C:\______test_files\ims-small-logo.png"); //OpenRead[二進位讀檔]
             System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
             fs.Close();
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -129,7 +129,7 @@ namespace vcs_ReadWrite_PNG
 
 
             //讀前面256拜
-            fs = File.OpenRead(@"C:\______test_vcs\ims-small-logo.png"); //OpenRead[二進位讀檔]
+            fs = File.OpenRead(@"C:\______test_files\ims-small-logo.png"); //OpenRead[二進位讀檔]
 
             filelength = 256;
             w = new Byte[filelength]; //建立一個位元組陣列

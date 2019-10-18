@@ -392,7 +392,7 @@ namespace vcs_test_all_11_Draw
             g.FillEllipse(hb, 450, 150, 200, 100);
 
             //紋理筆刷
-            Image myImage = Image.FromFile(@"C:\______test_vcs\bear.jpg");
+            Image myImage = Image.FromFile(@"C:\______test_files\bear.jpg");
             TextureBrush tb = new TextureBrush(myImage);
             g.FillEllipse(tb, 50, 250, 300, 100);
 
@@ -624,7 +624,7 @@ namespace vcs_test_all_11_Draw
         {
             //在指定位置畫上一圖
             // Create image.
-            Image newImage = Image.FromFile(@"C:\______test_vcs\cat\cat2.png");
+            Image newImage = Image.FromFile(@"C:\______test_files\cat\cat2.png");
             //Image newImage = Resource1.doraemon;
 
             // Create coordinates for upper-left corner of image.

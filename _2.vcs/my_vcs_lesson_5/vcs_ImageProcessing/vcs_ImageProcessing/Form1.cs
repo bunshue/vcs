@@ -11,7 +11,7 @@ namespace vcs_ImageProcessing
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_vcs\_case1\\pic1.jpg";
+        string filename = @"C:\______test_files\_case1\\pic1.jpg";
         //Graphics g;
         Pen p;
         Bitmap bitmap1;

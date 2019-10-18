@@ -20,7 +20,7 @@ namespace ReadWriteImage
         private void Form1_Load(object sender, EventArgs e)
         {
             //read image
-            Bitmap bmp = new Bitmap("C:\\______test_vcs\\_case1\\pic2.jpg");
+            Bitmap bmp = new Bitmap("C:\\______test_files\\_case1\\pic2.jpg");
 
             //load image in picturebox
             pictureBox1.Image = bmp;

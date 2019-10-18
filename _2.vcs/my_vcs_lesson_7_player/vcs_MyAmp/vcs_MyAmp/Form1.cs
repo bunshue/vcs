@@ -16,7 +16,7 @@ namespace vcs_MyAmp
     public partial class Form1 : Form
     {
         private WMPLib.WindowsMediaPlayer wplayer;// = new WMPLib.WindowsMediaPlayer();
-        string mp3_file_path = "C:\\______test_vcs_mp3\\09    都はるみ--裏町人生(後街人生).mp3";
+        string mp3_file_path = "C:\\______test_files_mp3\\09    都はるみ--裏町人生(後街人生).mp3";
 
         ArrayList musicPath = new ArrayList();    //用於保存歌曲目錄
 
@@ -26,7 +26,7 @@ namespace vcs_MyAmp
         {
             InitializeComponent();
             wplayer = new WMPLib.WindowsMediaPlayer();
-            //wplayer.URL = @"C:\______test_vcs\bbbb.mp3";
+            //wplayer.URL = @"C:\______test_files\bbbb.mp3";
             wplayer.URL = mp3_file_path;
             wplayer.settings.setMode("loop", true);
 
@@ -190,7 +190,7 @@ namespace vcs_MyAmp
         //using WMPLib;
         private void button5_Click(object sender, EventArgs e)
         {
-            //wplayer.URL = @"C:\______test_vcs\bbbb.mp3";
+            //wplayer.URL = @"C:\______test_files\bbbb.mp3";
             //wplayer.settings.setMode("loop", true);
             wplayer.URL = mp3_file_path;
 
@@ -295,7 +295,7 @@ namespace vcs_MyAmp
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_vcs_mp3";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -365,7 +365,7 @@ namespace vcs_MyAmp
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_vcs_mp3";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -554,7 +554,7 @@ namespace vcs_MyAmp
 
         private void button20_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_vcs_mp3";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = "c:\\______test_files_mp3";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";

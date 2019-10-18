@@ -23,7 +23,7 @@ namespace vcs_FolderBrowserDialog
 
         private void button1_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_vcs";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "取得目錄: " + folderBrowserDialog1.SelectedPath + "\n";
@@ -41,7 +41,7 @@ namespace vcs_FolderBrowserDialog
 
         private void button4_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_vcs";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";

@@ -17,7 +17,7 @@ namespace test_web_cam
     public partial class Form1 : Form
     {
         private Capture cap = null;
-        string _phtoDirectory = @"c:\______test_vcs\photos\";
+        string _phtoDirectory = @"c:\______test_files\photos\";
         string _fileName;
 
         public Form1()
@@ -35,7 +35,7 @@ namespace test_web_cam
         private void Form1_Load(object sender, EventArgs e)
         {
             cap = new Capture(0);
-            //cap = new Capture("C:\\______test_vcs\\aaaa.mp4");
+            //cap = new Capture("C:\\______test_files\\aaaa.mp4");
             Application.Idle += new EventHandler(Application_Idle);
             double width;
             double height;

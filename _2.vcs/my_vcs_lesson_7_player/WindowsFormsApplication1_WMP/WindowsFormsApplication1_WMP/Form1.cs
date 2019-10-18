@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1_WMP
         public Form1()
         {
             InitializeComponent();
-            player.URL = "C:\\______test_vcs\\07    都はろみ--妻戀道中(他鄉思妻兒).mp3";
+            player.URL = "C:\\______test_files\\07    都はろみ--妻戀道中(他鄉思妻兒).mp3";
             player.settings.volume = 50;
             player.settings.autoStart = false;
             player.controls.stop();

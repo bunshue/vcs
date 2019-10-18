@@ -11,7 +11,7 @@ namespace vcs_GetThumbNail
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_vcs\bear.bmp";
+        string filename = @"C:\______test_files\bear.bmp";
         public Form1()
         {
             InitializeComponent();

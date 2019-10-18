@@ -53,8 +53,8 @@ namespace vcs_ReadWrite_QR_code
             //將要編碼的文字產生出QRCode的圖檔
             bitmap = writer.Write(content);
             //儲存圖片
-            bitmap.Save(@"C:\______test_vcs\temp.png", System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(@"C:\______test_vcs\temp.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            bitmap.Save(@"C:\______test_files\temp.png", System.Drawing.Imaging.ImageFormat.Png);
+            bitmap.Save(@"C:\______test_files\temp.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             //顯示在畫面中
             pictureBox1.Image = bitmap;
         }
@@ -66,7 +66,7 @@ namespace vcs_ReadWrite_QR_code
             ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
 
             //讀取要解碼的圖片
-            FileStream fs = new FileStream(@"C:\______test_vcs\temp.png", FileMode.Open);
+            FileStream fs = new FileStream(@"C:\______test_files\temp.png", FileMode.Open);
             Byte[] data = new Byte[fs.Length];
             // 把檔案讀取到位元組陣列
             fs.Read(data, 0, data.Length);
