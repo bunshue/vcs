@@ -95,6 +95,7 @@
             this.Controls.Add(this.p3);
             this.Controls.Add(this.p0);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

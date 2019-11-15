@@ -649,25 +649,6 @@ namespace vcs_MyPaint
 
         private void button14_Click(object sender, EventArgs e)
         {
-            int xx;
-            int yy;
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    byte rrr = bitmap1.GetPixel(xx, yy).R;
-                    byte ggg = bitmap1.GetPixel(xx, yy).G;
-                    byte bbb = bitmap1.GetPixel(xx, yy).B;
-
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap1.SetPixel(xx, yy, zz);
-                }
-            }
-
-            pictureBox2.Image = bitmap1;
             
 
         }

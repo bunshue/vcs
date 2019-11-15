@@ -170,6 +170,12 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_save_data = new System.Windows.Forms.Button();
+            this.comboBox_saturation = new System.Windows.Forms.ComboBox();
+            this.numericUpDown_saturation = new System.Windows.Forms.NumericUpDown();
+            this.bt_saturation = new System.Windows.Forms.Button();
+            this.bt_ae_decrease = new System.Windows.Forms.Button();
+            this.lb_main_mesg2 = new System.Windows.Forms.Label();
             this.bt_save_img = new System.Windows.Forms.Button();
             this.bt_clear_serial = new System.Windows.Forms.Button();
             this.lb_sn_opal = new System.Windows.Forms.Label();
@@ -411,6 +417,7 @@
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
+            this.bt_min = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -428,6 +435,7 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_saturation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).BeginInit();
@@ -1972,6 +1980,12 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_save_data);
+            this.tp_USB.Controls.Add(this.comboBox_saturation);
+            this.tp_USB.Controls.Add(this.numericUpDown_saturation);
+            this.tp_USB.Controls.Add(this.bt_saturation);
+            this.tp_USB.Controls.Add(this.bt_ae_decrease);
+            this.tp_USB.Controls.Add(this.lb_main_mesg2);
             this.tp_USB.Controls.Add(this.bt_save_img);
             this.tp_USB.Controls.Add(this.bt_clear_serial);
             this.tp_USB.Controls.Add(this.lb_sn_opal);
@@ -2103,6 +2117,97 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_save_data
+            // 
+            this.bt_save_data.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_save_data.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_save_data.ForeColor = System.Drawing.Color.Black;
+            this.bt_save_data.Location = new System.Drawing.Point(562, 61);
+            this.bt_save_data.Name = "bt_save_data";
+            this.bt_save_data.Size = new System.Drawing.Size(64, 32);
+            this.bt_save_data.TabIndex = 173;
+            this.bt_save_data.Text = "儲存";
+            this.bt_save_data.UseVisualStyleBackColor = false;
+            this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
+            // 
+            // comboBox_saturation
+            // 
+            this.comboBox_saturation.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_saturation.FormattingEnabled = true;
+            this.comboBox_saturation.Items.AddRange(new object[] {
+            "x0",
+            "x0.25",
+            "x0.5",
+            "x0.75",
+            "x1",
+            "x1.25",
+            "x1.5",
+            "x1.75",
+            "x2.0"});
+            this.comboBox_saturation.Location = new System.Drawing.Point(660, 131);
+            this.comboBox_saturation.Name = "comboBox_saturation";
+            this.comboBox_saturation.Size = new System.Drawing.Size(89, 32);
+            this.comboBox_saturation.TabIndex = 172;
+            this.comboBox_saturation.Text = "x1";
+            this.comboBox_saturation.DropDown += new System.EventHandler(this.comboBox_saturation_DropDown);
+            this.comboBox_saturation.SelectedIndexChanged += new System.EventHandler(this.comboBox_saturation_SelectedIndexChanged);
+            // 
+            // numericUpDown_saturation
+            // 
+            this.numericUpDown_saturation.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_saturation.Location = new System.Drawing.Point(324, 70);
+            this.numericUpDown_saturation.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_saturation.Name = "numericUpDown_saturation";
+            this.numericUpDown_saturation.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_saturation.TabIndex = 171;
+            this.numericUpDown_saturation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_saturation.Value = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            // 
+            // bt_saturation
+            // 
+            this.bt_saturation.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_saturation.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_saturation.ForeColor = System.Drawing.Color.Black;
+            this.bt_saturation.Location = new System.Drawing.Point(479, 61);
+            this.bt_saturation.Name = "bt_saturation";
+            this.bt_saturation.Size = new System.Drawing.Size(64, 32);
+            this.bt_saturation.TabIndex = 170;
+            this.bt_saturation.Text = "Sat";
+            this.bt_saturation.UseVisualStyleBackColor = false;
+            this.bt_saturation.Click += new System.EventHandler(this.bt_saturation_Click);
+            // 
+            // bt_ae_decrease
+            // 
+            this.bt_ae_decrease.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_ae_decrease.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_ae_decrease.ForeColor = System.Drawing.Color.Black;
+            this.bt_ae_decrease.Location = new System.Drawing.Point(406, 61);
+            this.bt_ae_decrease.Name = "bt_ae_decrease";
+            this.bt_ae_decrease.Size = new System.Drawing.Size(64, 32);
+            this.bt_ae_decrease.TabIndex = 169;
+            this.bt_ae_decrease.Text = "亮暗";
+            this.bt_ae_decrease.UseVisualStyleBackColor = false;
+            this.bt_ae_decrease.Click += new System.EventHandler(this.bt_ae_decrease_Click);
+            // 
+            // lb_main_mesg2
+            // 
+            this.lb_main_mesg2.AutoSize = true;
+            this.lb_main_mesg2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg2.Location = new System.Drawing.Point(543, 171);
+            this.lb_main_mesg2.Name = "lb_main_mesg2";
+            this.lb_main_mesg2.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg2.TabIndex = 136;
+            this.lb_main_mesg2.Text = "mesg2";
             // 
             // bt_save_img
             // 
@@ -2586,6 +2691,11 @@
             this.numericUpDown_bpt.Size = new System.Drawing.Size(64, 32);
             this.numericUpDown_bpt.TabIndex = 124;
             this.numericUpDown_bpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_bpt.Value = new decimal(new int[] {
+            56,
+            0,
+            0,
+            0});
             this.numericUpDown_bpt.ValueChanged += new System.EventHandler(this.numericUpDown_bpt_ValueChanged);
             this.numericUpDown_bpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_bpt_KeyPress);
             // 
@@ -2602,6 +2712,11 @@
             this.numericUpDown_wpt.Size = new System.Drawing.Size(64, 32);
             this.numericUpDown_wpt.TabIndex = 119;
             this.numericUpDown_wpt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_wpt.Value = new decimal(new int[] {
+            66,
+            0,
+            0,
+            0});
             this.numericUpDown_wpt.ValueChanged += new System.EventHandler(this.numericUpDown_wpt_ValueChanged);
             this.numericUpDown_wpt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_wpt_KeyPress);
             // 
@@ -4738,9 +4853,9 @@
             this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
             this.lb_main_mesg.Location = new System.Drawing.Point(404, 18);
             this.lb_main_mesg.Name = "lb_main_mesg";
-            this.lb_main_mesg.Size = new System.Drawing.Size(58, 24);
+            this.lb_main_mesg.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg.TabIndex = 133;
-            this.lb_main_mesg.Text = "COM";
+            this.lb_main_mesg.Text = "mesg1";
             // 
             // groupBox5
             // 
@@ -4824,12 +4939,25 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
+            // bt_min
+            // 
+            this.bt_min.Font = new System.Drawing.Font("新細明體", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_min.ForeColor = System.Drawing.Color.Black;
+            this.bt_min.Location = new System.Drawing.Point(1262, 57);
+            this.bt_min.Name = "bt_min";
+            this.bt_min.Size = new System.Drawing.Size(49, 30);
+            this.bt_min.TabIndex = 136;
+            this.bt_min.Text = "最小化";
+            this.bt_min.UseVisualStyleBackColor = true;
+            this.bt_min.Click += new System.EventHandler(this.bt_min_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1370, 704);
+            this.Controls.Add(this.bt_min);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.lb_main_mesg);
@@ -4882,6 +5010,7 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_saturation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).EndInit();
@@ -5307,6 +5436,13 @@
         private System.Windows.Forms.TextBox tb_sn_opal;
         private System.Windows.Forms.Button bt_clear_serial;
         private System.Windows.Forms.Button bt_save_img;
+        private System.Windows.Forms.Label lb_main_mesg2;
+        private System.Windows.Forms.Button bt_saturation;
+        private System.Windows.Forms.Button bt_ae_decrease;
+        private System.Windows.Forms.NumericUpDown numericUpDown_saturation;
+        private System.Windows.Forms.ComboBox comboBox_saturation;
+        private System.Windows.Forms.Button bt_save_data;
+        private System.Windows.Forms.Button bt_min;
     }
 }
 

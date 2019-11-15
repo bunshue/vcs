@@ -35,7 +35,7 @@ namespace vcs_Draw_Moving
             int r = 150;
             int x;
             int y;
-            degree += 0.4;
+            degree += 0.1;
             x = r + (int)(r * Math.Cos(degree * Math.PI / 180));
             y = r + (int)(r * Math.Sin(degree * Math.PI / 180));
 

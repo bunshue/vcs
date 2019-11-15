@@ -923,6 +923,16 @@ namespace vcs_SlideShowString
                 current_strings.Clear();
                 Form1_Load(sender, e);
                 timer1.Enabled = true;
+
+                richTextBox1.Text += "正中\n";
+                align_direction = '2';
+
+                font_size_default = 40;
+                display_width = 100;
+                display_height = 85;
+
+                slide_show_string();
+
             }
             else if (e.KeyCode == Keys.L)
             {

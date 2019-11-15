@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for CompositingQuality
-
 using System.IO;    //for File
 
 using System.Net;   //for WebClient
@@ -139,49 +137,12 @@ namespace vcs_find_test_area
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //使用不透明和半透明筆刷繪製
-
-            bitmap1 = new Bitmap(filename);
-            g = Graphics.FromImage(bitmap1);
-
-            //g.DrawImage(bitmap1, 50, 50, bitmap1.Width, bitmap1.Height);
-
-            SolidBrush opaqueBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 255));
-            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 0, 255));
-
-            g.FillEllipse(opaqueBrush, 35, 45, 145, 130);
-            g.FillEllipse(semiTransBrush, 186, 45, 145, 130);
-
-            g.CompositingQuality = CompositingQuality.GammaCorrected;   //指定要在合成期間使用的品質等級。
-            g.FillEllipse(semiTransBrush, 140, 190, 186, 130);
-
-            pictureBox1.Image = bitmap1;
 
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            DownloadStaticMap(40.714728, -73.998672, "map.jpg");
-        }
-
-
-        private void DownloadStaticMap(double latitude, double longitude, string file)
-        {
-            if (string.IsNullOrEmpty(file))
-                throw new ArgumentNullException("file");
-
-            if (File.Exists(file))
-                return;
-
-
-            var urlFormat = @"http://maps.google.com/maps/api/staticmap?center={0},{1}&size=640x640&format=jpg&sensor=false&markers=color:red%7Csize:mid%7Clabel:A%7C{0},{1}";
-            var url = String.Format(urlFormat, latitude.ToString(), longitude.ToString());
-
-            using (var wc = new WebClient())
-            {
-                wc.DownloadFile(url, file);
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -191,81 +152,18 @@ namespace vcs_find_test_area
             wc.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "d:\\blog.png");
         }
 
-        int tt = 0;
-        int xx = 0;
-        int yy = 0;
-        double gg = 9.8;
         private void button7_Click(object sender, EventArgs e)
         {
-            tt = 0;
-            xx = 0;
-            yy = 0;
-            timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            bitmap1 = new Bitmap(filename);
-            g = Graphics.FromImage(bitmap1);
-            pictureBox1.Image = bitmap1;
-         
-            /*
-            xx += 2;
-            yy += 2;
-            //g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
-
-            //g.DrawEllipse(new Pen(Color.Red, 3), xx, yy, 20, 20);
-            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(xx, yy, 20, 20));
-
-            if (xx >= 300)
-                yy -= 4;
-
-            if (xx >= 600)
-                timer1.Enabled = false;
-            */
-
-            tt++;
-            xx = tt*30;
-            yy = (int)(gg * tt * tt / 2);
-            //g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
-
-            //g.DrawEllipse(new Pen(Color.Red, 3), xx, yy, 20, 20);
-            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(xx, yy, 20, 20));
-
-            if (xx >= 300)
-                yy -= 4;
-
-            if (xx >= 600)
-                timer1.Enabled = false;
 
 
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //使用不透明和半透明筆刷繪製
-
-            bitmap1 = new Bitmap(filename);
-            g = Graphics.FromImage(bitmap1);
-
-            //g.DrawImage(bitmap1, 50, 50, bitmap1.Width, bitmap1.Height);
-
-            /*
-            SolidBrush opaqueBrush = new SolidBrush(Color.FromArgb(255, 0, 0, 255));
-            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 0, 255));
-
-            g.FillEllipse(opaqueBrush, 35, 45, 145, 130);
-            g.FillEllipse(semiTransBrush, 186, 45, 145, 130);
-
-            g.CompositingQuality = CompositingQuality.GammaCorrected;   //指定要在合成期間使用的品質等級。
-            g.FillEllipse(semiTransBrush, 140, 190, 186, 130);
-            */
-
-
-            g.DrawString("驗證完成", new Font("標楷體", 100), new SolidBrush(Color.Blue), new PointF(20, 20));
-            g.DrawString("驗證完成", new Font("標楷體", 100), new SolidBrush(Color.FromArgb(60, 0, 0, 255)), new PointF(20, 220));
-
-            pictureBox1.Image = bitmap1;
 
         }
 
@@ -343,9 +241,6 @@ namespace vcs_find_test_area
             }
 
             int rgb_max = 0;
-            int r_max = 0;
-            int g_max = 0;
-            int b_max = 0;
 
             richTextBox1.Text += "R = " + "\n";
             for (i = 0; i < 16; i++)

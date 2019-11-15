@@ -260,5 +260,34 @@ namespace vcs_ImageProcessing
 
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+
+            bitmap1 = new Bitmap(filename);
+            Graphics g = Graphics.FromImage(bitmap1);   //畫字用
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    byte rrr = bitmap1.GetPixel(xx, yy).R;
+                    byte ggg = bitmap1.GetPixel(xx, yy).G;
+                    byte bbb = bitmap1.GetPixel(xx, yy).B;
+
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bitmap1.SetPixel(xx, yy, zz);
+                }
+            }
+            g.DrawString("彩色轉灰階", new Font("標楷體", 100), new SolidBrush(Color.Blue), new PointF(20, 20));
+
+            pictureBox2.Image = bitmap1;
+
+        }
+
     }
 }
