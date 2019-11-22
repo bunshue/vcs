@@ -208,6 +208,7 @@ namespace imsLink
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
         int timer_webcam_mode = FOCUS_ON_PICTURE;
+        DateTime bootup_time = System.DateTime.Now;
 
         //二維List for string
         List<string[]> camera_serials = new List<string[]>();
@@ -258,6 +259,8 @@ namespace imsLink
         {
             InitializeComponent();
 
+            richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
+
             if (flag_operation_mode == MODE_RELEASE_STAGE1)
             {
                 flag_release_mode = true;
@@ -300,6 +303,8 @@ namespace imsLink
             pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
 
             comboBox_saturation.SelectedIndex = 4;
+            comboBox_denoise.SelectedIndex = 8;
+            comboBox_sharpness.SelectedIndex = 2;
 
             /*
             if (comboBox1.Text.Length == 0)
@@ -368,6 +373,11 @@ namespace imsLink
                 numericUpDown_TG_B.Enabled = false;
 
                 comboBox_saturation.Enabled = false;
+                comboBox_denoise.Enabled = false;
+                comboBox_sharpness.Enabled = false;
+                bt_save_data.Enabled = false;
+                numericUpDown_sharpness.Enabled = false;
+                numericUpDown_denoise.Enabled = false;
             }
 
             if (flag_usb_mode == true)
@@ -1232,7 +1242,7 @@ namespace imsLink
                                     //richTextBox1.Text += "把資料暫存起來\n";
                                     camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString() });
 
-                                    if ((camera_serials.Count % 5) == 0)
+                                    //if ((camera_serials.Count % 5) == 0)
                                     {
                                         richTextBox1.Text += "自動存檔\n";
                                         exportCSV();
@@ -1712,6 +1722,7 @@ namespace imsLink
                         g_conn_status = input[2];
                         if (g_conn_status == DONGLE_NONE)
                         {
+                            show_main_message("無連接器", S_OK, 30);
                             textBox7.Text = "無連接器";
                             textBox7.BackColor = Color.Red;
                             playSound(S_FALSE);
@@ -1719,9 +1730,11 @@ namespace imsLink
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
                         else if (g_conn_status == CAMERA_NONE)
                         {
+                            show_main_message("無相機", S_OK, 30);
                             textBox7.Text = "有連接器, 無相機";
                             textBox7.BackColor = Color.Red;
                             playSound(S_FALSE);
@@ -1729,19 +1742,22 @@ namespace imsLink
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_none;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_none;
                             panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_none;
-
+                            panel_camera_status5.BackgroundImage = imsLink.Properties.Resources.recorder_none;
                         }
                         else if (g_conn_status == CAMERA_OK)
                         {
+                            show_main_message("有相機", S_OK, 30);
                             textBox7.Text = "有連接器, 有相機";
                             textBox7.BackColor = Color.White;
                             panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                             panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
+                            panel_camera_status5.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
                         }
                         else
                         {
+                            show_main_message("相機狀態不明", S_OK, 30);
                             textBox7.Text = "狀態不明, status = " + g_conn_status.ToString();
                             textBox7.BackColor = Color.Red;
                             playSound(S_FALSE);
@@ -1749,6 +1765,7 @@ namespace imsLink
                             panel_camera_status2.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status3.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                             panel_camera_status4.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
+                            panel_camera_status5.BackgroundImage = imsLink.Properties.Resources.recorder_fail;
                         }
                         flag_read_connection_again = true;
                         progressBar1.Value = 100;
@@ -1962,11 +1979,15 @@ namespace imsLink
                 bt_saturation.Visible = false;
 
                 //Saturation
+                lb_function.Visible = false;
                 numericUpDown_saturation.Visible = false;
 
                 comboBox_saturation.Visible = false;
+                comboBox_denoise.Visible = false;
+                comboBox_sharpness.Visible = false;
                 bt_save_data.Visible = false;
-
+                numericUpDown_sharpness.Enabled = false;
+                numericUpDown_denoise.Enabled = false;
             }
             else
             {
@@ -2034,10 +2055,15 @@ namespace imsLink
                 bt_saturation.Visible = en;
 
                 //Saturation
+                lb_function.Visible = en;
                 numericUpDown_saturation.Visible = en;
 
                 comboBox_saturation.Visible = en;
+                comboBox_denoise.Visible = en;
+                comboBox_sharpness.Visible = en;
                 bt_save_data.Visible = en;
+                numericUpDown_sharpness.Enabled = en;
+                numericUpDown_denoise.Enabled = en;
             }
 
             //note
@@ -2540,7 +2566,11 @@ namespace imsLink
 
 
                 //comboBox_saturation.Location
+                //comboBox_denoise.Location
+                //comboBox_sharpness.Location
                 //bt_save_data.Location
+                //numericUpDown_sharpness.Location
+                //numericUpDown_denoise.Location
             }
             else
             {
@@ -2564,18 +2594,15 @@ namespace imsLink
 
                 //Saturation
                 bt_saturation.Location = new Point(bt_write_wpt.Location.X + 100, bt_write_wpt.Location.Y - 40);
-
-                //Saturation
                 numericUpDown_saturation.Location = new Point(bt_saturation.Location.X + 70, bt_saturation.Location.Y);
-
+                lb_function.Location = new Point(bt_saturation.Location.X + 70, bt_saturation.Location.Y - 20);
                 comboBox_saturation.Location = new Point(numericUpDown_saturation.Location.X + 70, numericUpDown_saturation.Location.Y);
-
-                bt_save_data.Location = new Point(comboBox_saturation.Location.X + 95, comboBox_saturation.Location.Y);
-
+                comboBox_denoise.Location = new Point(comboBox_saturation.Location.X + 85, comboBox_saturation.Location.Y);
+                comboBox_sharpness.Location = new Point(comboBox_saturation.Location.X + 140, comboBox_saturation.Location.Y);
+                bt_save_data.Location = new Point(comboBox_saturation.Location.X + 200, comboBox_saturation.Location.Y);
+                numericUpDown_denoise.Location = new Point(comboBox_denoise.Location.X, comboBox_denoise.Location.Y + 40);
+                numericUpDown_sharpness.Location = new Point(comboBox_sharpness.Location.X, comboBox_sharpness.Location.Y + 40);
             }
-
-
-
             refresh_picturebox2();
             return;
         }
@@ -2634,6 +2661,7 @@ namespace imsLink
             tb_awb_mesg.Text = "";
             lb_main_mesg.Text = "";
             lb_main_mesg2.Text = "";
+            lb_main_mesg3.Text = "";
             lb_awb_data.Text = "";
             lb_awb_time.Text = "";
             bt_script_save.Visible = false;
@@ -2898,6 +2926,7 @@ namespace imsLink
         private void button72_Click(object sender, EventArgs e)
         {
             //建立一個檔案
+            richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
             string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
             StreamWriter sw = File.CreateText(filename);
             sw.Write(richTextBox1.Text);
@@ -3603,6 +3632,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn2.Clear();
             tb_sn1.BackColor = Color.Gray;
@@ -3742,6 +3772,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
             tb_sn1.Clear();
             tb_sn1.BackColor = Color.Gray;
             if (flag_comport_ok == false)
@@ -4805,6 +4836,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -5405,7 +5437,7 @@ namespace imsLink
         private void button20_Click(object sender, EventArgs e)
         {
             show_main_message("關閉程式", S_OK, 30);
-            exportCSV();
+            //exportCSV();
             if (flag_comport_ok == true)
             {
                 serialPort1.Close();
@@ -5541,6 +5573,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -5630,6 +5663,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -5701,6 +5735,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -6278,6 +6313,7 @@ namespace imsLink
                     panel_camera_status2.BackgroundImage = null;
                     panel_camera_status3.BackgroundImage = null;
                     panel_camera_status4.BackgroundImage = null;
+                    panel_camera_status5.BackgroundImage = null;
                     Send_IMS_Data(0xFF, 0, 0, 0);
                 }
                 else
@@ -6364,20 +6400,23 @@ namespace imsLink
 
             if (flag_check_webcam_signal == true)
             {
-                cccc++;
-                if ((cccc % 50) == 0)
+                if (g_conn_status == CAMERA_OK)
                 {
-                    //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
-                    if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
+                    cccc++;
+                    if ((cccc % 50) == 0)
                     {
-                        richTextBox1.Text += "refresh webcam\n";
-                        //button12_Click_1(sender, e);
-                    }
-                    else
-                    {
-                        total_RGB_R_old = total_RGB_R;
-                        total_RGB_G_old = total_RGB_G;
-                        total_RGB_B_old = total_RGB_B;
+                        //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
+                        if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
+                        {
+                            richTextBox1.Text += "refresh webcam\n";
+                            button12_Click_1(sender, e);
+                        }
+                        else
+                        {
+                            total_RGB_R_old = total_RGB_R;
+                            total_RGB_G_old = total_RGB_G;
+                            total_RGB_B_old = total_RGB_B;
+                        }
                     }
                 }
             }
@@ -6436,6 +6475,7 @@ namespace imsLink
             panel_camera_status2.BackgroundImage = null;
             panel_camera_status3.BackgroundImage = null;
             panel_camera_status4.BackgroundImage = null;
+            panel_camera_status5.BackgroundImage = null;
 
             if (flag_comport_ok == false)
             {
@@ -9908,6 +9948,7 @@ namespace imsLink
                 {
                     lb_main_mesg.Text = "";
                     lb_main_mesg2.Text = "";
+                    lb_main_mesg3.Text = "";
                 }
                 /*
                 if (timer_display_show_main_mesg_count >= (timer_display_show_main_mesg_count_target * 2))
@@ -9994,9 +10035,20 @@ namespace imsLink
                     }
                 }
             }
-            
+
             if (ret == S_OK)
+            {
+                //計算serialPort1中有多少位元組 
+                BytesToRead = serialPort1.BytesToRead;
+
+                if (BytesToRead > 0)
+                {
+                    //開啟程式時, 把所有serialPort的資料讀出來, 並丟棄之
+                    serialPort1.DiscardInBuffer();
+                    richTextBox1.Text += "xxxx 連接COM時, 發現COM有資料, 丟棄UART buffer內的資料 aaa\n";
+                }
                 return S_OK;
+            }
             else
                 return S_FALSE;
         }
@@ -10637,19 +10689,47 @@ namespace imsLink
 
         private void button46_Click(object sender, EventArgs e)
         {
-            exportCSV();
+            //exportCSV();
         }
 
         void exportCSV()
         {
-            String filename = Application.StartupPath + "\\ims_camera_serial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
-            //StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("UTF-8"));    //指名編碼格式
-            StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.UTF8);    //指名編碼格式
+            if (camera_serials.Count > 0)
+                richTextBox1.Text += "共有 " + camera_serials.Count.ToString() + " 筆資料要存\n";
+            else
+            {
+                richTextBox1.Text += "無資料, 離開\n";
+                show_main_message("無資料", S_OK, 20);
+                return;
+            }
+
+            String filename = Application.StartupPath + "\\ims_camera_serial_" + DateTime.Now.ToString("yyyy_MMdd") + ".csv";
+            string content = "";
+            StreamWriter sw;
+
+            if (File.Exists(filename) == false)   //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.UTF8);    //指名編碼格式
+                content += "編號" + "," + "Opal序號" + "," + "廠內生產製令序號" + "," + "燒錄時間" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename + " 已存在\n";
+                try
+                {
+                    sw = new StreamWriter(File.Open(filename, FileMode.Append), Encoding.UTF8);    //指名編碼格式
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                    show_main_message("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message3("匯出CSV檔失敗", S_OK, 50);
+                    return;
+                }
+            }
 
             int i;
-            string content = "";
-
-            content += "編號" + "," + "Opal序號" + "," + "廠內生產製令序號" + "," + "燒錄時間" + "\n";
             for (i = 0; i < camera_serials.Count; i++)
             {
                 //richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString() + " camera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString() + "\n";
@@ -10660,6 +10740,8 @@ namespace imsLink
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
             show_main_message("已存檔CSV", S_OK, 20);
+            show_main_message3("已存檔CSV", S_OK, 20);
+            camera_serials.Clear();
         }
 
         void playSound(int number)
@@ -10698,6 +10780,17 @@ namespace imsLink
                 show_main_message("COM已連線", S_OK, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.comport;
                 toolTip1.SetToolTip(pictureBox_comport, "COM已連線");
+
+                //計算serialPort1中有多少位元組 
+                BytesToRead = serialPort1.BytesToRead;
+
+                if (BytesToRead > 0)
+                {
+                    //開啟程式時, 把所有serialPort的資料讀出來, 並丟棄之
+                    serialPort1.DiscardInBuffer();
+                    richTextBox1.Text += "丟棄UART buffer內的資料 aaa\n";
+                    richTextBox1.Text += "xxxx 連接COM時, 發現COM有資料, 丟棄UART buffer內的資料 bbb\n";
+                }
             }
             else
             {
@@ -10728,6 +10821,16 @@ namespace imsLink
         void show_main_message2(string mesg, int number, int timeout)
         {
             lb_main_mesg2.Text = mesg;
+            playSound(number);
+
+            timer_display_show_main_mesg_count = 0;
+            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
+        }
+
+        void show_main_message3(string mesg, int number, int timeout)
+        {
+            lb_main_mesg3.Text = mesg;
             playSound(number);
 
             timer_display_show_main_mesg_count = 0;
@@ -11104,18 +11207,18 @@ namespace imsLink
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            /*
             byte SendData;
             DongleAddr_h = 0x3A;
             DongleAddr_l = 0x03;
             SendData = 0x1A;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
+            delay(1000);
+
             DongleAddr_h = 0x3A;
             DongleAddr_l = 0x04;
             SendData = 0x10;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
-            */
 
             /*
             richTextBox1.Text += "Cam.IsRunning = " + Cam.IsRunning.ToString() + "\n";
@@ -11133,9 +11236,13 @@ namespace imsLink
                 }
             }
             */
+
+            /*
+            //套用 WPT BPT 的值
             bt_write_wpt_Click(sender, e);
             delay(1000);
             bt_write_bpt_Click(sender, e);
+            */
         }
 
         private void bt_saturation_Click(object sender, EventArgs e)
@@ -11259,7 +11366,6 @@ namespace imsLink
             else
                 richTextBox1.Text += "XXXXXXXXXX\n";
 
-
             richTextBox1.Text += "Setup saturation\n";
             if (flag_comport_ok == false)
             {
@@ -11338,6 +11444,391 @@ namespace imsLink
         private void bt_min_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void comboBox_denoise_DropDown(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DropDown\n";
+            timer_webcam.Enabled = false;
+        }
+
+        private void comboBox_denoise_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            byte TH1 = 0x0e;
+            byte TH2 = 0x20;
+
+            if (comboBox_denoise.SelectedIndex == 0)
+            {
+                richTextBox1.Text += "de-noise OFF\n";
+                TH1 = 0;
+                TH2 = 0;
+            }
+            else if (comboBox_denoise.SelectedIndex == 1)
+            {
+                richTextBox1.Text += "de-noise 1\n";
+                TH1 = 0x01;
+                TH2 = 0x12;
+            }
+            else if (comboBox_denoise.SelectedIndex == 2)
+            {
+                richTextBox1.Text += "de-noise 2\n";
+                TH1 = 0x02;
+                TH2 = 0x14;
+            }
+            else if (comboBox_denoise.SelectedIndex == 3)
+            {
+                richTextBox1.Text += "de-noise 3\n";
+                TH1 = 0x04;
+                TH2 = 0x16;
+            }
+            else if (comboBox_denoise.SelectedIndex == 4)
+            {
+                richTextBox1.Text += "de-noise 4\n";
+                TH1 = 0x06;
+                TH2 = 0x18;
+            }
+            else if (comboBox_denoise.SelectedIndex == 5)
+            {
+                richTextBox1.Text += "de-noise 5\n";
+                TH1 = 0x08;
+                TH2 = 0x1a;
+            }
+            else if (comboBox_denoise.SelectedIndex == 6)
+            {
+                richTextBox1.Text += "de-noise 6\n";
+                TH1 = 0x0a;
+                TH2 = 0x1c;
+            }
+            else if (comboBox_denoise.SelectedIndex == 7)
+            {
+                richTextBox1.Text += "de-noise 7\n";
+                TH1 = 0x0c;
+                TH2 = 0x1e;
+            }
+            else if (comboBox_denoise.SelectedIndex == 8)
+            {
+                richTextBox1.Text += "de-noise 8\n";
+                TH1 = 0x0e;
+                TH2 = 0x20;
+            }
+            else if (comboBox_denoise.SelectedIndex == 9)
+            {
+                richTextBox1.Text += "de-noise 9\n";
+                TH1 = 0x10;
+                TH2 = 0x22;
+            }
+            else
+                richTextBox1.Text += "XXXXXXXXXX\n";
+
+
+            richTextBox1.Text += "Setup de-noise\n";
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            richTextBox1.Text += "Setup de-noise,  TH1 = " + TH1.ToString() + ", TH2 = " + TH2.ToString() + "\n";
+
+            byte SendData;
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x06;
+            SendData = TH1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(1000);
+
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x07;
+            SendData = TH2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+            timer_webcam.Enabled = true;
+
+        }
+
+        private void comboBox_sharpness_DropDown(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DropDown\n";
+            timer_webcam.Enabled = false;
+        }
+
+        private void comboBox_sharpness_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            byte TH1 = 0x04;
+            byte TH2 = 0x06;
+
+            if (comboBox_sharpness.SelectedIndex == 0)
+            {
+                richTextBox1.Text += "sharpness OFF\n";
+                TH1 = 0;
+                TH2 = 0;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 1)
+            {
+                richTextBox1.Text += "sharpness 1\n";
+                TH1 = 0x02;
+                TH2 = 0x04;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 2)
+            {
+                richTextBox1.Text += "sharpness 2\n";
+                TH1 = 0x04;
+                TH2 = 0x06;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 3)
+            {
+                richTextBox1.Text += "sharpness 3\n";
+                TH1 = 0x06;
+                TH2 = 0x08;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 4)
+            {
+                richTextBox1.Text += "sharpness 4\n";
+                TH1 = 0x08;
+                TH2 = 0x0a;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 5)
+            {
+                richTextBox1.Text += "sharpness 5\n";
+                TH1 = 0x0a;
+                TH2 = 0x0c;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 6)
+            {
+                richTextBox1.Text += "sharpness 6\n";
+                TH1 = 0x0c;
+                TH2 = 0x0e;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 7)
+            {
+                richTextBox1.Text += "sharpness 7\n";
+                TH1 = 0x0e;
+                TH2 = 0x10;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 8)
+            {
+                richTextBox1.Text += "sharpness 8\n";
+                TH1 = 0x10;
+                TH2 = 0x12;
+            }
+            else if (comboBox_sharpness.SelectedIndex == 9)
+            {
+                richTextBox1.Text += "sharpness 9\n";
+                TH1 = 0x10;
+                TH2 = 0x22;
+            }
+            else
+                richTextBox1.Text += "XXXXXXXXXX\n";
+
+
+            richTextBox1.Text += "Setup sharpness\n";
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            richTextBox1.Text += "Setup sharpness,  TH1 = " + TH1.ToString() + ", TH2 = " + TH2.ToString() + "\n";
+
+            byte SendData;
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x0b;
+            SendData = TH1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(1000);
+
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x0c;
+            SendData = TH2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+            timer_webcam.Enabled = true;
+
+        }
+
+        private void numericUpDown_denoise_ValueChanged(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            numericUpDown_denoise.BackColor = Color.Pink;
+            richTextBox1.Text += "Setup de-noise " + numericUpDown_denoise.Value.ToString() + "\n";
+
+            byte TH1 = 0x0e;
+            byte TH2 = 0x20;
+
+            switch ((int)numericUpDown_denoise.Value)
+            {
+                case 0:
+                    richTextBox1.Text += "de-noise OFF\n";
+                    TH1 = 0;
+                    TH2 = 0;
+                    break;
+                case 1:
+                    richTextBox1.Text += "de-noise 1\n";
+                    TH1 = 0x01;
+                    TH2 = 0x12;
+                    break;
+                case 2:
+                    richTextBox1.Text += "de-noise 2\n";
+                    TH1 = 0x02;
+                    TH2 = 0x14;
+                    break;
+                case 3:
+                    richTextBox1.Text += "de-noise 3\n";
+                    TH1 = 0x04;
+                    TH2 = 0x16;
+                    break;
+                case 4:
+                    richTextBox1.Text += "de-noise 4\n";
+                    TH1 = 0x06;
+                    TH2 = 0x18;
+                    break;
+                case 5:
+                    richTextBox1.Text += "de-noise 5\n";
+                    TH1 = 0x08;
+                    TH2 = 0x1a;
+                    break;
+                case 6:
+                    richTextBox1.Text += "de-noise 6\n";
+                    TH1 = 0x0a;
+                    TH2 = 0x1c;
+                    break;
+                case 7:
+                    richTextBox1.Text += "de-noise 7\n";
+                    TH1 = 0x0c;
+                    TH2 = 0x1e;
+                    break;
+                case 8:
+                    richTextBox1.Text += "de-noise 8\n";
+                    TH1 = 0x0e;
+                    TH2 = 0x20;
+                    break;
+                case 9:
+                    richTextBox1.Text += "de-noise 9\n";
+                    TH1 = 0x10;
+                    TH2 = 0x22;
+                    break;
+                default:
+                    richTextBox1.Text += "de-noise XXXXXXXXXX\n";
+                    break;
+            }
+
+            richTextBox1.Text += "Setup de-noise,  TH1 = " + TH1.ToString() + ", TH2 = " + TH2.ToString() + "\n";
+
+            byte SendData;
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x06;
+            SendData = TH1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(500);
+
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x07;
+            SendData = TH2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            numericUpDown_denoise.BackColor = Color.White;
+        }
+
+        private void numericUpDown_sharpness_ValueChanged(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            numericUpDown_sharpness.BackColor = Color.Pink;
+            richTextBox1.Text += "Setup sharpness " + numericUpDown_sharpness.Value.ToString() + "\n";
+
+            byte TH1 = 0x04;
+            byte TH2 = 0x06;
+
+            switch ((int)numericUpDown_sharpness.Value)
+            {
+                case 0:
+                    richTextBox1.Text += "sharpness OFF\n";
+                    TH1 = 0;
+                    TH2 = 0;
+                    break;
+                case 1:
+                    richTextBox1.Text += "sharpness 1\n";
+                    TH1 = 0x02;
+                    TH2 = 0x04;
+                    break;
+                case 2:
+                    richTextBox1.Text += "sharpness 2\n";
+                    TH1 = 0x04;
+                    TH2 = 0x06;
+                    break;
+                case 3:
+                    richTextBox1.Text += "sharpness 3\n";
+                    TH1 = 0x06;
+                    TH2 = 0x08;
+                    break;
+                case 4:
+                    richTextBox1.Text += "sharpness 4\n";
+                    TH1 = 0x08;
+                    TH2 = 0x0a;
+                    break;
+                case 5:
+                    richTextBox1.Text += "sharpness 5\n";
+                    TH1 = 0x0a;
+                    TH2 = 0x0c;
+                    break;
+                case 6:
+                    richTextBox1.Text += "sharpness 6\n";
+                    TH1 = 0x0c;
+                    TH2 = 0x0e;
+                    break;
+                case 7:
+                    richTextBox1.Text += "sharpness 7\n";
+                    TH1 = 0x0e;
+                    TH2 = 0x10;
+                    break;
+                case 8:
+                    richTextBox1.Text += "sharpness 8\n";
+                    TH1 = 0x10;
+                    TH2 = 0x12;
+                    break;
+                case 9:
+                    richTextBox1.Text += "sharpness 9\n";
+                    TH1 = 0x10;
+                    TH2 = 0x22;
+                    break;
+                default:
+                    richTextBox1.Text += "sharpness XXXXXXXXXX\n";
+                    TH1 = 0;
+                    TH2 = 0;
+                    break;
+            }
+
+            richTextBox1.Text += "Setup sharpness,  TH1 = " + TH1.ToString() + ", TH2 = " + TH2.ToString() + "\n";
+
+            byte SendData;
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x0b;
+            SendData = TH1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(500);
+
+            DongleAddr_h = 0x55;
+            DongleAddr_l = 0x0c;
+            SendData = TH2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            numericUpDown_sharpness.BackColor = Color.White;
+
         }
 
 
