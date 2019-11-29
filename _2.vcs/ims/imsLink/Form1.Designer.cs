@@ -142,7 +142,6 @@
             this.lb_main_mesg3 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button46 = new System.Windows.Forms.Button();
             this.panel_camera_status3 = new System.Windows.Forms.Panel();
             this.lb_write_camera_serial2 = new System.Windows.Forms.Label();
             this.bt_confirm = new System.Windows.Forms.Button();
@@ -171,6 +170,11 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.numericUpDown_sharpness = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_denoise = new System.Windows.Forms.NumericUpDown();
+            this.comboBox_sharpness = new System.Windows.Forms.ComboBox();
+            this.lb_function = new System.Windows.Forms.Label();
+            this.comboBox_denoise = new System.Windows.Forms.ComboBox();
             this.panel_camera_status5 = new System.Windows.Forms.Panel();
             this.bt_save_data = new System.Windows.Forms.Button();
             this.comboBox_saturation = new System.Windows.Forms.ComboBox();
@@ -379,6 +383,8 @@
             this.cb_1 = new System.Windows.Forms.CheckBox();
             this.cb_0 = new System.Windows.Forms.CheckBox();
             this.tp_About = new System.Windows.Forms.TabPage();
+            this.button47 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
@@ -420,11 +426,6 @@
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.bt_min = new System.Windows.Forms.Button();
-            this.comboBox_denoise = new System.Windows.Forms.ComboBox();
-            this.lb_function = new System.Windows.Forms.Label();
-            this.comboBox_sharpness = new System.Windows.Forms.ComboBox();
-            this.numericUpDown_denoise = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_sharpness = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -442,6 +443,8 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_saturation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).BeginInit();
@@ -472,8 +475,6 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -1658,7 +1659,6 @@
             this.groupBox10.Controls.Add(this.lb_main_mesg3);
             this.groupBox10.Controls.Add(this.label12);
             this.groupBox10.Controls.Add(this.label11);
-            this.groupBox10.Controls.Add(this.button46);
             this.groupBox10.Controls.Add(this.panel_camera_status3);
             this.groupBox10.Controls.Add(this.lb_write_camera_serial2);
             this.groupBox10.Controls.Add(this.bt_confirm);
@@ -1714,19 +1714,6 @@
             this.label11.Size = new System.Drawing.Size(260, 24);
             this.label11.TabIndex = 143;
             this.label11.Text = "不能重複燒錄相機序號";
-            // 
-            // button46
-            // 
-            this.button46.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button46.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button46.ForeColor = System.Drawing.Color.Black;
-            this.button46.Location = new System.Drawing.Point(6, 460);
-            this.button46.Name = "button46";
-            this.button46.Size = new System.Drawing.Size(80, 80);
-            this.button46.TabIndex = 107;
-            this.button46.UseVisualStyleBackColor = true;
-            this.button46.Visible = false;
-            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // panel_camera_status3
             // 
@@ -2145,6 +2132,102 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown_sharpness
+            // 
+            this.numericUpDown_sharpness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_sharpness.Location = new System.Drawing.Point(709, 6);
+            this.numericUpDown_sharpness.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numericUpDown_sharpness.Name = "numericUpDown_sharpness";
+            this.numericUpDown_sharpness.Size = new System.Drawing.Size(52, 32);
+            this.numericUpDown_sharpness.TabIndex = 179;
+            this.numericUpDown_sharpness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_sharpness.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown_sharpness.ValueChanged += new System.EventHandler(this.numericUpDown_sharpness_ValueChanged);
+            // 
+            // numericUpDown_denoise
+            // 
+            this.numericUpDown_denoise.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_denoise.Location = new System.Drawing.Point(622, 6);
+            this.numericUpDown_denoise.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numericUpDown_denoise.Name = "numericUpDown_denoise";
+            this.numericUpDown_denoise.Size = new System.Drawing.Size(52, 32);
+            this.numericUpDown_denoise.TabIndex = 178;
+            this.numericUpDown_denoise.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_denoise.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numericUpDown_denoise.ValueChanged += new System.EventHandler(this.numericUpDown_denoise_ValueChanged);
+            // 
+            // comboBox_sharpness
+            // 
+            this.comboBox_sharpness.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_sharpness.FormattingEnabled = true;
+            this.comboBox_sharpness.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBox_sharpness.Location = new System.Drawing.Point(722, 89);
+            this.comboBox_sharpness.Name = "comboBox_sharpness";
+            this.comboBox_sharpness.Size = new System.Drawing.Size(52, 32);
+            this.comboBox_sharpness.TabIndex = 177;
+            this.comboBox_sharpness.Text = "2";
+            this.comboBox_sharpness.DropDown += new System.EventHandler(this.comboBox_sharpness_DropDown);
+            this.comboBox_sharpness.SelectedIndexChanged += new System.EventHandler(this.comboBox_sharpness_SelectedIndexChanged);
+            // 
+            // lb_function
+            // 
+            this.lb_function.AutoSize = true;
+            this.lb_function.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_function.Location = new System.Drawing.Point(234, 262);
+            this.lb_function.Name = "lb_function";
+            this.lb_function.Size = new System.Drawing.Size(266, 19);
+            this.lb_function.TabIndex = 176;
+            this.lb_function.Text = "   Sat            Sat           DNS     sharp ";
+            // 
+            // comboBox_denoise
+            // 
+            this.comboBox_denoise.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_denoise.FormattingEnabled = true;
+            this.comboBox_denoise.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBox_denoise.Location = new System.Drawing.Point(660, 89);
+            this.comboBox_denoise.Name = "comboBox_denoise";
+            this.comboBox_denoise.Size = new System.Drawing.Size(52, 32);
+            this.comboBox_denoise.TabIndex = 175;
+            this.comboBox_denoise.Text = "8";
+            this.comboBox_denoise.DropDown += new System.EventHandler(this.comboBox_denoise_DropDown);
+            this.comboBox_denoise.SelectedIndexChanged += new System.EventHandler(this.comboBox_denoise_SelectedIndexChanged);
             // 
             // panel_camera_status5
             // 
@@ -4624,6 +4707,8 @@
             // 
             // tp_About
             // 
+            this.tp_About.Controls.Add(this.button47);
+            this.tp_About.Controls.Add(this.button41);
             this.tp_About.Controls.Add(this.linkLabel1);
             this.tp_About.Controls.Add(this.label57);
             this.tp_About.Controls.Add(this.label58);
@@ -4636,6 +4721,32 @@
             this.tp_About.TabIndex = 19;
             this.tp_About.Text = "About";
             this.tp_About.UseVisualStyleBackColor = true;
+            // 
+            // button47
+            // 
+            this.button47.BackColor = System.Drawing.SystemColors.Control;
+            this.button47.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button47.ForeColor = System.Drawing.Color.Red;
+            this.button47.Location = new System.Drawing.Point(814, 511);
+            this.button47.Name = "button47";
+            this.button47.Size = new System.Drawing.Size(118, 32);
+            this.button47.TabIndex = 132;
+            this.button47.Text = "製作相機資料";
+            this.button47.UseVisualStyleBackColor = false;
+            this.button47.Click += new System.EventHandler(this.button47_Click);
+            // 
+            // button41
+            // 
+            this.button41.BackColor = System.Drawing.SystemColors.Control;
+            this.button41.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button41.ForeColor = System.Drawing.Color.Red;
+            this.button41.Location = new System.Drawing.Point(814, 549);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(118, 32);
+            this.button41.TabIndex = 131;
+            this.button41.Text = "清除相機資料";
+            this.button41.UseVisualStyleBackColor = false;
+            this.button41.Click += new System.EventHandler(this.button41_Click_1);
             // 
             // linkLabel1
             // 
@@ -4988,102 +5099,6 @@
             this.bt_min.UseVisualStyleBackColor = true;
             this.bt_min.Click += new System.EventHandler(this.bt_min_Click);
             // 
-            // comboBox_denoise
-            // 
-            this.comboBox_denoise.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox_denoise.FormattingEnabled = true;
-            this.comboBox_denoise.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.comboBox_denoise.Location = new System.Drawing.Point(660, 89);
-            this.comboBox_denoise.Name = "comboBox_denoise";
-            this.comboBox_denoise.Size = new System.Drawing.Size(52, 32);
-            this.comboBox_denoise.TabIndex = 175;
-            this.comboBox_denoise.Text = "8";
-            this.comboBox_denoise.DropDown += new System.EventHandler(this.comboBox_denoise_DropDown);
-            this.comboBox_denoise.SelectedIndexChanged += new System.EventHandler(this.comboBox_denoise_SelectedIndexChanged);
-            // 
-            // lb_function
-            // 
-            this.lb_function.AutoSize = true;
-            this.lb_function.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_function.Location = new System.Drawing.Point(234, 262);
-            this.lb_function.Name = "lb_function";
-            this.lb_function.Size = new System.Drawing.Size(266, 19);
-            this.lb_function.TabIndex = 176;
-            this.lb_function.Text = "   Sat            Sat           DNS     sharp ";
-            // 
-            // comboBox_sharpness
-            // 
-            this.comboBox_sharpness.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox_sharpness.FormattingEnabled = true;
-            this.comboBox_sharpness.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.comboBox_sharpness.Location = new System.Drawing.Point(722, 89);
-            this.comboBox_sharpness.Name = "comboBox_sharpness";
-            this.comboBox_sharpness.Size = new System.Drawing.Size(52, 32);
-            this.comboBox_sharpness.TabIndex = 177;
-            this.comboBox_sharpness.Text = "2";
-            this.comboBox_sharpness.DropDown += new System.EventHandler(this.comboBox_sharpness_DropDown);
-            this.comboBox_sharpness.SelectedIndexChanged += new System.EventHandler(this.comboBox_sharpness_SelectedIndexChanged);
-            // 
-            // numericUpDown_denoise
-            // 
-            this.numericUpDown_denoise.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_denoise.Location = new System.Drawing.Point(622, 6);
-            this.numericUpDown_denoise.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numericUpDown_denoise.Name = "numericUpDown_denoise";
-            this.numericUpDown_denoise.Size = new System.Drawing.Size(52, 32);
-            this.numericUpDown_denoise.TabIndex = 178;
-            this.numericUpDown_denoise.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_denoise.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numericUpDown_denoise.ValueChanged += new System.EventHandler(this.numericUpDown_denoise_ValueChanged);
-            // 
-            // numericUpDown_sharpness
-            // 
-            this.numericUpDown_sharpness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_sharpness.Location = new System.Drawing.Point(709, 6);
-            this.numericUpDown_sharpness.Maximum = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            this.numericUpDown_sharpness.Name = "numericUpDown_sharpness";
-            this.numericUpDown_sharpness.Size = new System.Drawing.Size(52, 32);
-            this.numericUpDown_sharpness.TabIndex = 179;
-            this.numericUpDown_sharpness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_sharpness.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDown_sharpness.ValueChanged += new System.EventHandler(this.numericUpDown_sharpness_ValueChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -5143,6 +5158,8 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_saturation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).EndInit();
@@ -5181,8 +5198,6 @@
             this.statusStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5544,7 +5559,6 @@
         private System.Windows.Forms.TextBox tb_info_g3;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.TextBox tb_info_g4;
-        private System.Windows.Forms.Button button46;
         private System.Windows.Forms.TextBox tb_awb_mesg;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button bt_script;
@@ -5585,6 +5599,8 @@
         private System.Windows.Forms.ComboBox comboBox_sharpness;
         private System.Windows.Forms.NumericUpDown numericUpDown_sharpness;
         private System.Windows.Forms.NumericUpDown numericUpDown_denoise;
+        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button47;
     }
 }
 

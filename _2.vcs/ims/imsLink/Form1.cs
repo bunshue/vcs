@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE_NORMAL;
+        int flag_operation_mode = MODE_RELEASE_STAGE2;
 
         bool flag_release_mode = false;
         bool flag_enaglb_awb_function = true;
@@ -30,6 +30,7 @@ namespace imsLink
         private const int MODE_NORMAL = 0x00;           //normal use
         private const int MODE_RELEASE_STAGE1 = 0x01;   //release mode stage 1, 4X4 USB camera
         private const int MODE_RELEASE_STAGE2 = 0x02;   //release mode stage 2, AWB mode, writing camera serial
+        private const int MODE_RELEASE_STAGE3 = 0x03;   //release mode stage 3, judge class
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
         private const bool SHOW_COMPORT_LOG = false;
@@ -85,6 +86,7 @@ namespace imsLink
         int flag_camera_start = 0;
         int flag_camera_use_insighteyes = 0;
         int flag_camera_already_have_serial = 0;
+        int csv_index = 0;
         byte cnt1 = 0;
         int cnt3 = 0;
 		int g_conn_status = CAMERA_UNKNOWN;
@@ -140,6 +142,7 @@ namespace imsLink
         bool flag_break = false;
         bool flag_do_awb = false;
         bool flag_doing_writing_data = false;
+        bool flag_doing_refreshing_camera = false;
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
         int timer_display_r_count = 0;
@@ -259,10 +262,11 @@ namespace imsLink
         {
             InitializeComponent();
 
-            richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
+            richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\t";
 
             if (flag_operation_mode == MODE_RELEASE_STAGE1)
             {
+                richTextBox1.Text += "MODE_RELEASE_STAGE1\n";
                 flag_release_mode = true;
                 flag_enaglb_awb_function = false;
                 flag_usb_mode = true;  //for webcam
@@ -270,11 +274,22 @@ namespace imsLink
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
+                richTextBox1.Text += "MODE_RELEASE_STAGE2\n";
                 flag_release_mode = true;
                 flag_enaglb_awb_function = true;
                 flag_usb_mode = false;  //for webcam
                 flag_check_webcam_signal = true;
             }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                richTextBox1.Text += "MODE_RELEASE_STAGE3\n";
+                flag_release_mode = true;
+                flag_enaglb_awb_function = false;
+                flag_usb_mode = true;  //for webcam
+                flag_check_webcam_signal = false;
+            }
+            else
+                richTextBox1.Text += "MODE_NORMAL\n";
 
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
@@ -1245,7 +1260,7 @@ namespace imsLink
                                     //if ((camera_serials.Count % 5) == 0)
                                     {
                                         richTextBox1.Text += "自動存檔\n";
-                                        exportCSV();
+                                        exportCSV4();
                                     }
                                 }
                                 else
@@ -1986,8 +2001,31 @@ namespace imsLink
                 comboBox_denoise.Visible = false;
                 comboBox_sharpness.Visible = false;
                 bt_save_data.Visible = false;
-                numericUpDown_sharpness.Enabled = false;
-                numericUpDown_denoise.Enabled = false;
+                numericUpDown_sharpness.Visible = false;
+                numericUpDown_denoise.Visible = false;
+
+                //hide some buttons
+                button32.Visible = false;
+                button35.Visible = false;
+                button70.Visible = false;
+                button88.Visible = false;
+                button74.Visible = false;
+                button87.Visible = false;
+                button9.Visible = false;
+
+                bt_awb_test_init.Visible = false;
+                bt_awb_test2.Visible = false;
+                bt_break.Visible = false;
+                bt_awb.Visible = false;
+                bt_disable_timer_webcam.Visible = false;
+                bt_clear.Visible = false;
+                bt_erase.Visible = false;
+                bt_test.Visible = false;
+
+                bt_write2.Visible = false;
+                bt_script.Visible = false;
+                bt_script_load.Visible = false;
+                bt_cancel.Visible = false;
             }
             else
             {
@@ -2240,7 +2278,16 @@ namespace imsLink
             x_st = 140;
             y_st = 510;
             dx = 65;
-            bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
+
+            if (flag_operation_mode == MODE_NORMAL)
+            {
+                bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
+            }
+            else
+            {
+                bt_read2.Location = new Point(x_st + dx * 3, y_st + 40);
+            }
+
             bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
             bt_script.Location = new Point(x_st + dx * 5, y_st + 30);
 
@@ -2696,7 +2743,6 @@ namespace imsLink
             btnLeft.BackgroundImage = imsLink.Properties.Resources.left;
             btnRight.BackgroundImage = imsLink.Properties.Resources.right;
             btnCenter.BackgroundImage = imsLink.Properties.Resources.stop;
-            button46.BackgroundImage = imsLink.Properties.Resources.excel;
 
             camera_serials.Clear();
 
@@ -2744,6 +2790,7 @@ namespace imsLink
             // C# 設定視窗載入位置 
             this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
+            /*
             if ((flag_release_mode == true) || (flag_usb_mode == true))
             {
                 //C# 軟體啟動、版權宣告視窗 
@@ -2751,6 +2798,7 @@ namespace imsLink
                 frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
                 frm.ShowDialog();   //顯示Form2視窗
             }
+            */
 
             toolTip1.SetToolTip(button17, "Zoom in");
             toolTip1.SetToolTip(button18, "Zoom out");
@@ -2812,6 +2860,7 @@ namespace imsLink
 
             show_item_location();
 
+            richTextBox1.Text += "call check_webcam() 111\n";
             check_webcam();
 
             richTextBox2.Visible = false;
@@ -2832,6 +2881,17 @@ namespace imsLink
             {
                 timer_webcam_mode = FOCUS_ON_PICTURE;
             }
+
+            //檢查存圖片的資料夾
+            string Path = Application.StartupPath + "\\picture";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+
             return;
         }
 
@@ -2873,14 +2933,26 @@ namespace imsLink
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //在退出程序前彈出確認退出程序的對話框
+            if (e.CloseReason != CloseReason.WindowsShutDown)
+            {
+                if (flag_doing_refreshing_camera == true)
+                {
+                    richTextBox1.Text += "正在影像重抓, 忽略alt-f4\n";
+                    e.Cancel = true;
+                }
+            }
+
             /*
             if (Cam != null)
             {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                 {
-                    //Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
+                    flag_camera_start = 0;
+                    Cam.Stop();   // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
                     richTextBox1.Text += "先關閉camera\n";
                 }
             }
@@ -3097,6 +3169,8 @@ namespace imsLink
 
         public bool Send_IMS_Data(byte cc, byte xx, byte yy, byte zz)
         {
+            serialPort1.DiscardInBuffer();
+
             byte[] data = new byte[5];
 
             data[0] = cc;
@@ -4019,11 +4093,13 @@ namespace imsLink
                 /*
                 if (Cam != null)
                 {
-                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                    if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                     {
-                        //Cam.Stop();   // WebCam stops capturing images.
-                        Cam.SignalToStop();
-                        Cam.WaitForStop();
+                        flag_camera_start = 0;
+                        Cam.Stop();   // WebCam stops capturing images.
+                        //Cam.SignalToStop();
+                        //Cam.WaitForStop();
+                        Cam = null;
                     }
                 }
                 */
@@ -4861,17 +4937,41 @@ namespace imsLink
         //int camera_start = 0;
         private void button12_Click_1(object sender, EventArgs e)
         {
-            show_main_message("影像重抓", S_OK, 30);
-            if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+            if (flag_doing_refreshing_camera == true)
             {
-                richTextBox1.Text += "USB影像傳輸中, 中斷重來\n";
-                flag_camera_start = 0;
-                //Cam.Stop();  // WebCam stops capturing images.
-                Cam.SignalToStop();
-                Cam.WaitForStop();
-                comboBox_webcam.Items.Clear();
+                richTextBox1.Text += "正在影像重抓, 忽略\n";
+                return;
             }
 
+            if ((flag_operation_mode != MODE_RELEASE_STAGE1) && (flag_operation_mode != MODE_RELEASE_STAGE3))
+            {
+                if (flag_comport_ok == false)
+                {
+                    show_main_message("影像重抓", S_OK, 30);
+                    richTextBox1.Text += "no comport, abort\n";
+                    return;
+                }
+            }
+
+            flag_doing_refreshing_camera = true;
+
+            show_main_message("影像重抓", S_OK, 30);
+            if (Cam != null)
+            {
+                if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+                {
+                    richTextBox1.Text += "USB影像傳輸中, 中斷重來ST\n";  //david : 應考慮此功能是否有用?
+                    flag_camera_start = 0;
+                    Cam.Stop();  // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
+                    comboBox_webcam.Items.Clear();
+                    richTextBox1.Text += "USB影像傳輸中, 中斷重來SP\n";
+                }
+            }
+
+            richTextBox1.Text += "call check_webcam() 222\n";
             if (check_webcam() == S_OK)
             {
                 richTextBox1.Text += "重新抓取USB影像\t";
@@ -4904,25 +5004,46 @@ namespace imsLink
             {
                 camera_start = 0;
                 button12.Text = "Start";
-                //Cam.Stop();  // WebCam stops capturing images.
-                Cam.SignalToStop();
-                Cam.WaitForStop();
+                flag_camera_start = 0;
+                Cam.Stop();  // WebCam stops capturing images.
+                //Cam.SignalToStop();
+                //Cam.WaitForStop();
+                Cam = null;
             }
             */
+            flag_doing_refreshing_camera = false;
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (Cam != null)
             {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                 {
+                    flag_camera_start = 0;
                     Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
                 }
             }
 
+            richTextBox1.Text += "關閉程式\n";
+            /*
+            //Application.Exit();
+            try
+            {
+                Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f : " + ex.Message + "\n";
+            }
+            Environment.Exit(Environment.ExitCode);
+            */
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -4943,9 +5064,11 @@ namespace imsLink
             {
                 if (flag_camera_is_stopped == 0)
                 {
-                    //Cam.Stop();
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
+                    flag_camera_start = 0;
+                    Cam.Stop();
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
                     flag_camera_is_stopped = 1;
                     richTextBox1.Text += "停止\n";
                 }
@@ -5088,12 +5211,12 @@ namespace imsLink
                     if (flag_usb_mode == true)
                     {
                         filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
-                        filename2 = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                        filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
                     }
                     else
                     {
                         filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
-                        filename2 = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
+                        filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
                     }
                 }
                 else
@@ -5436,8 +5559,13 @@ namespace imsLink
 
         private void button20_Click(object sender, EventArgs e)
         {
+            if (flag_doing_refreshing_camera == true)
+            {
+                richTextBox1.Text += "正在影像重抓, 忽略\n";
+                return;
+            }
+
             show_main_message("關閉程式", S_OK, 30);
-            //exportCSV();
             if (flag_comport_ok == true)
             {
                 serialPort1.Close();
@@ -5449,14 +5577,18 @@ namespace imsLink
                 playSound(S_FALSE);
             }
 
-            if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+            if (Cam != null)
             {
-                richTextBox1.Text += "USB影像傳輸中, 關閉\n";
-                flag_camera_start = 0;
-                Cam.Stop();  // WebCam stops capturing images.
-                Cam.SignalToStop();
-                Cam.WaitForStop();
-                comboBox_webcam.Items.Clear();
+                if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+                {
+                    richTextBox1.Text += "USB影像傳輸中, 關閉\n";
+                    flag_camera_start = 0;
+                    Cam.Stop();  // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
+                    comboBox_webcam.Items.Clear();
+                }
             }
             show_main_message("關閉程式", S_OK, 30);
             richTextBox1.Text += "確認關閉ST\n";
@@ -5465,11 +5597,13 @@ namespace imsLink
 
             if (Cam != null)
             {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
                 {
-                    //Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
+                    flag_camera_start = 0;
+                    Cam.Stop();   // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
                     richTextBox1.Text += "先關閉camera\n";
                 }
             }
@@ -5478,6 +5612,7 @@ namespace imsLink
                 richTextBox1.Text += "camera is null\n";
             }
 
+            /*
             richTextBox1.Text += "關閉程式\n";
             //Application.Exit();
             try
@@ -5488,9 +5623,12 @@ namespace imsLink
             {
                 richTextBox1.Text += "xxx錯誤訊息f : " + ex.Message + "\n";
             }
+            */
 
             //C# 強制關閉 Process
-            //Process.GetCurrentProcess().Kill();
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -5881,6 +6019,7 @@ namespace imsLink
             Send_IMS_Data(0xF0, 0x12, 0x34, 0x56);   //main board model write
 
             serialPort1.Write(main_board_model_data_send, 0, main_board_model_data_send.Length);
+            delay(200);
             delay(200);
             lb_write_mb_model.Text = "寫入主機型號完成";
             lb_write_mb_model.ForeColor = Color.Black;
@@ -6400,23 +6539,20 @@ namespace imsLink
 
             if (flag_check_webcam_signal == true)
             {
-                if (g_conn_status == CAMERA_OK)
+                cccc++;
+                if ((cccc % 50) == 0)
                 {
-                    cccc++;
-                    if ((cccc % 50) == 0)
+                    //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
+                    if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
                     {
-                        //richTextBox1.Text += "R " + total_RGB_R.ToString() + "    " + "G " + total_RGB_G.ToString() + "    " + "B " + total_RGB_B.ToString() + "\n";
-                        if ((total_RGB_R == total_RGB_R_old) && (total_RGB_G == total_RGB_G_old) && (total_RGB_B == total_RGB_B_old))
-                        {
-                            richTextBox1.Text += "refresh webcam\n";
-                            button12_Click_1(sender, e);
-                        }
-                        else
-                        {
-                            total_RGB_R_old = total_RGB_R;
-                            total_RGB_G_old = total_RGB_G;
-                            total_RGB_B_old = total_RGB_B;
-                        }
+                        //richTextBox1.Text += "refresh webcam\n";
+                        //button12_Click_1(sender, e);
+                    }
+                    else
+                    {
+                        total_RGB_R_old = total_RGB_R;
+                        total_RGB_G_old = total_RGB_G;
+                        total_RGB_B_old = total_RGB_B;
                     }
                 }
             }
@@ -6486,6 +6622,7 @@ namespace imsLink
                 return;
             }
             g_conn_status = CAMERA_UNKNOWN;
+            delay(200);
             delay(200);
             Send_IMS_Data(0xFF, 0, 0, 0);
 
@@ -6586,6 +6723,7 @@ namespace imsLink
                     lb_write_camera_serial2.Text += "    燒錄完成";
 
                     delay(200);
+                    delay(200);
 
                     //驗證資料
                     lb_write_camera_serial2.Text += "    驗證中";
@@ -6608,8 +6746,41 @@ namespace imsLink
                     //g2.DrawString(str, f, new SolidBrush(Color.Blue), new PointF((panel9.Width - tmp_width) / 2, (panel9.Height - tmp_height) / 2));
                     button11.BackColor = System.Drawing.SystemColors.ControlLight;
 
-                    flag_verify_serial_data = 1;
-                    Get_IMS_Data(0, 0xAA, 0xAA);
+                    richTextBox1.Text += "delay ST\n";
+                    //flag_verify_serial_data = 1;
+                    //Get_IMS_Data(0, 0xAA, 0xAA);
+
+                    //delay(200);
+                    delay(200);
+                    delay(200);
+                    richTextBox1.Text += "delay SP\n";
+
+                    richTextBox1.Text += "驗證完成, 序號相同\n";
+                    lb_write_camera_serial2.Text += "    驗證完成";
+                    lb_write_camera_serial2.ForeColor = Color.Black;
+                    g2.Clear(BackColor);
+                    g2.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                    playSound(S_OK);
+
+                    //richTextBox1.Text += "把資料暫存起來\n";
+                    camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString() });
+
+                    //if ((camera_serials.Count % 5) == 0)
+                    {
+                        richTextBox1.Text += "自動存檔\n";
+                        exportCSV4();
+                    }
+
+                    // Stop timing
+                    stopwatch.Stop();
+                    richTextBox1.Text += "燒錄驗證完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+
+                    if (stopwatch.ElapsedMilliseconds > 7000)
+                    {
+                        flag_burn_long_cnt++;
+                        ////lb_mesg2.Text = "耗時太久 " + flag_burn_long_cnt.ToString() + " 次";
+                    }
+                    flag_doing_writing_data = false;
                 }
             }
             else
@@ -8699,7 +8870,7 @@ namespace imsLink
         private void bt_goto_awb_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "bt_goto_awb_Click ST\n";
-            if (flag_release_mode == false)
+            //if (flag_release_mode == false)
             {
                 if (flag_comport_connection_ok == false)
                 {
@@ -9679,17 +9850,19 @@ namespace imsLink
             richTextBox1.Text += "flag_camera_start = " + flag_camera_start.ToString() + "\n";
             richTextBox1.Text += "Cam.IsRunning = " + Cam.IsRunning.ToString() + "\n";
 
-            //if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+            if (Cam != null)
             {
-                richTextBox1.Text += "USB影像傳輸中, 關閉\n";
-                flag_camera_start = 0;
-                Cam.Stop();  // WebCam stops capturing images.
-                Cam.SignalToStop();
-                Cam.WaitForStop();
-                comboBox_webcam.Items.Clear();
+                if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+                {
+                    richTextBox1.Text += "USB影像傳輸中, 關閉\n";
+                    flag_camera_start = 0;
+                    Cam.Stop();  // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
+                    comboBox_webcam.Items.Clear();
+                }
             }
-
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -9713,6 +9886,16 @@ namespace imsLink
         int check_webcam()
         {
             int i;
+
+            if ((flag_operation_mode != MODE_RELEASE_STAGE1) && (flag_operation_mode != MODE_RELEASE_STAGE3))
+            {
+                if (flag_comport_ok == false)
+                {
+                    richTextBox1.Text += "no comport, abort\n";
+                    return S_FALSE;
+                }
+            }
+
             if (flag_doing_check_webcam == false)
             {
                 flag_doing_check_webcam = true;
@@ -9725,8 +9908,19 @@ namespace imsLink
 
             if (flag_enaglb_awb_function == true)
             {
-                richTextBox1.Text += "call check_webcam ST\n";
+                richTextBox1.Text += "call check_webcam ST, 檢查相機有無接上\n";
                 g_conn_status = CAMERA_UNKNOWN;
+
+                serialPort1.DiscardInBuffer();
+                richTextBox1.Text += "丟棄UART buffer內的資料 ccc\n";
+
+                delay(100);
+                delay(100);
+                delay(100);
+
+                serialPort1.DiscardInBuffer();
+                richTextBox1.Text += "丟棄UART buffer內的資料 ddd\n";
+
                 Send_IMS_Data(0xFF, 0, 0, 0);
 
                 int cnt = 0;
@@ -9793,12 +9987,14 @@ namespace imsLink
                     else
                     {
                         Cam_tmp = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
+                        /*
                         Cam_tmp.VideoResolution = Cam_tmp.VideoCapabilities[0];
 
                         richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + "\n";
                         //richTextBox1.Text += "FR1 = " + Cam_tmp.VideoCapabilities[0].FrameRate.ToString();
                         richTextBox1.Text += "W = " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + "\n";
                         richTextBox1.Text += "H = " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + "\n";
+                        */
                         /*
                         richTextBox1.Text += "BitCount = " + Cam_tmp.VideoCapabilities[0].BitCount.ToString() + "\n";
                         richTextBox1.Text += "FR_max = " + Cam_tmp.VideoCapabilities[0].MaximumFrameRate.ToString() + "\n";
@@ -9817,7 +10013,7 @@ namespace imsLink
                         richTextBox1.Text += "FrameSize.H = " + Cam_tmp.VideoResolution.FrameSize.Height.ToString() + "\n";
                         */
 
-                        webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                        webcam_name = (i + 1).ToString() + ". " + USBWebcams[i].Name + " " + Cam_tmp.VideoCapabilities[i].FrameSize.Width.ToString() + " X " + Cam_tmp.VideoCapabilities[i].FrameSize.Height.ToString() + " @ " + Cam_tmp.VideoCapabilities[i].AverageFrameRate.ToString() + " Hz";
                     }
 
                     comboBox_webcam.Items.Add(webcam_name);
@@ -9831,7 +10027,7 @@ namespace imsLink
                         richTextBox1.Text += "有InsightEyes影像裝置 在 i = " + i.ToString() + "\n";
 
                         Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);  //實例化對象
-                        Cam.VideoResolution = Cam.VideoCapabilities[0];
+                        Cam.VideoResolution = Cam.VideoCapabilities[i];
                         Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);     //綁定事件
 
                         Cam.Start();   // WebCam starts capturing images.
@@ -9875,10 +10071,14 @@ namespace imsLink
             richTextBox1.Text += "你選取了" + comboBox_webcam.SelectedItem.ToString() + "\n";
             richTextBox1.Text += "SelectedIndex = " + comboBox_webcam.SelectedIndex.ToString() + "\n";
 
-            flag_camera_start = 0;
-            //Cam.Stop();  // WebCam stops capturing images.
-            Cam.SignalToStop();
-            Cam.WaitForStop();
+            if (Cam != null)
+            {
+                flag_camera_start = 0;
+                Cam.Stop();  // WebCam stops capturing images.
+                //Cam.SignalToStop();
+                //Cam.WaitForStop();
+                Cam = null;
+            }
 
             Cam = new VideoCaptureDevice(USBWebcams[comboBox_webcam.SelectedIndex].MonikerString);
             Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
@@ -10057,7 +10257,21 @@ namespace imsLink
         {
             flag_comport_ok = false;
             serialPort1.PortName = comport;
-            serialPort1.BaudRate = int.Parse(comboBox2.Text);
+
+            try
+            {
+                serialPort1.BaudRate = int.Parse(comboBox2.Text);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+                //MessageBox.Show("無法連上Comport, 請重新連線");
+                richTextBox1.Text += "無法連上 " + comport + ", 請重新連線";
+                button1.Enabled = true;
+                button2.Enabled = false;
+                this.BackColor = Color.Pink;
+                flag_comport_ok = false;
+            }
 
             //serialPort1.Open(); //原本是這一行，改寫成以下。
             try
@@ -10079,6 +10293,17 @@ namespace imsLink
 
                     flag_comport_ok = true;
                     flag_comport_connection_ok = false;
+
+                    //計算serialPort1中有多少位元組 
+                    BytesToRead = serialPort1.BytesToRead;
+
+                    if (BytesToRead > 0)
+                    {
+                        //開啟程式時, 把所有serialPort的資料讀出來, 並丟棄之
+                        serialPort1.DiscardInBuffer();
+                        richTextBox1.Text += "xxxx 連接COM時, 發現COM有資料, 丟棄UART buffer內的資料 ccc\n";
+                    }
+
                     delay(100);
                     Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
 
@@ -10687,12 +10912,7 @@ namespace imsLink
             lb_awb_time.Text = (timer_awb_cnt / 10).ToString() + "." + (timer_awb_cnt % 10).ToString();
         }
 
-        private void button46_Click(object sender, EventArgs e)
-        {
-            //exportCSV();
-        }
-
-        void exportCSV()
+        void exportCSV4()
         {
             if (camera_serials.Count > 0)
                 richTextBox1.Text += "共有 " + camera_serials.Count.ToString() + " 筆資料要存\n";
@@ -10703,7 +10923,8 @@ namespace imsLink
                 return;
             }
 
-            String filename = Application.StartupPath + "\\ims_camera_serial_" + DateTime.Now.ToString("yyyy_MMdd") + ".csv";
+            string filename = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyy_MMdd") + "_04.csv";
+
             string content = "";
             StreamWriter sw;
 
@@ -10733,7 +10954,14 @@ namespace imsLink
             for (i = 0; i < camera_serials.Count; i++)
             {
                 //richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString() + " camera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString() + "\n";
-                content += (i + 1).ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "\n";
+                csv_index++;
+                if (csv_index == 1)
+                    content += "\n";
+                content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                if ((camera_serials.Count > 1) && (i < (camera_serials.Count - 1)))
+                {
+                    content += "\n";
+                }
             }
 
             sw.WriteLine(content);
@@ -10794,7 +11022,7 @@ namespace imsLink
             }
             else
             {
-                richTextBox1.Text += "未連線\n";
+                richTextBox1.Text += "COM未連線\n";
                 this.BackColor = Color.Pink;
                 show_main_message("COM未連線", S_FALSE, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.x;
@@ -11221,23 +11449,6 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
             /*
-            richTextBox1.Text += "Cam.IsRunning = " + Cam.IsRunning.ToString() + "\n";
-
-            //richTextBox1.Text += "call Cam.Stop()\n";
-
-            if (Cam != null)
-            {
-                //if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    richTextBox1.Text += "call Cam.Stop()\n";
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
-            }
-            */
-
-            /*
             //套用 WPT BPT 的值
             bt_write_wpt_Click(sender, e);
             delay(1000);
@@ -11264,20 +11475,6 @@ namespace imsLink
             DongleAddr_l = 0x04;
             SendData = 0x14;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
-            */
-
-            /*
-            richTextBox1.Text += "frame_cnt = " + frame_cnt.ToString() + " frame_cnt_old = " + frame_cnt_old.ToString() + "\n";
-
-            if ((flag_camera_start == 1) && (Cam.IsRunning == true))
-            {
-                richTextBox1.Text += "USB影像傳輸中, 中斷重來\n";
-                flag_camera_start = 0;
-                //Cam.Stop();  // WebCam stops capturing images.
-                Cam.SignalToStop();
-                Cam.WaitForStop();
-                comboBox_webcam.Items.Clear();
-            }
             */
 
             int sat = (int)numericUpDown_saturation.Value;
@@ -11828,6 +12025,47 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
             numericUpDown_sharpness.BackColor = Color.White;
+
+        }
+
+        private void button41_Click_1(object sender, EventArgs e)
+        {
+            bt_erase_Click(sender, e);
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+            //[C#] 產生一組亂數
+            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+
+            var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var chars2 = "0123456789";
+            var stringChars1 = new char[10];
+            var stringChars2 = new char[11];
+            var random = new Random();
+            for (int i = 0; i < stringChars1.Length; i++)
+            {
+                if (i < 2)
+                {
+                    stringChars1[i] = chars1[random.Next(chars1.Length)];
+                }
+                else
+                {
+                    stringChars1[i] = chars2[random.Next(chars2.Length)];
+                }
+            }
+            var finalString1 = new String(stringChars1);
+            richTextBox1.Text += "相機序號1：" + finalString1 + "\n";
+
+            for (int i = 0; i < stringChars2.Length; i++)
+            {
+                stringChars2[i] = chars2[random.Next(chars2.Length)];
+            }
+            var finalString2 = new String(stringChars2);
+            richTextBox1.Text += "相機序號2：" + finalString2 + "\n";
+
+            tb_sn1.Text = finalString1;
+            tb_sn2.Text = finalString2;
 
         }
 

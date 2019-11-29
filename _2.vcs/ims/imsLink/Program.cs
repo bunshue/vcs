@@ -15,7 +15,15 @@ namespace imsLink
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            try
+            {
+                Application.Run(new Form1());
+            }
+            catch (Exception ex)
+            {
+                //richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+            }
+
         }
     }
 }
