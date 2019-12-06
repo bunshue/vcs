@@ -160,6 +160,23 @@
             this.lb_sn1 = new System.Windows.Forms.Label();
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.tp_Product = new System.Windows.Forms.TabPage();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lb_product3 = new System.Windows.Forms.Label();
+            this.lb_product2 = new System.Windows.Forms.Label();
+            this.lb_product1 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tb_product3 = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tb_wait_product_data = new System.Windows.Forms.TextBox();
+            this.button52 = new System.Windows.Forms.Button();
+            this.button53 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.button54 = new System.Windows.Forms.Button();
+            this.tb_product2 = new System.Windows.Forms.TextBox();
+            this.tb_product1 = new System.Windows.Forms.TextBox();
             this.tp_Camera_Model = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -435,6 +452,7 @@
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.bt_min = new System.Windows.Forms.Button();
+            this.product_timer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -449,6 +467,8 @@
             this.groupBox4.SuspendLayout();
             this.tp_Serial_Auto.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.tp_Product.SuspendLayout();
+            this.groupBox14.SuspendLayout();
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
@@ -597,6 +617,7 @@
             this.tabControl1.Controls.Add(this.tp_Connection);
             this.tabControl1.Controls.Add(this.tp_System);
             this.tabControl1.Controls.Add(this.tp_Serial_Auto);
+            this.tabControl1.Controls.Add(this.tp_Product);
             this.tabControl1.Controls.Add(this.tp_Camera_Model);
             this.tabControl1.Controls.Add(this.tp_USB);
             this.tabControl1.Controls.Add(this.tp_Test);
@@ -1911,6 +1932,186 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // tp_Product
+            // 
+            this.tp_Product.Controls.Add(this.groupBox14);
+            this.tp_Product.Location = new System.Drawing.Point(4, 26);
+            this.tp_Product.Name = "tp_Product";
+            this.tp_Product.Size = new System.Drawing.Size(940, 586);
+            this.tp_Product.TabIndex = 26;
+            this.tp_Product.Text = "第五站";
+            this.tp_Product.UseVisualStyleBackColor = true;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.label20);
+            this.groupBox14.Controls.Add(this.lb_product3);
+            this.groupBox14.Controls.Add(this.lb_product2);
+            this.groupBox14.Controls.Add(this.lb_product1);
+            this.groupBox14.Controls.Add(this.label13);
+            this.groupBox14.Controls.Add(this.tb_product3);
+            this.groupBox14.Controls.Add(this.panel4);
+            this.groupBox14.Controls.Add(this.tb_wait_product_data);
+            this.groupBox14.Controls.Add(this.button52);
+            this.groupBox14.Controls.Add(this.button53);
+            this.groupBox14.Controls.Add(this.label17);
+            this.groupBox14.Controls.Add(this.label18);
+            this.groupBox14.Controls.Add(this.button54);
+            this.groupBox14.Controls.Add(this.tb_product2);
+            this.groupBox14.Controls.Add(this.tb_product1);
+            this.groupBox14.Location = new System.Drawing.Point(46, 20);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(848, 546);
+            this.groupBox14.TabIndex = 70;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "產品包裝";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(29, 219);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(106, 24);
+            this.label20.TabIndex = 111;
+            this.label20.Text = "寫入資料";
+            // 
+            // lb_product3
+            // 
+            this.lb_product3.AutoSize = true;
+            this.lb_product3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_product3.Location = new System.Drawing.Point(31, 340);
+            this.lb_product3.Name = "lb_product3";
+            this.lb_product3.Size = new System.Drawing.Size(94, 24);
+            this.lb_product3.TabIndex = 110;
+            this.lb_product3.Text = "BOX-Lot";
+            // 
+            // lb_product2
+            // 
+            this.lb_product2.AutoSize = true;
+            this.lb_product2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_product2.Location = new System.Drawing.Point(31, 303);
+            this.lb_product2.Name = "lb_product2";
+            this.lb_product2.Size = new System.Drawing.Size(70, 24);
+            this.lb_product2.TabIndex = 109;
+            this.lb_product2.Text = "PI-SN";
+            // 
+            // lb_product1
+            // 
+            this.lb_product1.AutoSize = true;
+            this.lb_product1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_product1.Location = new System.Drawing.Point(31, 263);
+            this.lb_product1.Name = "lb_product1";
+            this.lb_product1.Size = new System.Drawing.Size(82, 24);
+            this.lb_product1.TabIndex = 108;
+            this.lb_product1.Text = "ERP-SN";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(29, 170);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(94, 24);
+            this.label13.TabIndex = 107;
+            this.label13.Text = "BOX-Lot";
+            // 
+            // tb_product3
+            // 
+            this.tb_product3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_product3.Location = new System.Drawing.Point(142, 170);
+            this.tb_product3.Name = "tb_product3";
+            this.tb_product3.Size = new System.Drawing.Size(518, 32);
+            this.tb_product3.TabIndex = 106;
+            this.tb_product3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel4
+            // 
+            this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel4.Location = new System.Drawing.Point(242, 398);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(380, 122);
+            this.panel4.TabIndex = 104;
+            // 
+            // tb_wait_product_data
+            // 
+            this.tb_wait_product_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wait_product_data.Location = new System.Drawing.Point(486, 255);
+            this.tb_wait_product_data.Multiline = true;
+            this.tb_wait_product_data.Name = "tb_wait_product_data";
+            this.tb_wait_product_data.Size = new System.Drawing.Size(335, 22);
+            this.tb_wait_product_data.TabIndex = 103;
+            this.tb_wait_product_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button52
+            // 
+            this.button52.Location = new System.Drawing.Point(742, 103);
+            this.button52.Name = "button52";
+            this.button52.Size = new System.Drawing.Size(80, 40);
+            this.button52.TabIndex = 102;
+            this.button52.Text = "清除";
+            this.button52.UseVisualStyleBackColor = true;
+            this.button52.Click += new System.EventHandler(this.button52_Click);
+            // 
+            // button53
+            // 
+            this.button53.Location = new System.Drawing.Point(742, 43);
+            this.button53.Name = "button53";
+            this.button53.Size = new System.Drawing.Size(80, 40);
+            this.button53.TabIndex = 101;
+            this.button53.Text = "寫入";
+            this.button53.UseVisualStyleBackColor = true;
+            this.button53.Click += new System.EventHandler(this.button53_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(29, 103);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(70, 24);
+            this.label17.TabIndex = 100;
+            this.label17.Text = "PI-SN";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(29, 43);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(82, 24);
+            this.label18.TabIndex = 99;
+            this.label18.Text = "ERP-SN";
+            // 
+            // button54
+            // 
+            this.button54.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button54.Location = new System.Drawing.Point(742, 170);
+            this.button54.Name = "button54";
+            this.button54.Size = new System.Drawing.Size(80, 40);
+            this.button54.TabIndex = 98;
+            this.button54.Text = "到修改模式";
+            this.button54.UseVisualStyleBackColor = true;
+            this.button54.Click += new System.EventHandler(this.button54_Click);
+            // 
+            // tb_product2
+            // 
+            this.tb_product2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_product2.Location = new System.Drawing.Point(142, 103);
+            this.tb_product2.Name = "tb_product2";
+            this.tb_product2.Size = new System.Drawing.Size(518, 32);
+            this.tb_product2.TabIndex = 56;
+            this.tb_product2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_product1
+            // 
+            this.tb_product1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_product1.Location = new System.Drawing.Point(142, 43);
+            this.tb_product1.Name = "tb_product1";
+            this.tb_product1.Size = new System.Drawing.Size(518, 32);
+            this.tb_product1.TabIndex = 52;
+            this.tb_product1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // tp_Camera_Model
             // 
             this.tp_Camera_Model.Controls.Add(this.panel8);
@@ -3164,6 +3365,8 @@
             this.bt_awb_test.Text = "色彩校正";
             this.bt_awb_test.UseVisualStyleBackColor = false;
             this.bt_awb_test.Click += new System.EventHandler(this.bt_awb_test_Click);
+            this.bt_awb_test.MouseLeave += new System.EventHandler(this.bt_awb_test_MouseLeave);
+            this.bt_awb_test.MouseHover += new System.EventHandler(this.bt_awb_test_MouseHover);
             // 
             // numericUpDown_B
             // 
@@ -5230,6 +5433,11 @@
             this.bt_min.UseVisualStyleBackColor = true;
             this.bt_min.Click += new System.EventHandler(this.bt_min_Click);
             // 
+            // product_timer
+            // 
+            this.product_timer.Interval = 300;
+            this.product_timer.Tick += new System.EventHandler(this.product_timer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -5284,6 +5492,9 @@
             this.tp_Serial_Auto.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
+            this.tp_Product.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
             this.tp_Camera_Model.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -5743,6 +5954,24 @@
         private System.Windows.Forms.RadioButton rb_b;
         private System.Windows.Forms.RadioButton rb_a;
         private System.Windows.Forms.Label lb_class;
+        private System.Windows.Forms.TabPage tp_Product;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TextBox tb_wait_product_data;
+        private System.Windows.Forms.Button button52;
+        private System.Windows.Forms.Button button53;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox tb_product2;
+        private System.Windows.Forms.TextBox tb_product1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tb_product3;
+        private System.Windows.Forms.Button button54;
+        private System.Windows.Forms.Timer product_timer;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lb_product3;
+        private System.Windows.Forms.Label lb_product2;
+        private System.Windows.Forms.Label lb_product1;
     }
 }
 
