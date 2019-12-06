@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for Process
+using System.IO;    //for Path
+
 namespace imsLink
 {
     static class Program
@@ -13,17 +16,26 @@ namespace imsLink
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            try
+            string MName = Process.GetCurrentProcess().MainModule.ModuleName;
+            string PName = Path.GetFileNameWithoutExtension(MName);
+            Process[] myProcess = Process.GetProcessesByName(PName);
+            if (myProcess.Length > 1)
             {
-                Application.Run(new Form1());
+                MessageBox.Show("不允許重複執行本程式", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            else
             {
-                //richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                try
+                {
+                    Application.Run(new Form1());
+                }
+                catch (Exception ex)
+                {
+                    //richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+                }
             }
-
         }
     }
 }

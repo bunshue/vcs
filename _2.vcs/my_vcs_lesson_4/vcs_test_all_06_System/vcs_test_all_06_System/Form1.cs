@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;   //for DllImport
-using System.Diagnostics;   //for process
+using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;    //for Computer
 using System.Drawing.Text;  //for InstalledFontCollection
 using System.Reflection;        //for Assembly
@@ -86,13 +86,6 @@ namespace vcs_test_all_06_System
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = string.Empty;
-            Process[] myProcesses = Process.GetProcesses();
-            foreach (Process myProcess in myProcesses)
-            {
-                if (myProcess.MainWindowTitle.Length > 0)
-                    richTextBox1.Text += "任務名： " + myProcess.MainWindowTitle + "\n";
-            }
 
         }
 
@@ -172,27 +165,11 @@ namespace vcs_test_all_06_System
 
         private void button13_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo();
-            processStartInfo.FileName = "explorer.exe";  //资源管理器
-            processStartInfo.Arguments = @"C:\";
-            System.Diagnostics.Process.Start(processStartInfo);
 
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //開啟檔案總管
-            String pathname = "C:\\";
-            System.Diagnostics.Process.Start(pathname);
-            /*
-            if (Directory.Exists(this.FolderPath))
-            {
-                System.Diagnostics.Process.Start(this.FolderPath);
-                return true;
-            }
-            else
-                return false;
-             */
 
         }
 
@@ -326,50 +303,16 @@ namespace vcs_test_all_06_System
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //[C#]取得本機端上，執行中有 GUI 介面的應用程式
-            //Environment.MachineName 屬性 : 取得這個本機電腦的 NetBIOS 名稱。
-            //Process.GetProcesses 方法 (String) : 為指定電腦上的每個處理序資源建立新的 Process 元件。
-            //Process.MainWindowHandle 屬性 : 取得相關處理序主視窗的視窗控制代碼。
-            foreach (Process p in Process.GetProcesses(System.Environment.MachineName))
-            {
-                if (p.MainWindowHandle != IntPtr.Zero)  // 判斷 MainWindowHandle 為非零值的應用程式，表示有主視窗
-                {
-                    //listBox1.Items.Add(p.ToString());
-                    richTextBox1.Text += p.ToString() + "\n";
-                }
-            }
 
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //開啟檔案總管
-            String pathname = "C:\\";
-            System.Diagnostics.Process.Start(pathname);
-            /*
-            if (Directory.Exists(this.FolderPath))
-            {
-                System.Diagnostics.Process.Start(this.FolderPath);
-                return true;
-            }
-            else
-                return false;
-             */
 
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //用預設的程式開啟檔案
-            String pathname = "C:\\______test_files\\aaaaaaa.txt";
-
-            if (File.Exists(pathname) == false)
-            {
-                MessageBox.Show("檔案: " + pathname + "不存在，無法開啟。\n");
-                return;
-            }
-            else
-                System.Diagnostics.Process.Start(pathname);
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -412,27 +355,6 @@ namespace vcs_test_all_06_System
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //呼叫系統內建小鍵盤     fail
-            //System.Diagnostics.Process.Start("" + System.Environment.SystemDirectory + "/osk.exe");
-
-            //開啟特定程式
-            //Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
-
-            //開啟計算機程式
-            //Process.Start(@"C:\WINDOWS\system32\calc.exe");
-
-            //開啟檔案 由預設程式開啟
-            //System.Diagnostics.Process.Start("C:\\______test_files\\my_text_file.txt");
-            
-            //開啟記事本程式
-            //System.Diagnostics.Process.Start("notepad.exe");
-
-            //開啟程式
-            //System.Diagnostics.Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-            System.Diagnostics.Process.Start("winver.exe ");              //--打开Windows版本信息
-
-            //開啟imsLink
-            //System.Diagnostics.Process.Start(@"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
 
 
         }

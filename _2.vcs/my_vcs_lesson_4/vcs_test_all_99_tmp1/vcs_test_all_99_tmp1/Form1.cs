@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;                        //for StreamReader
 using System.Diagnostics;               //for process, FileVersionInfo, Stopwatch
-using System.Runtime.InteropServices;   //for DllImport
 using System.Drawing.Imaging;   //for bmp2jpg
 using System.Net;           //for WebClient
 
@@ -41,23 +40,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            // 列出系統中所有的程序
-            Process[] processes = Process.GetProcesses();
-
-            richTextBox1.Text += "系統中共有： " + processes.Length.ToString() + " 個程序\n";
-
-            foreach (Process p in processes)
-            {
-                // 因為使用 Idle 的 StartTime 會造成錯誤，因此先排除
-                if (!p.ProcessName.Equals("Idle"))
-                {
-                    // 顯示程序的名稱及啟動時間
-                    richTextBox1.Text += p.ProcessName + "\t\t" + p.StartTime.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
-                    //listBox1.Items.Add(string.Format("{0} - {1}", p.ProcessName, p.StartTime.ToString("yyyy/MM/dd HH:mm:ss")));
-                }
-                else
-                    richTextBox1.Text += p.ProcessName + "\t\t" + "xxxxxxxxxxxxxxxx\n";
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -220,34 +202,9 @@ namespace vcs_test_all_99_tmp1
             richTextBox1.Text += "在Form1()的InitializeComponent()後加入訊息\n";
         }
 
-        [DllImport("User32.dll")]
-        private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
-        [DllImport("User32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-        private const int WS_SHOWNORMAL = 1;
-
         private void button27_Click(object sender, EventArgs e)
         {
-            //C# 指定程序還原與置於前景視窗
-            // 取得目前電腦的處理序
-            richTextBox1.Text += "找到 " + Process.GetProcesses().Length + " 個程序\n\n";
-            foreach (Process pTarget in Process.GetProcesses())
-            {
-                richTextBox1.Text += pTarget.ProcessName + "\n";
-                if (pTarget.ProcessName == "ACDSee32")  // 取得處理序名稱並與指定程序名稱比較
-                {
-                    //MessageBox.Show("你開啟了ACDSee32");
-                    //richTextBox1.Text += pTarget.ProcessName + "\n";
-                    HandleRunningInstance(pTarget);
-                }
-            }
-        }
-        public static void HandleRunningInstance(Process instance)
-        {
-            // 相同時透過ShowWindowAsync還原，以及SetForegroundWindow將程式至於前景
-            ShowWindowAsync(instance.MainWindowHandle, WS_SHOWNORMAL);
-            SetForegroundWindow(instance.MainWindowHandle);
-            //Environment.SpecialFolder.
+
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -397,7 +354,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button32_Click_1(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Machine: " + Environment.MachineName + "\n";
+            richTextBox1.Text += "MachineName: " + Environment.MachineName + "\n";
             richTextBox1.Text += "# of processors (logical): " + Environment.ProcessorCount + "\n";
             //richTextBox1.Text += "# of processors (physical): " + CountPhysicalProcessors() + "\n";
             //richTextBox1.Text += "RAM installed:   bytes" + CountPhysicalMemory() + "\n";

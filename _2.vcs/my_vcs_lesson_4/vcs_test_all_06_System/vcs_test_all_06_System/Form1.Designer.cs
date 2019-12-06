@@ -124,7 +124,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(217, 42);
             this.button6.TabIndex = 6;
-            this.button6.Text = "正在執行的任務";
+            this.button6.Text = "xxx";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -201,7 +201,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(205, 42);
             this.button13.TabIndex = 14;
-            this.button13.Text = "開啟檔案總管 C槽";
+            this.button13.Text = "xxx";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -212,7 +212,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(205, 42);
             this.button14.TabIndex = 15;
-            this.button14.Text = "開啟檔案總管";
+            this.button14.Text = "xxx";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -256,7 +256,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(211, 42);
             this.button19.TabIndex = 20;
-            this.button19.Text = "取得本機端上執行中的應用程式";
+            this.button19.Text = "xxx";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -289,7 +289,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(211, 42);
             this.button25.TabIndex = 25;
-            this.button25.Text = "用預設的程式開啟檔案";
+            this.button25.Text = "xxx";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -322,7 +322,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(205, 42);
             this.button28.TabIndex = 29;
-            this.button28.Text = "開啟檔案總管";
+            this.button28.Text = "xxx";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -430,7 +430,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(211, 42);
             this.button16.TabIndex = 49;
-            this.button16.Text = "開啟 各種程式";
+            this.button16.Text = "xxx";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

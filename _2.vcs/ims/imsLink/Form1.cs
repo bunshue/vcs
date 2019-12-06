@@ -217,7 +217,7 @@ namespace imsLink
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
         int timer_webcam_mode = FOCUS_ON_PICTURE;
-        DateTime bootup_time = System.DateTime.Now;
+        DateTime bootup_time = DateTime.Now;
 
         //二維List for string
         List<string[]> camera_serials = new List<string[]>();
@@ -3117,6 +3117,8 @@ namespace imsLink
         {
             //建立一個檔案
             richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
+            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - bootup_time).ToString() + " 秒\n";
+            //richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";  //wrong
             string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
             StreamWriter sw = File.CreateText(filename);
             sw.Write(richTextBox1.Text);

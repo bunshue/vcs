@@ -127,7 +127,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(154, 42);
             this.button7.TabIndex = 7;
-            this.button7.Text = "列出所有行程列表";
+            this.button7.Text = "xxx";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -248,7 +248,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(154, 42);
             this.button27.TabIndex = 27;
-            this.button27.Text = "指定程序還原與置於前景視窗";
+            this.button27.Text = "xxx";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
