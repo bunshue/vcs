@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        String compile_time = "12/6/2019 11:43上午";
+        String compile_time = "12/16/2019 02:53下午";
 
         int flag_operation_mode = MODE_RELEASE_STAGE2;
         bool flag_release_mode = true; //false for M-dir, true for N-dir
@@ -57,8 +57,8 @@ namespace imsLink
         private const int ERROR_DATE = 0x0F;	//error date
         private const int AWB_PAGE0 = 0x10;	    //awb data, old method
         private const int AWB_PAGE1 = 0x11;	    //awb data, new method
-        private const int USER_PAGE1 = 0x12;	    //UFM data page 1
-        private const int USER_PAGE2 = 0x13;	    //UFM data page 2
+        private const int USER_PAGE1 = 0x12;    //UFM data page 1, WPT, BPT, saturation
+        private const int USER_PAGE2 = 0x13;    //UFM data page 2, brightness
         private const int DISPLAY_FHD = 0x00;	//screen size FHD
         private const int DISPLAY_SD = 0x01;	//screen size SD
 
@@ -438,6 +438,7 @@ namespace imsLink
                 bt_save_data.Enabled = false;
                 numericUpDown_sharpness.Enabled = false;
                 numericUpDown_denoise.Enabled = false;
+                numericUpDown_brightness.Enabled = false;
             }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE3))
@@ -1326,7 +1327,7 @@ namespace imsLink
                                     playSound(S_OK);
 
                                     //richTextBox1.Text += "把資料暫存起來\n";
-                                    camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString() });
+                                    camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
 
                                     //if ((camera_serials.Count % 5) == 0)
                                     {
@@ -1440,7 +1441,7 @@ namespace imsLink
                             */
 
                             //資料不是5拜，打印出來。
-                            //richTextBox1.Text += "\n得到資料不是5拜 " + DateTime.Now.ToString() + "\t";
+                            //richTextBox1.Text += "\n得到資料不是5拜 " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\t";
 
                             input = "aa unknown data, len = " + BytesToRead.ToString() + "\n";
                             if (BytesToRead >= 4)
@@ -2076,6 +2077,7 @@ namespace imsLink
                 bt_save_data.Visible = false;
                 numericUpDown_sharpness.Visible = false;
                 numericUpDown_denoise.Visible = false;
+                numericUpDown_brightness.Visible = false;
 
                 //hide some buttons
                 button32.Visible = false;
@@ -2178,6 +2180,7 @@ namespace imsLink
                 bt_save_data.Visible = en;
                 numericUpDown_sharpness.Enabled = en;
                 numericUpDown_denoise.Enabled = en;
+                numericUpDown_brightness.Enabled = en;
             }
 
             //note
@@ -2694,6 +2697,7 @@ namespace imsLink
                 //bt_save_data.Location
                 //numericUpDown_sharpness.Location
                 //numericUpDown_denoise.Location
+                //numericUpDown_brightness.location
             }
             else
             {
@@ -2722,9 +2726,10 @@ namespace imsLink
                 comboBox_saturation.Location = new Point(numericUpDown_saturation.Location.X + 70, numericUpDown_saturation.Location.Y);
                 comboBox_denoise.Location = new Point(comboBox_saturation.Location.X + 85, comboBox_saturation.Location.Y);
                 comboBox_sharpness.Location = new Point(comboBox_saturation.Location.X + 140, comboBox_saturation.Location.Y);
-                bt_save_data.Location = new Point(comboBox_saturation.Location.X + 200, comboBox_saturation.Location.Y);
+                bt_save_data.Location = new Point(comboBox_saturation.Location.X + 210, comboBox_saturation.Location.Y + 60);
                 numericUpDown_denoise.Location = new Point(comboBox_denoise.Location.X, comboBox_denoise.Location.Y + 40);
                 numericUpDown_sharpness.Location = new Point(comboBox_sharpness.Location.X, comboBox_sharpness.Location.Y + 40);
+                numericUpDown_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y);
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE3)
@@ -3015,7 +3020,7 @@ namespace imsLink
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = DateTime.Now.ToString();
+            toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
             string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
             string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
@@ -3119,7 +3124,7 @@ namespace imsLink
             richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
             richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - bootup_time).ToString() + " 秒\n";
             //richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";  //wrong
-            string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
+            string filename = "imsLink_log." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             StreamWriter sw = File.CreateText(filename);
             sw.Write(richTextBox1.Text);
             sw.Close();
@@ -3918,7 +3923,7 @@ namespace imsLink
             richTextBox1.AppendText("圖形介面版本 : A02\n");
             richTextBox1.AppendText("韌體版本 : F0" + fw_version.ToString() + "\n");
             richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
-            richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString() + "\n");
+            richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n");
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
@@ -4379,7 +4384,7 @@ namespace imsLink
 
             if (cb_show_time.Checked == true)
             {   //顯示時間
-                drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 drawBrush = new SolidBrush(Color.Yellow);
                 drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                 //drawFont2 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
@@ -5366,7 +5371,7 @@ namespace imsLink
                 {   //顯示時間
                     int xPos = 10;
                     int yPos = 10;
-                    string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
                     g.ReleaseHdc();
                     g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
@@ -5431,23 +5436,23 @@ namespace imsLink
 
                 if ((flag_operation_mode == MODE_RELEASE_STAGE1) ||(flag_operation_mode == MODE_RELEASE_STAGE2))
                 {
-                    camera_serials.Add(new string[] { tb_sn_opal.Text, DateTime.Now.ToString() });
+                    camera_serials.Add(new string[] { tb_sn_opal.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     exportCSV();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     if (rb_a.Checked == true)
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, "A", DateTime.Now.ToString() });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, "A", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     else if (rb_b.Checked == true)
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, "B", DateTime.Now.ToString() });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, "B", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     else if (rb_c.Checked == true)
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, "C", DateTime.Now.ToString() });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, "C", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     else if (rb_e.Checked == true)
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, "E", DateTime.Now.ToString() });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, "E", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     else if (rb_ng.Checked == true)
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, "NG", DateTime.Now.ToString() });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, "NG", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     else
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, "未判定", DateTime.Now.ToString() });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, "未判定", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
 
                     rb_a.Checked = false;
                     rb_b.Checked = false;
@@ -5900,7 +5905,7 @@ namespace imsLink
             button21.BackColor = Color.Red;
             //richTextBox1.Text += "更新系統時間\n";
 
-            //richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString() + "\n";
+            //richTextBox1.Text += "目前時間 : " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
 
             System.DateTime dt = System.DateTime.Now;
             /*
@@ -6668,6 +6673,7 @@ namespace imsLink
         int read_connection_fail_cnt = 0;
         private void timer_rtc_Tick(object sender, EventArgs e)
         {
+            /*
             if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
                 if (flag_try_connect_comport == false)
@@ -6677,6 +6683,7 @@ namespace imsLink
                     connect_IMS_comport();
                 }
             }
+            */
 
             if (flag_comport_ok == false)
                 return;
@@ -6980,7 +6987,7 @@ namespace imsLink
                     //驗證資料
                     lb_write_camera_serial2.Text += "    驗證中";
                     lb_write_camera_serial2.ForeColor = Color.Blue;
-                    richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString() + "\n";
+                    richTextBox1.Text += "\n讀相機序號回來 " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
 
                     Font f = new Font("標楷體", 60);
                     int tmp_width = 0;
@@ -7015,7 +7022,7 @@ namespace imsLink
                     playSound(S_OK);
 
                     //richTextBox1.Text += "把資料暫存起來\n";
-                    camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString() });
+                    camera_serials.Add(new string[] { tb_sn1.Text, tb_sn2.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
 
                     //if ((camera_serials.Count % 5) == 0)
                     {
@@ -7420,6 +7427,7 @@ namespace imsLink
             }
             else if (e.KeyCode == Keys.X)
             {
+                button20_Click(sender, e);
             }
             else if (e.KeyCode == Keys.F1)
             {
@@ -10224,9 +10232,9 @@ namespace imsLink
                 serialPort1.DiscardInBuffer();
                 richTextBox1.Text += "丟棄UART buffer內的資料 ccc\n";
 
-                delay(100);
-                delay(100);
-                delay(100);
+                delay(50);
+                //delay(100);
+                //delay(100);
 
                 serialPort1.DiscardInBuffer();
                 richTextBox1.Text += "丟棄UART buffer內的資料 ddd\n";
@@ -10237,11 +10245,11 @@ namespace imsLink
                 while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
                 {
                     richTextBox1.Text += "-2xx";
-                    delay(100);
+                    delay(50);
                 }
                 if (g_conn_status == DONGLE_NONE)
                 {
-                    richTextBox1.Text += "無連接器\n";
+                    richTextBox1.Text += "無連接器3\n";
                     flag_doing_check_webcam = false;
                     return S_FALSE;
                 }
@@ -10619,7 +10627,7 @@ namespace imsLink
                     while ((flag_comport_connection_ok == false) && (cnt++ < 10))
                     {
                         richTextBox1.Text += ".";
-                        delay(100);
+                        delay(50);
                     }
                     //richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
                     flag_comport_ok = false;
@@ -12213,18 +12221,20 @@ namespace imsLink
         private void bt_save_data_Click(object sender, EventArgs e)
         {
             int i;
-            int page = USER_PAGE1;
+            int page;
+            byte data;
+            //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
+
+            page = USER_PAGE1;
 
             for (i = 0; i < 16; i++)
             {
                 user_flash_data[i] = 0;
             }
 
-            byte data;
-            //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
-
             user_flash_data[0] = 0xDA;  //header
 
+            /*
             data = 30;
             user_flash_data[1] = 0x3A;  //WPT AH
             user_flash_data[2] = 0x03;  //WPT AL
@@ -12234,7 +12244,9 @@ namespace imsLink
             user_flash_data[4] = 0x3A;  //BPT AH
             user_flash_data[5] = 0x04;  //BPT AL
             user_flash_data[6] = data;
+            */
 
+            richTextBox1.Text += "Saturation x0.75\n";
             data = 0x26;
             user_flash_data[7] = 0x58;  //Saturation TH2 AH
             user_flash_data[8] = 0x03;  //Saturation TH2 AL
@@ -12252,8 +12264,35 @@ namespace imsLink
             Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
             serialPort1.Write(user_flash_data, 0, 16);
 
+            delay(500);
+
+            page = USER_PAGE2;
+
+            for (i = 0; i < 16; i++)
+            {
+                user_flash_data[i] = 0;
+            }
+
+            user_flash_data[0] = 0xDA;  //header
+
+            data = (byte)numericUpDown_brightness.Value;
+
+            richTextBox1.Text += "Brightness = " + data.ToString() + "\n";
+
+            user_flash_data[1] = 0xAA;
+            user_flash_data[2] = 0xBB;
+            user_flash_data[3] = data;
+
+            user_flash_data[13] = 0x00; //dummy, no data
+            user_flash_data[14] = 0x00; //dummy, no data
+            user_flash_data[15] = 0x00; //dummy, no data
+
+            Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
+            serialPort1.Write(user_flash_data, 0, 16);
+
             richTextBox1.Text += "寫入資料  完成\n";
 
+            show_main_message("相機寫入資料完成", S_OK, 30);
         }
 
         private void bt_min_Click(object sender, EventArgs e)
@@ -13000,7 +13039,7 @@ namespace imsLink
                 flag_ok_to_write_data = true;
                 richTextBox1.Text += "資料齊全, 準備存檔\n";
 
-                camera_serials.Add(new string[] { tb_product1.Text, tb_product2.Text, tb_product3.Text, DateTime.Now.ToString() });
+                camera_serials.Add(new string[] { tb_product1.Text, tb_product2.Text, tb_product3.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
 
                 exportCSV();
 

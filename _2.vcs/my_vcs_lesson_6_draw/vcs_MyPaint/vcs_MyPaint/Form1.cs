@@ -649,7 +649,54 @@ namespace vcs_MyPaint
 
         private void button14_Click(object sender, EventArgs e)
         {
-            
+            int ww = 1000;
+            int hh = 500;
+            int dd = ww / 5;
+            //pictureBox1.Size = new Size(1, 1);
+            pictureBox2.Size = new Size(ww, hh);
+            pictureBox2.Location = new Point(10, 10);
+
+            //逐點製作圖檔
+            int xx;
+            int yy;
+            bitmap1 = new Bitmap(ww, hh);
+            for (yy = 0; yy < hh; yy++)
+            {
+                for (xx = 0; xx < ww; xx++)
+                {
+                    if ((xx / dd) < 1)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
+                    else if ((xx / dd) < 2)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
+                    else if ((xx / dd) < 3)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
+                    else if ((xx / dd) < 4)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0x00));
+                    else if ((xx / dd) < 5)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0xff, 0xff));
+                    else
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            for (int i = 0; i < 5; i++)
+            {
+                if(i == 3)
+                    sb = new SolidBrush(Color.White);
+                else
+                    sb = new SolidBrush(Color.Black);
+
+                g.FillEllipse(sb, dd*i + dd/2, 100, 10, 10);
+            }
+
+            Font f = new Font("標楷體", 100);
+            sb = new SolidBrush(Color.White);
+            g.DrawString("ims", f, sb, new PointF(80, 300));
+
+            pictureBox2.Image = bitmap1;
+
 
         }
 

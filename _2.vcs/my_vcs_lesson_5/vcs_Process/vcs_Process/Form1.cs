@@ -320,6 +320,29 @@ namespace vcs_Process
             //Environment.SpecialFolder.
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //在c#中，如果启动了外部程序，一般也可以通过退出码来确认程序的运行状态：
+
+            Process p = Process.Start(@"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+
+            p.WaitForExit();
+            if (p.ExitCode == 0)
+            {
+                //richTextBox1.Text += "11111111111111111111\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "222222222222222222222\n";
+            }
+            richTextBox1.Text += "退出碼 : " + p.ExitCode.ToString() + "\n";
+            richTextBox1.Text += "退出時間 : " + p.ExitTime + "\n";
+
+
+
+
+        }
+
 
 
 

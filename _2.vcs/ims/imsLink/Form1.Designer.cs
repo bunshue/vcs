@@ -453,6 +453,7 @@
             this.button33 = new System.Windows.Forms.Button();
             this.bt_min = new System.Windows.Forms.Button();
             this.product_timer = new System.Windows.Forms.Timer(this.components);
+            this.numericUpDown_brightness = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -505,6 +506,7 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -2229,6 +2231,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.numericUpDown_brightness);
             this.tp_USB.Controls.Add(this.lb_class);
             this.tp_USB.Controls.Add(this.groupBox_class);
             this.tp_USB.Controls.Add(this.numericUpDown_sharpness);
@@ -2530,9 +2533,9 @@
             this.lb_function.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_function.Location = new System.Drawing.Point(234, 262);
             this.lb_function.Name = "lb_function";
-            this.lb_function.Size = new System.Drawing.Size(266, 19);
+            this.lb_function.Size = new System.Drawing.Size(328, 19);
             this.lb_function.TabIndex = 176;
-            this.lb_function.Text = "   Sat            Sat           DNS     sharp ";
+            this.lb_function.Text = "   Sat            Sat           DNS     sharp     亮度   ";
             // 
             // comboBox_denoise
             // 
@@ -2569,11 +2572,11 @@
             // bt_save_data
             // 
             this.bt_save_data.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_save_data.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_save_data.ForeColor = System.Drawing.Color.Black;
-            this.bt_save_data.Location = new System.Drawing.Point(562, 61);
+            this.bt_save_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_save_data.ForeColor = System.Drawing.Color.Red;
+            this.bt_save_data.Location = new System.Drawing.Point(547, 44);
             this.bt_save_data.Name = "bt_save_data";
-            this.bt_save_data.Size = new System.Drawing.Size(54, 32);
+            this.bt_save_data.Size = new System.Drawing.Size(69, 49);
             this.bt_save_data.TabIndex = 173;
             this.bt_save_data.Text = "儲存";
             this.bt_save_data.UseVisualStyleBackColor = false;
@@ -5438,6 +5441,25 @@
             this.product_timer.Interval = 300;
             this.product_timer.Tick += new System.EventHandler(this.product_timer_Tick);
             // 
+            // numericUpDown_brightness
+            // 
+            this.numericUpDown_brightness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_brightness.Location = new System.Drawing.Point(774, 6);
+            this.numericUpDown_brightness.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_brightness.Name = "numericUpDown_brightness";
+            this.numericUpDown_brightness.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_brightness.TabIndex = 182;
+            this.numericUpDown_brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_brightness.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -5542,6 +5564,7 @@
             this.statusStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5972,6 +5995,7 @@
         private System.Windows.Forms.Label lb_product3;
         private System.Windows.Forms.Label lb_product2;
         private System.Windows.Forms.Label lb_product1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_brightness;
     }
 }
 
