@@ -21,9 +21,9 @@ namespace imsLink
     public partial class Form1 : Form
     {
         String compile_time = "12/16/2019 02:53下午";
+        String software_version = "A04";
 
         int flag_operation_mode = MODE_RELEASE_STAGE2;
-        bool flag_release_mode = true; //false for M-dir, true for N-dir
 
         bool flag_enaglb_awb_function = true;
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
@@ -110,6 +110,7 @@ namespace imsLink
         bool flag_comport_connection_ok = false;
         bool flag_already_write_system_data = false;
         bool flag_fullscreen = false;
+        bool flag_network_disk_status = true;
 
         int data_expo = 0;
         byte data_expo_h = 0;
@@ -304,10 +305,8 @@ namespace imsLink
             else
                 richTextBox1.Text += "MODE_RELEASE_STAGE0\n";
 
-            if (flag_release_mode == true)
-                richTextBox1.Text += "存CSV檔到N槽\n";
-            else
-                richTextBox1.Text += "存CSV檔到M槽\n";
+            richTextBox1.Text += "存圖片檔到M槽\n";
+            richTextBox1.Text += "存CSV檔到N槽\n";
 
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
@@ -330,8 +329,8 @@ namespace imsLink
             numericUpDown_R.Value = trackBar_R.Value;
             numericUpDown_G.Value = trackBar_G.Value;
             numericUpDown_B.Value = trackBar_B.Value;
-            //comboBox_temperature.SelectedIndex = 12; //6500K
-            comboBox_temperature.SelectedIndex = 29; //7700K modified
+            comboBox_temperature.SelectedIndex = 12; //6500K
+            //comboBox_temperature.SelectedIndex = 29; //7700K modified
             numericUpDown_TG_R.Value = TARGET_AWB_R;
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
@@ -456,6 +455,7 @@ namespace imsLink
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
                 timer_rtc.Enabled = false;
                 timer_get_rgb.Enabled = true;
+                product_timer.Enabled = false;
                 //Comport_Scan();
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
@@ -465,6 +465,7 @@ namespace imsLink
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
                 timer_rtc.Enabled = true;
                 timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE5)
             {
@@ -489,6 +490,7 @@ namespace imsLink
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
                 timer_rtc.Enabled = true;
                 timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
             }
 
             this.Width = 960;
@@ -528,7 +530,7 @@ namespace imsLink
                 button1.Enabled = true;
                 button2.Enabled = false;
                 flag_comport_ok = false;
-                show_main_message("COM未連線", S_FALSE, 100);
+                show_main_message1("COM未連線", S_FALSE, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.x;
                 toolTip1.SetToolTip(pictureBox_comport, "COM未連線");
             }
@@ -567,7 +569,7 @@ namespace imsLink
 
         private void button9_Click(object sender, EventArgs e)
         {
-            show_main_message("Reset", S_OK, 30);
+            show_main_message1("Reset", S_OK, 30);
             richTextBox1.AppendText("[PC] : Reset imsLink\n");
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
             Reset_imsLink_Setting();
@@ -1811,7 +1813,7 @@ namespace imsLink
                         g_conn_status = input[2];
                         if (g_conn_status == DONGLE_NONE)
                         {
-                            show_main_message("無連接器", S_OK, 30);
+                            show_main_message1("無連接器", S_OK, 30);
                             textBox7.Text = "無連接器";
                             textBox7.BackColor = Color.Red;
                             playSound(S_FALSE);
@@ -1823,7 +1825,7 @@ namespace imsLink
                         }
                         else if (g_conn_status == CAMERA_NONE)
                         {
-                            show_main_message("無相機", S_OK, 30);
+                            show_main_message1("無相機", S_OK, 30);
                             textBox7.Text = "有連接器, 無相機";
                             textBox7.BackColor = Color.Red;
                             playSound(S_FALSE);
@@ -1835,7 +1837,7 @@ namespace imsLink
                         }
                         else if (g_conn_status == CAMERA_OK)
                         {
-                            show_main_message("有相機", S_OK, 30);
+                            show_main_message1("有相機", S_OK, 30);
                             textBox7.Text = "有連接器, 有相機";
                             textBox7.BackColor = Color.White;
                             panel_camera_status1.BackgroundImage = imsLink.Properties.Resources.recorder_ok;
@@ -1846,7 +1848,7 @@ namespace imsLink
                         }
                         else
                         {
-                            show_main_message("相機狀態不明", S_OK, 30);
+                            show_main_message1("相機狀態不明", S_OK, 30);
                             textBox7.Text = "狀態不明, status = " + g_conn_status.ToString();
                             textBox7.BackColor = Color.Red;
                             playSound(S_FALSE);
@@ -1921,7 +1923,7 @@ namespace imsLink
         private void button10_Click(object sender, EventArgs e)
         {
             Comport_Scan();
-            show_main_message("COM重抓", S_OK, 50);
+            show_main_message1("COM重抓", S_OK, 50);
         }
 
         private void Comport_Scan()
@@ -2790,6 +2792,8 @@ namespace imsLink
                 cb_enable_awb.Checked = false;
             }
 
+            this.Text = "imsLink " + software_version;
+
             pictureBox1.Size = new Size(640, 480);
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
@@ -3015,6 +3019,13 @@ namespace imsLink
             else
                 richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
 
+            if (check_network_disk() == S_OK)
+            {
+                show_main_message1("已連上網路磁碟機 ", S_OK, 10);
+                show_main_message2("已連上網路磁碟機 ", S_OK, 10);
+                show_main_message3("已連上網路磁碟機 ", S_OK, 10);
+            }
+
             return;
         }
 
@@ -3026,6 +3037,19 @@ namespace imsLink
             string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
             //richTextBox1.Text += weekday + "\n";
             lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
+
+            if (flag_network_disk_status == false)
+            {
+                if ((DateTime.Now.Second % 5) == 0)
+                {
+                    if (check_network_disk() == S_OK)
+                    {
+                        show_main_message1("已連上網路磁碟機 ", S_OK, 10);
+                        show_main_message2("已連上網路磁碟機 ", S_OK, 10);
+                        show_main_message3("已連上網路磁碟機 ", S_OK, 10);
+                    }
+                }
+            }
         }
 
         public double hex2dec(string hex_data)
@@ -3120,6 +3144,8 @@ namespace imsLink
 
         private void button72_Click(object sender, EventArgs e)
         {
+            button3_Click(sender, e);   //顯示系統資訊
+
             //建立一個檔案
             richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
             richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - bootup_time).ToString() + " 秒\n";
@@ -3918,9 +3944,9 @@ namespace imsLink
         private void button3_Click(object sender, EventArgs e)
         {
             OperatingSystem OSv = System.Environment.OSVersion;
-            richTextBox1.AppendText("imsLink登錄時間 : " + "2017/1/3 03:00下午" + "\n");
+            richTextBox1.AppendText("imsLink登錄時間 : " + compile_time + "\n");
             richTextBox1.AppendText("作業系統版本 : " + OSv.ToString() + "\n");
-            richTextBox1.AppendText("圖形介面版本 : A02\n");
+            richTextBox1.AppendText("圖形介面版本 : " + software_version + "\n");
             richTextBox1.AppendText("韌體版本 : F0" + fw_version.ToString() + "\n");
             richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
             richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n");
@@ -4161,6 +4187,7 @@ namespace imsLink
                 timer_webcam.Enabled = true;
                 timer_webcam_mode = FOCUS_ON_PICTURE;
                 timer_get_rgb.Enabled = true;
+                product_timer.Enabled = false;
             }
             else if (tabControl1.SelectedTab == tp_Product)
             {
@@ -4174,6 +4201,7 @@ namespace imsLink
                 richTextBox1.Text += "離開USB WebCam\n";
                 timer_webcam.Enabled = false;
                 timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
 
                 if (flag_fullscreen == true)
                 {
@@ -4843,6 +4871,15 @@ namespace imsLink
                 richTextBox1.Text += "四";
             }
 
+            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            {
+                tb_wait_camera_data.Clear();
+
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
+            }
+
             int len;
             len = tb_wait_camera_data.Text.Length;
 
@@ -5112,7 +5149,7 @@ namespace imsLink
             {
                 if (flag_comport_ok == false)
                 {
-                    show_main_message("影像重抓", S_OK, 30);
+                    show_main_message1("影像重抓", S_OK, 30);
                     richTextBox1.Text += "no comport, abort\n";
                     return;
                 }
@@ -5120,7 +5157,7 @@ namespace imsLink
 
             flag_doing_refreshing_camera = true;
 
-            show_main_message("影像重抓", S_OK, 30);
+            show_main_message1("影像重抓", S_OK, 30);
             if (Cam != null)
             {
                 if ((flag_camera_start == 1) && (Cam.IsRunning == true))
@@ -5252,14 +5289,14 @@ namespace imsLink
                     flag_camera_is_stopped = 1;
                     richTextBox1.Text += "停止\n";
                     enable_camera_streaming(false);
-                    show_main_message("影像停止", S_FALSE, 30);
+                    show_main_message1("影像停止", S_FALSE, 30);
                 }
                 else
                 {
                     flag_camera_is_stopped = 0;
                     richTextBox1.Text += "繼續\n";
                     enable_camera_streaming(true);
-                    show_main_message("影像繼續", S_OK, 30);
+                    show_main_message1("影像繼續", S_OK, 30);
                 }
             }
         }
@@ -5270,7 +5307,7 @@ namespace imsLink
             {
                 if ((rb_a.Checked == false) && (rb_b.Checked == false) && (rb_c.Checked == false) && (rb_e.Checked == false) && (rb_ng.Checked == false))
                 {
-                    show_main_message("未判定等級", S_OK, 30);
+                    show_main_message1("未判定等級", S_OK, 30);
                     show_main_message2("未判定等級", S_OK, 30);
 
                     tb_sn_opal.Clear();
@@ -5288,7 +5325,7 @@ namespace imsLink
             this.tb_sn_opal.BackColor = Color.White;
 
             this.pictureBox1.Focus();
-            show_main_message("存檔中...", S_OK, 10);
+            show_main_message1("存檔中...", S_OK, 10);
             delay(10);
 
             int i;
@@ -5296,7 +5333,7 @@ namespace imsLink
 
             if (tb_sn_opal.Text.Length == 0)
             {
-                show_main_message("未輸入相機序號", S_OK, 30);
+                show_main_message1("未輸入相機序號", S_OK, 30);
                 show_main_message2("未輸入相機序號", S_OK, 30);
                 flag_incorrect_data = true;
             }
@@ -5311,7 +5348,7 @@ namespace imsLink
                 {
                     flag_incorrect_data = true;
                     richTextBox1.Text += "SN1格式不正確b0\n";
-                    show_main_message("序號格式不正確", S_OK, 30);
+                    show_main_message1("序號格式不正確", S_OK, 30);
                 }
 
                 if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
@@ -5322,7 +5359,7 @@ namespace imsLink
                 {
                     flag_incorrect_data = true;
                     richTextBox1.Text += "SN1格式不正確b1\n";
-                    show_main_message("序號格式不正確", S_OK, 30);
+                    show_main_message1("序號格式不正確", S_OK, 30);
                 }
 
                 for (i = 2; i < tb_sn_opal.Text.Length; i++)
@@ -5331,7 +5368,7 @@ namespace imsLink
                     {
                         flag_incorrect_data = true;
                         richTextBox1.Text += "SN1格式不正確b\n";
-                        show_main_message("序號格式不正確", S_OK, 30);
+                        show_main_message1("序號格式不正確", S_OK, 30);
                     }
                 }
 
@@ -5343,7 +5380,7 @@ namespace imsLink
             else
             {
                 flag_incorrect_data = true;
-                show_main_message("序號格式不正確", S_OK, 30);
+                show_main_message1("序號格式不正確", S_OK, 30);
             }
 
             if (flag_incorrect_data == true)
@@ -5424,13 +5461,13 @@ namespace imsLink
                     richTextBox1.Text += "已存檔 : " + filename1a + "\n";
                     richTextBox1.Text += "已存檔 : " + filename2a + "\n";
                     //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                    show_main_message("已存檔BMP", S_OK, 30);
+                    show_main_message1("已存檔BMP", S_OK, 30);
                     show_main_message2("已存檔 : " + filename1a, S_OK, 30);
                 }
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
-                    show_main_message("存檔失敗", S_OK, 30);
+                    show_main_message1("存檔失敗", S_OK, 30);
                     show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
 
@@ -5484,7 +5521,7 @@ namespace imsLink
             else
             {
                 richTextBox1.Text += "無圖可存\n";
-                show_main_message("無圖可存", S_FALSE, 30);
+                show_main_message1("無圖可存", S_FALSE, 30);
                 show_main_message2("無圖可存", S_FALSE, 30);
                 tb_sn_opal.Clear();
             }
@@ -5822,7 +5859,7 @@ namespace imsLink
                 return;
             }
 
-            show_main_message("關閉程式", S_OK, 30);
+            show_main_message1("關閉程式", S_OK, 30);
             if (flag_comport_ok == true)
             {
                 serialPort1.Close();
@@ -5847,7 +5884,7 @@ namespace imsLink
                     comboBox_webcam.Items.Clear();
                 }
             }
-            show_main_message("關閉程式", S_OK, 30);
+            show_main_message1("關閉程式", S_OK, 30);
             richTextBox1.Text += "確認關閉ST\n";
             delay(100);
             richTextBox1.Text += "確認關閉SP\n";
@@ -7462,6 +7499,14 @@ namespace imsLink
         int timer_webcam_cnt = 0;
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
+            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            {
+                tb_sn_opal.Clear();
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
+            }
+
             if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 if (flag_operation_mode == MODE_RELEASE_STAGE3)
@@ -7470,7 +7515,7 @@ namespace imsLink
                     {
                         if ((rb_a.Checked == false) && (rb_b.Checked == false) && (rb_c.Checked == false) && (rb_e.Checked == false) && (rb_ng.Checked == false))
                         {
-                            show_main_message("未判定等級", S_OK, 30);
+                            show_main_message1("未判定等級", S_OK, 30);
                             show_main_message2("未判定等級", S_OK, 30);
 
                             tb_sn_opal.Clear();
@@ -7518,11 +7563,17 @@ namespace imsLink
                     else
                         lb_main_mesg2.Text = "等待輸入資料";
 
-
                     if ((cnt3++ % 3) == 0)
                     {
                         this.tb_sn_opal.Focus();
                     }
+                }
+
+                if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+                {
+                    show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                    show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                    show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
                 }
                 return;
             }
@@ -7564,6 +7615,12 @@ namespace imsLink
                 }
             }
 
+            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            {
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
+            }
 
             /*
             int ret;
@@ -8364,6 +8421,24 @@ namespace imsLink
                 progressBar_awb.Value = 10;
                 delay(500);
 
+                //設定相機亮度
+
+                byte SendData;
+
+                SendData = 40;
+                DongleAddr_h = 0x3A;
+                DongleAddr_l = 0x03;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+                delay(100);
+
+                SendData = 25;
+                DongleAddr_h = 0x3A;
+                DongleAddr_l = 0x04;
+                Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+                delay(100);
+
                 //if (flag_awb_mode == false)
                 {
                     lb_rgb_r.Text = "";
@@ -8548,6 +8623,7 @@ namespace imsLink
                 timer_webcam.Enabled = true;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
+                tb_awb_mesg.Text = "寫資料進相機";
                 //do not write data to camera
                 //寫資料進相機裡
                 ret = get_r_data();
@@ -8597,7 +8673,9 @@ namespace imsLink
                 Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
                 serialPort1.Write(user_flash_data, 0, 16);
 
-                richTextBox1.Text += "寫入資料  完成\n";
+                delay(50);
+
+                bt_save_data_Click(sender, e);  //write saturation brightness data
 
                 // Stop timing
                 stopwatch.Stop();
@@ -10159,6 +10237,7 @@ namespace imsLink
 
         private void bt_test_Click(object sender, EventArgs e)
         {
+            /*
             richTextBox1.Text += "none\n";
             //write_awb_data_to_camera(data_R, data_B);
 
@@ -10181,6 +10260,28 @@ namespace imsLink
                     comboBox_webcam.Items.Clear();
                 }
             }
+            */
+
+            //設定相機亮度
+            richTextBox1.Text += "設定相機亮度\n";
+
+            byte SendData;
+
+            SendData = 40;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x03;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(100);
+
+            SendData = 25;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x04;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            delay(100);
+
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -10198,6 +10299,7 @@ namespace imsLink
                 return;
             }
             Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
+            show_main_message1("清除相機資料完成", S_OK, 30);
         }
 
         bool flag_doing_check_webcam = false;
@@ -11235,7 +11337,7 @@ namespace imsLink
             else
             {
                 richTextBox1.Text += "無資料, 離開\n";
-                show_main_message("無資料", S_OK, 20);
+                show_main_message1("無資料", S_OK, 20);
                 return;
             }
 
@@ -11244,68 +11346,39 @@ namespace imsLink
 
             if (flag_operation_mode == MODE_RELEASE_STAGE1)
             {
-                if (flag_release_mode == true)
-                {
-                    filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01.csv";
-                }
-                else
-                {
-                    filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01.csv";
-                }
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
-                if (flag_release_mode == true)
-                {
-                    filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
-                }
-                else
-                {
-                    filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
-                }
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE3)
             {
-                if (flag_release_mode == true)
-                {
-                    filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
-                }
-                else
-                {
-                    filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
-                }
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE4)
             {
-                if (flag_release_mode == true)
-                {
-                    filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
-                }
-                else
-                {
-                    filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
-                }
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE5)
             {
-                if (flag_release_mode == true)
-                {
-                    filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
-                }
-                else
-                {
-                    filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
-                }
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
             }
             else
             {
                 filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
+            }
+
+            if (check_network_disk() == S_FALSE)
+            {
+                richTextBox1.Text += "網路磁碟機不存在\n";
+                return;
             }
 
             string content = "";
@@ -11344,7 +11417,7 @@ namespace imsLink
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
-                    show_main_message("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
                 }
@@ -11419,7 +11492,7 @@ namespace imsLink
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
-                    show_main_message("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
                 }
@@ -11456,7 +11529,7 @@ namespace imsLink
 
             richTextBox1.Text += "存檔檔名: " + filename1 + "\n";
             richTextBox1.Text += "存檔檔名: " + filename2 + "\n";
-            show_main_message("已存檔CSV", S_OK, 20);
+            show_main_message1("已存檔CSV", S_OK, 20);
             show_main_message3("已存檔CSV", S_OK, 20);
             camera_serials.Clear();
         }
@@ -11469,7 +11542,7 @@ namespace imsLink
             else
             {
                 richTextBox1.Text += "無資料, 離開\n";
-                show_main_message("無資料", S_OK, 20);
+                show_main_message1("無資料", S_OK, 20);
                 return;
             }
 
@@ -11494,7 +11567,7 @@ namespace imsLink
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
-                    show_main_message("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
                 }
@@ -11517,7 +11590,7 @@ namespace imsLink
             sw.WriteLine(content);
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
-            show_main_message("已存檔CSV", S_OK, 20);
+            show_main_message1("已存檔CSV", S_OK, 20);
             show_main_message3("已存檔CSV", S_OK, 20);
             camera_serials.Clear();
         }
@@ -11529,7 +11602,7 @@ namespace imsLink
             else
             {
                 richTextBox1.Text += "無資料, 離開\n";
-                show_main_message("無資料", S_OK, 20);
+                show_main_message1("無資料", S_OK, 20);
                 return;
             }
 
@@ -11554,7 +11627,7 @@ namespace imsLink
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
-                    show_main_message("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
                 }
@@ -11577,7 +11650,7 @@ namespace imsLink
             sw.WriteLine(content);
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
-            show_main_message("已存檔CSV", S_OK, 20);
+            show_main_message1("已存檔CSV", S_OK, 20);
             show_main_message3("已存檔CSV", S_OK, 20);
             camera_serials.Clear();
         }
@@ -11616,7 +11689,7 @@ namespace imsLink
             if (ret == S_OK)
             {
                 richTextBox1.Text += "已連上IMS EGD System\n";
-                show_main_message("COM已連線", S_OK, 100);
+                show_main_message1("COM已連線", S_OK, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.comport;
                 toolTip1.SetToolTip(pictureBox_comport, "COM已連線");
 
@@ -11635,7 +11708,7 @@ namespace imsLink
             {
                 richTextBox1.Text += "COM未連線\n";
                 this.BackColor = Color.Pink;
-                show_main_message("COM未連線", S_FALSE, 100);
+                show_main_message1("COM未連線", S_FALSE, 100);
                 pictureBox_comport.Image = imsLink.Properties.Resources.x;
                 toolTip1.SetToolTip(pictureBox_comport, "COM未連線");
                 
@@ -11647,7 +11720,7 @@ namespace imsLink
             }
         }
 
-        void show_main_message(string mesg, int number, int timeout)
+        void show_main_message1(string mesg, int number, int timeout)
         {
             lb_main_mesg.Text = mesg;
             playSound(number);
@@ -12220,6 +12293,15 @@ namespace imsLink
 
         private void bt_save_data_Click(object sender, EventArgs e)
         {
+            if (g_conn_status != CAMERA_OK)
+            {
+                show_main_message1("無相機，不儲存", S_OK, 50);
+                richTextBox1.Text += "無相機，不儲存\n";
+                return;
+            }
+
+            show_main_message1("相機寫入資料中....", S_OK, 50);
+
             int i;
             int page;
             byte data;
@@ -12290,9 +12372,11 @@ namespace imsLink
             Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
             serialPort1.Write(user_flash_data, 0, 16);
 
+            delay(3000);
+
             richTextBox1.Text += "寫入資料  完成\n";
 
-            show_main_message("相機寫入資料完成", S_OK, 30);
+            show_main_message1("相機寫入資料完成", S_OK, 30);
         }
 
         private void bt_min_Click(object sender, EventArgs e)
@@ -12725,6 +12809,8 @@ namespace imsLink
             tb_sn2.Text = finalString2;
 
             flag_ok_to_write_data = true;
+
+            show_main_message1("製作相機資料完成", S_OK, 30);
         }
 
         private void button46_Click(object sender, EventArgs e)
@@ -12889,6 +12975,15 @@ namespace imsLink
             {
                 this.tb_wait_product_data.Focus();
                 richTextBox1.Text += "五";
+            }
+
+            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            {
+                tb_wait_product_data.Clear();
+
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
             }
 
             int len;
@@ -13254,11 +13349,46 @@ namespace imsLink
             timer_webcam.Enabled = true;
         }
 
+        int check_network_disk()
+        {
+            //richTextBox1.Text += "check_network_disk()\n";
+            if (flag_operation_mode != MODE_RELEASE_STAGE0)
+            {
+                string Path1 = "M:\\";
+                string Path2 = "N:\\";
 
+                if ((flag_operation_mode != MODE_RELEASE_STAGE5) && (Directory.Exists(Path1) == false))     //確認資料夾是否存在
+                {
+                    show_main_message1("無法連上 " + Path1, S_FALSE, 30);
+                    show_main_message2("無法連上 " + Path1, S_FALSE, 30);
+                    show_main_message3("無法連上 " + Path1, S_FALSE, 30);
+                    flag_network_disk_status = false;
+                }
+                else if (Directory.Exists(Path2) == false)     //確認資料夾是否存在
+                {
+                    show_main_message1("無法連上 " + Path2, S_FALSE, 30);
+                    show_main_message2("無法連上 " + Path2, S_FALSE, 30);
+                    show_main_message3("無法連上 " + Path2, S_FALSE, 30);
+                    flag_network_disk_status = false;
+                }
+                else
+                {
+                    /*
+                    show_main_message1("已連上 " + Path, S_OK, 10);
+                    show_main_message2("已連上 " + Path, S_OK, 10);
+                    show_main_message3("已連上 " + Path, S_OK, 10);
+                    */
+                    flag_network_disk_status = true;
+                }
+            }
+            else
+                flag_network_disk_status = true;
 
-
-
-
+            if (flag_network_disk_status == true)
+                return S_OK;
+            else
+                return S_FALSE;
+        }
     }
 }
 

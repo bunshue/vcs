@@ -464,7 +464,7 @@ namespace vcs_MyClock
             lb_yy.Text = dt.Year.ToString();
 
             string[] Month_name = new string[] { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"};
-            string month = Month_name[Convert.ToInt32(dt.Month.ToString("d"))].ToString();
+            string month = Month_name[Convert.ToInt32(dt.Month.ToString("d")) - 1].ToString();
 
             //lb_mm1.Text = dt.Month.ToString();
             lb_mm1.Text = month;

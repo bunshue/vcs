@@ -180,12 +180,13 @@ namespace vcs_MyPaint
             //逐點製作圖檔
             int xx;
             int yy;
-            bitmap1 = new Bitmap(100, 100);
-            for (yy = 0; yy < 100; yy++)
+            bitmap1 = new Bitmap(300, 300);
+            for (yy = 0; yy < 300; yy++)
             {
-                for (xx = 0; xx < 100; xx++)
+                for (xx = 0; xx < 300; xx++)
                 {
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 64, 64));
                 }
             }
             pictureBox2.Image = bitmap1;
