@@ -189,6 +189,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.numericUpDown_brightness = new System.Windows.Forms.NumericUpDown();
             this.lb_class = new System.Windows.Forms.Label();
             this.groupBox_class = new System.Windows.Forms.GroupBox();
             this.rb_ng = new System.Windows.Forms.RadioButton();
@@ -453,7 +454,7 @@
             this.button33 = new System.Windows.Forms.Button();
             this.bt_min = new System.Windows.Forms.Button();
             this.product_timer = new System.Windows.Forms.Timer(this.components);
-            this.numericUpDown_brightness = new System.Windows.Forms.NumericUpDown();
+            this.button49 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -473,6 +474,7 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).BeginInit();
             this.groupBox_class.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).BeginInit();
@@ -506,7 +508,6 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -2377,6 +2378,25 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown_brightness
+            // 
+            this.numericUpDown_brightness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_brightness.Location = new System.Drawing.Point(774, 6);
+            this.numericUpDown_brightness.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_brightness.Name = "numericUpDown_brightness";
+            this.numericUpDown_brightness.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_brightness.TabIndex = 182;
+            this.numericUpDown_brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_brightness.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
             // 
             // lb_class
             // 
@@ -5441,24 +5461,18 @@
             this.product_timer.Interval = 300;
             this.product_timer.Tick += new System.EventHandler(this.product_timer_Tick);
             // 
-            // numericUpDown_brightness
+            // button49
             // 
-            this.numericUpDown_brightness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_brightness.Location = new System.Drawing.Point(774, 6);
-            this.numericUpDown_brightness.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_brightness.Name = "numericUpDown_brightness";
-            this.numericUpDown_brightness.Size = new System.Drawing.Size(64, 32);
-            this.numericUpDown_brightness.TabIndex = 182;
-            this.numericUpDown_brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_brightness.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
+            this.button49.BackColor = System.Drawing.Color.Black;
+            this.button49.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button49.ForeColor = System.Drawing.Color.White;
+            this.button49.Location = new System.Drawing.Point(1095, 6);
+            this.button49.Name = "button49";
+            this.button49.Size = new System.Drawing.Size(60, 60);
+            this.button49.TabIndex = 137;
+            this.button49.Text = "本地存圖";
+            this.button49.UseVisualStyleBackColor = false;
+            this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
             // Form1
             // 
@@ -5466,6 +5480,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1370, 704);
+            this.Controls.Add(this.button49);
             this.Controls.Add(this.bt_min);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.groupBox5);
@@ -5522,6 +5537,7 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).EndInit();
             this.groupBox_class.ResumeLayout(false);
             this.groupBox_class.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).EndInit();
@@ -5564,7 +5580,6 @@
             this.statusStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5996,6 +6011,7 @@
         private System.Windows.Forms.Label lb_product2;
         private System.Windows.Forms.Label lb_product1;
         private System.Windows.Forms.NumericUpDown numericUpDown_brightness;
+        private System.Windows.Forms.Button button49;
     }
 }
 

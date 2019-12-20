@@ -215,6 +215,7 @@ namespace imsLink
         int diff_g = 0;
         int diff_b = 0;
         int timer_awb_cnt = 0;
+        int awb_cnt = 0;
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
         int timer_webcam_mode = FOCUS_ON_PICTURE;
@@ -4871,7 +4872,7 @@ namespace imsLink
                 richTextBox1.Text += "四";
             }
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            if (flag_network_disk_status == false)
             {
                 tb_wait_camera_data.Clear();
 
@@ -5328,69 +5329,72 @@ namespace imsLink
             show_main_message1("存檔中...", S_OK, 10);
             delay(10);
 
-            int i;
-            bool flag_incorrect_data = false;
-
-            if (tb_sn_opal.Text.Length == 0)
+            if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
-                show_main_message1("未輸入相機序號", S_OK, 30);
-                show_main_message2("未輸入相機序號", S_OK, 30);
-                flag_incorrect_data = true;
-            }
-            else if ((tb_sn_opal.Text.Length == 9) || (tb_sn_opal.Text.Length == 10))
-            {
-                //檢查英文字母的正確性
-                if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
-                {
-                    flag_incorrect_data = false;
-                }
-                else
-                {
-                    flag_incorrect_data = true;
-                    richTextBox1.Text += "SN1格式不正確b0\n";
-                    show_main_message1("序號格式不正確", S_OK, 30);
-                }
+                int i;
+                bool flag_incorrect_data = false;
 
-                if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
+                if (tb_sn_opal.Text.Length == 0)
                 {
-                    flag_incorrect_data = false;
-                }
-                else
-                {
+                    show_main_message1("未輸入相機序號", S_OK, 30);
+                    show_main_message2("未輸入相機序號", S_OK, 30);
                     flag_incorrect_data = true;
-                    richTextBox1.Text += "SN1格式不正確b1\n";
-                    show_main_message1("序號格式不正確", S_OK, 30);
                 }
-
-                for (i = 2; i < tb_sn_opal.Text.Length; i++)
+                else if ((tb_sn_opal.Text.Length == 9) || (tb_sn_opal.Text.Length == 10))
                 {
-                    if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
+                    //檢查英文字母的正確性
+                    if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
+                    {
+                        flag_incorrect_data = false;
+                    }
+                    else
                     {
                         flag_incorrect_data = true;
-                        richTextBox1.Text += "SN1格式不正確b\n";
+                        richTextBox1.Text += "SN1格式不正確b0\n";
                         show_main_message1("序號格式不正確", S_OK, 30);
                     }
-                }
 
-                if (flag_incorrect_data == false)
+                    if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
+                    {
+                        flag_incorrect_data = false;
+                    }
+                    else
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b1\n";
+                        show_main_message1("序號格式不正確", S_OK, 30);
+                    }
+
+                    for (i = 2; i < tb_sn_opal.Text.Length; i++)
+                    {
+                        if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "SN1格式不正確b\n";
+                            show_main_message1("序號格式不正確", S_OK, 30);
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
+                    }
+                }
+                else
                 {
-                    richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
+                    flag_incorrect_data = true;
+                    show_main_message1("序號格式不正確", S_OK, 30);
                 }
-            }
-            else
-            {
-                flag_incorrect_data = true;
-                show_main_message1("序號格式不正確", S_OK, 30);
-            }
 
-            if (flag_incorrect_data == true)
-            {
-                richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
-                return;
-            }
-            else
-            {
-                richTextBox1.Text += "資料正確\n";
+                if (flag_incorrect_data == true)
+                {
+                    richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
+                    return;
+                }
+                else
+                {
+                    richTextBox1.Text += "資料正確\n";
+                }
             }
 
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
@@ -5440,7 +5444,7 @@ namespace imsLink
                 }
                 else
                 {
-                    filename1 = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    filename1 = "M:\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                     filename2 = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 }
 
@@ -7499,7 +7503,7 @@ namespace imsLink
         int timer_webcam_cnt = 0;
         private void timer_webcam_Tick(object sender, EventArgs e)
         {
-            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            if (flag_network_disk_status == false)
             {
                 tb_sn_opal.Clear();
                 show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
@@ -7569,7 +7573,7 @@ namespace imsLink
                     }
                 }
 
-                if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+                if (flag_network_disk_status == false)
                 {
                     show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
                     show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
@@ -7615,7 +7619,7 @@ namespace imsLink
                 }
             }
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            if (flag_network_disk_status == false)
             {
                 show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
                 show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
@@ -8672,6 +8676,10 @@ namespace imsLink
 
                 Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
                 serialPort1.Write(user_flash_data, 0, 16);
+
+                //for data analysis
+                awb_cnt++;
+                richTextBox1.Text += "awb_r(" + awb_cnt.ToString() + ")=" + data_R.ToString() + ";awb_b(" + awb_cnt.ToString() + ")=" + data_B.ToString() + ";\n";
 
                 delay(50);
 
@@ -11371,7 +11379,7 @@ namespace imsLink
             }
             else
             {
-                filename1 = "M:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
             }
 
@@ -12977,7 +12985,7 @@ namespace imsLink
                 richTextBox1.Text += "五";
             }
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE0) && (flag_network_disk_status == false))
+            if (flag_network_disk_status == false)
             {
                 tb_wait_product_data.Clear();
 
@@ -13352,42 +13360,108 @@ namespace imsLink
         int check_network_disk()
         {
             //richTextBox1.Text += "check_network_disk()\n";
-            if (flag_operation_mode != MODE_RELEASE_STAGE0)
-            {
-                string Path1 = "M:\\";
-                string Path2 = "N:\\";
 
-                if ((flag_operation_mode != MODE_RELEASE_STAGE5) && (Directory.Exists(Path1) == false))     //確認資料夾是否存在
-                {
-                    show_main_message1("無法連上 " + Path1, S_FALSE, 30);
-                    show_main_message2("無法連上 " + Path1, S_FALSE, 30);
-                    show_main_message3("無法連上 " + Path1, S_FALSE, 30);
-                    flag_network_disk_status = false;
-                }
-                else if (Directory.Exists(Path2) == false)     //確認資料夾是否存在
-                {
-                    show_main_message1("無法連上 " + Path2, S_FALSE, 30);
-                    show_main_message2("無法連上 " + Path2, S_FALSE, 30);
-                    show_main_message3("無法連上 " + Path2, S_FALSE, 30);
-                    flag_network_disk_status = false;
-                }
-                else
-                {
-                    /*
-                    show_main_message1("已連上 " + Path, S_OK, 10);
-                    show_main_message2("已連上 " + Path, S_OK, 10);
-                    show_main_message3("已連上 " + Path, S_OK, 10);
-                    */
-                    flag_network_disk_status = true;
-                }
+            string PathM = "M:\\";
+            string PathN = "N:\\";
+
+            if ((flag_operation_mode != MODE_RELEASE_STAGE5) && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
+            {
+                show_main_message1("無法連上 " + PathM, S_FALSE, 30);
+                show_main_message2("無法連上 " + PathM, S_FALSE, 30);
+                show_main_message3("無法連上 " + PathM, S_FALSE, 30);
+                flag_network_disk_status = false;
+            }
+            else if (Directory.Exists(PathN) == false)     //確認資料夾是否存在
+            {
+                show_main_message1("無法連上 " + PathN, S_FALSE, 30);
+                show_main_message2("無法連上 " + PathN, S_FALSE, 30);
+                show_main_message3("無法連上 " + PathN, S_FALSE, 30);
+                flag_network_disk_status = false;
             }
             else
+            {
+                /*
+                show_main_message1("已連上 " + Path, S_OK, 10);
+                show_main_message2("已連上 " + Path, S_OK, 10);
+                show_main_message3("已連上 " + Path, S_OK, 10);
+                */
                 flag_network_disk_status = true;
+            }
 
             if (flag_network_disk_status == true)
                 return S_OK;
             else
                 return S_FALSE;
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            this.pictureBox1.Focus();
+            show_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                if (cb_show_time.Checked == true)
+                {   //顯示時間
+                    int xPos = 10;
+                    int yPos = 10;
+                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                    g.ReleaseHdc();
+                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                }
+                else
+                {
+                    g.ReleaseHdc();
+                }
+
+                g.Dispose();
+
+                String filename1 = string.Empty;
+
+                filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                //String file1 = file + ".jpg";
+                String filename1a = filename1 + ".bmp";
+                //String file3 = file + ".png";
+
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename1a, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message1("已存檔BMP", S_OK, 30);
+                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    show_main_message1("存檔失敗", S_OK, 30);
+                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message1("無圖可存", S_FALSE, 30);
+                show_main_message2("無圖可存", S_FALSE, 30);
+            }
+
         }
     }
 }
