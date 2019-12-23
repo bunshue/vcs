@@ -35,6 +35,9 @@ namespace imsLink
         private const int MODE_RELEASE_STAGE3 = 0x03;   //release mode stage 3, judge class
         private const int MODE_RELEASE_STAGE4 = 0x04;   //release mode stage 4, write camera serial
         private const int MODE_RELEASE_STAGE5 = 0x05;   //release mode stage 5, packaging product
+        private const int MODE_RELEASE_STAGE6 = 0x06;   //release mode stage 6, packaging product package6
+        private const int MODE_RELEASE_STAGE7 = 0x07;   //release mode stage 7, packaging product package7
+        private const int MODE_RELEASE_STAGE8 = 0x08;   //release mode stage 8, packaging product package8
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
         private const bool SHOW_COMPORT_LOG = false;
@@ -160,6 +163,10 @@ namespace imsLink
         bool flag_display_b_do_awb = false;
         decimal wpt_value_old = 0;
 
+        bool flag_ok_package_data1 = false;
+        bool flag_ok_package_data2 = false;
+        bool flag_ok_package_data3 = false;
+
         Stopwatch stopwatch = new Stopwatch();
 
         int zoom_cnt = 0;
@@ -232,6 +239,9 @@ namespace imsLink
         Graphics g;
         Graphics g2;
         Graphics g3;
+        Graphics g6;
+        Graphics g7;
+        Graphics g8;
 
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -272,8 +282,8 @@ namespace imsLink
             InitializeComponent();
             groupBox_class.MouseLeave += new EventHandler(groupBox_class_MouseLeave);
 
+            richTextBox1.Text += "\nimsLink " + software_version + " 啟動, 時間 : " + bootup_time.ToString() + "\n\n";
             richTextBox1.Text += "Compile time : " + compile_time + "\n";
-            richTextBox1.Text += "Bootup  time : " + bootup_time.ToString() + "\t";
 
             if (flag_operation_mode == MODE_RELEASE_STAGE1)
             {
@@ -303,11 +313,21 @@ namespace imsLink
                 flag_usb_mode = false;  //for webcam
                 flag_check_webcam_signal = false;
             }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+            {
+                richTextBox1.Text += "MODE_RELEASE_STAGE6\n";
+                flag_enaglb_awb_function = false;
+                flag_usb_mode = false;  //for webcam
+                flag_check_webcam_signal = false;
+                timer_stage6.Enabled = true;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = false;
+            }
             else
                 richTextBox1.Text += "MODE_RELEASE_STAGE0\n";
 
             richTextBox1.Text += "存圖片檔到M槽\n";
-            richTextBox1.Text += "存CSV檔到N槽\n";
+            richTextBox1.Text += "存CSV檔到N槽\n\n";
 
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
@@ -320,6 +340,15 @@ namespace imsLink
 
             g3 = panel4.CreateGraphics();
             g3.Clear(BackColor);
+
+            g6 = panel_package1.CreateGraphics();
+            g6.Clear(BackColor);
+
+            g7 = panel_package2.CreateGraphics();
+            g7.Clear(BackColor);
+
+            g8 = panel_package3.CreateGraphics();
+            g8.Clear(BackColor);
 
             Reset_imsLink_Setting();
 
@@ -409,7 +438,7 @@ namespace imsLink
                 {
                     this.tp_USB.Text = "第二站";
                 }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE5)
+                else if ((flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6))
                 {
                     this.tp_USB.Text = "第一站";
                 }
@@ -451,6 +480,9 @@ namespace imsLink
                 this.tp_Camera_Model.Parent = null;
                 this.tp_Serial_Auto.Parent = null;
                 this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Package1.Parent = null; //產品包裝6
+                this.tp_Package2.Parent = null; //產品包裝7
+                this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
@@ -462,6 +494,9 @@ namespace imsLink
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
                 this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Package1.Parent = null; //產品包裝6
+                this.tp_Package2.Parent = null; //產品包裝7
+                this.tp_Package3.Parent = null; //產品包裝8
                 //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
                 timer_rtc.Enabled = true;
@@ -483,6 +518,24 @@ namespace imsLink
                 timer_rtc.Enabled = false;
                 timer_get_rgb.Enabled = false;
                 product_timer.Enabled = true;
+                //Comport_Scan();
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+            {
+                cb_show_grid.Checked = true;
+                this.tp_Info.Parent = null;
+                this.tp_Connection.Parent = null;
+                this.tp_System.Parent = null;
+                this.tp_Camera.Parent = null;   //camera
+                this.tp_Camera_Model.Parent = null;
+                this.tp_Serial_Auto.Parent = null;
+                this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Test.Parent = null;     //Test
+                this.tp_Layer.Parent = null;    //Layer
+                tabControl1.SelectTab(tp_Package1);  //程式啟動時，直接跳到USB那頁。
+                timer_rtc.Enabled = false;
+                timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
                 //Comport_Scan();
             }
             else
@@ -3027,6 +3080,22 @@ namespace imsLink
                 show_main_message3("已連上網路磁碟機 ", S_OK, 10);
             }
 
+            //make sure comport is connected
+            if (flag_enaglb_awb_function == true)
+            {
+                if (flag_comport_connection_ok == false)
+                {
+                    show_main_message1("重新連線COM Port ", S_OK, 30);
+                    show_main_message2("重新連線COM Port ", S_OK, 30);
+                    show_main_message3("重新連線COM Port ", S_OK, 30);
+                    richTextBox1.Text += "no comport, call connect_IMS_comport() again\n";
+                    delay(30);
+                    connect_IMS_comport();
+                }
+            }
+
+            richTextBox1.Text += "\nimsLink " + software_version + " 啟動完成\n\n";
+
             return;
         }
 
@@ -4196,6 +4265,51 @@ namespace imsLink
                 timer_webcam.Enabled = false;
                 timer_get_rgb.Enabled = false;
                 product_timer.Enabled = true;
+            }
+            else if (tabControl1.SelectedTab == tp_Package1)
+            {
+                richTextBox1.Text += "進入主機 六\n";
+                timer_webcam.Enabled = false;
+                timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
+                flag_operation_mode = MODE_RELEASE_STAGE6;
+                timer_stage6.Enabled = true;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = false;
+
+                flag_ok_package_data1 = false;
+                flag_ok_package_data2 = false;
+                flag_ok_package_data3 = false;
+            }
+            else if (tabControl1.SelectedTab == tp_Package2)
+            {
+                richTextBox1.Text += "進入Dongle 七\n";
+                timer_webcam.Enabled = false;
+                timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
+                flag_operation_mode = MODE_RELEASE_STAGE7;
+                timer_stage6.Enabled = false;
+                timer_stage7.Enabled = true;
+                timer_stage8.Enabled = false;
+
+                flag_ok_package_data1 = false;
+                flag_ok_package_data2 = false;
+                flag_ok_package_data3 = false;
+            }
+            else if (tabControl1.SelectedTab == tp_Package3)
+            {
+                richTextBox1.Text += "進入主機包裝 八\n";
+                timer_webcam.Enabled = false;
+                timer_get_rgb.Enabled = false;
+                product_timer.Enabled = false;
+                flag_operation_mode = MODE_RELEASE_STAGE8;
+                timer_stage6.Enabled = false;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = true;
+
+                flag_ok_package_data1 = false;
+                flag_ok_package_data2 = false;
+                flag_ok_package_data3 = false;
             }
             else
             {
@@ -8338,6 +8452,32 @@ namespace imsLink
         bool flag_doing_awb = false;
         private void bt_awb_test_Click(object sender, EventArgs e)
         {
+/*
+            //設定相機預設的RGB值
+
+            byte SendData;
+
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1A;
+            SendData = 0x05;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1B;
+            SendData = 0xB0;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1E;
+            SendData = 0x06;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x52;
+            DongleAddr_l = 0x1F;
+            SendData = 0x70;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+*/
             if (flag_doing_awb == false)
             {
                 tb_awb_mesg.Text = "";
@@ -8679,7 +8819,7 @@ namespace imsLink
 
                 //for data analysis
                 awb_cnt++;
-                richTextBox1.Text += "awb_r(" + awb_cnt.ToString() + ")=" + data_R.ToString() + ";awb_b(" + awb_cnt.ToString() + ")=" + data_B.ToString() + ";\n";
+                richTextBox1.Text += "\nawb_r(" + awb_cnt.ToString() + ")=" + data_R.ToString() + ";awb_b(" + awb_cnt.ToString() + ")=" + data_B.ToString() + ";\n";
 
                 delay(50);
 
@@ -10012,6 +10152,10 @@ namespace imsLink
                         richTextBox1.Text += "E-";
                     else
                         richTextBox1.Text += "E+";
+                    if (data_new > 511)
+                        data_new = 511;
+                    else if (data_new < 0)
+                        data_new = 0;
                     numericUpDown_expo.Value = data_new;
                     byte dd;
 
@@ -10060,6 +10204,10 @@ namespace imsLink
                         richTextBox1.Text += "R-";
                     else
                         richTextBox1.Text += "R+";
+                    if (data_new > 4095)
+                        data_new = 4095;
+                    else if (data_new < 0)
+                        data_new = 0;
                     numericUpDown_R.Value = data_new;
                     byte dd;
 
@@ -10106,6 +10254,10 @@ namespace imsLink
                         richTextBox1.Text += "B-";
                     else
                         richTextBox1.Text += "B+";
+                    if (data_new > 4095)
+                        data_new = 4095;
+                    else if (data_new < 0)
+                        data_new = 0;
                     numericUpDown_B.Value = data_new;
                     byte dd;
 
@@ -11377,6 +11529,21 @@ namespace imsLink
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
             }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+            {
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_06.csv";
+                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_06.csv";
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE7)
+            {
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_07.csv";
+                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_07.csv";
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE8)
+            {
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_08.csv";
+                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_08.csv";
+            }
             else
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
@@ -11409,6 +11576,18 @@ namespace imsLink
                 else if (flag_operation_mode == MODE_RELEASE_STAGE5)
                 {
                     content += "No." + "," + "ERP-SN" + "," + "PI-SN" + "," + "BOX-Lot" + "," + "Date" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+                {
+                    content += "No." + "," + "主機序號" + "," + "小PCBA序號" + "," + "大PCBA序號" + "," + "生產時間" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE7)
+                {
+                    content += "No." + "," + "Dongle包裝" + "," + "Dongle序號" + "," + "生產時間" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE8)
+                {
+                    content += "No." + "," + "成品包裝序號" + "," + "主機序號" + "," + "Dongle包裝" + "," + "生產時間" + "\n";
                 }
                 else
                 {
@@ -11445,6 +11624,18 @@ namespace imsLink
                     content += csv_index4.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE5)
+                {
+                    content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+                {
+                    content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE7)
+                {
+                    content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE8)
                 {
                     content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
                 }
@@ -11485,6 +11676,18 @@ namespace imsLink
                 {
                     content += "No." + "," + "ERP-SN" + "," + "PI-SN" + "," + "BOX-Lot" + "," + "Date" + "\n";
                 }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+                {
+                    content += "No." + "," + "主機序號" + "," + "小PCBA序號" + "," + "大PCBA序號" + "," + "生產時間" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE7)
+                {
+                    content += "No." + "," + "Dongle包裝" + "," + "Dongle序號" + "," + "生產時間" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE8)
+                {
+                    content += "No." + "," + "成品包裝序號" + "," + "主機序號" + "," + "Dongle包裝" + "," + "生產時間" + "\n";
+                }
                 else
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "\n";
@@ -11520,6 +11723,18 @@ namespace imsLink
                     content += csv_index4.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE5)
+                {
+                    content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE6)
+                {
+                    content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE7)
+                {
+                    content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE8)
                 {
                     content += csv_index.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
                 }
@@ -12914,6 +13129,11 @@ namespace imsLink
                     product_timer.Enabled = false;
                 }
             }
+            else if ((flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE7) || (flag_operation_mode == MODE_RELEASE_STAGE8))
+            {
+//TBD
+
+            }
         }
 
         private void button20_MouseLeave(object sender, EventArgs e)
@@ -12928,6 +13148,11 @@ namespace imsLink
                 {
                     product_timer.Enabled = true;
                 }
+            }
+            else if ((flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE7) || (flag_operation_mode == MODE_RELEASE_STAGE8))
+            {
+//TBD
+
             }
         }
 
@@ -13173,6 +13398,78 @@ namespace imsLink
 
         }
 
+        void check_export_data78()
+        {
+            if (flag_operation_mode == MODE_RELEASE_STAGE7)
+            {
+                if ((flag_ok_package_data1 == true) && (flag_ok_package_data2 == true))
+                {
+                    flag_ok_to_write_data = true;
+                    richTextBox1.Text += "資料齊全, 準備存檔\n";
+
+                    camera_serials.Add(new string[] { tb_package21.Text, tb_package22.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+
+                    exportCSV();
+
+                    g7.Clear(BackColor);
+                    g7.DrawString("存檔完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                    playSound(S_OK);
+
+                    lb_package21.Text = "Dongle包裝 : " + tb_package21.Text;
+                    lb_package22.Text = "Dongle序號 : " + tb_package22.Text;
+
+                    tb_package21.Clear();
+                    tb_package22.Clear();
+
+                    flag_ok_package_data1 = false;
+                    flag_ok_package_data2 = false;
+
+                    flag_ok_to_write_data = false;
+                }
+                else
+                {
+                    richTextBox1.Text += "資料還不齊全\n";
+
+                }
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE8)
+            {
+                if ((flag_ok_package_data1 == true) && (flag_ok_package_data2 == true) && (flag_ok_package_data3 == true))
+                {
+                    flag_ok_to_write_data = true;
+                    richTextBox1.Text += "資料齊全, 準備存檔\n";
+
+                    camera_serials.Add(new string[] { tb_package31.Text, tb_package32.Text, tb_package33.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+
+                    exportCSV();
+
+                    g8.Clear(BackColor);
+                    g8.DrawString("存檔完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
+                    playSound(S_OK);
+
+                    lb_package31.Text = "成品包裝序號 : " + tb_package31.Text;
+                    lb_package32.Text = "主機序號 : " + tb_package32.Text;
+                    lb_package33.Text = "Dongle包裝 : " + tb_package33.Text;
+
+
+                    tb_package31.Clear();
+                    tb_package32.Clear();
+                    tb_package33.Clear();
+
+                    flag_ok_package_data1 = false;
+                    flag_ok_package_data2 = false;
+                    flag_ok_package_data3 = false;
+
+                    flag_ok_to_write_data = false;
+                }
+                else
+                {
+                    richTextBox1.Text += "資料還不齊全\n";
+
+                }
+            }
+        }
+
         private void button54_Click(object sender, EventArgs e)
         {
             if (flag_auto_scan_mode == true)
@@ -13364,7 +13661,7 @@ namespace imsLink
             string PathM = "M:\\";
             string PathN = "N:\\";
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE5) && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
+            if ((flag_operation_mode != MODE_RELEASE_STAGE5) && (flag_operation_mode != MODE_RELEASE_STAGE6) && (flag_operation_mode != MODE_RELEASE_STAGE7) && (flag_operation_mode != MODE_RELEASE_STAGE8) && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
             {
                 show_main_message1("無法連上 " + PathM, S_FALSE, 30);
                 show_main_message2("無法連上 " + PathM, S_FALSE, 30);
@@ -13463,6 +13760,330 @@ namespace imsLink
             }
 
         }
+
+        private void timer_stage6_Tick(object sender, EventArgs e)
+        {
+            if (flag_doing_writing_data == true)
+            {
+                richTextBox1.Text += "正在存檔, 忽略\n";
+                return;
+            }
+
+            if ((cnt3++ % 3) == 0)
+            {
+                this.tb_wait_package1_data.Focus();
+                richTextBox1.Text += "六";
+            }
+
+            if (flag_network_disk_status == false)
+            {
+                tb_wait_package1_data.Clear();
+
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
+            }
+
+            int len;
+            len = tb_wait_package1_data.Text.Length;
+
+
+
+        }
+
+        private void timer_stage7_Tick(object sender, EventArgs e)
+        {
+            if (flag_doing_writing_data == true)
+            {
+                richTextBox1.Text += "正在存檔, 忽略\n";
+                return;
+            }
+
+            if ((cnt3++ % 3) == 0)
+            {
+                this.tb_wait_package2_data.Focus();
+                richTextBox1.Text += "七";
+            }
+
+            if (flag_network_disk_status == false)
+            {
+                tb_wait_package2_data.Clear();
+
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
+            }
+
+            int len;
+            len = tb_wait_package2_data.Text.Length;
+
+            if (len > 20)   //太長, 直接放棄
+            {
+                tb_wait_package2_data.Clear();
+                //richTextBox1.Text += "X1";
+                return;
+            }
+            else if (len > 5)    //檢查是否換行
+            {
+                if ((tb_wait_package2_data.Text[len - 2] == 0x0D) || (tb_wait_package2_data.Text[len - 1] == 0x0A))
+                {
+                    tb_wait_package2_data.Text = tb_wait_package2_data.Text.Trim();
+                    //richTextBox1.Text += "OK";
+                }
+                else
+                {
+                    //richTextBox1.Text += "X2";
+                    return;
+                }
+            }
+            else    //太短  留著累計
+            {
+                //richTextBox1.Text += "X3";
+                return;
+            }
+
+            if (tb_wait_package2_data.Text.Length > 0)
+            {
+                if ((flag_ok_package_data1 == false) && (flag_ok_package_data2 == false))
+                {
+                    panel_package2.BackgroundImage = null;
+                    g7.Clear(BackColor);
+                }
+
+                int i;
+                bool flag_incorrect_data = false;
+                if (tb_wait_package2_data.Text.Length == 13)
+                {
+                    for (i = 0; i < tb_wait_package2_data.Text.Length; i++)
+                    {
+                        if (i == 7)
+                        {
+                            if (tb_wait_package2_data.Text[i] != '-')
+                            {
+                                flag_incorrect_data = true;
+                                richTextBox1.Text += "資料3格式不正確a\n";
+                                tb_wait_package2_data.Text = "";
+                                //tb_product3.Clear();
+                                //tb_product3.BackColor = Color.Pink;
+                            }
+                        }
+                        else if (i == 8)
+                        {
+                            //檢查英文字母的正確性
+                            if (((tb_wait_package2_data.Text[i] >= 'A') && (tb_wait_package2_data.Text[i] <= 'Z')) || ((tb_wait_package2_data.Text[i] >= 'a') && (tb_wait_package2_data.Text[i] <= 'z')))
+                            {
+                                flag_incorrect_data = false;
+                            }
+                            else
+                            {
+                                flag_incorrect_data = true;
+                                richTextBox1.Text += "資料3格式不正確a\n";
+                                tb_wait_package2_data.Text = "";
+                                //tb_product3.Clear();
+                                //tb_product3.BackColor = Color.Pink;
+                            }
+                        }
+                        else if ((tb_wait_package2_data.Text[i] < '0') || (tb_wait_package2_data.Text[i] > '9'))
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "資料3格式不正確b\n";
+                            tb_wait_package2_data.Text = "";
+                            //tb_product3.Clear();
+                            //tb_product3.BackColor = Color.Pink;
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        if (flag_ok_package_data1 == false)
+                        {
+                            flag_ok_package_data1 = true;
+                            richTextBox1.Text += "取得資料1 : " + tb_wait_package2_data.Text + "\n";
+                            tb_package21.Text = tb_wait_package2_data.Text;
+                            tb_package21.BackColor = Color.White;
+                            tb_wait_package2_data.Text = "";
+                        }
+                        else
+                        {
+                            flag_ok_package_data2 = true;
+                            richTextBox1.Text += "取得資料2 : " + tb_wait_package2_data.Text + "\n";
+                            tb_package22.Text = tb_wait_package2_data.Text;
+                            tb_package22.BackColor = Color.White;
+                            tb_wait_package2_data.Text = "";
+                            /*
+                            if ((flag_ok_product_data1 == false) && (flag_ok_product_data2 == false) && (flag_ok_product_data3 == false))
+                            {
+                                panel4.BackgroundImage = null;
+                                g3.Clear(BackColor);
+                            }
+                            flag_ok_product_data1 = true;
+                            */
+
+                            delay(30);
+                            check_export_data78();
+                        }
+                    }
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "有資料, 但是長度錯誤, 一律清除\n";
+                    tb_wait_package2_data.Text = "";
+                }
+
+            }
+
+
+
+
+        }
+
+        private void timer_stage8_Tick(object sender, EventArgs e)
+        {
+            if (flag_doing_writing_data == true)
+            {
+                richTextBox1.Text += "正在存檔, 忽略\n";
+                return;
+            }
+
+            if ((cnt3++ % 3) == 0)
+            {
+                this.tb_wait_package3_data.Focus();
+                richTextBox1.Text += "八";
+            }
+
+            if (flag_network_disk_status == false)
+            {
+                tb_wait_package3_data.Clear();
+
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 10);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 10);
+            }
+
+            int len;
+            len = tb_wait_package3_data.Text.Length;
+
+            if (len > 20)   //太長, 直接放棄
+            {
+                tb_wait_package3_data.Clear();
+                //richTextBox1.Text += "X1";
+                return;
+            }
+            else if (len > 5)    //檢查是否換行
+            {
+                if ((tb_wait_package3_data.Text[len - 2] == 0x0D) || (tb_wait_package3_data.Text[len - 1] == 0x0A))
+                {
+                    tb_wait_package3_data.Text = tb_wait_package3_data.Text.Trim();
+                    //richTextBox1.Text += "OK";
+                }
+                else
+                {
+                    //richTextBox1.Text += "X2";
+                    return;
+                }
+            }
+            else    //太短  留著累計
+            {
+                //richTextBox1.Text += "X3";
+                return;
+            }
+
+            if (tb_wait_package3_data.Text.Length > 0)
+            {
+                if ((flag_ok_package_data1 == false) && (flag_ok_package_data2 == false) && (flag_ok_package_data3 == false))
+                {
+                    panel_package3.BackgroundImage = null;
+                    g8.Clear(BackColor);
+                }
+
+                int i;
+                bool flag_incorrect_data = false;
+                if (tb_wait_package3_data.Text.Length == 13)
+                {
+                    for (i = 0; i < tb_wait_package3_data.Text.Length; i++)
+                    {
+                        if (i == 7)
+                        {
+                            if (tb_wait_package3_data.Text[i] != '-')
+                            {
+                                flag_incorrect_data = true;
+                                richTextBox1.Text += "資料3格式不正確a\n";
+                                tb_wait_package3_data.Text = "";
+                                //tb_product3.Clear();
+                                //tb_product3.BackColor = Color.Pink;
+                            }
+                        }
+                        else if (i == 8)
+                        {
+                            //檢查英文字母的正確性
+                            if (((tb_wait_package3_data.Text[i] >= 'A') && (tb_wait_package3_data.Text[i] <= 'Z')) || ((tb_wait_package3_data.Text[i] >= 'a') && (tb_wait_package3_data.Text[i] <= 'z')))
+                            {
+                                flag_incorrect_data = false;
+                            }
+                            else
+                            {
+                                flag_incorrect_data = true;
+                                richTextBox1.Text += "資料3格式不正確a\n";
+                                tb_wait_package3_data.Text = "";
+                                //tb_product3.Clear();
+                                //tb_product3.BackColor = Color.Pink;
+                            }
+                        }
+                        else if ((tb_wait_package3_data.Text[i] < '0') || (tb_wait_package3_data.Text[i] > '9'))
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "資料3格式不正確b\n";
+                            tb_wait_package3_data.Text = "";
+                            //tb_product3.Clear();
+                            //tb_product3.BackColor = Color.Pink;
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        if (flag_ok_package_data1 == false)
+                        {
+                            flag_ok_package_data1 = true;
+                            richTextBox1.Text += "取得資料1 : " + tb_wait_package3_data.Text + "\n";
+                            tb_package31.Text = tb_wait_package3_data.Text;
+                            tb_package31.BackColor = Color.White;
+                            tb_wait_package3_data.Text = "";
+                        }
+                        else if (flag_ok_package_data2 == false)
+                        {
+                            flag_ok_package_data2 = true;
+                            richTextBox1.Text += "取得資料2 : " + tb_wait_package3_data.Text + "\n";
+                            tb_package32.Text = tb_wait_package3_data.Text;
+                            tb_package32.BackColor = Color.White;
+                            tb_wait_package3_data.Text = "";
+                        }
+                        else
+                        {
+                            flag_ok_package_data3 = true;
+                            richTextBox1.Text += "取得資料3 : " + tb_wait_package3_data.Text + "\n";
+                            tb_package33.Text = tb_wait_package3_data.Text;
+                            tb_package33.BackColor = Color.White;
+                            tb_wait_package3_data.Text = "";
+
+                            delay(30);
+                            check_export_data78();
+                        }
+                    }
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "有資料, 但是長度錯誤, 一律清除\n";
+                    tb_wait_package3_data.Text = "";
+                }
+
+            }
+        }
+
+
+
+
     }
 }
 
