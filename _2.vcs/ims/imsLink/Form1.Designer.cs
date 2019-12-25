@@ -210,7 +210,6 @@
             this.tb_package21 = new System.Windows.Forms.TextBox();
             this.tp_Package3 = new System.Windows.Forms.TabPage();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.lb_package33 = new System.Windows.Forms.Label();
             this.lb_package32 = new System.Windows.Forms.Label();
@@ -238,14 +237,9 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.tb_wait_sn_data = new System.Windows.Forms.TextBox();
             this.numericUpDown_brightness = new System.Windows.Forms.NumericUpDown();
             this.lb_class = new System.Windows.Forms.Label();
-            this.groupBox_class = new System.Windows.Forms.GroupBox();
-            this.rb_ng = new System.Windows.Forms.RadioButton();
-            this.rb_e = new System.Windows.Forms.RadioButton();
-            this.rb_c = new System.Windows.Forms.RadioButton();
-            this.rb_b = new System.Windows.Forms.RadioButton();
-            this.rb_a = new System.Windows.Forms.RadioButton();
             this.numericUpDown_sharpness = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_denoise = new System.Windows.Forms.NumericUpDown();
             this.comboBox_sharpness = new System.Windows.Forms.ComboBox();
@@ -470,7 +464,7 @@
             this.button13 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.button34 = new System.Windows.Forms.Button();
             this.button74 = new System.Windows.Forms.Button();
@@ -478,20 +472,18 @@
             this.button70 = new System.Windows.Forms.Button();
             this.button87 = new System.Windows.Forms.Button();
             this.button88 = new System.Windows.Forms.Button();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.scanner_timer = new System.Windows.Forms.Timer(this.components);
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer_stage4 = new System.Windows.Forms.Timer(this.components);
             this.button20 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
             this.button35 = new System.Windows.Forms.Button();
             this.scanner_timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_rtc = new System.Windows.Forms.Timer(this.components);
-            this.timer_get_rgb = new System.Windows.Forms.Timer(this.components);
-            this.timer_webcam = new System.Windows.Forms.Timer(this.components);
+            this.timer_rgb = new System.Windows.Forms.Timer(this.components);
+            this.timer_stage2 = new System.Windows.Forms.Timer(this.components);
             this.bt_goto_awb = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.lb_main_mesg = new System.Windows.Forms.Label();
+            this.lb_main_mesg1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.pictureBox_comport = new System.Windows.Forms.PictureBox();
             this.timer_awb = new System.Windows.Forms.Timer(this.components);
@@ -502,12 +494,17 @@
             this.button72 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.bt_min = new System.Windows.Forms.Button();
-            this.product_timer = new System.Windows.Forms.Timer(this.components);
+            this.timer_stage5 = new System.Windows.Forms.Timer(this.components);
             this.button49 = new System.Windows.Forms.Button();
             this.timer_stage6 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage7 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage8 = new System.Windows.Forms.Timer(this.components);
-            this.label16 = new System.Windows.Forms.Label();
+            this.timer_stage3 = new System.Windows.Forms.Timer(this.components);
+            this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
+            this.lb_main_mesg5 = new System.Windows.Forms.Label();
+            this.lb_main_mesg6 = new System.Windows.Forms.Label();
+            this.lb_main_mesg7 = new System.Windows.Forms.Label();
+            this.lb_main_mesg8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -534,7 +531,6 @@
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).BeginInit();
-            this.groupBox_class.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_saturation)).BeginInit();
@@ -2009,6 +2005,7 @@
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.lb_main_mesg5);
             this.groupBox14.Controls.Add(this.label20);
             this.groupBox14.Controls.Add(this.lb_product3);
             this.groupBox14.Controls.Add(this.lb_product2);
@@ -2101,7 +2098,7 @@
             // tb_wait_product_data
             // 
             this.tb_wait_product_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_product_data.Location = new System.Drawing.Point(486, 255);
+            this.tb_wait_product_data.Location = new System.Drawing.Point(486, 233);
             this.tb_wait_product_data.Multiline = true;
             this.tb_wait_product_data.Name = "tb_wait_product_data";
             this.tb_wait_product_data.Size = new System.Drawing.Size(335, 22);
@@ -2189,6 +2186,7 @@
             // 
             // groupBox15
             // 
+            this.groupBox15.Controls.Add(this.lb_main_mesg6);
             this.groupBox15.Controls.Add(this.label14);
             this.groupBox15.Controls.Add(this.lb_package13);
             this.groupBox15.Controls.Add(this.lb_package12);
@@ -2281,7 +2279,7 @@
             // tb_wait_package1_data
             // 
             this.tb_wait_package1_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_package1_data.Location = new System.Drawing.Point(486, 229);
+            this.tb_wait_package1_data.Location = new System.Drawing.Point(486, 223);
             this.tb_wait_package1_data.Multiline = true;
             this.tb_wait_package1_data.Name = "tb_wait_package1_data";
             this.tb_wait_package1_data.Size = new System.Drawing.Size(335, 22);
@@ -2296,6 +2294,7 @@
             this.button50.TabIndex = 102;
             this.button50.Text = "清除";
             this.button50.UseVisualStyleBackColor = true;
+            this.button50.Click += new System.EventHandler(this.button50_Click);
             // 
             // button51
             // 
@@ -2305,6 +2304,7 @@
             this.button51.TabIndex = 101;
             this.button51.Text = "寫入";
             this.button51.UseVisualStyleBackColor = true;
+            this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
             // label22
             // 
@@ -2335,6 +2335,7 @@
             this.button55.TabIndex = 98;
             this.button55.Text = "到修改模式";
             this.button55.UseVisualStyleBackColor = true;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
             // tb_package12
             // 
@@ -2366,7 +2367,7 @@
             // 
             // groupBox16
             // 
-            this.groupBox16.Controls.Add(this.label16);
+            this.groupBox16.Controls.Add(this.lb_main_mesg7);
             this.groupBox16.Controls.Add(this.label24);
             this.groupBox16.Controls.Add(this.lb_package22);
             this.groupBox16.Controls.Add(this.lb_package21);
@@ -2427,7 +2428,7 @@
             // tb_wait_package2_data
             // 
             this.tb_wait_package2_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_package2_data.Location = new System.Drawing.Point(486, 234);
+            this.tb_wait_package2_data.Location = new System.Drawing.Point(486, 228);
             this.tb_wait_package2_data.Multiline = true;
             this.tb_wait_package2_data.Name = "tb_wait_package2_data";
             this.tb_wait_package2_data.Size = new System.Drawing.Size(335, 22);
@@ -2442,6 +2443,7 @@
             this.button56.TabIndex = 102;
             this.button56.Text = "清除";
             this.button56.UseVisualStyleBackColor = true;
+            this.button56.Click += new System.EventHandler(this.button56_Click);
             // 
             // button57
             // 
@@ -2451,6 +2453,7 @@
             this.button57.TabIndex = 101;
             this.button57.Text = "寫入";
             this.button57.UseVisualStyleBackColor = true;
+            this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
             // label29
             // 
@@ -2481,6 +2484,7 @@
             this.button58.TabIndex = 98;
             this.button58.Text = "到修改模式";
             this.button58.UseVisualStyleBackColor = true;
+            this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
             // tb_package22
             // 
@@ -2512,7 +2516,7 @@
             // 
             // groupBox17
             // 
-            this.groupBox17.Controls.Add(this.label15);
+            this.groupBox17.Controls.Add(this.lb_main_mesg8);
             this.groupBox17.Controls.Add(this.label31);
             this.groupBox17.Controls.Add(this.lb_package33);
             this.groupBox17.Controls.Add(this.lb_package32);
@@ -2534,17 +2538,6 @@
             this.groupBox17.TabIndex = 71;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "主機包裝";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(661, 448);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(160, 24);
-            this.label15.TabIndex = 144;
-            this.label15.Text = "要照順序掃瞄";
             // 
             // label31
             // 
@@ -2631,6 +2624,7 @@
             this.button59.TabIndex = 102;
             this.button59.Text = "清除";
             this.button59.UseVisualStyleBackColor = true;
+            this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
             // button60
             // 
@@ -2640,6 +2634,7 @@
             this.button60.TabIndex = 101;
             this.button60.Text = "寫入";
             this.button60.UseVisualStyleBackColor = true;
+            this.button60.Click += new System.EventHandler(this.button60_Click);
             // 
             // label36
             // 
@@ -2670,6 +2665,7 @@
             this.button61.TabIndex = 98;
             this.button61.Text = "到修改模式";
             this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
             // tb_package32
             // 
@@ -2806,9 +2802,9 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.tb_wait_sn_data);
             this.tp_USB.Controls.Add(this.numericUpDown_brightness);
             this.tp_USB.Controls.Add(this.lb_class);
-            this.tp_USB.Controls.Add(this.groupBox_class);
             this.tp_USB.Controls.Add(this.numericUpDown_sharpness);
             this.tp_USB.Controls.Add(this.numericUpDown_denoise);
             this.tp_USB.Controls.Add(this.comboBox_sharpness);
@@ -2953,6 +2949,16 @@
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // tb_wait_sn_data
+            // 
+            this.tb_wait_sn_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wait_sn_data.Location = new System.Drawing.Point(179, 523);
+            this.tb_wait_sn_data.Multiline = true;
+            this.tb_wait_sn_data.Name = "tb_wait_sn_data";
+            this.tb_wait_sn_data.Size = new System.Drawing.Size(125, 22);
+            this.tb_wait_sn_data.TabIndex = 183;
+            this.tb_wait_sn_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // numericUpDown_brightness
             // 
             this.numericUpDown_brightness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2975,88 +2981,13 @@
             // lb_class
             // 
             this.lb_class.AutoSize = true;
-            this.lb_class.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_class.ForeColor = System.Drawing.Color.Red;
             this.lb_class.Location = new System.Drawing.Point(441, 212);
             this.lb_class.Name = "lb_class";
-            this.lb_class.Size = new System.Drawing.Size(99, 37);
+            this.lb_class.Size = new System.Drawing.Size(286, 111);
             this.lb_class.TabIndex = 181;
             this.lb_class.Text = "class";
-            // 
-            // groupBox_class
-            // 
-            this.groupBox_class.Controls.Add(this.rb_ng);
-            this.groupBox_class.Controls.Add(this.rb_e);
-            this.groupBox_class.Controls.Add(this.rb_c);
-            this.groupBox_class.Controls.Add(this.rb_b);
-            this.groupBox_class.Controls.Add(this.rb_a);
-            this.groupBox_class.Location = new System.Drawing.Point(443, 295);
-            this.groupBox_class.Name = "groupBox_class";
-            this.groupBox_class.Size = new System.Drawing.Size(57, 174);
-            this.groupBox_class.TabIndex = 180;
-            this.groupBox_class.TabStop = false;
-            this.groupBox_class.Text = "Class";
-            this.groupBox_class.MouseHover += new System.EventHandler(this.groupBox_class_MouseHover);
-            // 
-            // rb_ng
-            // 
-            this.rb_ng.AutoSize = true;
-            this.rb_ng.Location = new System.Drawing.Point(8, 142);
-            this.rb_ng.Name = "rb_ng";
-            this.rb_ng.Size = new System.Drawing.Size(48, 20);
-            this.rb_ng.TabIndex = 4;
-            this.rb_ng.Text = "NG";
-            this.rb_ng.UseVisualStyleBackColor = true;
-            this.rb_ng.CheckedChanged += new System.EventHandler(this.rb_ng_CheckedChanged);
-            this.rb_ng.MouseHover += new System.EventHandler(this.rb_ng_MouseHover);
-            // 
-            // rb_e
-            // 
-            this.rb_e.AutoSize = true;
-            this.rb_e.Location = new System.Drawing.Point(8, 112);
-            this.rb_e.Name = "rb_e";
-            this.rb_e.Size = new System.Drawing.Size(35, 20);
-            this.rb_e.TabIndex = 3;
-            this.rb_e.Text = "E";
-            this.rb_e.UseVisualStyleBackColor = true;
-            this.rb_e.CheckedChanged += new System.EventHandler(this.rb_e_CheckedChanged);
-            this.rb_e.MouseHover += new System.EventHandler(this.rb_e_MouseHover);
-            // 
-            // rb_c
-            // 
-            this.rb_c.AutoSize = true;
-            this.rb_c.Location = new System.Drawing.Point(8, 82);
-            this.rb_c.Name = "rb_c";
-            this.rb_c.Size = new System.Drawing.Size(36, 20);
-            this.rb_c.TabIndex = 2;
-            this.rb_c.Text = "C";
-            this.rb_c.UseVisualStyleBackColor = true;
-            this.rb_c.CheckedChanged += new System.EventHandler(this.rb_c_CheckedChanged);
-            this.rb_c.MouseHover += new System.EventHandler(this.rb_c_MouseHover);
-            // 
-            // rb_b
-            // 
-            this.rb_b.AutoSize = true;
-            this.rb_b.Location = new System.Drawing.Point(8, 52);
-            this.rb_b.Name = "rb_b";
-            this.rb_b.Size = new System.Drawing.Size(36, 20);
-            this.rb_b.TabIndex = 1;
-            this.rb_b.Text = "B";
-            this.rb_b.UseVisualStyleBackColor = true;
-            this.rb_b.CheckedChanged += new System.EventHandler(this.rb_b_CheckedChanged);
-            this.rb_b.MouseHover += new System.EventHandler(this.rb_b_MouseHover);
-            // 
-            // rb_a
-            // 
-            this.rb_a.AutoSize = true;
-            this.rb_a.Location = new System.Drawing.Point(8, 22);
-            this.rb_a.Name = "rb_a";
-            this.rb_a.Size = new System.Drawing.Size(37, 20);
-            this.rb_a.TabIndex = 0;
-            this.rb_a.Text = "A";
-            this.rb_a.UseVisualStyleBackColor = true;
-            this.rb_a.CheckedChanged += new System.EventHandler(this.rb_a_CheckedChanged);
-            this.rb_a.MouseHover += new System.EventHandler(this.rb_a_MouseHover);
             // 
             // numericUpDown_sharpness
             // 
@@ -4765,6 +4696,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(308, 56);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // tp_Test
@@ -5769,11 +5701,11 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
-            // timer1
+            // timer_clock
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer_clock.Enabled = true;
+            this.timer_clock.Interval = 1000;
+            this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
             // 
             // button34
             // 
@@ -5835,20 +5767,10 @@
             this.button88.UseVisualStyleBackColor = true;
             this.button88.Click += new System.EventHandler(this.button88_Click);
             // 
-            // timer2
+            // timer_stage4
             // 
-            this.timer2.Interval = 2000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // scanner_timer
-            // 
-            this.scanner_timer.Interval = 300;
-            this.scanner_timer.Tick += new System.EventHandler(this.scanner_timer_Tick);
-            // 
-            // timer3
-            // 
-            this.timer3.Enabled = true;
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            this.timer_stage4.Interval = 300;
+            this.timer_stage4.Tick += new System.EventHandler(this.timer_stage4_Tick);
             // 
             // button20
             // 
@@ -5898,15 +5820,14 @@
             this.timer_rtc.Interval = 500;
             this.timer_rtc.Tick += new System.EventHandler(this.timer_rtc_Tick);
             // 
-            // timer_get_rgb
+            // timer_rgb
             // 
-            this.timer_get_rgb.Tick += new System.EventHandler(this.timer_get_rgb_Tick);
+            this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
             // 
-            // timer_webcam
+            // timer_stage2
             // 
-            this.timer_webcam.Enabled = true;
-            this.timer_webcam.Interval = 300;
-            this.timer_webcam.Tick += new System.EventHandler(this.timer_webcam_Tick);
+            this.timer_stage2.Interval = 300;
+            this.timer_stage2.Tick += new System.EventHandler(this.timer_stage2_Tick);
             // 
             // bt_goto_awb
             // 
@@ -5925,16 +5846,16 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
-            // lb_main_mesg
+            // lb_main_mesg1
             // 
-            this.lb_main_mesg.AutoSize = true;
-            this.lb_main_mesg.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg.Location = new System.Drawing.Point(403, 18);
-            this.lb_main_mesg.Name = "lb_main_mesg";
-            this.lb_main_mesg.Size = new System.Drawing.Size(78, 24);
-            this.lb_main_mesg.TabIndex = 133;
-            this.lb_main_mesg.Text = "mesg1";
+            this.lb_main_mesg1.AutoSize = true;
+            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg1.Location = new System.Drawing.Point(403, 18);
+            this.lb_main_mesg1.Name = "lb_main_mesg1";
+            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg1.TabIndex = 133;
+            this.lb_main_mesg1.Text = "mesg1";
             // 
             // groupBox5
             // 
@@ -6030,10 +5951,10 @@
             this.bt_min.UseVisualStyleBackColor = true;
             this.bt_min.Click += new System.EventHandler(this.bt_min_Click);
             // 
-            // product_timer
+            // timer_stage5
             // 
-            this.product_timer.Interval = 300;
-            this.product_timer.Tick += new System.EventHandler(this.product_timer_Tick);
+            this.timer_stage5.Interval = 300;
+            this.timer_stage5.Tick += new System.EventHandler(this.timer_stage5_Tick);
             // 
             // button49
             // 
@@ -6063,16 +5984,59 @@
             this.timer_stage8.Interval = 300;
             this.timer_stage8.Tick += new System.EventHandler(this.timer_stage8_Tick);
             // 
-            // label16
+            // timer_stage3
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label16.ForeColor = System.Drawing.Color.Red;
-            this.label16.Location = new System.Drawing.Point(661, 448);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(160, 24);
-            this.label16.TabIndex = 145;
-            this.label16.Text = "要照順序掃瞄";
+            this.timer_stage3.Interval = 300;
+            this.timer_stage3.Tick += new System.EventHandler(this.timer_stage3_Tick);
+            // 
+            // timer_stage1
+            // 
+            this.timer_stage1.Interval = 300;
+            this.timer_stage1.Tick += new System.EventHandler(this.timer_stage1_Tick);
+            // 
+            // lb_main_mesg5
+            // 
+            this.lb_main_mesg5.AutoSize = true;
+            this.lb_main_mesg5.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg5.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg5.Location = new System.Drawing.Point(585, 263);
+            this.lb_main_mesg5.Name = "lb_main_mesg5";
+            this.lb_main_mesg5.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg5.TabIndex = 137;
+            this.lb_main_mesg5.Text = "mesg5";
+            // 
+            // lb_main_mesg6
+            // 
+            this.lb_main_mesg6.AutoSize = true;
+            this.lb_main_mesg6.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg6.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg6.Location = new System.Drawing.Point(581, 252);
+            this.lb_main_mesg6.Name = "lb_main_mesg6";
+            this.lb_main_mesg6.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg6.TabIndex = 138;
+            this.lb_main_mesg6.Text = "mesg6";
+            // 
+            // lb_main_mesg7
+            // 
+            this.lb_main_mesg7.AutoSize = true;
+            this.lb_main_mesg7.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg7.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg7.Location = new System.Drawing.Point(529, 258);
+            this.lb_main_mesg7.Name = "lb_main_mesg7";
+            this.lb_main_mesg7.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg7.TabIndex = 139;
+            this.lb_main_mesg7.Text = "mesg7";
+            // 
+            // lb_main_mesg8
+            // 
+            this.lb_main_mesg8.AutoSize = true;
+            this.lb_main_mesg8.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg8.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg8.Location = new System.Drawing.Point(543, 269);
+            this.lb_main_mesg8.Name = "lb_main_mesg8";
+            this.lb_main_mesg8.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg8.TabIndex = 140;
+            this.lb_main_mesg8.Text = "mesg8";
             // 
             // Form1
             // 
@@ -6084,7 +6048,7 @@
             this.Controls.Add(this.bt_min);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.lb_main_mesg);
+            this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.bt_goto_awb);
             this.Controls.Add(this.button35);
             this.Controls.Add(this.button13);
@@ -6147,8 +6111,6 @@
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).EndInit();
-            this.groupBox_class.ResumeLayout(false);
-            this.groupBox_class.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_saturation)).EndInit();
@@ -6209,7 +6171,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_clock;
         private System.DirectoryServices.DirectoryEntry directoryEntry1;
         private System.Windows.Forms.TabPage tp_Connection;
         private System.Windows.Forms.Button button33;
@@ -6229,7 +6191,6 @@
         private System.Windows.Forms.Button button117;
         private System.Windows.Forms.Button button120;
         private System.Windows.Forms.Button button119;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.TextBox tb_exposure;
         private System.Windows.Forms.Button button121;
         private System.Windows.Forms.TrackBar trackBar6;
@@ -6305,10 +6266,9 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox tb_info_a2;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Timer scanner_timer;
+        private System.Windows.Forms.Timer timer_stage4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lb_a;
-        private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Panel panel_camera_status1;
         private System.Windows.Forms.TabPage tp_USB;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -6390,7 +6350,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Label lb_rgb_r;
-        private System.Windows.Forms.Timer timer_get_rgb;
+        private System.Windows.Forms.Timer timer_rgb;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox tb_info_aa1;
@@ -6403,7 +6363,7 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label lb_write_camera_serial2;
         private System.Windows.Forms.Panel panel_camera_status3;
-        private System.Windows.Forms.Timer timer_webcam;
+        private System.Windows.Forms.Timer timer_stage2;
         private System.Windows.Forms.Label lb_data;
         private System.Windows.Forms.TextBox tb_4a;
         private System.Windows.Forms.Label lb_addr;
@@ -6485,7 +6445,7 @@
         private System.Windows.Forms.Button bt_erase;
         private System.Windows.Forms.ComboBox comboBox_webcam;
         private System.Windows.Forms.Timer timer_display;
-        private System.Windows.Forms.Label lb_main_mesg;
+        private System.Windows.Forms.Label lb_main_mesg1;
         private System.Windows.Forms.CheckBox cb_show_time;
         private System.Windows.Forms.CheckBox cb_show_grid;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -6594,12 +6554,6 @@
         private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Button button46;
         private System.Windows.Forms.Button button48;
-        private System.Windows.Forms.GroupBox groupBox_class;
-        private System.Windows.Forms.RadioButton rb_ng;
-        private System.Windows.Forms.RadioButton rb_e;
-        private System.Windows.Forms.RadioButton rb_c;
-        private System.Windows.Forms.RadioButton rb_b;
-        private System.Windows.Forms.RadioButton rb_a;
         private System.Windows.Forms.Label lb_class;
         private System.Windows.Forms.TabPage tp_Product;
         private System.Windows.Forms.GroupBox groupBox14;
@@ -6614,7 +6568,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox tb_product3;
         private System.Windows.Forms.Button button54;
-        private System.Windows.Forms.Timer product_timer;
+        private System.Windows.Forms.Timer timer_stage5;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lb_product3;
         private System.Windows.Forms.Label lb_product2;
@@ -6672,8 +6626,13 @@
         private System.Windows.Forms.Button button61;
         private System.Windows.Forms.TextBox tb_package32;
         private System.Windows.Forms.TextBox tb_package31;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Timer timer_stage3;
+        private System.Windows.Forms.TextBox tb_wait_sn_data;
+        private System.Windows.Forms.Timer timer_stage1;
+        private System.Windows.Forms.Label lb_main_mesg5;
+        private System.Windows.Forms.Label lb_main_mesg6;
+        private System.Windows.Forms.Label lb_main_mesg7;
+        private System.Windows.Forms.Label lb_main_mesg8;
     }
 }
 
