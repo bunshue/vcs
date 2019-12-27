@@ -229,6 +229,23 @@
             this.button61 = new System.Windows.Forms.Button();
             this.tb_package32 = new System.Windows.Forms.TextBox();
             this.tb_package31 = new System.Windows.Forms.TextBox();
+            this.tp_sale = new System.Windows.Forms.TabPage();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.lb_main_mesg9 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lb_sale3 = new System.Windows.Forms.Label();
+            this.lb_sale2 = new System.Windows.Forms.Label();
+            this.lb_sale1 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tb_sale3 = new System.Windows.Forms.TextBox();
+            this.panel_sale = new System.Windows.Forms.Panel();
+            this.button62 = new System.Windows.Forms.Button();
+            this.button63 = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.button64 = new System.Windows.Forms.Button();
+            this.tb_sale2 = new System.Windows.Forms.TextBox();
+            this.tb_sale1 = new System.Windows.Forms.TextBox();
             this.tp_Camera_Model = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -505,6 +522,7 @@
             this.timer_stage8 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage3 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
+            this.timer_stage9 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -527,6 +545,8 @@
             this.groupBox16.SuspendLayout();
             this.tp_Package3.SuspendLayout();
             this.groupBox17.SuspendLayout();
+            this.tp_sale.SuspendLayout();
+            this.groupBox18.SuspendLayout();
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
@@ -679,6 +699,7 @@
             this.tabControl1.Controls.Add(this.tp_Package1);
             this.tabControl1.Controls.Add(this.tp_Package2);
             this.tabControl1.Controls.Add(this.tp_Package3);
+            this.tabControl1.Controls.Add(this.tp_sale);
             this.tabControl1.Controls.Add(this.tp_Camera_Model);
             this.tabControl1.Controls.Add(this.tp_USB);
             this.tabControl1.Controls.Add(this.tp_Test);
@@ -2728,6 +2749,191 @@
             this.tb_package31.Size = new System.Drawing.Size(518, 32);
             this.tb_package31.TabIndex = 52;
             this.tb_package31.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tp_sale
+            // 
+            this.tp_sale.Controls.Add(this.groupBox18);
+            this.tp_sale.Location = new System.Drawing.Point(4, 26);
+            this.tp_sale.Name = "tp_sale";
+            this.tp_sale.Size = new System.Drawing.Size(940, 586);
+            this.tp_sale.TabIndex = 30;
+            this.tp_sale.Text = "出貨記錄";
+            this.tp_sale.UseVisualStyleBackColor = true;
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.lb_main_mesg9);
+            this.groupBox18.Controls.Add(this.label16);
+            this.groupBox18.Controls.Add(this.lb_sale3);
+            this.groupBox18.Controls.Add(this.lb_sale2);
+            this.groupBox18.Controls.Add(this.lb_sale1);
+            this.groupBox18.Controls.Add(this.label27);
+            this.groupBox18.Controls.Add(this.tb_sale3);
+            this.groupBox18.Controls.Add(this.panel_sale);
+            this.groupBox18.Controls.Add(this.button62);
+            this.groupBox18.Controls.Add(this.button63);
+            this.groupBox18.Controls.Add(this.label28);
+            this.groupBox18.Controls.Add(this.label32);
+            this.groupBox18.Controls.Add(this.button64);
+            this.groupBox18.Controls.Add(this.tb_sale2);
+            this.groupBox18.Controls.Add(this.tb_sale1);
+            this.groupBox18.Location = new System.Drawing.Point(46, 20);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(848, 546);
+            this.groupBox18.TabIndex = 71;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "出貨記錄";
+            // 
+            // lb_main_mesg9
+            // 
+            this.lb_main_mesg9.AutoSize = true;
+            this.lb_main_mesg9.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg9.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg9.Location = new System.Drawing.Point(555, 239);
+            this.lb_main_mesg9.Name = "lb_main_mesg9";
+            this.lb_main_mesg9.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg9.TabIndex = 137;
+            this.lb_main_mesg9.Text = "mesg9";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(29, 219);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(106, 24);
+            this.label16.TabIndex = 111;
+            this.label16.Text = "寫入資料";
+            // 
+            // lb_sale3
+            // 
+            this.lb_sale3.AutoSize = true;
+            this.lb_sale3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sale3.Location = new System.Drawing.Point(31, 340);
+            this.lb_sale3.Name = "lb_sale3";
+            this.lb_sale3.Size = new System.Drawing.Size(130, 24);
+            this.lb_sale3.TabIndex = 110;
+            this.lb_sale3.Text = "箱號或序號";
+            // 
+            // lb_sale2
+            // 
+            this.lb_sale2.AutoSize = true;
+            this.lb_sale2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sale2.Location = new System.Drawing.Point(31, 303);
+            this.lb_sale2.Name = "lb_sale2";
+            this.lb_sale2.Size = new System.Drawing.Size(118, 24);
+            this.lb_sale2.TabIndex = 109;
+            this.lb_sale2.Text = "單號(7碼)";
+            // 
+            // lb_sale1
+            // 
+            this.lb_sale1.AutoSize = true;
+            this.lb_sale1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sale1.Location = new System.Drawing.Point(31, 263);
+            this.lb_sale1.Name = "lb_sale1";
+            this.lb_sale1.Size = new System.Drawing.Size(118, 24);
+            this.lb_sale1.TabIndex = 108;
+            this.lb_sale1.Text = "單別(4碼)";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(29, 170);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(130, 24);
+            this.label27.TabIndex = 107;
+            this.label27.Text = "箱號或序號";
+            // 
+            // tb_sale3
+            // 
+            this.tb_sale3.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sale3.Location = new System.Drawing.Point(172, 167);
+            this.tb_sale3.Multiline = true;
+            this.tb_sale3.Name = "tb_sale3";
+            this.tb_sale3.Size = new System.Drawing.Size(488, 40);
+            this.tb_sale3.TabIndex = 106;
+            this.tb_sale3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_sale3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_sale3_MouseClick);
+            // 
+            // panel_sale
+            // 
+            this.panel_sale.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel_sale.Location = new System.Drawing.Point(242, 398);
+            this.panel_sale.Name = "panel_sale";
+            this.panel_sale.Size = new System.Drawing.Size(380, 122);
+            this.panel_sale.TabIndex = 104;
+            // 
+            // button62
+            // 
+            this.button62.Location = new System.Drawing.Point(742, 103);
+            this.button62.Name = "button62";
+            this.button62.Size = new System.Drawing.Size(80, 40);
+            this.button62.TabIndex = 102;
+            this.button62.Text = "清除";
+            this.button62.UseVisualStyleBackColor = true;
+            this.button62.Click += new System.EventHandler(this.button62_Click);
+            // 
+            // button63
+            // 
+            this.button63.Location = new System.Drawing.Point(742, 43);
+            this.button63.Name = "button63";
+            this.button63.Size = new System.Drawing.Size(80, 40);
+            this.button63.TabIndex = 101;
+            this.button63.Text = "寫入";
+            this.button63.UseVisualStyleBackColor = true;
+            this.button63.Click += new System.EventHandler(this.button63_Click);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(29, 103);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(118, 24);
+            this.label28.TabIndex = 100;
+            this.label28.Text = "單號(7碼)";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(29, 43);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(118, 24);
+            this.label32.TabIndex = 99;
+            this.label32.Text = "單別(4碼)";
+            // 
+            // button64
+            // 
+            this.button64.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button64.Location = new System.Drawing.Point(742, 170);
+            this.button64.Name = "button64";
+            this.button64.Size = new System.Drawing.Size(80, 40);
+            this.button64.TabIndex = 98;
+            this.button64.Text = "到修改模式";
+            this.button64.UseVisualStyleBackColor = true;
+            this.button64.Click += new System.EventHandler(this.button64_Click);
+            // 
+            // tb_sale2
+            // 
+            this.tb_sale2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sale2.Location = new System.Drawing.Point(172, 103);
+            this.tb_sale2.Name = "tb_sale2";
+            this.tb_sale2.Size = new System.Drawing.Size(488, 32);
+            this.tb_sale2.TabIndex = 56;
+            this.tb_sale2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_sale2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sale2_KeyPress);
+            // 
+            // tb_sale1
+            // 
+            this.tb_sale1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sale1.Location = new System.Drawing.Point(172, 43);
+            this.tb_sale1.Name = "tb_sale1";
+            this.tb_sale1.Size = new System.Drawing.Size(488, 32);
+            this.tb_sale1.TabIndex = 52;
+            this.tb_sale1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_sale1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sale1_KeyPress);
             // 
             // tp_Camera_Model
             // 
@@ -6035,6 +6241,11 @@
             this.timer_stage1.Interval = 300;
             this.timer_stage1.Tick += new System.EventHandler(this.timer_stage1_Tick);
             // 
+            // timer_stage9
+            // 
+            this.timer_stage9.Interval = 300;
+            this.timer_stage9.Tick += new System.EventHandler(this.timer_stage9_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -6102,6 +6313,9 @@
             this.tp_Package3.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
+            this.tp_sale.ResumeLayout(false);
+            this.groupBox18.ResumeLayout(false);
+            this.groupBox18.PerformLayout();
             this.tp_Camera_Model.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -6630,6 +6844,24 @@
         private System.Windows.Forms.RadioButton rb_5X5;
         private System.Windows.Forms.RadioButton rb_4X4;
         private System.Windows.Forms.RadioButton rb_3X3;
+        private System.Windows.Forms.TabPage tp_sale;
+        private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.Label lb_main_mesg9;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lb_sale3;
+        private System.Windows.Forms.Label lb_sale2;
+        private System.Windows.Forms.Label lb_sale1;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox tb_sale3;
+        private System.Windows.Forms.Panel panel_sale;
+        private System.Windows.Forms.Button button62;
+        private System.Windows.Forms.Button button63;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Button button64;
+        private System.Windows.Forms.TextBox tb_sale2;
+        private System.Windows.Forms.TextBox tb_sale1;
+        private System.Windows.Forms.Timer timer_stage9;
     }
 }
 

@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Diagnostics;
-
 using System.IO;
 
 using System.Reflection;    //for BindingFlags
@@ -24,7 +22,6 @@ namespace test1101
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Debug.Print("AAAAAAAAAAAAAAAAAAaa");
             
         }
 
