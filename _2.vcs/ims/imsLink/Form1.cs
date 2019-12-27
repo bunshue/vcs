@@ -377,8 +377,10 @@ namespace imsLink
             numericUpDown_R.Value = trackBar_R.Value;
             numericUpDown_G.Value = trackBar_G.Value;
             numericUpDown_B.Value = trackBar_B.Value;
-            comboBox_temperature.SelectedIndex = 12; //6500K
-            //comboBox_temperature.SelectedIndex = 29; //7700K modified
+            if (software_version == "A03")
+                comboBox_temperature.SelectedIndex = 29; //7700K modified
+            else
+                comboBox_temperature.SelectedIndex = 12; //6500K
             numericUpDown_TG_R.Value = TARGET_AWB_R;
             numericUpDown_TG_G.Value = TARGET_AWB_G;
             numericUpDown_TG_B.Value = TARGET_AWB_B;
@@ -2297,31 +2299,6 @@ namespace imsLink
             bt_save_img.Visible = false;
             bt_clear_serial.Visible = false;
 
-            if (flag_operation_mode <= MODE_RELEASE_STAGE3)
-            {
-                button49.Visible = true;
-            }
-            else
-            {
-                button49.Visible = false;
-            }
-
-            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
-                cb_enable_awb.Visible = true;
-            else
-                cb_enable_awb.Visible = false;
-
-            if (flag_operation_mode == MODE_RELEASE_STAGE3)
-            {
-                tb_wait_sn_data.Visible = true;
-                lb_class.Visible = true;
-            }
-            else
-            {
-                tb_wait_sn_data.Visible = false;
-                lb_class.Visible = false;
-            }
-           
             return;
         }
 
@@ -2865,17 +2842,14 @@ namespace imsLink
                 numericUpDown_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y);
             }
 
-            if (flag_operation_mode != MODE_RELEASE_STAGE3)
-            {
-                lb_class.Visible = false;
-            }
-
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
             {
                 button13.Visible = true;
                 button47.Visible = true;
                 button41.Visible = true;
                 groupBox5.Visible = true;
+                cb_enable_awb.Visible = true;
+                bt_LED.Visible = true;
             }
             else
             {
@@ -2883,6 +2857,33 @@ namespace imsLink
                 button47.Visible = false;
                 button41.Visible = false;
                 groupBox5.Visible = false;
+                cb_enable_awb.Visible = false;
+                bt_LED.Visible = false;
+            }
+
+            if (flag_operation_mode <= MODE_RELEASE_STAGE3)
+            {
+                button49.Visible = true;
+            }
+            else
+            {
+                button49.Visible = false;
+            }
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            {
+                button19.Location = new Point(button19.Location.X - 35, button19.Location.Y);
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                tb_wait_sn_data.Visible = true;
+                lb_class.Visible = true;
+            }
+            else
+            {
+                tb_wait_sn_data.Visible = false;
+                lb_class.Visible = false;
             }
 
             refresh_picturebox2();
@@ -3109,9 +3110,9 @@ namespace imsLink
             }
             if (cb_show_grid.Checked == false)
             {
-                cb_3X3.Visible = false;
-                cb_4X4.Visible = false;
-                cb_5X5.Visible = false;
+                rb_3X3.Visible = false;
+                rb_4X4.Visible = false;
+                rb_5X5.Visible = false;
             }
 
             show_item_location();
@@ -4766,17 +4767,21 @@ namespace imsLink
                 int j;
 
                 j = 0;
-                if (cb_3X3.Checked == true)
+                if (rb_3X3.Checked == true)
                 {
                     j = 3;
                 }
-                else if (cb_4X4.Checked == true)
+                else if (rb_4X4.Checked == true)
                 {
                     j = 4;
                 }
-                else if (cb_5X5.Checked == true)
+                else if (rb_5X5.Checked == true)
                 {
                     j = 5;
+                }
+                else
+                {
+                    j = 4;
                 }
 
                 if (j >= 2)
@@ -4828,8 +4833,11 @@ namespace imsLink
                 if ((y_st + hh) > h)
                     y_st = h - hh;
 
-                if(timer_webcam_mode == FOCUS_ON_PICTURE)
+                if (timer_webcam_mode == FOCUS_ON_PICTURE)
+                {
                     gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+                    gg.DrawRectangle(new Pen(Color.Red, 10), 0, 0, pictureBox1.Width / 2, pictureBox1.Height / 2);
+                }
                 else
                     gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
 
@@ -8985,9 +8993,11 @@ namespace imsLink
                 Send_IMS_Data(0xD0, (byte)page, 0, 0);  //write user data to camera flash
                 serialPort1.Write(user_flash_data, 0, 16);
 
-                delay(50);
-
-                bt_save_data_Click(sender, e);  //write saturation brightness data
+                if (software_version != "A03")
+                {
+                    delay(50);
+                    bt_save_data_Click(sender, e);  //write saturation brightness data
+                }
 
                 // Stop timing
                 stopwatch.Stop();
@@ -11100,42 +11110,15 @@ namespace imsLink
         {
             if (cb_show_grid.Checked == true)
             {
-                cb_3X3.Visible = true;
-                cb_4X4.Visible = true;
-                cb_5X5.Visible = true;
+                rb_3X3.Visible = true;
+                rb_4X4.Visible = true;
+                rb_5X5.Visible = true;
             }
             else
             {
-                cb_3X3.Visible = false;
-                cb_4X4.Visible = false;
-                cb_5X5.Visible = false;
-            }
-        }
-
-        private void cb_3X3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_3X3.Checked == true)
-            {
-                cb_4X4.Checked = false;
-                cb_5X5.Checked = false;
-            }
-        }
-
-        private void cb_4X4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_4X4.Checked == true)
-            {
-                cb_3X3.Checked = false;
-                cb_5X5.Checked = false;
-            }
-        }
-
-        private void cb_5X5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_5X5.Checked == true)
-            {
-                cb_3X3.Checked = false;
-                cb_4X4.Checked = false;
+                rb_3X3.Visible = false;
+                rb_4X4.Visible = false;
+                rb_5X5.Visible = false;
             }
         }
 
