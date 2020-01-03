@@ -258,6 +258,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_awb_break = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
             this.rb_3X3 = new System.Windows.Forms.RadioButton();
@@ -321,7 +322,7 @@
             this.bt_write_wpt = new System.Windows.Forms.Button();
             this.bt_read_wpt = new System.Windows.Forms.Button();
             this.bt_disable_timer_webcam = new System.Windows.Forms.Button();
-            this.bt_break = new System.Windows.Forms.Button();
+            this.bt_tmp = new System.Windows.Forms.Button();
             this.comboBox_temperature = new System.Windows.Forms.ComboBox();
             this.numericUpDown_TG_B = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_TG_G = new System.Windows.Forms.NumericUpDown();
@@ -3052,6 +3053,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_awb_break);
             this.tp_USB.Controls.Add(this.rb_5X5);
             this.tp_USB.Controls.Add(this.rb_4X4);
             this.tp_USB.Controls.Add(this.rb_3X3);
@@ -3115,7 +3117,7 @@
             this.tp_USB.Controls.Add(this.bt_write_wpt);
             this.tp_USB.Controls.Add(this.bt_read_wpt);
             this.tp_USB.Controls.Add(this.bt_disable_timer_webcam);
-            this.tp_USB.Controls.Add(this.bt_break);
+            this.tp_USB.Controls.Add(this.bt_tmp);
             this.tp_USB.Controls.Add(this.comboBox_temperature);
             this.tp_USB.Controls.Add(this.numericUpDown_TG_B);
             this.tp_USB.Controls.Add(this.numericUpDown_TG_G);
@@ -3198,6 +3200,19 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // bt_awb_break
+            // 
+            this.bt_awb_break.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_awb_break.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_awb_break.ForeColor = System.Drawing.Color.Red;
+            this.bt_awb_break.Location = new System.Drawing.Point(616, 448);
+            this.bt_awb_break.Name = "bt_awb_break";
+            this.bt_awb_break.Size = new System.Drawing.Size(64, 32);
+            this.bt_awb_break.TabIndex = 187;
+            this.bt_awb_break.Text = "中斷";
+            this.bt_awb_break.UseVisualStyleBackColor = false;
+            this.bt_awb_break.Click += new System.EventHandler(this.bt_awb_break_Click);
             // 
             // rb_5X5
             // 
@@ -4010,18 +4025,18 @@
             this.bt_disable_timer_webcam.UseVisualStyleBackColor = false;
             this.bt_disable_timer_webcam.Click += new System.EventHandler(this.bt_disable_timer_webcam_Click);
             // 
-            // bt_break
+            // bt_tmp
             // 
-            this.bt_break.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_break.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_break.ForeColor = System.Drawing.Color.Black;
-            this.bt_break.Location = new System.Drawing.Point(822, 371);
-            this.bt_break.Name = "bt_break";
-            this.bt_break.Size = new System.Drawing.Size(64, 32);
-            this.bt_break.TabIndex = 115;
-            this.bt_break.Text = "break";
-            this.bt_break.UseVisualStyleBackColor = false;
-            this.bt_break.Click += new System.EventHandler(this.bt_break_Click);
+            this.bt_tmp.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_tmp.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_tmp.ForeColor = System.Drawing.Color.Black;
+            this.bt_tmp.Location = new System.Drawing.Point(822, 371);
+            this.bt_tmp.Name = "bt_tmp";
+            this.bt_tmp.Size = new System.Drawing.Size(64, 32);
+            this.bt_tmp.TabIndex = 115;
+            this.bt_tmp.Text = "tmp";
+            this.bt_tmp.UseVisualStyleBackColor = false;
+            this.bt_tmp.Click += new System.EventHandler(this.bt_tmp_Click);
             // 
             // comboBox_temperature
             // 
@@ -6638,7 +6653,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_TG_R;
         private System.Windows.Forms.ComboBox comboBox_temperature;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button bt_break;
         private System.Windows.Forms.Button bt_disable_timer_webcam;
         private System.Windows.Forms.Button bt_write_wpt;
         private System.Windows.Forms.Button bt_read_wpt;
@@ -6862,6 +6876,8 @@
         private System.Windows.Forms.TextBox tb_sale2;
         private System.Windows.Forms.TextBox tb_sale1;
         private System.Windows.Forms.Timer timer_stage9;
+        private System.Windows.Forms.Button bt_awb_break;
+        private System.Windows.Forms.Button bt_tmp;
     }
 }
 
