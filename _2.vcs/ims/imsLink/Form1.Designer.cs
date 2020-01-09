@@ -231,6 +231,7 @@
             this.tb_package31 = new System.Windows.Forms.TextBox();
             this.tp_sale = new System.Windows.Forms.TabPage();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lb_main_mesg9 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.lb_sale3 = new System.Windows.Forms.Label();
@@ -524,6 +525,7 @@
             this.timer_stage3 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage9 = new System.Windows.Forms.Timer(this.components);
+            this.rb_NXN = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -2763,6 +2765,7 @@
             // 
             // groupBox18
             // 
+            this.groupBox18.Controls.Add(this.checkBox1);
             this.groupBox18.Controls.Add(this.lb_main_mesg9);
             this.groupBox18.Controls.Add(this.label16);
             this.groupBox18.Controls.Add(this.lb_sale3);
@@ -2785,12 +2788,24 @@
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "出貨記錄";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkBox1.Location = new System.Drawing.Point(660, 175);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(71, 25);
+            this.checkBox1.TabIndex = 138;
+            this.checkBox1.Text = "取消";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // lb_main_mesg9
             // 
             this.lb_main_mesg9.AutoSize = true;
             this.lb_main_mesg9.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg9.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg9.Location = new System.Drawing.Point(555, 239);
+            this.lb_main_mesg9.Location = new System.Drawing.Point(539, 239);
             this.lb_main_mesg9.Name = "lb_main_mesg9";
             this.lb_main_mesg9.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg9.TabIndex = 137;
@@ -2852,7 +2867,7 @@
             this.tb_sale3.Location = new System.Drawing.Point(172, 167);
             this.tb_sale3.Multiline = true;
             this.tb_sale3.Name = "tb_sale3";
-            this.tb_sale3.Size = new System.Drawing.Size(488, 40);
+            this.tb_sale3.Size = new System.Drawing.Size(468, 40);
             this.tb_sale3.TabIndex = 106;
             this.tb_sale3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_sale3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_sale3_MouseClick);
@@ -2867,7 +2882,7 @@
             // 
             // button62
             // 
-            this.button62.Location = new System.Drawing.Point(742, 103);
+            this.button62.Location = new System.Drawing.Point(742, 97);
             this.button62.Name = "button62";
             this.button62.Size = new System.Drawing.Size(80, 40);
             this.button62.TabIndex = 102;
@@ -2877,7 +2892,7 @@
             // 
             // button63
             // 
-            this.button63.Location = new System.Drawing.Point(742, 43);
+            this.button63.Location = new System.Drawing.Point(742, 37);
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(80, 40);
             this.button63.TabIndex = 101;
@@ -2908,7 +2923,7 @@
             // button64
             // 
             this.button64.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button64.Location = new System.Drawing.Point(742, 170);
+            this.button64.Location = new System.Drawing.Point(742, 165);
             this.button64.Name = "button64";
             this.button64.Size = new System.Drawing.Size(80, 40);
             this.button64.TabIndex = 98;
@@ -2921,7 +2936,7 @@
             this.tb_sale2.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_sale2.Location = new System.Drawing.Point(172, 103);
             this.tb_sale2.Name = "tb_sale2";
-            this.tb_sale2.Size = new System.Drawing.Size(488, 32);
+            this.tb_sale2.Size = new System.Drawing.Size(468, 32);
             this.tb_sale2.TabIndex = 56;
             this.tb_sale2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_sale2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sale2_KeyPress);
@@ -2931,7 +2946,7 @@
             this.tb_sale1.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_sale1.Location = new System.Drawing.Point(172, 43);
             this.tb_sale1.Name = "tb_sale1";
-            this.tb_sale1.Size = new System.Drawing.Size(488, 32);
+            this.tb_sale1.Size = new System.Drawing.Size(468, 32);
             this.tb_sale1.TabIndex = 52;
             this.tb_sale1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_sale1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sale1_KeyPress);
@@ -3053,6 +3068,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.rb_NXN);
             this.tp_USB.Controls.Add(this.bt_awb_break);
             this.tp_USB.Controls.Add(this.rb_5X5);
             this.tp_USB.Controls.Add(this.rb_4X4);
@@ -3218,11 +3234,11 @@
             // 
             this.rb_5X5.AutoSize = true;
             this.rb_5X5.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_5X5.Location = new System.Drawing.Point(111, 486);
+            this.rb_5X5.Location = new System.Drawing.Point(105, 486);
             this.rb_5X5.Name = "rb_5X5";
-            this.rb_5X5.Size = new System.Drawing.Size(46, 17);
+            this.rb_5X5.Size = new System.Drawing.Size(58, 17);
             this.rb_5X5.TabIndex = 186;
-            this.rb_5X5.Text = "5X5";
+            this.rb_5X5.Text = "80X80";
             this.rb_5X5.UseVisualStyleBackColor = true;
             // 
             // rb_4X4
@@ -3230,7 +3246,7 @@
             this.rb_4X4.AutoSize = true;
             this.rb_4X4.Checked = true;
             this.rb_4X4.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_4X4.Location = new System.Drawing.Point(65, 486);
+            this.rb_4X4.Location = new System.Drawing.Point(63, 486);
             this.rb_4X4.Name = "rb_4X4";
             this.rb_4X4.Size = new System.Drawing.Size(46, 17);
             this.rb_4X4.TabIndex = 185;
@@ -6261,6 +6277,17 @@
             this.timer_stage9.Interval = 300;
             this.timer_stage9.Tick += new System.EventHandler(this.timer_stage9_Tick);
             // 
+            // rb_NXN
+            // 
+            this.rb_NXN.AutoSize = true;
+            this.rb_NXN.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_NXN.Location = new System.Drawing.Point(160, 486);
+            this.rb_NXN.Name = "rb_NXN";
+            this.rb_NXN.Size = new System.Drawing.Size(70, 17);
+            this.rb_NXN.TabIndex = 188;
+            this.rb_NXN.Text = "160X160";
+            this.rb_NXN.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -6878,6 +6905,8 @@
         private System.Windows.Forms.Timer timer_stage9;
         private System.Windows.Forms.Button bt_awb_break;
         private System.Windows.Forms.Button bt_tmp;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.RadioButton rb_NXN;
     }
 }
 

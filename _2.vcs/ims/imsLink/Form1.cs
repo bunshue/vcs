@@ -20,10 +20,10 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        String compile_time = "1/3/2020 09:29下午";
-        String software_version = "A03";
+        String compile_time = "1/9/2020 10:37上午";
+        String software_version = "A04";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE9;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE1;  //不允許第四, 第七, 第八
 
         bool flag_enaglb_awb_function = true;
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
@@ -174,6 +174,7 @@ namespace imsLink
         bool flag_ok_data1 = false;
         bool flag_ok_data2 = false;
         bool flag_ok_data3 = false;
+        bool flag_cancel_data = false;
         int ccc = 0;
 
 
@@ -784,7 +785,7 @@ namespace imsLink
                         {
                             lb_a.Text = "Product : " + month.ToString("00") + "/"
                                 + mday.ToString("00") + "/"
-                                + year.ToString("0000") + " "
+                                + (year + 100).ToString("0000") + " "
                                 + wday.ToString() + " "
                                 + hour.ToString("00") + ":"
                                 + minutes.ToString("00") + ":"
@@ -3156,6 +3157,7 @@ namespace imsLink
                 rb_3X3.Visible = false;
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
+                rb_NXN.Visible = false;
             }
 
             show_item_location();
@@ -4156,6 +4158,9 @@ namespace imsLink
             lb_d.Text = "";
             lb_e.Text = "";
             lb_f.Text = "";
+            lb_sn1.Text = "相機序號1 讀取中...";
+            lb_sn2.Text = "相機序號2 讀取中...";
+            lb_sn3.Text = "";
             lb_awb0.Text = "";
             lb_awb1.Text = "";
             tb_info_a2.BackColor = Color.White;
@@ -4862,7 +4867,11 @@ namespace imsLink
                 }
                 else if (rb_5X5.Checked == true)
                 {
-                    j = 5;
+                    j = 80;
+                }
+                else if (rb_NXN.Checked == true)
+                {
+                    j = 160;
                 }
                 else
                 {
@@ -6390,7 +6399,7 @@ namespace imsLink
 
             Send_IMS_Data(0xB0, 0x12, 0x34, 0x56);      //RTC write
 
-            rtc_data_send[0] = (byte)(dt.Year - 1900);
+            rtc_data_send[0] = (byte)(dt.Year - 2000);
             rtc_data_send[1] = (byte)dt.Month;
             rtc_data_send[2] = (byte)dt.Day;
             rtc_data_send[3] = (byte)dt.DayOfWeek;
@@ -11239,12 +11248,14 @@ namespace imsLink
                 rb_3X3.Visible = true;
                 rb_4X4.Visible = true;
                 rb_5X5.Visible = true;
+                rb_NXN.Visible = true;
             }
             else
             {
                 rb_3X3.Visible = false;
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
+                rb_NXN.Visible = false;
             }
         }
 
@@ -11944,7 +11955,10 @@ namespace imsLink
                 else if (flag_operation_mode == MODE_RELEASE_STAGE9)
                 {
                     csv_index9++;
-                    content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                    if (flag_cancel_data == true)
+                        content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",取消";
+                    else
+                        content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
                     csv_index9 -= camera_serials.Count;
                 }
                 else
@@ -12059,7 +12073,10 @@ namespace imsLink
                 else if (flag_operation_mode == MODE_RELEASE_STAGE9)
                 {
                     csv_index9++;
-                    content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                    if (flag_cancel_data == true)
+                        content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",取消";
+                    else
+                        content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
                 }
                 else
                 {
@@ -13768,6 +13785,24 @@ namespace imsLink
                     lb_sale1.Text = "單別(4碼) : " + tb_sale1.Text;
                     lb_sale2.Text = "單號(7碼) : " + tb_sale2.Text;
                     lb_sale3.Text = "箱號或序號 : " + tb_sale3.Text;
+                    if (flag_cancel_data == true)
+                    {
+                        label16.Text = "取消資料";
+                        flag_cancel_data = false;
+                        checkBox1.Checked = false;
+                        label16.ForeColor = Color.Red;
+                        lb_sale1.ForeColor = Color.Red;
+                        lb_sale2.ForeColor = Color.Red;
+                        lb_sale3.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        label16.Text = "寫入資料";
+                        label16.ForeColor = Color.Black;
+                        lb_sale1.ForeColor = Color.Black;
+                        lb_sale2.ForeColor = Color.Black;
+                        lb_sale3.ForeColor = Color.Black;
+                    }
 
                     //tb_sale1.Clear();
                     //tb_sale2.Clear();
@@ -15721,7 +15756,7 @@ namespace imsLink
                 return;
             }
 
-            if (len > 30)   //太長, 直接放棄
+            if (len > 45)   //太長, 直接放棄
             {
                 tb_sale3.Clear();
                 //richTextBox1.Text += "X1";
@@ -15989,6 +16024,7 @@ namespace imsLink
                 //richTextBox1.Text += "len = " + tb_sale3.Text.Length.ToString() + "\n";
                 int i;
                 bool flag_incorrect_data = false;
+                /*
                 if (tb_sale3.Text.Length == 11)
                 {
                     for (i = 0; i < tb_sale3.Text.Length; i++)
@@ -15997,6 +16033,28 @@ namespace imsLink
                         {
                             flag_incorrect_data = true;
                             richTextBox1.Text += "序號格式不正確\n";
+                            tb_sale3.Clear();
+                            tb_sale3.BackColor = Color.Pink;
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        richTextBox1.Text += "取得序號 : " + tb_sale3.Text + "\n";
+                        tb_sale3.BackColor = Color.Pink;
+                        flag_ok_data3 = true;
+                        //check_export_data();
+                    }
+                }
+                */
+                if ((tb_sale3.Text.Length == 38) || (tb_sale3.Text.Length == 39))
+                {
+                    for (i = 0; i < tb_sale3.Text.Length; i++)
+                    {
+                        if ((tb_sale3.Text[i] < '0') || (tb_sale3.Text[i] > '9'))
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "資料格式不正確\n";
                             tb_sale3.Clear();
                             tb_sale3.BackColor = Color.Pink;
                         }
@@ -16147,6 +16205,21 @@ namespace imsLink
             refresh_picturebox2();
             delay(100);
             bt_awb_test_Click(sender, e);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                flag_cancel_data = true;
+                checkBox1.ForeColor = Color.Red;
+            }
+            else
+            {
+                flag_cancel_data = false;
+                checkBox1.ForeColor = Color.Black;
+            }
+            tb_sale3.Focus();
         }
 
 
