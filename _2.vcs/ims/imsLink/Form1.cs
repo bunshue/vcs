@@ -23,14 +23,15 @@ namespace imsLink
         String compile_time = "1/9/2020 10:37上午";
         String software_version = "A04";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE1;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
         bool flag_enaglb_awb_function = true;
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
         bool flag_check_webcam_signal = true;
 
         private const int MODE_RELEASE_STAGE0 = 0x00;   //release mode stage 0, normal use
-        private const int MODE_RELEASE_STAGE1 = 0x01;   //release mode stage 1, 4X4 USB camera
+        private const int MODE_RELEASE_STAGE1A = 0x01;   //release mode stage 1, 4X4 USB camera
+        private const int MODE_RELEASE_STAGE1B = 0x11;   //release mode stage 1, 4X4 USB camera
         private const int MODE_RELEASE_STAGE2 = 0x02;   //release mode stage 2, AWB mode, writing camera serial
         private const int MODE_RELEASE_STAGE3 = 0x03;   //release mode stage 3, judge class
         private const int MODE_RELEASE_STAGE4 = 0x04;   //release mode stage 4, write camera serial
@@ -169,7 +170,10 @@ namespace imsLink
         bool flag_display_r_do_awb = false;
         bool flag_display_g_do_awb = false;
         bool flag_display_b_do_awb = false;
+        bool flag_find_brightness = false;
         decimal wpt_value_old = 0;
+
+        bool flag_awb_auto_find_location = false;
 
         bool flag_ok_data1 = false;
         bool flag_ok_data2 = false;
@@ -188,10 +192,15 @@ namespace imsLink
 
         int btn_down_up_cnt = 0;
         int btn_right_left_cnt = 0;
-        int flag_down_up_cnt = 0;
         int flag_right_left_cnt = 0;
+        int flag_down_up_cnt = 0;
+        int flag_right_left_point_cnt = 0;
+        int flag_down_up_point_cnt = 0;
+
         int awb_step = 10;
         int awb_block = 32;     //AWB block size width, height
+        int awb_window_size = 200;     //AWB window size width, height
+        int awb_auto_step = 5;
 
         int TARGET_AWB_R = 255;
         int TARGET_AWB_G = 249;
@@ -248,6 +257,7 @@ namespace imsLink
         //SetToolTip：定義控制項會跳出提示的文字
 
         Graphics g;
+        Graphics ga;
         Graphics g2;
         Graphics g3;
         Graphics g6;
@@ -289,6 +299,89 @@ namespace imsLink
             }
         }
 
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -303,9 +396,9 @@ namespace imsLink
                 flag_usb_mode = false;  //for webcam
                 flag_check_webcam_signal = true;
             }
-            else if (flag_operation_mode == MODE_RELEASE_STAGE1)
+            else if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
             {
-                richTextBox1.Text += "MODE_RELEASE_STAGE1\n";
+                richTextBox1.Text += "MODE_RELEASE_STAGE1 A/B\n";
                 flag_enaglb_awb_function = false;
                 flag_usb_mode = true;  //for webcam
                 flag_check_webcam_signal = false;
@@ -463,9 +556,13 @@ namespace imsLink
                 {
                     this.tp_USB.Text = "色彩校正";
                 }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE1)
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1A)
                 {
-                    this.tp_USB.Text = "第一站";
+                    this.tp_USB.Text = "第一站A";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                {
+                    this.tp_USB.Text = "第一站B";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
@@ -511,7 +608,7 @@ namespace imsLink
                 numericUpDown_brightness.Enabled = false;
             }
 
-            if (flag_operation_mode == MODE_RELEASE_STAGE1)
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
             {
                 cb_show_grid.Checked = true;
                 this.tp_Info.Parent = null;
@@ -524,6 +621,7 @@ namespace imsLink
                 this.tp_Package1.Parent = null; //產品包裝6
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
+                this.tp_sale.Parent = null;     //出貨紀錄
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
@@ -539,6 +637,7 @@ namespace imsLink
                 this.tp_Package1.Parent = null; //產品包裝6
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
+                this.tp_sale.Parent = null;     //出貨紀錄
                 //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
                 tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
                 timer_rtc.Enabled = true;
@@ -559,6 +658,7 @@ namespace imsLink
                 this.tp_Package1.Parent = null; //產品包裝6
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
+                this.tp_sale.Parent = null;     //出貨紀錄
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
@@ -2251,6 +2351,9 @@ namespace imsLink
 
                 button46.Visible = false;
                 button48.Visible = false;
+
+                bt_find_brightness.Visible = false;
+                numericUpDown_find_brightness.Visible = false;
             }
             else
             {
@@ -2850,7 +2953,9 @@ namespace imsLink
                 //bt_save_data.Location
                 //numericUpDown_sharpness.Location
                 //numericUpDown_denoise.Location
-                //numericUpDown_brightness.location
+                //numericUpDown_brightness.Location
+                //bt_find_brightness.Location
+                //numericUpDown_find_brightness.Location
             }
             else
             {
@@ -2883,6 +2988,9 @@ namespace imsLink
                 numericUpDown_denoise.Location = new Point(comboBox_denoise.Location.X, comboBox_denoise.Location.Y + 40);
                 numericUpDown_sharpness.Location = new Point(comboBox_sharpness.Location.X, comboBox_sharpness.Location.Y + 40);
                 numericUpDown_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y);
+
+                bt_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 100);
+                numericUpDown_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 60);
             }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
@@ -2913,7 +3021,7 @@ namespace imsLink
                 button49.Visible = false;
             }
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 button19.Location = new Point(button19.Location.X - 35, button19.Location.Y);
             }
@@ -2944,7 +3052,7 @@ namespace imsLink
                 flag_display_mode = DISPLAY_FHD;
             }
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE9))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE1B))
             {
                 MessageBox.Show("不能使用此模式, mode = " + flag_operation_mode.ToString() + ", 離開", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
@@ -3170,12 +3278,12 @@ namespace imsLink
             bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 button19_Click(sender, e);
             }
 
-            if (flag_operation_mode <= MODE_RELEASE_STAGE3)
+            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
             {
                 //檢查存圖片的資料夾
                 string Path = Application.StartupPath + "\\picture";
@@ -4364,9 +4472,9 @@ namespace imsLink
                     timer_stage2.Enabled = true;
                     timer_stage3.Enabled = false;
                 }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE1)
+                else if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
                 {
-                    richTextBox1.Text += "第一站\n";
+                    richTextBox1.Text += "第一站 A/B\n";
                     timer_stage1.Enabled = true;
                     timer_stage2.Enabled = false;
                     timer_stage3.Enabled = false;
@@ -4735,7 +4843,8 @@ namespace imsLink
                     }
                 }
                 */
-                this.tb_sn2.Focus();
+                if(this.tb_sn2.Focused == false)
+                    this.tb_sn2.Focus();
             }
         }
 
@@ -4751,12 +4860,19 @@ namespace imsLink
         int total_G = 0;
         int total_B = 0;
 
+        int step = 1;
+        int add_amount = 1;
+        int add_tmp = 0;
+        int ccccc = 0;
         int frame_cnt = 0;
         int frame_cnt_old = 0;
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            if (flag_awb_auto_find_location == true)
+                return;
+
             int x_st = 0;
             int y_st = 0;
             int dy = 40;
@@ -4783,13 +4899,13 @@ namespace imsLink
                     int i;
                     int j;
                     Color pt;
-                    x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step;
+                    x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
                     if (x_st < 0)
                         x_st = 0;
                     if ((x_st + ww) > WW)
                         x_st = WW - ww;
 
-                    y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step;
+                    y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
                     if (y_st < 0)
                         y_st = 0;
                     if ((y_st + hh) > HH)
@@ -4851,7 +4967,7 @@ namespace imsLink
                                              (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4,
                                              w - zoom_step * zoom_cnt, h - zoom_step * zoom_cnt * 3 / 4);
 
-            if (cb_show_grid.Checked == true)
+            if ((cb_show_grid.Checked == true) && (flag_enaglb_awb_function == false))
             {   //顯示格線
                 int i;
                 int j;
@@ -4886,9 +5002,44 @@ namespace imsLink
                         gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
                     }
                 }
+            }
+            else if ((cb_show_grid.Checked == true) && (flag_enaglb_awb_function == true))
+            {
+                int www = awb_block;
+                int hhh = awb_block;
+
+                //畫框的功能
+                // Set the DashStyle property.
+                Pen PenStyle2 = new Pen(Color.Black, 1);
+                //PenStyle2.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+                PenStyle2.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+
+                gg.DrawLine(PenStyle2, w / 2 - 140, h / 2, w / 2 + 140, h / 2);
+                gg.DrawLine(PenStyle2, w / 2, h / 2 - 140, w / 2, h / 2 + 140);
+
+                for (www = awb_block; www <= 192; www += awb_block)
+                {
+                    hhh = www;
+                    x_st = w / 2 - www / 2;
+                    if (x_st < 0)
+                        x_st = 0;
+                    if ((x_st + www) > w)
+                        x_st = w - www;
+
+                    y_st = h / 2 - hhh / 2;
+                    if (y_st < 0)
+                        y_st = 0;
+                    if ((y_st + hhh) > h)
+                        y_st = h - hhh;
+
+                    gg.DrawRectangle(PenStyle2, x_st, y_st, www, hhh);
+                }
+
 
 
             }
+
+
 
             if (cb_show_time.Checked == true)
             {   //顯示時間
@@ -4900,6 +5051,181 @@ namespace imsLink
                 x_st = 10;
                 y_st = 10;
                 gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
+            }
+
+            if ((flag_enaglb_awb_function == true) && (flag_find_brightness == true))
+            {
+                ccccc++;
+                //if ((ccccc % 10) == 0)
+                {
+                    int WW = bm.Width;
+                    int HH = bm.Height;
+                    int i;
+                    int j;
+                    Color p;
+
+                    //richTextBox1.Text += "WW = " + WW.ToString() + ", HH = " + HH.ToString() + "\n";
+                    //richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+                    x_st = w / 2 - awb_window_size / 2;
+                    y_st = h / 2 - awb_window_size / 2;
+
+                    if (x_st < 0)
+                        x_st = 0;
+                    if ((x_st + ww) > WW)
+                        x_st = WW - ww;
+
+                    if (y_st < 0)
+                        y_st = 0;
+                    if ((y_st + hh) > HH)
+                        y_st = HH - hh;
+
+                    for (j = 0; j < awb_window_size; j++)
+                    {
+                        for (i = 0; i < awb_window_size; i++)
+                        {
+                            p = bm.GetPixel(x_st + i, y_st + j);
+                            //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+                            //richTextBox1.Text += "x(" + p.R.ToString() + ", " + p.G.ToString() + ", " + p.B.ToString() + ")\n";
+
+                            //bm.SetPixel(xx, yy, Color.FromArgb(rrr.R, rrr.G, rrr.B));
+
+                            RGB pp = new RGB(p.R, p.G, p.B);
+                            YUV yyy = new YUV();
+                            yyy = RGBToYUV(pp);
+                            int th = (int)numericUpDown_find_brightness.Value;
+                            int y_new = 0;
+
+                            if (yyy.Y > th)
+                            {
+                                //bitmap1.SetPixel(xx, yy, Color.FromArgb((int)yyy.Y, (int)yyy.Y, (int)yyy.Y));
+                                //bm.SetPixel(x_st + i, y_st + j, Color.Red);
+                                y_new = (int)((yyy.Y - th) * (256 - 100) / (256 - th) + 100);
+                                //bm.SetPixel(x_st + i, y_st + j, Color.FromArgb(y_new, 0, 0));
+                                bm.SetPixel(x_st + i, y_st + j, Color.Yellow);
+                            }
+                            else
+                            {
+                            }
+                            //bm.SetPixel(x_st + i, y_st + j, Color.Red);
+                        }
+                    }
+
+                    x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
+                    if (x_st < 0)
+                        x_st = 0;
+                    if ((x_st + ww) > WW)
+                        x_st = WW - ww;
+
+                    y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
+                    if (y_st < 0)
+                        y_st = 0;
+                    if ((y_st + hh) > HH)
+                        y_st = HH - hh;
+
+                    /*
+                    richTextBox1.Text += "WW = " + WW.ToString() + ", HH = " + HH.ToString() + "\n";
+                    richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+                    richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+                    */
+
+                    bool flag_break = false;
+                    for (j = y_st; j < (y_st + awb_block); j++)
+                    {
+                        for (i = x_st; i < (x_st + awb_block); i++)
+                        {
+                            p = bm.GetPixel(i, j);
+
+                            if (p.R == 255)
+                            {
+                                if (step == 1)
+                                {
+                                    //flag_right_left_point_cnt += add_amount;
+                                    flag_right_left_point_cnt += awb_auto_step;
+                                    add_tmp++;
+                                    if (add_tmp == (add_amount * 2 - 1))
+                                    {
+                                        add_tmp = 0;
+                                        step = 2;
+                                    }
+                                    //richTextBox1.Text += "E";
+                                }
+                                else if (step == 2)
+                                {
+                                    //flag_down_up_point_cnt += add_amount;
+                                    flag_down_up_point_cnt += awb_auto_step;
+                                    add_tmp++;
+                                    if (add_tmp == (add_amount * 2 - 1))
+                                    {
+                                        add_tmp = 0;
+                                        step = 3;
+                                    }
+                                    //richTextBox1.Text += "S";
+                                }
+                                else if (step == 3)
+                                {
+                                    //flag_right_left_point_cnt -= (add_amount + 1);
+                                    flag_right_left_point_cnt -= awb_auto_step;
+                                    add_tmp++;
+                                    if (add_tmp == (add_amount * 2))
+                                    {
+                                        add_tmp = 0;
+                                        step = 4;
+                                    }
+                                    //richTextBox1.Text += "W";
+                                }
+                                else if (step == 4)
+                                {
+                                    //flag_down_up_point_cnt -= (add_amount + 1);
+                                    flag_down_up_point_cnt -= awb_auto_step;
+                                    add_tmp++;
+                                    if (add_tmp == (add_amount * 2))
+                                    {
+                                        add_tmp = 0;
+                                        step = 1;
+                                        add_amount++;
+                                    }
+                                    //richTextBox1.Text += "N";
+                                }
+                                if ((((Math.Abs(flag_right_left_point_cnt) + awb_block) > 100) || ((Math.Abs(flag_down_up_point_cnt) + awb_block) > 100)))
+                                {
+                                    if (awb_block >= 8)
+                                    {
+                                        richTextBox1.Text += "awb_block old = " + awb_block.ToString() + "\n";
+                                        awb_block -= 4;
+                                        richTextBox1.Text += "awb_block new = " + awb_block.ToString() + "\n";
+                                        richTextBox1.Text += "flag_down_up_point_cnt = " + flag_down_up_point_cnt.ToString() + ", flag_right_left_point_cnt = " + flag_right_left_point_cnt.ToString() + "\n";
+
+                                        flag_right_left_cnt = 0;
+                                        flag_down_up_cnt = 0;
+                                        flag_right_left_point_cnt = 0;
+                                        flag_down_up_point_cnt = 0;
+                                        step = 1;
+                                        add_amount = 1;
+                                        add_tmp = 0;
+                                    }
+                                }
+
+
+                                refresh_picturebox2();
+                                //richTextBox1.Text += "break, flag_down_up_point_cnt = " + flag_down_up_point_cnt.ToString() + ", flag_right_left_point_cnt = " + flag_right_left_point_cnt.ToString() + "\n";
+                                flag_break = true;
+                                break;
+                            }
+                        }
+                        if (flag_break == true)
+                            break;
+                    }
+
+
+
+                    GC.Collect();       //回收資源
+
+
+                }
+
+
+
             }
 
             if ((flag_enaglb_awb_function == true) && (flag_fullscreen == true))
@@ -4915,13 +5241,13 @@ namespace imsLink
 
                 //if (flag_enaglb_awb_function == true)
             //{
-                x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step;
+                x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
                 if (x_st < 0)
                     x_st = 0;
                 if ((x_st + ww) > w)
                     x_st = w - ww;
 
-                y_st = h / 2 - hh / 2 + flag_down_up_cnt * awb_step;
+                y_st = h / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
                 if (y_st < 0)
                     y_st = 0;
                 if ((y_st + hh) > h)
@@ -4935,20 +5261,20 @@ namespace imsLink
                 else
                     gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
 
-                x_st = w / 2 - 100;
-                y_st = h / 2 - 100;
+                x_st = w / 2 - awb_window_size / 2;
+                y_st = h / 2 - awb_window_size / 2;
 
-                Pen PenStyle = new Pen(Color.Silver, 1);
+                Pen PenStyle1 = new Pen(Color.Silver, 1);
                 // Set the DashStyle property.
-                //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-                PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-                //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-                //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-                //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+                PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
 
                 // Draw a rectangle.
-                gg.DrawRectangle(PenStyle, x_st, y_st, 100 * 2, 100 * 2);
+                gg.DrawRectangle(PenStyle1, x_st, y_st, awb_window_size, awb_window_size);
 
                 total_RGB_R = total_R;
                 total_RGB_G = total_G;
@@ -5353,7 +5679,8 @@ namespace imsLink
 
             if ((cnt3++ % 3) == 0)
             {
-                this.tb_wait_camera_data.Focus();
+                if (this.tb_wait_camera_data.Focused == false)
+                    this.tb_wait_camera_data.Focus();
                 richTextBox1.Text += "四";
             }
 
@@ -5623,7 +5950,7 @@ namespace imsLink
                 return;
             }
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE1) && (flag_operation_mode != MODE_RELEASE_STAGE3))
+            if ((flag_operation_mode != MODE_RELEASE_STAGE1A) && (flag_operation_mode != MODE_RELEASE_STAGE1B) && (flag_operation_mode != MODE_RELEASE_STAGE3))
             {
                 if (flag_comport_ok == false)
                 {
@@ -5882,10 +6209,15 @@ namespace imsLink
                 String filename1 = string.Empty;
                 String filename2 = string.Empty;
 
-                if (flag_operation_mode == MODE_RELEASE_STAGE1)
+                if (flag_operation_mode == MODE_RELEASE_STAGE1A)
                 {
                     filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
-                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1a";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                {
+                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1b";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
@@ -5925,12 +6257,12 @@ namespace imsLink
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息b1 : " + ex.Message + "\n";
                     show_main_message1("存檔失敗", S_OK, 30);
                     show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
 
-                if ((flag_operation_mode == MODE_RELEASE_STAGE1) ||(flag_operation_mode == MODE_RELEASE_STAGE2))
+                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                 {
                     camera_serials.Add(new string[] { tb_sn_opal.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                     exportCSV();
@@ -6936,7 +7268,8 @@ namespace imsLink
             if ((cnt3++ % 3) == 0)
             {
                 //richTextBox1.Text += "B1";
-                this.tb_wait_data.Focus();
+                if (this.tb_wait_data.Focused == false)
+                    this.tb_wait_data.Focus();
             }
             if (tb_wait_data.Text.Length > 0)
             {
@@ -7544,8 +7877,8 @@ namespace imsLink
             int WW = 640;
             int HH = 480;
 
-            int flag_down_up_cnt_old = flag_down_up_cnt;
             int flag_right_left_cnt_old = flag_right_left_cnt;
+            int flag_down_up_cnt_old = flag_down_up_cnt;
 
             x_st_old = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step;
             y_st_old = HH / 2 - hh / 2 + flag_down_up_cnt_old * awb_step;
@@ -7881,6 +8214,12 @@ namespace imsLink
                 flag_right_left_cnt = 0;
                 flag_down_up_cnt = 0;
                 awb_block = 32;
+
+                flag_right_left_point_cnt = 0;
+                flag_down_up_point_cnt = 0;
+                step = 1;
+                add_amount = 1;
+                add_tmp = 0;
             }
             else if (e.KeyCode == Keys.Home)
             {
@@ -7956,7 +8295,8 @@ namespace imsLink
                 if ((cnt3++ % 3) == 0)
                 {
                     richTextBox1.Text += "二a";
-                    this.pictureBox1.Focus();
+                    if (this.pictureBox1.Focused == false)
+                        this.pictureBox1.Focus();
                 }
                 if (frame_cnt_old == frame_cnt)
                 {
@@ -7988,7 +8328,8 @@ namespace imsLink
                     }
 
                     richTextBox1.Text += "二b";
-                    this.tb_sn_opal.Focus();
+                    if (this.tb_sn_opal.Focused == false)
+                        this.tb_sn_opal.Focus();
                     this.tb_sn_opal.BackColor = Color.Pink;
                 }
 
@@ -10014,13 +10355,13 @@ namespace imsLink
             int WW = 640 * 1;
             int HH = 480 * 1;
 
-            x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step;
+            x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
             if (x_st < 0)
                 x_st = 0;
             if ((x_st + ww) > WW)
                 x_st = WW - ww;
 
-            y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step;
+            y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
             if (y_st < 0)
                 y_st = 0;
             if ((y_st + hh) > HH)
@@ -10074,7 +10415,14 @@ namespace imsLink
             g = Graphics.FromImage(bmp);
             g.DrawRectangle(new Pen(Color.Silver, 2), 1, 1, ww - 2, hh - 2);
 
-            pictureBox2.Image = bmp;
+            try
+            {
+                pictureBox2.Image = bmp;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
+            }
         }
 
         private void numericUpDown_R_KeyPress(object sender, KeyPressEventArgs e)
@@ -10736,6 +11084,7 @@ namespace imsLink
             }
             */
 
+            /*
             //設定相機亮度
             richTextBox1.Text += "設定相機亮度\n";
 
@@ -10754,7 +11103,12 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
             delay(100);
+            */
 
+            //richTextBox1.Text += "flag_down_up_cnt = " + flag_down_up_cnt.ToString() + ", flag_right_left_cnt = " + flag_right_left_cnt.ToString() + "\n";
+            //richTextBox1.Text += "flag_down_up_point_cnt = " + flag_down_up_point_cnt.ToString() + ", flag_right_left_point_cnt = " + flag_right_left_point_cnt.ToString() + "\n";
+
+            find_awb_location();
 
         }
 
@@ -10781,7 +11135,7 @@ namespace imsLink
         {
             int i;
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE1) && (flag_operation_mode != MODE_RELEASE_STAGE3))
+            if ((flag_operation_mode != MODE_RELEASE_STAGE1A) && (flag_operation_mode != MODE_RELEASE_STAGE1B) && (flag_operation_mode != MODE_RELEASE_STAGE3))
             {
                 if (flag_comport_ok == false)
                 {
@@ -11793,10 +12147,15 @@ namespace imsLink
             String filename1 = string.Empty;
             String filename2 = string.Empty;
 
-            if (flag_operation_mode == MODE_RELEASE_STAGE1)
+            if (flag_operation_mode == MODE_RELEASE_STAGE1A)
             {
-                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01.csv";
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01a.csv";
+                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01a.csv";
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
+            {
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
+                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -11859,7 +12218,11 @@ namespace imsLink
                 richTextBox1.Text += "檔案: " + filename1 + " 不存在\n";
                 sw = new StreamWriter(File.Open(filename1, FileMode.Create), Encoding.UTF8);    //指名編碼格式
 
-                if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
+                {
+                    content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "," + "設備" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "\n";
                 }
@@ -11916,7 +12279,20 @@ namespace imsLink
             for (i = 0; i < camera_serials.Count; i++)
             {
                 //richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString() + " camera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString() + "\n";
-                if (flag_operation_mode == MODE_RELEASE_STAGE3)
+
+                if (flag_operation_mode == MODE_RELEASE_STAGE1A)
+                {
+                    csv_index1++;
+                    content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ",1";
+                    csv_index1 -= camera_serials.Count;
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                {
+                    csv_index1++;
+                    content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ",2";
+                    csv_index1 -= camera_serials.Count;
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     csv_index3++;
                     content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
@@ -11983,7 +12359,11 @@ namespace imsLink
                 richTextBox1.Text += "檔案: " + filename2 + " 不存在\n";
                 sw = new StreamWriter(File.Open(filename2, FileMode.Create), Encoding.UTF8);    //指名編碼格式
 
-                if ((flag_operation_mode == MODE_RELEASE_STAGE1) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
+                {
+                    content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "," + "設備" + "\n";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "\n";
                 }
@@ -12040,7 +12420,18 @@ namespace imsLink
             for (i = 0; i < camera_serials.Count; i++)
             {
                 //richTextBox1.Text += "camera_serials[" + i.ToString() + "][0] = " + camera_serials[i][0].ToString() + " camera_serials[" + i.ToString() + "][1] = " + camera_serials[i][1].ToString() + "\n";
-                if (flag_operation_mode == MODE_RELEASE_STAGE3)
+
+                if (flag_operation_mode == MODE_RELEASE_STAGE1A)
+                {
+                    csv_index1++;
+                    content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ",1";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                {
+                    csv_index1++;
+                    content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ",2";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     csv_index3++;
                     content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
@@ -12575,7 +12966,8 @@ namespace imsLink
         {
             tb_sn_opal.Clear();
             timer_stage2.Enabled = false;
-            this.tb_sn_opal.Focus();
+            if (this.tb_sn_opal.Focused == false)
+                this.tb_sn_opal.Focus();
         }
 
         private void bt_save_img_Click(object sender, EventArgs e)
@@ -13543,7 +13935,8 @@ namespace imsLink
                 else
                     lb_main_mesg5.Text = "等待輸入資料 -";
 
-                this.tb_wait_product_data.Focus();
+                if (this.tb_wait_product_data.Focused == false)
+                    this.tb_wait_product_data.Focus();
                 richTextBox1.Text += "五";
             }
 
@@ -14152,7 +14545,8 @@ namespace imsLink
 
         private void button49_Click(object sender, EventArgs e)
         {
-            this.pictureBox1.Focus();
+            if (this.pictureBox1.Focused == false)
+                this.pictureBox1.Focus();
             show_main_message1("存檔中...", S_OK, 10);
             delay(10);
 
@@ -14206,7 +14600,7 @@ namespace imsLink
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
                     show_main_message1("存檔失敗", S_OK, 30);
                     show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
@@ -14240,7 +14634,8 @@ namespace imsLink
                 else
                     lb_main_mesg6.Text = "等待輸入資料 -";
 
-                this.tb_wait_package1_data.Focus();
+                if (this.tb_wait_package1_data.Focused == false)
+                    this.tb_wait_package1_data.Focus();
                 richTextBox1.Text += "六";
             }
 
@@ -14441,7 +14836,8 @@ namespace imsLink
                         lb_main_mesg7.Text = "等待輸入第 2 筆資料 -";
                 }
 
-                this.tb_wait_package2_data.Focus();
+                if (this.tb_wait_package2_data.Focused == false)
+                    this.tb_wait_package2_data.Focus();
                 richTextBox1.Text += "七";
             }
 
@@ -14624,7 +15020,8 @@ namespace imsLink
                         lb_main_mesg8.Text = "等待輸入第 3 筆資料 -";
                 }
 
-                this.tb_wait_package3_data.Focus();
+                if (this.tb_wait_package3_data.Focused == false)
+                    this.tb_wait_package3_data.Focus();
                 richTextBox1.Text += "八";
             }
 
@@ -15453,7 +15850,8 @@ namespace imsLink
                         lb_main_mesg2.Text = "輸入相機序號 -";
                 }
 
-                this.tb_wait_sn_data.Focus();
+                if (this.tb_wait_sn_data.Focused == false)
+                    this.tb_wait_sn_data.Focus();
                 this.tb_sn_opal.BackColor = Color.Pink;
                 richTextBox1.Text += "三";
             }
@@ -15576,7 +15974,8 @@ namespace imsLink
                 timer_stage2.Enabled = true;
                 timer_webcam_mode = FOCUS_ON_PICTURE;
                 this.tb_sn_opal.BackColor = Color.White;
-                this.pictureBox1.Focus();
+                if (this.pictureBox1.Focused == false)
+                    this.pictureBox1.Focus();
                 show_main_message1("移動方塊", S_OK, 10);
                 show_main_message2("移動方塊", S_OK, 10);
                 show_main_message3("移動方塊", S_OK, 10);
@@ -15608,7 +16007,8 @@ namespace imsLink
                         lb_main_mesg2.Text = "等待輸入資料 -";
                 }
 
-                this.tb_sn_opal.Focus();
+                if (this.tb_sn_opal.Focused == false)
+                    this.tb_sn_opal.Focus();
                 this.tb_sn_opal.BackColor = Color.Pink;
                 richTextBox1.Text += "一";
             }
@@ -15671,7 +16071,10 @@ namespace imsLink
                 if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
                 {
                     if ((tb_sale1.Focused == false) && (tb_sale2.Focused == false))
-                        tb_sale1.Focus();
+                    {
+                        if (tb_sale1.Focused == false)
+                            tb_sale1.Focus();
+                    }
                 }
 
                 if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
@@ -15797,7 +16200,8 @@ namespace imsLink
             flag_ok_data1 = false;
             flag_ok_data2 = false;
             flag_ok_data3 = false;
-            tb_sale1.Focus();
+            if (tb_sale1.Focused == false)
+                tb_sale1.Focus();
         }
 
         //第九站手動寫入
@@ -15825,7 +16229,8 @@ namespace imsLink
                     check_export_data();
                 else
                 {
-                    tb_sale3.Focus();
+                    if (tb_sale3.Focused == false)
+                        tb_sale3.Focus();
                     tb_sale3.BackColor = Color.Pink;
                     richTextBox1.Text += "資料不齊全, 忽略\n";
                     g9.Clear(BackColor);
@@ -15885,13 +16290,15 @@ namespace imsLink
                 {
                     if (flag_ok_data2 == false)
                     {
-                        tb_sale2.Focus();
+                        if (tb_sale2.Focused == false)
+                            tb_sale2.Focus();
                         tb_sale3.BackColor = Color.White;
                     }
                     else
                     {
                         tb_sale3.BackColor = Color.Pink;
-                        tb_sale3.Focus();
+                        if (tb_sale3.Focused == false)
+                            tb_sale3.Focus();
                     }
                 }
             }
@@ -15946,12 +16353,14 @@ namespace imsLink
                 {
                     if (flag_ok_data1 == false)
                     {
-                        tb_sale1.Focus();
+                        if (tb_sale1.Focused == false)
+                            tb_sale1.Focus();
                         tb_sale3.BackColor = Color.White;
                     }
                     else
                     {
-                        tb_sale3.Focus();
+                        if (tb_sale3.Focused == false)
+                            tb_sale3.Focus();
                         tb_sale3.BackColor = Color.Pink;
                     }
                 }
@@ -16010,7 +16419,8 @@ namespace imsLink
             }
             else
             {
-                tb_sale3.Focus();
+                if (tb_sale3.Focused == false)
+                    tb_sale3.Focus();
                 tb_sale3.BackColor = Color.Pink;
             }
 
@@ -16219,7 +16629,302 @@ namespace imsLink
                 flag_cancel_data = false;
                 checkBox1.ForeColor = Color.Black;
             }
-            tb_sale3.Focus();
+            if (tb_sale3.Focused == false)
+                tb_sale3.Focus();
+        }
+
+        private void bt_find_brightness_Click(object sender, EventArgs e)
+        {
+            if (flag_find_brightness == false)
+            {
+                bt_find_brightness.Text = "取消";
+                flag_find_brightness = true;
+            }
+            else
+            {
+
+
+                bt_find_brightness.Text = "找過亮";
+                flag_find_brightness = false;
+            }
+            flag_right_left_cnt = 0;
+            flag_down_up_cnt = 0;
+            flag_right_left_point_cnt = 0;
+            flag_down_up_point_cnt = 0;
+            //awb_block = 32;
+            step = 1;
+            add_amount = 1;
+            add_tmp = 0;
+            refresh_picturebox2();
+        }
+
+        void find_awb_location()
+        {
+            flag_awb_auto_find_location = true;
+            delay(10);
+
+            flag_right_left_cnt = 0;
+            flag_down_up_cnt = 0;
+            flag_right_left_point_cnt = 0;
+            flag_down_up_point_cnt = 0;
+            //awb_block = 32;
+            step = 1;
+            add_amount = 1;
+            add_tmp = 0;
+            refresh_picturebox2();
+
+            int x_st = 0;
+            int y_st = 0;
+            int dy = 40;
+            int ww = awb_block;
+            int hh = awb_block;
+
+            Bitmap bm2 = null;
+
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm2 = bm;
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+            }
+
+            ga = Graphics.FromImage(bm2);
+
+            int w;
+            int h;
+            try
+            {
+                w = bm2.Width;
+                h = bm2.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+
+
+            int WW = bm2.Width;
+            int HH = bm2.Height;
+            int i;
+            int j;
+            Color p;
+
+            //richTextBox1.Text += "WW = " + WW.ToString() + ", HH = " + HH.ToString() + "\n";
+            //richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+            x_st = w / 2 - awb_window_size / 2;
+            y_st = h / 2 - awb_window_size / 2;
+
+            if (x_st < 0)
+                x_st = 0;
+            if ((x_st + ww) > WW)
+                x_st = WW - ww;
+
+            if (y_st < 0)
+                y_st = 0;
+            if ((y_st + hh) > HH)
+                y_st = HH - hh;
+
+            for (j = 0; j < awb_window_size; j++)
+            {
+                for (i = 0; i < awb_window_size; i++)
+                {
+                    p = bm2.GetPixel(x_st + i, y_st + j);
+                    //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+                    //richTextBox1.Text += "x(" + p.R.ToString() + ", " + p.G.ToString() + ", " + p.B.ToString() + ")\n";
+
+                    //bm2.SetPixel(xx, yy, Color.FromArgb(rrr.R, rrr.G, rrr.B));
+
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+                    int th = (int)numericUpDown_find_brightness.Value;
+                    int y_new = 0;
+
+                    if (yyy.Y > th)
+                    {
+                        //bitmap1.SetPixel(xx, yy, Color.FromArgb((int)yyy.Y, (int)yyy.Y, (int)yyy.Y));
+                        //bm2.SetPixel(x_st + i, y_st + j, Color.Red);
+                        y_new = (int)((yyy.Y - th) * (256 - 100) / (256 - th) + 100);
+                        //bm2.SetPixel(x_st + i, y_st + j, Color.FromArgb(y_new, 0, 0));
+                        bm2.SetPixel(x_st + i, y_st + j, Color.Yellow);
+                    }
+                    else
+                    {
+                    }
+                    //bm2.SetPixel(x_st + i, y_st + j, Color.Red);
+                }
+            }
+
+            x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
+            if (x_st < 0)
+                x_st = 0;
+            if ((x_st + ww) > WW)
+                x_st = WW - ww;
+
+            y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
+            if (y_st < 0)
+                y_st = 0;
+            if ((y_st + hh) > HH)
+                y_st = HH - hh;
+
+            /*
+            richTextBox1.Text += "WW = " + WW.ToString() + ", HH = " + HH.ToString() + "\n";
+            richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            */
+
+            bool flag_break = false;
+
+            while(true)
+            {
+                //delay(5);
+                flag_break = false;
+                for (j = y_st; j < (y_st + awb_block); j++)
+                {
+                    for (i = x_st; i < (x_st + awb_block); i++)
+                    {
+                        p = bm2.GetPixel(i, j);
+
+                        if (p.R == 255)
+                        {
+                            if (step == 1)
+                            {
+                                //flag_right_left_point_cnt += add_amount;
+                                flag_right_left_point_cnt += awb_auto_step;
+                                add_tmp++;
+                                if (add_tmp == (add_amount * 2 - 1))
+                                {
+                                    add_tmp = 0;
+                                    step = 2;
+                                }
+                                //richTextBox1.Text += "E";
+                            }
+                            else if (step == 2)
+                            {
+                                //flag_down_up_point_cnt += add_amount;
+                                flag_down_up_point_cnt += awb_auto_step;
+                                add_tmp++;
+                                if (add_tmp == (add_amount * 2 - 1))
+                                {
+                                    add_tmp = 0;
+                                    step = 3;
+                                }
+                                //richTextBox1.Text += "S";
+                            }
+                            else if (step == 3)
+                            {
+                                //flag_right_left_point_cnt -= (add_amount + 1);
+                                flag_right_left_point_cnt -= awb_auto_step;
+                                add_tmp++;
+                                if (add_tmp == (add_amount * 2))
+                                {
+                                    add_tmp = 0;
+                                    step = 4;
+                                }
+                                //richTextBox1.Text += "W";
+                            }
+                            else if (step == 4)
+                            {
+                                //flag_down_up_point_cnt -= (add_amount + 1);
+                                flag_down_up_point_cnt -= awb_auto_step;
+                                add_tmp++;
+                                if (add_tmp == (add_amount * 2))
+                                {
+                                    add_tmp = 0;
+                                    step = 1;
+                                    add_amount++;
+                                }
+                                //richTextBox1.Text += "N";
+                            }
+                            if ((((Math.Abs(flag_right_left_point_cnt) + awb_block) > 100) || ((Math.Abs(flag_down_up_point_cnt) + awb_block) > 100)))
+                            {
+                                if (awb_block >= 8)
+                                {
+                                    richTextBox1.Text += "awb_block old = " + awb_block.ToString() + "\n";
+                                    awb_block -= 4;
+                                    richTextBox1.Text += "awb_block new = " + awb_block.ToString() + "\n";
+                                    richTextBox1.Text += "flag_down_up_point_cnt = " + flag_down_up_point_cnt.ToString() + ", flag_right_left_point_cnt = " + flag_right_left_point_cnt.ToString() + "\n";
+
+                                    flag_right_left_cnt = 0;
+                                    flag_down_up_cnt = 0;
+                                    flag_right_left_point_cnt = 0;
+                                    flag_down_up_point_cnt = 0;
+                                    step = 1;
+                                    add_amount = 1;
+                                    add_tmp = 0;
+                                }
+                            }
+
+                            x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
+                            if (x_st < 0)
+                                x_st = 0;
+                            if ((x_st + ww) > w)
+                                x_st = w - ww;
+
+                            y_st = h / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
+                            if (y_st < 0)
+                                y_st = 0;
+                            if ((y_st + hh) > h)
+                                y_st = h - hh;
+
+                            //ga.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
+                            //pictureBox1.Image = bm2;
+
+                            //refresh_picturebox2();
+                            //richTextBox1.Text += "break, flag_down_up_point_cnt = " + flag_down_up_point_cnt.ToString() + ", flag_right_left_point_cnt = " + flag_right_left_point_cnt.ToString() + "\n";
+                            flag_break = true;
+                            break;
+                        }
+                    }
+                    if (flag_break == true)
+                        break;
+                }
+                if (flag_break == false)
+                {
+                    richTextBox1.Text += "FIND OUT AWB LOCATION\n";
+                    richTextBox1.Text += "flag_down_up_point_cnt = " + flag_down_up_point_cnt.ToString() + ", flag_right_left_point_cnt = " + flag_right_left_point_cnt.ToString() + "\n";
+
+                    x_st = w / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
+                    if (x_st < 0)
+                        x_st = 0;
+                    if ((x_st + ww) > w)
+                        x_st = w - ww;
+
+                    y_st = h / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
+                    if (y_st < 0)
+                        y_st = 0;
+                    if ((y_st + hh) > h)
+                        y_st = h - hh;
+
+                    //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+                    //richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+                    ga.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, awb_block, awb_block);
+                    pictureBox1.Image = bm2;
+                    refresh_picturebox2();
+
+                    break;
+                }
+            }
+
+
+            GC.Collect();       //回收資源
+
+            pictureBox1.Image = bm2;
+
+
+
+            delay(1000);
+
+            flag_awb_auto_find_location = false;
+
         }
 
 

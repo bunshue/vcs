@@ -259,6 +259,9 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.numericUpDown_find_brightness = new System.Windows.Forms.NumericUpDown();
+            this.bt_find_brightness = new System.Windows.Forms.Button();
+            this.rb_NXN = new System.Windows.Forms.RadioButton();
             this.bt_awb_break = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
@@ -525,7 +528,6 @@
             this.timer_stage3 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage9 = new System.Windows.Forms.Timer(this.components);
-            this.rb_NXN = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -553,6 +555,7 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).BeginInit();
@@ -3068,6 +3071,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.numericUpDown_find_brightness);
+            this.tp_USB.Controls.Add(this.bt_find_brightness);
             this.tp_USB.Controls.Add(this.rb_NXN);
             this.tp_USB.Controls.Add(this.bt_awb_break);
             this.tp_USB.Controls.Add(this.rb_5X5);
@@ -3216,6 +3221,49 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown_find_brightness
+            // 
+            this.numericUpDown_find_brightness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_find_brightness.Location = new System.Drawing.Point(837, 108);
+            this.numericUpDown_find_brightness.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness.Name = "numericUpDown_find_brightness";
+            this.numericUpDown_find_brightness.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_find_brightness.TabIndex = 190;
+            this.numericUpDown_find_brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_find_brightness.Value = new decimal(new int[] {
+            220,
+            0,
+            0,
+            0});
+            // 
+            // bt_find_brightness
+            // 
+            this.bt_find_brightness.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_find_brightness.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_find_brightness.ForeColor = System.Drawing.Color.Black;
+            this.bt_find_brightness.Location = new System.Drawing.Point(837, 61);
+            this.bt_find_brightness.Name = "bt_find_brightness";
+            this.bt_find_brightness.Size = new System.Drawing.Size(70, 32);
+            this.bt_find_brightness.TabIndex = 189;
+            this.bt_find_brightness.Text = "找過亮";
+            this.bt_find_brightness.UseVisualStyleBackColor = false;
+            this.bt_find_brightness.Click += new System.EventHandler(this.bt_find_brightness_Click);
+            // 
+            // rb_NXN
+            // 
+            this.rb_NXN.AutoSize = true;
+            this.rb_NXN.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_NXN.Location = new System.Drawing.Point(160, 486);
+            this.rb_NXN.Name = "rb_NXN";
+            this.rb_NXN.Size = new System.Drawing.Size(70, 17);
+            this.rb_NXN.TabIndex = 188;
+            this.rb_NXN.Text = "160X160";
+            this.rb_NXN.UseVisualStyleBackColor = true;
             // 
             // bt_awb_break
             // 
@@ -6277,17 +6325,6 @@
             this.timer_stage9.Interval = 300;
             this.timer_stage9.Tick += new System.EventHandler(this.timer_stage9_Tick);
             // 
-            // rb_NXN
-            // 
-            this.rb_NXN.AutoSize = true;
-            this.rb_NXN.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_NXN.Location = new System.Drawing.Point(160, 486);
-            this.rb_NXN.Name = "rb_NXN";
-            this.rb_NXN.Size = new System.Drawing.Size(70, 17);
-            this.rb_NXN.TabIndex = 188;
-            this.rb_NXN.Text = "160X160";
-            this.rb_NXN.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -6363,6 +6400,7 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).EndInit();
@@ -6907,6 +6945,8 @@
         private System.Windows.Forms.Button bt_tmp;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.RadioButton rb_NXN;
+        private System.Windows.Forms.Button bt_find_brightness;
+        private System.Windows.Forms.NumericUpDown numericUpDown_find_brightness;
     }
 }
 
