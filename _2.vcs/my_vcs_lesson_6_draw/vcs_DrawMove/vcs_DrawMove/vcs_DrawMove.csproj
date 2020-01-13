@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ABC99715-42FF-40C9-B292-CFC0E44707A6}</ProjectGuid>
+    <ProjectGuid>{7D4EC17A-35AA-47CA-8845-526B8F7382E0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>draw_running_sine</RootNamespace>
-    <AssemblyName>draw_running_sine</AssemblyName>
+    <RootNamespace>vcs_DrawMove</RootNamespace>
+    <AssemblyName>vcs_DrawMove</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

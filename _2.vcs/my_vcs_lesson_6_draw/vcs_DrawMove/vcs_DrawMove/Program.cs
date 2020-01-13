@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace draw_running_sine
+namespace vcs_DrawMove
 {
     static class Program
     {

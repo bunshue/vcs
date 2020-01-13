@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw_Moving2.Properties
+namespace vcs_DrawMove.Properties
 {
 
 
