@@ -259,8 +259,17 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
-            this.numericUpDown_find_brightness = new System.Windows.Forms.NumericUpDown();
+            this.bt_awb_test3 = new System.Windows.Forms.Button();
+            this.bt_show_brightness = new System.Windows.Forms.Button();
+            this.lb_th_l = new System.Windows.Forms.Label();
+            this.lb_th_h = new System.Windows.Forms.Label();
+            this.numericUpDown_find_brightness_l = new System.Windows.Forms.NumericUpDown();
+            this.lb_yuv_v = new System.Windows.Forms.Label();
+            this.lb_yuv_u = new System.Windows.Forms.Label();
+            this.lb_yuv_y = new System.Windows.Forms.Label();
+            this.cb_show_progress = new System.Windows.Forms.CheckBox();
             this.bt_find_brightness = new System.Windows.Forms.Button();
+            this.numericUpDown_find_brightness_h = new System.Windows.Forms.NumericUpDown();
             this.rb_NXN = new System.Windows.Forms.RadioButton();
             this.bt_awb_break = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
@@ -555,7 +564,8 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_l)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).BeginInit();
@@ -3071,8 +3081,17 @@
             // 
             // tp_USB
             // 
-            this.tp_USB.Controls.Add(this.numericUpDown_find_brightness);
+            this.tp_USB.Controls.Add(this.bt_awb_test3);
+            this.tp_USB.Controls.Add(this.bt_show_brightness);
+            this.tp_USB.Controls.Add(this.lb_th_l);
+            this.tp_USB.Controls.Add(this.lb_th_h);
+            this.tp_USB.Controls.Add(this.numericUpDown_find_brightness_l);
+            this.tp_USB.Controls.Add(this.lb_yuv_v);
+            this.tp_USB.Controls.Add(this.lb_yuv_u);
+            this.tp_USB.Controls.Add(this.lb_yuv_y);
+            this.tp_USB.Controls.Add(this.cb_show_progress);
             this.tp_USB.Controls.Add(this.bt_find_brightness);
+            this.tp_USB.Controls.Add(this.numericUpDown_find_brightness_h);
             this.tp_USB.Controls.Add(this.rb_NXN);
             this.tp_USB.Controls.Add(this.bt_awb_break);
             this.tp_USB.Controls.Add(this.rb_5X5);
@@ -3222,37 +3241,148 @@
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown_find_brightness
+            // bt_awb_test3
             // 
-            this.numericUpDown_find_brightness.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_find_brightness.Location = new System.Drawing.Point(837, 108);
-            this.numericUpDown_find_brightness.Maximum = new decimal(new int[] {
+            this.bt_awb_test3.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_awb_test3.Font = new System.Drawing.Font("標楷體", 30.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_awb_test3.ForeColor = System.Drawing.Color.Black;
+            this.bt_awb_test3.Location = new System.Drawing.Point(799, 462);
+            this.bt_awb_test3.Name = "bt_awb_test3";
+            this.bt_awb_test3.Size = new System.Drawing.Size(64, 32);
+            this.bt_awb_test3.TabIndex = 201;
+            this.bt_awb_test3.Text = "色彩校正";
+            this.bt_awb_test3.UseVisualStyleBackColor = false;
+            this.bt_awb_test3.Click += new System.EventHandler(this.bt_awb_test3_Click);
+            // 
+            // bt_show_brightness
+            // 
+            this.bt_show_brightness.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_show_brightness.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_show_brightness.ForeColor = System.Drawing.Color.Black;
+            this.bt_show_brightness.Location = new System.Drawing.Point(744, 109);
+            this.bt_show_brightness.Name = "bt_show_brightness";
+            this.bt_show_brightness.Size = new System.Drawing.Size(80, 32);
+            this.bt_show_brightness.TabIndex = 200;
+            this.bt_show_brightness.Text = "顯示過亮";
+            this.bt_show_brightness.UseVisualStyleBackColor = false;
+            this.bt_show_brightness.Click += new System.EventHandler(this.bt_show_brightness_Click);
+            // 
+            // lb_th_l
+            // 
+            this.lb_th_l.AutoSize = true;
+            this.lb_th_l.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_th_l.Location = new System.Drawing.Point(306, 296);
+            this.lb_th_l.Name = "lb_th_l";
+            this.lb_th_l.Size = new System.Drawing.Size(43, 19);
+            this.lb_th_l.TabIndex = 199;
+            this.lb_th_l.Text = "下限";
+            // 
+            // lb_th_h
+            // 
+            this.lb_th_h.AutoSize = true;
+            this.lb_th_h.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_th_h.Location = new System.Drawing.Point(242, 292);
+            this.lb_th_h.Name = "lb_th_h";
+            this.lb_th_h.Size = new System.Drawing.Size(43, 19);
+            this.lb_th_h.TabIndex = 198;
+            this.lb_th_h.Text = "上限";
+            // 
+            // numericUpDown_find_brightness_l
+            // 
+            this.numericUpDown_find_brightness_l.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_find_brightness_l.Location = new System.Drawing.Point(837, 146);
+            this.numericUpDown_find_brightness_l.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.numericUpDown_find_brightness.Name = "numericUpDown_find_brightness";
-            this.numericUpDown_find_brightness.Size = new System.Drawing.Size(64, 32);
-            this.numericUpDown_find_brightness.TabIndex = 190;
-            this.numericUpDown_find_brightness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_find_brightness.Value = new decimal(new int[] {
-            220,
+            this.numericUpDown_find_brightness_l.Name = "numericUpDown_find_brightness_l";
+            this.numericUpDown_find_brightness_l.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_find_brightness_l.TabIndex = 197;
+            this.numericUpDown_find_brightness_l.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_find_brightness_l.Value = new decimal(new int[] {
+            100,
             0,
             0,
             0});
+            this.numericUpDown_find_brightness_l.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_l_ValueChanged);
+            // 
+            // lb_yuv_v
+            // 
+            this.lb_yuv_v.AutoSize = true;
+            this.lb_yuv_v.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_v.ForeColor = System.Drawing.Color.Red;
+            this.lb_yuv_v.Location = new System.Drawing.Point(734, 545);
+            this.lb_yuv_v.Name = "lb_yuv_v";
+            this.lb_yuv_v.Size = new System.Drawing.Size(25, 28);
+            this.lb_yuv_v.TabIndex = 196;
+            this.lb_yuv_v.Text = "V";
+            // 
+            // lb_yuv_u
+            // 
+            this.lb_yuv_u.AutoSize = true;
+            this.lb_yuv_u.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_u.ForeColor = System.Drawing.Color.Blue;
+            this.lb_yuv_u.Location = new System.Drawing.Point(704, 545);
+            this.lb_yuv_u.Name = "lb_yuv_u";
+            this.lb_yuv_u.Size = new System.Drawing.Size(25, 28);
+            this.lb_yuv_u.TabIndex = 195;
+            this.lb_yuv_u.Text = "U";
+            // 
+            // lb_yuv_y
+            // 
+            this.lb_yuv_y.AutoSize = true;
+            this.lb_yuv_y.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_y.ForeColor = System.Drawing.Color.Gold;
+            this.lb_yuv_y.Location = new System.Drawing.Point(680, 545);
+            this.lb_yuv_y.Name = "lb_yuv_y";
+            this.lb_yuv_y.Size = new System.Drawing.Size(25, 28);
+            this.lb_yuv_y.TabIndex = 194;
+            this.lb_yuv_y.Text = "Y";
+            // 
+            // cb_show_progress
+            // 
+            this.cb_show_progress.AutoSize = true;
+            this.cb_show_progress.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_progress.Location = new System.Drawing.Point(786, 146);
+            this.cb_show_progress.Name = "cb_show_progress";
+            this.cb_show_progress.Size = new System.Drawing.Size(91, 20);
+            this.cb_show_progress.TabIndex = 193;
+            this.cb_show_progress.Text = "顯示進度";
+            this.cb_show_progress.UseVisualStyleBackColor = true;
             // 
             // bt_find_brightness
             // 
             this.bt_find_brightness.BackColor = System.Drawing.SystemColors.Control;
             this.bt_find_brightness.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_find_brightness.ForeColor = System.Drawing.Color.Black;
-            this.bt_find_brightness.Location = new System.Drawing.Point(837, 61);
+            this.bt_find_brightness.Location = new System.Drawing.Point(744, 61);
             this.bt_find_brightness.Name = "bt_find_brightness";
-            this.bt_find_brightness.Size = new System.Drawing.Size(70, 32);
-            this.bt_find_brightness.TabIndex = 189;
+            this.bt_find_brightness.Size = new System.Drawing.Size(80, 32);
+            this.bt_find_brightness.TabIndex = 191;
             this.bt_find_brightness.Text = "找過亮";
             this.bt_find_brightness.UseVisualStyleBackColor = false;
-            this.bt_find_brightness.Click += new System.EventHandler(this.bt_find_brightness_Click);
+            this.bt_find_brightness.Click += new System.EventHandler(this.bt_find_brightness2_Click);
+            // 
+            // numericUpDown_find_brightness_h
+            // 
+            this.numericUpDown_find_brightness_h.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_find_brightness_h.Location = new System.Drawing.Point(837, 108);
+            this.numericUpDown_find_brightness_h.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness_h.Name = "numericUpDown_find_brightness_h";
+            this.numericUpDown_find_brightness_h.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_find_brightness_h.TabIndex = 190;
+            this.numericUpDown_find_brightness_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_find_brightness_h.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness_h.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_h_ValueChanged);
             // 
             // rb_NXN
             // 
@@ -6400,7 +6530,8 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_l)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_sharpness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_denoise)).EndInit();
@@ -6945,8 +7076,17 @@
         private System.Windows.Forms.Button bt_tmp;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.RadioButton rb_NXN;
+        private System.Windows.Forms.NumericUpDown numericUpDown_find_brightness_h;
         private System.Windows.Forms.Button bt_find_brightness;
-        private System.Windows.Forms.NumericUpDown numericUpDown_find_brightness;
+        private System.Windows.Forms.CheckBox cb_show_progress;
+        private System.Windows.Forms.Label lb_yuv_v;
+        private System.Windows.Forms.Label lb_yuv_u;
+        private System.Windows.Forms.Label lb_yuv_y;
+        private System.Windows.Forms.NumericUpDown numericUpDown_find_brightness_l;
+        private System.Windows.Forms.Label lb_th_l;
+        private System.Windows.Forms.Label lb_th_h;
+        private System.Windows.Forms.Button bt_show_brightness;
+        private System.Windows.Forms.Button bt_awb_test3;
     }
 }
 
