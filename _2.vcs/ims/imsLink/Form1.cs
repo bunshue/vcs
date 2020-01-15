@@ -21,9 +21,9 @@ namespace imsLink
     public partial class Form1 : Form
     {
         String compile_time = "1/15/2020 11:59上午";
-        String software_version = "A04";
+        String software_version = "A03";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE2;  //不允許第四, 第七, 第八
 
         bool flag_enaglb_awb_function = true;
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
@@ -2212,7 +2212,6 @@ namespace imsLink
 
             bt_awb.Visible = en;
             bt_awb_test.Visible = en;
-            bt_awb_test3.Visible = en;
             progressBar_awb.Visible = en;
             tb_awb_mesg.Visible = en;
             lb_awb_time.Visible = en;
@@ -2226,6 +2225,7 @@ namespace imsLink
             bt_clear.Visible = en;
             bt_tmp.Visible = en;
             pictureBox2.Visible = en;
+            cb_auto_search.Visible = en;
 
             lb_awb_result_expo.Visible = en;
             lb_awb_result_gain.Visible = en;
@@ -2359,6 +2359,7 @@ namespace imsLink
                 numericUpDown_find_brightness_l.Visible = false;
                 lb_th_h.Visible = false;
                 lb_th_l.Visible = false;
+                lb_yuv_y2.Visible = false;
             }
             else
             {
@@ -2436,6 +2437,8 @@ namespace imsLink
                 numericUpDown_sharpness.Enabled = en;
                 numericUpDown_denoise.Enabled = en;
                 numericUpDown_brightness.Enabled = en;
+
+                lb_yuv_y2.Visible = en;
             }
 
             //note
@@ -2554,9 +2557,6 @@ namespace imsLink
             bt_awb_test.Location = new Point(170 + 70 * 0 - 30, 460 + 40 * 0 - 200);
             bt_awb_test.Size = new Size(200, 97);
             bt_awb_test.BackColor = Color.Lime;
-            bt_awb_test3.Location = new Point(1670, 480);
-            bt_awb_test3.Size = new Size(200, 97);
-            bt_awb_test3.BackColor = Color.Lime;
             progressBar_awb.Location = new Point(170 + 70 * 0 - 30, 460 + 40 * 0 - 200 + 100);
             //lb_awb_time.Location = new Point(170 + 70 * 0 + 330, 460 + 40 * 0 - 200 + 100 + 4);
             lb_awb_time.Location = new Point(170 + 70 * 0 + 10, 460 + 40 * 0 - 200 + 100 + 4);
@@ -2565,6 +2565,9 @@ namespace imsLink
             tb_awb_mesg.Size = new Size(250, 150);
 
             bt_awb_break.Location = new Point(170 + 70 * 0 - 30 + 205, 460 + 40 * 0 - 200 + 24 + 40);
+
+            cb_auto_search.Location = new Point(500, 330);
+            cb_auto_search.Checked = true;
 
             //button
             x_st = 140;
@@ -2896,14 +2899,15 @@ namespace imsLink
                     bt_clear_serial.Location = new Point(x_st + 315, y_st);
                 }
 
-                lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 15);
-                lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 15);
-                lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 15);
+                lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 18);
+                lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 18);
+                lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 18);
 
-                lb_yuv_y.Location = new Point(5, 489 + 65 + 47 + 12);
-                lb_yuv_u.Location = new Point(5 + 50, 489 + 65 + 47 + 12);
-                lb_yuv_v.Location = new Point(5 + 100, 489 + 65 + 47 + 12);
+                lb_yuv_y.Location = new Point(5, 489 + 65 + 47 + 4);
+                lb_yuv_u.Location = new Point(5 + 50, 489 + 65 + 47 + 4);
+                lb_yuv_v.Location = new Point(5 + 100, 489 + 65 + 47 + 4);
 
+                lb_yuv_y2.Location = new Point(1610, 740);
             }
 
             //TARGET RGB
@@ -3013,7 +3017,31 @@ namespace imsLink
 
                 lb_th_h.Location = new Point(numericUpDown_find_brightness_h.Location.X - 42, numericUpDown_find_brightness_h.Location.Y + 7);
                 lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
+            }
 
+            if (flag_operation_mode == MODE_RELEASE_STAGE2)
+            {
+                //debug code
+                bt_find_brightness.Visible = true;
+                bt_show_brightness.Visible = true;
+                cb_show_progress.Visible = true;
+                numericUpDown_find_brightness_h.Visible = true;
+                numericUpDown_find_brightness_l.Visible = true;
+
+                lb_th_h.Visible = true;
+                lb_th_l.Visible = true;
+
+                bt_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 250);
+                bt_show_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 200);
+                cb_show_progress.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 150);
+                numericUpDown_find_brightness_h.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 110);
+                numericUpDown_find_brightness_l.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 70);
+
+                lb_th_h.Location = new Point(numericUpDown_find_brightness_h.Location.X - 42, numericUpDown_find_brightness_h.Location.Y + 7);
+                lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
+
+
+                lb_yuv_y2.Visible = true;
 
             }
 
@@ -5497,15 +5525,18 @@ namespace imsLink
                     }
                 }
 
-                //draw auto awb region
-                int th_h = (int)numericUpDown_find_brightness_h.Value;
-                int th_l = (int)numericUpDown_find_brightness_l.Value;
+                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                {
+                    //draw auto awb region
+                    int th_h = (int)numericUpDown_find_brightness_h.Value;
+                    int th_l = (int)numericUpDown_find_brightness_l.Value;
 
-                //gg.DrawRectangle(new Pen(Color.Green, 1), 550, 347, 18, 255/4);
-                gg.FillRectangle(new SolidBrush(Color.LightGreen), 550, 347, 18, 255 / 4);
+                    //gg.DrawRectangle(new Pen(Color.Green, 1), 550, 347, 18, 255/4);
+                    gg.FillRectangle(new SolidBrush(Color.LightGreen), 550, 347, 18, 255 / 4);
 
-                gg.FillRectangle(new SolidBrush(Color.Yellow), 550, 347, 18, (255 - th_h) / 4);
-                gg.FillRectangle(new SolidBrush(Color.Gold), 550, 347 + (255 - th_l) / 4, 18, (th_l / 4));
+                    gg.FillRectangle(new SolidBrush(Color.Yellow), 550, 347, 18, (255 - th_h) / 4);
+                    gg.FillRectangle(new SolidBrush(Color.Gold), 550, 347 + (255 - th_l) / 4, 18, (th_l / 4));
+                }
 
             }
             usb_camera_width = w;
@@ -5535,11 +5566,14 @@ namespace imsLink
             if (flag_comport_ok == false)
                 return;
 
-            if ((cnt3++ % 3) == 0)
+            if ((cnt3++ % 10) == 0)
             {
-                if (this.tb_wait_camera_data.Focused == false)
-                    this.tb_wait_camera_data.Focus();
                 richTextBox1.Text += "四";
+                if (this.tb_wait_camera_data.Focused == false)
+                {
+                    this.tb_wait_camera_data.Focus();
+                    richTextBox1.Text += "F4";
+                }
             }
 
             if (flag_network_disk_status == false)
@@ -7110,8 +7144,6 @@ namespace imsLink
             int y_st = MousePosition.Y - pictureBox1.Location.Y - tabControl1.Location.Y - tabControl1.ItemSize.Height;
 
             richTextBox1.Text += "x_st = " + x_st.ToString() + " y_st = " + y_st.ToString() + "\n";
-
-
         }
 
         bool flag_ok_machine_serial = false;
@@ -7123,11 +7155,14 @@ namespace imsLink
             if (flag_comport_ok == false)
                 return;
 
-            if ((cnt3++ % 3) == 0)
+            if ((cnt3++ % 10) == 0)
             {
-                //richTextBox1.Text += "B1";
+                richTextBox1.Text += "B1";
                 if (this.tb_wait_data.Focused == false)
+                {
                     this.tb_wait_data.Focus();
+                    richTextBox1.Text += "FB1";
+                }
             }
             if (tb_wait_data.Text.Length > 0)
             {
@@ -7336,7 +7371,7 @@ namespace imsLink
             }
         }
 
-        bool flag_try_connect_comport = false;
+        //bool flag_try_connect_comport = false;
         int read_connection_cnt = 0;
         int read_connection_fail_cnt = 0;
         private void timer_rtc_Tick(object sender, EventArgs e)
@@ -7470,6 +7505,7 @@ namespace imsLink
             lb_yuv_y.Text = ((int)yyy.Y).ToString();
             lb_yuv_u.Text = ((int)yyy.U).ToString();
             lb_yuv_v.Text = ((int)yyy.V).ToString();
+            lb_yuv_y2.Text = ((int)yyy.Y).ToString();
 
             if (flag_check_webcam_signal == true)
             {
@@ -8157,11 +8193,14 @@ namespace imsLink
 
             if (timer_webcam_mode == FOCUS_ON_PICTURE)
             {
-                if ((cnt3++ % 3) == 0)
+                if ((cnt3++ % 10) == 0)
                 {
                     richTextBox1.Text += "二a";
                     if (this.pictureBox1.Focused == false)
+                    {
                         this.pictureBox1.Focus();
+                        richTextBox1.Text += "F2a";
+                    }
                 }
                 if (frame_cnt_old == frame_cnt)
                 {
@@ -8176,25 +8215,27 @@ namespace imsLink
             }
             else if (timer_webcam_mode == FOCUS_ON_SERIAL)
             {
-
-                if ((cnt3++ % 3) == 0)
+                if (flag_network_disk_status == true)
                 {
-                    if (flag_network_disk_status == true)
-                    {
-                        ccc++;
-                        if ((ccc % 4) == 0)
-                            lb_main_mesg2.Text = "等待輸入資料 \\";
-                        else if ((ccc % 4) == 1)
-                            lb_main_mesg2.Text = "等待輸入資料 |";
-                        else if ((ccc % 4) == 2)
-                            lb_main_mesg2.Text = "等待輸入資料 /";
-                        else
-                            lb_main_mesg2.Text = "等待輸入資料 -";
-                    }
+                    ccc++;
+                    if ((ccc % 4) == 0)
+                        lb_main_mesg2.Text = "等待輸入資料 \\";
+                    else if ((ccc % 4) == 1)
+                        lb_main_mesg2.Text = "等待輸入資料 |";
+                    else if ((ccc % 4) == 2)
+                        lb_main_mesg2.Text = "等待輸入資料 /";
+                    else
+                        lb_main_mesg2.Text = "等待輸入資料 -";
+                }
 
+                if ((cnt3++ % 10) == 0)
+                {
                     richTextBox1.Text += "二b";
                     if (this.tb_sn_opal.Focused == false)
+                    {
                         this.tb_sn_opal.Focus();
+                        richTextBox1.Text += "F2b";
+                    }
                     this.tb_sn_opal.BackColor = Color.Pink;
                 }
 
@@ -8269,7 +8310,6 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
         }
 
-        bool flag_awb_mode = false;
         private void bt_awb_Click(object sender, EventArgs e)
         {
             if (flag_comport_ok == false)
@@ -8284,7 +8324,6 @@ namespace imsLink
                 lb_rgb_r.Text = "";
                 lb_rgb_g.Text = "";
                 lb_rgb_b.Text = "";
-                flag_awb_mode = true;
                 timer_stage2.Enabled = false;
                 //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
@@ -8292,7 +8331,6 @@ namespace imsLink
             else
             {
                 bt_awb.Text = "Manual";
-                flag_awb_mode = false;
                 timer_stage2.Enabled = true;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
             }
@@ -8922,13 +8960,26 @@ namespace imsLink
         }
 
         bool flag_doing_awb = false;
-        private void bt_awb_test_Click(object sender, EventArgs e)
+
+        void do_awb(object sender, EventArgs e)
         {
+            if (cb_show_grid.Checked == true)
+            {
+                cb_show_grid.Checked = false;
+                delay(100);
+            }
+
+            if (cb_auto_search.Checked == true)
+            {
+                bt_awb_test.BackColor = Color.Pink;
+                find_awb_location();
+            }
+
             lb_main_mesg2.Text = "等待輸入資料";
             timer_stage2.Enabled = true;
             timer_webcam_mode = FOCUS_ON_SERIAL;
             tb_sn_opal.BackColor = Color.Pink;
-            
+
             if (flag_doing_awb == false)
             {
                 tb_awb_mesg.Text = "";
@@ -9069,12 +9120,10 @@ namespace imsLink
                     delay(20);
                 }
 
-                //if (flag_awb_mode == false)
                 {
                     lb_rgb_r.Text = "";
                     lb_rgb_g.Text = "";
                     lb_rgb_b.Text = "";
-                    flag_awb_mode = true;
                     //timer_stage2.Enabled = false;
                     bt_awb.Text = "Auto";
                     //richTextBox1.Text += "\nTo Auto mode\n";
@@ -9255,7 +9304,6 @@ namespace imsLink
 
                 //切換回自動模式
                 bt_awb.Text = "Manual";
-                flag_awb_mode = false;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
 
                 if (flag_awb_break == false)
@@ -9379,6 +9427,11 @@ namespace imsLink
             */
             //flag_doing_awb = false;
             //bt_awb_test.Enabled = true;
+        }
+
+        private void bt_awb_test_Click(object sender, EventArgs e)
+        {
+            do_awb(sender, e);
         }
 
         int check_RGB_value()
@@ -10366,7 +10419,6 @@ namespace imsLink
                 return;
             }
 
-            //flag_awb_mode = false;
             //timer_webcam.Enabled = true;
             bt_awb.Text = "Manual";
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
@@ -10380,7 +10432,6 @@ namespace imsLink
                 return;
             }
 
-            //flag_awb_mode = true;
             //timer_webcam.Enabled = false;
             bt_awb.Text = "Auto";
             //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
@@ -10840,7 +10891,6 @@ namespace imsLink
             lb_rgb_r.Text = "";
             lb_rgb_g.Text = "";
             lb_rgb_b.Text = "";
-            flag_awb_mode = true;
             timer_stage2.Enabled = false;
             bt_awb.Text = "Auto";
             //richTextBox1.Text += "\nTo Auto mode\n";
@@ -13800,21 +13850,24 @@ namespace imsLink
                 return;
             }
 
-            if ((cnt3++ % 3) == 0)
-            {
-                ccc++;
-                if ((ccc % 4) == 0)
-                    lb_main_mesg5.Text = "等待輸入資料 \\";
-                else if ((ccc % 4) == 1)
-                    lb_main_mesg5.Text = "等待輸入資料 |";
-                else if ((ccc % 4) == 2)
-                    lb_main_mesg5.Text = "等待輸入資料 /";
-                else
-                    lb_main_mesg5.Text = "等待輸入資料 -";
+            ccc++;
+            if ((ccc % 4) == 0)
+                lb_main_mesg5.Text = "等待輸入資料 \\";
+            else if ((ccc % 4) == 1)
+                lb_main_mesg5.Text = "等待輸入資料 |";
+            else if ((ccc % 4) == 2)
+                lb_main_mesg5.Text = "等待輸入資料 /";
+            else
+                lb_main_mesg5.Text = "等待輸入資料 -";
 
-                if (this.tb_wait_product_data.Focused == false)
-                    this.tb_wait_product_data.Focus();
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "五";
+                if (this.tb_wait_product_data.Focused == false)
+                {
+                    this.tb_wait_product_data.Focus();
+                    richTextBox1.Text += "F5";
+                }
             }
 
             if (flag_network_disk_status == false)
@@ -14499,21 +14552,24 @@ namespace imsLink
                 return;
             }
 
-            if ((cnt3++ % 3) == 0)
-            {
-                ccc++;
-                if ((ccc % 4) == 0)
-                    lb_main_mesg6.Text = "等待輸入資料 \\";
-                else if ((ccc % 4) == 1)
-                    lb_main_mesg6.Text = "等待輸入資料 |";
-                else if ((ccc % 4) == 2)
-                    lb_main_mesg6.Text = "等待輸入資料 /";
-                else
-                    lb_main_mesg6.Text = "等待輸入資料 -";
+            ccc++;
+            if ((ccc % 4) == 0)
+                lb_main_mesg6.Text = "等待輸入資料 \\";
+            else if ((ccc % 4) == 1)
+                lb_main_mesg6.Text = "等待輸入資料 |";
+            else if ((ccc % 4) == 2)
+                lb_main_mesg6.Text = "等待輸入資料 /";
+            else
+                lb_main_mesg6.Text = "等待輸入資料 -";
 
-                if (this.tb_wait_package1_data.Focused == false)
-                    this.tb_wait_package1_data.Focus();
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "六";
+                if (this.tb_wait_package1_data.Focused == false)
+                {
+                    this.tb_wait_package1_data.Focus();
+                    richTextBox1.Text += "F6";
+                }
             }
 
             if (flag_network_disk_status == false)
@@ -14670,13 +14726,7 @@ namespace imsLink
                     richTextBox1.Text += "有資料, 但是長度錯誤, 一律清除\n";
                     tb_wait_package1_data.Text = "";
                 }
-
             }
-
-
-
-
-
         }
 
         private void timer_stage7_Tick(object sender, EventArgs e)
@@ -14687,35 +14737,38 @@ namespace imsLink
                 return;
             }
 
-            if ((cnt3++ % 3) == 0)
+            ccc++;
+            if (flag_ok_data1 == false)
             {
-                ccc++;
-                if (flag_ok_data1 == false)
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg7.Text = "等待輸入第 1 筆資料 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg7.Text = "等待輸入第 1 筆資料 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg7.Text = "等待輸入第 1 筆資料 /";
-                    else
-                        lb_main_mesg7.Text = "等待輸入第 1 筆資料 -";
-                }
+                if ((ccc % 4) == 0)
+                    lb_main_mesg7.Text = "等待輸入第 1 筆資料 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg7.Text = "等待輸入第 1 筆資料 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg7.Text = "等待輸入第 1 筆資料 /";
                 else
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg7.Text = "等待輸入第 2 筆資料 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg7.Text = "等待輸入第 2 筆資料 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg7.Text = "等待輸入第 2 筆資料 /";
-                    else
-                        lb_main_mesg7.Text = "等待輸入第 2 筆資料 -";
-                }
+                    lb_main_mesg7.Text = "等待輸入第 1 筆資料 -";
+            }
+            else
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg7.Text = "等待輸入第 2 筆資料 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg7.Text = "等待輸入第 2 筆資料 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg7.Text = "等待輸入第 2 筆資料 /";
+                else
+                    lb_main_mesg7.Text = "等待輸入第 2 筆資料 -";
+            }
 
-                if (this.tb_wait_package2_data.Focused == false)
-                    this.tb_wait_package2_data.Focus();
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "七";
+                if (this.tb_wait_package2_data.Focused == false)
+                {
+                    this.tb_wait_package2_data.Focus();
+                    richTextBox1.Text += "F7";
+                }
             }
 
             if (flag_network_disk_status == false)
@@ -14860,46 +14913,49 @@ namespace imsLink
                 return;
             }
 
-            if ((cnt3++ % 3) == 0)
+            ccc++;
+            if (flag_ok_data1 == false)
             {
-                ccc++;
-                if (flag_ok_data1 == false)
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg8.Text = "等待輸入第 1 筆資料 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg8.Text = "等待輸入第 1 筆資料 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg8.Text = "等待輸入第 1 筆資料 /";
-                    else
-                        lb_main_mesg8.Text = "等待輸入第 1 筆資料 -";
-                }
-                else if (flag_ok_data2 == false)
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg8.Text = "等待輸入第 2 筆資料 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg8.Text = "等待輸入第 2 筆資料 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg8.Text = "等待輸入第 2 筆資料 /";
-                    else
-                        lb_main_mesg8.Text = "等待輸入第 2 筆資料 -";
-                }
+                if ((ccc % 4) == 0)
+                    lb_main_mesg8.Text = "等待輸入第 1 筆資料 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg8.Text = "等待輸入第 1 筆資料 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg8.Text = "等待輸入第 1 筆資料 /";
                 else
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg8.Text = "等待輸入第 3 筆資料 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg8.Text = "等待輸入第 3 筆資料 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg8.Text = "等待輸入第 3 筆資料 /";
-                    else
-                        lb_main_mesg8.Text = "等待輸入第 3 筆資料 -";
-                }
+                    lb_main_mesg8.Text = "等待輸入第 1 筆資料 -";
+            }
+            else if (flag_ok_data2 == false)
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg8.Text = "等待輸入第 2 筆資料 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg8.Text = "等待輸入第 2 筆資料 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg8.Text = "等待輸入第 2 筆資料 /";
+                else
+                    lb_main_mesg8.Text = "等待輸入第 2 筆資料 -";
+            }
+            else
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg8.Text = "等待輸入第 3 筆資料 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg8.Text = "等待輸入第 3 筆資料 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg8.Text = "等待輸入第 3 筆資料 /";
+                else
+                    lb_main_mesg8.Text = "等待輸入第 3 筆資料 -";
+            }
 
-                if (this.tb_wait_package3_data.Focused == false)
-                    this.tb_wait_package3_data.Focus();
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "八";
+                if (this.tb_wait_package3_data.Focused == false)
+                {
+                    this.tb_wait_package3_data.Focus();
+                    richTextBox1.Text += "F8";
+                }
             }
 
             if (flag_network_disk_status == false)
@@ -15701,36 +15757,39 @@ namespace imsLink
                 return;
             }
 
-            if ((cnt3++ % 3) == 0)
+            ccc++;
+            if (flag_stage3_step == 0)
             {
-                ccc++;
-                if (flag_stage3_step == 0)
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg2.Text = "判定等級 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg2.Text = "判定等級 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg2.Text = "判定等級 /";
-                    else
-                        lb_main_mesg2.Text = "判定等級 -";
-                }
+                if ((ccc % 4) == 0)
+                    lb_main_mesg2.Text = "判定等級 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg2.Text = "判定等級 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg2.Text = "判定等級 /";
                 else
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg2.Text = "輸入相機序號 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg2.Text = "輸入相機序號 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg2.Text = "輸入相機序號 /";
-                    else
-                        lb_main_mesg2.Text = "輸入相機序號 -";
-                }
+                    lb_main_mesg2.Text = "判定等級 -";
+            }
+            else
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg2.Text = "輸入相機序號 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg2.Text = "輸入相機序號 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg2.Text = "輸入相機序號 /";
+                else
+                    lb_main_mesg2.Text = "輸入相機序號 -";
+            }
 
-                if (this.tb_wait_sn_data.Focused == false)
-                    this.tb_wait_sn_data.Focus();
-                this.tb_sn_opal.BackColor = Color.Pink;
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "三";
+                if (this.tb_wait_sn_data.Focused == false)
+                {
+                    this.tb_wait_sn_data.Focus();
+                    richTextBox1.Text += "F3";
+                }
+                this.tb_sn_opal.BackColor = Color.Pink;
             }
 
             int result = check_tb_sn_opal_data();
@@ -15869,25 +15928,28 @@ namespace imsLink
                 show_main_message3("無法連上網路磁碟機 ", S_FALSE, 30);
             }
 
-            if ((cnt3++ % 3) == 0)
+            if (flag_network_disk_status == true)
             {
-                if (flag_network_disk_status == true)
-                {
-                    ccc++;
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg2.Text = "等待輸入資料 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg2.Text = "等待輸入資料 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg2.Text = "等待輸入資料 /";
-                    else
-                        lb_main_mesg2.Text = "等待輸入資料 -";
-                }
+                ccc++;
+                if ((ccc % 4) == 0)
+                    lb_main_mesg2.Text = "等待輸入資料 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg2.Text = "等待輸入資料 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg2.Text = "等待輸入資料 /";
+                else
+                    lb_main_mesg2.Text = "等待輸入資料 -";
+            }
 
-                if (this.tb_sn_opal.Focused == false)
-                    this.tb_sn_opal.Focus();
-                this.tb_sn_opal.BackColor = Color.Pink;
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "一";
+                if (this.tb_sn_opal.Focused == false)
+                {
+                    this.tb_sn_opal.Focus();
+                    richTextBox1.Text += "F1";
+                }
+                this.tb_sn_opal.BackColor = Color.Pink;
             }
 
             int result = check_tb_sn_opal_data();
@@ -15942,44 +16004,10 @@ namespace imsLink
                 return;
             }
 
-            if ((cnt3++ % 3) == 0)
+            ccc++;
+            if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
             {
-                ccc++;
-                if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
-                {
-                    if ((tb_sale1.Focused == false) && (tb_sale2.Focused == false))
-                    {
-                        if (tb_sale1.Focused == false)
-                            tb_sale1.Focus();
-                    }
-                }
-
-                if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
-                {
-                    if (tb_sale1.Focused == true)
-                    {
-                        if ((ccc % 4) == 0)
-                            lb_main_mesg9.Text = "等待輸入 單別 \\";
-                        else if ((ccc % 4) == 1)
-                            lb_main_mesg9.Text = "等待輸入 單別 |";
-                        else if ((ccc % 4) == 2)
-                            lb_main_mesg9.Text = "等待輸入 單別 /";
-                        else
-                            lb_main_mesg9.Text = "等待輸入 單別 -";
-                    }
-                    else
-                    {
-                        if ((ccc % 4) == 0)
-                            lb_main_mesg9.Text = "等待輸入 單號 \\";
-                        else if ((ccc % 4) == 1)
-                            lb_main_mesg9.Text = "等待輸入 單號 |";
-                        else if ((ccc % 4) == 2)
-                            lb_main_mesg9.Text = "等待輸入 單號 /";
-                        else
-                            lb_main_mesg9.Text = "等待輸入 單號 -";
-                    }
-                }
-                else if (flag_ok_data1 == false)
+                if (tb_sale1.Focused == true)
                 {
                     if ((ccc % 4) == 0)
                         lb_main_mesg9.Text = "等待輸入 單別 \\";
@@ -15990,7 +16018,7 @@ namespace imsLink
                     else
                         lb_main_mesg9.Text = "等待輸入 單別 -";
                 }
-                else if (flag_ok_data2 == false)
+                else
                 {
                     if ((ccc % 4) == 0)
                         lb_main_mesg9.Text = "等待輸入 單號 \\";
@@ -16001,18 +16029,55 @@ namespace imsLink
                     else
                         lb_main_mesg9.Text = "等待輸入 單號 -";
                 }
+            }
+            else if (flag_ok_data1 == false)
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg9.Text = "等待輸入 單別 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg9.Text = "等待輸入 單別 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg9.Text = "等待輸入 單別 /";
                 else
-                {
-                    if ((ccc % 4) == 0)
-                        lb_main_mesg9.Text = "等待輸入 箱號或序號 \\";
-                    else if ((ccc % 4) == 1)
-                        lb_main_mesg9.Text = "等待輸入 箱號或序號 |";
-                    else if ((ccc % 4) == 2)
-                        lb_main_mesg9.Text = "等待輸入 箱號或序號 /";
-                    else
-                        lb_main_mesg9.Text = "等待輸入 箱號或序號 -";
-                }
+                    lb_main_mesg9.Text = "等待輸入 單別 -";
+            }
+            else if (flag_ok_data2 == false)
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg9.Text = "等待輸入 單號 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg9.Text = "等待輸入 單號 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg9.Text = "等待輸入 單號 /";
+                else
+                    lb_main_mesg9.Text = "等待輸入 單號 -";
+            }
+            else
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg9.Text = "等待輸入 箱號或序號 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg9.Text = "等待輸入 箱號或序號 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg9.Text = "等待輸入 箱號或序號 /";
+                else
+                    lb_main_mesg9.Text = "等待輸入 箱號或序號 -";
+            }
+
+            if ((cnt3++ % 10) == 0)
+            {
                 richTextBox1.Text += "九";
+                if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
+                {
+                    if ((tb_sale1.Focused == false) && (tb_sale2.Focused == false))
+                    {
+                        if (tb_sale1.Focused == false)
+                        {
+                            tb_sale1.Focus();
+                            richTextBox1.Text += "F9";
+                        }
+                    }
+                }
             }
 
             if (flag_network_disk_status == false)
@@ -16491,7 +16556,7 @@ namespace imsLink
             flag_down_up_cnt = dy;
             refresh_picturebox2();
             delay(100);
-            bt_awb_test_Click(sender, e);
+            do_awb(sender, e);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -16986,13 +17051,6 @@ namespace imsLink
 
         }
 
-        private void bt_awb_test3_Click(object sender, EventArgs e)
-        {
-            find_awb_location();
-
-            bt_awb_test_Click(sender, e);
-        }
-
         private void numericUpDown_find_brightness_h_ValueChanged(object sender, EventArgs e)
         {
             if (numericUpDown_find_brightness_h.Value <= numericUpDown_find_brightness_l.Value)
@@ -17003,13 +17061,7 @@ namespace imsLink
         {
             if (numericUpDown_find_brightness_l.Value >= numericUpDown_find_brightness_h.Value)
                 numericUpDown_find_brightness_l.Value = (numericUpDown_find_brightness_h.Value - 1);
-
         }
-
-
-
-
-
 
 
 
