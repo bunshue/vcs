@@ -35,5 +35,14 @@ namespace vcs_DataGridView
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //clear
+            //dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
+            //dataGridView1.Invalidate();
+            dataGridView1.Columns.Clear();
+        }
     }
 }
