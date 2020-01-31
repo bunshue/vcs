@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5CA046FA-14EB-456C-B1AF-8C628C82EFC4}</ProjectGuid>
+    <ProjectGuid>{6A622095-67B5-4889-BB6B-7415F443BCEB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DataGridView</RootNamespace>
-    <AssemblyName>vcs_DataGridView</AssemblyName>
+    <RootNamespace>vcs_DataGridView1</RootNamespace>
+    <AssemblyName>vcs_DataGridView1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -161,6 +161,7 @@ namespace imsLink
         bool flag_B_OK = false;
         bool flag_do_awb = false;
         bool flag_do_find_awb_location = false;
+        bool flag_do_find_awb_location_ok = false;
         bool flag_doing_writing_data = false;
         bool flag_doing_refreshing_camera = false;
         int timer_display_show_main_mesg_count = 0;
@@ -3043,7 +3044,7 @@ namespace imsLink
                 lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
 
                 lb_yuv_y2.Visible = true;
-                lb_auto_awb_cnt.Visible = true;
+                lb_auto_awb_cnt.Visible = false;
             }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
@@ -5135,7 +5136,7 @@ namespace imsLink
 
                 if (timer_webcam_mode == FOCUS_ON_PICTURE)
                 {
-                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
                     gg.DrawRectangle(new Pen(Color.Red, 10), 0, 0, pictureBox1.Width / 2, pictureBox1.Height / 2);
                 }
 
@@ -5151,6 +5152,11 @@ namespace imsLink
                         gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
                 }
                 */
+
+                if (flag_do_find_awb_location_ok == true)
+                {
+                    //gg.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
+                }
 
                 x_st = w / 2 - awb_window_size / 2;
                 y_st = h / 2 - awb_window_size / 2;
@@ -9079,6 +9085,29 @@ namespace imsLink
 
                 restore_camera_setup();
 
+                timer_stage2.Enabled = true;
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+
+                delay(200);
+
+                timer_stage2.Enabled = false;
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+                
+                //歸零
+                flag_right_left_cnt = 0;
+                flag_down_up_cnt = 0;
+                flag_right_left_point_cnt = 0;
+                flag_down_up_point_cnt = 0;
+                awb_block = 32;
+                step = 1;
+                add_amount = 1;
+                add_tmp = 0;
+                //ww = awb_block;
+                //hh = awb_block;
+                refresh_picturebox2();
+                delay(500);
+
+                flag_do_find_awb_location_ok = false;
                 if (cb_auto_search.Checked == true)
                 {
                     bt_awb_test.BackColor = Color.Pink;
@@ -9086,14 +9115,15 @@ namespace imsLink
                     {
                         tb_awb_mesg.Text = "尋找區域失敗";
                         bt_awb_test.BackColor = Color.Red;
-                        flag_doing_awb = true;
                         bt_awb_test.Enabled = true;
                         bt_awb_break.Visible = false;
                         flag_doing_awb = false;
                         playSound(S_FALSE);
+                        flag_do_find_awb_location_ok = true;
                         return;
                     }
                 }
+                flag_do_find_awb_location_ok = true;
 
                 //bt_awb_test.Text = "清除相機資料";
                 tb_awb_mesg.Text = "清除相機資料";
@@ -11490,7 +11520,7 @@ namespace imsLink
                         richTextBox1.Text += "xxxx 連接COM時, 發現COM有資料, 丟棄UART buffer內的資料 ccc\n";
                     }
 
-                    delay(100);
+                    delay(500);
                     Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
 
                     int cnt = 0;
@@ -14530,6 +14560,26 @@ namespace imsLink
                     g.ReleaseHdc();
                 }
 
+                if ((data_R > 0) && (data_G > 0) && (data_B > 0))
+                {
+                    int x_st = 0;
+                    int y_st = 0;
+
+                    y_st = 450;
+                    drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    drawBrush = new SolidBrush(Color.Red);
+                    x_st = 430;
+                    g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
+
+                    drawBrush = new SolidBrush(Color.Green);
+                    x_st = 430 + 70;
+                    g.DrawString(data_G.ToString(), drawFont1, drawBrush, x_st, y_st);
+
+                    drawBrush = new SolidBrush(Color.Blue);
+                    x_st = 430 + 140;
+                    g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+
                 g.Dispose();
 
                 String filename1 = string.Empty;
@@ -16522,13 +16572,15 @@ namespace imsLink
 
         private void bt_tmp_Click(object sender, EventArgs e)
         {
+            int total_test_count = 50;
+
             lb_auto_awb_cnt.Visible = true;
             richTextBox1.Text += "自動測試AWB\n";
             tb_awb_mesg.Text = "自動AWB開始";
             awb_cnt = 0;
 
             int i;
-            for (i = 1; i <= 20; i++)
+            for (i = 1; i <= total_test_count; i++)
             {
                 lb_auto_awb_cnt.Text = i.ToString();
                 do_awb(sender, e);
@@ -16647,11 +16699,11 @@ namespace imsLink
             {
                 if (timer_webcam_mode == FOCUS_ON_PICTURE)
                 {
-                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
                     gg.DrawRectangle(new Pen(Color.Red, 10), 0, 0, pictureBox1.Width / 2, pictureBox1.Height / 2);
                 }
                 else
-                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
             }
             catch (Exception ex)
             {
@@ -16862,7 +16914,7 @@ namespace imsLink
                             {
                                 try
                                 {
-                                    ga.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
+                                    ga.DrawRectangle(new Pen(Color.Silver, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
                                     pictureBox1.Image = bm2;
                                 }
                                 catch (Exception ex)
@@ -16908,7 +16960,7 @@ namespace imsLink
 
                     try
                     {
-                        ga.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, awb_block, awb_block);
+                        ga.DrawRectangle(new Pen(Color.Green, 1), x_st - 2, y_st - 2, awb_block + 4, awb_block + 4);
                     }
                     catch (Exception ex)
                     {

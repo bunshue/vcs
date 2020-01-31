@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_DataGridView
+namespace vcs_DataGridView2
 {
     public partial class Form1 : Form
     {

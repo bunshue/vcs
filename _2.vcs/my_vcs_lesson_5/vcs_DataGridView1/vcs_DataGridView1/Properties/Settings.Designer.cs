@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_DataGridView.Properties
+namespace vcs_DataGridView1.Properties
 {
 
 

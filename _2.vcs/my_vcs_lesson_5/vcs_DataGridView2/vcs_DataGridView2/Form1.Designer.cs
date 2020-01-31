@@ -1,4 +1,4 @@
-﻿namespace vcs_DataGridView
+﻿namespace vcs_DataGridView2
 {
     partial class Form1
     {
