@@ -18,6 +18,8 @@ namespace vcs_DataGridView1
         private Button addDataGridView = new Button();
         private Button addNewRowButton = new Button();
         private Button deleteRowButton = new Button();
+        private Button infoDataGridView = new Button();
+        private Button clearDataGridView = new Button();
 
         public Form1()
         {
@@ -75,9 +77,32 @@ namespace vcs_DataGridView1
             }
         }
 
+        private void infoDataGridView_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "ROWS = " + songsDataGridView.Rows.Count.ToString() + "\n";
+            richTextBox1.Text += "COLS = " + songsDataGridView.Columns.Count.ToString() + "\n";
+            richTextBox1.Text += "Content:\n";
+
+            for (int i = 0; i <= songsDataGridView.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < songsDataGridView.Columns.Count; j++)
+                {
+                    DataGridViewCell dgvCell = songsDataGridView[j, i];
+                    richTextBox1.Text += dgvCell.Value + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+
+        }
+
+        private void clearDataGridView_Click(object sender, EventArgs e)
+        {
+            this.songsDataGridView.Rows.Clear();
+        }
+
         private void SetupLayout()
         {
-            this.Size = new Size(600, 500);
+            //this.Size = new Size(900, 660);
 
             setupDataGridView.Text = "Setup DGV";
             setupDataGridView.Location = new Point(10, 10);
@@ -95,10 +120,20 @@ namespace vcs_DataGridView1
             deleteRowButton.Location = new Point(310, 10);
             deleteRowButton.Click += new EventHandler(deleteRowButton_Click);
 
+            infoDataGridView.Text = "Info";
+            infoDataGridView.Location = new Point(410, 10);
+            infoDataGridView.Click += new EventHandler(infoDataGridView_Click);
+
+            clearDataGridView.Text = "Clear";
+            clearDataGridView.Location = new Point(510, 10);
+            clearDataGridView.Click += new EventHandler(clearDataGridView_Click);
+
             buttonPanel.Controls.Add(setupDataGridView);
             buttonPanel.Controls.Add(addDataGridView);
             buttonPanel.Controls.Add(addNewRowButton);
             buttonPanel.Controls.Add(deleteRowButton);
+            buttonPanel.Controls.Add(infoDataGridView);
+            buttonPanel.Controls.Add(clearDataGridView);
             buttonPanel.Height = 50;
             buttonPanel.Dock = DockStyle.Bottom;
 
@@ -132,17 +167,13 @@ namespace vcs_DataGridView1
             songsDataGridView.Columns[2].Name = "Title";
             songsDataGridView.Columns[3].Name = "Artist";
             songsDataGridView.Columns[4].Name = "Album";
-            songsDataGridView.Columns[4].DefaultCellStyle.Font =
-                new Font(songsDataGridView.DefaultCellStyle.Font, FontStyle.Italic);
+            songsDataGridView.Columns[4].DefaultCellStyle.Font = new Font(songsDataGridView.DefaultCellStyle.Font, FontStyle.Italic);
 
-            songsDataGridView.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
+            songsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             songsDataGridView.MultiSelect = false;
             songsDataGridView.Dock = DockStyle.Fill;
 
-            songsDataGridView.CellFormatting += new
-                DataGridViewCellFormattingEventHandler(
-                songsDataGridView_CellFormatting);
+            songsDataGridView.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
         }
 
         private void PopulateDataGridView()
