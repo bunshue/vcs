@@ -3377,7 +3377,7 @@ namespace imsLink
                 }
             }
 
-            richTextBox1.Text += "\nimsLink " + software_version + " 啟動完成\n\n";
+            richTextBox1.Text += "\nimsLink " + software_version + " 啟動完成, 時間 : " + DateTime.Now.ToString() + "\n\n";
             return;
         }
 
@@ -4918,10 +4918,19 @@ namespace imsLink
         int frame_cnt_old = 0;
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
+        bool flag_capture_picture = false;
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             if (flag_do_find_awb_location == true)
                 return;
+
+            if (flag_capture_picture == true)
+            {
+                richTextBox1.Text += "xxx Cam_NewFrame! ";
+                return;
+            }
+
+            flag_capture_picture = true;
 
             int x_st = 0;
             int y_st = 0;
@@ -4993,6 +5002,7 @@ namespace imsLink
             {
                 richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
+                flag_capture_picture = false;
                 return;
             }
 
@@ -5004,6 +5014,7 @@ namespace imsLink
             {
                 richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
+                flag_capture_picture = false;
                 return;
             }
 
@@ -5018,6 +5029,7 @@ namespace imsLink
             {
                 richTextBox1.Text += "xxx錯誤訊息o : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
+                flag_capture_picture = false;
                 return;
             }
 
@@ -5247,6 +5259,7 @@ namespace imsLink
                 {
                     richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
                     GC.Collect();       //回收資源
+                    flag_capture_picture = false;
                     return;
                 }
 
@@ -5572,8 +5585,10 @@ namespace imsLink
             }
             usb_camera_width = w;
             usb_camera_height = h;
+
             try
             {
+                //將處理之後的圖片貼出來
                 pictureBox1.Image = bm.Clone(rect, PixelFormat.Format32bppArgb);
             }
             catch (Exception ex)
@@ -5581,6 +5596,9 @@ namespace imsLink
                 richTextBox1.Text += "xxx錯誤訊息p : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
+
+            flag_capture_picture = false;
+            return;
         }
 
         bool flag_ok_camera_serial1 = false;
@@ -8356,13 +8374,13 @@ namespace imsLink
                 lb_rgb_b.Text = "";
                 timer_stage2.Enabled = false;
                 //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
             }
             else
             {
                 bt_awb.Text = "Manual";
                 timer_stage2.Enabled = true;
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
             }
         }
 
@@ -9062,7 +9080,7 @@ namespace imsLink
                 Stopwatch stopwatch = new Stopwatch();
                 // Begin timing
                 stopwatch.Start();
-                richTextBox1.Text += "\nAWB 開始 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                richTextBox1.Text += "\nAWB 開始 : 0 秒\n";
                 flag_awb_break = false;
 
                 bt_awb_break.Visible = true;
@@ -9086,12 +9104,12 @@ namespace imsLink
                 restore_camera_setup();
 
                 timer_stage2.Enabled = true;
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
 
                 delay(200);
 
                 timer_stage2.Enabled = false;
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
                 
                 //歸零
                 flag_right_left_cnt = 0;
@@ -9123,6 +9141,9 @@ namespace imsLink
                         return;
                     }
                 }
+
+                //check_awb_region();
+
                 flag_do_find_awb_location_ok = true;
 
                 //bt_awb_test.Text = "清除相機資料";
@@ -9146,7 +9167,7 @@ namespace imsLink
                     bt_awb.Text = "Auto";
                     //richTextBox1.Text += "\nTo Auto mode\n";
                     //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-                    Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+                    Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
                 }
 
                 timer_display.Enabled = true;
@@ -9267,7 +9288,7 @@ namespace imsLink
                 if (flag_awb_break == false)
                 {
                     //richTextBox1.Text += "AGC auto, EXPO auto\n";
-                    //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+                    //Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);    //To auto mode
 
                     //richTextBox1.Text += "Target  R G B = " + TARGET_AWB_R.ToString() + " " + TARGET_AWB_G.ToString() + " " + TARGET_AWB_B.ToString() + "\n";
                     //richTextBox1.Text += "Current R G B = " + (total_RGB_R / awb_block / awb_block).ToString() + " " + (total_RGB_G / awb_block / awb_block).ToString() + " " + (total_RGB_B / awb_block / awb_block).ToString() + "\n";
@@ -9322,9 +9343,11 @@ namespace imsLink
                     tolerance_ratio = 1;
                 }
 
+                //check_awb_region();
+
                 //切換回自動模式
                 bt_awb.Text = "Manual";
-                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
 
                 if (flag_awb_break == false)
                 {
@@ -10461,7 +10484,7 @@ namespace imsLink
 
             //timer_webcam.Enabled = true;
             bt_awb.Text = "Manual";
-            Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
         }
 
         void to_awb_manual_mode()
@@ -10475,7 +10498,7 @@ namespace imsLink
             //timer_webcam.Enabled = false;
             bt_awb.Text = "Auto";
             //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
         }
 
         private void bt_disable_timer_webcam_Click(object sender, EventArgs e)
@@ -10935,7 +10958,7 @@ namespace imsLink
             bt_awb.Text = "Auto";
             //richTextBox1.Text += "\nTo Auto mode\n";
             //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
 
             timer_display.Enabled = true;
             flag_do_awb = true;
@@ -16572,10 +16595,10 @@ namespace imsLink
 
         private void bt_tmp_Click(object sender, EventArgs e)
         {
-            int total_test_count = 50;
+            int total_test_count = 20;
 
             lb_auto_awb_cnt.Visible = true;
-            richTextBox1.Text += "自動測試AWB\n";
+            richTextBox1.Text += "\n自動測試AWB ST, 時間 : " + DateTime.Now.ToString() + "\n";
             tb_awb_mesg.Text = "自動AWB開始";
             awb_cnt = 0;
 
@@ -16586,6 +16609,7 @@ namespace imsLink
                 do_awb(sender, e);
             }
             lb_auto_awb_cnt.Visible = false;
+            richTextBox1.Text += "\n自動測試AWB SP, 時間 : " + DateTime.Now.ToString() + "\n";
             tb_awb_mesg.Text = "自動AWB結束";
         }
 

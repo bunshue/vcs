@@ -51,7 +51,14 @@ namespace vcs_test_all_10_Math_Random
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "未完成\n";
+            int x;
+            int y;
+            richTextBox1.Text += "y = 200 + 200 * sin(x)\n";
+            for (x = 0; x <= 360; x += 10)
+            {
+                y = 200 + (int)(200 * (Math.Sin((Math.PI * x / 180))));
+                richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\n";
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
