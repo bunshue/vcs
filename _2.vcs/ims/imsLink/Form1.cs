@@ -29,6 +29,9 @@ namespace imsLink
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
         bool flag_check_webcam_signal = true;
 
+        int total_test_count = 20;
+        int current_test_count = 0;
+
         private const int MODE_RELEASE_STAGE0 = 0x00;   //release mode stage 0, normal use
         private const int MODE_RELEASE_STAGE1A = 0x01;   //release mode stage 1, 4X4 USB camera
         private const int MODE_RELEASE_STAGE1B = 0x11;   //release mode stage 1, 4X4 USB camera
@@ -9138,6 +9141,7 @@ namespace imsLink
                         flag_doing_awb = false;
                         playSound(S_FALSE);
                         flag_do_find_awb_location_ok = true;
+                        timer_stage2.Enabled = true;
                         return;
                     }
                 }
@@ -9158,6 +9162,8 @@ namespace imsLink
                 tb_awb_mesg.Text = "色彩校正開始";
                 progressBar_awb.Value = 10;
                 delay(100);
+
+                //button49_Click(sender, e);
 
                 {
                     lb_rgb_r.Text = "";
@@ -9338,6 +9344,9 @@ namespace imsLink
                     //bt_awb_test.Text = "細調結束";
                     tb_awb_mesg.Text = "細調結束";
                     progressBar_awb.Value = 90;
+
+                    //button49_Click(sender, e);
+
                     delay(500);
                     progressBar_awb.Value = 95;
                     tolerance_ratio = 1;
@@ -9448,6 +9457,8 @@ namespace imsLink
 
                     flag_doing_awb = false;
                     bt_awb_test.Enabled = true;
+
+                    //button49_Click(sender, e);
                 }
                 else
                 {
@@ -9479,6 +9490,7 @@ namespace imsLink
             */
             //flag_doing_awb = false;
             //bt_awb_test.Enabled = true;
+            timer_stage2.Enabled = true;
         }
 
         private void bt_awb_test_Click(object sender, EventArgs e)
@@ -14583,21 +14595,28 @@ namespace imsLink
                     g.ReleaseHdc();
                 }
 
-                if ((data_R > 0) && (data_G > 0) && (data_B > 0))
-                {
-                    int x_st = 0;
-                    int y_st = 0;
+                int x_st = 0;
+                int y_st = 0;
 
-                    y_st = 450;
+                y_st = 450;
+
+                if (data_R > 0)
+                {
                     drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                     drawBrush = new SolidBrush(Color.Red);
                     x_st = 430;
                     g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
 
+                if (data_G > 0)
+                {
                     drawBrush = new SolidBrush(Color.Green);
                     x_st = 430 + 70;
                     g.DrawString(data_G.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
 
+                if (data_B > 0)
+                {
                     drawBrush = new SolidBrush(Color.Blue);
                     x_st = 430 + 140;
                     g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
@@ -14607,7 +14626,14 @@ namespace imsLink
 
                 String filename1 = string.Empty;
 
-                filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                if (lb_auto_awb_cnt.Visible == true)
+                {
+                    filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + current_test_count.ToString("D2");
+                }
+                else
+                {
+                    filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
 
                 //String file1 = file + ".jpg";
                 String filename1a = filename1 + ".bmp";
@@ -16595,17 +16621,14 @@ namespace imsLink
 
         private void bt_tmp_Click(object sender, EventArgs e)
         {
-            int total_test_count = 20;
-
             lb_auto_awb_cnt.Visible = true;
             richTextBox1.Text += "\n自動測試AWB ST, 時間 : " + DateTime.Now.ToString() + "\n";
             tb_awb_mesg.Text = "自動AWB開始";
             awb_cnt = 0;
 
-            int i;
-            for (i = 1; i <= total_test_count; i++)
+            for (current_test_count = 1; current_test_count <= total_test_count; current_test_count++)
             {
-                lb_auto_awb_cnt.Text = i.ToString();
+                lb_auto_awb_cnt.Text = current_test_count.ToString();
                 do_awb(sender, e);
             }
             lb_auto_awb_cnt.Visible = false;
