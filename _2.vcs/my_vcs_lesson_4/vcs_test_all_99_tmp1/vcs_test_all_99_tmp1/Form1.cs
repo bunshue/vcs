@@ -477,21 +477,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button41_Click(object sender, EventArgs e)
         {
-            PictureBox pb_new = new PictureBox();
-            Button bt_new = new Button();
-            this.Controls.Add(pb_new);
-            this.Controls.Add(bt_new);
-            bt_new.Location = new Point(332, 502);
-            bt_new.Size = new Size(154, 42);
-            bt_new.BackColor = Color.Red;
-            bt_new.Text = "新增控件";
-            bt_new.Click += new EventHandler(bt_new_Click);
 
-        }
-
-        private void bt_new_Click(System.Object sender, System.EventArgs e)
-        {
-            richTextBox1.Text += "你按了這個新控件\n";
         }
 
 

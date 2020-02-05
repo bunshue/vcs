@@ -480,7 +480,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(154, 42);
             this.button41.TabIndex = 58;
-            this.button41.Text = "建立新控件";
+            this.button41.Text = "xxx";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 

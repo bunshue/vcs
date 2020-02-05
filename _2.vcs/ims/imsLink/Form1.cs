@@ -9113,20 +9113,23 @@ namespace imsLink
 
                 timer_stage2.Enabled = false;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
-                
-                //歸零
-                flag_right_left_cnt = 0;
-                flag_down_up_cnt = 0;
-                flag_right_left_point_cnt = 0;
-                flag_down_up_point_cnt = 0;
-                awb_block = 32;
-                step = 1;
-                add_amount = 1;
-                add_tmp = 0;
-                //ww = awb_block;
-                //hh = awb_block;
-                refresh_picturebox2();
-                delay(500);
+
+                if (cb_auto_search.Checked == true)
+                {
+                    //自動搜尋模式需要先歸零
+                    flag_right_left_cnt = 0;
+                    flag_down_up_cnt = 0;
+                    flag_right_left_point_cnt = 0;
+                    flag_down_up_point_cnt = 0;
+                    awb_block = 32;
+                    step = 1;
+                    add_amount = 1;
+                    add_tmp = 0;
+                    //ww = awb_block;
+                    //hh = awb_block;
+                    refresh_picturebox2();
+                    delay(500);
+                }
 
                 flag_do_find_awb_location_ok = false;
                 if (cb_auto_search.Checked == true)
@@ -9163,7 +9166,7 @@ namespace imsLink
                 progressBar_awb.Value = 10;
                 delay(100);
 
-                //button49_Click(sender, e);
+                button49_Click(sender, e);
 
                 {
                     lb_rgb_r.Text = "";
@@ -9345,7 +9348,7 @@ namespace imsLink
                     tb_awb_mesg.Text = "細調結束";
                     progressBar_awb.Value = 90;
 
-                    //button49_Click(sender, e);
+                    button49_Click(sender, e);
 
                     delay(500);
                     progressBar_awb.Value = 95;
@@ -9458,7 +9461,7 @@ namespace imsLink
                     flag_doing_awb = false;
                     bt_awb_test.Enabled = true;
 
-                    //button49_Click(sender, e);
+                    button49_Click(sender, e);
                 }
                 else
                 {
@@ -14622,6 +14625,25 @@ namespace imsLink
                     g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
                 }
 
+                if (lb_auto_awb_cnt.Visible == true)
+                {
+                    drawBrush = new SolidBrush(Color.Yellow);
+                    x_st = 430 - 70 * 2 - 60;
+                    g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+
+                if (cb_auto_search.Checked == true)
+                {
+                    drawBrush = new SolidBrush(Color.DarkBlue);
+                    x_st = 430 - 70 * 2 - 20;
+                    g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+                else
+                {
+                    drawBrush = new SolidBrush(Color.DarkBlue);
+                    x_st = 430 - 70 * 2;
+                    g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
                 g.Dispose();
 
                 String filename1 = string.Empty;

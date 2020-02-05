@@ -212,7 +212,57 @@ namespace test_controls_add
             panel1.Controls.AddRange(Button2); 
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "建立新表單並新增控件於其上\n";
+            //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
+            //產生一個新的form, 並在該form上面產生MxN組的按鈕
 
+            int i;
+            int j;
+            //this.Size = new Size(800, 600);
+            for (i = 0; i < m_cols; i++)
+            {
+                for (j = 0; j < m_rows; j++)
+                {
+                    Button btn = new Button();
+                    this.AcceptButton = btn;
+                    this.Controls.Add(btn);
+                    btn.Left = m_btnWidth * i;
+                    btn.Top = m_btnHeight * j;
+                    btn.Width = m_btnWidth;
+                    btn.Height = m_btnHeight;
+                    btn.Text = (j + 1).ToString() + ", " + (i + 1).ToString();
+                    btn.Click += new EventHandler(myClick);
+                }
+            }
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            PictureBox pb_new = new PictureBox();
+            pb_new.Size = new Size(250, 250);
+            pb_new.Left = 600;
+            pb_new.Top = 50;
+            pb_new.BackColor = Color.Pink;
+            this.Controls.Add(pb_new);
+            
+            Button bt_new = new Button();
+            this.Controls.Add(bt_new);
+            //bt_new.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
+            bt_new.Left = button10.Location.X;
+            bt_new.Top = button10.Location.Y + 60;
+            bt_new.Size = new Size(154, 42);
+            bt_new.BackColor = Color.Red;
+            bt_new.Text = "新增控件";
+            bt_new.Click += new EventHandler(bt_new_Click);
+        }
+
+        private void bt_new_Click(System.Object sender, System.EventArgs e)
+        {
+            richTextBox1.Text += "你按了這個新控件\n";
+        }
 
 
     }
