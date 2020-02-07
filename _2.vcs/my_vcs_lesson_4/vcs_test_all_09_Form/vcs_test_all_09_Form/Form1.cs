@@ -106,81 +106,21 @@ namespace vcs_test_all_09_Form
 
         private void button14_Click(object sender, EventArgs e)
         {
-            Form2 f2;
-            f2 = new Form2();
-            f2.Show();
 
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            // 繼承Form類別產生新的視窗表單
-            Form Form2 = new Form();
-
-            Form2.Cursor = System.Windows.Forms.Cursors.Cross;
-            Form2.FormBorderStyle = FormBorderStyle.Sizable;
-            Form2.Height = 400;
-            Form2.HelpButton = true;
-            Form2.MaximizeBox = true;
-            Form2.MinimizeBox = true;
-            Form2.Name = "Form2";
-            Form2.ShowInTaskbar = true;
-            Form2.StartPosition = FormStartPosition.CenterParent;
-            Form2.Text = "New Form 2";
-            Form2.Width = 500;
-            Form2.WindowState = FormWindowState.Normal;
-            Form2.Enabled = true;
-
-            // 以Form類別的ShowDialog方法顯示視窗表單
-            Form2.ShowDialog();
 
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            // 繼承Form類別產生新的視窗表單
-            Form Form3 = new Form();
-
-            Form3.Cursor = System.Windows.Forms.Cursors.Cross;
-            Form3.FormBorderStyle = FormBorderStyle.Sizable;
-            Form3.Height = 400;
-            Form3.HelpButton = true;
-            Form3.MaximizeBox = true;
-            Form3.MinimizeBox = true;
-            Form3.Name = "Form3";
-            Form3.ShowInTaskbar = true;
-            Form3.StartPosition = FormStartPosition.CenterParent;
-            Form3.Text = "New Form 3";
-            Form3.Width = 500;
-            Form3.WindowState = FormWindowState.Normal;
-            Form3.Enabled = true;
-
-            // 以Form類別的ShowDialog方法顯示視窗表單
-            Form3.ShowDialog();
 
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            // 繼承Form類別產生新的視窗表單
-            Form Form4 = new Form();
-
-            Form4.Cursor = System.Windows.Forms.Cursors.Cross;
-            Form4.FormBorderStyle = FormBorderStyle.Sizable;
-            Form4.Height = 400;
-            Form4.HelpButton = true;
-            Form4.MaximizeBox = true;
-            Form4.MinimizeBox = true;
-            Form4.Name = "Form4";
-            Form4.ShowInTaskbar = true;
-            Form4.StartPosition = FormStartPosition.CenterParent;
-            Form4.Text = "New Form 4";
-            Form4.Width = 500;
-            Form4.WindowState = FormWindowState.Normal;
-            Form4.Enabled = true;
-
-            // 以Form類別的ShowDialog方法顯示視窗表單
-            Form4.ShowDialog();
 
         }
 

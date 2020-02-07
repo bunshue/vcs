@@ -221,7 +221,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(194, 45);
             this.button14.TabIndex = 13;
-            this.button14.Text = "開啟新表單";
+            this.button14.Text = "xxx";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -232,7 +232,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(162, 45);
             this.button15.TabIndex = 16;
-            this.button15.Text = "開啟Form c";
+            this.button15.Text = "xxx";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -243,7 +243,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(162, 45);
             this.button16.TabIndex = 15;
-            this.button16.Text = "開啟Form b";
+            this.button16.Text = "xxx";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -254,7 +254,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(162, 45);
             this.button17.TabIndex = 14;
-            this.button17.Text = "開啟Form a";
+            this.button17.Text = "xxx";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

@@ -759,7 +759,7 @@ namespace vcs_test_all_06_DirectoryFile
             return directories;
         }
 
-        //讀取資料夾下所有檔案
+        //讀取資料夾下所有檔案, 只看一層
         private ArrayList GetFiles(string path)
         {
             ArrayList files = new ArrayList();
@@ -769,7 +769,6 @@ namespace vcs_test_all_06_DirectoryFile
                 files.AddRange(Directory.GetFiles(path));
                 richTextBox1.Text += "總共" + files.Count.ToString() + "個檔案\n";
             }
-
             return files;
         }
 

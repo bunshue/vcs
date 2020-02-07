@@ -39,11 +39,6 @@ namespace test_use_recycle_bin
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int i;
-            for (i = 0x64C2; i < 0x64C2 + 10; i++)
-            {
-                richTextBox1.Text += "unicode value = 0x" + i.ToString("X4") + ", code = " + ((char)i).ToString() + "\n";
-            }
 
         }
 
