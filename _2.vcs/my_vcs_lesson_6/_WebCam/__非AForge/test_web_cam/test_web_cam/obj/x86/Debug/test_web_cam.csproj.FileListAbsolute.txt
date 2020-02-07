@@ -1,0 +1,16 @@
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.Form1.resources
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.Properties.Resources.resources
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.csproj.GenerateResource.Cache
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\bin\Debug\test_web_cam.exe
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\bin\Debug\test_web_cam.pdb
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.csprojResolveAssemblyReference.cache
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.exe
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\vcs_WebCam_all\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.pdb
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.exe
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.pdb
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\bin\Debug\test_web_cam.exe
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\bin\Debug\test_web_cam.pdb
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.csprojResolveAssemblyReference.cache
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.Form1.resources
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.Properties.Resources.resources
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\test_web_cam\test_web_cam\obj\x86\Debug\test_web_cam.csproj.GenerateResource.Cache
