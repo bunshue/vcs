@@ -11,7 +11,7 @@ namespace vcs_ImageProcessing
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\_case1\\pic1.jpg";
+        string filename = @"C:\______test_files\_case1\\pic3.jpg";
         //Graphics g;
         Pen p;
         Bitmap bitmap1;
@@ -19,12 +19,12 @@ namespace vcs_ImageProcessing
         public Form1()
         {
             InitializeComponent();
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //圖片Zoom的方法
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
             pictureBox1.ClientSize = new Size(640, 480);    //設定pictureBox的大小
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
 
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom; //圖片Zoom的方法
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal; //圖片Zoom的方法
             pictureBox2.ClientSize = new Size(640, 480);    //設定pictureBox的大小
             pictureBox2.BorderStyle = BorderStyle.Fixed3D;
             pictureBox2.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
@@ -34,6 +34,7 @@ namespace vcs_ImageProcessing
         {
             Image image1 = new Bitmap(filename, true);
             pictureBox1.Image = image1;
+            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
 
         }
 
@@ -229,18 +230,18 @@ namespace vcs_ImageProcessing
             int ww;
             int hh;
 
-            richTextBox1.Text += "擷取其中一塊處理中~~~~~~\n";
+            richTextBox1.Text += "擷取其中一塊處理中~~~~~~, 九宮格之正中央\n";
 
             bitmap1 = new Bitmap(filename);
             //g = Graphics.FromImage(bitmap1);
 
-            ww = 300;
-            hh = 300;
+            ww = bitmap1.Width / 3;
+            hh = bitmap1.Height / 3;
 
             Bitmap bitmap2 = new Bitmap(ww, hh);
 
-            int x_st = 450;
-            int y_st = 450;
+            int x_st = ww;
+            int y_st = hh;
 
             for (xx = 0; xx < ww; xx++)
             {
@@ -250,9 +251,8 @@ namespace vcs_ImageProcessing
                 }
             }
             pictureBox2.Image = bitmap2;
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;     //圖片Zoom的方法
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
             richTextBox1.Text += "處理完成\n";
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -286,6 +286,11 @@ namespace vcs_ImageProcessing
             g.DrawString("彩色轉灰階", new Font("標楷體", 100), new SolidBrush(Color.Blue), new PointF(20, 20));
 
             pictureBox2.Image = bitmap1;
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
 
         }
 
