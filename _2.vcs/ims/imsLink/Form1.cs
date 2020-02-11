@@ -99,6 +99,7 @@ namespace imsLink
         int flag_camera_use_insighteyes = 0;
         int flag_camera_already_have_serial = 0;
         int flag_stage3_step = 0;
+        int flag_stage_awb = 0;
         int csv_index1 = 0;
         //int csv_index2 = 0;
         int csv_index3 = 0;
@@ -2444,6 +2445,8 @@ namespace imsLink
 
                 lb_yuv_y2.Visible = en;
                 lb_auto_awb_cnt.Visible = false;
+
+                bt_tmp.Text = total_test_count.ToString() + "次";
             }
 
             //note
@@ -5117,8 +5120,6 @@ namespace imsLink
                 drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 drawBrush = new SolidBrush(Color.Yellow);
                 drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                //drawFont2 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                drawFont3 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                 x_st = 10;
                 y_st = 10;
                 gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
@@ -5132,6 +5133,7 @@ namespace imsLink
                 int x_st2 = 0;
                 int y_st2 = 0;
                 Point[] points = new Point[3];
+                drawFont3 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
 
             //畫框的功能
 
@@ -5268,6 +5270,7 @@ namespace imsLink
 
                 if ((flag_do_awb == true) && (flag_display_r_do_awb == true))
                 {
+                    drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                     if (diff_r > 0)
                     {
                         x_st2 = x_st + 100 - ss;
@@ -5277,7 +5280,6 @@ namespace imsLink
                         points[2] = new Point(x_st2 + 0, y_st2 + ss);
                         gg.FillPolygon(new SolidBrush(Color.Red), points);
 
-                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                         gg.DrawString(diff_r.ToString(), drawFont2, new SolidBrush(Color.Red), x_st + 101, y_st + 7);
                     }
                     else if (diff_r < 0)
@@ -5289,7 +5291,6 @@ namespace imsLink
                         points[0] = new Point(x_st2 + ss / 2, y_st2 + ss);
                         gg.FillPolygon(new SolidBrush(Color.Green), points);
 
-                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                         gg.DrawString((-diff_r).ToString(), drawFont2, new SolidBrush(Color.Green), x_st + 101, y_st + 7);
                     }
                 }
@@ -5366,6 +5367,7 @@ namespace imsLink
 
                 if ((flag_do_awb == true) && (flag_display_g_do_awb == true))
                 {
+                    drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                     if (diff_g > 0)
                     {
                         x_st2 = x_st + 100 - ss;
@@ -5375,7 +5377,6 @@ namespace imsLink
                         points[2] = new Point(x_st2 + 0, y_st2 + ss);
                         gg.FillPolygon(new SolidBrush(Color.Red), points);
 
-                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                         gg.DrawString(diff_g.ToString(), drawFont2, new SolidBrush(Color.Red), x_st + 101, y_st + 7);
                     }
                     else if (diff_g < 0)
@@ -5387,7 +5388,6 @@ namespace imsLink
                         points[0] = new Point(x_st2 + ss / 2, y_st2 + ss);
                         gg.FillPolygon(new SolidBrush(Color.Green), points);
 
-                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                         gg.DrawString((-diff_g).ToString(), drawFont2, new SolidBrush(Color.Green), x_st + 101, y_st + 7);
                     }
                 }
@@ -5474,6 +5474,7 @@ namespace imsLink
 
                 if ((flag_do_awb == true) && (flag_display_b_do_awb == true))
                 {
+                    drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                     if (diff_b > 0)
                     {
                         x_st2 = x_st + 100 - ss;
@@ -5483,7 +5484,6 @@ namespace imsLink
                         points[2] = new Point(x_st2 + 0, y_st2 + ss);
                         gg.FillPolygon(new SolidBrush(Color.Red), points);
 
-                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                         gg.DrawString(diff_b.ToString(), drawFont2, new SolidBrush(Color.Red), x_st + 101, y_st + 7);
                     }
                     else if (diff_b < 0)
@@ -5495,7 +5495,6 @@ namespace imsLink
                         points[0] = new Point(x_st2 + ss / 2, y_st2 + ss);
                         gg.FillPolygon(new SolidBrush(Color.Green), points);
 
-                        drawFont2 = new Font("Arial", 3, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                         gg.DrawString((-diff_b).ToString(), drawFont2, new SolidBrush(Color.Green), x_st + 101, y_st + 7);
                     }
                 }
@@ -9166,6 +9165,7 @@ namespace imsLink
                 progressBar_awb.Value = 10;
                 delay(100);
 
+                flag_stage_awb = 0;
                 button49_Click(sender, e);
 
                 {
@@ -9446,6 +9446,14 @@ namespace imsLink
                             "down_up_point_cnt(" + awb_cnt.ToString() + ")=" + flag_down_up_point_cnt.ToString() + ";" +
                             "awb_block(" + awb_cnt.ToString() + ")=" + awb_block.ToString() + ";" +
                             "\n";
+
+                        awb_cnt--;
+                        richTextBox1.Text +=
+                            "right_left_point_cnt[" + awb_cnt.ToString() + "]=" + flag_right_left_point_cnt.ToString() + ";" +
+                            "down_up_point_cnt[" + awb_cnt.ToString() + "]=" + flag_down_up_point_cnt.ToString() + ";" +
+                            "awb_block[" + awb_cnt.ToString() + "]=" + awb_block.ToString() + ";" +
+                            "\t//for vcs\n";
+                        awb_cnt++;
                     }
                     else
                     {
@@ -9461,6 +9469,7 @@ namespace imsLink
                     flag_doing_awb = false;
                     bt_awb_test.Enabled = true;
 
+                    flag_stage_awb = 2;
                     button49_Click(sender, e);
                 }
                 else
@@ -11566,6 +11575,11 @@ namespace imsLink
                     {
                         richTextBox1.Text += ".";
                         delay(50);
+                        if ((cnt % 5) == 4)
+                        {
+                            delay(500);
+                            Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
+                        }
                     }
                     //richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
                     flag_comport_ok = false;
@@ -14651,6 +14665,23 @@ namespace imsLink
                 if (lb_auto_awb_cnt.Visible == true)
                 {
                     filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + current_test_count.ToString("D2");
+                    if (flag_stage_awb == 0)
+                    {
+                        filename1 += "_a";
+                    }
+                    else if (flag_stage_awb == 1)
+                    {
+                        filename1 += "_b";
+
+                    }
+                    else if (flag_stage_awb == 2)
+                    {
+                        filename1 += "_c";
+                    }
+                    else
+                    {
+                        filename1 += "_xxxxxx";
+                    }
                 }
                 else
                 {
@@ -16764,6 +16795,7 @@ namespace imsLink
             if ((y_st + hh) > h)
                 y_st = h - hh;
 
+            /*
             try
             {
                 if (timer_webcam_mode == FOCUS_ON_PICTURE)
@@ -16781,6 +16813,7 @@ namespace imsLink
                 flag_do_find_awb_location = false;
                 return S_FALSE;
             }
+            */
 
             flag_do_find_awb_location = true;
             delay(10);
@@ -17027,6 +17060,7 @@ namespace imsLink
                     //richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
                     //richTextBox1.Text += "awb_block = " + awb_block.ToString() + ", awb_block = " + awb_block.ToString() + "\n";
 
+                    /*
                     try
                     {
                         ga.DrawRectangle(new Pen(Color.Green, 1), x_st - 2, y_st - 2, awb_block + 4, awb_block + 4);
@@ -17038,6 +17072,7 @@ namespace imsLink
                         flag_do_find_awb_location = false;
                         return S_FALSE;
                     }
+                    */
                     
                     pictureBox1.Image = bm2;
                     refresh_picturebox2();
@@ -17234,12 +17269,12 @@ namespace imsLink
             delay(10);
             DongleAddr_h = 0x52;
             DongleAddr_l = 0x1E;
-            SendData = 0x06;
+            SendData = 0x05;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
             delay(10);
             DongleAddr_h = 0x52;
             DongleAddr_l = 0x1F;
-            SendData = 0x70;
+            SendData = 0x00;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
             delay(10);
 
