@@ -71,7 +71,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(552, 522);
             this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "李白 越中覽古\n越王勾踐破吳歸，\n戰士還家盡錦衣。\n宮女如花滿春殿，\n只今唯有鷓鴣飛。\n";
+            this.richTextBox1.Text = "";
             // 
             // button2
             // 
@@ -223,7 +223,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(205, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "xxx";
+            this.button15.Text = "一些資訊";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

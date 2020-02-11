@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_37_sorting
+namespace vcs_test_all_14_Array_Sorting
 {
     static class Program
     {

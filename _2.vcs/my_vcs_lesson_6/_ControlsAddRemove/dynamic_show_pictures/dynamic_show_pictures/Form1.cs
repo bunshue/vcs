@@ -76,7 +76,34 @@ namespace dynamic_show_pictures
 
             if (Directory.Exists(path))     //確認資料夾是否存在
             {
-                files.AddRange(Directory.GetFiles(path));
+                //files.AddRange(Directory.GetFiles(path)); 加入所有檔案, 但無法區分是否為圖片檔, 捨棄
+
+                string[] f = System.IO.Directory.GetFiles(path, "*.*", System.IO.SearchOption.AllDirectories);
+                foreach (string filename in f)
+                {
+                    richTextBox1.Text += filename + "\n";
+
+                    FileInfo fi = new FileInfo(filename);
+
+                    if (fi.Exists == true)      //確認檔案是否存在
+                    {
+                        /*
+                        richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
+                        richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                        richTextBox1.Text += "副檔名：" + fi.Extension + Environment.NewLine;
+                        richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                        richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
+                        richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
+                        richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
+                        */
+                        if ((fi.Extension == ".bmp") || (fi.Extension == ".jpg") || (fi.Extension == ".png"))
+                        {
+                            files.Add(fi.Directory + "//" + fi.Name);
+                        }
+                    }
+                    else
+                        richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                }
             }
             return files;
         }

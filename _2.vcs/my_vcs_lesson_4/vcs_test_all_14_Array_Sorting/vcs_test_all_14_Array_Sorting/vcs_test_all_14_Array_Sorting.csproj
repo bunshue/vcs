@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DB3D63C4-6582-49A4-A157-DD484A32D14E}</ProjectGuid>
+    <ProjectGuid>{41B824E2-7788-42CC-A010-6E6FD9FE42A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_37_sorting</RootNamespace>
-    <AssemblyName>vcs_test_all_37_sorting</AssemblyName>
+    <RootNamespace>vcs_test_all_14_Array_Sorting</RootNamespace>
+    <AssemblyName>vcs_test_all_14_Array_Sorting</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

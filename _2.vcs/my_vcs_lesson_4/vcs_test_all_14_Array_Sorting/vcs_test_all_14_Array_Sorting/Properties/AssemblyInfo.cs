@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_test_all_37_sorting")]
+[assembly: AssemblyTitle("vcs_test_all_14_Array_Sorting")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("vcs_test_all_37_sorting")]
+[assembly: AssemblyProduct("vcs_test_all_14_Array_Sorting")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("ee8bdfc4-7cd8-4b13-a0b5-6edd0dd0a75f")]
+[assembly: Guid("7de000ea-5546-4f84-bdde-6bab21c20be5")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

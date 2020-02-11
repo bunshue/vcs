@@ -346,29 +346,11 @@ namespace vcs_test_all_99_tmp1
 
         private void button23_Click_1(object sender, EventArgs e)
         {
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            MessageBox.Show("螢幕解析度為 " + screenWidth.ToString() + "*" + screenHeight.ToString());
 
         }
 
         private void button32_Click_1(object sender, EventArgs e)
         {
-            richTextBox1.Text += "MachineName: " + Environment.MachineName + "\n";
-            richTextBox1.Text += "# of processors (logical): " + Environment.ProcessorCount + "\n";
-            //richTextBox1.Text += "# of processors (physical): " + CountPhysicalProcessors() + "\n";
-            //richTextBox1.Text += "RAM installed:   bytes" + CountPhysicalMemory() + "\n";
-            richTextBox1.Text += "Is OS 64-bit? " + Environment.Is64BitOperatingSystem + "\n";
-            richTextBox1.Text += "Is process 64-bit? " + Environment.Is64BitProcess + "\n";
-            richTextBox1.Text += "Little-endian: " + BitConverter.IsLittleEndian + "\n";
-            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
-            {
-                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
-                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
-                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
-                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
-                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
-            }
 
         }
 

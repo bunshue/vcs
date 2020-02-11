@@ -403,7 +403,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(154, 42);
             this.button23.TabIndex = 52;
-            this.button23.Text = "取得螢幕目前的解析度";
+            this.button23.Text = "xxx";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click_1);
             // 
@@ -414,7 +414,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(154, 42);
             this.button32.TabIndex = 56;
-            this.button32.Text = "一些資訊";
+            this.button32.Text = "xxx";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click_1);
             // 

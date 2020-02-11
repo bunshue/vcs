@@ -40,6 +40,7 @@ namespace vcs_MyPlayer2
                     {
                         richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
                         richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                        richTextBox1.Text += "副檔名：" + fi.Extension + Environment.NewLine;
                         richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
                         richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
                         richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
@@ -95,6 +96,7 @@ namespace vcs_MyPlayer2
                     {
                         richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
                         richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                        richTextBox1.Text += "副檔名：" + fi.Extension + Environment.NewLine;
                         richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
                         richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
                         richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;

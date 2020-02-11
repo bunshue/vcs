@@ -13,7 +13,7 @@ namespace vcs_DrawSearchLocation
 {
     public partial class Form1 : Form
     {
-        private const int ROUND = 50;
+        private const int ROUND = 30;
 
         Graphics g;
         Bitmap bitmap1;
@@ -64,56 +64,38 @@ namespace vcs_DrawSearchLocation
             int[] down_up_point_cnt = new int[ROUND];
             int[] awb_block = new int[ROUND];
 
-            right_left_point_cnt[0] = -15; down_up_point_cnt[0] = 65; awb_block[0] = 32;	//for vcs
-            right_left_point_cnt[1] = -10; down_up_point_cnt[1] = -55; awb_block[1] = 32;	//for vcs
-            right_left_point_cnt[2] = -10; down_up_point_cnt[2] = -55; awb_block[2] = 32;	//for vcs
-            right_left_point_cnt[3] = -15; down_up_point_cnt[3] = 65; awb_block[3] = 32;	//for vcs
-            right_left_point_cnt[4] = -15; down_up_point_cnt[4] = 65; awb_block[4] = 32;	//for vcs
-            right_left_point_cnt[5] = -15; down_up_point_cnt[5] = 65; awb_block[5] = 32;	//for vcs
-            right_left_point_cnt[6] = 50; down_up_point_cnt[6] = -30; awb_block[6] = 32;	//for vcs
-            right_left_point_cnt[7] = -15; down_up_point_cnt[7] = 65; awb_block[7] = 32;	//for vcs
-            right_left_point_cnt[8] = -15; down_up_point_cnt[8] = -50; awb_block[8] = 28;	//for vcs
-            right_left_point_cnt[9] = -10; down_up_point_cnt[9] = -50; awb_block[9] = 28;	//for vcs
-            right_left_point_cnt[10] = -15; down_up_point_cnt[10] = 65; awb_block[10] = 32;	//for vcs
-            right_left_point_cnt[11] = 55; down_up_point_cnt[11] = -30; awb_block[11] = 28;	//for vcs
-            right_left_point_cnt[12] = -15; down_up_point_cnt[12] = 65; awb_block[12] = 32;	//for vcs
-            right_left_point_cnt[13] = -15; down_up_point_cnt[13] = 65; awb_block[13] = 32;	//for vcs
-            right_left_point_cnt[14] = 50; down_up_point_cnt[14] = -30; awb_block[14] = 28;	//for vcs
-            right_left_point_cnt[15] = 50; down_up_point_cnt[15] = -30; awb_block[15] = 32;	//for vcs
-            right_left_point_cnt[16] = -15; down_up_point_cnt[16] = 65; awb_block[16] = 32;	//for vcs
-            right_left_point_cnt[17] = 50; down_up_point_cnt[17] = -30; awb_block[17] = 28;	//for vcs
-            right_left_point_cnt[18] = -15; down_up_point_cnt[18] = 65; awb_block[18] = 32;	//for vcs
-            right_left_point_cnt[19] = -15; down_up_point_cnt[19] = 65; awb_block[19] = 32;	//for vcs
-            right_left_point_cnt[20] = -15; down_up_point_cnt[20] = 65; awb_block[20] = 32;	//for vcs
-            right_left_point_cnt[21] = -15; down_up_point_cnt[21] = 65; awb_block[21] = 32;	//for vcs
-            right_left_point_cnt[22] = -10; down_up_point_cnt[22] = -55; awb_block[22] = 32;	//for vcs
-            right_left_point_cnt[23] = -15; down_up_point_cnt[23] = 65; awb_block[23] = 32;	//for vcs
-            right_left_point_cnt[24] = -10; down_up_point_cnt[24] = -55; awb_block[24] = 32;	//for vcs
-            right_left_point_cnt[25] = 50; down_up_point_cnt[25] = -30; awb_block[25] = 32;	//for vcs
-            right_left_point_cnt[26] = 50; down_up_point_cnt[26] = -30; awb_block[26] = 32;	//for vcs
-            right_left_point_cnt[27] = -15; down_up_point_cnt[27] = 65; awb_block[27] = 32;	//for vcs
-            right_left_point_cnt[28] = -15; down_up_point_cnt[28] = 65; awb_block[28] = 32;	//for vcs
-            right_left_point_cnt[29] = 50; down_up_point_cnt[29] = -30; awb_block[29] = 28;	//for vcs
-            right_left_point_cnt[30] = 60; down_up_point_cnt[30] = 65; awb_block[30] = 32;	//for vcs
-            right_left_point_cnt[31] = -15; down_up_point_cnt[31] = 65; awb_block[31] = 32;	//for vcs
-            right_left_point_cnt[32] = -15; down_up_point_cnt[32] = 65; awb_block[32] = 32;	//for vcs
-            right_left_point_cnt[33] = -10; down_up_point_cnt[33] = -55; awb_block[33] = 32;	//for vcs
-            right_left_point_cnt[34] = -15; down_up_point_cnt[34] = 65; awb_block[34] = 32;	//for vcs
-            right_left_point_cnt[35] = 50; down_up_point_cnt[35] = -30; awb_block[35] = 32;	//for vcs
-            right_left_point_cnt[36] = -30; down_up_point_cnt[36] = -55; awb_block[36] = 32;	//for vcs
-            right_left_point_cnt[37] = -15; down_up_point_cnt[37] = 65; awb_block[37] = 32;	//for vcs
-            right_left_point_cnt[38] = 50; down_up_point_cnt[38] = -30; awb_block[38] = 28;	//for vcs
-            right_left_point_cnt[39] = 60; down_up_point_cnt[39] = -55; awb_block[39] = 28;	//for vcs
-            right_left_point_cnt[40] = 50; down_up_point_cnt[40] = -30; awb_block[40] = 32;	//for vcs
-            right_left_point_cnt[41] = -15; down_up_point_cnt[41] = 65; awb_block[41] = 32;	//for vcs
-            right_left_point_cnt[42] = 50; down_up_point_cnt[42] = -30; awb_block[42] = 28;	//for vcs
-            right_left_point_cnt[43] = -15; down_up_point_cnt[43] = 65; awb_block[43] = 32;	//for vcs
-            right_left_point_cnt[44] = -10; down_up_point_cnt[44] = -50; awb_block[44] = 28;	//for vcs
-            right_left_point_cnt[45] = -10; down_up_point_cnt[45] = -55; awb_block[45] = 32;	//for vcs
-            right_left_point_cnt[46] = 50; down_up_point_cnt[46] = -30; awb_block[46] = 32;	//for vcs
-            right_left_point_cnt[47] = 50; down_up_point_cnt[47] = -30; awb_block[47] = 32;	//for vcs
-            right_left_point_cnt[48] = -15; down_up_point_cnt[48] = 65; awb_block[48] = 32;	//for vcs
-            right_left_point_cnt[49] = -10; down_up_point_cnt[49] = -55; awb_block[49] = 32;	//for vcs
+
+            right_left_point_cnt[0] = -10; down_up_point_cnt[0] = 65; awb_block[0] = 32;	//for vcs
+            right_left_point_cnt[1] = -10; down_up_point_cnt[1] = 65; awb_block[1] = 32;	//for vcs
+            right_left_point_cnt[2] = -10; down_up_point_cnt[2] = 65; awb_block[2] = 32;	//for vcs
+            right_left_point_cnt[3] = -10; down_up_point_cnt[3] = 65; awb_block[3] = 32;	//for vcs
+            right_left_point_cnt[4] = -10; down_up_point_cnt[4] = 65; awb_block[4] = 32;	//for vcs
+            right_left_point_cnt[5] = -10; down_up_point_cnt[5] = 65; awb_block[5] = 32;	//for vcs
+            right_left_point_cnt[6] = -10; down_up_point_cnt[6] = 65; awb_block[6] = 32;	//for vcs
+            right_left_point_cnt[7] = -10; down_up_point_cnt[7] = 65; awb_block[7] = 32;	//for vcs
+            right_left_point_cnt[8] = -15; down_up_point_cnt[8] = 65; awb_block[8] = 32;	//for vcs
+            right_left_point_cnt[9] = -10; down_up_point_cnt[9] = 65; awb_block[9] = 32;	//for vcs
+            right_left_point_cnt[10] = -10; down_up_point_cnt[10] = 65; awb_block[10] = 32;	//for vcs
+            right_left_point_cnt[11] = -10; down_up_point_cnt[11] = 65; awb_block[11] = 32;	//for vcs
+            right_left_point_cnt[12] = -10; down_up_point_cnt[12] = 65; awb_block[12] = 32;	//for vcs
+            right_left_point_cnt[13] = -10; down_up_point_cnt[13] = 65; awb_block[13] = 32;	//for vcs
+            right_left_point_cnt[14] = -10; down_up_point_cnt[14] = 65; awb_block[14] = 32;	//for vcs
+            right_left_point_cnt[15] = -10; down_up_point_cnt[15] = 65; awb_block[15] = 32;	//for vcs
+            right_left_point_cnt[16] = -10; down_up_point_cnt[16] = 65; awb_block[16] = 32;	//for vcs
+            right_left_point_cnt[17] = -15; down_up_point_cnt[17] = 65; awb_block[17] = 32;	//for vcs
+            right_left_point_cnt[18] = -10; down_up_point_cnt[18] = 65; awb_block[18] = 32;	//for vcs
+            right_left_point_cnt[19] = -10; down_up_point_cnt[19] = 65; awb_block[19] = 32;	//for vcs
+            right_left_point_cnt[20] = -10; down_up_point_cnt[20] = 65; awb_block[20] = 28;	//for vcs
+            right_left_point_cnt[21] = -10; down_up_point_cnt[21] = 65; awb_block[21] = 32;	//for vcs
+            right_left_point_cnt[22] = -10; down_up_point_cnt[22] = 65; awb_block[22] = 28;	//for vcs
+            right_left_point_cnt[23] = -10; down_up_point_cnt[23] = 65; awb_block[23] = 32;	//for vcs
+            right_left_point_cnt[24] = -10; down_up_point_cnt[24] = 65; awb_block[24] = 32;	//for vcs
+            right_left_point_cnt[25] = -10; down_up_point_cnt[25] = 65; awb_block[25] = 32;	//for vcs
+            right_left_point_cnt[26] = -10; down_up_point_cnt[26] = 65; awb_block[26] = 32;	//for vcs
+            right_left_point_cnt[27] = -10; down_up_point_cnt[27] = 65; awb_block[27] = 32;	//for vcs
+            right_left_point_cnt[28] = -10; down_up_point_cnt[28] = 65; awb_block[28] = 32;	//for vcs
+            right_left_point_cnt[29] = -10; down_up_point_cnt[29] = 65; awb_block[29] = 32;	//for vcs
+
 
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, 640 - 1, 480 - 1));
 
@@ -132,6 +114,8 @@ namespace vcs_DrawSearchLocation
                 y_st = HH / 2 - hh / 2 + down_up_point_cnt[i];
 
                 g.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(x_st, y_st, ww, hh));
+
+                g.DrawString(i.ToString(), new Font("標楷體", 16), new SolidBrush(Color.Red), new PointF(x_st + 100, y_st + hh + 10 + i * 12 - 200));
             }
 
         }

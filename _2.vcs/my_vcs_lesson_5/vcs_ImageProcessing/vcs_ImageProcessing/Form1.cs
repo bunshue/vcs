@@ -243,9 +243,9 @@ namespace vcs_ImageProcessing
             int x_st = ww;
             int y_st = hh;
 
-            for (xx = 0; xx < ww; xx++)
+            for (yy = 0; yy < hh; yy++)
             {
-                for (yy = 0; yy < hh; yy++)
+                for (xx = 0; xx < ww; xx++)
                 {
                     bitmap2.SetPixel(xx, yy, bitmap1.GetPixel(x_st + xx, y_st + yy));
                 }
@@ -291,6 +291,35 @@ namespace vcs_ImageProcessing
 
         private void button13_Click(object sender, EventArgs e)
         {
+            int xx;
+            int yy;
+            int ww;
+            int hh;
+
+            richTextBox1.Text += "縮圖成一半\n";
+
+            bitmap1 = new Bitmap(filename);
+            //g = Graphics.FromImage(bitmap1);
+
+            ww = bitmap1.Width / 2;
+            hh = bitmap1.Height / 2;
+
+            Bitmap bitmap2 = new Bitmap(ww, hh);
+
+            int x_st = 0;
+            int y_st = 0;
+
+            for (yy = 0; yy < hh; yy++)
+            {
+                for (xx = 0; xx < ww; xx++)
+                {
+                    bitmap2.SetPixel(xx, yy, bitmap1.GetPixel(x_st + xx * 2 + 1, y_st + yy * 2 + 1));
+                }
+            }
+
+            pictureBox2.Image = bitmap2;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
+            richTextBox1.Text += "處理完成\n";
 
         }
 
