@@ -161,8 +161,9 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(217, 42);
             this.button8.TabIndex = 8;
-            this.button8.Text = "xxx";
+            this.button8.Text = "字串處理";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 

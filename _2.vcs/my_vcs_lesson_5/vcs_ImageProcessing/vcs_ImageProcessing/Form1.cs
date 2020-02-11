@@ -35,25 +35,21 @@ namespace vcs_ImageProcessing
             Image image1 = new Bitmap(filename, true);
             pictureBox1.Image = image1;
             richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
-
         }
 
         private void trackBar_R_Scroll(object sender, EventArgs e)
         {
             tb_R.Text = trackBar_R.Value.ToString();
-
         }
 
         private void trackBar_G_Scroll(object sender, EventArgs e)
         {
             tb_G.Text = trackBar_G.Value.ToString();
-
         }
 
         private void trackBar_B_Scroll(object sender, EventArgs e)
         {
             tb_B.Text = trackBar_B.Value.ToString();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,7 +62,6 @@ namespace vcs_ImageProcessing
             ratio_b = trackBar_B.Value;
 
             draw_picture(ratio_r, ratio_g, ratio_b);
-
         }
 
         int ratio = 100;
@@ -79,7 +74,6 @@ namespace vcs_ImageProcessing
 
                 draw_picture(ratio, ratio, ratio);
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -98,7 +92,6 @@ namespace vcs_ImageProcessing
         {
             bitmap1 = null;
             pictureBox2.Image = null;
-
         }
 
         void draw_picture(int ratio_r, int ratio_g, int ratio_b)
@@ -320,6 +313,37 @@ namespace vcs_ImageProcessing
             pictureBox2.Image = bitmap2;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
             richTextBox1.Text += "處理完成\n";
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            // Retrieve the image.
+            Bitmap image1 = new Bitmap(filename, true);
+
+            int x, y;
+
+            // Loop through the images pixels to reset color.
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+                    Color pixelColor = image1.GetPixel(x, y);
+                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
+                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
+                    Color newColor = Color.FromArgb(0, 0, pixelColor.B);
+                    image1.SetPixel(x, y, newColor);
+                }
+            }
+
+            // Set the PictureBox to display the image.
+            pictureBox1.Image = image1;
+
+            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
+
+            // Display the pixel format in Label1.
+            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
+
 
         }
 

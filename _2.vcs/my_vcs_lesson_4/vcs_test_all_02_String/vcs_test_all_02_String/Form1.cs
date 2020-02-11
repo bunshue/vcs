@@ -105,6 +105,50 @@ namespace vcs_test_all_02_String
             richTextBox1.Clear();
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //字串處理
+            string str1 = "群曜醫電股份有限公司 Insight Medical Solutions Inc.";
+            string str2 = string.Empty;
+            str2 = str1.Substring(0, 4);    //從0取4
+            richTextBox1.Text += "str2 = " + str2 + "\n";
+            str2 = str1.Substring(4, 6);    //從4取6
+            richTextBox1.Text += "str2 = " + str2 + "\n";
+            str2 = str1.Substring(8, 10);   //從8取10
+            richTextBox1.Text += "str2 = " + str2 + "\n";
+
+            //char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
+            str1 = "中間路線";
+            byte[] byteData = Encoding.Default.GetBytes(str1);
+            foreach (byte b in byteData)
+            {
+                richTextBox1.Text += b.ToString("X2") + " ";
+
+
+            }
+            richTextBox1.Text += "\n";
+
+            string nn = string.Empty;
+            nn = Encoding.Default.GetString(byteData);
+            richTextBox1.Text += "new string : " + nn + "\n";
+
+
+            byteData[1] = (byte)(byteData[1] + 2);
+            nn = Encoding.Default.GetString(byteData);
+            richTextBox1.Text += "new string : " + nn + "\n";
+
+            str1 = "专业知识中";
+            byte[] byteData2 = Encoding.Default.GetBytes(str1);
+            foreach (byte b in byteData2)
+            {
+                richTextBox1.Text += b.ToString("X2") + " ";
+
+
+            }
+            richTextBox1.Text += "\n";
+
+        }
+
 
     }
 }
