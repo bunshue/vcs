@@ -81,16 +81,17 @@ namespace test_controls_add
         }
 
         //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
-
         private static void removeAllBtns(Panel panel)
         {
             while (panel.Controls.Count > 0)
+            {
                 foreach (Control item in panel.Controls.OfType<Button>())
                 {
                     Button btn = (Button)item;
                     MessageBox.Show("移除" + btn.Text);
                     panel.Controls.Remove(item);
                 }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

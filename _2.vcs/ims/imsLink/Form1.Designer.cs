@@ -259,6 +259,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.lb_auto_awb_cnt = new System.Windows.Forms.Label();
             this.cb_auto_search = new System.Windows.Forms.CheckBox();
             this.lb_yuv_y2 = new System.Windows.Forms.Label();
             this.bt_show_brightness = new System.Windows.Forms.Button();
@@ -538,7 +539,7 @@
             this.timer_stage3 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage9 = new System.Windows.Forms.Timer(this.components);
-            this.lb_auto_awb_cnt = new System.Windows.Forms.Label();
+            this.cb_only_search = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -3083,6 +3084,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.cb_only_search);
             this.tp_USB.Controls.Add(this.lb_auto_awb_cnt);
             this.tp_USB.Controls.Add(this.cb_auto_search);
             this.tp_USB.Controls.Add(this.lb_yuv_y2);
@@ -3244,6 +3246,17 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_auto_awb_cnt
+            // 
+            this.lb_auto_awb_cnt.AutoSize = true;
+            this.lb_auto_awb_cnt.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_auto_awb_cnt.ForeColor = System.Drawing.Color.Red;
+            this.lb_auto_awb_cnt.Location = new System.Drawing.Point(545, 212);
+            this.lb_auto_awb_cnt.Name = "lb_auto_awb_cnt";
+            this.lb_auto_awb_cnt.Size = new System.Drawing.Size(22, 24);
+            this.lb_auto_awb_cnt.TabIndex = 204;
+            this.lb_auto_awb_cnt.Text = "1";
             // 
             // cb_auto_search
             // 
@@ -6468,16 +6481,16 @@
             this.timer_stage9.Interval = 300;
             this.timer_stage9.Tick += new System.EventHandler(this.timer_stage9_Tick);
             // 
-            // lb_auto_awb_cnt
+            // cb_only_search
             // 
-            this.lb_auto_awb_cnt.AutoSize = true;
-            this.lb_auto_awb_cnt.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_auto_awb_cnt.ForeColor = System.Drawing.Color.Red;
-            this.lb_auto_awb_cnt.Location = new System.Drawing.Point(545, 212);
-            this.lb_auto_awb_cnt.Name = "lb_auto_awb_cnt";
-            this.lb_auto_awb_cnt.Size = new System.Drawing.Size(22, 24);
-            this.lb_auto_awb_cnt.TabIndex = 204;
-            this.lb_auto_awb_cnt.Text = "1";
+            this.cb_only_search.AutoSize = true;
+            this.cb_only_search.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_only_search.Location = new System.Drawing.Point(628, 218);
+            this.cb_only_search.Name = "cb_only_search";
+            this.cb_only_search.Size = new System.Drawing.Size(75, 20);
+            this.cb_only_search.TabIndex = 205;
+            this.cb_only_search.Text = "僅搜尋";
+            this.cb_only_search.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -7113,6 +7126,7 @@
         private System.Windows.Forms.Label lb_yuv_y2;
         private System.Windows.Forms.CheckBox cb_auto_search;
         private System.Windows.Forms.Label lb_auto_awb_cnt;
+        private System.Windows.Forms.CheckBox cb_only_search;
     }
 }
 

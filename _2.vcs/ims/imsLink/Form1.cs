@@ -2230,6 +2230,7 @@ namespace imsLink
             bt_tmp.Visible = en;
             pictureBox2.Visible = en;
             cb_auto_search.Visible = en;
+            cb_only_search.Visible = en;
 
             lb_awb_result_expo.Visible = en;
             lb_awb_result_gain.Visible = en;
@@ -2359,6 +2360,7 @@ namespace imsLink
                 bt_find_brightness.Visible = false;
                 bt_show_brightness.Visible = false;
                 cb_show_progress.Visible = false;
+                cb_only_search.Visible = false;
                 numericUpDown_find_brightness_h.Visible = false;
                 numericUpDown_find_brightness_l.Visible = false;
                 lb_th_h.Visible = false;
@@ -2576,6 +2578,9 @@ namespace imsLink
 
             cb_auto_search.Location = new Point(500, 330);
             cb_auto_search.Checked = true;
+
+            cb_only_search.Location = new Point(530, 465);
+            cb_only_search.Checked = false;
 
             //button
             x_st = 140;
@@ -2983,6 +2988,7 @@ namespace imsLink
                 //bt_find_brightness2.Location
                 //bt_show_brightness.Location
                 //cb_show_progress.Location
+                //cb_only_search.Location
                 //numericUpDown_find_brightness.Location
 
             }
@@ -3030,10 +3036,12 @@ namespace imsLink
 
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
+                /*
                 //debug code
                 bt_find_brightness.Visible = true;
                 bt_show_brightness.Visible = true;
                 cb_show_progress.Visible = true;
+                cb_only_search.Visible = true;
                 numericUpDown_find_brightness_h.Visible = true;
                 numericUpDown_find_brightness_l.Visible = true;
 
@@ -3051,6 +3059,7 @@ namespace imsLink
 
                 lb_yuv_y2.Visible = true;
                 lb_auto_awb_cnt.Visible = false;
+                */
             }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
@@ -3502,18 +3511,7 @@ namespace imsLink
 
         private void button72_Click(object sender, EventArgs e)
         {
-            button3_Click(sender, e);   //顯示系統資訊
-
-            //建立一個檔案
-            richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
-            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - bootup_time).ToString() + " 秒\n";
-            //richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";  //wrong
-            string filename = "imsLink_log." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            StreamWriter sw = File.CreateText(filename);
-            sw.Write(richTextBox1.Text);
-            sw.Close();
-            richTextBox1.Text += "存檔檔名: " + filename + "\n";
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+            save_log_to_local_drive();
         }
 
         private void button73_Click(object sender, EventArgs e)
@@ -4284,14 +4282,7 @@ namespace imsLink
 
         private void button3_Click(object sender, EventArgs e)
         {
-            OperatingSystem OSv = System.Environment.OSVersion;
-            richTextBox1.AppendText("imsLink登錄時間 : " + compile_time + "\n");
-            richTextBox1.AppendText("作業系統版本 : " + OSv.ToString() + "\n");
-            richTextBox1.AppendText("圖形介面版本 : " + software_version + "\n");
-            richTextBox1.AppendText("韌體版本 : F0" + fw_version.ToString() + "\n");
-            richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
-            richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n");
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+            show_system_info();     //顯示系統資訊
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -5157,18 +5148,24 @@ namespace imsLink
                     gg.DrawRectangle(new Pen(Color.Red, 10), 0, 0, pictureBox1.Width / 2, pictureBox1.Height / 2);
                 }
 
-                /*
-                if (flag_doing_awb == false)
+
+                if (flag_do_find_awb_location_ok == true)
                 {
-                    if (timer_webcam_mode == FOCUS_ON_PICTURE)
-                    {
-                        gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
-                        gg.DrawRectangle(new Pen(Color.Red, 10), 0, 0, pictureBox1.Width / 2, pictureBox1.Height / 2);
-                    }
-                    else
-                        gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
+                    gg.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
                 }
-                */
+                else
+                {
+                    if (flag_doing_awb == false)
+                    {
+                        if (timer_webcam_mode == FOCUS_ON_PICTURE)
+                        {
+                            gg.DrawRectangle(new Pen(Color.Red, 1), x_st, y_st, ww, hh);
+                            gg.DrawRectangle(new Pen(Color.Red, 10), 0, 0, pictureBox1.Width / 2, pictureBox1.Height / 2);
+                        }
+                        else
+                            gg.DrawRectangle(new Pen(Color.Silver, 1), x_st, y_st, ww, hh);
+                    }
+                }
 
                 if (flag_do_find_awb_location_ok == true)
                 {
@@ -5571,7 +5568,8 @@ namespace imsLink
                     }
                 }
 
-                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                //if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                if (flag_operation_mode == MODE_RELEASE_STAGE0)
                 {
                     //draw auto awb region
                     int th_h = (int)numericUpDown_find_brightness_h.Value;
@@ -5583,7 +5581,6 @@ namespace imsLink
                     gg.FillRectangle(new SolidBrush(Color.Yellow), 550, 347, 18, (255 - th_h) / 4);
                     gg.FillRectangle(new SolidBrush(Color.Gold), 550, 347 + (255 - th_l) / 4, 18, (th_l / 4));
                 }
-
             }
             usb_camera_width = w;
             usb_camera_height = h;
@@ -6050,192 +6047,7 @@ namespace imsLink
 
         private void button16_Click(object sender, EventArgs e)
         {
-            show_main_message1("存檔中...", S_OK, 10);
-            delay(10);
-
-            if (flag_operation_mode != MODE_RELEASE_STAGE0)
-            {
-                int i;
-                bool flag_incorrect_data = false;
-
-                if (tb_sn_opal.Text.Length == 0)
-                {
-                    show_main_message1("未輸入相機序號", S_OK, 30);
-                    show_main_message2("未輸入相機序號", S_OK, 30);
-                    flag_incorrect_data = true;
-                }
-                else if ((tb_sn_opal.Text.Length == 9) || (tb_sn_opal.Text.Length == 10))
-                {
-                    //檢查英文字母的正確性
-                    if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
-                    {
-                        flag_incorrect_data = false;
-                    }
-                    else
-                    {
-                        flag_incorrect_data = true;
-                        richTextBox1.Text += "SN1格式不正確b0\n";
-                        show_main_message1("序號格式不正確", S_OK, 30);
-                    }
-
-                    if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
-                    {
-                        flag_incorrect_data = false;
-                    }
-                    else
-                    {
-                        flag_incorrect_data = true;
-                        richTextBox1.Text += "SN1格式不正確b1\n";
-                        show_main_message1("序號格式不正確", S_OK, 30);
-                    }
-
-                    for (i = 2; i < tb_sn_opal.Text.Length; i++)
-                    {
-                        if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
-                        {
-                            flag_incorrect_data = true;
-                            richTextBox1.Text += "SN1格式不正確b\n";
-                            show_main_message1("序號格式不正確", S_OK, 30);
-                        }
-                    }
-
-                    if (flag_incorrect_data == false)
-                    {
-                        richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
-                    }
-                }
-                else
-                {
-                    flag_incorrect_data = true;
-                    show_main_message1("序號格式不正確", S_OK, 30);
-                }
-
-                if (flag_incorrect_data == true)
-                {
-                    richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
-                    return;
-                }
-                else
-                {
-                    richTextBox1.Text += "資料正確\n";
-                }
-            }
-
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
-            if (bitmap1 != null)
-            {
-                IntPtr pHdc;
-                Graphics g = Graphics.FromImage(bitmap1);
-                Pen p = new Pen(Color.Red, 1);
-                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                pHdc = g.GetHdc();
-
-                if (cb_show_time.Checked == true)
-                {   //顯示時間
-                    int xPos = 10;
-                    int yPos = 10;
-                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-
-                    g.ReleaseHdc();
-                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-                }
-                else
-                {
-                    g.ReleaseHdc();
-                }
-
-                g.Dispose();
-
-                String filename1 = string.Empty;
-                String filename2 = string.Empty;
-
-                if (flag_operation_mode == MODE_RELEASE_STAGE1A)
-                {
-                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
-                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1a";
-                }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
-                {
-                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
-                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1b";
-                }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE2)
-                {
-                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
-                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
-                }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE3)
-                {
-                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_3";
-                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_3";
-                }
-                else
-                {
-                    filename1 = "M:\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                    filename2 = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                }
-
-                //String file1 = file + ".jpg";
-                String filename1a = filename1 + ".bmp";
-                String filename2a = filename2 + ".bmp";
-                //String file3 = file + ".png";
-
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename1a, ImageFormat.Bmp);
-                    bitmap1.Save(filename2a, ImageFormat.Bmp);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2a + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                    show_main_message1("已存檔BMP", S_OK, 30);
-                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "xxx錯誤訊息b1 : " + ex.Message + "\n";
-                    show_main_message1("存檔失敗", S_OK, 30);
-                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
-                }
-
-                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE2))
-                {
-                    camera_serials.Add(new string[] { tb_sn_opal.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
-                    exportCSV();
-                }
-                else if (flag_operation_mode == MODE_RELEASE_STAGE3)
-                {
-                    if ((lb_class.Text.Length == 1) || (lb_class.Text.Length == 2))
-                    {
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, lb_class.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
-                        lb_class.Text = "";
-                        flag_stage3_step = 0;
-                        exportCSV();
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "等級資料錯誤, 不匯出csv檔, len = " + lb_class.Text.Length.ToString() + "\n";
-                        show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
-                        show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
-                        show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
-                    }
-                }
-
-                tb_sn_opal.Clear();
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-                show_main_message1("無圖可存", S_FALSE, 30);
-                show_main_message2("無圖可存", S_FALSE, 30);
-                tb_sn_opal.Clear();
-            }
+            save_image_to_drive();
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -6567,76 +6379,7 @@ namespace imsLink
 
         private void button20_Click(object sender, EventArgs e)
         {
-            if (flag_doing_refreshing_camera == true)
-            {
-                richTextBox1.Text += "正在影像重抓, 忽略\n";
-                return;
-            }
-
-            show_main_message1("關閉程式", S_OK, 30);
-            if (flag_comport_ok == true)
-            {
-                serialPort1.Close();
-                this.BackColor = Color.Yellow;
-                button1.Enabled = true;
-                button2.Enabled = false;
-                flag_comport_ok = false;
-                lb_main_mesg1.Text = "COM未連線";
-                playSound(S_FALSE);
-            }
-
-            if (Cam != null)
-            {
-                if ((flag_camera_start == 1) && (Cam.IsRunning == true))
-                {
-                    richTextBox1.Text += "USB影像傳輸中, 關閉\n";
-                    flag_camera_start = 0;
-                    Cam.Stop();  // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
-                    comboBox_webcam.Items.Clear();
-                }
-            }
-            show_main_message1("關閉程式", S_OK, 30);
-            richTextBox1.Text += "確認關閉ST\n";
-            delay(100);
-            richTextBox1.Text += "確認關閉SP\n";
-
-            if (Cam != null)
-            {
-                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    flag_camera_start = 0;
-                    Cam.Stop();   // WebCam stops capturing images.
-                    //Cam.SignalToStop();
-                    //Cam.WaitForStop();
-                    Cam = null;
-                    richTextBox1.Text += "先關閉camera\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "camera is null\n";
-            }
-
-            /*
-            richTextBox1.Text += "關閉程式\n";
-            //Application.Exit();
-            try
-            {
-                System.Environment.Exit(0);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息f : " + ex.Message + "\n";
-            }
-            */
-
-            //C# 強制關閉 Process
-            Process.GetCurrentProcess().Kill();
-
-            Application.Exit();
+            exit_program();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -7106,7 +6849,7 @@ namespace imsLink
 
         private void button6_Click(object sender, EventArgs e)
         {
-            button72_Click(sender, e);
+            save_log_to_local_drive();
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
@@ -8194,7 +7937,7 @@ namespace imsLink
             }
             else if (e.KeyCode == Keys.X)
             {
-                button20_Click(sender, e);
+                exit_program();
             }
             else if (e.KeyCode == Keys.F1)
             {
@@ -8294,7 +8037,7 @@ namespace imsLink
                 {
                     timer_stage2.Enabled = false;
                     lb_main_mesg2.Text = "資料正確, 存檔中";
-                    button16_Click(sender, e);
+                    save_image_to_drive();
                     delay(30);
                     timer_stage2.Enabled = true;
                 }
@@ -9158,6 +8901,64 @@ namespace imsLink
                 //progressBar_awb.BackColor = Color.Red;
                 Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
 
+                if (cb_only_search.Checked == true)
+                {
+                    if (cb_auto_search.Checked == true)
+                    {
+                        progressBar_awb.Value = 5;
+                        delay(100);
+
+                        lb_rgb_r.Text = "";
+                        lb_rgb_g.Text = "";
+                        lb_rgb_b.Text = "";
+
+                        timer_display.Enabled = true;
+                        flag_do_awb = true;
+                        //richTextBox1.Text += "AWB test ST write 0x3503 as 0x03\n";
+
+                        // Stop timing
+                        stopwatch.Stop();
+                        timer_awb.Enabled = false;
+
+                        // Write result
+
+                        richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                        //bt_awb_test.Text = "色彩校正完成";
+                        tb_awb_mesg.Text = "色彩校正完成";
+                        bt_awb_break.Visible = false;
+                        bt_awb_test.BackColor = Color.Lime;
+                        progressBar_awb.Value = 100;
+                        //progressBar_awb.ForeColor = Color.Green;
+                        //progressBar_awb.BackColor = Color.Green;
+                        flag_do_awb = false;
+                        timer_display.Enabled = false;
+                        playSound(S_OK);
+
+                        //for data analysis
+                        richTextBox1.Text +=
+                            "right_left_point_cnt[" + awb_cnt.ToString() + "]=" + flag_right_left_point_cnt.ToString() + ";" +
+                            "down_up_point_cnt[" + awb_cnt.ToString() + "]=" + flag_down_up_point_cnt.ToString() + ";" +
+                            "awb_block[" + awb_cnt.ToString() + "]=" + awb_block.ToString() + ";" +
+                            "\t//for vcs\n";
+                        awb_cnt++;
+
+                        flag_doing_awb = false;
+                        bt_awb_test.Enabled = true;
+
+                        /*
+                        //debug picture
+                        flag_stage_awb = 2;
+                        save_image_to_local_drive();
+                        */
+
+                        //flag_doing_awb = false;
+                        //bt_awb_test.Enabled = true;
+                        timer_stage2.Enabled = true;
+
+                        return;
+                    }
+                }
+
                 progressBar_awb.Value = 5;
                 delay(500);
                 //bt_awb_test.Text = "色彩校正開始";
@@ -9165,19 +8966,20 @@ namespace imsLink
                 progressBar_awb.Value = 10;
                 delay(100);
 
+                /*
+                //debug picture
                 flag_stage_awb = 0;
-                button49_Click(sender, e);
+                save_image_to_local_drive();
+                */
 
-                {
-                    lb_rgb_r.Text = "";
-                    lb_rgb_g.Text = "";
-                    lb_rgb_b.Text = "";
-                    //timer_stage2.Enabled = false;
-                    bt_awb.Text = "Auto";
-                    //richTextBox1.Text += "\nTo Auto mode\n";
-                    //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-                    Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
-                }
+                lb_rgb_r.Text = "";
+                lb_rgb_g.Text = "";
+                lb_rgb_b.Text = "";
+                //timer_stage2.Enabled = false;
+                bt_awb.Text = "Auto";
+                //richTextBox1.Text += "\nTo Auto mode\n";
+                //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
 
                 timer_display.Enabled = true;
                 flag_do_awb = true;
@@ -9348,9 +9150,12 @@ namespace imsLink
                     tb_awb_mesg.Text = "細調結束";
                     progressBar_awb.Value = 90;
 
-                    button49_Click(sender, e);
+                    /*
+                    //debug picture
+                    save_image_to_local_drive();
+                    */
 
-                    delay(500);
+                    delay(100);
                     progressBar_awb.Value = 95;
                     tolerance_ratio = 1;
                 }
@@ -9469,8 +9274,11 @@ namespace imsLink
                     flag_doing_awb = false;
                     bt_awb_test.Enabled = true;
 
+                    /*
+                    //debug picture
                     flag_stage_awb = 2;
-                    button49_Click(sender, e);
+                    save_image_to_local_drive();
+                    */
                 }
                 else
                 {
@@ -11136,15 +10944,7 @@ namespace imsLink
 
         private void bt_erase_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "erase all camera flash data\n";
-
-            if (flag_comport_ok == false)
-            {
-                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
-            show_main_message1("清除相機資料完成", S_OK, 30);
+            erase_camera_data();
         }
 
         bool flag_doing_check_webcam = false;
@@ -11673,7 +11473,7 @@ namespace imsLink
 
         private void button43_Click(object sender, EventArgs e)
         {
-            bt_erase_Click(sender, e);
+            erase_camera_data();
         }
 
         Byte[] user_flash_data = new Byte[16];
@@ -12994,7 +12794,7 @@ namespace imsLink
 
         private void bt_save_img_Click(object sender, EventArgs e)
         {
-            button16_Click(sender, e);
+            save_image_to_drive();
         }
 
         private void tb_sn_opal_MouseClick(object sender, MouseEventArgs e)
@@ -13764,57 +13564,22 @@ namespace imsLink
 
         private void button41_Click_1(object sender, EventArgs e)
         {
-            bt_erase_Click(sender, e);
+            erase_camera_data();
         }
 
         private void button47_Click(object sender, EventArgs e)
         {
-            //[C#] 產生一組亂數
-            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
-
-            var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var chars2 = "0123456789";
-            var stringChars1 = new char[10];
-            var stringChars2 = new char[11];
-            var random = new Random();
-            for (int i = 0; i < stringChars1.Length; i++)
-            {
-                if (i < 2)
-                {
-                    stringChars1[i] = chars1[random.Next(chars1.Length)];
-                }
-                else
-                {
-                    stringChars1[i] = chars2[random.Next(chars2.Length)];
-                }
-            }
-            var finalString1 = new String(stringChars1);
-            richTextBox1.Text += "相機序號1：" + finalString1 + "\n";
-
-            for (int i = 0; i < stringChars2.Length; i++)
-            {
-                stringChars2[i] = chars2[random.Next(chars2.Length)];
-            }
-            var finalString2 = new String(stringChars2);
-            richTextBox1.Text += "相機序號2：" + finalString2 + "\n";
-
-            tb_sn1.Text = finalString1;
-            tb_sn2.Text = finalString2;
-
-            flag_ok_to_write_data = true;
-
-            show_main_message1("製作相機資料完成", S_OK, 30);
+            make_camera_data();
         }
 
         private void button46_Click(object sender, EventArgs e)
         {
-            button47_Click(sender, e);
-
+            make_camera_data();
         }
 
         private void button48_Click(object sender, EventArgs e)
         {
-            bt_erase_Click(sender, e);
+            erase_camera_data();
         }
 
         private void tb_sn_opal_KeyPress(object sender, KeyPressEventArgs e)
@@ -14582,143 +14347,7 @@ namespace imsLink
 
         private void button49_Click(object sender, EventArgs e)
         {
-            if (this.pictureBox1.Focused == false)
-                this.pictureBox1.Focus();
-            show_main_message1("存檔中...", S_OK, 10);
-            delay(10);
-
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
-            if (bitmap1 != null)
-            {
-                IntPtr pHdc;
-                Graphics g = Graphics.FromImage(bitmap1);
-                Pen p = new Pen(Color.Red, 1);
-                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
-                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                pHdc = g.GetHdc();
-
-                if (cb_show_time.Checked == true)
-                {   //顯示時間
-                    int xPos = 10;
-                    int yPos = 10;
-                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-
-                    g.ReleaseHdc();
-                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-                }
-                else
-                {
-                    g.ReleaseHdc();
-                }
-
-                int x_st = 0;
-                int y_st = 0;
-
-                y_st = 450;
-
-                if (data_R > 0)
-                {
-                    drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                    drawBrush = new SolidBrush(Color.Red);
-                    x_st = 430;
-                    g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-
-                if (data_G > 0)
-                {
-                    drawBrush = new SolidBrush(Color.Green);
-                    x_st = 430 + 70;
-                    g.DrawString(data_G.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-
-                if (data_B > 0)
-                {
-                    drawBrush = new SolidBrush(Color.Blue);
-                    x_st = 430 + 140;
-                    g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-
-                if (lb_auto_awb_cnt.Visible == true)
-                {
-                    drawBrush = new SolidBrush(Color.Yellow);
-                    x_st = 430 - 70 * 2 - 60;
-                    g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-
-                if (cb_auto_search.Checked == true)
-                {
-                    drawBrush = new SolidBrush(Color.DarkBlue);
-                    x_st = 430 - 70 * 2 - 20;
-                    g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-                else
-                {
-                    drawBrush = new SolidBrush(Color.DarkBlue);
-                    x_st = 430 - 70 * 2;
-                    g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-                g.Dispose();
-
-                String filename1 = string.Empty;
-
-                if (lb_auto_awb_cnt.Visible == true)
-                {
-                    filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + current_test_count.ToString("D2");
-                    if (flag_stage_awb == 0)
-                    {
-                        filename1 += "_a";
-                    }
-                    else if (flag_stage_awb == 1)
-                    {
-                        filename1 += "_b";
-
-                    }
-                    else if (flag_stage_awb == 2)
-                    {
-                        filename1 += "_c";
-                    }
-                    else
-                    {
-                        filename1 += "_xxxxxx";
-                    }
-                }
-                else
-                {
-                    filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                }
-
-                //String file1 = file + ".jpg";
-                String filename1a = filename1 + ".bmp";
-                //String file3 = file + ".png";
-
-                try
-                {
-                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                    bitmap1.Save(filename1a, ImageFormat.Bmp);
-                    //bitmap1.Save(@file3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
-                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-                    show_main_message1("已存檔BMP", S_OK, 30);
-                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
-                    show_main_message1("存檔失敗", S_OK, 30);
-                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-                show_main_message1("無圖可存", S_FALSE, 30);
-                show_main_message2("無圖可存", S_FALSE, 30);
-            }
-
+            save_image_to_local_drive();
         }
 
         private void timer_stage6_Tick(object sender, EventArgs e)
@@ -15974,7 +15603,7 @@ namespace imsLink
             {
                 timer_stage3.Enabled = false;
                 lb_main_mesg2.Text = "資料正確, 存檔中";
-                button16_Click(sender, e);
+                save_image_to_drive();
                 delay(30);
                 timer_stage3.Enabled = true;
             }
@@ -16134,7 +15763,7 @@ namespace imsLink
             {
                 timer_stage1.Enabled = false;
                 lb_main_mesg2.Text = "資料正確, 存檔中";
-                button16_Click(sender, e);
+                save_image_to_drive();
                 delay(30);
                 timer_stage1.Enabled = true;
             }
@@ -17408,9 +17037,501 @@ namespace imsLink
             flag_do_find_awb_location = false;
 
             return S_OK;
-
-
         }
+
+        void save_log_to_local_drive()
+        {
+            show_system_info();     //顯示系統資訊
+
+            //建立一個檔案
+            richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
+            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - bootup_time).ToString() + " 秒\n";
+            //richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";  //wrong
+            string filename = "imsLink_log." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            StreamWriter sw = File.CreateText(filename);
+            sw.Write(richTextBox1.Text);
+            sw.Close();
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
+        void save_image_to_drive()
+        {
+            show_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            if (flag_operation_mode != MODE_RELEASE_STAGE0)
+            {
+                int i;
+                bool flag_incorrect_data = false;
+
+                if (tb_sn_opal.Text.Length == 0)
+                {
+                    show_main_message1("未輸入相機序號", S_OK, 30);
+                    show_main_message2("未輸入相機序號", S_OK, 30);
+                    flag_incorrect_data = true;
+                }
+                else if ((tb_sn_opal.Text.Length == 9) || (tb_sn_opal.Text.Length == 10))
+                {
+                    //檢查英文字母的正確性
+                    if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
+                    {
+                        flag_incorrect_data = false;
+                    }
+                    else
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b0\n";
+                        show_main_message1("序號格式不正確", S_OK, 30);
+                    }
+
+                    if (((tb_sn_opal.Text[1] >= 'A') && (tb_sn_opal.Text[1] <= 'Z')) || ((tb_sn_opal.Text[1] >= 'a') && (tb_sn_opal.Text[1] <= 'z')))
+                    {
+                        flag_incorrect_data = false;
+                    }
+                    else
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b1\n";
+                        show_main_message1("序號格式不正確", S_OK, 30);
+                    }
+
+                    for (i = 2; i < tb_sn_opal.Text.Length; i++)
+                    {
+                        if ((tb_sn_opal.Text[i] < '0') || (tb_sn_opal.Text[i] > '9'))
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "SN1格式不正確b\n";
+                            show_main_message1("序號格式不正確", S_OK, 30);
+                        }
+                    }
+
+                    if (flag_incorrect_data == false)
+                    {
+                        richTextBox1.Text += "取得 SN1序號 : " + tb_sn_opal.Text + "\n";
+                    }
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    show_main_message1("序號格式不正確", S_OK, 30);
+                }
+
+                if (flag_incorrect_data == true)
+                {
+                    richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\n";
+                    return;
+                }
+                else
+                {
+                    richTextBox1.Text += "資料正確\n";
+                }
+            }
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                if (cb_show_time.Checked == true)
+                {   //顯示時間
+                    int xPos = 10;
+                    int yPos = 10;
+                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                    g.ReleaseHdc();
+                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                }
+                else
+                {
+                    g.ReleaseHdc();
+                }
+
+                g.Dispose();
+
+                String filename1 = string.Empty;
+                String filename2 = string.Empty;
+
+                if (flag_operation_mode == MODE_RELEASE_STAGE1A)
+                {
+                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1a";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                {
+                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1";
+                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_1b";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE2)
+                {
+                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
+                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_2";
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE3)
+                {
+                    filename1 = "M:\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_3";
+                    filename2 = Application.StartupPath + "\\picture\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + tb_sn_opal.Text + "_3";
+                }
+                else
+                {
+                    filename1 = "M:\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    filename2 = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
+
+                //String file1 = file + ".jpg";
+                String filename1a = filename1 + ".bmp";
+                String filename2a = filename2 + ".bmp";
+                //String file3 = file + ".png";
+
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename1a, ImageFormat.Bmp);
+                    bitmap1.Save(filename2a, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2a + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message1("已存檔BMP", S_OK, 30);
+                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b1 : " + ex.Message + "\n";
+                    show_main_message1("存檔失敗", S_OK, 30);
+                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+
+                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                {
+                    camera_serials.Add(new string[] { tb_sn_opal.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                    exportCSV();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE3)
+                {
+                    if ((lb_class.Text.Length == 1) || (lb_class.Text.Length == 2))
+                    {
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, lb_class.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                        lb_class.Text = "";
+                        flag_stage3_step = 0;
+                        exportCSV();
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "等級資料錯誤, 不匯出csv檔, len = " + lb_class.Text.Length.ToString() + "\n";
+                        show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
+                        show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
+                        show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
+                    }
+                }
+
+                tb_sn_opal.Clear();
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message1("無圖可存", S_FALSE, 30);
+                show_main_message2("無圖可存", S_FALSE, 30);
+                tb_sn_opal.Clear();
+            }
+            return;
+        }
+
+        void save_image_to_local_drive()
+        {
+            if (this.pictureBox1.Focused == false)
+                this.pictureBox1.Focus();
+            show_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                if (cb_show_time.Checked == true)
+                {   //顯示時間
+                    int xPos = 10;
+                    int yPos = 10;
+                    string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                    g.ReleaseHdc();
+                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                }
+                else
+                {
+                    g.ReleaseHdc();
+                }
+
+                int x_st = 0;
+                int y_st = 0;
+
+                y_st = 450;
+
+                if (data_R > 0)
+                {
+                    drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                    drawBrush = new SolidBrush(Color.Red);
+                    x_st = 430;
+                    g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+
+                if (data_G > 0)
+                {
+                    drawBrush = new SolidBrush(Color.Green);
+                    x_st = 430 + 70;
+                    g.DrawString(data_G.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+
+                if (data_B > 0)
+                {
+                    drawBrush = new SolidBrush(Color.Blue);
+                    x_st = 430 + 140;
+                    g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+
+                if (lb_auto_awb_cnt.Visible == true)
+                {
+                    drawBrush = new SolidBrush(Color.Yellow);
+                    x_st = 430 - 70 * 2 - 60;
+                    g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+
+                if (cb_auto_search.Checked == true)
+                {
+                    drawBrush = new SolidBrush(Color.DarkBlue);
+                    x_st = 430 - 70 * 2 - 20;
+                    g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+                else
+                {
+                    drawBrush = new SolidBrush(Color.DarkBlue);
+                    x_st = 430 - 70 * 2;
+                    g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+                g.Dispose();
+
+                String filename1 = string.Empty;
+
+                if (lb_auto_awb_cnt.Visible == true)
+                {
+                    filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + current_test_count.ToString("D2");
+                    if (flag_stage_awb == 0)
+                    {
+                        filename1 += "_a";
+                    }
+                    else if (flag_stage_awb == 1)
+                    {
+                        filename1 += "_b";
+
+                    }
+                    else if (flag_stage_awb == 2)
+                    {
+                        filename1 += "_c";
+                    }
+                    else
+                    {
+                        filename1 += "_xxxxxx";
+                    }
+                }
+                else
+                {
+                    filename1 = Application.StartupPath + "\\picture\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                }
+
+                //String file1 = file + ".jpg";
+                String filename1a = filename1 + ".bmp";
+                //String file3 = file + ".png";
+
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename1a, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message1("已存檔BMP", S_OK, 30);
+                    show_main_message2("已存檔 : " + filename1a, S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b2 : " + ex.Message + "\n";
+                    show_main_message1("存檔失敗", S_OK, 30);
+                    show_main_message2("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message1("無圖可存", S_FALSE, 30);
+                show_main_message2("無圖可存", S_FALSE, 30);
+            }
+            return;
+        }
+
+        void show_system_info()
+        {
+            //顯示系統資訊
+            OperatingSystem OSv = System.Environment.OSVersion;
+            richTextBox1.AppendText("imsLink登錄時間 : " + compile_time + "\n");
+            richTextBox1.AppendText("作業系統版本 : " + OSv.ToString() + "\n");
+            richTextBox1.AppendText("圖形介面版本 : " + software_version + "\n");
+            richTextBox1.AppendText("韌體版本 : F0" + fw_version.ToString() + "\n");
+            richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
+            richTextBox1.AppendText("目前時間 : " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n");
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
+        void exit_program()
+        {
+            if (flag_doing_refreshing_camera == true)
+            {
+                richTextBox1.Text += "正在影像重抓, 忽略\n";
+                return;
+            }
+
+            show_main_message1("關閉程式", S_OK, 30);
+            if (flag_comport_ok == true)
+            {
+                serialPort1.Close();
+                this.BackColor = Color.Yellow;
+                button1.Enabled = true;
+                button2.Enabled = false;
+                flag_comport_ok = false;
+                lb_main_mesg1.Text = "COM未連線";
+                playSound(S_FALSE);
+            }
+
+            if (Cam != null)
+            {
+                if ((flag_camera_start == 1) && (Cam.IsRunning == true))
+                {
+                    richTextBox1.Text += "USB影像傳輸中, 關閉\n";
+                    flag_camera_start = 0;
+                    Cam.Stop();  // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
+                    comboBox_webcam.Items.Clear();
+                }
+            }
+            show_main_message1("關閉程式", S_OK, 30);
+            richTextBox1.Text += "確認關閉ST\n";
+            delay(100);
+            richTextBox1.Text += "確認關閉SP\n";
+
+            if (Cam != null)
+            {
+                if (Cam.IsRunning == true)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    flag_camera_start = 0;
+                    Cam.Stop();   // WebCam stops capturing images.
+                    //Cam.SignalToStop();
+                    //Cam.WaitForStop();
+                    Cam = null;
+                    richTextBox1.Text += "先關閉camera\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "camera is null\n";
+            }
+
+            /*
+            richTextBox1.Text += "關閉程式\n";
+            //Application.Exit();
+            try
+            {
+                System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f : " + ex.Message + "\n";
+            }
+            */
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
+            return;
+        }
+
+        void make_camera_data()
+        {
+            //[C#] 產生一組亂數
+            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+            var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var chars2 = "0123456789";
+            var stringChars1 = new char[10];
+            var stringChars2 = new char[11];
+            var random = new Random();
+            for (int i = 0; i < stringChars1.Length; i++)
+            {
+                if (i < 2)
+                {
+                    stringChars1[i] = chars1[random.Next(chars1.Length)];
+                }
+                else
+                {
+                    stringChars1[i] = chars2[random.Next(chars2.Length)];
+                }
+            }
+            var finalString1 = new String(stringChars1);
+            richTextBox1.Text += "相機序號1：" + finalString1 + "\n";
+
+            for (int i = 0; i < stringChars2.Length; i++)
+            {
+                stringChars2[i] = chars2[random.Next(chars2.Length)];
+            }
+            var finalString2 = new String(stringChars2);
+            richTextBox1.Text += "相機序號2：" + finalString2 + "\n";
+
+            tb_sn1.Text = finalString1;
+            tb_sn2.Text = finalString2;
+
+            flag_ok_to_write_data = true;
+
+            show_main_message1("製作相機資料完成", S_OK, 30);
+            return;
+        }
+
+        void erase_camera_data()
+        {
+            richTextBox1.Text += "erase all camera flash data\n";
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
+            show_main_message1("清除相機資料完成", S_OK, 30);
+            return;
+        }
+
+
+
+
+
 
 
     }

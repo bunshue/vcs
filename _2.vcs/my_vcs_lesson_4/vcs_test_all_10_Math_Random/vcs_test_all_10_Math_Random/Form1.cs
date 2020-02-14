@@ -266,5 +266,97 @@ namespace vcs_test_all_10_Math_Random
 
 
         }
+
+        public static string GetRandomString3(int length)
+        {
+            //var str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            var str = "ABCDE";
+            var next = new Random();
+            var builder = new StringBuilder();
+            for (var i = 0; i < length; i++)
+            {
+                builder.Append(str[next.Next(0, str.Length)]);
+            }
+            return builder.ToString();
+        }
+
+
+        private const int ROUND = 1000;
+        int[] useless = new int[ROUND];
+
+        public class MySearchInfo
+        {
+            public char c;
+            public int cnt;
+            public MySearchInfo(char c, int cc)
+            {
+                this.c = c;
+                this.cnt = cc;
+            }
+        }
+
+        //不用宣告長度的陣列(Array)
+        // 宣告searchinfos 為List
+        // 以下List 裡為MyFileInfo 型態
+        List<MySearchInfo> result = new List<MySearchInfo>();
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            int i;
+            int j;
+
+            for (i = 0; i < ROUND; i++)
+            {
+                useless[i] = 0;
+            }
+            result.Clear();
+
+            string str = GetRandomString3(ROUND);
+            richTextBox1.Text += "產生任意字串 : " + str + "\n";
+
+            for (i = 0; i < ROUND; i++)
+            {
+                //richTextBox1.Text += "取得字元 " + str[i] + "\n";
+            }
+
+            for (i = 0; i < ROUND; i++)
+            {
+                for (j = i + 1; j < ROUND; j++)
+                {
+                    if (useless[i] != -1)
+                    {
+                        //richTextBox1.Text += "compare i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+                        if (str[i] == str[j])
+                        {
+                            //richTextBox1.Text += "X";
+                            useless[i]++;
+                            useless[j] = -1;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+            }
+
+            for (i = 0; i < ROUND; i++)
+            {
+                //richTextBox1.Text += useless[i].ToString() + " ";
+                if (useless[i] != -1)
+                {
+                    //richTextBox1.Text += "found " + str[i] + " at i = " + i.ToString() + ", cnt = " + useless[i].ToString() + "\n";
+                    result.Add(new MySearchInfo(str[i], (useless[i] + 1)));
+                }
+            }
+
+            richTextBox1.Text += "結果:\n";
+            for (i = 0; i < result.Count; i++)
+            {
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 種, 字元 : " + result[i].c.ToString() + ", 出現次數 : " + result[i].cnt.ToString() + ", 比例 : " + ((double)result[i].cnt * 100 / ROUND).ToString() + " %\n";
+
+            }
+
+        }
     }
 }
