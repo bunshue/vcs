@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DrawSearchLocation
+namespace WindowsFormsApplication111
 {
     static class Program
     {

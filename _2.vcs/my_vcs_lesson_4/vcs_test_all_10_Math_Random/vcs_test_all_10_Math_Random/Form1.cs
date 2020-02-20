@@ -33,6 +33,7 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "-5的絕對值 = " + (Math.Abs(value)).ToString() + "\n";
             richTextBox1.Text += "兩者取大 = " + (Math.Max(aa, bb)).ToString() + "\n";
             richTextBox1.Text += "兩者取小 = " + (Math.Min(aa, bb)).ToString() + "\n";
+            richTextBox1.Text += "根號2 = " + (Math.Sqrt(2)).ToString() + "\n";
 
             float result = 0;
             int a = 11;
@@ -79,7 +80,6 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "取0~10的亂數值：" + result2 + "\n";
             richTextBox1.Text += "取10~20的亂數值：" + result3 + "\n";
             richTextBox1.Text += "取0.0~1.0的亂數值：" + result4 + "\n";
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -354,9 +354,174 @@ namespace vcs_test_all_10_Math_Random
             for (i = 0; i < result.Count; i++)
             {
                 richTextBox1.Text += "第 " + (i + 1).ToString() + " 種, 字元 : " + result[i].c.ToString() + ", 出現次數 : " + result[i].cnt.ToString() + ", 比例 : " + ((double)result[i].cnt * 100 / ROUND).ToString() + " %\n";
+            }
+        }
 
+        /// <summary> 
+        /// 標準差(StandardDifference) 
+        /// </summary> 
+        /// <param name="val"></param> 
+        /// <returns></returns> 
+        public double SD(double[] a)
+        {
+            int len;
+            double avg;
+            double sd;
+            int i;
+
+            len = a.Length;
+            avg = a.Average();
+            if (len <= 1)
+            {
+                sd = 0;
+                richTextBox1.Text += "SD = " + sd.ToString() + "\n";
+                return sd;
             }
 
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            richTextBox1.Text += "average = " + avg.ToString() + "\n";
+            sd = 0;
+            for (i = 0; i < len; i++)
+            {
+                sd += Math.Pow((a[i] - avg), 2);
+            }
+            sd /= (len - 1);
+            sd = Math.Sqrt(sd);
+
+            return sd;
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //一維陣列用法：
+            double[] a = new double[7] { 1, 3, 5, 7, 9, 11, 13 };
+
+            double sd;
+            sd = SD(a);
+            richTextBox1.Text += "SD = " + sd.ToString() + "\n";
+        }
+
+        /// <summary> 
+        /// 標準差(StandardDifference) 
+        /// </summary> 
+        /// <param name="val"></param> 
+        /// <returns></returns> 
+        public double SD2(List<double> val)
+        {
+            if (val.Count > 1)
+            {
+                double avg = val.Average();
+                double _result = (from a in val select Math.Pow(a - avg, 2)).Sum();
+                if (avg > 0 && _result > 0)
+                {
+                    double _sum = _result / (double)(val.Count - 1);
+                    double _Sqrt = Math.Sqrt(_sum);
+                    return _Sqrt;
+                }
+                else
+                    return 0;
+            }
+            else if (val.Count == 1)
+            {
+                return 0;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            List<double> arrays = new List<double>();
+
+            arrays.Add(1);
+            arrays.Add(3);
+            arrays.Add(5);
+            arrays.Add(7);
+            arrays.Add(9);
+            arrays.Add(11);
+            arrays.Add(13);
+
+            double sd;
+            sd = SD2(arrays);
+            richTextBox1.Text += "SD = " + sd.ToString() + "\n";
+        }
+
+        private const int CNT = 1000;
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //一維陣列用法：
+            double[] a = new double[CNT];
+
+            int i;
+            Random r = new Random();
+            for (i = 0; i < CNT; i++)
+            {
+                a[i] = r.NextDouble();
+            }
+
+
+            for (i = 0; i < CNT; i++)
+            {
+                //richTextBox1.Text += "a[" + i.ToString() + "] = " + a[i].ToString() + "\n";
+            }
+
+            double sd;
+            sd = SD(a);
+            richTextBox1.Text += "SD = " + sd.ToString() + "\n";
+
+
+        }
+
+        private const int RND = 20;
+        double[] awb_r = new double[RND];
+        double[] awb_b = new double[RND];
+        double[] right_left_point_cnt = new double[RND];
+        double[] down_up_point_cnt = new double[RND];
+        double[] awb_block = new double[RND];
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            awb_r[0] = 1578; awb_b[0] = 1594; right_left_point_cnt[0] = 60; down_up_point_cnt[0] = -60; awb_block[0] = 28;	//for vcs
+            awb_r[1] = 1583; awb_b[1] = 1591; right_left_point_cnt[1] = 60; down_up_point_cnt[1] = -60; awb_block[1] = 28;	//for vcs
+            awb_r[2] = 1586; awb_b[2] = 1600; right_left_point_cnt[2] = 70; down_up_point_cnt[2] = -60; awb_block[2] = 24;	//for vcs
+            awb_r[3] = 1573; awb_b[3] = 1589; right_left_point_cnt[3] = 60; down_up_point_cnt[3] = -60; awb_block[3] = 32;	//for vcs
+            awb_r[4] = 1575; awb_b[4] = 1590; right_left_point_cnt[4] = 70; down_up_point_cnt[4] = -55; awb_block[4] = 24;	//for vcs
+            awb_r[5] = 1571; awb_b[5] = 1599; right_left_point_cnt[5] = 60; down_up_point_cnt[5] = -60; awb_block[5] = 32;	//for vcs
+            awb_r[6] = 1582; awb_b[6] = 1597; right_left_point_cnt[6] = 70; down_up_point_cnt[6] = -60; awb_block[6] = 24;	//for vcs
+            awb_r[7] = 1573; awb_b[7] = 1595; right_left_point_cnt[7] = 60; down_up_point_cnt[7] = -60; awb_block[7] = 32;	//for vcs
+            awb_r[8] = 1571; awb_b[8] = 1587; right_left_point_cnt[8] = 60; down_up_point_cnt[8] = -55; awb_block[8] = 24;	//for vcs
+            awb_r[9] = 1577; awb_b[9] = 1590; right_left_point_cnt[9] = 60; down_up_point_cnt[9] = -60; awb_block[9] = 32;	//for vcs
+            awb_r[10] = 1581; awb_b[10] = 1580; right_left_point_cnt[10] = 60; down_up_point_cnt[10] = -60; awb_block[10] = 24;	//for vcs
+            awb_r[11] = 1576; awb_b[11] = 1600; right_left_point_cnt[11] = 60; down_up_point_cnt[11] = -60; awb_block[11] = 32;	//for vcs
+            awb_r[12] = 1531; awb_b[12] = 1491; right_left_point_cnt[12] = -10; down_up_point_cnt[12] = 70; awb_block[12] = 24;	//for vcs
+            awb_r[13] = 1566; awb_b[13] = 1583; right_left_point_cnt[13] = 60; down_up_point_cnt[13] = -55; awb_block[13] = 24;	//for vcs
+            awb_r[14] = 1575; awb_b[14] = 1599; right_left_point_cnt[14] = 60; down_up_point_cnt[14] = -60; awb_block[14] = 32;	//for vcs
+            awb_r[15] = 1574; awb_b[15] = 1603; right_left_point_cnt[15] = 60; down_up_point_cnt[15] = -60; awb_block[15] = 32;	//for vcs
+            awb_r[16] = 1572; awb_b[16] = 1596; right_left_point_cnt[16] = 60; down_up_point_cnt[16] = -60; awb_block[16] = 32;	//for vcs
+            awb_r[17] = 1589; awb_b[17] = 1590; right_left_point_cnt[17] = 70; down_up_point_cnt[17] = -60; awb_block[17] = 24;	//for vcs
+            awb_r[18] = 1569; awb_b[18] = 1598; right_left_point_cnt[18] = 60; down_up_point_cnt[18] = -60; awb_block[18] = 32;	//for vcs
+            awb_r[19] = 1571; awb_b[19] = 1592; right_left_point_cnt[19] = 60; down_up_point_cnt[19] = -60; awb_block[19] = 32;	//for vcs
+
+            double sd;
+
+            sd = SD(awb_r);
+            richTextBox1.Text += "awb_r SD = " + sd.ToString() + "\n";
+
+            sd = SD(awb_b);
+            richTextBox1.Text += "awb_b SD = " + sd.ToString() + "\n";
+
+            /*
+            sd = SD(right_left_point_cnt);
+            richTextBox1.Text += "right_left_point_cnt SD = " + sd.ToString() + "\n";
+
+            sd = SD(down_up_point_cnt);
+            richTextBox1.Text += "down_up_point_cnt SD = " + sd.ToString() + "\n";
+
+            sd = SD(awb_block);
+            richTextBox1.Text += "awb_block SD = " + sd.ToString() + "\n";
+            */
         }
     }
 }

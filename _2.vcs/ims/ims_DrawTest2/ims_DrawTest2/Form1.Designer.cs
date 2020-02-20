@@ -1,4 +1,4 @@
-﻿namespace vcs_DrawSearchLocation
+﻿namespace ims_DrawTest2
 {
     partial class Form1
     {

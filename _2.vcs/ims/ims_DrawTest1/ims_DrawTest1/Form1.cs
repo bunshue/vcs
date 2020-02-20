@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 
-namespace vcs_DrawSearchLocation
+namespace ims_DrawTest1
 {
     public partial class Form1 : Form
     {
