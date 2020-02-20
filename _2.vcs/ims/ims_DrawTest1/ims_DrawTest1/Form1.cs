@@ -140,7 +140,7 @@ namespace ims_DrawTest1
             int width;
             int height;
 
-            filename = Application.StartupPath + "\\ims_image.bmp";
+            filename = "C:\\______test_files\\ims_image.bmp";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
