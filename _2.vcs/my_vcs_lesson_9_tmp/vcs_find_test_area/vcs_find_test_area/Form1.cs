@@ -15,9 +15,7 @@ namespace vcs_find_test_area
 {
     public partial class Form1 : Form
     {
-        //string filename = @"C:\______test_files\_case1\\pic1.jpg";
-        string filename = @"test_pic.bmp";
-
+        string filename = @"C:\______test_files\test_pic.bmp";
         
         Graphics g;
         Pen p;

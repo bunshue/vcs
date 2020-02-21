@@ -22,8 +22,8 @@ namespace test_parse_camera_data
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string camera_setup_filename = "i2c_init_table.mem";
-            string camera_setup_filename_clean = "i2c_init_table_clean.mem";
+            string camera_setup_filename = "C:\\______test_files\\files_for_parse_data\\i2c_init_table.mem";
+            string camera_setup_filename_clean = "C:\\______test_files\\files_for_parse_data\\i2c_init_table_clean.mem";
 
             if (System.IO.File.Exists(camera_setup_filename) == false)
             {
@@ -218,9 +218,9 @@ namespace test_parse_camera_data
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string input_filename = "ov_register1.h";
-            string output_filename = "ov_register2.h";
-            string output_filename2 = "ov_register3.h";
+            string input_filename = "C:\\______test_files\\files_for_parse_data\\ov_register1.h";
+            string output_filename = "C:\\______test_files\\files_for_parse_data\\ov_register2.h";
+            string output_filename2 = "C:\\______test_files\\files_for_parse_data\\ov_register3.h";
 
             if (System.IO.File.Exists(input_filename) == false)
             {
@@ -319,7 +319,7 @@ namespace test_parse_camera_data
         private void button5_Click(object sender, EventArgs e)
         {
             XmlDocument document = new XmlDocument();
-            document.Load(@"宅之力R.xml");
+            document.Load("C:\\______test_files\\files_for_parse_data\\宅之力R.xml");
             richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["server"].Value + "\t";
             richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["account"].Value + "\t";
             richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["password"].Value + "\t";
@@ -348,7 +348,7 @@ namespace test_parse_camera_data
             xmlnode_settinginfo.Attributes.Append(xmlattribute_delay);//將屬性加入xmlnode_settinginfo節點下
             xmlnode_root.AppendChild(xmlnode_settinginfo);//將xmlnode_settinginfo節點加入xmlnode_root節點下
             document.AppendChild(xmlnode_root); //將xmlnode_root節點加入document中
-            document.Save(@"宅之力W.xml");
+            document.Save("C:\\______test_files\\files_for_parse_data\\宅之力W.xml");
 
             richTextBox1.Text += "宅之力_xml寫入 OK\n\r";
 
@@ -357,7 +357,7 @@ namespace test_parse_camera_data
         private void button7_Click(object sender, EventArgs e)
         {
             XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load(@"仙人的設計之路1.xml");
+            XmlDoc.Load("C:\\______test_files\\files_for_parse_data\\仙人的設計之路1.xml");
             XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1");
 
             foreach (XmlNode OneNode in NodeLists)
@@ -375,7 +375,7 @@ namespace test_parse_camera_data
         private void button8_Click(object sender, EventArgs e)
         {
             XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load(@"仙人的設計之路2.xml");
+            XmlDoc.Load("C:\\______test_files\\files_for_parse_data\\仙人的設計之路2.xml");
             XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1");
             //XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1/MyLevel2");
 
@@ -399,7 +399,6 @@ namespace test_parse_camera_data
         private void button9_Click(object sender, EventArgs e)
         {
 
-        }
         }
     }
 }
