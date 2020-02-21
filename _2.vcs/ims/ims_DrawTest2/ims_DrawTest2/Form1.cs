@@ -22,9 +22,33 @@ namespace ims_DrawTest2
 
         private const int BORDER_W = 5;     //5% border
         private const int BORDER_H = 5;     //5% border
+        private const int STEP = 20;        //one step in y-axis
 
         Graphics g;
         Bitmap bitmap1;
+
+        double awb_r_avg = 0;
+        double awb_r_max = 0;
+        double awb_r_min = 0;
+
+        double awb_b_avg = 0;
+        double awb_b_max = 0;
+        double awb_b_min = 0;
+
+        int W = 0;
+        int H = 0;
+
+        int w = 0;
+        int h = 0;
+
+        int ratio_x;
+        int ratio_y;
+        double y_max = 0;
+        double y_min = 0;
+        double y_range = 0;
+
+        int offset_x = 0;
+        int offset_y = 0;
 
         public Form1()
         {
@@ -33,7 +57,11 @@ namespace ims_DrawTest2
             //g = pictureBox1.CreateGraphics(); same
             g = Graphics.FromImage(pictureBox1.Image);
             g.Clear(Color.White);
+            init_parameters();
+        }
 
+        void init_parameters()
+        {
             awb_r[0] = 1559; awb_b[0] = 1469; right_left_point_cnt[0] = -35; down_up_point_cnt[0] = -65; awb_block[0] = 16;	//for vcs
             awb_r[1] = 1536; awb_b[1] = 1406; right_left_point_cnt[1] = -30; down_up_point_cnt[1] = -60; awb_block[1] = 16;	//for vcs
             awb_r[2] = 1551; awb_b[2] = 1463; right_left_point_cnt[2] = -35; down_up_point_cnt[2] = -65; awb_block[2] = 20;	//for vcs
@@ -85,32 +113,37 @@ namespace ims_DrawTest2
             awb_r[48] = 1551; awb_b[48] = 1447; right_left_point_cnt[48] = -35; down_up_point_cnt[48] = -65; awb_block[48] = 20;	//for vcs
             awb_r[49] = 1528; awb_b[49] = 1412; right_left_point_cnt[49] = -30; down_up_point_cnt[49] = -60; awb_block[49] = 16;	//for vcs
 
-        }
+            awb_r_avg = awb_r.Average();
+            awb_r_max = awb_r.Max();
+            awb_r_min = awb_r.Min();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double awb_r_avg = awb_r.Average();
-            double awb_r_max = awb_r.Max();
-            double awb_r_min = awb_r.Min();
+            awb_b_avg = awb_b.Average();
+            awb_b_max = awb_b.Max();
+            awb_b_min = awb_b.Min();
 
-            double awb_b_avg = awb_b.Average();
-            double awb_b_max = awb_b.Max();
-            double awb_b_min = awb_b.Min();
+            W = pictureBox1.Width;
+            H = pictureBox1.Height;
 
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
+            w = W * (100 - BORDER_W * 2) / 100;
+            h = H * (100 - BORDER_H * 2) / 100;
 
-            int w = W * (100 - BORDER_W * 2) / 100;
-            int h = H * (100 - BORDER_H * 2) / 100;
+            y_max = Math.Max(awb_r_max, awb_b_max);
+            y_min = Math.Min(awb_r_min, awb_b_min);
 
-            int ratio_x;
-            int ratio_y;
-            double y_max = Math.Max(awb_r_max, awb_b_max);
-            double y_min = Math.Min(awb_r_min, awb_b_min);
-            double y_range = y_max - y_min;
+            if (((int)y_max % STEP) != 0)
+                y_max = (double)(((int)y_max / STEP + 1) * STEP);
+
+            if (((int)y_min % STEP) != 0)
+                y_min = (double)(((int)y_min / STEP) * STEP);
+
+            y_range = y_max - y_min;
+            y_range = y_max - y_min;
 
             ratio_x = (int)((double)w / ROUND);
             ratio_y = (int)((double)h / y_range);
+
+            offset_x = W * BORDER_W / 100;
+            offset_y = H * BORDER_H / 100;
 
             richTextBox1.Text += "awb_r average = " + awb_r_avg.ToString() + "\n";
             richTextBox1.Text += "awb_r max = " + awb_r_max.ToString() + "\n";
@@ -120,10 +153,10 @@ namespace ims_DrawTest2
             richTextBox1.Text += "awb_b max = " + awb_b_max.ToString() + "\n";
             richTextBox1.Text += "awb_b min = " + awb_b_min.ToString() + "\n";
 
-            richTextBox1.Text += "pictureBox width = " + W.ToString() + "\n";
-            richTextBox1.Text += "pictureBox height = " + H.ToString() + "\n";
-            richTextBox1.Text += "pictureBox draw width = " + w.ToString() + "\n";
-            richTextBox1.Text += "pictureBox draw height = " + h.ToString() + "\n";
+            richTextBox1.Text += "pictureBox width W = " + W.ToString() + "\n";
+            richTextBox1.Text += "pictureBox height H = " + H.ToString() + "\n";
+            richTextBox1.Text += "pictureBox draw width w = " + w.ToString() + "\n";
+            richTextBox1.Text += "pictureBox draw height h = " + h.ToString() + "\n";
 
             richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
             richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
@@ -132,10 +165,20 @@ namespace ims_DrawTest2
             richTextBox1.Text += "ratio_x = " + ratio_x.ToString() + "\n";
             richTextBox1.Text += "ratio_y = " + ratio_y.ToString() + "\n";
 
+            richTextBox1.Text += "offset_x = " + offset_x.ToString() + "\n";
+            richTextBox1.Text += "offset_y = " + offset_y.ToString() + "\n";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_test_result();
+        }
+
+        void show_test_result()
+        {
 
             int width;
             int height;
-
 
             bitmap1 = new Bitmap(W, H);
 
@@ -150,7 +193,6 @@ namespace ims_DrawTest2
 
             g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
-
 
             /*
             for (i = 0; i < ROUND; i++)
@@ -198,27 +240,24 @@ namespace ims_DrawTest2
             }
             */
             DrawXY();
-            //DrawGrid();
-            DrawTick();
+            DrawGrid();
+            //DrawTick();
 
             int i;
-            int offset_x = W * BORDER_W / 100;
-            int offset_y = H * BORDER_H / 100;
 
             Point[] pt_r = new Point[ROUND];    //一維陣列內有 ROUND 個Point
             Point[] pt_b = new Point[ROUND];    //一維陣列內有 ROUND 個Point
 
             for (i = 0; i < ROUND; i++)
             {
-                pt_r[i].X = offset_x + i * ratio_x;
-                pt_r[i].Y = (int)(H - ((awb_r[i] - y_min)) * ratio_y - offset_y);
-                pt_b[i].X = offset_x + i * ratio_x;
-                pt_b[i].Y = (int)(H - ((awb_b[i] - y_min)) * ratio_y - offset_y);
+                pt_r[i].X = offset_x + ratio_x * (i + 1);
+                pt_r[i].Y = (int)(H - (offset_y + (awb_r[i] - y_min) * ratio_y));
+                pt_b[i].X = offset_x + ratio_x * (i + 1);
+                pt_b[i].Y = (int)(H - (offset_y + (awb_b[i] - y_min) * ratio_y));
             }
 
             g.DrawLines(new Pen(Brushes.Red, 3), pt_r);
             g.DrawLines(new Pen(Brushes.Blue, 3), pt_b);
-
 
             double sd_r;
             sd_r = SD(awb_r);
@@ -243,7 +282,6 @@ namespace ims_DrawTest2
             y_sp = y_st;
             g.DrawLine(new Pen(Color.DarkBlue, 1), x_st, y_st, x_sp, y_sp);
 
-
             y_st = (int)((H - offset_y) - ((awb_r_avg + sd_r - y_min)) * ratio_y);    //+1 SD
             y_sp = y_st;
             g.DrawLine(new Pen(Color.Red, 1), x_st, y_st, x_sp, y_sp);
@@ -260,16 +298,18 @@ namespace ims_DrawTest2
             y_sp = y_st;
             g.DrawLine(new Pen(Color.Blue, 1), x_st, y_st, x_sp, y_sp);
 
-
             /*
             y_st = (int)(H - ((awb_b_avg - y_min)) * ratio_y - offset_y);
             y_sp = y_st;
             g.DrawLine(new Pen(Color.Blue, 1), x_st, y_st, x_sp, y_sp);
             */
 
-            
             pictureBox1.Image = bitmap1;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //show_test_result();
         }
 
         /// <summary> 
@@ -340,49 +380,24 @@ namespace ims_DrawTest2
             g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
         }
 
-        private void DrawGrid()    //grid on
+        private void DrawGrid_X()    //grid on x, 水平格線
         {
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            int w = W * (100 - BORDER_W * 2) / 100;
-            int h = H * (100 - BORDER_H * 2) / 100;
-
-            int offset_x = W * BORDER_W / 100;
-            int offset_y = H * BORDER_H / 100;
-
+            int i;
             int x1;
             int x2;
             int y1;
             int y2;
 
-            //richTextBox1.Text += "h = " + h.ToString() + ", cnt = " + (h / 100).ToString() + "\n";
-            for (int i = 1; i <= h / 100; i++)
+            for (i = ((int)y_min + STEP); i <= (int)y_max; i += STEP)
             {
-                //richTextBox1.Text += "i = " + i.ToString() + "\n";
                 x1 = offset_x;
-                y1 = H - offset_y - i * 100;
+                y1 = H - (offset_y + (i - (int)y_min) * ratio_y);
+
+                richTextBox1.Text += "i = " + i.ToString() + " ";
+                richTextBox1.Text += "y = " + y1.ToString() + "\n";
+
                 x2 = offset_x + w;
                 y2 = y1;
-                Point px1 = new Point(x1, y1);
-                Point px2 = new Point(x2, y2);
-                g.DrawLine(new Pen(Brushes.Pink, 1), px1, px2);
-            }
-
-            for (int i = 1; i <= w / 100; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\n";
-                x1 = offset_x;
-                y1 = H - offset_y - i * 100;
-                x2 = offset_x + w;
-                y2 = y1;
-
-
-                x1 = offset_x + i * 100;
-                y1 = H - offset_y;
-                x2 = x1;
-                y2 = H - offset_y - h;
-
                 Point px1 = new Point(x1, y1);
                 Point px2 = new Point(x2, y2);
                 g.DrawLine(new Pen(Brushes.Pink, 1), px1, px2);
@@ -390,24 +405,85 @@ namespace ims_DrawTest2
 
         }
 
-        private void DrawTick()    //tick on
+        private void DrawGrid_Y()    //grid on y, 垂直格線
         {
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            int w = W * (100 - BORDER_W * 2) / 100;
-            int h = H * (100 - BORDER_H * 2) / 100;
-
-            int offset_x = W * BORDER_W / 100;
-            int offset_y = H * BORDER_H / 100;
-
+            int i;
             int x1;
             int x2;
             int y1;
             int y2;
 
+            for (i = 0; i < ROUND; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\n";
+
+                if ((i % 5) == 4)
+                {
+                    x1 = offset_x + ratio_x * (i + 1);
+                    y1 = H - offset_y;
+                    x2 = x1;
+                    y2 = H - offset_y - h;
+
+                    Point px1 = new Point(x1, y1);
+                    Point px2 = new Point(x2, y2);
+                    g.DrawLine(new Pen(Brushes.Pink, 1), px1, px2);
+                }
+            }
+        }
+
+        private void DrawGrid()    //grid on
+        {
+            DrawGrid_X();   //水平格線
+            DrawGrid_Y();   //垂直格線
+        }
+
+        private void DrawTick_X()    //tick on x
+        {
+            int i;
+            int x1;
+            int x2;
+            int y1;
+            int y2;
+
+            for (i = 0; i < ROUND; i++)
+            {
+                //richTextBox1.Text += "i = " + i.ToString() + "\n";
+                if ((i % 5) == 4)   //Major tick
+                {
+                    x1 = offset_x + ratio_x * (i + 1);
+                    y1 = H - offset_y;
+                    x2 = x1;
+                    y2 = H - offset_y - 40;
+                    Point px1 = new Point(x1, y1);
+                    Point px2 = new Point(x2, y2);
+                    g.DrawLine(new Pen(Brushes.DeepPink, 3), px1, px2);
+                }
+                else      //Minor tick
+                {
+                    x1 = offset_x + ratio_x * (i + 1);
+                    y1 = H - offset_y;
+                    x2 = x1;
+                    y2 = H - offset_y - 20;
+                    Point px1 = new Point(x1, y1);
+                    Point px2 = new Point(x2, y2);
+                    g.DrawLine(new Pen(Brushes.Pink, 1), px1, px2);
+                }
+            }
+
+
+        }
+
+        private void DrawTick_Y()    //tick on y
+        {
+            int i;
+            int x1;
+            int x2;
+            int y1;
+            int y2;
+
+
             //richTextBox1.Text += "h = " + h.ToString() + ", cnt = " + (h / 100).ToString() + "\n";
-            for (int i = 1; i <= h / 100; i++)
+            for (i = 1; i <= h / 100; i++)
             {
                 //richTextBox1.Text += "i = " + i.ToString() + "\n";
                 x1 = offset_x;
@@ -419,19 +495,15 @@ namespace ims_DrawTest2
                 g.DrawLine(new Pen(Brushes.Pink, 1), px1, px2);
             }
 
-            for (int i = 1; i <= w / 100; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\n";
-                x1 = offset_x + i * 100;
-                y1 = H - offset_y;
-                x2 = x1;
-                y2 = H - offset_y - 50;
-                Point px1 = new Point(x1, y1);
-                Point px2 = new Point(x2, y2);
-                g.DrawLine(new Pen(Brushes.Pink, 1), px1, px2);
-            }
-
         }
+
+
+        private void DrawTick()    //tick on
+        {
+            DrawTick_X();
+            DrawTick_Y();
+        }
+
 
 
 
