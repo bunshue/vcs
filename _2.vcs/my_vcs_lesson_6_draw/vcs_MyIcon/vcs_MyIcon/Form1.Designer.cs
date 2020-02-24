@@ -80,6 +80,7 @@
             this.button45 = new System.Windows.Forms.Button();
             this.button46 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
+            this.button48 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -616,11 +617,23 @@
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
+            // button48
+            // 
+            this.button48.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button48.Location = new System.Drawing.Point(751, 481);
+            this.button48.Name = "button48";
+            this.button48.Size = new System.Drawing.Size(60, 60);
+            this.button48.TabIndex = 49;
+            this.button48.Text = "超長圖";
+            this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 631);
+            this.Controls.Add(this.button48);
             this.Controls.Add(this.button47);
             this.Controls.Add(this.button46);
             this.Controls.Add(this.button45);
@@ -730,6 +743,7 @@
         private System.Windows.Forms.Button button45;
         private System.Windows.Forms.Button button46;
         private System.Windows.Forms.Button button47;
+        private System.Windows.Forms.Button button48;
     }
 }
 

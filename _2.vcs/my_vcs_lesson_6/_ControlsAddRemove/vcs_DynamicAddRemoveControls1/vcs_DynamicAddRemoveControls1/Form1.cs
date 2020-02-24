@@ -98,26 +98,26 @@ namespace vcs_DynamicAddRemoveControls1
                 ((Button)sender).BackColor = Color.Gray;
 
 
-            int ii;
-            int jj;
+            int i;
+            int j;
 
             string tt = ((Button)sender).Tag.ToString();
 
             if (tt != null)
             {
-                ii = int.Parse(tt.Substring(7, 2));
-                jj = int.Parse(tt.Substring(10, 2));
-                richTextBox1.Text += "ii = " + ii.ToString() + ", jj = " + jj.ToString() + "\n";
+                i = int.Parse(tt.Substring(7, 2));
+                j = int.Parse(tt.Substring(10, 2));
+                richTextBox1.Text += "i = " + i.ToString() + ", j = " + j.ToString() + "\n";
 
                 if (((Button)sender).BackColor == Color.Gray)
                 {
                     //((Button)sender).BackColor = Color.Blue;
-                    gray[ii, jj] = 0;
+                    gray[i, j] = 0;
                 }
                 else
                 {
                     //((Button)sender).BackColor = Color.Gray;
-                    gray[ii, jj] = 1;
+                    gray[i, j] = 1;
                 }
             }
 
@@ -155,17 +155,18 @@ namespace vcs_DynamicAddRemoveControls1
                     {
                         if (con.Tag.ToString().Substring(0, 7) == "dynamic")
                         {
-                            int index = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            int i = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            int j = int.Parse(con.Tag.ToString().Substring(10, 2));
                             /*
                             richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\t";
                             richTextBox1.Text += "Tag:\t" + con.Tag + "\t";
-                            richTextBox1.Text += "Index:\t" + index.ToString() + "\n";
+                            richTextBox1.Text += "i:\t" + i.ToString() + "\t";
+                            richTextBox1.Text += "j:\t" + j.ToString() + "\n";
                             */
-
                             if (con.BackColor == Color.Gray)
-                                gray[index % COLUMNS, index / COLUMNS] = 0;
+                                gray[i, j] = 0;
                             else
-                                gray[index % COLUMNS, index / COLUMNS] = 1;
+                                gray[i, j] = 1;
                         }
                     }
                 }
@@ -199,14 +200,17 @@ namespace vcs_DynamicAddRemoveControls1
                     {
                         if (con.Tag.ToString().Substring(0, 7) == "dynamic")
                         {
-                            int index = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            i = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            j = int.Parse(con.Tag.ToString().Substring(10, 2));
+
                             /*
                             richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\t";
                             richTextBox1.Text += "Tag:\t" + con.Tag + "\t";
-                            richTextBox1.Text += "Index:\t" + index.ToString() + "\n";
+                            richTextBox1.Text += "i:\t" + i.ToString() + "\t";
+                            richTextBox1.Text += "j:\t" + j.ToString() + "\n";
                             */
 
-                            gray[index % COLUMNS, index / COLUMNS] = 0;
+                            gray[i, j] = 0;
                             con.BackColor = Color.Gray;
                         }
                     }
@@ -340,17 +344,18 @@ namespace vcs_DynamicAddRemoveControls1
                     {
                         if (con.Tag.ToString().Substring(0, 7) == "dynamic")
                         {
-                            int index = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            int i = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            int j = int.Parse(con.Tag.ToString().Substring(10, 2));
                             /*
                             richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\t";
                             richTextBox1.Text += "Tag:\t" + con.Tag + "\t";
-                            richTextBox1.Text += "Index:\t" + index.ToString() + "\n";
+                            richTextBox1.Text += "i:\t" + i.ToString() + "\t";
+                            richTextBox1.Text += "j:\t" + j.ToString() + "\n";
                             */
-
                             if (con.BackColor == Color.Gray)
-                                gray[index % COLUMNS, index / COLUMNS] = 0;
+                                gray[i, j] = 0;
                             else
-                                gray[index % COLUMNS, index / COLUMNS] = 1;
+                                gray[i, j] = 1;
                         }
                     }
                 }

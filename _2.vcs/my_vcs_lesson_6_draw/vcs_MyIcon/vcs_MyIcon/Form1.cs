@@ -1751,5 +1751,31 @@ namespace vcs_MyIcon
             g = Graphics.FromImage(bitmap1);
             pictureBox1.Image = bitmap1;
         }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 12345;
+            height = 678;
+            bitmap1 = new Bitmap(width, height);
+
+            //bin2bmp
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx % 256), (xx % 256), (xx % 256)));
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
+
+        }
     }
 }

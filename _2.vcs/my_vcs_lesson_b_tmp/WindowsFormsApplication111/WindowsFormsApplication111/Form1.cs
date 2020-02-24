@@ -346,5 +346,143 @@ namespace WindowsFormsApplication111
             }
 
         }
+
+
+        private class eraNameList
+        {
+            public string EraName { get; set; }
+            public int Year_ST { get; set; }
+            public int Year_SP { get; set; }
+            public int Year_length { get; set; }
+        }
+
+        List<eraNameList> eraName = new List<eraNameList>();
+
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "類似sprintf的寫法\n";
+            int number = 123;
+            string name = "david";
+            string information = string.Empty;
+            information = string.Format("ID = {0}, Name = {1}", number.ToString(), name);
+            richTextBox1.Text += "information : " + information + "\n";
+        }
+
+        void load_eraData()
+        {
+            eraName.Add(new eraNameList { EraName = "順治", Year_ST = 1644, Year_SP = 1661 });
+            eraName.Add(new eraNameList { EraName = "康熙", Year_ST = 1662, Year_SP = 1722 });
+            eraName.Add(new eraNameList { EraName = "雍正", Year_ST = 1723, Year_SP = 1735 });
+            eraName.Add(new eraNameList { EraName = "乾隆", Year_ST = 1736, Year_SP = 1795 });
+            /*
+            eraName.Add(new eraNameList { EraName = "嘉慶", Year_ST = 1796, Year_SP = 1820 });
+            eraName.Add(new eraNameList { EraName = "道光", Year_ST = 1821, Year_SP = 1850 });
+            eraName.Add(new eraNameList { EraName = "咸豐", Year_ST = 1851, Year_SP = 1861 });
+            eraName.Add(new eraNameList { EraName = "同治", Year_ST = 1862, Year_SP = 1874 });
+            eraName.Add(new eraNameList { EraName = "光緒", Year_ST = 1875, Year_SP = 1908 });
+            eraName.Add(new eraNameList { EraName = "宣統", Year_ST = 1909, Year_SP = 1911 });
+            */
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            load_eraData();
+
+            int year;
+            int era_start = 0;
+            int total_year = 0;
+            richTextBox1.Text += "年號\t起\t迄\t年\n";
+            foreach (var showlist in eraName)
+            {
+                if (era_start == 0)
+                    era_start = showlist.Year_ST;
+                year = showlist.Year_SP - showlist.Year_ST + 1;
+                total_year += year;
+                showlist.Year_length = year;
+                richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
+            }
+            richTextBox1.Text += "總年數 : " + total_year.ToString() + "\n";
+
+            int W = panel1.Width;
+            int H = panel1.Height;
+
+            int ratio;
+            ratio = W / total_year;
+
+            richTextBox1.Text += "W : " + W.ToString() + "\n";
+            richTextBox1.Text += "H : " + H.ToString() + "\n";
+            richTextBox1.Text += "ratio : " + ratio.ToString() + "\n";
+
+            Graphics g = panel1.CreateGraphics();
+            Pen p = new Pen(Color.Red, 1);
+            Font f;
+
+            int x_st = 0;
+            int y_st = 0;
+            int w = 0;
+            int h = 0;
+
+            h = 50;
+            y_st = 0;
+            total_year = 0;
+
+            foreach (var showlist in eraName)
+            {
+                year = showlist.Year_SP - showlist.Year_ST + 1;
+                total_year += year;
+                showlist.Year_length = year;
+                //richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
+
+                x_st = (showlist.Year_ST - era_start) * ratio;
+                w = year * ratio;
+                p = new Pen(Color.Red, 1);
+                g.DrawRectangle(p, x_st, y_st, w, h);
+                richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
+
+                f = new Font("標楷體", 12);
+                g.DrawString((total_year - year + 1).ToString(), f, new SolidBrush(Color.Blue), new PointF(x_st, y_st + h));
+
+
+
+                string name = showlist.EraName + "(" + year.ToString() + ")";
+                int font_size = 20;
+                int ww = 0;
+                int hh = 0;
+
+                bool flag_font_size_ok = false;
+
+                f = new Font("標楷體", font_size);
+                while (flag_font_size_ok == false)
+                {
+                    ww = g.MeasureString(name, f).ToSize().Width;
+                    hh = g.MeasureString(name, f).ToSize().Height;
+                    if ((ww > w) || (hh > h))
+                    {
+                        font_size--;
+                        richTextBox1.Text += "font太大, 減為" + font_size.ToString() + "\n";
+                        f = new Font("標楷體", font_size);
+                    }
+                    else
+                    {
+                        flag_font_size_ok = true;
+                    }
+                }
+
+                richTextBox1.Text += "ww = " + ww.ToString() + "  hh = " + hh.ToString() + "\n";
+
+                g.DrawString(name, f, new SolidBrush(Color.Blue), new PointF(x_st + (w - ww) / 2, y_st + (h - hh) / 2));
+
+                p = new Pen(Color.Green, 1);
+                g.DrawRectangle(p, x_st + (w - ww) / 2, y_st + (h - hh) / 2, ww, hh);
+
+
+
+            }
+           
+
+
+
+        }
     }
 }

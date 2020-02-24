@@ -523,5 +523,26 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "awb_block SD = " + sd.ToString() + "\n";
             */
         }
+
+        private const int SEARCH_NUMBER = 10;
+        private void button19_Click(object sender, EventArgs e)
+        {
+            int i;
+            int j;
+            bool flag_digit_0_ok = false;
+            bool flag_digit_7_ok = false;
+            for (i = 1; i < SEARCH_NUMBER; i++)
+            {
+                for (j = i; j < 10000; j++)
+                {
+
+
+
+                }
+
+
+            }
+
+        }
     }
 }
