@@ -307,43 +307,6 @@ namespace WindowsFormsApplication111
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //找資料夾所在的硬碟
-            string path = String.Empty;
-
-            path = "C:\\______test_files\\_case1";
-
-            richTextBox1.Text += "\n搜尋路徑" + path + "\n";
-
-            if (File.Exists(path))
-            {
-                // This path is a file
-                richTextBox1.Text += "XXXXXXXXXXXXXXX1\n\n";
-                //ProcessFile(path, 0);
-                //richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else if (Directory.Exists(path))
-            {
-                // This path is a directory
-                richTextBox1.Text += "XXXXXXXXXXXXXXX2\n\n";
-
-                DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
-                richTextBox1.Text += "Name : " + d.Name + "\n";
-                richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                richTextBox1.Text += "Root : " + d.Root + "\n";
-
-
-                //FolederName = path;
-                //ProcessDirectory(path);
-                //richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
-
-                //show_file_info();
-            }
-            else
-            {
-                //Console.WriteLine("{0} is not a valid file or directory.", path);
-                richTextBox1.Text += "非合法路徑或檔案\n";
-            }
 
         }
 

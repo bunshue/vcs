@@ -313,16 +313,18 @@
             this.comboBox_drive.Name = "comboBox_drive";
             this.comboBox_drive.Size = new System.Drawing.Size(105, 29);
             this.comboBox_drive.TabIndex = 47;
+            this.comboBox_drive.SelectedIndexChanged += new System.EventHandler(this.comboBox_drive_SelectedIndexChanged);
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 204);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(217, 42);
             this.button1.TabIndex = 50;
-            this.button1.Text = "xxx";
+            this.button1.Text = "找資料夾所在的硬碟的標籤";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button13
             // 

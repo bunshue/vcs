@@ -48,7 +48,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 70);
             this.button1.TabIndex = 0;
-            this.button1.Text = "找資料夾所在的硬碟";
+            this.button1.Text = "xxx";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

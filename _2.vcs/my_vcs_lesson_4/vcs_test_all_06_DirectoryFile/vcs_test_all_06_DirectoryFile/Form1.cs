@@ -1642,6 +1642,87 @@ namespace vcs_test_all_06_DirectoryFile
             richTextBox1.Text += "檔案內容 : " + y + "\n";
         }
 
+        private void button60_Click(object sender, EventArgs e)
+        {
+            string filename;
+            int len;
+
+            richTextBox1.Text += "讀檔案的一部分\n";
+
+            filename = "c:\\______test_files\\test_ReadAllBytes.bmp";
+            len = 100;
+            richTextBox1.Text += "讀bmp檔, 從頭讀\t長度: " + len.ToString() + " 拜\n";
+
+            byte[] bmpdata = new byte[len];
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            fs.Seek(0, SeekOrigin.Begin);
+            fs.Read(bmpdata, 0, len);
+            fs.Close();
+
+            //打印資料
+            string data_read_result;
+            int cnt;
+
+            data_read_result = string.Empty;
+            cnt = 0;
+            foreach (byte b in bmpdata)
+            {
+                data_read_result += b.ToString("X2");
+                cnt++;
+                if ((cnt % 16) == 0)
+                {
+                    data_read_result += "\n";
+                }
+                else
+                {
+                    data_read_result += " ";
+                }
+            }
+            richTextBox1.Text += data_read_result + "\n";
+
+            data_read_result = string.Empty;
+            cnt = 0;
+            foreach (byte b in bmpdata)
+            {
+                if (char.IsLetterOrDigit((char)b) == true)
+                {
+                    data_read_result += (char)b;
+                }
+                else
+                {
+                    data_read_result += ".";
+                }
+
+                cnt++;
+                if ((cnt % 16) == 0)
+                {
+                    data_read_result += "\n";
+                }
+                else
+                {
+                    data_read_result += " ";
+                }
+            }
+            richTextBox1.Text += data_read_result + "\n";
+
+
+
+
+
+
+
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
 

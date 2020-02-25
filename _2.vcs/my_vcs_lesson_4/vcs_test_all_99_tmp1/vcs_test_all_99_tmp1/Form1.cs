@@ -120,26 +120,8 @@ namespace vcs_test_all_99_tmp1
 
         }
 
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MB的計算常量
-        const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionGBMBKB(Int64 KSize)
-        {
-            if (KSize / GB >= 1)//如果目前Byte的值大於等於1GB
-                return (Math.Round(KSize / (float)GB, 2)).ToString() + "GB";//將其轉換成GB
-            else if (KSize / MB >= 1)//如果目前Byte的值大於等於1MB
-                return (Math.Round(KSize / (float)MB, 2)).ToString() + "MB";//將其轉換成MB
-            else if (KSize / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(KSize / (float)KB, 2)).ToString() + "KB";//將其轉換成KGB
-            else
-                return KSize.ToString() + "Byte";//顯示Byte值
-        }
-
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "轉換格式\t將Byte轉換成GB、MB、KB\n";
-            richTextBox1.Text += "原本格式： " + double.Parse(textBox1.Text) + "\n";
-            richTextBox1.Text += "轉換格式： " + ByteConversionGBMBKB(Convert.ToInt64(textBox1.Text)) + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)

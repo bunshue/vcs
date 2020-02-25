@@ -879,13 +879,14 @@
             // 
             // button54
             // 
-            this.button54.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button54.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button54.Location = new System.Drawing.Point(9, 159);
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(185, 40);
             this.button54.TabIndex = 38;
-            this.button54.Text = "xxx";
+            this.button54.Text = "讀檔案的一部分 mp3";
             this.button54.UseVisualStyleBackColor = true;
+            this.button54.Click += new System.EventHandler(this.button54_Click);
             // 
             // button55
             // 
@@ -929,23 +930,25 @@
             // 
             // button60
             // 
-            this.button60.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button60.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button60.Location = new System.Drawing.Point(9, 67);
             this.button60.Name = "button60";
             this.button60.Size = new System.Drawing.Size(185, 40);
             this.button60.TabIndex = 33;
-            this.button60.Text = "xxx";
+            this.button60.Text = "讀檔案的一部分 bmp";
             this.button60.UseVisualStyleBackColor = true;
+            this.button60.Click += new System.EventHandler(this.button60_Click);
             // 
             // button61
             // 
-            this.button61.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button61.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button61.Location = new System.Drawing.Point(9, 113);
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(185, 40);
             this.button61.TabIndex = 34;
-            this.button61.Text = "xxx";
+            this.button61.Text = "讀檔案的一部分 png";
             this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
             // button62
             // 

@@ -760,12 +760,15 @@ namespace vcs_DrAP
             flag_search_vcs_pattern = 0;
         }
 
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
         const int KB = 1024;//定義KB的計算常量
         public string ByteConversionGBMBKB(Int64 KSize)
         {
-            if (KSize / GB >= 1)//如果目前Byte的值大於等於1GB
+            if (KSize / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(KSize / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (KSize / GB >= 1)//如果目前Byte的值大於等於1GB
                 return (Math.Round(KSize / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
             else if (KSize / MB >= 1)//如果目前Byte的值大於等於1MB
                 return (Math.Round(KSize / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
@@ -1719,6 +1722,62 @@ namespace vcs_DrAP
                 return;
             }
 
+            if (checkBox3.Checked == true)
+            {
+                richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+                for (int i = 0; i < listBox1.Items.Count; i++)
+                {
+                    path = listBox1.Items[i].ToString();
+
+                    //找資料夾所在的硬碟的標籤
+                    richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+
+                    if (File.Exists(path))
+                    {
+                        // This path is a file
+                        richTextBox1.Text += "是個檔案\n";
+                    }
+                    else if (Directory.Exists(path))
+                    {
+                        // This path is a directory
+                        DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                        /*
+                        richTextBox1.Text += "Name : " + d.Name + "\n";
+                        richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                        richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                        richTextBox1.Text += "Root : " + d.Root + "\n";
+                        */
+
+                        DriveInfo drive = new DriveInfo(d.Root.ToString());
+
+                        if (drive.IsReady)
+                        {
+                            richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
+                            richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
+                            //richTextBox1.Text += "名稱 : " + drive.Name + "\n";
+                            richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                            richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\n";
+                            richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                            /*
+                            richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                            richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
+                            richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
+                            */
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                        }
+                    }
+                    else
+                    {
+                        //Console.WriteLine("{0} is not a valid file or directory.", path);
+                        richTextBox1.Text += "非合法路徑或檔案\n";
+                    }
+                }
+            }
+            richTextBox1.Text += "\n";
+
             richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
@@ -1748,6 +1807,92 @@ namespace vcs_DrAP
                     richTextBox1.Text += "非合法路徑或檔案\n";
                 }
             }
+        }
+
+        void save_log_to_local_drive()
+        {
+            string filename = string.Empty;
+
+            if (checkBox3.Checked == true)
+            {
+                string hddname = string.Empty;
+
+                richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+                for (int i = 0; i < listBox1.Items.Count; i++)
+                {
+                    path = listBox1.Items[i].ToString();
+
+                    //找資料夾所在的硬碟的標籤
+
+                    richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+
+                    if (File.Exists(path))
+                    {
+                        // This path is a file
+                        richTextBox1.Text += "是個檔案\n";
+                    }
+                    else if (Directory.Exists(path))
+                    {
+                        // This path is a directory
+                        DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                        /*
+                        richTextBox1.Text += "Name : " + d.Name + "\n";
+                        richTextBox1.Text += "FullName : " + d.FullName + "\n";
+                        richTextBox1.Text += "Parent : " + d.Parent + "\n";
+                        richTextBox1.Text += "Root : " + d.Root + "\n";
+                        */
+
+                        DriveInfo drive = new DriveInfo(d.Root.ToString());
+
+                        if (drive.IsReady)
+                        {
+                            hddname = drive.VolumeLabel;
+                            /*
+                            richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
+                            richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
+                            //richTextBox1.Text += "名稱 : " + drive.Name + "\n";
+
+                            richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+                            richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\n";
+                            richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                            */
+
+                            /*
+                            richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                            richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
+                            richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
+                            */
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                        }
+                    }
+                    else
+                    {
+                        //Console.WriteLine("{0} is not a valid file or directory.", path);
+                        richTextBox1.Text += "非合法路徑或檔案\n";
+                    }
+
+                }
+                filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd") + ".txt";
+            }
+            else
+            {
+                filename = "AP." + DateTime.Now.ToString("yyyy.MMdd") + ".txt";
+            }
+
+            //建立一個檔案
+            StreamWriter sw = File.CreateText(filename);
+            sw.Write(richTextBox1.Text);
+            sw.Close();
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            save_log_to_local_drive();
         }
 
     }

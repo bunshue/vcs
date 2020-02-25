@@ -67,6 +67,8 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -470,11 +472,37 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button23
+            // 
+            this.button23.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
+            this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button23.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button23.Location = new System.Drawing.Point(915, 607);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(45, 45);
+            this.button23.TabIndex = 40;
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Checked = true;
+            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox3.Location = new System.Drawing.Point(505, 67);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(72, 16);
+            this.checkBox3.TabIndex = 41;
+            this.checkBox3.Text = "磁碟資訊";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 1008);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
@@ -560,6 +588,8 @@
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
