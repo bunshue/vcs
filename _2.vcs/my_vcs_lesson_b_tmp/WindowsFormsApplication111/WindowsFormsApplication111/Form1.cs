@@ -305,9 +305,73 @@ namespace WindowsFormsApplication111
 
         }
 
+        private const int WIDTH = 100;
         private void button1_Click(object sender, EventArgs e)
         {
+            //產出panel, 畫硬碟使用空間占比圖
+            Panel pnl = new Panel();
+            pnl.Left = 1000;
+            pnl.Top = 100;
+            pnl.Width = WIDTH;
+            pnl.Height = WIDTH;
+            pnl.Tag = "dynamic";
+            pnl.BackColor = Color.White;
+            this.Controls.Add(pnl);
 
+            Graphics g;
+            g = pnl.CreateGraphics();
+            //Pen PenStyle = new Pen(Color.Black, 1);
+            //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            //g.DrawRectangle(PenStyle, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            Brush b;
+            //g.FillPie(bb, 10, 10, 80, 80, -180, 350);
+            int total_space = 1810;
+            int available_space = 1090;
+            int used_space = total_space - available_space;
+
+            int used_angle = used_space * 360 / total_space;
+            //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
+
+            b = new SolidBrush(Color.LightGreen);
+            g.FillEllipse(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            b = new SolidBrush(Color.Red);
+            g.FillPie(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
+
+            b = new SolidBrush(Color.White);
+            g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
+
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            removeAllItems();
+        }
+
+        //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
+        private void removeAllItems()
+        {
+            bool flag_do_remove = true;
+            while (flag_do_remove == true)
+            {
+                bool flag_do_remove_this = false;
+                foreach (Control con in this.Controls)
+                {
+                    //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                    if (con.Tag != null)
+                    {
+                        if (con.Tag.ToString() == "dynamic")
+                        {
+                            this.Controls.Remove(con);
+                            flag_do_remove_this = true;
+                        }
+                    }
+                }
+                if (flag_do_remove_this == false)
+                    flag_do_remove = false;
+            }
         }
 
 
@@ -406,8 +470,6 @@ namespace WindowsFormsApplication111
                 f = new Font("標楷體", 12);
                 g.DrawString((total_year - year + 1).ToString(), f, new SolidBrush(Color.Blue), new PointF(x_st, y_st + h));
 
-
-
                 string name = showlist.EraName + "(" + year.ToString() + ")";
                 int font_size = 20;
                 int ww = 0;
@@ -447,5 +509,20 @@ namespace WindowsFormsApplication111
 
 
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Graphics buttonGraphics = button11.CreateGraphics();
+            Pen myPen = new Pen(Color.ForestGreen, 4.0F);
+            myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+
+            Rectangle theRectangle = button11.ClientRectangle;
+            theRectangle.Inflate(-2, -2);
+            buttonGraphics.DrawRectangle(myPen, theRectangle);
+            buttonGraphics.DrawRectangle(myPen, 10, 10, button11.Width - 20, button11.Height - 20);
+            buttonGraphics.Dispose();
+            myPen.Dispose();
+        }
+
     }
 }

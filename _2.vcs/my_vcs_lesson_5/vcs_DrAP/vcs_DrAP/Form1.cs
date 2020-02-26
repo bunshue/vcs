@@ -1001,7 +1001,7 @@ namespace vcs_DrAP
             bool conversionSuccessful = int.TryParse(textBox1.Text, out min_size_mb);    //out為必須
             if (conversionSuccessful == true)
             {
-                richTextBox1.Text += "容量限制： " + min_size_mb.ToString() + " MB\n";
+                //richTextBox1.Text += "容量限制： " + min_size_mb.ToString() + " MB\n";
             }
             else
             {
@@ -1730,7 +1730,7 @@ namespace vcs_DrAP
                     path = listBox1.Items[i].ToString();
 
                     //找資料夾所在的硬碟的標籤
-                    richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+                    //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 
                     if (File.Exists(path))
                     {
@@ -1752,17 +1752,22 @@ namespace vcs_DrAP
 
                         if (drive.IsReady)
                         {
+                            richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
+
                             richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
                             richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
                             //richTextBox1.Text += "名稱 : " + drive.Name + "\n";
                             richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
-                            richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\n";
+                            richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
+                                + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
+                                + (drive.AvailableFreeSpace * 100 / drive.TotalSize).ToString() + " % )\n";
                             richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
                             /*
                             richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
                             richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
                             richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
                             */
+                            drawDiskSpace(drive.AvailableFreeSpace, drive.TotalSize);
                         }
                         else
                         {
@@ -1824,7 +1829,7 @@ namespace vcs_DrAP
 
                     //找資料夾所在的硬碟的標籤
 
-                    richTextBox1.Text += "\n資料夾路徑" + path + "\n";
+                    //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 
                     if (File.Exists(path))
                     {
@@ -1875,11 +1880,11 @@ namespace vcs_DrAP
                     }
 
                 }
-                filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd") + ".txt";
+                filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
             }
             else
             {
-                filename = "AP." + DateTime.Now.ToString("yyyy.MMdd") + ".txt";
+                filename = "AP." + DateTime.Now.ToString("yyyy.MMdd.HHmm") + ".txt";
             }
 
             //建立一個檔案
@@ -1893,6 +1898,71 @@ namespace vcs_DrAP
         private void button23_Click(object sender, EventArgs e)
         {
             save_log_to_local_drive();
+        }
+
+        private const int WIDTH = 100;
+        void drawDiskSpace(long free, long total)
+        {
+            removeDrawDiskSpace();
+
+            //產出panel, 畫硬碟使用空間占比圖
+            Panel pnl = new Panel();
+            pnl.Left = 800;
+            pnl.Top = 100;
+            pnl.Width = WIDTH;
+            pnl.Height = WIDTH;
+            pnl.Tag = "dynamic";
+            pnl.BackColor = Color.White;
+            //this.Controls.Add(pnl);
+            this.richTextBox1.Controls.Add(pnl);
+
+            Graphics g;
+            g = pnl.CreateGraphics();
+            //Pen PenStyle = new Pen(Color.Black, 1);
+            //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            //g.DrawRectangle(PenStyle, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            Brush b;
+            long used = total - free;
+
+            int used_angle = (int)(used * 360 / total);
+            //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
+
+            b = new SolidBrush(Color.LightGreen);
+            g.FillEllipse(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+
+            b = new SolidBrush(Color.Red);
+            g.FillPie(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
+
+            b = new SolidBrush(Color.White);
+            g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
+
+
+
+        }
+
+        //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
+        void removeDrawDiskSpace()
+        {
+            bool flag_do_remove = true;
+            while (flag_do_remove == true)
+            {
+                bool flag_do_remove_this = false;
+                foreach (Control con in this.Controls)
+                {
+                    //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                    if (con.Tag != null)
+                    {
+                        if (con.Tag.ToString() == "dynamic")
+                        {
+                            this.Controls.Remove(con);
+                            flag_do_remove_this = true;
+                        }
+                    }
+                }
+                if (flag_do_remove_this == false)
+                    flag_do_remove = false;
+            }
         }
 
     }
