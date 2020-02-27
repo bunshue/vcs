@@ -20,6 +20,7 @@ using System.Runtime.InteropServices;   //for Marshal
 
 using Microsoft.VisualBasic;    //C# 利用 VisualBasic 簡體 繁體 大小寫 轉換
 
+using System.Globalization; //for CultureInfo
 
 namespace WindowsFormsApplication111
 {
@@ -305,76 +306,6 @@ namespace WindowsFormsApplication111
 
         }
 
-        private const int WIDTH = 100;
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //產出panel, 畫硬碟使用空間占比圖
-            Panel pnl = new Panel();
-            pnl.Left = 1000;
-            pnl.Top = 100;
-            pnl.Width = WIDTH;
-            pnl.Height = WIDTH;
-            pnl.Tag = "dynamic";
-            pnl.BackColor = Color.White;
-            this.Controls.Add(pnl);
-
-            Graphics g;
-            g = pnl.CreateGraphics();
-            //Pen PenStyle = new Pen(Color.Black, 1);
-            //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            //g.DrawRectangle(PenStyle, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
-
-            Brush b;
-            //g.FillPie(bb, 10, 10, 80, 80, -180, 350);
-            int total_space = 1810;
-            int available_space = 1090;
-            int used_space = total_space - available_space;
-
-            int used_angle = used_space * 360 / total_space;
-            //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
-
-            b = new SolidBrush(Color.LightGreen);
-            g.FillEllipse(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
-
-            b = new SolidBrush(Color.Red);
-            g.FillPie(b, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100, -180, used_angle);
-
-            b = new SolidBrush(Color.White);
-            g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
-
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            removeAllItems();
-        }
-
-        //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
-        private void removeAllItems()
-        {
-            bool flag_do_remove = true;
-            while (flag_do_remove == true)
-            {
-                bool flag_do_remove_this = false;
-                foreach (Control con in this.Controls)
-                {
-                    //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
-                    if (con.Tag != null)
-                    {
-                        if (con.Tag.ToString() == "dynamic")
-                        {
-                            this.Controls.Remove(con);
-                            flag_do_remove_this = true;
-                        }
-                    }
-                }
-                if (flag_do_remove_this == false)
-                    flag_do_remove = false;
-            }
-        }
-
-
         private class eraNameList
         {
             public string EraName { get; set; }
@@ -393,7 +324,8 @@ namespace WindowsFormsApplication111
             string name = "david";
             string information = string.Empty;
             information = string.Format("ID = {0}, Name = {1}", number.ToString(), name);
-            richTextBox1.Text += "information : " + information + "\n";
+            richTextBox1.Text += "information1 : " + information + "\n";
+            richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
         }
 
         void load_eraData()
@@ -522,6 +454,73 @@ namespace WindowsFormsApplication111
             buttonGraphics.DrawRectangle(myPen, 10, 10, button11.Width - 20, button11.Height - 20);
             buttonGraphics.Dispose();
             myPen.Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //顯示百分比
+            //要using System.Globalization; //for CultureInfo
+            int a = 2;
+            int b = 3;
+            richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
+            richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
+            richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            int a, b, c, d, ee, f;
+
+            a = 123456;
+            b = 2006;
+            c = 3;
+            d = 11;
+            ee = 1234567890;
+            f = 2468;
+
+            richTextBox1.Text += "數字保留10位, 向左靠齊\n";
+            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
+            richTextBox1.Text += "數字保留10位, 向右靠齊\n";
+            richTextBox1.Text += string.Format("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
+            richTextBox1.Text += "字串保留10位, 向左靠齊\n";
+            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", "David", "Mary", "Doraemon", "Cat", "Dog", "Lion") + "\n";
+
+            Random rnd = new Random();
+            // Create new thread and display three random numbers.
+            richTextBox1.Text += "Some currency values:\n";
+            for (int ctr = 0; ctr <= 3; ctr++)
+            {
+                richTextBox1.Text += string.Format("{0:C2}", rnd.NextDouble() * 100) + "\n";
+            }
+
+            double aa = 123456789012345.456789;
+            richTextBox1.Text += aa.ToString("N0", CultureInfo.InvariantCulture) + "\n";
+
+            int bb = 1234567890;
+            richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
+
+            int mm = 184;
+
+            double used = 197594525696;
+            double free = 36310528000;
+            double total = 233905053696;
+
+            double used2 = 184.02;
+            double free2 = 33.82;
+            double total2 = 217.84;
+
+            double pp = 15.5212345;
+
+            //已使用空間 :	197,593,485,312 個位元組	184.02 GB
+            richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
+                "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
+
+
+
+            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
+
+
+
         }
 
     }

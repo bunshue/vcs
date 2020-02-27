@@ -358,9 +358,9 @@
             // button19
             // 
             this.button19.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(905, 578);
+            this.button19.Location = new System.Drawing.Point(902, 578);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(60, 23);
+            this.button19.Size = new System.Drawing.Size(63, 30);
             this.button19.TabIndex = 36;
             this.button19.Text = "清除";
             this.button19.UseVisualStyleBackColor = true;
@@ -477,7 +477,7 @@
             this.button23.BackgroundImage = global::vcs_DrAP.Properties.Resources.save_file;
             this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button23.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(915, 607);
+            this.button23.Location = new System.Drawing.Point(902, 607);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(45, 45);
             this.button23.TabIndex = 40;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -40,19 +39,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(150, 261);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 46);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "create";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
@@ -128,7 +118,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(150, 177);
+            this.button8.Location = new System.Drawing.Point(150, 101);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(93, 70);
             this.button8.TabIndex = 8;
@@ -138,11 +128,11 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(150, 101);
+            this.button9.Location = new System.Drawing.Point(150, 187);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(93, 70);
             this.button9.TabIndex = 9;
-            this.button9.Text = "show";
+            this.button9.Text = "製作年表";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -152,16 +142,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1334, 190);
             this.panel1.TabIndex = 10;
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(150, 313);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(93, 46);
-            this.button10.TabIndex = 11;
-            this.button10.Text = "delete";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -173,13 +153,34 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(150, 263);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 70);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "顯示百分比";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(150, 339);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(93, 70);
+            this.button10.TabIndex = 14;
+            this.button10.Text = "格式化列印";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 627);
-            this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -190,7 +191,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -199,7 +199,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -211,8 +210,9 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button10;
     }
 }
 

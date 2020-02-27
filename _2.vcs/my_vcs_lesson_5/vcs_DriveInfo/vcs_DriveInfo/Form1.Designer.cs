@@ -28,26 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbDrive = new System.Windows.Forms.ComboBox();
+            this.comboBox_drive = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // cmbDrive
+            // comboBox_drive
             // 
-            this.cmbDrive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cmbDrive.FormattingEnabled = true;
-            this.cmbDrive.Location = new System.Drawing.Point(12, 12);
-            this.cmbDrive.Name = "cmbDrive";
-            this.cmbDrive.Size = new System.Drawing.Size(264, 29);
-            this.cmbDrive.TabIndex = 0;
-            this.cmbDrive.SelectedIndexChanged += new System.EventHandler(this.cmbDrive_SelectedIndexChanged);
+            this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_drive.FormattingEnabled = true;
+            this.comboBox_drive.Location = new System.Drawing.Point(12, 12);
+            this.comboBox_drive.Name = "comboBox_drive";
+            this.comboBox_drive.Size = new System.Drawing.Size(264, 29);
+            this.comboBox_drive.TabIndex = 0;
+            this.comboBox_drive.SelectedIndexChanged += new System.EventHandler(this.comboBox_drive_SelectedIndexChanged);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(491, 11);
+            this.button1.Location = new System.Drawing.Point(575, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 29);
             this.button1.TabIndex = 1;
@@ -60,7 +62,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(12, 56);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(592, 452);
+            this.richTextBox1.Size = new System.Drawing.Size(676, 406);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -75,15 +77,39 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(12, 479);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(160, 29);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "取得磁碟資訊";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(191, 479);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(283, 29);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "找資料夾所在的硬碟的標籤";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 520);
+            this.ClientSize = new System.Drawing.Size(700, 520);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.cmbDrive);
+            this.Controls.Add(this.comboBox_drive);
             this.Name = "Form1";
             this.Text = "使用 DriveInfo 類別取得磁碟資訊";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -93,10 +119,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbDrive;
+        private System.Windows.Forms.ComboBox comboBox_drive;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 

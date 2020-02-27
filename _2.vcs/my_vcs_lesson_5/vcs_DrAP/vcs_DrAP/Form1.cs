@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;    //for FileInfo DirectoryInfo
 using System.Diagnostics;
+using System.Globalization; //for CultureInfo
 
 namespace vcs_DrAP
 {
@@ -1750,18 +1751,24 @@ namespace vcs_DrAP
 
                         DriveInfo drive = new DriveInfo(d.Root.ToString());
 
-                        if (drive.IsReady)
+                        if (drive.IsReady == true)
                         {
                             richTextBox1.Text += "\nAP." + drive.VolumeLabel + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + "\n\n";
 
-                            richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
-                            richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
-                            //richTextBox1.Text += "名稱 : " + drive.Name + "\n";
-                            richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
-                            richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t"
-                                + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\t( "
-                                + (drive.AvailableFreeSpace * 100 / drive.TotalSize).ToString() + " % )\n";
-                            richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
+                            richTextBox1.Text += string.Format("{0,-10}{1,-15}", "磁碟 :", drive.ToString()) + "\n";
+                            richTextBox1.Text += string.Format("{0,-10}{1,-15}", "標籤 :", drive.VolumeLabel) + "\n";
+                            //richTextBox1.Text += string.Format("{0,-12}{1,-25}", "名稱 :", drive.Name) + "\n";
+                            richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                                "使用空間 :", (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace))) + "\n";
+                            double percentage = (double)drive.AvailableFreeSpace / (double)drive.TotalSize;
+                            richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}{4,-10}",
+                                "可用空間 :", drive.AvailableFreeSpace.ToString("N0", CultureInfo.InvariantCulture), " 個位元組",
+                                ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)),
+                                " ( " + percentage.ToString("P", CultureInfo.InvariantCulture) + " )")
+                                + "\n";
+                            richTextBox1.Text += string.Format("{0,-12}{1,17}{2,-7}{3,10}",
+                                "磁碟容量 :", drive.TotalSize.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize))) + "\n";
+
                             /*
                             richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
                             richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
@@ -1771,7 +1778,7 @@ namespace vcs_DrAP
                         }
                         else
                         {
-                            richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                            richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
                         }
                     }
                     else
@@ -1849,28 +1856,14 @@ namespace vcs_DrAP
 
                         DriveInfo drive = new DriveInfo(d.Root.ToString());
 
-                        if (drive.IsReady)
+                        if (drive.IsReady == true)
                         {
                             hddname = drive.VolumeLabel;
-                            /*
-                            richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
-                            richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
-                            //richTextBox1.Text += "名稱 : " + drive.Name + "\n";
-
-                            richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
-                            richTextBox1.Text += "可用空間 :\t\t" + drive.AvailableFreeSpace.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.AvailableFreeSpace)) + "\n";
-                            richTextBox1.Text += "磁碟容量 :\t\t" + drive.TotalSize.ToString() + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize)) + "\n";
-                            */
-
-                            /*
-                            richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
-                            richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
-                            richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
-                            */
                         }
                         else
                         {
                             richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                            hddname = "NotReady";
                         }
                     }
                     else
@@ -1907,8 +1900,8 @@ namespace vcs_DrAP
 
             //產出panel, 畫硬碟使用空間占比圖
             Panel pnl = new Panel();
-            pnl.Left = 800;
-            pnl.Top = 100;
+            pnl.Left = 750;
+            pnl.Top = 20;
             pnl.Width = WIDTH;
             pnl.Height = WIDTH;
             pnl.Tag = "dynamic";
@@ -1948,14 +1941,14 @@ namespace vcs_DrAP
             while (flag_do_remove == true)
             {
                 bool flag_do_remove_this = false;
-                foreach (Control con in this.Controls)
+                foreach (Control con in this.richTextBox1.Controls)
                 {
                     //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
                     if (con.Tag != null)
                     {
                         if (con.Tag.ToString() == "dynamic")
                         {
-                            this.Controls.Remove(con);
+                            this.richTextBox1.Controls.Remove(con);
                             flag_do_remove_this = true;
                         }
                     }
