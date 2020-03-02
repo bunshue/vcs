@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D; //for LineCap
 using System.Drawing.Imaging;   //for ImageFormat
 
 namespace _vcs_DrawTemplate
@@ -89,6 +90,29 @@ namespace _vcs_DrawTemplate
             points[1] = new Point(width * 7 / 8, height * 7 / 8);
             points[2] = new Point(width * 1 / 8, height * 7 / 8);
             g.FillPolygon(sb, points);
+
+            //畫箭頭
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0, 255), 8);
+            pen.StartCap = LineCap.RoundAnchor;
+            pen.EndCap = LineCap.ArrowAnchor;
+            g.DrawLine(pen, 100, 100, 300, 300);
+
+            //畫聯結線條
+            GraphicsPath path = new GraphicsPath();
+            Pen penJoin = new Pen(Color.FromArgb(255, 0, 0, 255), 20);
+
+            path.StartFigure();
+            path.AddLine(new Point(50, 200), new Point(100, 200));
+            path.AddLine(new Point(100, 200), new Point(100, 250));
+
+            penJoin.LineJoin = LineJoin.Bevel;
+            g.DrawPath(penJoin, path);
+
+            //繪製自訂虛線
+            float[] dashValues = { 5, 2, 15, 4 };
+            Pen greenPen = new Pen(Color.Green, 10);
+            greenPen.DashPattern = dashValues;
+            g.DrawLine(greenPen, new Point(50, 150), new Point(600, 150));
             
             pictureBox1.Image = bitmap1;
         }
