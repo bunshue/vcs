@@ -1760,7 +1760,7 @@ namespace vcs_MyIcon
             int xx;
             int yy;
 
-            width = 12345;
+            width = 256 * 100;
             height = 678;
             bitmap1 = new Bitmap(width, height);
 
@@ -1774,6 +1774,17 @@ namespace vcs_MyIcon
             }
 
             g = Graphics.FromImage(bitmap1);
+
+            Font f;
+            f = new Font("Arial", 50);
+            for (xx = 0; xx < width; xx += 256)
+            {
+                g.DrawString((xx / 256 + 1).ToString() + "/" + (width / 256).ToString(), f, sb, new PointF(xx, 100));
+            }
+
+            g.DrawRectangle(p, new Rectangle(0, 0, width-1, height-1));
+
+
             pictureBox1.Image = bitmap1;
 
         }
