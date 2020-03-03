@@ -328,10 +328,28 @@ namespace WindowsFormsApplication111
             richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
         }
 
-
         private void button9_Click(object sender, EventArgs e)
         {
+            //取得上一層資料夾的名稱
 
+            richTextBox1.Text += "原目錄 : " + Application.StartupPath + "\n";
+
+            string str = Application.StartupPath;
+            string[] split_str = new string[20];
+            split_str = str.Split('\\'); //以\當分隔符號
+            //richTextBox1.Text += "\n";
+            //richTextBox1.Text += "共有 : " + split_str.Length.ToString() + " 個項目\n";
+
+            richTextBox1.Text += "上一層資料夾的名稱 : " + split_str[split_str.Length - 1] + "\n";
+
+            /*
+            int i = 0;
+            foreach (string tmp in split_str)
+            {
+                i++;
+                richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
+            }
+            */
         }
 
         private void button11_Click(object sender, EventArgs e)

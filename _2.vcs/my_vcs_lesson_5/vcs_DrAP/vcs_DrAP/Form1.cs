@@ -10,6 +10,8 @@ using System.IO;    //for FileInfo DirectoryInfo
 using System.Diagnostics;
 using System.Globalization; //for CultureInfo
 
+using MediaInfoNET;
+
 namespace vcs_DrAP
 {
     public partial class Form1 : Form
@@ -20,7 +22,7 @@ namespace vcs_DrAP
             richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
 
 
-            StreamWriter sw = File.CreateText(drap_setup_filename);
+            StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
             string content = "";
             content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
             content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
@@ -225,7 +227,7 @@ namespace vcs_DrAP
             FolederName = path;
             richTextBox1.Text += path + "\n\n";
 
-            if (File.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -419,7 +421,28 @@ namespace vcs_DrAP
                 //richTextBox1.Text += filename + "\n";
                 //richTextBox1.Text += fi.Name + "\n";
                 //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-                richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+
+                MediaFile f = new MediaFile(fi.FullName);
+
+                //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+                if (f.InfoAvailable == true)
+                {
+                    int w = f.Video[0].Width;
+                    int h = f.Video[0].Height;
+                    //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                        fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                }
+
                 //richTextBox1.Text += fi.Directory + "\n";
                 //richTextBox1.Text += fi.DirectoryName + "\n";
 
@@ -695,7 +718,7 @@ namespace vcs_DrAP
 
                 richTextBox2.Text += "\n搜尋路徑" + path + "\n";
 
-                if (File.Exists(path))
+                if (System.IO.File.Exists(path))
                 {
                     // This path is a file
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -1202,7 +1225,7 @@ namespace vcs_DrAP
                 path = search_path;
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (File.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -1356,6 +1379,80 @@ namespace vcs_DrAP
 
         private void button18_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\內視鏡影片\院長平島徹朗が実際に胃内視鏡検査を受けました Full ver [720p].mp4";
+
+            MediaFile f = new MediaFile(filename);
+
+            richTextBox1.Text += "[檔案資訊]\n";
+            richTextBox1.Text += "  檔案名稱: " + filename + "\n";
+            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+            richTextBox1.Text += "  CodecID: " + f.General.CodecID + "\n";
+            richTextBox1.Text += "  Extension: " + f.General.Extension + "\n";
+            richTextBox1.Text += "  Format: " + f.General.Format + "\n";
+            richTextBox1.Text += "  FormatID: " + f.General.FormatID + "\n";
+            richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+            richTextBox1.Text += "  檔案大小: " + ByteConversionGBMBKB(Convert.ToInt64(f.FileSize)) + "\n";
+
+            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+            richTextBox1.Text += "  Name: " + f.Name + "\n";
+            //richTextBox1.Text += "  ParentFolder: " + f.ParentFolder + "\n";
+            richTextBox1.Text += "  InfoAvailable: " + f.InfoAvailable.ToString() + "\n";
+
+            richTextBox1.Text += "\n";
+            if (f.InfoAvailable == true)
+            {
+                //richTextBox1.Text += "  MediaInfo_Text: " + f.MediaInfo_Text + "\n";
+                //richTextBox1.Text += "  Info_Text: " + f.Info_Text + "\n";
+
+                int w = f.Video[0].Width;
+                int h = f.Video[0].Height;
+
+                richTextBox1.Text += "[視訊資訊]\n";
+                richTextBox1.Text += "  視訊編碼: " + f.Video[0].Format + "\n";
+                richTextBox1.Text += "  輸入格式: " + f.Video[0].Format + "\n";
+                richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                richTextBox1.Text += "  Bitrate: " + f.Video[0].Bitrate.ToString() + " kbps\n";
+
+                /*
+                richTextBox1.Text += "Format : " + f.General.Format.ToString() + "\n";
+                richTextBox1.Text += "W : " + f.Video[0].Width.ToString() + "\n";
+                richTextBox1.Text += "H : " + f.Video[0].Height.ToString() + "\n";
+                richTextBox1.Text += "時間 : " + f.Video[0].DurationString + "\n";
+
+                richTextBox1.Text += "Description : " + f.Video[0].Description + "\n";
+                richTextBox1.Text += "Format : " + f.Video[0].Format + "\n";
+                richTextBox1.Text += "FrameRate : " + f.Video[0].FrameRate.ToString() + "\n";
+                richTextBox1.Text += "FrameSize : " + f.Video[0].FrameSize.ToString() + "\n";
+                richTextBox1.Text += "MPlayerID : " + f.Video[0].MPlayerID.ToString() + "\n";
+                richTextBox1.Text += "PixelFormat : " + f.Video[0].PixelFormat + "\n";
+                richTextBox1.Text += "Resolution : " + f.Video[0].Resolution.ToString() + "\n";
+                richTextBox1.Text += "StreamSize : " + f.Video[0].StreamSize.ToString() + "\n";
+                richTextBox1.Text += "StreamType : " + f.Video[0].StreamType + "\n";
+                */
+
+                richTextBox1.Text += "\n";
+                richTextBox1.Text += "[音訊資訊]\n";
+                richTextBox1.Text += "  音訊編碼: " + f.Audio[0].Format + "\n";
+                richTextBox1.Text += "  取樣率: " + f.Audio[0].SamplingRate.ToString() + "\n";
+                richTextBox1.Text += "  聲道數: " + f.Audio[0].Channels.ToString() + "\n";
+                richTextBox1.Text += "  Bitrate: " + f.Audio[0].Bitrate.ToString() + " kbps\n";
+
+                /*
+                richTextBox1.Text += "CodecID : " + f.Audio[0].CodecID + "\n";
+                richTextBox1.Text += "Description : " + f.Audio[0].Description + "\n";
+                richTextBox1.Text += "DurationString : " + f.Audio[0].DurationString + "\n";
+                richTextBox1.Text += "Format : " + f.Audio[0].Format + "\n";
+                richTextBox1.Text += "FormatID : " + f.Audio[0].FormatID + "\n";
+                richTextBox1.Text += "ID : " + f.Audio[0].ID + "\n";
+                richTextBox1.Text += "MPlayerID : " + f.Audio[0].MPlayerID + "\n";
+                richTextBox1.Text += "StreamSize : " + f.Audio[0].StreamSize + "\n";
+                richTextBox1.Text += "StreamType : " + f.Audio[0].StreamType + "\n";
+                */
+
+            }
             
 
         }
@@ -1515,7 +1612,7 @@ namespace vcs_DrAP
 
             total_folders = 0;
 
-            if (File.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -1694,7 +1791,7 @@ namespace vcs_DrAP
                 path = search_path;
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
-            if (File.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -1733,7 +1830,7 @@ namespace vcs_DrAP
                     //找資料夾所在的硬碟的標籤
                     //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 
-                    if (File.Exists(path))
+                    if (System.IO.File.Exists(path))
                     {
                         // This path is a file
                         richTextBox1.Text += "是個檔案\n";
@@ -1797,7 +1894,7 @@ namespace vcs_DrAP
 
                 richTextBox2.Text += "\n搜尋路徑" + path + "\n";
 
-                if (File.Exists(path))
+                if (System.IO.File.Exists(path))
                 {
                     // This path is a file
                     richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -1838,7 +1935,7 @@ namespace vcs_DrAP
 
                     //richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 
-                    if (File.Exists(path))
+                    if (System.IO.File.Exists(path))
                     {
                         // This path is a file
                         richTextBox1.Text += "是個檔案\n";
@@ -1881,7 +1978,7 @@ namespace vcs_DrAP
             }
 
             //建立一個檔案
-            StreamWriter sw = File.CreateText(filename);
+            StreamWriter sw = System.IO.File.CreateText(filename);
             sw.Write(richTextBox1.Text);
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
