@@ -391,7 +391,23 @@ namespace vcs_DrAP
         public void ProcessFile(string path, int step)
         {
             //richTextBox1.Text += path + "\n";
-            FileInfo fi = new FileInfo(path);
+
+            FileInfo fi;
+
+            try
+            {   //可能會產生錯誤的程式區段
+                fi = new FileInfo(path);
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
+                return;
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+
 
             //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
@@ -474,6 +490,10 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
+            if (checkBox4.Checked == true)
+            {
+                listView1.Columns.Add("影片1", 100, HorizontalAlignment.Left);
+            }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
@@ -493,7 +513,112 @@ namespace vcs_DrAP
             richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
             for (int i = 0; i < fileinfos.Count; i++)
             {
-                ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+                //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
+                ListViewItem i1;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
+
+                if (checkBox4.Checked == true)
+                {
+
+                    //richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filename + "\n";
+
+                    richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+
+                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
+
+                    //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                    //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                    //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+                    if (f.InfoAvailable == true)
+                    {
+                        int w = f.Video[0].Width;
+                        int h = f.Video[0].Height;
+                        //richTextBox2.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                        //richTextBox2.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                        //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                        //fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                        string item = string.Empty;
+                        string itema = string.Empty;
+                        string itemb = string.Empty;
+                        string itemc = string.Empty;
+
+                        item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                        itema = fileinfos[i].filename;
+                        itemb = fileinfos[i].filepath;
+                        itemc = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+
+                        //i1 = new ListViewItem(fileinfos[i].filename);
+                        i1 = new ListViewItem(item);
+                        i1.UseItemStyleForSubItems = false;
+
+                        //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+
+                        sub_i1a.Text = itema;
+                        i1.SubItems.Add(sub_i1a);
+                        //sub_i1a.Text = fileinfos[i].filepath;
+                        //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                        sub_i1b.Text = itemb;
+                        i1.SubItems.Add(sub_i1b);
+
+                        //sub_i1a.Text = fi.Length.ToString();
+                        //sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        sub_i1c.Text = itemc;
+                        i1.SubItems.Add(sub_i1c);
+
+                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1c.ForeColor = System.Drawing.Color.Blue;
+
+                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+
+
+
+                    }
+                    else
+                    {
+                        i1 = new ListViewItem(fileinfos[i].filename);
+                        i1.UseItemStyleForSubItems = false;
+
+                        richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
+                        //richTextBox2.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size)) + "\n";
+                        sub_i1a.Text = fileinfos[i].filepath;
+                        i1.SubItems.Add(sub_i1a);
+                        //sub_i1a.Text = fi.Length.ToString();
+                        sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        i1.SubItems.Add(sub_i1b);
+
+                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
+
+                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    }
+                }
+                else
+                {
+                    i1 = new ListViewItem(fileinfos[i].filename);
+                i1.UseItemStyleForSubItems = false;
+
+                    richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX2\n";
+                sub_i1a.Text = fileinfos[i].filepath;
+                i1.SubItems.Add(sub_i1a);
+                //sub_i1a.Text = fi.Length.ToString();
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                i1.SubItems.Add(sub_i1b);
+
+                sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                sub_i1b.ForeColor = System.Drawing.Color.Blue;
+
+                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                }
 
                 if (flag_search_mode == 1)
                 {
@@ -507,23 +632,6 @@ namespace vcs_DrAP
                     }
                 }
 
-                i1.UseItemStyleForSubItems = false;
-
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-
-                sub_i1a.Text = fileinfos[i].filepath;
-                i1.SubItems.Add(sub_i1a);
-                //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
-                i1.SubItems.Add(sub_i1b);
-
-                sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                sub_i1b.ForeColor = System.Drawing.Color.Blue;
-
-                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-
                 listView1.Items.Add(i1);
                 //設置ListView最後一行可見
                 //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
@@ -535,6 +643,10 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
+            if (checkBox4.Checked == true)
+            {
+                listView1.Columns.Add("影片2", 100, HorizontalAlignment.Left);
+            }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
@@ -591,6 +703,10 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
+            if (checkBox4.Checked == true)
+            {
+                listView1.Columns.Add("影片3", 100, HorizontalAlignment.Left);
+            }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
@@ -843,10 +959,14 @@ namespace vcs_DrAP
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
             //richTextBox.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            //richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
+            //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
-            fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text;
+            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+
+
+            fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[1].Text;
 
             if (flag_search_vcs_pattern == 0)
             {
@@ -1271,6 +1391,10 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
+            if (checkBox4.Checked == true)
+            {
+                listView1.Columns.Add("影片4", 100, HorizontalAlignment.Left);
+            }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
@@ -1482,6 +1606,10 @@ namespace vcs_DrAP
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Clear();
             //設置列名稱
+            if (checkBox4.Checked == true)
+            {
+                listView1.Columns.Add("影片5", 100, HorizontalAlignment.Left);
+            }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);

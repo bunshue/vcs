@@ -544,5 +544,29 @@ namespace vcs_test_all_10_Math_Random
             }
 
         }
+
+        int GCD(int a, int b)
+        {
+            if (a % b == 0)
+                return b;
+            else
+                return GCD(b, a % b);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //最大公因數
+            int w = 1920;
+            int h = 1080;
+            int gcd = GCD(w, h);
+            richTextBox1.Text += "gcd = " + gcd.ToString() + "\n";
+            richTextBox1.Text += "ratio = " + (w / gcd).ToString() + " : " + (h / gcd).ToString() + "\n";
+
+            w = 1280;
+            h = 720;
+            gcd = GCD(w, h);
+            richTextBox1.Text += "gcd = " + gcd.ToString() + "\n";
+            richTextBox1.Text += "ratio = " + (w / gcd).ToString() + " : " + (h / gcd).ToString() + "\n";
+        }
     }
 }

@@ -350,7 +350,12 @@ namespace WindowsFormsApplication111
                 richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
             }
             */
+
+
+
+
         }
+
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -425,6 +430,61 @@ namespace WindowsFormsApplication111
 
 
         }
+
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "作業系統 : " + GetOS() + ", " + GetBit() + "\n";
+        }
+
+        private static string GetOS()
+        {
+            //定義系統版本
+            Version ver = Environment.OSVersion.Version;
+            //Major主版本號,Minor副版本號
+            if (ver.Major == 5 && ver.Minor == 0)
+            {
+                return "Windows 2000";
+            }
+            else if (ver.Major == 5 && ver.Minor == 1)
+            {
+                return "Windows XP";
+            }
+            else if (ver.Major == 5 && ver.Minor == 2)
+            {
+                return "Windows 2003";
+            }
+            else if (ver.Major == 6 && ver.Minor == 0)
+            {
+                return "Windows Vista";
+            }
+            else if (ver.Major == 6 && ver.Minor == 1)
+            {
+                return "Windows7";
+            }
+            else if (ver.Major == 6 && ver.Minor == 2)
+            {
+                return "Windows10";
+            }
+            else
+            {
+                return "未知";
+            }
+        }
+
+        private static string GetBit()
+        {
+            if (Environment.Is64BitOperatingSystem)
+                return "64bit";
+            else
+                return "32bit";
+        }
+
 
     }
 }
