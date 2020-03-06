@@ -306,16 +306,6 @@ namespace WindowsFormsApplication111
 
         }
 
-        private class eraNameList
-        {
-            public string EraName { get; set; }
-            public int Year_ST { get; set; }
-            public int Year_SP { get; set; }
-            public int Year_length { get; set; }
-        }
-
-        List<eraNameList> eraName = new List<eraNameList>();
-
 
         private void button8_Click(object sender, EventArgs e)
         {

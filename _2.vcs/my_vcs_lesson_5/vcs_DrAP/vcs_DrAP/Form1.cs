@@ -24,13 +24,35 @@ namespace vcs_DrAP
 
             StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
             string content = "";
-            content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            //定義系統版本
+            Version ver = Environment.OSVersion.Version;
+            //Major主版本號,Minor副版本號
+            if (ver.Major == 6 && ver.Minor == 1)
+            {
+                //Windows7
+                content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            }
+            else
+            {
+                //Windows10
+                content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+            }
             content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
             content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
             content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
             content += SelectedLanguage.ToString() + "\n";
 
-            video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            //Major主版本號,Minor副版本號
+            if (ver.Major == 6 && ver.Minor == 1)
+            {
+                //Windows7
+                video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            }
+            else
+            {
+                //Windows10
+                video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+            }
             audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
             picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
             text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
