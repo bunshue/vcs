@@ -21,6 +21,7 @@ namespace vcs_test_all_13_ListView
         private void Form1_Load(object sender, EventArgs e)
         {
             listView1.View = View.Details;  //把 listView1 的 View 屬性設成 Details
+            listView1.FullRowSelect = true; //整行一起選取
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,6 +29,7 @@ namespace vcs_test_all_13_ListView
             if (listView1.Columns.Count == 0)
             {
                 //設置列名稱、大小與對齊
+                listView1.Columns.Add("座號", 60, HorizontalAlignment.Center);
                 listView1.Columns.Add("姓名", 100, HorizontalAlignment.Center);
                 listView1.Columns.Add("國文", 100, HorizontalAlignment.Center);
                 listView1.Columns.Add("英文", 100, HorizontalAlignment.Center);
@@ -65,7 +67,6 @@ namespace vcs_test_all_13_ListView
             int score_eng;
             int score_math;
 
-
             for (int i = 0; i < 10; i++)
             {
                 var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -91,30 +92,52 @@ namespace vcs_test_all_13_ListView
                 score_eng = Rnd.Next(50, 80) + 1;
                 score_math = Rnd.Next(40, 70) + 1;
 
-                ListViewItem i1 = new ListViewItem(name_string);
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                sub_i1a.Text = score_chi.ToString();
-                i1.SubItems.Add(sub_i1a);
-                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-                sub_i1b.Text = score_eng.ToString();
-                i1.SubItems.Add(sub_i1b);
-                /*
-                ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
-                sub_i1c.Text = score_math.ToString();
-                i1.SubItems.Add(sub_i1c);
+                /* debug
+                name_string = "david";
+
+                score_chi = 80;
+                score_eng = 90;
+                score_math = 100;
+                */
+
+                //建立一行資料的檔頭與第0筆資料(座號)
+                ListViewItem item = new ListViewItem((i + 1).ToString());
+
+                //建立這一筆資料的第1個子項目(姓名)
+                ListViewItem.ListViewSubItem sub_item_1 = new ListViewItem.ListViewSubItem();
+                sub_item_1.Text = name_string;
+                item.SubItems.Add(sub_item_1);
+
+                //建立這一筆資料的第2個子項目(國文)
+                ListViewItem.ListViewSubItem sub_item_2 = new ListViewItem.ListViewSubItem();
+                sub_item_2.Text = score_chi.ToString();
+                item.SubItems.Add(sub_item_2);
+
+                //建立這一筆資料的第3個子項目(英文)
+                ListViewItem.ListViewSubItem sub_item_3 = new ListViewItem.ListViewSubItem();
+                sub_item_3.Text = score_eng.ToString();
+                item.SubItems.Add(sub_item_3);
+
+                /*  這項改成直接加入
+                //建立這一筆資料的第4個子項目(數學)
+                ListViewItem.ListViewSubItem sub_item_4 = new ListViewItem.ListViewSubItem();
+                sub_item_4.Text = score_math.ToString();
+                item.SubItems.Add(sub_item_4);
                 */
                 //直接加入
-                i1.SubItems.Add(score_math.ToString());
+                item.SubItems.Add(score_math.ToString());
 
-                listView1.Items.Add(i1);
+                //整行資料一次加入到listView1
+                listView1.Items.Add(item);
 
                 /*
                 //添加item另法 AddRange
-                ListViewItem itm = new ListViewItem(name_string);
-                itm.SubItems.Add(score_chi.ToString());
-                itm.SubItems.Add(score_eng.ToString());
-                itm.SubItems.Add(score_math.ToString());
-                listView1.Items.AddRange(new ListViewItem[] { itm });
+                ListViewItem item = new ListViewItem((i + 1).ToString());
+                item.SubItems.Add(name_string);
+                item.SubItems.Add(score_chi.ToString());
+                item.SubItems.Add(score_eng.ToString());
+                item.SubItems.Add(score_math.ToString());
+                listView1.Items.AddRange(new ListViewItem[] { item });
                 */
 
             }
@@ -247,6 +270,7 @@ namespace vcs_test_all_13_ListView
 
         class StudentData
         {
+            public int number { get; set; }
             public string name { get; set; }
             public int score_chi { get; set; }
             public int score_eng { get; set; }
@@ -278,33 +302,33 @@ namespace vcs_test_all_13_ListView
             float average;
             for (i = 0; i < listView1.Items.Count; i++)
             {
-                ListViewItem t = listView1.Items[i];
-                t.UseItemStyleForSubItems = false;
-                if (int.Parse(t.SubItems[1].Text) < 60)
+                ListViewItem item = listView1.Items[i];
+                item.UseItemStyleForSubItems = false;
+                if (int.Parse(item.SubItems[2].Text) < 60)  //這一筆資料的第2個子項目(國文)
                 {
-                    t.SubItems[1].ForeColor = Color.Red;
+                    item.SubItems[2].ForeColor = Color.Red;
                 }
-                if (int.Parse(t.SubItems[2].Text) < 60)
+                if (int.Parse(item.SubItems[3].Text) < 60)  //這一筆資料的第3個子項目(英文)
                 {
-                    t.SubItems[2].ForeColor = Color.Red;
+                    item.SubItems[3].ForeColor = Color.Red;
                 }
-                if (int.Parse(t.SubItems[3].Text) < 60)
+                if (int.Parse(item.SubItems[4].Text) < 60)  //這一筆資料的第4個子項目(數學)
                 {
-                    t.SubItems[3].ForeColor = Color.Red;
+                    item.SubItems[4].ForeColor = Color.Red;
                 }
-                total = int.Parse(t.SubItems[1].Text) + int.Parse(t.SubItems[2].Text) + int.Parse(t.SubItems[3].Text);
+                total = int.Parse(item.SubItems[2].Text) + int.Parse(item.SubItems[3].Text) + int.Parse(item.SubItems[4].Text);
                 average = (float)total /3;
-                t.SubItems.Add(total.ToString());
-                t.SubItems.Add(average.ToString("#0.00"));
+                item.SubItems.Add(total.ToString());
+                item.SubItems.Add(average.ToString("#0.00"));
 
-
-                richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\t" + listView1.Items[i].SubItems[3].Text + "\n";
+                richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\t" + listView1.Items[i].SubItems[3].Text + "\t" + listView1.Items[i].SubItems[4].Text + "\n";
 
                 StudentDataArray[i] = new StudentData { };
-                StudentDataArray[i].name = t.SubItems[0].Text;
-                StudentDataArray[i].score_chi = int.Parse(t.SubItems[1].Text);
-                StudentDataArray[i].score_eng = int.Parse(t.SubItems[2].Text);
-                StudentDataArray[i].score_math = int.Parse(t.SubItems[3].Text);
+                StudentDataArray[i].number = i;
+                StudentDataArray[i].name = item.SubItems[1].Text;
+                StudentDataArray[i].score_chi = int.Parse(item.SubItems[2].Text);
+                StudentDataArray[i].score_eng = int.Parse(item.SubItems[3].Text);
+                StudentDataArray[i].score_math = int.Parse(item.SubItems[4].Text);
                 StudentDataArray[i].total = total;
                 StudentDataArray[i].average = average;
                 scores[i] = total;

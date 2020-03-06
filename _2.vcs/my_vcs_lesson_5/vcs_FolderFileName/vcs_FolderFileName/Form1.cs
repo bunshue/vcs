@@ -276,7 +276,9 @@ namespace vcs_FolderFileName
         void show_file_info()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+            
             //設置列名稱
             listView1.Columns.Add("檔名", 700, HorizontalAlignment.Center);
             listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);

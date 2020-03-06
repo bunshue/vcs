@@ -167,6 +167,27 @@ namespace vcs_YearTable
 
         void load_eraData()
         {
+
+            eraName.Add(new eraNameList { EraName = "洪武", Year_ST = 1368, Year_SP = 1398 });
+            eraName.Add(new eraNameList { EraName = "建文", Year_ST = 1399, Year_SP = 1402 });
+            eraName.Add(new eraNameList { EraName = "永樂", Year_ST = 1403, Year_SP = 1424 });
+            eraName.Add(new eraNameList { EraName = "洪熙", Year_ST = 1425, Year_SP = 1425 });
+            eraName.Add(new eraNameList { EraName = "宣德", Year_ST = 1426, Year_SP = 1435 });
+            eraName.Add(new eraNameList { EraName = "正統", Year_ST = 1436, Year_SP = 1449 });
+            eraName.Add(new eraNameList { EraName = "景泰", Year_ST = 1450, Year_SP = 1456 });
+            eraName.Add(new eraNameList { EraName = "天順", Year_ST = 1457, Year_SP = 1464 });
+            eraName.Add(new eraNameList { EraName = "成化", Year_ST = 1465, Year_SP = 1487 });
+            eraName.Add(new eraNameList { EraName = "弘治", Year_ST = 1488, Year_SP = 1505 });
+            eraName.Add(new eraNameList { EraName = "正德", Year_ST = 1506, Year_SP = 1521 });
+            eraName.Add(new eraNameList { EraName = "嘉靖", Year_ST = 1522, Year_SP = 1566 });
+            eraName.Add(new eraNameList { EraName = "隆慶", Year_ST = 1567, Year_SP = 1572 });
+            eraName.Add(new eraNameList { EraName = "萬曆", Year_ST = 1573, Year_SP = 1620 });
+            eraName.Add(new eraNameList { EraName = "泰昌", Year_ST = 1620, Year_SP = 1620 });
+            eraName.Add(new eraNameList { EraName = "天啟", Year_ST = 1621, Year_SP = 1627 });
+            eraName.Add(new eraNameList { EraName = "崇禎", Year_ST = 1628, Year_SP = 1644 });
+
+
+
             eraName.Add(new eraNameList { EraName = "順治", Year_ST = 1644, Year_SP = 1661 });
             eraName.Add(new eraNameList { EraName = "康熙", Year_ST = 1662, Year_SP = 1722 });
             eraName.Add(new eraNameList { EraName = "雍正", Year_ST = 1723, Year_SP = 1735 });

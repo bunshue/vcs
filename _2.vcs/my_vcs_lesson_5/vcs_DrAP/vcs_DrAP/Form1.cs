@@ -169,12 +169,27 @@ namespace vcs_DrAP
             public string filepath;
             public string extension;
             public long size;
+            public int width;
+            public int height;
+            public int fps;
+            public string duration;
             public MyFileInfo(string n, string p, string e, long s)
             {
                 this.filename = n;
                 this.filepath = p;
                 this.extension = e;
                 this.size = s;
+            }
+            public MyFileInfo(string n, string p, string e, long s, int w,int h, int f, string d)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.extension = e;
+                this.size = s;
+                this.width = w;
+                this.height = h;
+                this.fps = f;
+                this.duration = d;
             }
         }
 
@@ -488,7 +503,9 @@ namespace vcs_DrAP
         void show_file_info()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+
             //設置列名稱
             if (checkBox4.Checked == true)
             {
@@ -641,7 +658,9 @@ namespace vcs_DrAP
         void show_file_info2()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+
             //設置列名稱
             if (checkBox4.Checked == true)
             {
@@ -701,12 +720,10 @@ namespace vcs_DrAP
         void show_file_info3()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+
             //設置列名稱
-            if (checkBox4.Checked == true)
-            {
-                listView1.Columns.Add("影片3", 100, HorizontalAlignment.Left);
-            }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
@@ -749,7 +766,9 @@ namespace vcs_DrAP
             richTextBox1.Text += "show_file_info4 ST\n";
 
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+
             //設置列名稱
             listView1.Columns.Add("最底層資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 250, HorizontalAlignment.Left);
@@ -1389,7 +1408,9 @@ namespace vcs_DrAP
         private void button12_Click(object sender, EventArgs e)
         {
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+
             //設置列名稱
             if (checkBox4.Checked == true)
             {
@@ -1604,7 +1625,9 @@ namespace vcs_DrAP
         private void button21_Click(object sender, EventArgs e)
         {
             listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
+
             //設置列名稱
             if (checkBox4.Checked == true)
             {
