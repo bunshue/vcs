@@ -189,29 +189,36 @@ namespace vcs_DrAP
         {
             public string filename;
             public string filepath;
-            public string extension;
-            public long size;
-            public int width;
-            public int height;
-            public int fps;
-            public string duration;
-            public MyFileInfo(string n, string p, string e, long s)
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public int video_width;
+            public int video_height;
+            public int video_fps;
+            public string video_duration;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
             {
                 this.filename = n;
                 this.filepath = p;
-                this.extension = e;
-                this.size = s;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
             }
-            public MyFileInfo(string n, string p, string e, long s, int w,int h, int f, string d)
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
             {
                 this.filename = n;
                 this.filepath = p;
-                this.extension = e;
-                this.size = s;
-                this.width = w;
-                this.height = h;
-                this.fps = f;
-                this.duration = d;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+
+                this.video_width = w;
+                this.video_height = h;
+                this.video_fps = f;
+                this.video_duration = d;
             }
         }
 
@@ -219,14 +226,14 @@ namespace vcs_DrAP
         {
             public string foldername;
             public string folderpath;
-            public long size;
-            public string date;
-            public MyFolderInfo(string n, string p, long s, string d)
+            public long foldersize;
+            public DateTime foldercreationtime;
+            public MyFolderInfo(string n, string p, long s, DateTime c)
             {
                 this.foldername = n;
                 this.folderpath = p;
-                this.size = s;
-                this.date = d;
+                this.foldersize = s;
+                this.foldercreationtime = c;
             }
         }
 
@@ -518,7 +525,7 @@ namespace vcs_DrAP
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
                 */
 
-                fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length));
+                fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             }
         }
 
@@ -531,7 +538,7 @@ namespace vcs_DrAP
             //設置列名稱
             if (checkBox4.Checked == true)
             {
-                listView1.Columns.Add("影片1", 100, HorizontalAlignment.Left);
+                listView1.Columns.Add("影片1", 150, HorizontalAlignment.Left);
             }
             listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
@@ -543,10 +550,10 @@ namespace vcs_DrAP
             if (checkBox2.Checked == true)
             {
                 //排序 由小到大
-                //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
+                //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
                 //排序 由大到小  在return的地方多個負號
-                fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+                fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
             }
 
             richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
@@ -588,7 +595,7 @@ namespace vcs_DrAP
                         item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
                         itema = fileinfos[i].filename;
                         itemb = fileinfos[i].filepath;
-                        itemc = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        itemc = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
 
                         //i1 = new ListViewItem(fileinfos[i].filename);
                         i1 = new ListViewItem(item);
@@ -604,7 +611,7 @@ namespace vcs_DrAP
                         i1.SubItems.Add(sub_i1b);
 
                         //sub_i1a.Text = fi.Length.ToString();
-                        //sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        //sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         sub_i1c.Text = itemc;
                         i1.SubItems.Add(sub_i1c);
 
@@ -626,11 +633,11 @@ namespace vcs_DrAP
                         i1.UseItemStyleForSubItems = false;
 
                         richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
-                        //richTextBox2.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size)) + "\n";
+                        //richTextBox2.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
                         sub_i1a.Text = fileinfos[i].filepath;
                         i1.SubItems.Add(sub_i1a);
                         //sub_i1a.Text = fi.Length.ToString();
-                        sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1b);
 
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -649,7 +656,7 @@ namespace vcs_DrAP
                 sub_i1a.Text = fileinfos[i].filepath;
                 i1.SubItems.Add(sub_i1a);
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1b);
 
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -698,10 +705,10 @@ namespace vcs_DrAP
             if (checkBox2.Checked == true)
             {
                 //排序 由小到大
-                //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
+                //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
                 //排序 由大到小  在return的地方多個負號
-                fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+                fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
             }
 
             richTextBox2.Text += "cnt = " + fileinfos.Count.ToString() + "\n";
@@ -726,7 +733,7 @@ namespace vcs_DrAP
                 sub_i1a.Text = fileinfos[i].filepath;
                 i1.SubItems.Add(sub_i1a);
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
@@ -767,7 +774,7 @@ namespace vcs_DrAP
                 i1.SubItems.Add(sub_i1a);
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1b);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1b.ForeColor = System.Drawing.Color.Blue;
@@ -800,15 +807,15 @@ namespace vcs_DrAP
             if (checkBox2.Checked == true)
             {
                 //排序 由小到大
-                //fileinfos.Sort((x, y) => { return x.size.CompareTo(y.size); });
+                //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
                 //排序 由大到小  在return的地方多個負號       先不排序
-                //fileinfos.Sort((x, y) => { return -x.size.CompareTo(y.size); });
+                //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
             }
 
             for (int i = 0; i < folderinfos.Count; i++)
             {
-                //richTextBox1.Text += "name : " + folderinfos[i].foldername + " path : " + folderinfos[i].folderpath + " size : " + folderinfos[i].size.ToString() + "\n";
+                //richTextBox1.Text += "name : " + folderinfos[i].foldername + " path : " + folderinfos[i].folderpath + " size : " + folderinfos[i].filesize.ToString() + "\n";
 
                 ListViewItem i1 = new ListViewItem(folderinfos[i].foldername);
 
@@ -817,12 +824,12 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                 ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
 
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(folderinfos[i].size));
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(folderinfos[i].foldersize));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
                 sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
-                sub_i1b.Text = folderinfos[i].date;
+                sub_i1b.Text = folderinfos[i].foldercreationtime.ToString();
                 i1.SubItems.Add(sub_i1b);
 
                 listView1.Items.Add(i1);
@@ -1061,7 +1068,7 @@ namespace vcs_DrAP
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
+                all_filename += " \"" + listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[1].Text + "\"";
             }
 
             //指定應用程式路徑
@@ -1125,6 +1132,29 @@ namespace vcs_DrAP
             {
                 //按Enter 等同於 button9_Click
                 button9_Click(sender, e);
+            }
+
+            if (e.KeyCode == Keys.F2)
+            {
+                richTextBox2.Text += "你按了F2\n";
+
+                if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+                    return;
+
+                int selNdx = listView1.SelectedIndices[0];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+                richTextBox2.Text += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
+
+                //ListViewItem t = listView1.Items[selNdx]; //相同寫法
+                //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
+                richTextBox2.Text += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+
+
+
+
+
+
             }
         }
 
@@ -1224,6 +1254,9 @@ namespace vcs_DrAP
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
             //設定執行後的表單大小
             this.Size = new Size(1920, 1080);
 
@@ -1231,6 +1264,10 @@ namespace vcs_DrAP
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
             this.listBox1.BorderStyle = BorderStyle.Fixed3D;
+
+            this.listView1.Size = new System.Drawing.Size(1860, 458);
+
+
 
             //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             //this.listBox1.Items.Add(search_path);
@@ -1354,7 +1391,7 @@ namespace vcs_DrAP
                 if (flag_pattern_match == 1)
                 {
                     richTextBox2.Text += fi.FullName + "\n";
-                    fileinfos.Add(new MyFileInfo(fi.Name, fi.DirectoryName, fi.Extension, fi.Length));
+                    fileinfos.Add(new MyFileInfo(fi.Name, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
                 }
 
                 sr.Close();
@@ -1450,19 +1487,19 @@ namespace vcs_DrAP
             {
                 for (int j = i + 1; j < fileinfos.Count; j++)
                 {
-                    if (fileinfos[i].size == fileinfos[j].size)
+                    if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size)) + "\n";
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].size)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
 
                         ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
 
                         ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                         i1.SubItems.Add(fileinfos[i].filepath);
-                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
 						i1.SubItems.Add(sub_i1a);
-                        i1.SubItems.Add(fileinfos[i].extension);
+                        i1.SubItems.Add(fileinfos[i].fileextension);
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
                         sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
@@ -1473,9 +1510,9 @@ namespace vcs_DrAP
 
                         ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
                         i2.SubItems.Add(fileinfos[j].filepath);
-                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].size));
+                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
 						i2.SubItems.Add(sub_i2a);
-                        i2.SubItems.Add(fileinfos[j].extension);
+                        i2.SubItems.Add(fileinfos[j].fileextension);
                         sub_i2a.ForeColor = System.Drawing.Color.Blue;
                         sub_i2a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
 
@@ -1501,7 +1538,7 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
@@ -1692,18 +1729,18 @@ namespace vcs_DrAP
 
 
 
-                    if (fileinfos[i].size == fileinfos[j].size)
+                    if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
                         /*
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size)) + "\n";
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].size)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
 
                         ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
 
                         ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                         i1.SubItems.Add(fileinfos[i].filepath);
-                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                        sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                         i1.SubItems.Add(sub_i1a);
                         i1.SubItems.Add(fileinfos[i].extension);
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
@@ -1716,7 +1753,7 @@ namespace vcs_DrAP
 
                         ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
                         i2.SubItems.Add(fileinfos[j].filepath);
-                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].size));
+                        sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
                         i2.SubItems.Add(sub_i2a);
                         i2.SubItems.Add(fileinfos[j].extension);
                         sub_i2a.ForeColor = System.Drawing.Color.Blue;
@@ -1744,7 +1781,7 @@ namespace vcs_DrAP
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
 
                 //sub_i1a.Text = fi.Length.ToString();
-                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].size));
+                sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
                 i1.SubItems.Add(sub_i1a);
                 sub_i1a.ForeColor = System.Drawing.Color.Blue;
 
@@ -1874,7 +1911,7 @@ namespace vcs_DrAP
                         {
                             DirectoryInfo di = new DirectoryInfo(targetDirectory);
                             //richTextBox1.Text += "建立日期:\t" + di.CreationTime.ToString() + "\n\n";
-                            folderinfos.Add(new MyFolderInfo(targetDirectory, targetDirectory, folder_size, di.CreationTime.ToString()));
+                            folderinfos.Add(new MyFolderInfo(targetDirectory, targetDirectory, folder_size, di.CreationTime));
                         }
                     }
 
@@ -2227,6 +2264,7 @@ namespace vcs_DrAP
                     flag_do_remove = false;
             }
         }
+
 
     }
 }
