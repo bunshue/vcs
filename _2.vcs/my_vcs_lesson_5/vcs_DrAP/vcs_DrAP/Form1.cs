@@ -21,7 +21,6 @@ namespace vcs_DrAP
             richTextBox2.Text += "update_setup_file ST\n";
             richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
 
-
             StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
             string content = "";
             //定義系統版本
@@ -72,7 +71,7 @@ namespace vcs_DrAP
             }
             content += "\n";
 
-            sw.WriteLine(content);
+            sw.WriteLine(content, Encoding.UTF8);
             sw.Close();
 
         }
@@ -89,7 +88,7 @@ namespace vcs_DrAP
             {
                 richTextBox2.Text += "檔案 " + drap_setup_filename + " 存在, 開啟，並讀入設定\n";
                 string line;
-                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.Default);
+                StreamReader sr = new StreamReader(drap_setup_filename, Encoding.UTF8);
                 i = 0;
                 while (!sr.EndOfStream)
                 {               // 每次讀取一行，直到檔尾
@@ -283,7 +282,6 @@ namespace vcs_DrAP
                 // This path is a directory
                 //ProcessDirectory(path);
 
-
                 try
                 {
                     //richTextBox1.Text += targetDirectory + "\n\n";
@@ -324,9 +322,6 @@ namespace vcs_DrAP
                         e.GetType().Name);
                     */
                 }
-
-
-
 
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
                 show_file_info();
@@ -393,7 +388,7 @@ namespace vcs_DrAP
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        if (checkBox1.Checked == false)
+                        if (cb_file_l.Checked == false)
                         {
                             richTextBox1.Text += "\n";
                             //for (int i = 0; i < step * 2; i++)
@@ -461,7 +456,7 @@ namespace vcs_DrAP
             folder_files++;
 
             //richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
-            if (((checkBox1.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (checkBox1.Checked == false))
+            if (((cb_file_l.Checked == true) && (fi.Length > min_size_mb * 1024 * 1024)) || (cb_file_l.Checked == false))
             {
                 if (flag_search_mode == 1)
                 {
@@ -483,24 +478,29 @@ namespace vcs_DrAP
                 //richTextBox1.Text += fi.Name + " \t\t " + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                 //richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
 
-
                 MediaFile f = new MediaFile(fi.FullName);
 
                 //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
                 //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
                 //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-                if (f.InfoAvailable == true)
+                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
                 {
                     int w = f.Video[0].Width;
                     int h = f.Video[0].Height;
                     //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
                     //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                        fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                    if (checkBox6.Checked)
+                    {
+                        richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                            fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                    }
                 }
                 else
                 {
-                    richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    if (checkBox6.Checked)
+                    {
+                        richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                    }
                 }
 
                 //richTextBox1.Text += fi.Directory + "\n";
@@ -525,6 +525,7 @@ namespace vcs_DrAP
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
                 */
 
+                //或許某些時候不需要
                 fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
             }
         }
@@ -538,9 +539,9 @@ namespace vcs_DrAP
             //設置列名稱
             if (checkBox4.Checked == true)
             {
-                listView1.Columns.Add("影片1", 150, HorizontalAlignment.Left);
+                listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
             }
-            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
@@ -568,17 +569,15 @@ namespace vcs_DrAP
 
                 if (checkBox4.Checked == true)
                 {
-
-                    //richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filename + "\n";
-
-                    richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+                    //debug mesg
+                    //richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
 
                     MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
 
                     //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
                     //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
                     //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-                    if (f.InfoAvailable == true)
+                    if ((f.InfoAvailable == true) && (f.Video.Count > 0))
                     {
                         int w = f.Video[0].Width;
                         int h = f.Video[0].Height;
@@ -586,6 +585,12 @@ namespace vcs_DrAP
                         //richTextBox2.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
                         //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                         //fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                        if (cb_video_s.Checked == true)
+                        {
+                            if (h > 480)
+                                continue;
+                        }
 
                         string item = string.Empty;
                         string itema = string.Empty;
@@ -622,13 +627,12 @@ namespace vcs_DrAP
                         sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                         sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                         sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-
-
-
-
                     }
                     else
                     {
+                        if (checkBox6.Checked == false)
+                            continue;
+
                         i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
 
@@ -646,24 +650,34 @@ namespace vcs_DrAP
                         sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                         sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                     }
+
+
+
+
+
+
+
                 }
                 else
                 {
+                    if (checkBox6.Checked == false)
+                        continue;
+
                     i1 = new ListViewItem(fileinfos[i].filename);
-                i1.UseItemStyleForSubItems = false;
+                    i1.UseItemStyleForSubItems = false;
 
                     richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX2\n";
-                sub_i1a.Text = fileinfos[i].filepath;
-                i1.SubItems.Add(sub_i1a);
-                //sub_i1a.Text = fi.Length.ToString();
-                sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                i1.SubItems.Add(sub_i1b);
+                    sub_i1a.Text = fileinfos[i].filepath;
+                    i1.SubItems.Add(sub_i1a);
+                    //sub_i1a.Text = fi.Length.ToString();
+                    sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                    i1.SubItems.Add(sub_i1b);
 
-                sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1b.ForeColor = System.Drawing.Color.Blue;
 
-                sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                 }
 
                 if (flag_search_mode == 1)
@@ -1094,8 +1108,10 @@ namespace vcs_DrAP
                 ProcessStartInfo pInfo = new ProcessStartInfo(target);
                 pInfo.Arguments = all_filename;
 
+                /* debug mesg
                 richTextBox2.Text += "target : " + target + "\n";
                 richTextBox2.Text += "all_filename : " + all_filename + "\n";
+                */
 
                 using (Process p = new Process())
                 {
@@ -1252,22 +1268,47 @@ namespace vcs_DrAP
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        void Setup_DrAP_Form()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
             //設定執行後的表單大小
             this.Size = new Size(1920, 1080);
-
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
             this.listBox1.BorderStyle = BorderStyle.Fixed3D;
+            this.listView1.Size = new System.Drawing.Size(1900, 500);
 
-            this.listView1.Size = new System.Drawing.Size(1860, 458);
+            this.richTextBox2.Size = new System.Drawing.Size(594, 388);
+            button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
+
+            richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
+            richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
+
+            richTextBox2.Text += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
+            richTextBox2.Text += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
 
 
+            //this.richTextBox2.Location = new Point(1600, 600);
+
+            if (checkBox7.Checked == false)
+            {
+                richTextBox2.Visible = false;
+                button20.Visible = false;
+            }
+
+
+
+
+
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Setup_DrAP_Form();
 
             //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             //this.listBox1.Items.Add(search_path);
@@ -1368,8 +1409,7 @@ namespace vcs_DrAP
             if (res == true)
             {
                 //richTextBox2.Text += fi.FullName + "\n";
-
-                StreamReader sr = new StreamReader(fi.FullName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+                StreamReader sr = new StreamReader(fi.FullName, Encoding.UTF8);
 
                 int flag_pattern_match = 0;
                 int i = 0;
@@ -1583,81 +1623,6 @@ namespace vcs_DrAP
 
         private void button18_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\內視鏡影片\院長平島徹朗が実際に胃内視鏡検査を受けました Full ver [720p].mp4";
-
-            MediaFile f = new MediaFile(filename);
-
-            richTextBox1.Text += "[檔案資訊]\n";
-            richTextBox1.Text += "  檔案名稱: " + filename + "\n";
-            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
-            richTextBox1.Text += "  CodecID: " + f.General.CodecID + "\n";
-            richTextBox1.Text += "  Extension: " + f.General.Extension + "\n";
-            richTextBox1.Text += "  Format: " + f.General.Format + "\n";
-            richTextBox1.Text += "  FormatID: " + f.General.FormatID + "\n";
-            richTextBox1.Text += "\n";
-
-            //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
-            richTextBox1.Text += "  檔案大小: " + ByteConversionGBMBKB(Convert.ToInt64(f.FileSize)) + "\n";
-
-            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
-            richTextBox1.Text += "  Name: " + f.Name + "\n";
-            //richTextBox1.Text += "  ParentFolder: " + f.ParentFolder + "\n";
-            richTextBox1.Text += "  InfoAvailable: " + f.InfoAvailable.ToString() + "\n";
-
-            richTextBox1.Text += "\n";
-            if (f.InfoAvailable == true)
-            {
-                //richTextBox1.Text += "  MediaInfo_Text: " + f.MediaInfo_Text + "\n";
-                //richTextBox1.Text += "  Info_Text: " + f.Info_Text + "\n";
-
-                int w = f.Video[0].Width;
-                int h = f.Video[0].Height;
-
-                richTextBox1.Text += "[視訊資訊]\n";
-                richTextBox1.Text += "  視訊編碼: " + f.Video[0].Format + "\n";
-                richTextBox1.Text += "  輸入格式: " + f.Video[0].Format + "\n";
-                richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                richTextBox1.Text += "  Bitrate: " + f.Video[0].Bitrate.ToString() + " kbps\n";
-
-                /*
-                richTextBox1.Text += "Format : " + f.General.Format.ToString() + "\n";
-                richTextBox1.Text += "W : " + f.Video[0].Width.ToString() + "\n";
-                richTextBox1.Text += "H : " + f.Video[0].Height.ToString() + "\n";
-                richTextBox1.Text += "時間 : " + f.Video[0].DurationString + "\n";
-
-                richTextBox1.Text += "Description : " + f.Video[0].Description + "\n";
-                richTextBox1.Text += "Format : " + f.Video[0].Format + "\n";
-                richTextBox1.Text += "FrameRate : " + f.Video[0].FrameRate.ToString() + "\n";
-                richTextBox1.Text += "FrameSize : " + f.Video[0].FrameSize.ToString() + "\n";
-                richTextBox1.Text += "MPlayerID : " + f.Video[0].MPlayerID.ToString() + "\n";
-                richTextBox1.Text += "PixelFormat : " + f.Video[0].PixelFormat + "\n";
-                richTextBox1.Text += "Resolution : " + f.Video[0].Resolution.ToString() + "\n";
-                richTextBox1.Text += "StreamSize : " + f.Video[0].StreamSize.ToString() + "\n";
-                richTextBox1.Text += "StreamType : " + f.Video[0].StreamType + "\n";
-                */
-
-                richTextBox1.Text += "\n";
-                richTextBox1.Text += "[音訊資訊]\n";
-                richTextBox1.Text += "  音訊編碼: " + f.Audio[0].Format + "\n";
-                richTextBox1.Text += "  取樣率: " + f.Audio[0].SamplingRate.ToString() + "\n";
-                richTextBox1.Text += "  聲道數: " + f.Audio[0].Channels.ToString() + "\n";
-                richTextBox1.Text += "  Bitrate: " + f.Audio[0].Bitrate.ToString() + " kbps\n";
-
-                /*
-                richTextBox1.Text += "CodecID : " + f.Audio[0].CodecID + "\n";
-                richTextBox1.Text += "Description : " + f.Audio[0].Description + "\n";
-                richTextBox1.Text += "DurationString : " + f.Audio[0].DurationString + "\n";
-                richTextBox1.Text += "Format : " + f.Audio[0].Format + "\n";
-                richTextBox1.Text += "FormatID : " + f.Audio[0].FormatID + "\n";
-                richTextBox1.Text += "ID : " + f.Audio[0].ID + "\n";
-                richTextBox1.Text += "MPlayerID : " + f.Audio[0].MPlayerID + "\n";
-                richTextBox1.Text += "StreamSize : " + f.Audio[0].StreamSize + "\n";
-                richTextBox1.Text += "StreamType : " + f.Audio[0].StreamType + "\n";
-                */
-
-            }
-            
 
         }
 
@@ -1668,12 +1633,12 @@ namespace vcs_DrAP
                 //按Enter 等同於 button13_Click
                 button13_Click(sender, e);
             }
-
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            removeDrawDiskSpace();
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1918,7 +1883,7 @@ namespace vcs_DrAP
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        if (checkBox1.Checked == false)
+                        if (cb_file_l.Checked == false)
                         {
                             richTextBox1.Text += "xxxxxxxxxxx\n";
                             richTextBox1.Text += "\n";
@@ -2207,14 +2172,13 @@ namespace vcs_DrAP
 
             //產出panel, 畫硬碟使用空間占比圖
             Panel pnl = new Panel();
-            pnl.Left = 750;
-            pnl.Top = 20;
+            pnl.Left = 1010;
+            pnl.Top = 5;
             pnl.Width = WIDTH;
             pnl.Height = WIDTH;
             pnl.Tag = "dynamic";
             pnl.BackColor = Color.White;
-            //this.Controls.Add(pnl);
-            this.richTextBox1.Controls.Add(pnl);
+            this.Controls.Add(pnl);
 
             Graphics g;
             g = pnl.CreateGraphics();
@@ -2236,9 +2200,6 @@ namespace vcs_DrAP
 
             b = new SolidBrush(Color.White);
             g.FillEllipse(b, WIDTH / 4, WIDTH / 4, WIDTH / 2, WIDTH / 2);
-
-
-
         }
 
         //移除按鈕部分,  一趟並不會將所有panel上的button回傳, 所以加入while迴圈, 真是神奇驚訝 
@@ -2248,20 +2209,55 @@ namespace vcs_DrAP
             while (flag_do_remove == true)
             {
                 bool flag_do_remove_this = false;
-                foreach (Control con in this.richTextBox1.Controls)
+                foreach (Control con in this.Controls)
                 {
                     //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
                     if (con.Tag != null)
                     {
                         if (con.Tag.ToString() == "dynamic")
                         {
-                            this.richTextBox1.Controls.Remove(con);
+                            this.Controls.Remove(con);
                             flag_do_remove_this = true;
                         }
                     }
                 }
                 if (flag_do_remove_this == false)
                     flag_do_remove = false;
+            }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked == true)
+            {
+                richTextBox2.Visible = true;
+                button20.Visible = true;
+                if (checkBox6.Checked == true)
+                {
+                    richTextBox1.Size = new Size(1300, 430);
+
+                    button19.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button19.Width, button19.Location.Y);
+                    button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
+                }
+
+            }
+            else
+            {
+                richTextBox2.Visible = false;
+                button20.Visible = false;
+
+                if (checkBox6.Checked == true)
+                {
+                    richTextBox1.Size = new Size(listView1.Width, 430);
+
+                    button19.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button19.Width, button19.Location.Y);
+                    button23.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - button23.Width, button23.Location.Y);
+
+                }
+
+
+
+
             }
         }
 
