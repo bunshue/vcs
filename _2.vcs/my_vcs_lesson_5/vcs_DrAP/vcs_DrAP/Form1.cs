@@ -16,6 +16,49 @@ namespace vcs_DrAP
 {
     public partial class Form1 : Form
     {
+        void Setup_DrAP_Form()
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+            //設定執行後的表單大小
+            this.Size = new Size(1920, 1080);
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.BorderStyle = BorderStyle.Fixed3D;
+            this.listView1.Size = new System.Drawing.Size(1900, 500);
+
+            this.richTextBox2.Size = new System.Drawing.Size(594, 388);
+            button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
+
+            richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
+            richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
+
+            richTextBox2.Text += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
+            richTextBox2.Text += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
+
+
+            //this.richTextBox2.Location = new Point(1600, 600);
+
+            if (checkBox7.Checked == false)
+            {
+                richTextBox2.Visible = false;
+                button20.Visible = false;
+            }
+
+            if (cb_video_only.Checked == true)
+                groupBox_video.Enabled = true;
+            else
+                groupBox_video.Enabled = false;
+            if (cb_file_size.Checked == true)
+                groupBox_file.Enabled = true;
+            else
+                groupBox_file.Enabled = false;
+
+
+        }
+
         void update_setup_file()
         {
             richTextBox2.Text += "update_setup_file ST\n";
@@ -489,7 +532,7 @@ namespace vcs_DrAP
                     int h = f.Video[0].Height;
                     //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
                     //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    if (checkBox6.Checked)
+                    if (cb_generate_text.Checked == true)
                     {
                         richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                             fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
@@ -497,7 +540,7 @@ namespace vcs_DrAP
                 }
                 else
                 {
-                    if (checkBox6.Checked)
+                    if (cb_generate_text.Checked == true)
                     {
                         richTextBox1.Text += fi.FullName + "\t\t" + ByteConversionGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
                     }
@@ -532,16 +575,20 @@ namespace vcs_DrAP
 
         void show_file_info()
         {
+            if (cb_video_only.Checked == false)
+                return;
+
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
 
             //設置列名稱
-            if (checkBox4.Checked == true)
+            if (cb_video_only.Checked == true)
             {
                 listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
             }
-            listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
@@ -563,11 +610,18 @@ namespace vcs_DrAP
                 //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                 ListViewItem i1;
 
+                ListViewItem.ListViewSubItem sub_i1s = new ListViewItem.ListViewSubItem();
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                 ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
                 ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
 
-                if (checkBox4.Checked == true)
+                string item = string.Empty;
+                string items = string.Empty;
+                string itema = string.Empty;
+                string itemb = string.Empty;
+                string itemc = string.Empty;
+
+                if (cb_video_only.Checked == true)
                 {
                     //debug mesg
                     //richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
@@ -586,51 +640,57 @@ namespace vcs_DrAP
                         //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                         //fi.FullName, ByteConversionGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
 
-                        if (cb_video_s.Checked == true)
+                        if (((cb_video_l.Checked == true) && (h >= 1080)) || ((cb_video_m.Checked == true) && (h < 1080) && (h > 480)) || ((cb_video_s.Checked == true) && (h <= 480)))
                         {
-                            if (h > 480)
-                                continue;
+                            item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                            if (h >= 1080)
+                                items = "大";
+                            else if (h <= 480)
+                                items = "小";
+                            else
+                                items = "中";
+                            itema = fileinfos[i].filename;
+                            itemb = fileinfos[i].filepath;
+                            itemc = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+
+                            //i1 = new ListViewItem(fileinfos[i].filename);
+                            i1 = new ListViewItem(item);
+                            i1.UseItemStyleForSubItems = false;
+
+                            //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+
+                            sub_i1s.Text = items;
+                            i1.SubItems.Add(sub_i1s);
+
+                            sub_i1a.Text = itema;
+                            i1.SubItems.Add(sub_i1a);
+                            //sub_i1a.Text = fileinfos[i].filepath;
+                            //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                            sub_i1b.Text = itemb;
+                            i1.SubItems.Add(sub_i1b);
+
+                            //sub_i1a.Text = fi.Length.ToString();
+                            //sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                            sub_i1c.Text = itemc;
+                            i1.SubItems.Add(sub_i1c);
+
+                            sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                            sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                            sub_i1c.ForeColor = System.Drawing.Color.Blue;
+
+                            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                            sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
                         }
-
-                        string item = string.Empty;
-                        string itema = string.Empty;
-                        string itemb = string.Empty;
-                        string itemc = string.Empty;
-
-                        item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                        itema = fileinfos[i].filename;
-                        itemb = fileinfos[i].filepath;
-                        itemc = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-
-                        //i1 = new ListViewItem(fileinfos[i].filename);
-                        i1 = new ListViewItem(item);
-                        i1.UseItemStyleForSubItems = false;
-
-                        //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-
-                        sub_i1a.Text = itema;
-                        i1.SubItems.Add(sub_i1a);
-                        //sub_i1a.Text = fileinfos[i].filepath;
-                        //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
-                        sub_i1b.Text = itemb;
-                        i1.SubItems.Add(sub_i1b);
-
-                        //sub_i1a.Text = fi.Length.ToString();
-                        //sub_i1b.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-                        sub_i1c.Text = itemc;
-                        i1.SubItems.Add(sub_i1c);
-
-                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
-                        sub_i1c.ForeColor = System.Drawing.Color.Blue;
-
-                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-                        sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        else
+                            continue;
                     }
                     else
                     {
-                        if (checkBox6.Checked == false)
+                        if (cb_video_only.Checked == true)
+                            continue;
+
+                        if (cb_generate_text.Checked == false)
                             continue;
 
                         i1 = new ListViewItem(fileinfos[i].filename);
@@ -660,7 +720,10 @@ namespace vcs_DrAP
                 }
                 else
                 {
-                    if (checkBox6.Checked == false)
+                    if (cb_video_only.Checked == true)
+                        continue;
+
+                    if (cb_generate_text.Checked == false)
                         continue;
 
                     i1 = new ListViewItem(fileinfos[i].filename);
@@ -705,11 +768,11 @@ namespace vcs_DrAP
             listView1.Clear();
 
             //設置列名稱
-            if (checkBox4.Checked == true)
+            if (cb_video_only.Checked == true)
             {
                 listView1.Columns.Add("影片2", 100, HorizontalAlignment.Left);
             }
-            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名2", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
@@ -767,7 +830,7 @@ namespace vcs_DrAP
             listView1.Clear();
 
             //設置列名稱
-            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名3", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
@@ -1024,11 +1087,18 @@ namespace vcs_DrAP
             //richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
             //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
-            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-
-
-            fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[1].Text;
+            if (flag_function == FUNCTION_FIND_BIG_FILE)
+            {
+                richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
+            }
+            else
+            {
+                richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+            }
 
             if (flag_search_vcs_pattern == 0)
             {
@@ -1228,8 +1298,9 @@ namespace vcs_DrAP
         private void button4_Click(object sender, EventArgs e)
         {
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
+            button4.BackColor = Color.Red;
             min_size_mb = 0;
-            bool conversionSuccessful = int.TryParse(textBox1.Text, out min_size_mb);    //out為必須
+            bool conversionSuccessful = int.TryParse(tb_file_l.Text, out min_size_mb);    //out為必須
             if (conversionSuccessful == true)
             {
                 //richTextBox1.Text += "容量限制： " + min_size_mb.ToString() + " MB\n";
@@ -1242,6 +1313,7 @@ namespace vcs_DrAP
             }
             flag_function = FUNCTION_FIND_BIG_FILE;
             find_and_show_big_files();
+            button4.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -1266,44 +1338,6 @@ namespace vcs_DrAP
                 */
                 listView1.SelectedItems[i].Remove();
             }
-        }
-
-        void Setup_DrAP_Form()
-        {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-            //設定執行後的表單大小
-            this.Size = new Size(1920, 1080);
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.BorderStyle = BorderStyle.Fixed3D;
-            this.listView1.Size = new System.Drawing.Size(1900, 500);
-
-            this.richTextBox2.Size = new System.Drawing.Size(594, 388);
-            button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
-
-            richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
-            richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
-
-            richTextBox2.Text += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
-            richTextBox2.Text += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
-
-
-            //this.richTextBox2.Location = new Point(1600, 600);
-
-            if (checkBox7.Checked == false)
-            {
-                richTextBox2.Visible = false;
-                button20.Visible = false;
-            }
-
-
-
-
-
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -1446,6 +1480,8 @@ namespace vcs_DrAP
 
         private void button13_Click(object sender, EventArgs e)
         {
+            button13.BackgroundImage = null;
+            button13.BackColor = Color.Red;
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_VCS;
@@ -1476,6 +1512,8 @@ namespace vcs_DrAP
             }
             show_file_info3();
             flag_search_vcs_pattern = 1;
+            button13.BackColor = System.Drawing.SystemColors.ControlLight;
+            button13.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             return;
         }
 
@@ -1511,11 +1549,11 @@ namespace vcs_DrAP
             listView1.Clear();
 
             //設置列名稱
-            if (checkBox4.Checked == true)
+            if (cb_video_only.Checked == true)
             {
                 listView1.Columns.Add("影片4", 100, HorizontalAlignment.Left);
             }
-            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名4", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
@@ -1623,7 +1661,7 @@ namespace vcs_DrAP
 
         private void button18_Click(object sender, EventArgs e)
         {
-
+            richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
         }
 
         private void textBox3_KeyDown(object sender, KeyEventArgs e)
@@ -1653,11 +1691,11 @@ namespace vcs_DrAP
             listView1.Clear();
 
             //設置列名稱
-            if (checkBox4.Checked == true)
+            if (cb_video_only.Checked == true)
             {
                 listView1.Columns.Add("影片5", 100, HorizontalAlignment.Left);
             }
-            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名5", 300, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
@@ -2083,7 +2121,10 @@ namespace vcs_DrAP
                     ProcessDirectory(path);
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionGBMBKB(Convert.ToInt64(total_size)) + "\n";
 
-                    show_file_info();
+                    if (cb_video_only.Checked == true)
+                    {
+                        show_file_info();
+                    }
                 }
                 else
                 {
@@ -2172,7 +2213,7 @@ namespace vcs_DrAP
 
             //產出panel, 畫硬碟使用空間占比圖
             Panel pnl = new Panel();
-            pnl.Left = 1010;
+            pnl.Left = 1070;
             pnl.Top = 5;
             pnl.Width = WIDTH;
             pnl.Height = WIDTH;
@@ -2232,7 +2273,7 @@ namespace vcs_DrAP
             {
                 richTextBox2.Visible = true;
                 button20.Visible = true;
-                if (checkBox6.Checked == true)
+                if (cb_generate_text.Checked == true)
                 {
                     richTextBox1.Size = new Size(1300, 430);
 
@@ -2246,7 +2287,7 @@ namespace vcs_DrAP
                 richTextBox2.Visible = false;
                 button20.Visible = false;
 
-                if (checkBox6.Checked == true)
+                if (cb_generate_text.Checked == true)
                 {
                     richTextBox1.Size = new Size(listView1.Width, 430);
 
@@ -2259,6 +2300,22 @@ namespace vcs_DrAP
 
 
             }
+        }
+
+        private void cb_video_only_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_video_only.Checked == true)
+                groupBox_video.Enabled = true;
+            else
+                groupBox_video.Enabled = false;
+        }
+
+        private void cb_file_size_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_file_size.Checked == true)
+                groupBox_file.Enabled = true;
+            else
+                groupBox_file.Enabled = false;
         }
 
 
