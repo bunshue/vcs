@@ -64,64 +64,108 @@ namespace vcs_DrAP
             richTextBox2.Text += "update_setup_file ST\n";
             richTextBox2.Text += "length of old_search_path = " + old_search_path.Count.ToString() + "\n";
 
-            StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
-            string content = "";
-            //定義系統版本
-            Version ver = Environment.OSVersion.Version;
-            //Major主版本號,Minor副版本號
-            if (ver.Major == 6 && ver.Minor == 1)
+            if (flag_need_update_setup_file == false)
             {
-                //Windows7
-                content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                richTextBox2.Text += "無修改, 不用存檔\n";
             }
             else
             {
-                //Windows10
-                content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
-            }
-            content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
-            content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
-            content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
-            content += SelectedLanguage.ToString() + "\n";
+                richTextBox2.Text += "有修改, 需要存檔\n";
 
-            //Major主版本號,Minor副版本號
-            if (ver.Major == 6 && ver.Minor == 1)
-            {
-                //Windows7
-                video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-            }
-            else
-            {
-                //Windows10
-                video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
-            }
-            audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
-            picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
-            text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
-
-            if (old_search_path.Count == 0)
-            {
-                content += "C:\\______test_files\n";
-                old_search_path.Add("C:\\______test_files");
-            }
-            else
-            {
-                foreach (string sss in old_search_path)
+                StreamWriter sw = System.IO.File.CreateText(drap_setup_filename);
+                string content = "";
+                //定義系統版本
+                Version ver = Environment.OSVersion.Version;
+                //Major主版本號,Minor副版本號
+                if (ver.Major == 6 && ver.Minor == 1)
                 {
-                    richTextBox2.Text += sss + "\n";
-                    content += sss + "\n";
+                    //Windows7
+                    content += "\"C:\\Program Files\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
                 }
+                else
+                {
+                    //Windows10
+                    content += "\"C:\\Program Files (x86)\\DAUM\\PotPlayer\\PotPlayerMini.exe\"\n";
+                }
+                content += "\"C:\\Program Files (x86)\\AIMP\\AIMP.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\ACDSee32\\ACDSee32.exe\"\n";
+                content += "\"C:\\Program Files (x86)\\IDM Computer Solutions\\UltraEdit-32\\uedit32.exe\"\n";
+                content += SelectedLanguage.ToString() + "\n";
+                content += comboBox1.SelectedIndex.ToString() + "\n";
+                if (cb_video_only.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_l.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_m.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_video_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_size.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_l.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_m.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_file_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+
+                //Major主版本號,Minor副版本號
+                if (ver.Major == 6 && ver.Minor == 1)
+                {
+                    //Windows7
+                    video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+                }
+                else
+                {
+                    //Windows10
+                    video_player_path = @"C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe";
+                }
+                audio_player_path = @"C:\Program Files (x86)\AIMP\AIMP.exe";
+                picture_viewer_path = @"C:\Program Files (x86)\ACDSee32\ACDSee32.exe";
+                text_editor_path = @"C:\Program Files (x86)\IDM Computer Solutions\UltraEdit-32\uedit32.exe";
+
+                richTextBox2.Text += "目前共有 " + listBox1.Items.Count.ToString() + " 條搜尋路徑\n";
+
+                if (listBox1.Items.Count == 0)
+                {
+                    content += "C:\\______test_files\n";
+                    old_search_path.Add("C:\\______test_files");
+                }
+                else
+                {
+                    for (int i = 0; i < listBox1.Items.Count; i++)
+                    {
+                        richTextBox2.Text += listBox1.Items[i] + "\n";
+                        content += listBox1.Items[i] + "\n";
+                    }
+                }
+                content += "\n";
+
+                sw.WriteLine(content, Encoding.UTF8);
+                sw.Close();
             }
-            content += "\n";
-
-            sw.WriteLine(content, Encoding.UTF8);
-            sw.Close();
-
         }
 
         void Read_Setup_File()
         {
             int i;
+            int tmp;
             if (System.IO.File.Exists(drap_setup_filename) == false)
             {
                 richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
@@ -155,12 +199,72 @@ namespace vcs_DrAP
                             SelectedLanguage = int.Parse(line);
                             break;
                         case 5:
+                            tmp = int.Parse(line);
+                            comboBox1.SelectedIndex = tmp;
+                            break;
+                        case 6:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_only.Checked = true;
+                            else
+                                cb_video_only.Checked = false;
+                            break;
+                        case 7:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_l.Checked = true;
+                            else
+                                cb_video_l.Checked = false;
+                            break;
+                        case 8:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_m.Checked = true;
+                            else
+                                cb_video_m.Checked = false;
+                            break;
+                        case 9:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_video_s.Checked = true;
+                            else
+                                cb_video_s.Checked = false;
+                            break;
+                        case 10:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_size.Checked = true;
+                            else
+                                cb_file_size.Checked = false;
+                            break;
+                        case 11:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_l.Checked = true;
+                            else
+                                cb_file_l.Checked = false;
+                            break;
+                        case 12:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_m.Checked = true;
+                            else
+                                cb_file_m.Checked = false;
+                            break;
+                        case 13:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_file_s.Checked = true;
+                            else
+                                cb_file_s.Checked = false;
+                            break;
+                        case 14:
                             search_path = line;
                             break;
                         default:
                             break;
                     }
-                    if (i >= 5)
+                    if (i >= 14)
                     {
                         if (line.Length > 0)
                         {
@@ -196,6 +300,11 @@ namespace vcs_DrAP
 
         private const int FUNCTION_TEST = 0xFF;         //測試
 
+        private const int FILETYPE_VIDEO = 0x00;        //影片
+        private const int FILETYPE_AUDIO = 0x01;        //音樂
+        private const int FILETYPE_ALL = 0x02;          //全部
+        private const int FILETYPE_OTHERS = 0xFF;       //其他
+
         int flag_function = FUNCTION_NONE;
 
         string path = String.Empty;
@@ -220,6 +329,8 @@ namespace vcs_DrAP
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
         string search_path = String.Empty;
+
+        bool flag_need_update_setup_file = false;
 
         private const int SEARCH_MODE_VCS = 0x00;	//search vcs code
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code
@@ -999,15 +1110,15 @@ namespace vcs_DrAP
         {
             filetype = comboBox1.SelectedIndex;
             switch (filetype)
-            { 
-                case 0:
+            {
+                case FILETYPE_VIDEO:
                     filetype2 = "*.*";
                     break;
-                case 1:
+                case FILETYPE_AUDIO:
                     filetype2 = "*.mp3";
                     break;
-                case 2:
-                    filetype2 = "*.txt";
+                case FILETYPE_ALL:
+                    filetype2 = "*.*";
                     break;
                 default:
                     filetype2 = "*.*";
@@ -1152,7 +1263,7 @@ namespace vcs_DrAP
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
-                all_filename += " \"" + listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[1].Text + "\"";
+                all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
             }
 
             //指定應用程式路徑
@@ -1638,25 +1749,28 @@ namespace vcs_DrAP
                 richTextBox2.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
                 listBox1.Items.Add(folderBrowserDialog1.SelectedPath);
                 old_search_path.Add(folderBrowserDialog1.SelectedPath);
+                flag_need_update_setup_file = true;
             }
             else
             {
                 richTextBox2.Text = "未選取資料夾\n";
             }
             flag_search_done = 0;
-
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Remove(listBox1.SelectedItem);
+            richTextBox2.Text += "移除了 " + listBox1.SelectedItem + "\n";
             old_search_path.Remove(folderBrowserDialog1.SelectedPath);
+            listBox1.Items.Remove(listBox1.SelectedItem);
+            flag_need_update_setup_file = true;
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             old_search_path.Clear();
+            flag_need_update_setup_file = true;
         }
 
         private void button18_Click(object sender, EventArgs e)

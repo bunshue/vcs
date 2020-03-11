@@ -77,9 +77,9 @@
             this.cb_video_m = new System.Windows.Forms.CheckBox();
             this.groupBox_file = new System.Windows.Forms.GroupBox();
             this.cb_file_l = new System.Windows.Forms.CheckBox();
+            this.tb_file_s = new System.Windows.Forms.TextBox();
             this.cb_file_m = new System.Windows.Forms.CheckBox();
             this.cb_file_s = new System.Windows.Forms.CheckBox();
-            this.tb_file_s = new System.Windows.Forms.TextBox();
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
@@ -100,9 +100,9 @@
             this.comboBox1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "*.*",
-            "*.mp3",
-            "*.txt"});
+            "影片",
+            "全部檔案",
+            "音樂"});
             this.comboBox1.Location = new System.Drawing.Point(765, 34);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(88, 21);
@@ -251,9 +251,9 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox3.Location = new System.Drawing.Point(1530, 37);
+            this.textBox3.Location = new System.Drawing.Point(1526, 37);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(138, 30);
+            this.textBox3.Size = new System.Drawing.Size(142, 30);
             this.textBox3.TabIndex = 24;
             this.textBox3.Text = "listview";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -296,7 +296,7 @@
             // 
             this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button15.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(213, 45);
+            this.button15.Location = new System.Drawing.Point(213, 44);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(20, 20);
             this.button15.TabIndex = 30;
@@ -308,7 +308,7 @@
             // 
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button16.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(213, 71);
+            this.button16.Location = new System.Drawing.Point(213, 74);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(20, 20);
             this.button16.TabIndex = 31;
@@ -384,7 +384,7 @@
             this.button21.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button21.Location = new System.Drawing.Point(1363, 70);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(156, 23);
+            this.button21.Size = new System.Drawing.Size(144, 23);
             this.button21.TabIndex = 38;
             this.button21.Text = "找可能相同檔案";
             this.button21.UseVisualStyleBackColor = true;
@@ -541,7 +541,7 @@
             this.checkBox7.AutoSize = true;
             this.checkBox7.Checked = true;
             this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Location = new System.Drawing.Point(1480, 88);
+            this.checkBox7.Location = new System.Drawing.Point(1526, 81);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(62, 16);
             this.checkBox7.TabIndex = 45;
@@ -615,6 +615,16 @@
             this.cb_file_l.Text = "大";
             this.cb_file_l.UseVisualStyleBackColor = true;
             // 
+            // tb_file_s
+            // 
+            this.tb_file_s.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_file_s.Location = new System.Drawing.Point(210, 14);
+            this.tb_file_s.Name = "tb_file_s";
+            this.tb_file_s.Size = new System.Drawing.Size(52, 30);
+            this.tb_file_s.TabIndex = 48;
+            this.tb_file_s.Text = "10";
+            this.tb_file_s.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // cb_file_m
             // 
             this.cb_file_m.AutoSize = true;
@@ -640,16 +650,6 @@
             this.cb_file_s.TabIndex = 43;
             this.cb_file_s.Text = "小";
             this.cb_file_s.UseVisualStyleBackColor = true;
-            // 
-            // tb_file_s
-            // 
-            this.tb_file_s.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_file_s.Location = new System.Drawing.Point(210, 14);
-            this.tb_file_s.Name = "tb_file_s";
-            this.tb_file_s.Size = new System.Drawing.Size(52, 30);
-            this.tb_file_s.TabIndex = 48;
-            this.tb_file_s.Text = "10";
-            this.tb_file_s.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cb_file_size
             // 
