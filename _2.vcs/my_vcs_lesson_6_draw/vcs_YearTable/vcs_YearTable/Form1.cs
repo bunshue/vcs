@@ -200,8 +200,13 @@ namespace vcs_YearTable
 
         private void button8_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+            eraName.Clear();
+
             load_eraData();
 
+            int offset_x = 50;
+            int offset_y = 50;
             int year;
             int era_start = 0;
             int total_year = 0;
@@ -217,7 +222,7 @@ namespace vcs_YearTable
             }
             richTextBox1.Text += "總年數 : " + total_year.ToString() + "\n";
 
-            pictureBox1.Size = new System.Drawing.Size(total_year * 10 + 10, 190);
+            pictureBox1.Size = new System.Drawing.Size(offset_x * 2 + total_year * 10 + 10, offset_y * 2 + 190);
 
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bitmap1);
@@ -245,6 +250,7 @@ namespace vcs_YearTable
             int y_st = 0;
             int w = 0;
             int h = 0;
+            int year_now = DateTime.Now.Year;
 
             h = 50;
             y_st = 0;
@@ -253,6 +259,8 @@ namespace vcs_YearTable
             foreach (var showlist in eraName)
             {
                 year = showlist.Year_SP - showlist.Year_ST + 1;
+                if (showlist.EraName == "順治")
+                    total_year = 0;
                 total_year += year;
                 showlist.Year_length = year;
                 //richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
@@ -260,11 +268,13 @@ namespace vcs_YearTable
                 x_st = (showlist.Year_ST - era_start) * ratio;
                 w = year * ratio;
                 p = new Pen(Color.Red, 1);
-                g.DrawRectangle(p, x_st, y_st, w, h);
+                g.DrawRectangle(p, offset_x + x_st, offset_y + y_st, w, h);
                 richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
 
                 f = new Font("標楷體", 12);
-                g.DrawString((total_year - year + 1).ToString(), f, new SolidBrush(Color.Blue), new PointF(x_st, y_st + h));
+                g.DrawString((total_year - year + 1).ToString(), f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st, offset_y + y_st + h));
+                f = new Font("標楷體", 10);
+                g.DrawString((showlist.Year_ST - year_now).ToString(), f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st, offset_y + y_st + h + 20));
 
                 string name = showlist.EraName + "(" + year.ToString() + ")";
                 int font_size = 20;
@@ -292,10 +302,10 @@ namespace vcs_YearTable
 
                 richTextBox1.Text += "ww = " + ww.ToString() + "  hh = " + hh.ToString() + "\n";
 
-                g.DrawString(name, f, new SolidBrush(Color.Blue), new PointF(x_st + (w - ww) / 2, y_st + (h - hh) / 2));
+                g.DrawString(name, f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2));
 
                 p = new Pen(Color.Green, 1);
-                g.DrawRectangle(p, x_st + (w - ww) / 2, y_st + (h - hh) / 2, ww, hh);
+                g.DrawRectangle(p, offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2, ww, hh);
 
 
                 pictureBox1.Image = bitmap1;
@@ -350,6 +360,8 @@ namespace vcs_YearTable
 
         private void button10_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+
             //load_personData();    //TBD
 
             string[,] person = new string[19, 4] { 
@@ -464,5 +476,94 @@ namespace vcs_YearTable
             pictureBox1.Image = bitmap1;
 
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "現在年 " + DateTime.Now.Year.ToString() + "\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+            //load_personData();    //TBD
+
+            //C# 計算差異天數
+            string startDate = "628年7月21日";
+            string endDate = "683年12月27日";
+            DateTime dtStart = DateTime.Parse(startDate);
+            DateTime dtEnd = DateTime.Parse(endDate);
+            // 計算差異天數
+            TimeSpan tsDay = dtEnd - dtStart;
+            int dayCount = (int)tsDay.TotalDays;
+            richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
+
+            richTextBox1.Text += "天1 : " + tsDay.Days.ToString() + "\n";
+
+            richTextBox1.Text += "天1 : " + tsDay.TotalDays.ToString() + "\n";   //same
+
+
+            string[,] person = new string[12, 6] { 
+            { "1", "唐高祖", "566年4月7日", "635年6月25日", "618年6月18日", "626年9月4日"},
+            { "2", "唐太宗", "598年1月23日", "649年7月10日", "626年9月4日", "649年7月10日"},
+            { "3", "唐高宗", "628年7月21日", "683年12月27日", "649年7月15日", "683年12月27日"},
+            { "4", "唐中宗", "656年11月26日", "710年7月3日", "684年1月3日","684年2月26日"},
+            { "5", "唐睿宗", "662年6月22日", "716年7月13日", "684年2月27日","690年10月16日"},
+            { "6", "則天后", "628年7月21日", "683年12月27日", "649年7月15日", "683年12月27日"},
+            { "7", "唐中宗", "656年11月26日", "710年7月3日", "705年2月23日","710年7月3日"},
+            { "8", "唐睿宗", "662年6月22日", "716年7月13日", "710年7月25日","712年9月8日"},
+            { "9", "唐玄宗", "685年9月8日", "762年5月3日", "712年9月8日", "756年8月1日"},
+            { "10", "唐肅宗", "711年1月21日","762年5月16日","756年8月12日", "762年5月16日"},
+            { "11", "唐代宗", "726年11月11日", "779年6月10日", "762年5月18日", "779年6月10日"},
+            { "12", "唐德宗", "742年5月27日", "805年2月25日","779年6月12日", "805年2月25日"},
+            };
+
+            int i;
+            //int age;
+            //int position;
+            //int BORDER = 50;
+            //int HEIGHT = 50;
+
+            richTextBox1.Text += "xxx" + person.Length.ToString() + "\n";
+            richTextBox1.Text += "xxx" + person.LongLength.ToString() + "\n";
+
+            richTextBox1.Text += "xxx" + person.Rank.ToString() + "\n";
+
+
+            for (i = 0; i < 12; i++)
+            {
+                int num;
+                num = int.Parse(person[i, 0]);
+                richTextBox1.Text += "第 " + num.ToString() + " 任 " + person[i, 1] + "\n";
+
+                DateTime lifeStart = DateTime.Parse(person[i, 2]);
+                DateTime lifeEnd = DateTime.Parse(person[i, 3]);
+
+                DateTime workStart = DateTime.Parse(person[i, 4]);
+                DateTime workEnd = DateTime.Parse(person[i, 5]);
+
+                // 計算差異天數
+                TimeSpan lifeDay = lifeEnd - lifeStart;
+                int lifedayCount = (int)lifeDay.TotalDays;
+                richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+                TimeSpan workDay = workEnd - workStart;
+                int workdayCount = (int)workDay.TotalDays;
+                richTextBox1.Text += "在位 " + workdayCount.ToString() + " 天" + "\t" + DayConversionYMD(workdayCount) + "\n";
+
+            }
+
+        }
+
+        public string DayConversionYMD(int day)
+        {
+            if (day > 365)
+                return (day / 365).ToString() + " 年" + ((day % 365) / 30).ToString() + " 月" + ((day % 365) % 30).ToString() + " 日";
+            else if (day > 30)
+                return (day / 30).ToString() + " 月" + ((day % 365) % 30).ToString() + " 日";
+            else
+                return day.ToString() + " 日";
+        }
+
     }
 }

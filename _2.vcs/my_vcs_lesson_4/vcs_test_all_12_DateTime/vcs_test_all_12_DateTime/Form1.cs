@@ -21,6 +21,7 @@ namespace vcs_test_all_12_DateTime
             InitializeComponent();
             LoginTime = DateTime.Now; //取得目前登入的時間
             richTextBox1.Text += "登入時間： " + LoginTime.ToString() + "\n";
+            label5.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
