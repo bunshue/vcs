@@ -169,6 +169,7 @@ namespace vcs_DrAP
             if (System.IO.File.Exists(drap_setup_filename) == false)
             {
                 richTextBox2.Text += "檔案 " + drap_setup_filename + " 不存在，製作一個。\n";
+                flag_need_update_setup_file = true;
                 update_setup_file();
             }
             else

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Globalization; //for CultureInfo
 
 namespace vcs_YearTable
 {
@@ -491,6 +492,13 @@ namespace vcs_YearTable
             //C# 計算差異天數
             string startDate = "628年7月21日";
             string endDate = "683年12月27日";
+
+            DateTime lifeEarliest = DateTime.Now;
+            DateTime lifeLatest = new DateTime(1, 1, 1);
+
+            DateTime workEarliest = DateTime.Now;
+            DateTime workLatest = new DateTime(1, 1, 1);
+
             DateTime dtStart = DateTime.Parse(startDate);
             DateTime dtEnd = DateTime.Parse(endDate);
             // 計算差異天數
@@ -501,40 +509,146 @@ namespace vcs_YearTable
             richTextBox1.Text += "天1 : " + tsDay.Days.ToString() + "\n";
 
             richTextBox1.Text += "天1 : " + tsDay.TotalDays.ToString() + "\n";   //same
-
-
             string[,] person = new string[12, 6] { 
+                /*
             { "1", "唐高祖", "566年4月7日", "635年6月25日", "618年6月18日", "626年9月4日"},
             { "2", "唐太宗", "598年1月23日", "649年7月10日", "626年9月4日", "649年7月10日"},
             { "3", "唐高宗", "628年7月21日", "683年12月27日", "649年7月15日", "683年12月27日"},
             { "4", "唐中宗", "656年11月26日", "710年7月3日", "684年1月3日","684年2月26日"},
             { "5", "唐睿宗", "662年6月22日", "716年7月13日", "684年2月27日","690年10月16日"},
-            { "6", "則天后", "628年7月21日", "683年12月27日", "649年7月15日", "683年12月27日"},
+            { "6", "則天后", "624年2月17日", "705年12月16日", "690年10月16日", "705年2月21日"},
             { "7", "唐中宗", "656年11月26日", "710年7月3日", "705年2月23日","710年7月3日"},
             { "8", "唐睿宗", "662年6月22日", "716年7月13日", "710年7月25日","712年9月8日"},
             { "9", "唐玄宗", "685年9月8日", "762年5月3日", "712年9月8日", "756年8月1日"},
-            { "10", "唐肅宗", "711年1月21日","762年5月16日","756年8月12日", "762年5月16日"},
+            { "10", "唐肅宗", "711年1月21日","762年5月16日", "756年8月12日", "762年5月16日"},
             { "11", "唐代宗", "726年11月11日", "779年6月10日", "762年5月18日", "779年6月10日"},
-            { "12", "唐德宗", "742年5月27日", "805年2月25日","779年6月12日", "805年2月25日"},
+            { "12", "唐德宗", "742年5月27日", "805年2月25日", "779年6月12日", "805年2月25日"},
+            { "13", "唐順宗", "761年2月21日", "806年2月11日", "805年2月28日", "805年8月31日"},
+            { "14", "唐憲宗", "778年3月17日", "820年2月14日", "805年9月5日", "820年2月14日"},
+            { "15", "唐穆宗", "795年7月26日", "824年2月25日", "820年2月20日", "824年2月25日"},
+            { "16", "唐敬宗", "809年7月22日", "827年1月9日", "824年2月29日", "827年1月9日"},
+            { "17", "唐文宗", "809年11月20日", "840年2月10日", "827年1月13日", "840年2月10日"},
+            { "18", "唐武宗", "814年7月2日", "846年4月22日", "840年2月20日", "846年4月22日"},
+            { "19", "唐宣宗", "810年7月27日", "859年9月10日", "846年4月22日", "859年9月10日"},
+            { "20", "唐懿宗", "833年12月28日", "873年8月15日", "859年9月13日", "873年8月15日"},
+            { "21", "唐僖宗", "862年6月8日", "888年4月20日", "873年8月16日", "888年4月20日"},
+            { "22", "唐昭宗", "867年3月31日", "904年9月22日", "888年4月22日", "904年9月22日"},
+            { "23", "唐哀帝", "892年10月27日", "908年3月26日", "904年9月27日", "907年5月12日"},
+                */
+{ "1", "清太祖", "1559年2月21日", "1626年9月30日", "1616年2月17日", "1626年9月30日"},
+{ "2", "清太宗", "1592年11月28日", "1643年9月21日", "1626年10月20日", "1643年9月21日"},
+{ "3", "順治", "1638年3月15日", "1661年2月5日", "1643年10月8日", "1661年2月5日"},
+{ "4", "康熙", "1654年5月4日", "1722年12月20日", "1661年2月5日", "1722年12月20日"},
+{ "5", "雍正", "1678年12月13日", "1735年10月8日", "1722年12月20日", "1735年10月7日"},
+{ "6", "乾隆", "1711年9月25日", "1799年2月7日", "1735年10月18日", "1796年2月9日"},
+{ "7", "嘉慶", "1760年11月14日", "1820年9月2日", "1796年2月9日", "1820年9月2日"},
+{ "8", "道光", "1782年9月16日", "1850年2月26日", "1820年10月3日", "1850年2月26日"},
+{ "9", "咸豐", "1831年7月17日", "1861年8月22日", "1850年3月9日", "1861年8月22日"},
+{ "10", "同治", "1856年4月27日", "1875年1月12日", "1861年11月11日", "1875年1月12日"},
+{ "11", "光緒", "1871年8月14日", "1908年11月14日", "1875年2月25日", "1908年11月14日"},
+{ "12", "宣統", "1906年2月7日", "1967年10月17日", "1908年12月2日", "1912年2月12日"},
+
+
             };
 
+
             int i;
-            //int age;
-            //int position;
-            //int BORDER = 50;
-            //int HEIGHT = 50;
 
-            richTextBox1.Text += "xxx" + person.Length.ToString() + "\n";
-            richTextBox1.Text += "xxx" + person.LongLength.ToString() + "\n";
+            //int[,] array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };//定義一個3行3列的二維陣列
+            int row = person.Rank;//獲取行數
+            int col1 = person.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int col2 = person.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int num1 = person.Length;//獲取整個二維陣列的長度，即所有元 的個數
 
-            richTextBox1.Text += "xxx" + person.Rank.ToString() + "\n";
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+            richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
 
+            int total_persons = person.GetUpperBound(0) + 1;
 
-            for (i = 0; i < 12; i++)
+            for (i = 0; i < total_persons; i++)
             {
                 int num;
                 num = int.Parse(person[i, 0]);
                 richTextBox1.Text += "第 " + num.ToString() + " 任 " + person[i, 1] + "\n";
+
+                DateTime lifeStart = DateTime.Parse(person[i, 2]);
+                DateTime lifeEnd = DateTime.Parse(person[i, 3]);
+
+                DateTime workStart = DateTime.Parse(person[i, 4]);
+                DateTime workEnd = DateTime.Parse(person[i, 5]);
+
+                if (lifeEarliest > lifeStart)
+                    lifeEarliest = lifeStart;
+
+                if (lifeLatest < lifeEnd)
+                    lifeLatest = lifeEnd;
+
+                if (workEarliest > workStart)
+                    workEarliest = workStart;
+
+                if (workLatest < workEnd)
+                    workLatest = workEnd;
+
+
+                // 計算差異天數
+                TimeSpan lifeDay = lifeEnd - lifeStart;
+                int lifedayCount = (int)lifeDay.TotalDays;
+                richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+                TimeSpan workDay = workEnd - workStart;
+                int workdayCount = (int)workDay.TotalDays;
+                richTextBox1.Text += "在位 " + workdayCount.ToString() + " 天" + "\t" + DayConversionYMD(workdayCount) + "\n";
+
+
+            }
+            richTextBox1.Text += "壽命最早" + lifeEarliest.ToString() + "\n";
+            richTextBox1.Text += "壽命最晚" + lifeLatest.ToString() + "\n";
+            TimeSpan totalLife = lifeLatest - lifeEarliest;
+            int totalLifeDaysCount = (int)totalLife.TotalDays;
+            richTextBox1.Text += "壽命全長 " + totalLifeDaysCount.ToString() + " 天" + "\t" + DayConversionYMD(totalLifeDaysCount) + "\n";
+
+            richTextBox1.Text += "在位最早" + workEarliest.ToString() + "\n";
+            richTextBox1.Text += "在位最晚" + workLatest.ToString() + "\n";
+            TimeSpan totalWork = workLatest - workEarliest;
+            int totalWorkDaysCount = (int)totalWork.TotalDays;
+            richTextBox1.Text += "在位全長 " + totalWorkDaysCount.ToString() + " 天" + "\t" + DayConversionYMD(totalWorkDaysCount) + "\n";
+
+
+            int age;
+            int position;
+            int BORDER = 50;
+            int HEIGHT = 50;
+            int offset_x = 100;
+            int offset_y = 0;
+            int x_st;
+            int y_st;
+            int w;
+            int h;
+            Font f;
+            int ratio = 40;
+
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+
+            pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, total_persons * HEIGHT + BORDER * 2);
+
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "已新建圖檔\n";
+            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
+
+            for (i = 0; i < total_persons; i++)
+            {
+                int num;
+                num = int.Parse(person[i, 0]);
+                richTextBox1.Text += "第 " + num.ToString() + " 任 " + person[i, 1] + "\n";
+
 
                 DateTime lifeStart = DateTime.Parse(person[i, 2]);
                 DateTime lifeEnd = DateTime.Parse(person[i, 3]);
@@ -551,7 +665,62 @@ namespace vcs_YearTable
                 int workdayCount = (int)workDay.TotalDays;
                 richTextBox1.Text += "在位 " + workdayCount.ToString() + " 天" + "\t" + DayConversionYMD(workdayCount) + "\n";
 
+                x_st = BORDER + ((int)(lifeStart - lifeEarliest).TotalDays) / ratio + offset_x;
+                y_st = BORDER + 50 * (num - 1) + offset_y;
+
+                w = ((int)(lifeEnd - lifeStart).TotalDays) / ratio;
+                h = 40;
+
+                g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+                g.DrawRectangle(p, x_st, y_st, w, h);
+
+                f = new Font("標楷體", 22);
+                int tmp_width = 0;
+                string str = string.Empty;
+
+                str = num.ToString() + "." + person[i, 1];
+
+                tmp_width = g.MeasureString(str, f).ToSize().Width;
+                //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "\n";
+
+                g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st - tmp_width, y_st + 5));
+
+                x_st = BORDER + ((int)(lifeEnd - lifeEarliest).TotalDays) / ratio + offset_x;
+                y_st = BORDER + 50 * (num - 1);
+                g.DrawString("(" + ((double)(lifedayCount) / (double)365).ToString("N1", CultureInfo.InvariantCulture) +
+                             ", " + ((double)(workdayCount) / (double)365).ToString("N1", CultureInfo.InvariantCulture) + ")",
+                    f, new SolidBrush(Color.Blue), new PointF(x_st + 5, y_st + 5));
+
+                x_st = BORDER + ((int)(workStart - lifeEarliest).TotalDays) / ratio + offset_x;
+                y_st = BORDER + HEIGHT * (num - 1);
+                w = ((int)(workEnd - workStart).TotalDays) / ratio;
+                h = HEIGHT * 4 / 5;
+                if (w == 0)
+                    w = 1;
+                g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h));
+                g.DrawRectangle(p, x_st, y_st, w, h);
+
+
+
+
+                //richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
+
+
+
+
             }
+
+
+
+
+
+
+
+
+
+
+
+            pictureBox1.Image = bitmap1;
 
         }
 

@@ -76,11 +76,13 @@ namespace vcs_WMI_Win32__tmp
             richTextBox1.Text += "\n獲取硬碟序號\n";
             richTextBox1.Text += "\nWin32_DiskDrive\n";
             ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            richTextBox1.Text += "硬碟個數：" + mos.Get().Count.ToString() + "\n";
             foreach (ManagementObject mo in mos.Get())
             {
-                richTextBox1.Text += "硬碟序號：" + mo["Model"].ToString() + "\n";
+                richTextBox1.Text += "硬碟 Model：" + mo["Model"].ToString() + "\n";
+                richTextBox1.Text += "硬碟 DeviceID：" + mo["DeviceID"].ToString() + "\n";
+                richTextBox1.Text += "\n";
             }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
