@@ -68,7 +68,16 @@ namespace vcs_Win32_LogicalDisk
             richTextBox1.Text += "Size: " + disk["Size"].ToString() + "\n";
             richTextBox1.Text += "FreeSpace: " + disk["FreeSpace"].ToString() + "\n";
             richTextBox1.Text += "MaximumComponentLength: " + disk["MaximumComponentLength"].ToString() + "\n";
-            richTextBox1.Text += "MediaType: " + disk["MediaType"].ToString() + "\n";
+            try
+            {
+                richTextBox1.Text += "MediaType: " + disk["MediaType"].ToString() + "\n";
+                media_type = (uint)disk["MediaType"];
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息 : " + ex.Message + "\n";
+            }
+
             //richTextBox1.Text += "Access: " + disk["Access"].ToString() + "\n";
             richTextBox1.Text += "DriveType: " + disk["DriveType"].ToString() + "\t";
 
@@ -127,9 +136,10 @@ namespace vcs_Win32_LogicalDisk
 
             richTextBox1.Text += "Hard Disk Free Space = " + dblFree.ToString() + " GB\n";
 
-            media_type = (uint)disk["MediaType"];
             switch (media_type)
             {
+                case 0:
+                    richTextBox1.Text += "MediaType 無資料\n";break;
                 case 1:
                     richTextBox1.Text += "5¼-Inch Floppy Disk (1), 5 1/4-Inch Floppy Disk - 1.2 MB - 512 bytes/sector." + "\n"; break;
                 case 2:

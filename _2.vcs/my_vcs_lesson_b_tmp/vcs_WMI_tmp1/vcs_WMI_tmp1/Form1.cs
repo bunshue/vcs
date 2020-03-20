@@ -157,5 +157,87 @@ namespace vcs_WMI_tmp1
             richTextBox1.Text += "獲取網路卡位址\t" + GetNetCardMACAddress() + "\n";
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //如何從C＃中的USB閃存驅動器獲取VID/PID？
+
+            // Get all the disk drives 
+
+            ManagementObjectSearcher mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+
+            // Loop through each object (disk) retrieved by WMI 
+
+            foreach (ManagementObject moDisk in mosDisks.Get())
+            {
+
+                // Add the HDD to the list (use the Model field as the item's caption) 
+
+                comboBox1.Items.Add(moDisk["Model"].ToString());
+
+            }
+            if (comboBox1.Items.Count > 0)
+                comboBox1.SelectedIndex = 0;
+
+
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Get all the disk drives from WMI that match the Model name selected in the ComboBox 
+
+            ManagementObjectSearcher mosDisks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive WHERE Model = '" + comboBox1.SelectedItem + "'");
+
+            // Loop through the drives retrieved, although it should normally be only one loop going on here 
+
+            foreach (ManagementObject moDisk in mosDisks.Get())
+            {
+                // Set all the fields to the appropriate values 
+
+                richTextBox1.Text += "Type: " + moDisk["MediaType"].ToString() + "\n";
+
+                richTextBox1.Text += "Model: " + moDisk["Model"].ToString() + "\n";
+
+                richTextBox1.Text += "Serial: " + moDisk["SerialNumber"].ToString() + "\n";
+
+                richTextBox1.Text += "Interface: " + moDisk["InterfaceType"].ToString() + "\n";
+
+                // The capacity in gigabytes is easily calculated 
+
+                richTextBox1.Text += "Capacity: " + moDisk["Size"].ToString() + " bytes (" + Math.Round(((((double)Convert.ToDouble(moDisk["Size"]) / 1024) / 1024) / 1024), 2) + " GB)" + "\n";
+
+                richTextBox1.Text += "Partitions: " + moDisk["Partitions"].ToString() + "\n";
+
+                richTextBox1.Text += "Signature: " + moDisk["Signature"].ToString() + "\n";
+
+                richTextBox1.Text += "Firmware: " + moDisk["FirmwareRevision"].ToString() + "\n";
+
+                richTextBox1.Text += "Cylinders: " + moDisk["TotalCylinders"].ToString() + "\n";
+
+                richTextBox1.Text += "Sectors: " + moDisk["TotalSectors"].ToString() + "\n";
+
+                richTextBox1.Text += "Heads: " + moDisk["TotalHeads"].ToString() + "\n";
+
+                richTextBox1.Text += "Tracks: " + moDisk["TotalTracks"].ToString() + "\n";
+
+                richTextBox1.Text += "Bytes per Sector: " + moDisk["BytesPerSector"].ToString() + "\n";
+
+                richTextBox1.Text += "Sectors per Track: " + moDisk["SectorsPerTrack"].ToString() + "\n";
+
+                richTextBox1.Text += "Tracks per Cylinder: " + moDisk["TracksPerCylinder"].ToString() + "\n";
+
+            } 
+
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+
+
     }
 }

@@ -165,6 +165,7 @@ namespace vcs_test_all_13_ListView
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
                 richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\t" + listView1.Items[i].SubItems[3].Text + "\n";
             }
+
             if (listView1.SelectedItems.Count <= 0)
             {
                 //richTextBox1.Text += "未選擇listView項目\n";
@@ -177,6 +178,14 @@ namespace vcs_test_all_13_ListView
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
                 richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\t" + listView1.SelectedItems[i].SubItems[1].Text + "\t" + listView1.SelectedItems[i].SubItems[2].Text + listView1.SelectedItems[i].SubItems[3].Text + "\n";
             }
+
+            richTextBox1.Text += "選擇" + listView1.SelectedIndices.Count.ToString() + "個項目，Index分別是：\n";
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox1.Text += listView1.SelectedIndices[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
         }
 
         private void button4_Click(object sender, EventArgs e)

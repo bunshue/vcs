@@ -31,6 +31,7 @@ namespace vcs_DrAP
 
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
             button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
+            button11.Location = new Point(button11.Location.X + 100, button11.Location.Y + 10);
 
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
             richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
@@ -121,6 +122,10 @@ namespace vcs_DrAP
                 else
                     content += "0\n";
                 if (cb_file_s.Checked == true)
+                    content += "1\n";
+                else
+                    content += "0\n";
+                if (cb_generate_text.Checked == true)
                     content += "1\n";
                 else
                     content += "0\n";
@@ -260,12 +265,19 @@ namespace vcs_DrAP
                                 cb_file_s.Checked = false;
                             break;
                         case 14:
+                            tmp = int.Parse(line);
+                            if (tmp == 1)
+                                cb_generate_text.Checked = true;
+                            else
+                                cb_generate_text.Checked = false;
+                            break;
+                        case 15:
                             search_path = line;
                             break;
                         default:
                             break;
                     }
-                    if (i >= 14)
+                    if (i >= 15)
                     {
                         if (line.Length > 0)
                         {
@@ -1126,6 +1138,7 @@ namespace vcs_DrAP
                     break;
             }
             richTextBox2.Text += "change file type to " + filetype2 + "\n";
+            flag_need_update_setup_file = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -2423,6 +2436,7 @@ namespace vcs_DrAP
                 groupBox_video.Enabled = true;
             else
                 groupBox_video.Enabled = false;
+            flag_need_update_setup_file = true;
         }
 
         private void cb_file_size_CheckedChanged(object sender, EventArgs e)
@@ -2431,6 +2445,42 @@ namespace vcs_DrAP
                 groupBox_file.Enabled = true;
             else
                 groupBox_file.Enabled = false;
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_generate_text_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_video_l_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_video_m_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_video_s_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_file_l_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_file_m_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
+        }
+
+        private void cb_file_s_CheckedChanged(object sender, EventArgs e)
+        {
+            flag_need_update_setup_file = true;
         }
 
 

@@ -523,6 +523,7 @@
             this.cb_video_s.TabIndex = 43;
             this.cb_video_s.Text = "小";
             this.cb_video_s.UseVisualStyleBackColor = true;
+            this.cb_video_s.CheckedChanged += new System.EventHandler(this.cb_video_s_CheckedChanged);
             // 
             // cb_generate_text
             // 
@@ -535,6 +536,7 @@
             this.cb_generate_text.TabIndex = 44;
             this.cb_generate_text.Text = "目錄下檔名轉出純文字";
             this.cb_generate_text.UseVisualStyleBackColor = true;
+            this.cb_generate_text.CheckedChanged += new System.EventHandler(this.cb_generate_text_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -573,6 +575,7 @@
             this.cb_video_l.TabIndex = 45;
             this.cb_video_l.Text = "大";
             this.cb_video_l.UseVisualStyleBackColor = true;
+            this.cb_video_l.CheckedChanged += new System.EventHandler(this.cb_video_l_CheckedChanged);
             // 
             // cb_video_m
             // 
@@ -586,6 +589,7 @@
             this.cb_video_m.TabIndex = 44;
             this.cb_video_m.Text = "中";
             this.cb_video_m.UseVisualStyleBackColor = true;
+            this.cb_video_m.CheckedChanged += new System.EventHandler(this.cb_video_m_CheckedChanged);
             // 
             // groupBox_file
             // 
@@ -614,6 +618,7 @@
             this.cb_file_l.TabIndex = 45;
             this.cb_file_l.Text = "大";
             this.cb_file_l.UseVisualStyleBackColor = true;
+            this.cb_file_l.CheckedChanged += new System.EventHandler(this.cb_file_l_CheckedChanged);
             // 
             // tb_file_s
             // 
@@ -637,6 +642,7 @@
             this.cb_file_m.TabIndex = 44;
             this.cb_file_m.Text = "中";
             this.cb_file_m.UseVisualStyleBackColor = true;
+            this.cb_file_m.CheckedChanged += new System.EventHandler(this.cb_file_m_CheckedChanged);
             // 
             // cb_file_s
             // 
@@ -650,6 +656,7 @@
             this.cb_file_s.TabIndex = 43;
             this.cb_file_s.Text = "小";
             this.cb_file_s.UseVisualStyleBackColor = true;
+            this.cb_file_s.CheckedChanged += new System.EventHandler(this.cb_file_s_CheckedChanged);
             // 
             // cb_file_size
             // 
