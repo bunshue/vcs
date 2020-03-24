@@ -332,6 +332,26 @@ namespace vcs_test_all_01_Richtextbox
 
         }
 
+        private void button29_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            richTextBox1.LoadFile("C:\\______test_files\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf");
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Find("壓縮機", RichTextBoxFinds.MatchCase);
+
+            richTextBox1.SelectionFont = new Font("Verdana", 30, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Red;
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SaveFile("C:\\______test_files\\MyDocument.rtf", RichTextBoxStreamType.RichText);
+        }
+
 
     }
 }

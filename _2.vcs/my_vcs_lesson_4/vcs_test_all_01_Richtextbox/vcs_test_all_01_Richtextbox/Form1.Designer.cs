@@ -276,8 +276,9 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(197, 42);
             this.button18.TabIndex = 19;
-            this.button18.Text = "xxx";
+            this.button18.Text = "另存RTF檔";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button20
             // 
@@ -326,8 +327,9 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(197, 42);
             this.button29.TabIndex = 28;
-            this.button29.Text = "xxx";
+            this.button29.Text = "讀取RTF檔";
             this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // button36
             // 
@@ -336,8 +338,9 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(197, 42);
             this.button36.TabIndex = 44;
-            this.button36.Text = "xxx";
+            this.button36.Text = "在RTF檔內搜尋";
             this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // button21
             // 
