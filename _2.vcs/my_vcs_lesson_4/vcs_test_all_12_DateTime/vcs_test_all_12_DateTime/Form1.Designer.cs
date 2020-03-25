@@ -376,7 +376,7 @@
             // button25
             // 
             this.button25.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(352, 388);
+            this.button25.Location = new System.Drawing.Point(691, 388);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(164, 46);
             this.button25.TabIndex = 30;
@@ -501,8 +501,9 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(164, 46);
             this.button31.TabIndex = 46;
-            this.button31.Text = "xxx";
+            this.button31.Text = "農曆";
             this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // button32
             // 
@@ -597,8 +598,9 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(164, 46);
             this.button40.TabIndex = 47;
-            this.button40.Text = "xxx";
+            this.button40.Text = "民國/農曆";
             this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
             // textBox2
             // 
@@ -697,7 +699,7 @@
             // button48
             // 
             this.button48.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button48.Location = new System.Drawing.Point(692, 387);
+            this.button48.Location = new System.Drawing.Point(352, 389);
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(164, 46);
             this.button48.TabIndex = 58;
