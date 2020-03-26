@@ -916,7 +916,8 @@ namespace vcs_SlideShowString
                     slide_show_string();
                 }
             }
-            else if (e.KeyCode == Keys.N)
+            /*
+            else if (e.KeyCode == Keys.N)       //重複使用了~~~~~~~  和念經模式重複了
             {
                 flag_operation_mode = MODE_NORMAL;
                 all_strings.Clear();
@@ -934,6 +935,7 @@ namespace vcs_SlideShowString
                 slide_show_string();
 
             }
+            */
             else if (e.KeyCode == Keys.L)
             {
                 flag_operation_mode = MODE_LONG;
