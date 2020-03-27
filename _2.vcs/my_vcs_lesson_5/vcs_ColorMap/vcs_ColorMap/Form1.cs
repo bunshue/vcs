@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Reflection;    //for PropertyInfo
+
 namespace vcs_ColorMap
 {
     public partial class Form1 : Form
@@ -155,6 +157,43 @@ namespace vcs_ColorMap
                 //rgb_array
                 //g.FillRectangle(b, 0, i * 50, 300, 50);
                 g.FillRectangle(b, border, i * hh + border, w - border * 2, hh);
+            }
+
+        }
+
+        /*
+        列舉系統的所有Color並以ComboBox顯示
+        首先利用Reflection的方式取得系統中的所有Color，將利Color的名子加到cmbColor中。
+        接著在cmbColor中自行繪制顯示的內容，在這邊需要將cmbColor中的屬性'DrawMode'設為'OwnerDrawFixed'，並新的DrawItem事件
+        */
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //用Reflection的方式取得系統中的所有Color，將利Color的名子加到comboBox中。
+            Type type = typeof(Color);
+            PropertyInfo[] propInfo = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
+            var names = from color in propInfo
+                        where color.Name != "Transparent"
+                        select color.Name;
+            comboBox1.Items.Clear();
+            foreach (var item in names)
+            {
+                comboBox1.Items.Add(item);
+            }
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Rectangle rect = e.Bounds;
+            if (e.Index >= 0)
+            {
+                string colorName = ((ComboBox)sender).Items[e.Index].ToString();
+                Font font = new Font("Arial", 9, FontStyle.Regular);
+                Color color = Color.FromName(colorName);
+                Brush brush = new SolidBrush(color);
+                g.FillRectangle(brush, rect.X + 5, rect.Y, 50, rect.Height);
+                g.DrawString(colorName, font, Brushes.Black, rect.X + 15, rect.Top);
             }
 
         }

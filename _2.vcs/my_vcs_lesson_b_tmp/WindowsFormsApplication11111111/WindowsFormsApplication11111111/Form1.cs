@@ -193,10 +193,6 @@ namespace WindowsFormsApplication11111111
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //取得Windows資訊
-        }
 
     }
 }

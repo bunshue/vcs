@@ -95,18 +95,6 @@ namespace calendar
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            string text = "測試一下";
-            byte[] byt = System.Text.UnicodeEncoding.Unicode.GetBytes(text);
-            richTextBox1.Text += System.Text.UnicodeEncoding.Unicode.GetString(byt) + "\n";
-
-            //如果要自行指定BIG5編碼的話:
-            string text2 = "測試一下";
-            byte[] byt2 = System.Text.Encoding.GetEncoding("Big5").GetBytes(text2);
-            richTextBox1.Text += System.Text.Encoding.GetEncoding("Big5").GetString(byt2) + "\n";
-
-        }
 
     }
 }

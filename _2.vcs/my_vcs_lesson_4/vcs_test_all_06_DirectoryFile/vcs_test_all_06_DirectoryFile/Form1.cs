@@ -1723,6 +1723,54 @@ namespace vcs_test_all_06_DirectoryFile
 
         }
 
+        private void button57_Click(object sender, EventArgs e)
+        {
+            string filename_source = @"C:\______test_files\bear.jpg";
+            string filename_destination = @"C:\______test_files\_cpfile\ccc.jpg";   //要寫完整檔名
+
+            richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
+            try
+            {
+                //File.Copy(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
+                //File.Move(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
+                File.Copy(filename_source, filename_destination, true); //覆蓋檔案
+                //File.Move(filename_source, filename_destination, true); //覆蓋檔案
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+            }
+
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+            string pathname = @"C:\______test_files\_cpfile";
+
+            richTextBox1.Text += "Directory.Delete 目錄不是空的\n";
+            try
+            {
+                //Directory.Delete(pathname); //若目錄不是空的, 會出現IOException
+                Directory.Delete(pathname, true); //強制刪除不是空的目錄
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+            }
+
+
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\bear.jpg";
+
+            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+            File.SetAttributes(filename, FileAttributes.ReadOnly);
+            richTextBox1.Text += File.GetAttributes(filename) + "\n";
+
+        }
+
     }
 }
 

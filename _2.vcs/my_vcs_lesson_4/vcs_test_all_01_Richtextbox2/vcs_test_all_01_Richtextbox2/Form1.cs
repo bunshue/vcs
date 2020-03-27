@@ -59,6 +59,9 @@ namespace vcs_test_all_01_Richtextbox2
 
             button4.Enabled = false;
             radioButton2.Checked = true;
+
+            label3.Text = "";
+            label4.Text = "";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -84,6 +87,11 @@ namespace vcs_test_all_01_Richtextbox2
             richTextBox2.Text += "FindUp\n";
             int rboxL = rbox.SelectionStart;
             int index = rbox.Find(str, 0, rboxL, RichTextBoxFinds.Reverse);
+
+            richTextBox2.Text += "index = " + index.ToString() + "\t" +
+    "rboxL = " + rboxL.ToString() + "\t" +
+    "sum = " + sum.ToString() + "\n";
+
             if (index > -1)
             {
                 rbox.SelectionStart = index;
@@ -94,12 +102,21 @@ namespace vcs_test_all_01_Richtextbox2
             else if (index < 0)
             {
                 seeks(str);
-                sum = 0;
-                //如果还想再找一遍,添加下面这句
-                //rbox.SelectionStart = rbox.Text.Length;
+
+                //richTextBox2.Text += "搜尋到底了, sum = " + sum.ToString() + "\n";
+
+                if ((checkBox3.Checked == true) && (sum > 0))
+                {
+                    sum = 0;
+                    richTextBox2.Text += "搜尋到底了, 再搜尋\n";
+                    //如果还想再找一遍,添加下面这句
+                    rbox.SelectionStart = rbox.Text.Length;
+                    FindUp(rbox, str);
+                }
+                else
+                    sum = 0;
             }
         }
-
 
         /// <summary>向下查找指定字符 或 字符串 (不区分大小写)<para>　<para>
         /// 参数1(rbox):内容文本框,指定为 RichTextBox 文本框类型
@@ -265,7 +282,8 @@ namespace vcs_test_all_01_Richtextbox2
         /// <param name="str1">要替换的内容</param>
         private void Replace(string str0, string str1)
         {
-            richTextBox2.Text += "Replace\n";
+            //Replace 把所有的 "蘇子換成 "蘇東坡
+            richTextBox2.Text += "Replace 把所有的 \"" + str0 + "\" 換成 \"" + str1 + "\"\n";
             //Form_Mxdr f1 = (Form_Mxdr)this.Owner;
             RichTextBox rbox = this.richTextBox1;
             rbox.SelectionLength = str0.Length;
@@ -314,6 +332,44 @@ namespace vcs_test_all_01_Richtextbox2
             RichTextBox rbox = this.richTextBox1;
             string str0 = textBox1.Text, str1 = textBox2.Text;
             this.ReplaceAll(rbox, str0, str1);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            label3.Text = "文字總長: " + richTextBox1.TextLength.ToString();
+
+        }
+
+        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (richTextBox1.SelectionLength > 0)
+                label4.Text = "選取長度: " + richTextBox1.SelectionLength.ToString();
+            else
+                label4.Text = "";
+
+            if (richTextBox1.SelectionLength == 0)
+            {
+                // 將RichTextBox中選取的文字，透過 FontFamily 類別 
+                // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
+                //Font MyFont = new Font(new FontFamily("新細明體"), 12, FontStyle.Bold | FontStyle.Italic);
+                Font MyFont = new Font(new FontFamily("新細明體"), 12, FontStyle.Regular);
+                //this.richTextBox1.Font = DefaultFont; fail
+                this.richTextBox1.Font = MyFont;
+            }
+            else
+            {
+                // 將RichTextBox中選取的文字，透過 FontFamily 類別 
+                // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
+                Font MyFont = new Font(new FontFamily("標楷體"), 16, FontStyle.Bold | FontStyle.Italic);
+                //this.richTextBox1.Font = DefaultFont; fail
+                this.richTextBox1.SelectionFont = MyFont;
+            }
+
         }
 
 

@@ -874,8 +874,9 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(185, 40);
             this.button46.TabIndex = 38;
-            this.button46.Text = "xxx";
+            this.button46.Text = "FileAttributes";
             this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // button54
             // 
@@ -910,13 +911,14 @@
             // 
             // button57
             // 
-            this.button57.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button57.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button57.Location = new System.Drawing.Point(9, 342);
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(185, 40);
             this.button57.TabIndex = 23;
-            this.button57.Text = "xxx";
+            this.button57.Text = "檔案已存在的FileCopy/Move";
             this.button57.UseVisualStyleBackColor = true;
+            this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
             // button58
             // 
@@ -925,8 +927,9 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(185, 40);
             this.button58.TabIndex = 26;
-            this.button58.Text = "xxx";
+            this.button58.Text = "Directory.Delete 目錄不是空的";
             this.button58.UseVisualStyleBackColor = true;
+            this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
             // button60
             // 

@@ -26,40 +26,18 @@ namespace vcs_tmp_all
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
         {
-            label2.Text = "選取長度: " + richTextBox1.SelectionLength.ToString();
-
-            if (richTextBox1.SelectionLength == 0)
-            {
-                // 將RichTextBox中選取的文字，透過 FontFamily 類別 
-                // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
-                //Font MyFont = new Font(new FontFamily("新細明體"), 12, FontStyle.Bold | FontStyle.Italic);
-                Font MyFont = new Font(new FontFamily("新細明體"), 12, FontStyle.Regular);
-                //this.richTextBox1.Font = DefaultFont; fail
-                this.richTextBox1.Font = MyFont;
-            }
-            else
-            {
-                // 將RichTextBox中選取的文字，透過 FontFamily 類別 
-                // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
-                Font MyFont = new Font(new FontFamily("標楷體"), 16, FontStyle.Bold | FontStyle.Italic);
-                //this.richTextBox1.Font = DefaultFont; fail
-                this.richTextBox1.SelectionFont = MyFont;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile("c:\\______test_vcs\\eula.3084.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "文字總長: " + richTextBox1.TextLength.ToString();
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            label1.Text = "文字總長: " + richTextBox1.TextLength.ToString();
         }
 
         private void button5_Click(object sender, EventArgs e)

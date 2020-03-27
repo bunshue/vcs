@@ -98,6 +98,12 @@ namespace vcs_SlideShowString
         {
             InitializeComponent();
             this.Visible = false;
+            this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
+            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
+            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
+
+            //表單不顯示在 Windows 工作列中
+            this.ShowInTaskbar = false;
         }
 
         bool loadTextSetup()
@@ -1125,14 +1131,6 @@ namespace vcs_SlideShowString
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Visible = false;
-            this.pictureBox1.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
-            this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
-            this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
-
-            //表單不顯示在 Windows 工作列中
-            this.ShowInTaskbar = false;
-
             bool result;
 
             result = loadTextSetup();
