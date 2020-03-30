@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<iRealHD_Config>
+        <CFindWorklistDataset>
+                <Element Tag="0008,0005" VR="CS">ISO_IR 100</Element>    
+                <Element Tag="0008,0050" VR="SH"/>
+                <Element Tag="0008,1050" VR="PN"/>
+                <Element Tag="0008,1060" VR="PN"/>
+                <Element Tag="0008,0090" VR="PN"/>
+                <Element Tag="0010,0010" VR="PN"/>
+                <Element Tag="0010,0020" VR="LO"/>
+                <Element Tag="0010,0030" VR="DA"/>
+                <Element Tag="0010,0040" VR="CS"/>
+                <Element Tag="0010,1000" VR="LO"/>
+                <Element Tag="0010,1001" VR="PN"/>
+                <Element Tag="0010,1010" VR="AS"/>
+                <Element Tag="0018,0015" VR="CS"/>
+                <Element Tag="0020,000D" VR="UI"/>
+                <Element Tag="0032,1060" VR="LO"/>
+                <Element Tag="0040,1001" VR="SH"/>
+                <Element Tag="0040,0100" VR="SQ">
+                        <Element Tag="0008,0060" VR="CS"/>
+                        <Element Tag="0040,0001" VR="AE"/>
+                        <Element Tag="0040,0002" VR="DA"/>
+                        <Element Tag="0040,0003" VR="TM"/>
+                        <Element Tag="0040,0007" VR="LO"/>
+                        <Element Tag="0040,0009" VR="SH"/>
+                        <Element Tag="0040,0010" VR="SH"/>
+                        <Element Tag="0040,0011" VR="SH"/>
+                </Element>
+        </CFindWorklistDataset>
+        <CFindTransferSyntax>
+                <UID Value="1.2.840.10008.1.2"/>
+                <UID Value="1.2.840.10008.1.2.1"/>
+        </CFindTransferSyntax>
+        <DICOMServiceLog>
+                <DICOMLog Type="0" Path="D:\CEchoLog.txt"/>
+                <DICOMLog Type="1" Path="D:\CFindLog.txt"/>
+                <DICOMLog Type="2" Path="D:\CStoreLog.txt"/>
+        </DICOMServiceLog>
+        <CFindResultTitleColumn>    
+                <Column Title="Accession Num." Width="400" CFindTag="0008,0050|"/>
+                <Column Title="PatientID" Width="250" CFindTag="0010,0020|"/>
+                <Column Title="Patient Name" Width="350" CFindTag="0010,0010|"/>    
+                <Column Title="Modality" Width="230" CFindTag="0040,0100|0008,0060|"/>
+                <Column Title="Study Date" Width="280" CFindTag="0040,0100|0040,0002|"/>
+                <Column Title="BirthDay" Width="280" CFindTag="0010,0030|"/>
+                <Column Title="Sex" Width="100" CFindTag="0010,0040|"/>    
+                <Column Title="Refer Dr." Width="300" CFindTag="0008,0090|"/>
+                <Column Title="Description" Width="800" CFindTag="0040,0100|0040,0007|"/>
+        </CFindResultTitleColumn>
+        <CFindResultComponentGetData>    
+                <DataElement ComponentName="nsedsAccessionNumber" GetValueType="0" Description="AccessionNumber" CFindTag="0008,0050|"/>
+                <DataElement ComponentName="nsedsPatientID" GetValueType="0" Description="PatientID" CFindTag="0010,0020|"/>
+                <DataElement ComponentName="nsedsPatientName" GetValueType="0" Description="PatientName" CFindTag="0010,0010|"/>    
+                <DataElement ComponentName="nsedsSex" GetValueType="0" Description="Sex" CFindTag="0010,0040|"/>
+                <DataElement ComponentName="nsedsBirthDay" GetValueType="0" Description="BirthDay" CFindTag="0010,0030|"/>
+                <DataElement ComponentName="nscbsModality" GetValueType="0" Description="Modality" CFindTag="0040,0100|0008,0060|"/>
+                <DataElement ComponentName="nsldtStudyDate" GetValueType="1" Description="StduyDate" CFindTag="0040,0100|0040,0002|"/>    
+                <DataElement ComponentName="nsedsDescription" GetValueType="0" Description="Description" CFindTag="0040,0100|0040,0007|"/>
+                <DataElement ComponentName="nsedsReferingDr" GetValueType="0" Description="DrReferring" CFindTag="0008,0090|"/>
+                <DataElement ComponentName="nsedsPerformingDr" GetValueType="0" Description="DrPerforming" CFindTag="0008,1050|"/>
+                <DataElement ComponentName="nsedsReportDr" GetValueType="0" Description="DrReport" CFindTag="0008,1060|"/>
+                <DataElement ComponentName="nsedsStudyInstanceUID" GetValueType="0" Description="StudyInstanceUID" CFindTag="0020,000D|"/>
+                <DataElement ComponentName="nsedsScheduledProcedureStepID" GetValueType="0" Description="ScheduledProcedureStepID" CFindTag="0040,0100|0040,0009|"/>
+        </CFindResultComponentGetData>
+        <PackageMetaInfo>
+                <MetaElement Tag="0002,0001" CFindTag=""/>
+                <MetaElement Tag="0002,0002" CFindTag="">1.2.840.10008.5.1.4.1.1.7</MetaElement>
+                <MetaElement Tag="0002,0003" CFindTag=""/>
+                <MetaElement Tag="0002,0010" CFindTag="">1.2.840.10008.1.2.1</MetaElement>
+                <MetaElement Tag="0002,0012" CFindTag=""/>
+                <MetaElement Tag="0002,0013" CFindTag=""/>
+        </PackageMetaInfo>
+        <!--
+        <DefaultPackage>
+                <DCMElement Tag="0008,1010">ES</DCMElement>
+        </DefaultPackage>
+        -->
+        <PackageDataset>
+                <DCMElement Tag="0008,0008" CFindTag="">DERIVED</DCMElement>
+                <DCMElement Tag="0008,0016" CFindTag="">1.2.840.10008.5.1.4.1.1.7</DCMElement>
+                <DCMElement Tag="0008,0018" CFindTag=""/>
+                <DCMElement Tag="0008,0020" CFindTag="0040,0100|0040,0002|"/>
+                <DCMElement Tag="0008,0021" CFindTag="0040,0100|0040,0002|"/>
+                <DCMElement Tag="0008,0023" CFindTag="0040,0100|0040,0002|"/>
+                <DCMElement Tag="0008,0030" CFindTag="0040,0100|0040,0003|"/>
+                <DCMElement Tag="0008,0031" CFindTag="0040,0100|0040,0003|"/>
+                <DCMElement Tag="0008,0033" CFindTag="0040,0100|0040,0003|"/>
+                <DCMElement Tag="0008,0050" CFindTag="0008,0050|"/>
+                <DCMElement Tag="0008,0060" CFindTag="0040,0100|0008,0060|"/>
+                <DCMElement Tag="0008,0064" CFindTag="">DV</DCMElement>
+                <DCMElement Tag="0008,0070" CFindTag="">EWeb</DCMElement>
+                <DCMElement Tag="0008,0080" CFindTag=""/>
+                <DCMElement Tag="0008,0090" CFindTag="0008,0090|"/>
+                <DCMElement Tag="0008,1010" CFindTag="0040,0100|0040,0010|"/>
+                <DCMElement Tag="0008,1030" CFindTag="0040,0100|0040,0007|"/>
+                <DCMElement Tag="0008,1090" CFindTag="">FilingSystemHD</DCMElement>
+                <DCMElement Tag="0010,0010" CFindTag="0010,0010|"/>
+                <DCMElement Tag="0010,0020" CFindTag="0010,0020|"/>
+                <DCMElement Tag="0010,0030" CFindTag="0010,0030|"/>
+                <DCMElement Tag="0010,0040" CFindTag="0010,0040|"/>
+                <DCMElement Tag="0010,1000" CFindTag="0010,1000|"/>
+                <DCMElement Tag="0010,1000" CFindTag="0010,1000|"/>
+                <DCMElement Tag="0010,1010" CFindTag="0010,1010|"/>
+                <DCMElement Tag="0018,0015" CFindTag="0018,0015|"/>
+                <DCMElement Tag="0018,1022" CFindTag="">NTSC</DCMElement>
+                <DCMElement Tag="0020,000D" CFindTag="0020,000D|"/>
+                <DCMElement Tag="0020,000E" CFindTag=""/>
+                <DCMElement Tag="0020,0013" CFindTag=""/>
+                <DCMElement Tag="0028,0002" CFindTag=""/>
+                <DCMElement Tag="0028,0004" CFindTag=""/>
+                <DCMElement Tag="0028,0006" CFindTag=""/>
+                <DCMElement Tag="0028,0010" CFindTag=""/>
+                <DCMElement Tag="0028,0011" CFindTag=""/>
+                <DCMElement Tag="0028,0100" CFindTag=""/>
+                <DCMElement Tag="0028,0101" CFindTag=""/>
+                <DCMElement Tag="0028,0102" CFindTag=""/>
+                <DCMElement Tag="0028,0103" CFindTag=""/>
+                <DCMElement Tag="0032,000A" CFindTag=""/>
+                <DCMElement Tag="0040,1001" CFindTag="0040,0100|0040,1001|"/>
+        </PackageDataset>
+        <QueryControlList>
+                <QryList Name="HistoricalQry" ListContent="PatientID|Modality|StudyStartDate|StudyEndDate|"/>
+        </QueryControlList>
+</iRealHD_Config>

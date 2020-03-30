@@ -21,7 +21,7 @@ namespace imsLink
     public partial class Form1 : Form
     {
         String compile_time = "1/15/2020 11:59上午";
-        String software_version = "A03";
+        String software_version = "A04";
 
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
@@ -35,6 +35,7 @@ namespace imsLink
         private const int MODE_RELEASE_STAGE0 = 0x00;   //release mode stage 0, normal use
         private const int MODE_RELEASE_STAGE1A = 0x01;   //release mode stage 1, 4X4 USB camera
         private const int MODE_RELEASE_STAGE1B = 0x11;   //release mode stage 1, 4X4 USB camera
+        private const int MODE_RELEASE_STAGE1C = 0x12;   //release mode stage 1, check result
         private const int MODE_RELEASE_STAGE2 = 0x02;   //release mode stage 2, AWB mode, writing camera serial
         private const int MODE_RELEASE_STAGE3 = 0x03;   //release mode stage 3, judge class
         private const int MODE_RELEASE_STAGE4 = 0x04;   //release mode stage 4, write camera serial
@@ -98,6 +99,7 @@ namespace imsLink
         int flag_camera_start = 0;
         int flag_camera_use_insighteyes = 0;
         int flag_camera_already_have_serial = 0;
+        int flag_stage1c_step = 0;
         int flag_stage3_step = 0;
         int flag_stage_awb = 0;
         int csv_index1 = 0;
@@ -177,13 +179,15 @@ namespace imsLink
         bool flag_display_g_do_awb = false;
         bool flag_display_b_do_awb = false;
         decimal wpt_value_old = 0;
-
+        byte camera_ybright_sign_bits = 0;
+        byte camera_yoffset_sign_bits = 0;
+        bool flag_ok_camera_ybright_sign_bit = false;
+        bool flag_ok_camera_yoffset_sign_bit = false;
         bool flag_ok_data1 = false;
         bool flag_ok_data2 = false;
         bool flag_ok_data3 = false;
         bool flag_cancel_data = false;
         int ccc = 0;
-
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -246,6 +250,7 @@ namespace imsLink
         int diff_b = 0;
         int timer_awb_cnt = 0;
         int awb_cnt = 0;
+
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
         int timer_webcam_mode = FOCUS_ON_SERIAL;
@@ -405,6 +410,18 @@ namespace imsLink
                 flag_enaglb_awb_function = false;
                 flag_usb_mode = true;  //for webcam
                 flag_check_webcam_signal = false;
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
+            {
+                richTextBox1.Text += "MODE_RELEASE_STAGE1 C\n";
+                flag_enaglb_awb_function = false;
+                flag_usb_mode = false;  //for webcam
+                flag_check_webcam_signal = false;
+                timer_stage1c.Enabled = true;
+                timer_stage6.Enabled = false;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = false;
+                timer_stage9.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -579,7 +596,7 @@ namespace imsLink
                 {
                     this.tp_USB.Text = "第二站";
                 }
-                else if ((flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE9))
+                else if ((flag_operation_mode == MODE_RELEASE_STAGE1C) || (flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE9))
                 {
                     this.tp_USB.Text = "第一站";
                 }
@@ -625,6 +642,7 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
@@ -634,21 +652,7 @@ namespace imsLink
                 timer_stage1.Enabled = true;
                 //Comport_Scan();
             }
-            else if (flag_operation_mode == MODE_RELEASE_STAGE2)
-            {
-                this.tp_Product.Parent = null;  //產品包裝
-                this.tp_Package1.Parent = null; //產品包裝6
-                this.tp_Package2.Parent = null; //產品包裝7
-                this.tp_Package3.Parent = null; //產品包裝8
-                this.tp_sale.Parent = null;     //出貨紀錄
-                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
-                tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
-                timer_rtc.Enabled = true;
-                timer_rgb.Enabled = false;
-                timer_stage5.Enabled = false;
-                timer_stage1.Enabled = false;
-            }
-            else if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
             {
                 cb_show_grid.Checked = true;
                 this.tp_Info.Parent = null;
@@ -662,6 +666,45 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Test.Parent = null;     //Test
+                this.tp_Layer.Parent = null;    //Layer
+                tabControl1.SelectTab(tp_Check);
+                timer_rtc.Enabled = false;
+                timer_rgb.Enabled = false;
+                timer_stage5.Enabled = false;
+                timer_stage1.Enabled = false;
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE2)
+            {
+                this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Package1.Parent = null; //產品包裝6
+                this.tp_Package2.Parent = null; //產品包裝7
+                this.tp_Package3.Parent = null; //產品包裝8
+                this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Check.Parent = null;    //檢查結果
+                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
+                tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
+                timer_rtc.Enabled = true;
+                timer_rgb.Enabled = false;
+                timer_stage5.Enabled = false;
+                timer_stage1.Enabled = false;
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                cb_show_grid.Checked = true;
+                cb_air_ng.Checked = false;
+                this.tp_Info.Parent = null;
+                this.tp_Connection.Parent = null;
+                this.tp_System.Parent = null;
+                this.tp_Camera.Parent = null;   //camera
+                this.tp_Camera_Model.Parent = null;
+                this.tp_Serial_Auto.Parent = null;
+                this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Package1.Parent = null; //產品包裝6
+                this.tp_Package2.Parent = null; //產品包裝7
+                this.tp_Package3.Parent = null; //產品包裝8
+                this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
@@ -683,6 +726,7 @@ namespace imsLink
                 this.tp_Serial_Auto.Parent = null;
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
+                this.tp_Check.Parent = null;    //檢查結果
                 tabControl1.SelectTab(tp_Product);  //程式啟動時，直接跳到USB那頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
@@ -700,6 +744,7 @@ namespace imsLink
                 this.tp_Camera_Model.Parent = null;
                 this.tp_Serial_Auto.Parent = null;
                 this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
                 tabControl1.SelectTab(tp_Package1);  //程式啟動時，直接跳到USB那頁。
@@ -2018,8 +2063,32 @@ namespace imsLink
                                     if (flag_wait_data_cmd == SENSOR_BPT)
                                         flag_wait_data_cmd = 0;
                                 }
+                                else if (input[2] == 0x19)
+                                {
+                                    lb_yuv_y3.Text = ((int)input[3]).ToString();
+                                }
                             }
                             //richTextBox1.Text += "\n";
+                        }
+                        else if (input[1] == 0x58)
+                        {
+                            if (input[2] == 0x08)
+                            {
+                                camera_ybright_sign_bits = (byte)((input[3] >> 3) & 0x01);
+                                camera_yoffset_sign_bits = (byte)((input[3] >> 2) & 0x01);
+                                flag_ok_camera_ybright_sign_bit = true;
+                                flag_ok_camera_yoffset_sign_bit = true;
+                            }
+                            //richTextBox1.Text += "ADDR : 0x" + ((int)input[1]).ToString("X2") + ((int)input[2]).ToString("X2") + ", value : 0x" + ((int)input[3]).ToString("X2") + "\n";
+
+                            if (input[2] == 0x06)
+                                lb_data_camera_gain.Text = "G 0x" + ((int)input[3]).ToString("X2");
+                            else if (input[2] == 0x05)
+                                lb_data_camera_offset.Text = "O 0x" + ((int)input[3]).ToString("X2");
+                            else if (input[2] == 0x07)
+                                lb_data_camera_bright.Text = "B 0x" + ((int)input[3]).ToString("X2");
+                            else if (input[2] == 0x08)
+                                lb_data_camera_sign.Text = "S 0x" + ((int)input[3]).ToString("X2");
                         }
                     }
                     else if (input[1] == 0xA1)
@@ -2366,7 +2435,23 @@ namespace imsLink
                 lb_th_h.Visible = false;
                 lb_th_l.Visible = false;
                 lb_yuv_y2.Visible = false;
+                lb_yuv_y3.Visible = false;
                 lb_auto_awb_cnt.Visible = false;
+
+                gb_contrast_brightness.Visible = false;
+                gb_contrast_brightness2.Visible = false;
+                gb_contrast_brightness3.Visible = false;
+                pictureBox_contrast.Visible = false;
+                lb_data_camera_gain.Visible = false;
+                lb_data_camera_offset.Visible = false;
+                lb_data_camera_bright.Visible = false;
+                lb_data_camera_sign.Visible = false;
+                cb_Contrast_Brightness_Gamma.Visible = false;
+                cb_Gamma.Visible = false;
+
+                lb_yuv_y.Visible = false;
+                lb_yuv_u.Visible = false;
+                lb_yuv_v.Visible = false;
             }
             else
             {
@@ -2446,9 +2531,21 @@ namespace imsLink
                 numericUpDown_brightness.Enabled = en;
 
                 lb_yuv_y2.Visible = en;
+                lb_yuv_y3.Visible = en;
                 lb_auto_awb_cnt.Visible = false;
 
                 bt_tmp.Text = total_test_count.ToString() + "次";
+
+                gb_contrast_brightness.Visible = true;
+                gb_contrast_brightness2.Visible = true;
+                gb_contrast_brightness3.Visible = true;
+                pictureBox_contrast.Visible = true;
+                lb_data_camera_gain.Visible = true;
+                lb_data_camera_offset.Visible = true;
+                lb_data_camera_bright.Visible = true;
+                lb_data_camera_sign.Visible = true;
+                cb_Contrast_Brightness_Gamma.Visible = true;
+                cb_Gamma.Visible = true;
             }
 
             //note
@@ -2921,6 +3018,8 @@ namespace imsLink
                 lb_yuv_v.Location = new Point(5 + 100, 489 + 65 + 47 + 4);
 
                 lb_yuv_y2.Location = new Point(1610, 740);
+                lb_yuv_y3.Location = new Point(1215, 105);
+
                 lb_auto_awb_cnt.Location = new Point(bt_awb_break.Location.X + 110, bt_awb_break.Location.Y + 5);
             }
 
@@ -3034,6 +3133,28 @@ namespace imsLink
                 lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
             }
 
+            if (flag_operation_mode == MODE_RELEASE_STAGE0)
+            {
+                gb_contrast_brightness.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30);
+                gb_contrast_brightness2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115);
+                //gb_contrast_brightness3.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115 + 115);
+                gb_contrast_brightness3.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);
+
+                pictureBox_contrast.Location = new Point(pictureBox1.Location.X + 50, pictureBox1.Location.Y + 100);
+                if(cb_Gamma.Checked == true)
+                    pictureBox_contrast.Size = new Size(300, 256);
+                else
+                    pictureBox_contrast.Size = new Size(280, 256);
+                lb_data_camera_gain.Location = new Point(1090, 40);
+                lb_data_camera_offset.Location = new Point(1090, 40 + 40);
+                lb_data_camera_bright.Location = new Point(1090, 40 + 80);
+                lb_data_camera_sign.Location = new Point(1090, 40 + 120);
+
+                cb_Contrast_Brightness_Gamma.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - 800, pictureBox1.Location.Y + 6);
+                cb_Gamma.Location = new Point(cb_Contrast_Brightness_Gamma.Location.X + 230, cb_Contrast_Brightness_Gamma.Location.Y);
+            }
+
+
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
                 /*
@@ -3099,11 +3220,13 @@ namespace imsLink
             {
                 tb_wait_sn_data.Visible = true;
                 lb_class.Visible = true;
+                cb_air_ng.Visible = true;
             }
             else
             {
                 tb_wait_sn_data.Visible = false;
                 lb_class.Visible = false;
+                cb_air_ng.Visible = false;
             }
 
             refresh_picturebox2();
@@ -3121,7 +3244,7 @@ namespace imsLink
                 flag_display_mode = DISPLAY_FHD;
             }
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE1B))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE1C))
             {
                 MessageBox.Show("不能使用此模式, mode = " + flag_operation_mode.ToString() + ", 離開", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
@@ -3174,6 +3297,11 @@ namespace imsLink
             lb_write_camera_serial2.Text = "";
             lb_zoom.Text = "1.00 X";
             lb_rtc2.Text = "";
+            lb_data_camera_gain.Text = "";
+            lb_data_camera_offset.Text = "";
+            lb_data_camera_bright.Text = "";
+            lb_data_camera_sign.Text = "";
+            lb_gain_value.Text = "1 X";
             tb_machine_serial.Text = "0000000-B0000";
             tb_mb_big_serial.Text = "0000000000000";
             tb_mb_small_serial.Text = "0000000 0000 000000 0000";
@@ -3194,6 +3322,20 @@ namespace imsLink
             tb_wpt.Text = Convert.ToString((Int32)numericUpDown_wpt.Value, 16).ToUpper();
             tb_bpt.Text = Convert.ToString((Int32)numericUpDown_bpt.Value, 16).ToUpper();
             wpt_value_old = numericUpDown_wpt.Value;
+
+            //numericUpDown_gain3.Value = trackBar_Contrast3.Value;
+            //numericUpDown_offset3.Value = trackBar_Y_Offset3.Value;
+            //numericUpDown_brightness3.Value = trackBar_Brightness3.Value;
+            numericUpDown_wpt3.Value = trackBar_WPT.Value;
+            numericUpDown_bpt3.Value = trackBar_BPT.Value;
+            trackBar_WPT.Minimum = trackBar_BPT.Value + 1;
+            trackBar_BPT.Maximum = trackBar_WPT.Value - 1;
+
+            tb_gain3.Text = ((int)numericUpDown_gain3.Value).ToString("X2");
+            tb_offset3.Text = ((int)numericUpDown_offset3.Value).ToString("X2");
+            tb_brightness3.Text = ((int)numericUpDown_brightness3.Value).ToString("X2");
+            tb_wpt3.Text = ((int)numericUpDown_wpt3.Value).ToString("X2");
+            tb_bpt3.Text = ((int)numericUpDown_bpt3.Value).ToString("X2");
 
             if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
@@ -3268,15 +3410,13 @@ namespace imsLink
             // C# 設定視窗載入位置 
             this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-            /*
-            if (flag_operation_mode != MODE_RELEASE_STAGE0)
+            //if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
                 //C# 軟體啟動、版權宣告視窗 
                 Frm_Start frm = new Frm_Start();    //實體化Form2視窗物件
                 frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
                 frm.ShowDialog();   //顯示Form2視窗
             }
-            */
 
             toolTip1.SetToolTip(button17, "Zoom in");
             toolTip1.SetToolTip(button18, "Zoom out");
@@ -4739,6 +4879,32 @@ namespace imsLink
                 g9.Clear(BackColor);
                 g9.DrawString("先填單別單號", new Font("標楷體", 43), new SolidBrush(Color.Green), new PointF(1, 30));
             }
+            else if (tabControl1.SelectedTab == tp_Check)
+            {
+                richTextBox1.Text += "進入檢查結果 一C\n";
+                flag_operation_mode = MODE_RELEASE_STAGE1C;
+                timer_rgb.Enabled = false;
+                timer_stage1.Enabled = false;
+                timer_stage2.Enabled = false;
+                timer_stage3.Enabled = false;
+                timer_stage4.Enabled = false;
+                timer_stage5.Enabled = false;
+                timer_stage6.Enabled = false;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = false;
+                timer_stage9.Enabled = false;
+                timer_stage1c.Enabled = true;
+
+                flag_ok_data1 = false;
+                flag_ok_data2 = false;
+                flag_ok_data3 = false;
+                tb_package11.Clear();
+                tb_package12.Clear();
+                tb_package13.Clear();
+
+                //flag_auto_scan_mode = true;
+                //button55.Text = "到修改模式";
+            }
             else if (tabControl1.SelectedTab == tp_About)
             {
                 richTextBox1.Text += "進入About頁\n";
@@ -4916,6 +5082,17 @@ namespace imsLink
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         bool flag_capture_picture = false;
+        int[] y_data_r = new int[8];
+        int[] y_data_g = new int[8];
+        int[] y_data_b = new int[8];
+        int[] y_data_y = new int[8];
+        int[] y_data_y_old = new int[] { 0, 29, 80, 105, 149, 178, 225, 255 };
+        int[] g_data_new = new int[] { 0x00, 0x2C, 0x2F, 0x3A, 0x4E, 0x5F, 0x6C, 0x76, 0x7F, 0x87, 0x8F, 0x99, 0xA4, 0xB3, 0xC5, 0xD7 };
+        int[] g_data_old = new int[] { 0x00, 0x2C, 0x2F, 0x3A, 0x4E, 0x5F, 0x6C, 0x76, 0x7F, 0x87, 0x8F, 0x99, 0xA4, 0xB3, 0xC5, 0xD7 };
+
+        public Bitmap bm_contrast = null;
+        Graphics gc;    //for contrast
+
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             if (flag_do_find_awb_location == true)
@@ -4949,6 +5126,7 @@ namespace imsLink
 
                     //Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
                     Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone();
+                    //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipX);
 
                     int WW = bitmap1.Width;
                     int HH = bitmap1.Height;
@@ -4986,6 +5164,28 @@ namespace imsLink
                     total_RGB_R = total_R;
                     total_RGB_G = total_G;
                     total_RGB_B = total_B;
+
+                    if (cb_Contrast_Brightness_Gamma.Checked == true)
+                    {
+                        Color pt2;
+                        for (i = 0; i < 8; i++)
+                        {
+                            x_st = i * 80 + 20;
+                            y_st = 300;
+
+                            pt2 = bitmap1.GetPixel(x_st, y_st);
+                            y_data_r[i] = pt2.R;
+                            y_data_g[i] = pt2.G;
+                            y_data_b[i] = pt2.B;
+
+                            RGB pp = new RGB(pt2.R, pt2.G, pt2.B);
+                            YUV yyy = new YUV();
+                            yyy = RGBToYUV(pp);
+
+                            y_data_y[i] = (int)yyy.Y;
+                        }
+                    }
+
                 }
             }
 
@@ -4993,6 +5193,7 @@ namespace imsLink
             {
                 //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
                 bm = (Bitmap)eventArgs.Frame.Clone();
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipX);
                 //pictureBox1.Image = bm;
             }
             catch (Exception ex)
@@ -5171,6 +5372,178 @@ namespace imsLink
                 {
                     //gg.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
                 }
+
+                if ((cb_Contrast_Brightness_Gamma.Checked == true) && (cb_Gamma.Checked == false))
+                {
+                    int i;
+                    i = 0;
+                    x_st = i * 80 + 10;
+                    y_st = 225;
+
+                    gg.DrawString(y_data_r[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.White), x_st, y_st);
+                    gg.DrawString(y_data_g[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.White), x_st, y_st + 20);
+                    gg.DrawString(y_data_b[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.White), x_st, y_st + 40);
+                    gg.DrawString(y_data_y_old[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Gray), x_st, y_st + 70);
+                    if (y_data_y[i] == y_data_y_old[i])
+                        gg.DrawString(y_data_y[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Gray), x_st, y_st + 100);
+                    else
+                    {
+                        gg.FillRectangle(new SolidBrush(Color.White), x_st, y_st + 100, 40, 22);
+                        gg.DrawString(y_data_y[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Red), x_st, y_st + 100);
+                    }
+
+                    for (i = 1; i < 8; i++)
+                    {
+                        x_st = i * 80 + 10;
+                        y_st = 225;
+
+                        gg.DrawString(y_data_r[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Black), x_st, y_st);
+                        gg.DrawString(y_data_g[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Black), x_st, y_st + 20);
+                        gg.DrawString(y_data_b[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Black), x_st, y_st + 40);
+                        gg.DrawString(y_data_y_old[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Gray), x_st, y_st + 70);
+                        if (y_data_y[i] == y_data_y_old[i])
+                            gg.DrawString(y_data_y[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Gray), x_st, y_st + 100);
+                        else
+                        {
+                            gg.FillRectangle(new SolidBrush(Color.White), x_st, y_st + 100, 40, 22);
+                            gg.DrawString(y_data_y[i].ToString(), new Font("標楷體", 16), new SolidBrush(Color.Red), x_st, y_st + 100);
+                        }
+
+
+                    }
+
+
+                    int ww2 = pictureBox_contrast.Width;
+                    int hh2 = pictureBox_contrast.Height;
+                    bm_contrast = new Bitmap(ww2, hh2);
+
+                    gc = Graphics.FromImage(bm_contrast);
+                    gc.Clear(Color.White);
+
+                    // Create pens.
+                    Pen redPen = new Pen(Color.Red, 3);
+                    Pen grayPen = new Pen(Color.Gray, 10);
+
+
+                    Point[] curvePoints = new Point[8];    //一維陣列內有 8 個Point
+
+                    for (i = 0; i < 8; i++)
+                    {
+                        curvePoints[i].X = 40 * i;
+                        curvePoints[i].Y = 255 - (y_data_y_old[i]);
+                    }
+                    // Draw lines between original points to screen.
+                    gc.DrawLines(grayPen, curvePoints);   //畫直線
+                    // Draw curve to screen.
+                    //gc.DrawCurve(redPen, curvePoints); //畫曲線
+
+                    for (i = 0; i < 8; i++)
+                    {
+                        curvePoints[i].X = 40 * i;
+                        curvePoints[i].Y = 255 - (y_data_y[i]);
+                    }
+                    // Draw lines between original points to screen.
+                    gc.DrawLines(redPen, curvePoints);   //畫直線
+                    // Draw curve to screen.
+                    //gc.DrawCurve(redPen, curvePoints); //畫曲線
+
+                    pictureBox_contrast.Image = bm_contrast;
+                }
+                else if ((cb_Contrast_Brightness_Gamma.Checked == true) && (cb_Gamma.Checked == true))
+                {
+                    /*
+                    int i;
+
+                    int ww2 = pictureBox_contrast.Width;
+                    int hh2 = pictureBox_contrast.Height;
+                    bm_contrast = new Bitmap(ww2, hh2);
+
+                    gc = Graphics.FromImage(bm_contrast);
+                    gc.Clear(Color.White);
+
+                    // Create pens.
+                    Pen redPen = new Pen(Color.Red, 3);
+                    Pen grayPen = new Pen(Color.Gray, 10);
+
+                    Point[] curvePoints = new Point[16];    //一維陣列內有 16 個Point
+
+                    for (i = 0; i < 16; i++)
+                    {
+                        curvePoints[i].X = 20 * i;
+                        curvePoints[i].Y = 255 - (g_data_old[i]);
+                    }
+                    // Draw lines between original points to screen.
+                    gc.DrawLines(grayPen, curvePoints);   //畫直線
+                    // Draw curve to screen.
+                    //gc.DrawCurve(redPen, curvePoints); //畫曲線
+                    gc.DrawString("2.2", new Font("標楷體", 16), new SolidBrush(Color.Gray), 260, 80);
+
+                    for (i = 0; i < 16; i++)
+                    {
+                        curvePoints[i].X = 20 * i;
+                        curvePoints[i].Y = 255 - (g_data_new[i]);
+                    }
+                    // Draw lines between original points to screen.
+                    gc.DrawLines(redPen, curvePoints);   //畫直線
+                    // Draw curve to screen.
+                    //gc.DrawCurve(redPen, curvePoints); //畫曲線
+
+                    pictureBox_contrast.Image = bm_contrast;
+
+                    */
+                    pictureBox_contrast.Visible = false;
+
+                }
+
+
+                /*
+
+                Graphics g;
+                Bitmap bmp;
+                //逐點製作圖檔
+                int xx;
+                int yy;
+
+                bmp = new Bitmap(ww2, hh2);
+
+                //background
+                for (yy = 0; yy < hh2; yy++)
+                {
+                    for (xx = 0; xx < ww2; xx++)
+                    {
+                        bmp.SetPixel(xx, yy, Color.FromArgb(255, TARGET_AWB_R, TARGET_AWB_G, TARGET_AWB_B));
+                        //bitmap3.SetPixel(xx, yy, Color.Red);
+                    }
+                }
+
+                try
+                {
+                    g = Graphics.FromImage(bmp);
+                    g.DrawRectangle(new Pen(Color.Silver, 2), 1, 1, ww2 - 2, hh2 - 2);    //draw boundary
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息r1 : " + ex.Message + "\n";
+                    GC.Collect();       //回收資源
+                    return;
+                }
+
+                try
+                {
+                    pictureBox_contrast.Image = bmp;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息r2 : " + ex.Message + "\n";
+                    GC.Collect();       //回收資源
+                    return;
+                }
+                GC.Collect();       //回收資源
+                */
+
+
+
+
 
                 x_st = w / 2 - awb_window_size / 2;
                 y_st = h / 2 - awb_window_size / 2;
@@ -6170,8 +6543,10 @@ namespace imsLink
                         lb_sn_opal.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - dy);
                         tb_sn_opal.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y - dy);
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 30);
-                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y - 130);
+                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 140 + 10, tb_wait_sn_data.Location.Y - 140);
                         lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
+
+                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 145, tb_sn_opal.Location.Y + 0); //SD display + big show
                     }
                 }
                 else
@@ -6210,8 +6585,10 @@ namespace imsLink
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
-                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 138, tb_wait_sn_data.Location.Y - 150);
+                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 138 + 10, tb_wait_sn_data.Location.Y - 150);
                         lb_main_mesg2.Location = new Point(lb_main_mesg2.Location.X, lb_main_mesg2.Location.Y - 8);
+
+                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120); //HD display + big show
                     }
                 }
 
@@ -6311,8 +6688,10 @@ namespace imsLink
                         lb_sn_opal.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - dy);
                         tb_sn_opal.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y - dy);
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 32);
-                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 167, tb_wait_sn_data.Location.Y - 130);
+                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 167, tb_wait_sn_data.Location.Y - 140);
                         lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
+
+                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 650, tb_sn_opal.Location.Y + 20);   //SD display + small show
                     }
                 }
                 else
@@ -6332,8 +6711,10 @@ namespace imsLink
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X + 140, tb_sn_opal.Location.Y);
-                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 28, tb_wait_sn_data.Location.Y - 138);
+                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 20 + 8, tb_wait_sn_data.Location.Y - 138);
                         lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
+
+                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 650, tb_sn_opal.Location.Y - 5);     //HD display + small show
                     }
                 }
 
@@ -8030,6 +8411,15 @@ namespace imsLink
                         richTextBox1.Text += "F2b";
                     }
                     this.tb_sn_opal.BackColor = Color.Pink;
+
+                    /*  取得亮度
+                    if (timer_cnt > 20)
+                    {
+                        DongleAddr_h = 0x3A;
+                        DongleAddr_l = 0x19;
+                        Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+                    }
+                    */
                 }
 
                 int result = check_tb_sn_opal_data();
@@ -9254,6 +9644,7 @@ namespace imsLink
 
                         awb_cnt--;
                         richTextBox1.Text +=
+                            "awb_r[" + awb_cnt.ToString() + "]=" + data_R.ToString() + ";awb_b[" + awb_cnt.ToString() + "]=" + data_B.ToString() + ";" +
                             "right_left_point_cnt[" + awb_cnt.ToString() + "]=" + flag_right_left_point_cnt.ToString() + ";" +
                             "down_up_point_cnt[" + awb_cnt.ToString() + "]=" + flag_down_up_point_cnt.ToString() + ";" +
                             "awb_block[" + awb_cnt.ToString() + "]=" + awb_block.ToString() + ";" +
@@ -10993,6 +11384,12 @@ namespace imsLink
                 {
                     richTextBox1.Text += "-2xx";
                     delay(50);
+                    if ((cnt % 5) == 4)
+                    {
+                        richTextBox1.Text += "無回應, 再發一次命令2\n";
+                        delay(500);
+                        Send_IMS_Data(0xFF, 0, 0, 0);
+                    }
                 }
                 if (g_conn_status == DONGLE_NONE)
                 {
@@ -11352,6 +11749,7 @@ namespace imsLink
                 //一定會被執行的程式區段
                 if (serialPort1.IsOpen)
                 {
+                    serialPort1.DtrEnable = true;   //白話地說就是通知儀器說我(電腦)這邊已經準備好了
                     //MessageBox.Show("已經連上" + serialPort1.PortName);
 
                     flag_comport_ok = true;
@@ -11377,6 +11775,7 @@ namespace imsLink
                         delay(50);
                         if ((cnt % 5) == 4)
                         {
+                            richTextBox1.Text += "無回應, 再發一次命令1\n";
                             delay(500);
                             Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
                         }
@@ -11979,6 +12378,11 @@ namespace imsLink
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
                 filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
             }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
+            {
+                filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01c.csv";
+                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01c.csv";
+            }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
@@ -12044,13 +12448,17 @@ namespace imsLink
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "," + "設備" + "\n";
                 }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
+                {
+                    content += "編號" + "," + "Opal序號" + "," + "檢查1" + "," + "檢查2" + "," + "檢查3" + "," + "存檔時間" + "\n";
+                }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
-                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "\n";
+                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "," + "氣密NG" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
@@ -12114,10 +12522,20 @@ namespace imsLink
                     content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ",2";
                     csv_index1 -= camera_serials.Count;
                 }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
+                {
+                    csv_index1++;
+                    content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ","
+                        + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + "," + camera_serials[i][4].ToString();
+                    csv_index1 -= camera_serials.Count;
+                }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     csv_index3++;
-                    content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    if(cb_air_ng.Checked == true)
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + ",1";
+                    else
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
                     csv_index3 -= camera_serials.Count;
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
@@ -12185,13 +12603,17 @@ namespace imsLink
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "," + "設備" + "\n";
                 }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
+                {
+                    content += "編號" + "," + "Opal序號" + "," + "檢查1" + "," + "檢查2" + "," + "檢查3" + "," + "存檔時間" + "\n";
+                }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
                     content += "編號" + "," + "Opal序號" + "," + "存檔時間" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
-                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "\n";
+                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "," + "氣密NG" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
@@ -12253,10 +12675,23 @@ namespace imsLink
                     csv_index1++;
                     content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ",2";
                 }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
+                {
+                    csv_index1++;
+                    content += csv_index1.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + ","
+                        + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + "," + camera_serials[i][4].ToString();
+                }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     csv_index3++;
-                    content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+
+                    if (cb_air_ng.Checked == true)
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + ",1";
+                        cb_air_ng.Checked = false;
+                    }
+                    else
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
@@ -12611,7 +13046,29 @@ namespace imsLink
                     DongleData = (byte)data;
 
                     Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
-                    delay(100);
+                    delay(20);
+
+                    g_data_new[0] = 0x00;
+                    if (cb_Gamma.Checked == true)
+                    {
+                        if ((DongleAddr_h == 0x53) && (DongleAddr_l == 0x01))
+                        {
+                            //setup avg_sel as Input data from GAMMA module
+                            DongleAddr_h = 0x50;
+                            DongleAddr_l = 0x02;
+                            DongleData = 0x88;
+
+                            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+                        }
+
+                        if (DongleAddr_h == 0x53)
+                        {
+                            if ((DongleAddr_l > 0) && (DongleAddr_l < 0x10))
+                            {
+                                g_data_new[DongleAddr_l] = DongleData;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -13144,7 +13601,7 @@ namespace imsLink
 
             user_flash_data[0] = 0xDA;  //header
 
-            data = (byte)numericUpDown_brightness.Value;    //default WPT = 40, BPT = 25
+            data = (byte)numericUpDown_brightness.Value;    //default WPT = 120, BPT = 100
 
             richTextBox1.Text += "Brightness = " + data.ToString() + "\n";
 
@@ -13274,9 +13731,7 @@ namespace imsLink
             SendData = TH2;
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
-
             timer_stage2.Enabled = true;
-
         }
 
         private void comboBox_sharpness_DropDown(object sender, EventArgs e)
@@ -14315,7 +14770,7 @@ namespace imsLink
             string PathM = "M:\\";
             string PathN = "N:\\";
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE5) && (flag_operation_mode != MODE_RELEASE_STAGE6) && (flag_operation_mode != MODE_RELEASE_STAGE7) && (flag_operation_mode != MODE_RELEASE_STAGE8) && (flag_operation_mode != MODE_RELEASE_STAGE9) && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
+            if ((flag_operation_mode != MODE_RELEASE_STAGE1C) && (flag_operation_mode != MODE_RELEASE_STAGE5) && (flag_operation_mode != MODE_RELEASE_STAGE6) && (flag_operation_mode != MODE_RELEASE_STAGE7) && (flag_operation_mode != MODE_RELEASE_STAGE8) && (flag_operation_mode != MODE_RELEASE_STAGE9) && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
             {
                 show_main_message1("無法連上 " + PathM, S_FALSE, 30);
                 show_main_message2("無法連上 " + PathM, S_FALSE, 30);
@@ -15664,6 +16119,12 @@ namespace imsLink
                         richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
                         flag_stage3_step = 1;
                     }
+                    else if (tb_wait_sn_data.Text[0] == 'F')
+                    {
+                        lb_class.Text = tb_wait_sn_data.Text[0].ToString();
+                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
+                        flag_stage3_step = 1;
+                    }
                     else
                     {
                         lb_class.Text = "不允許" + tb_wait_sn_data.Text[0].ToString();
@@ -16883,6 +17344,23 @@ namespace imsLink
 
             tb_awb_mesg.Text = "設定相機預設值";
 
+            //不使用Gamma設定
+            DongleAddr_h = 0x50;
+            DongleAddr_l = 0x00;
+            SendData = 0xFF;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x50;
+            DongleAddr_l = 0x02;
+            SendData = 0xC8;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+            DongleAddr_h = 0x53;
+            DongleAddr_l = 0x00;
+            SendData = 0x01;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            delay(10);
+
             //設定相機預設的RGB值
             //R = 0x670 = 1456
             //B = 0x670 = 1648
@@ -16940,6 +17418,14 @@ namespace imsLink
 
                 delay(20);
             }
+
+            //
+
+
+
+
+
+
             return;
         }
 
@@ -17528,9 +18014,1219 @@ namespace imsLink
             return;
         }
 
+        private void trackBar_Contrast_Scroll(object sender, EventArgs e)
+        {
+            get_camera_contrast_brightness_setup();
+
+            byte SendData;
+
+            byte data1 = 0x06;  //CTRL  //fixed
+            byte data2 = 0x02;  //EN    //fixed
+            byte data3 = 0x00;  //Y_OFFSET
+            byte data4 = 0x20;  //Y_GAIN
+            //byte data5 = 0x00;  //Y_BRIGHT
+            byte data6 = 0x00;  //SIGN
+
+            //byte camera_yoffset_sign_bits_local = 0;
+
+            switch (trackBar_Contrast.Value)
+            {
+                case 4:
+                    data3 = 0xA0;
+                    data4 = 0x24;
+                    //data5 = 0x0F;
+                    data6 = 0x00;
+                    camera_yoffset_sign_bits = 0;
+                    break;
+                case 3:
+                    data3 = 0x90;
+                    data4 = 0x23;
+                    //data5 = 0x0A;
+                    data6 = 0x00;
+                    camera_yoffset_sign_bits = 0;
+                    break;
+                case 2:
+                    data3 = 0x90;
+                    data4 = 0x22;
+                    //data5 = 0x0A;
+                    data6 = 0x00;
+                    camera_yoffset_sign_bits = 0;
+                    break;
+                case 1:
+                    data3 = 0x80;
+                    data4 = 0x21;
+                    //data5 = 0x05;
+                    data6 = 0x00;
+                    camera_yoffset_sign_bits = 0;
+                    break;
+                case 0:
+                    data3 = 0x00;
+                    data4 = 0x20;
+                    //data5 = 0x00;
+                    data6 = 0x00;
+                    camera_yoffset_sign_bits = 0;
+                    break;
+                case -1:
+                    data3 = 0x80;
+                    data4 = 0x1F;
+                    //data5 = 0x05;
+                    data6 = 0x0C;
+                    camera_yoffset_sign_bits = 1;
+                    break;
+                case -2:
+                    data3 = 0x90;
+                    data4 = 0x1E;
+                    //data5 = 0x05;
+                    data6 = 0x0C;
+                    camera_yoffset_sign_bits = 1;
+                    break;
+                case -3:
+                    data3 = 0x90;
+                    data4 = 0x1D;
+                    //data5 = 0x05;
+                    data6 = 0x0C;
+                    camera_yoffset_sign_bits = 1;
+                    break;
+                case -4:
+                    data3 = 0xA0;
+                    data4 = 0x1C;
+                    //data5 = 0x05;
+                    data6 = 0x0C;
+                    camera_yoffset_sign_bits = 1;
+                    break;
+                default:
+                    data3 = 0x00;
+                    data4 = 0x20;
+                    //data5 = 0x00;
+                    data6 = 0x00;
+                    richTextBox1.Text += "XXXXXXXX";
+                    camera_yoffset_sign_bits = 0;
+                    break;
+            }
+
+            data6 = (byte)((((int)camera_ybright_sign_bits) << 3) | (((int)camera_yoffset_sign_bits) << 2));
+
+            richTextBox1.Text += "選擇了對比 " + trackBar_Contrast.Value.ToString() + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = data1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = data2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = data3;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = data4;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            /*
+            //  Y BRIGHT 不設定
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            SendData = data5;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            */
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = data6;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+        }
+
+        private void trackBar_Brightness_Scroll(object sender, EventArgs e)
+        {
+            get_camera_contrast_brightness_setup();
+
+            byte SendData;
+            int brightness = 0;
+            int sign_bit = 0;
+            switch (trackBar_Brightness.Value)
+            {
+                case 4: brightness = 0x40; break;
+                case 3: brightness = 0x30; break;
+                case 2: brightness = 0x20; break;
+                case 1: brightness = 0x10; break;
+                case 0: brightness = 0x00; break;
+                case -1: brightness = 0x10; sign_bit = 0x08; break;
+                case -2: brightness = 0x20; sign_bit = 0x08; break;
+                case -3: brightness = 0x30; sign_bit = 0x08; break;
+                case -4: brightness = 0x40; sign_bit = 0x08; break;
+                default: brightness = 0x00; richTextBox1.Text += "XXXXXXXX"; break;
+            }
+
+            richTextBox1.Text += "選擇了亮度 " + trackBar_Brightness.Value.ToString() + "\t設定 " + brightness.ToString() + "\n";
+
+
+            richTextBox1.Text += "camera_yoffset_sign_bits = " + camera_yoffset_sign_bits.ToString("X2") + "\n";
+            richTextBox1.Text += "sign_bit a = " + sign_bit.ToString("X2") + "\n";
+
+            sign_bit = (byte)(sign_bit | (((int)camera_yoffset_sign_bits) << 2));
+
+            richTextBox1.Text += "sign_bit b = " + sign_bit.ToString("X2") + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = 0x06;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = 0x02;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            /*
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = 0x20;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            */
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            SendData = (byte)brightness;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = (byte)sign_bit;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+        }
+
+        void get_camera_contrast_brightness_setup()
+        {
+            flag_ok_camera_ybright_sign_bit = false;
+            flag_ok_camera_yoffset_sign_bit = false;
+
+            //read current Y SIGN BITS value;
+            //讀取SIGN BITS	0x5808
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            int cnt = 0;
+            while ((flag_ok_camera_yoffset_sign_bit == false) || (flag_ok_camera_ybright_sign_bit == false))
+            {
+                richTextBox1.Text += "W";
+                delay(100);
+                cnt++;
+                if (cnt == 3)
+                    break;
+            }
+            //richTextBox1.Text += "取得sign ybright " + ((int)camera_ybright_sign_bits).ToString("X2") + "\n";
+            //richTextBox1.Text += "取得sign yoffset " + ((int)camera_yoffset_sign_bits).ToString("X2") + "\n";
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            //read current Y BRIGHT value;
+            //讀取亮度	0x5807
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            //read current Y SIGN BITS value;
+            //讀取SIGN BITS	0x5808
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+            richTextBox1.Text += "恢復預設值\n";
+
+
+            byte SendData;
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = 0x06;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = 0x02;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = 0x20;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            trackBar_Contrast3.Value = 0;
+            trackBar_Y_Offset3.Value = 0;
+            trackBar_Brightness3.Value = 0;
+
+            numericUpDown_gain3.Value = 0;
+            numericUpDown_offset3.Value = 0;
+            numericUpDown_brightness3.Value = 0;
+
+            lb_gain_value.Text = "1 X";
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            byte SendData;
+
+            byte data1 = 0x06;  //CTRL  //fixed
+            byte data2 = 0x02;  //EN    //fixed
+            byte data3 = 0x00;  //Y_OFFSET
+            byte data4 = 0x20;  //Y_GAIN
+            byte data5 = 0x00;  //Y_BRIGHT
+            byte data6 = 0x00;  //SIGN
+
+            switch (trackBar2.Value)
+            {
+                case 4:
+                    data3 = 0xA0;
+                    data4 = 0xE0;
+                    data5 = 0x0F;
+                    data6 = 0x00;
+                    break;
+                case 3:
+                    data3 = 0x90;
+                    data4 = 0x90;
+                    data5 = 0x0A;
+                    data6 = 0x00;
+                    break;
+                case 2:
+                    data3 = 0x90;
+                    data4 = 0x60;
+                    data5 = 0x0A;
+                    data6 = 0x00;
+                    break;
+                case 1:
+                    data3 = 0x80;
+                    data4 = 0x30;
+                    data5 = 0x05;
+                    data6 = 0x00;
+                    break;
+                case 0:
+                    data3 = 0x00;
+                    data4 = 0x20;
+                    data5 = 0x00;
+                    data6 = 0x00;
+                    break;
+                case -1:
+                    data3 = 0x80;
+                    data4 = 0x25;
+                    data5 = 0x05;
+                    data6 = 0x0C;
+                    break;
+                case -2:
+                    data3 = 0x90;
+                    data4 = 0x2A;
+                    data5 = 0x05;
+                    data6 = 0x0C;
+                    break;
+                case -3:
+                    data3 = 0x90;
+                    data4 = 0x2F;
+                    data5 = 0x05;
+                    data6 = 0x0C;
+                    break;
+                case -4:
+                    data3 = 0xA0;
+                    data4 = 0x34;
+                    data5 = 0x05;
+                    data6 = 0x0C;
+                    break;
+                default:
+                    data3 = 0x00;
+                    data4 = 0x20;
+                    data5 = 0x00;
+                    data6 = 0x00;
+                    richTextBox1.Text += "XXXXXXXX";
+                    break;
+            }
+
+            richTextBox1.Text += "選擇了對比 " + trackBar2.Value.ToString() + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = data1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = data2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = data3;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = data4;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            //  Y BRIGHT 不設定
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            SendData = data5;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = data6;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            byte SendData;
+            int brightness = 0;
+            int sign_bit = 0;
+            switch (trackBar1.Value)
+            {
+                case 4: brightness = 0x40; break;
+                case 3: brightness = 0x30; break;
+                case 2: brightness = 0x20; break;
+                case 1: brightness = 0x10; break;
+                case 0: brightness = 0x00; break;
+                case -1: brightness = 0x10; sign_bit = 0x08; break;
+                case -2: brightness = 0x20; sign_bit = 0x08; break;
+                case -3: brightness = 0x30; sign_bit = 0x08; break;
+                case -4: brightness = 0x40; sign_bit = 0x08; break;
+                default: brightness = 0x00; richTextBox1.Text += "XXXXXXXX"; break;
+            }
+
+            richTextBox1.Text += "選擇了亮度 " + trackBar1.Value.ToString() + "\t設定 " + brightness.ToString() + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = 0x06;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = 0x02;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            /*
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = 0x20;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+            */
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            SendData = (byte)brightness;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = (byte)sign_bit;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+        }
+
+        private void timer_stage1c_Tick(object sender, EventArgs e)
+        {
+            if (flag_network_disk_status == false)
+            {
+                tb_wait_check_data.Clear();
+
+                show_main_message1("無法連上網路磁碟機 ", S_FALSE, 30);
+                show_main_message2("無法連上網路磁碟機 ", S_FALSE, 30);
+                show_main_message3("無法連上網路磁碟機 ", S_FALSE, 30);
+            }
+
+            if (flag_doing_writing_data == true)
+            {
+                richTextBox1.Text += "正在存檔, 忽略\n";
+                return;
+            }
+
+            ccc++;
+            if (flag_stage1c_step == 0)
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg1c.Text = "等待勾選項目 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg1c.Text = "等待勾選項目 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg1c.Text = "等待勾選項目 /";
+                else
+                    lb_main_mesg1c.Text = "等待勾選項目 -";
+
+                return;
+            }
+            else
+            {
+                if ((ccc % 4) == 0)
+                    lb_main_mesg1c.Text = "輸入相機序號 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg1c.Text = "輸入相機序號 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg1c.Text = "輸入相機序號 /";
+                else
+                    lb_main_mesg1c.Text = "輸入相機序號 -";
+            }
+
+            if ((timer_cnt++ % 10) == 0)
+            {
+                richTextBox1.Text += "一C";
+                if (this.tb_wait_check_data.Focused == false)
+                {
+                    this.tb_wait_check_data.Focus();
+                    richTextBox1.Text += "F1c";
+                }
+            }
+
+            //檢查相機序號
+            int len;
+            len = tb_wait_check_data.Text.Length;
+
+            if (len > 20)   //太長, 直接放棄
+            {
+                tb_wait_check_data.Clear();
+                //richTextBox1.Text += "X1";
+                return;
+            }
+            else if (len > 5)    //檢查是否換行
+            {
+                if ((tb_wait_check_data.Text[len - 2] == 0x0D) || (tb_wait_check_data.Text[len - 1] == 0x0A))
+                {
+                    tb_wait_check_data.Text = tb_wait_check_data.Text.Trim();
+                    //richTextBox1.Text += "OK";
+                }
+                else
+                {
+                    //richTextBox1.Text += "X2";
+                    return;
+                }
+            }
+            else    //太短  留著累計
+            {
+                //richTextBox1.Text += "X3";
+                return;
+            }
+
+            int i;
+            bool flag_incorrect_data = false;
+
+            len = tb_wait_check_data.Text.Length;
+            if ((len == 9) || (len == 10))
+            {
+                //檢查英文字母的正確性
+                //檢查第0碼
+                if (((tb_wait_check_data.Text[0] >= 'A') && (tb_wait_check_data.Text[0] <= 'Z')) || ((tb_wait_check_data.Text[0] >= 'a') && (tb_wait_check_data.Text[0] <= 'z')))
+                {
+                    flag_incorrect_data = false;
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "SN1格式不正確b0\n";
+                }
+
+                //檢查第1碼
+                if (((tb_wait_check_data.Text[1] >= 'A') && (tb_wait_check_data.Text[1] <= 'Z')) || ((tb_wait_check_data.Text[1] >= 'a') && (tb_wait_check_data.Text[1] <= 'z')))
+                {
+                    flag_incorrect_data = false;
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "SN1格式不正確b1\n";
+                }
+
+                //檢查第 2~8 或 2~9 碼
+                for (i = 2; i < len; i++)
+                {
+                    if ((tb_wait_check_data.Text[i] < '0') || (tb_wait_check_data.Text[i] > '9'))
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b\n";
+                    }
+                }
+
+                if (flag_incorrect_data == false)
+                {
+                    richTextBox1.Text += "取得 SN1序號 : " + tb_wait_check_data.Text + "\n";
+                }
+            }
+            else
+            {
+                flag_incorrect_data = true;
+                richTextBox1.Text += "序號格式不正確\n";
+            }
+
+            if (flag_incorrect_data == true)
+            {
+                richTextBox1.Text += "資料錯誤,長度 " + len.ToString() + "\t內容 " + tb_wait_check_data.Text + "\t清除\n";
+                tb_wait_check_data.Clear();
+            }
+            else
+            {
+                richTextBox1.Text += "資料正確\n";
+                lb_main_mesg1c.Text = "資料正確, 存檔中";
+
+                timer_stage1c.Enabled = false;
+
+                if ((cb_check1.Checked == true) && (cb_check2.Checked == true) && (cb_check3.Checked == true))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "底部", "Hi-pot", "身體", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else if ((cb_check1.Checked == true) && (cb_check2.Checked == true) && (cb_check3.Checked == false))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "底部", "Hi-pot", "", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else if ((cb_check1.Checked == true) && (cb_check2.Checked == false) && (cb_check3.Checked == true))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "底部", "", "身體", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else if ((cb_check1.Checked == false) && (cb_check2.Checked == true) && (cb_check3.Checked == true))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "", "Hi-pot", "身體", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else if ((cb_check1.Checked == true) && (cb_check2.Checked == false) && (cb_check3.Checked == false))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "底部", "", "", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else if ((cb_check1.Checked == false) && (cb_check2.Checked == true) && (cb_check3.Checked == false))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "", "Hi-pot", "", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else if ((cb_check1.Checked == false) && (cb_check2.Checked == false) && (cb_check3.Checked == true))
+                    camera_serials.Add(new string[] { tb_wait_check_data.Text, "", "", "身體", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                else
+                    richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+
+                exportCSV();
+
+                delay(30);
+                timer_stage1c.Enabled = true;
+                tb_wait_check_data.Clear();
+
+                cb_check1.Checked = false;
+                cb_check2.Checked = false;
+                cb_check3.Checked = false;
+                cb_check1.BackColor = Color.White;
+                cb_check2.BackColor = Color.White;
+                cb_check3.BackColor = Color.White;
+            }
+
+        }
+
+        private void cb_check1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_check1.Checked == true)
+                cb_check1.BackColor = Color.Red;
+            else
+                cb_check1.BackColor = Color.White;
+
+            if ((cb_check1.Checked == false) && (cb_check2.Checked == false) && (cb_check3.Checked == false))
+                flag_stage1c_step = 0;
+            else
+                flag_stage1c_step = 1;
+            this.tb_wait_check_data.Focus();
+        }
+
+        private void cb_check2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_check2.Checked == true)
+                cb_check2.BackColor = Color.Red;
+            else
+                cb_check2.BackColor = Color.White;
+
+            if ((cb_check1.Checked == false) && (cb_check2.Checked == false) && (cb_check3.Checked == false))
+                flag_stage1c_step = 0;
+            else
+                flag_stage1c_step = 1;
+            this.tb_wait_check_data.Focus();
+        }
+
+        private void cb_check3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_check3.Checked == true)
+                cb_check3.BackColor = Color.Red;
+            else
+                cb_check3.BackColor = Color.White;
+
+            if ((cb_check1.Checked == false) && (cb_check2.Checked == false) && (cb_check3.Checked == false))
+                flag_stage1c_step = 0;
+            else
+                flag_stage1c_step = 1;
+            this.tb_wait_check_data.Focus();
+        }
+
+        /*
+        private void trackBar_Contrast3_Scroll(object sender, EventArgs e)
+        {
+            int setup = (int)trackBar_Contrast3.Value;
+            int gain = 0;
+            int offset = 0;
+
+            if (setup >= 0)
+            {
+                if (setup < 8)
+                    gain = setup * 2 + 0;
+                else if (setup < 16)
+                    gain = (setup - 8) * 6 + 16;
+                else if (setup < 24)
+                    gain = (setup - 16) * 6 + 64;
+                else if (setup <= 32)
+                    gain = (setup - 24) * 10 + 112;
+                else
+                {
+                    richTextBox1.Text += "XXXXXXXXXXXXXX";
+                }
+                gain += 32;
+            }
+            else
+            {
+                gain = Math.Abs(setup) * 20 / 32 + 32;
+            }
+
+            offset = Math.Abs(setup) + 128;
+
+
+            richTextBox1.Text += "setup = " + setup.ToString() + ", gain = " + gain.ToString() + ", offset = " + offset.ToString() + "\n";
+
+
+            get_camera_contrast_brightness_setup();
+
+            byte SendData;
+
+            byte data1 = 0x06;  //CTRL  //fixed
+            byte data2 = 0x02;  //EN    //fixed
+            byte data3 = 0x00;  //Y_OFFSET
+            byte data4 = 0x20;  //Y_GAIN
+            //byte data5 = 0x00;  //Y_BRIGHT
+            byte data6 = 0x00;  //SIGN
+
+            byte camera_yoffset_sign_bits_local = 0;
+
+            if (setup >= 0)
+            {
+                data6 = 0x00;
+                camera_yoffset_sign_bits_local = 0;
+            }
+            else
+            {
+                data6 = 0x0C;
+                camera_yoffset_sign_bits_local = 1;
+            }
+
+            data3 = (byte)offset;
+            data4 = (byte)gain;
+            data6 = (byte)((((int)camera_ybright_sign_bits) << 3) | (((int)camera_yoffset_sign_bits_local) << 2));
+
+            //richTextBox1.Text += "選擇了對比 " + trackBar_Contrast.Value.ToString() + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = data1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = data2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = data3;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = data4;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+*/
+        /*
+        //  Y BRIGHT 不設定
+        DongleAddr_h = 0x58;
+        DongleAddr_l = 0x07;    //Y_BRIGHT
+        SendData = data5;
+        Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        */
+        /*
+                    DongleAddr_h = 0x58;
+                    DongleAddr_l = 0x08;    //SIGN
+                    SendData = data6;
+                    Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
 
 
+
+
+
+
+
+                }
+                */
+
+        private void trackBar_Brightness3_Scroll(object sender, EventArgs e)
+        {
+            //設定 Y_BRIGHT
+            //get_camera_contrast_brightness_setup();
+
+            byte SendData;
+            byte data1 = 0x06;  //CTRL  //fixed
+            byte data2 = 0x02;  //EN    //fixed
+            byte data6 = 0x00;  //SIGN
+            //byte camera_ybright_sign_bits_local = 0;
+
+            int setup = (int)trackBar_Brightness3.Value;
+            numericUpDown_brightness3.Value = trackBar_Brightness3.Value;
+            int brightness = 0;
+            
+            if (trackBar_Brightness3.Value >= 0)
+            {
+                brightness = setup;
+                camera_ybright_sign_bits = 0;
+            }
+            else
+            {
+                brightness = -setup;
+                camera_ybright_sign_bits = 1;
+            }
+
+            richTextBox1.Text += "選擇了亮度 " + setup.ToString() + "\t設定 " + brightness.ToString() + "\n";
+
+            richTextBox1.Text += "camera_yoffset_sign_bits = " + camera_yoffset_sign_bits.ToString("X2") + "\n";
+            
+            data6 = (byte)((((int)camera_ybright_sign_bits) << 3) | (((int)camera_yoffset_sign_bits) << 2));
+
+            richTextBox1.Text += "data6 = " + data6.ToString("X2") + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = data1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = data2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            SendData = (byte)brightness;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = data6;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        }
+
+        private void trackBar_Contrast3_Scroll(object sender, EventArgs e)
+        {
+            //設定 Y_GAIN
+            byte SendData;
+
+            byte data1 = 0x06;  //CTRL  //fixed
+            byte data2 = 0x02;  //EN    //fixed
+            byte data4 = 0x20;  //Y_GAIN
+
+            int setup = (int)trackBar_Contrast3.Value;
+            numericUpDown_gain3.Value = trackBar_Contrast3.Value;
+
+            richTextBox1.Text += "選擇了對比 " + setup.ToString() + "\t";
+
+            data4 += (byte)setup;
+
+            richTextBox1.Text += "設定值 " + data4.ToString() + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = data1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = data2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            SendData = data4;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            int num1 = (setup + 0x20) / 0x20;
+            int num2 = (setup + 0x20) % 0x20;
+            lb_gain_value.Text = (num1 + ((float)num2) / 32).ToString() + " X";
+        }
+
+        private void trackBar_Y_Offset3_Scroll(object sender, EventArgs e)
+        {
+            //設定 Y_OFFSET
+            //get_camera_contrast_brightness_setup();
+
+            byte SendData;
+            byte data1 = 0x06;  //CTRL  //fixed
+            byte data2 = 0x02;  //EN    //fixed
+            byte data3 = 0x00;  //Y_OFFSET
+            byte data6 = 0x00;  //SIGN
+            //byte camera_yoffset_sign_bits_local = 0;
+            int setup = (int)trackBar_Y_Offset3.Value;
+            numericUpDown_offset3.Value = trackBar_Y_Offset3.Value;
+
+            richTextBox1.Text += "選擇了OFFSET " + setup.ToString() + "\t";
+
+            if (setup >= 0)
+                camera_yoffset_sign_bits = 0;
+            else
+            {
+                camera_yoffset_sign_bits = 1;
+                setup = -setup;
+            }
+
+            data3 = (byte)setup;
+            //richTextBox1.Text += "設定值 " + data3.ToString() + "\n";
+
+            //richTextBox1.Text += "camera_yoffset_sign_bits = " + camera_yoffset_sign_bits.ToString("X2") + "\n";
+
+            data6 = (byte)((((int)camera_ybright_sign_bits) << 3) | (((int)camera_yoffset_sign_bits) << 2));
+
+            //richTextBox1.Text += "data6 = " + data6.ToString("X2") + "\n";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x00;    //CTRL
+            SendData = data1;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x0B;    //EN
+            SendData = data2;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            SendData = data3;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            SendData = data6;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+
+
+
+
+
+
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte cnt1 = 0;
+            DongleAddr_h = 0x50;
+            DongleAddr_l = 0x80;
+            DongleData = (byte)(cnt1 * 4 + 128);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+
+            /*
+            cnt1 = 1;
+            DongleAddr_h = 0x38;
+            DongleAddr_l = 0x20;
+            DongleData = (byte)(0x10 | (cnt1 << 2));
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+            */
+
+        }
+
+        private void button71_Click(object sender, EventArgs e)
+        {
+            lb_data_camera_gain.Text = "";
+            lb_data_camera_offset.Text = "";
+            lb_data_camera_bright.Text = "";
+            lb_data_camera_sign.Text = "";
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x06;    //Y_GAIN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x05;    //Y_OFFSET
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            //read current Y BRIGHT value;
+            //讀取亮度	0x5807
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x07;    //Y_BRIGHT
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            delay(100);
+
+            //read current Y SIGN BITS value;
+            //讀取SIGN BITS	0x5808
+            DongleAddr_h = 0x58;
+            DongleAddr_l = 0x08;    //SIGN
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+        }
+
+        private void numericUpDown_offset3_ValueChanged(object sender, EventArgs e)
+        {
+            int dd = (int)numericUpDown_offset3.Value;
+            if (dd < 0)
+            {
+                dd = -dd;
+                tb_offset3.BackColor = Color.Gray;
+            }
+            else
+            {
+                tb_offset3.BackColor = Color.White;
+            }
+            tb_offset3.Text = dd.ToString("X2");
+        }
+
+        private void numericUpDown_gain3_ValueChanged(object sender, EventArgs e)
+        {
+            int dd = (int)numericUpDown_gain3.Value;
+            if (dd < 0)
+            {
+                dd = -dd;
+                tb_gain3.BackColor = Color.Gray;
+            }
+            else
+            {
+                tb_gain3.BackColor = Color.White;
+            }
+            tb_gain3.Text = dd.ToString("X2");
+        }
+
+        private void numericUpDown_brightness3_ValueChanged(object sender, EventArgs e)
+        {
+            int dd = (int)numericUpDown_brightness3.Value;
+            if (dd < 0)
+            {
+                dd = -dd;
+                tb_brightness3.BackColor = Color.Gray;
+            }
+            else
+            {
+                tb_brightness3.BackColor = Color.White;
+            }
+            tb_brightness3.Text = dd.ToString("X2");
+        }
+
+        private void button75_Click(object sender, EventArgs e)
+        {
+            button75.BackColor = Color.Red;
+            button75.Text = "選檔";
+            openFileDialog1.Title = "把Script寫進檔案";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                button75.Text = "設定中";
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+
+                int x_st = 300;
+                int y_st = 300;
+                richTextBox2.Visible = true;
+                richTextBox2.Location = new Point(x_st, y_st);
+                richTextBox2.Size = new System.Drawing.Size(150, 500);
+                richTextBox2.Clear();
+
+                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+                richTextBox2.Text += sr.ReadToEnd();
+                sr.Close();
+
+                parse_script_command_and_send();
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+            button75.Text = "Gamma";
+            button75.BackColor = System.Drawing.SystemColors.ControlLight;
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            string filename = "gamma_default.txt";
+            richTextBox1.Text += "開啟Gamma檔案: " + filename + "\n";
+
+            int x_st = 300;
+            int y_st = 300;
+            richTextBox2.Visible = true;
+            richTextBox2.Location = new Point(x_st, y_st);
+            richTextBox2.Size = new System.Drawing.Size(150, 500);
+            richTextBox2.Clear();
+
+            StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            richTextBox2.Text += sr.ReadToEnd();
+            sr.Close();
+
+
+            parse_script_command_and_send();
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Visible = false;
+        }
+
+        private void cb_Contrast_Brightness_Gamma_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_Contrast_Brightness_Gamma.Checked == true)
+            {
+                gb_contrast_brightness.Visible = true;
+                gb_contrast_brightness2.Visible = true;
+                gb_contrast_brightness3.Visible = true;
+                pictureBox_contrast.Visible = true;
+            }
+            else
+            {
+                gb_contrast_brightness.Visible = false;
+                gb_contrast_brightness2.Visible = false;
+                gb_contrast_brightness3.Visible = false;
+                pictureBox_contrast.Visible = false;
+            }
+
+        }
+
+        private void cb_Gamma_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_Gamma.Checked == true)
+                pictureBox_contrast.Size = new Size(300, 256);
+            else
+                pictureBox_contrast.Size = new Size(280, 256);
+
+        }
+
+        private void trackBar_WPT_Scroll(object sender, EventArgs e)
+        {
+            int setup = (int)trackBar_WPT.Value;
+            numericUpDown_wpt3.Value = trackBar_WPT.Value;
+            trackBar_BPT.Maximum = trackBar_WPT.Value - 1;
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte SendData = (byte)setup;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x03;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        }
+
+        private void numericUpDown_wpt3_ValueChanged(object sender, EventArgs e)
+        {
+            int dd = (int)numericUpDown_wpt3.Value;
+            tb_wpt3.Text = dd.ToString("X2");
+        }
+
+        private void trackBar_BPT_Scroll(object sender, EventArgs e)
+        {
+            int setup = (int)trackBar_BPT.Value;
+            numericUpDown_bpt3.Value = trackBar_BPT.Value;
+            trackBar_WPT.Minimum = trackBar_BPT.Value + 1;
+
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            byte SendData = (byte)setup;
+            DongleAddr_h = 0x3A;
+            DongleAddr_l = 0x04;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
+        }
+
+        private void numericUpDown_bpt3_ValueChanged(object sender, EventArgs e)
+        {
+            int dd = (int)numericUpDown_bpt3.Value;
+            tb_bpt3.Text = dd.ToString("X2");
+        }
+
+        private void button76_Click(object sender, EventArgs e)
+        {
+            //WPT BPT 也要 恢復成預設值
+            trackBar_BPT.Maximum = 255;
+            trackBar_WPT.Minimum = 0;
+            trackBar_WPT.Value = 40;
+            trackBar_BPT.Value = 25;
+            trackBar_BPT.Maximum = trackBar_WPT.Value - 1;
+            trackBar_WPT.Minimum = trackBar_BPT.Value + 1;
+            numericUpDown_wpt3.Value = trackBar_WPT.Value;
+            numericUpDown_bpt3.Value = trackBar_BPT.Value;
+
+            trackBar_WPT_Scroll(sender, e);
+            trackBar_BPT_Scroll(sender, e);
+        }
 
 
 

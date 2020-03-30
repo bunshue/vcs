@@ -1,0 +1,30 @@
+//建立資料庫連線物件
+//-Create DBConnection -NAME fMyADOConnection
+//建立資料庫處理物件
+//-Create DBQuery -NAME fMyADOQuery
+//資料庫連線
+//-Connect ACCESS C:\Program Files (x86)\FilingSystem HD\FilingSystemHDDB\FilingSystemHD.mdb -NAME fMyADOConnection
+//元件連線
+//-Link -SrcName fMyADOQuery -DesName fMyADOConnection
+//檢查欄位是否已存在,不存在就建立
+//-DBCommand -CheckField -ADOName fMyADOQuery {EZ_Video, HasCompress, Alter Table EZ_Video Add HasCompress char(2) NULL}
+//檢查欄位是否已存在,不存在就建立
+//-DBCommand -CheckField -ADOName fMyADOQuery {EZ_Video, HasDelete, Alter Table EZ_Video Add HasDelete char(2) NULL}
+
+//建立容器儲存錄影檔資料庫唯一碼(VD_UIKey)
+//-Create vector -Name fVecVDUIKey
+//建立容器儲存錄影檔路徑(VideoFilePath)
+//-Create vector -NAME fVecVideo
+
+//找出日期以前的錄影檔路徑
+//-SQL -OpenSQL Select VD_UIKey, VideoFilePath From EZ_Exam, EZ_Series, EZ_Video Where EZ_Exam.StudyDate < -M3 And EZ_Exam.EX_UIKey=EZ_Series.EX_UIKey And EZ_Series.SE_UIKey=EZ_Video.SE_UIKey -Name fMyADOQuery
+
+//記錄錄影檔路徑
+//-Record -DBFieldName -NAME fMyADOQuery -LOOP {VD_UIKey=>fVecVDUIKey, VideoFilePath=>fVecVideo}
+
+//刪除錄影檔
+//-DeleteFile -Container -Name fVecVideo -Loop
+
+//更新VDUIKey資料表(參數名稱固定為$P)
+//-DBCommand -UpdateField -ADOName fMyADOQuery -UpdateContainerName fVecVDUIKey -UpdateSQL Update EZ_Video Set HasDelete='Y' Where VD_UIKey=$P
+

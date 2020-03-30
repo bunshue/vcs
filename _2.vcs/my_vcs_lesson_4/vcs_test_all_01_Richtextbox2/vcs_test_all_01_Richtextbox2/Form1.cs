@@ -342,7 +342,6 @@ namespace vcs_test_all_01_Richtextbox2
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             label3.Text = "文字總長: " + richTextBox1.TextLength.ToString();
-
         }
 
         private void richTextBox1_SelectionChanged(object sender, EventArgs e)
@@ -352,6 +351,7 @@ namespace vcs_test_all_01_Richtextbox2
             else
                 label4.Text = "";
 
+            /*   暫不改變字體
             if (richTextBox1.SelectionLength == 0)
             {
                 // 將RichTextBox中選取的文字，透過 FontFamily 類別 
@@ -368,6 +368,29 @@ namespace vcs_test_all_01_Richtextbox2
                 Font MyFont = new Font(new FontFamily("標楷體"), 16, FontStyle.Bold | FontStyle.Italic);
                 //this.richTextBox1.Font = DefaultFont; fail
                 this.richTextBox1.SelectionFont = MyFont;
+            }
+            */
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (richTextBox1.Focused == false)
+            {
+                //richTextBox2.Text += "F ";
+                richTextBox1.Focus();
+            }
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                if (e.KeyCode == Keys.F)
+                {
+                    richTextBox2.Text += "你按了 ctrl + F\n";
+                }
+
+
             }
 
         }

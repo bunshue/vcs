@@ -16,6 +16,7 @@ namespace imsLink
         [STAThread]
         static void Main()
         {
+            /*
             string MName = Process.GetCurrentProcess().MainModule.ModuleName;
             string PName = Path.GetFileNameWithoutExtension(MName);
             Process[] myProcess = Process.GetProcessesByName(PName);
@@ -24,6 +25,7 @@ namespace imsLink
                 MessageBox.Show("不允許重複執行本程式", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
+            */
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);

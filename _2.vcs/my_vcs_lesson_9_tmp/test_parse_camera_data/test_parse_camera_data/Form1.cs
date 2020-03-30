@@ -319,7 +319,7 @@ namespace test_parse_camera_data
         private void button5_Click(object sender, EventArgs e)
         {
             XmlDocument document = new XmlDocument();
-            document.Load("C:\\______test_files\\files_for_parse_data\\宅之力R.xml");
+            document.Load("C:\\______test_files\\_xml\\宅之力R.xml");
             richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["server"].Value + "\t";
             richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["account"].Value + "\t";
             richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["password"].Value + "\t";
@@ -348,7 +348,7 @@ namespace test_parse_camera_data
             xmlnode_settinginfo.Attributes.Append(xmlattribute_delay);//將屬性加入xmlnode_settinginfo節點下
             xmlnode_root.AppendChild(xmlnode_settinginfo);//將xmlnode_settinginfo節點加入xmlnode_root節點下
             document.AppendChild(xmlnode_root); //將xmlnode_root節點加入document中
-            document.Save("C:\\______test_files\\files_for_parse_data\\宅之力W.xml");
+            document.Save("C:\\______test_files\\_xml\\宅之力W.xml");
 
             richTextBox1.Text += "宅之力_xml寫入 OK\n\r";
 
@@ -357,7 +357,7 @@ namespace test_parse_camera_data
         private void button7_Click(object sender, EventArgs e)
         {
             XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load("C:\\______test_files\\files_for_parse_data\\仙人的設計之路1.xml");
+            XmlDoc.Load("C:\\______test_files\\_xml\\仙人的設計之路1.xml");
             XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1");
 
             foreach (XmlNode OneNode in NodeLists)
@@ -375,7 +375,7 @@ namespace test_parse_camera_data
         private void button8_Click(object sender, EventArgs e)
         {
             XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load("C:\\______test_files\\files_for_parse_data\\仙人的設計之路2.xml");
+            XmlDoc.Load("C:\\______test_files\\_xml\\仙人的設計之路2.xml");
             XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1");
             //XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1/MyLevel2");
 

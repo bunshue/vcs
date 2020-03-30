@@ -11,6 +11,7 @@ namespace vcs_ReadWrite_XML2
 {
     public partial class Form1 : Form
     {
+        string filename = "C:\\______test_files\\_xml\\person.xml";
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +22,7 @@ namespace vcs_ReadWrite_XML2
         private void Form1_Load(object sender, EventArgs e)
         {
             // 讀取XML文件並放入DataSet
-            ds.ReadXml("person.xml");
+            ds.ReadXml(filename);
             dataGridView1.DataSource = ds.Tables["學生"];
             DataColumn dc = ds.Tables["學生"].Columns["學號"];
             // 在學生DataTable建立學號欄位為主鍵，主鍵名稱為「PK_學號」

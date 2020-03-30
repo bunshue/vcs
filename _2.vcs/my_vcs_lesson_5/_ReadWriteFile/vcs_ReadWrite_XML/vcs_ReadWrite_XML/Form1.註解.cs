@@ -59,67 +59,121 @@ namespace vcs_ReadWrite_XML
         /// <param name="aIndent">縮進大小</param>
         private void RecurseXmlDocument(XmlNode aXnNode, int aIndent)
         {
+            richTextBox1.Text += "\nRecurseXmlDocument ST aIndent = " + aIndent.ToString();
             //判斷結點中是否有內容
             if (aXnNode == null)
             {
+                richTextBox1.Text += "RecurseXmlDocument SP XXXXXXXXXXXX\n";
                 return;
             }
 
             //節點是元素時
             if (aXnNode is XmlElement)
             {
+                richTextBox1.Text += "\t取得 XmlElement";
                 //顯示根元素的名稱
-                richTextBox1.Text += "\n\t根元素 : " + "\"" + aXnNode.Name.PadLeft(aXnNode.Name.Length + aIndent) + "\"" + "\t";
+                richTextBox1.Text += "\n根元素 : " + "\"" + aXnNode.Name.PadLeft(aXnNode.Name.Length + aIndent) + "\"" + "\t";
                 lbXmlValue.Items.Add(aXnNode.Name.PadLeft(aXnNode.Name.Length + aIndent));
                 if (aXnNode.Attributes != null)
                 {
+                    richTextBox1.Text += "有 aXnNode.Attributes 共有 " + aXnNode.Attributes.Count.ToString() + " 項屬性";
                     //得到屬性
+                    int i = 0;
                     foreach (XmlAttribute xaAttribute in aXnNode.Attributes)
                     {
+                        i++;
                         string sText = "";
                         sText = xaAttribute.Name;
-                        richTextBox1.Text += "\n\t\t屬性名 sText1 = " + "\"" + sText + "\"";
+                        richTextBox1.Text += "\n第 " + i.ToString() + " 項屬性, 屬性名 sText1 = " + "\"" + sText + "\"";
                         lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent + 2));
                         sText = xaAttribute.Value;
                         lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent + 4));
-                        richTextBox1.Text += "\t屬性值 sText2 = " + "\"" + sText + "\"";
+                        richTextBox1.Text += ", 屬性值 sText2 = " + "\"" + sText + "\"";
                     }
                 }
+                else
+                    richTextBox1.Text += "無 aXnNode.Attributes\n";
+
+                richTextBox1.Text += "\n111 aXnNode.HasChildNodes = " + aXnNode.HasChildNodes.ToString() + "\n";
                 //根元素中是否有子元素
                 if (aXnNode.HasChildNodes)
                 {
+                    richTextBox1.Text += "\n111 aXnNode.HasChildNodes = " + aXnNode.HasChildNodes.ToString() + ", ChildNodes個數 : " + aXnNode.ChildNodes.Count.ToString() + "\n";
+                    richTextBox1.Text += "\n1111 aaa 有子元素 call recure with index = " + (aIndent + 2).ToString() + "\n";
                     //有子節點，遍歷子節點
                     RecurseXmlDocument(aXnNode.FirstChild, aIndent + 2);
                 }
+                else
+                    richTextBox1.Text += "\n1111 aaa XXXXXXX 無子元素\n";
+
                 //判斷下個節點是為空
                 if (aXnNode.NextSibling != null)
                 {
+                    richTextBox1.Text += "\n111 aXnNode.NextSibling = " + aXnNode.NextSibling.ToString() + "\n";
+                }
+                else
+                    richTextBox1.Text += "\n111 aXnNode.NextSibling = null \n";
+
+                if (aXnNode.NextSibling != null)
+                {
+                    richTextBox1.Text += "\n1111 bbb call recurse 有下一個節點 with index = " + (aIndent + 2).ToString() + "\n";
                     RecurseXmlDocument(aXnNode.NextSibling, aIndent);
                 }
+                else
+                    richTextBox1.Text += "\n1111 bbb XXXXXXX 無下一個節點\n";
             }
             else if (aXnNode is XmlText)
             {
+                richTextBox1.Text += "\t取得 XmlText";
                 //顯示節點中的內容
                 string sText = ((XmlText)aXnNode).Value;
                 lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent));
-                richTextBox1.Text += "\t文本 sText3 = " + "\"" + sText + "\"";
+                richTextBox1.Text += "\t文本 sText3 = " + "\"" + sText + "\"" + "\n";
             }
             else if (aXnNode is XmlComment)
             {
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                richTextBox1.Text += "\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+
+
+                richTextBox1.Text += "\t取得 XmlComment";
                 string sText = aXnNode.Value;
                 lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent));
                 richTextBox1.Text += "\n註釋 sText4 = " + "\"" + sText + "\"";
                 //如果不加下邊的遍歷，資料只會得出備註中的內容，不會得出子節點內容
+
+                if (aXnNode.NextSibling != null)
+                    richTextBox1.Text += "\n222 aXnNode.NextSibling = " + aXnNode.NextSibling.ToString() + "\n";
+                else
+                    richTextBox1.Text += "\n222 aXnNode.NextSibling = null \n";
+
                 if (aXnNode.HasChildNodes)
                 {
                     //有子節點，遍歷子節點
                     RecurseXmlDocument(aXnNode.FirstChild, aIndent + 2);
                 }
+                else
+                    richTextBox1.Text += "\n2222 aaa XXXXXXX\n";
+                richTextBox1.Text += "\n222 aXnNode.NextSibling = " + aXnNode.NextSibling.ToString() + "\n";
                 if (aXnNode.NextSibling != null)
                 {
                     RecurseXmlDocument(aXnNode.NextSibling, aIndent);
                 }
+                else
+                    richTextBox1.Text += "\n2222 bbb XXXXXXX\n";
             }
+            else
+            {
+                richTextBox1.Text += "\t取得 其他 XXXXXXX";
+            }
+            richTextBox1.Text += "RecurseXmlDocument SP aIndent = " + aIndent.ToString() + "\n";
         }
 
         /// <summary>

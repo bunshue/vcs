@@ -38,16 +38,16 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 324);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 322);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(596, 191);
+            this.richTextBox1.Size = new System.Drawing.Size(714, 324);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // btnGet
             // 
             this.btnGet.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnGet.Location = new System.Drawing.Point(614, 12);
+            this.btnGet.Location = new System.Drawing.Point(732, 12);
             this.btnGet.Name = "btnGet";
             this.btnGet.Size = new System.Drawing.Size(167, 45);
             this.btnGet.TabIndex = 1;
@@ -58,22 +58,22 @@
             // btnCreateNode
             // 
             this.btnCreateNode.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnCreateNode.Location = new System.Drawing.Point(614, 85);
+            this.btnCreateNode.Location = new System.Drawing.Point(732, 85);
             this.btnCreateNode.Name = "btnCreateNode";
             this.btnCreateNode.Size = new System.Drawing.Size(167, 45);
             this.btnCreateNode.TabIndex = 2;
-            this.btnCreateNode.Text = "增加節點";
+            this.btnCreateNode.Text = "增加節點並存檔";
             this.btnCreateNode.UseVisualStyleBackColor = true;
             this.btnCreateNode.Click += new System.EventHandler(this.btnCreateNode_Click);
             // 
             // btnDeleteNode
             // 
             this.btnDeleteNode.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnDeleteNode.Location = new System.Drawing.Point(614, 156);
+            this.btnDeleteNode.Location = new System.Drawing.Point(732, 156);
             this.btnDeleteNode.Name = "btnDeleteNode";
             this.btnDeleteNode.Size = new System.Drawing.Size(167, 45);
             this.btnDeleteNode.TabIndex = 3;
-            this.btnDeleteNode.Text = "刪除節點";
+            this.btnDeleteNode.Text = "刪除節點並存檔";
             this.btnDeleteNode.UseVisualStyleBackColor = true;
             this.btnDeleteNode.Click += new System.EventHandler(this.btnDeleteNode_Click);
             // 
@@ -83,13 +83,13 @@
             this.lbXmlValue.ItemHeight = 12;
             this.lbXmlValue.Location = new System.Drawing.Point(12, 12);
             this.lbXmlValue.Name = "lbXmlValue";
-            this.lbXmlValue.Size = new System.Drawing.Size(596, 304);
+            this.lbXmlValue.Size = new System.Drawing.Size(714, 304);
             this.lbXmlValue.TabIndex = 4;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(614, 470);
+            this.button1.Location = new System.Drawing.Point(732, 601);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 45);
             this.button1.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 527);
+            this.ClientSize = new System.Drawing.Size(911, 658);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lbXmlValue);
             this.Controls.Add(this.btnDeleteNode);
