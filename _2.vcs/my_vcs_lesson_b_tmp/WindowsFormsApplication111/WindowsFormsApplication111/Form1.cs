@@ -174,24 +174,6 @@ namespace WindowsFormsApplication111
             return success;
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //.Net C# 檢查 Socket Port 是否正常
-
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //.Net C# 取得電腦名稱
-            //Windows 及 LINUX 都正常
-
-            richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
-            richTextBox1.Text += "電腦名稱 2 : " + System.Net.Dns.GetHostName() + "\n";
-            richTextBox1.Text += "電腦名稱 3 : " + System.Windows.Forms.SystemInformation.ComputerName + "\n";
-            richTextBox1.Text += "電腦名稱 4 : " + System.Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             //C# 將 BitmapData 複製到 byte[] Array 陣列
@@ -433,54 +415,6 @@ namespace WindowsFormsApplication111
             byte[] byt2 = System.Text.Encoding.GetEncoding("Big5").GetBytes(text2);
             richTextBox1.Text += System.Text.Encoding.GetEncoding("Big5").GetString(byt2) + "\n";
 
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "作業系統 : " + GetOS() + ", " + GetBit() + "\n";
-        }
-
-        private static string GetOS()
-        {
-            //定義系統版本
-            Version ver = Environment.OSVersion.Version;
-            //Major主版本號,Minor副版本號
-            if (ver.Major == 5 && ver.Minor == 0)
-            {
-                return "Windows 2000";
-            }
-            else if (ver.Major == 5 && ver.Minor == 1)
-            {
-                return "Windows XP";
-            }
-            else if (ver.Major == 5 && ver.Minor == 2)
-            {
-                return "Windows 2003";
-            }
-            else if (ver.Major == 6 && ver.Minor == 0)
-            {
-                return "Windows Vista";
-            }
-            else if (ver.Major == 6 && ver.Minor == 1)
-            {
-                return "Windows7";
-            }
-            else if (ver.Major == 6 && ver.Minor == 2)
-            {
-                return "Windows10";
-            }
-            else
-            {
-                return "未知";
-            }
-        }
-
-        private static string GetBit()
-        {
-            if (Environment.Is64BitOperatingSystem)
-                return "64bit";
-            else
-                return "32bit";
         }
 
 

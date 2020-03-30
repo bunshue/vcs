@@ -174,7 +174,16 @@ namespace vcs_test_all_04_Font
 
         private void button10_Click(object sender, EventArgs e)
         {
-            this.listBox1.Items.AddRange(FontFamily.Families);
+            //列出所有已安裝字型
+
+            //一樣
+            //this.listBox1.Items.AddRange(FontFamily.Families);
+
+            //一樣
+            foreach (FontFamily oneFontFamily in FontFamily.Families)
+            {
+                listBox1.Items.Add(oneFontFamily.Name);
+            }
         }
     }
 }
