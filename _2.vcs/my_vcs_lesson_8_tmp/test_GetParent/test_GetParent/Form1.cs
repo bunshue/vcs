@@ -20,35 +20,6 @@ namespace test_GetParent
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GetLogicalDrives();
-        }
-
-        // Print out all logical drives on the system.
-        void GetLogicalDrives()
-        {
-            try
-            {
-                string[] drives = System.IO.Directory.GetLogicalDrives();
-
-                foreach (string str in drives)
-                {
-                    System.Console.WriteLine(str);
-                    richTextBox1.Text += "drive : " + str + "\n";
-                }
-            }
-            catch (System.IO.IOException)
-            {
-                System.Console.WriteLine("An I/O error occurs.");
-            }
-            catch (System.Security.SecurityException)
-            {
-                System.Console.WriteLine("The caller does not have the " +
-                    "required permission.");
-            }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_case1\pic1.jpg";
@@ -74,15 +45,6 @@ namespace test_GetParent
                 this.Controls["label" + i.ToString()].Text = "這是label" + i.ToString();
 
             }
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            System.Globalization.CultureInfo cuinfo = new System.Globalization.CultureInfo("zh-TW");
-            cuinfo.DateTimeFormat.Calendar = cuinfo.OptionalCalendars[2];
-            //richTextBox1.Text += DateTime.Now.ToString("yyyy/MM/dd", cuinfo) + "\n";
-            MessageBox.Show(DateTime.Now.ToString("yyyy/MM/dd", cuinfo));
-
         }
 
         private void button9_Click(object sender, EventArgs e)

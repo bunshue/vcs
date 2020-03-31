@@ -25,7 +25,32 @@ namespace vcs_test_all_99_tmp1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //顯示所有邏輯磁碟機
+            GetLogicalDrives();
+        }
 
+        // Print out all logical drives on the system.
+        void GetLogicalDrives()
+        {
+            try
+            {
+                string[] drives = System.IO.Directory.GetLogicalDrives();
+
+                foreach (string str in drives)
+                {
+                    System.Console.WriteLine(str);
+                    richTextBox1.Text += "drive : " + str + "\n";
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                System.Console.WriteLine("An I/O error occurs.");
+            }
+            catch (System.Security.SecurityException)
+            {
+                System.Console.WriteLine("The caller does not have the " +
+                    "required permission.");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ReadWrite_EXCEL2.Properties
+namespace vcs_test_all_01_Richtextbox3.Properties
 {
 
 

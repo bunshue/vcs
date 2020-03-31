@@ -88,7 +88,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(772, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(443, 426);
+            this.richTextBox1.Size = new System.Drawing.Size(561, 426);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
                 "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。";
@@ -97,9 +97,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 588);
+            this.button2.Location = new System.Drawing.Point(1266, 429);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 42);
+            this.button2.Size = new System.Drawing.Size(67, 42);
             this.button2.TabIndex = 2;
             this.button2.Text = "clear";
             this.button2.UseVisualStyleBackColor = true;
@@ -211,8 +211,9 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(217, 42);
             this.button12.TabIndex = 13;
-            this.button12.Text = "xxx";
+            this.button12.Text = "格式化列印";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -317,8 +318,9 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(217, 42);
             this.button24.TabIndex = 24;
-            this.button24.Text = "xxx";
+            this.button24.Text = "顯示百分比";
             this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // button29
             // 
@@ -345,12 +347,13 @@
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(235, 540);
+            this.button21.Location = new System.Drawing.Point(12, 590);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(197, 42);
+            this.button21.Size = new System.Drawing.Size(217, 42);
             this.button21.TabIndex = 45;
-            this.button21.Text = "xxx";
+            this.button21.Text = "類似sprintf的寫法";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // textBox1
             // 
@@ -472,7 +475,7 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(772, 444);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(443, 188);
+            this.richTextBox2.Size = new System.Drawing.Size(561, 188);
             this.richTextBox2.TabIndex = 56;
             this.richTextBox2.Text = "";
             // 
@@ -514,7 +517,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.ClientSize = new System.Drawing.Size(1345, 644);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button33);
             this.Controls.Add(this.button32);
             this.Controls.Add(this.tb_search);
@@ -552,7 +556,6 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";

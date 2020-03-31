@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;    //for FILE
 using System.Xml;
 
 namespace vcs_ReadWrite_XML3
@@ -20,17 +21,25 @@ namespace vcs_ReadWrite_XML3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            XmlDocument document = new XmlDocument();
-            document.Load("C:\\______test_files\\_xml\\宅之力R.xml");
-            richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["server"].Value + "\t";
-            richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["account"].Value + "\t";
-            richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["password"].Value + "\t";
-            richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["delay"].Value + "\n";
-
+            string filename = "C:\\______test_files\\_xml\\宅之力R.xml";
+            if (File.Exists(filename))
+            {
+                XmlDocument document = new XmlDocument();
+                richTextBox1.Text += "開啟XML文件 : " + filename + "\n";
+                document.Load(filename);
+                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["server"].Value + "\t";
+                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["account"].Value + "\t";
+                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["password"].Value + "\t";
+                richTextBox1.Text += document.SelectSingleNode("/root/settinginfo").Attributes["delay"].Value + "\n";
+            }
+            else
+                richTextBox1.Text += "XML文件 : " + filename + " 不存在\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string filename = "C:\\______test_files\\_xml\\宅之力W.xml";
+
             XmlDocument document = new XmlDocument();
             document.AppendChild(document.CreateXmlDeclaration("1.0", "UTF-8", ""));//將宣告節點加入document中
             XmlNode xmlnode_root = document.CreateNode(XmlNodeType.Element, "root", "");
@@ -44,36 +53,16 @@ namespace vcs_ReadWrite_XML3
             xmlattribute_password.Value = textBox_Password.Text;
             xmlattribute_delay.Value = textBox_timerInterval.Text;
 
-
             xmlnode_settinginfo.Attributes.Append(xmlattribute_server);//將屬性加入xmlnode_settinginfo節點下
             xmlnode_settinginfo.Attributes.Append(xmlattribute_account);//將屬性加入xmlnode_settinginfo節點下
             xmlnode_settinginfo.Attributes.Append(xmlattribute_password);//將屬性加入xmlnode_settinginfo節點下
             xmlnode_settinginfo.Attributes.Append(xmlattribute_delay);//將屬性加入xmlnode_settinginfo節點下
             xmlnode_root.AppendChild(xmlnode_settinginfo);//將xmlnode_settinginfo節點加入xmlnode_root節點下
             document.AppendChild(xmlnode_root); //將xmlnode_root節點加入document中
-            document.Save("C:\\______test_files\\_xml\\宅之力W.xml");
 
-            richTextBox1.Text += "宅之力_xml寫入 OK\n\r";
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            XmlDocument XmlDoc = new XmlDocument();
-            XmlDoc.Load("C:\\______test_files\\_xml\\仙人的設計之路1.xml");
-            XmlNodeList NodeLists = XmlDoc.SelectNodes("Root/MyLevel1");
-
-            foreach (XmlNode OneNode in NodeLists)
-            {
-                //String StrAttrName = OneNode.Attributes.Name;
-                //String StrAttrValue = OneNode.Attributes[" MyAttr1 "].Value;
-                //String StrAttrValue = OneNode.InnerText;
-                richTextBox1.Text += OneNode.Attributes.Count.ToString() + "\t";
-                richTextBox1.Text += OneNode.Attributes[" MyAttr1 "].Value + "\t";
-                richTextBox1.Text += OneNode.InnerText + "\n";
-            }
-            richTextBox1.Text += "\n\n仙人的設計之路1 OK\n\n";
-
+            //保存結果
+            document.Save(filename);
+            richTextBox1.Text += "寫入XML文件 : " + filename + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -14,7 +14,14 @@ using Excel = Microsoft.Office.Interop.Excel;
 //using System.Runtime.InteropServices;
 
 /*
-參考/加入參考/COM/Microsoft Excel 12.0 Object Library
+順序
+1. 加入以上using
+2. 參考/加入參考/COM/Microsoft Office 12.0 Object Library
+                     Microsoft Excel 12.0 Object Library
+
+
+參考/加入參考/COM/Microsoft Excel 12.0 Object Library (用此即可)
+
 */
 
 namespace vcs_ReadWrite_EXCEL5
@@ -49,7 +56,7 @@ namespace vcs_ReadWrite_EXCEL5
                             }
             };
 
-            // Display the list in an Excel spreadsheet.
+            // Display the list in an Excel spreadsheet.    電子表格程序
             DisplayInExcel(bankAccounts);
 
 
@@ -74,10 +81,12 @@ namespace vcs_ReadWrite_EXCEL5
             // Earlier versions of C# require explicit casting.
             //Excel._Worksheet workSheet = (Excel.Worksheet)excelApp.ActiveSheet;
 
+            //設定標題
             // Establish column headings in cells A1 and B1.
             workSheet.Cells[1, "A"] = "ID Number";
             workSheet.Cells[1, "B"] = "Current Balance";
 
+            //加入資料
             var row = 1;
             foreach (var acct in accounts)
             {
@@ -86,19 +95,21 @@ namespace vcs_ReadWrite_EXCEL5
                 workSheet.Cells[row, "B"] = acct.Balance;
             }
 
+            //在 DisplayInExcel 結尾加入下列程式碼，以調整資料行寬度以容納內容。
             workSheet.Columns[1].AutoFit();
             workSheet.Columns[2].AutoFit();
 
+            //加入表格的其他格式
             // Call to AutoFormat in Visual C#. This statement replaces the 
             // two calls to AutoFit.
-            workSheet.Range["A1", "B3"].AutoFormat(
-                Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic2);
+            // Call to AutoFormat in Visual C# 2010.
+            workSheet.Range["A1", "B3"].AutoFormat(Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic2);
 
             // Put the spreadsheet contents on the clipboard. The Copy method has one
             // optional parameter for specifying a destination. Because no argument  
             // is sent, the destination is the Clipboard.
+            //Copy 方法會將工作表加入剪貼簿
             workSheet.Range["A1:B3"].Copy();
-
 
             String filename = Application.StartupPath + "\\csv_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
             workSheet.SaveAs(filename);

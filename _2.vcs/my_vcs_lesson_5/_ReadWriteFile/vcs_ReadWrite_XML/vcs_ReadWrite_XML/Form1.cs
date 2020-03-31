@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;    //for FILE
 using System.Xml;
 
 namespace vcs_ReadWrite_XML

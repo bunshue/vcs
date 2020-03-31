@@ -34,12 +34,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button11 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -95,19 +92,9 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(150, 101);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(93, 70);
-            this.button8.TabIndex = 8;
-            this.button8.Text = "類似sprintf的寫法";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(150, 187);
+            this.button9.Location = new System.Drawing.Point(150, 116);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(93, 70);
             this.button9.TabIndex = 9;
@@ -132,26 +119,6 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(150, 263);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 70);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "顯示百分比";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(12, 263);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(93, 70);
-            this.button10.TabIndex = 14;
-            this.button10.Text = "格式化列印";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(265, 23);
@@ -168,12 +135,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 627);
             this.Controls.Add(this.button12);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -193,12 +157,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button12;
     }
 }

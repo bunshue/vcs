@@ -289,17 +289,6 @@ namespace WindowsFormsApplication111
         }
 
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "類似sprintf的寫法\n";
-            int number = 123;
-            string name = "david";
-            string information = string.Empty;
-            information = string.Format("ID = {0}, Name = {1}", number.ToString(), name);
-            richTextBox1.Text += "information1 : " + information + "\n";
-            richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             //取得上一層資料夾的名稱
@@ -342,67 +331,6 @@ namespace WindowsFormsApplication111
             buttonGraphics.Dispose();
             myPen.Dispose();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //顯示百分比
-            //要using System.Globalization; //for CultureInfo
-            int a = 2;
-            int b = 3;
-            richTextBox1.Text += "顯示一位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P1", CultureInfo.InvariantCulture) + "\n";
-            richTextBox1.Text += "顯示兩位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P", CultureInfo.InvariantCulture) + "\n";
-            richTextBox1.Text += "顯示十位小數的百分比 :\t\t" + ((double)a / (double)b).ToString("P10", CultureInfo.InvariantCulture) + "\n";
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            int a, b, c, d, ee, f;
-
-            a = 123456;
-            b = 2006;
-            c = 3;
-            d = 11;
-            ee = 1234567890;
-            f = 2468;
-
-            richTextBox1.Text += "數字保留10位, 向左靠齊\n";
-            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
-            richTextBox1.Text += "數字保留10位, 向右靠齊\n";
-            richTextBox1.Text += string.Format("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", a.ToString(), b.ToString(), c.ToString(), d.ToString(), ee.ToString(), f.ToString()) + "\n";
-            richTextBox1.Text += "字串保留10位, 向左靠齊\n";
-            richTextBox1.Text += string.Format("{0,-10}{1,-10}{2,-10}{3,-10}{4,-10}{5,-10}", "David", "Mary", "Doraemon", "Cat", "Dog", "Lion") + "\n";
-
-            Random rnd = new Random();
-            // Create new thread and display three random numbers.
-            richTextBox1.Text += "Some currency values:\n";
-            for (int ctr = 0; ctr <= 3; ctr++)
-            {
-                richTextBox1.Text += string.Format("{0:C2}", rnd.NextDouble() * 100) + "\n";
-            }
-
-            double aa = 123456789012345.456789;
-            richTextBox1.Text += aa.ToString("N0", CultureInfo.InvariantCulture) + "\n";
-
-            int bb = 1234567890;
-            richTextBox1.Text += bb.ToString("N0", CultureInfo.InvariantCulture) + "\n";
-
-
-            double used = 197594525696;
-
-            double used2 = 184.02;
-
-            //已使用空間 :	197,593,485,312 個位元組	184.02 GB
-            richTextBox1.Text += string.Format("{0,-15}{1,20}{2,-10}{3,-10}",
-                "已使用空間 :", used.ToString("N0", CultureInfo.InvariantCulture), " 個位元組", used2.ToString() + " GB") + "\n";
-
-
-
-            //richTextBox1.Text += "已使用空間 :\t" + (drive.TotalSize - drive.AvailableFreeSpace).ToString("N0", CultureInfo.InvariantCulture) + " 個位元組\t" + ByteConversionGBMBKB(Convert.ToInt64(drive.TotalSize - drive.AvailableFreeSpace)) + "\n";
-
-
-
-        }
-
 
         private void button12_Click(object sender, EventArgs e)
         {
