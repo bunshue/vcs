@@ -478,6 +478,66 @@ namespace vcs_test_all_03_Syntax
 
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //Dictionary的用法
+            Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
+            { "mouse", "Mickey" },
+            { "bull", "Benny" },
+            { "tiger", "Eric" },
+            { "rabbit", "Cony" }
+            };
+            string animal_type;
+            string animal_name;
+
+            animal_type = "mouse";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
+
+            animal_type = "bull";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
+
+            animal_type = "tiger";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
+
+            animal_type = "rabbit";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
+
+            animal_type = "dragon";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
+
+
+        }
+
 
     }
 }

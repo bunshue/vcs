@@ -234,13 +234,14 @@
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button15.Location = new System.Drawing.Point(235, 108);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(154, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "xxx";
+            this.button15.Text = "Dictionary字典用法";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 

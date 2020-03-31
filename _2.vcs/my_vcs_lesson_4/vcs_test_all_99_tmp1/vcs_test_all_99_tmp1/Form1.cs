@@ -170,6 +170,26 @@ namespace vcs_test_all_99_tmp1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //取得上一層資料夾的名稱
+
+            richTextBox1.Text += "原目錄 : " + Application.StartupPath + "\n";
+
+            string str = Application.StartupPath;
+            string[] split_str = new string[20];
+            split_str = str.Split('\\'); //以\當分隔符號
+            //richTextBox1.Text += "\n";
+            //richTextBox1.Text += "共有 : " + split_str.Length.ToString() + " 個項目\n";
+
+            richTextBox1.Text += "上一層資料夾的名稱 : " + split_str[split_str.Length - 1] + "\n";
+
+            /*
+            int i = 0;
+            foreach (string tmp in split_str)
+            {
+                i++;
+                richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
+            }
+            */
 
         }
 
@@ -466,6 +486,34 @@ namespace vcs_test_all_99_tmp1
 
         private void button41_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //先畫 button10
+            Graphics buttonGraphics = button10.CreateGraphics();
+            Pen myPen = new Pen(Color.ForestGreen, 4.0F);
+            myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+
+            Rectangle theRectangle = button10.ClientRectangle;
+            theRectangle.Inflate(-2, -2);
+            buttonGraphics.DrawRectangle(myPen, theRectangle);
+            buttonGraphics.DrawRectangle(myPen, 10, 10, button10.Width - 20, button10.Height - 20);
+            buttonGraphics.Dispose();
+            myPen.Dispose();
+
+            //再畫 richTextBox1
+            buttonGraphics = richTextBox1.CreateGraphics();
+            myPen = new Pen(Color.ForestGreen, 4.0F);
+            myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+
+            theRectangle = richTextBox1.ClientRectangle;
+            theRectangle.Inflate(-2, -2);
+            buttonGraphics.DrawRectangle(myPen, theRectangle);
+            buttonGraphics.DrawRectangle(myPen, 10, 10, richTextBox1.Width - 20, richTextBox1.Height - 20);
+            buttonGraphics.Dispose();
+            myPen.Dispose();
 
         }
 

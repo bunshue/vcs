@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_TextSearch
+namespace vcs_test_all_01_Richtextbox4_TextSearch
 {
     static class Program
     {

@@ -45,7 +45,7 @@ namespace vcs_tmp_all
             int cnt = 0;
             richTextBox1.Text += Directory.GetCurrentDirectory() + "\n";
 
-            DirectoryInfo dir = new DirectoryInfo("c:\\______test_vcs");
+            DirectoryInfo dir = new DirectoryInfo("c:\\______test_files");
             richTextBox1.Text += "addr = " + dir.ToString() + "\n";
 
             DirectoryInfo[] dddd = dir.GetDirectories();
@@ -67,10 +67,6 @@ namespace vcs_tmp_all
             }
             richTextBox1.Text += "\n";
 
-            DirectoryInfo dir2 = new DirectoryInfo("c:\\______test_vcs\\______test_vcszzzzzznew");
-            richTextBox1.Text += "addr2 = " + dir2.ToString() + "\n";
-            richTextBox1.Text += "create" + dir2 + "\n";
-            dir2.Create();
 
         }
 
@@ -121,5 +117,7 @@ namespace vcs_tmp_all
             File.WriteAllBytes(@"C:\______test_vcs\\my_bin_file.bin", aaaaa);
             richTextBox2.Text += "已存檔C:\\______test_vcs\\my_bin_file.bin\n";
         }
+
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_TextSearch", "vcs_TextSearch\vcs_TextSearch.csproj", "{CDC9D094-E06B-4D4A-B0EB-5B66373DB425}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_01_Richtextbox4_TextSearch", "vcs_test_all_01_Richtextbox4_TextSearch\vcs_test_all_01_Richtextbox4_TextSearch.csproj", "{CDC9D094-E06B-4D4A-B0EB-5B66373DB425}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

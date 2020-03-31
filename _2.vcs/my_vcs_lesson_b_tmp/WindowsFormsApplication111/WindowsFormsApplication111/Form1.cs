@@ -80,67 +80,6 @@ namespace WindowsFormsApplication111
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //Dictionary的用法
-
-            Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
-            { "mouse", "Mickey" },
-            { "bull", "Benny" },
-            { "tiger", "Eric" },
-            { "rabbit", "Cony" }
-            };
-            string animal_type;
-            string animal_name;
-
-            animal_type = "mouse";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "bull";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "tiger";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "rabbit";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "dragon";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-
-
-        }
 
         public class MyWebClient : WebClient
         {
@@ -289,61 +228,6 @@ namespace WindowsFormsApplication111
         }
 
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //取得上一層資料夾的名稱
-
-            richTextBox1.Text += "原目錄 : " + Application.StartupPath + "\n";
-
-            string str = Application.StartupPath;
-            string[] split_str = new string[20];
-            split_str = str.Split('\\'); //以\當分隔符號
-            //richTextBox1.Text += "\n";
-            //richTextBox1.Text += "共有 : " + split_str.Length.ToString() + " 個項目\n";
-
-            richTextBox1.Text += "上一層資料夾的名稱 : " + split_str[split_str.Length - 1] + "\n";
-
-            /*
-            int i = 0;
-            foreach (string tmp in split_str)
-            {
-                i++;
-                richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
-            }
-            */
-
-
-
-
-        }
-
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            Graphics buttonGraphics = button11.CreateGraphics();
-            Pen myPen = new Pen(Color.ForestGreen, 4.0F);
-            myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-
-            Rectangle theRectangle = button11.ClientRectangle;
-            theRectangle.Inflate(-2, -2);
-            buttonGraphics.DrawRectangle(myPen, theRectangle);
-            buttonGraphics.DrawRectangle(myPen, 10, 10, button11.Width - 20, button11.Height - 20);
-            buttonGraphics.Dispose();
-            myPen.Dispose();
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            string text = "測試一下";
-            byte[] byt = System.Text.UnicodeEncoding.Unicode.GetBytes(text);
-            richTextBox1.Text += System.Text.UnicodeEncoding.Unicode.GetString(byt) + "\n";
-
-            //如果要自行指定BIG5編碼的話:
-            string text2 = "測試一下";
-            byte[] byt2 = System.Text.Encoding.GetEncoding("Big5").GetBytes(text2);
-            richTextBox1.Text += System.Text.Encoding.GetEncoding("Big5").GetString(byt2) + "\n";
-
-        }
 
 
     }

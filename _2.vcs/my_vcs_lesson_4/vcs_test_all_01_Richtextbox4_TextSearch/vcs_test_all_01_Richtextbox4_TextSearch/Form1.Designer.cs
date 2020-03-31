@@ -1,4 +1,4 @@
-﻿namespace vcs_TextSearch
+﻿namespace vcs_test_all_01_Richtextbox4_TextSearch
 {
     partial class Form1
     {
