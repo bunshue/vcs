@@ -71,15 +71,23 @@ namespace test_dock
             RichTextBox richTextBox1 = new RichTextBox();
             richTextBox1.Dock = DockStyle.Fill;
 
-            richTextBox1.LoadFile("C:\\______test_files\\VS2013Express.rtf");
-            richTextBox1.Find("Text", RichTextBoxFinds.MatchCase);
+            try
+            {
+                richTextBox1.LoadFile("C:\\______test_files\\VS2013Express.rtf");
+                richTextBox1.Find("Text", RichTextBoxFinds.MatchCase);
 
-            richTextBox1.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
-            richTextBox1.SelectionColor = Color.Red;
+                richTextBox1.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
+                richTextBox1.SelectionColor = Color.Red;
 
-                                    richTextBox1.SaveFile("C:\\______test_files\\MyDocument.rtf", RichTextBoxStreamType.RichText);
+                richTextBox1.SaveFile("C:\\______test_files\\MyDocument.rtf", RichTextBoxStreamType.RichText);
 
-            this.Controls.Add(richTextBox1);
+                this.Controls.Add(richTextBox1);
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
+
         }
 
 

@@ -335,7 +335,14 @@ namespace vcs_test_all_01_Richtextbox
         private void button29_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-            richTextBox1.LoadFile("C:\\______test_files\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf");
+            try
+            {
+                richTextBox1.LoadFile("C:\\______test_files\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("File not found!");
+            }
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -421,6 +428,69 @@ namespace vcs_test_all_01_Richtextbox
             information = string.Format("ID = {0}, Name = {1}", number.ToString(), name);
             richTextBox1.Text += "information1 : " + information + "\n";
             richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            //選擇設置粗體或取消
+            Font oldFont = this.richTextBox1.SelectionFont;
+            Font newFont;
+            if (oldFont.Bold)
+                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Bold);
+            else
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Bold);
+            this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //選擇設置斜體或取消
+            Font oldFont = this.richTextBox1.SelectionFont;
+            Font newFont;
+            if (oldFont.Italic)
+                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Italic);
+            else
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Italic);
+            this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //選擇設置底線或取消
+            Font oldFont = this.richTextBox1.SelectionFont;
+            Font newFont;
+            if (oldFont.Underline)
+                newFont = new Font(oldFont, oldFont.Style & ~FontStyle.Underline);
+            else
+                newFont = new Font(oldFont, oldFont.Style | FontStyle.Underline);
+            this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Focus();
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            //選擇設置置中或取消
+            if (this.richTextBox1.SelectionAlignment == HorizontalAlignment.Center)
+                this.richTextBox1.SelectionAlignment = HorizontalAlignment.Left;
+            else
+                this.richTextBox1.SelectionAlignment = HorizontalAlignment.Center;
+            this.richTextBox1.Focus();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //float oldSize = richTextBox1.SelectionFont.Size;
+            float oldSize = richTextBox1.Font.Size;
+            float newSize = oldSize + 1;
+            FontFamily currentFontFamily;
+            Font newFont;
+            currentFontFamily = this.richTextBox1.SelectionFont.FontFamily;
+            newFont = new Font(currentFontFamily, newSize);
+            //this.richTextBox1.SelectionFont = newFont;
+            this.richTextBox1.Font = newFont;
 
         }
 

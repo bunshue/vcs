@@ -40,7 +40,17 @@ namespace vcs_AnalysisArticle
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            /*
+            try
+            {
+                richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
+            */
+
             string y = File.ReadAllText("novel.txt", System.Text.Encoding.Default);
             //richTextBox1.Text += "檔案內容 : " + y + "\n";
             richTextBox1.Text += "總長度：" + y.Length.ToString() + "\n";
@@ -300,7 +310,7 @@ X   FB00～FFFDh：文字表現形式區，收容組合拉丁文字、希伯來�
         private void button5_Click(object sender, EventArgs e)
         {
             int i;
-            int j = 0;
+            //int j = 0;
             string aaa = string.Empty;
             for (i = 0x4E2D; i < 0x4FFF; i++)
             {

@@ -267,6 +267,8 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.rb_NXN = new System.Windows.Forms.RadioButton();
+            this.lb_class = new System.Windows.Forms.Label();
             this.cb_air_ng = new System.Windows.Forms.CheckBox();
             this.cb_Gamma = new System.Windows.Forms.CheckBox();
             this.cb_Contrast_Brightness_Gamma = new System.Windows.Forms.CheckBox();
@@ -349,14 +351,12 @@
             this.cb_show_progress = new System.Windows.Forms.CheckBox();
             this.bt_find_brightness = new System.Windows.Forms.Button();
             this.numericUpDown_find_brightness_h = new System.Windows.Forms.NumericUpDown();
-            this.rb_NXN = new System.Windows.Forms.RadioButton();
             this.bt_awb_break = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
             this.rb_3X3 = new System.Windows.Forms.RadioButton();
             this.tb_wait_sn_data = new System.Windows.Forms.TextBox();
             this.numericUpDown_brightness = new System.Windows.Forms.NumericUpDown();
-            this.lb_class = new System.Windows.Forms.Label();
             this.numericUpDown_sharpness = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_denoise = new System.Windows.Forms.NumericUpDown();
             this.comboBox_sharpness = new System.Windows.Forms.ComboBox();
@@ -616,6 +616,12 @@
             this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage9 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage1c = new System.Windows.Forms.Timer(this.components);
+            this.groupBox_brightness = new System.Windows.Forms.GroupBox();
+            this.rb_brightness_color_2 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_color_1 = new System.Windows.Forms.RadioButton();
+            this.groupBox_gridlinecolor = new System.Windows.Forms.GroupBox();
+            this.rb_gridlinecolor_black = new System.Windows.Forms.RadioButton();
+            this.rb_gridlinecolor_white = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -702,6 +708,8 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
+            this.groupBox_brightness.SuspendLayout();
+            this.groupBox_gridlinecolor.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -3275,6 +3283,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.groupBox_gridlinecolor);
             this.tp_USB.Controls.Add(this.rb_NXN);
             this.tp_USB.Controls.Add(this.lb_class);
             this.tp_USB.Controls.Add(this.cb_air_ng);
@@ -3449,6 +3458,28 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // rb_NXN
+            // 
+            this.rb_NXN.AutoSize = true;
+            this.rb_NXN.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_NXN.Location = new System.Drawing.Point(160, 486);
+            this.rb_NXN.Name = "rb_NXN";
+            this.rb_NXN.Size = new System.Drawing.Size(70, 17);
+            this.rb_NXN.TabIndex = 188;
+            this.rb_NXN.Text = "160X160";
+            this.rb_NXN.UseVisualStyleBackColor = true;
+            // 
+            // lb_class
+            // 
+            this.lb_class.AutoSize = true;
+            this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_class.ForeColor = System.Drawing.Color.Red;
+            this.lb_class.Location = new System.Drawing.Point(669, 327);
+            this.lb_class.Name = "lb_class";
+            this.lb_class.Size = new System.Drawing.Size(286, 111);
+            this.lb_class.TabIndex = 181;
+            this.lb_class.Text = "class";
             // 
             // cb_air_ng
             // 
@@ -4464,17 +4495,6 @@
             0});
             this.numericUpDown_find_brightness_h.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_h_ValueChanged);
             // 
-            // rb_NXN
-            // 
-            this.rb_NXN.AutoSize = true;
-            this.rb_NXN.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_NXN.Location = new System.Drawing.Point(160, 486);
-            this.rb_NXN.Name = "rb_NXN";
-            this.rb_NXN.Size = new System.Drawing.Size(70, 17);
-            this.rb_NXN.TabIndex = 188;
-            this.rb_NXN.Text = "160X160";
-            this.rb_NXN.UseVisualStyleBackColor = true;
-            // 
             // bt_awb_break
             // 
             this.bt_awb_break.BackColor = System.Drawing.SystemColors.Control;
@@ -4551,17 +4571,6 @@
             0,
             0,
             0});
-            // 
-            // lb_class
-            // 
-            this.lb_class.AutoSize = true;
-            this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_class.ForeColor = System.Drawing.Color.Red;
-            this.lb_class.Location = new System.Drawing.Point(669, 327);
-            this.lb_class.Name = "lb_class";
-            this.lb_class.Size = new System.Drawing.Size(286, 111);
-            this.lb_class.TabIndex = 181;
-            this.lb_class.Text = "class";
             // 
             // numericUpDown_sharpness
             // 
@@ -7531,12 +7540,82 @@
             this.timer_stage1c.Interval = 300;
             this.timer_stage1c.Tick += new System.EventHandler(this.timer_stage1c_Tick);
             // 
+            // groupBox_brightness
+            // 
+            this.groupBox_brightness.Controls.Add(this.rb_brightness_color_2);
+            this.groupBox_brightness.Controls.Add(this.rb_brightness_color_1);
+            this.groupBox_brightness.Location = new System.Drawing.Point(1006, 429);
+            this.groupBox_brightness.Name = "groupBox_brightness";
+            this.groupBox_brightness.Size = new System.Drawing.Size(67, 100);
+            this.groupBox_brightness.TabIndex = 138;
+            this.groupBox_brightness.TabStop = false;
+            this.groupBox_brightness.Text = "亮度";
+            // 
+            // rb_brightness_color_2
+            // 
+            this.rb_brightness_color_2.AutoSize = true;
+            this.rb_brightness_color_2.Checked = true;
+            this.rb_brightness_color_2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_brightness_color_2.Location = new System.Drawing.Point(6, 62);
+            this.rb_brightness_color_2.Name = "rb_brightness_color_2";
+            this.rb_brightness_color_2.Size = new System.Drawing.Size(51, 17);
+            this.rb_brightness_color_2.TabIndex = 226;
+            this.rb_brightness_color_2.TabStop = true;
+            this.rb_brightness_color_2.Text = "黃光";
+            this.rb_brightness_color_2.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_color_1
+            // 
+            this.rb_brightness_color_1.AutoSize = true;
+            this.rb_brightness_color_1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_brightness_color_1.Location = new System.Drawing.Point(6, 29);
+            this.rb_brightness_color_1.Name = "rb_brightness_color_1";
+            this.rb_brightness_color_1.Size = new System.Drawing.Size(51, 17);
+            this.rb_brightness_color_1.TabIndex = 226;
+            this.rb_brightness_color_1.Text = "白光";
+            this.rb_brightness_color_1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_gridlinecolor
+            // 
+            this.groupBox_gridlinecolor.Controls.Add(this.rb_gridlinecolor_black);
+            this.groupBox_gridlinecolor.Controls.Add(this.rb_gridlinecolor_white);
+            this.groupBox_gridlinecolor.Location = new System.Drawing.Point(766, 327);
+            this.groupBox_gridlinecolor.Name = "groupBox_gridlinecolor";
+            this.groupBox_gridlinecolor.Size = new System.Drawing.Size(116, 40);
+            this.groupBox_gridlinecolor.TabIndex = 227;
+            this.groupBox_gridlinecolor.TabStop = false;
+            // 
+            // rb_gridlinecolor_black
+            // 
+            this.rb_gridlinecolor_black.AutoSize = true;
+            this.rb_gridlinecolor_black.Checked = true;
+            this.rb_gridlinecolor_black.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_gridlinecolor_black.Location = new System.Drawing.Point(59, 18);
+            this.rb_gridlinecolor_black.Name = "rb_gridlinecolor_black";
+            this.rb_gridlinecolor_black.Size = new System.Drawing.Size(51, 17);
+            this.rb_gridlinecolor_black.TabIndex = 226;
+            this.rb_gridlinecolor_black.TabStop = true;
+            this.rb_gridlinecolor_black.Text = "黑線";
+            this.rb_gridlinecolor_black.UseVisualStyleBackColor = true;
+            // 
+            // rb_gridlinecolor_white
+            // 
+            this.rb_gridlinecolor_white.AutoSize = true;
+            this.rb_gridlinecolor_white.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_gridlinecolor_white.Location = new System.Drawing.Point(6, 18);
+            this.rb_gridlinecolor_white.Name = "rb_gridlinecolor_white";
+            this.rb_gridlinecolor_white.Size = new System.Drawing.Size(51, 17);
+            this.rb_gridlinecolor_white.TabIndex = 226;
+            this.rb_gridlinecolor_white.Text = "白線";
+            this.rb_gridlinecolor_white.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1370, 704);
+            this.Controls.Add(this.groupBox_brightness);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.bt_min);
             this.Controls.Add(this.button9);
@@ -7677,6 +7756,10 @@
             this.statusStrip1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
+            this.groupBox_brightness.ResumeLayout(false);
+            this.groupBox_brightness.PerformLayout();
+            this.groupBox_gridlinecolor.ResumeLayout(false);
+            this.groupBox_gridlinecolor.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8270,6 +8353,12 @@
         private System.Windows.Forms.Button button77;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.CheckBox cb_air_ng;
+        private System.Windows.Forms.GroupBox groupBox_brightness;
+        private System.Windows.Forms.RadioButton rb_brightness_color_2;
+        private System.Windows.Forms.RadioButton rb_brightness_color_1;
+        private System.Windows.Forms.GroupBox groupBox_gridlinecolor;
+        private System.Windows.Forms.RadioButton rb_gridlinecolor_black;
+        private System.Windows.Forms.RadioButton rb_gridlinecolor_white;
     }
 }
 

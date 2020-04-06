@@ -45,7 +45,14 @@ namespace vcs_ReadWrite_TXT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            try
+            {
+                richTextBox1.LoadFile("pipa.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

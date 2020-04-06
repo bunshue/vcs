@@ -1398,7 +1398,14 @@ namespace vcs_test_all_06_DirectoryFile
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
                 richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
 
-                richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                try
+                {
+                    richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                }
+                catch (System.IO.FileNotFoundException)
+                {
+                    MessageBox.Show("找不到檔案");
+                }
             }
             else
             {

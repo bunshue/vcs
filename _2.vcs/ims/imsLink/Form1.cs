@@ -20,7 +20,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        String compile_time = "1/15/2020 11:59上午";
+        String compile_time = "4/6/2020 05:42下午";
         String software_version = "A04";
 
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
@@ -2675,9 +2675,12 @@ namespace imsLink
 
             cb_auto_search.Location = new Point(500, 330);
             cb_auto_search.Checked = true;
+            cb_auto_search.Enabled = false;
 
             cb_only_search.Location = new Point(530, 465);
             cb_only_search.Checked = false;
+
+            groupBox_brightness.Enabled = false;
 
             //button
             x_st = 140;
@@ -3131,6 +3134,10 @@ namespace imsLink
 
                 lb_th_h.Location = new Point(numericUpDown_find_brightness_h.Location.X - 42, numericUpDown_find_brightness_h.Location.Y + 7);
                 lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
+
+                groupBox_brightness.Location = new Point(bt_find_brightness.Location.X + 25, bt_find_brightness.Location.Y - 30);
+
+
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
@@ -3191,6 +3198,7 @@ namespace imsLink
                 groupBox5.Visible = true;
                 cb_enable_awb.Visible = true;
                 bt_LED.Visible = true;
+                groupBox_brightness.Visible = true;
             }
             else
             {
@@ -3200,6 +3208,7 @@ namespace imsLink
                 groupBox5.Visible = false;
                 cb_enable_awb.Visible = false;
                 bt_LED.Visible = false;
+                groupBox_brightness.Visible = false;
             }
 
             if (flag_operation_mode <= MODE_RELEASE_STAGE3)
@@ -3214,7 +3223,12 @@ namespace imsLink
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 button19.Location = new Point(button19.Location.X - 35, button19.Location.Y);
+                //groupBox_gridlinecolor.Location = new Point(rb_NXN.Location.X - 100, rb_NXN.Location.Y + 15);
+                groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 110, cb_show_grid.Location.Y - 20);
             }
+            else
+                groupBox_gridlinecolor.Visible = false;
+
 
             if (flag_operation_mode == MODE_RELEASE_STAGE3)
             {
@@ -3475,6 +3489,7 @@ namespace imsLink
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
                 rb_NXN.Visible = false;
+                groupBox_gridlinecolor.Visible = false;
             }
 
             show_item_location();
@@ -5269,8 +5284,16 @@ namespace imsLink
                 {
                     for (i = 1; i <= (j - 1); i++)
                     {
-                        gg.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
-                        gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
+                        if (rb_gridlinecolor_white.Checked == true)
+                        {
+                            gg.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
+                            gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
+                        }
+                        else
+                        {
+                            gg.DrawLine(new Pen(Color.Black, 1), w * i / j, 0, w * i / j, h);
+                            gg.DrawLine(new Pen(Color.Black, 1), 0, h * i / j, w, h * i / j);
+                        }
                     }
                 }
             }
@@ -11824,6 +11847,7 @@ namespace imsLink
                 rb_4X4.Visible = true;
                 rb_5X5.Visible = true;
                 rb_NXN.Visible = true;
+                groupBox_gridlinecolor.Visible = true;
             }
             else
             {
@@ -11831,6 +11855,7 @@ namespace imsLink
                 rb_4X4.Visible = false;
                 rb_5X5.Visible = false;
                 rb_NXN.Visible = false;
+                groupBox_gridlinecolor.Visible = false;
             }
         }
 
@@ -17404,14 +17429,25 @@ namespace imsLink
             }
             else               //same
             {
-                SendData = 0x42;
+                if (rb_brightness_color_1.Checked == true)
+                    richTextBox1.Text += "使用白光 0x42 0x38\n";
+                else
+                    richTextBox1.Text += "使用黃光 40 25\n";
+                if (rb_brightness_color_1.Checked == true)
+                    SendData = 0x42;
+                else
+                    SendData = 40;
                 DongleAddr_h = 0x3A;
                 DongleAddr_l = 0x03;
                 Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
 
                 delay(20);
 
-                SendData = 0x38;
+                if (rb_brightness_color_1.Checked == true)
+                    SendData = 0x38;
+                else
+                    SendData = 25;
+
                 DongleAddr_h = 0x3A;
                 DongleAddr_l = 0x04;
                 Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, SendData);
