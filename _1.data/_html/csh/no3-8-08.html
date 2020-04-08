@@ -1,0 +1,277 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 3-8-8 nice [ +n | -n ] 指令</title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-3.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1">
+            <p class="akh1">3-8-8 nice [ +n | -n ] 指令</p>
+            <blockquote> 
+              <p><span class="akb1">UNIX
+作業系統是一個多人多工的分時（time-sharing）作業系統。所有人的所執行的所有程式均可在系統中同時運作。每一個執行的程式對系統而言都會給
+於相對映到處理程序（process）。系統以程序定序（process
+scheduling）的管理方式來安排這些程序，讓它們依序、循環地進到核心程式中執行。這其中的程序運作實際上是非常複雜的，但我們只需要注意到一個
+觀念，就是程序定序中有設定優先權的處理方式。而內建指令 nice 的作用便是能讓使用者透過它，去調變程序優先權（process
+priority）中關於計算處理的一項參數。借以控制該程序在同一時間內所能享用的CPU資源的多寡。 nice
+內建指令用數字“-20”到“+19”來代表程序優先權的高低。數字“-20”優先權最高，而數字“+19”優先權則是最低。一般使用者所能調變的範圍是
+“0”到“+19”，固定的設定值是“0”，也就是一般使用者所能得到的最高程序優先權。而 super-user
+所能調變就比一般的使用者為大，範圍是“-20”到“+19”（這便是我們稱他為 super-user 的原因之一）。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">當我們使用指令 ps -l 來顯示系統的處理程序時， NI 欄為所代表的數字就是程序優先權的數值。我們先來看一般指令的程序優先權情況，如下：</span></p>
+              <dl> 
+                <dt><span class="akb2">3 % ps -l</span></dt>
+                <dt><span class="akb2">F UID PID PPID CP PRI NI SZ RSS WCHAN STAT 
+                  TT TIME COMMAND</span></dt>
+                <dt><span class="akb2">20488201 101 3398 3397 0 15 0 56 376 kernelma 
+                  S p0 0:00 -csh (csh)</span></dt>
+                <dt><span class="akb2">20000001 101 3402 3398 9 27 0 216 456 R 
+                  p0 0:00 ps -l</span></dt>
+              </dl>
+              <p><span class="akb1">我們可清楚地看觀察到 NI 欄的數字均為“0”。現在讓我們降低程序優先權來執行指令 
+                ps -l 看看結果：</span></p>
+              <dl> 
+                <dt><span class="akb2">5 % nice +10 ps -l</span></dt>
+                <dt><span class="akb2">F UID PID PPID CP PRI NI SZ RSS WCHAN STAT 
+                  TT TIME COMMAND</span></dt>
+                <dt><span class="akb2">20488201 101 3398 3397 1 15 0 56 216 kernelma 
+                  S p0 0:00 -csh (csh)</span></dt>
+                <dt><span class="akb2">20000001 101 3412 3398 18 49 10 216 452 
+                  R N p0 0:00 ps -l</span></dt>
+              </dl>
+              <p><span class="akb1">看 NI 欄的程序優先權為“10”，正如我們所下的指令效果。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">能
+妥善地運用調整指令的程序優先權，將有助於提昇系統的使用效率。這點在一個忙的不得了的機器上，善用指令 nice
+整體的工作效率將會有所改善。譬如你 Open Windows
+的環境下，一面在執行比較高優先的工作的同時，一面在操作一般的系統指令，如果你能適當地將次要的系統指令操作降低程序優先權，就會縮短高優先的工作時
+間。比較方便的做法是以 nice 指令來執行一個較低優先的 subshell 或者是開一個較低優先 xterm，則你在這個 subshell
+或 xterm 之下所操作的任何指令，都會得到較低優先的程序處理權。</span></p>
+              <p><span class="akb1">C shell的內建指令 nice 固定的程序優先權數值為“4”。如下所示：</span></p>
+              <dl> 
+                <dt><span class="akb2">7 % nice ps -l</span></dt>
+                <dt><span class="akb2">F UID PID PPID CP PRI NI SZ RSS WCHAN STAT 
+                  TT TIME COMMAND</span></dt>
+                <dt><span class="akb2">20488201 101 3609 3608 0 15 0 56 228 kernelma 
+                  S p2 0:00 -csh (csh)</span></dt>
+                <dt><span class="akb2">20000001 101 3619 3609 19 37 4 216 452 
+                  R N p2 0:00 ps -l</span></dt>
+              </dl>
+              <p><span class="akb1">當你運用 nice 指令時請注意一點，在 nice 指令不接受別名所設定的“指令”，也就是說要用 
+                nice 來下指令時，別名的功能將失去它的效用。請小心使用之。另外與 nice 指令相關的是 renice 指令。 nice 
+                指令是要在下指令時用的，而 renice 指令則是當你下完指令後，才想到要更改程序優先權時使用。一般使用者要使用 renice 
+                指令只能將程序優先權降低，且一但降低後便不能再將它提高。而 super-user 則不受這些限制，並可針對使用者會或者是某個群體程序（process 
+                group）或者是某個程序做程序優先權的提高與降低。如果有非常重要的工作急著要提早執行完畢，你可以去求求 super-user 
+                用 renice 來加速一下，你便可知道“電腦特權階級”的滋味！</span></p>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no3-8-07.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no3-8-09.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

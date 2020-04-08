@@ -32,7 +32,27 @@ namespace 父子視窗傳值問題
         {
             // point the Form2's owner to Form1
             Form1 parentForm = (Form1)this.Owner;
-            parentForm.MsgFromChild = "Msg from child-form success";
+            parentForm.MsgFromChild = "按了按鍵1";
+            //this.close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Application.Exit();
+            //this.Close();
+            this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // point the Form2's owner to Form1
+            Form1 parentForm = (Form1)this.Owner;
+            parentForm.MsgFromChild = "按了按鍵1";
             //this.close();
         }
     }

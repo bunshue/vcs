@@ -1,0 +1,855 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+	<HEAD>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf8">
+		<META NAME="Generator" CONTENT="PhotoImpact">
+	
+<link href="word.css" rel="stylesheet" type="text/css">
+<title>Perl Book</title></HEAD>
+	
+<BODY>
+<table width="342" height="3020" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align=center><img src="index_2.jpg" width="743" height="162"></td>
+  </tr>
+  <tr><td>
+  </td></tr>
+  <tr> 
+    <td height="2831" background="index_4.jpg"> 
+      <blockquote>
+	  附錄B：常用的五十個CPAN模組<BR/>
+<BR/>
+這個附錄的內容原來是來自於Autrijus Tang(唐宗漢)的「CPAN模組數來寶」，正如我們說的，使用Perl而不使用CPAN實在是無法感覺到那種驚人的集結力量。可是CPAN模組數量之多，要能從中得到一個適合自己的模組，也有相當的難度。因此能夠以一般最常使用的模組來作為熟悉CPAN的開始，確實是美事一樁。而這份投影片曾經在許多地方發表過，包括台北的「Perl/PHP/Python Party」、德國的「German Perl Workshop」，以及美國的「Open Source Conference 2003」發表過，也都獲得很好的迴響。所以我就決定把這一份投影片改寫為這本書的附錄。<BR/>
+<BR/>
+CPANPLUS<BR/>
+<BR/>
+我們前面提過好幾次關於CPANPLUS，因為這個模組很可能在接下來的Perl版本中，將接替CPAN成為預設的模組安裝管理工具。<BR/>
+<BR/>
+	% cpanp<BR/>
+	a # 依作者名稱搜尋模組		<BR/>
+	m # 依模組名稱搜尋模組<BR/>
+	f # 列出作者的所有套件		<BR/>
+	o # 列出可供更新的模組<BR/>
+	i # 安裝	<BR/>
+	t # 測試	<BR/>
+	u # 移除	<BR/>
+	d # 下載<BR/>
+	l # 詳細資訊	<BR/>
+	r # 顯示README	<BR/>
+	c # 品管報告	<BR/>
+	z # 解開模組<BR/>
+<BR/>
+LWP::Simple<BR/>
+<BR/>
+利用LWP::Simple，可以很容易的讓我們在Perl程式中取得某個網頁的內容，這經常被拿來運用於資料的收集。<BR/>
+<BR/>
+	$page = get("http://www.cpan.org/");	# 取得網頁<BR/>
+	getprint($url);				# 印出內容<BR/>
+	getstore($url, $file);			# 存入檔案<BR/>
+	head($url)				# 取得標頭<BR/>
+	mirror($url, $file);			# 映射網址<BR/>
+<BR/>
+WWW::Mechanize<BR/>
+<BR/>
+如果你每天都要進行相同的步驟去登入某個網站，或填入某些資料取得相關的資訊，那麼你可以可以透過WWW::Mechanize來請Perl幫忙。他可以像一個機器人般的，幫你進行這些繁雜的手續，就像你的代理人一般。<BR/>
+<BR/>
+	my $agent = WWW::Mechanize->new();	# 建立物件<BR/>
+	$agent->get($url);			# 到達網站<BR/>
+	$agent->follow($link);			# 按下鏈結<BR/>
+	$agent->form($number);			# 進入表單<BR/>
+	$agent->field($name, $value);		# 輸入資料<BR/>
+	$agent->click($button);			# 按下按鈕<BR/>
+	$agent->back();				# 回上一頁<BR/>
+	$agent->add_header($name => $value);	# 加入標頭<BR/>
+	print $agent->{content};		# 印出結果<BR/>
+<BR/>
+HTML::Mason<BR/>
+<BR/>
+我們在正文中也提過這個模組，他可以讓我們簡單的寫出動態的網站，就像你在寫HTML一樣。如果你熟悉PHP，你應該也會很習慣這個方式，當然，他其實是非常強力的內嵌式模板系統。<BR/>
+<BR/>
+	<%perl><BR/>
+	my $noun = '全世界';			# 內嵌程式碼<BR/>
+	my @time = split /[\s:]/, localtime;<BR/>
+	</%perl><BR/>
+	歡迎<% $noun %>，			# 安插運算式<BR/>
+	% if ( $time[3] < 12 ) {		# 流程控制<BR/>
+	早安！<BR/>
+	% } else {<BR/>
+	晚安！<BR/>
+	% }<BR/>
+<BR/>
+Template<BR/>
+<BR/>
+另一個在Perl領域中常用的模板系統，他可以很方便的讓你切開頁面設計跟程式碼，讓兩者的相關性減到最低。也讓所有人都可以在不互相干擾的情況下發揮比較大的效率。<BR/>
+<BR/>
+	[% INCLUDE header title = 'This is an HTML example' %]<BR/>
+	<h1>Some Interesting Links</h1><BR/>
+	[% webpages = [				# 內嵌程式碼<BR/>
+	    { url => 'http://foo.org', title => 'The Foo Organsiation' }<BR/>
+	    { url => 'http://bar.org', title => 'The Bar Organsiation' }<BR/>
+	] %]<BR/>
+	<ul><BR/>
+	[% FOREACH link = webpages %]		# 流程控制<BR/>
+	    <li><a href="[% link.url %]">[% link.title %]</a>	# 取得元素<BR/>
+	[% END %]<BR/>
+	</ul><BR/>
+	[% INCLUDE footer %]			# 套用元件<BR/>
+<BR/>
+XML::RSS<BR/>
+<BR/>
+要怎麼處理RSS的檔案？XML::RSS是一個非常方便的工具。你可以透過簡單的處理，產生出一個標準的RSS。<BR/>
+<BR/>
+	my $rss = XML::RSS->new();		# 建立物件<BR/>
+        $rss->parse($string);			# 剖析字串<BR/>
+        foreach my $item (@{$rss->{'items'}}) {	# 處理元素<BR/>
+            print "title: $item->{'title'}\n";<BR/>
+            print "link: $item->{'link'}\n\n";<BR/>
+        }<BR/>
+	$rss->add_module(			# 自訂模組<BR/>
+	    prefix => 'content',		# 全文模組<BR/>
+	    uri => 'http://purl.org/my/rss/module/',<BR/>
+	);<BR/>
+	$rss->add_item(				# 新增元素<BR/>
+	    title => $title,<BR/>
+	    link  => $link,<BR/>
+	    content => { encoded => $text },<BR/>
+	);<BR/>
+        $rss->{output} = '1.0';			# 轉換版本<BR/>
+        print $rss->as_string;			# 印出 XML<BR/>
+<BR/>
+DBI<BR/>
+<BR/>
+DBI幾乎是現在寫程式必備的模組之一了，當然他本身也已經是一種標準。因此了解DBI的使用方式顯然是一個重要的課題。<BR/>
+<BR/>
+	my $dbh = DBI->connect(			# 連結資料庫<BR/>
+	    "DBI:mysql:database=test;host=localhost",<BR/>
+	    "Melody", "Nelson", {'RaiseError' => 1}<BR/>
+	);<BR/>
+	eval { $dbh->do("DROP TABLE foo") };	# 卸除資料庫<BR/>
+	# 建立資料庫<BR/>
+	$dbh->do("CREATE TABLE foo (id INTEGER, name VARCHAR(20))");<BR/>
+	# 插入資料列（用 quote 進行引括）<BR/>
+	$dbh->do("INSERT INTO foo VALUES (1, " . $dbh->quote("Tim") . ")");<BR/>
+	# 插入資料列（用 ? 進行引括）<BR/>
+	$dbh->do("INSERT INTO foo VALUES (?, ?)", undef, 2, "Jochen");<BR/>
+	my $sth = $dbh->prepare("SELECT * FROM foo");	# 準備選取資料列<BR/>
+	$sth->execute;					# 執行選取<BR/>
+	while (my $ref = $sth->fetchrow_hashref()) {	# 選取成雜湊<BR/>
+	    print "Found a row: id = $ref->{'id'}, name = $ref->{'name'}\n";<BR/>
+	}<BR/>
+	$sth->finish;					# 結束查詢<BR/>
+	$dbh->disconnect;				# 結束資料庫連線<BR/>
+<BR/>
+YAML<BR/>
+<BR/>
+我們都知道在Perl中有陣列，雜湊，或陣列的陣列，雜湊的雜湊，或雜湊的陣列，雜湊的雜湊......，這麼複雜的資料結構，透過YAML可以讓我們清楚的一目了然。這樣才不會讓程式設計師到最後自己都搞不清楚資料的結構到底是甚麼樣了。<BR/>
+<BR/>
+	# 將複雜的資料結構傾印成跨平台、跨語言、簡潔易讀的文件格式<BR/>
+	print Dump { 'P3P' => {<BR/>
+	    'Date' => [ '2003-02-07T10:00:00', '2003-02-09T12:00:00' ],<BR/>
+	    'Entry Fee' => 'USD$6',<BR/>
+	    'Hosted-By' => 'Taipei Perl Mongers',<BR/>
+	    'URL' => \('http://p3p.elixus.org/'),<BR/>
+	} };<BR/>
+<BR/>
+	# 結果如下, 比 XML 漂亮多了吧. :-)<BR/>
+	--- #YAML:1.0<BR/>
+	P3P:<BR/>
+	  Date:<BR/>
+	    - 2003-02-07T10:00:00<BR/>
+	    - 2003-02-09T12:00:00<BR/>
+	  Entry Fee: USD$6<BR/>
+	  Hosted-By: Taipei Perl Mongers<BR/>
+	  URL: !perl/ref:<BR/>
+	    =: http://p3p.elixus.org/<BR/>
+<BR/>
+Storable<BR/>
+<BR/>
+在Perl中，怎麼簡單的儲存資料。如果你只想單純的把一些資料記下，又不想勞師動眾的安裝巨大的資料庫，還要煩惱資料庫的規劃。隨手使用Storable也許是個不錯的解決方式。<BR/>
+<BR/>
+        store \%table, 'file';		# 傾印 \%table 到二進制檔案 file<BR/>
+        $hashref = retrieve('file');	# 讀回 \%table<BR/>
+        nstore \%table, 'file';		# 跨平台的傾印格式<BR/>
+        $hashref = retrieve('file');	# 相同的讀法<BR/>
+<BR/>
+        store_fd \@array, \*STDOUT;	    # 存進檔案代號<BR/>
+        nstore_fd \%table, \*STDOUT;	    # 存進檔案代號（跨平台）<BR/>
+        $aryref = fd_retrieve(\*SOCKET);    # 從網路 socket 讀取<BR/>
+        $hashref = fd_retrieve(\*SOCKET);   # 從網路 socket 讀取<BR/>
+<BR/>
+        $serialized = freeze \%table;	    # 存進純量變數中<BR/>
+        %clone = %{ thaw($serialized) };    # 解開成等價的雜湊<BR/>
+        $cloneref = dclone($ref);	    # 也可以這樣寫<BR/>
+<BR/>
+        lock_store \%table, 'file';	    # 非強制式鎖定寫入<BR/>
+        lock_nstore \%table, 'file';	    # 同上（跨平台）<BR/>
+        $hashref = lock_retrieve('file');   # 非強制式鎖定讀取<BR/>
+<BR/>
+BerkeleyDB<BR/>
+<BR/>
+當然，你也可以使用簡單的資料庫來儲存，而這時候BerkeleyDB就是一個很好的選擇。我們也在內文中提過這個部份，在這裡大家可以作為一個備忘。<BR/>
+<BR/>
+	tie my %h, "BerkeleyDB::Hash",	    # 繫結 %h 雜湊<BR/>
+		    -Filename => 'test.db', # 連到 test.db 資料庫<BR/>
+		    -Flags    => DB_CREATE, # 若不存在，即行建立<BR/>
+	    or die "$BerkeleyDB::Error: $!\n" ;<BR/>
+<BR/>
+	# 將鍵/值對加入檔案中<BR/>
+	$h{"蘋果"} = "紅"; <BR/>
+	$h{"柳橙"} = "橙";<BR/>
+	$h{"香蕉"} = "黃"; <BR/>
+	$h{"蕃茄"} = "紅";<BR/>
+	# 檢查某個鍵存在與否<BR/>
+	print "香蕉船!\n\n" if $h{"香蕉"};<BR/>
+	# 刪除鍵/值對<BR/>
+	delete $h{"蘋果"};<BR/>
+	# 印出資料檔的內容<BR/>
+	while (my ($k, $v) = each %h) { print "$k -> $v\n" }<BR/>
+	# 解除繫結<BR/>
+	untie(%h);<BR/>
+<BR/>
+Inline::Files<BR/>
+<BR/>
+當然，還有神奇的方式來儲存資料，也就是儲存在程式本身。例如我們以前常看到的網站計數器，既然我們儲存的只是一個整數，那麼把他儲存在程式中也是一個不錯的方法，而Inline::Files就可以達到這樣的效果。<BR/>
+<BR/>
+	# 簡單的計數器<BR/>
+	open COUNT or die $!;		    # 開啟虛擬檔案 __COUNT__<BR/>
+	my $count = <COUNT>;		    # 讀進目前紀錄<BR/>
+	open COUNT, ">$COUNT" or die $!;    # 撰寫虛擬檔案 __COUNT__<BR/>
+	print COUNT ++$count;		    # 寫入新的值<BR/>
+	open DATE, ">$DATE" or die $!;	    # 撰寫虛擬檔案 __DATE__<BR/>
+	print DATE scalar localtime;	    # 寫入更新日期<BR/>
+<BR/>
+	__COUNT__<BR/>
+	1<BR/>
+	__DATE__<BR/>
+	Sat Feb  8 11:01:33 CST 2003<BR/>
+<BR/>
+Devel::DProf<BR/>
+<BR/>
+如果你打算為你的程式進行最佳化，那麼檢查程式的執行時間是有必要的，你可以發現程式的瓶頸是在那裡發生的。並且判斷每個部份的重要性以及對整體效率的影響。<BR/>
+<BR/>
+	# 執行效能分析, 寫入紀錄檔 tmon.out<BR/>
+	% perl -d:DProf /usr/local/bin/cpanp -m Foobar<BR/>
+	# 分析紀錄檔, 印出效能報表<BR/>
+	% dprofpp<BR/>
+	Total Elapsed Time = 5.074083 Seconds	# 總執行時間<BR/>
+	  User+System Time = 4.053218 Seconds	# 實際使用時間<BR/>
+	Exclusive Times<BR/>
+	%Time ExclSec CumulS #Calls sec/call Csec/c  Name<BR/>
+	 40.4   1.641  1.641      2   0.8203 0.8203  Storable::net_pstore<BR/>
+	 28.3   1.148  1.148      3   0.3828 0.3828  Storable::pretrieve<BR/>
+	 5.97   0.242  0.241      7   0.0346 0.0345  CPANPLUS::Internals::Search::BEGIN<BR/>
+	 4.59   0.186  0.271     14   0.0133 0.0194  CPANPLUS::Configure::Setup::BEGIN<BR/>
+	 2.66   0.108  0.179     23   0.0047 0.0078  CPANPLUS::Internals::BEGIN<BR/>
+<BR/>
+Inline<BR/>
+<BR/>
+常常有人抱怨用Perl寫出來的程式效率比較差，如果你把Perl拿來跟C或甚至組合語言相比，那麼結果大概很容易想像。可是好消息是你可以把程式中最強調效率的部份用C來寫，而且你確實可以在Perl裡面寫C，只要你用上Inline模組。不單單只是C，Inline還包含了Java，Assembley或各式各樣的其他程式語言。讓大家都能夠得心應手的把各種語言跟Perl「黏」在一起。<BR/>
+<BR/>
+	# 內嵌 C 語言函式<BR/>
+	use Inline C => 'void greet(char *x) { printf("Hello, %s!\n", x); }';<BR/>
+	greet("World");	# 印出 "Hello, World!\n"<BR/>
+<BR/>
+	# 內嵌 Python 函式<BR/>
+	use Inline Python => '<BR/>
+	    def Foo():<BR/>
+		class Bar:<BR/>
+		    def __init__(self):<BR/>
+			print "new Bar()"<BR/>
+		    def tank():<BR/>
+			return 10<BR/>
+		return Bar()<BR/>
+	';<BR/>
+<BR/>
+	my $o = Foo();	# 建立物件<BR/>
+	print $o->tank;	# 印出 10<BR/>
+<BR/>
+	# 還支援組合語言、Awk、BC、Basic、Befunge、C++、Guile、Java、Ruby、Tcl...<BR/>
+<BR/>
+Locale::Maketext::Lexicon<BR/>
+<BR/>
+程式的國際化(i18n)某種程度而言是非常必要的，因此藉由Locale::Maketext::Lexicon就可以幫我們處理一大堆的瑣事。接下來只要有完整的語系檔，就可以讓應用程式說出各式各樣的語言。<BR/>
+<BR/>
+	% xgettext.pl *.pl # 將目錄下所有 .pl 檔內的可譯詞解到 messages.po 內<BR/>
+<BR/>
+	# 撰寫國際化程式的好工具<BR/>
+	use base 'Locale::Maketext';			# 採用 Maketext 本土化架構<BR/>
+	use Locale::Maketext::Lexicon {			# 定義詞典檔<BR/>
+	    en	  => [ 'Auto' ],			# 以英文為基底語言<BR/>
+	    de    => [ Gettext => 'de.po' ],		# 從 de.po 讀入德文詞典<BR/>
+	    fr	  => [ Tie => [ DB_File => 'fr.db' ]],	# 從 fr.db 讀入法文詞典<BR/>
+	    zh_tw => [ Gettext => \*DATA ],		# 從 __DATA__ 讀入中文詞典<BR/>
+	};<BR/>
+	my $h = __PACKAGE__->get_handle;		# 自動取得使用者語系<BR/>
+	print $h->maketext("Hello, [_1]!", "Perl");	# 印出本土化的訊息<BR/>
+	__DATA__<BR/>
+	msgid "Hello, %1!"<BR/>
+	msgstr "%1 您好!"<BR/>
+<BR/>
+Log::Dispatch<BR/>
+<BR/>
+程式執行時經常都會有意外發生，或是程式本身的錯誤，還是操作上的問題。而要排除這些問題，最好的方式就是在意外發生時能紀錄下意外發生的狀況。而且還可以在有重大的意外狀況時通知管理者儘速排除。<BR/>
+<BR/>
+	my $log = Log::Dispatch->new;			# 建立紀錄物件<BR/>
+	$log->add( Log::Dispatch::File->new(		# 新增紀錄檔物件<BR/>
+	    name => 'file',				# 物件名稱<BR/>
+	    min_level => 'debug',			# 紀錄門檻<BR/>
+	    filename => '/var/log/test.log',		# 紀錄檔名<BR/>
+	) );<BR/>
+	$log->add( Log::Dispatch::Email::MailSend->new(	# 新增郵件紀錄物件<BR/>
+	    name => 'email',				# 物件名稱<BR/>
+	    min_level => 'emergency',			# 紀錄門檻<BR/>
+	    to => [ qw( foo@bar.com bar@baz.org ) ],	# 收件地址<BR/>
+	    subject => '救命啊!!!',			# 郵件標題<BR/>
+	) );<BR/>
+	$log->info("系統啟動中...");			# 存到紀錄檔裡<BR/>
+	$log->error("磁碟空間不足...");			# 同上<BR/>
+	$log->emergency("記憶體損毀!");			# 送出 Email<BR/>
+<BR/>
+Test::More<BR/>
+<BR/>
+測試當然是寫程式重要的過程跟檢驗之一。而如果能有方便的工具讓程式設計師不用煩惱怎麼做測試，那應該會提昇不少工作效率。這時後用Test::More應該是很好的選擇。<BR/>
+<BR/>
+	use Test::More tests => 16;			# 測試數量<BR/>
+	use_ok('CGI');					# 匯入模組<BR/>
+	require_ok('Test::More');			# 使用模組<BR/>
+	ok( "空" eq "空",        '空即是空' );		# 真值檢查<BR/>
+	is(   "色", "色",        '色即是色' );		# 字串相等<BR/>
+	isnt( "空", "色",        '空不是色');		# 字串不等<BR/>
+	isn't("色", "空",        '色不是空');		# 字串不等<BR/>
+	like("空空", '/^空/',    '空空如也');		# 字串比對<BR/>
+	isa_ok(CGI->new, 'CGI',  '物件類別');		# 物件類別<BR/>
+	eq_array([1..3], [1..3], '陣列相等');		# 陣列相等<BR/>
+	cmp_ok(1+1, '==', 2,     '數值相等');		# 數值相等<BR/>
+	is_deeply($ref1, $ref2,  '複雜結構');		# 複雜結構<BR/>
+	can_ok('Test::More', qw(ok is isnt like skip), '方法測試');<BR/>
+<BR/>
+Regexp::Common<BR/>
+<BR/>
+正規表示式確實是非常方便的工具，可是有些時候要寫出一個好的正規表示式的樣式確實非常讓人困擾的。幸好，很多情況下我們都會寫出類似的樣式，而這些樣式其實也有不少人曾經使用，我們就可以利用Regexp::Common來方便的使用這些非常一般化的樣式了。<BR/>
+<BR/>
+	while (<>) {<BR/>
+	    /$RE{num}{real}/               and print "內有數值: $&";<BR/>
+	    /$RE{profanity}/               and print "不雅文字: $&";<BR/>
+	    /$RE{quoted}/                  and print "引號括住的字串: $&";<BR/>
+	    /$RE{delimited}{-delim=>'/'}/  and print "斜線括住的字串: $&";<BR/>
+	    /$RE{balanced}{-parens=>'()'}/ and print "對稱括號內字串: $&";<BR/>
+	}<BR/>
+<BR/>
+Parse::RecDescent<BR/>
+<BR/>
+既然Perl對於文字處理的能力這麼的好，當然也有許多人拿他來進行相關的資料處理。以下就是一個處理一般文章的例子。<BR/>
+<BR/>
+	# 定義文法規則<BR/>
+	$lexer = Parse::RecDescent->new(q(<BR/>
+	    lex: token(s)<BR/>
+<BR/>
+	    token: 'I\b'           <token:POSS><BR/>
+		| 'see\b'          <token:VERB><BR/>
+		| 'on\b'           <token:PREP><BR/>
+		| 'by\b'           <token:PREP><BR/>
+		| /the\b|a\b/i     <token:ARTICLE><BR/>
+		| /\w+/            <token:WORD,PUNCT,OTHER><BR/>
+	));<BR/>
+	# 進行詞彙分析<BR/>
+	my $tokens = $lexer->lex('I see a cat on the windowsill by the door!');<BR/>
+<BR/>
+Text::Autoformat<BR/>
+<BR/>
+文字的格式也是另一種進行文字處理時會遇到的狀況。在Text::Autoformat，你可以設定好希望的格式，然後交由Perl幫忙排版。<BR/>
+<BR/>
+	# 整段編排、右邊界 50 欄、左右對齊（限英文；中文見 Lingua::ZH::Wrap）<BR/>
+	print autoformat(q(<BR/>
+	> Now is the Winter of our discontent made glorious Summer by this<BR/>
+	> son of York. And all the clouds that lour'd upon our house in the<BR/>
+	> deep bosom of the ocean buried.<BR/>
+	    - this is a very very very very long item.<BR/>
+	    - this is another very very very very very very long item.<BR/>
+	), { all => 1, right => 50, justify => 'full' });<BR/>
+<BR/>
+	# 印出結果:<BR/>
+	> Now  is  the  Winter  of  our  discontent   made<BR/>
+	> glorious Summer by this son of York. And all the<BR/>
+	> clouds that lour'd upon our house  in  the  deep<BR/>
+	> bosom of the ocean buried.<BR/>
+	    - this is a very very very very long item.<BR/>
+	    - this is another very  very  very  very  very<BR/>
+	    very long item.<BR/>
+<BR/>
+Text::Quoted<BR/>
+<BR/>
+另一個分析文章的模組，我們常常在電子郵件內容或是討論區的討論串中使用其他人的引言，而如果想要分析出引言的內容，Text::Quoted就提供了這方面的功能。<BR/>
+ <BR/>
+	# 分析引言結構<BR/>
+	my $structure = extract(q(<BR/>
+        > foo<BR/>
+        > # Bar<BR/>
+        > baz<BR/>
+<BR/>
+        quux<BR/>
+	));<BR/>
+<BR/>
+	# 傳回結構如下:<BR/>
+        [ [<BR/>
+            { text => 'foo', quoter => '>', raw => '> foo' },<BR/>
+            [ { text => 'Bar', quoter => '> #', raw => '> # Bar' } ],<BR/>
+            { text => 'baz', quoter => '>', raw => '> baz' }<BR/>
+          ],<BR/>
+          { empty => 1 },<BR/>
+          { text => 'quux', quoter => '', raw => 'quux' } ]<BR/>
+<BR/>
+XML::SAX<BR/>
+<BR/>
+<BR/>
+<BR/>
+	package MyHandler;		# 自訂 SAX 處理器<BR/>
+	use base 'XML::SAX::Base';<BR/>
+	sub start_element {<BR/>
+	    my ($self, $data) = @_;<BR/>
+	    # ... 對 $data 元素進行處理 ...<BR/>
+	    $self->SUPER::start_element($data);<BR/>
+	}<BR/>
+<BR/>
+	package main;<BR/>
+	use XML::SAX::ParserFactory;<BR/>
+	my $p = XML::SAX::ParserFactory->parser(Handler => MyHandler->new);<BR/>
+	$p->parse_uri("foo.xml");	# 利用 MyHandler 剖析 foo.xml<BR/>
+	$p->parse_string("<foo/>");	# 剖析字串<BR/>
+	$p->parse_file($fh);		# 剖析檔案<BR/>
+<BR/>
+GD<BR/>
+<BR/>
+Perl也能畫圖，而且可以畫出非常漂亮的各種圖形，只要使用GD模組，就可以畫出各式各樣的圖表。<BR/>
+<BR/>
+	my $im = GD::Image->newFromPng('1.png');	# 讀取影像<BR/>
+	my $blue = $im->colorAllocate(0,0,255);		# 定義色彩<BR/>
+	$im->arc(50,50,95,75,0,360,$blue);		# 畫上橢圓<BR/>
+	open IMG, '>:raw', '2.png'; print IMG $im->png;	# 儲存影像<BR/>
+<BR/>
+	my $graph = GD::Graph::bars->new(400, 300);	# 新增柱狀圖<BR/>
+	my $gd = $graph->plot([1..10], [2..11]);	# 填上資料<BR/>
+	open IMG, '>:raw', '3.png'; print IMG $gd->png;	# 儲存影像<BR/>
+<BR/>
+Imager<BR/>
+<BR/>
+另外，影像檔案的處理則是透過Imager來進行。你可以用Imager幫圖檔做旋轉，縮圖，調色等等......。<BR/>
+<BR/>
+	my $img = Imager->new;				# 建立物件<BR/>
+	$img->open( file => '1.png', type => 'png');	# 讀取影像<BR/>
+	$img = $img->scale(scalefactor => 0.5);		# 1/2 縮圖<BR/>
+	$img = $img->rotate(degrees => 20);		# 旋轉圖形<BR/>
+	$img->filter(type => 'autolevels');		# 自動調色<BR/>
+	$img = $img->convert(preset => 'grey');		# 轉成灰階<BR/>
+	$img->write(file => '2.png');			# 儲存影像<BR/>
+<BR/>
+	my $pie = Imager::Graph::Pie->new;		# 新增圓餅圖<BR/>
+	my $img = $pie->draw(				# 填上資料<BR/>
+	    data     => [qw( 17874757  8146372   1321544  811406 )],<BR/>
+	    labels   => [qw( Apache    Microsoft iPlanet  Zeus   )],<BR/>
+	    title    => 'Netcraft Web Survey',<BR/>
+	    legend   => { valign => 'bottom' },<BR/>
+	    features => [qw(labelspconly legend dropshadow)],<BR/>
+	);<BR/>
+	$img->write(file => '3.png');			# 儲存影像<BR/>
+<BR/>
+GraphViz<BR/>
+<BR/>
+這是利用模組建立起一堆節點的相關關係，並且繪製成圖檔。最有趣的是它可以自動幫忙調整節點的相互位置。<BR/>
+<BR/>
+	my $g = GraphViz->new;					# 建立有向圖<BR/>
+<BR/>
+	$g->add_node('唭哩岸');					# 新增節點<BR/>
+	$g->add_node('敦煌', label => '莫高窟');		# 附帶描述<BR/>
+	$g->add_node('沙瓦那');<BR/>
+<BR/>
+	$g->add_edge('唭哩岸' => '敦煌');			# 新增路徑<BR/>
+	$g->add_edge('唭哩岸' => '沙瓦那', label => '遙遠');	# 附帶描述<BR/>
+	$g->add_edge('敦煌' => '唭哩岸');			# 雙向路徑<BR/>
+<BR/>
+	$g->as_png('graph.png');				# 儲存影像<BR/>
+<BR/>
+Image::Size<BR/>
+<BR/>
+轉換圖檔的長寬，尤其在網路上時更有用，可以有效管控圖檔的檔案大小，而且支援多種檔案格式。<BR/>
+<BR/>
+	my ($w, $h) = imgsize("test.png");	# 取得圖片長寬<BR/>
+	my $size = html_imgsize("test.png");	# 'width="XX" height="YY"'<BR/>
+	my @attrs = attr_imgsize("test.png");	# ('-width', 60, '-height', 40)<BR/>
+<BR/>
+	# 支援格式: GIF JPG XBM XPM PPM PGM PBM XV PNG MNG TIF BMP PSD SWF PCD<BR/>
+<BR/>
+Image::Magick<BR/>
+<BR/>
+也是一個圖形處理的模組，它可以讀入圖檔，然後進行各種處理，例如縮圖，轉換檔案等等，就像名稱一般，開始變魔術。<BR/>
+<BR/>
+	my $image = Image::Magick->new;<BR/>
+	my $x = $image->Read('girl.png', 'logo.png', 'rose.png'); # 讀入三個影像<BR/>
+	$x = $image->Crop(geometry=>'100x100+1"00"+1"00');	  # 截成 100x100<BR/>
+	$image->Annotate(font=>'kai.ttf', text=>"太神奇了!");	  # 加上文字<BR/>
+	$x = $image->Write('animation.gif');			  # 存成動畫<BR/>
+<BR/>
+Mail::Audit<BR/>
+<BR/>
+這是郵件的處理模組，可以根據不同的條件來分配郵件，就像郵差在分派郵件一般。<BR/>
+<BR/>
+	my $m = Mail::Audit->new(emergency=>"~/emergency_mbox"); # 建立物件<BR/>
+	$m->pipe("listgate cle") if $mail->from =~ /cle-devel/;  # 送到管線<BR/>
+	$m->accept("perl")       if $mail->from =~ /perl/;       # 接進信箱<BR/>
+	$m->reject("nospam")     if $mail->rblcheck();           # 彈回垃圾<BR/>
+	$m->ignore               if $mail->subject =~ /boring/i; # 忽略信件<BR/>
+	$m->noexit(1); $m->accept("~/Mail/%Y%m"); $m->noexit(0); # 按月彙整<BR/>
+	$m->accept;						 # 其餘接收<BR/>
+<BR/>
+Mail::SpamAssassin<BR/>
+<BR/>
+處理垃圾郵件，廣告郵件的好幫手，利用一整套的規則可以相當準確的判讀郵件是否為垃圾郵件。常常和Mail::Audit搭配使用，減少煩人的垃圾信。<BR/>
+<BR/>
+	my $m = Mail::SpamAssassin::NoMailAudit->new;	# 虛擬 Mail::Audit<BR/>
+	my $spamtest = Mail::SpamAssassin->new;		# 建立過濾器<BR/>
+	if ($spamtest->check($m)->is_spam) {		# 如果是垃圾信...<BR/>
+	    $status->rewrite_mail;			# ...加上說明<BR/>
+	    $m->accept("trash");			# ...丟進垃圾桶<BR/>
+	} else {<BR/>
+	    $m->accept;				# 不然則照常接收<BR/>
+	}<BR/>
+<BR/>
+	# 典型的 Spam 報告如下:<BR/>
+	SPAM: Content analysis details:   (7.90 hits, 5 required)<BR/>
+	SPAM: UNDISC_RECIPS      (1.5 points)  Valid-looking To "undisclosed-recipients"<BR/>
+	SPAM: NO_REAL_NAME       (1.3 points)  From: does not include a real name<BR/>
+	SPAM: HEADER_8BITS       (0.4 points)  Headers include 3 consecutive 8-bit characters<BR/>
+	SPAM: SPAM_PHRASE_00_01  (0.8 points)  BODY: Spam phrases score is 00 to 01 (low)<BR/>
+	SPAM: HTML_FONT_COLOR_YELLOW (0.4 points)  BODY: HTML font color is yellow<BR/>
+	SPAM: BIG_FONT           (0.3 points)  BODY: FONT Size +2 and up or 3 and up<BR/>
+	SPAM: HTML_WITH_BGCOLOR  (0.3 points)  BODY: HTML mail with non-white background<BR/>
+	SPAM: DATE_IN_FUTURE_96_XX (0.5 points)  Date: is 96 hours or more after Received: date<BR/>
+<BR/>
+Mail::Box<BR/>
+<BR/>
+簡單讀取信箱的模組，讓你的Perl程式可以代理你去讀取信箱，然後進行必要的處理。<BR/>
+<BR/>
+	my $mgr    = Mail::Box::Manager->new;		# 建立物件<BR/>
+	my $folder = $mgr->open(folder => $ENV{MAIL});	# 開啟信箱<BR/>
+<BR/>
+	print $folder->name;				# 印出名稱<BR/>
+	print $folder->message(0);			# 第一封信<BR/>
+	$folder->message(3)->delete;			# 刪第三封<BR/>
+	my $emails = $folder->messages;			# 信件數量<BR/>
+<BR/>
+	foreach ($folder->messages) {...}		# 逐封處理<BR/>
+	foreach (@$folder) {...}			# 同上<BR/>
+<BR/>
+	# 新增一封郵件<BR/>
+	$folder->addMessage(Mail::Box::Message->new(...));<BR/>
+<BR/>
+Mail::Bulkmail<BR/>
+<BR/>
+大量發送信件的模組，只需要一個存有所有收件人的文字檔，Perl就可以幫忙寄送郵件。<BR/>
+<BR/>
+	my $bulk = Mail::Bulkmail->new(<BR/>
+            "LIST"          => "~/my.list.txt",		# 地址清單<BR/>
+            "From"          => 'not_spam@example.com',	# 寄件人<BR/>
+            "Subject"       => "Test message",		# 標題<BR/>
+            "Message"       => "... blah blah ..."	# 內文<BR/>
+	) or die Mail::Bulkmail->error();<BR/>
+<BR/>
+	$bulk->bulkmail() or die $bulk->error;		# 寄出大宗郵件<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+Term::ReadKey<BR/>
+*************<BR/>
+#HTML# <img title="命令列工具" name="img" id="img" src="cmdline.jpg" width=400 height=400 align=right><div><BR/>
+<BR/>
+	ReadMode(4);				# 停用控制鍵<BR/>
+	1 until defined($key = ReadKey(-1));	# 等使用者按某個鍵<BR/>
+	print "使用者按了 $key\n";		# 印出<BR/>
+	ReadMode(0);				# 恢復控制鍵<BR/>
+<BR/>
+	($w, $h, $x, $y) = GetTerminalSize();	# 取得終端機大小<BR/>
+	SetTerminalSize($w, $h, $x, $y);	# 設定終端機大小<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+Term::ReadLine<BR/>
+**************<BR/>
+<BR/>
+	my $term = Term::ReadLine->('小算盤');	# 建立物件<BR/>
+	my $prompt = "鍵入數學運算式: ";	# 提示字串<BR/>
+	my $OUT = $term->OUT || \*STDOUT;	# 設定輸出<BR/>
+<BR/>
+	# 每次讀入一列<BR/>
+	while ( defined ($_ = $term->readline($prompt)) ) {<BR/>
+	    my $res = eval($_);			# 執行算式<BR/>
+	    warn $@ if $@;			# 檢查錯誤<BR/>
+	    print $OUT $res, "\n" unless $@;	# 印出結果<BR/>
+	    $term->addhistory($_) if /\S/;	# 加入歷史<BR/>
+	}<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+IPC::Run<BR/>
+********<BR/>
+<BR/>
+	# 執行 ftp, 以 in.txt 的內容鍵入, 輸出到 $out, 錯誤到 $err<BR/>
+	run(['ftp'], 'in.txt', \$out, \$err, timeout(10)) or die $?;<BR/>
+<BR/>
+	# 設定管線 (pipe), 將壓縮後的資料存進 $out<BR/>
+	run([qw(tar cf - test.dat)], '|', ['gzip'], \$out);<BR/>
+<BR/>
+	# ckhung 的 dynagpt 後端<BR/>
+	my $h = start( ['gnuplot'], '>pipe', \*GPT_OUT, '<pipe', \*GPT_PIPE, '2>pipe', \*GPT_ERR ) or die $?;<BR/>
+<BR/>
+	# 互動式的用法<BR/>
+	my $h = start([qw(telnet example.org)], \$in, \$out, \$err, timeout(10));<BR/>
+<BR/>
+	pump($h) until $out =~ /Login:/;	# 等待提示字串<BR/>
+	$in .= "Melody\n" ;			# 鍵入使用者名稱<BR/>
+	pump($h) until $out =~ /Password:/;	# 等待提示字串<BR/>
+	$in .= "Nelson\n" ;			# 鍵入密碼<BR/>
+	pump($h) until $out =~ /C:\>/;		# 等待提示字串<BR/>
+	$in .= "dir /w" ;			# 鍵入指令<BR/>
+	pump($h) until $out =~ /(\d+) bytes/;	# 擷取所要的輸出<BR/>
+<BR/>
+	finish($h) or die $?;			# 結束行程<BR/>
+	warn $err if $err;			# 顯示警告<BR/>
+	print $out;				# 列印輸出<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+PAR<BR/>
+***<BR/>
+<BR/>
+	% pp -o packed.exe source.pl        # 自足的 .exe 檔<BR/>
+	% packed.exe                        # 在同樣的作業系統下皆可執行<BR/>
+	% pp -o packed.exe -e 'print "Hi!"' # 將單列程式轉成執行檔<BR/>
+<BR/>
+	% pp -p CGI.par -M CGI		    # 封裝 CGI.pm 及其所需模組<BR/>
+	% parl -ICGI.par script.pl	    # parl 可直接讀入 .par 程式庫<BR/>
+<BR/>
+	# 在 httpd.conf 裡, 直接執行 Perl Servlet:<BR/>
+	<VirtualHost *><BR/>
+	    PARDir /path/to/par/archive/directory<BR/>
+	    PARFile /path/to/a/par/file.par<BR/>
+	    PerlModule Apache::PAR<BR/>
+	    ...<BR/>
+	</VirtualHost><BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+PPerl<BR/>
+*****<BR/>
+<BR/>
+	# 執行 cpanp, 結束時將它轉為常駐程式<BR/>
+	% time perl /usr/local/bin/cpanp -m Foobar<BR/>
+	        3.36 real         2.37 user         0.30 sys<BR/>
+	# 再次執行時, 可省去啟動及載入模組的時間<BR/>
+	# (跟 FastCGI、ModPerl::Registry 原理相同)<BR/>
+	% time pperl /usr/local/bin/cpanp -m Foobar<BR/>
+	        1.02 real         0.44 user         0.20 sys<BR/>
+	# 殺掉常駐程式<BR/>
+	% pperl -- -k cpanp<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+Archive::Tar<BR/>
+************<BR/>
+#HTML# <img title="格式轉換" name="img" id="img" src="converter.jpg" width=400 height=400 align=right><div><BR/>
+<BR/>
+	Archive::Tar->create_archive(		# 建立壓縮檔<BR/>
+	    "my.tar.gz",			# 檔名<BR/>
+	    9,					# 壓縮程度<BR/>
+	    ("/this/file", "/that/file"),	# 來源檔案<BR/>
+	);<BR/>
+	# 列出其中的檔案<BR/>
+	print "$_\n" for Archive::Tar->list_archive("my.tar.gz");<BR/>
+<BR/>
+	$tar = Archive::Tar->new;			# 建立壓縮檔<BR/>
+	$tar->read("origin.tar.gz", 1);			# 讀取檔案<BR/>
+	$tar->add_files("file/foo.c", "file/bar.c");	# 新增檔案<BR/>
+	$tar->add_data("file/baz.c", "檔案內容");	# 新增內容<BR/>
+	$tar->write("files.tar");			# 寫入壓縮檔<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+Encode<BR/>
+******<BR/>
+<BR/>
+	use encoding 'big5';	# 用 big5 碼寫程式<BR/>
+	use open ':locale';	# 依地區設定決定輸出入編碼<BR/>
+<BR/>
+	$octets = encode(big5 => $string);  # 從 Unicode 編碼為 Big5<BR/>
+	$string = decode(big5 => $octets);  # 從 Big5 解碼為 Unicode<BR/>
+	from_to($octets, "big5", "utf-16"); # Big5 轉 UTF-16<BR/>
+<BR/>
+	# 指定使用 HTML 實體做為替代<BR/>
+	$PerlIO::encoding::fallback = Encode::FB_HTMLCREF;<BR/>
+	binmode(STDOUT, ':encoding(big5)'); # STDOUT 轉為 big5<BR/>
+	print "游鍚�鶼鰤|長";		    # 印出「游錫&#22531;院長」<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+XML::Simple<BR/>
+***********<BR/>
+<BR/>
+	# 讀取 XML 成雜湊參照<BR/>
+	my $ref = XMLin(q(<BR/>
+	    <config logdir="/var/log/foo/" debugfile="/tmp/foo.debug"><BR/>
+		<server name="sahara" osname="solaris" osversion="2.6"><BR/>
+		    <address>10.0.0.101</address><BR/>
+		    <address>10.0.1.101</address><BR/>
+		</server><BR/>
+	    </config><BR/>
+	));<BR/>
+	$ref->{server}{sahara}{address}[1] = '10.0.1.102';  # 更改元素<BR/>
+	print XMLout($ref);				    # 印出 XML<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+SpreadSheet::ParseExcel<BR/>
+************************<BR/>
+<BR/>
+	# 另請參考 SpreadSheeet::WriteExcel<BR/>
+	my $book = Spreadsheet::ParseExcel::Workbook->Parse('Test.xls');<BR/>
+	foreach my $sheet (@{$book->{Worksheet}}) {<BR/>
+	    print "--------- SHEET: $sheet->{Name}\n";<BR/>
+	    foreach my $row ($sheet->{MinRow} .. $sheet->{MaxWor}) {<BR/>
+		foreach my $col ($sheet->{MinCol} .. $sheet->{MaxCol}) {<BR/>
+		    $cell = $sheet->{Cells}[$row][$col] or next;<BR/>
+		    print "( $iR , $iC ) =>", $cell->Value, "\n";<BR/>
+		}<BR/>
+	    }<BR/>
+	}<BR/>
+<BR/>
+Date::Manip<BR/>
+<BR/>
+剖析常用日期格式 -- 日期物件的新標準請見 Datetime.pm<BR/>
+<BR/>
+	my @date = (<BR/>
+	    ParseDate("today"),<BR/>
+	    ParseDate("1st thursday in June 1992"),<BR/>
+	    ParseDate("05/10/93"),<BR/>
+	    ParseDate("12:30 Dec 12th 1880"),<BR/>
+	    ParseDate("8:00pm december tenth"),<BR/>
+	);<BR/>
+	# 比較與排序<BR/>
+	my @sorted = sort { Date_Cmp($a, $b) } @date;<BR/>
+	# 印出 "It is now 16:15:39 on Feb  7, 2003."<BR/>
+	print UnixDate("today","It is now %T on %b %e, %Y.");<BR/>
+	# 今天起的第三個工作天...<BR/>
+	$date = &DateCalc("today","+ 3 business days",\$err);<BR/>
+<BR/>
+Encode::HanConvert<BR/>
+<BR/>
+好用的轉碼模組，可以繁，簡體轉換，而且還可以轉換相對應的詞庫，另外，還可以轉換為萬國碼。<BR/>
+<BR/>
+	$gbk = big5_to_gb($big5);	# Big5 轉 GBK<BR/>
+	$big5 = gb_to_big5($gbk);	# GBK 轉 Big5<BR/>
+	$simp = trad_to_simp($trad);	# 萬國碼繁轉簡<BR/>
+	$trad = simp_to_trad($simp);	# 萬國碼簡轉繁<BR/>
+<BR/>
+	# 直接用內附的 b2g.pl 及 g2b.pl（-p 表示使用兩岸對照詞庫）<BR/>
+	% b2g.pl -p < big5.txt > gbk.txt<BR/>
+	% g2b.pl -p < gbk.txt  > big5.txt<BR/>
+<BR/>
+Lingua::ZH::Toke<BR/>
+<BR/>
+可以針對中文字進行統計，只要建立起你想要統計的各種符號(包括段，詞，句，字等等)，Perl就可以幫你算出各個符號的出現次數。<BR/>
+<BR/>
+	# 建立 Lingua::ZH::Toke::Sentence「句子」物件（->Sentence 亦可）<BR/>
+	my $token = Lingua::ZH::Toke->new( '那人卻在/燈火闌珊處/益發意興闌珊' );<BR/>
+	# 利用陣列解參照，輕易達成分段功能<BR/>
+	print $token->[0]           # 段   - 那人卻在<BR/>
+		    ->[2]           # 詞   - 卻在<BR/>
+		    ->[0]           # 字   - 卻<BR/>
+		    ->[0]           # 音   - ㄑㄩㄝˋ<BR/>
+		    ->[2];          # 注音 - ㄝ<BR/>
+	# 利用雜湊解參照，計算出現次數<BR/>
+	print $token->{'那人卻在'}; # 1 - 出現一次片段<BR/>
+	print $token->{'意興闌珊'}; # 1 - 出現一次單詞<BR/>
+	print $token->{'發意興闌'}; # undef - 不是一個詞<BR/>
+	print $token->{'珊'};       # 2 - 出現兩次字<BR/>
+	print $token->{'ㄧˋ'};      # 2 - 出現兩次字音：益意<BR/>
+	print $token->{'ㄨ'};       # 3 - 出現三次注音：那火處<BR/>
+	# 逐項處理「段」物件<BR/>
+	while (my $fragment = <$token>) {<BR/>
+	    # 逐項處理「詞」物件<BR/>
+	    while (my $phrase = <$token>) { ... }<BR/>
+	}<BR/>
+<BR/>
+Lingua::ZH::Summarize<BR/>
+<BR/>
+可以處理中文的模組，主要是進行中文文章的摘要。<BR/>
+<BR/>
+	print summarize( $text );                    # 印出文章摘要<BR/>
+	print summarize( $text, maxlength => 500 );  # 500 個位元組的摘要<BR/>
+	print summarize( $text, wrap => 75 );        # 在第 75 欄斷列<BR/>
+<BR/>
+	# 紅樓夢第一回：<BR/>
+	細按則深有趣味。待在下將此來歷注明。必有補天濟世之材。那紅塵中有卻有些樂事。<BR/>
+	究竟是到頭一夢。還只沒有實在的好處。使人一見便知是奇物方妙。因有個空空道人<BR/>
+	訪道求仙。原來就是無材補天。據你自己說有些趣味。更有一種風月筆墨。雖不敢說<BR/>
+	強似前代書中所有之人。哪�鶭峖酗u夫去看那理治之書！皆是稱功頌德。這東南一隅有<BR/>
+	處曰姑蘇。最是紅塵中一二等富貴風流之地。這閶門外有個十�鶭庰鞳C街內有個仁清巷。<BR/>
+	巷內有個古廟。倒是神仙一流人品。不辨是何地方。如今現有一段風流公案正該了結。<BR/>
+	並不曾將兒女之真情發泄一二。如今雖已有一半落塵。不能洞悉明白。<BR/>
+<BR/>
+----------------------------------------------------------------<BR/>
+<BR/>
+OurNet::FuzzyIndex<BR/>
+<BR/>
+可以針對一大堆的文件建立索引檔案，並且進行模糊搜尋。<BR/>
+<BR/>
+	my $db = OurNet::FuzzyIndex->new('test.db');	# 建立資料庫<BR/>
+	$db->insert('資料甲', '這是一些中文字');	# 插入索引<BR/>
+	$db->insert('資料乙', '這是另一些中文');	# 插入索引<BR/>
+	$db->insert('資料丙', '這也是一些中文');	# 插入索引<BR/>
+<BR/>
+	# 以模糊搜尋進行全文檢索, 符合的存到 %result 中<BR/>
+	my %result = $db->query('查詢中文字', $MATCH_FUZZY);<BR/>
+<BR/>
+	# 從上次找到的結果, 繼續搜尋其中「不符合」某字串的<BR/>
+	%result = $db->query('也是', $MATCH_NOT, \%result);<BR/>
+<BR/>
+	# 用 $db->getkey 取得名稱, 印出結果<BR/>
+	foreach my $idx (sort {$result{$b} <=> $result{$a}} keys(%result)) {<BR/>
+	    $val = $result{$idx};<BR/>
+	    print "找到: ".$db->getkey($idx)." (分數: $val)\n";<BR/>
+	}<BR/>
+<BR/>
+Text::Orientation<BR/>
+<BR/>
+可以進行文字的旋轉，這是非常奇妙的功能，而且還可以處理中文字。<BR/>
+<BR/>
+	# 建立字串物件, 並指定編碼<BR/>
+	my $o = Text::Orientation->new({<BR/>
+	    TEXT => "滿紙荒唐言\n一把辛酸淚\n都云作者痴\n誰解其中味\n",<BR/>
+	    CHARSET => 'utf-8',<BR/>
+	});<BR/>
+<BR/>
+	# 右轉 90 度<BR/>
+	print $o->rotate(1);<BR/>
+<BR/>
+	# 結果如下：<BR/>
+	誰都一滿<BR/>
+	解云把紙<BR/>
+	其作辛荒<BR/>
+	中者酸唐<BR/>
+	味痴淚言<BR/>
+<BR/>
+<pre><BR/>
+版權所有 (c) 2002, 2003 唐宗漢。本文是自由文件，可以依與 Perl 相同的授權條款散佈。
+</pre>
+
+      </blockquote>
+      </td>
+      <td>
+      </td>
+  </tr>
+  <tr align=center>
+    <td><img src="index_5.jpg" width="743" height="27"></td>
+  </tr>
+</table>
+</BODY>
+</HTML>

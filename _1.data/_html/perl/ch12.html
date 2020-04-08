@@ -1,0 +1,287 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="generator" content="Movable Type Publishing Platform 4.0-beta2-20070612" />
+
+    <title>
+        
+    perl 學習手札: 第十二章 字串處理
+        
+
+    </title>
+
+
+    
+    <link rel="start" href="./perl_index.html" title="Home" />
+    
+  
+
+</head>
+<body class="page-archive layout-two-column-right" onload="individualArchivesOnLoad(commenter_name)">
+   <div id="container">
+      <div id="container-inner" class="pkg">
+         <div id="banner">
+            <div id="banner-inner" class="pkg">
+               <h1 id="banner-header"><a href="./perl_index.html" accesskey="1">perl 學習手札</a></h1>
+               <h2 id="banner-description"></h2>
+            </div>
+         </div>
+         <div id="pagebody">
+            <div id="pagebody-inner" class="pkg">
+               <div id="alpha">
+                  <div id="alpha-inner" class="pkg">
+
+
+<h3 class="entry-header">第十二章 字串處理</h3>
+
+<div class="entry" id="entry-379">
+    <div class="entry-content">
+
+        <div class="entry-body">
+            第十二章 字串處理<br>
+<br>
+我們前面兩章提到了許多關於檔案的操作，現在我們應該可以很輕鬆的從檔案中取得我們需要的資訊了。不過如果只是空有一大堆的資訊，卻沒有辦法處理的話，只
+怕也沒有甚麼幫助。不過既然對於Perl來說，大多數的東西都是由數字跟字串組合而成，那麼一但我們可以用簡單的方式來整理字串的話，那麼應該就可以讓這
+些資訊變得相當有用。<br>
+<br>
+12.1 簡單的字串形式<br>
+我們在講解變數的時候已經提過關於Perl是如何對待字串的，雖然對於不少其他程式語言來說，字串其實只是字元的串列。可是Perl卻簡化了這樣的觀念，
+因此反而讓字元變成長度為一的字串。就像對待數字一樣，Perl並不會要求程式設計師去強制規定某些變數只能放整數，某些變數只能放浮點數。<br>
+這樣寬鬆的規定確實讓程式設計師省了許多麻煩，不過當你的分類越粗略時，要怎麼有效的對這些資料進行處理就顯得更加重要。而就像許多人對於Perl的印象，它在處理字串時非常的具有威力。這當中的原因除了正規表示式之外，Perl對於字串的控制顯然也有一些有趣的部份。<br>
+對於字串最基本的操作應該就是長度了，我們經常會要求知道字串的長度，這時候，只需要使用length這個函式就可以取得你所指定字串的長度了。<br>
+<br>
+<pre><br><br>my $string = "string";<br>print length($string);&nbsp;&nbsp;	# 長度是6<br></pre>
+<br>
+當然，有時候你會被某些控制字元所欺騙，因為他們也是佔有長度的，就像這樣：<br>
+<br>
+<pre><br><br>my $string = "string\n";<br>print length($string);&nbsp;&nbsp;	# 這時候長度變成7了<br></pre>
+<br>
+取得字串長度只是第一步，接下來我們可能需要找出字串的相關性。例如我們會想要取得某個字串的其中一段。不過我們可能會先需要知道這個子字串在原來字串的位置這時候就可以使用index來取得相關的訊息了。用實際的例子我們可以很容易看到index的用法：<br>
+<br>
+<pre><br><br>my $mainstring = "Perl Mongers";<br>my $substring = "Mongers";<br>print index($mainstring, $substring);&nbsp;&nbsp;# 印出 5<br></pre>
+<br>
+看來相當容易對吧，Perl會告訴你子字串第一個字母所在的位置，只是字串是由0開始算起。也就是說，如果你在字串的一開始就找到符合的子字串，那麼Perl就會傳回0。不過如果Perl發現你所指定的子字串不在原來的字串中，那麼就會傳回-1。<br>
+當然，有些人會關心中文字串的處理，我們先來試試下面的例子：<br>
+<br>
+<pre><br><br>my $mainstring = "台北Perl推廣組";&nbsp;&nbsp;# Big5 碼的中文<br>my $substring = "推廣組";<br>print index($mainstring, $substring);&nbsp;&nbsp;# 印出8<br></pre>
+<br>
+其實index傳回的是位元，所以如果你要利用index來找到某些中文字在在字串中是位於第幾個位元那麼就沒有問題。當然，如果你要的是以中文的角度來看，那麼「字」的觀念在這裡顯然並不存在。<br>
+<br>
+另外，就像正規表示式一樣，index在進行比對時，也會確定找到你所需要的字串就停止了。所以index傳回的就永遠會是第一次找到子字串的位置。實際的結果會像是這樣：<br>
+<br>
+<pre><br><br>my $mainstring = "perl training by Taipei perl mongers";<br>my $substring = "perl";<br>print index($mainstring, $substring);&nbsp;&nbsp;	# 結果是0<br></pre>
+<br>
+因為Perl在一開始就找到了比對成功的字串"perl"，因此它馬上傳回0，然後就停止比對了。可是這樣有時候是不是會有些不方便呢？所以我們來看看Perl對於index這個函式的描述。<br>
+<br>
+<pre><br><br>index STR,SUBSTR,POSITION<br>index STR,SUBSTR<br></pre>
+<br>
+我們好像發現一些署光，沒錯，根據上面的語法，其實我們還可以使用index的第三個參數，也就是位置。所以你可以要求index從第幾個位元開始找起，例如：<br>
+<br>
+<pre><br><br>my $mainstring = "perl training by Taipei perl mongers";<br>my $substring = "perl";<br>my $first = index($mainstring, $substring);&nbsp;&nbsp;	# 先找到第一次出現perl的地方<br>print index($mainstring, $substring, $first+1);&nbsp;&nbsp;	# 接下去找<br></pre>
+<br>
+這樣的用法就可以讓你找到下一個出現子字串的地方。當然，如果你沒有加第三個參數的話，那麼index會把它預設為0。也就是我們一開始一直使用的方式。<br>
+不過如果你不知道子字串會出現多少次，可是你又想找到最後一次出現的位置，那麼你會想要怎麼作呢？用個迴圈好像是我們目前可以想到的作法，所以我們就來試試吧：<br>
+<br>
+<pre><br><br>my $mainstring = "perl training by Taipei perl mongers";<br>my $substring = "perl";<br>my ($pos, $current);<br>my $pos;<br>my $current = -1;<br>until ($pos == -1) {&nbsp;&nbsp;				  # 到找不到正確字串為止<br>    $pos = index($mainstring, $substring, $current + 1);  # 從上次找到的位置往下找<br>    $current = $pos unless ($pos == -1);<br>}<br><br>print $current;&nbsp;&nbsp;					  # 印出 24	<br></pre>
+<br>
+看起來好點小小的複雜，因為我們必須用一個迴圈去搜尋所有的子字串，一直到它找到最後一個。不過有沒有可能從字串的尾端去找，那麼我們就只需要找到第一個符合的字串，因為對於從字串開頭而言，那就會是最後一次比對成功的子字串了。<br>
+看來這樣的需求不少，因此Perl的開發者也就提供了另外一個函式，也就是rindex，基本上rindex的使用方式跟index幾乎一模一樣，只不過它是從字串尾端開始找起。既然如此，我們就改用rindex來完成剛剛的工作：<br>
+<br>
+<pre><br><br>my $mainstring = "perl training by Taipei perl mongers";<br>my $substring = "perl";<br>print rindex($mainstring, $substring);&nbsp;&nbsp;	# 同樣印出 24<br></pre>
+<br>
+這樣顯然方便了許多，不過對於rindex來說，如果我們指定了第三個參數，那其實是用來表示搜尋的上限。也就是我們要求rindex在某個位置之前的就不找了。這樣描述似乎太過籠統，我們不如來看看實際的運作情形吧：<br>
+<br>
+<pre><br><br>my $mainstring = "Taipei perl mongers";<br>my $substring = "perl";<br>print rindex($mainstring, $substring, 4);&nbsp;&nbsp;# 結果傳回 -1<br></pre>
+<br>
+其實參數的意義也就是「以這裡為開始搜尋的起點」，所以如果我們把參數設定為4的話，Perl就只會從第四個位元往回進行比對，所以當然不會比對成功。<br>
+<br>
+利用index找出子字串的位置之後，我們還可以利用substr來取出某個字串內的子字串。我們先看看substr的標準語法：<br>
+<br>
+<pre><br><br>substr EXPR,OFFSET,LENGTH<br>substr EXPR,OFFSET<br></pre>
+<br>
+最簡單的方式就是只有指定要處理的字串跟另一個我們想取得子字串的起始點，所以你可以讓它看起來像這樣：<br>
+<br>
+<pre><br><br>my $string = "substring";<br>print substr($string, 3);&nbsp;&nbsp;# 果然印出 string 了<br></pre>
+<br>
+如果你沒有傳入長度這個參數，那麼Perl會預設幫你取到字串結束。所以我們剛剛取得的字串就是"string"，如果你想要的只是"str"三個字母，你就可以指定長度，也就是像這樣：<br>
+<br>
+<pre><br><br>my $string = "substring";<br>print substr($string, 3, 3);&nbsp;&nbsp;# 這樣就只會印出 str<br></pre>
+<br>
+有時候如果字串太長，也許從字串結尾開始算起會比較容易，就像index搜尋子字串的位置，可以利用rindex來要求Perl從字串尾端找起，那麼substr要如何使用類似的方式呢？答案就是利用負數的起始點，這樣說好像不如直接看個範例：<br>
+<br>
+<pre><br><br>my $string = "Taipei Perl Mongers";<br>print substr($string, -12, 4);&nbsp;&nbsp;#印出 Perl<br></pre>
+<br>
+另外，我們之前使用過正規表示式來進行取代的工作，例如下面的字串，我們想把"London"以"Taipei"取代，所以可以利用正規表示式，作這樣的處理：<br>
+<br>
+<pre><br><br>my $string = "London Perl Mongers";<br>$string =~ s/London/Taipei/;<br></pre>
+<br>
+當然，有些時候使用正規表示式未必比較方便。或是我們可以取得的資料有限，這樣的情況下，也許可以利用substr來進行字串替換。substr也可以進行替換，別擔心，你沒看錯，我們就來實驗看看，利用substr來把"London"換成"Taipei"。<br>
+<br>
+<pre><br><br>my $string = "London Perl Mongers";<br>substr($string, 0, 6) = "Taipei";<br>print $string;&nbsp;&nbsp;			# 就會印出 "Taipei Perl Monger"<br></pre>
+<br>
+這樣看起來好像沒甚麼，顯然不夠絢麗，我們來把它改寫一下吧！<br>
+<br>
+<pre><br><br>my $string = "London Perl Mongers";<br>print substr($string, 0, 6) = "New York";<br>print $string;&nbsp;&nbsp;			# 你完全不需要考慮字串長度<br></pre>
+<br>
+字串長度對Perl來說並不是個問題，所以我們可以很安心的使用長度不相等的字串來進行替換，Perl可以自動的幫你處理長度的問題。其實這種需求顯然相當的高，所以這也是substr的另一種標準語法，也就是說，我們可以把剛剛的語法用這種方式來取代：<br>
+<br>
+<pre><br><br>my $string = "London Perl Mongers";<br>substr($string, 0, 6, "New York");&nbsp;&nbsp;# 使用第四個參數<br>print $string;&nbsp;&nbsp;			# 也是會替換為 New York Perl Mongers<br></pre>
+<br>
+12.2 uc 與 lc<br>
+<br>
+字串中，偶而會有一些惱人的狀況，也就是字串的大小寫問題。例如你弄了一個會員帳號系統，因此這個系統必須讓管理者可以開帳號，使用者可以登入等等。有許
+多牽涉到帳號的輸入，比對問題，這時候如果還有字母大小寫的問題，也許會更讓人氣餒，尤其目前的大多數使用者幾乎都習慣了大小寫不分的使用狀況。所以有時
+候也許需要藉由系統自動轉換的方式來避開這一類瑣碎的事。<br>
+<br>
+uc也就是upper case的意思，所以很清楚的，它會幫你把字串中的英文字母傳換成大寫，然後回傳，就像這樣：<br>
+<br>
+<pre><br><br>my $string = "I want to get the uppercased string";<br>print uc $string;    # 結果就變成了 "I WANT TO GET THE UPPERCASED STRING"<br></pre>
+<br>
+怎麼樣，一點都不意外吧！而且依此類推，lc 則是轉成小寫之後回傳，這應該不需要重新舉例了。<br>
+這樣一來，我們雖然可以取得全部大小或全部小寫的字串，可是在更多時候，我們其實只要字首的大小就好了，那麼可以怎麼作呢？也許可以考慮使用ucfirst，看這個函式名稱就覺得它是我們想要的東西。，既然如此，那我們就直接來試一下吧：<br>
+<br>
+<pre><br><br>my $string = "upper case";<br>print ucfirst $string;&nbsp;&nbsp;	# 印出 Upper case<br></pre>
+<br>
+就像我們所預期的一樣，我們讓Perl把第一個字母印出了大寫，不過這完全是意料之中？相對應於ucfirst，Perl也提供了lcfirst這個函式，而且正如大家所猜想的一樣，它會把字串的第一個字母轉為小寫。<br>
+<br>
+12.3 sprintf<br>
+<br>
+我們已經非常習慣使用print來印出我們執行程式所得到的結果了，可是很多時候print印出的結果卻未必讓人滿意，不滿意的原因有很多時候是因為它的
+輸出格式無法依照我們的要求，或者說我們需要花更多的力氣才能達到我們所期待的樣子。所以這時候，sprintf就可以派上用場了。sprintf主要是
+可以幫助我們作格式化的列印指令。例如你總是希望印出兩位數的小數點，那麼這時候，你應該就會非常需要sprintf來幫助你。我們來看看我們可以怎麼作
+呢？<br>
+<br>
+<pre><br><br>my $num = 21.3;<br>my $formatted = sprintf "%.2f", $num;&nbsp;&nbsp;	# 先設定好格式<br>print $formatted;<br></pre>
+<br>
+當然，sprintf的功能相當的豐富，如果你打算使用的話，應該先來看看sprintf提供甚麼樣的強大功能：<br>
+<br>
+<pre><br><br>%%   百分比符號<br>%c   字元   <br>%s   字串<br>%d   包含正負號的十進位整數<br>%u   不包含正負號的十進位整數<br>%o   不包含正負號的八進位整數<br>%x   不包含正負號的十六進位整數<br>%e   以科學符號表示的符點數<br>%f   固定長度的十進位浮點數<br>%X   使用大寫表示的%x<br>%E   使用大寫表示的%E<br></pre>
+<br>
+其他還有一些不同的格式指定方式，當你開始使用的時候，你可以參考printf的說明文件。<br>
+<br>
+12.4 排序<br>
+<br>
+對於字串的另一個重頭戲，也就是排序了。因為當我們有了資料之後，要怎麼讓資料可以更容易的讓人可以進行檢索，或如何進行有效的整理就是非常重要的議題
+了，而排序正是這些議題的第一門課程。所謂的排序其實主要在進行的也就是「比較」，「交換」的工作，因此我們可以先從Perl如何交換兩個變數的值來看
+起。<br>
+在傳統的方式，或其他程式語言目前的實作方式還是如此，也就是使用另一個變數來作為暫存的變數。例如我們如果想要把$a跟$b兩個變數裡面的值進行交換，那麼可能的作法也許會是這樣：<br>
+<br>
+<pre><br><br>$tmp = $a;&nbsp;&nbsp;	# 先把$a的值放進暫存變數<br>$a = $b;&nbsp;&nbsp;	# 把$b的值指定給$a<br>$b = $tmp;&nbsp;&nbsp;	# 從$tmp中取得$a原來的值，並指定給＄b<br></pre>
+<br>
+可是在Perl當中，我們就可以輕鬆一些了。我們如果要交換兩個變數的值，只需要使用這樣的方式就可以了：<br>
+<br>
+<pre><br><br>($a, $b) = ($b, $a);<br></pre>
+<br>
+這樣看起來好像有點差距，可是又相差不大，部過一但變數夠多，你利用其他方式可能只會讓自己變得頭昏腦脹，不然你試著自己弄一個四個變數的狀況，然後用原來的方式寫寫看，我想總還是很難比這樣看起來更方便了吧：<br>
+<br>
+<pre><br><br>($a, $b, $c, $d) = ($b, $c, $d, $a);<br></pre>
+<br>
+能夠輕鬆的交換變數內的值之後，我們如果利用排序的結果來決定是否要把兩個正在進行比較的變數值交換，那麼最後就可以完成整個串列的排序。如果你學過某些
+相關的內容，應該會覺得非常熟悉，這似乎是某種被稱為「泡沫排序法」的方式。當然，你可以使用其他在資料結構那堂課中所學的其他排序，好吧，不過暫時先忘
+了這些課本上的東西。我們先來看看最基本的排序方式：<br>
+<br>
+<pre><br><br>sub my_sort {<br>&nbsp;&nbsp;my ($a, $b) = @_;<br>&nbsp;&nbsp;($a, $b) = ($b, $a) if ($a &gt; $b);<br>&nbsp;&nbsp;.......			# 繼續其他運算<br>}<br></pre>
+<br>
+利用比較，交換的方式，我們似乎完成了一個簡單，可以用來排序的副常式。不過既然每次排序我們都需要這樣的東西，那麼Perl很顯然的，應該會有更簡易的方式。於是我們發現了一個新的運算符：&lt;=&gt;。<br>
+有人稱這個符號為太空船符號，確實是有幾分像，那麼它有甚麼便利性呢？我們實際利用這個符號來進行排序吧。這裡還有一個很大的特點，當我們在進行比較時，
+通常會定義兩個變數來表示正在進行比較的值，很多時候我們都用$a跟$b來代表這兩個值。只不過如果每次我們都需要這兩個變數，那不是很累人嗎？Perl
+也非常體諒我們打字的辛苦，所以$a跟$b已經被設為Perl排序時的內建變數。意思也就是說，以後如果你在Perl中要進行排序，你不需要自己另外定義
+這兩個變數。<br>
+<br>
+<pre><br><br>my @array = (6, 8, 24, 7, 12, 14);<br>my @ordered = sort { $a &lt;=&gt; $b } @array;<br>print @ordered;&nbsp;&nbsp;						# 結果變成 6, 7, 8, 12, 14, 24<br></pre>
+<br>
+你可能會很好奇，這樣的方式難道不能直接用sort來作嗎？我們之前學過，直接使用sort這個函式來對陣列進行排序。所以現在的狀況應該可以使用同樣的方式來進行排序。那麼何不來試試呢？<br>
+<br>
+好啊，這已經讓我快要一頭霧水了。因為上面的例子實在讓人很想改寫成這樣：<br>
+<br>
+<pre><br><br>my @array = (6, 8, 24, 7, 12, 14);<br>my @ordered = sort @array;<br>print @ordered;&nbsp;&nbsp;						# 這次輸出 12, 14, 24, 6, 7, 8<br></pre>
+<br>
+聰明的你可能已經看出排列出來的結果了，沒錯，sort預設會使用字串排列的方式，這時候，我們應該先提示一下sort的語法：<br>
+<br>
+<pre><br><br>sort SUBNAME LIST&nbsp;&nbsp;	# 你可以使用副常式<br>sort BLOCK LIST&nbsp;&nbsp;		# 或使用一個區塊<br>sort LIST&nbsp;&nbsp;			# 這是我們一開始說的方式<br></pre>
+<br>
+因此，如果你沒有指定區塊或是副常式，Perl預設會使用字串的方式去進行排序，也就是我們第二次看到的結果了。那麼如果我要強制Perl使用字串比對，
+或是針對字串進行比對，那應該怎麼寫呢？你可以參考另一個和&lt;=&gt;相對應的運算符，也就是'cmp'，這也就是比較的意思。讓我們直接來試試
+這樣的比較方式吧：<br>
+<br>
+<pre><br><br>my @array = (6, 8, 24, 7, 12, 14);<br>my @ordered = sort { $a cmp $b } @array;<br>print @ordered;&nbsp;&nbsp;						# 這次還是輸出 12, 14, 24, 6, 7, 8<br></pre>
+<br>
+沒錯吧，果然和我們第二次只使用sort的結果是一樣的。特別要注意的就是'cmp'這個東西，如果你要進行字串的排序，可不能使用太空船符號。另外，我們還可以直接進行遞減的排序，而且非常簡單，我們直接利用第一個例子來試試吧：<br>
+<br>
+<pre><br><br>my @array = (6, 8, 24, 7, 12, 14);<br>my @ordered = sort { $b &lt;=&gt; $a } @array;<br>print @ordered;&nbsp;&nbsp;						# 遞減排序： 24, 14, 12, 8, 7, 6<br></pre>
+<br>
+其實一但可以利用區塊或副常式來進行獨特的排序方式，我們可以玩出不少其他的花樣。例如你可以對雜湊進行排序，或是比對多個值來進行排序。其中雜湊的排序
+是非常常用的。尤其我們知道，雜湊的安排是依據系統計算出存取的最佳化方式，因此大多數的時候，我們拿到一個雜湊通常是沒有甚麼順序性。要能夠對於其中的
+鍵或值排序都是非常重要的，而透過sort的方式，我們就很容易做到了。<br>
+<br>
+<pre><br><br>my %hash = (john, 24, mary, 28, david, 22);<br>my @order = sort { $hash{$a} &lt;=&gt; $hash{$b} } keys %hash;<br>print @order;&nbsp;&nbsp;				# 依序是 david john mary<br></pre>
+<br>
+雖然只有三行程式，不過我們還是應該來解釋一下其中到底發生了甚麼事，否則看起來實在讓人有點頭暈。第一行的問題應該不大，或者說如果你第一行看起來有點
+吃力，那你可能要先翻回去看看雜湊那一章，至少你應該要懂得怎麼定義一個雜湊，然後指定雜湊的鍵跟值。這裡所用的方式一點也不特別，我們只是用串列來賦值
+給一個雜湊。最複雜的應該是第二行
+(除非你覺得最後一行要印出一個陣列對你而言太過困難)，我們先看等號左邊，那裡定義了一個陣列，因為我們希望可以得到一個依照雜湊值排序過的雜湊鍵陣
+列。這聽來好像不難，讓我們先想像一下，我們該怎麼取得這樣的陣列呢？<br>
+首先我們應該先拿到包含所有雜湊鍵的陣列，也就是利用keys這個函式取得的一個陣列。拿到這個陣列之後，我們就可以來進行排序了。排序的重點在於區塊內
+的那一小段程式。我們還是使用了Perl預設的兩個變數，也就是$a跟$b，分別代表從陣列(keys
+%hash)拿出來準備比較的兩個數值。部過我們並不是直接對變數$a，$b進行比較，而是以他們為鍵，而取的雜湊值來進行排序。<br>
+<br>
+12.5 多子鍵排序<br>
+<br>
+很多時候，我們會希望排序的根據不單單只是一個單純的鍵值，例如在剛剛的例子中，如果我們希望當排序時，在遇到年齡相同的時候，還能以名字排序，那麼我們
+就會需要多子鍵排序。另外還有非常常見的就是網路上經常看到的IP，我們如果要按照順序將IP排序，那麼這是沒有辦法依照正常的方式來進行排序的。例如我
+們看到這些IP：<br>
+<br>
+<pre><br><br>140.21.135.218<br>140.112.22.49<br>140.213.21.4<br>140.211.42.8<br><br>依照正常字串排序之後會變成：<br><br>140.112.22.49<br>140.21.135.218<br>140.211.42.8<br>140.213.21.4<br></pre>
+<br>
+這看起來實在不太對勁，因為是藉由字串的關係，所以21被排在112的後面。所以我們想要作的其實是把每一個部份都拆開來，然後進行數字的比對。所以我們可以這麼作：<br>
+<br>
+<pre><br><br>#!/usr/bin/perl -w<br><br>use strict;<br><br>my @ip = ("140.21.135.218", "140.112.22.49", "140.213.21.4", "140.211.42.8");<br>my @order = sort ipsort @ip;&nbsp;&nbsp;	# 直接叫用副常式<br>print "$_\n" for @order;<br><br><br>sub ipsort {<br>    my ($a1, $a2, $a3, $a4) = $a =~ /(\d+).(\d+).(\d+).(\d+)/;&nbsp;&nbsp;	# 分為四個數字<br>    my ($b1, $b2, $b3, $b4) = $b =~ /(\d+).(\d+).(\d+).(\d+)/;<br>    $a1 &lt;=&gt; $b1 or $a2 &lt;=&gt; $b2 or $a3 &lt;=&gt; $b3 or $a4 &lt;=&gt; $b4;&nbsp;&nbsp;	# 進行多子鍵排序<br>}<br></pre>
+<br>
+這個程式的重點在於兩個部份，第一個部份是直接叫用副常式進行排序。所以我們看到在這裡，我們呼叫了副常式ipsort來幫我們進行多子鍵的排序部份。而
+且我們一樣可以直接在副常式之中使用預設變數$a，$b。在我們把排序的程式放進副常式之後，我們就開始進行ip的拆解工作，利用正規表示式把每一個ip
+都拆解成四個部份。所以我們就分別有了$a1...$a4以及$b1...$b4這樣的子鍵。然後利用子鍵來進行排序，並且利用or來作為是否進行下一個
+子鍵排序的關鍵。因為太空船符號的比較會傳回-1, 0 或是
+1，因此如果是0就表示兩者相等，於是繼續比對下一個子鍵。利用這樣排序之後，我們就可以得到這樣的結果：<br>
+<br>
+<pre><br><br>140.21.135.218<br>140.112.22.49<br>140.211.42.8<br>140.213.21.4<br></pre>
+<br>
+習題：<br>
+1. 讓使用者輸入字串，取得字串後算出該字串的長度，然後印出。<br>
+2. 利用sprintf做出貨幣輸出的表示法，例如：136700以$136,700，26400以$26,400表示。<br>
+3. 利用雜湊%hash = (john, 24, mary, 28, david, 22, paul, 28)進行排序，先依照雜湊的值排序，如果兩個元素的值相等，則依照鍵值進行字串排序。 
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+
+<!-- <div id="gamma">
+   <div id="gamma-inner" class="pkg">
+       Gamma Content
+   </div>
+</div> -->
+
+
+            </div>
+        </div>
+        <!-- <div id="footer">
+            <div id="footer-inner" class="pkg">
+                Footer Content
+            </div>
+        </div> -->
+        </div>
+    </div>
+</body>
+</html>
+

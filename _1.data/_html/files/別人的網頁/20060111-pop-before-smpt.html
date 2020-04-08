@@ -1,0 +1,130 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-tw">
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title></title>
+</head>
+
+<body>
+
+<hr>
+<p align="center"><b><font size="+2" face="標楷體">Fedora 4 Postfix + Dovecot + POP 
+Before SMTP<br>
+簡易設定 POP Before SMTP 郵件主機系統</font></b></p>
+<p align="center"><b><font face="標楷體" size="4">Szukai Chou 周斯凱<br>
+&lt;kai@pckai.idv.tw&gt;</font></b></p>
+<hr>
+<p align="left"><font size="+1" color="#000099"><b><font face="標楷體">簡介</font>：<br>
+</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+之前使用 SMTP認證機制裡面，都使用 Cyrus SASL 機制勾選認證機制來傳送信件， POP Before SMTP 
+這套軟體很早就發展了，但不知道為何很少人用，小弟發現使用 POP Before SMTP 很方便，也不影響一般使用者的使用習慣，安裝十分方便 ，設定上也沒有 
+SASL 那麼複雜只需要在 Postfix 加入一行參數即可運作 ，所以給各位參考。</p>
+<hr>
+<p align="left"><b><font color="#000099" face="標楷體"><font size="+1">架設流程</font></font></b>：</p>
+<ol>
+  <li>
+  <p align="left"><font face="新細明體">先安裝 POP Before SMTP ( Postfix 
+  的詳細安裝請參考鳥哥的私房菜中 - 架站文件中的 Postfix Server ，不再贅述)<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font color="#000099">yum install pop-before-smtp</font><br>
+　</font></li>
+  <li>
+  <p align="left">先修改 POP Before SMTP 設定<br>
+  <br>
+  修改檔案：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vi 
+  /etc/pop-before-smtp-conf.pl<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 設定底下參數：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <font color="#000066">$file_tail{'name'} = '/var/log/maillog';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  #設定mail的log檔</font> <br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  $grace = 30*60;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  #這項功能是當IP被資料庫記錄以後有效時間,單位是秒</font> <br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  $dbfile = '/etc/postfix/pop-before-smtp';&nbsp;&nbsp;&nbsp;&nbsp; 
+  #將資料庫放置在/etc/posftix底下,檔名為pop-before-smtp<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font>
+  找到底下參數：<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  # For Dovecot POP3/IMAP<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #$pat = 
+  '^(... .. ..:..:..) \S+ (?:dovecot: )? (?:imap|pop3)-login: ' .<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # 'Login: \S+ 
+  \[(\d+\.\d+\.\d+\.\d+)\]';</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 更換成底下參數：<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  $pat = '^(... .. ..:..:..) \S+ (?:imap|pop3)-login: ' .<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  'Login: \S+ \[(\d+\.\d+\.\d+\.\d+)\]';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #請注意最後有個小句點 
+  -login: ' .</font><br>
+　</li>
+  <li>
+  <p align="left">修改 Dovecot 設定<br>
+  <br>
+  修改檔案：<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  vi /etc/dovecot.conf </font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 設定底下參數：<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  protocols = pop3&nbsp;&nbsp;&nbsp;&nbsp; #設定 Dovecot 接收 POP3 協定<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pop3_listen = 
+  [*]&nbsp;&nbsp;&nbsp;&nbsp; # IPV4 設定為 [*] ， 如果是 IPV6 請設定[ : : ]</font><br>
+　</li>
+  <li>
+  <p align="left">修改Postfix 設定<br>
+  <br>
+  修改檔案：<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  vi /etc/postfix/main.cf</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在 main.cf 
+  的最後一行加入<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  ###POP-BEFORE-SMTP###<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  smtpd_recipient_restrictions = 
+  permit_mynetworks,reject_non_fqdn_recipient,check_client_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; access 
+  hash:/etc/postfix/pop-before- smtp,reject_unauth_destination&nbsp; #此行沒有斷行 ， 
+  為同一行</font><br>
+　</li>
+  <li>
+  <p align="left">啟動 POP Before SMTP<br>
+  <br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  /etc/rc.d/init.d/pop-before-smtp start</font><br>
+　</li>
+  <li>
+  <p align="left">測試 POP Before SMTP 資料庫中有沒有IP<br>
+  <br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  /usr/sbin/pop-before-smtp --list</font><br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 測試結果：<br>
+  <font color="#000066">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  [root@ns1 /]# /usr/sbin/pop-before-smtp --list<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The database 
+  holds 1 IP:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  220.141.156.241</font><br>
+　</p>
+  <hr></li>
+</ol>
+<p align="left"><b><font face="標楷體" size="+1" color="#000099">參考文獻</font></b><font color="#000099">：<br>
+<br>
+</font>POP Before SMTP 原始網站<br>
+http://popbsmtp.sourceforge.net/<font color="#000099"><br>
+<br>
+</font><font face="新細明體">鳥哥的 Linux 與 ADSL 私房菜 - 簡易 Mail Server 架設 -- Postfix 設定<br>
+http://linux.vbird.org/linux_server/0390postfix.php<font color="#000099"><br>
+<br>
+</font>鳥哥的 Linux 與 ADSL 私房菜 - 簡易設定 POP Before SMTP 郵件主機系統<font color="#000099"><br>
+</font>作者 Wang &lt;wang1126@mail.gpp.ks.edu.tw&gt;</font></p>
+
+</body>
+
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Big5">
+   <meta name="Author" content="VBird">
+   <meta name="GENERATOR" content="Mozilla/4.5 [zh-TW] (WinNT; I) [Netscape]">
+   <title> 章節跳動註解範例2 </title>
+<style>
+
+</style>
+</head>
+<BODY nosave="" bgcolor="#FFFFF0" background="./gray.jpg" text="black">
+
+
+
+
+<h3>Table of Contents</h3>
+<OL>
+<LI><a href="#what">What's new (in 2.4)?</a>
+<LI><A HREF="#requ">Requirements</a>
+<LI><A HREF="#intr">Introduction</A>
+<LI><A HREF="#feat">Features</A>
+<LI><A HREF="#dirs">Directory Structure (unix)</A>
+</OL>
+
+<h3><a name="what">What's new (in 2.4)</a></h3>
+<blockquote>
+Please check this section periodically to see what have been changed or
+added. 
+</blockquote>
+<p>
+<ul type=square>
+    <li> This version is compiled and tested only on Unix.
+<p>
+    <li> The maximum number of digits the counter can count and display can
+    be very high. The default is 80.  That is, there will not be any need 
+    to recycle the datafile within your life time. If you want to change it, 
+    edit the count.h and modify the directive MAX_DIGITS.
+<p>
+    <li> Wild card can be used in the IPs in ignore host block in the 
+    config file.  There is no limit for number of IPs (as long as memory 
+    is not exhausted).
+<p>
+    <li> Wild card can be used in the hosts/IPs in the auth block of the 
+    config file.  There is no limit for number of hosts/IPs (as long as memory 
+    is not exhausted).
+<p>
+    <li>The counter can count with image= parameter if df= parameter is
+    specified.
+<p>
+<!-- added, Oct-25-1997 -->
+    <li> Consecutive accesses from a host will not increment the counter.
+<p>
+<!-- added, Oct-26-1997 -->
+    <li> New "cache" and expires" parameters can be used to change the
+     caching behavior of certain browsers.
+<p>
+    <li> Date in clock is Year 2000 safe :)
+<p>
+    <li> Meaning of BLOCK 3 of the count.cfg file differes with that of
+    Count 2.3. So if you'r using an older config file, change the boolean
+    in this block.
+<p>
+    <li> Many bug fixes.
+</ul>
+<h3><A NAME="requ">
+Requirements
+</A></h3>
+<ul>
+<P>
+<!--
+The current version (2.3) works on unix, NT (intel), Win95,OS/2 and VMS.
+The version 2.2 is ported to Mac by someone. It will be available If I can
+obtain the distribution from the person.
+-->
+<p>
+<LI> A C compiler (ANSI or non-ANSI).
+<P>
+<LI> You should be familiar with Unix operating system in order to install
+it on Unix. I think if you know what <b>ls</b> command is, you qualify. If your
+site is configured to run CGI programs from users' space, then you will 
+not need root access otherwise root access is needed.
+<P>
+<LI> You must run a web server. The web server must be capable of running
+CGI programs. If you run several web servers in your domain, you can 
+install the counter in one server and allow the users at other servers to 
+access the counter remotely.
+<p>
+<LI>The web server must be running on any of the Unix, NT, OS/2, VMS or 
+Amiga Operating System.
+</ul>
+<P>
+<blockquote>
+It is reported that the Count 2.3 runs on the following platforms, 
+hopefully 2.4 will be portable as well.
+<p>
+<center>
+<table border cellpadding=3>
+<tr>
+    <th bgcolor="#ddddff"><b>Operating System</b></th>
+    <th bgcolor="#ddddff"><b>First reported by</b></th>
+</tr>
+<tr>
+    <td>AIX 3.2.5</td>
+    <td align=center>robtuck@coeibm.rutgers.edu</td>
+<!-- Dec-12-1996 -->
+</tr>
+<tr>
+    <td>Amiga</td>
+    <td align=center>albertv@spinnewiel.xs4all.n (ported by)<td>
+<!-- May-31-1997 -->
+</tr>
+<tr>
+    <td>AU/X</td>
+    <td align=center>jussi.haro@tothepoint.fi</td>
+</tr>
+<tr>
+    <td>BSDI</td>
+    <td align=center>chris@technonet.com</td>
+<!-- 09/26/96 -->
+</tr>
+<tr>
+    <td>DEC OSF1</td>
+    <td align=center>ma_muquit@fccc.edu</td>
+</tr>
+<tr>
+    <td>DG/UX</td>
+    <td align=center>irrigacion@planet.losandes.com.ar</td>
+<!-- 10/31/1996 -->
+</tr>
+<tr>
+    <td>DomainOS 10.4.1 (on Apollo Workstns)</td>
+    <td align=center>philippe.hubaut@etud.insa-tlse.fr</td>
+<!-- Nov-18-1996 -->
+</tr>
+<tr>
+    <td>FreeBSD 2.1.5</td>
+    <td align=center>tomcat@1lo.lublin.pl</td>
+</tr>
+<tr>
+    <td>HP-UX</td>
+    <td align=center>takao.tsukiyama@tokyo.tohmatsu.co.jp</td>
+</tr>
+<tr>
+    <td>Linux</td>
+    <td align=center>ashley@photocraftlab.com</td>
+</tr>
+<tr>
+    <td>NetBSD</td>
+    <td align=center>makoto@komekome.bay.prug.or.jp</td>
+<!-- Aug-26-1997 -->
+</tr>
+<tr>
+    <td>NEXTSTEP 3.3,3.2,4.0 for Mach<br>
+    (Motorola,Intel)
+    </td>
+    <td align=center>jk@exnext.com</td>
+</tr>
+<tr>
+    <td>NT 3.51 (intel)</td>
+    <td align=center>ma_muquit@fccc.edu</td>
+</tr>
+<tr>
+    <td>NT 4.0 with IIS 2.0</td>
+    <td align=center>srakhtar@ix.netcom.com</td>
+<!-- Dec-03-1996 -->
+</tr>
+<tr>
+    <td>SunOS 4.1.x</td>
+    <td align=center>ma_muquit@fccc.edu</td>
+</tr>
+<tr>
+    <td>Solaris 2.x</td>
+    <td align=center>ma_muquit@fccc.edu</td>
+</tr>
+<tr>
+    <td>SCO</td>
+    <td align=center>yuqiao@UDel.Edu</td>
+<!-- Dec-15-1996-->
+</tr>
+<tr>
+    <td>SGI</td>
+    <td align=center>ma_muquit@fccc.edu</td>
+</tr>
+<tr>
+    <td>SINIX 5.4 (SVR4, MX500I by Siemens</td>
+    <td align=center>Richard.Bothe@mch.sni.de</td>
+<!-- Dec-04-1996 -->
+</tr>
+<tr>
+    <td>ULTRIX 4.3</td>
+    <td align=center>mbarria@ing.puc.cl</td>
+</tr>
+<tr>
+    <td>UnixWare 2/2.03</td>
+    <td align=center>ebh@fpk.hp.com
+    <br>ivanlan@tzuk-te.callware.com
+    </td>
+    
+</tr>
+<tr>
+    <td>VMS</td>
+    <td align=center>phil@pottsoft.demon.co.uk (ported by)</td>
+<!-- Oct 22, 1996 -->
+</tr>
+<tr>
+    <td>Win95</td>
+    <td align=center>null@dent.showa-u.ac.jp<br>
+</tr>
+<tr>
+    <td>OS/2</td>
+    <td align=center>
+    dshields@direct.ca (2.3) [ported by)
+    <br>
+    </td>
+</tr>
+</table>
+</center>
+</blockquote>
+<P>
+<h3><A NAME="intr">
+Introduction
+</A></h3>
+<blockquote>
+This is a 
+<A HREF="http://hoohoo.ncsa.uiuc.edu/cgi">CGI</A>
+program to keep record of the raw hits of a web page. It
+generates a GIF image of the number of hits and returns to the browser as
+an in-lined image.  The program also has a run-time option not to show the digit
+images, this way the hits can be kept without displaying it. The hits can be
+be monitored without incrementing from a separate page as well.
+Almost all of the
+<A HREF="#feat">features</A> are run-time options.
+This program started as a fun to play
+with CGI programming but due to enormous interest, feature request, input
+from thousands of you, it has
+turned in to the most configurable counter on the whole <b>World Wide
+Web</b>. 
+<P>
+The program is distributed as a gzip'd tar archive. If you do not have
+gzip/gunzip, it is available a tar archive at:
+<a href="ftp://prep.ai.mit.edu/pub/gnu/gzip-1.2.4.tar">prep.ai.mit.edu</a>.
+The URL is:
+<code>ftp://prep.ai.mit.edu/pub/gnu/gzip-1.2.4.tar</code>
+</blockquote>
+<P>
+<h3><A NAME="feat">
+Features
+</A></h3>
+<table border=0 width="100%">
+<tr>
+<td>
+<UL type=square>
+<LI> Does not require server-side includes.
+<p>
+    <li><font color="#a52b2b">
+    The maximum number of digits the counter can count and display can
+    be very high. The default is 80.  That is, there will not be any need 
+    to recycle the datafile within your life time. If you want to change it, 
+    edit the count.h and modify the directive MAX_DIGITS.</font>
+    <font size=-1>(new in this release).</font>
+<p>
+    <li><font color="#a52b2b">
+    Wild card can be used in the IPs in ignore host block in the 
+    config file.  There is no limit for number of IPs (as long as memory 
+    is not exhausted).</font>
+    <font size=-1>(new in this release).</font>
+<p>
+    <li> <font color="#a52b2b">
+    Wild card can be used in the hosts/IPs in the auth block of the 
+    config file.  There is no limit for number of hosts/IPs (as long as memory 
+    is not exhausted).</font>
+    <font size=-1>(new in this release).</font>
+<p>
+    <li><font color="#a52b2b">
+    The counter can count with image= parameter if df= parameter is
+    specified.</font>
+    <font size=-1>(new in this release).</font>
+<p>
+<!-- added, Oct-25-1997 -->
+    <li><font color="#a52b2b">
+    Consecutive accesses from a host will not increment the counter.
+    </font>
+    <font size=-1>(new in this release).</font>
+<p>
+<!-- added, Oct-26-1997 -->
+    <li><font color="#a52b2b">
+    New "cache" and expires" parameters can be used to change the
+     caching behavior of certain browsers.</font>
+    <font size=-1>(new in this release).</font>
+<p>
+    <li><font color="#a52b2b">
+    Year 2000 safe :)</font>
+    <font size=-1>(new in this release).</font>
+<p>
+<li> Uses image strip as well as individual digit images. Using an image
+strip reduces disk i/o significantly, therefore, it's faster. A program
+(mkstrip) is supplied to create an image strip from individual digit images. 
+<p>
+<li> Comma can be displayed after every 3rd digit from right.
+<p>
+<li> Any one color of the image can be changed on the fly. 
+<p>
+<li> Uses netmasks to mask out a range of hosts in the network or the entire
+network. 
+<p>
+<li> Automatic datafile creation, strict mode, use of rgb color database
+can be controlled from the cfg file at run time. 
+<p>
+<li> Any arbitrary GIF file can be displayed. Frame and other attributes of
+the counter can be applied to the GIF file. 
+<P>
+<LI> Count 2.0 is backward compatible with Count1.5's URL. One thing to
+note, the keyword <b>wxh</b> has no meaning in Count 2.0. It was used in
+Count 1.5 to specify digit dimensions. In Count 2.0 it is not required,
+because the digit dimensions are determined automatically. Therefore, you
+can use variable width digit images in this version.
+<P>
+<li> Reasonable default for all <b>QUERY_STRING</b> parameters.
+<p>
+<li> The same program can be used to display time or date.
+<p>
+<li> The time and date of any timezone in the world can be displayed. The
+time can be displayed in 12 or in 24 hour format.
+<p>
+<li> Supports digit images with variable width.
+<p>
+<li> Counter can be displayed without incrementing (for monitoring etc.)
+<p>
+<li> A literal digit string can be displayed.
+<p>
+<li> A random digit string can be displayed.
+<p>
+<li> The color of the digits can be negated.
+<p>
+<li> The counter can be rotated (only integral of 90 degrees, 90,180,270).
+The default rotation is 270 degrees.
+<p>
+<LI> An <B>ornamental 3D frame</B> can be wrapped around the counter image
+with user defined thickness and color at <I>run time</I>.
+<p>
+<li> The frame and transparent color can be a name (e.g. red,green,pink
+etc.). The color can be specified as a hex string, e.g. ffffff, ff0000 etc.
+as well as RGB triplets as before.
+<P>
+<LI> Single program for any number of users for any number of web pages. 
+<P>
+<LI> Any color of the counter image can be made <B>transparent</B> at
+<I>run time</I>.
+<P>
+<LI> Style of digits can be specified at <I>run time</I>.
+<P>
+<LI> Authorized host names can be in the configuration file.  Authorized
+hosts are those which can run the counter remotely. Do not confuse this with
+visitors from certain hosts.
+<P>
+<LI> IP filtering through a configuration file at <I>run time</I>. Any number of
+hosts can be ignored from counting. A netmask can be used to filter out a
+specific range of host in a network or to filter out the entire network.
+It's a good idea to ignore your own host or entire domain. Gen-conf program
+will let you create the configuration file interactively.
+<P>
+<LI><b>Data file locking</b>. Data file will not get clobbered by
+simultaneous Count.cgi processes. 
+<P>
+<LI> Maximum number of digits can be set or counter can be displayed with
+exact number of digits at <I>run time</I>.
+<P>
+<LI> User will be able to specify a start-up counter value at <I>run
+time</I>. This will take effect if the data file does not exist. You will
+be prompted by the configuration program if you want this feature or not.
+<P>
+<LI> If you <b>do not want to display the counter</b> but like to keep the
+hits on your page, sh=0 can be defined in the QUERY_STRING at <I>run time</I>.
+It will write a 1x1 transparent GIF image to the browser but the counter in the
+data file will be incremented all right. 
+</UL>
+</td>
+</tr>
+</table>
+<h3><a name="dirs">
+Directory Structure (unix)
+</a></h3>
+<blockquote>
+Before going to the configuration procedure, please browse through
+the default directory structure below. It will help you answering questions
+of the configuration script. You can change the name of the directories
+as you please, but keep the directory structure same, it will make your
+life much easier. You do not have to create any of these directories, they
+will be created for you by the Count-install program. Only thing you 
+probably have to create are the individual datafiles (keep reading).
+<p>
+<img src="images/countdst.gif" border=1 alt="directory structure">
+<p>
+<b>Base Directory</b> is the directory where all the sub-directories and
+the files related to counter reside. 
+<p>
+<b>Log Directory</b> is the directory which holds the counter Log file.
+Counter error messages or if someone tries to access your counter remotely,
+warning message regarding this is written to this file.
+<p>
+<b>conf</b> directory holds the configuration file for the counter. 
+configuration file holds information in 4 blocks. Each
+block resides between a left and right curly brace. 
+This file is created by the program <b>Gen-conf</b> and can be hand crafted
+later. After creating the file, please read the comments in the file.
+<p>
+<b>data</b> directory holds all the datafiles for the counter. The datafiles
+stores the access counts of web pages. Each page must have a separate
+datafile. The datafile is specified at run-time. You will know about it
+later.
+<p>
+<b>digits</b> directory holds sub-directories with various styles of GIF
+digits. For example, <b>A</b> sub-directory holds the green led digits.
+The sub-directories have GIF digit files named zero.gif, one.gif...nine.gif.
+you will know about it later.
+<p>
+<b>rgb.txt</b> file is used to convert a color name (for example, cyan) to the
+appropriate red, green and blue color component. This file came from 
+X consortium and supplied with the distribution. You will know about the
+file later.
+</blockquote>
+<p>
+
+
+
+
+
+
+
+</body></html>
+

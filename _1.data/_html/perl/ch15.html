@@ -1,0 +1,316 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="generator" content="Movable Type Publishing Platform 4.0-beta2-20070612" />
+
+    <title>
+
+        
+    perl 學習手札: 第十五章 關於資料庫的基本操作
+        
+
+    </title>
+
+
+    
+    <link rel="start" href="./perl_index.html" title="Home" />
+   
+
+</head>
+<body class="page-archive layout-two-column-right" onload="individualArchivesOnLoad(commenter_name)">
+   <div id="container">
+      <div id="container-inner" class="pkg">
+         <div id="banner">
+            <div id="banner-inner" class="pkg">
+               <h1 id="banner-header"><a href="./perl_index.html" accesskey="1">perl 學習手札</a></h1>
+               <h2 id="banner-description"></h2>
+            </div>
+         </div>
+         <div id="pagebody">
+            <div id="pagebody-inner" class="pkg">
+               <div id="alpha">
+                  <div id="alpha-inner" class="pkg">
+
+
+<h3 class="entry-header">第十五章 關於資料庫的基本操作</h3>
+
+<div class="entry" id="entry-382">
+    <div class="entry-content">
+
+        <div class="entry-body">
+            15. 關於資料庫的基本操作<br>
+如果讀者練習足夠認真的話，也許你已經對Perl可以慢慢的上手了。當然，你可能也準備用Perl來寫公司的一些小系統，或是個人日常生活使用的一些小程
+式。而大部份的時候，你都會希望能把存下一些資料，至少總不會每次要執行程式時，又要重新輸入這些相關的資訊。當然，很多資料也總是隨著程式不斷進行時被
+記錄下來的。這時候你可以利用不少不同的方式來儲存資料，例如你可以寫入檔案中。最簡單的方式應該也是如此，我們總是可以舉出這樣的例子。<br>
+<br>
+<pre><br><br>sub savePhone {<br>    my ($name, $phone) = shift;<br>    open PHONE, "&gt;&gt;phone";<br>    print PHONE "$name\t$phone";<br>    close PHONE;<br>}<br></pre>
+<br>
+這是一個很小，也很簡單，作為通訊錄的副常式。或者它根本算不上是一個通訊錄，只是紀錄姓名跟電話的相對應資料。而我們的作法也不過就是把得到的資料寫入
+檔案中，而這個檔案的名稱叫做"phone"。於是我們把姓名跟電話新增到檔案的最後，而且就只作這個動作，然後就把檔案關閉。如果我們持續新增朋友的電
+話，那麼檔案也就會不斷增長，也就長的像一個通訊錄了。<br>
+這樣的通訊錄有甚麼特色呢？特色就是它會長長的一串，如果你交友廣闊，也許這樣的檔案可以讓你印出好幾頁。當然，如果你要搜尋也不是太容易，要排序也是要
+自己處理。所以歸納出一個特色，這樣的通訊錄純粹只是作為「紀錄」，實在無法拿來運用。不相信的話，你可以想像一下，如果你現在想紀錄的不只姓名跟電話，
+你還想把眾多朋友的地址，Email全部記下來，那麼你會發現用檔案真是非常辛苦。何況如果你想在使用檔案儲存這些資料的同時還可以方便的搜尋，刪除，排
+序等等，那麼你大概很快就會放棄這樣的想法。<br>
+當然，如果你只是想要簡單的記下一些資料，那麼單純的使用檔案也會讓你自己輕鬆一點，不過如果你打算開始利用Perl幫你處理一些稍微複雜一點的資料時，那麼你應該好好考慮使用資料庫的形式。 <br>
+<br>
+15.1 DBM<br>
+<br>
+一種非常簡單的資料庫形式，而且在你安裝Perl之後，你也就同時擁有這樣的資料庫系統，也就是「DBM檔案」。不過雖然同樣都是「DBM檔案」，運作的方式卻根據所在的環境而不盡然完全相同。所以如果對於DBM的運作方式有興趣的人也許就得自己去翻翻其他資料了。<br>
+不過就像本章大多數的部份，我們會盡量讓大家在比較沒有負擔的狀況下使用資料庫。畢竟在這個時候，很多技巧與程式的語法似乎都是使用比自己動手開始寫要重要許多。<br>
+<br>
+15.1.1 與DBM連繫<br>
+<br>
+「DBM檔案」的資料庫非常有趣，它是利用特殊的雜湊來存取資料庫，或說達成資料庫的形式。所以它會利用雜湊跟所謂的DBM進行緊密的結合。這從我們開始操作DBM就可以看出來，所以我們先來開啟一個DBM檔案，試試怎麼使用DBM。<br>
+<br>
+<pre><br><br>dbmopen (%HASH, "dbmfile", 0666) or <br>    die "檔案打不開!";<br></pre>
+<br>
+看起來是不是有點面熟？其實跟開檔案的方式確實有點接近。不過我們所指定的並不是檔案代號，而是一個雜湊，用來聯繫DBM檔案，這樣的方式可以讓你在操作雜湊時就等於在操作DBM檔案一般，也就是讓你用簡單的方式對雜湊進行改變時，Perl會直接幫你反應到檔案中。<br>
+其實當我們使用了dbmopen時，Perl也會自動幫我們建立起相對的資料庫檔案，可是我們在寫程式所對應的還是只有雜湊，這樣想像起來好像非常的輕鬆。即使Perl已經幫我們在系統中建立了兩個實體檔案，我們卻並不需要理會，繼續使用方便的雜湊吧。<br>
+當然，這個雜湊就像我們平常所看到的一樣，所以你也要遵守雜湊的命名規則。不過很多時候，程式設計師總會有一些慣用法，就像檔案代號大多使用全部大寫的方
+式，我們也習慣使用全部大寫的雜湊代號來代表繫結DBM檔案的雜湊。而且請各位務必記住，所謂的繫結是指在目前的程式當中，一但我們利用dbmopen這
+個指令時，Perl會讓我們以雜湊的方式來對DBM檔案運作，可是一但我們關閉這個繫結或是離開程式後，這樣的關係就不存在了。所以檔案內當然也不會有相
+關的雜湊名稱被記錄下來。<br>
+而關閉的方式則是只要使用像這樣的指令：<br>
+<br>
+<pre><br><br>dbmclose(%HASH);<br></pre>
+<br>
+沒錯，還是跟你在關閉一個檔案一樣的方式。而且如果你沒有手動關閉這個DBM檔案，Perl也會在程式結束時自動將它關閉，不過你應該知道，這不會是一個好習慣的。<br>
+<br>
+15.1.2 DBM檔案的操作<br>
+<br>
+在開啟一個DBM檔案資料庫之後，我們就可以對它進行存取，也就是進行一般的操作。例如你可以修改資料庫的內容，新增資料，搜尋你要的資料等等。至少值得
+慶幸的是，所有的事情都可以利用雜湊來完成，那是大家都還算熟悉的東西。其實我們如果看個例子，應該很容易就可以上手了。<br>
+<br>
+<pre><br><br>dbmopen (%HASH, "dbmfile", 0666) or <br>    die "檔案打不開!";<br>print $HASH{'John'} if (exists $HASH{'Hohn'});<br>$HASH{'Mary'} = '0227331122';<br><br>@sort_keys = sort {$a cmp $b} (keys %HASH);<br>for (@sort_keys) {<br>    print "$_: $HASH{$_}\n";<br>}<br><br>delete $HASH{'Paul'};<br>dbmclose(%HASH);<br></pre>
+<br>
+沒錯吧，除了第一行需要讓你的雜湊跟DBM檔案建立繫結以及最後一行關閉DBM檔案之外，你幾乎看不出來你正在對一個DBM資料庫進行操作。因此如果你打
+算要用DBM資料庫，那麼幾乎是可以非常容易的上手。不過其實使用DBM資料庫還是有一些比較深入的技巧，例如你可能要鎖定資料庫，以避免因為超過一個以
+上的行程在存取資料庫而產生問題。不過一開始使用，你暫時還不需要讓自己煩惱這麼多
+(否則只怕光擔心這些問題就讓人不敢使用了)。而這相關的問題，你可以在某些進階的Perl相關書籍中找到合適的作法與解答。<br>
+<br>
+15.1.3 多重資料<br>
+<br>
+如果你還記得雜湊的特性(希望你會記得，不然該怎麼使用DBM資料庫呢)，那麼你應該記得雜湊其實是由一對的鍵值所構成的。也就是說，雜湊中每個獨特的鍵
+都會被對應到一個值上。而我們剛剛也利用了這個特性，紀錄了姓名與電話的對應關係。但是這時候卻有問題了，如果我希望記下的不只電話，或說除了家裡電話之
+外，我還希望記下好友的行動電話號碼，那麼在雜湊中好像就不適用了。<br>
+可是如果一次只能紀錄一個鍵跟一個值，那麼DBM資料庫還真是不實用，畢竟大多數的時候，我們總會需要使用一大堆的資料欄位。因此最好可以讓DBM資料庫可以讓一個鍵對應到多個欄位，這樣子我們就可以紀錄行動電話，或是生日，地址等等其他資料了。<br>
+可是既然雜湊的特性沒辦法改變，那麼要怎麼樣可以把多個欄位擠在一個雜湊值中呢？很直覺的，我們當然可以直接把所有的資料「連」成一個超長的字串。所以你可能得到這樣的資料：<br>
+<br>
+<pre><br><br>$personal_data = "02-27631122\t0931213987\t1974.12.3"<br></pre>
+<br>
+接著你利用split來把字串切成一個小陣列，讓你可以獨立使用每一個部份，就像這樣的方式：<br>
+<br>
+<pre><br><br>@data = split /\t/, @personal_data;<br></pre>
+<br>
+這樣好像很容易，你可以利用簡單的方式來儲存多個欄位的資料。可是如果有其他更有效率的方式也許會更好，畢竟把所有東西全部胡亂的擠成一團似乎不是甚麼太
+好的方式。所以pack跟unpack這樣的函式似乎可以幫我們解決這類的問題，而且它們也正是為了這個理由而存在的。當然，有一部份的理由是在於把資料
+打包成為系統或網路的傳輸時使用。<br>
+pack的運作方式主要在於格式化我們的資料，也就是當我們在進行打包的時候，我們必須先定義出打包的方式。例如你要打包成位元組，整數等等不同的資料格
+式。所以Perl會根據我們所定義出來的格式，把資料打包成整齊的字串，以方便我們進行儲存或傳輸的工作。至於我們常用的格式字元包括c(字元)，s(整
+數)，l(長整數)，a(字串)，h(以低位元組開始的十六進位字串)，H(以高位元組開始的十六進位字串)，f(浮點數)，x(一個null的位元組)
+等等。當然，各式各樣的格式字元種類繁雜，各位如果有興趣可以利用perldoc
+來檢查手上版本所有可用的格式字元集。我們先用簡單的例子來看看pack的用法。<br>
+<br>
+<pre><br><br>my $data1 = length(pack("s l", 23, 6874192));<br>my $data2 = length(pack("s l", 463, 66250921));<br>print "$data1\t$data2";<br></pre>
+<br>
+結果我們發現兩個長度都是一樣的，沒錯，因為Perl依照我們的格式把資料打包起來了。也就是整數以兩個位元組，長整數以四個位元組來儲存。當我們取得被打包過的資料後，我們可以用unpack把已經打包起來的資料解開，以便取得原來的資料格式，簡單的寫法就像這樣：<br>
+<br>
+<pre><br><br>my $pack = pack("s l", 23, 6874192);<br>my ($short, $long) = unpack("s l", $pack);<br>print "$short\t$long";<br></pre>
+<br>
+另外，你可以在格式字元後使用重複次數的方式，例如使用"cccc"來表示重複使用c四次，不過一般來說，我們都不會這麼用，因為使用c4可以達到同樣的
+效果，而且當然更簡潔易讀。只是當你使用數字來代表重複的次數時，有一個要注意的部份，因為有些格式字元的數字並不是用來表示重複的用法，例如你使用a6
+其實是表示長度為6的字串。當然，如果你的字串長度不足，Perl是會幫你補進NULL的。<br>
+其實使用pack/unpack這一組打包資料的函式的另一項好處就是你可以利用固定的長度來儲存某些特定的資料爛位。例如你訂好某些資料的欄位，接下來
+當你把打包過的資料存到檔案裡面，那麼你就可以保證每一比資料的長度都是相等的。以後當你要查某一筆資料的時候，你可以直接用seek的方式，迅速的找到
+資料所在的位置。<br>
+回頭來看我們的通訊錄吧！我們現在希望儲存不只一種欄位，所以使用pack來把各種需要的欄位打包在一起，當成雜湊的值存入DBM資料庫中。所以我們先使
+用pack來儲存電話跟行動電話兩個欄位吧，首先要先訂出需要的長度。假設他們各是長度為12的字串，所以我們應該這麼作：<br>
+<br>
+<pre><br><br>my $packed = pack("a12 a12", $tel, $cellphone);<br>$HASH{'John'} = $packed;<br><br>my $data = $HASH{'Mary'};<br>my ($mary_tel, $mary_cell) = unpack("a12 a12", $data);<br></pre>
+<br>
+接下來，你可以試著用DBM作簡單的資料管理，而且可以使用多個欄位。<br>
+<br>
+15.2 DB_File<br>
+<br>
+另外，使用Perl，你也可以簡單的使用雜湊的方式來存取Berkeley
+DB，而所需的模組DB_File目前已經內附在Perl的核心當中，因此你裝完Perl之後，如果你的系統中已經有Berkeley
+DB的話，你就可以在程式中直接使用DB_File來存取Berkeley DB。<br>
+使用DB_File其實非常容易，和使用dbmopen非常類似，你只需要把資料庫檔案和雜湊建立起繫結，那麼你就可以直接使用雜湊來控制資料庫的檔案，不過實際的使用上，還是有著很大的差別。最簡單的使用方式，其實只需要這麼作：<br>
+<br>
+<pre><br><br>$filename = "test";<br>tie %hash, "DB_File", $filename;<br></pre>
+<br>
+接下來，你就可以把建立起繫結(tie)的雜湊直接使用，就像一般雜湊一般。於是我們就直接使用%hash來存取，就像這樣：<br>
+<br>
+<pre><br><br>$hash{'John'} = '27365124';<br>$hash{'Mary'} = '26421382';<br></pre>
+<br>
+沒錯，完全就只是雜湊的操作，感覺被騙了嗎？其實在操作上，最簡單的方式也就是這樣，跟你直接使用dbmopen沒有相差太遠。不過就使用上而
+言，DB_File還是有些比較方便的地方，例如你可以在建立繫結的時候就指定檔案的權限。另外，你也可以控制相同雜湊鍵的處理方式。就像這樣的寫法：<br>
+<br>
+<pre><br><br>$DB_BTREE-&gt;{'flags'} = R_DUP;&nbsp;&nbsp;	# 允許鍵值重複<br>$tie = tie %h, "DB_File", "test", O_RDWR, 0644, $DB_BTREE or die $!;<br></pre>
+<br>
+接下來，你就可以利用 $tie 來進行一些操作。你可以使用 <br>
+<br>
+<pre><br><br>$tie-&gt;del($key);<br>$tie-&gt;put($key, $value);<br>$tie-&gt;get($key, $value);<br></pre>
+<br>
+等等方式來對資料庫進行方便的存取。<br>
+<br>
+可是你慢慢會發現，這樣的資料庫雖然方便，可是有時候卻未必能夠滿足我們的需求。於是我們也許可以轉向求助於關聯式資料庫，雖然它的資料庫形式複雜不少，但是以功能來說，卻能夠讓你在處理大量資料時還能夠隨心所欲。<br>
+<br>
+15.3 DBI<br>
+<br>
+接下來，我們假設你已經知道的需求，你對於簡單的DB_File，也就是Berkeley
+DB所提供的簡易資料庫再也無法滿足。你需要更強大的資料庫功能，最好是能應付各種複雜狀況的「關聯式資料庫」。你的資料需要大量的表格來儲存，表格和表
+格間也許還存在著交纏的連結與相關性。總之，至少在這時候，你應該要有「關聯式資料庫」的概念，當然也要可以自己獨立掌握資料庫的操作，因為我們並沒有打
+算在這裡教導大家怎摩使用資料庫。當然，目前在開放源碼社群經常使用的MySQL也是屬於「關聯式資料庫」，你也可以在網路上找到非常完善的相關文件與使
+用手冊等等。所以如果你對於這部份還不太熟悉，那麼可以先閱讀相關的資料後再回頭來看這一節，利用Perl連結到各種的關聯式資料庫。<br>
+不過在正式上路之前，我們還是必須來看看在Perl的使用上，整個DBI的概念。所謂的DBI，其實是Database
+Interface，所以其實對於DBI來說，它只是一個讓使用者可以降低成本的方式去控制各種資料庫，也就因此，它的使用必須搭配所謂的DBD，也就是
+Database driver。我們可以利用簡單的圖來表達DBI，DBD跟實際資料庫之間的關係。<br>
+<br>
+&lt;&lt;圖一&gt;&gt;<br>
+<br>
+從圖上可以看得出來，其實使用者所接觸到的部份幾乎只有DBI的部份，只不過在使用前必須根據使用者實際搭配的資料庫安裝DBD。當然，我們在這裡也就只
+針對DBI的部份介紹。可是因為DBI的使用其實是利用Perl物件導向的程式寫作方式來進行，而我們並沒有介紹物件導向的程式寫法，所以對於大多數的人
+來說也許有些困擾，不過一開始就讓初學者學習怎麼使用Perl的物件導向寫法似乎太過躁進。不過即使還沒開始自己動手寫物件導向程式前，當然也可以安心的
+使用已經現成的各式各樣物件導向模組。而且目前在CPAN上有不少模組都已經是以物件導向的方式開發，因此使用者也可以利用學習DBI的機會，順便也學學
+物件導向模組的使用。<br>
+<br>
+<pre><br><br>一般來說，我們在開始使用一個物件時，都會先利用建構元來產生一個物件。有些程式語言也許是使用new這個「方法(method)」來達到進行這樣的工作，在Perl的物件導向語法中，雖然也有很多模組使用new來達成建構一個物件的目的，不過Perl本身的物件導向語法並不強制規定建構方式的關鍵字。所以你可以使用<br><br>$dbh = DBI-&gt;connect(...);<br><br>來建構出一個DBI物件，然後使用$dbh來進行各式各樣該物件所提供的方法。<br><br></pre>
+<br>
+<br>
+一開始，你顯然要先在你的程式使用DBI這麼模組，接著就是連接上你的資料庫，就像這樣：<br>
+<br>
+<pre><br><br>use DBI;<br><br>my $dbh = DBI-&gt;connect("dbi:Pg:dbname=foo", "user", "passwd");<br></pre>
+<br>
+其中的Pg其實代表的是資料庫的驅動程式部份(Pg 指的是PostgreSQL的驅動程式)，其實比較精準的用法應該是這樣：<br>
+<br>
+<pre><br><br>$dbh = DBI-&gt;connect($data_source, $username, $auth, \%attr);<br></pre>
+<br>
+其中的$data_source也就是描寫相關的資料庫驅動以及所要連結的資料庫等資訊，當然，如果需要，你還必須把資料庫所在的主機位置也寫在這裡，就像這樣：<br>
+<br>
+<pre><br><br>$dbh = DBI-&gt;connect("dbi:Pg:dbname=foo;host=db.host", "user", "password");<br></pre>
+<br>
+另外，由於DBI可以處理相關失敗時的錯誤狀況，如果連接資料庫失敗，它會傳回錯誤訊息：$DBI::errstr。所以我們在進行資料庫連結時，可以使用這樣的方式：<br>
+<br>
+<pre><br><br>$dbh = DBI-&gt;connect("dbi:Pg:dbname=foo", $user, $passwd) or die $DBI::errstr;<br></pre>
+<br>
+有些時候，你可能不知道你的資料庫是不是已經安裝了專門給DBI使用的驅動程式，這時候你可以利用這樣的方式來取得目前機器上可以使用的所有驅動程式的陣列：<br>
+<br>
+<pre><br><br>@available = DBI-&gt;available_drivers;<br></pre>
+<br>
+連接上資料庫之後，最簡單的方式就是直接執行你的SQL命令，所以我們要用最簡單的方式應該是這麼寫的：<br>
+<br>
+<pre><br><br>my $sql = "DELETE FROM foo";<br>my $return = $dbh-&gt;do($sql);&nbsp;&nbsp;	# 傳回受到改變的資料筆數<br></pre>
+<br>
+這樣的方式是讓你執行SQL語法的最簡單方式，不過它的主要限制在於並沒有辦法傳回你從資料庫中選取的資料。因此大多數的時候，我們都會使用其他的方式來進行資料庫的select動作。一般的方式大概都會是這個樣子：<br>
+<br>
+<pre><br><br>my $sql = "SELECT * FROM foo";<br>my $sth = $dbh-&gt;prepare($sql);<br>$sth-&gt;execute;<br>while (my @result = $sth-&gt;fetchrow_array) {<br>    print $result[0];<br>    # @result 回依序取得每筆資料的各欄位值<br>}<br></pre>
+<br>
+這樣是非常常見的寫法，主要就是用來從資料庫取出某些特定的資料。這是因為我們並不能直接使用do這個方法來執行select的語法，因為那並不會得到我
+們真正想要的內容。所以我們還是先寫好我們要取值的SQL語法，也就是"select * from
+foo"這個敘述。接下來，我們要告訴$dbh，處理我們所要的這個SQL敘述，並且建構出一個敘述的控制器(statement
+handler)，因為我們在進行select的時候，大多是透過執行某個select語法，接著一筆一筆取回執行的結果。而敘述控制器剛好就是為了這樣
+的需求而存在的。因此在利用prepare產生出控制器之後，我們就可以要求控制器執行我們的SQL敘述。緊接著利用while這個迴圈逐筆的把取得的資
+料當到其他的變數供我們使用。<br>
+而取回的方式最簡單的就是利用陣列的方式，也就是利用fetchrow_array這個方法來一筆一筆，所以每當fetchrow_array執行後有取
+得結果，就會讓while敘述成真，因此我們就可以從陣列@result中取得該筆的值。而陣列的元素則是依照資料庫select出來的結果來排序。<br>
+所以很多人並不喜歡這樣的用法，因為當你的資料表格欄位足夠多時，你會發現這種用法真的讓人很頭痛。你看看下面的例子吧：<br>
+<br>
+<pre><br><br>my $sql = "SELECT a, b, c, d, e, f, g, h, i, j FROM data_table";<br>my $sth = $dbh-&gt;prepare($sql);<br>$sth-&gt;execute;<br>while (my @result = $sth-&gt;fetchrow_array) {<br>    ....<br>}<br></pre>
+<br>
+然後你希望取出欄位e跟i來作運算，於是你就要從0開始算，算出e是索引為4，i則是索引為8的欄位。這種事情真的是太辛苦了，當然，你的欄位數目也許還
+會更多，那時候你可能會想要找一片堅固一點的牆了。所以我們還是寧願使用雜湊的方式來取得資料庫送出來的值，也就是DBI提供的
+fetchrow_hashref。至少使用雜湊參照的方式能夠讓使用者在取值時更為直覺。如果我們改寫剛剛的取值方式，應該可以這麼使用：<br>
+<br>
+<pre><br><br>while (my $hash_ref = $sth-&gt;fetchrow_hashref) {<br>    print $hash_ref-&gt;{'e'};&nbsp;&nbsp;      # 你可以直接叫用欄位名稱<br>    print $hash_ref-&gt;{'i'};&nbsp;&nbsp;      # 這樣顯然愉快了<br>}<br></pre>
+<br>
+另外，有時候你還會需要更方便的形式來取出資料，其中常用的包括了fetchall_arrayref跟fetchall_hashref。其中的用法會是類似這樣的形式：<br>
+<br>
+於是，你在也不需要手動計算某個欄位應該位於陣列的第幾個元素了，希望這樣能夠讓你心情愉快的寫程式。可是你又發現，很多時候，你只是打算先把全部的資料從資料庫擷取出來之後，再一次進行運算，還是乾脆包成一個陣列，丟給副常式去處理，那麼你可能會寫成這樣的方式：<br>
+<br>
+<pre><br><br>$arrayref = $sth-&gt;fetchall_arrayref;<br>或是<br>$hashref = $sth-&gt;fetchall_hashref($key);<br></pre>
+<br>
+這兩種方法都會一次傳回使用者所選定的條件，只是傳回值儲存的方式有所差異。其中特別有趣的是fetchall_hashref這個方法，使用者可以選定
+資料庫鍵值欄位，並依此來得到相關的其他欄位值。假如我們剛剛的眾多欄位中，欄位'a'是資料表的Primary
+Key，那麼我們就可以使用這種方式，取出特殊鍵值的那一筆資料：<br>
+<br>
+<pre><br><br>$hashref = $sth-&gt;fetchall_hashref('a');<br>print $hashref-&gt;{foo}-&gt;{c};<br></pre>
+<br>
+這一行很顯然的，我們使用了fetchall_hashref這個物件的方法，重要的是我們指定了主要鍵的欄位'a'。於是敘述控制器到資料庫選出了我們
+要的所有資料，並且以主要鍵作為雜湊的鍵，而它的值則是其他個欄位鍵，值所形成的雜湊參照。因此我們要取得某個主要鍵值為'foo'這筆資料中，欄位
+'c'的值，就可是使用第二行的方式取得。<br>
+<br>
+以上我們提到的大多是一般在進行一次的DBI操作時會使用到的方法，可是整個DBI的操作卻是相當複雜，提供的功能也非常強大，要詳細討論的話，都可以寫
+出一本書來。不過即使你沒打算買回DBI的書仔細鑽研，在你可以使用簡單的DBI操作之後，我們還是建議你看看DBI的官方文件，你可以直接使用
+perldoc DBI來閱讀。<br>
+<br>
+你以為我忘了另外一個重要的部份了嗎？當然沒有。接下來我們要來看看在你對於資料庫的操作結束時，你應該要作的工作就是把它釋放，也就是利用
+disconnect的方法來釋出它所佔用的資源。雖然Perl會在程式結束時自動釋出還沒佔用的相關資源，可是我們還是強烈建議你，你應該在使用完
+DBI的資源後，手動將它關閉。因為你的程式也許會在系統運作一段時間，而且你卻只有某一段程式使用了這些資源，更有甚者，你也許一次開啟了多個資料庫連
+結，那麼適時的釋放這些資源顯然是程式寫作的好習慣。<br>
+<br>
+<pre><br><br>$dbh-&gt;disconnect;<br></pre>
+<br>
+15.4 DBIx::Password<br>
+<br>
+相對於DBI的複雜程度，DBIx::Paswsword只能算是協助使用DBI的一個小小工具。它也沒有提供類似DBI那樣魔術般的強大功能，簡單的
+說，它只是讓你用比較偷懶的方式來建構出一個資料庫控制物件，也就是所謂的database
+handler。別忘了，資料庫是相當重要的，我們經常要幫資料庫設定出繁雜的密碼，以避免遭人破解。可是這些密碼到底有多複雜呢？很多時候，連管理人員
+也總是搞不清楚這些密碼，再加上如果你的伺服器上還有不只一個資料庫，或是你的程式要連接多部資料庫，而且它們還分屬於不同的種類，那麼要寫個程式倒也相
+當辛苦。<br>
+針對這個需要考驗程式設計師記憶力的問題，DBIx::Password提出了解決的方式。也就是只要設定一次，那麼設定會被寫入Password.pm
+這個檔案之中。當你第一次安裝DBIx::Psassword這個模組時，它會問你一堆問題，其實也就是問你目前使用中的資料庫設定。而所有的資料將會像
+這樣的存在資料庫中：<br>
+<br>
+<pre><br><br>my $virtual1 = {<br>    'dbix' =&gt; {<br>        'database' =&gt; 'db_name',&nbsp;&nbsp;# 資料庫名稱<br>        'password' =&gt; 'passwd',&nbsp;&nbsp;	# 使用者密碼<br>        'attributes' =&gt; {},&nbsp;&nbsp;	# 連接資料庫的其他參數<br>        'port' =&gt; '',<br>        'username' =&gt; 'user',&nbsp;&nbsp;	# 使用者名稱<br>        'host' =&gt; 'localhost',&nbsp;&nbsp;	# 主機<br>        'driver' =&gt; 'mysql',&nbsp;&nbsp;	# 資料庫類型<br>        'connect' =&gt; 'DBI:mysql:database=db_name;host=localhost'<br>    },<br>};<br></pre>
+<br>
+那麼以後當你要連接資料庫時，就只需要使用虛擬的名稱了，原來建構資料庫控制器的方式也由DBI轉移倒DBIx。所以使用者再也不需要記一長串的資料庫連接需要的參數，因為所有的東西現在都由DBIx::Password負責了。讓生活快樂一點的寫法就變成了：<br>
+<br>
+<pre><br><br>my $dbh = DBIx::Password-&gt;connect($user);<br></pre>
+<br>
+剛剛我們舉的例子中，就可以把$user設為"dbix"，那麼DBIx::Password就會幫忙我們使用DBI進行資料庫的連結。而且在DBIx::Password中，你當然可以設定多組的參數，因為它只是利用雜湊存起你所有資料庫的相關資料。 <br>
+<br>
+雖然DBIx::Password還提供其他的一些操作方式，不過其實我們幾乎有超過百分之九十的機會都是使用connect這個物件方法，所以我們應該暫時可以先下課了。<br>
+<br>
+習題：<br>
+1. 利用自己熟悉的資料庫系統(例如 MySQL 或 Postgres)，建立一個資料庫，並且利用DBI連上資料庫，取得Database Handler。<br>
+2. 試著建立以下的一個資料表格，並且利用Perl輸入資料如下：<br>
+<pre><br><br>資料表格：<br>name: varchar(24)<br>cellphone: varchar(12)<br>company: vrchar(24)<br>title: varchar(12)<br>資料內容<br>[ name: 王小明<br>  cellphone: 0911111111<br>  company: 甲上資訊<br>  title: 專案經理 ]<br>[ name: 李小華<br>  cellphone: 0922222222<br>  company: 乙下軟體<br>  title: 業務經理 ]<br></pre>
+3. 從資料庫中取出所有資料，並且利用fetchrow_array的方式逐筆印出資料。<br>
+4. 呈上題，改利用fetchrow_hashref進行同樣的工作。 
+        </div>
+    </div>
+</div>
+                    </div>
+                </div>
+<!-- <div id="gamma">
+   <div id="gamma-inner" class="pkg">
+       Gamma Content
+   </div>
+</div> -->
+
+
+            </div>
+        </div>
+        <!-- <div id="footer">
+            <div id="footer-inner" class="pkg">
+                Footer Content
+            </div>
+        </div> -->
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+	<HEAD>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf8">
+		<META NAME="Generator" CONTENT="PhotoImpact">
+	
+<link href="word.css" rel="stylesheet" type="text/css">
+<title>Perl Book</title></HEAD>
+	
+<BODY>
+<table width="342" height="3020" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align=center><img src="index_2.jpg" width="743" height="162"></td>
+  </tr>
+  <tr><td>
+  </td></tr>
+  <tr> 
+    <td height="2831" background="index_4.jpg"> 
+      <blockquote>
+	  附錄A. 習題解答<BR/>
+<BR/>
+第一章：<BR/>
+1. 試著找出你電腦上的Perl版本為何。<BR/>
+<BR/>
+解答：當然，你得先確定你的電腦上確實裝了Perl。如果你在Unix/Linux/*BSD或是Mac OS X上，打開你的終端機(terminal)，進入shell，接著打入perl -v，其中第一行中就可以看到你電腦上的Perl版本了。詳細的內容可以參閱第一章內容。<BR/>
+<BR/>
+2. 利用perldoc perl找出所有的perl文件內容<BR/>
+<BR/>
+解答：當你能看到perl -v的內容之後，你的電腦應該已經安裝Perl。接下來，你可以在shell中打入perldoc perl。於是你可以看到所有的文件，像這樣：<BR/>
+<BR/>
+<pre><BR/>
+       Overview
+
+           perl                Perl overview (this section)
+           perlintro           Perl introduction for beginners
+           perltoc             Perl documentation table of contents
+
+&nbsp;&nbsp;   ...........
+
+           perluts             Perl notes for UTS
+           perlvmesa           Perl notes for VM/ESA
+           perlvms             Perl notes for VMS
+           perlvos             Perl notes for Stratus VOS
+           perlwin32           Perl notes for Windows
+</pre>
+<BR/>
+至於如果你想看其中的任何一份文件，只要使用perldoc這個指令即可，例如可以使用perldoc perlsyn來看關於Perl語法的相關文件。 <BR/>
+<BR/>
+3. 利用Perl寫出第一個程式，印出你的名字<BR/>
+<BR/>
+解答：你只需要使用print就可以解決這個問題，所以像是這樣：<BR/>
+<BR/>
+<pre><BR/>
+print "簡信昌";
+當然，你還可以用單引號，至少在這裡的用法是一樣的：
+print '簡信昌';
+</pre>
+<BR/>
+第二章：<BR/>
+1. 使用換行字元，將你的名字以每個字一行的方式印出。<BR/>
+<BR/>
+解答：最簡單的方式，你可以這麼寫<BR/>
+<pre><BR/>
+print "簡\n信\n昌\n";
+另外，你當然可以逐行印出:
+print "簡\n";
+print "信\n";
+print "昌\n";
+</pre>
+<BR/>
+2. 印出'\n', \t'字串。<BR/>
+<BR/>
+解答：你可以單純的使用單引號<BR/>
+<pre><BR/>
+print '\n \t";
+或是使用雙引號，然後加上跳脫字元：
+print "\\n \\t";
+</pre>
+<BR/>
+3. 讓使用者輸入姓名，然後印出包含使用者姓名的招呼語(例如：hello xxx)。<BR/>
+<BR/>
+解答：這裡主要是要能夠讓使用者輸入，所以我們應該使用<STDIN><BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+use strict;
+
+chomp(my $input = <STDIN>);
+print "Hello $input \n";
+</pre>
+<BR/>
+第三章：<BR/>
+1. 試著把串列 (24, 33, 65, 42, 58, 24, 87) 放入陣列中，並讓使用者輸入索引值 (0...6)，然後印出陣列中相對應的值。<BR/>
+<BR/>
+解答：在這裡，我們並不先對輸入值做判斷，也就是假設使用者都會乖乖的輸入0...6的數字。<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+use strict;
+
+my @array = (24, 33, 65, 42, 58, 24, 87);
+chomp(my $input = <STDIN>);  &nbsp;&nbsp; # 使用者輸入
+print $array[$input];
+</pre>
+<BR/>
+2. 把剛剛的陣列進行排序，並且印出排序後的結果。<BR/>
+<BR/>
+解答：這部份其實只需要使用一個排序的函式sort。<BR/>
+<pre><BR/>
+print sort @array;
+</pre>
+<BR/>
+3. 取出陣列中大於40的所有值。<BR/>
+<BR/>
+解答：至於這一個部份，我們則是可以使用gerp這個函式直接完成：<BR/>
+<pre><BR/>
+print grep {$_ > 40} @array;
+你當然還可以把過濾出來的值再進行排序，就像這樣：
+print sort grep {$_>40} @array;
+</pre>
+<BR/>
+4. 將所有陣列中的值除以 10 後印出。<BR/>
+<BR/>
+解答：至於要把一個陣列中的所有值同時進行某種轉換，對應，就可以使用map<BR/>
+<pre><BR/>
+print map {$_/10} @array;
+同樣的，你還是可以試著將結果排序
+</pre>
+<BR/>
+第四章：<BR/>
+1. 算出1+3+5+...+99的值。<BR/>
+<BR/>
+解答：我們可以使用for迴圈或是while迴圈來進行。<BR/>
+<pre><BR/>
+$!/usr/bin/perl
+
+use strict;
+my $sum = 0;
+for (my $i = 0; $i < 100; $i+2) {
+    $sum+=$_;
+}
+
+print $sum;
+
+如果使用while，那麼程式碼應該像是這樣
+
+#!/usr/bin/perl
+
+use strict;
+
+my ($sum,$i);
+while ($i < 100) {
+    $sum+=$i;
+    $i++;
+}
+print $sum;
+</pre>
+<BR/>
+2. 如果我們從1加到n，那麼在累加結果不超過100，n的最大值應該是多少？<BR/>
+<BR/>
+解答：這時候，我們用while迴圈似乎就比較方便了<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+use strict;
+
+my ($sum, $i);
+while ($sum <= 100) {
+    $sum+=$i;
+    $i++;
+}
+
+print $i;
+</pre>
+<BR/>
+3. 讓使用者輸入一個數字，如果輸入的數字小於50，則算出他的階乘，否則就印出數字太大的警告。<BR/>
+<BR/>
+解答：這裡有兩個重點，一個是if判斷式，另一個則是計算階乘的迴圈。<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+use strict;
+
+chomp(my $input = <STDIN>);
+if ($input < 50) {
+    my $total = 1;     # 這跟算總和不同
+    for (my $i = 1; $i <= $input; $i++) {
+    &nbsp;&nbsp;$total*=$i;    # 進行階乘
+    }
+    print $total;
+} else {
+    print "數字太大了";
+}
+</pre>
+<BR/>
+第五章：<BR/>
+1. 將下列資料建立一個雜湊：<BR/>
+   John => 1982.1.5<BR/>
+   Paul => 1978.11.3<BR/>
+   Lee  => 1976.3.2<BR/>
+   Mary	=> 1980.6.23<BR/>
+<BR/>
+解答：我們可以很簡單的使用串列，或是=>來建立雜湊：<BR/>
+<pre><BR/>
+my %hash = (   John => "1982.1.5",
+   &nbsp;&nbsp;       Paul => "1978.11.3",
+   &nbsp;&nbsp;       Lee  => "1976.3.2",
+   &nbsp;&nbsp;       Mary => "1980.6.23" );
+至於如果使用串列，則非常單純的只要：
+my %hash = qw/John 1982.1.5 Paul 1978.11.3 Lee 1976.3.2 Mary 1980.6.23/;
+</pre>
+<BR/>
+2. 印出1980年以後出生的人跟他們的生日。<BR/>
+<BR/>
+解答：我們逐個取出雜湊的鍵值，然後比較資料。<BR/>
+<pre><BR/>
+my %hash = qw/John 1982.1.5 Paul 1978.11.3 Lee 1976.3.2 Mary 1980.6.23/;
+while ( ($key, $value) = each %hash) {
+    print "$key, $value" if ($value gt "1980");
+}
+</pre>
+<BR/>
+3. 新增兩筆資料到雜湊中：<BR/>
+   Kayle => 1984.6.12<BR/>
+   Ray	 => 1978.5.29<BR/>
+<BR/>
+解答：要新增雜湊中的內容很簡單，只需要單純的指定鍵跟對應的值就可以了。<BR/>
+<pre><BR/>
+$hash{Kayle} = '1984.6.12';
+$hash{Ray} = '1978.5.29';
+</pre>
+<BR/>
+4. 檢查在不修改程式碼的情況下，能否達成第二題的題目需求<BR/>
+<BR/>
+解答：由於我們使用while迴圈，它會自動檢查雜湊中所有的內容，因此即使我們新增了兩筆資料，對於迴圈的運作並不會有所影響。<BR/>
+<BR/>
+第六章：<BR/>
+1. 下面有一段程式，包含了一個陣列，以及一個副常式diff。其中diff這個副常式的功能在於算出陣列中最大與最小數值之間的差距。請試著將這個副常式補上。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my @array = (23, 54, 12, 64, 23);
+my $ret = diff(@array);
+print "$ret\n";&nbsp;&nbsp;	# 印出 52 (64 - 12)
+my @array2 = (42, 33, 71, 19, 52, 3);
+my $ret2 = diff(@array2);
+print "$ret2\n";&nbsp;&nbsp;# 印出 68 (71 - 3)
+</pre>
+<BR/>
+解答：我們需要進行的工作包括讀取透過副常式傳來的陣列內容，並且取得陣列中的最大值與最小值，再進行兩個值的計算。<BR/>
+<pre><BR/>
+sub diff {
+    my @param = @_;
+    my ($max, $min) = ($param[0], $param[0]);
+    for (@param) {
+    &nbsp;&nbsp;$max = $_ if $_ > $max;		# 求最大值
+&nbsp;&nbsp;$min = $_ if $_ < $min;		# 求最小值
+    }
+    $max - $min;
+}
+</pre>
+<BR/>
+2. 把第四章計算階乘的程式改寫為副常式型態，利用參數傳入所要求得的階乘數。<BR/>
+<BR/>
+解答：我們先來看看第四章中關於階乘的這段程式碼。<BR/>
+<pre><BR/>
+my $total = 1;
+for (my $i = 1; $i <= $input; $i++) {
+    $total*=$i;
+}
+print $total;
+
+接下來我們將它改為副常式型態：
+sub times {
+    my $input = shift;&nbsp;&nbsp;			# 取得使用者傳入的參數
+    my $total = 1;
+    for (my $i = 1; $i <= $input; $i++) {&nbsp;&nbsp;# 計算階乘
+    &nbsp;&nbsp;$total*=$i;
+    }
+    return $total;
+}
+</pre>
+<BR/>
+第七章：<BR/>
+1. 讓使用者輸入字串，並且比對是否有Perl字樣，然後印出比對結果。<BR/>
+<BR/>
+解答：這裡只需要使用最單純的樣式比對來判斷比對的結果。<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+use strict;
+
+chomp(my $input = <STDIN>);
+if ($input =~ /Perl/) {
+    print "比對成功\n";
+} else {
+    print "比對失敗\n";
+}
+</pre>
+<BR/>
+2. 比對當使用者輸入的字串包含foo兩次以上時(foofoo 或是 foofoofoo 或是 foofoofoofoo...)，印出比對成功字樣。<BR/>
+<BR/>
+解答：使用群組比對的方式似乎可以簡單的達到這個要求，所以設定樣式為foo。請注意，你不能將樣式設定為foofoo，否則如果foo的出現次數是單次(例如三次)的話，那就無法正確比對了。所以我們的寫法可以像這樣：<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+use strict;
+
+chomp(my $input = <STDIN>);
+if ($input =~ /(foo){2,}/) {&nbsp;&nbsp;	# 必須出現兩次以上
+    print "比對成功\n";
+} else {
+    print "比對失敗\n";
+}
+</pre>
+<BR/>
+第八章：<BR/>
+1. 延續第七章的第一題，比對出perl在字串結尾的成功結果。<BR/>
+<BR/>
+解答：和第七章的第一個問題不同的是在於我們必須使用定位點的概念。所以我們只寫出需要進行字串結尾的樣式。<BR/>
+<pre><BR/>
+$input =~ /perl$/;
+</pre>
+<BR/>
+2. 繼續比對使用者輸入的字串，並且確定是否有輸入數字。<BR/>
+<BR/>
+解答：這個問題主要的部份在於可以使用字符集或是字符集的簡寫。最簡單的當然是直接使用\d的簡寫形式。<BR/>
+<pre><BR/>
+$input =~ /\d/;
+而其實也就是可以使用
+$input =~/[0-9]/;
+</pre>
+<BR/>
+3. 利用回溯參照，找出使用者輸入中，引號內(包括雙引號或單引號)的字串。<BR/>
+<BR/>
+解答：在這裡，我們特別要求不管使用者使用單引號或雙引號時都可以可以找出引號中的字串。因此在比對時，就必須使用字符集，也就是['"]必須同時被納入。但是一但使用字符集來進行比對，為了避免產生錯誤的對稱，例如"單引號''"，我們就必須使用回溯參照，以確定我們比對的是對稱的引號。另外，則是要注意使用記憶變數來取得我們比對出來的內容。所以比對的樣式應該可以這麼寫：<BR/>
+<pre><BR/>
+$input =~ /['"](.+?)\1/;
+print $1;&nbsp;&nbsp;		# 比對出來的內容
+</pre>
+我們還要注意括號裡的內容，首先是一個萬用符號.，接下來是重複符號+，這是指至少出現一次的重複符號。接下來是為了避免比對超過第一次對稱的引號範圍，所以我們用了不貪多的修飾符號'?'。而這裡面正是我們所要取得的全部內容，所以就用了記憶變數的符號。<BR/>
+<BR/>
+4. 找出使用者輸入的第一個由p開頭，l結尾的英文字。<BR/>
+<BR/>
+解答：這裡我們要確定的有幾個部份，也就是我們要比對的是一個「字(word)」，因此p跟l分別是這個字的兩個端點，我們也就可以利用\b來畫出這個字的界線。當然，記憶變數還是需要的，因為我們不但要確定是否比對成功，因為我們還想取得比對成功的字串內容。所以我們就把比對樣式寫成這樣：<BR/>
+<pre><BR/>
+$input =~ /\b(p\w*l)\b/;
+print $1;
+</pre>
+<BR/>
+第九章：<BR/>
+1. 陸續算出 (1...1) 的總和，(1...2) 的總和，...到 (1...10) 的總和。但是當得到總和大於50時就結束。<BR/>
+<BR/>
+解答：這個題目主要有兩個部份，第一個是關於計算加總的部份，一般我們也許常用for迴圈來進行加總的部份，當然你也可以使用while迴圈或其他方式。接下來，你要考慮計算出來的總和，讓他不超過50。這個情況下，可以使用last來做迴圈的餓外控制。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my ($base, $sum) = (0, 0);
+for $base (1...10) {
+    $sum = sum($base);
+    last if ($sum > 50);
+    print "$base => $sum\n";
+}
+
+sub sum {
+    my $index = shift;
+    my $summary;
+    for (1...$index) {
+        $summary += $_;
+    }
+    return $summary;
+}
+</pre>
+<BR/>
+2. 把下面的程式轉為三元運算符形式：<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+chomp(my $input = <STDIN>);
+if ($input < 60) {
+    print "不及格";
+} else {
+    print "及格";
+}
+</pre>
+<BR/>
+解答：這部份其實只要考慮if敘述句內的部份。所以我們先找出關鍵的部份，也就是if條件跟else的內容。接下來就只需要一一對照轉換就可以了。<BR/>
+<pre><BR/>
+原來寫法：     if ($input < 60) { print "及格" } else { print "不及格" }
+三元算符寫法：  ($input < 60) ? print "及格" : print "不及格";
+</pre>
+<BR/>
+第十章：<BR/>
+1. 試著將下面的資料利用perl寫入檔案中：<BR/>
+<pre><BR/>
+Paul, 26933211
+Mary, 21334566
+John, 23456789
+</pre>
+<BR/>
+解答：這裡主要的重點就是開啟檔案，寫入內容，至於資料，我們可以使用雜湊來處裡。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my %tel = ("Paul", 26933211, "Mary", 21334566, "John", 23456789);
+open FILE, ">telephone";
+for (keys %tel) {
+    print FILE "$_ => $tel{$_}\n";
+}
+close FILE;
+
+然後你可以去看檔案"telephone"的內容，也就是：
+
+John => 23456789
+Mary => 21334566
+Paul => 26933211
+</pre>
+<BR/>
+2. 在檔案中新增下列資料：<BR/>
+<pre><BR/>
+Peter, 27216543
+Ruby, 27820022
+</pre>
+<BR/>
+解答：剛剛我們在開啟檔案時使用了">"來表示寫入一個新檔。接下來，我們只是要在現有的檔案中加入新的內容，因此我們應該改用">>"的方式，以避免原來的檔案被清空。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my %tel = ("Peter", 27216543, "Ruby", 27820022);
+open FILE, ">>telephone";
+for (keys %tel) {
+    print FILE "$_ => $tel{$_}\n";
+}
+close FILE;
+</pre>
+這樣我們就可以很容易的看出其中的不同了。<BR/>
+<BR/>
+3. 從剛剛已經存入資料的檔案讀出檔案內容，並且印出結果。<BR/>
+<BR/>
+解答：不同於剛剛寫入檔案，我們現在需要的是把檔案內容讀出。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+open FILE, "telephone";
+while (<FILE>) {
+    print $_;
+}
+close FILE;
+</pre>
+<BR/>
+第十一章：<BR/>
+1. 列出目前所在位置的所有檔案/資料夾名稱。<BR/>
+<BR/>
+解答：我們可以用簡單的角括號方式來取得目前目錄下的所有內容。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my @files = <*>;
+print "$_\n" for @files;
+</pre>
+<BR/>
+2. 承一，只列出資料夾名稱。<BR/>
+<BR/>
+解答：在這裡，我們只需要修改剛剛的程式，在列印前判斷我們取得的是檔案或資料夾。<BR/>
+<pre><BR/>
+my @files = <*>;
+for (@files) {
+    print "$_\n" if (-d $_);
+}
+</pre>
+<BR/>
+3. 利用perl，把目錄下所有附檔名為.pl的檔案修改權限為可執行。<BR/>
+<BR/>
+解答：首先我們還是使用角括號，但是我們這次要取出的只有所有附檔名為.pl的檔案。接下來，再以chmod來修改權限。<BR/>
+<pre><BR/>
+my @files = <*.pl>;
+chmod 0755, @files;
+</pre>
+<BR/>
+第十二章：<BR/>
+1. 讓使用者輸入字串，取得字串後算出該字串的長度，然後印出。<BR/>
+<BR/>
+解答：這裡主要還是要使用length這個函式，來取得字串長度。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+chomp(my $str = <STDIN>);
+print length($str);
+</pre>
+<BR/>
+2. 利用sprintf做出貨幣輸出的表示法，例如：136700以$136,700，26400以$26,400表示。<BR/>
+3. 利用雜湊%hash = (john, 24, mary, 28, david, 22, paul, 28)進行排序，先依照雜湊的值排序，如果兩個元素的值相等，則依照鍵值進行字串排序。<BR/>
+<BR/>
+第十三章：<BR/>
+1. 試著在你的Unix-like上的機器裝起CPANPLUS這個模組。<BR/>
+<BR/>
+解答：你可以直接透過CPAN來安裝CPANPLUS，或是到http://search.cpan.org/下載CPANPLUS的原始碼，解開之後直接安裝。成功安裝之後，你可以在shell底下使用CPANPLUS，就像這樣：<BR/>
+<pre><BR/>
+[hcchien@Apple]% cpanp
+CPANPLUS::Shell::Default -- CPAN exploration and modules installation (v0.03)
+*** Please report bugs to <cpanplus-bugs@lists.sourceforge.net>.
+*** Using CPANPLUS::Backend v0.049.  
+*** ReadLine support available (try 'i Term::ReadLine::Perl').
+
+CPAN Terminal> 
+</pre>
+<BR/>
+2. 還記得我們寫過階乘的副常式嗎？試著把它放入套件My.pm中，並且寫出一個程式呼叫，然後使用這個副常式。<BR/>
+<BR/>
+解答：其實如果知道Package的包裝方式跟使用方式，這個問題可以很容易的解決。 <BR/>
+<pre><BR/>
+sub times {
+    my $input = shift;&nbsp;&nbsp;			# 取得使用者傳入的參數
+    my $total = 1;
+    for (my $i = 1; $i <= $input; $i++) {&nbsp;&nbsp;# 計算階乘
+    &nbsp;&nbsp;$total*=$i;
+    }
+    return $total;
+}
+</pre>
+<BR/>
+第十四章：<BR/>
+1. 下面程式中，%hash是一個雜湊變數，$hash_ref則是這個雜湊變數的參照。試著利用$hash_ref找出參照的所有鍵值。<BR/>
+<pre><BR/>
+%hash = ( name => 'John',
+      &nbsp;&nbsp;  age => 24,
+&nbsp;&nbsp;  cellphone => '0911111111' );
+$hash_ref = \%hash;
+</pre>
+<BR/>
+解答：其實你只要解開雜湊參照，就可以簡單的使用keys函式來取得參照的所有鍵。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my %hash = ( name => 'John',
+             age => 24,
+             cellphone => '0911111111' );
+my $hash_ref = \%hash;
+
+my @keys = keys %{$hash_ref};
+print $_ for @keys;
+</pre>
+<BR/>
+2. 以下有一個雜湊，試著將第一題中的雜湊跟這個雜湊(@hash_array)放入同一陣列中。<BR/>
+<pre><BR/>
+%hash1 = ( name => 'Paul',
+       &nbsp;&nbsp;   age => 21,
+&nbsp;&nbsp;   cellphone => '0922222222',
+&nbsp;&nbsp;   birthday => '1982/3/21' );
+</pre>
+<BR/>
+解答：由於陣列中的元素都是純量，所以我們需要的是把兩個雜湊的參照放進陣列@hash_array中。<BR/>
+<pre><BR/>
+my @hash_array = ( { name => 'John',
+              &nbsp;&nbsp;     age => 24,
+             &nbsp;&nbsp;     cellphone => '0911111111' },
+&nbsp;&nbsp;      	   { name => 'Paul',
+       &nbsp;&nbsp;      	     age => 21,
+&nbsp;&nbsp;   	     cellphone => '0922222222',
+&nbsp;&nbsp;   	     birthday => '1982/3/21' } );
+</pre>
+<BR/>
+3. 承上一題，印出陣列$hash_array中每個雜湊鍵為'birthday'的值，如果雜湊鍵不存在，就印出「不存在」來提醒使用者。<BR/>
+<BR/>
+解答：在這裡，我們應該先從陣列中依序取出雜湊的參照，然後解開參照，判斷參照鍵'birthday'是否存在。如果存在就可以取出其中的雜湊值。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my @array = ( { name => 'John',
+              &nbsp;&nbsp;age => 24,
+             &nbsp;&nbsp;cellphone => '0911111111' },
+&nbsp;&nbsp;      { name => 'Paul',
+       &nbsp;&nbsp;      	age => 21,
+&nbsp;&nbsp;   	cellphone => '0922222222',
+&nbsp;&nbsp;   	birthday => '1982/3/21' } );
+
+for (@array) {
+    if (exists ${$_}{birthday}) {&nbsp;&nbsp;# 解開參照，並且判斷雜湊鍵是否存在
+&nbsp;&nbsp;print ${$_}{birthday};
+    } else {
+&nbsp;&nbsp;print "the key doesn't exist";
+    }
+}
+
+其實你可以用更簡潔的方式來解開參照，也就是$_->{birthday}
+</pre>
+<BR/>
+第十五章：<BR/>
+1. 利用自己熟悉的資料庫系統(例如 MySQL 或 Postgres)，建立一個資料庫，並且利用DBI連上資料庫，取得Database Handler。<BR/>
+<BR/>
+解答：假設我們在MySQL建了一個資料庫叫做'perlbook'所以我們要連接上資料庫，就只要使用DBI。<BR/>
+<pre><BR/>
+my $dbh = DBI->connect('dbi:mysql:dababase=perlbook', 'user', 'password');
+</pre>
+<BR/>
+2. 試著建立以下的一個資料表格，並且利用Perl輸入資料如下：<BR/>
+<pre><BR/>
+資料表格：
+name: varchar(24)
+cellphone: varchar(12)
+company: vrchar(24)
+title: varchar(12)
+資料內容
+[ name: 王小明
+  cellphone: 0911111111
+  company: 甲上資訊
+  title: 專案經理 ]
+[ name: 李小華
+  cellphone: 0922222222
+  company: 乙下軟體
+  title: 業務經理 ]
+</pre>
+<BR/>
+解答：建立資料表格，我們可以透過各種方式，例如MySQL的用戶端程式，或現成的管理程式。當然也可以利用DBI的方式來建立新的資料表格。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+use DBI;
+
+my $dbh = DBI->connect('dbi:mysql:database=perlbook', 'user', 'password');
+
+my $create = <<"END";
+CREATE TABLE address (
+    name varchar(24),
+    cellphone varchar(12),
+    company vrchar(24),
+    title varchar(12)
+);
+END
+
+$dbh->do($create) or die "can't create";    # 先把資料表格建起來
+
+my $sql;
+$sql = "INSERT INTO address VALUES ('王小明', '0911111111', '甲上資訊', '專案經理')";
+$dbh->do($sql);
+$sql = "INSERT INTO address VALUES ('李小華', '0922222222', '乙下軟體', '業務經理')";
+$dbh->do($sql);
+</pre>
+<BR/>
+3. 從資料庫中取出所有資料，並且利用fetchrow_array的方式逐筆印出資料。<BR/>
+<BR/>
+解答：和新增資料不同，一般我們要從資料庫抓資料出來，都會先使用prepare，然後execute之後才取得資料內容。所以寫法和剛剛會有不少的差別。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+use DBI;
+
+my $dbh = DBI->connect('dbi:mysql:database=perlbook', 'user', 'password');
+
+my $sql = "select * from address";
+my $sth = $dbh->prepare($sql);
+$sth->execute;&nbsp;&nbsp;				# 先取得所有的內容
+while (my @result = $sth->fetchrow_array) {&nbsp;&nbsp;# 逐筆取出
+    print "姓名：$result[0]\n";
+    print "電話：$result[1]\n";
+    print "公司：$result[2]\n";
+    print "職稱：$result[3]\n";
+}
+
+$dbh->disconnect;
+</pre>
+<BR/>
+4. 呈上題，改利用fetchrow_hashref進行同樣的工作。<BR/>
+<BR/>
+解答：在這裡，我們只需要修改while迴圈內的程式碼。將原來使用fetchrow_array的部份改成使用fetchrow_hashref就可以了。當然，因為fetchrow_hashref拿到的是一個雜湊參照，所以我們得先解開參照，然後取得其中的值。<BR/>
+<BR/>
+<灰框>><BR/>
+while (my $result = $sth->fetchrow_hashref) {	# 逐筆取出<BR/>
+    print "姓名：$result->{name}\n";<BR/>
+    print "電話：$result->{cellphone}\n";<BR/>
+    print "公司：$result->{company}\n";    <BR/>
+    print "職稱：$result->{title}\n";<BR/>
+}<BR/>
+<灰框>><BR/>
+<BR/>
+第十六章：<BR/>
+1. 以下是一個HTML頁面的原始碼，試著寫出action中指定的print.pl，並且印出所有欄位中，使用者填入的值。<BR/>
+<pre><BR/>
+<HTML>
+    <HEAD>
+        <TITLE>習題</TITLE>
+    </HEAD>
+    <BODY>
+        <FORM ACTION="print.pl" METHOD="POST">
+&nbsp;&nbsp;    姓名：<INPUT TYPE="text" NAME="name"><BR/>
+&nbsp;&nbsp;    地址：<INPUT TYPE="text" NAME="address"><BR/>
+&nbsp;&nbsp;    電話：<INPUT TYPE="text" NAME="tel"><BR/>
+&nbsp;&nbsp;    <INPUT TYPE="submit">
+&nbsp;&nbsp;</FORM>
+    </BODY>
+</HTML>
+</pre>
+<BR/>
+解答：基本上，這個題目我們想要的就是取得使用者輸入的內容，所以利用CGI模組就可以簡單的做到這件事。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+use CGI;
+
+my $q = CGI->new;
+print "姓名：".$q->param('name')."\n";
+print "地址：".$q->param('adress')."\n";
+print "電話：".$q->param('tel')."\n";
+</pre>
+<BR/>
+2. 承上題，試著修改剛剛的print.pl，並且利用Template模組搭配以下的模板來進行輸出。<BR/>
+<pre><BR/>
+<TABLE>
+    <TR><TD>姓名：</TD><TD>[% name %]</TD></TR>
+    <TR><TD>地址：</TD><TD>[% address %]</TD></TR>
+    <TR><TD>電話：</TD><TD>[% tel %]</TD></TR>
+</TABLE>
+</pre>
+<BR/>
+解答：這裡的主要工作就是把Template的物件建起來，這樣一來，我們就可以使用Template::Toolkit來建立漂亮的模板。我們假設把上面的模板存成template.html。<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+use Template;
+use CGI;
+
+my $q = CGI->new;
+my $config = {
+    INCLUDE_PATH => './',
+    EVAL_PERL    => 1,
+};
+
+my $template = Template->new($config);
+my $vars = {
+    name  => $q->param('name'),
+    address => $q->param('address'),
+    tel => $q->param('tel')
+};
+
+my $temp_file = 'template.html';
+my $output;
+$template->process($temp_file, $vars, $output)
+    || die $template->error();
+
+print $output;
+</pre>
+<BR/>
+3. 承上題，將利用Template輸出的部份改為HTML::Mason。<BR/>
+<BR/>
+解答：我們假定各位的HTML::Mason都設定完成，也就是其實目前都可以執行HTML::Mason的相關程式。因此我們接下來需要的只是處理這一頁的Mason程式。<BR/>
+<pre><BR/>
+<TABLE>
+    <TR><TD>姓名：</TD><TD><% $name %></TD></TR>
+    <TR><TD>地址：</TD><TD><% $address %></TD></TR>
+    <TR><TD>電話：</TD><TD><% $tel %></TD></TR>
+</TABLE>
+
+<%args>
+$name
+$address
+$tel
+</%args>
+</pre>
+<BR/>
+第十七章：<BR/>
+1. 找出maillog中被reject(退信)的資料，也就是找到日誌檔中以reject標明的內容。例如：<BR/>
+<pre><BR/>
+Jun  3 00:00:46 dns2 postfix/smtpd[71431]: D988D6A: reject: RCPT from smtp2.wanadoo.fr[193.252.22.29]: 450 <fnatterdobkl@hcchien.org>: User unknown in local recipient table; from=<> to=<fnatterdobkl@hcchien.org> proto=ESMTP helo=<mwinf0203.wanadoo.fr>
+</pre>
+<BR/>
+解答：對於系統的日誌檔而言，其實最有利的大多還是格式的固定(規則)化。所以我們可以比較容易的處理這些日誌檔，進而用比較輕鬆的方式取得我們需要的資料。在這裡，我們發現郵件伺服器的日誌檔格式是以': '來作為區隔。所以如果我們把每一筆資料(一列)視為一個字串，利用split來將字串切開為包含各欄位的陣列的話，我們就發現陣列的第三個元素就可以用來判斷是否為退信的資料，因此這樣就顯得容易多了。讓我們來試試看：<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+
+my $file = "/var/log/mail.log";
+open LOG, $file;
+while (<LOG>) {
+    my @columns = split /: /, $_;
+    print $_ if ($columns[2] eq 'reject');
+}
+close LOG;
+</pre>
+<BR/>
+<BR/>
+2. 承上題，統計當月每天的退信數字，並且畫成長條圖。<BR/>
+
+      </blockquote>
+      </td>
+      <td>
+      </td>
+  </tr>
+  <tr align=center>
+    <td><img src="index_5.jpg" width="743" height="27"></td>
+  </tr>
+</table>
+</BODY>
+</HTML>

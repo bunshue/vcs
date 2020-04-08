@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+	<HEAD>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf8">
+		<META NAME="Generator" CONTENT="PhotoImpact">
+	
+<link href="word.css" rel="stylesheet" type="text/css">
+<title>Perl Book</title></HEAD>
+	
+<BODY>
+<table width="342" height="3020" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align=center><img src="index_2.jpg" width="743" height="162"></td>
+  </tr>
+  <tr><td>
+  </td></tr>
+  <tr> 
+    <td height="2831" background="index_4.jpg"> 
+      <blockquote>
+	  17. Perl與系統管理<BR/>
+<BR/>
+Perl之所以能夠一直在腳本程式中佔有一席之地，有一些部份其實也是因為在系統管理中，Perl還能發揮著不錯的效用，而且在使用上也是非常方便。它能夠像shell script一樣，拿了就直接用，而不需要定義一堆變數，物件，物件的方法之後才開始寫程式碼。你可以找到相關的模組，然後非常迅速的完成你想達到的目的。所以它保留了shell script的方便性，卻又比shell script擁有更多的資源。當然優點也在某些程度上被當為缺點，例如有些人認為Perl程式碼非常的不夠嚴謹，因為相對於Java或Python，它顯然太過自由了。<BR/>
+其實Perl對於Linux/*BSD的方便性幾乎是不言可喻，很多時候在這些系統中都會預設安裝了Perl，因為Perl能夠相當程度的處理系統中的雜事。但是不只如此，如果你是一個系統管理員，Perl能幫你作的事情也許比你想像中的還要多。尤其當你需要對很多系統的資料進行搜尋，比對的時候，Perl就更能顯示它的重要性。何況很多時候，我們可以透過日誌檔(log)的分析來進行系統的監控跟效率的評比，而這也正是Perl的其中一項專長。這也就對於很多系統管理的統計部份(例如MRTG跟awstats)是藉由perl來達成能做出很好的解釋了。<BR/>
+這一章的大綱是根據Autrijus Tang在對一群準Linux系統管理員上課前，我們一起討論出來的結果，而內容則有許多是直接使用他上課中使用的範例。這些範例在原作中以開放文本的方式釋出，各位可以直接使用在測試或其他正式的產品中。<BR/>
+<BR/>
+17.1 Perl在系統管理上的優勢<BR/>
+其實就像我們前面所提的，Perl在系統管理上有著非常重要的應用跟地位，對於許多Unix-like之類的作業系統管理來說，Perl經常是他們的好幫手。可是Perl到底有甚麼特別的優勢呢？除了我們剛剛提到的文字比對，處理的優勢外，Perl其實還有不少能夠吸引人的地方。其中最特殊幾點大概包括：<BR/>
+<BR/>
+1. Perl的黏性特強：Perl被稱為是一種黏膠程式語言，他能夠用最省力的方式把各種東西綁在一起。作為一個系統管理員總是會大量接觸各式各樣的工具，因此需要整合這些工具的機會就非常的大，所以perl的優勢在這個時候就能夠容易的顯現出來。<BR/>
+2. Perl資源豐富：我們之前多次提到的CPAN就是最豐富的資料庫，不單單是網路程式，資料庫處理，其實就像系統管理相關的部份，也有為數不少的模組。這些模組不但是許多系統管理員實際用來管理的工具，當然也是他們的經驗。所以你看這些模組，不單單是找尋可供應用的工具，也可以藉此挖掘這些人管理系統的方式。<BR/>
+3. Perl的作業環境：除了Unix-like的各種作業系統能夠輕易的安裝，執行Perl之外，微軟的Windows或是OS/2，以及蘋果公司的Mac OS也都可以讓Perl正常的運作。因此很多時候，當系統管理者同時必須管理一種以上的作業平台時，也能夠輕易的使用相同的工具。<BR/>
+4. Perl幾乎是一種標準：這裡所謂的標準，其實是因為目前已經很多的系統管理工具都是使用Perl所開發出來的，所以如果系統管理人員如果可以擁有Perl的能力，那麼自己維護或修改這些系統的可能性就可以大大增加。<BR/>
+<BR/>
+17.2 Perl的單行執行模式<BR/>
+很多系統管理員使用Perl當然是因為Perl的順手跟方便，就像我們說的，你總不會希望找一個檔案，或置換檔案的某些字串前還要先定義一大堆變數，或是先弄一個物件，然後拿來繼承，再利用被繼承的物件寫出置換字串的物件方法。然後又沒有好的正規表示式，然後你可能得用substr一個一個去找出來。最慘的可能是你寫完這樣的程式已經是下班時間，所以你還得加班把需要的結果搞定。而且你知道，程式寫出來不一定可以那麼順利，尤其你寫了那麼長的程式，有bugs也在所難免，然後......。於是，下場應該是可以預料的。<BR/>
+雖然很多人批評Perl非常不嚴謹，可是換個角度看，應該是說Perl允許你「隨手」寫出可以解決手邊工作的工具。而且Perl的「隨手」還不是普通的隨手。因為Perl提供單行執行模式，所以你可能可以看到這樣的一行程式：<BR/>
+<BR/>
+<pre><BR/>
+perl -MEncode -pi -e '$_ = encode_utf8(decode(big5 => $_))' *
+</pre>
+<BR/>
+執行完這一行之後，你該目錄下的Big5檔案就會全部都變成UTF8了。這實在非常神奇，不是嗎？其實不只這樣，你還可以利用一行的程式把檔案中的某些字串一次換掉。就像這樣：<BR/>
+<BR/>
+<pre><BR/>
+perl -pi.bak -e "s,foo,bar," *
+</pre>
+<BR/>
+這樣一來，所有檔案中的foo就全部被換成bar了。希望你沒有繼續想像如果你手動替換或是正在用其他結構嚴謹的程式語言在進行中。當然，如果你現在還在這裡，我們就利用那些堅持一定要有足夠完整的程式架構才能執行的傢伙還在奮鬥的時間，來看看怎麼執行單行的Perl吧。<BR/>
+首先，最基本的就是"-e"這個參數了，你可以使用perl -e來執行一行程式。不過請注意，我說的是一行程式，而不是一個敘述句，所以你當然可以這麼寫：<BR/>
+<BR/>
+<pre><BR/>
+perl -e "$foo = 2; print $foo"
+</pre>
+<BR/>
+接下來，雖然只是一行的Perl程式，可是你還是可以使用Perl的其他各式各樣模組，如果沒有辦法使用模組，那單行的執行模式大概也沒有人願意使用了吧！所以我們使用了"-M"的選項來指定所要使用的模組，就像前面的第一個例子中，我們用了"-MEncode"來指定使用Encode這個模組。<BR/>
+接下來，我們要讓這一行程式能對所有我們指定的檔案工作，所以我們使用了"-p"這個選項這個選項允許使用者以迴圈的方式來執行這一行程式，在這裡也就讓我們可以使用*這個萬用字元來指定所有的檔案。接下來，我們看到另一個選項是"-i"，這是讓perl會自動幫你進行備份，免得你對檔案進行操作之後，結果非常不滿意，卻還得手動改回來。所以當我們指定了"-i.bak"就是讓所有被修改的檔案在修改前就先備份一個副檔名為.bak的檔案。不過這是小寫i，如果你用了大寫的I，那意義可就大不相同了，"-I"讓你可以指定@INC的內容。<BR/>
+<BR/>
+17.3 管理檔案<BR/>
+<BR/>
+系統管理一開始大概都要面對一大堆的檔案吧，而基本的檔案管理其實還沒有太過複雜，只要你的shell夠熟，幾乎也可以應付很多狀況。例如你可以輕鬆的利用find找到你要的檔案，甚至禳他們排序，就像這樣：<BR/>
+<BR/>
+<pre><BR/>
+find /home/hcchien/svn/ *.txt -print | sort
+
+如果你用Find::File::Rule來寫，可能會像這樣：
+
+#!/usr/bin/perl -w
+
+use File::Find::Rule;
+
+my $rule =  File::Find::Rule->new;
+my @files = $rule->file->name( '*.txt' )->in('/home/hcchien/');
+
+print "$_$/" for @files;
+</pre>
+<BR/>
+Perl的寫法不但比較長，比較複雜，而且速度比起你在shell底下真是慢了好幾倍。暫時看起來，Perl在這樣簡單的狀況下實在不特別好用。可是別忘了，像這樣簡單的狀況，每個人都習慣隨手就用shell解決，可是如果情況稍微複雜一點呢？比如我想找出檔案狀態是可執行的.txt檔案，那麼你應該怎麼做呢？接下來，我想把這些檔案的可執行模式取消，然後也許再修改某些內容......。如果只是單一內容，shell確實非常輕巧，快速，可是一但我們要把一堆操作集合在一起時，你就會發現perl有甚麼過人之處了。<BR/>
+<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use File::Find::Rule;
+
+my $rule =  File::Find::Rule->new;
+$rule->file;
+$rule->executable;
+my @files = $rule->name( '*.txt' )->in('/home/hcchien/');
+
+for my $file (@files) {
+    open READ, $file;
+    s/foo/bar/g while (<READ>);
+}
+</pre>
+<BR/>
+當然，你還可以對這些檔案做其他的操作，例如每個檔案都插入一列新的資料等等。這時候，有另外一個模組就顯得非常有用了，這麼模組就是IO::All。還記得我們之前怎麼讀入一個檔案的內容吧？IO::All現在可以讓你非常簡單的控制檔案，我們來比較看看：<BR/>
+<BR/>
+<pre><BR/>
+用傳統的作法，我們可以這麼寫：
+
+open FILE, "<foo.txt";
+$buf.=$_ while (<FILE>);
+
+倒也相當簡潔，不過現在使用IO::All，就只要這麼做：
+
+my $buf < io('foo.txt');
+</pre>
+<BR/>
+不過我們並不打算在這裡深切的介紹IO::All這個模組，因為我們還有其他更重要的事情要做。<BR/>
+<BR/>
+17.4 郵件管理<BR/>
+<BR/>
+接下來讓我們來看看作為伺服器的一個重要工作，也就是關於Mail的管理。也因為對於郵件的管理需求其實非常的大，所以其實相關的管理工具也不在少數。例如可以過濾廣告信件，發送大量信件或是寄發一般的通知信件等等。不過由於某些工作的特殊性質，使得Perl成為這些工作中非常能夠勝任重要工具，這些工作中當然有不少是字串內容的分析，而最具代表性的也就是廣告信的過濾了。<BR/>
+<BR/>
+17.4.1 Mail::Audit + Mail::SpamAssassin<BR/>
+<BR/>
+這是一個非常具有殺手級實力的一個Perl模組，如果你已經是一個現任的網路管理人員，整天聽到你所管理的郵件伺服器中不斷傳來廣告郵件，而且你還不知道這個模組，那麼應該先去CPAN上搜尋Mail::SpamAssassin這個模組。然後你還可以搭配Mail::Audit這個模組。這裡的例子是許多人使用Mail::Audit跟Mail::SpamAssassin時經常會作為過濾信件第一關的檢查工具：<BR/>
+<BR/>
+<pre><BR/>
+use Mail::Audit;
+use Mail::SpamAssassin;
+my $m = Mail::Audit->new(
+    emergency   => "~/emergency_mbox",
+    nomime      => 1,
+);
+my $sa = Mail::SpamAssassin->new;
+$m->pipe("listgate cle") if $m->from =~ /svk-devel/;    # 送到pipe
+$m->accept("~/perl")     if $m->from =~ /perl/;         # 接進特定信箱
+$m->reject("no rbl")     if $m->rblcheck;               # 拒絕黑名單
+$m->ignore               if $m->subject =~ /sex/i;      # 忽略信件
+my $status = $sa->check($m);                            # 檢查垃圾信
+if ($status->is_spam) {
+    $status->rewrite_mail;                              # 加上檔頭
+    $m->accept("~/Mail/spam");                          # 收進垃圾桶
+}
+$m->noexit(1); $m->accept("~/Mail/%Y%m"); $m->noexit(0);# 按月彙整
+$m->accept;                                             # 其餘接收
+</pre>
+<BR/>
+其實如果利用Mail::Audit，還可以直接套用Mail::Audit::MAPS。因為這樣就可以直接把一些已經被列為黑名單的寄件者先排除在外了，而且使用上也沒有甚麼太大的差別。其實你只需要多做一個判斷:<BR/>
+<BR/>
+<pre><BR/>
+if ($mail->rblcheck) {
+    ......
+}
+</pre>
+<BR/>
+另外，Mail::Audit還有一個常用的外掛程式則是Mail::Audit::KillDups。他可以幫你刪除一些ID重複的信件，其實這也是可能的廣告信來源之一，所以你可以又事先過濾掉一些垃圾郵件。其實不只這些，Mail::Audit的外掛程式種類之多，實在讓人覺得有趣，我自己另一個常用的是Mail::Audi::PGP，不過這就未必適合所有人了。<BR/>
+至於Mail::SpamAssassin，除了搭配Mail::Audit之外，其實也有命令列程式。透過命令列程式，你可以設定自己的黑名單(blacklist)跟白名單(whitelist)，也可以透過手動訓練的方式，來增進SpamAssassin的準確率。<BR/>
+<BR/>
+17.4.2 Mail::Sendmail 與 Mail::Bulkmail<BR/>
+<BR/>
+另外，perl也可以用非常方便的方式來傳送mail。雖然你在系統管理時，如果需要寄發mail，可以方便的使用sendmail來傳送。可是其實有些時候你會在系統中定時執行一些程式，或許是進行系統的意外檢查，或許是做定時的工作。那麼你可能會希望這些工作如果發生意外，你可以很快的收到電子郵件通知。這時候Mail::Sendmail就變得很有用了。<BR/>
+<BR/>
+<pre><BR/>
+use Mail::Sendmail;
+
+%mail = ( To      => 'yourmail@hostname.com',
+          From    => 'mail@server.com',
+          Message => "救命啊！Apache不動了！！"
+        );
+
+sendmail(%mail) or die $Mail::Sendmail::error;
+</pre>
+<BR/>
+各位大概都聽過「自相矛盾」的成語故事吧？而且千萬別以為那是書上拿來騙小孩的故事，因為真實的就發生在perl的模組中。我們之前介紹了目前幾乎被公認最好阻擋廣告信的模組：SpamAssassin，可是現在我們也要介紹另一個被認為發廣告信的強力模組，也就是Mail::Bulkmail。<BR/>
+<BR/>
+<pre><BR/>
+use Mail::Bulkmail;
+my $bulk = Mail::Bulkmail->new(
+    LIST          => "~/listfile",&nbsp;&nbsp;    # 地址清單
+    From          => 'admin@bulkmail.com',  # 寄件人
+    Subject       => "System Information",  # 標題
+    Message       => '~/announcement.txt'   # 內文檔名
+    message_from_file => 1                  # 從檔案讀取內文
+);
+$bulk->bulkmail() or die Mail::Bulkmail->error;
+</pre>
+<BR/>
+在這裡，你只需要把要一次傳送的一大堆郵件地址逐行放進一個純文字檔。Mail::Bulkmail就會幫你讀出這些地址，而且發送郵件。至於內文，你雖然可以直接寫在程式中，可是更有彈性的方式也是可以利用文字檔來讀入郵件內容。這樣一來，如果你的郵件是每週定時發送，那麼你只需要修改傳送名單跟郵件內容的檔案就可以輕鬆的讓程式替你完成其他工作了。<BR/>
+<BR/>
+17.4.3 POP3Client 及 IMAPClient<BR/>
+<BR/>
+有些時候，你可能有一些帳號是專門用來處理一些特定的工作，那麼其實這些送到該帳號的信件未必需要由一個特定的人去收，而可以利用程式去進行處理。這個時候，你可以使用Mail::POP3Client這個模組來讀取這些郵件。我們先用一個簡單的例子來看看這個模組的用法：<BR/>
+<BR/>
+<pre><BR/>
+use Mail::POP3Client;
+my $pop = Mail::POP3Client->new(
+    USER     => "me",
+    PASSWORD => "mypassword",
+    HOST     => "pop3.example.com",
+);
+foreach ( 1 .. $pop->Count-1 ) {
+    $pop->Head( $_ ) =~ /^From:\s+somebody\@example.com/ or next;
+    open my $fh, '>', "mail-$_.txt" or die $!;
+    $pop->RetrieveToFile($fh, $_);
+}
+</pre>
+<BR/>
+這個程式可以讓某個人寄來的信都被備份到一個特定的檔案中，其實主要的就是透過郵件檔頭中的寄件者進行比對。所以如果你可以針對主題進行比對，就可以對郵件進行分類。當然，如果你想出其他更好用的郵件過濾演算法，也許可以從這裡開始進行實做(雖然我們並不建議你這麼做)。其實一但可以直接取出郵件中的每一封郵件，我們可以做的應用就非常的廣泛了。而有了POP3Client，好像也少不了IMAPClient。我們還是先來看另一個例子吧：<BR/>
+<BR/>
+<pre><BR/>
+use Mail::IMAPClient;
+
+my $imap = Mail::IMAPClient->new;       
+$imap = Mail::IMAPClient->new(  
+        &nbsp;&nbsp;	Server => $host,
+                        User    => $id,
+                        Password=> $pass,
+        )       or die "無法連上主機：$host as $id: $@";
+</pre>
+<BR/>
+使用IMAPClient，也因為郵件伺服器種類的特性差異，讓它提供更多的操作方式給使用者。最基本的比如IMAPClient的Connected跟Unconnected，另外可以透過Range來選定某一個特定範圍的郵件。例如：<BR/>
+<BR/>
+<pre><BR/>
+$imap->Range($imap->messages);
+</pre>
+<BR/>
+其中$imap->messages會取得目前所在資料夾的所有郵件，然後透過$imap->Range()來把這些郵件設定成要操作的郵件範圍。不過你也可以在$imap->Range()中使用逗點分隔來指定某幾封特定的信件。另外，如果你考慮搬移信件，你可以使用move來進行，其實非常方便，就像這樣：<BR/>
+<BR/>
+<pre><BR/>
+my $newUid = $imap->move($newFolder, $oldUid) 
+   &nbsp;&nbsp;     or die "Could not move: $@\n";
+$imap->expunge;
+</pre>
+<BR/>
+另外，還有一些常用的方法例如delete_messages和restore_messages就分別是用來刪除郵件跟回覆被刪除的郵件。或是你可以用search來搜尋郵件。其實IMAPClient非常的強大，確實需要根據自己的需求去研究相關的文件才能確實掌握。<BR/>
+<BR/>
+17.5 日誌檔<BR/>
+<BR/>
+作為一個系統管理，能確實掌握每日的紀錄檔確實是非常重要的工作。不過如果你進入/etc/log資料夾，就會發現裡面的檔案其實是相當多的。也就是說，如果你身為一個系統管理員，每天要注意這些檔案中有沒有異常，如果你還在使用傳統的工人智慧，那麼每天進行這樣的工作就要浪費許多時間。因此要希望能夠在這部份節省更多的時間來從事其他的管理工作，我們可以使用一些工作來簡化這些日常的程序，Parse::Syslog就是其中之一。<BR/>
+我們先來看看一個簡單的例子，來了解Parse::Syslog怎麼幫我們處理這些日誌檔案。<BR/>
+<BR/>
+<pre><BR/>
+use Parse::Syslog;
+my $syslog = Parse::Syslog->new('/var/log/syslog');
+
+while (my $entry = $syslog->next) {
+    $entry->{program} =~ /sudo$/ or next;
+    print localtime($entry->{timestamp})."\n",
+        "$entry->{text}\n\n";
+}
+</pre>
+<BR/>
+其實程式並不困難，首先我們設定要處理的檔案，在這裡我們針對"/var/log/syslog"這個檔案來檢查。接著Parse::Syslog傳回一個物件，也就是$syslog。接下來我們使用next這個物件操作方法逐行處理這個檔案，在檔案結束之前，$syslog->next都會傳回真值，因此讓我們可以一行一行來進行比對的工作。我們試圖找出日誌檔中關於有使用者使用sudo這個指令，所以我們使用了正規表示式。<BR/>
+接下來，Parse::Syslog可以幫你取得事件發生的時間，所以當我們比對成功之後，就可以印出使用者使用sudo這個指令的時間。<BR/>
+所以如果我們一次把所有要監視的檔案內容利用Parse::Syslog設定好，那麼其實以後的日子就會輕鬆愉快許多了。當然，如果你擷取出這魔一堆檔案，那麼要把這些讓人需要特別注意的紀錄進行處理，才能方便管理者閱讀或檢查，這時候可以使用另一個模組來進行。<BR/>
+Log::Dispatch是不錯的選擇。你只要新建立一個相關的物件，並且指定要寫入的檔名，那麼可以依照紀錄的等級來將相關的訊息寫入檔案中。<BR/>
+<BR/>
+<pre><BR/>
+use Log::Dispatch;
+my $log = Log::Dispatch->new;               # 建立紀錄物件
+# 新增紀錄檔
+$log->add( Log::Dispatch::File->new(
+    name => 'file',                         # 物件名稱
+    min_level => 'debug',                   # 紀錄門檻
+    filename => '/var/log/test.log',        # 紀錄檔名
+) );
+
+接下來，我們把想要寫入的訊息像這樣的加入檔案中：
+
+$log->log( level => 'alert', message => 'Strange data in incoming request' );
+</pre>
+<BR/>
+這裡有一個有趣的部份，也就是紀錄門檻。他可以讓使用者依照不同的等級來分門別類，而門檻的類別分別為：<BR/>
+<BR/>
+<pre><BR/>
+除錯 (debug)
+消息 (info)
+提示 (notice)
+警告 (warning)
+錯誤 (error)
+關鍵 (critical)
+警鈴 (alert)
+緊急事件 (emergency)
+</pre>
+<BR/>
+既然有了這些分別，你就可以進行更多的動作來確保系統正常的運作。例如你可以在系統遇到異常現象時發出信件給自己，就像這樣：<BR/>
+<BR/>
+<pre><BR/>
+$log->add( Log::Dispatch::Email::MailSend->new(
+    name => 'email',                        # 物件名稱
+    min_level => 'emergency',               # 紀錄門檻
+    to => [ 'admin@example.com' ],          # 收件地址
+    subject => 'HELP!!!',                   # 郵件標題
+) );
+</pre>
+<BR/>
+於是如果你的日誌得到了一些緊急事件的訊息時，就會自動發出電子郵件給你。如此一來你可以在第一時間就知道系統異常，並且進行檢修。當然，如果你是超級負責的系統管理員，你也許希望在你沒有網路的時候也能得到相關的緊急警告，這時候手機簡訊也許是另一種通知的好方法。<BR/>
+<BR/>
+<pre><BR/>
+use Net::SMS;
+my $df = `df -h`;&nbsp;&nbsp;		# 取得硬碟配置資訊
+$df =~ /-\d/ or exit;   &nbsp;&nbsp;	# 若沒有數字是負的就直接離開
+my $sms = Net::SMS->new;                # 簡訊物件
+$sms->accountId("123-456-789-12345");   # 帳號
+$sms->accountPassword("mypassword");    # 密碼
+$sms->sourceAddr("0928-000-000");       # 來源
+$sms->destAddr("0928-999-999");         # 目的
+$sms->msgData("HARD DISK FULL:\n$df");  # 訊息
+$sms->submit;                           # 送出簡訊
+$sms->success or die $sms->errorDesc;   # 偵測錯誤
+</pre>
+<BR/>
+我們使用Net::SMS可以直接發送簡訊，在這個例子中，我們使用shell指令去檢查磁碟空間。並且當發現磁碟空間不足時就發出手機簡訊來警告系統管理人員。雖然你寫了這些程式之後，未必就可以獲得老闆的賞識而加薪，不過我想讓老闆少點機會找你麻煩應該還算是一項大利多吧！<BR/>
+<BR/>
+17.6 報表<BR/>
+<BR/>
+身為系統管理人員，尤其當你是在企業內部進行系統管理時，最容易遭到忽略。因為當大家系統非常順暢時，幾乎沒人會歸功於系統管理員的認真。於是要怎麼拿出實際的內容來說服其他的人，這也算是系統管理人員的重大業務之一了吧！很多人使用MRTG(註一)來監測網路流量，使用awstats(註二)來看網站的各式數據。<BR/>
+可惜的是大多數的人對這些報表並不太有興趣，除非你管理的是一個(或一堆)網站，而且公司的業務也就是經營這些網站。既然如此，那麼一個系統管理員有些時候其實還是要呈現出自己優良的管理績效，在沒有現成的套裝工具下，要怎麼樣快速的建立出漂亮的報表其實也是不小的學問。<BR/>
+如果你需要的是文字的報表，那麼我們前一章使用的Template就非常適合，你可以利用Template::Toolkit畫一個HTML的報表。<BR/>
+<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+use Template;
+use IO::All;
+use Mail::MboxParser;
+
+my $dir = io('/var/mail');&nbsp;&nbsp;		  # 準備逐個檢查信箱
+my %all;
+while (my $io = $dir->next) {&nbsp;&nbsp;		  # 一個一個看信箱的信件數目
+    if ($io->is_file) {&nbsp;&nbsp;    			  # 只檢查檔案
+        eval {&nbsp;&nbsp;				  # 避免因為某些原因中斷
+            my $mb = Mail::MboxParser->new("$io", newline => '#DELIMITER');
+            %all{$io} = $mb->nmsgs;&nbsp;&nbsp;	  # 把結果放入雜湊
+        }
+    }
+}
+
+my $config = {
+      &nbsp;&nbsp;     INCLUDE_PATH => '/search/path',
+      &nbsp;&nbsp;     POST_CHOMP   => 1,
+  &nbsp;&nbsp;     };
+
+my $template = Template->new($config);&nbsp;&nbsp;	# 建立新的模板物件
+my $vars = { messages  => \%all };
+my $input = 'report.html';
+my $output;
+
+$template->process($input, $vars, $output)&nbsp;&nbsp;# 處理模板內容
+      || die $template->error();
+print $output;
+</pre>
+<BR/>
+這時候，你可以取得一個含有所有信箱郵件個數的一個雜湊變數(我們使用了Mail::MboxParser)。如此一來，你只要弄一個漂亮的模板，就可以讓系統動態把資料填入，隨時可以監控目前大家信箱內的郵件數目了。不過這樣其實還沒結束，因為很多老闆或主管對於文字的接受度總是比較低，所以如果你有漂亮的報表，那麼給他們的印象應該也會隨之提高。這時候，你也許可以認真考慮使用GD::Graph這個模組。這個模組可以讓你輕鬆的畫出漂亮的統計圖表，你可以根據資料的屬性以及需求的差異，畫出例如圓餅圖，曲線圖，柱狀圖等等，如果你還想更絢麗，GD::Graph還可以畫出立體的3D圖形。<BR/>
+我們用另一個例子來看看怎麼使用GD::Graph吧：<BR/>
+<BR/>
+<pre><BR/>
+use GD::Graph::bars3d;
+my $graph = GD::Graph::bars3d->new(800, 600);       # 新增柱狀圖
+my @files = </var/log/maillog.*.bz2>;
+
+my $image = $graph->plot([&nbsp;&nbsp;		    # 訂出橫座標，縱座標內容
+    [map /(\d+)\./g, @files],
+    [map -s, @files],
+]) or die $graph->error;
+
+open my $fh, '>', '3.png' or die $!;
+print $fh $image->png;      # 儲存影像
+</pre>
+<BR/>
+我們取得了每次的電子郵件日誌檔的，然後根據這些檔案的大小進行統計。這時候，我們只需要訂出橫座標跟縱座標的內容，交給GD去畫就好了，你當然也可以定時的要求程式幫你畫出某些統計圖表。很有用吧！你可以定時交出漂亮的工作報表，而且還是由電腦自動產生。<BR/>
+<BR/>
+利用Perl來協助系統管理其實還算是非常方便的，何況已經有許多的系統管理員早就在做這些工作，也因此我們有很多方便的工具可以使用。這完全讓我們省下許多時間，尤其當更多的系統管理員每天都花許多時間在這些繁瑣而且又沒有變化的工作上。<BR/>
+<BR/>
+習題：<BR/>
+1. 找出maillog中被reject(退信)的資料，也就是找到日誌檔中以reject標明的內容。例如：<BR/>
+<pre><BR/>
+Jun  3 00:00:46 dns2 postfix/smtpd[71431]: D988D6A: reject: RCPT from smtp2.wanadoo.fr[193.252.22.29]: 450 <fnatterdobkl@hcchien.org>: User unknown in local recipient table; from=<> to=<fnatterdobkl@hcchien.org> proto=ESMTP helo=<mwinf0203.wanadoo.fr>
+</pre>
+2. 承上題，統計當月每天的退信數字，並且畫成長條圖。<BR/>
+<BR/>
+註一：Multi Router Traffic Grapher (http://people.ee.ethz.ch/~oetiker/webtools/mrtg/)<BR/>
+註二：http://awstats.sourceforge.net/<BR/>
+
+      </blockquote>
+      </td>
+      <td  valign="top">
+      </td>
+  </tr>
+  <tr align=center>
+    <td><img src="index_5.jpg" width="743" height="27"></td>
+  </tr>
+</table>
+</BODY>
+<script type="text/javascript" src="http://tw.js.webmaster.yahoo.com/110643/ystat.js"></script><noscript><a href="http://tw.webmaster.yahoo.com"><img src=http://tw.img.webmaster.yahoo.com/110643/ystats.gif></a></noscript>
+</HTML>

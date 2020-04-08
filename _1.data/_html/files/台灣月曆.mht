@@ -1,0 +1,1936 @@
+From: <¥Ñ Windows Internet Explorer 8 Àx¦s>
+Subject: =?big5?B?pXjGV6TrvuQ=?=
+Date: Thu, 30 Sep 2010 00:42:49 +0800
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="big5"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://s.o4u.com/host/blog/calendar/calendar.htm
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.3664
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+        ***************************************
+         =B9A=BE=E4=A4=EB=BE=E4&=A5@=AC=C9=AE=C9=B6=A1 DHTML =B5{=A6=A1 =
+(=A5x=C6W=AA=A9)
+        ***************************************
+             =B3=CC=AB=E1=AD=D7=A7=EF: 2009 =A6~ 3 =A4=EB 20 =A4=E9
+
+
+=A6p=AAG=B1z=C4=B1=B1o=B3o=AD=D3=B5{=A6=A1=A4=A3=BF=F9=A1A=B1z=A5i=A5H=A6=
+=DB=A5=D1=C2=E0=B1H=B5=B9=BF=CB=AAB=A6n=A4=CD=A4=C0=A8=C9=A1C=A6=DB=A5=D1=
+=A8=CF
+=A5=CE=BDd=B3=F2: =
+=BE=C7=AE=D5=A1B=BE=C7=B7|=A1B=A4=BD=B7|=A1B=A4=BD=A5q=A4=BA=B3=A1=A1B=B5=
+{=A6=A1=AC=E3=A8s=A1B=AD=D3=A4H=BA=F4=AF=B8=A8=D1=A4H=ACd
+=B8=DF=A8=CF=A5=CE=A1C
+
+Open Source =
+=A4=A3=A5N=AA=ED=A9=F1=B1=F3=B5=DB=A7@=C5v=A1A=A5=F4=A6=F3=A7=CE=A6=A1=A4=
+=A7=A4=DE=A5=CE=A9=CE=C2=E0=B8=FC=ABe=BD=D0=A8=D3=ABH=A7i
+=AA=BE=A1C=A6p=BB=DD=A9=F3=A1u=B0=D3=B7~=A9=CE=C0=E7=A7Q=A1v=A5=D8=AA=BA=A4=
+=A4=A8=CF=A5=CE=A6=B9=B3=A1=A5=F7=A4=A7=B5{=A6=A1=BDX=A9=CE=B8=EA=AE=C6=A1=
+A=BB=DD=A8=FA
+=B1o=A5=BB=A4H=AE=D1=AD=B1=B1=C2=C5v=A1C
+
+=B3=CC=B7s=AA=A9=A5=BB=BBP=A7=F3=B7s=B8=EA=B0T=A9=F3 =
+http://sean.o4u.com/ap/calendar/ =A4=BD=A7G
+
+
+=A1@                            =
+=C5w=AA=EF=A8=D3=ABH=A4=AC=AC=DB=B0Q=BD=D7=AC=E3=A8s=BBP=AB=FC=A5=BF=BB~=C2=
+=D5
+                      =
+=B3s=B5=B8=A4=E8=A6=A1=A1Ghttp://sean.o4u.com/contact/
+                      =A1@=A1@=A1@=A1@=A1@=A1@=A1@=A1@=A1@=A1@Sean Lin =
+(=AAL=AC=AC=BD=E5)
+                          =
+=B4L=AD=AB=A5L=A4H=B3=D0=A7@=A1E=BD=D0=A4=C5=A7R=B0=A3=A9=CE=C5=DC=A7=F3=A6=
+=B9=BB=A1=A9=FA
+
+--><HTML><HEAD><TITLE>=A5x=C6W=A4=EB=BE=E4</TITLE>
+<META name=3Dkeywords=20
+content=3D"=AE=C9=B6=A1;=A5@=AC=C9=AE=C9=B6=A1;=AE=C9=B0=CF;=B9A=BE=E4;=B3=
+=B1=BE=E4;=B6=A7=BE=E4;=A4=EB=BE=E4;=BE=E4=AAk;=B8`=A4=E9;=AC=F6=A9=C0=A4=
+=E9;=AE=C9=B0=CF;=B8`=AE=F0;=A4G=A4Q=A5|=B8`=AE=F0;=A4z=A4=E4;=A5=CD=A8v;=
+world time clock;gregorian solar;chinese lunar;calendar">
+<META name=3Drobots content=3DAll>
+<META name=3Ddescription=20
+content=3D"Gregorian Solar Calendar and Chinese Lunar Calendar">
+<META content=3D"text/html; charset=3Dbig5" http-equiv=3DContent-Type>
+<SCRIPT language=3DJavascript>
+<!--
+/************************************************************************=
+*****
+                                 =AD=D3=A4H=B0=BE=A6n=B3]=A9w
+*************************************************************************=
+****/
+
+var conWeekend =3D 3;  // =ACP=B4=C1=A4=BB=C3C=A6=E2=C5=E3=A5=DC: =
+1=3D=B6=C2=A6=E2, 2=3D=BA=F1=A6=E2, 3=3D=AC=F5=A6=E2, 4=3D=B9j=B6g=A5=F0
+
+
+/************************************************************************=
+*****
+                                 =A4=E9=B4=C1=B8=EA=AE=C6
+*************************************************************************=
+****/
+
+var lunarInfo=3Dnew Array(
+0x4bd8,0x4ae0,0xa570,0x54d5,0xd260,0xd950,0x5554,0x56af,0x9ad0,0x55d2,
+0x4ae0,0xa5b6,0xa4d0,0xd250,0xd295,0xb54f,0xd6a0,0xada2,0x95b0,0x4977,
+0x497f,0xa4b0,0xb4b5,0x6a50,0x6d40,0xab54,0x2b6f,0x9570,0x52f2,0x4970,
+0x6566,0xd4a0,0xea50,0x6a95,0x5adf,0x2b60,0x86e3,0x92ef,0xc8d7,0xc95f,
+0xd4a0,0xd8a6,0xb55f,0x56a0,0xa5b4,0x25df,0x92d0,0xd2b2,0xa950,0xb557,
+0x6ca0,0xb550,0x5355,0x4daf,0xa5b0,0x4573,0x52bf,0xa9a8,0xe950,0x6aa0,
+0xaea6,0xab50,0x4b60,0xaae4,0xa570,0x5260,0xf263,0xd950,0x5b57,0x56a0,
+0x96d0,0x4dd5,0x4ad0,0xa4d0,0xd4d4,0xd250,0xd558,0xb540,0xb6a0,0x95a6,
+0x95bf,0x49b0,0xa974,0xa4b0,0xb27a,0x6a50,0x6d40,0xaf46,0xab60,0x9570,
+0x4af5,0x4970,0x64b0,0x74a3,0xea50,0x6b58,0x5ac0,0xab60,0x96d5,0x92e0,
+0xc960,0xd954,0xd4a0,0xda50,0x7552,0x56a0,0xabb7,0x25d0,0x92d0,0xcab5,
+0xa950,0xb4a0,0xbaa4,0xad50,0x55d9,0x4ba0,0xa5b0,0x5176,0x52bf,0xa930,
+0x7954,0x6aa0,0xad50,0x5b52,0x4b60,0xa6e6,0xa4e0,0xd260,0xea65,0xd530,
+0x5aa0,0x76a3,0x96d0,0x4afb,0x4ad0,0xa4d0,0xd0b6,0xd25f,0xd520,0xdd45,
+0xb5a0,0x56d0,0x55b2,0x49b0,0xa577,0xa4b0,0xaa50,0xb255,0x6d2f,0xada0,
+0x4b63,0x937f,0x49f8,0x4970,0x64b0,0x68a6,0xea5f,0x6b20,0xa6c4,0xaaef,
+0x92e0,0xd2e3,0xc960,0xd557,0xd4a0,0xda50,0x5d55,0x56a0,0xa6d0,0x55d4,
+0x52d0,0xa9b8,0xa950,0xb4a0,0xb6a6,0xad50,0x55a0,0xaba4,0xa5b0,0x52b0,
+0xb273,0x6930,0x7337,0x6aa0,0xad50,0x4b55,0x4b6f,0xa570,0x54e4,0xd260,
+0xe968,0xd520,0xdaa0,0x6aa6,0x56df,0x4ae0,0xa9d4,0xa4d0,0xd150,0xf252,
+0xd520);
+
+var solarMonth=3Dnew Array(31,28,31,30,31,30,31,31,30,31,30,31);
+var Gan=3Dnew =
+Array("=A5=D2","=A4A","=A4=FE","=A4B","=A5=B3","=A4v","=A9=B0","=A8=AF","=
+=A4=D0","=AC=D1");
+var Zhi=3Dnew =
+Array("=A4l","=A4=A1","=B1G","=A5f","=A8=B0","=A4x","=A4=C8","=A5=BC","=A5=
+=D3","=A8=BB","=A6=A6","=A5=E8");
+var Animals=3Dnew =
+Array("=B9=AB","=A4=FB","=AA=EA","=A8=DF","=C0s","=B3D","=B0=A8","=A6=CF"=
+,"=B5U","=C2=FB","=AA=AF","=BD=DE");
+var solarTerm =3D new =
+Array("=A4p=B4H","=A4j=B4H","=A5=DF=ACK","=ABB=A4=F4","=C5=E5=EEh","=ACK=A4=
+=C0","=B2M=A9=FA","=BD\=ABB","=A5=DF=AEL","=A4p=BA=A1","=A8~=BA=D8","=AEL=
+=A6=DC","=A4p=B4=BB","=A4j=B4=BB","=A5=DF=AC=EE","=B3B=B4=BB","=A5=D5=C5S=
+","=AC=EE=A4=C0","=B4H=C5S","=C1=F7=AD=B0","=A5=DF=A5V","=A4p=B3=B7","=A4=
+j=B3=B7","=A5V=A6=DC");
+var nStr1 =3D new =
+Array('=A4=E9','=A4@','=A4G','=A4T','=A5|','=A4=AD','=A4=BB','=A4C','=A4K=
+','=A4E','=A4Q');
+var nStr2 =3D new Array('=AA=EC','=A4Q','=A4=DC','=A4=CA','=C9m');
+var monthName =3D new =
+Array("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","=
+DEC");
+
+//=B0=EA=BE=E4=B8`=A4=E9 *=AA=ED=A5=DC=A9=F1=B0=B2=A4=E9
+var sFtv =3D new Array(
+"0101*=A4=B8=A5=B9 =
+=A4=A4=B5=D8=A5=C1=B0=EA=B6}=B0=EA=AC=F6=A9=C0=A4=E9",
+"0111 =A5q=AAk=B8`",
+"0115 =C3=C4=AEv=B8`",
+"0123 =A6=DB=A5=D1=A4=E9",
+"0204 =B9A=A5=C1=B8`",
+"0214 =B1=A1=A4H=B8`",
+"0215 =C0=B8=BC@=B8`",
+"0219 =B7s=A5=CD=AC=A1=B9B=B0=CA=AC=F6=A9=C0=A4=E9",
+"0228*=A9M=A5=AD=AC=F6=A9=C0=A4=E9",
+"0301 =A7L=A7=D0=B8`",
+"0305 =B5=A3=A4l=ADx=B8`",
+"0308 =B0=FC=A4k=B8`",
+"0312 =B4=D3=BE=F0=B8` =B0=EA=A4=F7=B3u=A5@=AC=F6=A9=C0=A4=E9",
+"0317 =B0=EA=C2=E5=B8`",
+"0320 =B6l=ACF=B8`",
+"0321 =AE=F0=B6H=B8`",
+"0325 =AC=FC=B3N=B8`",
+"0326 =BCs=BC=BD=B8`",
+"0329 =ABC=A6~=B8` =AD=B2=A9R=A5=FD=AFP=AC=F6=A9=C0=A4=E9",
+"0330 =A5X=AA=A9=B8`",
+"0401 =B7M=A4H=B8` =A5D=ADp=B8`",
+"0404 =B0=FC=A5=AE=B8`",
+"0405 =AD=B5=BC=D6=B8`",
+"0407 =BD=C3=A5=CD=B8`",
+"0422 =A5@=AC=C9=A6a=B2y=A4=E9",
+"0501*=B3=D2=B0=CA=B8`",
+"0504 =A4=E5=C3=C0=B8`",
+"0505 =BBR=C1=D0=B8`",
+"0510 =AF]=BA=E2=B8`",
+"0512 =C5@=A4h=B8`",
+"0603 =B8T=B7=CF=B8`",
+"0606 =A4u=B5{=AEv=B8` =A4=F4=A7Q=B8`",
+"0609 =C5K=B8=F4=B8`",
+"0615 =C4=B5=B9=EE=B8`",
+"0630 =B7|=ADp=AEv=B8`",
+"0701 =BA=AE=A5=C1=B8` =A4=BD=B8=F4=B8` =B5|=B0=C8=B8`",
+"0711 =AF=E8=AE=FC=B8`",
+"0712 =C5=A4=B0=D7=B8`",
+"0808 =A4=F7=BF=CB=B8`",
+"0814 =AA=C5=ADx=B8`",
+"0827 =BEG=A6=A8=A5\\=BD=CF=A8=B0",
+"0901 =B0O=AA=CC=B8`",
+"0903 =ADx=A4H=B8` =A7=DC=BE=D4=AC=F6=A9=C0",
+"0909 =C5=E9=A8|=B8` =AB=DF=AEv=B8`",
+"0913 =AAk=AB=DF=A4=E9",
+"0928 =B1=D0=AEv=B8` =A4=D5=A4l=BD=CF=A8=B0",
+"1006 =A6=D1=A4H=B8`",
+"1010*=B0=EA=BCy=AC=F6=A9=C0=A4=E9",
+"1021 =B5=D8=B9=B4=B8`",
+"1025 =A5x=C6W=A5=FA=B4_=B8`",
+"1031 =B8U=B8t=B8` =BD=B1=A4=BD=BD=CF=A8=B0=AC=F6=A9=C0=A4=E9 =
+=BAa=A5=C1=B8`",
+"1101 =B0=D3=A4H=B8`",
+"1111 =A4u=B7~=B8` =A6a=ACF=B8`",
+"1117 =A6=DB=A8=D3=A4=F4=B8`",
+"1112 =B0=EA=A4=F7=BD=CF=A8=B0=AC=F6=A9=C0=A4=E9 =C2=E5=AEv=B8` =
+=A4=A4=B5=D8=A4=E5=A4=C6=B4_=BF=B3=B8`",
+"1121 =A8=BE=AA=C5=B8`",
+"1205 =AE=FC=AD=FB=B8` =AA=BC=A4H=B8`",
+"1210 =A4H=C5v=B8`",
+"1212 =BE=CB=A7L=B8`",
+"1225 =A6=E6=BE=CB=AC=F6=A9=C0=A4=E9 =A5=C1=B1=DA=B4_=BF=B3=B8` =
+=B8t=BD=CF=B8`",
+"1227 =AB=D8=BFv=AEv=B8`",
+"1228 =B9q=ABH=B8`",
+"1231 =A8=FC=ABH=B8`");
+
+//=ACY=A4=EB=AA=BA=B2=C4=B4X=AD=D3=ACP=B4=C1=B4X=A1C 5,6,7,8 =
+=AA=ED=A5=DC=A8=EC=BC=C6=B2=C4 1,2,3,4 =AD=D3=ACP=B4=C1=B4X
+var wFtv =3D new Array(
+"0520 =A5=C0=BF=CB=B8`",
+"0716 =B0=EA=BB=DA=A6X=A7@=B8`",
+"0730 =B3Q=A5=A3=A7=D0=B0=EA=AEa=B6g",
+"1144 =B7P=AE=A6=B8`");
+
+//=B9A=BE=E4=B8`=A4=E9
+var lFtv =3D new Array(
+"0101*=ACK=B8`",
+"0102*=A6^=AEQ=AEa",
+"0103*=B2=BD=AF=AA",
+"0104 =AA=EF=AF=AB",
+"0105 =B6}=A5=AB",
+"0109 =A4=D1=A4=BD=A5=CD",
+"0115 =A4=B8=AEd=B8` =C6[=A5=FA=B8`",
+"0202 =C0Y=A4=FA =A4g=A6a=A4=BD=A5=CD",
+"0323 =B6=FD=AF=AA=A5=CD",
+"0408 =AFD=A6=F2=B8`",
+"0505*=BA=DD=A4=C8=B8` =B8=D6=A4H=B8`",
+"0701 =B6}=B0=AD=AA=F9",
+"0707 =A4C=A4i=B1=A1=A4H=B8`",
+"0715 =A4=A4=A4=B8=B8`",
+"0800 =C3=F6=B0=AD=AA=F9",
+"0815*=A4=A4=AC=EE=B8`",
+"0909 =AD=AB=B6=A7=B8`",
+"1208 =C3=BE=A4K=B8`",
+"1216 =A7=C0=A4=FA",
+"1224 =B0e=AF=AB",
+"0100*=B0=A3=A4i");
+
+//=A5@=AC=C9=AE=C9=B6=A1=B8=EA=AE=C6
+var timeData =3D {
+"Asia (North, East) =A5_=A8=C8=A1B=AAF=A8=C8": {
+"Brunei             =A8Z=B5=DC    =
+":["+0800","","=B4=B5=A8=BD=A4=DA=A5[=B8U=B4=E4"],
+"Burma              =BDq=A8l    ":["+0630","","=A5=F5=A5=FA"],
+"Cambodia           =ACZ=AEH=B9=EB  ":["+0700","","=AA=F7=C3=E4"],
+"China              =A4=A4=B0=EA    =
+":["+0800","","=A5_=A8=CA=A1B=AD=AB=BCy=A1B=A4W=AE=FC=A1B=AD=BB=B4=E4"],
+"China(Ulumuqi)     =A4=A4=B0=EA    =
+":["+0600","","=AFQ=BE|=A4=EC=BB=F4"],
+"Indonesia          =A6L=A5=A7    ":["+0700","","=ADC=A5[=B9F"],
+"Japan              =A4=E9=A5=BB    =
+":["+0900","","=AAF=A8=CA=A1B=A4j=A8=C1=A1B=A5=BE=B7E"],
+"Korea              =C1=FA=B0=EA    ":["+0900","","=AD=BA=BA=B8"],
+"Kazakhstan(Almaty) =AB=A2=C2=C4=A7J  ":["+0600","","Almaty"],
+"Kazakhstan(Aqtau)  =AB=A2=C2=C4=A7J  ":["+0400","","Aqtau"],
+"Kazakhstan(Aqtobe) =AB=A2=C2=C4=A7J  ":["+0500","","Aqtobe"],
+"Kirghizia          =
+=A6N=BA=B8=A6N=B4=B5":["+0500","","=A4=F1=B4=B5=B3=CD=A7J"],
+"Laos               =BCd=B0=EA    ":["+0700","","=A5=C3=AC=C3"],
+"Malaysia           =
+=B0=A8=A8=D3=A6=E8=A8=C8":["+0800","","=A6N=B6=A9=A9Y"],
+"Mongolia           =
+=BBX=A5j=A7Q=A8=C8":["+0800","03L03|09L03","=AFQ=C4=F5=A4=DA=A6=AB(=AEw=AD=
+=DB)"],
+"Philippines        =B5=E1=AB=DF=BB=AB  =
+":["+0800","","=B0=A8=A5=A7=A9=D4"],
+"Russia(Anadyr)     =ABX=C3=B9=B4=B5  =
+":["+1300","03L03|10L03","=AA=FC=A8=BA=A9=B3=AAe"],
+"Russia(Kamchatka)  =ABX=C3=B9=B4=B5  =
+":["+1200","03L03|10L03","=B3=F4=B9=EE=A5[=A5b=AEq"],
+"Russia(Magadan)    =ABX=C3=B9=B4=B5  =
+":["+1100","03L03|10L03","=B0=A8=A5[=A4=A6"],
+"Russia(Vladivostok)=ABX=C3=B9=B4=B5  =
+":["+1000","03L03|10L03","=AE=FC=B0=D1=AB=C2"],
+"Russia(Yakutsk)    =ABX=C3=B9=B4=B5  =
+":["+0900","03L03|10L03","=B6=AE=AEw=A6=B8=A7J"],
+"Singapore          =B7s=A5[=A9Y  ":["+0800","","=B7s=A5[=A9Y"],
+"Taiwan             =A5x=C6W    =
+":["+0800","","=A5x=A5_=A1B=B0=AA=B6=AF"],
+"Thailand           =AE=F5=B0=EA    ":["+0700","","=B0=D2=A8=A6"],
+"Vietnam            =B6V=ABn    ":["+0700","","=AAe=A4=BA"]
+},
+"Asia (South, West) =ABn=A8=C8=A1B=A4=A4=A8=C8=A1B=A6=E8=A8=C8": {
+"Afghanistan        =AA=FC=B4I=A6=BD  =
+":["+0430","","=B3=D8=A5=AC=BA=B8"],
+"Bahrain            =A4=DA=AAL    ":["+0300","","=B3=C1=AF=C7=BA=BF"],
+"Bangladesh         =A9s=A5[=A9=D4  ":["+0600","","=B9F=A5d"],
+"Bhutan             =A4=A3=A4=A6    ":["+0600","","=A8=AF=A5=AC"],
+"Cyprus             =
+=C1=C9=B4=B6=B0=C7=B4=B5":["+0200","","=A5=A7=A5j=A6=E8=A8=C8"],
+"East Timor         =AAF=AB=D2=A8Z":["+0800","","=AB=D2=A4O"],
+"India              =A6L=AB=D7    =
+":["+0530","","=B7s=BCw=A8=BD=A1B=A9s=B6R=A1B=A5[=BA=B8=A6U=B5=AA"],
+"Iran               =A5=EC=AE=D4    ":["+0330","04 13|10 =
+13","=BCw=B6=C2=C4=F5"],
+"Iraq               =A5=EC=A9=D4=A7J  ":["+0300","04 13|10 =
+13","=A4=DA=AE=E6=B9F"],
+"Israel             =A5H=A6=E2=A6C  =
+":["+0200","04F53|09F53","=ADC=B8=F4=BC=BB=A7N"],
+"Jordan             =AC=F9=A5=B9    ":["+0200","","=A6w=B0=D2"],
+"Kuwait             =AC=EC=AB=C2=AFS  =
+":["+0300","","=AC=EC=AB=C2=AFS=A5=AB"],
+"Lebanon            =BE=A4=A4=DA=B9=E0  =
+":["+0200","03L03|10L03","=A8=A9=BE|=AFS"],
+"Maldives           =B0=A8=BA=B8=A6a=A4=D2":["+0500","","=BA=BF=AB=DF"],
+"Nepal              =A5=A7=AAy=BA=B8  =
+":["+0545","","=A5[=BCw=BA=A1=B3=A3"],
+"Oman               =AA=FC=B0=D2    =
+":["+0400","","=B0=A8=B4=B5=B3=D8=AFS"],
+"Pakistan           =
+=A4=DA=B0=F2=B4=B5=A9Z":["+0500","","=B3=D8=A9=D4=B0E=A1B=A5=EC=B4=B5=C4=F5=
+=B3=F9"],
+"Palestine          =
+=A4=DA=B0=C7=B4=B5=A9Z":["+0200","","=ADC=B8=F4=BC=BB=A7N"],
+"Qatar              =A5d=B9F    ":["+0300","","=A7=F9=AB=A2"],
+"Saudi Arabia       =
+=A8F=AFQ=A6a=AA=FC=A9=D4=A7B":["+0300","","=A7Q=B6=AE=BCw"],
+"Sri Lanka          =
+=B4=B5=A8=BD=C4=F5=A5d":["+0600","","=A5i=AD=DB=A9Y"],
+"Syria              =B1=D4=A7Q=A8=C8  ":["+0200","04 13|10 =
+13","=A4j=B0=A8=A4h=AD=B2"],
+"Tajikistan         =B6=F0=A6N=A7J  ":["+0500","","=A7=F9=AE=E1=A8=A9"],
+"Turkey             =A4g=A6=D5=A8=E4  =
+":["+0200","","=A5=EC=B4=B5=A9Z=B3=F9"],
+"Turkmenistan       =A4g=AEw=B0=D2  =
+":["+0500","","=AA=FC=A4=B0=AB=A2=A4=DA=BCw"],
+"United Arab Emirates =
+=AA=FC=A9=D4=A7B=C1p=A6X=A4j=A4=BD=B0=EA":["+0400","","=AA=FC=A5=AC=B9F=A4=
+=F1"],
+"Uzbekistan         =AFQ=AF=F7=A7O=A7J":["+0500","","=B6=F0=A4=B0=A4z"],
+"Yemen              =B8=AD=AA=F9    ":["+0300","","=A8F=A8=BA"]
+},
+"Europe (North)     =A5_=BC=DA": {
+"Denmark            =
+=A4=A6=B3=C1":["+0100","04F03|10L03","=AD=F4=A5=BB=AB=A2=AE=DA"],
+"Faroe Is.(DK)      =
+=AAk=C3=B9=B8s=AEq(=A4=A6=B3=C1)":["+0100","","=A6=AB=BA=B8=B4=B5=B4=E4"]=
+,
+"Finland            =
+=AA=E2=C4=F5":["+0200","03L01|10L01","=BB=AE=BA=B8=A8=AF=B0=F2"],
+"Iceland            =A6B=AEq":["+0000","","=B9p=A7J=B6=AE=A5=BC=A7J"],
+"Jan Mayen(NORWAY)  =
+=B4=AD=B0=A8=A9=B5=AEq(=AE=BF=AB=C2)":["-0100","","=B4=AD=B0=A8=A9=B5=AEq=
+"],
+"Norwegian          =AE=BF=AB=C2":["+0100","","=B6=F8=B4=B5=B3=B0"],
+"Svalbard(NORWAY)   =
+=B4=B5=A5=CB=BA=B8=A4=DA=B8s=AEq(=AE=BF=AB=C2)":["+0100","","Longyearbyen=
+"],
+"Sweden             =
+=B7=E7=A8=E5":["+0100","03L01|10L01","=B4=B5=BCw=AD=F4=BA=B8=BC=AF"]
+},
+"Europe (Eastern)   =A4=A4=BC=DA=A1B=AAF=BC=DA": {
+"Armenia            =
+=A8=C8=AC=FC=A5=A7=A8=C8":["+0400","","=B8=AD=A8=BD=B7=C5"],
+"Austria            =B6=F8=A6a=A7Q  =
+":["+0100","03L01|10L01","=BA=FB=A4]=AF=C7"],
+"Azerbaijan         =A8=C8=B6=EB=AB=F4=B5M":["+0400","","=A4=DA=AEw"],
+"Belarus            =
+=A5=D5=ABX=C3=B9=B4=B5":["+0200","03L03|10L03","=A9=FA=B4=B5=A7J"],
+"Czech Republic     =B1=B6=A7J    ":["+0100","","=A5=AC=A9=D4=AE=E6"],
+"Estonia            =B7R=A8F=A5=A7=A8=C8":["+0200","","=B6=F0=AAL"],
+"Georgia            =B3=EC=AAv=A8=C8  =
+":["+0500","","=B2=C4=A4=F1=A7Q=B4=B5"],
+"Germany            =BCw=B0=EA    ":["+0100","03L01|10L01","=ACf=AAL"],
+"Hungarian          =A6I=A4=FA=A7Q  =
+":["+0100","","=A5=AC=B9F=A8=D8=B4=B5"],
+"Latvia             =A9=D4=B2=E6=BA=FB=A8=C8":["+0200","","=A8=BD=A5["],
+"Liechtenstein      =
+=A6C=A4=E4=B4=B0=B4=B5=B5n":["+0100","","=A5=CB=B3=A3=AF=F7"],
+"Lithuania          =A5=DF=B3=B3=A9{  =
+":["+0200","","=BA=FB=BA=B8=AF=C3=B4=B5"],
+"Moldova            =
+=BC=AF=BA=B8=A6h=A5=CB":["+0200","","=B0=F2=A7=C6=AFI=A4=D2"],
+"Poland             =AAi=C4=F5    ":["+0100","","=B5=D8=A8F"],
+"Rumania            =
+=C3=B9=B0=A8=A5=A7=A8=C8":["+0200","","=A5=AC=A5[=B0=C7=B4=B5=AFS"],
+"Russia(Moscow)     =ABX=C3=B9=B4=B5  =
+":["+0300","03L03|10L03","=B2=F6=B4=B5=AC=EC"],
+"Russia(Volgograd)  =ABX=C3=B9=B4=B5  =
+":["+0300","03L03|10L03","=A5=F1=BA=B8=AD=F4=AE=E6=B0=C7"],
+"Slovakia           =
+=B4=B5=AC=A5=A5=EF=A7J":["+0100","","=A5=AC=A9=D4=B4=A3=B4=B5=A9=D4=A5=CB=
+"],
+"Switzerland        =B7=E7=A4h    =
+":["+0100","03L01|10L01","=C4=AC=BE=A4=A5@"],
+"Ukraine            =AFQ=A7J=C4=F5  ":["+0200","","=B0=F2=BB=B2"],
+"Ukraine(Simferopol)=AFQ=A7J=C4=F5  ":["+0300","","Simferopol"]
+},
+"Europe (Western)   =A6=E8=BC=DA": {
+"Andorra            =A6w=B9D=BA=B8 =
+":["+0100","03L01|10L01","=A6w=B9D=BA=B8"],
+"Belgium            =A4=F1=A7Q=AE=C9 =
+":["+0100","03L01|10L01","=A5=AC=BE|=B6=EB=BA=B8"],
+"Channel Is.(UK)    =
+=AE=FC=AEl=B8s=AEq(=AD^)":["+0000","03L01|10L01","=AE=DA=A6=E8=AEq=A1B=BF=
+A=A6=E8=AEq"],
+"France             =AAk=B0=EA   =
+":["+0100","03L01|10L01","=A4=DA=BE=A4"],
+"Gibraltar(UK)      =
+=AA=BD=A5=AC=C3=B9=AA=FB(=AD^)":["+0100","03L01|10L01","=AA=BD=A5=AC=C3=B9=
+=AA=FB"],
+"Ireland            =B7R=BA=B8=C4=F5 =
+":["+0000","03L01|10L01","=B3=A3=ACf=AAL"],
+"Isle of Man(UK)    =
+=A4H=AEq(=AD^)":["+0000","03L01|10L01","=B9D=AE=E6=A9=D4=B4=B5"],
+"Luxembourg         =BFc=B4=CB=B3=F9 =
+":["+0100","03L01|10L01","=BFc=B4=CB=B3=F9=A5=AB"],
+"Monaco             =BC=AF=AF=C7=AD=F4 =
+":["+0100","","=BC=AF=AF=C7=AD=F4=A5=AB"],
+"Netherlands        =B2=FC=C4=F5   =
+":["+0100","03L01|10L01","=AA=FC=A9i=B4=B5=AFS=A4=A6"],
+"United Kingdom     =AD^=B0=EA   =
+":["+0000","03L01|10L01","=AD=DB=B4=B0=A1B=B7R=A4B=B3=F9"]
+
+},
+"Europe (South)     =ABn=BC=DA": {
+"Albania            =
+=AA=FC=BA=B8=A4=DA=A5=A7=A8=C8":["+0100","","=A6a=A9=D4=A8=BA"],
+"Bosnia             =
+=AAi=A4h=A5=A7=A8=C8":["+0100","","=B6=EB=A9=D4=ADC=A6=F2"],
+"Bulgaria           =
+=ABO=A5[=A7Q=A8=C8":["+0200","","=AF=C1=B5=E1=A8=C8"],
+"Croatia            =
+=A7J=C3=B9=AEJ=A6=E8=A8=C8":["+0100","","=A5=BE=AE=E6=B9p=A5=AC"],
+"Greece             =A7=C6=C3=BE    =
+":["+0200","03L01|10L01","=B6=AE=A8=E5"],
+"Holy See           =B1=D0=A7=CA    ":["+0100","","=B1=EB=B8=A6=A9=A3"],
+"Italy              =B8q=A4j=A7Q  =
+":["+0100","03L01|10L01","=C3=B9=B0=A8"],
+"Macedonia          =B0=A8=A8=E4=B9y  =
+":["+0100","","=B4=B5=B0=AA=A9=BC=A8=C8"],
+"Malta              =B0=A8=BA=B8=A5L  ":["+0100","","=A5=CB=B0=C7=A5L"],
+"Portugal           =B8=B2=B5=E5=A4=FA  =
+":["+0000","03L01|10L01","=A8=BD=B4=B5=A5=BB"],
+"San Marino         =
+=B8t=B0=A8=A7Q=BF=D5":["+0100","","=B8t=B0=A8=A7Q=BF=D5"],
+"Serbia             =
+=B6=EB=BA=B8=BA=FB=A8=C8":["+0100","","=A8=A9=BA=B8=AE=E6=B5=DC=BCw"],
+"Montenegro         =
+=BBX=AFS=A4=BA=AD=F4=C3=B9":["+0100","","=AAi=BCw=A4=E0=A8=BD=B9=EE"],
+"Slovenia           =
+=B4=B5=AC=A5=BA=FB=A5=A7=A8=C8":["+0100","","=BFc=A5=AC=BA=B8=B6=AE=A8=BA=
+"],
+"Span               =A6=E8=AFZ=A4=FA  =
+":["+0100","03L01|10L01","=B0=A8=BCw=A8=BD"]
+},
+"America (North)    =A5_=AC=FC=ACw": {
+"Canada(NST)        =
+=A5[=AE=B3=A4j":["-0330","03S02|11F02","=AF=C3=AA=E2=C4=F5, St. John's, =
+Goose Bay"],
+"Canada(AST)        =A5[=AE=B3=A4j":["-0400","03S02|11F02","Pangnirtung, =
+Glace Bay"],
+"Canada(EST)        =
+=A5[=AE=B3=A4j":["-0500","03S02|11F02","=BBX=AFS=B0=FA"],
+"Canada(CST)        =A5[=AE=B3=A4j":["-0600","03S02|11F02","Swift =
+Current, Regina, Rainy River"],
+"Canada(MST)        =A5[=AE=B3=A4j":["-0700","03S02|11F02","Inuvik, =
+Edmonton, Dawson Creek"],
+"Canada(PST)        =
+=A5[=AE=B3=A4j":["-0800","03S02|11F02","=B7=C5=AD=F4=B5=D8"],
+"Greenland(DK)      =
+=AE=E6=B3=AE=C4=F5(=A4=A6=B3=C1)":["-0300","03L00|10L00","=A7V=A7J"],
+"US(Eastern)        =
+=AC=FC=B0=EA(=AAF=A9=A4)":["-0500","03S02|11F02","=AF=C3=AC=F9"],
+"US(Central)        =
+=AC=FC=B0=EA(=A4=A4=B3=A1)":["-0600","03S02|11F02","=AA=DB=A5[=AD=F4"],
+"US(Mountain)       =
+=AC=FC=B0=EA(=A4s=B0=CF)":["-0700","03S02|11F02","=A4=A6=A6=F2"],
+"US(Pacific)        =
+=AC=FC=B0=EA(=A6=E8=A9=A4)":["-0800","03S02|11F02","=C2=C2=AA=F7=A4s=A1B=AC=
+=A5=A7=FC=C1F"],
+"US(Arizona)        =AC=FC=B0=EA      =
+":["-0700","","=A8=C8=BE=FA=AE=E1=A8=BA"],
+"US(Alaska)         =AC=FC=B0=EA      ":["-0900","","=A6=B6=BF=D5"]
+},
+"America (South)    =A4=A4=ABn=AC=FC=ACw": {
+"Anguilla(UK)       =A6w=A6c=A9=D4(=AD^)":["-0400","","=A5=CB=A7Q"],
+"Antigua & Barbuda  =
+=A6w=A6a=A5d=A4=CE=A4=DA=A5=AC=B9F":["-0400","","=B8t=AC=F9=BF=AB"],
+"Argentina          =AA=FC=AE=DA=A7=CA  =
+":["-0300","","=A5=AC=A9y=BF=D5=B4=B5=A6=E3=A7Q=B4=B5"],
+"Aruba(NL)          =
+=AA=FC=BE|=A4=DA(=B2=FC)":["-0400","","=B6=F8=A9=D4=AFI=B4=B5=B6=F0=BCw"]=
+,
+"Bahamas            =A4=DA=AB=A2=B0=A8  ":["-0500","","=AE=B3=AF=C1"],
+"Barbados           =A4=DA=A8=A9=A6h  ":["-0400","","=BE=F4=C2=ED"],
+"Belize             =A8=A9=A8=BD=B4=B5  =
+":["-0600","","=A8=A9=BA=B8=BE=A5=A8=B9"],
+"Bermuda(UK)        =
+=A6=CA=BC}=B9F=B8s=AEq(=AD^)":["-0400","","=BA~=B1K=BA=B8=B9y"],
+"Bolivia            =
+=AC=C1=A7Q=BA=FB=A8=C8":["-0400","","=A9=D4=A4=DA=B4=B5"],
+"Brazil(AST)        =A4=DA=A6=E8    ":["-0500","10F03|02L03","Porto =
+Acre"],
+"Brazil(EST)        =A4=DA=A6=E8    =
+":["-0300","10F03|02L03","=A8=BD=AC=F9=BC=F6=A4=BA=BFc=A1B=A4=DA=A6=E8=A7=
+Q=A8=C8"],
+"Brazil(FST)        =A4=DA=A6=E8    ":["-0200","10F03|02L03","Noronha"],
+"Brazil(WST)        =A4=DA=A6=E8    ":["-0400","10F03|02L03","Cuiaba"],
+"British Virgin =
+Is.(UK)=BA=FB=BA=B8=A8=CA=B8s=AEq(=AD^)":["-0400","","=C3=B9=BCw=AB=B0"],=
+
+"Cayman Is.(UK)     =
+=B6}=B0=D2=B8s=AEq(=AD^)":["-0500","","=B3=EC=AAv=B4=B0"],
+"Chile              =B4=BC=A7Q    =
+":["-0300","10F03|03F03","=B8t=A6a=A4=FA=AD=F4"],
+"Chile              =B4=BC=A7Q    ":["-0500","10F03|03F03","Hanga Roa"],
+"Colombia           =
+=AD=F4=AD=DB=A4=F1=A8=C8":["-0500","","=AAi=AD=F4=A4j"],
+"Costa Rica         =
+=AD=F4=B4=B5=A4j=BE=A4=A5[":["-0600","","=B8t=AC=F9=B7=E6"],
+"Cuba               =A5j=A4=DA    ":["-0500","04 =
+13|10L03","=AB=A2=A5=CB=A8=BA"],
+"Dominica           =A6h=A6=CC=A5=A7=A7J":["-0400","","=C3=B9=B1=F4"],
+"Dominican Republic =
+=A6h=A9=FA=A5=A7=A5[":["-0400","","=B8t=A6h=A9=FA=AD=F4"],
+"Ecuador            =A4=CC=A5=CA=A6h  ":["-0500","","=B0=F2=A6h"],
+"El Salvador        =
+=C2=C4=BA=B8=A5=CB=A6h":["-0600","","=B8t=C2=C4=BA=B8=A5=CB=A6h"],
+"Falkland Is.(UK)   =
+=BA=D6=A7J=C4=F5=B8s=AEq(=AD^)":["-0300","09F03|04F03","=A5v=A9Z=A7Q"],
+"Grenada            =
+=AE=E6=B7=E7=A8=BA=B9F":["-0400","","=B8t=B3=EC=AAv"],
+"Guadeloupe(FR)     =
+=A5=CA=BCw=C3=B9=B4=B6(=AAk)":["-0400","","=A4=DA=B4=B5=AFS=BA=B8"],
+"Guatemala          =
+=A5=CA=A6a=B0=A8=A9=D4":["-0600","","=A5=CA=A6a=B0=A8=A9=D4=AB=B0"],
+"Guiana(FR)         =A6c=A8=C8=A8=BA(=AAk)":["-0300","","=A5d=AEb"],
+"Guyana             =BB\=A8=C8=A8=BA  ":["-0400","","=A6=F5=AAv=B4=B0"],
+"Haiti              =AE=FC=A6a    ":["-0500","","=A4=D3=A4l=B4=E4"],
+"Honduras           =
+=A7=BB=B3=A3=A9=D4=B4=B5":["-0600","","=BCw=A5j=B4=B5=A5[=A4=DA"],
+"Jamaica            =A4=FA=B6R=A5[  ":["-0500","","=A8=CA=B4=B5=B4=B0"],
+"Martinique(FR)     =
+=B0=A8=B4=A3=A5=A7=A7J(=AAk)":["-0400","","=AAk=C4=F5=A6=E8=B3=F9"],
+"Mexico(Mazatlan)   =BE=A5=A6=E8=AD=F4  ":["-0700","","Mazatlan"],
+"Mexico(=AD=BA=B3=A3)       =BE=A5=A6=E8=AD=F4  =
+":["-0600","","=BE=A5=A6=E8=AD=F4=AB=B0"],
+"Mexico(=B8=A6=AB=BD=AER)     =BE=A5=A6=E8=AD=F4  =
+":["-0800","","=B8=A6=AB=BD=AER"],
+"Montserrat(UK)     =
+=BBX=AFS=B6=EB=A9=D4=AFS(=AD^)":["-0400","","=B4=B6=A7Q=ADT=B4=B5"],
+"Antilles(NL)       =
+=A6w=AA=BA=A6C=B4=B5(=B2=FC)":["-0400","","=AB=C2=B7G=B4=B5=B6=F0=BCw"],
+"Nicaragua          =
+=A5=A7=A5[=A9=D4=A5=CA":["-0500","","=B0=A8=AF=C7=A5=CA"],
+"Panama             =A4=DA=AE=B3=B0=A8  =
+":["-0500","","=A4=DA=AE=B3=B0=A8=A5=AB"],
+"Paraguay           =A4=DA=A9=D4=A6c  =
+":["-0400","10F03|02L03","=A8=C8=AAQ=B4=CB"],
+"Peru               =AF=A6=BE|    ":["-0500","","=A7Q=B0=A8"],
+"Puerto Rico(US)    =
+=AAi=A6h=BE=A4=A6U(=AC=FC)":["-0400","","=B8t=ADJ=A6w"],
+"So. Georgia & So. Sandwich =
+Is.(UK)=ABn=B3=EC=AAv=A9M=ABn=A4T=A9=FA=AAv=B8s=AEq(=AD^)":["-0200","","G=
+rytviken"],
+"St. Kitts & Nevis  =
+=B8t=A7J=A8=BD=B4=B5=A6h=BA=D6=A4=CE=A5=A7=BA=FB=B4=B5":["-0400","","=A4=DA=
+=A4h=A6a"],
+"St. Lucia          =B8t=C5S=A6=E8=A8=C8":["-0400","","=A5d=B4=B5=BBA"],
+"St. Pierre & Miquelon(FR) =
+=B8t=A5=D6=AEJ=BA=B8=A9M=B1K=A7J=B6=A9=B8s=AEq(=AAk)":["-0330","","=B8t=A5=
+=D6=AEJ=BA=B8=A5=AB"],
+"St. Vincent & Grenadines =
+=B8t=A4=E5=B4=CB=A4=CE=AE=E6=B7=E7=A8=BA=A4B":["-0400","","=AA=F7=A5=DB=AB=
+=B0"],
+"Suriname           =
+=C4=AC=A7Q=ABn":["-0300","","=A4=DA=A9=D4=B0=A8=A7Q=AAi"],
+"Trinidad & Tobago  =
+=A4d=A8=BD=B9F=A4=CE=A6=AB=A4=DA=AD=F4":["-0400","","=A6=E8=AFZ=A4=FA=B4=E4=
+"],
+"Turks & Caicos Is.(UK) =
+=AFS=A7J=B4=B5=A9M=B3=CD=AC=EC=B4=B5=B8s=AEq(=AD^)":["-0500","","=AC=EC=A7=
+B=AE=A6=AB=B0"],
+"Uruguay            =AFQ=A9=D4=A6c  ":["-0300","","=BBX=AFS=BA=FB=A6h"],
+"Venezuela          =
+=A9e=A4=BA=B7=E7=A9=D4":["-0400","","=A5d=A9=D4=A5d=B4=B5"],
+"Virgin Is.(US)     =
+=BA=FB=BA=B8=A8=CA=B8s=AEq(=AC=FC)":["-0400","","=AEL=AC=A5=AFS.=AA=FC=B0=
+=A8=A8=BD"]
+},
+"Africa (North)     =A5_=ABD": {
+"Morocco            =BC=AF=AC=A5=AD=F4  =
+":["+0000","","=A5d=C2=C4=A5=AC=C4=F5=A5d"],
+"Algeria            =
+=AA=FC=BA=B8=A4=CE=A7Q=A8=C8":["+0100","","=AA=FC=BA=B8=A4=CE=BA=B8"],
+"Tunisia            =
+=AC=F0=A5=A7=A6=E8=A8=C8":["+0100","","=AC=F0=A5=A7=B4=B5"],
+"Libyan             =A7Q=A4=F1=A8=C8  =
+":["+0200","","=AA=BA=BE=A4=AAi=A8=BD"],
+"Egypt              =AEJ=A4=CE    =
+":["+0200","04L53|09L43","=B6}=C3=B9"],
+"Sudan              =C4=AC=A4=A6    ":["+0200","","=A5d=A4g=BFp"]
+},
+"Africa (Western)   =A6=E8=ABD": {
+"Western Sahara     =
+=A6=E8=BC=BB=AB=A2=A9=D4":["+0000","","=AA=FC=A4=D7=AE=A6"],
+"Mauritania         =
+=ADT=A7Q=B6=F0=A5=A7=A8=C8":["+0000","","=BF=D5=A7J=A4=D6"],
+"Mali               =B0=A8=A7Q    ":["+0000","","=A4=DA=B0=A8=AC=EC"],
+"Niger              =A5=A7=A4=E9    ":["+0100","","=A5=A7=AA=FC=AC=FC"],
+"Chad               =ACd=BCw    ":["+0100","","=AE=A6=A5[=AC=FC=AF=C7"],
+"Senegal            =B6=EB=A4=BA=A5[=BA=B8":["+0000","","=B9F=A5d"],
+"Gambia             =A5=CC=A4=F1=A8=C8  ":["+0000","","=AFZ=A6=CB"],
+"Guinea-Bissau      =
+=B4X=A4=BA=A8=C8=A4=F1=AF=C1":["+0000","","=A4=F1=AF=C1"],
+"Guinea             =B4X=A4=BA=A8=C8  =
+":["+0000","","=AC_=A8=BA=A7J=A8=BD"],
+"Sierra Leone       =B7=E0=A4l=A4s  ":["+0000","","=A6=DB=A5=D1=AB=B0"],
+"Liberia            =
+=BF=E0=A4=F1=B7=E7=A8=C8":["+0000","","=BBX=C3=B9=BA=FB=A8=C8"],
+"Ivory Coast        =
+=B6H=A4=FA=AE=FC=A9=A4":["+0000","","=B6=AE=BFp=AF=C1=A4=E0"],
+"Burkina Faso       =
+=A5=AC=A6N=AF=C7=AAk=AF=C1":["+0000","","=A5=CB=A5[=A7=F9=A5j"],
+"Ghana              =AD{=AF=C7    ":["+0000","","=AA=FC=A7J=A9=D4"],
+"Togo               =A6h=AD=F4    ":["+0000","","=AC=A5=B1=F6"],
+"Benin              =A8=A9=ABn    ":["+0100","","=B7s=B4=E4"],
+"Nigeria            =
+=A9`=A4=CE=A7Q=A8=C8":["+0100","","=AA=FC=A5=AC=A5=BE"],
+"Cape Verde         =BA=FB=BCw=A8=A4=AEq":["-0100","","=B0=F6=A8=C8"],
+"Canary Is.(SP)     =
+=A5[=AF=C7=A7Q=B8s=AEq(=A6=E8=AFZ=A4=FA)":["-0100","","=B3=EC=AAv=AB=B0"]=
+
+},
+"Africa (Central)   =A4=A4=ABD": {
+"Cameroon           =B3=D8=B3=C1=B6=A9  =
+":["+0100","","=B6=AE=AE=A6=BCw"],
+"Cen.African Rep.   =A4=A4=ABD=A6@=A9M=B0=EA":["+0100","","=AFZ=B0=F2"],
+"Sao Tome & =
+Principe=B8t=A6h=AC=FC=B4=B6=AAL=A6=E8=A4=F1":["+0000","","=B8t=A6h=AC=FC=
+"],
+"Equatorial Guinea  =
+=A8=AA=B9D=B4X=A4=BA=A8=C8":["+0100","","=B0=A8=A9=D4=B3=D5"],
+"Gabon              =A5[=B4^    ":["+0100","","=A6=DB=A5=D1=A5=AB"],
+"Congo,Republic     =
+=AD=E8=AAG=A6@=A9M=B0=EA":["+0100","","=A5=AC=A9=D4=C2=C4=A5=AB"],
+"Congo,Democratic   =
+=AD=E8=AAG=A5=C1=A5D=A6@=A9M=B0=EA":["+0100","","=AA=F7=AEL=A8F"]
+},
+"Africa (East)      =AAF=ABD": {
+"Eritrea            =
+=A4=CC=A7Q=AB=AB=A8=C8":["+0300","","=AA=FC=B4=B5=B0=A8=A9=D4"],
+"Djibouti           =A6N=A5=AC=A6a  ":["+0300","","=A6N=A5=AC=A6a"],
+"Ethiopia           =
+=A6=E7=AF=C1=A4=F1=A8=C8":["+0300","","=AA=FC=AD}=B4=B5=AA=FC=A8=A9=A4=DA=
+"],
+"Somalia            =
+=AF=C1=B0=A8=A7Q=A8=C8":["+0300","","=BC=AF=A5[=AD}=A5=F0"],
+"Kenya              =AA=D6=A8=C8    ":["+0300","","=A9`=AC=A5=A4=F1"],
+"Uganda             =AFQ=A4z=B9F  ":["+0300","","=A7=A2=A9=AC=A9=D4"],
+"Rwanda             =BFc=A6w=B9F  ":["+0200","","=A6N=A8=CE=A7Q"],
+"Burundi            =BBZ=B6=A9=A6a  =
+":["+0200","","=A5=AC=AAQ=A5=AC=A9=D4"],
+"Tanzania           =
+=A9Z=A9|=A5=A7=A8=C8":["+0300","","=A7=F9=BFw=BA=BF"],
+"Malawi             =B0=A8=A9=D4=AB=C2  =
+":["+0200","","=A8=BD=AE=D4=AB=C2"],
+"Mozambique         =
+=B2=F6=A4T=A4=F1=A7J":["+0200","","=B0=A8=A5=AC=A6h"],
+"Madagascar         =
+=B0=A8=B9F=A5[=B4=B5=A5[":["+0300","","=A6w=B6=F0=A8=BA=A8=BA=A7Q=A6=F2"]=
+,
+"Comoros            =B8=AF=BC=AF    ":["+0300","","=B2=F6=AC=A5=A5=A7"],
+"Seychelles         =B6=EB=AEu=BA=B8  =
+":["+0300","","=BA=FB=A6h=A7Q=A8=C8"],
+"Mauritius          =
+=BC=D2=A8=BD=A6=E8=B4=B5":["+0400","","=B8=F4=A9=F6=A4h=B4=E4"],
+"Mayotte(FR)        =
+=B0=A8=AC=F9=AFS=AEq(=AAk)":["+0300","","Mamoutzou"],
+"Reunion(FR)        =
+=AFd=A5=A7=A9=F4=AEq(=AAk)":["+0400","","=B8t=A6=FD=A5=A7"]
+},
+"Africa (South)     =ABn=ABD": {
+"Angola             =A6w=AD=F4=A9=D4  ":["+0100","","=BE|=A6w=B9F"],
+"Zambia             =A9|=A4=F1=A8=C8  ":["+0200","","=B8=F4=A8F=A5d"],
+"Namibia            =
+=AF=C7=A6=CC=A4=F1=A8=C8":["+0200","09F03|04F03","=B7=C5=A6R=A7J"],
+"Botswana           =AAi=A5=BE=A8=BA  =
+":["+0200","","=B9=C5=A7B=B6=A9=A8=BD"],
+"Zimbabwe           =A8=AF=A4=DA=AB=C2  =
+":["+0200","","=AB=A2=A9=D4=B9p"],
+"South Africa       =ABn=ABD    =
+":["+0200","","=B4=B6=A7Q=A6=AB=A8=BD=A8=C8"],
+"Swaziland          =
+=A5v=A5=CB=C0=D9=C4=F5":["+0200","","=BE=A5=A4=DA=A5=BB"],
+"Lesotho            =BF=E0=AF=C1=A6=AB  =
+":["+0200","","=B0=A8=C1=C9=BE|"],
+"Saint Helena(UK)   =
+=B8t=BB=AE=B0=C7=AE=B3(=AD^)":["-0100","","=B8=E2=A9i=A4h=AB=B0"]
+},
+"Oceania            =A4j=ACv=ACw": {
+"American Samoa(US) =
+=AC=FC=C4=DD=C2=C4=BC=AF=A8=C8(=AC=FC)":["-1100","","=AC=A3=AD=F4=AC=A3=AD=
+=F4=B4=E4"],
+"Australia(Adelaide)=BFD=A4j=A7Q=A8=C8  =
+":["+0930","10L03|03L03","=AA=FC=BCw=B5=DC=BCw"],
+"Australia(Brisbane)=BFD=A4j=A7Q=A8=C8  =
+":["+1000","","=A5=AC=A7Q=B4=B5=AFZ"],
+"Australia(Darwin)  =BFD=A4j=A7Q=A8=C8  =
+":["+0930","","=B9F=BA=B8=A4=E5"],
+"Australia(Hobart)  =BFD=A4j=A7Q=A8=C8  =
+":["+1000","10L03|03L03","=C0N=A4=DA=AFS"],
+"Australia(Perth)   =BFD=A4j=A7Q=A8=C8  ":["+0800","","=A7B=B4=B5"],
+"Australia(Sydney)  =BFD=A4j=A7Q=A8=C8  =
+":["+1000","10L03|03L03","=A7=A2=B0=F6=A9=D4=A1B=BE=A5=BA=B8=A5=BB=A1B=B3=
+=B7=B1=F9"],
+"Cook Islands(NZ)   =AEw=A7J=B8s=AEq(=AF=C3)  =
+":["-1000","","=AA=FC=A5=CB=BE|=AA=FC"],
+"Fiji               =B4=B4=C0=D9      =
+":["+1200","11F03|02L03","=C4=AC=A5=CB"],
+"Guam               =C3=F6=AEq      ":["+1000","","=AA=FC=A5[=AF=C7"],
+"Hawaii(US)         =
+=AEL=AB=C2=A6i(=AC=FC)":["-1000","","=C0=C8=AD=BB=A4s"],
+"Kiribati           =A6N=A8=BD=A4=DA=B4=B5  =
+":["+1100","","=B6=F0=A9=D4=A5=CB"],
+"Marshall Is.       =B0=A8=B2=D0=BA=B8=B8s=AEq":["+1200","","Majuro"],
+"Micronesia         =
+=B1K=A7J=C3=B9=A5=A7=A6=E8=A8=C8":["+1000","","=A9=AC=A7Q=B0=F2=BA=B8"],
+"Midway Is.(US)     =
+=A4=A4=B3~=AEq(=AC=FC)":["-1100","","=A4=A4=B3~=AEq"],
+"Nauru Rep.         =BF=D5=BE|=A6@=A9M=B0=EA":["+1200","","=B6=AE=B3s"],
+"New Calednia(FR)   =
+=B7s=A7J=A8=BD=A6h=A5=A7=A8=C8(=AAk)":["+1100","","Noumea"],
+"New Guined         =B7s=B4X=A4=BA=A8=C8  =
+":["+1000","","=B2=F6=B0=C7=B4=B5=A4=F1=B4=E4"],
+"New Zealand        =AF=C3=A6=E8=C4=F5    =
+":["+1200","10F03|04F63","=B6=F8=A7J=C4=F5"],
+"New Zealand(CHADT) =AF=C3=A6=E8=C4=F5    =
+":["+1245","10F03|04F63","Waitaing"],
+"Niue(NZ)           =AF=C3=AEJ(=AF=C3)      =
+":["-1100","","=AA=FC=AC=A5=B5=E1"],
+"Nor. Mariana Is.   =
+=A5_=B0=A8=A8=BD=A8=C8=AF=C7=B8s=AEq(=AC=FC)":["+1000","","=B6=EB=AFZ=AEq=
+"],
+"Palau              =A9=AD=AF[      ":["+0900","","=AC_=AC=A5"],
+"Papua New Guinea   =
+=A4=DA=A5=AC=A8=C8=AF=C3=B4X=A4=BA=A8=C8":["+1000","","=B2=F6=BA=B8=B4=B5=
+=A8=A9=B4=E4"],
+"Pitcairn Is.(UK)   =
+=A5=D6=AFS=B3=CD=AE=A6=B8s=AEq(=AD^)":["-0830","","=A8=C8=B7=ED=B4=B5=B4=B0=
+"],
+"Polynesia(FR)      =
+=AAi=A7Q=A5=A7=A6=E8=A8=C8(=AAk)":["-1000","","=A4=DA=A4=F1=B8=A6=A1B=A4j=
+=B7=CB=A6a"],
+"Solomon Is.        =
+=AF=C1=C3=B9=AA=F9=B8s=AEq":["+1100","","=B2=FC=A5=A7=AA=FC=A9=D4"],
+"Tokelau(NZ)        =A6=AB=A7J=B3=D2(=AF=C3)    =
+":["-1100","","=A7V=AEw=B6=F0=A7V"],
+"Tonga              =AAF=A5[      =
+":["+1300","10F63|04F63","=A7V=A5=CA=B0=FA=B5o"],
+"Tuvalu             =A6R=A5=CB=BE|    =
+":["+1200","","=B4I=A8=BA=B4I=B4=A3"],
+"Vanuatu            =B8U=A8=BA=A7=F9    =
+":["+1100","","=BA=FB=A9=D4=B4=E4"],
+"Western Samoa      =A6=E8=C2=C4=BC=AF=A8=C8  =
+":["-1100","","=AA=FC=A7=C8=A8=C8"],
+"=B0=EA=BB=DA=B4=AB=A4=E9=BDu                   =
+":["-1200","","=B0=EA=BB=DA=B4=AB=A4=E9=BDu"]
+}
+};
+
+
+/************************************************************************=
+*****
+                                    =A4=E9=B4=C1=ADp=BA=E2
+*************************************************************************=
+****/
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =B6=C7=A6^=B9A=BE=E4 =
+y=A6~=AA=BA=C1`=A4=D1=BC=C6
+function lYearDays(y) {
+   var i, sum =3D 348;
+   for(i=3D0x8000; i>0x8; i>>=3D1) sum +=3D (lunarInfo[y-1900] & i)? 1: =
+0;
+   return(sum+leapDays(y));
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =B6=C7=A6^=B9A=BE=E4 =
+y=A6~=B6|=A4=EB=AA=BA=A4=D1=BC=C6
+function leapDays(y) {
+   if(leapMonth(y)) return( (lunarInfo[y-1899]&0xf)=3D=3D0xf? 30: 29);
+   else return(0);
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =B6=C7=A6^=B9A=BE=E4 =
+y=A6~=B6|=AD=FE=AD=D3=A4=EB 1-12 , =A8S=B6|=B6=C7=A6^ 0
+function leapMonth(y) {
+   var lm =3D lunarInfo[y-1900] & 0xf;
+   return(lm=3D=3D0xf?0:lm);
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =B6=C7=A6^=B9A=BE=E4 =
+y=A6~m=A4=EB=AA=BA=C1`=A4=D1=BC=C6
+function monthDays(y,m) {
+   return( (lunarInfo[y-1900] & (0x10000>>m))? 30: 29 );
+}
+
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =BA=E2=A5X=B9A=BE=E4, =
+=B6=C7=A4J=A4=E9=B4=C1=AA=AB=A5=F3, =
+=B6=C7=A6^=B9A=BE=E4=A4=E9=B4=C1=AA=AB=A5=F3
+//                                       =
+=B8=D3=AA=AB=A5=F3=C4=DD=A9=CA=A6=B3 .year .month .day .isLeap
+function Lunar(objDate) {
+
+   var i, leap=3D0, temp=3D0;
+   var offset   =3D =
+(Date.UTC(objDate.getFullYear(),objDate.getMonth(),objDate.getDate()) - =
+Date.UTC(1900,0,31))/86400000;
+
+   for(i=3D1900; i<2100 && offset>0; i++) { temp=3DlYearDays(i); =
+offset-=3Dtemp; }
+
+   if(offset<0) { offset+=3Dtemp; i--; }
+
+   this.year =3D i;
+
+   leap =3D leapMonth(i); //=B6|=AD=FE=AD=D3=A4=EB
+   this.isLeap =3D false;
+
+   for(i=3D1; i<13 && offset>0; i++) {
+      //=B6|=A4=EB
+      if(leap>0 && i=3D=3D(leap+1) && this.isLeap=3D=3Dfalse)
+         { --i; this.isLeap =3D true; temp =3D leapDays(this.year); }
+      else
+         { temp =3D monthDays(this.year, i); }
+
+      //=B8=D1=B0=A3=B6|=A4=EB
+      if(this.isLeap=3D=3Dtrue && i=3D=3D(leap+1)) this.isLeap =3D =
+false;
+
+      offset -=3D temp;
+   }
+
+   if(offset=3D=3D0 && leap>0 && i=3D=3Dleap+1)
+      if(this.isLeap)
+         { this.isLeap =3D false; }
+      else
+         { this.isLeap =3D true; --i; }
+
+   if(offset<0){ offset +=3D temp; --i; }
+
+   this.month =3D i;
+   this.day =3D offset + 1;
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=B6=C7=A6^=B0=EA=BE=E4 =
+y=A6~=ACYm+1=A4=EB=AA=BA=A4=D1=BC=C6
+function solarDays(y,m) {
+   if(m=3D=3D1)
+      return(((y%4 =3D=3D 0) && (y%100 !=3D 0) || (y%400 =3D=3D 0))? 29: =
+28);
+   else
+      return(solarMonth[m]);
+}
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D =B6=C7=A4J offset =B6=C7=A6^=A4z=A4=E4, =
+0=3D=A5=D2=A4l
+function cyclical(num) {
+   return(Gan[num%10]+Zhi[num%12]);
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D =A4=EB=BE=E4=C4=DD=A9=CA
+function =
+calElement(sYear,sMonth,sDay,week,lYear,lMonth,lDay,isLeap,cYear,cMonth,c=
+Day) {
+   this.isToday    =3D false;
+   //=B0=EA=BE=E4
+   this.sYear      =3D sYear;   //=A6=E8=A4=B8=A6~4=A6=EC=BC=C6=A6r
+   this.sMonth     =3D sMonth;  //=A6=E8=A4=B8=A4=EB=BC=C6=A6r
+   this.sDay       =3D sDay;    //=A6=E8=A4=B8=A4=E9=BC=C6=A6r
+   this.week       =3D week;    //=ACP=B4=C1, 1=AD=D3=A4=A4=A4=E5
+   //=B9A=BE=E4
+   this.lYear      =3D lYear;   //=A6=E8=A4=B8=A6~4=A6=EC=BC=C6=A6r
+   this.lMonth     =3D lMonth;  //=B9A=BE=E4=A4=EB=BC=C6=A6r
+   this.lDay       =3D lDay;    //=B9A=BE=E4=A4=E9=BC=C6=A6r
+   this.isLeap     =3D isLeap;  //=ACO=A7_=AC=B0=B9A=BE=E4=B6|=A4=EB?
+   //=A4K=A6r
+   this.cYear      =3D cYear;   //=A6~=ACW, 2=AD=D3=A4=A4=A4=E5
+   this.cMonth     =3D cMonth;  //=A4=EB=ACW, 2=AD=D3=A4=A4=A4=E5
+   this.cDay       =3D cDay;    //=A4=E9=ACW, 2=AD=D3=A4=A4=A4=E5
+
+   this.color      =3D '';
+
+   this.lunarFestival =3D ''; //=B9A=BE=E4=B8`=A4=E9
+   this.solarFestival =3D ''; //=B0=EA=BE=E4=B8`=A4=E9
+   this.solarTerms    =3D ''; //=B8`=AE=F0
+}
+
+//=3D=3D=3D=3D=3D =
+=ACY=A6~=AA=BA=B2=C4n=AD=D3=B8`=AE=F0=AC=B0=B4X=A4=E9(=B1q0=A4p=B4H=B0_=BA=
+=E2)
+var solarTermBase =3D new =
+Array(4,19,3,18,4,19,4,19,4,20,4,20,6,22,6,22,6,22,7,22,6,21,6,21);
+var solarTermIdx =3D =
+'0123415341536789:;<9:=3D<>:=3D1>?012@015@015@015AB78CDE8CD=3D1FD01GH01GH=
+01IH01IJ0KLMN;LMBEOPDQRST0RUH0RVH0RWH0RWM0XYMNZ[MB\\]PT^_ST`_WH`_WH`_WM`_=
+WM`aYMbc[Mde]Sfe]gfh_gih_Wih_WjhaWjka[jkl[jmn]ope]qph_qrh_sth_W';
+var solarTermOS =3D =
+'211122112122112121222211221122122222212222222221222122222232222222222222=
+2222332232322232322222223222221121221121212222112221222222222222222222223=
+2222211212211212122211121112212222221222122222122112212222222222222222222=
+2223222232222232222222222222112122112121122111211122122122212221222221221=
+1221222222222222222212111221121222122212222112221222222322222322222222222=
+2211212211212111111122222211212111212111111122222211112111212111111121112=
+2112122112121122111222212111121111121111111111122112122112121122111211122=
+1121222122212222212222111111211111211111112221111111211111111111111111221=
+1212111212111111122211111111111111111111111112211112111212111111122112212=
+2222212221222221222111011111111111111111111122111121111121111111211122112=
+1221121211222112211110111111011111111111111121111211111211111112111221121=
+2211222122221122111101111110111111111011111111112111111111111111112211212=
+1112121122111111011111121111111111111111011111111112111111111111011111111=
+1111111111112211110111111011101111101110110111111111111111112211110110111=
+0111011111011101101111110111111111121111100101110111011111011001101111110=
+1111111111211111001011001010111110110011011111101111111110211111001011001=
+0101111001100110110111011101111102111110010110010100111001100110010111011=
+1011111021111100101000101001100010001100101100101011111011111100101000101=
+0011000111111111111111111111111100011001011001010111100111111001010001010=
+0000001111110000100000100000001000110010110010100111001100110010110011101=
+1111010001100101000101001100011001100101100101011111011110000001000000000=
+0000000011001010001010011000111100000000000000000000000011001010001010000=
+000111000000000000000000000000011001010000010000000';
+
+function sTerm(y,n) {
+   return(solarTermBase[n] +  Math.floor( solarTermOS.charAt( ( =
+Math.floor(solarTermIdx.charCodeAt(y-1900)) - 48) * 24 + n  ) ) );
+}
+
+
+
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D =B6=C7=A6^=A4=EB=BE=E4=AA=AB=A5=F3 (y=A6~,m+1=A4=EB)
+/*
+=A5\=AF=E0=BB=A1=A9=FA: =
+=B6=C7=A6^=BE=E3=AD=D3=A4=EB=AA=BA=A4=E9=B4=C1=B8=EA=AE=C6=AA=AB=A5=F3
+
+=A8=CF=A5=CE=A4=E8=A6=A1: OBJ =3D new =
+calendar(=A6~,=B9s=B0_=BA=E2=A4=EB);
+
+OBJ.length      =B6=C7=A6^=B7=ED=A4=EB=B3=CC=A4j=A4=E9
+OBJ.firstWeek   =B6=C7=A6^=B7=ED=A4=EB=A4@=A4=E9=ACP=B4=C1
+
+=A5=D1 OBJ[=A4=E9=B4=C1].=C4=DD=A9=CA=A6W=BA=D9 =
+=A7Y=A5i=A8=FA=B1o=A6U=B6=B5=AD=C8
+
+OBJ[=A4=E9=B4=C1].isToday  =B6=C7=A6^=ACO=A7_=AC=B0=A4=B5=A4=E9 true =
+=A9=CE false
+
+=A8=E4=A5L OBJ[=A4=E9=B4=C1] =C4=DD=A9=CA=B0=D1=A8=A3 calElement() =
+=A4=A4=AA=BA=B5=F9=B8=D1
+*/
+function calendar(y,m) {
+
+   var sDObj, lDObj, lY, lM, lD=3D1, lL, lX=3D0, tmp1, tmp2, tmp3;
+   var cY, cM, cD; //=A6~=ACW,=A4=EB=ACW,=A4=E9=ACW
+   var lDPOS =3D new Array(3);
+   var n =3D 0;
+   var firstLM =3D 0;
+
+   sDObj =3D new Date(y,m,1,0,0,0,0);    =
+//=B7=ED=A4=EB=A4@=A4=E9=A4=E9=B4=C1
+
+   this.length    =3D solarDays(y,m);    =
+//=B0=EA=BE=E4=B7=ED=A4=EB=A4=D1=BC=C6
+   this.firstWeek =3D sDObj.getDay();    =
+//=B0=EA=BE=E4=B7=ED=A4=EB1=A4=E9=ACP=B4=C1=B4X
+
+   ////////=A6~=ACW =
+1900=A6~=A5=DF=ACK=AB=E1=AC=B0=A9=B0=A4l=A6~(60=B6i=A8=EE36)
+   if(m<2) cY=3Dcyclical(y-1900+36-1);
+   else cY=3Dcyclical(y-1900+36);
+   var term2=3DsTerm(y,2); //=A5=DF=ACK=A4=E9=B4=C1
+
+   ////////=A4=EB=ACW 1900=A6~1=A4=EB=A4p=B4H=A5H=ABe=AC=B0 =
+=A4=FE=A4l=A4=EB(60=B6i=A8=EE12)
+   var firstNode =3D sTerm(y,m*2) =
+//=B6=C7=A6^=B7=ED=A4=EB=A1u=B8`=A1v=AC=B0=B4X=A4=E9=B6}=A9l
+   cM =3D cyclical((y-1900)*12+m+12);
+
+   //=B7=ED=A4=EB=A4@=A4=E9=BBP 1900/1/1 =AC=DB=AEt=A4=D1=BC=C6
+   //1900/1/1=BBP 1970/1/1 =AC=DB=AEt25567=A4=E9, 1900/1/1 =
+=A4=E9=ACW=AC=B0=A5=D2=A6=A6=A4=E9(60=B6i=A8=EE10)
+   var dayCyclical =3D Date.UTC(y,m,1,0,0,0,0)/86400000+25567+10;
+
+   for(var i=3D0;i<this.length;i++) {
+
+      if(lD>lX) {
+         sDObj =3D new Date(y,m,i+1);    =
+//=B7=ED=A4=EB=A4@=A4=E9=A4=E9=B4=C1
+         lDObj =3D new Lunar(sDObj);     //=B9A=BE=E4
+         lY    =3D lDObj.year;           //=B9A=BE=E4=A6~
+         lM    =3D lDObj.month;          //=B9A=BE=E4=A4=EB
+         lD    =3D lDObj.day;            //=B9A=BE=E4=A4=E9
+         lL    =3D lDObj.isLeap;         //=B9A=BE=E4=ACO=A7_=B6|=A4=EB
+         lX    =3D lL? leapDays(lY): monthDays(lY,lM); =
+//=B9A=BE=E4=B7=ED=A4=EB=B3=CC=AB=E1=A4@=A4=D1
+
+         if(n=3D=3D0) firstLM =3D lM;
+         lDPOS[n++] =3D i-lD+1;
+      }
+
+      //=A8=CC=B8`=AE=F0=BD=D5=BE=E3=A4G=A4=EB=A4=C0=AA=BA=A6~=ACW, =
+=A5H=A5=DF=ACK=AC=B0=AC=C9
+      if(m=3D=3D1 && (i+1)=3D=3Dterm2) cY=3Dcyclical(y-1900+36);
+      //=A8=CC=B8`=AE=F0=A4=EB=ACW, =A5H=A1u=B8`=A1v=AC=B0=AC=C9
+      if((i+1)=3D=3DfirstNode) cM =3D cyclical((y-1900)*12+m+13);
+      //=A4=E9=ACW
+      cD =3D cyclical(dayCyclical+i);
+
+      //sYear,sMonth,sDay,week,
+      //lYear,lMonth,lDay,isLeap,
+      //cYear,cMonth,cDay
+      this[i] =3D new calElement(y, m+1, i+1, =
+nStr1[(i+this.firstWeek)%7],
+                               lY, lM, lD++, lL,
+                               cY ,cM, cD );
+   }
+
+   //=B8`=AE=F0
+   tmp1=3DsTerm(y,m*2  )-1;
+   tmp2=3DsTerm(y,m*2+1)-1;
+   this[tmp1].solarTerms =3D solarTerm[m*2];
+   this[tmp2].solarTerms =3D solarTerm[m*2+1];
+   if(m=3D=3D3) this[tmp1].color =3D 'red'; //=B2M=A9=FA=C3C=A6=E2
+
+   //=B0=EA=BE=E4=B8`=A4=E9
+   for(i in sFtv)
+      if(sFtv[i].match(/^(\d{2})(\d{2})([\s\*])(.*)$/)) {
+         tmp1=3DNumber(RegExp.$1);
+         tmp2=3DNumber(RegExp.$2);
+         if(tmp1=3D=3D(m+1)) {
+            if(tmp2<=3Dthis.length){
+              this[tmp2-1].solarFestival +=3D =
+((this[tmp2-1].solarFestival.length>0?' ':'') + RegExp.$4);
+              if(RegExp.$3=3D=3D'*') this[tmp2-1].color =3D 'red';
+            }
+         }
+      }
+
+   //=A4=EB=B6g=B8`=A4=E9
+   for(i in wFtv)
+      if(wFtv[i].match(/^(\d{2})(\d)(\d)([\s\*])(.+)$/))
+         if(Number(RegExp.$1)=3D=3D(m+1)) {
+            tmp1=3DNumber(RegExp.$2);
+            tmp2=3DNumber(RegExp.$3);
+            if(tmp1<5)
+               this[((this.firstWeek>tmp2)?7:0) + 7*(tmp1-1) + tmp2 - =
+this.firstWeek].solarFestival +=3D RegExp.$5 + ' ';
+            else {
+               tmp1 -=3D 5;
+               tmp3 =3D (this.firstWeek+this.length-1)%7; =
+//=B7=ED=A4=EB=B3=CC=AB=E1=A4@=A4=D1=ACP=B4=C1?
+               this[this.length - tmp3 - 7*tmp1 + tmp2 - (tmp2>tmp3?7:0) =
+- 1 ].solarFestival +=3D RegExp.$5 + ' ';
+            }
+         }
+
+   //=B9A=BE=E4=B8`=A4=E9
+   for(i in lFtv)
+      if(lFtv[i].match(/^(\d{2})(.{2})([\s\*])(.+)$/)) {
+         tmp1=3DNumber(RegExp.$1)-firstLM;
+         if(tmp1=3D=3D-11) tmp1=3D1;
+         if(tmp1 >=3D0 && tmp1<n) {
+            tmp2 =3D lDPOS[tmp1] + Number(RegExp.$2) -1;
+            if( tmp2 >=3D 0 && tmp2<this.length && =
+this[tmp2].isLeap!=3Dtrue) {
+               this[tmp2].lunarFestival +=3D RegExp.$4 + ' ';
+               if(RegExp.$3=3D=3D'*') this[tmp2].color =3D 'red';
+            }
+         }
+      }
+
+
+   //=B4_=AC=A1=B8`=A5u=A5X=B2{=A6b3=A9=CE4=A4=EB
+   if(m=3D=3D2 || m=3D=3D3) {
+      var estDay =3D new easter(y);
+      if(m =3D=3D estDay.m)
+         this[estDay.d-1].solarFestival =3D =
+this[estDay.d-1].solarFestival+' =B4_=AC=A1=B8`';
+   }
+
+   //=B6=C2=A6=E2=ACP=B4=C1=A4=AD
+   if((this.firstWeek+12)%7=3D=3D5)
+      this[12].solarFestival +=3D '=B6=C2=A6=E2=ACP=B4=C1=A4=AD';
+
+   //=A4=B5=A4=E9
+   if(y=3D=3DtY && m=3D=3DtM) this[tD-1].isToday =3D true;
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =
+=B6=C7=A6^=B8=D3=A6~=AA=BA=B4_=AC=A1=B8`(=ACK=A4=C0=AB=E1=B2=C4=A4@=A6=B8=
+=BA=A1=A4=EB=B6g=AB=E1=AA=BA=B2=C4=A4@=A5D=A4=E9)
+function easter(y) {
+   var term2=3DsTerm(y,5); //=A8=FA=B1o=ACK=A4=C0=A4=E9=B4=C1
+   var dayTerm2 =3D new Date(Date.UTC(y,2,term2,0,0,0,0)); =
+//=A8=FA=B1o=ACK=A4=C0=AA=BA=B0=EA=BE=E4=A4=E9=B4=C1=AA=AB=A5=F3(=ACK=A4=C0=
+=A4@=A9w=A5X=B2{=A6b3=A4=EB)
+   var lDayTerm2 =3D new Lunar(dayTerm2); =
+//=A8=FA=B1o=A8=FA=B1o=ACK=A4=C0=B9A=BE=E4
+
+   if(lDayTerm2.day<15) =
+//=A8=FA=B1o=A4U=AD=D3=A4=EB=B6=EA=AA=BA=AC=DB=AEt=A4=D1=BC=C6
+      var lMlen=3D 15-lDayTerm2.day;
+   else
+      var lMlen=3D (lDayTerm2.isLeap? leapDays(y): =
+monthDays(y,lDayTerm2.month)) - lDayTerm2.day + 15;
+
+   //=A4@=A4=D1=B5=A5=A9=F3 1000*60*60*24 =3D 86400000 =B2@=AC=ED
+   var l15 =3D new Date(dayTerm2.getTime() + 86400000*lMlen ); =
+//=A8D=A5X=B2=C4=A4@=A6=B8=A4=EB=B6=EA=AC=B0=B0=EA=BE=E4=B4X=A4=E9
+   var dayEaster =3D new Date(l15.getTime() + 86400000*( =
+7-l15.getUTCDay() ) ); //=A8D=A5X=A4U=AD=D3=B6g=A4=E9
+
+   this.m =3D dayEaster.getUTCMonth();
+ this.d =3D dayEaster.getUTCDate();
+}
+
+//=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =
+=A4=A4=A4=E5=A4=E9=B4=C1
+function cDay(d){
+   var s;
+
+   switch (d) {
+      case 10:
+         s =3D '=AA=EC=A4Q'; break;
+      case 20:
+         s =3D '=A4G=A4Q'; break;
+         break;
+      case 30:
+         s =3D '=A4T=A4Q'; break;
+         break;
+      default :
+         s =3D nStr2[Math.floor(d/10)];
+         s +=3D nStr1[d%10];
+   }
+   return(s);
+}
+
+/////////////////////////////////////////////////////////////////////////=
+//////
+
+var cld;
+
+function drawCld(SY,SM) {
+   var i,sD,s,size;
+   cld =3D new calendar(SY,SM);
+
+   if(SY>1874 && SY<1909) yDisplay =3D '=A5=FA=BA=FC' + =
+(((SY-1874)=3D=3D1)?'=A4=B8':SY-1874);
+   if(SY>1908 && SY<1912) yDisplay =3D '=AB=C5=B2=CE' + =
+(((SY-1908)=3D=3D1)?'=A4=B8':SY-1908);
+   if(SY>1911) yDisplay =3D '=A5=C1=B0=EA' + =
+(((SY-1911)=3D=3D1)?'=A4=B8':SY-1911);
+
+   document.getElementById("GZ").innerHTML =3D yDisplay +'=A6~ =
+=B9A=BE=E4=B7=B3=A6=B8' + cyclical(SY-1900+36) + '=A6~ =
+=A1i'+Animals[(SY-4)%12]+'=A1j';
+
+   document.getElementById("YMBG").innerHTML =3D "&nbsp;" + SY + =
+"<BR>&nbsp;" + monthName[SM];
+
+   for(i=3D0;i<42;i++) {
+
+      gObj=3Ddocument.getElementById('GD'+ i);
+      sObj=3Ddocument.getElementById('SD'+ i);
+      lObj=3Ddocument.getElementById('LD'+ i);
+
+
+      gObj.className =3D '';
+
+      sD =3D i - cld.firstWeek;
+
+      if(sD>-1 && sD<cld.length) { //=A4=E9=B4=C1=A4=BA
+         sObj.innerHTML =3D sD+1;
+
+         if(cld[sD].isToday) gObj.className =3D 'todayColor'; =
+//=A4=B5=A4=E9=C3C=A6=E2
+
+         sObj.style.color =3D cld[sD].color; =
+//=B0=EA=A9w=B0=B2=A4=E9=C3C=A6=E2
+
+         if(cld[sD].lDay=3D=3D1) //=C5=E3=A5=DC=B9A=BE=E4=A4=EB
+            if(cld[sD].isLeap) //=B6|=A4=EB
+              lObj.innerHTML =3D '<b>=B6|'+cld[sD].lMonth+'=A4=EB' + =
+(leapDays(cld[sD].lYear)=3D=3D29?'=A4p':'=A4j')+'</b>';
+            else //=ABD=B6|=A4=EB
+              lObj.innerHTML =3D '<b>'+cld[sD].lMonth+'=A4=EB' + =
+(monthDays(cld[sD].lYear,cld[sD].lMonth)=3D=3D29?'=A4p':'=A4j')+'</b>';
+         else //=C5=E3=A5=DC=B9A=BE=E4=A4=E9
+            lObj.innerHTML =3D cDay(cld[sD].lDay);
+
+         s=3Dcld[sD].lunarFestival;
+         if(s.length>0) { //=B9A=BE=E4=B8`=A4=E9
+            if(s.length>6) s =3D s.substr(0, 4)+'=A1K';
+            s =3D s.fontcolor('red');
+         }
+         else { //=B0=EA=BE=E4=B8`=A4=E9
+            s=3Dcld[sD].solarFestival;
+            if(s.length>0) {
+               size =3D (s.charCodeAt(0)>0 && s.charCodeAt(0)<128)?8:4;
+               if(s.length>size+1) s =3D s.substr(0, size)+'=A1K';
+               =
+s=3D(s=3D=3D'=B6=C2=A6=E2=ACP=B4=C1=A4=AD')?s.fontcolor('black'):s.fontco=
+lor('blue');
+            }
+            else { //=A4=DC=A5|=B8`=AE=F0
+               s=3Dcld[sD].solarTerms;
+               if(s.length>0) s =3D s.fontcolor('limegreen');
+            }
+         }
+
+         if(cld[sD].solarTerms=3D=3D'=B2M=A9=FA') s =3D =
+'=B2M=A9=FA=B8`'.fontcolor('red');
+
+
+
+         if(s.length>0) lObj.innerHTML =3D s;
+
+      }
+      else { //=ABD=A4=E9=B4=C1
+         sObj.innerHTML =3D '';
+         lObj.innerHTML =3D '';
+      }
+   }
+}
+
+
+function changeCld() {
+   var y,m;
+   y=3Ddocument.CLD.SY.selectedIndex+1900;
+   m=3Ddocument.CLD.SM.selectedIndex;
+   drawCld(y,m);
+}
+
+function pushBtm(K) {
+   switch (K){
+      case 'YU' :
+         if(document.CLD.SY.selectedIndex>0) =
+document.CLD.SY.selectedIndex--;
+         break;
+      case 'YD' :
+         if(document.CLD.SY.selectedIndex<200) =
+document.CLD.SY.selectedIndex++;
+         break;
+      case 'MU' :
+         if(document.CLD.SM.selectedIndex>0) {
+            document.CLD.SM.selectedIndex--;
+         }
+         else {
+            document.CLD.SM.selectedIndex=3D11;
+            if(document.CLD.SY.selectedIndex>0) =
+document.CLD.SY.selectedIndex--;
+         }
+         break;
+      case 'MD' :
+         if(document.CLD.SM.selectedIndex<11) {
+            document.CLD.SM.selectedIndex++;
+         }
+         else {
+            document.CLD.SM.selectedIndex=3D0;
+            if(document.CLD.SY.selectedIndex<200) =
+document.CLD.SY.selectedIndex++;
+         }
+         break;
+      default :
+         document.CLD.SY.selectedIndex=3DtY-1900;
+         document.CLD.SM.selectedIndex=3DtM;
+   }
+   changeCld();
+
+   return false;
+
+}
+
+var Today =3D new Date();
+var tY =3D Today.getFullYear();
+var tM =3D Today.getMonth();
+var tD =3D Today.getDate();
+/////////////////////////////////////////////////////////////////////////=
+/////
+
+var width =3D "130";
+var offsetx =3D 2;
+var offsety =3D 8;
+
+var x =3D 0;
+var y =3D 0;
+var snow =3D 0;
+var sw =3D 0;
+var cnt =3D 0;
+
+var dStyle;
+//document.onmousemove =3D mEvn;
+
+//=C5=E3=A5=DC=B8=D4=B2=D3=A4=E9=B4=C1=B8=EA=AE=C6
+function mOvr(v) {
+   var s,festival,spcday;
+   var sObj=3Ddocument.getElementById('SD'+ v);
+   var d=3DsObj.innerHTML-1;
+
+    //sYear,sMonth,sDay,week,
+    //lYear,lMonth,lDay,isLeap,
+    //cYear,cMonth,cDay
+
+   if(sObj.innerHTML!=3D'') {
+      sObj.style.cursor =3D 's-resize';
+      spcday=3Dcld[d].sMonth=3D=3D3 && =
+cld[d].sDay=3D=3D3*7?unescape('%20%u6797%u6D35%u8CE2%u7684%u751F%u65E5'):=
+'';
+
+      if(cld[d].solarTerms =3D=3D '' && cld[d].solarFestival =3D=3D '' =
+&& cld[d].lunarFestival =3D=3D '' && spcday=3D=3D'')
+         festival =3D '';
+      else
+         festival =3D '<TABLE WIDTH=3D100% BORDER=3D0 CELLPADDING=3D2 =
+CELLSPACING=3D0 BGCOLOR=3D"#CCFFCC"><TR><TD>'+
+         '<FONT COLOR=3D"#000000" =
+STYLE=3D"font-size:9pt;">'+cld[d].solarTerms + ' ' + =
+cld[d].solarFestival + ' ' + cld[d].lunarFestival+' =
+'+spcday+'</FONT></TD>'+
+         '</TR></TABLE>';
+
+
+
+      s=3D '<TABLE WIDTH=3D"130" BORDER=3D0 CELLPADDING=3D"2" =
+CELLSPACING=3D0 BGCOLOR=3D"#000066" style=3D"opacity:0.8; =
+-moz-opacity:0.8; filter:Alpha(opacity=3D80)"><TR><TD>' +
+         '<TABLE WIDTH=3D100% BORDER=3D0 CELLPADDING=3D0 =
+CELLSPACING=3D0><TR><TD ALIGN=3D"right"><FONT COLOR=3D"#ffffff" =
+STYLE=3D"font-size:9pt;">'+
+         cld[d].sYear+' =A6~ '+cld[d].sMonth+' =A4=EB '+cld[d].sDay+' =
+=A4=E9<br>=ACP=B4=C1'+cld[d].week+'<br>'+
+         '<font color=3D"violet">=B9A=BE=E4'+(cld[d].isLeap?'=B6| ':' =
+')+cld[d].lMonth+' =A4=EB '+cld[d].lDay+' =A4=E9</font><br>'+
+         '<font color=3D"yellow">'+cld[d].cYear+'=A6~ =
+'+cld[d].cMonth+'=A4=EB '+cld[d].cDay + '=A4=E9</font>'+
+         '</FONT></TD></TR></TABLE>'+ festival +'</TD></TR></TABLE>';
+
+      document.getElementById("detail").innerHTML =3D s;
+
+      if (snow =3D=3D 0) {
+         dStyle.left =3D x+offsetx-(width/2);
+         dStyle.top =3D y+offsety;
+         dStyle.visibility =3D "visible";
+         snow =3D 1;
+      }
+   }
+}
+
+//=B2M=B0=A3=B8=D4=B2=D3=A4=E9=B4=C1=B8=EA=AE=C6
+function mOut() {
+   if ( cnt >=3D 1 ) { sw =3D 0; }
+   if ( sw =3D=3D 0 ) { snow =3D 0; dStyle.visibility =3D "hidden";}
+   else cnt++;
+}
+
+//=A8=FA=B1o=A6=EC=B8m
+function mEvn(event) {
+
+   if(navName =3D=3D 'IE') {
+      x=3Devent.x;
+      y=3Devent.y;
+   }
+   else {
+      x=3Devent.clientX;
+      y=3Devent.clientY;
+   }
+
+
+   if (document.body.scrollLeft) x+=3Ddocument.body.scrollLeft;
+   if (document.body.scrollTop) y+=3Ddocument.body.scrollTop;
+
+   if (snow){
+      dStyle.left =3D x+offsetx-(width/2);
+      dStyle.top =3D y+offsety;
+   }
+}
+
+/************************************************************************=
+*****
+                                =A5@=AC=C9=AE=C9=B6=A1=ADp=BA=E2
+*************************************************************************=
+****/
+var OneHour =3D 60*60*1000;
+var OneDay =3D OneHour*24;
+var TimezoneOffset =3D Today.getTimezoneOffset()*60*1000;
+
+function showUTC(objD) {
+   var dn,s;
+   var hh =3D objD.getUTCHours();
+   var mm =3D objD.getUTCMinutes();
+   var ss =3D objD.getUTCSeconds();
+   s =3D objD.getUTCFullYear() + "=A6~" + (objD.getUTCMonth() + 1) + =
+"=A4=EB" + objD.getUTCDate() +"=A4=E9 ("+ nStr1[objD.getUTCDay()] +")";
+
+   if(hh>12) { hh =3D hh-12; dn =3D '=A4U=A4=C8'; }
+   else dn =3D '=A4W=A4=C8';
+
+   if(hh<10) hh =3D '0' + hh;
+   if(mm<10) mm =3D '0' + mm;
+   if(ss<10) ss =3D '0' + ss;
+
+   s +=3D " " + dn + ' ' + hh + ":" + mm + ":" + ss;
+   return(s);
+}
+
+function showLocale(objD) {
+   var dn,s;
+   var hh =3D objD.getHours();
+   var mm =3D objD.getMinutes();
+   var ss =3D objD.getSeconds();
+   s =3D objD.getFullYear() + "=A6~" + (objD.getMonth() + 1) + "=A4=EB" =
++ objD.getDate() +"=A4=E9 ("+ nStr1[objD.getDay()] +")";
+
+   if(hh>12) { hh =3D hh-12; dn =3D '=A4U=A4=C8'; }
+   else dn =3D '=A4W=A4=C8';
+
+   if(hh<10) hh =3D '0' + hh;
+   if(mm<10) mm =3D '0' + mm;
+   if(ss<10) ss =3D '0' + ss;
+
+   s +=3D " " + dn + ' ' + hh + ":" + mm + ":" + ss;
+   return(s);
+}
+
+//=B6=C7=A4J=AE=C9=AEt=A6r=A6=EA, =
+=B6=C7=A6^=B0=BE=B2=BE=A4=A7=A5=BF=ADt=B2@=AC=ED
+function parseOffset(s) {
+   var sign,hh,mm,v;
+   sign =3D s.substr(0,1)=3D=3D'-'?-1:1;
+   hh =3D Math.floor(s.substr(1,2));
+   mm =3D Math.floor(s.substr(3,2));
+   v =3D sign*(hh*60+mm)*60*1000;
+   return(v);
+}
+
+//=B6=C7=A6^UTC=A4=E9=B4=C1=AA=AB=A5=F3 =
+(=A6~,=A4=EB-1,=B2=C4=B4X=AD=D3=ACP=B4=C1=B4X,=B4X=C2I)
+function getWeekDay(y,m,nd,w,h){
+   var d,d2,w1;
+   if(nd>0){
+      d =3D new Date(Date.UTC(y, m, 1));
+      w1 =3D d.getUTCDay();
+      d2 =3D new Date( d.getTime() + ((w<w1? w+7-w1 : w-w1 )+(nd-1)*7   =
+)*OneDay + h*OneHour);
+   }
+   else {
+      nd =3D Math.abs(nd);
+      d =3D new Date( Date.UTC(y, m+1, 1)  - OneDay );
+      w1 =3D d.getUTCDay();
+      d2 =3D new Date( d.getTime() + (  (w>w1? w-7-w1 : w-w1 )-(nd-1)*7  =
+ )*OneDay + h*OneHour);
+   }
+   return(d2);
+}
+
+//=B6=C7=A4J=ACY=AE=C9=B6=A1=AD=C8, =A4=E9=A5=FA=B8`=AC=F9=A6r=A6=EA =
+=B6=C7=A6^=ACO=A7_=B8`=AC=F9 true =A9=CE false
+function isDaylightSaving(d,strDS) {
+
+   if(strDS =3D=3D '') return(false);
+
+   var m1,n1,w1,t1;
+   var m2,n2,w2,t2;
+  =20
+   //"04F02|10L02"
+   // 01234567890
+  =20
+   with(Math) {
+      m1 =3D floor(strDS.substr(0,2))-1; //=A4=EB
+      w1 =3D floor(strDS.substr(3,1));   //=ACP
+      t1 =3D floor(strDS.substr(4,1));   //=AE=C9
+      m2 =3D floor(strDS.substr(6,2))-1;
+      w2 =3D floor(strDS.substr(9,1));
+      t2 =3D floor(strDS.substr(10,1));
+   }
+
+   switch(strDS.substr(2,1)){ //F L =C0Y=A9=CE=A7=C0
+      case 'F': n1=3D1; break; //=B2=C4=A4@=AD=D3
+      case 'S': n1=3D2; break; //=B2=C4=A4G=AD=D3
+      case 'L': n1=3D-1; break; //=A8=EC=BC=C6=B2=C4=A4@=AD=D3
+      default : n1=3D0; break;
+   }
+
+   switch(strDS.substr(8,1)){
+      case 'F': n2=3D1; break;
+      case 'S': n2=3D2; break;
+      case 'L': n2=3D-1; break;
+      default : n2=3D0; break;
+   }
+
+
+   var d1, d2, re;
+
+   if(n1=3D=3D0)
+      d1 =3D new Date(Date.UTC(d.getUTCFullYear(), m1, =
+Math.floor(strDS.substr(2,2)),t1));
+   else
+      d1 =3D getWeekDay(d.getUTCFullYear(),m1,n1,w1,t1);
+
+   if(n2=3D=3D0)
+      d2 =3D new Date(Date.UTC(d.getUTCFullYear(), m2, =
+Math.floor(strDS.substr(8,2)),t2));
+   else
+      d2 =3D getWeekDay(d.getUTCFullYear(),m2,n2,w2,t2);
+
+   if(d2>d1)
+      re =3D (d>d1 && d<d2)? true: false;
+   else
+      re =3D (d>d1 || d<d2)? true: false;
+
+   return(re);
+}
+
+var isDS =3D false;
+
+//=ADp=BA=E2=A5=FE=B2y=AE=C9=B6=A1
+function getGlobeTime() {
+   var d,s;
+   d =3D new Date();
+
+   d.setTime(d.getTime()+parseOffset(objTimeZone[0]));
+
+   isDS=3DisDaylightSaving(d,objTimeZone[1]);
+   if(isDS) d.setTime(d.getTime()+OneHour);
+   return(showUTC(d));
+}
+
+var objTimeZone;
+var objContinentMenu;
+var objCountryMenu;
+
+function tick() {
+   var today;
+   today =3D new Date();
+   document.getElementById("LocalTime").innerHTML =3D showLocale(today);
+   document.getElementById("GlobeTime").innerHTML =3D getGlobeTime();
+   window.setTimeout("tick()", 1000);
+}
+
+//=AB=FC=A9w=A6=DB=A9w=AF=C1=A4=DE=AE=C9=B0=CF
+function setTZ(a,c){
+   objContinentMenu.options[a].selected=3Dtrue;
+   chContinent();
+   objCountryMenu.options[c].selected=3Dtrue;
+   chCountry();
+}
+
+//=C5=DC=A7=F3=B0=CF=B0=EC
+function chContinent() {
+   var key,i;
+   continent =3D =
+objContinentMenu.options[objContinentMenu.selectedIndex].value;
+   for (var i =3D objCountryMenu.options.length-1; i >=3D 0; i--)
+      objCountryMenu[0]=3Dnull;
+
+   for (key in timeData[continent])
+      objCountryMenu.options[objCountryMenu.options.length]=3Dnew =
+Option(key, key);
+
+   objCountryMenu.options[0].selected=3Dtrue;
+   chCountry();
+}
+
+//=C5=DC=A7=F3=B0=EA=AEa
+function chCountry() {
+   var txtContinent =3D =
+objContinentMenu.options[objContinentMenu.selectedIndex].value;
+   var txtCountry =3D =
+objCountryMenu.options[objCountryMenu.selectedIndex].value;
+
+   objTimeZone =3D timeData[txtContinent][txtCountry];
+
+   getGlobeTime();
+
+   //=A6a=B9=CF=A6=EC=B2=BE
+   document.getElementById("City").innerHTML =3D (isDS=3D=3Dtrue?"<SPAN =
+STYLE=3D'font-size:12pt;font-family:Wingdings; color:Red;'><font =
+face=3D'Wingdings'>R</font></span> ":'') + objTimeZone[2]; =
+//=AD=BA=B3=A3
+   var pos =3D Math.floor(objTimeZone[0].substr(0,3));
+   if(pos<0) pos+=3D24;
+   pos*=3D-10;
+   document.getElementById("world").style.left =3D pos;
+
+}
+
+function setCookie(name,value) {
+   var today =3D new Date();
+   var expires =3D new Date();
+   expires.setTime(today.getTime() + 1000*60*60*24*365);
+   document.cookie =3D name + "=3D" + escape(value) + "; expires=3D" + =
+expires.toGMTString();
+}
+
+function getCookie(Name) {
+   var search =3D Name + "=3D";
+   if(document.cookie.length > 0) {
+      offset =3D document.cookie.indexOf(search);
+      if(offset !=3D -1) {
+         offset +=3D search.length;
+         end =3D document.cookie.indexOf(";", offset);
+         if(end =3D=3D -1) end =3D document.cookie.length;
+         return unescape(document.cookie.substring(offset, end));
+      }
+      else return('');
+   }
+   else return('');
+}
+
+/////////////////////////////////////////////////////////////////////////=
+//
+
+function initialize() {
+   var key;
+
+   //=AE=C9=B6=A1
+   if(navName =3D=3D 'IE') {
+      oMap =3D document.getElementById("map");
+      if(oMap.filters.length >0) {
+         oMap.filters.Light.Clear();
+         oMap.filters.Light.addAmbient(255,255,255,60);
+         oMap.filters.Light.addCone(120, 60, 80, 120, 60, =
+255,255,255,120,60);
+      }
+   }
+
+   objContinentMenu=3Ddocument.WorldClock.continentMenu;
+   objCountryMenu=3Ddocument.WorldClock.countryMenu;
+
+   for (key in timeData)
+      objContinentMenu[objContinentMenu.length]=3Dnew Option(key, key);
+
+
+   var TZ1 =3D getCookie('TZ1');
+   var TZ2 =3D getCookie('TZ2');
+
+
+   if(TZ1=3D=3D'') {TZ1=3D0; TZ2=3D18;}
+   setTZ(TZ1,TZ2);
+
+   tick();
+
+
+   //=A4=EB=BE=E4
+   dStyle =3D document.getElementById("detail").style;
+   document.CLD.SY.selectedIndex=3DtY-1900;
+   document.CLD.SM.selectedIndex=3DtM;
+   drawCld(tY,tM);
+  =20
+   //=A6a=B9=CF
+   var mapImage =3D =
+'data:image/jpeg;base64,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3D';
+   document.getElementById("world1").src =3D mapImage;
+   document.getElementById("world2").src =3D mapImage;
+}
+
+function terminate() {
+   setCookie("TZ1",objContinentMenu.selectedIndex);
+   setCookie("TZ2",objCountryMenu.selectedIndex);
+}
+
+
+//-->
+</SCRIPT>
+
+<STYLE>.todayColor {
+	BORDER-BOTTOM: blue 2px ridge; BORDER-LEFT: blue 2px ridge; =
+BACKGROUND-COLOR: aqua; BORDER-TOP: blue 2px ridge; BORDER-RIGHT: blue =
+2px ridge
+}
+</STYLE>
+
+<META name=3DGENERATOR content=3D"MSHTML 8.00.6001.18928"></HEAD>
+<BODY style=3D"Z-INDEX: 0; POSITION: relative" onmousemove=3DmEvn(event) =
+
+onunload=3Dterminate() onload=3Dinitialize()>
+<SCRIPT language=3DJavascript><!--
+var agent =3D navigator.userAgent;
+var navVer =3D 0;
+var navName =3D '';
+
+if(agent.indexOf("MSIE") !=3D -1) {
+	navVer =3D agent.replace(/^.+MSIE ([0-9\.]+).*$/i, "$1");
+	navName =3D 'IE';
+}
+if(agent.indexOf("Firefox") !=3D -1) {
+	navVer =3D agent.replace(/^.+Firefox\/([0-9\.]+).*$/i, "$1");
+	navName =3D 'Firefox';
+}
+if(agent.indexOf("Gecko") !=3D -1) {
+	navVer =3D agent.replace(/^.*Mozilla\/([0-9\.]+).*$/i, "$1");
+	navName =3D 'Mozilla';
+}
+if(navVer =3D=3D 0 || (navName=3D=3D'IE'&&navVer<4) ) {
+ =
+document.write("<h1>=A7A=AA=BA=C2s=C4=FD=BE=B9=B5L=AAk=B0=F5=A6=E6=A6=B9=B5=
+{=A6=A1=A1C</h1>=A6=B9=B5{=A6=A1=BB=DD=A6b IE 4.0 =A9=CE Firefox 1.0 =
+=A5H=AB=E1=AA=BA=AA=A9=A5=BB=A4~=AF=E0=B0=F5=A6=E6!!")
+ document.close;
+}
+//--></SCRIPT>
+
+<DIV=20
+style=3D"Z-INDEX: 3; POSITION: absolute; FILTER: =
+shadow(color=3D#333333,direction=3D135); WIDTH: 140px; HEIGHT: 120px"=20
+id=3Ddetail></DIV>
+<CENTER>
+<TABLE border=3D0>
+  <TBODY>
+  <TR><!------------------------------ =A5@=AC=C9=AE=C9=B6=A1 =
+----------------------------------->
+    <FORM name=3DWorldClock>
+    <TD vAlign=3Dtop width=3D240 align=3Dmiddle><FONT =
+style=3D"FONT-SIZE: 9pt"=20
+      size=3D2>=A5=BB=A6a=AE=C9=B6=A1</FONT><BR><SPAN=20
+      style=3D"FONT-FAMILY: Arial; COLOR: #000080; FONT-SIZE: 11pt"=20
+      id=3DLocalTime>0000=A6~0=A4=EB0=A4=E9 (=A1@) =A1@=A4=C8 =
+00:00:00</SPAN>=20
+      <P><SPAN style=3D"WIDTH: 150px; FONT-FAMILY: =
+'=B7s=B2=D3=A9=FA=C5=E9'; FONT-SIZE: 9pt"=20
+      id=3DCity>=A5x=C6W</SPAN> <BR><SPAN=20
+      style=3D"FONT-FAMILY: Arial; COLOR: #000080; FONT-SIZE: 11pt"=20
+      id=3DGlobeTime>0000=A6~0=A4=EB0=A4=E9 (=A1@) =A1@=A4=C8 =
+00:00:00</SPAN><BR>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD align=3Dmiddle>
+            <DIV=20
+            style=3D"BORDER-BOTTOM: #888 2px solid; FILTER: Light; =
+BORDER-LEFT: #888 2px solid; WIDTH: 240px; HEIGHT: 120px; OVERFLOW: =
+hidden; BORDER-TOP: #888 2px solid; BORDER-RIGHT: #888 2px solid"=20
+            id=3Dmap>
+            <DIV style=3D"POSITION: relative; WIDTH: 500px" =
+id=3Dworld><IMG=20
+            id=3Dworld1><IMG =
+id=3Dworld2></DIV></DIV></TD></TR></TBODY></TABLE><BR><SELECT=20
+      style=3D"BACKGROUND-COLOR: #e0e0ff; WIDTH: 240px; FONT: 9pt =
+'=B2=D3=A9=FA=C5=E9'"=20
+      onchange=3DchContinent() name=3DcontinentMenu></SELECT><BR><SELECT =
+
+      style=3D"BACKGROUND-COLOR: #e0e0ff; WIDTH: 240px; FONT: 9pt =
+'=B2=D3=A9=FA=C5=E9'"=20
+      onchange=3DchCountry() =
+name=3DcountryMenu></SELECT></P></TD></FORM><!---------------------------=
+--- =B8U=A6~=BE=E4 ----------------------------------->
+    <FORM onsubmit=3D"return false;" name=3DCLD>
+    <TD align=3Dmiddle>
+      <DIV style=3D"Z-INDEX: -1; POSITION: absolute; TOP: 30px"><FONT=20
+      style=3D"FONT-FAMILY: 'Arial Black'; COLOR: #f0f0f0; FONT-SIZE: =
+100pt"=20
+      id=3DYMBG>&nbsp;0000<BR>&nbsp;JUN</FONT> </DIV>
+      <TABLE border=3D0 width=3D500>
+        <TBODY>
+        <TR>
+          <TD bgColor=3D#000080 colSpan=3D7 align=3Dmiddle><FONT=20
+            style=3D"FONT-SIZE: 9pt" color=3D#ffffff =
+size=3D2>=A6=E8=BE=E4<SELECT=20
+            style=3D"FONT-SIZE: 9pt" onchange=3DchangeCld() name=3DSY>=20
+              <SCRIPT language=3DJavascript><!--
+          for(i=3D1900;i<2101;i++) document.write('<option>'+i)
+          //--></SCRIPT>
+            </SELECT>=A6~<SELECT style=3D"FONT-SIZE: 9pt" =
+onchange=3DchangeCld()=20
+            name=3DSM>=20
+              <SCRIPT language=3DJavaScript><!--
+          for(i=3D1;i<13;i++) document.write('<option>'+i)
+          //--></SCRIPT>
+            </SELECT>=A4=EB</FONT> <FONT id=3DGZ color=3D#ffffff =
+size=3D4=20
+            face=3D=BC=D0=B7=A2=C5=E9></FONT><BR></TD></TR>
+        <TR align=3Dmiddle bgColor=3D#e0e0e0>
+          <TD width=3D65>=A4=E9</TD>
+          <TD width=3D65>=A4@</TD>
+          <TD width=3D65>=A4G</TD>
+          <TD width=3D65>=A4T</TD>
+          <TD width=3D65>=A5|</TD>
+          <TD width=3D65>=A4=AD</TD>
+          <TD width=3D65>=A4=BB</TD></TR>
+        <SCRIPT language=3DJavaScript><!--
+          var gNum, color1, color2;
+
+          // =ACP=B4=C1=A4=BB=C3C=A6=E2
+          switch (conWeekend) {
+          case 1:
+             color1 =3D 'black';
+             color2 =3D color1;
+             break;
+          case 2:
+             color1 =3D 'green';
+             color2 =3D color1;
+             break;
+          case 3:
+             color1 =3D 'red';
+             color2 =3D color1;
+             break;
+          default :
+             color1 =3D 'green';
+             color2 =3D 'red';
+          }
+
+          for(i=3D0;i<6;i++) {
+             document.write('<tr align=3Dcenter>')
+             for(j=3D0;j<7;j++) {
+                gNum =3D i*7+j
+                document.write('<td id=3D"GD' + gNum +'" =
+onMouseOver=3D"mOvr(' + gNum +')" onMouseOut=3D"mOut()"><font id=3D"SD' =
++ gNum +'" size=3D5 face=3D"Arial Black"')
+                if(j =3D=3D 0) document.write(' color=3Dred')
+                if(j =3D=3D 6) {
+                   if(i%2=3D=3D1) document.write(' color=3D'+color2)
+                      else document.write(' color=3D'+color1)
+                }
+                document.write(' TITLE=3D""> </font><br><font id=3D"LD' =
++ gNum + '" size=3D2 style=3D"font-size:9pt"> </font></td>')
+             }
+             document.write('</tr>')
+          }
+          //--></SCRIPT>
+        </TBODY></TABLE></TD>
+    <TD vAlign=3Dtop width=3D40 =
+align=3Dmiddle><BR><BR><BR>=A6~<BR><BUTTON=20
+      style=3D"FONT-SIZE: 9pt" =
+onclick=3D"pushBtm('YD')">=A1=B6</BUTTON><BR><BUTTON=20
+      style=3D"FONT-SIZE: 9pt" onclick=3D"pushBtm('YU')">=A1=BF</BUTTON> =
+
+      <P>=A4=EB<BR><BUTTON style=3D"FONT-SIZE: 9pt"=20
+      onclick=3D"pushBtm('MD')">=A1=B6</BUTTON><BR><BUTTON =
+style=3D"FONT-SIZE: 9pt"=20
+      onclick=3D"pushBtm('MU')">=A1=BF</BUTTON>
+      <P><BUTTON style=3D"FONT-SIZE: 9pt" =
+onclick=3D"pushBtm('')">=A4=B5<BR>=A4=E9</BUTTON>
+      <P></P></TD></FORM></TR></TBODY></TABLE></CENTER></BODY></HTML>

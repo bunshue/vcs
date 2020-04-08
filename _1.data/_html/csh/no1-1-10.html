@@ -1,0 +1,289 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 1-1-10 誰是"老大哥" -- 版權訴訟</title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-1.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1"> 
+            <p><span class="akh1">1-1-10 誰是"老大哥" -- 版權訴訟</span></p>
+            <blockquote> 
+              <p class="akb1">AT&amp;T 的 USL 在 1991 年正式轉變了一家公司。當然，這意味著她將更重視 UNIX 
+                在商業上的利益。當時的 UNIX OS 早以稱霸高階的電腦市場；從 Cray 超級電腦、IBM 的大型電腦主機、迷你級電腦到工作站，均是 
+                UNIX 的天下(這一點，直到現在21世紀，仍舊沒有多大的改變)。即使在80年代中期後開始迅速發展的個人電腦，雖然當時被戲稱為是玩具電腦，但也仍舊有像 
+                XENIX<sup><a href="#ps1" class="akup1">*1</a></sup>, Interactive 
+                UNIX<sup><a href="#ps1" class="akup1">*2</a></sup> 等幾種向 AT&amp;T 
+                繳過稅的商業化版本。UNIX 簡直就是 AT&amp;T 的一棵搖錢樹。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">但這一切在 Networking Release 2(以後簡寫為 Net/2)出現之後，起了變化！</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">首先，一位 i386 處理器的玩家名叫 Bill Jolitz，在拿到 Net/2 之後，很快地就將 
+                Net/2 kernal 缺少的程式補齊了。BSD kernal 這時可算是大功告成了。當時 Bill Jolitz 將他們放在網際網路與其他人共享他的原始碼，並且得到了不少正面的回應。由於這個版本是使用在 
+                i386 微處理器的個人電腦上，所以就命名為 386BSD，在 1992 年 2 月正式發表。這該算是 BSD 首度功能完整且版權獨立的版本。Bill 
+                Jolitz 是當時唯一的 kernal 維護者。在他離開這個計劃之後，繼起的 BSD 玩家們延續了這個版本，日後衍生了 FreeBSD，然後又從其中分支出裂 
+                NetBSD 版本。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">另一個將 Net/2 完整化的是一家叫 <a href="http://www.bsdi.com/" class="akb2">Berkeley 
+                Software Design, Incorporated</a> 的公司，簡稱 <a href="http://www.bsdi.com/" class="akb2">BSDI</a><sup><a href="#ps3" class="akup1">*3</a></sup>。由於 
+                Net/2 的版權聲明中，宣稱其原始檔案的合法性，並且允許使用者，從事衍生物的商業行為，所以 BSDI 將他們修改後的系統命名為 
+                BSD/386。他們並將成果打包，刊登廣告以 995 美金的售價販售 BSD/386，而且含原始碼，而且還提供免費服務電話的諮詢，電號號碼是"1-800-ITS-Unix"。時間大約是在 
+                1992 年 1 月。當時，USL 的 System V 含 source code 的價格大約是 BSD/386 價格的一百倍左右。這可驚動了老大哥 
+                AT&amp;T。並且正式地書面嚴重警告 BSDI 違反的註冊商標法(電話號碼裡有 Unix 的字眼)，並公開宣稱 AT&amp;T 
+                擁有 UNIX 的註冊商標。BSDI 再次刊登廣告公開反擊 AT&amp;T，聲明她的商業行為完全合法。果不期然， BSDI 
+                的博命演出讓雙方手牽手走上法庭。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">AT&amp;T 的 USL 控告 BSDI 剽竊他的 UNIX 原始碼，要求法官還他公道。在聽證會上，BSDI 
+                祭出早已準備好的法寶；自己在無任何 AT&amp;T source code 的條件下寫出的合法檔案，以及來自於 BSD 授權的 
+                Net/2 source code。前面的證據足以讓 BSDI 立於不敗之地，後者讓 BSDI 置身在暴風圈外。BSDI 的辨證獲得了法官的採信。但 
+                At&amp;T 豈會就此罷手，他們將焦點轉移到 Net/2 的 BSD 授權上面，並且重新提出控訴，被告的對象變成了 BSDI 
+                與柏克萊大學；同時 AT&amp;T 還申請法庭禁止 BSDI 一切的 BSD/386 銷售行為。就這樣，柏克萊大學也對號入坐了。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">農
+夫我認為，畢竟 AT&amp;T 是營利企業，她得維護她的商業利益，這點是天經地義的事。雖然柏克萊大學與 AT&amp;T 在 UNIX
+發展上有著非比尋常的關係，但商業利益是現實的。企業資助學術界的研究計劃，多半是基於商業上的考量；我相信，學術界的少數高層在尋求奧援時不會不明白這
+一點，即使這有可能讓大部分的學術人士無法接受或不願接受。不管如何，這一記醒棍倒再次挑起了這一點事實。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">成為被告的柏克萊大學，只好無奈地面對這場無情的商業訴訟。但他們也同樣不甘示弱地對 AT&amp;T 
+                的 Systerm V 著作權提出質疑，因為在 AT&amp;T 的 UNIX 授權聲明中完全沒有提及柏克萊的貢獻。所以柏克萊反控 
+                AT&amp;T 違反的 BSD 的授權條款。柏克萊的反擊讓戰況越演越烈，訴訟案一路從 AT&amp;T 的老家新澤西州的聯邦法庭打到柏克萊大學的所在地加州法院，但依舊沒有結果。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">到了 1993 年，官司還在進行中，但 AT&amp;T 卻已經打包 USL 準備以一億美元的價格找尋買主了。最後 
+                AT&amp;T 將 USL 以八千萬美元代價的賣給了 <a href="http://www.novell.com/" class="akb2">Novell</a>。而新買主也當仁不讓地加入了這場混戰。但卻也因此，戰況露出了一線平息的曙光。訴訟案在 
+                1994 年 1 月宣告終結，以庭外和解收場。實際的協議內容僅有當事人知情。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">如果從勝負的角度來看這場訴訟，或許柏克萊與 BSDI 是勝利的一方。但如果從 UNIX 發展的腳步來看這場訴訟，就可能根本沒有任何一方是勝利者了。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">事件平息後的 1994 年 6 月，柏克萊的 CSRG 風光地發表了 BSD 4.4 Lite。在這個版本中，有 
+                70 個檔案引用的一份新修改的版權聲明，闡述的 AT&amp;T 與 BSD 雙方的貢獻，並明確地給予檔案自由散播的權利。但不知為何，應該有能力完整發表的 
+                BSD 4.4 Lite 還是缺少了三的檔案。當時，農夫我也很高興地買了一本 BSD4.4-Lite CD-ROM Companion，含一張光碟，現在拿在手上，看來總覺得有點呆。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1">掌握 UNIX source code 以及 UNIX 商標的 Novell，將 UNIX 商標交給 
+                X/open 管理，自己則發展了一套命名為 UNIXWave 的作業系統。推出後市場的反應並不熱絡。不久，Novell 與 
+                SCO 接頭，在 SCO 保證繼續支援 UNIXWare 的條件下，UNIX 在1995年二次易主，新主人是 <a href="http://www.sco.com/" class="akb2">SCO</a>。</p>
+              <p class="akb1">&nbsp;</p>
+              <hr size="2">
+              <p class="akb1">備註：</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1"><a name="ps1"></a>*1 Intel 在 1978 年發表 4.77 MHz 的 
+                8086 微處理器。1980 年，Microsfot 便以 V7 為基礎，發表了在微處理器(microprocessor-based 
+                computers)上執行的版本也就是 XENIX。到了 1982年，一家成立於 1979 年的軟體公司 Santa Cruz 
+                Operation，成為微軟的合作開發廠商。之後她這家公司便一直致力於這個領域裡延續到今日，縮寫就是今日的 SCO。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1"><a name="ps2"></a>*2 Interactive IS/1 (以 V6 為主體)。這個版本後來演化為比較讓人熟之的名字 
+                -- Interactive UNIX。後來因為 Sun Microsystems 致力發展 Solaris for X86，被財力雄厚的 
+                Sun Microsystems 合併了，如今已經不見蹤跡了。</p>
+              <p class="akb1">&nbsp;</p>
+              <p class="akb1"><a name="ps3"></a>*3 就在我反覆修改的時候，BSDI 這家公司已經被 Wind 
+                River 合併了，改名為 iXsystems。2001/05/03</p>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no1-1-09.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no1-1-11.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

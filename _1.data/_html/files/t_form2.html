@@ -1,0 +1,103 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=big5">
+<title> 各種表單範例2 </title>
+</head>
+<body>
+
+群組方塊  將同一個群組的表單欄位放在同一個群組方塊中<br>
+ 
+<form>
+<fieldset>
+<legend>性別</legend>
+請點選你的性別:
+<input name="sex" type="radio" value="male"> 男
+<input name="sex" type="radio" value="female">女
+</fieldset>
+</form>
+
+<br><br>
+
+密碼輸入欄 設定的屬性為『TYPE=PASSWORD』<br>
+<form>
+<input type="password" name="age" size="10" value="333"
+maxlength="8">
+<input type="submit" value="送出密碼">
+</form>
+
+<br><br>
+圖片	 設定按鈕時可以使用自己所建立的圖檔作為按鈕圖 設定的屬性為『TYPE=IMAGE』<br>
+<form>
+<input type="image" src="01.JPG“ name="image" >
+在圖上點一下就可以送出滑鼠位置的座標
+</form>
+
+<br><br>
+檔案上傳	檔案上傳欄位之後會自動加上「瀏覽」按鈕，讓使用者可以瀏覽要上傳的檔案，其屬性的設定為『type=file』。
+<form>
+<input type="file" name="pic01" value="選取圖檔">
+</form>
+
+<br><br>
+設定表單文字的大小1 絕對大小<br>
+<form>
+<input type="text" style="font-size:11px"
+name="name" value="請輸入姓名" size="20">
+</form>
+設定表單文字的大小2 關鍵字<br>
+<form>
+<input type="text" style="font-size:large"
+name="name" value="請輸入姓名" size="20">
+</form>
+
+<br><br>
+設定表單的色彩<br>
+背景色彩	STYLE=“BACKGROUND-COLOR:顏色”<br>
+文字色彩	STYLE=“COLOR:顏色”<br>
+<form>
+<input type="text" name="name" value="請輸入姓名"
+style="background-color:#99CC66; color:red">
+</form>
+
+<br><br>
+混合表單<br>
+<h3>個人資料</h3>
+<form>
+<fieldset>
+<legend>個人資料</legend>
+你的姓名:<input type=text name="username" size="20" value="個人姓名" style="fontsize:
+large;background-color:#99CC66;color:white"><br>
+請點選你的性別:
+<input name="sex" type="radio" value="male"> 男
+<input name="sex" type="radio" value="female">女<br>
+請選擇你的年齡:<br>
+<select name="age">
+<option>請選擇年齡</option>
+<option>0~12歲</option>
+<option selected>13~19歲</option>
+<option>20~29歲</option>
+</select>
+</fieldset><p></p>
+<fieldset>
+<legend>上網調查</legend>
+上網時最常作的事情是:<br>
+<input name="www" type="checkbox" value="down" style="background-color:#993333">下載檔案<br>
+<input name="www" type="checkbox" value="game" style="background-color:#993333">玩線上遊戲<br>
+</fieldset><p></p>
+<fieldset>
+<legend>你的意見</legend>
+<textarea name="people" rows=5 cols=40 style="font-size:14px;background-color:#33FFCC">
+請在此輸入你想說的話
+</textarea> </fieldset> <hr>
+<input type=submit value="按此送出資料" style="background-color:#FFCC00">
+<input type=reset value="按此清除所有資料" style="background-color:#FFCC00">
+</form>
+
+
+
+
+</body>
+</HTML>
+
+
+

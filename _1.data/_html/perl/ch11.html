@@ -1,0 +1,288 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="generator" content="Movable Type Publishing Platform 4.0-beta2-20070612" />
+
+    <title>
+
+        
+    perl 學習手札: 第十一章 檔案系統
+        
+
+    </title>
+    
+    <link rel="start" href="./perl_index.html" title="Home" />
+
+</head>
+<body class="page-archive layout-two-column-right" onload="individualArchivesOnLoad(commenter_name)">
+   <div id="container">
+      <div id="container-inner" class="pkg">
+         <div id="banner">
+            <div id="banner-inner" class="pkg">
+               <h1 id="banner-header"><a href="./perl_index.html" accesskey="1">perl 學習手札</a></h1>
+               <h2 id="banner-description"></h2>
+            </div>
+         </div>
+         <div id="pagebody">
+            <div id="pagebody-inner" class="pkg">
+               <div id="alpha">
+                  <div id="alpha-inner" class="pkg">
+
+
+<h3 class="entry-header">第十一章 檔案系統</h3>
+
+<div class="entry" id="entry-378">
+    <div class="entry-content">
+
+        <div class="entry-body">
+            11. 檔案系統<br>
+上一章我們提到了一些關於在Perl當中使用檔案代號來進行檔案存取的工作，不過要能靈活運用這些操作，你應該要有對於系統本身的檔案架構有一些認識。因
+為運用檔案代號，實際上你也是在操控整個系統的目錄跟檔案。所以我們接下來就要簡單提醒大家一些基本的事項，並且告訴大家應該怎麼利用Perl去進行檔案
+的操作。<br>
+11.1 檔案測試<br>
+我們在上一章曾經嘗試打開一個檔案，並且從檔案內讀出其中的內容。不過我們也遇到了一些問題，也就是檔案可能會因為不存在而使資料讀取發生問題。因此我們
+利用die的方式來判斷，假如程式無法打開這個檔案代號，那麼就中止程式繼續進行。當然，找不到檔案是我們設法開啟檔案代號時可能發生的錯誤之一。我們也
+許還可能發生其他問題，比如沒有權限打開指定的檔案等等。不過對於這當中的某些狀況，我們其實在準備開啟檔案時可以先進行測試，也就是所謂的檔案測試，在
+說明可以進行測試的項目之前，我們可以先來看看這個例子：<br>
+<br>
+<pre><br><br>#!/usr/local/bin/perl -w<br><br>use strict;<br><br>my $logfile = "/var/log/messages";&nbsp;&nbsp;# 先指定檔案到變數 $logfile<br>if (-e $logfile) {&nbsp;&nbsp;		# 判斷檔案是否存在<br>    open LOG, $logfile or die "$!";&nbsp;&nbsp;# 開啟檔案代號<br>    my $line_num = 1;<br>    while (<log>) {<br>        print "$line_num\t$_\n";<br>        $line_num++;<br>    }<br>} else {<br>    print "檔案不存在\n";<br>}<br></log></pre>
+<br>
+這個程式的主要工作在於讀出系統日誌檔的內容，並且幫忙加上行號印出。當然，我們先指定要開啟的檔案名稱是"/var/log/messages"這個檔
+案，接下來便利用檔案判斷的參數"-e"來確定檔案是否存在。如果這個檔案確實存在，我們就打開檔案代號"LOG"，用來聯繫"$logfile"這個檔
+案，也就是"/var/log/messages"。當然，這時候我們雖然確定檔案存在，可是因為還是可能存在其他導致無法正常開啟檔案的狀況，因此我們
+還是決定一但開啟失敗就利用die印出錯誤訊息，然後中斷程式。如果檔案開啟沒有問題，我們就可以開始一行一行把資料讀進來，然後加上行號後輸出了。<br>
+這樣看來，"-e"的判斷似乎功用不大，因為我們判斷如果檔案不存在，好像也沒有特殊的動作。所以我們來讓"-e"看起來能有些幫助：<br>
+<br>
+<pre><br><br>#!/usr/local/bin/perl -w<br><br>use strict;<br><br>while (-e (my $logfile = shift)) {&nbsp;&nbsp;# 判斷檔案是否存在<br>    open LOG, $logfile or die "$!";&nbsp;&nbsp;# 開啟檔案代號<br>    my $line_num = 1;<br>    while (<log>) {<br>        print "$line_num\t$_";<br>        $line_num++;<br>    }<br>}<br></log></pre>
+<br>
+這樣看起來好像有趣了一些，我們來看看到底改了甚麼。首先，我們把原來指定給變數$logfile的檔案取消，讓$logfile變成是使用者由執行時輸入的參數。接著我們依然檢查了這個檔案是否存在，如果存在則打開並加上行數印出。<br>
+其實並不困難，我們只需要以指定的參數就可以用來檢查檔案的屬性。所以我們來看看到底有那些參數可以使用：<br>
+<br>
+<pre><br><br>-A&nbsp;&nbsp;檔案上次存取至今的時間<br>-B&nbsp;&nbsp;檔案被判斷為二進位檔<br>-C&nbsp;&nbsp;檔案的 inode 被更改至今的時間<br>-M&nbsp;&nbsp;檔案上次修改至今的時間<br>-O&nbsp;&nbsp;目前實際使用者是否為該檔案或目錄的擁有者<br>-R&nbsp;&nbsp;目前實際的使用者具有讀的權限<br>-S&nbsp;&nbsp;檔案代號是否為 socket<br>-T&nbsp;&nbsp;檔案判斷為文字檔<br>-W&nbsp;&nbsp;目前實際的使用者具有寫的權限<br>-X&nbsp;&nbsp;目前實際的使用者具有執行的權限<br>-c&nbsp;&nbsp;字元型檔案<br>-e&nbsp;&nbsp;檢查檔案或目錄是否存在<br>-f&nbsp;&nbsp;判斷檔案是否為文字檔<br>-g&nbsp;&nbsp;檔案或目錄具有 setgid 屬性<br>-k&nbsp;&nbsp;檔案或目錄設定了 sticky 位元<br>-l&nbsp;&nbsp;檔案代號是一個符號連結<br>-o&nbsp;&nbsp;目前的使用者是否為該檔案或目錄的擁有者<br>-r&nbsp;&nbsp;目前的使用者具有讀的權限<br>-s&nbsp;&nbsp;檔案或目錄存在而且有內容<br>-t&nbsp;&nbsp;檔案代號是 TTY 裝置<br>-u&nbsp;&nbsp;檔案或目錄具有 setuid 屬性<br>-w&nbsp;&nbsp;目前的使用者具有寫的權限<br>-x&nbsp;&nbsp;目前的使用者具有執行的權限<br>-z&nbsp;&nbsp;檔案或目錄存在而且沒有內容<br></pre>
+<br>
+其中有許多是關於系統本身的相關知識，例如使用者id，群組id等等。這部份建議各位應該能夠針對自己所使用的作業系統，去找到相關的參考書籍。其他例如
+在Unix系統上使用，大多則採用相類似的權限判斷方式。當然，其中有些部份是僅供參考，例如檔案是否為文字檔，或是二進位檔。對於big5檔案來
+說，Perl就可能會誤判成二進位檔。<br>
+當然，很多時候我們還是需要在對檔案進行存取之前，先確定他們相關的狀況。例如是否能夠有足夠的權限，或是我們可以得到檔案最後被修改的時間等等。大部份
+的時候，這些判斷可以給我們當作很好的參考。例如我們可以設定時間清除過久沒有更新的檔案等等。這些工具對於使用Perl來管理日常工作的管理者來說更是
+能夠提供非常好的幫助。<br>
+<br>
+11.2 重要的檔案相關內建函式<br>
+對於系統中的檔案系統，Perl大多數的時候總是透過底層的作業系統去進行操作，因此你會發現很多的函式和作業系統提供的函式大多非常接近(註一)。這樣
+其實也非常能夠幫助使用者用簡單的方式記憶，而不需要多背另一套指令函式。例如我們剛剛提到的檔案測試，也就是Perl所提供第一個屬於檔案操作的函式。
+因此如果你想要獲得更精準的說明，你可以考慮使用"perldoc -f -X"來查看所有的測試符號。<br>
+接下來，我們來看看還有那些函式是我們可以善加利用的部份。Perl在處理檔案代號或其他檔案相關的函式多達十幾個，其實已經足以應付大多數的使用。接下來我們將挑出幾個經常被使用的內建函式，讓讀者可以開始熟悉該怎麼在Perl中控制檔案系統。<br>
+<br>
+chdir：就像你在大多數作業系統下所使用的指令一樣，你可以利用chdir來切換目前工作的目錄。因此我們可以使用下面的方式來指定我們想要操作的目錄：<br>
+<br>
+<pre><br><br>chdir "/tmp" or die $!;<br>open LOG, "&gt;log.txt" or die $!;<br>print LOG "write to log\n" or die $!;<br></pre>
+<br>
+沒錯，我們只是小小的修改了剛剛的程式，把原來沒有指定目錄的狀況，改成在目錄"/tmp"下了一個檔案log.txt，並且寫入字串。就像你在大多數
+Unix作業系統中的狀況，你也可以單獨使用chdir而沒有附帶任何的參數，這時候系統會根據你的環境變數$ENV{HOME}來決定應該切換到哪一個
+目錄。<br>
+<br>
+chmod：對於熟悉Unix的系統對於此應該也是非常的熟悉，這個函式就是呼叫系統中chmod的操作，來修改檔案或是目錄的權限。如果你對於系統的權
+限結構還不太熟悉，建議你先看一些相關的文件，可以了解Unix系統下對於權限的限制跟實作的方式。當然，Perl並不太願意改變大家的使用習慣，所以如
+果你經常使用Unix下的chmod指令，那麼你可以繼續你的使用習慣，就像這樣：<br>
+<br>
+<pre><br><br>chmod 0444, 'log.txt';<br></pre>
+<br>
+不過也有比較具有彈性的用法，例如你可以這樣使用：<br>
+<br>
+<pre><br><br>$mode = 0644;<br>chmod $mode, 'log.txt';<br></pre>
+<br>
+有些部份通常會讓你搞錯，因此你必須特別注意。如果你剛剛把$mode這個變數寫成下面的形式，那麼可能執行之後，可能會發生一些讓你意想不到的狀況。<br>
+<br>
+<pre><br><br>$mode = "0644";<br>chmod $mode, 'log.txt';<br></pre>
+<br>
+我們直接來看看實際的狀況吧！它的權限目前是0444。如果我們想要把它利用剛剛的權限來修改它，那麼會發生甚麼事呢？<br>
+<br>
+<pre><br><br>Inappropriate file type or format at ch3.pl line 6.<br></pre>
+<br>
+Perl毫不留情的給了我們一個錯誤訊息，告訴我們這樣指定檔案權限是不被允許的。很多人可能已經一頭霧水了，我們加了引號之後到底有甚麼差別呢？你還記得我們剛剛指定權限的作法嗎？<br>
+<br>
+<pre><br><br>$mode = 0644;<br></pre>
+<br>
+其實當你在使用這樣的純量賦值時，Perl會把你所指定的數字設定為八進位。可是當你幫它加上引號之後，也就是使用了$mode =
+"0644"後，它就變為一個字串了。可是chmod所需要的可不是字串，而是一個八進位的數字，所以如果你使用了引號來定義權限的值，別忘了把他轉為八
+進位制，所以我們可以改寫成這樣：<br>
+<br>
+<pre><br><br>$mode = '0644'; chmod oct($mode), 'log.txt';<br></pre>
+<br>
+當然，最省力還是前一種的方式，不過既然方法不只一種，使用者可以選擇自己最容易接受的方式。至於直接使用八進位的變數定義，應該是最被推薦的使用方式。不需要繁雜的轉換手續，也減少打字跟錯誤的機會。<br>
+<br>
+chown：修改檔案或是資料夾的擁有者也是你在管理Unix系統會遇到的狀況。其中這包括了使用者id(uid)跟群組id(gid)，使用的方式則是將使用者id跟群組id利用串列的方式來描述，配合上想要修改的檔案，所以指令的形式應該是：<br>
+<br>
+<pre><br><br>chown LIST;<br></pre>
+<br>
+用實際的例子來看，我們則可以寫成這樣：<br>
+<br>
+<pre><br><br>chown $uid, $gid, 'log.txt';<br></pre>
+<br>
+至於後面的檔案，則可以利用串列的方式表示，或直接以陣列方式。也就是說，你當然可以用這樣的方式來表達chown的形式：<br>
+<br>
+<pre><br><br>chown $uid, $gid, @array;<br></pre>
+<br>
+直接使用陣列確實是有相當的好處，我們可以利用樣式比對找出我們要的所有檔案，然後一次進行相關的修改。例如在系統的使用上，我們常常使用星號(*)作為萬用符號，比如你可以利用這樣的方式找出所有Perl的檔案：<br>
+<br>
+<pre><br><br>ls *.pl<br></pre>
+<br>
+而在Perl中，也有相關的用法，也就是glob。因為這個功能非常重要，所以我們接下來就來看看glob的用法。<br>
+<br>
+glob：他的語法其實相當簡單，也就是利用glob接上一個樣式，作為比對的標準。所以你可能會這麼使用：<br>
+<br>
+<pre><br><br>@filelist = glob "*.pl";<br></pre>
+<br>
+這樣的方式就跟你在系統下尋找符合某些條件的檔案用法一樣，所以你可以把利用glob所傳回來的檔案串列放入一個陣列之中。然後再針對這個陣列進行
+chown或是chmod相關的操作。也許你會考慮，這樣的作法跟你在shell底下的運作有甚麼差別嗎？其實很多時候，Perl可以利用這些方式把你日
+常必須重複進行的工作處理掉。<br>
+不過其實有時候你也許會看到某種寫法，就像這樣：<br>
+<br>
+<pre><br><br>@filelist = &lt;*.pl&gt;;<br></pre>
+<br>
+這樣得出的結果其實跟你使用glob有著異曲同工之妙，也就是取得目前目錄下的檔案，並且依據你所描述的樣式傳回你需要的檔案。因此你可以輕易的取得你想要的檔案，例如你想要印出目錄下的所有附屬檔名是txt的檔案，那麼你只需要這麼作：<br>
+<br>
+<pre><br><br>for $file (&lt;*.txt&gt;) {<br>    open FH, $file;<br>    print $_ while (<fh>);<br>}<br></fh></pre>
+<br>
+看出這其中有一些奧妙了嗎？我們利用角符號代替了glob的工作，可是同時角符號也被我們拿來作為讀取檔案內容的運算。確實是如此，那麼Perl會如何分
+辨其中的差別呢？其實由於檔案代號必須符合Perl的命名原則，因此Perl可以藉此判斷你目前的語境下是裡是用角括號來處理檔案代號或是進行glob的
+處理。當然，其中會有一些例外，比如你用這樣的方式來表達檔案代號：<br>
+<br>
+<pre><br><br>open FH, $file;<br>$filehandle = "FH";<br>print $_ while (&lt;$filehandle&gt;);<br></pre>
+<br>
+這時候角括號裡面放的其實是一個Perl的純量變數，不過這個純量變數卻是被指定到另外一個檔案代號，所以Perl還是會以對待檔案代號的方式來對待它。這應該一點都不讓人意外，不過你現在應該可以應付大多數的狀況了。<br>
+<br>
+link：你有時候會需要把檔案建立起鏈結，在系統底下，你可以直接使用"ln"這個指令來達成你需要的目的。而透過Perl，則可以利用link來達到一樣的工作。他的語法就像這樣：<br>
+<br>
+<pre><br><br>my $res = link "/home/foo", "/home/bar";<br></pre>
+<br>
+這樣的意思就是把"/home/foo"這個檔案連結到"/home/bar"，或者你可以說"/home/bar"是"/home/foo"的一個連
+結。至於link這個指令則會有回傳值，如果連結成功，則回傳值為真值，相反的，如果連結失敗，則會傳回偽值。我們來試試這個例子：<br>
+<br>
+<pre><br><br>#!/usr/local/bin/perl<br><br>use strict;<br><br>my $ret = link "log.txt", "log.bak";<br>open FH, "log.bak" or die $! if ($ret);<br>print $_ while (<fh>);<br></fh></pre>
+<br>
+執行之後，我們就可以看到資料夾中多了一個叫做"log.bak"的檔案，不過如果你需要真正了解他的運作，我們還是建議你去看看關於Unix下關於檔案
+及資料夾的解釋，其中inode這個觀念可以幫助你確實了解這樣的連結所產生的意義。不過在這裡，我們就暫且先不深入的探討Unix下的相關部份。<br>
+<br>
+mkdir：接下來，我們應該來告訴大家，該怎麼開啟自己的一個資料夾。這個指令跟你在Unix底下的使用非常接近，你只需要使用這樣的方式就可以了：<br>
+<br>
+<pre><br><br>mkdir PATH;<br></pre>
+<br>
+這看起來跟你在命令列下的用法一模一樣，而且就是這麼簡單。所以你幾乎不需要學習新的東西就可以很輕鬆的在Perl底下新增一個資料夾。另外，你還可以透
+過umask來指定這個新資料夾的權限。而用法也是跟剛剛類似，唯一的差別只是把你希望指定的umask放在敘述的最後。所以看起來應該就像這樣：<br>
+<br>
+<pre><br><br>mkdir PATH, umask;<br></pre>
+<br>
+所以你可以把新增加的這個資料夾指定某個特殊的權限，例如你希望開一個所有人都可以任意存取的資料夾，那麼就可以這樣寫：<br>
+<br>
+<pre><br><br>mkdir foo, 0777;<br></pre>
+<br>
+rename：接下來我們來看看如何使用Perl來幫你的檔案改名字，其實當你開始利用Perl來對檔案進行操作時，修改檔名是非常有用的一項工具。我們可以先來看看一個實際的範例：<br>
+<br>
+<pre><br><br>my $file = "messages.log";<br>if (-e $file) {<br>   rename $file, "$file.old";<br>}<br>open FH, "&gt;$file";<br>print FH, "接下來就可以寫入資料";<br></pre>
+<br>
+在實際運用時，如果我們可以適時的搭配檔案的測試運算，那就可以產生出很不錯的效果。就這個例子，我們先利用"-e"來判斷檔案是否存在。如果檔案存在，我們就把檔案更名，也就是再檔案結尾加上".old"，在這裡，我們就看到了rename 的用法，也就是：<br>
+<br>
+<pre><br><br>rename $oldfile, $newfile;<br></pre>
+<br>
+當我們正確的把檔案改了名字之後，就可以安心的把新的資料寫入檔案了，你應該注意到了，我悶在這裡因為是使用了大於(&gt;)符號來進行開啟檔案代號的動作，所以如果之前沒有先把檔案更名，那麼舊有的資料就會被取代了。<br>
+<br>
+rmdir：就像你在作業系統下的作法一樣，你可以利用rmdir來刪除一個資料夾。不過也跟你在終端機前使用rmdir一樣，如果資料夾裡面還有存在其
+他檔案，rmdir就會產生失敗，而且會傳回偽值，很顯然，這是相對於刪除成功所傳回的真值。所以如果你是Unix系統的慣用者，也許你應該非常熟悉這個
+函式，你只需要這麼指定：<br>
+<br>
+<pre><br><br>rmdir FILENAME;<br></pre>
+<br>
+stat：其實如果你想要更靈活的使用我們介紹的這些函式來對檔案系統進行控制時，你應該要先了解stat這個重要的函式。為甚麼stat這個函式這麼重要，也許我們來看看下面的範例就能夠很快的了解了：<br>
+<br>
+<pre><br><br>my @ret = stat "log.txt";<br>print "$_\n" for (@ret);<br><br>於是我們試著執行這個程式，會看到這樣的結果：<br><br>234881034&nbsp;&nbsp;	# 裝置編號<br>1183005&nbsp;&nbsp;		# inode 編號<br>33060&nbsp;&nbsp;		# 檔案模式(類型及權限)<br>1&nbsp;&nbsp;		# 檔案的連結數目<br>501&nbsp;&nbsp;		# uid<br>501&nbsp;&nbsp;		# gid<br>0&nbsp;&nbsp;		# 裝置辨識<br>17&nbsp;&nbsp;		# 檔案大小<br>1078894964&nbsp;&nbsp;	# 最後存取時間<br>1078894638&nbsp;&nbsp;	# 最後修改時間<br>1078939576&nbsp;&nbsp;	# inode 修改的時間<br>4096&nbsp;&nbsp;		# 檔案存取時的區塊大小<br>8&nbsp;&nbsp;		# 區塊的數目<br></pre>
+<br>
+毫無疑問，我們確實可以利用stat個函式得到相當多的檔案相關資訊，因此如果你想要對檔案進行操作之前，也許可以先利用stat來得到相關的訊息。<br>
+我們剛剛利用一個陣列來儲存stat的回傳值，這樣也許不容易分辨各個值所代表的意義，所以你當然可以改用這樣的方式來取得相關的資料：<br>
+<br>
+<pre><br><br>($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat("log.txt");<br></pre>
+<br>
+另外，有些時候你也許會看到有人使用lstat來取得檔案的相關資訊，不過基本上這兩個函式所進行的工作應該是一樣的，所以除非你想要多打一些字，否則還是可以直接使用stat就好了。<br>
+<br>
+unlink：就像你使用的rm一樣，unlink也可以讓你刪除系統中的某些檔案。而且unlink的用法十分簡單，基本上就是傳進你想要刪除的檔案串
+列。意思就是說，如果你搭配著glob或是角括號(&lt;&gt;)使用，那麼你就可以過濾出某些特殊的檔案，並且加以刪除。相信大家經過上面幾個函式
+的訓練，應該可以很輕易的使用這個函式，就像這樣：<br>
+<br>
+<pre><br><br>my @files = &lt;*.txt&gt;;<br>unlink @files or die $!;<br></pre>
+<br>
+當然，別忘了要刪除檔案千萬要非常的小心，可別因為一時大意就把資料全部的毀了(註二)。當然，我們剛剛說了，在unlink後面所連接的參數是一個串列，所以你可以使用任何表達串列的方式，其中當然包括一一列出你所要刪除的檔案。所以如果有一個程式寫的像這樣：<br>
+<br>
+<pre><br><br>#!/usr/bin/perl<br>use strict;<br>unlink @_ or die $!;<br></pre>
+<br>
+那麼他看起來像不像陽春的rm指令呢？其實有時候玩玩也是還滿有趣的。<br>
+<br>
+utime：Perl另外也提供了一個讓你修改檔案時間的函式，也就是utime。utime的用法也是傳入一個串列，所以基本上會是：<br>
+<br>
+<pre><br><br>utime LIST;<br></pre>
+<br>
+不過不太一樣的地方在於你必須指定你所要修改的時間參數，所以其實比較常看到的用法也許會比較接近這樣的形式：<br>
+<br>
+<pre><br><br>utime $atime, $mtime, @files;<br></pre>
+<br>
+其中第一個參數就是檔案存取時間，第二個參數就是檔案最後一次修改的時間。<br>
+<br>
+11.3 localtime<br>
+<br>
+這個函式看起來跟檔案操作並沒有甚麼直接的關係，不過我們剛剛看到了一些不太友善的數字，也就是對於檔案相關時間的描述。例如我們利用stat傳回來的日期都是這樣子的表示方式：<br>
+<br>
+<pre><br><br>1078894964&nbsp;&nbsp;	# 最後存取時間<br>1078894638&nbsp;&nbsp;	# 最後修改時間<br>1078939576&nbsp;&nbsp;	# inode 修改的時間<br></pre>
+<br>
+這時候，我們就可以使用localtime來轉換成一般人可以接受而且使用的資訊。localtime會傳回一個串列，分別代表用來表示時間的各個欄位，所以你可以利用這樣的方式取得你需要的欄位：<br>
+<br>
+<pre><br><br>@realtime = localtime($timestamp);<br><br>只是如果你使用這樣的方式，恐怕自己也很難很快的使用，所以也許可以換一個方式：<br><br>($sec, $min, $hour, $day, $mon, $year, $wday, $yday, $isdat) = <br>localtime ($timestamp);<br></pre>
+<br>
+所以如果你想要取得檔案最後修改的正確時間，你可以利用下面的方式達成：<br>
+<br>
+<pre><br><br>my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat("log.txt");<br>($sec, $min, $hour, $day, $mon, $year, $wday, $yday, $isdat) = <br>localtime ($mtime);<br></pre>
+<br>
+呼，確實有一點冗長。不過確實可以讓你正確的取得大部份的資訊。<br>
+<br>
+習題：<br>
+1. 列出目前所在位置的所有檔案/資料夾名稱。<br>
+2. 承一，只列出資料夾名稱。<br>
+3. 利用Perl，把目錄下所有附檔名為.pl的檔案修改權限為可執行。<br>
+<br>
+註一：當然所謂的接近，指的是和Unix系統的接近。<br>
+註二：上面的程式就讓本書內容差點付之一炬，幸好作者使用了版本控制系統來進行備份。 
+        </div>
+
+    </div>
+</div>
+                    </div>
+                </div>
+
+<!-- <div id="gamma">
+   <div id="gamma-inner" class="pkg">
+       Gamma Content
+   </div>
+</div> -->
+
+
+            </div>
+        </div>
+        <!-- <div id="footer">
+            <div id="footer-inner" class="pkg">
+                Footer Content
+            </div>
+        </div> -->
+        </div>
+    </div>
+</body>
+</html>
+

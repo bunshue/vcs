@@ -1,0 +1,336 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 2-3 C Shell的運用面 </title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-2.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1">
+            <p><span class="akh1">2-3 C Shell的運用面</span> 
+            </p><blockquote> 
+              <p class="akb1">對於一個使用 C shell 作為人機使用界面的 UNIX 作業系統使用者而言，C shell 
+                到底提供了你什麼樣的功能呢？讓我們分別從“指令行模式下”、“製定使用環境”與“程式設計”這三個方面來為你說明。希望您能藉此先行建立與瞭解 
+                C Shell 應用面的概念。</p>
+            </blockquote>
+            <p class="akh2">2-3-1 指令行模式下</p>
+            <blockquote> 
+              <p class="akb1">我相信這應該是使用者最為熟悉的運用層面。所以我使用幾個關鍵性的功能名詞來做為區隔為您分項扼要的說明：</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">輸入/輸出重導向（I/O redirerction）：</font><br>
+                提供一套規則讓使用者可將執行所需的輸入或執行所得的輸出做重導向的組合運用。如重導向輸出為檔案，或將檔案重導向作為指令的輸入等。這個項目可以說相當基礎，是有必要全盤瞭解的。</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">特殊符號（Regular Expressions）：</font><br>
+                C Shell 定義了一套關於特殊符號的功能定義叫做 Regular Expressions。一般所提到的 wildcard 
+                以及各項的括符引號、斜線、倒斜線等定義及使用的法則均包含在裡面。這一套符號規則常式要說簡單嗎？可算是簡單，只要理解的話，不管在指令的使用或者是 
+                sed、awk 的應用都可事半功倍。（不過老實說，一段時日沒接觸的我看到了，回頭看以前自己寫的符號堆，有時也頗具催眠作用）</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">管道（Pipes）：</font><br>
+                的功能則是讓你輕易地將一個指令的輸出結果，做為另一個指令的輸入。個人建議您善用這項功能。</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">過去指令使用記錄（history）：</font><br>
+                可以迅速地將已使用過的指令再次執行，或者是做部份引數上的修改並重新加以執行。看似簡單的理念，不過可以做到相當複雜的變化，可以說是一項非常好用但可以使人懶到極點的好功能。</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">別名（aliases）：</font><br>
+                提供使用者自行設定簡單的字串來取代複雜的指令選項或多個指令的連續組合。這一項使用者絕對不可不會。</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">工作控制（job control）：</font><br>
+                在單一的終端機螢幕模式下，掌控具分時多工特性的 UNIX 作業系統。此功能可能在現今 X-Windows 介面下變的比較不重要了，不過還是建議您多少看一下，因為事實上，這項功能還是相當好用的。</p>
+              <p>&nbsp;</p>
+              <p class="akb1"><font color="#990000">內建指令（Build-in command）：</font><br>
+                在這個模式下，C Shell 負責解譯與執行 UNIX 指令，同時也提供一些常用的內建指令提昇系統的使用效率。這些所謂的內建功能我認為多少還是要瞭解一點，雖然你有可能常使用而不自覺。</p>
+            </blockquote>
+            <p class="akh2">2-3-2 製訂使用環境</p>
+            <blockquote> 
+              <p class="akb1">當一個使用者想要主動去瞭解如何制訂與如何改變使用環境時，便算是已經來到進階門檻之前了。</p>
+              <p class="akb1">以一個使用 C Shell 的使用者而言，簽入（login）UNIX 系統後，系統會幫你啟動一個 
+                C Shell 做為你的 login shell，此 login shell 將會常駐在記憶體中，一直到你簽出（logout）UNIX系統為止。</p>
+              <p class="akb1">C shell 定義了預設變數（predefined variables）及環境變數（environment 
+                variables）用來控制使用者的使用環境，設定的方式是在使用者簽入系統時由 login shell 讀取特殊的起始檔案（startup 
+                files）作為設定的依據，如果使用者沒有屬於自己的起始檔案，則 login shell 將會讀取系統的預設檔案來加以設定。</p>
+              <p>&nbsp;</p>
+              <p class="akb1">C
+shell 所定義的三個起始檔案分別是“.login”、 “.cshrc”、 “.logout”，這三個起始檔案的檔案格式是一般的文字檔，使用
+vi 便可編輯。在使用者 login 後 login shell
+會先讀取“.cshrc”然後再呼叫“.login”，依據這兩個起始檔案的內容制訂出使用者的使用環境（至於兩類變數應設定在那一個起始檔案中，稍後再
+做討論）；當使用者要 logout 時 login shell 則會讀取“.logout”並執行該特殊檔案的設定，然後才會退出系統。</p>
+              <p>&nbsp;</p>
+              <p class="akb1">使
+用者個人的啟始檔案必須放在自己的 home 目錄下，如果你用指令 ls
+看不到的話請不用驚訝，因為我們前面已經提過它們是特殊檔案，你必須使用指令 ls -a
+才會顯示出來。如果還看不到，這也用不著奇怪，這可能是因為你的系統管理者為你建立 account 時忘了幫你拷貝的緣故吧。如果您使用了 UNIX
+作業系統已有一段時日，到今天您才發覺到您根本沒有自己的 “.cshrc” 及 “.login”
+啟始檔案的話，你一定會質疑它們必須存在的必要性與重要性？因為過去你沒有這些檔案還不是用的好好的！事實上並非如此，因為當你個人的 home
+目錄下沒有這些啟始檔案時，shell 依舊是必須去讀取系統為你準備的原始的啟始檔案，所以說如果你沒有這些啟始檔案，你可以在 UNIX
+的檔案系統找到系統原始的啟始檔案，以 Sun OS 4.1.X 而言檔案的位於 /usr/lib 目錄內，檔案名稱是 Cshrc 及
+Login。你可以將它們拷貝一份到你的home目錄下作為參考，以便於你在學習中做為設定的範本。（在此說明，以後我們所討論的啟始檔案都將是以你的
+home 目錄下的必須有這些啟始檔案為前提。）</p>
+              <p>&nbsp;</p>
+              <p class="akb1">以下針對這三個檔案分為做功能上的區隔簡介（說明的部份僅只是建議，因為這三個檔案的使用具有相當大的彈性）。</p>
+              <p>&nbsp;</p>
+              <p class="akb2"><a name="cshrc"></a>“.cshrc”檔案</p>
+              <blockquote> 
+                <p class="akb1">對我個人而言，這是個令我印象深刻的特殊檔案，也就是曾經把菜鳥時代的我最喜歡亂設定，然後電腦就罷工的特殊檔案“.cshrc”（其意大概是為 
+                  C Shell resource control）。對login shell而言，這是第一個讀取的啟始檔案（啟始檔案的位置在使用者的home 
+                  dir.下）。使用者必須知道一點就是 login shell 產生 sub shell 時，sub shell 也會讀取“.cshrc”檔案，但 
+                  sub shell 不會再讀取“.login”，此運作法則請務必注意。</p>
+                <p>&nbsp;</p>
+                <p class="akb1">一
+般而言“.cshrc”使用者必要作改變的環境變數（environment variables），由於前面提到過 login shell 產生
+sub shell
+時也會讀取“.cshrc”，所以設定的變數是會遺傳的這點也請切記（所以在不確定的因素下，不建議自己作不必要的環境變數設定，以免後患無窮）。至於預
+設變數（predefined variables）的部份，牽涉到的大都是屬於 C shell
+本身所提供的操作功能，建議您視變數的特性作必要的設定（因為並非全部的變數都適合在“.cshrc”中設定的）。</p>
+                <p>&nbsp;</p>
+                <p class="akb1">設定上的實際例子我放在第四、五章中有相關內容時再作說明。</p>
+                <p>&nbsp;</p>
+              </blockquote>
+              <p class="akb2">“.login”檔案</p>
+              <blockquote> 
+                <p class="akb1">login 進入 UNIX 系統的方式大致說來可分為從 console login，remote 
+                  login 兩類。前者比較單純，也就是在主機簽入系統，所以螢幕、鍵盤等設定使用的是主機系統的周邊，一般而言都不會有問題。而後者是藉由網路或連線裝置從系統外簽入 
+                  UNIX 系統，譬如由另一個 UNIX 主機使用 rlogin 簽入系統；又譬如，從 MS Windows 的個人電腦使用 
+                  telnet 簽入系統，或者是從 VT220 的終端機遷入系統等等，由於使用的並非是主機的周邊，有時候必須針對這種情況先加以判斷，然後再加以設定特殊的周邊裝置參數，否則時常會發生如鍵盤或者編輯上（特別是使用 
+                  vi 指令時）的小問題。</p>
+                <p>&nbsp;</p>
+                <p class="akb1">適當的“.login”檔案設定可以應付上述的情況，設定的情況得視實際的狀況而定。</p>
+                <p>&nbsp;</p>
+              </blockquote>
+              <p class="akb2">“.logout”檔案</p>
+              <blockquote> 
+                <p class="akb1">這個特殊檔案是 C Shell 專有的，它的用途我想你應該猜的到，就是在你退出系統前才會執行的特殊檔案。也就是在你的 
+                  login shell 要終止之前，C shell會到你的 home 目錄之下去尋找這個特殊檔案，並依其內容的設定加以執行。由於在功能上屬於非並必要性，所以在一般的 
+                  UNIX 系統中，這個特殊檔案並不像“.cshrc”及“.login”在系統中的有預設檔案的存在。如果使用者個人需要的話，必須自己使用文字編輯工具作自己的設定。</p>
+                <p class="akb1">&nbsp;</p>
+                <p class="akb1">我個人認為 C shell 的這項功能非常適合來做一些暫存檔案的清除，或者是個人工作資料與記錄的整理及備份，或者是一些備忘錄資料的顯示等等。</p>
+                <p>&nbsp;</p>
+                <p class="akb1">對
+於 UNIX
+系統的起始檔案，最好能有系統的預設檔案，這部份應該是系統管理者的責任。使用者個人在有正確的認知情況下，可依據個人的需求再加以調整與設定，當然調整
+設定後的後果，正確的說使用者應自行負責。對於起始檔案，使用者應該要有自己設定的做修改與設定。如果一個 UNIX
+系統的管理者與使用者無法共同做到此點，便應該再自我提昇對系統的使用能力。</p>
+              </blockquote>
+            </blockquote>
+            <p class="akh2">2-3-3 程式設計</p>
+            <blockquote> 
+              <p class="akb1">C Shell 雖然是一個負責解譯及執行指令的使用者界面，但是它的功能卻不僅只限於此而已（事實上，在 
+                UNIX 系統中，三個 shell 均具有此特性，而這點特性，便是我喜歡 UNIX系統的主要原因）。 C Shell 提供在語法上類似於 
+                C Language 的流程控制（control flow），也正是 C Shell 得其名的主因。由於具有此項功能，在程式設計上對於一個學習過 
+                C Language 的使用者而言相當容易適應。同時 C Shell 的包容性上也比 Bourne Shell 及 Korn 
+                Shell 來得好。不過事實上，有些 UNIX 作業系統的專家相當反對使用 C shell 來撰寫程式，如 Tim O‘Reilly 
+                及 Jerry Peek 兩位 UNIX 的先進大師在其 UNIX 的偉大著作 UNIX POWER TOOLS 中，就以一個章節的篇幅來說明 
+                C Shell 在撰寫程式時會產生的限制及 bugs。（UNIX POWER TOOLS 第49章 “C Shell Programming 
+                ... NOT”）。原因事實上很簡單，就是不夠嚴謹，且有一些致命性的 bug 存在。原本我的寫作計畫中，想對此部份做比較深入的介紹，後來也受到此篇文章的影響，修改過不少 
+                script 範例，不過仍然無法擺脫其陰影。所以目前此部份正在重寫中。建議有心想要瞭解這部份的使用者，可以讀一讀 GAIL 
+                ANDERSON 與 PAUL ANDERSON 合著的『The UNIX C SHELL FIELD GUIDE』，我相信您絕對能有相當大的收穫。</p>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no2-2.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

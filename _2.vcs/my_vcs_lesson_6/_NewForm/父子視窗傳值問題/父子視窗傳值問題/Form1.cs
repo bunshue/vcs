@@ -23,7 +23,7 @@ namespace 父子視窗傳值問題
         {
             set { strValue = value; }
         }
-
+        Form2 childForm = new Form2();
         public Form1()
         {
             InitializeComponent();
@@ -31,10 +31,8 @@ namespace 父子視窗傳值問題
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 childForm = new Form2();
             childForm.Msg = "父告訴子一件事~~~~~~~";
             childForm.setValue();
-            childForm.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,6 +48,13 @@ namespace 父子視窗傳值問題
         {
             //Form2 childForm = new Form2();
             //childForm.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //childForm.ShowDialog();
+            childForm.Show();
+
         }
     }
 }

@@ -1,0 +1,630 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 3-5 history 的設定與運用 </title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-3.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1"><span class="akh1">3-5 history 的設定與運用</span> 
+            <blockquote> 
+              <p><span class="akb1">history 說起來可算是 C Shell 的重大功能之一。history 這個字如果以它的整體功能來說，或許我們可稱它為 
+                UNIX 的指令使用記錄。它負責記錄使用過的指令，供使用者“再利用”。這個“再利用”的動作可說是靈活多變，可運用的方面除了指令行外，連別名（aliases）、預設變數（Predefined 
+                Variables）的設定或 shell script 的程式設計等均可見到 history 的運用蹤跡。實在是一項使用者不能忽略的好功能。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akh2">3-5-1 製定 history 的使用環境</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">要能善用 history，首先得熟悉關於 history 使用環境的三個重要的預設變數。以下讓我們來為你一一地介紹：</span></p>
+              <blockquote> 
+                <p> <b></b><u><span class="akb2">$history 變數</span></u></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">變數 history 是使用 history 功能之前必須先設定的。通常都在 C 
+                  Shell 的啟始檔案“.cshrc”中設定此變數，當然也可用手動的方式來設定或更改。設定的語法如下：</span></p>
+                <blockquote> 
+                  <p><span class="akb1">set history = n （n是數字且必須是整數）</span></p>
+                </blockquote>
+                <p><span class="akb1">如果你把 n 設定為 30，則 C Shell 將會隨時為你保留最後所下的 30 
+                  道指令，供你呼叫顯示到螢幕上，這便是 history list，它可供你運用 history 的其它功能。如果你想查看此變數的設定值，可使用指令</span></p>
+                <blockquote> 
+                  <p><span class="akb1">echo $history</span></p>
+                </blockquote>
+                <p><span class="akb1">來顯示 history 設定值。要重新設定可修改“.cshrc”檔案內的設定，再以指令 
+                  source .cshrc 便能更新設定值。也可直接下指令 set history = n 來更改。但後者設定的設定值會隨著該 
+                  Shell 的終結而消失，此點請注意。</span></p>
+                <p><b></b></p>
+                <p><u><span class="akb2">$savehist 變數</span></u></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">設定這個變數的作用是在 Shell 終結後，將最後某幾道指令儲存到使用者的 home 
+                  目錄下的“.history”特殊檔案中，以供你下次 login 或另一個還在工作的 shell 來運用，上一個 shell 
+                  所記錄下來的最後幾道指令。如你設定為下：</span></p>
+                <blockquote> 
+                  <p><span class="akb1">set savehist = 50</span></p>
+                </blockquote>
+                <p><span class="akb1">則每一個 shell 的終結，都會對“~/.history”檔案做資料寫入、更新的動作。請注意！再重覆一遍，是每一個 
+                  shell 的終結都會更新 home 目錄下的“.history”檔案。所以當你下次 login 時所見到的 history 
+                  list，便是“.history”檔案的內容。</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">如果你常在 X Windows 或者是 Open Windows 等 GUI Windows 
+                  界面下工作的話，相信你一定會開好幾個 Windows 同時工作。在這種工作環境下如果你不去加以控制要儲存那一個 shell 
+                  的話，建議你不要使用它，或許會比較好些。</span></p>
+                <p><b></b></p>
+                <p><u><span class="akb2">$histchars 變數</span></u></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">這個變數便是用來改變設定 history 的運用符號。用來解決符號的使用習慣問題。history 
+                  的專屬符號有兩個，第一個使用的符號“!”第二個符號“^”。如果你如下設定：</span></p>
+                <blockquote> 
+                  <p><span class="akb1">set histchars = "#/"</span></p>
+                </blockquote>
+                <p><span class="akb1">則符號“#”取代符號“!”；而符號“/”取代符號“^”。老實說來 UNIX系統對特殊符號的運用可說到了一“符”多“棲”的田地了，小心改出毛病來。建議你謹慎使用（最好是不用）。</span></p>
+              </blockquote>
+              <p><span class="akh2">3-5-2 history 的運用說明</span></p>
+              <blockquote> 
+                <p><b></b><u><span class="akb2">3-5-2-1 設定 history 的數量與顯示的關係</span></u></p>
+                <p><span class="akb1">在一般使用的情況下，history 的設定數量大約都在 20 ~ 50 之間。這是因為設定太大了會佔用系統資源，用不上的話實在不划算。適中夠用就是好的設定值。你也可就螢幕顯示的列數來做為設定值的參考。免得列出history 
+                  時超過螢幕所能容納的行數。要在螢幕上列出 history 相當簡單，鍵入 history 便可。如果你嫌“history”字太長不好記，設個別名“alias 
+                  h history”，相信也不會有人罵你懶！</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">在指令行模式下鍵入 history 可顯示出 history list。當然你也可以在指令 
+                  history 後加上一個數字，用來控制顯示 history list 的數量。如下：</span></p>
+                <blockquote> 
+                  <p><span class="akb2">25 % history 5<br>
+                    21 ls<br>
+                    22 cd subdir1<br>
+                    23 ls<br>
+                    24 cl<br>
+                    25 history 5</span></p>
+                </blockquote>
+                <p><span class="akb1">在 BSD 版本的 UNIX 系統中，C Shell 會提供 history 一項比較特殊的選項，就是“-r”選項。它的作用是將 
+                  hisroty list 顯示的事件次序倒過來。如下所示：</span></p>
+                <blockquote> 
+                  <p><span class="akb2">26 % history -r 5<br>
+                    26 history -r 5<br>
+                    25 history 5<br>
+                    24 cl<br>
+                    23 ls<br>
+                    22 cd subdir1<br>
+                    27 % </span></p>
+                </blockquote>
+                <p><span class="akb1">較長的設定值在顯示上會有超出螢幕行數的情況產生，這個問題很好解決，提供幾種別名設定供你參考使用：</span></p>
+                <blockquote> 
+                  <p><span class="akb2">alias hup 'history | head -15' （前15道history）<br>
+                    alias hdn 'history | tail -15' （後15道history）<br>
+                    alias hm 'history | more' （一頁一頁看）</span></p>
+                </blockquote>
+                <p><b></b><u><span class="akb2">3-5-2-2 history 對過去指令的處理方式說明</span></u></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">C Shell 的 history 功能，對於使用者所執行過的每個指令，基本上都把它當成一個“事件（event）”來處理。而每個事件都以數字來編號代表之。讓我們來在設定預設變數 
+                  $prompt 中加入 history 功能來說明，這種事件的處理情況。在指令行中鍵入如下：</span></p>
+                <blockquote> 
+                  <p><span class="akb2">% set prompt = '\! % '</span></p>
+                </blockquote>
+                <p><span class="akb1">這樣你便可在提詞（prompt）中清楚地看到 history 對“事件”的編號情況。如以下實際例子：</span></p>
+                <blockquote> 
+                  <p><span class="akb2">% set prompt = '\! % '<br>
+                    13 % history<br>
+                    4 cd test<br>
+                    5 \rm -r test<br>
+                    6 tar cvf /dev/rst8 backup &amp;<br>
+                    7 ls<br>
+                    8 vi backup.task<br>
+                    9 set history = 50<br>
+                    10 ps axu | grep cron<br>
+                    11 cd<br>
+                    12 set prompt = '! % '<br>
+                    13 history<br>
+                    14 % echo $history<br>
+                    10</span></p>
+                </blockquote>
+                <p><span class="akb1">從以上實例中看到 history 對過去指令的編號情況。通常 history 對指令的編號由 
+                  1 開始編起，每次自動加 1。但如果你設定預設變數 $savehist，則由此變數的數字加 1 算起。此點請注意。</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">到此相信你對 history 的運作應該有一個概略的瞭解了吧！接下來便開始來運用 
+                  history 的功能，來“便利”我們的指令操作。如果你能善用將可大大改變你的使用效率。它至少可以降低你因為打多了鍵盤而得到職業病的機率。</span></p>
+                <p><b></b></p>
+                <p><u><span class="akb2">3-5-2-3 history 的符號說明與基本運用</span></u></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">我們已經知道 history 對指令是以事件來處理，且加以編號。要如何簡單地“再利用”這些過去的“事件”呢？history 
+                  定義了一群符號來供我們變化使用。這些符號都是組合式的，基礎的第一個符號是“!”。此符號用來啟動 history 功能，但緊接在符號後的不能是下列這些符號：TAB 
+                  鍵、空白鍵、換行、等號或“(”及“.”等。接上這些符號將會產生錯誤。</span></p>
+                <p><span class="akb1">history 在指令行運作下的常用到的符號運用組合，我們以功能分類來加以說明：</span></p>
+                <p>&nbsp;</p>
+                <p><u><span class="akb1">1. 指定事件執行</span></u></p>
+                <blockquote> 
+                  <p><span class="akb1">符號“!!”</span></p>
+                  <p><span class="akb1">“!!”執行上一個指令。在運用上除了執行上個指令外，並可在符號後在加入與指令語法不相沖的字元來修飾上個指令。如下例：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% ls<br>
+                    akira.sch passwd</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">以上是指令 ls 的執行情況，當你覺得所顯示的訊息不足，想要加上選項-l時，你可在運用 
+                    history 時再加上該選項，如下用“!! -l”便相當於下指令“ls -l”：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% !! -l<br>
+                    total 2<br>
+                    1 -rw-r--r-- 1 akira 184 Sep 16 11:32 akira.sch<br>
+                    1 -rw-r--r-- 1 akira 65 Sep 16 11:31 passwd</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">符號“!n”</span></p>
+                  <p><span class="akb1">“!n”執行第 n 個事件。注意到這第 n 個事件一定得還在 history 
+                    list 內才能順利執行。</span></p>
+                  <p><span class="akb1">假設我們的 history 變數設定值為 10，當我們執行到第 22 個事件時，想要用符號“!n”來執行第 
+                    5 個事件，會產生什麼情況呢？請看下面：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">21 % echo $history<br>
+                    10<br>
+                    22 % !5<br>
+                    5: Event not found.<br>
+                    22 %</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">“5: Event not found.”這個錯誤訊息便明顯的告訴了我們，指令所要執行的 
+                    history 事件以不在 history list 的範圍之內。如果你常會有這種情況發生，可以考慮將 history 
+                    變數的設定值加大到適當的數字。另外請注意到在事件 22 執行指令“!5”時，因產生“5: Event not found.”的錯誤，history 
+                    對此錯誤的指令並不記錄下來，所以事件的編號停留“22”。如果你所指定的事件在 history list 的範圍內的話，指令便能順利的執行過去的事件。如下：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">22 % !17<br>
+                    ls<br>
+                    total 4<br>
+                    2 cshrc* 1 file 1 passwd</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">符號“!-n”</span></p>
+                  <p><span class="akb1">“!-n” 執行在 history list 中倒數第 n 個事件。</span></p>
+                  <p><span class="akb1">我們用下面的例子說明它的使用情況：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">24 % h<br>
+                    15 ps axu | grep cron<br>
+                    16 pwd<br>
+                    17 ls<br>
+                    18 vi passwd<br>
+                    19 h<br>
+                    20 cl<br>
+                    21 echo $history<br>
+                    22 vi ~/.cshrc<br>
+                    23 ls<br>
+                    24 h<br>
+                    25 % !-4 <br>
+                    echo $history<br>
+                    10<br>
+                    26 %</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">看到沒有事件 25 的指令“!-4”所執行的是 history list 的事件 
+                    21，剛好是倒數第四個。</span></p>
+                </blockquote>
+                <p><u><span class="akb1">2. 搜尋指定執行</span></u></p>
+                <blockquote> 
+                  <p><span class="akb1">“!string” 搜尋以某字串 string 為開頭的過去指令並加以執行。</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">“!?string?” 搜尋過去指令行中有某字串 ?string? 並加以執行。</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">以上兩種使用方式均是在 history list 的 event 中，搜尋 
+                    event 的開頭或 event 中間有指定的字串，來加以執行。但均是執行第一個符合條件的 event。搜尋時以由 
+                    event 數字大到小。如下例所示：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">34 % h<br>
+                    25 h<br>
+                    26 cd<br>
+                    27 tar cvf /dev/rst8 akbin &amp;<br>
+                    28 ps<br>
+                    29 vi ~/.cshrc<br>
+                    30 tar tvf /dev/rst8<br>
+                    31 cd test<br>
+                    32 ls<br>
+                    33 vi passwd<br>
+                    34 h<br>
+                    35 % !v</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">在上例中最後指令“!v”所執行的是第33個“vi passwd”，而不會是第27個“vi 
+                    ~/.cshrc”。如果要執行第 27 個 event，你可用“!?cshrc”來執行，當然你也可直接用“!27”來執行，但會使用搜尋方式，自然是在不記的第幾個 
+                    event 的情況下才會採用的，不是嗎？又如果你設定的 $history 為 100 個，要用眼睛在 history 
+                    list 中找尋，倒不如“奴役”電腦還來得好。是嗎？</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">接下來介紹一個比較特殊的符號“!{...}”，用來應付一種比較特殊的情況。譬如你想在重執行以下這個指令：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% cat /etc/hosts &gt; ~/hosts</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">並且要緊接著在指令後加入一些字串。如將重導向的“~/hosts”這個檔案名稱改為“~/hosts.bak”， 
+                    如果你下指令如下：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% !cat.bak<br>
+                    cat.bak: Event not found.</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">這種錯誤是因為搜尋的字串與添加的字串沒有區隔開來的結果。解決的方法是使用大括號“{ 
+                    }”將搜尋的字串括起來，再僅接著添加的字串便可。如下所示：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% !{cat}.bak<br>
+                    cat /etc/passwd &gt; ~/hosts.bak</span></p>
+                </blockquote>
+                <p><u><span class="akb1">3. 修改執行過去指令</span></u></p>
+                <blockquote> 
+                  <p><span class="akb1">下錯指令、打錯字的情況是難免會發生的，或大同小異的指令也偶而會連續使用，像此類的情況運用修改的方式相當適當。（由其指令又臭又長的時候，你使用時一定會感激造令者的偉大）先來看一個例子：</span></p>
+                  <p><span class="akb1">% rsh hosta -l user "screendump -x 
+                    20 -y 20 -X 300 -Y 300 scrfileA"</span></p>
+                  <p><span class="akb1">如果是像這種指令打錯了一個字，比方說指令 screendump 少打了一個字母 
+                    e，變成 screndump，天呀！主管在旁邊看耶！！重打一次？如果再打錯保證你年終獎金少一半！！！這可怎麼辦？？不用急，露一手什麼叫“知錯能改”，如下：</span></p>
+                  <p><span class="akb1">語法 ^old^new^ 修改上個指令的old為new後執行。</span></p>
+                  <p><span class="akb1">實際指令 % ^re^ree^ </span></p>
+                  <p><span class="akb1">就這樣把你漏打的字母補了進去。簡單幾個字就搞定，方便吧！不過這種方式的修改是有限制的。它只能還是以上面那個長的不得了的指令中更改一個地方，而且還得是上一個“事件”才行。如果不是上一道指令，要做類似的修改運用，可用以下的語法均可做到：</span></p>
+                  <p><span class="akb1">!n:s/old/new/ 修改第 n 個事件的 old 為 new 後執行。</span></p>
+                  <p><span class="akb1">!string:s/old/new/ 搜尋以 string 為開頭的事件並修改 
+                    old 為 new 後執行之。</span></p>
+                  <p><span class="akb1">到目前所介紹的三種方式，均有個共通性，就是只能更改一組字串。而且字串內不可有空白鍵。如果有空白鍵會造成修改錯誤。如果要同時修改兩個以上相同的字串，對後面兩種語法中再加一個“g”便可，如下：</span></p>
+                  <p><span class="akb1">!n:gs/old/new/ 修改第 n 個事件中所有的 old 為 new 
+                    後執行。</span></p>
+                  <p><span class="akb1">!string:gs/old/new/ 搜尋以 string 為開頭的事件並修改所有的 
+                    old 為 new 後執行之。</span></p>
+                  <p><span class="akb1">用這種方法便可輕易地將那個臭長指令中的 20，一起更改為想要的數字了。如下示：</span></p>
+                  <p><span class="akb2">% !rsh:gs/20/50/</span></p>
+                  <p><span class="akb1">這時我們所得到的將相當於下：</span></p>
+                  <p><span class="akb2">% rsh hosta -l user "screendump -x 
+                    50 -y 50 -X 300 -Y 300 scrfileA"</span></p>
+                  <p><span class="akb1">自己找例子試一試吧！它們真的是太好用了。</span></p>
+                </blockquote>
+                <p><b></b><u><span class="akb2">3-5-2-4 history 對於事件的引數（argument）運用</span></u></p>
+                <blockquote> 
+                  <p><u><span class="akb1">1. 引數的區分方式</span></u></p>
+                  <p><span class="akb1">在前面我們曾經提到 history 對指令是以編號的事件來處理，但你除了可再利用這些事件外，同時你也可再利用事件中的每一個引數。先讓我們來看一個底下這個例子：</span></p>
+                  <p><span class="akb1">事
+件的引數由 0 開始編起，所以 0
+便代表事件開頭的指令。接下來是以空白鍵來隔開的字串或以特殊符號依序編號。注意到引數的編號，並非全以空白鍵隔開才算，因為只要有特殊符號，不管它與前
+後有無空白鍵都得算是一個單獨的引數。（這些特殊符號有 |,&lt;,&lt;&lt;,&gt;,&gt;&gt;,&amp;
+等）history
+對引數安排了多種方式來代表引數的位置，如數字（0，1，2，...）或符號（“^”“$”“*”“x*”“x-”）。對引數的運用可單一的或者是一個範
+圍（x-y）均可。</span></p>
+                  <p><span class="akb1">以下我們以表列來說明引數的符號使用方式：</span></p>
+                </blockquote>
+              </blockquote>
+            </blockquote>
+            <div align="center"> 
+              <center>
+                <table vspace="9" width="450" border="1" cellpadding="4" cellspacing="0">
+                  <tbody><tr> 
+                    <td valign="top" width="60" align="right"> 
+                      <p align="center"><span class="akb2">符號</span> 
+                    </p></td>
+                    <td valign="top"> 
+                      <p align="left"><span class="akb2">說 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                        明</span> 
+                    </p></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!!:n</span></td>
+                    <td valign="top"><span class="akb2">使用上個事件的第 n 個引數，如“!!:3”</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!!:x-y</span></td>
+                    <td valign="top"><span class="akb2">使用上個事件的第 x 個引數到第 y 個引數，如“!!:0-4”</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!n:^</span></td>
+                    <td valign="top"><span class="akb2">使用第 n 個事件的第 1 個引數，符號“^”代表第一個引數</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!^</span></td>
+                    <td valign="top"><span class="akb2">使用上個事件的第 1 個引數</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!$</span></td>
+                    <td valign="top"><span class="akb2">使用上個事件的最後一個引數，符號“$”代表第最後個引數</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!*</span></td>
+                    <td valign="top"><span class="akb2">使用上個事件的第 1 個引數到最後一個引數</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!!:x*</span></td>
+                    <td valign="top"><span class="akb2">使用上個事件的第 x 個引數到最後一個引數，（相當於“!!:x-$”）如“!!:2*”即代表使用第 
+                      2 個之後的所有引數</span></td>
+                  </tr>
+                  <tr> 
+                    <td valign="top" width="60" align="right"><span class="akb2">!!:x-</span></td>
+                    <td valign="top"><span class="akb2">與上相似不同處為不包含最後的引數，如“!!:2-”即代表使用第 
+                      2個到最後的倒數第一個引數。（語法“!!:x-”就是“!!:x-$”去掉“$”後所剩下來的樣子）</span></td>
+                  </tr>
+                </tbody></table>
+              </center>
+            </div>
+            <blockquote> 
+              <blockquote> 
+                <blockquote> 
+                  <p><u><span class="akb1">2. 引數在指令行的運用</span></u></p>
+                  <p><span class="akb1">在指令行模式下有些時候會連續好幾個指令都用到同一個或一群檔名，也就事說，你可能會有一個字串要一再重複鍵入。比方有以下情況：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">1 % ls -l ch1.doc ch2.doc ch3.doc<br>
+                    2 % chmod g+w ch1.doc ch2.doc ch3.doc <br>
+                    3 % tar cvf /dev/rst8 ch1.doc ch2.doc ch3.doc</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">像以上這接連的三個指令都用到相同的檔案名稱 ch1.doc，ch2.doc， 
+                    ch3.doc，利用 C Shell 的 history 功能，我們可在指令中將過去事件的引數利用符號代入，以簡化指令的長度，如以下所示：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">4 % ls -l ch1.doc ch2.doc ch3.doc<br>
+                    5 % chmod g+w !!:2*<br>
+                    6 % tar cvf /dev/rst8 !!:2*</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">指令 5 中的“!!:2*”就代表指令 4 中的第 2 到最後的引數，所以指令 
+                    5 相當於指令 2。同理指令 6 相當於指令 3。</span></p>
+                  <p><span class="akb1">再舉一個例子：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">7 % ls -l *.doc *.txt<br>
+                    8 % rm -r !$<br>
+                    9 % cat *.doc &gt; doc.files<br>
+                    10 % !6:0-2 !!$</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">指令 8 中的“!$”既代表指令 7 中的最後的引數，就是“*.txt”。指令 
+                    10 的使用在語法上是成立的。連用 history 功能來組成指令，第一組“!6:0-2”是使用事件 6 的第 0 
+                    到第 2 個引數，接著空白鍵，接著第二組“!!$”使用前一個事件的最後一個引數。所以此指令相當於下：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">10 % tar cvf /dev/rst8 doc.file</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">這便是 history 的引數的組合運用。對了！相信你還記得下面這個又臭又長的指令吧！</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% rsh hosta -l user "screendump -x 
+                    50 -y 50 -X 300 -Y 300 scrfileA"</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">如果現在要你運用 history 的修改功能來更改第二個“50”變為“60”的話，你該如何下指令？回憶一下過去所介紹過的“修改功能”中，只能更改第一個或全部都改，這只改第二個可怎麼改才好呢？相信上面的指令 
+                    10會代給你靈感的。想到了沒，答案如下：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">% !rsh:0-7 60 !rsh:9*</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">我們用該事件的引數 0 到 7，而引數 8 便是要修改的對像，我們不引用。在“!rsh:0-7”之後，我們便加上“□60□”，再接上該事件的引數 
+                    9 到最後的引數。如此便能成功地將某個事件中的某個引數，代換成所需（“□”代表空白鍵）。運用這樣較麻煩的方法可補原先與修改功能的不足與缺憾。希望有一天這種方法能幫你解決一些困擾。</span></p>
+                  <p><span class="akb1">在 history 功能中有一項是僅將指令或所須的功能列出，而不執行。使用的符號為“:p”。這種列出不執行的方式，對比較複雜或比較沒有把握的組合運用是有幫助的。我們來修改第 
+                    10 個的使用語法成為只顯示而不執行，來看看它的用法：</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">10 % !6:0-2:p !!:$:p<br>
+                    tar cvf /dev/rst8 doc.file<br>
+                    11 %</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">如上指令 10 所得的結果顯示在下行，但並不執行。如果錯誤則可加以更正，如果正確無誤想要執行則再鍵入“!!”便可。</span></p>
+                  <p><u><span class="akb1">3. 引數的特殊符號運用</span></u></p>
+                  <p><span class="akb1">在 history 的引數運用上有一項是比較特殊的，它是關於路徑（path）的運用。一般也並不常運用在指令行模式之下，倒是在 
+                    shell 的程式設計上相當有用。不過我們在介紹時，還是將它運用在指令行模式之下，讀者可借此瞭解它的功能。</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb2">27 % !cat:p<br>
+                    cat /usr/adm/messages &gt; message.1<br>
+                    28 % !!:1:t:p<br>
+                    messages<br>
+                    29 % !cat:1:h:p<br>
+                    /usr/adm</span></p>
+                  <p>&nbsp;</p>
+                  <p><span class="akb1">由上例中我們可藉由 history 的功能來將一個路徑分離成兩個部份，如 “/usr/adm/messages”可分離成，“/usr/adm”與“messages”。如果以前面這個情況來說，一個絕對路徑（full 
+                    path）可將它分離成檔案所在的路徑及檔案名稱這兩項資料吧！這個運用情況，我們將在 shell 程式設計中再為你舉例說明。</span></p>
+                </blockquote>
+              </blockquote>
+              <p><span class="akh2">3-5-3 關於 history list 的說明</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">history
+list 實際上便是你啟動 History
+功能之後所產生的一個指令暫存器。這個指令暫存器會記錄的你下過的指令，也可稱之為事件（even）。儲存事件的數量便是你使用內建指令「set
+history = xx」所指定的數量。 history list
+的內容允許被呼叫出來加以再次使用或者是修改使用，被呼叫出來的事件可以是整個事件也可以是事件的部份引數，在使用上有相當多的方式及符號，當然組合的變
+化也相當多。同時這個 history list 的內容也可以在你 logout 前儲存成特殊檔案供你下一次 login 時再利用。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akh2">3-5-4 如何傳遞 hisrory list 到另一個 C shell 中</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">在前面我們曾提到變數 savehist，它的功能是可以在你結束 C shell 之後，把該 
+                shell 的&nbsp; history list 儲存起來供你下一次 login 時，或者是另一個 C shell 來使用，但如果你並不想終結現在正在操作的 
+                C shell，卻需要將 history list 儲存起來，提供另一個 C shell 運用時。此時變數 savehist 
+                的功能就不能適用了。我們得尋求變通的方式來達到這個目的。首先，將所需的 history list 數量重導向到一個檔案中儲存，如下所示：</span></p>
+              <blockquote> 
+                <p><span class="akb2">33 % history -h 15 &gt; history.15<br>
+                  34 % vi history.15</span></p>
+              </blockquote>
+              <p><span class="akb1">接著便是使用編輯器清除檔案內不必要的指令。然後退出 vi。這時另一個 C shell 
+                便可以看見這個檔案“history.15”。這時我們便可使用內建指令 source -h 來將該讀取“history.15”檔案內的各行指令，將它們加入到這個 
+                C shell 的 history list 中，如此便可以供我們來運用了。請見實際的指令操作：</span></p>
+              <blockquote> 
+                <p><span class="akb2">10 % source -h history.15<br>
+                  22 % </span></p>
+              </blockquote>
+              <p><span class="akb1">（請注意，加上選項 -h 的作用在於只讀入指令，但並不執行。關於詳細的情況請參考內建指令 
+                source 說明）</span></p>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no3-4.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no3-6.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

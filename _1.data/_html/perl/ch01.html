@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+	<HEAD>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf8">
+		<META NAME="Generator" CONTENT="PhotoImpact">
+	
+<link href="word.css" rel="stylesheet" type="text/css">
+<title>Perl Book</title></HEAD>
+	
+<BODY>
+<table width="342" height="3020" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align=center><img src="index_2.jpg" width="743" height="162"></td>
+  </tr>
+  <tr><td>
+  </td></tr>
+  <tr> 
+    <td height="2831" background="index_4.jpg"> 
+      <blockquote>
+	  1.  關於Perl<BR/>
+當你翻開這本書的時候，你也就進入了一個奇幻的世界。Perl確實是一種非常吸引人的程式語言，而之所以這麼引人入勝的原因不單單在於他的功能，也在於他寫作的方式，或說成為一種程式寫作的藝術。即使你只是每天埋首於程式寫作的程式設計師，也不再讓生活過份單調，至少你可以嘗試在程式碼中多一些變化。而且許多Perl的程式設計師已經這麼作了，這也是Perl的理念-「There is more than one way to do it」。    <BR/>
+<BR/>
+常常遇到有人問我：「Perl到底可以拿來作甚麼呢？」，不過後來我慢慢的發現，這個問題的答案卻是非常的多樣化。因為在不同的領域幾乎都有人在使用Perl，所以他們會給你的答案就會有很大的差異了。有人會覺得Perl拿來用在生物資訊上真是非常方便，有人也來進行語料的處理，資料庫，網頁程式設計更是有著廣泛的運用。當然，還有許多人把Perl拿來當成系統管理的利器，更是處理系統日誌的好幫手。<BR/>
+<BR/>
+1.1 Perl的歷史<BR/>
+由Larry Wall創造出來的Perl在1987年時最早出現在usenet的新聞群組comp.source。從當時所釋出的1.0版本，到3.0版為止，幾乎維持著一年有一次大版本的更新，也就是說在1989年時，Perl已經有了3.0 版。而1991年，Perl開發團隊發展出相當關鍵的4.0版。因為隨著4.0版的釋出，Perl發表了新的版權聲明，也就是Perl Artistic Licence(藝術家授權)。Perl4跟Perl5之間相隔了有三年之久，漸漸的，Perl的架構已經日趨穩定。一直到最近，Perl釋出了新的Perl 5.8版，並且同時進行新一代版本的開發。        <BR/>
+<BR/>
+1.2 Perl的概念<BR/>
+Perl是非常容易使用的程式語言，或者我們應該說他是方便的程式語言，你可以隨手就寫完一支Perl的程式，就像你在命令列中打一個指令一樣 (註一)。因為Perl的誕生幾乎就在於讓使用者能夠以更好方便的方式去撰寫程式碼，卻不必像寫C一樣的考慮很多細節。<BR/>
+另外，Perl的黏性非常的強 (註二)，你可以用Perl把不同的東西輕易的連接起來。而且你可以用Perl解決你大部份的問題，雖然有些時候你並不想這麼作，但這並不表示Perl作不到。<BR/>
+1.3 特色<BR/>
+很多人對Perl的印象就是一種寫CGI(註三)的程式語言，或者直覺的認為Perl只是拿來處理文字的工具。不過就像我們所說的，Perl幾乎可以完成大部份你希望達成的工作。但是不可否認的，正規表示式顯然是Perl足以傲人的部份，這也就是Perl大量被拿來使用作為文字處理的原因之一。<BR/>
+而且Perl對於你希望快速的完成某些工作確實可以提供非常大的幫助。甚至在Unix-like的環境下，還可以直接使用Perl為基礎的Shell，讓你用Perl當指令。而不必像許多程式語言，在還沒正式工作之前，你必須先準備一堆事情，包括你的變數定義，你的資料結構等等。也因此，許多Unix-like系統的管理員都喜歡拿Perl來進行系統管理。畢竟沒人希望要處理一個郵件紀錄檔還要先花一堆時間搞清楚該怎麼把紀錄檔內的東西轉成合適的資料結構。<BR/>
+<BR/>
+1.4 使用Perl的環境<BR/>
+雖然大多數的Unix-like系統管理員選擇Perl來幫助他們管理他們的伺服器，可是這絕對不表示Perl只能在這些系統上執行。相反的，Perl可以在絕大多數的作業系統上執行。而目前Windows上的Perl則是以Active Perl(http://www.activeperl.com)這家公司所提供的直譯器為主。Perl的使用在不同的作業系統下會略有不同，本書則以unix-like為執行環境。<BR/>
+<BR/>
+1.5 開始使用 Perl<BR/>
+在開始使用Perl之前，必須先確定你的機器上是否已經安裝Perl。在許多unix-like的作業系統中，都預設會安裝Perl，你也可以先執行下面的指令來確定目前系統內的Perl版本。<BR/>
+<BR/>
+<pre><BR/>
+[hcchien@Apple]% perl -v
+
+This is perl, v5.8.2 built for darwin-2level
+
+Copyright 1987-2003, Larry Wall
+
+Perl may be copied only under the terms of either the Artistic License or the
+GNU General Public License, which may be found in the Perl 5 source kit.
+
+Complete documentation for Perl, including FAQ lists, should be found on
+this system using `man perl' or `perldoc perl'.  If you have access to the
+Internet, point your browser at http://www.perl.com/, the Perl Home Page.
+</pre>
+<BR/>
+我們看到在版本的部份，這裡使用的是Perl 5.8.2的版本，然後有著作者Larry Wall的名字，也就是版權擁有著。接下來是Perl的版權說明。另外，你應該要注意 `perldoc perl' 這個部份：直接在你的終端機下打這行指令，就可以看到Perl內附的文件，而且內容非常詳細。<BR/>
+在這裡，我們建議使用Perl 5.8以上的版本，如果你的版本過於老舊，或是系統中還沒有安裝Perl，可以從http://www.perl.com/下載，並且安裝Perl。<BR/>
+如果你的系統已經有Perl，並且正常運作，那麼你可以開始使用你的Perl。你可以試著使用所有程式語言都會使用的範例來作為使用Perl的開端：<BR/>
+<BR/>
+<pre><BR/>
+[hcchien@Apple]% perl -e 'print "hello world!\n"'
+hello world!
+</pre>
+<BR/>
+不過在Windows上，因為命令列不能使用單引號，所以得這樣寫：<BR/>
+<BR/>
+<pre><BR/>
+[hcchien@Apple]% perl -e "print \"Hello world\n\""
+hello world!
+</pre>
+<BR/>
+1.6 你的第一支Perl程式<BR/>
+事實上，你剛剛已經有了你的第一支Perl程式。當然，你可以不承認那是一支Perl程式。不過讓我們真正來寫一支程式吧。如果你習慣於使用許多整合性程式開發工具，你大概會希望知道要安裝甚麼樣的工具來寫Perl。不過你可能要失望了，因為我們全部所需要的就只是一個文字編輯器。你在unix上，可以選擇vi(vim)，joe或任何你習慣的編輯器，在Windows上可以使用記事本，或下載UltraEdit(http://www.ultraedit.com/)。不過請不要使用類似Word的這樣的文書處理工具，因為這樣子你只是讓事情更複雜了。當然，即使你在Windows上，你還是可以選擇Vim或是Emacs這些在Unix世界獲得高度評價的文字編輯器，而且他們還是自由軟體。<BR/>
+現在，我們可以打下第一支程式了：<BR/>
+<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+print "hello world\n";
+</pre>
+<BR/>
+相信大家很快就打完了這支程式。先別管裡面到底說了甚麼（雖然妳們應該都看懂了），我們先來執行他吧！<BR/>
+<BR/>
+<pre><BR/>
+[hcchien@Apple]% perl ch1.pl 
+hello world
+</pre>
+    <BR/>
+好極了，結果就像我們直接用命令列執行的樣子。不過至少我們知道了，只要用Perl去執行我們寫出來的程式就可以了，當然，你還可以有更簡單的辦法。你可以讓你的檔案變成可以執行，在Unix下，你只需要利用chmod來達成這樣的目的。當然，我們假設你已經可以操作你的系統，至少能夠了解檔案權限。修改完權限之後，你只需要在檔案的所在目錄打：<BR/>
+<BR/>
+<pre><BR/>
+[hcchien@Apple]% ./ch1.pl
+hello world
+</pre>
+<BR/>
+那麼第一行又是甚麼意思呢？其實這是Unix系統中，表明這支程式該以甚麼方式執行的表達方式。在這裡，我們希望使用"/usr/bin/perl"這個程式來執行。所以請依照你系統內的實際狀況適時改寫。否則當你在執行的時候，很可能會看到"Command not found"之類的錯誤訊息。<BR/>
+不過在真正開始寫Perl之前，我們還要提醒幾件事情，這些事情對於你要開始寫Perl的程式是非常的重要的。<BR/>
+1. Perl的敘述句是用分號(;)隔開的，因此只要你的敘述句還沒出現分號，Perl就不會把他當成一個完整的結束，除非你的這個敘述句是在一個區塊的最後一句。我們可以在perldoc裡面找到這樣的範例；<BR/>
+<BR/>
+<pre><BR/>
+print 
+"hello world\n"
+;
+</pre>
+<BR/>
+而且這樣的寫法對 Perl來說並沒有什麼不同，只是對於需要維護你的程式的人來說顯然並不會特別高興。適時的空白確實可以提高程式的可讀性，不過記得不要濫用，造成自己遭受埋怨。<BR/>
+2. Perl是以井字號(#)作為程式的註解標示，也就是只要以井字號開始，到敘述句結束前的內容都會被當成程式註解，Perl並不會嘗試去執行他，或編譯他。對於有些習慣於C程式寫作的程式員而言，能夠使用(/* .... */)來進行程式的註解確實是相當方便的。Perl並沒有正式的定義方式來進行這樣整個區塊的註解，不過卻可以利用其他方式來達到同樣的目的。例如使用pod(plain-old documentation format，簡明文件格式)：<BR/>
+<BR/>
+<pre><BR/>
+#!/usr/bin/perl
+
+print "hello world\n";
+
+=head1
+這裡其實是註解，所以也是很方便的
+主要是可以一次放很多行註解
+=cut
+</pre>
+    <BR/>
+如果你還想找出其他可能的替代方案，可以直接看perlfaq這份文件，而方法就是直接執行perldoc perlfaq(註四)就可以了。<BR/>
+接下來，我們便要真正進入Perl的環境中了。<BR/>
+<BR/>
+習題：<BR/>
+1. 試著找出你電腦上的Perl版本為何。<BR/>
+2. 利用perldoc perl找出所有的perl文件內容<BR/>
+3. 利用Perl寫出第一個程式，印出你的名字<BR/>
+<BR/>
+<BR/>
+註一：事實上，Perl有所謂的單行模式，你就只需要在命令列中執行Perl的敘述句。 <BR/>
+註二：因此也有人戲稱Perl是「膠水程式語言」。<BR/>
+註三：就是所謂的「Common Gateway Interface」，動態網站程式的設計界面。<BR/>
+註四：perldoc裡有著許多非常有用的文件，你可以考慮試著看看perldoc perldoc。<BR/>
+
+      </blockquote>
+      </td>
+      <td valign="top">
+      </td>
+  </tr>
+  <tr align=center>
+    <td><img src="index_5.jpg" width="743" height="27"></td>
+  </tr>
+</table>
+</BODY>
+<script type="text/javascript" src="http://tw.js.webmaster.yahoo.com/110643/ystat.js"></script><noscript><a href="http://tw.webmaster.yahoo.com"><img src=http://tw.img.webmaster.yahoo.com/110643/ystats.gif></a></noscript>
+</HTML>

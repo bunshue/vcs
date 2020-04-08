@@ -1,0 +1,233 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Linux啟動程序</title>
+<meta name="Microsoft Theme" content="mstheme15890 111, default">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body alink="#660033" background="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/lebkgnd.jpg" bgcolor="#937BAA" link="#400040" text="#000000" vlink="#440088"><!--msnavigation--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td><p align="center"><font size="6"><strong>
+<img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/Linux_boot.gif" alt="Linux啟動程序" border="0" height="60" width="600"></strong></font><br>
+<script language="JavaScript"><!--
+MSFPhover = 
+  (((navigator.appName == "Netscape") && 
+  (parseInt(navigator.appVersion) >= 3 )) || 
+  ((navigator.appName == "Microsoft Internet Explorer") && 
+  (parseInt(navigator.appVersion) >= 4 ))); 
+function MSFPpreload(img) 
+{
+  var a=new Image(); a.src=img; return a; 
+}
+// --></script><script language="JavaScript"><!--
+if(MSFPhover) { MSFPnav1n=MSFPpreload("_derived/home_cmp_mstheme15890110_hbtn.gif"); MSFPnav1h=MSFPpreload("_derived/home_cmp_mstheme15890110_hbtn_a.gif"); }
+// --></script>
+</p></td></tr><!--msnavigation--></tbody></table><!--msnavigation--><table dir="ltr" border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><!--msnavigation--><td valign="top">
+<p><font color="#FF0000"><font face="Rockwell" size="5">&nbsp; Linux</font><font face="標楷體" size="5">系統的啟動程序</font></font></p>  
+<p>　</p>  
+<!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul1.gif" alt="bullet" height="15" hspace="13" width="15"></td><td valign="top" width="100%">Linux的啟動<!--msthemelist--></td></tr>
+<!--msthemelist--></tbody></table>
+<p align="center">
+<img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/Linux_boot.jpg" border="1" height="504" width="590"><br>  
+</p>  
+<!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul1.gif" alt="bullet" height="15" hspace="13" width="15"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%"><font color="#0000FF" face="新細明體" size="4">
+    系統啟動與 <span lang="en-us">Process</span></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%"><span lang="en-us">init</span>是系統載入核心後的第一個<span lang="en-us">Process</span>。<!--msthemelist--></p></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%"><span lang="en-us">init</span>讀入<span lang="en-us">/etc/inittab</span>，並依據<span lang="en-us">/etc/inittab</span>設定內容，依序啟動各個相關的<span lang="en-us">Process</span>，第一個被啟動的程序為<span lang="en-us">/etc/rc.sysinit</span>。<span lang="en-us">rc.sysinit</span>負責系統相關運作環境的初始化，其中包括：系統預設
+    執行檔案搜尋路徑<font color="#000000">、
+    置換空間<span lang="en-us">(Swap)</span>的啟動、網路環境設定<span lang="en-us">(Hostname</span>、IP
+    <span lang="en-us">Address</span>、<span lang="en-us">Domain Name...)</span>、
+    檔案系統檢查<span lang="en-us">(With fsck)</span>、重新以<span lang="en-us">read/write</span>模式掛上檔案系統<span lang="en-us">...</span>。</font><!--msthemelist--></p></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%"><font color="#000000"><span lang="en-us">
+    rc.sysinit</span>完成系統初始設定後，<span lang="en-us">init</span>依據<span lang="en-us">/etc/inittab</span>設定之<span lang="en-us">default 
+    run level</span>進入<span lang="en-us">/etc/rc.d/rcx.d</span>啟動相關服務。</font><!--msthemelist--></p></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%"><font color="#000000"><span lang="en-us">/etc/init.d</span>目錄下存放著各個系統服務啟動的設定檔案<span lang="en-us">(Scripts)</span>。</font><!--msthemelist--></p></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%"><font color="#000000"><span lang="en-us">/etc/init.d/rc.local</span>是系統完成開機前所執行的最後一個<span lang="en-us">shell 
+    scrip</span>，因此其優先權高於所有系統啟動程序，此一檔案內容預設值為空檔。<br>
+    <br>
+　</font><!--msthemelist--></p></td></tr>
+  <!--msthemelist--></tbody></table>
+  <!--msthemelist--></p></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul1.gif" alt="bullet" height="15" hspace="13" width="15"></td><td valign="top" width="100%">  
+    <p style="line-height: 150%">
+    <font color="#0000FF" face="Terminal" size="4">Linux Runlevel </font>
+  <!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">   
+        <p style="line-height: 150%">7 RunLevel<br>   
+        因應不同需求，Linux(UNIX)可以分為七種不同啟動模式，或七種不同執行等級，一般正常使用的系統多開啟為Level    
+        3 或5</p>   
+        <table bordercolordark="#666633" bordercolorlight="#999966" align="right" border="1" width="90%">   
+          <tbody><tr>   
+            <td width="15%">Runlevel</td>   
+            <td width="85%">   
+              <p align="center">代表意義</p></td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">0</td>   
+            <td width="85%">關機</td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">1</td>   
+            <td width="85%">單人模式(Single User Mode)</td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">2</td>   
+            <td width="85%">多人使用模式，無NFS功能(網路是啟動的)</td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">3</td>   
+            <td width="85%">完整多人使用模式</td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">4</td>   
+            <td width="85%">unused</td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">5</td>   
+            <td width="85%">完整多人使用模式，xdm啟動(圖形Login畫面)</td>   
+          </tr>   
+          <tr>   
+            <td align="center" width="15%">6</td>   
+            <td width="85%">重新開機(Reboot)</td>   
+          </tr>   
+        </tbody></table><!--msthemelist--></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">   
+        <p style="line-height: 150%">Run Level的改變<br>   
+        root可以使用<font color="#0000FF" face="Rockwell">init</font>或<font color="#0000FF" face="Rockwell">telinit</font>切換到不同Run    
+        Level<br>   
+        <font color="#0000FF" face="Rockwell">init 0</font> = <font color="#0000FF" face="Rockwell">shutdown    
+        -h</font>&nbsp;<br>   
+        <font color="#0000FF" face="Rockwell">init 6 </font>= <font color="#0000FF" face="Rockwell">reboot</font><br>   
+        <br>   
+      <!--msthemelist--></p></td></tr>
+  <!--msthemelist--></tbody></table>
+  <!--msthemelist--></p></td></tr>
+<!--msthemelist--></tbody></table>
+<!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul1.gif" alt="bullet" height="15" hspace="13" width="15"></td><td valign="top" width="100%">   
+    <p style="line-height: 150%"><font color="#0000FF">
+    <font face="Terminal" size="4">/etc/inittab</font><font face="新細明體" size="4">內容解讀</font></font><br>   
+    <br>   
+    <!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">   
+        <p style="line-height: 100%">/etc/inittab內容(Just For RedHAT Linux)<br>  
+        <br>  
+        <font face="Rockwell Condensed" size="2">id : 3 : initdefault :<br>  
+        si : : sysinit: /etc/rc.d/rc.sysinit<br>  
+        <br>  
+        l0 : 0 : wait: /etc/rc.d/rc 0<br>   
+        l1 : 1 : wait: /etc/rc.d/rc 1<br>   
+        l2 : 2 : wait: /etc/rc.d/rc 2<br>   
+        l3 : 3 : wait: /etc/rc.d/rc 3<br>   
+        l4 : 4 : wait: /etc/rc.d/rc 4<br>   
+        l5 : 5 : wait: /etc/rc.d/rc 5<br>   
+        l6 : 6 : wait: /etc/rc.d/rc 6<br>   
+        <br>    
+        ud : : once : /sbin/update<br>  
+        ca : : ctrlaltdel : /sbin/shutdown -t3 -r now<br>    
+        pf : : powerfail :/sbin/shutdown -f -h +2 "Power Failure; System Shutting Down"<br>    
+        pr : 12345 : powerokwait:/sbin/shutdown -c "Power Restored; Shutdown Cancelled"<br>    
+        <br>   
+        1 : 2345 : respawn : /sbin/mingetty tty1<br>   
+        2 : 2345 : respawn : /sbin/mingetty tty2<br>   
+        3 : 2345 : respawn : /sbin/mingetty tty3<br>    
+        4 : 2345 : respawn : /sbin/mingetty tty4<br>   
+        5 : 2345 : respawn : /sbin/mingetty tty5<br>   
+        6 : 2345 : respawn : /sbin/mingetty tty6<br>   
+        <br>   
+        x : 5 : respawn : /etc/X11/prefdm -nodaemon<br>   
+        <br>   
+        </font><!--msthemelist--></p></td></tr>
+      <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">   
+        <p style="line-height: 150%"><font color="#0000FF" size="4">
+        <font face="Terminal">/etc/inittab</font>每一行的意義</font><br>  
+        Format: <u><b> <font color="#FF0000" face="Rockwell">code</font></b></u><font color="#000000" face="Rockwell">:</font><u><b><font color="#FF0000" face="Rockwell">runlevels</font></b></u><font color="#000000" face="Rockwell">:</font><u><b><font color="#FF0000" face="Rockwell">action</font></b></u><font color="#000000" face="Rockwell">:</font><font color="#FF0000" face="Rockwell"><u><b>process</b></u><br>  
+        </font><br>  
+        <b>  
+        <u><font color="#FF0000" face="Rockwell">code</font></u></b><font color="#000000" face="Rockwell"><u>:   
+        </u></font><font color="#000000">這是每</font><font color="#000000" face="Rockwell">"</font><font color="#000000">項目</font><font color="#000000" face="Rockwell">"(</font><font color="#000000">行</font><font color="#000000" face="Rockwell">)</font><font color="#000000">的識別碼，他的格式可以是一個字元或兩個字元，某些特殊動作必須搭配特酥識別碼，系統預定的識別碼建議不要更動它。<br>  
+        <br>  
+        </font><b><u><font color="#FF0000" face="Rockwell">runlevels</font></u></b><font color="#000000" face="Rockwell"><u>:</u></font><font color="#000000">這是這個</font><font color="#000000" face="Rockwell">"</font><font color="#000000">項目</font><font color="#000000" face="Rockwell">"(</font><font color="#000000">行</font><font color="#000000" face="Rockwell">)</font><font color="#000000">指定的</font><font color="#000000" face="Rockwell">Run   
+        Level</font><font color="#000000">，他的格式可以是</font><font color="#000000" face="Rockwell">0~6</font><font color="#000000">任何數目字元的組合，只要系統目前</font><font color="#000000" face="Rockwell">Run   
+        Level</font><font color="#000000">符合這個項目指定的層級，則這行的內容會自動生效，這行所指定的</font><font color="#000000" face="Rockwell">Command</font><font color="#000000">也將會被執行。
+        空白欄位代表涵括所有<span lang="en-us">Run Level </span>。<br>  
+        例如：當系統開機至</font><font color="#000000" face="Rockwell">Run   
+        Level</font><font color="#000000"> </font><font color="#000000" face="Rockwell">5</font><font color="#000000">時，項目『</font><font face="Rockwell Condensed" size="2">x   
+        : 5 : respawn : /etc/X11/prefdm -nodaemon</font><font color="#000000">』就會被執行，當系統開機至</font><font color="#000000" face="Rockwell">Run   
+        Level</font><font color="#000000"> </font><font color="#000000" face="Rockwell">2</font><font color="#000000">、</font><font color="#000000" face="Rockwell">3</font><font color="#000000">、</font><font color="#000000" face="Rockwell">4</font><font color="#000000">、</font><font color="#000000" face="Rockwell">5</font><font color="#000000">時，項目『</font><font face="Rockwell Condensed" size="2">1   
+        : 2345 : respawn : /sbin/mingetty tty1</font><font color="#000000">』都會生效。<br>  
+        <br>  
+        </font><b><u><font color="#FF0000" face="Rockwell">action</font></u></b><font color="#000000" face="Rockwell"><u>:</u></font><font color="#000000">這個欄位告訴</font><font color="#000000" face="Rockwell">"init"</font><font color="#000000">如何處理這個項目，可用選項有：</font><font color="#000000" face="Rockwell">initdefault</font><font color="#000000">、</font><font color="#000000" face="Rockwell">wait</font><font color="#000000">、</font><font color="#000000" face="Rockwell">respawn</font><font color="#000000">等共</font><font color="#000000" face="Rockwell">15</font><font color="#000000">種不同的值，他們所代表的意義請用</font><font color="#000000" face="Rockwell">"man   
+        initttab"</font><font color="#000000">一窺究竟。<br>  
+        <br>  
+        </font><b><u><font color="#FF0000" face="Rockwell">process</font></u></b><font color="#000000" face="Rockwell"><u>:</u></font><font color="#000000">要執行的命令與參數。<br>  
+        <br>  
+        </font><!--msthemelist--></p></td></tr>
+      <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+        <p style="line-height: 150%"><font color="#0000FF">
+        <font face="Terminal" size="4">id   
+        : 3 : initdefault :</font><br>   
+        </font><font face="Rockwell">action "initdefault"</font>告訴   
+        <font face="Rockwell">init </font>將系統開至<font face="Rockwell">Run   
+        Level 3<br>  
+        <br>  
+        </font><!--msthemelist--></p></td></tr>
+      <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+        <p style="line-height: 150%">
+        <font color="#0000FF" face="Terminal" size="4">si   
+        : : sysinit: /etc/rc.d/rc.sysinit</font><font face="Rockwell"><font color="#0000FF"><br>  
+        </font>runlevel </font>欄位空白告訴<font face="Rockwell">init</font>不管系統開到哪一個<font face="Rockwell">Run   
+        Level</font>都要執行這一項目<font face="Rockwell">(rc.sysinit)<br>  
+        action "sysinit"</font>告訴<font face="Rockwell">init</font>優先執行這個項目。<font face="Rockwell"><br>
+        "sysinit"</font>將忽略<font face="Rockwell">runlevel</font>欄位。<br>  
+        <br>  
+      <!--msthemelist--></p></td></tr>
+      <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+        <p style="line-height: 150%">
+        <font color="#0000FF" face="Terminal" size="4">&nbsp;ca   
+        : : ctrlaltdel : /sbin/shutdown -t3 -r now</font><font face="Rockwell"><br>   
+        action "ctrlaltdel"</font>告訴<font face="Rockwell">init</font>當系統收到<font face="Rockwell">SIGINT(or   
+        User</font>同時按下<font face="Rockwell">Alt+Ctrl+Del</font>時<font face="Rockwell">)</font>，執行這個項目<font face="Rockwell">(/sbin/shutdown   
+        -t3 -r now)</font>。如果你不希望你的系統因為有人在<font face="Rockwell">Console</font>按下<font face="Rockwell">Alt+Ctrl+Del</font>而重新開機時，你可以修改這個項目。<br>  
+        <br>  
+      <!--msthemelist--></p></td></tr>
+      <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%">  
+        <p style="line-height: 150%">
+        <font color="#0000FF" face="Terminal" size="4">5 :   
+        2345 : respawn : /sbin/mingetty tty5</font><font face="Rockwell"><br>  
+        </font>表示在進入<font face="Rockwell">RunLevel 2/3/4/5/6</font>時執行   
+        <font face="Rockwell">"</font><font color="#000000" face="Rockwell">/sbin/mingetty tty5   
+        </font><font face="Rockwell">"</font>，<font face="Rockwell">action   
+        "respawn"</font>表示在一個<font face="Rockwell">session</font>結束後<font face="Rockwell">(User</font>由<font face="Rockwell">logout   
+        Console tty5)</font>，在執行一次<font face="Rockwell">"</font><font color="#000000" face="Rockwell">/sbin/mingetty tty5   
+        </font><font face="Rockwell">"</font>，如果此處不用<font face="Rockwell">repawn</font>的話，當<font face="Rockwell">User   
+        Logout tty5</font>，這個<font face="Rockwell">Virtual Terminal</font>將一去不復返，也就是<font face="Rockwell">"Alt+F5"</font>將不再發生作用。<br>  
+        <br>  
+      <!--msthemelist--></p></td></tr>
+  <!--msthemelist--></tbody></table>
+  <!--msthemelist--></p></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul1.gif" alt="bullet" height="15" hspace="13" width="15"></td><td valign="top" width="100%"><p style="line-height: 150%">
+  <font color="#0000FF" face="Terminal" size="4">/etc/rc.d/rcx.d</font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!--msthemelist--><tbody><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%"><p style="line-height: 150%"><span lang="en-us">x</span>為相關之<span lang="en-us">Run 
+    Level(/etc/rc.d/rc1.d</span><font color="#000000">、<span lang="en-us">rc2.d</span>、<span lang="en-us">....)</span></font><!--msthemelist--></p></td></tr>
+    <!--msthemelist--><tr><td valign="baseline" width="42"><img src="Linux%E5%95%9F%E5%8B%95%E7%A8%8B%E5%BA%8F_files/aleabul2.gif" alt="bullet" height="12" hspace="15" width="12"></td><td valign="top" width="100%"><p style="line-height: 150%"><span lang="en-us">/etc/rc.d/rcx.d </span>
+    目錄下所有檔案均為符號鏈結<span lang="en-us">(Symbolic Link)</span><font color="#000000">、I目標指向<span lang="en-us">/etc/init.d</span>下的服務啟動程序<span lang="en-us">(Scripts)</span>，執行方式則是利用<span lang="en-us">program 
+    alias name</span>的不同，來決定執行方式。</font></p><p style="line-height: 150%">
+    <span lang="en-us">/etc/rc.d/rcx.d </span>目錄下所有檔案名稱為<span lang="en-us"><font color="#FF0000"><font face="Terminal">K</font><font face="Times New Roman"><i>nn</i></font><font face="Terminal">ServiceName</font></font>
+    </span>或<font color="#FF0000" face="Terminal"> S</font><font color="#FF0000" face="Times New Roman"><i>nn</i></font><font color="#FF0000" face="Terminal">ServiceName<span lang="en-us">
+    </span></font><font color="#000000">，其中<span lang="en-us">K</span>代表當系統切換到此一<span lang="en-us">Run 
+    level</span>時<u>必須關閉的服務</u>，S則是必須啟動的服務，<span lang="en-us">nn</span>則是服務關閉或啟動的順序，優先順序為由小而大，最大值為<span lang="en-us">99</span>。(T<span lang="en-us">hat's 
+    why /etc/init.d/rc.local is the last script to run before system finishing 
+    its bootup process)</span></font><!--msthemelist--></p></td></tr>
+  <!--msthemelist--></tbody></table>
+  <!--msthemelist--></p></td></tr>
+<!--msthemelist--></tbody></table>
+　<!--msnavigation--></td></tr><!--msnavigation--></tbody></table></body></html>

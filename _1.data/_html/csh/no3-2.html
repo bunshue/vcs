@@ -1,0 +1,640 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 3-2 輸入/輸出重導向（I/O Redirection）</title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-3.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1">
+            <p class="akh1">3-2 輸入/輸出重導向（I/O Redirection）</p>
+            <blockquote> 
+              <p class="akb1">“輸入/輸出重導向”是 shell 用來處理標準輸入（standard input）、標準輸出（standard 
+                output）與標準錯誤（standard error）等訊息的重要功能。它可將指令執行的輸出導向到檔案中，亦可把執行程式或指令所需的引數或輸入由檔案導入。或把指令執行錯誤時所產生的錯誤訊息導向 
+                /dev/null。其應用範圍可說相當廣範。</p>
+              <p><img src="images/3-2_1.gif" vspace="8" width="300" align="right" border="0" height="99" hspace="8"></p>
+              <p class="akh2">3-2-1 輸入重導向（Input Redirection）的運用</p>
+              <p></p>
+              <p><u><span class="akb2">符號“&lt;”－－重導向標準輸入</span></u></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">如右圖所示，通常一個程式或指令所須輸入的參數便稱為標準輸入（standard input）。在導入的運用上，可用來導入檔案。語法如下：</span></p>
+              <blockquote> 
+                <p class="akb2">使用語法 command &lt; file</p>
+              </blockquote>
+              <p><span class="akb1">下面的例子，第一是將檔案“mail.file”重導入指令 mail 中，做為傳送mail給使用者 
+                akk 的內容。第二則是將檔案“file.data”重導入指令“wc -l”中，用以計算該檔案的行數、字數（word）與字元數。</span></p>
+              <blockquote> 
+                <p><span class="akb2">1 % mail akk &lt; mail.file<br>
+                  2 % wc &lt; file.data<br>
+                  1 11 66</span></p>
+              </blockquote>
+              <p><span class="akb1">雖然以上重導入的使用方法是正確的，但對於一般的指令的運用來說實在是多此一舉，因為像這類指令的語法均會支援檔案輸入的功能。但是重導入的運用卻依然不可輕意忽視，有許多軟體公司所發展的應用程式或自行開發的 
+                shell 程式（一般稱為 shell script），大部份多採用交談式的方式來要求使用者輸入所需的資料，像此類的交談資料，可預先做成一個檔案再以重導入的方式執行，不但省去交談的程序更可進一步將簡化作業程序。</span></p>
+              <p>&nbsp;</p>
+              <p><b></b><u><span class="akb2">符號“&lt;&lt;”－－字元的重導向</span></u></p>
+              <blockquote> 
+                <p class="akb2">使用語法 command &lt;&lt; word<br>
+                  word or data keyin<br>
+                  ....<br>
+                  word</p>
+              </blockquote>
+              <p><span class="akb1">在上面我們所提到的重導向符號“&lt;”它所能處理的對像是檔案，如果不是檔案便無法處理。而在這裡將為你介紹的符號“&lt;&lt;”則是用來重導向文字使用的。我們來看它運用在指令行模式下的情況。</span></p>
+              <blockquote> 
+                <p><span class="akb2">% mail akk &lt;&lt; EOF!<br>
+                  testting I/O Redirection function<br>
+                  testting I/O Redirection function<br>
+                  testting I/O Redirection function<br>
+                  EOF!<br>
+                  %</span></p>
+              </blockquote>
+              <p><span class="akb1">在上面我們使用了符號 “&lt;&lt;” 來將我們想要傳 mail 給使用者 akk 
+                的訊息一一由鍵盤鍵入。指令行最後的“EOF!”代表當我們見要鍵入內容的結尾用字－－我們可稱它為“關鍵字”。當我們鍵入指令“mail 
+                akk &lt;&lt; EOF!”後 return，便可開始鍵入想要傳送的訊息內容，如果想要結束僅需在新的一行鍵入“關鍵字”便可。</span></p>
+              <p><span class="akb1">這個符號“&lt;&lt;”常被運用在檔案編輯的指令上，如指令 ed、ex。如下例子：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% ed sed1.f &lt;&lt; ok<br>
+                  g/root/s/0/1/<br>
+                  g/akira/d<br>
+                  w sed2.f<br>
+                  q<br>
+                  ok</span></p>
+              </blockquote>
+              <p><span class="akb1">上
+例我們運用這種重導入的方式來編輯檔案“sed1.f”。第二行與第三行是指令 ed
+的編輯指令，前者是找尋檔案內所有的“root”字串，並將該行的“０”代換為“１”。後者則是找尋檔案內所有的“akira”字串，並將該行清除。第四
+行也是編輯指令，用意是將編輯的結果寫到另一個檔案“sed2.f”中。第五行則是退出指令 ed
+編輯器。第六行便是重導入的“關鍵字”，告訴導入終止。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">如果有機會試一試這種用法！使用它來編輯檔案，有時候比你進入 vi 編輯器做還快速。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akh2">3-2-2 輸出重導向（Output Redirection）的運用</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">在重導出的使用比較起重導入的運用複雜，也比較常使用到。通常指令的輸出訊號包含到標準輸出（standard 
+                output）與標準錯誤（standard error）二種。關於重導出所使用的符號也比較多，總共有 8 個符號。就功能的區別，大致上可歸類成兩組。如下表所示：</span></p>
+            </blockquote>
+            <div align="right"> 
+              <table class="akb2" vspace="9" width="400" align="center" border="1" cellpadding="4" cellspacing="0">
+                <tbody><tr> 
+                  <td valign="top"> 
+                    <p align="center">第一組 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&amp;” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;&amp;” 
+                  </p></td>
+                </tr>
+                <tr> 
+                  <td valign="top"> 
+                    <p align="center">第二組 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;!” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&amp;!” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;!” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;&amp;!” 
+                  </p></td>
+                </tr>
+              </tbody></table>
+            </div>
+            <blockquote> 
+              <p><u><span class="akb2">符號“&gt;”與“&gt;&amp;”－－重導向標準輸出與標準錯誤</span></u></p>
+              <blockquote> 
+                <p class="akb2">使用語法 command &gt; file<br>
+                  command &gt;&amp; file</p>
+              </blockquote>
+              <p><span class="akb1">先讓我們來下一個指令 find，從“root”以下找尋檔名為“Cshrc”，並將結果列出來。</span></p>
+              <blockquote> 
+                <p><span class="akb2">7 % find / -name Cshrc -print <br>
+                  /usr/lib/Cshrc<br>
+                  find: cannot chdir to /var/spool/mqueue: Permission denied<br>
+                  /home1/akira/cshell/Cshrc<br>
+                  8 % </span></p>
+              </blockquote>
+              <p><span class="akb1">指
+令所輸出的訊息有三行，有兩行是指令找到我們指定檔名的資料輸出，這正是我們所要的。而這些輸出訊息的格式屬於標準輸出。但卻有一行訊息顯示“/var
+/spool/mqueue”目錄不允許我們進入，換句話說該目錄我們沒有讀取的權限。這行訊息會混在兩行標準輸出的訊息中是因為指令 find
+搜尋目錄的次序關係，並無特殊意義。但訊息本身的格式卻不屬於標準輸出，而是標準錯誤。這一點我們可用以下的指令來獲得證實：</span></p>
+              <blockquote> 
+                <p><span class="akb2">9 % find / -name Cshrc -print &gt; file.tmp<br>
+                  find: cannot chdir to /var/spool/mqueue: Permission denied<br>
+                  10 % cat file.tmp<br>
+                  /usr/lib/Cshrc<br>
+                  /home1/akira/cshell/Cshrc</span></p>
+              </blockquote>
+              <p><span class="akb1">當我們再一次執行同樣的 find 指令，但使用重導向符號“&gt;”，將輸出導向到檔案“file.tmp”中。結果發現只剩下警告訊息依然出現在螢幕上。用指令 
+                cat 去看檔案“file.tmp”證實需要的資料確實在檔案中。這證實了警告訊息是不同於一般的輸出訊息的。因為它的模式是標準錯誤。其實就整體而言，在 
+                C Shell 的環境中警告性的、錯誤性的輸出訊息均屬於此類－－標準錯誤。千萬別忘了。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">如果說你想要將這了兩種輸出訊息一起重導向到檔案“file.tmp”中，可改用重導向符號“&gt;&amp;”。如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">11 % find / -name Cshrc -print &gt;&amp; 
+                  file.tmp<br>
+                  12 % cat file.tmp<br>
+                  /usr/lib/Cshrc<br>
+                  find: cannot chdir to /var/spool/mqueue: Permission denied<br>
+                  /home1/akira/cshell/Cshrc</span></p>
+              </blockquote>
+              <p><span class="akb1">情
+況便如我們所要的，所有訊息都在檔案
+“file.tmp”中了。在這裡我們要告訴你一件事，其實在輸出重導向這一系列的符號中，“&amp;”符號便是代表標準錯誤，只要是重導向符號中含有
+“&amp;”，就表是可重導標準錯誤。如
+“&gt;&amp;”“&gt;&gt;&amp;”“&gt;&amp;!”“&gt;&gt;&amp;!”都是。</span></p>
+              <p><span class="akb1">對
+於重導向符號“&gt;”與“&gt;&amp;”在運用上有一個特性，那就是當你所指令的檔案實際上不存在時，重導向功能會幫你產生該檔案，並將資料寫
+入。但如果該檔案在執行前便以存在，則當指令執行重導向功能完後，該檔案原來的資料將會被重導入的資料所重寫。換句話說，便是原來的資料將會完全不見，且
+無法挽回。使用上請讀者務必注意到此一特點。我們來看下面的實際例子：</span></p>
+              <blockquote> 
+                <p><span class="akb2">13 % cat file.tmp<br>
+                  /usr/lib/Cshrc<br>
+                  find: cannot chdir to /var/spool/mqueue: Permission denied<br>
+                  /home1/akira/cshell/Cshrc<br>
+                  14 % tail -1 /etc/passwd &gt; file.tmp<br>
+                  15 % cat file.tmp<br>
+                  +::0:0:::</span></p>
+              </blockquote>
+              <p><span class="akb1">我們可清楚地看出，當指令“tail -1 /etc/passwd &gt; file.tmp”執行完後，檔案“file.tmp”的內容已變成是“/etc/passwd”檔案的最後一行。而原來的資料以不見了。</span></p>
+              <p><span class="akb1">在重導向的運用上有一項限制，請先看到下面的例子：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% cat acct.data &gt; acct.data<br>
+                  cat: input acct.data is output</span></p>
+              </blockquote>
+              <p><span class="akb1">當指令 cat 所產生的標準輸出的正是檔案“acct.data”的內容，而我們又要將這個輸出重導向到檔案“acct.data”中。於是造成指令 
+                cat 的執行錯誤。在這裡我們要告訴你在運用重導向時，不能有輸出檔名與重導向的檔名相同的情況產生。</span></p>
+              <p>&nbsp;</p>
+              <p><u><span class="akb2">符號“&gt;&gt;”與“&gt;&gt;&amp;”</span> </u></p>
+              <blockquote> 
+                <p><span class="akb2">使用語法 command &gt;&gt; file<br>
+                  command &gt;&gt;&amp; file</span></p>
+              </blockquote>
+              <p><span class="akb1">這兩個重導向的符號比起先前我們所介紹的符號“&gt;”與“&gt;&amp;”，在功能上有一個很大的差別。就是符號“&gt;&gt;”與“&gt;&gt;&amp;”在重導向輸出資料到檔案時，不會重寫原檔案內容。它們只會將輸出資料重導向到原檔案內容的後面。</span></p>
+              <p><span class="akb1">有了這兩個符號，我們便可將多個指令的輸出一起重導到同一個檔案中，而不必再擔心內容會被重寫了。我們來看個例子：</span></p>
+              <blockquote> 
+                <p><span class="akb2">3 % who &gt;&gt; data.tmp<br>
+                  4 % ps axu &gt;&gt; data.tmp<br>
+                  5 % df &gt;&gt; data.tmp</span></p>
+              </blockquote>
+              <p><span class="akb1">第
+一個執行的指令“who &gt;&gt;
+data.tmp”如果檔案“data.tmp”不存在，重導向符號“&gt;&gt;”與符號“&gt;”相同，會自動產生該檔案，並將輸出重導向到檔
+案中。如果“data.tmp”檔案已存在，則指令輸出便直接在寫到原有的內容後面。而第二、三個指令的輸出，一樣地會依序串寫到該檔案中。如果你覺得三
+行指令太麻煩了，改成以下的執行方式有也行：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% ( who ; ps axu ; df ) &gt;&gt; data.tmp</span></p>
+              </blockquote>
+              <p><span class="akb1">（如果連標準錯誤資料也要寫入檔案則必須使用符號“&gt;&gt;&amp;”）</span> 
+              </p>
+              <p>&nbsp; </p>
+              <p><u><span class="akb2">設定 $noclobber 預設變數改變輸出重導向特性</span></u></p>
+              <blockquote> 
+                <p class="akb2">變數設定語法 set noclobber<br>
+                  取消變數設定語法 unset noclobber</p>
+              </blockquote>
+              <p><span class="akb1">以上對輸出重導向所使用的符號已介紹了四個（第一組），但其實還有四個尚未介紹（第二組），它們的功能與上述的符號有點對映關係。如下：</span></p>
+            </blockquote>
+            <div align="right"> 
+              <table class="akb2" vspace="9" width="400" align="center" border="1" cellpadding="4" cellspacing="0">
+                <tbody><tr> 
+                  <td valign="top"> 
+                    <p align="center">第一組 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&amp;” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;&amp;” 
+                  </p></td>
+                </tr>
+                <tr> 
+                  <td valign="top"> 
+                    <p align="center">第二組 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;!” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&amp;!” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;!” 
+                  </p></td>
+                  <td valign="top"> 
+                    <p align="center">“&gt;&gt;&amp;!” 
+                  </p></td>
+                </tr>
+              </tbody></table>
+            </div>
+            <blockquote> 
+              <p><span class="akb1">以
+下的四個符號在未設定 $noclobber 變數時功能與上四個完全相同。但如果你設定 $noclobber
+變數，使用符號“&gt;”與“&gt;&amp;”將無法重寫（overwrite）已存在的檔案，而必需使用符號“&gt;!”與
+“&gt;&amp;!”才行。同時使用符號“&gt;&gt;”與“&gt;&gt;&amp;”亦不能將指令輸出導向不存在的檔案中，得使用
+“&gt;&gt;!”與“&gt;&gt;&amp;!”。</span></p>
+              <p><span class="akb1">在下面的例子當中，我們先設定了 $noclobber 變數，然後指令 ls 的結果告訴我們該目錄下並無任何檔案存在。接著我們操作幾個運用重導向的指令看看它們的結果。</span></p>
+              <blockquote> 
+                <p><span class="akb2">1 % set noclobber<br>
+                  2 % ls<br>
+                  total 0<br>
+                  3 % cat /etc/passwd &gt;&gt; passwd.bak<br>
+                  passwd.bak: No such file or directory<br>
+                  4 % cat /etc/passwd &gt;&gt;! passwd.bak</span></p>
+              </blockquote>
+              <p><span class="akb1">當指令 3 執行失敗的原因是“passwd.bak”檔案不存在。這如果在沒有設定預設變數 
+                noclobber 的情況下，它是不會產生錯誤的。接著指令4將重導符號由“&gt;&gt;”改為“&gt;&gt;!”便順利地執行成功了。這時以指令 
+                ls -l 便可清楚地看到該檔案的各項資料。</span></p>
+              <blockquote> 
+                <p><span class="akb2">% ls -l<br>
+                  total 1<br>
+                  1 -rw-r--r-- 1 akira 1182 Sep 9 15:19 passwd.bak</span></p>
+              </blockquote>
+              <p><span class="akb1">在這種環境下如果我們鍵入了以下的指令：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% ps axu &gt; passwd.bak<br>
+                  file_a: File exists.</span></p>
+              </blockquote>
+              <p><span class="akb1">則因為該檔名已經存在，不允許我們用符號“&gt;”來將該檔的內容重寫。這便是設定預設變數 
+                noclobber 所產生的保護作用。如果想重寫該檔案則必須使用符號“&gt;!”才行，如下所示：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% ps axu &gt;! passwd.bak</span></p>
+              </blockquote>
+              <p><span class="akb1">以
+上所模擬的情況僅只是設定前與設定後的最大不同處。至餘其它的情況請自行在電腦上依序演練，注意到與原先未設定變數前的種種差別，必可加深在使用上的經
+驗。此項功能將對於撰寫 shell 程式有相當的幫助。如果你想取消該變數的設定只要在指令行鍵入“unset
+noclobber”便可以了。在上面的各個重導向的情況中，如果須連標準錯誤訊息也一起重導的話，只要重導向符號代有“&amp;”便可。如
+“&gt;&amp;!”及“&gt;&gt;&amp;!”。千萬注意！位置不能放錯。</span></p>
+              <p>&nbsp; </p>
+              <p><span class="akh2">3-2-3 實用的輸入/輸出重導向運用</span> </p>
+              <p>&nbsp;</p>
+              <p><u><span class="akb2">標準輸出與標準錯誤的分離重導向</span></u></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">就
+如我們所知，一個指令的輸出訊息包含了標準輸出與標準錯誤兩種型態。有時我們會有需要將某指令的輸出訊息儲存建檔管理，除了正確的輸出資料外，那些錯誤訊
+往往也是相當重要的，為了將有兩種訊息分開來存放，重導向的使用手法就顯得格外的重要，針對此種情況常用的重導向方法是將指令與重導向標準輸出用括號括起
+來，如此一來此部份會先執行，並且指令的標準輸出訊息也會先儲存到指定的檔案中，輸出訊息剩下的部份就是標準錯誤訊息，我們再用重導符號
+“&gt;&amp;”重導到指定的錯誤訊息檔案便大功告成了。使用語法如下：</span></p>
+              <blockquote> 
+                <p class="akb2">( command &gt; stdout.file ) &gt;&amp; err.data</p>
+              </blockquote>
+              <p><span class="akb1">讓我們來看一個實際的運用：</span></p>
+              <blockquote> 
+                <p class="akb2">% (find /user1 -type f -size +50000c -ls &gt; 
+                  big.file) &gt;&amp; err.file</p>
+              </blockquote>
+              <p><span class="akb1">上例中我們用指令 find 去搜尋目錄 /user1 之下所有超過 50000 字元的檔案，並將結果以檔名 
+                big.file 儲存。但指令執行的錯誤訊息則存到 err.file 檔案中。如此便將指令 find 的標準輸出與標準錯誤訊息分開來存放，讓我們更容易整理。</span></p>
+              <p>&nbsp;</p>
+              <p><b></b><u><span class="akb2">輸出重導向與/dev/null－－UNIX系統的垃箕筒</span></u></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">真正在實際的運用上，有時候執行一個指令並不是要它的輸出結果，而是要它的指令執行狀態訊號。（這種使用手法在撰寫 
+                Shell 程式時常使用的上）。這時輸出的訊號反而便成一不需要的，這時有沒有可能將指令的輸出，讓它“消失”呢？有的！在 UNIX 
+                系統中的早就為你準備了一個垃箕筒，專門供你處理不必要輸出訊息。你只要將輸出重導到“/dev/null”這個垃箕筒來，輸出訊號自然便消失，而且也不會佔用硬碟或其它資源。來看一個運用指令 
+                grep 的例子：</span></p>
+              <blockquote> 
+                <p><span class="akb2">1 % ps axu | grep cron | grep -v grep<br>
+                  root 136 0.0 0.0 56 0 ? IW Oct 3 0:00 cron<br>
+                  2 % echo $status<br>
+                  0</span></p>
+              </blockquote>
+              <p><span class="akb1">在上面我們將指令所輸出的系統處理程序的資料，用管線引導到指令 grep 中去篩選“cron”，並去除 
+                grep 指令本身的處理程序。但這並非我們主要的所須的，真正所要的是指令 grep 的執行狀態，如上用指令“echo $status”所顯示的輸出“0”，便是指令 
+                grep 的執行狀態。“0”表示指令 grep 有找到指定的字串，如果是“1”則表示沒有找到所指定的字串。我們可看見第一行指令是會有訊號輸出的，讓我們將它改一改。如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">3 % ps axu | grep cron | grep -v grep &gt;&amp; 
+                  /dev/null<br>
+                  4 % echo $status<br>
+                  0</span></p>
+              </blockquote>
+              <p><span class="akb1">指令的輸出訊號不再出現在螢幕，且指令的執行情況正常。這便是“/dev/null”的妙用。當然你也可以用它來重導向根本不需要的要輸出訊號。如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">5 % tar cvf /dev/rst8 /user[1-3] &gt; /dev/null</span></p>
+              </blockquote>
+              <p><span class="akb1">像如此便能將看也看不來的指令輸出去掉，只保留標準錯誤訊息可輸出到螢幕上。如此一來，指令執行時是否有錯誤訊息更可一目了然。</span></p>
+              <p>&nbsp;</p>
+              <p><u><span class="akb2">輸出、輸入重導向的混用</span></u></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">輸出、輸入重導向是允許混合起來運用的，如前面提到輸入重導向的運用上，將程式或指令所需的資料用重導入，再將執行結果重導到檔案中。這便是常見的使用方式。見以下使用語法：</span></p>
+              <blockquote> 
+                <p class="akb2">command &lt; file.input &gt; file.output</p>
+              </blockquote>
+              <p><span class="akb1">我們來看一個例子：比方有一份報表要將大寫字母轉換成小寫字母。</span></p>
+              <blockquote> 
+                <p><span class="akb2">% tr "[A-Z]" "[a-z]" 
+                  &lt; report.org &gt; report.low</span></p>
+              </blockquote>
+              <p><span class="akb1">在上例，我們將檔案“report.org”倒導入指令 tr 去做大寫字母轉換成小寫字母的動作，然後將 
+                tr 指令的結果重導向到檔案“report.low”中儲存。而原始的檔案“report.org”則毫無改變地保留。檔案“report.low”便是我們想要的結果。</span></p>
+              <p><span class="akb1">另外也有一種使用情況，讓我們來看下面的例子：</span></p>
+              <blockquote> 
+                <p><span class="akb2">1 % sort -n &gt; munber.data &lt;&lt; end!<br>
+                  3838<br>
+                  5<br>
+                  29<br>
+                  128<br>
+                  end!</span></p>
+                <p><span class="akb2">2 %cat munber.data<br>
+                  5<br>
+                  29<br>
+                  128<br>
+                  3838<br>
+                  %</span></p>
+              </blockquote>
+              <p><span class="akb1">假定你有一串數字要建檔並且要你排序排好，相信以上的使用方法你一定會喜歡得不得了！</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akh2">3-2-4 重導向符號說明</span></p>
+            </blockquote>
+            <div align="right"> 
+              <table class="akb2" vspace="9" width="400" align="center" border="1" cellpadding="4" cellspacing="0">
+                <tbody><tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">符號 
+                  </p></td>
+                  <td valign="top" width="86%"> 
+                    <p align="center">說 明 
+                  </p></td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt; 
+                  </p></td>
+                  <td valign="top" width="86%">將 stdout 重導向到檔案（command &gt; file）</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;&gt; 
+                  </p></td>
+                  <td valign="top" width="86%">將 stdout 資料串加到檔案內容之後（command &gt;&gt; 
+                    file）</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;&amp; 
+                  </p></td>
+                  <td valign="top" width="86%">stdout 及 stderr 重導向到檔案（command 
+                    &gt;&amp; file）</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;&gt;&amp; 
+                  </p></td>
+                  <td valign="top" width="86%">將 steout 及 stderr 資料串加到檔案內容之後（command 
+                    &gt;&gt;&amp; file）</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;! 
+                  </p></td>
+                  <td valign="top" width="86%">將 stdout 重導向到檔案，有設定 $noclobber 
+                    時，可重寫檔案。</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;&gt;! 
+                  </p></td>
+                  <td valign="top" width="86%">將 stdout 資料串加到檔案內容之後，有設定 $noclobber 
+                    時，可重寫檔案。</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;&amp;! 
+                  </p></td>
+                  <td valign="top" width="86%">stdout 及 stderr 重導向到檔案，有設定 $noclobber 
+                    時，可重寫檔案。</td>
+                </tr>
+                <tr> 
+                  <td valign="top" width="14%"> 
+                    <p align="center">&gt;&gt;&amp;! 
+                  </p></td>
+                  <td valign="top" width="86%">將 steout 及 stderr 資料串加到檔案內容之後，有設定 
+                    $noclobber 時，可重寫檔案。</td>
+                </tr>
+              </tbody></table>
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no3-1.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no3-3.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

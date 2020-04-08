@@ -1,0 +1,27 @@
+<html><head>
+<META http-equiv="Content-Type" content="text/html; charset=big5">
+<title> 運用 Radio 的方法、屬性和事件 </title>
+<link rel="shortcut icon" href="./baby.ico" />
+<script>
+function show(theform) {
+	var sex_len = theform.sex.length;
+	for (var i = 0 ; i < sex_len ; i++) {
+ 		if (theform.sex[i].checked) {
+			alert(theform.sex[i].value);
+ 		}
+	}
+}
+</script>
+</head><body>
+<form name="myform">
+運用 Radio 的方法、屬性和事件
+<br>
+請選擇性別：<br>
+<input type="radio" name="sex" value="男生">男<br>
+<input type="radio" name="sex" value="女生">女<br>
+<input type="radio" name="sex" value="秘密">不告訴你<br>
+<input type="button" onclick="show(this.form)" value="看結果">
+<input type="button" onclick="this.form.sex[2].click()" value="拒答">
+</form>
+</body></html>
+

@@ -1,0 +1,60 @@
+body {
+#    background:#4C4C8F;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-width: 0px;
+    margin-height: 0px;
+    padding: 0;
+    background-image:
+#    url(bk.gif);
+#    background-repeat:repeat-x;
+    font-family:trebuchet MS, trebuchet, verdana, arial, sans-serif;
+    font-size: 11px;
+    color: #444;
+}
+
+.perl {
+	font-family: "新細明體";
+	font-size: 24px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: bold;
+	color: #336600;
+}
+.typeA {
+	font-family: "新細明體";
+	font-size: 18px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #CC9933;
+}
+.typeB {
+	font-family: "新細明體";
+	font-size: 18px;
+	font-style: normal;
+	line-height: 30px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #669933;
+}
+.typeC {
+	font-family: "新細明體";
+	font-size: 12pt;
+	font-style: normal;
+	line-height: 30px;
+	color: #333333;
+}
+pre {
+    font-size: 10pt;
+    font-family: 'Andale Mono', Courier, monospace;
+    background: #DDD;
+    border: 1px dashed #EEE;
+    padding: 2px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+

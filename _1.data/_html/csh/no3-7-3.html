@@ -1,0 +1,449 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 3-7-3 背景工作的控制管理</title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-3.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1">
+            <p class="akh1">3-7-3 背景工作的控制管理</p>
+            <blockquote> 
+              <p><span class="akb1">當我們將數個工作放到背景工作執行時，我們要如何去管理這些背景工作呢？又如何知道背景工作的執行情況？如何終止或暫時停止背景工作的執行？不要急先讓我們來丟幾個指令到背景工作去執行，再來逐一說明：</span></p>
+              <blockquote> 
+                <p><span class="akb2">6 % du -a /user &gt; user.data &amp;<br>
+                  [1] 237<br>
+                  7 % find / -name core -type f -ls &gt; core.data &amp;<br>
+                  [2] 238<br>
+                  8 % grep '^[^:]*::' /etc/passwd &gt; nopasswd &amp;<br>
+                  [3] 239</span></p>
+              </blockquote>
+              <p><span class="akb1">如上我們將 3 個指令放到背景（background）中執行。用指令 jobs -l 
+                顯示背景工作的執行情況如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% jobs -l<br>
+                  [1] + 237 Running du -a /user &gt; user.data<br>
+                  [2] - 238 Running find / -name core -type f -ls &gt; core.data 
+                  <br>
+                  [3] 239 Running grep '^[^:]*::' /etc/passwd &gt; nopasswd</span></p>
+              </blockquote>
+              <p><span class="akb1">首先我們為你介紹一個工作控制特有的名辭：current job。再上例中的 current 
+                job 是相信讀者一定能一眼看出是“du -a /user &gt; user.data”，也就是背景工作號碼“[1]”。如果當第一個背景工作順利執行完畢，第二個與第三個背景工作均還在執行中時，current 
+                job 便會自動變成是背景工作號碼“[2]”的背景工作。所以 current job 是會變動的。當你下 fg、bg、stop 
+                等指令時，如果不加任何引數則所變動的均是 current job，關於這點在下指令時千萬得注意。同時代表 current job 
+                的特殊符號也有是多個如“%”“%+”或“%%”，選一個習慣的運用便可。</span></p>
+              <p>&nbsp;</p>
+              <p><u><span class="akb2">管理背景工作處理程序</span></u></p>
+              <blockquote> 
+                <p><u><span class="akb1">終止背景工作</span></u></p>
+                <p><span class="akb1">指令總是有下錯或下了而又發覺不必要了的時候，當這樣的情況，當這樣的指令是產生在已執行的背景工作時，你可用 
+                  C Shell 的內建指令 kill來終結它，而且還有很多種方式呢。在例子中，假如你想要“終結”背景工作“du -a /user 
+                  &gt; user.data”。見下面幾種指令 kill 的用法：</span></p>
+              </blockquote>
+            </blockquote>
+            <div align="center"> 
+              <table vspace="9" width="500" border="1" cellpadding="4" cellspacing="0">
+                <tbody><tr> 
+                  <td colspan="2" valign="top"><span class="akb2">內建指令 kill 使用語法：</span></td>
+                </tr>
+                <tr> 
+                  <td valign="top"><span class="akb2">kill pid_number</span></td>
+                  <td valign="top"><span class="akb2">將某個號碼的處理程序終止執行</span></td>
+                </tr>
+                <tr> 
+                  <td valign="top"><span class="akb2">kill %</span></td>
+                  <td valign="top"><span class="akb2">終止執行 current job</span></td>
+                </tr>
+                <tr> 
+                  <td valign="top"><span class="akb2">kill %+</span></td>
+                  <td valign="top"><span class="akb2">同上</span></td>
+                </tr>
+                <tr> 
+                  <td valign="top"><span class="akb2">kill %-</span></td>
+                  <td valign="top"><span class="akb2">終止執行 previous job</span></td>
+                </tr>
+                <tr> 
+                  <td valign="top"><span class="akb2">kill %m</span></td>
+                  <td valign="top"><span class="akb2">終止執行第 m 個背景工作</span></td>
+                </tr>
+                <tr> 
+                  <td valign="top"><span class="akb2">kill %string</span></td>
+                  <td valign="top"><span class="akb2">搜尋以 string 為開頭的背景工作並將它終止執行（為避免錯誤，此法少用）</span></td>
+                </tr>
+              </tbody></table>
+            </div>
+            <blockquote> 
+              <blockquote> 
+                <p><span class="akb1">瞭解上述的情況後，要終止第一個背景工作就很簡單了。隨便以底下的每一行指令均可將它終止。</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">% kill 237 （237為第一個背景工作的PID號碼）<br>
+                  % kill %1</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">如果想終止第二個背景工作，以下兩種方法均可。</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">% kill %2<br>
+                  % kill %-</span></p>
+                <p>&nbsp;</p>
+                <p><u><span class="akb1">前景、背景工作的停止及再繼續執行</span></u></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">有
+些時候在工作中，手邊正做到一半的事，時常會被打斷，要求你先處理別的事。譬如你正用 vi 編輯某個檔案或用指令 find
+在整理檔案系統的過時檔案，你的主管十萬火急地跑過來，馬上要你處理一份資料，因為他的主管馬上要，人又坐在你旁邊，好罷！把正在處理的工作先佔停下來，
+先做他的吧。請想想，你是如何暫時停止你的工作的？在這個時候，我們可使用 control-z 來暫停工作。且我們會得到一個訊息，如下：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">Stopped<br>
+                  20 %</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">暫停的工作已被 C Shell 放入背景工作中了，且保留原狀態停止執行。這時便可以馬上做你主管插入的高優先工作，假設如下：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">20 % cd ~/acct<br>
+                  21 % lpr mooon.acct</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">這時候你雖然把工作目錄更改了，但其實並不要緊。你可以先用 C Shell 的內建指令 
+                  jobs 來顯示剛才被暫停的工作是第幾個背景工作，假設你就只有那一個背景工作，則你將見到類似下列的訊息：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">22 % jobs<br>
+                  [1] + Stopped vi home.data</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">這時你可以不用顧慮工作目錄改變的問題，因為 C Shell 的工作控制會幫你處理的，你只管用 
+                  C Shell 的內建指令 fg 來把背景工作切換到前景來執行便可。如下：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">23 % fg （註：指令後不加引數既代表current job）<br>
+                  vi home.data (wd: ~/test)</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">上面訊息“(wd: ~/test)”便是告訴你 vi 的工作目錄，請放心它絕對與你當初的工作目錄相同。這訊息出現的時間很短，馬上便回到你原來的 
+                  vi 模式中，當你編輯完後，存檔後會出現下面的訊息：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">(wd now: /home1/acct)<br>
+                  24 % </span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">工作目錄又回到你所改變的目錄去了。自己好好試一試，碰上時可幫你解決不少困擾。</span></p>
+                <p><span class="akb1">以上為你介紹的是暫停前景工作，接下來我們來談談如何暫停背景工作的執行。 C shell 
+                  的內建指令 stop 可用來暫停背景工作。語法如下：</span></p>
+              </blockquote>
+            </blockquote>
+            <div align="center"> 
+              <table vspace="9" width="300" border="1" cellpadding="4" cellspacing="0">
+                <tbody><tr> 
+                  <td colspan="2"><span class="akb2">stop 指令使用語法：</span></td>
+                </tr>
+                <tr> 
+                  <td><span class="akb2">stop %</span></td>
+                  <td><span class="akb2">停止第一個背景工作執行</span></td>
+                </tr>
+                <tr> 
+                  <td><span class="akb2">stop %n</span></td>
+                  <td><span class="akb2">停止第 n 個背景工作執行</span></td>
+                </tr>
+              </tbody></table>
+            </div>
+            <blockquote> 
+              <blockquote> 
+                <p><span class="akb1">瞭解指令 stop 的語法後，你便可將想要停止的背景工作暫時停止執行，譬如你要將一份整年度的月報表用 
+                  nroff 指令整理，因為資料量龐大，所以你將它放到背景中執行。指令如下示：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">% nroff -ms moonth[1-12].acct &gt; year93.acct 
+                  &amp;<br>
+                  [4] 240</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">當你處理到一半的時候發覺 moonth12.acct 檔案是舊的需要更新，這時你用 
+                  jobs 指令查看到背景工作“[4]”還在執行中，但無法知道指令以處理到那一個月份時，你可馬上下 stop 指令，將背景工作“[4]”先暫時停止執行再說：</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb2">% stop %4</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">然
+後馬上查看檔案 year93.acct 的尾部判斷是否以處理到第 12 月份，如果還沒有執行到，馬上將 moonth12.acct
+檔案資料更新。再用指令 bg
+來將已被暫時停止執行的背景工作“[4]”再接著繼續執行下去。這樣非但可更正錯誤檔案，又不用將已處理完的工作放棄，重新重頭再執行一次。可說是一舉數
+得。這是工作控制中最令人“感激”的一項功德無量的功能。千萬不可不知。</span></p>
+              </blockquote>
+              <p><b></b><u><span class="akb2">指令 stty 設定的影響</span></u></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">在
+一般的環境下，背景工作的輸出均會直接出現在螢幕上，如果想要讓背景工作的輸出不直接插入到前景工作中，用指令 stty 來設定可解決這項問題。指令
+stty
+有一項參數叫“tostop”它的作用是將背景工作的輸出不直接輸出到前景去，只送出訊息告訴前景說某背景工作有輸出訊息。並且它會將那個背景工作先暫時
+停止執行。當你知道某背景工作有訊息輸出時，可用指令 fg
+來將該背景工作叫回前景觀看其輸出訊息，同時該工作將會繼續執行。如果你想再將這個工作送回背景去執行，你可以用 control-z 先暫停，再用
+bg
+將該工作放入背景中繼續執行。這種運用方式僅適用於輸出訊息少的工作，訊息輸出量大且頻繁的工作可能就不適合。因為當一有訊息要輸出，該工作便會停止執
+行，等待你去查看後才會再繼續執行，前景、後景這樣切換多次會叫人受不了的。讓我們來看一下實際的例子：</span></p>
+              <p><span class="akb1">如果你不知 stty 指令現在的設定，可用鍵入 stty 來顯示設定值，如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% stty <br>
+                  speed 38400 baud; evenp <br>
+                  -inpck imaxbel -tabs <br>
+                  iexten crt </span></p>
+              </blockquote>
+              <p><span class="akb1">顯示的參數中可看到並無“tostop”，於是下指令來設定它：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% stty tostop<br>
+                  % stty<br>
+                  speed 38400 baud; evenp <br>
+                  -inpck imaxbel -tabs <br>
+                  iexten crt tostop </span></p>
+              </blockquote>
+              <p><span class="akb1">在這樣的環境設定下，我們將一個指令放入背景中執行，如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% find / -name Cshrc -ls &amp;</span></p>
+              </blockquote>
+              <p><span class="akb1">當背景工作找到檔案時，會在你前景出現以下的訊息：</span></p>
+              <blockquote> 
+                <p><span class="akb2">[1] + Stopped (tty output) find / -name 
+                  Cshrc -ls</span></p>
+              </blockquote>
+              <p><span class="akb1">這時你便可用指令 fg 將該背景工作叫回前景，便可看見輸出內容，如下示：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% fg<br>
+                  find / -name Cshrc -ls<br>
+                  24255 3 -rw-r--r-- 1 bin staff 2897 Jul 24 1992 /usr/lib/Cshrc</span></p>
+              </blockquote>
+              <p><span class="akb1">此時你可以將它 control-z 暫停，再以指令 bg 送回背景中執行。就可在前景繼續工作，並等待下一個輸出訊息出現。</span></p>
+              <p><span class="akb1">如果你想將“tostop”這個參數去掉，指令語法如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% stty -tostop<br>
+                  % stty<br>
+                  speed 38400 baud; evenp <br>
+                  -inpck imaxbel -tabs <br>
+                  iexten crt </span></p>
+              </blockquote>
+              <p><b></b><u><span class="akb2">指令 notify 與預設變數 $notify 的運用</span></u></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">C shell 的工作控制對於背景工作的執行結果通知，通常是在前景中等待你任何一次 
+                return 的時候，順便將訊息輸出到螢幕上。譬如當你在前景中用 vi 在 編輯檔案時，某個背景工作的執行結束了，這項訊息會一直等待你編輯完檔案退出 
+                vi 模式後，才有機會將會訊息輸出到螢幕上。這個好處是不影響你編輯檔案，但也可能延誤你對需最優先工作的處理時效。如果你要改變這項工作控制的執行特性， 
+                C Shell 提供了內建指令 notify 與預設變數 $notify 來供你運用。先來看指令 notify 的用法。比方說你把一個指令放到背景中執行，如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% cc -o backup backup.c &amp;</span></p>
+              </blockquote>
+              <p><span class="akb1">當指令放入背景中執行時，如果你想讓它在執行結束時馬上通知你，你可運用內建指令 notify 
+                來做到這點，如下鍵入指令：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% notify</span></p>
+              </blockquote>
+              <p><span class="akb1">這時指令不加引數是因為該背景工作是 current job，如果不是 current 
+                job，你下指令時便得加背景工作號碼的引數，如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% notify %3 （假設背景工作號碼為3）</span></p>
+              </blockquote>
+              <p><span class="akb1">當你下完指令 notify 之後，便去做另一個程式的編輯工作，當該背景工作執行完畢時，如果你還未離開 
+                vi 模式，輸出訊息便會插入螢幕中，插入的訊息僅是通知你背景工作的情況，並不會加入你的 vi buffer 中，這點請放一百個心。訊息如下：</span></p>
+              <blockquote> 
+                <p><span class="akb2">[1] Done cc -o backup backup.c</span></p>
+              </blockquote>
+              <p><span class="akb1">以上是使用指令的方式，如果使用模式比較適合你的使用習慣的話，建議你不妨改用設定預設變數 
+                $notify 的方式，將下行加入“~/.cshrc”檔案中，則你每個背景工作均會以此方式通知你其執行情況。</span></p>
+              <blockquote> 
+                <p><span class="akb2">set notify</span></p>
+              </blockquote>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no3-7-2.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no3-7-4.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

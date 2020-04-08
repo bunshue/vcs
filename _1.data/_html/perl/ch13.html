@@ -1,0 +1,294 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="generator" content="Movable Type Publishing Platform 4.0-beta2-20070612" />
+
+    <title>
+
+        
+    perl 學習手札: 第十三章 模組與套件
+        
+
+    </title>
+
+
+    
+    <link rel="start" href="./perl_index.html" title="Home" />
+    
+
+</head>
+<body class="page-archive layout-two-column-right" onload="individualArchivesOnLoad(commenter_name)">
+   <div id="container">
+      <div id="container-inner" class="pkg">
+         <div id="banner">
+            <div id="banner-inner" class="pkg">
+               <h1 id="banner-header"><a href="./perl_index.html" accesskey="1">perl 學習手札</a></h1>
+               <h2 id="banner-description"></h2>
+            </div>
+         </div>
+         <div id="pagebody">
+            <div id="pagebody-inner" class="pkg">
+               <div id="alpha">
+                  <div id="alpha-inner" class="pkg">
+
+
+<h3 class="entry-header">第十三章 模組與套件</h3>
+
+<div class="entry" id="entry-380">
+    <div class="entry-content">
+
+        <div class="entry-body">
+            13 模組與套件<br>
+Perl之所以可以這麼受到歡迎，除了本身有許多專為懶人設計的語法以及相對於其他程式語言，更接近自然語言的用法之外，豐富的模組資源更是讓Perl能
+持續維持高人氣的主要因素。而數以千計的模組不但能吸引住眾多的Perl開發者，更能讓這些開發者貢獻出其他的模組，如此一來，便會造成「網絡效應」，而
+持續讓更多人願意投入Perl的懷抱。<br>
+對於Perl的使用者來說，如果你不會使用各式各樣的模組，那麼你對Perl的使用率可能不到十分之一。因此能夠寫Perl的人，可能也因此對於程式碼重
+用的部份鄉對於其他程式語言的程式設計師有更深的感受。當然，大多數的Perl程式設計師總是需要學會如何開始使用模組，緊接著便會了解如果善用模組，找
+到自己所需要的資源。再下一階段就是如何寫出自己的模組。<br>
+可惜很多程式設計師，或是專案管理員對於這方面並不重視，他們總是只看著手邊的東西。而不肯多花時間把手邊的程式碼整理成模組，很多人不相信自己還會重新
+用到這些程式碼，或者不認為同樣的這些程式碼如果整理成模組，可以讓許多人節省更多的時間。當然，對於這些程式設計師或管理專案的人而言，更不用提要怎麼
+進行好一個專案，版本控制，分支，合併了。 (註一)<br>
+不論如何，一但你開始使用Perl，你應該就必須有足夠的能力去使用各式各樣的模組。而且還必須了解模組與套件的結構，因為你可能會需要對於你使用的
+Perl模組進行除錯的工作，雖然這些事情未必經常發生。不過你從這裡開始，就會開始慢慢的學會如何寫好自己的模組。所以現在就開始來進入的世界吧！<br>
+13.1 關於程式的重用<br>
+我們之前提到過可以節省程式碼寫作的時間，大幅提昇程式可重用性的方式就是副常式。可是如果你沒有好好管理你的程式碼，等到下一次你需要同樣的函式時，你
+還是必須重寫一次。當然，很多人這時候就會利用複製，貼上的方法。把原來的副常式複製到新的程式之中，這樣一來，就可以再度使用同樣的副常式了。<br>
+可是利用這樣的方式還是會有一些問提存在，就像我們在描述副常式時所說的，當你一再使用複製，貼上這樣的方式時，很容易就會造成管理上的問題。因為你還是沒有辦法統一的管理一個套件，讓你以後只要修改模組，接著就可以一次修正使用相同模組的所有程式。<br>
+而不會像你使用拷貝，貼上的方式，你一但找到副常式的一個錯誤，就必須同時修正所有使用這個副常式的程式，當然還可以能因為你忘了某個程式中忘了修改而讓自己踩到地雷。所以既然你都已經使用了副常式，除非你確定某些副常式只會在目前的程式使用，否則他們都有機會成為模組。<br>
+另外，當你開始使用獨立的模組之後，你更需要做好檔案的管理，因為你可能會公開給所有的人使用，就像CPAN (Comprehensive Perl
+Archives Network，Perl綜合典藏網)
+上面所有的模組一樣，或是開放給公司內部使用。不管如何，你的程式一但公開釋出之後，就應該考慮使用者的使用性以及如何更新版本，修正錯誤的問題。這其實
+是非常嚴肅的問題，因為一但沒有辦法做好程式碼的管理，很容易會加重負擔，反而增加管理成本。這個部份對於部份許多公司或個人來說，都還需要更深的著墨，
+我們應該在附錄用一些篇幅，介紹這個部份，雖然它們並不屬於Perl的範圍之內。<br>
+13.2 你該知道的 CPAN<br>
+也許你不太同意我們剛剛所說的部份，不過如果你確定你要開始使用Perl來解決生活，或工作上的問題時，你大概很難不先知道，而且學會如何使用CPAN。<br>
+剛剛說了，CPAN就是Perl典藏網，可是葫蘆裡到底賣的是甚麼藥呢？其實CPAN上主要的就是上面的許多模組，目前已經有好幾千個模組在CPAN上。所以你可以在上面取得這些模組的原始碼，文件，有些模組可能還提供其他的二進位檔案，讓你在沒有辦法編譯時也可以使用。<br>
+目前的CPAN，上面已經充滿了各式各樣的模組，大部份的需求幾乎都可以有現成的模組來解決你的問題，或七成以上的問題。當然，如果你想要在CPAN上找
+到符合需求的模組確實需要花點功夫，因為浩瀚CPAN大海，既然有各種各樣的模組，雖然你可以使用搜尋的功能，可是如果你完全沒有頭緒，恐怕是需要一點時
+間來適應CPAN這個圖書館了。不過接下來的章節，我們會在各個部份介紹相關使用的模組，這些模組很大部份的時候幾乎都是你在寫相關程式時一定會用到的模
+組。另外，我們也會在附錄整理五十個在CPAN上非常有用的模組，這個清單將會包括很多領域的部份模組，相信可以作為一個參考清單及介紹。<br>
+接下來，也許你終於花了一些時間找到了一個符合你需求的模組，那麼你在開始使用之前，必須先安裝這個模組。最傳統的方式，你可以下載這個模組的原始碼，然
+後試著自己編譯。這時候，你可以先到CPAN網站上搜尋你需要的模組。(圖一)，然後下載原始檔，接著就開始編譯，像這樣。(圖二)<br>
+不過這樣確實有點辛苦，尤其Perl的使用上，我們會經常大量的安裝模組，如果每次都要這樣子來一步一步來就會顯得相當吃力。因此我們必然需要更方便的工
+作來幫助我們完成安裝模組的工具，而在你安裝完Perl之後，其實Perl就會給你一個叫做cpan的工具程式，而他正是幫助你完成大量安裝Perl模組
+的好幫手。很多時候，你可以直接進入cpan的命令列中。(圖三)<br>
+不過如果你在Win32的作業平台上，CPAN對你的幫助顯然就小的多了，尤其當大多數的Windows使用者並沒有安裝相關可以提供編譯這些模組的編譯
+器，那麼他們所需要的，應該是能夠提供Windows平台上的二進位檔安裝了。當然，這時候你應該使用由ActivePerl所提供的ppm程式，以便讓
+你可以容易的安裝Perl模組。<br>
+cpan是目前的Perl版本內附的CPAN模組安裝程式工具，不過下一個階段的取代性程式也正在發展當中，而且目前也已經相當穩定，不久之後將會取代
+cpan，成為Perl內附的工具程式，這個新的工具就是cpanplus。就像這個模組的名稱，他正是cpan的加強版，例如他可以幫你確認目前機器上
+安裝的模組版本，以及該模組的最新釋出版本，提醒你該升級。你可以輕鬆的解除某個模組的安裝或是下載某個模組，解除安裝等等。(圖四)<br>
+很可惜，截至目前為止，cpanplus還是只能在Unix的環境下執行，主要的問題還是因為編譯器的問題，就如我們剛剛說的，絕大多數的Windows
+系統中並沒有編譯器，所以如果你的Windows環境下能夠裝起合適的編譯器，當然還是可以使用這些方便的工具。另外，Mac OS
+X的系統預設也並沒有安裝編譯器，所以如果你希望使用cpan/cpanplus的話，就必須安裝相關的套件。<br>
+<br>
+13.3 使用CPAN與CPANPLUS<br>
+<br>
+如果你只是想要學習Perl的語法，那麼也許你不需要使用CPAN，不過當你要開始利用Perl來完成某些工作，或作業。而且完全不想自己重新開始，那麼
+學會使用CPAN/CPANPLUS就是一件非常重要的工作了。正如我們所說的，如果你在Linux/*BSD的作業系統中，一般而言，你一但裝好了
+perl，核心安裝也會自動把CPAN這麼模組安裝進去。所以也就有命令列的執行程式"cpan"，如果你是第一次執行cpan，會需要作一些設定，以確
+定你電腦內的環境以及各種程式的位置。完成設定之後，你會看到提示符號，就像這樣：<br>
+<br>
+<pre><br><br>cpan&gt;<br><br>這就表示你可以開始使用cpan了。<br></pre>
+<br>
+當然，你可以利用help取得完整的cpan使用說明，不過我們還是就一些常用的功能進行介紹。最常用的大概就是install了，幾乎還無疑問，你可以利用install來安裝需要的模組。所以如果你想安裝CPANPLUS這個模組，就只需要這麼作：<br>
+<br>
+<pre><br><br>cpan&gt;install CPANPLUS<br></pre>
+<br>
+利用cpan安裝模組，它會幫你進行完整的步驟，也就是一般我們手動從原始碼安裝時會進行的步驟：<br>
+<br>
+<pre><br><br>perl Makefile.PL<br>make<br>make test<br>make install<br></pre>
+<br>
+所以有時候你會在使用cpan安裝的過程中遇到測試不過或其他狀況，這時候你可以使用強迫安裝的方式來要求cpan進行強制安裝。使用的方式也非常簡單，就只要在install時加上force的選項：<br>
+<br>
+<pre><br><br>cpan&gt;force install CPANPLUS<br></pre>
+<br>
+另外，如果你只想下載某個模組，而不想進行編譯或安裝，那麼就使用get指令。<br>
+<br>
+<pre><br><br>cpan&gt;get CPANPLUS<br></pre>
+<br>
+類似的指令則有make，test，install，clean等等，這些都是針對某個模組進行安裝相關的操作。而如果你想查詢某個模組的相關資料，你可以使用i這個指令，就像這樣：<br>
+<br>
+<pre><br><br>cpan&gt; i CPANPLUS<br>Strange distribution name [CPANPLUS]<br>Module id = CPANPLUS<br>    CPAN_USERID  AUTRIJUS (Autrijus Tang <autrijus@autrijus.org>)<br>    CPAN_VERSION 0.049<br>    CPAN_FILE    A/AU/AUTRIJUS/CPANPLUS-0.049.tar.gz<br>    MANPAGE      CPANPLUS - Command-line access to the CPAN interface<br>    INST_FILE    /usr/local/lib/perl5/site_perl/5.8.4/CPANPLUS.pm<br>    INST_VERSION 0.049<br></autrijus@autrijus.org></pre>
+<br>
+我們可以知道模組的名稱，版本，作者等等各種資訊。另外，i也可以使用正規表示式，所以如果你使用<br>
+<br>
+<pre><br><br>cpan&gt;i /CPANPLUS/<br></pre>
+<br>
+就會傳回一串內容有關CPANPLUS的模組。不過因為使用i這個指令會傳回所有關於模組，作者，散佈或集結而成的模組(例如Bundle::CPAN)
+等等資訊。而如果你想單純的搜尋其中一個部份，就可以使用作者(a)，模組(m)，散佈(m)跟集結(b)。我們繼續用CPANPLUS作例子：<br>
+<br>
+<pre><br><br>cpan&gt; d /CPANPLUS/<br>Distribution    A/AU/AUTRIJUS/CPANPLUS-0.049.tar.gz<br>Distribution    B/BD/BDULFER/CPANPLUS-Shell-Tk-0.02.tar.gz<br>Distribution    K/KA/KANE/CPANPLUS-0.042.tar.gz<br>Distribution    M/MA/MARCUS/CPANPLUS-Shell-Curses-0.06.tar.gz<br>4 items found<br></pre>
+<br>
+這樣應該清楚多了，這表示我們只要搜尋內容有CPANPLUS的相關散佈檔案，而不想要包山包海的把所有相關資訊都收集起來，當然你也可以只使用m或a來取得相關的資訊。<br>
+接下來，還有一個你也許會常用到的功能，也就是"reload index"。CPAN上的模組幾乎無時無刻不在更新，所以你的電腦裡面的各種資料其實會需要經常更新，這時候你只需要利用這樣的方式，CPAN會自動取網路上找到最新的內容索引：<br>
+<br>
+<pre><br><br>cpan&gt; reload index<br>Fetching with LWP:<br>  ftp://ftp.perl.org/pub/CPAN/authors/01mailrc.txt.gz<br>Going to read /Users/hcchien/.cpan/sources/authors/01mailrc.txt.gz<br>Fetching with LWP:<br>  ftp://ftp.perl.org/pub/CPAN/modules/02packages.details.txt.gz<br>Going to read /Users/hcchien/.cpan/sources/modules/02packages.details.txt.gz<br>  Database was generated on Tue, 11 May 2004 09:34:08 GMT<br>Fetching with LWP:<br>  ftp://ftp.perl.org/pub/CPAN/modules/03modlist.data.gz<br>Going to read /Users/hcchien/.cpan/sources/modules/03modlist.data.gz<br>Going to write /Users/hcchien/.cpan/Metadata<br></pre>
+<br>
+最後，如果你要離開，就請使用quit，CPAN會移除某些暫存檔，讓你平安的回到地面。<br>
+CPAN在perl的使用上確實是非常方便的，不過有些地方還是讓人有點感覺不夠，例如你如果順手想要安裝CPANPLUS，那麼你可能需要進入cpan的命令列下，或是利用Perl的單行模式執行這樣的指令：<br>
+<br>
+<pre><br><br>&gt;perl -MCPAN -e"install CPANPLUS"<br></pre>
+<br>
+這倒還好，雖然指令長了一點，不過總是一次可以解決。只是我們都知道，因為在Perl中使用其他各式各樣的模組是縮短開發時程跟降低成本的好方法，所以大
+部份模組其實都還是用了其他模組，我們就說這個要被安裝的模組必須依賴其他某些模組，可是在CPAN裡卻沒辦法幫我們完成這些相關性的安裝工作。所以如果
+你安裝某一個模組卻發現它必須依賴其他模組時，CPAN會發出錯誤訊息給你，然後就停擺了。當然在我們的期望中，如果它可以「順便」幫我們把其他需要的模
+組也安裝進去，那顯然會減少許多手動的工作。因此在這樣的需求下，CPANPLUS也就因應而生了。<br>
+CPANPLUS在使用上有一些不同於CPAN的地方，例如你可以直接在shell下面執行CPANPLUS的安裝手續，就只要這麼打：<br>
+<br>
+<pre><br><br>&gt;cpanp -i SVK<br></pre>
+<br>
+接著，神奇的事情就要發生了，當我們安裝一個模組，而它所依賴的其他模組並不存在時，系統就會自動詢問使用者是不是要同時安裝相關的模組，就像這樣：<br>
+<br>
+<pre><br><br>[root@Apple]# cpanp -i IO::All<br>CPANPLUS::Shell::Default -- CPAN exploration and modules installation (v0.03)<br>*** Please report bugs to <cpanplus-bugs@lists.sourceforge.net>.<br>*** Using CPANPLUS::Backend v0.049.  ReadLine support suppressed in batch mode.<br><br>Installing: IO::All<br>Warning: prerequisite Spiffy 0.16 not found. We have 0.15.<br>Checking if your kit is complete...<br>Looks good<br>Writing Makefile for IO::All<br><br>Spiffy is a required module for this install.<br>Would you like me to install it? [Y/n]: <br></cpanplus-bugs@lists.sourceforge.net></pre>
+<br>
+接下來，CPANPLUS也有自己的終端機，你只需要用"cpanp"就可以進入：<br>
+<br>
+<pre><br><br>[root@Apple]# cpanp<br>CPANPLUS::Shell::Default -- CPAN exploration and modules installation (v0.03)<br>*** Please report bugs to <cpanplus-bugs@lists.sourceforge.net>.<br>*** Using CPANPLUS::Backend v0.049.  <br>*** ReadLine support available (try 'i Term::ReadLine::Perl').<br><br>CPAN Terminal&gt; <br></cpanplus-bugs@lists.sourceforge.net></pre>
+<br>
+CPANPLUS還有一個非常好用的功能，就是列出目前系統中還沒更新的模組清單，所以你只要進入cpanp，然後使用"o"就可以得到系統中需要更新的模組，不過這通常需要花費一段時間：<br>
+<br>
+<pre><br><br>CPAN Terminal&gt; o<br><br>    1     3.04       3.05   CGI                                      LDS       <br>    2     1.06       1.08   Digest                                   GAAS      <br>    3                1.05   Encode::CN::HZ                           DANKOGAI  <br>    4     0.56       0.59   ExtUtils::AutoInstall                    AUTRIJUS<br>    ......<br>    ......<br></pre>
+<br>
+另外，還有跟CPAN比較不同的部份在於你使用CPANPLUS可以解安裝某個模組，也就是使用"u"這個選項，也就是代表uninstall的意思。你
+還可以利用cpanp進行本地端的perl模組管理，例如使用e來新增某些目錄倒你自己的@INC中。至於在cpan中使用reload
+index的工作，在cpanp中只需要按下x就可以了。<br>
+其實在不久之後，CPANPLUS將取代CPAN在Perl核心中的地位，因此現在開始熟悉CPANPLUS似乎也不是甚麼壞事。<br>
+<br>
+13.4 使用模組<br>
+<br>
+看了一堆長篇大論，我們終於要開始寫程式了，或是你根本直接跳過前面的敘述來到這裡。不管如何，我們假設你已經學會怎麼裝模組了，而現在該來學習怎麼使用這些已經存在你硬碟中的模組了吧！<br>
+先來用一個簡單的模組吧，這個模組對於將來你在寫程式的除錯時會有相當的助益。就像下面這一段程式碼所寫的樣子：<br>
+<br>
+<pre><br><br>use strict;<br>use Data::Dumper;&nbsp;&nbsp;	# 說明我們要使用的模組名稱<br><br>my %hash = ("john", 24, "mary", 28, "paul", 22, "alice", 19);<br>print Dumper(%hash);&nbsp;&nbsp;	# 這就是模組裡面提供的函式<br></pre>
+<br>
+當我們決定要使用某個模組時，我們就用關鍵字"use"，也就是「使用某某模組」的意思，還真是口語化。接下來，你就可以使用模組內提供的函式了。所以我
+們在接下來的地方，定義了一個雜湊，是包含了名字，以及他們的年紀。程式最後，我們用了Dumper這個函式來印出雜湊hash裡的所有內容，而
+Dumper其實就是Data::Dumper這個模組所提供的函式。<br>
+最基本，對於模組的使用大概就是這個樣子。當然，這也是最簡單的方式。在你使用use來指定你所要使用的模組時，Perl會載入模組，並且把模組匯入。而
+當你在使用use這個指令時，其實還可以指定匯入模組中的某些函式。例如我們找到一個模組，叫做Cwd，它主要的功能是可以幫助我們找到目前的路徑，如果
+你是一個Unix的使用者，那麼他就非常接近ped這個Unix指令。這個模組提供了不少函式，不過我們有時候並不想全部用到，所以你雖然可以像原來的方
+式，這麼使用它：<br>
+<br>
+<pre><br><br>use Cwd;<br><br>my $dir = cwd();<br><br>print $dir;&nbsp;&nbsp;	# 印出目前的目錄<br></pre>
+<br>
+另外一種方式則是在use後多加一個參數，用來表示要匯入的函式。就像這樣：<br>
+<br>
+<pre><br><br>use Cwd qw(abs_path);&nbsp;&nbsp;		# 我只想用abs_path<br><br>my $dir = Cwd::abs_path;&nbsp;&nbsp;	# 這時候，要加上完整的模組名稱<br><br>print $dir;<br></pre>
+<br>
+在你使用模組的時候，你也許還要注意另外一件事，也就是Perl能不能正確的載入你的模組。大多數的時候，你會從CPAN安裝模組，這些狀況下其實並不會
+有太大的問題，因為系統都會幫你安排好你的模組所應該擺放的位置。可是如果你利用其他方式取模組，或準備安插自己的模組時，有時候卻會因為Perl找不到
+你指定的模組而無法進行載入。因為對於Perl來說，它有一個模組載入的路徑，而這些路徑其實是被紀錄在@INC底下的，所以如果你沒有安裝某個模組，或
+是你的模組並不在Perl的載入路徑內的話，那麼它就會告訴你無法找到這個模組。<br>
+因為@INC也是Perl內建的陣列變數，所以如果你想要知道系統中的@INC，你也可以直接用這樣的方式印出來：<br>
+<br>
+<pre><br><br>print "@INC\n";&nbsp;&nbsp;	# 別懷疑，只需要這樣<br></pre>
+<br>
+或者你直接在命令列底下使用perl -V也可以看到相關的內容。不過這樣會輸出非常多的內容，只怕在這裡列出來會佔去一大頁，所以還是由各位自己試試看吧。<br>
+當然，如果你的模組地處邊緣，沒有辦法被@INC含蓋進去的話，也不用擔心，你可以自己指定程式內使用的模組路徑。其中一種方式是直接修改@INC變數，
+只是這個部份牽扯到關於模組載入的時機，也就是如果Perl在編譯的時候無法找到指定的模組，它就會開始不高興，然後大聲哭鬧。所以你在程式碼執行的部份
+修改了@INC這個變數對於停止Perl的問題並沒有太大的幫助 (註二)。既然解決方法不只一種 (There is more than one
+way to do it)，我們顯然可以試試其他辦法。有另外一個方式，也就是直接使用use指令，就像這樣：<br>
+<br>
+<pre><br><br>use lib "/home/hcchien/pm/";<br><br>use Personal;<br></pre>
+<br>
+其實你還是有其他各式各樣的方式，不過在這裡我想還是這樣就足夠了。至少這也是目前我遇過最常用的方式，如果某一天你覺得這樣的方式已經不敷使用，相信你已經有能力找到更多方式來幫助你解決問題了。<br>
+<br>
+13.5 開始寫出你的套件<br>
+<br>
+經過一番努力，你應該要慢慢熟悉怎麼使用cpan/cpanplus從CPAN安裝各式各樣的模組了
+(註三)。接下來，你應該蓋上這本書，然後開始寫Perl程式了。或是你已經可以自己寫一些程式，然後拿來解決一些日常生活上的問題，或工作上的需要。接
+下來，你已經準備把手上已經寫好的程式碼集結起來，先把它們集結出一個套件吧。<br>
+我們剛剛一直在討論怎麼使用CPAN上豐富的模組資源，不過現在我們應該回過頭來看看模組的組成元素。其中非常重要的一個部份，也就是套件。套件其實就是
+你在寫Perl程式時的零件箱，也就是你可以放進一堆可以重新使用的小零件，那麼在程式裡面，你就可以直接拿出來，兜起來，很快就可以寫好自己的程式。<br>
+我們先來用個簡單的例子吧，雖然大多數的工作已經有了模組可以讓我們使用，可是要讓大家簡單明暸的看懂套件的寫法，我們還是來看看下個這個程式吧：<br>
+<br>
+<pre><br><br>#!/usr/bin/perl -w<br><br>use strict;<br><br>my @grades = (67, 73, 57, 44, 82, 79, 67, 88, 95, 70);;<br><br>my $adv = adv(@grades);&nbsp;&nbsp;      	      	# 叫用 adv 這個副常式<br>print $adv;<br><br>sub adv {<br>    my @input = @_;<br>    my $total;<br>    $total+=$_ for (@input);&nbsp;&nbsp;	# 算總和<br>    $adv = $total/scalar(@input);&nbsp;&nbsp;# 求平均<br>}<br></pre>
+<br>
+這程式相當簡單，我們在主要的程式部份看到兩個重點，第一個就是定義一個陣列，在這裡我們定義了一個關於成績的陣列，裡面放滿了一堆學生的成績。第二個重
+點則是在程式裡面叫用了adv這個副常式。至於在副常式adv裡面，我們取得了主程式傳來的成績陣列，緊接著計算總和，然後算出平均。接下來，我們希望開
+放這個方便的副常式給其他程式使用，所以我們必須把它放進套件中，就像這樣：<br>
+<br>
+<pre><br><br>package Personal;&nbsp;&nbsp;# 套件的開始<br><br>sub adv {<br>    my @input = @_;<br>    my $total;<br>    $total+=$_ for (@input);<br>    $adv = $total/scalar(@input);<br>}<br><br>1;&nbsp;&nbsp;		# 回傳一個真值<br></pre>
+<br>
+於是我把它儲存為另一個檔案，叫做Personal.pm，接下來我們就可以開始使用這個套件了。也就像我們之前所說的方式，我們還是使用use這個指令。所以原來的程式就會變成這樣：<br>
+<br>
+<pre><br><br>use strict;<br>use Personal;&nbsp;&nbsp;			# 現在我們直接使用這個套件了<br><br>my @grades = (67, 73, 57, 44, 82, 79, 67, 88, 95, 70);;<br><br>my $adv = Personal::adv(@grades);       # 然後呼叫套件的adv<br>print $adv;<br></pre>
+<br>
+乍看之下，好像不過就是把原來的程式切成兩半，實在一點也沒甚麼特殊的。不過事實當然絕非如此，現在我們假設又要寫另一個程式了，這次要算的是一大群人的平均年齡。沒錯，我們又需要用到算平均的函式了。所以我們寫了這樣的程式：<br>
+<br>
+<pre><br><br>#!/usr/bin/perl -w<br><br>use strict;<br>use Personal;<br><br>my %member = (  'john' =&gt; 22,<br>                'mary' =&gt; 42,<br>                'paul' =&gt; 27,<br>                'alice' =&gt; 19,<br>                'josha' =&gt; 37  );<br><br>my @age = values %member;&nbsp;&nbsp;# 取出所有人的年齡，放入陣列<br><br>my $adv = Personal::adv(@age);&nbsp;&nbsp;# 還是使用了adv這個函式<br>print $adv;<br></pre>
+<br>
+這樣的用法應該不難理解，我們現在有了自己的套件檔案，也就是Personal.pm。接下來，我們只要再度需要使用adv的部份，就只需要載入Personal.pm就可以。當然，使用者也可以自己不斷加入新的函式，來讓自己的函式庫越來越豐富。<br>
+一般來說，我們都以.pm來作為分辨一般Perl程式與套件的方式。而我們在套件的一開始，則是以關鍵字package來表明這個套件的名稱，就像我們剛剛寫的方式：<br>
+<br>
+<pre><br><br>package Personal;<br></pre>
+<br>
+當我們開始使用套件的時候，其實套件內部就像是另一個獨立的程式一樣，你在使用一個套件時，並沒有辦法提供一個全域變數來供所有人使用。而且這當然是完全
+合理的邏輯，否則不是會讓人一團混亂嗎？不過在套件內部確實也有一些機制來保持一個專屬的空間，避免套件與套件之間，套件與程式之間，所有的變數名稱，副
+常式變成像一盤義大利麵一樣，全部打結混在一起。因此，我們在將自己的套件完成到某個程度之後，使用套件名稱作為檔名儲存起來，就可以開始使用了。以剛剛
+的套件為例，我們就把他儲存為Personal.pm。<br>
+Perl使用的方式就是所謂的「符號表 (symbol
+table)」。一般沒有被定義套件名稱的的部份，其實都是被委以main這個套件，當然你也可以隨時使用package來定義套件名稱。套件的有效範圍
+是從你使用package宣告開始，一直到這個區塊的結束，或是另一個package的宣告。所以這也就是某個套件的有效命名空間，也就是說在這有效範圍
+內的變數命名都會是屬於這個套件的命名空間下。用簡單的表示方式就會是：<br>
+<br>
+<pre><br><br>$PACKAGE::$VARIABLE<br></pre>
+<br>
+這樣的方式其實就讓人比較可以理解為甚麼我們會使用類似Cwd::abs_path這樣的方式來呼叫某個副常式。而且你也可能偶而會發現這樣的程式錯誤：<br>
+<br>
+<pre><br><br>Undefined subroutine &amp;main::adv called at ch3.pl line 14.<br></pre>
+<br>
+也就是Perl在main這個命名空間下並沒有找到adv這個副常式。<br>
+<br>
+而就像很多情況看到的，我們可以使用包含的關係來使用套件的命名空間，所以你當然也可能看到類似這樣的方式：<br>
+<br>
+<pre><br><br>$PACKAGE1::$PACKAGE2::$VARIABLE<br></pre>
+<br>
+套件與模組的使用對於大多數的程式寫作都是非常重要的議題，而對於Perl來說更是如此，因為他可以讓你大量減少程式寫作的時間。至少在看完這一章之後，你應該可以開始學習使用CPAN上廣大的資源。<br>
+<br>
+習題：<br>
+1. 試著在你的Unix-like上的機器裝起CPANPLUS這個模組。<br>
+2. 還記得我們寫過階乘的副常式嗎？試著把它放入套件My.pm中，並且寫出一個程式呼叫，然後使用這個副常式。<br>
+<br>
+註一：許多專案管理的方式就是採用拷貝，複製的方式，和我們所提的方式顯然大異其趣。<br>
+註二：我們確實可以在程式碼中要求Perl在編譯期間就修改變數@INC，不過我們不打算在這裡把這件事情搞的這麼複雜。<br>
+註三：千萬別小看這部份，如果沒有CPAN，你寫Perl會感覺太辛苦了。 
+        </div>
+    </div>
+</div>
+
+
+                    </div>
+                </div>
+
+<!-- <div id="gamma">
+   <div id="gamma-inner" class="pkg">
+       Gamma Content
+   </div>
+</div> -->
+
+
+            </div>
+        </div>
+        <!-- <div id="footer">
+            <div id="footer-inner" class="pkg">
+                Footer Content
+            </div>
+        </div> -->
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,474 @@
+<html><head><!-- #BeginTemplate "/Templates/akCSH-v2.dwt" -->
+
+<!-- #BeginEditable "doctitle" --> 
+<title>網路農夫 -- UNIX C Shell -- 3-8-1 umask 指令</title>
+<meta content="" name="keywords">
+<!-- #EndEditable --> 
+<meta content="網路農夫 -- UNIX C Shell" name="Description">
+<meta content="網路農夫 -- 黃天彥" name="author">
+<meta content="網路農夫 -- 黃天彥" name="copyright">
+<meta content="akira@mail.akira.com.tw" name="E-mail">
+<meta http-equiv="Content-Type" content="text/html; charset=Big5">
+<meta http-equiv="Window-target" content="_top">
+<link rel="home" href="index.html">
+<link rev="made" href="mailto:akira@mail.akira.com.tw">
+<script language="JavaScript"><!--
+should_be_in_frames=0 
+ page_sect=""
+//--></script>
+
+<script type="text/javascript" language="JavaScript" src="images/akcsh-2000.js"></script>
+
+<script event="onresize" for="window" language="JavaScript">
+<!--
+
+
+
+
+//deal with dropdowns on resize
+	for (k=1;k<=num_drops;k++){
+		reposition(k);
+		}
+//-->
+</script>
+<link rel="stylesheet" href="images/akcsh-2001.css">
+<style type="text/css"><!--
+  body {
+    scrollbar-face-color: #FFC359;
+    scrollbar-shadow-color: #ff9900;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #663333;
+    scrollbar-arrow-color: #663333; }
+//--></style>
+</head><body leftmargin="0" onload="global_init();local_init();" topmargin="0" text="#000000" vlink="#000000" alink="#000000" bgcolor="#663333" link="#000000" marginheight="0" marginwidth="0">
+<a name="top"></a>&nbsp;<br>
+<div id="drop1" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 160px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>‧ <a class="white" href="preface.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">前言：一場浮士德的交易</a>&nbsp;</td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop2" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 224px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">UNIX 簡史</a>&nbsp;&nbsp; 
+        </p><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-01.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-01 先前的一個理想</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-02.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-02 一個遊戲的開始</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-03.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-03 初期的自由發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-04.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-04 走出貝爾實驗室</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-05.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-05 一個穩定的基石</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-06.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-06 一個重要的延續與發展</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-07.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-07 UNIX 與 DARPA 交會</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-08.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-08 商業化的不平坦歷程 -- UNIX 版本的戰爭</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-09.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-09 讓 UNIX 自由-- Networking Release 2</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-10.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-10 誰是"老大哥" -- 版權訴訟</a>&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no1-1-11.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">1-11 GNU 計劃 -- 開啟新大道</a>&nbsp;&nbsp; 
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop3" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 287px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td>
+        <p>‧ <a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">認識 Shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-1 shell 是什麼？</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-2 三個主要的 shell</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no2-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">2-3 C shell 的應用面</a></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop4" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 352px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no3-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 的基本運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-1 在 C shell 下的指令運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-2 輸入 / 輸出重導向</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-3.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-3 檔名擴展的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-4.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-4 管線的觀念與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-5.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-5 History 的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-6.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-6 別名的設定與運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-7.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-7 工作控制的運用</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-8.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-8 C SHELL 的內建指令</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no3-9.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">3-9 引號的運用與指令的關係</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop5" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 418px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">C Shell 變數的整體介紹</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-1 環境變數的設定影響</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no4-2.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">4-2 預設變數的設定影響</a></p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop6" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 482px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="no5-0.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">制定 C Shell 的使用環境</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="no5-1.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-1 login 的型態與起始檔案讀取的關係</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">5-2 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop7" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 547px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">基礎的 C SHELL 程式設計觀念簡介</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="#" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">6-1 待續.....</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+  
+</div>
+<div id="drop8" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 612px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr>
+      <td>
+        <p>‧ <a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">本文寫作參考資料</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">出版書籍</a>&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="white" href="references.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">網路文獻</a>&nbsp;&nbsp;</p></td>
+    </tr>
+  </tbody></table>
+</div>
+<div id="drop9" style="border: 1px solid rgb(255, 255, 255); position: absolute; left: 650px; top: 106px; z-index: 1; background-color: rgb(223, 128, 16); visibility: hidden;" onmouseover="keepdrop()" onmouseout="if(ie){hidedrop()}"> 
+  <table border="0" cellpadding="2" cellspacing="2">
+    <tbody><tr> 
+      <td> 
+        <p>‧ <a class="white" href="index-cshell.html" onmouseout="if(ns){hidedrop()}" onmouseover="keepdrop()">回本文主索引</a>&nbsp;&nbsp;<br>
+      </p></td>
+    </tr>
+  </tbody></table>
+</div>
+<script><!--
+//set positions and show dropdowns
+		for (k=1;k<=num_drops;k++){
+			registerlayer(k);
+			reposition(k);
+			}
+	if(ie5 && num_drops>0){ reposition(1) } //wierdness
+			dropsloaded=1
+//--></script>
+<table width="762" align="center" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1a.gif" alt="網路農夫 --  Home" name="home1" width="118" border="0" height="62"></a></td>
+    <td valign="top" bgcolor="#000000"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1b.gif" name="home2" alt="網路農夫 --  Home" width="642" border="0" height="62"></a></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+  <tr> 
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+    <td valign="top" width="118" align="left" bgcolor="#ea6b48"><a href="http://www.akira.com.tw/"><img src="images/akcsh-main800-1c.gif" name="home3" alt="網路農夫 --  Home" width="118" border="0" height="363"></a></td>
+    <td valign="top" width="642" bgcolor="#ffc359"> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/cind-01.gif" width="40" height="23"></td>
+          <td><a href="preface.html" onmouseout="hidedrop()" onmouseover="showdrop(1,'preface','giflib2001/cind-02a.gif')"><img src="images/cind-02.gif" name="preface" width="54" border="0" height="23"></a></td>
+          <td><a href="no1-1-01.html" onmouseout="hidedrop()" onmouseover="showdrop(2,'c1','giflib2001/cind-03a.gif')"><img src="images/cind-03.gif" name="c1" width="63" border="0" height="23"></a></td>
+          <td><a href="no2-1.html" onmouseout="hidedrop()" onmouseover="showdrop(3,'c2','giflib2001/cind-04a.gif')"><img src="images/cind-04.gif" name="c2" width="65" border="0" height="23"></a></td>
+          <td><a href="no3-0.html" onmouseout="hidedrop()" onmouseover="showdrop(4,'c3','giflib2001/cind-05a.gif')"><img src="images/cind-05.gif" name="c3" width="66" border="0" height="23"></a></td>
+          <td><a href="no4-1.html" onmouseout="hidedrop()" onmouseover="showdrop(5,'c4','giflib2001/cind-06a.gif')"><img src="images/cind-06.gif" name="c4" width="64" border="0" height="23"></a></td>
+          <td><a href="no5-0.html" onmouseout="hidedrop()" onmouseover="showdrop(6,'c5','giflib2001/cind-07a.gif')"><img src="images/cind-07.gif" name="c5" width="65" border="0" height="23"></a></td>
+          <td><a href="cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(7,'c6','giflib2001/cind-08a.gif')"><img src="images/cind-08.gif" name="c6" alt="wait....." width="64" border="0" height="23"></a></td>
+          <td><a href="references.html" onmouseout="hidedrop()" onmouseover="showdrop(8,'c7','giflib2001/cind-09a.gif')"><img src="images/cind-09.gif" name="c7" width="78" border="0" height="23"></a></td>
+          <td><a href="index-cshell.html" onmouseout="hidedrop()" onmouseover="showdrop(9,'c8','giflib2001/cind-10a.gif')"><img src="images/cind-10.gif" name="c8" width="83" border="0" height="23"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #BeginEditable "chxx" --><img src="images/ch-3.gif" width="642" height="88"><!-- #EndEditable --><br>
+      <!-- #BeginEditable "maintext" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="15">
+        <tbody><tr> 
+          <td class="akb1">
+            <p class="akh1">3-8-1 umask 指令</p>
+            <blockquote> 
+              <p align="justify"><span class="akb2">umask （顯示設定值）<br>
+                umask nnn （設定umask，設定值為000~777的整數）</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">umask 指令的功能是用來“限定”每一個新增的檔案、目錄的基本使用權限（permission）。譬如說當使用者以編輯器新產生的檔案，或者是從系統的某處拷貝來的新檔案，或者是以輸出重導向的方式產生的新檔案，或是以指令 
+                mkdir 新建的目錄等等，一切新產生的檔案、目錄，它們的最初使用權限，均會受到這個內建指令 umask 的設定值所影響。</span><span class="akb1">就是我所說的“限定”。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">指令裡的 nnn 所代表的意義與 chmod 指令的 nnn 相似。不同的是 chmod 
+                指令 nnn 是“給於”使用或者是將要改變的許可權限，而 umask 則是“取消”nnn 的使用許可權限。這點是根本性的差異，使用者必須分清楚。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">指令 umask 的設定值以三個八進位的數字“nnn”代表。第一個設定數字給使用者自己（owner 
+                user），第二個則是設定給用使用者所屬的群體（group），第三個給不屬於同群體的其它使用者（other）。每一位數字的設定值都是三項不同權限的數值加總，read 
+                權限數值為 4；write 權限數值為 2；execute 權限數值為 1。結合了前三者的權限數值，單一的數字可設定的範圍是 
+                0 ~ 7；整體的可設定範圍是 000 ~ 777。</span></p>
+              <p>&nbsp;</p>
+              <p><span class="akb1">要知道設定後會得到什麼結果。原則上，方法很簡單。就是用最大值減去設定值即可得到你想要知道的結果。</span><span class="akb1">對目錄而言最大值是 
+                777；對檔案而言，最大值則是 666。這個方法對目錄而言完全正確；但對檔案而言會有無法應付的意外。</span></p>
+              <blockquote> 
+                <p><span class="akb1">以下為了說明上的方便，我將以實際運用上，不可能會採用的設定值 067 作為本節例子來加以說明。</span></p>
+              </blockquote>
+              <p><span class="akb1">譬如當你設定 umask 為 670 ，使用檔案的最大值 666 減去設定值 670，得到的是數值是 
+                負4，已超出數值的定義範圍變成沒有任何意義的數值。但真正使用者會得到</span><span class="akb1">的結果卻是檔案對 
+                other 開放 rw 權限；對 owner 與 group 關閉所有權限。所以使用者無法使用減去的方法來獲得完全正確的結果。</span></p>
+              <p><span class="akb1">表面上，C shell 讓系統使用者使用 umask 時只需輸入一組 3 個數字的設定值。但是，這組設定值對於目錄及檔案卻有著不同的作用結果。所以農夫我打算更進一步地說明其中運作的細節，讓看官們能完全的理解。</span></p>
+              <p><span class="akb1">對系統程式而言，內建指令 </span><span class="akb1">umask 
+                的設定值實際上是群組化的參數，也就是 S_IRWXU、S_IRWXG、S_IRWXO。代表的群組情況如下：</span></p>
+              <p>&nbsp;</p>
+              <ul>
+                <li><span class="akb1">S_IRWXU = S_IRUSR | S_IWUSR | S_IXUSR </span></li>
+                <li><span class="akb1">S_IRWXG = S_IRGRP | S_IWGRP | S_IXGRP </span></li>
+                <li><span class="akb1">S_IRWXO = S_IROTH | S_IWOTH | S_IXOTH</span></li>
+              </ul>
+              <p><span class="akb1">也就是說 umask 所設定的三個數字，其實包含了九個不同意涵的參數，用來對映九種不同的使用權限，這些參數會被要產生檔案的程式，或者是要產生目錄的程式帶入並執行出結果。一個 
+                C shell 的使用者必須要有能力完全掌握 umask 的設定，並演算出設定後所得到的結果。</span></p>
+              <blockquote> 
+                <p><span class="akb1">系統在產生一個新目錄，會完全使用到上述的九種權限的參數，所以最大值是 777 ，這</span><span class="akb1">對 
+                  umask 內建指令而言，可以很容易地使用減去權限的方法來獲得正確的結果。</span><span class="akb1">但在產生一個新檔案時，就不是如此。</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">系統在產生一個新檔案時，creat function 只取用</span><span class="akb1"> 
+                  read 與 write 權限相關參數，也就是 access permission bits 裡的 S_IRUSR, S_IWUSR, 
+                  S_IRGRP, S_IWGRP, S_IROTH, S_IWOTH 來定義產生的檔案應該具有何種程度的權限。由於 read（數值 
+                  4） 與 write（數值 2） 的權限相加的結果是 6。所以最大的有效數值為 666。至於所有的 </span><span class="akb1">execute 
+                  權限（數值 1）在此被忽略（access permission bits 為 S_IXUSR, S_IXGRP, S_IXOTH），</span><span class="akb1">所以 
+                  creat function 在輸出時一律定義為 0，也就是無執行的權限。會對檔案如此限制的理由其實很容易理解。因為幾乎不可能有一個使用者他的所有檔案都絕對必要被固定成為給予 
+                  execute 權限(檔案包含的型態相當多，如文字檔、資料檔、圖形檔、執行檔等等)</span><span class="akb1">，如果功能被如此設定的話，反而會造成相當多的系統漏洞，所以必須管制成必要時再由使用者自己來打開 
+                  execute 權限（這就是為什麼每當你新編輯完成的 C Shell script ，還要用指令 chmod 來加上可執行使用權限才能執行的原因）。</span></p>
+                <p>&nbsp;</p>
+                <p><span class="akb1">明瞭上述的原因之後，看官們您能理解，指令 umask 的設定值裡面，如果包含了</span><span class="akb1"> 
+                  excute 權限，又運算產生檔案的使用權限時，應該要先減去（或者應該稱為 disable），才來作運算。所以當設定值為 
+                  670，其中是第二位數字是奇數，明顯的包含了 S_EXGRP 的數值，所以先減去 1，所已有效設定為 660。此時使用最大值 
+                  666 減去 660，得到的便是正確的檔案使用權限。</span></p>
+              </blockquote>
+              <p><span class="akb1"><img src="images/EOR-rule.gif" width="120" align="right" height="113">農夫我使用最大值減去設定值的方式來說明，對一般的使用者應該能較容易理解與運用。在前一版的文字說明中，我曾經提到計算的方式此用的是 
+                XOR 運算法則，它才是實際上程式的運算法則。也就是設定值被程式拆成參數後的參數演算法則。我想學習過邏輯運算的人都清楚 XOR 
+                的運算方式（如右圖所示）。</span></p>
+              <p><span class="akb1">以下我使用設定值 067 當作例子，以 XOR 的演算法則來實際設定會應該得到的結果。</span></p>
+              <p><img src="images/umask-pic-1.gif" width="400" height="304"></p>
+              <p><span class="akb1">希望看官們，能理解以上的說明（農夫我發覺改寫後的版本，看起來實在相當囉唆）。以下提供一些比較常用的設定值供看官們參考：</span></p>
+            </blockquote>
+            <table vspace="9" width="400" align="center" border="1" cellpadding="4" cellspacing="0">
+              <tbody><tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">檔案權限的最大值</span> 
+                </p></td>
+                <td valign="top" align="center"><span class="akb2">設定值</span></td>
+                <td valign="top" align="center"><span class="akb2">結果</span></td>
+                <td valign="top"><span class="akb2">代表的使用權限</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">666</span></td>
+                <td valign="top" align="center"><span class="akb2">002</span></td>
+                <td valign="top" align="center"><span class="akb2">664</span></td>
+                <td valign="top"><span class="akb2">rw-rw-r--</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">666</span></td>
+                <td valign="top" align="center"><span class="akb2">022</span></td>
+                <td valign="top" align="center"><span class="akb2">644</span></td>
+                <td valign="top"><span class="akb2">rw-r--r--</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">666</span></td>
+                <td valign="top" align="center"><span class="akb2">037</span></td>
+                <td valign="top" align="center"><span class="akb2">640</span></td>
+                <td valign="top"><span class="akb2">rw-r-----</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">666</span></td>
+                <td valign="top" align="center"><span class="akb2">077</span></td>
+                <td valign="top" align="center"><span class="akb2">600</span></td>
+                <td valign="top"><span class="akb2">rw-------</span></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">目錄權限的最大值</span> 
+                </p></td>
+                <td valign="top" align="center"><span class="akb2">設定值</span></td>
+                <td valign="top" align="center"><span class="akb2">結果</span></td>
+                <td valign="top"><span class="akb2">代表的使用權限</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">777</span></td>
+                <td valign="top" align="center"><span class="akb2">002</span></td>
+                <td valign="top" align="center"><span class="akb2">775</span></td>
+                <td valign="top"><span class="akb2">rwxrwxr-x</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">777</span></td>
+                <td valign="top" align="center"><span class="akb2">022</span></td>
+                <td valign="top" align="center"><span class="akb2">755</span></td>
+                <td valign="top"><span class="akb2">rwxr-xr-x</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">777</span></td>
+                <td valign="top" align="center"><span class="akb2">037</span></td>
+                <td valign="top" align="center"><span class="akb2">740</span></td>
+                <td valign="top"><span class="akb2">rwxr-----</span></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"><span class="akb2">777</span></td>
+                <td valign="top" align="center"><span class="akb2">077</span></td>
+                <td valign="top" align="center"><span class="akb2">700</span></td>
+                <td valign="top"><span class="akb2">rwx------</span></td>
+              </tr>
+            </tbody></table>
+            <blockquote> 
+              <p><span class="akb1">順便附上單一設定值與檔案及目錄的互動對照表，如下：</span></p>
+            </blockquote>
+            <table vspace="9" width="400" align="center" border="1" cellpadding="4" cellspacing="0">
+              <tbody><tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">umask<br>
+                    設定值</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">檔案<br>
+                    使用許可權</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">目錄<br>
+                    使用許可權</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">0</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">rw-</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">rwx</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">1</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">rw-</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">rw-</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">2</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">r--</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">r-x</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">3</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">r--</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">r--</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">4</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">-w-</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">-wx</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">5</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">-w-</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">r--</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">6</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">---</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">--x</span> 
+                </p></td>
+              </tr>
+              <tr> 
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">7</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">---</span> 
+                </p></td>
+                <td valign="top"> 
+                  <p align="center"><span class="akb2">---</span> 
+                </p></td>
+              </tr>
+            </tbody></table>
+            <blockquote> 
+              <p><span class="akb1">假如使用者想要顯示 umask 的設定值，可鍵入指令 umask，設定值即會顯示出：</span></p>
+              <blockquote> 
+                <p><span class="akb2">% umask<br>
+                  22</span></p>
+              </blockquote>
+              <p><span class="akb1">以上所顯示的設定值“22”即代表“022”。因第一個數字為“0”時不顯示。假如顯示值為“2”則代表“002”，顯示值為“0”則代表“000”。一般系統的常用的設定值有“002”、“022”、“037”或“077”等幾種。</span></p>
+              <p><span class="akb1">接著我們實際來設定指令並觀看其使用結果：</span> </p>
+              <blockquote> 
+                <p><span class="akb2">5 % umask 022 ; umask<br>
+                  22<br>
+                  6 % ls -l &gt; aa ; ls -l aa<br>
+                  1 -rw-r--r-- 1 akira 61 Aug 31 11:32 aa<br>
+                  7 % mkdir dd ; ls -l<br>
+                  total 2<br>
+                  1 -rw-r--r-- 1 akira 61 Aug 31 11:32 aa<br>
+                  1 drwxr-xr-x 2 akira 512 Aug 31 11:33 dd/</span></p>
+              </blockquote>
+              <p><span class="akb1">一般而言如果使用者要自行設定或更改這個指令的設定值，最好的方式是將這個指令放在“~/.cshrc”檔案中，讓 
+                C Shell 來為你執行。如果 login 後還有須要更動，可直接在指令行模式下鍵入指令重新設定之。如果使用者不自行設定則系統會給於系統的設定值，一般均為“022”。</span> 
+              </p>
+            </blockquote>
+          </td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --><!-- #BeginEditable "akicon" --> 
+      <table width="642" border="0" cellpadding="0" cellspacing="0">
+        <tbody><tr> 
+          <td><img src="images/b-line.gif" width="501" height="29"></td>
+          <td><a href="no3-8.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02a.gif')"><img src="images/1_01.gif" name="up" width="52" border="0" height="29"></a></td>
+          <td><a href="#" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02bs.gif')"><img src="images/1_02b.gif" name="akicon" width="33" border="0" height="29"></a></td>
+          <td><a href="no3-8-02.html" onmouseout="hidedrop()" onmouseover="akshowdrop('akicon','giflib2001/b-icon/1-02c.gif')"><img src="images/1_03.gif" name="next" width="56" border="0" height="29"></a></td>
+        </tr>
+      </tbody></table>
+      <!-- #EndEditable --></td>
+    <td width="1" bgcolor="#ffffff"><img src="images/dot-white.gif" width="1" height="1"></td>
+  </tr>
+  <tr> 
+    <td colspan="4" width="762" bgcolor="#ffffff"><img src="images/dot-white.gif" alt="" vspace="0" width="1" border="0" height="1" hspace="0"></td>
+  </tr>
+</tbody></table>
+<p align="center">&nbsp;</p>
+<p class="akb3" align="center">版本：Beta-2001-05 -- 網路農夫</p>
+<p align="center">&nbsp;</p>
+<!-- #EndTemplate --></body></html>

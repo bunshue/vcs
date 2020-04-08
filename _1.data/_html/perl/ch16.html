@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+	<HEAD>
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf8">
+		<META NAME="Generator" CONTENT="PhotoImpact">
+	
+<link href="word.css" rel="stylesheet" type="text/css">
+<title>Perl Book</title></HEAD>
+	
+<BODY>
+<table width="342" height="3020" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align=center><img src="index_2.jpg" width="743" height="162"></td>
+  </tr>
+  <tr><td>
+
+  </td></tr>
+  <tr> 
+    <td height="2831" background="index_4.jpg"> 
+      <blockquote>
+	  16. 用Perl實作網站程式<BR/>
+<BR/>
+很多人開始接觸Perl都是因為把他拿來作為寫CGI(Common Gateway Interface)程式的工具，當然，也因此不少人都把Perl定位在「寫網站程式」。雖然事實絕非如此，不過用Perl來寫CGI也確實是非常方便的。尤其在不少前輩的努力之下，讓我們現在得以更方便的建立網路相關的程式。雖然目前已經有其他非常方便的腳本語言(scripting language)也可以讓人非常輕鬆的寫出CGI程式，例如像PHP或ASP一開始就是以最方便的嵌入HTML來進行互動式網頁作為主要目的(目前PHP已經把觸角延伸到其他方面，例如PHP-GTK)，可是Perl所依賴的不單單只是方便的CGI寫成模式，更重要的是程式語言本身所能達到的效果。<BR/>
+很多人在準備開始寫CGI的時候都會遇到類似的問題：「我應該學PHP或是Perl？」其實如果你大多數的時候只希望把Perl拿來寫網站，而且你手上的東西又非常的急迫，那麼PHP也許可以很快的讓你達到目的。雖然很多人可能不以為然，不過我倒是以為，可以把學Perl當成純粹的學習一種程式語言，而CGI只是一種實作Perl GUI(圖形使用界面，Graphical User Interface)的方式。何況越來越多人把瀏覽器當成是GUI以及Client/Server架構最容易的達成方式，其中當然也因為使用瀏覽器作為用戶端程式可以降低使用平台的困擾，而Perl正是驗證了這種詮釋。<BR/>
+利用Perl來寫CGI程式的另外一個最大的疑慮大概是Perl的效率問題，這也許要從網站結構跟原理說起。一般來說，整個網站的原理並不算太困難，也就是用戶端發出一個需求，伺服器端收到之後，根據用戶的需求發出回應，然後關閉兩者的連線。而如果想要達到動態網站的目的，也就是根據使用者的需求，由伺服器端在收到需求之後，根據伺服器的設定把資料傳給後端的程式，接著程式依照需求產生出結果之後再傳回給網站伺服器。接著，網站伺服器就根據正常的流程把資料傳回給用戶端。我們可以從圖一看到比較清楚的流程。<BR/>
+在正常的狀況下，Perl每次收到由網站伺服器傳來的需求時，就會重新開啟一個程序(process)，然後開始根據需求來產生結果。可是問題在於Perl在初始化的過程必須耗費相當的時間跟記憶體，因此當Perl完成初始化，然後產生出適當的結果並且回傳給網站伺服器。這樣的過程其實是相當漫長的，尤其當你的伺服器負載過大，或是硬體本身的效率不佳的時候，就會壤人感到非常的不耐。而這也經常是Perl作為CGI程式最讓人疑慮的部份。<BR/>
+當然，這部份也已經有解決的方案了。現在使用者可以利用FastCGI，或是在Apache中搭配mod_perl使用，這樣一來就可以讓原來的程式被保留在記憶體中，而不必因為每次有使用者發出瀏覽的需求就必須重新啟動Perl，造成因為Perl初始化的延遲問題。不過如果想要有更好的效能來使用mod_perl，那麼足夠的記憶體就變成非常重要的。所幸硬體的價格不斷下降，讓這樣的資源使用不至於發生太大的問題。<BR/>
+如果要使用Perl來增進網站的速度，是需要進行一些設定上的改變，當然有時候能夠跟程式配合是更理想的。不過這對於剛開始準備使用Perl來作為網站程式的工具而言顯然是有些困難的，所以我們並沒有要在這一章中介紹更多相關於mod_perl的使用。待各位對於使用Perl來建構出網站這樣的工作熟悉之後，可以繼續選擇相關書籍或文件進行研究。<BR/>
+<BR/>
+16.1 CGI<BR/>
+<BR/>
+現在使用Perl作為網路應用程式的主要程式語言時，幾乎所有人第一個會遇到的就是CGI這個模組。CGI模組提供的功能非常的強大，不管是輸出至網頁上或是透過CGI取得使用者輸入的參數，另外也可以利用CGI動態產生HTML的各種表單選項。對於動態網頁的支援，CGI目前已經可以算是非常完善。甚至有時候會讓人感到相當意外，因為有些時候你會忽然發現，原來這些東西CGI.pm也可以達到。<BR/>
+現在我們就來看一下，如果要使用Perl開始寫CGI程式，那麼應該怎麼下手呢？毫無疑問，你總得先載入CGI這麼模組，所以就像我們所熟知的方式，先在你的程式加入這一行吧：<BR/>
+<BR/>
+<pre><BR/>
+use CGI;
+</pre>
+<BR/>
+接下來，我們應該建立一個新的CGI物件，方法也不太難，也就是利用new這個物件的操作方法。所以只要這樣子就可以建立起CGI物件：<BR/>
+<BR/>
+<pre><BR/>
+my $q = CGI->new;
+</pre>
+<BR/>
+如果你想要把任何內容輸出到網頁上，你大概都要先送出HTML的標頭檔到網頁上，也就是所謂的header。最簡單的方式當然就只要這麼寫：<BR/>
+<BR/>
+<pre><BR/>
+print $q->header;
+</pre>
+<BR/>
+不過其實header有很多的參數，例如你應該要可以設定內容的編碼或輸出的內容型態等等。所以header這個函式也允許你使用相關的參數來改變header的屬性，例如你可以設定網頁輸出的內容編碼為UTF-8：<BR/>
+<BR/>
+<pre><BR/>
+print $q->header(-charset => 'utf-8');
+</pre>
+<BR/>
+而且你可以一次指定多種屬性，就像這樣的方式：<BR/>
+<BR/>
+<pre><BR/>
+print $q->header(-charset => 'utf-8',
+      &nbsp;&nbsp;	 -type => 'text/html');
+</pre>
+<BR/>
+當然，HTML的標頭檔還有各式各樣的屬性，使用者也都可以利用header來設定，而且這樣子的方式似乎也比起手動輸入各種header的設定值要簡潔不少，因此這個函式對於經常使用CGI的人來說還是非常方便的。而另一個重要的功能則是CGI的param，也就是利用CGI傳回來的參數。很多時候，我們都會利用這樣的方式來取得由HTML表單中傳回來的欄位值：<BR/>
+<BR/>
+<pre><BR/>
+如果你的HTML裡面寫的是這個樣子:
+
+<input type="text" name="user">
+
+那麼你的Perl就可以這麼使用：
+
+$q->param('name');
+</pre>
+<BR/>
+也就是藉由HTML裡面的表單欄位名稱作為param的參數來取得使用者輸入的值，這樣就可以讓程式設計師很方便的取得使用輸入的結果。舉個簡單的例子吧！如果我們想製作一個使用者登入的程式，那麼畫面上大多不外乎就是使用者名稱､密碼兩個欄位。所以我們通常的作法就是利用取得的使用者名稱去資料庫搜尋相對應的密碼資料，如果沒有相關的資料就表示沒有這個使用者，或是使用者輸入的使用者的名稱有誤。如果可以找到相對應的使用者，那麼我們就比對資料庫中擷取出來的密碼與使用者輸入的是否一樣。而程式的寫法大概就像是這樣：<BR/>
+<BR/>
+<pre><BR/>
+#!/usr/bin/perl -w
+
+use strict;
+use CGI;
+use DBI;
+
+my $q = CGI->new;
+print $q->header;
+my $user = $q->param('user');
+my $dbh = ('DBD:mysql:database=foo', 'user', 'passwd');
+my $sql = "SELECT password FROM table WHERE user = '$user'";
+my $sth = $dbh->prepare($sql);
+$sth->execute;
+unless (my @pwd_check = $sth->fetchrow_array) {
+    print "沒有這位使用者";
+else {
+    unless ($pwd_check[0] eq $q->param('passwd')) {
+        print "密碼錯誤";
+    else {
+        ......
+    }
+}
+</pre>
+<BR/>
+有些時候，你會希望可以一次取得所有由HTML表單傳過來的欄位名稱，這時候CGI的另一個函式就可以派上用場了。也就是可以使用params這個函式，它會傳回一個陣列，這個陣列就包含了所有由HTML傳來的表單欄位。因此你的程式中可以這樣寫：<BR/>
+<BR/>
+<pre><BR/>
+my @params = $q->params();
+</pre>
+<BR/>
+我們一開始就提到了關於利用CGI這麼模組送出動態header的方式，其實它不只能夠送出檔頭，你還可以動態的產生其他的網頁元素，例如你可以使用這樣的方式來印出字級為h1的文字內容：<BR/>
+<BR/>
+<pre><BR/>
+print h1('這是h1級的字');
+
+或是使用
+
+print start_h1,"這是h1級的字,end_h1;
+
+結果都可以產生
+
+<h1>這是h1級的字</h1>
+
+這樣的HTML內容
+</pre>
+<BR/>
+類似的用法還有包括下面幾種：<BR/>
+<BR/>
+<pre><BR/>
+start_table()&nbsp;&nbsp;# 送出<table>這個標籤
+end_table()&nbsp;&nbsp;# 送出</table>這個標籤
+start_ul()&nbsp;&nbsp;# 送出<ul>
+end_ul()&nbsp;&nbsp;# 送出</ul>
+</pre>
+<BR/>
+當然，你還可能不直接送出header，因為你想要在處理完某些狀況之後，把網頁的位址送到其他地方。這時候你就應該使用redirect這個函式。它的用法也是非常的簡單，你只需要告訴它你想轉往的其他網址就可以了。<BR/>
+<BR/>
+<pre><BR/>
+$q->redirect('http://url.you.want/');
+</pre>
+<BR/>
+至於HTML的元素，也有很多時候你可以利用CGI這麼模組動態產生，例如你可以使用img來產生出<img src="">這樣的HTML標籤。其他諸如ul，comment等等也都能夠輕易的被產生。不過另外一組非常完整的則是HTML表單的產生方式，也就是你可以利用CGI來產生大多數的表單欄位。<BR/>
+一個非常基本的例子，就是利用CGI模組來產生一個text的表單欄位。<BR/>
+<BR/>
+<pre><BR/>
+print $q->textfield( -name=>'field',
+                     -default=>'default value');
+</pre>
+<BR/>
+另外的一些欄位也都可以用類似的方式產生，就像接下來的例子：<BR/>
+<BR/>
+<pre><BR/>
+print $query->textarea( -name => 'textarea',
+                        -default => '會放在欄位的預設值',
+                        -rows => 5,
+                        -columns => 10);
+print $query->password_field( -name => 'password',
+                              -value => '這裡也是預設值',
+print $query->checkbox_group( -name=>'checkbox',
+                              -values=>['value1','value2','value3','value4'],
+                              -default=>['value1','value3'],
+                              -linebreak=>'true',
+        &nbsp;&nbsp;	      -labels=>\%labels);
+</pre>
+<BR/>
+當然，還有各式各樣的表單欄位，使用的方式也都大同小異，事實上，CGI模組的文件中有詳細的描述。不過有一個非常重要的卻是不可忽略的，也就是錯誤訊息。當使用者使用CGI進行一些運作時，有時候會有一些錯誤，這時候CGI模組會透過cgi_error來傳回錯誤的訊息，所以你可以在程式中加上這個函式，讓CGI發生錯誤時能送出錯誤訊息。就像這樣的方式：<BR/>
+<BR/>
+<pre><BR/>
+if ($q->cgi_error) {
+   print "無法處理CGI程式";
+   print $q->cgi_error;
+}
+</pre>
+<BR/>
+接下來，我們再來講一個CGI模組的重要功能，也就是cookie的存取。許多時候，網站設計者為了減少使用者重複輸入資料的困擾，或是取得使用者瀏覽的紀錄，常常會藉由用戶端瀏覽器的cookie功能來紀錄一些相關性的資料。而CGI也可以針對這些cookie進行存取。如果我們想要取得已經存在用戶端瀏覽器上的cookie資料，我們只需要這麼作：<BR/>
+<BR/>
+<pre><BR/>
+use CGI;
+my $q = CGI->new;
+my $cookie = $q->cookie('cookie_name');
+</pre>
+<BR/>
+接下來，我們當然也可能需要寫入cookie到使用者端，那麼我們可以利用CGI的檔頭來完成這項工作，也就是HTML的header。而完整的用法就是先把你所要寫入的cookie值，屬性都先設定好，然後直接用header來把這些內容送給使用者的瀏覽器中。<BR/>
+<BR/>
+<pre><BR/>
+$cookie = $q->cookie( -name=>'cookie_name',
+                      -value=>'value',
+                      -expires=>'+1h',
+                      -domain=>'.my.domain',
+                      -secure=>1);
+    print $q->header( -cookie=>$cookie);
+</pre>
+<BR/>
+很顯然的，CGI的功能還不止於此，雖然我們已經介紹了大部份使用CGI時常用的功能。不過如果你還有進一步的需求，應該務必使用perldoc CGI來詳細閱讀CGI的相關文件。 <BR/>
+<BR/>
+16.2 Template<BR/>
+<BR/>
+Template雖然不單單用於網路應用程式中，可是卻有許多人在寫網站相關的程式時總會大量的使用，因為對於能夠讓程式設計師單獨的處理程式而不需要擔心網頁的設計對於許多視設計為畏途的程式設計師而言，實在是非常的重要。<BR/>
+Template其實完整的名稱是Template Toolkit，因為目前的Template Toolkit的版本是2.13，所以一般人又習慣稱呼目前的為TT2。至於正接受Perl基金會發展的則是Template::Toolkit的第三版，也就是俗稱的TT3。當然，既然可以接受Perl基金會的贊助開發新版Template::Toolkit，可見這個模組對於Perl社群的重要性了。<BR/>
+首先我們先來談談template系統的概念，讓大家能更深刻的感受使用template系統對程式設計師在網站程式的重要性。我們在剛剛可以看到CGI這個模組的運作，所以我們可以透過CHI的使用，輸出絕大多數的HTML標籤，也就是完成一個HTML頁面的輸出。當然，還有一種可能就是直接使用print指令，一個一個的把HTML標籤手動印出。可是不管是上面兩種方式選擇哪一種都會遇到相同的問題，也就是要怎麼跟網頁設計者一起合作來完成一個美觀，功能又強的網站呢？有一種可能的方式也許是由設計者做好一般的HTML頁面，然後你將這個頁面當作一般的文字檔案將它逐行讀入。然後自行置換掉要動態產生的部份。如此一來，只要網頁設計者能在網頁中加上讓你的程式可以認得的關鍵字，那麼你就可以不理會畫面的改變，而且還能夠讓程式正確的執行。這樣的概念正是孕育出模板系統的主要想法。<BR/>
+Perl的模板系統其實不只一種，可是Template Toolkit卻是深受許多人喜愛的，因為它不但可以讓使用者把模板與程式碼分隔，也可以讓程式設計師在模板中加上各式各樣的簡單控制。雖然說簡單，可是功能卻也一點也不含糊。因為使用者可以在裡面使用迴圈，可以取得由程式傳來的各種變數，當然也可以在模板中自己設定變數。當然，最後如果所有的方法都用盡，還不能達成你的要求，你也可以在模板裡面加上Perl的程式碼。<BR/>
+基本的使用TT2，你應該要有一個Perl的程式碼，跟相關的模板。而如果你只需要單純的變數替換，那麼使用的方式非常的簡單。你可以這麼寫：<BR/>
+<BR/>
+<pre><BR/>
+use Template;
+
+my $config = {
+    INCLUDE_PATH => '/template/path',
+    EVAL_PERL    => 1,
+};
+
+my $template = Template->new($config);
+
+my $replace = "要放入模板的變數";
+my $vars = {
+    var  => $replace,
+};
+
+my $temp_file = 'template.html';
+my $output;
+$template->process($temp_file, $vars, $output)
+    || die $template->error();
+
+print $output;
+</pre>
+<BR/>
+這時候，你就必須有一個符合Perl程式碼中指定的模板檔案，已就是template.html。而在這個模板中，大多數都是一般的HTML標籤。而需要被置換的變數則被定義在$vars中。我們可以先來看看這個templte可能的形式。<BR/>
+<BR/>
+<pre><BR/>
+<html>
+    <head>
+&nbsp;&nbsp;<title>這是TT2示範</title>
+    </head>
+    <body>
+&nbsp;&nbsp;這裡可以替換變數 [% var %]
+    </body>
+</html>
+</pre>
+<BR/>
+好了，現在你可以把這個HTML拿去給網頁設計的人，讓他負責美化頁面，只要他在設計完頁面後，能把關鍵的標籤[% var %]留在適當的位置就可以了。不過你可不能輕鬆，讓我們來研究一下Template是怎麼運作的。首先，在我們新建立一個Template的物件時，我們必須設定好相關的內容，在這裡的例子中，我們只有設定了兩個參數，一個是INCLUDE_PATH，也就是你的template檔案所放置的位置，這裡的內容可以是一個串列。也就是說，你可以指定不只一個路徑。另一個我們設定的是EVAL_PERL這個選項是設定是否讓你的Template執行Perl的區塊。當然，選項還有好幾項，例如你可以設定POST_CHOMP，這個選項跟chomp函式有一些類似，它可以幫你去除使用者參數的空白字元。另外，還有PRE_PROCESS的選項則是設定所有的模板在被載入之後，都必須預先執行某個程序，例如先把檔頭輸出到模板中等等。另外，你還可以修改Template預設的標籤設定，例如我們剛剛看到的[% var %]，就是利用Template的預設標籤[% %]把它表現出來。而Template允許你在建立Template物件時使用START_TAG跟END_TAG來改變這樣的預設標籤。如果你用了這樣的方式：<BR/>
+<BR/>
+<pre><BR/>
+my $template = Template->new({ 
+                   START_TAG => quotemeta('<?'),
+                   END_TAG   => quotemeta('?>'),
+    &nbsp;&nbsp;       });
+
+那麼剛剛在模板裡的變數就應該改寫成
+
+<? var ?>
+
+這樣似乎跟PHP有一點像了。
+</pre>
+<BR/>
+不過Template的作者也知道很多人大概很習慣PHP或是ASP的標籤，所以在Template也提供了另一個設定選項，也就是TAG_STYLE。你可以設定成php(<? ... ?>)或是asp(<% ... %>)，不過其實我個人以為[% ... %]的原創形式還算順手，所以倒是沒換過任何其他標籤風格。Template的設定選項非常多樣化，不過只要了解以上的這些項目就大概都能應付百分之八十的情況了。如果還需要其他的資訊，則可以參閱Template::Manual::Config。<BR/>
+接下來，我們來看看使用上有甚麼需要注意的。在程式中，基本上你如果有甚麼特別需要注意的部份，那大概就是變數的傳遞了。如果你要傳一個純量變數，跟我們剛剛的範例一樣，那麼就只是把變數指定為雜湊變數的一個值。就像我們剛剛的用法一樣，你就只要指定：<BR/>
+<BR/>
+<pre><BR/>
+my $vars = {
+   var => $replace
+};
+</pre>
+<BR/>
+可是很多時候，我們也許會傳送一整個陣列或是雜湊，那麼這時候你最方便的方式就是傳送這些變數的參照，寫法也許就像是這樣：<BR/>
+<BR/>
+<pre><BR/>
+my @grades = (86, 54, 78, 66, 53, 92, 81);
+my $vars = {
+    $var => $replace,
+    $var2 => \@grades,
+};
+</pre>
+<BR/>
+這時候，你的模板內容顯然也需要改寫，把印出陣列的這部份加入你的模板中，一般來說，我們可以使用Template提供的FOREACH迴圈。所以你可以在你的template加上類似的一塊：<BR/>
+<BR/>
+<pre><BR/>
+[% FOREACH grade = grades %]
+成績：[% grade %] 
+[% END %]
+</pre>
+<BR/>
+當然，除了陣列，我們還可以使用雜湊。使用的方式卻也不太一樣，雖然你還是傳遞雜湊參照，可是在模板中的使用卻是直接利用雜湊鍵。所以你的Perl程式碼跟模板中分別是這麼寫的：<BR/>
+<BR/>
+<pre><BR/>
+my %hash = ( height => 178,
+   &nbsp;&nbsp;     weight => 67,
+&nbsp;&nbsp;     age => 28 );
+my $vars = { var => \%hash };
+
+於是你必須在模板中做出相對應的修改：
+
+[% var.height %]
+[% var.weight %]
+[% var.age %]
+</pre>
+<BR/>
+我們剛剛看到在模板中放了FOREACH這個Template提供的迴圈，其實模板中還有許多可供利用的特殊功能，例如一個非常方便的就是[% INCLUDE %]。很多時候，人們都喜歡在網頁的某個部份加上一些制式的內容，最常見的當然就是版權說明了。所以我們可以把這些版權說明的內容放到某一個檔案中，例如就叫做copyright.tt2吧！所以我們有了一個template檔案，內容其實就是一些文字敘述：<BR/>
+<BR/>
+<pre><BR/>
+copyright.tt2:
+Copyright Hsin-Chang Chien 2004 - 2005
+</pre>
+<BR/>
+好了，現在我們有不少其他的模板檔案，希望每一頁都能加上這一段內容。那麼我們只需要在這些檔案的適當位置加上這樣的一行()所謂的適當位置就是你希望看到這些內容的位置：<BR/>
+<BR/>
+<pre><BR/>
+[% INCLUDE copyright.tt2 %]
+</pre>
+<BR/>
+這樣的寫法可以讓你一次省去相當多的麻煩，尤其當你有可能更動這些檔案的內容時。例如我現在想把版權的內容進行調整，那麼你只需要修改copyright.tt2一個檔案，而不需要把所有的檔案一個一個叫出來修改。不過其實INCLUDE可以應付比較複雜的模板系統，而像版權聲明這種純文字的檔案，還有更簡潔的載入方法，也就是INSERT，如果你要被載入的檔案是一個純文字檔，不需要Template幫你進行任何的處理，那麼就考慮使用[% INSERT %]吧！<BR/>
+另外，Template還支援另一種常用的重複敘述，也就是WHILE。它的語法相當簡單，也就是使用這樣的區塊把要執行的內容標示出來：<BR/>
+<BR/>
+<pre><BR/>
+[% WHILE condition %]
+   ....
+[% END %]
+</pre>
+<BR/>
+而IF敘述的基本用法也是和Perl語法幾乎一樣只是他是使用大寫字母，而且用Template的標籤區隔出來，所以你可以輕鬆的使用：<BR/>
+<BR/>
+<pre><BR/>
+[% IF condition %]
+   ....
+[% END %]
+
+或是
+
+[% IF condition %]
+   ....
+[% ELSE %]
+   ....
+[% END %]
+
+而ELSIF也是被允許的，用法也是類似：
+
+[% IF condition %]
+   ....
+[% ELSIF condition2 %]
+   ....
+[% ELSE %]
+   ....
+[% END %]
+
+當然，你還有UNLESS可以使用，用法也是相同：
+
+[% UNLESS condition %]
+   ....
+[% END %]
+</pre>
+<BR/>
+至於如果你真的想在模板裡面寫Perl程式，也只需要這麼作：<BR/>
+<BR/>
+<pre><BR/>
+[% PERL %]
+   # perl 程式碼
+   ....
+[% END %]
+</pre>
+<BR/>
+只是我個人並不建議你常常需要這麼使用，否則你有可能其實是挑錯工具了。因為Perl有其他模板系統也許比較符合你的習慣跟需求。而我們接下來就要介紹另一種在Perl社群中最近非常風行的另一套網路應用程式的搭配系統，也就是Mason。至於Template，它還有很多奧妙，你可以試著參考相關的官方文件。<BR/>
+<BR/>
+16.3 Mason<BR/>
+<BR/>
+網頁設計跟程式碼怎麼切割，這個想法會根據寫程式的人的習慣而有很大的差距。很多人喜歡利用像Template::Toolkit這樣的工具來讓網頁的版面跟程式碼分離的越乾淨越好。當然也有人認為像php形式的內嵌式作法可以讓網站的雛型在很短的時間就產生出來，因此Mason也就以類似的作法誕生了。因此在這一，兩年來，Mason已經成為非常重要的模組，尤其在作為網站的工具時。根據job.perl.org(一個專門張貼Perl相關工作機會的網站)上的資訊，Mason已經是許多國外企業在徵求網站相關程式開發人員時需求度很高的技術了。而且許多大型網站現在也都使用了Mason來產生他們的網頁內容，例如亞馬遜書店(http://www.amazon.com)就是一例。<BR/>
+Mason基本的操作原理是在你的Apache中加上一個控制器(Handler)，讓使用者的要求全部送給Mason處理，這樣一來，Mason就可以把各式各樣的使用者需求都預先處理好，然後送出合適的內容。使用Mason，你除了裝上HTML::Mason這個模組之外，你的Apache還必須支援mod_perl，在一切準備就緒之後，你可以在你的Apache中像這樣的進行設定：<BR/>
+<BR/>
+<pre><BR/>
+PerlModule HTML::Mason::ApacheHandler
+
+<Location />
+    SetHandler perl-script
+    PerlHandler HTML::Mason::ApacheHandler
+</Location>
+</pre>
+<BR/>
+在Mason中，你可以使用百分比(%)符號作為Perl程式碼的引導符號，或是<% ... $>。如果是一行的開始是由%引導，那麼表示這一行是Perl程式碼。或是利用<% ... %>來設定一個區塊的perl程式碼。所以你的網頁可以像這樣子：<BR/>
+<BR/>
+<pre><BR/>
+<%perl>
+my $num = 1;
+my $sum = 0;
+while ($num <= 10) {
+    $sum+=$num;
+}
+</%perl>
+總和是： <% $sum %>
+</pre>
+<BR/>
+那麼結果就會在網頁上呈現出計算後的總和，因此他已經把網頁的HTML跟perl程式碼作了緊密的結合。尤其如果我們使用%作為程式行的起始，就更能表達出其中不可切割的關係了：<BR/>
+<BR/>
+<pre><BR/>
+% $foo = 70;
+% if ($foo >= 60) {
+你的成績及格了
+% } else {
+你被當了
+% }
+</pre>
+<BR/>
+我們常使用這樣的方式來把條件判斷穿插在HTML裡面，所以你的內容已經是夾雜各種語法的一個綜合體了。而且不像Template使用自己定義的特殊語法，你在Mason中使用的大多是標準的HTML跟Perl語法(雖然他們總是夾雜在一起)。所以你當然可以這樣寫：<BR/>
+<BR/>
+<pre><BR/>
+% my @array = (67, 43, 98, 72, 87);
+% for my $grade (@array) {
+你的成績是： <% $grade %>
+% }
+</pre>
+<BR/>
+接下來比較特殊的是一些Maon專用的元件，利用這些元件，你可以很容易的處理一些資料。例如使用者傳來的需求就是其中一個很好的例子。在Mason中最基本的兩個全域變數(每次使用者發出各種要求時，就會產生的兩個變數)分別是$r跟$m。其中$r是Apache傳來的需求內容，至於$m則是負責Mason自己的API。所以你可以藉由$r來取得由Apache傳來的資料，例如：<BR/>
+<BR/>
+<pre><BR/>
+$r->uri
+$r->content_type
+</pre>
+<BR/>
+不過我們暫時先不管$m這個負責處理Mason API的變數，因為我們還有更有趣的東西要玩。也就是在Mason頁面中常常會被使用的<%args>...</%args>區塊。這個區塊可以用來取得由使用者藉由POST/GET傳來的參數，一個很簡單的例子當然就是像這樣：<BR/>
+<BR/>
+<pre><BR/>
+http://my.site/mason.html?arg1=value1&arg2=value2
+
+於是我們就在mason.html裡面加上args區塊，利用ARGS取得這些變數之後，我們就可以在頁面中自由使用了。
+
+<%args>
+$arg1
+$arg2
+</%args>
+</pre>
+<BR/>
+所以剛剛累加的程式，我們可以由使用者輸入想要累加的數字，這時候，我們只要把while的結束條件利用使用者輸入的變數來替換就可以了。<BR/>
+<BR/>
+<pre><BR/>
+<%perl>
+my $sum = 0;
+while ($end > 0) {
+    $sum+=$end;
+}
+</%perl>
+總和： <% $sum %>
+
+<%args>
+$end
+</%args>
+</pre>
+<BR/>
+看來應該不是太困難，只是有點雜亂。如果我們每次都想要在頁面開始之前，就先用perl進行一堆運算，判斷的時候，可以把<%perl> ... </%perl>這一大段的區塊搬離開應該屬於HTML的位置嗎？其實在Mason也替你想到了這個問題，所以在Mason中你可以使用<%init> ... </%init>這個區塊，也就是進行初始化的工作。我們把剛剛的那一段頁面的程式碼重新排列組合一下。<BR/>
+<BR/>
+<pre><BR/>
+總和： <% $sum %>
+
+<%init>
+my $sum = 0;
+while ($end > 0) {
+    $sum+=$end;
+}
+</%init>
+
+<%args>
+$end
+</%args>
+</pre>
+<BR/>
+這樣看起來顯然乾淨多了，不過記得我們在使用Template::Toolkit的時候有一個很不錯的概念，也就是[% INSERT %]/[% INCLUDE %]的方式，在Mason中也有類似，也就是利用<& ... &>的方式來載入你的自訂元件。用個簡單的例子來看：<BR/>
+<BR/>
+<pre><BR/>
+<HTML>
+<HEAD><TITLE>標題</TITLE></HEAD>
+<BODY>
+<TABLE>
+% for my $grade (@grades) {
+<TR><TD><% $grade %></TD></TR>
+% }
+</TABLE>
+<HR>
+copyright 2004-2005 Hsin-chan Chien
+</BODY>
+</HTML>
+
+<%args>
+@grades
+</%args>&nbsp;&nbsp;
+</pre>
+<BR/>
+這時候，我們可以把前、後的HTML分別放到header跟footer兩個地方，然後利用<& ... &>來載入，所以這個內容就會被改寫為：<BR/>
+<BR/>
+<pre><BR/>
+<& header &>
+<TABLE>
+% for my $grade (@grades) {
+<TR><TD><% $grade %></TD></TR>
+% }
+</TABLE>
+<& footer &>
+
+<%args>
+@grades
+</%args>&nbsp;&nbsp;
+</pre>
+<BR/>
+這對於一整個網站維持所有網頁中部份元素的統一是一種非常方便而且有用的方式。而且任何在獨立的元素中被修改的部份也會在所有的頁面一次更新，這絕對比起你一個一個檔案修改要來得經濟實惠許多。尤其當你所進行的是一個非常龐大的網站時，更能了解這種用法的重要性。<BR/>
+<BR/>
+不可否認，我們花了這麼多的頁面來講這三個目前在Perl社群中最被常用來進行網站程式的工具模組，卻只能對每一個部份做非常入門的介紹。畢竟這三個模組都是非常複雜而且功能強大的。另外的特點就是他們都可以詳細到各自出版一本完整的使用手冊。不過對於一開始想要嘗試使用這幾個模組的人來說，事實上也能用陽春的功能幫你進行許多繁複的工作了。別忘了，大多數的Perl模組或語法，你只要了解他們的百分之二十，就可以處理百分之八十的日常工作。<BR/>
+<BR/>
+習題：<BR/>
+1. 以下是一個HTML頁面的原始碼，試著寫出action中指定的print.pl，並且印出所有欄位中，使用者填入的值。<BR/>
+<pre><BR/>
+<HTML>
+    <HEAD>
+        <TITLE>習題</TITLE>
+    </HEAD>
+    <BODY>
+        <FORM ACTION="print.pl" METHOD="POST">
+&nbsp;&nbsp;    姓名：<INPUT TYPE="text" NAME="name"><BR/>
+&nbsp;&nbsp;    地址：<INPUT TYPE="text" NAME="address"><BR/>
+&nbsp;&nbsp;    電話：<INPUT TYPE="text" NAME="tel"><BR/>
+&nbsp;&nbsp;    <INPUT TYPE="submit">
+&nbsp;&nbsp;</FORM>
+    </BODY>
+</HTML>
+</pre>
+2. 承上題，試著修改剛剛的print.pl，並且利用Template模組搭配以下的模板來進行輸出。<BR/>
+<pre><BR/>
+<TABLE>
+    <TR><TD>姓名：</TD><TD>[% name %]</TD></TR>
+    <TR><TD>地址：</TD><TD>[% address %]</TD></TR>
+    <TR><TD>電話：</TD><TD>[% tel %]</TD></TR>
+</TABLE>
+</pre>
+3. 承上題，將利用Template輸出的部份改為HTML::Mason。<BR/>
+
+      </blockquote>
+      </td>
+      <td  valign="top">
+      </td>
+  </tr>
+  <tr align=center>
+    <td><img src="index_5.jpg" width="743" height="27"></td>
+  </tr>
+</table>
+</BODY>
+<script type="text/javascript" src="http://tw.js.webmaster.yahoo.com/110643/ystat.js"></script><noscript><a href="http://tw.webmaster.yahoo.com"><img src=http://tw.img.webmaster.yahoo.com/110643/ystats.gif></a></noscript>
+</HTML>

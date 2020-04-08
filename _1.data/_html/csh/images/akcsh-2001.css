@@ -1,0 +1,25 @@
+a:hover {  text-decoration: underline; color: #000000}
+a {  text-decoration: none; color: #FF9900}
+.akb1 {  font-family: "細明體", "新細明體", "Arial", "Verdana"; font-size: 12px; line-height: 18px; color: #000000}
+.akb2 {  font-family: "新細明體", "細明體"; font-size: 9pt; color: #336600; line-height: 12pt}
+.akb3 {  font-family: "新細明體", "細明體"; font-size: 9pt; line-height: 16pt; color: #FFFFFF}
+.eakb1 {  font-family: "Arial", "Verdana"; font-size: 9pt; line-height: 12pt; color: #006600}
+P {	FONT: 11px Verdana, Arial, Geneva, Helvetica, sans-serif; MARGIN: 0px 0px 1px}
+A {	COLOR: #000000; TEXT-DECORATION: none; font-family: "新細明體", "細明體"}
+A:hover {	TEXT-DECORATION: underline; font-family: "新細明體", "細明體"; background-color: #FF6633}
+.nounderline {	TEXT-DECORATION: none}
+.header {	FONT: 20px Arial, Geneva, Verdana, Helvetica, sans-serif}
+.strap {	FONT-FAMILY: Arial, Geneva, Verdana, Helvetica, sans-serif; FONT-SIZE: 16px}
+.subhead {	FONT-WEIGHT: bold}
+.linklist {	FONT-FAMILY: Arial, Geneva, Verdana, Helvetica, sans-serif}
+.tiny {	FONT-FAMILY: Arial, Verdana, Geneva, Helvetica, sans-serif; FONT-SIZE: 10px}
+.smlhead {	FONT-WEIGHT: bold}
+.verdict {	FONT: bold 16px Arial, Geneva, Verdana, Helvetica, sans-serif}
+.forms {	FONT: 12px Arial, Geneva, Verdana, Helvetica, sans-serif}
+.date {	COLOR: white; FONT: bold 14px Arial, Verdana, Geneva, Helvetica, sans-serif}
+.dropitems {	COLOR: white; FONT: bold 11px Arial, Verdana, Geneva, Helvetica, sans-serif; PADDING-BOTTOM: 5px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; PADDING-TOP: 5px}
+.quickfinder {	COLOR: #ffffff; FONT: bold 12px Arial, Geneva, Verdana, Helvetica, sans-serif}
+.white {	COLOR: #FFFFFF; font-family: "新細明體", "細明體"; font-size: 9pt}.akh2 { font-family: "新細明體", "細明體"; font-size: 9pt; color: #990000}
+.akh1 { font-family: "新細明體", "細明體"; font-size: 12pt; color: #660033}
+.akh3 { font-family: "新細明體", "細明體"; font-size: 9pt; color: #000000}
+.akup1 {  font-family: "Arial", "Helvetica", "sans-serif"; font-size: 9px; color: #FF0000}
