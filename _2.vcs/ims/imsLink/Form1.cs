@@ -250,6 +250,7 @@ namespace imsLink
         int diff_b = 0;
         int timer_awb_cnt = 0;
         int awb_cnt = 0;
+        int Send_IMS_Data_cnt = 0;
 
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
@@ -3831,6 +3832,7 @@ namespace imsLink
 
         public bool Send_IMS_Data(byte cc, byte xx, byte yy, byte zz)
         {
+            Send_IMS_Data_cnt++;
             //serialPort1.DiscardInBuffer();    //can not use this
 
             byte[] data = new byte[5];
@@ -9239,6 +9241,7 @@ namespace imsLink
                 // Begin timing
                 stopwatch.Start();
                 richTextBox1.Text += "\nAWB 開始 : 0 秒\n";
+                Send_IMS_Data_cnt = 0;
                 flag_awb_break = false;
 
                 bt_awb_break.Visible = true;
@@ -9252,7 +9255,7 @@ namespace imsLink
                 if (cb_show_grid.Checked == true)
                 {
                     cb_show_grid.Checked = false;
-                    delay(100);
+                    delay(10);
                 }
 
                 tb_awb_mesg.Text = "AWB 開始";
@@ -9264,7 +9267,7 @@ namespace imsLink
                 timer_stage2.Enabled = true;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
 
-                delay(200);
+                delay(20);
 
                 timer_stage2.Enabled = false;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
@@ -9283,7 +9286,7 @@ namespace imsLink
                     //ww = awb_block;
                     //hh = awb_block;
                     refresh_picturebox2();
-                    delay(500);
+                    delay(100);
                 }
 
                 flag_do_find_awb_location_ok = false;
@@ -9319,7 +9322,7 @@ namespace imsLink
                     if (cb_auto_search.Checked == true)
                     {
                         progressBar_awb.Value = 5;
-                        delay(100);
+                        delay(10);
 
                         lb_rgb_r.Text = "";
                         lb_rgb_g.Text = "";
@@ -9373,11 +9376,11 @@ namespace imsLink
                 }
 
                 progressBar_awb.Value = 5;
-                delay(500);
+                delay(50);
                 //bt_awb_test.Text = "色彩校正開始";
                 tb_awb_mesg.Text = "色彩校正開始";
                 progressBar_awb.Value = 10;
-                delay(100);
+                delay(10);
 
                 /*
                 //debug picture
@@ -9418,7 +9421,7 @@ namespace imsLink
                     //bt_awb_test.Text = "檢查飽和結束";
                     tb_awb_mesg.Text = "檢查飽和結束";
                     progressBar_awb.Value = 30;
-                    delay(500);
+                    delay(50);
                     //bt_awb_test.Text = "粗調開始";
                     tb_awb_mesg.Text = "粗調開始";
                     progressBar_awb.Value = 32;
@@ -9521,7 +9524,7 @@ namespace imsLink
                     //bt_awb_test.Text = "粗調結束";
                     tb_awb_mesg.Text = "粗調結束";
                     progressBar_awb.Value = 52;
-                    delay(500);
+                    delay(50);
                     //bt_awb_test.Text = "細調開始";
                     tb_awb_mesg.Text = "細調開始";
                     progressBar_awb.Value = 56;
@@ -9568,7 +9571,7 @@ namespace imsLink
                     save_image_to_local_drive();
                     */
 
-                    delay(100);
+                    delay(10);
                     progressBar_awb.Value = 95;
                     tolerance_ratio = 1;
                 }
@@ -9642,6 +9645,7 @@ namespace imsLink
                 if (flag_awb_break == false)
                 {
                     richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+                    richTextBox1.Text += "AWB 完成\t總命令個數 : " + Send_IMS_Data_cnt.ToString() + " 個\n";
                     //bt_awb_test.Text = "色彩校正完成";
                     tb_awb_mesg.Text = "色彩校正完成";
                     bt_awb_break.Visible = false;
@@ -9663,6 +9667,7 @@ namespace imsLink
                             "right_left_point_cnt(" + awb_cnt.ToString() + ")=" + flag_right_left_point_cnt.ToString() + ";" +
                             "down_up_point_cnt(" + awb_cnt.ToString() + ")=" + flag_down_up_point_cnt.ToString() + ";" +
                             "awb_block(" + awb_cnt.ToString() + ")=" + awb_block.ToString() + ";" +
+                            "cmd(" + awb_cnt.ToString() + ")=" + Send_IMS_Data_cnt.ToString() + ";" +
                             "\n";
 
                         awb_cnt--;
@@ -9787,8 +9792,8 @@ namespace imsLink
                         diff = TARGET_AWB_G * awb_block * awb_block - rgb_g;
                         //diff = diff * 10 / 4;
                         diff = diff * 1 / (awb_block * awb_block);
-                        if (diff > 5)
-                            diff = 5;
+                        if (diff > 50)
+                            diff = 50;
 
                         data_expo += diff;
                         diff_g = diff;
@@ -10091,8 +10096,8 @@ namespace imsLink
                 //diff = (total_RGB_R / awb_block / awb_block) - (TARGET_AWB_R + 1);
                 diff = total_RGB_R - (TARGET_AWB_R * awb_block * awb_block + 1 * awb_block * awb_block);
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 20)
-                    diff = 20;
+                if (diff > 90)
+                    diff = 90;
 
                 diff_r = -diff;
                 timer_display_r_count = 0;
@@ -10124,8 +10129,8 @@ namespace imsLink
             {
                 diff = (TARGET_AWB_R * awb_block * awb_block - 1 * awb_block * awb_block) - total_RGB_R;
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 20)
-                    diff = 20;
+                if (diff > 90)
+                    diff = 90;
 
                 diff_r = diff;
                 timer_display_r_count = 0;
@@ -10164,8 +10169,8 @@ namespace imsLink
             {
                 diff = total_RGB_B - (TARGET_AWB_B * awb_block * awb_block + 1 * awb_block * awb_block);
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 20)
-                    diff = 20;
+                if (diff > 90)
+                    diff = 90;
 
                 diff_b = -diff;
                 timer_display_b_count = 0;
@@ -10195,8 +10200,8 @@ namespace imsLink
             {
                 diff = (TARGET_AWB_B * awb_block * awb_block - 1 * awb_block * awb_block) - total_RGB_B;
                 diff = diff * 16 / (awb_block * awb_block);
-                if (diff > 20)
-                    diff = 20;
+                if (diff > 90)
+                    diff = 90;
 
                 diff_b = diff;
                 timer_display_b_count = 0;

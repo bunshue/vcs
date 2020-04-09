@@ -22,6 +22,9 @@ namespace MoonPhase
 
 		//Variables for Moon program
 		private double ip;
+        private TextBox textBox1;
+        private Button button1;
+        private RichTextBox richTextBox1;
 		private double ag;
 
 		public frmMoon()
@@ -51,86 +54,124 @@ namespace MoonPhase
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(frmMoon));
-			this.btnToDay = new System.Windows.Forms.Button();
-			this.btnClose = new System.Windows.Forms.Button();
-			this.MyCalendar = new System.Windows.Forms.MonthCalendar();
-			this.lblAge = new System.Windows.Forms.Label();
-			this.PicMoon = new System.Windows.Forms.PictureBox();
-			this.SuspendLayout();
-			// 
-			// btnToDay
-			// 
-			this.btnToDay.Font = new System.Drawing.Font("Tahoma", 8.25F);
-			this.btnToDay.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.btnToDay.Location = new System.Drawing.Point(188, 176);
-			this.btnToDay.Name = "btnToDay";
-			this.btnToDay.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.btnToDay.Size = new System.Drawing.Size(75, 24);
-			this.btnToDay.TabIndex = 2;
-			this.btnToDay.Text = "Moon today";
-			this.btnToDay.Click += new System.EventHandler(this.btnToDay_Click);
-			// 
-			// btnClose
-			// 
-			this.btnClose.Font = new System.Drawing.Font("Tahoma", 8.25F);
-			this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.btnClose.Location = new System.Drawing.Point(368, 176);
-			this.btnClose.Name = "btnClose";
-			this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.btnClose.Size = new System.Drawing.Size(75, 24);
-			this.btnClose.TabIndex = 4;
-			this.btnClose.Text = "Close";
-			this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-			// 
-			// MyCalendar
-			// 
-			this.MyCalendar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.MyCalendar.Location = new System.Drawing.Point(188, 8);
-			this.MyCalendar.Name = "MyCalendar";
-			this.MyCalendar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.MyCalendar.TabIndex = 11;
-			this.MyCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MyCalendar_DateChanged);
-			// 
-			// lblAge
-			// 
-			this.lblAge.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.lblAge.Font = new System.Drawing.Font("Tahoma", 9.75F);
-			this.lblAge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.lblAge.Location = new System.Drawing.Point(16, 176);
-			this.lblAge.Name = "lblAge";
-			this.lblAge.Size = new System.Drawing.Size(155, 24);
-			this.lblAge.TabIndex = 12;
-			this.lblAge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// PicMoon
-			// 
-			this.PicMoon.BackColor = System.Drawing.Color.Navy;
-			this.PicMoon.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-			this.PicMoon.Location = new System.Drawing.Point(16, 8);
-			this.PicMoon.Name = "PicMoon";
-			this.PicMoon.Size = new System.Drawing.Size(155, 155);
-			this.PicMoon.TabIndex = 13;
-			this.PicMoon.TabStop = false;
-			// 
-			// frmMoon
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(455, 214);
-			this.Controls.Add(this.PicMoon);
-			this.Controls.Add(this.lblAge);
-			this.Controls.Add(this.MyCalendar);
-			this.Controls.Add(this.btnClose);
-			this.Controls.Add(this.btnToDay);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximizeBox = false;
-			this.Name = "frmMoon";
-			this.ShowInTaskbar = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "*Moon Phase*";
-			this.Load += new System.EventHandler(this.frmMoon_Load);
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMoon));
+            this.btnToDay = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.MyCalendar = new System.Windows.Forms.MonthCalendar();
+            this.lblAge = new System.Windows.Forms.Label();
+            this.PicMoon = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PicMoon)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // btnToDay
+            // 
+            this.btnToDay.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.btnToDay.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnToDay.Location = new System.Drawing.Point(188, 203);
+            this.btnToDay.Name = "btnToDay";
+            this.btnToDay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnToDay.Size = new System.Drawing.Size(75, 28);
+            this.btnToDay.TabIndex = 2;
+            this.btnToDay.Text = "Moon today";
+            this.btnToDay.Click += new System.EventHandler(this.btnToDay_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnClose.Location = new System.Drawing.Point(333, 203);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnClose.Size = new System.Drawing.Size(75, 28);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // MyCalendar
+            // 
+            this.MyCalendar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.MyCalendar.Location = new System.Drawing.Point(188, 9);
+            this.MyCalendar.Name = "MyCalendar";
+            this.MyCalendar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.MyCalendar.TabIndex = 11;
+            this.MyCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MyCalendar_DateChanged);
+            // 
+            // lblAge
+            // 
+            this.lblAge.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblAge.Font = new System.Drawing.Font("Tahoma", 9.75F);
+            this.lblAge.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblAge.Location = new System.Drawing.Point(16, 203);
+            this.lblAge.Name = "lblAge";
+            this.lblAge.Size = new System.Drawing.Size(155, 28);
+            this.lblAge.TabIndex = 12;
+            this.lblAge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PicMoon
+            // 
+            this.PicMoon.BackColor = System.Drawing.Color.Navy;
+            this.PicMoon.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.PicMoon.Location = new System.Drawing.Point(16, 9);
+            this.PicMoon.Name = "PicMoon";
+            this.PicMoon.Size = new System.Drawing.Size(155, 179);
+            this.PicMoon.TabIndex = 13;
+            this.PicMoon.TabStop = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox1.Location = new System.Drawing.Point(16, 260);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(155, 33);
+            this.textBox1.TabIndex = 14;
+            this.textBox1.Text = "2006/03/11";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(188, 260);
+            this.button1.Name = "button1";
+            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button1.Size = new System.Drawing.Size(75, 28);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "OK";
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(420, 9);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(249, 312);
+            this.richTextBox1.TabIndex = 16;
+            this.richTextBox1.Text = "";
+            // 
+            // frmMoon
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
+            this.ClientSize = new System.Drawing.Size(681, 333);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.PicMoon);
+            this.Controls.Add(this.lblAge);
+            this.Controls.Add(this.MyCalendar);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnToDay);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.Name = "frmMoon";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "*Moon Phase*";
+            this.Load += new System.EventHandler(this.frmMoon_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PicMoon)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 		#endregion
@@ -306,5 +347,19 @@ namespace MoonPhase
 		{
 			Application.Exit();
 		}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            bool conversionSuccessful = DateTime.TryParse(textBox1.Text, out dt);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
+                this.MyCalendar.SetDate(dt);
+
+            }
+            else
+                richTextBox1.Text += "DateTime.TryParse 失敗\n";
+        }
 	}
 }

@@ -78,6 +78,18 @@ namespace vcs_test_all_12_DateTime
             int dayCount = (int)tsDay.TotalDays;
             richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
 
+            //C# 計算差異天數
+            startDate = "628年7月21日";
+            endDate = "683年12月27日";
+
+            dtStart = DateTime.Parse(startDate);
+            dtEnd = DateTime.Parse(endDate);
+            // 計算差異天數
+            tsDay = dtEnd - dtStart;
+            dayCount = (int)tsDay.TotalDays;
+            richTextBox1.Text += "相差" + dayCount.ToString() + "天" + "\n";
+            richTextBox1.Text += "天1 : " + tsDay.Days.ToString() + "\n";        //same
+            richTextBox1.Text += "天1 : " + tsDay.TotalDays.ToString() + "\n";   //same
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1028,6 +1040,13 @@ namespace vcs_test_all_12_DateTime
             tlc.GetDayOfMonth(DateTime.Now).ToString();
             */
             richTextBox1.Text += "農曆" + tlc.GetYear(DateTime.Now).ToString() + "年" + tlc.GetMonth(DateTime.Now).ToString() + "月" + tlc.GetDayOfMonth(DateTime.Now).ToString() + "日\n";
+
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+
+
 
         }
 

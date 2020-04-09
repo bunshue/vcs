@@ -86,7 +86,6 @@ namespace vcs_ParseData
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //DateTime dt = DateTime.Now;
             DateTime dt = DateTime.Now;
             bool conversionSuccessful = DateTime.TryParse(textBox4.Text, out dt);    //out為必須
             if (conversionSuccessful == true)

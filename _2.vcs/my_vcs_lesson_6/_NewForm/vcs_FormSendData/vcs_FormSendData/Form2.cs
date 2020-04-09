@@ -29,6 +29,8 @@ namespace vcs_FormSendData
         public Form2()
         {
             InitializeComponent();
+            button_ok.DialogResult = System.Windows.Forms.DialogResult.OK;//設定button_ok為OK
+            button_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;//設定button_cancel為Cancel
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -32,7 +32,8 @@ namespace vcs_FormSendData
             this.richTextBox1.Text += "父得到信息 : " + form1_data + "\n";
         }
 
-        Form2 childForm = new Form2();
+        //使用自己建立的Form2表單
+        Form2 childForm = new Form2();      //實體化Form2視窗物件
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +47,8 @@ namespace vcs_FormSendData
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //childForm.StartPosition = FormStartPosition.CenterScreen;      //設定新表單的顯示位置, 居中顯示
+            //childForm.StartPosition = FormStartPosition.CenterParent;
             childForm.StartPosition = FormStartPosition.Manual;
             childForm.Location = new Point(this.Location.X + 550, this.Location.Y);
             childForm.Owner = this;
@@ -56,6 +59,68 @@ namespace vcs_FormSendData
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form2 childForm = new Form2();//產生Form2的物件，才可以使用它所提供的Method
+            //childForm.Show();         //不等結束
+            //childForm.ShowDialog();   //要等結束
+            childForm.ShowDialog(this); //設定Form2為Form1的上層，並開啟Form2視窗。由於在Form1的程式碼內使用this，所以this為Form1的物件本身
+
+            if (childForm.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                //若使用者在Form2按下了OK，則進入這個判斷式
+                richTextBox1.Text += "按下了" + childForm.DialogResult.ToString() + "\n";
+            }
+            else if (childForm.DialogResult == System.Windows.Forms.DialogResult.Cancel)
+            {
+                //若使用者在Form2按下了Cancel或者直接點選X關閉視窗，都會進入這個判斷式
+                richTextBox1.Text += "按下了" + childForm.DialogResult.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "按下了" + childForm.DialogResult.ToString() + "\n";
+            }
+
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // 繼承Form類別產生新的視窗表單
+            Form form_new = new Form();
+
+            form_new.Cursor = System.Windows.Forms.Cursors.Cross;
+            form_new.FormBorderStyle = FormBorderStyle.Sizable;
+            form_new.Height = 400;
+            form_new.HelpButton = true;
+            form_new.MaximizeBox = true;
+            form_new.MinimizeBox = true;
+            form_new.Name = "New Form";
+            form_new.ShowInTaskbar = true;
+            form_new.StartPosition = FormStartPosition.CenterParent;
+            form_new.Text = "New Form";
+            form_new.Width = 500;
+            form_new.WindowState = FormWindowState.Normal;
+            form_new.Enabled = true;
+
+            // 以Form類別的ShowDialog方法顯示視窗表單, 需要等到新表單結束, 不可重複開啟新表單
+            //form_new.ShowDialog();
+
+            // 以Form類別的Show方法顯示視窗表單, 不用等到新表單結束, 可重複開啟新表單
+            form_new.Show();
+
+        }
+
+        private Form3 frm3 = null;
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //Form1之 button6的「Modifiers」屬性變更為“public”，以供Form3存取。
+            //將Form1傳入Form3中
+            frm3 = new Form3(this);
+            //frm3.ShowDialog();
+            frm3.Show();
         }
     }
 }
