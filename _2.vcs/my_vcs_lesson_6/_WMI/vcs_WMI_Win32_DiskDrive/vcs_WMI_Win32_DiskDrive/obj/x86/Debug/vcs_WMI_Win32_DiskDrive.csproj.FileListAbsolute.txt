@@ -1,7 +1,0 @@
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\bin\Debug\vcs_WMI_Win32_DiskDrive.exe
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\bin\Debug\vcs_WMI_Win32_DiskDrive.pdb
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\obj\x86\Debug\vcs_WMI_Win32_DiskDrive.Form1.resources
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\obj\x86\Debug\vcs_WMI_Win32_DiskDrive.Properties.Resources.resources
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\obj\x86\Debug\vcs_WMI_Win32_DiskDrive.csproj.GenerateResource.Cache
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\obj\x86\Debug\vcs_WMI_Win32_DiskDrive.exe
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32_DiskDrive\vcs_WMI_Win32_DiskDrive\obj\x86\Debug\vcs_WMI_Win32_DiskDrive.pdb
