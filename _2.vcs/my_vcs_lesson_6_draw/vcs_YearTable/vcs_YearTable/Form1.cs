@@ -308,11 +308,8 @@ namespace vcs_YearTable
                 p = new Pen(Color.Green, 1);
                 g.DrawRectangle(p, offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2, ww, hh);
 
-
                 pictureBox1.Image = bitmap1;
             }
-
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -320,7 +317,7 @@ namespace vcs_YearTable
             //儲存圖檔
             if (bitmap1 != null)
             {
-                string filename = Application.StartupPath + "\\draw_test_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string filename = Application.StartupPath + "\\YearTable_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 //string filename1 = filename + ".jpg";
                 string filename2 = filename + ".bmp";
                 //string filename3 = filename + ".png";
@@ -336,146 +333,6 @@ namespace vcs_YearTable
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-
-        }
-
-        int life_st = 0;
-        int life_sp = 0;
-        int year_min = 10000;
-        int year_max = 0;
-        int position_st = 1;
-
-        void find_position_st(int position)
-        {
-            if (position > position_st)
-                position_st = position;
-        }
-
-        void find_max_min(int year)
-        {
-            if (year < year_min)
-                year_min = year;
-            if (year > year_max)
-                year_max = year;
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-
-            //load_personData();    //TBD
-
-            string[,] person = new string[19, 4] { 
-            { "寇準", "961", "1023" , "0"},
-            { "范仲淹", "989", "1052" , "2"},
-            { "包拯", "999", "1062" , "4"},
-            { "司馬光", "1019", "1086" , "3"},
-            { "王安石", "1021", "1086" , "5"},
-            { "歐陽修", "1007", "1072" , "1"},
-            { "秦觀", "1049", "1100" , "-1"},
-            { "黃庭堅", "1045", "1105" , "6"},
-            { "宋高宗", "1107", "1187" , "6"},
-            { "宋理宗", "1205", "1264" , "6"},
-            { "宋度宗", "1240", "1274" , "3"},
-            { "蘇軾", "1037", "1101" , "0"},
-            { "岳飛", "1103", "1142" , "0"},
-            { "李清照", "1084", "1155" , "1"},
-            { "朱熹", "1130", "1200" , "3"},
-            { "辛棄疾", "1140", "1207" , "4"},
-            { "文天祥", "1236", "1283" , "4"},
-            { "宋徽宗", "1082", "1135" , "2"},
-            { "宋欽宗", "1100", "1156" , "5"}
-            };
-            int[,] data = new int[19, 4];
-
-            int i;
-            int age;
-            int position;
-            int BORDER = 50;
-            int HEIGHT = 50;
-
-            for (i = 0; i < 19; i++)
-            {
-                life_st = int.Parse(person[i, 1]);
-                find_max_min(life_st);
-                data[i, 0] = life_st;
-                life_sp = int.Parse(person[i, 2]);
-                find_max_min(life_sp);
-                data[i, 1] = life_sp;
-                age = life_sp - life_st;
-                data[i, 2] = age;
-                position = int.Parse(person[i, 3]);
-                find_position_st(position);
-                data[i, 3] = position;
-                richTextBox1.Text += person[i, 0] + "\t" + life_st.ToString() + "\t" + life_sp.ToString() + "\t" + age.ToString() + "\t" + position.ToString() + "\n";
-            }
-            richTextBox1.Text += "min = " + year_min.ToString() + "\tmax = " + year_max.ToString() + "\n";
-            richTextBox1.Text += "W = " + pictureBox1.Width.ToString() + "\tH = " + pictureBox1.Height.ToString() + "\n";
-
-            pictureBox1.Size = new System.Drawing.Size(1200, 800);
-
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            richTextBox1.Text += "已新建圖檔\n";
-            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, BORDER, BORDER));
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 10, pictureBox1.Height - 10));
-
-            int total_width = pictureBox1.Width;
-            int total_length = year_max - year_min;
-            int ratio = (total_width - 200) / total_length;
-
-            richTextBox1.Text += "total_width = " + total_width.ToString() + "\ttotal_length = " + total_length.ToString() + "\n";
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-
-            int offset = year_min - BORDER;
-
-            //int position_st = 8;
-
-            g.DrawRectangle(new Pen(Color.Green), new Rectangle(BORDER, 10, total_length * ratio, 30));
-
-
-            int x;
-            int y;
-            int w;
-            int h;
-            for (i = 0; i < 19; i++)
-            {
-                if (data[i, 3] != -1)
-                {
-                    richTextBox1.Text += "AAA" + person[i, 0] + "\n";
-
-                    x = (data[i, 0] - year_min) * ratio + BORDER;
-                    y = BORDER + HEIGHT * data[i, 3];
-                    w = data[i, 2] * ratio;
-                    h = HEIGHT - 10;
-                    g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x, y, w, h));
-                    g.DrawRectangle(new Pen(Color.Black), new Rectangle(x, y, w, h));
-                    g.DrawString(person[i, 0], this.Font, new SolidBrush(Color.Black), (data[i, 0] - year_min) * ratio + data[i, 2] * ratio / 2 + BORDER, BORDER + HEIGHT * data[i, 3] + 20);
-                }
-                else
-                {
-                    position_st++;
-                    richTextBox1.Text += "BBB" + person[i, 0] + "\n";
-                    x = (data[i, 0] - year_min) * ratio + BORDER;
-                    y = BORDER + HEIGHT * position_st;
-                    w = data[i, 2] * ratio;
-                    h = HEIGHT - 10;
-                    g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x, y, w, h));
-                    g.DrawRectangle(new Pen(Color.Black), new Rectangle(x, y, w, h));
-                    g.DrawString(person[i, 0], this.Font, new SolidBrush(Color.Black), (data[i, 0] - year_min) * ratio + data[i, 2] * ratio / 2 + BORDER, BORDER + HEIGHT * position_st + 20);
-                }
-            }
-
-            //g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), 100, 100);
-            
-            pictureBox1.Image = bitmap1;
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -483,15 +340,70 @@ namespace vcs_YearTable
             richTextBox1.Text += "現在年 " + DateTime.Now.Year.ToString() + "\n";
         }
 
-        private const int PERSON_DATA_SUI = 0x00;   //person data 0, Sui
-        private const int PERSON_DATA_TANG = 0x01;   //person data 1, Tang
-        private const int PERSON_DATA_CHING = 0x02;   //person data 2, Ching
+        private const int EMPEROR_DATA_SUI = 0x00;      //emperor data 0, Sui
+        private const int EMPEROR_DATA_TANG = 0x01;     //emperor data 1, Tang
+        private const int EMPEROR_DATA_CHING = 0x02;    //emperor data 2, Ching
+
+        private const int PERSON_DATA_1 = 0x11;   //person data 1, Sung
+        private const int PERSON_DATA_2 = 0x12;   //person data 2, Ming
+        private const int PERSON_DATA_3 = 0x13;   //person data 3, Ching
 
         string[,] person = null;
 
         void load_personData(int index)
         {
-            if (index == PERSON_DATA_SUI)
+            if (index == PERSON_DATA_1)
+            {
+                person = new string[19, 4] { 
+                { "寇準", "961年", "1023年10月24日" , "1"},
+                { "范仲淹", "989年10月1日", "1052年6月19日" , "2"},
+                { "包拯", "999年3月5日", "1062年7月3日" , "3"},
+                { "歐陽修", "1007年8月1日", "1072年9月22日" , "4"},
+                { "司馬光", "1019年11月17日", "1086年10月11日" , "5"},
+                { "王安石", "1021年12月18日", "1086年5月21日" , "6"},
+                { "蘇軾", "1037年1月8日", "1101年8月24日" , "7"},
+                { "黃庭堅", "1045年", "1105年" , "8"},
+                { "秦觀", "1049年", "1100年9月17日" , "9"},
+                { "宋徽宗", "1082年6月7日", "1135年6月4日" , "10"},
+                { "李清照", "1084年3月13日", "1155年5月12日" , "11"},
+                { "宋欽宗", "1100年5月23日", "1161年6月14日" , "12"},
+                { "岳飛", "1103年3月24日", "1142年1月27日" , "13"},
+                { "宋高宗", "1107年5月21日", "1187年11月9日" , "14"},
+                { "朱熹", "1130年10月22日", "1200年4月23日" , "15"},
+                { "辛棄疾", "1140年5月28日", "1207年10月3日" , "16"},
+                { "宋理宗", "1205年1月26日", "1264年11月16日" , "17"},
+                { "文天祥", "1236年6月6日", "1283年1月9日" , "18"},
+                { "宋度宗", "1240年5月2日", "1274年8月12日" , "19"},
+                };
+            }
+            else if (index == PERSON_DATA_2)
+            {
+                person = new string[3, 4] { 
+                { "湯顯祖", "1550年9月24日", "1616年7月29日" , "1"},
+                { "莎士比亞", "1564年4月26日", "1616年4月23日" , "2"},
+                { "伊莉莎白一世", "1533年9月7日", "1603年3月24日" , "3"},
+                };
+            }
+            else if (index == PERSON_DATA_3)
+            {
+                //TBD
+                person = new string[3, 4] { 
+                { "ccc", "1550年9月24日", "1616年7月29日" , "1"},
+                { "cccc", "1564年4月26日", "1616年4月23日" , "2"},
+                { "ccccc", "1533年9月7日", "1603年3月24日" , "3"},
+                };
+            }
+            else
+            {
+                person = new string[1, 4] { 
+                { "xxx", "1550年9月24日", "1616年7月29日" , "1"},
+                };
+            }
+        }
+
+        void load_emperorData(int index)
+        {
+            if (index == EMPEROR_DATA_SUI)
             {
                 person = new string[3, 6] {
                 { "1", "隋文帝", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
@@ -499,7 +411,7 @@ namespace vcs_YearTable
                 { "3", "隋恭帝", "605年", "619年9月14日", "617年12月18日", "618年6月18日"},
                 };
             }
-            else if (index == PERSON_DATA_TANG)
+            else if (index == EMPEROR_DATA_TANG)
             {
                 person = new string[23, 6] { 
                 { "1", "唐高祖", "566年4月7日", "635年6月25日", "618年6月18日", "626年9月4日"},
@@ -527,7 +439,7 @@ namespace vcs_YearTable
                 { "23", "唐哀帝", "892年10月27日", "908年3月26日", "904年9月27日", "907年5月12日"},
                 };
             }
-            else if (index == PERSON_DATA_CHING)
+            else if (index == EMPEROR_DATA_CHING)
             {
                 person = new string[12, 6] { 
                 { "1", "清太祖", "1559年2月21日", "1626年9月30日", "1616年2月17日", "1626年9月30日"},
@@ -546,7 +458,9 @@ namespace vcs_YearTable
             }
             else
             {
-
+                person = new string[1, 6] {
+                { "1", "xxx", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
+                };
             }
         }
 
@@ -555,6 +469,98 @@ namespace vcs_YearTable
             richTextBox1.Clear();
 
             load_personData(index);
+
+            DateTime lifeEarliest = DateTime.Now;
+            DateTime lifeLatest = new DateTime(1, 1, 1);
+
+            int i;
+            int total_persons = person.GetUpperBound(0) + 1;
+            //richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
+
+            for (i = 0; i < total_persons; i++)
+            {
+                DateTime lifeStart = DateTime.Parse(person[i, 1]);
+                DateTime lifeEnd = DateTime.Parse(person[i, 2]);
+
+                if (lifeEarliest > lifeStart)
+                    lifeEarliest = lifeStart;
+
+                if (lifeLatest < lifeEnd)
+                    lifeLatest = lifeEnd;
+
+                // 計算差異天數
+                TimeSpan lifeDay = lifeEnd - lifeStart;
+                int lifedayCount = (int)lifeDay.TotalDays;
+                richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+            }
+
+            richTextBox1.Text += "壽命最早" + lifeEarliest.ToString() + "\n";
+            richTextBox1.Text += "壽命最晚" + lifeLatest.ToString() + "\n";
+            TimeSpan totalLife = lifeLatest - lifeEarliest;
+            int totalLifeDaysCount = (int)totalLife.TotalDays;
+            richTextBox1.Text += "壽命全長 " + totalLifeDaysCount.ToString() + " 天" + "\t" + DayConversionYMD(totalLifeDaysCount) + "\n";
+
+            //int age;
+            //int position;
+            int BORDER = 50;
+            int HEIGHT = 50;
+            int offset_x = 100;
+            int offset_y = 0;
+            int x_st;
+            int y_st;
+            int w;
+            int h;
+            Font f;
+            int ratio = 40;
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+            pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, total_persons * HEIGHT + BORDER * 2);
+
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "已新建圖檔\n";
+            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
+
+            for (i = 0; i < total_persons; i++)
+            {
+                int num;
+                num = int.Parse(person[i, 3]);
+                richTextBox1.Text += "第 " + num.ToString() + " 行 " + person[i, 1] + "\n";
+
+                DateTime lifeStart = DateTime.Parse(person[i, 1]);
+                DateTime lifeEnd = DateTime.Parse(person[i, 2]);
+
+                // 計算差異天數
+                TimeSpan lifeDay = lifeEnd - lifeStart;
+                int lifedayCount = (int)lifeDay.TotalDays;
+                richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+                x_st = BORDER + ((int)(lifeStart - lifeEarliest).TotalDays) / ratio + offset_x;
+                y_st = BORDER + 50 * (num - 1) + offset_y;
+
+                w = ((int)(lifeEnd - lifeStart).TotalDays) / ratio;
+                h = 40;
+
+                g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+                g.DrawRectangle(p, x_st, y_st, w, h);
+
+                f = new Font("標楷體", 22);
+                string str = person[i, 0] + " (" + ((double)(lifedayCount) / (double)365).ToString("N1", CultureInfo.InvariantCulture) + ")";
+
+                g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st + 5, y_st + 5));
+            }
+            pictureBox1.Image = bitmap1;
+        }
+
+        void draw_emperor_data(int index)
+        {
+            richTextBox1.Clear();
+
+            load_emperorData(index);
 
             DateTime lifeEarliest = DateTime.Now;
             DateTime lifeLatest = new DateTime(1, 1, 1);
@@ -576,6 +582,7 @@ namespace vcs_YearTable
             */
 
             int total_persons = person.GetUpperBound(0) + 1;
+            //richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
 
             for (i = 0; i < total_persons; i++)
             {
@@ -609,6 +616,7 @@ namespace vcs_YearTable
                 int workdayCount = (int)workDay.TotalDays;
                 richTextBox1.Text += "在位 " + workdayCount.ToString() + " 天" + "\t" + DayConversionYMD(workdayCount) + "\n";
             }
+
             richTextBox1.Text += "壽命最早" + lifeEarliest.ToString() + "\n";
             richTextBox1.Text += "壽命最晚" + lifeLatest.ToString() + "\n";
             TimeSpan totalLife = lifeLatest - lifeEarliest;
@@ -700,9 +708,7 @@ namespace vcs_YearTable
                     w = 1;
                 g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h));
                 g.DrawRectangle(p, x_st, y_st, w, h);
-
                 //richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
-
             }
             pictureBox1.Image = bitmap1;
         }
@@ -719,17 +725,32 @@ namespace vcs_YearTable
 
         private void button12_Click(object sender, EventArgs e)
         {
-            draw_person_data(PERSON_DATA_TANG);
+            draw_emperor_data(EMPEROR_DATA_TANG);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            draw_person_data(PERSON_DATA_CHING);
+            draw_emperor_data(EMPEROR_DATA_CHING);
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            draw_person_data(PERSON_DATA_SUI);
+            draw_emperor_data(EMPEROR_DATA_SUI);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_1);
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_2);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_3);
         }
     }
 }

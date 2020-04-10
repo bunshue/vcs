@@ -1,0 +1,7 @@
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\bin\Debug\vcs_WMI_Win32__tmp.exe
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\bin\Debug\vcs_WMI_Win32__tmp.pdb
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\obj\x86\Debug\vcs_WMI_Win32__tmp.Form1.resources
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\obj\x86\Debug\vcs_WMI_Win32__tmp.Properties.Resources.resources
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\obj\x86\Debug\vcs_WMI_Win32__tmp.csproj.GenerateResource.Cache
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\obj\x86\Debug\vcs_WMI_Win32__tmp.exe
+D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_5\_WMI\vcs_WMI_Win32__tmp\vcs_WMI_Win32__tmp\obj\x86\Debug\vcs_WMI_Win32__tmp.pdb
