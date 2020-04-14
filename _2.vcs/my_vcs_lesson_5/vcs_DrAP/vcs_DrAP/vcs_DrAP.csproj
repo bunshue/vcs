@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="img\matlab.png" />
     <None Include="img\ultraedit.jpg" />
     <None Include="img\python.bmp" />
   </ItemGroup>

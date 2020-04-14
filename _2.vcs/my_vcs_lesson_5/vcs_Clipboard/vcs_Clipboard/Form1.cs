@@ -87,7 +87,6 @@ namespace vcs_Clipboard
             //Clipboard.SetData(DataFormats.Text, Clipboard.GetData(DataFormats.Text) + richTextBox1.Text + "\n");
             //Clipboard.SetDataObject(Clipboard.GetText() + richTextBox1.Text + "\n");      //建議用此
             Clipboard.SetDataObject(Clipboard.GetText() + "累計新增一些資料" + "\n");      //建議用此
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -95,14 +94,12 @@ namespace vcs_Clipboard
             //C# – 貼上剪貼簿
             //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
             richTextBox1.Text += Clipboard.GetText();   //建議用此
-
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //C# – 清除剪貼簿
             Clipboard.Clear();
-
         }
 
         //Read text from clipboard
@@ -114,6 +111,26 @@ namespace vcs_Clipboard
                 clipText = System.Windows.Forms.Clipboard.GetText();
                 richTextBox1.Text += clipText + "\n";
             }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //C# – 貼上剪貼簿
+            //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
+            richTextBox1.Text += Clipboard.GetText();   //建議用此
+
+            richTextBox1.Text += "\n\n";
+            int len = Clipboard.GetText().Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += Clipboard.GetText()[i].ToString() + "\n";
+                richTextBox1.Text += ((int)Clipboard.GetText()[i]).ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n\n";
+
+
         }
     }
 }

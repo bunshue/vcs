@@ -41,6 +41,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -129,13 +130,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Location = new System.Drawing.Point(12, 298);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(159, 307);
+            this.groupBox1.Size = new System.Drawing.Size(159, 372);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "純文字剪貼簿";
@@ -143,7 +145,7 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(11, 235);
+            this.button9.Location = new System.Drawing.Point(11, 304);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(142, 52);
             this.button9.TabIndex = 10;
@@ -176,13 +178,24 @@
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(23, 622);
+            this.button10.Location = new System.Drawing.Point(23, 676);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(142, 52);
             this.button10.TabIndex = 11;
             this.button10.Text = "貼上剪貼簿";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(11, 220);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(142, 68);
+            this.button11.TabIndex = 11;
+            this.button11.Text = "貼上剪貼簿+編碼";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // Form1
             // 
@@ -221,6 +234,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
 

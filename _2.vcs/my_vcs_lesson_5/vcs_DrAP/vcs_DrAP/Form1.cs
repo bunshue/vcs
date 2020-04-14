@@ -32,6 +32,7 @@ namespace vcs_DrAP
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
             button20.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - button20.Width, richTextBox2.Location.Y);
             button11.Location = new Point(button11.Location.X + 100, button11.Location.Y + 10);
+            button24.Location = new Point(button13.Location.X + 55, button13.Location.Y);
 
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
             richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
@@ -347,6 +348,7 @@ namespace vcs_DrAP
 
         private const int SEARCH_MODE_VCS = 0x00;	//search vcs code
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code
+        private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code
         int search_mode = SEARCH_MODE_VCS;
 
         List<String> old_search_path = new List<String>();
@@ -1568,6 +1570,8 @@ namespace vcs_DrAP
                 pattern = "Form1.cs";
             else if (search_mode == SEARCH_MODE_PYTHON)
                 pattern = "py";
+            else if (search_mode == SEARCH_MODE_MATLAB)
+                pattern = ".m";
             else
                 pattern = "Form1.cs";
 
@@ -2123,6 +2127,8 @@ namespace vcs_DrAP
 
         private void button22_Click(object sender, EventArgs e)
         {
+            button22.BackgroundImage = null;
+            button22.BackColor = Color.Red;
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_PYTHON;
@@ -2153,6 +2159,8 @@ namespace vcs_DrAP
             }
             show_file_info3();
             flag_search_vcs_pattern = 1;
+            button22.BackColor = System.Drawing.SystemColors.ControlLight;
+            button22.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             return;
         }
 
@@ -2489,6 +2497,46 @@ namespace vcs_DrAP
         private void cb_file_s_CheckedChanged(object sender, EventArgs e)
         {
             flag_need_update_setup_file = true;
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            button24.BackgroundImage = null;
+            button24.BackColor = Color.Red;
+            button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
+            flag_function = FUNCTION_SEARCH;
+            search_mode = SEARCH_MODE_MATLAB;
+            if (textBox3.Text == "")
+            {
+                richTextBox2.Text += "未輸入搜尋內容\n";
+                return;
+            }
+
+            fileinfos.Clear();
+
+            string path = @"D:\___source_code\_git\part1\vcs\_4.cmpp\_matlab1_test";
+
+            if (path == String.Empty)
+                path = search_path;
+
+            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            if (System.IO.File.Exists(path))
+            {
+                // This path is a file
+                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
+                ProcessFileS(path);
+            }
+            else if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessDirectoryS(path);
+            }
+            show_file_info3();
+            flag_search_vcs_pattern = 1;
+            button24.BackColor = System.Drawing.SystemColors.ControlLight;
+            button24.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
+            return;
+
         }
 
 
