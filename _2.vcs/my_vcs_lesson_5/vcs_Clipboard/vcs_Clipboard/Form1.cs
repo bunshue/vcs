@@ -92,6 +92,7 @@ namespace vcs_Clipboard
         private void button8_Click(object sender, EventArgs e)
         {
             //C# – 貼上剪貼簿
+            richTextBox1.Text += "\n";
             //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
             richTextBox1.Text += Clipboard.GetText();   //建議用此
         }
@@ -116,10 +117,11 @@ namespace vcs_Clipboard
         private void button11_Click(object sender, EventArgs e)
         {
             //C# – 貼上剪貼簿
+            richTextBox1.Text += "\n";
             //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
             richTextBox1.Text += Clipboard.GetText();   //建議用此
 
-            richTextBox1.Text += "\n\n";
+            richTextBox1.Text += "\n";
             int len = Clipboard.GetText().Length;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
             int i;
@@ -128,9 +130,7 @@ namespace vcs_Clipboard
                 //richTextBox1.Text += Clipboard.GetText()[i].ToString() + "\n";
                 richTextBox1.Text += ((int)Clipboard.GetText()[i]).ToString("X2") + " ";
             }
-            richTextBox1.Text += "\n\n";
-
-
+            richTextBox1.Text += "\n";
         }
     }
 }
