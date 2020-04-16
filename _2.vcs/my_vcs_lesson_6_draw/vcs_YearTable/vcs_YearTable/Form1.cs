@@ -23,138 +23,27 @@ namespace vcs_YearTable
         {
             InitializeComponent();
 
-            button2.Enabled = false;
-            button3.Enabled = false;
-            button4.Enabled = false;
-            button5.Enabled = false;
-            button7.Enabled = false;
-
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             p = new Pen(Color.Red, 3);
             sb = new SolidBrush(Color.Red);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //新建圖檔, 初始化畫布
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            richTextBox1.Text += "已新建圖檔\n";
-            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
-            button7.Enabled = true;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //載入圖片至畫布
-            string filename = string.Empty;
-            filename = "C:\\______test_files\\picture1.jpg";
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-            bitmap1 = new Bitmap(filename);
-
-            int width;
-            int height;
-
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            richTextBox1.Text += "畫布大小 : W = " + width.ToString() + " H = " + height.ToString() + "\n";
-
-            //pictureBox1.Size = new Size(width, height);   //改變圖框大小
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Image = bitmap1;
-
-            g = Graphics.FromImage(bitmap1);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //畫東西
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
-            g.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(100, 100, 300, 300));
-
-            int width = 200;
-            int height = 200;
-            Point[] points = new Point[3];
-            points[0] = new Point(width / 2, height / 8);
-            points[1] = new Point(width * 7 / 8, height * 7 / 8);
-            points[2] = new Point(width * 1 / 8, height * 7 / 8);
-            g.FillPolygon(sb, points);
-            
-            pictureBox1.Image = bitmap1;
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
-            //清除畫布
-            //g.Clear(Color.White);
-            g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //逐點繪圖
-            int width = bitmap1.Width;
-            int height = bitmap1.Height;
-            int xx;
-            int yy;
-            Color pt;
-
-            //讀取/修改每一的的RGB值
-            for (yy = 0; yy < height / 2; yy += 1)
+            if (g != null)
             {
-                for (xx = 0; xx < width / 2; xx += 1)
-                {
-                    pt = bitmap1.GetPixel(xx, yy);
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 255 - pt.R, 255 - pt.G, 255 - pt.B));
-                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
-                    //bitmap1.SetPixel(xx, yy, Color.White);
-                }
+                //清除畫布
+                //g.Clear(Color.White);
+                g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
+
+                pictureBox1.Image = bitmap1;
             }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //儲存圖檔
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\draw_test_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                //string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                //string filename3 = filename + ".png";
-
-                //bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                bitmap1.Save(@filename2, ImageFormat.Bmp);
-                //bitmap1.Save(@filename3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                //richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                //richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-
 
         private class eraNameList
         {
@@ -378,17 +267,31 @@ namespace vcs_YearTable
             }
             else if (index == PERSON_DATA_2)
             {
-                person = new string[3, 4] { 
-                { "湯顯祖", "1550年9月24日", "1616年7月29日" , "1"},
-                { "莎士比亞", "1564年4月26日", "1616年4月23日" , "2"},
-                { "伊莉莎白一世", "1533年9月7日", "1603年3月24日" , "3"},
+                person = new string[15, 4] { 
+                { "嘉靖帝", "1507年9月16日", "1567年1月23日", "1"},
+                { "隆慶帝", "1537年3月4日", "1572年7月5日", "2"},
+                { "萬曆帝", "1563年9月4日", "1620年8月18日", "3"},
+                { "泰昌帝", "1582年8月28日", "1620年9月26日", "1"},
+                { "天啟帝", "1605年12月23日", "1627年9月30日", "2"},
+                { "崇禎帝", "1611年2月6日", "1644年4月25日", "4"},
+                { "哥倫布", "1451年", "1506年5月20日", "1"},
+                { "哥白尼", "1473年2月19日", "1543年5月24日", "3"},
+                { "湯顯祖", "1550年9月24日", "1616年7月29日" , "6"},
+                { "莎士比亞", "1564年4月26日", "1616年4月23日" , "5"},
+                { "伊莉莎白一世", "1533年9月7日", "1603年3月24日" , "4"},
+                { "努爾哈赤", "1559年2月21日", "1626年9月30日" , "7"},
+                { "皇太極", "1592年11月28日", "1643年9月21日" , "8"},
+                { "牛頓", "1643年1月4日", "1727年3月31日", "5"},
+                { "萊布尼茲", "1646年7月1日", "1716年11月14日", "9"},
                 };
             }
             else if (index == PERSON_DATA_3)
             {
-                person = new String[21, 4] { 
-                { "乾隆帝", "1711年9月25日", "1799年2月7日" , "1"},
-                { "嘉慶帝", "1760年11月13日", "1820年9月2日" , "2"},
+                person = new String[31, 4] { 
+                { "雍正帝", "1678年12月13日", "1735年10月8日", "1"},
+                { "年羹堯", "1679年", "1726年1月15日", "3"},
+                { "乾隆帝", "1711年9月25日", "1799年2月7日" , "2"},
+                { "嘉慶帝", "1760年11月13日", "1820年9月2日" , "1"},
                 { "紀昀", "1724年8月3日", "1805年3月14日" , "4"},
                 { "和珅", "1750年7月1日", "1799年2月22日" , "5"},
                 { "道光帝", "1782年9月16日", "1850年2月26日", "3"},
@@ -398,17 +301,24 @@ namespace vcs_YearTable
                 { "奕訢", "1833年1月11日", "1898年5月29日", "4"},
                 { "奕譞", "1840年10月16日", "1891年1月1日", "5"},
                 { "慈禧", "1835年11月29日", "1908年11月15日", "2"},
-                { "隆裕", "1868年1月28日", "1913年2月22日", "7"},
-                { "袁世凱", "1859年9月16日", "1916年6月6日", "13"},
-                { "李鴻章", "1823年2月15日", "1901年11月7日", "9"},
+                { "隆裕", "1868年1月28日", "1913年2月22日", "6"},
+                { "袁世凱", "1859年9月16日", "1916年6月6日", "17"},
+                { "曾國藩", "1811年11月26日", "1872年3月12日", "9"},
+                { "左宗棠", "1812年11月10日", "1885年9月5日", "10"},
+                { "張之洞", "1837年9月2日", "1909年10月4日", "12"},
+                { "榮祿", "1836年4月6日", "1903年4月11日", "13"},
+                { "李鴻章", "1823年2月15日", "1901年11月7日", "11"},
                 { "華盛頓", "1732年2月22日", "1799年12月14日" , "6"},
                 { "拿破崙", "1769年8月15日", "1821年5月5日" , "7"},
-                //{ "路易十四", "1638年9月5日", "1715年9月1日", "7"},
+                { "路易十四", "1638年9月5日", "1715年9月1日", "6"},
                 { "路易十六", "1754年8月23日", "1793年1月21日", "8"},
-                { "維多利亞女王", "1819年5月24日", "1901年1月22日", "6"},
+                { "林肯", "1809年2月12日", "1865年4月15日", "6"},
+                { "莫札特", "1756年1月27日", "1791年12月5日", "9"},
+                { "貝多芬", "1770年12月16日", "1827年3月26日", "12"},
+                { "維多利亞女王", "1819年5月24日", "1901年1月22日", "14"},
                 { "俾斯麥", "1815年4月1日", "1898年7月30日", "8"},
-                { "伊藤博文", "1841年10月16日", "1909年10月26日", "11"},
-                { "明治天皇", "1852年11月3日", "1912年7月30日", "12"},
+                { "伊藤博文", "1841年10月16日", "1909年10月26日", "15"},
+                { "明治天皇", "1852年11月3日", "1912年7月30日", "16"},
                 };
             }
             else
