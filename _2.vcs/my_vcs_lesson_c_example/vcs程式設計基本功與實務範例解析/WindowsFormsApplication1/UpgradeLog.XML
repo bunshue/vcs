@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WindowsFormsApplication1">
+</Property><Property Name="方案檔" Value="D:\Chiu2012\程式設計\programming-C#\C#201009\WindowsFormsApplication1\WindowsFormsApplication1.sln">
+</Property><Property Name="Date" Value="2012年5月17日">
+</Property><Property Name="Time" Value="下午 20:04">
+</Property></Properties><Event ErrorLevel="0" Project="WindowsFormsApplication1" Source="WindowsFormsApplication1.csproj" Description="專案轉換成功">
+</Event><Event ErrorLevel="3" Project="WindowsFormsApplication1" Source="WindowsFormsApplication1.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WindowsFormsApplication1.sln" Description="方案轉換成功">
+</Event><Event ErrorLevel="3" Project="" Source="WindowsFormsApplication1.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WindowsFormsApplication1" Source="WindowsFormsApplication1.csproj" Description="掃描完成: 專案檔不需要升級。">
+</Event></UpgradeLog>

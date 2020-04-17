@@ -69,5 +69,80 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "檔案內容 : " + y + "\n";
             richTextBox1.Text += "長度：" + y.Length.ToString() + "\n";
         }
+
+        private const int ENCODING_1 = 1;	//encoding type 1, big5
+        private const int ENCODING_2 = 2;	//encoding type 2, gb2312
+        private const int ENCODING_3 = 3;	//encoding type 3, shift_jis
+        private const int ENCODING_4 = 4;	//encoding type 4, unicode
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__text\\Compressor.c";
+            load_text_file(filename, ENCODING_1);
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__text\\sc\\襟裳岬.txt";
+            load_text_file(filename, ENCODING_2);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__text\\jap\\饩Ⓚ丗钡冦冦葢轿瘅.txt";
+            load_text_file(filename, ENCODING_3);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__text\\Form1.cs.txt";
+            load_text_file(filename, ENCODING_4);
+        }
+
+        void load_text_file(string filename, int encodng_type)
+        {
+            //使用指定編碼，big5、gb2312、shift_jis、unicode不分大小寫
+
+            richTextBox2.Clear();
+            //StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+            StreamReader sr;
+
+            switch (encodng_type)
+            {
+                case ENCODING_1:
+                    richTextBox1.Text += "ENCODING_1, Big5\n";
+                    //sr = new StreamReader(filename, Encoding.Default);    //Windows預設，就是big5
+                    //sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
+                    sr = new StreamReader(filename, Encoding.GetEncoding(950)); //same
+                    break;
+                case ENCODING_2:
+                    richTextBox1.Text += "ENCODING_2, gb2312\n";
+                    sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));
+                    break;
+                case ENCODING_3:
+                    richTextBox1.Text += "ENCODING_3, Shift_jis\n";
+                    sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
+                    break;
+                case ENCODING_4:
+                    richTextBox1.Text += "ENCODING_4, Unicode\n";
+                    sr = new StreamReader(filename, Encoding.Default);
+                    break;
+                default:
+                    richTextBox1.Text += "ENCODING unknown, xxxxxxxx\n";
+                    sr = new StreamReader(filename, Encoding.Default);
+                    break;
+            }
+            richTextBox2.Text += sr.ReadToEnd();
+            sr.Close();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+        }
+
     }
 }

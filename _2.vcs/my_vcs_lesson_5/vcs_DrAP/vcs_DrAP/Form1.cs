@@ -1565,20 +1565,28 @@ namespace vcs_DrAP
             bool res;
             string pattern = string.Empty;// = "Form1.cs";
 
-
             if(search_mode == SEARCH_MODE_VCS)
-                pattern = "Form1.cs";
+                pattern = ".cs";
             else if (search_mode == SEARCH_MODE_PYTHON)
                 pattern = "py";
             else if (search_mode == SEARCH_MODE_MATLAB)
                 pattern = ".m";
             else
-                pattern = "Form1.cs";
+                pattern = ".cs";
 
             res = fi.FullName.ToLower().Replace(" ", "").Contains(pattern.ToLower());
 
             if (res == true)
             {
+                if (search_mode == SEARCH_MODE_VCS)
+                {
+                    if (fi.FullName.ToLower().Replace(" ", "").Contains("designer"))
+                    {
+                        res = false;
+                        return;
+                    }
+                }
+
                 //richTextBox2.Text += fi.FullName + "\n";
                 StreamReader sr = new StreamReader(fi.FullName, Encoding.UTF8);
 
