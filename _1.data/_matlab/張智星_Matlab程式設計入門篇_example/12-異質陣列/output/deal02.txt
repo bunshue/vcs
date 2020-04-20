@@ -1,0 +1,23 @@
+
+dirs = 
+
+  Columns 1 through 6
+
+    '.'    '..'    'appdata'    'bin'    'bugreport'    'etc'
+
+  Columns 7 through 11
+
+    'examples'    'extern'    'help'    'java'    'lib'
+
+  Columns 12 through 16
+
+    'licenses'    'mcr'    'notebook'    'polyspace'    'remote'
+
+  Columns 17 through 21
+
+    'resources'    'rtw'    'runtime'    'simulink'    'stateflow'
+
+  Columns 22 through 25
+
+    'sys'    'toolbox'    'ui'    'uninstall'
+

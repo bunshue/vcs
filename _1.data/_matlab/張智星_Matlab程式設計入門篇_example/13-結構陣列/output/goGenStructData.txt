@@ -1,0 +1,1 @@
+Error in running goGenStructData! (Logged to error.log)

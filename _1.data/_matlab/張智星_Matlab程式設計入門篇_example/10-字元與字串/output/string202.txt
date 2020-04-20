@@ -1,0 +1,7 @@
+
+departments =
+
+ee  
+cs  
+econ
+

@@ -1,0 +1,18 @@
+
+A = 
+
+    'James Bond'    [3x2 double]
+    [    3.1416]    [5x5 double]
+
+
+B = 
+
+    [3x3 double]    [1x4 double]
+    [2.2204e-16]    'NTU'       
+
+
+C = 
+
+    'James Bond'    [3x2 double]    [3x3 double]    [1x4 double]
+    [    3.1416]    [5x5 double]    [2.2204e-16]    'NTU'       
+

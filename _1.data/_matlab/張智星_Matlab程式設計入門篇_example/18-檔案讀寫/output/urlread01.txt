@@ -1,0 +1,15 @@
+<HTML>
+<HEAD>
+<META http-equiv="Refresh"
+	content="0; URL=http://neural.cs.nthu.edu.tw/jang">
+</HEAD>
+
+<BODY>
+The link you just clicked is obsolete.<br>
+You are being transported automatically to Roger Jang's current
+homepage at
+<a href="http://neural.cs.nthu.edu.tw/jang">
+         http://neural.cs.nthu.edu.tw/jang</a>.
+</BODY>
+</HTML>
+

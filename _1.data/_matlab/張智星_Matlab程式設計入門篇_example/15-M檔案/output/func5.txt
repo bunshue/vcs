@@ -1,0 +1,6 @@
+[Warning: The P-code file func5.p was generated prior to MATLAB
+version 7.5 (R2007b) and will not be supported in a future release.
+Use <a href="matlab:doc pcode">pcode</a> to regenerate func5.p using MATLAB R2007b or later.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+Error in running func5! (Logged to error.log)

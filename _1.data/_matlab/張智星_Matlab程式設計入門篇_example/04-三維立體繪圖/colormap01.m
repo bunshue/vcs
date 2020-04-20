@@ -1,0 +1,2 @@
+cm=colormap;
+size(cm)

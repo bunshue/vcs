@@ -1,0 +1,6 @@
+[Warning: The encoding 'UTF-16' is not supported.
+See the documentation for FOPEN.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('readChinese_unicode', 'D:\users\jang\books\matlabProgramming4beginner\example\10-字元與字串\readChinese_unicode.m', 2)" style="font-weight:bold">readChinese_unicode</a> (<a href="matlab: opentoline('D:\users\jang\books\matlabProgramming4beginner\example\10-字元與字串\readChinese_unicode.m',2,0)">line 2</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+這是一句中文，編碼方式是 unicode！

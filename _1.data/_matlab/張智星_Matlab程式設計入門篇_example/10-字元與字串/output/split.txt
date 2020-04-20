@@ -1,0 +1,11 @@
+
+str =
+
+This-is-a-test
+
+After running "tokenList=split(str, '-')":
+
+tokenList = 
+
+    'This'    'is'    'a'    'test'
+

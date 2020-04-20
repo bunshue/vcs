@@ -1,0 +1,4 @@
+Thomas Wang	72 71 75 81 80 86
+Brian Chung	99 95 98 96 99 99
+Alexander S.-H. Huang	90 85 87 90 88 92
+Simon Lin	65 63 70 63 62 61

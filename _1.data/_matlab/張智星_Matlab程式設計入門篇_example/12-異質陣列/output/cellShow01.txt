@@ -1,0 +1,6 @@
+
+A = 
+
+    'James Bond'    [3x2 double]
+    [    3.1416]    [5x5 double]
+

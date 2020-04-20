@@ -1,0 +1,6 @@
+      name: 'Alex'
+    scores: [80 85 90 88]
+
+      name: 'Betty'
+    scores: [88 100 90 80]
+

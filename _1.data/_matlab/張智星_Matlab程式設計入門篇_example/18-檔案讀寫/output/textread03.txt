@@ -1,0 +1,15 @@
+
+ans =
+
+cell
+
+
+ans =
+
+contents = textread('textread03.m','%s','delimiter','\n','whitespace','');
+
+
+ans =
+
+class(contents)		% 印出 contents 的資料類別
+

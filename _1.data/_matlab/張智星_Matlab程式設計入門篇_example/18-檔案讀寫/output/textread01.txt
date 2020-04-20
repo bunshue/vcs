@@ -1,0 +1,26 @@
+data.txt ªº¤º®e¡G
+
+Timmy OnlineGames 13
+Annie Chatrooms 10
+Roger Tennis 41
+
+name = 
+
+    'Timmy'
+    'Annie'
+    'Roger'
+
+
+hobby = 
+
+    'OnlineGames'
+    'Chatrooms'
+    'Tennis'
+
+
+age =
+
+    13
+    10
+    41
+

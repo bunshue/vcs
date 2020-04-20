@@ -1,0 +1,9 @@
+i=1, bigram(277).token=黃鶴, bigram(277).count=6
+i=2, bigram(668).token=鶴樓, bigram(668).count=3
+i=3, bigram(861).token=樓上, bigram(861).count=3
+i=4, bigram(603).token=上青, bigram(603).count=4
+i=5, bigram(129).token=青山, bigram(129).count=10
+i=6, bigram(241).token=山中, bigram(241).count=7
+i=7, bigram(2376).token=中腸, bigram(2376).count=2
+i=8, bigram(773).token=腸斷, bigram(773).count=3
+i=9, bigram(552).token=斷E, bigram(552).count=4

@@ -1,0 +1,8 @@
+
+h = 
+
+  2x1 <a href="matlab:helpPopup matlab.graphics.chart.primitive.Line" style="font-weight:bold">Line</a> array:
+
+  Line
+  Line
+

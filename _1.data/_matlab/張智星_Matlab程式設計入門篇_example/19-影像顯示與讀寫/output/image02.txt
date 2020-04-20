@@ -1,0 +1,3 @@
+min(min(X)) = 1
+max(max(X)) = 81
+size(map, 1) = 81

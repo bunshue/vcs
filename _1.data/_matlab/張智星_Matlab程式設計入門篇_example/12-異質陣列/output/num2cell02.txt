@@ -1,0 +1,5 @@
+
+D = 
+
+    [2x1 double]    [2x1 double]    [2x1 double]
+

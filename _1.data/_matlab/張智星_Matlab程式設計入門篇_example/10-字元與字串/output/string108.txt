@@ -1,0 +1,11 @@
+
+ans =
+
+  Columns 1 through 5
+
+       20170       26085       20107       65292       20170
+
+  Columns 6 through 7
+
+       26085       30050
+

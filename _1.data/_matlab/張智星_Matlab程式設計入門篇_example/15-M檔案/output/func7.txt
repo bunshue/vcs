@@ -1,0 +1,2 @@
+mfilename = func7
+Error in running func7! (Logged to error.log)

@@ -28,19 +28,23 @@ namespace vcs_CopyFromScreen
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
 
-            String file1 = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             //將裁切出的矩形存成JPG圖檔。
-            myImage.Save(file1);
-            richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + file1 + "\n";
+            String filename1 = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            myImage.Save(filename1, ImageFormat.Jpeg);
+            richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename1 + "\n";
 
             //將裁切出的矩形存成其他格式
-            String file2 = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            Image imgCanvas = (Image)myImage;
-            imgCanvas.Save(file2, ImageFormat.Bmp);
-            richTextBox1.Text += "全螢幕截圖2，存檔檔名：" + file2 + "\n";
+            String filename2 = Application.StartupPath + "\\image_full_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            myImage.Save(filename2, ImageFormat.Bmp);
+            richTextBox1.Text += "全螢幕截圖2，存檔檔名：" + filename2 + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            save_current_program_to_local_drive();
+        }
+
+        void save_current_program_to_local_drive()
         {
             //本程式截圖
             Bitmap myImage = new Bitmap(this.Width, this.Height);
@@ -51,10 +55,16 @@ namespace vcs_CopyFromScreen
             //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
-            String file = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            myImage.Save(file);
-            richTextBox1.Text += "本程式截圖，存檔檔名：" + file + "\n";
 
+            //存成bmp檔
+            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            myImage.Save(filename, ImageFormat.Bmp);
+
+            //存成jpg檔
+            //String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //myImage.Save(filename, ImageFormat.Jpeg);
+
+            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -67,9 +77,16 @@ namespace vcs_CopyFromScreen
             IntPtr dc1 = g.GetHdc();
             g.ReleaseHdc(dc1);
             //this.pictureBox1.Image = image;   若有picturebox 可以貼上
-            String file = Application.StartupPath + "\\image_partial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            image.Save(file, ImageFormat.Jpeg); //把圖片存起來
-            richTextBox1.Text += "已部分截圖存檔完成, 檔名 : " + file + "\n";
+
+            //存成bmp檔
+            String filename = Application.StartupPath + "\\image_partial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            image.Save(filename, ImageFormat.Bmp); //把圖片存起來
+            richTextBox1.Text += "已部分截圖存檔完成, 檔名 : " + filename + "\n";
+
+            //存成jpg檔
+            //String filename = Application.StartupPath + "\\image_partial_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //image.Save(filename, ImageFormat.Jpeg); //把圖片存起來
+            //richTextBox1.Text += "已部分截圖存檔完成, 檔名 : " + filename + "\n";
         }
     }
 }

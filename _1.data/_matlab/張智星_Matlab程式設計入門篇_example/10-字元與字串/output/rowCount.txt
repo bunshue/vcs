@@ -1,0 +1,29 @@
+Original string matrix:
+一台
+八爪
+三光
+人性
+八爪
+三光
+八爪
+After sorting and finding counts of unique rows:
+八爪 ==> 3
+三光 ==> 2
+人性 ==> 1
+一台 ==> 1
+Original cell array of strings:
+    'abc'
+    'acd'
+    'ad'
+    'a'
+    'bc'
+    'ad'
+    'acd'
+    'acd'
+
+After sorting and finding counts of unique rows:
+acd ==> 3
+ad ==> 2
+bc ==> 1
+abc ==> 1
+a ==> 1

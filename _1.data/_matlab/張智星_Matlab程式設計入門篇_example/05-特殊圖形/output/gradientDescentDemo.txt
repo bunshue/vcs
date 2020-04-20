@@ -1,0 +1,32 @@
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('gradientDescentDemo', 'd:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m', 24)" style="font-weight:bold">gradientDescentDemo</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m',24,0)">line 24</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('gradientDescentDemo', 'd:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m', 25)" style="font-weight:bold">gradientDescentDemo</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m',25,0)">line 25</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('gradientDescentDemo', 'd:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m', 39)" style="font-weight:bold">gradientDescentDemo</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m',39,0)">line 39</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('gradientDescentDemo', 'd:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m', 41)" style="font-weight:bold">gradientDescentDemo</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\05-特殊圖形\gradientDescentDemo.m',41,0)">line 41</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 

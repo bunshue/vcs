@@ -1,0 +1,7 @@
+檔案名稱 = D:\users\jang\books\matlabProgramming4beginner\example\20-音訊讀寫、錄製與播放\welcome.wav
+壓縮方式 = Uncompressed
+通道個數 = 1 個
+取樣頻率 = 11025 Hz
+取樣點總個數 = 16001 個
+音訊長度 = 1.45134 秒
+取樣點解析度 = 8 位元/取樣點
