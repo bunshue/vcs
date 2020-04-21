@@ -92,32 +92,6 @@ namespace vcs_tmp_all
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            richTextBox2.Clear();
-            int i;
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox2.Text += i.ToString() + " ";
-            }
-            File.WriteAllText(@"C:\______test_vcs\\my_text_file.txt", richTextBox2.Text, Encoding.Default);
-            richTextBox2.Text += "\n已存檔C:\\______test_vcs\\my_text_file.txt\n";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            richTextBox2.Clear();
-            int i;
-            byte[] aaaaa = new byte[256];
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBo21.Text += i.ToString();
-                aaaaa[i] = (byte)i;
-            }
-            File.WriteAllBytes(@"C:\______test_vcs\\my_bin_file.bin", aaaaa);
-            richTextBox2.Text += "已存檔C:\\______test_vcs\\my_bin_file.bin\n";
-        }
-
 
     }
 }

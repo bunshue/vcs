@@ -48,7 +48,7 @@ namespace vcs_ReadWrite_BIN
 
             //寫資料
             File.WriteAllBytes(filename, data_read);
-            richTextBox1.Text += "寫成檔案" + filename + "\n";
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -447,6 +447,21 @@ namespace vcs_ReadWrite_BIN
 
             sw.Close();
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
+            richTextBox1.Clear();
+            int i;
+            byte[] aaaaa = new byte[256];
+            for (i = 0; i < 256; i++)
+            {
+                //richTextBo21.Text += i.ToString();
+                aaaaa[i] = (byte)i;
+            }
+            File.WriteAllBytes(filename, aaaaa);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
     }
 }

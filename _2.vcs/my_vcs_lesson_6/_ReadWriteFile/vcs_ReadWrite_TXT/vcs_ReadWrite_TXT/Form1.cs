@@ -75,14 +75,26 @@ namespace vcs_ReadWrite_TXT
             string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
             try
             {
-                StreamReader SReader = new StreamReader(filename, Encoding.Default);
+                StreamReader sr = new StreamReader(filename, Encoding.Default);
                 string line = string.Empty;
                 int i = 0;
-                while ((line = SReader.ReadLine()) != null)
+
+                /*
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    line = sr.ReadLine();            // 讀取文字到 line 變數
+                    if (line.Length > 0)
+                    {
+                    }
+                }
+                */
+
+                while ((line = sr.ReadLine()) != null)  // 讀取文字到 line 變數
                 {
                     i++;
-                    richTextBox2.Text += "第" + i.ToString() + "行\t" + line + Environment.NewLine;
+                    richTextBox2.Text += "第" + i.ToString() + "行\t" + line + "\tlength:" + line.Length.ToString() + "\n";
                 }
+                sr.Close();
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -135,7 +147,8 @@ namespace vcs_ReadWrite_TXT
                     break;
                 case ENCODING_2:
                     richTextBox1.Text += "ENCODING_2, gb2312\n";
-                    sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字
+                    //sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字, same
+                    sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"), true);
                     break;
                 case ENCODING_3:
                     richTextBox1.Text += "ENCODING_3, Shift_jis\n";
@@ -171,19 +184,19 @@ namespace vcs_ReadWrite_TXT
         private void button12_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
-            write_text_file(filename, ENCODING_1);
+            write_text_file(filename, ENCODING_2);
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
-            write_text_file(filename, ENCODING_1);
+            write_text_file(filename, ENCODING_3);
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".unicode.txt";
-            write_text_file(filename, ENCODING_1);
+            write_text_file(filename, ENCODING_4);
         }
 
         void write_text_file(string filename, int encodng_type)
@@ -193,26 +206,18 @@ namespace vcs_ReadWrite_TXT
             string content = "";
             content = "漢字內碼陆羽茶经都はるみ123";
 
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter sw;
 
             switch (encodng_type)
             {
                 case ENCODING_1:
                     richTextBox1.Text += "ENCODING_1, Big5\n";
-                    //sr = new StreamReader(filename, Encoding.Default);    //Windows預設，就是big5
-                    //sr = new StreamReader(filename, Encoding.GetEncoding("big5"));
-                    //sr = new StreamReader(filename, Encoding.GetEncoding(950)); //same
-                    //sw = new StreamWriter(filename, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
-                    //sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.UTF8);    //指名編碼格式
-
                     try
                     {
-                        sw = new StreamWriter(File.Open(filename, FileMode.Create), Encoding.GetEncoding("big5"));    //指名編碼格式
-
+                        sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
                         sw.WriteLine(content);
                         sw.Close();
-
-
                     }
                     catch (Exception ex)
                     {
@@ -220,29 +225,78 @@ namespace vcs_ReadWrite_TXT
                         return;
                     }
                     break;
-                    /*
                 case ENCODING_2:
                     richTextBox1.Text += "ENCODING_2, gb2312\n";
-                    sr = new StreamReader(filename, Encoding.GetEncoding("gb2312"));    //以gb2312編碼讀取文字檔案中的漢字
+                    try
+                    {
+                        sw = new StreamWriter(fs, Encoding.GetEncoding("gb2312"));   //指名編碼格式
+                        sw.WriteLine(content);
+                        sw.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                        return;
+                    }
                     break;
                 case ENCODING_3:
                     richTextBox1.Text += "ENCODING_3, Shift_jis\n";
-                    sr = new StreamReader(filename, Encoding.GetEncoding("shift_jis"));
+                    try
+                    {
+                        sw = new StreamWriter(fs, Encoding.GetEncoding("shift_jis"));   //指名編碼格式
+                        sw.WriteLine(content);
+                        sw.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                        return;
+                    }
                     break;
                 case ENCODING_4:
                     richTextBox1.Text += "ENCODING_4, Unicode\n";
-                    //sr = new StreamReader(filename, Encoding.Default);    //同
-                    //sr = new StreamReader(filename, Encoding.UTF8);       //同
-                    sr = new StreamReader(filename, Encoding.Unicode);      //同
+                    try
+                    {
+                        //sw = new StreamWriter(fs, Encoding.GetEncoding("utf-8"));   //指名編碼格式 the same
+                        sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式
+                        sw.WriteLine(content);
+                        sw.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                        return;
+                    }
                     break;
                 default:
                     richTextBox1.Text += "ENCODING unknown, xxxxxxxx\n";
-                    sr = new StreamReader(filename, Encoding.Default);  //使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
-                     */
-                    //break;
+                    try
+                    {
+                        sw = new StreamWriter(fs, Encoding.Default);   //指名編碼格式
+                        sw.WriteLine(content);
+                        sw.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                        return;
+                    }
+                    break;
             }
-            //richTextBox2.Text += sr.ReadToEnd();
-            //sr.Close();
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".default.txt";
+            richTextBox1.Clear();
+            int i;
+            for (i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += i.ToString() + " ";
+            }
+            File.WriteAllText(filename, richTextBox1.Text, Encoding.Default);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
 
     }

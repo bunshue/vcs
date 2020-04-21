@@ -11,7 +11,6 @@ namespace vcs_Console_1
     {
         static void Main(string[] args)
         {
-            //string path = "c:\\______test_vcs";  //預設開啟的路徑
             string path = "C:\\Windows\\System32\\com";  //預設開啟的路徑
 
             // Specify the starting folder on the command line, or in 
