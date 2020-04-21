@@ -173,7 +173,7 @@ namespace my_rgb_yuv
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\picture\\ims_image_20191220_162739.bmp";
+            string filename = "C:\\______test_files\\ims_image.bmp";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 

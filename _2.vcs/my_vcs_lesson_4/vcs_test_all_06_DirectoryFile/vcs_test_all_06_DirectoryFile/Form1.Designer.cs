@@ -103,6 +103,7 @@
             this.button61 = new System.Windows.Forms.Button();
             this.button62 = new System.Windows.Forms.Button();
             this.button63 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -211,7 +212,7 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(18, 547);
+            this.button9.Location = new System.Drawing.Point(1105, 570);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(102, 43);
             this.button9.TabIndex = 8;
@@ -562,6 +563,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button68);
             this.groupBox1.Controls.Add(this.button25);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button7);
@@ -575,7 +577,7 @@
             this.groupBox1.Controls.Add(this.button49);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 530);
+            this.groupBox1.Size = new System.Drawing.Size(200, 601);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "檔案操作";
@@ -973,11 +975,22 @@
             this.button63.Text = "xxx";
             this.button63.UseVisualStyleBackColor = true;
             // 
+            // button68
+            // 
+            this.button68.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button68.Location = new System.Drawing.Point(6, 529);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(185, 40);
+            this.button68.TabIndex = 59;
+            this.button68.Text = "刪除檔案 (使用資源回收筒)";
+            this.button68.UseVisualStyleBackColor = true;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1558, 597);
+            this.ClientSize = new System.Drawing.Size(1558, 625);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -1075,6 +1088,7 @@
         private System.Windows.Forms.Button button61;
         private System.Windows.Forms.Button button62;
         private System.Windows.Forms.Button button63;
+        private System.Windows.Forms.Button button68;
     }
 }
 

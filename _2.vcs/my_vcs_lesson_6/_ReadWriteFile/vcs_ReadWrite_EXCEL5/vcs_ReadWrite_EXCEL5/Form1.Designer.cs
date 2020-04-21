@@ -34,11 +34,12 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 37);
+            this.button1.Size = new System.Drawing.Size(131, 95);
             this.button1.TabIndex = 0;
-            this.button1.Text = "匯出一個excel檔";
+            this.button1.Text = "匯出資料至Excel, 並存檔";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

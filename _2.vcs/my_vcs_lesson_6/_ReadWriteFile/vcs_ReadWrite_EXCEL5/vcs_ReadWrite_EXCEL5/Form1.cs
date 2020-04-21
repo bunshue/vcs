@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-
 using Excel = Microsoft.Office.Interop.Excel;
 //using System.Diagnostics;
 //using System.Runtime.InteropServices;
 
 /*
+加入必要的 using 指示詞
+using Excel = Microsoft.Office.Interop.Excel;
+
 順序
 1. 加入以上using
 2. 參考/加入參考/COM/Microsoft Office 12.0 Object Library
@@ -21,7 +23,6 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 
 參考/加入參考/COM/Microsoft Excel 12.0 Object Library (用此即可)
-
 */
 
 namespace vcs_ReadWrite_EXCEL5
@@ -105,13 +106,13 @@ namespace vcs_ReadWrite_EXCEL5
             // Call to AutoFormat in Visual C# 2010.
             workSheet.Range["A1", "B3"].AutoFormat(Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic2);
 
+            //Copy 方法會將工作表加入剪貼簿
             // Put the spreadsheet contents on the clipboard. The Copy method has one
             // optional parameter for specifying a destination. Because no argument  
             // is sent, the destination is the Clipboard.
-            //Copy 方法會將工作表加入剪貼簿
             workSheet.Range["A1:B3"].Copy();
 
-            String filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
+            string filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx";
             workSheet.SaveAs(filename);
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
 

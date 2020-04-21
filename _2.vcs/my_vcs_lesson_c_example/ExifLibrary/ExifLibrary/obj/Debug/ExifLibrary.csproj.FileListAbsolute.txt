@@ -1,0 +1,8 @@
+D:\Desktop\source\ExifLibrary\bin\Debug\ExifLibrary.dll.config
+D:\Desktop\source\ExifLibrary\bin\Debug\ExifLibrary.dll
+D:\Desktop\source\ExifLibrary\bin\Debug\ExifLibrary.pdb
+D:\Desktop\source\ExifLibrary\obj\Debug\ResolveAssemblyReference.cache
+D:\Desktop\source\ExifLibrary\obj\Debug\ExifLibrary.BinaryMapViewer.resources
+D:\Desktop\source\ExifLibrary\obj\Debug\ExifLibrary.csproj.GenerateResource.Cache
+D:\Desktop\source\ExifLibrary\obj\Debug\ExifLibrary.dll
+D:\Desktop\source\ExifLibrary\obj\Debug\ExifLibrary.pdb

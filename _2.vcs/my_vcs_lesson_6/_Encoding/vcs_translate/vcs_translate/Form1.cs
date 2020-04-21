@@ -25,6 +25,7 @@ namespace vcs_translate
             return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
         }
 
+        //使用系統 kernel32.dll LCMapString進行轉換
         internal const int LOCALE_SYSTEM_DEFAULT = 0x0800;
         internal const int LCMAP_SIMPLIFIED_CHINESE = 0x02000000;
         internal const int LCMAP_TRADITIONAL_CHINESE = 0x04000000;
@@ -43,17 +44,38 @@ namespace vcs_translate
             return tTarget;
         }
 
-
+        /// <summary>
+        /// 將繁體中文字元轉換成簡體中文
+        /// </summary>
+        /// <param name="strBig5"></param>
+        /// <returns></returns>
+        private string Big5translateGB2312(string strBig5)
+        {
+            String tTarget = new String(' ', strBig5.Length);
+            int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_SIMPLIFIED_CHINESE, strBig5, strBig5.Length, tTarget, strBig5.Length);
+            return tTarget;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text = Big5toGB2312(this.richTextBox1.Text);
-            //richTextBox3.Text = GB2312translateBig5(this.richTextBox2.Text);
+            richTextBox5.Text = Big5toGB2312(this.richTextBox1.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox3.Text = GB2312translateBig5(this.richTextBox2.Text);
+            richTextBox6.Text = GB2312translateBig5(this.richTextBox2.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox4.Clear();
+            richTextBox5.Clear();
+            richTextBox6.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox5.Text = Big5translateGB2312(this.richTextBox3.Text);
         }
     }
 }

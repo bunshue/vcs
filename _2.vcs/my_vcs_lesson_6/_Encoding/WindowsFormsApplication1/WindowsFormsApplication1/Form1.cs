@@ -149,14 +149,12 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string tt = "唐王";
+            string str = "都はるみ全曲集２ Disc 2";
             int i;
-            richTextBox1.Text += "len = " + tt.Length.ToString() + "\n";
-            for (i = 0; i < tt.Length; i++)
+            richTextBox1.Text += "len = " + str.Length.ToString() + "\n";
+            for (i = 0; i < str.Length; i++)
             {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + tt[i] + "\tvalue\t" + ((int)tt[i]).ToString("X4") + "\n";
-
-
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + str[i] + "\tvalue\t" + ((int)str[i]).ToString("X4") + "\n";
             }
             richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
         }
@@ -168,6 +166,9 @@ namespace WindowsFormsApplication1
             {
                 richTextBox1.Text += "unicode value = 0x" + i.ToString("X4") + ", code = " + ((char)i).ToString() + "\n";
             }
+
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)

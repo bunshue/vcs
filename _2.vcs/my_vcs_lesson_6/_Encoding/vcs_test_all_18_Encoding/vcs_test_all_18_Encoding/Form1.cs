@@ -28,43 +28,43 @@ namespace vcs_test_all_18_Encoding
             InitializeComponent();
         }
 
-        private string Big5toGB2312(string strBig5)
-        {
-            StringBuilder sb = new StringBuilder();
-            byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-            return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
-        }
+                                                                private string Big5toGB2312(string strBig5)
+                                                                {
+                                                                    StringBuilder sb = new StringBuilder();
+                                                                    byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
+                                                                    return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
+                                                                }
 
-        //使用系統 kernel32.dll LCMapString進行轉換
-        internal const int LOCALE_SYSTEM_DEFAULT = 0x0800;
-        internal const int LCMAP_SIMPLIFIED_CHINESE = 0x02000000;
-        internal const int LCMAP_TRADITIONAL_CHINESE = 0x04000000;
-        [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern int LCMapString(int Locale, int dwMapFlags, string lpSrcStr, int cchSrc, [Out] string lpDestStr, int cchDest);
+                                                                //使用系統 kernel32.dll LCMapString進行轉換
+                                                                internal const int LOCALE_SYSTEM_DEFAULT = 0x0800;
+                                                                internal const int LCMAP_SIMPLIFIED_CHINESE = 0x02000000;
+                                                                internal const int LCMAP_TRADITIONAL_CHINESE = 0x04000000;
+                                                                [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
+                                                                internal static extern int LCMapString(int Locale, int dwMapFlags, string lpSrcStr, int cchSrc, [Out] string lpDestStr, int cchDest);
 
-        /// <summary>
-        /// 將簡體中文字元轉換成繁體中文
-        /// </summary>
-        /// <param name="strGB2312"></param>
-        /// <returns></returns>
-        private string GB2312translateBig5(string strGB2312)
-        {
-            String tTarget = new String(' ', strGB2312.Length);
-            int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_TRADITIONAL_CHINESE, strGB2312, strGB2312.Length, tTarget, strGB2312.Length);
-            return tTarget;
-        }
+                                                                /// <summary>
+                                                                /// 將簡體中文字元轉換成繁體中文
+                                                                /// </summary>
+                                                                /// <param name="strGB2312"></param>
+                                                                /// <returns></returns>
+                                                                private string GB2312translateBig5(string strGB2312)
+                                                                {
+                                                                    String tTarget = new String(' ', strGB2312.Length);
+                                                                    int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_TRADITIONAL_CHINESE, strGB2312, strGB2312.Length, tTarget, strGB2312.Length);
+                                                                    return tTarget;
+                                                                }
 
-        /// <summary>
-        /// 將繁體中文字元轉換成簡體中文
-        /// </summary>
-        /// <param name="strBig5"></param>
-        /// <returns></returns>
-        private string Big5translateGB2312(string strBig5)
-        {
-            String tTarget = new String(' ', strBig5.Length);
-            int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_SIMPLIFIED_CHINESE, strBig5, strBig5.Length, tTarget, strBig5.Length);
-            return tTarget;
-        }
+                                                                /// <summary>
+                                                                /// 將繁體中文字元轉換成簡體中文
+                                                                /// </summary>
+                                                                /// <param name="strBig5"></param>
+                                                                /// <returns></returns>
+                                                                private string Big5translateGB2312(string strBig5)
+                                                                {
+                                                                    String tTarget = new String(' ', strBig5.Length);
+                                                                    int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_SIMPLIFIED_CHINESE, strBig5, strBig5.Length, tTarget, strBig5.Length);
+                                                                    return tTarget;
+                                                                }
 
         /*
         1. 專案->參考->右鍵->加入參考->COM->選Microsoft Word 11.0 Object Library->確定
@@ -101,17 +101,17 @@ namespace vcs_test_all_18_Encoding
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.txtGB2312.Text = Big5toGB2312(this.txtSource.Text);
+                                                        this.txtGB2312.Text = Big5toGB2312(this.txtSource.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.txtSC1.Text = Big5translateGB2312(this.txtTC1.Text);
+                                                        this.txtSC1.Text = Big5translateGB2312(this.txtTC1.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.txtTC2.Text = GB2312translateBig5(this.txtSC2.Text);
+                                                        this.txtTC2.Text = GB2312translateBig5(this.txtSC2.Text);
         }
 
         /// <summary>

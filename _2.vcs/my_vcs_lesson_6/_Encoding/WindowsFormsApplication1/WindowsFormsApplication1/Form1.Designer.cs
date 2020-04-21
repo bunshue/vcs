@@ -82,11 +82,11 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 166);
+            this.button4.Location = new System.Drawing.Point(12, 146);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(75, 43);
             this.button4.TabIndex = 4;
-            this.button4.Text = "button4";
+            this.button4.Text = "打印文字編碼";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

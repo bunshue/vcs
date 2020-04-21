@@ -227,6 +227,96 @@ namespace WindowsFormsApplication111
 
         }
 
+        //偵測原始檔案類型
+
+        //應改用binary read
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "偵測原始檔案類型";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            //openFileDialog1.DefaultExt = "*.txt";
+            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "檔案 : " + openFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "長度 : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+                int len = openFileDialog1.FileName.Length;
+
+                if (len < 10)
+                {
+                    richTextBox1.Text += "檔案太小, 忽略";
+                    return;
+                }
+
+
+                len = 10;
+                int[] data = new int[len];
+
+                string builtHex = string.Empty;
+                using (Stream S = File.OpenRead(openFileDialog1.FileName))
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        data[i] = S.ReadByte();
+                        builtHex += data[i].ToString("X2") + " ";
+
+                        /*
+                        if (ImageTypes.ContainsKey(builtHex))
+                        {
+                            string 真實副檔名 = ImageTypes[builtHex];
+                            break;
+                        }
+                        */
+                    }
+                    richTextBox1.Text += "data : " + builtHex + "\n";
+                    if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
+                    {
+                        richTextBox1.Text += "PNG 檔案\n";
+                    }
+                    else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
+                    {
+                        richTextBox1.Text += "JPG 檔案\n";
+                    }
+                    else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
+                    {
+                        richTextBox1.Text += "GIF 檔案\n";
+                    }
+                    else if ((data[0] == 'B') && (data[1] == 'M'))
+                    {
+                        richTextBox1.Text += "BMP 檔案\n";
+                    }
+                    else if ((data[0] == 0xFF) && (data[1] == 0xFE))
+                    {
+                        richTextBox1.Text += " 純文字Unicode 檔案\n";
+                    }
+                    else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
+                    {
+                        richTextBox1.Text += "MP3 檔案\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "其他 檔案\n";
+                    }
+
+
+                }
+
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+
+        }
+
 
 
 

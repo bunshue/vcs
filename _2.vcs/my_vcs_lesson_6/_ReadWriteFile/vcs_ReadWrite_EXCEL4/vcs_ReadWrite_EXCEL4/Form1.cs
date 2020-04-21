@@ -96,9 +96,7 @@ namespace vcs_ReadWrite_EXCEL4
             xlsApp = null;
 
 
-            richTextBox1.Text += "存檔檔名: " + filename + "\n";
-
-
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
 
 
         }

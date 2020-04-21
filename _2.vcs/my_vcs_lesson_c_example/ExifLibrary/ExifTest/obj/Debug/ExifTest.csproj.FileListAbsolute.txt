@@ -1,0 +1,11 @@
+D:\Desktop\source\ExifTest\bin\Debug\ExifTest.exe.config
+D:\Desktop\source\ExifTest\bin\Debug\ExifTest.exe
+D:\Desktop\source\ExifTest\bin\Debug\ExifTest.pdb
+D:\Desktop\source\ExifTest\bin\Debug\ExifLibrary.dll
+D:\Desktop\source\ExifTest\bin\Debug\ExifLibrary.pdb
+D:\Desktop\source\ExifTest\obj\Debug\ResolveAssemblyReference.cache
+D:\Desktop\source\ExifTest\obj\Debug\ExifLibrary.FormMain.resources
+D:\Desktop\source\ExifTest\obj\Debug\ExifLibrary.Properties.Resources.resources
+D:\Desktop\source\ExifTest\obj\Debug\ExifTest.csproj.GenerateResource.Cache
+D:\Desktop\source\ExifTest\obj\Debug\ExifTest.exe
+D:\Desktop\source\ExifTest\obj\Debug\ExifTest.pdb

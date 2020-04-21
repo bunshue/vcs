@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.IO;    //for Directory
 using System.Collections;   //for ArrayList
 
+using Microsoft.VisualBasic.FileIO;
+
 namespace vcs_test_all_06_DirectoryFile
 {
     public partial class Form1 : Form
@@ -1330,7 +1332,6 @@ namespace vcs_test_all_06_DirectoryFile
             richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
             string TempFileName = System.IO.Path.GetTempFileName();
             richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
-
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -1775,6 +1776,24 @@ namespace vcs_test_all_06_DirectoryFile
             richTextBox1.Text += File.GetAttributes(filename) + "\n";
             File.SetAttributes(filename, FileAttributes.ReadOnly);
             richTextBox1.Text += File.GetAttributes(filename) + "\n";
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            //刪除檔案(使用資源回收筒)
+
+            //先將Microsoft.VisualBasic.Dll加入參考。
+            //參考/加入參考/.NET/Microsoft.VisualBasic
+            //加上 using Microsoft.VisualBasic.FileIO;    //引用Microsoft.VisualBasic.FileIO命名空間。
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                FileSystem.DeleteFile(openFileDialog1.FileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                richTextBox1.Text += "已將檔案 : " + openFileDialog1.FileName + " 移至資源回收筒\n";
+            }
+            else
+                richTextBox1.Text += "未選取檔案\n";
 
         }
 
