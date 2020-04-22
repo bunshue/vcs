@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-#if DEBUG
-            ExifLibrary.MemoryBinStream memoryBinStream1 = new ExifLibrary.MemoryBinStream();
-#endif
+            ExifLibrary.MemoryBinStream memoryBinStream2 = new ExifLibrary.MemoryBinStream();
             this.fdOpen = new System.Windows.Forms.OpenFileDialog();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.ssExif = new System.Windows.Forms.StatusStrip();
@@ -40,29 +38,32 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.lvExif = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbField = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-#if DEBUG
             this.binaryMapViewer1 = new ExifLibrary.BinaryMapViewer();
-#endif
             this.pbThumb = new System.Windows.Forms.PictureBox();
             this.tsExif = new System.Windows.Forms.ToolStrip();
             this.btnOpen = new System.Windows.Forms.ToolStripButton();
             this.fdSave = new System.Windows.Forms.SaveFileDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.ssExif.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -84,11 +85,11 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(613, 425);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(961, 485);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(613, 478);
+            this.toolStripContainer1.Size = new System.Drawing.Size(961, 538);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -105,25 +106,25 @@
             this.lblThumbnail});
             this.ssExif.Location = new System.Drawing.Point(0, 0);
             this.ssExif.Name = "ssExif";
-            this.ssExif.Size = new System.Drawing.Size(613, 22);
+            this.ssExif.Size = new System.Drawing.Size(961, 22);
             this.ssExif.TabIndex = 0;
             // 
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(39, 17);
+            this.lblStatus.Size = new System.Drawing.Size(43, 17);
             this.lblStatus.Text = "Ready";
             // 
             // lblByteOrder
             // 
             this.lblByteOrder.Name = "lblByteOrder";
-            this.lblByteOrder.Size = new System.Drawing.Size(74, 17);
+            this.lblByteOrder.Size = new System.Drawing.Size(80, 17);
             this.lblByteOrder.Text = "#ByteOrder#";
             // 
             // lblThumbnail
             // 
             this.lblThumbnail.Name = "lblThumbnail";
-            this.lblThumbnail.Size = new System.Drawing.Size(79, 17);
+            this.lblThumbnail.Size = new System.Drawing.Size(83, 17);
             this.lblThumbnail.Text = "#Thumbnail#";
             // 
             // splitContainer1
@@ -139,8 +140,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(613, 425);
-            this.splitContainer1.SplitterDistance = 370;
+            this.splitContainer1.Size = new System.Drawing.Size(961, 485);
+            this.splitContainer1.SplitterDistance = 580;
             this.splitContainer1.TabIndex = 5;
             // 
             // splitContainer3
@@ -157,8 +158,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tbField);
-            this.splitContainer3.Size = new System.Drawing.Size(370, 425);
-            this.splitContainer3.SplitterDistance = 303;
+            this.splitContainer3.Size = new System.Drawing.Size(580, 485);
+            this.splitContainer3.SplitterDistance = 345;
             this.splitContainer3.TabIndex = 0;
             // 
             // lvExif
@@ -172,13 +173,13 @@
             this.lvExif.Location = new System.Drawing.Point(0, 0);
             this.lvExif.MultiSelect = false;
             this.lvExif.Name = "lvExif";
-            this.lvExif.Size = new System.Drawing.Size(370, 303);
+            this.lvExif.Size = new System.Drawing.Size(580, 345);
             this.lvExif.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvExif.TabIndex = 2;
             this.lvExif.UseCompatibleStateImageBehavior = false;
             this.lvExif.View = System.Windows.Forms.View.Details;
-            this.lvExif.SelectedIndexChanged += new System.EventHandler(this.lvExif_SelectedIndexChanged);
             this.lvExif.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvExif_ColumnClick);
+            this.lvExif.SelectedIndexChanged += new System.EventHandler(this.lvExif_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -202,7 +203,7 @@
             this.tbField.Name = "tbField";
             this.tbField.ReadOnly = true;
             this.tbField.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbField.Size = new System.Drawing.Size(370, 118);
+            this.tbField.Size = new System.Drawing.Size(580, 136);
             this.tbField.TabIndex = 0;
             // 
             // splitContainer2
@@ -214,30 +215,28 @@
             // 
             // splitContainer2.Panel1
             // 
-#if DEBUG
+            this.splitContainer2.Panel1.Controls.Add(this.button1);
+            this.splitContainer2.Panel1.Controls.Add(this.richTextBox1);
             this.splitContainer2.Panel1.Controls.Add(this.binaryMapViewer1);
-#endif
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.pbThumb);
-            this.splitContainer2.Size = new System.Drawing.Size(239, 425);
-            this.splitContainer2.SplitterDistance = 283;
+            this.splitContainer2.Size = new System.Drawing.Size(377, 485);
+            this.splitContainer2.SplitterDistance = 322;
             this.splitContainer2.TabIndex = 0;
-#if DEBUG
             // 
             // binaryMapViewer1
             // 
             this.binaryMapViewer1.BinSize = 8;
             this.binaryMapViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.binaryMapViewer1.Location = new System.Drawing.Point(0, 0);
-            memoryBinStream1.Position = ((long)(0));
-            this.binaryMapViewer1.Map = memoryBinStream1;
+            memoryBinStream2.Position = ((long)(0));
+            this.binaryMapViewer1.Map = memoryBinStream2;
             this.binaryMapViewer1.Name = "binaryMapViewer1";
-            this.binaryMapViewer1.Size = new System.Drawing.Size(239, 283);
+            this.binaryMapViewer1.Size = new System.Drawing.Size(377, 322);
             this.binaryMapViewer1.TabIndex = 3;
             this.binaryMapViewer1.BinSelect += new ExifLibrary.BinaryMapViewer.OnBinSelect(this.binaryMapViewer1_BinSelect);
-#endif
             // 
             // pbThumb
             // 
@@ -246,7 +245,7 @@
             this.pbThumb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbThumb.Location = new System.Drawing.Point(0, 0);
             this.pbThumb.Name = "pbThumb";
-            this.pbThumb.Size = new System.Drawing.Size(239, 138);
+            this.pbThumb.Size = new System.Drawing.Size(377, 159);
             this.pbThumb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbThumb.TabIndex = 2;
             this.pbThumb.TabStop = false;
@@ -259,7 +258,7 @@
             this.btnOpen});
             this.tsExif.Location = new System.Drawing.Point(0, 0);
             this.tsExif.Name = "tsExif";
-            this.tsExif.Size = new System.Drawing.Size(613, 31);
+            this.tsExif.Size = new System.Drawing.Size(961, 31);
             this.tsExif.Stretch = true;
             this.tsExif.TabIndex = 0;
             // 
@@ -278,11 +277,29 @@
             // 
             this.fdSave.Filter = "JPEG Images *.jpg|*.jpg";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(3, 134);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(374, 257);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(290, 146);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 478);
+            this.ClientSize = new System.Drawing.Size(961, 538);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "FormMain";
             this.Text = "Exif Test";
@@ -297,13 +314,16 @@
             this.ssExif.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbThumb)).EndInit();
             this.tsExif.ResumeLayout(false);
@@ -335,6 +355,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.TextBox tbField;
         private System.Windows.Forms.SaveFileDialog fdSave;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

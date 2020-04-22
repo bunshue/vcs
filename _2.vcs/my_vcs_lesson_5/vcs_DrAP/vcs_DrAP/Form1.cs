@@ -1434,6 +1434,9 @@ namespace vcs_DrAP
         {
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             button4.BackColor = Color.Red;
+
+            delay(10);
+
             min_size_mb = 0;
             bool conversionSuccessful = int.TryParse(tb_file_l.Text, out min_size_mb);    //out為必須
             if (conversionSuccessful == true)
@@ -1630,6 +1633,9 @@ namespace vcs_DrAP
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_VCS;
+
+            delay(10);
+
             if (textBox3.Text == "")
             {
                 richTextBox2.Text += "未輸入搜尋內容\n";
@@ -2140,6 +2146,9 @@ namespace vcs_DrAP
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_PYTHON;
+
+            delay(10);
+
             if (textBox3.Text == "")
             {
                 richTextBox2.Text += "未輸入搜尋內容\n";
@@ -2514,6 +2523,9 @@ namespace vcs_DrAP
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_MATLAB;
+
+            delay(10);
+
             if (textBox3.Text == "")
             {
                 richTextBox2.Text += "未輸入搜尋內容\n";
@@ -2546,6 +2558,18 @@ namespace vcs_DrAP
             return;
 
         }
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        } 
 
 
     }

@@ -37,6 +37,7 @@ namespace ExifLibrary
 
         private void ReadFile(string filename)
         {
+            richTextBox1.Text += "ReadFile : " + filename + "\n";
             data = ExifFile.Read(filename);
             Settings.Default.Lastfile = filename;
             Settings.Default.Save();
@@ -56,13 +57,13 @@ namespace ExifLibrary
 #if DEBUG
             binaryMapViewer1.Map = data.Map;
 #endif
-
+            /*
             this.Text = Path.GetFileName(filename) + " - Exif Test";
             lblStatus.Text = Path.GetFileName(filename);
             lblByteOrder.Text = "Byte Order: " + (data.ByteOrder == BitConverterEx.ByteOrder.LittleEndian ? "Little-Endian" : "Big-Endian");
             lblThumbnail.Text = "Thumbnail: " + (data.Thumbnail == null ? "None" : data.Thumbnail.ToBitmap().Width.ToString() + "x" + data.Thumbnail.ToBitmap().Height.ToString());
 
-            lvExif.Sort();
+            //lvExif.Sort();
 
             ExifFile EF = ExifFile.Read(filename);
             
@@ -72,10 +73,12 @@ namespace ExifLibrary
             }
             
             EF.Save(filename + ".jpg");
+            */
         }
 
         private void lvExif_SelectedIndexChanged(object sender, EventArgs e)
         {
+            richTextBox1.Text += "lvExif_SelectedIndexChanged\n";
             if (lvExif.SelectedItems.Count == 0)
                 tbField.Text = "";
             else
@@ -127,15 +130,25 @@ namespace ExifLibrary
         {
             ListViewColumnSorter sorter = (ListViewColumnSorter)lvExif.ListViewItemSorter;
 
+            richTextBox1.Text += "lvExif_ColumnClick sorter.SortColumn = " + sorter.SortColumn.ToString() + "\n";
             if (e.Column == sorter.SortColumn)
+            {
+                richTextBox1.Text += "lvExif_ColumnClick 反相\n";
                 sorter.ReverseSortOrder();
+            }
             else
             {
+                richTextBox1.Text += "lvExif_ColumnClick 遞增排序\n";
                 sorter.SortColumn = e.Column;
                 sorter.SortOrder = System.Windows.Forms.SortOrder.Ascending;
             }
 
             lvExif.Sort();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }
