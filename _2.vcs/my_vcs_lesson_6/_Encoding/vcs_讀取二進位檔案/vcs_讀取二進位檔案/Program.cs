@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_18_Encoding
+namespace vcs_讀取二進位檔案
 {
     static class Program
     {

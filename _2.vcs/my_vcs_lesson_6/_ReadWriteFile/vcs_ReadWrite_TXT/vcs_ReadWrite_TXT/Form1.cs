@@ -190,7 +190,21 @@ namespace vcs_ReadWrite_TXT
         private void button11_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
-            write_text_file(filename, ENCODING_3);
+            //write_text_file(filename, ENCODING_3);
+
+            int i;
+            byte[] data = { 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
+
+            int len = data.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] aaaaa = new byte[len];
+            for (i = 0; i < len; i++)
+            {
+                aaaaa[i] = data[i];
+            }
+            File.WriteAllBytes(filename, aaaaa);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
