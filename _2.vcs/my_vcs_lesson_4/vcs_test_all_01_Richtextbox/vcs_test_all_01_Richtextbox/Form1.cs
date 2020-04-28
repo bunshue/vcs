@@ -181,10 +181,9 @@ namespace vcs_test_all_01_Richtextbox
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //string test_string = "ABC可否開啟檔案總管？";
-            string test_string = "如果用MysonLink，就要燒錄mega上放的韌體。";
-            string test_string2 = "ABCDE";
-            /*
+            string str1 = "徹底修改matlab預設工作目錄";
+            string str2 = "ABCDE";
+            /*  ASCII表
             int j = 0;
             for (int i = 0; i < 256; i++)
             {
@@ -196,16 +195,15 @@ namespace vcs_test_all_01_Richtextbox
 
             }
             */
-            for (int i = 0; i < test_string.Length; i++)
+            for (int i = 0; i < str1.Length; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + test_string[i] + "\t" + Convert.ToString(((int)test_string[i]), 16) + "\n";
+                richTextBox1.Text += i.ToString() + "\t" + str1[i] + "\t" + Convert.ToString(((int)str1[i]), 16) + "\n";
             }
-            for (int i = 0; i < test_string2.Length; i++)
+            for (int i = 0; i < str2.Length; i++)
             {
-                richTextBox1.Text += i.ToString() + "\t" + test_string2[i] + "\t" + Convert.ToString(((int)test_string2[i]), 16) + "\n";
+                richTextBox1.Text += i.ToString() + "\t" + str2[i] + "\t" + Convert.ToString(((int)str2[i]), 16) + "\n";
             }
             richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
-
         }
 
         private void button16_Click(object sender, EventArgs e)

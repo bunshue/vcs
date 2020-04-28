@@ -193,7 +193,13 @@ namespace vcs_ReadWrite_TXT
             //write_text_file(filename, ENCODING_3);
 
             int i;
-            byte[] data = { 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
+            //はるみの三度笠
+            //byte[] data = { 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
+            byte[] data = { 0xE0, 0x4F, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41 };
+
+            string str = System.Text.Encoding.ASCII.GetString(data);
+            richTextBox1.Text += "str = " + str + "\n";
+            string filename2 = str + ".txt";
 
             int len = data.Length;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
@@ -204,7 +210,9 @@ namespace vcs_ReadWrite_TXT
                 aaaaa[i] = data[i];
             }
             File.WriteAllBytes(filename, aaaaa);
+            //File.WriteAllBytes(filename2, aaaaa);
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
         }
 
         private void button10_Click(object sender, EventArgs e)
