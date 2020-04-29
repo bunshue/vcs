@@ -71,11 +71,213 @@ namespace vcs_translate
             richTextBox4.Clear();
             richTextBox5.Clear();
             richTextBox6.Clear();
+            richTextBox7.Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox5.Text = Big5translateGB2312(this.richTextBox3.Text);
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            richTextBox7.Text += "統一轉出\n";
+            //string和byte[]的轉換
+            //string類型轉成byte[]：
+            string str = textBox3.Text;
+            byte[] byteArray;
+            //richTextBox7.Text += "統一字串\t" + str1 + "\t轉成unicode編碼 : " + "\t";
+            byteArray = System.Text.Encoding.GetEncoding("unicode").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
+            translate_code(byteArray);
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            richTextBox7.Text += "簡中轉出\n";
+            string str = textBox2.Text;
+            byte[] byteArray;
+            //richTextBox7.Text += "簡中字串\t" + str1 + "\t轉成gb2312編碼 : " + "\t";
+            byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用gb2312編碼, 把字串轉成拜列
+            translate_code(byteArray);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            richTextBox7.Text += "正中轉出\n";
+            //string和byte[]的轉換
+            //string類型轉成byte[]：
+            string str = textBox1.Text;
+            byte[] byteArray;
+            //richTextBox7.Text += "正中字串\t" + str1 + "\t轉成Big5編碼 : " + "\t";
+            byteArray = System.Text.Encoding.GetEncoding("big5").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
+            translate_code(byteArray);
+        }
+
+        void translate_code(byte[] byteArray)
+        {
+            int i;
+            int len;
+            string str;
+
+            len = byteArray.Length;
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox7.Text += "i = " + i.ToString() + "\t" + (char)byteArray[i] + "\t" + byteArray[i].ToString("X2") + "\t" + byteArray[i].ToString() + "\n";
+                //richTextBox7.Text += "i = " + i.ToString() + "\t" + byteArray[i].ToString("X2") + "\n";
+                richTextBox7.Text += byteArray[i].ToString("X2") + " ";
+            }
+            richTextBox7.Text += "\n";
+
+
+            richTextBox7.Text += "byteArray 資料\t";
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox7.Text += "i = " + i.ToString() + "\t" + (char)byteArray[i] + "\t" + byteArray[i].ToString("X2") + "\t" + byteArray[i].ToString() + "\n";
+                //richTextBox7.Text += "i = " + i.ToString() + "\t" + byteArray[i].ToString("X2") + "\n";
+                richTextBox7.Text += byteArray[i].ToString("X2") + " ";
+            }
+            richTextBox7.Text += "\n";
+
+            //byte[]轉成string：
+            //str = System.Text.Encoding.Default.GetString(byteArray);
+            //richTextBox7.Text += "用預設編碼轉成字串\t" + str + "\n";
+
+            str = System.Text.Encoding.GetEncoding("big5").GetString(byteArray);
+            richTextBox7.Text += "用Big5編碼轉成字串\t" + str + "\n";
+            richTextBox6.Text = str;
+
+            str = System.Text.Encoding.GetEncoding("gb2312").GetString(byteArray);
+            richTextBox7.Text += "用gb2312編碼轉成字串\t" + str + "\n";
+            richTextBox5.Text = str;
+
+            byteArray[0] = 0x9D;
+            byteArray[1] = 0x32;
+            str = System.Text.Encoding.GetEncoding("unicode").GetString(byteArray);
+            richTextBox7.Text += "用unicode編碼轉成字串\t" + str + "\n";
+            richTextBox4.Text = str;
+
+
+
+
+        }
+
+        /// <summary>
+        /// 判斷是否為GB2312編碼
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public bool IsGBCode(string word)
+        {
+            byte[] bytes = Encoding.GetEncoding("GB2312").GetBytes(word);
+            // if there is only one byte, it is ASCII code or other code
+            if (bytes.Length <= 1)
+            {
+                return false;
+            }
+            else
+            {
+                byte byte1 = bytes[0];
+                byte byte2 = bytes[1];
+                //判斷是否是GB2312
+                if (byte1 >= 176 && byte1 <= 247 && byte2 >= 160 && byte2 <= 254)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (IsGBCode(richTextBox1.Text) == true)
+                richTextBox7.Text += "richTextBox1   是GB2312碼\n";
+            else
+                richTextBox7.Text += "richTextBox1 不是GB2312碼\n";
+
+            if (IsGBCode(richTextBox2.Text) == true)
+                richTextBox7.Text += "richTextBox2   是GB2312碼\n";
+            else
+                richTextBox7.Text += "richTextBox2 不是GB2312碼\n";
+
+            if (IsGBCode(richTextBox3.Text) == true)
+                richTextBox7.Text += "richTextBox3   是GB2312碼\n";
+            else
+                richTextBox7.Text += "richTextBox3 不是GB2312碼\n";
+
+            if (IsGBCode(textBox1.Text) == true)
+                richTextBox7.Text += "字串: " + textBox1.Text + "    是GB2312碼\n";
+            else
+                richTextBox7.Text += "字串: " + textBox1.Text + "  不是GB2312碼\n";
+
+            if (IsGBCode(textBox2.Text) == true)
+                richTextBox7.Text += "字串: " + textBox2.Text + "    是GB2312碼\n";
+            else
+                richTextBox7.Text += "字串: " + textBox2.Text + "  不是GB2312碼\n";
+
+            if (IsGBCode(textBox3.Text) == true)
+                richTextBox7.Text += "字串: " + textBox3.Text + "    是GB2312碼\n";
+            else
+                richTextBox7.Text += "字串: " + textBox3.Text + "  不是GB2312碼\n";
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string str = "都はるみ全曲集２ Disc 2";
+            int i;
+            richTextBox7.Text += "len = " + str.Length.ToString() + "\n";
+            for (i = 0; i < str.Length; i++)
+            {
+                richTextBox7.Text += "i = " + i.ToString() + "\t" + str[i] + "\tvalue\t" + ((int)str[i]).ToString("X4") + "\n";
+            }
+            richTextBox7.Text += "\n文字編碼都是Unicode編碼\n";
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            int i;
+            for (i = 0x64C2; i < 0x64C2 + 10; i++)
+            {
+                richTextBox7.Text += "unicode value = 0x" + i.ToString("X4") + ", code = " + ((char)i).ToString() + "\n";
+            }
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string str;
+            byte[] byteArray;
+            //TC    您讓球網園謂鎮縣創景維斯提蘭想錫傳統厚載著歐斯與瓊駕駛船壹起務
+            //SC    琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮
+            //unicode
+
+            richTextBox7.Text += "正中轉簡中\n";
+            str = "您讓球網園謂鎮縣創景維斯提蘭想錫傳統厚載著歐斯與瓊駕駛船壹起務";
+            byteArray = System.Text.Encoding.GetEncoding("Big5").GetBytes(str);
+            richTextBox7.Text += str + "\n";
+            richTextBox7.Text += System.Text.Encoding.GetEncoding("gb2312").GetString(byteArray) + "\n";
+
+
+            richTextBox7.Text += "簡中轉正中\n";
+            str = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮";
+            byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);
+            richTextBox7.Text += str + "\n";
+            richTextBox7.Text += System.Text.Encoding.GetEncoding("big5").GetString(byteArray) + "\n";
+
+            /*
+            string str1 = "測試一下";
+            byte[] byteArray1 = System.Text.UnicodeEncoding.Unicode.GetBytes(str1);
+            richTextBox7.Text += System.Text.UnicodeEncoding.Unicode.GetString(byteArray1) + "\n";
+            */
+
+        }
+
+
+
     }
 }

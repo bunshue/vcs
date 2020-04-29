@@ -33,19 +33,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.txtSC2 = new System.Windows.Forms.TextBox();
-            this.txtTC1 = new System.Windows.Forms.TextBox();
-            this.txtSource = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 50);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "顯示所有編碼";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -87,53 +83,11 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // txtSC2
-            // 
-            this.txtSC2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtSC2.Location = new System.Drawing.Point(12, 447);
-            this.txtSC2.Name = "txtSC2";
-            this.txtSC2.Size = new System.Drawing.Size(204, 36);
-            this.txtSC2.TabIndex = 14;
-            this.txtSC2.Text = "来听演唱会";
-            // 
-            // txtTC1
-            // 
-            this.txtTC1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtTC1.Location = new System.Drawing.Point(12, 388);
-            this.txtTC1.Name = "txtTC1";
-            this.txtTC1.Size = new System.Drawing.Size(204, 36);
-            this.txtTC1.TabIndex = 13;
-            this.txtTC1.Text = "來聽演唱會";
-            // 
-            // txtSource
-            // 
-            this.txtSource.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtSource.Location = new System.Drawing.Point(12, 328);
-            this.txtSource.Name = "txtSource";
-            this.txtSource.Size = new System.Drawing.Size(204, 36);
-            this.txtSource.TabIndex = 12;
-            this.txtSource.Text = "揤坫儂諷秶";
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(12, 524);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(115, 38);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "編碼檢查";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 585);
-            this.Controls.Add(this.txtSC2);
-            this.Controls.Add(this.txtTC1);
-            this.Controls.Add(this.txtSource);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -142,7 +96,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -153,10 +106,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox txtSC2;
-        private System.Windows.Forms.TextBox txtTC1;
-        private System.Windows.Forms.TextBox txtSource;
-        private System.Windows.Forms.Button button5;
     }
 }
 

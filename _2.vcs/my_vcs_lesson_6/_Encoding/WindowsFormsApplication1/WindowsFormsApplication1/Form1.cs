@@ -134,11 +134,6 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             var badstringFromDatabase = "ƒ`ƒƒƒlƒ‹ƒp[ƒgƒi[‚Ì‘I‘ð";
@@ -147,41 +142,5 @@ namespace WindowsFormsApplication1
             richTextBox1.Text += "result : " + oughtToBeJapanese + "\n";
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string str = "都はるみ全曲集２ Disc 2";
-            int i;
-            richTextBox1.Text += "len = " + str.Length.ToString() + "\n";
-            for (i = 0; i < str.Length; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + str[i] + "\tvalue\t" + ((int)str[i]).ToString("X4") + "\n";
-            }
-            richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            int i;
-            for (i = 0x64C2; i < 0x64C2 + 10; i++)
-            {
-                richTextBox1.Text += "unicode value = 0x" + i.ToString("X4") + ", code = " + ((char)i).ToString() + "\n";
-            }
-
-
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            string text = "測試一下";
-            byte[] byt = System.Text.UnicodeEncoding.Unicode.GetBytes(text);
-            richTextBox1.Text += System.Text.UnicodeEncoding.Unicode.GetString(byt) + "\n";
-
-            //如果要自行指定BIG5編碼的話:
-            string text2 = "測試一下";
-            byte[] byt2 = System.Text.Encoding.GetEncoding("Big5").GetBytes(text2);
-            richTextBox1.Text += System.Text.Encoding.GetEncoding("Big5").GetString(byt2) + "\n";
-
-        }
     }
 }

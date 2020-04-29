@@ -147,49 +147,6 @@ namespace WindowsFormsApplication1eeeeee
 
         }
 
-        /// <summary>
-        /// 判斷是否為GB2312編碼
-        /// </summary>
-        /// <param name="word"></param>
-        /// <returns></returns>
-        public bool IsGBCode(string word)
-        {
-            byte[] bytes = Encoding.GetEncoding("GB2312").GetBytes(word);
-            // if there is only one byte, it is ASCII code or other code
-            if (bytes.Length <= 1)
-            {
-                return false;
-            }
-            else
-            {
-                byte byte1 = bytes[0];
-                byte byte2 = bytes[1];
-                //判斷是否是GB2312
-                if (byte1 >= 176 && byte1 <= 247 && byte2 >= 160 && byte2 <= 254)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (IsGBCode(txtSource.Text) == true)
-                richTextBox1.Text += "字串: " + txtSource.Text + "    是GB2312碼\n";
-            else
-                richTextBox1.Text += "字串: " + txtSource.Text + "  不是GB2312碼\n";
-            if (IsGBCode(txtTC1.Text) == true)
-                richTextBox1.Text += "字串: " + txtTC1.Text + "    是GB2312碼\n";
-            else
-                richTextBox1.Text += "字串: " + txtTC1.Text + "  不是GB2312碼\n";
-            if (IsGBCode(txtSC2.Text) == true)
-                richTextBox1.Text += "字串: " + txtSC2.Text + "    是GB2312碼\n";
-            else
-                richTextBox1.Text += "字串: " + txtSC2.Text + "  不是GB2312碼\n";
-        }
     }
 }
