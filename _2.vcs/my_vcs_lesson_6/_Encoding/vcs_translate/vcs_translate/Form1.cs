@@ -246,6 +246,30 @@ namespace vcs_translate
                 richTextBox7.Text += "unicode value = 0x" + i.ToString("X4") + ", code = " + ((char)i).ToString() + "\n";
             }
 
+            //用unicode打印出特殊符號
+            //特殊字元 平方、立方、micrometer 之顯示
+            /*
+            其實就是印出unicode碼：                                 
+            178=0xB2='²'
+            178=0xB3='³'
+            178=0xB5='µ'
+            */
+
+            richTextBox7.Text += "s" + ((char)178).ToString() + "   s" + ((char)179).ToString() + "  " + ((char)181).ToString() + "m";
+
+
+
+            //去 https://unicode-table.com/en/#2327 找出需要的unicode
+            //int i;
+            for (i = 0x23E9; i < (0x23E9 + 18); i++)
+            {
+                richTextBox7.Text += "i = 0x" + i.ToString("X4") + "\t" + ((char)i).ToString() + "\n";
+
+
+            }
+
+
+
         }
 
         private void button11_Click(object sender, EventArgs e)

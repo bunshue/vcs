@@ -252,7 +252,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(936, 311);
+            this.button8.Location = new System.Drawing.Point(936, 322);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(93, 23);
             this.button8.TabIndex = 22;
@@ -274,9 +274,9 @@
             // 
             this.button10.Location = new System.Drawing.Point(936, 242);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(93, 40);
+            this.button10.Size = new System.Drawing.Size(93, 62);
             this.button10.TabIndex = 24;
-            this.button10.Text = "Unicode數值轉字元";
+            this.button10.Text = "Unicode數值轉字元, 特殊符號";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
