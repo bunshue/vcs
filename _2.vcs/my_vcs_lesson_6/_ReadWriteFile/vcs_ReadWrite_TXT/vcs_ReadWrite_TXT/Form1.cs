@@ -193,9 +193,8 @@ namespace vcs_ReadWrite_TXT
             //write_text_file(filename, ENCODING_3);
 
             int i;
-            //はるみの三度笠
-            //byte[] data = { 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
-            byte[] data = { 0xE0, 0x4F, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41, 0x41 };
+            //都はるみ全曲集２	shift_jis
+            byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
 
             string str = System.Text.Encoding.ASCII.GetString(data);
             richTextBox1.Text += "str = " + str + "\n";
@@ -319,6 +318,114 @@ namespace vcs_ReadWrite_TXT
             }
             File.WriteAllText(filename, richTextBox1.Text, Encoding.Default);
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string filename;
+            byte[] data = new byte[16];
+
+            filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
+            //都はるみ全曲集２ 	繁体中文(Big5) 	950 	big5 	B3 A3 3F 3F 3F A5 FE A6 B1 B6 B0 A2 B1
+            //は C756
+            //る C777
+            //み C766
+
+            data[0] = 0xB3;
+            data[1] = 0xA3;
+            data[2] = 0xC7;
+            data[3] = 0x56;
+            data[4] = 0xC7;
+            data[5] = 0x77;
+            data[6] = 0xC7;
+            data[7] = 0x66;
+            data[8] = 0xA5;
+            data[9] = 0xFE;
+            data[10] = 0xA6;
+            data[11] = 0xB1;
+            data[12] = 0xB6;
+            data[13] = 0xB0;
+            data[14] = 0xA2;
+            data[15] = 0xB1;
+            //寫資料
+            File.WriteAllBytes(filename, data);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+            filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
+            //都はるみ全曲集２ 	简体中文(GB2312) 	936 	gb2312 	B6 BC A4 CF A4 EB A4 DF C8 AB C7 FA BC AF A3 B2
+            data[0] = 0xB6;
+            data[1] = 0xBC;
+            data[2] = 0xA4;
+            data[3] = 0xCF;
+            data[4] = 0xA4;
+            data[5] = 0xEB;
+            data[6] = 0xA4;
+            data[7] = 0xDF;
+            data[8] = 0xC8;
+            data[9] = 0xAB;
+            data[10] = 0xC7;
+            data[11] = 0xFA;
+            data[12] = 0xBC;
+            data[13] = 0xAF;
+            data[14] = 0xA3;
+            data[15] = 0xB2;
+            //寫資料
+            File.WriteAllBytes(filename, data);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+            filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
+            //都はるみ全曲集２ 	日语(Shift-JIS) 	932 	shift_jis 	93 73 82 CD 82 E9 82 DD 91 53 8B C8 8F 57 82 51
+            data[0] = 0x93;
+            data[1] = 0x73;
+            data[2] = 0x82;
+            data[3] = 0xCD;
+            data[4] = 0x82;
+            data[5] = 0xE9;
+            data[6] = 0x82;
+            data[7] = 0xDD;
+            data[8] = 0x91;
+            data[9] = 0x53;
+            data[10] = 0x8B;
+            data[11] = 0xC8;
+            data[12] = 0x8F;
+            data[13] = 0x57;
+            data[14] = 0x82;
+            data[15] = 0x51;
+            //寫資料
+            File.WriteAllBytes(filename, data);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+            filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".unicode.txt";
+            //都はるみ全曲集２ 	Unicode 		        1200 	utf-16 		FD 90 6F 30 8B 30 7F 30 68 51 F2 66 C6 96 12 FF     use this
+            //都はるみ全曲集２ 	Unicode (Big-Endian) 	1201 	utf-16BE 	90 FD 30 6F 30 8B 30 7F 51 68 66 F2 96 C6 FF 12
+
+            byte[] data2 = new byte[18];
+
+            data2[0] = 0xFF;
+            data2[1] = 0xFE;
+            data2[2] = 0xFD;
+            data2[3] = 0x90;
+            data2[4] = 0x6F;
+            data2[5] = 0x30;
+            data2[6] = 0x8B;
+            data2[7] = 0x30;
+            data2[8] = 0x7F;
+            data2[9] = 0x30;
+            data2[10] = 0x68;
+            data2[11] = 0x51;
+            data2[12] = 0xF2;
+            data2[13] = 0x66;
+            data2[14] = 0xC6;
+            data2[15] = 0x96;
+            data2[16] = 0x12;
+            data2[17] = 0xFF;
+            //寫資料
+            File.WriteAllBytes(filename, data2);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+
+
+
         }
 
     }
