@@ -85,7 +85,7 @@ namespace WindowsFormsApplication1eeeeee
             {
                 //richTextBox1.Text += "i = " + i.ToString() + "\t" + string_old[i] + "\tvalue\t" + ((int)string_old[i]).ToString("X4") + "\n";
             }
-            //richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
+            //richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
 
             // Create two different encodings.
             Encoding encoding_old = Encoding.Unicode;

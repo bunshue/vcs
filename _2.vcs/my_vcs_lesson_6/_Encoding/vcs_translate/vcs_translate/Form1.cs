@@ -234,8 +234,7 @@ namespace vcs_translate
             {
                 richTextBox7.Text += "i = " + i.ToString() + "\t" + str[i] + "\tvalue\t" + ((int)str[i]).ToString("X4") + "\n";
             }
-            richTextBox7.Text += "\n文字編碼都是Unicode編碼\n";
-
+            richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
         }
 
         private void button10_Click(object sender, EventArgs e)

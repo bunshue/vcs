@@ -236,6 +236,7 @@ namespace vcs_YearTable
         private const int PERSON_DATA_1 = 0x11;   //person data 1, Sung
         private const int PERSON_DATA_2 = 0x12;   //person data 2, Ming
         private const int PERSON_DATA_3 = 0x13;   //person data 3, Ching
+        private const int PERSON_DATA_SCIENCE = 0x20;   //person data, 科技人
 
         string[,] person = null;
 
@@ -679,6 +680,11 @@ namespace vcs_YearTable
         private void button16_Click(object sender, EventArgs e)
         {
             draw_person_data(PERSON_DATA_3);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_SCIENCE);
         }
     }
 }

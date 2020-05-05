@@ -31,9 +31,12 @@ namespace vcs_test_all_08_Media
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\aaaa.mp3";       //一定要有@
+            string filename1 = @"C:\______test_files\aaaa.mp3";       //一定要有@
+            string filename2 = @"C:\______test_files\harumi.mp3";       //一定要有@
             Mp3Info mp3_information;
-            byte[] Info = getLast128(filename);
+            byte[] Info;
+
+            Info = getLast128(filename1);
             mp3_information = getMp3Info(Info);
 
             richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
@@ -47,6 +50,45 @@ namespace vcs_test_all_08_Media
             richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
             richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
             richTextBox1.Text += "\n";
+
+            Info = getLast128(filename2);
+            mp3_information = getMp3Info(Info);
+
+            int i;
+
+            //richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+            richTextBox1.Text += "Title.len : " + mp3_information.Title.Length.ToString() + "\n";
+            for (i = 0; i < mp3_information.Title.Length; i++)
+            {
+                //richTextBox1.Text += i.ToString() + "\t" + mp3_information.Title[i] + "\t" + Convert.ToString(((int)mp3_information.Title[i]), 16) + "\n";
+                richTextBox1.Text += Convert.ToString(((int)mp3_information.Title[i]), 16) + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+            richTextBox1.Text += "Artist.len : " + mp3_information.Artist.Length.ToString() + "\n";
+
+            for (i = 0; i < mp3_information.Artist.Length; i++)
+            {
+                //richTextBox1.Text += i.ToString() + "\t" + mp3_information.Title[i] + "\t" + Convert.ToString(((int)mp3_information.Title[i]), 16) + "\n";
+                richTextBox1.Text += Convert.ToString(((int)mp3_information.Artist[i]), 16) + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+            richTextBox1.Text += "Album.len : " + mp3_information.Album.Length.ToString() + "\n";
+            //richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+            richTextBox1.Text += "Year.len : " + mp3_information.Year.Length.ToString() + "\n";
+
+            richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+            richTextBox1.Text += "identify.len : " + mp3_information.identify.Length.ToString() + "\n";
+            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+            richTextBox1.Text += "Comment.len : " + mp3_information.Comment.Length.ToString() + "\n";
+            richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
+            richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
+            richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
+            richTextBox1.Text += "\n";
+
         }
         public struct Mp3Info
         {

@@ -123,7 +123,7 @@ namespace vcs_Clipboard
 
             richTextBox1.Text += "\n";
             int len = Clipboard.GetText().Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            richTextBox1.Text += "Unicode (Big-Endian), len = " + len.ToString() + "\n";
             int i;
             for (i = 0; i < len; i++)
             {

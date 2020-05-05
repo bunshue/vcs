@@ -129,7 +129,7 @@ namespace WindowsFormsApplication1
 
             }
 
-            richTextBox1.Text += "\n文字編碼都是Unicode編碼\n";
+            richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
 
 
         }
