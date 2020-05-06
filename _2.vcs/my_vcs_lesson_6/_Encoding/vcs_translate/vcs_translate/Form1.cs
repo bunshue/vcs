@@ -21,8 +21,8 @@ namespace vcs_translate
         private string Big5toGB2312(string strBig5)
         {
             StringBuilder sb = new StringBuilder();
-            byte[] unknow = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
-            return Encoding.GetEncoding("gb2312").GetString(unknow); // 簡體中文 (GB2312) 
+            byte[] tmp = Encoding.GetEncoding("Big5").GetBytes(strBig5);  // 繁體中文 (Big5) 
+            return Encoding.GetEncoding("gb2312").GetString(tmp); // 簡體中文 (GB2312) 
         }
 
         //使用系統 kernel32.dll LCMapString進行轉換
@@ -297,6 +297,30 @@ namespace vcs_translate
             byte[] byteArray1 = System.Text.UnicodeEncoding.Unicode.GetBytes(str1);
             richTextBox7.Text += System.Text.UnicodeEncoding.Unicode.GetString(byteArray1) + "\n";
             */
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox7.Text += "日文轉出\n";
+            //都はるみの三度笠
+            byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
+
+            int i;
+
+            //string str = System.Text.Encoding.ASCII.GetString(data);
+            string str = System.Text.Encoding.GetEncoding("shift_jis").GetString(data);  //指名使用gb2312編碼, 把字串轉成拜列
+            richTextBox7.Text += "str = " + str + "\n";
+
+
+            /*
+            string str = textBox2.Text;
+            byte[] byteArray;
+            //richTextBox7.Text += "簡中字串\t" + str1 + "\t轉成gb2312編碼 : " + "\t";
+            byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用gb2312編碼, 把字串轉成拜列
+            translate_code(byteArray);
+             * 
+             * */
 
         }
 

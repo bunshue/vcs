@@ -29,9 +29,61 @@ namespace vcs_test_all_08_Media
             trackBar1.Value = wplayer.settings.volume;
         }
 
+        string translate_to_shift_jis(string tmp1)
+        {
+            //string tmp1 = mp3_information.Title;
+            byte[] data_tmp = Encoding.Default.GetBytes(tmp1);
+            //byte[] data_tmp = Encoding.GetEncoding("big5").GetBytes(tmp1);
+            string tmp2 = Encoding.GetEncoding("shift_jis").GetString(data_tmp);
+            //richTextBox1.Text += "new string is : " + tmp2 + "\n";
+            return tmp2;
+        }
+
+        string translate_to_shift_jis2(string tmp1)
+        {
+            richTextBox1.Text += "\ntranslate_to_shift_jis2\n\n";
+            int i;
+            int len;
+            len = tmp1.Length;
+            richTextBox1.Text += "old string len = " + len.ToString() + "\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += ((int)tmp1[i]).ToString("X4");
+
+//                richTextBox1.Text += ((int)sSource[i]).ToString("X2") + " ";
+
+                if (i != (len - 1))
+                {
+                    richTextBox1.Text += " ";
+                }
+                else
+                    richTextBox1.Text += "\n";
+            }
+
+
+            //string tmp1 = mp3_information.Title;
+            //byte[] data_tmp = Encoding.Default.GetBytes(tmp1);
+            byte[] data_tmp = Encoding.GetEncoding("big5").GetBytes(tmp1);
+            len = data_tmp.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += data_tmp[i].ToString("X2");
+                if (i != (len - 1))
+                {
+                    richTextBox1.Text += " ";
+                }
+                else
+                    richTextBox1.Text += "\n";
+            }
+            string tmp2 = Encoding.GetEncoding("shift_jis").GetString(data_tmp);
+            //richTextBox1.Text += "new string is : " + tmp2 + "\n";
+            return tmp2;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files\aaaa.mp3";       //一定要有@
+            int i;
+            string filename1 = @"C:\______test_files\harumi.mp3";       //一定要有@
             string filename2 = @"C:\______test_files\harumi.mp3";       //一定要有@
             Mp3Info mp3_information;
             byte[] Info;
@@ -39,11 +91,44 @@ namespace vcs_test_all_08_Media
             Info = getLast128(filename1);
             mp3_information = getMp3Info(Info);
 
+            //richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+            
             richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+            string str1 = mp3_information.Title;
+            int len = str1.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] sss = Encoding.GetEncoding("big5").GetBytes(str1);  // 繁體中文 (Big5) 
+            len = sss.Length;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += sss[i].ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+
+            richTextBox1.Text += "Title : " + translate_to_shift_jis(mp3_information.Title) + "\n";
+            richTextBox1.Text += "Artist : " + translate_to_shift_jis(mp3_information.Artist) + "\n";
+
+            string tmp;
+
+            tmp = translate_to_shift_jis2("王大中");
+            richTextBox1.Text += "Album : " + tmp + "\n";
+
+            tmp = translate_to_shift_jis2(mp3_information.Album);
+            richTextBox1.Text += "Album : " + tmp + "\n";
+
+            richTextBox1.Text += "Year : " + translate_to_shift_jis(mp3_information.Year) + "\n";
+            richTextBox1.Text += "identify : " + translate_to_shift_jis(mp3_information.identify) + "\n";
+            richTextBox1.Text += "Comment : " + translate_to_shift_jis(mp3_information.Comment) + "\n";
+
+
             richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
             richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
             richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
-
             richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
             richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
             richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
@@ -53,8 +138,6 @@ namespace vcs_test_all_08_Media
 
             Info = getLast128(filename2);
             mp3_information = getMp3Info(Info);
-
-            int i;
 
             //richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
             richTextBox1.Text += "Title.len : " + mp3_information.Title.Length.ToString() + "\n";
@@ -115,6 +198,17 @@ namespace vcs_test_all_08_Media
             rl = stream.Read(Info, 0, seekPos);
             fs.Close();
             stream.Close();
+            richTextBox1.Text += "印出此檔案之末128拜資料\n";
+            int i;
+            for (i = 0; i < 128; i++)
+            {
+                richTextBox1.Text += Info[i].ToString("X2");
+                if((i%16)==15)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
             return Info;
         }
         //再對上面返回的位元組陣列分段取出，並保存到Mp3Info結構中返回:
