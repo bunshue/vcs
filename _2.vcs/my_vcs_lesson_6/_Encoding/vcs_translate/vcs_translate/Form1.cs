@@ -276,7 +276,7 @@ namespace vcs_translate
             string str;
             byte[] byteArray;
             //TC    您讓球網園謂鎮縣創景維斯提蘭想錫傳統厚載著歐斯與瓊駕駛船壹起務
-            //SC    琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮
+            //SC    琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮美空ひばり恋酒
             //unicode
 
             richTextBox7.Text += "正中轉簡中\n";
@@ -287,7 +287,7 @@ namespace vcs_translate
 
 
             richTextBox7.Text += "簡中轉正中\n";
-            str = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮";
+            str = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮美空ひばり恋酒";
             byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);
             richTextBox7.Text += str + "\n";
             richTextBox7.Text += System.Text.Encoding.GetEncoding("big5").GetString(byteArray) + "\n";

@@ -210,7 +210,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(855, 30);
             this.textBox2.TabIndex = 17;
-            this.textBox2.Text = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮";
+            this.textBox2.Text = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮美空ひばり恋酒";
             // 
             // textBox1
             // 

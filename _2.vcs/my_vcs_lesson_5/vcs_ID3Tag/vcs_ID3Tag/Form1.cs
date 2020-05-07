@@ -18,6 +18,8 @@ namespace vcs_ID3Tag
             InitializeComponent();
         }
 
+        string encoding = "big5";
+
         public struct Mp3Info
         {
             public string identify;//TAG，三個位元組
@@ -154,7 +156,7 @@ namespace vcs_ID3Tag
         }
 
         //再對上面返回的位元組陣列分段取出，並保存到Mp3Info結構中返回:
-        private Mp3Info2 getMp3Info2(byte[] Info)
+        private Mp3Info2 getMp3Info2(byte[] Info, string encoding)
         {
             Mp3Info2 mp3Info = new Mp3Info2();
             string tmp;
@@ -240,7 +242,7 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
             */
 
-            tmp = Encoding.GetEncoding("shift_jis").GetString(mp3Info.identify);
+            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.identify);
             richTextBox1.Text += "identify : " + tmp;
             richTextBox1.Text += "\n";
             /*
@@ -251,7 +253,7 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
             */
 
-            tmp = Encoding.GetEncoding("shift_jis").GetString(mp3Info.Title);
+            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Title);
             richTextBox1.Text += "Title : " + tmp;
             richTextBox1.Text += "\n";
             /*
@@ -262,7 +264,7 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
             */
 
-            tmp = Encoding.GetEncoding("shift_jis").GetString(mp3Info.Artist);
+            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Artist);
             richTextBox1.Text += "Artist : " + tmp;
             richTextBox1.Text += "\n";
             /*
@@ -273,7 +275,7 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
             */
 
-            tmp = Encoding.GetEncoding("shift_jis").GetString(mp3Info.Album);
+            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Album);
             richTextBox1.Text += "Album : " + tmp;
             richTextBox1.Text += "\n";
             /*
@@ -284,7 +286,7 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
             */
 
-            tmp = Encoding.GetEncoding("shift_jis").GetString(mp3Info.Year);
+            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Year);
             richTextBox1.Text += "Year : " + tmp;
             richTextBox1.Text += "\n";
             /*
@@ -295,7 +297,7 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
             */
 
-            tmp = Encoding.GetEncoding("shift_jis").GetString(mp3Info.Comment);
+            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Comment);
             richTextBox1.Text += "Comment : " + tmp;
             richTextBox1.Text += "\n";
 
@@ -320,6 +322,15 @@ namespace vcs_ID3Tag
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (radioButton1.Checked == true)
+                encoding = "big5";
+            else if (radioButton2.Checked == true)
+                encoding = "gb2312";
+            else if (radioButton3.Checked == true)
+                encoding = "shift_jis";
+            else
+                encoding = "unicode";
+
             openFileDialog1.Title = "多選檔案";
             //openFileDialog1.ShowHelp = true;
             openFileDialog1.FileName = "";              //預設開啟的檔名
@@ -333,16 +344,13 @@ namespace vcs_ID3Tag
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n";
-                richTextBox1.Text += "已選取檔案: \n";
+                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
                 foreach (var strFilename in openFileDialog1.FileNames)
                 {
-                    richTextBox1.Text += "\t" + strFilename + "\n";
-
+                    richTextBox1.Text += "檔名:\t" + strFilename + "\n";
+                    get_ID3Tag(strFilename, encoding);
                 }
-                richTextBox1.Text += "\n";
-
+                //richTextBox1.Text += "\n";
             }
             else
             {
@@ -351,41 +359,78 @@ namespace vcs_ID3Tag
 
         }
 
+        void get_ID3Tag(string filename, string encoding)
+        {
+            if (encoding == "big5")
+            {
+                //richTextBox1.Text += "\n----------------------正中編碼----------------------\n";
+                Mp3Info mp3_information;
+                byte[] Info = getLast128(filename);
+                mp3_information = getMp3Info(Info);
+
+                richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+                richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+                richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+                richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+                richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+                richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+                richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
+                richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
+                richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
+                richTextBox1.Text += "\n";
+            }
+            else if (encoding == "gb2312")
+            {
+                //richTextBox1.Text += "\n----------------------簡中編碼----------------------\n";
+                Mp3Info2 mp3_information2;
+
+                byte[] Info = getLast128(filename);
+                mp3_information2 = getMp3Info2(Info, encoding);
+
+
+            }
+            else if (encoding == "shift_jis")
+            {
+                //richTextBox1.Text += "\n----------------------日文編碼----------------------\n";
+                Mp3Info2 mp3_information2;
+
+                byte[] Info = getLast128(filename);
+                mp3_information2 = getMp3Info2(Info, encoding);
+
+
+            }
+            else
+            {
+
+
+            }
+
+
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "\n\n----------------------正中編碼----------------------\n\n";
             string filename = @"C:\______test_files\aaaa.mp3";       //一定要有@
-            Mp3Info mp3_information;
-            byte[] Info = getLast128(filename);
-            mp3_information = getMp3Info(Info);
+            get_ID3Tag(filename, "big5");
+        }
 
-            richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
-            richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
-            richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
-            richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
-            richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
-            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
-            richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
-            richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
-            richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
-            richTextBox1.Text += "\n";
-
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\uramachi.mp3";       //一定要有@
+            get_ID3Tag(filename, "gb2312");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "\n\n----------------------日文編碼----------------------\n\n";
-            string filename1 = @"C:\______test_files\harumi.mp3";       //一定要有@
-            Mp3Info2 mp3_information2;
-
-            byte[] Info = getLast128(filename1);
-            mp3_information2 = getMp3Info2(Info);
-
+            string filename = @"C:\______test_files\harumi.mp3";       //一定要有@
+            get_ID3Tag(filename, "shift_jis");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
     }
 }

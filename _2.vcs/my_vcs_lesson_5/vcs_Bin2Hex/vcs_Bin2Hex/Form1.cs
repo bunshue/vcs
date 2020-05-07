@@ -23,6 +23,21 @@ namespace vcs_Bin2Hex
 
         void do_bin2hex(int mode)
         {
+            int new_line = 1;
+
+            if (radioButton1.Checked == true)
+                new_line = 1;
+            else if (radioButton2.Checked == true)
+                new_line = 2;
+            else if (radioButton3.Checked == true)
+                new_line = 8;
+            else if (radioButton4.Checked == true)
+                new_line = 16;
+            else if (radioButton5.Checked == true)
+                new_line = 32;
+            else
+                new_line = 4;
+
             openFileDialog1.Title = "二進位檔轉成文字檔";
             //openFileDialog1.ShowHelp = true;
             openFileDialog1.FileName = "";              //預設開啟的檔名
@@ -79,7 +94,7 @@ namespace vcs_Bin2Hex
 
                 }
 
-                filename = filename + ".txt";
+                filename = filename + "." + new_line.ToString() + ".txt";
 
                 FileStream fsw = new FileStream(filename, FileMode.Create, FileAccess.Write);
                 StreamWriter sw;
@@ -89,8 +104,13 @@ namespace vcs_Bin2Hex
 
                 for (i = 0; i < len; i++)
                 {
-                    sw.Write(data[i].ToString("X2") + "\n");
+                    sw.Write(data[i].ToString("X2"));
+                    if ((i % new_line) == (new_line - 1))
+                        sw.Write(data[i].ToString("\n"));
+                    else
+                        sw.Write(data[i].ToString(" "));
                 }
+
                 sw.Close();
                 richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n\n";
 
