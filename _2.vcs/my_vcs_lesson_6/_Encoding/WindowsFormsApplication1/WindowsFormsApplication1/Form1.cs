@@ -134,14 +134,6 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            var badstringFromDatabase = "ƒ`ƒƒƒlƒ‹ƒp[ƒgƒi[‚Ì‘I‘ð";
-            var hopefullyRecovered = Encoding.GetEncoding(1252).GetBytes(badstringFromDatabase);
-            var oughtToBeJapanese = Encoding.GetEncoding("shift_jis").GetString(hopefullyRecovered);
-            richTextBox1.Text += "result : " + oughtToBeJapanese + "\n";
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             //ABCDEFG

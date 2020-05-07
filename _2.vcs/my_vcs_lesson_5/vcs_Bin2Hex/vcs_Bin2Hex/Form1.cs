@@ -67,7 +67,7 @@ namespace vcs_Bin2Hex
                 else
                 {
                     //前部分binary讀取
-                    data = File.ReadAllBytes(filename);
+                    data = File.ReadAllBytes(filename); //有全讀否? 如果檔案很大 但只要讀一點 會不會太浪費?
                     long len_file = data.Length;
 
                     FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);

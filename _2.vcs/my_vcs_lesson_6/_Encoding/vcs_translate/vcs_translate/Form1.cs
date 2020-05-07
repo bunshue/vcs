@@ -87,7 +87,7 @@ namespace vcs_translate
             string str = textBox3.Text;
             byte[] byteArray;
             //richTextBox7.Text += "統一字串\t" + str1 + "\t轉成unicode編碼 : " + "\t";
-            byteArray = System.Text.Encoding.GetEncoding("unicode").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
+            byteArray = Encoding.GetEncoding("unicode").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
             translate_code(byteArray);
 
         }
@@ -98,7 +98,7 @@ namespace vcs_translate
             string str = textBox2.Text;
             byte[] byteArray;
             //richTextBox7.Text += "簡中字串\t" + str1 + "\t轉成gb2312編碼 : " + "\t";
-            byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用gb2312編碼, 把字串轉成拜列
+            byteArray = Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用gb2312編碼, 把字串轉成拜列
             translate_code(byteArray);
         }
 
@@ -110,7 +110,7 @@ namespace vcs_translate
             string str = textBox1.Text;
             byte[] byteArray;
             //richTextBox7.Text += "正中字串\t" + str1 + "\t轉成Big5編碼 : " + "\t";
-            byteArray = System.Text.Encoding.GetEncoding("big5").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
+            byteArray = Encoding.GetEncoding("big5").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
             translate_code(byteArray);
         }
 
@@ -140,20 +140,20 @@ namespace vcs_translate
             richTextBox7.Text += "\n";
 
             //byte[]轉成string：
-            //str = System.Text.Encoding.Default.GetString(byteArray);
+            //str = Encoding.Default.GetString(byteArray);
             //richTextBox7.Text += "用預設編碼轉成字串\t" + str + "\n";
 
-            str = System.Text.Encoding.GetEncoding("big5").GetString(byteArray);
+            str = Encoding.GetEncoding("big5").GetString(byteArray);
             richTextBox7.Text += "用Big5編碼轉成字串\t" + str + "\n";
             richTextBox6.Text = str;
 
-            str = System.Text.Encoding.GetEncoding("gb2312").GetString(byteArray);
+            str = Encoding.GetEncoding("gb2312").GetString(byteArray);
             richTextBox7.Text += "用gb2312編碼轉成字串\t" + str + "\n";
             richTextBox5.Text = str;
 
             byteArray[0] = 0x9D;
             byteArray[1] = 0x32;
-            str = System.Text.Encoding.GetEncoding("unicode").GetString(byteArray);
+            str = Encoding.GetEncoding("unicode").GetString(byteArray);
             richTextBox7.Text += "用unicode編碼轉成字串\t" + str + "\n";
             richTextBox4.Text = str;
 
@@ -273,29 +273,32 @@ namespace vcs_translate
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string str;
+            string str_old;
+            string str_new;
             byte[] byteArray;
             //TC    您讓球網園謂鎮縣創景維斯提蘭想錫傳統厚載著歐斯與瓊駕駛船壹起務
             //SC    琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮美空ひばり恋酒
             //unicode
 
             richTextBox7.Text += "正中轉簡中\n";
-            str = "您讓球網園謂鎮縣創景維斯提蘭想錫傳統厚載著歐斯與瓊駕駛船壹起務";
-            byteArray = System.Text.Encoding.GetEncoding("Big5").GetBytes(str);
-            richTextBox7.Text += str + "\n";
-            richTextBox7.Text += System.Text.Encoding.GetEncoding("gb2312").GetString(byteArray) + "\n";
+            str_old = "您讓球網園謂鎮縣創景維斯提蘭想錫傳統厚載著歐斯與瓊駕駛船壹起務";
+            byteArray = Encoding.GetEncoding("big5").GetBytes(str_old);
+            str_new = Encoding.GetEncoding("gb2312").GetString(byteArray);
+            richTextBox7.Text += "原字串\t" + str_old + "\n";
+            richTextBox7.Text += "新字串\t" + str_new + "\n";
 
 
             richTextBox7.Text += "簡中轉正中\n";
-            str = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮美空ひばり恋酒";
-            byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);
-            richTextBox7.Text += str + "\n";
-            richTextBox7.Text += System.Text.Encoding.GetEncoding("big5").GetString(byteArray) + "\n";
+            str_old = "琵琶行间隔回答国家奈何古巴马公塔两年多么的历度界可渐变今将们城和唱暮美空ひばり恋酒";
+            byteArray = Encoding.GetEncoding("gb2312").GetBytes(str_old);
+            str_new = Encoding.GetEncoding("big5").GetString(byteArray);
+            richTextBox7.Text += "原字串\t" + str_old + "\n";
+            richTextBox7.Text += "新字串\t" + str_new + "\n";
 
             /*
             string str1 = "測試一下";
-            byte[] byteArray1 = System.Text.UnicodeEncoding.Unicode.GetBytes(str1);
-            richTextBox7.Text += System.Text.UnicodeEncoding.Unicode.GetString(byteArray1) + "\n";
+            byte[] byteArray1 = UnicodeEncoding.Unicode.GetBytes(str1);
+            richTextBox7.Text += UnicodeEncoding.Unicode.GetString(byteArray1) + "\n";
             */
 
         }
@@ -306,10 +309,8 @@ namespace vcs_translate
             //都はるみの三度笠
             byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
 
-            int i;
-
-            //string str = System.Text.Encoding.ASCII.GetString(data);
-            string str = System.Text.Encoding.GetEncoding("shift_jis").GetString(data);  //指名使用gb2312編碼, 把字串轉成拜列
+            //string str = Encoding.ASCII.GetString(data);
+            string str = Encoding.GetEncoding("shift_jis").GetString(data);  //指名使用gb2312編碼, 把字串轉成拜列
             richTextBox7.Text += "str = " + str + "\n";
 
 
@@ -317,7 +318,7 @@ namespace vcs_translate
             string str = textBox2.Text;
             byte[] byteArray;
             //richTextBox7.Text += "簡中字串\t" + str1 + "\t轉成gb2312編碼 : " + "\t";
-            byteArray = System.Text.Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用gb2312編碼, 把字串轉成拜列
+            byteArray = Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用gb2312編碼, 把字串轉成拜列
             translate_code(byteArray);
              * 
              * */

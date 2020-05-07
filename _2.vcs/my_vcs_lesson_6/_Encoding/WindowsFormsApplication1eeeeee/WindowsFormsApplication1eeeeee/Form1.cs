@@ -147,6 +147,11 @@ namespace WindowsFormsApplication1eeeeee
 
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
 
 
 

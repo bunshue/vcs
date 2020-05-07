@@ -45,6 +45,7 @@ namespace vcs_ID3Tag
             rl = stream.Read(Info, 0, seekPos);
             fs.Close();
             stream.Close();
+            /*
             richTextBox1.Text += "印出此檔案之末128拜資料\n";
             int i;
             for (i = 0; i < 128; i++)
@@ -56,6 +57,7 @@ namespace vcs_ID3Tag
                     richTextBox1.Text += " ";
             }
             richTextBox1.Text += "\n";
+            */
             return Info;
         }
         //再對上面返回的位元組陣列分段取出，並保存到Mp3Info結構中返回:
@@ -142,169 +144,6 @@ namespace vcs_ID3Tag
 
         }
 
-        public struct Mp3Info2
-        {
-            public byte[] identify;//TAG，三個位元組
-            public byte[] Title;//歌曲名,30個位元組
-            public byte[] Artist;//歌手名,30個位元組
-            public byte[] Album;//所屬唱片,30個位元組
-            public byte[] Year;//年,4個字元
-            public byte[] Comment;//注釋,28個位元組
-            public char reserved1;//保留位，一個位元組
-            public char reserved2;//保留位，一個位元組
-            public char reserved3;//保留位，一個位元組
-        }
-
-        //再對上面返回的位元組陣列分段取出，並保存到Mp3Info結構中返回:
-        private Mp3Info2 getMp3Info2(byte[] Info, string encoding)
-        {
-            Mp3Info2 mp3Info = new Mp3Info2();
-            string tmp;
-
-            mp3Info.identify = new byte[3];
-            mp3Info.Title = new byte[30];
-            mp3Info.Artist = new byte[30];
-            mp3Info.Album = new byte[30];
-            mp3Info.Year = new byte[4];
-            mp3Info.Comment = new byte[28];
-
-            int i;
-            int position = 0;//迴圈的起始值
-            int currentIndex = 0;//Info的當前索引值
-            //獲取TAG標識(陣列前3個)
-            for (i = currentIndex; i < currentIndex + 3; i++)
-            {
-                mp3Info.identify[i] = Info[i];
-                position++;
-            }
-            currentIndex = position;
-            //獲取歌名（陣列3-32）
-            //str = null;
-            byte[] bytTitle = new byte[30];//將歌名部分讀到一個單獨的陣列中
-            int j = 0;
-            for (i = currentIndex; i < currentIndex + 30; i++)
-            {
-                mp3Info.Title[j] = Info[i];
-                position++;
-                j++;
-            }
-            currentIndex = position;
-            //獲取歌手名（陣列33-62）
-            j = 0;
-            byte[] bytArtist = new byte[30];//將歌手名部分讀到一個單獨的陣列中
-            for (i = currentIndex; i < currentIndex + 30; i++)
-            {
-                mp3Info.Artist[j] = Info[i];
-                position++;
-                j++;
-            }
-            currentIndex = position;
-            //獲取唱片名（陣列63-92）
-            j = 0;
-            byte[] bytAlbum = new byte[30];//將唱片名部分讀到一個單獨的陣列中
-            for (i = currentIndex; i < currentIndex + 30; i++)
-            {
-                mp3Info.Album[j] = Info[i];
-                position++;
-                j++;
-            }
-            currentIndex = position;
-            //獲取年 （陣列93-96）
-            j = 0;
-            byte[] bytYear = new byte[4];//將年部分讀到一個單獨的陣列中
-            for (i = currentIndex; i < currentIndex + 4; i++)
-            {
-                mp3Info.Year[j] = Info[i];
-                position++;
-                j++;
-            }
-            currentIndex = position;
-            //獲取注釋（陣列97-124）
-            j = 0;
-            byte[] bytComment = new byte[28];//將注釋部分讀到一個單獨的陣列中
-            for (i = currentIndex; i < currentIndex + 25; i++)
-            {
-                mp3Info.Comment[j] = Info[i];
-                position++;
-                j++;
-            }
-            currentIndex = position;
-            //以下獲取保留位（陣列125-127）
-            mp3Info.reserved1 = (char)Info[++position];
-            mp3Info.reserved2 = (char)Info[++position];
-            mp3Info.reserved3 = (char)Info[++position];
-
-            /*
-            for (i = 0; i < mp3Info.identify.Length; i++)
-            {
-                richTextBox1.Text += mp3Info.identify[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.identify);
-            richTextBox1.Text += "identify : " + tmp;
-            richTextBox1.Text += "\n";
-            /*
-            for (i = 0; i < mp3Info.Title.Length; i++)
-            {
-                richTextBox1.Text += mp3Info.Title[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Title);
-            richTextBox1.Text += "Title : " + tmp;
-            richTextBox1.Text += "\n";
-            /*
-            for (i = 0; i < mp3Info.Artist.Length; i++)
-            {
-                richTextBox1.Text += mp3Info.Artist[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Artist);
-            richTextBox1.Text += "Artist : " + tmp;
-            richTextBox1.Text += "\n";
-            /*
-            for (i = 0; i < mp3Info.Album.Length; i++)
-            {
-                richTextBox1.Text += mp3Info.Album[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Album);
-            richTextBox1.Text += "Album : " + tmp;
-            richTextBox1.Text += "\n";
-            /*
-            for (i = 0; i < mp3Info.Year.Length; i++)
-            {
-                richTextBox1.Text += mp3Info.Year[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Year);
-            richTextBox1.Text += "Year : " + tmp;
-            richTextBox1.Text += "\n";
-            /*
-            for (i = 0; i < mp3Info.Comment.Length; i++)
-            {
-                richTextBox1.Text += mp3Info.Comment[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            tmp = Encoding.GetEncoding(encoding).GetString(mp3Info.Comment);
-            richTextBox1.Text += "Comment : " + tmp;
-            richTextBox1.Text += "\n";
-
-            return mp3Info;
-
-        }
-
         //上面程式用到下面的方法：
         /// <summary>
         /// 將位元組陣列轉換成字串
@@ -314,7 +153,7 @@ namespace vcs_ID3Tag
         private string byteToString(byte[] b)
         {
             //Encoding enc = Encoding.GetEncoding("GB2312");
-            Encoding enc = Encoding.GetEncoding("BIG5");
+            Encoding enc = Encoding.GetEncoding(encoding);
             string str = enc.GetString(b);
             str = str.Substring(0, str.IndexOf('\0') >= 0 ? str.IndexOf('\0') : str.Length);//去掉無用字元
             return str;
@@ -350,86 +189,101 @@ namespace vcs_ID3Tag
                     richTextBox1.Text += "檔名:\t" + strFilename + "\n";
                     get_ID3Tag(strFilename, encoding);
                 }
-                //richTextBox1.Text += "\n";
             }
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
-
         }
 
         void get_ID3Tag(string filename, string encoding)
         {
-            if (encoding == "big5")
-            {
-                //richTextBox1.Text += "\n----------------------正中編碼----------------------\n";
-                Mp3Info mp3_information;
-                byte[] Info = getLast128(filename);
-                mp3_information = getMp3Info(Info);
+            Mp3Info mp3_information;
+            byte[] Info = getLast128(filename);
+            mp3_information = getMp3Info(Info);
 
-                richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
-                richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
-                richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
-                richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
-                richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
-                richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
-                richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
-                richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
-                richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
-                richTextBox1.Text += "\n";
-            }
-            else if (encoding == "gb2312")
-            {
-                //richTextBox1.Text += "\n----------------------簡中編碼----------------------\n";
-                Mp3Info2 mp3_information2;
-
-                byte[] Info = getLast128(filename);
-                mp3_information2 = getMp3Info2(Info, encoding);
-
-
-            }
-            else if (encoding == "shift_jis")
-            {
-                //richTextBox1.Text += "\n----------------------日文編碼----------------------\n";
-                Mp3Info2 mp3_information2;
-
-                byte[] Info = getLast128(filename);
-                mp3_information2 = getMp3Info2(Info, encoding);
-
-
-            }
-            else
-            {
-
-
-            }
-
-
-
+            richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+            richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+            richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+            richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+            richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+            richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
+            richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
+            richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
+            richTextBox1.Text += "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\aaaa.mp3";       //一定要有@
-            get_ID3Tag(filename, "big5");
+            encoding = "big5";
+            get_ID3Tag(filename, encoding);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\uramachi.mp3";       //一定要有@
-            get_ID3Tag(filename, "gb2312");
+            encoding = "gb2312";
+            get_ID3Tag(filename, encoding);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\harumi.mp3";       //一定要有@
-            get_ID3Tag(filename, "shift_jis");
+            encoding = "shift_jis";
+            get_ID3Tag(filename, encoding);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+                encoding = "big5";
+            else if (radioButton2.Checked == true)
+                encoding = "gb2312";
+            else if (radioButton3.Checked == true)
+                encoding = "shift_jis";
+            else
+                encoding = "unicode";
+
+            openFileDialog1.Title = "多選檔案";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            openFileDialog1.DefaultExt = "*.mp3";
+            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            openFileDialog1.Filter = "音樂檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|所有檔案(*.*)|*.*";   //檔案類型
+            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            //openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
+            openFileDialog1.Multiselect = true;    //允許多選檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
+                foreach (var strFilename in openFileDialog1.FileNames)
+                {
+                    richTextBox1.Text += "檔名:\t" + strFilename + "\n";
+                    richTextBox1.Text += "正中編碼\n";
+                    encoding = "big5";
+                    get_ID3Tag(strFilename, encoding);
+                    richTextBox1.Text += "\n簡中編碼\n";
+                    encoding = "gb2312";
+                    get_ID3Tag(strFilename, encoding);
+                    richTextBox1.Text += "\n日文編碼\n";
+                    encoding = "shift_jis";
+                    get_ID3Tag(strFilename, encoding);
+                    richTextBox1.Text += "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
         }
 
     }
