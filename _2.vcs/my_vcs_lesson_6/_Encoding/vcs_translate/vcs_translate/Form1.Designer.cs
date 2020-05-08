@@ -55,6 +55,15 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -188,9 +197,9 @@
             // 
             // richTextBox7
             // 
-            this.richTextBox7.Location = new System.Drawing.Point(1035, 41);
+            this.richTextBox7.Location = new System.Drawing.Point(1134, 41);
             this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(235, 761);
+            this.richTextBox7.Size = new System.Drawing.Size(300, 761);
             this.richTextBox7.TabIndex = 15;
             this.richTextBox7.Text = "";
             // 
@@ -293,7 +302,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(936, 608);
+            this.button12.Location = new System.Drawing.Point(936, 546);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(93, 23);
             this.button12.TabIndex = 26;
@@ -301,11 +310,102 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(936, 590);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(93, 36);
+            this.button13.TabIndex = 27;
+            this.button13.Text = "顯示Windows內所有編碼";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(936, 641);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(93, 23);
+            this.button14.TabIndex = 28;
+            this.button14.Text = "Unicode to Big5";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(936, 679);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(93, 36);
+            this.button15.TabIndex = 29;
+            this.button15.Text = "Unicode to gb2312";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(936, 735);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(93, 23);
+            this.button16.TabIndex = 30;
+            this.button16.Text = "各種編碼轉換";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(1035, 590);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(93, 36);
+            this.button17.TabIndex = 31;
+            this.button17.Text = "編碼1";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(1035, 641);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(93, 23);
+            this.button18.TabIndex = 32;
+            this.button18.Text = "編碼2";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(1035, 679);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(93, 36);
+            this.button19.TabIndex = 33;
+            this.button19.Text = "編碼3";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(1035, 735);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(93, 23);
+            this.button20.TabIndex = 34;
+            this.button20.Text = "xxx";
+            this.button20.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1282, 814);
+            this.ClientSize = new System.Drawing.Size(1446, 814);
+            this.Controls.Add(this.button20);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.button17);
+            this.Controls.Add(this.button16);
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
@@ -367,6 +467,15 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

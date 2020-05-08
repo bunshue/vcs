@@ -68,6 +68,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,7 +114,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(154, 42);
             this.button4.TabIndex = 4;
-            this.button4.Text = "xxx";
+            this.button4.Text = "取得真實副檔名";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -124,7 +125,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(154, 42);
             this.button7.TabIndex = 7;
-            this.button7.Text = "xxx";
+            this.button7.Text = "判斷檔案格式";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -141,12 +142,12 @@
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button15.Location = new System.Drawing.Point(332, 299);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(154, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "xxx";
+            this.button15.Text = "讀取bmp檔案";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -212,7 +213,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(154, 42);
             this.button25.TabIndex = 25;
-            this.button25.Text = "xxx";
+            this.button25.Text = "取得目前應用程式版本";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -245,7 +246,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(154, 42);
             this.button28.TabIndex = 29;
-            this.button28.Text = "xxx";
+            this.button28.Text = "提供磁碟上實體檔案的版本資訊";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -391,7 +392,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(154, 42);
             this.button34.TabIndex = 55;
-            this.button34.Text = "xxx";
+            this.button34.Text = "取得軟體版本";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click_1);
             // 
@@ -470,12 +471,12 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button5.Location = new System.Drawing.Point(332, 252);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(154, 42);
             this.button5.TabIndex = 65;
-            this.button5.Text = "xxx";
+            this.button5.Text = " .Net C# 將 BitmapData 複製到 byte[] Array 陣列";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -489,6 +490,10 @@
             this.button10.Text = "在控件上畫東西";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -579,6 +584,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

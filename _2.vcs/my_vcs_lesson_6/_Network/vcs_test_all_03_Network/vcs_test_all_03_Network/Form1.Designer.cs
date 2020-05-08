@@ -295,8 +295,9 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(217, 42);
             this.button24.TabIndex = 24;
-            this.button24.Text = "xxx";
+            this.button24.Text = "讓 WebClient 擁有 Timeout 功能";
             this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // button29
             // 

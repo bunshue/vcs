@@ -81,12 +81,11 @@ namespace vcs_Bin2Hex
                 }
                 else
                 {
-                    //前部分binary讀取
+                    //前/後部分binary讀取
                     data = File.ReadAllBytes(filename); //有全讀否? 如果檔案很大 但只要讀一點 會不會太浪費?
                     long len_file = data.Length;
 
                     FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                    BinaryReader br = new BinaryReader(fs);
                     //len = System.Convert.ToDouble(fs.Length);
                     len = fs.Length;
                     richTextBox1.Text += "讀取檔案 : " + filename + "\n";
@@ -96,25 +95,37 @@ namespace vcs_Bin2Hex
 
                     if (len > len_file)
                         len = len_file;
-                    richTextBox1.Text += "讀前面 " + len.ToString() + " 拜\n";
 
-                    //讀取位元陣列
-                    data = br.ReadBytes((int)len);    //用ReadBytes讀取檔案的前幾拜(循序)
+                    if (radioButton6.Checked == true)
+                    {
+                        richTextBox1.Text += "讀前面 " + len.ToString() + " 拜\n";
+                        BinaryReader br = new BinaryReader(fs);
 
-                    //釋放資源
-                    br.Close();
-                    fs.Close();
+                        //讀取位元陣列
+                        data = br.ReadBytes((int)len);    //用ReadBytes讀取檔案的前幾拜(循序)
+
+                        //釋放資源
+                        br.Close();
+                        fs.Close();
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "讀後面 " + len.ToString() + " 拜\n";
+                        Stream stream = fs;
+                        stream.Seek(-len, SeekOrigin.End);
+                        int result = 0;
+                        data = new byte[len];
+                        result = stream.Read(data, 0, (int)len);
+                        fs.Close();
+                        stream.Close();
+                    }
                 }
-
 
                 if (radioButton8.Checked == true)
                 {
                     //顯示only
                     richTextBox1.Text += "印出資料內容, 長度 " + data.Length.ToString() + " 拜\n";
                     print_data(data);
-
-
-
                 }
                 else
                 {
@@ -124,7 +135,6 @@ namespace vcs_Bin2Hex
 
                     FileStream fsw = new FileStream(filename, FileMode.Create, FileAccess.Write);
                     StreamWriter sw;
-
 
                     sw = new StreamWriter(fsw, Encoding.GetEncoding("unicode"));   //指名編碼格式
 

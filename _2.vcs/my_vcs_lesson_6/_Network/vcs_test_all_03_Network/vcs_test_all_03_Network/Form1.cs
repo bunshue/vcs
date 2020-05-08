@@ -212,6 +212,28 @@ namespace vcs_test_all_03_Network
         }
 
 
+        public class MyWebClient : WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri uri)
+            {
+                WebRequest WR = base.GetWebRequest(uri);
+                WR.Timeout = 30 * 1000;     //30秒
+                return WR;
+            }
+        }
+
+        ////.Net C# 讓 WebClient 擁有 Timeout 功能
+        private void button24_Click(object sender, EventArgs e)
+        {
+            MyWebClient MWC = new MyWebClient();
+            string HTML = MWC.DownloadString("http://www.google.com.tw/");
+            richTextBox1.Text += HTML;
+            //Console.WriteLine(HTML);
+
+
+        }
+
+
 
     }
 }
