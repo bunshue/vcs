@@ -33,6 +33,22 @@ namespace vcs_ID3Tag
             public char reserved3;//保留位，一個位元組
         }
 
+        void print_data(byte[] data)
+        {
+            int i;
+            int len;
+            len = data.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += data[i].ToString("X2");
+                if ((i % 16) == 15)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
         //所以，我們只要把MP3檔的最後128個位元組分段讀出來並保存到該結構裡就可以了。函式定義如下：
         private byte[] getLast128(string FileName)
         {
@@ -45,19 +61,13 @@ namespace vcs_ID3Tag
             rl = stream.Read(Info, 0, seekPos);
             fs.Close();
             stream.Close();
-            /*
-            richTextBox1.Text += "印出此檔案之末128拜資料\n";
-            int i;
-            for (i = 0; i < 128; i++)
+
+            if (cb_raw_data.Checked == true)
             {
-                richTextBox1.Text += Info[i].ToString("X2");
-                if ((i % 16) == 15)
-                    richTextBox1.Text += "\n";
-                else
-                    richTextBox1.Text += " ";
+                richTextBox1.Text += "印出此檔案之末128拜資料\n";
+                print_data(Info);
             }
-            richTextBox1.Text += "\n";
-            */
+
             return Info;
         }
         //再對上面返回的位元組陣列分段取出，並保存到Mp3Info結構中返回:

@@ -20,11 +20,26 @@ namespace vcs_Bin2Hex
 
         private const int MODE_0 = 0x00;
         private const int MODE_1 = 0x01;
+        int new_line = 1;
+
+        void print_data(byte[] data)
+        {
+            int i;
+            int len;
+            len = data.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += data[i].ToString("X2");
+                if ((i % new_line) == (new_line - 1))
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+        }
 
         void do_bin2hex(int mode)
         {
-            int new_line = 1;
-
             if (radioButton1.Checked == true)
                 new_line = 1;
             else if (radioButton2.Checked == true)
@@ -89,42 +104,47 @@ namespace vcs_Bin2Hex
                     //釋放資源
                     br.Close();
                     fs.Close();
-
-
-
                 }
 
-                filename = filename + "." + new_line.ToString() + ".txt";
 
-                FileStream fsw = new FileStream(filename, FileMode.Create, FileAccess.Write);
-                StreamWriter sw;
-
-
-                sw = new StreamWriter(fsw, Encoding.GetEncoding("unicode"));   //指名編碼格式
-
-                for (i = 0; i < len; i++)
+                if (radioButton8.Checked == true)
                 {
-                    sw.Write(data[i].ToString("X2"));
-                    if ((i % new_line) == (new_line - 1))
-                        sw.Write(data[i].ToString("\n"));
-                    else
-                        sw.Write(data[i].ToString(" "));
+                    //顯示only
+                    richTextBox1.Text += "印出資料內容, 長度 " + data.Length.ToString() + " 拜\n";
+                    print_data(data);
+
+
+
                 }
+                else
+                {
+                    //存檔only
 
-                sw.Close();
-                richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n\n";
+                    filename = filename + "." + new_line.ToString() + ".txt";
+
+                    FileStream fsw = new FileStream(filename, FileMode.Create, FileAccess.Write);
+                    StreamWriter sw;
 
 
+                    sw = new StreamWriter(fsw, Encoding.GetEncoding("unicode"));   //指名編碼格式
 
+                    for (i = 0; i < len; i++)
+                    {
+                        sw.Write(data[i].ToString("X2"));
+                        if ((i % new_line) == (new_line - 1))
+                            sw.Write(data[i].ToString("\n"));
+                        else
+                            sw.Write(data[i].ToString(" "));
+                    }
 
+                    sw.Close();
+                    richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n\n";
+                }
             }
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
