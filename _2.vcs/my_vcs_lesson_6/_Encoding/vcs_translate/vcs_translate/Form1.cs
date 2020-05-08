@@ -706,6 +706,71 @@ namespace vcs_translate
             richTextBox7.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
         }
 
+        private void button20_Click(object sender, EventArgs e)
+        {
+            char c = 'A';
+            richTextBox7.Text += "ccc = " + c + "\n";
+
+            c = '\u0045';
+
+            //c = 0x46;
+
+            richTextBox7.Text += "ccc = " + c + "\n";
+            richTextBox7.Text += "ccc = " + c.ToString() + "\n";
+
+            string nnn = "清太祖";
+            int len = nnn.Length;
+            richTextBox7.Text += "len = " + len.ToString() + "\n";
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox7.Text += "i = " + i.ToString() + "\tdata = " + nnn[i] + "\n";
+                richTextBox7.Text += "i = " + i.ToString() + "\tdata = " + ((int)nnn[i]).ToString("X4") + "\n";
+
+
+            }
+
+            for (i = 0x6E05; i < (0x6E05 + 10); i++)
+            {
+                richTextBox7.Text += "i = " + i.ToString() + "\tdata = " + i + "\n";
+
+
+            }
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            richTextBox7.Text += "把系統暫存區的資料印出來\n";
+
+
+            //C# – 貼上剪貼簿
+            //richTextBox1.Text += Clipboard.GetData(DataFormats.Text);
+            //richTextBox1.Text += Clipboard.GetText();   //建議用此
+
+
+
+            string data = Clipboard.GetText();
+
+            int len = data.Length;
+            richTextBox7.Text += "len = " + len.ToString() + "\n";
+
+            richTextBox7.Text += "內容:\n";
+            richTextBox7.Text += data;
+            richTextBox7.Text += "\n";
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox7.Text += "i = " + i.ToString() + "\tdata = " + data[i] + "\n";
+                richTextBox7.Text += "i = " + i.ToString() + "\tdata = " + ((int)data[i]).ToString("X4") + "\n";
+
+
+            }
+
+        }
+
 
 
     }

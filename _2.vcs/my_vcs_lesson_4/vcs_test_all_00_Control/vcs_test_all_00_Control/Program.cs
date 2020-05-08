@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_GetParent
+namespace vcs_test_all_00_Control
 {
     static class Program
     {

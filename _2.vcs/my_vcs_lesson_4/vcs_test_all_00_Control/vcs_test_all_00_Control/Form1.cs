@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace test_dock
+namespace vcs_test_all_00_Control
 {
     public partial class Form1 : Form
     {
@@ -19,8 +19,6 @@ namespace test_dock
         int i = 0;
         private void button1_Click(object sender, EventArgs e)
         {
-            //AddMyGroupBox();
-
             i++;
 
             i %= 6;
@@ -37,8 +35,13 @@ namespace test_dock
             else
                 button1.Dock = DockStyle.None;
 
+
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AddMyGroupBox();
+        }
 
         // Add a GroupBox to a form and set some of its common properties.
         private void AddMyGroupBox()
@@ -60,10 +63,9 @@ namespace test_dock
             this.Controls.Add(groupBox1);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             CreateMyRichTextBox();
-
         }
 
         public void CreateMyRichTextBox()

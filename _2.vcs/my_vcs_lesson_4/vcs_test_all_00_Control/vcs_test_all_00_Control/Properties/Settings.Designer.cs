@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace test_GetParent.Properties
+namespace vcs_test_all_00_Control.Properties
 {
 
 

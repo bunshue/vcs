@@ -62,8 +62,15 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "i1的資料型別是：" + i1.GetType().ToString() + "\n";
             richTextBox1.Text += "b1的資料型別是：" + b1.GetType().ToString() + "\n";
             richTextBox1.Text += "日期的資料型別是：" + DateTime.Now.GetType().ToString() + "\n";
-
         }
+
+        string[] LunarHolDayName = {
+                  "小寒", "大寒", "立春", "雨水",
+                  "驚蟄", "春分", "清明", "谷雨",
+                  "立夏", "小滿", "芒種", "夏至",
+                  "小暑", "大暑", "立秋", "處暑",
+                  "白露", "秋分", "寒露", "霜降",
+                  "立冬", "小雪", "大雪", "冬至"};
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -116,8 +123,13 @@ namespace vcs_test_all_03_Syntax
             a1[2] = 6;
             a1[3] = 2;
             Array.Sort(a1);
-            richTextBox1.Text += "最大值為：" + a1[3].ToString() + "\n";
+            richTextBox1.Text += "\n最大值為：" + a1[3].ToString() + "\n";
 
+            foreach (string str in LunarHolDayName)
+            {
+                richTextBox1.Text += str + " ";
+            }
+            richTextBox1.Text += "\n";
 
 
 
@@ -535,6 +547,44 @@ namespace vcs_test_all_03_Syntax
             else
                 richTextBox1.Text += "no matched animal name\n";
 
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            String strOrg = "ABCDE";
+            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
+            byte[] stringConvByte = Encoding.Default.GetBytes(strOrg);
+            // Encoding.GetString方法，將 Byte 序列 轉為 String
+            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
+
+            int i;
+            richTextBox1.Text += "len of strOrg = " + strOrg.Length.ToString() + "\n";
+            for (i = 0; i < strOrg.Length; i++)
+            {
+                richTextBox1.Text += "value is " + strOrg[i] + "\n";
+                richTextBox1.Text += "value is " + strOrg[i].ToString() + "\n";
+                //richTextBox1.Text += "value is\n";
+
+            }
+            richTextBox1.Text += "len of stringConvByte = " + stringConvByte.Length.ToString() + "\n";
+            for (i = 0; i < stringConvByte.Length; i++)
+            {
+                richTextBox1.Text += "value is " + stringConvByte[i].ToString("X2") + "\n";
+                //richTextBox1.Text += "value is\n";
+
+            }
+            richTextBox1.Text += "len of byteConvStrig = " + byteConvStrig.Length.ToString() + "\n";
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                this.Controls["label" + i.ToString()].Text = "這是label" + i.ToString();
+
+            }
 
         }
 

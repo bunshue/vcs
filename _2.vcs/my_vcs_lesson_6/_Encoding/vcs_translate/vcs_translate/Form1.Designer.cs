@@ -64,6 +64,7 @@
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button21 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -352,7 +353,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(1035, 590);
+            this.button17.Location = new System.Drawing.Point(1035, 500);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(93, 36);
             this.button17.TabIndex = 31;
@@ -362,7 +363,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(1035, 641);
+            this.button18.Location = new System.Drawing.Point(1035, 551);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(93, 23);
             this.button18.TabIndex = 32;
@@ -372,7 +373,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(1035, 679);
+            this.button19.Location = new System.Drawing.Point(1035, 589);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(93, 36);
             this.button19.TabIndex = 33;
@@ -382,22 +383,34 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(1035, 735);
+            this.button20.Location = new System.Drawing.Point(1035, 631);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(93, 23);
             this.button20.TabIndex = 34;
-            this.button20.Text = "xxx";
+            this.button20.Text = "打印編碼";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(1035, 679);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(93, 36);
+            this.button21.TabIndex = 35;
+            this.button21.Text = "把系統暫存區的資料印出來";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1446, 814);
+            this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -476,6 +489,7 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button21;
     }
 }
 

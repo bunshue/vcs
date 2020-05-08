@@ -571,6 +571,18 @@ namespace vcs_test_all_12_DateTime
             richTextBox1.Text += "The day of the year is " + dateTimePicker1.Value.DayOfYear.ToString() + "\n";
             richTextBox1.Text += "Millisecond is: " + dateTimePicker1.Value.Millisecond.ToString() + "\n";
 
+
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += dateTimePicker1.Value.Year.ToString();
+            richTextBox1.Text += "/" + dateTimePicker1.Value.Month.ToString();
+            richTextBox1.Text += "/" + dateTimePicker1.Value.Day.ToString();
+
+            richTextBox1.Text += " " + DateTime.Now.Hour;
+            richTextBox1.Text += ":" + DateTime.Now.Minute;
+            richTextBox1.Text += ":" + DateTime.Now.Second;
+            richTextBox1.Text += "\n";
+
+
         }
 
         private void button30_Click(object sender, EventArgs e)
