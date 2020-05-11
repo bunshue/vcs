@@ -269,29 +269,11 @@ namespace vcs_test_all_03_Syntax
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //Byte型態的陣列轉換為字串
-            int bytes = 0;
-            Byte[] byte_array = new Byte[256];
-            String new_string = "";
-            byte_array[0] = (byte)'A';
-            byte_array[1] = (byte)'B';
-            byte_array[2] = (byte)'C';
-            bytes = 3;
-            // 將Byte型態的陣列轉換為字串
-            new_string = Encoding.ASCII.GetString(byte_array, 0, bytes);
-            richTextBox1.Text += "get string : " + new_string + "\n";
 
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //字串轉換為Byte型態的陣列
-            String original_string = "lion-mouse.";
-            Byte[] byte_array = Encoding.ASCII.GetBytes(original_string);
-            foreach (char c in byte_array)
-            {
-                richTextBox1.Text += c.ToString() + "\n";
-            }
 
         }
 
@@ -398,26 +380,11 @@ namespace vcs_test_all_03_Syntax
 
         private void button26_Click(object sender, EventArgs e)
         {
-            string str = "this is a lion-mouse";
-            richTextBox1.Text += "old string : " + str + "\n";
-
-            byte[] byteArray = System.Text.Encoding.Default.GetBytes(str);
-            richTextBox1.Text += "len = " + byteArray.Length.ToString() + ", to byte array\n";
-            int i;
-            for (i = 0; i < byteArray.Length; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byteArray[i] + "\n";  //多了(char)變成%c
-            }
 
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            byte[] byteArray = new byte[5] { 0x41, 0x42, 0x43, 0x44, 0x45 };
-
-            string str = System.Text.Encoding.Default.GetString(byteArray);
-
-            richTextBox1.Text += "get string : " + str + "\n";
 
         }
 
@@ -552,30 +519,6 @@ namespace vcs_test_all_03_Syntax
 
         private void button16_Click(object sender, EventArgs e)
         {
-            String strOrg = "ABCDE";
-            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
-            byte[] stringConvByte = Encoding.Default.GetBytes(strOrg);
-            // Encoding.GetString方法，將 Byte 序列 轉為 String
-            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
-
-            int i;
-            richTextBox1.Text += "len of strOrg = " + strOrg.Length.ToString() + "\n";
-            for (i = 0; i < strOrg.Length; i++)
-            {
-                richTextBox1.Text += "value is " + strOrg[i] + "\n";
-                richTextBox1.Text += "value is " + strOrg[i].ToString() + "\n";
-                //richTextBox1.Text += "value is\n";
-
-            }
-            richTextBox1.Text += "len of stringConvByte = " + stringConvByte.Length.ToString() + "\n";
-            for (i = 0; i < stringConvByte.Length; i++)
-            {
-                richTextBox1.Text += "value is " + stringConvByte[i].ToString("X2") + "\n";
-                //richTextBox1.Text += "value is\n";
-
-            }
-            richTextBox1.Text += "len of byteConvStrig = " + byteConvStrig.Length.ToString() + "\n";
-
         }
 
         private void button17_Click(object sender, EventArgs e)

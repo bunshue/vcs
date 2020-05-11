@@ -172,8 +172,9 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(217, 42);
             this.button9.TabIndex = 9;
-            this.button9.Text = "xxx";
+            this.button9.Text = "GetString 和 GetBytes";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 

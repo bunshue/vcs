@@ -194,7 +194,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(217, 42);
             this.button10.TabIndex = 11;
-            this.button10.Text = "Byte型態的陣列轉換為字串";
+            this.button10.Text = "xxx";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -205,7 +205,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(217, 42);
             this.button11.TabIndex = 12;
-            this.button11.Text = "字串轉換為Byte型態的陣列";
+            this.button11.Text = "xxx";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -260,7 +260,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(154, 42);
             this.button16.TabIndex = 17;
-            this.button16.Text = "GetString GetBytes";
+            this.button16.Text = "xxx";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -355,7 +355,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(154, 42);
             this.button26.TabIndex = 26;
-            this.button26.Text = "string 轉 byte[]";
+            this.button26.Text = "xxx";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -366,7 +366,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(154, 42);
             this.button27.TabIndex = 27;
-            this.button27.Text = "byte[] 轉 string";
+            this.button27.Text = "xxx";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
