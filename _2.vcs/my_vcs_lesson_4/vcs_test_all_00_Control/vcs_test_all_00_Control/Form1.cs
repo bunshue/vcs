@@ -92,6 +92,29 @@ namespace vcs_test_all_00_Control
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "遍歷所有控件\n";
+            foreach (Control con in this.Controls)
+            {
+                System.String strControl = con.GetType().ToString();//获得控件的类型
+                System.String strControlName = con.Name.ToString();//获得控件的名称
+
+                richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+
+
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //Sender它代表的是引發這個事件的Object，所以我們可以把他轉型回來使用。
+            richTextBox1.Text += "Name : " + ((Button)sender).Name.ToString() + "\n";
+            richTextBox1.Text += "Size : " + ((Button)sender).Size.Width.ToString() + " X " + ((Button)sender).Size.Height.ToString() + "\n";
+
+        }
+
 
     }
 }

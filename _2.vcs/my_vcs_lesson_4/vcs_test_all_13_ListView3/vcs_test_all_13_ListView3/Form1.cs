@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_test_all_13_ListView2
+namespace vcs_test_all_13_ListView3
 {
     public partial class Form1 : Form
     {
@@ -17,6 +17,41 @@ namespace vcs_test_all_13_ListView2
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            LoadImageList();
+        }
+
+        private void LoadImageList()
+        {
+            var list = new List<string>();
+            list.Add(@"C:\______test_files\_pic\poster_01.jpg");
+            list.Add(@"C:\______test_files\_pic\poster_02.jpg");
+            list.Add(@"C:\______test_files\_pic\poster_03.jpg");
+            list.Add(@"C:\______test_files\_pic\poster_04.jpg");
+            list.Add(@"C:\______test_files\_pic\poster_05.jpg");
+            list.Add(@"C:\______test_files\_pic\poster_06.jpg");
+            list.Add(@"C:\______test_files\_pic\poster_07.jpg");
+
+            ImageList imglist = new ImageList();
+            imglist.ImageSize = new Size(200, 200);
+            imglist.ColorDepth = ColorDepth.Depth32Bit;
+            foreach (var filename in list)
+            {
+                imglist.Images.Add(Image.FromFile(filename));
+            }
+            picListView.LargeImageList = imglist;
+
+            for (int i = 0; i < imglist.Images.Count; i++)
+            {
+                var lvi = new ListViewItem();
+                lvi.ImageIndex = 0;
+                lvi.Text = "P" + i;
+                //lvi.ToolTipText = "P" + i;
+                picListView.Items.Add(lvi);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             CreateMyListView();
         }
@@ -56,35 +91,29 @@ namespace vcs_test_all_13_ListView2
             ListViewItem item3 = new ListViewItem("item3", 0);
             // Place a check mark next to the item.
             item3.Checked = true;
-            item3.SubItems.Add("777777777777777777777777777777777777777");
+            item3.SubItems.Add("7");
             item3.SubItems.Add("8");
             item3.SubItems.Add("9");
-            ListViewItem item4 = new ListViewItem("item4", 0);
-            // Place a check mark next to the item.
-            item4.Checked = true;
-            item4.SubItems.Add("7");
-            item4.SubItems.Add("8");
-            item4.SubItems.Add("9");
 
             // Create columns for the items and subitems.
             // Width of -2 indicates auto-size.
-            listView1.Columns.Add("第一欄", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("subitem2", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("subitem3", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("subitem4", -2, HorizontalAlignment.Center);
+            listView1.Columns.Add("Item Column", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Column 2", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Column 3", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Column 4", -2, HorizontalAlignment.Center);
 
             //Add the items to the ListView.
-            listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3, item4 });
+            listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
 
             // Create two ImageList objects.
             ImageList imageListSmall = new ImageList();
             ImageList imageListLarge = new ImageList();
 
             // Initialize the ImageList objects with bitmaps.
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic1.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic2.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic3.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic4.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\______test_files\_pic\poster_01.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\______test_files\_pic\poster_02.jpg"));
+            imageListLarge.Images.Add(Bitmap.FromFile(@"C:\______test_files\_pic\poster_03.jpg"));
+            imageListLarge.Images.Add(Bitmap.FromFile(@"C:\______test_files\_pic\poster_04.jpg"));
 
             //Assign the ImageList objects to the ListView.
             listView1.LargeImageList = imageListLarge;
@@ -93,6 +122,8 @@ namespace vcs_test_all_13_ListView2
             // Add the ListView to the control collection.
             this.Controls.Add(listView1);
         }
+
+
 
     }
 }

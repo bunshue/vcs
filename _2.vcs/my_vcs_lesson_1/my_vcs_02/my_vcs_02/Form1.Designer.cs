@@ -40,7 +40,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.OpenComPortButton = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.SelectFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -48,6 +47,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -89,7 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(581, 51);
+            this.label1.Location = new System.Drawing.Point(554, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 12);
             this.label1.TabIndex = 7;
@@ -97,7 +97,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(656, 41);
+            this.textBox3.Location = new System.Drawing.Point(629, 41);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(251, 34);
@@ -105,7 +105,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(584, 91);
+            this.button3.Location = new System.Drawing.Point(566, 91);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(141, 37);
             this.button3.TabIndex = 9;
@@ -115,7 +115,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(766, 91);
+            this.button4.Location = new System.Drawing.Point(721, 91);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(141, 37);
             this.button4.TabIndex = 10;
@@ -125,7 +125,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(583, 153);
+            this.button5.Location = new System.Drawing.Point(565, 153);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(138, 33);
             this.button5.TabIndex = 11;
@@ -135,7 +135,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(765, 153);
+            this.button6.Location = new System.Drawing.Point(720, 153);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(141, 33);
             this.button6.TabIndex = 12;
@@ -143,20 +143,10 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // OpenComPortButton
-            // 
-            this.OpenComPortButton.Location = new System.Drawing.Point(583, 207);
-            this.OpenComPortButton.Name = "OpenComPortButton";
-            this.OpenComPortButton.Size = new System.Drawing.Size(138, 40);
-            this.OpenComPortButton.TabIndex = 0;
-            this.OpenComPortButton.Text = "COM Close";
-            this.OpenComPortButton.UseVisualStyleBackColor = true;
-            this.OpenComPortButton.Click += new System.EventHandler(this.OpenComPortButton_Click);
-            // 
             // button7
             // 
             this.button7.CausesValidation = false;
-            this.button7.Location = new System.Drawing.Point(583, 282);
+            this.button7.Location = new System.Drawing.Point(565, 272);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(138, 40);
             this.button7.TabIndex = 13;
@@ -167,7 +157,7 @@
             // SelectFile
             // 
             this.SelectFile.Image = global::my_vcs_02.Properties.Resources._1431440286_folder_open;
-            this.SelectFile.Location = new System.Drawing.Point(583, 359);
+            this.SelectFile.Location = new System.Drawing.Point(565, 349);
             this.SelectFile.Name = "SelectFile";
             this.SelectFile.Size = new System.Drawing.Size(126, 86);
             this.SelectFile.TabIndex = 14;
@@ -181,7 +171,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(728, 396);
+            this.label2.Location = new System.Drawing.Point(710, 386);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 12);
             this.label2.TabIndex = 15;
@@ -200,7 +190,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(588, 454);
+            this.label3.Location = new System.Drawing.Point(550, 456);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(319, 24);
             this.label3.TabIndex = 17;
@@ -210,7 +200,7 @@
             // 
             this.button9.BackColor = System.Drawing.Color.Red;
             this.button9.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(766, 294);
+            this.button9.Location = new System.Drawing.Point(721, 284);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(128, 77);
             this.button9.TabIndex = 18;
@@ -218,18 +208,26 @@
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(886, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(274, 496);
+            this.richTextBox1.TabIndex = 19;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 520);
+            this.ClientSize = new System.Drawing.Size(1172, 520);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SelectFile);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.OpenComPortButton);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -261,7 +259,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button OpenComPortButton;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button SelectFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -269,6 +266,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -64,35 +64,12 @@ namespace my_vcs_02
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("CruuentSystemDir : " + System.Environment.CurrentDirectory);
+            richTextBox1.Text += "CruuentSystemDir : " + System.Environment.CurrentDirectory + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("CurrentDirectory : " + Application.StartupPath);
-        }
-
-        int IsComPortOpen = 0;
-        private void OpenComPortButton_Click(object sender, EventArgs e)
-        {
-            if (IsComPortOpen == 1)
-            {
-                //OPEN => CLOSE
-                this.OpenComPortButton.Text = "COM Close";
-                //this.OpenComPortButton.ForeColor = Color.OrangeRed;
-                this.OpenComPortButton.BackColor = Color.OrangeRed;
-                //this.OpenComPortButton.Image = Resource1.green_ball_icon;
-                IsComPortOpen = 0;
-            }
-            else
-            {
-                //CLOSE => OPEN
-                this.OpenComPortButton.Text = "COM Open";
-                //this.OpenComPortButton.ForeColor = Color.MediumSpringGreen;
-                this.OpenComPortButton.BackColor = Color.MediumSpringGreen;
-                //this.OpenComPortButton.Image = Resource1.red_ball_icon;
-                IsComPortOpen = 1;
-            }
+            richTextBox1.Text += "CurrentDirectory : " + Application.StartupPath + "\n";
         }
 
         [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
@@ -107,9 +84,9 @@ namespace my_vcs_02
         private void button7_Click(object sender, EventArgs e)
         {
             if (IsConnectedToInternet())
-                MessageBox.Show("已連接在網上!", "提示");
+                richTextBox1.Text += "已連接在網上" + "\n";
             else
-                MessageBox.Show("未連接在網上!!", "提示"); 
+                richTextBox1.Text += "未連接在網上" + "\n";
         }
 
         private void SelectFile_Click(object sender, EventArgs e)
@@ -127,7 +104,7 @@ namespace my_vcs_02
 
         private void button9_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("一些按鈕功能。");
+            richTextBox1.Text += "一些按鈕功能\n";
         }
     }
 }
