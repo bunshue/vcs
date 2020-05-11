@@ -194,10 +194,10 @@ namespace vcs_ID3Tag
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
-                foreach (var strFilename in openFileDialog1.FileNames)
+                foreach (var filename in openFileDialog1.FileNames)
                 {
-                    richTextBox1.Text += "檔名:\t" + strFilename + "\n";
-                    get_ID3Tag(strFilename, encoding);
+                    richTextBox1.Text += "檔名:\t" + filename + "\n";
+                    get_ID3Tag(filename, encoding);
                 }
             }
             else

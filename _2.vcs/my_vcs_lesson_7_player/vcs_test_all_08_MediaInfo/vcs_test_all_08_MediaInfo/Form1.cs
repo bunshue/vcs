@@ -19,31 +19,25 @@ namespace vcs_test_all_08_MediaInfo
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void get_MediaInfo(string filename)
         {
-            string filename = @"C:\______test_files\aaaa.mp3";
-            richTextBox1.Text += "  檔案名稱: " + filename + "\n";
-
             MediaFile f = new MediaFile(filename);
 
             if (f.InfoAvailable == true)
             {
-                richTextBox1.Text += "InfoAvailable = true\n";
-                richTextBox1.Text += "Info:\n" + f.Info_Text + "\n\n";
+                richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.Info_Text + "\n\n";
 
-                richTextBox1.Text += "File Name : " + f.Name + "\n";
+                richTextBox1.Text += "有MediaInfo資料, 分項資料:\n";
+                richTextBox1.Text += "File : " + f.File + "\n";
+                richTextBox1.Text += "Name : " + f.Name + "\n";
+                richTextBox1.Text += "Title : " + f.Title + "\n";
                 richTextBox1.Text += "FileSize : " + f.FileSize.ToString() + " Bytes\n";
                 richTextBox1.Text += "FrameCount : " + f.FrameCount.ToString() + "\n";
                 richTextBox1.Text += "StreamCount : " + f.StreamCount.ToString() + "\n";
-
-                richTextBox1.Text += "File : " + f.File + "\n";
                 richTextBox1.Text += "ParentFolder : " + f.ParentFolder + "\n";
                 richTextBox1.Text += "Extension : " + f.Extension + "\n";
-                richTextBox1.Text += "Description : \n" + f.Description + "\n\n";
-                richTextBox1.Text += "Title : " + f.Title + "\n";
+                richTextBox1.Text += "Description : \n" + f.Description + "\n";
                 richTextBox1.Text += "Capacity : " + f.Text.Capacity.ToString() + "\n";
-
-                richTextBox1.Text += "\n";
 
                 //General
                 richTextBox1.Text += "Format : " + f.General.Format + "\n";
@@ -56,14 +50,14 @@ namespace vcs_test_all_08_MediaInfo
                 richTextBox1.Text += "Extension : " + f.General.Extension + "\n";
                 richTextBox1.Text += "Format : " + f.General.Format + "\n";
                 richTextBox1.Text += "FormatID : " + f.General.FormatID + "\n";
-
-
                 richTextBox1.Text += "ID : " + f.General.ID.ToString() + "\n";
                 richTextBox1.Text += "StreamSize : " + f.General.StreamSize.ToString() + "\n";
                 richTextBox1.Text += "StreamType : " + f.General.StreamType + "\n";
 
+                richTextBox1.Text += "\n";
                 richTextBox1.Text += "Audio Count: " + f.Audio.Count.ToString() + "\n";
                 richTextBox1.Text += "Video Count: " + f.Video.Count.ToString() + "\n";
+                richTextBox1.Text += "\n";
 
                 if (f.Audio.Count > 0)
                 {
@@ -145,26 +139,59 @@ namespace vcs_test_all_08_MediaInfo
             }
             else
             {
-                richTextBox1.Text += "InfoAvailable = false\n";
                 richTextBox1.Text += "無MediaInfo資料\n";
             }
 
             //Info
             if (f.MediaInfo_Available == true)
             {
-                richTextBox1.Text += "MediaInfo_Available = true, info:\n";
-                richTextBox1.Text += f.MediaInfo_Text + "\n\n";
+                richTextBox1.Text += "有MediaInfo資料, 全部資料:\n" + f.MediaInfo_Text + "\n";
             }
             else
             {
-                richTextBox1.Text += "MediaInfo_Available = false\n";
+                richTextBox1.Text += "無MediaInfo資料\n";
             }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            richTextBox1.Text += "檔案名稱: " + filename + "\n";
+            get_MediaInfo(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "多選檔案";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            openFileDialog1.DefaultExt = "*.mp3";
+            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            openFileDialog1.Filter = "音樂檔(*.mp3)|*.mp3|Wave檔(*.wav)|*.wav|所有檔案(*.*)|*.*";   //檔案類型
+            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            //openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
+            openFileDialog1.Multiselect = true;    //允許多選檔案
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
+                foreach (var filename in openFileDialog1.FileNames)
+                {
+                    richTextBox1.Text += "檔名:\t" + filename + "\n";
+                    get_MediaInfo(filename);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+
         }
 
 

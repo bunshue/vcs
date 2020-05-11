@@ -95,19 +95,19 @@ namespace vcs_MyPaint
         {
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String file1 = file + ".jpg";
-                String file2 = file + ".bmp";
-                String file3 = file + ".png";
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
 
-                bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(@file2, ImageFormat.Bmp);
-                bitmap1.Save(@file3, ImageFormat.Png);
+                bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                bitmap1.Save(@filename2, ImageFormat.Bmp);
+                bitmap1.Save(@filename3, ImageFormat.Png);
 
                 richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + file2 + "\n";
-                richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
             }
             else
                 richTextBox1.Text += "無圖可存\n";
@@ -838,10 +838,7 @@ namespace vcs_MyPaint
             i = 4; j = 3; c = Color.Honeydew;
             drawBox(i, j, c);
 
-
             pictureBox2.Image = bitmap1;
-
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -896,23 +893,21 @@ namespace vcs_MyPaint
 
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String file1 = file + ".jpg";
-                String file2 = file + ".bmp";
-                String file3 = file + ".png";
+                String filename1 = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                String filename2 = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                String filename3 = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
 
-                bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(@file2, ImageFormat.Bmp);
-                bitmap1.Save(@file3, ImageFormat.Png);
+                bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                bitmap1.Save(@filename2, ImageFormat.Bmp);
+                bitmap1.Save(@filename3, ImageFormat.Png);
 
                 richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + file2 + "\n";
-                richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -967,22 +962,21 @@ namespace vcs_MyPaint
             //this.WindowState = FormWindowState.Maximized;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
-
             if (bitmap1 != null)
             {
-                String file = "C:\\______test_files\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String file1 = file + ".jpg";
-                String file2 = file + ".bmp";
-                String file3 = file + ".png";
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
 
-                bitmap1.Save(@file1, ImageFormat.Jpeg);
-                bitmap1.Save(@file2, ImageFormat.Bmp);
-                bitmap1.Save(@file3, ImageFormat.Png);
+                bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                bitmap1.Save(@filename2, ImageFormat.Bmp);
+                bitmap1.Save(@filename3, ImageFormat.Png);
 
                 richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + file2 + "\n";
-                richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
             }
             else
                 richTextBox1.Text += "無圖可存\n";
