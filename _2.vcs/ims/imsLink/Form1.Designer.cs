@@ -267,6 +267,13 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.bt_measure_brightness = new System.Windows.Forms.Button();
+            this.bt_reset_camera = new System.Windows.Forms.Button();
+            this.bt_brightness = new System.Windows.Forms.Button();
+            this.bt_location = new System.Windows.Forms.Button();
+            this.groupBox_gridlinecolor = new System.Windows.Forms.GroupBox();
+            this.rb_gridlinecolor_black = new System.Windows.Forms.RadioButton();
+            this.rb_gridlinecolor_white = new System.Windows.Forms.RadioButton();
             this.rb_NXN = new System.Windows.Forms.RadioButton();
             this.lb_class = new System.Windows.Forms.Label();
             this.cb_air_ng = new System.Windows.Forms.CheckBox();
@@ -279,6 +286,7 @@
             this.lb_data_camera_gain = new System.Windows.Forms.Label();
             this.pictureBox_contrast = new System.Windows.Forms.PictureBox();
             this.gb_contrast_brightness3 = new System.Windows.Forms.GroupBox();
+            this.cb_change_rank = new System.Windows.Forms.CheckBox();
             this.trackBar_BPT = new System.Windows.Forms.TrackBar();
             this.tb_bpt3 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -619,9 +627,7 @@
             this.groupBox_brightness = new System.Windows.Forms.GroupBox();
             this.rb_brightness_color_2 = new System.Windows.Forms.RadioButton();
             this.rb_brightness_color_1 = new System.Windows.Forms.RadioButton();
-            this.groupBox_gridlinecolor = new System.Windows.Forms.GroupBox();
-            this.rb_gridlinecolor_black = new System.Windows.Forms.RadioButton();
-            this.rb_gridlinecolor_white = new System.Windows.Forms.RadioButton();
+            this.bt_save_program_picture = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -651,6 +657,7 @@
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            this.groupBox_gridlinecolor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).BeginInit();
             this.gb_contrast_brightness3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_BPT)).BeginInit();
@@ -709,7 +716,6 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.groupBox_brightness.SuspendLayout();
-            this.groupBox_gridlinecolor.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -3283,6 +3289,11 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.cb_change_rank);
+            this.tp_USB.Controls.Add(this.bt_measure_brightness);
+            this.tp_USB.Controls.Add(this.bt_reset_camera);
+            this.tp_USB.Controls.Add(this.bt_brightness);
+            this.tp_USB.Controls.Add(this.bt_location);
             this.tp_USB.Controls.Add(this.groupBox_gridlinecolor);
             this.tp_USB.Controls.Add(this.rb_NXN);
             this.tp_USB.Controls.Add(this.lb_class);
@@ -3459,6 +3470,92 @@
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // bt_measure_brightness
+            // 
+            this.bt_measure_brightness.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_measure_brightness.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_measure_brightness.ForeColor = System.Drawing.Color.Black;
+            this.bt_measure_brightness.Location = new System.Drawing.Point(799, 474);
+            this.bt_measure_brightness.Name = "bt_measure_brightness";
+            this.bt_measure_brightness.Size = new System.Drawing.Size(64, 32);
+            this.bt_measure_brightness.TabIndex = 231;
+            this.bt_measure_brightness.Text = "Messure";
+            this.bt_measure_brightness.UseVisualStyleBackColor = false;
+            this.bt_measure_brightness.Click += new System.EventHandler(this.bt_measure_brightness_Click);
+            // 
+            // bt_reset_camera
+            // 
+            this.bt_reset_camera.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_reset_camera.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_reset_camera.ForeColor = System.Drawing.Color.Black;
+            this.bt_reset_camera.Location = new System.Drawing.Point(719, 474);
+            this.bt_reset_camera.Name = "bt_reset_camera";
+            this.bt_reset_camera.Size = new System.Drawing.Size(64, 32);
+            this.bt_reset_camera.TabIndex = 230;
+            this.bt_reset_camera.Text = "Reset";
+            this.bt_reset_camera.UseVisualStyleBackColor = false;
+            this.bt_reset_camera.Click += new System.EventHandler(this.bt_reset_camera_Click);
+            // 
+            // bt_brightness
+            // 
+            this.bt_brightness.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_brightness.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_brightness.ForeColor = System.Drawing.Color.Black;
+            this.bt_brightness.Location = new System.Drawing.Point(837, 409);
+            this.bt_brightness.Name = "bt_brightness";
+            this.bt_brightness.Size = new System.Drawing.Size(64, 32);
+            this.bt_brightness.TabIndex = 229;
+            this.bt_brightness.Text = "亮度AWB";
+            this.bt_brightness.UseVisualStyleBackColor = false;
+            this.bt_brightness.Click += new System.EventHandler(this.bt_brightness_Click);
+            // 
+            // bt_location
+            // 
+            this.bt_location.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_location.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_location.ForeColor = System.Drawing.Color.Black;
+            this.bt_location.Location = new System.Drawing.Point(759, 412);
+            this.bt_location.Name = "bt_location";
+            this.bt_location.Size = new System.Drawing.Size(64, 32);
+            this.bt_location.TabIndex = 228;
+            this.bt_location.Text = "位置AWB";
+            this.bt_location.UseVisualStyleBackColor = false;
+            this.bt_location.Click += new System.EventHandler(this.bt_location_Click);
+            // 
+            // groupBox_gridlinecolor
+            // 
+            this.groupBox_gridlinecolor.Controls.Add(this.rb_gridlinecolor_black);
+            this.groupBox_gridlinecolor.Controls.Add(this.rb_gridlinecolor_white);
+            this.groupBox_gridlinecolor.Location = new System.Drawing.Point(766, 327);
+            this.groupBox_gridlinecolor.Name = "groupBox_gridlinecolor";
+            this.groupBox_gridlinecolor.Size = new System.Drawing.Size(64, 60);
+            this.groupBox_gridlinecolor.TabIndex = 227;
+            this.groupBox_gridlinecolor.TabStop = false;
+            // 
+            // rb_gridlinecolor_black
+            // 
+            this.rb_gridlinecolor_black.AutoSize = true;
+            this.rb_gridlinecolor_black.Checked = true;
+            this.rb_gridlinecolor_black.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_gridlinecolor_black.Location = new System.Drawing.Point(7, 38);
+            this.rb_gridlinecolor_black.Name = "rb_gridlinecolor_black";
+            this.rb_gridlinecolor_black.Size = new System.Drawing.Size(51, 17);
+            this.rb_gridlinecolor_black.TabIndex = 226;
+            this.rb_gridlinecolor_black.TabStop = true;
+            this.rb_gridlinecolor_black.Text = "黑線";
+            this.rb_gridlinecolor_black.UseVisualStyleBackColor = true;
+            // 
+            // rb_gridlinecolor_white
+            // 
+            this.rb_gridlinecolor_white.AutoSize = true;
+            this.rb_gridlinecolor_white.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_gridlinecolor_white.Location = new System.Drawing.Point(7, 17);
+            this.rb_gridlinecolor_white.Name = "rb_gridlinecolor_white";
+            this.rb_gridlinecolor_white.Size = new System.Drawing.Size(51, 17);
+            this.rb_gridlinecolor_white.TabIndex = 226;
+            this.rb_gridlinecolor_white.Text = "白線";
+            this.rb_gridlinecolor_white.UseVisualStyleBackColor = true;
+            // 
             // rb_NXN
             // 
             this.rb_NXN.AutoSize = true;
@@ -3486,7 +3583,7 @@
             this.cb_air_ng.AutoSize = true;
             this.cb_air_ng.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.cb_air_ng.ForeColor = System.Drawing.Color.Red;
-            this.cb_air_ng.Location = new System.Drawing.Point(414, 281);
+            this.cb_air_ng.Location = new System.Drawing.Point(696, 222);
             this.cb_air_ng.Name = "cb_air_ng";
             this.cb_air_ng.Size = new System.Drawing.Size(113, 28);
             this.cb_air_ng.TabIndex = 225;
@@ -3623,6 +3720,18 @@
             this.gb_contrast_brightness3.TabIndex = 213;
             this.gb_contrast_brightness3.TabStop = false;
             this.gb_contrast_brightness3.Text = "Contrast / Brightness";
+            // 
+            // cb_change_rank
+            // 
+            this.cb_change_rank.AutoSize = true;
+            this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
+            this.cb_change_rank.Location = new System.Drawing.Point(811, 222);
+            this.cb_change_rank.Name = "cb_change_rank";
+            this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
+            this.cb_change_rank.TabIndex = 232;
+            this.cb_change_rank.Text = "改判";
+            this.cb_change_rank.UseVisualStyleBackColor = true;
             // 
             // trackBar_BPT
             // 
@@ -4324,10 +4433,10 @@
             // cb_only_search
             // 
             this.cb_only_search.AutoSize = true;
-            this.cb_only_search.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_only_search.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.cb_only_search.Location = new System.Drawing.Point(726, 276);
             this.cb_only_search.Name = "cb_only_search";
-            this.cb_only_search.Size = new System.Drawing.Size(75, 20);
+            this.cb_only_search.Size = new System.Drawing.Size(65, 17);
             this.cb_only_search.TabIndex = 205;
             this.cb_only_search.Text = "僅搜尋";
             this.cb_only_search.UseVisualStyleBackColor = true;
@@ -7575,39 +7684,17 @@
             this.rb_brightness_color_1.Text = "白光";
             this.rb_brightness_color_1.UseVisualStyleBackColor = true;
             // 
-            // groupBox_gridlinecolor
+            // bt_save_program_picture
             // 
-            this.groupBox_gridlinecolor.Controls.Add(this.rb_gridlinecolor_black);
-            this.groupBox_gridlinecolor.Controls.Add(this.rb_gridlinecolor_white);
-            this.groupBox_gridlinecolor.Location = new System.Drawing.Point(766, 327);
-            this.groupBox_gridlinecolor.Name = "groupBox_gridlinecolor";
-            this.groupBox_gridlinecolor.Size = new System.Drawing.Size(116, 40);
-            this.groupBox_gridlinecolor.TabIndex = 227;
-            this.groupBox_gridlinecolor.TabStop = false;
-            // 
-            // rb_gridlinecolor_black
-            // 
-            this.rb_gridlinecolor_black.AutoSize = true;
-            this.rb_gridlinecolor_black.Checked = true;
-            this.rb_gridlinecolor_black.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_gridlinecolor_black.Location = new System.Drawing.Point(59, 18);
-            this.rb_gridlinecolor_black.Name = "rb_gridlinecolor_black";
-            this.rb_gridlinecolor_black.Size = new System.Drawing.Size(51, 17);
-            this.rb_gridlinecolor_black.TabIndex = 226;
-            this.rb_gridlinecolor_black.TabStop = true;
-            this.rb_gridlinecolor_black.Text = "黑線";
-            this.rb_gridlinecolor_black.UseVisualStyleBackColor = true;
-            // 
-            // rb_gridlinecolor_white
-            // 
-            this.rb_gridlinecolor_white.AutoSize = true;
-            this.rb_gridlinecolor_white.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_gridlinecolor_white.Location = new System.Drawing.Point(6, 18);
-            this.rb_gridlinecolor_white.Name = "rb_gridlinecolor_white";
-            this.rb_gridlinecolor_white.Size = new System.Drawing.Size(51, 17);
-            this.rb_gridlinecolor_white.TabIndex = 226;
-            this.rb_gridlinecolor_white.Text = "白線";
-            this.rb_gridlinecolor_white.UseVisualStyleBackColor = true;
+            this.bt_save_program_picture.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save_program_picture.ForeColor = System.Drawing.Color.Black;
+            this.bt_save_program_picture.Location = new System.Drawing.Point(1262, 123);
+            this.bt_save_program_picture.Name = "bt_save_program_picture";
+            this.bt_save_program_picture.Size = new System.Drawing.Size(60, 60);
+            this.bt_save_program_picture.TabIndex = 139;
+            this.bt_save_program_picture.Text = "本程式存圖";
+            this.bt_save_program_picture.UseVisualStyleBackColor = true;
+            this.bt_save_program_picture.Click += new System.EventHandler(this.bt_save_program_picture_Click);
             // 
             // Form1
             // 
@@ -7615,6 +7702,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1370, 704);
+            this.Controls.Add(this.bt_save_program_picture);
             this.Controls.Add(this.groupBox_brightness);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.bt_min);
@@ -7688,6 +7776,8 @@
             this.groupBox2.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            this.groupBox_gridlinecolor.ResumeLayout(false);
+            this.groupBox_gridlinecolor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).EndInit();
             this.gb_contrast_brightness3.ResumeLayout(false);
             this.gb_contrast_brightness3.PerformLayout();
@@ -7758,8 +7848,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
             this.groupBox_brightness.ResumeLayout(false);
             this.groupBox_brightness.PerformLayout();
-            this.groupBox_gridlinecolor.ResumeLayout(false);
-            this.groupBox_gridlinecolor.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8359,6 +8447,12 @@
         private System.Windows.Forms.GroupBox groupBox_gridlinecolor;
         private System.Windows.Forms.RadioButton rb_gridlinecolor_black;
         private System.Windows.Forms.RadioButton rb_gridlinecolor_white;
+        private System.Windows.Forms.Button bt_location;
+        private System.Windows.Forms.Button bt_brightness;
+        private System.Windows.Forms.Button bt_measure_brightness;
+        private System.Windows.Forms.Button bt_reset_camera;
+        private System.Windows.Forms.Button bt_save_program_picture;
+        private System.Windows.Forms.CheckBox cb_change_rank;
     }
 }
 
