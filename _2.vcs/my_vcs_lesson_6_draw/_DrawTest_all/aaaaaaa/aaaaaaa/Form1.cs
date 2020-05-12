@@ -73,10 +73,15 @@ namespace aaaaaaa
             
             Bitmap bm = new Bitmap(width, height);
             panel1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
-            bm.Save(@"C:\______test_files\aaaaaaa.jpg", ImageFormat.Jpeg);
-            bm.Save(@"C:\______test_files\aaaaaaa.bmp", ImageFormat.Bmp);
-            bm.Save(@"C:\______test_files\aaaaaaa.png", ImageFormat.Png);
 
+            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string filename1 = filename + ".jpg";
+            string filename2 = filename + ".bmp";
+            string filename3 = filename + ".png";
+
+            bm.Save(@filename1, ImageFormat.Jpeg);
+            bm.Save(@filename2, ImageFormat.Bmp);
+            bm.Save(@filename3, ImageFormat.Png);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -106,9 +111,15 @@ namespace aaaaaaa
 
             Bitmap bm = new Bitmap(width, height);
             panel1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
-            bm.Save(@"C:\______test_files\aaaaaaa.jpg", ImageFormat.Jpeg);
-            bm.Save(@"C:\______test_files\aaaaaaa.bmp", ImageFormat.Bmp);
-            bm.Save(@"C:\______test_files\aaaaaaa.png", ImageFormat.Png);
+
+            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string filename1 = filename + ".jpg";
+            string filename2 = filename + ".bmp";
+            string filename3 = filename + ".png";
+
+            bm.Save(@filename1, ImageFormat.Jpeg);
+            bm.Save(@filename2, ImageFormat.Bmp);
+            bm.Save(@filename3, ImageFormat.Png);
         }
 
         private void button5_Click(object sender, EventArgs e)

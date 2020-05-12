@@ -67,7 +67,9 @@ namespace vcs_tmp_draw_all
 
         private void button5_Click(object sender, EventArgs e)
         {
-            bmp.Save(@"C:\______test_files\zzzzz.jpg");
+            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string filename1 = filename + ".jpg";
+            bmp.Save(@filename1);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -80,8 +82,9 @@ namespace vcs_tmp_draw_all
             myDraw.DrawLine(p, 100, 100, 300, 100);
             //MyDraw.DrawLine(new pen(Color.Red, 2), x, y, e.X, e.Y); //可以繪圖了
             g.DrawImage(bmp, 0, 0);
-            bmp.Save(@"C:\______test_files\3333.jpg");
-
+            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string filename1 = filename + ".jpg";
+            bmp.Save(@filename1);
         }
 
         private void button7_Click(object sender, EventArgs e)

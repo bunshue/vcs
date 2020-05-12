@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Drawing.Imaging;   //for ImageFormat
 
 namespace vcs_ReadWrite_QR_code
 {
@@ -56,8 +57,8 @@ namespace vcs_ReadWrite_QR_code
             string filename1 = Application.StartupPath + "\\qr_code_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
             string filename2 = Application.StartupPath + "\\qr_code_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
 
-            bitmap.Save(filename1, System.Drawing.Imaging.ImageFormat.Png);
-            bitmap.Save(filename2, System.Drawing.Imaging.ImageFormat.Jpeg);
+            bitmap.Save(filename1, ImageFormat.Png);
+            bitmap.Save(filename2, ImageFormat.Jpeg);
             //顯示在畫面中
             pictureBox1.Image = bitmap;
         }

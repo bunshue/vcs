@@ -47,12 +47,9 @@ namespace vcs_ColorPicker1
 
                 this.FormBorderStyle = FormBorderStyle.None;
                 
-                this.Size = new Size(240, 55);
+                this.Size = new Size(240, 80);
 
                 g = this.CreateGraphics();
-                
-
-
             }
         }
 
@@ -102,6 +99,89 @@ namespace vcs_ColorPicker1
             return Color.FromArgb(Red, Green, Blue);
         }
 
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
         int cnt = 0;
         Brush b = new SolidBrush(Color.White);
         Color cl_old;
@@ -114,26 +194,38 @@ namespace vcs_ColorPicker1
                 Color cl = GetColor(pt);
                 if (cl_old != cl)
                 {
+                    this.Size = new Size(240, 80);
                     cnt = 0;
                     g.Clear(BackColor);
 
-                    g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 5));
-                    g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Green), new PointF(5 + 75, 5));
-                    g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 5));
+                    g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
+                    g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Green), new PointF(5 + 75, 0));
+                    g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
 
                     cl_old = cl;
+
+                    int rr = cl.R;
+                    int gg = cl.G;
+                    int bb = cl.B;
+
+                    RGB pp = new RGB((byte)rr, (byte)gg, (byte)bb);
+                    YUV yy = new YUV();
+                    yy = RGBToYUV(pp);
+
+                    g.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
+                    g.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
+                    g.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
                 }
                 else
                 {
                     cnt++;
                     if ((cnt > 25) && (cnt % 5) == 0)
                     {
+                        this.Size = new Size(240, 55);
                         g.Clear(BackColor);
                         g.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
                     }
-
                 }
-
             }
             else
             {

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for ImageFormat
+
 namespace vcs_PictureBox
 {
     public partial class Form1 : Form
@@ -142,8 +144,9 @@ namespace vcs_PictureBox
             graphics0.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
             graphics0.Dispose();
             //儲存新的影像
-            zoomImage.Save("zoom.jpg");
-            richTextBox1.Text += "縮小一半，存檔完成，檔名： zoom.jpg\n";
+            string filename = Application.StartupPath + "\\zoom_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            zoomImage.Save(@filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "縮小一半，存檔完成，檔名：" + filename + "\n";
             #endregion
         }
 
@@ -166,10 +169,10 @@ namespace vcs_PictureBox
             graphics0a.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2);
             graphics0a.Dispose();
             //儲存新的影像
-            zoomImageb.Save("big.jpg");
-            richTextBox1.Text += "放大一倍，存檔完成，檔名： big.jpg\n";
+            string filename = Application.StartupPath + "\\big_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            zoomImageb.Save(@filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "放大一倍，存檔完成，檔名：" + filename + "\n";
             #endregion
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -192,13 +195,11 @@ namespace vcs_PictureBox
             graphics1.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height);
             graphics1.Dispose();
             //儲存新的影像
-            //rotateImage.Save("rotate.jpg");
-
+            string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            rotateImage.Save(@filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
             pictureBox1.Image = rotateImage;
-
             #endregion
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -219,8 +220,6 @@ namespace vcs_PictureBox
             // Draw the cloned portion of the Bitmap object.
             Graphics g = pictureBox2.CreateGraphics();
             g.DrawImage(cloneBitmap, 0, 0);
-
-
         }
 
         bool flag_mouse_down = false;

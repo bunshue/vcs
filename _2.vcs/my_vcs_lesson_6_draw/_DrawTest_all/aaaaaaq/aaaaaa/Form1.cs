@@ -31,8 +31,9 @@ namespace aaaaaa
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bmp.Save(@"C:\______test_files\zzzzz.jpg");
-
+            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string filename1 = filename + ".jpg";
+            bmp.Save(@filename1);
         }
 
         private void Form1_Load(object sender, EventArgs e)
