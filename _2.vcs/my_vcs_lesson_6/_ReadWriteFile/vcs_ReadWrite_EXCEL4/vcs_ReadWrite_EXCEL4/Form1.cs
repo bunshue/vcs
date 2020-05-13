@@ -58,6 +58,14 @@ namespace vcs_ReadWrite_EXCEL4
 
             richTextBox1.Text += "len = " + AnimalDataArray.Length.ToString() + "\n";
 
+            //第一列放標題
+            xlsWookSheet.Cells[1, "A"] = "中文名";
+            xlsWookSheet.Cells[1, "B"] = "英文名";
+            xlsWookSheet.Cells[1, "C"] = "名字";
+            xlsWookSheet.Cells[1, "D"] = "年齡";
+            xlsWookSheet.Cells[1, "E"] = "體重";
+            xlsWookSheet.Cells[1, "F"] = "生日";
+
             int i;
             int j;
             for (i = 0; i < AnimalDataArray.Length; i++)
@@ -65,12 +73,13 @@ namespace vcs_ReadWrite_EXCEL4
                 richTextBox1.Text += AnimalDataArray[i].Name_C + "\t" + AnimalDataArray[i].Name_E + "\t" + AnimalDataArray[i].Name_N + "\t"
                     + AnimalDataArray[i].Age.ToString() + "\t" + AnimalDataArray[i].Weight.ToString() + "\t" + AnimalDataArray[i].Birthday + "\n";
 
-                j = 0; xlsWookSheet.Cells[i + 1, j + 1] = AnimalDataArray[i].Name_C;
-                j = 1; xlsWookSheet.Cells[i + 1, j + 1] = AnimalDataArray[i].Name_E;
-                j = 2; xlsWookSheet.Cells[i + 1, j + 1] = AnimalDataArray[i].Name_N;
-                j = 3; xlsWookSheet.Cells[i + 1, j + 1] = AnimalDataArray[i].Age;
-                j = 4; xlsWookSheet.Cells[i + 1, j + 1] = AnimalDataArray[i].Weight;
-                j = 5; xlsWookSheet.Cells[i + 1, j + 1] = AnimalDataArray[i].Birthday;
+                //資料從第二列開始放
+                j = 0; xlsWookSheet.Cells[i + 2, j + 1] = AnimalDataArray[i].Name_C;
+                j = 1; xlsWookSheet.Cells[i + 2, j + 1] = AnimalDataArray[i].Name_E;
+                j = 2; xlsWookSheet.Cells[i + 2, j + 1] = AnimalDataArray[i].Name_N;
+                j = 3; xlsWookSheet.Cells[i + 2, j + 1] = AnimalDataArray[i].Age;
+                j = 4; xlsWookSheet.Cells[i + 2, j + 1] = AnimalDataArray[i].Weight;
+                j = 5; xlsWookSheet.Cells[i + 2, j + 1] = AnimalDataArray[i].Birthday;
             }
 
             /*
@@ -86,6 +95,20 @@ namespace vcs_ReadWrite_EXCEL4
             }
             */
 
+            //結尾加入下列程式碼，以調整資料行寬度以容納內容。
+            xlsWookSheet.Columns[1].AutoFit();
+            xlsWookSheet.Columns[2].AutoFit();
+            xlsWookSheet.Columns[3].AutoFit();
+            xlsWookSheet.Columns[4].AutoFit();
+            xlsWookSheet.Columns[5].AutoFit();
+            xlsWookSheet.Columns[6].AutoFit();
+
+            //加入表格的其他格式
+            // Call to AutoFormat in Visual C#. This statement replaces the 
+            // two calls to AutoFit.
+            // Call to AutoFormat in Visual C# 2010.
+            xlsWookSheet.Range["A1", "F5"].AutoFormat(Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic2);
+
             String filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
 
             xlsWookBook.SaveAs(filename, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
@@ -95,10 +118,7 @@ namespace vcs_ReadWrite_EXCEL4
             xlsWookBook = null;
             xlsApp = null;
 
-
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
-
-
         }
     }
 }

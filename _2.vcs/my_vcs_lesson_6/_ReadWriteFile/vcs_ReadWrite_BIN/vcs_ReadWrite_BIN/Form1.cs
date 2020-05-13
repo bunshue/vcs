@@ -21,33 +21,34 @@ namespace vcs_ReadWrite_BIN
         private void button1_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\bin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
+            richTextBox1.Text += "寫入檔案\n";
 
-            byte[] data_read = new byte[256];
+            byte[] data = new byte[256];
 
-            /*
-            打印資料
-            string data_read_result = string.Empty;
-            foreach (byte b in data_read)
+            //設定資料內容
+            for (int i = 0; i < data.Length; i++)
             {
-                data_read_result += b.ToString("X2");
-            }
-            richTextBox1.Text += data_read_result;
-            */
-
-            //修改資料
-            for (int i = 0; i < data_read.Length; i++)
-            {
-                //data_read[i] = (byte)i;
+                data[i] = (byte)i;
+                /*
                 if ((i % 2) == 0)
                 {
-                    data_read[i] = 0xA1;
+                    data[i] = 0xA1;
                 }
                 else
-                    data_read[i] = 0x42;
+                    data[i] = 0x42;
+                */
             }
 
+            //打印資料
+            string data_result = string.Empty;
+            foreach (byte b in data)
+            {
+                data_result += b.ToString("X2");
+            }
+            richTextBox1.Text += data_result;
+
             //寫資料
-            File.WriteAllBytes(filename, data_read);
+            File.WriteAllBytes(filename, data);
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
 
@@ -449,21 +450,6 @@ namespace vcs_ReadWrite_BIN
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
-            richTextBox1.Clear();
-            int i;
-            byte[] aaaaa = new byte[256];
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBo21.Text += i.ToString();
-                aaaaa[i] = (byte)i;
-            }
-            File.WriteAllBytes(filename, aaaaa);
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
-        }
-
         string filename = "C:\\______test_files\\__RW\\_bin\\sample.bin";
 
         void print_data(byte[] data, int len)
@@ -479,6 +465,29 @@ namespace vcs_ReadWrite_BIN
             }
             richTextBox1.Text += "\n";
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //讀取資料
+            byte[] data = File.ReadAllBytes(filename);
+            richTextBox1.Text += "讀取檔案" + filename + "\t";
+            richTextBox1.Text += "len = " + data.Length.ToString() + "\n";
+
+            //打印資料
+            string data_read_result = string.Empty;
+            foreach (byte b in data)
+            {
+                data_read_result += b.ToString("X2");
+            }
+            richTextBox1.Text += data_read_result;
+            richTextBox1.Text += "\n";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -543,5 +552,6 @@ namespace vcs_ReadWrite_BIN
             br.Close();
             fs.Close();
         }
+
     }
 }
