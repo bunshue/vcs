@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_parse_camera_data
+namespace ims_ParseCameraData
 {
     static class Program
     {

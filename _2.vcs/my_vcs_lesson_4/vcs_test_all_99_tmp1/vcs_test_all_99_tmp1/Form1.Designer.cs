@@ -466,8 +466,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 42);
             this.button1.TabIndex = 66;
-            this.button1.Text = "xxx";
+            this.button1.Text = "搜尋子目錄內的所有檔案";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button5
             // 

@@ -13400,13 +13400,10 @@ namespace imsLink
                 //StreamReader sr = new StreamReader(openFileDialog1.FileName);
                 //StreamReader sr = new StreamReader(fileName, Encoding.Default);
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-                richTextBox2.Text += sr.ReadToEnd();
+                richTextBox2.Text += sr.ReadToEnd();	//讀取所有文字內容
                 sr.Close();
 
                 bt_script_load.Visible = false;
-
-
-
             }
             else
             {
@@ -19610,7 +19607,7 @@ namespace imsLink
                 richTextBox2.Clear();
 
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-                richTextBox2.Text += sr.ReadToEnd();
+                richTextBox2.Text += sr.ReadToEnd();	//讀取所有文字內容
                 sr.Close();
 
                 parse_script_command_and_send();
@@ -19636,12 +19633,10 @@ namespace imsLink
             richTextBox2.Clear();
 
             StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            richTextBox2.Text += sr.ReadToEnd();
+            richTextBox2.Text += sr.ReadToEnd();	//讀取所有文字內容
             sr.Close();
 
-
             parse_script_command_and_send();
-
         }
 
         private void button68_Click(object sender, EventArgs e)

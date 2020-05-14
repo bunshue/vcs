@@ -568,5 +568,28 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "gcd = " + gcd.ToString() + "\n";
             richTextBox1.Text += "ratio = " + (w / gcd).ToString() + " : " + (h / gcd).ToString() + "\n";
         }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            byte[] data = new byte[100];
+            new Random().NextBytes(data);
+
+            richTextBox1.Text += "亂數陣列內容:\n";
+            int i;
+            for (i = 0; i < data.Length; i++)
+            {
+                richTextBox1.Text += data[i].ToString();
+                if ((i % 16) == 15)
+                {
+                    richTextBox1.Text += "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += " ";
+                }
+            }
+            richTextBox1.Text += "\n";
+
+        }
     }
 }

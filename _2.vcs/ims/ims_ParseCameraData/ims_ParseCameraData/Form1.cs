@@ -11,7 +11,7 @@ using System.IO;                //for file read/write
 
 using System.Xml;
 
-namespace test_parse_camera_data
+namespace ims_ParseCameraData
 {
     public partial class Form1 : Form
     {
@@ -219,7 +219,7 @@ namespace test_parse_camera_data
         private void button2_Click(object sender, EventArgs e)
         {
             string input_filename = "C:\\______test_files\\files_for_parse_data\\ov_register1.h";
-            string output_filename = "C:\\______test_files\\files_for_parse_data\\ov_register2.h";
+            string output_filename1 = "C:\\______test_files\\files_for_parse_data\\ov_register2.h";
             string output_filename2 = "C:\\______test_files\\files_for_parse_data\\ov_register3.h";
 
             if (System.IO.File.Exists(input_filename) == false)
@@ -231,9 +231,9 @@ namespace test_parse_camera_data
             {
                 richTextBox1.Text += "檔案 " + input_filename + " 存在, 開啟，並讀入設定" + "\n";
 
-                StreamWriter sw = File.CreateText(output_filename);
+                StreamWriter sw = File.CreateText(output_filename1);
                 StreamWriter sw2 = File.CreateText(output_filename2);
-                string content = "";
+                string content1 = "";
                 string content2 = "";
 
                 using (StreamReader sr = new StreamReader(input_filename))
@@ -280,13 +280,13 @@ namespace test_parse_camera_data
                         //richTextBox1.Text += "new: " + i.ToString() + "\t" + line + "\t" + "len = " + line.Length.ToString() + "\n";
                         //if (line.Length > 0)
                         {
-                            content += line + "\n";
+                            content1 += line + "\n";
                         }
                     }
                     sr.Close();
                 }
 
-                sw.WriteLine(content);
+                sw.WriteLine(content1);
                 sw.Close();
                 sw2.WriteLine(content2);
                 sw2.Close();

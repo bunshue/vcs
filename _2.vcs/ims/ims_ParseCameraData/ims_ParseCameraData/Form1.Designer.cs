@@ -1,4 +1,4 @@
-﻿namespace test_parse_camera_data
+﻿namespace ims_ParseCameraData
 {
     partial class Form1
     {

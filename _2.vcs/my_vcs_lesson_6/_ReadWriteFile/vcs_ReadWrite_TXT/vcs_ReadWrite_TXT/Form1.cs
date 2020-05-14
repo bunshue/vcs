@@ -165,7 +165,7 @@ namespace vcs_ReadWrite_TXT
                     sr = new StreamReader(filename, Encoding.Default);  //使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
                     break;
             }
-            richTextBox2.Text += sr.ReadToEnd();
+            richTextBox2.Text += sr.ReadToEnd();	//讀取所有文字內容
             sr.Close();
         }
 
@@ -375,6 +375,43 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename3 + "\n";
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename4 + "\n";
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            string filename;
+            byte[] b;
+            string s;
+
+            richTextBox1.Text += "用預設編碼開啟\n";
+            filename = "C:\\______test_files\\__text\\Compressor.c";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.Default.GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用Big5編碼開啟\n";
+            filename = "C:\\______test_files\\__text\\Compressor.c";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.GetEncoding("big5").GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用gb2312編碼開啟\n";
+            filename = "C:\\______test_files\\__text\\sc\\001川の流れのように.txt";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.GetEncoding("gb2312").GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用shift_jis編碼開啟\n";
+            filename = "C:\\______test_files\\__text\\jap\\饩Ⓚ丗钡冦冦葢轿瘅.txt";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.GetEncoding("shift_jis").GetString(b);
+            richTextBox1.Text += s + "\n";
+
+            richTextBox1.Text += "用utf-8編碼開啟\n";
+            filename = "C:\\______test_files\\__text\\Form1.cs.txt";
+            b = File.ReadAllBytes(filename);
+            s = Encoding.UTF8.GetString(b);
+            richTextBox1.Text += s + "\n";
         }
 
     }

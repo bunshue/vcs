@@ -40,42 +40,21 @@ namespace vcs_tmp_all
         {
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            int cnt = 0;
-            richTextBox1.Text += Directory.GetCurrentDirectory() + "\n";
-
-            DirectoryInfo dir = new DirectoryInfo("c:\\______test_files");
-            richTextBox1.Text += "addr = " + dir.ToString() + "\n";
-
-            DirectoryInfo[] dddd = dir.GetDirectories();
-            richTextBox1.Text += "\nfiles\n";
-            cnt = 0;
-            foreach (DirectoryInfo d in dddd)
-            {
-                cnt++;
-                richTextBox1.Text += cnt.ToString() + "\t" + d + "\n";
-            }
-
-            FileInfo[] aaaa = dir.GetFiles();
-            richTextBox1.Text += "\nfiles\n";
-            cnt = 0;
-            foreach (FileInfo b in aaaa)
-            {
-                cnt++;
-                richTextBox1.Text += cnt.ToString() + "\t" + b + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
+
             string pattern1 = "山";
             string pattern2 = "人";
             string pattern3 = "夢中";
             string pattern4 = "三生";
+
+            richTextBox2.Text += "搜尋關鍵字\n";
+            richTextBox2.Text += "pattern1 :\t" + pattern1 + "\n";
+            richTextBox2.Text += "pattern2 :\t" + pattern2 + "\n";
+            richTextBox2.Text += "pattern3 :\t" + pattern3 + "\n";
+            richTextBox2.Text += "pattern4 :\t" + pattern4 + "\n";
+
             int position1;
             int position2;
             int position3;
@@ -85,10 +64,11 @@ namespace vcs_tmp_all
             position3 = richTextBox1.Find(pattern3);
             position4 = richTextBox1.Find(pattern4);
 
-            richTextBox2.Text += position1.ToString() + " " +
-                position2.ToString() + " " +
-                position3.ToString() + " " +
-                position4.ToString() + "\n";
+
+            richTextBox2.Text += "找到 pattern1 :\t" + pattern1 + "\t在\t" + position1.ToString() + "\n";
+            richTextBox2.Text += "找到 pattern2 :\t" + pattern2 + "\t在\t" + position2.ToString() + "\n";
+            richTextBox2.Text += "找到 pattern3 :\t" + pattern3 + "\t在\t" + position3.ToString() + "\n";
+            richTextBox2.Text += "找到 pattern4 :\t" + pattern4 + "\t在\t" + position4.ToString() + "\n";
 
         }
 

@@ -65,7 +65,7 @@ namespace my_vcs_01
             {
                 //StreamReader sr = new StreamReader(openFileDialog1.FileName);
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-                richTextBox1.Text = sr.ReadToEnd();
+                richTextBox1.Text = sr.ReadToEnd();	//讀取所有文字內容
                 sr.Close();
             }
         }

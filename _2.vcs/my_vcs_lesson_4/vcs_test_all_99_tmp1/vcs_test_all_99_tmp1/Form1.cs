@@ -758,6 +758,33 @@ namespace vcs_test_all_99_tmp1
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int cnt = 0;
+
+            DirectoryInfo dir = new DirectoryInfo("c:\\______test_files");
+            richTextBox1.Text += "搜尋子目錄內的所有檔案, 子目錄 : " + dir.ToString() + "\n";
+
+            DirectoryInfo[] dddd = dir.GetDirectories();
+            cnt = 0;
+            richTextBox1.Text += "子目錄 :\n";
+            foreach (DirectoryInfo d in dddd)
+            {
+                cnt++;
+                richTextBox1.Text += cnt.ToString() + "\t" + d + "\n";
+            }
+
+            FileInfo[] aaaa = dir.GetFiles();
+            cnt = 0;
+            richTextBox1.Text += "子目錄 " + dir.Name + " 下的檔案 :\n";
+            foreach (FileInfo b in aaaa)
+            {
+                cnt++;
+                richTextBox1.Text += cnt.ToString() + "\t" + b + "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
+
 
 
     }

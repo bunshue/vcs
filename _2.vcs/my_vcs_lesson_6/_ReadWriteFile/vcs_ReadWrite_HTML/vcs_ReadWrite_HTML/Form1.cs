@@ -35,7 +35,7 @@ namespace vcs_ReadWrite_HTML
             // 使用 WebBrowser.DocumentStream 取得網頁內容
             // 使用 StreamReader 讀入資料流，設定編碼為 Encoding.Default
             //System.IO.StreamReader getReader = new System.IO.StreamReader(this.webBrowser1.DocumentStream, System.Text.Encoding.Default);
-            //string gethtml = getReader.ReadToEnd();
+            //string gethtml = getReader.ReadToEnd();	//讀取所有文字內容
             string htmlB = webBrowser1.DocumentText;
             this.richTextBox1.Text += htmlB;
         }
@@ -59,7 +59,7 @@ namespace vcs_ReadWrite_HTML
             Stream streamReceive = response.GetResponseStream();
             Encoding encoding = Encoding.GetEncoding("BIG5");
             StreamReader streamReader = new StreamReader(streamReceive, encoding);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            strResult = streamReader.ReadToEnd();
+            strResult = streamReader.ReadToEnd();	//讀取所有文字內容
             streamReader.Close();
             return strResult;
         }

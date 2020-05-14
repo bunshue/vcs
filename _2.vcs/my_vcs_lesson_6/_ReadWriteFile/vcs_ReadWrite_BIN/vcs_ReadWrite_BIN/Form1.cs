@@ -569,5 +569,160 @@ namespace vcs_ReadWrite_BIN
             richTextBox1.Clear();
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            filename = "C:\\______test_files\\aaaa.mp3";
+
+            //讀取資料
+            byte[] data = File.ReadAllBytes(filename);
+            int len = data.Length;
+            richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+            richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+
+            //打印資料
+            //print_data(data, len);
+
+            filename = Application.StartupPath + "\\bin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+            richTextBox1.Text += "寫入檔案\n";
+
+            //年分
+            data[len - 35] = 0x32;
+            data[len - 34] = 0x33;
+            data[len - 33] = 0x34;
+            data[len - 32] = 0x35;
+
+            //專輯 
+            data[len - 65] = 0x41;
+            data[len - 64] = 0x42;
+            data[len - 63] = 0x43;
+            data[len - 62] = 0x44;
+            data[len - 61] = 0x45;
+            data[len - 60] = 0x46;
+
+            //藝術家
+            data[len - 95] = 0x48;
+            data[len - 94] = 0x49;
+
+            //標題
+            data[len - 125] = 0x52;
+            data[len - 124] = 0x53;
+
+            //設定資料內容
+            //for (int i = len/2; i < len; i++)
+            {
+                //data[i] = 0xff;
+                /*
+                if ((i % 2) == 0)
+                {
+                    data[i] = 0xA1;
+                }
+                else
+                    data[i] = 0x42;
+                */
+            }
+
+            //打印資料
+            //print_data(data, data.Length);
+
+            /*
+            //打印資料, 另法
+            string data_result = string.Empty;
+            foreach (byte b in data)
+            {
+                data_result += b.ToString("X2");
+            }
+            richTextBox1.Text += data_result;
+            */
+
+            //寫資料
+            File.WriteAllBytes(filename, data);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            int i;
+            string filename = Application.StartupPath + "\\bin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
+
+            byte[] data = new byte[100];
+            for (i = 0; i < data.Length; i++)
+            {
+                data[i] = (byte)(0x41 + (i % 26));
+            }
+
+            richTextBox1.Text += "\nWriteByte\n";
+            //打印資料
+            print_data(data, data.Length);
+
+            using (FileStream fileStream = new FileStream(filename, FileMode.Create))
+            {
+                // Write the data to the file, byte by byte.
+                for (i = 0; i < data.Length; i++)
+                {
+                    fileStream.WriteByte(data[i]);
+                }
+            }
+            richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename + "\n";
+
+            filename = "C:\\______test_files\\__RW\\_bin\\sample.bin";
+            richTextBox1.Text += "\nReadByte, 檔名 : " + filename + "\n";
+
+            using (FileStream fileStream = new FileStream(filename, FileMode.Open))
+            {
+                // Set the stream position to the beginning of the file.
+                fileStream.Seek(0, SeekOrigin.Begin);
+
+                byte[] data2 = new byte[fileStream.Length];
+
+                // Read and verify the data.
+                for (i = 0; i < fileStream.Length; i++)
+                {
+                    data2[i] = (byte)fileStream.ReadByte();
+                }
+                //打印資料
+                print_data(data2, data2.Length);
+
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\bin_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bin";
+            using (BinaryWriter writer = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            {
+                writer.Write(1.250F);
+                writer.Write(@"c:\Temp");
+                writer.Write(10);
+                writer.Write(true);
+            }
+            richTextBox1.Text += "\nBinaryWriter\n";
+            richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename + "\n";
+
+            richTextBox1.Text += "\nBinaryReader, 檔名 : " + filename + "\n";
+            float aspectRatio;
+            string tempDirectory;
+            int autoSaveTime;
+            bool showStatusBar;
+
+            if (File.Exists(filename))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                {
+                    aspectRatio = reader.ReadSingle();
+                    tempDirectory = reader.ReadString();
+                    autoSaveTime = reader.ReadInt32();
+                    showStatusBar = reader.ReadBoolean();
+                }
+
+                richTextBox1.Text += "Aspect ratio set to: " + aspectRatio.ToString() + "\n";
+                richTextBox1.Text += "Temp directory is: " + tempDirectory + "\n";
+                richTextBox1.Text += "Auto save time set to: " + autoSaveTime.ToString() + "\n";
+                richTextBox1.Text += "Show status bar: " + showStatusBar.ToString() + "\n";
+            }
+
+
+        }
+
     }
 }

@@ -50,7 +50,7 @@ namespace WindowsFormsApplication1wwwww
             using (WebResponse response = request.GetResponse())
             {
                 StreamReader sr = new StreamReader(response.GetResponseStream());
-                result = sr.ReadToEnd();        //一次讀完全部
+                result = sr.ReadToEnd();        //讀取所有文字內容
                 sr.Close();
             }
             richTextBox1.Text += result + "\n";
@@ -77,7 +77,7 @@ namespace WindowsFormsApplication1wwwww
             StreamReader reader = new StreamReader(response.GetResponseStream());
 
             //將串流轉字串
-            string tmp = reader.ReadToEnd();
+            string tmp = reader.ReadToEnd();	//讀取所有文字內容
 
             //關閉連線
             response.Close();

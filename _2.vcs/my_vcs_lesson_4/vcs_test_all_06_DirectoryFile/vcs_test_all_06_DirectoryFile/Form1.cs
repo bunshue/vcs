@@ -479,7 +479,7 @@ namespace vcs_test_all_06_DirectoryFile
             StreamReader sr1 = new StreamReader("c:\\______test_files\\compare\\aaaa.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
             StreamReader sr2 = new StreamReader("c:\\______test_files\\compare\\bbbb.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
             StreamReader sr3 = new StreamReader("c:\\______test_files\\compare\\ssss.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))
+            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))	//讀取所有文字內容
             {
                 richTextBox1.Text += "兩個文件相等\n";
             }
@@ -487,7 +487,7 @@ namespace vcs_test_all_06_DirectoryFile
             {
                 richTextBox1.Text += "兩個文件不相等\n";
             }
-            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))
+            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))	//讀取所有文字內容
             {
                 richTextBox1.Text += "兩個文件相等\n";
             }
@@ -534,7 +534,7 @@ namespace vcs_test_all_06_DirectoryFile
                 richTextBox1.Clear();
                 //讀取中文檔案
                 StreamReader sw = new StreamReader(@"c:/______test_files/read_file.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-                richTextBox1.Text += sw.ReadToEnd();
+                richTextBox1.Text += sw.ReadToEnd();	//讀取所有文字內容
             }
 
         }
@@ -631,7 +631,7 @@ namespace vcs_test_all_06_DirectoryFile
             //一次讀取檔案內所有資料
             FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
             StreamReader sr = f.OpenText();
-            richTextBox1.Text += sr.ReadToEnd();
+            richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
             sr.Close();
 
         }
@@ -1374,7 +1374,7 @@ namespace vcs_test_all_06_DirectoryFile
                 //StreamReader sr = new StreamReader(openFileDialog1.FileName);
                 //StreamReader sr = new StreamReader(fileName, Encoding.Default);
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-                richTextBox1.Text += sr.ReadToEnd();
+                richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
                 sr.Close();
             }
             else
@@ -1441,7 +1441,7 @@ namespace vcs_test_all_06_DirectoryFile
                 //StreamReader sr = new StreamReader(fileName, Encoding.Default);
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
 
-                //richTextBox1.Text += sr.ReadToEnd();
+                //richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
                 //寫法一
                 while (!sr.EndOfStream)
                 {               // 每次讀取一行，直到檔尾
