@@ -50,9 +50,9 @@ namespace vcs_ID3Tag
         }
 
         //所以，我們只要把MP3檔的最後128個位元組分段讀出來並保存到該結構裡就可以了。函式定義如下：
-        private byte[] getLast128(string FileName)
+        private byte[] getLast128(string filename)
         {
-            FileStream fs = new FileStream(FileName, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             Stream stream = fs;
             stream.Seek(-128, SeekOrigin.End);
             const int seekPos = 128;

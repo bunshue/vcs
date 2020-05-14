@@ -40,12 +40,17 @@ namespace vcs_ReadWrite_BIN
             }
 
             //打印資料
+            print_data(data, data.Length);
+
+            /*
+            //打印資料, 另法
             string data_result = string.Empty;
             foreach (byte b in data)
             {
                 data_result += b.ToString("X2");
             }
             richTextBox1.Text += data_result;
+            */
 
             //寫資料
             File.WriteAllBytes(filename, data);
@@ -470,10 +475,15 @@ namespace vcs_ReadWrite_BIN
         {
             //讀取資料
             byte[] data = File.ReadAllBytes(filename);
-            richTextBox1.Text += "讀取檔案" + filename + "\t";
-            richTextBox1.Text += "len = " + data.Length.ToString() + "\n";
+            int len = data.Length;
+            richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+            richTextBox1.Text += "長度 : " + len.ToString() + "\n";
 
             //打印資料
+            print_data(data, len);
+
+            /*
+            //打印資料, 另法
             string data_read_result = string.Empty;
             foreach (byte b in data)
             {
@@ -481,22 +491,55 @@ namespace vcs_ReadWrite_BIN
             }
             richTextBox1.Text += data_read_result;
             richTextBox1.Text += "\n";
+            */
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-
-        }
-
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //全部binary讀取
-            byte[] data = File.ReadAllBytes(filename);
-            int len = data.Length;
+            //隨機binary讀取
+            FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            BinaryReader br = new BinaryReader(fs);
+            int len = (int)fs.Length;
             richTextBox1.Text += "讀取檔案 : " + filename + "\n";
             richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+
+            len = 7;
+            byte[] data = new byte[7];
+
+            int i;
+            for (i = 0; i < 8; i++)
+            {
+                //讀取位元陣列
+                fs.Seek(32 * i, SeekOrigin.Begin);  //從Begin開始 32 *i 拜
+                data = br.ReadBytes(len);           //用ReadBytes從目前位置開始讀len拜
+                print_data(data, len);
+            }
+
+            //釋放資源
+            br.Close();
+            fs.Close();
+
+            richTextBox1.Text += "讀一個mp3檔的末128拜\n";
+            string filename2 = "C:\\______test_files\\aaaa.mp3";
+            //隨機binary讀取
+            fs = File.Open(filename2, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            br = new BinaryReader(fs);
+            len = (int)fs.Length;
+            richTextBox1.Text += "讀取檔案 : " + filename2 + "\n";
+            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "讀末128拜\n";
+
+            len = 128;
+            byte[] data2 = new byte[len];
+            fs.Seek(-len, SeekOrigin.End);  //從最後開始往回算 128 拜
+
+            //讀取位元陣列
+            data = br.ReadBytes(len);       //用ReadBytes從目前位置開始讀len拜
             print_data(data, len);
+
+            //釋放資源
+            br.Close();
+            fs.Close();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -521,36 +564,9 @@ namespace vcs_ReadWrite_BIN
             print_data(data, len);
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
-            //隨機binary讀取
-            FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            BinaryReader br = new BinaryReader(fs);
-            int len = System.Convert.ToInt16(fs.Length);
-            richTextBox1.Text += "讀取檔案 : " + filename + "\n";
-            richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
-
-            len = 20;
-            byte[] data = new byte[20];
-
-            //讀取位元陣列
-            fs.Seek(0, SeekOrigin.Begin);       //從Begin開始0拜
-            data = br.ReadBytes(len);           //用ReadBytes從目前位置開始讀len拜
-            print_data(data, len);
-
-            //讀取位元陣列
-            fs.Seek(100, SeekOrigin.Begin);     //從Begin開始100拜
-            data = br.ReadBytes(len);           //用ReadBytes從目前位置開始讀len拜
-            print_data(data, len);
-
-            //讀取位元陣列
-            fs.Seek(200, SeekOrigin.Begin);     //從Begin開始200拜
-            data = br.ReadBytes(len);           //用ReadBytes從目前位置開始讀len拜
-            print_data(data, len);
-
-            //釋放資源
-            br.Close();
-            fs.Close();
+            richTextBox1.Clear();
         }
 
     }
