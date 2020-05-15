@@ -33,6 +33,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -74,11 +75,22 @@
             this.richTextBox2.TabIndex = 8;
             this.richTextBox2.Text = "";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(736, 111);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(126, 45);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "搜尋關鍵字 Next";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(874, 654);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
@@ -96,6 +108,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

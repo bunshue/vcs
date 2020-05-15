@@ -28,9 +28,9 @@ namespace vcs_ID3Tag
             public string Album;//所屬唱片,30個位元組
             public string Year;//年,4個字元
             public string Comment;//注釋,28個位元組
-            public char reserved1;//保留位，一個位元組
-            public char reserved2;//保留位，一個位元組
-            public char reserved3;//保留位，一個位元組
+            public byte Zero;//保留位，一個位元組, byte 125, 零位元組
+            public byte Track;//保留位，一個位元組, byte 126, 曲目
+            public byte Genre;//保留位，一個位元組, byte 127, 藝術類型
         }
 
         void print_data(byte[] data)
@@ -138,7 +138,7 @@ namespace vcs_ID3Tag
             str = null;
             j = 0;
             byte[] bytComment = new byte[28];//將注釋部分讀到一個單獨的陣列中
-            for (i = currentIndex; i < currentIndex + 25; i++)
+            for (i = currentIndex; i < currentIndex + 27; i++)
             {
                 bytComment[j] = Info[i];
                 position++;
@@ -147,11 +147,10 @@ namespace vcs_ID3Tag
             currentIndex = position;
             mp3Info.Comment = this.byteToString(bytComment);
             //以下獲取保留位（陣列125-127）
-            mp3Info.reserved1 = (char)Info[++position];
-            mp3Info.reserved2 = (char)Info[++position];
-            mp3Info.reserved3 = (char)Info[++position];
+            mp3Info.Zero = Info[++position];
+            mp3Info.Track = Info[++position];
+            mp3Info.Genre = Info[++position];
             return mp3Info;
-
         }
 
         //上面程式用到下面的方法：
@@ -218,10 +217,21 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
             richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
             richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
-            richTextBox1.Text += "reserved1 : " + mp3_information.reserved1 + "\n";
-            richTextBox1.Text += "reserved2 : " + mp3_information.reserved2 + "\n";
-            richTextBox1.Text += "reserved3 : " + mp3_information.reserved3 + "\n";
+            richTextBox1.Text += "Zero : " + mp3_information.Zero.ToString() + "\n";
+            richTextBox1.Text += "Track : " + mp3_information.Track.ToString() + "\n";
+            richTextBox1.Text += "Genre : " + mp3_information.Genre.ToString() + "\n";
             richTextBox1.Text += "\n";
+
+            textBox1.Text = mp3_information.identify;
+            textBox2.Text = mp3_information.Title;
+            textBox3.Text = mp3_information.Artist;
+            textBox4.Text = mp3_information.Album;
+            textBox5.Text = mp3_information.Year;
+            textBox6.Text = mp3_information.Comment;
+            textBox7.Text = mp3_information.Track.ToString();
+            textBox8.Text = mp3_information.Genre.ToString();
+
+            print_genre(mp3_information.Genre);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -248,6 +258,13 @@ namespace vcs_ID3Tag
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -296,5 +313,146 @@ namespace vcs_ID3Tag
             }
         }
 
+        void print_genre(byte genre)
+        {
+
+            string[,] genre_data = new string[,] {
+            { "0", "Blues", "藍調"},
+            { "1", "Classic Rock", "古典搖滾樂"},
+            { "2", "Country", "鄉村音樂"},
+            { "3", "Dance", "舞曲"},
+            { "4", "Disco", "迪斯科"},
+            { "5", "Funk", "放克"},
+            { "6", "Grunge", "油漬搖滾"},
+            { "7", "Hip-Hop", "嘻哈"},
+            { "8", "Jazz", "爵士樂"},
+            { "9", "Metal", "重金屬音樂"},
+            { "10", "New Age", "新世紀音樂"},
+            { "11", "Oldies", "Oldies"},
+            { "12", "Other", "Other"},
+            { "13", "Pop", "流行 (音樂類型)"},
+            { "14", "R&B", "節奏布魯斯"},
+            { "15", "Rap", "饒舌"},
+            { "16", "Reggae", "雷鬼音樂"},
+            { "17", "Rock", "搖滾樂"},
+            { "18", "Techno", "鐵克諾音樂"},
+            { "19", "Industrial", "Industrial"},
+            { "20", "Alternative", "另類搖滾"},
+            { "21", "Ska", "斯卡曲風"},
+            { "22", "Death Metal", "死亡金屬音樂"},
+            { "23", "Pranks", "Pranks"},
+            { "24", "Soundtrack", "原聲音樂"},
+            { "25", "Euro-Techno", "Euro-Techno"},
+            { "26", "Ambient", "氛圍音樂"},
+            { "27", "Trip-Hop", "神遊舞曲"},
+            { "28", "Vocal", "聲樂"},
+            { "29", "Jazz+Funk", "爵士樂+放克"},
+            { "30", "Fusion", "融合爵士樂"},
+            { "31", "Trance", "出神音樂"},
+            { "32", "Classical", "古典音樂"},
+            { "33", "Instrumental", "器樂"},
+            { "34", "Acid", "Acid"},
+            { "35", "House", "浩室音樂"},
+            { "36", "Game", "Game"},
+            { "37", "Sound Clip", "音效及聲音片段"},
+            { "38", "Gospel", "福音音樂"},
+            { "39", "Noise", "噪音音樂"},
+            { "40", "AlternRock", "AlternRock"},
+            { "41", "Bass", "電貝斯"},
+            { "42", "Soul", "靈魂樂"},
+            { "43", "Punk", "龐克文化"},
+            { "44", "Space", "Space"},
+            { "45", "Meditative", "冥想音樂"},
+            { "46", "Instrumental Pop", "Instrumental Pop"},
+            { "47", "Instrumental Rock", "Instrumental Rock"},
+            { "48", "Ethnic", "Ethnic"},
+            { "49", "Gothic", "Gothic"},
+            { "50", "Darkwave", "Darkwave"},
+            { "51", "Techno-Industrial", "Techno-Industrial"},
+            { "52", "Electronic", "電子音樂"},
+            { "53", "Pop-Folk", "Pop-Folk"},
+            { "54", "Eurodance", "歐陸舞曲"},
+            { "55", "Dream", "Dream"},
+            { "56", "Southern Rock", "Southern Rock"},
+            { "57", "Comedy", "喜劇"},
+            { "58", "Cult", "Cult"},
+            { "59", "Gangsta", "Gangsta"},
+            { "60", "Top 40", "Top 40"},
+            { "61", "Christian Rap", "Christian Rap"},
+            { "62", "Pop/Funk", "流行 (音樂類型)/放克"},
+            { "63", "Jungle", "早期叢林舞曲"},
+            { "64", "Native American", "Native American"},
+            { "65", "Cabaret", "卡巴萊"},
+            { "66", "New Wave", "新浪潮"},
+            { "67", "Psychadelic", "Psychadelic"},
+            { "68", "Rave", "銳舞"},
+            { "69", "Showtunes", "Showtunes"},
+            { "70", "Trailer", "Trailer"},
+            { "71", "Lo-Fi", "Lo-Fi"},
+            { "72", "Tribal", "Tribal"},
+            { "73", "Acid Punk", "Acid Punk"},
+            { "74", "Acid Jazz", "酸爵士"},
+            { "75", "Polka", "波爾卡"},
+            { "76", "Retro", "Retro"},
+            { "77", "Musical", "Musical"},
+            { "78", "Rock & Roll", "搖滾"},
+            { "79", "Hard Rock", "硬式搖滾"},
+            { "80", "Folk", "民俗音樂"},
+            { "81", "Folk-Rock", "民謠搖滾"},
+            { "82", "National Folk", "National Folk"},
+            { "83", "Swing", "Swing"},
+            { "84", "Fast Fusion", "Fast Fusion"},
+            { "85", "Bebob", "咆勃爵士樂"},
+            { "86", "Latin", "拉丁舞"},
+            { "87", "Revival", "Revival"},
+            { "88", "Celtic", "凱爾特音樂"},
+            { "89", "Bluegrass", "藍草音樂"},
+            { "90", "Avantgarde", "前衛"},
+            { "91", "Gothic Rock", "哥德搖滾"},
+            { "92", "Progressive Rock", "前衛搖滾"},
+            { "93", "Psychedelic Rock", "迷幻搖滾"},
+            { "94", "Symphonic Rock", "前衛搖滾"},
+            { "95", "Slow Rock", "Slow Rock"},
+            { "96", "Big Band", "大樂團"},
+            { "97", "Chorus", "副歌"},
+            { "98", "Easy Listening", "Easy Listening"},
+            { "99", "Acoustic", "原音樂"},
+            { "100", "Humour", "幽默"},
+            { "101", "Speech", "語音"},
+            { "102", "Chanson", "香頌"},
+            { "103", "Opera", "歌劇"},
+            { "104", "Chamber Music", "室內樂"},
+            { "105", "Sonata", "奏鳴曲"},
+            { "106", "Symphony", "交響曲"},
+            { "107", "Booty Bass", "Booty Bass"},
+            { "108", "Primus", "諷刺"},
+            { "109", "Porn Groove", "Porn Groove"},
+            { "110", "Satire", "Satire"},
+            { "111", "Slow Jam", "Slow Jam"},
+            { "112", "Club", "電子舞曲"},
+            { "113", "Tango", "探戈"},
+            { "114", "Samba", "桑巴"},
+            { "115", "Folklore", "民俗學"},
+            { "116", "Ballad", "謠曲"},
+            { "117", "Power Ballad", "Power Ballad"},
+            { "118", "Rhythmic Soul", "Rhythmic Soul"},
+            { "119", "Freestyle", "Freestyle"},
+            { "120", "Duet", "Duet"},
+            { "121", "Punk Rock", "朋克搖滾"},
+            { "122", "Drum Solo", "Drum Solo"},
+            { "123", "A capella", "無伴奏合唱"},
+            { "124", "Euro-House", "浩室音樂"},
+            { "125", "Dance Hall", "Dance Hall"},
+            };
+
+            if (genre <= 125)
+            {
+                textBox8.Text = genre.ToString() + "  " + genre_data[genre, 1] + "  " + genre_data[genre, 2];
+            }
+            else
+            {
+                textBox8.Text = genre.ToString() + "  無資料";
+            }
+        }
     }
 }

@@ -72,6 +72,15 @@ namespace vcs_tmp_all
 
         }
 
+        int i = 0;
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            i = richTextBox1.Find("，", i, RichTextBoxFinds.None);
+            richTextBox2.Text += "Found pattern at i = " + i.ToString() + "\n";
+            if (i == -1)
+                richTextBox2.Text += "己至最後, 重新搜尋\n";
 
+            i++;
+        }
     }
 }

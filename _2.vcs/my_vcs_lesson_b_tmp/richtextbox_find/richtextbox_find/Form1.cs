@@ -16,23 +16,11 @@ namespace richtextbox_find
             InitializeComponent();
         }
 
-        int i = 0;
-        private void button1_Click(object sender, EventArgs e)
-        {
-            i = richTextBox1.Find("a", i, RichTextBoxFinds.None);
-            richTextBox2.Text += "Found pattern at i = " + i.ToString() + "\n";
-            if (i == -1)
-                richTextBox2.Text += "己至最後, 重新搜尋\n";
-
-            i++;
-
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             int ret;
-            ret = FindMyText(new char[] { 'D', 'e', 'l', 't', 'a' });
+            //ret = FindMyText(new char[] { 'D', 'e', 'l', 't', 'a' });
+            ret = FindMyText(new char[] { 't', 'h', 'e' });
             richTextBox2.Text += "ret = " + ret.ToString() + "\n";
             
         }
@@ -47,6 +35,8 @@ namespace richtextbox_find
                 // Obtain the location of the first character found in the control     
                 // that matches any of the characters in the char array.     
                 int indexToText = richTextBox1.Find(text);
+                richTextBox2.Text += "indexToText = " + indexToText.ToString() + "\n";
+                     
                 // Determine whether the text was found in richTextBox1.     
                 if (indexToText >= 0)
                 {
@@ -86,6 +76,11 @@ namespace richtextbox_find
             currentFontFamily = this.richTextBox1.SelectionFont.FontFamily;
             newFont = new Font(currentFontFamily, newSize);
             this.richTextBox1.SelectionFont = newFont;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
         }
 
 
