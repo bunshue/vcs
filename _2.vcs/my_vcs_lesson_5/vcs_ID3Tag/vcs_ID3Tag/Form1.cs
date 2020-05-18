@@ -62,12 +62,12 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "\n";
         }
 
-        private byte[] getFirst128(string filename)
+        private byte[] getID3v2Header(string filename)
         {
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             Stream stream = fs;
             stream.Seek(0, SeekOrigin.Begin);
-            const int seekPos = 128;
+            const int seekPos = 10;
             int rl = 0;
             byte[] Info = new byte[seekPos];
             rl = stream.Read(Info, 0, seekPos);
@@ -76,10 +76,142 @@ namespace vcs_ID3Tag
 
             if (cb_raw_data.Checked == true)
             {
-                richTextBox1.Text += "印出此檔案之初128拜資料\n";
+                richTextBox1.Text += "印出此檔案之前10拜資料\n";
                 print_data(Info);
             }
             return Info;
+        }
+
+        private byte[] getID3v2Data(string filename, int len)
+        {
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            Stream stream = fs;
+            stream.Seek(10, SeekOrigin.Begin);
+            int seekPos = len;
+            int rl = 0;
+            byte[] Info = new byte[seekPos];
+            rl = stream.Read(Info, 0, seekPos);
+            fs.Close();
+            stream.Close();
+
+            if (cb_raw_data.Checked == true)
+            {
+                richTextBox1.Text += "印出此檔案之前 " + len.ToString() + " 拜資料\n";
+                print_data(Info);
+            }
+            return Info;
+        }
+
+
+        //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV2結構中返回:
+        void getMp3InfoV2a(byte[] Info)
+        {
+            Mp3InfoV2 mp3InfoV2 = new Mp3InfoV2();
+            string str = null;
+            int i;
+            int position = 0;//迴圈的起始值
+            int currentIndex = 0;//Info的當前索引值
+            //獲取Frame ID標識(陣列前4個)
+
+            for (int k = 0; k < 11; k++)
+            {
+                richTextBox1.Text += "\n第 " + (k + 1).ToString() + " 筆資料\n";
+                for (position = currentIndex; position < currentIndex + 10; position++)
+                {
+                    richTextBox1.Text += Info[position].ToString("X2") + " ";
+                }
+                richTextBox1.Text += "\n";
+
+                if ((Info[currentIndex] == 0x00) && (Info[currentIndex + 1] == 0x00) && (Info[currentIndex + 2] == 0x00) && (Info[currentIndex + 3] == 0x00))
+                {
+                    richTextBox1.Text += "資料已到盡頭\n";
+                    break;
+                }
+
+
+                for (position = currentIndex; position < currentIndex + 4; position++)
+                {
+                    str = str + (char)Info[position];
+                }
+                currentIndex = position;
+                mp3InfoV2.identify = str;
+
+                int tag_size = (((Info[currentIndex++] & 0xff) << 24) + ((Info[currentIndex++] & 0xff) << 16) + ((Info[currentIndex++] & 0xff) << 8) + (Info[currentIndex++] & 0xff));
+                //richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
+
+                richTextBox1.Text += "\n" + mp3InfoV2.identify + "\t";
+
+                currentIndex += 2;  //skip flags
+
+                //richTextBox1.Text += "currentIndex = " + currentIndex.ToString() + "\n";
+                //richTextBox1.Text += "position = " + position.ToString() + "\n";
+
+                bool skip = false;
+
+                if (mp3InfoV2.identify == "MCDI")
+                {
+                    skip = true;
+                    richTextBox1.Text += "\tskip\n";
+                    str = null;
+                }
+
+                if (skip == false)
+                {
+                    //獲取字串資料
+                    str = null;
+                    byte[] data = new byte[tag_size];//將歌名部分讀到一個單獨的陣列中
+                    int j = 0;
+                    for (i = currentIndex; i < currentIndex + tag_size; i++)
+                    {
+                        if (Info[i] == 0x00)
+                        {
+                        }
+                        else
+                        {
+                            data[j] = Info[i];
+                            j++;
+                        }
+                    }
+                    mp3InfoV2.Title = this.byteToString(data);
+
+
+                    /*
+                    richTextBox1.Text += "data : " + mp3InfoV2.Title + "\n";
+
+                    richTextBox1.Text += "hex data : \n";
+                    for (i = 0; i < tag_size; i++)
+                    {
+                        richTextBox1.Text += data[i].ToString("X2") + " ";
+                    }
+                    richTextBox1.Text += "\n";
+
+
+                    richTextBox1.Text += "byteArray 資料\t";
+                    for (i = 0; i < tag_size; i++)
+                    {
+                        //richTextBox7.Text += "i = " + i.ToString() + "\t" + (char)byteArray[i] + "\t" + byteArray[i].ToString("X2") + "\t" + byteArray[i].ToString() + "\n";
+                        //richTextBox7.Text += "i = " + i.ToString() + "\t" + byteArray[i].ToString("X2") + "\n";
+                        richTextBox1.Text += data[i].ToString("X2") + " ";
+                    }
+                    richTextBox1.Text += "\n";
+                    */
+                    string str2 = Encoding.GetEncoding("big5").GetString(data);
+                    richTextBox1.Text += str2 + "\n";
+
+
+
+                }
+                    
+
+
+                currentIndex += tag_size;
+                richTextBox1.Text += "\ncurrentIndex = " + currentIndex.ToString() + "\n";
+            }
+
+
+
+        
+        
         }
 
         //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV2結構中返回:
@@ -394,51 +526,68 @@ namespace vcs_ID3Tag
         void get_ID3v2Tag(string filename, string encoding)
         {
             Mp3InfoV2 mp3_information;
-            byte[] Info = getFirst128(filename);
-
-
-            if ((Info[0] == 'I') && (Info[1] == 'D') && (Info[2] == '3'))
+            byte[] header = getID3v2Header(filename);
+            if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
             {
-                mp3_information = getMp3InfoV2(Info);
+                richTextBox1.Text += "Major version : " + header[3].ToString() + "\n";
+                richTextBox1.Text += "minor version : " + header[4].ToString() + "\n";
+                richTextBox1.Text += "flags : " + header[5].ToString("X2") + "\n";
 
-                richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+                int tag_size = (((header[6] & 0x7f) << 21) + ((header[7] & 0x7f) << 14) + ((header[8] & 0x7f) << 7) + (header[9] & 0x7f));
+                richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
+
+                //tag_size += 12;
+
+                //tag_size = 600;
+
+                byte[] Info = getID3v2Data(filename, tag_size);
+
+                getMp3InfoV2a(Info);
+
+
+                //mp3_information = getMp3InfoV2(Info);
+
+                //richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+
+
+
+
+                /*
+
+                richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+                richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+                richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+                richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+                richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+                richTextBox1.Text += "Zero : " + mp3_information.Zero.ToString() + "\n";
+                if (mp3_information.Zero == 0)
+                    richTextBox1.Text += "Track : " + mp3_information.Track.ToString() + "\n";
+                else
+                    richTextBox1.Text += "Track : 無資料\n";
+                richTextBox1.Text += "Genre : " + mp3_information.Genre.ToString() + "\n";
+                richTextBox1.Text += "\n";
+
+                textBox1.Text = mp3_information.identify;
+                textBox2.Text = mp3_information.Title;
+                textBox3.Text = mp3_information.Artist;
+                textBox4.Text = mp3_information.Album;
+                textBox5.Text = mp3_information.Year;
+                textBox6.Text = mp3_information.Comment;
+                if (mp3_information.Zero == 0)
+                    textBox7.Text = mp3_information.Track.ToString();
+                else
+                    textBox7.Text = "無資料";
+                textBox8.Text = mp3_information.Genre.ToString();
+
+                print_genre(mp3_information.Genre);
+                */
+
+
             }
             else
             {
                 richTextBox1.Text += "無ID3 v2資料\n";
-
             }
-
-
-            /*
-
-            richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
-            richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
-            richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
-            richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
-            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
-            richTextBox1.Text += "Zero : " + mp3_information.Zero.ToString() + "\n";
-            if (mp3_information.Zero == 0)
-                richTextBox1.Text += "Track : " + mp3_information.Track.ToString() + "\n";
-            else
-                richTextBox1.Text += "Track : 無資料\n";
-            richTextBox1.Text += "Genre : " + mp3_information.Genre.ToString() + "\n";
-            richTextBox1.Text += "\n";
-
-            textBox1.Text = mp3_information.identify;
-            textBox2.Text = mp3_information.Title;
-            textBox3.Text = mp3_information.Artist;
-            textBox4.Text = mp3_information.Album;
-            textBox5.Text = mp3_information.Year;
-            textBox6.Text = mp3_information.Comment;
-            if (mp3_information.Zero == 0)
-                textBox7.Text = mp3_information.Track.ToString();
-            else
-                textBox7.Text = "無資料";
-            textBox8.Text = mp3_information.Genre.ToString();
-
-            print_genre(mp3_information.Genre);
-            */
         }
 
         private void button2_Click(object sender, EventArgs e)
