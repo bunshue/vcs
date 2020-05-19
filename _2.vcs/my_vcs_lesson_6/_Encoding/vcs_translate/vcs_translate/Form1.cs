@@ -90,7 +90,6 @@ namespace vcs_translate
             //richTextBox7.Text += "統一字串\t" + str1 + "\t轉成unicode編碼 : " + "\t";
             byteArray = Encoding.GetEncoding("unicode").GetBytes(str);  //指名使用big5編碼, 把字串轉成拜列
             translate_code(byteArray);
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -122,23 +121,9 @@ namespace vcs_translate
             string str;
 
             len = byteArray.Length;
-            for (i = 0; i < len; i++)
-            {
-                //richTextBox7.Text += "i = " + i.ToString() + "\t" + (char)byteArray[i] + "\t" + byteArray[i].ToString("X2") + "\t" + byteArray[i].ToString() + "\n";
-                //richTextBox7.Text += "i = " + i.ToString() + "\t" + byteArray[i].ToString("X2") + "\n";
-                richTextBox7.Text += byteArray[i].ToString("X2") + " ";
-            }
-            richTextBox7.Text += "\n";
 
-
-            richTextBox7.Text += "byteArray 資料\t";
-            for (i = 0; i < len; i++)
-            {
-                //richTextBox7.Text += "i = " + i.ToString() + "\t" + (char)byteArray[i] + "\t" + byteArray[i].ToString("X2") + "\t" + byteArray[i].ToString() + "\n";
-                //richTextBox7.Text += "i = " + i.ToString() + "\t" + byteArray[i].ToString("X2") + "\n";
-                richTextBox7.Text += byteArray[i].ToString("X2") + " ";
-            }
-            richTextBox7.Text += "\n";
+            richTextBox7.Text += "byteArray 資料\n";
+            print_data(byteArray);
 
             //byte[]轉成string：
             //str = Encoding.Default.GetString(byteArray);
@@ -157,10 +142,6 @@ namespace vcs_translate
             str = Encoding.GetEncoding("unicode").GetString(byteArray);
             richTextBox7.Text += "用unicode編碼轉成字串\t" + str + "\n";
             richTextBox4.Text = str;
-
-
-
-
         }
 
         /// <summary>
@@ -223,7 +204,6 @@ namespace vcs_translate
                 richTextBox7.Text += "字串: " + textBox3.Text + "    是GB2312碼\n";
             else
                 richTextBox7.Text += "字串: " + textBox3.Text + "  不是GB2312碼\n";
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -235,7 +215,7 @@ namespace vcs_translate
             {
                 richTextBox7.Text += "i = " + i.ToString() + "\t" + str[i] + "\tvalue\t" + ((int)str[i]).ToString("X4") + "\n";
             }
-            richTextBox1.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
+            richTextBox7.Text += "\n文字編碼都是Unicode編碼 Unicode (Big-Endian) 	1201 	utf-16BE\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -456,7 +436,6 @@ namespace vcs_translate
             {
                 richTextBox7.Text += "i = " + i.ToString() + "\t" + string_new[i] + "\tvalue\t" + ((int)string_new[i]).ToString("X4") + "\n";
             }
-
         }
 
         void print_data(byte[] data)
@@ -471,7 +450,6 @@ namespace vcs_translate
                     richTextBox7.Text += " ";
             }
             richTextBox7.Text += "\n";
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -768,6 +746,106 @@ namespace vcs_translate
 
 
             }
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            string str = tb_string.Text;
+
+            byte[] byteArray;
+
+            richTextBox7.Text += "日語(Shift-JIS)編碼\n";
+            byteArray = Encoding.GetEncoding("shift_jis").GetBytes(str);  //指名使用日語(Shift-JIS)編碼, 把字串轉成拜列
+            print_data(byteArray);
+
+            richTextBox7.Text += "簡體中文(GB2312)編碼\n";
+            byteArray = Encoding.GetEncoding("gb2312").GetBytes(str);  //指名使用簡體中文(GB2312)編碼, 把字串轉成拜列
+            print_data(byteArray);
+
+            richTextBox7.Text += "正體中文(Big5)編碼\n";
+            byteArray = Encoding.GetEncoding("big5").GetBytes(str);  //指名使用正體中文(Big5)編碼, 把字串轉成拜列
+            print_data(byteArray);
+
+            richTextBox7.Text += "Unicode編碼\n";
+            byteArray = Encoding.GetEncoding("utf-16").GetBytes(str);  //指名使用Unicode編碼, 把字串轉成拜列
+            print_data(byteArray);
+
+            richTextBox7.Text += "Unicode (Big-Endian)編碼\n";
+            byteArray = Encoding.GetEncoding("utf-16BE").GetBytes(str);  //指名使用Unicode (Big-Endian)編碼, 把字串轉成拜列
+            print_data(byteArray);
+
+            richTextBox7.Text += "Unicode (UTF-8)編碼\n";
+            byteArray = Encoding.GetEncoding("utf-8").GetBytes(str);  //指名使用Unicode (UTF-8)編碼, 把字串轉成拜列
+            print_data(byteArray);
+
+        }
+
+        byte ascii2int(char c)
+        {
+            byte value = 0;
+            if ((c >= (Char)48 && c <= (Char)57))
+                value = (byte)(c - 48);
+            else if ((c >= 'A') && (c <= 'F'))
+            {
+                value = (byte)(c - 'A' + 10);
+            }
+            else if ((c >= 'a') && (c <= 'f'))
+            {
+                value = (byte)(c - 'a' + 10);
+            }
+            return value;
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            int i;
+            int len;
+            string str;
+            str = tb_number.Text;
+            richTextBox7.Text += "str is " + str + "\n";
+            len = str.Length;
+            richTextBox7.Text += "len is " + len.ToString() + "\n";
+            str = str.Replace(" ", "");
+            len = str.Length;
+            richTextBox7.Text += "str is " + str + "\n";
+            richTextBox7.Text += "len is " + len.ToString() + "\n";
+
+            byte[] byteArray = new byte[len / 2];
+            for (i = 0; i < (len / 2); i++)
+            {
+                byteArray[i] = (byte)(ascii2int(str[2 * i]) * 16 + ascii2int(str[2 * i + 1]));
+            }
+
+            print_data(byteArray);
+
+            //byte[]轉成string：
+            str = Encoding.Default.GetString(byteArray);
+            richTextBox7.Text += "用預設編碼轉成字串\t" + str + "\n";
+
+            richTextBox7.Text += "日語(Shift-JIS)解碼\n";
+            str = Encoding.GetEncoding("shift_jis").GetString(byteArray);	//指名使用日語(Shift-JIS)解碼, 把拜列轉成字串
+            richTextBox7.Text += str + "\n";
+
+            richTextBox7.Text += "簡體中文(GB2312)解碼\n";
+            str = Encoding.GetEncoding("gb2312").GetString(byteArray);	//指名使用簡體中文(GB2312)解碼, 把拜列轉成字串
+            richTextBox7.Text += str + "\n";
+
+            richTextBox7.Text += "正體中文(Big5)解碼\n";
+            str = Encoding.GetEncoding("big5").GetString(byteArray);	//指名使用正體中文(Big5)解碼, 把拜列轉成字串
+            richTextBox7.Text += str + "\n";
+
+            richTextBox7.Text += "Unicode解碼\n";
+            str = Encoding.GetEncoding("utf-16").GetString(byteArray);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+            richTextBox7.Text += str + "\n";
+
+            richTextBox7.Text += "Unicode (Big-Endian)解碼\n";
+            str = Encoding.GetEncoding("utf-16BE").GetString(byteArray);	//指名使用Unicode (Big-Endian)解碼, 把拜列轉成字串
+            richTextBox7.Text += str + "\n";
+
+            richTextBox7.Text += "Unicode (UTF-8)解碼\n";
+            str = Encoding.GetEncoding("utf-8").GetString(byteArray);	//指名使用Unicode (UTF-8)解碼, 把拜列轉成字串
+            richTextBox7.Text += str + "\n";
 
         }
 

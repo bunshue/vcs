@@ -56,7 +56,21 @@ namespace vcs_ID3Tag
                 richTextBox1.Text += data[i].ToString("X2");
                 if ((i % 16) == 15)
                     richTextBox1.Text += "\n";
-                else
+                else if (i != (len - 1))
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        void print_data(byte[] data, int start, int len)
+        {
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += data[start + i].ToString("X2");
+                if ((i % 16) == 15)
+                    richTextBox1.Text += "\n";
+                else if (i != (len - 1))
                     richTextBox1.Text += " ";
             }
             richTextBox1.Text += "\n";
@@ -74,9 +88,9 @@ namespace vcs_ID3Tag
             fs.Close();
             stream.Close();
 
-            if (cb_raw_data.Checked == true)
+            //if (cb_raw_data.Checked == true)
             {
-                richTextBox1.Text += "印出此檔案之前10拜資料\n";
+                richTextBox1.Text += "印出此檔案之前10拜資料(ID3 header)\n";
                 print_data(Info);
             }
             return Info;
@@ -86,7 +100,7 @@ namespace vcs_ID3Tag
         {
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             Stream stream = fs;
-            stream.Seek(10, SeekOrigin.Begin);
+            stream.Seek(10, SeekOrigin.Begin);  //從offset=10開始, 讀len長度資料
             int seekPos = len;
             int rl = 0;
             byte[] Info = new byte[seekPos];
@@ -102,7 +116,6 @@ namespace vcs_ID3Tag
             return Info;
         }
 
-
         //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV2結構中返回:
         void getMp3InfoV2a(byte[] Info)
         {
@@ -113,21 +126,18 @@ namespace vcs_ID3Tag
             int currentIndex = 0;//Info的當前索引值
             //獲取Frame ID標識(陣列前4個)
 
-            for (int k = 0; k < 11; k++)
+            int k = 0;
+            while(true)
             {
-                richTextBox1.Text += "\n第 " + (k + 1).ToString() + " 筆資料\n";
-                for (position = currentIndex; position < currentIndex + 10; position++)
-                {
-                    richTextBox1.Text += Info[position].ToString("X2") + " ";
-                }
-                richTextBox1.Text += "\n";
+                k++;
+                //richTextBox1.Text += "\n第 " + k.ToString() + " 筆資料\t";
+                //print_data(Info, currentIndex, 10);
 
                 if ((Info[currentIndex] == 0x00) && (Info[currentIndex + 1] == 0x00) && (Info[currentIndex + 2] == 0x00) && (Info[currentIndex + 3] == 0x00))
                 {
-                    richTextBox1.Text += "資料已到盡頭\n";
+                    //richTextBox1.Text += "資料已到盡頭\n";
                     break;
                 }
-
 
                 for (position = currentIndex; position < currentIndex + 4; position++)
                 {
@@ -139,9 +149,9 @@ namespace vcs_ID3Tag
                 int tag_size = (((Info[currentIndex++] & 0xff) << 24) + ((Info[currentIndex++] & 0xff) << 16) + ((Info[currentIndex++] & 0xff) << 8) + (Info[currentIndex++] & 0xff));
                 //richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
 
-                richTextBox1.Text += "\n" + mp3InfoV2.identify + "\t";
-
+                //richTextBox1.Text += mp3InfoV2.identify + "\t";
                 currentIndex += 2;  //skip flags
+
 
                 //richTextBox1.Text += "currentIndex = " + currentIndex.ToString() + "\n";
                 //richTextBox1.Text += "position = " + position.ToString() + "\n";
@@ -151,7 +161,7 @@ namespace vcs_ID3Tag
                 if (mp3InfoV2.identify == "MCDI")
                 {
                     skip = true;
-                    richTextBox1.Text += "\tskip\n";
+                    //richTextBox1.Text += "\tskip\n";
                     str = null;
                 }
 
@@ -172,7 +182,17 @@ namespace vcs_ID3Tag
                             j++;
                         }
                     }
+
+                    /* test
+                    print_data(data);
+                    string str2 = Encoding.GetEncoding("big5").GetString(data);
+                    richTextBox1.Text += "\n";
+                    richTextBox1.Text += "------" + str2 + "-----------";
+                    richTextBox1.Text += "\n";
+                    */
+
                     mp3InfoV2.Title = this.byteToString(data);
+                    print_data_frame(mp3InfoV2.identify, mp3InfoV2.Title);
 
 
                     /*
@@ -185,7 +205,6 @@ namespace vcs_ID3Tag
                     }
                     richTextBox1.Text += "\n";
 
-
                     richTextBox1.Text += "byteArray 資料\t";
                     for (i = 0; i < tag_size; i++)
                     {
@@ -195,23 +214,13 @@ namespace vcs_ID3Tag
                     }
                     richTextBox1.Text += "\n";
                     */
-                    string str2 = Encoding.GetEncoding("big5").GetString(data);
-                    richTextBox1.Text += str2 + "\n";
-
-
-
+                    //string str2 = Encoding.GetEncoding("big5").GetString(data);
+                    //richTextBox1.Text += str2;
+                    //richTextBox1.Text += "\n";
                 }
-                    
-
-
                 currentIndex += tag_size;
-                richTextBox1.Text += "\ncurrentIndex = " + currentIndex.ToString() + "\n";
+                //richTextBox1.Text += "\ncurrentIndex = " + currentIndex.ToString() + "\n";
             }
-
-
-
-        
-        
         }
 
         //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV2結構中返回:
@@ -529,6 +538,7 @@ namespace vcs_ID3Tag
             byte[] header = getID3v2Header(filename);
             if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
             {
+                richTextBox1.Text += "有ID3 v2資料\n";
                 richTextBox1.Text += "Major version : " + header[3].ToString() + "\n";
                 richTextBox1.Text += "minor version : " + header[4].ToString() + "\n";
                 richTextBox1.Text += "flags : " + header[5].ToString("X2") + "\n";
@@ -536,21 +546,13 @@ namespace vcs_ID3Tag
                 int tag_size = (((header[6] & 0x7f) << 21) + ((header[7] & 0x7f) << 14) + ((header[8] & 0x7f) << 7) + (header[9] & 0x7f));
                 richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
 
-                //tag_size += 12;
-
-                //tag_size = 600;
-
                 byte[] Info = getID3v2Data(filename, tag_size);
-
                 getMp3InfoV2a(Info);
 
 
                 //mp3_information = getMp3InfoV2(Info);
 
                 //richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
-
-
-
 
                 /*
 
@@ -581,8 +583,6 @@ namespace vcs_ID3Tag
 
                 print_genre(mp3_information.Genre);
                 */
-
-
             }
             else
             {
@@ -808,6 +808,63 @@ namespace vcs_ID3Tag
             {
                 textBox8.Text = genre.ToString() + "  無資料";
             }
+        }
+
+        void print_data_frame(string id, string data)
+        {
+            //richTextBox1.Text += id + "\t" + data + "\n";
+            switch (id)
+            {
+                case "TPE1":
+                    richTextBox1.Text += "指揮" + "\t" + data + "\n";
+                    break;
+                case "TPE2":
+                    richTextBox1.Text += "樂團/樂隊/伴奏" + "\t" + data + "\n";
+                    break;
+                case "TXXX":
+                    richTextBox1.Text += "自訂文字" + "\t" + data + "\n";
+                    break;
+                case "TALB":
+                    richTextBox1.Text += "專輯/電影/節目標題" + "\t" + data + "\n";
+                    break;
+                case "TIT2":
+                    richTextBox1.Text += "標題" + "\t" + data + "\n";
+                    break;
+                case "TYER":
+                    richTextBox1.Text += "年分" + "\t" + data + "\n";
+                    break;
+                case "TSSE":
+                    richTextBox1.Text += "編碼環境設定" + "\t" + data + "\n";
+                    break;
+                case "COMM":
+                    richTextBox1.Text += "評論" + "\t" + data + "\n";
+                    break;
+                case "TENC":
+                    richTextBox1.Text += "編碼者" + "\t" + data + "\n";
+                    break;
+                case "MCDI":
+                    richTextBox1.Text += "音樂光碟識別碼" + "\t" + data + "\n";
+                    break;
+                case "TRCK":
+                    richTextBox1.Text += "曲目" + "\t" + data + "\n";
+                    break;
+                case "TCON":
+                    richTextBox1.Text += "內容類型" + "\t" + data + "\n";
+                    break;
+                case "TLEN":
+                    richTextBox1.Text += "長度" + "\t" + data + "\n";
+                    break;
+                default:
+                    richTextBox1.Text += "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx " + id + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
+                    richTextBox1.Text += "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx " + id + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
+                    richTextBox1.Text += "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx " + id + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
+                    richTextBox1.Text += "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx " + id + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
+                    break;
+            }
+
+
+            //richTextBox1.Text += "\n";
+
         }
     }
 }
