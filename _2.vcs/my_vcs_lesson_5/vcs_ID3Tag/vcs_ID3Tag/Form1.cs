@@ -88,7 +88,7 @@ namespace vcs_ID3Tag
             fs.Close();
             stream.Close();
 
-            //if (cb_raw_data.Checked == true)
+            if (cb_raw_data.Checked == true)
             {
                 richTextBox1.Text += "印出此檔案之前10拜資料(ID3 header)\n";
                 print_data(Info);
@@ -501,35 +501,44 @@ namespace vcs_ID3Tag
         {
             Mp3InfoV1 mp3_information;
             byte[] Info = getLast128(filename);
-            mp3_information = getMp3InfoV1(Info);
 
-            richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
-            richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
-            richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
-            richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
-            richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
-            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
-            richTextBox1.Text += "Zero : " + mp3_information.Zero.ToString() + "\n";
-            if (mp3_information.Zero == 0)
-                richTextBox1.Text += "Track : " + mp3_information.Track.ToString() + "\n";
+            if ((Info[0] == 'T') && (Info[1] == 'A') && (Info[2] == 'G'))
+            {
+                richTextBox1.Text += "有ID3 v1資料\n";
+                mp3_information = getMp3InfoV1(Info);
+
+                richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+                richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+                richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+                richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+                richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+                richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+                richTextBox1.Text += "Zero : " + mp3_information.Zero.ToString() + "\n";
+                if (mp3_information.Zero == 0)
+                    richTextBox1.Text += "Track : " + mp3_information.Track.ToString() + "\n";
+                else
+                    richTextBox1.Text += "Track : 無資料\n";
+                richTextBox1.Text += "Genre : " + mp3_information.Genre.ToString() + "\n";
+                richTextBox1.Text += "\n";
+
+                textBox1.Text = mp3_information.identify;
+                textBox2.Text = mp3_information.Title;
+                textBox3.Text = mp3_information.Artist;
+                textBox4.Text = mp3_information.Album;
+                textBox5.Text = mp3_information.Year;
+                textBox6.Text = mp3_information.Comment;
+                if (mp3_information.Zero == 0)
+                    textBox7.Text = mp3_information.Track.ToString();
+                else
+                    textBox7.Text = "無資料";
+                textBox8.Text = mp3_information.Genre.ToString();
+
+                print_genre(mp3_information.Genre);
+            }
             else
-                richTextBox1.Text += "Track : 無資料\n";
-            richTextBox1.Text += "Genre : " + mp3_information.Genre.ToString() + "\n";
-            richTextBox1.Text += "\n";
-
-            textBox1.Text = mp3_information.identify;
-            textBox2.Text = mp3_information.Title;
-            textBox3.Text = mp3_information.Artist;
-            textBox4.Text = mp3_information.Album;
-            textBox5.Text = mp3_information.Year;
-            textBox6.Text = mp3_information.Comment;
-            if (mp3_information.Zero == 0)
-                textBox7.Text = mp3_information.Track.ToString();
-            else
-                textBox7.Text = "無資料";
-            textBox8.Text = mp3_information.Genre.ToString();
-
-            print_genre(mp3_information.Genre);
+            {
+                richTextBox1.Text += "無ID3 v1資料\n";
+            }
         }
 
         void get_ID3v2Tag(string filename, string encoding)
@@ -538,6 +547,9 @@ namespace vcs_ID3Tag
             byte[] header = getID3v2Header(filename);
             if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
             {
+                richTextBox1.Text += "印出此檔案之前10拜資料(ID3 header)\n";
+                print_data(header);
+
                 richTextBox1.Text += "有ID3 v2資料\n";
                 richTextBox1.Text += "Major version : " + header[3].ToString() + "\n";
                 richTextBox1.Text += "minor version : " + header[4].ToString() + "\n";
