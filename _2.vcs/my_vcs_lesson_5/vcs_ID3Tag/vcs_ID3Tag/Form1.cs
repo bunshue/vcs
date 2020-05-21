@@ -134,15 +134,15 @@ namespace vcs_ID3Tag
 
         public struct Mp3InfoV2
         {
-            public string identify;//TAG，三個位元組
+            public string identify;//ID3，三個位元組
             public string Title;//歌曲名,30個位元組
             public string Artist;//歌手名,30個位元組
             public string Album;//所屬唱片,30個位元組
             public string Year;//年,4個字元
             public string Comment;//注釋,28個位元組
-            public byte Zero;//保留位，一個位元組, byte 125, 零位元組
-            public byte Track;//保留位，一個位元組, byte 126, 曲目
-            public byte Genre;//保留位，一個位元組, byte 127, 藝術類型
+            public string Track;//保留位，一個位元組, byte 126, 曲目
+            public string Genre;//保留位，一個位元組, byte 127, 藝術類型
+            public string Length;
         }
 
         void print_data(byte[] data)
@@ -216,14 +216,14 @@ namespace vcs_ID3Tag
         }
 
         //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV2結構中返回:
-        void getMp3InfoV2(byte[] Info)
+        private Mp3InfoV2 getMp3InfoV2(byte[] Info)
         {
             Mp3InfoV2 mp3InfoV2 = new Mp3InfoV2();
-            string str = null;
+            string frame_id = null;
+            string frame_id_data = null;
             int i;
             int position = 0;//迴圈的起始值
             int currentIndex = 0;//Info的當前索引值
-            //獲取Frame ID標識(陣列前4個)
 
             int k = 0;
             while(true)
@@ -240,34 +240,30 @@ namespace vcs_ID3Tag
 
                 for (position = currentIndex; position < currentIndex + 4; position++)
                 {
-                    str = str + (char)Info[position];
+                    frame_id += (char)Info[position];
                 }
                 currentIndex = position;
-                mp3InfoV2.identify = str;
 
                 int tag_size = (((Info[currentIndex++] & 0xff) << 24) + ((Info[currentIndex++] & 0xff) << 16) + ((Info[currentIndex++] & 0xff) << 8) + (Info[currentIndex++] & 0xff));
                 //richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
 
-                //richTextBox1.Text += mp3InfoV2.identify + "\t";
                 currentIndex += 2;  //skip flags
-
 
                 //richTextBox1.Text += "currentIndex = " + currentIndex.ToString() + "\n";
                 //richTextBox1.Text += "position = " + position.ToString() + "\n";
 
                 bool skip = false;
 
-                if (mp3InfoV2.identify == "MCDI")
+                if (frame_id == "MCDI")
                 {
                     skip = true;
                     //richTextBox1.Text += "\tskip\n";
-                    str = null;
+                    frame_id = null;
                 }
 
                 if (skip == false)
                 {
                     //獲取字串資料
-                    str = null;
                     byte[] data = new byte[tag_size];//將歌名部分讀到一個單獨的陣列中
                     int j = 0;
                     for (i = currentIndex; i < currentIndex + tag_size; i++)
@@ -290,8 +286,47 @@ namespace vcs_ID3Tag
                     richTextBox1.Text += "\n";
                     */
 
-                    mp3InfoV2.Title = this.byteToString(data);
-                    print_data_frame(mp3InfoV2.identify, mp3InfoV2.Title);
+                    frame_id_data = this.byteToString(data);
+
+                    if (frame_id == "TIT2")
+                    {
+                        mp3InfoV2.Title = frame_id_data;
+                    }
+                    else if (frame_id == "TPE1")
+                    {
+                        mp3InfoV2.Artist = frame_id_data;
+                    }
+                    else if (frame_id == "TALB")
+                    {
+                        mp3InfoV2.Album = frame_id_data;
+                    }
+                    else if (frame_id == "TYER")
+                    {
+                        mp3InfoV2.Year = frame_id_data;
+                    }
+                    else if (frame_id == "COMM")
+                    {
+                        mp3InfoV2.Comment = frame_id_data;
+                    }
+                    else if (frame_id == "TRCK")
+                    {
+                        mp3InfoV2.Track = frame_id_data;
+                    }
+                    else if (frame_id == "TCON")
+                    {
+                        mp3InfoV2.Genre = frame_id_data;
+                    }
+                    else if (frame_id == "TLEN")
+                    {
+                        mp3InfoV2.Length = frame_id_data;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "未定義:\t" + frame_id + "\n";
+                    }
+
+                    print_data_frame(frame_id, frame_id_data);
+                    frame_id = null;
 
                     /*
                     richTextBox1.Text += "data : " + mp3InfoV2.Title + "\n";
@@ -319,6 +354,7 @@ namespace vcs_ID3Tag
                 currentIndex += tag_size;
                 //richTextBox1.Text += "\ncurrentIndex = " + currentIndex.ToString() + "\n";
             }
+            return mp3InfoV2;
         }
 
         //所以，我們只要把MP3檔的最後128個位元組分段讀出來並保存到該結構裡就可以了。函式定義如下：
@@ -341,6 +377,7 @@ namespace vcs_ID3Tag
             }
             return Info;
         }
+
         //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV1結構中返回:
         private Mp3InfoV1 getMp3InfoV1(byte[] Info)
         {
@@ -522,6 +559,8 @@ namespace vcs_ID3Tag
                 textBox8.Text = mp3_information.Genre.ToString();
 
                 print_genre(mp3_information.Genre);
+
+                print_ID3TagV1(mp3_information);
             }
             else
             {
@@ -531,6 +570,7 @@ namespace vcs_ID3Tag
 
         void get_ID3v2Tag(string filename, string encoding)
         {
+            Mp3InfoV2 mp3_information;
             byte[] header = getID3v2Header(filename);
             if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
             {
@@ -549,7 +589,13 @@ namespace vcs_ID3Tag
                 //richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
 
                 byte[] Info = getID3v2Data(filename, tag_size);
-                getMp3InfoV2(Info);
+                mp3_information = getMp3InfoV2(Info);
+
+
+                print_ID3TagV2(mp3_information);
+
+
+
             }
             else
             {
@@ -854,5 +900,36 @@ namespace vcs_ID3Tag
                 richTextBox1.Text += "XXXXXXXXXXXX 找不到 id = " + id + "\n\n\n";
             }
         }
+
+        void print_ID3TagV1(Mp3InfoV1 mp3_information)
+        {
+            richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+            richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+            richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+            richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+            richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+            richTextBox1.Text += "Zero : " + mp3_information.Zero.ToString() + "\n";
+            if (mp3_information.Zero == 0)
+                richTextBox1.Text += "Track : " + mp3_information.Track.ToString() + "\n";
+            else
+                richTextBox1.Text += "Track : 無資料\n";
+            richTextBox1.Text += "Genre : " + mp3_information.Genre.ToString() + "\n";
+            richTextBox1.Text += "\n";
+        }
+
+        void print_ID3TagV2(Mp3InfoV2 mp3_information)
+        {
+            richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
+            richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
+            richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
+            richTextBox1.Text += "Album : " + mp3_information.Album + "\n";
+            richTextBox1.Text += "Year : " + mp3_information.Year + "\n";
+            richTextBox1.Text += "Comment : " + mp3_information.Comment + "\n";
+            richTextBox1.Text += "Genre : " + mp3_information.Genre + "\n";
+            richTextBox1.Text += "Length : " + mp3_information.Length + "\n";
+            richTextBox1.Text += "\n";
+        }
+
     }
 }
