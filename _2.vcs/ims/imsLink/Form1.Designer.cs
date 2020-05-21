@@ -267,6 +267,7 @@
             this.tb_info_83 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.cb_change_rank = new System.Windows.Forms.CheckBox();
             this.bt_measure_brightness = new System.Windows.Forms.Button();
             this.bt_reset_camera = new System.Windows.Forms.Button();
             this.bt_brightness = new System.Windows.Forms.Button();
@@ -286,7 +287,6 @@
             this.lb_data_camera_gain = new System.Windows.Forms.Label();
             this.pictureBox_contrast = new System.Windows.Forms.PictureBox();
             this.gb_contrast_brightness3 = new System.Windows.Forms.GroupBox();
-            this.cb_change_rank = new System.Windows.Forms.CheckBox();
             this.trackBar_BPT = new System.Windows.Forms.TrackBar();
             this.tb_bpt3 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -628,6 +628,12 @@
             this.rb_brightness_color_2 = new System.Windows.Forms.RadioButton();
             this.rb_brightness_color_1 = new System.Windows.Forms.RadioButton();
             this.bt_save_program_picture = new System.Windows.Forms.Button();
+            this.gb_ng_reason = new System.Windows.Forms.GroupBox();
+            this.cb_reason1 = new System.Windows.Forms.CheckBox();
+            this.cb_reason2 = new System.Windows.Forms.CheckBox();
+            this.cb_reason3 = new System.Windows.Forms.CheckBox();
+            this.tb_reason = new System.Windows.Forms.TextBox();
+            this.button78 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -716,6 +722,7 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.groupBox_brightness.SuspendLayout();
+            this.gb_ng_reason.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -2986,6 +2993,7 @@
             // 
             // groupBox18
             // 
+            this.groupBox18.Controls.Add(this.gb_ng_reason);
             this.groupBox18.Controls.Add(this.checkBox1);
             this.groupBox18.Controls.Add(this.lb_main_mesg9);
             this.groupBox18.Controls.Add(this.label16);
@@ -3026,7 +3034,7 @@
             this.lb_main_mesg9.AutoSize = true;
             this.lb_main_mesg9.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg9.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg9.Location = new System.Drawing.Point(539, 239);
+            this.lb_main_mesg9.Location = new System.Drawing.Point(456, 230);
             this.lb_main_mesg9.Name = "lb_main_mesg9";
             this.lb_main_mesg9.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg9.TabIndex = 137;
@@ -3470,6 +3478,18 @@
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // cb_change_rank
+            // 
+            this.cb_change_rank.AutoSize = true;
+            this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
+            this.cb_change_rank.Location = new System.Drawing.Point(811, 222);
+            this.cb_change_rank.Name = "cb_change_rank";
+            this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
+            this.cb_change_rank.TabIndex = 232;
+            this.cb_change_rank.Text = "改判";
+            this.cb_change_rank.UseVisualStyleBackColor = true;
+            // 
             // bt_measure_brightness
             // 
             this.bt_measure_brightness.BackColor = System.Drawing.SystemColors.Control;
@@ -3720,18 +3740,6 @@
             this.gb_contrast_brightness3.TabIndex = 213;
             this.gb_contrast_brightness3.TabStop = false;
             this.gb_contrast_brightness3.Text = "Contrast / Brightness";
-            // 
-            // cb_change_rank
-            // 
-            this.cb_change_rank.AutoSize = true;
-            this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
-            this.cb_change_rank.Location = new System.Drawing.Point(811, 222);
-            this.cb_change_rank.Name = "cb_change_rank";
-            this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
-            this.cb_change_rank.TabIndex = 232;
-            this.cb_change_rank.Text = "改判";
-            this.cb_change_rank.UseVisualStyleBackColor = true;
             // 
             // trackBar_BPT
             // 
@@ -6322,7 +6330,7 @@
             // 
             // button16
             // 
-            this.button16.BackgroundImage = global::imsLink.Properties.Resources.save;
+            this.button16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button16.BackgroundImage")));
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button16.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button16.ForeColor = System.Drawing.Color.Black;
@@ -7534,7 +7542,7 @@
             // 
             // button22
             // 
-            this.button22.BackgroundImage = global::imsLink.Properties.Resources.clipboard;
+            this.button22.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button22.BackgroundImage")));
             this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button22.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button22.ForeColor = System.Drawing.Color.Black;
@@ -7547,7 +7555,7 @@
             // 
             // button73
             // 
-            this.button73.BackgroundImage = global::imsLink.Properties.Resources.folder_open;
+            this.button73.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button73.BackgroundImage")));
             this.button73.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button73.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button73.ForeColor = System.Drawing.Color.Black;
@@ -7560,7 +7568,7 @@
             // 
             // button72
             // 
-            this.button72.BackgroundImage = global::imsLink.Properties.Resources.save;
+            this.button72.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button72.BackgroundImage")));
             this.button72.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button72.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button72.ForeColor = System.Drawing.Color.Black;
@@ -7573,7 +7581,7 @@
             // 
             // button33
             // 
-            this.button33.BackgroundImage = global::imsLink.Properties.Resources.open_log;
+            this.button33.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button33.BackgroundImage")));
             this.button33.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button33.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button33.ForeColor = System.Drawing.Color.Green;
@@ -7695,6 +7703,73 @@
             this.bt_save_program_picture.Text = "本程式存圖";
             this.bt_save_program_picture.UseVisualStyleBackColor = true;
             this.bt_save_program_picture.Click += new System.EventHandler(this.bt_save_program_picture_Click);
+            // 
+            // gb_ng_reason
+            // 
+            this.gb_ng_reason.Controls.Add(this.button78);
+            this.gb_ng_reason.Controls.Add(this.tb_reason);
+            this.gb_ng_reason.Controls.Add(this.cb_reason3);
+            this.gb_ng_reason.Controls.Add(this.cb_reason2);
+            this.gb_ng_reason.Controls.Add(this.cb_reason1);
+            this.gb_ng_reason.Location = new System.Drawing.Point(642, 272);
+            this.gb_ng_reason.Name = "gb_ng_reason";
+            this.gb_ng_reason.Size = new System.Drawing.Size(200, 248);
+            this.gb_ng_reason.TabIndex = 139;
+            this.gb_ng_reason.TabStop = false;
+            this.gb_ng_reason.Text = "NG原因";
+            // 
+            // cb_reason1
+            // 
+            this.cb_reason1.AutoSize = true;
+            this.cb_reason1.Location = new System.Drawing.Point(16, 30);
+            this.cb_reason1.Name = "cb_reason1";
+            this.cb_reason1.Size = new System.Drawing.Size(91, 20);
+            this.cb_reason1.TabIndex = 0;
+            this.cb_reason1.Text = "線材破損";
+            this.cb_reason1.UseVisualStyleBackColor = true;
+            this.cb_reason1.CheckedChanged += new System.EventHandler(this.cb_reason1_CheckedChanged);
+            // 
+            // cb_reason2
+            // 
+            this.cb_reason2.AutoSize = true;
+            this.cb_reason2.Location = new System.Drawing.Point(16, 60);
+            this.cb_reason2.Name = "cb_reason2";
+            this.cb_reason2.Size = new System.Drawing.Size(156, 20);
+            this.cb_reason2.TabIndex = 1;
+            this.cb_reason2.Text = "Connector接觸不良";
+            this.cb_reason2.UseVisualStyleBackColor = true;
+            this.cb_reason2.CheckedChanged += new System.EventHandler(this.cb_reason2_CheckedChanged);
+            // 
+            // cb_reason3
+            // 
+            this.cb_reason3.AutoSize = true;
+            this.cb_reason3.Location = new System.Drawing.Point(16, 90);
+            this.cb_reason3.Name = "cb_reason3";
+            this.cb_reason3.Size = new System.Drawing.Size(75, 20);
+            this.cb_reason3.TabIndex = 2;
+            this.cb_reason3.Text = "其他：";
+            this.cb_reason3.UseVisualStyleBackColor = true;
+            this.cb_reason3.CheckedChanged += new System.EventHandler(this.cb_reason3_CheckedChanged);
+            // 
+            // tb_reason
+            // 
+            this.tb_reason.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_reason.Location = new System.Drawing.Point(16, 115);
+            this.tb_reason.Multiline = true;
+            this.tb_reason.Name = "tb_reason";
+            this.tb_reason.Size = new System.Drawing.Size(164, 127);
+            this.tb_reason.TabIndex = 3;
+            this.tb_reason.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_reason_KeyPress);
+            // 
+            // button78
+            // 
+            this.button78.Location = new System.Drawing.Point(136, 208);
+            this.button78.Name = "button78";
+            this.button78.Size = new System.Drawing.Size(44, 34);
+            this.button78.TabIndex = 140;
+            this.button78.Text = "OK";
+            this.button78.UseVisualStyleBackColor = true;
+            this.button78.Click += new System.EventHandler(this.button78_Click);
             // 
             // Form1
             // 
@@ -7848,6 +7923,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
             this.groupBox_brightness.ResumeLayout(false);
             this.groupBox_brightness.PerformLayout();
+            this.gb_ng_reason.ResumeLayout(false);
+            this.gb_ng_reason.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8453,6 +8530,12 @@
         private System.Windows.Forms.Button bt_reset_camera;
         private System.Windows.Forms.Button bt_save_program_picture;
         private System.Windows.Forms.CheckBox cb_change_rank;
+        private System.Windows.Forms.GroupBox gb_ng_reason;
+        private System.Windows.Forms.TextBox tb_reason;
+        private System.Windows.Forms.CheckBox cb_reason3;
+        private System.Windows.Forms.CheckBox cb_reason2;
+        private System.Windows.Forms.CheckBox cb_reason1;
+        private System.Windows.Forms.Button button78;
     }
 }
 
