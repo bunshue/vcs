@@ -252,16 +252,15 @@ namespace vcs_ID3Tag
                 //richTextBox1.Text += "currentIndex = " + currentIndex.ToString() + "\n";
                 //richTextBox1.Text += "position = " + position.ToString() + "\n";
 
-                bool skip = false;
-
                 if (frame_id == "MCDI")
                 {
-                    skip = true;
-                    //richTextBox1.Text += "\tskip\n";
-                    frame_id = null;
+                    richTextBox1.Text += frame_id + "\t\tskip\n";
                 }
-
-                if (skip == false)
+                else if (frame_id == "APIC")
+                {
+                    richTextBox1.Text += frame_id + "\t\tskip\n";
+                }
+                else
                 {
                     //獲取字串資料
                     byte[] data = new byte[tag_size];//將歌名部分讀到一個單獨的陣列中
@@ -326,7 +325,6 @@ namespace vcs_ID3Tag
                     }
 
                     print_data_frame(frame_id, frame_id_data);
-                    frame_id = null;
 
                     /*
                     richTextBox1.Text += "data : " + mp3InfoV2.Title + "\n";
@@ -351,8 +349,11 @@ namespace vcs_ID3Tag
                     //richTextBox1.Text += str2;
                     //richTextBox1.Text += "\n";
                 }
+                frame_id = null;
                 currentIndex += tag_size;
                 //richTextBox1.Text += "\ncurrentIndex = " + currentIndex.ToString() + "\n";
+                if (currentIndex >= Info.Length)
+                    break;
             }
             return mp3InfoV2;
         }
@@ -496,7 +497,7 @@ namespace vcs_ID3Tag
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = "c:\\______test_files\\_id3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -605,21 +606,21 @@ namespace vcs_ID3Tag
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\aaaa.mp3";       //一定要有@
+            string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
             encoding = "big5";
             get_ID3Tag(filename, encoding);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\uramachi.mp3";       //一定要有@
+            string filename = @"C:\______test_files\_id3\uramachi.mp3";       //一定要有@
             encoding = "gb2312";
             get_ID3Tag(filename, encoding);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\harumi.mp3";       //一定要有@
+            string filename = @"C:\______test_files\_id3\harumi.mp3";       //一定要有@
             encoding = "shift_jis";
             get_ID3Tag(filename, encoding);
         }
@@ -672,7 +673,7 @@ namespace vcs_ID3Tag
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = "c:\\______test_files\\_id3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -930,6 +931,116 @@ namespace vcs_ID3Tag
             richTextBox1.Text += "Length : " + mp3_information.Length + "\n";
             richTextBox1.Text += "\n";
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
+            string filename2 = filename + ".no.id3." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+
+            richTextBox1.Text += "移除 MP3 ID3 v1\n";
+            richTextBox1.Text += "原檔名:\t" + filename + "\n";
+            richTextBox1.Text += "新檔名:\t" + filename2 + "\n";
+            remove_ID3TagV1(filename, filename2);
+        }
+
+        void remove_ID3TagV1(string filename, string filename2)
+        {
+            clear_textbox_id3_data();
+
+            textBox_filename.Text = filename;
+
+            byte[] Info = getLast128(filename);
+            if ((Info[0] == 'T') && (Info[1] == 'A') && (Info[2] == 'G'))
+            {
+                richTextBox1.Text += "有ID3 v1資料\t移除之\n";
+                //讀取資料
+                byte[] data = File.ReadAllBytes(filename);
+                int len = data.Length;
+                //richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+                //richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+
+                int i;
+                using (FileStream fileStream = new FileStream(filename2, FileMode.Create))
+                {
+                    // Write the data to the file, byte by byte.
+                    for (i = 0; i < (len - 128); i++)
+                    {
+                        fileStream.WriteByte(data[i]);
+                    }
+                }
+                //richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename2 + "\n";
+
+
+
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v1資料\n";
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
+            string filename2 = filename + ".no.id3." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+
+            richTextBox1.Text += "新增 MP3 ID3 v1\n";
+            richTextBox1.Text += "原檔名:\t" + filename + "\n";
+            richTextBox1.Text += "新檔名:\t" + filename2 + "\n";
+            add_ID3TagV1(filename, filename2);
+        }
+
+        void add_ID3TagV1(string filename, string filename2)
+        {
+            clear_textbox_id3_data();
+
+            textBox_filename.Text = filename;
+
+            byte[] Info = getLast128(filename);
+            if ((Info[0] == 'T') && (Info[1] == 'A') && (Info[2] == 'G'))
+            {
+                richTextBox1.Text += "有ID3 v1資料\t不可新增\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v1資料\t可新增\n";
+                //TBD
+
+
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
+            string filename2 = filename + ".no.id3." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+
+            richTextBox1.Text += "修改 MP3 ID3 v1\n";
+            richTextBox1.Text += "原檔名:\t" + filename + "\n";
+            richTextBox1.Text += "新檔名:\t" + filename2 + "\n";
+            modify_ID3TagV1(filename, filename2);
+        }
+
+        void modify_ID3TagV1(string filename, string filename2)
+        {
+            clear_textbox_id3_data();
+
+            textBox_filename.Text = filename;
+
+            byte[] Info = getLast128(filename);
+            if ((Info[0] == 'T') && (Info[1] == 'A') && (Info[2] == 'G'))
+            {
+                richTextBox1.Text += "有ID3 v1資料\t可修改\n";
+                //TBD
+
+
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v1資料\t不可修改\n";
+            }
+        }
+
 
     }
 }

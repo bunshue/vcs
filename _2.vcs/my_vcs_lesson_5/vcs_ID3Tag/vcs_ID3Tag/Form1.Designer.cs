@@ -61,6 +61,9 @@
             this.textBox_filename = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox9b = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -364,11 +367,47 @@
             this.textBox9b.Size = new System.Drawing.Size(400, 30);
             this.textBox9b.TabIndex = 28;
             // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(410, 19);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(158, 35);
+            this.button7.TabIndex = 29;
+            this.button7.Text = "移除 MP3 ID3 v1";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Location = new System.Drawing.Point(410, 69);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(158, 35);
+            this.button8.TabIndex = 30;
+            this.button8.Text = "新增 MP3 ID3 v1";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(410, 120);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(158, 35);
+            this.button9.TabIndex = 31;
+            this.button9.Text = "修改 MP3 ID3 v1";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1420, 675);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.textBox9b);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_filename);
@@ -442,6 +481,9 @@
         private System.Windows.Forms.TextBox textBox_filename;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox9b;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 
