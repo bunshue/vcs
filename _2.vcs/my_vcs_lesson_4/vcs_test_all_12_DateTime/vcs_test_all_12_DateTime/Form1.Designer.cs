@@ -523,8 +523,9 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(164, 46);
             this.button33.TabIndex = 44;
-            this.button33.Text = "xxx";
+            this.button33.Text = "十二生肖 年";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
             // button34
             // 
@@ -694,8 +695,9 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(164, 46);
             this.button47.TabIndex = 59;
-            this.button47.Text = "xxx";
+            this.button47.Text = "日本紀年";
             this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
             // button48
             // 

@@ -547,17 +547,62 @@ namespace vcs_ID3Tag
                 richTextBox1.Text += "\n";
                 */
 
-                textBox1.Text = mp3_information.identify;
-                textBox2.Text = mp3_information.Title;
-                textBox3.Text = mp3_information.Artist;
-                textBox4.Text = mp3_information.Album;
-                textBox5.Text = mp3_information.Year;
-                textBox6.Text = mp3_information.Comment;
-                if (mp3_information.Zero == 0)
-                    textBox7.Text = mp3_information.Track.ToString();
+                if (encoding == "big5")
+                {
+                    textBox11.Text = mp3_information.identify;
+                    textBox12.Text = mp3_information.Title;
+                    textBox13.Text = mp3_information.Artist;
+                    textBox14.Text = mp3_information.Album;
+                    textBox15.Text = mp3_information.Year;
+                    textBox16.Text = mp3_information.Comment;
+                    if (mp3_information.Zero == 0)
+                        textBox17.Text = mp3_information.Track.ToString();
+                    else
+                        textBox17.Text = "無資料";
+                    textBox18.Text = mp3_information.Genre.ToString();
+                }
+                else if (encoding == "gb2312")
+                {
+                    textBox21.Text = mp3_information.identify;
+                    textBox22.Text = mp3_information.Title;
+                    textBox23.Text = mp3_information.Artist;
+                    textBox24.Text = mp3_information.Album;
+                    textBox25.Text = mp3_information.Year;
+                    textBox26.Text = mp3_information.Comment;
+                    if (mp3_information.Zero == 0)
+                        textBox27.Text = mp3_information.Track.ToString();
+                    else
+                        textBox27.Text = "無資料";
+                    textBox28.Text = mp3_information.Genre.ToString();
+                }
+                else if (encoding == "shift_jis")
+                {
+                    textBox31.Text = mp3_information.identify;
+                    textBox32.Text = mp3_information.Title;
+                    textBox33.Text = mp3_information.Artist;
+                    textBox34.Text = mp3_information.Album;
+                    textBox35.Text = mp3_information.Year;
+                    textBox36.Text = mp3_information.Comment;
+                    if (mp3_information.Zero == 0)
+                        textBox37.Text = mp3_information.Track.ToString();
+                    else
+                        textBox37.Text = "無資料";
+                    textBox38.Text = mp3_information.Genre.ToString();
+                }
                 else
-                    textBox7.Text = "無資料";
-                textBox8.Text = mp3_information.Genre.ToString();
+                {
+                    textBox11.Text = mp3_information.identify;
+                    textBox12.Text = mp3_information.Title;
+                    textBox13.Text = mp3_information.Artist;
+                    textBox14.Text = mp3_information.Album;
+                    textBox15.Text = mp3_information.Year;
+                    textBox16.Text = mp3_information.Comment;
+                    if (mp3_information.Zero == 0)
+                        textBox17.Text = mp3_information.Track.ToString();
+                    else
+                        textBox17.Text = "無資料";
+                    textBox18.Text = mp3_information.Genre.ToString();
+                }
 
                 print_genre(mp3_information.Genre);
 
@@ -575,7 +620,23 @@ namespace vcs_ID3Tag
             byte[] header = getID3v2Header(filename);
             if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
             {
-                textBox1b.Text = "ID3";
+                if (encoding == "big5")
+                {
+                    textBox11b.Text = "ID3";
+                }
+                else if (encoding == "gb2312")
+                {
+                    textBox21b.Text = "ID3";
+                }
+                else if (encoding == "shift_jis")
+                {
+                    textBox31b.Text = "ID3";
+                }
+                else
+                {
+                    textBox11b.Text = "ID3";
+                }
+
                 /*
                 richTextBox1.Text += "印出此檔案之前10拜資料(ID3 header)\n";
                 print_data(header);
@@ -625,32 +686,98 @@ namespace vcs_ID3Tag
             get_ID3Tag(filename, encoding);
         }
 
+        void clear_textbox_id3_data_big5()
+        {
+            textBox11.Clear();
+            textBox12.Clear();
+            textBox13.Clear();
+            textBox14.Clear();
+            textBox15.Clear();
+            textBox16.Clear();
+            textBox17.Clear();
+            textBox18.Clear();
+            textBox11b.Clear();
+            textBox12b.Clear();
+            textBox13b.Clear();
+            textBox14b.Clear();
+            textBox15b.Clear();
+            textBox16b.Clear();
+            textBox17b.Clear();
+            textBox18b.Clear();
+            textBox19b.Clear();
+        }
+
+        void clear_textbox_id3_data_gb2312()
+        {
+            textBox21.Clear();
+            textBox22.Clear();
+            textBox23.Clear();
+            textBox24.Clear();
+            textBox25.Clear();
+            textBox26.Clear();
+            textBox27.Clear();
+            textBox28.Clear();
+            textBox21b.Clear();
+            textBox22b.Clear();
+            textBox23b.Clear();
+            textBox24b.Clear();
+            textBox25b.Clear();
+            textBox26b.Clear();
+            textBox27b.Clear();
+            textBox28b.Clear();
+            textBox29b.Clear();
+        }
+
+        void clear_textbox_id3_data_shift_jis()
+        {
+            textBox31.Clear();
+            textBox32.Clear();
+            textBox33.Clear();
+            textBox34.Clear();
+            textBox35.Clear();
+            textBox36.Clear();
+            textBox37.Clear();
+            textBox38.Clear();
+            textBox31b.Clear();
+            textBox32b.Clear();
+            textBox33b.Clear();
+            textBox34b.Clear();
+            textBox35b.Clear();
+            textBox36b.Clear();
+            textBox37b.Clear();
+            textBox38b.Clear();
+            textBox39b.Clear();
+        }
+
         void clear_textbox_id3_data()
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
-            textBox6.Clear();
-            textBox7.Clear();
-            textBox8.Clear();
-            textBox1b.Clear();
-            textBox2b.Clear();
-            textBox3b.Clear();
-            textBox4b.Clear();
-            textBox5b.Clear();
-            textBox6b.Clear();
-            textBox7b.Clear();
-            textBox8b.Clear();
-            textBox9b.Clear();
             textBox_filename.Clear();
+            if (encoding == "big5")
+            {
+                clear_textbox_id3_data_big5();
+            }
+            else if (encoding == "gb2312")
+            {
+                clear_textbox_id3_data_gb2312();
+            }
+            else if (encoding == "shift_jis")
+            {
+                clear_textbox_id3_data_shift_jis();
+            }
+            else
+            {
+                clear_textbox_id3_data_big5();
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-            clear_textbox_id3_data();
+            textBox_filename.Clear();
+            clear_textbox_id3_data_big5();
+            clear_textbox_id3_data_gb2312();
+            clear_textbox_id3_data_shift_jis();
+            //clear_textbox_id3_data();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -832,11 +959,41 @@ namespace vcs_ID3Tag
 
             if (genre <= 125)
             {
-                textBox8.Text = genre.ToString() + "  " + genre_data[genre, 1] + "  " + genre_data[genre, 2];
+                if (encoding == "big5")
+                {
+                    textBox18.Text = genre.ToString() + "  " + genre_data[genre, 1] + "  " + genre_data[genre, 2];
+                }
+                else if (encoding == "gb2312")
+                {
+                    textBox28.Text = genre.ToString() + "  " + genre_data[genre, 1] + "  " + genre_data[genre, 2];
+                }
+                else if (encoding == "shift_jis")
+                {
+                    textBox38.Text = genre.ToString() + "  " + genre_data[genre, 1] + "  " + genre_data[genre, 2];
+                }
+                else
+                {
+                    textBox18.Text = genre.ToString() + "  " + genre_data[genre, 1] + "  " + genre_data[genre, 2];
+                }
             }
             else
             {
-                textBox8.Text = genre.ToString() + "  無資料";
+                if (encoding == "big5")
+                {
+                    textBox18.Text = genre.ToString() + "  無資料";
+                }
+                else if (encoding == "gb2312")
+                {
+                    textBox28.Text = genre.ToString() + "  無資料";
+                }
+                else if (encoding == "shift_jis")
+                {
+                    textBox38.Text = genre.ToString() + "  無資料";
+                }
+                else
+                {
+                    textBox18.Text = genre.ToString() + "  無資料";
+                }
             }
         }
 
@@ -849,42 +1006,162 @@ namespace vcs_ID3Tag
             {
                 if (id == "TIT2")
                 {
-                    textBox2b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox12b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox22b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox32b.Text = data;
+                    }
+                    else
+                    {
+                        textBox12b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "TPE1")
                 {
-                    textBox3b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox13b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox23b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox33b.Text = data;
+                    }
+                    else
+                    {
+                        textBox13b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "TALB")
                 {
-                    textBox4b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox14b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox24b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox34b.Text = data;
+                    }
+                    else
+                    {
+                        textBox14b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "TYER")
                 {
-                    textBox5b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox15b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox25b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox35b.Text = data;
+                    }
+                    else
+                    {
+                        textBox15b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "COMM")
                 {
-                    textBox6b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox16b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox26b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox36b.Text = data;
+                    }
+                    else
+                    {
+                        textBox16b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "TRCK")
                 {
-                    textBox7b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox17b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox27b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox37b.Text = data;
+                    }
+                    else
+                    {
+                        textBox17b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "TCON")
                 {
-                    textBox8b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox18b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox28b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox38b.Text = data;
+                    }
+                    else
+                    {
+                        textBox18b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == "TLEN")
                 {
-                    textBox9b.Text = data;
+                    if (encoding == "big5")
+                    {
+                        textBox19b.Text = data;
+                    }
+                    else if (encoding == "gb2312")
+                    {
+                        textBox29b.Text = data;
+                    }
+                    else if (encoding == "shift_jis")
+                    {
+                        textBox39b.Text = data;
+                    }
+                    else
+                    {
+                        textBox19b.Text = data;
+                    }
                     found_frame_id = true;
                 }
                 else if (id == frame_data[i, 0])
@@ -1040,6 +1317,114 @@ namespace vcs_ID3Tag
                 richTextBox1.Text += "無ID3 v1資料\t不可修改\n";
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            setup_item_location();
+        }
+
+        void setup_item_location()
+        {
+            int x_st = 85;
+            int y_st = 210;
+            int offset_x = 255;
+            int offset_y = 35;
+            textBox11.Location = new Point(x_st, y_st + offset_y * 0);
+            textBox12.Location = new Point(x_st, y_st + offset_y * 1);
+            textBox13.Location = new Point(x_st, y_st + offset_y * 2);
+            textBox14.Location = new Point(x_st, y_st + offset_y * 3);
+            textBox15.Location = new Point(x_st, y_st + offset_y * 4);
+            textBox16.Location = new Point(x_st, y_st + offset_y * 5);
+            textBox17.Location = new Point(x_st, y_st + offset_y * 6);
+            textBox18.Location = new Point(x_st, y_st + offset_y * 7);
+
+            textBox11b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 0);
+            textBox12b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 1);
+            textBox13b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 2);
+            textBox14b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 3);
+            textBox15b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 4);
+            textBox16b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 5);
+            textBox17b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 6);
+            textBox18b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 7);
+            textBox19b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 8);
+
+
+            textBox21.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 0);
+            textBox22.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 1);
+            textBox23.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 2);
+            textBox24.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 3);
+            textBox25.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 4);
+            textBox26.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 5);
+            textBox27.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 6);
+            textBox28.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 7);
+
+            textBox21b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 0);
+            textBox22b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 1);
+            textBox23b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 2);
+            textBox24b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 3);
+            textBox25b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 4);
+            textBox26b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 5);
+            textBox27b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 6);
+            textBox28b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 7);
+            textBox29b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 8);
+
+            textBox31.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 0);
+            textBox32.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 1);
+            textBox33.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 2);
+            textBox34.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 3);
+            textBox35.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 4);
+            textBox36.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 5);
+            textBox37.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 6);
+            textBox38.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 7);
+
+            textBox31b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 0);
+            textBox32b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 1);
+            textBox33b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 2);
+            textBox34b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 3);
+            textBox35b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 4);
+            textBox36b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 5);
+            textBox37b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 6);
+            textBox38b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 7);
+            textBox39b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 8);
+
+            textBox_filename.Location = new Point(x_st + offset_x * 0, y_st - offset_y * 1);
+            button4.Location = new Point(x_st + offset_x * 6-button4.Size.Width-5, y_st - offset_y * 1);
+
+            label0.Text = "Filename";
+            label1.Text = "Header";
+            label2.Text = "Title";
+            label3.Text = "Artist";
+            label4.Text = "Album";
+            label5.Text = "Year";
+            label6.Text = "Comment";
+            label7.Text = "Track";
+            label8.Text = "Genre";
+            label9.Text = "Length";
+
+            int left = 70;
+            label0.Location = new Point(x_st - left, y_st - offset_y * 1);
+            label1.Location = new Point(x_st - left, y_st + offset_y * 0);
+            label2.Location = new Point(x_st - left, y_st + offset_y * 1);
+            label3.Location = new Point(x_st - left, y_st + offset_y * 2);
+            label4.Location = new Point(x_st - left, y_st + offset_y * 3);
+            label5.Location = new Point(x_st - left, y_st + offset_y * 4);
+            label6.Location = new Point(x_st - left, y_st + offset_y * 5);
+            label7.Location = new Point(x_st - left, y_st + offset_y * 6);
+            label8.Location = new Point(x_st - left, y_st + offset_y * 7);
+            label9.Location = new Point(x_st - left, y_st + offset_y * 8);
+
+            cb_raw_data.Location = new Point(x_st, y_st + offset_y * 9);
+            richTextBox1.Location = new Point(x_st, y_st + offset_y * 10);
+
+            richTextBox1.Size = new Size(250 * 6 + 5 * 5, 300);
+
+            this.Size = new Size(1650, 920);
+
+
+        }
+
+
+
 
 
     }

@@ -1062,6 +1062,49 @@ namespace vcs_test_all_12_DateTime
 
         }
 
+        private void button33_Click(object sender, EventArgs e)
+        {
+            System.Globalization.ChineseLunisolarCalendar chinseCaleander =//創建日歷對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農歷計算，而日和月按陰陽歷計算。
+new System.Globalization.ChineseLunisolarCalendar();
+            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
+            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
+            string Tree = TreeYear.Substring(chinseCaleander.//得到生肖信息
+                GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
+            //Substring(x,y)從此實例檢索子字符串。 子字符串從指定的字符位置開始且具有指定的長度
+            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
+
+
+            richTextBox1.Text += "今天是： "//顯示星期信息
+                + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
+
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+            var japaneseCal = new JapaneseCalendar();
+            var jaJp = new CultureInfo("ja-JP");
+            jaJp.DateTimeFormat.Calendar = japaneseCal;
+
+            var date = new DateTime(1905, 2, 12);
+            richTextBox1.Text += "Gregorian calendar date: " + date.ToString("d") + "\n";
+
+            // Call the ToString(IFormatProvider) method.
+            richTextBox1.Text += "Japanese calendar date: " + date.ToString("d", jaJp) + "\n";
+
+
+
+            var date2 = new DateTime(2, 5, 10, japaneseCal);
+
+            richTextBox1.Text += "Gregorian calendar date: " + date2.ToString("d") + "\n";
+            richTextBox1.Text += "Japanese calendar date: " + date2.ToString("d", jaJp) + "\n";
+
+            richTextBox1.Text += "Japanese calendar date: " + DateTime.Now.ToString("d", jaJp) + "\n";
+
+
+
+
+        }
+
 
    
     }
