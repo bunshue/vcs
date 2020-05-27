@@ -102,29 +102,29 @@ namespace vcs_translate3
 
             //byte[]轉成string：
             str = Encoding.Default.GetString(byteArray);
-            richTextBox1.Text += "用預設編碼轉成字串\t" + str + "\n";
+            richTextBox1.Text += "用預設編碼轉成字串\t\t\t" + str + "\n";
 
-            richTextBox1.Text += "日語(Shift-JIS)解碼\n";
+            richTextBox1.Text += "日語(Shift-JIS)解碼\t\t\t";
             str = Encoding.GetEncoding("shift_jis").GetString(byteArray);	//指名使用日語(Shift-JIS)解碼, 把拜列轉成字串
             richTextBox1.Text += str + "\n";
 
-            richTextBox1.Text += "簡體中文(GB2312)解碼\n";
+            richTextBox1.Text += "簡體中文(GB2312)解碼\t\t\t";
             str = Encoding.GetEncoding("gb2312").GetString(byteArray);	//指名使用簡體中文(GB2312)解碼, 把拜列轉成字串
             richTextBox1.Text += str + "\n";
 
-            richTextBox1.Text += "正體中文(Big5)解碼\n";
+            richTextBox1.Text += "正體中文(Big5)解碼\t\t\t";
             str = Encoding.GetEncoding("big5").GetString(byteArray);	//指名使用正體中文(Big5)解碼, 把拜列轉成字串
             richTextBox1.Text += str + "\n";
 
-            richTextBox1.Text += "Unicode解碼\n";
+            richTextBox1.Text += "Unicode解碼\t\t\t\t";
             str = Encoding.GetEncoding("utf-16").GetString(byteArray);	//指名使用Unicode解碼解碼, 把拜列轉成字串
             richTextBox1.Text += str + "\n";
 
-            richTextBox1.Text += "Unicode (Big-Endian)解碼\n";
+            richTextBox1.Text += "Unicode (Big-Endian)解碼\t\t\t";
             str = Encoding.GetEncoding("utf-16BE").GetString(byteArray);	//指名使用Unicode (Big-Endian)解碼, 把拜列轉成字串
             richTextBox1.Text += str + "\n";
 
-            richTextBox1.Text += "Unicode (UTF-8)解碼\n";
+            richTextBox1.Text += "Unicode (UTF-8)解碼\t\t\t";
             str = Encoding.GetEncoding("utf-8").GetString(byteArray);	//指名使用Unicode (UTF-8)解碼, 把拜列轉成字串
             richTextBox1.Text += str + "\n";
         }

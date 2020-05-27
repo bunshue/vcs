@@ -418,7 +418,7 @@
             this.tb_string.Name = "tb_string";
             this.tb_string.Size = new System.Drawing.Size(770, 30);
             this.tb_string.TabIndex = 36;
-            this.tb_string.Text = "都はるみ全曲集２";
+            this.tb_string.Text = "黃河遠上白雲間，一片孤城萬仞山。";
             // 
             // label5
             // 
@@ -447,7 +447,7 @@
             this.tb_number.Name = "tb_number";
             this.tb_number.Size = new System.Drawing.Size(770, 30);
             this.tb_number.TabIndex = 38;
-            this.tb_number.Text = "A5CE42696735BD73BD58C2E0A6A8A672A6EA";
+            this.tb_number.Text = "C7BCB5D1BACEED9AD4B997EEC1F8A3ACB4BAEF4CB2BBB6C8D3F1E954EA50A1A3";
             // 
             // button22
             // 

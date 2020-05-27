@@ -18,6 +18,8 @@ namespace vcs_ID3Tag
             InitializeComponent();
         }
 
+        bool flag_debug_message = true;    //print some message
+
         string encoding = "big5";
 
         string[,] frame_data = new string[,] { 
@@ -150,6 +152,8 @@ namespace vcs_ID3Tag
             int i;
             int len;
             len = data.Length;
+            if (len > 128)
+                len = 128;
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += data[i].ToString("X2");
@@ -164,6 +168,8 @@ namespace vcs_ID3Tag
         void print_data(byte[] data, int start, int len)
         {
             int i;
+            if (len > 128)
+                len = 128;
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += data[start + i].ToString("X2");
@@ -229,8 +235,12 @@ namespace vcs_ID3Tag
             while(true)
             {
                 k++;
-                //richTextBox1.Text += "\n第 " + k.ToString() + " 筆資料\t";
-                //print_data(Info, currentIndex, 10);
+                if (flag_debug_message == true)
+                {
+                    richTextBox1.Text += "\n第 " + k.ToString() + " 筆資料\t";
+                    //印出此frame id的檔頭(10拜)
+                    print_data(Info, currentIndex, 10);
+                }
 
                 if ((Info[currentIndex] == 0x00) && (Info[currentIndex + 1] == 0x00) && (Info[currentIndex + 2] == 0x00) && (Info[currentIndex + 3] == 0x00))
                 {
@@ -242,10 +252,28 @@ namespace vcs_ID3Tag
                 {
                     frame_id += (char)Info[position];
                 }
+
+                if (flag_debug_message == true)
+                {
+                    richTextBox1.Text += "ID\t\tpos = 0x" + currentIndex.ToString("X2") + "=" + currentIndex.ToString() + "\t\t";
+                    for (position = currentIndex; position < currentIndex + 4; position++)
+                    {
+                        richTextBox1.Text += Info[position].ToString("X2") + " ";
+                    }
+                    richTextBox1.Text += "\t\t";
+                    for (position = currentIndex; position < currentIndex + 4; position++)
+                    {
+                        richTextBox1.Text += (char)Info[position];
+                    }
+                    richTextBox1.Text += "\t\t";
+                }
+
                 currentIndex = position;
 
                 int tag_size = (((Info[currentIndex++] & 0xff) << 24) + ((Info[currentIndex++] & 0xff) << 16) + ((Info[currentIndex++] & 0xff) << 8) + (Info[currentIndex++] & 0xff));
-                //richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
+
+                if (flag_debug_message == true)
+                    richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
 
                 currentIndex += 2;  //skip flags
 
@@ -254,11 +282,11 @@ namespace vcs_ID3Tag
 
                 if (frame_id == "MCDI")
                 {
-                    richTextBox1.Text += frame_id + "\t\tskip\n";
+                    richTextBox1.Text += frame_id + "\t\tlen = " + tag_size.ToString() + "\t\tskip\n";
                 }
                 else if (frame_id == "APIC")
                 {
-                    richTextBox1.Text += frame_id + "\t\tskip\n";
+                    richTextBox1.Text += frame_id + "\t\tlen = " + tag_size.ToString() + "\t\tskip\n";
                 }
                 else
                 {
@@ -267,13 +295,21 @@ namespace vcs_ID3Tag
                     int j = 0;
                     for (i = currentIndex; i < currentIndex + tag_size; i++)
                     {
-                        if (Info[i] == 0x00)
-                        {
-                        }
-                        else
+                        if (encoding == "utf-16")
                         {
                             data[j] = Info[i];
                             j++;
+                        }
+                        else
+                        {
+                            if (Info[i] == 0x00)
+                            {
+                            }
+                            else
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
                         }
                     }
 
@@ -284,6 +320,20 @@ namespace vcs_ID3Tag
                     richTextBox1.Text += "------" + str2 + "-----------";
                     richTextBox1.Text += "\n";
                     */
+
+                    if (flag_debug_message == true)
+                    {
+                        richTextBox1.Text += frame_id + "\t\t";
+                        for (i = 0; i < tag_size; i++)
+                        {
+                            richTextBox1.Text += data[i].ToString("X2");
+                            if ((i % 32) == 31)
+                                richTextBox1.Text += "\n";
+                            else
+                                richTextBox1.Text += " ";
+                        }
+                        richTextBox1.Text += "\n";
+                    }
 
                     frame_id_data = this.byteToString(data);
 
@@ -306,6 +356,20 @@ namespace vcs_ID3Tag
                     else if (frame_id == "COMM")
                     {
                         mp3InfoV2.Comment = frame_id_data;
+
+                        if (flag_debug_message == true)
+                        {
+                            richTextBox1.Text += "COMM data :\n";
+                            for (i = 0; i < tag_size; i++)
+                            {
+                                richTextBox1.Text += data[i].ToString("X2");
+                                if ((i % 32) == 31)
+                                    richTextBox1.Text += "\n";
+                                else
+                                    richTextBox1.Text += " ";
+                            }
+                            richTextBox1.Text += "\ndata :\t\t" + frame_id_data + "\n";
+                        }
                     }
                     else if (frame_id == "TRCK")
                     {
@@ -321,7 +385,8 @@ namespace vcs_ID3Tag
                     }
                     else
                     {
-                        richTextBox1.Text += "未定義:\t" + frame_id + "\n";
+                        if (flag_debug_message == true)
+                            richTextBox1.Text += "未定義:\t" + frame_id + "\n";
                     }
 
                     print_data_frame(frame_id, frame_id_data);
@@ -473,7 +538,8 @@ namespace vcs_ID3Tag
             //Encoding enc = Encoding.GetEncoding("GB2312");
             Encoding enc = Encoding.GetEncoding(encoding);
             string str = enc.GetString(b);
-            str = str.Substring(0, str.IndexOf('\0') >= 0 ? str.IndexOf('\0') : str.Length);//去掉無用字元
+            if (encoding != "utf-16")
+                str = str.Substring(0, str.IndexOf('\0') >= 0 ? str.IndexOf('\0') : str.Length);//去掉無用字元
             return str;
         }
 
@@ -517,6 +583,7 @@ namespace vcs_ID3Tag
         {
             clear_textbox_id3_data();
             textBox_filename.Text = filename;
+            richTextBox1.Text += "檔名:\t\t" + filename + "\n";
             get_ID3v1Tag(filename, encoding);
             get_ID3v2Tag(filename, encoding);
         }
@@ -646,18 +713,13 @@ namespace vcs_ID3Tag
                 richTextBox1.Text += "minor version : " + header[4].ToString() + "\n";
                 richTextBox1.Text += "flags : " + header[5].ToString("X2") + "\n";
                 */
-
                 int tag_size = (((header[6] & 0x7f) << 21) + ((header[7] & 0x7f) << 14) + ((header[8] & 0x7f) << 7) + (header[9] & 0x7f));
-                //richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
+                richTextBox1.Text += "ID3 tag_size = " + tag_size.ToString() + "\n";
 
                 byte[] Info = getID3v2Data(filename, tag_size);
                 mp3_information = getMp3InfoV2(Info);
 
-
                 print_ID3TagV2(mp3_information);
-
-
-
             }
             else
             {
@@ -1164,6 +1226,11 @@ namespace vcs_ID3Tag
                     }
                     found_frame_id = true;
                 }
+                else if (id == "????")
+                {
+                    //skip data
+                    found_frame_id = true;
+                }
                 else if (id == frame_data[i, 0])
                 {
                     richTextBox1.Text += frame_data[i, 0] + "\t" + frame_data[i, 1] + "\t" + data + "\n";
@@ -1423,9 +1490,11 @@ namespace vcs_ID3Tag
 
         }
 
-
-
-
-
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_id3\unicode_ナレーション(岡本妙子).mp3";       //一定要有@
+            encoding = "utf-16";
+            get_ID3Tag(filename, encoding);
+        }
     }
 }
