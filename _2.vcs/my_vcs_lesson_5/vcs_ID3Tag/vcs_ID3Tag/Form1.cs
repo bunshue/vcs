@@ -153,7 +153,10 @@ namespace vcs_ID3Tag
             int len;
             len = data.Length;
             if (len > 128)
+            {
+                richTextBox1.Text += "xxxxxx len = " + len.ToString() + "\n";
                 len = 128;
+            }
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += data[i].ToString("X2");
@@ -169,7 +172,10 @@ namespace vcs_ID3Tag
         {
             int i;
             if (len > 128)
+            {
+                richTextBox1.Text += "xxxxxx len = " + len.ToString() + "\n";
                 len = 128;
+            }
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += data[start + i].ToString("X2");
@@ -288,6 +294,10 @@ namespace vcs_ID3Tag
                 {
                     richTextBox1.Text += frame_id + "\t\tlen = " + tag_size.ToString() + "\t\tskip\n";
                 }
+                else if (frame_id == "GEOB")
+                {
+                    richTextBox1.Text += frame_id + "\t\tlen = " + tag_size.ToString() + "\t\tskip\n";
+                }
                 else
                 {
                     //獲取字串資料
@@ -295,21 +305,13 @@ namespace vcs_ID3Tag
                     int j = 0;
                     for (i = currentIndex; i < currentIndex + tag_size; i++)
                     {
-                        if (encoding == "utf-16")
+                        if (Info[i] == 0x00)
                         {
-                            data[j] = Info[i];
-                            j++;
                         }
                         else
                         {
-                            if (Info[i] == 0x00)
-                            {
-                            }
-                            else
-                            {
-                                data[j] = Info[i];
-                                j++;
-                            }
+                            data[j] = Info[i];
+                            j++;
                         }
                     }
 
@@ -324,7 +326,10 @@ namespace vcs_ID3Tag
                     if (flag_debug_message == true)
                     {
                         richTextBox1.Text += frame_id + "\t\t";
-                        for (i = 0; i < tag_size; i++)
+                        int len = tag_size;
+                        if (len > 100)
+                            len = 100;
+                        for (i = 0; i < len; i++)
                         {
                             richTextBox1.Text += data[i].ToString("X2");
                             if ((i % 32) == 31)
@@ -339,15 +344,141 @@ namespace vcs_ID3Tag
 
                     if (frame_id == "TIT2")
                     {
-                        mp3InfoV2.Title = frame_id_data;
+                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
+                        {
+                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                            data = new byte[tag_size - 3];
+                            j = 0;
+                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
+                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                            mp3InfoV2.Title = str;
+                            frame_id_data = str;
+                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
+
+                            if (encoding == "big5")
+                            {
+                                textBox12b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "gb2312")
+                            {
+                                textBox22b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "shift_jis")
+                            {
+                                textBox32b.BackColor = Color.Pink;
+                            }
+                            else
+                            {
+                                textBox12b.BackColor = Color.Pink;
+                            }
+                        }
+                        else
+                        {
+                            mp3InfoV2.Title = frame_id_data;
+                        }
+                    }
+                    else if (frame_id == "TPE2")
+                    {
+                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
+                        {
+                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                            data = new byte[tag_size - 3];
+                            j = 0;
+                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
+                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                            frame_id_data = str;
+                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
+                        }
+                        else
+                        {
+                            richTextBox1.Text += frame_id + "\t\t" + frame_id_data + "\n";
+                        }
                     }
                     else if (frame_id == "TPE1")
                     {
-                        mp3InfoV2.Artist = frame_id_data;
+                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
+                        {
+                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                            data = new byte[tag_size - 3];
+                            j = 0;
+                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
+                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                            mp3InfoV2.Title = str;
+                            frame_id_data = str;
+                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
+
+                            if (encoding == "big5")
+                            {
+                                textBox13b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "gb2312")
+                            {
+                                textBox23b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "shift_jis")
+                            {
+                                textBox33b.BackColor = Color.Pink;
+                            }
+                            else
+                            {
+                                textBox13b.BackColor = Color.Pink;
+                            }
+                        }
+                        else
+                        {
+                            mp3InfoV2.Artist = frame_id_data;
+                        }
                     }
                     else if (frame_id == "TALB")
                     {
-                        mp3InfoV2.Album = frame_id_data;
+                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
+                        {
+                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                            data = new byte[tag_size - 3];
+                            j = 0;
+                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
+                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                            mp3InfoV2.Title = str;
+                            frame_id_data = str;
+                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
+
+                            if (encoding == "big5")
+                            {
+                                textBox14b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "gb2312")
+                            {
+                                textBox24b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "shift_jis")
+                            {
+                                textBox34b.BackColor = Color.Pink;
+                            }
+                            else
+                            {
+                                textBox14b.BackColor = Color.Pink;
+                            }
+                        }
+                        else
+                        {
+                            mp3InfoV2.Album = frame_id_data;
+                        }
                     }
                     else if (frame_id == "TYER")
                     {
@@ -355,12 +486,66 @@ namespace vcs_ID3Tag
                     }
                     else if (frame_id == "COMM")
                     {
-                        mp3InfoV2.Comment = frame_id_data;
+                        if ((data[4] == 0xFF) && (data[5] == 0xFE))
+                        {
+                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                            j = 0;
+                            for (i = currentIndex + 10; i < currentIndex + tag_size; i++)
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
+                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                            mp3InfoV2.Comment = str;
+                            frame_id_data = str;
+                            richTextBox1.Text += "COMM\t\t" + str + "\n";
+
+                            if (encoding == "big5")
+                            {
+                                textBox16b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "gb2312")
+                            {
+                                textBox26b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "shift_jis")
+                            {
+                                textBox36b.BackColor = Color.Pink;
+                            }
+                            else
+                            {
+                                textBox16b.BackColor = Color.Pink;
+                            }
+                        }
+                        else
+                        {
+                            mp3InfoV2.Comment = frame_id_data;
+
+                            if (encoding == "big5")
+                            {
+                                textBox16b.BackColor = Color.White;
+                            }
+                            else if (encoding == "gb2312")
+                            {
+                                textBox26b.BackColor = Color.White;
+                            }
+                            else if (encoding == "shift_jis")
+                            {
+                                textBox36b.BackColor = Color.White;
+                            }
+                            else
+                            {
+                                textBox16b.BackColor = Color.White;
+                            }
+                        }
 
                         if (flag_debug_message == true)
                         {
                             richTextBox1.Text += "COMM data :\n";
-                            for (i = 0; i < tag_size; i++)
+                            int len = tag_size;
+                            if (len > 100)
+                                len = 100;
+                            for (i = 0; i < len; i++)
                             {
                                 richTextBox1.Text += data[i].ToString("X2");
                                 if ((i % 32) == 31)
@@ -373,7 +558,42 @@ namespace vcs_ID3Tag
                     }
                     else if (frame_id == "TRCK")
                     {
-                        mp3InfoV2.Track = frame_id_data;
+                        if ((tag_size > 2) && ((data[1] == 0xFF) && (data[2] == 0xFE)))
+                        {
+                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                            data = new byte[tag_size - 3];
+                            j = 0;
+                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                            {
+                                data[j] = Info[i];
+                                j++;
+                            }
+                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                            mp3InfoV2.Title = str;
+                            frame_id_data = str;
+                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
+
+                            if (encoding == "big5")
+                            {
+                                textBox17b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "gb2312")
+                            {
+                                textBox27b.BackColor = Color.Pink;
+                            }
+                            else if (encoding == "shift_jis")
+                            {
+                                textBox37b.BackColor = Color.Pink;
+                            }
+                            else
+                            {
+                                textBox17b.BackColor = Color.Pink;
+                            }
+                        }
+                        else
+                        {
+                            mp3InfoV2.Track = frame_id_data;
+                        }
                     }
                     else if (frame_id == "TCON")
                     {
@@ -385,8 +605,32 @@ namespace vcs_ID3Tag
                     }
                     else
                     {
+                        if (tag_size > 2)
+                        {
+                            if ((data[1] == 0xFF) && (data[2] == 0xFE))
+                            {
+                                //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
+                                data = new byte[tag_size - 3];
+                                j = 0;
+                                for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                                {
+                                    data[j] = Info[i];
+                                    j++;
+                                }
+                                string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                                frame_id_data = str;
+                                richTextBox1.Text += "Unicode\t\t" + frame_id + "\t\t" + str + "\n";
+
+                            }
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "xxxxx 未定義:\t" + frame_id + "\t\t" + frame_id_data + "\n";
+                            richTextBox1.Text += "xxxxx tag_size = " + tag_size.ToString() + "\n";
+                        }
+
                         if (flag_debug_message == true)
-                            richTextBox1.Text += "未定義:\t" + frame_id + "\n";
+                            richTextBox1.Text += "未定義:\t" + frame_id + "\t\t" + frame_id_data + "\n";
                     }
 
                     print_data_frame(frame_id, frame_id_data);
@@ -584,8 +828,10 @@ namespace vcs_ID3Tag
             clear_textbox_id3_data();
             textBox_filename.Text = filename;
             richTextBox1.Text += "檔名:\t\t" + filename + "\n";
-            get_ID3v1Tag(filename, encoding);
-            get_ID3v2Tag(filename, encoding);
+            if (cb_v1.Checked == true)
+                get_ID3v1Tag(filename, encoding);
+            if (cb_v2.Checked == true)
+                get_ID3v2Tag(filename, encoding);
         }
 
         void get_ID3v1Tag(string filename, string encoding)
@@ -687,6 +933,7 @@ namespace vcs_ID3Tag
             byte[] header = getID3v2Header(filename);
             if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
             {
+                mp3_information.identify = "ID3";
                 if (encoding == "big5")
                 {
                     textBox11b.Text = "ID3";
@@ -767,6 +1014,7 @@ namespace vcs_ID3Tag
             textBox17b.Clear();
             textBox18b.Clear();
             textBox19b.Clear();
+            textBox16b.BackColor = Color.White;
         }
 
         void clear_textbox_id3_data_gb2312()
@@ -788,6 +1036,7 @@ namespace vcs_ID3Tag
             textBox27b.Clear();
             textBox28b.Clear();
             textBox29b.Clear();
+            textBox26b.BackColor = Color.White;
         }
 
         void clear_textbox_id3_data_shift_jis()
@@ -809,6 +1058,7 @@ namespace vcs_ID3Tag
             textBox37b.Clear();
             textBox38b.Clear();
             textBox39b.Clear();
+            textBox36b.BackColor = Color.White;
         }
 
         void clear_textbox_id3_data()
@@ -839,7 +1089,6 @@ namespace vcs_ID3Tag
             clear_textbox_id3_data_big5();
             clear_textbox_id3_data_gb2312();
             clear_textbox_id3_data_shift_jis();
-            //clear_textbox_id3_data();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1248,6 +1497,7 @@ namespace vcs_ID3Tag
 
         void print_ID3TagV1(Mp3InfoV1 mp3_information)
         {
+            richTextBox1.Text += "\nID3TagV1 資料 :\n";
             richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
             richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
             richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
@@ -1265,6 +1515,7 @@ namespace vcs_ID3Tag
 
         void print_ID3TagV2(Mp3InfoV2 mp3_information)
         {
+            richTextBox1.Text += "\nID3TagV2 資料 :\n";
             richTextBox1.Text += "identify : " + mp3_information.identify + "\n";
             richTextBox1.Text += "Title : " + mp3_information.Title + "\n";
             richTextBox1.Text += "Artist : " + mp3_information.Artist + "\n";
@@ -1493,7 +1744,7 @@ namespace vcs_ID3Tag
         private void button10_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_id3\unicode_ナレーション(岡本妙子).mp3";       //一定要有@
-            encoding = "utf-16";
+            encoding = "big5";
             get_ID3Tag(filename, encoding);
         }
     }
