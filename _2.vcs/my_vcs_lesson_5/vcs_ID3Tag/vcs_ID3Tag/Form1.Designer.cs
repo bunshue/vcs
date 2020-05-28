@@ -240,11 +240,11 @@
             // 
             this.cb_raw_data.AutoSize = true;
             this.cb_raw_data.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_raw_data.Location = new System.Drawing.Point(24, 611);
+            this.cb_raw_data.Location = new System.Drawing.Point(12, 120);
             this.cb_raw_data.Name = "cb_raw_data";
-            this.cb_raw_data.Size = new System.Drawing.Size(100, 23);
+            this.cb_raw_data.Size = new System.Drawing.Size(61, 23);
             this.cb_raw_data.TabIndex = 8;
-            this.cb_raw_data.Text = "Raw Data";
+            this.cb_raw_data.Text = "Raw";
             this.cb_raw_data.UseVisualStyleBackColor = true;
             // 
             // textBox11
@@ -813,7 +813,7 @@
             this.cb_v1.Checked = true;
             this.cb_v1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_v1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_v1.Location = new System.Drawing.Point(12, 85);
+            this.cb_v1.Location = new System.Drawing.Point(12, 80);
             this.cb_v1.Name = "cb_v1";
             this.cb_v1.Size = new System.Drawing.Size(46, 23);
             this.cb_v1.TabIndex = 79;
@@ -826,7 +826,7 @@
             this.cb_v2.Checked = true;
             this.cb_v2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_v2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_v2.Location = new System.Drawing.Point(12, 126);
+            this.cb_v2.Location = new System.Drawing.Point(12, 100);
             this.cb_v2.Name = "cb_v2";
             this.cb_v2.Size = new System.Drawing.Size(46, 23);
             this.cb_v2.TabIndex = 80;
@@ -906,7 +906,6 @@
             this.Controls.Add(this.textBox13);
             this.Controls.Add(this.textBox12);
             this.Controls.Add(this.textBox11);
-            this.Controls.Add(this.cb_raw_data);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -915,6 +914,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.cb_raw_data);
             this.Name = "Form1";
             this.Text = "ID3Tag";
             this.Load += new System.EventHandler(this.Form1_Load);

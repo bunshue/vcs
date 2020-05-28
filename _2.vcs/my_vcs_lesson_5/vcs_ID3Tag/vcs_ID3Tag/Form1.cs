@@ -18,8 +18,6 @@ namespace vcs_ID3Tag
             InitializeComponent();
         }
 
-        bool flag_debug_message = true;    //print some message
-
         string encoding = "big5";
 
         string[,] frame_data = new string[,] { 
@@ -152,10 +150,10 @@ namespace vcs_ID3Tag
             int i;
             int len;
             len = data.Length;
-            if (len > 128)
+            if (len > 50)
             {
-                richTextBox1.Text += "xxxxxx len = " + len.ToString() + "\n";
-                len = 128;
+                richTextBox1.Text += "print too long len = " + len.ToString() + "\n";
+                len = 50;
             }
             for (i = 0; i < len; i++)
             {
@@ -171,10 +169,10 @@ namespace vcs_ID3Tag
         void print_data(byte[] data, int start, int len)
         {
             int i;
-            if (len > 128)
+            if (len > 50)
             {
-                richTextBox1.Text += "xxxxxx len = " + len.ToString() + "\n";
-                len = 128;
+                richTextBox1.Text += "print too long len = " + len.ToString() + "\n";
+                len = 50;
             }
             for (i = 0; i < len; i++)
             {
@@ -241,7 +239,7 @@ namespace vcs_ID3Tag
             while(true)
             {
                 k++;
-                if (flag_debug_message == true)
+                if (cb_raw_data.Checked == true)
                 {
                     richTextBox1.Text += "\n第 " + k.ToString() + " 筆資料\t";
                     //印出此frame id的檔頭(10拜)
@@ -259,9 +257,9 @@ namespace vcs_ID3Tag
                     frame_id += (char)Info[position];
                 }
 
-                if (flag_debug_message == true)
+                if (cb_raw_data.Checked == true)
                 {
-                    richTextBox1.Text += "ID\t\tpos = 0x" + currentIndex.ToString("X2") + "=" + currentIndex.ToString() + "\t\t";
+                    richTextBox1.Text += "ID\t\tpos = 0x" + currentIndex.ToString("X2") + " = " + currentIndex.ToString() + "\t\t";
                     for (position = currentIndex; position < currentIndex + 4; position++)
                     {
                         richTextBox1.Text += Info[position].ToString("X2") + " ";
@@ -278,8 +276,8 @@ namespace vcs_ID3Tag
 
                 int tag_size = (((Info[currentIndex++] & 0xff) << 24) + ((Info[currentIndex++] & 0xff) << 16) + ((Info[currentIndex++] & 0xff) << 8) + (Info[currentIndex++] & 0xff));
 
-                if (flag_debug_message == true)
-                    richTextBox1.Text += "tag_size = " + tag_size.ToString() + "\n";
+                if (cb_raw_data.Checked == true)
+                    richTextBox1.Text += "tag_size = 0x" + tag_size.ToString("X2") + " = " + tag_size.ToString() + "\n";
 
                 currentIndex += 2;  //skip flags
 
@@ -323,7 +321,7 @@ namespace vcs_ID3Tag
                     richTextBox1.Text += "\n";
                     */
 
-                    if (flag_debug_message == true)
+                    if (cb_raw_data.Checked == true)
                     {
                         richTextBox1.Text += frame_id + "\t\t";
                         int len = tag_size;
@@ -358,23 +356,6 @@ namespace vcs_ID3Tag
                             mp3InfoV2.Title = str;
                             frame_id_data = str;
                             richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-
-                            if (encoding == "big5")
-                            {
-                                textBox12b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "gb2312")
-                            {
-                                textBox22b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "shift_jis")
-                            {
-                                textBox32b.BackColor = Color.Pink;
-                            }
-                            else
-                            {
-                                textBox12b.BackColor = Color.Pink;
-                            }
                         }
                         else
                         {
@@ -418,23 +399,6 @@ namespace vcs_ID3Tag
                             mp3InfoV2.Title = str;
                             frame_id_data = str;
                             richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-
-                            if (encoding == "big5")
-                            {
-                                textBox13b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "gb2312")
-                            {
-                                textBox23b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "shift_jis")
-                            {
-                                textBox33b.BackColor = Color.Pink;
-                            }
-                            else
-                            {
-                                textBox13b.BackColor = Color.Pink;
-                            }
                         }
                         else
                         {
@@ -457,23 +421,6 @@ namespace vcs_ID3Tag
                             mp3InfoV2.Title = str;
                             frame_id_data = str;
                             richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-
-                            if (encoding == "big5")
-                            {
-                                textBox14b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "gb2312")
-                            {
-                                textBox24b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "shift_jis")
-                            {
-                                textBox34b.BackColor = Color.Pink;
-                            }
-                            else
-                            {
-                                textBox14b.BackColor = Color.Pink;
-                            }
                         }
                         else
                         {
@@ -499,47 +446,13 @@ namespace vcs_ID3Tag
                             mp3InfoV2.Comment = str;
                             frame_id_data = str;
                             richTextBox1.Text += "COMM\t\t" + str + "\n";
-
-                            if (encoding == "big5")
-                            {
-                                textBox16b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "gb2312")
-                            {
-                                textBox26b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "shift_jis")
-                            {
-                                textBox36b.BackColor = Color.Pink;
-                            }
-                            else
-                            {
-                                textBox16b.BackColor = Color.Pink;
-                            }
                         }
                         else
                         {
                             mp3InfoV2.Comment = frame_id_data;
-
-                            if (encoding == "big5")
-                            {
-                                textBox16b.BackColor = Color.White;
-                            }
-                            else if (encoding == "gb2312")
-                            {
-                                textBox26b.BackColor = Color.White;
-                            }
-                            else if (encoding == "shift_jis")
-                            {
-                                textBox36b.BackColor = Color.White;
-                            }
-                            else
-                            {
-                                textBox16b.BackColor = Color.White;
-                            }
                         }
 
-                        if (flag_debug_message == true)
+                        if (cb_raw_data.Checked == true)
                         {
                             richTextBox1.Text += "COMM data :\n";
                             int len = tag_size;
@@ -572,23 +485,6 @@ namespace vcs_ID3Tag
                             mp3InfoV2.Title = str;
                             frame_id_data = str;
                             richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-
-                            if (encoding == "big5")
-                            {
-                                textBox17b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "gb2312")
-                            {
-                                textBox27b.BackColor = Color.Pink;
-                            }
-                            else if (encoding == "shift_jis")
-                            {
-                                textBox37b.BackColor = Color.Pink;
-                            }
-                            else
-                            {
-                                textBox17b.BackColor = Color.Pink;
-                            }
                         }
                         else
                         {
@@ -629,7 +525,7 @@ namespace vcs_ID3Tag
                             richTextBox1.Text += "xxxxx tag_size = " + tag_size.ToString() + "\n";
                         }
 
-                        if (flag_debug_message == true)
+                        if (cb_raw_data.Checked == true)
                             richTextBox1.Text += "未定義:\t" + frame_id + "\t\t" + frame_id_data + "\n";
                     }
 
@@ -825,6 +721,9 @@ namespace vcs_ID3Tag
 
         void get_ID3Tag(string filename, string encoding)
         {
+            this.Text = "讀取" + filename;
+            this.BackColor = Color.Pink;
+            richTextBox1.BackColor = Color.Pink;
             clear_textbox_id3_data();
             textBox_filename.Text = filename;
             richTextBox1.Text += "檔名:\t\t" + filename + "\n";
@@ -832,6 +731,9 @@ namespace vcs_ID3Tag
                 get_ID3v1Tag(filename, encoding);
             if (cb_v2.Checked == true)
                 get_ID3v2Tag(filename, encoding);
+            this.Text = "ID3Tag";
+            this.BackColor = Color.White;
+            richTextBox1.BackColor = Color.White;
         }
 
         void get_ID3v1Tag(string filename, string encoding)
@@ -1014,7 +916,6 @@ namespace vcs_ID3Tag
             textBox17b.Clear();
             textBox18b.Clear();
             textBox19b.Clear();
-            textBox16b.BackColor = Color.White;
         }
 
         void clear_textbox_id3_data_gb2312()
@@ -1036,7 +937,6 @@ namespace vcs_ID3Tag
             textBox27b.Clear();
             textBox28b.Clear();
             textBox29b.Clear();
-            textBox26b.BackColor = Color.White;
         }
 
         void clear_textbox_id3_data_shift_jis()
@@ -1058,7 +958,6 @@ namespace vcs_ID3Tag
             textBox37b.Clear();
             textBox38b.Clear();
             textBox39b.Clear();
-            textBox36b.BackColor = Color.White;
         }
 
         void clear_textbox_id3_data()
@@ -1731,7 +1630,6 @@ namespace vcs_ID3Tag
             label8.Location = new Point(x_st - left, y_st + offset_y * 7);
             label9.Location = new Point(x_st - left, y_st + offset_y * 8);
 
-            cb_raw_data.Location = new Point(x_st, y_st + offset_y * 9);
             richTextBox1.Location = new Point(x_st, y_st + offset_y * 10);
 
             richTextBox1.Size = new Size(250 * 6 + 5 * 5, 300);
