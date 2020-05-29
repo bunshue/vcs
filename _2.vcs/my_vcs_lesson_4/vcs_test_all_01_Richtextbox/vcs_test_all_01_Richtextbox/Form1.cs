@@ -69,7 +69,6 @@ namespace vcs_test_all_01_Richtextbox
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-            richTextBox2.Clear();
         }
 
         int value1 = 12345;
@@ -119,7 +118,6 @@ namespace vcs_test_all_01_Richtextbox
                 ((RichTextBox)sender).SelectAll();
             */
 
-
             if (tb_search.Text == "")
                 richTextBox2.Text += "未輸入搜尋內容\n";
             if (e.KeyCode == Keys.F3)
@@ -129,27 +127,21 @@ namespace vcs_test_all_01_Richtextbox
                 // 使用System.Text.RegularExpressions來搜尋指定字串
 
                 string strTxt = richTextBox1.Text;  // 準備要搜尋的來源字串
-                string strKey = tb_search.Text;     // 指定字串
+                string search_pattern = tb_search.Text; //欲搜尋的字串
 
-                richTextBox2.Text += "strKey = " + strKey + "\tLength = " + strKey.Length.ToString() + "\n";
+                richTextBox2.Text += "搜尋字串 : " + search_pattern + "\tLength = " + search_pattern.Length.ToString() + "\n";
 
-                //richTextBox2.Text += "strTxt = " + strTxt + "\n";
-                //richTextBox2.Text += "strKey = " + strKey + "\n";
+                System.Text.RegularExpressions.MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(strTxt, search_pattern);
 
-
-                System.Text.RegularExpressions.MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(strTxt, strKey);
                 foreach (System.Text.RegularExpressions.Match m in matches)
                 {
                     //lstIndex.Items.Add(m.Index);  // 將搜尋結果index顯示於ListBox中
-                    richTextBox2.Text += "aaa" + m.Index.ToString() + "\n";
+                    richTextBox2.Text += "找到, 在 m = " + m.Index.ToString() + "\n";
                     richTextBox1.SelectionStart = m.Index;
-                    richTextBox1.SelectionLength = strKey.Length;
+                    richTextBox1.SelectionLength = search_pattern.Length;
+                    richTextBox1.SelectionBackColor = Color.Red;
                 }
-
             }
-
-
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -526,6 +518,98 @@ namespace vcs_test_all_01_Richtextbox
         {
             this.Ranks();  //点击鼠标时显示
         }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            int textSize = int.Parse(textBox2.Text);
+            ApplyTextSize(textSize);
+
+        }
+
+        //改变字体大小
+        private void ApplyTextSize(int textSize)
+        {
+            FontFamily currentFontFamily;
+            Font newFont;
+            currentFontFamily = this.richTextBox1.SelectionFont.FontFamily;
+            newFont = new Font(currentFontFamily, textSize);
+            this.richTextBox1.SelectionFont = newFont;
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == 13)
+            {
+                int textSize = int.Parse(textBox2.Text);
+                ApplyTextSize(textSize);
+
+                e.Handled = true;
+                this.richTextBox1.Focus();
+            }  
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
+        }
+
+        int i = 0;
+        private void button39_Click(object sender, EventArgs e)
+        {
+            string search_pattern = tb_search.Text;
+            richTextBox2.Text += "搜尋 " + search_pattern + "\t";
+            i = richTextBox1.Find(search_pattern, i, RichTextBoxFinds.None);
+            if (i == -1)
+            {
+                richTextBox2.Text += "己至最後, 重新搜尋\n";
+            }
+            else
+            {
+                richTextBox2.Text += "找到, 在 i = " + i.ToString() + "\n";
+                richTextBox1.SelectionStart = i;
+                richTextBox1.SelectionLength = search_pattern.Length;
+                richTextBox1.SelectionBackColor = Color.Red;
+            }
+            i++;
+
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            string pattern1 = "風";
+            string pattern2 = "雨";
+            string pattern3 = "山";
+            string pattern4 = "人";
+
+            richTextBox2.Text += "搜尋關鍵字\n";
+            richTextBox2.Text += "pattern1 :\t" + pattern1 + "\n";
+            richTextBox2.Text += "pattern2 :\t" + pattern2 + "\n";
+            richTextBox2.Text += "pattern3 :\t" + pattern3 + "\n";
+            richTextBox2.Text += "pattern4 :\t" + pattern4 + "\n";
+
+            int position1;
+            int position2;
+            int position3;
+            int position4;
+            position1 = richTextBox1.Find(pattern1);
+            position2 = richTextBox1.Find(pattern2);
+            position3 = richTextBox1.Find(pattern3);
+            position4 = richTextBox1.Find(pattern4);
+
+
+            richTextBox2.Text += "找到 pattern1 :\t" + pattern1 + "\t在\t" + position1.ToString() + "\n";
+            richTextBox2.Text += "找到 pattern2 :\t" + pattern2 + "\t在\t" + position2.ToString() + "\n";
+            richTextBox2.Text += "找到 pattern3 :\t" + pattern3 + "\t在\t" + position3.ToString() + "\n";
+            richTextBox2.Text += "找到 pattern4 :\t" + pattern4 + "\t在\t" + position4.ToString() + "\n";
+
+        }
+
 
 
     }

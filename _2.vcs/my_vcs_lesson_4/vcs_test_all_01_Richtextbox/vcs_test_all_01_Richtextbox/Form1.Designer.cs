@@ -72,6 +72,11 @@
             this.button33 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.button35 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button37 = new System.Windows.Forms.Button();
+            this.button38 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -101,7 +106,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(1266, 429);
+            this.button2.Location = new System.Drawing.Point(1266, 394);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(67, 42);
             this.button2.TabIndex = 2;
@@ -462,7 +467,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(449, 499);
+            this.label1.Location = new System.Drawing.Point(449, 496);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(292, 24);
             this.label1.TabIndex = 54;
@@ -472,7 +477,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(449, 539);
+            this.label2.Location = new System.Drawing.Point(449, 529);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(257, 24);
             this.label2.TabIndex = 55;
@@ -489,9 +494,9 @@
             // tb_search
             // 
             this.tb_search.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(531, 577);
+            this.tb_search.Location = new System.Drawing.Point(438, 561);
             this.tb_search.Name = "tb_search";
-            this.tb_search.Size = new System.Drawing.Size(100, 33);
+            this.tb_search.Size = new System.Drawing.Size(68, 33);
             this.tb_search.TabIndex = 57;
             this.tb_search.Text = "雨";
             this.tb_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -542,11 +547,71 @@
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox2.Location = new System.Drawing.Point(568, 590);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(57, 33);
+            this.textBox2.TabIndex = 62;
+            this.textBox2.Text = "20";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            // 
+            // button37
+            // 
+            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button37.Location = new System.Drawing.Point(633, 590);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(134, 33);
+            this.button37.TabIndex = 63;
+            this.button37.Text = "設定字體大小";
+            this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
+            // 
+            // button38
+            // 
+            this.button38.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button38.Location = new System.Drawing.Point(1266, 589);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(67, 42);
+            this.button38.TabIndex = 64;
+            this.button38.Text = "clear";
+            this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
+            // 
+            // button39
+            // 
+            this.button39.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button39.Location = new System.Drawing.Point(513, 559);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(49, 33);
+            this.button39.TabIndex = 65;
+            this.button39.Text = "搜尋";
+            this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
+            // 
+            // button40
+            // 
+            this.button40.Font = new System.Drawing.Font("新細明體", 10F);
+            this.button40.Location = new System.Drawing.Point(513, 594);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(49, 48);
+            this.button40.TabIndex = 66;
+            this.button40.Text = "多重搜尋";
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1345, 644);
+            this.Controls.Add(this.button40);
+            this.Controls.Add(this.button39);
+            this.Controls.Add(this.button38);
+            this.Controls.Add(this.button37);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button35);
             this.Controls.Add(this.button34);
             this.Controls.Add(this.button2);
@@ -642,6 +707,11 @@
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button34;
         private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button37;
+        private System.Windows.Forms.Button button38;
+        private System.Windows.Forms.Button button39;
+        private System.Windows.Forms.Button button40;
     }
 }
 

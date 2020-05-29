@@ -62,93 +62,97 @@ namespace vcs_Bin2Hex
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();   //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\______test_files";            //預設開啟的路徑
+            openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string filename = openFileDialog1.FileName;
-                byte[] data;
-                long len;
-                int i;
-
-                if (mode == MODE_0)
+                richTextBox1.Text += "已選取檔案個數: " + openFileDialog1.FileNames.Length.ToString() + "\n\n";
+                foreach (var filename in openFileDialog1.FileNames)
                 {
-                    //全部binary讀取
-                    data = File.ReadAllBytes(filename);
-                    len = data.Length;
+                    byte[] data;
+                    long len;
+                    int i;
 
-                    richTextBox1.Text += "檔案名稱 : " + filename + "\n";
-                    richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
-                    //print_data(data, len);
-                }
-                else
-                {
-                    //前/後部分binary讀取
-                    data = File.ReadAllBytes(filename); //有全讀否? 如果檔案很大 但只要讀一點 會不會太浪費?
-                    long len_file = data.Length;
-
-                    FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                    //len = System.Convert.ToDouble(fs.Length);
-                    len = fs.Length;
-                    richTextBox1.Text += "讀取檔案 : " + filename + "\n";
-                    richTextBox1.Text += "檔案長度 : " + len_file.ToString() + "\n";
-                    len = int.Parse(textBox1.Text);
-                    richTextBox1.Text += "讀取長度 : " + len.ToString() + "\n";
-
-                    if (len > len_file)
-                        len = len_file;
-
-                    if (radioButton6.Checked == true)
+                    if (mode == MODE_0)
                     {
-                        richTextBox1.Text += "讀前面 " + len.ToString() + " 拜\n";
-                        BinaryReader br = new BinaryReader(fs);
+                        //全部binary讀取
+                        data = File.ReadAllBytes(filename);
+                        len = data.Length;
 
-                        //讀取位元陣列
-                        data = br.ReadBytes((int)len);    //用ReadBytes讀取檔案的前幾拜(循序)
-
-                        //釋放資源
-                        br.Close();
-                        fs.Close();
+                        richTextBox1.Text += "檔案名稱 : " + filename + "\n";
+                        richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
+                        //print_data(data, len);
                     }
                     else
                     {
-                        richTextBox1.Text += "讀後面 " + len.ToString() + " 拜\n";
-                        Stream stream = fs;
-                        stream.Seek(-len, SeekOrigin.End);
-                        int result = 0;
-                        data = new byte[len];
-                        result = stream.Read(data, 0, (int)len);
-                        fs.Close();
-                        stream.Close();
-                    }
-                }
+                        //前/後部分binary讀取
+                        data = File.ReadAllBytes(filename); //有全讀否? 如果檔案很大 但只要讀一點 會不會太浪費?
+                        long len_file = data.Length;
 
-                if (radioButton8.Checked == true)
-                {
-                    //顯示only
-                    richTextBox1.Text += "印出資料內容, 長度 " + data.Length.ToString() + " 拜\n";
-                    print_data(data);
-                }
-                else
-                {
-                    //存檔only
+                        FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                        //len = System.Convert.ToDouble(fs.Length);
+                        len = fs.Length;
+                        richTextBox1.Text += "讀取檔案 : " + filename + "\n";
+                        richTextBox1.Text += "檔案長度 : " + len_file.ToString() + "\n";
+                        len = int.Parse(textBox1.Text);
+                        richTextBox1.Text += "讀取長度 : " + len.ToString() + "\n";
 
-                    filename = filename + "." + new_line.ToString() + ".txt";
+                        if (len > len_file)
+                            len = len_file;
 
-                    FileStream fsw = new FileStream(filename, FileMode.Create, FileAccess.Write);
-                    StreamWriter sw;
+                        if (radioButton6.Checked == true)
+                        {
+                            richTextBox1.Text += "讀前面 " + len.ToString() + " 拜\n";
+                            BinaryReader br = new BinaryReader(fs);
 
-                    sw = new StreamWriter(fsw, Encoding.GetEncoding("unicode"));   //指名編碼格式
+                            //讀取位元陣列
+                            data = br.ReadBytes((int)len);    //用ReadBytes讀取檔案的前幾拜(循序)
 
-                    for (i = 0; i < len; i++)
-                    {
-                        sw.Write(data[i].ToString("X2"));
-                        if ((i % new_line) == (new_line - 1))
-                            sw.Write(data[i].ToString("\n"));
+                            //釋放資源
+                            br.Close();
+                            fs.Close();
+                        }
                         else
-                            sw.Write(data[i].ToString(" "));
+                        {
+                            richTextBox1.Text += "讀後面 " + len.ToString() + " 拜\n";
+                            Stream stream = fs;
+                            stream.Seek(-len, SeekOrigin.End);
+                            int result = 0;
+                            data = new byte[len];
+                            result = stream.Read(data, 0, (int)len);
+                            fs.Close();
+                            stream.Close();
+                        }
                     }
 
-                    sw.Close();
-                    richTextBox1.Text += "存檔完成, 檔名 : " + filename + "\n\n";
+                    if (radioButton8.Checked == true)
+                    {
+                        //顯示only
+                        richTextBox1.Text += "印出資料內容, 長度 " + data.Length.ToString() + " 拜\n";
+                        print_data(data);
+                    }
+                    else
+                    {
+                        //存檔only
+
+                        string filename2 = filename + "." + new_line.ToString() + ".txt";
+
+                        FileStream fsw = new FileStream(filename2, FileMode.Create, FileAccess.Write);
+                        StreamWriter sw;
+
+                        sw = new StreamWriter(fsw, Encoding.GetEncoding("unicode"));   //指名編碼格式
+
+                        for (i = 0; i < len; i++)
+                        {
+                            sw.Write(data[i].ToString("X2"));
+                            if ((i % new_line) == (new_line - 1))
+                                sw.Write(data[i].ToString("\n"));
+                            else
+                                sw.Write(data[i].ToString(" "));
+                        }
+
+                        sw.Close();
+                        richTextBox1.Text += "存檔完成, 檔名 : " + filename2 + "\n\n";
+                    }
                 }
             }
             else

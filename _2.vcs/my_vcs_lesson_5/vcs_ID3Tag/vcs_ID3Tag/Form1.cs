@@ -338,94 +338,32 @@ namespace vcs_ID3Tag
                         richTextBox1.Text += "\n";
                     }
 
-                    frame_id_data = this.byteToString(data);
+                    if (frame_id == "COMM")
+                    {
+                        frame_id_data = this.byteToString(data);
+                    }
+                    else
+                    {
+                        frame_id_data = check_frame_id_dataunicode(Info, currentIndex, tag_size);
+                        if (frame_id_data == null)
+                            frame_id_data = this.byteToString(data);
+                    }
 
                     if (frame_id == "TIT2")
                     {
-                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
-                        {
-                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
-                            data = new byte[tag_size - 3];
-                            j = 0;
-                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
-                            {
-                                data[j] = Info[i];
-                                j++;
-                            }
-                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
-                            mp3InfoV2.Title = str;
-                            frame_id_data = str;
-                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-                        }
-                        else
-                        {
-                            mp3InfoV2.Title = frame_id_data;
-                        }
+                        mp3InfoV2.Title = frame_id_data;
                     }
                     else if (frame_id == "TPE2")
                     {
-                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
-                        {
-                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
-                            data = new byte[tag_size - 3];
-                            j = 0;
-                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
-                            {
-                                data[j] = Info[i];
-                                j++;
-                            }
-                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
-                            frame_id_data = str;
-                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-                        }
-                        else
-                        {
-                            richTextBox1.Text += frame_id + "\t\t" + frame_id_data + "\n";
-                        }
+                        richTextBox1.Text += frame_id + "\t\t" + frame_id_data + "\n";
                     }
                     else if (frame_id == "TPE1")
                     {
-                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
-                        {
-                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
-                            data = new byte[tag_size - 3];
-                            j = 0;
-                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
-                            {
-                                data[j] = Info[i];
-                                j++;
-                            }
-                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
-                            mp3InfoV2.Title = str;
-                            frame_id_data = str;
-                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-                        }
-                        else
-                        {
-                            mp3InfoV2.Artist = frame_id_data;
-                        }
+                        mp3InfoV2.Artist = frame_id_data;
                     }
                     else if (frame_id == "TALB")
                     {
-                        if ((data[1] == 0xFF) && (data[2] == 0xFE))
-                        {
-                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
-                            data = new byte[tag_size - 3];
-                            j = 0;
-                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
-                            {
-                                data[j] = Info[i];
-                                j++;
-                            }
-                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
-                            mp3InfoV2.Title = str;
-                            frame_id_data = str;
-                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-                        }
-                        else
-                        {
-                            mp3InfoV2.Album = frame_id_data;
-                        }
+                        mp3InfoV2.Album = frame_id_data;
                     }
                     else if (frame_id == "TYER")
                     {
@@ -471,25 +409,7 @@ namespace vcs_ID3Tag
                     }
                     else if (frame_id == "TRCK")
                     {
-                        if ((tag_size > 2) && ((data[1] == 0xFF) && (data[2] == 0xFE)))
-                        {
-                            //richTextBox1.Text += "Unicode解碼 " + frame_id + ", len = " + tag_size.ToString() + "\n";
-                            data = new byte[tag_size - 3];
-                            j = 0;
-                            for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
-                            {
-                                data[j] = Info[i];
-                                j++;
-                            }
-                            string str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
-                            mp3InfoV2.Title = str;
-                            frame_id_data = str;
-                            richTextBox1.Text += frame_id + "\t\t" + str + "\n";
-                        }
-                        else
-                        {
-                            mp3InfoV2.Track = frame_id_data;
-                        }
+                        mp3InfoV2.Track = frame_id_data;
                     }
                     else if (frame_id == "TCON")
                     {
@@ -1542,10 +1462,24 @@ namespace vcs_ID3Tag
 
         void setup_item_location()
         {
-            int x_st = 85;
-            int y_st = 210;
-            int offset_x = 255;
-            int offset_y = 35;
+            int x_st;
+            int y_st;
+            int offset_x;
+            int offset_y;
+
+            x_st = 12;
+            y_st = 80;
+            offset_x = 0;
+            offset_y = 25;
+            cb_v1.Location = new Point(x_st, y_st + offset_y * 0);
+            cb_v2.Location = new Point(x_st, y_st + offset_y * 1);
+            cb_raw_data.Location = new Point(x_st, y_st + offset_y * 2);
+
+            x_st = 85;
+            y_st = 210;
+            offset_x = 255;
+            offset_y = 35;
+
             textBox11.Location = new Point(x_st, y_st + offset_y * 0);
             textBox12.Location = new Point(x_st, y_st + offset_y * 1);
             textBox13.Location = new Point(x_st, y_st + offset_y * 2);
@@ -1645,5 +1579,27 @@ namespace vcs_ID3Tag
             encoding = "big5";
             get_ID3Tag(filename, encoding);
         }
+
+        string check_frame_id_dataunicode(byte[] Info, int currentIndex, int tag_size)
+        {
+            string str = null;
+            //richTextBox1.Text += "check_frame_id_dataunicode, currentIndex = " + currentIndex.ToString() + ", tag_size = " + tag_size.ToString() + "\n";
+            if ((Info[currentIndex + 1] == 0xFF) && (Info[currentIndex+2] == 0xFE))
+            {
+                //獲取字串資料
+                byte[] data = new byte[tag_size - 3];
+                int i = 0;
+                int j = 0;
+                for (i = currentIndex + 3; i < currentIndex + tag_size; i++)
+                {
+                    data[j] = Info[i];
+                    j++;
+                }
+                str = Encoding.GetEncoding("utf-16").GetString(data);	//指名使用Unicode解碼解碼, 把拜列轉成字串
+                //richTextBox1.Text += "Unicode解碼的到\t" + str + "\n";
+            }
+            return str;
+        }
+
     }
 }
