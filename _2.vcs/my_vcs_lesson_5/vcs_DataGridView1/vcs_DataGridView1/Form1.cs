@@ -79,24 +79,7 @@ namespace vcs_DataGridView1
 
         private void infoDataGridView_Click(object sender, EventArgs e)
         {
-            int r;
-            int c;
-            int rows = dataGridView1.RowCount;
-            int cols = dataGridView1.ColumnCount;
-            richTextBox1.Text += "ROWS = " + rows.ToString() + "\n";
-            richTextBox1.Text += "COLS = " + cols.ToString() + "\n";
-            richTextBox1.Text += "Content:\n";
-
-            for (r = 0; r < rows; r++)
-            {
-                richTextBox1.Text += "r = " + r.ToString() + "\t";
-                for (c = 0; c < cols; c++)
-                {
-                    DataGridViewCell dgvCell = dataGridView1[c, r];
-                    richTextBox1.Text += dgvCell.Value + "\t";
-                }
-                richTextBox1.Text += "\n";
-            }
+            print_dataGridView_data(dataGridView1);
         }
 
         private void clearDataGridView_Click(object sender, EventArgs e)
@@ -202,6 +185,31 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[3].DisplayIndex = 1;
             dataGridView1.Columns[4].DisplayIndex = 2;
         }
+
+        void print_dataGridView_data(DataGridView dgv)
+        {
+            int r;
+            int c;
+            int rows = dgv.RowCount;
+            int cols = dgv.ColumnCount;
+            richTextBox1.Text += "ROWS = " + rows.ToString() + "\n";
+            richTextBox1.Text += "COLS = " + cols.ToString() + "\n";
+            richTextBox1.Text += "Content:\n";
+
+            for (r = 0; r < rows; r++)
+            {
+                richTextBox1.Text += "r = " + r.ToString() + "\t";
+                for (c = 0; c < cols; c++)
+                {
+                    //richTextBox1.Text += dataGridView1[c, r].Value + "\t";
+                    DataGridViewCell dgvCell = dgv[c, r];
+                    richTextBox1.Text += dgvCell.Value + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
+
 
 
     }
