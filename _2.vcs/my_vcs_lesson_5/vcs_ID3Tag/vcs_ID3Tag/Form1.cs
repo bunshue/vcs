@@ -695,6 +695,7 @@ namespace vcs_ID3Tag
                     else
                         textBox17.Text = "無資料";
                     textBox18.Text = mp3_information.Genre.ToString();
+                    cb_id3v11.Checked = true;
                 }
                 else if (encoding == "gb2312")
                 {
@@ -709,6 +710,7 @@ namespace vcs_ID3Tag
                     else
                         textBox27.Text = "無資料";
                     textBox28.Text = mp3_information.Genre.ToString();
+                    cb_id3v21.Checked = true;
                 }
                 else if (encoding == "shift_jis")
                 {
@@ -723,6 +725,7 @@ namespace vcs_ID3Tag
                     else
                         textBox37.Text = "無資料";
                     textBox38.Text = mp3_information.Genre.ToString();
+                    cb_id3v31.Checked = true;
                 }
                 else
                 {
@@ -737,6 +740,7 @@ namespace vcs_ID3Tag
                     else
                         textBox17.Text = "無資料";
                     textBox18.Text = mp3_information.Genre.ToString();
+                    cb_id3v11.Checked = true;
                 }
 
                 print_genre(mp3_information.Genre);
@@ -746,6 +750,55 @@ namespace vcs_ID3Tag
             else
             {
                 richTextBox1.Text += "無ID3 v1資料\n";
+                if (encoding == "big5")
+                {
+                    textBox11.Enabled = false;
+                    textBox12.Enabled = false;
+                    textBox13.Enabled = false;
+                    textBox14.Enabled = false;
+                    textBox15.Enabled = false;
+                    textBox16.Enabled = false;
+                    textBox17.Enabled = false;
+                    textBox18.Enabled = false;
+                    cb_id3v11.Checked = false;
+                }
+                else if (encoding == "gb2312")
+                {
+                    textBox21.Enabled = false;
+                    textBox22.Enabled = false;
+                    textBox23.Enabled = false;
+                    textBox24.Enabled = false;
+                    textBox25.Enabled = false;
+                    textBox26.Enabled = false;
+                    textBox27.Enabled = false;
+                    textBox28.Enabled = false;
+                    cb_id3v21.Checked = false;
+                }
+                else if (encoding == "shift_jis")
+                {
+                    textBox31.Enabled = false;
+                    textBox32.Enabled = false;
+                    textBox33.Enabled = false;
+                    textBox34.Enabled = false;
+                    textBox35.Enabled = false;
+                    textBox36.Enabled = false;
+                    textBox37.Enabled = false;
+                    textBox38.Enabled = false;
+                    cb_id3v31.Checked = false;
+                }
+                else
+                {
+                    textBox11.Enabled = false;
+                    textBox12.Enabled = false;
+                    textBox13.Enabled = false;
+                    textBox14.Enabled = false;
+                    textBox15.Enabled = false;
+                    textBox16.Enabled = false;
+                    textBox17.Enabled = false;
+                    textBox18.Enabled = false;
+                    cb_id3v11.Checked = false;
+                }
+
             }
         }
 
@@ -759,18 +812,22 @@ namespace vcs_ID3Tag
                 if (encoding == "big5")
                 {
                     textBox11b.Text = "ID3";
+                    cb_id3v11b.Checked = true;
                 }
                 else if (encoding == "gb2312")
                 {
                     textBox21b.Text = "ID3";
+                    cb_id3v21b.Checked = true;
                 }
                 else if (encoding == "shift_jis")
                 {
                     textBox31b.Text = "ID3";
+                    cb_id3v31b.Checked = true;
                 }
                 else
                 {
                     textBox11b.Text = "ID3";
+                    cb_id3v11b.Checked = true;
                 }
 
                 /*
@@ -793,6 +850,58 @@ namespace vcs_ID3Tag
             else
             {
                 richTextBox1.Text += "無ID3 v2資料\n";
+                if (encoding == "big5")
+                {
+                    textBox11b.Enabled = false;
+                    textBox12b.Enabled = false;
+                    textBox13b.Enabled = false;
+                    textBox14b.Enabled = false;
+                    textBox15b.Enabled = false;
+                    textBox16b.Enabled = false;
+                    textBox17b.Enabled = false;
+                    textBox18b.Enabled = false;
+                    textBox19b.Enabled = false;
+                    cb_id3v11b.Checked = false;
+                }
+                else if (encoding == "gb2312")
+                {
+                    textBox21b.Enabled = false;
+                    textBox22b.Enabled = false;
+                    textBox23b.Enabled = false;
+                    textBox24b.Enabled = false;
+                    textBox25b.Enabled = false;
+                    textBox26b.Enabled = false;
+                    textBox27b.Enabled = false;
+                    textBox28b.Enabled = false;
+                    textBox29b.Enabled = false;
+                    cb_id3v21b.Checked = false;
+                }
+                else if (encoding == "shift_jis")
+                {
+                    textBox31b.Enabled = false;
+                    textBox32b.Enabled = false;
+                    textBox33b.Enabled = false;
+                    textBox34b.Enabled = false;
+                    textBox35b.Enabled = false;
+                    textBox36b.Enabled = false;
+                    textBox37b.Enabled = false;
+                    textBox38b.Enabled = false;
+                    textBox39b.Enabled = false;
+                    cb_id3v31b.Checked = false;
+                }
+                else
+                {
+                    textBox11b.Enabled = false;
+                    textBox12b.Enabled = false;
+                    textBox13b.Enabled = false;
+                    textBox14b.Enabled = false;
+                    textBox15b.Enabled = false;
+                    textBox16b.Enabled = false;
+                    textBox17b.Enabled = false;
+                    textBox18b.Enabled = false;
+                    textBox19b.Enabled = false;
+                    cb_id3v11b.Checked = false;
+                }
             }
         }
 
@@ -836,6 +945,28 @@ namespace vcs_ID3Tag
             textBox17b.Clear();
             textBox18b.Clear();
             textBox19b.Clear();
+
+            textBox11.Enabled = true;
+            textBox12.Enabled = true;
+            textBox13.Enabled = true;
+            textBox14.Enabled = true;
+            textBox15.Enabled = true;
+            textBox16.Enabled = true;
+            textBox17.Enabled = true;
+            textBox18.Enabled = true;
+
+            textBox11b.Enabled = true;
+            textBox12b.Enabled = true;
+            textBox13b.Enabled = true;
+            textBox14b.Enabled = true;
+            textBox15b.Enabled = true;
+            textBox16b.Enabled = true;
+            textBox17b.Enabled = true;
+            textBox18b.Enabled = true;
+            textBox19b.Enabled = true;
+
+            cb_id3v11.Checked = false;
+            cb_id3v11b.Checked = false;
         }
 
         void clear_textbox_id3_data_gb2312()
@@ -857,6 +988,28 @@ namespace vcs_ID3Tag
             textBox27b.Clear();
             textBox28b.Clear();
             textBox29b.Clear();
+
+            textBox21.Enabled = true;
+            textBox22.Enabled = true;
+            textBox23.Enabled = true;
+            textBox24.Enabled = true;
+            textBox25.Enabled = true;
+            textBox26.Enabled = true;
+            textBox27.Enabled = true;
+            textBox28.Enabled = true;
+
+            textBox21b.Enabled = true;
+            textBox22b.Enabled = true;
+            textBox23b.Enabled = true;
+            textBox24b.Enabled = true;
+            textBox25b.Enabled = true;
+            textBox26b.Enabled = true;
+            textBox27b.Enabled = true;
+            textBox28b.Enabled = true;
+            textBox29b.Enabled = true;
+
+            cb_id3v21.Checked = false;
+            cb_id3v21b.Checked = false;
         }
 
         void clear_textbox_id3_data_shift_jis()
@@ -878,6 +1031,28 @@ namespace vcs_ID3Tag
             textBox37b.Clear();
             textBox38b.Clear();
             textBox39b.Clear();
+
+            textBox31.Enabled = true;
+            textBox32.Enabled = true;
+            textBox33.Enabled = true;
+            textBox34.Enabled = true;
+            textBox35.Enabled = true;
+            textBox36.Enabled = true;
+            textBox37.Enabled = true;
+            textBox38.Enabled = true;
+
+            textBox31b.Enabled = true;
+            textBox32b.Enabled = true;
+            textBox33b.Enabled = true;
+            textBox34b.Enabled = true;
+            textBox35b.Enabled = true;
+            textBox36b.Enabled = true;
+            textBox37b.Enabled = true;
+            textBox38b.Enabled = true;
+            textBox39b.Enabled = true;
+
+            cb_id3v31.Checked = false;
+            cb_id3v31b.Checked = false;
         }
 
         void clear_textbox_id3_data()
@@ -1349,7 +1524,7 @@ namespace vcs_ID3Tag
         private void button7_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
-            string filename2 = filename + ".no.id3." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+            string filename2 = filename + ".no.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v1\n";
             richTextBox1.Text += "原檔名:\t" + filename + "\n";
@@ -1367,6 +1542,7 @@ namespace vcs_ID3Tag
             if ((Info[0] == 'T') && (Info[1] == 'A') && (Info[2] == 'G'))
             {
                 richTextBox1.Text += "有ID3 v1資料\t移除之\n";
+
                 //讀取資料
                 byte[] data = File.ReadAllBytes(filename);
                 int len = data.Length;
@@ -1383,9 +1559,6 @@ namespace vcs_ID3Tag
                     }
                 }
                 //richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename2 + "\n";
-
-
-
             }
             else
             {
@@ -1396,7 +1569,7 @@ namespace vcs_ID3Tag
         private void button8_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
-            string filename2 = filename + ".no.id3." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+            string filename2 = filename + ".add.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "新增 MP3 ID3 v1\n";
             richTextBox1.Text += "原檔名:\t" + filename + "\n";
@@ -1427,7 +1600,7 @@ namespace vcs_ID3Tag
         private void button9_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
-            string filename2 = filename + ".no.id3." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+            string filename2 = filename + ".modify.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "修改 MP3 ID3 v1\n";
             richTextBox1.Text += "原檔名:\t" + filename + "\n";
@@ -1466,6 +1639,8 @@ namespace vcs_ID3Tag
             int y_st;
             int offset_x;
             int offset_y;
+            int xx = 20;
+            int yy = 5;
 
             x_st = 12;
             y_st = 80;
@@ -1480,7 +1655,9 @@ namespace vcs_ID3Tag
             offset_x = 255;
             offset_y = 35;
 
-            textBox11.Location = new Point(x_st, y_st + offset_y * 0);
+            cb_id3v11.Location = new Point(x_st, y_st + offset_y * 0 + yy);
+            textBox11.Size = new Size(textBox11.Size.Width - xx, textBox11.Size.Height);
+            textBox11.Location = new Point(x_st + xx, y_st + offset_y * 0);
             textBox12.Location = new Point(x_st, y_st + offset_y * 1);
             textBox13.Location = new Point(x_st, y_st + offset_y * 2);
             textBox14.Location = new Point(x_st, y_st + offset_y * 3);
@@ -1489,7 +1666,9 @@ namespace vcs_ID3Tag
             textBox17.Location = new Point(x_st, y_st + offset_y * 6);
             textBox18.Location = new Point(x_st, y_st + offset_y * 7);
 
-            textBox11b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 0);
+            cb_id3v11b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 0 + yy);
+            textBox11b.Size = new Size(textBox11b.Size.Width - xx, textBox11b.Size.Height);
+            textBox11b.Location = new Point(x_st + offset_x * 1 + xx, y_st + offset_y * 0);
             textBox12b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 1);
             textBox13b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 2);
             textBox14b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 3);
@@ -1499,8 +1678,9 @@ namespace vcs_ID3Tag
             textBox18b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 7);
             textBox19b.Location = new Point(x_st + offset_x * 1, y_st + offset_y * 8);
 
-
-            textBox21.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 0);
+            cb_id3v21.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 0 + yy);
+            textBox21.Size = new Size(textBox21.Size.Width - xx, textBox21.Size.Height);
+            textBox21.Location = new Point(x_st + offset_x * 2 + xx, y_st + offset_y * 0);
             textBox22.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 1);
             textBox23.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 2);
             textBox24.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 3);
@@ -1509,7 +1689,9 @@ namespace vcs_ID3Tag
             textBox27.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 6);
             textBox28.Location = new Point(x_st + offset_x * 2, y_st + offset_y * 7);
 
-            textBox21b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 0);
+            cb_id3v21b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 0 + yy);
+            textBox21b.Size = new Size(textBox21b.Size.Width - xx, textBox21b.Size.Height);
+            textBox21b.Location = new Point(x_st + offset_x * 3 + xx, y_st + offset_y * 0);
             textBox22b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 1);
             textBox23b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 2);
             textBox24b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 3);
@@ -1519,7 +1701,9 @@ namespace vcs_ID3Tag
             textBox28b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 7);
             textBox29b.Location = new Point(x_st + offset_x * 3, y_st + offset_y * 8);
 
-            textBox31.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 0);
+            cb_id3v31.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 0 + yy);
+            textBox31.Size = new Size(textBox31.Size.Width - xx, textBox31.Size.Height);
+            textBox31.Location = new Point(x_st + offset_x * 4 + xx, y_st + offset_y * 0);
             textBox32.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 1);
             textBox33.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 2);
             textBox34.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 3);
@@ -1528,7 +1712,9 @@ namespace vcs_ID3Tag
             textBox37.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 6);
             textBox38.Location = new Point(x_st + offset_x * 4, y_st + offset_y * 7);
 
-            textBox31b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 0);
+            cb_id3v31b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 0 + yy);
+            textBox31b.Size = new Size(textBox31b.Size.Width - xx, textBox31b.Size.Height);
+            textBox31b.Location = new Point(x_st + offset_x * 5 + xx, y_st + offset_y * 0);
             textBox32b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 1);
             textBox33b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 2);
             textBox34b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 3);
@@ -1601,5 +1787,209 @@ namespace vcs_ID3Tag
             return str;
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
+            string filename2 = filename + ".no.id3v2." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+
+            richTextBox1.Text += "移除 MP3 ID3 v2\n";
+            richTextBox1.Text += "原檔名:\t" + filename + "\n";
+            richTextBox1.Text += "新檔名:\t" + filename2 + "\n";
+            remove_ID3TagV2(filename, filename2);
+        }
+
+        void remove_ID3TagV2(string filename, string filename2)
+        {
+            clear_textbox_id3_data();
+
+            textBox_filename.Text = filename;
+
+            byte[] header = getID3v2Header(filename);
+            if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
+            {
+                richTextBox1.Text += "有ID3 v2資料\t移除之\n";
+
+                /*
+                richTextBox1.Text += "印出此檔案之前10拜資料(ID3 header)\n";
+                print_data(header);
+
+                richTextBox1.Text += "有ID3 v2資料\n";
+                richTextBox1.Text += "Major version : " + header[3].ToString() + "\n";
+                richTextBox1.Text += "minor version : " + header[4].ToString() + "\n";
+                richTextBox1.Text += "flags : " + header[5].ToString("X2") + "\n";
+                */
+
+                int tag_size = (((header[6] & 0x7f) << 21) + ((header[7] & 0x7f) << 14) + ((header[8] & 0x7f) << 7) + (header[9] & 0x7f));
+                //richTextBox1.Text += "ID3 tag_size = " + tag_size.ToString() + "\n";
+
+                //讀取資料
+                byte[] data = File.ReadAllBytes(filename);
+                int len = data.Length;
+                //richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+                //richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+
+                int i;
+                using (FileStream fileStream = new FileStream(filename2, FileMode.Create))
+                {
+                    // Write the data to the file, byte by byte.
+                    for (i = (10 + tag_size); i < len; i++)
+                    {
+                        fileStream.WriteByte(data[i]);
+                    }
+                }
+                //richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename2 + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v2資料\n";
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_id3\aaaa.mp3";       //一定要有@
+            string filename2 = filename + ".no.id3v1v2." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+
+            richTextBox1.Text += "移除 MP3 ID3 v1 v2\n";
+            richTextBox1.Text += "原檔名:\t" + filename + "\n";
+            richTextBox1.Text += "新檔名:\t" + filename2 + "\n";
+            remove_ID3TagV1V2(filename, filename2);
+        }
+
+        void remove_ID3TagV1V2(string filename, string filename2)
+        {
+            bool flag_remove_tag_v1 = false;
+            bool flag_remove_tag_v2 = false;
+            int tag_size_v1 = 0;
+            int tag_size_v2 = 0;
+
+            clear_textbox_id3_data();
+
+            textBox_filename.Text = filename;
+
+            byte[] Info = getLast128(filename);
+            if ((Info[0] == 'T') && (Info[1] == 'A') && (Info[2] == 'G'))
+            {
+                richTextBox1.Text += "有ID3 v1資料\t移除之\n";
+                tag_size_v1 = 128;
+                flag_remove_tag_v1 = true;
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v1資料\n";
+            }
+
+            byte[] header = getID3v2Header(filename);
+            if ((header[0] == 'I') && (header[1] == 'D') && (header[2] == '3'))
+            {
+                richTextBox1.Text += "有ID3 v2資料\t移除之\n";
+                tag_size_v2 = (((header[6] & 0x7f) << 21) + ((header[7] & 0x7f) << 14) + ((header[8] & 0x7f) << 7) + (header[9] & 0x7f));
+                //richTextBox1.Text += "ID3 tag_size_v2 = " + tag_size_v2.ToString() + "\n";
+                flag_remove_tag_v2 = true;
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v2資料\n";
+            }
+
+            if ((flag_remove_tag_v1 == true) && (flag_remove_tag_v2 == true))
+            {
+                richTextBox1.Text += "移除ID3 v1 和 v2資料\n";
+
+                //讀取資料
+                byte[] data = File.ReadAllBytes(filename);
+                int len = data.Length;
+                //richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+                //richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+
+                int i;
+                using (FileStream fileStream = new FileStream(filename2, FileMode.Create))
+                {
+                    // Write the data to the file, byte by byte.
+                    for (i = (10 + tag_size_v2); i < (len - tag_size_v1); i++)
+                    {
+                        fileStream.WriteByte(data[i]);
+                    }
+                }
+                //richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename2 + "\n";
+            }
+            else if (flag_remove_tag_v1 == true)
+            {
+                richTextBox1.Text += "僅移除ID3 v1資料\n";
+
+                //讀取資料
+                byte[] data = File.ReadAllBytes(filename);
+                int len = data.Length;
+                //richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+                //richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+
+                int i;
+                using (FileStream fileStream = new FileStream(filename2, FileMode.Create))
+                {
+                    // Write the data to the file, byte by byte.
+                    for (i = 0; i < (len - tag_size_v1); i++)
+                    {
+                        fileStream.WriteByte(data[i]);
+                    }
+                }
+                //richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename2 + "\n";
+            }
+            else if (flag_remove_tag_v2 == true)
+            {
+                richTextBox1.Text += "僅移除ID3 v2資料\n";
+
+                //讀取資料
+                byte[] data = File.ReadAllBytes(filename);
+                int len = data.Length;
+                //richTextBox1.Text += "全部binary讀取\t檔案" + filename + "\t";
+                //richTextBox1.Text += "長度 : " + len.ToString() + "\n";
+
+                int i;
+                using (FileStream fileStream = new FileStream(filename2, FileMode.Create))
+                {
+                    // Write the data to the file, byte by byte.
+                    //for (i = 0; i < (len - 128); i++)
+                    for (i = (10 + tag_size_v2); i < len; i++)
+                    {
+                        fileStream.WriteByte(data[i]);
+                    }
+                }
+                //richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename2 + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無ID3 v1 v2資料可移除\n";
+            }
+        }
+
+        private void cb_id3v11_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_id3v11b_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_id3v21_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_id3v21b_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_id3v31_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_id3v31b_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -109,6 +109,14 @@
             this.button10 = new System.Windows.Forms.Button();
             this.cb_v1 = new System.Windows.Forms.CheckBox();
             this.cb_v2 = new System.Windows.Forms.CheckBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.cb_id3v11 = new System.Windows.Forms.CheckBox();
+            this.cb_id3v11b = new System.Windows.Forms.CheckBox();
+            this.cb_id3v21 = new System.Windows.Forms.CheckBox();
+            this.cb_id3v21b = new System.Windows.Forms.CheckBox();
+            this.cb_id3v31 = new System.Windows.Forms.CheckBox();
+            this.cb_id3v31b = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -833,11 +841,107 @@
             this.cb_v2.Text = "v2";
             this.cb_v2.UseVisualStyleBackColor = true;
             // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(746, 20);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(158, 35);
+            this.button11.TabIndex = 81;
+            this.button11.Text = "移除 MP3 ID3 v2";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Location = new System.Drawing.Point(921, 20);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(158, 35);
+            this.button12.TabIndex = 82;
+            this.button12.Text = "移除 MP3 ID3 v1 v2";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // cb_id3v11
+            // 
+            this.cb_id3v11.AutoSize = true;
+            this.cb_id3v11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_id3v11.Location = new System.Drawing.Point(92, 182);
+            this.cb_id3v11.Name = "cb_id3v11";
+            this.cb_id3v11.Size = new System.Drawing.Size(15, 14);
+            this.cb_id3v11.TabIndex = 83;
+            this.cb_id3v11.UseVisualStyleBackColor = true;
+            this.cb_id3v11.CheckedChanged += new System.EventHandler(this.cb_id3v11_CheckedChanged);
+            // 
+            // cb_id3v11b
+            // 
+            this.cb_id3v11b.AutoSize = true;
+            this.cb_id3v11b.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_id3v11b.Location = new System.Drawing.Point(126, 182);
+            this.cb_id3v11b.Name = "cb_id3v11b";
+            this.cb_id3v11b.Size = new System.Drawing.Size(15, 14);
+            this.cb_id3v11b.TabIndex = 84;
+            this.cb_id3v11b.UseVisualStyleBackColor = true;
+            this.cb_id3v11b.CheckedChanged += new System.EventHandler(this.cb_id3v11b_CheckedChanged);
+            // 
+            // cb_id3v21
+            // 
+            this.cb_id3v21.AutoSize = true;
+            this.cb_id3v21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_id3v21.Location = new System.Drawing.Point(158, 182);
+            this.cb_id3v21.Name = "cb_id3v21";
+            this.cb_id3v21.Size = new System.Drawing.Size(15, 14);
+            this.cb_id3v21.TabIndex = 85;
+            this.cb_id3v21.UseVisualStyleBackColor = true;
+            this.cb_id3v21.CheckedChanged += new System.EventHandler(this.cb_id3v21_CheckedChanged);
+            // 
+            // cb_id3v21b
+            // 
+            this.cb_id3v21b.AutoSize = true;
+            this.cb_id3v21b.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_id3v21b.Location = new System.Drawing.Point(189, 182);
+            this.cb_id3v21b.Name = "cb_id3v21b";
+            this.cb_id3v21b.Size = new System.Drawing.Size(15, 14);
+            this.cb_id3v21b.TabIndex = 86;
+            this.cb_id3v21b.UseVisualStyleBackColor = true;
+            this.cb_id3v21b.CheckedChanged += new System.EventHandler(this.cb_id3v21b_CheckedChanged);
+            // 
+            // cb_id3v31
+            // 
+            this.cb_id3v31.AutoSize = true;
+            this.cb_id3v31.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_id3v31.Location = new System.Drawing.Point(232, 182);
+            this.cb_id3v31.Name = "cb_id3v31";
+            this.cb_id3v31.Size = new System.Drawing.Size(15, 14);
+            this.cb_id3v31.TabIndex = 87;
+            this.cb_id3v31.UseVisualStyleBackColor = true;
+            this.cb_id3v31.CheckedChanged += new System.EventHandler(this.cb_id3v31_CheckedChanged);
+            // 
+            // cb_id3v31b
+            // 
+            this.cb_id3v31b.AutoSize = true;
+            this.cb_id3v31b.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_id3v31b.Location = new System.Drawing.Point(268, 182);
+            this.cb_id3v31b.Name = "cb_id3v31b";
+            this.cb_id3v31b.Size = new System.Drawing.Size(15, 14);
+            this.cb_id3v31b.TabIndex = 88;
+            this.cb_id3v31b.UseVisualStyleBackColor = true;
+            this.cb_id3v31b.CheckedChanged += new System.EventHandler(this.cb_id3v31b_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1676, 876);
+            this.Controls.Add(this.cb_id3v31b);
+            this.Controls.Add(this.cb_id3v31);
+            this.Controls.Add(this.cb_id3v21b);
+            this.Controls.Add(this.cb_id3v21);
+            this.Controls.Add(this.cb_id3v11b);
+            this.Controls.Add(this.cb_id3v11);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.cb_v2);
             this.Controls.Add(this.cb_v1);
             this.Controls.Add(this.button10);
@@ -1008,6 +1112,14 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.CheckBox cb_v1;
         private System.Windows.Forms.CheckBox cb_v2;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.CheckBox cb_id3v11;
+        private System.Windows.Forms.CheckBox cb_id3v11b;
+        private System.Windows.Forms.CheckBox cb_id3v21;
+        private System.Windows.Forms.CheckBox cb_id3v21b;
+        private System.Windows.Forms.CheckBox cb_id3v31;
+        private System.Windows.Forms.CheckBox cb_id3v31b;
     }
 }
 

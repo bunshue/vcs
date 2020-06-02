@@ -12,7 +12,7 @@ namespace vcs_DataGridView1
     public partial class Form1 : Form
     {
         private Panel buttonPanel = new Panel();
-        private DataGridView songsDataGridView = new DataGridView();
+        private DataGridView dataGridView1 = new DataGridView();
 
         private Button setupDataGridView = new Button();
         private Button addDataGridView = new Button();
@@ -31,11 +31,11 @@ namespace vcs_DataGridView1
             SetupLayout();
         }
 
-        private void songsDataGridView_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
+        private void dataGridView1_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
         {
             if (e != null)
             {
-                if (this.songsDataGridView.Columns[e.ColumnIndex].Name == "Release Date")
+                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "Release Date")
                 {
                     if (e.Value != null)
                     {
@@ -66,38 +66,42 @@ namespace vcs_DataGridView1
 
         private void addNewRowButton_Click(object sender, EventArgs e)
         {
-            this.songsDataGridView.Rows.Add();
+            this.dataGridView1.Rows.Add();
         }
 
         private void deleteRowButton_Click(object sender, EventArgs e)
         {
-            if (this.songsDataGridView.SelectedRows.Count > 0 && this.songsDataGridView.SelectedRows[0].Index != this.songsDataGridView.Rows.Count - 1)
+            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
             {
-                this.songsDataGridView.Rows.RemoveAt(this.songsDataGridView.SelectedRows[0].Index);
+                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
             }
         }
 
         private void infoDataGridView_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "ROWS = " + songsDataGridView.Rows.Count.ToString() + "\n";
-            richTextBox1.Text += "COLS = " + songsDataGridView.Columns.Count.ToString() + "\n";
+            int r;
+            int c;
+            int rows = dataGridView1.RowCount;
+            int cols = dataGridView1.ColumnCount;
+            richTextBox1.Text += "ROWS = " + rows.ToString() + "\n";
+            richTextBox1.Text += "COLS = " + cols.ToString() + "\n";
             richTextBox1.Text += "Content:\n";
 
-            for (int i = 0; i <= songsDataGridView.Rows.Count - 1; i++)
+            for (r = 0; r < rows; r++)
             {
-                for (int j = 0; j < songsDataGridView.Columns.Count; j++)
+                richTextBox1.Text += "r = " + r.ToString() + "\t";
+                for (c = 0; c < cols; c++)
                 {
-                    DataGridViewCell dgvCell = songsDataGridView[j, i];
+                    DataGridViewCell dgvCell = dataGridView1[c, r];
                     richTextBox1.Text += dgvCell.Value + "\t";
                 }
                 richTextBox1.Text += "\n";
             }
-
         }
 
         private void clearDataGridView_Click(object sender, EventArgs e)
         {
-            this.songsDataGridView.Rows.Clear();
+            this.dataGridView1.Rows.Clear();
         }
 
         private void SetupLayout()
@@ -142,38 +146,35 @@ namespace vcs_DataGridView1
 
         private void SetupDataGridView()
         {
-            this.Controls.Add(songsDataGridView);
+            this.Controls.Add(dataGridView1);
 
-            songsDataGridView.ColumnCount = 5;
+            dataGridView1.ColumnCount = 5;
 
-            songsDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            songsDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            songsDataGridView.ColumnHeadersDefaultCellStyle.Font =
-                new Font(songsDataGridView.Font, FontStyle.Bold);
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridView1.Font, FontStyle.Bold);
 
-            songsDataGridView.Name = "songsDataGridView";
-            songsDataGridView.Location = new Point(8, 8);
-            songsDataGridView.Size = new Size(500, 250);
-            songsDataGridView.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            songsDataGridView.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
-            songsDataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            songsDataGridView.GridColor = Color.Black;
-            songsDataGridView.RowHeadersVisible = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Location = new Point(8, 8);
+            dataGridView1.Size = new Size(500, 250);
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dataGridView1.GridColor = Color.Black;
+            dataGridView1.RowHeadersVisible = false;
 
-            songsDataGridView.Columns[0].Name = "Release Date";
-            songsDataGridView.Columns[1].Name = "Track";
-            songsDataGridView.Columns[2].Name = "Title";
-            songsDataGridView.Columns[3].Name = "Artist";
-            songsDataGridView.Columns[4].Name = "Album";
-            songsDataGridView.Columns[4].DefaultCellStyle.Font = new Font(songsDataGridView.DefaultCellStyle.Font, FontStyle.Italic);
+            dataGridView1.Columns[0].Name = "Release Date";
+            dataGridView1.Columns[1].Name = "Track";
+            dataGridView1.Columns[2].Name = "Title";
+            dataGridView1.Columns[3].Name = "Artist";
+            dataGridView1.Columns[4].Name = "Album";
+            dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
-            songsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            songsDataGridView.MultiSelect = false;
-            songsDataGridView.Dock = DockStyle.Fill;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Dock = DockStyle.Fill;
 
-            songsDataGridView.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
+            dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
         }
 
         private void PopulateDataGridView()
@@ -186,19 +187,20 @@ namespace vcs_DataGridView1
             string[] row5 = { "6/10/2003", "13", "Scatterbrain. (As Dead As Leaves.)", "Radiohead", "Hail to the Thief" };
             string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
 
-            songsDataGridView.Rows.Add(row0);
-            songsDataGridView.Rows.Add(row1);
-            songsDataGridView.Rows.Add(row2);
-            songsDataGridView.Rows.Add(row3);
-            songsDataGridView.Rows.Add(row4);
-            songsDataGridView.Rows.Add(row5);
-            songsDataGridView.Rows.Add(row6);
+            dataGridView1.Rows.Add(row0);
+            dataGridView1.Rows.Add(row1);
+            dataGridView1.Rows.Add(row2);
+            dataGridView1.Rows.Add(row3);
+            dataGridView1.Rows.Add(row4);
+            dataGridView1.Rows.Add(row5);
+            dataGridView1.Rows.Add(row6);
 
-            songsDataGridView.Columns[0].DisplayIndex = 3;
-            songsDataGridView.Columns[1].DisplayIndex = 4;
-            songsDataGridView.Columns[2].DisplayIndex = 0;
-            songsDataGridView.Columns[3].DisplayIndex = 1;
-            songsDataGridView.Columns[4].DisplayIndex = 2;
+            //dataGridView 顯示欄排序
+            dataGridView1.Columns[0].DisplayIndex = 3;
+            dataGridView1.Columns[1].DisplayIndex = 4;
+            dataGridView1.Columns[2].DisplayIndex = 0;
+            dataGridView1.Columns[3].DisplayIndex = 1;
+            dataGridView1.Columns[4].DisplayIndex = 2;
         }
 
 
