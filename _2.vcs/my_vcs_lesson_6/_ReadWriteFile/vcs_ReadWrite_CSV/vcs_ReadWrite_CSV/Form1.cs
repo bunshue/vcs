@@ -77,7 +77,30 @@ namespace vcs_ReadWrite_CSV
 
         private void button3_Click(object sender, EventArgs e)
         {
+            int i;
+            int len = 0;
+            string filename = "C:\\______test_files\\__RW\\_csv\\成績檔.csv";
 
+            Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
+            string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+            foreach (string s in readText)
+            {
+                //只打印每行資料
+                //richTextBox1.Text += s + "\r\n";
+
+                //切割資料後印出
+                string[] ss = s.Split(',');
+                len = ss.Length;
+                for (i = 0; i < len; i++)
+                {
+                    //richTextBox1.Text += ss[0] + "  " + ss[1] + "  " + ss[2] + "  " + ss[3] + "  " + ss[4] + "\r\n";
+                    richTextBox1.Text += ss[i];
+                    if (i != (len - 1))
+                        richTextBox1.Text += "  ";
+                    else
+                        richTextBox1.Text += "\n";
+                }
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -88,6 +111,31 @@ namespace vcs_ReadWrite_CSV
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int k = 0;
+            string filename = "C:\\______test_files\\__RW\\_csv\\F0035CH1.CSV";
+
+            Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
+            string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+            foreach (string s in readText)
+            {
+                //只打印每行資料
+                //richTextBox1.Text += s + "\r\n";
+
+                //切割資料後印出
+                string[] ss = s.Split(',');
+
+                richTextBox1.Text += "---" + ss[3] + "---" + ss[4] + "---" + "\r\n";
+
+                k++;
+                if (k == 100)
+                    break;
+
+            }
+
         }
 
     }

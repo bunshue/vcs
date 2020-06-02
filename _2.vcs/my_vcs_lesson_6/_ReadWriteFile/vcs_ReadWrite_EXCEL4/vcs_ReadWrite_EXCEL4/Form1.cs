@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using Excel = Microsoft.Office.Interop.Excel;
 
-using System.Data.OleDb;    //for OleDbConnection
+using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟連接
 
 /*
 參考/加入參考/COM/Microsoft Excel 12.0 Object Library
@@ -125,6 +125,7 @@ namespace vcs_ReadWrite_EXCEL4
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //在C# 使用 OleDb 讀取 Excel
             openFileDialog1.Title = "匯入Excel資料";
             //openFileDialog1.ShowHelp = true;
             openFileDialog1.FileName = "";              //預設開啟的檔名
