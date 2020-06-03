@@ -53,7 +53,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(184, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(502, 502);
+            this.richTextBox1.Size = new System.Drawing.Size(464, 502);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -70,12 +70,12 @@
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Font = new System.Drawing.Font("標楷體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(12, 257);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(147, 41);
             this.button3.TabIndex = 3;
-            this.button3.Text = "讀取CSV檔1";
+            this.button3.Text = "讀取CSV檔1_成績單";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -114,12 +114,12 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Font = new System.Drawing.Font("標楷體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button7.Location = new System.Drawing.Point(12, 320);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(147, 41);
             this.button7.TabIndex = 7;
-            this.button7.Text = "讀取CSV檔2";
+            this.button7.Text = "讀取CSV檔2_示波器";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -127,7 +127,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 529);
+            this.ClientSize = new System.Drawing.Size(1204, 564);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);

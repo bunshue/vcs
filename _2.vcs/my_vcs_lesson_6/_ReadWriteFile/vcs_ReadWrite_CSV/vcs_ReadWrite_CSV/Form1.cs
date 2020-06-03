@@ -77,8 +77,6 @@ namespace vcs_ReadWrite_CSV
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int i;
-            int len = 0;
             string filename = "C:\\______test_files\\__RW\\_csv\\成績檔.csv";
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
@@ -100,7 +98,8 @@ namespace vcs_ReadWrite_CSV
                 //二, 分割資料, 分割資料後印出
                 /*
                 string[] ss = s.Split(',');         //將一列的資料，以逗號的方式進行資料切割，並將資料放入一個字串陣列
-                len = ss.Length;
+                int len = ss.Length;
+                int i;
                 for (i = 0; i < len; i++)
                 {
                     //richTextBox1.Text += ss[0] + "  " + ss[1] + "  " + ss[2] + "  " + ss[3] + "  " + ss[4] + "\r\n";
@@ -140,48 +139,114 @@ namespace vcs_ReadWrite_CSV
             richTextBox1.Clear();
         }
 
-        private const int PICTURE_WIDTH = 300;
-        private const int PICTURE_HEIGHT = 300;
+        private const int LENGTH = 500;
+        private const int PICTURE_WIDTH = 500;
+        private const int PICTURE_HEIGHT = 500;
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int k = 0;
+            //int k = 0;
             string filename = "C:\\______test_files\\__RW\\_csv\\F0035CH1.CSV";
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
             string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案
+
+            richTextBox1.Text += "len = " + readText.Length.ToString() + "\n";
+
+            //資料處理
+            //double[][] allData = new double[readText.Length][]; //宣告一個2維double陣列，用來儲存所有的成績資料，第一維的大小是資料的列數(筆數)
+            double[,] allData = new double[readText.Length, 2]; //宣告一個2維double陣列，用來儲存所有的成績資料，第一維的大小是資料的列數(筆數)
+            //Point[][] colonPoints = new Point[2][];
+            int line = 0; //表第幾行(第幾列，每一列為一個學生的資料)
+
             foreach (string s in readText)
             {
                 //只打印每行資料
                 //richTextBox1.Text += s + "\r\n";
 
+                /*
                 //切割資料後印出
                 string[] ss = s.Split(',');
 
                 richTextBox1.Text += "---" + ss[3] + "---" + ss[4] + "---" + "\r\n";
+                */
 
-                k++;
-                if (k == 100)
-                    break;
+                //三, 資料處理
+
+                //richTextBox1.Text += s + "\r\n";
+
+                string[] ss = s.Split(','); //將一列的資料，以逗號的方式進行資料切割，並將資料放入一個字串陣列
+
+                allData[line, 0] = double.Parse(ss[3]);
+                allData[line, 1] = double.Parse(ss[4]);
+
+                //richTextBox1.Text += allData[line, 0] + "  " + allData[line, 1] + "\r\n";
+                line++; //進行下一筆資料的處理
+                //資料分別在取出的字串陣列裏，姓名->ss[0], 成績1->ss[1], 成績2->ss[2], 成績3->ss[3], 成績4->ss[4]
+
+                //k++;
+                //if (k == LENGTH)
+                    //break;
 
             }
 
 
             // 實例化圖片方塊
-            PictureBox pbx = new PictureBox();
+            PictureBox pictureBox1 = new PictureBox();
 
-            pbx.Size = new Size(PICTURE_WIDTH, PICTURE_HEIGHT);
+            pictureBox1.Size = new Size(PICTURE_WIDTH, PICTURE_HEIGHT);
 
             // 設定圖片方塊參數
-            pbx.Left = 10;
-            pbx.Top = 10;
-            //pbx.Width = 300;
-            //pbx.Height = 300;
-            pbx.BackColor = Color.Pink;
-            pbx.SizeMode = PictureBoxSizeMode.Zoom;
-            pbx.Location = new Point(this.Width - 350, 0);
+            pictureBox1.Left = 10;
+            pictureBox1.Top = 10;
+            //pictureBox1.Width = 300;
+            //pictureBox1.Height = 300;
+            pictureBox1.BackColor = Color.Pink;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new Point(this.Width - 550, 0);
             // 將圖片方塊加入表單
-            this.Controls.Add(pbx);
+            this.Controls.Add(pictureBox1);
+
+            Point[] curvePoints = new Point[LENGTH];    //一維陣列內有 N 個Point
+
+            int i;
+            for (i = 0; i < LENGTH; i++)
+            {
+                curvePoints[i].X = i;
+                curvePoints[i].Y = pictureBox1.Height - (int)allData[i * 4, 1] * 10 - 50;
+
+                //curvePoints[i].X = i;
+                //curvePoints[i].Y = i;
+
+                //curvePoints[i].Y = H - (int)y1_data[i] - 100;
+                //curvePoints[i].Y = H - (offset_y + (int)y1_data[i] + (draw_max - draw_min) / 2000) * 2;
+                //curvePoints[i].Y = H - (offset_y + (int)y1_data[i] + h / 2);
+            }
+
+
+            Graphics g;
+            Pen p;
+            SolidBrush sb;
+            Bitmap bitmap1;
+
+            p = new Pen(Color.Red, 3);
+            sb = new SolidBrush(Color.Red);
+
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.Gray);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
+
+
+            // Draw curve to screen.
+            g.DrawCurve(p, curvePoints); //畫曲線
+
+            
+            pictureBox1.Image = bitmap1;
+
+
+
+
         }
 
     }
