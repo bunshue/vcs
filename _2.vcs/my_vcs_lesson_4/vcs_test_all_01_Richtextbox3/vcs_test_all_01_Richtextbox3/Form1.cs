@@ -20,14 +20,15 @@ namespace vcs_test_all_01_Richtextbox3
         {
             richTextBox1.Clear();
 
+            //讀取純文字檔到richTextBox裏
             try
             {
                 richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
             catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show("File not found!");
-            }  
+                richTextBox2.Text += "找不到檔案\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

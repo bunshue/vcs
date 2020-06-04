@@ -27,46 +27,18 @@ namespace vcs_test_all_01_Richtextbox2
             InitializeComponent();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            start = 0;
-            sum = 0;
-
-            richTextBox1.Clear();
-
-            try
-            {
-                richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                richTextBox2.Text += "找不到檔案\n";
-            }
-
             button1.Enabled = true;
             button2.Enabled = true;
             button3.Enabled = true;
 
-            button4.Enabled = true;
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            button1.Enabled = false;
-            button2.Enabled = false;
-            button3.Enabled = false;
-
-            button4.Enabled = false;
             radioButton2.Checked = true;
 
             label3.Text = "";
             label4.Text = "";
-        }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            richTextBox1_TextChanged(sender, e);    //顯示文字總長
         }
 
         #region ***********全局变量*************
@@ -108,7 +80,7 @@ namespace vcs_test_all_01_Richtextbox2
                 if ((checkBox3.Checked == true) && (sum > 0))
                 {
                     sum = 0;
-                    richTextBox2.Text += "搜尋到底了, 再搜尋\n";
+                    richTextBox2.Text += "a搜尋到底了, 再搜尋\n";
                     //如果还想再找一遍,添加下面这句
                     rbox.SelectionStart = rbox.Text.Length;
                     FindUp(rbox, str);
@@ -144,15 +116,15 @@ namespace vcs_test_all_01_Richtextbox2
                     //richTextBox2.Text += "cannot find pattern\n";
                     this.seeks(str);
 
-                    if (checkBox3.Checked == true)
+                    if ((checkBox3.Checked == true) && (sum > 0))
                     {
-                        richTextBox2.Text += "搜尋到底了, 再搜尋\n";
+                        richTextBox2.Text += "b搜尋到底了, 再搜尋\n";
                         start = 0;
                         FindDown(rbox, str);
                     }
                     else
                     {
-                        richTextBox2.Text += "搜尋到底了\n";
+                        richTextBox2.Text += "c搜尋到底了\n";
                         start = los;
                     }
                     sum = 0;
@@ -332,6 +304,9 @@ namespace vcs_test_all_01_Richtextbox2
             RichTextBox rbox = this.richTextBox1;
             string str0 = textBox1.Text, str1 = textBox2.Text;
             this.ReplaceAll(rbox, str0, str1);
+            sum = 0;
+            start = 0;
+            flag_search_pattern_start = false;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -396,8 +371,6 @@ namespace vcs_test_all_01_Richtextbox2
         }
 
 
-
- 
 
 
 

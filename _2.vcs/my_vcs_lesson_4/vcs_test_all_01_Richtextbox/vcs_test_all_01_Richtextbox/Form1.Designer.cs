@@ -65,9 +65,7 @@
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.tb_search = new System.Windows.Forms.TextBox();
             this.button32 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
@@ -75,8 +73,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button37 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
-            this.button40 = new System.Windows.Forms.Button();
+            this.button41 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -99,7 +96,6 @@
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
                 "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。";
-            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
             this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
             this.richTextBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseUp);
             // 
@@ -473,16 +469,6 @@
             this.label1.TabIndex = 54;
             this.label1.Text = "C# richTextBox 按ctrl+A全選";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(449, 529);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(257, 24);
-            this.label2.TabIndex = 55;
-            this.label2.Text = "C# richTextBox 按F3搜尋";
-            // 
             // richTextBox2
             // 
             this.richTextBox2.Location = new System.Drawing.Point(772, 444);
@@ -490,16 +476,6 @@
             this.richTextBox2.Size = new System.Drawing.Size(561, 188);
             this.richTextBox2.TabIndex = 56;
             this.richTextBox2.Text = "";
-            // 
-            // tb_search
-            // 
-            this.tb_search.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_search.Location = new System.Drawing.Point(438, 561);
-            this.tb_search.Name = "tb_search";
-            this.tb_search.Size = new System.Drawing.Size(68, 33);
-            this.tb_search.TabIndex = 57;
-            this.tb_search.Text = "雨";
-            this.tb_search.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button32
             // 
@@ -580,35 +556,23 @@
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
-            // button39
+            // button41
             // 
-            this.button39.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button39.Location = new System.Drawing.Point(513, 559);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(49, 33);
-            this.button39.TabIndex = 65;
-            this.button39.Text = "搜尋";
-            this.button39.UseVisualStyleBackColor = true;
-            this.button39.Click += new System.EventHandler(this.button39_Click);
-            // 
-            // button40
-            // 
-            this.button40.Font = new System.Drawing.Font("新細明體", 10F);
-            this.button40.Location = new System.Drawing.Point(513, 594);
-            this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(49, 48);
-            this.button40.TabIndex = 66;
-            this.button40.Text = "多重搜尋";
-            this.button40.UseVisualStyleBackColor = true;
-            this.button40.Click += new System.EventHandler(this.button40_Click);
+            this.button41.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button41.Location = new System.Drawing.Point(773, 394);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(67, 42);
+            this.button41.TabIndex = 67;
+            this.button41.Text = "開啟";
+            this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1345, 644);
-            this.Controls.Add(this.button40);
-            this.Controls.Add(this.button39);
+            this.Controls.Add(this.button41);
             this.Controls.Add(this.button38);
             this.Controls.Add(this.button37);
             this.Controls.Add(this.textBox2);
@@ -617,9 +581,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button33);
             this.Controls.Add(this.button32);
-            this.Controls.Add(this.tb_search);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button26);
@@ -700,9 +662,7 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.TextBox tb_search;
         private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button34;
@@ -710,8 +670,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.Button button38;
-        private System.Windows.Forms.Button button39;
-        private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Button button41;
     }
 }
 
