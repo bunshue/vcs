@@ -16,36 +16,6 @@ namespace vcs_test_all_01_Richtextbox3
             InitializeComponent();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-
-            //讀取純文字檔到richTextBox裏
-            try
-            {
-                richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                richTextBox2.Text += "找不到檔案\n";
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-
-            try
-            {
-                richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔
-                richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
-            }
-            catch (System.Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }  
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
             int length = this.richTextBox1.TextLength;

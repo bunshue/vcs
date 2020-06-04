@@ -540,5 +540,21 @@ namespace vcs_test_all_01_Richtextbox
 
         }
 
+        private void button39_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+            try
+            {
+                richTextBox1.SaveFile(filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔
+                richTextBox2.Text += "存檔完成, 檔名 : " + filename + "\n";
+            }
+            catch (System.Exception err)
+            {
+                richTextBox2.Text += "存檔失敗, 原因 : " + err.Message + "\n";
+            }  
+
+        }
+
     }
 }

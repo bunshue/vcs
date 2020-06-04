@@ -74,6 +74,7 @@
             this.button37 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
+            this.button39 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -567,11 +568,23 @@
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
+            // button39
+            // 
+            this.button39.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button39.Location = new System.Drawing.Point(881, 394);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(67, 42);
+            this.button39.TabIndex = 68;
+            this.button39.Text = "儲存";
+            this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1345, 644);
+            this.Controls.Add(this.button39);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button38);
             this.Controls.Add(this.button37);
@@ -671,6 +684,7 @@
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.Button button38;
         private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button39;
     }
 }
 
