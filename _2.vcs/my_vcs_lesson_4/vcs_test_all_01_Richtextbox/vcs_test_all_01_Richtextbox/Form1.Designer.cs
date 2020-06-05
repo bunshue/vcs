@@ -75,6 +75,9 @@
             this.button38 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.button39 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
+            this.button42 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -560,7 +563,7 @@
             // button41
             // 
             this.button41.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button41.Location = new System.Drawing.Point(773, 394);
+            this.button41.Location = new System.Drawing.Point(772, 348);
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(67, 42);
             this.button41.TabIndex = 67;
@@ -571,7 +574,7 @@
             // button39
             // 
             this.button39.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button39.Location = new System.Drawing.Point(881, 394);
+            this.button39.Location = new System.Drawing.Point(919, 395);
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(67, 42);
             this.button39.TabIndex = 68;
@@ -579,11 +582,39 @@
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
+            // button40
+            // 
+            this.button40.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button40.Location = new System.Drawing.Point(846, 394);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(67, 42);
+            this.button40.TabIndex = 69;
+            this.button40.Text = "字型";
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
+            // 
+            // button42
+            // 
+            this.button42.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button42.Location = new System.Drawing.Point(773, 395);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(67, 42);
+            this.button42.TabIndex = 70;
+            this.button42.Text = "開啟";
+            this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1345, 644);
+            this.Controls.Add(this.button42);
+            this.Controls.Add(this.button40);
             this.Controls.Add(this.button39);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button38);
@@ -685,6 +716,9 @@
         private System.Windows.Forms.Button button38;
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Button button39;
+        private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Button button42;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

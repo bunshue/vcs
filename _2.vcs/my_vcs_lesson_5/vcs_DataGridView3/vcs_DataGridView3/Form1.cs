@@ -16,11 +16,6 @@ namespace vcs_DataGridView3
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            load_data();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             print_dataGridView_data(dataGridView1);
@@ -28,8 +23,8 @@ namespace vcs_DataGridView3
 
         void load_data()
         {
-            SetupDataGridView();
-            PopulateDataGridView();
+            SetupDataGridView();        //設定DGV
+            PopulateDataGridView();     //填入資料
         }
 
         private void SetupDataGridView()
@@ -113,6 +108,49 @@ namespace vcs_DataGridView3
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            load_data();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //int index = dataGridView1.Rows.Add();
+            //dataGridView1.Rows[index].Cells[0].Value = "123456";
+
+            string[] row0 = { "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" };
+            dataGridView1.Rows.Add(row0);
+
+            //DataGridViewRowCollection rows = dataGridView1.Rows;
+            //rows.Add(new Object[] { "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" });
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();         //刪除row資料, 留下標題
+
+            //dataGridView1.Columns.Clear();    //刪除標題
+
+            //clear
+            //dataGridView1.DataSource = null;
+            //dataGridView1.Invalidate();
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
+            {
+                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+            }
+
         }
 
     }

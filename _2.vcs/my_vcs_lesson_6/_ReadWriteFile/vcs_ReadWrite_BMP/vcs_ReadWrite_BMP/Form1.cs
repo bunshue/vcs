@@ -122,7 +122,7 @@ namespace vcs_ReadWrite_BMP
 
             //寫資料
             File.WriteAllBytes(filename, data);
-            richTextBox1.Text += "寫成檔案" + filename + "\n";
+            richTextBox1.Text += "\n製作BMP檔\t" + filename + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -131,8 +131,8 @@ namespace vcs_ReadWrite_BMP
 
             //讀取資料
             byte[] data = File.ReadAllBytes(filename);
-            richTextBox1.Text += "讀取檔案" + filename + "\t";
-            richTextBox1.Text += "len = " + data.Length.ToString() + "\n";
+            richTextBox1.Text += "\n讀取BMP檔\t" + filename + "\n";
+            richTextBox1.Text += "長度 = " + data.Length.ToString() + " 拜\n";
 
             /*
             打印資料

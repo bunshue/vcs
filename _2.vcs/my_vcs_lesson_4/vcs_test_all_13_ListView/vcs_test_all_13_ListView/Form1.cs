@@ -147,45 +147,49 @@ namespace vcs_test_all_13_ListView
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        void print_listView_data(ListView lv)
         {
-            richTextBox1.Text += "共有 : " + listView1.Columns.Count.ToString() + " 個欄目\n";
-            richTextBox1.Text += "共有 : " + listView1.Items.Count.ToString() + " 個項目\n";
+            richTextBox1.Text += "共有 : " + lv.Columns.Count.ToString() + " 個欄目\n";
+            richTextBox1.Text += "共有 : " + lv.Items.Count.ToString() + " 個項目\n";
 
-            if (listView1.Items.Count <= 0)
+            if (lv.Items.Count <= 0)
             {
                 richTextBox1.Text += "listView無內容\n";
                 return;
             }
 
-            richTextBox1.Text += "共有" + listView1.Items.Count.ToString() + "個項目，分別是：\n";
-            for (int i = 0; i < listView1.Items.Count; i++)
+            richTextBox1.Text += "共有" + lv.Items.Count.ToString() + "個項目，分別是：\n";
+            for (int i = 0; i < lv.Items.Count; i++)
             {
-                //ListViewItem t = listView1.Items[i];  //相同寫法
+                //ListViewItem t = lv.Items[i];  //相同寫法
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\t" + listView1.Items[i].SubItems[3].Text + "\n";
+                richTextBox1.Text += lv.Items[i].SubItems[0].Text + "\t" + lv.Items[i].SubItems[1].Text + "\t" + lv.Items[i].SubItems[2].Text + "\t" + lv.Items[i].SubItems[3].Text + "\n";
             }
 
-            if (listView1.SelectedItems.Count <= 0)
+            if (lv.SelectedItems.Count <= 0)
             {
                 //richTextBox1.Text += "未選擇listView項目\n";
                 return;
             }
-            richTextBox1.Text += "選擇" + listView1.SelectedItems.Count.ToString() + "個項目，分別是：\n";
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            richTextBox1.Text += "選擇" + lv.SelectedItems.Count.ToString() + "個項目，分別是：\n";
+            for (int i = 0; i < lv.SelectedItems.Count; i++)
             {
-                //ListViewItem t = listView1.SelectedItems[i];  //相同寫法
+                //ListViewItem t = lv.SelectedItems[i];  //相同寫法
                 //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += listView1.SelectedItems[i].SubItems[0].Text + "\t" + listView1.SelectedItems[i].SubItems[1].Text + "\t" + listView1.SelectedItems[i].SubItems[2].Text + listView1.SelectedItems[i].SubItems[3].Text + "\n";
+                richTextBox1.Text += lv.SelectedItems[i].SubItems[0].Text + "\t" + lv.SelectedItems[i].SubItems[1].Text + "\t" + lv.SelectedItems[i].SubItems[2].Text + lv.SelectedItems[i].SubItems[3].Text + "\n";
             }
 
-            richTextBox1.Text += "選擇" + listView1.SelectedIndices.Count.ToString() + "個項目，Index分別是：\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            richTextBox1.Text += "選擇" + lv.SelectedIndices.Count.ToString() + "個項目，Index分別是：\n";
+            for (int i = 0; i < lv.SelectedIndices.Count; i++)
             {
-                richTextBox1.Text += listView1.SelectedIndices[i].ToString() + " ";
+                richTextBox1.Text += lv.SelectedIndices[i].ToString() + " ";
             }
             richTextBox1.Text += "\n";
+        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            print_listView_data(listView1);
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -463,10 +463,10 @@ namespace vcs_ReadWrite_BIN
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += data[i].ToString("X2");
-                if ((i % 32) == 31)
+                if ((i % 16) == 15)
                     richTextBox1.Text += "\n";
                 else
-                    richTextBox1.Text += "  ";
+                    richTextBox1.Text += " ";
             }
             richTextBox1.Text += "\n";
         }
@@ -496,11 +496,14 @@ namespace vcs_ReadWrite_BIN
 
         private void button10_Click(object sender, EventArgs e)
         {
+            int len;
+            FileStream fs;
+
             //隨機binary讀取
-            FileStream fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            fs = File.Open(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             BinaryReader br = new BinaryReader(fs);
-            int len = (int)fs.Length;
-            richTextBox1.Text += "讀取檔案 : " + filename + "\n";
+            len = (int)fs.Length;
+            richTextBox1.Text += "隨機binary讀取\n讀取檔案 : " + filename + "\n";
             richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
 
             len = 7;
@@ -519,27 +522,29 @@ namespace vcs_ReadWrite_BIN
             br.Close();
             fs.Close();
 
-            richTextBox1.Text += "讀一個mp3檔的末128拜\n";
+            richTextBox1.Text += "\n讀一個mp3檔的末128拜\n";
             string filename2 = "C:\\______test_files\\aaaa.mp3";
+            len = 128;
             //隨機binary讀取
-            fs = File.Open(filename2, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            br = new BinaryReader(fs);
-            len = (int)fs.Length;
+            fs = new FileStream(filename2, FileMode.Open, FileAccess.Read);
+            Stream stream = fs;
+            int seekPos = len;
+            //stream.Seek(-seekPos, SeekOrigin.End);  //從最後開始往回算 128 拜    //same
+            fs.Seek(-seekPos, SeekOrigin.End);  //從最後開始往回算 128 拜
+            int rl = 0;
+            byte[] data2 = new byte[seekPos];
+            rl = stream.Read(data2, 0, seekPos);
+
             richTextBox1.Text += "讀取檔案 : " + filename2 + "\n";
             richTextBox1.Text += "檔案長度 : " + len.ToString() + "\n";
             richTextBox1.Text += "讀末128拜\n";
 
-            len = 128;
-            byte[] data2 = new byte[len];
-            fs.Seek(-len, SeekOrigin.End);  //從最後開始往回算 128 拜
-
             //讀取位元陣列
-            data = br.ReadBytes(len);       //用ReadBytes從目前位置開始讀len拜
-            print_data(data, len);
+            print_data(data2, len);
 
             //釋放資源
-            br.Close();
             fs.Close();
+            stream.Close();
         }
 
         private void button8_Click(object sender, EventArgs e)

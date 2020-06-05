@@ -538,6 +538,8 @@ namespace vcs_test_all_01_Richtextbox
                 richTextBox2.Text += "找不到檔案\n";
             }
 
+
+
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -553,6 +555,34 @@ namespace vcs_test_all_01_Richtextbox
             {
                 richTextBox2.Text += "存檔失敗, 原因 : " + err.Message + "\n";
             }  
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog().Equals(DialogResult.OK))
+            {
+                // RichTextBox.SelectionFont取得目前選擇的文字，並且將FontDialog所設定的字型結果套入 
+                //richTextBox1.SelectionFont = fontDialog1.Font;
+                richTextBox1.Font = fontDialog1.Font;
+            }   
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+            //讀取純文字檔到richTextBox裏
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
+                richTextBox1.Text += System.IO.File.ReadAllText(openFileDialog1.FileName, System.Text.Encoding.Default);
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
 
         }
 
