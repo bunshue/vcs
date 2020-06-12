@@ -14,32 +14,10 @@ namespace vcs_ox_game
         public Form1()
         {
             InitializeComponent();
-            Symbol1_tb.TextChanged += SymbolTextChenge;
-            Symbol2_tb.TextChanged += SymbolTextChenge;
-            Symbol1_tb.MouseClick += Symbol_tb_MouseClick;
-            Symbol2_tb.MouseClick += Symbol_tb_MouseClick;
         }
-
-        private void Symbol_tb_MouseClick(object sender, MouseEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            tb.SelectAll();
-        }
-
-        private void SymbolTextChenge(object sender, EventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            if (tb.TextLength >= 2)
-            {
-                tb.SelectAll();
-                MessageBox.Show("只能輸入一個字!", "錯誤!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
 
         Button[,] btn = new Button[3, 3];
         Label label;
-        Font font = new Font("微軟正黑體", 12);
         bool nowIndex = false;
         string symbol1, symbol2;
         int count;
@@ -53,8 +31,8 @@ namespace vcs_ox_game
 
         private void StartGame()
         {
-            symbol1 = Symbol1_tb.Text;
-            symbol2 = Symbol2_tb.Text;
+            symbol1 = "O";
+            symbol2 = "X";
             panel1.Visible = false;
             if (panel != null)
             {
@@ -62,7 +40,6 @@ namespace vcs_ox_game
                 Start_btn.Enabled = false;
             }
             nowIndex = false;
-            this.Size = new Size(420, 440);
             if (panel == null)
             {
                 panel = new Panel();
@@ -83,19 +60,19 @@ namespace vcs_ox_game
                 }
             btn = new Button[3, 3];
             for (int x = 0; x < btn.GetLength(0); x++)
+            {
                 for (int y = 0; y < btn.GetLength(1); y++)
                 {
                     btn[x, y] = new Button();
                     btn[x, y].Size = new Size(100, 100);
                     btn[x, y].Text = "";
                     btn[x, y].Location = new Point(50 + x * 100, 50 + y * 100);
-                    btn[x, y].Font = font;
                     btn[x, y].Click += ButtonsClick;
                     panel.Controls.Add(btn[x, y]);
                 }
+            }
             if (label == null)
                 label = new Label();
-            label.Font = font;
             label.Size = new Size(200, 20);
             label.Text = "玩家一，請選擇。";
             label.Location = new Point(50, 20);
@@ -117,7 +94,7 @@ namespace vcs_ox_game
                     label.Text = "GameOver!";
                     GameOver("GameOver");
                 }
-                Console.WriteLine(count);
+                richTextBox1.Text += "ButtonsClick, count = " + count.ToString() + "\n";
             }
         }
 
@@ -163,7 +140,7 @@ namespace vcs_ox_game
                 panel1.Visible = true;
                 Start_btn.Enabled = true;
                 panel.Visible = false;
-                this.Size = new Size(307, 254);
+                this.Size = new Size(800, 600);
             }
         }
 

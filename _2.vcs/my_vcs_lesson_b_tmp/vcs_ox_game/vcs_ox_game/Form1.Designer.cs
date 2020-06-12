@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Symbol1_tb = new System.Windows.Forms.TextBox();
-            this.Symbol2_tb = new System.Windows.Forms.TextBox();
             this.Start_btn = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -41,25 +40,9 @@
             this.panel1.Size = new System.Drawing.Size(421, 386);
             this.panel1.TabIndex = 0;
             // 
-            // Symbol1_tb
-            // 
-            this.Symbol1_tb.Location = new System.Drawing.Point(462, 21);
-            this.Symbol1_tb.Name = "Symbol1_tb";
-            this.Symbol1_tb.Size = new System.Drawing.Size(100, 22);
-            this.Symbol1_tb.TabIndex = 1;
-            this.Symbol1_tb.Text = "O";
-            // 
-            // Symbol2_tb
-            // 
-            this.Symbol2_tb.Location = new System.Drawing.Point(462, 66);
-            this.Symbol2_tb.Name = "Symbol2_tb";
-            this.Symbol2_tb.Size = new System.Drawing.Size(100, 22);
-            this.Symbol2_tb.TabIndex = 2;
-            this.Symbol2_tb.Text = "X";
-            // 
             // Start_btn
             // 
-            this.Start_btn.Location = new System.Drawing.Point(462, 127);
+            this.Start_btn.Location = new System.Drawing.Point(461, 21);
             this.Start_btn.Name = "Start_btn";
             this.Start_btn.Size = new System.Drawing.Size(75, 23);
             this.Start_btn.TabIndex = 3;
@@ -67,28 +50,33 @@
             this.Start_btn.UseVisualStyleBackColor = true;
             this.Start_btn.Click += new System.EventHandler(this.button1_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(461, 76);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(292, 447);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 557);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.Start_btn);
-            this.Controls.Add(this.Symbol2_tb);
-            this.Controls.Add(this.Symbol1_tb);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox Symbol1_tb;
-        private System.Windows.Forms.TextBox Symbol2_tb;
         private System.Windows.Forms.Button Start_btn;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
