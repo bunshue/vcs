@@ -37,7 +37,7 @@ namespace vcs_ox_game
             if (panel != null)
             {
                 panel.Visible = true;
-                Start_btn.Enabled = false;
+                button1.Enabled = false;
             }
             nowIndex = false;
             if (panel == null)
@@ -74,7 +74,7 @@ namespace vcs_ox_game
             if (label == null)
                 label = new Label();
             label.Size = new Size(200, 20);
-            label.Text = "玩家一，請選擇。";
+            label.Text = "玩家一，請選擇，畫圈。";
             label.Location = new Point(50, 20);
             panel.Controls.Add(label);
         }
@@ -86,20 +86,22 @@ namespace vcs_ox_game
             {
                 btn.Text = nowIndex == true ? symbol2 : symbol1;
                 nowIndex = !nowIndex;
-                label.Text = nowIndex == true ? "玩家二，請選擇。" : "玩家一，請選擇。";
+                label.Text = nowIndex == true ? "玩家二，請選擇，畫叉。" : "玩家一，請選擇，畫圈。";
                 Check();
                 count++;
+                richTextBox1.Text += "ButtonsClick, count = " + count.ToString() + "\n";
                 if (count == 9)
                 {
+                    richTextBox1.Text += "走滿棋格, count = " + count.ToString() + "\n";
                     label.Text = "GameOver!";
                     GameOver("GameOver");
                 }
-                richTextBox1.Text += "ButtonsClick, count = " + count.ToString() + "\n";
             }
         }
 
         private void Check()
         {
+            richTextBox1.Text += "檢查\t";
             for (int x = 0; x < btn.GetLength(0); x++)
                 if (btn[x, 0].Text == btn[x, 1].Text && btn[x, 1].Text == btn[x, 2].Text && btn[x, 0].Text != "" && btn[x, 1].Text != "" && btn[x, 2].Text != "")
                     GameOver(btn[x, 0].Text);
@@ -138,7 +140,7 @@ namespace vcs_ox_game
             else
             {
                 panel1.Visible = true;
-                Start_btn.Enabled = true;
+                button1.Enabled = true;
                 panel.Visible = false;
                 this.Size = new Size(800, 600);
             }

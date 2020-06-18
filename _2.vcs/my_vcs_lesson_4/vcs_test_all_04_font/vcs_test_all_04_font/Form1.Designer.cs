@@ -208,16 +208,16 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(428, 79);
+            this.listBox1.Location = new System.Drawing.Point(631, 51);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(264, 364);
+            this.listBox1.Size = new System.Drawing.Size(219, 364);
             this.listBox1.TabIndex = 15;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(428, 40);
+            this.button10.Location = new System.Drawing.Point(631, 12);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(264, 23);
+            this.button10.Size = new System.Drawing.Size(219, 23);
             this.button10.TabIndex = 16;
             this.button10.Text = "取得目前可用字型，顯示於ListBox";
             this.button10.UseVisualStyleBackColor = true;
@@ -227,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 539);
+            this.ClientSize = new System.Drawing.Size(862, 574);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button11);

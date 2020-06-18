@@ -136,6 +136,7 @@
     <None Include="img\1431440286_folder_open.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="recorder_sensor_fail.png" />
     <None Include="img\play_pause.bmp" />
     <None Include="img\refresh.bmp" />
     <None Include="img\minus.bmp" />

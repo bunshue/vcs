@@ -111,6 +111,21 @@ namespace vcs_test_all_09_Form
 
         private void button17_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "表單位置 " + this.Location.X.ToString() + ", " + this.Location.Y.ToString() + "\n";
+            richTextBox1.Text += "表單大小 " + this.Size.Width.ToString() + " X " + this.Size.Height.ToString() + "\n";
+            richTextBox1.Text += "表單大小 " + this.ClientSize.Width.ToString() + " X " + this.ClientSize.Height.ToString() + "\n";
+
+            //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
+
+            
+            
+            
+            
+            
+            //改變表單位置
+            //this.Location = new Point(1920 / 2, 0);
 
         }
 
@@ -306,21 +321,18 @@ namespace vcs_test_all_09_Form
         {
             richTextBox1.Text += "Form Size : w = " + this.Width.ToString() + " h = " + this.Height.ToString() + "\n";
             richTextBox1.Text += "Form ClientSize : w = " + this.ClientSize.Width.ToString() + " h = " + this.ClientSize.Height.ToString() + "\n";
-
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
             //改變表單大小
             this.Size = new Size(1920 / 2, 1080 / 2);
-
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
             //改變表單位置
             this.Location = new Point(1920 / 2, 0);
-
         }
 
         private void button38_Click(object sender, EventArgs e)

@@ -239,6 +239,12 @@
             this.tb_wait_check_data = new System.Windows.Forms.TextBox();
             this.tp_sale = new System.Windows.Forms.TabPage();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.gb_ng_reason = new System.Windows.Forms.GroupBox();
+            this.button78 = new System.Windows.Forms.Button();
+            this.tb_reason = new System.Windows.Forms.TextBox();
+            this.cb_reason3 = new System.Windows.Forms.CheckBox();
+            this.cb_reason2 = new System.Windows.Forms.CheckBox();
+            this.cb_reason1 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lb_main_mesg9 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -255,6 +261,25 @@
             this.button64 = new System.Windows.Forms.Button();
             this.tb_sale2 = new System.Windows.Forms.TextBox();
             this.tb_sale1 = new System.Windows.Forms.TextBox();
+            this.tp_Cosmo = new System.Windows.Forms.TabPage();
+            this.panel_cosmo = new System.Windows.Forms.Panel();
+            this.tb_sn_opal12 = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.lb_main_mesg12b = new System.Windows.Forms.Label();
+            this.lb_main_mesg12a = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.tb_wait_sn_data12 = new System.Windows.Forms.TextBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.button80 = new System.Windows.Forms.Button();
+            this.button82 = new System.Windows.Forms.Button();
+            this.button81 = new System.Windows.Forms.Button();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.button83 = new System.Windows.Forms.Button();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.lb_main_mesg12c = new System.Windows.Forms.Label();
             this.tp_Camera_Model = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -628,12 +653,16 @@
             this.rb_brightness_color_2 = new System.Windows.Forms.RadioButton();
             this.rb_brightness_color_1 = new System.Windows.Forms.RadioButton();
             this.bt_save_program_picture = new System.Windows.Forms.Button();
-            this.gb_ng_reason = new System.Windows.Forms.GroupBox();
-            this.cb_reason1 = new System.Windows.Forms.CheckBox();
-            this.cb_reason2 = new System.Windows.Forms.CheckBox();
-            this.cb_reason3 = new System.Windows.Forms.CheckBox();
-            this.tb_reason = new System.Windows.Forms.TextBox();
-            this.button78 = new System.Windows.Forms.Button();
+            this.gb_ng_reason1 = new System.Windows.Forms.GroupBox();
+            this.lb_ng_reason = new System.Windows.Forms.Label();
+            this.button79 = new System.Windows.Forms.Button();
+            this.tb_reason_stage1 = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.cb_stage1_ng = new System.Windows.Forms.CheckBox();
+            this.timer_stage12 = new System.Windows.Forms.Timer(this.components);
+            this.cb_check3c = new System.Windows.Forms.CheckBox();
+            this.cb_check2c = new System.Windows.Forms.CheckBox();
+            this.cb_check1c = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -660,6 +689,9 @@
             this.groupBox19.SuspendLayout();
             this.tp_sale.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            this.gb_ng_reason.SuspendLayout();
+            this.tp_Cosmo.SuspendLayout();
+            this.groupBox20.SuspendLayout();
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_USB.SuspendLayout();
@@ -722,7 +754,7 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.groupBox_brightness.SuspendLayout();
-            this.gb_ng_reason.SuspendLayout();
+            this.gb_ng_reason1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -841,13 +873,14 @@
             this.tabControl1.Controls.Add(this.tp_Package3);
             this.tabControl1.Controls.Add(this.tp_Check);
             this.tabControl1.Controls.Add(this.tp_sale);
+            this.tabControl1.Controls.Add(this.tp_Cosmo);
             this.tabControl1.Controls.Add(this.tp_Camera_Model);
             this.tabControl1.Controls.Add(this.tp_USB);
             this.tabControl1.Controls.Add(this.tp_Test);
             this.tabControl1.Controls.Add(this.tp_Layer);
             this.tabControl1.Controls.Add(this.tp_About);
             this.tabControl1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tabControl1.Location = new System.Drawing.Point(3, 58);
+            this.tabControl1.Location = new System.Drawing.Point(5, 59);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(948, 616);
@@ -3017,6 +3050,73 @@
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "出貨記錄";
             // 
+            // gb_ng_reason
+            // 
+            this.gb_ng_reason.Controls.Add(this.button78);
+            this.gb_ng_reason.Controls.Add(this.tb_reason);
+            this.gb_ng_reason.Controls.Add(this.cb_reason3);
+            this.gb_ng_reason.Controls.Add(this.cb_reason2);
+            this.gb_ng_reason.Controls.Add(this.cb_reason1);
+            this.gb_ng_reason.Location = new System.Drawing.Point(642, 272);
+            this.gb_ng_reason.Name = "gb_ng_reason";
+            this.gb_ng_reason.Size = new System.Drawing.Size(200, 248);
+            this.gb_ng_reason.TabIndex = 139;
+            this.gb_ng_reason.TabStop = false;
+            this.gb_ng_reason.Text = "NG原因";
+            // 
+            // button78
+            // 
+            this.button78.Location = new System.Drawing.Point(136, 208);
+            this.button78.Name = "button78";
+            this.button78.Size = new System.Drawing.Size(44, 34);
+            this.button78.TabIndex = 140;
+            this.button78.Text = "OK";
+            this.button78.UseVisualStyleBackColor = true;
+            this.button78.Click += new System.EventHandler(this.button78_Click);
+            // 
+            // tb_reason
+            // 
+            this.tb_reason.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_reason.Location = new System.Drawing.Point(16, 115);
+            this.tb_reason.Multiline = true;
+            this.tb_reason.Name = "tb_reason";
+            this.tb_reason.Size = new System.Drawing.Size(164, 127);
+            this.tb_reason.TabIndex = 3;
+            this.tb_reason.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_reason_KeyPress);
+            // 
+            // cb_reason3
+            // 
+            this.cb_reason3.AutoSize = true;
+            this.cb_reason3.Location = new System.Drawing.Point(16, 90);
+            this.cb_reason3.Name = "cb_reason3";
+            this.cb_reason3.Size = new System.Drawing.Size(75, 20);
+            this.cb_reason3.TabIndex = 2;
+            this.cb_reason3.Text = "其他：";
+            this.cb_reason3.UseVisualStyleBackColor = true;
+            this.cb_reason3.CheckedChanged += new System.EventHandler(this.cb_reason3_CheckedChanged);
+            // 
+            // cb_reason2
+            // 
+            this.cb_reason2.AutoSize = true;
+            this.cb_reason2.Location = new System.Drawing.Point(16, 60);
+            this.cb_reason2.Name = "cb_reason2";
+            this.cb_reason2.Size = new System.Drawing.Size(156, 20);
+            this.cb_reason2.TabIndex = 1;
+            this.cb_reason2.Text = "Connector接觸不良";
+            this.cb_reason2.UseVisualStyleBackColor = true;
+            this.cb_reason2.CheckedChanged += new System.EventHandler(this.cb_reason2_CheckedChanged);
+            // 
+            // cb_reason1
+            // 
+            this.cb_reason1.AutoSize = true;
+            this.cb_reason1.Location = new System.Drawing.Point(16, 30);
+            this.cb_reason1.Name = "cb_reason1";
+            this.cb_reason1.Size = new System.Drawing.Size(91, 20);
+            this.cb_reason1.TabIndex = 0;
+            this.cb_reason1.Text = "線材破損";
+            this.cb_reason1.UseVisualStyleBackColor = true;
+            this.cb_reason1.CheckedChanged += new System.EventHandler(this.cb_reason1_CheckedChanged);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -3179,6 +3279,217 @@
             this.tb_sale1.TabIndex = 52;
             this.tb_sale1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_sale1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sale1_KeyPress);
+            // 
+            // tp_Cosmo
+            // 
+            this.tp_Cosmo.Controls.Add(this.cb_check3c);
+            this.tp_Cosmo.Controls.Add(this.cb_check2c);
+            this.tp_Cosmo.Controls.Add(this.cb_check1c);
+            this.tp_Cosmo.Controls.Add(this.panel_cosmo);
+            this.tp_Cosmo.Controls.Add(this.tb_sn_opal12);
+            this.tp_Cosmo.Controls.Add(this.label53);
+            this.tp_Cosmo.Controls.Add(this.lb_main_mesg12b);
+            this.tp_Cosmo.Controls.Add(this.lb_main_mesg12a);
+            this.tp_Cosmo.Controls.Add(this.label52);
+            this.tp_Cosmo.Controls.Add(this.tb_wait_sn_data12);
+            this.tp_Cosmo.Controls.Add(this.groupBox20);
+            this.tp_Cosmo.Controls.Add(this.button83);
+            this.tp_Cosmo.Controls.Add(this.richTextBox3);
+            this.tp_Cosmo.Controls.Add(this.lb_main_mesg12c);
+            this.tp_Cosmo.Location = new System.Drawing.Point(4, 26);
+            this.tp_Cosmo.Name = "tp_Cosmo";
+            this.tp_Cosmo.Size = new System.Drawing.Size(940, 586);
+            this.tp_Cosmo.TabIndex = 32;
+            this.tp_Cosmo.Text = "COSMO";
+            this.tp_Cosmo.UseVisualStyleBackColor = true;
+            // 
+            // panel_cosmo
+            // 
+            this.panel_cosmo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel_cosmo.Location = new System.Drawing.Point(301, 448);
+            this.panel_cosmo.Name = "panel_cosmo";
+            this.panel_cosmo.Size = new System.Drawing.Size(380, 122);
+            this.panel_cosmo.TabIndex = 190;
+            // 
+            // tb_sn_opal12
+            // 
+            this.tb_sn_opal12.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sn_opal12.Location = new System.Drawing.Point(24, 180);
+            this.tb_sn_opal12.Multiline = true;
+            this.tb_sn_opal12.Name = "tb_sn_opal12";
+            this.tb_sn_opal12.Size = new System.Drawing.Size(182, 22);
+            this.tb_sn_opal12.TabIndex = 189;
+            this.tb_sn_opal12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label53.Location = new System.Drawing.Point(21, 210);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(118, 24);
+            this.label53.TabIndex = 188;
+            this.label53.Text = "COSMO訊息";
+            // 
+            // lb_main_mesg12b
+            // 
+            this.lb_main_mesg12b.AutoSize = true;
+            this.lb_main_mesg12b.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg12b.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg12b.Location = new System.Drawing.Point(212, 176);
+            this.lb_main_mesg12b.Name = "lb_main_mesg12b";
+            this.lb_main_mesg12b.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg12b.TabIndex = 187;
+            this.lb_main_mesg12b.Text = "mesg1";
+            // 
+            // lb_main_mesg12a
+            // 
+            this.lb_main_mesg12a.AutoSize = true;
+            this.lb_main_mesg12a.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg12a.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg12a.Location = new System.Drawing.Point(212, 130);
+            this.lb_main_mesg12a.Name = "lb_main_mesg12a";
+            this.lb_main_mesg12a.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg12a.TabIndex = 186;
+            this.lb_main_mesg12a.Text = "mesg1";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.Location = new System.Drawing.Point(20, 143);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(106, 24);
+            this.label52.TabIndex = 185;
+            this.label52.Text = "Opal序號";
+            // 
+            // tb_wait_sn_data12
+            // 
+            this.tb_wait_sn_data12.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wait_sn_data12.Location = new System.Drawing.Point(590, 170);
+            this.tb_wait_sn_data12.Multiline = true;
+            this.tb_wait_sn_data12.Name = "tb_wait_sn_data12";
+            this.tb_wait_sn_data12.Size = new System.Drawing.Size(182, 22);
+            this.tb_wait_sn_data12.TabIndex = 184;
+            this.tb_wait_sn_data12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.button80);
+            this.groupBox20.Controls.Add(this.button82);
+            this.groupBox20.Controls.Add(this.button81);
+            this.groupBox20.Controls.Add(this.label51);
+            this.groupBox20.Controls.Add(this.label50);
+            this.groupBox20.Controls.Add(this.comboBox3);
+            this.groupBox20.Controls.Add(this.comboBox4);
+            this.groupBox20.Location = new System.Drawing.Point(24, 19);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(508, 99);
+            this.groupBox20.TabIndex = 32;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Comport";
+            // 
+            // button80
+            // 
+            this.button80.Location = new System.Drawing.Point(200, 41);
+            this.button80.Name = "button80";
+            this.button80.Size = new System.Drawing.Size(87, 33);
+            this.button80.TabIndex = 28;
+            this.button80.Text = "COM Scan";
+            this.button80.UseVisualStyleBackColor = true;
+            this.button80.Click += new System.EventHandler(this.button80_Click);
+            // 
+            // button82
+            // 
+            this.button82.Location = new System.Drawing.Point(306, 40);
+            this.button82.Name = "button82";
+            this.button82.Size = new System.Drawing.Size(75, 33);
+            this.button82.TabIndex = 22;
+            this.button82.Text = "Connect";
+            this.button82.UseVisualStyleBackColor = true;
+            this.button82.Click += new System.EventHandler(this.button82_Click);
+            // 
+            // button81
+            // 
+            this.button81.Location = new System.Drawing.Point(399, 42);
+            this.button81.Name = "button81";
+            this.button81.Size = new System.Drawing.Size(91, 33);
+            this.button81.TabIndex = 23;
+            this.button81.Text = "Disconnect";
+            this.button81.UseVisualStyleBackColor = true;
+            this.button81.Click += new System.EventHandler(this.button81_Click);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label51.Location = new System.Drawing.Point(23, 23);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(80, 21);
+            this.label51.TabIndex = 24;
+            this.label51.Text = "Comport";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label50.Location = new System.Drawing.Point(137, 23);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(52, 21);
+            this.label50.TabIndex = 25;
+            this.label50.Text = "Baud";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "9600",
+            "19600",
+            "115200"});
+            this.comboBox3.Location = new System.Drawing.Point(112, 47);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(77, 24);
+            this.comboBox3.TabIndex = 27;
+            this.comboBox3.Text = "9600";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(11, 47);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(92, 24);
+            this.comboBox4.TabIndex = 26;
+            // 
+            // button83
+            // 
+            this.button83.Location = new System.Drawing.Point(819, 543);
+            this.button83.Name = "button83";
+            this.button83.Size = new System.Drawing.Size(109, 33);
+            this.button83.TabIndex = 30;
+            this.button83.Text = "clear";
+            this.button83.UseVisualStyleBackColor = true;
+            this.button83.Click += new System.EventHandler(this.button83_Click);
+            // 
+            // richTextBox3
+            // 
+            this.richTextBox3.Location = new System.Drawing.Point(24, 242);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(789, 186);
+            this.richTextBox3.TabIndex = 29;
+            this.richTextBox3.Text = "";
+            // 
+            // lb_main_mesg12c
+            // 
+            this.lb_main_mesg12c.AutoSize = true;
+            this.lb_main_mesg12c.Font = new System.Drawing.Font("Arial", 120F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg12c.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg12c.Location = new System.Drawing.Point(537, -4);
+            this.lb_main_mesg12c.Name = "lb_main_mesg12c";
+            this.lb_main_mesg12c.Size = new System.Drawing.Size(317, 183);
+            this.lb_main_mesg12c.TabIndex = 191;
+            this.lb_main_mesg12c.Text = "OK";
             // 
             // tp_Camera_Model
             // 
@@ -7704,72 +8015,111 @@
             this.bt_save_program_picture.UseVisualStyleBackColor = true;
             this.bt_save_program_picture.Click += new System.EventHandler(this.bt_save_program_picture_Click);
             // 
-            // gb_ng_reason
+            // gb_ng_reason1
             // 
-            this.gb_ng_reason.Controls.Add(this.button78);
-            this.gb_ng_reason.Controls.Add(this.tb_reason);
-            this.gb_ng_reason.Controls.Add(this.cb_reason3);
-            this.gb_ng_reason.Controls.Add(this.cb_reason2);
-            this.gb_ng_reason.Controls.Add(this.cb_reason1);
-            this.gb_ng_reason.Location = new System.Drawing.Point(642, 272);
-            this.gb_ng_reason.Name = "gb_ng_reason";
-            this.gb_ng_reason.Size = new System.Drawing.Size(200, 248);
-            this.gb_ng_reason.TabIndex = 139;
-            this.gb_ng_reason.TabStop = false;
-            this.gb_ng_reason.Text = "NG原因";
+            this.gb_ng_reason1.Controls.Add(this.lb_ng_reason);
+            this.gb_ng_reason1.Controls.Add(this.button79);
+            this.gb_ng_reason1.Controls.Add(this.tb_reason_stage1);
+            this.gb_ng_reason1.Controls.Add(this.checkBox2);
+            this.gb_ng_reason1.Location = new System.Drawing.Point(1004, 154);
+            this.gb_ng_reason1.Name = "gb_ng_reason1";
+            this.gb_ng_reason1.Size = new System.Drawing.Size(200, 223);
+            this.gb_ng_reason1.TabIndex = 140;
+            this.gb_ng_reason1.TabStop = false;
+            this.gb_ng_reason1.Text = "NG原因";
             // 
-            // cb_reason1
+            // lb_ng_reason
             // 
-            this.cb_reason1.AutoSize = true;
-            this.cb_reason1.Location = new System.Drawing.Point(16, 30);
-            this.cb_reason1.Name = "cb_reason1";
-            this.cb_reason1.Size = new System.Drawing.Size(91, 20);
-            this.cb_reason1.TabIndex = 0;
-            this.cb_reason1.Text = "線材破損";
-            this.cb_reason1.UseVisualStyleBackColor = true;
-            this.cb_reason1.CheckedChanged += new System.EventHandler(this.cb_reason1_CheckedChanged);
+            this.lb_ng_reason.AutoSize = true;
+            this.lb_ng_reason.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_ng_reason.Location = new System.Drawing.Point(10, 21);
+            this.lb_ng_reason.Name = "lb_ng_reason";
+            this.lb_ng_reason.Size = new System.Drawing.Size(64, 28);
+            this.lb_ng_reason.TabIndex = 233;
+            this.lb_ng_reason.Text = "原因";
             // 
-            // cb_reason2
+            // button79
             // 
-            this.cb_reason2.AutoSize = true;
-            this.cb_reason2.Location = new System.Drawing.Point(16, 60);
-            this.cb_reason2.Name = "cb_reason2";
-            this.cb_reason2.Size = new System.Drawing.Size(156, 20);
-            this.cb_reason2.TabIndex = 1;
-            this.cb_reason2.Text = "Connector接觸不良";
-            this.cb_reason2.UseVisualStyleBackColor = true;
-            this.cb_reason2.CheckedChanged += new System.EventHandler(this.cb_reason2_CheckedChanged);
+            this.button79.Location = new System.Drawing.Point(136, 172);
+            this.button79.Name = "button79";
+            this.button79.Size = new System.Drawing.Size(44, 34);
+            this.button79.TabIndex = 140;
+            this.button79.Text = "OK";
+            this.button79.UseVisualStyleBackColor = true;
+            this.button79.Click += new System.EventHandler(this.button79_Click);
             // 
-            // cb_reason3
+            // tb_reason_stage1
             // 
-            this.cb_reason3.AutoSize = true;
-            this.cb_reason3.Location = new System.Drawing.Point(16, 90);
-            this.cb_reason3.Name = "cb_reason3";
-            this.cb_reason3.Size = new System.Drawing.Size(75, 20);
-            this.cb_reason3.TabIndex = 2;
-            this.cb_reason3.Text = "其他：";
-            this.cb_reason3.UseVisualStyleBackColor = true;
-            this.cb_reason3.CheckedChanged += new System.EventHandler(this.cb_reason3_CheckedChanged);
+            this.tb_reason_stage1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_reason_stage1.Location = new System.Drawing.Point(16, 79);
+            this.tb_reason_stage1.Multiline = true;
+            this.tb_reason_stage1.Name = "tb_reason_stage1";
+            this.tb_reason_stage1.Size = new System.Drawing.Size(164, 127);
+            this.tb_reason_stage1.TabIndex = 3;
+            this.tb_reason_stage1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_reason_stage1_KeyPress);
             // 
-            // tb_reason
+            // checkBox2
             // 
-            this.tb_reason.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_reason.Location = new System.Drawing.Point(16, 115);
-            this.tb_reason.Multiline = true;
-            this.tb_reason.Name = "tb_reason";
-            this.tb_reason.Size = new System.Drawing.Size(164, 127);
-            this.tb_reason.TabIndex = 3;
-            this.tb_reason.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_reason_KeyPress);
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(16, 57);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(60, 16);
+            this.checkBox2.TabIndex = 2;
+            this.checkBox2.Text = "其他：";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // button78
+            // cb_stage1_ng
             // 
-            this.button78.Location = new System.Drawing.Point(136, 208);
-            this.button78.Name = "button78";
-            this.button78.Size = new System.Drawing.Size(44, 34);
-            this.button78.TabIndex = 140;
-            this.button78.Text = "OK";
-            this.button78.UseVisualStyleBackColor = true;
-            this.button78.Click += new System.EventHandler(this.button78_Click);
+            this.cb_stage1_ng.AutoSize = true;
+            this.cb_stage1_ng.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_stage1_ng.Location = new System.Drawing.Point(1002, 561);
+            this.cb_stage1_ng.Name = "cb_stage1_ng";
+            this.cb_stage1_ng.Size = new System.Drawing.Size(57, 25);
+            this.cb_stage1_ng.TabIndex = 141;
+            this.cb_stage1_ng.Text = "NG";
+            this.cb_stage1_ng.UseVisualStyleBackColor = true;
+            this.cb_stage1_ng.CheckedChanged += new System.EventHandler(this.cb_stage1_ng_CheckedChanged);
+            // 
+            // timer_stage12
+            // 
+            this.timer_stage12.Interval = 300;
+            this.timer_stage12.Tick += new System.EventHandler(this.timer_stage12_Tick);
+            // 
+            // cb_check3c
+            // 
+            this.cb_check3c.AutoSize = true;
+            this.cb_check3c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_check3c.Location = new System.Drawing.Point(70, 530);
+            this.cb_check3c.Name = "cb_check3c";
+            this.cb_check3c.Size = new System.Drawing.Size(126, 47);
+            this.cb_check3c.TabIndex = 194;
+            this.cb_check3c.Text = "身體";
+            this.cb_check3c.UseVisualStyleBackColor = true;
+            this.cb_check3c.CheckedChanged += new System.EventHandler(this.cb_check3c_CheckedChanged);
+            // 
+            // cb_check2c
+            // 
+            this.cb_check2c.AutoSize = true;
+            this.cb_check2c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_check2c.Location = new System.Drawing.Point(70, 480);
+            this.cb_check2c.Name = "cb_check2c";
+            this.cb_check2c.Size = new System.Drawing.Size(170, 47);
+            this.cb_check2c.TabIndex = 193;
+            this.cb_check2c.Text = "Hi-pot";
+            this.cb_check2c.UseVisualStyleBackColor = true;
+            this.cb_check2c.CheckedChanged += new System.EventHandler(this.cb_check2c_CheckedChanged);
+            // 
+            // cb_check1c
+            // 
+            this.cb_check1c.AutoSize = true;
+            this.cb_check1c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_check1c.Location = new System.Drawing.Point(70, 430);
+            this.cb_check1c.Name = "cb_check1c";
+            this.cb_check1c.Size = new System.Drawing.Size(126, 47);
+            this.cb_check1c.TabIndex = 192;
+            this.cb_check1c.Text = "底部";
+            this.cb_check1c.UseVisualStyleBackColor = true;
+            this.cb_check1c.CheckedChanged += new System.EventHandler(this.cb_check1c_CheckedChanged);
             // 
             // Form1
             // 
@@ -7777,6 +8127,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1370, 704);
+            this.Controls.Add(this.cb_stage1_ng);
+            this.Controls.Add(this.gb_ng_reason1);
             this.Controls.Add(this.bt_save_program_picture);
             this.Controls.Add(this.groupBox_brightness);
             this.Controls.Add(this.button49);
@@ -7846,6 +8198,12 @@
             this.tp_sale.ResumeLayout(false);
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
+            this.gb_ng_reason.ResumeLayout(false);
+            this.gb_ng_reason.PerformLayout();
+            this.tp_Cosmo.ResumeLayout(false);
+            this.tp_Cosmo.PerformLayout();
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
             this.tp_Camera_Model.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -7923,8 +8281,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
             this.groupBox_brightness.ResumeLayout(false);
             this.groupBox_brightness.PerformLayout();
-            this.gb_ng_reason.ResumeLayout(false);
-            this.gb_ng_reason.PerformLayout();
+            this.gb_ng_reason1.ResumeLayout(false);
+            this.gb_ng_reason1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8536,6 +8894,35 @@
         private System.Windows.Forms.CheckBox cb_reason2;
         private System.Windows.Forms.CheckBox cb_reason1;
         private System.Windows.Forms.Button button78;
+        private System.Windows.Forms.GroupBox gb_ng_reason1;
+        private System.Windows.Forms.Button button79;
+        private System.Windows.Forms.TextBox tb_reason_stage1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox cb_stage1_ng;
+        private System.Windows.Forms.Label lb_ng_reason;
+        private System.Windows.Forms.TabPage tp_Cosmo;
+        private System.Windows.Forms.Button button80;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Button button81;
+        private System.Windows.Forms.Button button82;
+        private System.Windows.Forms.Button button83;
+        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.TextBox tb_wait_sn_data12;
+        private System.Windows.Forms.Label lb_main_mesg12b;
+        private System.Windows.Forms.Label lb_main_mesg12a;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Timer timer_stage12;
+        private System.Windows.Forms.TextBox tb_sn_opal12;
+        private System.Windows.Forms.Panel panel_cosmo;
+        private System.Windows.Forms.Label lb_main_mesg12c;
+        private System.Windows.Forms.CheckBox cb_check3c;
+        private System.Windows.Forms.CheckBox cb_check2c;
+        private System.Windows.Forms.CheckBox cb_check1c;
     }
 }
 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Start_btn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -40,15 +40,15 @@
             this.panel1.Size = new System.Drawing.Size(421, 386);
             this.panel1.TabIndex = 0;
             // 
-            // Start_btn
+            // button1
             // 
-            this.Start_btn.Location = new System.Drawing.Point(461, 21);
-            this.Start_btn.Name = "Start_btn";
-            this.Start_btn.Size = new System.Drawing.Size(75, 23);
-            this.Start_btn.TabIndex = 3;
-            this.Start_btn.Text = "button1";
-            this.Start_btn.UseVisualStyleBackColor = true;
-            this.Start_btn.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Location = new System.Drawing.Point(461, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(97, 49);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Start";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
@@ -64,7 +64,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.Start_btn);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -75,7 +75,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button Start_btn;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
