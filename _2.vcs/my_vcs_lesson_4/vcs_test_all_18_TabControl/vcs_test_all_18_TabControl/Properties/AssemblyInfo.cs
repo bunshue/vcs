@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("my_vcs_19_讓TabPage顯示或隱藏")]
+[assembly: AssemblyTitle("vcs_test_all_18_TabControl")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("my_vcs_19_讓TabPage顯示或隱藏")]
+[assembly: AssemblyProduct("vcs_test_all_18_TabControl")]
 [assembly: AssemblyCopyright("Copyright © Home 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_19_讓TabPage顯示或隱藏
+namespace vcs_test_all_18_TabControl
 {
     static class Program
     {

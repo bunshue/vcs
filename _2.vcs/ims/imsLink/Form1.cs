@@ -167,6 +167,7 @@ namespace imsLink
         int data_B = 0;
         byte data_B_h = 0;
         byte data_B_l = 0;
+        double awb_time = 0;
 
         private const int SENSOR_EXPO = 0x01;	//camera sensor expo
         private const int SENSOR_GAIN = 0x02;	//camera sensor gain
@@ -2454,6 +2455,7 @@ namespace imsLink
             comboBox1.Items.Clear();
             comboBox4.Items.Clear();
             string[] tempString = SerialPort.GetPortNames();
+            Array.Sort(tempString);
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
             tempString.CopyTo(COM_Ports_NameArr, 0);
 
@@ -2808,11 +2810,15 @@ namespace imsLink
                 button7.Location = new Point(button7.Location.X - dx, button7.Location.Y);
                 bt_min.Location = new Point(button7.Location.X + 100, button7.Location.Y);
                 bt_save_program_picture.Location = new Point(button7.Location.X + 100 + 65, button7.Location.Y);
+                bt_read_camera_register.Location = new Point(button7.Location.X + 100 + 65+65, button7.Location.Y);
+                bt_restore_camera_setup.Location = new Point(button7.Location.X + 100 + 65+65+65, button7.Location.Y);
             }
             else
             {
                 bt_min.Location = new Point(button7.Location.X + 55, button7.Location.Y - 10);
                 bt_save_program_picture.Location = new Point(button7.Location.X + 55 + 65, button7.Location.Y - 10);
+                bt_read_camera_register.Location = new Point(button7.Location.X + 55 + 65 + 65, button7.Location.Y - 10);
+                bt_restore_camera_setup.Location = new Point(button7.Location.X + 55 + 65+65+65, button7.Location.Y - 10);
             }
 
             x_st = 20;
@@ -3404,6 +3410,7 @@ namespace imsLink
 
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
+                bt_restore_camera_setup.Visible = false;
                 /*
                 //debug code
                 bt_find_brightness.Visible = true;
@@ -8885,6 +8892,7 @@ namespace imsLink
                         }
 
                         tb_awb_mesg.Text = awb_result;
+                        lb_main_mesg2.Text = awb_result;
 
                         richTextBox1.Text += "AWB結果 : " + awb_result + "\n";
 
@@ -10356,6 +10364,7 @@ namespace imsLink
                 // Write result
                 if (flag_awb_break == false)
                 {
+                    awb_time = stopwatch.Elapsed.TotalSeconds;
                     richTextBox1.Text += "AWB 完成\t總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
                     richTextBox1.Text += "AWB 完成\t粗調 : " + check_cnt_large.ToString() + " 次\t細調 : " + check_cnt_small.ToString() + " 次\n";
                     richTextBox1.Text += "AWB 完成\t總命令個數 : " + Send_IMS_Data_cnt.ToString() + " 個\n";
@@ -12361,6 +12370,7 @@ namespace imsLink
         {
             richTextBox1.Text += "check_comport ST\n";
             string[] tempString = SerialPort.GetPortNames();
+            Array.Sort(tempString);
 
             richTextBox1.Text += "b共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string aaa in tempString)
@@ -12447,6 +12457,7 @@ namespace imsLink
             richTextBox1.Text += "try_connect_comport ST\n";
 
             string[] tempString = SerialPort.GetPortNames();
+            Array.Sort(tempString);
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
             tempString.CopyTo(COM_Ports_NameArr, 0);
 
@@ -13503,7 +13514,7 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
-                    content += "編號" + "," + "Opal序號" + "," + "色彩校正結果" + "," + "時間" + "\n";
+                    content += "編號" + "," + "Opal序號" + "," + "色彩校正結果" + "," + "時間" + "," + "R" + "," + "B" + "," + "時間" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
@@ -13604,8 +13615,9 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE2)
                 {
+                    richTextBox1.Text += "R = " + data_R.ToString() + ", B = " + data_B.ToString() + ", T = " + awb_time.ToString() + "\n";
                     csv_index2++;
-                    content += csv_index2.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    content += csv_index2.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + data_R.ToString() + "," + data_B.ToString() + "," + awb_time.ToString();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
@@ -19094,8 +19106,6 @@ namespace imsLink
             int j;
             Color p;
             Bitmap bm2 = null;
-            int th_h = (int)numericUpDown_find_brightness_h.Value;
-            int th_l = (int)numericUpDown_find_brightness_l.Value;
             double y_total = 0;
 
             tb_awb_mesg.Text = "量測亮度";
@@ -21228,7 +21238,12 @@ namespace imsLink
 
         private void bt_measure_brightness_Click(object sender, EventArgs e)
         {
-            find_brightness();
+            //find_brightness();
+            measure_brightness(50,50);
+            delay(1000);
+            measure_brightness(100, 100);
+            delay(1000);
+            measure_brightness(150, 150);
         }
 
         private void bt_save_program_picture_Click(object sender, EventArgs e)
@@ -21535,6 +21550,135 @@ namespace imsLink
                 cb_check3c.BackColor = Color.Red;
             else
                 cb_check3c.BackColor = Color.White;
+        }
+
+        private void bt_read_camera_register_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xFF, 0xDD, 0xEE, 0x01);
+        }
+
+        private void bt_restore_camera_setup_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xFF, 0xDD, 0xEE, 0x02);
+        }
+
+        private void button84_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xFF, 0xDD, 0xEE, 0x01);
+        }
+
+        private void button85_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xFF, 0xDD, 0xEE, 0x02);
+        }
+
+        int measure_brightness(int ww, int hh)
+        {
+            flag_do_find_awb_location = true;
+            int x_st = 0;
+            int y_st = 0;
+            int w;
+            int h;
+            int i;
+            int j;
+            Color p;
+            Bitmap bm2 = null;
+            double y_total = 0;
+            int result = -1;
+
+            tb_awb_mesg.Text = "量測亮度";
+
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm2 = bm;
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f1 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            try
+            {
+                ga = Graphics.FromImage(bm2);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            try
+            {
+                w = bm2.Width;
+                h = bm2.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            x_st = w / 2 - ww / 2;
+            y_st = h / 2 - hh / 2;
+
+            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            richTextBox1.Text += "ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+            for (j = y_st; j < (y_st + hh); j++)
+            {
+                for (i = x_st; i < (x_st + ww); i++)
+                {
+                    p = bm2.GetPixel(i, j);
+                    //bm2.SetPixel(i, j, Color.FromArgb(255, 0, 0));
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+                    y_total += yyy.Y;
+                }
+            }
+            ga.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
+
+            richTextBox1.Text += "量測點數 ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+            richTextBox1.Text += "y_total = " + y_total.ToString() + "\n";
+            richTextBox1.Text += "y_avg = " + (y_total / (ww * hh)).ToString() + "\n";
+
+            tb_awb_mesg.Text = (y_total / (ww * hh)).ToString();
+
+            GC.Collect();       //回收資源
+            pictureBox1.Image = bm2;
+
+            delay(2000);
+            flag_do_find_awb_location = false;
+            return S_OK;
         }
 
     }

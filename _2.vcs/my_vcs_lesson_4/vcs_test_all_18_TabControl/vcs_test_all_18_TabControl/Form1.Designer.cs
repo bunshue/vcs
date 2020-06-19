@@ -1,4 +1,4 @@
-﻿namespace my_vcs_19_讓TabPage顯示或隱藏
+﻿namespace vcs_test_all_18_TabControl
 {
     partial class Form1
     {

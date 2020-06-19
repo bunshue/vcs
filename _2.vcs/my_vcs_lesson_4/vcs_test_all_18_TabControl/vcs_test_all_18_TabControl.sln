@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "my_vcs_19_讓TabPage顯示或隱藏", "my_vcs_19_讓TabPage顯示或隱藏\my_vcs_19_讓TabPage顯示或隱藏.csproj", "{32C4DE12-2E7C-481B-90F0-F65DCB3D276F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_18_TabControl", "vcs_test_all_18_TabControl\vcs_test_all_18_TabControl.csproj", "{32C4DE12-2E7C-481B-90F0-F65DCB3D276F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

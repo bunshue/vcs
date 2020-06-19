@@ -8,8 +8,8 @@
     <ProjectGuid>{32C4DE12-2E7C-481B-90F0-F65DCB3D276F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>my_vcs_19_讓TabPage顯示或隱藏</RootNamespace>
-    <AssemblyName>my_vcs_19_讓TabPage顯示或隱藏</AssemblyName>
+    <RootNamespace>vcs_test_all_18_TabControl</RootNamespace>
+    <AssemblyName>vcs_test_all_18_TabControl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

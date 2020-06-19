@@ -602,6 +602,8 @@
             this.cb_1 = new System.Windows.Forms.CheckBox();
             this.cb_0 = new System.Windows.Forms.CheckBox();
             this.tp_About = new System.Windows.Forms.TabPage();
+            this.button84 = new System.Windows.Forms.Button();
+            this.button85 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -663,6 +665,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.cb_stage1_ng = new System.Windows.Forms.CheckBox();
             this.timer_stage12 = new System.Windows.Forms.Timer(this.components);
+            this.bt_read_camera_register = new System.Windows.Forms.Button();
+            this.bt_restore_camera_setup = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -3846,7 +3850,7 @@
             this.bt_measure_brightness.Name = "bt_measure_brightness";
             this.bt_measure_brightness.Size = new System.Drawing.Size(64, 32);
             this.bt_measure_brightness.TabIndex = 231;
-            this.bt_measure_brightness.Text = "Messure";
+            this.bt_measure_brightness.Text = "測光";
             this.bt_measure_brightness.UseVisualStyleBackColor = false;
             this.bt_measure_brightness.Click += new System.EventHandler(this.bt_measure_brightness_Click);
             // 
@@ -7572,6 +7576,8 @@
             // 
             // tp_About
             // 
+            this.tp_About.Controls.Add(this.button84);
+            this.tp_About.Controls.Add(this.button85);
             this.tp_About.Controls.Add(this.button47);
             this.tp_About.Controls.Add(this.button41);
             this.tp_About.Controls.Add(this.linkLabel1);
@@ -7586,6 +7592,32 @@
             this.tp_About.TabIndex = 19;
             this.tp_About.Text = "About";
             this.tp_About.UseVisualStyleBackColor = true;
+            // 
+            // button84
+            // 
+            this.button84.BackColor = System.Drawing.SystemColors.Control;
+            this.button84.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button84.ForeColor = System.Drawing.Color.Red;
+            this.button84.Location = new System.Drawing.Point(812, 430);
+            this.button84.Name = "button84";
+            this.button84.Size = new System.Drawing.Size(118, 32);
+            this.button84.TabIndex = 134;
+            this.button84.Text = "讀相機暫存器";
+            this.button84.UseVisualStyleBackColor = false;
+            this.button84.Click += new System.EventHandler(this.button84_Click);
+            // 
+            // button85
+            // 
+            this.button85.BackColor = System.Drawing.SystemColors.Control;
+            this.button85.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button85.ForeColor = System.Drawing.Color.Red;
+            this.button85.Location = new System.Drawing.Point(812, 468);
+            this.button85.Name = "button85";
+            this.button85.Size = new System.Drawing.Size(118, 32);
+            this.button85.TabIndex = 133;
+            this.button85.Text = "相機恢復預設";
+            this.button85.UseVisualStyleBackColor = false;
+            this.button85.Click += new System.EventHandler(this.button85_Click);
             // 
             // button47
             // 
@@ -8125,12 +8157,38 @@
             this.timer_stage12.Interval = 300;
             this.timer_stage12.Tick += new System.EventHandler(this.timer_stage12_Tick);
             // 
+            // bt_read_camera_register
+            // 
+            this.bt_read_camera_register.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_read_camera_register.ForeColor = System.Drawing.Color.Black;
+            this.bt_read_camera_register.Location = new System.Drawing.Point(1262, 189);
+            this.bt_read_camera_register.Name = "bt_read_camera_register";
+            this.bt_read_camera_register.Size = new System.Drawing.Size(60, 60);
+            this.bt_read_camera_register.TabIndex = 142;
+            this.bt_read_camera_register.Text = "讀相機暫存器";
+            this.bt_read_camera_register.UseVisualStyleBackColor = true;
+            this.bt_read_camera_register.Click += new System.EventHandler(this.bt_read_camera_register_Click);
+            // 
+            // bt_restore_camera_setup
+            // 
+            this.bt_restore_camera_setup.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_restore_camera_setup.ForeColor = System.Drawing.Color.Black;
+            this.bt_restore_camera_setup.Location = new System.Drawing.Point(1262, 255);
+            this.bt_restore_camera_setup.Name = "bt_restore_camera_setup";
+            this.bt_restore_camera_setup.Size = new System.Drawing.Size(60, 60);
+            this.bt_restore_camera_setup.TabIndex = 143;
+            this.bt_restore_camera_setup.Text = "相機恢復預設";
+            this.bt_restore_camera_setup.UseVisualStyleBackColor = true;
+            this.bt_restore_camera_setup.Click += new System.EventHandler(this.bt_restore_camera_setup_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1370, 704);
+            this.Controls.Add(this.bt_restore_camera_setup);
+            this.Controls.Add(this.bt_read_camera_register);
             this.Controls.Add(this.cb_stage1_ng);
             this.Controls.Add(this.gb_ng_reason1);
             this.Controls.Add(this.bt_save_program_picture);
@@ -8927,6 +8985,10 @@
         private System.Windows.Forms.CheckBox cb_check3c;
         private System.Windows.Forms.CheckBox cb_check2c;
         private System.Windows.Forms.CheckBox cb_check1c;
+        private System.Windows.Forms.Button bt_read_camera_register;
+        private System.Windows.Forms.Button bt_restore_camera_setup;
+        private System.Windows.Forms.Button button84;
+        private System.Windows.Forms.Button button85;
     }
 }
 

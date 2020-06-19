@@ -27,6 +27,7 @@ namespace vcs_ox_game
         private void button1_Click(object sender, EventArgs e)
         {
             StartGame();
+            button2.Enabled = true;
         }
 
         private void StartGame()
@@ -185,6 +186,17 @@ namespace vcs_ox_game
                 panel.Visible = false;
                 this.Size = new Size(800, 600);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //panel1.Visible = true;
+            label.Text = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
     }
