@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_test_all_22_Show_Font_ListView")]
+[assembly: AssemblyTitle("vcs_test_all_13_ListView4_ShowFont")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("vcs_test_all_22_Show_Font_ListView")]
+[assembly: AssemblyProduct("vcs_test_all_13_ListView4_ShowFont")]
 [assembly: AssemblyCopyright("Copyright © Home 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -262,6 +262,9 @@
             this.tb_sale2 = new System.Windows.Forms.TextBox();
             this.tb_sale1 = new System.Windows.Forms.TextBox();
             this.tp_Cosmo = new System.Windows.Forms.TabPage();
+            this.cb_check3c = new System.Windows.Forms.CheckBox();
+            this.cb_check2c = new System.Windows.Forms.CheckBox();
+            this.cb_check1c = new System.Windows.Forms.CheckBox();
             this.panel_cosmo = new System.Windows.Forms.Panel();
             this.tb_sn_opal12 = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
@@ -660,9 +663,6 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.cb_stage1_ng = new System.Windows.Forms.CheckBox();
             this.timer_stage12 = new System.Windows.Forms.Timer(this.components);
-            this.cb_check3c = new System.Windows.Forms.CheckBox();
-            this.cb_check2c = new System.Windows.Forms.CheckBox();
-            this.cb_check1c = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -3303,6 +3303,42 @@
             this.tp_Cosmo.Text = "COSMO";
             this.tp_Cosmo.UseVisualStyleBackColor = true;
             // 
+            // cb_check3c
+            // 
+            this.cb_check3c.AutoSize = true;
+            this.cb_check3c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_check3c.Location = new System.Drawing.Point(70, 530);
+            this.cb_check3c.Name = "cb_check3c";
+            this.cb_check3c.Size = new System.Drawing.Size(126, 47);
+            this.cb_check3c.TabIndex = 194;
+            this.cb_check3c.Text = "身體";
+            this.cb_check3c.UseVisualStyleBackColor = true;
+            this.cb_check3c.CheckedChanged += new System.EventHandler(this.cb_check3c_CheckedChanged);
+            // 
+            // cb_check2c
+            // 
+            this.cb_check2c.AutoSize = true;
+            this.cb_check2c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_check2c.Location = new System.Drawing.Point(70, 480);
+            this.cb_check2c.Name = "cb_check2c";
+            this.cb_check2c.Size = new System.Drawing.Size(170, 47);
+            this.cb_check2c.TabIndex = 193;
+            this.cb_check2c.Text = "Hi-pot";
+            this.cb_check2c.UseVisualStyleBackColor = true;
+            this.cb_check2c.CheckedChanged += new System.EventHandler(this.cb_check2c_CheckedChanged);
+            // 
+            // cb_check1c
+            // 
+            this.cb_check1c.AutoSize = true;
+            this.cb_check1c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_check1c.Location = new System.Drawing.Point(70, 430);
+            this.cb_check1c.Name = "cb_check1c";
+            this.cb_check1c.Size = new System.Drawing.Size(126, 47);
+            this.cb_check1c.TabIndex = 192;
+            this.cb_check1c.Text = "底部";
+            this.cb_check1c.UseVisualStyleBackColor = true;
+            this.cb_check1c.CheckedChanged += new System.EventHandler(this.cb_check1c_CheckedChanged);
+            // 
             // panel_cosmo
             // 
             this.panel_cosmo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -5125,18 +5161,22 @@
             this.comboBox_saturation.Items.AddRange(new object[] {
             "x0",
             "x0.25",
-            "x0.5",
+            "x0.50",
             "x0.75",
-            "x1",
+            "x0.80",
+            "x0.85",
+            "x0.90",
+            "x0.95",
+            "x1.00",
             "x1.25",
-            "x1.5",
+            "x1.50",
             "x1.75",
-            "x2.0"});
+            "x2.00"});
             this.comboBox_saturation.Location = new System.Drawing.Point(660, 131);
             this.comboBox_saturation.Name = "comboBox_saturation";
             this.comboBox_saturation.Size = new System.Drawing.Size(82, 32);
             this.comboBox_saturation.TabIndex = 172;
-            this.comboBox_saturation.Text = "x1";
+            this.comboBox_saturation.Text = "x1.00";
             this.comboBox_saturation.DropDown += new System.EventHandler(this.comboBox_saturation_DropDown);
             this.comboBox_saturation.SelectedIndexChanged += new System.EventHandler(this.comboBox_saturation_SelectedIndexChanged);
             // 
@@ -8084,42 +8124,6 @@
             // 
             this.timer_stage12.Interval = 300;
             this.timer_stage12.Tick += new System.EventHandler(this.timer_stage12_Tick);
-            // 
-            // cb_check3c
-            // 
-            this.cb_check3c.AutoSize = true;
-            this.cb_check3c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_check3c.Location = new System.Drawing.Point(70, 530);
-            this.cb_check3c.Name = "cb_check3c";
-            this.cb_check3c.Size = new System.Drawing.Size(126, 47);
-            this.cb_check3c.TabIndex = 194;
-            this.cb_check3c.Text = "身體";
-            this.cb_check3c.UseVisualStyleBackColor = true;
-            this.cb_check3c.CheckedChanged += new System.EventHandler(this.cb_check3c_CheckedChanged);
-            // 
-            // cb_check2c
-            // 
-            this.cb_check2c.AutoSize = true;
-            this.cb_check2c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_check2c.Location = new System.Drawing.Point(70, 480);
-            this.cb_check2c.Name = "cb_check2c";
-            this.cb_check2c.Size = new System.Drawing.Size(170, 47);
-            this.cb_check2c.TabIndex = 193;
-            this.cb_check2c.Text = "Hi-pot";
-            this.cb_check2c.UseVisualStyleBackColor = true;
-            this.cb_check2c.CheckedChanged += new System.EventHandler(this.cb_check2c_CheckedChanged);
-            // 
-            // cb_check1c
-            // 
-            this.cb_check1c.AutoSize = true;
-            this.cb_check1c.Font = new System.Drawing.Font("標楷體", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_check1c.Location = new System.Drawing.Point(70, 430);
-            this.cb_check1c.Name = "cb_check1c";
-            this.cb_check1c.Size = new System.Drawing.Size(126, 47);
-            this.cb_check1c.TabIndex = 192;
-            this.cb_check1c.Text = "底部";
-            this.cb_check1c.UseVisualStyleBackColor = true;
-            this.cb_check1c.CheckedChanged += new System.EventHandler(this.cb_check1c_CheckedChanged);
             // 
             // Form1
             // 

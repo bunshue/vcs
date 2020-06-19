@@ -46,6 +46,12 @@ namespace vcs_DynamicAddRemoveControls2
         {
             Button btn = sender as Button;
             richTextBox1.Text += "你按了 " + btn.Name + "\n";
+
+            if (btn.BackColor != Color.Pink)
+                btn.BackColor = Color.Pink;
+            else
+                btn.BackColor = SystemColors.ControlLight;
+
             /*
             if (btn.Text == "" && count < 9)
             {

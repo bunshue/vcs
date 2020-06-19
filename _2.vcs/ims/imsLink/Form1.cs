@@ -288,6 +288,10 @@ namespace imsLink
         int Send_IMS_Data_cnt = 0;
         int awb_time_out = 600;
 
+        string saturation_ratio = "X1.00";
+        byte g_TH2 = 0;
+        byte g_TH1 = 0;
+
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
         int timer_webcam_mode = FOCUS_ON_SERIAL;
@@ -580,7 +584,7 @@ namespace imsLink
 
             pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
 
-            comboBox_saturation.SelectedIndex = 4;
+            comboBox_saturation.SelectedIndex = 8;
             comboBox_denoise.SelectedIndex = 8;
             comboBox_sharpness.SelectedIndex = 2;
 
@@ -3507,6 +3511,7 @@ namespace imsLink
                 cb_air_ng.Visible = false;
                 cb_change_rank.Visible = false;
             }
+            richTextBox2.Visible = false;
 
             refresh_picturebox2();
             return;
@@ -3771,7 +3776,6 @@ namespace imsLink
             richTextBox1.Text += "call check_webcam() 111\n";
             check_webcam();
 
-            richTextBox2.Visible = false;
             bt_script_save.Visible = false;
             bt_script_cancel.Visible = false;
             bt_cancel.Visible = false;
@@ -5625,7 +5629,15 @@ namespace imsLink
                 drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
                 x_st = 10;
                 y_st = 10;
-                gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
+
+                if (flag_david_test == true)
+                {
+                    gg.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont1, drawBrush, x_st, y_st);
+                }
+                else
+                {
+                    gg.DrawString(drawDate, drawFont1, drawBrush, x_st, y_st);
+                }
             }
 
             if ((flag_enaglb_awb_function == true) && (flag_fullscreen == true))
@@ -14790,61 +14802,97 @@ namespace imsLink
             if (comboBox_saturation.SelectedIndex == 0)
             {
                 richTextBox1.Text += "x0\n";
+                saturation_ratio = "x0";
                 TH2 = 0;
                 TH1 = 0;
             }
             else if (comboBox_saturation.SelectedIndex == 1)
             {
                 richTextBox1.Text += "x0.25\n";
+                saturation_ratio = "x0.25";
                 TH2 = 0x10;
                 TH1 = 0x0A;
             }
             else if (comboBox_saturation.SelectedIndex == 2)
             {
-                richTextBox1.Text += "x0.5\n";
+                richTextBox1.Text += "x0.50\n";
+                saturation_ratio = "x0.50";
                 TH2 = 0x20;
                 TH1 = 0x14;
             }
             else if (comboBox_saturation.SelectedIndex == 3)
             {
                 richTextBox1.Text += "x0.75\n";
+                saturation_ratio = "x0.75";
                 TH2 = 0x26;
                 TH1 = 0x1D;
             }
             else if (comboBox_saturation.SelectedIndex == 4)
             {
-                richTextBox1.Text += "x1\n";
-                TH2 = 0x40;
-                TH1 = 0x28;
+                richTextBox1.Text += "x0.80\n";
+                saturation_ratio = "x0.80";
+                TH2 = 44;
+                TH1 = 32;
             }
             else if (comboBox_saturation.SelectedIndex == 5)
             {
-                richTextBox1.Text += "x1.25\n";
-                TH2 = 0x50;
-                TH1 = 0x32;
+                richTextBox1.Text += "x0.85\n";
+                saturation_ratio = "x0.85";
+                TH2 = 49;
+                TH1 = 34;
             }
             else if (comboBox_saturation.SelectedIndex == 6)
             {
-                richTextBox1.Text += "x1.5\n";
-                TH2 = 0x60;
-                TH1 = 0x3C;
+                richTextBox1.Text += "x0.90\n";
+                saturation_ratio = "x0.90";
+                TH2 = 54;
+                TH1 = 36;
             }
             else if (comboBox_saturation.SelectedIndex == 7)
             {
-                richTextBox1.Text += "x1.75\n";
-                TH2 = 0x70;
-                TH1 = 0x46;
+                richTextBox1.Text += "x0.95\n";
+                saturation_ratio = "x0.95";
+                TH2 = 59;
+                TH1 = 38;
             }
             else if (comboBox_saturation.SelectedIndex == 8)
             {
-                richTextBox1.Text += "x2.0\n";
+                richTextBox1.Text += "x1.00\n";
+                saturation_ratio = "x1.00";
+                TH2 = 0x40;
+                TH1 = 0x28;
+            }
+            else if (comboBox_saturation.SelectedIndex == 9)
+            {
+                richTextBox1.Text += "x1.25\n";
+                saturation_ratio = "x1.25";
+                TH2 = 0x50;
+                TH1 = 0x32;
+            }
+            else if (comboBox_saturation.SelectedIndex == 10)
+            {
+                richTextBox1.Text += "x1.50\n";
+                saturation_ratio = "x1.50";
+                TH2 = 0x60;
+                TH1 = 0x3C;
+            }
+            else if (comboBox_saturation.SelectedIndex == 11)
+            {
+                richTextBox1.Text += "x1.75\n";
+                saturation_ratio = "x1.75";
+                TH2 = 0x70;
+                TH1 = 0x46;
+            }
+            else if (comboBox_saturation.SelectedIndex == 12)
+            {
+                richTextBox1.Text += "x2.00\n";
+                saturation_ratio = "x2.00";
                 TH2 = 0x80;
                 TH1 = 0x50;
             }
             else
                 richTextBox1.Text += "XXXXXXXXXX\n";
 
-            richTextBox1.Text += "Setup saturation\n";
             if (flag_comport_ok == false)
             {
                 MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -14868,9 +14916,9 @@ namespace imsLink
 
             
             timer_stage2.Enabled = true;
-            
 
-
+            g_TH2 = TH2;
+            g_TH1 = TH1;
         }
         void do_save_camera_data()
         {
@@ -19506,7 +19554,15 @@ namespace imsLink
                     string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
                     g.ReleaseHdc();
-                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+                    if (flag_david_test == true)
+                    {
+                        g.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont, drawBrush, xPos, yPos);
+                    }
+                    else
+                    {
+                        g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                    }
                 }
                 else
                 {
@@ -19631,7 +19687,15 @@ namespace imsLink
                     string drawDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
                     g.ReleaseHdc();
-                    g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+
+                    if (flag_david_test == true)
+                    {
+                        g.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont, drawBrush, xPos, yPos);
+                    }
+                    else
+                    {
+                        g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+                    }
                 }
                 else
                 {

@@ -8,8 +8,8 @@
     <ProjectGuid>{758A072A-8F84-428A-89ED-F9A150E7447E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_22_Show_Font_ListView</RootNamespace>
-    <AssemblyName>vcs_test_all_22_Show_Font_ListView</AssemblyName>
+    <RootNamespace>vcs_test_all_13_ListView4_ShowFont</RootNamespace>
+    <AssemblyName>vcs_test_all_13_ListView4_ShowFont</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
