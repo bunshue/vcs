@@ -14,6 +14,10 @@ namespace vcs_test_all_00_Control
         public Form1()
         {
             InitializeComponent();
+            button6.Click += new System.EventHandler(button6_Click);//按下button6觸發button1_Click
+            button7.Click += new System.EventHandler(button6_Click);//按下button7觸發button1_Click
+            button8.Click += new System.EventHandler(button6_Click);//按下button8觸發button1_Click
+            button9.Click += new System.EventHandler(button6_Click);//按下button9觸發button1_Click
         }
 
         int i = 0;
@@ -115,6 +119,12 @@ namespace vcs_test_all_00_Control
 
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            richTextBox1.Text += "你按了 " + btn.Text + "\n";
 
+            richTextBox1.Text += "你按了 " + ((Button)sender).Name.ToString() + "\n";
+        }
     }
 }

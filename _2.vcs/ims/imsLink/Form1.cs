@@ -12122,28 +12122,27 @@ namespace imsLink
                 richTextBox1.Text += "call check_webcam ST, 檢查相機有無接上\n";
                 g_conn_status = CAMERA_UNKNOWN;
 
-                serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
-
-                delay(50);
-                //delay(100);
-                //delay(100);
+                delay(1000);
 
                 serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
 
                 Send_IMS_Data(0xFF, 0, 0, 0);
 
                 int cnt = 0;
-                while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 20))
+                while ((g_conn_status == CAMERA_UNKNOWN) && (cnt++ < 60))
                 {
-                    richTextBox1.Text += "-2xx";
-                    delay(50);
-                    if ((cnt % 5) == 4)
+                    richTextBox1.Text += "y";
+                    delay(10);
+                    if ((cnt % 40) == 39)
                     {
                         richTextBox1.Text += "無回應, 再發一次命令2\n";
-                        delay(500);
+                        serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
                         Send_IMS_Data(0xFF, 0, 0, 0);
                     }
                 }
+                richTextBox1.Text += "\ncnt = " + cnt.ToString() + "\n";    //usually cnt = 4
+                richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
+
                 if (g_conn_status == DONGLE_NONE)
                 {
                     richTextBox1.Text += "無連接器3\n";
@@ -12532,18 +12531,20 @@ namespace imsLink
                     Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
 
                     int cnt = 0;
-                    while ((flag_comport_connection_ok == false) && (cnt++ < 10))
+                    while ((flag_comport_connection_ok == false) && (cnt++ < 20))
                     {
-                        richTextBox1.Text += ".";
-                        delay(50);
-                        if ((cnt % 5) == 4)
+                        richTextBox1.Text += "x";
+                        delay(10);
+                        if ((cnt % 10) == 9)
                         {
                             richTextBox1.Text += "無回應, 再發一次命令1\n";
-                            delay(500);
+                            serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
                             Send_IMS_Data0(0xFF, 0x11, 0x52, 0x00); //directly send uart command
                         }
                     }
-                    //richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+                    richTextBox1.Text += "\ncnt = " + cnt.ToString() + "\n";    //usually cnt = 4
+                    richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
+
                     flag_comport_ok = false;
 
                     if (flag_comport_connection_ok == true)
@@ -14901,6 +14902,7 @@ namespace imsLink
             byte data;
             //ex: DA-52-1A-04-52-1B-D2-52-1E-07-52-1F-08-00-00-00
 
+            /*
             page = USER_PAGE1;
 
             for (i = 0; i < 16; i++)
@@ -14909,7 +14911,7 @@ namespace imsLink
             }
 
             user_flash_data[0] = 0xDA;  //header
-
+            */
             /*
             data = 30;
             user_flash_data[1] = 0x3A;  //WPT AH
@@ -14922,6 +14924,7 @@ namespace imsLink
             user_flash_data[6] = data;
             */
 
+            /*
             richTextBox1.Text += "Saturation x0.75\n";
             data = 0x26;
             user_flash_data[7] = 0x58;  //Saturation TH2 AH
@@ -14941,7 +14944,7 @@ namespace imsLink
             serialPort1.Write(user_flash_data, 0, 16);
 
             delay(500);
-
+            */
             page = USER_PAGE2;
 
             for (i = 0; i < 16; i++)

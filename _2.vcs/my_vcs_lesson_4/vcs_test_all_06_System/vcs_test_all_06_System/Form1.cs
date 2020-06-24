@@ -247,6 +247,14 @@ namespace vcs_test_all_06_System
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //(A)關於
+            //方案總管/vcs_test_all_06_System/右鍵/加入/Windows Form/關於對話方塊/新增
+
+            AboutBox1 formab = new AboutBox1();
+            formab.ShowDialog();
+
+
+            //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
 
         private void button23_Click(object sender, EventArgs e)
