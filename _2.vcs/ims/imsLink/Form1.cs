@@ -54,6 +54,7 @@ namespace imsLink
         private const int MODE_RELEASE_STAGE9 = 0x09;   //release mode stage 9, sale data
         private const int MODE_RELEASE_STAGE11 = 0x11;   //release mode stage 11, HiPot check
         private const int MODE_RELEASE_STAGE12 = 0x12;   //release mode stage 12, COSMO check
+        private const int MODE_RELEASE_STAGE20 = 0x20;   //release mode stage 20, chicony test
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
         private const bool SHOW_COMPORT_LOG = false;
@@ -533,6 +534,18 @@ namespace imsLink
                 timer_stage9.Enabled = false;
                 timer_stage12.Enabled = true;
             }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE20)
+            {
+                richTextBox1.Text += "MODE_RELEASE_STAGE20\t相機測試\n";
+                flag_enaglb_awb_function = false;
+                flag_usb_mode = false;  //for webcam
+                flag_check_webcam_signal = false;
+                timer_stage6.Enabled = false;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = false;
+                timer_stage9.Enabled = false;
+                timer_stage12.Enabled = false;
+            }
             else
             {
                 richTextBox1.Text += "MODE_RELEASE_STAGE unknown\n";
@@ -677,7 +690,7 @@ namespace imsLink
                 {
                     this.tp_USB.Text = "第二站";
                 }
-                else if ((flag_operation_mode == MODE_RELEASE_STAGE1C) || (flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11) || (flag_operation_mode == MODE_RELEASE_STAGE12))
+                else if ((flag_operation_mode == MODE_RELEASE_STAGE1C) || (flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11) || (flag_operation_mode == MODE_RELEASE_STAGE12) || (flag_operation_mode == MODE_RELEASE_STAGE20))
                 {
                     this.tp_USB.Text = "第一站";
                 }
@@ -725,6 +738,7 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Camera_Test.Parent = null;  //相機測試
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
@@ -750,6 +764,7 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Camera_Test.Parent = null;  //相機測試
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
@@ -766,6 +781,7 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Camera_Test.Parent = null;  //相機測試
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
@@ -791,6 +807,7 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Camera_Test.Parent = null;  //相機測試
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
@@ -893,7 +910,32 @@ namespace imsLink
                 this.tp_Package3.Parent = null;
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_Camera_Test.Parent = null;  //相機測試
                 tabControl1.SelectTab(tp_Cosmo);  //程式啟動時，直接跳到USB那頁。
+                timer_rtc.Enabled = false;
+                timer_rgb.Enabled = false;
+                timer_stage5.Enabled = false;
+                timer_stage1.Enabled = false;
+                //Comport_Scan();
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE20)
+            {
+                this.tp_Info.Parent = null;
+                this.tp_Connection.Parent = null;
+                this.tp_System.Parent = null;
+                this.tp_Camera.Parent = null;   //camera
+                this.tp_Camera_Model.Parent = null;
+                this.tp_Serial_Auto.Parent = null;
+                this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Test.Parent = null;     //Test
+                this.tp_Layer.Parent = null;    //Layer
+                this.tp_Package1.Parent = null;
+                this.tp_Package2.Parent = null;
+                this.tp_Package3.Parent = null;
+                this.tp_Check.Parent = null;    //檢查結果
+                this.tp_Cosmo.Parent = null;    //COSMO氣密測試
+                this.tp_sale.Parent = null;     //出貨紀錄
+                tabControl1.SelectTab(tp_Camera_Test);  //程式啟動時，直接跳到相機測試那頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
@@ -2453,12 +2495,15 @@ namespace imsLink
         {
             comboBox1.Items.Clear();
             comboBox4.Items.Clear();
+            comboBox7.Items.Clear();
             string[] tempString = SerialPort.GetPortNames();
             Array.Sort(tempString);
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
             tempString.CopyTo(COM_Ports_NameArr, 0);
 
             comboBox1.Items.Clear();    //Clear All items in Combobox
+            comboBox4.Items.Clear();    //Clear All items in Combobox
+            comboBox7.Items.Clear();    //Clear All items in Combobox
 
             richTextBox1.Text += "a共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
@@ -2466,6 +2511,7 @@ namespace imsLink
                 richTextBox1.Text += port + "\t";
                 comboBox1.Items.Add(port);
                 comboBox4.Items.Add(port);
+                comboBox7.Items.Add(port);
             }
             richTextBox1.Text += "\n";
 
@@ -2473,11 +2519,13 @@ namespace imsLink
             {
                 comboBox1.Text = COM_Ports_NameArr[0];
                 comboBox4.Text = COM_Ports_NameArr[0];
+                comboBox7.Text = COM_Ports_NameArr[0];
             }
 
             if (COM_Ports_NameArr.Length >= 2)
             {
                 comboBox1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+                comboBox7.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
             }
         }
 
@@ -3534,7 +3582,7 @@ namespace imsLink
                 flag_display_mode = DISPLAY_FHD;
             }
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE12))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE4) || (flag_operation_mode > MODE_RELEASE_STAGE20))
             {
                 MessageBox.Show("不能使用此模式, mode = " + flag_operation_mode.ToString() + ", 離開", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
@@ -3779,8 +3827,12 @@ namespace imsLink
                 bt_awb_test.BackColor = Color.Pink;
             }
 
-            richTextBox1.Text += "call check_webcam() 111\n";
-            check_webcam();
+            if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2) 
+                || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+            {
+                richTextBox1.Text += "call check_webcam() 111\n";
+                check_webcam();
+            }
 
             bt_script_save.Visible = false;
             bt_script_cancel.Visible = false;
@@ -3812,7 +3864,28 @@ namespace imsLink
                 button82_Click(sender, e);
             }
 
-            if (check_network_disk() == S_OK)
+            if (flag_operation_mode == MODE_RELEASE_STAGE20)
+            {
+                if (flag_comport_connection_ok == false)
+                {
+                    richTextBox1.Text += "MODE_RELEASE_STAGE20 call connect_IMS_comport()\n";
+                    connect_IMS_comport();
+                }
+
+                if (serialPort1.IsOpen)
+                {
+                    button89.Enabled = false;
+                    button90.Enabled = true;
+                    this.BackColor = System.Drawing.SystemColors.ControlLight;
+                    flag_comport_ok = true;
+                }
+                button84.Visible = false;
+                button85.Visible = false;
+                button47.Visible = false;
+                button41.Visible = false;
+            }
+
+            if ((flag_operation_mode != MODE_RELEASE_STAGE20) && (check_network_disk() == S_OK))
             {
                 show_main_message1("已連上網路磁碟機", S_OK, 30);
                 show_main_message2("已連上網路磁碟機", S_OK, 30);
@@ -12391,11 +12464,14 @@ namespace imsLink
                 serialPort1.Close();
                 this.BackColor = Color.Yellow;
                 button1.Enabled = true;
+                button89.Enabled = true;
                 button2.Enabled = false;
+                button90.Enabled = false;
                 flag_comport_ok = false;
             }
 
             comboBox1.Items.Clear();    //Clear All items in Combobox
+            comboBox7.Items.Clear();    //Clear All items in Combobox
             richTextBox1.Text += "try_connect_comport ST\n";
 
             string[] tempString = SerialPort.GetPortNames();
@@ -12408,6 +12484,7 @@ namespace imsLink
             {
                 richTextBox1.Text += port + "\t";
                 comboBox1.Items.Add(port);
+                comboBox7.Items.Add(port);
             }
             richTextBox1.Text += "\n";
 
@@ -12420,10 +12497,12 @@ namespace imsLink
             else if (COM_Ports_NameArr.Length == 1)
             {
                 comboBox1.Text = COM_Ports_NameArr[0];
+                comboBox7.Text = COM_Ports_NameArr[0];
             }
             else
             {
                 comboBox1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+                comboBox7.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
             }
 
             if (COM_Ports_NameArr.Length == 1)
@@ -12443,11 +12522,14 @@ namespace imsLink
                     //richTextBox1.Text += "try_index = " + try_index.ToString() + "\n";
 
                     comboBox1.Text = COM_Ports_NameArr[try_index];
+                    comboBox7.Text = COM_Ports_NameArr[try_index];
 
                     serialPort1.Close();
                     this.BackColor = Color.Yellow;
                     button1.Enabled = true;
+                    button89.Enabled = true;
                     button2.Enabled = false;
+                    button90.Enabled = false;
                     flag_comport_ok = false;
 
                     ret = connect_comport(COM_Ports_NameArr[try_index]);
@@ -12491,7 +12573,9 @@ namespace imsLink
                 //MessageBox.Show("無法連上Comport, 請重新連線");
                 richTextBox1.Text += "無法連上 " + comport + ", 請重新連線";
                 button1.Enabled = true;
+                button89.Enabled = true;
                 button2.Enabled = false;
+                button90.Enabled = false;
                 this.BackColor = Color.Pink;
                 flag_comport_ok = false;
             }
@@ -12552,14 +12636,18 @@ namespace imsLink
                         if (serialPort1.IsOpen)
                         {
                             button1.Enabled = false;
+                            button89.Enabled = false;
                             button2.Enabled = true;
+                            button90.Enabled = true;
                             this.BackColor = System.Drawing.SystemColors.ControlLight;
                             flag_comport_ok = true;
                         }
                         else
                         {
                             button1.Enabled = true;
+                            button89.Enabled = true;
                             button2.Enabled = false;
+                            button90.Enabled = false;
                             this.BackColor = Color.Pink;
                             flag_comport_ok = false;
                         }
@@ -13822,7 +13910,7 @@ namespace imsLink
             if (ret == S_OK)
             {
                 richTextBox1.Text += "已連上IMS EGD System\n";
-                show_main_message1("COM已連線", S_OK, 100);
+                show_main_message1("COM已連線", S_OK, 30);
                 pictureBox_comport.Image = imsLink.Properties.Resources.comport;
                 toolTip1.SetToolTip(pictureBox_comport, "COM已連線");
 
@@ -13846,7 +13934,9 @@ namespace imsLink
                 serialPort1.Close();
                 this.BackColor = Color.Yellow;
                 button1.Enabled = true;
+                button89.Enabled = true;
                 button2.Enabled = false;
+                button90.Enabled = false;
                 flag_comport_ok = false;
             }
         }
@@ -19801,7 +19891,9 @@ namespace imsLink
                 serialPort1.Close();
                 this.BackColor = Color.Yellow;
                 button1.Enabled = true;
+                button89.Enabled = true;
                 button2.Enabled = false;
+                button90.Enabled = false;
                 flag_comport_ok = false;
                 lb_main_mesg1.Text = "COM未連線";
                 playSound(S_FALSE);
@@ -21815,6 +21907,77 @@ namespace imsLink
                 flag_wait_for_confirm = true;
             }
             return;
+        }
+
+        private void button86_Click(object sender, EventArgs e)
+        {
+            Comport_Scan();
+        }
+
+        private void button89_Click(object sender, EventArgs e)
+        {
+            serialPort1.PortName = comboBox7.Text;
+            serialPort1.BaudRate = int.Parse(comboBox6.Text);
+
+            serialPort1.Open();
+            if (serialPort1.IsOpen)
+            {
+                button89.Enabled = false;
+                button90.Enabled = true;
+                this.BackColor = System.Drawing.SystemColors.ControlLight;
+                flag_comport_ok = true;
+            }
+        }
+
+        private void button90_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+                button89.Enabled = true;
+                button90.Enabled = false;
+                this.BackColor = Color.Yellow;
+                flag_comport_ok = false;
+            }
+        }
+
+        private void button91_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xFF, 0xCC, 0xBB, 0xAA);
+            show_main_message1("LED變換", S_FALSE, 10);
+        }
+
+        private void button92_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
+            richTextBox1.Text += "到手動模式\n";
+            show_main_message1("到手動模式", S_FALSE, 10);
+            button92.BackColor = Color.Pink;
+            button93.BackColor = System.Drawing.SystemColors.ControlLight;
+        }
+
+        private void button93_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
+            richTextBox1.Text += "到自動模式\n";
+            show_main_message1("到自動模式", S_FALSE, 10);
+            button92.BackColor = System.Drawing.SystemColors.ControlLight;
+            button93.BackColor = Color.Pink;
         }
     }
 }

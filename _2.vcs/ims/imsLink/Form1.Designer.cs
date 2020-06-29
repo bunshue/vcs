@@ -667,6 +667,19 @@
             this.timer_stage12 = new System.Windows.Forms.Timer(this.components);
             this.bt_read_camera_register = new System.Windows.Forms.Button();
             this.bt_restore_camera_setup = new System.Windows.Forms.Button();
+            this.tp_Camera_Test = new System.Windows.Forms.TabPage();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.button86 = new System.Windows.Forms.Button();
+            this.button89 = new System.Windows.Forms.Button();
+            this.button90 = new System.Windows.Forms.Button();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.button91 = new System.Windows.Forms.Button();
+            this.button92 = new System.Windows.Forms.Button();
+            this.button93 = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -759,6 +772,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.groupBox_brightness.SuspendLayout();
             this.gb_ng_reason1.SuspendLayout();
+            this.tp_Camera_Test.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -871,6 +886,7 @@
             this.tabControl1.Controls.Add(this.tp_Connection);
             this.tabControl1.Controls.Add(this.tp_System);
             this.tabControl1.Controls.Add(this.tp_Serial_Auto);
+            this.tabControl1.Controls.Add(this.tp_USB);
             this.tabControl1.Controls.Add(this.tp_Product);
             this.tabControl1.Controls.Add(this.tp_Package1);
             this.tabControl1.Controls.Add(this.tp_Package2);
@@ -878,8 +894,8 @@
             this.tabControl1.Controls.Add(this.tp_Check);
             this.tabControl1.Controls.Add(this.tp_sale);
             this.tabControl1.Controls.Add(this.tp_Cosmo);
+            this.tabControl1.Controls.Add(this.tp_Camera_Test);
             this.tabControl1.Controls.Add(this.tp_Camera_Model);
-            this.tabControl1.Controls.Add(this.tp_USB);
             this.tabControl1.Controls.Add(this.tp_Test);
             this.tabControl1.Controls.Add(this.tp_Layer);
             this.tabControl1.Controls.Add(this.tp_About);
@@ -3655,7 +3671,6 @@
             this.tp_USB.Controls.Add(this.bt_location);
             this.tp_USB.Controls.Add(this.groupBox_gridlinecolor);
             this.tp_USB.Controls.Add(this.rb_NXN);
-            this.tp_USB.Controls.Add(this.lb_class);
             this.tp_USB.Controls.Add(this.cb_air_ng);
             this.tp_USB.Controls.Add(this.cb_Gamma);
             this.tp_USB.Controls.Add(this.cb_Contrast_Brightness_Gamma);
@@ -3943,7 +3958,7 @@
             this.lb_class.AutoSize = true;
             this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_class.ForeColor = System.Drawing.Color.Red;
-            this.lb_class.Location = new System.Drawing.Point(669, 327);
+            this.lb_class.Location = new System.Drawing.Point(214, 161);
             this.lb_class.Name = "lb_class";
             this.lb_class.Size = new System.Drawing.Size(286, 111);
             this.lb_class.TabIndex = 181;
@@ -4061,6 +4076,7 @@
             this.gb_contrast_brightness3.Controls.Add(this.button77);
             this.gb_contrast_brightness3.Controls.Add(this.label49);
             this.gb_contrast_brightness3.Controls.Add(this.trackBar_WPT);
+            this.gb_contrast_brightness3.Controls.Add(this.lb_class);
             this.gb_contrast_brightness3.Controls.Add(this.tb_wpt3);
             this.gb_contrast_brightness3.Controls.Add(this.label46);
             this.gb_contrast_brightness3.Controls.Add(this.numericUpDown_wpt3);
@@ -8181,6 +8197,143 @@
             this.bt_restore_camera_setup.UseVisualStyleBackColor = true;
             this.bt_restore_camera_setup.Click += new System.EventHandler(this.bt_restore_camera_setup_Click);
             // 
+            // tp_Camera_Test
+            // 
+            this.tp_Camera_Test.Controls.Add(this.button93);
+            this.tp_Camera_Test.Controls.Add(this.button92);
+            this.tp_Camera_Test.Controls.Add(this.button91);
+            this.tp_Camera_Test.Controls.Add(this.groupBox21);
+            this.tp_Camera_Test.Location = new System.Drawing.Point(4, 26);
+            this.tp_Camera_Test.Name = "tp_Camera_Test";
+            this.tp_Camera_Test.Size = new System.Drawing.Size(940, 586);
+            this.tp_Camera_Test.TabIndex = 33;
+            this.tp_Camera_Test.Text = "相機測試";
+            this.tp_Camera_Test.UseVisualStyleBackColor = true;
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.button86);
+            this.groupBox21.Controls.Add(this.button89);
+            this.groupBox21.Controls.Add(this.button90);
+            this.groupBox21.Controls.Add(this.label54);
+            this.groupBox21.Controls.Add(this.label55);
+            this.groupBox21.Controls.Add(this.comboBox6);
+            this.groupBox21.Controls.Add(this.comboBox7);
+            this.groupBox21.Location = new System.Drawing.Point(216, 44);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(508, 99);
+            this.groupBox21.TabIndex = 33;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "Comport";
+            // 
+            // button86
+            // 
+            this.button86.Location = new System.Drawing.Point(200, 41);
+            this.button86.Name = "button86";
+            this.button86.Size = new System.Drawing.Size(87, 33);
+            this.button86.TabIndex = 28;
+            this.button86.Text = "COM Scan";
+            this.button86.UseVisualStyleBackColor = true;
+            this.button86.Click += new System.EventHandler(this.button86_Click);
+            // 
+            // button89
+            // 
+            this.button89.Location = new System.Drawing.Point(306, 40);
+            this.button89.Name = "button89";
+            this.button89.Size = new System.Drawing.Size(75, 33);
+            this.button89.TabIndex = 22;
+            this.button89.Text = "Connect";
+            this.button89.UseVisualStyleBackColor = true;
+            this.button89.Click += new System.EventHandler(this.button89_Click);
+            // 
+            // button90
+            // 
+            this.button90.Location = new System.Drawing.Point(399, 42);
+            this.button90.Name = "button90";
+            this.button90.Size = new System.Drawing.Size(91, 33);
+            this.button90.TabIndex = 23;
+            this.button90.Text = "Disconnect";
+            this.button90.UseVisualStyleBackColor = true;
+            this.button90.Click += new System.EventHandler(this.button90_Click);
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label54.Location = new System.Drawing.Point(23, 23);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(80, 21);
+            this.label54.TabIndex = 24;
+            this.label54.Text = "Comport";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label55.Location = new System.Drawing.Point(137, 23);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(52, 21);
+            this.label55.TabIndex = 25;
+            this.label55.Text = "Baud";
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Items.AddRange(new object[] {
+            "9600",
+            "19600",
+            "115200"});
+            this.comboBox6.Location = new System.Drawing.Point(112, 47);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(77, 24);
+            this.comboBox6.TabIndex = 27;
+            this.comboBox6.Text = "115200";
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(11, 47);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(92, 24);
+            this.comboBox7.TabIndex = 26;
+            // 
+            // button91
+            // 
+            this.button91.BackColor = System.Drawing.Color.Black;
+            this.button91.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button91.ForeColor = System.Drawing.Color.Gold;
+            this.button91.Location = new System.Drawing.Point(229, 236);
+            this.button91.Name = "button91";
+            this.button91.Size = new System.Drawing.Size(175, 169);
+            this.button91.TabIndex = 67;
+            this.button91.Text = "LED";
+            this.button91.UseVisualStyleBackColor = false;
+            this.button91.Click += new System.EventHandler(this.button91_Click);
+            // 
+            // button92
+            // 
+            this.button92.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button92.Location = new System.Drawing.Point(497, 227);
+            this.button92.Name = "button92";
+            this.button92.Size = new System.Drawing.Size(172, 63);
+            this.button92.TabIndex = 99;
+            this.button92.Text = "到手動模式";
+            this.button92.UseVisualStyleBackColor = true;
+            this.button92.Click += new System.EventHandler(this.button92_Click);
+            // 
+            // button93
+            // 
+            this.button93.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button93.Location = new System.Drawing.Point(497, 350);
+            this.button93.Name = "button93";
+            this.button93.Size = new System.Drawing.Size(172, 63);
+            this.button93.TabIndex = 100;
+            this.button93.Text = "到自動模式";
+            this.button93.UseVisualStyleBackColor = true;
+            this.button93.Click += new System.EventHandler(this.button93_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -8345,6 +8498,9 @@
             this.groupBox_brightness.PerformLayout();
             this.gb_ng_reason1.ResumeLayout(false);
             this.gb_ng_reason1.PerformLayout();
+            this.tp_Camera_Test.ResumeLayout(false);
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -8989,6 +9145,19 @@
         private System.Windows.Forms.Button bt_restore_camera_setup;
         private System.Windows.Forms.Button button84;
         private System.Windows.Forms.Button button85;
+        private System.Windows.Forms.TabPage tp_Camera_Test;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.Button button86;
+        private System.Windows.Forms.Button button89;
+        private System.Windows.Forms.Button button90;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.Button button91;
+        private System.Windows.Forms.Button button93;
+        private System.Windows.Forms.Button button92;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
