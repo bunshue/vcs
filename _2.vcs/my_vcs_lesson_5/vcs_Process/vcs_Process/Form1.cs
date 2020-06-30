@@ -25,7 +25,7 @@ namespace vcs_Process
 
         private void button1_Click(object sender, EventArgs e)
         {
-            myProcess = Process.Start(@"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            myProcess = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
             richTextBox1.Text += "ProcessName : " + myProcess.ProcessName + "\n";
             richTextBox1.Text += "SessionId : " + myProcess.SessionId.ToString() + "\n";
             richTextBox1.Text += "StartTime : " + myProcess.StartTime + "\n";
@@ -145,7 +145,7 @@ namespace vcs_Process
                 {
                     myProcess.StartInfo.UseShellExecute = false;
                     // You can start any process, HelloWorld is a do-nothing example.
-                    myProcess.StartInfo.FileName = @"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe";
+                    myProcess.StartInfo.FileName = @"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe";
                     myProcess.StartInfo.CreateNoWindow = true;
                     myProcess.Start();
                     // This code assumes the process you are starting will terminate itself. 
@@ -184,7 +184,7 @@ namespace vcs_Process
             System.Diagnostics.Process.Start("winver.exe ");              //--打开Windows版本信息
 
             //開啟imsLink
-            //System.Diagnostics.Process.Start(@"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            //System.Diagnostics.Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
 
         }
 
@@ -324,7 +324,7 @@ namespace vcs_Process
         {
             //在c#中，如果启动了外部程序，一般也可以通过退出码来确认程序的运行状态：
 
-            Process p = Process.Start(@"D:\___source_code\_git\part1\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            Process p = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
 
             p.WaitForExit();
             if (p.ExitCode == 0)

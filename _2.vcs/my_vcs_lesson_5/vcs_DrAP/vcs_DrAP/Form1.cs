@@ -1644,7 +1644,7 @@ namespace vcs_DrAP
 
             fileinfos.Clear();
 
-            string path = @"D:\___source_code\_git\part1\vcs\_2.vcs";
+            string path = @"C:\_git\vcs\_2.vcs";
 
             if (path == String.Empty)
                 path = search_path;
@@ -2157,7 +2157,7 @@ namespace vcs_DrAP
 
             fileinfos.Clear();
 
-            string path = @"D:\___source_code\_git\part1\vcs\_4.cmpp\_python_test";
+            string path = @"C:\_git\vcs\_4.cmpp\_python_test";
 
             if (path == String.Empty)
                 path = search_path;
@@ -2534,7 +2534,7 @@ namespace vcs_DrAP
 
             fileinfos.Clear();
 
-            string path = @"D:\___source_code\_git\part1\vcs\_4.cmpp\_matlab1_test";
+            string path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
 
             if (path == String.Empty)
                 path = search_path;

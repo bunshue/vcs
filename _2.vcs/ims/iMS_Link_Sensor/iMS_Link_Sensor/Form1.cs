@@ -21,6 +21,9 @@ namespace iMS_Link_Sensor
         private const int DONGLE_NONE = 2;	//no dongle
         private const int CAMERA_UNKNOWN = 3;	//dongle camera unknown status
         private const int CAMERA_SENSOR_FAIL = 6;	//dongle camera sensor fail
+        private const int SENSOR_EXPO = 0x01;	//camera sensor expo
+        private const int SENSOR_GAIN = 0x02;	//camera sensor gain
+
         bool flag_comport_ok = false;
         bool flag_comport_connection_ok = false;
 
@@ -36,10 +39,30 @@ namespace iMS_Link_Sensor
         int g_conn_status = CAMERA_UNKNOWN;
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
-        
+        int flag_wait_data_cmd = 0;
+        int data_expo = 0;
+        byte data_expo_h = 0;
+        byte data_expo_l = 0;
+        int data_gain = 0;
+        byte data_gain_h = 0;
+        byte data_gain_l = 0;
+        byte DongleAddr_h;
+        byte DongleAddr_l;
+        byte DongleData;
+
+        bool flag_awb_update_expo = false;
+        bool flag_awb_update_gain = false;
+
         public Form1()
         {
             InitializeComponent();
+            numericUpDown_expo.Value = trackBar_expo.Value;
+            numericUpDown_gain.Value = trackBar_gain.Value;
+
+            trackBar_gain.Enabled = false;
+            tb_gain.Enabled = false;
+            numericUpDown_gain.Enabled = false;
+            bt_setup_gain.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -696,15 +719,51 @@ namespace iMS_Link_Sensor
                             {
                                 if (input[2] == 0x01)
                                 {
+                                    data_expo_h = (byte)input[3];
+                                    flag_awb_update_expo = true;
+                                    //richTextBox1.Text += "eH  ";
+                                    if (flag_wait_data_cmd == SENSOR_EXPO)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x02)
                                 {
+                                    data_expo_l = (byte)input[3];
+                                    //richTextBox1.Text += "eL  ";
+                                    if (flag_awb_update_expo == true)
+                                    {
+                                        flag_awb_update_expo = false;
+                                        data_expo = (int)data_expo_h * 256 + (int)data_expo_l;
+                                        lb_awb_result_expo.Text = "0x" + data_expo.ToString("X2") + " " + data_expo.ToString("D3");
+                                        //if (flag_update_RGB_scrollbar == true)
+                                            numericUpDown_expo.Value = data_expo;
+                                        //flag_wait_receive_data = 0;
+                                    }
+                                    if (flag_wait_data_cmd == SENSOR_EXPO)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x0A)
                                 {
+                                    data_gain_h = (byte)input[3];
+                                    flag_awb_update_gain = true;
+                                    //richTextBox1.Text += "gH  ";
+                                    if (flag_wait_data_cmd == SENSOR_GAIN)
+                                        flag_wait_data_cmd = 0;
                                 }
                                 else if (input[2] == 0x0B)
                                 {
+                                    data_gain_l = (byte)input[3];
+                                    //richTextBox1.Text += "gL  ";
+                                    if (flag_awb_update_gain == true)
+                                    {
+                                        flag_awb_update_gain = false;
+                                        data_gain = (int)data_gain_h * 256 + (int)data_gain_l;
+                                        lb_awb_result_gain.Text = "0x" + data_gain.ToString("X2") + " " + data_gain.ToString("D3");
+                                        //if (flag_update_RGB_scrollbar == true)
+                                            numericUpDown_gain.Value = data_gain;
+                                    }
+                                    if (flag_wait_data_cmd == SENSOR_GAIN)
+                                        flag_wait_data_cmd = 0;
+
                                 }
                             }
                             else if (input[1] == 0x52)
@@ -994,8 +1053,8 @@ namespace iMS_Link_Sensor
                 return;
             }
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
-            richTextBox1.Text += "到手動模式\n";
-            show_main_message1("到手動模式", S_FALSE, 10);
+            richTextBox1.Text += "到手動模式\t自動曝光(AE) 關\n";
+            show_main_message1("自動曝光(AE) 關", S_FALSE, 10);
             button92.BackColor = Color.Pink;
             button93.BackColor = System.Drawing.SystemColors.ControlLight;
         }
@@ -1008,8 +1067,8 @@ namespace iMS_Link_Sensor
                 return;
             }
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
-            richTextBox1.Text += "到自動模式\n";
-            show_main_message1("到自動模式", S_FALSE, 10);
+            richTextBox1.Text += "到自動模式\t自動曝光(AE) 開\n";
+            show_main_message1("自動曝光(AE) 開", S_FALSE, 10);
             button92.BackColor = System.Drawing.SystemColors.ControlLight;
             button93.BackColor = Color.Pink;
         }
@@ -1096,6 +1155,339 @@ namespace iMS_Link_Sensor
         {
             richTextBox1.Clear();
         }
+
+        private void numericUpDown_expo_ValueChanged(object sender, EventArgs e)
+        {
+            trackBar_expo.Value = (Int32)numericUpDown_expo.Value;
+            tb_expo.Text = Convert.ToString(trackBar_expo.Value, 16).ToUpper();
+
+        }
+
+        private void numericUpDown_gain_ValueChanged(object sender, EventArgs e)
+        {
+            trackBar_gain.Value = (Int32)numericUpDown_gain.Value;
+            tb_gain.Text = Convert.ToString(trackBar_gain.Value, 16).ToUpper();
+
+        }
+
+        private void bt_setup_expo_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_expo.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x01;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x02;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+
+            richTextBox1.Text += "設定EXPO 為 " + SendData.ToString() + "\n";
+            show_main_message1("設定EXPO 為 " + SendData.ToString(), S_FALSE, 30);
+        }
+
+        private void bt_setup_gain_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SendData = trackBar_gain.Value;
+            byte dd;
+
+            dd = (byte)(SendData / 256);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x0A;
+            //Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+            DongleAddr_h = 0x35;
+            DongleAddr_l = 0x0B;
+
+            dd = (byte)(SendData % 256);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
+
+            richTextBox1.Text += "設定GAIN 為 " + SendData.ToString() + "\n";
+            show_main_message1("設定GAIN 為 " + SendData.ToString(), S_FALSE, 30);
+
+        }
+
+        private void trackBar_expo_Scroll(object sender, EventArgs e)
+        {
+            numericUpDown_expo.Value = trackBar_expo.Value;
+        }
+
+        private void trackBar_gain_Scroll(object sender, EventArgs e)
+        {
+            numericUpDown_gain.Value = trackBar_gain.Value;
+        }
+
+        private void tb_expo_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_expo.Text.Length == 0)
+            {
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_expo.Text, 16);
+            if ((value < 0) || (value > 511))
+            {
+                tb_expo.Text = "";
+                return;
+            }
+            numericUpDown_expo.Value = value;
+
+        }
+
+        private void tb_gain_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_gain.Text.Length == 0)
+            {
+                return;
+            }
+
+            int value = Convert.ToInt32(tb_gain.Text, 16);
+            if ((value < 0) || (value > 511))
+            {
+                tb_gain.Text = "";
+                return;
+            }
+            numericUpDown_gain.Value = value;
+
+        }
+
+        bool check_textbox_decimal(KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void numericUpDown_expo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_decimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_expo_Click(sender, e);
+            }
+
+        }
+
+        private void numericUpDown_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_decimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_setup_gain_Click(sender, e);
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "讀取EXPO和GAIN\n";
+            show_main_message1("讀取EXPO和GAIN", S_FALSE, 30);
+
+            lb_awb_result_expo.Text = "";
+            lb_awb_result_gain.Text = "";
+            flag_awb_update_expo = false;
+            flag_awb_update_gain = false;
+
+            get_expo_data();
+            get_gain_data();
+        }
+
+        int get_expo_data()
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return S_FALSE;
+            }
+            data_expo = -1;
+            lb_awb_result_expo.Text = "";
+            flag_awb_update_expo = false;
+            read_camera_sensor(SENSOR_EXPO);
+
+            if (data_expo != -1)
+            {
+                return S_OK;
+            }
+            else
+            {
+                richTextBox1.Text += "資料不完整expo\t";
+                return S_FALSE;
+            }
+        }
+
+        int get_gain_data()
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return S_FALSE;
+            }
+            data_gain = -1;
+            lb_awb_result_gain.Text = "";
+            flag_awb_update_gain = false;
+            read_camera_sensor(SENSOR_GAIN);
+
+            if (data_gain != -1)
+            {
+                return S_OK;
+            }
+            else
+            {
+                richTextBox1.Text += "資料不完整gain\t";
+                return S_FALSE;
+            }
+        }
+
+        bool read_camera_sensor0(int cmd, byte DongleAddr_h, byte DongleAddr_l)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            flag_wait_data_cmd = cmd;
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+
+            int cnt = 0;
+            int cnt_max = 30;
+
+            cnt = 0;
+            while ((flag_wait_data_cmd != 0) && (cnt < cnt_max))
+            {
+                cnt++;
+                //richTextBox1.Text += "e";
+                //richTextBox1.Text += "e" + cnt.ToString() + " ";
+                delay(10);
+            }
+
+            flag_wait_data_cmd = 0;
+
+            //richTextBox1.Text += "wait result ok cnt = " + cnt.ToString() + "\n";
+            if (cnt == cnt_max)
+            {
+                richTextBox1.Text += "Fail " + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\t";
+                return false;
+            }
+            else
+            {
+                //richTextBox1.Text += "OK " + DongleAddr_h.ToString("X2") + DongleAddr_l.ToString("X2") + "\n";
+                return true;
+            }
+        }
+
+        void read_camera_sensor(int cmd)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            byte DongleAddr_h1 = 0;
+            byte DongleAddr_l1 = 0;
+            byte DongleAddr_h2 = 0;
+            byte DongleAddr_l2 = 0;
+
+            if (cmd == SENSOR_EXPO)
+            {
+                DongleAddr_h1 = 0x35;
+                DongleAddr_l1 = 0x01;
+                DongleAddr_h2 = 0x35;
+                DongleAddr_l2 = 0x02;
+            }
+            else if (cmd == SENSOR_GAIN)
+            {
+                DongleAddr_h1 = 0x35;
+                DongleAddr_l1 = 0x0A;
+                DongleAddr_h2 = 0x35;
+                DongleAddr_l2 = 0x0B;
+            }
+            else
+            {
+                richTextBox1.Text += "unknown cmd = " + cmd.ToString() + ", abort\n";
+                return;
+            }
+
+            while (read_camera_sensor0(cmd, DongleAddr_h1, DongleAddr_l1) == false)
+            {
+                richTextBox1.Text += "read again " + DongleAddr_h1.ToString("X2") + DongleAddr_l1.ToString("X2") + "\t";
+                delay(20);
+            }
+
+            if ((DongleAddr_h2 == 0x00) && (DongleAddr_l2 == 0x00))
+            {
+                return;
+            }
+
+            while (read_camera_sensor0(cmd, DongleAddr_h2, DongleAddr_l2) == false)
+            {
+                richTextBox1.Text += "read again " + DongleAddr_h2.ToString("X2") + DongleAddr_l2.ToString("X2") + "\t";
+                delay(20);
+            }
+        }
+
+        private void tb_expo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+        }
+
+        private void tb_gain_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+        }
+
+        bool check_textbox_hexadecimal(KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
 
     }
 }
