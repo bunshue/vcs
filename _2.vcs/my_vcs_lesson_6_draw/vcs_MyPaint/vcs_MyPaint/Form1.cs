@@ -983,6 +983,52 @@ namespace vcs_MyPaint
 
             richTextBox1.Text += "FullHD點圖 SP\n";
         }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap("C:\\______test_files\\bear.jpg");
+            Bitmap bitmap2 = new Bitmap("C:\\______test_files\\__RW\\_png\\ims-small-logo.png");
+
+            //將圖２貼到圖１左上角
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.DrawImage(bitmap2, 0, 0);
+
+            //在圖１之右下角輸出文字
+            Font f = new Font("Brush Script MT", 24, FontStyle.Italic);
+            Brush b = new SolidBrush(Color.White);
+            Brush bb = new SolidBrush(Color.Black);
+            string ct = "小熊家族";
+
+            int x = bitmap1.Width - 200;
+            int y = bitmap1.Height - 50;
+
+            g.DrawString(ct, f, b, x, y);
+            g.DrawString(ct, f, bb, x - 1, y - 1);
+            g.DrawString(ct, f, bb, x - 1, y + 1);
+            g.DrawString(ct, f, bb, x + 1, y - 1);
+            g.DrawString(ct, f, bb, x + 1, y + 1);
+            g.DrawString(ct, f, b, x, y);
+
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                bitmap1.Save(@filename2, ImageFormat.Bmp);
+                bitmap1.Save(@filename3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+
+        }
     }
 }
 
