@@ -20099,7 +20099,7 @@ namespace imsLink
 
             data6 = (byte)((((int)camera_ybright_sign_bits) << 3) | (((int)camera_yoffset_sign_bits) << 2));
 
-            richTextBox1.Text += "選擇了對比 " + trackBar_Contrast.Value.ToString() + "\n";
+            richTextBox1.Text += "a選擇了對比 " + trackBar_Contrast.Value.ToString() + "\n";
 
             DongleAddr_h = 0x58;
             DongleAddr_l = 0x00;    //CTRL
@@ -20394,7 +20394,7 @@ namespace imsLink
                     break;
             }
 
-            richTextBox1.Text += "選擇了對比 " + trackBar2.Value.ToString() + "\n";
+            richTextBox1.Text += "b選擇了對比 " + trackBar2.Value.ToString() + "\n";
 
             DongleAddr_h = 0x58;
             DongleAddr_l = 0x00;    //CTRL
@@ -20878,7 +20878,7 @@ namespace imsLink
             int setup = (int)trackBar_Contrast3.Value;
             numericUpDown_gain3.Value = trackBar_Contrast3.Value;
 
-            richTextBox1.Text += "選擇了對比 " + setup.ToString() + "\t";
+            richTextBox1.Text += "c選擇了對比 " + setup.ToString() + "\t";
 
             data4 += (byte)setup;
 

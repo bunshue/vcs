@@ -65,8 +65,8 @@
             this.lb_0x4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.lb_awb_result_gain = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.lb_awb_result_expo = new System.Windows.Forms.Label();
             this.groupBox21.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -183,22 +183,23 @@
             // button93
             // 
             this.button93.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button93.Location = new System.Drawing.Point(326, 291);
+            this.button93.Location = new System.Drawing.Point(326, 115);
             this.button93.Name = "button93";
             this.button93.Size = new System.Drawing.Size(196, 63);
             this.button93.TabIndex = 103;
             this.button93.Text = "自動曝光(AE) 開";
             this.button93.UseVisualStyleBackColor = true;
+            this.button93.Visible = false;
             this.button93.Click += new System.EventHandler(this.button93_Click);
             // 
             // button92
             // 
             this.button92.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button92.Location = new System.Drawing.Point(326, 185);
+            this.button92.Location = new System.Drawing.Point(326, 184);
             this.button92.Name = "button92";
-            this.button92.Size = new System.Drawing.Size(196, 63);
+            this.button92.Size = new System.Drawing.Size(190, 190);
             this.button92.TabIndex = 102;
-            this.button92.Text = "自動曝光(AE) 關";
+            this.button92.Text = "自動曝光(AE) 關 EXPO = 50";
             this.button92.UseVisualStyleBackColor = true;
             this.button92.Click += new System.EventHandler(this.button92_Click);
             // 
@@ -207,9 +208,9 @@
             this.button91.BackColor = System.Drawing.Color.Black;
             this.button91.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button91.ForeColor = System.Drawing.Color.Gold;
-            this.button91.Location = new System.Drawing.Point(102, 185);
+            this.button91.Location = new System.Drawing.Point(83, 184);
             this.button91.Name = "button91";
-            this.button91.Size = new System.Drawing.Size(175, 169);
+            this.button91.Size = new System.Drawing.Size(190, 190);
             this.button91.TabIndex = 101;
             this.button91.Text = "LED";
             this.button91.UseVisualStyleBackColor = false;
@@ -310,7 +311,7 @@
             this.trackBar_expo.Size = new System.Drawing.Size(324, 45);
             this.trackBar_expo.TabIndex = 136;
             this.trackBar_expo.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.trackBar_expo.Value = 134;
+            this.trackBar_expo.Value = 50;
             this.trackBar_expo.Scroll += new System.EventHandler(this.trackBar_expo_Scroll);
             // 
             // numericUpDown_gain
@@ -458,6 +459,16 @@
             this.groupBox1.TabIndex = 150;
             this.groupBox1.TabStop = false;
             // 
+            // lb_awb_result_gain
+            // 
+            this.lb_awb_result_gain.AutoSize = true;
+            this.lb_awb_result_gain.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_awb_result_gain.Location = new System.Drawing.Point(71, 105);
+            this.lb_awb_result_gain.Name = "lb_awb_result_gain";
+            this.lb_awb_result_gain.Size = new System.Drawing.Size(48, 19);
+            this.lb_awb_result_gain.TabIndex = 152;
+            this.lb_awb_result_gain.Text = "GAIN";
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.SystemColors.Control;
@@ -470,16 +481,6 @@
             this.button2.Text = "讀取";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // lb_awb_result_gain
-            // 
-            this.lb_awb_result_gain.AutoSize = true;
-            this.lb_awb_result_gain.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_awb_result_gain.Location = new System.Drawing.Point(71, 105);
-            this.lb_awb_result_gain.Name = "lb_awb_result_gain";
-            this.lb_awb_result_gain.Size = new System.Drawing.Size(48, 19);
-            this.lb_awb_result_gain.TabIndex = 152;
-            this.lb_awb_result_gain.Text = "GAIN";
             // 
             // lb_awb_result_expo
             // 

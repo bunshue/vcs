@@ -63,6 +63,11 @@ namespace iMS_Link_Sensor
             tb_gain.Enabled = false;
             numericUpDown_gain.Enabled = false;
             bt_setup_gain.Enabled = false;
+
+            trackBar_expo.Enabled = false;
+            tb_expo.Enabled = false;
+            numericUpDown_expo.Enabled = false;
+            bt_setup_expo.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -1053,10 +1058,14 @@ namespace iMS_Link_Sensor
                 return;
             }
             Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
-            richTextBox1.Text += "到手動模式\t自動曝光(AE) 關\n";
-            show_main_message1("自動曝光(AE) 關", S_FALSE, 10);
+            richTextBox1.Text += "到手動模式\t自動曝光(AE) 關 + EXPO = 50\n";
+            show_main_message1("自動曝光(AE) 關 + EXPO = 50", S_FALSE, 10);
             button92.BackColor = Color.Pink;
             button93.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            trackBar_expo.Value = 50;
+            numericUpDown_expo.Value = 50;
+            bt_setup_expo_Click(sender, e);
         }
 
         private void button93_Click(object sender, EventArgs e)
@@ -1192,7 +1201,7 @@ namespace iMS_Link_Sensor
 
 
             richTextBox1.Text += "設定EXPO 為 " + SendData.ToString() + "\n";
-            show_main_message1("設定EXPO 為 " + SendData.ToString(), S_FALSE, 30);
+            //show_main_message1("設定EXPO 為 " + SendData.ToString(), S_FALSE, 30);
         }
 
         private void bt_setup_gain_Click(object sender, EventArgs e)
