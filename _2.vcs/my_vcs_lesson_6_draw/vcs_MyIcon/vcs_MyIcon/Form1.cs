@@ -1787,5 +1787,116 @@ namespace vcs_MyIcon
             pictureBox1.Image = bitmap1;
 
         }
+
+        private const int ON = 0x00;
+        private const int OFF = 0x01;
+
+        void draw_switch(int on_off)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 64;
+            bitmap1 = new Bitmap(width, height);
+
+            Color background_color;
+            Color foreground_color;
+            Color active_color;
+            Font f;
+
+            if (on_off == ON)
+            {
+                background_color = Color.Black;
+                foreground_color = Color.LimeGreen;
+                active_color = Color.White;
+            }
+            else
+            {
+                background_color = Color.Black;
+                foreground_color = Color.LimeGreen;
+                active_color = Color.White;
+            }
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            sb = new SolidBrush(foreground_color);
+
+            g.FillEllipse(sb, new Rectangle(0, 0, width / 2, width / 2));
+            g.FillEllipse(sb, new Rectangle(width / 2, 0, width / 2, width / 2));
+            g.FillRectangle(sb, new Rectangle(width / 4, 0, width / 2, width / 2));
+
+            sb = new SolidBrush(active_color);
+
+            if (on_off == ON)
+                g.FillEllipse(sb, new Rectangle(width / 2 + 2, 0 + 2, width / 2 - 4, width / 2 - 4));
+            else
+                g.FillEllipse(sb, new Rectangle(0 / 2 + 2, 0 + 2, width / 2 - 4, width / 2 - 4));
+
+
+            sb = new SolidBrush(active_color);
+            f = new Font("Arial", 20);
+
+            if (on_off == ON)
+                g.DrawString("ON", f, sb, new PointF(width / 16, height / 4));
+            else
+                g.DrawString("OFF", f, sb, new PointF(width / 2, height / 4));
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            draw_switch(ON);
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+            draw_switch(OFF);
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 256;
+            height = 256;
+            bitmap1 = new Bitmap(width, height);
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    if (yy < 256 / 4)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx % 256), 0, 0));
+                    else if (yy < 256 / 4 * 2)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, (xx % 256), 0));
+                    else if (yy < 256 / 4 * 3)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, (xx % 256)));
+                    else
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx % 256), (xx % 256), (xx % 256)));
+                }
+            }
+            g = Graphics.FromImage(bitmap1);
+
+            pictureBox1.Image = bitmap1;
+        }
     }
 }

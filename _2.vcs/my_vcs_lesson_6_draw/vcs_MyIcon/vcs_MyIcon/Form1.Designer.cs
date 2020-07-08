@@ -81,6 +81,9 @@
             this.button46 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
             this.button48 = new System.Windows.Forms.Button();
+            this.button49 = new System.Windows.Forms.Button();
+            this.button50 = new System.Windows.Forms.Button();
+            this.button51 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -628,11 +631,47 @@
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
+            // button49
+            // 
+            this.button49.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button49.BackgroundImage")));
+            this.button49.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button49.Location = new System.Drawing.Point(818, 481);
+            this.button49.Name = "button49";
+            this.button49.Size = new System.Drawing.Size(60, 60);
+            this.button49.TabIndex = 50;
+            this.button49.UseVisualStyleBackColor = true;
+            this.button49.Click += new System.EventHandler(this.button49_Click);
+            // 
+            // button50
+            // 
+            this.button50.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button50.BackgroundImage")));
+            this.button50.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button50.Location = new System.Drawing.Point(817, 547);
+            this.button50.Name = "button50";
+            this.button50.Size = new System.Drawing.Size(60, 60);
+            this.button50.TabIndex = 51;
+            this.button50.UseVisualStyleBackColor = true;
+            this.button50.Click += new System.EventHandler(this.button50_Click);
+            // 
+            // button51
+            // 
+            this.button51.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button51.Location = new System.Drawing.Point(883, 409);
+            this.button51.Name = "button51";
+            this.button51.Size = new System.Drawing.Size(60, 60);
+            this.button51.TabIndex = 52;
+            this.button51.Text = "製作pattern";
+            this.button51.UseVisualStyleBackColor = true;
+            this.button51.Click += new System.EventHandler(this.button51_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 631);
+            this.ClientSize = new System.Drawing.Size(955, 631);
+            this.Controls.Add(this.button51);
+            this.Controls.Add(this.button50);
+            this.Controls.Add(this.button49);
             this.Controls.Add(this.button48);
             this.Controls.Add(this.button47);
             this.Controls.Add(this.button46);
@@ -744,6 +783,9 @@
         private System.Windows.Forms.Button button46;
         private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Button button48;
+        private System.Windows.Forms.Button button49;
+        private System.Windows.Forms.Button button50;
+        private System.Windows.Forms.Button button51;
     }
 }
 
