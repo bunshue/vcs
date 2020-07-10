@@ -1,4 +1,4 @@
-﻿namespace vcs_DrawBoundary
+﻿namespace vcs_ScreenRuler
 {
     partial class Form1
     {

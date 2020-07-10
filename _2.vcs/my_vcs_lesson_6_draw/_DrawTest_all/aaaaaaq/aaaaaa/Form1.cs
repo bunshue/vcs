@@ -29,13 +29,6 @@ namespace aaaaaa
             g.DrawEllipse(p, 300, 300, 200, 200);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-            string filename1 = filename + ".jpg";
-            bmp.Save(@filename1);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             bmp = new Bitmap(@"C:\______test_files\bear.jpg");

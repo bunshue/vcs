@@ -28,7 +28,6 @@ namespace _vcs_DrawTemplate
             button4.Enabled = false;
             button5.Enabled = false;
             button7.Enabled = false;
-            button8.Enabled = false;
             button9.Enabled = false;
 
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
@@ -52,7 +51,6 @@ namespace _vcs_DrawTemplate
             button4.Enabled = true;
             button5.Enabled = true;
             button7.Enabled = true;
-            button8.Enabled = true;
             button9.Enabled = true;
         }
 
@@ -159,105 +157,36 @@ namespace _vcs_DrawTemplate
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //儲存圖檔
+            save_image_to_drive();
+        }
+
+        void save_image_to_drive()
+        {
             if (bitmap1 != null)
             {
-                string filename = Application.StartupPath + "\\draw_test_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                //string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                //string filename3 = filename + ".png";
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
 
-                //bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                bitmap1.Save(@filename2, ImageFormat.Bmp);
-                //bitmap1.Save(@filename3, ImageFormat.Png);
+                try
+                {
+                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                    bitmap1.Save(@filename2, ImageFormat.Bmp);
+                    bitmap1.Save(@filename3, ImageFormat.Png);
 
-                richTextBox1.Text += "存檔成功\n";
-                //richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                //richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            if (timer1.Enabled == false)
-                timer1.Enabled = true;
-            else
-                timer1.Enabled = false;
-        }
-
-        int x_st = 0;
-        int y_st = 0;
-        int xx = 0;
-        int yy = 0;
-        int step = 200;
-        Pen pen = new Pen(Color.Blue, 40);
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            int w = pictureBox1.Width;
-            int h = pictureBox1.Height;
-            //richTextBox1.Text += "W = " + w.ToString() + " H = " + h.ToString() + "\n";
-            if ((xx < (w - 1)) && (yy == 0))
-            {
-                if (xx == 0)
-                {
-                    if (pen.Color == Color.Red)
-                        pen.Color = Color.Blue;
-                    else
-                        pen.Color = Color.Red;
-                }
-
-                //richTextBox1.Text += "1";
-                if (xx < (w - step))
-                    xx += step;
-                else
-                    xx = w - 1;
-            }
-            else if ((yy < (h - 1)) && (xx == (w - 1)))
-            {
-                //richTextBox1.Text += "2";
-                if (yy < (h - step))
-                    yy += step;
-                else
-                    yy = h - 1;
-            }
-            else if ((xx > 0) && (yy == (h - 1)))
-            {
-                //richTextBox1.Text += "3";
-                if (xx > step)
-                    xx -= step;
-                else
-                    xx = 0;
-            }
-            else if ((yy > 0) && (xx == 0))
-            {
-                //richTextBox1.Text += "4";
-                if (yy > step)
-                    yy -= step;
-                else
-                    yy = 0;
-            }
-            else
-            {
-                richTextBox1.Text += "xxxxxx\n";
-            }
-
-            if (pen.Color == Color.Red)
-                pen.Color = Color.Blue;
-            else
-                pen.Color = Color.Red;
-
-
-            g.DrawLine(pen, x_st, y_st, xx, yy);
-            x_st = xx;
-            y_st = yy;
-
-            pictureBox1.Image = bitmap1;
-
-
-
         }
 
         private void button9_Click(object sender, EventArgs e)

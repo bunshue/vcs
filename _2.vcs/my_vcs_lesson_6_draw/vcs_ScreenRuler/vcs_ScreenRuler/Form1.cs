@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_DrawBoundary
+namespace vcs_ScreenRuler
 {
     public partial class Form1 : Form
     {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DrawBoundary", "vcs_DrawBoundary\vcs_DrawBoundary.csproj", "{7EC0D45D-835D-4C35-B084-B4B7C28E6578}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ScreenRuler", "vcs_ScreenRuler\vcs_ScreenRuler.csproj", "{7EC0D45D-835D-4C35-B084-B4B7C28E6578}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

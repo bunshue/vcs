@@ -13,26 +13,29 @@ namespace vcs_Draw3
 {
     public partial class Form1 : Form
     {
-        Graphics g;
+        Graphics g1;
+        Graphics g2;
         Pen p;
         SolidBrush sb;
         Bitmap bitmap1;
+        Bitmap bitmap2;
+        Bitmap bitmap3;
 
         public Form1()
         {
             InitializeComponent();
 
             show_item_location();
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            g = panel1.CreateGraphics();
+            g1 = panel1.CreateGraphics();
             p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
 
-            g.Clear(Color.Red);             //useless??
+            g1.Clear(Color.Red);             //useless??
             panel1.BackColor = Color.Pink;
 
         }
@@ -90,38 +93,201 @@ namespace vcs_Draw3
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
 
-            pictureBox1.Location = new Point(10, 10);
+            //pictureBox1.Location = new Point(10, 10);
         }
 
+        bool isRunning1 = false;
+        bool isRunning2 = false;
+        bool isRunning3 = false;
+        bool isRunning4 = false;
+
+        string filename = "C:\\______test_files\\picture1.jpg";
         private void button0_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            //pictureBox2.Image = Image.FromFile(filename);
+
+            bitmap3 = new Bitmap(filename);
+            richTextBox1.Text += "W = " + bitmap3.Width.ToString() + " H = " + bitmap3.Height.ToString() + "\n";
+            pictureBox2.Size = bitmap3.Size;
+            pictureBox2.Image = bitmap3;
+            pictureBox2.Location = new Point(400, 300);
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (bitmap3 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            if (isRunning1 == false)
+            {
+                isRunning1 = true;
+                timer4.Enabled = true;
+                richTextBox1.Text += "ST\n";
+            }
+            else
+            {
+                isRunning1 = false;
+                timer4.Enabled = false;
+                richTextBox1.Text += "SP\n";
+            }
 
         }
 
+        int tt = 0;
+        int xx2 = 0;
+        int yy2 = 0;
+        double gg = 9.8;
         private void button2_Click(object sender, EventArgs e)
         {
+            if (bitmap3 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            if (isRunning3 == false)
+            {
+                isRunning3 = true;
+                timer6.Enabled = true;
+                richTextBox1.Text += "ST\n";
+                tt = 0;
+                xx2 = 0;
+                yy2 = 0;
+            }
+            else
+            {
+                isRunning3 = false;
+                timer6.Enabled = false;
+                richTextBox1.Text += "SP\n";
+            }
+
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Bitmap bitmap_old;
+            bitmap_old = new Bitmap(filename);
+            pictureBox2.Image = bitmap_old;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (bitmap3 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            if (isRunning2 == false)
+            {
+                isRunning2 = true;
+                timer5.Enabled = true;
+                richTextBox1.Text += "ST\n";
+            }
+            else
+            {
+                isRunning2 = false;
+                timer5.Enabled = false;
+                richTextBox1.Text += "SP\n";
+            }
 
         }
+
+        Bitmap bmp;
+        Graphics g;
+        Pen p4;
+        int t;
+
+        int WIDTH = 720, HEIGHT = 300, AMPLITUDE = 150;
 
         private void button5_Click(object sender, EventArgs e)
         {
+            /*
+            if (bitmap3 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+             */
+
+            if (isRunning4 == false)
+            {
+                isRunning4 = true;
+                timer7.Enabled = true;
+                richTextBox1.Text += "ST\n";
+
+                pictureBox2.Width = 640;
+                pictureBox2.Height = 480;
+                pictureBox2.Location = new Point(400, 300);
+
+                //create Bitmap
+                bmp = null;
+                bmp = new Bitmap(pictureBox2.Size.Width, pictureBox2.Size.Height);
+
+                //background color
+                //this.BackColor = Color.Black;
+
+                //center
+                //cx = WIDTH / 2;
+                //cy = HEIGHT / 2;
+
+                //initial degree of HAND
+                //u = 0;
+
+                //timer1.Enabled = true;
+                pictureBox2.Image = null;
+                t = 0;
+                DrawXY();
+                DrawYLine();
+
+
+                //timer1.Enabled = true;
+
+
+
+            }
+            else
+            {
+                isRunning4 = false;
+                timer7.Enabled = false;
+                richTextBox1.Text += "SP\n";
+            }
 
         }
+
+        private void DrawXY()//画X轴Y轴
+        {
+            //graphics
+            g = Graphics.FromImage(bmp);
+            System.Drawing.Point px1 = new System.Drawing.Point(this.pictureBox1.Width * 10 / 100, this.pictureBox1.Height * 90 / 100);
+            System.Drawing.Point px2 = new System.Drawing.Point(this.pictureBox1.Width * 90 / 100, this.pictureBox1.Height * 90 / 100);
+            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
+            System.Drawing.Point py1 = new System.Drawing.Point(this.pictureBox1.Width * 10 / 100, this.pictureBox1.Height * 90 / 100);
+            System.Drawing.Point py2 = new System.Drawing.Point(this.pictureBox1.Width * 10 / 100, this.pictureBox1.Height * 10 / 100);
+            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
+            g.Dispose();
+        }
+
+        private void DrawYLine()    //画X轴刻度
+        {
+            //graphics
+            g = Graphics.FromImage(bmp);
+            for (int i = 1; i < 9; i++)
+            {
+                System.Drawing.Point py1 = new System.Drawing.Point(100 * i, this.pictureBox1.Height - 5);
+                System.Drawing.Point py2 = new System.Drawing.Point(100 * i, this.pictureBox1.Height);
+                g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
+            }
+            g.Dispose();
+        }
+
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -239,11 +405,11 @@ namespace vcs_Draw3
             x = r + (int)(r * Math.Cos(degree * Math.PI / 180));
             y = r + (int)(r * Math.Sin(degree * Math.PI / 180));
 
-            g.Clear(Color.Pink);
+            g1.Clear(Color.Pink);
 
             Point point1a = new Point(r, r);
             Point point2a = new Point(x, y);
-            g.DrawLine(p, point1a, point2a);     // Draw line to screen.
+            g1.DrawLine(p, point1a, point2a);     // Draw line to screen.
 
 
         }
@@ -281,6 +447,302 @@ namespace vcs_Draw3
                 p2.BackColor = Color.Gray;
                 p3.BackColor = Color.Blue;
             }
+        }
+
+
+        int x_st = 0;
+        int y_st = 0;
+        int xx = 0;
+        int yy = 0;
+        int step = 60;
+        Pen pen = new Pen(Color.Blue, 30);
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            int w = pictureBox1.Width;
+            int h = pictureBox1.Height;
+            //richTextBox1.Text += "w = " + w.ToString() + " h = " + h.ToString() + "\n";
+            if ((xx < (w - 1)) && (yy == 0))
+            {
+                if (xx == 0)
+                {
+                    if (pen.Color == Color.Red)
+                        pen.Color = Color.Blue;
+                    else
+                        pen.Color = Color.Red;
+                }
+
+                //richTextBox1.Text += "1";
+                if (xx < (w - step))
+                    xx += step;
+                else
+                    xx = w - 1;
+            }
+            else if ((yy < (h - 1)) && (xx == (w - 1)))
+            {
+                //richTextBox1.Text += "2";
+                if (yy < (h - step))
+                    yy += step;
+                else
+                    yy = h - 1;
+            }
+            else if ((xx > 0) && (yy == (h - 1)))
+            {
+                //richTextBox1.Text += "3";
+                if (xx > step)
+                    xx -= step;
+                else
+                    xx = 0;
+            }
+            else if ((yy > 0) && (xx == 0))
+            {
+                //richTextBox1.Text += "4";
+                if (yy > step)
+                    yy -= step;
+                else
+                    yy = 0;
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxx\n";
+            }
+
+            if (pen.Color == Color.Red)
+                pen.Color = Color.Blue;
+            else
+                pen.Color = Color.Red;
+
+
+            //richTextBox1.Text += "\t(" + x_st.ToString() + "," + y_st.ToString() + ")-" + "(" + xx.ToString() + "," + yy.ToString() + ")" + "\n";
+
+            g2.DrawLine(pen, x_st, y_st, xx, yy);
+            x_st = xx;
+            y_st = yy;
+
+            pictureBox1.Image = bitmap2;
+
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                //新建圖檔, 初始化畫布
+                bitmap2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                g2 = Graphics.FromImage(bitmap2);
+                g2.Clear(Color.White);
+                pictureBox1.Image = bitmap2;
+
+                timer3.Enabled = true;
+                pictureBox1.Location = new Point(10, 350);
+                pictureBox1.Size = new Size(300, 200);
+            }
+            else
+            {
+                timer3.Enabled = false;
+
+            }
+
+        }
+
+        int x_st4 = 0;
+        int y_st4 = 200;
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            bitmap3 = new Bitmap(filename);
+
+            Graphics g = Graphics.FromImage(bitmap3);
+
+            if (x_st4 < 300)
+            {
+                x_st4 += 5;
+                //y_st4 += 10;
+                //y_st4 = 200 + 200 * (int)(Math.Sin((Math.PI * x_st4 / 180)));
+                y_st4 = 200 + (int)(100 * (Math.Sin((Math.PI * x_st4 / 180))));
+            }
+            else
+            {
+                x_st4 = 0;
+                //y_st4 = 0;
+            }
+            int ww = 10;
+            int hh = 10;
+
+            //g.DrawRectangle(new Pen(Color.Red, 1), x_st4, y_st4, ww, hh);
+            //g.DrawEllipse(new Pen(Color.Red, 1), x_st4, y_st4, ww, hh);
+            //g.FillEllipse(new Brush(Color.Red), x_st4, y_st4, ww, hh);
+            g.FillEllipse(new SolidBrush(Color.Red), x_st4, y_st4, ww, hh);
+
+            pictureBox2.Image = bitmap3;
+
+
+            //bitmap1 = new Bitmap(filename);
+            //bitmap_old = new Bitmap(filename);
+            //pictureBox1.Image = bitmap1;
+
+
+        }
+
+        int step3 = 1;
+        int xx3 = 0;
+        int yy3 = 0;
+        int ww = 0;
+        int hh = 0;
+        int thick = 10;
+        int add = 10;
+        int round = 0;
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            //bitmap1 = new Bitmap(filename);
+
+            ww = bitmap3.Width;
+            hh = bitmap3.Height;
+
+            Graphics g = Graphics.FromImage(bitmap3);
+
+            if (step3 == 1)
+            {
+                if (xx3 < (ww - thick - add))
+                {
+                    xx3 += add;
+                }
+                else
+                {
+                    xx3 = ww - thick - 1;
+                    step3 = 2;
+                }
+            }
+            else if (step3 == 2)
+            {
+                if (yy3 < (hh - thick - add))
+                {
+                    yy3 += add;
+                }
+                else
+                {
+                    yy3 = hh - thick - 1;
+                    step3 = 3;
+                }
+            }
+            else if (step3 == 3)
+            {
+                if (xx3 > add)
+                {
+                    xx3 -= add;
+                }
+                else
+                {
+                    xx3 = 0;
+                    step3 = 4;
+                }
+            }
+            else if (step3 == 4)
+            {
+                if (yy3 > add)
+                {
+                    yy3 -= add;
+                }
+                else
+                {
+                    yy3 = 0;
+                    step3 = 1;
+                    round++;
+                    //bitmap1 = new Bitmap(filename);
+                }
+            }
+
+            if ((round % 2) == 0)
+                g.FillRectangle(new SolidBrush(Color.Red), xx3, yy3, thick, thick);
+            else
+                g.FillRectangle(new SolidBrush(Color.White), xx3, yy3, thick, thick);
+
+            //g.FillEllipse(new SolidBrush(Color.Red), xx3, yy3, 3, 3);
+
+            pictureBox2.Image = bitmap3;
+
+
+            //bitmap1 = new Bitmap(filename);
+            //bitmap_old = new Bitmap(filename);
+            //pictureBox1.Image = bitmap1;
+
+
+
+        }
+
+        private void timer6_Tick(object sender, EventArgs e)
+        {
+            bitmap3 = new Bitmap(filename);
+            Graphics g = Graphics.FromImage(bitmap3);
+            pictureBox2.Image = bitmap3;
+
+            /*
+            xx += 2;
+            yy += 2;
+            //g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
+
+            //g.DrawEllipse(new Pen(Color.Red, 3), xx, yy, 20, 20);
+            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(xx, yy, 20, 20));
+
+            if (xx >= 300)
+                yy -= 4;
+
+            if (xx >= 600)
+                timer1.Enabled = false;
+            */
+
+            tt++;
+            xx2 = tt * 30;
+            yy2 = (int)(gg * tt * tt / 2);
+            //g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
+
+            //g.DrawEllipse(new Pen(Color.Red, 3), xx, yy, 20, 20);
+            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(xx2, yy2, 20, 20));
+
+            if (xx2 >= 200)
+                yy2 -= 4;
+
+            if (xx2 >= 800)
+            {
+                tt = 0;
+                xx2 = 0;
+                yy2 = 0;
+
+            }
+
+        }
+
+        private void timer7_Tick(object sender, EventArgs e)
+        {
+            //pen
+            p4 = new Pen(Color.Green, 1f);
+
+            //graphics
+            g = Graphics.FromImage(bmp);
+
+            int xx;
+            int yy;
+
+            xx = t;
+            yy = HEIGHT - (int)(AMPLITUDE * Math.Sin(Math.PI * t / 180)) - AMPLITUDE;
+
+
+            g.DrawEllipse(new Pen(Color.Red, 1f), xx, yy, 1, 1);
+
+            //load bitmap in picturebox1
+            pictureBox2.Image = bmp;
+
+
+            //dispose
+            p4.Dispose();
+            g.Dispose();
+
+            t += 3;
+            if (t >= 720)
+                timer1.Enabled = false;
+
+
         }
 
 
