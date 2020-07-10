@@ -11,10 +11,14 @@ using System.Runtime.InteropServices;   //for Marshal
 
 using System.Drawing.Imaging;   //for BitmapData
 
+using System.Diagnostics;   //for Process
+
 namespace WindowsFormsApplication1dddd
 {
+
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -422,59 +426,45 @@ namespace WindowsFormsApplication1dddd
 
         }
 
+
+        public struct MyRectangle
+        {
+            public string name;
+            public int x_st;        //顯示座標x
+            public int y_st;        //顯示座標y
+            public int w;           //width
+            public int h;           //height
+            public int line_out;    //邊框大小
+            public Color c_out;     //邊框顏色
+            public Color c_in;      //內部顏色
+
+        } 
+
         private void button4_Click(object sender, EventArgs e)
         {
-            int num = 10;
-            Random rr = new Random();
+            MyRectangle r1 = new MyRectangle();
 
-            List<int> myList = new List<int>();   //用來存放篩選後的字
-
-            /*  不均勻分配
-            myList.Add('A');
-            myList.Add('A');
-            myList.Add('A');
-            myList.Add('B');
-            myList.Add('C');
-            */
-
-            for (int i = 0; i < num; i++)
-            {
-                myList.Add(rr.Next(10));
-            }
+        }
 
 
-            /*
-            //特定分配
-            for (int i = 50; i <= 57; i++)
-                //ASCII碼，找出數字
-                myList.Add((char)i); //從2開始，排除了0，1，放入列表
-            */
+        public static class define  //define some constant
+        {
+            public const int MAX_LENGTH_OF_IDENTICARDID = 20;   //maximum length of identicardid
+            public const int MAX_LENGTH_OF_NAME = 50;           //maximum length of name
+            public const int MAX_LENGTH_OF_COUNTRY = 50;        //maximum length of country
+            public const int MAX_LENGTH_OF_NATION = 50;         //maximum length of nation
+            public const int MAX_LENGTH_OF_BIRTHDAY = 8;        //maximum length of birthday
+            public const int MAX_LENGTH_OF_ADDRESS = 200;       //maximum length of address
+        }
 
-            richTextBox1.Text += "len = " + myList.Count.ToString() + "\n";
-            for (int i = 0; i < num; i++)
-            {
-                richTextBox1.Text += myList[i] + " ";
-
-            }
-            richTextBox1.Text += "\n";
-
-            myList.Sort();
-
-            richTextBox1.Text += "After sort\n";
-            for (int i = 0; i < num; i++)
-            {
-                richTextBox1.Text += myList[i] + " ";
-
-            }
-            richTextBox1.Text += "\n";
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
 
         }
 
 
-
-
-
-
     }
+
+
 }
