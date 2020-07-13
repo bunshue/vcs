@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_11_Draw", "vcs_test_all_11_Draw\vcs_test_all_11_Draw.csproj", "{DEADB4BB-2E53-49D9-ABAE-E6F0BD29724D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw4", "vcs_Draw4\vcs_Draw4.csproj", "{DEADB4BB-2E53-49D9-ABAE-E6F0BD29724D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

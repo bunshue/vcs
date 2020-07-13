@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_test_all_11_Draw")]
+[assembly: AssemblyTitle("vcs_Draw5")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("vcs_test_all_11_Draw")]
+[assembly: AssemblyProduct("vcs_Draw5")]
 [assembly: AssemblyCopyright("Copyright © Home 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

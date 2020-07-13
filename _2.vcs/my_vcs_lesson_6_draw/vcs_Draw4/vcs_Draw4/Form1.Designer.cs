@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_11_Draw
+﻿namespace vcs_Draw4
 {
     partial class Form1
     {

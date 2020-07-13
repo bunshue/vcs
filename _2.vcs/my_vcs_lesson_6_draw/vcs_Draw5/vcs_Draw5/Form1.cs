@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D; //for GraphicsPath, LinearGradientBrush
 
-namespace vcs_test_all_11_Draw
+namespace vcs_Draw5
 {
     public partial class Form1 : Form
     {

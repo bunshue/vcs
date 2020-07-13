@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D;     //for GraphicsPath
 
-namespace vcs_test_all_11_Draw
+namespace vcs_Draw4
 {
     public partial class Form1 : Form
     {

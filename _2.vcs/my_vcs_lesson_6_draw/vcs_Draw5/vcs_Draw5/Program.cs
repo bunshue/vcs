@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_11_Draw
+namespace vcs_Draw5
 {
     static class Program
     {
