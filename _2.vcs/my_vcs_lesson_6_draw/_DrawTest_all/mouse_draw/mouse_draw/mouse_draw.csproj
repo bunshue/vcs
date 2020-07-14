@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AAE4C8B4-CB0E-48D8-BE13-CA6DF43D80F6}</ProjectGuid>
+    <ProjectGuid>{FE640DC9-DCF1-49A8-A037-87996846F719}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_MyPaint</RootNamespace>
-    <AssemblyName>vcs_MyPaint</AssemblyName>
+    <RootNamespace>mouse_draw</RootNamespace>
+    <AssemblyName>mouse_draw</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

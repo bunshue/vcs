@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for ImageFormat
+
 namespace vcs_Draw6
 {
     public partial class Form1 : Form
@@ -1253,6 +1255,60 @@ namespace vcs_Draw6
             }
             richTextBox1.Text += "\n";
 
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //將 Windows Form 的畫面存成圖片
+            //Control就有一個 DrawToBitmap 的Method可以用
+
+            var bm = new Bitmap(Width, Height);
+            this.DrawToBitmap(bm, this.Bounds);
+
+            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            String filename1 = filename + ".bmp";
+
+            try
+            {
+                bm.Save(filename1, ImageFormat.Bmp);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //將 PictureBox Form 的畫面存成圖片
+            //Control就有一個 DrawToBitmap 的Method可以用
+
+            int w = pictureBox1.Width;
+            int h = pictureBox1.Height;
+
+            var bm = new Bitmap(w,h);
+            pictureBox1.DrawToBitmap(bm, new Rectangle(0, 0, w, h));
+
+            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            String filename1 = filename + ".bmp";
+
+            try
+            {
+                bm.Save(filename1, ImageFormat.Bmp);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
 
         }
     }

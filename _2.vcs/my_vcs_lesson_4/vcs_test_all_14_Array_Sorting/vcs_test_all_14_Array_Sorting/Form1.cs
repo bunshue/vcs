@@ -45,6 +45,13 @@ namespace vcs_test_all_14_Array_Sorting
             int[] a = new int[5] { 0, 1, 2, 3, 4 };
             Point[] pt = new Point[360];    //一維陣列內有360個Point
 
+            //字串一維陣列
+            String[] strings = { "This is a string.", "Hello!", "Nothing.", "Yes.", "randomize" };
+            // print out the array of strings
+            foreach (var s in strings)
+            {
+                richTextBox1.Text += "字串\t" + s + "\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -53,7 +60,6 @@ namespace vcs_test_all_14_Array_Sorting
             int[,] b = new int[2, 3];
             int[,] c = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
             int[,] myArray = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
-
         }
 
         private void button5_Click(object sender, EventArgs e)

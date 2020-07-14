@@ -385,6 +385,53 @@ namespace vcs_test_all_01_Richtextbox
             richTextBox1.Text += "information1 : " + information + "\n";
             richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
 
+
+            string msg1 = "Name : \"{0}\",\tKind \"{1}\".\n";
+            string msg2 = "Using the {0} - \"{1}\" culture:";
+            string str;
+
+            str = string.Format(msg1, "lion", "mouse");
+            richTextBox1.Text += "str1 = " + str + "\n";
+
+
+            //各國語言(語系)代碼表(zh-tw, zh-cn,en-us...) json 格式 [繁中/簡中/英文格式] 
+            CultureInfo ci;
+
+            ci = new CultureInfo("en-US");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-TW");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CN");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-HK");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-SG");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CHS");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CHT");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("ja-JP");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+
+
+
         }
 
         private void button34_Click(object sender, EventArgs e)

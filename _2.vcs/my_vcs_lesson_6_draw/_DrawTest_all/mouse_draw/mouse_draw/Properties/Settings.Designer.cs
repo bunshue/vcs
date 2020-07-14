@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_MyPaint.Properties
+namespace mouse_draw.Properties
 {
 
 
