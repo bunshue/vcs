@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{495602D9-8338-4D08-A5E4-F80760A243A0}</ProjectGuid>
+    <ProjectGuid>{F981E0AC-2414-4F08-9626-9ED795FC46CC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_find_test_area</RootNamespace>
-    <AssemblyName>vcs_find_test_area</AssemblyName>
+    <RootNamespace>vcs_Remove_Bin_Obj</RootNamespace>
+    <AssemblyName>vcs_Remove_Bin_Obj</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

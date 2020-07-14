@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_find_test_area
+namespace vcs_Remove_Bin_Obj
 {
     static class Program
     {

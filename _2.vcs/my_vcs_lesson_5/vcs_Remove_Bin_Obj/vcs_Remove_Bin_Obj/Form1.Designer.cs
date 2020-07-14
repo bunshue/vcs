@@ -1,4 +1,4 @@
-﻿namespace vcs_DrawEncodingRange
+﻿namespace vcs_Remove_Bin_Obj
 {
     partial class Form1
     {
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -37,34 +36,26 @@
             // 
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 59);
+            this.button1.Size = new System.Drawing.Size(104, 47);
             this.button1.TabIndex = 0;
-            this.button1.Text = "畫各種編碼的區間";
+            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(93, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(975, 700);
-            this.panel1.TabIndex = 1;
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1087, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(139, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(250, 487);
-            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Size = new System.Drawing.Size(598, 493);
+            this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1349, 639);
+            this.ClientSize = new System.Drawing.Size(749, 517);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -75,7 +66,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

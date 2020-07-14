@@ -14,6 +14,8 @@ using System.Threading;
 
 using System.IO;
 
+using System.Net;   //for WebClient
+
 namespace WindowsFormsApplication1
 {
     //創建SetValue的委托
@@ -110,6 +112,51 @@ namespace WindowsFormsApplication1
                 }
             }
             */
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //下載檔案的範例 - 使用WebClient
+            WebClient wc = new WebClient();
+            wc.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "d:\\blog.png");
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            HttpWebRequest httpRequest = null;
+            HttpWebResponse httpResponse;
+
+            string result = "";
+            String txtURL = "https://www.google.com.tw/";
+            char[] cbuffer = new char[256];
+            int byteRead = 0;
+            try
+            {
+
+                Uri httpURL = new Uri(txtURL);
+                httpRequest = (HttpWebRequest)WebRequest.Create(httpURL);
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+                System.IO.Stream respStream = httpResponse.GetResponseStream();
+                System.IO.StreamReader respStreamReader = new StreamReader(respStream);
+                byteRead = respStreamReader.Read(cbuffer, 0, 256);
+                while (byteRead != 0)
+                {
+                    string response = new string(cbuffer, 0, byteRead);
+                    result = result + response;
+                    byteRead = respStreamReader.Read(cbuffer, 0, 256);
+                    richTextBox1.Text += response + "\n";
+                }
+
+
+
+            }
+            catch (Exception)
+            {
+
+            }
 
         }
 

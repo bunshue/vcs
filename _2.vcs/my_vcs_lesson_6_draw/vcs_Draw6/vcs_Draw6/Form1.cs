@@ -915,5 +915,345 @@ namespace vcs_Draw6
             pictureBox1.Image = bitmap1;
 
         }
+
+        //畫各種編碼的區間
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int xx;
+            int yy;
+            int dd = 20;
+            int allow = 0;
+
+            richTextBox1.Text += "W = " + this.pictureBox1.Width.ToString() + " H = " + this.pictureBox1.Height.ToString() + "\n";
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(Color.White);
+            //DrawXY();
+
+            Point[] pt1 = new Point[656];    //一維陣列內有360個Point
+            yy = 200;
+            allow = 0;
+            for (xx = 0; xx <= 65535; xx++)
+            {
+                pt1[xx / 100].X = xx / 100;
+                if ((((xx / 256) >= 0xA1) && ((xx / 256) <= 0xE7)) && (((xx % 256) >= 0xA1) && ((xx % 256) <= 0xFE)))
+                {
+                    pt1[xx / 100].Y = yy - 100 + dd;
+                    allow++;
+                }
+                else
+                    //pt1[xx / 100].Y = 300 - 100;
+                    pt1[xx / 100].Y = yy - dd;
+
+
+            }
+            g.DrawLines(new Pen(Brushes.Red, 3), pt1);
+            g.DrawString("GB2313", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(20, yy - 80));
+            richTextBox1.Text += "e1 allow = " + allow.ToString() + "\n";
+
+
+
+            Point[] pt2 = new Point[656];    //一維陣列內有360個Point
+            yy = 300;
+            allow = 0;
+            for (xx = 0; xx <= 65535; xx++)
+            {
+                pt2[xx / 100].X = xx / 100;
+                if ((((xx / 256) >= 0x81) && ((xx / 256) <= 0xFE)) && ((((xx % 256) >= 0x40) && ((xx % 256) <= 0x7E)) || (((xx % 256) >= 0x80) && ((xx % 256) <= 0xFE))))
+                {
+                    pt2[xx / 100].Y = yy - 100 + dd;
+                    allow++;
+                    //pt1[xx / 100].Y = 300 - 100;
+                }
+                else
+                    //pt1[xx / 100].Y = 300 - 100;
+                    pt2[xx / 100].Y = yy - dd;
+
+
+            }
+            g.DrawLines(new Pen(Brushes.Green, 3), pt2);
+            g.DrawString("GBK", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(20, yy - 80));
+            richTextBox1.Text += "e2 allow = " + allow.ToString() + "\n";
+
+            Point[] pt3 = new Point[656];    //一維陣列內有360個Point
+            yy = 400;
+            allow = 0;
+            for (xx = 0; xx <= 65535; xx++)
+            {
+                pt3[xx / 100].X = xx / 100;
+                if ((((xx / 256) >= 0x81) && ((xx / 256) <= 0xFE)) && ((((xx % 256) >= 0x40) && ((xx % 256) <= 0x7E)) || (((xx % 256) >= 0xA1) && ((xx % 256) <= 0xFE))))
+                {
+                    pt3[xx / 100].Y = yy - 100 + dd;
+                    allow++;
+                    //pt1[xx / 100].Y = 300 - 100;
+                }
+                else
+                    //pt1[xx / 100].Y = 300 - 100;
+                    pt3[xx / 100].Y = yy - dd;
+
+
+            }
+            g.DrawLines(new Pen(Brushes.Blue, 3), pt3);
+            g.DrawString("GB2313", new Font("Big5", 30), new SolidBrush(Color.Blue), new PointF(20, yy - 80));
+            richTextBox1.Text += "e3 allow = " + allow.ToString() + "\n";
+
+
+            Point[] pt4 = new Point[656];    //一維陣列內有360個Point
+            yy = 500;
+            allow = 0;
+            for (xx = 0; xx <= 65535; xx++)
+            {
+                pt4[xx / 100].X = xx / 100;
+                if ((xx > 0x4e00) && (xx < 0x9fbf))
+                {
+                    pt4[xx / 100].Y = yy - 100 + dd;
+                    allow++;
+                }
+                else
+                    pt4[xx / 100].Y = yy - dd;
+
+
+            }
+            g.DrawLines(new Pen(Brushes.Yellow, 3), pt4);
+            g.DrawString("Unicode", new Font("標楷體", 30), new SolidBrush(Color.Yellow), new PointF(20, yy - 80));
+            richTextBox1.Text += "e4 allow = " + allow.ToString() + "\n";
+
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\test_pic.bmp";
+            Image image1 = new Bitmap(filename, true);
+            pictureBox1.Image = image1;
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.ClientSize = new Size(image1.Size.Width, image1.Size.Height);    //設定pictureBox的大小
+
+            richTextBox1.Text += "W = " + image1.Size.Width.ToString() + "  H = " + image1.Size.Height.ToString() + "\n";
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\test_pic.bmp";
+            bitmap1 = new Bitmap(filename);
+            Graphics g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
+
+            int i;
+            int j;
+            int A;
+            int R;
+            int G;
+            int B;
+            int search_size = 256;   //256X256
+            int awb_block = 32;     //AWB block size width, height
+            int ww = awb_block;
+            int hh = awb_block;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int center_x = W / 2;
+            int center_y = H / 2;
+            int x_st = center_x - search_size / 2;
+            int y_st = center_y - search_size / 2;
+
+            for (i = 0; i <= (search_size / awb_block); i++)
+            {
+                g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
+                g.DrawLine(new Pen(Color.Red, 1), x_st + awb_block * i, y_st, x_st + awb_block * i, y_st + search_size - 1);
+            }
+
+            int[] saturation_array = new int[(search_size / awb_block) * (search_size / awb_block)];
+
+            int upper_bound = 240;
+            for (j = y_st; j < (y_st + search_size); j++)
+            {
+                for (i = x_st; i < (x_st + search_size); i++)
+                {
+                    Color pp = bitmap1.GetPixel(i, j);
+
+                    A = pp.A;
+                    R = pp.R;
+                    G = pp.G;
+                    B = pp.B;
+
+                    if ((R >= upper_bound) && (G >= upper_bound) && (B >= upper_bound))
+                    {
+                        saturation_array[((i - x_st) / awb_block) + (((j - y_st) / awb_block)) * (search_size / awb_block)]++;
+
+                    }
+                }
+            }
+
+            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 255, 0));
+            //richTextBox1.Text += "\nresult:\n";
+            for (i = 0; i < saturation_array.Length; i++)
+            {
+                //richTextBox1.Text += "saturation_array[" + i.ToString() + "] = " + saturation_array[i].ToString() + "\n";
+                if (saturation_array[i] == 0)
+                {
+                    g.FillRectangle(semiTransBrush, new Rectangle(x_st + awb_block * (i % (search_size / awb_block)), y_st + awb_block * (i / (search_size / awb_block)), awb_block, awb_block));
+                }
+            }
+
+
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\test_pic.bmp";
+            bitmap1 = new Bitmap(filename);
+            Graphics g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
+
+            Graphics g2 = pictureBox2.CreateGraphics();
+            //pictureBox1.Image = bitmap1;
+
+
+            int i;
+            int j;
+            int A;
+            int R;
+            int G;
+            int B;
+            int search_size = 256;   //256X256
+            int awb_block = 32;     //AWB block size width, height
+            int ww = awb_block;
+            int hh = awb_block;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int center_x = W / 2;
+            int center_y = H / 2;
+            int x_st = center_x - search_size / 2;
+            int y_st = center_y - search_size / 2;
+
+            int[,] rgb_array = new int[3, 16];
+
+            for (i = 0; i <= (search_size / awb_block); i++)
+            {
+                g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
+                g.DrawLine(new Pen(Color.Red, 1), x_st + awb_block * i, y_st, x_st + awb_block * i, y_st + search_size - 1);
+            }
+
+            int[] saturation_array = new int[(search_size / awb_block) * (search_size / awb_block)];
+
+            int upper_bound = 240;
+            for (j = y_st; j < (y_st + search_size); j++)
+            {
+                for (i = x_st; i < (x_st + search_size); i++)
+                {
+                    Color pp = bitmap1.GetPixel(i, j);
+
+                    A = pp.A;
+                    R = pp.R;
+                    G = pp.G;
+                    B = pp.B;
+
+                    if ((R >= upper_bound) && (G >= upper_bound) && (B >= upper_bound))
+                    {
+                        saturation_array[((i - x_st) / awb_block) + (((j - y_st) / awb_block)) * (search_size / awb_block)]++;
+
+                    }
+                    rgb_array[0, (R / 16)] += R;
+                    rgb_array[1, (G / 16)] += G;
+                    rgb_array[2, (B / 16)] += B;
+                }
+
+            }
+
+            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 255, 0));
+            //richTextBox1.Text += "\nresult:\n";
+            for (i = 0; i < saturation_array.Length; i++)
+            {
+                //richTextBox1.Text += "saturation_array[" + i.ToString() + "] = " + saturation_array[i].ToString() + "\n";
+                if (saturation_array[i] == 0)
+                {
+                    g.FillRectangle(semiTransBrush, new Rectangle(x_st + awb_block * (i % (search_size / awb_block)), y_st + awb_block * (i / (search_size / awb_block)), awb_block, awb_block));
+                }
+            }
+
+            int rgb_max = 0;
+
+            richTextBox1.Text += "R = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += rgb_array[0, i].ToString() + " ";
+                if (rgb_max < rgb_array[0, i])
+                    rgb_max = rgb_array[0, i];
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "G = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += rgb_array[1, i].ToString() + " ";
+                if (rgb_max < rgb_array[1, i])
+                    rgb_max = rgb_array[1, i];
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "B = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += rgb_array[2, i].ToString() + " ";
+                if (rgb_max < rgb_array[2, i])
+                    rgb_max = rgb_array[2, i];
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "rgb_max = " + rgb_max.ToString() + "\n";
+
+            //g2.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(50, 50, 200, 100));
+
+            //g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 255, 0)), new Rectangle(50, 50, 200, 100));
+
+
+            //SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(255, 0, 255, 0));
+
+            int height = 300;
+            int h = 0;
+            richTextBox1.Text += "normalize\n";
+
+            richTextBox1.Text += "R = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                h = (int)((double)rgb_array[0, i] * height / rgb_max);
+                richTextBox1.Text += ((int)((double)rgb_array[0, i] * height / rgb_max)).ToString() + " ";
+
+                if (h < 1)
+                    h = 1;
+                g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 255, 0, 0)), new Rectangle(20 + i * 20, pictureBox2.Height - 50 - h, 4, h));
+
+                //g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 128, 128, 0)), new Rectangle(20 + i * 20, 50, 4, h));
+
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "G = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                h = (int)((double)rgb_array[1, i] * height / rgb_max);
+                richTextBox1.Text += ((int)((double)rgb_array[1, i] * height / rgb_max)).ToString() + " ";
+                if (h < 1)
+                    h = 1;
+                g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 255, 0)), new Rectangle(20 + i * 20 + 5, pictureBox2.Height - 50 - h, 4, h));
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "B = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                h = (int)((double)rgb_array[2, i] * height / rgb_max);
+                richTextBox1.Text += ((int)((double)rgb_array[2, i] * height / rgb_max)).ToString() + " ";
+                if (h < 1)
+                    h = 1;
+                g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0, 255)), new Rectangle(20 + i * 20 + 10, pictureBox2.Height - 50 - h, 4, h));
+            }
+            richTextBox1.Text += "\n";
+
+
+        }
     }
 }

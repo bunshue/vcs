@@ -36,6 +36,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -67,7 +69,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 431);
+            this.button2.Location = new System.Drawing.Point(12, 379);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -77,7 +79,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 472);
+            this.button3.Location = new System.Drawing.Point(12, 420);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -87,7 +89,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 514);
+            this.button4.Location = new System.Drawing.Point(12, 462);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
@@ -97,7 +99,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(154, 347);
+            this.button5.Location = new System.Drawing.Point(12, 499);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 6;
@@ -107,7 +109,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(154, 397);
+            this.button6.Location = new System.Drawing.Point(130, 347);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 57);
             this.button6.TabIndex = 7;
@@ -115,11 +117,33 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(130, 491);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(126, 31);
+            this.button10.TabIndex = 14;
+            this.button10.Text = "C# 文字版瀏覽器";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(130, 410);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 72);
+            this.button7.TabIndex = 13;
+            this.button7.Text = "下載檔案的範例 - 使用WebClient";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(936, 665);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -146,6 +170,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button7;
     }
 }
 
