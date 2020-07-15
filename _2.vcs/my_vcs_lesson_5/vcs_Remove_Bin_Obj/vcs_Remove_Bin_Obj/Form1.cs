@@ -14,10 +14,16 @@ namespace vcs_Remove_Bin_Obj
     public partial class Form1 : Form
     {
         List<string> folder_name = new List<string>();   //宣告string型態的List
+        string search_path = string.Empty;
 
         public Form1()
         {
             InitializeComponent();
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            label1.Text = "目前位置 : " + currentPath;
+            //richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            search_path = currentPath;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -27,8 +33,6 @@ namespace vcs_Remove_Bin_Obj
             string currentPath = Directory.GetCurrentDirectory();
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
-
-
             //確認資料夾是否存在
             string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
@@ -37,24 +41,18 @@ namespace vcs_Remove_Bin_Obj
                 richTextBox1.Text += "資料夾: " + Path + " 存在\n";
             */
 
-            //string path = @"c:\______test_files";
-            //string path = @"D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6_draw";
-
             //string path = @"C:\_git\vcs\_2.vcs";
-            string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
+            //string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
+            string path = search_path;
 
             folder_name.Clear();
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
-
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
             if (Directory.Exists(path))
             {
-                richTextBox1.Text += "path = " + path + "\n";
                 // This path is a directory
                 ProcessDirectory(path);
             }
-            
             
             ProcessDirectoryBinObj(folder_name);
         }
@@ -74,9 +72,13 @@ namespace vcs_Remove_Bin_Obj
                     foreach (string fileName in fileEntries)
                     {
                         if (fileName.EndsWith(".suo"))
-                            folder_name.Add(fileName);
+                        {
+                            if (checkBox4.Checked == true)
+                                richTextBox1.Text += fileName + "\n";
+                            if (checkBox2.Checked == true)
+                                folder_name.Add(fileName);
+                        }
                     }
-
 
                     // Recurse into subdirectories of this directory.
                     string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
@@ -84,10 +86,21 @@ namespace vcs_Remove_Bin_Obj
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
+
                         if (subdirectory.EndsWith("\\bin"))
-                            folder_name.Add(subdirectory);
+                        {
+                            if (checkBox3.Checked == true)
+                                richTextBox1.Text += subdirectory + "\n";
+                            if (checkBox1.Checked == true)
+                                folder_name.Add(subdirectory);
+                        }
                         else if (subdirectory.EndsWith("\\obj"))
-                            folder_name.Add(subdirectory);
+                        {
+                            if (checkBox3.Checked == true)
+                                richTextBox1.Text += subdirectory + "\n";
+                            if (checkBox1.Checked == true)
+                                folder_name.Add(subdirectory);
+                        }
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
                         ProcessDirectory(subdirectory);
                     }
@@ -111,10 +124,10 @@ namespace vcs_Remove_Bin_Obj
             int i;
             int len;
             len = folder_name.Count;
-            richTextBox1.Text += "len = " + len + "\n";
+            richTextBox1.Text += "欲刪除個數 : " + len + "\n";
             for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += "subdirectory = " + folder_name[i] + "\n";
+                //richTextBox1.Text += "資料夾 : " + folder_name[i] + "\n";
 
                 if (Directory.Exists(folder_name[i]))     //確認資料夾是否存在
                 {
@@ -153,6 +166,11 @@ namespace vcs_Remove_Bin_Obj
 
 
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
 
