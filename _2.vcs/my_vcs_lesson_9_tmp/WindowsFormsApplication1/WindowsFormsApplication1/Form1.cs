@@ -36,6 +36,26 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //C# 網路連線檢查
+            //C# 可以實作 ping 網路連線檢查
+            //INIT PING OBJECT
+            System.Net.NetworkInformation.Ping objPing = new System.Net.NetworkInformation.Ping();
+
+            try
+            {
+                //設定測試連線及逾時時間
+                System.Net.NetworkInformation.PingReply PingResult = objPing.Send("www.google.com.tw", 5000);
+
+                //取得結果
+                string pingMsg = (PingResult.Status == System.Net.NetworkInformation.IPStatus.Success) ? "連線成功" : "無法連線";
+
+                richTextBox1.Text += pingMsg + "\n";
+
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
 
         }
 

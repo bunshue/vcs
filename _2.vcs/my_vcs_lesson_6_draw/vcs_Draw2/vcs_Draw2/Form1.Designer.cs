@@ -53,12 +53,12 @@
             this.button24 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +78,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(102, 42);
             this.button9.TabIndex = 18;
+            this.button9.Text = "畫資料連接球";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -321,6 +322,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "修改畫筆色色";
             // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(176, 50);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(102, 42);
+            this.button19.TabIndex = 47;
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button18
+            // 
+            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Location = new System.Drawing.Point(54, 50);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(102, 42);
+            this.button18.TabIndex = 46;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
@@ -368,26 +389,6 @@
             this.radioButton1.Text = "單色";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // button18
-            // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(54, 50);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(102, 42);
-            this.button18.TabIndex = 46;
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button19
-            // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(176, 50);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(102, 42);
-            this.button19.TabIndex = 47;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // Form1
             // 
