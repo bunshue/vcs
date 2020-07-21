@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{479D1539-3A2F-4770-8EC3-75F4A7DDAE51}</ProjectGuid>
+    <ProjectGuid>{5BDD12E7-6923-41C0-81F3-AED86ED6B1EF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Mosaic</RootNamespace>
-    <AssemblyName>vcs_Mosaic</AssemblyName>
+    <RootNamespace>小畫家大全</RootNamespace>
+    <AssemblyName>小畫家大全</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

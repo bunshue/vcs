@@ -144,7 +144,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 40);
             this.button9.TabIndex = 9;
-            this.button9.Text = "新進測項2";
+            this.button9.Text = "馬賽克範例";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 

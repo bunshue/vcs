@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
+using System.Drawing.Imaging;   //for ImageFormat
 
-
-namespace MyPaint
+namespace 小畫家大全
 {
     public partial class Form1 : Form
     {
@@ -23,7 +22,7 @@ namespace MyPaint
         //当前使用的工具
         private drawTools drawTool = drawTools.Pen;
         private bool isDrawing = false;     //是否正在繪圖
-        private Image theImage;             //進行操作的bitmap
+        Image bitmap1;             //進行操作的bitmap
         Graphics g;         //Graphics實例
         Graphics ig;        //繪製bitmap的Graphics實例
         Color foreColor = Color.Red;
@@ -33,10 +32,11 @@ namespace MyPaint
         public Form1()
         {
             InitializeComponent();
+
             //創建一個bitmap
-            theImage = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height);
+            bitmap1 = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height);
             g = this.CreateGraphics();
-            ig = Graphics.FromImage(theImage);
+            ig = Graphics.FromImage(bitmap1);
             ig.Clear(backColor);
 
             PenStyle = new Pen(foreColor);
@@ -48,6 +48,9 @@ namespace MyPaint
 
             //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
             PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
+            g.Clear(backColor);
+            ig.Clear(backColor);
 
         }
 
@@ -82,6 +85,7 @@ namespace MyPaint
                     g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
                 }
             }
+
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -91,12 +95,54 @@ namespace MyPaint
             {
                 ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
             }
+
+
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            //将Image中保存的图像，绘制出来
+            Graphics g = this.CreateGraphics();
+            if (bitmap1 != null)
+            {
+                g.Clear(Color.White);
+                g.DrawImage(bitmap1, this.ClientRectangle);
+            }
+
+        }
+
+        void save_image_to_drive()
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                    bitmap1.Save(@filename2, ImageFormat.Bmp);
+                    bitmap1.Save(@filename3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "image." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".bmp";
-            theImage.Save(filename, ImageFormat.Bmp);
+            save_image_to_drive();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -120,29 +166,7 @@ namespace MyPaint
             PenStyle.Width = (int)numericUpDown1.Value;
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Point p1, p2;
-
-            p1 = new Point();
-            p2 = new Point();
-
-            p1.X = 50;
-            p1.Y = 50;
-            p2.X = 250;
-            p2.Y = 250;
-
-            g.DrawLine(PenStyle, p1, p2);
-            ig.DrawLine(PenStyle, p1, p2);
-
-            p1.X = 400;
-            p1.Y = 200;
-
-            g.DrawLine(PenStyle, p2, p1);
-            ig.DrawLine(PenStyle, p2, p1);
-        }
-
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked == true)
                 drawTool = drawTools.Pen;
@@ -158,24 +182,14 @@ namespace MyPaint
                 drawTool = drawTools.Erase;
             else
                 drawTool = drawTools.None;
-        }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            //将Image中保存的图像，绘制出来
-            Graphics g = this.CreateGraphics();
-            if (theImage != null)
-            {
-                g.Clear(Color.White);
-                g.DrawImage(theImage, this.ClientRectangle);
-            }
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
-
         }
+
 
     }
 }

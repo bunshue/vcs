@@ -58,7 +58,8 @@ namespace _vcs_DrawTemplate
         {
             //載入圖片至畫布
             string filename = string.Empty;
-            filename = "C:\\______test_files\\bear.jpg";
+            //filename = "C:\\______test_files\\bear.jpg";
+            filename = "C:\\______test_files\\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
             bitmap1 = new Bitmap(filename);
 
@@ -191,11 +192,83 @@ namespace _vcs_DrawTemplate
 
         private void button8_Click(object sender, EventArgs e)
         {
+            Random rnd = new Random();
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            int r;
+            int g;
+            int b;
+
+            r = rnd.Next(256);
+            g = rnd.Next(256);
+            b = rnd.Next(256);
+
+            width = 300;
+            height = 300;
+            bitmap1 = new Bitmap(width, height);
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    r = rnd.Next(256);
+                    g = rnd.Next(256);
+                    b = rnd.Next(256);
+
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, r, g, b));
+                }
+            }
+
+            pictureBox1.Image = bitmap1;
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //馬賽克   TBD
+            int block_size = 30;
+
+            int i;
+            int xx;
+            int yy;
+            int r_total = 0;
+            int g_total = 0;
+            int b_total = 0;
+            byte rrr;
+            byte ggg;
+            byte bbb;
+
+            for (yy = 0; yy < bitmap1.Height / 5; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width / 5; xx += 5)
+                {
+                    r_total = 0;
+                    g_total = 0;
+                    b_total = 0;
+
+                    for (i = 0; i < block_size; i++)
+                    {
+
+                        rrr = bitmap1.GetPixel(xx + i, yy).R;
+                        ggg = bitmap1.GetPixel(xx + i, yy).G;
+                        bbb = bitmap1.GetPixel(xx + i, yy).B;
+                        r_total += rrr;
+                        g_total += ggg;
+                        b_total += bbb;
+                    }
+
+                    Color zz = Color.FromArgb(255, (byte)(r_total / block_size), (byte)(g_total / block_size), (byte)(b_total / block_size));
+                    for (i = 0; i < block_size; i++)
+                    {
+                        bitmap1.SetPixel(xx + i, yy, zz);
+                    }
+                }
+            }
+
+            pictureBox1.Image = bitmap1;
 
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace MyPaint
+namespace 小畫家大全
 {
     static class Program
     {
