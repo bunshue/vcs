@@ -13369,10 +13369,20 @@ namespace imsLink
                 {
                     sw = new StreamWriter(File.Open(filename1, FileMode.Append), Encoding.Default);    //指名編碼格式
                 }
+                    /*
+                catch (IOException exception)
+                {
+                    var errorCode = Marshal.GetHRForException(exception) & 65535;
+                    richTextBox1.Text += "xxxerrorCode   : " + errorCode.ToString() + "\n";
+                    return;
+                    //return errorCode == 32 || errorCode == 33;
+                }
+                     */
                 catch (Exception ex)
                 {
+                    richTextBox1.Text += "xxx錯誤訊息p : " + ex.ToString() + "\n";
                     richTextBox1.Text += "xxx錯誤訊息p : " + ex.Message + "\n";
-                    show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message1("CSV檔使用中, 未儲存1", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
                 }
@@ -13598,7 +13608,7 @@ namespace imsLink
                 catch (Exception ex)
                 {
                     richTextBox1.Text += "xxx錯誤訊息r : " + ex.Message + "\n";
-                    show_main_message1("CSV檔使用中, 未儲存", S_OK, 50);
+                    show_main_message1("CSV檔使用中, 未儲存2", S_OK, 50);
                     show_main_message3("匯出CSV檔失敗", S_OK, 50);
                     return;
                 }
