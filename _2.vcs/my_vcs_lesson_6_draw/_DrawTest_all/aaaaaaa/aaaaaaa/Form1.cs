@@ -14,8 +14,6 @@ namespace aaaaaaa
     {
         Graphics g;                 // 繪圖區
         Pen pen;                    // 畫筆
-        bool isMouseDown = false;   // 紀錄滑鼠是否被按下
-        List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。        
         
         public Form1()
         {
@@ -28,19 +26,6 @@ namespace aaaaaaa
             */
             g = this.CreateGraphics(); // 取得繪圖區物件
             pen = new Pen(Color.Black, 3); // 設定畫筆為黑色、粗細為 3 點。
-        }
-
-        private void panel1_MouseHover(object sender, EventArgs e)
-        {
-            this.Cursor = System.Windows.Forms.Cursors.VSplit;
-            //label2.Text = "(" + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString();
-            //label2.Text = "(" + System.Windows.Forms.Cursor.Position.X.ToString() + ", " + System.Windows.Forms.Cursor.Position.Y.ToString() + ")";
-
-        }
-
-        private void panel1_MouseLeave(object sender, EventArgs e)
-        {
-            this.Cursor = System.Windows.Forms.Cursors.Default;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -136,50 +121,5 @@ namespace aaaaaaa
             this.panel2.BackgroundImage = bmpClone;
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            label2.Text = "(" + System.Windows.Forms.Cursor.Position.X.ToString() + ", " + System.Windows.Forms.Cursor.Position.Y.ToString() + ")";
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            isMouseDown = true; // 滑鼠被按下後設定旗標值。
-            points.Add(e.Location); // 將點加入到 points 陣列當中。
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown) // 如果滑鼠被按下
-            {
-                points.Add(e.Location); // 將點加入到 points 陣列當中。
-                // 畫出上一點到此點的線段。
-                //g.DrawLine(pen, points[points.Count - 2], points[points.Count - 1]);
-                this.Invalidate();
-            }
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            points.Add(new Point(-1, -1)); // 滑鼠放開時，插入一個斷點 (-1,-1)，以代表前後兩點之間有斷開。
-            isMouseDown = false; // 滑鼠已經沒有被按下了。
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            for (int i = 0; i < points.Count - 1; i++)
-            {
-                if (points[i].X >= 0 && points[i + 1].X >= 0)
-                    g.DrawLine(pen, points[i], points[i + 1]);
-            }
-
-        }
-        
-
-  
     }
 }

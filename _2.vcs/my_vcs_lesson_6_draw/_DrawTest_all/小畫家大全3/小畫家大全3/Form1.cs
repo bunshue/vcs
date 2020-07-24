@@ -14,10 +14,25 @@ namespace 小畫家大全3
     public partial class Form1 : Form
     {
         Graphics g;
+        Graphics ig;        //繪製bitmap的Graphics實例
+        Pen PenStyle;
         Pen p;
         //SolidBrush sb;
         Bitmap bitmap1;
 
+        Color foreColor = Color.Red;
+        Color backColor = Color.White;
+
+        private Point startPoint, oldPoint; //繪圖時紀錄滑鼠位置
+        //枚举类型，各种绘图工具
+        private enum drawTools
+        {
+            Pen = 0, Line, Circle, Rectangle, String, Erase, None
+        };
+        //当前使用的工具
+        private drawTools drawTool = drawTools.Pen;
+        private bool isDrawing = false;     //是否正在繪圖
+        
         public Form1()
         {
             InitializeComponent();
@@ -67,10 +82,27 @@ namespace 小畫家大全3
             //指定畫布大小
             pictureBox1.Width = 640;
             pictureBox1.Height = 480;
+
+            //創建一個bitmap
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            ig = Graphics.FromImage(bitmap1);
             g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+
+
+            PenStyle = new Pen(foreColor);
+            PenStyle.Width = (int)numericUpDown1.Value;
+            PenStyle.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            PenStyle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+            PenStyle.Color = foreColor;
+
+            //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+
+            g.Clear(backColor);
+            ig.Clear(backColor);
+
             pictureBox1.Image = bitmap1;
 
         }
@@ -434,21 +466,111 @@ namespace 小畫家大全3
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            /*
             if (checkBox1.Checked == true)
             {
-                flag_eraser_mode = true;
-                pictureBox1.Visible = false;
+                //flag_eraser_mode = true;
+                //pictureBox1.Visible = false;
 
-                g = this.CreateGraphics();
-                p = new Pen(Color.Red, 6);
+                //g = this.CreateGraphics();
+                //p = new Pen(Color.Red, 6);
+                backColor = Color.White;
+                PenStyle = new Pen(backColor);
+                PenStyle.Width = (int)numericUpDown1.Value;
+                //PenStyle.Color = backColor;
             }
             else
             {
-                flag_eraser_mode = false;
-                pictureBox1.Visible = true;
+                //flag_eraser_mode = false;
+                //pictureBox1.Visible = true;
+                PenStyle.Color = foreColor;
             }
-            */
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foreColor = colorDialog1.Color;
+                PenStyle.Color = foreColor;
+            }
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            PenStyle.Width = (int)numericUpDown1.Value;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+                drawTool = drawTools.Pen;
+            else if (radioButton2.Checked == true)
+                drawTool = drawTools.Line;
+            else if (radioButton3.Checked == true)
+                drawTool = drawTools.Rectangle;
+            else if (radioButton4.Checked == true)
+                drawTool = drawTools.Circle;
+            else if (radioButton5.Checked == true)
+                drawTool = drawTools.String;
+            else if (radioButton6.Checked == true)
+                drawTool = drawTools.Erase;
+            else
+                drawTool = drawTools.None;
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (bitmap1 == null)
+                return;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                //如果开始绘制，则开始记录鼠标位置
+                isDrawing = true;
+                startPoint = new Point(e.X, e.Y);
+                oldPoint = new Point(e.X, e.Y);
+            }
+
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (bitmap1 == null)
+                return;
+
+            if (isDrawing == true)
+            {
+                if (drawTool == drawTools.Pen)
+                {
+                    g.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
+                    ig.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
+                    oldPoint.X = e.X;
+                    oldPoint.Y = e.Y;
+                    pictureBox1.Image = bitmap1;
+                }
+                else if (drawTool == drawTools.Rectangle)
+                {
+                    //首先恢复此次操作之前的图像，然后再添加Rectangle
+                    //this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
+                    g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+                }
+            }
+            
+
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (bitmap1 == null)
+                return;
+
+            isDrawing = false;
+            if (drawTool == drawTools.Rectangle)
+            {
+                ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+            }
+
         }
 
     }
