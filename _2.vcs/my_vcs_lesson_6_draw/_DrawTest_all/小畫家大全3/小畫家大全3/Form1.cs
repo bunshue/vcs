@@ -536,6 +536,9 @@ namespace 小畫家大全3
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            //this.Text = e.X.ToString() + ", " + e.Y.ToString();   //same
+            this.Text = "(" + System.Windows.Forms.Cursor.Position.X.ToString() + ", " + System.Windows.Forms.Cursor.Position.Y.ToString() + ")";
+
             if (bitmap1 == null)
                 return;
 
