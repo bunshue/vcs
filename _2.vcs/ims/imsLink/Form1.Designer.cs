@@ -161,6 +161,10 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.groupBox_metering = new System.Windows.Forms.GroupBox();
+            this.rb_metering_2 = new System.Windows.Forms.RadioButton();
+            this.rb_metering_3 = new System.Windows.Forms.RadioButton();
+            this.rb_metering_1 = new System.Windows.Forms.RadioButton();
             this.cb_change_rank = new System.Windows.Forms.CheckBox();
             this.bt_measure_brightness = new System.Windows.Forms.Button();
             this.bt_reset_camera = new System.Windows.Forms.Button();
@@ -695,6 +699,7 @@
             this.tp_Serial_Auto.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            this.groupBox_metering.SuspendLayout();
             this.groupBox_gridlinecolor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).BeginInit();
             this.gb_contrast_brightness3.SuspendLayout();
@@ -2210,6 +2215,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.groupBox_metering);
             this.tp_USB.Controls.Add(this.cb_change_rank);
             this.tp_USB.Controls.Add(this.bt_measure_brightness);
             this.tp_USB.Controls.Add(this.bt_reset_camera);
@@ -2389,6 +2395,53 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_metering
+            // 
+            this.groupBox_metering.Controls.Add(this.rb_metering_2);
+            this.groupBox_metering.Controls.Add(this.rb_metering_3);
+            this.groupBox_metering.Controls.Add(this.rb_metering_1);
+            this.groupBox_metering.Location = new System.Drawing.Point(288, 21);
+            this.groupBox_metering.Name = "groupBox_metering";
+            this.groupBox_metering.Size = new System.Drawing.Size(213, 57);
+            this.groupBox_metering.TabIndex = 233;
+            this.groupBox_metering.TabStop = false;
+            this.groupBox_metering.Text = "Metering";
+            // 
+            // rb_metering_2
+            // 
+            this.rb_metering_2.AutoSize = true;
+            this.rb_metering_2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_metering_2.Location = new System.Drawing.Point(14, 30);
+            this.rb_metering_2.Name = "rb_metering_2";
+            this.rb_metering_2.Size = new System.Drawing.Size(52, 17);
+            this.rb_metering_2.TabIndex = 227;
+            this.rb_metering_2.Text = "CEN.";
+            this.rb_metering_2.UseVisualStyleBackColor = true;
+            // 
+            // rb_metering_3
+            // 
+            this.rb_metering_3.AutoSize = true;
+            this.rb_metering_3.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_metering_3.Location = new System.Drawing.Point(78, 30);
+            this.rb_metering_3.Name = "rb_metering_3";
+            this.rb_metering_3.Size = new System.Drawing.Size(55, 17);
+            this.rb_metering_3.TabIndex = 226;
+            this.rb_metering_3.Text = "AVG.";
+            this.rb_metering_3.UseVisualStyleBackColor = true;
+            // 
+            // rb_metering_1
+            // 
+            this.rb_metering_1.AutoSize = true;
+            this.rb_metering_1.Checked = true;
+            this.rb_metering_1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_metering_1.Location = new System.Drawing.Point(140, 30);
+            this.rb_metering_1.Name = "rb_metering_1";
+            this.rb_metering_1.Size = new System.Drawing.Size(59, 17);
+            this.rb_metering_1.TabIndex = 226;
+            this.rb_metering_1.TabStop = true;
+            this.rb_metering_1.Text = "AUTO";
+            this.rb_metering_1.UseVisualStyleBackColor = true;
             // 
             // cb_change_rank
             // 
@@ -8397,6 +8450,8 @@
             this.groupBox10.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            this.groupBox_metering.ResumeLayout(false);
+            this.groupBox_metering.PerformLayout();
             this.groupBox_gridlinecolor.ResumeLayout(false);
             this.groupBox_gridlinecolor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).EndInit();
@@ -9158,6 +9213,10 @@
         private System.Windows.Forms.Button button93;
         private System.Windows.Forms.Button button92;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.GroupBox groupBox_metering;
+        private System.Windows.Forms.RadioButton rb_metering_2;
+        private System.Windows.Forms.RadioButton rb_metering_3;
+        private System.Windows.Forms.RadioButton rb_metering_1;
     }
 }
 

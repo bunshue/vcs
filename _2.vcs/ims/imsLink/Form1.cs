@@ -27,6 +27,8 @@ namespace imsLink
 
         bool flag_david_test = false;   //david測試第12站時, ims主機要開putty模式
 
+        bool flag_user_metering = false;   //在第3站加上測光模式
+
         bool flag_enaglb_awb_function = true;
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
         bool flag_check_webcam_signal = true;
@@ -3517,10 +3519,24 @@ namespace imsLink
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 button19.Location = new Point(button19.Location.X - 35, button19.Location.Y);
-                groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 110, cb_show_grid.Location.Y - 20-20);
+                groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 110, cb_show_grid.Location.Y - 20 - 20);
             }
             else
                 groupBox_gridlinecolor.Visible = false;
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
+            {
+                groupBox5.Visible = true;
+                groupBox_metering.Visible = true;
+                groupBox_metering.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 50);
+
+                lb_yuv_y2.Visible = true;
+                lb_yuv_y2.Location = new Point(lb_rgb_b.Location.X + 60, lb_rgb_b.Location.Y+10);
+            }
+            else
+            {
+                groupBox_metering.Visible = false;
+            }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
             {
@@ -3804,6 +3820,15 @@ namespace imsLink
             //toolTip1.ToolTipTitle = "提示訊息";
 
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
+
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
+            {
+                if (flag_comport_connection_ok == false)
+                {
+                    richTextBox1.Text += "metering call connect_IMS_comport()\n";
+                    connect_IMS_comport();
+                }
+            }
 
             if (flag_enaglb_awb_function == true)
             {
@@ -5651,22 +5676,143 @@ namespace imsLink
                     j = 4;
                 }
 
-                if (j >= 2)
+                if (flag_user_metering == false)
                 {
-                    for (i = 1; i <= (j - 1); i++)
+                    if (j >= 2)
                     {
-                        if (rb_gridlinecolor_white.Checked == true)
+                        for (i = 1; i <= (j - 1); i++)
                         {
-                            gg.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
-                            gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
-                        }
-                        else
-                        {
-                            gg.DrawLine(new Pen(Color.Black, 1), w * i / j, 0, w * i / j, h);
-                            gg.DrawLine(new Pen(Color.Black, 1), 0, h * i / j, w, h * i / j);
+                            if (rb_gridlinecolor_white.Checked == true)
+                            {
+                                gg.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
+                                gg.DrawLine(new Pen(Color.Silver, 1), 0, h * i / j, w, h * i / j);
+                            }
+                            else
+                            {
+                                gg.DrawLine(new Pen(Color.Black, 1), w * i / j, 0, w * i / j, h);
+                                gg.DrawLine(new Pen(Color.Black, 1), 0, h * i / j, w, h * i / j);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    int xx_st = 0;
+                    int yy_st = 0;
+                    int draw_x_st = 0;
+                    int draw_y_st = 0;
+                    double result = -1;
+                    int www = 0;
+                    int hhh = 0;
+
+                    drawBrush = new SolidBrush(Color.Black);
+                    drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+
+                    if (rb_metering_1.Checked == true)
+                    {
+                        j = 5;
+                        www = 16;
+                        hhh = 12;
+
+                        for (i = 1; i <= (j - 1); i++)
+                        {
+                            gg.DrawLine(new Pen(Color.Red, 1), w * i / j, 0, w * i / j, h);
+                            gg.DrawLine(new Pen(Color.Red, 1), 0, h * i / j, w, h * i / j);
+                        }
+
+
+                        for (yy_st = h / 10 - hhh / 2; yy_st < h; yy_st += h / 5)
+                        {
+                            for (xx_st = w / 10 - www / 2; xx_st < w; xx_st += w / 5)
+                            {
+                                result = -1;
+                                result = measure_brightness2(xx_st, yy_st, www, hhh);
+
+                                gg.DrawRectangle(new Pen(Color.Red, 1), xx_st, yy_st, www, hhh);
+
+
+                                draw_x_st = xx_st - www / 2;
+                                draw_y_st = yy_st + hhh;
+
+                                string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
+
+                                drawBrush = new SolidBrush(Color.White);
+                                drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
+
+                                drawBrush = new SolidBrush(Color.Black);
+                                drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (rb_metering_2.Checked == true)  //CEN.
+                        {
+                            j = 5;
+                            result = -1;
+                            www = w / 5;
+                            hhh = h / 5;
+
+                            xx_st = w * 2 / 5;
+                            yy_st = h * 2 / 5;
+
+                            result = measure_brightness2(xx_st, yy_st, www, hhh);
+
+                            gg.DrawRectangle(new Pen(Color.Green, 1), xx_st, yy_st, www, hhh);
+
+                            draw_x_st = xx_st;
+                            draw_y_st = yy_st + hhh;
+
+                            string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
+
+                            drawBrush = new SolidBrush(Color.White);
+                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
+
+                            drawBrush = new SolidBrush(Color.Black);
+                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
+
+                        }
+                        else     //AVG.
+                        {
+                            j = 3;
+                            result = -1;
+                            www = w / 3;
+                            hhh = h / 3;
+
+                            xx_st = w * 1 / 3;
+                            yy_st = h * 1 / 3;
+
+                            result = measure_brightness2(xx_st, yy_st, www, hhh);
+
+                            gg.DrawRectangle(new Pen(Color.Green, 1), xx_st, yy_st, www, hhh);
+
+                            draw_x_st = xx_st;
+                            draw_y_st = yy_st + hhh;
+
+                            string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
+
+                            drawBrush = new SolidBrush(Color.White);
+                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
+
+                            drawBrush = new SolidBrush(Color.Black);
+                            drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                            gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
+
+                        }
+
+                        if ((j % 2) == 0)
+                            gg.DrawRectangle(new Pen(Color.Red, 1), w / 2 - w / j / 2, h / 2 - h / j / 2, w / j, h / j);
+                        else
+                            gg.DrawRectangle(new Pen(Color.Red, 1), w * (j / 2) / j, h * (j / 2) / j, w / j, h / j);
+                    }
+
+                }
+
             }
             else if ((cb_show_grid.Checked == true) && (flag_enaglb_awb_function == true))
             {
@@ -21827,6 +21973,99 @@ namespace imsLink
 
             delay(10);
             flag_do_find_awb_location = false;
+            return y_total / (ww * hh);
+        }
+
+        double measure_brightness2(int x_st, int y_st, int ww, int hh)
+        {
+            if ((ww <= 0) || (hh <= 0))
+            {
+                richTextBox1.Text += "量測點數 ww = " + ww.ToString() + ", hh = " + hh.ToString() + " 不合法\n";
+                return -1;
+            }
+
+            int w;
+            int h;
+            int i;
+            int j;
+            Color p;
+            Bitmap bm2 = null;
+            double y_total = 0;
+            int result = -1;
+
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //bm2 = bm;
+                bm2 = (Bitmap)bm.Clone();
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f1 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return result;
+            }
+
+            try
+            {
+                ga = Graphics.FromImage(bm2);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return result;
+            }
+
+            try
+            {
+                w = bm2.Width;
+                h = bm2.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            if (x_st < 0)
+                x_st = 0;
+            if (y_st < 0)
+                y_st = 0;
+            if ((x_st + ww) > w)
+                x_st = w - ww;
+            if ((y_st + hh) > h)
+                y_st = h - hh;
+
+            //richTextBox1.Text += "量測點數 ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+            //richTextBox1.Text += "起點 x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+
+            for (j = y_st; j < (y_st + hh); j++)
+            {
+                for (i = x_st; i < (x_st + ww); i++)
+                {
+                    p = bm2.GetPixel(i, j);
+                    //bm2.SetPixel(i, j, Color.FromArgb(255, 0, 0));
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+                    y_total += yyy.Y;
+                }
+            }
+            //ga.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
+
+            //richTextBox1.Text += "y_total = " + y_total.ToString() + "\n";
+            //richTextBox1.Text += "y_avg = " + (y_total / (ww * hh)).ToString() + "\n\n";
+
+            //tb_awb_mesg.Text = (y_total / (ww * hh)).ToString();
+
+            GC.Collect();       //回收資源
+            //pictureBox1.Image = bm2;
+
+            //delay(10);
             return y_total / (ww * hh);
         }
 
