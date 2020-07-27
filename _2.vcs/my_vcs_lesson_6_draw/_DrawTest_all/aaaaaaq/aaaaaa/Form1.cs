@@ -20,15 +20,6 @@ namespace aaaaaa
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = bmp;
-
-            g.DrawEllipse(p, 100, 100, 200, 200);
-            p = new Pen(Color.Blue, 5);
-            g.DrawEllipse(p, 300, 300, 200, 200);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             bmp = new Bitmap(@"C:\______test_files\bear.jpg");
@@ -37,16 +28,10 @@ namespace aaaaaa
             pictureBox1.Image = bmp;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = bmp;
-            g.DrawRectangle(p, 250, 250, 200, 200);
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            bmp = new Bitmap(@"C:\______test_files\bear.jpg");
+            //bmp = new Bitmap(@"C:\______test_files\bear.jpg");
+            bmp = new Bitmap(@"C:\______test_files\picture1.jpg");
             g = Graphics.FromImage(bmp);
             pictureBox1.Image = bmp;
         }

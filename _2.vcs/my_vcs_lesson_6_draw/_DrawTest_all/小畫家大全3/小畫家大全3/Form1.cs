@@ -30,7 +30,8 @@ namespace 小畫家大全3
             Pen = 0, Line, Circle, Rectangle, String, Erase, None
         };
         //当前使用的工具
-        private drawTools drawTool = drawTools.Pen;
+        //private drawTools drawTool = drawTools.Pen;
+        private drawTools drawTool = drawTools.Line;
         private bool isDrawing = false;     //是否正在繪圖
         
         public Form1()
@@ -504,7 +505,8 @@ namespace 小畫家大全3
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked == true)
-                drawTool = drawTools.Pen;
+                //drawTool = drawTools.Pen;
+                drawTool = drawTools.Line;
             else if (radioButton2.Checked == true)
                 drawTool = drawTools.Line;
             else if (radioButton3.Checked == true)
@@ -527,9 +529,12 @@ namespace 小畫家大全3
             if (e.Button == MouseButtons.Left)
             {
                 //如果开始绘制，则开始记录鼠标位置
-                isDrawing = true;
-                startPoint = new Point(e.X, e.Y);
-                oldPoint = new Point(e.X, e.Y);
+                if ((isDrawing = !isDrawing) == true)
+                {
+                    //isDrawing = true;
+                    startPoint = new Point(e.X, e.Y);
+                    oldPoint = new Point(e.X, e.Y);
+                }
             }
 
         }
@@ -552,11 +557,23 @@ namespace 小畫家大全3
                     oldPoint.Y = e.Y;
                     pictureBox1.Image = bitmap1;
                 }
+                else if (drawTool == drawTools.Line)
+                {
+                    g.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
+                    ig.DrawLine(PenStyle, oldPoint, new Point(e.X, e.Y));
+                    oldPoint.X = e.X;
+                    oldPoint.Y = e.Y;
+                    pictureBox1.Image = bitmap1;
+                }
                 else if (drawTool == drawTools.Rectangle)
                 {
                     //首先恢复此次操作之前的图像，然后再添加Rectangle
                     //this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
-                    g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+                    //this.pictureBox1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
+
+                    //g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+                    //ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+                    pictureBox1.Image = bitmap1;
                 }
             }
             
@@ -571,9 +588,29 @@ namespace 小畫家大全3
             isDrawing = false;
             if (drawTool == drawTools.Rectangle)
             {
+                g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
                 ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
+                pictureBox1.Image = bitmap1;
             }
 
+
+
+
+
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            /*
+            //将Image中保存的图像，绘制出来
+            Graphics g = this.CreateGraphics();
+            if (bitmap1 != null)
+            {
+                g.Clear(Color.White);
+                g.DrawImage(bitmap1, this.ClientRectangle);
+            }
+            */
         }
 
     }
