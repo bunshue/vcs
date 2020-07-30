@@ -26,6 +26,12 @@ namespace vcs_YearTable
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             p = new Pen(Color.Red, 3);
             sb = new SolidBrush(Color.Red);
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Normal;
+            this.Size = new Size(1920, 1080);
+            this.Location = new Point(0, 0);
+            this.BackColor = Color.Pink;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -844,6 +850,8 @@ namespace vcs_YearTable
             int ratio = 40;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
             pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, total_persons * HEIGHT + BORDER * 2);
+            //this.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3 + 10, total_persons * HEIGHT + BORDER * 2 + 10);
+            richTextBox1.Text += "this size : W = " + (totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3).ToString() + ", H = " + (total_persons * HEIGHT + BORDER * 2).ToString() + "\n";
 
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bitmap1);
@@ -958,5 +966,66 @@ namespace vcs_YearTable
         {
             draw_person_data(PERSON_DATA_GREAT);
         }
+
+        //***********************
+        private Point mouseOffset;//記錄滑鼠座標
+        private bool isMouseDown = false;//是否按下滑鼠
+        //***********************
+
+        #region 移動無邊框Form
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int xOffset;
+            int yOffset;
+            if (e.Button == MouseButtons.Left)
+            {
+                xOffset = -e.X;
+                yOffset = -e.Y;
+                mouseOffset = new Point(xOffset, yOffset);
+                isMouseDown = true;
+            }
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+                Location = mousePos;
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
+        }
+
+        #endregion
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

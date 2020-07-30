@@ -24,7 +24,10 @@ namespace vcs_ScreenRuler
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+            //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+            this.WindowState = FormWindowState.Normal;
+            this.Size = new Size(1920, 1080 / 4);
+            this.Location = new Point(0, 0);
             this.BackColor = Color.White;
 
             bmp = new Bitmap(screenWidth, screenHeight);     //initial W, H
@@ -38,23 +41,33 @@ namespace vcs_ScreenRuler
             delta = 100;
             for (i = 0; i < screenWidth; i += delta)
             {
-                //g.DrawLine(new Pen(Color.Green, 1), i, 0, i, screenHeight);
+                g.DrawLine(new Pen(Color.Blue, 1), i, 0, i, screenHeight / 2);
+                g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(i - 15, 30));   //畫直線
+            }
+
+            for (i = 0; i < 350; i += delta)
+            {
+                g.DrawLine(new Pen(Color.Blue, 1), 0, i, screenWidth, i);
+                g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(0, i));
             }
 
             delta = screenWidth * 5 / 100;
             for (i = 0; i < screenWidth; i += delta)
             {
-                g.DrawLine(new Pen(Color.Red, 1), i, 0, i, screenHeight);
+                g.DrawLine(new Pen(Color.Red, 1), i, 0 + 100, i, screenHeight);
+                g.DrawString((i * 100 / screenWidth).ToString() + " %".ToString(), new Font("標楷體", 12), new SolidBrush(Color.Red), new PointF(i - 20, 220));
             }
 
+            /*
             i = screenHeight * 10 / 100;
             g.DrawLine(new Pen(Color.Green, 1), 0, i, i + screenWidth, i);
 
             i = screenHeight * 90 / 100;
             g.DrawLine(new Pen(Color.Green, 1), 0, i, i + screenWidth, i);
+            */
 
             this.BackgroundImage = bmp;
-            //this.Opacity = 0.5;
+            this.Opacity = 0.5;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -62,6 +75,7 @@ namespace vcs_ScreenRuler
             switch (e.KeyCode)   //根據e.KeyCode分別執行
             {
                 case Keys.X:
+                case Keys.Escape:
                     Application.Exit();
                     break;
                 default:
@@ -72,7 +86,52 @@ namespace vcs_ScreenRuler
 
         private void Form1_Click(object sender, EventArgs e)
         {
-            this.Opacity -= 0.1;
+            //this.Opacity -= 0.1;
         }
+
+        //***********************
+        private Point mouseOffset;//記錄滑鼠座標
+        private bool isMouseDown = false;//是否按下滑鼠
+        //***********************
+
+        #region 移動無邊框Form
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            int xOffset;
+            int yOffset;
+            if (e.Button == MouseButtons.Left)
+            {
+                xOffset = -e.X;
+                yOffset = -e.Y;
+                mouseOffset = new Point(xOffset, yOffset);
+                isMouseDown = true;
+            }
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+                Location = mousePos;
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
+        }
+        #endregion
+
+        private void Form1_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }
