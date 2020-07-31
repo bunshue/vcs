@@ -184,6 +184,14 @@ namespace vcs_test_all_04_Font
             {
                 listBox1.Items.Add(oneFontFamily.Name);
             }
+
+            //顯示於RichTextBox裏
+            richTextBox1.Text += "共有 " + FontFamily.Families.Length.ToString() + " 種字型, 如下:\n";
+            for (int i = 0; i < FontFamily.Families.Length; i++)
+            {
+                richTextBox1.Text += (i + 1).ToString() + "\t" + FontFamily.Families[i].Name + "\n";
+            }
+
         }
     }
 }

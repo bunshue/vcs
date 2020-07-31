@@ -73,12 +73,6 @@ namespace aaaaaaa
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "there are " + FontFamily.Families.Length.ToString() + " fonts\n";
-            for (int i = 0; i < FontFamily.Families.Length; i++)
-            //for (int i = 0; i < 10; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + FontFamily.Families[i].Name + "\n";
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)

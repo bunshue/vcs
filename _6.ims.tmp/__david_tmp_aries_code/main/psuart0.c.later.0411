@@ -1,0 +1,2677 @@
+
+// *****************************************************
+// Dependencies
+// *****************************************************
+#include <stdlib.h>
+#include "psuart0.h"
+#include "periphs.h"
+#include "sleep.h"
+
+volatile int TotalReceivedCount = 0;
+volatile int TotalSentCount = 0;
+int TotalErrorCount = 0;
+
+static u8 SendBuffer[PSUART0_BUFFER_SIZE];	/* Buffer for Transmitting Data */
+static u8 RecvBuffer[PSUART0_BUFFER_SIZE];	/* Buffer for Receiving Data */
+
+void print_psuart0_cmd(int cmd_len);
+void print_psuart0_data(int cmd_len, int data_len);
+
+// *****************************************************
+// Private functions
+// *****************************************************
+
+/****************************************************************************
+psuart0 interrupt handler
+******************************************************************************/
+void psuart0_IntrHandler(void *CallBackRef, u32 Event, unsigned int EventData)
+{
+	XUartPs *psuart0 = (XUartPs *)CallBackRef;
+
+	/* All of the data has been sent */
+	if (Event == XUARTPS_EVENT_SENT_DATA) {
+		TotalSentCount = EventData;
+	}
+
+	/* All of the data has been received */
+	if (Event == XUARTPS_EVENT_RECV_DATA) {
+		TotalReceivedCount = EventData;
+	}
+
+	/*
+	 * Data was received, but not the expected number of bytes, a
+	 * timeout just indicates the data stopped for 8 character times
+	 */
+	if (Event == XUARTPS_EVENT_RECV_TOUT) {
+		TotalReceivedCount = EventData;
+	}
+
+	/*
+	 * Data was received with an error, keep the data but determine
+	 * what kind of errors occurred
+	 */
+	if (Event == XUARTPS_EVENT_RECV_ERROR) {
+		TotalReceivedCount = EventData;
+		TotalErrorCount++;
+	}
+
+	/*
+	 * Data was received with an parity or frame or break error, keep the data
+	 * but determine what kind of errors occurred. Specific to Zynq Ultrascale+
+	 * MP.
+	 */
+	if (Event == XUARTPS_EVENT_PARE_FRAME_BRKE) {
+		TotalReceivedCount = EventData;
+		TotalErrorCount++;
+	}
+
+	/*
+	 * Data was received with an overrun error, keep the data but determine
+	 * what kind of errors occurred. Specific to Zynq Ultrascale+ MP.
+	 */
+	if (Event == XUARTPS_EVENT_RECV_ORERR) {
+		TotalReceivedCount = EventData;
+		TotalErrorCount++;
+	}
+
+}
+
+unsigned int psuart0_dongle_ping(void)
+{
+	uint32_t Index;
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++) {
+
+		//SendBuffer[Index] = (Index % 26) + 'A';
+		SendBuffer[Index] = 0;
+
+		RecvBuffer[Index] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x05;	//len				data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[5] = 0x30;	//					data3, write address 0x300A, only move pointer
+	SendBuffer[6] = 0x0A;	//					data4
+
+
+	SendBuffer[7] = 0xFF;	//sync
+	SendBuffer[8] = 0xAA;	//sync
+	SendBuffer[9] = 0x04;	//len					data0
+	SendBuffer[10] = 0x57;	//op code	I2C_READ	data1
+	SendBuffer[11] = 0x79;	//						data2	, sensor address
+	SendBuffer[12] = 0xCC;	//						data3	, dummy variable
+
+	SendBuffer[13] = 0xFF;	//sync
+	SendBuffer[14] = 0xAA;	//sync
+	SendBuffer[15] = 0x03;	//len				data0
+	SendBuffer[16] = 0xA3;	//op code			data1  0xA_:CMD_READ 0x3 addr for I2C
+	SendBuffer[17] = 0x01;	//					data2
+
+	/*
+	 * Wait for the entire buffer to be received, letting the interrupt
+	 * processing work in the background, this function may get locked
+	 * up in this loop if the interrupts are not working correctly.
+	 */
+	while (1) {
+
+		TotalSentCount = 0;
+		TotalReceivedCount = 0;
+
+		// Set up send buffer
+
+		/*
+		 * Start receiving data before sending it since there is a loopback,
+		 * ignoring the number of bytes received as the return value since we
+		 * know it will be zero
+		 */
+		XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+		/*
+		 * Send the buffer using the UART and ignore the number of bytes sent
+		 * as the return value since we are using it in interrupt mode.
+		 */
+		XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 18);
+
+		//xil_printf("detecting dongle\r\n");
+		usleep(2000); // Sleep for a bit to wait for response
+
+		//xil_printf("sent: %d, rec: %d\r\n", TotalSentCount, TotalReceivedCount);
+
+		if (TotalSentCount+1 == TotalReceivedCount)
+		{
+			// Found Camera
+			if(RecvBuffer[18] == 0x76)//xil_printf("dongle+camera\r\n");
+				return CAMERA_OK; // All plugged in
+		}
+		else if (TotalSentCount == TotalReceivedCount)
+		{
+			//xil_printf("dongle only\r\n");
+			return CAMERA_NONE; // Found dongle but no camera
+		}
+		else if (TotalSentCount == 18 && TotalReceivedCount == 0)
+		{
+			//xil_printf("no dongle\r\n");
+			return DONGLE_NONE; // No dongle or camera
+		}
+		else
+		{
+			//xil_printf("dongle only\r\n");
+			return CAMERA_NONE; // Found dongle but no camera
+		}
+	}
+
+	//	/* Verify the entire receive buffer was successfully received */
+	//	for (Index = 0; Index < TEST_BUFFER_SIZE; Index++) {
+	//		if (RecvBuffer[Index] != SendBuffer[Index]) {
+	//			BadByteCount++;
+	//		}
+	//	}
+}
+
+unsigned int test_dongle_read_write(void)
+{
+	uint32_t i;
+
+	xil_printf("test_dongle_read_write ST\n\r");
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+
+	//						64
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		//SendBuffer[i] = (Index % 26) + 'A';
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x05;	//len				data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[5] = 0x30;	//					data3, write address 0x300A, only move pointer
+	SendBuffer[6] = 0x0A;	//					data4
+
+
+	SendBuffer[7] = 0xFF;	//sync
+	SendBuffer[8] = 0xAA;	//sync
+	SendBuffer[9] = 0x04;	//len					data0
+	SendBuffer[10] = 0x57;	//op code	I2C_READ	data1
+	SendBuffer[11] = 0x79;	//						data2	, sensor address
+	SendBuffer[12] = 0xCC;	//						data3	, dummy variable
+
+	SendBuffer[13] = 0xFF;	//sync
+	SendBuffer[14] = 0xAA;	//sync
+	SendBuffer[15] = 0x03;	//len				data0
+	SendBuffer[16] = 0xA3;	//op code			data1  0xA_:CMD_READ 0x3 addr for I2C
+	SendBuffer[17] = 0x01;	//					data2
+
+	/*
+	 * Wait for the entire buffer to be received, letting the interrupt
+	 * processing work in the background, this function may get locked
+	 * up in this loop if the interrupts are not working correctly.
+	 */
+	while (1)
+	{
+		TotalSentCount = 0;
+		TotalReceivedCount = 0;
+
+		// Set up send buffer
+
+		/*
+		 * Start receiving data before sending it since there is a loopback,
+		 * ignoring the number of bytes received as the return value since we
+		 * know it will be zero
+		 */
+		//														64
+		XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+		xil_printf("RecvBuffer : 0x \n\r");
+		for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+		{
+			xil_printf("%x ", RecvBuffer[i]);
+			if((i%16) == 15)
+				xil_printf("\n\r");
+		}
+		xil_printf("\n\r");
+		xil_printf("TotalReceivedCount = %d\n\r",TotalReceivedCount);
+
+		/*
+		 * Send the buffer using the UART and ignore the number of bytes sent
+		 * as the return value since we are using it in interrupt mode.
+		 */
+		XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 18);
+
+		xil_printf("RecvBuffer : 0x \n\r");
+		for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+		{
+			xil_printf("%x ", RecvBuffer[i]);
+			if((i%16) == 15)
+				xil_printf("\n\r");
+		}
+		xil_printf("\n\r");
+		xil_printf("TotalReceivedCount = %d\n\r",TotalReceivedCount);
+
+		//xil_printf("detecting dongle\r\n");
+		usleep(DELAY); // Sleep for a bit to wait for response
+
+		//										18				19, 18, 0
+		xil_printf("sent: %d, rec: %d\r\n", TotalSentCount, TotalReceivedCount);
+
+		//		18 + 1				19
+		if (TotalSentCount+1 == TotalReceivedCount)
+		{
+			// Found Camera
+			xil_printf("psuart0_dongle_ping SP 0 dongle + camera\n\r");
+			if(RecvBuffer[18] == 0x76)//xil_printf("dongle+camera\r\n");
+				return 0; // All plugged in
+		}
+		//			18					18
+		else if (TotalSentCount == TotalReceivedCount)
+		{
+			//xil_printf("dongle only\r\n");
+			xil_printf("psuart0_dongle_ping SP 1 dongle only\n\r");
+			return 1; // Found dongle but no camera
+		}
+		//			18							0
+		else if (TotalSentCount == 18 && TotalReceivedCount == 0)
+		{
+			//xil_printf("no dongle\r\n");
+			xil_printf("psuart0_dongle_ping SP 2 no dongle\n\r");
+			return 2; // No dongle or camera
+		}
+	}
+
+	//	/* Verify the entire receive buffer was successfully received */
+	//	for (Index = 0; Index < TEST_BUFFER_SIZE; Index++) {
+	//		if (RecvBuffer[Index] != SendBuffer[Index]) {
+	//			BadByteCount++;
+	//		}
+	//	}
+}
+
+
+unsigned char dongle_read_data(unsigned int addr)
+{
+	uint32_t i;
+
+	//xil_printf("dongle_read_data ST addr = 0x%x\n\r", addr);
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+
+	//						64
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		//SendBuffer[i] = (Index % 26) + 'A';
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x05;	//len				data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[5] = (addr >> 8)&0xff;	//		data3, write address 0x300A, only move pointer
+	SendBuffer[6] = addr & 0xff;		//		data4
+
+	SendBuffer[7] = 0xFF;	//sync
+	SendBuffer[8] = 0xAA;	//sync
+	SendBuffer[9] = 0x04;	//len					data0
+	SendBuffer[10] = 0x57;	//op code	I2C_READ	data1
+	SendBuffer[11] = 0x79;	//						data2	, sensor address
+	SendBuffer[12] = 0xCC;	//						data3	, dummy variable
+
+	SendBuffer[13] = 0xFF;	//sync
+	SendBuffer[14] = 0xAA;	//sync
+	SendBuffer[15] = 0x03;	//len				data0
+	SendBuffer[16] = 0xA3;	//op code			data1  0xA_:CMD_READ 0x3 addr for I2C
+	SendBuffer[17] = 0x01;	//					data2
+
+	/*
+	 * Wait for the entire buffer to be received, letting the interrupt
+	 * processing work in the background, this function may get locked
+	 * up in this loop if the interrupts are not working correctly.
+	 */
+	//while (1)
+	{
+		TotalSentCount = 0;
+		TotalReceivedCount = 0;
+
+		// Set up send buffer
+
+		/*
+		 * Start receiving data before sending it since there is a loopback,
+		 * ignoring the number of bytes received as the return value since we
+		 * know it will be zero
+		 */
+		//														64
+		XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+		/*
+		 * Send the buffer using the UART and ignore the number of bytes sent
+		 * as the return value since we are using it in interrupt mode.
+		 */
+		XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 18);
+
+		/*
+		xil_printf("RecvBuffer : 0x \n\r");
+		for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+		{
+			xil_printf("%x ", RecvBuffer[i]);
+			if((i%16) == 15)
+				xil_printf("\n\r");
+		}
+		xil_printf("\n\r");
+		xil_printf("TotalReceivedCount = %d\n\r",TotalReceivedCount);
+		*/
+
+		//xil_printf("detecting dongle\r\n");
+		usleep(DELAY); // Sleep for a bit to wait for response
+
+		if(TotalReceivedCount == 19)
+		{
+			//xil_printf("data : 0x%x\n\r", RecvBuffer[18]);
+			return RecvBuffer[18];
+		}
+		else
+			return 0;
+
+	}
+}
+
+unsigned char dongle_write_data(unsigned int addr, unsigned char data)
+{
+	uint32_t i;
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+
+	//						64
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		//SendBuffer[i] = (Index % 26) + 'A';
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x06;	//len				data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[5] = (addr >> 8)&0xff;	//		data3, write address 0x300A, only move pointer
+	SendBuffer[6] = addr & 0xff;		//		data4
+	SendBuffer[7] = (data&0xff);		//		data5
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 8);
+
+	return 0;
+}
+
+
+unsigned char* dongle_read_n_data(unsigned int addr, unsigned int len)
+{
+	uint32_t i;
+
+	xil_printf("fail to read 2 bytes by one command\n\r");
+
+	xil_printf("dongle_read_data ST addr = 0x%x\n\r", addr);
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+
+	//						64
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		//SendBuffer[i] = (Index % 26) + 'A';
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x05;	//len				data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[5] = (addr >> 8)&0xff;	//		data3, write address 0x300A, only move pointer
+	SendBuffer[6] = addr & 0xff;		//		data4
+
+	SendBuffer[7] = 0xFF;	//sync
+	SendBuffer[8] = 0xAA;	//sync
+	SendBuffer[9] = 0x05;	//len					data0
+	SendBuffer[10] = 0x57;	//op code	I2C_READ	data1
+	SendBuffer[11] = 0x79;	//						data2	, sensor address
+	SendBuffer[12] = 0xCC;	//						data3	, dummy variable
+	SendBuffer[13] = 0xDD;	//						data4	, dummy variable
+
+	SendBuffer[14] = 0xFF;	//sync
+	SendBuffer[15] = 0xAA;	//sync
+	SendBuffer[16] = 0x04;	//len				data0
+	SendBuffer[17] = 0xA4;	//op code			data1  0xA_:CMD_READ 0x3 addr for I2C
+	SendBuffer[18] = 0x01;	//					data2
+	SendBuffer[19] = 0x01;	//					data3
+
+	/*
+	 * Wait for the entire buffer to be received, letting the interrupt
+	 * processing work in the background, this function may get locked
+	 * up in this loop if the interrupts are not working correctly.
+	 */
+	//while (1)
+	{
+		TotalSentCount = 0;
+		TotalReceivedCount = 0;
+
+		// Set up send buffer
+
+		/*
+		 * Start receiving data before sending it since there is a loopback,
+		 * ignoring the number of bytes received as the return value since we
+		 * know it will be zero
+		 */
+		//														64
+		XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+		/*
+		 * Send the buffer using the UART and ignore the number of bytes sent
+		 * as the return value since we are using it in interrupt mode.
+		 */
+		XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 20);
+
+		/*
+		xil_printf("RecvBuffer : 0x \n\r");
+		for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+		{
+			xil_printf("%x ", RecvBuffer[i]);
+			if((i%16) == 15)
+				xil_printf("\n\r");
+		}
+		xil_printf("\n\r");
+		xil_printf("TotalReceivedCount = %d\n\r",TotalReceivedCount);
+		*/
+
+		//xil_printf("detecting dongle\r\n");
+		usleep(DELAY); // Sleep for a bit to wait for response
+
+		xil_printf("TotalReceivedCount = %d\n\r",TotalReceivedCount);
+
+		if(TotalReceivedCount == 20)
+		{
+			xil_printf("data : 0x%x\n\r", RecvBuffer[18]);
+			xil_printf("data : 0x%x\n\r", RecvBuffer[19]);
+			return 0;
+		}
+		else
+			return 0;
+
+	}
+}
+
+void psuart0_exposure(unsigned int exposure)
+{
+	uint32_t Index;
+
+	if(exposure < 1 || exposure > 5)
+		return;
+
+
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++) {
+
+		//SendBuffer[Index] = (Index % 26) + 'A';
+		SendBuffer[Index] = 0;
+
+		RecvBuffer[Index] = 0;
+	}
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	// Init SendBuffer, white point
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x06;	//len				data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[5] = 0x3a;	//					data3
+	SendBuffer[6] = 0x03;	//					data4
+							//SendBuffer[7]		data5
+	switch(exposure)
+	{
+		case 1:
+			SendBuffer[7] = 0x2A;
+			break;
+		case 2:
+			SendBuffer[7] = 0x36;
+			break;
+		case 3:
+			SendBuffer[7] = 0x42;
+			break;
+		case 4:
+			SendBuffer[7] = 0x4E;
+			break;
+		case 5:
+			SendBuffer[7] = 0x5A;
+			break;
+		default:
+			break;
+	}
+
+	SendBuffer[8] = 0xFF;	//sync
+	SendBuffer[9] = 0xAA;	//sync
+	SendBuffer[10] = 0x06;	//len				data0
+	SendBuffer[11] = 0x67;	//op code 	I2C_WR	data1
+	SendBuffer[12] = 0x78;	//					data2, sensor address 0x78
+	SendBuffer[13] = 0x3a;	//					data3
+	SendBuffer[14] = 0x04;	//					data4
+							//SendBuffer[7]		data5
+	switch(exposure)
+	{
+		case 1:
+			SendBuffer[15] = 0x20;
+			break;
+		case 2:
+			SendBuffer[15] = 0x2C;
+			break;
+		case 3:
+			SendBuffer[15] = 0x38;
+			break;
+		case 4:
+			SendBuffer[15] = 0x44;
+			break;
+		case 5:
+			SendBuffer[15] = 0x50;
+			break;
+		default:
+			break;
+	}
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+	/*
+	 * Send the buffer using the UART and ignore the number of bytes sent
+	 * as the return value since we are using it in interrupt mode.
+	 */
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 16);
+
+	//xil_printf("detecting dongle\r\n");
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+//	xil_printf("sent: %d, rec: %d\r\n", TotalSentCount, TotalReceivedCount);
+//
+//	for(Index=0; Index < TotalReceivedCount; Index++){
+//		xil_printf("%x\r\n", RecvBuffer[Index]);
+//	}
+	return;
+}
+
+void psuart0_exposure_data(u8 exposure)
+{
+	uint32_t Index;
+
+	if(exposure < 0 || exposure > 255)
+	{
+		xil_printf("david0703: %s:%s(%d) ST xxxxxxxxxxxxxxxxx\r\n",__FILE__,__func__,__LINE__);
+		return;
+	}
+
+	//xil_printf("david0703: %s:%s(%d) ST exposure = %d\r\n",__FILE__,__func__,__LINE__,exposure);
+
+	/*
+	 * Initialize the send buffer bytes with a pattern and the
+	 * the receive buffer bytes to zero to allow the receive data to be
+	 * verified
+	 */
+	//						64
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++)
+	{
+		//SendBuffer[Index] = (Index % 26) + 'A';
+		SendBuffer[Index] = 0;
+
+		RecvBuffer[Index] = 0;
+	}
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	// Init SendBuffer, white point
+	SendBuffer[0] = 0xFF;		//sync
+	SendBuffer[1] = 0xAA;		//sync
+	SendBuffer[2] = 0x06;		//len				data0
+	SendBuffer[3] = 0x67;		//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;		//					data2, sensor address 0x78
+	SendBuffer[5] = 0x3a;		//					data3
+	SendBuffer[6] = 0x03;		//					data4
+	SendBuffer[7] = exposure;	//SendBuffer[7]		data5
+
+	SendBuffer[8] = 0xFF;		//sync
+	SendBuffer[9] = 0xAA;		//sync
+	SendBuffer[10] = 0x06;		//len				data0
+	SendBuffer[11] = 0x67;		//op code 	I2C_WR	data1
+	SendBuffer[12] = 0x78;		//					data2, sensor address 0x78
+	SendBuffer[13] = 0x3a;		//					data3
+	SendBuffer[14] = 0x04;		//					data4
+	SendBuffer[15] = exposure;	//SendBuffer[7]		data5
+
+	//														64
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+	/*
+	 * Send the buffer using the UART and ignore the number of bytes sent
+	 * as the return value since we are using it in interrupt mode.
+	 */
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 16);
+
+	return;
+}
+
+unsigned char camera_fpga_read_data(unsigned char addr)
+{
+	uint32_t i;
+	unsigned char cmd_len;
+
+	cmd_len = 3;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//cmd len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = 0x01;			//data len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, (cmd_len + 2));
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+	if(TotalReceivedCount == cmd_len + 2 + 1)
+		return RecvBuffer[cmd_len + 2];
+	else
+		return 0;
+}
+
+unsigned char camera_fpga_write_data(unsigned char addr, unsigned char data)
+{
+	uint32_t i;
+	unsigned char cmd_len;
+
+	cmd_len = 3;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//cmd len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+
+	/*
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+	*/
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+	return 0;
+}
+
+unsigned char camera_fpga_read_data_tmp(unsigned char addr, unsigned char len)
+{
+	uint32_t i;
+	unsigned char cmd_len;
+
+	cmd_len = 3;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//cmd len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = len;			//data
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+	return 0;
+}
+
+unsigned char camera_write_one_byte(unsigned char addr, unsigned char length)
+{
+	uint32_t i;
+
+	xil_printf("Write addr 0x%02x\tdata: ", addr);
+
+	for(i = 0;i < length ; i++)
+	{
+		xil_printf("0x%02x ", write_data[i]);
+	}
+	xil_printf("\n\r");
+
+	//						64
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		//SendBuffer[i] = (Index % 26) + 'A';
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;		//sync
+	SendBuffer[1] = 0xAA;		//sync
+	SendBuffer[2] = 0x03;		//len
+	SendBuffer[3] = addr;		//addr
+	for(i = 0;i < length ; i++)
+	{
+		SendBuffer[4 + i] = write_data[i];		//data
+	}
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 4 + length);
+
+	return 0;
+}
+
+unsigned char camera_read_one_byte(unsigned char addr)
+{
+	uint32_t i;
+	//						64
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;		//sync
+	SendBuffer[1] = 0xAA;		//sync
+	SendBuffer[2] = 0x03;	//len
+	SendBuffer[3] = addr;	//read 0x8
+	SendBuffer[4] = 0x04;	//1 byte
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	//														64
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+	//XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 5);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 8);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	xil_printf("Read addr 0x08\t");
+
+	//if(TotalReceivedCount == 6)
+	if(TotalReceivedCount == 9)
+	{
+		xil_printf("data: 0x%02x 0x%02x 0x%02x 0x%02x\n\r", RecvBuffer[5], RecvBuffer[6], RecvBuffer[7], RecvBuffer[8]);
+		return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("read data fail\n\r");
+		return 0;
+	}
+}
+
+
+void camera_fpga_read_write_test(void)
+{
+	xil_printf("\n\rcamera_fpga_read_write_test ST\n\r");
+
+	unsigned char addr;
+	unsigned char result;
+	unsigned char length;
+
+	/*
+
+	addr = 0xA8;
+	result = camera_read_one_byte(addr);
+	xil_printf("Read addr 0x%02x\tdata: 0x%02x\n\r", addr, result);
+
+	addr = 0x88;
+	write_data[0] = 0x80;
+	length = 1;
+	result = camera_write_one_byte(addr, length);
+	usleep(DELAY);
+
+	addr = 0xA8;
+	result = camera_read_one_byte(addr);
+	xil_printf("Read addr 0x%02x\tdata: 0x%02x\n\r", addr, result);
+
+	addr = 0x89;
+	write_data[0] = 0xF0;
+	write_data[1] = 0x00;
+	write_data[2] = 0x00;
+	write_data[3] = 0x00;
+	length = 4;
+	result = camera_write_one_byte(addr, length);
+	usleep(DELAY);
+
+	addr = 0xA9;
+	result = camera_read_one_byte(addr);
+	xil_printf("Read addr 0x%02x\tdata: 0x%02x\n\r", addr, result);
+	*/
+
+	//---------------------------------------------------------------------------------------------
+	//test read device id code
+	/*
+	addr = 0x88;
+	write_data[0] = 0x80;
+	length = 1;
+	result = camera_write_one_byte(addr, length);
+	usleep(DELAY);
+
+	addr = 0x89;
+	write_data[0] = 0xE0;
+	write_data[1] = 0x00;
+	write_data[2] = 0x00;
+	write_data[3] = 0x00;
+	length = 4;
+	result = camera_write_one_byte(addr, length);
+	usleep(DELAY);
+
+	addr = 0xAB;
+	result = camera_read_one_byte(addr);
+	xil_printf("Read addr 0x%02x\tdata: 0x%02x\n\r", addr, result);
+	*/
+
+	addr = 0x80;
+	write_data[0] = 0x19;
+	write_data[1] = 0x00;
+	write_data[2] = 0x00;
+	write_data[3] = 0x00;
+	length = 4;
+	result = camera_write_one_byte(addr, length);
+	usleep(DELAY);
+
+	addr = 0xAB;
+	result = camera_read_one_byte(addr);
+	xil_printf("Read addr 0x%02x\tdata: 0x%02x\n\r", addr, result);
+
+
+	xil_printf("\n\rcamera_fpga_read_write_test SP\n\r");
+	return;
+}
+
+
+void read_TraceID(void)
+{
+	uint32_t Index;
+
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++) {
+		SendBuffer[Index] = 0;
+		RecvBuffer[Index] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x07;	//len				data0
+	SendBuffer[3] = 0x80;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x19;	//					data2, sensor address 0x78
+	SendBuffer[5] = 0x00;	//					data3, write address 0x300A, only move pointer
+	SendBuffer[6] = 0x00;	//					data4
+	SendBuffer[7] = 0x00;	//					data4
+	SendBuffer[8] = 0x00;	//					data4
+
+	SendBuffer[7] = 0xFF;	//sync
+	SendBuffer[8] = 0xAA;	//sync
+	SendBuffer[9] = 0x03;	//len					data0
+	SendBuffer[10] = 0xA0;	//op code	I2C_READ	data1
+	SendBuffer[11] = 0x08;	//						data2	, sensor address
+
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 12);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+	if ( 12345 == TotalReceivedCount)
+	{
+		xil_printf("TrackID ok\r\n");
+	}
+	else
+	{
+		xil_printf("TrackID fail\r\n");
+	}
+	return;
+}
+
+unsigned char test_read_dongle_data(u16 addr)
+{
+	uint32_t Index;
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++) {
+		SendBuffer[Index] = 0;
+		RecvBuffer[Index] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x05;	//len					data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR		data1
+	SendBuffer[4] = 0x78;	//						data2, sensor address 0x78 for write
+	SendBuffer[5] = (addr >> 8 ) & 0xff;	//		data3, write address, only move pointer
+	SendBuffer[6] = addr & 0xff;			//		data4
+
+	SendBuffer[7] = 0xFF;	//sync
+	SendBuffer[8] = 0xAA;	//sync
+	SendBuffer[9] = 0x04;	//len			data0
+	SendBuffer[10] = 0x57;	//op code	I2C_RD	data1
+	SendBuffer[11] = 0x79;	//					data2	, sensor address 0x79 for read
+	SendBuffer[12] = 0xCC;	//					data3	, dummy variable
+
+	SendBuffer[13] = 0xFF;	//sync
+	SendBuffer[14] = 0xAA;	//sync
+	SendBuffer[15] = 0x03;	//len				data0
+	SendBuffer[16] = 0xA3;	//op code			data1  0xA_:CMD_READ 0x3 addr for I2C
+	SendBuffer[17] = 0x01;	//					data2
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 18);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	if (TotalSentCount + 1 == TotalReceivedCount)
+	{
+		//xil_printf("data : 0x%02x\r\n", RecvBuffer[18]);
+		//xil_printf("addr = 0x%04x, data = 0x%02x\r\n", addr, RecvBuffer[18]);
+		return RecvBuffer[18];
+	}
+	else
+	{
+		xil_printf("fail\r\n");
+		return 0;
+	}
+}
+
+// fail read data more than 1 byte
+unsigned int test_read_dongle_data2()
+{
+	uint32_t Index;
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++) {
+		SendBuffer[Index] = 0;
+		RecvBuffer[Index] = 0;
+	}
+
+	xil_printf("test_read_dongle_data2\n\r");
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x03;	//len					data0
+	SendBuffer[3] = 0xA0;	//op code	CMD_RD		data1  0xA_:CMD_RD 0x3 addr for I2C
+	SendBuffer[4] = 0x08;	//len
+
+	while (1) {
+
+		TotalSentCount = 0;
+		TotalReceivedCount = 0;
+
+		XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+		XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 5);
+
+		usleep(DELAY); // Sleep for a bit to wait for response
+
+		//xil_printf("TotalSentCount = %d, TotalReceivedCount = %d\r\n", TotalSentCount, TotalReceivedCount);
+
+		if (TotalSentCount + 8 == TotalReceivedCount)
+		{
+			xil_printf("data: 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x\n\r", RecvBuffer[5], RecvBuffer[6], RecvBuffer[7], RecvBuffer[8], RecvBuffer[9], RecvBuffer[10], RecvBuffer[11], RecvBuffer[12]);
+			return RecvBuffer[5];
+		}
+		else if (TotalSentCount == TotalReceivedCount)
+		{
+			xil_printf("dongle only\r\n");
+			return 0; // Found dongle but no camera
+		}
+		else if (TotalSentCount == 18 && TotalReceivedCount == 0)
+		{
+			xil_printf("no dongle\r\n");
+			return 0; // No dongle or camera
+		}
+		else
+		{
+			xil_printf("dongle only\r\n");
+			return 0; // Found dongle but no camera
+		}
+	}
+}
+
+unsigned char test_read_dongle_data3()
+{
+	uint32_t Index;
+	unsigned int addr;
+
+	addr = 0x300A;
+
+	for (Index = 0; Index < PSUART0_BUFFER_SIZE; Index++) {
+		SendBuffer[Index] = 0;
+		RecvBuffer[Index] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;					//sync
+	SendBuffer[1] = 0xAA;					//sync
+	SendBuffer[2] = 0x05;					//len				data0
+	SendBuffer[3] = 0x67;					//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;					//					data2, sensor address 0x78 for write
+	SendBuffer[5] = (addr >> 8 ) & 0xff;	//					data3, write address, only move pointer
+	SendBuffer[6] = addr & 0xff;			//					data4
+
+	SendBuffer[7] = 0xFF;					//sync
+	SendBuffer[8] = 0xAA;					//sync
+	SendBuffer[9] = 0x04;					//len				data0
+	SendBuffer[10] = 0x57;					//op code	I2C_RD	data1
+	SendBuffer[11] = 0x79;					//					data2	, sensor address 0x79 for read
+	SendBuffer[12] = 0xCC;					//					data3	, dummy variable
+
+	SendBuffer[13] = 0xFF;					//sync
+	SendBuffer[14] = 0xAA;					//sync
+	SendBuffer[15] = 0x03;					//len				data0
+	SendBuffer[16] = 0xA3;					//op code			data1  0xA_:CMD_READ 0x3 addr for I2C
+	SendBuffer[17] = 0x01;					//					data2
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 18);
+	usleep(DELAY); // Sleep for a bit to wait for response
+	if (TotalSentCount + 1 == TotalReceivedCount)
+	{
+		//xil_printf("data : 0x%02x\r\n", RecvBuffer[18]);
+		return RecvBuffer[18];
+	}
+	else
+	{
+		xil_printf("fail\r\n");
+		return 0;
+	}
+}
+
+/*
+#define ReadDeviceID	 	0xE0
+#define ReadUSERCODE		0xC0
+#define ReadStatusRegister 	0x3C
+#define ReadBusyFlag		0xF0
+*/
+
+
+unsigned char camera_fpga_read_data2(unsigned char command, unsigned char data_len)
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	addr = 0x09;
+	cmd_len = 6;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, 8);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	addr = 0x0B;
+	cmd_len = 3;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("fail\n\r");
+		//return 0;
+	}
+
+	//-------------------------------------------------------------------------------------------------------
+
+	wishbone_connection(0);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	return 0;
+}
+
+void camera_fpga_read_one_page_data()
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char data_len;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	command = 0xCA;
+
+	addr = 0x09;
+	cmd_len = 6;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x10;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x10;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	addr = 0x0B;
+	cmd_len = 3;
+	data_len = 0x10;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("fail\n\r");
+		//return 0;
+	}
+
+	//-------------------------------------------------------------------------------------------------------
+
+	wishbone_connection(0);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	return;
+
+
+}
+
+void SET_ADDRESS(unsigned char page)
+{
+	uint32_t i;
+	unsigned char command;
+	//unsigned char data_len;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	xil_printf("\n\rSET_ADDRESS_0x%04x\r\n", page);
+
+	wishbone_connection(1);
+
+	command = 0xB4;
+
+	addr = 0x09;
+	cmd_len = 0x0A;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x00;
+	SendBuffer[8] = 0x40;
+	SendBuffer[9] = 0x00;
+	SendBuffer[10] = 0x00;
+	SendBuffer[11] = page;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	wishbone_connection(0);
+	return;
+}
+
+void camera_fpga_write_one_page_data(void)
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	command = 0xC9;
+
+	addr = 0x09;
+	cmd_len = 22;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x01;
+
+	SendBuffer[8] = 0xAA;
+	SendBuffer[9] = 0xBB;
+	SendBuffer[10] = 0xCC;
+	SendBuffer[11] = 0xDD;
+
+	SendBuffer[12] = 0xAA;
+	SendBuffer[13] = 0xAA;
+	SendBuffer[14] = 0xAA;
+	SendBuffer[15] = 0xAA;
+	SendBuffer[16] = 0xBB;
+	SendBuffer[17] = 0xBB;
+	SendBuffer[18] = 0xBB;
+	SendBuffer[19] = 0xBB;
+	SendBuffer[20] = 0xCC;
+	SendBuffer[21] = 0xCC;
+	SendBuffer[22] = 0xCC;
+	SendBuffer[23] = 0xCC;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//delay a while
+	delay_command(0xff);
+
+	wishbone_connection(0);
+
+	return;
+}
+
+void wishbone_connection(int enable)
+{
+	unsigned char addr;
+	unsigned char data;
+
+	addr = 0x08;
+
+	/*
+	xil_printf("\n\rwishbone_connection ");
+	if(enable == 0)
+		xil_printf("disable\n\r");
+	else
+		xil_printf("enable\n\r");
+	*/
+
+	if(enable == 0)
+		data = 0x00;
+	else
+		data = 0x80;
+
+	camera_fpga_write_data(addr, data);
+	return;
+}
+
+void delay_command(unsigned char delay)
+{
+	uint32_t i;
+	unsigned char cmd_len;
+
+	cmd_len = 3;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//cmd len
+	SendBuffer[3] = 0x70;			//code	CMD_DLY
+	SendBuffer[4] = delay;			//data
+
+	print_psuart0_cmd(cmd_len);
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+	return;
+}
+
+void ENABLE_CONFIGURE(unsigned char enable)
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	/*
+	if(enable == 1)
+		xil_printf("ENABLE_CONFIGURE\r\n");
+	else
+		xil_printf("DISABLE_CONFIGURE\r\n");
+	*/
+
+	wishbone_connection(1);
+
+	if(enable == 1)
+	{
+		command = 0x74;
+		cmd_len = 0x06;
+	}
+	else
+	{
+		command = 0x26;
+		cmd_len = 0x05;
+	}
+	addr = 0x09;
+	data = command;
+
+	//xil_printf("\n\rwrite addr 0x%02x data 0x%02x\r\n", addr, data);
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	if(enable == 1)
+		SendBuffer[5] = 0x08;
+	else
+		SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x00;
+
+	print_psuart0_cmd(cmd_len);
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	wishbone_connection(0);
+	if(enable == 1)
+	{
+		wishbone_connection(0);
+		delay_command(0xff);
+	}
+	else
+	{
+		wishbone_connection(1);
+		camera_fpga_write_data(0x09, 0xff);
+		wishbone_connection(0);
+	}
+	usleep(1000);
+
+	return;
+}
+
+int READ_1PAGE()
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+
+	xil_printf("read one page\n\r");
+
+	wishbone_connection(1);
+
+	cmd_len = 0x06;
+	addr = 0x09;
+	data = 0xCA;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x10;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x10;
+
+	//print_psuart0_cmd(cmd_len);
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	cmd_len = 3;
+	addr = 0x0B;
+	data_len = 0x10;
+
+	for(i = 0; i < data_len; i++)
+	{
+		page_data[i] = 0;
+	}
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	//print_psuart0_cmd(cmd_len);
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		print_psuart0_data(cmd_len, data_len);
+		for(i = 0; i < data_len; i++)
+		{
+			page_data[i] = RecvBuffer[2 + cmd_len + i];
+		}
+		return XST_SUCCESS;
+	}
+	else
+	{
+		xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+		READ_STATUS();
+		xil_printf("fail----------------------------------------\n\r");
+		READ_STATUS();
+		return XST_FAILURE;
+	}
+}
+
+void READ_BUSY_FLAG()
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+
+	wishbone_connection(1);
+
+	addr = 0x09;
+	cmd_len = 6;
+	data = 0xF0;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	addr = 0x0B;
+	cmd_len = 3;
+	data_len = 4;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("READ_BUSY_FLAG fail\n\r");
+		//return 0;
+	}
+	wishbone_connection(0);
+	return;
+}
+
+void READ_ID()
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+
+	wishbone_connection(1);
+
+	addr = 0x09;
+	cmd_len = 6;
+	data = 0xE0;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	cmd_len = 3;
+	addr = 0x0B;
+	data_len = 4;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("READ_ID fail\n\r");
+		//return 0;
+	}
+	wishbone_connection(0);
+	return;
+}
+
+void READ_STATUS()
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 6;
+	addr = 0x09;
+	data = 0x3C;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	cmd_len = 3;
+	addr = 0x0B;
+	data_len = 4;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\t");
+		//return RecvBuffer[5];
+		int C = (RecvBuffer[2 + cmd_len + 2]>>1)&0x01;
+		int D = (RecvBuffer[2 + cmd_len + 2]>>0)&0x01;
+		if(C == 1)
+		{
+			if(D == 1)
+				xil_printf("NVCM\tProgrammed");
+			else
+				xil_printf("NVCM\tNotProgrammed");
+		}
+		else
+		{
+			if(D == 1)
+				xil_printf("SDRAM\tSuccessful");
+			else
+				xil_printf("SDRAM\tFailure");
+		}
+		xil_printf("\t");
+		int F = (RecvBuffer[2 + cmd_len + 1]>>1)&0x01;
+		int B = (RecvBuffer[2 + cmd_len + 1]>>0)&0x01;
+		if(F == 1)
+			xil_printf("Fail Flag = 1\t");
+		else
+			xil_printf("Fail Flag = 0\t");
+		if(B == 1)
+			xil_printf("Busy Flag = 1\n\r");
+		else
+			xil_printf("Busy Flag = 0\n\r");
+	}
+	else
+	{
+		xil_printf("READ_STATUS fail\n\r");
+		//return 0;
+	}
+	wishbone_connection(0);
+	return;
+}
+
+void READ_STATUS2()
+{
+	// xxxxxxxxxxxxxxxxxxxxx
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 6;
+	addr = 0x09;
+	data = 0xE0;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	cmd_len = 3;
+	addr = 0x0B;
+	data_len = 4;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("fail\n\r");
+		//return 0;
+	}
+	wishbone_connection(0);
+	return;
+}
+
+void READ_USER_CODE()
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 6;
+	addr = 0x09;
+	data = 0xC0;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	cmd_len = 3;
+	addr = 0x0B;
+	data_len = 4;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("fail\n\r");
+		//return 0;
+	}
+	wishbone_connection(0);
+	return;
+}
+
+void READ_nPAGE2RAM()
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	unsigned char data_len;
+	unsigned char cmd;
+
+	wishbone_connection(1);
+
+	cmd_len = 6;
+	addr = 0x09;
+	data = 0xCA;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x10;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x09;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//-------------------------------------------------------------------------------------------------------
+
+	cmd_len = 3;
+	addr = 0x0B;
+	data_len = 0x10;
+
+	//xil_printf("\n\rread addr 0x%02x\t", addr);
+	usleep(DELAY);	//needed
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	// Init SendBuffer with data
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0xA0 | addr;	//code	CMD_RD		data1  0xA_:CMD_RD addr for I2C
+	SendBuffer[4] = data_len;		//data	len
+
+	TotalSentCount = 0;
+	TotalReceivedCount = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Recv(periphs_inst.p_psuart0_inst, RecvBuffer, PSUART0_BUFFER_SIZE);
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	usleep(DELAY); // Sleep for a bit to wait for response
+
+	//xil_printf("TotalSentCount = %d TotalReceivedCount = %d\n\r", TotalSentCount, TotalReceivedCount);
+
+	if(TotalReceivedCount == (2 + cmd_len + data_len))
+	{
+		xil_printf("DATA:\t");
+		for(i = 0; i < data_len; i++)
+		{
+			xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		}
+		xil_printf("\n\r");
+		//return RecvBuffer[5];
+	}
+	else
+	{
+		xil_printf("fail\n\r");
+		//return 0;
+	}
+
+	cmd_len = 3;
+	cmd = 0xBB;
+	data = 0x80;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//cmd len
+	SendBuffer[3] = cmd;			// xxxx code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	wishbone_connection(0);
+	return;
+}
+
+void PROG_USER_CODE()
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 0x0A;
+	addr = 0x09;
+	command = 0xC2;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x00;
+
+	SendBuffer[8] = 0xAA;
+	SendBuffer[9] = 0xBB;
+	SendBuffer[10] = 0xCC;
+	SendBuffer[11] = 0xDD;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//delay a while
+	delay_command(0xff);
+
+	wishbone_connection(0);
+	return;
+}
+
+void PROG_1PAGE_user_code()
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 0x16;
+	addr = 0x09;
+	command = 0xC9;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x01;
+
+	SendBuffer[8] = 0x03;
+	SendBuffer[9] = 0x88;
+	SendBuffer[10] = 0x80;
+	SendBuffer[11] = 0x06;
+
+	SendBuffer[12] = 0x89;
+	SendBuffer[13] = 0xC0;
+	SendBuffer[14] = 0x00;
+	SendBuffer[15] = 0x00;
+	SendBuffer[16] = 0x00;
+	SendBuffer[17] = 0x03;
+	SendBuffer[18] = 0xAB;
+	SendBuffer[19] = 0x04;
+	SendBuffer[20] = 0x03;
+	SendBuffer[21] = 0x88;
+	SendBuffer[22] = 0x00;
+	SendBuffer[23] = 0x00;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//delay a while
+	delay_command(0xff);
+
+	wishbone_connection(0);
+	return;
+}
+
+void PROG_1PAGE()
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 0x16;
+	addr = 0x09;
+	command = 0xC9;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x01;
+
+
+	if((page_data[12] == 0xAA) && (page_data[13] == 0xBB) && (page_data[14] == 0xCC) && (page_data[15] == 0xDD))
+	{
+		xil_printf("write date data\n\r");
+		for(i = 0; i < 16; i++)
+		{
+			SendBuffer[8 + i] = page_data[i];
+		}
+	}
+	else if((page_data[0] == 0xEE) && (page_data[1] == 0xCC) && (page_data[2] == 0xDD) && (page_data[3] == 0xEE))
+	{
+		xil_printf("write date data\n\r");
+		for(i = 0; i < 16; i++)
+		{
+			SendBuffer[8 + i] = page_data[i];
+		}
+	}
+	else if((page_data[15] == 0xFF) || (page_data[15] == 0xCF))
+	{
+		xil_printf("write date data 2\n\r");
+		for(i = 0; i < 16; i++)
+		{
+			SendBuffer[8 + i] = page_data[i];
+		}
+	}
+	else if((page_data[12] == 0xA) && (page_data[13] == 0xB) && (page_data[14] == 0xC) && (page_data[15] == 0xD))
+	{
+		xil_printf("write user serial data\n\r");
+		for(i = 0; i < 16; i++)
+		{
+			SendBuffer[8 + i] = user_serial_data[i];
+		}
+	}
+	else
+	{
+		srand(rtc.tm_sec * rtc.tm_min);
+		//xil_printf("write random data\n\r");
+		for(i = 0; i < 16; i++)
+		{
+			SendBuffer[8 + i] = rand()%0x100;
+		}
+	}
+
+	print_psuart0_cmd(cmd_len);
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//delay a while
+	delay_command(0xff);
+	//delay_command(0xff);
+	//delay_command(0xff);
+	//delay_command(0xff);
+	//delay_command(0xff);
+
+	wishbone_connection(0);
+	return;
+}
+
+void PROG_1PAGE_identify()
+{
+	uint32_t i;
+	unsigned char command;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 0x16;
+	addr = 0x09;
+	command = 0xC9;
+	data = command;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x00;
+	SendBuffer[6] = 0x00;
+	SendBuffer[7] = 0x01;
+
+	SendBuffer[8] = 0x03;
+	SendBuffer[9] = 0x88;
+	SendBuffer[10] = 0x80;
+	SendBuffer[11] = 0x06;
+
+	SendBuffer[12] = 0x89;
+	SendBuffer[13] = 0xE0;
+	SendBuffer[14] = 0x00;
+	SendBuffer[15] = 0x00;
+	SendBuffer[16] = 0x00;
+	SendBuffer[17] = 0x03;
+	SendBuffer[18] = 0xAB;
+	SendBuffer[19] = 0x04;
+	SendBuffer[20] = 0x03;
+	SendBuffer[21] = 0x88;
+	SendBuffer[22] = 0x00;
+	SendBuffer[23] = 0x00;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	//delay a while
+	delay_command(0xff);
+
+	wishbone_connection(0);
+	return;
+}
+
+void ERASE_UFM(void)
+{
+	uint32_t i;
+	unsigned char addr;
+	unsigned char data;
+	unsigned char cmd_len;
+	//unsigned char data_len;
+
+	wishbone_connection(1);
+
+	cmd_len = 6;
+	addr = 0x09;
+	//data = 0xCB;
+	data = 0x0E;
+
+	for (i = 0; i < PSUART0_BUFFER_SIZE; i++)
+	{
+		SendBuffer[i] = 0;
+		RecvBuffer[i] = 0;
+	}
+
+	SendBuffer[0] = 0xFF;			//sync
+	SendBuffer[1] = 0xAA;			//sync
+	SendBuffer[2] = cmd_len;		//command len
+	SendBuffer[3] = 0x80 | addr;	//code	CMD_WR		data1  0x8_:CMD_RD addr for I2C
+	SendBuffer[4] = data;			//data
+	SendBuffer[5] = 0x08;
+	SendBuffer[6] = 0;
+	SendBuffer[7] = 0;
+
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+
+	XUartPs_Send(periphs_inst.p_psuart0_inst, SendBuffer, cmd_len + 2);
+
+	wishbone_connection(0);
+	wishbone_connection(0);
+	//delay a while
+	delay_command(0xff);
+	//delay_command(0xff);
+	return;
+}
+
+void print_psuart0_cmd(int cmd_len)
+{
+	int i;
+	xil_printf("CMD:\t");
+	for (i = 0; i < (cmd_len + 2); i++)
+	{
+		xil_printf("%02x ", SendBuffer[i]);
+	}
+	xil_printf("\n\r");
+	return;
+}
+
+void print_psuart0_data(int cmd_len, int data_len)
+{
+	int i;
+	xil_printf("DATA:\t");
+	for(i = 0; i < data_len; i++)
+	{
+		xil_printf("%02x ", RecvBuffer[2 + cmd_len + i]);
+		//page_data[i] = RecvBuffer[2 + cmd_len + i];
+	}
+	xil_printf("\n\r");
+	return;
+}
+

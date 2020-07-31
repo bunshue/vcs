@@ -244,6 +244,11 @@ namespace vcs_YearTable
         private const int PERSON_DATA_3 = 0x13;   //person data 3, Ching
         private const int PERSON_DATA_GREAT = 0x20;   //person data, 有名的人
 
+        private const int LEADER_DATA_0 = 0x00;      //leader data 0, 隋唐
+        private const int LEADER_DATA_1 = 0x01;      //leader data 1, 明末
+        private const int LEADER_DATA_2 = 0x02;      //leader data 2, 清末
+        private const int LEADER_DATA_3 = 0x03;      //leader data 3
+
         string[,] person = null;
 
         void load_personData(int index)
@@ -530,6 +535,69 @@ namespace vcs_YearTable
             }
         }
 
+        void load_leaderData(int index)
+        {
+            if (index == LEADER_DATA_0)
+            {
+                person = new string[,] {
+                { "隋文帝", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
+                { "隋煬帝", "569年", "618年4月11日", "604年8月21日", "618年4月11日"},
+                { "隋恭帝", "605年", "619年9月14日", "617年12月18日", "618年6月18日"},
+                };
+            }
+            else if (index == LEADER_DATA_1)
+            {
+                person = new string[,] { 
+                { "唐高祖", "566年4月7日", "635年6月25日", "618年6月18日", "626年9月4日"},
+                { "唐太宗", "598年1月23日", "649年7月10日", "626年9月4日", "649年7月10日"},
+                { "唐高宗", "628年7月21日", "683年12月27日", "649年7月15日", "683年12月27日"},
+                { "唐中宗", "656年11月26日", "710年7月3日", "684年1月3日","684年2月26日"},
+                { "唐睿宗", "662年6月22日", "716年7月13日", "684年2月27日","690年10月16日"},
+                { "則天后", "624年2月17日", "705年12月16日", "690年10月16日", "705年2月21日"},
+                { "唐中宗", "656年11月26日", "710年7月3日", "705年2月23日","710年7月3日"},
+                { "唐睿宗", "662年6月22日", "716年7月13日", "710年7月25日","712年9月8日"},
+                { "唐玄宗", "685年9月8日", "762年5月3日", "712年9月8日", "756年8月1日"},
+                { "唐肅宗", "711年1月21日","762年5月16日", "756年8月12日", "762年5月16日"},
+                { "唐代宗", "726年11月11日", "779年6月10日", "762年5月18日", "779年6月10日"},
+                { "唐德宗", "742年5月27日", "805年2月25日", "779年6月12日", "805年2月25日"},
+                { "唐順宗", "761年2月21日", "806年2月11日", "805年2月28日", "805年8月31日"},
+                { "唐憲宗", "778年3月17日", "820年2月14日", "805年9月5日", "820年2月14日"},
+                { "唐穆宗", "795年7月26日", "824年2月25日", "820年2月20日", "824年2月25日"},
+                { "唐敬宗", "809年7月22日", "827年1月9日", "824年2月29日", "827年1月9日"},
+                { "唐文宗", "809年11月20日", "840年2月10日", "827年1月13日", "840年2月10日"},
+                { "唐武宗", "814年7月2日", "846年4月22日", "840年2月20日", "846年4月22日"},
+                { "唐宣宗", "810年7月27日", "859年9月10日", "846年4月22日", "859年9月10日"},
+                { "唐懿宗", "833年12月28日", "873年8月15日", "859年9月13日", "873年8月15日"},
+                { "唐僖宗", "862年6月8日", "888年4月20日", "873年8月16日", "888年4月20日"},
+                { "唐昭宗", "867年3月31日", "904年9月22日", "888年4月22日", "904年9月22日"},
+                { "唐哀帝", "892年10月27日", "908年3月26日", "904年9月27日", "907年5月12日"},
+                };
+            }
+            else if (index == LEADER_DATA_2)
+            {
+                person = new string[,] { 
+                { "清太祖", "1559年2月21日", "1626年9月30日", "1616年2月17日", "1626年9月30日"},
+                { "清太宗", "1592年11月28日", "1643年9月21日", "1626年10月20日", "1643年9月21日"},
+                { "順治", "1638年3月15日", "1661年2月5日", "1643年10月8日", "1661年2月5日"},
+                { "康熙", "1654年5月4日", "1722年12月20日", "1661年2月5日", "1722年12月20日"},
+                { "雍正", "1678年12月13日", "1735年10月8日", "1722年12月20日", "1735年10月7日"},
+                { "乾隆", "1711年9月25日", "1799年2月7日", "1735年10月18日", "1796年2月9日"},
+                { "嘉慶", "1760年11月14日", "1820年9月2日", "1796年2月9日", "1820年9月2日"},
+                { "道光", "1782年9月16日", "1850年2月26日", "1820年10月3日", "1850年2月26日"},
+                { "咸豐", "1831年7月17日", "1861年8月22日", "1850年3月9日", "1861年8月22日"},
+                { "同治", "1856年4月27日", "1875年1月12日", "1861年11月11日", "1875年1月12日"},
+                { "光緒", "1871年8月14日", "1908年11月14日", "1875年2月25日", "1908年11月14日"},
+                { "宣統", "1906年2月7日", "1967年10月17日", "1908年12月2日", "1912年2月12日"},
+                };
+            }
+            else
+            {
+                person = new string[,] {
+                { "xxx", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
+                };
+            }
+        }
+
         void draw_person_data(int index)
         {
             richTextBox1.Clear();
@@ -760,6 +828,290 @@ namespace vcs_YearTable
             //pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, (row + 2) * HEIGHT + BORDER * 2);  ????
             //pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, 200);  ????
 
+            pictureBox1.Image = bitmap1;
+        }
+
+        void draw_leader_data(int index)
+        {
+            richTextBox1.Clear();
+
+            load_leaderData(index);
+
+            DateTime lifeEarliest = DateTime.Now;
+            DateTime lifeEarliest2 = DateTime.Now;
+            DateTime lifeLatest = new DateTime(1, 1, 1);
+            DateTime lifeStart;
+            DateTime lifeEnd;
+            DateTime workStart;
+            DateTime workEnd;
+            TimeSpan lifeDay;
+            TimeSpan workDay;
+            DateTime workEarliest = DateTime.Now;
+            DateTime workLatest = new DateTime(1, 1, 1);
+
+            int lifedayCount;
+            int workdayCount;
+            int row = 0;
+            string str;
+
+            int i;
+            int total_persons = person.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_persons = " + total_persons.ToString() + "\n";
+            int current_index = 0;
+            int next_index = 0;
+            DateTime current_life_sp;
+
+            int[] person_used = new int[total_persons];
+            for (i = 0; i < total_persons; i++)
+            {
+                person_used[i] = 0;
+            }
+
+            for (i = 0; i < total_persons; i++)
+            {
+                lifeStart = DateTime.Parse(person[i, 1]);
+                lifeEnd = DateTime.Parse(person[i, 2]);
+                workStart = DateTime.Parse(person[i, 3]);
+                workEnd = DateTime.Parse(person[i, 4]);
+
+                if (lifeEarliest > lifeStart)
+                {
+                    lifeEarliest = lifeStart;
+                    //current_index = i;
+                }
+
+                if (lifeLatest < lifeEnd)
+                    lifeLatest = lifeEnd;
+
+                if (workEarliest > workStart)
+                    workEarliest = workStart;
+
+                if (workLatest < workEnd)
+                    workLatest = workEnd;
+
+                // 計算差異天數
+                lifeDay = lifeEnd - lifeStart;
+                lifedayCount = (int)lifeDay.TotalDays;
+                //richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+                // 計算差異天數
+                lifeDay = lifeEnd - lifeStart;
+                lifedayCount = (int)lifeDay.TotalDays;
+                //richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+                workDay = workEnd - workStart;
+                workdayCount = (int)workDay.TotalDays;
+                //richTextBox1.Text += "在位 " + workdayCount.ToString() + " 天" + "\t" + DayConversionYMD(workdayCount) + "\n";
+            }
+
+            richTextBox1.Text += "壽命最早" + lifeEarliest.ToString() + "\n";
+            richTextBox1.Text += "壽命最晚" + lifeLatest.ToString() + "\n";
+            TimeSpan totalLife = lifeLatest - lifeEarliest;
+            int totalLifeDaysCount = (int)totalLife.TotalDays;
+            richTextBox1.Text += "壽命全長 " + totalLifeDaysCount.ToString() + " 天" + "\t" + DayConversionYMD(totalLifeDaysCount) + "\n";
+
+            richTextBox1.Text += "在位最早" + workEarliest.ToString() + "\n";
+            richTextBox1.Text += "在位最晚" + workLatest.ToString() + "\n";
+            TimeSpan totalWork = workLatest - workEarliest;
+            int totalWorkDaysCount = (int)totalWork.TotalDays;
+            richTextBox1.Text += "在位全長 " + totalWorkDaysCount.ToString() + " 天" + "\t" + DayConversionYMD(totalWorkDaysCount) + "\n";
+
+            //int age;
+            //int position;
+            int BORDER = 50;
+            int HEIGHT = 50;
+            int offset_x = 100;
+            int offset_y = 0;
+            int x_st;
+            int y_st;
+            int w;
+            int h;
+            Font f;
+            int ratio = 40;
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+            //pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, total_persons * HEIGHT + BORDER * 2);
+            pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, total_persons * HEIGHT / 2 + BORDER * 2);
+
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "已新建圖檔\n";
+            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            g.DrawRectangle(new Pen(Color.Lime), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
+
+            //找出最早的時間
+            lifeEarliest2 = DateTime.Now;
+            for (i = 0; i < total_persons; i++)
+            {
+                if (person_used[i] == 0)
+                {
+                    lifeStart = DateTime.Parse(person[i, 1]);
+
+                    if (lifeEarliest2 > lifeStart)
+                    {
+                        lifeEarliest2 = lifeStart;
+                        current_index = i;
+                    }
+                }
+            }
+
+            current_life_sp = DateTime.Parse(person[current_index, 2]);
+
+            /*
+            richTextBox1.Text += "取得時間最早的項目, index = " + current_index.ToString() + "\n";
+            richTextBox1.Text += "此項目的名字 = " + person[current_index, 0] + "\n";
+            richTextBox1.Text += "此項目的壽命開始時間 = " + DateTime.Parse(person[current_index, 1]).ToString() + "\n";
+            richTextBox1.Text += "此項目的壽命結束時間 = " + current_life_sp.ToString() + "\n";
+            richTextBox1.Text += "畫第 " + current_index.ToString() + " 項\n";
+            */
+
+            lifeStart = DateTime.Parse(person[current_index, 1]);
+            lifeEnd = DateTime.Parse(person[current_index, 2]);
+            workStart = DateTime.Parse(person[current_index, 3]);
+            workEnd = DateTime.Parse(person[current_index, 4]);
+
+            // 計算差異天數
+            lifeDay = lifeEnd - lifeStart;
+            lifedayCount = (int)lifeDay.TotalDays;
+            //richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+            workDay = workEnd - workStart;
+            workdayCount = (int)workDay.TotalDays;
+            //richTextBox1.Text += "在位 " + workdayCount.ToString() + " 天" + "\t" + DayConversionYMD(workdayCount) + "\n";
+
+            x_st = BORDER + ((int)(lifeStart - lifeEarliest).TotalDays) / ratio + offset_x;
+            y_st = BORDER + 50 * row + offset_y;
+
+            w = ((int)(lifeEnd - lifeStart).TotalDays) / ratio;
+            h = 40;
+
+            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+            g.DrawRectangle(p, x_st, y_st, w, h);
+
+            f = new Font("標楷體", 22);
+            str = person[current_index, 0] + " (" + ((double)(lifedayCount) / (double)365).ToString("N1", CultureInfo.InvariantCulture) + ")";
+            g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st + 5, y_st + 5));
+
+            x_st = BORDER + ((int)(workStart - lifeEarliest).TotalDays) / ratio + offset_x;
+            w = ((int)(workEnd - workStart).TotalDays) / ratio;
+            h = HEIGHT * 4 / 5;
+            if (w == 0)
+                w = 1;
+            g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h));
+            g.DrawRectangle(p, x_st, y_st, w, h);
+            //richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
+
+            person_used[current_index] = 1;
+
+            TimeSpan time_diff;
+            int smallest_diff;
+
+            for (int k = 0; k < (total_persons - 1); k++)
+            {
+                //richTextBox1.Text += "\nk = " + k.ToString() + "\n\n";
+                smallest_diff = 500 * 365;  //500年
+
+                for (i = 0; i < total_persons; i++)
+                {
+                    if (person_used[i] == 0)
+                    {
+                        if (DateTime.Parse(person[i, 1]) > current_life_sp)
+                        {
+                            time_diff = DateTime.Parse(person[i, 1]) - current_life_sp;
+                            if ((time_diff.TotalDays > 365) && ((int)time_diff.TotalDays < smallest_diff))
+                            {
+                                smallest_diff = (int)time_diff.TotalDays;
+                                next_index = i;
+                            }
+                        }
+                    }
+                }
+                //richTextBox1.Text += "smallest_diff = " + smallest_diff.ToString() + "\n";
+                if (smallest_diff == 500 * 365)
+                {
+                    //richTextBox1.Text += "已搜尋到底，要畫下一行。\n";
+                    row++;
+                    //從剩下的項目，找出最早的時間
+                    //找出最早的時間
+                    lifeEarliest2 = DateTime.Now;
+                    for (i = 0; i < total_persons; i++)
+                    {
+                        if (person_used[i] == 0)
+                        {
+                            lifeStart = DateTime.Parse(person[i, 1]);
+
+                            if (lifeEarliest2 > lifeStart)
+                            {
+                                lifeEarliest2 = lifeStart;
+                                current_index = i;
+                            }
+                        }
+                    }
+                    current_life_sp = DateTime.Parse(person[current_index, 2]);
+                    /*
+                    richTextBox1.Text += "取得剩下的項目裡面時間最早的項目, index = " + current_index.ToString() + "\n";
+                    richTextBox1.Text += "此項目的名字 = " + person[current_index, 0] + "\n";
+                    richTextBox1.Text += "此項目的壽命開始時間 = " + DateTime.Parse(person[current_index, 1]).ToString() + "\n";
+                    richTextBox1.Text += "此項目的壽命結束時間 = " + current_life_sp.ToString() + "\n";
+                    richTextBox1.Text += "畫第 " + current_index.ToString() + " 項\n";
+                    */
+                    current_life_sp = DateTime.Parse(person[current_index, 2]);
+                    person_used[current_index] = 1;
+                }
+                else
+                {
+                    current_index = next_index;
+                    /*
+                    richTextBox1.Text += "取得下一個項目, index = " + next_index.ToString() + "\n";
+                    richTextBox1.Text += "此項目的名字 = " + person[next_index, 0] + "\n";
+                    richTextBox1.Text += "此項目的壽命開始時間 = " + DateTime.Parse(person[next_index, 1]).ToString() + "\n";
+                    richTextBox1.Text += "此項目的壽命結束時間 = " + DateTime.Parse(person[next_index, 2]).ToString() + "\n";
+                    richTextBox1.Text += "畫第 " + current_index.ToString() + " 項\n";
+                    */
+                    current_life_sp = DateTime.Parse(person[current_index, 2]);
+                    person_used[current_index] = 1;
+                }
+
+                lifeStart = DateTime.Parse(person[current_index, 1]);
+                lifeEnd = DateTime.Parse(person[current_index, 2]);
+                workStart = DateTime.Parse(person[current_index, 3]);
+                workEnd = DateTime.Parse(person[current_index, 4]);
+
+                // 計算差異天數
+                lifeDay = lifeEnd - lifeStart;
+                lifedayCount = (int)lifeDay.TotalDays;
+                //richTextBox1.Text += "壽命 " + lifedayCount.ToString() + " 天" + "\t" + DayConversionYMD(lifedayCount) + "\n";
+
+                x_st = BORDER + ((int)(lifeStart - lifeEarliest).TotalDays) / ratio + offset_x;
+                y_st = BORDER + 50 * row + offset_y;
+
+                w = ((int)(lifeEnd - lifeStart).TotalDays) / ratio;
+                h = 40;
+
+                g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(x_st, y_st, w, h));
+
+                g.DrawRectangle(p, x_st, y_st, w, h);
+
+                f = new Font("標楷體", 22);
+                str = person[current_index, 0] + " (" + ((double)(lifedayCount) / (double)365).ToString("N1", CultureInfo.InvariantCulture) + ")";
+                g.DrawString(str, f, new SolidBrush(Color.Blue), new PointF(x_st + 5, y_st + 5));
+
+                x_st = BORDER + ((int)(workStart - lifeEarliest).TotalDays) / ratio + offset_x;
+                w = ((int)(workEnd - workStart).TotalDays) / ratio;
+                h = HEIGHT * 4 / 5;
+                if (w == 0)
+                    w = 1;
+                g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(x_st, y_st, w, h));
+                g.DrawRectangle(p, x_st, y_st, w, h);
+                //richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
+            }
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            //pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, (row + 2) * HEIGHT + BORDER * 2);  ????
+            //pictureBox1.Size = new System.Drawing.Size(totalLifeDaysCount / ratio + BORDER * 2 + offset_x * 3, 200);  ????
             pictureBox1.Image = bitmap1;
         }
 
@@ -1024,7 +1376,7 @@ namespace vcs_YearTable
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            draw_leader_data(LEADER_DATA_0);
         }
 
     }

@@ -45,6 +45,7 @@
             this.button11 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -223,11 +224,20 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(631, 421);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(219, 141);
+            this.richTextBox1.TabIndex = 17;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 574);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button11);
@@ -270,6 +280,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
