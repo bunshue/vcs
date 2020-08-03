@@ -13,12 +13,125 @@ namespace vcs_OXGame
     {
         //一維List for int
         List<int> steps = new List<int>();
-        List<int> select_steps = new List<int>();
+        List<int> select_steps_a = new List<int>();
+        List<int> select_steps_b = new List<int>();
+        List<int> select_steps_c = new List<int>();
         //int N;
+
+        Graphics g;
+        Pen p;
+        SolidBrush sb;
+        Bitmap bitmap1;
+
+        bool isRunning;
+        int current_user = 0;
 
         public Form1()
         {
             InitializeComponent();
+
+            p = new Pen(Color.Green, 3);
+            sb = new SolidBrush(Color.Pink);
+
+            //新建圖檔, 初始化畫布
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "已新建圖檔\n";
+            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = W / 3;
+            int h = H / 3;
+
+            g.DrawLine(p, w, 0, w, H);
+            g.DrawLine(p, w * 2, 0, w * 2, H);
+            g.DrawLine(p, 0, h, W, h);
+            g.DrawLine(p, 0, h * 2, W, h * 2);
+
+            label2.Text = "";
+            isRunning = false;
+
+            button4.Enabled = true;
+            button5.Enabled = false;
+
+        }
+
+        void draw_item(int current, int N)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = W / 3;
+            int h = H / 3;
+            int x_st = 0;
+            int y_st = 0;
+            int dd = 10;
+
+            if (N == 1)
+            {
+                x_st = dd;
+                y_st = dd;
+            }
+            else if (N == 2)
+            {
+                x_st = w + dd;
+                y_st = dd;
+            }
+            else if (N == 3)
+            {
+                x_st = w * 2 + dd;
+                y_st = dd;
+            }
+            else if (N == 4)
+            {
+                x_st = dd;
+                y_st = h + dd;
+            }
+            else if (N == 5)
+            {
+                x_st = w + dd;
+                y_st = h + dd;
+            }
+            else if (N == 6)
+            {
+                x_st = w * 2 + dd;
+                y_st = h + dd;
+            }
+            else if (N == 7)
+            {
+                x_st = dd;
+                y_st = h * 2 + dd;
+            }
+            else if (N == 8)
+            {
+                x_st = w + dd;
+                y_st = h * 2 + dd;
+            }
+            else if (N == 9)
+            {
+                x_st = w * 2 + dd;
+                y_st = h * 2 + dd;
+            }
+
+            //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            //richTextBox1.Text += "w = " + (w - dd * 2).ToString() + ", h = " + (h - dd * 2).ToString() + "\n";
+
+            richTextBox1.Text += "CCCCC\tcurrent_user = " + current.ToString() + "\n";
+
+            if (current == 0)
+            {
+                sb = new SolidBrush(Color.Lime);
+                g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+            }
+            else
+            {
+                sb = new SolidBrush(Color.Pink);
+                g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,11 +142,12 @@ namespace vcs_OXGame
         void reset_steps()
         {
             int i;
-            int tmp;
+            //int tmp;
             Random r = new Random();
 
             steps.Clear();
-            select_steps.Clear();
+            select_steps_a.Clear();
+            select_steps_b.Clear();
 
             for (i = 0; i < 9; i++)
             {
@@ -43,6 +157,7 @@ namespace vcs_OXGame
 
             //show_steps(steps);
 
+            /*  打亂分布
             for (i = 0; i < steps.Count; i++)
             {
                 int n = r.Next(steps.Count);
@@ -51,6 +166,7 @@ namespace vcs_OXGame
                 steps[i] = steps[n];
                 steps[n] = tmp;
             }
+            */
             show_steps(steps);
         }
 
@@ -68,12 +184,22 @@ namespace vcs_OXGame
                 richTextBox1.Text += "\n";
             }
 
-            if (select_steps.Count > 0)
+            if (select_steps_a.Count > 0)
             {
-                richTextBox1.Text += "已走步數 " + select_steps.Count.ToString() + " 步, 分別是:\t";
-                for (i = 0; i < select_steps.Count; i++)
+                richTextBox1.Text += "先攻方已走步數 " + select_steps_a.Count.ToString() + " 步, 分別是:\t";
+                for (i = 0; i < select_steps_a.Count; i++)
                 {
-                    richTextBox1.Text += select_steps[i].ToString() + "  ";
+                    richTextBox1.Text += select_steps_a[i].ToString() + "  ";
+                }
+                richTextBox1.Text += "\n";
+            }
+
+            if (select_steps_b.Count > 0)
+            {
+                richTextBox1.Text += "後攻方已走步數 " + select_steps_b.Count.ToString() + " 步, 分別是:\t";
+                for (i = 0; i < select_steps_b.Count; i++)
+                {
+                    richTextBox1.Text += select_steps_b[i].ToString() + "  ";
                 }
                 richTextBox1.Text += "\n";
             }
@@ -99,63 +225,229 @@ namespace vcs_OXGame
 
         }
 
-        void check_select_steps()
+        int check_select_steps_a()
         {
-            /*
-            int i;
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = W / 3;
+            int h = H / 3;
+            int x_st = -1;
+            int y_st = -1;
+            int x_sp = -1;
+            int y_sp = -1;
 
-            if (select_steps.Count > 0)
+            if ((select_steps_a.Contains(1) == true) && (select_steps_a.Contains(2) == true) && (select_steps_a.Contains(3) == true))
             {
-                richTextBox1.Text += "已走步數 " + select_steps.Count.ToString() + " 步, 分別是:\t";
-                for (i = 0; i < select_steps.Count; i++)
-                {
-                    richTextBox1.Text += select_steps[i].ToString() + "  ";
-                }
-                richTextBox1.Text += "\n";
+                richTextBox1.Text += "row 1 OK\n";
+                x_st = 0;
+                y_st = h / 2;
+                x_sp = W;
+                y_sp = h / 2;
             }
-            */
+            else if ((select_steps_a.Contains(4) == true) && (select_steps_a.Contains(5) == true) && (select_steps_a.Contains(6) == true))
+            {
+                richTextBox1.Text += "row 2 OK\n";
+                x_st = 0;
+                y_st = h + h / 2;
+                x_sp = W;
+                y_sp = h + h / 2;
+            }
+            else if ((select_steps_a.Contains(7) == true) && (select_steps_a.Contains(8) == true) && (select_steps_a.Contains(9) == true))
+            {
+                richTextBox1.Text += "row 3 OK\n";
+                x_st = 0;
+                y_st = h * 2 + h / 2;
+                x_sp = W;
+                y_sp = h * 2 + h / 2;
+            }
+            else if ((select_steps_a.Contains(1) == true) && (select_steps_a.Contains(4) == true) && (select_steps_a.Contains(7) == true))
+            {
+                richTextBox1.Text += "column 1 OK\n";
+                x_st = w / 2;
+                y_st = 0;
+                x_sp = w / 2;
+                y_sp = H;
+            }
+            else if ((select_steps_a.Contains(2) == true) && (select_steps_a.Contains(5) == true) && (select_steps_a.Contains(8) == true))
+            {
+                richTextBox1.Text += "column 2 OK\n";
+                x_st = w + w / 2;
+                y_st = 0;
+                x_sp = w + w / 2;
+                y_sp = H;
+            }
+            else if ((select_steps_a.Contains(3) == true) && (select_steps_a.Contains(6) == true) && (select_steps_a.Contains(9) == true))
+            {
+                richTextBox1.Text += "column 3 OK\n";
+                x_st = w * 2 + w / 2;
+                y_st = 0;
+                x_sp = w * 2 + w / 2;
+                y_sp = H;
+            }
+            else if ((select_steps_a.Contains(1) == true) && (select_steps_a.Contains(5) == true) && (select_steps_a.Contains(9) == true))
+            {
+                richTextBox1.Text += "cross 1 OK\n";
+                x_st = 0;
+                y_st = 0;
+                x_sp = W;
+                y_sp = H;
+            }
+            else if ((select_steps_a.Contains(3) == true) && (select_steps_a.Contains(5) == true) && (select_steps_a.Contains(7) == true))
+            {
+                richTextBox1.Text += "cross 2 OK\n";
+                x_st = W;
+                y_st = 0;
+                x_sp = 0;
+                y_sp = H;
+            }
+            if ((x_st == -1) || (y_st == -1) || (x_sp == -1) || (y_sp == -1))
+                return 0;
+
+            p = new Pen(Color.Red, 5);
+            g.DrawLine(p, x_st, y_st, x_sp, y_sp);
+
+            return 1;
+        }
+
+        int check_select_steps_b()
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = W / 3;
+            int h = H / 3;
+            int x_st = -1;
+            int y_st = -1;
+            int x_sp = -1;
+            int y_sp = -1;
+
+            if ((select_steps_b.Contains(1) == true) && (select_steps_b.Contains(2) == true) && (select_steps_b.Contains(3) == true))
+            {
+                richTextBox1.Text += "row 1 OK\n";
+                x_st = 0;
+                y_st = h / 2;
+                x_sp = W;
+                y_sp = h / 2;
+            }
+            else if ((select_steps_b.Contains(4) == true) && (select_steps_b.Contains(5) == true) && (select_steps_b.Contains(6) == true))
+            {
+                richTextBox1.Text += "row 2 OK\n";
+                x_st = 0;
+                y_st = h + h / 2;
+                x_sp = W;
+                y_sp = h + h / 2;
+            }
+            else if ((select_steps_b.Contains(7) == true) && (select_steps_b.Contains(8) == true) && (select_steps_b.Contains(9) == true))
+            {
+                richTextBox1.Text += "row 3 OK\n";
+                x_st = 0;
+                y_st = h * 2 + h / 2;
+                x_sp = W;
+                y_sp = h * 2 + h / 2;
+            }
+            else if ((select_steps_b.Contains(1) == true) && (select_steps_b.Contains(4) == true) && (select_steps_b.Contains(7) == true))
+            {
+                richTextBox1.Text += "column 1 OK\n";
+                x_st = w / 2;
+                y_st = 0;
+                x_sp = w / 2;
+                y_sp = H;
+            }
+            else if ((select_steps_b.Contains(2) == true) && (select_steps_b.Contains(5) == true) && (select_steps_b.Contains(8) == true))
+            {
+                richTextBox1.Text += "column 2 OK\n";
+                x_st = w + w / 2;
+                y_st = 0;
+                x_sp = w + w / 2;
+                y_sp = H;
+            }
+            else if ((select_steps_b.Contains(3) == true) && (select_steps_b.Contains(6) == true) && (select_steps_b.Contains(9) == true))
+            {
+                richTextBox1.Text += "column 3 OK\n";
+                x_st = w * 2 + w / 2;
+                y_st = 0;
+                x_sp = w * 2 + w / 2;
+                y_sp = H;
+            }
+            else if ((select_steps_b.Contains(1) == true) && (select_steps_b.Contains(5) == true) && (select_steps_b.Contains(9) == true))
+            {
+                richTextBox1.Text += "cross 1 OK\n";
+                x_st = 0;
+                y_st = 0;
+                x_sp = W;
+                y_sp = H;
+            }
+            else if ((select_steps_b.Contains(3) == true) && (select_steps_b.Contains(5) == true) && (select_steps_b.Contains(7) == true))
+            {
+                richTextBox1.Text += "cross 2 OK\n";
+                x_st = W;
+                y_st = 0;
+                x_sp = 0;
+                y_sp = H;
+            }
+            if ((x_st == -1) || (y_st == -1) || (x_sp == -1) || (y_sp == -1))
+                return 0;
+
+            p = new Pen(Color.Red, 5);
+            g.DrawLine(p, x_st, y_st, x_sp, y_sp);
+
+            return 1;
+        }
+
+        int check_select_steps_c(List<int> select_steps)
+        {
+            int got_line = 0;
+
             if ((select_steps.Contains(1) == true) && (select_steps.Contains(2) == true) && (select_steps.Contains(3) == true))
             {
                 richTextBox1.Text += "row 1 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(4) == true) && (select_steps.Contains(5) == true) && (select_steps.Contains(6) == true))
             {
                 richTextBox1.Text += "row 2 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(7) == true) && (select_steps.Contains(8) == true) && (select_steps.Contains(9) == true))
             {
                 richTextBox1.Text += "row 3 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(1) == true) && (select_steps.Contains(4) == true) && (select_steps.Contains(7) == true))
             {
                 richTextBox1.Text += "column 1 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(2) == true) && (select_steps.Contains(5) == true) && (select_steps.Contains(8) == true))
             {
                 richTextBox1.Text += "column 2 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(3) == true) && (select_steps.Contains(6) == true) && (select_steps.Contains(9) == true))
             {
                 richTextBox1.Text += "column 3 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(1) == true) && (select_steps.Contains(5) == true) && (select_steps.Contains(9) == true))
             {
                 richTextBox1.Text += "cross 1 OK\n";
+                got_line = 1;
             }
             else if ((select_steps.Contains(3) == true) && (select_steps.Contains(5) == true) && (select_steps.Contains(7) == true))
             {
                 richTextBox1.Text += "cross 2 OK\n";
+                got_line = 1;
             }
-
-
-
+            return got_line;
         }
-
 
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             this.Text = "目前滑鼠在Form1上的位置：" + e.X + " : " + e.Y;
+
+            if (isRunning == false)
+                return;
+
             int N = 0;
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
@@ -164,6 +456,7 @@ namespace vcs_OXGame
             int w = W / 3;
             int h = H / 3;
             int dd = 10;
+            int result;
 
             if ((x < dd) || (y < dd) || (x >= (W - dd)) || (y >= (H - dd)))
                 return;
@@ -223,11 +516,150 @@ namespace vcs_OXGame
                 }
             }
 
-            richTextBox1.Text += "取得 N = " + N.ToString() + "\n";
+            //richTextBox1.Text += "取得 N = " + N.ToString() + "\n";
 
-            remove_item(N);
-            select_steps.Add(N);
-            check_select_steps();
+            if (current_user == 0)
+            {
+                if (select_steps_a.Contains(N) == false)
+                {
+                    select_steps_a.Add(N);
+                    draw_item(current_user, N);
+                    remove_item(N);
+                    result = check_select_steps_a();
+
+                    if (result == 1)
+                    {
+                        richTextBox1.Text += "勝負已分\tUSER勝";
+                        /*
+                        if (radioButton1.Checked == true)
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "PC勝";
+                            else
+                                label2.Text = "USER勝";
+                        }
+                        else
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "USER勝";
+                            else
+                                label2.Text = "PC勝";
+                        }
+                        */
+                        isRunning = false;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "共走了 " + (select_steps_a.Count + select_steps_b.Count).ToString() + " 步\t";
+                        richTextBox1.Text += "PC方共走了 " + select_steps_a.Count.ToString() + " 步\n";
+                        current_user = 1 - current_user;
+                        label2.Text = "輪到 PC";
+                        /*
+                        if (current_user == 0)
+                        {
+                            label2.Text = "輪到 USER";
+                        }
+                        else
+                        {
+                            label2.Text = "輪到 PC";
+                        }
+                        */
+                        //if(current_user == 0)
+
+                        /*
+                        if (radioButton1.Checked == true)
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "輪到 USER";
+                            else
+                                label2.Text = "輪到 PC";
+                        }
+                        else
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "輪到 PC";
+                            else
+                                label2.Text = "輪到 USER";
+                        }
+                        */
+                    }
+
+
+                }
+
+
+            }
+            else
+            {
+                if (select_steps_b.Contains(N) == false)
+                {
+                    select_steps_b.Add(N);
+
+                    draw_item(current_user, N);
+                    remove_item(N);
+                    result = check_select_steps_b();
+
+                    if (result == 1)
+                    {
+                        richTextBox1.Text += "勝負已分\tPC勝";
+                        /*
+                        if (radioButton1.Checked == true)
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "PC勝";
+                            else
+                                label2.Text = "USER勝";
+                        }
+                        else
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "USER勝";
+                            else
+                                label2.Text = "PC勝";
+                        }
+                        */
+                        isRunning = false;
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "共走了 " + (select_steps_a.Count + select_steps_b.Count).ToString() + " 步\t";
+                        richTextBox1.Text += "USER方共走了 " + select_steps_b.Count.ToString() + " 步\n";
+                        current_user = 1 - current_user;
+                        label2.Text = "輪到 USER";
+                        /*
+                        if (current_user == 0)
+                        {
+                            label2.Text = "輪到 USER";
+                        }
+                        else
+                        {
+                            label2.Text = "輪到 PC";
+                        }
+                        */
+                        //if(current_user == 0)
+
+                        /*
+                        if (radioButton1.Checked == true)
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "輪到 USER";
+                            else
+                                label2.Text = "輪到 PC";
+                        }
+                        else
+                        {
+                            if ((select_steps_a.Count % 2) == 0)
+                                label2.Text = "輪到 PC";
+                            else
+                                label2.Text = "輪到 USER";
+                        }
+                        */
+                    }
+
+
+                }
+
+            }
 
 
         }
@@ -245,6 +677,157 @@ namespace vcs_OXGame
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked == true)
+                richTextBox1.Text += "先攻";
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked == true)
+                richTextBox1.Text += "後攻";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            isRunning = true;
+            reset_steps();
+
+            //新建圖檔, 初始化畫布
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "已新建圖檔\n";
+            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = W / 3;
+            int h = H / 3;
+
+            p = new Pen(Color.Green, 3);
+            g.DrawLine(p, w, 0, w, H);
+            g.DrawLine(p, w * 2, 0, w * 2, H);
+            g.DrawLine(p, 0, h, W, h);
+            g.DrawLine(p, 0, h * 2, W, h * 2);
+
+            button4.Enabled = false;
+            button5.Enabled = true;
+            groupBox1.Enabled = false;
+
+            if (radioButton1.Checked == true)
+            {
+                current_user = 0;
+            }
+            else
+            {
+                current_user = 1;
+            }
+
+            if (current_user == 0)
+            {
+                label2.Text = "輪到 USER";
+            }
+            else
+            {
+                label2.Text = "輪到 PC";
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            isRunning = false;
+            button4.Enabled = true;
+            button5.Enabled = false;
+            groupBox1.Enabled = true;
+            label2.Text = "";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (current_user == 0)
+            {
+                richTextBox1.Text += "目前輪到 USER\n";
+            }
+            else
+            {
+                richTextBox1.Text += "目前輪到 PC\n";
+
+                int i;
+
+                if (steps.Count > 0)
+                {
+                    richTextBox1.Text += "目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
+                    for (i = 0; i < steps.Count; i++)
+                    {
+                        richTextBox1.Text += steps[i].ToString() + "  ";
+                    }
+                    richTextBox1.Text += "\n";
+                }
+
+                if (select_steps_b.Count > 0)
+                {
+                    richTextBox1.Text += "目前後攻方已走步數 " + select_steps_b.Count.ToString() + " 步, 分別是:\t";
+                    for (i = 0; i < select_steps_b.Count; i++)
+                    {
+                        richTextBox1.Text += select_steps_b[i].ToString() + "  ";
+                    }
+                    richTextBox1.Text += "\n";
+                }
+
+                int win = 0;
+                //1. 檢查每一步，若必能贏，就直接下
+                if (steps.Count > 0)
+                {
+                    richTextBox1.Text += "目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
+                    for (i = 0; i < steps.Count; i++)
+                    {
+                        richTextBox1.Text += "測試項目 " + steps[i].ToString() + "\n";
+                        select_steps_c.Clear();
+                        int j;
+                        for (j = 0; j < select_steps_b.Count; j++)
+                        {
+                            select_steps_c.Add(select_steps_b[j]);
+                        }
+                        select_steps_c.Add(steps[i]);
+
+                        win = check_select_steps_c(select_steps_c);
+                        if (win == 1)
+                        {
+                            richTextBox1.Text += "下了 " + steps[i].ToString() + " 這步，立刻可贏\n";
+                            break;
+                        }
+
+
+                    }
+                    richTextBox1.Text += "\n";
+
+
+                }
+
+                //2. 檢查每一步，若下了之後，給對方贏的機會，則刪除
+
+                //3. 檢查每一步，下了之後，有兩勝以上機會，就直接下
+
+                //4. 檢查每一步，若有一勝機會，任選其一
+                //4. 檢查每一步，任選其一，盡量選邊角
+
+
+
+
+
+
+
+
+
+
+
+            }
         }
 
     }
