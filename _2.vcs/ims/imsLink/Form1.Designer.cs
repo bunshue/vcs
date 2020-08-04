@@ -184,6 +184,16 @@
             this.lb_data_camera_gain = new System.Windows.Forms.Label();
             this.pictureBox_contrast = new System.Windows.Forms.PictureBox();
             this.gb_contrast_brightness3 = new System.Windows.Forms.GroupBox();
+            this.groupBox_register = new System.Windows.Forms.GroupBox();
+            this.bt_manual_mode = new System.Windows.Forms.Button();
+            this.bt_write_m = new System.Windows.Forms.Button();
+            this.bt_read_m = new System.Windows.Forms.Button();
+            this.tb_4m = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.tb_3m = new System.Windows.Forms.TextBox();
+            this.tb_2m = new System.Windows.Forms.TextBox();
+            this.tb_1m = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
             this.trackBar_BPT = new System.Windows.Forms.TrackBar();
             this.tb_bpt3 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -703,6 +713,7 @@
             this.groupBox_gridlinecolor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).BeginInit();
             this.gb_contrast_brightness3.SuspendLayout();
+            this.groupBox_register.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_BPT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_WPT)).BeginInit();
@@ -965,6 +976,7 @@
             this.tb_4.Text = "0";
             this.tb_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_4.TextChanged += new System.EventHandler(this.tb_4_TextChanged);
+            this.tb_4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_4_KeyPress);
             // 
             // label61
             // 
@@ -986,6 +998,7 @@
             this.tb_3.Text = "00";
             this.tb_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_3.TextChanged += new System.EventHandler(this.tb_3_TextChanged);
+            this.tb_3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_3_KeyPress);
             // 
             // tb_2
             // 
@@ -996,6 +1009,7 @@
             this.tb_2.TabIndex = 37;
             this.tb_2.Text = "20";
             this.tb_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_2_KeyPress);
             // 
             // comboBox5
             // 
@@ -1015,7 +1029,7 @@
             this.bt_write.BackColor = System.Drawing.SystemColors.Control;
             this.bt_write.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_write.ForeColor = System.Drawing.Color.Black;
-            this.bt_write.Location = new System.Drawing.Point(706, 536);
+            this.bt_write.Location = new System.Drawing.Point(706, 535);
             this.bt_write.Name = "bt_write";
             this.bt_write.Size = new System.Drawing.Size(78, 32);
             this.bt_write.TabIndex = 41;
@@ -1032,6 +1046,7 @@
             this.tb_1.TabIndex = 36;
             this.tb_1.Text = "38";
             this.tb_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_1_KeyPress);
             // 
             // bt_read
             // 
@@ -2215,6 +2230,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.groupBox_register);
             this.tp_USB.Controls.Add(this.groupBox_metering);
             this.tp_USB.Controls.Add(this.cb_change_rank);
             this.tp_USB.Controls.Add(this.bt_measure_brightness);
@@ -2695,6 +2711,129 @@
             this.gb_contrast_brightness3.TabIndex = 213;
             this.gb_contrast_brightness3.TabStop = false;
             this.gb_contrast_brightness3.Text = "Contrast / Brightness";
+            // 
+            // groupBox_register
+            // 
+            this.groupBox_register.Controls.Add(this.bt_manual_mode);
+            this.groupBox_register.Controls.Add(this.bt_write_m);
+            this.groupBox_register.Controls.Add(this.bt_read_m);
+            this.groupBox_register.Controls.Add(this.tb_4m);
+            this.groupBox_register.Controls.Add(this.label63);
+            this.groupBox_register.Controls.Add(this.tb_3m);
+            this.groupBox_register.Controls.Add(this.tb_2m);
+            this.groupBox_register.Controls.Add(this.tb_1m);
+            this.groupBox_register.Controls.Add(this.label64);
+            this.groupBox_register.Location = new System.Drawing.Point(78, 47);
+            this.groupBox_register.Name = "groupBox_register";
+            this.groupBox_register.Size = new System.Drawing.Size(560, 203);
+            this.groupBox_register.TabIndex = 234;
+            this.groupBox_register.TabStop = false;
+            this.groupBox_register.Text = "Register";
+            // 
+            // bt_manual_mode
+            // 
+            this.bt_manual_mode.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_manual_mode.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_manual_mode.ForeColor = System.Drawing.Color.Black;
+            this.bt_manual_mode.Location = new System.Drawing.Point(43, 107);
+            this.bt_manual_mode.Name = "bt_manual_mode";
+            this.bt_manual_mode.Size = new System.Drawing.Size(64, 32);
+            this.bt_manual_mode.TabIndex = 60;
+            this.bt_manual_mode.Text = "Manual";
+            this.bt_manual_mode.UseVisualStyleBackColor = false;
+            this.bt_manual_mode.Click += new System.EventHandler(this.bt_manual_mode_Click);
+            // 
+            // bt_write_m
+            // 
+            this.bt_write_m.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_write_m.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_write_m.ForeColor = System.Drawing.Color.Black;
+            this.bt_write_m.Location = new System.Drawing.Point(462, 52);
+            this.bt_write_m.Name = "bt_write_m";
+            this.bt_write_m.Size = new System.Drawing.Size(78, 32);
+            this.bt_write_m.TabIndex = 50;
+            this.bt_write_m.Text = "Write";
+            this.bt_write_m.UseVisualStyleBackColor = false;
+            this.bt_write_m.Click += new System.EventHandler(this.bt_write_m_Click);
+            // 
+            // bt_read_m
+            // 
+            this.bt_read_m.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_read_m.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_read_m.ForeColor = System.Drawing.Color.Black;
+            this.bt_read_m.Location = new System.Drawing.Point(378, 52);
+            this.bt_read_m.Name = "bt_read_m";
+            this.bt_read_m.Size = new System.Drawing.Size(78, 32);
+            this.bt_read_m.TabIndex = 49;
+            this.bt_read_m.Text = "Read";
+            this.bt_read_m.UseVisualStyleBackColor = false;
+            this.bt_read_m.Click += new System.EventHandler(this.bt_read_m_Click);
+            // 
+            // tb_4m
+            // 
+            this.tb_4m.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_4m.Location = new System.Drawing.Point(305, 52);
+            this.tb_4m.Name = "tb_4m";
+            this.tb_4m.Size = new System.Drawing.Size(58, 32);
+            this.tb_4m.TabIndex = 46;
+            this.tb_4m.Text = "0";
+            this.tb_4m.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_4m.TextChanged += new System.EventHandler(this.tb_4m_TextChanged);
+            this.tb_4m.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_4m_KeyPress);
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.Location = new System.Drawing.Point(39, 27);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(282, 23);
+            this.label63.TabIndex = 47;
+            this.label63.Text = "Addr_H          Addr_L                        Data";
+            // 
+            // tb_3m
+            // 
+            this.tb_3m.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_3m.Location = new System.Drawing.Point(235, 52);
+            this.tb_3m.Name = "tb_3m";
+            this.tb_3m.Size = new System.Drawing.Size(58, 32);
+            this.tb_3m.TabIndex = 45;
+            this.tb_3m.Text = "00";
+            this.tb_3m.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_3m.TextChanged += new System.EventHandler(this.tb_3m_TextChanged);
+            this.tb_3m.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_3m_KeyPress);
+            // 
+            // tb_2m
+            // 
+            this.tb_2m.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_2m.Location = new System.Drawing.Point(129, 52);
+            this.tb_2m.Name = "tb_2m";
+            this.tb_2m.Size = new System.Drawing.Size(58, 32);
+            this.tb_2m.TabIndex = 44;
+            this.tb_2m.Text = "20";
+            this.tb_2m.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_2m.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_2m_KeyPress);
+            // 
+            // tb_1m
+            // 
+            this.tb_1m.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_1m.Location = new System.Drawing.Point(43, 52);
+            this.tb_1m.Name = "tb_1m";
+            this.tb_1m.Size = new System.Drawing.Size(58, 32);
+            this.tb_1m.TabIndex = 43;
+            this.tb_1m.Text = "38";
+            this.tb_1m.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_1m.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_1m_KeyPress);
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label64.Location = new System.Drawing.Point(19, 56);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(290, 23);
+            this.label64.TabIndex = 48;
+            this.label64.Text = "0x                 0x                      0x                =";
             // 
             // trackBar_BPT
             // 
@@ -8457,6 +8596,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).EndInit();
             this.gb_contrast_brightness3.ResumeLayout(false);
             this.gb_contrast_brightness3.PerformLayout();
+            this.groupBox_register.ResumeLayout(false);
+            this.groupBox_register.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_BPT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_WPT)).EndInit();
@@ -9217,6 +9358,16 @@
         private System.Windows.Forms.RadioButton rb_metering_2;
         private System.Windows.Forms.RadioButton rb_metering_3;
         private System.Windows.Forms.RadioButton rb_metering_1;
+        private System.Windows.Forms.GroupBox groupBox_register;
+        private System.Windows.Forms.TextBox tb_4m;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.TextBox tb_3m;
+        private System.Windows.Forms.TextBox tb_2m;
+        private System.Windows.Forms.TextBox tb_1m;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Button bt_write_m;
+        private System.Windows.Forms.Button bt_read_m;
+        private System.Windows.Forms.Button bt_manual_mode;
     }
 }
 

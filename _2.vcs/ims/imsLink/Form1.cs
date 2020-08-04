@@ -2146,6 +2146,8 @@ namespace imsLink
                         tb_4.Text = dd.ToString();
                         tb_3a.Text = dd.ToString("X2");
                         tb_4a.Text = dd.ToString();
+                        tb_3m.Text = dd.ToString("X2");
+                        tb_4m.Text = dd.ToString();
 
                         //richTextBox1.Text += "cmd : " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " " + ((int)input[3]).ToString("X2") + "\n";
 
@@ -2329,6 +2331,8 @@ namespace imsLink
                         tb_4.Text = dd.ToString();
                         tb_3a.Text = dd.ToString("X2");
                         tb_4a.Text = dd.ToString();
+                        tb_3m.Text = dd.ToString("X2");
+                        tb_4m.Text = dd.ToString();
                     }
                     else if (input[1] == 0xC1)
                     {
@@ -3527,15 +3531,21 @@ namespace imsLink
             if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
             {
                 groupBox5.Visible = true;
+
                 groupBox_metering.Visible = true;
                 groupBox_metering.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 50);
 
                 lb_yuv_y2.Visible = true;
-                lb_yuv_y2.Location = new Point(lb_rgb_b.Location.X + 60, lb_rgb_b.Location.Y+10);
+                lb_yuv_y2.Location = new Point(lb_rgb_b.Location.X + 60, lb_rgb_b.Location.Y + 10);
+
+                groupBox_register.Visible = true;
+                groupBox_register.Location = new Point(cb_show_grid.Location.X + 120, cb_show_grid.Location.Y + 300);
+            
             }
             else
             {
                 groupBox_metering.Visible = false;
+                groupBox_register.Visible = false;
             }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
@@ -5721,28 +5731,32 @@ namespace imsLink
                         }
 
 
-                        for (yy_st = h / 10 - hhh / 2; yy_st < h; yy_st += h / 5)
+                        for (yy_st = h / (j * 2) - hhh / 2; yy_st < h; yy_st += h / j)
                         {
-                            for (xx_st = w / 10 - www / 2; xx_st < w; xx_st += w / 5)
+                            if (yy_st == (h / (j * 2) - hhh / 2 + (h / j) * 3))
                             {
-                                result = -1;
-                                result = measure_brightness2(xx_st, yy_st, www, hhh);
+                                for (xx_st = w / (j * 2) - www / 2; xx_st < w; xx_st += w / j)
+                                {
+                                    result = -1;
+                                    result = measure_brightness2(xx_st, yy_st, www, hhh);
 
-                                gg.DrawRectangle(new Pen(Color.Red, 1), xx_st, yy_st, www, hhh);
+                                    gg.DrawRectangle(new Pen(Color.Red, 1), xx_st, yy_st, www, hhh);
+                                    //richTextBox1.Text += "x_st = " + xx_st.ToString() + ", y_st = " + yy_st.ToString() + ", w = " + www.ToString() + ", h = " + hhh.ToString() + "\n";
 
 
-                                draw_x_st = xx_st - www / 2;
-                                draw_y_st = yy_st + hhh;
+                                    draw_x_st = xx_st - www / 2;
+                                    draw_y_st = yy_st + hhh;
 
-                                string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
+                                    string brightness = ((int)result).ToString() + "." + (((int)(result * 1000)) % 1000).ToString();
 
-                                drawBrush = new SolidBrush(Color.White);
-                                drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                                gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
+                                    drawBrush = new SolidBrush(Color.White);
+                                    drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                    gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st, draw_y_st);
 
-                                drawBrush = new SolidBrush(Color.Black);
-                                drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                                gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
+                                    drawBrush = new SolidBrush(Color.Black);
+                                    drawFont1 = new Font("Arial", 4, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                                    gg.DrawString(brightness, drawFont1, drawBrush, draw_x_st - 2, draw_y_st + 2);
+                                }
                             }
                         }
                     }
@@ -11705,26 +11719,6 @@ namespace imsLink
             }
         }
 
-        private void tb_3a_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = check_textbox_hexadecimal(e);
-
-            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
-            {
-                bt_write_Click(sender, e);
-            }
-        }
-
-        private void tb_4a_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = check_textbox_decimal(e);
-
-            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
-            {
-                bt_write_Click(sender, e);
-            }
-        }
-
         private void tb_1a_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = check_textbox_hexadecimal(e);
@@ -11742,6 +11736,26 @@ namespace imsLink
             if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
             {
                 bt_read_Click(sender, e);
+            }
+        }
+
+        private void tb_3a_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_Click(sender, e);
+            }
+        }
+
+        private void tb_4a_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_decimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_Click(sender, e);
             }
         }
 
@@ -17645,6 +17659,9 @@ namespace imsLink
 
         private void timer_stage3_Tick(object sender, EventArgs e)
         {
+            if (flag_user_metering == true)
+                return;
+
             if (flag_network_disk_status == false)
             {
                 tb_wait_sn_data.Clear();
@@ -22227,6 +22244,180 @@ namespace imsLink
             show_main_message1("到自動模式", S_FALSE, 10);
             button92.BackColor = System.Drawing.SystemColors.ControlLight;
             button93.BackColor = Color.Pink;
+        }
+
+        private void tb_3m_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_3m.Text.Length == 0)
+            {
+                tb_4m.Text = "";
+                return;
+            }
+            int value = Convert.ToInt32(tb_3m.Text, 16);
+            tb_4m.Text = value.ToString();
+
+        }
+
+        private void tb_4m_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_4m.Text.Length == 0)
+            {
+                tb_3m.Text = "";
+                return;
+            }
+            int value = int.Parse(tb_4m.Text);
+            if ((value < 0) || (value > 255))
+            {
+                tb_4m.Text = "";
+                tb_3m.Text = "";
+            }
+            else
+                tb_3m.Text = Convert.ToString(value, 16).ToUpper();
+        }
+
+        private void bt_read_m_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (tb_1m.Text.Length <= 0)
+                return;
+            if (tb_2m.Text.Length <= 0)
+                return;
+            tb_3m.Text = "";
+            tb_4m.Text = "";
+
+            int addr_h = Convert.ToInt32(tb_1m.Text, 16);
+            int addr_l = Convert.ToInt32(tb_2m.Text, 16);
+            DongleAddr_h = (byte)addr_h;
+            DongleAddr_l = (byte)addr_l;
+            Send_IMS_Data(0xA1, DongleAddr_h, DongleAddr_l, 0);
+        }
+
+        private void bt_write_m_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (tb_1m.Text.Length <= 0)
+                return;
+            if (tb_2m.Text.Length <= 0)
+                return;
+            if (tb_3m.Text.Length <= 0)
+                return;
+            if (tb_4m.Text.Length <= 0)
+                return;
+            int addr_h = Convert.ToInt32(tb_1m.Text, 16);
+            int addr_l = Convert.ToInt32(tb_2m.Text, 16);
+            DongleAddr_h = (byte)addr_h;
+            DongleAddr_l = (byte)addr_l;
+            DongleData = (byte)int.Parse(tb_4m.Text);
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+        }
+
+        private void bt_manual_mode_Click(object sender, EventArgs e)
+        {
+            if (flag_comport_ok == false)
+            {
+                MessageBox.Show("No Comport", "imsLink", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (bt_manual_mode.Text == "Manual")
+            {
+                bt_manual_mode.Text = "Auto";
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x03);  //To manual mode
+            }
+            else
+            {
+                bt_manual_mode.Text = "Manual";
+                Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
+            }
+        }
+
+        private void tb_1m_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_read_m_Click(sender, e);
+            }
+        }
+
+        private void tb_2m_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_read_m_Click(sender, e);
+            }
+        }
+
+        private void tb_3m_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_m_Click(sender, e);
+            }
+        }
+
+        private void tb_4m_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_decimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_m_Click(sender, e);
+            }
+        }
+
+        private void tb_1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_read_Click(sender, e);
+            }
+        }
+
+        private void tb_2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_read_Click(sender, e);
+            }
+        }
+
+        private void tb_3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_Click(sender, e);
+            }
+        }
+
+        private void tb_4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = check_textbox_decimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                bt_write_Click(sender, e);
+            }
         }
     }
 }

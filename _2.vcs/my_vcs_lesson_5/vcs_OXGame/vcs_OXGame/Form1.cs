@@ -19,9 +19,11 @@ namespace vcs_OXGame
         //int N;
 
         Graphics g;
+        Graphics g2;
         Pen p;
         SolidBrush sb;
         Bitmap bitmap1;
+        Bitmap bitmap2;
 
         bool isRunning;
         int current_user = 0;
@@ -38,6 +40,11 @@ namespace vcs_OXGame
             g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
+
+            bitmap2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            g2 = Graphics.FromImage(bitmap2);
+            g2.Clear(Color.White);
+            pictureBox2.Image = bitmap2;
 
             richTextBox1.Text += "已新建圖檔\n";
             richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
@@ -124,12 +131,22 @@ namespace vcs_OXGame
             if (current == 0)
             {
                 sb = new SolidBrush(Color.Lime);
-                g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+                //g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+
+                p = new Pen(Color.Lime, 3);
+                g.DrawEllipse(p, x_st, y_st, w - dd * 2, h - dd * 2);
             }
             else
             {
                 sb = new SolidBrush(Color.Pink);
-                g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+                //g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+
+                p = new Pen(Color.Pink, 3);
+                //g.DrawEllipse(p, x_st, y_st, w - dd * 2, h - dd * 2);
+                g.DrawLine(p, x_st, y_st, x_st + w - dd * 2, y_st + h - dd * 2);
+                g.DrawLine(p, x_st + w - dd * 2, y_st, x_st, y_st + h - dd * 2);
+
+
             }
             pictureBox1.Image = bitmap1;
         }
@@ -552,8 +569,17 @@ namespace vcs_OXGame
                     {
                         richTextBox1.Text += "共走了 " + (select_steps_a.Count + select_steps_b.Count).ToString() + " 步\t";
                         richTextBox1.Text += "PC方共走了 " + select_steps_a.Count.ToString() + " 步\n";
+
+                        if ((select_steps_a.Count + select_steps_b.Count) >= 9)
+                        {
+                            richTextBox1.Text += "平手\n";
+                            isRunning = false;
+                            return;
+                        }
+
                         current_user = 1 - current_user;
                         label2.Text = "輪到 PC";
+                        draw_user(current_user);
                         /*
                         if (current_user == 0)
                         {
@@ -624,8 +650,17 @@ namespace vcs_OXGame
                     {
                         richTextBox1.Text += "共走了 " + (select_steps_a.Count + select_steps_b.Count).ToString() + " 步\t";
                         richTextBox1.Text += "USER方共走了 " + select_steps_b.Count.ToString() + " 步\n";
+
+                        if ((select_steps_a.Count + select_steps_b.Count) >= 9)
+                        {
+                            richTextBox1.Text += "平手\n";
+                            isRunning = false;
+                            return;
+                        }
+
                         current_user = 1 - current_user;
                         label2.Text = "輪到 USER";
+                        draw_user(current_user);
                         /*
                         if (current_user == 0)
                         {
@@ -662,6 +697,31 @@ namespace vcs_OXGame
             }
 
 
+        }
+
+        void draw_user(int current_user)
+        {
+            int W = pictureBox2.Width;
+            int H = pictureBox2.Height;
+            int x_st = 0;
+            int y_st = 0;
+            int dd = 3;
+            g2.Clear(Color.White);
+
+            if (current_user == 0)
+            {
+                p = new Pen(Color.Lime, 3);
+                g2.DrawEllipse(p, x_st + dd, y_st + dd, W - dd * 2, H - dd * 2);
+
+
+            }
+            else
+            {
+                p = new Pen(Color.Pink, 3);
+                g2.DrawLine(p, x_st + dd, y_st + dd, x_st + W - dd * 2, y_st + H - dd * 2);
+                g2.DrawLine(p, x_st + W - dd, y_st + dd, x_st + dd, y_st + H - dd * 2);
+            }
+            pictureBox2.Image = bitmap2;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -737,6 +797,7 @@ namespace vcs_OXGame
             {
                 label2.Text = "輪到 PC";
             }
+            draw_user(current_user);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -762,7 +823,7 @@ namespace vcs_OXGame
 
                 if (steps.Count > 0)
                 {
-                    richTextBox1.Text += "目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
+                    richTextBox1.Text += "pc目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
                     for (i = 0; i < steps.Count; i++)
                     {
                         richTextBox1.Text += steps[i].ToString() + "  ";
@@ -784,7 +845,7 @@ namespace vcs_OXGame
                 //1. 檢查每一步，若必能贏，就直接下
                 if (steps.Count > 0)
                 {
-                    richTextBox1.Text += "目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
+                    richTextBox1.Text += "bb目前可走步數 " + steps.Count.ToString() + " 步, 分別測試:\n";
                     for (i = 0; i < steps.Count; i++)
                     {
                         richTextBox1.Text += "測試項目 " + steps[i].ToString() + "\n";
