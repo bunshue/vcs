@@ -84,7 +84,18 @@
             this.button49 = new System.Windows.Forms.Button();
             this.button50 = new System.Windows.Forms.Button();
             this.button51 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt6 = new System.Windows.Forms.Button();
+            this.bt4 = new System.Windows.Forms.Button();
+            this.bt2 = new System.Windows.Forms.Button();
+            this.bt3 = new System.Windows.Forms.Button();
+            this.bt1 = new System.Windows.Forms.Button();
+            this.bt0 = new System.Windows.Forms.Button();
+            this.bt5 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
+            this.bt7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -99,7 +110,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 404);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(448, 215);
+            this.richTextBox1.Size = new System.Drawing.Size(469, 215);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -116,16 +127,15 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(502, 559);
+            this.button2.Location = new System.Drawing.Point(487, 490);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(60, 60);
             this.button2.TabIndex = 3;
-            this.button2.Text = "clear";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.BackgroundImage = global::vcs_Draw7_MyIcon.Properties.Resources.save;
             this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button3.Location = new System.Drawing.Point(553, 277);
             this.button3.Name = "button3";
@@ -185,7 +195,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(60, 60);
             this.button8.TabIndex = 9;
-            this.button8.Text = "轉成ico";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -195,7 +204,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(60, 60);
             this.button9.TabIndex = 10;
-            this.button9.Text = "開啟圖檔";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -209,15 +217,13 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(60, 60);
             this.button10.TabIndex = 11;
-            this.button10.Text = "轉成ico";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
-            this.button11.BackgroundImage = global::vcs_Draw7_MyIcon.Properties.Resources.folder_open;
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button11.Location = new System.Drawing.Point(502, 473);
+            this.button11.Location = new System.Drawing.Point(487, 415);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(60, 60);
             this.button11.TabIndex = 12;
@@ -293,22 +299,20 @@
             // button18
             // 
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button18.Location = new System.Drawing.Point(619, 415);
+            this.button18.Location = new System.Drawing.Point(553, 415);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(60, 28);
+            this.button18.Size = new System.Drawing.Size(60, 60);
             this.button18.TabIndex = 19;
-            this.button18.Text = "前景色";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
             this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button19.Location = new System.Drawing.Point(619, 447);
+            this.button19.Location = new System.Drawing.Point(553, 497);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(60, 28);
+            this.button19.Size = new System.Drawing.Size(60, 60);
             this.button19.TabIndex = 20;
-            this.button19.Text = "背景色";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -664,11 +668,124 @@
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt7);
+            this.groupBox1.Controls.Add(this.bt5);
+            this.groupBox1.Controls.Add(this.bt6);
+            this.groupBox1.Controls.Add(this.bt4);
+            this.groupBox1.Controls.Add(this.bt2);
+            this.groupBox1.Controls.Add(this.bt3);
+            this.groupBox1.Controls.Add(this.bt1);
+            this.groupBox1.Controls.Add(this.bt0);
+            this.groupBox1.Location = new System.Drawing.Point(905, 103);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(459, 131);
+            this.groupBox1.TabIndex = 53;
+            this.groupBox1.TabStop = false;
+            // 
+            // bt6
+            // 
+            this.bt6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt6.Location = new System.Drawing.Point(382, 36);
+            this.bt6.Name = "bt6";
+            this.bt6.Size = new System.Drawing.Size(60, 60);
+            this.bt6.TabIndex = 56;
+            this.bt6.UseVisualStyleBackColor = true;
+            this.bt6.Click += new System.EventHandler(this.bt6_Click);
+            // 
+            // bt4
+            // 
+            this.bt4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt4.Location = new System.Drawing.Point(270, 36);
+            this.bt4.Name = "bt4";
+            this.bt4.Size = new System.Drawing.Size(60, 60);
+            this.bt4.TabIndex = 55;
+            this.bt4.Text = "前景色";
+            this.bt4.UseVisualStyleBackColor = true;
+            this.bt4.Click += new System.EventHandler(this.bt4_Click);
+            // 
+            // bt2
+            // 
+            this.bt2.Location = new System.Drawing.Point(138, 39);
+            this.bt2.Name = "bt2";
+            this.bt2.Size = new System.Drawing.Size(60, 60);
+            this.bt2.TabIndex = 54;
+            this.bt2.Text = "轉成ico";
+            this.bt2.UseVisualStyleBackColor = true;
+            this.bt2.Click += new System.EventHandler(this.bt2_Click);
+            // 
+            // bt3
+            // 
+            this.bt3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt3.Location = new System.Drawing.Point(204, 39);
+            this.bt3.Name = "bt3";
+            this.bt3.Size = new System.Drawing.Size(60, 60);
+            this.bt3.TabIndex = 54;
+            this.bt3.Text = "轉成ico";
+            this.bt3.UseVisualStyleBackColor = true;
+            this.bt3.Click += new System.EventHandler(this.bt3_Click);
+            // 
+            // bt1
+            // 
+            this.bt1.BackgroundImage = global::vcs_Draw7_MyIcon.Properties.Resources.save;
+            this.bt1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt1.Location = new System.Drawing.Point(72, 39);
+            this.bt1.Name = "bt1";
+            this.bt1.Size = new System.Drawing.Size(60, 60);
+            this.bt1.TabIndex = 54;
+            this.bt1.UseVisualStyleBackColor = true;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
+            // 
+            // bt0
+            // 
+            this.bt0.Location = new System.Drawing.Point(6, 39);
+            this.bt0.Name = "bt0";
+            this.bt0.Size = new System.Drawing.Size(60, 60);
+            this.bt0.TabIndex = 54;
+            this.bt0.Text = "開啟圖檔";
+            this.bt0.UseVisualStyleBackColor = true;
+            this.bt0.Click += new System.EventHandler(this.bt0_Click);
+            // 
+            // bt5
+            // 
+            this.bt5.Location = new System.Drawing.Point(336, 36);
+            this.bt5.Name = "bt5";
+            this.bt5.Size = new System.Drawing.Size(60, 60);
+            this.bt5.TabIndex = 57;
+            this.bt5.Text = "背景色";
+            this.bt5.UseVisualStyleBackColor = true;
+            this.bt5.Click += new System.EventHandler(this.bt5_Click);
+            // 
+            // button0
+            // 
+            this.button0.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button0.BackgroundImage")));
+            this.button0.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button0.Location = new System.Drawing.Point(487, 559);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(60, 60);
+            this.button0.TabIndex = 54;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // bt7
+            // 
+            this.bt7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt7.Location = new System.Drawing.Point(336, 65);
+            this.bt7.Name = "bt7";
+            this.bt7.Size = new System.Drawing.Size(60, 60);
+            this.bt7.TabIndex = 58;
+            this.bt7.Text = "clear";
+            this.bt7.UseVisualStyleBackColor = true;
+            this.bt7.Click += new System.EventHandler(this.bt7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 631);
+            this.ClientSize = new System.Drawing.Size(1428, 631);
+            this.Controls.Add(this.button0);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button51);
             this.Controls.Add(this.button50);
             this.Controls.Add(this.button49);
@@ -723,8 +840,10 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "製作Icon";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -786,6 +905,16 @@
         private System.Windows.Forms.Button button49;
         private System.Windows.Forms.Button button50;
         private System.Windows.Forms.Button button51;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt1;
+        private System.Windows.Forms.Button bt0;
+        private System.Windows.Forms.Button bt2;
+        private System.Windows.Forms.Button bt3;
+        private System.Windows.Forms.Button bt4;
+        private System.Windows.Forms.Button bt6;
+        private System.Windows.Forms.Button bt5;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button bt7;
     }
 }
 

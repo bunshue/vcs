@@ -28,8 +28,6 @@ namespace vcs_Draw7_MyIcon
         {
             InitializeComponent();
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            button18.BackColor = foreground_color;
-            button19.BackColor = background_color;
             p = new Pen(foreground_color, 3);
             sb = new SolidBrush(foreground_color);
         }
@@ -66,28 +64,6 @@ namespace vcs_Draw7_MyIcon
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                bitmap1.Save(@filename2, ImageFormat.Bmp);
-                bitmap1.Save(@filename3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -236,78 +212,11 @@ namespace vcs_Draw7_MyIcon
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                richTextBox1.Text += "無圖片資料\n";
-                return;
-            }
-
-            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
-            Size size = new Size(128, 128);
-            //獲得原始圖片文件
-            //using (Bitmap bm = new Bitmap(FileName))
-            {
-                //從現有的圖像縮小, 為了得到合適的icon文件
-                using (Bitmap iconBm = new Bitmap(bitmap1, size))
-                {
-                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
-                    {
-                        string icon_filename = "C://______test_files//" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
-                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
-                        {
-                            icon.Save(stream);
-                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
-                        }
-                    }
-                }
-            }
-
-        
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
-            //openFileDialog1.Filter = "BMP|*.bmp|JPG|*.jpg|PNG|*.png|GIF|*.gif";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                FileName = this.openFileDialog1.FileName.Trim();
-                richTextBox1.Text += FileName + "\n";
-                pictureBox1.ImageLocation = openFileDialog1.FileName;
-            }
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            if (FileName == "")
-            {
-                richTextBox1.Text += "未選取圖片\n";
-                return;
-            }
-            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
-            Size size = new Size(256,256);
-            //獲得原始圖片文件
-            using (Bitmap bm = new Bitmap(FileName))
-            {
-                //從現有的圖像縮小, 為了得到合適的icon文件
-                using (Bitmap iconBm = new Bitmap(bm, size))    //硬是把大圖縮成小圖
-                {
-                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
-                    {
-                        string icon_filename = "C://______test_files//" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
-                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
-                        {
-                            icon.Save(stream);
-                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
-                        }
-                    }
-                }
-            }
+      
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("C://______test_files//");
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -532,25 +441,6 @@ namespace vcs_Draw7_MyIcon
             g.FillRectangle(sb, new Rectangle(width / 8 + width / 8, height * 2 / 8, width / 8, height / 2));
             pictureBox1.Image = bitmap1;
 
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                foreground_color = colorDialog1.Color;
-                sb = new SolidBrush(foreground_color);
-                button18.BackColor = foreground_color;
-            }
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                background_color = colorDialog1.Color;
-                button19.BackColor = background_color;
-            }
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1898,5 +1788,357 @@ namespace vcs_Draw7_MyIcon
 
             pictureBox1.Image = bitmap1;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            x_st = 500;
+            y_st = 10;
+            groupBox1.Location = new Point(x_st - 10, y_st);
+            groupBox1.ClientSize = new Size(65*8+12, 80);
+
+            x_st = 10;
+            y_st = 13;
+            dx = 65;
+            dy = 65;
+            bt0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+
+            //button
+            x_st = 500;
+            y_st = 100;
+            dx = 65;
+            dy = 65;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            button7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button11.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button13.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            button15.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button20.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button21.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button22.Location = new Point(x_st + dx * 6, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button29.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button30.Location = new Point(x_st + dx * 6, y_st + dy * 3);
+            button31.Location = new Point(x_st + dx * 7, y_st + dy * 3);
+
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button36.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button37.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+            button38.Location = new Point(x_st + dx * 6, y_st + dy * 4);
+            button39.Location = new Point(x_st + dx * 7, y_st + dy * 4);
+
+            button40.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button41.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button44.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button45.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            button46.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            button47.Location = new Point(x_st + dx * 7, y_st + dy * 5);
+
+            button48.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button49.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button50.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button51.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            //button52.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            //button53.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+
+
+            //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            //richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+
+            pictureBox1.Location = new Point(10, 10);
+
+            this.Size = new Size(1100, this.Size.Height);
+        }
+
+        private void bt0_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";
+            //openFileDialog1.Filter = "BMP|*.bmp|JPG|*.jpg|PNG|*.png|GIF|*.gif";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                FileName = this.openFileDialog1.FileName.Trim();
+                richTextBox1.Text += FileName + "\n";
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
+            }
+        }
+
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                bitmap1.Save(@filename2, ImageFormat.Bmp);
+                bitmap1.Save(@filename3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+        }
+
+        private void bt2_Click(object sender, EventArgs e)
+        {
+            if (FileName == "")
+            {
+                richTextBox1.Text += "未選取圖片\n";
+                return;
+            }
+            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
+            Size size = new Size(256, 256);
+            //獲得原始圖片文件
+            using (Bitmap bm = new Bitmap(FileName))
+            {
+                //從現有的圖像縮小, 為了得到合適的icon文件
+                using (Bitmap iconBm = new Bitmap(bm, size))    //硬是把大圖縮成小圖
+                {
+                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
+                    {
+                        string icon_filename = Application.StartupPath + "\\ICO_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
+                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
+                        {
+                            icon.Save(stream);
+                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
+                        }
+                    }
+                }
+            }
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "無圖片資料\n";
+                return;
+            }
+
+            //圖示中包含的圖片常見尺寸有16×16（小圖示）、32×32、48×48，另外24×24、64×64、128×128也比較常見。
+            Size size = new Size(128, 128);
+            //獲得原始圖片文件
+            //using (Bitmap bm = new Bitmap(FileName))
+            {
+                //從現有的圖像縮小, 為了得到合適的icon文件
+                using (Bitmap iconBm = new Bitmap(bitmap1, size))
+                {
+                    using (Icon icon = Icon.FromHandle(iconBm.GetHicon()))
+                    {
+                        string icon_filename = Application.StartupPath + "\\ICO_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".ico";
+                        using (Stream stream = new System.IO.FileStream(icon_filename, System.IO.FileMode.Create))
+                        {
+                            icon.Save(stream);
+                            richTextBox1.Text += "轉換成功, 路徑是 : " + icon_filename + "\n";
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private void bt4_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foreground_color = colorDialog1.Color;
+                sb = new SolidBrush(foreground_color);
+                button18.BackColor = foreground_color;
+            }
+        }
+
+        private void bt5_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                background_color = colorDialog1.Color;
+                button19.BackColor = background_color;
+            }
+
+        }
+
+        private void bt6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+            int s = 5;
+
+            width = 160;
+            height = 160;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(foreground_color, 8);
+            p.StartCap = System.Drawing.Drawing2D.LineCap.Square;
+
+            Point pointa;
+            Point pointb;
+
+            pointa = new Point(width * 0 / 4 + 10, height / 3+s);
+            pointb = new Point(width * 4 / 4 - 10, height / 3-s);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 0 / 4 + 10, height * 2 / 3+s);
+            pointb = new Point(width * 4 / 4 - 10, height * 2 / 3-s);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 1 / 3, height * 0 / 4 + 10);
+            pointb = new Point(width * 1 / 3, height * 4 / 4 - 10);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(width * 2 / 3, height * 0 / 4 + 10);
+            pointb = new Point(width * 2 / 3, height * 4 / 4 - 10);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            int r = 15;
+            int cx;
+            int cy;
+            p = new Pen(foreground_color, 6);
+
+            cx = width / 6;
+            cy = height / 6;
+            DrawCircle(g, p, cx, cy, r);
+
+            cx = width * 5 / 6;
+            cy = height * 5 / 6;
+            DrawCircle(g, p, cx, cy, r);
+
+            cx = width / 6;
+            cy = height * 5 / 6;
+            DrawCross(g, p, cx, cy, r);
+
+            cx = width * 3 / 6;
+            cy = height * 3 / 6;
+            DrawCross(g, p, cx, cy, r);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        void DrawCircle(Graphics g, Pen p, int cx, int cy, int r)
+        {
+            g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
+        }
+
+        void DrawCross(Graphics g, Pen p, int cx, int cy, int r)
+        {
+            //g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
+            Point pointa;
+            Point pointb;
+
+            pointa = new Point(cx + r, cy - r);
+            pointb = new Point(cx - r, cy + r);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+            pointa = new Point(cx - r, cy - r);
+            pointb = new Point(cx + r, cy + r);
+            g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+
+        }
+
     }
 }
