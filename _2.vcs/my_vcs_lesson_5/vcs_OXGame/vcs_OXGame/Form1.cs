@@ -547,6 +547,12 @@ namespace vcs_OXGame
                     if (result == 1)
                     {
                         richTextBox1.Text += "勝負已分\tUSER勝";
+
+                        SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 0, 255, 0));
+                        g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+                        button5.Text = "重玩";
+
+
                         /*
                         if (radioButton1.Checked == true)
                         {
@@ -628,6 +634,13 @@ namespace vcs_OXGame
                     if (result == 1)
                     {
                         richTextBox1.Text += "勝負已分\tPC勝";
+
+                        SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 255, 0, 0));
+                        g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+
+                        button5.Text = "重玩";
+
+
                         /*
                         if (radioButton1.Checked == true)
                         {
@@ -807,6 +820,7 @@ namespace vcs_OXGame
             button5.Enabled = false;
             groupBox1.Enabled = true;
             label2.Text = "";
+            button5.Text = "放棄";
         }
 
         private void button6_Click(object sender, EventArgs e)

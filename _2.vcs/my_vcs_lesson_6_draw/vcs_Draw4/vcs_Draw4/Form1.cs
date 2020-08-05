@@ -434,32 +434,6 @@ namespace vcs_Draw4
             }
         }
 
-        private void button21_Click(object sender, EventArgs e)
-        {
-            Pen pen = new Pen(Color.Black, 8);
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
-
-            g.DrawLine(pen, 50, 400, 50, 100);  //畫出X軸及y軸
-            g.DrawLine(pen, 50, 400, 350, 400);
-
-            pen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
-            //pp.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; //DashStyle設定線條 點
-            //pp.StartCap = System.Drawing.Drawing2D.LineCap.RoundAnchor; //設定為圓頭
-
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-
-            //gg.DrawLine(pp, 50, 50, 250, 250);//只畫一條
-            g.DrawLines(pen, new Point[] {//一次畫好多條
-            new Point(70,350),
-            new Point(100,280),
-            new Point(120,300),
-            new Point(200,220),
-            new Point(250,260),
-            new Point(340,150)});
-
-
-        }
-
         private void button32_Click(object sender, EventArgs e)
         {
             Point[] pt = new Point[360];    //一維陣列內有360個Point
@@ -568,21 +542,6 @@ namespace vcs_Draw4
 
         }
 
-        private void button26_Click(object sender, EventArgs e)
-        {
-            //同心圓
-            g.DrawString("這是一組同心圓", this.Font, Brushes.Black, 10, 20);
-            Pen p1 = new Pen(Color.Red);
-            Pen p2 = new Pen(Color.Purple);
-            Pen p3 = new Pen(Color.Blue);
-            Pen p4 = new Pen(Color.Green);
-            g.DrawEllipse(p1, 120 - 80, 120 - 80, 80 * 2, 80 * 2);
-            g.DrawEllipse(p2, 120 - 60, 120 - 60, 60 * 2, 60 * 2);
-            g.DrawEllipse(p3, 120 - 40, 120 - 40, 40 * 2, 40 * 2);
-            g.DrawEllipse(p4, 120 - 20, 120 - 20, 20 * 2, 20 * 2);
-
-        }
-
         private void button25_Click(object sender, EventArgs e)
         {
 
@@ -633,23 +592,6 @@ namespace vcs_Draw4
 
             // Draw image to screen.
             g.DrawImage(newImage, x, y);
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            int intLocation, intHeight;//定义两个int型的变量intLocation、intHeight 
-            intLocation = this.ClientRectangle.Location.Y;//为变量intLocation赋值
-            intHeight = this.ClientRectangle.Height / 200;//为变量intHeight赋值
-
-            for (int i = 255; i >= 0; i--)
-            {
-                Color color = new Color();
-                color = Color.FromArgb(1, i, 100);
-                SolidBrush SBrush = new SolidBrush(color);
-                Pen p = new Pen(SBrush, 1);
-                g.DrawLine(p, 400, 50 + i, 500, 50 + i);
-            }
 
         }
 
@@ -767,99 +709,6 @@ namespace vcs_Draw4
                 g.DrawString(i.ToString(), f, sb, 250.0F, 50.0F + 50 * i);
             }
 
-
-        }
-
-        private void DrawPacman(int center_x, int center_y, int radius)
-        {
-            // Create a Graphics object for the Control.
-            //Graphics g = pictureBox1.CreateGraphics();
-
-            // Create a new brush.
-            Brush brush = new SolidBrush(Color.Blue);
-
-            g.FillPie(brush, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2), 320, -280);
-
-            //Dispose of the brush.
-            brush.Dispose();
-        }
-
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            int center_x = 300;
-            int center_y = 300;
-            int radius = 200;
-            DrawPacman(center_x, center_y, radius);
-
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            Bitmap bmp;
-            SolidBrush brush;
-            Pen pen;
-
-            float ratio_x, ratio_y;
-            float wid, hei;
-            float x0, x1, y0, y1;
-
-            //----畫筆顏色----
-            pen = new Pen(Color.Black);
-            brush = new SolidBrush(pen.Color);
-            //----取得picturebox寬度與高度----
-            wid = pictureBox1.Width;
-            hei = pictureBox1.Height;
-            //----是否有上一次的圖片，如果有就清除----
-            if (pictureBox1.Image != null)
-                pictureBox1.Image = null;
-            //if (bmp != null)
-            //  bmp.Dispose();
-            //----轉換使用者輸入的資料----
-            x0 = (float)10;
-            y0 = (float)10;
-            x1 = (float)-5;
-            y1 = (float)-9;
-            //----計算放大倍率----
-            ratio_x = (wid - 50) / 20;
-            ratio_y = (hei - 50) / 20;
-            //----開新的Bitmap----
-            bmp = new Bitmap((int)wid, (int)hei);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bmp);
-            //----清除Bitmap為某顏色----
-            g.Clear(Color.White);
-            //----更改原點位置----
-            g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            //----畫坐標軸----
-            g.DrawLine(pen, -1000, 0, 1000, 0);//x軸
-            g.DrawLine(pen, 0, -1000, 0, 1000);//y軸
-            g.DrawString("X", this.Font, brush, wid / 2 - 20, 20);
-            g.DrawString("Y", this.Font, brush, 20, -hei / 2);
-            g.DrawLine(pen, wid / 2, 0, wid / 2 - 10, 5);//x軸箭頭
-            g.DrawLine(pen, wid / 2, 0, wid / 2 - 10, -5);
-            g.DrawLine(pen, 0, -hei / 2, 5, -hei / 2 + 10);//y軸箭頭
-            g.DrawLine(pen, 0, -hei / 2, -5, -hei / 2 + 10);
-            for (int i = -10; i <= 10; i++)//畫X Y軸座標位置
-            {
-                g.DrawLine(pen, i * ratio_x, -5, i * ratio_x, 5);
-                g.DrawString(i.ToString().PadLeft(2, ' '), this.Font, brush, i * ratio_x - 9, 10);
-                g.DrawLine(pen, -5, i * ratio_y, 5, i * ratio_y);
-                if (i != 0)
-                    g.DrawString(i.ToString(), this.Font, brush, 15, i * ratio_y - 8);
-            }
-            //----換顏色----
-            pen = new Pen(Color.Red);
-            brush = new SolidBrush(pen.Color);
-            //----畫線----
-            g.DrawLine(pen, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
-            //----畫兩點----
-            g.FillEllipse(brush, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
-            g.FillEllipse(brush, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
-            //----釋放Graphics資源----
-            g.Dispose();
-            //----將Bitmap顯示在Picture上
-            pictureBox1.Image = bmp;
 
         }
 
@@ -993,5 +842,6 @@ new Point(50, 30)};
             //Draw the path to the screen.
             g.FillPath(Brushes.Black, myPath);
         }
+
     }
 }

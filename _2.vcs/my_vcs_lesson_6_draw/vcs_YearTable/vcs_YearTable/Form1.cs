@@ -243,6 +243,7 @@ namespace vcs_YearTable
         private const int PERSON_DATA_2 = 0x12;   //person data 2, Ming
         private const int PERSON_DATA_3 = 0x13;   //person data 3, Ching
         private const int PERSON_DATA_GREAT = 0x20;   //person data, 有名的人
+        private const int PERSON_DATA_MODERN = 0x21;   //person data, 近現人物
 
         private const int LEADER_DATA_0 = 0x00;      //leader data 0, 隋唐
         private const int LEADER_DATA_1 = 0x01;      //leader data 1, 明末
@@ -462,6 +463,28 @@ namespace vcs_YearTable
                 //{ "xxxxx", "xxxxx", "xxxxx" , "xxxxxx"},
                 //{ "xxxxx", "xxxxx", "xxxxx" , "xxxxxx"},
                 };
+
+            }
+            else if (index == PERSON_DATA_MODERN)
+            {
+                person = new string[,] { 
+                { "卡爾·馬克思(Karl Marx)", "1818年5月5日", "1883年3月14日", "猶太裔德國"},
+                { "恩格斯", "1820年11月28日", "1895年8月5日" , "德國"},
+                { "胡適", "1891年12月17日", "1962年2月24日", "中國"},
+
+                //中方 溥儀載灃奕劻汪精衛胡漢民
+                //國方 蔣介石陳誠孫文何應欽蔣經國四大家族
+                //共方 毛澤東十大元帥江青 附共者
+                //蘇聯 列寧 史達林 赫魯雪夫
+                //美國
+                //其他國
+
+                { "約翰·杜威(John Dewey)", "1859年10月20日", "1952年6月1日", "美國"},
+
+                //{ "xxxxx", "xxxxx", "xxxxx" , "xxxxxx"},
+                //{ "xxxxx", "xxxxx", "xxxxx" , "xxxxxx"},
+                };
+
 
             }
             else
@@ -1377,6 +1400,11 @@ namespace vcs_YearTable
         private void button3_Click(object sender, EventArgs e)
         {
             draw_leader_data(LEADER_DATA_0);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_MODERN);
         }
 
     }
