@@ -229,14 +229,16 @@ namespace vcs_Draw9_Example
             pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
 
             //gg.DrawLine(pp, 50, 50, 250, 250);//只畫一條
-            g.DrawLines(pen, new Point[] {//一次畫好多條
+            g.DrawLines(pen, new Point[]
+            {//一次畫好多條
             new Point(70,350),
             new Point(100,280),
             new Point(120,300),
             new Point(200,220),
             new Point(250,260),
-            new Point(340,150)});
-
+            new Point(340,150)
+            }
+            );
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -260,6 +262,25 @@ namespace vcs_Draw9_Example
 
         private void button6_Click(object sender, EventArgs e)
         {
+            Brush bb = new SolidBrush(Color.Orange);
+            g.FillRectangle(bb, 70, 70, 200, 100);
+            //畫出一個填滿的方框
+
+            Pen pp = new Pen(Color.Black, 4);
+            g.DrawRectangle(pp, 70, 70, 200, 100);
+            //在同樣起點畫出黑色的長方型線，即實現加外框            
+
+
+            Random rr = new Random();
+            Brush db;
+            for (int i = 1; i <= 7; i++)
+            {
+                db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
+                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
+
+                g.FillRectangle(db, 70 + (i * 40), 70 + (i * 40), 200, 100);
+                //畫布上畫出方框，每次位置的X及Y值都加70，以實現往右下角移動
+            }
 
         }
 

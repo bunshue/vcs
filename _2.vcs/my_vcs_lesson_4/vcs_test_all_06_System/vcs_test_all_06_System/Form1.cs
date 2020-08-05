@@ -316,12 +316,21 @@ namespace vcs_test_all_06_System
 
         private void button21_Click(object sender, EventArgs e)
         {
+            checkSuperuser chk = new checkSuperuser();
+            chk.ShowDialog();
 
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-
+            // 找出字體大小,並算出比例
+            // 取出螢幕DPI值
+            float dpiX, dpiY;
+            Graphics graphics = this.CreateGraphics();
+            dpiX = graphics.DpiX;
+            dpiY = graphics.DpiY;
+            richTextBox1.Text += "dpiX = " + dpiX.ToString() + "\n";
+            richTextBox1.Text += "dpiY = " + dpiY.ToString() + "\n";
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -399,6 +408,16 @@ namespace vcs_test_all_06_System
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //列印出所有的編碼方式
+            StringBuilder sb = new StringBuilder();
+            foreach (EncodingInfo ei in Encoding.GetEncodings())
+            {
+                sb.Append(ei.CodePage).Append("\t")
+                    .Append(ei.Name).Append("\t")
+                    .Append(ei.DisplayName).Append("\r\n");
+            }
+
+            richTextBox1.Text += sb.ToString() + "\n";
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -441,6 +460,17 @@ namespace vcs_test_all_06_System
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //C# 如何產生 GUID?
+            //可以直接透過內建方法，產生 GUID
+
+            Guid guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID1 : " + guid + "\n";
+
+            guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID2 : " + guid + "\n";
+
+            guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID3 : " + guid + "\n";
 
 
         }

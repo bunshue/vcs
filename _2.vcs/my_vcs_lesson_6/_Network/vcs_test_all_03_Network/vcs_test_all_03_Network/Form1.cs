@@ -86,10 +86,13 @@ namespace vcs_test_all_03_Network
         {
             //網路連線狀態
             if (IsConnectedToInternet())
-                MessageBox.Show("已連接在網上!", "提示");
+            {
+                richTextBox1.Text += "已連接在網上!\n";
+            }
             else
-                MessageBox.Show("未連接在網上!!", "提示"); 
-
+            {
+                richTextBox1.Text += "未連接在網上!!\n";
+            }
         }
 
         string pic1 = "http://www.myson.com.tw/images/index/ad01.jpg";
@@ -162,9 +165,8 @@ namespace vcs_test_all_03_Network
             catch (WebException we)
             {
                 // add some kind of error processing
-                MessageBox.Show(we.ToString());
+                richTextBox1.Text += we.ToString() + "n";
             }
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -230,6 +232,31 @@ namespace vcs_test_all_03_Network
             richTextBox1.Text += HTML;
             //Console.WriteLine(HTML);
 
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //C# 網路連線檢查
+            //C# 可以實作 ping 網路連線檢查
+            //INIT PING OBJECT
+            System.Net.NetworkInformation.Ping objPing = new System.Net.NetworkInformation.Ping();
+
+            try
+            {
+                //設定測試連線及逾時時間
+                System.Net.NetworkInformation.PingReply PingResult = objPing.Send("www.google.com.tw", 5000);
+
+                //取得結果
+                string pingMsg = (PingResult.Status == System.Net.NetworkInformation.IPStatus.Success) ? "連線成功" : "無法連線";
+
+                richTextBox1.Text += pingMsg + "\n";
+
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
 
         }
 

@@ -24,10 +24,12 @@ namespace vcs_DriveInfo
         private void HDD_Scan()
         {
             comboBox_drive.Items.Clear();   //Clear All items in Combobox
+
+            //使用 DriveInfo 類別來顯示目前系統上所有磁片磁碟機的相關資訊
             DriveInfo[] drives = DriveInfo.GetDrives();
-            foreach (DriveInfo drive in drives)
+            foreach (DriveInfo d in drives)
             {
-                comboBox_drive.Items.Add(drive.ToString());
+                comboBox_drive.Items.Add(d.Name);
             }
 
             /*   same
@@ -93,7 +95,7 @@ namespace vcs_DriveInfo
         private void comboBox_drive_SelectedIndexChanged(object sender, EventArgs e)
         {
             richTextBox1.Text += "選中 : " + comboBox_drive.Text + "\n";
-            richTextBox1.Clear();
+            //richTextBox1.Clear();
             //DriveInfo drive = new DriveInfo(comboBox_drive.Text); //same
             DriveInfo drive = new DriveInfo(comboBox_drive.SelectedItem.ToString());
             if (drive.IsReady == true)
@@ -134,7 +136,7 @@ namespace vcs_DriveInfo
             //引用System.IO後即可調用DriveInfo類來對磁碟空間資訊進行遍歷了，此外DriveInfo只有在普通WINFORM中可以調用，WINCE專案中未封裝此類。
             //獲取磁片設備
             DriveInfo[] allDrives = DriveInfo.GetDrives();
-            richTextBox1.Text = "系統共有 " + allDrives.Length.ToString() + " 部磁碟機" + "\n";
+            richTextBox1.Text += "系統共有 " + allDrives.Length.ToString() + " 部磁碟機" + "\n";
             //遍歷磁片
             foreach (DriveInfo drive in allDrives)
             {

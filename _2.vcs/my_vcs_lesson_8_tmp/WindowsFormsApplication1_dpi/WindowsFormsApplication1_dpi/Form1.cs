@@ -16,17 +16,6 @@ namespace WindowsFormsApplication1_dpi
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // 找出字體大小,並算出比例
-            float dpiX, dpiY;
-            Graphics graphics = this.CreateGraphics();
-            dpiX = graphics.DpiX;
-            dpiY = graphics.DpiY;
-            richTextBox1.Text += "dpiX = " + dpiX.ToString() + "\n";
-            richTextBox1.Text += "dpiY = " + dpiY.ToString() + "\n";
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             //this.Size = new Size(1920 *2, 1080 / 1);

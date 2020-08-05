@@ -56,29 +56,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
-            //C# 如何產生 GUID?
-            //可以直接透過內建方法，產生 GUID
-
-            Guid guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID1 : " + guid + "\n";
-
-            guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID2 : " + guid + "\n";
-
-            guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID3 : " + guid + "\n";
-
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            checkSuperuser chk = new checkSuperuser();
-            chk.ShowDialog();
-        }
     }
 
 

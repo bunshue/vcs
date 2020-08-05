@@ -289,7 +289,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(211, 42);
             this.button25.TabIndex = 25;
-            this.button25.Text = "xxx";
+            this.button25.Text = "列印出所有的編碼方式";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -307,11 +307,11 @@
             // button27
             // 
             this.button27.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(446, 60);
+            this.button27.Location = new System.Drawing.Point(446, 109);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(211, 42);
             this.button27.TabIndex = 27;
-            this.button27.Text = "xxx";
+            this.button27.Text = "取得螢幕DPI設定值";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -384,11 +384,11 @@
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(446, 109);
+            this.button21.Location = new System.Drawing.Point(446, 60);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(211, 42);
             this.button21.TabIndex = 45;
-            this.button21.Text = "xxx";
+            this.button21.Text = "管理模式測試";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -430,7 +430,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(211, 42);
             this.button16.TabIndex = 49;
-            this.button16.Text = "xxx";
+            this.button16.Text = "C# 產生 GUID";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

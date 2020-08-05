@@ -143,6 +143,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(102, 42);
             this.button6.TabIndex = 22;
+            this.button6.Text = "繪圖 矩型 ";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

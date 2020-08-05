@@ -25,36 +25,6 @@ namespace WindowsFormsApplication1drive
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //下列範例示範如何使用 DriveInfo 類別來顯示目前系統上所有磁片磁碟機的相關資訊。
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-
-            foreach (DriveInfo d in allDrives)
-            {
-                richTextBox1.Text +="Drive "+ d.Name+"\n";
-                richTextBox1.Text +="  Drive type: "+ d.DriveType+"\n";
-                if (d.IsReady == true)
-                {
-                    richTextBox1.Text +="  Volume label: "+ d.VolumeLabel+"\n";
-                    richTextBox1.Text +="  File system: "+ d.DriveFormat+"\n";
-                    richTextBox1.Text +=
-                    "  Available space to current user: "+
-                    d.AvailableFreeSpace+"bytes \n";
-
-                    richTextBox1.Text +=
-                    "  Total available space: "+
-                    d.TotalFreeSpace+"\n";
-
-                    richTextBox1.Text +=
-                    "  Total size of drive: "+
-                    d.TotalSize+"\n";
-                }
-            }
-
-        }
-
-
         public class Worker
         {
             /* Initializes a new instance of the ManualResetEvent class 
