@@ -42,6 +42,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -67,9 +68,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(572, 84);
+            this.button2.Location = new System.Drawing.Point(563, 84);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 40);
+            this.button2.Size = new System.Drawing.Size(60, 40);
             this.button2.TabIndex = 16;
             this.button2.Text = "show steps";
             this.button2.UseVisualStyleBackColor = true;
@@ -79,7 +80,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(486, 84);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 40);
+            this.button1.Size = new System.Drawing.Size(60, 40);
             this.button1.TabIndex = 15;
             this.button1.Text = "reset steps";
             this.button1.UseVisualStyleBackColor = true;
@@ -176,11 +177,22 @@
             this.pictureBox2.TabIndex = 24;
             this.pictureBox2.TabStop = false;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(646, 84);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(60, 40);
+            this.button7.TabIndex = 25;
+            this.button7.Text = "test";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 490);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -220,6 +232,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button button7;
     }
 }
 

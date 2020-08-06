@@ -67,6 +67,82 @@ namespace vcs_OXGame
 
         }
 
+        void draw_win(int current, int N)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = W / 3;
+            int h = H / 3;
+            int x_st = 0;
+            int y_st = 0;
+            int dd = 10;
+
+            if (N == 1)
+            {
+                x_st = dd;
+                y_st = dd;
+            }
+            else if (N == 2)
+            {
+                x_st = w + dd;
+                y_st = dd;
+            }
+            else if (N == 3)
+            {
+                x_st = w * 2 + dd;
+                y_st = dd;
+            }
+            else if (N == 4)
+            {
+                x_st = dd;
+                y_st = h + dd;
+            }
+            else if (N == 5)
+            {
+                x_st = w + dd;
+                y_st = h + dd;
+            }
+            else if (N == 6)
+            {
+                x_st = w * 2 + dd;
+                y_st = h + dd;
+            }
+            else if (N == 7)
+            {
+                x_st = dd;
+                y_st = h * 2 + dd;
+            }
+            else if (N == 8)
+            {
+                x_st = w + dd;
+                y_st = h * 2 + dd;
+            }
+            else if (N == 9)
+            {
+                x_st = w * 2 + dd;
+                y_st = h * 2 + dd;
+            }
+
+            //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            //richTextBox1.Text += "w = " + (w - dd * 2).ToString() + ", h = " + (h - dd * 2).ToString() + "\n";
+
+            richTextBox1.Text += "CCCCC\tcurrent_user = " + current.ToString() + "\n";
+
+            if (current == 0)
+            {
+                sb = new SolidBrush(Color.Lime);
+                g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+            }
+            else
+            {
+                sb = new SolidBrush(Color.Pink);
+                g.FillRectangle(sb, x_st, y_st, w - dd * 2, h - dd * 2);
+            }
+            pictureBox1.Image = bitmap1;
+
+
+        }
+
         void draw_item(int current, int N)
         {
             int W = pictureBox1.Width;
@@ -482,17 +558,17 @@ namespace vcs_OXGame
             {
                 if (x < (w - dd))
                 {
-                    richTextBox1.Text += "左上\n";
+                    //richTextBox1.Text += "左上\n";
                     N = 1;
                 }
                 else if (x < (w * 2 - dd))
                 {
-                    richTextBox1.Text += "中上\n";
+                    //richTextBox1.Text += "中上\n";
                     N = 2;
                 }
                 else
                 {
-                    richTextBox1.Text += "右上\n";
+                    //richTextBox1.Text += "右上\n";
                     N = 3;
                 }
             }
@@ -500,17 +576,17 @@ namespace vcs_OXGame
             {
                 if (x < (w - dd))
                 {
-                    richTextBox1.Text += "左中\n";
+                    //richTextBox1.Text += "左中\n";
                     N = 4;
                 }
                 else if (x < (w * 2 - dd))
                 {
-                    richTextBox1.Text += "中中\n";
+                    //richTextBox1.Text += "中中\n";
                     N = 5;
                 }
                 else
                 {
-                    richTextBox1.Text += "右中\n";
+                    //richTextBox1.Text += "右中\n";
                     N = 6;
                 }
             }
@@ -518,17 +594,17 @@ namespace vcs_OXGame
             {
                 if (x < (w - dd))
                 {
-                    richTextBox1.Text += "左下\n";
+                    //richTextBox1.Text += "左下\n";
                     N = 7;
                 }
                 else if (x < (w * 2 - dd))
                 {
-                    richTextBox1.Text += "中下\n";
+                    //richTextBox1.Text += "中下\n";
                     N = 8;
                 }
                 else
                 {
-                    richTextBox1.Text += "右下\n";
+                    //richTextBox1.Text += "右下\n";
                     N = 9;
                 }
             }
@@ -537,6 +613,12 @@ namespace vcs_OXGame
 
             if (current_user == 0)
             {
+                if (select_steps_b.Contains(N) == true)
+                {
+                    richTextBox1.Text += "別人已經走過, 重來\n";
+                    return;
+                }
+
                 if (select_steps_a.Contains(N) == false)
                 {
                     select_steps_a.Add(N);
@@ -623,6 +705,12 @@ namespace vcs_OXGame
             }
             else
             {
+                if (select_steps_a.Contains(N) == true)
+                {
+                    richTextBox1.Text += "別人已經走過, 重來\n";
+                    return;
+                }
+
                 if (select_steps_b.Contains(N) == false)
                 {
                     select_steps_b.Add(N);
@@ -815,12 +903,20 @@ namespace vcs_OXGame
 
         private void button5_Click(object sender, EventArgs e)
         {
-            isRunning = false;
-            button4.Enabled = true;
-            button5.Enabled = false;
-            groupBox1.Enabled = true;
-            label2.Text = "";
-            button5.Text = "放棄";
+            if (button5.Text == "重玩")
+            {
+                button4_Click(sender, e);
+                button5.Text = "放棄";
+            }
+            else
+            {
+                isRunning = false;
+                button4.Enabled = true;
+                button5.Enabled = false;
+                groupBox1.Enabled = true;
+                label2.Text = "";
+                button5.Text = "放棄";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -875,6 +971,7 @@ namespace vcs_OXGame
                         if (win == 1)
                         {
                             richTextBox1.Text += "下了 " + steps[i].ToString() + " 這步，立刻可贏\n";
+                            draw_win(current_user, steps[i]);
                             break;
                         }
 
@@ -903,6 +1000,14 @@ namespace vcs_OXGame
 
 
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            draw_win(0, 5);
+
+            draw_win(1, 7);
+
         }
 
     }

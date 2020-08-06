@@ -3581,7 +3581,7 @@ namespace imsLink
             {
                 tb_wait_sn_data.Visible = true;
                 lb_class.Visible = true;
-                cb_air_ng.Visible = true;
+                cb_air_ng.Visible = false;
                 cb_change_rank.Visible = true;
             }
             else
@@ -5859,6 +5859,34 @@ namespace imsLink
 
                     gg.DrawRectangle(PenStyle2, x_st, y_st, www, hhh);
                 }
+            }
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                //Pen p = new Pen(Color.Red);
+                SolidBrush sb = new SolidBrush(Color.Black);
+                Point[] points = new Point[3];
+                int dd = 90;
+                points[0] = new Point(0, 0);
+                points[1] = new Point(dd, 0);
+                points[2] = new Point(0, dd);
+                gg.FillPolygon(sb, points);
+                //gg.DrawPolygon(p, points);
+                points[0] = new Point(640 - 1 - dd, 0);
+                points[1] = new Point(640 - 1, 0);
+                points[2] = new Point(640 - 1, dd);
+                gg.FillPolygon(sb, points);
+                //gg.DrawPolygon(p, points);
+                points[0] = new Point(0, 480 - 1);
+                points[1] = new Point(0, 480 - 1 - dd);
+                points[2] = new Point(dd, 480 - 1);
+                gg.FillPolygon(sb, points);
+                //gg.DrawPolygon(p, points);
+                points[0] = new Point(640 - 1 - dd, 480 - 1);
+                points[1] = new Point(640 - 1, 480 - 1);
+                points[2] = new Point(640 - 1, 480 - 1 - dd);
+                gg.FillPolygon(sb, points);
+                //gg.DrawPolygon(p, points);
             }
 
             if (cb_show_time.Checked == true)
@@ -19926,53 +19954,56 @@ namespace imsLink
                     g.ReleaseHdc();
                 }
 
-                int x_st = 0;
-                int y_st = 0;
-
-                y_st = 450;
-
-                if (data_R > 0)
+                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                 {
-                    drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
-                    drawBrush = new SolidBrush(Color.Red);
-                    x_st = 430;
-                    g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
+                    int x_st = 0;
+                    int y_st = 0;
 
-                if (data_G > 0)
-                {
-                    drawBrush = new SolidBrush(Color.Green);
-                    x_st = 430 + 70;
-                    g.DrawString(data_G.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
+                    y_st = 450;
 
-                if (data_B > 0)
-                {
-                    drawBrush = new SolidBrush(Color.Blue);
-                    x_st = 430 + 140;
-                    g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
+                    if (data_R > 0)
+                    {
+                        drawFont1 = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                        drawBrush = new SolidBrush(Color.Red);
+                        x_st = 430;
+                        g.DrawString(data_R.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
 
-                if (lb_auto_awb_cnt.Visible == true)
-                {
-                    drawBrush = new SolidBrush(Color.Yellow);
-                    x_st = 430 - 70 * 2 - 60;
-                    g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
+                    if (data_G > 0)
+                    {
+                        drawBrush = new SolidBrush(Color.Green);
+                        x_st = 430 + 70;
+                        g.DrawString(data_G.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
 
-                if (cb_auto_search.Checked == true)
-                {
-                    drawBrush = new SolidBrush(Color.DarkBlue);
-                    x_st = 430 - 70 * 2 - 20;
-                    g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    if (data_B > 0)
+                    {
+                        drawBrush = new SolidBrush(Color.Blue);
+                        x_st = 430 + 140;
+                        g.DrawString(data_B.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
+
+                    if (lb_auto_awb_cnt.Visible == true)
+                    {
+                        drawBrush = new SolidBrush(Color.Yellow);
+                        x_st = 430 - 70 * 2 - 60;
+                        g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
+
+                    if (cb_auto_search.Checked == true)
+                    {
+                        drawBrush = new SolidBrush(Color.DarkBlue);
+                        x_st = 430 - 70 * 2 - 20;
+                        g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
+                    else
+                    {
+                        drawBrush = new SolidBrush(Color.DarkBlue);
+                        x_st = 430 - 70 * 2;
+                        g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                    }
+                    g.Dispose();
                 }
-                else
-                {
-                    drawBrush = new SolidBrush(Color.DarkBlue);
-                    x_st = 430 - 70 * 2;
-                    g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
-                }
-                g.Dispose();
 
                 String filename1 = string.Empty;
 
