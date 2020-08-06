@@ -634,6 +634,16 @@ namespace vcs_OXGame
                         g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
                         button5.Text = "重玩";
 
+                        string str = "USER勝";
+                        Font f = new Font("標楷體", 120);
+                        int tmp_width = 0;
+                        int tmp_height = 0;
+                        tmp_width = g.MeasureString(str, f).ToSize().Width;
+                        tmp_height = g.MeasureString(str, f).ToSize().Height;
+                        //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+                        sb = new SolidBrush(Color.Purple);
+                        g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+
 
                         /*
                         if (radioButton1.Checked == true)
@@ -661,6 +671,20 @@ namespace vcs_OXGame
                         if ((select_steps_a.Count + select_steps_b.Count) >= 9)
                         {
                             richTextBox1.Text += "平手\n";
+
+                            string str = "平手";
+                            Font f = new Font("標楷體", 120);
+                            int tmp_width = 0;
+                            int tmp_height = 0;
+                            tmp_width = g.MeasureString(str, f).ToSize().Width;
+                            tmp_height = g.MeasureString(str, f).ToSize().Height;
+                            //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+                            sb = new SolidBrush(Color.Purple);
+                            g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+
+                            button5.Text = "重玩";
+                            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 0, 0, 255));
+                            g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
                             isRunning = false;
                             return;
                         }
@@ -728,6 +752,15 @@ namespace vcs_OXGame
 
                         button5.Text = "重玩";
 
+                        string str = "PC勝";
+                        Font f = new Font("標楷體", 120);
+                        int tmp_width = 0;
+                        int tmp_height = 0;
+                        tmp_width = g.MeasureString(str, f).ToSize().Width;
+                        tmp_height = g.MeasureString(str, f).ToSize().Height;
+                        //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+                        sb = new SolidBrush(Color.Purple);
+                        g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
 
                         /*
                         if (radioButton1.Checked == true)
@@ -755,6 +788,9 @@ namespace vcs_OXGame
                         if ((select_steps_a.Count + select_steps_b.Count) >= 9)
                         {
                             richTextBox1.Text += "平手\n";
+                            button5.Text = "重玩";
+                            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 0, 0, 255));
+                            g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
                             isRunning = false;
                             return;
                         }
@@ -921,6 +957,9 @@ namespace vcs_OXGame
 
         private void button6_Click(object sender, EventArgs e)
         {
+            if (isRunning == false)
+                return;
+
             if (current_user == 0)
             {
                 richTextBox1.Text += "目前輪到 USER\n";
@@ -1007,6 +1046,19 @@ namespace vcs_OXGame
             draw_win(0, 5);
 
             draw_win(1, 7);
+
+            richTextBox1.Text += "平手\n";
+
+            string str = "平手";
+            Font f = new Font("標楷體", 120);
+            int tmp_width = 0;
+            int tmp_height = 0;
+            tmp_width = g.MeasureString(str, f).ToSize().Width;
+            tmp_height = g.MeasureString(str, f).ToSize().Height;
+            //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+            sb = new SolidBrush(Color.Purple);
+            g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+
 
         }
 
