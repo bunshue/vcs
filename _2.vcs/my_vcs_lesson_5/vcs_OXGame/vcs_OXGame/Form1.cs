@@ -16,7 +16,6 @@ namespace vcs_OXGame
         List<int> select_steps_a = new List<int>();
         List<int> select_steps_b = new List<int>();
         List<int> select_steps_c = new List<int>();
-        //int N;
 
         Graphics g;
         Graphics g2;
@@ -26,7 +25,16 @@ namespace vcs_OXGame
         Bitmap bitmap2;
 
         bool isRunning;
-        int current_user = 0;
+
+        int current_user = PLAYER_1P;
+
+        int player_mode = MODE_1PLAYER;
+
+        private const int PLAYER_1P = 0x00;
+        private const int PLAYER_2P = 0x01;
+
+        private const int MODE_1PLAYER = 0x00;
+        private const int MODE_2PLAYER = 0x00;
 
         public Form1()
         {
@@ -628,39 +636,14 @@ namespace vcs_OXGame
 
                     if (result == 1)
                     {
-                        richTextBox1.Text += "勝負已分\tUSER勝";
+                        richTextBox1.Text += "勝負已分\t1P勝";
 
                         SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 0, 255, 0));
                         g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
                         button5.Text = "重玩";
 
-                        string str = "USER勝";
-                        Font f = new Font("標楷體", 120);
-                        int tmp_width = 0;
-                        int tmp_height = 0;
-                        tmp_width = g.MeasureString(str, f).ToSize().Width;
-                        tmp_height = g.MeasureString(str, f).ToSize().Height;
-                        //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-                        sb = new SolidBrush(Color.Purple);
-                        g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+                        draw_result("1P勝");
 
-
-                        /*
-                        if (radioButton1.Checked == true)
-                        {
-                            if ((select_steps_a.Count % 2) == 0)
-                                label2.Text = "PC勝";
-                            else
-                                label2.Text = "USER勝";
-                        }
-                        else
-                        {
-                            if ((select_steps_a.Count % 2) == 0)
-                                label2.Text = "USER勝";
-                            else
-                                label2.Text = "PC勝";
-                        }
-                        */
                         isRunning = false;
                     }
                     else
@@ -671,16 +654,7 @@ namespace vcs_OXGame
                         if ((select_steps_a.Count + select_steps_b.Count) >= 9)
                         {
                             richTextBox1.Text += "平手\n";
-
-                            string str = "平手";
-                            Font f = new Font("標楷體", 120);
-                            int tmp_width = 0;
-                            int tmp_height = 0;
-                            tmp_width = g.MeasureString(str, f).ToSize().Width;
-                            tmp_height = g.MeasureString(str, f).ToSize().Height;
-                            //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-                            sb = new SolidBrush(Color.Purple);
-                            g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+                            draw_result("平手");
 
                             button5.Text = "重玩";
                             SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 0, 0, 255));
@@ -690,42 +664,13 @@ namespace vcs_OXGame
                         }
 
                         current_user = 1 - current_user;
-                        label2.Text = "輪到 PC";
-                        draw_user(current_user);
-                        /*
-                        if (current_user == 0)
-                        {
-                            label2.Text = "輪到 USER";
-                        }
-                        else
-                        {
+                        if (player_mode == MODE_1PLAYER)
                             label2.Text = "輪到 PC";
-                        }
-                        */
-                        //if(current_user == 0)
-
-                        /*
-                        if (radioButton1.Checked == true)
-                        {
-                            if ((select_steps_a.Count % 2) == 0)
-                                label2.Text = "輪到 USER";
-                            else
-                                label2.Text = "輪到 PC";
-                        }
                         else
-                        {
-                            if ((select_steps_a.Count % 2) == 0)
-                                label2.Text = "輪到 PC";
-                            else
-                                label2.Text = "輪到 USER";
-                        }
-                        */
+                            label2.Text = "輪到 2P";
+                        draw_user(current_user);
                     }
-
-
                 }
-
-
             }
             else
             {
@@ -745,22 +690,22 @@ namespace vcs_OXGame
 
                     if (result == 1)
                     {
-                        richTextBox1.Text += "勝負已分\tPC勝";
 
                         SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(30, 255, 0, 0));
                         g.FillRectangle(semiTransBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
 
                         button5.Text = "重玩";
 
-                        string str = "PC勝";
-                        Font f = new Font("標楷體", 120);
-                        int tmp_width = 0;
-                        int tmp_height = 0;
-                        tmp_width = g.MeasureString(str, f).ToSize().Width;
-                        tmp_height = g.MeasureString(str, f).ToSize().Height;
-                        //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-                        sb = new SolidBrush(Color.Purple);
-                        g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+                        if (player_mode == MODE_1PLAYER)
+                        {
+                            draw_result("PC勝");
+                            richTextBox1.Text += "勝負已分\tPC勝";
+                        }
+                        else
+                        {
+                            draw_result("2P勝");
+                            richTextBox1.Text += "勝負已分\t2P勝";
+                        }
 
                         /*
                         if (radioButton1.Checked == true)
@@ -798,42 +743,9 @@ namespace vcs_OXGame
                         current_user = 1 - current_user;
                         label2.Text = "輪到 USER";
                         draw_user(current_user);
-                        /*
-                        if (current_user == 0)
-                        {
-                            label2.Text = "輪到 USER";
-                        }
-                        else
-                        {
-                            label2.Text = "輪到 PC";
-                        }
-                        */
-                        //if(current_user == 0)
-
-                        /*
-                        if (radioButton1.Checked == true)
-                        {
-                            if ((select_steps_a.Count % 2) == 0)
-                                label2.Text = "輪到 USER";
-                            else
-                                label2.Text = "輪到 PC";
-                        }
-                        else
-                        {
-                            if ((select_steps_a.Count % 2) == 0)
-                                label2.Text = "輪到 PC";
-                            else
-                                label2.Text = "輪到 USER";
-                        }
-                        */
                     }
-
-
                 }
-
             }
-
-
         }
 
         void draw_user(int current_user)
@@ -845,19 +757,33 @@ namespace vcs_OXGame
             int dd = 3;
             g2.Clear(Color.White);
 
-            if (current_user == 0)
+            if (current_user == PLAYER_1P)
             {
                 p = new Pen(Color.Lime, 3);
                 g2.DrawEllipse(p, x_st + dd, y_st + dd, W - dd * 2, H - dd * 2);
 
 
             }
-            else
+            else   //PLAYER_2P
             {
                 p = new Pen(Color.Pink, 3);
                 g2.DrawLine(p, x_st + dd, y_st + dd, x_st + W - dd * 2, y_st + H - dd * 2);
                 g2.DrawLine(p, x_st + W - dd, y_st + dd, x_st + dd, y_st + H - dd * 2);
             }
+            pictureBox2.Image = bitmap2;
+        }
+
+        void draw_result(string str)
+        {
+            Font f = new Font("標楷體", 120);
+            int tmp_width = 0;
+            int tmp_height = 0;
+            tmp_width = g.MeasureString(str, f).ToSize().Width;
+            tmp_height = g.MeasureString(str, f).ToSize().Height;
+            //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+            sb = new SolidBrush(Color.Purple);
+            g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+
             pictureBox2.Image = bitmap2;
         }
 
@@ -916,23 +842,27 @@ namespace vcs_OXGame
             button4.Enabled = false;
             button5.Enabled = true;
             groupBox1.Enabled = false;
+            groupBox2.Enabled = false;
 
             if (radioButton1.Checked == true)
             {
-                current_user = 0;
+                current_user = PLAYER_1P;
             }
             else
             {
-                current_user = 1;
+                current_user = PLAYER_2P;
             }
 
-            if (current_user == 0)
+            if (current_user == PLAYER_1P)
             {
-                label2.Text = "輪到 USER";
+                label2.Text = "輪到 1P";
             }
             else
             {
-                label2.Text = "輪到 PC";
+                if (player_mode == MODE_1PLAYER)
+                    label2.Text = "輪到 PC";
+                else
+                    label2.Text = "輪到 2P";
             }
             draw_user(current_user);
         }
@@ -950,6 +880,7 @@ namespace vcs_OXGame
                 button4.Enabled = true;
                 button5.Enabled = false;
                 groupBox1.Enabled = true;
+                groupBox2.Enabled = true;
                 label2.Text = "";
                 button5.Text = "放棄";
             }
@@ -960,13 +891,16 @@ namespace vcs_OXGame
             if (isRunning == false)
                 return;
 
-            if (current_user == 0)
+            if (current_user == PLAYER_1P)
             {
-                richTextBox1.Text += "目前輪到 USER\n";
+                richTextBox1.Text += "目前輪到 1P\n";
             }
-            else
+            else    //PLAYER_2P
             {
-                richTextBox1.Text += "目前輪到 PC\n";
+                if (player_mode == MODE_1PLAYER)
+                    richTextBox1.Text += "目前輪到 PC\n";
+                else
+                    richTextBox1.Text += "目前輪到 2P\n";
 
                 int i;
 
@@ -1047,19 +981,21 @@ namespace vcs_OXGame
 
             draw_win(1, 7);
 
-            richTextBox1.Text += "平手\n";
+        }
 
-            string str = "平手";
-            Font f = new Font("標楷體", 120);
-            int tmp_width = 0;
-            int tmp_height = 0;
-            tmp_width = g.MeasureString(str, f).ToSize().Width;
-            tmp_height = g.MeasureString(str, f).ToSize().Height;
-            //richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
-            sb = new SolidBrush(Color.Purple);
-            g.DrawString(str, f, sb, new PointF((pictureBox1.Width - tmp_width) / 2, (pictureBox1.Height - tmp_height) / 2));
+        private void rb_1p_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_1p.Checked == true)
+            {
+                groupBox1.Visible = true;
+                player_mode = MODE_1PLAYER;
+            }
 
-
+            if (rb_2p.Checked == true)
+            {
+                groupBox1.Visible = false;
+                player_mode = MODE_2PLAYER;
+            }
         }
 
     }
