@@ -28,13 +28,13 @@ namespace vcs_OXGame
 
         int current_user = PLAYER_1P;
 
-        int player_mode = MODE_1PLAYER;
+        int play_mode = MODE_1PLAYER;
 
         private const int PLAYER_1P = 0x00;
         private const int PLAYER_2P = 0x01;
 
         private const int MODE_1PLAYER = 0x00;
-        private const int MODE_2PLAYER = 0x00;
+        private const int MODE_2PLAYER = 0x01;
 
         public Form1()
         {
@@ -134,7 +134,7 @@ namespace vcs_OXGame
             //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
             //richTextBox1.Text += "w = " + (w - dd * 2).ToString() + ", h = " + (h - dd * 2).ToString() + "\n";
 
-            richTextBox1.Text += "CCCCC\tcurrent_user = " + current.ToString() + "\n";
+            //richTextBox1.Text += "CCCCC\tcurrent_user = " + current.ToString() + "\n";
 
             if (current == 0)
             {
@@ -210,7 +210,7 @@ namespace vcs_OXGame
             //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
             //richTextBox1.Text += "w = " + (w - dd * 2).ToString() + ", h = " + (h - dd * 2).ToString() + "\n";
 
-            richTextBox1.Text += "CCCCC\tcurrent_user = " + current.ToString() + "\n";
+            //richTextBox1.Text += "CCCCC\tcurrent_user = " + current.ToString() + "\n";
 
             if (current == 0)
             {
@@ -664,8 +664,11 @@ namespace vcs_OXGame
                         }
 
                         current_user = 1 - current_user;
-                        if (player_mode == MODE_1PLAYER)
-                            label2.Text = "輪到 PC";
+                        if (play_mode == MODE_1PLAYER)
+                        {
+                            label2.Text = "輪到 PC, 電選\n";
+                            button6_Click(sender, e);
+                        }
                         else
                             label2.Text = "輪到 2P";
                         draw_user(current_user);
@@ -696,7 +699,7 @@ namespace vcs_OXGame
 
                         button5.Text = "重玩";
 
-                        if (player_mode == MODE_1PLAYER)
+                        if (play_mode == MODE_1PLAYER)
                         {
                             draw_result("PC勝");
                             richTextBox1.Text += "勝負已分\tPC勝";
@@ -728,7 +731,7 @@ namespace vcs_OXGame
                     else
                     {
                         richTextBox1.Text += "共走了 " + (select_steps_a.Count + select_steps_b.Count).ToString() + " 步\t";
-                        richTextBox1.Text += "USER方共走了 " + select_steps_b.Count.ToString() + " 步\n";
+                        richTextBox1.Text += "1P 方共走了 " + select_steps_b.Count.ToString() + " 步\n";
 
                         if ((select_steps_a.Count + select_steps_b.Count) >= 9)
                         {
@@ -741,7 +744,7 @@ namespace vcs_OXGame
                         }
 
                         current_user = 1 - current_user;
-                        label2.Text = "輪到 USER";
+                        label2.Text = "輪到 1P";
                         draw_user(current_user);
                     }
                 }
@@ -859,7 +862,7 @@ namespace vcs_OXGame
             }
             else
             {
-                if (player_mode == MODE_1PLAYER)
+                if (play_mode == MODE_1PLAYER)
                     label2.Text = "輪到 PC";
                 else
                     label2.Text = "輪到 2P";
@@ -897,72 +900,82 @@ namespace vcs_OXGame
             }
             else    //PLAYER_2P
             {
-                if (player_mode == MODE_1PLAYER)
-                    richTextBox1.Text += "目前輪到 PC\n";
+                if (play_mode == MODE_1PLAYER)
+                {
+                    richTextBox1.Text += "目前輪到 PC\t自動走步\n";
+
+                    int i;
+
+                    if (steps.Count > 0)
+                    {
+                        richTextBox1.Text += "pc目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
+                        for (i = 0; i < steps.Count; i++)
+                        {
+                            richTextBox1.Text += steps[i].ToString() + "  ";
+                        }
+                        richTextBox1.Text += "\n";
+                    }
+
+                    if (select_steps_b.Count > 0)
+                    {
+                        richTextBox1.Text += "目前後攻方已走步數 " + select_steps_b.Count.ToString() + " 步, 分別是:\t";
+                        for (i = 0; i < select_steps_b.Count; i++)
+                        {
+                            richTextBox1.Text += select_steps_b[i].ToString() + "  ";
+                        }
+                        richTextBox1.Text += "\n";
+                    }
+
+                    int win = 0;
+                    //1. 檢查每一步，若必能贏，就直接下
+                    if (steps.Count > 0)
+                    {
+                        richTextBox1.Text += "bb目前可走步數 " + steps.Count.ToString() + " 步, 分別測試:\n";
+                        for (i = 0; i < steps.Count; i++)
+                        {
+                            //richTextBox1.Text += "測試項目 " + steps[i].ToString() + "\n";
+                            select_steps_c.Clear();
+                            int j;
+                            for (j = 0; j < select_steps_b.Count; j++)
+                            {
+                                select_steps_c.Add(select_steps_b[j]);
+                            }
+                            select_steps_c.Add(steps[i]);
+
+                            win = check_select_steps_c(select_steps_c);
+                            if (win == 1)
+                            {
+                                richTextBox1.Text += "下了 " + steps[i].ToString() + " 這步，立刻可贏\n";
+                                draw_win(current_user, steps[i]);
+                                break;
+                            }
+
+
+                        }
+                        richTextBox1.Text += "\n";
+
+
+                    
+                    }
+
+
+                    //2. 檢查每一步，若下了之後，給對方贏的機會，則刪除
+
+                    //3. 檢查每一步，下了之後，有兩勝以上機會，就直接下
+
+                    //4. 檢查每一步，若有一勝機會，任選其一
+                    //4. 檢查每一步，任選其一，盡量選邊角
+
+
+
+
+
+
+
                 else
                     richTextBox1.Text += "目前輪到 2P\n";
 
-                int i;
-
-                if (steps.Count > 0)
-                {
-                    richTextBox1.Text += "pc目前可走步數 " + steps.Count.ToString() + " 步, 分別是:\t";
-                    for (i = 0; i < steps.Count; i++)
-                    {
-                        richTextBox1.Text += steps[i].ToString() + "  ";
-                    }
-                    richTextBox1.Text += "\n";
                 }
-
-                if (select_steps_b.Count > 0)
-                {
-                    richTextBox1.Text += "目前後攻方已走步數 " + select_steps_b.Count.ToString() + " 步, 分別是:\t";
-                    for (i = 0; i < select_steps_b.Count; i++)
-                    {
-                        richTextBox1.Text += select_steps_b[i].ToString() + "  ";
-                    }
-                    richTextBox1.Text += "\n";
-                }
-
-                int win = 0;
-                //1. 檢查每一步，若必能贏，就直接下
-                if (steps.Count > 0)
-                {
-                    richTextBox1.Text += "bb目前可走步數 " + steps.Count.ToString() + " 步, 分別測試:\n";
-                    for (i = 0; i < steps.Count; i++)
-                    {
-                        richTextBox1.Text += "測試項目 " + steps[i].ToString() + "\n";
-                        select_steps_c.Clear();
-                        int j;
-                        for (j = 0; j < select_steps_b.Count; j++)
-                        {
-                            select_steps_c.Add(select_steps_b[j]);
-                        }
-                        select_steps_c.Add(steps[i]);
-
-                        win = check_select_steps_c(select_steps_c);
-                        if (win == 1)
-                        {
-                            richTextBox1.Text += "下了 " + steps[i].ToString() + " 這步，立刻可贏\n";
-                            draw_win(current_user, steps[i]);
-                            break;
-                        }
-
-
-                    }
-                    richTextBox1.Text += "\n";
-
-
-                }
-
-                //2. 檢查每一步，若下了之後，給對方贏的機會，則刪除
-
-                //3. 檢查每一步，下了之後，有兩勝以上機會，就直接下
-
-                //4. 檢查每一步，若有一勝機會，任選其一
-                //4. 檢查每一步，任選其一，盡量選邊角
-
-
 
 
 
@@ -988,13 +1001,15 @@ namespace vcs_OXGame
             if (rb_1p.Checked == true)
             {
                 groupBox1.Visible = true;
-                player_mode = MODE_1PLAYER;
+                play_mode = MODE_1PLAYER;
             }
 
             if (rb_2p.Checked == true)
             {
                 groupBox1.Visible = false;
-                player_mode = MODE_2PLAYER;
+                play_mode = MODE_2PLAYER;
+                richTextBox1.Text += "1 play_mode = " + play_mode.ToString() + "\n";
+
             }
         }
 
