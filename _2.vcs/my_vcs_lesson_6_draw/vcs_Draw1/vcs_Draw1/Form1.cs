@@ -1240,7 +1240,833 @@ namespace vcs_Draw1
 
         }
 
+        private void button27_Click(object sender, EventArgs e)
+        {
+            draw_audit_picture(1);
+        }
 
+        private void button28_Click(object sender, EventArgs e)
+        {
+            draw_audit_picture(2);
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            draw_audit_picture(3);
+
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            draw_audit_picture(4);
+        }
+
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            draw_audit_picture(5);
+
+        }
+
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            draw_audit_picture(6);
+        }
+
+
+        void draw_audit_picture(int draw_case)
+        {
+            int title_size1 = 50;
+            int title_size2 = 40;
+            int title_size3 = 40;
+            int H = 100;
+            int h = 10;
+            int width = 440;
+            int height = h + title_size1 + title_size2 + h + H + h + title_size3 + h + H + h;
+
+            Pen ArrowPen;
+            Pen redPen = new Pen(Color.Red, 3);
+            Pen greenPen = new Pen(Color.Green, 3);
+            Pen blackPen = new Pen(Color.Black, 3);
+
+            pictureBox1.Width = width;
+            pictureBox1.Height = height;
+
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.White);
+
+            /*
+            //debug
+            Pen debug = new Pen(Color.Green, 1);
+            g.DrawRectangle(debug, 0, 0, width - 1, h - 1); //h
+            g.DrawRectangle(debug, 0, h, width - 1, title_size1 - 1);   //title_size1
+            g.DrawRectangle(debug, 0, h + title_size1, width - 1, title_size2 - 1);   //title_size2
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2, width - 1, h - 1);   //h
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2 + h, width - 1, H - 1);   //H
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2 + h + H, width - 1, h - 1);   //h
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2 + h + H + h, width - 1, title_size3 - 1); //title_size3
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2 + h + H + h + title_size3, width - 1, h - 1);   //h
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2 + h + H + h + title_size3 + h, width - 1, H - 1);   //H
+            g.DrawRectangle(debug, 0, h + title_size1 + title_size2 + h + H + h + title_size3 + h + H, width - 1, h - 1);   //h
+            */
+
+            g.DrawRectangle(p, 0, 0, width - 1, height - 1);
+
+            int x_st = 0;
+            int y_st = 0;
+            int x_sp = 0;
+            int y_sp = 0;
+            int offset = 10;
+
+            int h_st = height;
+
+            int[] x_data = new int[21];
+            int[] y_data = new int[21];
+            Point point0;
+            Point point1;
+            Point point2;
+            Point point3;
+            Point point4;
+            Point point5;
+            Point point6;
+            Point point7;
+            Point point8;
+            Point point9;
+            Point point10;
+            Point point11;
+            Point point12;
+            Point point13;
+            Point point14;
+            Point point15;
+            Point point16;
+            Point point17;
+            Point point18;
+            Point point19;
+            Point point20;
+
+            int dx = 22;
+            y_st = h + H + h + title_size3 + h;
+
+            if ((draw_case == 1) || (draw_case == 2))
+            {
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 1; y_data[1] = y_st;
+                x_data[2] = dx * 2; y_data[2] = y_st;
+                x_data[3] = dx * 3; y_data[3] = y_st;
+                x_data[4] = dx * 4; y_data[4] = y_st;
+                x_data[5] = dx * 5; y_data[5] = y_st;
+                x_data[6] = dx * 6; y_data[6] = y_st;
+                x_data[7] = dx * 7; y_data[7] = y_st;
+                x_data[8] = dx * 8; y_data[8] = y_st;
+                x_data[9] = dx * 9; y_data[9] = y_st;
+
+                x_data[10] = dx * 10; y_data[10] = y_st;
+                y_st += H;
+                x_data[11] = dx * 10; y_data[11] = y_st;
+
+                x_data[12] = dx * 11; y_data[12] = y_st;
+                y_st -= H;
+                x_data[13] = dx * 11; y_data[13] = y_st;
+
+                x_data[14] = dx * 12; y_data[14] = y_st;
+                y_st += H;
+                x_data[15] = dx * 12; y_data[15] = y_st;
+
+                x_data[16] = dx * 13; y_data[16] = y_st;
+                y_st -= H;
+                x_data[17] = dx * 13; y_data[17] = y_st;
+
+                x_data[18] = dx * 14; y_data[18] = y_st;
+                y_st += H;
+                x_data[19] = dx * 14; y_data[19] = y_st;
+
+                x_data[20] = dx * 20; y_data[20] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+                point2 = new Point(x_data[2], h_st - y_data[2]);
+                point3 = new Point(x_data[3], h_st - y_data[3]);
+                point4 = new Point(x_data[4], h_st - y_data[4]);
+                point5 = new Point(x_data[5], h_st - y_data[5]);
+                point6 = new Point(x_data[6], h_st - y_data[6]);
+                point7 = new Point(x_data[7], h_st - y_data[7]);
+                point8 = new Point(x_data[8], h_st - y_data[8]);
+                point9 = new Point(x_data[9], h_st - y_data[9]);
+                point10 = new Point(x_data[10], h_st - y_data[10]);
+                point11 = new Point(x_data[11], h_st - y_data[11]);
+                point12 = new Point(x_data[12], h_st - y_data[12]);
+                point13 = new Point(x_data[13], h_st - y_data[13]);
+                point14 = new Point(x_data[14], h_st - y_data[14]);
+                point15 = new Point(x_data[15], h_st - y_data[15]);
+                point16 = new Point(x_data[16], h_st - y_data[16]);
+                point17 = new Point(x_data[17], h_st - y_data[17]);
+                point18 = new Point(x_data[18], h_st - y_data[18]);
+                point19 = new Point(x_data[19], h_st - y_data[19]);
+                point20 = new Point(x_data[20], h_st - y_data[20]);
+
+                Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19, point20 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(greenPen, curvePoints);   //畫直線
+
+                y_st = h;
+
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 1; y_data[1] = y_st;
+                x_data[2] = dx * 2; y_data[2] = y_st;
+                x_data[3] = dx * 3; y_data[3] = y_st;
+                x_data[4] = dx * 4; y_data[4] = y_st;
+                x_data[5] = dx * 5; y_data[5] = y_st;
+                x_data[6] = dx * 6; y_data[6] = y_st;
+                x_data[7] = dx * 7; y_data[7] = y_st;
+                x_data[8] = dx * 8; y_data[8] = y_st;
+                x_data[9] = dx * 9; y_data[9] = y_st;
+
+                x_data[10] = dx * 10; y_data[10] = y_st;
+                y_st += H;
+                x_data[11] = dx * 10; y_data[11] = y_st;
+
+                x_data[12] = dx * 11; y_data[12] = y_st;
+                y_st -= H;
+                x_data[13] = dx * 11; y_data[13] = y_st;
+
+                x_data[14] = dx * 12; y_data[14] = y_st;
+                y_st += H;
+                x_data[15] = dx * 12; y_data[15] = y_st;
+
+                x_data[16] = dx * 13; y_data[16] = y_st;
+                y_st -= H;
+                x_data[17] = dx * 13; y_data[17] = y_st;
+
+                x_data[18] = dx * 14; y_data[18] = y_st;
+                y_st += H;
+                x_data[19] = dx * 14; y_data[19] = y_st;
+
+                x_data[20] = dx * 20; y_data[20] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+                point2 = new Point(x_data[2], h_st - y_data[2]);
+                point3 = new Point(x_data[3], h_st - y_data[3]);
+                point4 = new Point(x_data[4], h_st - y_data[4]);
+                point5 = new Point(x_data[5], h_st - y_data[5]);
+                point6 = new Point(x_data[6], h_st - y_data[6]);
+                point7 = new Point(x_data[7], h_st - y_data[7]);
+                point8 = new Point(x_data[8], h_st - y_data[8]);
+                point9 = new Point(x_data[9], h_st - y_data[9]);
+                point10 = new Point(x_data[10], h_st - y_data[10]);
+                point11 = new Point(x_data[11], h_st - y_data[11]);
+                point12 = new Point(x_data[12], h_st - y_data[12]);
+                point13 = new Point(x_data[13], h_st - y_data[13]);
+                point14 = new Point(x_data[14], h_st - y_data[14]);
+                point15 = new Point(x_data[15], h_st - y_data[15]);
+                point16 = new Point(x_data[16], h_st - y_data[16]);
+                point17 = new Point(x_data[17], h_st - y_data[17]);
+                point18 = new Point(x_data[18], h_st - y_data[18]);
+                point19 = new Point(x_data[19], h_st - y_data[19]);
+                point20 = new Point(x_data[20], h_st - y_data[20]);
+
+                Point[] curvePoints2 = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19, point20 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(redPen, curvePoints2);   //畫直線
+            }
+            else if ((draw_case == 3) || (draw_case == 4))
+            {
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 1; y_data[1] = y_st;
+                x_data[2] = dx * 2; y_data[2] = y_st;
+                x_data[3] = dx * 3; y_data[3] = y_st;
+                x_data[4] = dx * 4; y_data[4] = y_st;
+
+                x_data[5] = dx * 5; y_data[5] = y_st;
+                y_st += H;
+                x_data[6] = dx * 5; y_data[6] = y_st;
+
+                x_data[7] = dx * 8; y_data[7] = y_st;
+                y_st -= H;
+                x_data[8] = dx * 8; y_data[8] = y_st;
+
+                x_data[9] = dx * 8; y_data[9] = y_st;
+                x_data[10] = dx * 10; y_data[10] = y_st;
+                x_data[11] = dx * 11; y_data[11] = y_st;
+                x_data[12] = dx * 12; y_data[12] = y_st;
+                x_data[13] = dx * 13; y_data[13] = y_st;
+                x_data[14] = dx * 14; y_data[14] = y_st;
+
+                x_data[15] = dx * 15; y_data[15] = y_st;
+                y_st += H;
+                x_data[16] = dx * 15; y_data[16] = y_st;
+
+                x_data[17] = dx * 18; y_data[17] = y_st;
+                y_st -= H;
+                x_data[18] = dx * 18; y_data[18] = y_st;
+
+                x_data[19] = dx * 19; y_data[19] = y_st;
+                x_data[20] = dx * 20; y_data[20] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+                point2 = new Point(x_data[2], h_st - y_data[2]);
+                point3 = new Point(x_data[3], h_st - y_data[3]);
+                point4 = new Point(x_data[4], h_st - y_data[4]);
+                point5 = new Point(x_data[5], h_st - y_data[5]);
+                point6 = new Point(x_data[6], h_st - y_data[6]);
+                point7 = new Point(x_data[7], h_st - y_data[7]);
+                point8 = new Point(x_data[8], h_st - y_data[8]);
+                point9 = new Point(x_data[9], h_st - y_data[9]);
+                point10 = new Point(x_data[10], h_st - y_data[10]);
+                point11 = new Point(x_data[11], h_st - y_data[11]);
+                point12 = new Point(x_data[12], h_st - y_data[12]);
+                point13 = new Point(x_data[13], h_st - y_data[13]);
+                point14 = new Point(x_data[14], h_st - y_data[14]);
+                point15 = new Point(x_data[15], h_st - y_data[15]);
+                point16 = new Point(x_data[16], h_st - y_data[16]);
+                point17 = new Point(x_data[17], h_st - y_data[17]);
+                point18 = new Point(x_data[18], h_st - y_data[18]);
+                point19 = new Point(x_data[19], h_st - y_data[19]);
+                point20 = new Point(x_data[20], h_st - y_data[20]);
+
+                Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19, point20 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(greenPen, curvePoints);   //畫直線
+
+
+
+
+                y_st = h + offset;
+
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 20; y_data[1] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+
+                Point[] curvePoints3 = { point0, point1 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(blackPen, curvePoints3);   //畫直線
+            }
+            else if (draw_case == 5)
+            {
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 1; y_data[1] = y_st;
+                x_data[2] = dx * 2; y_data[2] = y_st;
+                x_data[3] = dx * 3; y_data[3] = y_st;
+                x_data[4] = dx * 4; y_data[4] = y_st;
+
+                x_data[5] = dx * 5; y_data[5] = y_st;
+                y_st += H;
+                x_data[6] = dx * 5; y_data[6] = y_st;
+
+                x_data[7] = dx * 7; y_data[7] = y_st;
+                y_st -= H;
+                x_data[8] = dx * 7; y_data[8] = y_st;
+
+                x_data[9] = dx * 7; y_data[9] = y_st;
+                x_data[10] = dx * 10; y_data[10] = y_st;
+                x_data[11] = dx * 11; y_data[11] = y_st;
+                x_data[12] = dx * 12; y_data[12] = y_st;
+                x_data[13] = dx * 13; y_data[13] = y_st;
+                x_data[14] = dx * 14; y_data[14] = y_st;
+
+                x_data[15] = dx * 15; y_data[15] = y_st;
+                y_st += H;
+                x_data[16] = dx * 15; y_data[16] = y_st;
+
+                x_data[17] = dx * 17; y_data[17] = y_st;
+                y_st -= H;
+                x_data[18] = dx * 17; y_data[18] = y_st;
+
+                x_data[19] = dx * 19; y_data[19] = y_st;
+                x_data[20] = dx * 20; y_data[20] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+                point2 = new Point(x_data[2], h_st - y_data[2]);
+                point3 = new Point(x_data[3], h_st - y_data[3]);
+                point4 = new Point(x_data[4], h_st - y_data[4]);
+                point5 = new Point(x_data[5], h_st - y_data[5]);
+                point6 = new Point(x_data[6], h_st - y_data[6]);
+                point7 = new Point(x_data[7], h_st - y_data[7]);
+                point8 = new Point(x_data[8], h_st - y_data[8]);
+                point9 = new Point(x_data[9], h_st - y_data[9]);
+                point10 = new Point(x_data[10], h_st - y_data[10]);
+                point11 = new Point(x_data[11], h_st - y_data[11]);
+                point12 = new Point(x_data[12], h_st - y_data[12]);
+                point13 = new Point(x_data[13], h_st - y_data[13]);
+                point14 = new Point(x_data[14], h_st - y_data[14]);
+                point15 = new Point(x_data[15], h_st - y_data[15]);
+                point16 = new Point(x_data[16], h_st - y_data[16]);
+                point17 = new Point(x_data[17], h_st - y_data[17]);
+                point18 = new Point(x_data[18], h_st - y_data[18]);
+                point19 = new Point(x_data[19], h_st - y_data[19]);
+                point20 = new Point(x_data[20], h_st - y_data[20]);
+
+                Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19, point20 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(greenPen, curvePoints);   //畫直線
+
+
+                y_st = h;
+
+
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 1; y_data[1] = y_st;
+                x_data[2] = dx * 2; y_data[2] = y_st;
+                x_data[3] = dx * 3; y_data[3] = y_st;
+                x_data[4] = dx * 4; y_data[4] = y_st;
+
+                x_data[5] = dx * 5; y_data[5] = y_st;
+                y_st += H;
+                x_data[6] = dx * 5; y_data[6] = y_st;
+
+                x_data[7] = dx * 8; y_data[7] = y_st;
+                y_st -= H;
+                x_data[8] = dx * 8; y_data[8] = y_st;
+
+                x_data[9] = dx * 8; y_data[9] = y_st;
+                x_data[10] = dx * 10; y_data[10] = y_st;
+                x_data[11] = dx * 11; y_data[11] = y_st;
+                x_data[12] = dx * 12; y_data[12] = y_st;
+                x_data[13] = dx * 13; y_data[13] = y_st;
+                x_data[14] = dx * 14; y_data[14] = y_st;
+
+                x_data[15] = dx * 15; y_data[15] = y_st;
+                y_st += H;
+                x_data[16] = dx * 15; y_data[16] = y_st;
+
+                x_data[17] = dx * 18; y_data[17] = y_st;
+                y_st -= H;
+                x_data[18] = dx * 18; y_data[18] = y_st;
+
+                x_data[19] = dx * 19; y_data[19] = y_st;
+                x_data[20] = dx * 20; y_data[20] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+                point2 = new Point(x_data[2], h_st - y_data[2]);
+                point3 = new Point(x_data[3], h_st - y_data[3]);
+                point4 = new Point(x_data[4], h_st - y_data[4]);
+                point5 = new Point(x_data[5], h_st - y_data[5]);
+                point6 = new Point(x_data[6], h_st - y_data[6]);
+                point7 = new Point(x_data[7], h_st - y_data[7]);
+                point8 = new Point(x_data[8], h_st - y_data[8]);
+                point9 = new Point(x_data[9], h_st - y_data[9]);
+                point10 = new Point(x_data[10], h_st - y_data[10]);
+                point11 = new Point(x_data[11], h_st - y_data[11]);
+                point12 = new Point(x_data[12], h_st - y_data[12]);
+                point13 = new Point(x_data[13], h_st - y_data[13]);
+                point14 = new Point(x_data[14], h_st - y_data[14]);
+                point15 = new Point(x_data[15], h_st - y_data[15]);
+                point16 = new Point(x_data[16], h_st - y_data[16]);
+                point17 = new Point(x_data[17], h_st - y_data[17]);
+                point18 = new Point(x_data[18], h_st - y_data[18]);
+                point19 = new Point(x_data[19], h_st - y_data[19]);
+                point20 = new Point(x_data[20], h_st - y_data[20]);
+
+                Point[] curvePoints2 = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19, point20 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(redPen, curvePoints2);   //畫直線
+
+
+
+
+
+
+                /*
+                y_st = h + offset;
+
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 20; y_data[1] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+
+                Point[] curvePoints3 = { point0, point1 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(blackPen, curvePoints3);   //畫直線
+                */
+
+
+            }
+            else if (draw_case == 6)
+            {
+
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 1; y_data[1] = y_st;
+                x_data[2] = dx * 2; y_data[2] = y_st;
+                x_data[3] = dx * 3; y_data[3] = y_st;
+                x_data[4] = dx * 4; y_data[4] = y_st;
+
+                x_data[5] = dx * 5; y_data[5] = y_st;
+                y_st += H;
+                x_data[6] = dx * 5; y_data[6] = y_st;
+
+                x_data[7] = dx * 6; y_data[7] = y_st;
+                y_st -= H;
+                x_data[8] = dx * 6; y_data[8] = y_st;
+                
+                x_data[9] = dx * 7; y_data[9] = y_st;
+                y_st += H;
+                x_data[10] = dx * 7; y_data[10] = y_st;
+
+                x_data[11] = dx * 8; y_data[11] = y_st;
+                y_st -= H;
+                x_data[12] = dx * 8; y_data[12] = y_st;
+
+                x_data[13] = dx * 9; y_data[13] = y_st;
+                y_st += H;
+                x_data[14] = dx * 9; y_data[14] = y_st;
+
+                x_data[15] = dx * 10; y_data[15] = y_st;
+                y_st -= H;
+                x_data[16] = dx * 10; y_data[16] = y_st;
+
+                x_data[17] = dx * 18; y_data[17] = y_st;
+                x_data[18] = dx * 18; y_data[18] = y_st;
+                x_data[19] = dx * 19; y_data[19] = y_st;
+                x_data[20] = dx * 20; y_data[20] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+                point2 = new Point(x_data[2], h_st - y_data[2]);
+                point3 = new Point(x_data[3], h_st - y_data[3]);
+                point4 = new Point(x_data[4], h_st - y_data[4]);
+                point5 = new Point(x_data[5], h_st - y_data[5]);
+                point6 = new Point(x_data[6], h_st - y_data[6]);
+                point7 = new Point(x_data[7], h_st - y_data[7]);
+                point8 = new Point(x_data[8], h_st - y_data[8]);
+                point9 = new Point(x_data[9], h_st - y_data[9]);
+                point10 = new Point(x_data[10], h_st - y_data[10]);
+                point11 = new Point(x_data[11], h_st - y_data[11]);
+                point12 = new Point(x_data[12], h_st - y_data[12]);
+                point13 = new Point(x_data[13], h_st - y_data[13]);
+                point14 = new Point(x_data[14], h_st - y_data[14]);
+                point15 = new Point(x_data[15], h_st - y_data[15]);
+                point16 = new Point(x_data[16], h_st - y_data[16]);
+                point17 = new Point(x_data[17], h_st - y_data[17]);
+                point18 = new Point(x_data[18], h_st - y_data[18]);
+                point19 = new Point(x_data[19], h_st - y_data[19]);
+                point20 = new Point(x_data[20], h_st - y_data[20]);
+
+                Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19, point20 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(greenPen, curvePoints);   //畫直線
+
+
+
+
+                y_st = h + offset;
+
+                x_data[0] = dx * 0; y_data[0] = y_st;
+                x_data[1] = dx * 20; y_data[1] = y_st;
+
+                // Create points that define curve.
+                point0 = new Point(x_data[0], h_st - y_data[0]);
+                point1 = new Point(x_data[1], h_st - y_data[1]);
+
+                Point[] curvePoints3 = { point0, point1 };
+
+                // Draw lines between original points to screen.
+                g.DrawLines(blackPen, curvePoints3);   //畫直線
+
+
+
+            }
+
+
+            ArrowPen = new Pen(Color.Red, 6);   //重新設定pp的線條樣式
+            ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+
+            if ((draw_case == 1) || (draw_case == 2))
+            {
+                x_st = dx * 10;
+                y_st = h_st - (h + H + h + title_size3 + h + offset);
+
+                x_sp = dx * 10;
+                y_sp = h_st - (h + H + h + title_size3 + h + offset + (H - offset * 2));
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+            }
+            else if (draw_case == 3)
+            {
+
+            }
+            else if (draw_case == 4)
+            {
+                x_st = dx * 8 + 3;
+                y_st = h_st - (h + H + h + title_size3 + h + offset);
+                x_sp = dx * 8 + 3;
+                y_sp = h_st - (h + H + h + title_size3 + h + offset + (H - offset * 2));
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+                g.DrawString("Initialize OK", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st, y_st - H / 2));
+
+                x_st = dx * 18 + 3;
+                y_st = h_st - (h + H + h + title_size3 + h + offset);
+                x_sp = dx * 18 + 3;
+                y_sp = h_st - (h + H + h + title_size3 + h + offset + (H - offset * 2));
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+            }
+            else if (draw_case == 5)
+            {
+
+            }
+            else if (draw_case == 6)
+            {
+                x_st = dx * 5;
+                y_st = h_st - (h + H + h + title_size3 + h + offset);
+
+                x_sp = dx * 5;
+                y_sp = h_st - (h + H + h + title_size3 + h + offset + (H - offset * 2));
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+            }
+
+            ArrowPen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
+            ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+
+            if (draw_case == 1)
+            {
+                x_st = dx * 10;
+                y_st = h_st - (h + offset);
+
+                x_sp = dx * 10;
+                y_sp = h_st - (h + offset + (H - offset * 2));
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+                x_st = dx * 11;
+                x_sp = dx * 11;
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+                x_st = dx * 12;
+                x_sp = dx * 12;
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+                x_st = dx * 13;
+                x_sp = dx * 13;
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+                x_st = dx * 14;
+                x_sp = dx * 14;
+                g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+            }
+            else if (draw_case == 2)
+            {
+
+                y_st = h_st - (h + offset);
+                y_sp = h_st - (h + offset + (H - offset * 2));
+
+                for (int i = 1; i < 13; i++)
+                {
+                    x_st = dx * i * 3 / 2 + 5;
+                    x_sp = dx * i * 3 / 2 + 5;
+                    if (i == 12)
+                    {
+                        ArrowPen = new Pen(Color.Red, 10);   //重新設定pp的線條樣式
+                        ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                        g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+                    }
+                    else
+                    {
+                        g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+                    }
+                }
+            }
+            else if (draw_case == 3)
+            {
+                y_st = h_st - (h + offset);
+                y_sp = h_st - (h + offset + (H - offset * 2));
+
+                int x_st2 = 0;
+                int y_st2 = h_st - (h + 60);
+                int x_sp2 = 0;
+                int y_sp2 = h_st - (h + 60);
+
+                for (int i = 1; i < 4; i++)
+                {
+                    x_st = dx * i * 13 / 2 - 70;
+                    x_sp = dx * i * 13 / 2 - 70;
+                    richTextBox1.Text += "x = " + x_st.ToString() + "\n";
+                    if (i == 3)
+                    {
+                        ArrowPen = new Pen(Color.Red, 10);   //重新設定pp的線條樣式
+                        ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                        g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+
+                        //int height = h + title_size1 + title_size2 + h + H + h + title_size3 + h + H + h;
+                        Pen PenStyle2 = new Pen(Color.Black, 2);
+                        PenStyle2.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                        g.DrawLine(PenStyle2, x_st, h + title_size1 + 30, x_sp, height);
+                    }
+                    else
+                    {
+                        g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
+                    }
+                    if (i == 1)
+                        x_st2 = x_st;
+                    if (i == 2)
+                        x_sp2 = x_st;
+                }
+
+                ArrowPen = new Pen(Color.Red, 5);   //重新設定pp的線條樣式
+                ArrowPen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
+                richTextBox1.Text += "x_st2 = " + x_st2.ToString() + "x_sp2 = " + x_sp2.ToString() + "\n";
+
+                g.DrawString("1 sec", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2+40, y_st2+5));
+                g.DrawString("Conflict!", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(315, y_st2-55));
+
+            }
+            else if (draw_case == 4)
+            {
+                int x_st2 = 0;
+                int y_st2 = h_st - (h + offset);
+                int x_sp2 = 0;
+                int y_sp2 = h_st - (h + offset + (H - offset * 2));
+
+                x_st2 = dx * 8 + 6;
+                x_sp2 = dx * 8 + 6;
+                ArrowPen = new Pen(Color.Red, 8);   //重新設定pp的線條樣式
+                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
+                //richTextBox1.Text += "(" + x_st2.ToString() + ", " + y_st2.ToString() + ") - (" + x_sp2.ToString() + ", " + y_sp2.ToString() + ")\n";
+
+                g.DrawString("Detect OK Signal", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2, y_st2 - H / 2));
+
+                x_st2 = dx * 18 + 6;
+                x_sp2 = dx * 18 + 6;
+                g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
+                //richTextBox1.Text += "(" + x_st2.ToString() + ", " + y_st2.ToString() + ") - (" + x_sp2.ToString() + ", " + y_sp2.ToString() + ")\n";
+            }
+            else if (draw_case == 5)
+            {
+
+
+
+            }
+            else if (draw_case == 6)
+            {
+                int x_st2 = 0;
+                int y_st2 = h_st - (h + offset);
+                int x_sp2 = 0;
+                int y_sp2 = h_st - (h + offset + (H - offset * 2));
+
+                x_st2 = dx * 5;
+                x_sp2 = dx * 5;
+                ArrowPen = new Pen(Color.Red, 8);   //重新設定pp的線條樣式
+                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
+                //richTextBox1.Text += "(" + x_st2.ToString() + ", " + y_st2.ToString() + ") - (" + x_sp2.ToString() + ", " + y_sp2.ToString() + ")\n";
+
+                g.DrawString("Detect OK Signal", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2 + 10, y_st2 - H / 2 - 30));
+
+
+
+                ArrowPen = new Pen(Color.Black, 5);   //重新設定pp的線條樣式
+                ArrowPen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                g.DrawLine(ArrowPen, x_st2, y_st2 - H / 2 + 20, x_st2 + 300, y_st2 - H / 2 + 20);
+                richTextBox1.Text += "x_st2 = " + x_st2.ToString() + "x_sp2 = " + x_sp2.ToString() + "\n";
+
+                g.DrawString("0.2 sec", new Font("Times New Roman", 17), new SolidBrush(Color.Red), new PointF(x_st2 + 120, y_st2 - H / 2 + 25));
+
+
+
+            }
+
+            int offset2 = 15;
+            SolidBrush sb;
+            Font f;
+            f = new Font("Times New Roman", 17);
+            sb = new SolidBrush(Color.Purple);
+            if ((draw_case == 1) || (draw_case == 2))
+            {
+                g.DrawString("IE Insert Bouncing", f, sb, new PointF(0, h + offset2));
+                //g.DrawString("Push Button Bouncing", f, sb, new PointF(0, h + offset2));
+            }
+            else if ((draw_case == 3) || (draw_case == 4))
+            {
+                g.DrawString("IE initialization fails", f, sb, new PointF(0, h + offset2));
+            }
+            else if (draw_case == 5)
+            {
+                g.DrawString("Send Command to IE Error", f, sb, new PointF(0, h + offset2));
+            }
+            else if (draw_case == 6)
+            {
+                g.DrawString("Pedal Bouncing", f, sb, new PointF(0, h + offset2));
+            }
+
+            if ((draw_case == 1) || (draw_case == 2))
+            {
+                sb = new SolidBrush(Color.Red);
+                g.DrawString("IE Insert", f, sb, new PointF(0, h + title_size1 + offset2));
+                //g.DrawString("User Push Button", f, sb, new PointF(0, h + title_size1 + offset2));
+                if (draw_case == 1)
+                {
+                    sb = new SolidBrush(Color.Green);
+                    f = new Font("Times New Roman", 11);
+                    g.DrawString("Hardware Response", f, sb, new PointF(310, h + title_size1 + title_size2 + h + 10));
+                }
+            }
+            else if ((draw_case == 3) || (draw_case == 4))
+            {
+                sb = new SolidBrush(Color.Red);
+                g.DrawString("IE Plug-in & initialize", f, sb, new PointF(0, h + title_size1 + offset2));
+            }
+            else if (draw_case == 5)
+            {
+                sb = new SolidBrush(Color.Red);
+                g.DrawString("Send Data without Check-Sum", f, sb, new PointF(0, h + title_size1 + offset2));
+            }
+            else if (draw_case == 6)
+            {
+                sb = new SolidBrush(Color.Red);
+                g.DrawString("Real Pedal Bouncing", f, sb, new PointF(0, h + title_size1 + offset2));
+            }
+
+
+            f = new Font("Times New Roman", 17);
+            sb = new SolidBrush(Color.Blue);
+            if (draw_case == 1)
+                g.DrawString("Software Response", f, sb, new PointF(0, h + title_size1 + title_size2 + h + H + h + offset2));
+            else if (draw_case == 2)
+                g.DrawString("Software Detect Stable IE Signal", f, sb, new PointF(0, h + title_size1 + title_size2 + h + H + h + offset2));
+            else if (draw_case == 3)
+                g.DrawString("Software Detect IE", f, sb, new PointF(0, h + title_size1 + title_size2 + h + H + h + offset2));
+            else if (draw_case == 4)
+                g.DrawString("Software Detect IE OK Signal", f, sb, new PointF(0, h + title_size1 + title_size2 + h + H + h + offset2));
+            else if (draw_case == 5)
+                g.DrawString("Send Data with Check-Sum", f, sb, new PointF(0, h + title_size1 + title_size2 + h + H + h + offset2));
+            else if (draw_case == 6)
+                g.DrawString("Software Catthes First One", f, sb, new PointF(0, h + title_size1 + title_size2 + h + H + h + offset2));
+
+            pictureBox1.Image = bitmap1;
+
+
+
+        }
 
     }
 }
