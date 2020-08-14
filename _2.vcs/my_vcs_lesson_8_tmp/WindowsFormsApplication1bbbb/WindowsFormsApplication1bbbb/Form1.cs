@@ -18,15 +18,6 @@ namespace WindowsFormsApplication1bbbb
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            label1.Text = String.Format("X：{0}, Y：{1}", e.X, e.Y);
-
-            /*
-            說明：把label裡的文字，放入格式化字串，其中寫入MouseEventArgs e 的 e.X ,e.Y 位置。
-
-            補充：所有視窗程式設計(C# ,vb,android,java.....)計算視窗座標都是由左上角為基準(0,0)
-            */
-
-
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

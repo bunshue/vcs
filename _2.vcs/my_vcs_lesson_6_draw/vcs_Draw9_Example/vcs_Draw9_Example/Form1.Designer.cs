@@ -51,7 +51,17 @@
             this.button26 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
+            this.cb_manual = new System.Windows.Forms.CheckBox();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.cb_snake = new System.Windows.Forms.CheckBox();
+            this.button22 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.cb_magnifying = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -91,6 +101,9 @@
             this.pictureBox1.Size = new System.Drawing.Size(600, 600);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // button1
             // 
@@ -174,7 +187,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(102, 42);
             this.button10.TabIndex = 27;
-            this.button10.Text = "Gamma";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -236,6 +248,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(102, 42);
             this.button15.TabIndex = 33;
+            this.button15.Text = "稽核圖片1";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -246,6 +259,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(102, 42);
             this.button16.TabIndex = 33;
+            this.button16.Text = "稽核圖片2";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -256,6 +270,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(102, 42);
             this.button17.TabIndex = 34;
+            this.button17.Text = "稽核圖片3";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -292,11 +307,114 @@
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
+            // cb_manual
+            // 
+            this.cb_manual.AutoSize = true;
+            this.cb_manual.Location = new System.Drawing.Point(887, 365);
+            this.cb_manual.Name = "cb_manual";
+            this.cb_manual.Size = new System.Drawing.Size(58, 16);
+            this.cb_manual.TabIndex = 44;
+            this.cb_manual.Text = "manual";
+            this.cb_manual.UseVisualStyleBackColor = true;
+            // 
+            // button18
+            // 
+            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Location = new System.Drawing.Point(756, 296);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(102, 42);
+            this.button18.TabIndex = 45;
+            this.button18.Text = "稽核圖片4";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(874, 296);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(102, 42);
+            this.button19.TabIndex = 46;
+            this.button19.Text = "稽核圖片5";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button20
+            // 
+            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Location = new System.Drawing.Point(993, 296);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(102, 42);
+            this.button20.TabIndex = 47;
+            this.button20.Text = "稽核圖片6_踏板";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button21.Location = new System.Drawing.Point(755, 344);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(102, 42);
+            this.button21.TabIndex = 48;
+            this.button21.Text = "Gamma";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // cb_snake
+            // 
+            this.cb_snake.AutoSize = true;
+            this.cb_snake.Location = new System.Drawing.Point(993, 365);
+            this.cb_snake.Name = "cb_snake";
+            this.cb_snake.Size = new System.Drawing.Size(48, 16);
+            this.cb_snake.TabIndex = 49;
+            this.cb_snake.Text = "手繪";
+            this.cb_snake.UseVisualStyleBackColor = true;
+            this.cb_snake.CheckedChanged += new System.EventHandler(this.cb_snake_CheckedChanged);
+            // 
+            // button22
+            // 
+            this.button22.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button22.Location = new System.Drawing.Point(874, 451);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(102, 42);
+            this.button22.TabIndex = 50;
+            this.button22.Text = "把PictureBox上的東西匯出至檔案";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(618, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox2.TabIndex = 51;
+            this.pictureBox2.TabStop = false;
+            // 
+            // cb_magnifying
+            // 
+            this.cb_magnifying.AutoSize = true;
+            this.cb_magnifying.Location = new System.Drawing.Point(1107, 365);
+            this.cb_magnifying.Name = "cb_magnifying";
+            this.cb_magnifying.Size = new System.Drawing.Size(60, 16);
+            this.cb_magnifying.TabIndex = 52;
+            this.cb_magnifying.Text = "放大鏡";
+            this.cb_magnifying.UseVisualStyleBackColor = true;
+            this.cb_magnifying.CheckedChanged += new System.EventHandler(this.cb_magnifying_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 673);
+            this.ClientSize = new System.Drawing.Size(1219, 673);
+            this.Controls.Add(this.cb_magnifying);
+            this.Controls.Add(this.button22);
+            this.Controls.Add(this.cb_snake);
+            this.Controls.Add(this.button21);
+            this.Controls.Add(this.button20);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.cb_manual);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button26);
             this.Controls.Add(this.button25);
@@ -320,11 +438,14 @@
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -353,6 +474,15 @@
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.CheckBox cb_manual;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.CheckBox cb_snake;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox cb_magnifying;
     }
 }
 

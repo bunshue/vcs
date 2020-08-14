@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for Directory
+                            using System.IO;    //for Directory
 
 using System.Reflection;    //for BindingFlags
 
@@ -22,82 +22,6 @@ namespace WindowsFormsApplication1ffff
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //撈出資料夾內所有jpg檔
-            var dirnames = Directory.GetDirectories(@"C:\______test_files");
-            int i = 0;
-
-            try
-            {
-                foreach (var dir in dirnames)
-                {
-                    richTextBox1.Text += "aaaa3 dir = " + dir + "\n";
-                    var fnames = Directory.GetFiles(dir, "*.jpg").Select(Path.GetFileName);
-
-                    DirectoryInfo d = new DirectoryInfo(dir);
-                    FileInfo[] finfo = d.GetFiles("*.jpg");
-
-                    foreach (var f in fnames)
-                    {
-                        i++;
-                        //richTextBox1.Text += "The number of the file being renamed is: " + i.ToString() + "\n";
-
-                        richTextBox1.Text += f + "\n";
-
-                        if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", ""))))
-                        {
-                            File.Move(Path.Combine(dir, f), Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", "")));
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "The file you are attempting to rename already exists! The file path is " + dir + "\n";
-                            foreach (FileInfo fi in finfo)
-                            {
-                                richTextBox1.Text += "The file modify date is: " + File.GetLastWriteTime(dir) + "\n";
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-            richTextBox1.Text += "dirnames : " + dirnames + "\n";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //隨時產生臨時檔名
-            //richTextBox1.Text += "臨時檔名 : " + string.Format("filename-{0:yyyy-MM-dd_HH:mm:ss}.txt", DateTime.Now) + "\n";
-
-            //richTextBox1.Text += "臨時檔名 : " + string.Format("{0}{1}.txt", "filename-", DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")) + "\n";
-
-
-            string filename = string.Format("csv-{0:yyyy_MMdd_HHmmss}.csv", DateTime.Now);
-            richTextBox1.Text += "filename : " + filename + "\n";
-
-            int aaa = 123;
-            int bbb = 456;
-
-            using (var stream = File.CreateText(filename))
-            {
-                string first = aaa.ToString();
-                string second = bbb.ToString();
-                string csv = string.Format("{0},{1}\n", first, second);
-                //File.WriteAllText(filename, csv);
-                stream.WriteLine(csv);
-                richTextBox1.Text += "csv : " + csv + "\n";
-            }
-
-
-
-
-
-        }
-
 
         private static void CreateShortCut(string shortCutFile, string targetPath, string description = "")
         {
