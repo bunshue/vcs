@@ -23,7 +23,7 @@ namespace imsLink
         String compile_time = "6/23/2020 01:35下午";
         String software_version = "A04";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE2;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
         bool flag_david_test = false;   //david測試第12站時, ims主機要開putty模式
 
@@ -12341,6 +12341,40 @@ namespace imsLink
             //find_brightness();
 
             //save_current_program_to_local_drive();
+
+            string filename = "HLG2.txt";
+            richTextBox1.Text += "開啟 HLG2 檔案: " + filename + "\n";
+
+            /*
+            int x_st = 300;
+            int y_st = 300;
+            richTextBox2.Visible = true;
+            richTextBox2.Location = new Point(x_st, y_st);
+            richTextBox2.Size = new System.Drawing.Size(150, 500);
+            */
+            richTextBox2.Clear();
+
+            StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            richTextBox2.Text += sr.ReadToEnd();	//讀取所有文字內容
+            sr.Close();
+
+            parse_script_command_and_send();
+
+
+
+
+            //bt_script_file_Click(sender, e);
+            //parse_script_command_and_send();
+
+            cb_Contrast_Brightness_Gamma.Checked = true;
+
+            trackBar_Contrast3.Value = 3;
+            trackBar_Contrast3_Scroll(sender, e);
+
+            trackBar_Brightness3.Value = 16;
+            trackBar_Brightness3_Scroll(sender, e);
+
+
 
         }
 

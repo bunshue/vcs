@@ -98,6 +98,70 @@ namespace vcs_Draw9_Example
             //pictureBox1.Location = new Point(10, 10);
         }
 
+        void show_item_location2()
+        {
+            pictureBox2.Visible = false;
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+
+            this.Size = new Size(1700, 900);
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 1250;
+            y_st = 10;
+            dx = 120;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dy / 2);
+
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+
+            //pictureBox1.Location = new Point(10, 10);
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             //Bitmap bmp;
@@ -196,7 +260,6 @@ namespace vcs_Draw9_Example
             brush.Dispose();
         }
 
-
         private void button2_Click(object sender, EventArgs e)
         {
             //同心圓
@@ -231,16 +294,16 @@ namespace vcs_Draw9_Example
         private void button4_Click(object sender, EventArgs e)
         {
             Pen pen = new Pen(Color.Black, 8);
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
+            pen.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
 
             g.DrawLine(pen, 50, 400, 50, 100);  //畫出X軸及y軸
             g.DrawLine(pen, 50, 400, 350, 400);
 
             pen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
-            //pp.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; //DashStyle設定線條 點
-            //pp.StartCap = System.Drawing.Drawing2D.LineCap.RoundAnchor; //設定為圓頭
+            //pp.DashStyle = DashStyle.Dot; //DashStyle設定線條 點
+            //pp.StartCap = LineCap.RoundAnchor; //設定為圓頭
 
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            pen.EndCap = LineCap.ArrowAnchor;
 
             //gg.DrawLine(pp, 50, 50, 250, 250);//只畫一條
             g.DrawLines(pen, new Point[]
@@ -277,13 +340,11 @@ namespace vcs_Draw9_Example
         private void button6_Click(object sender, EventArgs e)
         {
             Brush bb = new SolidBrush(Color.Orange);
-            g.FillRectangle(bb, 70, 70, 200, 100);
-            //畫出一個填滿的方框
+            g.FillRectangle(bb, 70, 70, 200, 100);  //畫出一個填滿的方框
 
             Pen pp = new Pen(Color.Black, 4);
             g.DrawRectangle(pp, 70, 70, 200, 100);
             //在同樣起點畫出黑色的長方型線，即實現加外框            
-
 
             Random rr = new Random();
             Brush db;
@@ -295,7 +356,6 @@ namespace vcs_Draw9_Example
                 g.FillRectangle(db, 70 + (i * 40), 70 + (i * 40), 200, 100);
                 //畫布上畫出方框，每次位置的X及Y值都加70，以實現往右下角移動
             }
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -457,6 +517,64 @@ namespace vcs_Draw9_Example
 
         private void button12_Click(object sender, EventArgs e)
         {
+            int W = 340;
+            int H = 543;
+            int x_st;
+            int y_st;
+            int w;
+            int h;
+            pictureBox1.Location = new Point(50, 50);
+            pictureBox1.Size = new Size(W + 50, H + 50);  //改變圖框大小
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
+            Graphics g;
+
+            //新建圖檔, 初始化畫布
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            sb = new SolidBrush(Color.Red);
+            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(0, 0, w, h));
+            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(W - w, 0, w, h));
+            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(0, H - h, w, h));
+            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(W - w, H - h, w, h));
+
+            x_st = 0; y_st = 6 + 205; w = 10; h = 88; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
+            x_st = W - 10; y_st = 6 + 66; w = 10; h = 205; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
+
+            Font f;
+            f = new Font("Times New Roman", 14);
+            sb = new SolidBrush(Color.Black);
+            g.DrawString("205", f, sb, new PointF(0, 205 / 2));
+            g.DrawString("268", f, sb, new PointF(0, 573 - 6 - 268 + 268 / 2));
+            g.DrawString("66", f, sb, new PointF(W - 30, 66 / 2));
+            g.DrawString("290", f, sb, new PointF(W - 40, 573 - 6 - 290 + 290 / 2));
+
+            Pen pen = new Pen(Color.Black, 5);
+            pen.StartCap = LineCap.ArrowAnchor;
+            pen.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
+
+            g.DrawLine(pen, 0, H + 10, W, H + 10);
+            g.DrawLine(pen, W + 10, 0, W + 10, H);
+            g.DrawString("340", f, sb, new PointF(W / 2, H + 15));
+            g.DrawString("573", f, sb, new PointF(W + 15, H / 2));
+
+            int dw = 152;
+            int dh = 78;
+
+            x_st = (W - dw) / 2;
+            y_st = (H - dh) / 2;
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
+
+
+            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, W, H));
+            p = new Pen(Color.Black, 1);
+            g.DrawLine(p, 0, 0, W, H);
+            g.DrawLine(p, W, 0, 0, H);
+
+            pictureBox1.Image = bitmap1;
 
         }
 
@@ -1019,7 +1137,7 @@ namespace vcs_Draw9_Example
 
 
             ArrowPen = new Pen(Color.Red, 6);   //重新設定pp的線條樣式
-            ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            ArrowPen.EndCap = LineCap.ArrowAnchor;
 
             if ((draw_case == 1) || (draw_case == 2))
             {
@@ -1067,7 +1185,7 @@ namespace vcs_Draw9_Example
             }
 
             ArrowPen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
-            ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            ArrowPen.EndCap = LineCap.ArrowAnchor;
 
             if (draw_case == 1)
             {
@@ -1107,7 +1225,7 @@ namespace vcs_Draw9_Example
                     if (i == 12)
                     {
                         ArrowPen = new Pen(Color.Red, 10);   //重新設定pp的線條樣式
-                        ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                        ArrowPen.EndCap = LineCap.ArrowAnchor;
                         g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
                     }
                     else
@@ -1134,12 +1252,12 @@ namespace vcs_Draw9_Example
                     if (i == 3)
                     {
                         ArrowPen = new Pen(Color.Red, 10);   //重新設定pp的線條樣式
-                        ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                        ArrowPen.EndCap = LineCap.ArrowAnchor;
                         g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
 
                         //int height = h + title_size1 + title_size2 + h + H + h + title_size3 + h + H + h;
                         Pen PenStyle2 = new Pen(Color.Black, 2);
-                        PenStyle2.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                        PenStyle2.DashStyle = DashStyle.Dash;
                         g.DrawLine(PenStyle2, x_st, h + title_size1 + 30, x_sp, height);
                     }
                     else
@@ -1153,8 +1271,8 @@ namespace vcs_Draw9_Example
                 }
 
                 ArrowPen = new Pen(Color.Red, 5);   //重新設定pp的線條樣式
-                ArrowPen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                ArrowPen.StartCap = LineCap.ArrowAnchor;
+                ArrowPen.EndCap = LineCap.ArrowAnchor;
                 g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
                 richTextBox1.Text += "x_st2 = " + x_st2.ToString() + "x_sp2 = " + x_sp2.ToString() + "\n";
 
@@ -1172,7 +1290,7 @@ namespace vcs_Draw9_Example
                 x_st2 = dx * 8 + 6;
                 x_sp2 = dx * 8 + 6;
                 ArrowPen = new Pen(Color.Red, 8);   //重新設定pp的線條樣式
-                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                ArrowPen.EndCap = LineCap.ArrowAnchor;
                 g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
                 //richTextBox1.Text += "(" + x_st2.ToString() + ", " + y_st2.ToString() + ") - (" + x_sp2.ToString() + ", " + y_sp2.ToString() + ")\n";
 
@@ -1199,7 +1317,7 @@ namespace vcs_Draw9_Example
                 x_st2 = dx * 5;
                 x_sp2 = dx * 5;
                 ArrowPen = new Pen(Color.Red, 8);   //重新設定pp的線條樣式
-                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                ArrowPen.EndCap = LineCap.ArrowAnchor;
                 g.DrawLine(ArrowPen, x_st2, y_st2, x_sp2, y_sp2);
                 //richTextBox1.Text += "(" + x_st2.ToString() + ", " + y_st2.ToString() + ") - (" + x_sp2.ToString() + ", " + y_sp2.ToString() + ")\n";
 
@@ -1208,8 +1326,8 @@ namespace vcs_Draw9_Example
 
 
                 ArrowPen = new Pen(Color.Black, 5);   //重新設定pp的線條樣式
-                ArrowPen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-                ArrowPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                ArrowPen.StartCap = LineCap.ArrowAnchor;
+                ArrowPen.EndCap = LineCap.ArrowAnchor;
                 g.DrawLine(ArrowPen, x_st2, y_st2 - H / 2 + 20, x_st2 + 300, y_st2 - H / 2 + 20);
                 richTextBox1.Text += "x_st2 = " + x_st2.ToString() + "x_sp2 = " + x_sp2.ToString() + "\n";
 
@@ -1341,6 +1459,7 @@ namespace vcs_Draw9_Example
 
         private void button21_Click(object sender, EventArgs e)
         {
+            show_item_location2();
             pictureBox1.Location = new Point(50, 50);
             pictureBox1.Size = new Size(887, 636);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;

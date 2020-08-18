@@ -78,6 +78,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(102, 42);
             this.button9.TabIndex = 18;
+            this.button9.Text = "顏色名稱1";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -94,7 +95,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 372);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 248);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(344, 328);
             this.pictureBox1.TabIndex = 15;
@@ -182,6 +183,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(102, 42);
             this.button10.TabIndex = 27;
+            this.button10.Text = "顏色名稱2";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

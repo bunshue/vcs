@@ -7,6 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
+/*  1P模式和2P模式
+ *  1P模式為與電腦對戰  1P模式可選先攻後攻
+ *  必為1P為O  2P為X
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
+
+
 namespace vcs_OXGame
 {
     public partial class Form1 : Form
@@ -24,10 +45,10 @@ namespace vcs_OXGame
         Bitmap bitmap1;
         Bitmap bitmap2;
 
+        bool flag_release_mode = false; 
+
         bool isRunning;
-
         int current_user = PLAYER_1P;
-
         int play_mode = MODE_1PLAYER;
 
         private const int PLAYER_1P = 0x00;
@@ -72,7 +93,66 @@ namespace vcs_OXGame
 
             button4.Enabled = true;
             button5.Enabled = false;
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx = 80;
+            int dy = 60;
+
+            x_st = 500;
+            y_st = 10;
+            groupBox2.Location = new Point(x_st, y_st);
+
+            y_st += (dy + 10);
+            groupBox1.Location = new Point(x_st, y_st);
+
+            if (flag_release_mode == true)
+            {
+                y_st += (dy + 20);
+                label2.Location = new Point(x_st, y_st);
+
+                x_st = 500;
+                y_st = 300;
+
+                button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+                button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+                button1.Visible = false;
+                button6.Visible = false;
+                button2.Visible = false;
+                button7.Visible = false;
+
+                richTextBox1.Visible = false;
+                button3.Visible = false;
+                this.Size = new Size(this.Size.Width - 280, this.Size.Height);
+            }
+            else
+            {   //debug
+                x_st = 700;
+                y_st = 20;
+                button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+                button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+                button6.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+                button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+                button2.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+                button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+                button1.Visible = true;
+                button6.Visible = true;
+                button2.Visible = true;
+                button7.Visible = true;
+
+                x_st -= 100;
+                y_st += (dy / 2);
+                pictureBox2.Location = new Point(x_st, y_st);
+            }
+
+            return;
         }
 
         void draw_win(int current, int N)
