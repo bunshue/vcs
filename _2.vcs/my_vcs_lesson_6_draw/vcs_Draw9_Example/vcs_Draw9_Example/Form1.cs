@@ -166,7 +166,7 @@ namespace vcs_Draw9_Example
         {
             //Bitmap bmp;
             //SolidBrush brush;
-            //Pen pen;
+            //Pen p;
 
             float ratio_x, ratio_y;
             float w, h;
@@ -293,20 +293,20 @@ namespace vcs_Draw9_Example
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Pen pen = new Pen(Color.Black, 8);
-            pen.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
+            Pen p = new Pen(Color.Black, 8);
+            p.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
 
-            g.DrawLine(pen, 50, 400, 50, 100);  //畫出X軸及y軸
-            g.DrawLine(pen, 50, 400, 350, 400);
+            g.DrawLine(p, 50, 400, 50, 100);  //畫出X軸及y軸
+            g.DrawLine(p, 50, 400, 350, 400);
 
-            pen = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
+            p = new Pen(Color.Blue, 6);   //重新設定pp的線條樣式
             //pp.DashStyle = DashStyle.Dot; //DashStyle設定線條 點
             //pp.StartCap = LineCap.RoundAnchor; //設定為圓頭
 
-            pen.EndCap = LineCap.ArrowAnchor;
+            p.EndCap = LineCap.ArrowAnchor;
 
             //gg.DrawLine(pp, 50, 50, 250, 250);//只畫一條
-            g.DrawLines(pen, new Point[]
+            g.DrawLines(p, new Point[]
             {//一次畫好多條
             new Point(70,350),
             new Point(100,280),
@@ -342,8 +342,8 @@ namespace vcs_Draw9_Example
             Brush bb = new SolidBrush(Color.Orange);
             g.FillRectangle(bb, 70, 70, 200, 100);  //畫出一個填滿的方框
 
-            Pen pp = new Pen(Color.Black, 4);
-            g.DrawRectangle(pp, 70, 70, 200, 100);
+            Pen p = new Pen(Color.Black, 4);
+            g.DrawRectangle(p, 70, 70, 200, 100);
             //在同樣起點畫出黑色的長方型線，即實現加外框            
 
             Random rr = new Random();
@@ -552,22 +552,33 @@ namespace vcs_Draw9_Example
             g.DrawString("66", f, sb, new PointF(W - 30, 66 / 2));
             g.DrawString("290", f, sb, new PointF(W - 40, 573 - 6 - 290 + 290 / 2));
 
-            Pen pen = new Pen(Color.Black, 5);
-            pen.StartCap = LineCap.ArrowAnchor;
-            pen.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
+            Pen p = new Pen(Color.Black, 5);
+            p.StartCap = LineCap.ArrowAnchor;
+            p.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
 
-            g.DrawLine(pen, 0, H + 10, W, H + 10);
-            g.DrawLine(pen, W + 10, 0, W + 10, H);
+            g.DrawLine(p, 0, H + 10, W, H + 10);
+            g.DrawLine(p, W + 10, 0, W + 10, H);
             g.DrawString("340", f, sb, new PointF(W / 2, H + 15));
             g.DrawString("573", f, sb, new PointF(W + 15, H / 2));
 
-            int dw = 152;
-            int dh = 78;
 
+            int dw;
+            int dh;
+
+            //draw desk
+            dw = 152;
+            dh = 78;
             x_st = (W - dw) / 2;
             y_st = (H - dh) / 2;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
+
+            //draw sofa
+            dw = 180;
+            dh = 86;
+            x_st = 0;
+            y_st = H - dh;
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, W, H));
             p = new Pen(Color.Black, 1);
@@ -1256,9 +1267,9 @@ namespace vcs_Draw9_Example
                         g.DrawLine(ArrowPen, x_st, y_st, x_sp, y_sp);
 
                         //int height = h + title_size1 + title_size2 + h + H + h + title_size3 + h + H + h;
-                        Pen PenStyle2 = new Pen(Color.Black, 2);
-                        PenStyle2.DashStyle = DashStyle.Dash;
-                        g.DrawLine(PenStyle2, x_st, h + title_size1 + 30, x_sp, height);
+                        Pen p2 = new Pen(Color.Black, 2);
+                        p2.DashStyle = DashStyle.Dash;
+                        g.DrawLine(p2, x_st, h + title_size1 + 30, x_sp, height);
                     }
                     else
                     {

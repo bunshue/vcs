@@ -5835,12 +5835,12 @@ namespace imsLink
 
                 //畫框的功能
                 // Set the DashStyle property.
-                Pen PenStyle2 = new Pen(Color.Black, 1);
-                //PenStyle2.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-                PenStyle2.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                Pen p2 = new Pen(Color.Black, 1);
+                //p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+                p2.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
 
-                gg.DrawLine(PenStyle2, w / 2 - 140, h / 2, w / 2 + 140, h / 2);
-                gg.DrawLine(PenStyle2, w / 2, h / 2 - 140, w / 2, h / 2 + 140);
+                gg.DrawLine(p2, w / 2 - 140, h / 2, w / 2 + 140, h / 2);
+                gg.DrawLine(p2, w / 2, h / 2 - 140, w / 2, h / 2 + 140);
 
                 for (www = awb_block; www <= 192; www += awb_block)
                 {
@@ -5857,13 +5857,13 @@ namespace imsLink
                     if ((y_st + hhh) > h)
                         y_st = h - hhh;
 
-                    gg.DrawRectangle(PenStyle2, x_st, y_st, www, hhh);
+                    gg.DrawRectangle(p2, x_st, y_st, www, hhh);
                 }
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE3)
             {
-                //Pen p = new Pen(Color.Red);
+                //Pen p = new Pen(Color.Red);   for debug
                 SolidBrush sb = new SolidBrush(Color.Black);
                 Point[] points = new Point[3];
                 int dd = 90;
@@ -6132,23 +6132,23 @@ namespace imsLink
                 x_st = w / 2 - awb_window_size / 2;
                 y_st = h / 2 - awb_window_size / 2;
 
-                Pen PenStyle1;
+                Pen p1;
                 if (flag_do_find_awb_location_fail == true)
                 {
-                    PenStyle1 = new Pen(Color.Red, 12);
+                    p1 = new Pen(Color.Red, 12);
                 }
                 else
-                    PenStyle1 = new Pen(Color.Silver, 1);
+                    p1 = new Pen(Color.Silver, 1);
                 // Set the DashStyle property.
-                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-                PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-                //PenStyle1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+                p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+                //p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
 
                 // Draw a rectangle.
-                gg.DrawRectangle(PenStyle1, x_st, y_st, awb_window_size, awb_window_size);
+                gg.DrawRectangle(p1, x_st, y_st, awb_window_size, awb_window_size);
 
                 total_RGB_R = total_R;
                 total_RGB_G = total_G;

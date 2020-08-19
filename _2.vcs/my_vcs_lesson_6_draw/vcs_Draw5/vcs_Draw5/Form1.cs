@@ -49,10 +49,10 @@ namespace vcs_Draw5
             // Create a Graphics object for the Control.
             Graphics g = pictureBox1.CreateGraphics();
             // Create pen.
-            Pen penStyle = new Pen(Color.Red, 5);
+            Pen p = new Pen(Color.Red, 5);
             // Create location and size of ellipse.
             //畫圓
-            g.DrawEllipse(penStyle, 0, 0, 200, 200);
+            g.DrawEllipse(p, 0, 0, 200, 200);
 
             // Clean up the Graphics object.
             g.Dispose();
@@ -301,75 +301,75 @@ namespace vcs_Draw5
             //Graphics g = pictureBox1.CreateGraphics();
 
             // Create a new pen.
-            Pen PenStyle = new Pen(Brushes.DeepSkyBlue);
+            Pen p = new Pen(Brushes.DeepSkyBlue);
 
             // Set the pen's width.
-            PenStyle.Width = 8.0F;
+            p.Width = 8.0F;
 
             #region 設定轉彎接線
             // Set the LineJoin property.
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(10, 10, 80, 80));
+            g.DrawRectangle(p, new Rectangle(10, 10, 80, 80));
 
             // Set the LineJoin property.
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Miter;
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Miter;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(110, 10, 80, 80));
+            g.DrawRectangle(p, new Rectangle(110, 10, 80, 80));
 
             // Set the LineJoin property.
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.MiterClipped;
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.MiterClipped;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(210, 10, 80, 80));
+            g.DrawRectangle(p, new Rectangle(210, 10, 80, 80));
 
             // Set the LineJoin property.
-            PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
+            p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(310, 10, 80, 80));
+            g.DrawRectangle(p, new Rectangle(310, 10, 80, 80));
             #endregion
 
             #region 設定DashStyle property
             // Set the DashStyle property.
-            PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(10, 110, 80, 80));
+            g.DrawRectangle(p, new Rectangle(10, 110, 80, 80));
 
             // Set the DashStyle property.
-            PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(110, 110, 80, 80));
+            g.DrawRectangle(p, new Rectangle(110, 110, 80, 80));
 
             // Set the DashStyle property.
-            PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(210, 110, 80, 80));
+            g.DrawRectangle(p, new Rectangle(210, 110, 80, 80));
 
             // Set the DashStyle property.
-            PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(310, 110, 80, 80));
+            g.DrawRectangle(p, new Rectangle(310, 110, 80, 80));
 
             // Set the DashStyle property.
-            PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(410, 110, 80, 80));
+            g.DrawRectangle(p, new Rectangle(410, 110, 80, 80));
 
             // Set the DashStyle property.
-            PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(510, 110, 80, 80));
+            g.DrawRectangle(p, new Rectangle(510, 110, 80, 80));
             #endregion
 
             #region 設定顏色
             // Set the DashStyle property.
             //skyBluePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            PenStyle.Brush = System.Drawing.Brushes.Aquamarine;
+            p.Brush = System.Drawing.Brushes.Aquamarine;
             // Draw a rectangle.
-            g.DrawRectangle(PenStyle, new Rectangle(10, 210, 80, 80));
+            g.DrawRectangle(p, new Rectangle(10, 210, 80, 80));
             #endregion
 
             //Dispose of the pen.
-            PenStyle.Dispose();
+            p.Dispose();
 
 
         }
@@ -452,51 +452,49 @@ namespace vcs_Draw5
             //Graphics g = pictureBox1.CreateGraphics();
 
             // Create a new pen.
-            Pen PenStyle = new Pen(bt_color.BackColor);
+            Pen p = new Pen(bt_color.BackColor);
 
             // Set the pen's width.
-            PenStyle.Width = linewidth;
+            p.Width = linewidth;
 
             // Set the LineJoin property.
             switch (jointype)
             {
-                case 0: PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel; break;
-                case 1: PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Miter; break;
-                case 2: PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.MiterClipped; break;
-                case 3: PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round; break;
+                case 0: p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel; break;
+                case 1: p.LineJoin = System.Drawing.Drawing2D.LineJoin.Miter; break;
+                case 2: p.LineJoin = System.Drawing.Drawing2D.LineJoin.MiterClipped; break;
+                case 3: p.LineJoin = System.Drawing.Drawing2D.LineJoin.Round; break;
                 default:
-                    PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel; break;
+                    p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel; break;
             }
 
             // Set the DashStyle property.
             switch (dashtype)
             {
-                case 0: PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
-                case 1: PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash; break;
-                case 2: PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; break;
-                case 3: PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
-                case 4: PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; break;
-                case 5: PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
+                case 0: p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
+                case 1: p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash; break;
+                case 2: p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot; break;
+                case 3: p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot; break;
+                case 4: p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot; break;
+                case 5: p.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid; break;
                 default:
-                    PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
+                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom; break;
             }
 
             // Draw
             switch (drawtype)
             {
-                case 0: g.DrawRectangle(PenStyle, new Rectangle(position_x, position_y, size_w, size_h)); break;
-                case 1: g.DrawEllipse(PenStyle, new Rectangle(position_x, position_y, size_w, size_h)); break;
-                case 2: g.DrawPie(PenStyle, new Rectangle(position_x, position_y, size_w, size_h), 0, 180); break;
-                case 3: g.DrawArc(PenStyle, new Rectangle(position_x, position_y, size_w, size_h), 90, 180); break;
+                case 0: g.DrawRectangle(p, new Rectangle(position_x, position_y, size_w, size_h)); break;
+                case 1: g.DrawEllipse(p, new Rectangle(position_x, position_y, size_w, size_h)); break;
+                case 2: g.DrawPie(p, new Rectangle(position_x, position_y, size_w, size_h), 0, 180); break;
+                case 3: g.DrawArc(p, new Rectangle(position_x, position_y, size_w, size_h), 90, 180); break;
                 //case 4: g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), position_x, position_y); break;
                 case 4: g.DrawString("畫字串", this.Font, new SolidBrush(bt_color.BackColor), position_x, position_y); break;
                 default:
-                    PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel; break;
+                    p.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel; break;
             }
-
             //Dispose of the pen.
-            PenStyle.Dispose();
-
+            p.Dispose();
         }
 
         private void button31_Click(object sender, EventArgs e)

@@ -738,29 +738,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //先畫 button10
-            Graphics buttonGraphics = button10.CreateGraphics();
-            Pen myPen = new Pen(Color.ForestGreen, 4.0F);
-            myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-
-            Rectangle theRectangle = button10.ClientRectangle;
-            theRectangle.Inflate(-2, -2);
-            buttonGraphics.DrawRectangle(myPen, theRectangle);
-            buttonGraphics.DrawRectangle(myPen, 10, 10, button10.Width - 20, button10.Height - 20);
-            buttonGraphics.Dispose();
-            myPen.Dispose();
-
-            //再畫 richTextBox1
-            buttonGraphics = richTextBox1.CreateGraphics();
-            myPen = new Pen(Color.ForestGreen, 4.0F);
-            myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-
-            theRectangle = richTextBox1.ClientRectangle;
-            theRectangle.Inflate(-2, -2);
-            buttonGraphics.DrawRectangle(myPen, theRectangle);
-            buttonGraphics.DrawRectangle(myPen, 10, 10, richTextBox1.Width - 20, richTextBox1.Height - 20);
-            buttonGraphics.Dispose();
-            myPen.Dispose();
 
         }
 

@@ -292,84 +292,6 @@ namespace vcs_Draw4
 
         }
 
-        private void button16_Click(object sender, EventArgs e)
-        {
-            int yy = 20;
-            int dy = 25;
-
-            p.Width = 5;
-            p.Color = Color.Blue;
-
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy * 2;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.AnchorMask;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.Custom;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.DiamondAnchor;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.Flat;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.NoAnchor;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.RoundAnchor;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.Square;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.SquareAnchor;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-            yy += dy;
-            p.EndCap = System.Drawing.Drawing2D.LineCap.Triangle;
-            g.DrawLine(p, 20, yy, 300, yy);
-
-        }
-
         private void button17_Click(object sender, EventArgs e)
         {
             g.DrawBezier(p, 0, 0, 40, 20, 200, 450, 500, 300);
@@ -670,17 +592,17 @@ namespace vcs_Draw4
         {
             // Create a new pen.
             //顏色、線寬分開寫
-            //Pen PenStyle = new Pen(bt_color2.BackColor);
+            //Pen p = new Pen(bt_color2.BackColor);
             // Set the pen's width.
-            //PenStyle.Width = linewidth;
+            //p.Width = linewidth;
 
             //顏色、線寬寫在一起
-            Pen PenStyle = new Pen(Color.Red, linewidth);
+            Pen p = new Pen(Color.Red, linewidth);
 
             // Draw the circle
-            g.DrawEllipse(PenStyle, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
             //Dispose of the pen.
-            PenStyle.Dispose();
+            p.Dispose();
         }
 
         private void button40_Click(object sender, EventArgs e)

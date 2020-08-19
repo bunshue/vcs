@@ -2384,9 +2384,11 @@ namespace vcs_DrAP
 
             Graphics g;
             g = pnl.CreateGraphics();
-            //Pen PenStyle = new Pen(Color.Black, 1);
-            //PenStyle.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            //g.DrawRectangle(PenStyle, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+            /*  debug
+            Pen p = new Pen(Color.Black, 1);
+            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            g.DrawRectangle(p, WIDTH / 10, WIDTH / 10, WIDTH * 80 / 100, WIDTH * 80 / 100);
+            */
 
             Brush b;
             long used = total - free;

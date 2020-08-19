@@ -460,7 +460,7 @@
             // 
             // tb_w
             // 
-            this.tb_w.Location = new System.Drawing.Point(31, 45);
+            this.tb_w.Location = new System.Drawing.Point(32, 45);
             this.tb_w.Name = "tb_w";
             this.tb_w.Size = new System.Drawing.Size(40, 22);
             this.tb_w.TabIndex = 2;
@@ -478,7 +478,7 @@
             // 
             // tb_x
             // 
-            this.tb_x.Location = new System.Drawing.Point(31, 17);
+            this.tb_x.Location = new System.Drawing.Point(32, 17);
             this.tb_x.Name = "tb_x";
             this.tb_x.Size = new System.Drawing.Size(40, 22);
             this.tb_x.TabIndex = 0;
@@ -619,7 +619,7 @@
             // 
             // tb_y2
             // 
-            this.tb_y2.Location = new System.Drawing.Point(77, 17);
+            this.tb_y2.Location = new System.Drawing.Point(78, 17);
             this.tb_y2.Name = "tb_y2";
             this.tb_y2.Size = new System.Drawing.Size(40, 22);
             this.tb_y2.TabIndex = 1;
@@ -628,7 +628,7 @@
             // 
             // tb_x2
             // 
-            this.tb_x2.Location = new System.Drawing.Point(31, 17);
+            this.tb_x2.Location = new System.Drawing.Point(33, 17);
             this.tb_x2.Name = "tb_x2";
             this.tb_x2.Size = new System.Drawing.Size(40, 22);
             this.tb_x2.TabIndex = 0;

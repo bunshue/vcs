@@ -30,17 +30,17 @@ namespace vcs_PacMan
 
             // Create a new pen.
             //顏色、線寬分開寫
-            //Pen PenStyle = new Pen(bt_color2.BackColor);
+            //Pen p = new Pen(bt_color2.BackColor);
             // Set the pen's width.
-            //PenStyle.Width = linewidth;
+            //p.Width = linewidth;
 
             //顏色、線寬寫在一起
-            Pen PenStyle = new Pen(Color.Red, linewidth);
+            Pen p = new Pen(Color.Red, linewidth);
 
             // Draw the circle
-            g.DrawEllipse(PenStyle, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
             //Dispose of the pen.
-            PenStyle.Dispose();
+            p.Dispose();
         }
 
         private void DrawPacman(int center_x, int center_y, float radius)

@@ -97,7 +97,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 248);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(344, 328);
+            this.pictureBox1.Size = new System.Drawing.Size(488, 328);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
@@ -136,11 +136,12 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button5.Location = new System.Drawing.Point(993, 56);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(102, 42);
             this.button5.TabIndex = 23;
+            this.button5.Text = "在控件上畫東西";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -199,11 +200,12 @@
             // 
             // button12
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button12.Location = new System.Drawing.Point(755, 200);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(102, 42);
             this.button12.TabIndex = 28;
+            this.button12.Text = "LineCap線條屬性";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -220,11 +222,12 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(874, 200);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(102, 42);
             this.button13.TabIndex = 31;
+            this.button13.Text = "DashStyle虛線樣式";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -303,7 +306,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(362, 449);
+            this.panel1.Location = new System.Drawing.Point(550, 453);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 100);
             this.panel1.TabIndex = 44;
@@ -394,6 +397,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 673);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button24);
@@ -418,7 +422,6 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
