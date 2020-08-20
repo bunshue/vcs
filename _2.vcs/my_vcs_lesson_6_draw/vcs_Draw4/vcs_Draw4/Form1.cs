@@ -297,51 +297,6 @@ namespace vcs_Draw4
             g.DrawBezier(p, 0, 0, 40, 20, 200, 450, 500, 300);
         }
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-            //純色筆刷
-            SolidBrush sb = new SolidBrush(Color.LightGreen);
-            g.FillEllipse(sb, 50, 50, 300, 100);
-
-            //規劃筆刷
-            HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 50, 150, 200, 100);
-
-            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 250, 150, 200, 100);
-
-            hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 450, 150, 200, 100);
-
-            //紋理筆刷
-            Image myImage = Image.FromFile(@"C:\______test_files\bear.jpg");
-            TextureBrush tb = new TextureBrush(myImage);
-            g.FillEllipse(tb, 50, 250, 300, 100);
-
-
-            //漸層筆刷
-            Rectangle r;
-            LinearGradientBrush lgb;
-
-            r = new Rectangle(50, 350, 300, 100);
-            lgb = new LinearGradientBrush(
-               r,
-               Color.Blue,
-               Color.Green,
-               LinearGradientMode.Horizontal);
-            g.FillEllipse(lgb, r);
-
-
-            r = new Rectangle(50, 450, 300, 100);
-            lgb = new LinearGradientBrush(
-               r,
-               Color.Blue,
-               Color.Green,
-               LinearGradientMode.BackwardDiagonal);
-            g.FillEllipse(lgb, r);
-
-        }
-
         public void draw_grid()
         {
             int i;

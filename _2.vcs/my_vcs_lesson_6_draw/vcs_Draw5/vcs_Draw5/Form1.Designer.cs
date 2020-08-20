@@ -66,14 +66,9 @@
             this.tb_x = new System.Windows.Forms.TextBox();
             this.numericUpDown_linewidth = new System.Windows.Forms.NumericUpDown();
             this.bt_color = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.button23 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tb_radius = new System.Windows.Forms.TextBox();
@@ -371,9 +366,6 @@
             this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.numericUpDown_linewidth);
             this.groupBox4.Controls.Add(this.bt_color);
-            this.groupBox4.Controls.Add(this.button26);
-            this.groupBox4.Controls.Add(this.button27);
-            this.groupBox4.Controls.Add(this.button25);
             this.groupBox4.Controls.Add(this.button10);
             this.groupBox4.Location = new System.Drawing.Point(658, 331);
             this.groupBox4.Name = "groupBox4";
@@ -513,36 +505,6 @@
             this.bt_color.UseVisualStyleBackColor = false;
             this.bt_color.Click += new System.EventHandler(this.button22_Click);
             // 
-            // button26
-            // 
-            this.button26.Location = new System.Drawing.Point(270, 21);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(75, 23);
-            this.button26.TabIndex = 13;
-            this.button26.Text = "畫X軸刻度";
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
-            // button27
-            // 
-            this.button27.Location = new System.Drawing.Point(186, 21);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(75, 23);
-            this.button27.TabIndex = 12;
-            this.button27.Text = "畫X軸線";
-            this.button27.UseVisualStyleBackColor = true;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
-            // 
-            // button25
-            // 
-            this.button25.Location = new System.Drawing.Point(91, 21);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(75, 23);
-            this.button25.TabIndex = 11;
-            this.button25.Text = "畫XY軸";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
             // button23
             // 
             this.button23.Location = new System.Drawing.Point(972, 398);
@@ -555,8 +517,6 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.button22);
-            this.groupBox6.Controls.Add(this.button31);
             this.groupBox6.Controls.Add(this.groupBox7);
             this.groupBox6.Controls.Add(this.numericUpDown_linewidth2);
             this.groupBox6.Controls.Add(this.bt_color2);
@@ -566,26 +526,6 @@
             this.groupBox6.TabIndex = 20;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "畫圓";
-            // 
-            // button22
-            // 
-            this.button22.Location = new System.Drawing.Point(235, 57);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(67, 30);
-            this.button22.TabIndex = 21;
-            this.button22.Text = "畫小精靈";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click_2);
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(245, 21);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(46, 27);
-            this.button31.TabIndex = 21;
-            this.button31.Text = "畫圓";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // groupBox7
             // 
@@ -732,9 +672,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button27;
-        private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button bt_color;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ComboBox comboBox_dashtype;
@@ -749,7 +686,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_linewidth;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button31;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tb_radius;
@@ -757,7 +693,6 @@
         private System.Windows.Forms.TextBox tb_x2;
         private System.Windows.Forms.NumericUpDown numericUpDown_linewidth2;
         private System.Windows.Forms.Button bt_color2;
-        private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Panel panel1;
     }
 }

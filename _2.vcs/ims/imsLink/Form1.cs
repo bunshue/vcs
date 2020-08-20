@@ -29,6 +29,7 @@ namespace imsLink
 
         bool flag_user_metering = false;   //在第3站加上測光模式
 
+        bool flag_enaglb_sound_effect = false;
         bool flag_enaglb_awb_function = true;
         bool flag_usb_mode = false;  //for webcam, stage1, stage3
         bool flag_check_webcam_signal = true;
@@ -3451,15 +3452,15 @@ namespace imsLink
                     pictureBox_contrast.Size = new Size(300, 256);
                 else
                     pictureBox_contrast.Size = new Size(280, 256);
-                lb_data_camera_gain.Location = new Point(1090, 40);
-                lb_data_camera_offset.Location = new Point(1090, 40 + 40);
-                lb_data_camera_bright.Location = new Point(1090, 40 + 80);
-                lb_data_camera_sign.Location = new Point(1090, 40 + 120);
 
-                cb_Contrast_Brightness_Gamma.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - 800, pictureBox1.Location.Y + 6);
-                cb_Gamma.Location = new Point(cb_Contrast_Brightness_Gamma.Location.X + 230, cb_Contrast_Brightness_Gamma.Location.Y);
+                lb_data_camera_gain.Location = new Point(1090 - 500 + 15, 40 + 260);
+                lb_data_camera_offset.Location = new Point(1090 - 500 + 15, 40 + 40 + 260);
+                lb_data_camera_bright.Location = new Point(1090 - 500 + 15, 40 + 80 + 260);
+                lb_data_camera_sign.Location = new Point(1090 - 500 + 15, 40 + 120 + 260);
+
+                cb_Contrast_Brightness_Gamma.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - 672, pictureBox1.Location.Y + 5);
+                cb_Gamma.Location = new Point(cb_Contrast_Brightness_Gamma.Location.X + 206, cb_Contrast_Brightness_Gamma.Location.Y);
             }
-
 
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -3829,6 +3830,7 @@ namespace imsLink
             //ToolTipTitle：設定提示視窗的標題。
             //toolTip1.ToolTipTitle = "提示訊息";
 
+            comboBox_webcam.Size = new Size(comboBox_webcam.Size.Width - 50, comboBox_webcam.Size.Height);
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
@@ -14111,6 +14113,9 @@ namespace imsLink
 
         void playSound(int number)
         {
+            if (flag_enaglb_sound_effect == false)
+                return;
+
             //播放系統預設的音效
             switch (number)
             {
@@ -21307,6 +21312,7 @@ namespace imsLink
 
         private void button75_Click(object sender, EventArgs e)
         {
+            richTextBox2.Clear();
             button75.BackColor = Color.Red;
             button75.Text = "選檔";
             openFileDialog1.Title = "把Script寫進檔案";
@@ -21321,12 +21327,11 @@ namespace imsLink
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
                 //richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
 
-
-                int x_st = 300;
-                int y_st = 300;
+                int x_st = 605;
+                int y_st = 465;
                 richTextBox2.Visible = true;
                 richTextBox2.Location = new Point(x_st, y_st);
-                richTextBox2.Size = new System.Drawing.Size(150, 500);
+                richTextBox2.Size = new System.Drawing.Size(139, 495);
                 richTextBox2.Clear();
 
                 StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
@@ -21334,6 +21339,7 @@ namespace imsLink
                 sr.Close();
 
                 parse_script_command_and_send();
+                //richTextBox2.Visible = false;
             }
             else
             {
@@ -21348,11 +21354,11 @@ namespace imsLink
             string filename = "gamma_default.txt";
             richTextBox1.Text += "開啟Gamma檔案: " + filename + "\n";
 
-            int x_st = 300;
-            int y_st = 300;
+            int x_st = 605;
+            int y_st = 465;
             richTextBox2.Visible = true;
             richTextBox2.Location = new Point(x_st, y_st);
-            richTextBox2.Size = new System.Drawing.Size(150, 500);
+            richTextBox2.Size = new System.Drawing.Size(139, 495);
             richTextBox2.Clear();
 
             StreamReader sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
@@ -21382,6 +21388,12 @@ namespace imsLink
                 gb_contrast_brightness2.Visible = false;
                 gb_contrast_brightness3.Visible = false;
                 pictureBox_contrast.Visible = false;
+
+                lb_data_camera_gain.Text = "";
+                lb_data_camera_offset.Text = "";
+                lb_data_camera_bright.Text = "";
+                lb_data_camera_sign.Text = "";
+                richTextBox2.Visible = false;
             }
         }
 

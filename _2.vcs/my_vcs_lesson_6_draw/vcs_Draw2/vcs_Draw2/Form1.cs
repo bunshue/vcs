@@ -81,7 +81,7 @@ namespace vcs_Draw2
             int dy;
 
             //button
-            x_st = 800;
+            x_st = 820;
             y_st = 10;
             dx = 120;
             dy = 50;
@@ -89,32 +89,43 @@ namespace vcs_Draw2
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
 
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button15.Location = new Point(x_st + dx * 3, y_st + dy * 3);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
 
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);    //clear
+            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);    //save
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);    //exit
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
@@ -864,25 +875,159 @@ namespace vcs_Draw2
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //純色筆刷
+            SolidBrush sb = new SolidBrush(Color.LightGreen);
+            g.FillEllipse(sb, 50, 50, 300, 100);
 
+            //規劃筆刷
+            HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 50, 150, 200, 100);
+
+            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 250, 150, 200, 100);
+
+            hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 450, 150, 200, 100);
+
+            //紋理筆刷
+            Image myImage = Image.FromFile(@"C:\______test_files\bear.jpg");
+            TextureBrush tb = new TextureBrush(myImage);
+            g.FillEllipse(tb, 50, 250, 300, 100);
+
+
+            //漸層筆刷
+            Rectangle r;
+            LinearGradientBrush lgb;
+
+            r = new Rectangle(50, 350, 300, 100);
+            lgb = new LinearGradientBrush(
+               r,
+               Color.Blue,
+               Color.Green,
+               LinearGradientMode.Horizontal);
+            g.FillEllipse(lgb, r);
+
+
+            r = new Rectangle(50, 450, 300, 100);
+            lgb = new LinearGradientBrush(
+               r,
+               Color.Blue,
+               Color.Green,
+               LinearGradientMode.BackwardDiagonal);
+            g.FillEllipse(lgb, r);
+
+
+        }
+
+        private void DrawXY()//画X轴Y轴
+        {
+            int width = 600;
+            int height = 600;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+            bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.Clear(Color.Pink);
+
+            //Graphics g = this.pictureBox1.CreateGraphics();
+            System.Drawing.Point px1 = new System.Drawing.Point(0, this.pictureBox1.Height);
+            System.Drawing.Point px2 = new System.Drawing.Point(this.pictureBox1.Width, this.pictureBox1.Height);
+            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
+            System.Drawing.Point py1 = new System.Drawing.Point(0, this.pictureBox1.Height);
+            System.Drawing.Point py2 = new System.Drawing.Point(0, 0);
+            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Refresh();
+            //g.Dispose();
+        }
+
+        private void DrawXLine()    //画X轴平行线
+        {
+            //Graphics g = this.pictureBox1.CreateGraphics();
+            for (int i = 1; i < 9; i++)
+            {
+                Point px1 = new Point(0, this.pictureBox1.Height - i * 50);
+                Point px2 = new Point(this.pictureBox1.Width, this.pictureBox1.Height - i * 50);
+                g.DrawLine(new Pen(Brushes.Black, 1), px1, px2);
+            }
+            //g.Dispose();
+            //pictureBox1.Refresh();
+        }
+        private void DrawYLine()    //画X轴刻度
+        {
+            //Graphics g = this.pictureBox1.CreateGraphics();
+            for (int i = 1; i < 9; i++)
+            {
+                System.Drawing.Point py1 = new System.Drawing.Point(100 * i, this.pictureBox1.Height - 5);
+                System.Drawing.Point py2 = new System.Drawing.Point(100 * i, this.pictureBox1.Height);
+                g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
+            }
+            //pictureBox1.Refresh();
+            //g.Dispose();
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            //畫XY軸
+            DrawXY();
+            pictureBox1.Image = bitmap1;
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //畫X軸線
+            DrawXLine();
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //畫X軸刻度
+            DrawYLine();
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
 
         }
 
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            bitmap1 = null;
-            pictureBox1.Image = null;
-            richTextBox1.Clear();
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
         }
 
         void save_image_to_drive()
@@ -912,16 +1057,6 @@ namespace vcs_Draw2
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -981,7 +1116,7 @@ namespace vcs_Draw2
             }
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void bt_draw1_Click(object sender, EventArgs e)
         {
             //p = new Pen(Color.Red, 5);
             int width, height;
@@ -992,7 +1127,7 @@ namespace vcs_Draw2
 
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void bt_draw2_Click(object sender, EventArgs e)
         {
             //g.Clear(Color.LightGreen);
             p.Width = 10;
@@ -1001,10 +1136,24 @@ namespace vcs_Draw2
                 g.DrawLine(p, i, 0, i, pictureBox1.Height);
                 p.Width += 2;
             }
-
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            bitmap1 = null;
+            pictureBox1.Image = null;
+            richTextBox1.Clear();
+        }
 
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            save_image_to_drive();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
 
 

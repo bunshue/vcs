@@ -98,7 +98,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(600, 600);
+            this.pictureBox1.Size = new System.Drawing.Size(700, 700);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -162,21 +162,23 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button7.Location = new System.Drawing.Point(874, 104);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(102, 42);
             this.button7.TabIndex = 25;
+            this.button7.Text = "畫2D陣列1";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button8.Location = new System.Drawing.Point(993, 104);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(102, 42);
             this.button8.TabIndex = 24;
+            this.button8.Text = "畫2D陣列2";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -187,6 +189,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(102, 42);
             this.button10.TabIndex = 27;
+            this.button10.Text = "畫各種編碼的區間";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -408,6 +411,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1219, 673);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cb_magnifying);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.cb_snake);
@@ -438,7 +442,6 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Name = "Form1";
             this.Text = "Form1";

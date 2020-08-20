@@ -374,59 +374,6 @@ namespace vcs_Draw5
 
         }
 
-        private void DrawXY()//画X轴Y轴
-        {
-            //Graphics g = this.pictureBox1.CreateGraphics();
-            System.Drawing.Point px1 = new System.Drawing.Point(0, this.pictureBox1.Height);
-            System.Drawing.Point px2 = new System.Drawing.Point(this.pictureBox1.Width, this.pictureBox1.Height);
-            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
-            System.Drawing.Point py1 = new System.Drawing.Point(0, this.pictureBox1.Height);
-            System.Drawing.Point py2 = new System.Drawing.Point(0, 0);
-            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
-            pictureBox1.Refresh();
-            //g.Dispose();
-        }
-
-        private void DrawXLine()    //画X轴平行线
-        {
-            //Graphics g = this.pictureBox1.CreateGraphics();
-            for (int i = 1; i < 9; i++)
-            {
-                Point px1 = new Point(0, this.pictureBox1.Height - i * 50);
-                Point px2 = new Point(this.pictureBox1.Width, this.pictureBox1.Height - i * 50);
-                g.DrawLine(new Pen(Brushes.Black, 1), px1, px2);
-            }
-            //g.Dispose();
-            pictureBox1.Refresh();
-        }
-        private void DrawYLine()    //画X轴刻度
-        {
-            //Graphics g = this.pictureBox1.CreateGraphics();
-            for (int i = 1; i < 9; i++)
-            {
-                System.Drawing.Point py1 = new System.Drawing.Point(100 * i, this.pictureBox1.Height - 5);
-                System.Drawing.Point py2 = new System.Drawing.Point(100 * i, this.pictureBox1.Height);
-                g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
-            }
-            pictureBox1.Refresh();
-            //g.Dispose();
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            DrawXY();
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            DrawXLine();
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            DrawYLine();
-        }
-
         private void button22_Click(object sender, EventArgs e)
         {
             colorDialog1.AllowFullOpen = true;
@@ -497,10 +444,6 @@ namespace vcs_Draw5
             p.Dispose();
         }
 
-        private void button31_Click(object sender, EventArgs e)
-        {
-        }
-
         private void button22_Click_1(object sender, EventArgs e)
         {
             colorDialog1.AllowFullOpen = true;
@@ -510,10 +453,6 @@ namespace vcs_Draw5
                 bt_color2.BackColor = colorDialog1.Color;
             }
 
-        }
-
-        private void button22_Click_2(object sender, EventArgs e)
-        {
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
