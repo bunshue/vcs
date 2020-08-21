@@ -255,20 +255,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //依字串長度改變控件大小
-            //AutoSizeControl
-            int textPadding = 10;   //表示要套用至控制項所有邊緣的填補量
-            button18.Text = "012345678901234567890123456789012345";
-            Graphics g = button2.CreateGraphics();      //// Create a Graphics object for the Control.
-            // Get the Size needed to accommodate the formatted Text.
-            Size preferredSize = g.MeasureString(button18.Text, button18.Font).ToSize();
-            richTextBox1.Text += "size W = " + preferredSize.Width.ToString() + "\n";
-            richTextBox1.Text += "size H = " + preferredSize.Height.ToString() + "\n";
-            // Pad the text and resize the control.
-            button18.ClientSize = new Size(
-                preferredSize.Width + (textPadding * 2),
-                preferredSize.Height + (textPadding * 2));
-            g.Dispose();    // Clean up the Graphics object.
 
         }
 
@@ -348,11 +334,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得目前應用程式版本\n";
-            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
-
-            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
-            richTextBox1.Text += FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -373,12 +354,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button28_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
-            // Get the file version for the notepad.
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
-
-            // Print the file name and version number.
-            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
 
         }
 
@@ -473,8 +448,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button34_Click_1(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得軟體版本\t";
-            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
         }
 
         private void button35_Click_1(object sender, EventArgs e)
@@ -546,41 +519,12 @@ namespace vcs_test_all_99_tmp1
 
         private void button40_Click(object sender, EventArgs e)
         {
-            //Form.Controls 屬性是用來取得這張Form的控制項
-            //Controls.GetType 是取得這個控制項的類別名稱
 
-            for (int i = 0; i < this.Controls.Count; i++)
-            {
-                richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
-                richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
-                richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
-
-
-                if (this.Controls[i] is Button)
-                {
-                    richTextBox1.Text += "這是Button" + "\n";
-                }
-
-            }
 
         }
 
         private void button39_Click(object sender, EventArgs e)
         {
-            //列舉控制項
-            int i = 1;
-            foreach (Control ctrl in this.Controls)
-            {
-                //取出控制項的類型
-                string TypeName = ctrl.GetType().Name;
-                //類型若是Label
-                if (TypeName == "Button")
-                {
-                    ctrl.Name = "test" + i.ToString();
-                    richTextBox1.Text += ctrl.Name + "\n";
-                    i++;
-                }
-            }
 
         }
 

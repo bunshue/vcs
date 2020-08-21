@@ -24,6 +24,76 @@ namespace vcs_test_all_06_System
         public Form1()
         {
             InitializeComponent();
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 210;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button15.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+
+            button36.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button38.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -350,7 +420,12 @@ namespace vcs_test_all_06_System
 
         private void button19_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
+            // Get the file version for the notepad.
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
 
+            // Print the file name and version number.
+            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -472,6 +547,23 @@ namespace vcs_test_all_06_System
             guid = Guid.NewGuid();
             richTextBox1.Text += "GUID3 : " + guid + "\n";
 
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "取得軟體版本\t";
+            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+        }
+
+        private void button23_Click_1(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "取得目前應用程式版本\n";
+            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
+            richTextBox1.Text += FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
 
         }
 

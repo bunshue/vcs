@@ -126,5 +126,68 @@ namespace vcs_test_all_00_Control
 
             richTextBox1.Text += "你按了 " + ((Button)sender).Name.ToString() + "\n";
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //Form.Controls 屬性是用來取得這張Form的控制項
+            //Controls.GetType 是取得這個控制項的類別名稱
+
+            for (int i = 0; i < this.Controls.Count; i++)
+            {
+                richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
+                richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
+                richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
+
+
+                if (this.Controls[i] is Button)
+                {
+                    richTextBox1.Text += "這是Button" + "\n";
+                }
+
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //列舉控制項
+            int i = 1;
+            foreach (Control ctrl in this.Controls)
+            {
+                //取出控制項的類型
+                string TypeName = ctrl.GetType().Name;
+                //類型若是Label
+                if (TypeName == "Button")
+                {
+                    ctrl.Name = "test" + i.ToString();
+                    richTextBox1.Text += ctrl.Name + "\n";
+                    i++;
+                }
+            }
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //依字串長度改變控件大小
+            //AutoSizeControl
+            int textPadding = 10;   //表示要套用至控制項所有邊緣的填補量
+            button13.Text = "012345678901234567890123456789012345";
+            Graphics g = button2.CreateGraphics();      //// Create a Graphics object for the Control.
+            // Get the Size needed to accommodate the formatted Text.
+            Size preferredSize = g.MeasureString(button13.Text, button13.Font).ToSize();
+            richTextBox1.Text += "size W = " + preferredSize.Width.ToString() + "\n";
+            richTextBox1.Text += "size H = " + preferredSize.Height.ToString() + "\n";
+            // Pad the text and resize the control.
+            button13.ClientSize = new Size(
+                preferredSize.Width + (textPadding * 2),
+                preferredSize.Height + (textPadding * 2));
+            g.Dispose();    // Clean up the Graphics object.
+
+        }
     }
 }

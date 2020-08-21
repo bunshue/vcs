@@ -182,7 +182,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(154, 42);
             this.button18.TabIndex = 19;
-            this.button18.Text = "依字串長度改變控件大小";
+            this.button18.Text = "xxx";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -215,7 +215,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(154, 42);
             this.button25.TabIndex = 25;
-            this.button25.Text = "取得目前應用程式版本";
+            this.button25.Text = "xxx";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -248,7 +248,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(154, 42);
             this.button28.TabIndex = 29;
-            this.button28.Text = "提供磁碟上實體檔案的版本資訊";
+            this.button28.Text = "xxx";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -394,7 +394,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(154, 42);
             this.button34.TabIndex = 55;
-            this.button34.Text = "取得軟體版本";
+            this.button34.Text = "xxx";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click_1);
             // 
@@ -427,7 +427,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(154, 42);
             this.button39.TabIndex = 60;
-            this.button39.Text = "取得所有控制項名稱2";
+            this.button39.Text = "xxx";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -438,7 +438,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(154, 42);
             this.button40.TabIndex = 59;
-            this.button40.Text = "取得所有控制項名稱1";
+            this.button40.Text = "xxx";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
