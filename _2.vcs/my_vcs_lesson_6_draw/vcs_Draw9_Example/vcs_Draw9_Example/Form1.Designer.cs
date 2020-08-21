@@ -594,6 +594,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(100, 40);
             this.button38.TabIndex = 66;
+            this.button38.Text = "Ex9";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 

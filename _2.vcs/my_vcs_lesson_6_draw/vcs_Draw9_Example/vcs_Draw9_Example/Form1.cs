@@ -3645,6 +3645,44 @@ namespace vcs_Draw9_Example
 
         private void button38_Click(object sender, EventArgs e)
         {
+            int center_x = 200;
+            int center_y = 200;
+            int radius = 200;
+            int linewidth = 5;
+            int angle = 0;
+
+            // Create a Graphics object for the Control.
+            Graphics g = pictureBox1.CreateGraphics();
+
+            // Create a new pen.
+            Pen p = new Pen(Color.Red);
+
+            // Set the pen's width.
+            p.Width = linewidth;
+
+            // Draw
+
+            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+
+            for (angle = 0; angle < 360; angle += 10)
+            {
+                int xx = 0;
+                int yy = 0;
+                xx = (int)(radius * Math.Cos(angle * Math.PI / 180));
+                yy = (int)(radius * Math.Sin(angle * Math.PI / 180));
+
+                // Create a new pen.
+                //Pen PenStyle = new Pen(Brushes.DeepSkyBlue);
+
+                // Set the pen's width.
+                p.Width = 8.0F;
+
+                g.DrawLine(new Pen(Brushes.Red, 5), center_x, center_y, center_x + xx, center_y - yy);
+
+
+            }
+            //Dispose of the pen.
+            p.Dispose();
 
         }
 
