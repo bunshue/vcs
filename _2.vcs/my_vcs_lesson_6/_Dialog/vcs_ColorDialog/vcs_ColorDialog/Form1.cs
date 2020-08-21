@@ -27,6 +27,7 @@ namespace vcs_ColorDialog
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.BackColor = colorDialog1.Color;
+                button1.BackColor = colorDialog1.Color;
             }
         }
 

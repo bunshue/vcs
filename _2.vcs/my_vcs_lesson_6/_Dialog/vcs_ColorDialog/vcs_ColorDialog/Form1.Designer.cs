@@ -43,7 +43,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(159, 52);
             this.button1.TabIndex = 0;
-            this.button1.Text = "色彩對話方塊";
+            this.button1.Text = "色彩對話方塊\r\n選擇背景色";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -59,7 +59,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 153);
+            this.button2.Location = new System.Drawing.Point(12, 176);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(159, 52);
             this.button2.TabIndex = 2;
@@ -80,7 +80,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(12, 82);
+            this.button4.Location = new System.Drawing.Point(12, 105);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(159, 52);
             this.button4.TabIndex = 4;

@@ -123,9 +123,9 @@ namespace vcs_Draw2
             
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);    //clear
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);    //save
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);    //exit
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
@@ -139,7 +139,6 @@ namespace vcs_Draw2
             Font f = new Font("標楷體", 18, FontStyle.Bold);
             SolidBrush sb = new SolidBrush(Color.Black);
             graphic.DrawString("生日快樂!", f, sb, 10, 10);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -286,7 +285,7 @@ namespace vcs_Draw2
             //先畫 button5
             Graphics buttonGraphics = button5.CreateGraphics();
             Pen p = new Pen(Color.ForestGreen, 4.0F);
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            p.DashStyle = DashStyle.DashDotDot;
 
             Rectangle theRectangle = button5.ClientRectangle;
             theRectangle.Inflate(-2, -2);
@@ -298,7 +297,7 @@ namespace vcs_Draw2
             //再畫 richTextBox1
             buttonGraphics = richTextBox1.CreateGraphics();
             p = new Pen(Color.ForestGreen, 4.0F);
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            p.DashStyle = DashStyle.DashDotDot;
 
             theRectangle = richTextBox1.ClientRectangle;
             theRectangle.Inflate(-2, -2);
@@ -870,11 +869,6 @@ namespace vcs_Draw2
 
         private void button14_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
             //純色筆刷
             SolidBrush sb = new SolidBrush(Color.LightGreen);
             g.FillEllipse(sb, 50, 50, 300, 100);
@@ -916,6 +910,57 @@ namespace vcs_Draw2
                LinearGradientMode.BackwardDiagonal);
             g.FillEllipse(lgb, r);
 
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            int x_st = 10;
+            int y_st = 10;
+            int w = 100;
+            int h = 200;
+            int dx = 130;
+
+            //g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 6);
+
+            Font f = new Font("標楷體", 20, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            // Create a new pen.
+            Pen p = new Pen(Color.Red);
+            p.Width = 10;
+
+            // Set the LineJoin property.
+            p.LineJoin = LineJoin.Miter;
+            // Draw a rectangle.
+            g.DrawRectangle(p, new Rectangle(x_st, y_st, w, h));
+            g.DrawString("Miter", f, sb, new PointF(x_st, y_st + h + 10));
+
+            // Set the LineJoin property.
+            p.LineJoin = LineJoin.Bevel;
+            // Draw a rectangle.
+            x_st += dx;
+            g.DrawRectangle(p, new Rectangle(x_st, y_st, w, h));
+            g.DrawString("Bevel", f, sb, new PointF(x_st, y_st + h + 10));
+
+            // Set the LineJoin property.
+            p.LineJoin = LineJoin.Round;
+            // Draw a rectangle.
+            x_st += dx;
+            g.DrawRectangle(p, new Rectangle(x_st, y_st, w, h));
+            g.DrawString("Round", f, sb, new PointF(x_st, y_st + h + 10));
+
+            // Set the LineJoin property.
+            p.LineJoin = LineJoin.MiterClipped;
+            // Draw a rectangle.
+            x_st += dx;
+            g.DrawRectangle(p, new Rectangle(x_st, y_st, w, h));
+            g.DrawString("MiterClipped", f, sb, new PointF(x_st, y_st + h + 10));
+
+            string mesg = "Miter : 指定斜接接合。這會產生尖角或銳角，取決於斜接的長度是否超過斜接限制。\nBevel : 指定斜面接合。這會產生對角\nRound : 指定圓形接合。這會在直線之間產生平滑且圓的弧形。\nMiterClipped : 指定斜接接合。這會產生尖角或斜面角，取決於斜接的長度是否超過斜接限制。";
+            x_st = 10;
+            f = new Font("標楷體", 10, FontStyle.Bold);
+            g.DrawString(mesg, f, sb, new PointF(0, y_st + h + 70));     
 
         }
 
@@ -995,30 +1040,78 @@ namespace vcs_Draw2
 
         private void button20_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "畫一些圓\n";
+
+            int center_x;
+            int center_y;
+            int radius;
+            int linewidth;
+            Color c;
+
+            center_x = 100;
+            center_y = 100;
+            radius = 100;
+            linewidth = 10;
+            c = Color.Red;
+
+            DrawCircle(center_x, center_y, radius, linewidth, c);
+            center_x += 200;
+            center_y += 200;
+            DrawCircle(center_x, center_y, radius, linewidth, c);
+
+            center_x += 200;
+            center_y += 200;
+            DrawCircle(center_x, center_y, radius, linewidth, c);
 
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //DrawStar
 
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //DrawHeart
 
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //DrawPicture
+            //在指定位置畫上一圖
+            // Create image.
+            Image newImage = Image.FromFile(@"C:\______test_files\cat\cat2.png");
+            //Image newImage = Resource1.doraemon;
 
+            // Create coordinates for upper-left corner of image.
+            int x = 200;
+            int y = 200;
+
+            // Draw image to screen.
+            g.DrawImage(newImage, x, y);
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            DrawGrid();
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            Font f = new Font("標楷體", 16);
+            SolidBrush sb = new SolidBrush(Color.Red);
+
+            for (int i = 1; i <= 10; i++)
+            {
+                p = new Pen(Color.Red, i);
+                g.DrawEllipse(p, 350, 50 + 50 * i, i, i); //繪製紅色圓點
+
+                g.DrawString(i.ToString(), f, sb, 250.0F, 50.0F + 50 * i);
+            }
+
+
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1155,9 +1248,38 @@ namespace vcs_Draw2
             Application.Exit();
         }
 
+        private void DrawCircle(int center_x, int center_y, int radius, int linewidth, Color c)
+        {
+            // Create a new pen.
+            //顏色、線寬分開寫
+            //Pen p = new Pen(c);
+            // Set the pen's width.
+            //p.Width = linewidth;
+
+            //顏色、線寬寫在一起
+            Pen p = new Pen(c, linewidth);
+
+            // Draw the circle
+            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+            //Dispose of the pen.
+            p.Dispose();
+        }
 
 
 
+        private void DrawGrid()
+        {
+            int i;
+            p = new Pen(Color.Navy, 1);
+            for (i = 0; i < 7; i++)
+            {
+                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+            }
+            for (i = 0; i < 7; i++)
+            {
+                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+            }
+        }
 
 
     }

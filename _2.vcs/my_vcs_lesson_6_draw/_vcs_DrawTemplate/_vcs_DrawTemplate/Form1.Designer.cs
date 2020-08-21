@@ -156,7 +156,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 40);
             this.button8.TabIndex = 10;
-            this.button8.Text = "新進測項1";
+            this.button8.Text = "xxx";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -167,7 +167,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(100, 40);
             this.button10.TabIndex = 12;
-            this.button10.Text = "產生驗證圖片";
+            this.button10.Text = "xxx";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -178,7 +178,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(100, 40);
             this.button11.TabIndex = 11;
-            this.button11.Text = "建立8位灰度影像";
+            this.button11.Text = "xxx";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -189,7 +189,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(100, 40);
             this.button12.TabIndex = 13;
-            this.button12.Text = "二值化圖片";
+            this.button12.Text = "xxx";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

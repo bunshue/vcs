@@ -51,15 +51,11 @@ namespace vcs_Draw4
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //g.Clear(Color.Yellow);
             g.Clear(BackColor);
-            if (checkBox1.Checked == true)
-                draw_grid();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            draw_grid();
             Pen bluePen = new Pen(Color.Blue, 3);// Create pens.
 
             Point point1a = new Point(0, 0);
@@ -86,11 +82,6 @@ namespace vcs_Draw4
 
             Rectangle r = new Rectangle(200, 200, 200, 100);
             g.DrawEllipse(p, r);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            draw_grid();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -297,20 +288,6 @@ namespace vcs_Draw4
             g.DrawBezier(p, 0, 0, 40, 20, 200, 450, 500, 300);
         }
 
-        public void draw_grid()
-        {
-            int i;
-            p = new Pen(Color.Navy, 1);
-            for (i = 0; i < 7; i++)
-            {
-                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
-            }
-            for (i = 0; i < 7; i++)
-            {
-                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
-            }
-        }
-
         private void button32_Click(object sender, EventArgs e)
         {
             Point[] pt = new Point[360];    //一維陣列內有360個Point
@@ -456,22 +433,6 @@ namespace vcs_Draw4
 
         }
 
-        private void button33_Click(object sender, EventArgs e)
-        {
-            //在指定位置畫上一圖
-            // Create image.
-            Image newImage = Image.FromFile(@"C:\______test_files\cat\cat2.png");
-            //Image newImage = Resource1.doraemon;
-
-            // Create coordinates for upper-left corner of image.
-            int x = 200;
-            int y = 200;
-
-            // Draw image to screen.
-            g.DrawImage(newImage, x, y);
-
-        }
-
         private void button34_Click(object sender, EventArgs e)
         {
             // Create points that define curve.
@@ -539,52 +500,6 @@ namespace vcs_Draw4
 
             Pen greenPen = new Pen(Color.Green, 3); // Create pens.
             g.DrawCurve(greenPen, curvePoints); //畫曲線
-
-
-        }
-
-        private void DrawCircle(int center_x, int center_y, int radius, int linewidth)
-        {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(bt_color2.BackColor);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(Color.Red, linewidth);
-
-            // Draw the circle
-            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
-            //Dispose of the pen.
-            p.Dispose();
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            int center_x = 300;
-            int center_y = 300;
-            int radius = 200;
-            DrawCircle(center_x, center_y, radius, 5);
-
-
-            DrawCircle(300, 300, 1, 1);
-
-            p = new Pen(Color.Red, 1);
-            g.DrawEllipse(p, 350, 350, 1, 1); //繪製紅色圓點
-
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-
-            for (int i = 1; i <= 10; i++)
-            {
-                p = new Pen(Color.Red, i);
-                g.DrawEllipse(p, 350, 50 + 50 * i, i, i); //繪製紅色圓點
-
-                g.DrawString(i.ToString(), f, sb, 250.0F, 50.0F + 50 * i);
-            }
 
 
         }
