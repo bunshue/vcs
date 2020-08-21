@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 
-namespace 小畫家大全3
+namespace vcs_Paint
 {
     public partial class Form1 : Form
     {

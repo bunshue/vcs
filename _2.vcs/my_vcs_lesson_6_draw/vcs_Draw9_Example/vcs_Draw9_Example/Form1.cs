@@ -34,133 +34,86 @@ namespace vcs_Draw9_Example
             sb = new SolidBrush(Color.Blue);
             g.Clear(Color.Red);             //useless??
             pictureBox1.BackColor = Color.Pink;
-            show_item_location();
+            show_item_location(0);
 
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.BackColor = Color.Pink;
         }
 
-        void show_item_location()
-        {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 850;
-            y_st = 10;
-            dx = 120;
-            dy = 50;
-
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button15.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-
-            button16.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
-            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dy / 2);
-
-
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
-
-            //pictureBox1.Location = new Point(10, 10);
-        }
-
-        void show_item_location2()
+        void show_item_location(int form_position_x_st)
         {
             pictureBox2.Visible = false;
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 
-            this.Size = new Size(1700, 900);
+            this.Size = new Size(1460 + form_position_x_st, 900);
             int x_st;
             int y_st;
             int dx;
             int dy;
 
             //button
-            x_st = 1250;
+            x_st = 850 + form_position_x_st;
             y_st = 10;
-            dx = 120;
-            dy = 50;
+            dx = 110;
+            dy = 45;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
 
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
 
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
 
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button34.Location = new Point(x_st + dx * 4, y_st + dy * 6);
 
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dy / 2);
+            button35.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button36.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button39.Location = new Point(x_st + dx * 4, y_st + dy * 7);
 
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 8 + dy / 2);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
@@ -1611,8 +1564,253 @@ namespace vcs_Draw9_Example
 
         private void button13_Click(object sender, EventArgs e)
         {
+            open_test_file();
+            find_brightness();
+            do_statistics();
+        }
+
+        void open_test_file()
+        {
+            //開檔
+            string filename = @"C:\______test_files\test_pic.bmp";
+            Image image1 = new Bitmap(filename, true);
+            pictureBox1.Image = image1;
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.ClientSize = new Size(image1.Size.Width, image1.Size.Height);    //設定pictureBox的大小
+
+            richTextBox1.Text += "W = " + image1.Size.Width.ToString() + "  H = " + image1.Size.Height.ToString() + "\n";
+        }
+
+        void find_brightness()
+        {
+            //找過亮
+            string filename = @"C:\______test_files\test_pic.bmp";
+            bitmap1 = new Bitmap(filename);
+            Graphics g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
+
+            int i;
+            int j;
+            int A;
+            int R;
+            int G;
+            int B;
+            int search_size = 256;   //256X256
+            int awb_block = 32;     //AWB block size width, height
+            int ww = awb_block;
+            int hh = awb_block;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int center_x = W / 2;
+            int center_y = H / 2;
+            int x_st = center_x - search_size / 2;
+            int y_st = center_y - search_size / 2;
+
+            for (i = 0; i <= (search_size / awb_block); i++)
+            {
+                g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
+                g.DrawLine(new Pen(Color.Red, 1), x_st + awb_block * i, y_st, x_st + awb_block * i, y_st + search_size - 1);
+            }
+
+            int[] saturation_array = new int[(search_size / awb_block) * (search_size / awb_block)];
+
+            int upper_bound = 240;
+            for (j = y_st; j < (y_st + search_size); j++)
+            {
+                for (i = x_st; i < (x_st + search_size); i++)
+                {
+                    Color pp = bitmap1.GetPixel(i, j);
+
+                    A = pp.A;
+                    R = pp.R;
+                    G = pp.G;
+                    B = pp.B;
+
+                    if ((R >= upper_bound) && (G >= upper_bound) && (B >= upper_bound))
+                    {
+                        saturation_array[((i - x_st) / awb_block) + (((j - y_st) / awb_block)) * (search_size / awb_block)]++;
+
+                    }
+                }
+            }
+
+            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 255, 0));
+            //richTextBox1.Text += "\nresult:\n";
+            for (i = 0; i < saturation_array.Length; i++)
+            {
+                //richTextBox1.Text += "saturation_array[" + i.ToString() + "] = " + saturation_array[i].ToString() + "\n";
+                if (saturation_array[i] == 0)
+                {
+                    g.FillRectangle(semiTransBrush, new Rectangle(x_st + awb_block * (i % (search_size / awb_block)), y_st + awb_block * (i / (search_size / awb_block)), awb_block, awb_block));
+                }
+            }
+
 
         }
+
+        void do_statistics()
+        {
+            pictureBox2.Size = new Size(358, 262);
+            pictureBox2.Location = new Point(100, 480);
+
+            //統計
+
+            string filename = @"C:\______test_files\test_pic.bmp";
+            bitmap1 = new Bitmap(filename);
+            Graphics g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
+
+            Graphics g2 = pictureBox2.CreateGraphics();
+            //pictureBox1.Image = bitmap1;
+
+            int i;
+            int j;
+            int A;
+            int R;
+            int G;
+            int B;
+            int search_size = 256;   //256X256
+            int awb_block = 32;     //AWB block size width, height
+            int ww = awb_block;
+            int hh = awb_block;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int center_x = W / 2;
+            int center_y = H / 2;
+            int x_st = center_x - search_size / 2;
+            int y_st = center_y - search_size / 2;
+
+            int[,] rgb_array = new int[3, 16];
+
+            for (i = 0; i <= (search_size / awb_block); i++)
+            {
+                g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
+                g.DrawLine(new Pen(Color.Red, 1), x_st + awb_block * i, y_st, x_st + awb_block * i, y_st + search_size - 1);
+            }
+
+            int[] saturation_array = new int[(search_size / awb_block) * (search_size / awb_block)];
+
+            int upper_bound = 240;
+            for (j = y_st; j < (y_st + search_size); j++)
+            {
+                for (i = x_st; i < (x_st + search_size); i++)
+                {
+                    Color pp = bitmap1.GetPixel(i, j);
+
+                    A = pp.A;
+                    R = pp.R;
+                    G = pp.G;
+                    B = pp.B;
+
+                    if ((R >= upper_bound) && (G >= upper_bound) && (B >= upper_bound))
+                    {
+                        saturation_array[((i - x_st) / awb_block) + (((j - y_st) / awb_block)) * (search_size / awb_block)]++;
+
+                    }
+                    rgb_array[0, (R / 16)] += R;
+                    rgb_array[1, (G / 16)] += G;
+                    rgb_array[2, (B / 16)] += B;
+                }
+
+            }
+
+            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(60, 0, 255, 0));
+            //richTextBox1.Text += "\nresult:\n";
+            for (i = 0; i < saturation_array.Length; i++)
+            {
+                //richTextBox1.Text += "saturation_array[" + i.ToString() + "] = " + saturation_array[i].ToString() + "\n";
+                if (saturation_array[i] == 0)
+                {
+                    g.FillRectangle(semiTransBrush, new Rectangle(x_st + awb_block * (i % (search_size / awb_block)), y_st + awb_block * (i / (search_size / awb_block)), awb_block, awb_block));
+                }
+            }
+
+            int rgb_max = 0;
+
+            richTextBox1.Text += "R = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += rgb_array[0, i].ToString() + " ";
+                if (rgb_max < rgb_array[0, i])
+                    rgb_max = rgb_array[0, i];
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "G = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += rgb_array[1, i].ToString() + " ";
+                if (rgb_max < rgb_array[1, i])
+                    rgb_max = rgb_array[1, i];
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "B = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                richTextBox1.Text += rgb_array[2, i].ToString() + " ";
+                if (rgb_max < rgb_array[2, i])
+                    rgb_max = rgb_array[2, i];
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "rgb_max = " + rgb_max.ToString() + "\n";
+
+            //g2.DrawRectangle(new Pen(Color.Red, 1), new Rectangle(50, 50, 200, 100));
+
+            //g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 255, 0)), new Rectangle(50, 50, 200, 100));
+
+
+            //SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(255, 0, 255, 0));
+
+            int height = 300;
+            int h = 0;
+            richTextBox1.Text += "normalize\n";
+
+            richTextBox1.Text += "R = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                h = (int)((double)rgb_array[0, i] * height / rgb_max);
+                richTextBox1.Text += ((int)((double)rgb_array[0, i] * height / rgb_max)).ToString() + " ";
+
+                if (h < 1)
+                    h = 1;
+                g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 255, 0, 0)), new Rectangle(20 + i * 20, pictureBox2.Height - 50 - h, 4, h));
+
+                //g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 128, 128, 0)), new Rectangle(20 + i * 20, 50, 4, h));
+
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "G = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                h = (int)((double)rgb_array[1, i] * height / rgb_max);
+                richTextBox1.Text += ((int)((double)rgb_array[1, i] * height / rgb_max)).ToString() + " ";
+                if (h < 1)
+                    h = 1;
+                g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 255, 0)), new Rectangle(20 + i * 20 + 5, pictureBox2.Height - 50 - h, 4, h));
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "B = " + "\n";
+            for (i = 0; i < 16; i++)
+            {
+                h = (int)((double)rgb_array[2, i] * height / rgb_max);
+                richTextBox1.Text += ((int)((double)rgb_array[2, i] * height / rgb_max)).ToString() + " ";
+                if (h < 1)
+                    h = 1;
+                g2.FillRectangle(new SolidBrush(Color.FromArgb(255, 0, 0, 255)), new Rectangle(20 + i * 20 + 10, pictureBox2.Height - 50 - h, 4, h));
+            }
+            richTextBox1.Text += "\n";
+
+
+
+        }
+
+
+
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -2852,7 +3050,8 @@ namespace vcs_Draw9_Example
 
         private void button21_Click(object sender, EventArgs e)
         {
-            show_item_location2();
+            show_item_location(150);
+
             pictureBox1.Location = new Point(50, 50);
             pictureBox1.Size = new Size(887, 636);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
@@ -3235,6 +3434,223 @@ namespace vcs_Draw9_Example
         private void bt_exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            Point[] pt = new Point[360];    //一維陣列內有360個Point
+            int angle;
+            int amplitude = 100;
+            for (angle = 0; angle < 360; angle += 1)
+            {
+                pt[angle].X = angle;
+                pt[angle].Y = 300 - (int)(amplitude * Math.Sin(angle * 3 * Math.PI / 180));
+
+            }
+            g.DrawLines(new Pen(Brushes.Red, 3), pt);
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            double[] xx = new double[20];
+            double[] yy = new double[20];
+
+            for (int i = 0; i < 20; i++)
+            {
+                xx[i] = i * 30;
+                yy[i] = Math.Sin(i) * 200 + 200;
+                //yy[i] = 100;
+            }
+
+            // Create points that define curve.
+            Point point0 = new Point((int)xx[0], pictureBox1.Height - (int)yy[0]);
+            Point point1 = new Point((int)xx[1], pictureBox1.Height - (int)yy[1]);
+            Point point2 = new Point((int)xx[2], pictureBox1.Height - (int)yy[2]);
+            Point point3 = new Point((int)xx[3], pictureBox1.Height - (int)yy[3]);
+            Point point4 = new Point((int)xx[4], pictureBox1.Height - (int)yy[4]);
+            Point point5 = new Point((int)xx[5], pictureBox1.Height - (int)yy[5]);
+            Point point6 = new Point((int)xx[6], pictureBox1.Height - (int)yy[6]);
+            Point point7 = new Point((int)xx[7], pictureBox1.Height - (int)yy[7]);
+            Point point8 = new Point((int)xx[8], pictureBox1.Height - (int)yy[8]);
+            Point point9 = new Point((int)xx[9], pictureBox1.Height - (int)yy[9]);
+            Point point10 = new Point((int)xx[10], pictureBox1.Height - (int)yy[10]);
+            Point point11 = new Point((int)xx[11], pictureBox1.Height - (int)yy[11]);
+            Point point12 = new Point((int)xx[12], pictureBox1.Height - (int)yy[12]);
+            Point point13 = new Point((int)xx[13], pictureBox1.Height - (int)yy[13]);
+            Point point14 = new Point((int)xx[14], pictureBox1.Height - (int)yy[14]);
+            Point point15 = new Point((int)xx[15], pictureBox1.Height - (int)yy[15]);
+            Point point16 = new Point((int)xx[16], pictureBox1.Height - (int)yy[16]);
+            Point point17 = new Point((int)xx[17], pictureBox1.Height - (int)yy[17]);
+            Point point18 = new Point((int)xx[18], pictureBox1.Height - (int)yy[18]);
+            Point point19 = new Point((int)xx[19], pictureBox1.Height - (int)yy[19]);
+
+            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19 };
+
+            Pen redPen = new Pen(Color.Red, 3); // Create pens.
+            g.DrawLines(redPen, curvePoints);   //畫直線
+
+            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
+            g.DrawCurve(greenPen, curvePoints); //畫曲線
+
+
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            Point[] arrayPoint = new Point[20];
+            p = new Pen(Color.Blue, 5);
+            double zz;
+
+            for (int i = 0; i < 20; i++)
+            {
+                zz = Math.Sin(Math.PI * i * 30 / 180) * 200 + 200;
+                arrayPoint[i].X = i * 20;
+                arrayPoint[i].Y = (int)zz;
+            }
+            g.DrawLines(p, arrayPoint);
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+            // 以紅色繪正弦波
+            //Graphics g = this.CreateGraphics();
+            //Pen p = new Pen(Color.Red, 2);
+            int h = 100;
+            int y1 = 100;
+            double angle, y;
+            float tmpy, tmpx;
+            for (double x = 0; x <= 360; x++)
+            {
+                angle = x / 180 * Math.PI;
+                y = Convert.ToDouble(y1) + Math.Sin(angle) * h;
+                tmpx = Convert.ToSingle(x);
+                tmpy = Convert.ToSingle(y);
+                g.DrawEllipse(p, tmpx, tmpy, 1, 1); //繪製紅色圓點
+            }
+
+            g.DrawEllipse(p, 260, 260, 100, 100); //繪製紅色圓點
+
+            SolidBrush sb = new SolidBrush(Color.Green);
+            g.FillEllipse(sb, 360, 360, 100, 100); //繪製紅色圓點
+
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            int[] x = new int[10];
+            double[] y = new double[10];
+            int[] yy = new int[10];
+            //int x[10] = 0;
+            //float y[10] = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                x[i] = i * 40;
+                y[i] = Math.Sin(x[i] * Math.PI / 180) * 200 + 200;
+                yy[i] = (int)y[i];
+                richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
+            }
+
+            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
+
+            // Create points that define curve.
+            Point point0 = new Point(x[0], yy[0]);
+            Point point1 = new Point(x[1], yy[1]);
+            Point point2 = new Point(x[2], yy[2]);
+            Point point3 = new Point(x[3], yy[3]);
+            Point point4 = new Point(x[4], yy[4]);
+            Point point5 = new Point(x[5], yy[5]);
+            Point point6 = new Point(x[6], yy[6]);
+            Point point7 = new Point(x[7], yy[7]);
+            Point point8 = new Point(x[8], yy[8]);
+            Point point9 = new Point(x[9], yy[9]);
+
+            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9 };
+
+            g.DrawCurve(greenPen, curvePoints); //畫曲線
+            g.DrawLines(greenPen, curvePoints);   //畫直線
+
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            Point[] pt = new Point[360];    //一維陣列內有360個Point
+            int angle;
+            int amplitude = 100;
+            for (angle = 0; angle < 360; angle += 1)
+            {
+                pt[angle].X = angle;
+                pt[angle].Y = (int)(amplitude * Math.Sin(angle * 3 * Math.PI / 180)) + amplitude;
+
+            }
+            g.DrawLines(new Pen(Brushes.Red, 3), pt);
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+            //畫曲線
+            Point[] pts = new Point[5];
+            pts[0].X = 10;
+            pts[0].Y = 10;
+            pts[1].X = 20;
+            pts[1].Y = 60;
+            pts[2].X = 30;
+            pts[2].Y = 10;
+            pts[3].X = 40;
+            pts[3].Y = 60;
+            pts[4].X = 50;
+            pts[4].Y = 10;
+            g.DrawCurve(new Pen(Color.Black), pts);
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+
+
+            //畫多個Rectangles
+            Rectangle[] R = new Rectangle[25];
+            int i;
+            for (i = 0; i <= 24; i++)
+            {
+                //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
+                R[i] = new Rectangle(i * 10, i * 5, i * 30, i * 15);
+            }
+            g.DrawRectangles(new Pen(Brushes.Red, 3), R);
+
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

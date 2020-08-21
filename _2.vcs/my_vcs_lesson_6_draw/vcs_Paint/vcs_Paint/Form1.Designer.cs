@@ -1,4 +1,4 @@
-﻿namespace 小畫家大全3
+﻿namespace vcs_Paint
 {
     partial class Form1
     {
@@ -289,7 +289,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Paint";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

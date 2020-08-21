@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{55237122-10B4-451B-95E0-70736F1BB373}</ProjectGuid>
+    <ProjectGuid>{F070782F-6655-4160-995F-95534730900F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw6</RootNamespace>
-    <AssemblyName>vcs_Draw6</AssemblyName>
+    <RootNamespace>vcs_Paint</RootNamespace>
+    <AssemblyName>vcs_Paint</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -50,15 +50,7 @@
             this.button20 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
-            this.button39 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -294,83 +286,6 @@
             this.button23.Text = "Exit";
             this.button23.UseVisualStyleBackColor = true;
             // 
-            // button24
-            // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(844, 574);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(73, 33);
-            this.button24.TabIndex = 26;
-            this.button24.Text = "Ex1";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(765, 574);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(73, 33);
-            this.button25.TabIndex = 27;
-            this.button25.Text = "Ex1";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button28
-            // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button28.Location = new System.Drawing.Point(923, 535);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(73, 33);
-            this.button28.TabIndex = 34;
-            this.button28.Text = "Ex1";
-            this.button28.UseVisualStyleBackColor = true;
-            this.button28.Click += new System.EventHandler(this.button28_Click);
-            // 
-            // button29
-            // 
-            this.button29.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button29.Location = new System.Drawing.Point(923, 496);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(73, 33);
-            this.button29.TabIndex = 33;
-            this.button29.Text = "Ex1";
-            this.button29.UseVisualStyleBackColor = true;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
-            // button30
-            // 
-            this.button30.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button30.Location = new System.Drawing.Point(765, 535);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(73, 33);
-            this.button30.TabIndex = 32;
-            this.button30.Text = "Ex1";
-            this.button30.UseVisualStyleBackColor = true;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
-            // 
-            // button31
-            // 
-            this.button31.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button31.Location = new System.Drawing.Point(844, 535);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(73, 33);
-            this.button31.TabIndex = 31;
-            this.button31.Text = "Ex1";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // button32
-            // 
-            this.button32.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button32.Location = new System.Drawing.Point(765, 496);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(73, 33);
-            this.button32.TabIndex = 30;
-            this.button32.Text = "Ex1";
-            this.button32.UseVisualStyleBackColor = true;
-            this.button32.Click += new System.EventHandler(this.button32_Click);
-            // 
             // button34
             // 
             this.button34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -381,17 +296,6 @@
             this.button34.Text = "DrawLines";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
-            // 
-            // button39
-            // 
-            this.button39.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button39.Location = new System.Drawing.Point(844, 496);
-            this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(73, 33);
-            this.button39.TabIndex = 37;
-            this.button39.Text = "Ex1";
-            this.button39.UseVisualStyleBackColor = true;
-            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button42
             // 
@@ -484,15 +388,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button42);
-            this.Controls.Add(this.button39);
             this.Controls.Add(this.button34);
-            this.Controls.Add(this.button28);
-            this.Controls.Add(this.button29);
-            this.Controls.Add(this.button30);
-            this.Controls.Add(this.button31);
-            this.Controls.Add(this.button32);
-            this.Controls.Add(this.button25);
-            this.Controls.Add(this.button24);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button20);
@@ -546,15 +442,7 @@
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button28;
-        private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.Button button30;
-        private System.Windows.Forms.Button button31;
-        private System.Windows.Forms.Button button32;
         private System.Windows.Forms.Button button34;
-        private System.Windows.Forms.Button button39;
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
