@@ -567,5 +567,34 @@ namespace vcs_test_all_06_System
 
         }
 
+        private void button24_Click_1(object sender, EventArgs e)
+        {
+            //取得程式的編譯時間
+            richTextBox1.Text += "編譯時間 : " + GetLinkerTime() + "\n";
+        }
+
+        //取得程式的編譯時間
+        DateTime GetLinkerTime()
+        {
+            var filePath = Assembly.GetExecutingAssembly().Location;
+
+            const int c_PeHeaderOffset = 60;
+            const int c_LinkerTimestampOffset = 8;
+
+            var buffer = new byte[256];
+
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                stream.Read(buffer, 0, 256);
+
+            var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
+            var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+            var linkTimeUtc = epoch.AddSeconds(secondsSince1970);
+            var tz = TimeZoneInfo.Local;
+            var localTime = TimeZoneInfo.ConvertTimeFromUtc(linkTimeUtc, tz);
+            return localTime;
+        }
+
     }
 }

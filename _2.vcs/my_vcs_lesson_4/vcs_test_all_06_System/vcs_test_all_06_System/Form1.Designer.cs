@@ -465,12 +465,14 @@
             // 
             // button24
             // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button24.Font = new System.Drawing.Font("新細明體", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button24.Location = new System.Drawing.Point(12, 303);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 40);
             this.button24.TabIndex = 52;
+            this.button24.Text = "取得程式的編譯時間";
             this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click_1);
             // 
             // button32
             // 
