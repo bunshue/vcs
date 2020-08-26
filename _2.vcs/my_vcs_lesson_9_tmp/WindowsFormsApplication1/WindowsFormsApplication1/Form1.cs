@@ -9,56 +9,26 @@ using System.Windows.Forms;
 
 using System.Globalization;
 
-using System.Threading;
-
-
 using System.IO;
 
-using System.Net;   //for WebClient
+//加入參考Microsoft.VisualBasic.dll
+
+using Microsoft.VisualBasic.FileIO;
+
+//using System.Net;   //for WebClient
 
 namespace WindowsFormsApplication1
 {
-    //創建SetValue的委托
-    public delegate void SetValueDel(string str, object obj);
-
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
-            Thread.CurrentThread.Name = "MainThread";
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-        }
-
-        //開啟一個線程
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-            //將委托的方法和主窗體傳過去
-            NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
-
-            Thread TheThreadOne = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
-
-            TheThreadOne.Name = "在 " + DateTime.Now.ToString() + " 創建的線程";//給線程命名，方便調試。這行代碼可以省略。
-
-            //讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
-            TheThreadOne.IsBackground = true;
-            TheThreadOne.Start();
-        }
-
-        //給文本框賦值
-        private void SetValue(string str, object obj)
-        {
-            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
-            lock (obj)
-            {
-                richTextBox1.Text += str + " 到此一遊\n";
-                //this.txtReturnValue.Text = this.txtReturnValue.Text + str;
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -90,51 +60,38 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //下載檔案的範例 - 使用WebClient
-            WebClient wc = new WebClient();
-            wc.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "d:\\blog.png");
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
-            HttpWebRequest httpRequest = null;
-            HttpWebResponse httpResponse;
+            //在本文中是通过foreach 来列举出在"C:\Recycled"存在的所有被删除的文件信息的。
 
-            string result = "";
-            String txtURL = "https://www.google.com.tw/";
-            char[] cbuffer = new char[256];
-            int byteRead = 0;
-            try
+            int c = 0; // 定义此变量主要是来判断目录中是否有文件
+            foreach (string s1 in Directory.GetFiles("c:\\recycled")) // 返回文件名称字符串行时的枚举类型
             {
-
-                Uri httpURL = new Uri(txtURL);
-                httpRequest = (HttpWebRequest)WebRequest.Create(httpURL);
-                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-                System.IO.Stream respStream = httpResponse.GetResponseStream();
-                System.IO.StreamReader respStreamReader = new StreamReader(respStream);
-                byteRead = respStreamReader.Read(cbuffer, 0, 256);
-                while (byteRead != 0)
-                {
-                    string response = new string(cbuffer, 0, byteRead);
-                    result = result + response;
-                    byteRead = respStreamReader.Read(cbuffer, 0, 256);
-                    richTextBox1.Text += response + "\n";
-                }
-
-
-
+                ++c;
             }
-            catch (Exception)
+            if (c > 0) //判断是否存在文件如果 c > 0则回收站有文件，反之则没有
             {
-
+                richTextBox1.Text += "c = " + c.ToString() + "\n";
             }
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //使用資源回收筒刪除檔案
+            FileSystem.DeleteFile("C:\\______test_files\\blog.png", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            richTextBox1.Text += "已將檔案移至資源回收筒\n";
+        }
+
+
+        
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //不使用資源回收筒刪除檔案
+            //DirectoryInfo.Delete()相當於Windows Command Del(快捷鍵Shift + Del)是不會保存在資源回收筒
+            //DirectoryInfo.Delete("C:\\______test_files\\blog.png");
+        }
 
 
 
@@ -145,45 +102,6 @@ namespace WindowsFormsApplication1
     }
 
 
-    //建一個類，模擬實際使用情況
-    public class NEWThreadClass
-    {
-        //接收主窗體傳過來的委托方法。
-        public SetValueDel setValueDel;
-
-        //接收主窗體
-        public Form form;
-
-        //用於告訴主線程中鎖，是哪一個線程調用的。
-        static object locker = new object();
-
-        public NEWThreadClass(SetValueDel del, Form fom)
-        {
-            this.setValueDel = del;
-            this.form = fom;
-        }
-        //第一個線程,給主線程創建的控件傳值。
-        public void threadOne()
-        {
-            //這裡獲取線程的名字
-            string threadName = Thread.CurrentThread.Name;
-            try
-            {
-                while (true)
-                {
-                    //告訴主線程，我要更改你的控件了。
-                    this.form.Invoke((EventHandler)(delegate
-                    {
-                        //如果在這裡使用Thread.CurrentThread.Name 獲取到的是主線程的名字。
-                        setValueDel(threadName + " :Hello!", locker);//給文本框傳值，“自己的名字：Hello!”。
-                    }));
-                    Thread.Sleep(3 * 1000);//太累了 ，休息三秒。。。。
-                }
-            }
-            catch (Exception ex)
-            { }
-        }
-    }
     
 
 }

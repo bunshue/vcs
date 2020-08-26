@@ -52,9 +52,10 @@
             this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,8 +217,9 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(219, 42);
             this.button14.TabIndex = 15;
-            this.button14.Text = "xxx";
+            this.button14.Text = "下載一個網頁1";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button15
             // 
@@ -226,8 +228,9 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(219, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "xxx";
+            this.button15.Text = "下載一個網頁2";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 
@@ -236,8 +239,9 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(219, 42);
             this.button16.TabIndex = 17;
-            this.button16.Text = "xxx";
+            this.button16.Text = "C# 文字版瀏覽器";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
@@ -246,8 +250,9 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(219, 42);
             this.button17.TabIndex = 18;
-            this.button17.Text = "xxx";
+            this.button17.Text = "下載檔案的範例 - 使用WebClient";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -310,20 +315,10 @@
             this.button29.Text = "xxx";
             this.button29.UseVisualStyleBackColor = true;
             // 
-            // button36
-            // 
-            this.button36.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button36.Location = new System.Drawing.Point(235, 442);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(219, 42);
-            this.button36.TabIndex = 44;
-            this.button36.Text = "xxx";
-            this.button36.UseVisualStyleBackColor = true;
-            // 
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(235, 540);
+            this.button21.Location = new System.Drawing.Point(235, 444);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(219, 42);
             this.button21.TabIndex = 45;
@@ -339,14 +334,31 @@
             this.pictureBox1.TabIndex = 46;
             this.pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(235, 556);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 47;
+            this.label1.Text = "下載進度";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(323, 556);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(131, 23);
+            this.progressBar1.TabIndex = 48;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button21);
-            this.Controls.Add(this.button36);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button23);
@@ -375,6 +387,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -404,9 +417,10 @@
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

@@ -20,72 +20,129 @@ namespace vcs_test_all_06_DirectoryFile
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            show_item_location();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void show_item_location()
         {
-            //確認資料夾是否存在
-            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
-            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
-            else
-                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
-        }
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
+            //button
+            x_st = 6;
+            y_st = 10;
+            dx = 205;
+            dy = 40;
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //刪除資料夾
-            string Path = "C:\\______test_files_file_name2";
-            /*
-            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
-            else
-            {
-                Directory.Exists(Path);     //確認資料夾是否存在
-                richTextBox1.Text += "已刪除資料夾: " + Path + "\n";
-            }
-            */
-            if (Directory.Exists(Path))     //確認資料夾是否存在
-            {
-                try
-                {
-                    Directory.Delete(Path, true);   //recurrsive
-                    //Directory.Delete(Path, false);   //not recurrsive
-                    richTextBox1.Text += "已刪除資料夾" + Path + "\n";
-                }
-                catch
-                {
-                    richTextBox1.Text += "無法刪除資料夾" + Path + "\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
-            }
+            bt_file00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_file01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_file02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_file03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_file04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_file05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_file06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_file07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_file08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_file09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_file10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_file11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_file12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
-        }
+            bt_dir00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_dir01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_dir02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_dir03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_dir04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_dir05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_dir06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_dir07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_dir08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_dir09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_dir10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_dir11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_dir12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //建立一個新資料夾
-            string newPath = "C:\\______test_files_file_name2\\aaaa\\bbbb";
-            if (Directory.Exists(newPath) == false)     //確認資料夾是否存在
-            {
-                Directory.CreateDirectory(newPath);
-                richTextBox1.Text += "已建立一個新資料夾: " + newPath + "\n";
-            }
-            else
-                richTextBox1.Text += "資料夾: " + newPath + " 已存在，不能再建立\n";
+            bt_read00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_read01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_read02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_read03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_read04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_read05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_read06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_read07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_read08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_read09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_read10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_read11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_read12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            bt_write00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_write01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_write02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_write03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_write04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_write05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_write06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_write07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_write08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_write09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_write10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_write11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_write12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            bt_files00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_files01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_files02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_files03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_files04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_files05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_files06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_files07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_files08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_files09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_files10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_files11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_files12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            bt_new00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_new01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_new02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_new03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_new04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_new05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_new06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_new07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_new08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_new09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_new10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_new11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_new12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            bt_clear.Location = new Point(x_st + dx * 5+6, y_st + dy * 13 + 20);
+
+            x_st = 6;
+            y_st = 10;
+
+            gb1_file.Location = new Point(x_st + dx * 0, y_st + 0);
+            gb2_directory.Location = new Point(x_st + dx * 1, y_st + 0);
+            gb3_readfile.Location = new Point(x_st + dx * 2, y_st + 0);
+            gb4_writefile.Location = new Point(x_st + dx * 3, y_st + 0);
+            gb5_files.Location = new Point(x_st + dx * 4, y_st + 0);
+            gb6_new.Location = new Point(x_st + dx * 5, y_st + 0);
+
+            int gw = 200;
+            int gh = 535;
+            gb1_file.Size = new Size(gw, gh);
+            gb2_directory.Size = new Size(gw, gh);
+            gb3_readfile.Size = new Size(gw, gh);
+            gb4_writefile.Size = new Size(gw, gh);
+            gb5_files.Size = new Size(gw, gh);
+            gb6_new.Size = new Size(gw, gh);
+
         }
 
         //public static bool DeleteDirectory(string target_dir)
@@ -107,328 +164,6 @@ namespace vcs_test_all_06_DirectoryFile
             }
             Directory.Delete(target_dir, false);
             return result;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //刪除資料夾
-            string target_dir = "C:\\______test_files_file_name2";
-
-            if (Directory.Exists(target_dir))       //確認資料夾是否存在
-            {
-                richTextBox1.Text += "刪除資料夾: " + target_dir + "\n";
-                try
-                {
-                    DeleteDirectory(target_dir);
-                    //Directory.Delete(Path, true);   //recurrsive
-                    //Directory.Delete(Path, false);   //not recurrsive
-                    richTextBox1.Text += "OK\n";
-                }
-                catch
-                {
-                    richTextBox1.Text += "FAIL\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "資料夾: " + target_dir + " 不存在，不能刪除\n";
-            }
-        }
-
-        //public static bool DeleteDirectory(string target_dir)
-        public bool ShowDirectory(string target_dir)
-        {
-            bool result = false;
-            string[] files = Directory.GetFiles(target_dir);
-            string[] dirs = Directory.GetDirectories(target_dir);
-            richTextBox1.Text += "檔案個數 = " + files.Length.ToString() + "\n";
-            foreach (string file in files)
-            {
-                richTextBox1.Text += "檔案: " + file + "\t";
-                richTextBox1.Text += "Size: " + file.Length.ToString() + " 拜\n";
-            }
-            richTextBox1.Text += "\n";
-            foreach (string dir in dirs)
-            {
-                richTextBox1.Text += "資料夾: " + dir + "\n";
-                ShowDirectory(dir);
-            }
-            return result;
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            string target_dir = "C:\\______test_files_file_name1";
-            richTextBox1.Text += "資料夾: " + target_dir + "\n";
-            ShowDirectory(target_dir);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //取得檔案資訊
-            //法一
-            string filename = "c:\\______test_files\\vcs_test.old.txt";
-            if (File.Exists(filename) == false)   //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-            }
-            else
-            {
-                //建立日期 2016  3 31 020339
-                //修改日期 2016  7 18 010548
-                //存取日期 2016  3 31 020339
-                richTextBox1.Text += "檔案: " + filename + " 已存在\n";
-                richTextBox1.Text += "建立時間: " + File.GetCreationTime(filename) + "\n";
-                richTextBox1.Text += "修改時間: " + File.GetLastWriteTime(filename) + "\n";
-                richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
-                richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
-            }
-
-            //法二
-            FileInfo fi = new FileInfo(filename);
-            if (fi.Exists == true)      //確認檔案是否存在
-            {
-                richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
-                richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
-                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
-                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
-                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
-            }
-            else
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            string filename1 = "C:\\______test_files\\aaaaaaa.txt";
-            string filename2 = "C:\\aaaa.txt";
-
-            if (File.Exists(filename1) == false)            //確認檔案是否存在
-                richTextBox1.Text += "檔案: " + filename1 + " 不存在\n";
-            else
-                richTextBox1.Text += "檔案: " + filename1 + " 存在\n";
-
-            if (System.IO.File.Exists(filename2) == false)  //確認檔案是否存在
-                richTextBox1.Text += "檔案: " + filename2 + " 不存在\n";
-            else
-                richTextBox1.Text += "檔案: " + filename2 + " 存在\n";
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //建立檔案
-            string filename = "C:\\______test_files\\aaaaaaab.txt";
-            if (File.Exists(filename) == false)         //確認檔案是否存在
-            {
-                File.Create(filename);
-                richTextBox1.Text += "檔案: " + filename + " 不存在, 已建立\n";
-            }
-            else
-                richTextBox1.Text += "檔案: " + filename + " 已存在, 無法再建立\n";
-
-            //建立檔案
-            string destFileName = @"c:\______test_files\picture1a.jpg";
-            FileStream fs = File.Create(destFileName);
-            fs.Close();
-            richTextBox1.Text += "已建立檔案: " + destFileName + "\n";
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //刪除檔案
-            //法一
-            string filename = "C:\\______test_files\\aaaaaaab.txt";
-            if (File.Exists(filename) == false)     //確認檔案是否存在
-                richTextBox1.Text += "檔案: " + filename + " 不存在, 無法刪除\n";
-            else
-            {
-                File.Delete(filename);
-                richTextBox1.Text += "檔案: " + filename + " 存在, 已刪除\n";
-            }
-
-            //刪除檔案
-            //法二
-            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
-            if (f.Exists)       //確認檔案是否存在
-            {
-                f.Delete();
-                richTextBox1.Text += "檔案刪除成功\n";
-            }
-            else
-                richTextBox1.Text += "找不到檔案\n";
-
-
-            string destFileName = @"c:\______test_files\picture1a.jpg";
-            string destFileName2 = @"c:\______test_files\picture1b.jpg";
-
-            //刪除檔案
-            if (File.Exists(destFileName))      //確認檔案是否存在
-            {
-                File.Delete(destFileName);
-                richTextBox1.Text += "已刪除檔案: " + destFileName + "\n";
-            }
-            else
-                richTextBox1.Text += "檔案: " + destFileName + " 不存在，無法刪除\n";
-
-            //刪除檔案
-            if (File.Exists(destFileName2))     //確認檔案是否存在
-            {
-                File.Delete(destFileName2);
-                richTextBox1.Text += "已刪除檔案: " + destFileName2 + "\n";
-            }
-            else
-                richTextBox1.Text += "檔案: " + destFileName2 + " 不存在，無法刪除\n";
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            string filename1 = "C:\\______test_files\\aaaaaaa.txt";
-            string filename2 = "C:\\______test_files\\aaaaaaab.txt";
-
-            if (File.Exists(filename1) == false)    //確認原始檔案是否存在
-            {
-                richTextBox1.Text += "原始檔案: " + filename1 + " 不存在, 無法拷貝\n";
-                return;
-            }
-            if (File.Exists(filename2) == false)    //確認目標檔案是否存在
-            {
-                // Copy the file.
-                File.Copy(filename1, filename2);
-                richTextBox1.Text += "目標檔案: " + filename2 + " 不存在, 已拷貝\n";
-            }
-            else
-                richTextBox1.Text += "檔案: " + filename2 + " 已存在, 無法再拷貝\n";
-
-            //複製檔案，從 sourceFileName 複製到 destFileName
-            string sourceFileName = @"c:\______test_files\picture1.jpg";
-            string destFileName = @"c:\______test_files\picture1a.jpg";
-
-            if (File.Exists(sourceFileName))    //確認原始檔案是否存在
-            {
-                if (!File.Exists(destFileName)) //確認目標檔案是否存在
-                {
-                    File.Copy(sourceFileName, destFileName);
-                    richTextBox1.Text += "已複製檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                }
-                else
-                    richTextBox1.Text += "目標檔案: " + destFileName + " 已存在，無法複製\n";
-
-            }
-            else
-                richTextBox1.Text += "原始檔案: " + sourceFileName + " 不存在，無法複製\n";
-
-
-        }
-
-        int attr = 0;
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //修改檔案時間 屬性
-            string filename = @"C:\\cccc.txt";
-            if (File.Exists(filename) == false) //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-                return;
-            }
-            if ((File.GetAttributes(filename) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-                richTextBox1.Text += "檔案唯讀，不能修改檔案時間";
-            else
-            {
-                richTextBox1.Text += "改變檔案時間";
-                File.SetCreationTime(filename, new DateTime(1985, 5, 4));
-                File.SetLastWriteTime(filename, new DateTime(1995, 6, 5));
-                File.SetLastAccessTime(filename, new DateTime(2005, 7, 6));
-            }
-            if(attr == 0)
-                File.SetAttributes(filename, FileAttributes.Archive);
-            else if (attr == 1)
-                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
-            else if (attr == 2)
-                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
-            attr++;
-            if (attr > 2)
-                attr = 0;
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            //未完成
-            string Path_old = "C:\\______test_files_file_name1";
-            string Path_new = "C:\\______test_files_file_name2";
-            if (Directory.Exists(Path_old) == false)    //確認資料夾是否存在
-            {
-                richTextBox1.Text += "原始資料夾: " + Path_old + " 不存在, 不能拷貝\n";
-                return;
-            }
-            if (Directory.Exists(Path_new) == false)     //確認資料夾是否存在
-            {
-                //複製
-            }
-            else
-            {
-                richTextBox1.Text += "目的資料夾: " + Path_new + " 已存在, 不能拷貝\n";
-                return;
-            }
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            string Path_old = "C:\\______test_files_file_name2";
-            string Path_new = "C:\\______test_files_file_name3";
-            if (Directory.Exists(Path_old) == false)    //確認資料夾是否存在
-            {
-                richTextBox1.Text += "原始資料夾: " + Path_old + " 不存在, 不能拷貝\n";
-                return;
-            }
-            if (Directory.Exists(Path_new) == true)     //確認資料夾是否存在
-            {
-                richTextBox1.Text += "目的資料夾: " + Path_new + " 已存在, 不能拷貝\n";
-                return;
-            }
-            Directory.Move(Path_old, Path_new);
-            richTextBox1.Text += "移動/更名 完成，從原始資料夾: " + Path_old + " 到目的資料夾: " + Path_new + "\n";
-
-            //移動資料夾，從 sourceDirName 移動到 destDirName
-            string sourceDirName = @"c:\______test_files\folder2";
-            string destDirName = @"c:\______test_files\folder22";
-            if (Directory.Exists(sourceDirName))        //確認資料夾是否存在
-            {
-                if (!Directory.Exists(destDirName))     //確認資料夾是否存在
-                {
-                    Directory.Move(sourceDirName, destDirName);
-                    richTextBox1.Text += "已移動資料夾: " + sourceDirName + " 到 " + destDirName + "\n";
-                }
-                else
-                    richTextBox1.Text += "資料夾: " + destDirName + " 已存在\n";
-            }
-            else
-                richTextBox1.Text += "資料夾: " + sourceDirName + " 不存在\n";
-
-
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            string filename1 = "c:\\______test_files\\compare\\aaaa.txt";
-            string filename2 = "c:\\______test_files\\compare\\bbbb.txt";
-            string filename3 = "c:\\______test_files\\compare\\ssss.txt";
-            if (FileCompare(filename1, filename2))
-            {
-                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename2 + " 相同。\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename2 + " 不同。\n";
-            }
-            if (FileCompare(filename1, filename3))
-            {
-                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename3 + " 相同。\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename3 + " 不同。\n";
-            }
         }
 
         // 此方法所接收的兩個字串代表您所要比較的兩個檔案。
@@ -474,33 +209,284 @@ namespace vcs_test_all_06_DirectoryFile
             return ((file1byte - file2byte) == 0);
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        //刪除資料夾，recursive為True時，直接刪除資料夾及其資料夾下所有文件或資料夾;recursive為False時，需先將資料夾下所有文件或資料夾刪除
+        private void DeleteDirectory(string path, bool recursive)
         {
-            StreamReader sr1 = new StreamReader("c:\\______test_files\\compare\\aaaa.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            StreamReader sr2 = new StreamReader("c:\\______test_files\\compare\\bbbb.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            StreamReader sr3 = new StreamReader("c:\\______test_files\\compare\\ssss.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))	//讀取所有文字內容
+            if (Directory.Exists(path))     //確認資料夾是否存在
             {
-                richTextBox1.Text += "兩個文件相等\n";
+                if (recursive)
+                {
+                    Directory.Delete(path, true);
+                    richTextBox1.Text += "已刪除資料夾: " + path + "\n";
+                }
+                else
+                    richTextBox1.Text += "需要先把資料夾內的檔案刪除\n";
             }
-            else
-            {
-                richTextBox1.Text += "兩個文件不相等\n";
-            }
-            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))	//讀取所有文字內容
-            {
-                richTextBox1.Text += "兩個文件相等\n";
-            }
-            else
-            {
-                richTextBox1.Text += "兩個文件不相等\n";
-            }
-            sr1.Close();
-            sr2.Close();
-            sr3.Close();
         }
 
-        private void button20_Click(object sender, EventArgs e)
+        public static double DirSize(DirectoryInfo d)
+        {
+            double Size = 0;
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                Size += fi.Length;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
+                    Size += DirSize(di);   //利用遞迴把子資料夾也計算進來
+            }
+            return (Size);
+        }
+
+        string message = "";
+        double filesize_all = 0;
+
+        public void GetAllFileNames(DirectoryInfo d)
+        {
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                message += fi.Name;
+                message += "\t";
+                message += fi.Length.ToString(); ;
+                message += Environment.NewLine;
+                filesize_all += fi.Length;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
+                {
+                    GetAllFileNames(di);   //利用遞迴把子資料夾也加進來
+                }
+            }
+            message += Environment.NewLine;
+        }
+
+        private void bt_file00_Click(object sender, EventArgs e)
+        {
+            string filename1 = "C:\\______test_files\\aaaaaaa.txt";
+            string filename2 = "C:\\aaaa.txt";
+
+            if (File.Exists(filename1) == false)            //確認檔案是否存在
+                richTextBox1.Text += "檔案: " + filename1 + " 不存在\n";
+            else
+                richTextBox1.Text += "檔案: " + filename1 + " 存在\n";
+
+            if (System.IO.File.Exists(filename2) == false)  //確認檔案是否存在
+                richTextBox1.Text += "檔案: " + filename2 + " 不存在\n";
+            else
+                richTextBox1.Text += "檔案: " + filename2 + " 存在\n";
+        }
+
+        private void bt_file01_Click(object sender, EventArgs e)
+        {
+            //建立檔案
+            string filename = "C:\\______test_files\\aaaaaaab.txt";
+            if (File.Exists(filename) == false)         //確認檔案是否存在
+            {
+                File.Create(filename);
+                richTextBox1.Text += "檔案: " + filename + " 不存在, 已建立\n";
+            }
+            else
+                richTextBox1.Text += "檔案: " + filename + " 已存在, 無法再建立\n";
+
+            //建立檔案
+            string destFileName = @"c:\______test_files\picture1a.jpg";
+            FileStream fs = File.Create(destFileName);
+            fs.Close();
+            richTextBox1.Text += "已建立檔案: " + destFileName + "\n";
+
+        }
+
+        private void bt_file02_Click(object sender, EventArgs e)
+        {
+            string filename1 = "C:\\______test_files\\aaaaaaa.txt";
+            string filename2 = "C:\\______test_files\\aaaaaaab.txt";
+
+            if (File.Exists(filename1) == false)    //確認原始檔案是否存在
+            {
+                richTextBox1.Text += "原始檔案: " + filename1 + " 不存在, 無法拷貝\n";
+                return;
+            }
+            if (File.Exists(filename2) == false)    //確認目標檔案是否存在
+            {
+                // Copy the file.
+                File.Copy(filename1, filename2);
+                richTextBox1.Text += "目標檔案: " + filename2 + " 不存在, 已拷貝\n";
+            }
+            else
+                richTextBox1.Text += "檔案: " + filename2 + " 已存在, 無法再拷貝\n";
+
+            //複製檔案，從 sourceFileName 複製到 destFileName
+            string sourceFileName = @"c:\______test_files\picture1.jpg";
+            string destFileName = @"c:\______test_files\picture1a.jpg";
+
+            if (File.Exists(sourceFileName))    //確認原始檔案是否存在
+            {
+                if (!File.Exists(destFileName)) //確認目標檔案是否存在
+                {
+                    File.Copy(sourceFileName, destFileName);
+                    richTextBox1.Text += "已複製檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                }
+                else
+                    richTextBox1.Text += "目標檔案: " + destFileName + " 已存在，無法複製\n";
+
+            }
+            else
+                richTextBox1.Text += "原始檔案: " + sourceFileName + " 不存在，無法複製\n";
+
+
+        }
+
+        private void bt_file03_Click(object sender, EventArgs e)
+        {
+            //刪除檔案
+            //法一
+            string filename = "C:\\______test_files\\aaaaaaab.txt";
+            if (File.Exists(filename) == false)     //確認檔案是否存在
+                richTextBox1.Text += "檔案: " + filename + " 不存在, 無法刪除\n";
+            else
+            {
+                File.Delete(filename);
+                richTextBox1.Text += "檔案: " + filename + " 存在, 已刪除\n";
+            }
+
+            //刪除檔案
+            //法二
+            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
+            if (f.Exists)       //確認檔案是否存在
+            {
+                f.Delete();
+                richTextBox1.Text += "檔案刪除成功\n";
+            }
+            else
+                richTextBox1.Text += "找不到檔案\n";
+
+
+            string destFileName = @"c:\______test_files\picture1a.jpg";
+            string destFileName2 = @"c:\______test_files\picture1b.jpg";
+
+            //刪除檔案
+            if (File.Exists(destFileName))      //確認檔案是否存在
+            {
+                File.Delete(destFileName);
+                richTextBox1.Text += "已刪除檔案: " + destFileName + "\n";
+            }
+            else
+                richTextBox1.Text += "檔案: " + destFileName + " 不存在，無法刪除\n";
+
+            //刪除檔案
+            if (File.Exists(destFileName2))     //確認檔案是否存在
+            {
+                File.Delete(destFileName2);
+                richTextBox1.Text += "已刪除檔案: " + destFileName2 + "\n";
+            }
+            else
+                richTextBox1.Text += "檔案: " + destFileName2 + " 不存在，無法刪除\n";
+
+        }
+
+        private void bt_file04_Click(object sender, EventArgs e)
+        {
+            //刪除檔案(使用資源回收筒)
+
+            //先將Microsoft.VisualBasic.Dll加入參考。
+            //參考/加入參考/.NET/Microsoft.VisualBasic
+            //加上 using Microsoft.VisualBasic.FileIO;    //引用Microsoft.VisualBasic.FileIO命名空間。
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                FileSystem.DeleteFile(openFileDialog1.FileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                richTextBox1.Text += "已將檔案 : " + openFileDialog1.FileName + " 移至資源回收筒\n";
+            }
+            else
+                richTextBox1.Text += "未選取檔案\n";
+
+        }
+
+        private void bt_file05_Click(object sender, EventArgs e)
+        {
+            string sourceFileName = @"c:\______test_files\picture1a.jpg";
+            string destFileName = @"c:\______test_files\picture1b.jpg";
+
+            //移動檔案，從 sourceFileName 移動到 destFileName
+            if (File.Exists(sourceFileName))        //確認原始檔案是否存在
+            {
+                if (!File.Exists(destFileName))     //確認目標檔案是否存在
+                {
+                    File.Move(sourceFileName, destFileName);
+                    richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                }
+                else
+                    richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+            }
+            else
+                richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
+
+        }
+
+        private void bt_file06_Click(object sender, EventArgs e)
+        {
+            //取得檔案資訊
+            //法一
+            string filename = "c:\\______test_files\\vcs_test.old.txt";
+            if (File.Exists(filename) == false)   //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+            }
+            else
+            {
+                //建立日期 2016  3 31 020339
+                //修改日期 2016  7 18 010548
+                //存取日期 2016  3 31 020339
+                richTextBox1.Text += "檔案: " + filename + " 已存在\n";
+                richTextBox1.Text += "建立時間: " + File.GetCreationTime(filename) + "\n";
+                richTextBox1.Text += "修改時間: " + File.GetLastWriteTime(filename) + "\n";
+                richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
+                richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
+            }
+
+            //法二
+            FileInfo fi = new FileInfo(filename);
+            if (fi.Exists == true)      //確認檔案是否存在
+            {
+                richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
+                richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
+                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
+                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
+            }
+            else
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+
+        }
+
+        private void bt_file07_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\_case1\_case1a\_case1bb\eula.3086b.txt";
+            if (File.Exists(filename))      //確認檔案是否存在
+            {
+                richTextBox1.Text += "取得完整路徑檔名:\t" + Path.GetFullPath(filename) + "\n";
+                richTextBox1.Text += "取得路徑:\t\t" + Path.GetDirectoryName(filename) + "\n";
+                richTextBox1.Text += "取得檔名(包含附檔名):\t" + Path.GetFileName(filename) + "\n";
+                richTextBox1.Text += "取得檔名(不包含附檔名):\t" + Path.GetFileNameWithoutExtension(filename) + "\n";
+                richTextBox1.Text += "取得副檔名:\t\t" + Path.GetExtension(filename) + "\n";
+                richTextBox1.Text += "資料根目錄:\t\t" + Path.GetPathRoot(filename) + "\n";
+            }
+            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+        }
+
+        private void bt_file08_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\_case1\_case1a\eula.3085.txt";
             if (File.Exists(filename))  //確認檔案是否存在
@@ -517,9 +503,289 @@ namespace vcs_test_all_06_DirectoryFile
             }
             else
                 richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+
         }
 
-        private void button23_Click(object sender, EventArgs e)
+        private void bt_file09_Click(object sender, EventArgs e)
+        {
+            string pathname = @"C:\______test_files\_case1\_case1a\_case1bb\";
+            string foldername = "";
+            int got_slash = 0;
+            richTextBox1.Text += "length = " + pathname.Length.ToString() + "\n";
+            for (int i = (pathname.Length - 1); i >= 0; i--)
+            {
+                if (pathname[i] == '\\')
+                {
+                    got_slash++;
+                    if (got_slash == 2)
+                    {
+                        richTextBox1.Text += "got \\ in length = " + i.ToString() + "\n";
+                        //foldername = pathname.Substring(i,pathname.Length-2);
+                        foldername = pathname.Substring(i + 1, pathname.Length - i - 2);
+                        richTextBox1.Text += "path name = " + pathname + "\n";
+                        richTextBox1.Text += "folder name = " + foldername + "\n";
+
+                        break;
+                    }
+                }
+            }
+            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+        }
+
+        int attr = 0;
+        private void bt_file10_Click(object sender, EventArgs e)
+        {
+            //修改檔案時間 屬性
+            string filename = @"C:\\cccc.txt";
+            if (File.Exists(filename) == false) //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                return;
+            }
+            if ((File.GetAttributes(filename) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                richTextBox1.Text += "檔案唯讀，不能修改檔案時間";
+            else
+            {
+                richTextBox1.Text += "改變檔案時間";
+                File.SetCreationTime(filename, new DateTime(1985, 5, 4));
+                File.SetLastWriteTime(filename, new DateTime(1995, 6, 5));
+                File.SetLastAccessTime(filename, new DateTime(2005, 7, 6));
+            }
+            if (attr == 0)
+                File.SetAttributes(filename, FileAttributes.Archive);
+            else if (attr == 1)
+                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
+            else if (attr == 2)
+                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
+            attr++;
+            if (attr > 2)
+                attr = 0;
+
+        }
+
+        private void bt_file11_Click(object sender, EventArgs e)
+        {
+            string RandomFileName = System.IO.Path.GetRandomFileName();
+            richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
+            string TempFileName = System.IO.Path.GetTempFileName();
+            richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
+
+        }
+
+        private void bt_file12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_dir00_Click(object sender, EventArgs e)
+        {
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+
+        }
+
+        private void bt_dir01_Click(object sender, EventArgs e)
+        {
+            //確認資料夾是否存在
+            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
+                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+
+        }
+
+        private void bt_dir02_Click(object sender, EventArgs e)
+        {
+            //刪除資料夾
+            string Path = "C:\\______test_files_file_name2";
+            /*
+            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
+                richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
+            else
+            {
+                Directory.Exists(Path);     //確認資料夾是否存在
+                richTextBox1.Text += "已刪除資料夾: " + Path + "\n";
+            }
+            */
+            if (Directory.Exists(Path))     //確認資料夾是否存在
+            {
+                try
+                {
+                    Directory.Delete(Path, true);   //recurrsive
+                    //Directory.Delete(Path, false);   //not recurrsive
+                    richTextBox1.Text += "已刪除資料夾" + Path + "\n";
+                }
+                catch
+                {
+                    richTextBox1.Text += "無法刪除資料夾" + Path + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
+            }
+
+
+        }
+
+        private void bt_dir03_Click(object sender, EventArgs e)
+        {
+            string destDirName = @"c:\______test_files\folder2";
+            string destDirName2 = @"c:\______test_files\folder22";
+            DeleteDirectory(destDirName, true);
+            DeleteDirectory(destDirName2, true);
+
+        }
+
+        private void bt_dir04_Click(object sender, EventArgs e)
+        {
+            //建立一個新資料夾
+            string newPath = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            if (Directory.Exists(newPath) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(newPath);
+                richTextBox1.Text += "已建立一個新資料夾: " + newPath + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + newPath + " 已存在，不能再建立\n";
+
+        }
+
+        private void bt_dir05_Click(object sender, EventArgs e)
+        {
+            //未完成
+            string Path_old = "C:\\______test_files_file_name1";
+            string Path_new = "C:\\______test_files_file_name2";
+            if (Directory.Exists(Path_old) == false)    //確認資料夾是否存在
+            {
+                richTextBox1.Text += "原始資料夾: " + Path_old + " 不存在, 不能拷貝\n";
+                return;
+            }
+            if (Directory.Exists(Path_new) == false)     //確認資料夾是否存在
+            {
+                //複製
+            }
+            else
+            {
+                richTextBox1.Text += "目的資料夾: " + Path_new + " 已存在, 不能拷貝\n";
+                return;
+            }
+
+        }
+
+        private void bt_dir06_Click(object sender, EventArgs e)
+        {
+            string Path_old = "C:\\______test_files_file_name2";
+            string Path_new = "C:\\______test_files_file_name3";
+            if (Directory.Exists(Path_old) == false)    //確認資料夾是否存在
+            {
+                richTextBox1.Text += "原始資料夾: " + Path_old + " 不存在, 不能拷貝\n";
+                return;
+            }
+            if (Directory.Exists(Path_new) == true)     //確認資料夾是否存在
+            {
+                richTextBox1.Text += "目的資料夾: " + Path_new + " 已存在, 不能拷貝\n";
+                return;
+            }
+            Directory.Move(Path_old, Path_new);
+            richTextBox1.Text += "移動/更名 完成，從原始資料夾: " + Path_old + " 到目的資料夾: " + Path_new + "\n";
+
+            //移動資料夾，從 sourceDirName 移動到 destDirName
+            string sourceDirName = @"c:\______test_files\folder2";
+            string destDirName = @"c:\______test_files\folder22";
+            if (Directory.Exists(sourceDirName))        //確認資料夾是否存在
+            {
+                if (!Directory.Exists(destDirName))     //確認資料夾是否存在
+                {
+                    Directory.Move(sourceDirName, destDirName);
+                    richTextBox1.Text += "已移動資料夾: " + sourceDirName + " 到 " + destDirName + "\n";
+                }
+                else
+                    richTextBox1.Text += "資料夾: " + destDirName + " 已存在\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + sourceDirName + " 不存在\n";
+
+        }
+
+        private void bt_dir07_Click(object sender, EventArgs e)
+        {
+            //刪除資料夾
+            string target_dir = "C:\\______test_files_file_name2";
+
+            if (Directory.Exists(target_dir))       //確認資料夾是否存在
+            {
+                richTextBox1.Text += "刪除資料夾: " + target_dir + "\n";
+                try
+                {
+                    DeleteDirectory(target_dir);
+                    //Directory.Delete(Path, true);   //recurrsive
+                    //Directory.Delete(Path, false);   //not recurrsive
+                    richTextBox1.Text += "OK\n";
+                }
+                catch
+                {
+                    richTextBox1.Text += "FAIL\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "資料夾: " + target_dir + " 不存在，不能刪除\n";
+            }
+
+        }
+
+        private void bt_read00_Click(object sender, EventArgs e)
+        {
+            //讀檔1
+            //一次讀取檔案內所有資料
+            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
+            StreamReader sr = f.OpenText();
+            richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
+            sr.Close();
+
+        }
+
+        private void bt_read01_Click(object sender, EventArgs e)
+        {
+            //讀檔2
+            //一次讀取檔案內一行資料
+            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
+            StreamReader sr = f.OpenText();
+            while (sr.Peek() > 0)
+            {
+                richTextBox1.Text += sr.ReadLine() + "\n";
+            }
+            sr.Close();
+
+        }
+
+        private void bt_read02_Click(object sender, EventArgs e)
+        {
+            //讀檔3
+            //一次讀取檔案內一個字元
+            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
+            StreamReader sr = f.OpenText();
+            while (sr.Peek() > 0)
+            {
+                richTextBox1.Text += (char)sr.Read();
+            }
+            sr.Close();
+
+
+        }
+
+        private void bt_read03_Click(object sender, EventArgs e)
+        {
+            //讀檔4
+            string fileReadName = @"c:\______test_files\data.txt";
+            ReadFile(fileReadName);
+        }
+
+        private void bt_read04_Click(object sender, EventArgs e)
         {
             //讀取中文檔案
             String pathname = "C:\\______test_files\\read_file.txt";
@@ -536,10 +802,222 @@ namespace vcs_test_all_06_DirectoryFile
                 StreamReader sw = new StreamReader(@"c:/______test_files/read_file.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
                 richTextBox1.Text += sw.ReadToEnd();	//讀取所有文字內容
             }
+        }
+
+        private void bt_read05_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+            string filepath = string.Empty;
+            string context = string.Empty;
+
+            OpenFileDialog P_OpenFileDialog = new OpenFileDialog();
+            if (P_OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                filepath = P_OpenFileDialog.FileName;
+                FileStream filestream = File.Open(filepath, FileMode.Open);
+                StreamReader str_reader = new StreamReader(filestream);
+                try
+                {
+                    // Read File text
+                    for (int ii = 0; ii < 5; ii++)
+                    {
+                        context = str_reader.ReadLine();
+                        richTextBox1.Text += "Line " + ii.ToString() + ", context : " + context + "\n";
+
+                        string[] strArray = context.Split('\t');
+                        for (int i = 0; i < strArray.Length; i++)
+                        {
+                            richTextBox1.Text += strArray[i] + "\n";
+                        }
+                    }
+
+                    //this.Disp_Message("開啟檔案 : " + filepath, 0);
+                    //this.Disp_Message("讀取檔案成功 !!", 1);
+                    MessageBox.Show("Open File : " + filepath);
+                    MessageBox.Show("Read File Successfully !!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    //this.Disp_Message("開啟檔案 : " + filepath, 0);
+                    //this.Disp_Message("讀取檔案失敗 !!", 2);
+                    MessageBox.Show("Open File : " + filepath);
+                    MessageBox.Show("Read File Fail !!");
+                }
+
+                // Dispose StreamReader
+                str_reader.Dispose();
+                // Close FileStream
+                filestream.Close();
+            }
+        }
+
+        private void bt_read06_Click(object sender, EventArgs e)
+        {
+            string filepath = "C:\\______test_files\\aaaaaaab.txt";
+
+            string[] rowdat = new string[3];
+            string[] paraname = new string[16];
+            string context = string.Empty;
+            int t1 = 0;
+            int t2 = 0;
+            string rowdata = string.Empty;
+
+            FileStream filestream = File.Open(filepath, FileMode.Open);
+            StreamReader str_reader = new StreamReader(filestream);
+            // Read File text
+            for (int ii = 0; ii < 1; ii++)
+            {
+                context = str_reader.ReadLine();
+                MessageBox.Show("context " + ii + " = " + context + "  len = " + context.Length);
+                //MessageBox.Show("context[41] = " + Convert.ToString(context[41], 16));
+                //MessageBox.Show("context[42] = " + Convert.ToString(context[42], 16));
+
+                //MessageBox.Show("data = 0x" + Convert.ToString(value, 16) + " =" + value);
+
+                t1 = 0;
+                t2 = context.IndexOf("\t", t1);
+                rowdata = context.Substring(t1, t2 - t1);
+                MessageBox.Show("t1 = " + t1 + " t2 = " + t2 + " rowdata = " + rowdata);
+
+                do
+                {
+                    t1 = t2 + 1;
+                    t2 = context.IndexOf("\t", t1);
+                    if (t2 != -1)
+                    {
+                        rowdata = context.Substring(t1, t2 - t1);
+                        MessageBox.Show("t1 = " + t1 + " t2 = " + t2 + " rowdata = " + rowdata);
+                    }
+                    else
+                    {
+                        t2 = context.Length;
+                        rowdata = context.Substring(t1, t2 - t1);
+                        MessageBox.Show("t1 = " + t1 + " t2 = " + t2 + " rowdata = " + rowdata);
+                        break;
+                    }
+                }
+                while (t2 != -1);
+            }
+            // Dispose StreamReader
+            str_reader.Dispose();
+            // Close FileStream
+            filestream.Close();
+        }
+
+        private void bt_read07_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+            string filepath = "C:\\______test_files\\aaaaaaa.txt";
+
+            string[] rowdat = new string[3];
+            string[] paraname = new string[16];
+            int[] value = new int[16];
+            string context = string.Empty;
+            int t1 = 0;
+            int t2 = 0;
+
+            int[] xx = new int[16];
+            int[] yy = new int[16];
+
+            FileStream filestream = File.Open(filepath, FileMode.Open);
+            StreamReader str_reader = new StreamReader(filestream);
+            // Read File text
+            for (int ii = 0; ii < 16; ii++)
+            {
+                context = str_reader.ReadLine();
+                richTextBox1.Text += "原始context " + ii + " = " + context + "\n";
+                t1 = t2 = 0;
+                //for (int jj = 0; jj < 3; jj++)
+                for (int jj = 0; jj < 2; jj++)
+                {
+                    t2 = context.IndexOf("\t", t1);
+                    rowdat[jj] = context.Substring(t1, t2 - t1);
+                    richTextBox1.Text += "分割context = " + context + " jj = " + jj + " t1= " + t1 + " t2= " + t2 + " rowdat =" + rowdat[jj] + "\n";
+
+                    t1 = t2 + 1;
+                    if (jj == 0)
+                        xx[ii] = Int32.Parse(rowdat[jj]);
+                    else if (jj == 1)
+                        yy[ii] = Int32.Parse(rowdat[jj]);
+                }
+                paraname[ii] = rowdat[1];
+                //value[ii] = Int32.Parse(rowdat[2]);
+            }
+
+            MessageBox.Show("Result: \n" + xx[0].ToString() + " " + xx[1].ToString() + " " + xx[2].ToString() + " " + xx[3].ToString() + " " + xx[4].ToString() + " " + xx[5].ToString() + " " + xx[6].ToString() + " " + xx[7].ToString() + " " + xx[8].ToString() + " " + xx[9].ToString() + " " + xx[10].ToString() + " " + xx[11].ToString() + " " + xx[12].ToString() + " " + xx[13].ToString() + " " + xx[14].ToString() + " " + xx[15].ToString() + "\n" + yy[0].ToString() + " " + yy[1].ToString() + " " + yy[2].ToString() + " " + yy[3].ToString() + " " + yy[4].ToString() + " " + yy[5].ToString() + " " + yy[6].ToString() + " " + yy[7].ToString() + " " + yy[8].ToString() + " " + yy[9].ToString() + " " + yy[10].ToString() + " " + yy[11].ToString() + " " + yy[12].ToString() + " " + yy[13].ToString() + " " + yy[14].ToString() + " " + yy[15].ToString());
+
+            // Dispose StreamReader
+            str_reader.Dispose();
+            // Close FileStream
+            filestream.Close();
+        }
+
+        private void bt_read08_Click(object sender, EventArgs e)
+        {
+            //ReadAllText 讀取文件
+            //使用ReadAllText可以直接讀取文件中的內容，格式為:
+            //File.ReadAllText(檔案位置及名稱);
+            //建立檔案 & 讀取檔案 範例:
+
+            //建立檔案
+            string x = "Hello text";
+            File.WriteAllText("myfilename.txt", x);
+            richTextBox1.Text += "寫檔完成\n";
+
+            //讀取檔案
+            string y = File.ReadAllText("myfilename.txt");
+            richTextBox1.Text += "檔案內容 : " + y + "\n";
 
         }
 
-        private void button41_Click(object sender, EventArgs e)
+        private void bt_read09_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_read10_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "單選檔案";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            openFileDialog1.DefaultExt = "*.txt";
+            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            openFileDialog1.Multiselect = false;    //單選
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
+                FileInfo f = new FileInfo(openFileDialog1.FileName);
+                richTextBox1.Text += "Name: " + f.Name + "\n";
+                richTextBox1.Text += "FullName: " + f.FullName + "\n";
+                richTextBox1.Text += "Extension: " + f.Extension + "\n";
+                richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
+                richTextBox1.Text += "Directory: " + f.Directory + "\n";
+                richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+        }
+
+        private void bt_read11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_read12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_write00_Click(object sender, EventArgs e)
         {
             //建立時間檔案
             string filename = "Stage_Speed_Current." + DateTime.Now.ToString("MMdd.HH.mm") + ".txt";
@@ -611,10 +1089,9 @@ namespace vcs_test_all_06_DirectoryFile
             // Close FileStream
             filestream.Close();
             richTextBox1.Text += "儲存檔案5 OK，檔名：" + filename5 + "\n";
-
         }
 
-        private void button40_Click(object sender, EventArgs e)
+        private void bt_write01_Click(object sender, EventArgs e)
         {
             //附加檔案
             FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
@@ -622,329 +1099,319 @@ namespace vcs_test_all_06_DirectoryFile
             sw.Write(richTextBox1.Text);
             sw.Flush();
             sw.Close();
-
         }
 
-        private void button39_Click(object sender, EventArgs e)
+        private void bt_write02_Click(object sender, EventArgs e)
         {
-            //讀檔1
-            //一次讀取檔案內所有資料
-            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
-            StreamReader sr = f.OpenText();
-            richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
-            sr.Close();
-
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-            //讀檔2
-            //一次讀取檔案內一行資料
-            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
-            StreamReader sr = f.OpenText();
-            while (sr.Peek() > 0)
+            //string wmi_data_filename = "wmi-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
+            string wmi_data_filename = "C:\\vcs-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
+            if (System.IO.File.Exists(wmi_data_filename) == false)
             {
-                richTextBox1.Text += sr.ReadLine() + "\n";
+                MessageBox.Show("檔案 " + wmi_data_filename + " 不存在，製作一個。");
+                StreamWriter sw = File.CreateText(wmi_data_filename);
+                sw.Write(richTextBox1.Text);
+                sw.Close();
             }
-            sr.Close();
-
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            //讀檔3
-            //一次讀取檔案內一個字元
-            FileInfo f = new FileInfo("c:\\______test_files\\vcs_test.txt");
-            StreamReader sr = f.OpenText();
-            while (sr.Peek() > 0)
+            else
             {
-                richTextBox1.Text += (char)sr.Read();
+                MessageBox.Show("檔案 " + wmi_data_filename + " 存在, 開啟，並接續寫入資料");
+                StreamWriter sw = File.AppendText(wmi_data_filename);
+                sw.Write(richTextBox1.Text);
+                sw.Close();
             }
-            sr.Close();
-
         }
 
-        private void button27_Click(object sender, EventArgs e)
+        private void bt_write03_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            string folderpath;          // 紀錄資料夾路徑
+            string filename;            // 檔案名稱
+            string fullpath;
+            FileStream fs;
 
-            string filepath = "C:\\______test_files\\aaaaaaa.txt";
+            folderpath = System.IO.Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前路徑: " + folderpath + "\n";
 
-            string[] rowdat = new string[3];
-            string[] paraname = new string[16];
-            int[] value = new int[16];
-            string context = string.Empty;
-            int t1 = 0;
-            int t2 = 0;
+            // 使用現在時間建立檔案名稱
+            filename = DateTime.Now.Year.ToString();
+            filename += DateTime.Now.Month.ToString("00");
+            filename += DateTime.Now.Day.ToString("00");
+            filename += DateTime.Now.Hour.ToString("00");
+            filename += DateTime.Now.Minute.ToString("00");
+            filename += DateTime.Now.Second.ToString("00");
+            filename += ".txt";
+            richTextBox1.Text += "檔案名稱: " + filename + "\n";
 
-            int[] xx = new int[16];
-            int[] yy = new int[16];
+            fullpath = folderpath + "\\" + filename;
+            richTextBox1.Text += "完整路徑與檔名: " + fullpath + "\n";
 
-            FileStream filestream = File.Open(filepath, FileMode.Open);
-            StreamReader str_reader = new StreamReader(filestream);
-            // Read File text
-            for (int ii = 0; ii < 16; ii++)
+            //開啟檔案
+            fs = File.Open(fullpath, FileMode.Create);
+
+            fs.Close();
+        }
+
+        private void bt_write04_Click(object sender, EventArgs e)
+        {
+            string path = @"C:\______test_files\";
+            string fileName = "filewrite.txt";
+
+            if (!System.IO.Directory.Exists(path))
             {
-                context = str_reader.ReadLine();
-                richTextBox1.Text += "原始context " + ii + " = " + context + "\n";
-                t1 = t2 = 0;
-                //for (int jj = 0; jj < 3; jj++)
-                for (int jj = 0; jj < 2; jj++)
-                {
-                    t2 = context.IndexOf("\t", t1);
-                    rowdat[jj] = context.Substring(t1, t2 - t1);
-                    richTextBox1.Text += "分割context = " + context + " jj = " + jj + " t1= " + t1 + " t2= " + t2 + " rowdat =" + rowdat[jj] + "\n";
-
-                    t1 = t2 + 1;
-                    if (jj == 0)
-                        xx[ii] = Int32.Parse(rowdat[jj]);
-                    else if (jj == 1)
-                        yy[ii] = Int32.Parse(rowdat[jj]);
-                }
-                paraname[ii] = rowdat[1];
-                //value[ii] = Int32.Parse(rowdat[2]);
+                richTextBox1.Text += "路徑不存在，建立之。\n";
+                System.IO.Directory.CreateDirectory(path);
             }
-
-            MessageBox.Show("Result: \n" + xx[0].ToString() + " " + xx[1].ToString() + " " + xx[2].ToString() + " " + xx[3].ToString() + " " + xx[4].ToString() + " " + xx[5].ToString() + " " + xx[6].ToString() + " " + xx[7].ToString() + " " + xx[8].ToString() + " " + xx[9].ToString() + " " + xx[10].ToString() + " " + xx[11].ToString() + " " + xx[12].ToString() + " " + xx[13].ToString() + " " + xx[14].ToString() + " " + xx[15].ToString() + "\n" + yy[0].ToString() + " " + yy[1].ToString() + " " + yy[2].ToString() + " " + yy[3].ToString() + " " + yy[4].ToString() + " " + yy[5].ToString() + " " + yy[6].ToString() + " " + yy[7].ToString() + " " + yy[8].ToString() + " " + yy[9].ToString() + " " + yy[10].ToString() + " " + yy[11].ToString() + " " + yy[12].ToString() + " " + yy[13].ToString() + " " + yy[14].ToString() + " " + yy[15].ToString());
-
-            // Dispose StreamReader
-            str_reader.Dispose();
-            // Close FileStream
-            filestream.Close();
-
+            if (!System.IO.File.Exists(path + fileName))
+            {
+                richTextBox1.Text += "檔案不存在，建立之。\n";
+                FileStream fs = System.IO.File.Create(path + fileName);
+                fs.Close();
+            }
+            using (StreamWriter w = System.IO.File.AppendText(path + fileName))
+            {
+                //System.IO.File.SetAttributes(path + fileName, FileAttributes.Hidden);//隱藏
+                w.WriteLine(richTextBox1.Text, Encoding.Default);
+                richTextBox1.Text += "寫入檔案完成\n";
+            }
         }
 
-        private void button24_Click(object sender, EventArgs e)
+        private void bt_write05_Click(object sender, EventArgs e)
         {
-            //ReadAllText 讀取文件
-            //使用ReadAllText可以直接讀取文件中的內容，格式為:
-            //File.ReadAllText(檔案位置及名稱);
-            //建立檔案 & 讀取檔案 範例:
+            string fileName1 = "c:\\______test_files\\test_ReadAllBytes.bmp";
+            string fileName2 = "c:\\______test_files\\test_WriteAllBytes.bmp";
 
-            //建立檔案
+            //讀取資料
+            byte[] data_read = File.ReadAllBytes(fileName1);
+            richTextBox1.Text += "讀取檔案" + fileName1 + "\t";
+            richTextBox1.Text += "len = " + data_read.Length.ToString() + "\n";
+
+            /*
+            打印資料
+            string data_read_result = string.Empty;
+            foreach (byte b in data_read)
+            {
+                data_read_result += b.ToString("X2");
+            }
+            richTextBox1.Text += data_read_result;
+            */
+
+            //修改資料
+            for (int i = 54; i < data_read.Length; i++)
+            {
+                if (data_read[i] == 0xCC)
+                    data_read[i] = 0xFF;
+            }
+
+            //寫資料
+            File.WriteAllBytes(fileName2, data_read);
+            richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
+        }
+
+        private void bt_write06_Click(object sender, EventArgs e)
+        {
+            //WriteAllText 寫入/建立檔案
+            //透過WriteAllText可以將文字寫入檔案(如果檔案不存在，會自動建立)，格式為:
+            //File.WriteAllText(檔案位置及名稱, 字串);
+
             string x = "Hello text";
             File.WriteAllText("myfilename.txt", x);
             richTextBox1.Text += "寫檔完成\n";
+        }
+
+        private void bt_write07_Click(object sender, EventArgs e)
+        {
+            //AppendAllText 插入文字
+            //C# 將字串插入文件內容尾端
+            richTextBox1.Text += "寫一筆資料到檔案尾端\n";
+            File.AppendAllText("myfilename.txt", " append text to the end.");
 
             //讀取檔案
-            string y = File.ReadAllText("myfilename.txt");
+            // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
+            string y = File.ReadAllText("myfilename.txt", System.Text.Encoding.Default);
             richTextBox1.Text += "檔案內容 : " + y + "\n";
         }
 
-        //刪除資料夾，recursive為True時，直接刪除資料夾及其資料夾下所有文件或資料夾;recursive為False時，需先將資料夾下所有文件或資料夾刪除
-        private void DeleteDirectory(string path, bool recursive)
+        private void bt_write08_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(path))     //確認資料夾是否存在
+            openFileDialog1.Title = "測試讀取一個純文字檔";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            openFileDialog1.DefaultExt = "*.txt";
+            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                if (recursive)
-                {
-                    Directory.Delete(path, true);
-                    richTextBox1.Text += "已刪除資料夾: " + path + "\n";
-                }
-                else
-                    richTextBox1.Text += "需要先把資料夾內的檔案刪除\n";
-            }
-        }
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
 
-        //讀取資料夾下所有資料夾
-        private ArrayList GetDirectories(string path)
-        {
-            ArrayList directories = new ArrayList();
-
-            if (Directory.Exists(path))     //確認資料夾是否存在
-            {
-                directories.AddRange(Directory.GetDirectories(path));
-                richTextBox1.Text += "總共" + directories.Count.ToString() + "個資料夾\n";
-            }
-            //richTextBox1.Text += directories;
-
-            return directories;
-        }
-
-        //讀取資料夾下所有檔案, 只看一層
-        private ArrayList GetFiles(string path)
-        {
-            ArrayList files = new ArrayList();
-
-            if (Directory.Exists(path))     //確認資料夾是否存在
-            {
-                files.AddRange(Directory.GetFiles(path));
-                richTextBox1.Text += "總共" + files.Count.ToString() + "個檔案\n";
-            }
-            return files;
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
-            string sourceFileName = @"c:\______test_files\picture1a.jpg";
-            string destFileName = @"c:\______test_files\picture1b.jpg";
-
-            //移動檔案，從 sourceFileName 移動到 destFileName
-            if (File.Exists(sourceFileName))        //確認原始檔案是否存在
-            {
-                if (!File.Exists(destFileName))     //確認目標檔案是否存在
-                {
-                    File.Move(sourceFileName, destFileName);
-                    richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                }
-                else
-                    richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+                //StreamReader sr = new StreamReader(openFileDialog1.FileName);
+                //StreamReader sr = new StreamReader(fileName, Encoding.Default);
+                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+                richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
+                sr.Close();
             }
             else
-                richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
-        }
-
-        private void button47_Click(object sender, EventArgs e)
-        {
-            string destDirName = @"c:\______test_files\folder2";
-            string destDirName2 = @"c:\______test_files\folder22";
-            DeleteDirectory(destDirName, true);
-            DeleteDirectory(destDirName2, true);
-        }
-
-        private void button53_Click(object sender, EventArgs e)
-        {
-            string path = @"c:\______test_files";
-            GetDirectories(path);
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
-            string path = @"c:\______test_files";
-            GetFiles(path);
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-
-            string filepath = string.Empty;
-            string context = string.Empty;
-
-            OpenFileDialog P_OpenFileDialog = new OpenFileDialog();
-            if (P_OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                filepath = P_OpenFileDialog.FileName;
-                FileStream filestream = File.Open(filepath, FileMode.Open);
-                StreamReader str_reader = new StreamReader(filestream);
+                richTextBox1.Text += "未選取檔案\n";
+            }
+        }
+
+        private void bt_write09_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "測試讀取一個純文字檔";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            openFileDialog1.DefaultExt = "*.txt";
+            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
+            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
                 try
                 {
-                    // Read File text
-                    for (int ii = 0; ii < 5; ii++)
-                    {
-                        context = str_reader.ReadLine();
-                        richTextBox1.Text += "Line " + ii.ToString() + ", context : " + context + "\n";
-
-                        string[] strArray = context.Split('\t');
-                        for (int i = 0; i < strArray.Length; i++)
-                        {
-                            richTextBox1.Text += strArray[i] + "\n";
-                        }
-                    }
-
-                    //this.Disp_Message("開啟檔案 : " + filepath, 0);
-                    //this.Disp_Message("讀取檔案成功 !!", 1);
-                    MessageBox.Show("Open File : " + filepath);
-                    MessageBox.Show("Read File Successfully !!");
+                    richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
                 }
-                catch (Exception ex)
+                catch (System.IO.FileNotFoundException)
                 {
-                    Console.WriteLine(ex.ToString());
-                    //this.Disp_Message("開啟檔案 : " + filepath, 0);
-                    //this.Disp_Message("讀取檔案失敗 !!", 2);
-                    MessageBox.Show("Open File : " + filepath);
-                    MessageBox.Show("Read File Fail !!");
+                    MessageBox.Show("找不到檔案");
                 }
-
-                // Dispose StreamReader
-                str_reader.Dispose();
-                // Close FileStream
-                filestream.Close();
-            }
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-            string filepath = "C:\\______test_files\\aaaaaaab.txt";
-
-            string[] rowdat = new string[3];
-            string[] paraname = new string[16];
-            string context = string.Empty;
-            int t1 = 0;
-            int t2 = 0;
-            string rowdata = string.Empty;
-
-            FileStream filestream = File.Open(filepath, FileMode.Open);
-            StreamReader str_reader = new StreamReader(filestream);
-            // Read File text
-            for (int ii = 0; ii < 1; ii++)
-            {
-                context = str_reader.ReadLine();
-                MessageBox.Show("context " + ii + " = " + context + "  len = " + context.Length);
-                //MessageBox.Show("context[41] = " + Convert.ToString(context[41], 16));
-                //MessageBox.Show("context[42] = " + Convert.ToString(context[42], 16));
-
-                //MessageBox.Show("data = 0x" + Convert.ToString(value, 16) + " =" + value);
-
-                t1 = 0;
-                t2 = context.IndexOf("\t", t1);
-                rowdata = context.Substring(t1, t2 - t1);
-                MessageBox.Show("t1 = " + t1 + " t2 = " + t2 + " rowdata = " + rowdata);
-
-                do
-                {
-                    t1 = t2 + 1;
-                    t2 = context.IndexOf("\t", t1);
-                    if (t2 != -1)
-                    {
-                        rowdata = context.Substring(t1, t2 - t1);
-                        MessageBox.Show("t1 = " + t1 + " t2 = " + t2 + " rowdata = " + rowdata);
-                    }
-                    else
-                    {
-                        t2 = context.Length;
-                        rowdata = context.Substring(t1, t2 - t1);
-                        MessageBox.Show("t1 = " + t1 + " t2 = " + t2 + " rowdata = " + rowdata);
-                        break;
-                    }
-                }
-                while (t2 != -1);
-            }
-            // Dispose StreamReader
-            str_reader.Dispose();
-            // Close FileStream
-            filestream.Close();
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
-            if (GetFile())
-            {
-                MessageBox.Show("有找到");
             }
             else
             {
-                MessageBox.Show("沒有找到");
-            }
+                richTextBox1.Text += "未選取檔案\n";
 
+            }
         }
-        private Boolean GetFile()
+
+        private void bt_write10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "尋找檔案 start.wav \n";
-            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\______test_files");
-            foreach (FileInfo info in dirInfo.GetFiles("start.wav"))
+            int i = 0;
+            String line;
+            openFileDialog1.Title = "測試讀取一個純文字檔";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "文字檔|*.*|C#文件|*.cs|所有檔|*.*";   //限定檔案格式
+            //openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            //openFileDialog1.InitialDirectory = "c:\\";
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                return true;
+                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
+                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
+
+                //StreamReader sr = new StreamReader(openFileDialog1.FileName);
+                //StreamReader sr = new StreamReader(fileName, Encoding.Default);
+                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+                //richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
+                //寫法一
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    i++;
+                    line = sr.ReadLine();            // 讀取文字到 line 變數
+                    richTextBox1.Text += "第" + i.ToString() + "行： " + line + "\n";
+                }
+
+                /*
+                //寫法二
+                while ((line = sr.ReadLine()) != null)
+                {
+                    i++;
+                    richTextBox1.Text += "第" + i.ToString() + "行： " + line + "\n";
+                }
+                */
+                sr.Close();
             }
-            return false;
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+
+            }
         }
 
-        string message = "";
-        double filesize_all = 0;
+        private void bt_write11_Click(object sender, EventArgs e)
+        {
 
-        private void button32_Click(object sender, EventArgs e)
+        }
+
+        private void bt_write12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_files00_Click(object sender, EventArgs e)
+        {
+            string filename1 = "c:\\______test_files\\compare\\aaaa.txt";
+            string filename2 = "c:\\______test_files\\compare\\bbbb.txt";
+            string filename3 = "c:\\______test_files\\compare\\ssss.txt";
+            if (FileCompare(filename1, filename2))
+            {
+                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename2 + " 相同。\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename2 + " 不同。\n";
+            }
+            if (FileCompare(filename1, filename3))
+            {
+                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename3 + " 相同。\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename3 + " 不同。\n";
+            }
+        }
+
+        private void bt_files01_Click(object sender, EventArgs e)
+        {
+            StreamReader sr1 = new StreamReader("c:\\______test_files\\compare\\aaaa.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            StreamReader sr2 = new StreamReader("c:\\______test_files\\compare\\bbbb.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            StreamReader sr3 = new StreamReader("c:\\______test_files\\compare\\ssss.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))	//讀取所有文字內容
+            {
+                richTextBox1.Text += "兩個文件相等\n";
+            }
+            else
+            {
+                richTextBox1.Text += "兩個文件不相等\n";
+            }
+            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))	//讀取所有文字內容
+            {
+                richTextBox1.Text += "兩個文件相等\n";
+            }
+            else
+            {
+                richTextBox1.Text += "兩個文件不相等\n";
+            }
+            sr1.Close();
+            sr2.Close();
+            sr3.Close();
+        }
+
+        public enum SizeFormat
+        {
+            Bytes,
+            KiloBytes,
+            MegaBytes,
+            GigaBytes
+        }
+
+        private void bt_files02_Click(object sender, EventArgs e)
         {
             message = "";
+            filesize_all = 0;
             //計算某個檔案夾下的檔案大小，並可以用不同的單位(KB,MB,GB)顯示。
             DirectoryInfo d = new DirectoryInfo(@"C:\______test_files");//輸入檔案夾
             double size = DirSize(d);
@@ -966,72 +1433,61 @@ namespace vcs_test_all_06_DirectoryFile
                     break;
             }
 
-            message += size.ToString();
-            message += Environment.NewLine;
+            //message += size.ToString();
+            //message += Environment.NewLine;
 
-            message += Environment.NewLine;
-            message += Environment.NewLine;
-            message += "Get All FileNames";
-            message += Environment.NewLine;
+            //message += "Get All FileNames";
+            //message += Environment.NewLine;
             GetAllFileNames(d);
-            message += "Total filesize: " + filesize_all.ToString();
+            message += "Total filesize: " + filesize_all.ToString() + " Bytes.\n";
+            message += "Total filesize: " + size.ToString() + " Bytes.\n";
             message += Environment.NewLine;
-            richTextBox1.Text += message;
-
-
+            //richTextBox1.Text += message;     //無法捲到最後一行
+            richTextBox1.AppendText(message);   //可以捲到最後一行
+            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
-        public enum SizeFormat
+
+        private void bt_files03_Click(object sender, EventArgs e)
         {
-            Bytes,
-            KiloBytes,
-            MegaBytes,
-            GigaBytes
+            string target_dir = @"C:\______test_files";
+            ShowDirectory2(target_dir);
         }
 
-        public static double DirSize(DirectoryInfo d)
+        public bool ShowDirectory2(string target_dir)
         {
-            double Size = 0;
-            // Add file sizes.
-            FileInfo[] fis = d.GetFiles();
-            foreach (FileInfo fi in fis)
+            bool result = false;
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+            richTextBox1.Text += "資料夾: " + target_dir + "\n";
+            foreach (string file in files)
             {
-                Size += fi.Length;
+                File.SetAttributes(file, FileAttributes.Normal);
+                richTextBox1.Text += file + "\t";
+                richTextBox1.Text += file.Length.ToString() + "\n";
+                //File.Delete(file);
             }
-            // Add subdirectory sizes.
-            DirectoryInfo[] dis = d.GetDirectories();
-            foreach (DirectoryInfo di in dis)
+            richTextBox1.Text += "\n";
+            foreach (string dir in dirs)
             {
-                if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
-                    Size += DirSize(di);   //利用遞迴把子資料夾也計算進來
+                //richTextBox1.Text += dir + "\n";
+                ShowDirectory(dir);
             }
-            return (Size);
+            //Directory.Delete(target_dir, false);
+            return result;
         }
 
-        public void GetAllFileNames(DirectoryInfo d)
+        //讀檔案
+        private string ReadFile(string fileName)
         {
-            // Add file sizes.
-            FileInfo[] fis = d.GetFiles();
-            foreach (FileInfo fi in fis)
-            {
-                message += fi.Name;
-                message += "\t";
-                message += fi.Length.ToString(); ;
-                message += Environment.NewLine;
-                filesize_all += fi.Length;
-            }
-            // Add subdirectory sizes.
-            DirectoryInfo[] dis = d.GetDirectories();
-            foreach (DirectoryInfo di in dis)
-            {
-                if (di.Name != "System Volume Information" && di.Name.Substring(0, 1) != "$")//避開此類folder權限問題
-                {
-                    GetAllFileNames(di);   //利用遞迴把子資料夾也加進來
-                }
-            }
-            message += Environment.NewLine;
+            string content = "";
+            content = File.ReadAllText(fileName);
+            richTextBox1.Text += "檔案: " + fileName + " 內容：\n";
+            richTextBox1.Text += content;
+            richTextBox1.Text += "\n";
+            return content;
         }
 
-        private void button51_Click(object sender, EventArgs e)
+        private void bt_files04_Click(object sender, EventArgs e)
         {
             message = "";
 
@@ -1066,10 +1522,9 @@ namespace vcs_test_all_06_DirectoryFile
 
             richTextBox1.Text += message;
 
-
         }
 
-        private void button50_Click(object sender, EventArgs e)
+        private void bt_files05_Click(object sender, EventArgs e)
         {
             message = "";
             string strFolderPath = @"C:\______test_files";
@@ -1197,37 +1652,9 @@ namespace vcs_test_all_06_DirectoryFile
             richTextBox1.Text += message;
         }
 
-        private void button17_Click_1(object sender, EventArgs e)
-        {
-            string pathname = @"C:\______test_files\_case1\_case1a\_case1bb\";
-            string foldername = "";
-            int got_slash = 0;
-            richTextBox1.Text += "length = " + pathname.Length.ToString() + "\n";
-            for (int i = (pathname.Length - 1); i >= 0; i--)
-            {
-                if (pathname[i] == '\\')
-                {
-                    got_slash++;
-                    if (got_slash == 2)
-                    {
-                        richTextBox1.Text += "got \\ in length = " + i.ToString() + "\n";
-                        //foldername = pathname.Substring(i,pathname.Length-2);
-                        foldername = pathname.Substring(i + 1, pathname.Length - i - 2);
-                        richTextBox1.Text += "path name = " + pathname + "\n";
-                        richTextBox1.Text += "folder name = " + foldername + "\n";
-
-                        break;
-                    }
-                }
-            }
-            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-        }
-
-        private void button21_Click_1(object sender, EventArgs e)
+        private void bt_files06_Click(object sender, EventArgs e)
         {
             message = "";
-            filesize_all = 0;
             //計算某個檔案夾下的檔案大小，並可以用不同的單位(KB,MB,GB)顯示。
             DirectoryInfo d = new DirectoryInfo(@"C:\______test_files");//輸入檔案夾
             double size = DirSize(d);
@@ -1249,347 +1676,121 @@ namespace vcs_test_all_06_DirectoryFile
                     break;
             }
 
-            //message += size.ToString();
-            //message += Environment.NewLine;
-
-            //message += "Get All FileNames";
-            //message += Environment.NewLine;
-            GetAllFileNames(d);
-            message += "Total filesize: " + filesize_all.ToString() + " Bytes.\n";
-            message += "Total filesize: " + size.ToString() + " Bytes.\n";
+            message += size.ToString();
             message += Environment.NewLine;
-            //richTextBox1.Text += message;     //無法捲到最後一行
-            richTextBox1.AppendText(message);   //可以捲到最後一行
-            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
 
+            message += Environment.NewLine;
+            message += Environment.NewLine;
+            message += "Get All FileNames";
+            message += Environment.NewLine;
+            GetAllFileNames(d);
+            message += "Total filesize: " + filesize_all.ToString();
+            message += Environment.NewLine;
+            richTextBox1.Text += message;
         }
 
-        private void button22_Click_1(object sender, EventArgs e)
+        //讀取資料夾下所有資料夾
+        private ArrayList GetDirectories(string path)
         {
-            string target_dir = @"C:\______test_files";
-            ShowDirectory2(target_dir);
+            ArrayList directories = new ArrayList();
 
+            if (Directory.Exists(path))     //確認資料夾是否存在
+            {
+                directories.AddRange(Directory.GetDirectories(path));
+                richTextBox1.Text += "總共" + directories.Count.ToString() + "個資料夾\n";
+            }
+            //richTextBox1.Text += directories;
+
+            return directories;
         }
-        public bool ShowDirectory2(string target_dir)
+
+        //讀取資料夾下所有檔案, 只看一層
+        private ArrayList GetFiles(string path)
+        {
+            ArrayList files = new ArrayList();
+
+            if (Directory.Exists(path))     //確認資料夾是否存在
+            {
+                files.AddRange(Directory.GetFiles(path));
+                richTextBox1.Text += "總共" + files.Count.ToString() + "個檔案\n";
+            }
+            return files;
+        }
+
+        private void bt_files07_Click(object sender, EventArgs e)
+        {
+            string path = @"c:\______test_files";
+            GetDirectories(path);
+        }
+
+        private void bt_files08_Click(object sender, EventArgs e)
+        {
+            string path = @"c:\______test_files";
+            GetFiles(path);
+        }
+
+        private void bt_files09_Click(object sender, EventArgs e)
+        {
+            string target_dir = "C:\\______test_files_file_name1";
+            richTextBox1.Text += "資料夾: " + target_dir + "\n";
+            ShowDirectory(target_dir);
+        }
+
+        //public static bool DeleteDirectory(string target_dir)
+        public bool ShowDirectory(string target_dir)
         {
             bool result = false;
             string[] files = Directory.GetFiles(target_dir);
             string[] dirs = Directory.GetDirectories(target_dir);
-            richTextBox1.Text += "資料夾: " + target_dir + "\n";
+            richTextBox1.Text += "檔案個數 = " + files.Length.ToString() + "\n";
             foreach (string file in files)
             {
-                File.SetAttributes(file, FileAttributes.Normal);
-                richTextBox1.Text += file + "\t";
-                richTextBox1.Text += file.Length.ToString() + "\n";
-                //File.Delete(file);
+                richTextBox1.Text += "檔案: " + file + "\t";
+                richTextBox1.Text += "Size: " + file.Length.ToString() + " 拜\n";
             }
             richTextBox1.Text += "\n";
             foreach (string dir in dirs)
             {
-                //richTextBox1.Text += dir + "\n";
+                richTextBox1.Text += "資料夾: " + dir + "\n";
                 ShowDirectory(dir);
             }
-            //Directory.Delete(target_dir, false);
             return result;
         }
 
-        private void button26_Click_1(object sender, EventArgs e)
+        private void bt_files10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_case1\_case1a\_case1bb\eula.3086b.txt";
-            if (File.Exists(filename))      //確認檔案是否存在
+            if (GetFile())
             {
-                richTextBox1.Text += "取得完整路徑檔名:\t" + Path.GetFullPath(filename) + "\n";
-                richTextBox1.Text += "取得路徑:\t\t" + Path.GetDirectoryName(filename) + "\n";
-                richTextBox1.Text += "取得檔名(包含附檔名):\t" + Path.GetFileName(filename) + "\n";
-                richTextBox1.Text += "取得檔名(不包含附檔名):\t" + Path.GetFileNameWithoutExtension(filename) + "\n";
-                richTextBox1.Text += "取得副檔名:\t\t" + Path.GetExtension(filename) + "\n";
-                richTextBox1.Text += "資料根目錄:\t\t" + Path.GetPathRoot(filename) + "\n";
-            }
-            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            string fileReadName = @"c:\______test_files\data.txt";
-            ReadFile(fileReadName);
-
-        }
-
-        //讀檔案
-        private string ReadFile(string fileName)
-        {
-            string content = "";
-            content = File.ReadAllText(fileName);
-            richTextBox1.Text += "檔案: " + fileName + " 內容：\n";
-            richTextBox1.Text += content;
-            richTextBox1.Text += "\n";
-            return content;
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            string RandomFileName = System.IO.Path.GetRandomFileName();
-            richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
-            string TempFileName = System.IO.Path.GetTempFileName();
-            richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            //string wmi_data_filename = "wmi-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
-            string wmi_data_filename = "C:\\vcs-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
-            if (System.IO.File.Exists(wmi_data_filename) == false)
-            {
-                MessageBox.Show("檔案 " + wmi_data_filename + " 不存在，製作一個。");
-                StreamWriter sw = File.CreateText(wmi_data_filename);
-                sw.Write(richTextBox1.Text);
-                sw.Close();
+                MessageBox.Show("有找到");
             }
             else
             {
-                MessageBox.Show("檔案 " + wmi_data_filename + " 存在, 開啟，並接續寫入資料");
-                StreamWriter sw = File.AppendText(wmi_data_filename);
-                sw.Write(richTextBox1.Text);
-                sw.Close();
+                MessageBox.Show("沒有找到");
             }
-
         }
 
-        private void button48_Click(object sender, EventArgs e)
+        private Boolean GetFile()
         {
-            openFileDialog1.Title = "測試讀取一個純文字檔";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            richTextBox1.Text += "尋找檔案 start.wav \n";
+            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\______test_files");
+            foreach (FileInfo info in dirInfo.GetFiles("start.wav"))
             {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                //StreamReader sr = new StreamReader(openFileDialog1.FileName);
-                //StreamReader sr = new StreamReader(fileName, Encoding.Default);
-                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-                richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
-                sr.Close();
+                return true;
             }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
+            return false;
         }
 
-        private void button31_Click(object sender, EventArgs e)
+        private void bt_files11_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "測試讀取一個純文字檔";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                try
-                {
-                    richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-                }
-                catch (System.IO.FileNotFoundException)
-                {
-                    MessageBox.Show("找不到檔案");
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-
-            }
 
         }
 
-        private void button36_Click(object sender, EventArgs e)
+        private void bt_files12_Click(object sender, EventArgs e)
         {
-            int i = 0;
-            String line;
-            openFileDialog1.Title = "測試讀取一個純文字檔";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "文字檔|*.*|C#文件|*.cs|所有檔|*.*";   //限定檔案格式
-            //openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-
-            //openFileDialog1.InitialDirectory = "c:\\";
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
-            openFileDialog1.RestoreDirectory = true;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                //StreamReader sr = new StreamReader(openFileDialog1.FileName);
-                //StreamReader sr = new StreamReader(fileName, Encoding.Default);
-                StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-
-                //richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
-                //寫法一
-                while (!sr.EndOfStream)
-                {               // 每次讀取一行，直到檔尾
-                    i++;
-                    line = sr.ReadLine();            // 讀取文字到 line 變數
-                    richTextBox1.Text += "第" + i.ToString() + "行： " + line + "\n";
-                }
-
-                /*
-                //寫法二
-                while ((line = sr.ReadLine()) != null)
-                {
-                    i++;
-                    richTextBox1.Text += "第" + i.ToString() + "行： " + line + "\n";
-                }
-                */
-                sr.Close();
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-
-            }
 
         }
 
-        private void button29_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Title = "單選檔案";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-            openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-                FileInfo f = new FileInfo(openFileDialog1.FileName);
-                richTextBox1.Text += "Name: " + f.Name + "\n";
-                richTextBox1.Text += "FullName: " + f.FullName + "\n";
-                richTextBox1.Text += "Extension: " + f.Extension + "\n";
-                richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
-                richTextBox1.Text += "Directory: " + f.Directory + "\n";
-                richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-            string folderpath;          // 紀錄資料夾路徑
-            string filename;            // 檔案名稱
-            string fullpath;
-            FileStream fs;
-
-            folderpath = System.IO.Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前路徑: " + folderpath + "\n";
-
-            // 使用現在時間建立檔案名稱
-            filename = DateTime.Now.Year.ToString();
-            filename += DateTime.Now.Month.ToString("00");
-            filename += DateTime.Now.Day.ToString("00");
-            filename += DateTime.Now.Hour.ToString("00");
-            filename += DateTime.Now.Minute.ToString("00");
-            filename += DateTime.Now.Second.ToString("00");
-            filename += ".txt";
-            richTextBox1.Text += "檔案名稱: " + filename + "\n";
-
-            fullpath = folderpath + "\\" + filename;
-            richTextBox1.Text += "完整路徑與檔名: " + fullpath + "\n";
-
-            //開啟檔案
-            fs = File.Open(fullpath, FileMode.Create);
-
-
-
-            fs.Close();
-
-
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-            string path = @"C:\______test_files\";
-            string fileName = "filewrite.txt";
-
-            if (!System.IO.Directory.Exists(path))
-            {
-                richTextBox1.Text += "路徑不存在，建立之。\n";
-                System.IO.Directory.CreateDirectory(path);
-            }
-            if (!System.IO.File.Exists(path + fileName))
-            {
-                richTextBox1.Text += "檔案不存在，建立之。\n";
-                FileStream fs = System.IO.File.Create(path + fileName);
-                fs.Close();
-            }
-            using (StreamWriter w = System.IO.File.AppendText(path + fileName))
-            {
-                //System.IO.File.SetAttributes(path + fileName, FileAttributes.Hidden);//隱藏
-                w.WriteLine(richTextBox1.Text, Encoding.Default);
-                richTextBox1.Text += "寫入檔案完成\n";
-            }
-
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-            string fileName1 = "c:\\______test_files\\test_ReadAllBytes.bmp";
-            string fileName2 = "c:\\______test_files\\test_WriteAllBytes.bmp";
-
-            //讀取資料
-            byte[] data_read = File.ReadAllBytes(fileName1);
-            richTextBox1.Text += "讀取檔案" + fileName1 + "\t";
-            richTextBox1.Text += "len = " + data_read.Length.ToString() + "\n";
-
-            /*
-            打印資料
-            string data_read_result = string.Empty;
-            foreach (byte b in data_read)
-            {
-                data_read_result += b.ToString("X2");
-            }
-            richTextBox1.Text += data_read_result;
-            */
-
-            //修改資料
-            for (int i = 54; i < data_read.Length; i++)
-            {
-                if (data_read[i] == 0xCC)
-                    data_read[i] = 0xFF;
-            }
-
-            //寫資料
-            File.WriteAllBytes(fileName2, data_read);
-            richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
-
-        }
-
-        private void button30_Click(object sender, EventArgs e)
+        private void bt_new00_Click(object sender, EventArgs e)
         {
             string fileName1 = "c:\\______test_files\\test_ReadAllBytes.bmp";
             string fileName2 = "c:\\______test_files\\test_ReadAllBytes_half.bmp";
@@ -1624,33 +1825,10 @@ namespace vcs_test_all_06_DirectoryFile
             File.WriteAllText(fileName2, zzz);
             richTextBox1.Text += "寫成檔案" + fileName2 + "\n";
 
+
         }
 
-        private void button59_Click(object sender, EventArgs e)
-        {
-            //WriteAllText 寫入/建立檔案
-            //透過WriteAllText可以將文字寫入檔案(如果檔案不存在，會自動建立)，格式為:
-            //File.WriteAllText(檔案位置及名稱, 字串);
-
-            string x = "Hello text";
-            File.WriteAllText("myfilename.txt", x);
-            richTextBox1.Text += "寫檔完成\n";
-        }
-
-        private void button64_Click(object sender, EventArgs e)
-        {
-            //AppendAllText 插入文字
-            //C# 將字串插入文件內容尾端
-            richTextBox1.Text += "寫一筆資料到檔案尾端\n";
-            File.AppendAllText("myfilename.txt", " append text to the end.");
-
-            //讀取檔案
-            // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
-            string y = File.ReadAllText("myfilename.txt", System.Text.Encoding.Default);
-            richTextBox1.Text += "檔案內容 : " + y + "\n";
-        }
-
-        private void button60_Click(object sender, EventArgs e)
+        private void bt_new01_Click(object sender, EventArgs e)
         {
             string filename;
             int len;
@@ -1713,25 +1891,34 @@ namespace vcs_test_all_06_DirectoryFile
             }
             richTextBox1.Text += data_read_result + "\n";
 
-
-
-
-
-
-
         }
 
-        private void button61_Click(object sender, EventArgs e)
+        private void bt_new02_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button54_Click(object sender, EventArgs e)
+        private void bt_new03_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button57_Click(object sender, EventArgs e)
+        private void bt_new04_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_new05_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_new06_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_new07_Click(object sender, EventArgs e)
         {
             string filename_source = @"C:\______test_files\bear.jpg";
             string filename_destination = @"C:\______test_files\_cpfile\ccc.jpg";   //要寫完整檔名
@@ -1751,7 +1938,7 @@ namespace vcs_test_all_06_DirectoryFile
 
         }
 
-        private void button58_Click(object sender, EventArgs e)
+        private void bt_new08_Click(object sender, EventArgs e)
         {
             string pathname = @"C:\______test_files\_cpfile";
 
@@ -1766,10 +1953,9 @@ namespace vcs_test_all_06_DirectoryFile
                 richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
             }
 
-
         }
 
-        private void button46_Click(object sender, EventArgs e)
+        private void bt_new09_Click(object sender, EventArgs e)
         {
             string filename = @"C:\______test_files\bear.jpg";
 
@@ -1779,23 +1965,26 @@ namespace vcs_test_all_06_DirectoryFile
 
         }
 
-        private void button68_Click(object sender, EventArgs e)
+        private void bt_new10_Click(object sender, EventArgs e)
         {
-            //刪除檔案(使用資源回收筒)
-
-            //先將Microsoft.VisualBasic.Dll加入參考。
-            //參考/加入參考/.NET/Microsoft.VisualBasic
-            //加上 using Microsoft.VisualBasic.FileIO;    //引用Microsoft.VisualBasic.FileIO命名空間。
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                FileSystem.DeleteFile(openFileDialog1.FileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-                richTextBox1.Text += "已將檔案 : " + openFileDialog1.FileName + " 移至資源回收筒\n";
-            }
-            else
-                richTextBox1.Text += "未選取檔案\n";
 
         }
+
+        private void bt_new11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_new12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
 
     }
 }

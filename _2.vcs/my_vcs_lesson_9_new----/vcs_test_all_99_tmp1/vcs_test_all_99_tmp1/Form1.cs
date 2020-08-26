@@ -208,28 +208,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //???????
-            string filename = "c:\\______test_files\\test_ReadAllBytes.bmp";
-
-            byte[] bmp_header = new byte[256];
-            FileStream fs1 = new FileStream(filename, FileMode.Open);
-
-            richTextBox1.Text += "\nlength = " + fs1.Length.ToString() + "\n";
-
-            fs1.Read(bmp_header, 0, bmp_header.Length);
-
-            for (int i = 0; i < bmp_header.Length; i++)
-            {
-                richTextBox1.Text += bmp_header[i].ToString("X2");
-                if ((i % 16) == 15)
-                {
-                    richTextBox1.Text += "\n";
-                }
-                else
-                    richTextBox1.Text += " ";
-            }
-            // 關閉檔案。
-            fs1.Close();
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -306,30 +284,8 @@ namespace vcs_test_all_99_tmp1
 
         }
 
-        public String GetWebPage(String sURL)
-        {
-            try
-            {
-                WebClient wc = new WebClient();
-                wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
-                byte[] bd = wc.DownloadData(sURL);
-                return (Encoding.Default.GetString(bd));
-            }
-            catch
-            {
-                return ("fail");
-            }
-        }
-
         private void button24_Click(object sender, EventArgs e)
         {
-            string strURL = "http://google.com.tw";
-            //string strURL = "http://www.yahoo.com.tw";
-            string web_data = GetWebPage(strURL);
-            if (web_data == "fail")
-                richTextBox1.Text += "抓取網頁失敗";
-            else
-                richTextBox1.Text += "抓取網頁成功";
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -363,14 +319,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button33_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap;
-            string filename1 = "c:\\______test_files\\bear.bmp";
-            string filename2 = "c:\\______test_files\\bear.bmp.jpg";
-            bitmap = new Bitmap(filename1);
-            richTextBox1.Text += "width = " + bitmap.Width.ToString() + "\n";
-            richTextBox1.Text += "height = " + bitmap.Height.ToString() + "\n";
-            bitmap.Save(filename2, ImageFormat.Jpeg);
-            richTextBox1.Text += filename1 + " to " + filename2 + "轉換完成\n";
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -452,37 +400,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button35_Click_1(object sender, EventArgs e)
         {
-            string filename1 = "c:\\______test_files\\test_ReadAllBytes.bmp";
-            string filename2 = "c:\\______test_files\\test_WriteAllBytes.bmp";
-
-            //讀取資料
-            byte[] data_read = File.ReadAllBytes(filename1);
-            richTextBox1.Text += "讀取檔案" + filename1 + "\t";
-            richTextBox1.Text += "len = " + data_read.Length.ToString() + "\n";
-
-            /*
-            打印資料
-            string data_read_result = string.Empty;
-            foreach (byte b in data_read)
-            {
-                data_read_result += b.ToString("X2");
-            }
-            richTextBox1.Text += data_read_result;
-            */
-
-            //修改資料
-            for (int i = 54; i < data_read.Length; i++)
-            {
-                /*
-                if (data_read[i] == 0xCC)
-                    data_read[i] = 0xFF;
-                */
-                data_read[i] = (byte)(255 - (int)data_read[i]);
-            }
-
-            //寫資料
-            File.WriteAllBytes(filename2, data_read);
-            richTextBox1.Text += "寫成檔案" + filename2 + "\n";
 
         }
 

@@ -21,6 +21,8 @@ namespace vcs_Draw9_Example
         SolidBrush sb;
         Bitmap bitmap1;
 
+        bool draw_clock = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -107,15 +109,21 @@ namespace vcs_Draw9_Example
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             button39.Location = new Point(x_st + dx * 4, y_st + dy * 7);
 
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button40.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button41.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button44.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
-            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 8 + dy / 2);
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 9 + dy / 2);
+
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
 
             //pictureBox1.Location = new Point(10, 10);
@@ -1668,8 +1676,39 @@ namespace vcs_Draw9_Example
             //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
             y_st = H - dh;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-            //g.DrawString("180", f, sb, new PointF(180 / 2 - 10, H - 86));
-            //g.DrawString("86", f, sb, new PointF(180, H - 86 / 2 - 10));
+
+            Bitmap bmp = new Bitmap("c:\\______test_files\\BMW.jfif");
+
+            Rectangle destRect1 = new Rectangle(x_st + 12, y_st + 10, 180, 180);
+
+            float x = 0;
+            float y = 0;
+            float width = bmp.Width;
+            float height = bmp.Height;
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            g.DrawImage(bmp, destRect1, x, y, width, height, units);
+
+            //draw pillow
+            dw = 204 - 50;
+            dh = 25;
+            x_st = (W - dw) / 2;
+            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
+            y_st = H - dh;
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
+
+            //床頭櫃 dw=45,dh=45
+            dw = 60;
+            dh = 60;
+            x_st = (W - 204) / 2 - dw;
+            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
+            y_st = H - dh;
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
+
+            x_st = (W + 204) / 2;
+            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
+            y_st = H - dh;
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
             //draw cabinet1  dw=147,dh=39
             dw = 147;
@@ -1681,10 +1720,16 @@ namespace vcs_Draw9_Example
             //draw cabinet1  dw=112,dh=39
             dw = 112;
             dh = 39;
-            x_st = W - dw - 100-147;
+            x_st = W - dw - 100 - 147;
             y_st = 0;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
+            //draw division  dw=200,dh=40
+            dw = 30 + 140;
+            dh = 40;
+            x_st = 0;
+            y_st = 220;
+            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, W, H));
             //p = new Pen(Color.Black, 1);
@@ -3856,6 +3901,7 @@ namespace vcs_Draw9_Example
             {
                 button39.Text = "Clock Invalidate SP";
                 timer1.Enabled = true;
+                draw_clock = true;
                 this.DoubleBuffered = true;//避免闪烁  方法一
                 pictureBox1.Location = new Point(250, 250);
             }
@@ -3863,17 +3909,22 @@ namespace vcs_Draw9_Example
             {
                 button39.Text = "Clock Invalidate ST";
                 timer1.Enabled = false;
+                draw_clock = false;
                 pictureBox1.Location = new Point(0, 0);
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Invalidate();
+            if (draw_clock == true)
+                Invalidate();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            if (draw_clock == false)
+                return;
+
             Graphics g = e.Graphics;      //定义g为该窗体控件的画布　
             // Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
 
@@ -3949,6 +4000,31 @@ namespace vcs_Draw9_Example
             Pen hourPen = new Pen(Color.Black, 3);
             hourPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             g.DrawLine(hourPen, 0, 0, 35, 0);      
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
 
         }
 

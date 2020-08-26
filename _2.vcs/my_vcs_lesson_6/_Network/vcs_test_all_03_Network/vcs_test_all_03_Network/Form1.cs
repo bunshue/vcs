@@ -11,6 +11,7 @@ using System.Net.Sockets;   // for AddressFamily
 using System.Collections;   //for IEnumerator
 using System.Runtime.InteropServices;   //for DllImport
 using System.IO;    //for Stream
+using System.Threading;
 
 namespace vcs_test_all_03_Network
 {
@@ -260,7 +261,136 @@ namespace vcs_test_all_03_Network
 
         }
 
+        private WebClient client = new WebClient();
+        private void button14_Click(object sender, EventArgs e)
+        {
+            Thread th = new Thread(new ThreadStart(StartDownload));
+            th.Start();
+        }
 
+        private void StartDownload()
+        {
+            string URL = "http://weisico.com/program/2015/0630/237.html";
+            int n = URL.LastIndexOf("/");
+            string URLAddress = URL;//.Substring(0, n);
+            string fileName = URL.Substring(n + 1, URL.Length - n - 1);
+            string Dir = @"C:\______test_files\";
+            //下载文件，直接覆盖
+            string Path = Dir + fileName;
+
+            //Datetime.Now.ToFileTime.ToString()用于区别下载时间
+            // string Path = Dir +DateTime.Now.ToFileTime().ToString() + fileName  ;
+
+            try
+            {
+                WebRequest myre = WebRequest.Create(URLAddress);
+
+                Stream stream = client.OpenRead(URLAddress);
+                StreamReader reader = new StreamReader(stream);
+
+                FileStream outputStream = new FileStream(Path, FileMode.OpenOrCreate);
+                try
+                {
+                    int bufferSize = 100; // 网络速度快的话可以设置大一点，慢的话可以小一点
+                    int nRealCount;
+                    byte[] bBuffer = new byte[bufferSize];
+                    nRealCount = stream.Read(bBuffer, 0, bufferSize);
+
+                    // 下载，一面读一面下载是最好的方式。这样就不用声明多大的数组了
+                    while (nRealCount > 0)
+                    {
+                        outputStream.Write(bBuffer, 0, nRealCount);
+                        nRealCount = stream.Read(bBuffer, 0, bBuffer.Length);
+                    }
+                    MessageBox.Show("下载完毕!");
+                }
+                catch (WebException exp)
+                {
+                    MessageBox.Show(exp.Message, "Error");
+                    this.Text = "";
+                }
+                finally
+                {
+                    stream.Close();
+                    reader.Close();
+                    outputStream.Close();
+                }
+
+                //Application.Exit();
+
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+                //MessageBox.Show("请输入正确的文件地址");
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string strURL = "http://google.com.tw";
+            //string strURL = "http://www.yahoo.com.tw";
+            string web_data = GetWebPage(strURL);
+            if (web_data == "fail")
+                richTextBox1.Text += "抓取網頁失敗";
+            else
+                richTextBox1.Text += "抓取網頁成功";
+        }
+
+        public String GetWebPage(String sURL)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
+                byte[] bd = wc.DownloadData(sURL);
+                return (Encoding.Default.GetString(bd));
+            }
+            catch
+            {
+                return ("fail");
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            HttpWebRequest httpRequest = null;
+            HttpWebResponse httpResponse;
+
+            string result = "";
+            String txtURL = "https://www.google.com.tw/";
+            char[] cbuffer = new char[256];
+            int byteRead = 0;
+            try
+            {
+
+                Uri httpURL = new Uri(txtURL);
+                httpRequest = (HttpWebRequest)WebRequest.Create(httpURL);
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+                System.IO.Stream respStream = httpResponse.GetResponseStream();
+                System.IO.StreamReader respStreamReader = new StreamReader(respStream);
+                byteRead = respStreamReader.Read(cbuffer, 0, 256);
+                while (byteRead != 0)
+                {
+                    string response = new string(cbuffer, 0, byteRead);
+                    result = result + response;
+                    byteRead = respStreamReader.Read(cbuffer, 0, 256);
+                    richTextBox1.Text += response + "\n";
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //下載檔案的範例 - 使用WebClient
+            WebClient wc = new WebClient();
+            wc.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "C:\\______test_files\\blog.png");
+            richTextBox1.Text += "下載完成\n";
+        }
 
     }
 }

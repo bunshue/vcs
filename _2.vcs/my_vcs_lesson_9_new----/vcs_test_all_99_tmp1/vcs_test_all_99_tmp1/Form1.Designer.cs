@@ -149,7 +149,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(154, 42);
             this.button15.TabIndex = 16;
-            this.button15.Text = "讀取bmp檔案";
+            this.button15.Text = "xxx";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -204,7 +204,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(154, 42);
             this.button24.TabIndex = 24;
-            this.button24.Text = "抓取網頁";
+            this.button24.Text = "xxx";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -270,7 +270,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(154, 42);
             this.button33.TabIndex = 32;
-            this.button33.Text = "bmp 轉 jpg";
+            this.button33.Text = "xxx";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -405,7 +405,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(154, 42);
             this.button35.TabIndex = 54;
-            this.button35.Text = "parse bmp";
+            this.button35.Text = "xxx";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click_1);
             // 
