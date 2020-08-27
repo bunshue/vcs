@@ -50,6 +50,7 @@
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -292,11 +293,23 @@
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
+            // button22
+            // 
+            this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button22.Location = new System.Drawing.Point(183, 452);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(155, 40);
+            this.button22.TabIndex = 22;
+            this.button22.Text = "算方位";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1061, 664);
+            this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
@@ -349,6 +362,7 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Button button22;
     }
 }
 

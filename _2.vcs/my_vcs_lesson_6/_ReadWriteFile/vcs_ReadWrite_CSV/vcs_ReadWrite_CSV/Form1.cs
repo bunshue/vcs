@@ -249,5 +249,25 @@ namespace vcs_ReadWrite_CSV
 
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\csv_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
+
+            int aaa = 123;
+            int bbb = 456;
+
+            using (var stream = File.CreateText(filename))
+            {
+                string first = aaa.ToString();
+                string second = bbb.ToString();
+                string csv = string.Format("{0},{1}\n", first, second);
+                //File.WriteAllText(filename, csv);
+                stream.WriteLine(csv);
+                richTextBox1.Text += "csv : " + csv + "\n";
+            }
+            richTextBox1.Text += "存檔檔名: " + filename + "\n";
+
+        }
+
     }
 }

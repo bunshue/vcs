@@ -12,6 +12,7 @@ using System.Collections;   //for IEnumerator
 using System.Runtime.InteropServices;   //for DllImport
 using System.IO;    //for Stream
 using System.Threading;
+using System.Net.NetworkInformation;    //for UnicastIPAddressInformation
 
 namespace vcs_test_all_03_Network
 {
@@ -391,6 +392,26 @@ namespace vcs_test_all_03_Network
             wc.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "C:\\______test_files\\blog.png");
             richTextBox1.Text += "下載完成\n";
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //取得網卡的IPV6位置
+            foreach (var ip in GetLocalIPV6IP())
+            {
+                richTextBox1.Text += "ip = " + ip.ToString() + "\n";
+            }
+        }
+
+        private static IEnumerable<String> GetLocalIPV6IP()
+        {
+            return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
+                    where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
+                    from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
+                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
+                    let ipAddress = AddressInfo.Address.ToString()
+                    select ipAddress);
+        }
+
 
     }
 }

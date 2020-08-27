@@ -596,5 +596,44 @@ namespace vcs_test_all_06_System
             return localTime;
         }
 
+        private void button32_Click_1(object sender, EventArgs e)
+        {
+            //顯示所有邏輯磁碟機
+            GetLogicalDrives();
+        }
+
+        // Print out all logical drives on the system.
+        void GetLogicalDrives()
+        {
+            try
+            {
+                string[] drives = System.IO.Directory.GetLogicalDrives();
+
+                foreach (string str in drives)
+                {
+                    System.Console.WriteLine(str);
+                    richTextBox1.Text += "drive : " + str + "\n";
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                System.Console.WriteLine("An I/O error occurs.");
+            }
+            catch (System.Security.SecurityException)
+            {
+                System.Console.WriteLine("The caller does not have the " +
+                    "required permission.");
+            }
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            int a = 123;
+            int b = 456;
+
+            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
+            System.Diagnostics.Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
+        }
+
     }
 }

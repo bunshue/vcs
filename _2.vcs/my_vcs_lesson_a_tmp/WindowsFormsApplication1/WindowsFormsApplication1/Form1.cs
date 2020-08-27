@@ -9,9 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;    //for Directory
 
-using System.Net;
-using System.Net.NetworkInformation;    //for UnicastIPAddressInformation
-
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
@@ -97,47 +94,11 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //隨時產生臨時檔名
-            //richTextBox1.Text += "臨時檔名 : " + string.Format("filename-{0:yyyy-MM-dd_HH:mm:ss}.txt", DateTime.Now) + "\n";
-
-            //richTextBox1.Text += "臨時檔名 : " + string.Format("{0}{1}.txt", "filename-", DateTime.Now.ToString("yyyy-MM-dd_HH:mm:ss")) + "\n";
-
-
-            string filename = string.Format("csv-{0:yyyy_MMdd_HHmmss}.csv", DateTime.Now);
-            richTextBox1.Text += "filename : " + filename + "\n";
-
-            int aaa = 123;
-            int bbb = 456;
-
-            using (var stream = File.CreateText(filename))
-            {
-                string first = aaa.ToString();
-                string second = bbb.ToString();
-                string csv = string.Format("{0},{1}\n", first, second);
-                //File.WriteAllText(filename, csv);
-                stream.WriteLine(csv);
-                richTextBox1.Text += "csv : " + csv + "\n";
-            }
 
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //取得網卡的IPV6位置
-            foreach (var ip in GetLocalIPV6IP())
-            {
-                richTextBox1.Text += "ip = " + ip.ToString() + "\n";
-            }
-        }
-
-        private static IEnumerable<String> GetLocalIPV6IP()
-        {
-            return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
-                    where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
-                    from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
-                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
-                    let ipAddress = AddressInfo.Address.ToString()
-                    select ipAddress);
         }
 
         private void button5_Click(object sender, EventArgs e)

@@ -335,7 +335,7 @@
             // 
             // button29
             // 
-            this.button29.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button29.Location = new System.Drawing.Point(229, 360);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 40);
@@ -476,21 +476,25 @@
             // 
             // button32
             // 
-            this.button32.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button32.Location = new System.Drawing.Point(12, 406);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 40);
             this.button32.TabIndex = 53;
+            this.button32.Text = "顯示所有邏輯磁碟機";
             this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click_1);
             // 
             // button34
             // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(446, 406);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(200, 40);
             this.button34.TabIndex = 54;
+            this.button34.Text = "即時運算視窗輸出除錯訊息";
             this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
             // button35
             // 

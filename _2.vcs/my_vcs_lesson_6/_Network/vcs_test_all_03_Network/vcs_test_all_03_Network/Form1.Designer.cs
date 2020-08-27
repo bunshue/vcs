@@ -271,8 +271,9 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(219, 42);
             this.button20.TabIndex = 21;
-            this.button20.Text = "xxx";
+            this.button20.Text = "取得網卡的IPV6位置";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // button22
             // 
