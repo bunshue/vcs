@@ -1535,7 +1535,6 @@ namespace vcs_Draw9_Example
             g.DrawString("340", f, sb, new PointF(W / 2, H + 15));
             g.DrawString("573", f, sb, new PointF(W + 15, H / 2));
 
-
             int dw;
             int dh;
 
@@ -1575,6 +1574,40 @@ namespace vcs_Draw9_Example
             //g.DrawLine(p, W, 0, 0, H);
 
             pictureBox1.Image = bitmap1;
+        }
+
+        void draw_bookshelf(Graphics g, int x_st, int y_st, int M, int N)
+        {
+            //M     //橫向
+            //N     //高
+            int i;
+            int j;
+            int d = 7;
+            int D = 28;
+            //int x_sp;
+            //int y_sp;
+            int w = 0;
+            int h = 0;
+
+            p = new Pen(Color.Black, 1);
+
+            w = M * D + (M + 1) * d;
+            h = N * D + (N + 1) * d;
+
+            //x_sp = x_st + M * D + (M + 1) * d;
+            //y_sp = y_st + N * D + (N + 1) * d;
+
+            for (i = 0; i <= M; i++)
+            {
+                g.DrawLine(p, x_st + i * (d + D), y_st, x_st + i * (d + D), y_st + h);
+                g.DrawLine(p, x_st + i * (d + D) + d, y_st, x_st + i * (d + D) + d, y_st + h);
+            }
+
+            for (j = 0; j <= N; j++)
+            {
+                g.DrawLine(p, x_st, y_st + j * (d + D), x_st + w, y_st + j * (d + D));
+                g.DrawLine(p, x_st, y_st + j * (d + D) + d, x_st + w, y_st + j * (d + D) + d);
+            }
 
         }
 
@@ -1587,7 +1620,7 @@ namespace vcs_Draw9_Example
             int w;
             int h;
             pictureBox1.Location = new Point(50, 50);
-            pictureBox1.Size = new Size(W + 50, H + 50);  //改變圖框大小
+            pictureBox1.Size = new Size(W + 50 + 250, H + 50);  //改變圖框大小
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
             Graphics g;
@@ -1631,8 +1664,7 @@ namespace vcs_Draw9_Example
             g.DrawLine(p, 0, H + 10, W, H + 10);
             g.DrawLine(p, W + 10, 0, W + 10, H);
             g.DrawString("532", f, sb, new PointF(W / 2, H + 15));
-            g.DrawString("573", f, sb, new PointF(W + 15, H / 2));
-
+            g.DrawString("573", f, sb, new PointF(W + 15, H / 2+100));
 
             int dw;
             int dh;
@@ -1646,7 +1678,10 @@ namespace vcs_Draw9_Example
             //y_st = (H - dh) / 2;
             y_st = 6;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-            //g.DrawEllipse(new Pen(Color.Red, 3), cx - r, cy - r, r * 2, r * 2);
+            g.DrawString(dw.ToString(), f, sb, new PointF(x_st + dw / 3, y_st));
+            g.DrawString(dh.ToString(), f, sb, new PointF(x_st, dh / 2));
+
+
             int cx = 30 + dw / 2;
             int cy = dh + 50;
             int r = 30;
@@ -1730,6 +1765,14 @@ namespace vcs_Draw9_Example
             x_st = 0;
             y_st = 220;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
+
+
+            draw_bookshelf(g, 560, 50, 3, 3);
+            draw_bookshelf(g, 560, 50+112, 3, 3);
+            draw_bookshelf(g, 560+112, 50, 4, 3);
+            draw_bookshelf(g, 560+112, 50 + 112, 4, 3);
+
+            //draw_bookshelf(600, 200, 5, 2);
 
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, W, H));
             //p = new Pen(Color.Black, 1);
@@ -3604,7 +3647,6 @@ namespace vcs_Draw9_Example
 
         private void button27_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button28_Click(object sender, EventArgs e)

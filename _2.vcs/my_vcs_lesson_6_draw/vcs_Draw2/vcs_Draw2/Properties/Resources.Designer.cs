@@ -59,5 +59,15 @@ namespace vcs_Draw2.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap DashPattern {
+            get {
+                object obj = ResourceManager.GetObject("DashPattern", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
