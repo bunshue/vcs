@@ -93,6 +93,64 @@ namespace WindowsFormsApplication1
             //DirectoryInfo.Delete("C:\\______test_files\\blog.png");
         }
 
+        ImageList G_ImageList;
+        private void button4_Click(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add(WindowsFormsApplication1.Properties.Resources.poster_01);
+            comboBox1.Items.Add(WindowsFormsApplication1.Properties.Resources.poster_02);
+            comboBox1.Items.Add(WindowsFormsApplication1.Properties.Resources.poster_03);
+            comboBox1.Items.Add(WindowsFormsApplication1.Properties.Resources.poster_04);
+
+            //============================================================
+
+            comboBox1.DrawMode = DrawMode.OwnerDrawFixed;//設定繪製元素方式
+
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;	//設定組合框樣式
+
+            //============================================================
+
+            G_ImageList = new ImageList();//建立ImageList物件
+            G_ImageList.Images.Add(WindowsFormsApplication1.Properties.Resources.poster_01);
+            G_ImageList.Images.Add(WindowsFormsApplication1.Properties.Resources.poster_02);
+            G_ImageList.Images.Add(WindowsFormsApplication1.Properties.Resources.poster_03);
+            G_ImageList.Images.Add(WindowsFormsApplication1.Properties.Resources.poster_04);
+
+
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (G_ImageList != null)
+            {
+                Graphics g = e.Graphics;               //得到繪圖物件
+                Rectangle rec = e.Bounds;              //得到繪圖範圍
+                Size imageSize = G_ImageList.ImageSize;//取得圖像大小
+                if (e.Index >= 0)                      //判斷是否有繪製項 
+                {
+                    Font font = new Font("微軟正黑體", 20, FontStyle.Bold);//建立字體物件
+                    string s = comboBox1.Items[e.Index].ToString();        //得到繪製項的字串
+                    DrawItemState dis = e.State;
+                    if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))
+                    {
+                        g.FillRectangle(new SolidBrush(Color.LightBlue), rec); //畫item背景
+                        G_ImageList.Draw(g, rec.Left, rec.Top, e.Index);                //繪製圖像
+                        e.Graphics.DrawString(s, font, new SolidBrush(Color.Black),     //顯示字串
+                            rec.Left + imageSize.Width, rec.Top);
+                        e.DrawFocusRectangle();                                         //顯示取得焦點時的虛線框
+                    }
+                    else
+                    {
+                        g.FillRectangle(new SolidBrush(Color.LightGreen), rec);//畫item背景
+                        G_ImageList.Draw(e.Graphics, rec.Left, rec.Top, e.Index);       //繪製圖像
+                        e.Graphics.DrawString(s, font, new SolidBrush(Color.Black),     //顯示字串 
+                            rec.Left + imageSize.Width, rec.Top);
+                        e.DrawFocusRectangle();                                         //顯示取得焦點時的虛線框 
+                    }
+                }
+            }
+
+        }
+
 
 
 

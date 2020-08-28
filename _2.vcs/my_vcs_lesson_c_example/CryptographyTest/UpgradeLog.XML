@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CryptographyTest">
+</Property><Property Name="方案檔" Value="C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\CryptographyTest.sln">
+</Property><Property Name="Date" Value="2020年8月28日">
+</Property><Property Name="Time" Value="上午 09:11:04">
+</Property></Properties><Event ErrorLevel="0" Project="CryptographyTest" Source="CryptographyTest.csproj" Description="專案檔已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\CryptographyTest.csproj">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Form1.cs" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Form1.Designer.cs" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Program.cs" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Properties\AssemblyInfo.cs" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Properties\Resources.Designer.cs" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Properties\Settings.Designer.cs" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Properties\Settings.settings" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Form1.resx" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="Properties\Resources.resx" Description="檔案已成功備份為 C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\CryptographyTest\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="CryptographyTest.csproj" Description="專案轉換成功">
+</Event><Event ErrorLevel="3" Project="CryptographyTest" Source="CryptographyTest.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CryptographyTest" Source="CryptographyTest.csproj" Description="掃描完成: 專案檔不需要升級。">
+</Event></UpgradeLog>

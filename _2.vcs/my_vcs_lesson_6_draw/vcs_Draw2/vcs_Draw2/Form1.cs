@@ -135,10 +135,12 @@ namespace vcs_Draw2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            Graphics graphic = this.CreateGraphics();
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             Font f = new Font("標楷體", 18, FontStyle.Bold);
             SolidBrush sb = new SolidBrush(Color.Black);
-            graphic.DrawString("生日快樂!", f, sb, 10, 10);
+            g.DrawString("生日快樂!", f, sb, 10, 10);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -149,7 +151,9 @@ namespace vcs_Draw2
         int dd = 0;
         public void DrawVerticalString()
         {
-            Graphics g = this.CreateGraphics();
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
             string str = "imsLink每次影像重抓 像是會慢一陣子";
             Font f = new Font("Arial", 16);
             SolidBrush sb = new SolidBrush(Color.Black);
@@ -176,11 +180,15 @@ namespace vcs_Draw2
             f.Dispose();
             sb.Dispose();
             g.Dispose();
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Graphics g = this.CreateGraphics();
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
             // Construct a new Rectangle.
             Rectangle r = new Rectangle(new Point(50, 50), new Size(300, 300));
             Font f = new Font("標楷體", 12, FontStyle.Bold);
@@ -234,12 +242,15 @@ namespace vcs_Draw2
             fmt.FormatFlags = StringFormatFlags.DirectionVertical;  //直書
             g.DrawString("向中對齊+水平靠右+直書", f, Brushes.Red, (RectangleF)r, fmt);
 
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //使用StringFormat與適當DrawString方法來指定置中對齊的文字。
-            Graphics g = this.CreateGraphics();
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
             string text1 = "Use StringFormat and Rectangle objects to center text in a rectangle.";
             using (Font font1 = new Font("Arial", 22, FontStyle.Bold, GraphicsUnit.Point))
             {
@@ -255,13 +266,15 @@ namespace vcs_Draw2
                 g.DrawString(text1, font1, Brushes.Blue, rect1, stringFormat);
                 g.DrawRectangle(Pens.Black, rect1);
             }
-
+            pictureBox1.Image = bitmap1;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             //使用TextFormatFlags列舉型別換行，以及以垂直和水平置中與適當的文字DrawText方法。
-            Graphics g = this.CreateGraphics();
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
             string text2 = "Use TextFormatFlags and Rectangle objects to center text in a rectangle.";
 
             using (Font font2 = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point))
@@ -277,7 +290,7 @@ namespace vcs_Draw2
                 TextRenderer.DrawText(g, text2, font2, rect2, Color.Blue, flags);
                 g.DrawRectangle(Pens.Black, rect2);
             }
-
+            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)

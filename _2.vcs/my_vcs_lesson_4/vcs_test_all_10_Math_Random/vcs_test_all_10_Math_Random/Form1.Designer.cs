@@ -300,7 +300,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(155, 40);
             this.button22.TabIndex = 22;
-            this.button22.Text = "算方位";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

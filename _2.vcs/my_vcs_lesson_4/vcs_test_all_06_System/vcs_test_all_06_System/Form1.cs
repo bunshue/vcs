@@ -15,6 +15,7 @@ using System.Management;
 using System.IO;            //for DriveInfo
 using System.Net;   //for DNS
 using System.IO.Ports;          //for serial ports
+using System.Collections;   //for DictionaryEntry
 
 namespace vcs_test_all_06_System
 {
@@ -37,8 +38,8 @@ namespace vcs_test_all_06_System
             //button
             x_st = 10;
             y_st = 10;
-            dx = 210;
-            dy = 50;
+            dx = 160;
+            dy = 45;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -88,7 +89,13 @@ namespace vcs_test_all_06_System
             button36.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button37.Location = new Point(x_st + dx * 1, y_st + dy * 9);
             button38.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+
+            button40.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button41.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+
+            comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 10);
 
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
@@ -633,6 +640,67 @@ namespace vcs_test_all_06_System
 
             System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
             System.Diagnostics.Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
+        }
+
+        private void button35_Click_1(object sender, EventArgs e)
+        {
+            // part 1
+            ListView lv = new ListView();
+            lv.Left = 955;
+            lv.Top = 10;
+            lv.Width = 330;
+            lv.Height = 400;
+            lv.BackColor = Color.Pink;
+            this.Controls.Add(lv);
+            this.Size = new Size(this.Size.Width + 330, this.Size.Height);
+
+            lv.View = View.Details;//設定控制元件顯示方式
+            lv.GridLines = true;//是否顯示網格
+            lv.Columns.Add("環境變數", 150, HorizontalAlignment.Left);//新增列標頭
+            lv.Columns.Add("變數值", 150, HorizontalAlignment.Left);//新增列標頭
+            ListViewItem myItem;//建立ListViewItem對像
+            //取得系統環境變數及對應的變數值，並顯示在ListView控制元件中
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                myItem = new ListViewItem(DEntry.Key.ToString(), 0);//建立ListViewItem對像
+                myItem.SubItems.Add(DEntry.Value.ToString());//新增子項集合
+                lv.Items.Add(myItem);//將子項集合新增到控制元件中
+            }
+
+            // part 2
+            richTextBox1.Text += "目前系統目錄為：" + Environment.SystemDirectory + "\n";//顯示系統目錄
+            richTextBox1.Text += "機器名稱為：" + Environment.MachineName + "\n";//顯示機器名稱
+            richTextBox1.Text += "目前程式執行目錄：" + Environment.CurrentDirectory + "\n";//取得目前程式執行目錄
+            richTextBox1.Text += "系統版本號：" + Environment.OSVersion.VersionString + "\n";//顯示系統版本號
+
+            // part 3
+            ManagementClass mc = new ManagementClass("win32_processor"); //建立ManagementClass物件
+            ManagementObjectCollection moc = mc.GetInstances();          //取得CPU訊息
+
+            foreach (ManagementObject mo in moc)
+            {
+                richTextBox1.Text += "CPU編號\t\t" + mo["processorid"].ToString() + "\n";//取得CPU編號
+            }
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("Select * From Win32_Processor"); //查詢CPU訊息
+
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "CPU製造商名稱\t\t" + mo["Manufacturer"].ToString() + "\n";//取得CPU製造商名稱
+                richTextBox1.Text += "CPU版本號\t\t" + mo["Version"].ToString() + "\n";     //取得CPU版本號
+                richTextBox1.Text += "CPU產品名稱\t\t" + mo["Name"].ToString() + "\n";        //取得CPU產品名稱
+            }
+
+            // part 4
+            SelectQuery query = new SelectQuery("Select * from Win32_BaseBoard"); // 查詢主板
+            ManagementObjectSearcher dev = new ManagementObjectSearcher(query);   // 執行query
+            ManagementObjectCollection.ManagementObjectEnumerator enumerator = dev.Get().GetEnumerator();
+            enumerator.MoveNext();
+            ManagementBaseObject mbo = enumerator.Current;                    // 取得目前主板
+            richTextBox1.Text += "主板編號\t\t" + mbo.GetPropertyValue("SerialNumber").ToString() + "\n";  //取得主板編號
+            richTextBox1.Text += "主板製造商\t\t" + mbo.GetPropertyValue("Manufacturer").ToString() + "\n";  //取得主板製造商
+            richTextBox1.Text += "主板型號\t\t" + mbo.GetPropertyValue("Name").ToString() + "\n";          //取得主板型號
+
         }
 
     }
