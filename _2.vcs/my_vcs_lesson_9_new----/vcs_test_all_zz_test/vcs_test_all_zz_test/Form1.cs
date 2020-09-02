@@ -24,26 +24,12 @@ namespace vcs_test_all_zz_test
             richTextBox1.Clear();
         }
 
-        private void btn_test1_Click(object sender, EventArgs e)
-        {
-        }
-
-
-        private void btn_test2_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
         public class Person
         {
             public string Name;
             public int Age;
             public DateTime birthday;
         }
-
-
-
 
         public struct Age
         {
@@ -133,7 +119,7 @@ namespace vcs_test_all_zz_test
 
         private void btn_test5_Click(object sender, EventArgs e)
         {
-            string pdf_path = "C:\\______test_files\\A New Sensorless Starting Method for Brushless DC Motors without  Reversing Rotation 2007.pdf";
+            string pdf_path = "C:\\______test_files\\note_Linux_workstation.pdf";
             Process myProcess;
             myProcess = Process.Start(pdf_path);
             myProcess.WaitForExit();
@@ -208,20 +194,7 @@ namespace vcs_test_all_zz_test
 
         }
 
-        private void btn_test8_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

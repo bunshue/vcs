@@ -4047,6 +4047,23 @@ namespace vcs_Draw9_Example
 
         private void button40_Click(object sender, EventArgs e)
         {
+            Brush bb = new SolidBrush(Color.Navy);
+            g.FillPie(bb, 50, 50, 200, 200, 0, 90);
+            //畫個Pie，顏色是Pink,位置的x、y在50，大小為200*200，角度為從0度開始，畫90度
+
+            bb = new SolidBrush(Color.Green);
+            g.FillPie(bb, 50, 50, 200, 200, 90, 135);
+            //畫個Pie，顏色是Green,位置大小同上，角度為接著從90度開始，畫135度
+
+            bb = new SolidBrush(Color.Purple);
+            g.FillPie(bb, 50, 50, 200, 200, 225, 135);
+            //畫個Pie，顏色是Purple,位置大小同上，角度為接著從90+135=225度開始 畫135度
+            //如此，這3個pie就會合成一個圓
+
+
+            bb = new SolidBrush(Color.Blue);
+            g.DrawString("哭笑不得", new Font("標楷體", 24, FontStyle.Bold | FontStyle.Italic), bb, 20, 20);
+            //畫字就比較簡單了，會產生一個標楷體，24的大小，粗加斜，顏色為bb，位置在(20,20)
 
         }
 

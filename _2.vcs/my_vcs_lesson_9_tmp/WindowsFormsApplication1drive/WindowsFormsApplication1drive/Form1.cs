@@ -96,44 +96,6 @@ namespace WindowsFormsApplication1drive
             }
         }
 
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            return;
-            //TBD
-            System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaa\n");
-            Worker w1 = new Worker();
-            w1.Start();
-            Thread.Sleep(500);
-            w1.Pause();
-            Thread.Sleep(200);
-            w1.Resume();
-            Thread.Sleep(500);
-            w1.Pause();
-            Thread.Sleep(1000);
-            w1.Resume();
-            Thread.Sleep(200);
-            w1.Stop();
-            Console.Read();
-            System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaa2\n");
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            /*
-Dim sText As String = "Hello World"
-' Returns "hello world".
-Dim sNewText As String = StrConv(sText, VbStrConv.LowerCase)
-            */
-            //string str = "Hello World";
-            //string str2 = String.strconv
-
-            //LockUnlockBitsExample((PaintEventArgs)e);
-
-
-        }
-
         private void LockUnlockBitsExample(PaintEventArgs e)
         {
 

@@ -54,7 +54,6 @@ namespace vcs_test_all_99_tmp3
         private void Form1_Load(object sender, EventArgs e)
         {
             this.AcceptButton = button5;            //在表單按enter就執行button1按鈕的動作
-            textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -63,55 +62,6 @@ namespace vcs_test_all_99_tmp3
 
         private void button8_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if (textBox_hex.Text.Length <= 0)
-            {
-                label8.Text = "未輸入數字";
-            }
-            else
-            {
-                string input = textBox_hex.Text; ;
-                double output = 0;
-                byte value = 0;
-                for (int i = 0; i < input.Length; i++)
-                {
-                    if ((input[i] >= (Char)48 && input[i] <= (Char)57))
-                    {
-                        value = (byte)(input[i] - 48);
-
-                    }
-                    else if ((input[i] >= 'A') && (input[i] <= 'F'))
-                    {
-                        value = (byte)(input[i] - 'A' + 10);
-                    }
-                    else if ((input[i] >= 'a') && (input[i] <= 'f'))
-                    {
-                        value = (byte)(input[i] - 'a' + 10);
-                    }
-                    output = output * 16 + value;
-                    //MessageBox.Show("data : " + input[i] + " value : " + value);
-                }
-                label8.Text = "結果：" + output.ToString();
-            }
-        }
-
-        private void textBox_hex_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -25,7 +25,9 @@ namespace imsLink
 
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
-        bool flag_david_test = false;   //david測試第12站時, ims主機要開putty模式
+        bool flag_david_test1 = false;   //david測試第12站時, ims主機要開putty模式
+        bool flag_david_test2 = false;   //david測試2, 存圖顯示亮度狀況
+        bool flag_david_test3 = false;   //david測試3, no comport, no webcam, test ui only
 
         bool flag_user_metering = false;   //在第3站加上測光模式
 
@@ -95,7 +97,7 @@ namespace imsLink
         private const int DISPLAY_SD = 0x01;	//screen size SD
         private const int AWB_TIMEOUT = 120;	    //AWB timeoout in second
 
-        string imslink_log_filename = "imslink.log";
+        string imslink_log_filename = Application.StartupPath + "\\log\\imslink.log";
         string RxString = "";
         string[] COM_Ports_NameArr;
         int isCommandLog = 1;
@@ -299,6 +301,9 @@ namespace imsLink
 
         double[] brightness_data = new double[11];  //raw brightness data
         double[] brightness_data2 = new double[11]; //ring brightness data
+
+        double brightness_result_quarter = 0;
+        double brightness_result_full = 0;
 
         private const int FOCUS_ON_PICTURE = 0x00;	//timer_webcam focus on picture
         private const int FOCUS_ON_SERIAL = 0x01;	//timer_webcam focus on textbox serial
@@ -610,7 +615,7 @@ namespace imsLink
 
             if (flag_enable_awb_timeout == true)
             {
-                if (flag_david_test == true)
+                if (flag_david_test1 == true)
                     awb_time_out = 20;
                 else
                     awb_time_out = AWB_TIMEOUT;
@@ -708,6 +713,7 @@ namespace imsLink
                 comboBox_temperature.Enabled = false;
                 bt_script.Enabled = false;
                 bt_script_load.Enabled = false;
+                bt_measure_frame.Enabled = false;
                 bt_script_save.Enabled = false;
                 bt_script_cancel.Enabled = false;
                 bt_write2.Enabled = false;
@@ -2538,10 +2544,12 @@ namespace imsLink
 
         void show_awb_item_visible(bool en)
         {
+            groupBox_register0.Visible = en;
+            groupBox_brightness.Visible = en;
+            groupBox_wpt_bpt.Visible = en;
             lb_0x1.Visible = en;
             lb_0x2.Visible = en;
             lb_addr.Visible = en;
-            lb_data.Visible = en;
             tb_1a.Visible = en;
             tb_2a.Visible = en;
             tb_3a.Visible = en;
@@ -2553,6 +2561,7 @@ namespace imsLink
 
             bt_script.Visible = en;
             bt_script_load.Visible = en;
+            bt_measure_frame.Visible = en;
 
             bt_awb.Visible = en;
             bt_awb_test.Visible = en;
@@ -2598,6 +2607,9 @@ namespace imsLink
 
             if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
+                groupBox_awb.Visible = false;
+
+                /*
                 //Expo
                 lb_expo.Visible = false;
                 lb_0x3.Visible = false;
@@ -2642,6 +2654,7 @@ namespace imsLink
                 tb_B.Visible = false;
                 numericUpDown_B.Visible = false;
                 bt_setup_B.Visible = false;
+                */
 
                 //WPT
                 lb_wpt.Visible = false;
@@ -2698,6 +2711,7 @@ namespace imsLink
                 bt_measure_brightness.Visible = false;
                 bt_script.Visible = false;
                 bt_script_load.Visible = false;
+                bt_measure_frame.Enabled = false;
                 bt_cancel.Visible = false;
 
                 button46.Visible = false;
@@ -2732,6 +2746,9 @@ namespace imsLink
             }
             else
             {
+                groupBox_awb.Visible = true;
+
+                /*
                 //Expo
                 lb_expo.Visible = en;
                 lb_0x3.Visible = en;
@@ -2776,6 +2793,7 @@ namespace imsLink
                 tb_B.Visible = en;
                 numericUpDown_B.Visible = en;
                 bt_setup_B.Visible = en;
+                */
 
                 //WPT
                 lb_wpt.Visible = en;
@@ -2825,10 +2843,13 @@ namespace imsLink
                 cb_Gamma.Visible = true;
             }
 
-            //note
-            lb_note1.Visible = en;
-            lb_note2.Visible = en;
-            lb_note3.Visible = en;
+            if (flag_operation_mode == MODE_RELEASE_STAGE2)
+            {
+                //note
+                lb_note1.Visible = en;
+                lb_note2.Visible = en;
+                lb_note3.Visible = en;
+            }
 
             bt_save_img.Visible = false;
             bt_clear_serial.Visible = false;
@@ -2840,10 +2861,108 @@ namespace imsLink
 
         void show_item_location()
         {
+            groupBox5.Location = new Point(0, 0);
+            groupBox5.Size = new Size(397, 58);
+            groupBox_system.Location = new Point(0, 0);
+            groupBox_system.Size = new Size(134, 542 + 50);
+            groupBox_quick.Location = new Point(613, 0);
+            groupBox_quick.Size = new Size(1005, 62);
+
+            //gb_contrast_brightness.Location = new Point(613, 0);
+            gb_contrast_brightness.Size = new Size(603, 128);
+            gb_contrast_brightness2.Size = new Size(603, 128);
+            gb_contrast_brightness3.Size = new Size(603, 290);
+
+            //gb_contrast_brightness
+
             int x_st;
             int y_st;
             int dx;
             int dy;
+
+            x_st = 2;
+            y_st = 1;
+
+            dx = 60;
+            button9.Location = new Point(x_st + dx * 0, y_st);
+            button13.Location = new Point(x_st + dx * 1, y_st);
+            button35.Location = new Point(x_st + dx * 2, y_st);
+            button32.Location = new Point(x_st + dx * 3, y_st);
+            button20.Location = new Point(x_st + dx * 4, y_st);
+            button49.Location = new Point(x_st + dx * 5, y_st); //本地存圖
+            bt_min.Location = new Point(x_st + dx * 6, y_st);
+            bt_save_program_picture.Location = new Point(x_st + dx * 7, y_st);
+            bt_read_camera_register.Location = new Point(x_st + dx * 8, y_st);
+            bt_restore_camera_setup.Location = new Point(x_st + dx * 9, y_st);
+
+            x_st = bt_restore_camera_setup.Location.X + bt_restore_camera_setup.Size.Width;
+            dx = 40;
+            button33.Location = new Point(x_st + dx * 0, y_st);
+            y_st += 10;
+            button72.Location = new Point(x_st + dx * 1, y_st);
+            button22.Location = new Point(x_st + dx * 2, y_st);
+            button73.Location = new Point(x_st + dx * 3, y_st);
+            button74.Location = new Point(x_st + dx * 4, y_st);
+            button88.Location = new Point(x_st + dx * 5, y_st);
+            button70.Location = new Point(x_st + dx * 6, y_st);
+            button87.Location = new Point(x_st + dx * 7, y_st);
+            button34.Location = new Point(x_st + dx * 8, y_st);
+            button7.Location = new Point(x_st + dx * 9, y_st);
+
+
+
+
+
+            dx = 60;
+            dy = 60;
+
+            x_st = 8;
+            y_st = 15;
+
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            panel_camera_status5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            lb_zoom.Location = new Point(x_st + dx * 0 + 25, y_st + dy * 3-1);
+
+            btnLeft.Location = new Point(x_st + dx * 0, y_st + dy * 4 + 2);
+            btnCenter.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 4 + 2);
+            btnRight.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 4 + 2);
+            btnUp.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 4 - 40 + 2);
+            btnDown.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 4 + 40 + 2);
+
+            bt_LED.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dy / 2 - 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 5 + dy / 2 - 8);
+
+            cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 40 - 17);
+            cb_show_grid.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 40 + 25 - 17 - 3);
+            cb_enable_awb.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 40 + 25 * 2 - 17 - 6);
+
+            groupBox_gridlinecolor.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50);
+            rb_3X3.Location = new Point(x_st + dx * 1 - 8, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50 - 4);
+            rb_4X4.Location = new Point(x_st + dx * 1 - 8, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50 - 4 + 20);
+            rb_5X5.Location = new Point(x_st + dx * 1 - 8, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50 - 4 + 40);
+            rb_NXN.Location = new Point(x_st + dx * 1 - 8, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50 - 4 + 60);
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                lb_rgb_r.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 4);
+                lb_rgb_g.Location = new Point(dx * 0 + 43, y_st + dy * 6 + 40 + 25 * 4);
+                lb_rgb_b.Location = new Point(dx * 0 + 86, y_st + dy * 6 + 40 + 25 * 4);
+            }
+            else
+            {
+                lb_rgb_r.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 3 + 50);
+                lb_rgb_g.Location = new Point(dx * 0 + 45, y_st + dy * 6 + 40 + 25 * 3 + 50);
+                lb_rgb_b.Location = new Point(dx * 0 + 90, y_st + dy * 6 + 40 + 25 * 3 + 50);
+            }
+
+            lb_yuv_y.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 4 + 50);
+            lb_yuv_u.Location = new Point(dx * 0 + 43, y_st + dy * 6 + 40 + 25 * 4 + 50);
+            lb_yuv_v.Location = new Point(dx * 0 + 86, y_st + dy * 6 + 40 + 25 * 4 + 50);
 
             if (flag_display_mode == DISPLAY_SD)
             {
@@ -2862,17 +2981,10 @@ namespace imsLink
                 button34.Location = new Point(button34.Location.X - dx, button34.Location.Y);
                 dx = 85;
                 button7.Location = new Point(button7.Location.X - dx, button7.Location.Y);
-                bt_min.Location = new Point(button7.Location.X + 100, button7.Location.Y);
-                bt_save_program_picture.Location = new Point(button7.Location.X + 100 + 65, button7.Location.Y);
-                bt_read_camera_register.Location = new Point(button7.Location.X + 100 + 65+65, button7.Location.Y);
-                bt_restore_camera_setup.Location = new Point(button7.Location.X + 100 + 65+65+65, button7.Location.Y);
             }
             else
             {
-                bt_min.Location = new Point(button7.Location.X + 55, button7.Location.Y - 10);
-                bt_save_program_picture.Location = new Point(button7.Location.X + 55 + 65, button7.Location.Y - 10);
-                bt_read_camera_register.Location = new Point(button7.Location.X + 55 + 65 + 65, button7.Location.Y - 10);
-                bt_restore_camera_setup.Location = new Point(button7.Location.X + 55 + 65+65+65, button7.Location.Y - 10);
+
             }
 
             x_st = 20;
@@ -2966,94 +3078,71 @@ namespace imsLink
             else
                 cb_auto_search.Enabled = false;
 
-            cb_only_search.Location = new Point(530, 465);
-            cb_only_search.Checked = false;
-
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
                 groupBox_brightness.Enabled = true;
             else
                 groupBox_brightness.Enabled = false;
 
-            //button
-            x_st = 140;
-            y_st = 415;
-            dx = 65;
-            dy = 40;
-
-            //第零排button
-            bt_read_awb.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_erase.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            lb_awb_data.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 4);
-            bt_get_setup.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-
-            //第一排button
-            bt_awb_test_init.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            //bt_awb_test.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_awb_test2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            bt_tmp.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            bt_awb.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            bt_disable_timer_webcam.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-
-            //第二排button
-            bt_test.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            bt_clear.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            bt_location.Location = new Point(x_st + dx * 6, y_st + dy * 2);
-
-            y_st = 510;
-            bt_brightness.Location = new Point(x_st + dx * 6, y_st + 30);
-            //bt_brightness.Location = new Point(x_st + dx * 6, y_st + 30);
-
-            //讀寫相機暫存器
-            x_st = 140;
-            y_st = 520;
-            dx = 170;
-
-            lb_addr.Location = new Point(30, y_st + 5);
-            lb_0x1.Location = new Point(5, y_st + 3 + 30);
-            tb_1a.Location = new Point(30, y_st + 30);
-            tb_2a.Location = new Point(100, y_st + 30);
-
-            lb_data.Location = new Point(30 + dx, y_st + 5);
-            lb_0x2.Location = new Point(5 + dx, y_st + 3 + 30);
-            tb_3a.Location = new Point(30 + dx, y_st + 30);
-            tb_4a.Location = new Point(100 + dx, y_st + 30);
-
-            y_st = 521;
-            int dxx = 16;
-            b7.Location = new Point(30 + dx + dxx * 0, y_st + 30 + 35);
-            b6.Location = new Point(30 + dx + dxx * 1, y_st + 30 + 35);
-            b5.Location = new Point(30 + dx + dxx * 2, y_st + 30 + 35);
-            b4.Location = new Point(30 + dx + dxx * 3, y_st + 30 + 35);
-            b3.Location = new Point(30 + dx + dxx * 4 + 5, y_st + 30 + 35);
-            b2.Location = new Point(30 + dx + dxx * 5 + 5, y_st + 30 + 35);
-            b1.Location = new Point(30 + dx + dxx * 6 + 5, y_st + 30 + 35);
-            b0.Location = new Point(30 + dx + dxx * 7 + 5, y_st + 30 + 35);
-
-            x_st = 140;
-            y_st = 510;
-            dx = 65;
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
             {
-                bt_read2.Location = new Point(x_st + dx * 3, y_st + 30);
+                groupBox_debug.Visible = true;
+
+                lb_note1.Visible = false;
+                lb_note2.Visible = false;
+                lb_note3.Visible = false;
             }
             else
             {
-                bt_read2.Location = new Point(x_st + dx * 3, y_st + 40);
+                groupBox_debug.Visible = false;
             }
 
-            bt_write2.Location = new Point(x_st + dx * 4, y_st + 30);
-            bt_script.Location = new Point(x_st + dx * 5, y_st + 30);
+            //debug button
+            groupBox_debug.Location = new Point(0, 590);
+            groupBox_debug.Size = new Size(335 + 130 + 120, 120);
+            x_st = 10;
+            y_st = 20;
+            dx = 64;
+            dy = 32;
 
-            bt_cancel.Location = new Point(x_st + dx * 5, y_st + 30 + 32);       //at the same place
-            bt_script_load.Location = new Point(x_st + dx * 5, y_st + 30 + 32);  //at the same place
+            //第零排button
+            bt_erase.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_awb.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_disable_timer_webcam.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            cb_only_search.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            cb_only_search.Checked = false;
+            bt_awb_test2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_tmp.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_test.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_clear.Location = new Point(x_st + dx * 8, y_st + dy * 0);
 
-            bt_reset_camera.Location = new Point(x_st + dx * 3, y_st + 30 + 32);
-            bt_measure_brightness.Location = new Point(x_st + dx * 4, y_st + 30 + 32);
+            //第一排button
+            bt_script.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_location.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_brightness.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_reset_camera.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_awb_test_init.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_script_load.Location = new Point(x_st + dx * 5, y_st + dy * 1);  //at the same place
+            bt_cancel.Location = new Point(x_st + dx * 5, y_st + dy * 1);       //at the same place
+            bt_measure_brightness.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            bt_measure_frame.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            bt_debug1.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+
+            //第二排button
+            bt_debug2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_debug3.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            //第三排button
+
+
+
+            //讀寫相機暫存器
+            groupBox_register0.Location = new Point(135, 382);
+            groupBox_register0.Size = new Size(460, 122);
 
             //EXPO GAIN R G B
-            x_st = 140;
-            y_st = 390;
+            x_st = 5;
+            y_st = 12;
             dx = 80;
             lb_awb_result_expo.Location = new Point(x_st + dx * 0, y_st);
             lb_awb_result_gain.Location = new Point(x_st + dx * 1, y_st);
@@ -3067,8 +3156,163 @@ namespace imsLink
             lb_awb_result_G.ForeColor = Color.Green;
             lb_awb_result_B.ForeColor = Color.Blue;
 
+            x_st = 10;
+            y_st = 12;
+            dx = 64;
+            dy = 32;
+
+            lb_awb_data.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 4 - 10);
+            bt_read_awb.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 10);
+
+            x_st = 10;
+            y_st = 10 + 60 - 8;
+            dx = 170;
+
+            lb_addr.Location = new Point(30, y_st + 5 + 30 + 2);
+            lb_0x1.Location = new Point(5, y_st + 3 + 5);
+            tb_1a.Location = new Point(30, y_st + 5);
+            tb_2a.Location = new Point(90, y_st + 5);
+
+            lb_0x2.Location = new Point(-15 + dx, y_st + 3 + 5);
+            tb_3a.Location = new Point(10 + dx, y_st + 5);
+            tb_4a.Location = new Point(80 + dx, y_st + 5);
+
+            dx = 65;
+            bt_read2.Location = new Point(x_st + dx * 5 - 25, y_st + 30 - 30 + 5);
+            bt_write2.Location = new Point(x_st + dx * 6 - 33, y_st + 30 - 30 + 5);
+            bt_get_setup.Location = new Point(x_st + dx * 6 - 33, y_st + 30 - 30 + 5 - 32);
+
+            y_st = 20 + 60 - 8;
+            int dxx = 16;
+            b7.Location = new Point(115 + dx + dxx * 0, y_st + 30 + 0);
+            b6.Location = new Point(115 + dx + dxx * 1, y_st + 30 + 0);
+            b5.Location = new Point(115 + dx + dxx * 2, y_st + 30 + 0);
+            b4.Location = new Point(115 + dx + dxx * 3, y_st + 30 + 0);
+            b3.Location = new Point(115 + dx + dxx * 4 + 5, y_st + 30 + 0);
+            b2.Location = new Point(115 + dx + dxx * 5 + 5, y_st + 30 + 0);
+            b1.Location = new Point(115 + dx + dxx * 6 + 5, y_st + 30 + 0);
+            b0.Location = new Point(115 + dx + dxx * 7 + 5, y_st + 30 + 0);
+
+            //AWB
+            groupBox_awb.Location = new Point(0, 710);
+            groupBox_awb.Size = new Size(550, 262);
+
+            x_st = 0;
+            y_st = 20;
+            dx = 0;
+            dy = 48;
+
+            x_st = 0;
+            trackBar_expo.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            trackBar_gain.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            trackBar_R.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            trackBar_G.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            trackBar_B.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            x_st = 0;
+            int dd = 28;
+            lb_expo.Location = new Point(x_st + dx + 0, y_st + dy * 0 + dd);
+            lb_gain.Location = new Point(x_st + dx + 0, y_st + dy * 1 + dd);
+            lb_R.Location = new Point(x_st + dx + 0, y_st + dy * 2 + dd);
+            lb_G.Location = new Point(x_st + dx + 0, y_st + dy * 3 + dd);
+            lb_BB.Location = new Point(x_st + dx + 0, y_st + dy * 4 + dd);
+
+            dx = 350 - 27+1;
+            lb_0x3.Location = new Point(x_st + dx, y_st + dy * 0 + 3);
+            lb_0x4.Location = new Point(x_st + dx, y_st + dy * 1 + 3);
+            lb_0xR.Location = new Point(x_st + dx, y_st + dy * 2 + 3);
+            lb_0xG.Location = new Point(x_st + dx, y_st + dy * 3 + 3);
+            lb_0xB.Location = new Point(x_st + dx, y_st + dy * 4 + 3);
+
+            dd = 32;
+            lb_range_1.Location = new Point(x_st + dx + 30 + 8, y_st + dy * 0 + dd);
+            lb_range_2.Location = new Point(x_st + dx + 30 + 8, y_st + dy * 1 + dd);
+            lb_range_3.Location = new Point(x_st + dx + 30 + 8, y_st + dy * 2 + dd);
+            lb_range_4.Location = new Point(x_st + dx + 30 + 8, y_st + dy * 3 + dd);
+            lb_range_5.Location = new Point(x_st + dx + 30 + 8, y_st + dy * 4 + dd);
+
+            dx = 380 - 27;
+            tb_expo.Location = new Point(x_st + dx, y_st + dy * 0);
+            tb_gain.Location = new Point(x_st + dx, y_st + dy * 1);
+            tb_R.Location = new Point(x_st + dx, y_st + dy * 2);
+            tb_G.Location = new Point(x_st + dx, y_st + dy * 3);
+            tb_B.Location = new Point(x_st + dx, y_st + dy * 4);
+
+            dx = 450 - 27;
+            numericUpDown_expo.Location = new Point(x_st + dx, y_st + dy * 0);
+            numericUpDown_gain.Location = new Point(x_st + dx, y_st + dy * 1);
+            numericUpDown_R.Location = new Point(x_st + dx, y_st + dy * 2);
+            numericUpDown_G.Location = new Point(x_st + dx, y_st + dy * 3);
+            numericUpDown_B.Location = new Point(x_st + dx, y_st + dy * 4);
+
+            dx = 520 - 27-5;
+            bt_setup_expo.Location = new Point(x_st + dx, y_st + dy * 0);
+            bt_setup_gain.Location = new Point(x_st + dx, y_st + dy * 1);
+            bt_setup_R.Location = new Point(x_st + dx, y_st + dy * 2);
+            bt_setup_G.Location = new Point(x_st + dx, y_st + dy * 3);
+            bt_setup_B.Location = new Point(x_st + dx, y_st + dy * 4);
+
+            lb_range_1.Text = "0~1FF            0~511";
+            lb_range_2.Text = "0~1FF            0~511";
+            lb_range_3.Text = "0~FFF          0~4095";
+            lb_range_4.Text = "0~FFF          0~4095";
+            lb_range_5.Text = "0~FFF          0~4095";
+            lb_0x3.Text = "0x                 =";
+            lb_0x4.Text = "0x                 =";
+            lb_0xR.Text = "0x                 =";
+            lb_0xG.Text = "0x                 =";
+            lb_0xB.Text = "0x                 =";
+
+            groupBox_wpt_bpt.Location = new Point(1050, 845);
+            groupBox_wpt_bpt.Size = new Size(630 + 145, 145 - 30);
+
+            x_st = 5;
+            y_st = 30;
+            dx = 70;
+            dy = 40;
+            //WPT
+            lb_wpt.Location = new Point(x_st + dx * 0 + 2, y_st);
+            tb_wpt.Location = new Point(x_st + dx * 1, y_st);
+            numericUpDown_wpt.Location = new Point(x_st + dx * 2, y_st);
+            bt_read_wpt.Location = new Point(x_st + dx * 3, y_st);
+            bt_write_wpt.Location = new Point(x_st + dx * 4, y_st);
+
+            //Saturation
+            lb_function.Location = new Point(x_st + dx * 6, y_st - 20);
+            bt_saturation.Location = new Point(x_st + dx * 5, y_st);
+            numericUpDown_saturation.Location = new Point(x_st + dx * 6, y_st);
+            comboBox_saturation.Location = new Point(x_st + dx * 7, y_st);
+            comboBox_denoise.Location = new Point(x_st + dx * 8, y_st);
+            comboBox_sharpness.Location = new Point(x_st + dx * 9, y_st);
+            numericUpDown_brightness.Location = new Point(x_st + dx * 10, y_st);
+            
+            y_st += dy;
+            //BPT
+            lb_bpt.Location = new Point(x_st + dx * 0 + 2, y_st);
+            tb_bpt.Location = new Point(x_st + dx * 1, y_st);
+            numericUpDown_bpt.Location = new Point(x_st + dx * 2, y_st);
+            bt_read_bpt.Location = new Point(x_st + dx * 3, y_st);
+            bt_write_bpt.Location = new Point(x_st + dx * 4, y_st);
+            //AE Target
+            bt_ae_decrease.Location = new Point(x_st + dx * 5, y_st);
+
+            numericUpDown_denoise.Location = new Point(x_st + dx * 8, y_st);
+            numericUpDown_sharpness.Location = new Point(x_st + dx * 9, y_st);
+            bt_save_data.Location = new Point(x_st + dx * 10, y_st);
+
+            /*
+            lb_expo.Location = new Point(x_st + dx + 5, y_st + dy + 25);
+            lb_0x3.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
+            numericUpDown_expo.Location = new Point(x_st + dx + 220, y_st + dy + 5);
+            tb_expo.Location = new Point(x_st + dx + 280, y_st + dy + 5);
+            bt_setup_expo.Location = new Point(x_st + dx + 320, y_st + dy + 0);
+            lb_range_1.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
+            lb_range_1.Text = "0~1FF           0~511";
+            */
+
             if (flag_display_mode == DISPLAY_SD)
             {
+                /*
                 //EXPO
                 lb_expo.Size = new Size(lb_expo.Size.Width * 3 / 5, lb_expo.Height * 3 / 5);
                 lb_expo.Font = new Font("新細明體", lb_expo.Font.Size * 3 / 5);
@@ -3213,6 +3457,7 @@ namespace imsLink
                 bt_setup_B.Location = new Point(x_st + dx + 320, y_st + dy + 0);
                 lb_range_5.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
                 lb_range_5.Text = "0~FFF          0~4095";
+                */
 
                 //note
                 lb_note1.Font = new Font("標楷體", lb_note1.Font.Size * 5 / 6);
@@ -3236,13 +3481,10 @@ namespace imsLink
                     bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65);
                     bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65);
                 }
-
-                lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10);
-                lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10);
-                lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10);
             }
             else
             {
+                /*
                 //EXPO
                 lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
                 lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
@@ -3292,6 +3534,7 @@ namespace imsLink
                 numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
                 tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
                 bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
+                */
 
                 if (flag_operation_mode != MODE_RELEASE_STAGE0)
                 {
@@ -3306,20 +3549,15 @@ namespace imsLink
                 {
                     x_st = 1500;
                     y_st = 930;
-                    lb_sn_opal.Location = new Point(x_st + 10, y_st + 5);
-                    tb_sn_opal.Location = new Point(x_st + 120, y_st);
                     bt_save_img.Location = new Point(x_st + 250, y_st);
                     bt_clear_serial.Location = new Point(x_st + 315, y_st);
+
+                    lb_sn_opal.Location = new Point(x_st + 10 - 450, y_st + 5 - 130);
+                    tb_sn_opal.Location = new Point(x_st + 120 - 450, y_st - 130);
+                    lb_main_mesg2.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - 40);   //david0901
+
+
                 }
-
-                lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 18);
-                lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 18);
-                lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 18);
-
-                lb_yuv_y.Location = new Point(5, 489 + 65 + 47 + 4);
-                lb_yuv_u.Location = new Point(5 + 50, 489 + 65 + 47 + 4);
-                lb_yuv_v.Location = new Point(5 + 100, 489 + 65 + 47 + 4);
-
                 lb_yuv_y2.Location = new Point(1610, 740);
                 lb_yuv_y3.Location = new Point(1215, 105);
 
@@ -3358,6 +3596,7 @@ namespace imsLink
                 y_st = 460;
                 dx = 100;
                 dy = 550;
+                /*
                 //WPT
                 lb_wpt.Location = new Point(x_st + 2, y_st + 2);
                 tb_wpt.Location = new Point(x_st + 70, y_st);
@@ -3372,9 +3611,7 @@ namespace imsLink
                 numericUpDown_bpt.Location = new Point(x_st + 140, y_st);
                 bt_read_bpt.Location = new Point(x_st + 210, y_st);
                 bt_write_bpt.Location = new Point(x_st + 280, y_st);
-
-                //AE Target
-                bt_ae_decrease.Location = new Point(bt_read_wpt.Location.X, bt_read_wpt.Location.Y - 40);
+                */
 
                 //Saturation
                 bt_saturation.Location = new Point(bt_write_wpt.Location.X, bt_write_wpt.Location.Y - 40);
@@ -3397,6 +3634,7 @@ namespace imsLink
             else
             {
                 dx = 20;
+                /*
                 //WPT
                 lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 15 + 20);
                 tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20 + 20);
@@ -3410,10 +3648,12 @@ namespace imsLink
                 numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200 + dx, numericUpDown_wpt.Location.Y + 40);
                 bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200 + dx, bt_read_wpt.Location.Y + 40);
                 bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200 + dx, bt_write_wpt.Location.Y + 40);
+                */
 
                 //AE Target
-                bt_ae_decrease.Location = new Point(numericUpDown_wpt.Location.X, numericUpDown_wpt.Location.Y - 40);
+                //bt_ae_decrease.Location = new Point(numericUpDown_wpt.Location.X, numericUpDown_wpt.Location.Y - 40);
 
+                /*
                 //Saturation
                 bt_saturation.Location = new Point(bt_write_wpt.Location.X + 100, bt_write_wpt.Location.Y - 40);
                 numericUpDown_saturation.Location = new Point(bt_saturation.Location.X + 70, bt_saturation.Location.Y);
@@ -3425,6 +3665,7 @@ namespace imsLink
                 numericUpDown_denoise.Location = new Point(comboBox_denoise.Location.X, comboBox_denoise.Location.Y + 40);
                 numericUpDown_sharpness.Location = new Point(comboBox_sharpness.Location.X, comboBox_sharpness.Location.Y + 40);
                 numericUpDown_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y);
+                */
 
                 bt_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 250);
                 bt_show_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 200);
@@ -3443,7 +3684,7 @@ namespace imsLink
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
             {
                 gb_contrast_brightness.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30);
-                gb_contrast_brightness2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115);
+                gb_contrast_brightness2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115 + 15);
                 //gb_contrast_brightness3.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115 + 115);
                 gb_contrast_brightness3.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);
 
@@ -3460,11 +3701,13 @@ namespace imsLink
 
                 cb_Contrast_Brightness_Gamma.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - 672, pictureBox1.Location.Y + 5);
                 cb_Gamma.Location = new Point(cb_Contrast_Brightness_Gamma.Location.X + 206, cb_Contrast_Brightness_Gamma.Location.Y);
+                bt_restore_camera_setup.Visible = true;
             }
+            else
+                bt_restore_camera_setup.Visible = false;
 
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
-                bt_restore_camera_setup.Visible = false;
                 /*
                 //debug code
                 bt_find_brightness.Visible = true;
@@ -3524,7 +3767,7 @@ namespace imsLink
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 button19.Location = new Point(button19.Location.X - 35, button19.Location.Y);
-                groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 110, cb_show_grid.Location.Y - 20 - 20);
+                //groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 130, cb_show_grid.Location.Y + 10);
             }
             else
                 groupBox_gridlinecolor.Visible = false;
@@ -3535,13 +3778,14 @@ namespace imsLink
 
                 groupBox_metering.Visible = true;
                 groupBox_metering.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 50);
+                groupBox_metering.Size = new Size(213, 57);
 
                 lb_yuv_y2.Visible = true;
                 lb_yuv_y2.Location = new Point(lb_rgb_b.Location.X + 60, lb_rgb_b.Location.Y + 10);
 
                 groupBox_register.Visible = true;
-                groupBox_register.Location = new Point(cb_show_grid.Location.X + 120, cb_show_grid.Location.Y + 300);
-            
+                groupBox_register.Location = new Point(cb_show_grid.Location.X + 120, cb_show_grid.Location.Y + 370);
+                groupBox_register.Size = new Size(560, 122);
             }
             else
             {
@@ -3880,10 +4124,44 @@ namespace imsLink
                 button19_Click(sender, e);
             }
 
+            string Path;
+            //檢查存log的資料夾
+            Path = Application.StartupPath + "\\log";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+
+            //檢查存csv的資料夾
+            Path = Application.StartupPath + "\\csv";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE0)
+            {
+                //檢查存圖片的資料夾
+                Path = Application.StartupPath + "\\script";
+                if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+                {
+                    Directory.CreateDirectory(Path);
+                    richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+                }
+                else
+                    richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+
             if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B))
             {
                 //檢查存圖片的資料夾
-                string Path = Application.StartupPath + "\\picture";
+                Path = Application.StartupPath + "\\picture";
                 if (Directory.Exists(Path) == false)     //確認資料夾是否存在
                 {
                     Directory.CreateDirectory(Path);
@@ -5899,7 +6177,7 @@ namespace imsLink
                 x_st = 10;
                 y_st = 10;
 
-                if (flag_david_test == true)
+                if (flag_david_test1 == true)
                 {
                     gg.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont1, drawBrush, x_st, y_st);
                 }
@@ -7120,18 +7398,11 @@ namespace imsLink
                     bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
                     bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
 
-                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10 - dy);
-                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10 - dy);
-                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10 - dy);
-
                     lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X + 130, tb_sn_opal.Location.Y);
 
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
                         dy = 80;
-                        lb_rgb_r.Location = new Point(lb_rgb_r.Location.X, lb_rgb_r.Location.Y - dy);
-                        lb_rgb_g.Location = new Point(lb_rgb_g.Location.X, lb_rgb_g.Location.Y - dy);
-                        lb_rgb_b.Location = new Point(lb_rgb_b.Location.X, lb_rgb_b.Location.Y - dy);
                         lb_sn_opal.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - dy);
                         tb_sn_opal.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y - dy);
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 30);
@@ -7162,19 +7433,8 @@ namespace imsLink
                         tb_sn_opal.Location = new Point(x_st + 120, y_st);
                         bt_save_img.Location = new Point(x_st + 250, y_st);
                         bt_clear_serial.Location = new Point(x_st + 315, y_st);
-
-
-                        lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10);
-                        lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10);
-                        lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10);
-
                         lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X - 500, tb_sn_opal.Location.Y - 150);
-
                     }
-                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47);
-                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47);
-                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47);
-
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
@@ -7267,18 +7527,11 @@ namespace imsLink
                     bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
                     bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
 
-                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10 - dy);
-                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10 - dy);
-                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10 - dy);
-
                     lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X + 140, tb_sn_opal.Location.Y);
 
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
                         dy = 28;
-                        lb_rgb_r.Location = new Point(lb_rgb_r.Location.X, lb_rgb_r.Location.Y - dy);
-                        lb_rgb_g.Location = new Point(lb_rgb_g.Location.X, lb_rgb_g.Location.Y - dy);
-                        lb_rgb_b.Location = new Point(lb_rgb_b.Location.X, lb_rgb_b.Location.Y - dy);
                         lb_sn_opal.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - dy);
                         tb_sn_opal.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y - dy);
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 32);
@@ -7298,10 +7551,6 @@ namespace imsLink
                     lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X + 50 - 4 + 140, cb_enable_awb.Location.Y + 56 + 65 - dy);
                     bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
                     bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
-
-                    lb_rgb_r.Location = new Point(5, 489 + 65 + 47 - 10 - dy);
-                    lb_rgb_g.Location = new Point(5 + 50, 489 + 65 + 47 - 10 - dy);
-                    lb_rgb_b.Location = new Point(5 + 100, 489 + 65 + 47 - 10 - dy);
 
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
@@ -8277,7 +8526,9 @@ namespace imsLink
 
         private void timer_rgb_Tick(object sender, EventArgs e)
         {
-            //txtPoint.Text = Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString();
+            if (flag_david_test3 == true)
+                show_main_message1(Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString(), S_FALSE, 30);
+
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
             Color cl = GetColor(pt);
             panel1.BackColor = cl;
@@ -9203,7 +9454,7 @@ namespace imsLink
             Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, dd);
         }
 
-        private void button41_Click(object sender, EventArgs e)
+        private void bt_LED_Click(object sender, EventArgs e)
         {
             if (flag_comport_ok == false)
             {
@@ -12344,7 +12595,7 @@ namespace imsLink
 
             //save_current_program_to_local_drive();
 
-            string filename = "HLG2.txt";
+            string filename = Application.StartupPath + "\\script\\HLG2.txt";
             richTextBox1.Text += "開啟 HLG2 檔案: " + filename + "\n";
 
             /*
@@ -12393,6 +12644,12 @@ namespace imsLink
         bool flag_doing_check_webcam = false;
         int check_webcam()
         {
+            if (flag_david_test3 == true)
+            {
+                richTextBox1.Text += "david test 3, skip\n";
+                return S_OK;
+            }
+
             int i;
 
             if ((flag_operation_mode != MODE_RELEASE_STAGE1A) && (flag_operation_mode != MODE_RELEASE_STAGE1B) && (flag_operation_mode != MODE_RELEASE_STAGE3))
@@ -13418,11 +13675,33 @@ namespace imsLink
                 flag_fullscreen = false;
                 button19_Click(sender, e);
                 //cb_enable_awb.Location = new Point(11, 489 + 110);
+                if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                {
+                    groupBox_debug.Visible = true;
+                    groupBox_wpt_bpt.Visible = true;
+                }
+                else
+                {
+                    //lb_note1.Visible = true;
+                    //lb_note2.Visible = true;
+                    //lb_note3.Visible = true;
+                }
             }
             else
             {
                 flag_enaglb_awb_function = false;
                 show_awb_item_visible(false);
+                groupBox_debug.Visible = false;
+                groupBox_wpt_bpt.Visible = false;
+                groupBox_brightness.Visible = false;
+                gb_contrast_brightness.Visible = false;
+                gb_contrast_brightness2.Visible = false;
+                gb_contrast_brightness3.Visible = false;
+                pictureBox_contrast.Visible = false;
+                groupBox_awb.Visible = false;
+                lb_note1.Visible = false;
+                lb_note2.Visible = false;
+                lb_note3.Visible = false;
             }
         }
 
@@ -13449,72 +13728,72 @@ namespace imsLink
             if (flag_operation_mode == MODE_RELEASE_STAGE1A)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01a.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01a.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01a.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE1B)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01b.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE1C)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01c.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01c.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_01c.csv";
             }
             else if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_02.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE3)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE4)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE5)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_05.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE6)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_06.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_06.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_06.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE7)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_07.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_07.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_07.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE8)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_08.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_08.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_08.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE9)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_09.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_09.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_09.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE11)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_11.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_11.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_11.csv";
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE12)
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_12.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_12.csv";
+                filename2 = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_12.csv";
             }
             else
             {
                 filename1 = "N:\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_XX.csv";
-                filename2 = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
+                filename2 = Application.StartupPath + "\\csv\\xxxx_ims_" + DateTime.Now.ToString("yyyyMMdd") + "_00.csv";
             }
 
             if (check_network_disk() == S_FALSE)
@@ -14001,7 +14280,7 @@ namespace imsLink
                 return;
             }
 
-            string filename = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
+            string filename = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_03.csv";
 
             string content = "";
             StreamWriter sw;
@@ -14061,7 +14340,7 @@ namespace imsLink
                 return;
             }
 
-            string filename = Application.StartupPath + "\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
+            string filename = Application.StartupPath + "\\csv\\ims_" + DateTime.Now.ToString("yyyyMMdd") + "_04.csv";
 
             string content = "";
             StreamWriter sw;
@@ -14142,6 +14421,11 @@ namespace imsLink
 
         void connect_IMS_comport()
         {
+            if (flag_david_test3 == true)
+            {
+                richTextBox1.Text += "david test 3, skip\n";
+                return;
+            }
             int ret;
             ret = try_connect_comport();
             if (ret == S_OK)
@@ -14230,25 +14514,23 @@ namespace imsLink
                 bt_cancel.Visible = true;
                 bt_script.Text = "Apply";
 
-                int x_st;
-                int y_st;
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    x_st = 550 + 50;
-                    y_st = 540;
-                    richTextBox2.Location = new Point(x_st, y_st);
-                    richTextBox2.Size = new System.Drawing.Size(340, 120);
+                    show_main_message1("Mode0不支援SD螢幕", S_FALSE, 30);
+                    show_main_message2("Mode0不支援SD螢幕", S_FALSE, 30);
+                    show_main_message3("Mode0不支援SD螢幕", S_FALSE, 30);
                 }
                 else
                 {
-                    x_st = 191;
-                    y_st = 489 + 98 + 20;
+                    int x_st;
+                    int y_st;
+                    x_st = 605;
+                    y_st = 500;
                     richTextBox2.Location = new Point(x_st, y_st);
-                    richTextBox2.Size = new System.Drawing.Size(400, 300);
-                    bt_script_save.Location = new Point(x_st + 318, y_st + 2);
-                    bt_script_cancel.Location = new Point(x_st + 318, y_st + 2 + 32);
+                    richTextBox2.Size = new System.Drawing.Size(300, 460);
+                    bt_script_save.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + 5);
+                    bt_script_cancel.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + bt_script_save.Height + 10);
                 }
-
             }
             else
             {
@@ -14339,7 +14621,7 @@ namespace imsLink
             openFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = Application.StartupPath + "\\script\\";         //從目前目錄開始尋找檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
@@ -14352,23 +14634,22 @@ namespace imsLink
                 bt_cancel.Visible = true;
                 bt_script.Text = "Apply";
 
-                int x_st;
-                int y_st;
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    x_st = 550 + 50;
-                    y_st = 540;
-                    richTextBox2.Location = new Point(x_st, y_st);
-                    richTextBox2.Size = new System.Drawing.Size(340, 120);
+                    show_main_message1("Mode0不支援SD螢幕", S_FALSE, 30);
+                    show_main_message2("Mode0不支援SD螢幕", S_FALSE, 30);
+                    show_main_message3("Mode0不支援SD螢幕", S_FALSE, 30);
                 }
                 else
                 {
-                    x_st = 191;
-                    y_st = 489 + 98 + 20;
+                    int x_st;
+                    int y_st;
+                    x_st = 605;
+                    y_st = 500;
                     richTextBox2.Location = new Point(x_st, y_st);
-                    richTextBox2.Size = new System.Drawing.Size(400, 300);
-                    bt_script_save.Location = new Point(x_st + 318, y_st + 2);
-                    bt_script_cancel.Location = new Point(x_st + 318, y_st + 2 + 32);
+                    richTextBox2.Size = new System.Drawing.Size(300, 460);
+                    bt_script_save.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + 5);
+                    bt_script_cancel.Location = new Point(x_st + 300 - bt_script_save.Width - 5, y_st + bt_script_save.Height + 10);
                 }
                 richTextBox2.Clear();
 
@@ -14394,7 +14675,8 @@ namespace imsLink
             saveFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            saveFileDialog1.InitialDirectory = Application.StartupPath + "\\script\\";         //從目前目錄開始尋找檔案
+
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + saveFileDialog1.FileName + "\n";
@@ -19721,8 +20003,7 @@ namespace imsLink
             richTextBox1.Text += "Bootup time : " + bootup_time.ToString() + "\n";
             richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - bootup_time).ToString() + " 秒\n";
             //richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";  //wrong
-            string filename = "imsLink_log." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-
+            string filename = Application.StartupPath + "\\log\\imsLink_log." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("unicode"));   //指名編碼格式            
             sw.Write(richTextBox1.Text);
@@ -19745,11 +20026,11 @@ namespace imsLink
             g.ReleaseHdc(dc1);
 
             //存成bmp檔
-            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             bmp.Save(filename, ImageFormat.Bmp);
 
             //存成jpg檔
-            //String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             //myImage.Save(filename, ImageFormat.Jpeg);
             richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
         }
@@ -19846,7 +20127,7 @@ namespace imsLink
 
                     g.ReleaseHdc();
 
-                    if (flag_david_test == true)
+                    if (flag_david_test1 == true)
                     {
                         g.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont, drawBrush, xPos, yPos);
                     }
@@ -19888,7 +20169,7 @@ namespace imsLink
                 else
                 {
                     filename1 = "M:\\xxxx_ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                    filename2 = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    filename2 = Application.StartupPath + "\\xxxx_ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 }
 
                 //String file1 = file + ".jpg";
@@ -19979,7 +20260,7 @@ namespace imsLink
 
                     g.ReleaseHdc();
 
-                    if (flag_david_test == true)
+                    if (flag_david_test1 == true)
                     {
                         g.DrawString(saturation_ratio + ", TH2 = " + g_TH2.ToString() + ", TH1 = " + g_TH1.ToString(), drawFont, drawBrush, xPos, yPos);
                     }
@@ -20029,17 +20310,30 @@ namespace imsLink
                         g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
                     }
 
-                    if (cb_auto_search.Checked == true)
+                    if (flag_david_test2 == true)
                     {
                         drawBrush = new SolidBrush(Color.DarkBlue);
-                        x_st = 430 - 70 * 2 - 20;
-                        g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                        x_st = 200;
+                        y_st = 400;
+                        g.DrawString("中間1/4張亮度 : " + brightness_result_quarter.ToString(), drawFont1, drawBrush, x_st, y_st);
+
+                        y_st += 50;
+                        g.DrawString("整張亮度 : " + brightness_result_full.ToString(), drawFont1, drawBrush, x_st, y_st);
                     }
                     else
                     {
-                        drawBrush = new SolidBrush(Color.DarkBlue);
-                        x_st = 430 - 70 * 2;
-                        g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                        if (cb_auto_search.Checked == true)
+                        {
+                            drawBrush = new SolidBrush(Color.DarkBlue);
+                            x_st = 430 - 70 * 2 - 20;
+                            g.DrawString("point  " + flag_right_left_point_cnt.ToString() + ",  " + flag_down_up_point_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                        }
+                        else
+                        {
+                            drawBrush = new SolidBrush(Color.DarkBlue);
+                            x_st = 430 - 70 * 2;
+                            g.DrawString("step  " + flag_right_left_cnt.ToString() + ",  " + flag_down_up_cnt.ToString(), drawFont1, drawBrush, x_st, y_st);
+                        }
                     }
                     g.Dispose();
                 }
@@ -21320,7 +21614,7 @@ namespace imsLink
             openFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory() + "\\script";         //從目前目錄開始尋找檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 button75.Text = "設定中";
@@ -21351,7 +21645,7 @@ namespace imsLink
 
         private void button66_Click(object sender, EventArgs e)
         {
-            string filename = "gamma_default.txt";
+            string filename = Application.StartupPath + "\\script\\gamma_default.txt";
             richTextBox1.Text += "開啟Gamma檔案: " + filename + "\n";
 
             int x_st = 605;
@@ -21769,7 +22063,7 @@ namespace imsLink
 
         private void button82_Click(object sender, EventArgs e)
         {
-            if (flag_david_test == true)
+            if (flag_david_test1 == true)
             {
                 serialPort1.PortName = "COM3";
                 serialPort1.BaudRate = 115200;
@@ -22496,6 +22790,141 @@ namespace imsLink
                 bt_write_Click(sender, e);
             }
         }
+
+        private void bt_measure_frame_Click(object sender, EventArgs e)
+        {
+            measure_brightness_one_frame();
+
+            save_image_to_local_drive();
+        }
+
+        void measure_brightness_one_frame()
+        {
+            double result = -1;
+
+            /*
+            int ww = 10;
+            int hh = 10;
+            int x_st;
+            int i;
+
+            for (i = 0; i < 8; i++)
+            {
+                x_st = 80 * i + 80 / 2 - ww / 2;
+                result = measure_brightness_one_frame0(x_st, 100, ww, hh);
+                richTextBox1.Text += "result : " + result.ToString() + "\n";
+
+            }
+            */
+
+            result = measure_brightness_one_frame0(640 / 4, 480 / 4, 640 / 2, 480 / 2);
+            richTextBox1.Text += "中間1/4張平均 : result : " + result.ToString() + "\n";
+            brightness_result_quarter = result;
+
+            result = measure_brightness_one_frame0(0, 0, 640, 480);
+            richTextBox1.Text += "整張平均 : result : " + result.ToString() + "\n";
+            brightness_result_full = result;
+        }
+
+        double measure_brightness_one_frame0(int x_st, int y_st, int ww, int hh)
+        {
+            if ((ww <= 0) || (hh <= 0))
+            {
+                richTextBox1.Text += "量測點數 ww = " + ww.ToString() + ", hh = " + hh.ToString() + " 不合法\n";
+                return -1;
+            }
+            flag_do_find_awb_location = true;
+            int w;
+            int h;
+            int i;
+            int j;
+            Color p;
+            Bitmap bm2 = null;
+            double y_total = 0;
+            int result = -1;
+
+            tb_awb_mesg.Text = "量測亮度";
+
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                //bm2 = bm;
+                bm2 = (Bitmap)bm.Clone();
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f1 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            try
+            {
+                ga = Graphics.FromImage(bm2);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f2 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            try
+            {
+                w = bm2.Width;
+                h = bm2.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息f3 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                flag_do_find_awb_location = false;
+                return result;
+            }
+
+            if (x_st < 0)
+                x_st = 0;
+            if (y_st < 0)
+                y_st = 0;
+            if ((x_st + ww) > w)
+                x_st = w - ww;
+            if ((y_st + hh) > h)
+                y_st = h - hh;
+
+            //richTextBox1.Text += "量測起點 x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            //richTextBox1.Text += "量測範圍 ww = " + ww.ToString() + ", hh = " + hh.ToString() + "\n";
+
+            for (j = y_st; j < (y_st + hh); j++)
+            {
+                for (i = x_st; i < (x_st + ww); i++)
+                {
+                    p = bm2.GetPixel(i, j);
+                    //bm2.SetPixel(i, j, Color.FromArgb(255, 0, 0));
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+                    y_total += yyy.Y;
+                }
+            }
+            ga.DrawRectangle(new Pen(Color.Red, 1), x_st - 2, y_st - 2, ww + 4, hh + 4);
+
+            //richTextBox1.Text += "y_total = " + y_total.ToString() + "\n";
+            //richTextBox1.Text += "y_avg = " + (y_total / (ww * hh)).ToString() + "\n\n";
+
+            tb_awb_mesg.Text = (y_total / (ww * hh)).ToString();
+
+            GC.Collect();       //回收資源
+            //pictureBox1.Image = bm2;
+
+            delay(10);
+            flag_do_find_awb_location = false;
+            return y_total / (ww * hh);
+        }
+
+
     }
 }
 

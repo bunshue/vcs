@@ -623,12 +623,12 @@
             // 
             // button40
             // 
-            this.button40.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button40.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button40.Location = new System.Drawing.Point(756, 330);
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(100, 40);
             this.button40.TabIndex = 74;
-            this.button40.Text = "Ex11";
+            this.button40.Text = "Ex11_派圖";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 

@@ -822,11 +822,12 @@
             // 
             // bt_files11
             // 
-            this.bt_files11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files11.Location = new System.Drawing.Point(9, 511);
             this.bt_files11.Name = "bt_files11";
             this.bt_files11.Size = new System.Drawing.Size(185, 40);
             this.bt_files11.TabIndex = 56;
+            this.bt_files11.Text = "撈出資料夾內所有jpg檔";
             this.bt_files11.UseVisualStyleBackColor = true;
             this.bt_files11.Click += new System.EventHandler(this.bt_files11_Click);
             // 

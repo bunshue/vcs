@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_test1 = new System.Windows.Forms.Button();
-            this.btn_test2 = new System.Windows.Forms.Button();
             this.btn_test4 = new System.Windows.Forms.Button();
             this.btn_test3 = new System.Windows.Forms.Button();
             this.btn_test6 = new System.Windows.Forms.Button();
@@ -38,36 +36,12 @@
             this.btn_test7 = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btn_test1
-            // 
-            this.btn_test1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test1.Location = new System.Drawing.Point(12, 12);
-            this.btn_test1.Name = "btn_test1";
-            this.btn_test1.Size = new System.Drawing.Size(222, 36);
-            this.btn_test1.TabIndex = 0;
-            this.btn_test1.Text = "xxx";
-            this.btn_test1.UseVisualStyleBackColor = true;
-            this.btn_test1.Click += new System.EventHandler(this.btn_test1_Click);
-            // 
-            // btn_test2
-            // 
-            this.btn_test2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test2.Location = new System.Drawing.Point(12, 65);
-            this.btn_test2.Name = "btn_test2";
-            this.btn_test2.Size = new System.Drawing.Size(222, 36);
-            this.btn_test2.TabIndex = 1;
-            this.btn_test2.Text = "xxx";
-            this.btn_test2.UseVisualStyleBackColor = true;
-            this.btn_test2.Click += new System.EventHandler(this.btn_test2_Click);
             // 
             // btn_test4
             // 
             this.btn_test4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test4.Location = new System.Drawing.Point(12, 171);
+            this.btn_test4.Location = new System.Drawing.Point(12, 65);
             this.btn_test4.Name = "btn_test4";
             this.btn_test4.Size = new System.Drawing.Size(222, 36);
             this.btn_test4.TabIndex = 3;
@@ -78,7 +52,7 @@
             // btn_test3
             // 
             this.btn_test3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test3.Location = new System.Drawing.Point(12, 118);
+            this.btn_test3.Location = new System.Drawing.Point(12, 12);
             this.btn_test3.Name = "btn_test3";
             this.btn_test3.Size = new System.Drawing.Size(222, 36);
             this.btn_test3.TabIndex = 2;
@@ -89,7 +63,7 @@
             // btn_test6
             // 
             this.btn_test6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test6.Location = new System.Drawing.Point(12, 279);
+            this.btn_test6.Location = new System.Drawing.Point(12, 173);
             this.btn_test6.Name = "btn_test6";
             this.btn_test6.Size = new System.Drawing.Size(222, 36);
             this.btn_test6.TabIndex = 5;
@@ -100,7 +74,7 @@
             // btn_test5
             // 
             this.btn_test5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test5.Location = new System.Drawing.Point(12, 226);
+            this.btn_test5.Location = new System.Drawing.Point(12, 120);
             this.btn_test5.Name = "btn_test5";
             this.btn_test5.Size = new System.Drawing.Size(222, 36);
             this.btn_test5.TabIndex = 4;
@@ -111,18 +85,17 @@
             // btn_test8
             // 
             this.btn_test8.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test8.Location = new System.Drawing.Point(12, 386);
+            this.btn_test8.Location = new System.Drawing.Point(12, 280);
             this.btn_test8.Name = "btn_test8";
             this.btn_test8.Size = new System.Drawing.Size(222, 36);
             this.btn_test8.TabIndex = 7;
             this.btn_test8.Text = "String轉MD5碼";
             this.btn_test8.UseVisualStyleBackColor = true;
-            this.btn_test8.Click += new System.EventHandler(this.btn_test8_Click);
             // 
             // btn_test7
             // 
             this.btn_test7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_test7.Location = new System.Drawing.Point(12, 333);
+            this.btn_test7.Location = new System.Drawing.Point(12, 227);
             this.btn_test7.Name = "btn_test7";
             this.btn_test7.Size = new System.Drawing.Size(222, 36);
             this.btn_test7.TabIndex = 6;
@@ -150,35 +123,11 @@
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 493);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(222, 36);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "xxx";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 440);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(222, 36);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "xxx";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 611);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btn_clear);
             this.Controls.Add(this.btn_test8);
@@ -187,8 +136,6 @@
             this.Controls.Add(this.btn_test5);
             this.Controls.Add(this.btn_test4);
             this.Controls.Add(this.btn_test3);
-            this.Controls.Add(this.btn_test2);
-            this.Controls.Add(this.btn_test1);
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -198,8 +145,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_test1;
-        private System.Windows.Forms.Button btn_test2;
         private System.Windows.Forms.Button btn_test4;
         private System.Windows.Forms.Button btn_test3;
         private System.Windows.Forms.Button btn_test6;
@@ -208,8 +153,6 @@
         private System.Windows.Forms.Button btn_test7;
         private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }
 

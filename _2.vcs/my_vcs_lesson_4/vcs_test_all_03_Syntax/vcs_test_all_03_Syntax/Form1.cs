@@ -14,6 +14,84 @@ namespace vcs_test_all_03_Syntax
         public Form1()
         {
             InitializeComponent();
+            show_item_location();
+            textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 0;
+            y_st = 0;
+            dx = 190;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+
+            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button34.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button35.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+
+            label11.Location = new Point(x_st + dx * 5, y_st + dy * 5 + 5);
+            textBox_hex.Location = new Point(x_st + dx * 5 + 32, y_st + dy * 5);
+            lb_dec.Location = new Point(x_st + dx * 5 + 148, y_st + dy * 5 + 5);
+            lb_dec.Text = "";
+
+            label1.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 7);
+            label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 7);
+            label3.Location = new Point(x_st + dx * 2 / 2, y_st + dy * 7);
+            label4.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 7);
+            label5.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 7);
+
+            label6.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 8);
+            label7.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 8);
+            label8.Location = new Point(x_st + dx * 2 / 2, y_st + dy * 8);
+            label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
+            label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -333,31 +411,11 @@ namespace vcs_test_all_03_Syntax
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //使用正則表達式判斷字串是否符合手機號碼格式。
-            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[0-9]{4}-[0-9]{6}$");
-            if (rex.IsMatch(txtInput.Text))
-            {
-                MessageBox.Show("符合");
-            }
-            else
-            {
-                MessageBox.Show("不符合");
-            }
 
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
-            //使用正則表達式判斷字串是否符合身分證格式。
-            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[A-Z]{1}[0-9]{9}$");
-            if (rex.IsMatch(txtInput.Text))
-            {
-                MessageBox.Show("符合");
-            }
-            else
-            {
-                MessageBox.Show("不符合");
-            }
 
         }
 
@@ -379,11 +437,6 @@ namespace vcs_test_all_03_Syntax
         }
 
         private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
         {
 
         }
@@ -527,6 +580,138 @@ namespace vcs_test_all_03_Syntax
             {
                 this.Controls["label" + i.ToString()].Text = "這是label" + i.ToString();
 
+            }
+
+        }
+
+        private void btn_check1_Click(object sender, EventArgs e)
+        {
+            //使用正則表達式判斷字串是否符合手機號碼格式。
+            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[0-9]{4}-[0-9]{6}$");
+            if (rex.IsMatch(txtInput.Text))
+            {
+                MessageBox.Show("符合");
+            }
+            else
+            {
+                MessageBox.Show("不符合");
+            }
+        }
+
+        private void btn_check2_Click(object sender, EventArgs e)
+        {
+            //使用正則表達式判斷字串是否符合身分證格式。
+            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[A-Z]{1}[0-9]{9}$");
+            if (rex.IsMatch(txtInput.Text))
+            {
+                MessageBox.Show("符合");
+            }
+            else
+            {
+                MessageBox.Show("不符合");
+            }
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        bool check_textbox_hexadecimal(KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void textBox_hex_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                button35_Click(sender, e);
+            }
+        }
+
+        private void textBox_hex_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+
+            if (textBox_hex.Text.Length == 0)
+            {
+                value = 0;
+                lb_dec.Text = value.ToString();
+                return;
+            }
+
+            value = Convert.ToInt32(textBox_hex.Text, 16);
+            lb_dec.Text = value.ToString();
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            if (textBox_hex.Text.Length <= 0)
+            {
+                richTextBox1.Text += "未輸入數字";
+            }
+            else
+            {
+                string input = textBox_hex.Text; ;
+                double output = 0;
+                byte value = 0;
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if ((input[i] >= (Char)48 && input[i] <= (Char)57))
+                    {
+                        value = (byte)(input[i] - 48);
+
+                    }
+                    else if ((input[i] >= 'A') && (input[i] <= 'F'))
+                    {
+                        value = (byte)(input[i] - 'A' + 10);
+                    }
+                    else if ((input[i] >= 'a') && (input[i] <= 'f'))
+                    {
+                        value = (byte)(input[i] - 'a' + 10);
+                    }
+                    output = output * 16 + value;
+                    //MessageBox.Show("data : " + input[i] + " value : " + value);
+                }
+                richTextBox1.Text += "結果：" + output.ToString() + "\n";
             }
 
         }
