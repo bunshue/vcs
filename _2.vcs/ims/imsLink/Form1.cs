@@ -2682,7 +2682,7 @@ namespace imsLink
                 lb_yuv_y3.Visible = false;
                 lb_auto_awb_cnt.Visible = false;
 
-                gb_contrast_brightness.Visible = false;
+                gb_contrast_brightness1.Visible = false;
                 gb_contrast_brightness2.Visible = false;
                 gb_contrast_brightness3.Visible = false;
                 pictureBox_contrast.Visible = false;
@@ -2737,7 +2737,7 @@ namespace imsLink
 
                 bt_tmp.Text = total_test_count.ToString() + "次";
 
-                gb_contrast_brightness.Visible = true;
+                gb_contrast_brightness1.Visible = true;
                 gb_contrast_brightness2.Visible = true;
                 gb_contrast_brightness3.Visible = true;
                 pictureBox_contrast.Visible = true;
@@ -2775,7 +2775,7 @@ namespace imsLink
             groupBox_quick.Size = new Size(1005, 62);
 
             //gb_contrast_brightness.Location = new Point(613, 0);
-            gb_contrast_brightness.Size = new Size(603, 128);
+            gb_contrast_brightness1.Size = new Size(603, 128);
             gb_contrast_brightness2.Size = new Size(603, 128);
             gb_contrast_brightness3.Size = new Size(603, 290);
 
@@ -3343,8 +3343,8 @@ namespace imsLink
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
             {
-                gb_contrast_brightness.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30);
-                gb_contrast_brightness2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115 + 15);
+                gb_contrast_brightness1.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness1.Width - 5, pictureBox1.Location.Y + 30);
+                gb_contrast_brightness2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness1.Width - 5, pictureBox1.Location.Y + 30 + 115 + 15);
                 //gb_contrast_brightness3.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - gb_contrast_brightness.Width - 5, pictureBox1.Location.Y + 30 + 115 + 115);
                 gb_contrast_brightness3.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y);
 
@@ -7268,14 +7268,14 @@ namespace imsLink
             {
                 if (cb_Contrast_Brightness_Gamma.Checked == true)
                 {
-                    gb_contrast_brightness.Visible = true;
+                    gb_contrast_brightness1.Visible = true;
                     gb_contrast_brightness2.Visible = true;
                     gb_contrast_brightness3.Visible = true;
                     pictureBox_contrast.Visible = true;
                 }
                 else
                 {
-                    gb_contrast_brightness.Visible = false;
+                    gb_contrast_brightness1.Visible = false;
                     gb_contrast_brightness2.Visible = false;
                     gb_contrast_brightness3.Visible = false;
                     pictureBox_contrast.Visible = false;
@@ -13356,7 +13356,7 @@ namespace imsLink
                 groupBox_debug.Visible = false;
                 groupBox_wpt_bpt.Visible = false;
                 groupBox_brightness.Visible = false;
-                gb_contrast_brightness.Visible = false;
+                gb_contrast_brightness1.Visible = false;
                 gb_contrast_brightness2.Visible = false;
                 gb_contrast_brightness3.Visible = false;
                 pictureBox_contrast.Visible = false;
@@ -21333,14 +21333,14 @@ namespace imsLink
         {
             if (cb_Contrast_Brightness_Gamma.Checked == true)
             {
-                gb_contrast_brightness.Visible = true;
+                gb_contrast_brightness1.Visible = true;
                 gb_contrast_brightness2.Visible = true;
                 gb_contrast_brightness3.Visible = true;
                 pictureBox_contrast.Visible = true;
             }
             else
             {
-                gb_contrast_brightness.Visible = false;
+                gb_contrast_brightness1.Visible = false;
                 gb_contrast_brightness2.Visible = false;
                 gb_contrast_brightness3.Visible = false;
                 pictureBox_contrast.Visible = false;

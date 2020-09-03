@@ -322,7 +322,7 @@
             this.lb_data_camera_bright = new System.Windows.Forms.Label();
             this.lb_data_camera_gain = new System.Windows.Forms.Label();
             this.pictureBox_contrast = new System.Windows.Forms.PictureBox();
-            this.gb_contrast_brightness = new System.Windows.Forms.GroupBox();
+            this.gb_contrast_brightness1 = new System.Windows.Forms.GroupBox();
             this.trackBar_Brightness = new System.Windows.Forms.TrackBar();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -743,7 +743,7 @@
             this.groupBox_metering.SuspendLayout();
             this.groupBox_register.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).BeginInit();
-            this.gb_contrast_brightness.SuspendLayout();
+            this.gb_contrast_brightness1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Brightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Contrast)).BeginInit();
@@ -2264,7 +2264,7 @@
             this.tp_USB.Controls.Add(this.lb_data_camera_bright);
             this.tp_USB.Controls.Add(this.lb_data_camera_gain);
             this.tp_USB.Controls.Add(this.pictureBox_contrast);
-            this.tp_USB.Controls.Add(this.gb_contrast_brightness);
+            this.tp_USB.Controls.Add(this.gb_contrast_brightness1);
             this.tp_USB.Controls.Add(this.gb_contrast_brightness2);
             this.tp_USB.Controls.Add(this.gb_contrast_brightness3);
             this.tp_USB.Controls.Add(this.lb_auto_awb_cnt);
@@ -4386,26 +4386,26 @@
             this.pictureBox_contrast.TabIndex = 218;
             this.pictureBox_contrast.TabStop = false;
             // 
-            // gb_contrast_brightness
+            // gb_contrast_brightness1
             // 
-            this.gb_contrast_brightness.Controls.Add(this.trackBar_Brightness);
-            this.gb_contrast_brightness.Controls.Add(this.textBox13);
-            this.gb_contrast_brightness.Controls.Add(this.label19);
-            this.gb_contrast_brightness.Controls.Add(this.numericUpDown1);
-            this.gb_contrast_brightness.Controls.Add(this.trackBar_Contrast);
-            this.gb_contrast_brightness.Controls.Add(this.button65);
-            this.gb_contrast_brightness.Controls.Add(this.textBox15);
-            this.gb_contrast_brightness.Controls.Add(this.label15);
-            this.gb_contrast_brightness.Controls.Add(this.numericUpDown3);
-            this.gb_contrast_brightness.Controls.Add(this.label25);
-            this.gb_contrast_brightness.Controls.Add(this.label26);
-            this.gb_contrast_brightness.Controls.Add(this.button67);
-            this.gb_contrast_brightness.Location = new System.Drawing.Point(690, 87);
-            this.gb_contrast_brightness.Name = "gb_contrast_brightness";
-            this.gb_contrast_brightness.Size = new System.Drawing.Size(80, 64);
-            this.gb_contrast_brightness.TabIndex = 206;
-            this.gb_contrast_brightness.TabStop = false;
-            this.gb_contrast_brightness.Text = "Contrast / Brightness";
+            this.gb_contrast_brightness1.Controls.Add(this.trackBar_Brightness);
+            this.gb_contrast_brightness1.Controls.Add(this.textBox13);
+            this.gb_contrast_brightness1.Controls.Add(this.label19);
+            this.gb_contrast_brightness1.Controls.Add(this.numericUpDown1);
+            this.gb_contrast_brightness1.Controls.Add(this.trackBar_Contrast);
+            this.gb_contrast_brightness1.Controls.Add(this.button65);
+            this.gb_contrast_brightness1.Controls.Add(this.textBox15);
+            this.gb_contrast_brightness1.Controls.Add(this.label15);
+            this.gb_contrast_brightness1.Controls.Add(this.numericUpDown3);
+            this.gb_contrast_brightness1.Controls.Add(this.label25);
+            this.gb_contrast_brightness1.Controls.Add(this.label26);
+            this.gb_contrast_brightness1.Controls.Add(this.button67);
+            this.gb_contrast_brightness1.Location = new System.Drawing.Point(690, 87);
+            this.gb_contrast_brightness1.Name = "gb_contrast_brightness1";
+            this.gb_contrast_brightness1.Size = new System.Drawing.Size(80, 64);
+            this.gb_contrast_brightness1.TabIndex = 206;
+            this.gb_contrast_brightness1.TabStop = false;
+            this.gb_contrast_brightness1.Text = "Contrast / Brightness";
             // 
             // trackBar_Brightness
             // 
@@ -8730,8 +8730,8 @@
             this.groupBox_register.ResumeLayout(false);
             this.groupBox_register.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_contrast)).EndInit();
-            this.gb_contrast_brightness.ResumeLayout(false);
-            this.gb_contrast_brightness.PerformLayout();
+            this.gb_contrast_brightness1.ResumeLayout(false);
+            this.gb_contrast_brightness1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Brightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Contrast)).EndInit();
@@ -9301,7 +9301,7 @@
         private System.Windows.Forms.CheckBox cb_auto_search;
         private System.Windows.Forms.Label lb_auto_awb_cnt;
         private System.Windows.Forms.CheckBox cb_only_search;
-        private System.Windows.Forms.GroupBox gb_contrast_brightness;
+        private System.Windows.Forms.GroupBox gb_contrast_brightness1;
         private System.Windows.Forms.GroupBox gb_contrast_brightness2;
         private System.Windows.Forms.GroupBox gb_contrast_brightness3;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
