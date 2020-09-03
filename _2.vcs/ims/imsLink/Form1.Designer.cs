@@ -37,8 +37,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.SerialPortTimer100ms = new System.Windows.Forms.Timer(this.components);
             this.button9 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox_comport1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_baud_rate1 = new System.Windows.Forms.ComboBox();
             this.button10 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tp_Camera = new System.Windows.Forms.TabPage();
@@ -526,14 +526,14 @@
             this.lb_main_mesg12a = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.tb_wait_sn_data12 = new System.Windows.Forms.TextBox();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.groupBox_comport2 = new System.Windows.Forms.GroupBox();
             this.button80 = new System.Windows.Forms.Button();
             this.button82 = new System.Windows.Forms.Button();
             this.button81 = new System.Windows.Forms.Button();
             this.label51 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox_baud_rate2 = new System.Windows.Forms.ComboBox();
+            this.comboBox_comport2 = new System.Windows.Forms.ComboBox();
             this.button83 = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.lb_main_mesg12c = new System.Windows.Forms.Label();
@@ -541,14 +541,14 @@
             this.button93 = new System.Windows.Forms.Button();
             this.button92 = new System.Windows.Forms.Button();
             this.button91 = new System.Windows.Forms.Button();
-            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.groupBox_comport3 = new System.Windows.Forms.GroupBox();
             this.button86 = new System.Windows.Forms.Button();
             this.button89 = new System.Windows.Forms.Button();
             this.button90 = new System.Windows.Forms.Button();
             this.label54 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.comboBox_baud_rate3 = new System.Windows.Forms.ComboBox();
+            this.comboBox_comport3 = new System.Windows.Forms.ComboBox();
             this.tp_Camera_Model = new System.Windows.Forms.TabPage();
             this.panel8 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -669,7 +669,7 @@
             this.bt_goto_awb = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox_comport1 = new System.Windows.Forms.GroupBox();
             this.pictureBox_comport = new System.Windows.Forms.PictureBox();
             this.timer_awb = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -785,9 +785,9 @@
             this.groupBox18.SuspendLayout();
             this.gb_ng_reason.SuspendLayout();
             this.tp_Cosmo.SuspendLayout();
-            this.groupBox20.SuspendLayout();
+            this.groupBox_comport2.SuspendLayout();
             this.tp_Camera_Test.SuspendLayout();
-            this.groupBox21.SuspendLayout();
+            this.groupBox_comport3.SuspendLayout();
             this.tp_Camera_Model.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tp_Test.SuspendLayout();
@@ -800,7 +800,7 @@
             this.tp_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.groupBox_brightness.SuspendLayout();
             this.gb_ng_reason1.SuspendLayout();
@@ -876,29 +876,29 @@
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // comboBox1
+            // comboBox_comport1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1012, 15);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(85, 27);
-            this.comboBox1.TabIndex = 19;
+            this.comboBox_comport1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_comport1.FormattingEnabled = true;
+            this.comboBox_comport1.Location = new System.Drawing.Point(8, 18);
+            this.comboBox_comport1.Name = "comboBox_comport1";
+            this.comboBox_comport1.Size = new System.Drawing.Size(80, 27);
+            this.comboBox_comport1.TabIndex = 19;
             // 
-            // comboBox2
+            // comboBox_baud_rate1
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBox_baud_rate1.Enabled = false;
+            this.comboBox_baud_rate1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_baud_rate1.FormattingEnabled = true;
+            this.comboBox_baud_rate1.Items.AddRange(new object[] {
             "9600",
             "19600",
             "115200"});
-            this.comboBox2.Location = new System.Drawing.Point(92, 18);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(76, 27);
-            this.comboBox2.TabIndex = 20;
-            this.comboBox2.Text = "115200";
+            this.comboBox_baud_rate1.Location = new System.Drawing.Point(92, 18);
+            this.comboBox_baud_rate1.Name = "comboBox_baud_rate1";
+            this.comboBox_baud_rate1.Size = new System.Drawing.Size(76, 27);
+            this.comboBox_baud_rate1.TabIndex = 20;
+            this.comboBox_baud_rate1.Text = "115200";
             // 
             // button10
             // 
@@ -3190,9 +3190,9 @@
             this.groupBox_system.Controls.Add(this.lb_yuv_y);
             this.groupBox_system.Controls.Add(this.lb_yuv_u);
             this.groupBox_system.Controls.Add(this.lb_yuv_v);
-            this.groupBox_system.Location = new System.Drawing.Point(690, 6);
+            this.groupBox_system.Location = new System.Drawing.Point(699, 9);
             this.groupBox_system.Name = "groupBox_system";
-            this.groupBox_system.Size = new System.Drawing.Size(77, 69);
+            this.groupBox_system.Size = new System.Drawing.Size(68, 73);
             this.groupBox_system.TabIndex = 235;
             this.groupBox_system.TabStop = false;
             // 
@@ -6664,7 +6664,7 @@
             this.tp_Cosmo.Controls.Add(this.lb_main_mesg12a);
             this.tp_Cosmo.Controls.Add(this.label52);
             this.tp_Cosmo.Controls.Add(this.tb_wait_sn_data12);
-            this.tp_Cosmo.Controls.Add(this.groupBox20);
+            this.tp_Cosmo.Controls.Add(this.groupBox_comport2);
             this.tp_Cosmo.Controls.Add(this.button83);
             this.tp_Cosmo.Controls.Add(this.richTextBox3);
             this.tp_Cosmo.Controls.Add(this.lb_main_mesg12c);
@@ -6781,21 +6781,21 @@
             this.tb_wait_sn_data12.TabIndex = 184;
             this.tb_wait_sn_data12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // groupBox20
+            // groupBox_comport2
             // 
-            this.groupBox20.Controls.Add(this.button80);
-            this.groupBox20.Controls.Add(this.button82);
-            this.groupBox20.Controls.Add(this.button81);
-            this.groupBox20.Controls.Add(this.label51);
-            this.groupBox20.Controls.Add(this.label50);
-            this.groupBox20.Controls.Add(this.comboBox3);
-            this.groupBox20.Controls.Add(this.comboBox4);
-            this.groupBox20.Location = new System.Drawing.Point(24, 19);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(508, 99);
-            this.groupBox20.TabIndex = 32;
-            this.groupBox20.TabStop = false;
-            this.groupBox20.Text = "Comport";
+            this.groupBox_comport2.Controls.Add(this.button80);
+            this.groupBox_comport2.Controls.Add(this.button82);
+            this.groupBox_comport2.Controls.Add(this.button81);
+            this.groupBox_comport2.Controls.Add(this.label51);
+            this.groupBox_comport2.Controls.Add(this.label50);
+            this.groupBox_comport2.Controls.Add(this.comboBox_baud_rate2);
+            this.groupBox_comport2.Controls.Add(this.comboBox_comport2);
+            this.groupBox_comport2.Location = new System.Drawing.Point(24, 19);
+            this.groupBox_comport2.Name = "groupBox_comport2";
+            this.groupBox_comport2.Size = new System.Drawing.Size(508, 99);
+            this.groupBox_comport2.TabIndex = 32;
+            this.groupBox_comport2.TabStop = false;
+            this.groupBox_comport2.Text = "Comport";
             // 
             // button80
             // 
@@ -6847,28 +6847,28 @@
             this.label50.TabIndex = 25;
             this.label50.Text = "Baud";
             // 
-            // comboBox3
+            // comboBox_baud_rate2
             // 
-            this.comboBox3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.comboBox_baud_rate2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_baud_rate2.FormattingEnabled = true;
+            this.comboBox_baud_rate2.Items.AddRange(new object[] {
             "9600",
             "19600",
             "115200"});
-            this.comboBox3.Location = new System.Drawing.Point(112, 47);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(77, 24);
-            this.comboBox3.TabIndex = 27;
-            this.comboBox3.Text = "9600";
+            this.comboBox_baud_rate2.Location = new System.Drawing.Point(112, 47);
+            this.comboBox_baud_rate2.Name = "comboBox_baud_rate2";
+            this.comboBox_baud_rate2.Size = new System.Drawing.Size(77, 24);
+            this.comboBox_baud_rate2.TabIndex = 27;
+            this.comboBox_baud_rate2.Text = "9600";
             // 
-            // comboBox4
+            // comboBox_comport2
             // 
-            this.comboBox4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(11, 47);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(92, 24);
-            this.comboBox4.TabIndex = 26;
+            this.comboBox_comport2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_comport2.FormattingEnabled = true;
+            this.comboBox_comport2.Location = new System.Drawing.Point(11, 47);
+            this.comboBox_comport2.Name = "comboBox_comport2";
+            this.comboBox_comport2.Size = new System.Drawing.Size(92, 24);
+            this.comboBox_comport2.TabIndex = 26;
             // 
             // button83
             // 
@@ -6904,7 +6904,7 @@
             this.tp_Camera_Test.Controls.Add(this.button93);
             this.tp_Camera_Test.Controls.Add(this.button92);
             this.tp_Camera_Test.Controls.Add(this.button91);
-            this.tp_Camera_Test.Controls.Add(this.groupBox21);
+            this.tp_Camera_Test.Controls.Add(this.groupBox_comport3);
             this.tp_Camera_Test.Location = new System.Drawing.Point(4, 26);
             this.tp_Camera_Test.Name = "tp_Camera_Test";
             this.tp_Camera_Test.Size = new System.Drawing.Size(940, 586);
@@ -6947,21 +6947,21 @@
             this.button91.UseVisualStyleBackColor = false;
             this.button91.Click += new System.EventHandler(this.button91_Click);
             // 
-            // groupBox21
+            // groupBox_comport3
             // 
-            this.groupBox21.Controls.Add(this.button86);
-            this.groupBox21.Controls.Add(this.button89);
-            this.groupBox21.Controls.Add(this.button90);
-            this.groupBox21.Controls.Add(this.label54);
-            this.groupBox21.Controls.Add(this.label55);
-            this.groupBox21.Controls.Add(this.comboBox6);
-            this.groupBox21.Controls.Add(this.comboBox7);
-            this.groupBox21.Location = new System.Drawing.Point(216, 44);
-            this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(508, 99);
-            this.groupBox21.TabIndex = 33;
-            this.groupBox21.TabStop = false;
-            this.groupBox21.Text = "Comport";
+            this.groupBox_comport3.Controls.Add(this.button86);
+            this.groupBox_comport3.Controls.Add(this.button89);
+            this.groupBox_comport3.Controls.Add(this.button90);
+            this.groupBox_comport3.Controls.Add(this.label54);
+            this.groupBox_comport3.Controls.Add(this.label55);
+            this.groupBox_comport3.Controls.Add(this.comboBox_baud_rate3);
+            this.groupBox_comport3.Controls.Add(this.comboBox_comport3);
+            this.groupBox_comport3.Location = new System.Drawing.Point(216, 44);
+            this.groupBox_comport3.Name = "groupBox_comport3";
+            this.groupBox_comport3.Size = new System.Drawing.Size(508, 99);
+            this.groupBox_comport3.TabIndex = 33;
+            this.groupBox_comport3.TabStop = false;
+            this.groupBox_comport3.Text = "Comport";
             // 
             // button86
             // 
@@ -7013,28 +7013,28 @@
             this.label55.TabIndex = 25;
             this.label55.Text = "Baud";
             // 
-            // comboBox6
+            // comboBox_baud_rate3
             // 
-            this.comboBox6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Items.AddRange(new object[] {
+            this.comboBox_baud_rate3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_baud_rate3.FormattingEnabled = true;
+            this.comboBox_baud_rate3.Items.AddRange(new object[] {
             "9600",
             "19600",
             "115200"});
-            this.comboBox6.Location = new System.Drawing.Point(112, 47);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(77, 24);
-            this.comboBox6.TabIndex = 27;
-            this.comboBox6.Text = "115200";
+            this.comboBox_baud_rate3.Location = new System.Drawing.Point(112, 47);
+            this.comboBox_baud_rate3.Name = "comboBox_baud_rate3";
+            this.comboBox_baud_rate3.Size = new System.Drawing.Size(77, 24);
+            this.comboBox_baud_rate3.TabIndex = 27;
+            this.comboBox_baud_rate3.Text = "115200";
             // 
-            // comboBox7
+            // comboBox_comport3
             // 
-            this.comboBox7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(11, 47);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(92, 24);
-            this.comboBox7.TabIndex = 26;
+            this.comboBox_comport3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_comport3.FormattingEnabled = true;
+            this.comboBox_comport3.Location = new System.Drawing.Point(11, 47);
+            this.comboBox_comport3.Name = "comboBox_comport3";
+            this.comboBox_comport3.Size = new System.Drawing.Size(92, 24);
+            this.comboBox_comport3.TabIndex = 26;
             // 
             // tp_Camera_Model
             // 
@@ -8337,18 +8337,19 @@
             this.lb_main_mesg1.TabIndex = 133;
             this.lb_main_mesg1.Text = "mesg1";
             // 
-            // groupBox5
+            // groupBox_comport1
             // 
-            this.groupBox5.Controls.Add(this.pictureBox_comport);
-            this.groupBox5.Controls.Add(this.comboBox2);
-            this.groupBox5.Controls.Add(this.button10);
-            this.groupBox5.Controls.Add(this.button1);
-            this.groupBox5.Controls.Add(this.button2);
-            this.groupBox5.Location = new System.Drawing.Point(1103, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(63, 58);
-            this.groupBox5.TabIndex = 135;
-            this.groupBox5.TabStop = false;
+            this.groupBox_comport1.Controls.Add(this.comboBox_comport1);
+            this.groupBox_comport1.Controls.Add(this.pictureBox_comport);
+            this.groupBox_comport1.Controls.Add(this.comboBox_baud_rate1);
+            this.groupBox_comport1.Controls.Add(this.button10);
+            this.groupBox_comport1.Controls.Add(this.button1);
+            this.groupBox_comport1.Controls.Add(this.button2);
+            this.groupBox_comport1.Location = new System.Drawing.Point(1099, 12);
+            this.groupBox_comport1.Name = "groupBox_comport1";
+            this.groupBox_comport1.Size = new System.Drawing.Size(66, 70);
+            this.groupBox_comport1.TabIndex = 135;
+            this.groupBox_comport1.TabStop = false;
             // 
             // pictureBox_comport
             // 
@@ -8659,11 +8660,10 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1442, 704);
             this.Controls.Add(this.groupBox_quick);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.cb_stage1_ng);
             this.Controls.Add(this.gb_ng_reason1);
             this.Controls.Add(this.groupBox_brightness);
-            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox_comport1);
             this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.bt_goto_awb);
             this.Controls.Add(this.richTextBox1);
@@ -8783,11 +8783,11 @@
             this.gb_ng_reason.PerformLayout();
             this.tp_Cosmo.ResumeLayout(false);
             this.tp_Cosmo.PerformLayout();
-            this.groupBox20.ResumeLayout(false);
-            this.groupBox20.PerformLayout();
+            this.groupBox_comport2.ResumeLayout(false);
+            this.groupBox_comport2.PerformLayout();
             this.tp_Camera_Test.ResumeLayout(false);
-            this.groupBox21.ResumeLayout(false);
-            this.groupBox21.PerformLayout();
+            this.groupBox_comport3.ResumeLayout(false);
+            this.groupBox_comport3.PerformLayout();
             this.tp_Camera_Model.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -8809,7 +8809,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
+            this.groupBox_comport1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
             this.groupBox_brightness.ResumeLayout(false);
             this.groupBox_brightness.PerformLayout();
@@ -8830,8 +8830,8 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Timer SerialPortTimer100ms;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox_comport1;
+        private System.Windows.Forms.ComboBox comboBox_baud_rate1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -9086,7 +9086,7 @@
         private System.Windows.Forms.ComboBox comboBox_webcam;
         private System.Windows.Forms.Timer timer_display;
         private System.Windows.Forms.Label lb_main_mesg1;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox_comport1;
         private System.Windows.Forms.Button bt_read_awb;
         private System.Windows.Forms.Label lb_awb_data;
         private System.Windows.Forms.Button button43;
@@ -9403,15 +9403,15 @@
         private System.Windows.Forms.Label lb_ng_reason;
         private System.Windows.Forms.TabPage tp_Cosmo;
         private System.Windows.Forms.Button button80;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox_baud_rate2;
+        private System.Windows.Forms.ComboBox comboBox_comport2;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Button button81;
         private System.Windows.Forms.Button button82;
         private System.Windows.Forms.Button button83;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.GroupBox groupBox_comport2;
         private System.Windows.Forms.TextBox tb_wait_sn_data12;
         private System.Windows.Forms.Label lb_main_mesg12b;
         private System.Windows.Forms.Label lb_main_mesg12a;
@@ -9429,14 +9429,14 @@
         private System.Windows.Forms.Button button84;
         private System.Windows.Forms.Button button85;
         private System.Windows.Forms.TabPage tp_Camera_Test;
-        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.GroupBox groupBox_comport3;
         private System.Windows.Forms.Button button86;
         private System.Windows.Forms.Button button89;
         private System.Windows.Forms.Button button90;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox comboBox_baud_rate3;
+        private System.Windows.Forms.ComboBox comboBox_comport3;
         private System.Windows.Forms.Button button91;
         private System.Windows.Forms.Button button93;
         private System.Windows.Forms.Button button92;

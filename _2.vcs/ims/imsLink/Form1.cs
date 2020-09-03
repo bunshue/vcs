@@ -2506,39 +2506,39 @@ namespace imsLink
 
         private void Comport_Scan()
         {
-            comboBox1.Items.Clear();
-            comboBox4.Items.Clear();
-            comboBox7.Items.Clear();
+            comboBox_comport1.Items.Clear();
+            comboBox_comport2.Items.Clear();
+            comboBox_comport3.Items.Clear();
             string[] tempString = SerialPort.GetPortNames();
             Array.Sort(tempString);
             Array.Resize(ref COM_Ports_NameArr, tempString.Length);
             tempString.CopyTo(COM_Ports_NameArr, 0);
 
-            comboBox1.Items.Clear();    //Clear All items in Combobox
-            comboBox4.Items.Clear();    //Clear All items in Combobox
-            comboBox7.Items.Clear();    //Clear All items in Combobox
+            comboBox_comport1.Items.Clear();    //Clear All items in Combobox
+            comboBox_comport2.Items.Clear();    //Clear All items in Combobox
+            comboBox_comport3.Items.Clear();    //Clear All items in Combobox
 
             richTextBox1.Text += "a共抓到 " + tempString.Length.ToString() + " 個 comport :\t";
             foreach (string port in COM_Ports_NameArr)
             {
                 richTextBox1.Text += port + "\t";
-                comboBox1.Items.Add(port);
-                comboBox4.Items.Add(port);
-                comboBox7.Items.Add(port);
+                comboBox_comport1.Items.Add(port);
+                comboBox_comport2.Items.Add(port);
+                comboBox_comport3.Items.Add(port);
             }
             richTextBox1.Text += "\n";
 
             if (COM_Ports_NameArr.Length > 0)
             {
-                comboBox1.Text = COM_Ports_NameArr[0];
-                comboBox4.Text = COM_Ports_NameArr[0];
-                comboBox7.Text = COM_Ports_NameArr[0];
+                comboBox_comport1.Text = COM_Ports_NameArr[0];
+                comboBox_comport2.Text = COM_Ports_NameArr[0];
+                comboBox_comport3.Text = COM_Ports_NameArr[0];
             }
 
             if (COM_Ports_NameArr.Length >= 2)
             {
-                comboBox1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
-                comboBox7.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+                comboBox_comport1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+                comboBox_comport3.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
             }
         }
 
@@ -2608,53 +2608,6 @@ namespace imsLink
             if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
                 groupBox_awb.Visible = false;
-
-                /*
-                //Expo
-                lb_expo.Visible = false;
-                lb_0x3.Visible = false;
-                lb_range_1.Visible = false;
-                trackBar_expo.Visible = false;
-                tb_expo.Visible = false;
-                numericUpDown_expo.Visible = false;
-                bt_setup_expo.Visible = false;
-
-                //Gain
-                lb_gain.Visible = false;
-                lb_0x4.Visible = false;
-                lb_range_2.Visible = false;
-                trackBar_gain.Visible = false;
-                tb_gain.Visible = false;
-                numericUpDown_gain.Visible = false;
-                bt_setup_gain.Visible = false;
-
-                //R
-                lb_R.Visible = false;
-                lb_0xR.Visible = false;
-                lb_range_3.Visible = false;
-                trackBar_R.Visible = false;
-                tb_R.Visible = false;
-                numericUpDown_R.Visible = false;
-                bt_setup_R.Visible = false;
-
-                //G
-                lb_G.Visible = false;
-                lb_0xG.Visible = false;
-                lb_range_4.Visible = false;
-                trackBar_G.Visible = false;
-                tb_G.Visible = false;
-                numericUpDown_G.Visible = false;
-                bt_setup_G.Visible = false;
-
-                //B
-                lb_BB.Visible = false;
-                lb_0xB.Visible = false;
-                lb_range_5.Visible = false;
-                trackBar_B.Visible = false;
-                tb_B.Visible = false;
-                numericUpDown_B.Visible = false;
-                bt_setup_B.Visible = false;
-                */
 
                 //WPT
                 lb_wpt.Visible = false;
@@ -2748,53 +2701,6 @@ namespace imsLink
             {
                 groupBox_awb.Visible = true;
 
-                /*
-                //Expo
-                lb_expo.Visible = en;
-                lb_0x3.Visible = en;
-                lb_range_1.Visible = en;
-                trackBar_expo.Visible = en;
-                tb_expo.Visible = en;
-                numericUpDown_expo.Visible = en;
-                bt_setup_expo.Visible = en;
-
-                //Gain
-                lb_gain.Visible = en;
-                lb_0x4.Visible = en;
-                lb_range_2.Visible = en;
-                trackBar_gain.Visible = en;
-                tb_gain.Visible = en;
-                numericUpDown_gain.Visible = en;
-                bt_setup_gain.Visible = en;
-
-                //R
-                lb_R.Visible = en;
-                lb_0xR.Visible = en;
-                lb_range_3.Visible = en;
-                trackBar_R.Visible = en;
-                tb_R.Visible = en;
-                numericUpDown_R.Visible = en;
-                bt_setup_R.Visible = en;
-
-                //G
-                lb_G.Visible = en;
-                lb_0xG.Visible = en;
-                lb_range_4.Visible = en;
-                trackBar_G.Visible = en;
-                tb_G.Visible = en;
-                numericUpDown_G.Visible = en;
-                bt_setup_G.Visible = en;
-
-                //B
-                lb_BB.Visible = en;
-                lb_0xB.Visible = en;
-                lb_range_5.Visible = en;
-                trackBar_B.Visible = en;
-                tb_B.Visible = en;
-                numericUpDown_B.Visible = en;
-                bt_setup_B.Visible = en;
-                */
-
                 //WPT
                 lb_wpt.Visible = en;
                 tb_wpt.Visible = en;
@@ -2861,8 +2767,8 @@ namespace imsLink
 
         void show_item_location()
         {
-            groupBox5.Location = new Point(0, 0);
-            groupBox5.Size = new Size(397, 58);
+            groupBox_comport1.Location = new Point(0, 0);
+            groupBox_comport1.Size = new Size(397, 58);
             groupBox_system.Location = new Point(0, 0);
             groupBox_system.Size = new Size(134, 542 + 50);
             groupBox_quick.Location = new Point(613, 0);
@@ -2909,13 +2815,8 @@ namespace imsLink
             button34.Location = new Point(x_st + dx * 8, y_st);
             button7.Location = new Point(x_st + dx * 9, y_st);
 
-
-
-
-
             dx = 60;
             dy = 60;
-
             x_st = 8;
             y_st = 15;
 
@@ -3074,26 +2975,18 @@ namespace imsLink
             cb_auto_search.Checked = true;
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
-                cb_auto_search.Enabled = true;
-            else
-                cb_auto_search.Enabled = false;
-
-            if (flag_operation_mode == MODE_RELEASE_STAGE0)
-                groupBox_brightness.Enabled = true;
-            else
-                groupBox_brightness.Enabled = false;
-
-
-            if (flag_operation_mode == MODE_RELEASE_STAGE0)
             {
+                cb_auto_search.Enabled = true;
+                groupBox_brightness.Enabled = true;
                 groupBox_debug.Visible = true;
-
                 lb_note1.Visible = false;
                 lb_note2.Visible = false;
                 lb_note3.Visible = false;
             }
             else
             {
+                cb_auto_search.Enabled = false;
+                groupBox_brightness.Enabled = false;
                 groupBox_debug.Visible = false;
             }
 
@@ -3312,153 +3205,6 @@ namespace imsLink
 
             if (flag_display_mode == DISPLAY_SD)
             {
-                /*
-                //EXPO
-                lb_expo.Size = new Size(lb_expo.Size.Width * 3 / 5, lb_expo.Height * 3 / 5);
-                lb_expo.Font = new Font("新細明體", lb_expo.Font.Size * 3 / 5);
-                lb_0x3.Size = new Size(lb_0x3.Size.Width * 3 / 5, lb_0x3.Height * 3 / 5);
-                lb_0x3.Font = new Font("新細明體", lb_0x3.Font.Size * 3 / 5);
-                lb_range_1.Size = new Size(lb_range_1.Size.Width * 3 / 5, lb_range_1.Height * 3 / 5);
-                lb_range_1.Font = new Font("新細明體", lb_range_1.Font.Size * 3 / 5);
-
-                trackBar_expo.Size = new Size(trackBar_expo.Size.Width * 3 / 5, trackBar_expo.Height * 3 / 5);
-                numericUpDown_expo.Size = new Size(numericUpDown_expo.Size.Width * 4 / 5, numericUpDown_expo.Height * 4 / 5);
-                numericUpDown_expo.Font = new Font("Arial", numericUpDown_expo.Font.Size * 3 / 5);
-                tb_expo.Size = new Size(tb_expo.Size.Width * 3 / 5, tb_expo.Height * 3 / 5);
-                tb_expo.Font = new Font("Arial", tb_expo.Font.Size * 3 / 5);
-
-                x_st = 550;
-                y_st = 540;
-                dx = 0;
-                dy = 0;
-
-                trackBar_expo.Location = new Point(x_st + dx, y_st + dy);
-                lb_expo.Location = new Point(x_st + dx + 5, y_st + dy + 25);
-                lb_0x3.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
-                lb_0x3.Text = "0x                   =";
-                numericUpDown_expo.Location = new Point(x_st + dx + 220, y_st + dy + 5);
-                tb_expo.Location = new Point(x_st + dx + 280, y_st + dy + 5);
-                bt_setup_expo.Location = new Point(x_st + dx + 320, y_st + dy + 0);
-                lb_range_1.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
-                lb_range_1.Text = "0~1FF           0~511";
-
-                //GAIN
-                lb_gain.Size = new Size(lb_gain.Size.Width * 3 / 5, lb_gain.Height * 3 / 5);
-                lb_gain.Font = new Font("新細明體", lb_gain.Font.Size * 3 / 5);
-                lb_0x4.Size = new Size(lb_0x4.Size.Width * 3 / 5, lb_0x4.Height * 3 / 5);
-                lb_0x4.Font = new Font("新細明體", lb_0x4.Font.Size * 3 / 5);
-                lb_range_2.Size = new Size(lb_range_2.Size.Width * 3 / 5, lb_range_2.Height * 3 / 5);
-                lb_range_2.Font = new Font("新細明體", lb_range_2.Font.Size * 3 / 5);
-
-                trackBar_gain.Size = new Size(trackBar_gain.Size.Width * 3 / 5, trackBar_gain.Height * 3 / 5);
-                numericUpDown_gain.Size = new Size(numericUpDown_gain.Size.Width * 4 / 5, numericUpDown_gain.Height * 4 / 5);
-                numericUpDown_gain.Font = new Font("Arial", numericUpDown_gain.Font.Size * 3 / 5);
-                tb_gain.Size = new Size(tb_gain.Size.Width * 3 / 5, tb_gain.Height * 3 / 5);
-                tb_gain.Font = new Font("Arial", tb_gain.Font.Size * 3 / 5);
-
-                x_st = 550;
-                y_st = 600;
-                dx = 0;
-                dy = 0;
-
-                trackBar_gain.Location = new Point(x_st + dx, y_st + dy);
-                lb_gain.Location = new Point(x_st + dx + 5, y_st + dy + 25);
-                lb_0x4.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
-                lb_0x4.Text = "0x                   =";
-                numericUpDown_gain.Location = new Point(x_st + dx + 220, y_st + dy + 5);
-                tb_gain.Location = new Point(x_st + dx + 280, y_st + dy + 5);
-                bt_setup_gain.Location = new Point(x_st + dx + 320, y_st + dy + 0);
-                lb_range_2.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
-                lb_range_2.Text = "0~1FF           0~511";
-
-                //R
-                lb_R.Size = new Size(lb_R.Size.Width * 3 / 5, lb_R.Height * 3 / 5);
-                lb_R.Font = new Font("新細明體", lb_R.Font.Size * 3 / 5);
-                lb_0xR.Size = new Size(lb_0xR.Size.Width * 3 / 5, lb_0xR.Height * 3 / 5);
-                lb_0xR.Font = new Font("新細明體", lb_0xR.Font.Size * 3 / 5);
-                lb_range_3.Size = new Size(lb_range_3.Size.Width * 3 / 5, lb_range_3.Height * 3 / 5);
-                lb_range_3.Font = new Font("新細明體", lb_range_3.Font.Size * 3 / 5);
-
-                trackBar_R.Size = new Size(trackBar_R.Size.Width * 3 / 5, trackBar_R.Height * 3 / 5);
-                numericUpDown_R.Size = new Size(numericUpDown_R.Size.Width * 4 / 5, numericUpDown_R.Height * 4 / 5);
-                numericUpDown_R.Font = new Font("Arial", numericUpDown_R.Font.Size * 3 / 5);
-                tb_R.Size = new Size(tb_R.Size.Width * 3 / 5, tb_R.Height * 3 / 5);
-                tb_R.Font = new Font("Arial", tb_R.Font.Size * 3 / 5);
-
-                x_st = 580 + 370;
-                y_st = 540 - 2;
-                dx = 0;
-                dy = 0;
-
-                trackBar_R.Location = new Point(x_st + dx, y_st + dy);
-                lb_R.Location = new Point(x_st + dx + 5, y_st + dy + 25);
-                lb_0xR.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
-                lb_0xR.Text = "0x                   =";
-                numericUpDown_R.Location = new Point(x_st + dx + 220, y_st + dy + 5);
-                tb_R.Location = new Point(x_st + dx + 280, y_st + dy + 5);
-                bt_setup_R.Location = new Point(x_st + dx + 320, y_st + dy + 0);
-                lb_range_3.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
-                lb_range_3.Text = "0~FFF          0~4095";
-
-                //G
-                lb_G.Size = new Size(lb_G.Size.Width * 3 / 5, lb_G.Height * 3 / 5);
-                lb_G.Font = new Font("新細明體", lb_G.Font.Size * 3 / 5);
-                lb_0xG.Size = new Size(lb_0xG.Size.Width * 3 / 5, lb_0xG.Height * 3 / 5);
-                lb_0xG.Font = new Font("新細明體", lb_0xG.Font.Size * 3 / 5);
-                lb_range_4.Size = new Size(lb_range_4.Size.Width * 3 / 5, lb_range_4.Height * 3 / 5);
-                lb_range_4.Font = new Font("新細明體", lb_range_4.Font.Size * 3 / 5);
-
-                trackBar_G.Size = new Size(trackBar_G.Size.Width * 3 / 5, trackBar_G.Height * 3 / 5);
-                numericUpDown_G.Size = new Size(numericUpDown_G.Size.Width * 4 / 5, numericUpDown_G.Height * 4 / 5);
-                numericUpDown_G.Font = new Font("Arial", numericUpDown_G.Font.Size * 3 / 5);
-                tb_G.Size = new Size(tb_G.Size.Width * 3 / 5, tb_G.Height * 3 / 5);
-                tb_G.Font = new Font("Arial", tb_G.Font.Size * 3 / 5);
-
-                x_st = 580 + 370;
-                y_st = 540 + 40 - 3;
-                dx = 0;
-                dy = 0;
-
-                trackBar_G.Location = new Point(x_st + dx, y_st + dy);
-                lb_G.Location = new Point(x_st + dx + 5, y_st + dy + 25);
-                lb_0xG.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
-                lb_0xG.Text = "0x                   =";
-                numericUpDown_G.Location = new Point(x_st + dx + 220, y_st + dy + 5);
-                tb_G.Location = new Point(x_st + dx + 280, y_st + dy + 5);
-                bt_setup_G.Location = new Point(x_st + dx + 320, y_st + dy + 0);
-                lb_range_4.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
-                lb_range_4.Text = "0~FFF          0~4095";
-
-                //B
-                lb_BB.Size = new Size(lb_BB.Size.Width * 3 / 5, lb_BB.Height * 3 / 5);
-                lb_BB.Font = new Font("新細明體", lb_BB.Font.Size * 3 / 5);
-                lb_0xB.Size = new Size(lb_0xB.Size.Width * 3 / 5, lb_0xB.Height * 3 / 5);
-                lb_0xB.Font = new Font("新細明體", lb_0xB.Font.Size * 3 / 5);
-                lb_range_5.Size = new Size(lb_range_5.Size.Width * 3 / 5, lb_range_5.Height * 3 / 5);
-                lb_range_5.Font = new Font("新細明體", lb_range_5.Font.Size * 3 / 5);
-
-                trackBar_B.Size = new Size(trackBar_B.Size.Width * 3 / 5, trackBar_B.Height * 3 / 5);
-                numericUpDown_B.Size = new Size(numericUpDown_B.Size.Width * 4 / 5, numericUpDown_B.Height * 4 / 5);
-                numericUpDown_B.Font = new Font("Arial", numericUpDown_B.Font.Size * 3 / 5);
-                tb_B.Size = new Size(tb_B.Size.Width * 3 / 5, tb_B.Height * 3 / 5);
-                tb_B.Font = new Font("Arial", tb_B.Font.Size * 3 / 5);
-
-                x_st = 580 + 370;
-                y_st = 540 + 40 + 40- 5;
-                dx = 0;
-                dy = 0;
-
-                trackBar_B.Location = new Point(x_st + dx, y_st + dy);
-                lb_BB.Location = new Point(x_st + dx + 5, y_st + dy + 25);
-                lb_0xB.Location = new Point(x_st + dx + 200 + 2, y_st + dy + 10);
-                lb_0xB.Text = "0x                   =";
-                numericUpDown_B.Location = new Point(x_st + dx + 220, y_st + dy + 5);
-                tb_B.Location = new Point(x_st + dx + 280, y_st + dy + 5);
-                bt_setup_B.Location = new Point(x_st + dx + 320, y_st + dy + 0);
-                lb_range_5.Location = new Point(x_st + dx + 220 + 6, y_st + dy + 5 + 25);
-                lb_range_5.Text = "0~FFF          0~4095";
-                */
-
                 //note
                 lb_note1.Font = new Font("標楷體", lb_note1.Font.Size * 5 / 6);
                 lb_note2.Font = new Font("標楷體", lb_note2.Font.Size * 5 / 6);
@@ -3484,58 +3230,6 @@ namespace imsLink
             }
             else
             {
-                /*
-                //EXPO
-                lb_expo.Location = new Point(30 / 2, 720 - 120 + 45);
-                lb_0x3.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 3 - 130 + 45);
-                lb_range_1.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 3 - 130 + 30 + 45);
-                lb_range_1.Text = "0~1FF           0~511";
-                trackBar_expo.Location = new Point(30 / 2, 750 - 130 + 45);
-                numericUpDown_expo.Location = new Point(410 + 45, 750 - 130 + 45);
-                tb_expo.Location = new Point(410 + 45 - 80, 750 - 130 + 45);
-                bt_setup_expo.Location = new Point(480 + 45, 750 - 130 + 45);
-
-                //GAIN
-                lb_gain.Location = new Point(30 / 2, 720 + 100 - 50 - 90 + 50 - 15);
-                lb_0x4.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 - 90 + 50 - 15);
-                lb_range_2.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 - 90 + 30 + 50 - 15);
-                lb_range_2.Text = "0~1FF           0~511";
-                trackBar_gain.Location = new Point(30 / 2, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-                numericUpDown_gain.Location = new Point(410 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-                tb_gain.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-                bt_setup_gain.Location = new Point(480 + 45, 750 + 100 - 50 - 10 - 90 + 50 - 15);
-
-                //R
-                lb_R.Location = new Point(0, 750 + 100 - 50 + 50 - 30 - 15);
-                lb_0xR.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 - 30 - 15);
-                lb_range_3.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 - 15);
-                lb_range_3.Text = "0~FFF          0~4095";
-                trackBar_R.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-                numericUpDown_R.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-                tb_R.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-                bt_setup_R.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 - 30 - 15);
-
-                //G
-                lb_G.Location = new Point(0, 750 + 100 - 50 + 50 * 2 - 20 - 15);
-                lb_0xG.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 20 - 15);
-                lb_range_4.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 2 - 40 + 30 + 20 - 15);
-                lb_range_4.Text = "0~FFF          0~4095";
-                trackBar_G.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-                numericUpDown_G.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-                tb_G.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-                bt_setup_G.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 2 - 20 - 15);
-
-                //B
-                lb_BB.Location = new Point(0, 750 + 100 - 50 + 50 * 3 - 10 - 15);
-                lb_0xB.Location = new Point(410 + 35 - 50 - 50 + 5, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 10 - 15);
-                lb_range_5.Location = new Point(410 + 35 - 50 - 50 + 5 + 30, 750 + 100 + 3 - 50 - 10 + 50 * 3 - 20 + 30 + 10 - 15);
-                lb_range_5.Text = "0~FFF          0~4095";
-                trackBar_B.Location = new Point(30 / 2, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                numericUpDown_B.Location = new Point(410 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                tb_B.Location = new Point(410 + 45 - 80, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                bt_setup_B.Location = new Point(480 + 45, 750 + 100 - 50 - 10 + 50 * 3 - 10 - 15);
-                */
-
                 if (flag_operation_mode != MODE_RELEASE_STAGE0)
                 {
                     dy = 100;
@@ -3634,38 +3328,6 @@ namespace imsLink
             else
             {
                 dx = 20;
-                /*
-                //WPT
-                lb_wpt.Location = new Point(410 + 5 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 15 + 20);
-                tb_wpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20 + 20);
-                numericUpDown_wpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20 + 20);
-                bt_read_wpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20 + 20);
-                bt_write_wpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200 + dx, 750 + 100 - 50 - 10 + 50 * 2 - 20 + 20);
-
-                //BPT
-                lb_bpt.Location = new Point(410 + 5 + 400 + 20 + 200 + dx, lb_wpt.Location.Y + 40);
-                tb_bpt.Location = new Point(410 + 45 + 25 + 400 + 20 + 200 + dx, tb_wpt.Location.Y + 40);
-                numericUpDown_bpt.Location = new Point(410 + 45 + 25 + 80 + 400 + 20 + 200 + dx, numericUpDown_wpt.Location.Y + 40);
-                bt_read_bpt.Location = new Point(410 + 45 + 25 + 80 + 80 + 400 + 20 + 200 + dx, bt_read_wpt.Location.Y + 40);
-                bt_write_bpt.Location = new Point(410 + 45 + 25 + 80 + 150 + 400 + 20 + 200 + dx, bt_write_wpt.Location.Y + 40);
-                */
-
-                //AE Target
-                //bt_ae_decrease.Location = new Point(numericUpDown_wpt.Location.X, numericUpDown_wpt.Location.Y - 40);
-
-                /*
-                //Saturation
-                bt_saturation.Location = new Point(bt_write_wpt.Location.X + 100, bt_write_wpt.Location.Y - 40);
-                numericUpDown_saturation.Location = new Point(bt_saturation.Location.X + 70, bt_saturation.Location.Y);
-                lb_function.Location = new Point(bt_saturation.Location.X + 70, bt_saturation.Location.Y - 20);
-                comboBox_saturation.Location = new Point(numericUpDown_saturation.Location.X + 70, numericUpDown_saturation.Location.Y);
-                comboBox_denoise.Location = new Point(comboBox_saturation.Location.X + 85, comboBox_saturation.Location.Y);
-                comboBox_sharpness.Location = new Point(comboBox_saturation.Location.X + 140, comboBox_saturation.Location.Y);
-                bt_save_data.Location = new Point(comboBox_saturation.Location.X + 210, comboBox_saturation.Location.Y + 60);
-                numericUpDown_denoise.Location = new Point(comboBox_denoise.Location.X, comboBox_denoise.Location.Y + 40);
-                numericUpDown_sharpness.Location = new Point(comboBox_sharpness.Location.X, comboBox_sharpness.Location.Y + 40);
-                numericUpDown_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y);
-                */
 
                 bt_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 250);
                 bt_show_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 200);
@@ -3677,8 +3339,6 @@ namespace imsLink
                 lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
 
                 groupBox_brightness.Location = new Point(bt_find_brightness.Location.X + 25, bt_find_brightness.Location.Y - 30);
-
-
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
@@ -3739,7 +3399,7 @@ namespace imsLink
                 button13.Visible = true;
                 button47.Visible = true;
                 button41.Visible = true;
-                groupBox5.Visible = true;
+                groupBox_comport1.Visible = true;
                 cb_enable_awb.Visible = true;
                 bt_LED.Visible = true;
                 groupBox_brightness.Visible = true;
@@ -3749,7 +3409,7 @@ namespace imsLink
                 button13.Visible = false;
                 button47.Visible = false;
                 button41.Visible = false;
-                groupBox5.Visible = false;
+                groupBox_comport1.Visible = false;
                 cb_enable_awb.Visible = false;
                 bt_LED.Visible = false;
                 groupBox_brightness.Visible = false;
@@ -3774,7 +3434,7 @@ namespace imsLink
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
             {
-                groupBox5.Visible = true;
+                groupBox_comport1.Visible = true;
 
                 groupBox_metering.Visible = true;
                 groupBox_metering.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 50);
@@ -7415,6 +7075,7 @@ namespace imsLink
                 }
                 else
                 {
+                    /*
                     if (flag_operation_mode != MODE_RELEASE_STAGE0)
                     {
                         int dy = 100;
@@ -7435,6 +7096,7 @@ namespace imsLink
                         bt_clear_serial.Location = new Point(x_st + 315, y_st);
                         lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X - 500, tb_sn_opal.Location.Y - 150);
                     }
+                    */
                     if (flag_operation_mode == MODE_RELEASE_STAGE3)
                     {
                         tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
@@ -12951,8 +12613,8 @@ namespace imsLink
                 flag_comport_ok = false;
             }
 
-            comboBox1.Items.Clear();    //Clear All items in Combobox
-            comboBox7.Items.Clear();    //Clear All items in Combobox
+            comboBox_comport1.Items.Clear();    //Clear All items in Combobox
+            comboBox_comport3.Items.Clear();    //Clear All items in Combobox
             richTextBox1.Text += "try_connect_comport ST\n";
 
             string[] tempString = SerialPort.GetPortNames();
@@ -12964,8 +12626,8 @@ namespace imsLink
             foreach (string port in COM_Ports_NameArr)
             {
                 richTextBox1.Text += port + "\t";
-                comboBox1.Items.Add(port);
-                comboBox7.Items.Add(port);
+                comboBox_comport1.Items.Add(port);
+                comboBox_comport3.Items.Add(port);
             }
             richTextBox1.Text += "\n";
 
@@ -12977,19 +12639,19 @@ namespace imsLink
             }
             else if (COM_Ports_NameArr.Length == 1)
             {
-                comboBox1.Text = COM_Ports_NameArr[0];
-                comboBox7.Text = COM_Ports_NameArr[0];
+                comboBox_comport1.Text = COM_Ports_NameArr[0];
+                comboBox_comport3.Text = COM_Ports_NameArr[0];
             }
             else
             {
-                comboBox1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
-                comboBox7.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+                comboBox_comport1.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
+                comboBox_comport3.Text = COM_Ports_NameArr[COM_Ports_NameArr.Length - 2];   //倒數第2個
             }
 
             if (COM_Ports_NameArr.Length == 1)
             {
                 richTextBox1.Text += "只有一個comport, try 一次\n";
-                ret = connect_comport(comboBox1.Text);
+                ret = connect_comport(comboBox_comport1.Text);
             }
             else
             {
@@ -13002,8 +12664,8 @@ namespace imsLink
 
                     //richTextBox1.Text += "try_index = " + try_index.ToString() + "\n";
 
-                    comboBox1.Text = COM_Ports_NameArr[try_index];
-                    comboBox7.Text = COM_Ports_NameArr[try_index];
+                    comboBox_comport1.Text = COM_Ports_NameArr[try_index];
+                    comboBox_comport3.Text = COM_Ports_NameArr[try_index];
 
                     serialPort1.Close();
                     this.BackColor = Color.Yellow;
@@ -13046,7 +12708,7 @@ namespace imsLink
 
             try
             {
-                serialPort1.BaudRate = int.Parse(comboBox2.Text);
+                serialPort1.BaudRate = int.Parse(comboBox_baud_rate1.Text);
             }
             catch (Exception ex)
             {
@@ -14516,9 +14178,9 @@ namespace imsLink
 
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    show_main_message1("Mode0不支援SD螢幕", S_FALSE, 30);
-                    show_main_message2("Mode0不支援SD螢幕", S_FALSE, 30);
-                    show_main_message3("Mode0不支援SD螢幕", S_FALSE, 30);
+                    show_main_message1("色彩校正不支援SD螢幕", S_FALSE, 30);
+                    show_main_message2("色彩校正不支援SD螢幕", S_FALSE, 30);
+                    show_main_message3("色彩校正不支援SD螢幕", S_FALSE, 30);
                 }
                 else
                 {
@@ -22070,8 +21732,8 @@ namespace imsLink
             }
             else
             {
-                serialPort1.PortName = comboBox4.Text;
-                serialPort1.BaudRate = int.Parse(comboBox3.Text);
+                serialPort1.PortName = comboBox_comport2.Text;
+                serialPort1.BaudRate = int.Parse(comboBox_baud_rate2.Text);
             }
 
             serialPort1.Open();
@@ -22553,8 +22215,8 @@ namespace imsLink
 
         private void button89_Click(object sender, EventArgs e)
         {
-            serialPort1.PortName = comboBox7.Text;
-            serialPort1.BaudRate = int.Parse(comboBox6.Text);
+            serialPort1.PortName = comboBox_comport3.Text;
+            serialPort1.BaudRate = int.Parse(comboBox_baud_rate3.Text);
 
             serialPort1.Open();
             if (serialPort1.IsOpen)
@@ -22923,7 +22585,6 @@ namespace imsLink
             flag_do_find_awb_location = false;
             return y_total / (ww * hh);
         }
-
 
     }
 }
