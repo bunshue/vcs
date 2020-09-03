@@ -14,6 +14,9 @@ namespace WindowsFormsApplication1bbbb
         public Form1()
         {
             InitializeComponent();
+            label2.Text = "按滑鼠按鍵";
+            label3.Text = "按鍵盤方向鍵";
+            label4.Text = "按鍵盤按鍵";
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -56,10 +59,10 @@ namespace WindowsFormsApplication1bbbb
 
             switch (e.KeyData)
             {//監聽上、下、左、右來移動圖片
-                case Keys.Up: pictureBox1.Top -= pictureBox1.Height / 2; break;
-                case Keys.Down: pictureBox1.Top += pictureBox1.Height / 2; break;
-                case Keys.Left: pictureBox1.Left -= pictureBox1.Width / 2; break;
-                case Keys.Right: pictureBox1.Left += pictureBox1.Width / 2; break;
+                case Keys.Up: pictureBox1.Top -= 10; break;
+                case Keys.Down: pictureBox1.Top += 10; break;
+                case Keys.Left: pictureBox1.Left -= 10; break;
+                case Keys.Right: pictureBox1.Left += 10; break;
             }
 
             /*

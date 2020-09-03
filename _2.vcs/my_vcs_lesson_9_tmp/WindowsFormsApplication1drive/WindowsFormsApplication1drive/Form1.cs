@@ -244,8 +244,6 @@ namespace WindowsFormsApplication1drive
             Graphics g;
             g = pictureBox1.CreateGraphics();
 
-
-
             // Create a new bitmap.
             //Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg");
             Bitmap bmp = new Bitmap("c:\\______test_files\\pattern.jpg");
@@ -281,47 +279,10 @@ namespace WindowsFormsApplication1drive
                         bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx % 256), (xx % 256), (xx % 256)));
                 }
             }
-
             Bitmap bitmap2 = 灰度處理(bitmap1);
-
-
             //g = Graphics.FromImage(bitmap1);
-
-
-            
             pictureBox1.Image = bitmap2;
-
-
-
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Worker w1 = new Worker();
-            w1.Start();
-            Thread.Sleep(500);
-            richTextBox1.Text += "111111\n";
-                 
-            w1.Pause();
-            Thread.Sleep(200);
-            richTextBox1.Text += "222222\n";
-            w1.Resume();
-            Thread.Sleep(500);
-            richTextBox1.Text += "333333\n";
-            w1.Pause();
-            Thread.Sleep(1000);
-            richTextBox1.Text += "444444\n";
-            w1.Resume();
-            Thread.Sleep(200);
-            richTextBox1.Text += "555555\n";
-            w1.Stop();
-
-        }  
-
-
-
-
-
 
     }
 }

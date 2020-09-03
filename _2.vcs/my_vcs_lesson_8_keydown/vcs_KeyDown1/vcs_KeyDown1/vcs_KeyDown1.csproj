@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0C0C9F61-6138-4E7D-B0C7-2B1563601B7E}</ProjectGuid>
+    <ProjectGuid>{4E439E88-EE0D-48D2-ACC6-74C9E92BA80C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_LoadPicture</RootNamespace>
-    <AssemblyName>vcs_LoadPicture</AssemblyName>
+    <RootNamespace>vcs_KeyDown1</RootNamespace>
+    <AssemblyName>vcs_KeyDown1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -78,28 +78,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\center.bmp" />
+    <None Include="Resources\tankD.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\down.bmp" />
+    <None Include="Resources\tankL.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\left.bmp" />
+    <None Include="Resources\tankR.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="img\minus.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\plus.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\right.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\up.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\stop.bmp" />
+    <None Include="Resources\tankU.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

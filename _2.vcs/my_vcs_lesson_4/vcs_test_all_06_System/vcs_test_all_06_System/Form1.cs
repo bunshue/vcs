@@ -38,7 +38,7 @@ namespace vcs_test_all_06_System
             //button
             x_st = 10;
             y_st = 10;
-            dx = 160;
+            dx = 210;
             dy = 45;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -191,7 +191,7 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "ExitCode: " + Environment.ExitCode + "\n";
             richTextBox1.Text += "MachineName: " + Environment.MachineName + "\n";  //計算機名
             richTextBox1.Text += "SystemDirectory: " + Environment.SystemDirectory + "\n";
-            richTextBox1.Text += "TickCount: " + Environment.TickCount + "\n";
+            richTextBox1.Text += "TickCount: " + Environment.TickCount + "\t系統啟動後經過的Tick數, 1個tick為1msec\n";
             richTextBox1.Text += "UserDomainName: " + Environment.UserDomainName + "\n";
             richTextBox1.Text += "UserInteractive: " + Environment.UserInteractive + "\n";
             richTextBox1.Text += "UserName: " + Environment.UserName + "\n";    //操作系統的登錄用户名

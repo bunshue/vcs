@@ -24,16 +24,15 @@ namespace WindowsFormsApplication1aaaa
         public Form1()
         {
             InitializeComponent();
-            g = this.CreateGraphics();  //這個視窗，就是畫布
+            g = this.CreateGraphics();  //這個視窗，就是畫布, 直接畫在Form上
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //一、圖片的應用，將圖片縮放
-
             Image ii = WindowsFormsApplication1aaaa.Properties.Resources.picture1;
-            Bitmap bmp = new Bitmap(ii, ii.Width, ii.Height);   //用Bitmap直接進行縮放，比例自行調整，範例為1：1
-            g.DrawImage(bmp, 50, 50);
+            Bitmap bmp = new Bitmap(ii, ii.Width * 3 / 2, ii.Height * 3 / 2);   //用Bitmap直接進行縮放，比例自行調整，範例為1.5：1.5
+            g.DrawImage(bmp, 0, 0);
 
             if (bmp != null)
             {
@@ -53,16 +52,11 @@ namespace WindowsFormsApplication1aaaa
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-
-          
-            
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             //二、自行繪製一張圖，並另存在硬碟上
-
             Bitmap bmp = new Bitmap(240, 320);
             //new出一個bitmap，大小為240*320
 
@@ -74,8 +68,7 @@ namespace WindowsFormsApplication1aaaa
             bb = new SolidBrush(Color.Orange);
             g.FillEllipse(bb, 20, 20, 100, 100);
 
-            g.DrawImage(bmp, 50, 50);
-            //將bmp畫在gg畫布中
+            //g.DrawImage(bmp, 50, 50);   //將bmp畫在g畫布中
 
             if (bmp != null)
             {
@@ -95,8 +88,6 @@ namespace WindowsFormsApplication1aaaa
             }
             else
                 richTextBox1.Text += "無圖可存\n";
-            //另存
-
         }
 
         private void button5_Click(object sender, EventArgs e)

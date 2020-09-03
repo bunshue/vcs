@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0C0C9F61-6138-4E7D-B0C7-2B1563601B7E}</ProjectGuid>
+    <ProjectGuid>{2471B51D-C134-4A21-BECE-2E1433FB6273}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_LoadPicture</RootNamespace>
-    <AssemblyName>vcs_LoadPicture</AssemblyName>
+    <RootNamespace>vcs_MouseKety_Form</RootNamespace>
+    <AssemblyName>vcs_MouseKety_Form</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -76,30 +76,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\center.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\down.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\left.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\minus.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\plus.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\right.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\up.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\stop.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
