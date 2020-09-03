@@ -1,0 +1,57 @@
+========================
+ Big5/GB Translator 1.2
+========================
+
+
+DISCLAIMER
+----------
+USAGE OF THIS PROGRAM IS ENTIRELY AT YOUR OWN RISK.  THERE ARE NO WARRANTIES, EITHER EXPRESSED OR IMPLIED.
+
+
+What is Big5/GB Translator?
+---------------------------
+Big5/GB Translator is a handy utility used to tranlate Big5 and GB encoded texts.
+
+General Features:
+        Fast (100 kb file only costs you 10-20 seconds)
+        Convert a single sentence or even one word
+        Capable of translating files
+        Skip English parts automatically
+        English, Big5 and GB interfaces are included in one file
+	Supports wildcards in file conversions
+     	Auto-updater added
+
+
+How to Translate?
+-----------------
+Type the text (or enter filenames) and then press the buttons below.
+
+
+Frequently Asked Questions:
+---------------------------
+Q : I've input the source and destination filename, why the program still can't operate?
+A : Please make sure that the source file is existing. Also, source and destination can't be the same file.
+
+Q : Why doesn't the updater work?
+A : If you surf the net with a proxy server, then it will not work.
+
+
+History of RemoteShut
+---------------------
+2/May/1999 : Version 1.2 released
+        -Supports wildcards in file conversions
+	-Auto-updater added
+
+7/Apr/1999 : Version 1.1 released
+        -English, Big5 and GB interfaces are included in one file
+
+23/Jan/1999 : Version 1.0 released
+
+
+About 5679soft
+--------------
+Suggestions and comments, please feel free to contact me at:
+yingkit@iname.com
+
+Email : yingkit@iname.com
+URL : http://w3.to/5679soft/
