@@ -2836,7 +2836,7 @@ namespace imsLink
             btnDown.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 4 + 40 + 2);
 
             bt_LED.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dy / 2 - 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 5 + dy / 2 - 8);
+            bt_zoom.Location = new Point(x_st + dx * 1, y_st + dy * 5 + dy / 2 - 8);
 
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 40 - 17);
             cb_show_grid.Location = new Point(x_st + dx * 0, y_st + dy * 6 + 40 + 25 - 17 - 3);
@@ -2848,18 +2848,9 @@ namespace imsLink
             rb_5X5.Location = new Point(x_st + dx * 1 - 8, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50 - 4 + 40);
             rb_NXN.Location = new Point(x_st + dx * 1 - 8, y_st + dy * 6 + 40 + 25 - 17 - 3 + 50 - 4 + 60);
 
-            if (flag_operation_mode == MODE_RELEASE_STAGE3)
-            {
-                lb_rgb_r.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 4);
-                lb_rgb_g.Location = new Point(dx * 0 + 43, y_st + dy * 6 + 40 + 25 * 4);
-                lb_rgb_b.Location = new Point(dx * 0 + 86, y_st + dy * 6 + 40 + 25 * 4);
-            }
-            else
-            {
-                lb_rgb_r.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 3 + 50);
-                lb_rgb_g.Location = new Point(dx * 0 + 45, y_st + dy * 6 + 40 + 25 * 3 + 50);
-                lb_rgb_b.Location = new Point(dx * 0 + 90, y_st + dy * 6 + 40 + 25 * 3 + 50);
-            }
+            lb_rgb_r.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 3 + 50);
+            lb_rgb_g.Location = new Point(dx * 0 + 45, y_st + dy * 6 + 40 + 25 * 3 + 50);
+            lb_rgb_b.Location = new Point(dx * 0 + 90, y_st + dy * 6 + 40 + 25 * 3 + 50);
 
             lb_yuv_y.Location = new Point(dx * 0, y_st + dy * 6 + 40 + 25 * 4 + 50);
             lb_yuv_u.Location = new Point(dx * 0 + 43, y_st + dy * 6 + 40 + 25 * 4 + 50);
@@ -3230,14 +3221,28 @@ namespace imsLink
             }
             else
             {
+                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                {
+                    groupBox_sn1.Location = new Point(0, 600);
+                    groupBox_sn1.Size = new Size(300, 200);
+                    lb_sn_opal.Location = new Point(5, 10);
+                    tb_sn_opal.Location = new Point(5, 10 + 30);
+                    lb_main_mesg2.Location = new Point(5, 10 + 30 * 2);
+                    tb_wait_sn_data.Location = new Point(5, 10 + 30 * 3);
+                    cb_change_rank.Location = new Point(5, 10 + 30 * 4);
+                    cb_air_ng.Location = new Point(5, 10 + 30 * 5);
+
+                    lb_class.Location = new Point(160, 675);
+                }
+
                 if (flag_operation_mode != MODE_RELEASE_STAGE0)
                 {
                     dy = 100;
-                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
-                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
+                    //lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
+                    //tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
+                    //tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
                     bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
                     bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
-                    tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
                 }
                 else
                 {
@@ -3246,11 +3251,9 @@ namespace imsLink
                     bt_save_img.Location = new Point(x_st + 250, y_st);
                     bt_clear_serial.Location = new Point(x_st + 315, y_st);
 
-                    lb_sn_opal.Location = new Point(x_st + 10 - 450, y_st + 5 - 130);
-                    tb_sn_opal.Location = new Point(x_st + 120 - 450, y_st - 130);
-                    lb_main_mesg2.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - 40);   //david0901
-
-
+                    //lb_sn_opal.Location = new Point(x_st + 10 - 450, y_st - 130);
+                    //tb_sn_opal.Location = new Point(x_st + 120 - 450, y_st - 130);
+                    //lb_main_mesg2.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - 40);
                 }
                 lb_yuv_y2.Location = new Point(1610, 740);
                 lb_yuv_y3.Location = new Point(1215, 105);
@@ -3426,8 +3429,19 @@ namespace imsLink
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
-                button19.Location = new Point(button19.Location.X - 35, button19.Location.Y);
+                bt_zoom.Location = new Point(bt_zoom.Location.X - 31, bt_zoom.Location.Y);
                 //groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 130, cb_show_grid.Location.Y + 10);
+
+
+
+
+
+
+
+
+
+
+                //tb_sn_opal
             }
             else
                 groupBox_gridlinecolor.Visible = false;
@@ -3626,7 +3640,7 @@ namespace imsLink
             button15.BackgroundImage = imsLink.Properties.Resources.play_pause;
             button17.BackgroundImage = imsLink.Properties.Resources.plus;
             button18.BackgroundImage = imsLink.Properties.Resources.minus;
-            button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+            bt_zoom.BackgroundImage = imsLink.Properties.Resources.full_screen;
             button20.BackgroundImage = imsLink.Properties.Resources.power;
             button32.BackgroundImage = imsLink.Properties.Resources.console;
             button35.BackgroundImage = imsLink.Properties.Resources.ims3;
@@ -3698,11 +3712,11 @@ namespace imsLink
 
             if (flag_display_mode == DISPLAY_SD)
             {
-                toolTip1.SetToolTip(button19, "1.25X");
+                toolTip1.SetToolTip(bt_zoom, "1.25X");
             }
             else
             {
-                toolTip1.SetToolTip(button19, "2X");
+                toolTip1.SetToolTip(bt_zoom, "2X");
             }
 
             toolTip1.SetToolTip(btnUp, "Up");
@@ -3781,7 +3795,7 @@ namespace imsLink
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
-                button19_Click(sender, e);
+                bt_zoom_Click(sender, e);
             }
 
             string Path;
@@ -5077,7 +5091,7 @@ namespace imsLink
                 if (flag_fullscreen == true)
                 {
                     flag_fullscreen = false;
-                    button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+                    bt_zoom.BackgroundImage = imsLink.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
                     this.richTextBox1.Location = new System.Drawing.Point(958, 67);
                     this.richTextBox1.Size = new System.Drawing.Size(500, 586);
@@ -5091,11 +5105,11 @@ namespace imsLink
 
                     if (flag_display_mode == DISPLAY_SD)
                     {
-                        toolTip1.SetToolTip(button19, "1.25X");
+                        toolTip1.SetToolTip(bt_zoom, "1.25X");
                     }
                     else
                     {
-                        toolTip1.SetToolTip(button19, "2X");
+                        toolTip1.SetToolTip(bt_zoom, "2X");
                     }
 
                     show_awb_item_visible(false);   //222
@@ -5287,7 +5301,7 @@ namespace imsLink
                 if (flag_fullscreen == true)
                 {
                     flag_fullscreen = false;
-                    button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+                    bt_zoom.BackgroundImage = imsLink.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
                     this.richTextBox1.Location = new System.Drawing.Point(958, 67);
                     this.richTextBox1.Size = new System.Drawing.Size(500, 586);
@@ -5301,11 +5315,11 @@ namespace imsLink
 
                     if (flag_display_mode == DISPLAY_SD)
                     {
-                        toolTip1.SetToolTip(button19, "1.25X");
+                        toolTip1.SetToolTip(bt_zoom, "1.25X");
                     }
                     else
                     {
-                        toolTip1.SetToolTip(button19, "2X");
+                        toolTip1.SetToolTip(bt_zoom, "2X");
                     }
 
                     show_awb_item_visible(false);   //222
@@ -5361,7 +5375,7 @@ namespace imsLink
                 if (flag_fullscreen == true)
                 {
                     flag_fullscreen = false;
-                    button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+                    bt_zoom.BackgroundImage = imsLink.Properties.Resources.full_screen;
                     richTextBox1.Visible = true;
                     this.richTextBox1.Location = new System.Drawing.Point(958, 67);
                     this.richTextBox1.Size = new System.Drawing.Size(500, 586);
@@ -5375,11 +5389,11 @@ namespace imsLink
 
                     if (flag_display_mode == DISPLAY_SD)
                     {
-                        toolTip1.SetToolTip(button19, "1.25X");
+                        toolTip1.SetToolTip(bt_zoom, "1.25X");
                     }
                     else
                     {
-                        toolTip1.SetToolTip(button19, "2X");
+                        toolTip1.SetToolTip(bt_zoom, "2X");
                     }
 
                     show_awb_item_visible(false);   //222
@@ -7042,7 +7056,7 @@ namespace imsLink
                 richTextBox1.Text += "已達最小放大倍率\n";
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void bt_zoom_Click(object sender, EventArgs e)
         {
             //richTextBox1.AppendText("螢幕解析度 : " + Screen.PrimaryScreen.Bounds.Width.ToString() + "*" + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n");
             if (flag_fullscreen == false)
@@ -7069,12 +7083,32 @@ namespace imsLink
                         lb_class.Location = new Point(tb_wait_sn_data.Location.X + 140 + 27, tb_wait_sn_data.Location.Y - 190);
                         lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
 
-                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 145, tb_sn_opal.Location.Y - 40); //SD display + big show
-                        cb_change_rank.Location = new Point(tb_sn_opal.Location.X + 145, tb_sn_opal.Location.Y - 5); //SD display + big show
+                        //cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 145, tb_sn_opal.Location.Y - 40); //SD display + big show
+                        //cb_change_rank.Location = new Point(tb_sn_opal.Location.X + 145, tb_sn_opal.Location.Y - 5); //SD display + big show
                     }
                 }
                 else
                 {
+                    if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
+                    {
+                        int x_st;
+                        int y_st;
+                        x_st = 1500;
+                        y_st = 930;
+                        lb_sn_opal.Location = new Point(x_st + 10 - 450, y_st - 130);
+                        tb_sn_opal.Location = new Point(x_st + 120 - 450, y_st - 130);
+                        lb_main_mesg2.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - 40);   //david0901
+                    }
+                    else
+                    {
+                        int dy = 200;
+                        //lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
+                        //tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
+                        //lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy + 40);
+                        bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
+                        bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
+                    }
+
                     /*
                     if (flag_operation_mode != MODE_RELEASE_STAGE0)
                     {
@@ -7097,18 +7131,29 @@ namespace imsLink
                         lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X - 500, tb_sn_opal.Location.Y - 150);
                     }
                     */
-                    if (flag_operation_mode == MODE_RELEASE_STAGE3)
+                    if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
                     {
-                        tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
-                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 138 + 10, tb_wait_sn_data.Location.Y - 150);
-                        lb_main_mesg2.Location = new Point(lb_main_mesg2.Location.X, lb_main_mesg2.Location.Y - 8);
+                        groupBox_sn1.Location = new Point(0, 600);
+                        groupBox_sn1.Size = new Size(300, 200);
+                        lb_sn_opal.Location = new Point(5, 10);
+                        tb_sn_opal.Location = new Point(5, 10 + 30);
+                        lb_main_mesg2.Location = new Point(5, 10 + 30 * 2);
+                        tb_wait_sn_data.Location = new Point(5, 10 + 30 * 3);
+                        cb_change_rank.Location = new Point(5, 10 + 30 * 4);
+                        cb_air_ng.Location = new Point(5, 10 + 30 * 5);
 
-                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120); //HD display + big show
-                        cb_change_rank.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120 + 50); //HD display + big show
+                        lb_class.Location = new Point(160, 675);
+
+                        //lb_main_mesg2.Location = new Point(lb_main_mesg2.Location.X, lb_main_mesg2.Location.Y - 8);
+                        //tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
+                        //lb_class.Location = new Point(tb_wait_sn_data.Location.X + 138 + 10, tb_wait_sn_data.Location.Y - 150);
+
+                        //cb_air_ng.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120); //HD display + big show
+                        //cb_change_rank.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120 + 50); //HD display + big show
                     }
                 }
 
-                button19.BackgroundImage = imsLink.Properties.Resources.normal_screen;
+                bt_zoom.BackgroundImage = imsLink.Properties.Resources.normal_screen;
                 //this.TopMost = true;
 
                 this.FormBorderStyle = FormBorderStyle.None;
@@ -7138,7 +7183,7 @@ namespace imsLink
                 }
 
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
-                toolTip1.SetToolTip(button19, "1X");
+                toolTip1.SetToolTip(bt_zoom, "1X");
 
                 if (flag_enaglb_awb_function == true)
                 {
@@ -7200,32 +7245,47 @@ namespace imsLink
                         lb_class.Location = new Point(tb_wait_sn_data.Location.X + 167, tb_wait_sn_data.Location.Y - 140);
                         lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
 
-                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 600, tb_sn_opal.Location.Y + 20);   //SD display + small show
-                        cb_change_rank.Location = new Point(tb_sn_opal.Location.X + 600 + 150, tb_sn_opal.Location.Y + 20);   //SD display + small show
+                        //cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 600, tb_sn_opal.Location.Y + 20);   //SD display + small show
+                        //cb_change_rank.Location = new Point(tb_sn_opal.Location.X + 600 + 150, tb_sn_opal.Location.Y + 20);   //SD display + small show
                     }
                 }
                 else
                 {
-                    int dy = 62;
-                    lb_sn_opal.Text = "序號";
-                    lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2 - dy);
-                    tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X + 50 - 4 + 140, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    int dy = 0;
+                    //lb_sn_opal.Text = "序號";
+                    //lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12+140, cb_enable_awb.Location.Y + 56 + 65-2 - dy);
+                    //tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4+140, cb_enable_awb.Location.Y + 56 + 65 - dy);
+                    //lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X + 50 - 4 + 140+140, cb_enable_awb.Location.Y + 56 + 65 - dy);
                     bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
                     bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
 
-                    if (flag_operation_mode == MODE_RELEASE_STAGE3)
+                    if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                     {
-                        tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X + 140, tb_sn_opal.Location.Y);
-                        lb_class.Location = new Point(tb_wait_sn_data.Location.X + 20 + 8, tb_wait_sn_data.Location.Y - 138);
-                        lb_main_mesg2.Location = new Point(tb_wait_sn_data.Location.X + 140, tb_wait_sn_data.Location.Y);
+                        int x_st;
+                        int y_st;
+                        x_st = 150;
+                        y_st = 560;
+                        lb_sn_opal.Location = new Point(x_st, y_st);
+                        tb_sn_opal.Location = new Point(x_st + 110, y_st);
+                        lb_main_mesg2.Location = new Point(x_st + 250, y_st);
+                    }
 
-                        cb_air_ng.Location = new Point(tb_sn_opal.Location.X + 600, tb_sn_opal.Location.Y - 5);     //HD display + small show
-                        cb_change_rank.Location = new Point(tb_sn_opal.Location.X + 600+150, tb_sn_opal.Location.Y - 5);     //HD display + small show
+                    if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                    {
+                        groupBox_sn1.Location = new Point(140, 540);
+                        groupBox_sn1.Size = new Size(780, 50);
+                        lb_sn_opal.Location = new Point(5 + 0, 20);
+                        tb_sn_opal.Location = new Point(5 + 120, 20);
+                        lb_main_mesg2.Location = new Point(5 + 250, 20);
+                        tb_wait_sn_data.Location = new Point(5 + 550, 20);
+                        cb_change_rank.Location = new Point(5 + 700, 20);
+                        //cb_air_ng.Location = new Point(5+650, 20);
+
+                        lb_class.Location = new Point(140, 540 - 100);
                     }
                 }
 
-                button19.BackgroundImage = imsLink.Properties.Resources.full_screen;
+                bt_zoom.BackgroundImage = imsLink.Properties.Resources.full_screen;
                 richTextBox1.Visible = true;
                 this.richTextBox1.Location = new System.Drawing.Point(958, 67);
                 this.richTextBox1.Size = new System.Drawing.Size(500, 586);
@@ -7246,16 +7306,16 @@ namespace imsLink
                 {
                     if (flag_enaglb_awb_function == true)
                     {
-                        toolTip1.SetToolTip(button19, "1.10X");
+                        toolTip1.SetToolTip(bt_zoom, "1.10X");
                     }
                     else
                     {
-                        toolTip1.SetToolTip(button19, "1.33X");
+                        toolTip1.SetToolTip(bt_zoom, "1.33X");
                     }
                 }
                 else
                 {
-                    toolTip1.SetToolTip(button19, "2X");
+                    toolTip1.SetToolTip(bt_zoom, "2X");
                 }
 
                 if (flag_enaglb_awb_function == true)
@@ -8879,6 +8939,14 @@ namespace imsLink
         int timer_webcam_cnt = 0;
         private void timer_stage2_Tick(object sender, EventArgs e)
         {
+            if (flag_display_mode == DISPLAY_SD)
+            {
+                show_main_message1("色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message2("色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message3("色彩校正不支援SD螢幕", S_FALSE, 30);
+                return;
+            }
+
             if (flag_wait_for_confirm == true)
             {
                 show_main_message1("等待確認", S_FALSE, 30);
@@ -11226,7 +11294,7 @@ namespace imsLink
 
             tabControl1.SelectedTab = tp_USB;
 
-            button19_Click(sender, e);
+            bt_zoom_Click(sender, e);
 
             bt_goto_awb.Visible = false;
         }
@@ -13335,7 +13403,7 @@ namespace imsLink
             {
                 flag_enaglb_awb_function = true;
                 flag_fullscreen = false;
-                button19_Click(sender, e);
+                bt_zoom_Click(sender, e);
                 //cb_enable_awb.Location = new Point(11, 489 + 110);
                 if (flag_operation_mode == MODE_RELEASE_STAGE0)
                 {

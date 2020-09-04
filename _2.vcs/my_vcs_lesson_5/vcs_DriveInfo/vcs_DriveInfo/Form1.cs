@@ -172,6 +172,20 @@ namespace vcs_DriveInfo
                 }
                 richTextBox1.Text += "\n";
             }
+
+            String result = "";
+            foreach (DriveInfo di in DriveInfo.GetDrives())
+            {
+                //取得磁碟的資訊，並逐一列出
+                if (di.IsReady)
+                    //表示有東西，若不是可能是光碟、軟碟機
+                    result += String.Format("{0}\t{1}\t{2}\t{3}\r\n", di.Name, di.DriveType, di.TotalSize, di.TotalFreeSpace);
+                //印出資訊
+                else
+                    result += String.Format("{0}\t{1}\r\n", di.Name, di.DriveType);
+            }
+            richTextBox1.Text += result + "\n";
+
         }
 
         private void button4_Click(object sender, EventArgs e)

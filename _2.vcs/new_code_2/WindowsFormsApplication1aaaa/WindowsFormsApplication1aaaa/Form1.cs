@@ -27,33 +27,6 @@ namespace WindowsFormsApplication1aaaa
             g = this.CreateGraphics();  //這個視窗，就是畫布, 直接畫在Form上
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //一、圖片的應用，將圖片縮放
-            Image ii = WindowsFormsApplication1aaaa.Properties.Resources.picture1;
-            Bitmap bmp = new Bitmap(ii, ii.Width * 3 / 2, ii.Height * 3 / 2);   //用Bitmap直接進行縮放，比例自行調整，範例為1.5：1.5
-            g.DrawImage(bmp, 0, 0);
-
-            if (bmp != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                bmp.Save(@filename1, ImageFormat.Jpeg);
-                bmp.Save(@filename2, ImageFormat.Bmp);
-                bmp.Save(@filename3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             //二、自行繪製一張圖，並另存在硬碟上
@@ -70,55 +43,20 @@ namespace WindowsFormsApplication1aaaa
 
             //g.DrawImage(bmp, 50, 50);   //將bmp畫在g畫布中
 
-            if (bmp != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                bmp.Save(@filename1, ImageFormat.Jpeg);
-                bmp.Save(@filename2, ImageFormat.Bmp);
-                bmp.Save(@filename3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //三、在某圖片中，在指定的位置切裁指定的大小並另存圖片
-            Image ii = WindowsFormsApplication1aaaa.Properties.Resources.picture1;
-            Bitmap bmp = new Bitmap(500, 500);
-            Graphics g = Graphics.FromImage(bmp);
-            g.DrawImage(ii, new Rectangle(0, 0, ii.Width, ii.Height), new Rectangle(0, 0, ii.Width, ii.Height), GraphicsUnit.Pixel);
-            //以上是指，在ii這張圖中，以指定的大小，畫在指定的位置，量測單位是Pixel
+            //轉移中
+                                //三、在某圖片中，在指定的位置切裁指定的大小並另存圖片
+                                Image ii = WindowsFormsApplication1aaaa.Properties.Resources.picture1;
+                                Bitmap bmp = new Bitmap(500, 500);
+                                Graphics g = Graphics.FromImage(bmp);
+                                g.DrawImage(ii, new Rectangle(0, 0, ii.Width, ii.Height), new Rectangle(0, 0, ii.Width, ii.Height), GraphicsUnit.Pixel);
+                                //以上是指，在ii這張圖中，以指定的大小，畫在指定的位置，量測單位是Pixel
 
-            g.DrawImage(bmp, 0, 0);
+                                g.DrawImage(bmp, 0, 0);
 
-            if (bmp != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                bmp.Save(@filename1, ImageFormat.Jpeg);
-                bmp.Save(@filename2, ImageFormat.Bmp);
-                bmp.Save(@filename3, ImageFormat.Png);
-
-                richTextBox1.Text += "存檔成功\n";
-                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
 
         }
 
@@ -209,24 +147,6 @@ namespace WindowsFormsApplication1aaaa
         private void button8_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "cancel\n";
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            String result = "";
-            foreach (DriveInfo di in DriveInfo.GetDrives())
-            {
-                //取得磁碟的資訊，並逐一列出
-                if (di.IsReady)
-                    //表示有東西，若不是可能是光碟、軟碟機
-                    result += String.Format("{0}\t{1}\t{2}\t{3}\r\n", di.Name, di.DriveType, di.TotalSize, di.TotalFreeSpace);
-                //印出資訊
-                else
-                    result += String.Format("{0}\t{1}\r\n", di.Name, di.DriveType);
-            }
-            richTextBox1.Text += result + "\n";
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)

@@ -52,8 +52,12 @@
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -186,9 +190,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 613);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 627);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(831, 361);
+            this.richTextBox1.Size = new System.Drawing.Size(831, 347);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
@@ -239,6 +243,7 @@
             this.button8.TabIndex = 13;
             this.button8.Text = "存檔";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button18
             // 
@@ -353,11 +358,50 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(768, 628);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(74, 37);
+            this.button9.TabIndex = 213;
+            this.button9.Text = "clear";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(13, 605);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(71, 16);
+            this.radioButton4.TabIndex = 214;
+            this.radioButton4.Text = "截圖模式";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Location = new System.Drawing.Point(738, 55);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(160, 120);
+            this.pictureBox2.TabIndex = 215;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 986);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.radioButton4);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.btnCenter);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
@@ -386,6 +430,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -417,6 +462,9 @@
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

@@ -241,7 +241,7 @@
             this.cb_show_grid = new System.Windows.Forms.CheckBox();
             this.cb_show_time = new System.Windows.Forms.CheckBox();
             this.bt_LED = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.bt_zoom = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
@@ -703,6 +703,7 @@
             this.bt_restore_camera_setup = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
+            this.groupBox_sn1 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -805,6 +806,7 @@
             this.groupBox_brightness.SuspendLayout();
             this.gb_ng_reason1.SuspendLayout();
             this.groupBox_quick.SuspendLayout();
+            this.groupBox_sn1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -2245,6 +2247,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.lb_class);
+            this.tp_USB.Controls.Add(this.groupBox_sn1);
             this.tp_USB.Controls.Add(this.bt_script_cancel);
             this.tp_USB.Controls.Add(this.bt_script_save);
             this.tp_USB.Controls.Add(this.richTextBox2);
@@ -2254,9 +2258,7 @@
             this.tp_USB.Controls.Add(this.groupBox_register0);
             this.tp_USB.Controls.Add(this.groupBox_debug);
             this.tp_USB.Controls.Add(this.groupBox_metering);
-            this.tp_USB.Controls.Add(this.cb_change_rank);
             this.tp_USB.Controls.Add(this.groupBox_register);
-            this.tp_USB.Controls.Add(this.cb_air_ng);
             this.tp_USB.Controls.Add(this.cb_Gamma);
             this.tp_USB.Controls.Add(this.cb_Contrast_Brightness_Gamma);
             this.tp_USB.Controls.Add(this.lb_data_camera_sign);
@@ -2278,12 +2280,8 @@
             this.tp_USB.Controls.Add(this.bt_find_brightness);
             this.tp_USB.Controls.Add(this.numericUpDown_find_brightness_h);
             this.tp_USB.Controls.Add(this.bt_awb_break);
-            this.tp_USB.Controls.Add(this.tb_wait_sn_data);
-            this.tp_USB.Controls.Add(this.lb_main_mesg2);
             this.tp_USB.Controls.Add(this.bt_save_img);
             this.tp_USB.Controls.Add(this.bt_clear_serial);
-            this.tp_USB.Controls.Add(this.lb_sn_opal);
-            this.tp_USB.Controls.Add(this.tb_sn_opal);
             this.tp_USB.Controls.Add(this.bt_cancel);
             this.tp_USB.Controls.Add(this.tb_awb_mesg);
             this.tp_USB.Controls.Add(this.lb_awb_time);
@@ -2299,7 +2297,6 @@
             this.tp_USB.Controls.Add(this.pictureBox2);
             this.tp_USB.Controls.Add(this.pictureBox1);
             this.tp_USB.Controls.Add(this.progressBar_awb);
-            this.tp_USB.Controls.Add(this.lb_class);
             this.tp_USB.Location = new System.Drawing.Point(4, 26);
             this.tp_USB.Name = "tp_USB";
             this.tp_USB.Size = new System.Drawing.Size(940, 586);
@@ -3178,7 +3175,7 @@
             this.groupBox_system.Controls.Add(this.cb_show_grid);
             this.groupBox_system.Controls.Add(this.cb_show_time);
             this.groupBox_system.Controls.Add(this.bt_LED);
-            this.groupBox_system.Controls.Add(this.button19);
+            this.groupBox_system.Controls.Add(this.bt_zoom);
             this.groupBox_system.Controls.Add(this.button18);
             this.groupBox_system.Controls.Add(this.button17);
             this.groupBox_system.Controls.Add(this.button15);
@@ -3190,9 +3187,9 @@
             this.groupBox_system.Controls.Add(this.lb_yuv_y);
             this.groupBox_system.Controls.Add(this.lb_yuv_u);
             this.groupBox_system.Controls.Add(this.lb_yuv_v);
-            this.groupBox_system.Location = new System.Drawing.Point(699, 9);
+            this.groupBox_system.Location = new System.Drawing.Point(709, 21);
             this.groupBox_system.Name = "groupBox_system";
-            this.groupBox_system.Size = new System.Drawing.Size(68, 73);
+            this.groupBox_system.Size = new System.Drawing.Size(58, 60);
             this.groupBox_system.TabIndex = 235;
             this.groupBox_system.TabStop = false;
             // 
@@ -3409,17 +3406,17 @@
             this.bt_LED.UseVisualStyleBackColor = false;
             this.bt_LED.Click += new System.EventHandler(this.bt_LED_Click);
             // 
-            // button19
+            // bt_zoom
             // 
-            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button19.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.ForeColor = System.Drawing.Color.Black;
-            this.button19.Location = new System.Drawing.Point(85, 225);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(60, 60);
-            this.button19.TabIndex = 202;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
+            this.bt_zoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_zoom.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_zoom.ForeColor = System.Drawing.Color.Black;
+            this.bt_zoom.Location = new System.Drawing.Point(85, 225);
+            this.bt_zoom.Name = "bt_zoom";
+            this.bt_zoom.Size = new System.Drawing.Size(60, 60);
+            this.bt_zoom.TabIndex = 202;
+            this.bt_zoom.UseVisualStyleBackColor = true;
+            this.bt_zoom.Click += new System.EventHandler(this.bt_zoom_Click);
             // 
             // button18
             // 
@@ -4163,7 +4160,7 @@
             this.cb_change_rank.AutoSize = true;
             this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
-            this.cb_change_rank.Location = new System.Drawing.Point(10, 234);
+            this.cb_change_rank.Location = new System.Drawing.Point(5, 125);
             this.cb_change_rank.Name = "cb_change_rank";
             this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
             this.cb_change_rank.TabIndex = 232;
@@ -4298,7 +4295,7 @@
             this.cb_air_ng.AutoSize = true;
             this.cb_air_ng.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.cb_air_ng.ForeColor = System.Drawing.Color.Red;
-            this.cb_air_ng.Location = new System.Drawing.Point(10, 268);
+            this.cb_air_ng.Location = new System.Drawing.Point(5, 150);
             this.cb_air_ng.Name = "cb_air_ng";
             this.cb_air_ng.Size = new System.Drawing.Size(113, 28);
             this.cb_air_ng.TabIndex = 225;
@@ -5271,7 +5268,7 @@
             // tb_wait_sn_data
             // 
             this.tb_wait_sn_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_sn_data.Location = new System.Drawing.Point(11, 449);
+            this.tb_wait_sn_data.Location = new System.Drawing.Point(5, 100);
             this.tb_wait_sn_data.Multiline = true;
             this.tb_wait_sn_data.Name = "tb_wait_sn_data";
             this.tb_wait_sn_data.Size = new System.Drawing.Size(125, 22);
@@ -5283,7 +5280,7 @@
             this.lb_main_mesg2.AutoSize = true;
             this.lb_main_mesg2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(37, 81);
+            this.lb_main_mesg2.Location = new System.Drawing.Point(5, 75);
             this.lb_main_mesg2.Name = "lb_main_mesg2";
             this.lb_main_mesg2.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg2.TabIndex = 136;
@@ -5319,7 +5316,7 @@
             // 
             this.lb_sn_opal.AutoSize = true;
             this.lb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_opal.Location = new System.Drawing.Point(9, 397);
+            this.lb_sn_opal.Location = new System.Drawing.Point(5, 25);
             this.lb_sn_opal.Name = "lb_sn_opal";
             this.lb_sn_opal.Size = new System.Drawing.Size(106, 24);
             this.lb_sn_opal.TabIndex = 166;
@@ -5328,7 +5325,7 @@
             // tb_sn_opal
             // 
             this.tb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_sn_opal.Location = new System.Drawing.Point(11, 423);
+            this.tb_sn_opal.Location = new System.Drawing.Point(5, 50);
             this.tb_sn_opal.Multiline = true;
             this.tb_sn_opal.Name = "tb_sn_opal";
             this.tb_sn_opal.Size = new System.Drawing.Size(125, 22);
@@ -5554,7 +5551,7 @@
             this.lb_class.AutoSize = true;
             this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_class.ForeColor = System.Drawing.Color.Red;
-            this.lb_class.Location = new System.Drawing.Point(81, 7);
+            this.lb_class.Location = new System.Drawing.Point(494, 107);
             this.lb_class.Name = "lb_class";
             this.lb_class.Size = new System.Drawing.Size(100, 111);
             this.lb_class.TabIndex = 181;
@@ -8653,6 +8650,20 @@
             this.groupBox_quick.TabIndex = 227;
             this.groupBox_quick.TabStop = false;
             // 
+            // groupBox_sn1
+            // 
+            this.groupBox_sn1.Controls.Add(this.lb_sn_opal);
+            this.groupBox_sn1.Controls.Add(this.tb_sn_opal);
+            this.groupBox_sn1.Controls.Add(this.lb_main_mesg2);
+            this.groupBox_sn1.Controls.Add(this.tb_wait_sn_data);
+            this.groupBox_sn1.Controls.Add(this.cb_change_rank);
+            this.groupBox_sn1.Controls.Add(this.cb_air_ng);
+            this.groupBox_sn1.Location = new System.Drawing.Point(617, 193);
+            this.groupBox_sn1.Name = "groupBox_sn1";
+            this.groupBox_sn1.Size = new System.Drawing.Size(67, 69);
+            this.groupBox_sn1.TabIndex = 236;
+            this.groupBox_sn1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -8816,6 +8827,8 @@
             this.gb_ng_reason1.ResumeLayout(false);
             this.gb_ng_reason1.PerformLayout();
             this.groupBox_quick.ResumeLayout(false);
+            this.groupBox_sn1.ResumeLayout(false);
+            this.groupBox_sn1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -9487,7 +9500,7 @@
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button bt_zoom;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button15;
@@ -9496,6 +9509,7 @@
         private System.Windows.Forms.GroupBox groupBox_quick;
         private System.Windows.Forms.GroupBox groupBox_awb;
         private System.Windows.Forms.GroupBox groupBox_wpt_bpt;
+        private System.Windows.Forms.GroupBox groupBox_sn1;
     }
 }
 
