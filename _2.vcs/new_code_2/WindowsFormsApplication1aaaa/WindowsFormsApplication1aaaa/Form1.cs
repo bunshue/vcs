@@ -27,24 +27,6 @@ namespace WindowsFormsApplication1aaaa
             g = this.CreateGraphics();  //這個視窗，就是畫布, 直接畫在Form上
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //二、自行繪製一張圖，並另存在硬碟上
-            Bitmap bmp = new Bitmap(240, 320);
-            //new出一個bitmap，大小為240*320
-
-            Graphics g = Graphics.FromImage(bmp);
-            //將Graphics g畫布 畫在bmp上
-
-            Brush bb = new SolidBrush(Color.Pink);
-            g.FillRectangle(bb, 0, 0, 240, 320);
-            bb = new SolidBrush(Color.Orange);
-            g.FillEllipse(bb, 20, 20, 100, 100);
-
-            //g.DrawImage(bmp, 50, 50);   //將bmp畫在g畫布中
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             //轉移中

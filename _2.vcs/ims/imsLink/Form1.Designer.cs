@@ -161,6 +161,31 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.lb_yuv_y2 = new System.Windows.Forms.Label();
+            this.groupBox_awb2 = new System.Windows.Forms.GroupBox();
+            this.groupBox_brightness = new System.Windows.Forms.GroupBox();
+            this.rb_brightness_color_2 = new System.Windows.Forms.RadioButton();
+            this.rb_brightness_color_1 = new System.Windows.Forms.RadioButton();
+            this.numericUpDown_find_brightness_h = new System.Windows.Forms.NumericUpDown();
+            this.bt_show_brightness = new System.Windows.Forms.Button();
+            this.numericUpDown_find_brightness_l = new System.Windows.Forms.NumericUpDown();
+            this.bt_find_brightness = new System.Windows.Forms.Button();
+            this.lb_th_h = new System.Windows.Forms.Label();
+            this.lb_th_l = new System.Windows.Forms.Label();
+            this.cb_show_progress = new System.Windows.Forms.CheckBox();
+            this.groupBox_temperature = new System.Windows.Forms.GroupBox();
+            this.numericUpDown_TG_B = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_TG_R = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_TG_G = new System.Windows.Forms.NumericUpDown();
+            this.comboBox_temperature = new System.Windows.Forms.ComboBox();
+            this.lb_class = new System.Windows.Forms.Label();
+            this.groupBox_sn1 = new System.Windows.Forms.GroupBox();
+            this.lb_sn_opal = new System.Windows.Forms.Label();
+            this.tb_sn_opal = new System.Windows.Forms.TextBox();
+            this.lb_main_mesg2 = new System.Windows.Forms.Label();
+            this.tb_wait_sn_data = new System.Windows.Forms.TextBox();
+            this.cb_change_rank = new System.Windows.Forms.CheckBox();
+            this.cb_air_ng = new System.Windows.Forms.CheckBox();
             this.bt_script_cancel = new System.Windows.Forms.Button();
             this.bt_script_save = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -303,7 +328,6 @@
             this.rb_metering_2 = new System.Windows.Forms.RadioButton();
             this.rb_metering_3 = new System.Windows.Forms.RadioButton();
             this.rb_metering_1 = new System.Windows.Forms.RadioButton();
-            this.cb_change_rank = new System.Windows.Forms.CheckBox();
             this.groupBox_register = new System.Windows.Forms.GroupBox();
             this.bt_manual_mode = new System.Windows.Forms.Button();
             this.bt_write_m = new System.Windows.Forms.Button();
@@ -314,7 +338,6 @@
             this.tb_2m = new System.Windows.Forms.TextBox();
             this.tb_1m = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
-            this.cb_air_ng = new System.Windows.Forms.CheckBox();
             this.cb_Gamma = new System.Windows.Forms.CheckBox();
             this.cb_Contrast_Brightness_Gamma = new System.Windows.Forms.CheckBox();
             this.lb_data_camera_sign = new System.Windows.Forms.Label();
@@ -383,21 +406,7 @@
             this.button71 = new System.Windows.Forms.Button();
             this.lb_auto_awb_cnt = new System.Windows.Forms.Label();
             this.cb_auto_search = new System.Windows.Forms.CheckBox();
-            this.lb_yuv_y2 = new System.Windows.Forms.Label();
-            this.bt_show_brightness = new System.Windows.Forms.Button();
-            this.lb_th_l = new System.Windows.Forms.Label();
-            this.lb_th_h = new System.Windows.Forms.Label();
-            this.numericUpDown_find_brightness_l = new System.Windows.Forms.NumericUpDown();
-            this.cb_show_progress = new System.Windows.Forms.CheckBox();
-            this.bt_find_brightness = new System.Windows.Forms.Button();
-            this.numericUpDown_find_brightness_h = new System.Windows.Forms.NumericUpDown();
             this.bt_awb_break = new System.Windows.Forms.Button();
-            this.tb_wait_sn_data = new System.Windows.Forms.TextBox();
-            this.lb_main_mesg2 = new System.Windows.Forms.Label();
-            this.bt_save_img = new System.Windows.Forms.Button();
-            this.bt_clear_serial = new System.Windows.Forms.Button();
-            this.lb_sn_opal = new System.Windows.Forms.Label();
-            this.tb_sn_opal = new System.Windows.Forms.TextBox();
             this.bt_cancel = new System.Windows.Forms.Button();
             this.tb_awb_mesg = new System.Windows.Forms.TextBox();
             this.lb_awb_time = new System.Windows.Forms.Label();
@@ -405,15 +414,10 @@
             this.lb_note2 = new System.Windows.Forms.Label();
             this.lb_note1 = new System.Windows.Forms.Label();
             this.comboBox_webcam = new System.Windows.Forms.ComboBox();
-            this.comboBox_temperature = new System.Windows.Forms.ComboBox();
-            this.numericUpDown_TG_B = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_TG_G = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_TG_R = new System.Windows.Forms.NumericUpDown();
             this.bt_awb_test = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.progressBar_awb = new System.Windows.Forms.ProgressBar();
-            this.lb_class = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tp_Product = new System.Windows.Forms.TabPage();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.lb_main_mesg5 = new System.Windows.Forms.Label();
@@ -688,9 +692,6 @@
             this.timer_stage1 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage9 = new System.Windows.Forms.Timer(this.components);
             this.timer_stage1c = new System.Windows.Forms.Timer(this.components);
-            this.groupBox_brightness = new System.Windows.Forms.GroupBox();
-            this.rb_brightness_color_2 = new System.Windows.Forms.RadioButton();
-            this.rb_brightness_color_1 = new System.Windows.Forms.RadioButton();
             this.bt_save_program_picture = new System.Windows.Forms.Button();
             this.gb_ng_reason1 = new System.Windows.Forms.GroupBox();
             this.lb_ng_reason = new System.Windows.Forms.Label();
@@ -703,7 +704,6 @@
             this.bt_restore_camera_setup = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
-            this.groupBox_sn1 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -719,6 +719,15 @@
             this.tp_Serial_Auto.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            this.groupBox_awb2.SuspendLayout();
+            this.groupBox_brightness.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_l)).BeginInit();
+            this.groupBox_temperature.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).BeginInit();
+            this.groupBox_sn1.SuspendLayout();
             this.groupBox_wpt_bpt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_wpt)).BeginInit();
@@ -765,11 +774,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Contrast3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_l)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tp_Product.SuspendLayout();
@@ -803,10 +807,8 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
-            this.groupBox_brightness.SuspendLayout();
             this.gb_ng_reason1.SuspendLayout();
             this.groupBox_quick.SuspendLayout();
-            this.groupBox_sn1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -2247,6 +2249,9 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.lb_yuv_y2);
+            this.tp_USB.Controls.Add(this.groupBox_awb2);
+            this.tp_USB.Controls.Add(this.groupBox_temperature);
             this.tp_USB.Controls.Add(this.lb_class);
             this.tp_USB.Controls.Add(this.groupBox_sn1);
             this.tp_USB.Controls.Add(this.bt_script_cancel);
@@ -2271,17 +2276,7 @@
             this.tp_USB.Controls.Add(this.gb_contrast_brightness3);
             this.tp_USB.Controls.Add(this.lb_auto_awb_cnt);
             this.tp_USB.Controls.Add(this.cb_auto_search);
-            this.tp_USB.Controls.Add(this.lb_yuv_y2);
-            this.tp_USB.Controls.Add(this.bt_show_brightness);
-            this.tp_USB.Controls.Add(this.lb_th_l);
-            this.tp_USB.Controls.Add(this.lb_th_h);
-            this.tp_USB.Controls.Add(this.numericUpDown_find_brightness_l);
-            this.tp_USB.Controls.Add(this.cb_show_progress);
-            this.tp_USB.Controls.Add(this.bt_find_brightness);
-            this.tp_USB.Controls.Add(this.numericUpDown_find_brightness_h);
             this.tp_USB.Controls.Add(this.bt_awb_break);
-            this.tp_USB.Controls.Add(this.bt_save_img);
-            this.tp_USB.Controls.Add(this.bt_clear_serial);
             this.tp_USB.Controls.Add(this.bt_cancel);
             this.tp_USB.Controls.Add(this.tb_awb_mesg);
             this.tp_USB.Controls.Add(this.lb_awb_time);
@@ -2289,20 +2284,371 @@
             this.tp_USB.Controls.Add(this.lb_note2);
             this.tp_USB.Controls.Add(this.lb_note1);
             this.tp_USB.Controls.Add(this.comboBox_webcam);
-            this.tp_USB.Controls.Add(this.comboBox_temperature);
-            this.tp_USB.Controls.Add(this.numericUpDown_TG_B);
-            this.tp_USB.Controls.Add(this.numericUpDown_TG_G);
-            this.tp_USB.Controls.Add(this.numericUpDown_TG_R);
             this.tp_USB.Controls.Add(this.bt_awb_test);
             this.tp_USB.Controls.Add(this.pictureBox2);
-            this.tp_USB.Controls.Add(this.pictureBox1);
             this.tp_USB.Controls.Add(this.progressBar_awb);
+            this.tp_USB.Controls.Add(this.pictureBox1);
             this.tp_USB.Location = new System.Drawing.Point(4, 26);
             this.tp_USB.Name = "tp_USB";
             this.tp_USB.Size = new System.Drawing.Size(940, 586);
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // lb_yuv_y2
+            // 
+            this.lb_yuv_y2.AutoSize = true;
+            this.lb_yuv_y2.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_y2.ForeColor = System.Drawing.Color.Gold;
+            this.lb_yuv_y2.Location = new System.Drawing.Point(67, 179);
+            this.lb_yuv_y2.Name = "lb_yuv_y2";
+            this.lb_yuv_y2.Size = new System.Drawing.Size(39, 43);
+            this.lb_yuv_y2.TabIndex = 202;
+            this.lb_yuv_y2.Text = "Y";
+            // 
+            // groupBox_awb2
+            // 
+            this.groupBox_awb2.Controls.Add(this.groupBox_brightness);
+            this.groupBox_awb2.Controls.Add(this.numericUpDown_find_brightness_h);
+            this.groupBox_awb2.Controls.Add(this.bt_show_brightness);
+            this.groupBox_awb2.Controls.Add(this.numericUpDown_find_brightness_l);
+            this.groupBox_awb2.Controls.Add(this.bt_find_brightness);
+            this.groupBox_awb2.Controls.Add(this.lb_th_h);
+            this.groupBox_awb2.Controls.Add(this.lb_th_l);
+            this.groupBox_awb2.Controls.Add(this.cb_show_progress);
+            this.groupBox_awb2.Location = new System.Drawing.Point(787, 233);
+            this.groupBox_awb2.Name = "groupBox_awb2";
+            this.groupBox_awb2.Size = new System.Drawing.Size(61, 66);
+            this.groupBox_awb2.TabIndex = 237;
+            this.groupBox_awb2.TabStop = false;
+            // 
+            // groupBox_brightness
+            // 
+            this.groupBox_brightness.Controls.Add(this.rb_brightness_color_2);
+            this.groupBox_brightness.Controls.Add(this.rb_brightness_color_1);
+            this.groupBox_brightness.Location = new System.Drawing.Point(13, 14);
+            this.groupBox_brightness.Name = "groupBox_brightness";
+            this.groupBox_brightness.Size = new System.Drawing.Size(67, 69);
+            this.groupBox_brightness.TabIndex = 138;
+            this.groupBox_brightness.TabStop = false;
+            this.groupBox_brightness.Text = "亮度";
+            // 
+            // rb_brightness_color_2
+            // 
+            this.rb_brightness_color_2.AutoSize = true;
+            this.rb_brightness_color_2.Checked = true;
+            this.rb_brightness_color_2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_brightness_color_2.Location = new System.Drawing.Point(6, 39);
+            this.rb_brightness_color_2.Name = "rb_brightness_color_2";
+            this.rb_brightness_color_2.Size = new System.Drawing.Size(51, 17);
+            this.rb_brightness_color_2.TabIndex = 226;
+            this.rb_brightness_color_2.TabStop = true;
+            this.rb_brightness_color_2.Text = "黃光";
+            this.rb_brightness_color_2.UseVisualStyleBackColor = true;
+            // 
+            // rb_brightness_color_1
+            // 
+            this.rb_brightness_color_1.AutoSize = true;
+            this.rb_brightness_color_1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_brightness_color_1.Location = new System.Drawing.Point(6, 16);
+            this.rb_brightness_color_1.Name = "rb_brightness_color_1";
+            this.rb_brightness_color_1.Size = new System.Drawing.Size(51, 17);
+            this.rb_brightness_color_1.TabIndex = 226;
+            this.rb_brightness_color_1.Text = "白光";
+            this.rb_brightness_color_1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown_find_brightness_h
+            // 
+            this.numericUpDown_find_brightness_h.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_find_brightness_h.Location = new System.Drawing.Point(42, 181);
+            this.numericUpDown_find_brightness_h.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness_h.Name = "numericUpDown_find_brightness_h";
+            this.numericUpDown_find_brightness_h.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_find_brightness_h.TabIndex = 190;
+            this.numericUpDown_find_brightness_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_find_brightness_h.Value = new decimal(new int[] {
+            190,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness_h.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_h_ValueChanged);
+            // 
+            // bt_show_brightness
+            // 
+            this.bt_show_brightness.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_show_brightness.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_show_brightness.ForeColor = System.Drawing.Color.Black;
+            this.bt_show_brightness.Location = new System.Drawing.Point(13, 123);
+            this.bt_show_brightness.Name = "bt_show_brightness";
+            this.bt_show_brightness.Size = new System.Drawing.Size(80, 32);
+            this.bt_show_brightness.TabIndex = 200;
+            this.bt_show_brightness.Text = "顯示過亮";
+            this.bt_show_brightness.UseVisualStyleBackColor = false;
+            this.bt_show_brightness.Click += new System.EventHandler(this.bt_show_brightness_Click);
+            // 
+            // numericUpDown_find_brightness_l
+            // 
+            this.numericUpDown_find_brightness_l.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_find_brightness_l.Location = new System.Drawing.Point(42, 217);
+            this.numericUpDown_find_brightness_l.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness_l.Name = "numericUpDown_find_brightness_l";
+            this.numericUpDown_find_brightness_l.Size = new System.Drawing.Size(64, 32);
+            this.numericUpDown_find_brightness_l.TabIndex = 197;
+            this.numericUpDown_find_brightness_l.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_find_brightness_l.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDown_find_brightness_l.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_l_ValueChanged);
+            // 
+            // bt_find_brightness
+            // 
+            this.bt_find_brightness.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_find_brightness.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_find_brightness.ForeColor = System.Drawing.Color.Black;
+            this.bt_find_brightness.Location = new System.Drawing.Point(13, 86);
+            this.bt_find_brightness.Name = "bt_find_brightness";
+            this.bt_find_brightness.Size = new System.Drawing.Size(80, 32);
+            this.bt_find_brightness.TabIndex = 191;
+            this.bt_find_brightness.Text = "找過亮";
+            this.bt_find_brightness.UseVisualStyleBackColor = false;
+            this.bt_find_brightness.Click += new System.EventHandler(this.bt_find_brightness2_Click);
+            // 
+            // lb_th_h
+            // 
+            this.lb_th_h.AutoSize = true;
+            this.lb_th_h.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_th_h.Location = new System.Drawing.Point(2, 186);
+            this.lb_th_h.Name = "lb_th_h";
+            this.lb_th_h.Size = new System.Drawing.Size(43, 19);
+            this.lb_th_h.TabIndex = 198;
+            this.lb_th_h.Text = "上限";
+            // 
+            // lb_th_l
+            // 
+            this.lb_th_l.AutoSize = true;
+            this.lb_th_l.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_th_l.Location = new System.Drawing.Point(2, 220);
+            this.lb_th_l.Name = "lb_th_l";
+            this.lb_th_l.Size = new System.Drawing.Size(43, 19);
+            this.lb_th_l.TabIndex = 199;
+            this.lb_th_l.Text = "下限";
+            // 
+            // cb_show_progress
+            // 
+            this.cb_show_progress.AutoSize = true;
+            this.cb_show_progress.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_progress.Location = new System.Drawing.Point(13, 159);
+            this.cb_show_progress.Name = "cb_show_progress";
+            this.cb_show_progress.Size = new System.Drawing.Size(91, 20);
+            this.cb_show_progress.TabIndex = 193;
+            this.cb_show_progress.Text = "顯示進度";
+            this.cb_show_progress.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_temperature
+            // 
+            this.groupBox_temperature.Controls.Add(this.numericUpDown_TG_B);
+            this.groupBox_temperature.Controls.Add(this.numericUpDown_TG_R);
+            this.groupBox_temperature.Controls.Add(this.numericUpDown_TG_G);
+            this.groupBox_temperature.Controls.Add(this.comboBox_temperature);
+            this.groupBox_temperature.Location = new System.Drawing.Point(703, 219);
+            this.groupBox_temperature.Name = "groupBox_temperature";
+            this.groupBox_temperature.Size = new System.Drawing.Size(69, 65);
+            this.groupBox_temperature.TabIndex = 234;
+            this.groupBox_temperature.TabStop = false;
+            // 
+            // numericUpDown_TG_B
+            // 
+            this.numericUpDown_TG_B.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_TG_B.ForeColor = System.Drawing.Color.Blue;
+            this.numericUpDown_TG_B.Location = new System.Drawing.Point(14, 184);
+            this.numericUpDown_TG_B.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_TG_B.Name = "numericUpDown_TG_B";
+            this.numericUpDown_TG_B.Size = new System.Drawing.Size(100, 53);
+            this.numericUpDown_TG_B.TabIndex = 112;
+            this.numericUpDown_TG_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_TG_B.ValueChanged += new System.EventHandler(this.numericUpDown_TG_B_ValueChanged);
+            // 
+            // numericUpDown_TG_R
+            // 
+            this.numericUpDown_TG_R.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_TG_R.ForeColor = System.Drawing.Color.Red;
+            this.numericUpDown_TG_R.Location = new System.Drawing.Point(14, 66);
+            this.numericUpDown_TG_R.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_TG_R.Name = "numericUpDown_TG_R";
+            this.numericUpDown_TG_R.Size = new System.Drawing.Size(100, 53);
+            this.numericUpDown_TG_R.TabIndex = 110;
+            this.numericUpDown_TG_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_TG_R.ValueChanged += new System.EventHandler(this.numericUpDown_TG_R_ValueChanged);
+            // 
+            // numericUpDown_TG_G
+            // 
+            this.numericUpDown_TG_G.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown_TG_G.ForeColor = System.Drawing.Color.Green;
+            this.numericUpDown_TG_G.Location = new System.Drawing.Point(14, 125);
+            this.numericUpDown_TG_G.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown_TG_G.Name = "numericUpDown_TG_G";
+            this.numericUpDown_TG_G.Size = new System.Drawing.Size(100, 53);
+            this.numericUpDown_TG_G.TabIndex = 111;
+            this.numericUpDown_TG_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown_TG_G.ValueChanged += new System.EventHandler(this.numericUpDown_TG_G_ValueChanged);
+            // 
+            // comboBox_temperature
+            // 
+            this.comboBox_temperature.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_temperature.FormattingEnabled = true;
+            this.comboBox_temperature.Items.AddRange(new object[] {
+            "1000K",
+            "1400K",
+            "1800K",
+            "2200K",
+            "2600K",
+            "3000K",
+            "3400K",
+            "3800K",
+            "4200K",
+            "4600K",
+            "5500K",
+            "5700K",
+            "6500K",
+            "6700K",
+            "6900K",
+            "7100K",
+            "7300K",
+            "7500K",
+            "7700K",
+            "7900K",
+            "8100K",
+            "8300K",
+            "8500K",
+            "8700K",
+            "8900K",
+            "9100K",
+            "9300K",
+            "9500K",
+            "10000K",
+            "7700K m"});
+            this.comboBox_temperature.Location = new System.Drawing.Point(14, 25);
+            this.comboBox_temperature.Name = "comboBox_temperature";
+            this.comboBox_temperature.Size = new System.Drawing.Size(100, 33);
+            this.comboBox_temperature.TabIndex = 113;
+            this.comboBox_temperature.Text = "6500K";
+            this.comboBox_temperature.DropDown += new System.EventHandler(this.comboBox_temperature_DropDown);
+            this.comboBox_temperature.SelectedIndexChanged += new System.EventHandler(this.comboBox_temperature_SelectedIndexChanged);
+            this.comboBox_temperature.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.comboBox_temperature_PreviewKeyDown);
+            // 
+            // lb_class
+            // 
+            this.lb_class.AutoSize = true;
+            this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_class.ForeColor = System.Drawing.Color.Red;
+            this.lb_class.Location = new System.Drawing.Point(6, 150);
+            this.lb_class.Name = "lb_class";
+            this.lb_class.Size = new System.Drawing.Size(100, 111);
+            this.lb_class.TabIndex = 181;
+            this.lb_class.Text = "c";
+            // 
+            // groupBox_sn1
+            // 
+            this.groupBox_sn1.Controls.Add(this.lb_sn_opal);
+            this.groupBox_sn1.Controls.Add(this.tb_sn_opal);
+            this.groupBox_sn1.Controls.Add(this.lb_main_mesg2);
+            this.groupBox_sn1.Controls.Add(this.tb_wait_sn_data);
+            this.groupBox_sn1.Controls.Add(this.cb_change_rank);
+            this.groupBox_sn1.Controls.Add(this.cb_air_ng);
+            this.groupBox_sn1.Location = new System.Drawing.Point(614, 190);
+            this.groupBox_sn1.Name = "groupBox_sn1";
+            this.groupBox_sn1.Size = new System.Drawing.Size(70, 75);
+            this.groupBox_sn1.TabIndex = 236;
+            this.groupBox_sn1.TabStop = false;
+            // 
+            // lb_sn_opal
+            // 
+            this.lb_sn_opal.AutoSize = true;
+            this.lb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_opal.Location = new System.Drawing.Point(5, 25);
+            this.lb_sn_opal.Name = "lb_sn_opal";
+            this.lb_sn_opal.Size = new System.Drawing.Size(106, 24);
+            this.lb_sn_opal.TabIndex = 166;
+            this.lb_sn_opal.Text = "Opal序號";
+            // 
+            // tb_sn_opal
+            // 
+            this.tb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sn_opal.Location = new System.Drawing.Point(5, 50);
+            this.tb_sn_opal.Multiline = true;
+            this.tb_sn_opal.Name = "tb_sn_opal";
+            this.tb_sn_opal.Size = new System.Drawing.Size(125, 22);
+            this.tb_sn_opal.TabIndex = 165;
+            this.tb_sn_opal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_sn_opal.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_sn_opal_MouseClick);
+            this.tb_sn_opal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sn_opal_KeyPress);
+            // 
+            // lb_main_mesg2
+            // 
+            this.lb_main_mesg2.AutoSize = true;
+            this.lb_main_mesg2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg2.Location = new System.Drawing.Point(5, 75);
+            this.lb_main_mesg2.Name = "lb_main_mesg2";
+            this.lb_main_mesg2.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg2.TabIndex = 136;
+            this.lb_main_mesg2.Text = "mesg2";
+            // 
+            // tb_wait_sn_data
+            // 
+            this.tb_wait_sn_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wait_sn_data.Location = new System.Drawing.Point(5, 100);
+            this.tb_wait_sn_data.Multiline = true;
+            this.tb_wait_sn_data.Name = "tb_wait_sn_data";
+            this.tb_wait_sn_data.Size = new System.Drawing.Size(125, 22);
+            this.tb_wait_sn_data.TabIndex = 183;
+            this.tb_wait_sn_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cb_change_rank
+            // 
+            this.cb_change_rank.AutoSize = true;
+            this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
+            this.cb_change_rank.Location = new System.Drawing.Point(5, 125);
+            this.cb_change_rank.Name = "cb_change_rank";
+            this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
+            this.cb_change_rank.TabIndex = 232;
+            this.cb_change_rank.Text = "改判";
+            this.cb_change_rank.UseVisualStyleBackColor = true;
+            // 
+            // cb_air_ng
+            // 
+            this.cb_air_ng.AutoSize = true;
+            this.cb_air_ng.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_air_ng.ForeColor = System.Drawing.Color.Red;
+            this.cb_air_ng.Location = new System.Drawing.Point(5, 150);
+            this.cb_air_ng.Name = "cb_air_ng";
+            this.cb_air_ng.Size = new System.Drawing.Size(113, 28);
+            this.cb_air_ng.TabIndex = 225;
+            this.cb_air_ng.Text = "氣密NG";
+            this.cb_air_ng.UseVisualStyleBackColor = true;
             // 
             // bt_script_cancel
             // 
@@ -2362,9 +2708,9 @@
             this.groupBox_wpt_bpt.Controls.Add(this.numericUpDown_sharpness);
             this.groupBox_wpt_bpt.Controls.Add(this.lb_wpt);
             this.groupBox_wpt_bpt.Controls.Add(this.lb_bpt);
-            this.groupBox_wpt_bpt.Location = new System.Drawing.Point(703, 148);
+            this.groupBox_wpt_bpt.Location = new System.Drawing.Point(158, 267);
             this.groupBox_wpt_bpt.Name = "groupBox_wpt_bpt";
-            this.groupBox_wpt_bpt.Size = new System.Drawing.Size(67, 65);
+            this.groupBox_wpt_bpt.Size = new System.Drawing.Size(65, 60);
             this.groupBox_wpt_bpt.TabIndex = 212;
             this.groupBox_wpt_bpt.TabStop = false;
             // 
@@ -2489,7 +2835,7 @@
             this.bt_ae_decrease.BackColor = System.Drawing.SystemColors.Control;
             this.bt_ae_decrease.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_ae_decrease.ForeColor = System.Drawing.Color.Black;
-            this.bt_ae_decrease.Location = new System.Drawing.Point(11, 90);
+            this.bt_ae_decrease.Location = new System.Drawing.Point(466, 71);
             this.bt_ae_decrease.Name = "bt_ae_decrease";
             this.bt_ae_decrease.Size = new System.Drawing.Size(64, 32);
             this.bt_ae_decrease.TabIndex = 169;
@@ -2500,11 +2846,11 @@
             // bt_save_data
             // 
             this.bt_save_data.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_save_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_save_data.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_save_data.ForeColor = System.Drawing.Color.Red;
-            this.bt_save_data.Location = new System.Drawing.Point(669, 85);
+            this.bt_save_data.Location = new System.Drawing.Point(669, 72);
             this.bt_save_data.Name = "bt_save_data";
-            this.bt_save_data.Size = new System.Drawing.Size(68, 40);
+            this.bt_save_data.Size = new System.Drawing.Size(64, 32);
             this.bt_save_data.TabIndex = 173;
             this.bt_save_data.Text = "儲存";
             this.bt_save_data.UseVisualStyleBackColor = false;
@@ -4155,18 +4501,6 @@
             this.rb_metering_1.Text = "AUTO";
             this.rb_metering_1.UseVisualStyleBackColor = true;
             // 
-            // cb_change_rank
-            // 
-            this.cb_change_rank.AutoSize = true;
-            this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
-            this.cb_change_rank.Location = new System.Drawing.Point(5, 125);
-            this.cb_change_rank.Name = "cb_change_rank";
-            this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
-            this.cb_change_rank.TabIndex = 232;
-            this.cb_change_rank.Text = "改判";
-            this.cb_change_rank.UseVisualStyleBackColor = true;
-            // 
             // groupBox_register
             // 
             this.groupBox_register.Controls.Add(this.bt_manual_mode);
@@ -4290,25 +4624,13 @@
             this.label64.TabIndex = 48;
             this.label64.Text = "0x                 0x                      0x                =";
             // 
-            // cb_air_ng
-            // 
-            this.cb_air_ng.AutoSize = true;
-            this.cb_air_ng.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_air_ng.ForeColor = System.Drawing.Color.Red;
-            this.cb_air_ng.Location = new System.Drawing.Point(5, 150);
-            this.cb_air_ng.Name = "cb_air_ng";
-            this.cb_air_ng.Size = new System.Drawing.Size(113, 28);
-            this.cb_air_ng.TabIndex = 225;
-            this.cb_air_ng.Text = "氣密NG";
-            this.cb_air_ng.UseVisualStyleBackColor = true;
-            // 
             // cb_Gamma
             // 
             this.cb_Gamma.AutoSize = true;
             this.cb_Gamma.Checked = true;
             this.cb_Gamma.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_Gamma.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_Gamma.Location = new System.Drawing.Point(125, 340);
+            this.cb_Gamma.Location = new System.Drawing.Point(401, 57);
             this.cb_Gamma.Name = "cb_Gamma";
             this.cb_Gamma.Size = new System.Drawing.Size(76, 20);
             this.cb_Gamma.TabIndex = 224;
@@ -4322,7 +4644,7 @@
             this.cb_Contrast_Brightness_Gamma.Checked = true;
             this.cb_Contrast_Brightness_Gamma.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_Contrast_Brightness_Gamma.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_Contrast_Brightness_Gamma.Location = new System.Drawing.Point(13, 314);
+            this.cb_Contrast_Brightness_Gamma.Location = new System.Drawing.Point(193, 56);
             this.cb_Contrast_Brightness_Gamma.Name = "cb_Contrast_Brightness_Gamma";
             this.cb_Contrast_Brightness_Gamma.Size = new System.Drawing.Size(202, 20);
             this.cb_Contrast_Brightness_Gamma.TabIndex = 223;
@@ -4335,7 +4657,7 @@
             this.lb_data_camera_sign.AutoSize = true;
             this.lb_data_camera_sign.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_data_camera_sign.ForeColor = System.Drawing.Color.Gold;
-            this.lb_data_camera_sign.Location = new System.Drawing.Point(21, 106);
+            this.lb_data_camera_sign.Location = new System.Drawing.Point(83, 211);
             this.lb_data_camera_sign.Name = "lb_data_camera_sign";
             this.lb_data_camera_sign.Size = new System.Drawing.Size(39, 43);
             this.lb_data_camera_sign.TabIndex = 222;
@@ -4346,7 +4668,7 @@
             this.lb_data_camera_offset.AutoSize = true;
             this.lb_data_camera_offset.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_data_camera_offset.ForeColor = System.Drawing.Color.Gold;
-            this.lb_data_camera_offset.Location = new System.Drawing.Point(45, 106);
+            this.lb_data_camera_offset.Location = new System.Drawing.Point(107, 211);
             this.lb_data_camera_offset.Name = "lb_data_camera_offset";
             this.lb_data_camera_offset.Size = new System.Drawing.Size(39, 43);
             this.lb_data_camera_offset.TabIndex = 221;
@@ -4357,7 +4679,7 @@
             this.lb_data_camera_bright.AutoSize = true;
             this.lb_data_camera_bright.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_data_camera_bright.ForeColor = System.Drawing.Color.Gold;
-            this.lb_data_camera_bright.Location = new System.Drawing.Point(66, 106);
+            this.lb_data_camera_bright.Location = new System.Drawing.Point(128, 211);
             this.lb_data_camera_bright.Name = "lb_data_camera_bright";
             this.lb_data_camera_bright.Size = new System.Drawing.Size(39, 43);
             this.lb_data_camera_bright.TabIndex = 220;
@@ -4368,7 +4690,7 @@
             this.lb_data_camera_gain.AutoSize = true;
             this.lb_data_camera_gain.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_data_camera_gain.ForeColor = System.Drawing.Color.Gold;
-            this.lb_data_camera_gain.Location = new System.Drawing.Point(3, 106);
+            this.lb_data_camera_gain.Location = new System.Drawing.Point(65, 211);
             this.lb_data_camera_gain.Name = "lb_data_camera_gain";
             this.lb_data_camera_gain.Size = new System.Drawing.Size(39, 43);
             this.lb_data_camera_gain.TabIndex = 219;
@@ -5127,7 +5449,7 @@
             this.lb_auto_awb_cnt.AutoSize = true;
             this.lb_auto_awb_cnt.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_auto_awb_cnt.ForeColor = System.Drawing.Color.Red;
-            this.lb_auto_awb_cnt.Location = new System.Drawing.Point(101, 115);
+            this.lb_auto_awb_cnt.Location = new System.Drawing.Point(163, 220);
             this.lb_auto_awb_cnt.Name = "lb_auto_awb_cnt";
             this.lb_auto_awb_cnt.Size = new System.Drawing.Size(22, 24);
             this.lb_auto_awb_cnt.TabIndex = 204;
@@ -5137,127 +5459,19 @@
             // 
             this.cb_auto_search.AutoSize = true;
             this.cb_auto_search.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_auto_search.Location = new System.Drawing.Point(291, 49);
+            this.cb_auto_search.Location = new System.Drawing.Point(167, 74);
             this.cb_auto_search.Name = "cb_auto_search";
             this.cb_auto_search.Size = new System.Drawing.Size(91, 20);
             this.cb_auto_search.TabIndex = 203;
             this.cb_auto_search.Text = "自動搜尋";
             this.cb_auto_search.UseVisualStyleBackColor = true;
             // 
-            // lb_yuv_y2
-            // 
-            this.lb_yuv_y2.AutoSize = true;
-            this.lb_yuv_y2.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_yuv_y2.ForeColor = System.Drawing.Color.Gold;
-            this.lb_yuv_y2.Location = new System.Drawing.Point(5, 74);
-            this.lb_yuv_y2.Name = "lb_yuv_y2";
-            this.lb_yuv_y2.Size = new System.Drawing.Size(39, 43);
-            this.lb_yuv_y2.TabIndex = 202;
-            this.lb_yuv_y2.Text = "Y";
-            // 
-            // bt_show_brightness
-            // 
-            this.bt_show_brightness.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_show_brightness.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_show_brightness.ForeColor = System.Drawing.Color.Black;
-            this.bt_show_brightness.Location = new System.Drawing.Point(321, 264);
-            this.bt_show_brightness.Name = "bt_show_brightness";
-            this.bt_show_brightness.Size = new System.Drawing.Size(80, 32);
-            this.bt_show_brightness.TabIndex = 200;
-            this.bt_show_brightness.Text = "顯示過亮";
-            this.bt_show_brightness.UseVisualStyleBackColor = false;
-            this.bt_show_brightness.Click += new System.EventHandler(this.bt_show_brightness_Click);
-            // 
-            // lb_th_l
-            // 
-            this.lb_th_l.AutoSize = true;
-            this.lb_th_l.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_th_l.Location = new System.Drawing.Point(49, 558);
-            this.lb_th_l.Name = "lb_th_l";
-            this.lb_th_l.Size = new System.Drawing.Size(43, 19);
-            this.lb_th_l.TabIndex = 199;
-            this.lb_th_l.Text = "下限";
-            // 
-            // lb_th_h
-            // 
-            this.lb_th_h.AutoSize = true;
-            this.lb_th_h.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_th_h.Location = new System.Drawing.Point(9, 558);
-            this.lb_th_h.Name = "lb_th_h";
-            this.lb_th_h.Size = new System.Drawing.Size(43, 19);
-            this.lb_th_h.TabIndex = 198;
-            this.lb_th_h.Text = "上限";
-            // 
-            // numericUpDown_find_brightness_l
-            // 
-            this.numericUpDown_find_brightness_l.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_find_brightness_l.Location = new System.Drawing.Point(251, 117);
-            this.numericUpDown_find_brightness_l.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_find_brightness_l.Name = "numericUpDown_find_brightness_l";
-            this.numericUpDown_find_brightness_l.Size = new System.Drawing.Size(64, 32);
-            this.numericUpDown_find_brightness_l.TabIndex = 197;
-            this.numericUpDown_find_brightness_l.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_find_brightness_l.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDown_find_brightness_l.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_l_ValueChanged);
-            // 
-            // cb_show_progress
-            // 
-            this.cb_show_progress.AutoSize = true;
-            this.cb_show_progress.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_show_progress.Location = new System.Drawing.Point(196, 49);
-            this.cb_show_progress.Name = "cb_show_progress";
-            this.cb_show_progress.Size = new System.Drawing.Size(91, 20);
-            this.cb_show_progress.TabIndex = 193;
-            this.cb_show_progress.Text = "顯示進度";
-            this.cb_show_progress.UseVisualStyleBackColor = true;
-            // 
-            // bt_find_brightness
-            // 
-            this.bt_find_brightness.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_find_brightness.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_find_brightness.ForeColor = System.Drawing.Color.Black;
-            this.bt_find_brightness.Location = new System.Drawing.Point(321, 221);
-            this.bt_find_brightness.Name = "bt_find_brightness";
-            this.bt_find_brightness.Size = new System.Drawing.Size(80, 32);
-            this.bt_find_brightness.TabIndex = 191;
-            this.bt_find_brightness.Text = "找過亮";
-            this.bt_find_brightness.UseVisualStyleBackColor = false;
-            this.bt_find_brightness.Click += new System.EventHandler(this.bt_find_brightness2_Click);
-            // 
-            // numericUpDown_find_brightness_h
-            // 
-            this.numericUpDown_find_brightness_h.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_find_brightness_h.Location = new System.Drawing.Point(253, 73);
-            this.numericUpDown_find_brightness_h.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_find_brightness_h.Name = "numericUpDown_find_brightness_h";
-            this.numericUpDown_find_brightness_h.Size = new System.Drawing.Size(64, 32);
-            this.numericUpDown_find_brightness_h.TabIndex = 190;
-            this.numericUpDown_find_brightness_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_find_brightness_h.Value = new decimal(new int[] {
-            190,
-            0,
-            0,
-            0});
-            this.numericUpDown_find_brightness_h.ValueChanged += new System.EventHandler(this.numericUpDown_find_brightness_h_ValueChanged);
-            // 
             // bt_awb_break
             // 
             this.bt_awb_break.BackColor = System.Drawing.SystemColors.Control;
             this.bt_awb_break.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_awb_break.ForeColor = System.Drawing.Color.Red;
-            this.bt_awb_break.Location = new System.Drawing.Point(183, 73);
+            this.bt_awb_break.Location = new System.Drawing.Point(348, 168);
             this.bt_awb_break.Name = "bt_awb_break";
             this.bt_awb_break.Size = new System.Drawing.Size(64, 32);
             this.bt_awb_break.TabIndex = 187;
@@ -5265,81 +5479,12 @@
             this.bt_awb_break.UseVisualStyleBackColor = false;
             this.bt_awb_break.Click += new System.EventHandler(this.bt_awb_break_Click);
             // 
-            // tb_wait_sn_data
-            // 
-            this.tb_wait_sn_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_sn_data.Location = new System.Drawing.Point(5, 100);
-            this.tb_wait_sn_data.Multiline = true;
-            this.tb_wait_sn_data.Name = "tb_wait_sn_data";
-            this.tb_wait_sn_data.Size = new System.Drawing.Size(125, 22);
-            this.tb_wait_sn_data.TabIndex = 183;
-            this.tb_wait_sn_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lb_main_mesg2
-            // 
-            this.lb_main_mesg2.AutoSize = true;
-            this.lb_main_mesg2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(5, 75);
-            this.lb_main_mesg2.Name = "lb_main_mesg2";
-            this.lb_main_mesg2.Size = new System.Drawing.Size(78, 24);
-            this.lb_main_mesg2.TabIndex = 136;
-            this.lb_main_mesg2.Text = "mesg2";
-            // 
-            // bt_save_img
-            // 
-            this.bt_save_img.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_save_img.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_img.ForeColor = System.Drawing.Color.Blue;
-            this.bt_save_img.Location = new System.Drawing.Point(10, 478);
-            this.bt_save_img.Name = "bt_save_img";
-            this.bt_save_img.Size = new System.Drawing.Size(58, 32);
-            this.bt_save_img.TabIndex = 168;
-            this.bt_save_img.Text = "存檔";
-            this.bt_save_img.UseVisualStyleBackColor = false;
-            this.bt_save_img.Click += new System.EventHandler(this.bt_save_img_Click);
-            // 
-            // bt_clear_serial
-            // 
-            this.bt_clear_serial.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_clear_serial.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear_serial.ForeColor = System.Drawing.Color.Blue;
-            this.bt_clear_serial.Location = new System.Drawing.Point(74, 477);
-            this.bt_clear_serial.Name = "bt_clear_serial";
-            this.bt_clear_serial.Size = new System.Drawing.Size(58, 32);
-            this.bt_clear_serial.TabIndex = 167;
-            this.bt_clear_serial.Text = "清除";
-            this.bt_clear_serial.UseVisualStyleBackColor = false;
-            this.bt_clear_serial.Click += new System.EventHandler(this.bt_clear_serial_Click);
-            // 
-            // lb_sn_opal
-            // 
-            this.lb_sn_opal.AutoSize = true;
-            this.lb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_opal.Location = new System.Drawing.Point(5, 25);
-            this.lb_sn_opal.Name = "lb_sn_opal";
-            this.lb_sn_opal.Size = new System.Drawing.Size(106, 24);
-            this.lb_sn_opal.TabIndex = 166;
-            this.lb_sn_opal.Text = "Opal序號";
-            // 
-            // tb_sn_opal
-            // 
-            this.tb_sn_opal.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_sn_opal.Location = new System.Drawing.Point(5, 50);
-            this.tb_sn_opal.Multiline = true;
-            this.tb_sn_opal.Name = "tb_sn_opal";
-            this.tb_sn_opal.Size = new System.Drawing.Size(125, 22);
-            this.tb_sn_opal.TabIndex = 165;
-            this.tb_sn_opal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_sn_opal.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_sn_opal_MouseClick);
-            this.tb_sn_opal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sn_opal_KeyPress);
-            // 
             // bt_cancel
             // 
             this.bt_cancel.BackColor = System.Drawing.SystemColors.Control;
             this.bt_cancel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_cancel.ForeColor = System.Drawing.Color.Black;
-            this.bt_cancel.Location = new System.Drawing.Point(183, 120);
+            this.bt_cancel.Location = new System.Drawing.Point(348, 215);
             this.bt_cancel.Name = "bt_cancel";
             this.bt_cancel.Size = new System.Drawing.Size(64, 32);
             this.bt_cancel.TabIndex = 151;
@@ -5351,7 +5496,7 @@
             // 
             this.tb_awb_mesg.Font = new System.Drawing.Font("標楷體", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_awb_mesg.ForeColor = System.Drawing.Color.Red;
-            this.tb_awb_mesg.Location = new System.Drawing.Point(149, 463);
+            this.tb_awb_mesg.Location = new System.Drawing.Point(11, 136);
             this.tb_awb_mesg.Name = "tb_awb_mesg";
             this.tb_awb_mesg.Size = new System.Drawing.Size(181, 46);
             this.tb_awb_mesg.TabIndex = 148;
@@ -5362,7 +5507,7 @@
             this.lb_awb_time.AutoSize = true;
             this.lb_awb_time.BackColor = System.Drawing.Color.Transparent;
             this.lb_awb_time.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_awb_time.Location = new System.Drawing.Point(94, 559);
+            this.lb_awb_time.Location = new System.Drawing.Point(92, 110);
             this.lb_awb_time.Name = "lb_awb_time";
             this.lb_awb_time.Size = new System.Drawing.Size(63, 15);
             this.lb_awb_time.TabIndex = 146;
@@ -5405,110 +5550,18 @@
             // 
             this.comboBox_webcam.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_webcam.FormattingEnabled = true;
-            this.comboBox_webcam.Location = new System.Drawing.Point(11, 531);
+            this.comboBox_webcam.Location = new System.Drawing.Point(186, 29);
             this.comboBox_webcam.Name = "comboBox_webcam";
             this.comboBox_webcam.Size = new System.Drawing.Size(436, 27);
             this.comboBox_webcam.TabIndex = 131;
             this.comboBox_webcam.SelectedIndexChanged += new System.EventHandler(this.comboBox_webcam_SelectedIndexChanged);
-            // 
-            // comboBox_temperature
-            // 
-            this.comboBox_temperature.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_temperature.FormattingEnabled = true;
-            this.comboBox_temperature.Items.AddRange(new object[] {
-            "1000K",
-            "1400K",
-            "1800K",
-            "2200K",
-            "2600K",
-            "3000K",
-            "3400K",
-            "3800K",
-            "4200K",
-            "4600K",
-            "5500K",
-            "5700K",
-            "6500K",
-            "6700K",
-            "6900K",
-            "7100K",
-            "7300K",
-            "7500K",
-            "7700K",
-            "7900K",
-            "8100K",
-            "8300K",
-            "8500K",
-            "8700K",
-            "8900K",
-            "9100K",
-            "9300K",
-            "9500K",
-            "10000K",
-            "7700K m"});
-            this.comboBox_temperature.Location = new System.Drawing.Point(149, 416);
-            this.comboBox_temperature.Name = "comboBox_temperature";
-            this.comboBox_temperature.Size = new System.Drawing.Size(100, 33);
-            this.comboBox_temperature.TabIndex = 113;
-            this.comboBox_temperature.Text = "6500K";
-            this.comboBox_temperature.DropDown += new System.EventHandler(this.comboBox_temperature_DropDown);
-            this.comboBox_temperature.SelectedIndexChanged += new System.EventHandler(this.comboBox_temperature_SelectedIndexChanged);
-            this.comboBox_temperature.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.comboBox_temperature_PreviewKeyDown);
-            // 
-            // numericUpDown_TG_B
-            // 
-            this.numericUpDown_TG_B.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_TG_B.ForeColor = System.Drawing.Color.Blue;
-            this.numericUpDown_TG_B.Location = new System.Drawing.Point(253, 155);
-            this.numericUpDown_TG_B.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_TG_B.Name = "numericUpDown_TG_B";
-            this.numericUpDown_TG_B.Size = new System.Drawing.Size(100, 53);
-            this.numericUpDown_TG_B.TabIndex = 112;
-            this.numericUpDown_TG_B.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_TG_B.ValueChanged += new System.EventHandler(this.numericUpDown_TG_B_ValueChanged);
-            // 
-            // numericUpDown_TG_G
-            // 
-            this.numericUpDown_TG_G.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_TG_G.ForeColor = System.Drawing.Color.Green;
-            this.numericUpDown_TG_G.Location = new System.Drawing.Point(196, 155);
-            this.numericUpDown_TG_G.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_TG_G.Name = "numericUpDown_TG_G";
-            this.numericUpDown_TG_G.Size = new System.Drawing.Size(100, 53);
-            this.numericUpDown_TG_G.TabIndex = 111;
-            this.numericUpDown_TG_G.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_TG_G.ValueChanged += new System.EventHandler(this.numericUpDown_TG_G_ValueChanged);
-            // 
-            // numericUpDown_TG_R
-            // 
-            this.numericUpDown_TG_R.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_TG_R.ForeColor = System.Drawing.Color.Red;
-            this.numericUpDown_TG_R.Location = new System.Drawing.Point(147, 156);
-            this.numericUpDown_TG_R.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_TG_R.Name = "numericUpDown_TG_R";
-            this.numericUpDown_TG_R.Size = new System.Drawing.Size(100, 53);
-            this.numericUpDown_TG_R.TabIndex = 110;
-            this.numericUpDown_TG_R.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_TG_R.ValueChanged += new System.EventHandler(this.numericUpDown_TG_R_ValueChanged);
             // 
             // bt_awb_test
             // 
             this.bt_awb_test.BackColor = System.Drawing.SystemColors.Control;
             this.bt_awb_test.Font = new System.Drawing.Font("標楷體", 30.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_awb_test.ForeColor = System.Drawing.Color.Black;
-            this.bt_awb_test.Location = new System.Drawing.Point(164, 221);
+            this.bt_awb_test.Location = new System.Drawing.Point(91, 62);
             this.bt_awb_test.Name = "bt_awb_test";
             this.bt_awb_test.Size = new System.Drawing.Size(64, 32);
             this.bt_awb_test.TabIndex = 108;
@@ -5526,17 +5579,6 @@
             this.pictureBox2.TabIndex = 114;
             this.pictureBox2.TabStop = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(246, 221);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(69, 59);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
-            // 
             // progressBar_awb
             // 
             this.progressBar_awb.ForeColor = System.Drawing.Color.Green;
@@ -5546,16 +5588,16 @@
             this.progressBar_awb.TabIndex = 140;
             this.progressBar_awb.Value = 100;
             // 
-            // lb_class
+            // pictureBox1
             // 
-            this.lb_class.AutoSize = true;
-            this.lb_class.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_class.ForeColor = System.Drawing.Color.Red;
-            this.lb_class.Location = new System.Drawing.Point(494, 107);
-            this.lb_class.Name = "lb_class";
-            this.lb_class.Size = new System.Drawing.Size(100, 111);
-            this.lb_class.TabIndex = 181;
-            this.lb_class.Text = "c";
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(11, 74);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(69, 59);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // tp_Product
             // 
@@ -8481,41 +8523,6 @@
             this.timer_stage1c.Interval = 300;
             this.timer_stage1c.Tick += new System.EventHandler(this.timer_stage1c_Tick);
             // 
-            // groupBox_brightness
-            // 
-            this.groupBox_brightness.Controls.Add(this.rb_brightness_color_2);
-            this.groupBox_brightness.Controls.Add(this.rb_brightness_color_1);
-            this.groupBox_brightness.Location = new System.Drawing.Point(1158, 127);
-            this.groupBox_brightness.Name = "groupBox_brightness";
-            this.groupBox_brightness.Size = new System.Drawing.Size(67, 69);
-            this.groupBox_brightness.TabIndex = 138;
-            this.groupBox_brightness.TabStop = false;
-            this.groupBox_brightness.Text = "亮度";
-            // 
-            // rb_brightness_color_2
-            // 
-            this.rb_brightness_color_2.AutoSize = true;
-            this.rb_brightness_color_2.Checked = true;
-            this.rb_brightness_color_2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_brightness_color_2.Location = new System.Drawing.Point(6, 39);
-            this.rb_brightness_color_2.Name = "rb_brightness_color_2";
-            this.rb_brightness_color_2.Size = new System.Drawing.Size(51, 17);
-            this.rb_brightness_color_2.TabIndex = 226;
-            this.rb_brightness_color_2.TabStop = true;
-            this.rb_brightness_color_2.Text = "黃光";
-            this.rb_brightness_color_2.UseVisualStyleBackColor = true;
-            // 
-            // rb_brightness_color_1
-            // 
-            this.rb_brightness_color_1.AutoSize = true;
-            this.rb_brightness_color_1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_brightness_color_1.Location = new System.Drawing.Point(6, 16);
-            this.rb_brightness_color_1.Name = "rb_brightness_color_1";
-            this.rb_brightness_color_1.Size = new System.Drawing.Size(51, 17);
-            this.rb_brightness_color_1.TabIndex = 226;
-            this.rb_brightness_color_1.Text = "白光";
-            this.rb_brightness_color_1.UseVisualStyleBackColor = true;
-            // 
             // bt_save_program_picture
             // 
             this.bt_save_program_picture.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -8650,20 +8657,6 @@
             this.groupBox_quick.TabIndex = 227;
             this.groupBox_quick.TabStop = false;
             // 
-            // groupBox_sn1
-            // 
-            this.groupBox_sn1.Controls.Add(this.lb_sn_opal);
-            this.groupBox_sn1.Controls.Add(this.tb_sn_opal);
-            this.groupBox_sn1.Controls.Add(this.lb_main_mesg2);
-            this.groupBox_sn1.Controls.Add(this.tb_wait_sn_data);
-            this.groupBox_sn1.Controls.Add(this.cb_change_rank);
-            this.groupBox_sn1.Controls.Add(this.cb_air_ng);
-            this.groupBox_sn1.Location = new System.Drawing.Point(617, 193);
-            this.groupBox_sn1.Name = "groupBox_sn1";
-            this.groupBox_sn1.Size = new System.Drawing.Size(67, 69);
-            this.groupBox_sn1.TabIndex = 236;
-            this.groupBox_sn1.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -8673,7 +8666,6 @@
             this.Controls.Add(this.groupBox_quick);
             this.Controls.Add(this.cb_stage1_ng);
             this.Controls.Add(this.gb_ng_reason1);
-            this.Controls.Add(this.groupBox_brightness);
             this.Controls.Add(this.groupBox_comport1);
             this.Controls.Add(this.lb_main_mesg1);
             this.Controls.Add(this.bt_goto_awb);
@@ -8708,6 +8700,18 @@
             this.groupBox10.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            this.groupBox_awb2.ResumeLayout(false);
+            this.groupBox_awb2.PerformLayout();
+            this.groupBox_brightness.ResumeLayout(false);
+            this.groupBox_brightness.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_l)).EndInit();
+            this.groupBox_temperature.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).EndInit();
+            this.groupBox_sn1.ResumeLayout(false);
+            this.groupBox_sn1.PerformLayout();
             this.groupBox_wpt_bpt.ResumeLayout(false);
             this.groupBox_wpt_bpt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_bpt)).EndInit();
@@ -8765,11 +8769,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Contrast3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_brightness3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_gain3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_l)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_B)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_G)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TG_R)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tp_Product.ResumeLayout(false);
@@ -8822,13 +8821,9 @@
             this.statusStrip1.PerformLayout();
             this.groupBox_comport1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
-            this.groupBox_brightness.ResumeLayout(false);
-            this.groupBox_brightness.PerformLayout();
             this.gb_ng_reason1.ResumeLayout(false);
             this.gb_ng_reason1.PerformLayout();
             this.groupBox_quick.ResumeLayout(false);
-            this.groupBox_sn1.ResumeLayout(false);
-            this.groupBox_sn1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -9181,8 +9176,6 @@
         private System.Windows.Forms.Button bt_script_cancel;
         private System.Windows.Forms.Label lb_sn_opal;
         private System.Windows.Forms.TextBox tb_sn_opal;
-        private System.Windows.Forms.Button bt_clear_serial;
-        private System.Windows.Forms.Button bt_save_img;
         private System.Windows.Forms.Label lb_main_mesg2;
         private System.Windows.Forms.Button bt_saturation;
         private System.Windows.Forms.Button bt_ae_decrease;
@@ -9510,6 +9503,8 @@
         private System.Windows.Forms.GroupBox groupBox_awb;
         private System.Windows.Forms.GroupBox groupBox_wpt_bpt;
         private System.Windows.Forms.GroupBox groupBox_sn1;
+        private System.Windows.Forms.GroupBox groupBox_temperature;
+        private System.Windows.Forms.GroupBox groupBox_awb2;
     }
 }
 

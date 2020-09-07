@@ -67,15 +67,18 @@ namespace vcs_LoadPicture
                 Rectangle dstRect = new Rectangle(0, 0, 160, 120);    //貼上的地方
 
                 GraphicsUnit units = GraphicsUnit.Pixel;
-                Graphics g = pictureBox2.CreateGraphics();
+                Graphics g1;
+                Graphics g2;
 
-                g.DrawImage(image1, dstRect, srcRect, units);
+                g1 = pictureBox1.CreateGraphics();
+                g1.DrawImage(image1, dstRect, srcRect, units);
+                g1.DrawImage(image1, 0, 0);
+                g1.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(10, 10, 32, 40));
 
-                g = pictureBox2.CreateGraphics();
-                g.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(10, 10, 32, 40));
+                g2 = pictureBox2.CreateGraphics();
+                g2.DrawImage(image1, dstRect, srcRect, units);
+                g2.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(10, 10, 32, 40));
 
-                g = pictureBox1.CreateGraphics();
-                g.DrawRectangle(new Pen(Color.Red, 5), new Rectangle(10, 10, 32, 40));
 
                 //int x_st = zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2;
                 //int y_st = (zoom_step * zoom_cnt / 2 + zoom_step * btn_down_up_cnt / 2) * 3 / 4;

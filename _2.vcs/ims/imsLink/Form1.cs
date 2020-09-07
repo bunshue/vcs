@@ -2590,11 +2590,8 @@ namespace imsLink
             lb_awb_result_B.Visible = en;
             bt_get_setup.Visible = en;
 
-            comboBox_temperature.Visible = en;
             //comboBox_webcam.Visible = en;
-            numericUpDown_TG_R.Visible = en;
-            numericUpDown_TG_G.Visible = en;
-            numericUpDown_TG_B.Visible = en;
+            groupBox_temperature.Visible = en;
 
             b7.Visible = en;
             b6.Visible = en;
@@ -2607,7 +2604,9 @@ namespace imsLink
 
             if (flag_operation_mode != MODE_RELEASE_STAGE0)
             {
+                groupBox_wpt_bpt.Visible = false;
                 groupBox_awb.Visible = false;
+                groupBox_awb2.Visible = false;
 
                 //WPT
                 lb_wpt.Visible = false;
@@ -2674,10 +2673,6 @@ namespace imsLink
                 bt_show_brightness.Visible = false;
                 cb_show_progress.Visible = false;
                 cb_only_search.Visible = false;
-                numericUpDown_find_brightness_h.Visible = false;
-                numericUpDown_find_brightness_l.Visible = false;
-                lb_th_h.Visible = false;
-                lb_th_l.Visible = false;
                 lb_yuv_y2.Visible = false;
                 lb_yuv_y3.Visible = false;
                 lb_auto_awb_cnt.Visible = false;
@@ -2699,7 +2694,9 @@ namespace imsLink
             }
             else
             {
+                groupBox_wpt_bpt.Visible = true;
                 groupBox_awb.Visible = true;
+                groupBox_awb2.Visible = true;
 
                 //WPT
                 lb_wpt.Visible = en;
@@ -2756,10 +2753,6 @@ namespace imsLink
                 lb_note2.Visible = en;
                 lb_note3.Visible = en;
             }
-
-            bt_save_img.Visible = false;
-            bt_clear_serial.Visible = false;
-
             bt_awb_break.Visible = false;
 
             return;
@@ -3147,8 +3140,8 @@ namespace imsLink
             lb_0xG.Text = "0x                 =";
             lb_0xB.Text = "0x                 =";
 
-            groupBox_wpt_bpt.Location = new Point(1050, 845);
-            groupBox_wpt_bpt.Size = new Size(630 + 145, 145 - 30);
+            groupBox_wpt_bpt.Location = new Point(1050 - 3, 860);
+            groupBox_wpt_bpt.Size = new Size(630 + 145, 105);
 
             x_st = 5;
             y_st = 30;
@@ -3206,8 +3199,6 @@ namespace imsLink
                     lb_sn_opal.Text = "序號";
                     lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2);
                     tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65);
-                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65);
-                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65);
                     tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
                 }
                 else
@@ -3215,13 +3206,12 @@ namespace imsLink
                     lb_sn_opal.Text = "序號";
                     lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2);
                     tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65);
-                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65);
-                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65);
                 }
             }
             else
             {
-                if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) 
+                    || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
                 {
                     groupBox_sn1.Location = new Point(0, 600);
                     groupBox_sn1.Size = new Size(300, 200);
@@ -3233,28 +3223,18 @@ namespace imsLink
                     cb_air_ng.Location = new Point(5, 10 + 30 * 5);
 
                     lb_class.Location = new Point(160, 675);
+
+                    if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                    {
+                        groupBox_sn1.Location = new Point(1047, 728);
+                        groupBox_sn1.Size = new Size(300, 130);
+                    }
+                    if (flag_operation_mode == MODE_RELEASE_STAGE2)
+                    {
+                        groupBox_sn1.Size = new Size(300, 130);
+                    }
                 }
 
-                if (flag_operation_mode != MODE_RELEASE_STAGE0)
-                {
-                    dy = 100;
-                    //lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
-                    //tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
-                    //tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
-                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
-                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
-                }
-                else
-                {
-                    x_st = 1500;
-                    y_st = 930;
-                    bt_save_img.Location = new Point(x_st + 250, y_st);
-                    bt_clear_serial.Location = new Point(x_st + 315, y_st);
-
-                    //lb_sn_opal.Location = new Point(x_st + 10 - 450, y_st - 130);
-                    //tb_sn_opal.Location = new Point(x_st + 120 - 450, y_st - 130);
-                    //lb_main_mesg2.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - 40);
-                }
                 lb_yuv_y2.Location = new Point(1610, 740);
                 lb_yuv_y3.Location = new Point(1215, 105);
 
@@ -3264,6 +3244,10 @@ namespace imsLink
             //TARGET RGB
             if (flag_display_mode == DISPLAY_SD)
             {
+                show_main_message1("色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message2("色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message3("色彩校正不支援SD螢幕", S_FALSE, 30);
+
                 comboBox_temperature.Size = new Size(comboBox_temperature.Size.Width * 3 / 4, comboBox_temperature.Height * 2 / 3);
                 comboBox_temperature.Font = new Font("Arial", comboBox_temperature.Font.Size * 3 / 5);
                 numericUpDown_TG_R.Size = new Size(numericUpDown_TG_R.Size.Width * 3 / 5, numericUpDown_TG_R.Height * 3 / 5);
@@ -3273,75 +3257,23 @@ namespace imsLink
                 numericUpDown_TG_B.Size = new Size(numericUpDown_TG_B.Size.Width * 3 / 5, numericUpDown_TG_B.Height * 3 / 5);
                 numericUpDown_TG_B.Font = new Font("Arial", numericUpDown_TG_B.Font.Size * 3 / 5);
 
-                comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 230 * 11 / 10 + 115);
-                numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 250 * 11 / 10 + 120);
-                numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 290 * 11 / 10 + 120);
-                numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 70, 15 + 330 * 11 / 10 + 120);
+                groupBox_temperature.Location = new Point(935, 705 - 15);
+                groupBox_temperature.Size = new Size(110, 275);
+
+                comboBox_temperature.Location = new Point(935, 705);
+                numericUpDown_TG_R.Location = new Point(935, 745);
+                numericUpDown_TG_G.Location = new Point(935, 825);
+                numericUpDown_TG_B.Location = new Point(935, 905);
             }
             else
             {
-                comboBox_temperature.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 230 * 2 + 120 * 2 - 10);
-                numericUpDown_TG_R.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 250 * 2 + 120 * 2 - 10);
-                numericUpDown_TG_G.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 290 * 2 + 120 * 2 - 10);
-                numericUpDown_TG_B.Location = new Point(170 + 400 + 30 + 120 + 215, 15 + 330 * 2 + 120 * 2 - 10);
-            }
+                groupBox_temperature.Location = new Point(935, 705 - 15 + 20 + 15 + 10+15);
+                groupBox_temperature.Size = new Size(110, 240 - 10-10-5);
 
-            //WPT BPT AE_Target Saturation
-            if (flag_display_mode == DISPLAY_SD)
-            {
-                x_st = 900;
-                y_st = 460;
-                dx = 100;
-                dy = 550;
-                /*
-                //WPT
-                lb_wpt.Location = new Point(x_st + 2, y_st + 2);
-                tb_wpt.Location = new Point(x_st + 70, y_st);
-                numericUpDown_wpt.Location = new Point(x_st + 140, y_st);
-                bt_read_wpt.Location = new Point(x_st + 210, y_st);
-                bt_write_wpt.Location = new Point(x_st + 280, y_st);
-
-                y_st = 460 + 40;
-                //BPT
-                lb_bpt.Location = new Point(x_st + 2, y_st + 2);
-                tb_bpt.Location = new Point(x_st + 70, y_st);
-                numericUpDown_bpt.Location = new Point(x_st + 140, y_st);
-                bt_read_bpt.Location = new Point(x_st + 210, y_st);
-                bt_write_bpt.Location = new Point(x_st + 280, y_st);
-                */
-
-                //Saturation
-                bt_saturation.Location = new Point(bt_write_wpt.Location.X, bt_write_wpt.Location.Y - 40);
-
-
-                //comboBox_saturation.Location
-                //comboBox_denoise.Location
-                //comboBox_sharpness.Location
-                //bt_save_data.Location
-                //numericUpDown_sharpness.Location
-                //numericUpDown_denoise.Location
-                //numericUpDown_brightness.Location
-                //bt_find_brightness2.Location
-                //bt_show_brightness.Location
-                //cb_show_progress.Location
-                //cb_only_search.Location
-                //numericUpDown_find_brightness.Location
-
-            }
-            else
-            {
-                dx = 20;
-
-                bt_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 250);
-                bt_show_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 200);
-                cb_show_progress.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 150);
-                numericUpDown_find_brightness_h.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 110);
-                numericUpDown_find_brightness_l.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 70);
-
-                lb_th_h.Location = new Point(numericUpDown_find_brightness_h.Location.X - 42, numericUpDown_find_brightness_h.Location.Y + 7);
-                lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
-
-                groupBox_brightness.Location = new Point(bt_find_brightness.Location.X + 25, bt_find_brightness.Location.Y - 30);
+                comboBox_temperature.Location = new Point(5, 10);
+                numericUpDown_TG_R.Location = new Point(5, 45);
+                numericUpDown_TG_G.Location = new Point(5, 45 + 55);
+                numericUpDown_TG_B.Location = new Point(5, 45 + 110);
             }
 
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
@@ -3369,33 +3301,9 @@ namespace imsLink
             else
                 bt_restore_camera_setup.Visible = false;
 
-            if (flag_operation_mode == MODE_RELEASE_STAGE2)
-            {
-                /*
-                //debug code
-                bt_find_brightness.Visible = true;
-                bt_show_brightness.Visible = true;
-                cb_show_progress.Visible = true;
-                cb_only_search.Visible = true;
-                numericUpDown_find_brightness_h.Visible = true;
-                numericUpDown_find_brightness_l.Visible = true;
-
-                lb_th_h.Visible = true;
-                lb_th_l.Visible = true;
-
-                bt_find_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 250);
-                bt_show_brightness.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 200);
-                cb_show_progress.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 150);
-                numericUpDown_find_brightness_h.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 110);
-                numericUpDown_find_brightness_l.Location = new Point(comboBox_sharpness.Location.X + 55, comboBox_sharpness.Location.Y - 70);
-
-                lb_th_h.Location = new Point(numericUpDown_find_brightness_h.Location.X - 42, numericUpDown_find_brightness_h.Location.Y + 7);
-                lb_th_l.Location = new Point(numericUpDown_find_brightness_l.Location.X - 42, numericUpDown_find_brightness_l.Location.Y + 7);
-
-                lb_yuv_y2.Visible = true;
-                lb_auto_awb_cnt.Visible = false;
-                */
-            }
+            //AWB2 亮度 找過亮 顯示過量 上限下限
+            groupBox_awb2.Location = new Point(1750, 540);
+            groupBox_awb2.Size = new Size(115, 257);
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
             {
@@ -3430,21 +3338,11 @@ namespace imsLink
             if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
             {
                 bt_zoom.Location = new Point(bt_zoom.Location.X - 31, bt_zoom.Location.Y);
-                //groupBox_gridlinecolor.Location = new Point(cb_show_grid.Location.X + 130, cb_show_grid.Location.Y + 10);
-
-
-
-
-
-
-
-
-
-
-                //tb_sn_opal
             }
             else
+            {
                 groupBox_gridlinecolor.Visible = false;
+            }
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
             {
@@ -3498,14 +3396,12 @@ namespace imsLink
 
             if (flag_operation_mode == MODE_RELEASE_STAGE3)
             {
-                tb_wait_sn_data.Visible = true;
                 lb_class.Visible = true;
                 cb_air_ng.Visible = false;
                 cb_change_rank.Visible = true;
             }
             else
             {
-                tb_wait_sn_data.Visible = false;
                 lb_class.Visible = false;
                 cb_air_ng.Visible = false;
                 cb_change_rank.Visible = false;
@@ -7069,8 +6965,6 @@ namespace imsLink
                     lb_sn_opal.Text = "序號";
                     lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2 - dy);
                     tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
 
                     lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X + 130, tb_sn_opal.Location.Y);
 
@@ -7099,39 +6993,9 @@ namespace imsLink
                         tb_sn_opal.Location = new Point(x_st + 120 - 450, y_st - 130);
                         lb_main_mesg2.Location = new Point(lb_sn_opal.Location.X, lb_sn_opal.Location.Y - 40);   //david0901
                     }
-                    else
-                    {
-                        int dy = 200;
-                        //lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
-                        //tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
-                        //lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy + 40);
-                        bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
-                        bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
-                    }
 
-                    /*
-                    if (flag_operation_mode != MODE_RELEASE_STAGE0)
-                    {
-                        int dy = 100;
-                        lb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 28 + dy);
-                        tb_sn_opal.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy);
-                        lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X, cb_enable_awb.Location.Y + 56 + dy + 40);
-                        bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 - 20 + dy);
-                        bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170, cb_enable_awb.Location.Y + 56 + 20 + dy);
-                    }
-                    else
-                    {
-                        int x_st = 1500;
-                        int y_st = 930;
-                        lb_sn_opal.Text = "Opal序號";
-                        lb_sn_opal.Location = new Point(x_st + 10, y_st + 5);
-                        tb_sn_opal.Location = new Point(x_st + 120, y_st);
-                        bt_save_img.Location = new Point(x_st + 250, y_st);
-                        bt_clear_serial.Location = new Point(x_st + 315, y_st);
-                        lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X - 500, tb_sn_opal.Location.Y - 150);
-                    }
-                    */
-                    if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                    if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                        || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
                     {
                         groupBox_sn1.Location = new Point(0, 600);
                         groupBox_sn1.Size = new Size(300, 200);
@@ -7144,12 +7008,11 @@ namespace imsLink
 
                         lb_class.Location = new Point(160, 675);
 
-                        //lb_main_mesg2.Location = new Point(lb_main_mesg2.Location.X, lb_main_mesg2.Location.Y - 8);
-                        //tb_wait_sn_data.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 70);
-                        //lb_class.Location = new Point(tb_wait_sn_data.Location.X + 138 + 10, tb_wait_sn_data.Location.Y - 150);
-
-                        //cb_air_ng.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120); //HD display + big show
-                        //cb_change_rank.Location = new Point(tb_sn_opal.Location.X, tb_sn_opal.Location.Y + 120 + 50); //HD display + big show
+                        if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                        {
+                            groupBox_sn1.Location = new Point(1050, 700);
+                            groupBox_sn1.Size = new Size(300, 130);
+                        }
                     }
                 }
 
@@ -7209,9 +7072,9 @@ namespace imsLink
                         //lb_note1.Location = new Point(11 + 180 + 110, 489 + 98 + 19);
                         //lb_note2.Location = new Point(11 + 180 + 110, 489 + 98 + 25 + 12);
                         //lb_note3.Location = new Point(11 + 180 + 110, 489 + 98 + 50 + 6);
-                        lb_note1.Location = new Point(10 + 180 + 90, 489 + 98 + 19);
-                        lb_note2.Location = new Point(10 + 180 + 90, 489 + 98 + 25 + 12);
-                        lb_note3.Location = new Point(10 + 180 + 90, 489 + 98 + 50 + 6);
+                        lb_note1.Location = new Point(10 + 180 + 90, 489 + 98 + 19 - 80);
+                        lb_note2.Location = new Point(10 + 180 + 90, 489 + 98 + 25 + 12 - 80);
+                        lb_note3.Location = new Point(10 + 180 + 90, 489 + 98 + 50 + 6 - 80);
                     }
                 }
                 else
@@ -7231,8 +7094,6 @@ namespace imsLink
                     lb_sn_opal.Text = "序號";
                     lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12, cb_enable_awb.Location.Y + 56 + 65 + 2 - dy);
                     tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
 
                     lb_main_mesg2.Location = new Point(tb_sn_opal.Location.X + 140, tb_sn_opal.Location.Y);
 
@@ -7251,14 +7112,6 @@ namespace imsLink
                 }
                 else
                 {
-                    int dy = 0;
-                    //lb_sn_opal.Text = "序號";
-                    //lb_sn_opal.Location = new Point(cb_enable_awb.Location.X - 12+140, cb_enable_awb.Location.Y + 56 + 65-2 - dy);
-                    //tb_sn_opal.Location = new Point(cb_enable_awb.Location.X + 50 - 4+140, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    //lb_main_mesg2.Location = new Point(cb_enable_awb.Location.X + 50 - 4 + 140+140, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    bt_save_img.Location = new Point(cb_enable_awb.Location.X + 170 + 60 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
-                    bt_clear_serial.Location = new Point(cb_enable_awb.Location.X + 170 + 3, cb_enable_awb.Location.Y + 56 + 65 - dy);
-
                     if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                     {
                         int x_st;
@@ -7270,7 +7123,8 @@ namespace imsLink
                         lb_main_mesg2.Location = new Point(x_st + 250, y_st);
                     }
 
-                    if ((flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
+                    if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
+                        || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
                     {
                         groupBox_sn1.Location = new Point(140, 540);
                         groupBox_sn1.Size = new Size(780, 50);
@@ -13429,6 +13283,7 @@ namespace imsLink
                 gb_contrast_brightness3.Visible = false;
                 pictureBox_contrast.Visible = false;
                 groupBox_awb.Visible = false;
+                groupBox_awb2.Visible = false;
                 lb_note1.Visible = false;
                 lb_note2.Visible = false;
                 lb_note3.Visible = false;
@@ -14504,19 +14359,6 @@ namespace imsLink
             bt_cancel.Visible = false;
             bt_script_load.Visible = true;
             bt_script.Text = "Script";
-        }
-
-        private void bt_clear_serial_Click(object sender, EventArgs e)
-        {
-            tb_sn_opal.Clear();
-            timer_stage2.Enabled = false;
-            if (this.tb_sn_opal.Focused == false)
-                this.tb_sn_opal.Focus();
-        }
-
-        private void bt_save_img_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
         }
 
         private void tb_sn_opal_MouseClick(object sender, MouseEventArgs e)
