@@ -47,13 +47,7 @@
             this.button28 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
-            this.btn1 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btn2 = new System.Windows.Forms.Button();
-            this.btn3 = new System.Windows.Forms.Button();
-            this.btn4 = new System.Windows.Forms.Button();
-            this.btn5 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button11 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
@@ -64,14 +58,10 @@
             this.button39 = new System.Windows.Forms.Button();
             this.button40 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -79,18 +69,16 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(492, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(571, 579);
+            this.richTextBox1.Size = new System.Drawing.Size(571, 475);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "李白 越中覽古\n越王勾踐破吳歸，\n戰士還家盡錦衣。\n宮女如花滿春殿，\n只今唯有鷓鴣飛。\n\n\n";
-            this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
-            this.richTextBox1.DoubleClick += new System.EventHandler(this.richTextBox1_DoubleClick);
             this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
             this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseDown);
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(351, 549);
+            this.button2.Location = new System.Drawing.Point(332, 445);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(126, 42);
             this.button2.TabIndex = 2;
@@ -199,7 +187,7 @@
             // button24
             // 
             this.button24.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(12, 498);
+            this.button24.Location = new System.Drawing.Point(332, 397);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(154, 42);
             this.button24.TabIndex = 24;
@@ -273,75 +261,6 @@
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
-            // btn1
-            // 
-            this.btn1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn1.Location = new System.Drawing.Point(6, 16);
-            this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(25, 25);
-            this.btn1.TabIndex = 37;
-            this.btn1.Text = "1";
-            this.btn1.UseVisualStyleBackColor = true;
-            this.btn1.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btn2
-            // 
-            this.btn2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn2.Location = new System.Drawing.Point(36, 16);
-            this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(25, 25);
-            this.btn2.TabIndex = 38;
-            this.btn2.Text = "2";
-            this.btn2.UseVisualStyleBackColor = true;
-            this.btn2.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btn3
-            // 
-            this.btn3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn3.Location = new System.Drawing.Point(66, 16);
-            this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(25, 25);
-            this.btn3.TabIndex = 39;
-            this.btn3.Text = "3";
-            this.btn3.UseVisualStyleBackColor = true;
-            this.btn3.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btn4
-            // 
-            this.btn4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn4.Location = new System.Drawing.Point(95, 16);
-            this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(25, 25);
-            this.btn4.TabIndex = 40;
-            this.btn4.Text = "4";
-            this.btn4.UseVisualStyleBackColor = true;
-            this.btn4.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btn5
-            // 
-            this.btn5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn5.Location = new System.Drawing.Point(124, 16);
-            this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(25, 25);
-            this.btn5.TabIndex = 41;
-            this.btn5.Text = "5";
-            this.btn5.UseVisualStyleBackColor = true;
-            this.btn5.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btn4);
-            this.groupBox1.Controls.Add(this.btn5);
-            this.groupBox1.Controls.Add(this.btn1);
-            this.groupBox1.Controls.Add(this.btn2);
-            this.groupBox1.Controls.Add(this.btn3);
-            this.groupBox1.Location = new System.Drawing.Point(172, 492);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 48);
-            this.groupBox1.TabIndex = 42;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "使用相同事件";
-            // 
             // button11
             // 
             this.button11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -349,7 +268,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(154, 42);
             this.button11.TabIndex = 50;
-            this.button11.Text = "RichTextBox點三下全選";
+            this.button11.Text = "xxx";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click_1);
             // 
@@ -452,14 +371,6 @@
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(332, 508);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(154, 30);
-            this.dateTimePicker1.TabIndex = 63;
-            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -497,38 +408,14 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(12, 554);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(154, 33);
-            this.textBox1.TabIndex = 68;
-            this.textBox1.Text = "A123456789";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(172, 551);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(154, 42);
-            this.button6.TabIndex = 69;
-            this.button6.Text = "驗證身份證字號";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1075, 601);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(1075, 498);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button38);
             this.Controls.Add(this.button39);
             this.Controls.Add(this.button40);
@@ -539,7 +426,6 @@
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button11);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button33);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button28);
@@ -563,9 +449,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -589,13 +473,7 @@
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button33;
-        private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btn2;
-        private System.Windows.Forms.Button btn3;
-        private System.Windows.Forms.Button btn4;
-        private System.Windows.Forms.Button btn5;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button23;
@@ -606,13 +484,10 @@
         private System.Windows.Forms.Button button39;
         private System.Windows.Forms.Button button40;
         private System.Windows.Forms.Button button41;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button6;
     }
 }
 

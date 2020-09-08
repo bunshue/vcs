@@ -29,9 +29,9 @@ namespace vcs_ColorPicker2
             try
             {
                 Color pointColor = bmp.GetPixel(e.X, e.Y);
-                textBox1.Text = pointColor.R.ToString();
-                textBox2.Text = pointColor.G.ToString();
-                textBox3.Text = pointColor.B.ToString();
+                tb_r.Text = pointColor.R.ToString();
+                tb_g.Text = pointColor.G.ToString();
+                tb_b.Text = pointColor.B.ToString();
                 panel1.BackColor = Color.FromArgb(pointColor.R, pointColor.G, pointColor.B);
             }
             catch { }

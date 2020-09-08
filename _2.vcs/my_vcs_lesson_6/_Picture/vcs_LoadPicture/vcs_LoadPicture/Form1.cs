@@ -36,14 +36,7 @@ namespace vcs_LoadPicture
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
-
-            button17.BackgroundImage = vcs_LoadPicture.Properties.Resources.plus;
-            button18.BackgroundImage = vcs_LoadPicture.Properties.Resources.minus;
-            btnUp.BackgroundImage = vcs_LoadPicture.Properties.Resources.up;
-            btnDown.BackgroundImage = vcs_LoadPicture.Properties.Resources.down;
-            btnLeft.BackgroundImage = vcs_LoadPicture.Properties.Resources.left;
-            btnRight.BackgroundImage = vcs_LoadPicture.Properties.Resources.right;
-            btnCenter.BackgroundImage = vcs_LoadPicture.Properties.Resources.stop;
+            pictureBox2.Visible = false;
 
             reset_picturebox_setting();
         }
@@ -246,6 +239,12 @@ namespace vcs_LoadPicture
                 //調整影像大小
                 reload_picturebox2();
             }
+            else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                //TBD
+
+
+            }
             else
             {
                 //不支援此縮放模式
@@ -254,7 +253,7 @@ namespace vcs_LoadPicture
 
         void reload_picturebox0()
         {
-            pictureBox1.Size = new Size(pictureBox1.Width + zoom_step * zoom_cnt, pictureBox1.Height + zoom_step * zoom_cnt * 3 / 4);
+            pictureBox1.Size = new Size(usb_camera_width + zoom_step * zoom_cnt, usb_camera_height + zoom_step * zoom_cnt * 3 / 4);
         }
 
         void reload_picturebox1()
@@ -304,6 +303,8 @@ namespace vcs_LoadPicture
             Graphics g;
             g = pictureBox1.CreateGraphics();
             g.DrawImage(bmp_zoom, 0, 0);
+
+            pictureBox1.Size = new Size(bm.Width + zoom_step * zoom_cnt, bm.Height + zoom_step * zoom_cnt * 3 / 4);
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -320,7 +321,7 @@ namespace vcs_LoadPicture
                     ratio = 640 / (float)(w - zoom_step * zoom_cnt);
                     lb_zoom.Text = ratio.ToString("#0.00") + " X";
 
-                    richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\n";
+                    richTextBox1.Text += "+ zoom_cnt = " + zoom_cnt.ToString() + "\n";
 
                     reload_picturebox();
                 }
@@ -349,7 +350,6 @@ namespace vcs_LoadPicture
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE2)
             {
                 //調整影像大小
-
                 if (zoom_cnt < zoom_cnt_max)
                 {
                     zoom_cnt++;
@@ -367,6 +367,12 @@ namespace vcs_LoadPicture
                 else
                     richTextBox1.Text += "已達最大放大倍率\n";
             }
+            else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                //TBD
+
+
+            }
             else
             {
                 //不支援此縮放模式
@@ -381,7 +387,19 @@ namespace vcs_LoadPicture
             if (flag_zoom_operation_mode == MODE_RELEASE_STAGE0)
             {
                 //調整PictureBox大小
+                if (zoom_cnt > 0)
+                {
+                    zoom_cnt--;
 
+                    int w = usb_camera_width;
+                    float ratio;
+                    ratio = 640 / (float)(w - zoom_step * zoom_cnt);
+                    lb_zoom.Text = ratio.ToString("#0.00") + " X";
+
+                    richTextBox1.Text += "- zoom_cnt = " + zoom_cnt.ToString() + "\n";
+
+                    reload_picturebox();
+                }
             }
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE1)
             {
@@ -449,6 +467,28 @@ namespace vcs_LoadPicture
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE2)
             {
                 //調整影像大小
+                if (zoom_cnt > 0)
+                {
+                    zoom_cnt--;
+
+                    int w = usb_camera_width;
+                    float ratio;
+                    //ratio = 640 / (float)(w - zoom_step * zoom_cnt);
+                    ratio = (float)(w + zoom_step * zoom_cnt) / 640;
+                    lb_zoom.Text = ratio.ToString("#0.00") + " X";
+
+                    richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\n";
+
+                    reload_picturebox();
+
+                }
+
+
+
+            }
+            else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                //TBD
 
 
             }
@@ -518,30 +558,6 @@ namespace vcs_LoadPicture
             reload_picturebox();
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            flag_zoom_operation_mode = MODE_RELEASE_STAGE0;
-            reset_picturebox_setting();
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            flag_zoom_operation_mode = MODE_RELEASE_STAGE1;
-            reset_picturebox_setting();
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            flag_zoom_operation_mode = MODE_RELEASE_STAGE2;
-            reset_picturebox_setting();
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            flag_zoom_operation_mode = MODE_RELEASE_STAGE3;
-            reset_picturebox_setting();
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             if ((flag_zoom_operation_mode == MODE_RELEASE_STAGE0) || (flag_zoom_operation_mode == MODE_RELEASE_STAGE1))
@@ -590,6 +606,12 @@ namespace vcs_LoadPicture
                 else
                     richTextBox1.Text += "無圖可存\n";
             }
+            else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
+            {
+                //TBD
+
+
+            }
             else
             {
                 richTextBox1.Text += "不支援此縮放模式\n";
@@ -603,6 +625,49 @@ namespace vcs_LoadPicture
             richTextBox1.Text += "btn_right_left_cnt = " + btn_right_left_cnt.ToString() + "\n";
 
 
+        }
+
+        private void picture_mode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender.Equals(radioButton1))
+                richTextBox1.Text += "你按了radioButton1\n";
+            else if (sender.Equals(radioButton2))
+                richTextBox1.Text += "你按了radioButton2\n";
+            else if (sender.Equals(radioButton3))
+                richTextBox1.Text += "你按了radioButton3\n";
+            else if (sender.Equals(radioButton4))
+                richTextBox1.Text += "你按了radioButton4\n";
+            else
+                richTextBox1.Text += "你按了未知radioButton\n";
+
+            if (radioButton1.Checked == true)
+            {
+                flag_zoom_operation_mode = MODE_RELEASE_STAGE0;
+                reset_picturebox_setting();
+                pictureBox2.Visible = false;
+            }
+            else if (radioButton2.Checked == true)
+            {
+                flag_zoom_operation_mode = MODE_RELEASE_STAGE1;
+                reset_picturebox_setting();
+                pictureBox2.Visible = false;
+            }
+            else if (radioButton3.Checked == true)
+            {
+                flag_zoom_operation_mode = MODE_RELEASE_STAGE2;
+                reset_picturebox_setting();
+                pictureBox2.Visible = false;
+            }
+            else if (radioButton4.Checked == true)
+            {
+                flag_zoom_operation_mode = MODE_RELEASE_STAGE3;
+                reset_picturebox_setting();
+                pictureBox2.Visible = true;
+            }
+            else
+            {
+                richTextBox1.Text += "unknown mode\n";
+            }
         }
 
 

@@ -15,6 +15,7 @@ namespace vcs_test_all_01_Richtextbox1
         public Form1()
         {
             InitializeComponent();
+            label3.Text = "字數 : " + richTextBox1.TextLength.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -632,6 +633,28 @@ namespace vcs_test_all_01_Richtextbox1
             }
 
         }
+
+        DateTime doubleClickTimer;
+        private void richTextBox1_DoubleClick(object sender, EventArgs e)
+        {
+            doubleClickTimer = DateTime.Now; //記下DoubleClick的時間
+        }
+
+        private void richTextBox1_Click(object sender, EventArgs e)
+        {
+            TimeSpan t = (TimeSpan)(DateTime.Now - doubleClickTimer); //DoubleClick後又點了一下, 計算時間差
+
+            if (t.TotalMilliseconds <= 200) //如果小於200豪秒就全選
+                richTextBox1.SelectAll();
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            label3.Text = "字數 : " + richTextBox1.TextLength.ToString();
+        }
+
+
 
     }
 }

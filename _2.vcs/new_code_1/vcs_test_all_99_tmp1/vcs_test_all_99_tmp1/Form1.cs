@@ -17,19 +17,11 @@ namespace vcs_test_all_99_tmp1
 {
     public partial class Form1 : Form
     {
-        DateTime start_time;
         public Form1()
         {
             InitializeComponent();
-            start_time = DateTime.Now;
             toolTip1.SetToolTip(button26, "顯示提示訊息");
-
-
-            //For 驗證身份證字號
-            textBox1.MaxLength = 10;//設定字元數最大值
-            //textBox1.Focus();//程式啟動就把焦點移到textBox1
-            this.AcceptButton = button6;//按下enter就觸發button click事件
-        }
+       }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -296,29 +288,6 @@ namespace vcs_test_all_99_tmp1
         {
         }
 
-        private void btn_Click(object sender, EventArgs e)
-        {
-            if (sender.Equals(btn1))
-            {
-                richTextBox1.Text += "你按了 1\n";
-            }
-            else if (sender.Equals(btn2))
-            {
-                richTextBox1.Text += "你按了 2\n";
-            }
-            else if (sender.Equals(btn3))
-            {
-                richTextBox1.Text += "你按了 3\n";
-            }
-            else if (sender.Equals(btn4))
-            {
-                richTextBox1.Text += "你按了 4\n";
-            }
-            else if (sender.Equals(btn5))
-            {
-                richTextBox1.Text += "你按了 5\n";
-            }
-        }
 
         private void button31_Click(object sender, EventArgs e)
         {
@@ -442,21 +411,6 @@ namespace vcs_test_all_99_tmp1
 
         }
 
-        DateTime doubleClickTimer;
-
-        private void richTextBox1_DoubleClick(object sender, EventArgs e)
-        {
-            doubleClickTimer = DateTime.Now; //記下DoubleClick的時間
-        }
-
-        private void richTextBox1_Click(object sender, EventArgs e)
-        {
-            TimeSpan t = (TimeSpan)(DateTime.Now - doubleClickTimer); //DoubleClick後又點了一下, 計算時間差
-
-            if (t.TotalMilliseconds <= 200) //如果小於200豪秒就全選
-                richTextBox1.SelectAll();
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             //C# 將 BitmapData 複製到 byte[] Array 陣列
@@ -464,7 +418,7 @@ namespace vcs_test_all_99_tmp1
             //目前測試為，第二種方法比第一種方法快四倍。
 
             // Create a Bitmap object from a file.
-            using (Bitmap bmp = new Bitmap(@"C:/______test_files/IMG_20200219_172550.bmp"))
+            using (Bitmap bmp = new Bitmap(@"C:/______test_files/test_ReadAllBytes.bmp"))
             {
                 int W;
                 int H;
@@ -603,54 +557,6 @@ namespace vcs_test_all_99_tmp1
             }
             richTextBox1.Text += "\n";
         }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            if (textBox1.Text.Trim().Length == 10)//長度達十個字才驗證
-            {
-                if (isIdentificationId(textBox1.Text))//驗證身份證字號,正確回傳true
-                {
-                    textBox1.Text = textBox1.Text.ToUpper();//英文自動轉成大寫
-                    MessageBox.Show(textBox1.Text + "是正確的身份證字號", "", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else//驗證身份證字號,不正確回傳false
-                {
-                    MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        #region checkID
-        public static bool isIdentificationId(string arg_Identify)
-        {
-            var d = false;
-            if (arg_Identify.Length == 10)
-            {
-                arg_Identify = arg_Identify.ToUpper();
-                if (arg_Identify[0] >= 0x41 && arg_Identify[0] <= 0x5A)
-                {
-                    var a = new[] { 10, 11, 12, 13, 14, 15, 16, 17, 34, 18, 19, 20, 21, 22, 35, 23, 24, 25, 26, 27, 28, 29, 32, 30, 31, 33 };
-                    var b = new int[11];
-                    b[1] = a[(arg_Identify[0]) - 65] % 10;
-                    var c = b[0] = a[(arg_Identify[0]) - 65] / 10;
-                    for (var i = 1; i <= 9; i++)
-                    {
-                        b[i + 1] = arg_Identify[i] - 48;
-                        c += b[i] * (10 - i);
-                    }
-                    if (((c % 10) + b[10]) % 10 == 0)
-                    {
-                        d = true;
-                    }
-                }
-            }
-            return d;
-        }
-        #endregion
 
 
     }

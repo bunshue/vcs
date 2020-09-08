@@ -62,6 +62,8 @@
             this.button21 = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_check2 = new System.Windows.Forms.Button();
+            this.btn_check1 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,15 +76,21 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.btn_check2 = new System.Windows.Forms.Button();
-            this.btn_check1 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_hex = new System.Windows.Forms.TextBox();
             this.lb_dec = new System.Windows.Forms.Label();
             this.button35 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn4 = new System.Windows.Forms.Button();
+            this.btn5 = new System.Windows.Forms.Button();
+            this.btn1 = new System.Windows.Forms.Button();
+            this.btn2 = new System.Windows.Forms.Button();
+            this.btn3 = new System.Windows.Forms.Button();
+            this.button36 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -440,15 +448,38 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button36);
             this.groupBox1.Controls.Add(this.btn_check2);
             this.groupBox1.Controls.Add(this.txtInput);
             this.groupBox1.Controls.Add(this.btn_check1);
             this.groupBox1.Location = new System.Drawing.Point(1061, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 186);
+            this.groupBox1.Size = new System.Drawing.Size(154, 232);
             this.groupBox1.TabIndex = 47;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "正則表達式";
+            // 
+            // btn_check2
+            // 
+            this.btn_check2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn_check2.Location = new System.Drawing.Point(6, 120);
+            this.btn_check2.Name = "btn_check2";
+            this.btn_check2.Size = new System.Drawing.Size(142, 42);
+            this.btn_check2.TabIndex = 58;
+            this.btn_check2.Text = "檢查身分證格式";
+            this.btn_check2.UseVisualStyleBackColor = true;
+            this.btn_check2.Click += new System.EventHandler(this.btn_check2_Click);
+            // 
+            // btn_check1
+            // 
+            this.btn_check1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn_check1.Location = new System.Drawing.Point(6, 70);
+            this.btn_check1.Name = "btn_check1";
+            this.btn_check1.Size = new System.Drawing.Size(142, 42);
+            this.btn_check1.TabIndex = 57;
+            this.btn_check1.Text = "檢查手機號碼格式";
+            this.btn_check1.UseVisualStyleBackColor = true;
+            this.btn_check1.Click += new System.EventHandler(this.btn_check1_Click);
             // 
             // button34
             // 
@@ -562,28 +593,6 @@
             this.label10.TabIndex = 52;
             this.label10.Text = "label10";
             // 
-            // btn_check2
-            // 
-            this.btn_check2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_check2.Location = new System.Drawing.Point(6, 125);
-            this.btn_check2.Name = "btn_check2";
-            this.btn_check2.Size = new System.Drawing.Size(142, 42);
-            this.btn_check2.TabIndex = 58;
-            this.btn_check2.Text = "檢查身分證格式";
-            this.btn_check2.UseVisualStyleBackColor = true;
-            this.btn_check2.Click += new System.EventHandler(this.btn_check2_Click);
-            // 
-            // btn_check1
-            // 
-            this.btn_check1.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_check1.Location = new System.Drawing.Point(6, 71);
-            this.btn_check1.Name = "btn_check1";
-            this.btn_check1.Size = new System.Drawing.Size(142, 42);
-            this.btn_check1.TabIndex = 57;
-            this.btn_check1.Text = "檢查手機號碼格式";
-            this.btn_check1.UseVisualStyleBackColor = true;
-            this.btn_check1.Click += new System.EventHandler(this.btn_check1_Click);
-            // 
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -647,11 +656,92 @@
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btn4);
+            this.groupBox2.Controls.Add(this.btn5);
+            this.groupBox2.Controls.Add(this.btn1);
+            this.groupBox2.Controls.Add(this.btn2);
+            this.groupBox2.Controls.Add(this.btn3);
+            this.groupBox2.Location = new System.Drawing.Point(820, 108);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(99, 88);
+            this.groupBox2.TabIndex = 63;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "使用相同事件";
+            // 
+            // btn4
+            // 
+            this.btn4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn4.Location = new System.Drawing.Point(40, 50);
+            this.btn4.Name = "btn4";
+            this.btn4.Size = new System.Drawing.Size(25, 25);
+            this.btn4.TabIndex = 40;
+            this.btn4.Text = "4";
+            this.btn4.UseVisualStyleBackColor = true;
+            this.btn4.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // btn5
+            // 
+            this.btn5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn5.Location = new System.Drawing.Point(69, 50);
+            this.btn5.Name = "btn5";
+            this.btn5.Size = new System.Drawing.Size(25, 25);
+            this.btn5.TabIndex = 41;
+            this.btn5.Text = "5";
+            this.btn5.UseVisualStyleBackColor = true;
+            this.btn5.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // btn1
+            // 
+            this.btn1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn1.Location = new System.Drawing.Point(11, 19);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(25, 25);
+            this.btn1.TabIndex = 37;
+            this.btn1.Text = "1";
+            this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // btn2
+            // 
+            this.btn2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn2.Location = new System.Drawing.Point(41, 19);
+            this.btn2.Name = "btn2";
+            this.btn2.Size = new System.Drawing.Size(25, 25);
+            this.btn2.TabIndex = 38;
+            this.btn2.Text = "2";
+            this.btn2.UseVisualStyleBackColor = true;
+            this.btn2.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // btn3
+            // 
+            this.btn3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn3.Location = new System.Drawing.Point(11, 50);
+            this.btn3.Name = "btn3";
+            this.btn3.Size = new System.Drawing.Size(25, 25);
+            this.btn3.TabIndex = 39;
+            this.btn3.Text = "3";
+            this.btn3.UseVisualStyleBackColor = true;
+            this.btn3.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // button36
+            // 
+            this.button36.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button36.Location = new System.Drawing.Point(6, 170);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(142, 42);
+            this.button36.TabIndex = 59;
+            this.button36.Text = "驗證身份證字號";
+            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button35);
             this.Controls.Add(this.textBox_hex);
             this.Controls.Add(this.button32);
@@ -707,6 +797,7 @@
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -768,6 +859,13 @@
         private System.Windows.Forms.TextBox textBox_hex;
         private System.Windows.Forms.Label lb_dec;
         private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btn4;
+        private System.Windows.Forms.Button btn5;
+        private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.Button btn2;
+        private System.Windows.Forms.Button btn3;
+        private System.Windows.Forms.Button button36;
     }
 }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1drive
+namespace vcs_RGB2YUV
 {
     static class Program
     {

@@ -3217,8 +3217,8 @@ namespace imsLink
                     groupBox_sn1.Size = new Size(300, 200);
                     lb_sn_opal.Location = new Point(5, 10);
                     tb_sn_opal.Location = new Point(5, 10 + 30);
+                    tb_wait_sn_data.Location = new Point(5 + 160, 10 + 30);
                     lb_main_mesg2.Location = new Point(5, 10 + 30 * 2);
-                    tb_wait_sn_data.Location = new Point(5, 10 + 30 * 3);
                     cb_change_rank.Location = new Point(5, 10 + 30 * 4);
                     cb_air_ng.Location = new Point(5, 10 + 30 * 5);
 
@@ -3226,12 +3226,12 @@ namespace imsLink
 
                     if (flag_operation_mode == MODE_RELEASE_STAGE0)
                     {
-                        groupBox_sn1.Location = new Point(1047, 728);
-                        groupBox_sn1.Size = new Size(300, 130);
+                        groupBox_sn1.Location = new Point(1047, 758);
+                        groupBox_sn1.Size = new Size(300, 100);
                     }
                     if (flag_operation_mode == MODE_RELEASE_STAGE2)
                     {
-                        groupBox_sn1.Size = new Size(300, 130);
+                        groupBox_sn1.Size = new Size(300, 100);
                     }
                 }
 

@@ -55,9 +55,11 @@
             this.button9 = new System.Windows.Forms.Button();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -190,19 +192,19 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 627);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 653);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(831, 347);
+            this.richTextBox1.Size = new System.Drawing.Size(831, 321);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(141, 551);
+            this.trackBar1.Location = new System.Drawing.Point(156, 551);
             this.trackBar1.Maximum = 20;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(506, 45);
+            this.trackBar1.Size = new System.Drawing.Size(496, 45);
             this.trackBar1.TabIndex = 10;
             this.trackBar1.Value = 10;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -211,25 +213,25 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(13, 545);
+            this.radioButton1.Location = new System.Drawing.Point(8, 21);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(123, 16);
             this.radioButton1.TabIndex = 11;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "調整PictureBox大小";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.picture_mode_CheckedChanged);
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(13, 565);
+            this.radioButton2.Location = new System.Drawing.Point(8, 41);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(119, 16);
             this.radioButton2.TabIndex = 12;
             this.radioButton2.Text = "調整擷取影像大小";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.picture_mode_CheckedChanged);
             // 
             // button8
             // 
@@ -237,7 +239,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(806, 545);
+            this.button8.Location = new System.Drawing.Point(804, 520);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(74, 37);
             this.button8.TabIndex = 13;
@@ -247,6 +249,7 @@
             // 
             // button18
             // 
+            this.button18.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.minus;
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button18.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.ForeColor = System.Drawing.Color.Black;
@@ -259,6 +262,7 @@
             // 
             // button17
             // 
+            this.button17.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.plus;
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button17.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.ForeColor = System.Drawing.Color.Black;
@@ -281,13 +285,13 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(13, 585);
+            this.radioButton3.Location = new System.Drawing.Point(8, 61);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(95, 16);
             this.radioButton3.TabIndex = 205;
             this.radioButton3.Text = "調整影像大小";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.picture_mode_CheckedChanged);
             // 
             // label1
             // 
@@ -300,6 +304,7 @@
             // 
             // btnCenter
             // 
+            this.btnCenter.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.stop;
             this.btnCenter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCenter.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnCenter.ForeColor = System.Drawing.Color.Black;
@@ -312,6 +317,7 @@
             // 
             // btnRight
             // 
+            this.btnRight.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.right;
             this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRight.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnRight.ForeColor = System.Drawing.Color.Black;
@@ -324,6 +330,7 @@
             // 
             // btnLeft
             // 
+            this.btnLeft.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.left;
             this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLeft.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnLeft.ForeColor = System.Drawing.Color.Black;
@@ -336,6 +343,7 @@
             // 
             // btnDown
             // 
+            this.btnDown.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.down;
             this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDown.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnDown.ForeColor = System.Drawing.Color.Black;
@@ -348,6 +356,7 @@
             // 
             // btnUp
             // 
+            this.btnUp.BackgroundImage = global::vcs_LoadPicture.Properties.Resources.up;
             this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnUp.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnUp.ForeColor = System.Drawing.Color.Black;
@@ -364,7 +373,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(768, 628);
+            this.button9.Location = new System.Drawing.Point(768, 654);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(74, 37);
             this.button9.TabIndex = 213;
@@ -375,13 +384,13 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(13, 605);
+            this.radioButton4.Location = new System.Drawing.Point(8, 81);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(71, 16);
             this.radioButton4.TabIndex = 214;
             this.radioButton4.Text = "截圖模式";
             this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.picture_mode_CheckedChanged);
             // 
             // pictureBox2
             // 
@@ -394,13 +403,26 @@
             this.pictureBox2.TabIndex = 215;
             this.pictureBox2.TabStop = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Location = new System.Drawing.Point(12, 540);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(140, 105);
+            this.groupBox1.TabIndex = 216;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Mode";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 986);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.btnCenter);
             this.Controls.Add(this.btnRight);
@@ -408,13 +430,10 @@
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.lb_zoom);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button7);
@@ -431,6 +450,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -465,6 +486,7 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

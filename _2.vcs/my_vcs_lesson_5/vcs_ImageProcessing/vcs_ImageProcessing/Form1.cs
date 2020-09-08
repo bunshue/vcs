@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for ImageLockMode
+using System.Runtime.InteropServices;   //for Marshal
+
 namespace vcs_ImageProcessing
 {
     public partial class Form1 : Form
@@ -15,6 +18,80 @@ namespace vcs_ImageProcessing
         //Graphics g;
         Pen p;
         Bitmap bitmap1;
+
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
 
         public Form1()
         {
@@ -346,6 +423,343 @@ namespace vcs_ImageProcessing
 
 
         }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap2 = 灰度處理(bmp);
+            pictureBox2.Image = bitmap2;
+        }
+
+        /// <summary>  
+        /// 灰度處理(BitmapData類)  
+        /// </summary>  
+        /// <returns>輸出8位灰度圖片</returns>  
+        public static Bitmap 灰度處理(Bitmap 圖像)
+        {
+            Bitmap bmp = new Bitmap(圖像.Width, 圖像.Height, PixelFormat.Format8bppIndexed);
+
+            //設定實例BitmapData相關信息  
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            BitmapData data = 圖像.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            //鎖定bmp到系統內存中  
+            BitmapData data2 = bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+
+            //獲取位圖中第一個像素數據的地址  
+            IntPtr ptr = data.Scan0;
+            IntPtr ptr2 = data2.Scan0;
+
+            int numBytes = data.Stride * data.Height;
+            int numBytes2 = data2.Stride * data2.Height;
+
+            int n2 = data2.Stride - bmp.Width; //// 顯示寬度與掃描線寬度的間隙  
+
+            byte[] rgbValues = new byte[numBytes];
+            byte[] rgbValues2 = new byte[numBytes2];
+            //將bmp數據Copy到申明的數組中  
+            Marshal.Copy(ptr, rgbValues, 0, numBytes);
+            Marshal.Copy(ptr2, rgbValues2, 0, numBytes2);
+
+            int n = 0;
+
+            for (int y = 0; y < bmp.Height; y++)
+            {
+                for (int x = 0; x < bmp.Width * 3; x += 3)
+                {
+                    int i = data.Stride * y + x;
+
+                    double value = rgbValues[i + 2] * 0.299 + rgbValues[i + 1] * 0.587 + rgbValues[i] * 0.114; //計算灰度  
+
+                    rgbValues2[n] = (byte)value;
+
+                    n++;
+                }
+                n += n2; //跳過差值  
+            }
+
+            //將數據Copy到內存指針  
+            Marshal.Copy(rgbValues, 0, ptr, numBytes);
+            Marshal.Copy(rgbValues2, 0, ptr2, numBytes2);
+
+            //// 下面的代碼是為了修改生成位圖的索引表，從偽彩修改為灰度  
+            ColorPalette tempPalette;
+            using (Bitmap tempBmp = new Bitmap(1, 1, PixelFormat.Format8bppIndexed))
+            {
+                tempPalette = tempBmp.Palette;
+            }
+            for (int i = 0; i < 256; i++)
+            {
+                tempPalette.Entries[i] = Color.FromArgb(i, i, i);
+            }
+
+            bmp.Palette = tempPalette;
+
+
+            //從系統內存解鎖bmp  
+            圖像.UnlockBits(data);
+            bmp.UnlockBits(data2);
+
+            return bmp;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            LockUnlockBitsExample();
+
+        }
+
+        private void LockUnlockBitsExample()
+        {
+            // Create a new bitmap.
+            //Bitmap bmp = new Bitmap("c:\\______test_files\\IMG_256X32.bmp");
+            Bitmap bmp0 = new Bitmap("c:\\______test_files\\800px-L陆羽茶经.JPG");
+            Bitmap bmp = new Bitmap("c:\\______test_files\\800px-L陆羽茶经.JPG");
+            pictureBox1.Image = bmp0;
+
+            richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
+            richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+
+            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
+                richTextBox1.Text += "位元深度\t32\n";
+            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
+                richTextBox1.Text += "位元深度\t24\n";
+            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
+                richTextBox1.Text += "位元深度\t8\n";
+            else
+                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+
+            // Lock the bitmap's bits.  
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            //System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+
+            richTextBox1.Text += "W = " + bmpData.Width.ToString() + "\n";
+            richTextBox1.Text += "H = " + bmpData.Height.ToString() + "\n";
+            richTextBox1.Text += "Stride = " + bmpData.Stride.ToString() + "\n";    //圖片一橫條的拜數 即WX4(拜)
+            richTextBox1.Text += "Scan0 = " + bmpData.Scan0.ToString() + "\n";
+
+            // Get the address of the first line.
+            IntPtr ptr = bmpData.Scan0;
+
+            // Declare an array to hold the bytes of the bitmap.
+            int len = Math.Abs(bmpData.Stride) * bmp.Height;    //(W * 4) * H
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] rgbValues = new byte[len];
+
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, len);
+
+            /*
+            int i;
+            for (i = 0; i < 1024; i++)
+            {
+                richTextBox1.Text += rgbValues[i].ToString();
+                if ((i % 64) == 63)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            */
+
+            //對特定點的資料作操作
+            // Set every third value to 255. A 24bpp bitmap will look red.  
+            int tmp = 0;
+            for (int counter = 0; counter < (rgbValues.Length - 20); counter += 3)
+            {
+                tmp = rgbValues[counter] + rgbValues[counter + 1] + rgbValues[counter + 2];
+                tmp /= 3;
+                rgbValues[counter] = (byte)tmp;
+                rgbValues[counter + 1] = (byte)tmp;
+                rgbValues[counter + 2] = (byte)tmp;
+            }
+
+            /*
+            for (i = 0; i < 1024; i++)
+            {
+                richTextBox1.Text += rgbValues[i].ToString();
+                if ((i % 64) == 63)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            // Copy the RGB values back to the bitmap
+            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, len);
+
+            // Unlock the bits.
+            bmp.UnlockBits(bmpData);
+
+            // Draw the modified image.
+            pictureBox2.Image = bmp;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\ims_image.bmp";
+
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            pictureBox2.Image = Image.FromFile(filename);
+
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
+        public static RGB YUVToRGB(YUV yuv)
+        {
+            byte r = (byte)(yuv.Y + 1.4075 * (yuv.V - 128));
+            byte g = (byte)(yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128)));
+            byte b = (byte)(yuv.Y + 1.7790 * (yuv.U - 128));
+
+            return new RGB(r, g, b);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            int xx;
+            int yy;
+            Color p;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    p = bitmap1.GetPixel(xx, yy);
+
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    if (yyy.Y > 252)
+                    {
+                        //bitmap1.SetPixel(xx, yy, Color.FromArgb((int)yyy.Y, (int)yyy.Y, (int)yyy.Y));
+                        bitmap1.SetPixel(xx, yy, Color.Red);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            int xx;
+            int yy;
+            Color p;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    p = bitmap1.GetPixel(xx, yy);
+
+                    RGB pp = new RGB(p.R, p.G, p.B);
+                    YUV yyy = new YUV();
+                    RGB rrr = new RGB();
+                    yyy = RGBToYUV(pp);
+
+                    if (yyy.Y > 50)
+                    {
+                        yyy.Y -= 10;
+                    }
+                    else
+                    {
+                        yyy.Y = 50;
+                    }
+
+                    rrr = YUVToRGB(yyy);
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(rrr.R, rrr.G, rrr.B));
+                }
+            }
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, System.Drawing.FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                g.ReleaseHdc();
+
+                g.Dispose();
+
+                String filename1 = string.Empty;
+
+                filename1 = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                //String file1 = file + ".jpg";
+                String filename1a = filename1 + ".bmp";
+                //String file3 = file + ".png";
+
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename1a, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename1a + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+
+        }
+
+
 
     }
 }
