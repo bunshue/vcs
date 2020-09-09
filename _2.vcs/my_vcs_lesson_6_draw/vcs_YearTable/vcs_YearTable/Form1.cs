@@ -32,6 +32,57 @@ namespace vcs_YearTable
             this.Size = new Size(1920, 1080);
             this.Location = new Point(0, 0);
             this.BackColor = Color.Pink;
+
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 1200;
+            y_st = 10;
+            dx = 100;
+            dy = 42;
+
+            //row 0
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            //row 1
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            //row 2
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            //row 3
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+
+            //row 4
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button2.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+
+            //row 5
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+
+            //row 6
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
+
+
+            //row 7
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button9.Location = new Point(x_st + dx * 1-dx/4+5, y_st + dy * 7);
+            button5.Location = new Point(x_st + dx * 1+dx/3+10, y_st + dy * 7);
+
         }
 
         private void button4_Click(object sender, EventArgs e)

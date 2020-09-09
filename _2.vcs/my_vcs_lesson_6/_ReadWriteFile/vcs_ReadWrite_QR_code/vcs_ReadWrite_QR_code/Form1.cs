@@ -70,7 +70,7 @@ namespace vcs_ReadWrite_QR_code
             ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
 
             //讀取要解碼的圖片
-            string filename = "C:\\______test_files\\__RW\\_qr_code\\images.png";
+            string filename = "C:\\______test_files\\__RW\\_qr_code\\vcs_ReadWrite_QR_code.png";
 
             FileStream fs = new FileStream(filename, FileMode.Open);
 

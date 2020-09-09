@@ -77,7 +77,7 @@ namespace vcs_ReadWrite_CSV
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_csv\\成績檔.csv";
+            string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_成績檔.csv";
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
             //一維字串陣列
@@ -146,7 +146,7 @@ namespace vcs_ReadWrite_CSV
         private void button7_Click(object sender, EventArgs e)
         {
             //int k = 0;
-            string filename = "C:\\______test_files\\__RW\\_csv\\F0035CH1.CSV";
+            string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_F0035CH1.CSV";
 
             Encoding enc = Encoding.GetEncoding("big5"); //設定檔案的編碼
             string[] readText = System.IO.File.ReadAllLines(filename, enc); //以指定的編碼方式讀取檔案

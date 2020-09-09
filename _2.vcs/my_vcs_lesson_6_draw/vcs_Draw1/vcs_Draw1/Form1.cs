@@ -643,7 +643,7 @@ namespace vcs_Draw1
         private void button9_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap("C:\\______test_files\\bear.jpg");
-            Bitmap bitmap2 = new Bitmap("C:\\______test_files\\__RW\\_png\\ims-small-logo.png");
+            Bitmap bitmap2 = new Bitmap("C:\\______test_files\\__RW\\_png\\vcs_ReadWrite_PNG.png");
 
             //將圖２貼到圖１左上角
             Graphics g = Graphics.FromImage(bitmap1);   //以記憶體圖像 bitmap1 建立 記憶體畫布g

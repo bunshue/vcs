@@ -455,7 +455,7 @@ namespace vcs_ReadWrite_BIN
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
         }
 
-        string filename = "C:\\______test_files\\__RW\\_bin\\sample.bin";
+        string filename = "C:\\______test_files\\__RW\\_bin\\vcs_ReadWrite_BIN.bin";
 
         void print_data(byte[] data, int len)
         {
@@ -670,7 +670,7 @@ namespace vcs_ReadWrite_BIN
             }
             richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename + "\n";
 
-            filename = "C:\\______test_files\\__RW\\_bin\\sample.bin";
+            filename = "C:\\______test_files\\__RW\\_bin\\vcs_ReadWrite_BIN.bin";
             richTextBox1.Text += "\nReadByte, 檔名 : " + filename + "\n";
 
             using (FileStream fileStream = new FileStream(filename, FileMode.Open))

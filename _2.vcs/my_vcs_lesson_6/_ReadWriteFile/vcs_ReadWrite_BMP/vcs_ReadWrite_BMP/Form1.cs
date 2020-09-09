@@ -129,7 +129,7 @@ namespace vcs_ReadWrite_BMP
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_bmp\\ims_image.bmp";
+            string filename = "C:\\______test_files\\__RW\\_bmp\\vcs_ReadWrite_BMP.bmp";
 
             //讀取資料
             byte[] data = File.ReadAllBytes(filename);
