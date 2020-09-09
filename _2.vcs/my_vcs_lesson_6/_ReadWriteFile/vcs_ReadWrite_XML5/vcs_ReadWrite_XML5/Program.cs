@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace 使用unmanaged_DLL
+namespace vcs_ReadWrite_XML5
 {
     static class Program
     {

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{472E3D30-464E-41A3-A29F-69BBAD29F781}</ProjectGuid>
+    <ProjectGuid>{88748861-4D1C-48BB-8B3A-9BCC8EC1FE14}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>使用unmanaged_DLL</RootNamespace>
-    <AssemblyName>使用unmanaged DLL</AssemblyName>
+    <RootNamespace>用vcs下载http文件并显示进度条</RootNamespace>
+    <AssemblyName>用vcs下载http文件并显示进度条</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

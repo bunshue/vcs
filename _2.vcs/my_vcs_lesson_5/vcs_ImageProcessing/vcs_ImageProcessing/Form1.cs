@@ -330,35 +330,6 @@ namespace vcs_ImageProcessing
 
         }
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            int xx;
-            int yy;
-
-            bitmap1 = new Bitmap(filename);
-            Graphics g = Graphics.FromImage(bitmap1);   //畫字用
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    byte rrr = bitmap1.GetPixel(xx, yy).R;
-                    byte ggg = bitmap1.GetPixel(xx, yy).G;
-                    byte bbb = bitmap1.GetPixel(xx, yy).B;
-
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap1.SetPixel(xx, yy, zz);
-                }
-            }
-            g.DrawString("彩色轉灰階", new Font("標楷體", 100), new SolidBrush(Color.Blue), new PointF(20, 20));
-
-            pictureBox2.Image = bitmap1;
-
-        }
-
         private void button13_Click(object sender, EventArgs e)
         {
             int xx;
@@ -503,20 +474,14 @@ namespace vcs_ImageProcessing
             return bmp;
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void LockUnlockBitsExample1()
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            LockUnlockBitsExample();
+            string filename = @"C:\______test_files\_case1\\pic3.jpg";
 
-        }
-
-        private void LockUnlockBitsExample()
-        {
+            int data_offset = 0;
             // Create a new bitmap.
-            //Bitmap bmp = new Bitmap("c:\\______test_files\\IMG_256X32.bmp");
-            Bitmap bmp0 = new Bitmap("c:\\______test_files\\800px-L陆羽茶经.JPG");
-            Bitmap bmp = new Bitmap("c:\\______test_files\\800px-L陆羽茶经.JPG");
+            Bitmap bmp0 = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(filename);
             pictureBox1.Image = bmp0;
 
             richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
@@ -571,9 +536,109 @@ namespace vcs_ImageProcessing
             */
 
             //對特定點的資料作操作
-            // Set every third value to 255. A 24bpp bitmap will look red.  
             int tmp = 0;
             for (int counter = 0; counter < (rgbValues.Length - 20); counter += 3)
+            {
+                tmp = rgbValues[counter] + rgbValues[counter + 1] + rgbValues[counter + 2];
+                tmp /= 3;
+                rgbValues[counter] = (byte)tmp;
+                rgbValues[counter + 1] = (byte)tmp;
+                rgbValues[counter + 2] = (byte)tmp;
+            }
+
+            /*
+            for (i = 0; i < 1024; i++)
+            {
+                richTextBox1.Text += rgbValues[i].ToString();
+                if ((i % 64) == 63)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            // Copy the RGB values back to the bitmap
+            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, len);
+
+            // Unlock the bits.
+            bmp.UnlockBits(bmpData);
+
+            // Draw the modified image.
+            pictureBox2.Image = bmp;
+        }
+
+        private void LockUnlockBitsExample2()
+        {
+            int data_offset = 0;
+            // Create a new bitmap.
+            //Bitmap bmp = new Bitmap("c:\\______test_files\\IMG_256X32.bmp");
+            Bitmap bmp0 = new Bitmap("c:\\______test_files\\picture1.jpg");
+            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg");
+            pictureBox1.Image = bmp0;
+
+            richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
+            richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+
+            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
+            {
+                richTextBox1.Text += "位元深度\t32\n";
+                data_offset = 4;
+            }
+            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                richTextBox1.Text += "位元深度\t24\n";
+                data_offset = 3;
+            }
+            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
+            {
+                richTextBox1.Text += "位元深度\t8\n";
+                data_offset = 1;
+            }
+            else
+                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+
+            // Lock the bitmap's bits.  
+            Rectangle rect = new Rectangle(bmp.Width / 4, bmp.Width / 4, bmp.Width / 2, bmp.Height / 2);
+            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+
+            richTextBox1.Text += "W = " + bmpData.Width.ToString() + "\n";
+            richTextBox1.Text += "H = " + bmpData.Height.ToString() + "\n";
+            richTextBox1.Text += "Stride = " + bmpData.Stride.ToString() + "\n";    //圖片一橫條的拜數 即WX4(拜)
+            richTextBox1.Text += "Scan0 = " + bmpData.Scan0.ToString() + "\n";
+
+            // Get the address of the first line.
+            IntPtr ptr = bmpData.Scan0;
+
+            // Declare an array to hold the bytes of the bitmap.
+            int len = Math.Abs(bmpData.Stride) * bmp.Height / 4;    //(W * 4) * H
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] rgbValues = new byte[len];
+
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, len);
+
+            /*
+            int i;
+            for (i = 0; i < 1024; i++)
+            {
+                richTextBox1.Text += rgbValues[i].ToString();
+                if ((i % 64) == 63)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            */
+
+            //對特定點的資料作操作
+            int tmp = 0;
+            for (int counter = 0; counter < (rgbValues.Length - data_offset); counter += data_offset)
             {
                 tmp = rgbValues[counter] + rgbValues[counter + 1] + rgbValues[counter + 2];
                 tmp /= 3;
@@ -759,7 +824,163 @@ namespace vcs_ImageProcessing
 
         }
 
+        private void button16_Click(object sender, EventArgs e)
+        {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            LockUnlockBitsExample1();
+        }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            LockUnlockBitsExample2();
+        }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //SetPixel 彩色轉灰階
+            color_to_gray_1();
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //Marshal 彩色轉灰階
+            color_to_gray_2();
+        }
+
+        void color_to_gray_1()
+        {
+            richTextBox1.Text += "SetPixel 彩色轉灰階\n";
+            string filename = @"C:\______test_files\_case1\\pic3.jpg";
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+            Bitmap bmp0 = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(filename);
+            pictureBox1.Image = bmp0;
+
+            int xx;
+            int yy;
+
+            for (yy = 0; yy < bmp.Height; yy++)
+            {
+                for (xx = 0; xx < bmp.Width; xx++)
+                {
+                    byte rrr = bmp.GetPixel(xx, yy).R;
+                    byte ggg = bmp.GetPixel(xx, yy).G;
+                    byte bbb = bmp.GetPixel(xx, yy).B;
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bmp.SetPixel(xx, yy, zz);
+                }
+            }
+            pictureBox2.Image = bmp;
+        }
+
+        void color_to_gray_2()
+        {
+            richTextBox1.Text += "Marshal 彩色轉灰階\n";
+            string filename = @"C:\______test_files\_case1\\pic3.jpg";
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+
+            int data_offset = 0;
+            // Create a new bitmap.
+            Bitmap bmp0 = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(filename);
+            pictureBox1.Image = bmp0;
+
+            richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";
+            richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+
+            if (bmp.PixelFormat == PixelFormat.Format32bppRgb)
+                richTextBox1.Text += "位元深度\t32\n";
+            else if (bmp.PixelFormat == PixelFormat.Format24bppRgb)
+                richTextBox1.Text += "位元深度\t24\n";
+            else if (bmp.PixelFormat == PixelFormat.Format8bppIndexed)
+                richTextBox1.Text += "位元深度\t8\n";
+            else
+                richTextBox1.Text += "位元深度\tunknown, PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
+
+            // Lock the bitmap's bits.  
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            //System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+            System.Drawing.Imaging.BitmapData bmpData = bmp.LockBits(rect, System.Drawing.Imaging.ImageLockMode.ReadWrite, bmp.PixelFormat);
+
+            richTextBox1.Text += "W = " + bmpData.Width.ToString() + "\n";
+            richTextBox1.Text += "H = " + bmpData.Height.ToString() + "\n";
+            richTextBox1.Text += "Stride = " + bmpData.Stride.ToString() + "\n";    //圖片一橫條的拜數 即WX4(拜)
+            richTextBox1.Text += "Scan0 = " + bmpData.Scan0.ToString() + "\n";
+
+            // Get the address of the first line.
+            IntPtr ptr = bmpData.Scan0;
+
+            // Declare an array to hold the bytes of the bitmap.
+            int len = Math.Abs(bmpData.Stride) * bmp.Height;    //(W * 4) * H
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] rgbValues = new byte[len];
+
+            // Copy the RGB values into the array.
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, len);
+
+            /*
+            int i;
+            for (i = 0; i < 1024; i++)
+            {
+                richTextBox1.Text += rgbValues[i].ToString();
+                if ((i % 64) == 63)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            */
+
+            //對特定點的資料作操作
+            for (int counter = 0; counter < (rgbValues.Length - 20); counter += 3)
+            {
+                byte bbb = rgbValues[counter];      //Blue
+                byte ggg = rgbValues[counter + 1];  //Green
+                byte rrr = rgbValues[counter + 2];  //Red
+
+                int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+
+                rgbValues[counter] = (byte)Gray;
+                rgbValues[counter + 1] = (byte)Gray;
+                rgbValues[counter + 2] = (byte)Gray;
+            }
+
+            /*
+            for (i = 0; i < 1024; i++)
+            {
+                richTextBox1.Text += rgbValues[i].ToString();
+                if ((i % 64) == 63)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += " ";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            // Copy the RGB values back to the bitmap
+            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, ptr, len);
+
+            // Unlock the bits.
+            bmp.UnlockBits(bmpData);
+
+            // Draw the modified image.
+            pictureBox2.Image = bmp;
+        }
     }
 }

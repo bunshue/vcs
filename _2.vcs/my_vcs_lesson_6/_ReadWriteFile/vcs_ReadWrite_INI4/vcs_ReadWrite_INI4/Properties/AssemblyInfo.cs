@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("使用unmanaged DLL")]
+[assembly: AssemblyTitle("vcs_ReadWrite_INI4")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("使用unmanaged DLL")]
+[assembly: AssemblyProduct("vcs_ReadWrite_INI4")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("763692cc-12c6-40dd-96c2-11e9a0042161")]
+[assembly: Guid("412c1eaa-8818-4f46-95f7-dcec28134702")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

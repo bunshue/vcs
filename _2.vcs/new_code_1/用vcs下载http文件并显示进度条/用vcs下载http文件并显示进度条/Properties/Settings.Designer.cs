@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 使用unmanaged_DLL.Properties
+namespace 用vcs下载http文件并显示进度条.Properties
 {
 
 

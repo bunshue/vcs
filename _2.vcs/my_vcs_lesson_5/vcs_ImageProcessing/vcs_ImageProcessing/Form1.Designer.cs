@@ -57,6 +57,8 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).BeginInit();
@@ -260,11 +262,11 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(825, 392);
+            this.button12.Location = new System.Drawing.Point(949, 230);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(71, 37);
+            this.button12.Size = new System.Drawing.Size(72, 37);
             this.button12.TabIndex = 20;
-            this.button12.Text = "彩色轉灰階";
+            this.button12.Text = "SetPixel 彩色轉灰階";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -304,7 +306,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(100, 37);
             this.button16.TabIndex = 24;
-            this.button16.Text = "對圖片做Marshal處理";
+            this.button16.Text = "對圖片做Marshal處理1";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -348,11 +350,33 @@
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(825, 283);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(100, 37);
+            this.button21.TabIndex = 29;
+            this.button21.Text = "對圖片做Marshal處理2";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(949, 283);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(72, 37);
+            this.button22.TabIndex = 30;
+            this.button22.Text = "Marshal 彩色轉灰階";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1192, 987);
+            this.Controls.Add(this.button22);
+            this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button18);
@@ -426,6 +450,8 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Button button22;
     }
 }
 

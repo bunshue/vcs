@@ -640,6 +640,10 @@ namespace vcs_test_all_06_System
 
             System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
             System.Diagnostics.Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
+
+            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號1");
+            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號2");
+            Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號3");
         }
 
         private void button35_Click_1(object sender, EventArgs e)
