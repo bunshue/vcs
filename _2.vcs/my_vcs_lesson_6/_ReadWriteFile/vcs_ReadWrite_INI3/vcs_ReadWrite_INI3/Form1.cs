@@ -14,7 +14,7 @@ namespace vcs_ReadWrite_INI3
 {
     public partial class Form1 : Form
     {
-        public string filename = "c:\\______test_files\\__RW\\_ini\\language.ini";//要注意全域變數都是放在public Form1()上面
+        public string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI3.ini";//要注意全域變數都是放在public Form1()上面
 
         SetupIniIP ini = new SetupIniIP();
 
@@ -48,6 +48,7 @@ namespace vcs_ReadWrite_INI3
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Read ini data from " + filename + "\n";
             try
             {
                 if (File.Exists(filename))
@@ -67,6 +68,7 @@ namespace vcs_ReadWrite_INI3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Write ini data to " + filename + "\n";
             ini.IniWriteValue("Language", "lang1", textBox1.Text, filename);
             ini.IniWriteValue("Language", "lang2", textBox2.Text, filename);
 

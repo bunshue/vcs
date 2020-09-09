@@ -17,6 +17,8 @@ namespace vcs_ReadWrite_INI4
 {
     public partial class Form1 : Form
     {
+        string ini_filename = "c://______test_files//__RW//_ini//vcs_ReadWrite_INI4.ini";
+
         public Form1()
         {
             InitializeComponent();
@@ -24,11 +26,15 @@ namespace vcs_ReadWrite_INI4
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Read ini data from " + ini_filename + "\n";
+
             textBox1.Text = GetPrivateProfileString("version", "ver");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Write ini data to " + ini_filename + "\n";
+
             string iniValue = textBox1.Text;
             if (iniValue != "")
             {
@@ -41,37 +47,6 @@ namespace vcs_ReadWrite_INI4
             else
             {
                 richTextBox1.Text += "請輸入版本號\n";
-            }
-        }
-
-        /// <summary>
-        ///  软件安装路径，以此exe所在的路径为准。
-        /// </summary>
-        string installDirectory = null;
-        private string InstallDirectory
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(installDirectory))
-                {
-                    string sPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                    installDirectory = Path.GetDirectoryName(sPath) + @"\";
-                }
-                return installDirectory;
-            }
-        }
-
-        private string startUpIniFileName = null;
-        public string StartUpIniFileName
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(startUpIniFileName))
-                {
-                    startUpIniFileName = InstallDirectory + "ver.ini";
-                }
-
-                return startUpIniFileName;
             }
         }
 
@@ -91,7 +66,7 @@ namespace vcs_ReadWrite_INI4
         {
             int nCapacity = 255;
             StringBuilder temp = new StringBuilder(nCapacity);
-            int i = GetPrivateProfileString(section, key, "", temp, nCapacity, StartUpIniFileName);
+            int i = GetPrivateProfileString(section, key, "", temp, nCapacity, ini_filename);
 
             if (i < 0)
                 return "";
@@ -111,7 +86,7 @@ namespace vcs_ReadWrite_INI4
             if (section.Trim().Length <= 0 || key.Trim().Length <= 0 || value.Trim().Length <= 0)
                 return 0;
 
-            return WritePrivateProfileString(section, key, value, StartUpIniFileName);
+            return WritePrivateProfileString(section, key, value, ini_filename);
         } 
 
 

@@ -24,7 +24,7 @@ namespace vcs_ReadWrite_EXCEL2
             //Excel數據導入到dataGridView
             //http://weisico.com/program/2018/0531/370.html
 
-            string path = "c:\\______test_files\\__RW\\_excel\\excel_for_vcs_ReadWrite_EXCEL4.xls";
+            string path = "c:\\______test_files\\__RW\\_excel\\vcs_ReadWrite_EXCEL2.xls";
 
             try
             {

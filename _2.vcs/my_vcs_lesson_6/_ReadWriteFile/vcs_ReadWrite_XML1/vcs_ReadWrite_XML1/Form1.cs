@@ -14,9 +14,9 @@ namespace vcs_ReadWrite_XML1
 {
     public partial class Form1 : Form
     {
-        string filename = "C:\\______test_files\\__RW\\_xml\\books.xml";
-        string filename_add = "C:\\______test_files\\__RW\\_xml\\books_add.xml";
-        string filename_delete = "C:\\______test_files\\__RW\\_xml\\books_delete.xml";
+        string filename = "C:\\______test_files\\__RW\\_xml\\vcs_ReadWrite_XML1.xml";
+        string filename_add = "C:\\______test_files\\__RW\\_xml\\vcs_ReadWrite_XML1_add.xml";
+        string filename_delete = "C:\\______test_files\\__RW\\_xml\\vcs_ReadWrite_XML1_delete.xml";
 
         public Form1()
         {

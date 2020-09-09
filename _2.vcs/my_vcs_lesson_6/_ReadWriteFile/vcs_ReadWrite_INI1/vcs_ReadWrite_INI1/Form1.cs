@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_INI1
             InitializeComponent();
         }
 
-        private string filename = "c:\\______test_files\\__RW\\_ini\\sample.ini";
+        private string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI1a.ini";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool WritePrivateProfileString(
@@ -35,21 +35,18 @@ namespace vcs_ReadWrite_INI1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "write data to test_ini.ini.\n";
-            WritePrivateProfileString("Demo", "abc", "123", "c:\\______test_files\\__RW\\_ini\\test_ini.ini");
+            string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI1b.ini";
+            richTextBox1.Text += "Write ini data to " + filename + "\n";
+            WritePrivateProfileString("Demo", "abc", "123", filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "read data from test_ini.ini.\n";
+            string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI1b.ini";
+            richTextBox1.Text += "Read ini data from " + filename + "\n";
             StringBuilder temp = new StringBuilder();
-            GetPrivateProfileString("Demo", "abc", "", temp, 255, "c:\\______test_files\\__RW\\_ini\\test_ini.ini");
+            GetPrivateProfileString("Demo", "abc", "", temp, 255, filename);
             richTextBox1.Text += "get value = " + temp + "\n";
-
-            //Console.WriteLine(temp);
-            //Console.ReadLine();
-
-
         }
 
         /// <summary>
@@ -75,23 +72,23 @@ namespace vcs_ReadWrite_INI1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "write data to student.ini.\n";
-            string strName, strTemp;
+            string filename = "c://______test_files//__RW//_ini//vcs_ReadWrite_INI1c.ini";
+            richTextBox1.Text += "Write ini data to " + filename + "\n";
+
+            string strName;
             int nAge;
             strName = "張三";
             nAge = 12;
-            WritePrivateProfileString("StudentInfo", "Name", strName, "c://______test_files//__RW//_ini//student.ini");
-            WritePrivateProfileString("StudentInfo", "Age", nAge.ToString(), "c://______test_files//__RW//_ini//student.ini");
-
-
+            WritePrivateProfileString("StudentInfo", "Name", strName, filename);
+            WritePrivateProfileString("StudentInfo", "Age", nAge.ToString(), filename);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "read data from student.ini.\n";
+            string filename = "c://______test_files//__RW//_ini//vcs_ReadWrite_INI1c.ini";
+            richTextBox1.Text += "Read ini data from " + filename + "\n";
 
-
-
+            //TBD
 
 
         }

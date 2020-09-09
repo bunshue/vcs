@@ -83,6 +83,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(146, 33);
             this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "群曜醫電";
             // 
             // textBox2
             // 
@@ -91,6 +92,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(146, 33);
             this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "insighteyes";
             // 
             // button4
             // 
