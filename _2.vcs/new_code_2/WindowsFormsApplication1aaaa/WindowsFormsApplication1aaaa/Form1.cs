@@ -14,6 +14,9 @@ using System.Net;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;       //for Process, Stopwatch
 
+using System.Net.NetworkInformation;    //for Ping
+
+
 namespace WindowsFormsApplication1aaaa
 {
 
@@ -167,6 +170,43 @@ namespace WindowsFormsApplication1aaaa
             //MessageBox.Show("複製成功！");
 
             richTextBox1.Text += fi.Length.ToString() + " Bytes";
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            Ping ping = new Ping();
+
+            PingReply reply = ping.Send("www.google.com");
+            if (reply.Status == IPStatus.Success)
+            {
+                MessageBox.Show("ok");
+            } 
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process[] all = Process.GetProcesses();
+            int length = all.Length;
+            for (int index = 0; index < length; index++)
+            {
+                richTextBox1.Text += String.Format("{0} \tID:{1}", all[index].ProcessName, all[index].Id) + "\n";
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process[] ps = Process.GetProcessesByName("firefox");
+            foreach (Process p in ps)
+            {
+                richTextBox1.Text += String.Format("{0} \tID:{1}", p.ProcessName, p.Id) + "\n";
+            } 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
 
         }
 

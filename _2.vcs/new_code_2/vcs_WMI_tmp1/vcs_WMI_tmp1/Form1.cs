@@ -237,6 +237,42 @@ namespace vcs_WMI_tmp1
             richTextBox1.Clear();
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            ManagementObjectCollection collection = search.Get();
+            var networkList = from n in collection.Cast<ManagementBaseObject>()
+                              select new
+                              {
+                                  guid = n.GetPropertyValue("GUID"),
+                                  name = n.GetPropertyValue("Name"),
+                                  mac = n.GetPropertyValue("MACAddress")
+
+                              };
+            foreach (var n in networkList)
+                richTextBox1.Text += String.Format("{0}{2}{1}{2}{2}", n.name, n.mac, Environment.NewLine);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            ManagementObjectCollection collection = search.Get();
+            var usbList = from u in collection.Cast<ManagementBaseObject>()
+                          select new
+                          {
+                              id = u.GetPropertyValue("DeviceID"),
+                              name = u.GetPropertyValue("Name"),
+                              status = u.GetPropertyValue("Status"),
+                              system = u.GetPropertyValue("SystemName"),
+                              caption = u.GetPropertyValue("Caption"),
+                              pnp = u.GetPropertyValue("PNPDeviceID"),
+                              description = u.GetPropertyValue("Description")
+                          };
+            foreach (var u in usbList)
+                richTextBox1.Text += String.Format("{0}{7}{1}{7}{2}{7}{3}{7}{4}{7}{5}{7}{6}{7}{7}{7}",
+                    u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
+        }
+
 
 
     }
