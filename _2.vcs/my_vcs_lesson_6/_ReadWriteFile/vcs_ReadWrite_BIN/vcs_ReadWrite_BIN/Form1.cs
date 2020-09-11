@@ -16,6 +16,37 @@ namespace vcs_ReadWrite_BIN
         public Form1()
         {
             InitializeComponent();
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 100;
+            int dy = 50;
+
+
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+
+
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 11 + 20);
+
+            richTextBox1.Location = new Point(170, 10);
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)

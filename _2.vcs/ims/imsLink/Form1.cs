@@ -2779,34 +2779,88 @@ namespace imsLink
             int dx;
             int dy;
 
-            x_st = 2;
-            y_st = 1;
+            if (flag_operation_mode == MODE_RELEASE_STAGE0)
+            {
+                x_st = 2;
+                y_st = 1;
 
-            dx = 60;
-            button9.Location = new Point(x_st + dx * 0, y_st);
-            button13.Location = new Point(x_st + dx * 1, y_st);
-            button35.Location = new Point(x_st + dx * 2, y_st);
-            button32.Location = new Point(x_st + dx * 3, y_st);
-            button20.Location = new Point(x_st + dx * 4, y_st);
-            button49.Location = new Point(x_st + dx * 5, y_st); //本地存圖
-            bt_min.Location = new Point(x_st + dx * 6, y_st);
-            bt_save_program_picture.Location = new Point(x_st + dx * 7, y_st);
-            bt_read_camera_register.Location = new Point(x_st + dx * 8, y_st);
-            bt_restore_camera_setup.Location = new Point(x_st + dx * 9, y_st);
+                dx = 60;
+                button9.Location = new Point(x_st + dx * 0, y_st);
+                button13.Location = new Point(x_st + dx * 1, y_st);
+                button35.Location = new Point(x_st + dx * 2, y_st);
+                button32.Location = new Point(x_st + dx * 3, y_st);
+                button20.Location = new Point(x_st + dx * 4, y_st);
+                button49.Location = new Point(x_st + dx * 5, y_st); //本地存圖
+                bt_min.Location = new Point(x_st + dx * 6, y_st);
+                bt_save_program_picture.Location = new Point(x_st + dx * 7, y_st);
+                bt_read_camera_register.Location = new Point(x_st + dx * 8, y_st);
+                bt_restore_camera_setup.Location = new Point(x_st + dx * 9, y_st);
 
-            x_st = bt_restore_camera_setup.Location.X + bt_restore_camera_setup.Size.Width;
-            dx = 40;
-            button33.Location = new Point(x_st + dx * 0, y_st);
-            y_st += 10;
-            button72.Location = new Point(x_st + dx * 1, y_st);
-            button22.Location = new Point(x_st + dx * 2, y_st);
-            button73.Location = new Point(x_st + dx * 3, y_st);
-            button74.Location = new Point(x_st + dx * 4, y_st);
-            button88.Location = new Point(x_st + dx * 5, y_st);
-            button70.Location = new Point(x_st + dx * 6, y_st);
-            button87.Location = new Point(x_st + dx * 7, y_st);
-            button34.Location = new Point(x_st + dx * 8, y_st);
-            button7.Location = new Point(x_st + dx * 9, y_st);
+                x_st = bt_restore_camera_setup.Location.X + bt_restore_camera_setup.Size.Width;
+                dx = 40;
+                button33.Location = new Point(x_st + dx * 0, y_st);
+                y_st += 10;
+                button72.Location = new Point(x_st + dx * 1, y_st);
+                button22.Location = new Point(x_st + dx * 2, y_st);
+                button73.Location = new Point(x_st + dx * 3, y_st);
+                button74.Location = new Point(x_st + dx * 4, y_st);
+                button88.Location = new Point(x_st + dx * 5, y_st);
+                button70.Location = new Point(x_st + dx * 6, y_st);
+                button87.Location = new Point(x_st + dx * 7, y_st);
+                button34.Location = new Point(x_st + dx * 8, y_st);
+                button7.Location = new Point(x_st + dx * 9, y_st);
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE2)
+            {
+                x_st = 2;
+                y_st = 1;
+
+                dx = 60;
+                button13.Location = new Point(x_st + dx * 0, y_st);
+                button20.Location = new Point(x_st + dx * 1, y_st);
+                button49.Location = new Point(x_st + dx * 2, y_st); //本地存圖
+                bt_min.Location = new Point(x_st + dx * 3, y_st);
+                bt_save_program_picture.Location = new Point(x_st + dx * 4, y_st);
+                bt_read_camera_register.Location = new Point(x_st + dx * 5, y_st);
+
+                x_st = bt_read_camera_register.Location.X + bt_read_camera_register.Size.Width;
+                dx = 40;
+
+                button33.Location = new Point(x_st + dx * 0, y_st);
+
+                y_st += 10;
+                button72.Location = new Point(x_st + dx * 1, y_st);
+                button22.Location = new Point(x_st + dx * 2, y_st);
+                button73.Location = new Point(x_st + dx * 3, y_st);
+                button34.Location = new Point(x_st + dx * 4, y_st);
+                button7.Location = new Point(x_st + dx * 5, y_st);
+            }
+            else
+            {
+                groupBox_quick.Location = new Point(850, 0);
+                groupBox_quick.Size = new Size(770, 62);
+
+                x_st = 2;
+                y_st = 1;
+
+                dx = 60;
+                button20.Location = new Point(x_st + dx * 0, y_st);
+
+                x_st = button20.Location.X + button20.Size.Width;
+                dx = 40;
+
+                button33.Location = new Point(x_st + dx * 0, y_st);
+
+                y_st += 10;
+                button72.Location = new Point(x_st + dx * 1, y_st);
+                button22.Location = new Point(x_st + dx * 2, y_st);
+                button73.Location = new Point(x_st + dx * 3, y_st);
+                button34.Location = new Point(x_st + dx * 4, y_st);
+                button7.Location = new Point(x_st + dx * 5, y_st);
+
+
+
+            }
 
             dx = 60;
             dy = 60;

@@ -56,8 +56,8 @@ namespace vcs_WebCam_AForge0
                 this.Text = webcam_name;
 
                 pictureBox1.Size = new Size(ww, hh);
-                pictureBox1.Location = new Point(50, 50);
-                this.ClientSize = new Size(pictureBox1.Size.Width + 100, pictureBox1.Size.Height + 100);
+                pictureBox1.Location = new Point(20, 20);
+                this.ClientSize = new Size(pictureBox1.Size.Width + 40, pictureBox1.Size.Height + 40);
             }
             else
             {
