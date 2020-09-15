@@ -47,6 +47,45 @@ namespace vcs_Thread
                 //this.txtReturnValue.Text = this.txtReturnValue.Text + str;
             }
         }
+
+
+        Random r = new Random(Guid.NewGuid().GetHashCode());
+        private int _R = 0, _G = 0, _B = 0;
+        private Thread my_thread;
+
+        private void run_my_threaed()
+        {
+            while (true)
+            {
+                _R = r.Next(256);
+                _G = r.Next(256);
+                _B = r.Next(256);
+                Thread.Sleep(100);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            my_thread = new Thread(run_my_threaed);
+
+            if (my_thread.IsAlive == false)
+            {
+                my_thread.Start();
+            }  
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            my_thread.Abort();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lb_R.Text = _R.ToString();
+            lb_G.Text = _G.ToString();
+            lb_B.Text = _B.ToString();
+        }
+
     }
 
     //建一個類，模擬實際使用情況

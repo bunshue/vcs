@@ -3932,14 +3932,52 @@ namespace vcs_Draw9_Example
             }
             //Dispose of the pen.
             p.Dispose();
-
         }
+
+        //Reference : https://home.gamer.com.tw/creationDetail.php?sn=4281924
+        private Label[] lb_color = new Label[101];
+        Random r = new Random(Guid.NewGuid().GetHashCode());
+        private int _R = 0, _G = 0, _B = 0;
+        private int lb_color_x = 0, lb_color_y = 0;
 
         private void button39_Click(object sender, EventArgs e)
         {
+            for (int i = 1; i < lb_color.Length; i++)
+            {
+                lb_color[i] = new Label();
+                lb_color[i].Width = 50;
+                lb_color[i].Height = 50;
+                lb_color[i].Text = " ";
+                lb_color[i].Location = new Point(lb_color_x, lb_color_y);
+                _R = r.Next(255);
+                _G = r.Next(255);
+                _B = r.Next(255);
+                lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
+                this.Controls.Add(lb_color[i]);
+                lb_color_x += 50;
 
+                if (i % 10 == 0)
+                {
+                    lb_color_x = 0;
+                    lb_color_y += 50;
+                }
+            }
+
+            timer1.Enabled = true;
+            pictureBox1.Visible = false;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            for (int i = 1; i < lb_color.Length; i++)
+            {
+                _R = r.Next(255);
+                _G = r.Next(255);
+                _B = r.Next(255);
+                lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
+            }
+        }
+        
         private void button40_Click(object sender, EventArgs e)
         {
             Brush bb = new SolidBrush(Color.Navy);

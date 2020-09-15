@@ -14,6 +14,7 @@ namespace vcs_Remove_Bin_Obj
     public partial class Form1 : Form
     {
         List<string> folder_name = new List<string>();   //宣告string型態的List
+        List<string> filename_backup = new List<string>();   //宣告string型態的List
         string search_path = string.Empty;
 
         public Form1()
@@ -158,6 +159,93 @@ namespace vcs_Remove_Bin_Obj
                 {
                     richTextBox1.Text += "資料夾或檔案: " + folder_name[i] + " 不存在，不能刪除\n";
                 }
+            }
+        }
+
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessRenameDirectory(string targetDirectory)
+        {
+            try
+            {
+                // Process the list of files found in the directory.
+                try
+                {
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    Array.Sort(fileEntries);
+                    foreach (string fileName in fileEntries)
+                    {
+                        if (fileName.EndsWith(" 的副本"))
+                        {
+                            if (checkBox5.Checked == true)
+                                richTextBox1.Text += fileName + "\n";
+                            if (checkBox6.Checked == true)
+                                filename_backup.Add(fileName);
+                        }
+                    }
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    Array.Sort(subdirectoryEntries);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        ProcessRenameDirectory(subdirectory);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+            }
+        }
+
+        public void ProcessRenameBackup(List<string> filename_backup)
+        {
+            int i;
+            int len;
+            len = filename_backup.Count;
+            richTextBox1.Text += "欲更名個數 : " + len + "\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "檔案 : " + filename_backup[i] + "\n";
+
+
+                richTextBox1.Text += "new 檔案 : " + filename_backup[i].Replace(" 的副本", "") + "\n";
+
+                //if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", "")         )))
+
+
+                if (File.Exists(filename_backup[i]))     //確認檔案是否存在
+                {
+
+                    string sourceFileName = filename_backup[i];
+                    string destFileName = filename_backup[i].Replace(" 的副本", "");
+
+                    //移動檔案，從 sourceFileName 移動到 destFileName
+                    if (File.Exists(sourceFileName))        //確認原始檔案是否存在
+                    {
+                        if (!File.Exists(destFileName))     //確認目標檔案是否存在
+                        {
+                            File.Move(sourceFileName, destFileName);
+                            richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                        }
+                        else
+                            richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+                    }
+                    else
+                        richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
+
+                }
+                else
+                {
+                    richTextBox1.Text += "資料夾或檔案: " + filename_backup[i] + " 不存在，不能刪除\n";
+                }
 
 
 
@@ -171,6 +259,38 @@ namespace vcs_Remove_Bin_Obj
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            /*
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+
+            //確認資料夾是否存在
+            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
+                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+            */
+
+            //string path = @"C:\_git\vcs\_2.vcs";
+            //string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
+            string path = search_path;
+
+            filename_backup.Clear();
+
+            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessRenameDirectory(path);
+            }
+
+            ProcessRenameBackup(filename_backup);
+
         }
 
 
