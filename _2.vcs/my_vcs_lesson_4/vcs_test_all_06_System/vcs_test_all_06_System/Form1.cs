@@ -16,6 +16,7 @@ using System.IO;            //for DriveInfo
 using System.Net;   //for DNS
 using System.IO.Ports;          //for serial ports
 using System.Collections;   //for DictionaryEntry
+using System.Drawing.Imaging;   //for ImageFormat
 
 namespace vcs_test_all_06_System
 {
@@ -94,8 +95,13 @@ namespace vcs_test_all_06_System
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             button41.Location = new Point(x_st + dx * 1, y_st + dy * 10);
             button42.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 10);
 
-            comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button44.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button45.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+
+            comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
@@ -706,6 +712,74 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "主板型號\t\t" + mbo.GetPropertyValue("Name").ToString() + "\n";          //取得主板型號
 
         }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
+
+        }
+
+        [DllImport("User32")]
+        internal extern static bool GetCursorPos(out MousePoint point);
+
+        internal struct MousePoint
+        {
+            public int x;
+            public int y;
+        };
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MousePoint point;
+            GetCursorPos(out point);
+            this.Text = point.x.ToString() + ", " + point.y.ToString();
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            save_current_program_to_local_drive();
+        }
+
+        void save_current_program_to_local_drive()
+        {
+            //imsLink的方法
+            //本程式截圖
+            Bitmap bmp = new Bitmap(this.Width, this.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
+            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
+            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
+            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
+
+            //存成bmp檔
+            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bmp.Save(filename, ImageFormat.Bmp);
+
+            //存成jpg檔
+            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //myImage.Save(filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            Rectangle rect = Screen.GetBounds(Point.Empty);
+            using (Bitmap bmp = new Bitmap(rect.Width, rect.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+
+                //存成bmp檔
+                String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bmp.Save(filename, ImageFormat.Bmp);
+
+                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+            }
+
+        }
+
 
     }
 }
