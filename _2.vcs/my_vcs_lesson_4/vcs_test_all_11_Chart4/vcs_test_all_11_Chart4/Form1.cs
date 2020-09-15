@@ -27,8 +27,6 @@ namespace vcs_test_all_11_Chart4
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
             String[] _users = new String[] { "小王", "小風", "小明" };
             
-            chart1.Titles.Add("直線圖");
-
             int _length = _users.Length;
 
             for (int index = 0; index < _length; index++)
@@ -62,7 +60,6 @@ namespace vcs_test_all_11_Chart4
 
 
 
-            chart1.Titles.Add("圓餅圖");
             _series.ChartType = SeriesChartType.Pie;
             _series.IsValueShownAsLabel = true;
             _series.Points.DataBindXY(_users, _y);
@@ -77,9 +74,6 @@ namespace vcs_test_all_11_Chart4
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
             String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
 
-
-
-            chart1.Titles.Add("長條圖");
             int _length = _y.Length;
             _series = new Series[_length];
             for (int index = 0; index < _length; index++)
@@ -95,47 +89,9 @@ namespace vcs_test_all_11_Chart4
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            int[,] array = new int[,] {
-            {1,8,9,7,105,11,50,999,500,1},
-            {12,15,11,18,733,5,4,3,2,500} };
-
-
-            //標題 最大數值
-            Series series1 = new Series("第一條線", 1000);
-            Series series2 = new Series("第二條線", 1000);
-
-            //設定線條顏色
-            series1.Color = Color.Blue;
-            series2.Color = Color.Red;
-
-            //設定字型
-            series1.Font = new System.Drawing.Font("新細明體", 14);
-            series2.Font = new System.Drawing.Font("標楷體", 12);
-
-            //折線圖
-            series1.ChartType = SeriesChartType.Line;
-            series2.ChartType = SeriesChartType.Line;
-
-            //將數值顯示在線上
-            series1.IsValueShownAsLabel = true;
-            series2.IsValueShownAsLabel = true;
-
-
-            //將數值新增至序列
-            for (int index = 0; index < 10; index++)
-            {
-                series1.Points.AddXY(index, array[0, index]);
-                series2.Points.AddXY(index, array[1, index]);
-            }
-
-            //將序列新增到圖上
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-
-            //標題
-            this.chart1.Titles.Add("標題");
+            chart1.Series.Clear();  //每次使用此function前先清除圖表
         }
     }
 }
