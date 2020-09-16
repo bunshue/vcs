@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_Clock
+namespace vcs_Clock3
 {
     public partial class Form1 : Form
     {
@@ -33,7 +33,7 @@ namespace vcs_Clock
             hrHAND = 40 * WIDTH / 150;
 
             pictureBox1.Size = new Size(WIDTH * 164 / 150 + 300, HEIGHT * 164 / 150);
-            this.Size = new Size(WIDTH * 164 / 150 + 30 + 300, HEIGHT * 164 / 150 + 40);
+            this.Size = new Size(WIDTH * 164 / 150 + 30 + 330, HEIGHT * 164 / 150 + 40);
 
             //create bitmap
             bmp = new Bitmap(WIDTH + 1, HEIGHT + 1);
@@ -93,7 +93,7 @@ namespace vcs_Clock
 
             //disp time
             //this.Text = "Analog Clock -  " + hh + ":" + mm + ":" + ss;
-            this.Text = "ims_Clock - " + hh + ":" + mm + ":" + ss;
+            this.Text = "Time - " + hh + ":" + mm + ":" + ss;
 
             //dispose
             g.Dispose();

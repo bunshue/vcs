@@ -1,4 +1,4 @@
-﻿namespace vcs_Clock
+﻿namespace vcs_Clock3
 {
     partial class Form1
     {
