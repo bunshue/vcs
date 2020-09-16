@@ -519,6 +519,20 @@
             this.button64 = new System.Windows.Forms.Button();
             this.tb_sale2 = new System.Windows.Forms.TextBox();
             this.tb_sale1 = new System.Windows.Forms.TextBox();
+            this.tp_HiPot = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lb_main_mesg11 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.lb_sn_opal_hipot = new System.Windows.Forms.Label();
+            this.lb_hipot_status = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.tb_sn_opal_hipot = new System.Windows.Forms.TextBox();
+            this.panel_hipot = new System.Windows.Forms.Panel();
+            this.button94 = new System.Windows.Forms.Button();
+            this.button95 = new System.Windows.Forms.Button();
+            this.label71 = new System.Windows.Forms.Label();
+            this.button96 = new System.Windows.Forms.Button();
+            this.tb_hipot_status = new System.Windows.Forms.TextBox();
             this.tp_Cosmo = new System.Windows.Forms.TabPage();
             this.cb_check3c = new System.Windows.Forms.CheckBox();
             this.cb_check2c = new System.Windows.Forms.CheckBox();
@@ -704,6 +718,8 @@
             this.bt_restore_camera_setup = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
+            this.timer_stage11 = new System.Windows.Forms.Timer(this.components);
+            this.tb_wait_hipot_data = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -789,6 +805,8 @@
             this.tp_sale.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.gb_ng_reason.SuspendLayout();
+            this.tp_HiPot.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.tp_Cosmo.SuspendLayout();
             this.groupBox_comport2.SuspendLayout();
             this.tp_Camera_Test.SuspendLayout();
@@ -928,6 +946,7 @@
             this.tabControl1.Controls.Add(this.tp_Package3);
             this.tabControl1.Controls.Add(this.tp_Check);
             this.tabControl1.Controls.Add(this.tp_sale);
+            this.tabControl1.Controls.Add(this.tp_HiPot);
             this.tabControl1.Controls.Add(this.tp_Cosmo);
             this.tabControl1.Controls.Add(this.tp_Camera_Test);
             this.tabControl1.Controls.Add(this.tp_Camera_Model);
@@ -6691,6 +6710,154 @@
             this.tb_sale1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_sale1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_sale1_KeyPress);
             // 
+            // tp_HiPot
+            // 
+            this.tp_HiPot.Controls.Add(this.groupBox5);
+            this.tp_HiPot.Location = new System.Drawing.Point(4, 26);
+            this.tp_HiPot.Name = "tp_HiPot";
+            this.tp_HiPot.Size = new System.Drawing.Size(940, 586);
+            this.tp_HiPot.TabIndex = 34;
+            this.tp_HiPot.Text = "Hi Pot";
+            this.tp_HiPot.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.tb_wait_hipot_data);
+            this.groupBox5.Controls.Add(this.lb_main_mesg11);
+            this.groupBox5.Controls.Add(this.label66);
+            this.groupBox5.Controls.Add(this.lb_sn_opal_hipot);
+            this.groupBox5.Controls.Add(this.lb_hipot_status);
+            this.groupBox5.Controls.Add(this.label70);
+            this.groupBox5.Controls.Add(this.tb_sn_opal_hipot);
+            this.groupBox5.Controls.Add(this.panel_hipot);
+            this.groupBox5.Controls.Add(this.button94);
+            this.groupBox5.Controls.Add(this.button95);
+            this.groupBox5.Controls.Add(this.label71);
+            this.groupBox5.Controls.Add(this.button96);
+            this.groupBox5.Controls.Add(this.tb_hipot_status);
+            this.groupBox5.Location = new System.Drawing.Point(46, 20);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(848, 546);
+            this.groupBox5.TabIndex = 72;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Hi Pot 記錄";
+            // 
+            // lb_main_mesg11
+            // 
+            this.lb_main_mesg11.AutoSize = true;
+            this.lb_main_mesg11.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg11.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg11.Location = new System.Drawing.Point(265, 202);
+            this.lb_main_mesg11.Name = "lb_main_mesg11";
+            this.lb_main_mesg11.Size = new System.Drawing.Size(89, 24);
+            this.lb_main_mesg11.TabIndex = 137;
+            this.lb_main_mesg11.Text = "mesg11";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label66.Location = new System.Drawing.Point(29, 261);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(106, 24);
+            this.label66.TabIndex = 111;
+            this.label66.Text = "寫入資料";
+            // 
+            // lb_sn_opal_hipot
+            // 
+            this.lb_sn_opal_hipot.AutoSize = true;
+            this.lb_sn_opal_hipot.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sn_opal_hipot.Location = new System.Drawing.Point(31, 355);
+            this.lb_sn_opal_hipot.Name = "lb_sn_opal_hipot";
+            this.lb_sn_opal_hipot.Size = new System.Drawing.Size(202, 24);
+            this.lb_sn_opal_hipot.TabIndex = 110;
+            this.lb_sn_opal_hipot.Text = "相機序號(9~10碼)";
+            // 
+            // lb_hipot_status
+            // 
+            this.lb_hipot_status.AutoSize = true;
+            this.lb_hipot_status.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_hipot_status.Location = new System.Drawing.Point(31, 318);
+            this.lb_hipot_status.Name = "lb_hipot_status";
+            this.lb_hipot_status.Size = new System.Drawing.Size(142, 24);
+            this.lb_hipot_status.TabIndex = 109;
+            this.lb_hipot_status.Text = "狀態(1~2碼)";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label70.Location = new System.Drawing.Point(29, 130);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(106, 24);
+            this.label70.TabIndex = 107;
+            this.label70.Text = "相機序號";
+            // 
+            // tb_sn_opal_hipot
+            // 
+            this.tb_sn_opal_hipot.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_sn_opal_hipot.Location = new System.Drawing.Point(172, 127);
+            this.tb_sn_opal_hipot.Multiline = true;
+            this.tb_sn_opal_hipot.Name = "tb_sn_opal_hipot";
+            this.tb_sn_opal_hipot.Size = new System.Drawing.Size(468, 40);
+            this.tb_sn_opal_hipot.TabIndex = 106;
+            this.tb_sn_opal_hipot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel_hipot
+            // 
+            this.panel_hipot.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel_hipot.Location = new System.Drawing.Point(242, 398);
+            this.panel_hipot.Name = "panel_hipot";
+            this.panel_hipot.Size = new System.Drawing.Size(380, 122);
+            this.panel_hipot.TabIndex = 104;
+            // 
+            // button94
+            // 
+            this.button94.Location = new System.Drawing.Point(742, 97);
+            this.button94.Name = "button94";
+            this.button94.Size = new System.Drawing.Size(80, 40);
+            this.button94.TabIndex = 102;
+            this.button94.Text = "清除";
+            this.button94.UseVisualStyleBackColor = true;
+            // 
+            // button95
+            // 
+            this.button95.Location = new System.Drawing.Point(742, 37);
+            this.button95.Name = "button95";
+            this.button95.Size = new System.Drawing.Size(80, 40);
+            this.button95.TabIndex = 101;
+            this.button95.Text = "寫入";
+            this.button95.UseVisualStyleBackColor = true;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label71.Location = new System.Drawing.Point(29, 63);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(58, 24);
+            this.label71.TabIndex = 100;
+            this.label71.Text = "狀態";
+            // 
+            // button96
+            // 
+            this.button96.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button96.Location = new System.Drawing.Point(742, 165);
+            this.button96.Name = "button96";
+            this.button96.Size = new System.Drawing.Size(80, 40);
+            this.button96.TabIndex = 98;
+            this.button96.Text = "到修改模式";
+            this.button96.UseVisualStyleBackColor = true;
+            // 
+            // tb_hipot_status
+            // 
+            this.tb_hipot_status.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_hipot_status.Location = new System.Drawing.Point(172, 63);
+            this.tb_hipot_status.Name = "tb_hipot_status";
+            this.tb_hipot_status.Size = new System.Drawing.Size(468, 32);
+            this.tb_hipot_status.TabIndex = 56;
+            this.tb_hipot_status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // tp_Cosmo
             // 
             this.tp_Cosmo.Controls.Add(this.cb_check3c);
@@ -8657,6 +8824,21 @@
             this.groupBox_quick.TabIndex = 227;
             this.groupBox_quick.TabStop = false;
             // 
+            // timer_stage11
+            // 
+            this.timer_stage11.Interval = 300;
+            this.timer_stage11.Tick += new System.EventHandler(this.timer_stage11_Tick);
+            // 
+            // tb_wait_hipot_data
+            // 
+            this.tb_wait_hipot_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wait_hipot_data.Location = new System.Drawing.Point(477, 199);
+            this.tb_wait_hipot_data.Multiline = true;
+            this.tb_wait_hipot_data.Name = "tb_wait_hipot_data";
+            this.tb_wait_hipot_data.Size = new System.Drawing.Size(242, 40);
+            this.tb_wait_hipot_data.TabIndex = 138;
+            this.tb_wait_hipot_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -8791,6 +8973,9 @@
             this.groupBox18.PerformLayout();
             this.gb_ng_reason.ResumeLayout(false);
             this.gb_ng_reason.PerformLayout();
+            this.tp_HiPot.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tp_Cosmo.ResumeLayout(false);
             this.tp_Cosmo.PerformLayout();
             this.groupBox_comport2.ResumeLayout(false);
@@ -9505,6 +9690,22 @@
         private System.Windows.Forms.GroupBox groupBox_sn1;
         private System.Windows.Forms.GroupBox groupBox_temperature;
         private System.Windows.Forms.GroupBox groupBox_awb2;
+        private System.Windows.Forms.TabPage tp_HiPot;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label lb_main_mesg11;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label lb_sn_opal_hipot;
+        private System.Windows.Forms.Label lb_hipot_status;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.TextBox tb_sn_opal_hipot;
+        private System.Windows.Forms.Panel panel_hipot;
+        private System.Windows.Forms.Button button94;
+        private System.Windows.Forms.Button button95;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Button button96;
+        private System.Windows.Forms.TextBox tb_hipot_status;
+        private System.Windows.Forms.Timer timer_stage11;
+        private System.Windows.Forms.TextBox tb_wait_hipot_data;
     }
 }
 

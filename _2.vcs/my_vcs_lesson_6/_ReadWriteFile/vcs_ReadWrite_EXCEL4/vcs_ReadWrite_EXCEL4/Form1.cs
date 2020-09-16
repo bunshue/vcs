@@ -125,6 +125,8 @@ namespace vcs_ReadWrite_EXCEL4
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //sugar can not use this
+
             //在C# 使用 OleDb 讀取 Excel
             openFileDialog1.Title = "匯入Excel資料";
             //openFileDialog1.ShowHelp = true;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_RealtimeChart", "vcs_RealtimeChart\vcs_RealtimeChart.csproj", "{4810D8B2-DC08-4B78-878C-F9DF44A77691}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_11_Chart2", "vcs_test_all_11_Chart2\vcs_test_all_11_Chart2.csproj", "{4810D8B2-DC08-4B78-878C-F9DF44A77691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,14 +13,14 @@ using System.Windows.Forms.DataVisualization.Charting;
 //用 C# 建立 Realtime 圖表 
 //加入參考： 參考/加入參考/.NET/System.Windows.Forms.DataVisualization
 
-namespace vcs_RealtimeChart
+namespace vcs_test_all_11_Chart2
 {
     public partial class Form1 : Form
     {
         //繪圖類別
         public class RealtimeChart
         {
-            private Chart _chart = null;
+            private Chart chart1 = null;
             private int chartWidth = 480;
             private int chartHeight = 350;
             private string nameAxisX = "X軸標題";
@@ -28,23 +28,23 @@ namespace vcs_RealtimeChart
 
             public RealtimeChart()
             {
-                _chart = new Chart();
+                chart1 = new Chart();
 
                 ChartArea ctArea = new ChartArea();
                 Legend legend = new Legend();
                 Series series = new Series();
 
-                _chart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
-                _chart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                _chart.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
-                _chart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-                _chart.BorderlineWidth = 2;
-                _chart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-                _chart.Location = new System.Drawing.Point(10, 10);
-                _chart.Name = "chart1";
-                _chart.Size = new System.Drawing.Size(chartWidth, chartHeight);
-                _chart.TabIndex = 1;
-                _chart.Dock = System.Windows.Forms.DockStyle.Fill;
+                chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
+                chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+                chart1.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
+                chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                chart1.BorderlineWidth = 2;
+                chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
+                chart1.Location = new System.Drawing.Point(10, 10);
+                chart1.Name = "chart1";
+                chart1.Size = new System.Drawing.Size(chartWidth, chartHeight);
+                chart1.TabIndex = 1;
+                chart1.Dock = System.Windows.Forms.DockStyle.Fill;
 
                 ctArea.Area3DStyle.Inclination = 15;
                 ctArea.Area3DStyle.IsClustered = true;
@@ -72,26 +72,26 @@ namespace vcs_RealtimeChart
                 ctArea.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
                 ctArea.Name = "Default";
                 ctArea.ShadowColor = System.Drawing.Color.Transparent;
-                _chart.ChartAreas.Add(ctArea);
+                chart1.ChartAreas.Add(ctArea);
 
                 legend.BackColor = System.Drawing.Color.Transparent;
                 legend.Enabled = false;
                 legend.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
                 legend.IsTextAutoFit = false;
                 legend.Name = "Default";
-                _chart.Legends.Add(legend);
+                chart1.Legends.Add(legend);
 
                 series.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
                 series.ChartArea = "Default";
                 series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 series.Legend = "Default";
                 series.Name = "Default";
-                _chart.Series.Add(series);
+                chart1.Series.Add(series);
             }
 
             public Chart GetChart
             {
-                get { return _chart; }
+                get { return chart1; }
             }
         }
 

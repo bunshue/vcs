@@ -36,7 +36,7 @@ namespace imsLink
                 catch (Exception ex)
                 {
                     //richTextBox1.Text += "xxx錯誤訊息c : " + ex.Message + "\n";
-                    MessageBox.Show("錯誤訊息 : " + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("錯誤訊息x : " + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

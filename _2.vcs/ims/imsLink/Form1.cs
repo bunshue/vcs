@@ -137,6 +137,7 @@ namespace imsLink
         int csv_index7 = 0;
         int csv_index8 = 0;
         int csv_index9 = 0;
+        int csv_index11 = 0;
         int csv_index12 = 0;
         int timer_cnt = 0;
         int g_conn_status = CAMERA_UNKNOWN;
@@ -221,9 +222,6 @@ namespace imsLink
         bool flag_ok_data2 = false;
         bool flag_ok_data3 = false;
         bool flag_cancel_data = false;
-        bool flag_ng_reason1 = false;
-        bool flag_ng_reason2 = false;
-        bool flag_ng_reason3 = false;
         bool flag_wait_for_ng_reason = false;
         string[] ng_reason = new string[] { "無資料", "鏡頭脫落", "影像有黑影", "Ring上有異物", "Ring未組裝好", "Ring裂痕", "LED脫落", "LED不亮", "LED有異物", "漏光", "其他：" };
         int stage1_ng_reason = 0;
@@ -326,6 +324,7 @@ namespace imsLink
         Graphics g7;
         Graphics g8;
         Graphics g9;
+        Graphics g11;
         Graphics g12;
 
         //參考
@@ -475,6 +474,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -507,6 +507,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE9)
             {
@@ -518,6 +519,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = true;
+                timer_stage11.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE11)
             {
@@ -528,7 +530,8 @@ namespace imsLink
                 timer_stage6.Enabled = false;
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
-                timer_stage9.Enabled = true;
+                timer_stage9.Enabled = false;
+                timer_stage11.Enabled = true;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE12)
             {
@@ -540,6 +543,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
                 timer_stage12.Enabled = true;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE20)
@@ -552,6 +556,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
                 timer_stage12.Enabled = false;
             }
             else
@@ -585,6 +590,10 @@ namespace imsLink
             g9 = panel_sale.CreateGraphics();
             g9.Clear(BackColor);
             g9.DrawString("先填單別單號", new Font("標楷體", 43), new SolidBrush(Color.Green), new PointF(1, 30));
+
+            g11 = panel_hipot.CreateGraphics();
+            g11.Clear(BackColor);
+            g11.DrawString("先填狀態", new Font("標楷體", 60), new SolidBrush(Color.Green), new PointF(15, 20));
 
             g12 = panel_cosmo.CreateGraphics();
             g12.Clear(BackColor);
@@ -698,7 +707,9 @@ namespace imsLink
                 {
                     this.tp_USB.Text = "第二站";
                 }
-                else if ((flag_operation_mode == MODE_RELEASE_STAGE1C) || (flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6) || (flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11) || (flag_operation_mode == MODE_RELEASE_STAGE12) || (flag_operation_mode == MODE_RELEASE_STAGE20))
+                else if ((flag_operation_mode == MODE_RELEASE_STAGE1C) || (flag_operation_mode == MODE_RELEASE_STAGE5) || (flag_operation_mode == MODE_RELEASE_STAGE6) 
+                    || (flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11) || (flag_operation_mode == MODE_RELEASE_STAGE12) 
+                    || (flag_operation_mode == MODE_RELEASE_STAGE20))
                 {
                     this.tp_USB.Text = "第一站";
                 }
@@ -752,7 +763,7 @@ namespace imsLink
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-                tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
+                tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = true;
                 timer_stage5.Enabled = false;
@@ -777,7 +788,7 @@ namespace imsLink
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-                tabControl1.SelectTab(tp_Check);
+                tabControl1.SelectTab(tp_Check);    //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
@@ -793,8 +804,8 @@ namespace imsLink
                 this.tp_Camera_Test.Parent = null;  //相機測試
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
-                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
-                tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
+                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到指定分頁。
+                tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到指定分頁。   the same
                 timer_rtc.Enabled = true;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
@@ -821,7 +832,7 @@ namespace imsLink
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-                tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到USB那頁。
+                tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = true;
                 timer_stage5.Enabled = false;
@@ -842,7 +853,7 @@ namespace imsLink
                 this.tp_Layer.Parent = null;    //Layer
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
-                tabControl1.SelectTab(tp_Product);  //程式啟動時，直接跳到USB那頁。
+                tabControl1.SelectTab(tp_Product);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = true;
@@ -863,14 +874,14 @@ namespace imsLink
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
-                tabControl1.SelectTab(tp_Package1);  //程式啟動時，直接跳到USB那頁。
+                tabControl1.SelectTab(tp_Package1);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
                 timer_stage1.Enabled = false;
                 //Comport_Scan();
             }
-            else if ((flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11))
+            else if (flag_operation_mode == MODE_RELEASE_STAGE9)
             {
                 cb_show_grid.Checked = true;
                 this.tp_Info.Parent = null;
@@ -885,23 +896,41 @@ namespace imsLink
                 this.tp_Package1.Parent = null;
                 this.tp_Package2.Parent = null;
                 this.tp_Package3.Parent = null;
-                tabControl1.SelectTab(tp_sale);  //程式啟動時，直接跳到USB那頁。
+                this.tp_Check.Parent = null;
+                this.tp_Cosmo.Parent = null;
+                this.tp_Camera_Test.Parent = null;
+                this.tp_HiPot.Parent = null;
+                tabControl1.SelectTab(tp_sale);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
-                timer_stage5.Enabled = false;
                 timer_stage1.Enabled = false;
-                //Comport_Scan();
-
-                if (flag_operation_mode == MODE_RELEASE_STAGE11)
-                {
-                    tp_sale.Text = "HiPot";
-                    checkBox1.Text = "NG";
-                    lb_sale3.Text = "相機序號(9~10碼)";
-                    label27.Text = "相機序號";
-                    gb_ng_reason.Enabled = false;
-                }
-                else
-                    gb_ng_reason.Visible = false;
+                timer_stage5.Enabled = false;
+                gb_ng_reason.Visible = false;
+            }
+            else if (flag_operation_mode == MODE_RELEASE_STAGE11)
+            {
+                cb_show_grid.Checked = true;
+                this.tp_Info.Parent = null;
+                this.tp_Connection.Parent = null;
+                this.tp_System.Parent = null;
+                this.tp_Camera.Parent = null;   //camera
+                this.tp_Camera_Model.Parent = null;
+                this.tp_Serial_Auto.Parent = null;
+                this.tp_Product.Parent = null;  //產品包裝
+                this.tp_Test.Parent = null;     //Test
+                this.tp_Layer.Parent = null;    //Layer
+                this.tp_Package1.Parent = null;
+                this.tp_Package2.Parent = null;
+                this.tp_Package3.Parent = null;
+                this.tp_Check.Parent = null;
+                this.tp_Cosmo.Parent = null;
+                this.tp_Camera_Test.Parent = null;
+                this.tp_sale.Parent = null;
+                tabControl1.SelectTab(tp_HiPot);  //程式啟動時，直接跳到指定分頁。
+                timer_rtc.Enabled = false;
+                timer_rgb.Enabled = false;
+                timer_stage1.Enabled = false;
+                timer_stage5.Enabled = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE12)
             {
@@ -920,7 +949,7 @@ namespace imsLink
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_sale.Parent = null;     //出貨紀錄
                 this.tp_Camera_Test.Parent = null;  //相機測試
-                tabControl1.SelectTab(tp_Cosmo);  //程式啟動時，直接跳到USB那頁。
+                tabControl1.SelectTab(tp_Cosmo);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
@@ -944,7 +973,7 @@ namespace imsLink
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_sale.Parent = null;     //出貨紀錄
-                tabControl1.SelectTab(tp_Camera_Test);  //程式啟動時，直接跳到相機測試那頁。
+                tabControl1.SelectTab(tp_Camera_Test);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
@@ -953,8 +982,8 @@ namespace imsLink
             }
             else
             {
-                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到Connection那頁。
-                tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到Connection那頁。   the same
+                //tabControl1.SelectedTab = tp_Connection;  //程式啟動時，直接跳到指定分頁。
+                tabControl1.SelectTab(tp_Connection);       //程式啟動時，直接跳到指定分頁。   the same
                 timer_rtc.Enabled = true;
                 timer_rgb.Enabled = false;
                 timer_stage5.Enabled = false;
@@ -3264,7 +3293,7 @@ namespace imsLink
             }
             else
             {
-                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) 
+                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B)
                     || (flag_operation_mode == MODE_RELEASE_STAGE2) || (flag_operation_mode == MODE_RELEASE_STAGE3))
                 {
                     groupBox_sn1.Location = new Point(0, 600);
@@ -3287,6 +3316,10 @@ namespace imsLink
                     {
                         groupBox_sn1.Size = new Size(300, 100);
                     }
+                }
+                else
+                {
+                    groupBox_sn1.Visible = false;
                 }
 
                 lb_yuv_y2.Location = new Point(1610, 740);
@@ -3463,6 +3496,14 @@ namespace imsLink
             richTextBox2.Visible = false;
 
             refresh_picturebox2();
+
+            if (flag_operation_mode == MODE_RELEASE_STAGE11)
+            {
+                button94.Visible = false;
+                button95.Visible = false;
+                button96.Visible = false;
+            }
+
             return;
         }
 
@@ -3547,6 +3588,7 @@ namespace imsLink
             lb_main_mesg7.Text = "";
             lb_main_mesg8.Text = "";
             lb_main_mesg9.Text = "";
+            lb_main_mesg11.Text = "";
             lb_main_mesg12a.Text = "";
             lb_main_mesg12b.Text = "";
             lb_main_mesg12c.Text = "";
@@ -5017,6 +5059,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 timer_rgb.Enabled = true;
             }
@@ -5033,6 +5076,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 flag_ok_data1 = false;
                 flag_ok_data2 = false;
@@ -5078,6 +5122,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 flag_operation_mode = MODE_RELEASE_STAGE5;
                 flag_ok_data1 = false;
@@ -5104,6 +5149,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 flag_ok_data1 = false;
                 flag_ok_data2 = false;
@@ -5129,6 +5175,7 @@ namespace imsLink
                 timer_stage7.Enabled = true;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 flag_ok_data1 = false;
                 flag_ok_data2 = false;
@@ -5156,6 +5203,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = true;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 flag_ok_data1 = false;
                 flag_ok_data2 = false;
@@ -5172,10 +5220,8 @@ namespace imsLink
             }
             else if (tabControl1.SelectedTab == tp_sale)
             {
-                if(flag_operation_mode == MODE_RELEASE_STAGE9)
-                    richTextBox1.Text += "進入出貨記錄\n";
-                else
-                    richTextBox1.Text += "進入HiPot\n";
+                richTextBox1.Text += "進入出貨記錄 九\n";
+
                 timer_rgb.Enabled = false;
                 timer_stage1.Enabled = false;
                 timer_stage2.Enabled = false;
@@ -5186,6 +5232,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = true;
+                timer_stage11.Enabled = false;
 
                 flag_ok_data1 = false;
                 flag_ok_data2 = false;
@@ -5204,6 +5251,35 @@ namespace imsLink
                 g9.Clear(BackColor);
                 g9.DrawString("先填單別單號", new Font("標楷體", 43), new SolidBrush(Color.Green), new PointF(1, 30));
             }
+            else if (tabControl1.SelectedTab == tp_HiPot)
+            {
+                richTextBox1.Text += "進入Hi Pot記錄 十一\n";
+
+                timer_rgb.Enabled = false;
+                timer_stage1.Enabled = false;
+                timer_stage2.Enabled = false;
+                timer_stage3.Enabled = false;
+                timer_stage4.Enabled = false;
+                timer_stage5.Enabled = false;
+                timer_stage6.Enabled = false;
+                timer_stage7.Enabled = false;
+                timer_stage8.Enabled = false;
+                timer_stage9.Enabled = false;
+                timer_stage11.Enabled = true;
+
+                flag_ok_data1 = false;
+                flag_ok_data2 = false;
+                flag_ok_data3 = false;
+
+                tb_hipot_status.Clear();
+                tb_sn_opal_hipot.Clear();
+
+                tb_hipot_status.BackColor = Color.Pink;
+                tb_sn_opal_hipot.BackColor = Color.White;
+
+                g11.Clear(BackColor);
+                g11.DrawString("先填狀態", new Font("標楷體", 60), new SolidBrush(Color.Green), new PointF(15, 20));
+            }
             else if (tabControl1.SelectedTab == tp_Check)
             {
                 richTextBox1.Text += "進入檢查結果 一C\n";
@@ -5218,6 +5294,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
                 timer_stage1c.Enabled = true;
 
                 flag_ok_data1 = false;
@@ -5243,6 +5320,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 flag_ok_data1 = false;
                 flag_ok_data2 = false;
@@ -5321,6 +5399,7 @@ namespace imsLink
                 timer_stage7.Enabled = false;
                 timer_stage8.Enabled = false;
                 timer_stage9.Enabled = false;
+                timer_stage11.Enabled = false;
 
                 if (flag_fullscreen == true)
                 {
@@ -12563,6 +12642,7 @@ namespace imsLink
                     lb_main_mesg1.Text = "";
                     //lb_main_mesg2.Text = "";
                     lb_main_mesg3.Text = "";
+                    lb_main_mesg11.Text = "";
                     lb_main_mesg12a.Text = "";
                 }
                 /*
@@ -13492,7 +13572,7 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE11)
                 {
-                    content += "No." + "," + "序號" + "," + "單別" + "," + "單號" + "," + "時間" + "\n";
+                    content += "No." + "," + "序號" + "," + "狀態" + "," + "時間" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE12)
                 {
@@ -13640,22 +13720,9 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE11)
                 {
-                    csv_index9++;
-                    if (flag_cancel_data == true)
-                    {
-                        //content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG";
-                        if (flag_ng_reason1 == true)
-                            content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG,線材破損";
-                        else if (flag_ng_reason2 == true)
-                            content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG,Connector接觸不良";
-                        else if (flag_ng_reason3 == true)
-                            content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG,其他：" + tb_reason.Text;
-                        else
-                            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx\n";
-                    }
-                    else
-                        content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
-                    csv_index9 -= camera_serials.Count;
+                    csv_index11++;
+                    content += csv_index11.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    csv_index11 -= camera_serials.Count;
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE12)
                 {
@@ -13728,7 +13795,7 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE11)
                 {
-                    content += "No." + "," + "序號" + "," + "單別" + "," + "單號" + "," + "時間" + "\n";
+                    content += "No." + "," + "序號" + "," + "狀態" + "," + "時間" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE12)
                 {
@@ -13865,21 +13932,8 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE11)
                 {
-                    csv_index9++;
-                    if (flag_cancel_data == true)
-                    {
-                        //content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG";
-                        if (flag_ng_reason1 == true)
-                            content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG,線材破損";
-                        else if (flag_ng_reason2 == true)
-                            content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG,Connector接觸不良";
-                        else if (flag_ng_reason3 == true)
-                            content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString() + ",NG,其他：" + tb_reason.Text;
-                        else
-                            richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx\n";
-                    }
-                    else
-                        content += csv_index9.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_serials[i][3].ToString();
+                    csv_index11++;
+                    content += csv_index11.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE12)
                 {
@@ -14124,6 +14178,16 @@ namespace imsLink
         void show_main_message3(string mesg, int number, int timeout)
         {
             lb_main_mesg3.Text = mesg;
+            playSound(number);
+
+            timer_display_show_main_mesg_count = 0;
+            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_display.Enabled = true;
+        }
+
+        void show_main_message11(string mesg, int number, int timeout)
+        {
+            lb_main_mesg11.Text = mesg;
             playSound(number);
 
             timer_display_show_main_mesg_count = 0;
@@ -14810,6 +14874,106 @@ namespace imsLink
             {
                 richTextBox1.Text += "資料正確\n";
                 flag_ok_data3 = true;
+                return S_OK;
+            }
+        }
+
+        int check_tb_sn_opal_data11()
+        {
+            richTextBox1.Text += "C";
+            int i;
+            int len;
+            bool flag_incorrect_data = false;
+
+            len = tb_wait_hipot_data.Text.Length;
+
+            if (len > 20)   //太長, 直接放棄
+            {
+                tb_wait_hipot_data.Clear();
+                flag_incorrect_data = true;
+                return S_FALSE;
+            }
+            else if (len > 5)    //檢查是否換行
+            {
+                if ((tb_wait_hipot_data.Text[len - 2] == 0x0D) || (tb_wait_hipot_data.Text[len - 1] == 0x0A))
+                {
+                    tb_wait_hipot_data.Text = tb_wait_hipot_data.Text.Trim();
+                    //richTextBox1.Text += "OK";
+                }
+                else
+                {
+                    //richTextBox1.Text += "X2";
+                    return S_FALSE;
+                }
+            }
+            else    //太短  留著累計
+            {
+                //richTextBox1.Text += "X3";
+                flag_incorrect_data = true;
+                return S_FALSE;
+            }
+
+            if (tb_wait_hipot_data.Text.Length == 0)
+            {
+                //richTextBox1.Text += "未輸入資料\n";
+                flag_incorrect_data = true;
+                richTextBox1.Text += "f3 ";
+                return S_FALSE;
+            }
+            else if ((tb_wait_hipot_data.Text.Length == 9) || (tb_wait_hipot_data.Text.Length == 10))
+            {
+                //檢查英文字母的正確性
+                if (((tb_wait_hipot_data.Text[0] >= 'A') && (tb_wait_hipot_data.Text[0] <= 'Z')) || ((tb_wait_hipot_data.Text[0] >= 'a') && (tb_wait_hipot_data.Text[0] <= 'z')))
+                {
+                    flag_incorrect_data = false;
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "SN1格式不正確b0\n";
+                }
+
+                if (((tb_wait_hipot_data.Text[1] >= 'A') && (tb_wait_hipot_data.Text[1] <= 'Z')) || ((tb_wait_hipot_data.Text[1] >= 'a') && (tb_wait_hipot_data.Text[1] <= 'z')))
+                {
+                    flag_incorrect_data = false;
+                }
+                else
+                {
+                    flag_incorrect_data = true;
+                    richTextBox1.Text += "SN1格式不正確b1\n";
+                }
+
+                for (i = 2; i < tb_wait_hipot_data.Text.Length; i++)
+                {
+                    if ((tb_wait_hipot_data.Text[i] < '0') || (tb_wait_hipot_data.Text[i] > '9'))
+                    {
+                        flag_incorrect_data = true;
+                        richTextBox1.Text += "SN1格式不正確b\n";
+                    }
+                }
+
+                if (flag_incorrect_data == false)
+                {
+                    richTextBox1.Text += "c取得 SN1序號 : " + tb_wait_hipot_data.Text + "\n";
+                }
+            }
+            else
+            {
+                flag_incorrect_data = true;
+                richTextBox1.Text += "序號格式不正確\n";
+            }
+
+            if (flag_incorrect_data == true)
+            {
+                richTextBox1.Text += "資料錯誤,長度 " + tb_wait_hipot_data.Text.Length.ToString() + "\t內容 " + tb_wait_hipot_data.Text + "\t清除\n";
+                show_main_message12("資料錯誤, 請重新輸入", S_OK, 30);
+                tb_wait_hipot_data.Clear();
+                richTextBox1.Text += "f4 ";
+                return S_FALSE;
+            }
+            else
+            {
+                richTextBox1.Text += "資料正確\n";
                 return S_OK;
             }
         }
@@ -15953,7 +16117,12 @@ namespace imsLink
                 else if (flag_operation_mode == MODE_RELEASE_STAGE9)
                     camera_serials.Add(new string[] { tb_sale3.Text, tb_sale1.Text, tb_sale2.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                 else if (flag_operation_mode == MODE_RELEASE_STAGE11)
-                    camera_serials.Add(new string[] { tb_sale3.Text, tb_sale1.Text, tb_sale2.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                {
+                    if (tb_hipot_status.Text == "OK")
+                        camera_serials.Add(new string[] { tb_sn_opal_hipot.Text, "", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                    else
+                        camera_serials.Add(new string[] { tb_sn_opal_hipot.Text, tb_hipot_status.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE12)
                 {
                     if ((cb_check1c.Checked == true) && (cb_check2c.Checked == true) && (cb_check3c.Checked == true))
@@ -16035,7 +16204,7 @@ namespace imsLink
                     tb_package32.Clear();
                     tb_package33.Clear();
                 }
-                else if ((flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11))
+                else if (flag_operation_mode == MODE_RELEASE_STAGE9)
                 {
                     g9.Clear(BackColor);
                     g9.DrawString("存檔完成 " + csv_index9.ToString(), new Font("標楷體", 45), new SolidBrush(Color.Blue), new PointF(5, 30));
@@ -16043,11 +16212,7 @@ namespace imsLink
 
                     lb_sale1.Text = "單別(4碼) : " + tb_sale1.Text;
                     lb_sale2.Text = "單號(7碼) : " + tb_sale2.Text;
-
-                    if (flag_operation_mode == MODE_RELEASE_STAGE9)
-                        lb_sale3.Text = "箱號或序號 : " + tb_sale3.Text;
-                    else
-                        lb_sale3.Text = "相機序號(9~10碼) : " + tb_sale3.Text;
+                    lb_sale3.Text = "箱號或序號 : " + tb_sale3.Text;
 
                     if (flag_cancel_data == true)
                     {
@@ -16072,6 +16237,21 @@ namespace imsLink
                     //tb_sale1.Clear();
                     //tb_sale2.Clear();
                     tb_sale3.Clear();
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE11)
+                {
+                    g11.Clear(BackColor);
+                    g11.DrawString("存檔完成 " + csv_index11.ToString(), new Font("標楷體", 45), new SolidBrush(Color.Blue), new PointF(5, 30));
+                    playSound(S_OK);
+
+                    lb_hipot_status.Text = "狀態(1~2碼) : \t" + tb_hipot_status.Text;
+                    lb_sn_opal_hipot.Text = "相機序號(9~10碼) : \t" + tb_sn_opal_hipot.Text;
+
+                    lb_hipot_status.ForeColor = Color.Black;
+                    lb_sn_opal_hipot.ForeColor = Color.Black;
+
+                    tb_hipot_status.Clear();
+                    tb_sn_opal_hipot.Clear();
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE12)
                 {
@@ -16099,9 +16279,13 @@ namespace imsLink
                     return;
                 }
 
-                if ((flag_operation_mode == MODE_RELEASE_STAGE9) || (flag_operation_mode == MODE_RELEASE_STAGE11))
+                if (flag_operation_mode == MODE_RELEASE_STAGE9)
                 {
                     flag_ok_data3 = false;
+                }
+                else if (flag_operation_mode == MODE_RELEASE_STAGE11)
+                {
+                    flag_ok_data1 = false;
                 }
                 else
                 {
@@ -16401,7 +16585,10 @@ namespace imsLink
             string PathM = "M:\\";  //M槽放圖
             string PathN = "N:\\";  //N槽放CSV檔
 
-            if ((flag_operation_mode != MODE_RELEASE_STAGE1C) && (flag_operation_mode != MODE_RELEASE_STAGE2) && (flag_operation_mode != MODE_RELEASE_STAGE5) && (flag_operation_mode != MODE_RELEASE_STAGE6) && (flag_operation_mode != MODE_RELEASE_STAGE7) && (flag_operation_mode != MODE_RELEASE_STAGE8) && (flag_operation_mode != MODE_RELEASE_STAGE9) && (flag_operation_mode != MODE_RELEASE_STAGE11) && (flag_operation_mode != MODE_RELEASE_STAGE12) && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
+            if ((flag_operation_mode != MODE_RELEASE_STAGE1C) && (flag_operation_mode != MODE_RELEASE_STAGE2) && (flag_operation_mode != MODE_RELEASE_STAGE5) 
+                && (flag_operation_mode != MODE_RELEASE_STAGE6) && (flag_operation_mode != MODE_RELEASE_STAGE7) && (flag_operation_mode != MODE_RELEASE_STAGE8) 
+                && (flag_operation_mode != MODE_RELEASE_STAGE9) && (flag_operation_mode != MODE_RELEASE_STAGE11) && (flag_operation_mode != MODE_RELEASE_STAGE12) 
+                && (Directory.Exists(PathM) == false))     //確認資料夾是否存在
             {
                 show_main_message1("無法連上 " + PathM, S_FALSE, 30);
                 show_main_message2("無法連上 " + PathM, S_FALSE, 30);
@@ -17935,29 +18122,7 @@ namespace imsLink
             }
 
             ccc++;
-            if ((flag_operation_mode == MODE_RELEASE_STAGE11) && (checkBox1.Checked == true) && (flag_ng_reason1 == false) && (flag_ng_reason2 == false) && (flag_ng_reason3 == false))
-            {
-                if ((ccc % 4) == 0)
-                    lb_main_mesg9.Text = "等待勾選 NG原因 \\";
-                else if ((ccc % 4) == 1)
-                    lb_main_mesg9.Text = "等待勾選 NG原因 |";
-                else if ((ccc % 4) == 2)
-                    lb_main_mesg9.Text = "等待勾選 NG原因 /";
-                else
-                    lb_main_mesg9.Text = "等待勾選 NG原因 -";
-            }
-            else if ((flag_operation_mode == MODE_RELEASE_STAGE11) && (checkBox1.Checked == true) && (flag_ng_reason3 == true) && (flag_wait_for_ng_reason == true))
-            {
-                if ((ccc % 4) == 0)
-                    lb_main_mesg9.Text = "等待輸入 NG其他原因 \\";
-                else if ((ccc % 4) == 1)
-                    lb_main_mesg9.Text = "等待輸入 NG其他原因 |";
-                else if ((ccc % 4) == 2)
-                    lb_main_mesg9.Text = "等待輸入 NG其他原因 /";
-                else
-                    lb_main_mesg9.Text = "等待輸入 NG其他原因 -";
-            }
-            else if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
+            if ((flag_ok_data1 == false) && (flag_ok_data1 == false))
             {
                 if (tb_sale1.Focused == true)
                 {
@@ -18030,28 +18195,14 @@ namespace imsLink
                 }
                 else
                 {
-                    if (flag_operation_mode == MODE_RELEASE_STAGE9)
-                    {
-                        if ((ccc % 4) == 0)
-                            lb_main_mesg9.Text = "等待輸入 箱號或序號 \\";
-                        else if ((ccc % 4) == 1)
-                            lb_main_mesg9.Text = "等待輸入 箱號或序號 |";
-                        else if ((ccc % 4) == 2)
-                            lb_main_mesg9.Text = "等待輸入 箱號或序號 /";
-                        else
-                            lb_main_mesg9.Text = "等待輸入 箱號或序號 -";
-                    }
+                    if ((ccc % 4) == 0)
+                        lb_main_mesg9.Text = "等待輸入 箱號或序號 \\";
+                    else if ((ccc % 4) == 1)
+                        lb_main_mesg9.Text = "等待輸入 箱號或序號 |";
+                    else if ((ccc % 4) == 2)
+                        lb_main_mesg9.Text = "等待輸入 箱號或序號 /";
                     else
-                    {
-                        if ((ccc % 4) == 0)
-                            lb_main_mesg9.Text = "等待輸入 序號 \\";
-                        else if ((ccc % 4) == 1)
-                            lb_main_mesg9.Text = "等待輸入 序號 |";
-                        else if ((ccc % 4) == 2)
-                            lb_main_mesg9.Text = "等待輸入 序號 /";
-                        else
-                            lb_main_mesg9.Text = "等待輸入 序號 -";
-                    }
+                        lb_main_mesg9.Text = "等待輸入 箱號或序號 -";
                 }
                 if (tb_sale3.Focused == true)
                     tb_sale3.BackColor = Color.Pink;
@@ -18069,10 +18220,7 @@ namespace imsLink
 
             if ((timer_cnt++ % 10) == 0)
             {
-                if (flag_operation_mode == MODE_RELEASE_STAGE9)
                     richTextBox1.Text += "九";
-                else
-                    richTextBox1.Text += "十一";
 
                 if ((flag_ok_data1 == false) && (flag_ok_data2 == false) && (flag_wait_for_ng_reason == false))
                 {
@@ -18081,10 +18229,7 @@ namespace imsLink
                         if (tb_sale1.Focused == false)
                         {
                             tb_sale1.Focus();
-                            if (flag_operation_mode == MODE_RELEASE_STAGE9)
-                                richTextBox1.Text += "F9";
-                            else
-                                richTextBox1.Text += "F11";
+                            richTextBox1.Text += "F9";
                         }
                     }
                 }
@@ -18093,39 +18238,9 @@ namespace imsLink
                     if (tb_sale3.Focused == false)
                     {
                         tb_sale3.Focus();
-                        if (flag_operation_mode == MODE_RELEASE_STAGE9)
-                            richTextBox1.Text += "f9";
-                        else
-                            richTextBox1.Text += "f11";
+                        richTextBox1.Text += "f9";
                     }
                 }
-            }
-
-            if (flag_operation_mode == MODE_RELEASE_STAGE11)
-            {
-                if (checkBox1.Checked == true)
-                {
-                    if ((flag_ng_reason1 == false) && (flag_ng_reason2 == false) && (flag_ng_reason3 == false))
-                    {
-                        if (tb_sale3.Text.Length > 0)
-                        {
-                            tb_sale3.Clear();
-                            richTextBox1.Text += "尚未選擇NG原因，清除tb_sale3資料\n";
-                            g9.Clear(BackColor);
-                            g9.DrawString("    ", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
-                        }
-                    }
-                    else if ((flag_ng_reason3 == true) && (flag_wait_for_ng_reason == true))
-                    {
-                        richTextBox1.Text += "尚未輸入NG原因，清除tb_sale3資料\n";
-                        g9.Clear(BackColor);
-                        g9.DrawString("    ", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
-                    }
-
-
-                }
-
-
             }
 
             if (flag_network_disk_status == false)
@@ -18175,16 +18290,153 @@ namespace imsLink
             }
 
             int ret;
-            if (flag_operation_mode == MODE_RELEASE_STAGE9)
+            ret = check_sale3_data();
+
+            if (ret == S_OK)
+                check_export_data();
+        }
+
+        private void timer_stage11_Tick(object sender, EventArgs e)
+        {
+            if (flag_doing_writing_data == true)
             {
-                ret = check_sale3_data();
+                richTextBox1.Text += "正在存檔, 忽略\n";
+                return;
+            }
+
+            ccc++;
+            if (flag_ok_data1 == false)
+            {
+                if (tb_hipot_status.BackColor != Color.Pink)
+                {
+                    tb_hipot_status.BackColor = Color.Pink;
+                    tb_sn_opal_hipot.BackColor = Color.White;
+                }
+                if ((ccc % 4) == 0)
+                    lb_main_mesg11.Text = "等待輸入 狀態 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg11.Text = "等待輸入 狀態 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg11.Text = "等待輸入 狀態 /";
+                else
+                    lb_main_mesg11.Text = "等待輸入 狀態 -";
             }
             else
             {
-                ret = check_tb_sn_opal_data2();
+                if (tb_sn_opal_hipot.BackColor != Color.Pink)
+                {
+                    tb_hipot_status.BackColor = Color.White;
+                    tb_sn_opal_hipot.BackColor = Color.Pink;
+                }
+                if ((ccc % 4) == 0)
+                    lb_main_mesg11.Text = "等待輸入 序號 \\";
+                else if ((ccc % 4) == 1)
+                    lb_main_mesg11.Text = "等待輸入 序號 |";
+                else if ((ccc % 4) == 2)
+                    lb_main_mesg11.Text = "等待輸入 序號 /";
+                else
+                    lb_main_mesg11.Text = "等待輸入 序號 -";
             }
-            if (ret == S_OK)
-                check_export_data();
+
+            if ((timer_cnt++ % 10) == 0)
+            {
+                richTextBox1.Text += "十一";
+
+                if (tb_wait_hipot_data.Focused == false)
+                {
+                    tb_wait_hipot_data.Focus();
+                    richTextBox1.Text += "F11";
+                }
+            }
+
+            if (flag_network_disk_status == false)
+            {
+                show_main_message1("無法連上網路磁碟機", S_FALSE, 30);
+            }
+
+            int len;
+            len = tb_wait_hipot_data.Text.Length;
+
+            if (len > 45)   //太長, 直接放棄
+            {
+                tb_wait_hipot_data.Clear();
+                //richTextBox1.Text += "X1";
+                return;
+            }
+            else if ((len > 2) && (len <= 4))    //檢查是否換行
+            {
+                if ((tb_wait_hipot_data.Text[len - 2] == 0x0D) || (tb_wait_hipot_data.Text[len - 1] == 0x0A))
+                {
+                    tb_wait_hipot_data.Text = tb_wait_hipot_data.Text.Trim();
+
+                    if (tb_wait_hipot_data.Text == "OK")
+                    {
+                        tb_hipot_status.Text = "OK";
+                        flag_ok_data1 = true;
+                        tb_wait_hipot_data.Clear();
+                    }
+                    else if (tb_wait_hipot_data.Text == "B")
+                    {
+                        tb_hipot_status.Text = "B : Break down (燒斷)";
+                        flag_ok_data1 = true;
+                        tb_wait_hipot_data.Clear();
+                    }
+                    else if (tb_wait_hipot_data.Text == "M")
+                    {
+                        tb_hipot_status.Text = "M : Max-Fail (過電流)";
+                        flag_ok_data1 = true;
+                        tb_wait_hipot_data.Clear();
+                    }
+                    else if (tb_wait_hipot_data.Text == "S")
+                    {
+                        tb_hipot_status.Text = "S : Short (短路)";
+                        flag_ok_data1 = true;
+                        tb_wait_hipot_data.Clear();
+                    }
+                    if (flag_ok_data1 == true)
+                    {
+                        g11.Clear(BackColor);
+                        if (tb_hipot_status.Text == "OK")
+                            g11.DrawString(tb_hipot_status.Text, new Font("標楷體", 75), new SolidBrush(Color.Blue), new PointF(130, 15));
+                        else
+                            g11.DrawString(tb_hipot_status.Text, new Font("標楷體", 25), new SolidBrush(Color.Blue), new PointF(5, 45));
+
+                        lb_hipot_status.Text = "狀態(1~2碼)";
+                        lb_sn_opal_hipot.Text = "相機序號(9~10碼)";
+                    }
+                }
+                else
+                {
+                    //richTextBox1.Text += "X2";
+                    return;
+                }
+            }
+            else if (len > 4)
+            {
+                if (flag_ok_data1 == true)
+                {
+                    int result = check_tb_sn_opal_data11();
+
+                    if (result == S_OK)
+                    {
+                        tb_sn_opal_hipot.Text = tb_wait_hipot_data.Text;
+                        tb_wait_hipot_data.Clear();
+                        flag_ok_data2 = true;
+                        flag_ok_data3 = true;
+                        check_export_data();
+                    }
+                }
+                else
+                {
+                    tb_sn_opal_hipot.Text = "";
+                    tb_wait_hipot_data.Clear();
+                }
+            }
+            else    //太短  留著累計
+            {
+                //richTextBox1.Text += "X3";
+                return;
+            }
         }
 
         private void button62_Click(object sender, EventArgs e)
@@ -18604,9 +18856,6 @@ namespace imsLink
             tb_reason.Clear();
             tb_reason.BackColor = Color.White;
             flag_wait_for_ng_reason = false;
-            flag_ng_reason1 = false;
-            flag_ng_reason2 = false;
-            flag_ng_reason3 = false;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -21553,12 +21802,8 @@ namespace imsLink
             {
                 cb_reason2.Checked = false;
                 cb_reason3.Checked = false;
-                flag_ng_reason1 = true;
-                flag_ng_reason2 = false;
-                flag_ng_reason3 = false;
             }
-            else
-                flag_ng_reason1 = false;
+
             tb_reason.Clear();
             tb_reason.BackColor = Color.White;
             flag_wait_for_ng_reason = false;
@@ -21570,12 +21815,7 @@ namespace imsLink
             {
                 cb_reason1.Checked = false;
                 cb_reason3.Checked = false;
-                flag_ng_reason1 = false;
-                flag_ng_reason2 = true;
-                flag_ng_reason3 = false;
             }
-            else
-                flag_ng_reason2 = false;
             tb_reason.Clear();
             tb_reason.BackColor = Color.White;
             flag_wait_for_ng_reason = false;
@@ -21587,16 +21827,12 @@ namespace imsLink
             {
                 cb_reason1.Checked = false;
                 cb_reason2.Checked = false;
-                flag_ng_reason1 = false;
-                flag_ng_reason2 = false;
-                flag_ng_reason3 = true;
                 tb_reason.BackColor = Color.Pink;
                 flag_wait_for_ng_reason = true;
                 tb_reason.Focus();
             }
             else
             {
-                flag_ng_reason3 = false;
                 tb_reason.Clear();
                 tb_reason.BackColor = Color.White;
                 flag_wait_for_ng_reason = false;
@@ -22549,6 +22785,7 @@ namespace imsLink
             flag_do_find_awb_location = false;
             return y_total / (ww * hh);
         }
+
 
     }
 }

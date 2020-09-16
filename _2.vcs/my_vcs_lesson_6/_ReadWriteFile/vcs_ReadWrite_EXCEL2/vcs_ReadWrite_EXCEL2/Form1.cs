@@ -21,6 +21,7 @@ namespace vcs_ReadWrite_EXCEL2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //sugar can not use this
             //Excel數據導入到dataGridView
             //http://weisico.com/program/2018/0531/370.html
 

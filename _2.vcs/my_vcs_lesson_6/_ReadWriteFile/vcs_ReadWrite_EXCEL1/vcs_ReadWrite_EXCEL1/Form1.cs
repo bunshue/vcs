@@ -26,24 +26,7 @@ namespace vcs_ReadWrite_EXCEL1
         private void button1_Click(object sender, EventArgs e)
         {
             // 設定儲存檔名，不用設定副檔名，系統自動判斷 excel 版本，產生 .xls 或 .xlsx 副檔名
-            string pathFile = @"C:\______test_files\__RW\_excel";
-
-            string filename1 = pathFile + ".xls";
-            string filename2 = pathFile + ".xlsx";
-            if (File.Exists(filename1) == true)
-            {
-                richTextBox1.Text += "檔案: " + filename1 + " 已存在，不再製作。\n";
-                return;
-            }
-            else if (File.Exists(filename2) == true)
-            {
-                richTextBox1.Text += "檔案: " + filename2 + " 已存在，不再製作。\n";
-                return;
-            }
-            else
-            {
-                richTextBox1.Text += "開始製作檔案: " + pathFile + "\n";
-            }
+            string filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
             Excel.Application excelApp;
             Excel._Workbook wBook;
@@ -127,8 +110,7 @@ namespace vcs_ReadWrite_EXCEL1
             wRange.Select();
             wRange.Columns.AutoFit();
             //另存活頁簿
-            wBook.SaveAs(pathFile, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            richTextBox1.Text += "製作Excel檔案於: " + pathFile + Environment.NewLine;
+            wBook.SaveAs(filename, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
             //關閉活頁簿
             wBook.Close(false, Type.Missing, Type.Missing);
@@ -144,13 +126,15 @@ namespace vcs_ReadWrite_EXCEL1
             excelApp = null;
             GC.Collect();
 
+            richTextBox1.Text += "存檔檔名: " + filename + ",  xls or xlsx\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string pathFile = @"C:\______test_files\__RW\_excel";
+            //sugar can not use this
+            string filename = @"C:\______test_files\__RW\_excel\excel_20200916_115412.xls";
 
-            string filename = pathFile + ".xls";
+            //string filename = pathFile + ".xls";
             if (File.Exists(filename) == false)
             {
                 richTextBox1.Text += "檔案: " + filename + " 不存在，無法開啟。\n";
@@ -235,43 +219,13 @@ namespace vcs_ReadWrite_EXCEL1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string pathFile = @"C:\______test_files\__RW\_excel";
 
-            string filename = pathFile + ".xls";
-            if (File.Exists(filename) == false)
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在，無法刪除。\n";
-                return;
-            }
-            else
-            {
-                File.Delete(filename);
-                richTextBox1.Text += "已刪除檔案: " + filename + "\n";
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string pathFile = @"C:\______test_files\__RW\_excel";
-
-            string filename1 = pathFile + ".xls";
-            string filename2 = pathFile + ".xlsx";
-            if (File.Exists(filename1) == true)
-            {
-                richTextBox1.Text += "檔案: " + filename1 + " 已存在，不再製作。\n";
-                return;
-            }
-            else if (File.Exists(filename2) == true)
-            {
-                richTextBox1.Text += "檔案: " + filename2 + " 已存在，不再製作。\n";
-                return;
-            }
-            else
-            {
-                richTextBox1.Text += "開始製作檔案: " + pathFile + "\n";
-            }
-
-            string filename = @"C:\______test_files\__RW\_excel\vcs_test_excel.xls";
+            //Sugar can not open file
+            string filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("big5"));
             string s = "第1欄位\t第2欄位\t第3欄位\t第4欄位\t第5欄位\t";

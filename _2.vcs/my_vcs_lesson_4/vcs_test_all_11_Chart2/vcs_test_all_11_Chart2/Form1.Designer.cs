@@ -1,4 +1,4 @@
-﻿namespace vcs_RealtimeChart
+﻿namespace vcs_test_all_11_Chart2
 {
     partial class Form1
     {
