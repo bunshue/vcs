@@ -42,7 +42,8 @@ namespace WindowsFormsApplication1bbbb
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            label3.Text = String.Format("按了 {0} 鍵，鍵碼：{1}", e.KeyCode, e.KeyValue);
+                            label3.Text = String.Format("按了 {0} 鍵，鍵碼：{1}", e.KeyCode, e.KeyValue);
+
             //監聽按下的鍵值
             if (e.Control && e.Alt && e.KeyCode == Keys.H)
                 MessageBox.Show("哈哈哈！");//若按下Ctrl + Alt + H 

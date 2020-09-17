@@ -18,11 +18,14 @@ namespace vcs_MouseKety_Form
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label2.Text = "";
 
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            label2.Text = String.Format("按了 {0} 鍵，鍵碼：{1}", e.KeyCode, e.KeyValue);
+
             switch (e.KeyCode)
             {
                 case Keys.Up:       // 判斷是否按鍵盤上鍵

@@ -46,6 +46,7 @@
             this.button0 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.cb_show_data = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -223,11 +224,22 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // cb_show_data
+            // 
+            this.cb_show_data.AutoSize = true;
+            this.cb_show_data.Location = new System.Drawing.Point(12, 533);
+            this.cb_show_data.Name = "cb_show_data";
+            this.cb_show_data.Size = new System.Drawing.Size(72, 16);
+            this.cb_show_data.TabIndex = 12;
+            this.cb_show_data.Text = "顯示資料";
+            this.cb_show_data.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 647);
+            this.Controls.Add(this.cb_show_data);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button0);
@@ -245,6 +257,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -264,6 +277,7 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox cb_show_data;
     }
 }
 

@@ -46,7 +46,7 @@ namespace vcs_test_all_11_Chart1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 10);
         
         
         }
@@ -221,6 +221,19 @@ namespace vcs_test_all_11_Chart1
             /*
             //Point[] pt = new Point[360];    //一維陣列內有360個Point
             */
+
+            if (cb_show_data.Checked == true)
+            {
+                richTextBox1.Text += "顯示資料\n";
+                int count = series1.Points.Count;
+                richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+                for (i = 0; i < count; i++)
+                {
+                    richTextBox1.Text += "x[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
+                    richTextBox1.Text += "sin[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\t";
+                    richTextBox1.Text += "cos[" + i.ToString() + "] = " + series2.Points[i].YValues[0].ToString() + "\n";
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
