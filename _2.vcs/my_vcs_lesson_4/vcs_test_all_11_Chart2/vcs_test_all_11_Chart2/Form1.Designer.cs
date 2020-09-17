@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timerRealTimeData = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // timerRealTimeData
+            // timer1
             // 
-            this.timerRealTimeData.Enabled = true;
-            this.timerRealTimeData.Interval = 200;
-            this.timerRealTimeData.Tick += new System.EventHandler(this.timerRealTimeData_Tick);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 200;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -52,7 +52,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timerRealTimeData;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

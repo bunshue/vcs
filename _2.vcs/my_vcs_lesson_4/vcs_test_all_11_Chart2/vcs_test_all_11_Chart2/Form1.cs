@@ -95,9 +95,6 @@ namespace vcs_test_all_11_Chart2
             }
         }
 
-        //加入 Timer 元件模擬動態數據來源 
-        //private Timer timerRealTimeData;
-        private Random random = new Random();
         private int pointIndex = 0;
         Chart chart1 = new RealtimeChart().GetChart;
 
@@ -111,17 +108,17 @@ namespace vcs_test_all_11_Chart2
             this.Controls.Add(chart1);
         }
 
-        private void timerRealTimeData_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             // Define some variables
-            int numberOfPointsInChart = 10;
-            int numberOfPointsAfterRemoval = 10;
+            int numberOfPointsInChart = 15;
+            int numberOfPointsAfterRemoval = 15;
 
             // Simulate adding new data points
-            int newX = pointIndex + 1;
-            int newY = random.Next(0, 5000);
+            int x = pointIndex + 1;
+            int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
 
-            chart1.Series[0].Points.AddXY(newX, newY);
+            chart1.Series[0].Points.AddXY(x, y);
             ++pointIndex;
 
             // Adjust Y & X axis scale

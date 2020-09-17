@@ -1195,7 +1195,31 @@ namespace vcs_Draw2
 
         private void button27_Click(object sender, EventArgs e)
         {
+            p = new Pen(Color.Red, 10);     // 設定畫筆為藍色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
 
+            GraphicsPath myPath1 = DrawRoundRect(100, 100, 200, 100, 30);
+            g.FillPath(sb, myPath1);
+
+            GraphicsPath myPath2 = DrawRoundRect(100, 250, 400, 300, 50);
+            g.DrawPath(p, myPath2);
+        }
+
+        //繪製圓角矩形
+        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
         }
 
         void save_image_to_drive()

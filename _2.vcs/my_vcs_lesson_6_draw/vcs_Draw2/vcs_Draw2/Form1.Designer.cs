@@ -515,11 +515,12 @@
             // 
             // button27
             // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button27.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button27.Location = new System.Drawing.Point(995, 222);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(102, 42);
             this.button27.TabIndex = 53;
+            this.button27.Text = "繪製圓角矩形";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

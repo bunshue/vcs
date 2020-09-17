@@ -30,7 +30,7 @@ namespace vcs_Draw4
         private void Form1_Load(object sender, EventArgs e)
         {
             g = pictureBox1.CreateGraphics();
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            p = new Pen(Color.Red, 10);     // 設定畫筆為藍色、粗細為 10 點。
             sb = new SolidBrush(Color.Blue);
             f = new Font("標楷體", 16);
 
@@ -363,35 +363,6 @@ namespace vcs_Draw4
             }
         }
 
-        private void button43_Click(object sender, EventArgs e)
-        {
-            //DrawRoundRect(100, 100, 300, 200, 20);
-
-            GraphicsPath myPath1 = DrawRoundRect(100, 100, 200, 100, 30);
-            g.FillPath(sb, myPath1);
-
-            GraphicsPath myPath2 = DrawRoundRect(100, 250, 400, 300, 50);
-            g.DrawPath(p, myPath2);
-
-        }
-
-        //繪製圓角矩形
-        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
-        {
-            GraphicsPath roundedRect = new GraphicsPath();
-            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
-            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
-            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
-            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
-            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
-            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
-            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();
-            return roundedRect;
-        }
-
         private void button44_Click(object sender, EventArgs e)
         {
             GraphicsPath myGraphicsPath = new GraphicsPath();
@@ -444,6 +415,7 @@ new Point(50, 30)};
             //Draw the path to the screen.
             g.FillPath(Brushes.Black, myPath);
         }
+
 
     }
 }

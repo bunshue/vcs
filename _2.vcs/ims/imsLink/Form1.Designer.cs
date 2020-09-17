@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -161,6 +163,7 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lb_yuv_y2 = new System.Windows.Forms.Label();
             this.groupBox_awb2 = new System.Windows.Forms.GroupBox();
             this.groupBox_brightness = new System.Windows.Forms.GroupBox();
@@ -521,6 +524,7 @@
             this.tb_sale1 = new System.Windows.Forms.TextBox();
             this.tp_HiPot = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.tb_wait_hipot_data = new System.Windows.Forms.TextBox();
             this.lb_main_mesg11 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
             this.lb_sn_opal_hipot = new System.Windows.Forms.Label();
@@ -719,7 +723,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
             this.timer_stage11 = new System.Windows.Forms.Timer(this.components);
-            this.tb_wait_hipot_data = new System.Windows.Forms.TextBox();
+            this.lb_fps = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -735,6 +739,7 @@
             this.tp_Serial_Auto.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox_awb2.SuspendLayout();
             this.groupBox_brightness.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_find_brightness_h)).BeginInit();
@@ -2268,6 +2273,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.chart1);
             this.tp_USB.Controls.Add(this.lb_yuv_y2);
             this.tp_USB.Controls.Add(this.groupBox_awb2);
             this.tp_USB.Controls.Add(this.groupBox_temperature);
@@ -2313,6 +2319,19 @@
             this.tp_USB.TabIndex = 22;
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea6.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea6);
+            this.chart1.Location = new System.Drawing.Point(264, 73);
+            this.chart1.Name = "chart1";
+            series6.ChartArea = "ChartArea1";
+            series6.Name = "Series1";
+            this.chart1.Series.Add(series6);
+            this.chart1.Size = new System.Drawing.Size(338, 239);
+            this.chart1.TabIndex = 238;
+            this.chart1.Text = "chart1";
             // 
             // lb_yuv_y2
             // 
@@ -4237,35 +4256,41 @@
             // bt_debug3
             // 
             this.bt_debug3.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_debug3.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_debug3.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_debug3.ForeColor = System.Drawing.Color.Black;
             this.bt_debug3.Location = new System.Drawing.Point(271, 56);
             this.bt_debug3.Name = "bt_debug3";
             this.bt_debug3.Size = new System.Drawing.Size(60, 28);
             this.bt_debug3.TabIndex = 238;
+            this.bt_debug3.Text = "debug3";
             this.bt_debug3.UseVisualStyleBackColor = false;
+            this.bt_debug3.Click += new System.EventHandler(this.bt_debug3_Click);
             // 
             // bt_debug2
             // 
             this.bt_debug2.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_debug2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_debug2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_debug2.ForeColor = System.Drawing.Color.Black;
             this.bt_debug2.Location = new System.Drawing.Point(271, 23);
             this.bt_debug2.Name = "bt_debug2";
             this.bt_debug2.Size = new System.Drawing.Size(60, 28);
             this.bt_debug2.TabIndex = 237;
+            this.bt_debug2.Text = "debug2";
             this.bt_debug2.UseVisualStyleBackColor = false;
+            this.bt_debug2.Click += new System.EventHandler(this.bt_debug2_Click);
             // 
             // bt_debug1
             // 
             this.bt_debug1.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_debug1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_debug1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_debug1.ForeColor = System.Drawing.Color.Black;
             this.bt_debug1.Location = new System.Drawing.Point(205, 56);
             this.bt_debug1.Name = "bt_debug1";
             this.bt_debug1.Size = new System.Drawing.Size(60, 28);
             this.bt_debug1.TabIndex = 236;
+            this.bt_debug1.Text = "debug1";
             this.bt_debug1.UseVisualStyleBackColor = false;
+            this.bt_debug1.Click += new System.EventHandler(this.bt_debug1_Click);
             // 
             // bt_brightness
             // 
@@ -6742,6 +6767,16 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Hi Pot 記錄";
             // 
+            // tb_wait_hipot_data
+            // 
+            this.tb_wait_hipot_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_wait_hipot_data.Location = new System.Drawing.Point(477, 199);
+            this.tb_wait_hipot_data.Multiline = true;
+            this.tb_wait_hipot_data.Name = "tb_wait_hipot_data";
+            this.tb_wait_hipot_data.Size = new System.Drawing.Size(242, 40);
+            this.tb_wait_hipot_data.TabIndex = 138;
+            this.tb_wait_hipot_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // lb_main_mesg11
             // 
             this.lb_main_mesg11.AutoSize = true;
@@ -8829,15 +8864,16 @@
             this.timer_stage11.Interval = 300;
             this.timer_stage11.Tick += new System.EventHandler(this.timer_stage11_Tick);
             // 
-            // tb_wait_hipot_data
+            // lb_fps
             // 
-            this.tb_wait_hipot_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_hipot_data.Location = new System.Drawing.Point(477, 199);
-            this.tb_wait_hipot_data.Multiline = true;
-            this.tb_wait_hipot_data.Name = "tb_wait_hipot_data";
-            this.tb_wait_hipot_data.Size = new System.Drawing.Size(242, 40);
-            this.tb_wait_hipot_data.TabIndex = 138;
-            this.tb_wait_hipot_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lb_fps.AutoSize = true;
+            this.lb_fps.Font = new System.Drawing.Font("細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_fps.ForeColor = System.Drawing.Color.Black;
+            this.lb_fps.Location = new System.Drawing.Point(1006, 13);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(54, 27);
+            this.lb_fps.TabIndex = 239;
+            this.lb_fps.Text = "fps";
             // 
             // Form1
             // 
@@ -8845,6 +8881,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1442, 704);
+            this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.groupBox_quick);
             this.Controls.Add(this.cb_stage1_ng);
             this.Controls.Add(this.gb_ng_reason1);
@@ -8882,6 +8919,7 @@
             this.groupBox10.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBox_awb2.ResumeLayout(false);
             this.groupBox_awb2.PerformLayout();
             this.groupBox_brightness.ResumeLayout(false);
@@ -9706,6 +9744,8 @@
         private System.Windows.Forms.TextBox tb_hipot_status;
         private System.Windows.Forms.Timer timer_stage11;
         private System.Windows.Forms.TextBox tb_wait_hipot_data;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label lb_fps;
     }
 }
 

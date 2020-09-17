@@ -16,6 +16,8 @@ using AForge.Video.DirectShow;
 
 using System.Runtime.InteropServices;   //for dll
 
+using System.Windows.Forms.DataVisualization.Charting;  //for Series
+
 namespace imsLink
 {
     public partial class Form1 : Form
@@ -29,7 +31,8 @@ namespace imsLink
         bool flag_david_test2 = false;   //david測試2, 存圖顯示亮度狀況
         bool flag_david_test3 = false;   //david測試3, no comport, no webcam, test ui only
 
-        bool flag_user_metering = false;   //在第3站加上測光模式
+        bool flag_use_metering = false;   //在第3站加上測光模式
+        bool flag_use_chart1 = false;   //用chart1紀錄RGB變化
 
         bool flag_enaglb_sound_effect = false;
         bool flag_enaglb_awb_function = true;
@@ -96,6 +99,7 @@ namespace imsLink
         private const int DISPLAY_FHD = 0x00;	//screen size FHD
         private const int DISPLAY_SD = 0x01;	//screen size SD
         private const int AWB_TIMEOUT = 120;	    //AWB timeoout in second
+        private const int AWB_CHART_POINTS = 60;	    //AWB chart points
 
         string imslink_log_filename = Application.StartupPath + "\\log\\imslink.log";
         string RxString = "";
@@ -256,6 +260,14 @@ namespace imsLink
         int total_RGB_R = 0;
         int total_RGB_G = 0;
         int total_RGB_B = 0;
+        float average_RGB_R = 0;
+        float average_RGB_G = 0;
+        float average_RGB_B = 0;
+        double average_RGB_max = 0;
+        double average_RGB_min = 256;
+        Series series_r;
+        Series series_g;
+        Series series_b;
 
         int total_RGB_R_max = 0;
         int total_RGB_R_min = 0;
@@ -2760,6 +2772,7 @@ namespace imsLink
                 lb_yuv_y2.Visible = en;
                 lb_yuv_y3.Visible = en;
                 lb_auto_awb_cnt.Visible = false;
+                lb_fps.Visible = en;
 
                 bt_tmp.Text = total_test_count.ToString() + "次";
 
@@ -2782,6 +2795,10 @@ namespace imsLink
                 lb_note2.Visible = en;
                 lb_note3.Visible = en;
             }
+
+            if (flag_usb_mode == true)
+                lb_fps.Visible = true;
+
             bt_awb_break.Visible = false;
 
             return;
@@ -2838,6 +2855,14 @@ namespace imsLink
                 button87.Location = new Point(x_st + dx * 7, y_st);
                 button34.Location = new Point(x_st + dx * 8, y_st);
                 button7.Location = new Point(x_st + dx * 9, y_st);
+
+                if (flag_use_chart1 == true)
+                {
+                    chart1.Visible = true;
+                    chart1.Location = new Point(605, 500);
+                }
+                else
+                    chart1.Visible = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -2863,9 +2888,18 @@ namespace imsLink
                 button73.Location = new Point(x_st + dx * 3, y_st);
                 button34.Location = new Point(x_st + dx * 4, y_st);
                 button7.Location = new Point(x_st + dx * 5, y_st);
+                if (flag_use_chart1 == true)
+                {
+                    chart1.Visible = true;
+                    chart1.Location = new Point(605, 500);
+                }
+                else
+                    chart1.Visible = false;
             }
             else
             {
+                chart1.Visible = false;
+
                 groupBox_quick.Location = new Point(850, 0);
                 groupBox_quick.Size = new Size(770, 62);
 
@@ -2886,9 +2920,6 @@ namespace imsLink
                 button73.Location = new Point(x_st + dx * 3, y_st);
                 button34.Location = new Point(x_st + dx * 4, y_st);
                 button7.Location = new Point(x_st + dx * 5, y_st);
-
-
-
             }
 
             dx = 60;
@@ -3324,8 +3355,8 @@ namespace imsLink
 
                 lb_yuv_y2.Location = new Point(1610, 740);
                 lb_yuv_y3.Location = new Point(1215, 105);
-
                 lb_auto_awb_cnt.Location = new Point(bt_awb_break.Location.X + 110, bt_awb_break.Location.Y + 5);
+                lb_fps.Location = new Point(1720, 50);
             }
 
             //TARGET RGB
@@ -3431,7 +3462,7 @@ namespace imsLink
                 groupBox_gridlinecolor.Visible = false;
             }
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_use_metering == true))
             {
                 groupBox_comport1.Visible = true;
 
@@ -3743,7 +3774,7 @@ namespace imsLink
             comboBox_webcam.Size = new Size(comboBox_webcam.Size.Width - 50, comboBox_webcam.Size.Height);
             comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y - comboBox_webcam.Height);
 
-            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_user_metering == true))
+            if ((flag_operation_mode == MODE_RELEASE_STAGE3) && (flag_use_metering == true))
             {
                 if (flag_comport_connection_ok == false)
                 {
@@ -3897,6 +3928,25 @@ namespace imsLink
 
             cb_Contrast_Brightness_Gamma.Checked = false;
 
+            if (((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)) && (flag_use_chart1 == true))
+            {
+                series_r = chart1.Series.Add("");
+                series_g = chart1.Series.Add("");
+                series_b = chart1.Series.Add("");
+
+                series_r.ChartType = SeriesChartType.Line;
+                series_g.ChartType = SeriesChartType.Line;
+                series_b.ChartType = SeriesChartType.Line;
+
+                series_r.Color = Color.Red; //設定線條顏色
+                series_g.Color = Color.Green; //設定線條顏色
+                series_b.Color = Color.Blue; //設定線條顏色
+
+                series_r.BorderWidth = 2;
+                series_g.BorderWidth = 2;
+                series_b.BorderWidth = 2;
+            }
+
             richTextBox1.Text += "\nimsLink " + software_version + " 啟動完成, 時間 : " + DateTime.Now.ToString() + "\n\n";
             return;
         }
@@ -3922,6 +3972,26 @@ namespace imsLink
                         tb_awb_mesg.BackColor = Color.White;
                         tb_awb_mesg.Text = "";
                     }
+                }
+            }
+
+            if ((flag_operation_mode <= MODE_RELEASE_STAGE3) || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE1C))
+            {
+                if ((DateTime.Now.Second % 2) == 0)
+                {
+                    DateTime dt = DateTime.Now;
+                    /*
+                    //richTextBox1.Text += dt.Hour.ToString("00") + ":" + dt.Minute.ToString("00") + ":" + dt.Second.ToString("00") + "." + dt.Millisecond.ToString("000") + "\n";
+                    //richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
+                    //richTextBox1.Text += "frame diff = " + (frame_count - frame_count_old).ToString() + "\n";
+                    //richTextBox1.Text += "time diff = " + (dt - dt_old).ToString() + "\n";
+                    //richTextBox1.Text += "time diff in ms = " + ((TimeSpan)(dt - dt_old)).TotalMilliseconds.ToString() + "\n";
+                    //richTextBox1.Text += "fps = " + (((frame_count - frame_count_old)*1000)/((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString() + "\n";
+                    */
+                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F4") + " fps";
+
+                    dt_old = dt;
+                    frame_count_old = frame_count;
                 }
             }
         }
@@ -5483,6 +5553,9 @@ namespace imsLink
         int add_tmp = 0;
         int frame_cnt = 0;
         int frame_cnt_old = 0;
+        int frame_count = 0;
+        int frame_count_old = 0;
+        DateTime dt_old = DateTime.Now;
         public Bitmap bm = null;
         //自定義函數, 捕獲每一幀圖像並顯示
         bool flag_capture_picture = false;
@@ -5497,6 +5570,8 @@ namespace imsLink
         public Bitmap bm_contrast = null;
         Graphics gc;    //for contrast
 
+        int tick_count = 0;
+        float tick_x = 0;
         void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             if (flag_do_find_awb_location == true)
@@ -5521,6 +5596,7 @@ namespace imsLink
                 //richTextBox1.Text += "QQQ ";
             }
 
+            frame_count++;
             if ((flag_enaglb_awb_function == true) || (flag_check_webcam_signal == true))
             {
                 frame_cnt++;
@@ -5669,7 +5745,7 @@ namespace imsLink
                     j = 4;
                 }
 
-                if (flag_user_metering == false)
+                if (flag_use_metering == false)
                 {
                     if (j >= 2)
                     {
@@ -6188,6 +6264,7 @@ namespace imsLink
                         }
                     }
                 }
+                average_RGB_R = (float)total_RGB_R / (ww * hh);
 
                 if ((total_RGB_R >= (TARGET_AWB_R * ww * hh - tolerance)) && (total_RGB_R <= (TARGET_AWB_R * ww * hh + tolerance)))
                 {
@@ -6297,6 +6374,8 @@ namespace imsLink
                         }
                     }
                 }
+                average_RGB_G = (float)total_RGB_G / (ww * hh);
+
                 if ((total_RGB_G >= (TARGET_AWB_G * ww * hh - tolerance)) && (total_RGB_G <= (TARGET_AWB_G * ww * hh + tolerance)))
                 {
                     flag_G_OK = true;
@@ -6397,6 +6476,44 @@ namespace imsLink
                         }
                     }
                 }
+                average_RGB_B = (float)total_RGB_B / (ww * hh);
+
+                if (((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)) && (flag_use_chart1 == true))
+                {
+                    if ((tick_count % 2) == 0)
+                    {
+                        series_r.Points.AddXY(tick_x, average_RGB_R);
+                        series_g.Points.AddXY(tick_x, average_RGB_G);
+                        series_b.Points.AddXY(tick_x, average_RGB_B);
+
+                        if (series_r.Points.Count > AWB_CHART_POINTS)
+                            series_r.Points.RemoveAt(0);
+                        if (series_g.Points.Count > AWB_CHART_POINTS)
+                            series_g.Points.RemoveAt(0);
+                        if (series_b.Points.Count > AWB_CHART_POINTS)
+                            series_b.Points.RemoveAt(0);
+
+                        chart1.ChartAreas[0].AxisX.Maximum = tick_x;
+                        chart1.ChartAreas[0].AxisX.Minimum = tick_x - AWB_CHART_POINTS;
+
+                        if ((tick_count % 10) == 0)
+                        {
+                            find_series_max_min();
+                            int y_max = (int)average_RGB_max + 5;
+                            int y_min = (int)average_RGB_min - 5;
+                            if (y_max > 256)
+                                y_max = 256;
+                            if (y_min < 0)
+                                y_min = 0;
+
+                            chart1.ChartAreas[0].AxisY.Maximum = y_max;
+                            chart1.ChartAreas[0].AxisY.Minimum = y_min;
+                        }
+                    }
+                    tick_x++;
+                    tick_count++;
+                }
+
                 if (rgb_check_cnt == CHECK_AWB_FRAME)
                 {
                     rgb_check_cnt++;
@@ -17821,7 +17938,7 @@ namespace imsLink
 
         private void timer_stage3_Tick(object sender, EventArgs e)
         {
-            if (flag_user_metering == true)
+            if (flag_use_metering == true)
                 return;
 
             if (flag_network_disk_status == false)
@@ -22784,6 +22901,57 @@ namespace imsLink
             delay(10);
             flag_do_find_awb_location = false;
             return y_total / (ww * hh);
+        }
+
+        void find_series_max_min()
+        {
+            if (((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)) && (flag_use_chart1 == true))
+            {
+                int count = series_r.Points.Count;
+                int i;
+                average_RGB_max = 0;
+                average_RGB_min = 256;
+
+                for (i = 0; i < count; i++)
+                {
+                    /*
+                    richTextBox1.Text += "x["+i.ToString()+"] = " + series_r.Points[i].XValue.ToString() + "\t";
+                    richTextBox1.Text += "y_r[" + i.ToString() + "] = " + series_r.Points[i].YValues[0].ToString() + "\t";
+                    richTextBox1.Text += "y_g[" + i.ToString() + "] = " + series_g.Points[i].YValues[0].ToString() + "\t";
+                    richTextBox1.Text += "y_b[" + i.ToString() + "] = " + series_b.Points[i].YValues[0].ToString() + "\n";
+                    */
+
+                    if (series_r.Points[i].YValues[0] > average_RGB_max)
+                        average_RGB_max = series_r.Points[i].YValues[0];
+                    if (series_g.Points[i].YValues[0] > average_RGB_max)
+                        average_RGB_max = series_g.Points[i].YValues[0];
+                    if (series_b.Points[i].YValues[0] > average_RGB_max)
+                        average_RGB_max = series_b.Points[i].YValues[0];
+
+                    if (series_r.Points[i].YValues[0] < average_RGB_min)
+                        average_RGB_min = series_r.Points[i].YValues[0];
+                    if (series_g.Points[i].YValues[0] < average_RGB_min)
+                        average_RGB_min = series_g.Points[i].YValues[0];
+                    if (series_b.Points[i].YValues[0] < average_RGB_min)
+                        average_RGB_min = series_b.Points[i].YValues[0];
+                }
+                //richTextBox1.Text += "Max = " + average_RGB_max.ToString() + ", min = " + average_RGB_min.ToString() + "\n";
+            }
+        }
+
+        private void bt_debug1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_debug2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_debug3_Click(object sender, EventArgs e)
+        {
+
         }
 
 
