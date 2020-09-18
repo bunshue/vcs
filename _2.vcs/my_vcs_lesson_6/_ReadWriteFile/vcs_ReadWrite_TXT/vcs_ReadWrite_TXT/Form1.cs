@@ -414,5 +414,17 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += s + "\n";
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            StreamWriter filewriter = new StreamWriter(filename);
+            filewriter.WriteLine("鳳凰臺上鳳凰遊，鳳去臺空江自流");
+            filewriter.WriteLine("吳宮花草埋幽徑，晉代衣冠成古邱");
+            filewriter.WriteLine("三山半落青又外，二水中分白鷺洲");
+            filewriter.WriteLine("總為浮雲能蔽日，長安不見使人愁");
+            filewriter.Close();
+            richTextBox1.Text += "\n製作TXT檔\t" + filename + "\n";
+        }
+
     }
 }

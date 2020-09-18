@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.IO;    //for File
 using System.Drawing.Imaging;   //for ImageFormat
 
+using System.Diagnostics;               //for Stopwatch
+using System.Runtime.InteropServices;   //for Marshal
+
 namespace vcs_ReadWrite_BMP
 {
     public partial class Form1 : Form
@@ -612,6 +615,118 @@ namespace vcs_ReadWrite_BMP
             //寫資料
             File.WriteAllBytes(filename2, data_read);
             richTextBox1.Text += "寫成檔案" + filename2 + "\n";
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //C# 將 BitmapData 複製到 byte[] Array 陣列
+            //以下有兩種方法複製 BitmapData，一個是使用 unsafe 方法，一個一個 byte 複製，另外一個是複製記憶體區塊，較為快速。
+            //目前測試為，第二種方法比第一種方法快四倍。
+
+            //編譯時要選用/unsafe選項
+
+            // Create a Bitmap object from a file.
+            using (Bitmap bmp = new Bitmap(@"C:/______test_files/test_ReadAllBytes.bmp"))
+            {
+                int W;
+                int H;
+                W = bmp.Width;
+                H = bmp.Height;
+
+                int w;
+                int h;
+                int dataIndex = 0;
+
+                BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                for (int xx = 0; xx < 1000; xx++)   //做一千次 為了量測時間
+                {
+                    //一個一個byte複製
+                    w = bmpData.Width;
+                    h = bmpData.Height;
+                    dataIndex = 0;
+                    byte[] data = new byte[w * h * 3];
+                    unsafe
+                    {
+                        byte* p = (byte*)bmpData.Scan0.ToPointer();
+                        for (int y = 0; y < h; y++)
+                        {
+                            for (int x = 0; x < w; x++)
+                            {
+                                data[dataIndex++] = p[0];
+                                data[dataIndex++] = p[1];
+                                data[dataIndex++] = p[2];
+                                p += 3;
+                            }
+                        }
+                    }
+                }
+                sw.Stop();
+                richTextBox1.Text += "Time1: " + (sw.ElapsedMilliseconds / 1000).ToString() + "." + (sw.ElapsedMilliseconds % 1000).ToString("D3") + " 秒\n";
+                sw.Reset();
+                sw.Start();
+                for (int xx = 0; xx < 1000; xx++)   //做一千次 為了量測時間
+                {
+                    byte[] data = new byte[bmpData.Width * bmpData.Height * 3];
+                    Marshal.Copy(bmpData.Scan0, data, 0, data.Length); //複製記憶體區塊
+                }
+                sw.Stop();
+                richTextBox1.Text += "Time2: " + (sw.ElapsedMilliseconds / 1000).ToString() + "." + (sw.ElapsedMilliseconds % 1000).ToString("D3") + " 秒\n";
+                bmp.UnlockBits(bmpData);
+
+                BitmapData bmpData2 = bmp.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+
+                //一個一個byte複製
+                w = bmpData2.Width;
+                h = bmpData2.Height;
+                dataIndex = 0;
+                byte[] data2 = new byte[w * h * 4];
+                unsafe
+                {
+                    byte* p = (byte*)bmpData2.Scan0.ToPointer();
+                    for (int y = 0; y < h; y++)
+                    {
+                        for (int x = 0; x < w; x++)
+                        {
+                            data2[dataIndex++] = p[0];
+                            data2[dataIndex++] = p[1];
+                            data2[dataIndex++] = p[2];
+                            data2[dataIndex++] = 0xFF;
+                            p += 3;
+                        }
+                    }
+                }
+                bmp.UnlockBits(bmpData2);
+
+                int i;
+                int j;
+                int k;
+
+                richTextBox1.Text += "W = " + w.ToString() + "\n";
+                richTextBox1.Text += "H = " + h.ToString() + "\n";
+                richTextBox1.Text += "len = " + data2.Length.ToString() + "\n";
+
+                k = 3;
+                richTextBox1.Text += (k * 16).ToString("X8") + "h: ";
+                richTextBox1.Text += "00 00 00 00 00 00 ";
+                for (i = 0; i < (w * h / 10); i++)
+                {
+                    j = i + 6;
+                    richTextBox1.Text += data2[i].ToString("X2");
+                    if ((j % 16) == 15)
+                    {
+                        richTextBox1.Text += "\n";
+                        k++;
+                        richTextBox1.Text += (k * 16).ToString("X8") + "h: ";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += " ";
+                    }
+                }
+            }
 
         }
     }

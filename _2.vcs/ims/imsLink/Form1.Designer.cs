@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -724,6 +724,7 @@
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
             this.timer_stage11 = new System.Windows.Forms.Timer(this.components);
             this.lb_fps = new System.Windows.Forms.Label();
+            this.cb_show_rgb = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -2273,6 +2274,7 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.cb_show_rgb);
             this.tp_USB.Controls.Add(this.chart1);
             this.tp_USB.Controls.Add(this.lb_yuv_y2);
             this.tp_USB.Controls.Add(this.groupBox_awb2);
@@ -2322,13 +2324,13 @@
             // 
             // chart1
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea6);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(264, 73);
             this.chart1.Name = "chart1";
-            series6.ChartArea = "ChartArea1";
-            series6.Name = "Series1";
-            this.chart1.Series.Add(series6);
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(338, 239);
             this.chart1.TabIndex = 238;
             this.chart1.Text = "chart1";
@@ -8875,6 +8877,18 @@
             this.lb_fps.TabIndex = 239;
             this.lb_fps.Text = "fps";
             // 
+            // cb_show_rgb
+            // 
+            this.cb_show_rgb.AutoSize = true;
+            this.cb_show_rgb.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_rgb.Location = new System.Drawing.Point(471, 57);
+            this.cb_show_rgb.Name = "cb_show_rgb";
+            this.cb_show_rgb.Size = new System.Drawing.Size(90, 20);
+            this.cb_show_rgb.TabIndex = 239;
+            this.cb_show_rgb.Text = "顯示RGB";
+            this.cb_show_rgb.UseVisualStyleBackColor = true;
+            this.cb_show_rgb.CheckedChanged += new System.EventHandler(this.cb_show_rgb_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -9746,6 +9760,7 @@
         private System.Windows.Forms.TextBox tb_wait_hipot_data;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label lb_fps;
+        private System.Windows.Forms.CheckBox cb_show_rgb;
     }
 }
 

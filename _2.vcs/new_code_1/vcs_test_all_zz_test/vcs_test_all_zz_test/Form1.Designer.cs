@@ -45,7 +45,7 @@
             this.btn_test4.Name = "btn_test4";
             this.btn_test4.Size = new System.Drawing.Size(222, 36);
             this.btn_test4.TabIndex = 3;
-            this.btn_test4.Text = "存純文字檔";
+            this.btn_test4.Text = "xxx";
             this.btn_test4.UseVisualStyleBackColor = true;
             this.btn_test4.Click += new System.EventHandler(this.btn_test4_Click);
             // 
@@ -67,7 +67,7 @@
             this.btn_test6.Name = "btn_test6";
             this.btn_test6.Size = new System.Drawing.Size(222, 36);
             this.btn_test6.TabIndex = 5;
-            this.btn_test6.Text = "從FTP下載檔案";
+            this.btn_test6.Text = "xxx";
             this.btn_test6.UseVisualStyleBackColor = true;
             this.btn_test6.Click += new System.EventHandler(this.btn_test6_Click);
             // 
@@ -78,7 +78,7 @@
             this.btn_test5.Name = "btn_test5";
             this.btn_test5.Size = new System.Drawing.Size(222, 36);
             this.btn_test5.TabIndex = 4;
-            this.btn_test5.Text = "用adobe 打開PDF檔";
+            this.btn_test5.Text = "xxx";
             this.btn_test5.UseVisualStyleBackColor = true;
             this.btn_test5.Click += new System.EventHandler(this.btn_test5_Click);
             // 
@@ -89,8 +89,9 @@
             this.btn_test8.Name = "btn_test8";
             this.btn_test8.Size = new System.Drawing.Size(222, 36);
             this.btn_test8.TabIndex = 7;
-            this.btn_test8.Text = "String轉MD5碼";
+            this.btn_test8.Text = "xxx";
             this.btn_test8.UseVisualStyleBackColor = true;
+            this.btn_test8.Click += new System.EventHandler(this.btn_test8_Click);
             // 
             // btn_test7
             // 
@@ -99,7 +100,7 @@
             this.btn_test7.Name = "btn_test7";
             this.btn_test7.Size = new System.Drawing.Size(222, 36);
             this.btn_test7.TabIndex = 6;
-            this.btn_test7.Text = "比對兩個檔案是否相同";
+            this.btn_test7.Text = "xxx";
             this.btn_test7.UseVisualStyleBackColor = true;
             this.btn_test7.Click += new System.EventHandler(this.btn_test7_Click);
             // 

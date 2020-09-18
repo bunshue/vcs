@@ -2825,6 +2825,33 @@ namespace imsLink
             int dx;
             int dy;
 
+            if (((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2)) && (flag_use_chart1 == true))
+            {
+                cb_show_rgb.Visible = true;
+                if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                    cb_show_rgb.Checked = true;
+                else
+                    cb_show_rgb.Checked = false;
+
+                if (cb_show_rgb.Checked == true)
+                {
+                    chart1.Visible = true;
+                    chart1.Location = new Point(605, 500);
+                    cb_show_rgb.Location = new Point(605, 500 - 20);
+                }
+                else
+                {
+                    chart1.Visible = false;
+                    chart1.Location = new Point(605, 500);
+                    cb_show_rgb.Location = new Point(605, 500 - 20 + chart1.Size.Height);
+                }
+            }
+            else
+            {
+                cb_show_rgb.Visible = false;
+                chart1.Visible = false;
+            }
+
             if (flag_operation_mode == MODE_RELEASE_STAGE0)
             {
                 x_st = 2;
@@ -2855,14 +2882,6 @@ namespace imsLink
                 button87.Location = new Point(x_st + dx * 7, y_st);
                 button34.Location = new Point(x_st + dx * 8, y_st);
                 button7.Location = new Point(x_st + dx * 9, y_st);
-
-                if (flag_use_chart1 == true)
-                {
-                    chart1.Visible = true;
-                    chart1.Location = new Point(605, 500);
-                }
-                else
-                    chart1.Visible = false;
             }
             else if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
@@ -2888,18 +2907,9 @@ namespace imsLink
                 button73.Location = new Point(x_st + dx * 3, y_st);
                 button34.Location = new Point(x_st + dx * 4, y_st);
                 button7.Location = new Point(x_st + dx * 5, y_st);
-                if (flag_use_chart1 == true)
-                {
-                    chart1.Visible = true;
-                    chart1.Location = new Point(605, 500);
-                }
-                else
-                    chart1.Visible = false;
             }
             else
             {
-                chart1.Visible = false;
-
                 groupBox_quick.Location = new Point(850, 0);
                 groupBox_quick.Size = new Size(770, 62);
 
@@ -22952,6 +22962,21 @@ namespace imsLink
         private void bt_debug3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cb_show_rgb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_show_rgb.Checked == true)
+            {
+                chart1.Visible = true;
+                chart1.Location = new Point(605, 500);
+                cb_show_rgb.Location = new Point(605, 500 - 20);
+            }
+            else
+            {
+                chart1.Visible = false;
+                cb_show_rgb.Location = new Point(605, 500 - 20 + chart1.Size.Height);
+            }
         }
 
 

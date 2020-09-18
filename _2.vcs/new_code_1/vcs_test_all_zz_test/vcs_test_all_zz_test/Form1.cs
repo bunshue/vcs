@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;    //for StreamWriter
-using System.Diagnostics;   //for Process
-using System.Security.Cryptography; //for HashAlgorithm
+
+
 
 namespace vcs_test_all_zz_test
 {
@@ -109,88 +109,25 @@ namespace vcs_test_all_zz_test
 
         private void btn_test4_Click(object sender, EventArgs e)
         {
-            StreamWriter filewriter = new StreamWriter("C:\\______test_files\\poem.txt");
-            filewriter.WriteLine("鳳凰臺上鳳凰遊，鳳去臺空江自流");
-            filewriter.WriteLine("吳宮花草埋幽徑，晉代衣冠成古邱");
-            filewriter.WriteLine("三山半落青又外，二水中分白鷺洲");
-            filewriter.WriteLine("總為浮雲能蔽日，長安不見使人愁");
-            filewriter.Close();
         }
 
         private void btn_test5_Click(object sender, EventArgs e)
         {
-            string pdf_path = "C:\\______test_files\\note_Linux_workstation.pdf";
-            Process myProcess;
-            myProcess = Process.Start(pdf_path);
-            myProcess.WaitForExit();
 
         }
 
         private void btn_test6_Click(object sender, EventArgs e)
         {
-            //從FTP下載檔案
-            System.Net.WebClient webClient = new System.Net.WebClient();
-            //下載FTP檔案到指定位置
-            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
 
         }
 
         private void btn_test7_Click(object sender, EventArgs e)
         {
-            //利用檔案的MD5碼比對兩個檔案是否相同
-            //第一個檔案
-            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
-            //第二個檔案
-            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
-            //第三個檔案
-            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
 
-            //第一個檔案的MD5碼
-            string FileMD5_1 = string.Empty;
-            //建立MD5的演算法
-            HashAlgorithm algorithm = MD5.Create();
-            //取得第一個檔案MD5演算後的陣列
-            byte[] Hash1 = algorithm.ComputeHash(File.ReadAllBytes(filename1));
-            //建立第一個檔案的MD5碼
-            foreach (byte b in Hash1)
-            {
-                FileMD5_1 += b.ToString("X2");
-            }
+        }
 
-            //第二個檔案的MD5碼
-            string FileMD5_2 = string.Empty;
-            //取得第二個檔案MD5演算後的陣列
-            byte[] Hash2 = algorithm.ComputeHash(File.ReadAllBytes(filename2));
-            ///建立第二個檔案的MD5碼
-            foreach (byte b in Hash2)
-            {
-                FileMD5_2 += b.ToString("X2");
-            }
-
-            //第三個檔案的MD5碼
-            string FileMD5_3 = string.Empty;
-            //取得第三個檔案MD5演算後的陣列
-            byte[] Hash3 = algorithm.ComputeHash(File.ReadAllBytes(filename3));
-            ///建立第三個檔案的MD5碼
-            foreach (byte b in Hash3)
-            {
-                FileMD5_3 += b.ToString("X2");
-            }
-
-            if (FileMD5_1.Equals(FileMD5_2))
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
-
-            if (FileMD5_1.Equals(FileMD5_3))
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
-
-            if (FileMD5_2.Equals(FileMD5_3))
-                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
+        private void btn_test8_Click(object sender, EventArgs e)
+        {
 
         }
 
