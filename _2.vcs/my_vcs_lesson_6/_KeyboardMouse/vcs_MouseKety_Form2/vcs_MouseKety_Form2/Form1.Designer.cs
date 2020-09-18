@@ -32,6 +32,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label0 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -74,11 +75,22 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "label3";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(23, 327);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 24);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "label4";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 544);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label2);
@@ -98,6 +110,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

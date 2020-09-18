@@ -18,6 +18,7 @@ namespace vcs_MouseKety_Form2
             label1.Text = "在Form上按滑鼠各按鍵";
             label2.Text = "按X離開";
             label3.Text = "";
+            label4.Text = "";
         }
 
         [System.Runtime.InteropServices.DllImport("user32")]
@@ -92,6 +93,21 @@ namespace vcs_MouseKety_Form2
                 label3.Text = "MouseButtons.XButton2 你按了滑鼠下一頁";
                 mouse_event(MOUSEEVENTF_MOVE, 0, -20, 0, 0);
             }
+
+            String s = "";
+            switch (e.Button)
+            {
+                case System.Windows.Forms.MouseButtons.Left: s = "左鍵"; break;
+                case System.Windows.Forms.MouseButtons.Middle: s = "中間鍵"; break;
+                case System.Windows.Forms.MouseButtons.Right: s = "右鍵"; break;
+            }
+            label4.Text = String.Format("按了{0}於 X：{1}, Y：{2}", s, e.X, e.Y);
+
+            /*
+            說明：利用switch來判斷e.Button按下的是那個按鍵
+            需要注意的是，判讀的值在System.Windows.Forms.MouseButtons 裡對應
+            */
+
 
         }
     }

@@ -224,6 +224,21 @@ namespace vcs_test_all_09_Form
                 e.Cancel = true;
             }
             */
+
+            /*
+            //或是
+            //關閉程式前 確認視窗
+            DialogResult Result = MessageBox.Show("尚未儲存確定要關閉程式?", "關閉確認", MessageBoxButtons.YesNo);
+            if (Result == System.Windows.Forms.DialogResult.Yes)
+            {
+                // 關閉Form 
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+            */
         }
 
         private void button27_Click(object sender, EventArgs e)
