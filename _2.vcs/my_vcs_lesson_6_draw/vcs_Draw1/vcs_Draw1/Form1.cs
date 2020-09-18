@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D; //for LinearGradientBrush
 
 namespace vcs_Draw1
 {
@@ -85,6 +86,11 @@ namespace vcs_Draw1
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
 
             pictureBox1.Location = new Point(10, 10);
+
+
+            panel2.Size = new Size(750, 100);
+            panel2.Location = new Point(20, 550);
+            panel2.BackColor = Color.Pink;
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -987,6 +993,8 @@ namespace vcs_Draw1
 
             DrawTest(g, w, h);
 
+
+
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1176,5 +1184,33 @@ namespace vcs_Draw1
         {
             Application.Exit();
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+            GradientColor(e);
+        }
+
+        //抽取成一個方法實現漸變色,在Paint中引用
+        private void GradientColor(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Color FColor = Color.Green;
+            Color TColor = Color.Yellow;
+
+            Brush b = new LinearGradientBrush(this.ClientRectangle, FColor, TColor, LinearGradientMode.ForwardDiagonal);
+
+            g.FillRectangle(b, this.ClientRectangle);
+
+            /*
+             * Horizontal = 0　　　　　　摘要:指定從左到右的漸變。
+             * 
+             * Vertical = 1　　　　　　　摘要: 指定從上到下的漸變。
+             * 
+             * ForwardDiagonal = 2　　  摘要:指定從左上到右下的漸變。
+             * 
+             * BackwardDiagonal = 3　　 摘要:指定從右上到左下的漸變。
+             */
+        }
+
     }
 }

@@ -47,18 +47,9 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -254,7 +245,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(957, 574);
+            this.button19.Location = new System.Drawing.Point(957, 469);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(53, 23);
             this.button19.TabIndex = 9;
@@ -262,79 +253,11 @@
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button11);
-            this.groupBox3.Controls.Add(this.button12);
-            this.groupBox3.Controls.Add(this.button20);
-            this.groupBox3.Controls.Add(this.button21);
-            this.groupBox3.Location = new System.Drawing.Point(837, 183);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(173, 142);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "File";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(7, 106);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(160, 23);
-            this.button11.TabIndex = 3;
-            this.button11.Text = "Exit";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(6, 79);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(160, 23);
-            this.button12.TabIndex = 2;
-            this.button12.Text = "Save";
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(6, 50);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(160, 23);
-            this.button20.TabIndex = 1;
-            this.button20.Text = "Open";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Location = new System.Drawing.Point(6, 21);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(160, 23);
-            this.button21.TabIndex = 0;
-            this.button21.Text = "New";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.DefaultExt = "Image File (*.gif, *.bmp, *.jpg, *.jpeg, *.png)";
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Image File (*.gif, *.bmp, *.jpg, *.jpeg, *.png)|*.gif;*.bmp;*.jpg;*.jpeg;*.png";
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(12, 499);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(640, 98);
-            this.panel1.TabIndex = 21;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 604);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(1022, 502);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -344,7 +267,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -370,14 +292,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Panel panel1;
     }
 }
 

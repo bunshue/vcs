@@ -64,6 +64,7 @@
             this.bt_exit = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -453,11 +454,20 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(410, 561);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 100);
+            this.panel2.TabIndex = 52;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 673);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
@@ -543,6 +553,7 @@
         private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
