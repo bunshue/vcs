@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -163,6 +163,7 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.cb_show_rgb = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lb_yuv_y2 = new System.Windows.Forms.Label();
             this.groupBox_awb2 = new System.Windows.Forms.GroupBox();
@@ -187,8 +188,6 @@
             this.tb_sn_opal = new System.Windows.Forms.TextBox();
             this.lb_main_mesg2 = new System.Windows.Forms.Label();
             this.tb_wait_sn_data = new System.Windows.Forms.TextBox();
-            this.cb_change_rank = new System.Windows.Forms.CheckBox();
-            this.cb_air_ng = new System.Windows.Forms.CheckBox();
             this.bt_script_cancel = new System.Windows.Forms.Button();
             this.bt_script_save = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
@@ -724,7 +723,8 @@
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
             this.timer_stage11 = new System.Windows.Forms.Timer(this.components);
             this.lb_fps = new System.Windows.Forms.Label();
-            this.cb_show_rgb = new System.Windows.Forms.CheckBox();
+            this.richTextBox_reason = new System.Windows.Forms.RichTextBox();
+            this.bt_reason_ok = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -2274,6 +2274,8 @@
             // 
             // tp_USB
             // 
+            this.tp_USB.Controls.Add(this.bt_reason_ok);
+            this.tp_USB.Controls.Add(this.richTextBox_reason);
             this.tp_USB.Controls.Add(this.cb_show_rgb);
             this.tp_USB.Controls.Add(this.chart1);
             this.tp_USB.Controls.Add(this.lb_yuv_y2);
@@ -2322,15 +2324,27 @@
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // cb_show_rgb
+            // 
+            this.cb_show_rgb.AutoSize = true;
+            this.cb_show_rgb.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_rgb.Location = new System.Drawing.Point(471, 57);
+            this.cb_show_rgb.Name = "cb_show_rgb";
+            this.cb_show_rgb.Size = new System.Drawing.Size(90, 20);
+            this.cb_show_rgb.TabIndex = 239;
+            this.cb_show_rgb.Text = "顯示RGB";
+            this.cb_show_rgb.UseVisualStyleBackColor = true;
+            this.cb_show_rgb.CheckedChanged += new System.EventHandler(this.cb_show_rgb_CheckedChanged);
+            // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(264, 73);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(338, 239);
             this.chart1.TabIndex = 238;
             this.chart1.Text = "chart1";
@@ -2615,11 +2629,9 @@
             this.groupBox_sn1.Controls.Add(this.tb_sn_opal);
             this.groupBox_sn1.Controls.Add(this.lb_main_mesg2);
             this.groupBox_sn1.Controls.Add(this.tb_wait_sn_data);
-            this.groupBox_sn1.Controls.Add(this.cb_change_rank);
-            this.groupBox_sn1.Controls.Add(this.cb_air_ng);
             this.groupBox_sn1.Location = new System.Drawing.Point(614, 190);
             this.groupBox_sn1.Name = "groupBox_sn1";
-            this.groupBox_sn1.Size = new System.Drawing.Size(70, 75);
+            this.groupBox_sn1.Size = new System.Drawing.Size(83, 89);
             this.groupBox_sn1.TabIndex = 236;
             this.groupBox_sn1.TabStop = false;
             // 
@@ -2650,7 +2662,7 @@
             this.lb_main_mesg2.AutoSize = true;
             this.lb_main_mesg2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg2.Location = new System.Drawing.Point(5, 75);
+            this.lb_main_mesg2.Location = new System.Drawing.Point(5, 99);
             this.lb_main_mesg2.Name = "lb_main_mesg2";
             this.lb_main_mesg2.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg2.TabIndex = 136;
@@ -2659,36 +2671,12 @@
             // tb_wait_sn_data
             // 
             this.tb_wait_sn_data.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_wait_sn_data.Location = new System.Drawing.Point(5, 100);
+            this.tb_wait_sn_data.Location = new System.Drawing.Point(5, 77);
             this.tb_wait_sn_data.Multiline = true;
             this.tb_wait_sn_data.Name = "tb_wait_sn_data";
             this.tb_wait_sn_data.Size = new System.Drawing.Size(125, 22);
             this.tb_wait_sn_data.TabIndex = 183;
             this.tb_wait_sn_data.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // cb_change_rank
-            // 
-            this.cb_change_rank.AutoSize = true;
-            this.cb_change_rank.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_change_rank.ForeColor = System.Drawing.Color.Red;
-            this.cb_change_rank.Location = new System.Drawing.Point(5, 125);
-            this.cb_change_rank.Name = "cb_change_rank";
-            this.cb_change_rank.Size = new System.Drawing.Size(79, 28);
-            this.cb_change_rank.TabIndex = 232;
-            this.cb_change_rank.Text = "改判";
-            this.cb_change_rank.UseVisualStyleBackColor = true;
-            // 
-            // cb_air_ng
-            // 
-            this.cb_air_ng.AutoSize = true;
-            this.cb_air_ng.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_air_ng.ForeColor = System.Drawing.Color.Red;
-            this.cb_air_ng.Location = new System.Drawing.Point(5, 150);
-            this.cb_air_ng.Name = "cb_air_ng";
-            this.cb_air_ng.Size = new System.Drawing.Size(113, 28);
-            this.cb_air_ng.TabIndex = 225;
-            this.cb_air_ng.Text = "氣密NG";
-            this.cb_air_ng.UseVisualStyleBackColor = true;
             // 
             // bt_script_cancel
             // 
@@ -8877,17 +8865,25 @@
             this.lb_fps.TabIndex = 239;
             this.lb_fps.Text = "fps";
             // 
-            // cb_show_rgb
+            // richTextBox_reason
             // 
-            this.cb_show_rgb.AutoSize = true;
-            this.cb_show_rgb.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_show_rgb.Location = new System.Drawing.Point(471, 57);
-            this.cb_show_rgb.Name = "cb_show_rgb";
-            this.cb_show_rgb.Size = new System.Drawing.Size(90, 20);
-            this.cb_show_rgb.TabIndex = 239;
-            this.cb_show_rgb.Text = "顯示RGB";
-            this.cb_show_rgb.UseVisualStyleBackColor = true;
-            this.cb_show_rgb.CheckedChanged += new System.EventHandler(this.cb_show_rgb_CheckedChanged);
+            this.richTextBox_reason.Location = new System.Drawing.Point(348, 308);
+            this.richTextBox_reason.Name = "richTextBox_reason";
+            this.richTextBox_reason.Size = new System.Drawing.Size(224, 118);
+            this.richTextBox_reason.TabIndex = 240;
+            this.richTextBox_reason.Text = "";
+            // 
+            // bt_reason_ok
+            // 
+            this.bt_reason_ok.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_reason_ok.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_reason_ok.ForeColor = System.Drawing.Color.Black;
+            this.bt_reason_ok.Location = new System.Drawing.Point(610, 364);
+            this.bt_reason_ok.Name = "bt_reason_ok";
+            this.bt_reason_ok.Size = new System.Drawing.Size(60, 28);
+            this.bt_reason_ok.TabIndex = 241;
+            this.bt_reason_ok.Text = "OK";
+            this.bt_reason_ok.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -9619,7 +9615,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_bpt3;
         private System.Windows.Forms.Button button77;
         private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.CheckBox cb_air_ng;
         private System.Windows.Forms.GroupBox groupBox_brightness;
         private System.Windows.Forms.RadioButton rb_brightness_color_2;
         private System.Windows.Forms.RadioButton rb_brightness_color_1;
@@ -9631,7 +9626,6 @@
         private System.Windows.Forms.Button bt_measure_brightness;
         private System.Windows.Forms.Button bt_reset_camera;
         private System.Windows.Forms.Button bt_save_program_picture;
-        private System.Windows.Forms.CheckBox cb_change_rank;
         private System.Windows.Forms.GroupBox gb_ng_reason;
         private System.Windows.Forms.TextBox tb_reason;
         private System.Windows.Forms.CheckBox cb_reason3;
@@ -9761,6 +9755,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label lb_fps;
         private System.Windows.Forms.CheckBox cb_show_rgb;
+        private System.Windows.Forms.Button bt_reason_ok;
+        private System.Windows.Forms.RichTextBox richTextBox_reason;
     }
 }
 

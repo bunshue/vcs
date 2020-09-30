@@ -25,10 +25,12 @@ namespace vcs_Remove_Bin_Obj
             label1.Text = "目前位置 : " + currentPath;
             //richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
             search_path = currentPath;
+            lb_main_mesg.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            lb_main_mesg.Text = "";
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
@@ -122,6 +124,7 @@ namespace vcs_Remove_Bin_Obj
         // that are found, and process the files they contain.
         public void ProcessDirectoryBinObj(List<string> folder_name)
         {
+            bool flag_rename_fail = false;
             int i;
             int len;
             len = folder_name.Count;
@@ -141,6 +144,7 @@ namespace vcs_Remove_Bin_Obj
                     catch
                     {
                         richTextBox1.Text += "無法刪除資料夾" + folder_name[i] + "\n";
+                        flag_rename_fail = true;
                     }
                 }
                 else if (File.Exists(folder_name[i]))     //確認檔案是否存在
@@ -153,13 +157,18 @@ namespace vcs_Remove_Bin_Obj
                     catch
                     {
                         richTextBox1.Text += "無法刪除檔案" + folder_name[i] + "\n";
+                        flag_rename_fail = true;
                     }
                 }
                 else
                 {
                     richTextBox1.Text += "資料夾或檔案: " + folder_name[i] + " 不存在，不能刪除\n";
+                    flag_rename_fail = true;
                 }
             }
+            lb_main_mesg.Text = "欲刪除個數 : " + len + ", 完成";
+            if (flag_rename_fail == true)
+                lb_main_mesg.Text += "\t有錯誤";
         }
 
         // Process all files in the directory passed in, recurse on any directories 
@@ -207,6 +216,7 @@ namespace vcs_Remove_Bin_Obj
 
         public void ProcessRenameBackup(List<string> filename_backup)
         {
+            bool flag_rename_fail = false;
             int i;
             int len;
             len = filename_backup.Count;
@@ -236,24 +246,28 @@ namespace vcs_Remove_Bin_Obj
                             richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
                         }
                         else
+                        {
                             richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+                            flag_rename_fail = true;
+                        }
                     }
                     else
+                    {
                         richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
+                        flag_rename_fail = true;
+                    }
 
                 }
                 else
                 {
                     richTextBox1.Text += "資料夾或檔案: " + filename_backup[i] + " 不存在，不能刪除\n";
+                    flag_rename_fail = true;
                 }
-
-
-
-
             }
 
-
-
+            lb_main_mesg.Text = "更名個數 : " + len + ", 完成";
+            if (flag_rename_fail == true)
+                lb_main_mesg.Text += "\t有錯誤";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -263,6 +277,7 @@ namespace vcs_Remove_Bin_Obj
 
         private void button3_Click(object sender, EventArgs e)
         {
+            lb_main_mesg.Text = "";
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();

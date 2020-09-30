@@ -40,6 +40,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.lb_main_mesg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -55,9 +56,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(198, 61);
+            this.richTextBox1.Location = new System.Drawing.Point(198, 91);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(539, 444);
+            this.richTextBox1.Size = new System.Drawing.Size(539, 414);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -67,7 +68,7 @@
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(12, 110);
+            this.checkBox1.Location = new System.Drawing.Point(12, 115);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(165, 31);
             this.checkBox1.TabIndex = 2;
@@ -78,7 +79,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox2.Location = new System.Drawing.Point(12, 208);
+            this.checkBox2.Location = new System.Drawing.Point(12, 210);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(128, 31);
             this.checkBox2.TabIndex = 3;
@@ -89,7 +90,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(10, 22);
+            this.label1.Location = new System.Drawing.Point(10, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 19);
             this.label1.TabIndex = 4;
@@ -101,7 +102,7 @@
             this.checkBox3.Checked = true;
             this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox3.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox3.Location = new System.Drawing.Point(14, 61);
+            this.checkBox3.Location = new System.Drawing.Point(14, 73);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(165, 31);
             this.checkBox3.TabIndex = 5;
@@ -114,7 +115,7 @@
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox4.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox4.Location = new System.Drawing.Point(12, 157);
+            this.checkBox4.Location = new System.Drawing.Point(12, 161);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(128, 31);
             this.checkBox4.TabIndex = 6;
@@ -167,11 +168,23 @@
             this.checkBox6.Text = "改名  的副本";
             this.checkBox6.UseVisualStyleBackColor = true;
             // 
+            // lb_main_mesg
+            // 
+            this.lb_main_mesg.AutoSize = true;
+            this.lb_main_mesg.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg.Location = new System.Drawing.Point(194, 52);
+            this.lb_main_mesg.Name = "lb_main_mesg";
+            this.lb_main_mesg.Size = new System.Drawing.Size(66, 24);
+            this.lb_main_mesg.TabIndex = 134;
+            this.lb_main_mesg.Text = "mesg";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 517);
+            this.Controls.Add(this.lb_main_mesg);
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.button3);
@@ -204,6 +217,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.Label lb_main_mesg;
     }
 }
 
