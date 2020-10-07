@@ -1049,6 +1049,39 @@ namespace vcs_Draw1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            string filename = "C:\\______test_files\\picture1.jpg";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+            //this.ClientSize = bitmap1.Size;
+            //this.Size = bitmap1.Size;
+            //g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g = this.CreateGraphics();
+            g.DrawImage(bitmap1, 0, 0);
+
+            pictureBox1.Location = new Point(20, 20);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
+
+            richTextBox1.Text += "改變Gamma 6.0\n";
+
+            // Create image attributes and set large gamma.
+            ImageAttributes imageAttr = new ImageAttributes();
+            imageAttr.SetGamma(6.0F);
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            RectangleF srcRect = new RectangleF(0, 0, bitmap1.Width, bitmap1.Height);
+            RectangleF destRect = new RectangleF(0, 0, bitmap1.Width, bitmap1.Height);
+
+
+            // Create parallelogram for drawing adjusted image.
+            PointF ulCorner2 = new PointF(400, 0);
+            PointF urCorner2 = new PointF(400 + bitmap1.Width, 0);
+            PointF llCorner2 = new PointF(400, 0 + bitmap1.Height);
+            PointF[] destPara2 = { ulCorner2, urCorner2, llCorner2 };
+
+            // Draw adjusted image to screen.
+            g.DrawImage(bitmap1, destPara2, srcRect, units, imageAttr);
 
         }
 

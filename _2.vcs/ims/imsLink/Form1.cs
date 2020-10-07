@@ -3480,14 +3480,14 @@ namespace imsLink
                 groupBox_comport1.Visible = true;
 
                 groupBox_metering.Visible = true;
-                groupBox_metering.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 50);
+                groupBox_metering.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 360);
                 groupBox_metering.Size = new Size(213, 57);
 
                 lb_yuv_y2.Visible = true;
                 lb_yuv_y2.Location = new Point(lb_rgb_b.Location.X + 60, lb_rgb_b.Location.Y + 10);
 
                 groupBox_register.Visible = true;
-                groupBox_register.Location = new Point(cb_show_grid.Location.X + 120, cb_show_grid.Location.Y + 370);
+                groupBox_register.Location = new Point(cb_show_grid.Location.X, cb_show_grid.Location.Y + 420);
                 groupBox_register.Size = new Size(560, 122);
             }
             else
@@ -3998,7 +3998,8 @@ namespace imsLink
                     //richTextBox1.Text += "time diff in ms = " + ((TimeSpan)(dt - dt_old)).TotalMilliseconds.ToString() + "\n";
                     //richTextBox1.Text += "fps = " + (((frame_count - frame_count_old)*1000)/((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString() + "\n";
                     */
-                    lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F4") + " fps";
+                    if (flag_use_metering == false)
+                        lb_fps.Text = (((frame_count - frame_count_old) * 1000) / ((TimeSpan)(dt - dt_old)).TotalMilliseconds).ToString("F4") + " fps";
 
                     dt_old = dt;
                     frame_count_old = frame_count;
@@ -5789,6 +5790,7 @@ namespace imsLink
 
                     if (rb_metering_1.Checked == true)
                     {
+                        /*  部分圖
                         j = 5;
                         www = 16;
                         hhh = 12;
@@ -5828,6 +5830,10 @@ namespace imsLink
                                 }
                             }
                         }
+                        */
+
+                        result = measure_brightness2(0, 0, w, h);   //整張圖
+                        lb_fps.Text = result.ToString();
                     }
                     else
                     {
