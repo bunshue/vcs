@@ -16,8 +16,8 @@ namespace vcs_Draw3
         Graphics g1;
         Graphics g2;
         Pen p;
-        SolidBrush sb;
-        Bitmap bitmap1;
+        //SolidBrush sb;
+        //Bitmap bitmap1;
         Bitmap bitmap2;
         Bitmap bitmap3;
 
@@ -94,6 +94,7 @@ namespace vcs_Draw3
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
 
             //pictureBox1.Location = new Point(10, 10);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         bool isRunning1 = false;
@@ -200,14 +201,40 @@ namespace vcs_Draw3
 
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (bitmap3 == null)
+            {
+                richTextBox1.Text += "未開啟圖片\n";
+                return;
+            }
+
+            if (isRunning2 == false)
+            {
+                isRunning2 = true;
+                timer8.Enabled = true;
+                richTextBox1.Text += "ST\n";
+                round8 = 0;
+            }
+            else
+            {
+                isRunning2 = false;
+                timer8.Enabled = false;
+                richTextBox1.Text += "SP\n";
+            }
+
+        }
+
         Bitmap bmp;
         Graphics g;
         Pen p4;
         int t;
 
-        int WIDTH = 720, HEIGHT = 300, AMPLITUDE = 150;
+        //int WIDTH = 720;
+        int HEIGHT = 300;
+        int AMPLITUDE = 150;
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             /*
             if (bitmap3 == null)
@@ -247,11 +274,7 @@ namespace vcs_Draw3
                 DrawXY();
                 DrawYLine();
 
-
                 //timer1.Enabled = true;
-
-
-
             }
             else
             {
@@ -259,7 +282,6 @@ namespace vcs_Draw3
                 timer7.Enabled = false;
                 richTextBox1.Text += "SP\n";
             }
-
         }
 
         private void DrawXY()//画X轴Y轴
@@ -286,12 +308,6 @@ namespace vcs_Draw3
                 g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
             }
             g.Dispose();
-        }
-
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -392,6 +408,12 @@ namespace vcs_Draw3
         private void button26_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
 
@@ -590,9 +612,10 @@ namespace vcs_Draw3
         int yy3 = 0;
         int ww = 0;
         int hh = 0;
-        int thick = 10;
+        int thick5 = 10;
         int add = 10;
         int round = 0;
+
         private void timer5_Tick(object sender, EventArgs e)
         {
             //bitmap1 = new Bitmap(filename);
@@ -604,25 +627,25 @@ namespace vcs_Draw3
 
             if (step3 == 1)
             {
-                if (xx3 < (ww - thick - add))
+                if (xx3 < (ww - thick5 - add))
                 {
                     xx3 += add;
                 }
                 else
                 {
-                    xx3 = ww - thick - 1;
+                    xx3 = ww - thick5 - 1;
                     step3 = 2;
                 }
             }
             else if (step3 == 2)
             {
-                if (yy3 < (hh - thick - add))
+                if (yy3 < (hh - thick5 - add))
                 {
                     yy3 += add;
                 }
                 else
                 {
-                    yy3 = hh - thick - 1;
+                    yy3 = hh - thick5 - 1;
                     step3 = 3;
                 }
             }
@@ -654,9 +677,9 @@ namespace vcs_Draw3
             }
 
             if ((round % 2) == 0)
-                g.FillRectangle(new SolidBrush(Color.Red), xx3, yy3, thick, thick);
+                g.FillRectangle(new SolidBrush(Color.Red), xx3, yy3, thick5, thick5);
             else
-                g.FillRectangle(new SolidBrush(Color.White), xx3, yy3, thick, thick);
+                g.FillRectangle(new SolidBrush(Color.White), xx3, yy3, thick5, thick5);
 
             //g.FillEllipse(new SolidBrush(Color.Red), xx3, yy3, 3, 3);
 
@@ -668,6 +691,151 @@ namespace vcs_Draw3
             //pictureBox1.Image = bitmap1;
 
 
+
+        }
+
+        int step8 = 1;
+        int step8_old = -1;
+        int round8 = 0;
+        int W;
+        int H;
+        int w;
+        int h;
+        //int ratio = 7;
+
+        int x_st8 = 0;
+        int y_st8 = 0;
+        int count = 0;
+        int count_old = 0;
+
+        private void timer8_Tick(object sender, EventArgs e)
+        {
+            W = bitmap3.Width;
+            H = bitmap3.Height;
+
+            w = 25;
+            h = 25;
+
+            //richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + " w = " + w.ToString() + " h = " + h.ToString() + "\n";
+            
+            Graphics g = Graphics.FromImage(bitmap3);
+
+            g.FillRectangle(new SolidBrush(Color.Red), 0, 0, w, h);
+
+            if (step8 == 1)
+            {
+                //if (x_st8 < (W - w * (round8 + 2)))
+                if ((x_st8 + w) < (W -w * round8-w))
+                {
+                    x_st8 = x_st8 + w;
+                    richTextBox1.Text += "U ";
+                }
+                else
+                {
+                    x_st8 = W - w * round8 - w;
+                    step8 = 2;
+                    richTextBox1.Text += "u ";
+                }
+                //richTextBox1.Text += x_st8.ToString() + " ";
+                count++;
+            }
+            else if (step8 == 2)
+            {
+                if ((y_st8 + h) < (H - h * round8-h))
+                {
+                    y_st8 = y_st8 + h;
+                    richTextBox1.Text += "R ";
+                }
+                else
+                {
+                    //y_st8 = H - h * (round8 + 1) - 1;
+                    y_st8 = H - h * round8 - h;
+                    step8 = 3;
+                    richTextBox1.Text += "r ";
+                }
+                //richTextBox1.Text += y_st8.ToString() + " ";
+                count++;
+            }
+            else if (step8 == 3)
+            {
+                //if ((x_st8 - w * round8) > w)
+                if ((x_st8 - w)> (w* round8))
+                {
+                    x_st8 -= w;
+                    richTextBox1.Text += "D ";
+                }
+                else
+                {
+                    x_st8 = w * round8;
+                    step8 = 4;
+                    richTextBox1.Text += "d ";
+                }
+                //richTextBox1.Text += x_st8.ToString() + " ";
+                count++;
+            }
+            else if (step8 == 4)
+            {
+                if ((y_st8 - h) > (h * round8))
+                {
+                    y_st8 -= h;
+                    richTextBox1.Text += "L ";
+                }
+                else
+                {
+                    step8 = 1;
+                    round8++;
+                    x_st8 = w * round8;
+                    y_st8 = h * round8;
+                }
+                //richTextBox1.Text += y_st8.ToString() + " ";
+                count++;
+            }
+
+            if (step8_old != step8)
+            {
+                step8_old = step8;
+                richTextBox1.Text += "\nstep = " + step8.ToString() + "\t";
+
+                richTextBox1.Text += "count = " + count.ToString() + " ";
+                if (count > 1)
+                {
+                    if ((count - count_old) == 1)
+                    {
+                        timer8.Enabled = false;
+                        return;
+                    }
+                    else
+                    {
+                        count_old = count;
+                    }
+                }
+
+
+                //count = 0;
+            }
+
+            if (step8 == 1)
+            {
+                g.FillRectangle(new SolidBrush(Color.Red), x_st8, y_st8, w, h);
+            }
+            else if (step8 == 2)
+            {
+                g.FillRectangle(new SolidBrush(Color.Green), x_st8, y_st8, w, h);
+            }
+            else if (step8 == 3)
+            {
+                g.FillRectangle(new SolidBrush(Color.Blue), x_st8, y_st8, w, h);
+                //richTextBox1.Text += "(" + x_st8.ToString() + "," + y_st8.ToString() + ") ";
+            }
+            else if (step8 == 4)
+            {
+                g.FillRectangle(new SolidBrush(Color.Cyan), x_st8, y_st8, w, h);
+            }
+
+
+            richTextBox1.Text += "(" + x_st8.ToString() + "," + y_st8.ToString() + ") ";
+
+            pictureBox2.Image = bitmap3;
 
         }
 
@@ -744,7 +912,6 @@ namespace vcs_Draw3
 
 
         }
-
 
 
 

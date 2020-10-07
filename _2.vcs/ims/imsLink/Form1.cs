@@ -163,6 +163,8 @@ namespace imsLink
         bool flag_fullscreen = false;
         bool flag_network_disk_status = true;
         string camera_ng_reason = String.Empty;
+        string stage3_class = String.Empty;
+        bool flag_stage3_need_ng_reason = false;
 
         int data_expo = 0;
         byte data_expo_h = 0;
@@ -838,11 +840,13 @@ namespace imsLink
                 this.tp_Package2.Parent = null; //產品包裝7
                 this.tp_Package3.Parent = null; //產品包裝8
                 this.tp_sale.Parent = null;     //出貨紀錄
+                this.tp_HiPot.Parent = null;
                 this.tp_Camera_Test.Parent = null;  //相機測試
                 this.tp_Check.Parent = null;    //檢查結果
                 this.tp_Cosmo.Parent = null;    //COSMO氣密測試
                 this.tp_Test.Parent = null;     //Test
                 this.tp_Layer.Parent = null;    //Layer
+                this.tp_About.Parent = null;
                 tabControl1.SelectTab(tp_USB);  //程式啟動時，直接跳到指定分頁。
                 timer_rtc.Enabled = false;
                 timer_rgb.Enabled = true;
@@ -3524,15 +3528,14 @@ namespace imsLink
             if (flag_operation_mode == MODE_RELEASE_STAGE3)
             {
                 lb_class.Visible = true;
+                bt_zoom.Visible = false;
             }
             else
             {
                 lb_class.Visible = false;
             }
             richTextBox2.Visible = false;
-            richTextBox_reason.Visible = false;
-            bt_reason_ok.Visible = false;
-
+            groupBox_ng_reason.Visible = false;
             refresh_picturebox2();
 
             if (flag_operation_mode == MODE_RELEASE_STAGE11)
@@ -13152,9 +13155,7 @@ namespace imsLink
         private void data_15_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = check_textbox_hexadecimal(e);
-
         }
-
 
         int check_write_data()
         {
@@ -13666,7 +13667,7 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
-                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "," + "氣密NG" + "," + "改判" + "\n";
+                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "," + "不良原因" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
@@ -13783,8 +13784,18 @@ namespace imsLink
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     csv_index3++;
-                    content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
-
+                    if ((stage3_class == "A") || (stage3_class == "B") || (stage3_class == "C") || (stage3_class == "E"))
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    }
+                    else if ((stage3_class == "F") || (stage3_class == "NG"))
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_ng_reason;
+                    }
+                    else
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    }
                     csv_index3 -= camera_serials.Count;
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
@@ -13875,7 +13886,7 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
-                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "," + "氣密NG" + "," + "改判" + "\n";
+                    content += "編號" + "," + "Opal序號" + "," + "判定等級" + "," + "判定時間" + "," + "不良原因" + "\n";
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
@@ -13986,7 +13997,18 @@ namespace imsLink
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
                     csv_index3++;
-                    content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    if ((stage3_class == "A") || (stage3_class == "B") || (stage3_class == "C") || (stage3_class == "E"))
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    }
+                    else if ((stage3_class == "F") || (stage3_class == "NG"))
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString() + "," + camera_ng_reason;
+                    }
+                    else
+                    {
+                        content += csv_index3.ToString() + "," + camera_serials[i][0].ToString() + "," + camera_serials[i][1].ToString() + "," + camera_serials[i][2].ToString();
+                    }
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE4)
                 {
@@ -14580,7 +14602,6 @@ namespace imsLink
 
         int check_tb_sn_opal_data()
         {
-            //richTextBox1.Text += "C";
             int i;
             int len;
             bool flag_incorrect_data = false;
@@ -14594,6 +14615,7 @@ namespace imsLink
                     tb_sn_opal.Clear();
                     //richTextBox1.Text += "X1";
                     flag_incorrect_data = true;
+                    tb_wait_sn_data.Clear();
                     return S_FALSE;
                 }
                 else if (len > 5)    //檢查是否換行
@@ -14622,6 +14644,11 @@ namespace imsLink
                     flag_incorrect_data = true;
                     return S_FALSE;
                 }
+            }
+            else
+            {
+                tb_sn_opal.Text = tb_wait_sn_data.Text.Trim();
+                len = tb_wait_sn_data.Text.Length;
             }
 
             if (tb_sn_opal.Text.Length == 0)
@@ -14678,6 +14705,7 @@ namespace imsLink
                 richTextBox1.Text += "資料錯誤,長度 " + tb_sn_opal.Text.Length.ToString() + "\t內容 " + tb_sn_opal.Text + "\t清除\n";
                 show_main_message2("資料錯誤, 請重新輸入", S_OK, 30);
                 tb_sn_opal.Clear();
+                tb_wait_sn_data.Clear();
                 return S_FALSE;
             }
             else
@@ -14690,7 +14718,6 @@ namespace imsLink
 
         int check_tb_sn_opal_data_stage1()
         {
-            richTextBox1.Text += "C";
             int i;
             int len;
             bool flag_incorrect_data = false;
@@ -17992,17 +18019,34 @@ namespace imsLink
                 }
             }
 
-            int result = check_tb_sn_opal_data();
-            if (result == S_OK)
+            int len;
+
+            len = tb_wait_sn_data.Text.Length;
+
+            if ((flag_stage3_step == 0) || (flag_stage3_step == 1) || (flag_stage3_step == 2))
             {
-                timer_stage3.Enabled = false;
-                lb_main_mesg2.Text = "資料正確, 存檔中";
-                save_image_to_drive();
-                delay(30);
-                timer_stage3.Enabled = true;
+                if (len > 4)
+                {
+                    tb_wait_sn_data.Clear();
+                }
             }
 
-            int len;
+            if (flag_stage3_step == 3)
+            {
+                if (len > 8)
+                {
+                    int result = check_tb_sn_opal_data();
+                    if (result == S_OK)
+                    {
+                        timer_stage3.Enabled = false;
+                        lb_main_mesg2.Text = "資料正確, 存檔中";
+                        save_image_to_drive();
+                        delay(30);
+                        timer_stage3.Enabled = true;
+                    }
+                }
+            }
+
             len = tb_wait_sn_data.Text.Length;
 
             if (len > 50)   //太長, 直接放棄
@@ -18030,147 +18074,198 @@ namespace imsLink
                 return;
             }
 
-            if (tb_wait_sn_data.Text.Length > 0)
+            len = tb_wait_sn_data.Text.Length;
+
+            if (len > 0)
             {
-                if (tb_wait_sn_data.Text.Length == 1)
+                if ((flag_stage3_step == 0) || (flag_stage3_step == 1) || (flag_stage3_step == 3))              //等待判定等級 or 等待輸入不良原因 or 輸入相機序號
                 {
-                    if (tb_wait_sn_data.Text[0] == 'A')
+                    richTextBox1.Text += "len = " + len.ToString() + "\n";
+                    if (len == 1)
                     {
-                        lb_class.Text = tb_wait_sn_data.Text[0].ToString();
-                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        flag_stage3_step = 3;
-                    }
-                    else if (tb_wait_sn_data.Text[0] == 'B')
-                    {
-                        lb_class.Text = tb_wait_sn_data.Text[0].ToString();
-                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        flag_stage3_step = 3;
-                    }
-                    else if (tb_wait_sn_data.Text[0] == 'C')
-                    {
-                        lb_class.Text = tb_wait_sn_data.Text[0].ToString();
-                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        flag_stage3_step = 3;
-                    }
-                    else if (tb_wait_sn_data.Text[0] == 'E')
-                    {
-                        lb_class.Text = tb_wait_sn_data.Text[0].ToString();
-                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        flag_stage3_step = 3;
-                    }
-                    else if (tb_wait_sn_data.Text[0] == 'F')
-                    {
-                        lb_class.Text = tb_wait_sn_data.Text[0].ToString();
-                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        flag_stage3_step = 1;
-                    }
-                    else
-                    {
-                        lb_class.Text = "不允許" + tb_wait_sn_data.Text[0].ToString();
-                        richTextBox1.Text += "錯誤判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        flag_stage3_step = 0;
-                    }
-                }
-                else if (tb_wait_sn_data.Text.Length == 2)
-                {
-                    if ((tb_wait_sn_data.Text[0] == 'N') && (tb_wait_sn_data.Text[1] == 'G'))
-                    {
-                        lb_class.Text = tb_wait_sn_data.Text[0].ToString() + tb_wait_sn_data.Text[1].ToString();
-                        richTextBox1.Text += "判定為" + tb_wait_sn_data.Text[0].ToString() + tb_wait_sn_data.Text[1].ToString() + "\n";
-                        flag_stage3_step = 1;
-                    }
-                    else if (flag_stage3_step == 1)  //等待輸入不良原因
-                    {
-                        if ((tb_wait_sn_data.Text[0] == '2') && (tb_wait_sn_data.Text[1] >= 'A') && (tb_wait_sn_data.Text[1] <= 'Z'))
+                        if (tb_wait_sn_data.Text[0] == 'A')
                         {
-                            if (tb_wait_sn_data.Text[1] == 'P')
-                            {
-                                richTextBox_reason.Visible = true;
-                                bt_reason_ok.Visible = true;
-                            }
-                            switch (tb_wait_sn_data.Text[1])
-                            {
-                                case 'A': camera_ng_reason = "亮點大"; break;
-                                case 'B': camera_ng_reason = "亮點多"; break;
-                                case 'C': camera_ng_reason = "暗角"; break;
-                                case 'D': camera_ng_reason = "刮傷"; break;
-                                case 'E': camera_ng_reason = "噴濺物"; break;
-                                case 'F': camera_ng_reason = "撞傷"; break;
-                                case 'G': camera_ng_reason = "外觀補膠過厚"; break;
-                                case 'H': camera_ng_reason = "外觀毛邊"; break;
-                                case 'I': camera_ng_reason = "外觀不良"; break;
-                                case 'J': camera_ng_reason = "影像有黑影"; break;
-                                case 'K': camera_ng_reason = "內部有髒汙"; break;
-                                case 'L': camera_ng_reason = "內部有異物"; break;
-                                case 'M': camera_ng_reason = "內部有Particle"; break;
-                                case 'N': camera_ng_reason = "無法顏色調校"; break;
-                                case 'O': camera_ng_reason = "無法燒錄"; break;
-                                case 'P': camera_ng_reason = "其他"; break;
-                                case 'Q':
-                                case 'R':
-                                case 'S':
-                                case 'T':
-                                case 'U':
-                                case 'V':
-                                case 'W':
-                                case 'X':
-                                case 'Y':
-                                case 'Z': camera_ng_reason = "未定義"; break;
-                                default: camera_ng_reason = "unknown"; break;
-                            }
-
-
-
+                            stage3_class = tb_wait_sn_data.Text[0].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "判定為" + stage3_class + "\n";
+                            flag_stage3_step = 3;
+                            groupBox_ng_reason.Visible = false;
+                            flag_stage3_need_ng_reason = false;
+                            tb_wait_sn_data.Clear();
+                        }
+                        else if (tb_wait_sn_data.Text[0] == 'B')
+                        {
+                            stage3_class = tb_wait_sn_data.Text[0].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "判定為" + stage3_class + "\n";
+                            flag_stage3_step = 3;
+                            groupBox_ng_reason.Visible = false;
+                            flag_stage3_need_ng_reason = false;
+                            tb_wait_sn_data.Clear();
+                        }
+                        else if (tb_wait_sn_data.Text[0] == 'C')
+                        {
+                            stage3_class = tb_wait_sn_data.Text[0].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "判定為" + stage3_class + "\n";
+                            flag_stage3_step = 3;
+                            groupBox_ng_reason.Visible = false;
+                            flag_stage3_need_ng_reason = false;
+                            tb_wait_sn_data.Clear();
+                        }
+                        else if (tb_wait_sn_data.Text[0] == 'E')
+                        {
+                            lb_class.Text = tb_wait_sn_data.Text[0].ToString();
+                            richTextBox1.Text += "判定為" + stage3_class + "\n";
+                            flag_stage3_step = 3;
+                            groupBox_ng_reason.Visible = false;
+                            flag_stage3_need_ng_reason = false;
+                            tb_wait_sn_data.Clear();
+                        }
+                        else if (tb_wait_sn_data.Text[0] == 'F')
+                        {
+                            stage3_class = tb_wait_sn_data.Text[0].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "判定為" + stage3_class + "\n";
+                            flag_stage3_step = 1;
+                            groupBox_ng_reason.Visible = false;
+                            flag_stage3_need_ng_reason = true;
+                            tb_wait_sn_data.Clear();
                         }
                         else
                         {
-                            lb_class.Text = "不允許" + tb_wait_sn_data.Text[0].ToString();
-                            richTextBox1.Text += "錯誤判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                            //flag_stage3_step = 0;
+                            stage3_class = "不允許" + tb_wait_sn_data.Text[0].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "a1錯誤判定為" + stage3_class + "\n";
+                            flag_stage3_step = 0;
+                            flag_stage3_need_ng_reason = false;
+                            tb_wait_sn_data.Clear();
+                            return;
                         }
+                    }
+                    else if (len == 2)
+                    {
+                        if ((tb_wait_sn_data.Text[0] == 'N') && (tb_wait_sn_data.Text[1] == 'G'))
+                        {
+                            stage3_class = tb_wait_sn_data.Text[0].ToString() + tb_wait_sn_data.Text[1].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "判定為" + stage3_class + "\n";
+                            flag_stage3_step = 1;
+                            groupBox_ng_reason.Visible = false;
+                            flag_stage3_need_ng_reason = true;
+                            tb_wait_sn_data.Clear();
+                            return;
+                        }
+                        else if (flag_stage3_need_ng_reason == true)
+                        {
+                            if ((tb_wait_sn_data.Text[0] == '2') && (tb_wait_sn_data.Text[1] >= 'A') && (tb_wait_sn_data.Text[1] <= 'Z'))
+                            {
+                                camera_ng_reason = tb_wait_sn_data.Text + ":";
+                                if (tb_wait_sn_data.Text[1] == 'P')
+                                {
+                                    camera_ng_reason += "其他";
+                                    //richTextBox_reason.Visible = true;
+                                    //bt_reason_ok.Visible = true;
+                                    flag_stage3_step = 2;   //等待人工輸入不良原因
+
+                                    groupBox_ng_reason.Visible = true;
+                                    richTextBox_reason.Enabled = true;
+
+                                    if (flag_display_mode == DISPLAY_SD)
+                                    {
+                                        groupBox_ng_reason.Location = new Point(140, 336);
+                                    }
+                                    else
+                                    {
+                                        groupBox_ng_reason.Location = new Point(0, 770);
+                                    }
+                                    richTextBox_reason.Focus();
+                                }
+                                else
+                                {
+                                    groupBox_ng_reason.Visible = false;
+                                    switch (tb_wait_sn_data.Text[1])
+                                    {
+                                        case 'A': camera_ng_reason += "亮點大"; break;
+                                        case 'B': camera_ng_reason += "亮點多"; break;
+                                        case 'C': camera_ng_reason += "暗角"; break;
+                                        case 'D': camera_ng_reason += "刮傷"; break;
+                                        case 'E': camera_ng_reason += "噴濺物"; break;
+                                        case 'F': camera_ng_reason += "撞傷"; break;
+                                        case 'G': camera_ng_reason += "外觀補膠過厚"; break;
+                                        case 'H': camera_ng_reason += "外觀毛邊"; break;
+                                        case 'I': camera_ng_reason += "外觀不良"; break;
+                                        case 'J': camera_ng_reason += "影像有黑影"; break;
+                                        case 'K': camera_ng_reason += "內部有髒汙"; break;
+                                        case 'L': camera_ng_reason += "內部有異物"; break;
+                                        case 'M': camera_ng_reason += "內部有Particle"; break;
+                                        case 'N': camera_ng_reason += "無法顏色調校"; break;
+                                        case 'O': camera_ng_reason += "無法燒錄"; break;
+                                        case 'P': camera_ng_reason += "其他"; break;
+                                        case 'Q':
+                                        case 'R':
+                                        case 'S':
+                                        case 'T':
+                                        case 'U':
+                                        case 'V':
+                                        case 'W':
+                                        case 'X':
+                                        case 'Y':
+                                        case 'Z': camera_ng_reason += "未定義"; break;
+                                        default: camera_ng_reason += "unknown"; break;
+                                    }
+                                    flag_stage3_step = 3;
+                                }
+                                tb_wait_sn_data.Clear();
+                                richTextBox1.Text += "get ng reason : " + camera_ng_reason + "\n";
+                                lb_class.Text = camera_ng_reason;
+                            }
+                            else
+                            {
+                                lb_class.Text = "不允許" + tb_wait_sn_data.Text.ToString();
+                                richTextBox1.Text += "b錯誤判定為" + tb_wait_sn_data.Text.ToString() + "\n";
+                                lb_main_mesg2.Text = "b錯誤判定為" + tb_wait_sn_data.Text.ToString();
+                                tb_wait_sn_data.Clear();
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            stage3_class = "不允許" + tb_wait_sn_data.Text[0].ToString() + tb_wait_sn_data.Text[1].ToString();
+                            lb_class.Text = stage3_class;
+                            richTextBox1.Text += "a2錯誤判定為" + stage3_class + "\n";
+                            flag_stage3_step = 0;
+                            tb_wait_sn_data.Clear();
+                            return;
+                        }
+                    }
+                    else if ((len == 9) || (len == 10))
+                    {
+                        //richTextBox1.Text += "zzzzzzzzzzzzzzzzzz\n";
+                        return;
                     }
                     else
                     {
-                        //lb_class.Text = "不允許" + tb_wait_sn_data.Text[0].ToString();
-                        //richTextBox1.Text += "錯誤判定為" + tb_wait_sn_data.Text[0].ToString() + "\n";
-                        //flag_stage3_step = 0;
+                        stage3_class = "不允許" + tb_wait_sn_data.Text;
+                        richTextBox1.Text += "不可能等級" + stage3_class + "\t清除\n";
+                        lb_class.Text = stage3_class;
+                        richTextBox1.Text += "a錯誤判定為" + stage3_class + "\n";
+                        flag_stage3_step = 0;
+                        tb_wait_sn_data.Clear();
+                        return;
                     }
+                }
+                else if (flag_stage3_step == 2) //等待人工輸入不良原因
+                {
+                    richTextBox1.Text += "等待人工輸入不良原因 XXXXXXX\n";
                 }
                 else
                 {
-                    if ((tb_wait_sn_data.Text.Length == 9) || (tb_wait_sn_data.Text.Length == 10))
-                    {
-                        if (flag_stage3_step == 0)
-                        {
-                            show_main_message1("未判定等級", S_OK, 30);
-                            show_main_message2("未判定等級", S_OK, 30);
-                        }
-                        else if (flag_stage3_step == 1)
-                        {
-                            show_main_message1("未輸入不良原因", S_OK, 30);
-                            show_main_message2("未輸入不良原因", S_OK, 30);
-                        }
-                        else if (flag_stage3_step == 2)
-                        {
-                            show_main_message1("未人工輸入不良原因", S_OK, 30);
-                            show_main_message2("未人工輸入不良原因", S_OK, 30);
-                        }
-                        else if (flag_stage3_step == 3)
-                        {
-                            show_main_message2("準備存檔", S_OK, 10);
-                            tb_sn_opal.Text = tb_wait_sn_data.Text;
-                        }
-                        else
-                        {
-                            show_main_message1("未知狀態", S_OK, 30);
-                            show_main_message2("未知狀態", S_OK, 30);
-                        }
-                    }
-                    else
-                    {
-                        show_main_message2("資料錯誤", S_OK, 10);
-                        richTextBox1.Text += "有資料, 但是長度錯誤, 一律清除\n";
-                    }
+                    richTextBox1.Text += "unknown flag_stage3_step = " + flag_stage3_step.ToString() + "\n";
+                    show_main_message1("未知狀態", S_OK, 30);
+                    show_main_message2("未知狀態", S_OK, 30);
+                    show_main_message2("資料錯誤", S_OK, 10);
+                    richTextBox1.Text += "有資料, 但是長度錯誤, 一律清除\n";
                     tb_wait_sn_data.Clear();
                 }
             }
@@ -20267,22 +20362,28 @@ namespace imsLink
                 }
                 else if (flag_operation_mode == MODE_RELEASE_STAGE3)
                 {
-                    if ((lb_class.Text.Length == 1) || (lb_class.Text.Length == 2))
+                    if ((stage3_class.Length == 1) || (stage3_class.Length == 2))
                     {
-                        camera_serials.Add(new string[] { tb_sn_opal.Text, lb_class.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
-                        lb_class.Text = "";
-                        flag_stage3_step = 0;
+                        //camera_serials.Add(new string[] { tb_sn_opal.Text, lb_class.Text, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
+                        camera_serials.Add(new string[] { tb_sn_opal.Text, stage3_class, DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") });
                         exportCSV();
+                        flag_stage3_step = 0;
+                        tb_wait_sn_data.Clear();
+                        lb_class.Text = "";
+                        camera_ng_reason = String.Empty;
+                        stage3_class = String.Empty;
+                        flag_stage3_need_ng_reason = false;
+                        richTextBox_reason.Clear();
+                        groupBox_ng_reason.Visible = false;
                     }
                     else
                     {
-                        richTextBox1.Text += "等級資料錯誤, 不匯出csv檔, len = " + lb_class.Text.Length.ToString() + "\n";
+                        richTextBox1.Text += "等級資料錯誤, 不匯出csv檔, len = " + stage3_class.Length.ToString() + "\n";
                         show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
                         show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
                         show_main_message1("等級資料錯誤, 不匯出csv檔", S_OK, 30);
                     }
                 }
-
                 tb_sn_opal.Clear();
             }
             else
@@ -23037,6 +23138,41 @@ namespace imsLink
                 cb_show_rgb.Location = new Point(605, 500 - 20 + chart1.Size.Height);
             }
         }
+
+        private void bt_reason_ok_Click(object sender, EventArgs e)
+        {
+            int len;
+            len = richTextBox_reason.TextLength;
+            richTextBox1.Text += "NG len = " + len.ToString() + "\n";
+            if (len == 0)
+            {
+                richTextBox1.Text += "未輸入NG原因\n";
+            }
+            else
+            {
+                richTextBox1.Text += "取得NG原因\t" + richTextBox_reason.Text + "\n";
+                richTextBox_reason.Enabled = false;
+                //groupBox_ng_reason.Visible = false;
+                camera_ng_reason = "2P:" + richTextBox_reason.Text;
+                flag_stage3_step = 3;
+                this.tb_wait_sn_data.Focus();
+            }
+        }
+
+        private void bt_reason_cancel_Click(object sender, EventArgs e)
+        {
+            flag_stage3_step = 0;
+            tb_wait_sn_data.Clear();
+            lb_class.Text = "";
+            camera_ng_reason = String.Empty;
+            stage3_class = String.Empty;
+            richTextBox_reason.Clear();
+            groupBox_ng_reason.Visible = false;
+            this.tb_wait_sn_data.Focus();
+        }
+
+
+
 
 
     }

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -163,6 +163,10 @@
             this.tb_sn1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tp_USB = new System.Windows.Forms.TabPage();
+            this.groupBox_ng_reason = new System.Windows.Forms.GroupBox();
+            this.bt_reason_cancel = new System.Windows.Forms.Button();
+            this.bt_reason_ok = new System.Windows.Forms.Button();
+            this.richTextBox_reason = new System.Windows.Forms.RichTextBox();
             this.cb_show_rgb = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lb_yuv_y2 = new System.Windows.Forms.Label();
@@ -723,8 +727,6 @@
             this.groupBox_quick = new System.Windows.Forms.GroupBox();
             this.timer_stage11 = new System.Windows.Forms.Timer(this.components);
             this.lb_fps = new System.Windows.Forms.Label();
-            this.richTextBox_reason = new System.Windows.Forms.RichTextBox();
-            this.bt_reason_ok = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tp_Camera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
@@ -740,6 +742,7 @@
             this.tp_Serial_Auto.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.tp_USB.SuspendLayout();
+            this.groupBox_ng_reason.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.groupBox_awb2.SuspendLayout();
             this.groupBox_brightness.SuspendLayout();
@@ -2274,8 +2277,7 @@
             // 
             // tp_USB
             // 
-            this.tp_USB.Controls.Add(this.bt_reason_ok);
-            this.tp_USB.Controls.Add(this.richTextBox_reason);
+            this.tp_USB.Controls.Add(this.groupBox_ng_reason);
             this.tp_USB.Controls.Add(this.cb_show_rgb);
             this.tp_USB.Controls.Add(this.chart1);
             this.tp_USB.Controls.Add(this.lb_yuv_y2);
@@ -2324,6 +2326,55 @@
             this.tp_USB.Text = "色彩校正";
             this.tp_USB.UseVisualStyleBackColor = true;
             // 
+            // groupBox_ng_reason
+            // 
+            this.groupBox_ng_reason.Controls.Add(this.bt_reason_cancel);
+            this.groupBox_ng_reason.Controls.Add(this.bt_reason_ok);
+            this.groupBox_ng_reason.Controls.Add(this.richTextBox_reason);
+            this.groupBox_ng_reason.Location = new System.Drawing.Point(11, 347);
+            this.groupBox_ng_reason.Name = "groupBox_ng_reason";
+            this.groupBox_ng_reason.Size = new System.Drawing.Size(257, 91);
+            this.groupBox_ng_reason.TabIndex = 242;
+            this.groupBox_ng_reason.TabStop = false;
+            // 
+            // bt_reason_cancel
+            // 
+            this.bt_reason_cancel.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_reason_cancel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_reason_cancel.ForeColor = System.Drawing.Color.Black;
+            this.bt_reason_cancel.Location = new System.Drawing.Point(125, 56);
+            this.bt_reason_cancel.Name = "bt_reason_cancel";
+            this.bt_reason_cancel.Size = new System.Drawing.Size(60, 28);
+            this.bt_reason_cancel.TabIndex = 242;
+            this.bt_reason_cancel.Text = "Cancel";
+            this.bt_reason_cancel.UseVisualStyleBackColor = false;
+            this.bt_reason_cancel.Click += new System.EventHandler(this.bt_reason_cancel_Click);
+            // 
+            // bt_reason_ok
+            // 
+            this.bt_reason_ok.BackColor = System.Drawing.SystemColors.Control;
+            this.bt_reason_ok.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_reason_ok.ForeColor = System.Drawing.Color.Black;
+            this.bt_reason_ok.Location = new System.Drawing.Point(191, 56);
+            this.bt_reason_ok.Name = "bt_reason_ok";
+            this.bt_reason_ok.Size = new System.Drawing.Size(60, 28);
+            this.bt_reason_ok.TabIndex = 241;
+            this.bt_reason_ok.Text = "OK";
+            this.bt_reason_ok.UseVisualStyleBackColor = false;
+            this.bt_reason_ok.Click += new System.EventHandler(this.bt_reason_ok_Click);
+            // 
+            // richTextBox_reason
+            // 
+            this.richTextBox_reason.BackColor = System.Drawing.Color.Pink;
+            this.richTextBox_reason.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox_reason.Location = new System.Drawing.Point(6, 18);
+            this.richTextBox_reason.MaxLength = 50;
+            this.richTextBox_reason.Multiline = false;
+            this.richTextBox_reason.Name = "richTextBox_reason";
+            this.richTextBox_reason.Size = new System.Drawing.Size(245, 32);
+            this.richTextBox_reason.TabIndex = 240;
+            this.richTextBox_reason.Text = "";
+            // 
             // cb_show_rgb
             // 
             this.cb_show_rgb.AutoSize = true;
@@ -2338,13 +2389,13 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
             this.chart1.Location = new System.Drawing.Point(264, 73);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Name = "Series1";
+            this.chart1.Series.Add(series4);
             this.chart1.Size = new System.Drawing.Size(338, 239);
             this.chart1.TabIndex = 238;
             this.chart1.Text = "chart1";
@@ -8865,26 +8916,6 @@
             this.lb_fps.TabIndex = 239;
             this.lb_fps.Text = "fps";
             // 
-            // richTextBox_reason
-            // 
-            this.richTextBox_reason.Location = new System.Drawing.Point(348, 308);
-            this.richTextBox_reason.Name = "richTextBox_reason";
-            this.richTextBox_reason.Size = new System.Drawing.Size(224, 118);
-            this.richTextBox_reason.TabIndex = 240;
-            this.richTextBox_reason.Text = "";
-            // 
-            // bt_reason_ok
-            // 
-            this.bt_reason_ok.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_reason_ok.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_reason_ok.ForeColor = System.Drawing.Color.Black;
-            this.bt_reason_ok.Location = new System.Drawing.Point(610, 364);
-            this.bt_reason_ok.Name = "bt_reason_ok";
-            this.bt_reason_ok.Size = new System.Drawing.Size(60, 28);
-            this.bt_reason_ok.TabIndex = 241;
-            this.bt_reason_ok.Text = "OK";
-            this.bt_reason_ok.UseVisualStyleBackColor = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -8929,6 +8960,7 @@
             this.groupBox10.PerformLayout();
             this.tp_USB.ResumeLayout(false);
             this.tp_USB.PerformLayout();
+            this.groupBox_ng_reason.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.groupBox_awb2.ResumeLayout(false);
             this.groupBox_awb2.PerformLayout();
@@ -9757,6 +9789,8 @@
         private System.Windows.Forms.CheckBox cb_show_rgb;
         private System.Windows.Forms.Button bt_reason_ok;
         private System.Windows.Forms.RichTextBox richTextBox_reason;
+        private System.Windows.Forms.GroupBox groupBox_ng_reason;
+        private System.Windows.Forms.Button bt_reason_cancel;
     }
 }
 

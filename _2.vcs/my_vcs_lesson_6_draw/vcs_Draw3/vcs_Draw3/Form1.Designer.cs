@@ -72,6 +72,8 @@
             this.timer5 = new System.Windows.Forms.Timer(this.components);
             this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.timer7 = new System.Windows.Forms.Timer(this.components);
+            this.timer8 = new System.Windows.Forms.Timer(this.components);
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -80,7 +82,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(756, 479);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(235, 140);
+            this.richTextBox1.Size = new System.Drawing.Size(339, 211);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
@@ -142,7 +144,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(102, 42);
             this.button4.TabIndex = 21;
-            this.button4.Text = "畫邊框";
+            this.button4.Text = "畫邊框1";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -153,7 +155,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(102, 42);
             this.button5.TabIndex = 23;
-            this.button5.Text = "畫正弦波";
+            this.button5.Text = "畫邊框2";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -164,6 +166,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(102, 42);
             this.button6.TabIndex = 22;
+            this.button6.Text = "畫正弦波";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -457,11 +460,27 @@
             this.timer7.Interval = 10;
             this.timer7.Tick += new System.EventHandler(this.timer7_Tick);
             // 
+            // timer8
+            // 
+            this.timer8.Tick += new System.EventHandler(this.timer8_Tick);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1025, 660);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(70, 30);
+            this.bt_clear.TabIndex = 52;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 722);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.p2);
@@ -554,6 +573,8 @@
         private System.Windows.Forms.Timer timer5;
         private System.Windows.Forms.Timer timer6;
         private System.Windows.Forms.Timer timer7;
+        private System.Windows.Forms.Timer timer8;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 
