@@ -2922,7 +2922,10 @@ namespace imsLink
                 dx = 60;
                 button20.Location = new Point(x_st + dx * 0, y_st);
 
-                x_st = button20.Location.X + button20.Size.Width;
+
+                bt_min.Location = new Point(x_st + dx * 1, y_st);
+
+                x_st = bt_min.Location.X + bt_min.Size.Width;
                 dx = 40;
 
                 button33.Location = new Point(x_st + dx * 0, y_st);
@@ -3375,9 +3378,9 @@ namespace imsLink
             //TARGET RGB
             if (flag_display_mode == DISPLAY_SD)
             {
-                show_main_message1("色彩校正不支援SD螢幕", S_FALSE, 30);
-                show_main_message2("色彩校正不支援SD螢幕", S_FALSE, 30);
-                show_main_message3("色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message1("a色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message2("a色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message3("a色彩校正不支援SD螢幕", S_FALSE, 30);
 
                 comboBox_temperature.Size = new Size(comboBox_temperature.Size.Width * 3 / 4, comboBox_temperature.Height * 2 / 3);
                 comboBox_temperature.Font = new Font("Arial", comboBox_temperature.Font.Size * 3 / 5);
@@ -3766,6 +3769,7 @@ namespace imsLink
             toolTip1.SetToolTip(button35, "To imsLink Mode");
             toolTip1.SetToolTip(button32, "To PuTTy Mode");
             toolTip1.SetToolTip(button20, "Exit");
+            toolTip1.SetToolTip(bt_min, "最小化");
             toolTip1.SetToolTip(button33, "log on");
 
 
@@ -7345,7 +7349,7 @@ namespace imsLink
                 }
                 else
                 {
-                    pictureBox1.Location = new Point(170 + 90 + 80, 10);
+                    pictureBox1.Location = new Point(170 + 90 + 80 + 120, 10);
                     richTextBox1.Visible = false;
                 }
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
@@ -9059,9 +9063,9 @@ namespace imsLink
         {
             if (flag_display_mode == DISPLAY_SD)
             {
-                show_main_message1("色彩校正不支援SD螢幕", S_FALSE, 30);
-                show_main_message2("色彩校正不支援SD螢幕", S_FALSE, 30);
-                show_main_message3("色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message1("b色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message2("b色彩校正不支援SD螢幕", S_FALSE, 30);
+                show_main_message3("b色彩校正不支援SD螢幕", S_FALSE, 30);
                 return;
             }
 
@@ -14338,9 +14342,9 @@ namespace imsLink
 
                 if (flag_display_mode == DISPLAY_SD)
                 {
-                    show_main_message1("色彩校正不支援SD螢幕", S_FALSE, 30);
-                    show_main_message2("色彩校正不支援SD螢幕", S_FALSE, 30);
-                    show_main_message3("色彩校正不支援SD螢幕", S_FALSE, 30);
+                    show_main_message1("c色彩校正不支援SD螢幕", S_FALSE, 30);
+                    show_main_message2("c色彩校正不支援SD螢幕", S_FALSE, 30);
+                    show_main_message3("c色彩校正不支援SD螢幕", S_FALSE, 30);
                 }
                 else
                 {
