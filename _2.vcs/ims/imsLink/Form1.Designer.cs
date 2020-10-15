@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -2389,13 +2389,13 @@
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Location = new System.Drawing.Point(264, 73);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(338, 239);
             this.chart1.TabIndex = 238;
             this.chart1.Text = "chart1";
@@ -7004,10 +7004,10 @@
             // tb_sn_opal12
             // 
             this.tb_sn_opal12.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_sn_opal12.Location = new System.Drawing.Point(24, 180);
+            this.tb_sn_opal12.Location = new System.Drawing.Point(24, 167);
             this.tb_sn_opal12.Multiline = true;
             this.tb_sn_opal12.Name = "tb_sn_opal12";
-            this.tb_sn_opal12.Size = new System.Drawing.Size(182, 22);
+            this.tb_sn_opal12.Size = new System.Drawing.Size(182, 40);
             this.tb_sn_opal12.TabIndex = 189;
             this.tb_sn_opal12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -7047,7 +7047,7 @@
             // 
             this.label52.AutoSize = true;
             this.label52.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(20, 143);
+            this.label52.Location = new System.Drawing.Point(20, 140);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(106, 24);
             this.label52.TabIndex = 185;
@@ -7059,7 +7059,7 @@
             this.tb_wait_sn_data12.Location = new System.Drawing.Point(590, 170);
             this.tb_wait_sn_data12.Multiline = true;
             this.tb_wait_sn_data12.Name = "tb_wait_sn_data12";
-            this.tb_wait_sn_data12.Size = new System.Drawing.Size(182, 22);
+            this.tb_wait_sn_data12.Size = new System.Drawing.Size(182, 49);
             this.tb_wait_sn_data12.TabIndex = 184;
             this.tb_wait_sn_data12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

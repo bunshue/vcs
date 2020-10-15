@@ -25,7 +25,7 @@ namespace imsLink
         String compile_time = "6/23/2020 01:35下午";
         String software_version = "A04";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE3;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE12;  //不允許第四, 第七, 第八
 
         bool flag_david_test1 = false;   //david測試第12站時, ims主機要開putty模式
         bool flag_david_test2 = false;   //david測試2, 存圖顯示亮度狀況
@@ -2634,7 +2634,7 @@ namespace imsLink
             lb_awb_result_B.Visible = en;
             bt_get_setup.Visible = en;
 
-            //comboBox_webcam.Visible = en;
+            comboBox_webcam.Visible = false;
             groupBox_temperature.Visible = en;
 
             b7.Visible = en;
@@ -2913,7 +2913,7 @@ namespace imsLink
             }
             else
             {
-                groupBox_quick.Location = new Point(850, 0);
+                groupBox_quick.Location = new Point(850 - 60, 0);
                 groupBox_quick.Size = new Size(770, 62);
 
                 x_st = 2;
@@ -7349,7 +7349,7 @@ namespace imsLink
                 }
                 else
                 {
-                    pictureBox1.Location = new Point(170 + 90 + 80 + 120, 10);
+                    pictureBox1.Location = new Point(170 + 90 + 80 + 140, 10);
                     richTextBox1.Visible = false;
                 }
                 comboBox_webcam.Location = new Point(pictureBox1.Location.X + pictureBox1.Width - comboBox_webcam.Width, pictureBox1.Location.Y);
@@ -22326,6 +22326,8 @@ namespace imsLink
                 lb_main_mesg12c.Text = "";
                 timer12_cnt = 0;
                 tb_sn_opal12.Text = tb_wait_sn_data12.Text;
+                //lb_main_mesg12a.Text = "SN : " + tb_sn_opal12.Text;
+                tb_wait_sn_data12.Clear();
                 lb_main_mesg12a.Text = "SN : " + tb_sn_opal12.Text;
                 //timer_stage12.Enabled = false;
 
