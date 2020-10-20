@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Globalization;//for CultureInfo
+
 namespace vcs_test_all_03_Syntax
 {
     public partial class Form1 : Form
@@ -31,8 +33,8 @@ namespace vcs_test_all_03_Syntax
             int dy;
 
             //button
-            x_st = 0;
-            y_st = 0;
+            x_st = 12;
+            y_st = 12;
             dx = 190;
             dy = 50;
 
@@ -84,7 +86,7 @@ namespace vcs_test_all_03_Syntax
             lb_dec.Location = new Point(x_st + dx * 5 + 148, y_st + dy * 5 + 5);
             lb_dec.Text = "";
 
-            groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 3 - 3);
+            groupBox2.Location = new Point(x_st + dx * 5 - 5, y_st + dy * 3 - 3);
 
             label1.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 7);
             label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 7);
@@ -98,7 +100,61 @@ namespace vcs_test_all_03_Syntax
             label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
             label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
 
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "\n類似sprintf的寫法\n";
+            int number = 123;
+            string name = "david";
+            string information = string.Empty;
+            information = string.Format("ID = {0}, Name = {1}", number.ToString(), name);
+            richTextBox1.Text += "information1 : " + information + "\n";
+            richTextBox1.Text += "information2 : " + string.Format("ID = {0}, Name = {1}", number.ToString(), name) + "\n";
+
+            string msg1 = "Name : \"{0}\",\tKind \"{1}\".\n";
+            string str = string.Empty;
+
+            str = string.Format(msg1, "lion", "mouse");
+            richTextBox1.Text += "str1 = " + str + "\n";
+
+            string msg2 = "Using the {0} - \"{1}\" culture:";
+
+            //各國語言(語系)代碼表(zh-tw, zh-cn,en-us...) json 格式 [繁中/簡中/英文格式] 
+            CultureInfo ci;
+
+            ci = new CultureInfo("en-US");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-TW");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CN");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-HK");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-SG");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CHS");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("zh-CHT");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
+
+            ci = new CultureInfo("ja-JP");
+            str = string.Format(msg2, ci.DisplayName, ci.Name);
+            richTextBox1.Text += "str = " + str + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -364,7 +420,7 @@ namespace vcs_test_all_03_Syntax
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+
         }
 
         struct circle
@@ -797,7 +853,10 @@ namespace vcs_test_all_03_Syntax
         }
         #endregion
 
-
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
 
     }
 }

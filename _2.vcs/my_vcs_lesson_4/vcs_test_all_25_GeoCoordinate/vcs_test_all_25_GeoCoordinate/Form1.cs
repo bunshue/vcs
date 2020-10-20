@@ -10,6 +10,7 @@ using System.Device.Location;
 
 namespace vcs_test_all_25_GeoCoordinate
 {
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -17,7 +18,40 @@ namespace vcs_test_all_25_GeoCoordinate
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 110;
+            dy = 48;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
         {
             //台北車站	25.047778, 121.517033 
             //新竹車站	24.801604, 120.971655
@@ -36,7 +70,20 @@ namespace vcs_test_all_25_GeoCoordinate
             richTextBox1.Text += "北緯：" + station_hsc.Latitude.ToString() + "度\n";
             richTextBox1.Text += "有無其他資訊：" + station_hsc.IsUnknown.ToString() + "\n\n";
 
-            richTextBox1.Text += "兩站距離 " + distanceInKm.ToString() + " KM.\n";
+            richTextBox1.Text += "兩點距離 " + distanceInKm.ToString() + " KM.\n";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //台北車站	25.047778, 121.517033 
+            //新竹車站	24.801604, 120.971655
+
+            //計算距離
+            MapDistanceServices _distanceServices = new MapDistanceServices();
+
+            //double distanceInKm = _distanceServices.GetDistance(緯度1, 經度1, 緯度2, 經度2);
+            double distanceInKm = _distanceServices.GetDistance(25.047778, 121.517033, 24.801604, 120.971655);
+            richTextBox1.Text += "兩點距離 " + distanceInKm.ToString() + " KM.\n";
         }
 
         void find_angle(double x_st, double y_st, double x_sp, double y_sp)
@@ -103,7 +150,7 @@ namespace vcs_test_all_25_GeoCoordinate
             //richTextBox1.Text += "距離 " + distance.ToString() + " KM\n";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //南投縣魚池鄉東光村
             double e0 = 120.969543;
@@ -130,7 +177,6 @@ namespace vcs_test_all_25_GeoCoordinate
             //find_angle(e0, n0, e3, n3);
             //find_angle(e0, n0, e4, n4);
 
-
             find_angle(0, 0, 3, 4);
             find_angle(0, 0, 4, 3);
 
@@ -143,10 +189,13 @@ namespace vcs_test_all_25_GeoCoordinate
             find_angle(0, 0, -4, 3);
             find_angle(0, 0, -3, 4);
 
-
             find_angle(121.028837, 24.839819, 121.030778, 24.839649);
 
             find_angle(120.971655, 24.801604, 121.517033, 25.047778);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -164,11 +213,63 @@ namespace vcs_test_all_25_GeoCoordinate
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
 
-
     }
+
+    public class MapDistanceServices
+    {
+        public MapDistanceServices()
+        {
+        }
+        private const double EARTH_RADIUS = 6378.137;
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="lat1">緯度1</param>
+        /// <param name="lng1">經度1</param>
+        /// <param name="lat2">緯度2</param>
+        /// <param name="lng2">經度2</param>
+        /// <returns></returns>
+        public double GetDistance(double lat1, double lng1, double lat2, double lng2)
+        {
+            double dblResult = 0;
+            double radLat1 = rad(lat1);
+            double radLat2 = rad(lat2);
+            double distLat = radLat1 - radLat2;
+            double distLng = rad(lng1) - rad(lng2);
+            dblResult = 2 * Math.Asin(Math.Sqrt(Math.Pow(Math.Sin(distLat / 2), 2) +
+                            Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(distLng / 2), 2)));
+            dblResult = dblResult * EARTH_RADIUS;
+
+            dblResult = Math.Round(dblResult * 10000) /10000;  //這回傳變成公里,少3個0變公尺
+            //dblResult = Math.Round(dblResult * 10000) / 10; //公尺
+
+            return dblResult;
+        }
+    }
+
 }

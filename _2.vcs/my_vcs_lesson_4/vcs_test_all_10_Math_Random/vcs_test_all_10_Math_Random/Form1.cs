@@ -50,15 +50,25 @@ namespace vcs_test_all_10_Math_Random
         
         }
 
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             int x;
             int y;
-            richTextBox1.Text += "y = 200 + 200 * sin(x)\n";
-            for (x = 0; x <= 360; x += 10)
+            richTextBox1.Text += "y = sin(x)\n";
+            for (x = 0; x <= 360; x += 30)
             {
-                y = 200 + (int)(200 * (Math.Sin((Math.PI * x / 180))));
+                y = (int)(Math.Sin((Math.PI * x / 180)));
                 richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\n";
+            }
+
+            for (x = 0; x <= 360; x += 30)
+            {
+                richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + Math.Sin(rad(x)) + "\n";
             }
         }
 

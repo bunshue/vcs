@@ -25,7 +25,7 @@ namespace imsLink
         String compile_time = "6/23/2020 01:35下午";
         String software_version = "A04";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE12;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE3;  //不允許第四, 第七, 第八
 
         bool flag_david_test1 = false;   //david測試第12站時, ims主機要開putty模式
         bool flag_david_test2 = false;   //david測試2, 存圖顯示亮度狀況
@@ -14667,7 +14667,13 @@ namespace imsLink
                 flag_incorrect_data = true;
                 return S_FALSE;
             }
-            else if ((tb_sn_opal.Text.Length == 9) || (tb_sn_opal.Text.Length == 10))
+            else if (tb_sn_opal.Text.Length == 9)
+            {
+                flag_incorrect_data = true;
+                richTextBox1.Text += "序號格式不正確\n";
+                lb_class.Text = "序號長度九: " + tb_sn_opal.Text + ", 請重新輸入";
+            }
+            else if (tb_sn_opal.Text.Length == 10)
             {
                 //檢查英文字母的正確性
                 if (((tb_sn_opal.Text[0] >= 'A') && (tb_sn_opal.Text[0] <= 'Z')) || ((tb_sn_opal.Text[0] >= 'a') && (tb_sn_opal.Text[0] <= 'z')))
@@ -18049,6 +18055,8 @@ namespace imsLink
                     if (result == S_OK)
                     {
                         timer_stage3.Enabled = false;
+                        lb_class.Text = "序號資料正確, 存檔中";
+                        delay(30);
                         lb_main_mesg2.Text = "資料正確, 存檔中";
                         save_image_to_drive();
                         delay(30);

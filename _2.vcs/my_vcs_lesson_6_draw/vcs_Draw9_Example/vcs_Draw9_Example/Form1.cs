@@ -3645,6 +3645,823 @@ namespace vcs_Draw9_Example
 
         private void button27_Click(object sender, EventArgs e)
         {
+            show_item_location(150);
+
+            pictureBox1.Location = new Point(50, 50);
+            pictureBox1.Size = new Size(887, 636);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
+            Graphics g;
+
+            //新建圖檔, 初始化畫布
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            int i;
+            double gamma;
+
+            int[] data_in = new int[256];
+            int[] data_out = new int[256];
+            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
+
+            Pen gammaPen = new Pen(Color.Red, 2);
+            gamma = 2.2;
+            //畫出真正的Gamma 2.2曲線
+            for (i = 0; i < 256; i++)
+            {
+                data_in[i] = i;
+                data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
+
+                curvePoints[i].X = data_in[i] * 3;
+                curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+            }
+            g.DrawLines(gammaPen, curvePoints);   //畫直線
+
+
+
+            gammaPen = new Pen(Color.Green, 2);
+
+            data_in[0] = 0; data_out[0] = 92;
+            data_in[1] = 1; data_out[1] = 96;
+            data_in[2] = 2; data_out[2] = 99;
+            data_in[3] = 3; data_out[3] = 103;
+            data_in[4] = 4; data_out[4] = 106;
+            data_in[5] = 5; data_out[5] = 108;
+            data_in[6] = 6; data_out[6] = 111;
+            data_in[7] = 7; data_out[7] = 113;
+            data_in[8] = 8; data_out[8] = 115;
+            data_in[9] = 9; data_out[9] = 117;
+            data_in[10] = 10; data_out[10] = 120;
+            data_in[11] = 11; data_out[11] = 122;
+            data_in[12] = 12; data_out[12] = 123;
+            data_in[13] = 13; data_out[13] = 125;
+            data_in[14] = 14; data_out[14] = 127;
+            data_in[15] = 15; data_out[15] = 129;
+            data_in[16] = 16; data_out[16] = 132;
+            data_in[17] = 17; data_out[17] = 135;
+            data_in[18] = 18; data_out[18] = 138;
+            data_in[19] = 19; data_out[19] = 141;
+            data_in[20] = 20; data_out[20] = 143;
+            data_in[21] = 21; data_out[21] = 146;
+            data_in[22] = 22; data_out[22] = 148;
+            data_in[23] = 23; data_out[23] = 151;
+            data_in[24] = 24; data_out[24] = 153;
+            data_in[25] = 25; data_out[25] = 155;
+            data_in[26] = 26; data_out[26] = 158;
+            data_in[27] = 27; data_out[27] = 160;
+            data_in[28] = 28; data_out[28] = 162;
+            data_in[29] = 29; data_out[29] = 164;
+            data_in[30] = 30; data_out[30] = 166;
+            data_in[31] = 31; data_out[31] = 167;
+            data_in[32] = 32; data_out[32] = 153;
+            data_in[33] = 33; data_out[33] = 157;
+            data_in[34] = 34; data_out[34] = 160;
+            data_in[35] = 35; data_out[35] = 163;
+            data_in[36] = 36; data_out[36] = 166;
+            data_in[37] = 37; data_out[37] = 169;
+            data_in[38] = 38; data_out[38] = 171;
+            data_in[39] = 39; data_out[39] = 174;
+            data_in[40] = 40; data_out[40] = 176;
+            data_in[41] = 41; data_out[41] = 179;
+            data_in[42] = 42; data_out[42] = 181;
+            data_in[43] = 43; data_out[43] = 183;
+            data_in[44] = 44; data_out[44] = 185;
+            data_in[45] = 45; data_out[45] = 187;
+            data_in[46] = 46; data_out[46] = 189;
+            data_in[47] = 47; data_out[47] = 191;
+            data_in[48] = 48; data_out[48] = 170;
+            data_in[49] = 49; data_out[49] = 173;
+            data_in[50] = 50; data_out[50] = 177;
+            data_in[51] = 51; data_out[51] = 180;
+            data_in[52] = 52; data_out[52] = 183;
+            data_in[53] = 53; data_out[53] = 185;
+            data_in[54] = 54; data_out[54] = 188;
+            data_in[55] = 55; data_out[55] = 190;
+            data_in[56] = 56; data_out[56] = 192;
+            data_in[57] = 57; data_out[57] = 195;
+            data_in[58] = 58; data_out[58] = 197;
+            data_in[59] = 59; data_out[59] = 198;
+            data_in[60] = 60; data_out[60] = 200;
+            data_in[61] = 61; data_out[61] = 202;
+            data_in[62] = 62; data_out[62] = 203;
+            data_in[63] = 63; data_out[63] = 205;
+            data_in[64] = 64; data_out[64] = 183;
+            data_in[65] = 65; data_out[65] = 187;
+            data_in[66] = 66; data_out[66] = 190;
+            data_in[67] = 67; data_out[67] = 193;
+            data_in[68] = 68; data_out[68] = 195;
+            data_in[69] = 69; data_out[69] = 198;
+            data_in[70] = 70; data_out[70] = 200;
+            data_in[71] = 71; data_out[71] = 202;
+            data_in[72] = 72; data_out[72] = 204;
+            data_in[73] = 73; data_out[73] = 205;
+            data_in[74] = 74; data_out[74] = 207;
+            data_in[75] = 75; data_out[75] = 208;
+            data_in[76] = 76; data_out[76] = 210;
+            data_in[77] = 77; data_out[77] = 211;
+            data_in[78] = 78; data_out[78] = 212;
+            data_in[79] = 79; data_out[79] = 213;
+            data_in[80] = 80; data_out[80] = 193;
+            data_in[81] = 81; data_out[81] = 196;
+            data_in[82] = 82; data_out[82] = 199;
+            data_in[83] = 83; data_out[83] = 201;
+            data_in[84] = 84; data_out[84] = 204;
+            data_in[85] = 85; data_out[85] = 206;
+            data_in[86] = 86; data_out[86] = 208;
+            data_in[87] = 87; data_out[87] = 209;
+            data_in[88] = 88; data_out[88] = 211;
+            data_in[89] = 89; data_out[89] = 212;
+            data_in[90] = 90; data_out[90] = 213;
+            data_in[91] = 91; data_out[91] = 215;
+            data_in[92] = 92; data_out[92] = 216;
+            data_in[93] = 93; data_out[93] = 216;
+            data_in[94] = 94; data_out[94] = 217;
+            data_in[95] = 95; data_out[95] = 218;
+            data_in[96] = 96; data_out[96] = 201;
+            data_in[97] = 97; data_out[97] = 203;
+            data_in[98] = 98; data_out[98] = 206;
+            data_in[99] = 99; data_out[99] = 208;
+            data_in[100] = 100; data_out[100] = 210;
+            data_in[101] = 101; data_out[101] = 212;
+            data_in[102] = 102; data_out[102] = 213;
+            data_in[103] = 103; data_out[103] = 214;
+            data_in[104] = 104; data_out[104] = 216;
+            data_in[105] = 105; data_out[105] = 217;
+            data_in[106] = 106; data_out[106] = 217;
+            data_in[107] = 107; data_out[107] = 218;
+            data_in[108] = 108; data_out[108] = 219;
+            data_in[109] = 109; data_out[109] = 219;
+            data_in[110] = 110; data_out[110] = 220;
+            data_in[111] = 111; data_out[111] = 220;
+            data_in[112] = 112; data_out[112] = 207;
+            data_in[113] = 113; data_out[113] = 209;
+            data_in[114] = 114; data_out[114] = 211;
+            data_in[115] = 115; data_out[115] = 213;
+            data_in[116] = 116; data_out[116] = 214;
+            data_in[117] = 117; data_out[117] = 216;
+            data_in[118] = 118; data_out[118] = 217;
+            data_in[119] = 119; data_out[119] = 218;
+            data_in[120] = 120; data_out[120] = 218;
+            data_in[121] = 121; data_out[121] = 219;
+            data_in[122] = 122; data_out[122] = 220;
+            data_in[123] = 123; data_out[123] = 220;
+            data_in[124] = 124; data_out[124] = 221;
+            data_in[125] = 125; data_out[125] = 221;
+            data_in[126] = 126; data_out[126] = 221;
+            data_in[127] = 127; data_out[127] = 222;
+            data_in[128] = 128; data_out[128] = 131;
+            data_in[129] = 129; data_out[129] = 135;
+            data_in[130] = 130; data_out[130] = 138;
+            data_in[131] = 131; data_out[131] = 140;
+            data_in[132] = 132; data_out[132] = 143;
+            data_in[133] = 133; data_out[133] = 146;
+            data_in[134] = 134; data_out[134] = 148;
+            data_in[135] = 135; data_out[135] = 151;
+            data_in[136] = 136; data_out[136] = 153;
+            data_in[137] = 137; data_out[137] = 155;
+            data_in[138] = 138; data_out[138] = 157;
+            data_in[139] = 139; data_out[139] = 159;
+            data_in[140] = 140; data_out[140] = 161;
+            data_in[141] = 141; data_out[141] = 163;
+            data_in[142] = 142; data_out[142] = 165;
+            data_in[143] = 143; data_out[143] = 167;
+            data_in[144] = 144; data_out[144] = 170;
+            data_in[145] = 145; data_out[145] = 173;
+            data_in[146] = 146; data_out[146] = 177;
+            data_in[147] = 147; data_out[147] = 180;
+            data_in[148] = 148; data_out[148] = 183;
+            data_in[149] = 149; data_out[149] = 185;
+            data_in[150] = 150; data_out[150] = 188;
+            data_in[151] = 151; data_out[151] = 190;
+            data_in[152] = 152; data_out[152] = 193;
+            data_in[153] = 153; data_out[153] = 195;
+            data_in[154] = 154; data_out[154] = 197;
+            data_in[155] = 155; data_out[155] = 199;
+            data_in[156] = 156; data_out[156] = 200;
+            data_in[157] = 157; data_out[157] = 202;
+            data_in[158] = 158; data_out[158] = 203;
+            data_in[159] = 159; data_out[159] = 205;
+            data_in[160] = 160; data_out[160] = 193;
+            data_in[161] = 161; data_out[161] = 196;
+            data_in[162] = 162; data_out[162] = 199;
+            data_in[163] = 163; data_out[163] = 201;
+            data_in[164] = 164; data_out[164] = 204;
+            data_in[165] = 165; data_out[165] = 206;
+            data_in[166] = 166; data_out[166] = 207;
+            data_in[167] = 167; data_out[167] = 209;
+            data_in[168] = 168; data_out[168] = 211;
+            data_in[169] = 169; data_out[169] = 212;
+            data_in[170] = 170; data_out[170] = 213;
+            data_in[171] = 171; data_out[171] = 214;
+            data_in[172] = 172; data_out[172] = 215;
+            data_in[173] = 173; data_out[173] = 216;
+            data_in[174] = 174; data_out[174] = 217;
+            data_in[175] = 175; data_out[175] = 218;
+            data_in[176] = 176; data_out[176] = 206;
+            data_in[177] = 177; data_out[177] = 209;
+            data_in[178] = 178; data_out[178] = 211;
+            data_in[179] = 179; data_out[179] = 213;
+            data_in[180] = 180; data_out[180] = 214;
+            data_in[181] = 181; data_out[181] = 216;
+            data_in[182] = 182; data_out[182] = 217;
+            data_in[183] = 183; data_out[183] = 218;
+            data_in[184] = 184; data_out[184] = 218;
+            data_in[185] = 185; data_out[185] = 219;
+            data_in[186] = 186; data_out[186] = 220;
+            data_in[187] = 187; data_out[187] = 220;
+            data_in[188] = 188; data_out[188] = 221;
+            data_in[189] = 189; data_out[189] = 221;
+            data_in[190] = 190; data_out[190] = 221;
+            data_in[191] = 191; data_out[191] = 222;
+            data_in[192] = 192; data_out[192] = 215;
+            data_in[193] = 193; data_out[193] = 216;
+            data_in[194] = 194; data_out[194] = 217;
+            data_in[195] = 195; data_out[195] = 218;
+            data_in[196] = 196; data_out[196] = 219;
+            data_in[197] = 197; data_out[197] = 220;
+            data_in[198] = 198; data_out[198] = 221;
+            data_in[199] = 199; data_out[199] = 221;
+            data_in[200] = 200; data_out[200] = 222;
+            data_in[201] = 201; data_out[201] = 222;
+            data_in[202] = 202; data_out[202] = 222;
+            data_in[203] = 203; data_out[203] = 222;
+            data_in[204] = 204; data_out[204] = 223;
+            data_in[205] = 205; data_out[205] = 223;
+            data_in[206] = 206; data_out[206] = 223;
+            data_in[207] = 207; data_out[207] = 223;
+            data_in[208] = 208; data_out[208] = 219;
+            data_in[209] = 209; data_out[209] = 220;
+            data_in[210] = 210; data_out[210] = 220;
+            data_in[211] = 211; data_out[211] = 221;
+            data_in[212] = 212; data_out[212] = 222;
+            data_in[213] = 213; data_out[213] = 222;
+            data_in[214] = 214; data_out[214] = 222;
+            data_in[215] = 215; data_out[215] = 223;
+            data_in[216] = 216; data_out[216] = 223;
+            data_in[217] = 217; data_out[217] = 223;
+            data_in[218] = 218; data_out[218] = 223;
+            data_in[219] = 219; data_out[219] = 224;
+            data_in[220] = 220; data_out[220] = 224;
+            data_in[221] = 221; data_out[221] = 224;
+            data_in[222] = 222; data_out[222] = 224;
+            data_in[223] = 223; data_out[223] = 224;
+            data_in[224] = 224; data_out[224] = 221;
+            data_in[225] = 225; data_out[225] = 221;
+            data_in[226] = 226; data_out[226] = 222;
+            data_in[227] = 227; data_out[227] = 222;
+            data_in[228] = 228; data_out[228] = 223;
+            data_in[229] = 229; data_out[229] = 223;
+            data_in[230] = 230; data_out[230] = 223;
+            data_in[231] = 231; data_out[231] = 223;
+            data_in[232] = 232; data_out[232] = 224;
+            data_in[233] = 233; data_out[233] = 224;
+            data_in[234] = 234; data_out[234] = 224;
+            data_in[235] = 235; data_out[235] = 224;
+            data_in[236] = 236; data_out[236] = 224;
+            data_in[237] = 237; data_out[237] = 224;
+            data_in[238] = 238; data_out[238] = 224;
+            data_in[239] = 239; data_out[239] = 224;
+            data_in[240] = 240; data_out[240] = 222;
+            data_in[241] = 241; data_out[241] = 223;
+            data_in[242] = 242; data_out[242] = 223;
+            data_in[243] = 243; data_out[243] = 223;
+            data_in[244] = 244; data_out[244] = 223;
+            data_in[245] = 245; data_out[245] = 224;
+            data_in[246] = 246; data_out[246] = 224;
+            data_in[247] = 247; data_out[247] = 224;
+            data_in[248] = 248; data_out[248] = 224;
+            data_in[249] = 249; data_out[249] = 224;
+            data_in[250] = 250; data_out[250] = 224;
+            data_in[251] = 251; data_out[251] = 224;
+            data_in[252] = 252; data_out[252] = 225;
+            data_in[253] = 253; data_out[253] = 225;
+            data_in[254] = 254; data_out[254] = 225;
+            data_in[255] = 255; data_out[255] = 225;
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = data_in[i] * 3;
+                curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+            }
+            g.DrawLines(gammaPen, curvePoints);   //畫直線
+
+
+
+            Pen bluePen = new Pen(Color.Blue, 2);
+
+
+
+
+
+            data_in[0] = 0; data_out[0] = 93;
+            data_in[1] = 1; data_out[1] = 97;
+            data_in[2] = 2; data_out[2] = 100;
+            data_in[3] = 3; data_out[3] = 103;
+            data_in[4] = 4; data_out[4] = 107;
+            data_in[5] = 5; data_out[5] = 109;
+            data_in[6] = 6; data_out[6] = 112;
+            data_in[7] = 7; data_out[7] = 115;
+            data_in[8] = 8; data_out[8] = 118;
+            data_in[9] = 9; data_out[9] = 120;
+            data_in[10] = 10; data_out[10] = 123;
+            data_in[11] = 11; data_out[11] = 126;
+            data_in[12] = 12; data_out[12] = 128;
+            data_in[13] = 13; data_out[13] = 130;
+            data_in[14] = 14; data_out[14] = 133;
+            data_in[15] = 15; data_out[15] = 135;
+            data_in[16] = 16; data_out[16] = 139;
+            data_in[17] = 17; data_out[17] = 143;
+            data_in[18] = 18; data_out[18] = 147;
+            data_in[19] = 19; data_out[19] = 151;
+            data_in[20] = 20; data_out[20] = 154;
+            data_in[21] = 21; data_out[21] = 157;
+            data_in[22] = 22; data_out[22] = 160;
+            data_in[23] = 23; data_out[23] = 164;
+            data_in[24] = 24; data_out[24] = 166;
+            data_in[25] = 25; data_out[25] = 169;
+            data_in[26] = 26; data_out[26] = 172;
+            data_in[27] = 27; data_out[27] = 175;
+            data_in[28] = 28; data_out[28] = 178;
+            data_in[29] = 29; data_out[29] = 180;
+            data_in[30] = 30; data_out[30] = 183;
+            data_in[31] = 31; data_out[31] = 185;
+            data_in[32] = 32; data_out[32] = 168;
+            data_in[33] = 33; data_out[33] = 173;
+            data_in[34] = 34; data_out[34] = 177;
+            data_in[35] = 35; data_out[35] = 181;
+            data_in[36] = 36; data_out[36] = 185;
+            data_in[37] = 37; data_out[37] = 188;
+            data_in[38] = 38; data_out[38] = 192;
+            data_in[39] = 39; data_out[39] = 195;
+            data_in[40] = 40; data_out[40] = 198;
+            data_in[41] = 41; data_out[41] = 201;
+            data_in[42] = 42; data_out[42] = 204;
+            data_in[43] = 43; data_out[43] = 207;
+            data_in[44] = 44; data_out[44] = 209;
+            data_in[45] = 45; data_out[45] = 212;
+            data_in[46] = 46; data_out[46] = 214;
+            data_in[47] = 47; data_out[47] = 216;
+            data_in[48] = 48; data_out[48] = 188;
+            data_in[49] = 49; data_out[49] = 193;
+            data_in[50] = 50; data_out[50] = 197;
+            data_in[51] = 51; data_out[51] = 201;
+            data_in[52] = 52; data_out[52] = 204;
+            data_in[53] = 53; data_out[53] = 208;
+            data_in[54] = 54; data_out[54] = 211;
+            data_in[55] = 55; data_out[55] = 214;
+            data_in[56] = 56; data_out[56] = 217;
+            data_in[57] = 57; data_out[57] = 219;
+            data_in[58] = 58; data_out[58] = 222;
+            data_in[59] = 59; data_out[59] = 224;
+            data_in[60] = 60; data_out[60] = 226;
+            data_in[61] = 61; data_out[61] = 228;
+            data_in[62] = 62; data_out[62] = 230;
+            data_in[63] = 63; data_out[63] = 231;
+            data_in[64] = 64; data_out[64] = 209;
+            data_in[65] = 65; data_out[65] = 213;
+            data_in[66] = 66; data_out[66] = 217;
+            data_in[67] = 67; data_out[67] = 221;
+            data_in[68] = 68; data_out[68] = 224;
+            data_in[69] = 69; data_out[69] = 227;
+            data_in[70] = 70; data_out[70] = 229;
+            data_in[71] = 71; data_out[71] = 232;
+            data_in[72] = 72; data_out[72] = 234;
+            data_in[73] = 73; data_out[73] = 236;
+            data_in[74] = 74; data_out[74] = 237;
+            data_in[75] = 75; data_out[75] = 239;
+            data_in[76] = 76; data_out[76] = 240;
+            data_in[77] = 77; data_out[77] = 241;
+            data_in[78] = 78; data_out[78] = 242;
+            data_in[79] = 79; data_out[79] = 243;
+            data_in[80] = 80; data_out[80] = 220;
+            data_in[81] = 81; data_out[81] = 224;
+            data_in[82] = 82; data_out[82] = 227;
+            data_in[83] = 83; data_out[83] = 230;
+            data_in[84] = 84; data_out[84] = 232;
+            data_in[85] = 85; data_out[85] = 235;
+            data_in[86] = 86; data_out[86] = 236;
+            data_in[87] = 87; data_out[87] = 238;
+            data_in[88] = 88; data_out[88] = 240;
+            data_in[89] = 89; data_out[89] = 241;
+            data_in[90] = 90; data_out[90] = 242;
+            data_in[91] = 91; data_out[91] = 243;
+            data_in[92] = 92; data_out[92] = 244;
+            data_in[93] = 93; data_out[93] = 245;
+            data_in[94] = 94; data_out[94] = 245;
+            data_in[95] = 95; data_out[95] = 246;
+            data_in[96] = 96; data_out[96] = 230;
+            data_in[97] = 97; data_out[97] = 233;
+            data_in[98] = 98; data_out[98] = 235;
+            data_in[99] = 99; data_out[99] = 237;
+            data_in[100] = 100; data_out[100] = 239;
+            data_in[101] = 101; data_out[101] = 241;
+            data_in[102] = 102; data_out[102] = 242;
+            data_in[103] = 103; data_out[103] = 243;
+            data_in[104] = 104; data_out[104] = 244;
+            data_in[105] = 105; data_out[105] = 245;
+            data_in[106] = 106; data_out[106] = 246;
+            data_in[107] = 107; data_out[107] = 247;
+            data_in[108] = 108; data_out[108] = 247;
+            data_in[109] = 109; data_out[109] = 248;
+            data_in[110] = 110; data_out[110] = 248;
+            data_in[111] = 111; data_out[111] = 248;
+            data_in[112] = 112; data_out[112] = 233;
+            data_in[113] = 113; data_out[113] = 236;
+            data_in[114] = 114; data_out[114] = 238;
+            data_in[115] = 115; data_out[115] = 239;
+            data_in[116] = 116; data_out[116] = 241;
+            data_in[117] = 117; data_out[117] = 242;
+            data_in[118] = 118; data_out[118] = 243;
+            data_in[119] = 119; data_out[119] = 244;
+            data_in[120] = 120; data_out[120] = 245;
+            data_in[121] = 121; data_out[121] = 246;
+            data_in[122] = 122; data_out[122] = 246;
+            data_in[123] = 123; data_out[123] = 247;
+            data_in[124] = 124; data_out[124] = 248;
+            data_in[125] = 125; data_out[125] = 248;
+            data_in[126] = 126; data_out[126] = 249;
+            data_in[127] = 127; data_out[127] = 249;
+            data_in[128] = 128; data_out[128] = 138;
+            data_in[129] = 129; data_out[129] = 142;
+            data_in[130] = 130; data_out[130] = 146;
+            data_in[131] = 131; data_out[131] = 150;
+            data_in[132] = 132; data_out[132] = 154;
+            data_in[133] = 133; data_out[133] = 157;
+            data_in[134] = 134; data_out[134] = 160;
+            data_in[135] = 135; data_out[135] = 163;
+            data_in[136] = 136; data_out[136] = 166;
+            data_in[137] = 137; data_out[137] = 169;
+            data_in[138] = 138; data_out[138] = 172;
+            data_in[139] = 139; data_out[139] = 174;
+            data_in[140] = 140; data_out[140] = 177;
+            data_in[141] = 141; data_out[141] = 180;
+            data_in[142] = 142; data_out[142] = 182;
+            data_in[143] = 143; data_out[143] = 184;
+            data_in[144] = 144; data_out[144] = 188;
+            data_in[145] = 145; data_out[145] = 193;
+            data_in[146] = 146; data_out[146] = 197;
+            data_in[147] = 147; data_out[147] = 201;
+            data_in[148] = 148; data_out[148] = 205;
+            data_in[149] = 149; data_out[149] = 208;
+            data_in[150] = 150; data_out[150] = 211;
+            data_in[151] = 151; data_out[151] = 214;
+            data_in[152] = 152; data_out[152] = 217;
+            data_in[153] = 153; data_out[153] = 219;
+            data_in[154] = 154; data_out[154] = 222;
+            data_in[155] = 155; data_out[155] = 224;
+            data_in[156] = 156; data_out[156] = 226;
+            data_in[157] = 157; data_out[157] = 228;
+            data_in[158] = 158; data_out[158] = 230;
+            data_in[159] = 159; data_out[159] = 231;
+            data_in[160] = 160; data_out[160] = 219;
+            data_in[161] = 161; data_out[161] = 223;
+            data_in[162] = 162; data_out[162] = 227;
+            data_in[163] = 163; data_out[163] = 230;
+            data_in[164] = 164; data_out[164] = 232;
+            data_in[165] = 165; data_out[165] = 234;
+            data_in[166] = 166; data_out[166] = 236;
+            data_in[167] = 167; data_out[167] = 238;
+            data_in[168] = 168; data_out[168] = 239;
+            data_in[169] = 169; data_out[169] = 241;
+            data_in[170] = 170; data_out[170] = 242;
+            data_in[171] = 171; data_out[171] = 243;
+            data_in[172] = 172; data_out[172] = 244;
+            data_in[173] = 173; data_out[173] = 245;
+            data_in[174] = 174; data_out[174] = 245;
+            data_in[175] = 175; data_out[175] = 246;
+            data_in[176] = 176; data_out[176] = 233;
+            data_in[177] = 177; data_out[177] = 236;
+            data_in[178] = 178; data_out[178] = 238;
+            data_in[179] = 179; data_out[179] = 239;
+            data_in[180] = 180; data_out[180] = 241;
+            data_in[181] = 181; data_out[181] = 242;
+            data_in[182] = 182; data_out[182] = 243;
+            data_in[183] = 183; data_out[183] = 244;
+            data_in[184] = 184; data_out[184] = 245;
+            data_in[185] = 185; data_out[185] = 246;
+            data_in[186] = 186; data_out[186] = 246;
+            data_in[187] = 187; data_out[187] = 247;
+            data_in[188] = 188; data_out[188] = 248;
+            data_in[189] = 189; data_out[189] = 248;
+            data_in[190] = 190; data_out[190] = 248;
+            data_in[191] = 191; data_out[191] = 249;
+            data_in[192] = 192; data_out[192] = 244;
+            data_in[193] = 193; data_out[193] = 246;
+            data_in[194] = 194; data_out[194] = 247;
+            data_in[195] = 195; data_out[195] = 248;
+            data_in[196] = 196; data_out[196] = 248;
+            data_in[197] = 197; data_out[197] = 249;
+            data_in[198] = 198; data_out[198] = 249;
+            data_in[199] = 199; data_out[199] = 250;
+            data_in[200] = 200; data_out[200] = 250;
+            data_in[201] = 201; data_out[201] = 250;
+            data_in[202] = 202; data_out[202] = 251;
+            data_in[203] = 203; data_out[203] = 251;
+            data_in[204] = 204; data_out[204] = 251;
+            data_in[205] = 205; data_out[205] = 251;
+            data_in[206] = 206; data_out[206] = 251;
+            data_in[207] = 207; data_out[207] = 251;
+            data_in[208] = 208; data_out[208] = 247;
+            data_in[209] = 209; data_out[209] = 248;
+            data_in[210] = 210; data_out[210] = 248;
+            data_in[211] = 211; data_out[211] = 249;
+            data_in[212] = 212; data_out[212] = 249;
+            data_in[213] = 213; data_out[213] = 250;
+            data_in[214] = 214; data_out[214] = 250;
+            data_in[215] = 215; data_out[215] = 250;
+            data_in[216] = 216; data_out[216] = 250;
+            data_in[217] = 217; data_out[217] = 251;
+            data_in[218] = 218; data_out[218] = 251;
+            data_in[219] = 219; data_out[219] = 251;
+            data_in[220] = 220; data_out[220] = 251;
+            data_in[221] = 221; data_out[221] = 251;
+            data_in[222] = 222; data_out[222] = 251;
+            data_in[223] = 223; data_out[223] = 251;
+            data_in[224] = 224; data_out[224] = 249;
+            data_in[225] = 225; data_out[225] = 249;
+            data_in[226] = 226; data_out[226] = 250;
+            data_in[227] = 227; data_out[227] = 250;
+            data_in[228] = 228; data_out[228] = 250;
+            data_in[229] = 229; data_out[229] = 251;
+            data_in[230] = 230; data_out[230] = 251;
+            data_in[231] = 231; data_out[231] = 251;
+            data_in[232] = 232; data_out[232] = 251;
+            data_in[233] = 233; data_out[233] = 251;
+            data_in[234] = 234; data_out[234] = 251;
+            data_in[235] = 235; data_out[235] = 252;
+            data_in[236] = 236; data_out[236] = 252;
+            data_in[237] = 237; data_out[237] = 252;
+            data_in[238] = 238; data_out[238] = 252;
+            data_in[239] = 239; data_out[239] = 252;
+            data_in[240] = 240; data_out[240] = 249;
+            data_in[241] = 241; data_out[241] = 250;
+            data_in[242] = 242; data_out[242] = 250;
+            data_in[243] = 243; data_out[243] = 251;
+            data_in[244] = 244; data_out[244] = 251;
+            data_in[245] = 245; data_out[245] = 251;
+            data_in[246] = 246; data_out[246] = 251;
+            data_in[247] = 247; data_out[247] = 251;
+            data_in[248] = 248; data_out[248] = 252;
+            data_in[249] = 249; data_out[249] = 252;
+            data_in[250] = 250; data_out[250] = 252;
+            data_in[251] = 251; data_out[251] = 252;
+            data_in[252] = 252; data_out[252] = 252;
+            data_in[253] = 253; data_out[253] = 252;
+            data_in[254] = 254; data_out[254] = 252;
+            data_in[255] = 255; data_out[255] = 252;
+
+
+
+
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = data_in[i] * 3;
+                curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+            }
+            g.DrawLines(bluePen, curvePoints);   //畫直線
+
+
+            for (i = 0; i < 256; i++)
+            {
+                data_in[i] = 0;
+                data_out[i] = 0;
+                curvePoints[i].X = 0;
+                curvePoints[i].Y = 0;
+            }
+
+
+
+
+
+            data_in[0] = 0; data_out[0] = 93;
+            data_in[1] = 1; data_out[1] = 97;
+            data_in[2] = 2; data_out[2] = 100;
+            data_in[3] = 3; data_out[3] = 104;
+            data_in[4] = 4; data_out[4] = 107;
+            data_in[5] = 5; data_out[5] = 109;
+            data_in[6] = 6; data_out[6] = 113;
+            data_in[7] = 7; data_out[7] = 116;
+            data_in[8] = 8; data_out[8] = 118;
+            data_in[9] = 9; data_out[9] = 121;
+            data_in[10] = 10; data_out[10] = 124;
+            data_in[11] = 11; data_out[11] = 126;
+            data_in[12] = 12; data_out[12] = 129;
+            data_in[13] = 13; data_out[13] = 131;
+            data_in[14] = 14; data_out[14] = 133;
+            data_in[15] = 15; data_out[15] = 136;
+            data_in[16] = 16; data_out[16] = 139;
+            data_in[17] = 17; data_out[17] = 143;
+            data_in[18] = 18; data_out[18] = 147;
+            data_in[19] = 19; data_out[19] = 151;
+            data_in[20] = 20; data_out[20] = 154;
+            data_in[21] = 21; data_out[21] = 158;
+            data_in[22] = 22; data_out[22] = 161;
+            data_in[23] = 23; data_out[23] = 164;
+            data_in[24] = 24; data_out[24] = 167;
+            data_in[25] = 25; data_out[25] = 170;
+            data_in[26] = 26; data_out[26] = 173;
+            data_in[27] = 27; data_out[27] = 176;
+            data_in[28] = 28; data_out[28] = 178;
+            data_in[29] = 29; data_out[29] = 181;
+            data_in[30] = 30; data_out[30] = 183;
+            data_in[31] = 31; data_out[31] = 186;
+            data_in[32] = 32; data_out[32] = 189;
+            data_in[33] = 33; data_out[33] = 192;
+            data_in[34] = 34; data_out[34] = 196;
+            data_in[35] = 35; data_out[35] = 199;
+            data_in[36] = 36; data_out[36] = 202;
+            data_in[37] = 37; data_out[37] = 205;
+            data_in[38] = 38; data_out[38] = 207;
+            data_in[39] = 39; data_out[39] = 210;
+            data_in[40] = 40; data_out[40] = 212;
+            data_in[41] = 41; data_out[41] = 215;
+            data_in[42] = 42; data_out[42] = 217;
+            data_in[43] = 43; data_out[43] = 217;
+            data_in[44] = 44; data_out[44] = 220;
+            data_in[45] = 45; data_out[45] = 222;
+            data_in[46] = 46; data_out[46] = 224;
+            data_in[47] = 47; data_out[47] = 226;
+            data_in[48] = 48; data_out[48] = 228;
+            data_in[49] = 49; data_out[49] = 230;
+            data_in[50] = 50; data_out[50] = 231;
+            data_in[51] = 51; data_out[51] = 232;
+            data_in[52] = 52; data_out[52] = 234;
+            data_in[53] = 53; data_out[53] = 236;
+            data_in[54] = 54; data_out[54] = 238;
+            data_in[55] = 55; data_out[55] = 239;
+            data_in[56] = 56; data_out[56] = 240;
+            data_in[57] = 57; data_out[57] = 241;
+            data_in[58] = 58; data_out[58] = 242;
+            data_in[59] = 59; data_out[59] = 243;
+            data_in[60] = 60; data_out[60] = 244;
+            data_in[61] = 61; data_out[61] = 245;
+            data_in[62] = 62; data_out[62] = 246;
+            data_in[63] = 63; data_out[63] = 247;
+            data_in[64] = 64; data_out[64] = 248;
+            data_in[65] = 65; data_out[65] = 248;
+            data_in[66] = 66; data_out[66] = 250;
+            data_in[67] = 67; data_out[67] = 251;
+            data_in[68] = 68; data_out[68] = 252;
+            data_in[69] = 69; data_out[69] = 252;
+
+            for (i = 0; i < 70; i++)
+            {
+                curvePoints[i].X = data_in[i] * 10;
+                curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+            }
+
+
+            for (i = 70; i < 256; i++)
+            {
+                curvePoints[i].X = i * 10;
+                curvePoints[i].Y = 256 * 2 - 1;
+            }
+
+
+            g.DrawLines(new Pen(Color.DarkRed, 4), curvePoints);   //畫直線
+
+
+
+            data_in[0] = 0; data_out[0] = 59;
+            data_in[1] = 1; data_out[1] = 62;
+            data_in[2] = 2; data_out[2] = 64;
+            data_in[3] = 3; data_out[3] = 67;
+            data_in[4] = 4; data_out[4] = 69;
+            data_in[5] = 5; data_out[5] = 71;
+            data_in[6] = 6; data_out[6] = 73;
+            data_in[7] = 7; data_out[7] = 75;
+            data_in[8] = 8; data_out[8] = 78;
+            data_in[9] = 9; data_out[9] = 79;
+            data_in[10] = 10; data_out[10] = 81;
+            data_in[11] = 11; data_out[11] = 83;
+            data_in[12] = 12; data_out[12] = 85;
+            data_in[13] = 13; data_out[13] = 87;
+            data_in[14] = 14; data_out[14] = 88;
+            data_in[15] = 15; data_out[15] = 90;
+            data_in[16] = 16; data_out[16] = 93;
+            data_in[17] = 17; data_out[17] = 96;
+            data_in[18] = 18; data_out[18] = 99;
+            data_in[19] = 19; data_out[19] = 103;
+            data_in[20] = 20; data_out[20] = 105;
+            data_in[21] = 21; data_out[21] = 108;
+            data_in[22] = 22; data_out[22] = 111;
+            data_in[23] = 23; data_out[23] = 114;
+            data_in[24] = 24; data_out[24] = 116;
+            data_in[25] = 25; data_out[25] = 118;
+            data_in[26] = 26; data_out[26] = 121;
+            data_in[27] = 27; data_out[27] = 123;
+            data_in[28] = 28; data_out[28] = 126;
+            data_in[29] = 29; data_out[29] = 128;
+            data_in[30] = 30; data_out[30] = 130;
+            data_in[31] = 31; data_out[31] = 132;
+            data_in[32] = 32; data_out[32] = 135;
+            data_in[33] = 33; data_out[33] = 138;
+            data_in[34] = 34; data_out[34] = 141;
+            data_in[35] = 35; data_out[35] = 143;
+            data_in[36] = 36; data_out[36] = 146;
+            data_in[37] = 37; data_out[37] = 149;
+            data_in[38] = 38; data_out[38] = 151;
+            data_in[39] = 39; data_out[39] = 153;
+            data_in[40] = 40; data_out[40] = 156;
+            data_in[41] = 41; data_out[41] = 158;
+            data_in[42] = 42; data_out[42] = 160;
+            data_in[43] = 43; data_out[43] = 161;
+            data_in[44] = 44; data_out[44] = 163;
+            data_in[45] = 45; data_out[45] = 166;
+            data_in[46] = 46; data_out[46] = 168;
+            data_in[47] = 47; data_out[47] = 171;
+            data_in[48] = 48; data_out[48] = 173;
+            data_in[49] = 49; data_out[49] = 175;
+            data_in[50] = 50; data_out[50] = 177;
+            data_in[51] = 51; data_out[51] = 178;
+            data_in[52] = 52; data_out[52] = 181;
+            data_in[53] = 53; data_out[53] = 184;
+            data_in[54] = 54; data_out[54] = 186;
+            data_in[55] = 55; data_out[55] = 189;
+            data_in[56] = 56; data_out[56] = 191;
+            data_in[57] = 57; data_out[57] = 194;
+            data_in[58] = 58; data_out[58] = 196;
+            data_in[59] = 59; data_out[59] = 198;
+            data_in[60] = 60; data_out[60] = 200;
+            data_in[61] = 61; data_out[61] = 204;
+            data_in[62] = 62; data_out[62] = 206;
+            data_in[63] = 63; data_out[63] = 210;
+            data_in[64] = 64; data_out[64] = 212;
+            data_in[65] = 65; data_out[65] = 217;
+            data_in[66] = 66; data_out[66] = 223;
+            data_in[67] = 67; data_out[67] = 228;
+            data_in[68] = 68; data_out[68] = 236;
+            data_in[69] = 69; data_out[69] = 237;
+
+
+            for (i = 0; i < 70; i++)
+            {
+                curvePoints[i].X = data_in[i] * 10;
+                curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+            }
+
+
+            for (i = 70; i < 256; i++)
+            {
+                curvePoints[i].X = i * 10;
+                curvePoints[i].Y = 256 * 2 - 1;
+            }
+
+
+            g.DrawLines(new Pen(Color.Purple, 4), curvePoints);   //畫直線
+
+
+
+            Pen redPen = new Pen(Color.Red, 2);
+
+            /*
+   0    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1
+  32    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 1 1 1 1 1 1 1 1 1 1
+             */
+
+
+            for (i = 0; i < 256; i++)
+            {
+                data_in[i] = i; data_out[i] = 0;
+            }
+
+            for (i = 0; i < 32; i++)
+            {
+                data_out[i] = 200;
+            }
+
+            data_out[30] = 0;
+
+            data_out[48] = 200;
+            data_out[50] = 200;
+            data_out[52] = 200;
+            for (i = 54; i < 64; i++)
+            {
+                data_out[i] = 200;
+            }
+
+            for (i = 112; i < 128; i++)
+            {
+                data_out[i] = 200;
+            }
+
+
+
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = data_in[i] * 3;
+                curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+            }
+            g.DrawLines(redPen, curvePoints);   //畫直線
+
+            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button28_Click(object sender, EventArgs e)

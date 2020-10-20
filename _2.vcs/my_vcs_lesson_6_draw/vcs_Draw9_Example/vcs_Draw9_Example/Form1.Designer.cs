@@ -450,6 +450,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(100, 40);
             this.button27.TabIndex = 54;
+            this.button27.Text = "OV亮度";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
