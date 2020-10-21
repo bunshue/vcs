@@ -1018,14 +1018,14 @@ namespace vcs_Draw1
             PointF ulCorner1 = new PointF(x_st + 0, dy + y_st + 0);
             PointF urCorner1 = new PointF(x_st + W / 2, dy + y_st + 0);
             PointF llCorner1 = new PointF(x_st + 30, dy + y_st + H / 2);
-            PointF[] destPara1 = { ulCorner1, urCorner1, llCorner1 };
+            PointF[] destRect = { ulCorner1, urCorner1, llCorner1 };
             // Draw original image to screen.
             
             //一般貼上
-            g.DrawImage(img, destPara1, srcRect, units);
+            g.DrawImage(img, destRect, srcRect, units);
 
             //Gamma6.0 貼上
-            //g.DrawImage(img, destPara1, srcRect, units, imageAttr);
+            //g.DrawImage(img, destRect, srcRect, units, imageAttr);
 
             // 準備Gamma區域
             x_st = x_st + W;
@@ -1034,10 +1034,10 @@ namespace vcs_Draw1
             PointF ulCorner2 = new PointF(x_st, dy + y_st + 0);
             PointF urCorner2 = new PointF(x_st + W, dy + y_st + 0);
             PointF llCorner2 = new PointF(x_st, dy + y_st + H);
-            PointF[] destPara2 = { ulCorner2, urCorner2, llCorner2 };
+            PointF[] destRect2 = { ulCorner2, urCorner2, llCorner2 };
 
             // Draw adjusted image to screen.
-            g.DrawImage(img, destPara2, srcRect, units, imageAttr);
+            g.DrawImage(img, destRect2, srcRect, units, imageAttr);
 
             pictureBox1.Image = bitmap1;
 
