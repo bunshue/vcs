@@ -959,7 +959,6 @@ namespace vcs_Draw1
             bitmap1 = new Bitmap(pic_width / 2, pic_height / 2);
             pictureBox1.Image = bitmap1;
             //pictureBox1.BackColor = Color.Black;
-
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -968,78 +967,6 @@ namespace vcs_Draw1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            SolidBrush sb;
-            Font f;
-            sb = new SolidBrush(Color.Purple);
-            f = new Font("Times New Roman", 20);
-
-            // Create image.
-            Image img = Image.FromFile("C:\\______test_files\\picture1.jpg");
-            int W = img.Width;
-            int H = img.Height;
-            int x_st = 0;
-            int y_st = 0;
-            int dy = 100;
-            int sx = 130;
-            int sy = 110;
-            int sw = W / 3;
-            int sh = H / 3;
-
-            // Create image attributes and set large gamma.
-            ImageAttributes imageAttr = new ImageAttributes();
-            imageAttr.SetGamma(6.0F);
-
-            //調整picturebox1的大小
-            //新建圖檔, 初始化畫布
-            pictureBox1.Size = new Size(W * 3, H + dy);
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "已新建圖檔\n";
-            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            // 顯示原圖
-            g.DrawString("原圖", f, sb, new PointF(x_st, y_st));
-            g.DrawImage(img, x_st, y_st + dy, W, H);
-            //標示下一步要擷取的區域
-            g.DrawRectangle(new Pen(Color.Red, 2), new Rectangle(x_st + sx, y_st + dy + sy, sw, sh));
-
-            // 原圖擷取區域
-            x_st = x_st + W;
-            g.DrawString("原圖擷取區域Zoom", f, sb, new PointF(x_st, y_st));
-            // Create rectangle for source image.
-            //RectangleF srcRect = new RectangleF(0, 0, W, H); //擷取全圖
-            RectangleF srcRect = new RectangleF(sx, sy, sw, sh);   //擷取部分區域
-            GraphicsUnit units = GraphicsUnit.Pixel;
-
-            // 準備放大縮小貼上的位置
-            // Create parallelogram for drawing original image.
-            PointF ulCorner1 = new PointF(x_st + 0, dy + y_st + 0);
-            PointF urCorner1 = new PointF(x_st + W / 2, dy + y_st + 0);
-            PointF llCorner1 = new PointF(x_st + 30, dy + y_st + H / 2);
-            PointF[] destRect = { ulCorner1, urCorner1, llCorner1 };
-            // Draw original image to screen.
-            
-            //一般貼上
-            g.DrawImage(img, destRect, srcRect, units);
-
-            //Gamma6.0 貼上
-            //g.DrawImage(img, destRect, srcRect, units, imageAttr);
-
-            // 準備Gamma區域
-            x_st = x_st + W;
-            g.DrawString("Gamma 6.0", f, sb, new PointF(x_st, y_st));
-            // Create parallelogram for drawing adjusted image.
-            PointF ulCorner2 = new PointF(x_st, dy + y_st + 0);
-            PointF urCorner2 = new PointF(x_st + W, dy + y_st + 0);
-            PointF llCorner2 = new PointF(x_st, dy + y_st + H);
-            PointF[] destRect2 = { ulCorner2, urCorner2, llCorner2 };
-
-            // Draw adjusted image to screen.
-            g.DrawImage(img, destRect2, srcRect, units, imageAttr);
-
-            pictureBox1.Image = bitmap1;
 
         }
 
@@ -1052,8 +979,6 @@ namespace vcs_Draw1
             int h = 170;
 
             DrawTest(g, w, h);
-
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1069,9 +994,6 @@ namespace vcs_Draw1
             int h = pictureBox1.ClientSize.Height;
 
             DrawTest(g, w, h);
-
-
-
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1084,7 +1006,6 @@ namespace vcs_Draw1
             int h = panel1.ClientSize.Height;
 
             DrawTest(g, w, h);
-
         }
 
         private void DrawTest(Graphics g, int w, int h)
@@ -1121,7 +1042,6 @@ namespace vcs_Draw1
             //Brush b = new SolidBrush(Color.Blue);
             Brush b = new SolidBrush(Color.FromArgb(30, 0, 123, 0));
             g.FillRectangle(b, w / 4, 50, w / 2, 50);
-
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1191,7 +1111,6 @@ namespace vcs_Draw1
                 x_old = e.X;
                 y_old = e.Y;
             }
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1207,7 +1126,6 @@ namespace vcs_Draw1
 
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1232,8 +1150,6 @@ namespace vcs_Draw1
             g = this.CreateGraphics();
             g.DrawImage(bmp, 0, 0);
             */
-
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
