@@ -90,9 +90,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(756, 479);
+            this.richTextBox1.Location = new System.Drawing.Point(706, 479);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(460, 140);
+            this.richTextBox1.Size = new System.Drawing.Size(548, 140);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
@@ -479,9 +479,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(755, 428);
+            this.bt_clear.Location = new System.Drawing.Point(1153, 579);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(100, 40);
+            this.bt_clear.Size = new System.Drawing.Size(63, 40);
             this.bt_clear.TabIndex = 55;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;

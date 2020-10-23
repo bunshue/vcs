@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Globalization;//for CultureInfo
+using System.Threading;
 
 namespace vcs_test_all_03_Syntax
 {
@@ -105,6 +106,8 @@ namespace vcs_test_all_03_Syntax
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //用法:  string.Format( “{編號0} {編號1}…{編號N}”, 變數0, 變數1, … 變數N );
+
             richTextBox1.Text += "\n類似sprintf的寫法\n";
             int number = 123;
             string name = "david";
@@ -155,6 +158,13 @@ namespace vcs_test_all_03_Syntax
             ci = new CultureInfo("ja-JP");
             str = string.Format(msg2, ci.DisplayName, ci.Name);
             richTextBox1.Text += "str = " + str + "\n";
+
+            for (int i = 0; i < 10; i++)
+            {
+                string message = string.Format("{0} {1: yyyy/MM/dd HH:mm:ss.fff }", "現在時間 : ", DateTime.Now);
+                richTextBox1.Text += message + "\n";
+                Thread.Sleep(1234); //delay 1.234 秒
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -40,7 +40,7 @@ namespace vcs_test_all_06_System
             x_st = 10;
             y_st = 10;
             dx = 210;
-            dy = 45;
+            dy = 42;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -103,9 +103,22 @@ namespace vcs_test_all_06_System
 
             comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 11);
 
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 50);
+            label4.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 75);
+            label1.Text = "";
+            label2.Text = "";
+            label3.Text = "";
+            label4.Text = "";
+
+            bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13);
+
+            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 13);
+
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
         }
 
@@ -510,8 +523,6 @@ namespace vcs_test_all_06_System
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //離開
-            Application.Exit();
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -526,7 +537,6 @@ namespace vcs_test_all_06_System
             string systemName2 = System.Globalization.CultureInfo.CurrentCulture.NativeName;
             richTextBox1.Text += systemName + "\n";
             richTextBox1.Text += systemName2 + "\n";
-
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -538,12 +548,10 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
             richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
             richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -559,15 +567,12 @@ namespace vcs_test_all_06_System
 
             guid = Guid.NewGuid();
             richTextBox1.Text += "GUID3 : " + guid + "\n";
-
-
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "取得軟體版本\t";
             richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
-
         }
 
         private void button23_Click_1(object sender, EventArgs e)
@@ -577,7 +582,6 @@ namespace vcs_test_all_06_System
 
             richTextBox1.Text += "取得NOTEPAD版本資訊\n";
             richTextBox1.Text += FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
-
         }
 
         private void button24_Click_1(object sender, EventArgs e)
@@ -710,13 +714,11 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "主板編號\t\t" + mbo.GetPropertyValue("SerialNumber").ToString() + "\n";  //取得主板編號
             richTextBox1.Text += "主板製造商\t\t" + mbo.GetPropertyValue("Manufacturer").ToString() + "\n";  //取得主板製造商
             richTextBox1.Text += "主板型號\t\t" + mbo.GetPropertyValue("Name").ToString() + "\n";          //取得主板型號
-
         }
 
         private void button38_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
-
         }
 
         [DllImport("User32")]
@@ -777,7 +779,31 @@ namespace vcs_test_all_06_System
 
                 richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
             }
+        }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            //離開
+            Application.Exit();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            Computer myComputer = new Computer();
+            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory);
+            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
+            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
+            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
+        }
+
+        private void bt_memory_Click(object sender, EventArgs e)
+        {
+            timer2.Enabled = true;
         }
 
 

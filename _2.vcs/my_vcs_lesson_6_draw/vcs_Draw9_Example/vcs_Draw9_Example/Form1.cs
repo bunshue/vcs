@@ -113,9 +113,8 @@ namespace vcs_Draw9_Example
             button43.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button44.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 10);
 
             cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 9);
             cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 9);
@@ -125,6 +124,7 @@ namespace vcs_Draw9_Example
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
 
             //pictureBox1.Location = new Point(10, 10);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -4642,6 +4642,839 @@ namespace vcs_Draw9_Example
                 curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
             }
             g.DrawLines(redPen, curvePoints);   //畫直線
+
+
+            int[] expo_data_in = new int[256];
+            int[] expo_data_out = new int[256];
+            int[] gain_data_in = new int[256];
+            int[] gain_data_out = new int[256];
+
+
+
+
+            expo_data_in[0] = 0; expo_data_out[0] = 3;
+
+            expo_data_in[1] = 1; expo_data_out[1] = 3;
+
+            expo_data_in[2] = 2; expo_data_out[2] = 4;
+
+            expo_data_in[3] = 3; expo_data_out[3] = 5;
+
+            expo_data_in[4] = 4; expo_data_out[4] = 6;
+
+            expo_data_in[5] = 5; expo_data_out[5] = 7;
+
+            expo_data_in[6] = 6; expo_data_out[6] = 9;
+
+            expo_data_in[7] = 7; expo_data_out[7] = 10;
+
+            expo_data_in[8] = 8; expo_data_out[8] = 11;
+
+            expo_data_in[9] = 9; expo_data_out[9] = 12;
+
+            expo_data_in[10] = 10; expo_data_out[10] = 13;
+
+            expo_data_in[11] = 11; expo_data_out[11] = 14;
+
+            expo_data_in[12] = 12; expo_data_out[12] = 15;
+
+            expo_data_in[13] = 13; expo_data_out[13] = 16;
+
+            expo_data_in[14] = 14; expo_data_out[14] = 17;
+
+            expo_data_in[15] = 15; expo_data_out[15] = 19;
+
+            expo_data_in[16] = 16; expo_data_out[16] = 20;
+
+            expo_data_in[17] = 17; expo_data_out[17] = 20;
+
+            expo_data_in[18] = 18; expo_data_out[18] = 21;
+
+            expo_data_in[19] = 19; expo_data_out[19] = 22;
+
+            expo_data_in[20] = 20; expo_data_out[20] = 23;
+
+            expo_data_in[21] = 21; expo_data_out[21] = 24;
+
+            expo_data_in[22] = 22; expo_data_out[22] = 25;
+
+            expo_data_in[23] = 23; expo_data_out[23] = 26;
+
+            expo_data_in[24] = 24; expo_data_out[24] = 27;
+
+            expo_data_in[25] = 25; expo_data_out[25] = 28;
+
+            expo_data_in[26] = 26; expo_data_out[26] = 28;
+
+            expo_data_in[27] = 27; expo_data_out[27] = 29;
+
+            expo_data_in[28] = 28; expo_data_out[28] = 30;
+
+            expo_data_in[29] = 29; expo_data_out[29] = 31;
+
+            expo_data_in[30] = 30; expo_data_out[30] = 32;
+
+            expo_data_in[31] = 31; expo_data_out[31] = 32;
+
+            expo_data_in[32] = 32; expo_data_out[32] = 33;
+
+            expo_data_in[33] = 33; expo_data_out[33] = 34;
+
+            expo_data_in[34] = 34; expo_data_out[34] = 35;
+
+            expo_data_in[35] = 35; expo_data_out[35] = 35;
+
+            expo_data_in[36] = 36; expo_data_out[36] = 36;
+
+            expo_data_in[37] = 37; expo_data_out[37] = 37;
+
+            expo_data_in[38] = 38; expo_data_out[38] = 37;
+
+            expo_data_in[39] = 39; expo_data_out[39] = 38;
+
+            expo_data_in[40] = 40; expo_data_out[40] = 39;
+
+            expo_data_in[41] = 41; expo_data_out[41] = 39;
+
+            expo_data_in[42] = 42; expo_data_out[42] = 40;
+
+            expo_data_in[43] = 43; expo_data_out[43] = 41;
+
+            expo_data_in[44] = 44; expo_data_out[44] = 41;
+
+            expo_data_in[45] = 45; expo_data_out[45] = 42;
+
+            expo_data_in[46] = 46; expo_data_out[46] = 43;
+
+            expo_data_in[47] = 47; expo_data_out[47] = 43;
+
+            expo_data_in[48] = 48; expo_data_out[48] = 44;
+
+            expo_data_in[49] = 49; expo_data_out[49] = 45;
+
+            expo_data_in[50] = 50; expo_data_out[50] = 45;
+
+            expo_data_in[51] = 51; expo_data_out[51] = 46;
+
+            expo_data_in[52] = 52; expo_data_out[52] = 47;
+
+            expo_data_in[53] = 53; expo_data_out[53] = 47;
+
+            expo_data_in[54] = 54; expo_data_out[54] = 48;
+
+            expo_data_in[55] = 55; expo_data_out[55] = 48;
+
+            expo_data_in[56] = 56; expo_data_out[56] = 49;
+
+            expo_data_in[57] = 57; expo_data_out[57] = 50;
+
+            expo_data_in[58] = 58; expo_data_out[58] = 50;
+
+            expo_data_in[59] = 59; expo_data_out[59] = 51;
+
+            expo_data_in[60] = 60; expo_data_out[60] = 52;
+
+            expo_data_in[61] = 61; expo_data_out[61] = 52;
+
+            expo_data_in[62] = 62; expo_data_out[62] = 53;
+
+            expo_data_in[63] = 63; expo_data_out[63] = 53;
+
+            expo_data_in[64] = 64; expo_data_out[64] = 54;
+
+            expo_data_in[65] = 65; expo_data_out[65] = 55;
+
+            expo_data_in[66] = 66; expo_data_out[66] = 55;
+
+            expo_data_in[67] = 67; expo_data_out[67] = 56;
+
+            expo_data_in[68] = 68; expo_data_out[68] = 56;
+
+            expo_data_in[69] = 69; expo_data_out[69] = 57;
+
+            expo_data_in[70] = 70; expo_data_out[70] = 58;
+
+            expo_data_in[71] = 71; expo_data_out[71] = 58;
+
+            expo_data_in[72] = 72; expo_data_out[72] = 59;
+
+            expo_data_in[73] = 73; expo_data_out[73] = 59;
+
+            expo_data_in[74] = 74; expo_data_out[74] = 60;
+
+            expo_data_in[75] = 75; expo_data_out[75] = 61;
+
+            expo_data_in[76] = 76; expo_data_out[76] = 61;
+
+            expo_data_in[77] = 77; expo_data_out[77] = 62;
+
+            expo_data_in[78] = 78; expo_data_out[78] = 62;
+
+            expo_data_in[79] = 79; expo_data_out[79] = 63;
+
+            expo_data_in[80] = 80; expo_data_out[80] = 64;
+
+            expo_data_in[81] = 81; expo_data_out[81] = 64;
+
+            expo_data_in[82] = 82; expo_data_out[82] = 65;
+
+            expo_data_in[83] = 83; expo_data_out[83] = 65;
+
+            expo_data_in[84] = 84; expo_data_out[84] = 66;
+
+            expo_data_in[85] = 85; expo_data_out[85] = 66;
+
+            expo_data_in[86] = 86; expo_data_out[86] = 67;
+
+            expo_data_in[87] = 87; expo_data_out[87] = 68;
+
+            expo_data_in[88] = 88; expo_data_out[88] = 68;
+
+            expo_data_in[89] = 89; expo_data_out[89] = 69;
+
+            expo_data_in[90] = 90; expo_data_out[90] = 69;
+
+            expo_data_in[91] = 91; expo_data_out[91] = 70;
+
+            expo_data_in[92] = 92; expo_data_out[92] = 70;
+
+            expo_data_in[93] = 93; expo_data_out[93] = 71;
+
+            expo_data_in[94] = 94; expo_data_out[94] = 72;
+
+            expo_data_in[95] = 95; expo_data_out[95] = 72;
+
+            expo_data_in[96] = 96; expo_data_out[96] = 73;
+
+            expo_data_in[97] = 97; expo_data_out[97] = 73;
+
+            expo_data_in[98] = 98; expo_data_out[98] = 74;
+
+            expo_data_in[99] = 99; expo_data_out[99] = 74;
+
+            expo_data_in[100] = 100; expo_data_out[100] = 75;
+
+            expo_data_in[101] = 101; expo_data_out[101] = 75;
+
+            expo_data_in[102] = 102; expo_data_out[102] = 76;
+
+            expo_data_in[103] = 103; expo_data_out[103] = 76;
+
+            expo_data_in[104] = 104; expo_data_out[104] = 77;
+
+            expo_data_in[105] = 105; expo_data_out[105] = 77;
+
+            expo_data_in[106] = 106; expo_data_out[106] = 78;
+
+            expo_data_in[107] = 107; expo_data_out[107] = 78;
+
+            expo_data_in[108] = 108; expo_data_out[108] = 79;
+
+            expo_data_in[109] = 109; expo_data_out[109] = 80;
+
+            expo_data_in[110] = 110; expo_data_out[110] = 80;
+
+            expo_data_in[111] = 111; expo_data_out[111] = 81;
+
+            expo_data_in[112] = 112; expo_data_out[112] = 81;
+
+            expo_data_in[113] = 113; expo_data_out[113] = 82;
+
+            expo_data_in[114] = 114; expo_data_out[114] = 82;
+
+            expo_data_in[115] = 115; expo_data_out[115] = 83;
+
+            expo_data_in[116] = 116; expo_data_out[116] = 83;
+
+            expo_data_in[117] = 117; expo_data_out[117] = 84;
+
+            expo_data_in[118] = 118; expo_data_out[118] = 84;
+
+            expo_data_in[119] = 119; expo_data_out[119] = 85;
+
+            expo_data_in[120] = 120; expo_data_out[120] = 85;
+
+            expo_data_in[121] = 121; expo_data_out[121] = 86;
+
+            expo_data_in[122] = 122; expo_data_out[122] = 86;
+
+            expo_data_in[123] = 123; expo_data_out[123] = 86;
+
+            expo_data_in[124] = 124; expo_data_out[124] = 87;
+
+            expo_data_in[125] = 125; expo_data_out[125] = 87;
+
+            expo_data_in[126] = 126; expo_data_out[126] = 88;
+
+            expo_data_in[127] = 127; expo_data_out[127] = 88;
+
+            expo_data_in[128] = 128; expo_data_out[128] = 89;
+
+            expo_data_in[129] = 129; expo_data_out[129] = 89;
+
+            expo_data_in[130] = 130; expo_data_out[130] = 90;
+
+            expo_data_in[131] = 131; expo_data_out[131] = 90;
+
+            expo_data_in[132] = 132; expo_data_out[132] = 91;
+
+            expo_data_in[133] = 133; expo_data_out[133] = 91;
+
+            expo_data_in[134] = 134; expo_data_out[134] = 92;
+
+
+
+            gain_data_in[0] = 0; gain_data_out[0] = 91;
+
+            gain_data_in[1] = 1; gain_data_out[1] = 96;
+
+            gain_data_in[2] = 2; gain_data_out[2] = 99;
+
+            gain_data_in[3] = 3; gain_data_out[3] = 102;
+
+            gain_data_in[4] = 4; gain_data_out[4] = 106;
+
+            gain_data_in[5] = 5; gain_data_out[5] = 108;
+
+            gain_data_in[6] = 6; gain_data_out[6] = 111;
+
+            gain_data_in[7] = 7; gain_data_out[7] = 114;
+
+            gain_data_in[8] = 8; gain_data_out[8] = 117;
+
+            gain_data_in[9] = 9; gain_data_out[9] = 119;
+
+            gain_data_in[10] = 10; gain_data_out[10] = 122;
+
+            gain_data_in[11] = 11; gain_data_out[11] = 125;
+
+            gain_data_in[12] = 12; gain_data_out[12] = 127;
+
+            gain_data_in[13] = 13; gain_data_out[13] = 129;
+
+            gain_data_in[14] = 14; gain_data_out[14] = 132;
+
+            gain_data_in[15] = 15; gain_data_out[15] = 134;
+
+            gain_data_in[16] = 16; gain_data_out[16] = 138;
+
+            gain_data_in[17] = 17; gain_data_out[17] = 142;
+
+            gain_data_in[18] = 18; gain_data_out[18] = 146;
+
+            gain_data_in[19] = 19; gain_data_out[19] = 150;
+
+            gain_data_in[20] = 20; gain_data_out[20] = 153;
+
+            gain_data_in[21] = 21; gain_data_out[21] = 156;
+
+            gain_data_in[22] = 22; gain_data_out[22] = 160;
+
+            gain_data_in[23] = 23; gain_data_out[23] = 163;
+
+            gain_data_in[24] = 24; gain_data_out[24] = 166;
+
+            gain_data_in[25] = 25; gain_data_out[25] = 169;
+
+            gain_data_in[26] = 26; gain_data_out[26] = 171;
+
+            gain_data_in[27] = 27; gain_data_out[27] = 174;
+
+            gain_data_in[28] = 28; gain_data_out[28] = 177;
+
+            gain_data_in[29] = 29; gain_data_out[29] = 179;
+
+            gain_data_in[30] = 30; gain_data_out[30] = 182;
+
+            gain_data_in[31] = 31; gain_data_out[31] = 184;
+
+            gain_data_in[32] = 32; gain_data_out[32] = 167;
+
+            gain_data_in[33] = 33; gain_data_out[33] = 172;
+
+            gain_data_in[34] = 34; gain_data_out[34] = 176;
+
+            gain_data_in[35] = 35; gain_data_out[35] = 180;
+
+            gain_data_in[36] = 36; gain_data_out[36] = 184;
+
+            gain_data_in[37] = 37; gain_data_out[37] = 188;
+
+            gain_data_in[38] = 38; gain_data_out[38] = 191;
+
+            gain_data_in[39] = 39; gain_data_out[39] = 194;
+
+            gain_data_in[40] = 40; gain_data_out[40] = 197;
+
+            gain_data_in[41] = 41; gain_data_out[41] = 200;
+
+            gain_data_in[42] = 42; gain_data_out[42] = 203;
+
+            gain_data_in[43] = 43; gain_data_out[43] = 206;
+
+            gain_data_in[44] = 44; gain_data_out[44] = 209;
+
+            gain_data_in[45] = 45; gain_data_out[45] = 211;
+
+            gain_data_in[46] = 46; gain_data_out[46] = 214;
+
+            gain_data_in[47] = 47; gain_data_out[47] = 216;
+
+            gain_data_in[48] = 48; gain_data_out[48] = 188;
+
+            gain_data_in[49] = 49; gain_data_out[49] = 192;
+
+            gain_data_in[50] = 50; gain_data_out[50] = 196;
+
+            gain_data_in[51] = 51; gain_data_out[51] = 200;
+
+            gain_data_in[52] = 52; gain_data_out[52] = 204;
+
+            gain_data_in[53] = 53; gain_data_out[53] = 207;
+
+            gain_data_in[54] = 54; gain_data_out[54] = 210;
+
+            gain_data_in[55] = 55; gain_data_out[55] = 214;
+
+            gain_data_in[56] = 56; gain_data_out[56] = 216;
+
+            gain_data_in[57] = 57; gain_data_out[57] = 219;
+
+            gain_data_in[58] = 58; gain_data_out[58] = 221;
+
+            gain_data_in[59] = 59; gain_data_out[59] = 224;
+
+            gain_data_in[60] = 60; gain_data_out[60] = 226;
+
+            gain_data_in[61] = 61; gain_data_out[61] = 228;
+
+            gain_data_in[62] = 62; gain_data_out[62] = 230;
+
+            gain_data_in[63] = 63; gain_data_out[63] = 231;
+
+            gain_data_in[64] = 64; gain_data_out[64] = 208;
+
+            gain_data_in[65] = 65; gain_data_out[65] = 213;
+
+            gain_data_in[66] = 66; gain_data_out[66] = 217;
+
+            gain_data_in[67] = 67; gain_data_out[67] = 220;
+
+            gain_data_in[68] = 68; gain_data_out[68] = 224;
+
+            gain_data_in[69] = 69; gain_data_out[69] = 227;
+
+            gain_data_in[70] = 70; gain_data_out[70] = 229;
+
+            gain_data_in[71] = 71; gain_data_out[71] = 232;
+
+            gain_data_in[72] = 72; gain_data_out[72] = 234;
+
+            gain_data_in[73] = 73; gain_data_out[73] = 236;
+
+            gain_data_in[74] = 74; gain_data_out[74] = 237;
+
+            gain_data_in[75] = 75; gain_data_out[75] = 239;
+
+            gain_data_in[76] = 76; gain_data_out[76] = 240;
+
+            gain_data_in[77] = 77; gain_data_out[77] = 241;
+
+            gain_data_in[78] = 78; gain_data_out[78] = 242;
+
+            gain_data_in[79] = 79; gain_data_out[79] = 243;
+
+            gain_data_in[80] = 80; gain_data_out[80] = 219;
+
+            gain_data_in[81] = 81; gain_data_out[81] = 223;
+
+            gain_data_in[82] = 82; gain_data_out[82] = 227;
+
+            gain_data_in[83] = 83; gain_data_out[83] = 230;
+
+            gain_data_in[84] = 84; gain_data_out[84] = 233;
+
+            gain_data_in[85] = 85; gain_data_out[85] = 235;
+
+            gain_data_in[86] = 86; gain_data_out[86] = 237;
+
+            gain_data_in[87] = 87; gain_data_out[87] = 238;
+
+            gain_data_in[88] = 88; gain_data_out[88] = 240;
+
+            gain_data_in[89] = 89; gain_data_out[89] = 241;
+
+            gain_data_in[90] = 90; gain_data_out[90] = 242;
+
+            gain_data_in[91] = 91; gain_data_out[91] = 243;
+
+            gain_data_in[92] = 92; gain_data_out[92] = 244;
+
+            gain_data_in[93] = 93; gain_data_out[93] = 245;
+
+            gain_data_in[94] = 94; gain_data_out[94] = 245;
+
+            gain_data_in[95] = 95; gain_data_out[95] = 246;
+
+            gain_data_in[96] = 96; gain_data_out[96] = 229;
+
+            gain_data_in[97] = 97; gain_data_out[97] = 233;
+
+            gain_data_in[98] = 98; gain_data_out[98] = 235;
+
+            gain_data_in[99] = 99; gain_data_out[99] = 238;
+
+            gain_data_in[100] = 100; gain_data_out[100] = 239;
+
+            gain_data_in[101] = 101; gain_data_out[101] = 241;
+
+            gain_data_in[102] = 102; gain_data_out[102] = 242;
+
+            gain_data_in[103] = 103; gain_data_out[103] = 243;
+
+            gain_data_in[104] = 104; gain_data_out[104] = 244;
+
+            gain_data_in[105] = 105; gain_data_out[105] = 245;
+
+            gain_data_in[106] = 106; gain_data_out[106] = 246;
+
+            gain_data_in[107] = 107; gain_data_out[107] = 247;
+
+            gain_data_in[108] = 108; gain_data_out[108] = 247;
+
+            gain_data_in[109] = 109; gain_data_out[109] = 248;
+
+            gain_data_in[110] = 110; gain_data_out[110] = 248;
+
+            gain_data_in[111] = 111; gain_data_out[111] = 248;
+
+            gain_data_in[112] = 112; gain_data_out[112] = 233;
+
+            gain_data_in[113] = 113; gain_data_out[113] = 236;
+
+            gain_data_in[114] = 114; gain_data_out[114] = 238;
+
+            gain_data_in[115] = 115; gain_data_out[115] = 240;
+
+            gain_data_in[116] = 116; gain_data_out[116] = 241;
+
+            gain_data_in[117] = 117; gain_data_out[117] = 242;
+
+            gain_data_in[118] = 118; gain_data_out[118] = 243;
+
+            gain_data_in[119] = 119; gain_data_out[119] = 244;
+
+            gain_data_in[120] = 120; gain_data_out[120] = 245;
+
+            gain_data_in[121] = 121; gain_data_out[121] = 246;
+
+            gain_data_in[122] = 122; gain_data_out[122] = 246;
+
+            gain_data_in[123] = 123; gain_data_out[123] = 247;
+
+            gain_data_in[124] = 124; gain_data_out[124] = 247;
+
+            gain_data_in[125] = 125; gain_data_out[125] = 248;
+
+            gain_data_in[126] = 126; gain_data_out[126] = 248;
+
+            gain_data_in[127] = 127; gain_data_out[127] = 249;
+
+
+            expo_data_in[135] = 135; expo_data_out[135] = 249;
+
+            expo_data_in[136] = 136; expo_data_out[136] = 249;
+
+            expo_data_in[137] = 137; expo_data_out[137] = 249;
+
+            expo_data_in[138] = 138; expo_data_out[138] = 249;
+
+            expo_data_in[139] = 139; expo_data_out[139] = 249;
+
+            expo_data_in[140] = 140; expo_data_out[140] = 249;
+
+            expo_data_in[141] = 141; expo_data_out[141] = 249;
+
+            expo_data_in[142] = 142; expo_data_out[142] = 249;
+
+            expo_data_in[143] = 143; expo_data_out[143] = 249;
+
+            expo_data_in[144] = 144; expo_data_out[144] = 249;
+
+            expo_data_in[145] = 145; expo_data_out[145] = 249;
+
+            expo_data_in[146] = 146; expo_data_out[146] = 250;
+
+            expo_data_in[147] = 147; expo_data_out[147] = 250;
+
+            expo_data_in[148] = 148; expo_data_out[148] = 250;
+
+            expo_data_in[149] = 149; expo_data_out[149] = 250;
+
+            expo_data_in[150] = 150; expo_data_out[150] = 250;
+
+            expo_data_in[151] = 151; expo_data_out[151] = 250;
+
+            expo_data_in[152] = 152; expo_data_out[152] = 250;
+
+            expo_data_in[153] = 153; expo_data_out[153] = 250;
+
+            expo_data_in[154] = 154; expo_data_out[154] = 250;
+
+            expo_data_in[155] = 155; expo_data_out[155] = 250;
+
+            expo_data_in[156] = 156; expo_data_out[156] = 250;
+
+            expo_data_in[157] = 157; expo_data_out[157] = 250;
+
+            expo_data_in[158] = 158; expo_data_out[158] = 250;
+
+            expo_data_in[159] = 159; expo_data_out[159] = 250;
+
+            expo_data_in[160] = 160; expo_data_out[160] = 250;
+
+            expo_data_in[161] = 161; expo_data_out[161] = 250;
+
+            expo_data_in[162] = 162; expo_data_out[162] = 250;
+
+            expo_data_in[163] = 163; expo_data_out[163] = 250;
+
+            expo_data_in[164] = 164; expo_data_out[164] = 250;
+
+            expo_data_in[165] = 165; expo_data_out[165] = 250;
+
+            expo_data_in[166] = 166; expo_data_out[166] = 251;
+
+            expo_data_in[167] = 167; expo_data_out[167] = 251;
+
+            expo_data_in[168] = 168; expo_data_out[168] = 251;
+
+            expo_data_in[169] = 169; expo_data_out[169] = 251;
+
+            expo_data_in[170] = 170; expo_data_out[170] = 251;
+
+            expo_data_in[171] = 171; expo_data_out[171] = 251;
+
+            expo_data_in[172] = 172; expo_data_out[172] = 251;
+
+            expo_data_in[173] = 173; expo_data_out[173] = 251;
+
+            expo_data_in[174] = 174; expo_data_out[174] = 251;
+
+            expo_data_in[175] = 175; expo_data_out[175] = 251;
+
+            expo_data_in[176] = 176; expo_data_out[176] = 251;
+
+            expo_data_in[177] = 177; expo_data_out[177] = 251;
+
+            expo_data_in[178] = 178; expo_data_out[178] = 251;
+
+            expo_data_in[179] = 179; expo_data_out[179] = 251;
+
+            expo_data_in[180] = 180; expo_data_out[180] = 251;
+
+            expo_data_in[181] = 181; expo_data_out[181] = 251;
+
+            expo_data_in[182] = 182; expo_data_out[182] = 251;
+
+            expo_data_in[183] = 183; expo_data_out[183] = 251;
+
+            expo_data_in[184] = 184; expo_data_out[184] = 251;
+
+            expo_data_in[185] = 185; expo_data_out[185] = 251;
+
+            expo_data_in[186] = 186; expo_data_out[186] = 251;
+
+            expo_data_in[187] = 187; expo_data_out[187] = 251;
+
+            expo_data_in[188] = 188; expo_data_out[188] = 251;
+
+            expo_data_in[189] = 189; expo_data_out[189] = 251;
+
+            expo_data_in[190] = 190; expo_data_out[190] = 251;
+
+            expo_data_in[191] = 191; expo_data_out[191] = 251;
+
+            expo_data_in[192] = 192; expo_data_out[192] = 251;
+
+            expo_data_in[193] = 193; expo_data_out[193] = 251;
+
+            expo_data_in[194] = 194; expo_data_out[194] = 251;
+
+            expo_data_in[195] = 195; expo_data_out[195] = 251;
+
+            expo_data_in[196] = 196; expo_data_out[196] = 251;
+
+            expo_data_in[197] = 197; expo_data_out[197] = 251;
+
+            expo_data_in[198] = 198; expo_data_out[198] = 251;
+
+            expo_data_in[199] = 199; expo_data_out[199] = 251;
+
+            expo_data_in[200] = 200; expo_data_out[200] = 251;
+
+            expo_data_in[201] = 201; expo_data_out[201] = 251;
+
+            expo_data_in[202] = 202; expo_data_out[202] = 251;
+
+            expo_data_in[203] = 203; expo_data_out[203] = 252;
+
+            expo_data_in[204] = 204; expo_data_out[204] = 252;
+
+            expo_data_in[205] = 205; expo_data_out[205] = 252;
+
+            expo_data_in[206] = 206; expo_data_out[206] = 252;
+
+            expo_data_in[207] = 207; expo_data_out[207] = 252;
+
+            expo_data_in[208] = 208; expo_data_out[208] = 252;
+
+            expo_data_in[209] = 209; expo_data_out[209] = 252;
+
+            expo_data_in[210] = 210; expo_data_out[210] = 252;
+
+            expo_data_in[211] = 211; expo_data_out[211] = 252;
+
+            expo_data_in[212] = 212; expo_data_out[212] = 252;
+
+            expo_data_in[213] = 213; expo_data_out[213] = 252;
+
+            expo_data_in[214] = 214; expo_data_out[214] = 252;
+
+            expo_data_in[215] = 215; expo_data_out[215] = 252;
+
+            expo_data_in[216] = 216; expo_data_out[216] = 252;
+
+            expo_data_in[217] = 217; expo_data_out[217] = 252;
+
+            expo_data_in[218] = 218; expo_data_out[218] = 252;
+
+            expo_data_in[219] = 219; expo_data_out[219] = 252;
+
+            expo_data_in[220] = 220; expo_data_out[220] = 252;
+
+            expo_data_in[221] = 221; expo_data_out[221] = 252;
+
+            expo_data_in[222] = 222; expo_data_out[222] = 252;
+
+            expo_data_in[223] = 223; expo_data_out[223] = 252;
+
+            expo_data_in[224] = 224; expo_data_out[224] = 252;
+
+            expo_data_in[225] = 225; expo_data_out[225] = 252;
+
+            expo_data_in[226] = 226; expo_data_out[226] = 252;
+
+            expo_data_in[227] = 227; expo_data_out[227] = 252;
+
+            expo_data_in[228] = 228; expo_data_out[228] = 252;
+
+            expo_data_in[229] = 229; expo_data_out[229] = 252;
+
+            expo_data_in[230] = 230; expo_data_out[230] = 252;
+
+            expo_data_in[231] = 231; expo_data_out[231] = 252;
+
+            expo_data_in[232] = 232; expo_data_out[232] = 252;
+
+            expo_data_in[233] = 233; expo_data_out[233] = 252;
+
+            expo_data_in[234] = 234; expo_data_out[234] = 252;
+
+            expo_data_in[235] = 235; expo_data_out[235] = 252;
+
+            expo_data_in[236] = 236; expo_data_out[236] = 252;
+
+            expo_data_in[237] = 237; expo_data_out[237] = 252;
+
+            expo_data_in[238] = 238; expo_data_out[238] = 252;
+
+            expo_data_in[239] = 239; expo_data_out[239] = 252;
+
+            expo_data_in[240] = 240; expo_data_out[240] = 252;
+
+            expo_data_in[241] = 241; expo_data_out[241] = 252;
+
+            expo_data_in[242] = 242; expo_data_out[242] = 252;
+
+            expo_data_in[243] = 243; expo_data_out[243] = 252;
+
+            expo_data_in[244] = 244; expo_data_out[244] = 252;
+
+            expo_data_in[245] = 245; expo_data_out[245] = 252;
+
+            expo_data_in[246] = 246; expo_data_out[246] = 252;
+
+            expo_data_in[247] = 247; expo_data_out[247] = 252;
+
+            expo_data_in[248] = 248; expo_data_out[248] = 252;
+
+            expo_data_in[249] = 249; expo_data_out[249] = 252;
+
+            expo_data_in[250] = 250; expo_data_out[250] = 252;
+
+            expo_data_in[251] = 251; expo_data_out[251] = 252;
+
+            expo_data_in[252] = 252; expo_data_out[252] = 252;
+
+            expo_data_in[253] = 253; expo_data_out[253] = 252;
+
+            expo_data_in[254] = 254; expo_data_out[254] = 252;
+
+            expo_data_in[255] = 255; expo_data_out[255] = 252;
+
+
+
+
+
+
+
+
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = 0;
+                curvePoints[i].Y = 0;
+            }
+
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = expo_data_in[i] * 3;
+                curvePoints[i].Y = 256 * 2 - 1 - expo_data_out[i] * 2;
+            }
+
+            g.DrawLines(new Pen(Color.Green, 10), curvePoints);   //畫直線
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = gain_data_in[i] * 3;
+                curvePoints[i].Y = 256 * 2 - 1 - gain_data_out[i] * 2;
+            }
+
+            g.DrawLines(new Pen(Color.Navy, 10), curvePoints);   //畫直線
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1));
 
