@@ -130,12 +130,12 @@ namespace vcs_Draw2
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 10);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width + 240, this.Height - richTextBox1.Location.Y - 50);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //pictureBox1.Location = new Point(10, 10);
         }
