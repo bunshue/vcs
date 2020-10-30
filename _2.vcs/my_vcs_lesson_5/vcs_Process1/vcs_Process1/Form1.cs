@@ -11,6 +11,8 @@ using System.Threading;
 using System.IO;    //for File
 using System.Runtime.InteropServices;   //for DllImport
 
+using System.Drawing.Imaging;           //for PixelFormat
+
 namespace vcs_Process1
 {
     public partial class Form1 : Form
@@ -307,10 +309,27 @@ namespace vcs_Process1
             }
 
         }
+
+        //範圍
+        public struct Rect
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+        [DllImport("user32.dll")]
+        //取得應用程式畫面
+        public static extern Boolean GetWindowRect(IntPtr hWnd, ref Rect rect);
         [DllImport("User32.dll")]
         private static extern bool ShowWindowAsync(IntPtr hWnd, int cmdShow);
         [DllImport("User32.dll")]
+        //將程式置於前景
         private static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll")]
+        //顯示視窗
+        private static extern IntPtr ShowWindow(IntPtr hWnd, int nCmdShow);
+
         private const int WS_SHOWNORMAL = 1;
         public static void HandleRunningInstance(Process instance)
         {
@@ -339,6 +358,70 @@ namespace vcs_Process1
             richTextBox1.Text += "退出時間 : " + p.ExitTime + "\n";
 
 
+
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = string.Empty;
+
+            // 列出系統中所有的程序
+            //Process[] processes = Process.GetProcesses(System.Environment.MachineName);   //相同
+            Process[] processes = Process.GetProcesses();
+
+            richTextBox1.Text += "系統中共有： " + processes.Length.ToString() + " 個程序\n";
+
+            foreach (Process p in processes)
+            {
+                /*
+                // 因為使用 Idle 的 StartTime 會造成錯誤，因此先排除。對其他程序取時間也會造成錯誤，故不用。
+                if (!p.ProcessName.Equals("Idle"))
+                {
+                    // 顯示程序的名稱及啟動時間
+                    richTextBox1.Text += p.ProcessName + "\t\t" + p.StartTime.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += p.ProcessName + "\t\t" + "xxxxxxxxxxxxxxxx\n";
+                }
+                */
+
+                //取得特定應用程式的資訊
+                //richTextBox1.Text += p.ProcessName + "\n";
+                if (p.ProcessName == "putty")
+                {
+                    richTextBox1.Text += p.ProcessName + "\n";
+                    SetForegroundWindow(p.MainWindowHandle);
+                    ShowWindow(p.MainWindowHandle, 1);
+                    richTextBox1.Text += "time = " + p.StartTime.ToString() + "\n";
+                    Rect rect = new Rect();
+                    GetWindowRect(p.MainWindowHandle, ref rect);
+                    richTextBox1.Text += "Left = " + rect.Left.ToString() + "\n";
+                    richTextBox1.Text += "Right = " + rect.Right.ToString() + "\n";
+                    richTextBox1.Text += "Top = " + rect.Top.ToString() + "\n";
+                    richTextBox1.Text += "Bottom = " + rect.Bottom.ToString() + "\n";
+                    richTextBox1.Text += "Width = " + (rect.Right - rect.Left).ToString() + "\n";
+                    richTextBox1.Text += "Height = " + (rect.Bottom - rect.Top).ToString() + "\n";
+
+                    richTextBox1.Text += "擷取此應用程式的畫面\n";
+
+                    int width = rect.Right - rect.Left;
+                    int height = rect.Bottom - rect.Top;
+                    Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+
+                    Graphics.FromImage(bmp).CopyFromScreen(rect.Left,
+                                                           rect.Top,
+                                                           0,
+                                                           0,
+                                                           new Size(width, height),
+                                                           CopyPixelOperation.SourceCopy);
+                    string filename = Application.StartupPath + "\\capture_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                    //string path = DateTime.Now.ToString("yyyyMMdd HHmmss") + ".jpg";
+                    //bmp.Save(path);
+                    bmp.Save(filename, ImageFormat.Jpeg);
+                }
+            }
 
 
         }

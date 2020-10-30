@@ -25,7 +25,7 @@ namespace imsLink
         String compile_time = "6/23/2020 01:35下午";
         String software_version = "A04";
 
-        int flag_operation_mode = MODE_RELEASE_STAGE3;  //不允許第四, 第七, 第八
+        int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
 
         bool flag_david_test1 = false;   //david測試第12站時, ims主機要開putty模式
         bool flag_david_test2 = false;   //david測試2, 存圖顯示亮度狀況
@@ -20190,23 +20190,26 @@ namespace imsLink
         void save_current_program_to_local_drive()
         {
             //本程式截圖
-            Bitmap bmp = new Bitmap(this.Width, this.Height);
-            Graphics g = Graphics.FromImage(bmp);
-            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
-            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
-            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
-            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
+            using (Bitmap bmp = new Bitmap(this.Width, this.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
+                    g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
+                    //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
+                    IntPtr dc1 = g.GetHdc();
+                    g.ReleaseHdc(dc1);
+                }
+                //存成bmp檔
+                String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bmp.Save(filename, ImageFormat.Bmp);
 
-            //存成bmp檔
-            String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bmp.Save(filename, ImageFormat.Bmp);
-
-            //存成jpg檔
-            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //myImage.Save(filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+                //存成jpg檔
+                //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                //myImage.Save(filename, ImageFormat.Jpeg);
+                richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+            }
         }
 
         void save_image_to_drive()

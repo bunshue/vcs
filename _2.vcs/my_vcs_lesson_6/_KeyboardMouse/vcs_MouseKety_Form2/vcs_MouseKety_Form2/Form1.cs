@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//C# 透過Win32控制滑鼠 mouse_event
+
 namespace vcs_MouseKety_Form2
 {
     public partial class Form1 : Form
@@ -22,15 +24,20 @@ namespace vcs_MouseKety_Form2
         }
 
         [System.Runtime.InteropServices.DllImport("user32")]
+        //[DllImport("user32")]
         private static extern int mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
-        const int MOUSEEVENTF_MOVE = 0x0001;
-        const int MOUSEEVENTF_LEFTDOWN = 0X0002;
-        const int MOUSEEVENTF_LEFTUP = 0X0004;
-        const int MOUSEEVENTF_RIGHTDOWN = 0X0008;
-        const int MOUSEEVENTF_RIGHTUP = 0X0010;
-        const int MOUSEEVENTF_MIDDLEDOWN = 0X0020;
-        const int MOUSEEVENTF_MIDDLEUP = 0X0040;
-        const int MOUSEEVENTF_ABSOLUTE = 0X8000;
+        const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        const int MOUSEEVENTF_MOVE = 0x0001;        //移動鼠標
+        const int MOUSEEVENTF_WHEEL = 0x0800;       //移動滾輪
+        const int MOUSEEVENTF_HWHEEL = 0x01000;     //移動H滾輪
+        const int MOUSEEVENTF_LEFTDOWN = 0x0002;    //左鍵按下
+        const int MOUSEEVENTF_LEFTUP = 0x0004;      //左鍵放開
+        const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;  //中鍵按下
+        const int MOUSEEVENTF_MIDDLEUP = 0x0040;    //中鍵放開
+        const int MOUSEEVENTF_RIGHTDOWN = 0x0008;   //右鍵按下
+        const int MOUSEEVENTF_RIGHTUP = 0x0010;     //右鍵放開
+        const int MOUSEEVENTF_XDOWN = 0x0080;       //X鍵按下
+        const int MOUSEEVENTF_XUP = 0x1000;         //X鍵放開
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-//用 Invalidate() 做
+//用 Graphics 做
 
 namespace vcs_FunctionGenerator
 {
@@ -34,9 +34,12 @@ namespace vcs_FunctionGenerator
         int offset_x = 0;
         int offset_y = 0;
 
+        Graphics g;
+
         public Form1()
         {
             InitializeComponent();
+            g = panel1.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,14 +52,10 @@ namespace vcs_FunctionGenerator
             offset_y = H * BORDER_H / 100;
 
             check_signal_range();
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
-        {
-            this.panel1.Invalidate();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
         {
             int i;
 
@@ -105,7 +104,10 @@ namespace vcs_FunctionGenerator
 
             // Create pens.
             Pen redPen = new Pen(Color.Red, 3);
-            DrawLines(e);
+
+            g.Clear(Color.White);
+
+            DrawLines();
 
             Point[] curvePoints = new Point[N];    //一維陣列內有 N 個Point
 
@@ -118,10 +120,10 @@ namespace vcs_FunctionGenerator
             }
 
             // Draw lines between original points to screen.
-            e.Graphics.DrawLines(redPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, curvePoints);   //畫直線
 
             // Draw curve to screen.
-            //e.Graphics.DrawCurve(redPen, curvePoints); //畫曲線
+            //g.DrawCurve(redPen, curvePoints); //畫曲線
         }
 
         private void rb_1_CheckedChanged(object sender, EventArgs e)
@@ -211,14 +213,14 @@ namespace vcs_FunctionGenerator
             check_signal_range();
         }
 
-        void DrawLines(PaintEventArgs e)
+        void DrawLines()
         {
             Point px1 = new Point(panel1.Width * BORDER_W / 100, panel1.Height * (100 - BORDER_H) / 100);
             Point px2 = new Point(panel1.Width * (100 - BORDER_W) / 100, panel1.Height * (100 - BORDER_H) / 100);
-            e.Graphics.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
+            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
             Point py1 = new Point(panel1.Width * BORDER_W / 100, panel1.Height * (100 - BORDER_H) / 100);
             Point py2 = new Point(panel1.Width * BORDER_W / 100, panel1.Height * BORDER_H / 100);
-            e.Graphics.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
+            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
 
             int x1;
             int x2;
@@ -232,7 +234,9 @@ namespace vcs_FunctionGenerator
 
             Point pt1 = new Point(x1, y1);
             Point pt2 = new Point(x2, y2);
-            e.Graphics.DrawLine(new Pen(Brushes.Pink, 1), pt1, pt2);
+            g.DrawLine(new Pen(Brushes.Pink, 1), pt1, pt2);
+
+
         }
     }
 }
