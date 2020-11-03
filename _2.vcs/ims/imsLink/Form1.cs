@@ -44,6 +44,7 @@ namespace imsLink
         bool flag_enable_awb_timeout = true;   //AWB timeout 功能
         bool flag_wait_cosmo_message = false;
         bool flag_wait_for_confirm = false;
+        bool flag_draw_birghtness_result = false;
 
         int total_test_count = 20;
         int current_test_count = 0;
@@ -20493,15 +20494,15 @@ namespace imsLink
                         g.DrawString(current_test_count.ToString(), drawFont1, drawBrush, x_st, y_st);
                     }
 
-                    if (flag_david_test2 == true)
+                    if ((flag_david_test2 == true) || (flag_draw_birghtness_result == true))
                     {
                         drawBrush = new SolidBrush(Color.DarkBlue);
-                        x_st = 200;
-                        y_st = 400;
-                        g.DrawString("中間1/4張亮度 : " + brightness_result_quarter.ToString(), drawFont1, drawBrush, x_st, y_st);
+                        x_st = 230;
+                        y_st = 410;
+                        g.DrawString("中間1/4張亮度 : " + brightness_result_quarter.ToString("F2"), drawFont1, drawBrush, x_st, y_st);
 
-                        y_st += 50;
-                        g.DrawString("整張亮度 : " + brightness_result_full.ToString(), drawFont1, drawBrush, x_st, y_st);
+                        y_st += 35;
+                        g.DrawString("整張亮度 : " + brightness_result_full.ToString("F2"), drawFont1, drawBrush, x_st, y_st);
                     }
                     else
                     {
@@ -22965,9 +22966,11 @@ namespace imsLink
 
         private void bt_measure_frame_Click(object sender, EventArgs e)
         {
+            flag_draw_birghtness_result = true;
             measure_brightness_one_frame();
 
             save_image_to_local_drive();
+            flag_draw_birghtness_result = false;
         }
 
         void measure_brightness_one_frame()
@@ -22990,11 +22993,11 @@ namespace imsLink
             */
 
             result = measure_brightness_one_frame0(640 / 4, 480 / 4, 640 / 2, 480 / 2);
-            richTextBox1.Text += "中間1/4張平均 : result : " + result.ToString() + "\n";
+            richTextBox1.Text += "中間1/4張平均 : result : " + result.ToString("F4") + "\n";
             brightness_result_quarter = result;
 
             result = measure_brightness_one_frame0(0, 0, 640, 480);
-            richTextBox1.Text += "整張平均 : result : " + result.ToString() + "\n";
+            richTextBox1.Text += "整張平均 : result : " + result.ToString("F4") + "\n";
             brightness_result_full = result;
         }
 
@@ -23086,7 +23089,7 @@ namespace imsLink
             //richTextBox1.Text += "y_total = " + y_total.ToString() + "\n";
             //richTextBox1.Text += "y_avg = " + (y_total / (ww * hh)).ToString() + "\n\n";
 
-            tb_awb_mesg.Text = (y_total / (ww * hh)).ToString();
+            tb_awb_mesg.Text = "亮度: " + (y_total / (ww * hh)).ToString("F2");
 
             GC.Collect();       //回收資源
             //pictureBox1.Image = bm2;

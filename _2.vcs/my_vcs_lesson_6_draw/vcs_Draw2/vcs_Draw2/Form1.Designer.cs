@@ -310,7 +310,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(102, 42);
             this.button25.TabIndex = 41;
-            this.button25.Text = "DrawPoint";
+            this.button25.Text = "FillCircle";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -549,7 +549,9 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(102, 42);
             this.button30.TabIndex = 56;
+            this.button30.Text = "DrawPoint";
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // button31
             // 

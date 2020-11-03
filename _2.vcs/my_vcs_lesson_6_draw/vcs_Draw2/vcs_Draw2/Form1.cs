@@ -1083,25 +1083,20 @@ namespace vcs_Draw2
 
             int center_x;
             int center_y;
-            int radius;
-            int linewidth;
-            Color c;
+            int radius = 100;
+            int linewidth = 10;
 
             center_x = 100;
             center_y = 100;
-            radius = 100;
-            linewidth = 10;
-            c = Color.Red;
-
-            DrawCircle(center_x, center_y, radius, linewidth, c);
-            center_x += 200;
-            center_y += 200;
-            DrawCircle(center_x, center_y, radius, linewidth, c);
+            DrawCircle(center_x, center_y, radius, linewidth, Color.Red);
 
             center_x += 200;
             center_y += 200;
-            DrawCircle(center_x, center_y, radius, linewidth, c);
+            DrawCircle(center_x, center_y, radius, linewidth, Color.Green);
 
+            center_x += 200;
+            center_y += 200;
+            DrawCircle(center_x, center_y, radius, linewidth, Color.Blue);
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1178,14 +1173,23 @@ namespace vcs_Draw2
 
         private void button25_Click(object sender, EventArgs e)
         {
-            Font f = new Font("標楷體", 16);
-            SolidBrush sb = new SolidBrush(Color.Blue);
+            richTextBox1.Text += "畫一些實心圓\n";
 
-            for (int size = 1; size <= 10; size++)
-            {
-                DrawPoint(200, 50 + 50 * size, size, Color.Red);
-                g.DrawString(size.ToString(), f, sb, 100, 50 + 50 * size);
-            }
+            int center_x;
+            int center_y;
+            int radius = 100;
+
+            center_x = 200;
+            center_y = 100;
+            DrawFillCircle(center_x, center_y, radius, Color.Red);
+
+            center_x += 200;
+            center_y += 200;
+            DrawFillCircle(center_x, center_y, radius, Color.Green);
+
+            center_x += 200;
+            center_y += 200;
+            DrawFillCircle(center_x, center_y, radius, Color.Blue);
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1381,6 +1385,17 @@ namespace vcs_Draw2
             p.Dispose();
         }
 
+        private void DrawFillCircle(int center_x, int center_y, int radius, Color c)
+        {
+            SolidBrush newBrush = new SolidBrush(c);
+
+            // Fill the circle
+            g.FillEllipse(newBrush, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+
+            //Dispose of the brush
+            newBrush.Dispose();
+        }
+
         private void DrawStar(int center_x, int center_y, int radius, int linewidth, Color c)
         {
             //DrawStar
@@ -1483,6 +1498,19 @@ namespace vcs_Draw2
             {
                 g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
             }
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            Font f = new Font("標楷體", 16);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            for (int size = 1; size <= 10; size++)
+            {
+                DrawPoint(200, 50 + 50 * size, size, Color.Red);
+                g.DrawString(size.ToString(), f, sb, 100, 50 + 50 * size);
+            }
+
         }
 
 
