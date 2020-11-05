@@ -63,6 +63,90 @@ namespace ims_DrawTest1
         // 以下List 裡為MyFileInfo 型態
         List<MyDrawStringInfo> drawed = new List<MyDrawStringInfo>();
 
+
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -366,8 +450,68 @@ namespace ims_DrawTest1
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            String filename = string.Empty;
+
+            int width;
+            int height;
+
+            filename = "C:\\______test_files\\ims_image.bmp";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            //pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Image = bitmap1;
+
+            g = Graphics.FromImage(bitmap1);
+
+            pictureBox1.Image = bitmap1;
+
+            int ww = 640;
+            int hh = 480;
+
+            g.DrawRectangle(new Pen(Color.Red, 10), new Rectangle(0, 0, 640 - 1, 480 - 1));
+
+            int i;
+            int j;
+
+            Color pt;
+
+            int brightness_new = 0;
+            int brightness_old = 0;
+
+            for (j = 0; j < hh; j++)
+            {
+                for (i = 0; i < ww; i++)
+                {
+                    pt = bitmap1.GetPixel(i, j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    brightness_new = (int)yyy.Y;
 
 
-
+                    if (Math.Abs(brightness_new - brightness_old) > 20)
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0, 0));
+                    }
+                    else
+                    {
+                        //保持不變
+                    }
+                    brightness_old = brightness_new;
+                }
+            }
+        }
     }
 }

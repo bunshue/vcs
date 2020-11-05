@@ -13,7 +13,6 @@ namespace vcs_Draw8_Time
 {
     public partial class Form1 : Form
     {
-        //Graphics g;
         Bitmap bitmap1;
         string filename = "C:\\______test_files\\vcs_reference2\\書頁\\2016122615573727.jpg";
 
@@ -119,6 +118,7 @@ namespace vcs_Draw8_Time
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = "";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -133,9 +133,15 @@ namespace vcs_Draw8_Time
         {
             richTextBox1.Text += "量測時間ST\t";
             if (rb1.Checked == true)
+            {
                 richTextBox1.Text += "黑白\n";
+                label1.Text = "約耗時 21 秒, 目前無法中斷";
+            }
             else if (rb2.Checked == true)
+            {
                 richTextBox1.Text += "測光\n";
+                label1.Text = "約耗時 12 秒, 目前無法中斷";
+            }
             else
                 richTextBox1.Text += "其他\n";
 
@@ -192,6 +198,7 @@ namespace vcs_Draw8_Time
                 richTextBox1.Text += "亮度 : " + (y_total / (w * h)).ToString() + "\n";
 
             richTextBox1.Text += "總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+            label1.Text = "完成, 總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D; //for DashStyle
+
 namespace vcs_Draw9_Example2
 {
     public partial class Form1 : Form
@@ -147,9 +149,12 @@ namespace vcs_Draw9_Example2
             y_st = (int)(v * Math.Sin(angle * Math.PI / 180) * t - (g * t * t) / 2);  //s = vt - 1/2*g*t^2;
 
             if (y_st < 0)
+            {
                 timer1.Enabled = false;
+                //button1_Click(sender, e);
+            }
 
-            richTextBox1.Text += "t = " + t.ToString() + ", x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            //richTextBox1.Text += "t = " + t.ToString() + ", x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
 
             //dy = (int)(r * Math.Sin(i * Math.PI / 180));
 
@@ -168,9 +173,20 @@ namespace vcs_Draw9_Example2
             p2.X = (int)(r * Math.Cos(draw_angle * Math.PI / 180));
             p2.Y = H - (int)(r * Math.Sin(draw_angle * Math.PI / 180));
 
-            e.Graphics.DrawLine(new Pen(Color.Red, 2), p1, p2);
-            //gg.DrawLine(new Pen(Color.Silver, 1), w * i / j, 0, w * i / j, h);
+            Pen p = new Pen(Color.Red, 2);
+            p.DashStyle = DashStyle.Dot;
+            e.Graphics.DrawLine(p, p1, p2);
 
+            int dw = 0;
+            int dh = 20;
+            int max = trackBar2.Maximum;
+            int min = trackBar2.Minimum;
+
+            dw = pictureBox1.Width * (trackBar2.Value - trackBar2.Minimum + 1) / (trackBar2.Maximum - trackBar2.Minimum + 1);
+            //richTextBox1.Text += "max = " + max.ToString() + ", min = " + min.ToString() + "\n";
+
+            //SolidBrush newBrush = new SolidBrush(c);
+            e.Graphics.FillRectangle(new SolidBrush(Color.Red), 0, H - dh, dw, dh);
             
             label1.Text = t.ToString();
         }
@@ -188,7 +204,6 @@ namespace vcs_Draw9_Example2
             angle = trackBar1.Value;
             v = trackBar2.Value;
             timer1.Enabled = true;
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -201,7 +216,7 @@ namespace vcs_Draw9_Example2
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             lb_speed.Text = trackBar2.Value.ToString();
-
+            this.Invalidate();
         }
 
         /*

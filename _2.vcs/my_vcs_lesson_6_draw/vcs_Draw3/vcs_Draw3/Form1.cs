@@ -27,6 +27,7 @@ namespace vcs_Draw3
 
             show_item_location();
             //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            this.DoubleBuffered = true;
         }
 
 

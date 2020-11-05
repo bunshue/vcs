@@ -39,7 +39,7 @@ namespace vcs_Draw1
             //button
             x_st = 950;
             y_st = 10;
-            dx = 120;
+            dx = 130;
             dy = 50;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -651,7 +651,6 @@ namespace vcs_Draw1
 
         private void button8_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -965,11 +964,49 @@ namespace vcs_Draw1
 
         private void button25_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            p = new Pen(Color.Red, 5);
+
+            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
+
+            pictureBox1.Image = bitmap1;
+
+
+            richTextBox1.Text += "平移坐標軸至指定座標(100, 100) 然後畫一線\n";
+            g.TranslateTransform(100, 100);
+            g.DrawLine(p, 0, 0, 100, 0);
+            g.ResetTransform();
+
+            richTextBox1.Text += "平移坐標軸至指定座標(200, 200) 然後再進行旋轉座標畫線\n";
+            g.TranslateTransform(200, 200);
+            for (int i = 0; i < 8; i++)
+            {
+                //g.RotateTransform(45);
+                g.RotateTransform(10);//旋轉指定的角度
+                g.DrawLine(p, 0, 0, 100, 0);
+            }
+            g.Dispose();
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            //用漸變色填充
+            //LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
+            Rectangle rect = new Rectangle(0, 0, 500, 100);//定義矩形,參數為起點橫縱坐標以及其長和寬
+            rect.Location = new Point(100, 100);
+            LinearGradientBrush b = new LinearGradientBrush(rect, Color.Red, Color.Black, LinearGradientMode.Horizontal);
+            g.FillRectangle(b, rect);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1048,6 +1085,37 @@ namespace vcs_Draw1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+                bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            p = new Pen(Color.Red, 5);
+
+            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
+
+            pictureBox1.Image = bitmap1;
+
+
+            richTextBox1.Text += "轉變坐標軸角度\n";
+
+            for (int i = 0; i <= 90; i += 10)
+            {
+                g.RotateTransform(i);//旋轉指定的角度
+                g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
+                g.ResetTransform();//恢復坐標軸坐標 回 0 度
+            }
+
+            p = new Pen(Color.Blue, 2);
+            g.RotateTransform(20);//旋轉指定的角度
+            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            g.RotateTransform(30);//旋轉指定的角度
+            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            g.Dispose();
         }
 
         private void button18_Click(object sender, EventArgs e)
