@@ -40,12 +40,22 @@ namespace vcs_Draw9_Example2
             //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.Size = new System.Drawing.Size(W, H);
             pictureBox1.Image = img;
+            pictureBox2.Size = new System.Drawing.Size(W, 30);
+            pictureBox2.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y + H);
+            richTextBox1.Size = new Size(W, 190);
+            richTextBox1.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y + H + 40);
+
+
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
             angle = trackBar1.Value;
             v = trackBar2.Value;
             lb_angle.Text = trackBar1.Value.ToString();
             lb_speed.Text = trackBar2.Value.ToString();
+            lb_mass.Text = "質量 " + 10 + " 公斤";
+            lb_v0.Text = "初速度 " + trackBar2.Value.ToString() + " m/s";
+            lb_energy.Text = "能量 " + ((10 * trackBar2.Value * trackBar2.Value) / 2).ToString() + " 焦耳";
+            lb_total_power.Text = "總能量 " + 10000 + " 焦耳";
         }
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)
@@ -186,9 +196,24 @@ namespace vcs_Draw9_Example2
             //richTextBox1.Text += "max = " + max.ToString() + ", min = " + min.ToString() + "\n";
 
             //SolidBrush newBrush = new SolidBrush(c);
-            e.Graphics.FillRectangle(new SolidBrush(Color.Red), 0, H - dh, dw, dh);
+            //e.Graphics.FillRectangle(new SolidBrush(Color.Red), 0, H - dh, dw, dh);
             
             label1.Text = t.ToString();
+            this.pictureBox2.Invalidate();
+        }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            int dw = 0;
+            int dh = 20;
+            int max = trackBar2.Maximum;
+            int min = trackBar2.Minimum;
+
+            dw = pictureBox1.Width * (trackBar2.Value - trackBar2.Minimum + 1) / (trackBar2.Maximum - trackBar2.Minimum + 1);
+            //richTextBox1.Text += "max = " + max.ToString() + ", min = " + min.ToString() + "\n";
+
+            //SolidBrush newBrush = new SolidBrush(c);
+            e.Graphics.FillRectangle(new SolidBrush(Color.Red), 0, 0, dw, pictureBox2.Size.Height);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
