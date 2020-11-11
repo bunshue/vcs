@@ -87,6 +87,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.bt_memory = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -687,17 +688,28 @@
             this.bt_memory.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_memory.Location = new System.Drawing.Point(218, 547);
             this.bt_memory.Name = "bt_memory";
-            this.bt_memory.Size = new System.Drawing.Size(130, 40);
+            this.bt_memory.Size = new System.Drawing.Size(175, 40);
             this.bt_memory.TabIndex = 71;
-            this.bt_memory.Text = "記憶體狀態";
+            this.bt_memory.Text = "CPU 記憶體狀態";
             this.bt_memory.UseVisualStyleBackColor = true;
             this.bt_memory.Click += new System.EventHandler(this.bt_memory_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(216, 518);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 19);
+            this.label5.TabIndex = 72;
+            this.label5.Text = "label5";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1175, 614);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.bt_memory);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -821,6 +833,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button bt_memory;
+        private System.Windows.Forms.Label label5;
     }
 }
 

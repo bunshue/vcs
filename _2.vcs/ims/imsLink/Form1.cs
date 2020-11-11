@@ -19094,6 +19094,12 @@ namespace imsLink
                 //tb_awb_mesg.Text = "";
                 bt_awb_break.Visible = false;
 
+                lb_main_mesg1.Text = "";
+                //lb_main_mesg2.Text = "";
+                lb_main_mesg3.Text = "";
+                lb_main_mesg11.Text = "";
+                lb_main_mesg12a.Text = "";
+
                 bt_awb_test.BackColor = Color.Lime;
                 flag_do_awb = false;
                 timer_display.Enabled = false;
@@ -19106,14 +19112,13 @@ namespace imsLink
 
                 lb_awb_time.Text = "";
                 restore_camera_setup();
-                timer_stage2.Enabled = true;
                 Send_IMS_Data(0xA0, 0x35, 0x03, 0x00);  //To auto mode
 
                 tb_awb_mesg.Text = "";
                 tb_awb_mesg.Font = new Font("標楷體", 24);
                 tb_awb_mesg.BackColor = Color.White;
 
-                if (flag_operation_mode == MODE_RELEASE_STAGE2)
+                if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                 {
                     bt_awb_test.Enabled = false;
                     bt_awb_test.BackColor = Color.Pink;
@@ -19122,6 +19127,7 @@ namespace imsLink
                 flag_awb_break = false;
                 flag_awb_timeout = false;
                 flag_awb_manually_interrupt = false;
+                timer_stage2.Enabled = true;
             }
             else
             {

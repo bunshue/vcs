@@ -23,6 +23,8 @@ namespace vcs_test_all_06_System
     public partial class Form1 : Form
     {
         DateTime start_time = DateTime.Now;
+        static PerformanceCounter pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+
         public Form1()
         {
             InitializeComponent();
@@ -107,10 +109,12 @@ namespace vcs_test_all_06_System
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 50);
             label4.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 75);
+            label5.Location = new Point(x_st + dx * 0 + 280, y_st + dy * 12);
             label1.Text = "";
             label2.Text = "";
             label3.Text = "";
             label4.Text = "";
+            label5.Text = "";
 
             bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13);
 
@@ -645,6 +649,9 @@ namespace vcs_test_all_06_System
 
         private void button34_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "到 【偵錯】→【視窗】→【即時運算】 看結果\n\r";
+            richTextBox1.Text += "要勾選 【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】\n\r";
+
             int a = 123;
             int b = 456;
 
@@ -799,6 +806,10 @@ namespace vcs_test_all_06_System
             label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
             label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
             label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
+
+            double cpu_usage;
+            cpu_usage = (double)pc.NextValue();
+            label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
         }
 
         private void bt_memory_Click(object sender, EventArgs e)

@@ -86,6 +86,32 @@ namespace vcs_Thread
             lb_B.Text = _B.ToString();
         }
 
+        class thread1
+        {
+            private String title;
+            public thread1(String title)
+            {
+                this.title = title;
+            }
+            int aa = 0;
+            public void runMe()
+            {
+                while (true)
+                {
+                    aa++;
+                    System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
+                    System.Threading.Thread.Sleep(1000);
+                }
+            }
+        } 
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Thread
+            thread1 obj = new thread1("花旗銀行");
+            Thread t = new Thread(obj.runMe);
+            t.Start(); 
+        }
     }
 
     //建一個類，模擬實際使用情況

@@ -231,8 +231,29 @@ namespace vcs_test_all_00_Control
             }
 
         }
-    }
 
+        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(groupBox1.BackColor);
+            e.Graphics.DrawString(groupBox1.Text, groupBox1.Font, Brushes.Red, 10, 1);
+            e.Graphics.DrawLine(Pens.Red, 1, 7, 8, 7);
+            e.Graphics.DrawLine(Pens.Red, e.Graphics.MeasureString(groupBox1.Text, groupBox1.Font).Width + 8, 7, groupBox1.Width - 2, 7);
+            e.Graphics.DrawLine(Pens.Red, 1, 7, 1, groupBox1.Height - 2);
+            e.Graphics.DrawLine(Pens.Red, 1, groupBox1.Height - 2, groupBox1.Width - 2, groupBox1.Height - 2);
+            e.Graphics.DrawLine(Pens.Red, groupBox1.Width - 2, 7, groupBox1.Width - 2, groupBox1.Height - 2); 
+        }
+
+        private void button14_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.button14.FlatStyle = FlatStyle.Flat;
+            this.button14.FlatAppearance.BorderColor = Color.Red;
+        }
+
+        private void button14_MouseLeave(object sender, EventArgs e)
+        {
+            this.button14.FlatStyle = FlatStyle.Standard;
+        }
+    }
 
 
 
