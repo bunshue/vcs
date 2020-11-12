@@ -47,6 +47,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.cb_show_data = new System.Windows.Forms.CheckBox();
+            this.bt_save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(745, 366);
+            this.chart1.Size = new System.Drawing.Size(300, 300);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -142,7 +143,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(12, 473);
+            this.bt_clear.Location = new System.Drawing.Point(12, 554);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(101, 44);
             this.bt_clear.TabIndex = 5;
@@ -227,18 +228,29 @@
             // cb_show_data
             // 
             this.cb_show_data.AutoSize = true;
-            this.cb_show_data.Location = new System.Drawing.Point(12, 533);
+            this.cb_show_data.Location = new System.Drawing.Point(12, 619);
             this.cb_show_data.Name = "cb_show_data";
             this.cb_show_data.Size = new System.Drawing.Size(72, 16);
             this.cb_show_data.TabIndex = 12;
             this.cb_show_data.Text = "顯示資料";
             this.cb_show_data.UseVisualStyleBackColor = true;
             // 
+            // bt_save
+            // 
+            this.bt_save.Location = new System.Drawing.Point(12, 494);
+            this.bt_save.Name = "bt_save";
+            this.bt_save.Size = new System.Drawing.Size(101, 44);
+            this.bt_save.TabIndex = 13;
+            this.bt_save.Text = "Save";
+            this.bt_save.UseVisualStyleBackColor = true;
+            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 647);
+            this.Controls.Add(this.bt_save);
             this.Controls.Add(this.cb_show_data);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -278,6 +290,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox cb_show_data;
+        private System.Windows.Forms.Button bt_save;
     }
 }
 

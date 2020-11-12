@@ -55,6 +55,16 @@ namespace vcs_test_all_10_Math_Random
             return d * Math.PI / 180.0;
         }
 
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             int x;
@@ -62,13 +72,13 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "y = sin(x)\n";
             for (x = 0; x <= 360; x += 30)
             {
-                y = (int)(Math.Sin((Math.PI * x / 180)));
+                y = (int)(100 * sind(x));
                 richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\n";
             }
 
             for (x = 0; x <= 360; x += 30)
             {
-                richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + Math.Sin(rad(x)) + "\n";
+                richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + 100 * sind(x) + "\n";
             }
         }
 
