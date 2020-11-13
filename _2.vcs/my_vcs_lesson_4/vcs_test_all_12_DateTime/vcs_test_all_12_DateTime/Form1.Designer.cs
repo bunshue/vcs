@@ -706,8 +706,9 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(164, 46);
             this.button48.TabIndex = 58;
-            this.button48.Text = "xxx";
+            this.button48.Text = "幾年幾月幾日星期幾";
             this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
             // button49
             // 

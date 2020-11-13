@@ -77,6 +77,11 @@ namespace vcs_Draw1
             button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
 
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
             //bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             bt_save.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 8);
@@ -1302,6 +1307,32 @@ namespace vcs_Draw1
              * 
              * BackwardDiagonal = 3　　 摘要:指定從右上到左下的漸變。
              */
+        }
+
+        //The Paint Event Handler
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            try
+            {
+                // Draw the selection rectangle.
+                using (Pen pen = new Pen(Color.Red, 2))
+                {
+                    //Rectangle rect = SelectionRectangle(true);
+                    e.Graphics.DrawRectangle(pen, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+
+                    pen.Color = Color.Green;
+                    pen.DashPattern = new float[] { 5, 5 };
+                    e.Graphics.DrawRectangle(pen, 5, 5, pictureBox1.Size.Width - 10, pictureBox1.Size.Height - 10);
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

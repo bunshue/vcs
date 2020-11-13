@@ -1105,8 +1105,47 @@ new System.Globalization.ChineseLunisolarCalendar();
 
         }
 
+        //y－年，m－月，d－日期
+        string CaculateWeekDay(int y, int m, int d)
+        {
+            if (m == 1) m = 13;
+            if (m == 2) m = 14;
+            //基姆拉爾森計算公式
+            int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
+            string weekstr = "";
+            switch (week)
+            {
+                case 1: weekstr = "星期一"; break;
+                case 2: weekstr = "星期二"; break;
+                case 3: weekstr = "星期三"; break;
+                case 4: weekstr = "星期四"; break;
+                case 5: weekstr = "星期五"; break;
+                case 6: weekstr = "星期六"; break;
+                case 7: weekstr = "星期日"; break;
+            } return weekstr;
+        }
 
-   
+        private void button48_Click(object sender, EventArgs e)
+        {
+            //幾年幾月幾日星期幾
+            int year;
+            int month;
+            int day;
+            string result;
+
+            year = 2006;
+            month = 3;
+            day = 11;
+            result = CaculateWeekDay(year, month, day);
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
+
+
+            year = 2020;
+            month = 11;
+            day = 13;
+            result = CaculateWeekDay(year, month, day);
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
+        }
     }
 }
 
