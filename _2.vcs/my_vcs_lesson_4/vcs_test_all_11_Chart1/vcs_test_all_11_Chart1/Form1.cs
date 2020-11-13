@@ -26,6 +26,8 @@ namespace vcs_test_all_11_Chart1
         private const string XLABLE = "Degree";
         private const string YLABLE = "Amplitude";
 
+        bool flag_show_value = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -46,7 +48,7 @@ namespace vcs_test_all_11_Chart1
             x_st = 10;
             y_st = 10;
             dx = 110;
-            dy = 55;
+            dy = 50;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -56,10 +58,12 @@ namespace vcs_test_all_11_Chart1
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
 
-            bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+
+            bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 12);
         
         
         }
@@ -543,6 +547,83 @@ namespace vcs_test_all_11_Chart1
                 richTextBox1.Text += "無圖可存\n";
         }
 
+
+        internal class Item
+        {
+            public double X { get; private set; }
+            public double Y { get; private set; }
+            public Item(double x, double y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+        }
+
+        //用滑鼠指 顯示數值
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "用滑鼠指線 顯示數值\n";
+            FillChart();
+            flag_show_value = true;
+            this.tooltip.AutomaticDelay = 5;
+        }
+
+        private void FillChart()
+        {
+            var rand = new Random(123);
+            var items = Enumerable.Range(0, 20).Select(x => new Item(x, rand.Next(1, 100) / 2.0)).ToList();
+
+            this.chart1.Series.Clear();
+
+            var seriesLines = this.chart1.Series.Add("Line");
+            seriesLines.ChartType = SeriesChartType.Line; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesLines.XValueMember = "X";
+            seriesLines.YValueMembers = "Y";
+            seriesLines.Color = Color.Red;
+
+            var seriesPoints = this.chart1.Series.Add("Points");
+            seriesPoints.ChartType = SeriesChartType.Point; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesPoints.XValueMember = "X";
+            seriesPoints.YValueMembers = "Y";
+
+            this.chart1.DataSource = items;
+        }
+
+        Point? prevPosition = null;
+        ToolTip tooltip = new ToolTip();
+        private void chart1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_show_value == true)
+            {
+                var pos = e.Location;
+                if (prevPosition.HasValue && pos == prevPosition.Value)
+                    return;
+                tooltip.RemoveAll();
+                prevPosition = pos;
+                var results = chart1.HitTest(pos.X, pos.Y, false,
+                                                ChartElementType.DataPoint);
+                foreach (var result in results)
+                {
+                    if (result.ChartElementType == ChartElementType.DataPoint)
+                    {
+                        var prop = result.Object as DataPoint;
+                        if (prop != null)
+                        {
+                            var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
+                            var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
+
+                            // check if the cursor is really close to the point (2 pixels around)
+                            if (Math.Abs(pos.X - pointXPixel) < 2 &&
+                                Math.Abs(pos.Y - pointYPixel) < 2)
+                            {
+                                tooltip.Show("X=" + prop.XValue + ", Y=" + prop.YValues[0], this.chart1,
+                                                pos.X, pos.Y - 15);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
 

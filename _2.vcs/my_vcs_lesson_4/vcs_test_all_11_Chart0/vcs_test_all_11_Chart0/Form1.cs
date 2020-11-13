@@ -58,17 +58,43 @@ namespace vcs_test_all_11_Chart0
             //X軸
             chart1.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
             chart1.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
-            chart1.ChartAreas[0].AxisX.Title = XLABLE;
+            chart1.ChartAreas[0].AxisX.Title = XLABLE;              //設定X軸名稱
+            chart1.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
             chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
             chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
+            chart1.ChartAreas[0].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 15, System.Drawing.FontStyle.Bold);   //設定X軸刻度的字型
+            chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
+            chart1.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
+            chart1.ChartAreas[0].AxisX.LineColor = System.Drawing.Color.White;//設置X軸的線條顏色
+            chart1.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
+            chart1.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = System.Drawing.Color.Snow;//設置網格線的顏色
+            chart1.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
+            chart1.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
 
             //Y軸
             chart1.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
             chart1.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
-            chart1.ChartAreas[0].AxisY.Title = YLABLE;
-            chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;   //顯示 或 隱藏 Y 軸標示
+            chart1.ChartAreas[0].AxisY.Title = YLABLE;              //設定Y軸名稱
+            chart1.ChartAreas[0].AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
+            chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
             chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
 
+            chart1.ChartAreas[0].AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
+            chart1.ChartAreas[0].AxisY.LineColor = System.Drawing.Color.DarkBlue;//設置軸的線條顏色
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.White;//設置網格線顏色
+
+            #region 圖表樣式
+            chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            chart1.BackSecondaryColor = System.Drawing.Color.Yellow;//設置背景的輔助顏色
+            chart1.BorderlineColor = System.Drawing.Color.Yellow;//設置圖像邊框的顏色
+            chart1.BorderlineDashStyle=  System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart1.BorderlineWidth = 2;//設置圖像的邊框寬度
+            chart1.BorderSkin.SkinStyle=  System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart1.BackColor = System.Drawing.Color.Yellow;//設置圖表的背景顏色
+            #endregion
+            chart1.Titles[0].Font = new System.Drawing.Font("標楷體", 30f);//设置图表标题字体样式和大小
+            chart1.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -78,28 +104,62 @@ namespace vcs_test_all_11_Chart0
                  
             //設定數列大小與外觀
             //series 1
-            Series series1 = new Series("sin", 500); //初始畫線條(標題，最大值)
+            Series series1 = new Series("sin", 500); //初始畫線條(標題，最大數值)
             series1.Color = Color.Red; //設定線條顏色
+            series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
+            series1.BorderWidth = 3;    //線寬
             series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
             series1.ChartType = SeriesChartType.Point; //設定線條種類
             series1.MarkerSize = 5;     //圖標大小
-            series1.IsValueShownAsLabel = false;   //將數值顯示在線上
+            series1.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
+            series1.LegendText = "sin"; // 圖示上的文字
+            series1.Name = "sine";      //設置數據名稱
+            series1.ShadowOffset = 10;   //設置陰影偏移量
+            series1.ShadowColor = Color.Orange; //設置陰影顏色
+            series1.ToolTip = "百分比" + "#PERCENT";//鼠标移动显示数据 //TBD
+            series1.Label = "#VALY" + "/" + "#TOTAL" + "#LEGENDTEXT";//直接显示各项数据
+
+            /*
+            MsChart的Label的值的转义字符
+
+            #VALX 显示当前图例的X轴的对应文本(或数据)
+            #VAL, #VALY, 显示当前图例的Y轴的对应文本(或数据)
+            #VALY2, #VALY3, 显示当前图例的辅助Y轴的对应文本(或数据)
+            #SER: 显示当前图例的名称
+            #LABEL 显示当前图例的标签文本
+            #INDEX 显示当前图例的索引
+            #PERCENT 显示当前图例的所占的百分比
+            #TOTAL 总数量
+            #LEGENDTEXT 图例文本
+            */
 
             //series 2
-            Series series2 = new Series("cos", 500); //初始畫線條(標題，最大值)
+            Series series2 = new Series("cos", 500); //初始畫線條(標題，最大數值)
             series2.Color = Color.Green; //設定線條顏色
+            series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
+            series2.BorderWidth = 3;    //線寬
             series2.Font = new System.Drawing.Font("標楷體", 12); //設定字型
             series2.ChartType = SeriesChartType.Point; //設定線條種類
             series2.MarkerSize = 5;     //圖標大小
-            series2.IsValueShownAsLabel = false;   //將數值顯示在線上
+            series2.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
+            series2.LegendText = "cos"; // 圖示上的文字
+            series2.Name = "cos";      //設置數據名稱
+            series2.ShadowOffset = 10;   //設置陰影偏移量
+            series2.ShadowColor = Color.Orange; //設置陰影顏色
 
             //series 3
-            Series series3 = new Series("sin + cos", 500); //初始畫線條(標題，最大值)
+            Series series3 = new Series("sin + cos", 500); //初始畫線條(標題，最大數值)
             series3.Color = Color.Blue; //設定線條顏色
+            series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
+            series3.BorderWidth = 3;    //線寬
             series3.Font = new System.Drawing.Font("標楷體", 12); //設定字型
             series3.ChartType = SeriesChartType.Point; //設定線條種類
             series3.MarkerSize = 5;     //圖標大小
-            series3.IsValueShownAsLabel = false;   //將數值顯示在線上
+            series3.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
+            series3.LegendText = "sin + cos"; // 圖示上的文字
+            series3.Name = "sine + cos";      //設置數據名稱
+            series3.ShadowOffset = 10;   //設置陰影偏移量
+            series3.ShadowColor = Color.Orange; //設置陰影顏色
 
             int[] array_x = new int[37];
             int[] array_y1 = new int[37];

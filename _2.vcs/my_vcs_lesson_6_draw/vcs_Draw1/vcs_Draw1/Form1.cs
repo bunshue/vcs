@@ -651,6 +651,36 @@ namespace vcs_Draw1
 
         private void button8_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                int width = 600;
+                int height = 300;
+
+                pictureBox1.Size = new Size(width, height);
+                pictureBox1.Location = new Point(0, 0);
+
+                bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            }
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            Font f = new Font("標楷體", 20);
+            SolidBrush sb = new SolidBrush(Color.Purple);
+
+            Point p1 = new Point(10, 100);
+            Point p2 = new Point(590, 120);
+            Pen p = new Pen(Color.Red, 5);
+            g.DrawLine(p, p1, p2);
+            g.DrawString("反鋸齒功能\t關閉", f, sb, new PointF(170, 70));
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;  //反鋸齒功能
+
+            Point p3 = new Point(10, 100 + 100);
+            Point p4 = new Point(590, 100 + 120);
+            g.DrawLine(p, p3, p4);
+            g.DrawString("反鋸齒功能\t打開", f, sb, new PointF(170, 170));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)

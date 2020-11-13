@@ -298,6 +298,21 @@ namespace vcs_test_all_01_Richtextbox1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //在方案總管vcs_test_all_01_Richtextbox1按加入/現有項目/選擇 RtfTable.cs, RtfTable.cs要改namespace為vcs_test_all_01_Richtextbox1
+            RtfTable table = new RtfTable(4, 3, 120);
+            table.SetColumnWidths(1720, 1720, 1720);    //設定表格寬度
+
+            for (int r = 0; r < 4; r++)
+            {
+                for (int c = 0; c < 3; c++)
+                {
+                    table.Contents[r, c] = "(" + r.ToString() + ", " + c.ToString() + ")";
+                }
+            }
+            // 在RichTextBox中的某處加入表格 Insert the table at @@@.
+            richTextBox1.Rtf = richTextBox1.Rtf.Replace("@@@", table.ToString());
+            // 在RichTextBox最後加入表格 Insert the table at the end.
+            richTextBox1.Rtf = richTextBox1.Rtf.Trim().TrimEnd('}') + table.ToString() + "}";
         }
 
         private void button14_Click(object sender, EventArgs e)

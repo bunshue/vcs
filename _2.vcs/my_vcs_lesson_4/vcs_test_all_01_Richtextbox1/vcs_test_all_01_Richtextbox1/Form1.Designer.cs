@@ -235,11 +235,12 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(12, 613);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(220, 40);
             this.button13.TabIndex = 14;
+            this.button13.Text = "在RichTextBox內插入表格";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
