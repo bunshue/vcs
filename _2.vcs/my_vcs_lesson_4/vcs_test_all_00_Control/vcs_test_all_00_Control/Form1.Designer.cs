@@ -50,6 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button14 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -186,11 +187,11 @@
             // button12
             // 
             this.button12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(1015, 566);
+            this.button12.Location = new System.Drawing.Point(495, 527);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(56, 33);
+            this.button12.Size = new System.Drawing.Size(128, 62);
             this.button12.TabIndex = 9;
-            this.button12.Text = "clear";
+            this.button12.Text = "顯示richTextBox1的參數";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -278,11 +279,23 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "滑鼠移動到Button上後\r\n改變邊框顏色\r\n要改\r\nMouseMove\r\n和\r\nMouseLeave";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1030, 568);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(56, 33);
+            this.bt_clear.TabIndex = 15;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1098, 617);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.label1);
@@ -331,6 +344,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

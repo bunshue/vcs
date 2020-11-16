@@ -39,6 +39,11 @@ namespace vcs_Draw3
             g1.Clear(Color.Red);             //useless??
             panel1.BackColor = Color.Pink;
 
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MinimizeBox = false;
+            MaximizeBox = false;
+            DoubleBuffered = true;
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
 
@@ -50,7 +55,7 @@ namespace vcs_Draw3
             int dy;
 
             //button
-            x_st = 800;
+            x_st = 900;
             y_st = 10;
             dx = 120;
             dy = 50;
@@ -114,7 +119,7 @@ namespace vcs_Draw3
             richTextBox1.Text += "W = " + bitmap3.Width.ToString() + " H = " + bitmap3.Height.ToString() + "\n";
             pictureBox2.Size = bitmap3.Size;
             pictureBox2.Image = bitmap3;
-            pictureBox2.Location = new Point(400, 300);
+            pictureBox2.Location = new Point(570, 10);
 
         }
 
@@ -321,9 +326,43 @@ namespace vcs_Draw3
 
         }
 
+        private Random Rand = new Random();
+        private Bitmap Bm;
+        private Graphics Gr;
         private void button9_Click(object sender, EventArgs e)
         {
+            if (button9.Text == "畫任意矩形 ST")
+            {
+                timer_random_rectangle.Enabled = true;
+                button9.Text = "畫任意矩形 SP";
 
+                Bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                Gr = Graphics.FromImage(Bm);
+                pictureBox1.BackColor = Color.Pink;
+                pictureBox1.Image = Bm;
+            }
+            else
+            {
+                timer_random_rectangle.Enabled = false;
+                button9.Text = "畫任意矩形 ST";
+            }
+        }
+
+        private void timer_random_rectangle_Tick(object sender, EventArgs e)
+        {
+            int x = Rand.Next(pictureBox1.Width - 10);
+            int y = Rand.Next(pictureBox1.Height - 10);
+            int width = Rand.Next(pictureBox1.Width - x);
+            int height = Rand.Next(pictureBox1.Height - y);
+            Color color = Color.FromArgb(128,
+                255 * Rand.Next(2),
+                255 * Rand.Next(2),
+                255 * Rand.Next(2));
+            using (Brush brush = new SolidBrush(color))
+            {
+                Gr.FillRectangle(brush, x, y, width, height);
+            }
+            Refresh();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -913,7 +952,6 @@ namespace vcs_Draw3
 
 
         }
-
 
 
 

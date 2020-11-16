@@ -18,6 +18,7 @@ namespace vcs_test_all_00_Control
             button7.Click += new System.EventHandler(button6_Click);//按下button7觸發button1_Click
             button8.Click += new System.EventHandler(button6_Click);//按下button8觸發button1_Click
             button9.Click += new System.EventHandler(button6_Click);//按下button9觸發button1_Click
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         int i = 0;
@@ -168,7 +169,20 @@ namespace vcs_test_all_00_Control
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            richTextBox1.Text += "Bounds = " + richTextBox1.Bounds.ToString() + "\n";
+
+            richTextBox1.Text += "左上點座標 = (x_st, y_st) = (Left, Top)\n";
+            richTextBox1.Text += "x_st = Left = " + richTextBox1.Left.ToString() + "\n";
+            richTextBox1.Text += "y_st = Top = " + richTextBox1.Top.ToString() + "\n";
+
+            richTextBox1.Text += "右下點座標 = (x_sp, y_sp) = (x_st + W, y_st + H) = (Right, Bottom)\n";
+            richTextBox1.Text += "x_sp = Right = " + richTextBox1.Right.ToString() + "\n";
+            richTextBox1.Text += "y_sp = Bottom = " + richTextBox1.Bottom.ToString() + "\n";
+
+            richTextBox1.Text += "BackColor = " + richTextBox1.BackColor.ToString() + "\n";
+
+            richTextBox1.Text += "Size = " + richTextBox1.Size.ToString() + "\n";
+            richTextBox1.Text += "ClientSize = " + richTextBox1.ClientSize.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -252,6 +266,11 @@ namespace vcs_test_all_00_Control
         private void button14_MouseLeave(object sender, EventArgs e)
         {
             this.button14.FlatStyle = FlatStyle.Standard;
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 
