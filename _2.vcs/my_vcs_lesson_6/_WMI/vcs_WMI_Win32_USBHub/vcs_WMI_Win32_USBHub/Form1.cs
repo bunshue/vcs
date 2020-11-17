@@ -40,5 +40,18 @@ namespace vcs_WMI_Win32_USBHub
             richTextBox1.Text += "==========================================================";
             richTextBox1.Text += Environment.NewLine;
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "\nDevice\t\t\t\tPnP Device ID\t\t\t\tDescription\n";
+            ManagementObjectSearcher device_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            foreach (ManagementObject usb_device in device_searcher.Get())
+            {
+                richTextBox1.Text += usb_device.Properties["DeviceID"].Value.ToString() + "\t\t";
+                richTextBox1.Text += usb_device.Properties["PNPDeviceID"].Value.ToString() + "\t\t";
+                richTextBox1.Text += usb_device.Properties["Description"].Value.ToString() + "\n";
+            }
+
+        }
     }
 }
