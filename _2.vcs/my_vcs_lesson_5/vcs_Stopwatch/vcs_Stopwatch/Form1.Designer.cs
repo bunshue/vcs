@@ -38,11 +38,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.lblElapsed = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.tmrClock = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -127,15 +132,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
-            // button4
+            // button6
             // 
-            this.button4.Location = new System.Drawing.Point(22, 27);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(172, 23);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "量測時間開始";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button6.Location = new System.Drawing.Point(22, 122);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(172, 23);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "量測時間";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -147,21 +152,58 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // button4
             // 
-            this.button6.Location = new System.Drawing.Point(22, 122);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(172, 23);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "量測時間";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button4.Location = new System.Drawing.Point(22, 27);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(172, 23);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "量測時間開始";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // lblElapsed
+            // 
+            this.lblElapsed.Font = new System.Drawing.Font("Times New Roman", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblElapsed.Location = new System.Drawing.Point(27, 64);
+            this.lblElapsed.Name = "lblElapsed";
+            this.lblElapsed.Size = new System.Drawing.Size(290, 68);
+            this.lblElapsed.TabIndex = 7;
+            this.lblElapsed.Text = "00:00:00.0";
+            this.lblElapsed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnStart);
+            this.groupBox3.Controls.Add(this.lblElapsed);
+            this.groupBox3.Location = new System.Drawing.Point(493, 227);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(340, 310);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "StopWatch";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnStart.Location = new System.Drawing.Point(124, 182);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(97, 36);
+            this.btnStart.TabIndex = 8;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // tmrClock
+            // 
+            this.tmrClock.Tick += new System.EventHandler(this.tmrClock_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 573);
+            this.ClientSize = new System.Drawing.Size(857, 573);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
@@ -170,6 +212,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -187,6 +230,10 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label lblElapsed;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Timer tmrClock;
     }
 }
 

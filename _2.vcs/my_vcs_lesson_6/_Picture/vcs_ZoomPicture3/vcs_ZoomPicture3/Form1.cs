@@ -26,10 +26,16 @@ namespace vcs_ZoomPicture3
         private void Form1_Load(object sender, EventArgs e)
         {
             string filename = "C:\\______test_files\\picture1.jpg";
-            Image loadedImage = Image.FromFile(filename);
-            pictureBox1.Image = loadedImage;
 
+            //same
+            //Image img = Image.FromFile(filename);
+            //pictureBox1.Image = img;
 
+            //same
+            //Bitmap bitmap1 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap1;
+
+            pictureBox1.Image = new Bitmap(filename);
 
             width = pictureBox1.Image.Width;
             height = pictureBox1.Image.Height;
