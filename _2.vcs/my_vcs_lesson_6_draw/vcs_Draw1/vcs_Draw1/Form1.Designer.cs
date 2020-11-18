@@ -76,7 +76,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(756, 479);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(454, 140);
+            this.richTextBox1.Size = new System.Drawing.Size(525, 140);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
@@ -404,7 +404,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(362, 449);
+            this.panel1.Location = new System.Drawing.Point(410, 455);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 100);
             this.panel1.TabIndex = 44;
@@ -456,9 +456,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(754, 393);
+            this.bt_clear.Location = new System.Drawing.Point(1212, 585);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(120, 42);
+            this.bt_clear.Size = new System.Drawing.Size(69, 34);
             this.bt_clear.TabIndex = 49;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -512,7 +512,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1477, 673);
+            this.ClientSize = new System.Drawing.Size(1517, 718);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
@@ -556,6 +556,8 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);

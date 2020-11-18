@@ -75,8 +75,14 @@
             this.timer8 = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer_random_rectangle = new System.Windows.Forms.Timer(this.components);
+            this.picSample = new System.Windows.Forms.PictureBox();
+            this.picRainbow = new System.Windows.Forms.PictureBox();
+            this.timer_rainbow = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -481,11 +487,52 @@
             // 
             this.timer_random_rectangle.Tick += new System.EventHandler(this.timer_random_rectangle_Tick);
             // 
+            // picSample
+            // 
+            this.picSample.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.picSample.Location = new System.Drawing.Point(432, 41);
+            this.picSample.Name = "picSample";
+            this.picSample.Size = new System.Drawing.Size(100, 46);
+            this.picSample.TabIndex = 54;
+            this.picSample.TabStop = false;
+            this.picSample.Paint += new System.Windows.Forms.PaintEventHandler(this.picSample_Paint);
+            this.picSample.Resize += new System.EventHandler(this.picSample_Resize);
+            // 
+            // picRainbow
+            // 
+            this.picRainbow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picRainbow.Location = new System.Drawing.Point(318, 8);
+            this.picRainbow.Name = "picRainbow";
+            this.picRainbow.Size = new System.Drawing.Size(422, 27);
+            this.picRainbow.TabIndex = 53;
+            this.picRainbow.TabStop = false;
+            this.picRainbow.Paint += new System.Windows.Forms.PaintEventHandler(this.picRainbow_Paint);
+            this.picRainbow.Resize += new System.EventHandler(this.picRainbow_Resize);
+            // 
+            // timer_rainbow
+            // 
+            this.timer_rainbow.Enabled = true;
+            this.timer_rainbow.Tick += new System.EventHandler(this.timer_rainbow_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(567, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 19);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 809);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.picSample);
+            this.Controls.Add(this.picRainbow);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.checkBox1);
@@ -529,6 +576,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,6 +631,10 @@
         private System.Windows.Forms.Timer timer8;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer_random_rectangle;
+        private System.Windows.Forms.PictureBox picSample;
+        private System.Windows.Forms.PictureBox picRainbow;
+        private System.Windows.Forms.Timer timer_rainbow;
+        private System.Windows.Forms.Label label1;
     }
 }
 

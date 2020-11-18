@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 
+//方案總管/加入/現有項目/選取Rainbow.cs, 把 namespace 改成 vcs_Draw3
+
 namespace vcs_Draw3
 {
     public partial class Form1 : Form
@@ -44,6 +46,11 @@ namespace vcs_Draw3
             MaximizeBox = false;
             DoubleBuffered = true;
             StartPosition = FormStartPosition.CenterScreen;
+
+
+            timer_rainbow.Interval = Interval;
+            SelectedColor = Color.Red;
+            SelectedRainbowNumber = 0;
         }
 
 
@@ -952,6 +959,71 @@ namespace vcs_Draw3
 
 
         }
+
+
+        // The currently selected color and its number.
+        private Color SelectedColor;
+        private float SelectedRainbowNumber;
+
+        // The animation parameters.
+        private const float ColorDelta = 0.02f;
+        private int Interval = 20;
+
+        // Start with red selected.
+
+        // Continue animating the rainbow colors.
+        private void timer_rainbow_Tick(object sender, EventArgs e)
+        {
+            // Update the current color.
+            SelectedRainbowNumber += ColorDelta;
+            if (SelectedRainbowNumber > 1f)
+                SelectedRainbowNumber = 0f;
+            SelectedColor = Rainbow.RainbowNumberToColor(SelectedRainbowNumber);
+
+            // Draw the new color.
+            picRainbow.Refresh();
+            picSample.Refresh();
+            label1.Text = SelectedRainbowNumber.ToString();
+        }
+
+        private void picRainbow_Resize(object sender, EventArgs e)
+        {
+            picRainbow.Refresh();
+        }
+
+        private void picSample_Resize(object sender, EventArgs e)
+        {
+            picSample.Refresh();
+        }
+
+        // Draw the rainbow and the selected number.
+        private void picRainbow_Paint(object sender, PaintEventArgs e)
+        {
+            // Draw the rainbow.
+            using (Brush rainbow_brush = Rainbow.RainbowBrush(
+                new Point(0, 0),
+                new Point(picRainbow.ClientSize.Width, picRainbow.ClientSize.Height)))
+            {
+                e.Graphics.FillRectangle(rainbow_brush, picRainbow.ClientRectangle);
+            }
+
+            // Get and draw the selected location.
+            int x = (int)(SelectedRainbowNumber * picRainbow.ClientSize.Width);
+            Point[] pts =
+            {
+                new Point(x - 5, 0),
+                new Point(x, 5),
+                new Point(x + 5, 0)
+            };
+            e.Graphics.FillPolygon(Brushes.Black, pts);
+        }
+
+        // Draw the sample color.
+        private void picSample_Paint(object sender, PaintEventArgs e)
+        {
+            picSample.BackColor = SelectedColor;
+        }
+
 
 
 

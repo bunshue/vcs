@@ -558,7 +558,7 @@ namespace vcs_test_all_06_System
         {
             //方案總管/專案屬性/應用程式/組件資訊 內 修改組件資訊
 
-            //方案總管/加入/現有項目/AssemblyInfo.cs, 把 namespace 改成 vcs_test_all_06_System
+            //方案總管/加入/現有項目/選取AssemblyInfo.cs, 把 namespace 改成 vcs_test_all_06_System
             // Get the AssemblyInfo class.
             AssemblyInfo info = new AssemblyInfo();
 

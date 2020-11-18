@@ -29,6 +29,11 @@ namespace vcs_Draw1
             p = new Pen(Color.Red, 3);
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.ResizeRedraw = true;
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -38,7 +43,7 @@ namespace vcs_Draw1
 
             //button
             x_st = 950;
-            y_st = 10;
+            y_st = 40;
             dx = 130;
             dy = 50;
 
@@ -91,15 +96,14 @@ namespace vcs_Draw1
 
             comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 80);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            pictureBox1.Location = new Point(10, 10);
-
+            pictureBox1.Location = new Point(40, 40);
 
             panel2.Size = new Size(750, 100);
-            panel2.Location = new Point(20, 550);
+            panel2.Location = new Point(50, 570);
             panel2.BackColor = Color.Pink;
         }
 
@@ -1332,6 +1336,37 @@ namespace vcs_Draw1
 
         private void button27_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            // Make a rectangle.
+            Rectangle rect1 = new Rectangle(20, 20,
+                this.ClientSize.Width - 40,
+                this.ClientSize.Height - 40);
+
+            // Convert to RectangleF.
+            RectangleF rectf = rect1;
+
+            // Convert back to Rectangle.
+            Rectangle rect2 = Rectangle.Round(rectf);
+            //Rectangle rect2 = Rectangle.Truncate(rectf);
+
+            // Draw them.
+            using (Pen the_pen = new Pen(Color.Red, 20))
+            {
+                e.Graphics.DrawRectangle(the_pen, rect1);
+
+                the_pen.Color = Color.Lime;
+                the_pen.Width = 10;
+                e.Graphics.DrawRectangle(the_pen,
+                    rectf.X, rectf.Y, rectf.Width, rectf.Height);
+
+                the_pen.Color = Color.Blue;
+                the_pen.Width = 1;
+                e.Graphics.DrawRectangle(the_pen, rect2);
+            }
 
         }
 

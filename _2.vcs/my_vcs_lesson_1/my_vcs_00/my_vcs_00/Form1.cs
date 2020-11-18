@@ -19,6 +19,12 @@ namespace my_vcs_00
         private void Form1_Load(object sender, EventArgs e)
         {
             progressBar1.Value = 66;
+
+            numericUpDown2.Minimum = 0;
+            numericUpDown2.Maximum = 1;
+            numericUpDown2.DecimalPlaces = 2;
+            numericUpDown2.Increment = 0.01m;
+            numericUpDown2.Value = 0.75m;
         }
 
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
