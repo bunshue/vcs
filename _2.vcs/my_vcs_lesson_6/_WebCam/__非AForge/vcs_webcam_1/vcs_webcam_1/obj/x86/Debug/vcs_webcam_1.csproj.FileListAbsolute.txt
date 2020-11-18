@@ -1,3 +1,0 @@
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\vcs_webcam_1\vcs_webcam_1\obj\x86\Debug\vcs_webcam_1.Form1.resources
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\vcs_webcam_1\vcs_webcam_1\obj\x86\Debug\vcs_webcam_1.Properties.Resources.resources
-D:\___source_code\_git\part1\vcs\_2.vcs\my_vcs_lesson_6\_WebCam\__非AForge\vcs_webcam_1\vcs_webcam_1\obj\x86\Debug\vcs_webcam_1.csproj.GenerateResource.Cache
