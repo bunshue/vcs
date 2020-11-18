@@ -20,6 +20,7 @@ namespace vcs_Remove_Bin_Obj
         public Form1()
         {
             InitializeComponent();
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
             label1.Text = "目前位置 : " + currentPath;
@@ -30,7 +31,7 @@ namespace vcs_Remove_Bin_Obj
 
         private void button1_Click(object sender, EventArgs e)
         {
-            lb_main_mesg.Text = "";
+            lb_main_mesg.Text = "開始刪除檔案";
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
@@ -270,14 +271,9 @@ namespace vcs_Remove_Bin_Obj
                 lb_main_mesg.Text += "\t有錯誤";
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
-            lb_main_mesg.Text = "";
+            lb_main_mesg.Text = "開始改名檔案";
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
@@ -306,6 +302,11 @@ namespace vcs_Remove_Bin_Obj
 
             ProcessRenameBackup(filename_backup);
 
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
 

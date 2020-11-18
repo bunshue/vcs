@@ -20,7 +20,7 @@ namespace vcs_WebBrowser
         private void Form1_Load(object sender, EventArgs e)
         {
             // 預設載入的頁面
-            webBrowser1.Navigate("https://www.google.com.tw/");
+            //webBrowser1.Navigate("https://www.google.com.tw/");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -88,6 +88,12 @@ namespace vcs_WebBrowser
         {
             // 把目前的網址顯示在網址輸入框中
             textBox1.Text = webBrowser1.Url.ToString();
+            this.Text = "傳送完成";
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Navigate("about:blank");
         }
 
     }

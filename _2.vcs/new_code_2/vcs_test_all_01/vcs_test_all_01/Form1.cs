@@ -13,6 +13,9 @@ using System.Management;
 
 using System.Runtime.InteropServices;
 
+using System.Net.NetworkInformation;
+
+
 namespace vcs_test_all_01
 {
     public partial class Form1 : Form
@@ -177,6 +180,45 @@ namespace vcs_test_all_01
             g.DrawEllipse(p, 10, 10, 100, 100);//在畫板上畫橢圓,起始坐標為(10,10),外接矩形的寬為,高為
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            String host;
+
+            host = "www.google.com";
+
+            if (IsInternetConnected(host))
+                richTextBox1.Text += host + "\t連線OK\n";
+            else
+                richTextBox1.Text += host+ "\t無法連線\n";
+
+            host = "http://csharphelper.com/";
+
+            if (IsInternetConnected(host))
+                richTextBox1.Text += host + "\t連線OK\n";
+            else
+                richTextBox1.Text += host + "\t無法連線\n";
+        }
+
+        // Return true if a ping to Google works.
+        private bool IsInternetConnected(String host)
+        {
+            return IsInternetConnected(host, 1000);
+        }
+        private bool IsInternetConnected(String host, int timeout)
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply reply = ping.Send(host, timeout);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
 
 
