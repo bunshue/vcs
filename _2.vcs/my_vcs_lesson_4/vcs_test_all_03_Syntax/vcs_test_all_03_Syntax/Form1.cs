@@ -420,7 +420,8 @@ namespace vcs_test_all_03_Syntax
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            //顯示控件上的文字
+            richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)

@@ -79,10 +79,13 @@
             this.picRainbow = new System.Windows.Forms.PictureBox();
             this.timer_rainbow = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.timer_battery = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_battery = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -525,11 +528,25 @@
             this.label1.TabIndex = 55;
             this.label1.Text = "label1";
             // 
+            // timer_battery
+            // 
+            this.timer_battery.Enabled = true;
+            this.timer_battery.Tick += new System.EventHandler(this.timer_battery_Tick);
+            // 
+            // pictureBox_battery
+            // 
+            this.pictureBox_battery.Location = new System.Drawing.Point(762, 29);
+            this.pictureBox_battery.Name = "pictureBox_battery";
+            this.pictureBox_battery.Size = new System.Drawing.Size(84, 206);
+            this.pictureBox_battery.TabIndex = 56;
+            this.pictureBox_battery.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 809);
+            this.Controls.Add(this.pictureBox_battery);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picSample);
             this.Controls.Add(this.picRainbow);
@@ -578,6 +595,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -635,6 +653,8 @@
         private System.Windows.Forms.PictureBox picRainbow;
         private System.Windows.Forms.Timer timer_rainbow;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer_battery;
+        private System.Windows.Forms.PictureBox pictureBox_battery;
     }
 }
 

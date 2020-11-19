@@ -209,7 +209,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 40);
             this.button10.TabIndex = 11;
-            this.button10.Text = "xxx";
+            this.button10.Text = "顯示控件上的文字";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;   //for ImageFormat
 
 //方案總管/加入/現有項目/選取Rainbow.cs, 把 namespace 改成 vcs_Draw3
+//方案總管/加入/現有項目/選取BatteryStuff.cs, 把 namespace 改成 vcs_Draw3
 
 namespace vcs_Draw3
 {
@@ -1024,7 +1025,50 @@ namespace vcs_Draw3
             picSample.BackColor = SelectedColor;
         }
 
+        private void timer_battery_Tick(object sender, EventArgs e)
+        {
+            ShowBatteryStatus();
+        }
 
+        int percent = 0;
+        void ShowBatteryStatus()
+        {
+            // Change the icon.
+            // Draw the battery image.
+            int wid = pictureBox_battery.ClientSize.Width / 2;
+            int hgt = pictureBox_battery.ClientSize.Height;
+            Bitmap battery_bm = BatteryStuff.DrawBattery(
+                percent / 100f,
+                wid, hgt,
+                Color.Transparent, Color.Black,
+                Color.Lime, Color.White,
+                true);
+
+            // Convert the battery image into a square icon.
+            Bitmap square_bm = new Bitmap(hgt, hgt);
+            using (Graphics g = Graphics.FromImage(square_bm))
+            {
+                g.Clear(Color.Transparent);
+                Point[] dest =
+                {
+                    new Point((int)(0.5 * wid), 0),
+                    new Point((int)(1.5 * wid), 0),
+                    new Point((int)(0.5 * wid), hgt),
+                };
+                Rectangle source = new Rectangle(0, 0, wid, hgt);
+                g.DrawImage(battery_bm, dest, source, GraphicsUnit.Pixel);
+            }
+            pictureBox_battery.Image = square_bm;
+
+            //  TBD 製作 ICON 用
+            // Convert the bitmap into an icon.
+            Icon icon = Icon.FromHandle(square_bm.GetHicon());
+            //notifyIcon1.Icon = icon;
+
+            percent += 2;
+            if (percent > 100)
+                percent = 0;
+        }
 
 
     }

@@ -219,6 +219,19 @@ namespace vcs_test_all_01
             }
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // Get the current charge percent.
+            PowerStatus status = SystemInformation.PowerStatus;
+            int percent = (int)(status.BatteryLifePercent * 100);
+
+            richTextBox1.Text += percent.ToString() + "%" + "\n";
+            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
+        }
 
 
 

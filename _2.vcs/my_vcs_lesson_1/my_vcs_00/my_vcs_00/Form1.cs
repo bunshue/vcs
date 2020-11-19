@@ -25,6 +25,13 @@ namespace my_vcs_00
             numericUpDown2.DecimalPlaces = 2;
             numericUpDown2.Increment = 0.01m;
             numericUpDown2.Value = 0.75m;
+
+            notifyIcon1.Text = "Notify Icon Example";
+            notifyIcon1.Icon = new Icon(@"C:\______test_files\_material\ims.ico");
+            notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+
+            // Handle the DoubleClick event to activate the form.
+            notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
         }
 
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -86,6 +93,16 @@ namespace my_vcs_00
                 MessageBox.Show("開啟檔案: " + openFileDialog1.FileName);
             else
                 MessageBox.Show("未選擇檔案");
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void notifyIcon1_DoubleClick(object Sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
