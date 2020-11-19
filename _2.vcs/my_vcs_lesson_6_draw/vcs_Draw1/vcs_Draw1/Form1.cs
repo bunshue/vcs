@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for LinearGradientBrush
+using System.Drawing.Text;      //for TextRenderingHint
 
 namespace vcs_Draw1
 {
@@ -1367,6 +1368,35 @@ namespace vcs_Draw1
                 the_pen.Width = 1;
                 e.Graphics.DrawRectangle(the_pen, rect2);
             }
+
+
+
+            //表單底部畫字 ST
+            // Transform.
+            e.Graphics.ScaleTransform(1.5f, 1.5f, MatrixOrder.Append);
+            e.Graphics.RotateTransform(25, MatrixOrder.Append);
+            e.Graphics.TranslateTransform(80, 30, MatrixOrder.Append);
+
+            int x_st = 260;
+            int y_st = 0;
+            // Make a font.
+            using (Font the_font = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel))
+            {
+                // See how big the text will be when drawn.
+                string the_text = "群曜醫電股份有限公司";
+                SizeF text_size = e.Graphics.MeasureString(the_text, the_font);
+
+                // Draw a rectangle and two ellipses.
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.DrawRectangle(Pens.Blue, x_st, y_st, text_size.Width, text_size.Height);
+                e.Graphics.DrawEllipse(Pens.Red, x_st - 3, y_st - 3, 6, 6);
+                e.Graphics.DrawEllipse(Pens.Green, text_size.Width - 3, text_size.Height - 3, 6, 6);
+
+                // Draw the text.
+                e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                e.Graphics.DrawString(the_text, the_font, Brushes.Brown, x_st, y_st);
+            }
+            //表單底部畫字 SP
 
         }
 

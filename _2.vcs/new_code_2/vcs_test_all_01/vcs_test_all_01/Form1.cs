@@ -233,6 +233,17 @@ namespace vcs_test_all_01
             richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            double pi = Math.PI;
+            richTextBox1.Text += "小數點下2位\t" + pi.ToString("n2") + "\n";
+            richTextBox1.Text += "小數點下4位\t" + pi.ToString("n4") + "\t四捨五入\n";
+            richTextBox1.Text += "小數點下5位\t" + pi.ToString("n5") + "\n";
+            richTextBox1.Text += "小數點下10位\t" + pi.ToString("n10") + "\n";
+            richTextBox1.Text += "小數點下15位\t" + pi.ToString("n15") + "\n";
+
+        }
+
 
 
     }
