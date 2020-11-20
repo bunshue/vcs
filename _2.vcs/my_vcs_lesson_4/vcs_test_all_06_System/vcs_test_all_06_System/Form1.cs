@@ -29,6 +29,7 @@ namespace vcs_test_all_06_System
         {
             InitializeComponent();
             show_item_location();
+            numericUpDown1.Value = 0;
         }
 
         void show_item_location()
@@ -104,6 +105,8 @@ namespace vcs_test_all_06_System
             button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
 
             comboBox_font.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            lb_cursor.Location = new Point(x_st + dx * 3, y_st + dy * 12+8);
+            numericUpDown1.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 12);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
@@ -835,6 +838,43 @@ namespace vcs_test_all_06_System
         private void bt_memory_Click(object sender, EventArgs e)
         {
             timer2.Enabled = true;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            switch ((int)numericUpDown1.Value)
+            {
+                case 0: this.Cursor = Cursors.Default; label1.Text = "Default : 取得預設游標，通常為箭號游標。"; break;
+                case 1: this.Cursor = Cursors.Arrow; label1.Text = "Arrow : 取得箭號游標。"; break;
+                case 2: this.Cursor = Cursors.AppStarting; label1.Text = "AppStarting : 取得應用程式啟動時出現的游標。"; break;
+                case 3: this.Cursor = Cursors.Cross; label1.Text = "Cross : 取得十字型游標。"; break;
+                case 4: this.Cursor = Cursors.Hand; label1.Text = "Hand : 取得手狀游標，通常在游標停留在 Web 連結上方時使用。"; break;
+                case 5: this.Cursor = Cursors.Help; label1.Text = "Help : 取得由箭號和問號組成的說明游標"; break;
+                case 6: this.Cursor = Cursors.HSplit; label1.Text = "HSplit : 取得當滑鼠位在水平分割列上時出現的游標"; break;
+                case 7: this.Cursor = Cursors.IBeam; label1.Text = "IBeam : 取得 I 型游標，這個游標用來顯示當按一下滑鼠時文字游標出現的位置。"; break;
+                case 8: this.Cursor = Cursors.No; label1.Text = "No : 取得指示目前作業的特定區域無效的游標"; break;
+                case 9: this.Cursor = Cursors.NoMove2D; label1.Text = "NoMove2D : 取得當滑鼠不移動，但視窗可以水平和垂直方向捲動時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 10: this.Cursor = Cursors.NoMoveHoriz; label1.Text = "NoMoveHoriz : 取得當滑鼠不移動，但視窗可以水平方向捲動時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 11: this.Cursor = Cursors.NoMoveVert; label1.Text = "NoMoveVert : 取得當滑鼠不移動，但視窗可以垂直方向捲動時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 12: this.Cursor = Cursors.PanEast; label1.Text = "PanEast : 取得當滑鼠移動，而且視窗可水平捲動至右方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 13: this.Cursor = Cursors.PanNE; label1.Text = "PanNE : 取得當滑鼠移動，而且視窗可水平和垂直捲動至上方和右方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 14: this.Cursor = Cursors.PanNorth; label1.Text = "PanNorth : 取得當滑鼠移動，而且視窗可垂直捲動至上方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 15: this.Cursor = Cursors.PanNW; label1.Text = "PanNW : 取得當滑鼠移動，而且視窗可水平和垂直捲動至上方和左方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 16: this.Cursor = Cursors.PanSE; label1.Text = "PanSE : 取得當滑鼠移動，而且視窗可水平和垂直捲動至下方和右方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 17: this.Cursor = Cursors.PanSouth; label1.Text = "PanSouth : 取得當滑鼠移動，而且視窗可垂直捲動至下方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 18: this.Cursor = Cursors.PanSW; label1.Text = "PanSW : 取得當滑鼠移動，而且視窗可水平和垂直捲動至下方和左方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 19: this.Cursor = Cursors.PanWest; label1.Text = "PanWest : 取得當滑鼠移動而且視窗可水平捲動至左方時，滑鼠滾輪作業期間出現的游標。"; break;
+                case 20: this.Cursor = Cursors.SizeAll; label1.Text = "SizeAll : 取得四頭調整大小游標，它是由四個連結的箭號 (分別指向北、南、東和西) 所組成。"; break;
+                case 21: this.Cursor = Cursors.SizeNESW; label1.Text = "SizeNESW : 取得雙頭斜線 (東北/西南) 調整大小游標。"; break;
+                case 22: this.Cursor = Cursors.SizeNS; label1.Text = "SizeNS : 取得雙頭垂直 (北/南) 調整大小游標。"; break;
+                case 23: this.Cursor = Cursors.SizeNWSE; label1.Text = "SizeNWSE : 取得雙頭斜線 (西北/東南) 調整大小游標。"; break;
+                case 24: this.Cursor = Cursors.SizeWE; label1.Text = "SizeWE : 取得雙頭水平 (西/東) 調整大小游標。"; break;
+                case 25: this.Cursor = Cursors.UpArrow; label1.Text = "UpArrow : 取得向上箭號游標，通常用來辨認插入點。"; break;
+                case 26: this.Cursor = Cursors.VSplit; label1.Text = "VSplit : 取得當滑鼠位在垂直分割列上方時出現的游標。"; break;
+                case 27: this.Cursor = Cursors.WaitCursor; label1.Text = "WaitCursor : 取得等待游標，其形狀通常為沙漏形狀。"; break;
+                default: this.Cursor = Cursors.Default; label1.Text = "XXXXXXXXXXX"; break;
+            }
+
         }
 
 

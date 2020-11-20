@@ -15,6 +15,9 @@ using System.Runtime.InteropServices;
 
 using System.Net.NetworkInformation;
 
+using System.IO;    //for Stream
+using System.Net;   //for WebClient
+
 
 namespace vcs_test_all_01
 {
@@ -235,12 +238,130 @@ namespace vcs_test_all_01
 
         private void button9_Click(object sender, EventArgs e)
         {
-            double pi = Math.PI;
-            richTextBox1.Text += "小數點下2位\t" + pi.ToString("n2") + "\n";
-            richTextBox1.Text += "小數點下4位\t" + pi.ToString("n4") + "\t四捨五入\n";
-            richTextBox1.Text += "小數點下5位\t" + pi.ToString("n5") + "\n";
-            richTextBox1.Text += "小數點下10位\t" + pi.ToString("n10") + "\n";
-            richTextBox1.Text += "小數點下15位\t" + pi.ToString("n15") + "\n";
+            string url = "file:///C:/_git/vcs/_1.data/_html/My_Link.html";
+            // Get the response.
+            try
+            {
+                // Get the web response.
+                string result = GetWebResponse(url);
+                //Console.WriteLine(result.Replace("\\r\\n", "\r\n"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Read Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        // Get a web response.
+        private string GetWebResponse(string url)
+        {
+            // Make a WebClient.
+            WebClient web_client = new WebClient();
+
+            // Get the indicated URL.
+            Stream response = web_client.OpenRead(url);
+
+            // Read the result.
+            using (StreamReader stream_reader = new StreamReader(response))
+            {
+                // Get the results.
+                string result = stream_reader.ReadToEnd();
+
+                // Close the stream reader and its underlying stream.
+                stream_reader.Close();
+
+                // Return the result.
+
+                richTextBox1.Text += result + "\n";
+
+                string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+                StreamWriter sw = File.CreateText(filename);
+                sw.Write(result);
+                sw.Close();
+
+                return result;
+            }
+        }
+
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string[] words = {
+                "Alabama",
+                "Alaska",
+                "American Samoa",
+                "Arizona",
+                "Arkansas",
+                "California",
+                "Colorado",
+                "Connecticut",
+                "Delaware",
+                "District of Columbia",
+                "Florida",
+                "Georgia",
+                "Guam",
+                "Hawaii",
+                "Idaho",
+                "Illinois",
+                "Indiana",
+                "Iowa",
+                "Kansas",
+                "Kentucky",
+                "Louisiana",
+                "Maine",
+                "Maryland",
+                "Massachusetts",
+                "Michigan",
+                "Minnesota",
+                "Mississippi",
+                "Missouri",
+                "Montana",
+                "Nebraska",
+                "Nevada",
+                "New Hampshire",
+                "New Jersey",
+                "New Mexico",
+                "New York",
+                "North Carolina",
+                "North Dakota",
+                "Northern Marianas Islands    ",
+                "Ohio",
+                "Oklahoma",
+                "Oregon",
+                "Pennsylvania",
+                "Puerto Rico",
+                "Rhode Island",
+                "South Carolina",
+                "South Dakota",
+                "Tennessee",
+                "Texas",
+                "Utah",
+                "Vermont",
+                "Virginia ",
+                "Virgin Islands ",
+                "Washington",
+                "West Virginia",
+                "Wisconsin",
+                "Wyoming"
+            };
+
+            // Get a list holding each word's unique letter count and name.
+            var count_query =
+                from string word in words
+                orderby word.ToCharArray().Distinct().Count()
+                select word.ToCharArray().Distinct().Count() + ", " + word;
+            //listView1.DataSource = count_query.ToArray();
+
+            richTextBox1.Text += count_query.ToArray().Length.ToString() + "\n";
+
+            int len = count_query.ToArray().Length;
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + (count_query.ToArray())[i].ToString() + "\n";
+
+
+            }
 
         }
 

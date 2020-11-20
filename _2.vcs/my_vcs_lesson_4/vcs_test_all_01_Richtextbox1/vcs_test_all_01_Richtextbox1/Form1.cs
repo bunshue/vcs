@@ -16,7 +16,8 @@ namespace vcs_test_all_01_Richtextbox1
         {
             InitializeComponent();
             show_item_location();
-            label3.Text = "字數 : " + richTextBox1.TextLength.ToString();
+            label4.Text = "字數 : " + richTextBox1.TextLength.ToString();
+            label6.Text = "";
         }
 
         void show_item_location()
@@ -74,6 +75,7 @@ namespace vcs_test_all_01_Richtextbox1
             button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
             bt_open1.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open1.Size.Height * 2 - 5);
             bt_open2.Location = new Point(richTextBox1.Location.X, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_open2.Size.Height);
@@ -82,6 +84,9 @@ namespace vcs_test_all_01_Richtextbox1
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
+
+            label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 140, richTextBox1.Location.Y + 5);
+            label6.Location = new Point(richTextBox1.Location.X + 100, richTextBox1.Location.Y + 5);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -569,6 +574,16 @@ namespace vcs_test_all_01_Richtextbox1
             richTextBox1.Text += "數值格式\t" + y.ToString("N4") + "\n";
         }
 
+        private void button40_Click(object sender, EventArgs e)
+        {
+            double pi = Math.PI;
+            richTextBox1.Text += "小數點下2位\t" + pi.ToString("n2") + "\n";
+            richTextBox1.Text += "小數點下4位\t" + pi.ToString("n4") + "\t四捨五入\n";
+            richTextBox1.Text += "小數點下5位\t" + pi.ToString("n5") + "\n";
+            richTextBox1.Text += "小數點下10位\t" + pi.ToString("n10") + "\n";
+            richTextBox1.Text += "小數點下15位\t" + pi.ToString("n15") + "\n";
+        }
+
         /// <summary>自定义方法 -- 
         ///  获取文本中(行和列)--光标--坐标位置的调用方法
         /// </summary>
@@ -634,7 +649,7 @@ namespace vcs_test_all_01_Richtextbox1
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            label3.Text = "字數 : " + richTextBox1.TextLength.ToString();
+            label4.Text = "字數 : " + richTextBox1.TextLength.ToString();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -717,6 +732,46 @@ namespace vcs_test_all_01_Richtextbox1
         private void bt_clear2_Click(object sender, EventArgs e)
         {
             richTextBox2.Clear();
+        }
+
+        // Display the word under the mouse.
+        private void richTextBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            label6.Text = WordUnderMouse(richTextBox1, e.X, e.Y);
+        }
+
+        // Return the word under the mouse.
+        private string WordUnderMouse(RichTextBox rch, int x, int y)
+        {
+            // Get the character's position.
+            int pos = rch.GetCharIndexFromPosition(new Point(x, y));
+            if (pos <= 0) return "";
+
+            // Find the start of the word.
+            string txt = rch.Text;
+
+            int start_pos;
+            for (start_pos = pos; start_pos >= 0; start_pos--)
+            {
+                // Allow digits, letters, and underscores
+                // as part of the word.
+                char ch = txt[start_pos];
+                if (!char.IsLetterOrDigit(ch) && !(ch == '_')) break;
+            }
+            start_pos++;
+
+            // Find the end of the word.
+            int end_pos;
+            for (end_pos = pos; end_pos < txt.Length; end_pos++)
+            {
+                char ch = txt[end_pos];
+                if (!char.IsLetterOrDigit(ch) && !(ch == '_')) break;
+            }
+            end_pos--;
+
+            // Return the result.
+            if (start_pos > end_pos) return "";
+            return txt.Substring(start_pos, end_pos - start_pos + 1);
         }
 
 

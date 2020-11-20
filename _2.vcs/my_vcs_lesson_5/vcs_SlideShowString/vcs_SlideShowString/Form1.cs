@@ -102,8 +102,8 @@ namespace vcs_SlideShowString
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
 
-            //表單不顯示在 Windows 工作列中
-            this.ShowInTaskbar = false;
+            this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
+            //this.ShowInTaskbar = true;     //true : 表單顯示在 Windows 工作列中
         }
 
         bool loadTextSetup()

@@ -88,6 +88,9 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.bt_memory = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.lb_cursor = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -631,7 +634,7 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(633, 518);
+            this.bt_exit.Location = new System.Drawing.Point(639, 562);
             this.bt_exit.Name = "bt_exit";
             this.bt_exit.Size = new System.Drawing.Size(200, 40);
             this.bt_exit.TabIndex = 66;
@@ -705,11 +708,43 @@
             this.label5.TabIndex = 72;
             this.label5.Text = "label5";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.numericUpDown1.Location = new System.Drawing.Point(633, 521);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            27,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(96, 36);
+            this.numericUpDown1.TabIndex = 73;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // lb_cursor
+            // 
+            this.lb_cursor.AutoSize = true;
+            this.lb_cursor.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_cursor.Location = new System.Drawing.Point(735, 527);
+            this.lb_cursor.Name = "lb_cursor";
+            this.lb_cursor.Size = new System.Drawing.Size(94, 21);
+            this.lb_cursor.TabIndex = 74;
+            this.lb_cursor.Text = "改變鼠標";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1175, 614);
+            this.Controls.Add(this.lb_cursor);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bt_memory);
             this.Controls.Add(this.label4);
@@ -769,6 +804,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -835,6 +871,8 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button bt_memory;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label lb_cursor;
     }
 }
 

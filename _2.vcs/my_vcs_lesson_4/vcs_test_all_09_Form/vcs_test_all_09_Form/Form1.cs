@@ -180,13 +180,9 @@ namespace vcs_test_all_09_Form
             this.WindowState = FormWindowState.Normal;      //設定表單預設大小
         }
 
-
         bool flag_TopMost = false;
         private void button12_Click(object sender, EventArgs e)
         {
-
-
-
             if (flag_TopMost == false)
             {
                 flag_TopMost = true;
@@ -422,10 +418,23 @@ namespace vcs_test_all_09_Form
             this.ControlBox = false;
         }
 
+        bool flag_ShowInTaskbar = true;
         private void button39_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單不顯示在 Windows 工作列中\n";
-            this.ShowInTaskbar = false;
+            if (flag_ShowInTaskbar == true)
+            {
+                flag_ShowInTaskbar = false;
+                this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
+                richTextBox1.Text += "表單不顯示在 Windows 工作列中\n";
+                button39.Text = "表單顯示在 Windows 工作列中";
+            }
+            else
+            {
+                flag_ShowInTaskbar = true;
+                this.ShowInTaskbar = true;     //true : 表單顯示在 Windows 工作列中
+                richTextBox1.Text += "表單顯示在 Windows 工作列中\n";
+                button39.Text = "表單不顯示在 Windows 工作列中";
+            }
         }
 
         private void bt_exit_Click(object sender, EventArgs e)

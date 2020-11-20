@@ -84,6 +84,10 @@
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.button39 = new System.Windows.Forms.Button();
+            this.button40 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -105,11 +109,12 @@
             this.richTextBox1.Size = new System.Drawing.Size(561, 426);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
-                "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。";
+                "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.DoubleClick += new System.EventHandler(this.richTextBox1_DoubleClick);
             this.richTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyUp);
+            this.richTextBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseMove);
             this.richTextBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseUp);
             // 
             // button2
@@ -457,7 +462,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(481, 506);
+            this.label1.Location = new System.Drawing.Point(470, 513);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(292, 24);
             this.label1.TabIndex = 54;
@@ -522,7 +527,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(599, 600);
+            this.textBox2.Location = new System.Drawing.Point(599, 650);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(57, 33);
             this.textBox2.TabIndex = 62;
@@ -533,7 +538,7 @@
             // button37
             // 
             this.button37.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button37.Location = new System.Drawing.Point(497, 348);
+            this.button37.Location = new System.Drawing.Point(497, 327);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(320, 40);
             this.button37.TabIndex = 63;
@@ -550,7 +555,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(481, 536);
+            this.label2.Location = new System.Drawing.Point(470, 543);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(281, 24);
             this.label2.TabIndex = 71;
@@ -560,7 +565,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(481, 566);
+            this.label3.Location = new System.Drawing.Point(470, 573);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(257, 24);
             this.label3.TabIndex = 72;
@@ -635,7 +640,7 @@
             // bt_set_font_size
             // 
             this.bt_set_font_size.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_set_font_size.Location = new System.Drawing.Point(664, 600);
+            this.bt_set_font_size.Location = new System.Drawing.Point(664, 650);
             this.bt_set_font_size.Name = "bt_set_font_size";
             this.bt_set_font_size.Size = new System.Drawing.Size(134, 33);
             this.bt_set_font_size.TabIndex = 79;
@@ -657,7 +662,7 @@
             // button38
             // 
             this.button38.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button38.Location = new System.Drawing.Point(497, 396);
+            this.button38.Location = new System.Drawing.Point(497, 361);
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(320, 40);
             this.button38.TabIndex = 81;
@@ -669,7 +674,7 @@
             // button39
             // 
             this.button39.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button39.Location = new System.Drawing.Point(497, 444);
+            this.button39.Location = new System.Drawing.Point(496, 393);
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(320, 40);
             this.button39.TabIndex = 82;
@@ -678,11 +683,58 @@
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
+            // button40
+            // 
+            this.button40.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button40.Location = new System.Drawing.Point(497, 424);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(320, 40);
+            this.button40.TabIndex = 83;
+            this.button40.Text = "小數點下n位四捨五入";
+            this.button40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(471, 487);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(257, 24);
+            this.label4.TabIndex = 84;
+            this.label4.Text = "C# richTextBox 字數統計";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(471, 602);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(353, 24);
+            this.label5.TabIndex = 85;
+            this.label5.Text = "C# richTextBox 抓出游標所指的字";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(471, 463);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(376, 24);
+            this.label6.TabIndex = 86;
+            this.label6.Text = "C# richTextBox 抓出游標所指的字";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1395, 694);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.button40);
             this.Controls.Add(this.button39);
             this.Controls.Add(this.button38);
             this.Controls.Add(this.bt_clear2);
@@ -801,6 +853,10 @@
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Button button38;
         private System.Windows.Forms.Button button39;
+        private System.Windows.Forms.Button button40;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 
