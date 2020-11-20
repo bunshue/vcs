@@ -546,7 +546,9 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 40);
             this.button39.TabIndex = 57;
+            this.button39.Text = "列出目前的印表機";
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button40
             // 
@@ -578,6 +580,7 @@
             this.button42.Size = new System.Drawing.Size(200, 40);
             this.button42.TabIndex = 60;
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // timer1
             // 
@@ -591,7 +594,9 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(200, 40);
             this.button43.TabIndex = 61;
+            this.button43.Text = "預覽列印";
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
             // button44
             // 
@@ -601,6 +606,7 @@
             this.button44.Size = new System.Drawing.Size(200, 40);
             this.button44.TabIndex = 62;
             this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
             // button45
             // 
@@ -610,6 +616,7 @@
             this.button45.Size = new System.Drawing.Size(200, 40);
             this.button45.TabIndex = 63;
             this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
             // button46
             // 
@@ -619,6 +626,7 @@
             this.button46.Size = new System.Drawing.Size(200, 40);
             this.button46.TabIndex = 64;
             this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // bt_clear
             // 

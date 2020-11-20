@@ -17,6 +17,7 @@ using System.Net;   //for DNS
 using System.IO.Ports;          //for serial ports
 using System.Collections;   //for DictionaryEntry
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Printing;  //for PrinterSettings
 
 namespace vcs_test_all_06_System
 {
@@ -129,9 +130,37 @@ namespace vcs_test_all_06_System
 
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "取得軟體版本\t";
+            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒" + "\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //方案總管/專案屬性/應用程式/組件資訊 內 修改組件資訊
+
+            //方案總管/加入/現有項目/選取AssemblyInfo.cs, 把 namespace 改成 vcs_test_all_06_System
+            // Get the AssemblyInfo class.
+            AssemblyInfo info = new AssemblyInfo();
+
+            // Display the values.
+            richTextBox1.Text += "Title\t" + info.Title + "\n";
+            richTextBox1.Text += "Description\t" + info.Description + "\n";
+            richTextBox1.Text += "Company\t" + info.Company + "\n";
+            richTextBox1.Text += "Product\t" + info.Product + "\n";
+            richTextBox1.Text += "Copyright\t" + info.Copyright + "\n";
+            richTextBox1.Text += "Trademark\t" + info.Trademark + "\n";
+            richTextBox1.Text += "Assembly Version\t" + info.AssemblyVersion + "\n";
+            richTextBox1.Text += "File Version\t" + info.FileVersion + "\n";
+            richTextBox1.Text += "GUID\t" + info.Guid + "\n";
+            richTextBox1.Text += "Neutral Language\t" + info.NeutralLanguage + "\n";
+            richTextBox1.Text += "COM Visible\t" + info.IsComVisible.ToString() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -267,11 +296,6 @@ namespace vcs_test_all_06_System
 
         }
 
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button13_Click(object sender, EventArgs e)
         {
             //程式所在位置
@@ -307,7 +331,21 @@ namespace vcs_test_all_06_System
                 richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
                 richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
             }
+        }
 
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //C# 如何產生 GUID?
+            //可以直接透過內建方法，產生 GUID
+
+            Guid guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID1 : " + guid + "\n";
+
+            guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID2 : " + guid + "\n";
+
+            guid = Guid.NewGuid();
+            richTextBox1.Text += "GUID3 : " + guid + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -331,13 +369,35 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "Version: " + os.Version + "\n";
             richTextBox1.Text += "VersionString: " + os.VersionString + "\n";
             richTextBox1.Text += "CLR Version: " + System.Environment.Version + "\n";
+        }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
+            // Get the file version for the notepad.
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
+
+            // Print the file name and version number.
+            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
             //取得目前應用程式版本
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            checkSuperuser chk = new checkSuperuser();
+            chk.ShowDialog();
 
         }
 
@@ -345,7 +405,30 @@ namespace vcs_test_all_06_System
         {
             //取得NOTEPAD版本資訊
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
+        }
 
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //列印出所有的編碼方式
+            StringBuilder sb = new StringBuilder();
+            foreach (EncodingInfo ei in Encoding.GetEncodings())
+            {
+                sb.Append(ei.CodePage).Append("\t")
+                    .Append(ei.Name).Append("\t")
+                    .Append(ei.DisplayName).Append("\r\n");
+            }
+
+            richTextBox1.Text += sb.ToString() + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -358,11 +441,6 @@ namespace vcs_test_all_06_System
 
 
             //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -410,20 +488,6 @@ namespace vcs_test_all_06_System
             base.WndProc(ref m);
         }
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-            //int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            //int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.Text += "目前的螢幕解析度 :" + Screen.PrimaryScreen.Bounds.Width.ToString() + " * " + Screen.PrimaryScreen.Bounds.Height.ToString() + "\n";
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-            checkSuperuser chk = new checkSuperuser();
-            chk.ShowDialog();
-
-        }
-
         private void button27_Click(object sender, EventArgs e)
         {
             // 找出字體大小,並算出比例
@@ -449,16 +513,6 @@ namespace vcs_test_all_06_System
                 comboBox_font.Items.Add(temp.Name);
             }
             //在Visual Studio 2012下編譯執行後就會在comboBox中顯示目前安裝的所有字體。
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
-            // Get the file version for the notepad.
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
-
-            // Print the file name and version number.
-            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -514,28 +568,6 @@ namespace vcs_test_all_06_System
 
 
 
-        private void button25_Click(object sender, EventArgs e)
-        {
-            //列印出所有的編碼方式
-            StringBuilder sb = new StringBuilder();
-            foreach (EncodingInfo ei in Encoding.GetEncodings())
-            {
-                sb.Append(ei.CodePage).Append("\t")
-                    .Append(ei.Name).Append("\t")
-                    .Append(ei.DisplayName).Append("\r\n");
-            }
-
-            richTextBox1.Text += sb.ToString() + "\n";
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button32_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button30_Click(object sender, EventArgs e)
         {
@@ -544,6 +576,16 @@ namespace vcs_test_all_06_System
             string systemName2 = System.Globalization.CultureInfo.CurrentCulture.NativeName;
             richTextBox1.Text += systemName + "\n";
             richTextBox1.Text += systemName2 + "\n";
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -555,51 +597,6 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
             richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
             richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //方案總管/專案屬性/應用程式/組件資訊 內 修改組件資訊
-
-            //方案總管/加入/現有項目/選取AssemblyInfo.cs, 把 namespace 改成 vcs_test_all_06_System
-            // Get the AssemblyInfo class.
-            AssemblyInfo info = new AssemblyInfo();
-
-            // Display the values.
-            richTextBox1.Text += "Title\t" + info.Title + "\n";
-            richTextBox1.Text += "Description\t" + info.Description + "\n";
-            richTextBox1.Text += "Company\t" + info.Company + "\n";
-            richTextBox1.Text += "Product\t" + info.Product + "\n";
-            richTextBox1.Text += "Copyright\t" + info.Copyright + "\n";
-            richTextBox1.Text += "Trademark\t" + info.Trademark + "\n";
-            richTextBox1.Text += "Assembly Version\t" + info.AssemblyVersion + "\n";
-            richTextBox1.Text += "File Version\t" + info.FileVersion + "\n";
-            richTextBox1.Text += "GUID\t" + info.Guid + "\n";
-            richTextBox1.Text += "Neutral Language\t" + info.NeutralLanguage + "\n";
-            richTextBox1.Text += "COM Visible\t" + info.IsComVisible.ToString() + "\n";
-
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            //C# 如何產生 GUID?
-            //可以直接透過內建方法，產生 GUID
-
-            Guid guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID1 : " + guid + "\n";
-
-            guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID2 : " + guid + "\n";
-
-            guid = Guid.NewGuid();
-            richTextBox1.Text += "GUID3 : " + guid + "\n";
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "取得軟體版本\t";
-            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
         }
 
         private void button23_Click_1(object sender, EventArgs e)
@@ -874,6 +871,51 @@ namespace vcs_test_all_06_System
                 case 27: this.Cursor = Cursors.WaitCursor; label1.Text = "WaitCursor : 取得等待游標，其形狀通常為沙漏形狀。"; break;
                 default: this.Cursor = Cursors.Default; label1.Text = "XXXXXXXXXXX"; break;
             }
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            // Find all of the installed printers.
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                richTextBox1.Text += printer + "\n";
+            }
+
+            // Find and select the default printer.
+            try
+            {
+                PrinterSettings settings = new PrinterSettings();
+                richTextBox1.Text += "\n預設印表機:\t" + settings.PrinterName + "\n";
+            }
+            catch
+            {
+            }
+
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
 
         }
 
