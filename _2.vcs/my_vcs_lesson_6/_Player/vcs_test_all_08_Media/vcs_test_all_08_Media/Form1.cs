@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;   //for DllImport
 
 using WMPLib;   //for mp3
 
-
 namespace vcs_test_all_08_Media
 {
     public partial class Form1 : Form
@@ -23,15 +22,45 @@ namespace vcs_test_all_08_Media
         public Form1()
         {
             InitializeComponent();
+            show_item_location();
             wplayer = new WMPLib.WindowsMediaPlayer();
             trackBar1.Value = wplayer.settings.volume;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 120;
+            dy = 40;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
+
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 20);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+
+        private void button0_Click(object sender, EventArgs e)
         {
             //法一
             //直接使用 System.Media.SoundPlayer 類別 播放.wav檔
-            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\WindowsShutdown.wav");
+            //System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
 
             //法二, 直接使用 System.Media.SoundPlayer 類別
             //System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
@@ -39,31 +68,32 @@ namespace vcs_test_all_08_Media
 
             //法三
             //using System.Media;
-            //SoundPlayer sp = new SoundPlayer(@"C:\______test_files\WindowsShutdown.wav");
+            //SoundPlayer sp = new SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
             //sp.Play(); // 撥放
 
             //法四
             System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-            player.SoundLocation = @"C:\______test_files\start.wav";
+            player.SoundLocation = @"C:\______test_files\_wav\start.wav";
             player.Play();
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //法一
             //直接使用 System.Media.SoundPlayer 類別
-            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\WindowsShutdown.wav");
+            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\______test_files\_wav\WindowsShutdown.wav");
 
             //法二
             //System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
             //sp.SoundLocation = @"F:\_______mp3_ALL_all1\_mp3_0_中英日語文\《遥远的绝响--配乐朗诵余秋雨作品(共4篇)》.赵忠祥.[wav]\02.都江堰.wav";
 
             sp.Stop(); // 停止
+
         }
 
         int number = 0;
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //播放系統預設的音效
             switch (number)
@@ -96,8 +126,8 @@ namespace vcs_test_all_08_Media
             number++;
             if (number > 4)
                 number = 0;
-        }
 
+        }
 
         // API 宣告
         [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
@@ -105,13 +135,58 @@ namespace vcs_test_all_08_Media
             string lpstrCommand, string lpstrReturnString,
             int uReturnLength, int hwndCallback);
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += (GetMediaLen(@"C:\______test_files\WindowsShutdown.wav").ToString() + " 秒\n");
+            richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_wav\WindowsShutdown.wav").ToString() + " 秒\n");
             //richTextBox1.Text += (GetMediaLen(@"C:\aaaa.mp3").ToString() + " 秒");
             //richTextBox1.Text += (GetMediaLen(@"F:\_______VIDEO_ALL_all1\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            PlayWav(@"C:\______test_files\_wav\Frog.wav", false);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            PlayWav(@"C:\______test_files\_wav\Frog.wav", true);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            PlayWav(null, false);
+        }
+
+        // The player making the current sound.
+        private SoundPlayer Player = null;
+
+        // Dispose of the current player and
+        // play the indicated WAV file.
+        private void PlayWav(string filename, bool play_looping)
+        {
+            // Stop the player if it is running.
+            if (Player != null)
+            {
+                Player.Stop();
+                Player.Dispose();
+                Player = null;
+            }
+
+            // If we have no file name, we're done.
+            if (filename == null) return;
+            if (filename.Length == 0) return;
+
+            // Make the new player for the WAV file.
+            Player = new SoundPlayer(filename);
+
+            // Play.
+            if (play_looping)
+                Player.PlayLooping();
+            else
+                Player.Play();
+        }
+
+       
         // 取得多媒體檔案長度
         private long GetMediaLen(string File)
         {
@@ -133,33 +208,6 @@ namespace vcs_test_all_08_Media
                 mciSendString("close Media", null, 0, 0);
             }
             return RetVal;
-        }
-
-        //參考/加入參考/COM 選W indows Media Player (wmp.dll)
-        //using WMPLib;
-        private void button5_Click(object sender, EventArgs e)
-        {
-            wplayer.URL = @"C:\______test_files\bbbb.mp3";
-            wplayer.settings.setMode("loop", true);
-            wplayer.controls.play();
-            timer1.Enabled = true;
-            richTextBox1.Text += wplayer.currentMedia.getItemInfo("Title") + "\n";
-            richTextBox1.Text += "Title: " + wplayer.currentMedia.getItemInfo("Title") + "\n";
-            richTextBox1.Text += "Author: " + wplayer.currentMedia.getItemInfo("Author") + "\n";
-            richTextBox1.Text += "Copyright: " + wplayer.currentMedia.getItemInfo("Copyright") + "\n";
-            richTextBox1.Text += "Description: " + wplayer.currentMedia.getItemInfo("Description") + "\n";
-            richTextBox1.Text += "Duration: " + wplayer.currentMedia.getItemInfo("Duration").ToString() + " Sec\n";
-            richTextBox1.Text += "FileSize: " + wplayer.currentMedia.getItemInfo("FileSize").ToString() + "\n";
-            richTextBox1.Text += "FileType: " + wplayer.currentMedia.getItemInfo("FileType").ToString() + "\n";
-            richTextBox1.Text += "sourceURL: " + wplayer.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            wplayer.controls.stop();
-            timer1.Enabled = false;
-            progressBar1.Value = 0;
-            trackBar2.Value = 0;
         }
 
         public int MediaGetPosition()
@@ -198,22 +246,6 @@ namespace vcs_test_all_08_Media
             }  
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            wplayer.controls.pause();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            wplayer.controls.play();
-            timer1.Enabled = true;
-        }
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             wplayer.settings.volume = trackBar1.Value;
@@ -231,6 +263,52 @@ namespace vcs_test_all_08_Media
             wplayer.controls.currentPosition = position;
             wplayer.controls.play();
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //參考/加入參考/COM 選W indows Media Player (wmp.dll)
+        //using WMPLib;
+        private void mp3_player_play_Click(object sender, EventArgs e)
+        {
+            wplayer.URL = @"C:\______test_files\aaaa.mp3";
+            wplayer.settings.setMode("loop", true);
+            wplayer.controls.play();
+            timer1.Enabled = true;
+            richTextBox1.Text += wplayer.currentMedia.getItemInfo("Title") + "\n";
+            richTextBox1.Text += "Title: " + wplayer.currentMedia.getItemInfo("Title") + "\n";
+            richTextBox1.Text += "Author: " + wplayer.currentMedia.getItemInfo("Author") + "\n";
+            richTextBox1.Text += "Copyright: " + wplayer.currentMedia.getItemInfo("Copyright") + "\n";
+            richTextBox1.Text += "Description: " + wplayer.currentMedia.getItemInfo("Description") + "\n";
+            richTextBox1.Text += "Duration: " + wplayer.currentMedia.getItemInfo("Duration").ToString() + " Sec\n";
+            richTextBox1.Text += "FileSize: " + wplayer.currentMedia.getItemInfo("FileSize").ToString() + "\n";
+            richTextBox1.Text += "FileType: " + wplayer.currentMedia.getItemInfo("FileType").ToString() + "\n";
+            richTextBox1.Text += "sourceURL: " + wplayer.currentMedia.getItemInfo("sourceURL").ToString() + "\n";
+        }
+
+        private void mp3_player_pause_Click(object sender, EventArgs e)
+        {
+            wplayer.controls.pause();
+        }
+
+        private void mp3_player_resume_Click(object sender, EventArgs e)
+        {
+            wplayer.controls.play();
+            timer1.Enabled = true;
+
+        }
+
+        private void mp3_player_stop_Click(object sender, EventArgs e)
+        {
+            wplayer.controls.stop();
+            timer1.Enabled = false;
+            progressBar1.Value = 0;
+            trackBar2.Value = 0;
+        }
+
+
 
     }
 }

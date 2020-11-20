@@ -24,6 +24,13 @@ namespace vcs_Draw3
         Bitmap bitmap2;
         Bitmap bitmap3;
 
+
+        //for gear
+        // The frame images.
+        private Bitmap[] Frames;
+        // The index of the current frame.
+        private int FrameNum = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +38,18 @@ namespace vcs_Draw3
             show_item_location();
             //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             this.DoubleBuffered = true;
+
+            //for gear
+            // Load the frames.
+            Frames = new Bitmap[18];
+            for (int i = 0; i < 18; i++)
+            {
+                Frames[i] = new Bitmap("Frame" + i + ".png");
+            }
+            // Display the first frame.
+            pictureBox_gear.Image = Frames[FrameNum];
+            // Size the form to fit.
+            ClientSize = new Size(pictureBox_gear.Right + pictureBox_gear.Left, pictureBox_gear.Bottom + pictureBox_gear.Left);
         }
 
 
@@ -109,6 +128,12 @@ namespace vcs_Draw3
 
             //pictureBox1.Location = new Point(10, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            pictureBox_gear.Size = new Size(280, 280);
+            pictureBox_gear.Location = new Point(richTextBox1.Location.X - 300, richTextBox1.Location.Y);
+            trackBar1.Location = new Point(richTextBox1.Location.X - 300 - 20, richTextBox1.Location.Y - 50);
+            lb_fps.Location = new Point(richTextBox1.Location.X - 40, richTextBox1.Location.Y - 45);
+
         }
 
         bool isRunning1 = false;
@@ -1068,6 +1093,21 @@ namespace vcs_Draw3
             percent += 2;
             if (percent > 100)
                 percent = 0;
+        }
+
+        // Display the next image.
+        private void timer_gear_Tick(object sender, EventArgs e)
+        {
+            FrameNum = ++FrameNum % Frames.Length;
+            pictureBox_gear.Image = Frames[FrameNum];
+        }
+
+        // Set the delay per frame.
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            richTextBox1.Text += trackBar1.Value.ToString() + " ";
+            timer_gear.Interval = 1000 / trackBar1.Value;
+            lb_fps.Text = trackBar1.Value.ToString();
         }
 
 

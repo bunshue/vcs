@@ -150,4 +150,7 @@
   <metadata name="timer_battery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>32, 58</value>
   </metadata>
+  <metadata name="timer_gear.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>161, 58</value>
+  </metadata>
 </root>

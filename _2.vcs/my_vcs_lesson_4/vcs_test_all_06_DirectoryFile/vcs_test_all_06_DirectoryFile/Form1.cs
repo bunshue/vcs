@@ -1771,9 +1771,9 @@ namespace vcs_test_all_06_DirectoryFile
 
         private Boolean GetFile()
         {
-            richTextBox1.Text += "尋找檔案 start.wav \n";
+            richTextBox1.Text += "尋找檔案 IMG_20180228_215525.jpg\n";
             DirectoryInfo dirInfo = new DirectoryInfo(@"C:\______test_files");
-            foreach (FileInfo info in dirInfo.GetFiles("start.wav"))
+            foreach (FileInfo info in dirInfo.GetFiles("IMG_20180228_215525.jpg"))
             {
                 return true;
             }

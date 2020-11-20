@@ -81,11 +81,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.timer_battery = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_battery = new System.Windows.Forms.PictureBox();
+            this.pictureBox_gear = new System.Windows.Forms.PictureBox();
+            this.timer_gear = new System.Windows.Forms.Timer(this.components);
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.lb_fps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -493,7 +499,7 @@
             // picSample
             // 
             this.picSample.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.picSample.Location = new System.Drawing.Point(432, 41);
+            this.picSample.Location = new System.Drawing.Point(321, 41);
             this.picSample.Name = "picSample";
             this.picSample.Size = new System.Drawing.Size(100, 46);
             this.picSample.TabIndex = 54;
@@ -522,7 +528,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(567, 56);
+            this.label1.Location = new System.Drawing.Point(549, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 19);
             this.label1.TabIndex = 55;
@@ -535,17 +541,55 @@
             // 
             // pictureBox_battery
             // 
-            this.pictureBox_battery.Location = new System.Drawing.Point(762, 29);
+            this.pictureBox_battery.Location = new System.Drawing.Point(762, 57);
             this.pictureBox_battery.Name = "pictureBox_battery";
             this.pictureBox_battery.Size = new System.Drawing.Size(84, 206);
             this.pictureBox_battery.TabIndex = 56;
             this.pictureBox_battery.TabStop = false;
+            // 
+            // pictureBox_gear
+            // 
+            this.pictureBox_gear.Location = new System.Drawing.Point(435, 217);
+            this.pictureBox_gear.Name = "pictureBox_gear";
+            this.pictureBox_gear.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox_gear.TabIndex = 57;
+            this.pictureBox_gear.TabStop = false;
+            // 
+            // timer_gear
+            // 
+            this.timer_gear.Enabled = true;
+            this.timer_gear.Interval = 20;
+            this.timer_gear.Tick += new System.EventHandler(this.timer_gear_Tick);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(435, 344);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(274, 45);
+            this.trackBar1.TabIndex = 58;
+            this.trackBar1.Value = 50;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // lb_fps
+            // 
+            this.lb_fps.AutoSize = true;
+            this.lb_fps.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_fps.Location = new System.Drawing.Point(687, 380);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(31, 19);
+            this.lb_fps.TabIndex = 59;
+            this.lb_fps.Text = "fps";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 809);
+            this.Controls.Add(this.lb_fps);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.pictureBox_gear);
             this.Controls.Add(this.pictureBox_battery);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picSample);
@@ -596,6 +640,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -655,6 +701,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer_battery;
         private System.Windows.Forms.PictureBox pictureBox_battery;
+        private System.Windows.Forms.PictureBox pictureBox_gear;
+        private System.Windows.Forms.Timer timer_gear;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label lb_fps;
     }
 }
 
