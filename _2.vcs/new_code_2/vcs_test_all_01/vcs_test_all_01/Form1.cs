@@ -365,6 +365,44 @@ namespace vcs_test_all_01
 
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string text =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis blandit mauris, a sagittis libero. Proin a posuere justo, vel scelerisque risus.\n" +
+    "Sed condimentum suscipit est in sagittis. Maecenas ac nulla in metus gravida feugiat nec vel odio. Aenean vulputate urna vel gravida rhoncus.\n" +
+    "Etiam vel lacinia urna, non ultrices arcu. Curabitur eget neque nec felis facilisis lacinia. Donec sit amet neque vel ligula scelerisque cursus et quis nisl.\n" +
+    "Proin convallis metus elit, eu condimentum nunc ultrices vel. Maecenas elementum orci tellus, quis pretium risus fringilla non.\n" +
+    "Quisque eget diam a erat vestibulum cursus ut nec nisi. Duis non velit quis augue mattis consectetur pharetra sed dolor.\n" +
+    "Pellentesque luctus tempor ornare.\n" +
+    "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pellentesque dolor in leo porttitor, dignissim sollicitudin nulla bibendum.\n" +
+    "Nullam sit amet faucibus nunc, nec laoreet orci. Etiam nec rutrum mauris. Integer sapien felis, placerat id orci eu, fermentum porta dui.\n" +
+    "Nam in pharetra orci, sed sollicitudin urna. Suspendisse sit amet tellus sagittis, lobortis ante quis, consectetur est.\n" +
+    "Aliquam tempor ligula in augue facilisis, vehicula fermentum sem elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
+
+            // Split the text into paragraphs.
+            string[] paragraphs = text.Split('\n');
+
+            int i = 1;
+            // Draw each paragraph.
+            foreach (string paragraph in paragraphs)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 行\t" + paragraph + "\n";
+                // Break the text into words.
+                string[] words = paragraph.Split(' ');
+                foreach (string word in words)
+                {
+                    richTextBox1.Text += word + "_";
+
+                }
+                richTextBox1.Text += "\n";
+
+
+                i++;
+            }
+
+
+        }
+
 
 
     }

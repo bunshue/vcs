@@ -159,7 +159,9 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(172, 53);
             this.button11.TabIndex = 11;
+            this.button11.Text = "分析文章";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 

@@ -85,6 +85,8 @@
             this.timer_gear = new System.Windows.Forms.Timer(this.components);
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.lb_fps = new System.Windows.Forms.Label();
+            this.pictureBox_atom = new System.Windows.Forms.PictureBox();
+            this.timer_atom = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -92,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -582,11 +585,26 @@
             this.lb_fps.TabIndex = 59;
             this.lb_fps.Text = "fps";
             // 
+            // pictureBox_atom
+            // 
+            this.pictureBox_atom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_atom.Location = new System.Drawing.Point(321, 460);
+            this.pictureBox_atom.Name = "pictureBox_atom";
+            this.pictureBox_atom.Size = new System.Drawing.Size(320, 240);
+            this.pictureBox_atom.TabIndex = 60;
+            this.pictureBox_atom.TabStop = false;
+            // 
+            // timer_atom
+            // 
+            this.timer_atom.Interval = 20;
+            this.timer_atom.Tick += new System.EventHandler(this.timer_atom_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1251, 809);
+            this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_atom);
             this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox_gear);
@@ -642,6 +660,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -705,6 +724,8 @@
         private System.Windows.Forms.Timer timer_gear;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label lb_fps;
+        private System.Windows.Forms.PictureBox pictureBox_atom;
+        private System.Windows.Forms.Timer timer_atom;
     }
 }
 
