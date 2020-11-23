@@ -18,7 +18,10 @@ namespace vcs_test_all_13_ListView5
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Make the ListView column headers.
+            //listView檢視方法
+            listView1.View = View.Details;
+
+            //listView製作標題
             listView1.SetColumnHeaders(
                 new object[] {
                     "Title", HorizontalAlignment.Left,
@@ -45,8 +48,11 @@ namespace vcs_test_all_13_ListView5
             listView1.AddRow("Bogus Book", "http://www.noplace.com/bogus.htm", "0-123-45678-9", "http://www.noplace.com/bogus.jpg", "100", "6", "1/09/1998");
             listView1.AddRow("Fakey", "http://www.skatepark.com/fakey.htm", "9-876-54321-0", "http://www.skatepark.com/fakey.jpg", "9", "700", "1/08/1998");
 
-            // Size the columns.
+            // Size the columns.    //欄位對齊標題欄
             listView1.SizeColumnsToFitDataAndHeaders();
+
+            // Size the columns.    //欄位對齊資料
+            //listView1.SizeColumnsToFitData();
 
             // Make the form big enough to show the ListView.
             Rectangle item_rect =

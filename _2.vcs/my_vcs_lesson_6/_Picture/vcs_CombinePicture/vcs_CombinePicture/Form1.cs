@@ -21,7 +21,9 @@ namespace vcs_CombinePicture
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\_pic2";
+            string foldername = @"C:\______test_files\_pic_combine";
+
+            richTextBox1.Text += "撈出資料夾 " + foldername + " 內所有圖片檔案合併\n";
 
             // Get the picture files in the source directory.
             List<string> files = new List<string>();
@@ -52,7 +54,7 @@ namespace vcs_CombinePicture
             for (int i = 0; i < num_images; i++)
             {
                 images[i] = new Bitmap(files[i]);
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + files[i] + "\n";
+                richTextBox1.Text += "第 " + (i + 1).ToString() + " 張圖\t" + files[i] + "\n";
             }
 
             // Find the largest width and height.
@@ -65,20 +67,34 @@ namespace vcs_CombinePicture
             }
 
             // Make the result bitmap.
-            int margin = 10;
-            int num_cols = 6;
-            int num_rows = 3;
+            int num_cols = int.Parse(textBox1.Text);
+            int num_rows = int.Parse(textBox2.Text);
+
+            richTextBox1.Text += "最初 C = " + num_cols.ToString() + ", R = " + num_rows.ToString() + "\n";
+
+            if (num_images <= num_cols)
+            {
+                num_cols = num_images;
+                num_rows = 1;
+            }
+
+            if ((num_images / num_cols) < num_rows)
+            {
+                num_rows = num_images / num_cols;
+                if ((num_images % num_cols) > 0)
+                    num_rows += 1;
+            }
+
+            richTextBox1.Text += "決定 C = " + num_cols.ToString() + ", R = " + num_rows.ToString() + "\n";
+
+            int margin = int.Parse(textBox3.Text);
             int wid = max_wid * num_cols + margin * (num_cols - 1);
             int hgt = max_hgt * num_rows + margin * (num_rows - 1);
 
             richTextBox1.Text += "W = " + wid.ToString() + "\n";
             richTextBox1.Text += "H = " + hgt.ToString() + "\n";
 
-            //return;
-
-
             Bitmap bm = new Bitmap(wid, hgt);
-
 
             // Place the images on it.
             using (Graphics gr = Graphics.FromImage(bm))

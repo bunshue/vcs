@@ -98,7 +98,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(845, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(300, 547);
+            this.richTextBox1.Size = new System.Drawing.Size(450, 590);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -219,7 +219,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 40);
             this.button12.TabIndex = 13;
-            this.button12.Text = "取得記憶體狀態";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -557,7 +556,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 40);
             this.button40.TabIndex = 58;
-            this.button40.Text = "本程式存圖";
+            this.button40.Text = "取得記憶體狀態1";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -568,7 +567,6 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 40);
             this.button41.TabIndex = 59;
-            this.button41.Text = "全螢幕截圖";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -579,6 +577,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(200, 40);
             this.button42.TabIndex = 60;
+            this.button42.Text = "本程式存圖";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -605,6 +604,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(200, 40);
             this.button44.TabIndex = 62;
+            this.button44.Text = "取得記憶體狀態2";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -625,6 +625,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(200, 40);
             this.button46.TabIndex = 64;
+            this.button46.Text = "全螢幕截圖";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -750,7 +751,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1175, 614);
+            this.ClientSize = new System.Drawing.Size(1307, 614);
             this.Controls.Add(this.lb_cursor);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);

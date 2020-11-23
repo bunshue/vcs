@@ -285,14 +285,6 @@ namespace vcs_test_all_06_System
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //1. 參考 -> 加入參考 -> .NET/Microsoft.VisualBasic
-            //2. using Microsoft.VisualBasic.Devices;
-
-            Computer myComputer = new Computer();
-            richTextBox1.Text += "物理內存總量(M)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + "\n";
-            richTextBox1.Text += "可用物理內存(M)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + "\n";
-            richTextBox1.Text += "虛擬內存總量(M)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + "\n";
-            richTextBox1.Text += "可用虛擬內存(M)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + "\n";
 
         }
 
@@ -748,6 +740,43 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
         }
 
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            // Find all of the installed printers.
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                richTextBox1.Text += printer + "\n";
+            }
+
+            // Find and select the default printer.
+            try
+            {
+                PrinterSettings settings = new PrinterSettings();
+                richTextBox1.Text += "\n預設印表機:\t" + settings.PrinterName + "\n";
+            }
+            catch
+            {
+            }
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            //1. 參考 -> 加入參考 -> .NET/Microsoft.VisualBasic
+            //2. using Microsoft.VisualBasic.Devices;
+
+            Computer myComputer = new Computer();
+            richTextBox1.Text += "物理內存總量(M)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + "\n";
+            richTextBox1.Text += "可用物理內存(M)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + "\n";
+            richTextBox1.Text += "虛擬內存總量(M)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + "\n";
+            richTextBox1.Text += "可用虛擬內存(M)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + "\n";
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+        }
+
         [DllImport("User32")]
         internal extern static bool GetCursorPos(out MousePoint point);
 
@@ -762,50 +791,6 @@ namespace vcs_test_all_06_System
             MousePoint point;
             GetCursorPos(out point);
             this.Text = point.x.ToString() + ", " + point.y.ToString();
-        }
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            save_current_program_to_local_drive();
-        }
-
-        void save_current_program_to_local_drive()
-        {
-            //imsLink的方法
-            //本程式截圖
-            Bitmap bmp = new Bitmap(this.Width, this.Height);
-            Graphics g = Graphics.FromImage(bmp);
-            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
-            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
-            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
-            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
-            IntPtr dc1 = g.GetHdc();
-            g.ReleaseHdc(dc1);
-
-            //存成bmp檔
-            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bmp.Save(filename, ImageFormat.Bmp);
-
-            //存成jpg檔
-            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            //myImage.Save(filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bmp = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bmp))
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-
-                //存成bmp檔
-                String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-                bmp.Save(filename, ImageFormat.Bmp);
-
-                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
-            }
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -874,29 +859,32 @@ namespace vcs_test_all_06_System
 
         }
 
-        private void button39_Click(object sender, EventArgs e)
-        {
-            // Find all of the installed printers.
-            foreach (string printer in PrinterSettings.InstalledPrinters)
-            {
-                richTextBox1.Text += printer + "\n";
-            }
-
-            // Find and select the default printer.
-            try
-            {
-                PrinterSettings settings = new PrinterSettings();
-                richTextBox1.Text += "\n預設印表機:\t" + settings.PrinterName + "\n";
-            }
-            catch
-            {
-            }
-
-        }
-
         private void button42_Click(object sender, EventArgs e)
         {
+            save_current_program_to_local_drive();
+        }
 
+        void save_current_program_to_local_drive()
+        {
+            //imsLink的方法
+            //本程式截圖
+            Bitmap bmp = new Bitmap(this.Width, this.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, System.Drawing.Size blockRegionSize);
+            g.CopyFromScreen(this.Location, new Point(0, 0), new Size(this.Width, this.Height));
+            //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
+            //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
+            IntPtr dc1 = g.GetHdc();
+            g.ReleaseHdc(dc1);
+
+            //存成bmp檔
+            String filename = Application.StartupPath + "\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bmp.Save(filename, ImageFormat.Bmp);
+
+            //存成jpg檔
+            //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            //myImage.Save(filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -906,7 +894,36 @@ namespace vcs_test_all_06_System
 
         private void button44_Click(object sender, EventArgs e)
         {
+            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
 
+            foreach (ManagementObject mobj in os_searcher.Get())
+            {
+                GetInfo(mobj, "FreePhysicalMemory");
+                GetInfo(mobj, "FreeSpaceInPagingFiles");
+                GetInfo(mobj, "FreeVirtualMemory");
+                GetInfo(mobj, "SizeStoredInPagingFiles");
+                GetInfo(mobj, "TotalSwapSpaceSize");
+                GetInfo(mobj, "TotalVirtualMemorySize");
+                GetInfo(mobj, "TotalVisibleMemorySize");
+            }
+
+        }
+
+        // Add information about the property to the ListView.
+        private void GetInfo(ManagementObject mobj, string property_name)
+        {
+            object property_obj = mobj[property_name];
+            if (property_obj == null)
+            {
+                //lvwInfo.AddRow(property_name, "???");
+                richTextBox1.Text += property_name + "\t\t???\n";
+            }
+            else
+            {
+                ulong property_value = (ulong)property_obj * 1024;
+                //lvwInfo.AddRow(property_name, property_value.ToFileSizeApi());
+                richTextBox1.Text += property_name + "\t\t" + property_value.ToFileSizeApi() + "\n";
+            }
         }
 
         private void button45_Click(object sender, EventArgs e)
@@ -916,6 +933,18 @@ namespace vcs_test_all_06_System
 
         private void button46_Click(object sender, EventArgs e)
         {
+            Rectangle rect = Screen.GetBounds(Point.Empty);
+            using (Bitmap bmp = new Bitmap(rect.Width, rect.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+
+                //存成bmp檔
+                String filename = Application.StartupPath + "\\image_full_screen_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                bmp.Save(filename, ImageFormat.Bmp);
+
+                richTextBox1.Text += "全螢幕截圖，存檔檔名：" + filename + "\n";
+            }
 
         }
 
