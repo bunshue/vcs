@@ -775,6 +775,47 @@ namespace vcs_test_all_06_System
 
         private void button41_Click(object sender, EventArgs e)
         {
+            ShowPowerStatus1();
+            ShowPowerStatus2();
+        }
+
+        private void ShowPowerStatus1()
+        {
+            // Get the current charge percent.
+            PowerStatus status = SystemInformation.PowerStatus;
+            int percent = (int)(status.BatteryLifePercent * 100);
+
+            richTextBox1.Text += percent.ToString() + "%" + "\n";
+            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
+        }
+
+        private void ShowPowerStatus2()
+        {
+            PowerStatus status = SystemInformation.PowerStatus;
+            richTextBox1.Text += "Charge Status:\t" + status.BatteryChargeStatus.ToString() + "\n";
+
+            if (status.BatteryFullLifetime == -1)
+            {
+                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
+            }
+            richTextBox1.Text += "Charge:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
+            if (status.BatteryLifeRemaining == -1)
+            {
+                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
+            }
+            richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
         }
 
         [DllImport("User32")]

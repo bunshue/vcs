@@ -567,6 +567,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 40);
             this.button41.TabIndex = 59;
+            this.button41.Text = "電源狀態";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 

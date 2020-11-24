@@ -224,16 +224,22 @@ namespace vcs_test_all_01
 
         private void button8_Click(object sender, EventArgs e)
         {
-            // Get the current charge percent.
-            PowerStatus status = SystemInformation.PowerStatus;
-            int percent = (int)(status.BatteryLifePercent * 100);
+            //2021年距今還有多久
+            DateTime EventDate = new DateTime(2021, 11, 25, 12, 34, 56);
+            TimeSpan remaining = EventDate - DateTime.Now;
 
-            richTextBox1.Text += percent.ToString() + "%" + "\n";
-            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
+            if (remaining.TotalSeconds < 0)
+            {
+                richTextBox1.Text += "時間 " + EventDate + " 早就過了\n";
+            }
+            else
+            {
+                richTextBox1.Text += "時間 " + EventDate + " 距今:\n";
+                richTextBox1.Text += remaining.Days + "  天\n";
+                richTextBox1.Text += remaining.Hours + "  時\n";
+                richTextBox1.Text += remaining.Minutes + "  分\n";
+                richTextBox1.Text += remaining.Seconds + "  秒\n";
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)

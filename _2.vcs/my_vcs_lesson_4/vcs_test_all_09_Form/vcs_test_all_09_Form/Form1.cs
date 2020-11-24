@@ -84,7 +84,11 @@ namespace vcs_test_all_09_Form
 
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxx\n";
+            richTextBox1.Text += "表單顯示在螢幕最右下方\n";
+            const int margin = 10;
+            int x = Screen.PrimaryScreen.WorkingArea.Right - this.Width - margin;
+            int y = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height - margin;
+            this.Location = new Point(x, y);
         }
 
         private void button1_Click(object sender, EventArgs e)

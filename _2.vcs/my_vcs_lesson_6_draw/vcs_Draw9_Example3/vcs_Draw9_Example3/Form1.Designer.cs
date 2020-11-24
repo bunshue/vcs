@@ -79,8 +79,21 @@
             this.button42 = new System.Windows.Forms.Button();
             this.button43 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer_battery1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.picHBattery2 = new System.Windows.Forms.PictureBox();
+            this.picVBattery2 = new System.Windows.Forms.PictureBox();
+            this.picHBattery1 = new System.Windows.Forms.PictureBox();
+            this.picVBattery1 = new System.Windows.Forms.PictureBox();
+            this.picSamples = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSamples)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -602,15 +615,95 @@
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
-            // timer1
+            // timer_battery1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer_battery1.Enabled = true;
+            this.timer_battery1.Interval = 500;
+            this.timer_battery1.Tick += new System.EventHandler(this.timer_battery1_Tick);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblStatus);
+            this.groupBox1.Controls.Add(this.picHBattery2);
+            this.groupBox1.Controls.Add(this.picVBattery2);
+            this.groupBox1.Controls.Add(this.picHBattery1);
+            this.groupBox1.Controls.Add(this.picVBattery1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 439);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(346, 162);
+            this.groupBox1.TabIndex = 75;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Battery";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(17, 40);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(173, 37);
+            this.lblStatus.TabIndex = 10;
+            this.lblStatus.Text = "Offline";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picHBattery2
+            // 
+            this.picHBattery2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picHBattery2.Location = new System.Drawing.Point(108, 96);
+            this.picHBattery2.Name = "picHBattery2";
+            this.picHBattery2.Size = new System.Drawing.Size(80, 37);
+            this.picHBattery2.TabIndex = 9;
+            this.picHBattery2.TabStop = false;
+            // 
+            // picVBattery2
+            // 
+            this.picVBattery2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picVBattery2.Location = new System.Drawing.Point(272, 59);
+            this.picVBattery2.Name = "picVBattery2";
+            this.picVBattery2.Size = new System.Drawing.Size(40, 74);
+            this.picVBattery2.TabIndex = 8;
+            this.picVBattery2.TabStop = false;
+            // 
+            // picHBattery1
+            // 
+            this.picHBattery1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picHBattery1.Location = new System.Drawing.Point(22, 96);
+            this.picHBattery1.Name = "picHBattery1";
+            this.picHBattery1.Size = new System.Drawing.Size(80, 37);
+            this.picHBattery1.TabIndex = 7;
+            this.picHBattery1.TabStop = false;
+            // 
+            // picVBattery1
+            // 
+            this.picVBattery1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picVBattery1.Location = new System.Drawing.Point(226, 59);
+            this.picVBattery1.Name = "picVBattery1";
+            this.picVBattery1.Size = new System.Drawing.Size(40, 74);
+            this.picVBattery1.TabIndex = 6;
+            this.picVBattery1.TabStop = false;
+            // 
+            // picSamples
+            // 
+            this.picSamples.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picSamples.BackColor = System.Drawing.Color.Pink;
+            this.picSamples.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picSamples.Location = new System.Drawing.Point(376, 439);
+            this.picSamples.Name = "picSamples";
+            this.picSamples.Size = new System.Drawing.Size(243, 127);
+            this.picSamples.TabIndex = 76;
+            this.picSamples.TabStop = false;
+            this.picSamples.Paint += new System.Windows.Forms.PaintEventHandler(this.picSamples_Paint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1389, 688);
+            this.Controls.Add(this.picSamples);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button40);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button42);
@@ -664,7 +757,14 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSamples)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -721,7 +821,14 @@
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button43;
         private System.Windows.Forms.Button button44;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_battery1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.PictureBox picHBattery2;
+        private System.Windows.Forms.PictureBox picVBattery2;
+        private System.Windows.Forms.PictureBox picHBattery1;
+        private System.Windows.Forms.PictureBox picVBattery1;
+        private System.Windows.Forms.PictureBox picSamples;
     }
 }
 
