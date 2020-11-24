@@ -28,7 +28,7 @@ namespace vcs_Clipboard
             if (flag_my_PicPick == true)
             {
                 //button1.Visible = false;
-                button2.Visible = false;
+                //button2.Visible = false;
                 button3.Visible = false;
                 button4.Visible = false;
                 button5.Visible = false;
@@ -36,10 +36,17 @@ namespace vcs_Clipboard
                 groupBox1.Visible = false;
                 pictureBox1.Visible = false;
                 richTextBox1.Visible = false;
+
                 button1.Text = "截圖存檔";
                 button1.Location = new Point(10, 10);
                 button1.Size = new Size(60, 50);
-                label1.Location = new Point(75, 24);
+
+                button2.Font = new Font(button2.Font.Name, 14);
+                button2.Text = "全螢幕截圖";
+                button2.Location = new Point(button1.Location.X + button1.Size.Width + 2, 10);
+                button2.Size = new Size(115, 25);
+
+                label1.Location = new Point(75, 40);
 
                 this.Size = new Size(205, 110);
 
@@ -100,7 +107,6 @@ namespace vcs_Clipboard
                     Bitmap bitmap1 = (Bitmap)dataObject.GetData(DataFormats.Bitmap);  //取得Bitmap資料
                     if (bitmap1 != null)
                     {
-                        //string filename = Application.StartupPath + "\\vcs_Clipboard_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
                         string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
                         try
                         {
@@ -190,6 +196,31 @@ namespace vcs_Clipboard
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (flag_my_PicPick == true)
+            {
+                //全螢幕截圖
+                //建立空白畫布
+                Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                //取得畫布的繪圖物件用以繪圖
+                Graphics g = Graphics.FromImage(bitmap1);
+                g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+                IntPtr dc1 = g.GetHdc();
+                g.ReleaseHdc(dc1);
+
+                //將裁切出的矩形存成JPG圖檔。
+                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                try
+                {
+                    bitmap1.Save(@filename, ImageFormat.Jpeg);
+                    //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                    label1.Text = "存檔成功";
+                    timer1.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
