@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_stddev_extension.Properties {
+namespace howto_copy_paste_scribble.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

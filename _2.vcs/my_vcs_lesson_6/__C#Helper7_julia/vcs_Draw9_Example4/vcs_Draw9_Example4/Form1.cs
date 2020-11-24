@@ -22,6 +22,26 @@ namespace vcs_Draw9_Example4
         SolidBrush sb;
         Bitmap bitmap1;
 
+        // hit curve
+        // The points that define the curve.
+        private Point[] Points =
+        {
+            new Point(213, 204),
+            new Point(63, 143),
+            new Point(227, 60),
+            new Point(123, 222),
+            new Point(72, 64),
+        };
+
+        // A GraphicsPath to represent the curve.
+        GraphicsPath Path = new GraphicsPath();
+
+        // Hits and misses.
+        private List<Point> Hits = new List<Point>();
+        private List<Point> Misses = new List<Point>();
+
+        private Point[] ColorPoints = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +56,19 @@ namespace vcs_Draw9_Example4
             g.Clear(Color.Red);             //useless??
             pictureBox1.BackColor = Color.Pink;
             show_item_location();
+
+            // Make a GraphicsPath for the curve.
+            Path = new GraphicsPath();
+            Path.AddCurve(Points);
+
+            Random rand = new Random();
+            ColorPoints = new Point[20];
+            for (int i = 0; i < ColorPoints.Length; i++)
+            {
+                ColorPoints[i] = new Point(
+                    i * 15,
+                    rand.Next(5, 196));
+            }
         }
 
         void show_item_location()
@@ -121,8 +154,19 @@ namespace vcs_Draw9_Example4
             ClientSize = new Size(button4.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
         }
 
+        bool flag_check_click_on_curve = false;
         private void button0_Click(object sender, EventArgs e)
         {
+            if (button0.Text == "檢查有沒有點在線上 ST")
+            {
+                flag_check_click_on_curve = true;
+                button0.Text = "檢查有沒有點在線上 SP";
+            }
+            else
+            {
+                flag_check_click_on_curve = false;
+                button0.Text = "檢查有沒有點在線上 ST";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -318,6 +362,14 @@ namespace vcs_Draw9_Example4
         {
         }
 
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+
+
         private void bt_clear_Click(object sender, EventArgs e)
         {
             bitmap1 = null;
@@ -364,6 +416,130 @@ namespace vcs_Draw9_Example4
             Application.Exit();
         }
 
+        private void pictureBox_hit_curve_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (PointIsOverCurve(e.Location))
+                Hits.Add(e.Location);
+            else
+                Misses.Add(e.Location);
+            Refresh();
+
+        }
+
+        // See if the mouse is over the curve's GraphicsPath.
+        private void pictureBox_hit_curve_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (PointIsOverCurve(e.Location))
+                Cursor = Cursors.Cross;
+            else
+                Cursor = Cursors.Default;
+
+        }
+
+        // Draw the curve.
+        private void pictureBox_hit_curve_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawString("點擊曲線", new Font("標楷體", 25), new SolidBrush(Color.Blue), new PointF(30, 10));
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the curve.
+            e.Graphics.DrawCurve(Pens.Blue, Points);
+
+            // Draw the hits and misses.
+            foreach (Point point in Misses)
+                DrawPoint(e.Graphics, Brushes.Pink, Pens.Red, point);
+            foreach (Point point in Hits)
+                DrawPoint(e.Graphics, Brushes.Lime, Pens.Green, point);
+        }
+
+        // Return true if the point is over the curve.
+        private bool PointIsOverCurve(Point point)
+        {
+            // Use a three pixel wide pen.
+            using (Pen thick_pen = new Pen(Color.Black, 3))
+            {
+                return Path.IsOutlineVisible(point, thick_pen);
+            }
+        }
+
+        // Draw a point.
+        private void DrawPoint(Graphics gr, Brush brush, Pen pen, Point point)
+        {
+            const int radius = 3;
+            const int diameter = 2 * radius;
+            Rectangle rect = new Rectangle(
+                point.X - radius, point.Y - radius,
+                diameter, diameter);
+            gr.FillEllipse(brush, rect);
+            gr.DrawEllipse(pen, rect);
+        }
+
+        private void pictureBox_color_curve_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawString("彩色曲線", new Font("標楷體", 25), new SolidBrush(Color.Blue), new PointF(30, 10));
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            RectangleF world_rect = new RectangleF(0, 0, 100, 100);
+            RectangleF device_rect = new RectangleF(5, 5,
+                pictureBox_color_curve.ClientSize.Width - 10,
+                pictureBox_color_curve.ClientSize.Height - 10);
+
+            // Draw the axes.
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                for (int y = 10; y < 100; y += 10)
+                    e.Graphics.DrawLine(pen, -2, y, 2, y);
+                e.Graphics.DrawLine(pen, 0, 0, 0, 100);
+
+                for (int x = 10; x < 100; x += 10)
+                    e.Graphics.DrawLine(pen, x, -2, x, 2);
+                e.Graphics.DrawLine(pen, 0, 0, 100, 0);
+            }
+
+            // Make a brush for the curve.
+            using (LinearGradientBrush brush =
+                new LinearGradientBrush(world_rect,
+                    Color.Red, Color.Blue, 270))
+            {
+                ColorBlend blend = new ColorBlend();
+                blend.Colors = new Color[]
+                {
+                    Color.Red, Color.Red,
+                    Color.Orange, Color.Orange,
+                    Color.Yellow, Color.Yellow,
+                    Color.Green, Color.Green,
+                    Color.Blue, Color.Blue,
+                };
+                blend.Positions =
+                    new float[]
+                    {
+                        0.0f, 0.2f,
+                        0.2f, 0.4f,
+                        0.4f, 0.6f, 
+                        0.6f, 0.8f,
+                        0.8f, 1.0f,
+                    };
+                brush.InterpolationColors = blend;
+
+                // Make a thick pen defined by the brush.
+                using (Pen pen = new Pen(brush, 3))
+                {
+                    pen.LineJoin = LineJoin.Bevel;
+
+                    // Draw the curve.
+                    Random rand = new Random();
+
+                    e.Graphics.DrawCurve(pen, ColorPoints);     //曲線
+
+                    //e.Graphics.DrawLines(pen, ColorPoints);     //直線
+
+                    //// Draw a vertical line on the edge to show the colors.
+                    //e.Graphics.DrawLine(pen, 100, 0, 100, 100);
+                }
+            }
+
+        }
 
 
 

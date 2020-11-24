@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace howto_stddev_extension
+namespace vcs_test_all_10_Math_Random
 {
     public static class StatsStuff
     {

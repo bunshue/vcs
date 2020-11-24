@@ -80,7 +80,11 @@
             this.button43 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_hit_curve = new System.Windows.Forms.PictureBox();
+            this.pictureBox_color_curve = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hit_curve)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_color_curve)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -118,9 +122,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(704, 418);
+            this.pictureBox1.Size = new System.Drawing.Size(685, 418);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
@@ -227,11 +232,12 @@
             // 
             // button0
             // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button0.Location = new System.Drawing.Point(755, 8);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 30;
+            this.button0.Text = "檢查有沒有點在線上 ST";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -604,11 +610,35 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // pictureBox_hit_curve
+            // 
+            this.pictureBox_hit_curve.BackColor = System.Drawing.Color.LightGreen;
+            this.pictureBox_hit_curve.Location = new System.Drawing.Point(431, 438);
+            this.pictureBox_hit_curve.Name = "pictureBox_hit_curve";
+            this.pictureBox_hit_curve.Size = new System.Drawing.Size(254, 238);
+            this.pictureBox_hit_curve.TabIndex = 75;
+            this.pictureBox_hit_curve.TabStop = false;
+            this.pictureBox_hit_curve.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_hit_curve_Paint);
+            this.pictureBox_hit_curve.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hit_curve_MouseClick);
+            this.pictureBox_hit_curve.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hit_curve_MouseMove);
+            // 
+            // pictureBox_color_curve
+            // 
+            this.pictureBox_color_curve.BackColor = System.Drawing.Color.LightGreen;
+            this.pictureBox_color_curve.Location = new System.Drawing.Point(171, 438);
+            this.pictureBox_color_curve.Name = "pictureBox_color_curve";
+            this.pictureBox_color_curve.Size = new System.Drawing.Size(254, 238);
+            this.pictureBox_color_curve.TabIndex = 76;
+            this.pictureBox_color_curve.TabStop = false;
+            this.pictureBox_color_curve.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_color_curve_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1389, 688);
+            this.ClientSize = new System.Drawing.Size(1370, 688);
+            this.Controls.Add(this.pictureBox_color_curve);
+            this.Controls.Add(this.pictureBox_hit_curve);
             this.Controls.Add(this.button40);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button42);
@@ -663,6 +693,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hit_curve)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_color_curve)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -720,6 +752,8 @@
         private System.Windows.Forms.Button button43;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox_hit_curve;
+        private System.Windows.Forms.PictureBox pictureBox_color_curve;
     }
 }
 

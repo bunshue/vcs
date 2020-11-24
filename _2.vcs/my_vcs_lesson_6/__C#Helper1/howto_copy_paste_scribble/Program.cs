@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_stddev_extension
+namespace howto_copy_paste_scribble
 {
     static class Program
     {
