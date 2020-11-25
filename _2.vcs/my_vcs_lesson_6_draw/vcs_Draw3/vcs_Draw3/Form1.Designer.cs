@@ -88,6 +88,7 @@
             this.pictureBox_atom = new System.Windows.Forms.PictureBox();
             this.timer_atom = new System.Windows.Forms.Timer(this.components);
             this.label_size = new System.Windows.Forms.Label();
+            this.pictureBox_stretching = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -96,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -611,11 +613,22 @@
             this.label_size.TabIndex = 61;
             this.label_size.Text = "可以變大變小的Label";
             // 
+            // pictureBox_stretching
+            // 
+            this.pictureBox_stretching.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox_stretching.Location = new System.Drawing.Point(484, 280);
+            this.pictureBox_stretching.Name = "pictureBox_stretching";
+            this.pictureBox_stretching.Size = new System.Drawing.Size(171, 27);
+            this.pictureBox_stretching.TabIndex = 62;
+            this.pictureBox_stretching.TabStop = false;
+            this.pictureBox_stretching.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_stretching_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_stretching);
             this.Controls.Add(this.label_size);
             this.Controls.Add(this.pictureBox_atom);
             this.Controls.Add(this.lb_fps);
@@ -674,6 +687,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -740,6 +754,7 @@
         private System.Windows.Forms.PictureBox pictureBox_atom;
         private System.Windows.Forms.Timer timer_atom;
         private System.Windows.Forms.Label label_size;
+        private System.Windows.Forms.PictureBox pictureBox_stretching;
     }
 }
 

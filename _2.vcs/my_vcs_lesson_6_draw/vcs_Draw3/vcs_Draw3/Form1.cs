@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for Matrix
 
+using System.Drawing.Text;      //for TextRenderingHint
+
 //方案總管/加入/現有項目/選取Rainbow.cs, 把 namespace 改成 vcs_Draw3
 //方案總管/加入/現有項目/選取BatteryStuff.cs, 把 namespace 改成 vcs_Draw3
 
@@ -47,6 +49,20 @@ namespace vcs_Draw3
 
         int label_size_w_old = 0;
         int label_size_h_old = 0;
+
+        // The PictureBox's current size.
+        private float StartWidth;
+        private int StartHeight;
+        private float EndWidth = 260;
+        private float Dx, CurrentWidth;
+        private int TicksToGo, TotalTicks;
+
+        // Information about the string to draw.
+        private const string LabelText = "群曜醫電股份有限公司";
+        //private const string LabelText = "C# Programming";
+        private Font TextFont;
+        private float[] CharacterWidths;
+        private float TotalCharacterWidth;
 
         public Form1()
         {
@@ -144,6 +160,35 @@ namespace vcs_Draw3
 
             label_size_w_old = label_size.Size.Width;
             label_size_h_old = label_size.Size.Height;
+
+
+            // Set the initial size.
+            StartWidth = pictureBox_stretching.Size.Width;
+            StartHeight = pictureBox_stretching.Size.Height;
+            CurrentWidth = StartWidth;
+
+            // Stretch for 2 seconds.
+            TotalTicks = 2 * 1000 / timer1.Interval;
+            Dx = (EndWidth - StartWidth) / TotalTicks;
+
+            // Make the font and measure the characters.
+            CharacterWidths = new float[LabelText.Length];
+            TextFont = new Font("Times New Roman", 16);
+            using (Graphics gr = this.CreateGraphics())
+            {
+                for (int i = 0; i < LabelText.Length; i++)
+                {
+                    SizeF ch_size = gr.MeasureString(LabelText.Substring(i, 1), TextFont);
+                    CharacterWidths[i] = ch_size.Width;
+                }
+            }
+            TotalCharacterWidth = CharacterWidths.Sum();
+
+            CurrentWidth = StartWidth;
+            pictureBox_stretching.Size = new Size((int)StartWidth, pictureBox_stretching.Size.Height);
+            pictureBox_stretching.Refresh();
+            TicksToGo = TotalTicks;
+
         }
 
 
@@ -598,6 +643,18 @@ namespace vcs_Draw3
             if (dh > 50)
                 dh = 0;
             label_size.Size = new Size(label_size_w_old + dw, label_size_h_old + dh);
+
+            CurrentWidth += Dx;
+            pictureBox_stretching.Size = new Size((int)CurrentWidth, StartHeight);
+            pictureBox_stretching.Refresh();
+
+            // If we're done moving, disable the Timer.
+            if (--TicksToGo <= 0)
+            {
+                timer1.Enabled = false;
+                //TicksToGo = TotalTicks;
+            }
+
         }
 
         int cnt = 0;
@@ -1248,6 +1305,41 @@ namespace vcs_Draw3
                 gr.DrawPolygon(thin_pen, Points.ToArray());
             }
         }
+
+        // Draw the text on the control.
+        private void pictureBox_stretching_Paint(object sender, PaintEventArgs e)
+        {
+            // Use AntiAlias for the best result.
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            e.Graphics.Clear(pictureBox_stretching.BackColor);
+
+            SpaceTextToFit(e.Graphics, pictureBox_stretching.ClientRectangle,
+                TextFont, Brushes.Red, LabelText);
+
+        }
+
+        // Draw text inserting space between characters
+        // to make it fill the indicated width.
+        private void SpaceTextToFit(Graphics gr, Rectangle rect, Font font, Brush brush, string text)
+        {
+            using (StringFormat string_format = new StringFormat())
+            {
+                string_format.Alignment = StringAlignment.Near;
+                string_format.LineAlignment = StringAlignment.Near;
+
+                // Calculate the spacing.
+                float space = (rect.Width - TotalCharacterWidth) / (text.Length - 1);
+
+                // Draw the characters.
+                PointF point = new PointF(rect.X, rect.Y);
+                for (int i = 0; i < text.Length; i++)
+                {
+                    gr.DrawString(text[i].ToString(), font, brush, point);
+                    point.X += CharacterWidths[i] + space;
+                }
+            }
+        }
+
 
     }
 }

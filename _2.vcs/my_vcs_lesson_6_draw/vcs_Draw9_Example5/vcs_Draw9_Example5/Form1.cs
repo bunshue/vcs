@@ -45,6 +45,11 @@ namespace vcs_Draw9_Example5
             show_item_location();
             DrawRansomNoteText();
             DrawRansomNoteText2();
+
+            MakePentagons();
+            MakeOctagons();
+
+            button1_Click(sender, e);
         }
 
         void show_item_location()
@@ -228,10 +233,229 @@ namespace vcs_Draw9_Example5
             return points;
         }
 
+        // Coordinates of the points in the initiator.
+        private List<PointF> Initiator;
 
+        // Angles and distances for the generator.
+        private float ScaleFactor;
+        private List<float> GeneratorDTheta;
+
+        /*
+        // Coordinates of the points in the initiator.
+        private List<PointF> Initiator;
+
+        // Angles and distances for the generator.
+        private float ScaleFactor;
+        private List<float> GeneratorDTheta;
+        */
         private void button1_Click(object sender, EventArgs e)
         {
+            Draw_SnowFlake1();
+            Draw_SnowFlake2();
         }
+
+        void Draw_SnowFlake1()
+        {
+            this.Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+
+            // Define an initiator and generator.
+            Initiator = new List<PointF>();
+            float sqrt_3 = (float)Math.Sqrt(3.0);
+            float side1 = (pictureBox_snowflake.ClientSize.Height - 10f) / 2f;
+            float side2 = (pictureBox_snowflake.ClientSize.Width - 10f) / 2f / sqrt_3 * 2f;
+            float side = Math.Min(side1, side2);
+            float height = side * sqrt_3 / 2f;
+            float y1 = (pictureBox_snowflake.ClientSize.Height - 2 * side) / 2;
+            float y2 = y1 + side / 2;
+            float y3 = y2 + side;
+            float y4 = y1 + 2 * side;
+            float x1 = (pictureBox_snowflake.ClientSize.Width - 2 * height) / 2;
+            float x2 = x1 + height;
+            float x3 = x2 + height;
+            Initiator.Add(new PointF(x1, y2));
+            Initiator.Add(new PointF(x2, y1));
+            Initiator.Add(new PointF(x3, y2));
+            Initiator.Add(new PointF(x3, y3));
+            Initiator.Add(new PointF(x2, y4));
+            Initiator.Add(new PointF(x1, y3));
+            Initiator.Add(new PointF(x1, y2));
+
+            //// Initiator for drawing a single generator.
+            //Initiator = new List<PointF>();
+            //Initiator.Add(new PointF(5, pictureBox_snowflake.ClientSize.Height / 3));
+            //Initiator.Add(new PointF(
+            //    pictureBox_snowflake.ClientSize.Width - 5,
+            //    pictureBox_snowflake.ClientSize.Height / 3));
+
+            ScaleFactor = (float)(1.0 / 3.0);
+
+            GeneratorDTheta = new List<float>();
+            float pi_over_3 = (float)(Math.PI / 3f);
+            GeneratorDTheta.Add(0);
+            GeneratorDTheta.Add(pi_over_3);
+            GeneratorDTheta.Add(pi_over_3);
+            GeneratorDTheta.Add(-2 * pi_over_3);
+            GeneratorDTheta.Add(-pi_over_3);
+            GeneratorDTheta.Add(-pi_over_3);
+            GeneratorDTheta.Add(2 * pi_over_3);
+
+            // Get the parameters.
+            int depth = (int)numericUpDown1.Value;
+            Bitmap bm = new Bitmap(
+                pictureBox_snowflake.ClientSize.Width,
+                pictureBox_snowflake.ClientSize.Height);
+            pictureBox_snowflake.Image = bm;
+
+            // Draw the snowflake.
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                DrawSnowflake(gr, depth);
+            }
+
+            this.Cursor = Cursors.Default;
+
+        }
+
+        // Draw the complete snowflake.
+        private void DrawSnowflake(Graphics gr, int depth)
+        {
+            gr.Clear(pictureBox_snowflake.BackColor);
+
+            // Draw the snowflake.
+            for (int i = 1; i < Initiator.Count; i++)
+            {
+                PointF p1 = Initiator[i - 1];
+                PointF p2 = Initiator[i];
+
+                float dx = p2.X - p1.X;
+                float dy = p2.Y - p1.Y;
+                float length = (float)Math.Sqrt(dx * dx + dy * dy);
+                float theta = (float)Math.Atan2(dy, dx);
+                DrawSnowflakeEdge(gr, depth, ref p1, theta, length);
+            }
+        }
+
+        // Recursively draw a snowflake edge starting at
+        // (x1, y1) in direction theta and distance dist.
+        // Leave the coordinates of the endpoint in
+        // (x1, y1).
+        private void DrawSnowflakeEdge(Graphics gr, int depth, ref PointF p1, float theta, float dist)
+        {
+            if (depth == 0)
+            {
+                PointF p2 = new PointF(
+                    (float)(p1.X + dist * Math.Cos(theta)),
+                    (float)(p1.Y + dist * Math.Sin(theta)));
+                gr.DrawLine(Pens.Blue, p1, p2);
+                p1 = p2;
+                return;
+            }
+
+            // Recursively draw the edge.
+            dist *= ScaleFactor;
+            for (int i = 0; i < GeneratorDTheta.Count; i++)
+            {
+                theta += GeneratorDTheta[i];
+                DrawSnowflakeEdge(gr, depth - 1, ref p1, theta, dist);
+            }
+        }
+
+        void Draw_SnowFlake2()
+        {
+            this.Cursor = Cursors.WaitCursor;
+            Application.DoEvents();
+
+            // Define an initiator and generator.
+            Initiator = new List<PointF>();
+            float height = 0.75f * (Math.Min(
+                pictureBox_snowflake2.ClientSize.Width,
+                pictureBox_snowflake2.ClientSize.Height) - 20);
+            float width = (float)(height / Math.Sqrt(3.0) * 2);
+            float y3 = pictureBox_snowflake2.ClientSize.Height - 10;
+            float y1 = y3 - height;
+            float x3 = pictureBox_snowflake2.ClientSize.Height / 2;
+            float x1 = x3 - width / 2;
+            float x2 = x1 + width;
+            Initiator.Add(new PointF(x1, y1));
+            Initiator.Add(new PointF(x2, y1));
+            Initiator.Add(new PointF(x3, y3));
+            Initiator.Add(new PointF(x1, y1));
+
+            ScaleFactor = 1 / 3f;                   // Make subsegments 1/3 size.
+
+            GeneratorDTheta = new List<float>();
+            float pi_over_3 = (float)(Math.PI / 3f);
+            GeneratorDTheta.Add(0);                 // Draw in the original direction.
+            GeneratorDTheta.Add(-pi_over_3);        // Turn -60 degrees.
+            GeneratorDTheta.Add(2 * pi_over_3);     // Turn 120 degrees.
+            GeneratorDTheta.Add(-pi_over_3);        // Turn -60 degrees.
+
+            // Get the parameters.
+            int depth = (int)numericUpDown1.Value;
+
+            Bitmap bm = new Bitmap(pictureBox_snowflake2.ClientSize.Width, pictureBox_snowflake2.ClientSize.Height);
+            pictureBox_snowflake2.Image = bm;
+
+            // Draw the snowflake.
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                DrawSnowflake2(gr, depth);
+            }
+
+            this.Cursor = Cursors.Default;
+
+
+        }
+
+        // Draw the complete snowflake.
+        private void DrawSnowflake2(Graphics gr, int depth)
+        {
+            gr.Clear(pictureBox_snowflake2.BackColor);
+
+            // Draw the snowflake.
+            for (int i = 1; i < Initiator.Count; i++)
+            {
+                PointF p1 = Initiator[i - 1];
+                PointF p2 = Initiator[i];
+
+                float dx = p2.X - p1.X;
+                float dy = p2.Y - p1.Y;
+                float length = (float)Math.Sqrt(dx * dx + dy * dy);
+                float theta = (float)Math.Atan2(dy, dx);
+                DrawSnowflakeEdge2(gr, depth, ref p1, theta, length);
+            }
+        }
+
+        // Recursively draw a snowflake edge starting at
+        // (x1, y1) in direction theta and distance dist.
+        // Leave the coordinates of the endpoint in
+        // (x1, y1).
+        private void DrawSnowflakeEdge2(Graphics gr, int depth, ref PointF p1, float theta, float dist)
+        {
+            if (depth == 0)
+            {
+                PointF p2 = new PointF(
+                    (float)(p1.X + dist * Math.Cos(theta)),
+                    (float)(p1.Y + dist * Math.Sin(theta)));
+                gr.DrawLine(Pens.Blue, p1, p2);
+                p1 = p2;
+                return;
+            }
+
+            // Recursively draw the edge.
+            dist *= ScaleFactor;
+            for (int i = 0; i < GeneratorDTheta.Count; i++)
+            {
+                theta += GeneratorDTheta[i];
+                DrawSnowflakeEdge2(gr, depth - 1, ref p1, theta, dist);
+            }
+        }
+
+
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -382,7 +606,7 @@ namespace vcs_Draw9_Example5
             "Arial",
             "News Gothic MT",
             "AvantGarde Md BT",
-            "Benguiat Bk BT",
+            //"Benguiat Bk BT",
             "Bookman Old Style",
             "Bremen Bd BT",
             "Century Gothic",

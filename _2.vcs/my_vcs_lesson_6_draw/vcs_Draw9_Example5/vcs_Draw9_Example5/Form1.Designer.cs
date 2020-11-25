@@ -61,11 +61,15 @@
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox_snowflake = new System.Windows.Forms.PictureBox();
+            this.pictureBox_snowflake2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake2)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -103,7 +107,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(373, 389);
+            this.pictureBox1.Size = new System.Drawing.Size(316, 386);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -117,6 +121,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 19;
+            this.button1.Text = "SnowFlake";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -365,7 +370,7 @@
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.Location = new System.Drawing.Point(393, 150);
+            this.pictureBox5.Location = new System.Drawing.Point(333, 218);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(200, 200);
             this.pictureBox5.TabIndex = 61;
@@ -377,7 +382,7 @@
             this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox8.Location = new System.Drawing.Point(610, 150);
+            this.pictureBox8.Location = new System.Drawing.Point(539, 218);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(200, 200);
             this.pictureBox8.TabIndex = 62;
@@ -412,11 +417,35 @@
             0,
             0});
             // 
+            // pictureBox_snowflake
+            // 
+            this.pictureBox_snowflake.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_snowflake.Location = new System.Drawing.Point(333, 12);
+            this.pictureBox_snowflake.Name = "pictureBox_snowflake";
+            this.pictureBox_snowflake.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_snowflake.TabIndex = 65;
+            this.pictureBox_snowflake.TabStop = false;
+            // 
+            // pictureBox_snowflake2
+            // 
+            this.pictureBox_snowflake2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_snowflake2.Location = new System.Drawing.Point(539, 12);
+            this.pictureBox_snowflake2.Name = "pictureBox_snowflake2";
+            this.pictureBox_snowflake2.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_snowflake2.TabIndex = 66;
+            this.pictureBox_snowflake2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 688);
+            this.Controls.Add(this.pictureBox_snowflake2);
+            this.Controls.Add(this.pictureBox_snowflake);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox8);
@@ -459,6 +488,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -499,6 +530,8 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.PictureBox pictureBox_snowflake;
+        private System.Windows.Forms.PictureBox pictureBox_snowflake2;
     }
 }
 
