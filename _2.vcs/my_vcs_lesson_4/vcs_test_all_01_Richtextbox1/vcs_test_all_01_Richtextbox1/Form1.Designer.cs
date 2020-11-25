@@ -678,7 +678,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(320, 40);
             this.button39.TabIndex = 82;
-            this.button39.Text = "數字顯示格式";
+            this.button39.Text = "數字顯示格式     百分比%";
             this.button39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);

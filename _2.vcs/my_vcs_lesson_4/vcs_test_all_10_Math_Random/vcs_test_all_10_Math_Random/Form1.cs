@@ -110,6 +110,14 @@ namespace vcs_test_all_10_Math_Random
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "冪運算(Exponentiation), 又稱指數運算\n";
+
+            richTextBox1.Text += "2^10 =\t" + Math.Pow(2, 10).ToString() + "\n";
+            richTextBox1.Text += "3^8 =\t" + Math.Pow(3, 8).ToString() + "\n";
+
+            //SquaresPerSide = (int)Math.Pow(2, n);
+
+
             richTextBox1.Text += "未完成\n";
 
         }

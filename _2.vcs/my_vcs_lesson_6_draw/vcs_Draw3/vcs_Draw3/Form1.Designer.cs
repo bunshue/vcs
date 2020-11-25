@@ -87,6 +87,7 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.pictureBox_atom = new System.Windows.Forms.PictureBox();
             this.timer_atom = new System.Windows.Forms.Timer(this.components);
+            this.label_size = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -599,11 +600,23 @@
             this.timer_atom.Interval = 20;
             this.timer_atom.Tick += new System.EventHandler(this.timer_atom_Tick);
             // 
+            // label_size
+            // 
+            this.label_size.BackColor = System.Drawing.Color.LightGreen;
+            this.label_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_size.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_size.Location = new System.Drawing.Point(547, 164);
+            this.label_size.Name = "label_size";
+            this.label_size.Size = new System.Drawing.Size(160, 25);
+            this.label_size.TabIndex = 61;
+            this.label_size.Text = "可以變大變小的Label";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.label_size);
             this.Controls.Add(this.pictureBox_atom);
             this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.trackBar1);
@@ -726,6 +739,7 @@
         private System.Windows.Forms.Label lb_fps;
         private System.Windows.Forms.PictureBox pictureBox_atom;
         private System.Windows.Forms.Timer timer_atom;
+        private System.Windows.Forms.Label label_size;
     }
 }
 

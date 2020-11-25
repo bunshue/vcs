@@ -746,14 +746,14 @@ namespace vcs_test_all_06_System
             // Find all of the installed printers.
             foreach (string printer in PrinterSettings.InstalledPrinters)
             {
-                richTextBox1.Text += printer + "\n";
+                richTextBox1.Text += "找到印表機 :\t" + printer + "\n";
             }
 
             // Find and select the default printer.
             try
             {
                 PrinterSettings settings = new PrinterSettings();
-                richTextBox1.Text += "\n預設印表機:\t" + settings.PrinterName + "\n";
+                richTextBox1.Text += "\n預設印表機 :\t" + settings.PrinterName + "\n";
             }
             catch
             {

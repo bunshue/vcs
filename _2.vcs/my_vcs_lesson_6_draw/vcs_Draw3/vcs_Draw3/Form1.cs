@@ -45,6 +45,9 @@ namespace vcs_Draw3
         // The current point number where the atom is.
         private int AtomPoint = 0;
 
+        int label_size_w_old = 0;
+        int label_size_h_old = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -113,11 +116,6 @@ namespace vcs_Draw3
 
             // Display the result and size the form to fit.
             pictureBox_atom.Image = Background;
-            this.ClientSize = new Size(
-                pictureBox_atom.Width + 2 * pictureBox_atom.Left,
-                pictureBox_atom.Height + 2 * pictureBox_atom.Top);
-
-            // Enable the atom timer.
             timer_atom.Enabled = true;
 
 
@@ -142,6 +140,10 @@ namespace vcs_Draw3
             timer_rainbow.Interval = Interval;
             SelectedColor = Color.Red;
             SelectedRainbowNumber = 0;
+
+
+            label_size_w_old = label_size.Size.Width;
+            label_size_h_old = label_size.Size.Height;
         }
 
 
@@ -563,6 +565,8 @@ namespace vcs_Draw3
         }
 
 
+        int dw = 0;
+        int dh = 0;
         double degree = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -579,7 +583,21 @@ namespace vcs_Draw3
             Point point2a = new Point(x, y);
             g1.DrawLine(p, point1a, point2a);     // Draw line to screen.
 
-
+            /*
+             * 可以變大變小的Label
+             * 屬性
+             * BackColor
+             * BorderStype 改 FixedSingle
+             * AutoSize 改 False
+             * 改 Size
+            */
+            dw++;
+            dh++;
+            if (dw > 50)
+                dw = 0;
+            if (dh > 50)
+                dh = 0;
+            label_size.Size = new Size(label_size_w_old + dw, label_size_h_old + dh);
         }
 
         int cnt = 0;

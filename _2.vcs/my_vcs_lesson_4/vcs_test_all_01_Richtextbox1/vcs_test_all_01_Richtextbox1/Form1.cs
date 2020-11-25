@@ -572,6 +572,12 @@ namespace vcs_test_all_01_Richtextbox1
 
             double y = 123.456;
             richTextBox1.Text += "數值格式\t" + y.ToString("N4") + "\n";
+
+            richTextBox1.Text += "將0.87顯示為87%\n";
+            float percent = 0.87f;
+            richTextBox1.Text += "percent = " + percent.ToString() + "\t數字\n";
+            string percent_text = percent.ToString("P0");
+            richTextBox1.Text += "percent = " + percent_text + "\t百分比\n";
         }
 
         private void button40_Click(object sender, EventArgs e)
