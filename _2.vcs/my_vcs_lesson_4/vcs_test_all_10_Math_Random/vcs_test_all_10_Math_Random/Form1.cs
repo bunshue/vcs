@@ -11,6 +11,17 @@ namespace vcs_test_all_10_Math_Random
 {
     public partial class Form1 : Form
     {
+
+        /*  準備做標準差的數字 70 個
+        sd_num = [16  19  14  17  4  4  11  27  9  8  8  12  29  28  5  18  13  7  8  4  26  25  15  6  8  12  26  13  13  27  12  3  1  8  4  22  28  23  23  19  29  17  12  17  28  19  25  16  12  7  23  1  19  24  1  21  4  8  9  22  8  27  15  12  25  6  11  22  25  13  ];
+        int[] sd_num = new int[] {16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13};
+        Average	15.04285714
+        StdDev(true)	8.30651170	same as Matlab
+        StdDev(false)	8.24696605
+        */
+
+        int[] sd_num = new int[] { 16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13 };
+
         public Form1()
         {
             InitializeComponent();
@@ -65,7 +76,7 @@ namespace vcs_test_all_10_Math_Random
             bt_random5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_random6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_random7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
 
 
 
@@ -98,7 +109,6 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "無條件捨去c = " + c.ToString() + "\n";
             c = (int)Math.Ceiling(result);
             richTextBox1.Text += "無條件進位c = " + c.ToString() + "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,11 +124,15 @@ namespace vcs_test_all_10_Math_Random
 
             richTextBox1.Text += "2^10 =\t" + Math.Pow(2, 10).ToString() + "\n";
             richTextBox1.Text += "3^8 =\t" + Math.Pow(3, 8).ToString() + "\n";
+            richTextBox1.Text += "2 的平方根 = \t" + Math.Pow(2, 0.5).ToString() + "\n";
+            richTextBox1.Text += "8 的(-1/3)方根 = \t" + Math.Pow(8, -1 / 3).ToString() + "\n"; //error, should be 1/2
 
-            //SquaresPerSide = (int)Math.Pow(2, n);
+            richTextBox1.Text += "\n對數運算\n";
+            richTextBox1.Text += "log2 = \t" + Math.Log10(2).ToString() + "\n";
+            richTextBox1.Text += "ln2 = \t" + Math.Log(2).ToString() + "\n";
 
-
-            richTextBox1.Text += "未完成\n";
+            richTextBox1.Text += "exp(1) = \t" + Math.Exp(1).ToString() + "\n";
+            richTextBox1.Text += "exp(2) = \t" + Math.Exp(2).ToString() + "\n";
 
         }
 
@@ -194,12 +208,10 @@ namespace vcs_test_all_10_Math_Random
         private void button4_Click(object sender, EventArgs e)
         {
             //一維陣列用法：
-            double[] a = new double[7] { 1, 3, 5, 7, 9, 11, 13 };
-
+            double[] sd_num = new double[] { 16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13 };
             double sd;
-            sd = SD(a);
+            sd = SD(sd_num);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
-
         }
 
 
@@ -235,24 +247,25 @@ namespace vcs_test_all_10_Math_Random
 
         private void button5_Click(object sender, EventArgs e)
         {
+            double[] sd_num = new double[] { 16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13 };
+
             List<double> arrays = new List<double>();
 
-            arrays.Add(1);
-            arrays.Add(3);
-            arrays.Add(5);
-            arrays.Add(7);
-            arrays.Add(9);
-            arrays.Add(11);
-            arrays.Add(13);
+            int i;
+            for (i = 0; i < sd_num.Length; i++)
+                arrays.Add(sd_num[i]);
 
             double sd;
             sd = SD2(arrays);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
         }
 
-        private const int CNT = 1000;
+        private const int CNT = 70;
         private void button6_Click(object sender, EventArgs e)
         {
+            //一維陣列用法：
+            double[] sd_num = new double[] { 16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13 };
+
             //一維陣列用法：
             double[] a = new double[CNT];
 
@@ -263,18 +276,14 @@ namespace vcs_test_all_10_Math_Random
                 a[i] = r.NextDouble();
             }
 
-
             for (i = 0; i < CNT; i++)
             {
-                //richTextBox1.Text += "a[" + i.ToString() + "] = " + a[i].ToString() + "\n";
+                a[i] = sd_num[i];
             }
 
             double sd;
             sd = SD(a);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
-
-
-
         }
 
         private const int RND = 20;
@@ -335,21 +344,36 @@ namespace vcs_test_all_10_Math_Random
 
             // Make the values.
             Random rand = new Random();
-            const int num_values = 100;
+            const int num_values = 70;
 
-            int rr = 0;
             //Array version.
             int[] values = new int[num_values];
+
+            for (int i = 0; i < num_values; i++)
+            {
+                values[i] = rand.Next(1, 30);
+            }
+
+            for (int i = 0; i < num_values; i++)
+            {
+                values[i] = sd_num[i];
+            }
 
             richTextBox1.Text += "aaa=[";
             for (int i = 0; i < num_values; i++)
             {
-                rr = rand.Next(1, 30);
-                //rr = i * 5;
-                values[i] = rr;
-                richTextBox1.Text += rr.ToString() + "  ";
+                richTextBox1.Text += values[i].ToString() + "  ";
             }
             richTextBox1.Text += "];\n";
+
+            richTextBox1.Text += "int[] bbb = new int[] {";
+            for (int i = 0; i < num_values; i++)
+            {
+                richTextBox1.Text += values[i].ToString();
+                if (i != (num_values - 1))
+                    richTextBox1.Text += ", ";
+            }
+            richTextBox1.Text += "};\n";
 
             // Display statistics.
             richTextBox1.Text += "Average\t" + values.Average().ToString("0.00000000") + "\n";
