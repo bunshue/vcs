@@ -1115,6 +1115,7 @@ new System.Globalization.ChineseLunisolarCalendar();
             string weekstr = "";
             switch (week)
             {
+                case 0: weekstr = "星期日"; break;
                 case 1: weekstr = "星期一"; break;
                 case 2: weekstr = "星期二"; break;
                 case 3: weekstr = "星期三"; break;
@@ -1139,12 +1140,11 @@ new System.Globalization.ChineseLunisolarCalendar();
             result = CaculateWeekDay(year, month, day);
             richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
 
-
-            year = 2020;
-            month = 11;
-            day = 13;
+            year = 1941;
+            month = 12;
+            day = 7;
             result = CaculateWeekDay(year, month, day);
-            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\n";
+            richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
         }
     }
 }

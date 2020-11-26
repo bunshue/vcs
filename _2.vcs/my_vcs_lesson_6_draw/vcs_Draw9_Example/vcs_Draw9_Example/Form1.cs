@@ -5555,14 +5555,147 @@ namespace vcs_Draw9_Example
 
         }
 
+        // Draw some text aligned in columns.
         private void button28_Click(object sender, EventArgs e)
         {
+            g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            string headings = "Title\tPrice\t# Pages\tYear";
+            string[] lines =
+            {
+                "WPF 3d\t$34.95\t430\t2018",
+                "The C# Helper Top 100\t$24.95\t380\t2017",
+                "Interview Puzzles Dissected\t$15.95\t300\t2016",
+                "C# 24-Hour Trainer, Second Edition\t$45.00\t600\t2015",
+                "Beginning Software Engineering\t$45.00\t480\t2015",
+                "Essential Algorithms\t$60.00\t624\t2013",
+                "Beginning Database Design Solutions\t$44.99\t552\t2008",
+                "Powers of Two\t$2.04\t8\t16",
+            };
+
+            // Prepare a StringFormat to use the tabs.
+            using (StringFormat string_format = new StringFormat())
+            {
+                // These just make things weird:
+                //string_format.Alignment = StringAlignment.Center;
+                //string_format.LineAlignment = StringAlignment.Center;
+
+                // Define the tab stops.
+                float[] tabs = { 250, 75, 75 };
+                string_format.SetTabStops(0, tabs);
+
+                // Draw the headings.
+                float margin = 10;
+                float y = 10;
+                using (Font font = new Font("Times New Roman", 13, FontStyle.Bold))
+                {
+                    g.DrawString(headings, font, Brushes.Blue, margin, y, string_format);
+                }
+
+                // Draw a horizontal line.
+                y += 1.4f * Font.Height;
+                g.DrawLine(Pens.Blue, margin, y, margin + tabs.Sum() + 50, y);
+                y += 5;
+
+                // Draw the book entries.
+                using (Font font = new Font("Times New Roman", 11))
+                {
+                    foreach (string line in lines)
+                    {
+                        g.DrawString(line, font, Brushes.Black, margin, y, string_format);
+                        y += 1.2f * this.Font.Height;
+                    }
+                }
+            }
 
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            pictureBox1.Image = DrawHeart(W, H);
         }
+
+        // Draw the curve on a bitmap.
+        private Bitmap DrawHeart(int width, int height)
+        {
+            Bitmap bm = new Bitmap(width, height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Generate the points.
+                const int num_points = 100;
+                List<PointF> points = new List<PointF>();
+                float dt = (float)(2 * Math.PI / num_points);
+                for (float t = 0; t <= 2 * Math.PI; t += dt)
+                    points.Add(new PointF(X(t) * 5 + 200, Y(t) * 5 + 200));
+
+                // Get the coordinate bounds.
+                float wxmin = points[0].X;
+                float wxmax = wxmin;
+                float wymin = points[0].Y;
+                float wymax = wymin;
+                foreach (PointF point in points)
+                {
+                    if (wxmin > point.X) wxmin = point.X;
+                    if (wxmax < point.X) wxmax = point.X;
+                    if (wymin > point.Y) wymin = point.Y;
+                    if (wymax < point.Y) wymax = point.Y;
+                }
+
+                // Make the world coordinate rectangle.
+                RectangleF world_rect = new RectangleF(
+                    wxmin, wymin, wxmax - wxmin, wymax - wymin);
+
+                // Make the device coordinate rectangle with a margin.
+                const int margin = 5;
+                Rectangle device_rect = new Rectangle(
+                    margin, margin,
+                    pictureBox1.ClientSize.Width - 2 * margin,
+                    pictureBox1.ClientSize.Height - 2 * margin);
+
+                // Map world to device coordinates without distortion.
+                // Flip vertically so Y increases downward.
+                //SetTransformationWithoutDisortion(gr, world_rect, device_rect, false, true);
+
+                // Draw the curve.
+                gr.FillPolygon(Brushes.Pink, points.ToArray());
+                using (Pen pen = new Pen(Color.Red, 0))
+                {
+                    gr.DrawPolygon(pen, points.ToArray());
+
+                    // Draw a rectangle around the coordinate bounds.
+                    pen.Color = Color.Red;
+                    gr.DrawRectangle(pen, Rectangle.Round(world_rect));
+
+                    int ratio = 20;
+                    // Draw the X and Y axes.
+                    pen.Color = Color.Green;
+                    gr.DrawLine(pen, -20 * ratio, 0, 20 * ratio, 0);
+                    gr.DrawLine(pen, 0, -20 * ratio, 0, 20 * ratio);
+                    for (int x = -20; x <= 20; x++)
+                        gr.DrawLine(pen, x * ratio, -0.3f * ratio, x * ratio, 0.3f * ratio);
+                    for (int y = -20; y <= 20; y++)
+                        gr.DrawLine(pen, -0.3f * ratio, y * ratio, 0.3f * ratio, y * ratio);
+                }
+            }
+            return bm;
+        }
+
+        // The curve's parametric equations.
+        private float X(float t)
+        {
+            double sin_t = Math.Sin(t);
+            return (float)(16 * sin_t * sin_t * sin_t);
+        }
+        private float Y(float t)
+        {
+            return (float)(13 * Math.Cos(t) - 5 * Math.Cos(2 * t) - 2 * Math.Cos(3 * t) - Math.Cos(4 * t));
+        }
+
+
 
         private void button30_Click(object sender, EventArgs e)
         {

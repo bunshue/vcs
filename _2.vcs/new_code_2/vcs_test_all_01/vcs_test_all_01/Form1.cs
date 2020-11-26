@@ -409,6 +409,42 @@ namespace vcs_test_all_01
 
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // Download and display the text file.
+            richTextBox1.Clear();
+            richTextBox1.Text += "取得網頁純文字檔...\n";
+
+            const string url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
+            richTextBox1.Text += GetTextFile(url);
+            //richTextBox1.Select(0, 500);  //useless
+        }
+
+        // Get the text file at a given URL.
+        private string GetTextFile(string url)
+        {
+            try
+            {
+                url = url.Trim();
+                if (!url.ToLower().StartsWith("http")) url = "http://" + url;
+                WebClient web_client = new WebClient();
+                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
+                StreamReader reader = new StreamReader(image_stream);
+                string result = reader.ReadToEnd();
+                reader.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error downloading file " +
+                    url + '\n' + ex.Message,
+                    "Download Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            return "";
+        }
+
 
 
     }

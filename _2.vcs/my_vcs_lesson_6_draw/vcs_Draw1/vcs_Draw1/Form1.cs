@@ -1337,6 +1337,37 @@ namespace vcs_Draw1
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //DrawLines 直接使用 List
+            List<PointF> points = new List<PointF>();
+
+            // Make the Bitmap.
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            Bitmap bm = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bm);
+            g.SmoothingMode = SmoothingMode.AntiAlias;  //反鋸齒
+
+            // Draw the graph.
+            Pen graph_pen = new Pen(Color.Blue, 1);
+
+            // Loop over x values to generate points.
+            for (float x = 0; x < W; x += 5)
+            {
+                float y = (float)(H / 2 * Math.Sin(x / 25)) + H / 2;
+                points.Add(new PointF(x, y));
+            }
+
+            if (points.Count > 1)
+            {
+                //transform
+                for (int i = 0; i < points.Count; i++)
+                {
+                    points[i] = new PointF(points[i].X, H - points[i].Y);
+                }
+                g.DrawLines(graph_pen, points.ToArray());
+            }
+            // Display the result.
+            pictureBox1.Image = bm;
 
         }
 

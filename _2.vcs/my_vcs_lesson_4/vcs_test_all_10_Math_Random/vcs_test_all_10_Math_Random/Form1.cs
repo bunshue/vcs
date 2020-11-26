@@ -453,6 +453,33 @@ namespace vcs_test_all_10_Math_Random
 
         private void button12_Click(object sender, EventArgs e)
         {
+            int[] aaa = new int[] { 16, 19, 14, 17, 27, 37, 47 };
+            for (int i = 0; i < aaa.Length; i++)
+            {
+                bool result;
+                result = IsPrime(aaa[i]);
+                if (result == true)
+                    richTextBox1.Text += "數字 " + aaa[i] + " 質數\n";
+                else
+                    richTextBox1.Text += "數字 " + aaa[i] + " ----\n";
+            }
+        }
+
+        // Return true if the number is prime.
+        private bool IsPrime(int num)
+        {
+            // Handle 1 and 2 separately.
+            if (num == 1) return false;
+            if (num == 2) return true;
+            if (num % 2 == 0) return false;
+
+            // See if the number is divisible by odd values up to Sqrt(number).
+            int sqrt = (int)(Math.Sqrt(num) + 1);
+            for (int i = 3; i < sqrt; i++)
+                if (num % i == 0) return false;
+
+            // If we get here, the number is prime.
+            return true;
         }
 
         private void button13_Click(object sender, EventArgs e)

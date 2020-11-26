@@ -784,7 +784,7 @@ namespace vcs_Draw9_Example3
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             // Tile the image.
-            using (TextureBrush brush = new TextureBrush(new Bitmap(@"C:\______test_files\vcs_reference2\atari-rainbow-logo-1200xl.png")))
+            using (TextureBrush brush = new TextureBrush(new Bitmap(@"C:\______test_files\_material\ims-small-logo.png")))
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }

@@ -537,31 +537,46 @@ namespace vcs_test_all_06_DirectoryFile
         private void bt_file10_Click(object sender, EventArgs e)
         {
             //修改檔案時間 屬性
-            string filename = @"C:\\cccc.txt";
+            string filename = @"C:\\______test_files\\article.txt";
             if (File.Exists(filename) == false) //確認檔案是否存在
             {
                 richTextBox1.Text += "檔案: " + filename + " 不存在\n";
                 return;
             }
             if ((File.GetAttributes(filename) & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-                richTextBox1.Text += "檔案唯讀，不能修改檔案時間";
+                richTextBox1.Text += "檔案唯讀，不能修改檔案時間\n";
             else
             {
-                richTextBox1.Text += "改變檔案時間";
+                richTextBox1.Text += "檔案: " + filename + " 已存在\t原本檔案時間 與 檔案屬性\n";
+                richTextBox1.Text += "建立時間: " + File.GetCreationTime(filename) + "\n";
+                richTextBox1.Text += "修改時間: " + File.GetLastWriteTime(filename) + "\n";
+                richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
+                richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
+
+                richTextBox1.Text += "\n改變檔案時間 與 檔案屬性\n\n";
+
                 File.SetCreationTime(filename, new DateTime(1985, 5, 4));
                 File.SetLastWriteTime(filename, new DateTime(1995, 6, 5));
                 File.SetLastAccessTime(filename, new DateTime(2005, 7, 6));
-            }
-            if (attr == 0)
-                File.SetAttributes(filename, FileAttributes.Archive);
-            else if (attr == 1)
-                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
-            else if (attr == 2)
-                File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
-            attr++;
-            if (attr > 2)
-                attr = 0;
+                //File.SetLastAccessTime(filename, DateTime.Now);   //touch
+                //File.SetLastWriteTime(filename, DateTime.Now);    //touch
 
+                if (attr == 0)
+                    File.SetAttributes(filename, FileAttributes.Archive);
+                else if (attr == 1)
+                    File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
+                else if (attr == 2)
+                    File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden | FileAttributes.ReadOnly);
+                attr++;
+                if (attr > 2)
+                    attr = 0;
+
+                richTextBox1.Text += "檔案: " + filename + " 已存在\t更改後的檔案時間 與 檔案屬性\n";
+                richTextBox1.Text += "建立時間: " + File.GetCreationTime(filename) + "\n";
+                richTextBox1.Text += "修改時間: " + File.GetLastWriteTime(filename) + "\n";
+                richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
+                richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
+            }
         }
 
         private void bt_file11_Click(object sender, EventArgs e)

@@ -199,6 +199,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(155, 40);
             this.button12.TabIndex = 12;
+            this.button12.Text = "檢查質數";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

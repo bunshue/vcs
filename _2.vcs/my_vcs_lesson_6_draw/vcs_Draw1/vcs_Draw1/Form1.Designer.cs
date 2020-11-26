@@ -423,11 +423,12 @@
             // 
             // button27
             // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button27.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button27.Location = new System.Drawing.Point(1135, 295);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(120, 42);
             this.button27.TabIndex = 46;
+            this.button27.Text = "DrawLines 直接使用 List";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

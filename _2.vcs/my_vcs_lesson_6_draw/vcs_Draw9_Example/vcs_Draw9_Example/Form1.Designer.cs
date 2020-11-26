@@ -503,11 +503,12 @@
             // 
             // button28
             // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button28.Location = new System.Drawing.Point(1108, 237);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(100, 40);
             this.button28.TabIndex = 58;
+            this.button28.Text = "格式化列印文字";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -518,6 +519,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(100, 40);
             this.button29.TabIndex = 59;
+            this.button29.Text = "畫愛心";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 

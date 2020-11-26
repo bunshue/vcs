@@ -60,10 +60,10 @@ namespace vcs_test_all_01_Richtextbox3
 
         private void button8_Click(object sender, EventArgs e)
         {
-            MoveCurorLast();
+            MoveCursorLast();
         }
 
-        private void MoveCurorLast()
+        private void MoveCursorLast()
         {
             //让文本框获取焦点 
             richTextBox1.Focus();
