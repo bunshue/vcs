@@ -19,6 +19,15 @@ namespace vcs_test_all_09_Form
             show_item_location();
         }
 
+        // Load the picture from the startup directory.
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //方案總管/加入/現有項目/選圖片
+            //圖片之屬性 複製到輸出目錄 改成 有更新時才複製
+            BackgroundImage = new Bitmap("picture1.jpg");
+            //ClientSize = BackgroundImage.Size;    //表單符合圖片大小
+        }
+
         void show_item_location()
         {
             int x_st;

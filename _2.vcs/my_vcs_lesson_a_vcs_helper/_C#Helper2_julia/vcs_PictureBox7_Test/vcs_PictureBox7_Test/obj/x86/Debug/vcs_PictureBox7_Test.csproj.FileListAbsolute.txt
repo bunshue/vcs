@@ -1,0 +1,7 @@
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\bin\Debug\vcs_PictureBox7_Test.exe
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\bin\Debug\vcs_PictureBox7_Test.pdb
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\obj\x86\Debug\vcs_PictureBox7_Test.Form1.resources
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\obj\x86\Debug\vcs_PictureBox7_Test.Properties.Resources.resources
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\obj\x86\Debug\vcs_PictureBox7_Test.csproj.GenerateResource.Cache
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\obj\x86\Debug\vcs_PictureBox7_Test.exe
+C:\_git\vcs\_2.vcs\my_vcs_lesson_a_vcs_helper\_C#Helper2_julia\vcs_PictureBox7_Test\vcs_PictureBox7_Test\obj\x86\Debug\vcs_PictureBox7_Test.pdb

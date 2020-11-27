@@ -32,8 +32,6 @@ namespace vcs_test_all_10_Math_Random
             show_item_location();
         }
 
-
-
         void show_item_location()
         {
             int x_st;
@@ -45,7 +43,7 @@ namespace vcs_test_all_10_Math_Random
             x_st = 12;
             y_st = 12;
             dx = 170;
-            dy = 50;
+            dy = 48;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -817,6 +815,12 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "\n";
 
 
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(@"C:\______test_files\_material\sddev.png");
+            e.Graphics.DrawImage(bitmap1, 8, this.ClientSize.Height - bitmap1.Height - 8);
         }
 
     }

@@ -732,38 +732,8 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "C# 透過Win32取得滑鼠位置 GetCursorPos\n";
         }
 
-
-        string use_printer = string.Empty;
         private void button35_Click(object sender, EventArgs e)
         {
-            // Find all of the installed printers.
-            foreach (string printer in PrinterSettings.InstalledPrinters)
-            {
-                richTextBox1.Text += "找到印表機 :\t" + printer + "\n";
-            }
-
-            // Find and select the default printer.
-            try
-            {
-                PrinterSettings settings = new PrinterSettings();
-                richTextBox1.Text += "\n預設印表機 :\t" + settings.PrinterName + "\n\n";
-                use_printer = settings.PrinterName;
-            }
-            catch
-            {
-            }
-
-            // 使用PDF印表機
-            foreach (string printer in PrinterSettings.InstalledPrinters)
-            {
-                if (printer.Contains("PDF"))
-                {
-                    richTextBox1.Text += "使用PDF印表機\t" + printer + "\n";
-                    use_printer = printer;
-                }
-            }
-
-
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -935,14 +905,6 @@ namespace vcs_test_all_06_System
 
         private void button39_Click(object sender, EventArgs e)
         {
-            //預覽列印
-            //加入PrintDocument 和 PrintPreviewDialog
-            //printPreviewDialog1屬性之Document選printDocument1
-            //編輯 printDocument1_PrintPage
-
-            //無印表機也可以預覽列印
-
-            printPreviewDialog1.ShowDialog();
         }
 
         private void button44_Click(object sender, EventArgs e)
@@ -1001,131 +963,10 @@ namespace vcs_test_all_06_System
 
         }
 
-        /*  fewer
-        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            using (Font font = new Font("Times New Roman", 30))
-            {
-                e.Graphics.DrawString("Sample text", font, Brushes.Black,
-                    e.MarginBounds.Left, e.MarginBounds.Top);
-            }
-            e.HasMorePages = false;
-        }
-        */
 
-        /*
-        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            const float font_size = 12;
-            const float dy = font_size * 1.5f;
-            float x0 = e.MarginBounds.Left + 0.5f * 100;
-            float x1 = x0 + 0.75f * 100;
-            float y = e.MarginBounds.Top;
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            using (Font font = new Font("Times New Roman", font_size))
-            {
-                using (StringFormat sf = new StringFormat())
-                {
-                    sf.Alignment = StringAlignment.Center;
-
-                    e.Graphics.DrawString("Celsius", font, Brushes.Blue, x0, y, sf);
-                    e.Graphics.DrawString("Fahrenheit", font, Brushes.Blue, x1, y, sf);
-                    y += dy;
-
-                    for (int celsius = 60; celsius <= 250; celsius += 5)
-                    {
-                        float fahrenheit = celsius * 9f / 5f + 32;
-                        e.Graphics.DrawString(celsius.ToString(),
-                            font, Brushes.Black, x0, y, sf);
-                        e.Graphics.DrawString(fahrenheit.ToString("0"),
-                            font, Brushes.Black, x1, y, sf);
-                        y += dy;
-                    }
-
-                    y = e.MarginBounds.Top;
-                    float x2 = x1 + 1.2f * 100;
-                    float x3 = x2 + 0.75f * 100;
-                    e.Graphics.DrawString("Fahrenheit", font, Brushes.Blue, x2, y, sf);
-                    e.Graphics.DrawString("Celsius", font, Brushes.Blue, x3, y, sf);
-                    y += dy;
-
-                    for (int fahrenheit = 140; fahrenheit <= 500; fahrenheit += 10)
-                    {
-                        float celsius = (fahrenheit - 32) * 5f / 9f;
-                        e.Graphics.DrawString(fahrenheit.ToString(),
-                            font, Brushes.Black, x2, y, sf);
-                        e.Graphics.DrawString(celsius.ToString("0"),
-                            font, Brushes.Black, x3, y, sf);
-                        y += dy;
-                    }
-                }
-            }
-
-        }
-        */
-
-        //列印一個純文字檔
-        // Print a page of the text file.
-        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            richTextBox1.Text += "列印一個純文字檔\n";
-            // The text contained in the file.
-            string FileContents;
-            string filename = @"C:\\______test_files\\article.txt";
-
-            // Read the file's contents.
-            try
-            {
-                FileContents = File.ReadAllText(filename).Trim();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error reading file " + filename + ".\n" + ex.Message);
-                return;
-            }
-
-            // Make a font for printing.
-            using (Font font = new Font("Courier New", 10))
-            {
-                // Make a StringFormat to align text normally.
-                using (StringFormat string_format = new StringFormat())
-                {
-                    // See how much of the remaining text will fit.
-                    SizeF layout_area = new SizeF(
-                        e.MarginBounds.Width, e.MarginBounds.Height);
-                    int chars_fitted, lines_filled;
-                    e.Graphics.MeasureString(FileContents, font,
-                        layout_area, string_format,
-                        out chars_fitted, out lines_filled);
-
-                    // Print as much as will fit.
-                    e.Graphics.DrawString(
-                        FileContents.Substring(0, chars_fitted),
-                        font, Brushes.Black, e.MarginBounds,
-                        string_format);
-
-                    // Remove the printed text from the string.
-                    FileContents = FileContents.Substring(chars_fitted).Trim();
-                }
-            }
-
-            // See if we are done.
-            e.HasMorePages = FileContents.Length > 0;
-        }
 
         private void button43_Click(object sender, EventArgs e)
         {
-            button35_Click(sender, e);
-
-
-            // Select the printer.
-            printDocument1.PrinterSettings.PrinterName = use_printer;
-
-            // Set the print document name.
-            printDocument1.DocumentName = "印表機處理器看到的文件名稱";
-
-            // Print.
-            printDocument1.Print();
 
 
         }
