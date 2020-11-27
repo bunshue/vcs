@@ -5,44 +5,44 @@ using System.Text;
 
 using System.Drawing;
 
-namespace vcs_Draw9_Example5
+namespace vcs_Draw9_Example7_vcsh
 {
-    class Pentagon
+    class Octagon
     {
         // Colors.
         private static Random Rand = new Random();
         private static Color[] MyColors =
         {
-            Color.Black, Color.Red, Color.Orange,
-            Color.Yellow, Color.Lime, Color.LightGreen,
+            Color.Aquamarine, Color.Red, Color.Orange,
+            Color.Yellow, Color.SeaShell, Color.RosyBrown,
             Color.Cyan, Color.Blue, Color.LightBlue,
-            Color.Fuchsia,
+            Color.Fuchsia, Color.Beige, Color.BlueViolet, Color.Orange,
         };
 
         public PointF[] Points = null;
         public Color FillColor = Color.Black;
-        public List<Pentagon> Children = new List<Pentagon>();
+        public List<Octagon> Children = new List<Octagon>();
 
         // Constructor.
-        public Pentagon(PointF[] points)
+        public Octagon(PointF[] points)
         {
             Points = points;
             FillColor = MyColors[Rand.Next(0, MyColors.Length)];
-            FillColor = Color.FromArgb(128, FillColor);
+            FillColor = Color.FromArgb(80, FillColor);
         }
 
         // Draw.
         public void Draw(Graphics gr)
         {
-            // Draw this Pentagon.
+            // Draw this Octagon.
             using (Brush brush = new SolidBrush(FillColor))
             {
                 gr.FillPolygon(brush, Points);
             }
             gr.DrawPolygon(Pens.Black, Points);
 
-            // Draw child Pentagons (if any).
-            foreach (Pentagon child in Children) child.Draw(gr);
+            // Draw child Octagons (if any).
+            foreach (Octagon child in Children) child.Draw(gr);
         }
     }
 }

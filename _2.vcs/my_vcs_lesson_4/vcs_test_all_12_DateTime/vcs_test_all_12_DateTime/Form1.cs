@@ -1146,6 +1146,29 @@ new System.Globalization.ChineseLunisolarCalendar();
             result = CaculateWeekDay(year, month, day);
             richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月" + day.ToString() + "日\t是\t" + result + "\t珍珠港事變\n";
         }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+            string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+            foreach (string name in month_names)
+            {
+                if (name.Length > 0)
+                {
+                    richTextBox1.Text += name + "\n";
+                }
+            }
+
+            string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
+            foreach (string name in day_names)
+            {
+                if (name.Length > 0)
+                {
+                    richTextBox1.Text += name + "\n";
+
+                }
+            }
+
+        }
     }
 }
 

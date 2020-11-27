@@ -589,8 +589,9 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(164, 46);
             this.button39.TabIndex = 48;
-            this.button39.Text = "xxx";
+            this.button39.Text = "月名星期名";
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button40
             // 

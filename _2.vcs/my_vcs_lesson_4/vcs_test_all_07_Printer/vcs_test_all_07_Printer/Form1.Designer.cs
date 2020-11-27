@@ -47,6 +47,8 @@
             this.printPreviewDialog_image = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument_image = new System.Drawing.Printing.PrintDocument();
             this.printDocument_draw = new System.Drawing.Printing.PrintDocument();
+            this.printDocument_Calendar = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_Calendar = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,6 +80,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(194, 40);
             this.button5.TabIndex = 33;
+            this.button5.Text = "預覽列印月曆";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -218,6 +221,22 @@
             // 
             this.printDocument_draw.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_draw_PrintPage);
             // 
+            // printDocument_Calendar
+            // 
+            this.printDocument_Calendar.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_Calendar_PrintPage);
+            this.printDocument_Calendar.QueryPageSettings += new System.Drawing.Printing.QueryPageSettingsEventHandler(this.printDocument_Calendar_QueryPageSettings);
+            // 
+            // printPreviewDialog_Calendar
+            // 
+            this.printPreviewDialog_Calendar.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_Calendar.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_Calendar.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_Calendar.Document = this.printDocument_Calendar;
+            this.printPreviewDialog_Calendar.Enabled = true;
+            this.printPreviewDialog_Calendar.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_Calendar.Icon")));
+            this.printPreviewDialog_Calendar.Name = "printPreviewDialog_Calendar";
+            this.printPreviewDialog_Calendar.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -264,6 +283,8 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_image;
         private System.Drawing.Printing.PrintDocument printDocument_image;
         private System.Drawing.Printing.PrintDocument printDocument_draw;
+        private System.Drawing.Printing.PrintDocument printDocument_Calendar;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_Calendar;
     }
 }
 

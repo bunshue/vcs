@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw9_Example5
+﻿namespace vcs_Draw9_Example7_vcsh
 {
     partial class Form1
     {
@@ -54,7 +54,22 @@
             this.bt_exit = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.richTextBox_ransom_note = new System.Windows.Forms.RichTextBox();
+            this.pictureBox_ransom_note = new System.Windows.Forms.PictureBox();
+            this.richTextBox_ransom_note_result = new System.Windows.Forms.RichTextBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox_snowflake = new System.Windows.Forms.PictureBox();
+            this.pictureBox_snowflake2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake2)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -106,6 +121,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 19;
+            this.button1.Text = "SnowFlake";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -206,6 +222,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 30;
+            this.button0.Text = "Sierpinski";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -322,11 +339,120 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // richTextBox_ransom_note
+            // 
+            this.richTextBox_ransom_note.Location = new System.Drawing.Point(12, 424);
+            this.richTextBox_ransom_note.Name = "richTextBox_ransom_note";
+            this.richTextBox_ransom_note.Size = new System.Drawing.Size(219, 252);
+            this.richTextBox_ransom_note.TabIndex = 58;
+            this.richTextBox_ransom_note.Text = "Ransom Note以前綁匪要贖金的信件，為避免筆跡被視破，多由報紙上剪下文字拼成，因而字體混亂，大小不同，排列不整。現在人為求廣告效果或故意玩酷，將文字故意歪" +
+                "七扭八，選用各樣字體，色彩，大小，各不相同混合，形成特殊效果稱為ransom note effect.";
+            this.richTextBox_ransom_note.TextChanged += new System.EventHandler(this.richTextBox_ransom_note_TextChanged);
+            // 
+            // pictureBox_ransom_note
+            // 
+            this.pictureBox_ransom_note.Location = new System.Drawing.Point(247, 424);
+            this.pictureBox_ransom_note.Name = "pictureBox_ransom_note";
+            this.pictureBox_ransom_note.Size = new System.Drawing.Size(258, 252);
+            this.pictureBox_ransom_note.TabIndex = 59;
+            this.pictureBox_ransom_note.TabStop = false;
+            // 
+            // richTextBox_ransom_note_result
+            // 
+            this.richTextBox_ransom_note_result.Location = new System.Drawing.Point(521, 424);
+            this.richTextBox_ransom_note_result.Name = "richTextBox_ransom_note_result";
+            this.richTextBox_ransom_note_result.Size = new System.Drawing.Size(219, 209);
+            this.richTextBox_ransom_note_result.TabIndex = 60;
+            this.richTextBox_ransom_note_result.Text = "";
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox5.Location = new System.Drawing.Point(333, 218);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox5.TabIndex = 61;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox5_Paint);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox8.Location = new System.Drawing.Point(539, 218);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox8.TabIndex = 62;
+            this.pictureBox8.TabStop = false;
+            this.pictureBox8.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox8_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(733, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 21);
+            this.label1.TabIndex = 63;
+            this.label1.Text = "深度";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(784, 18);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(60, 22);
+            this.numericUpDown1.TabIndex = 64;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // pictureBox_snowflake
+            // 
+            this.pictureBox_snowflake.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_snowflake.Location = new System.Drawing.Point(333, 12);
+            this.pictureBox_snowflake.Name = "pictureBox_snowflake";
+            this.pictureBox_snowflake.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_snowflake.TabIndex = 65;
+            this.pictureBox_snowflake.TabStop = false;
+            // 
+            // pictureBox_snowflake2
+            // 
+            this.pictureBox_snowflake2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_snowflake2.Location = new System.Drawing.Point(539, 12);
+            this.pictureBox_snowflake2.Name = "pictureBox_snowflake2";
+            this.pictureBox_snowflake2.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_snowflake2.TabIndex = 66;
+            this.pictureBox_snowflake2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 688);
+            this.Controls.Add(this.pictureBox_snowflake2);
+            this.Controls.Add(this.pictureBox_snowflake);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.richTextBox_ransom_note_result);
+            this.Controls.Add(this.pictureBox_ransom_note);
+            this.Controls.Add(this.richTextBox_ransom_note);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.bt_save);
@@ -358,7 +484,14 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_snowflake2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -390,6 +523,15 @@
         private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.RichTextBox richTextBox_ransom_note;
+        private System.Windows.Forms.PictureBox pictureBox_ransom_note;
+        private System.Windows.Forms.RichTextBox richTextBox_ransom_note_result;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.PictureBox pictureBox_snowflake;
+        private System.Windows.Forms.PictureBox pictureBox_snowflake2;
     }
 }
 

@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Text;      //for TextRenderingHint
 
-namespace vcs_Draw9_Example5
+namespace vcs_Draw9_Example8_vcsh
 {
     public partial class Form1 : Form
     {
@@ -239,7 +239,6 @@ namespace vcs_Draw9_Example5
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
         }
-
 
 
 
