@@ -29,6 +29,12 @@ namespace vcs_Draw9_Example7_vcsh
         // The root of the Octagon object hierarchy.
         private Octagon Root8 = null;
 
+        int W = 200;
+        int H = 200;
+
+        private const int Period = 21;
+        private Color[] Colors;
+
         public Form1()
         {
             InitializeComponent();
@@ -50,6 +56,37 @@ namespace vcs_Draw9_Example7_vcsh
             MakeOctagons();
 
             button1_Click(sender, e);
+
+            richTextBox1.Text += "picturebox1 W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
+            richTextBox1.Text += "picturebox1 client W = " + pictureBox1.ClientSize.Width.ToString() + ", H = " + pictureBox1.ClientSize.Height.ToString() + "\n";
+
+            // Initialize the colors.
+            Colors = new Color[] {
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet
+            };
         }
 
         void show_item_location()
@@ -64,49 +101,69 @@ namespace vcs_Draw9_Example7_vcsh
             int dy;
 
             //button
-            x_st = 850;
-            y_st = 10;
+            x_st = 1150 + 220;
+            y_st = 40;
             dx = 110;
-            dy = 45;
+            dy = 38;
+
+            label1.Location = new Point(x_st + dx * 0 - 20, y_st + dy * 0 - 30);
+            numericUpDown1.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 0 - 30);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
 
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_exit.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
 
-            //pictureBox1.Location = new Point(10, 10);
+            pictureBox1.Size = new Size(W * 2, H * 2);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox_Chrysanthemum.Size = new Size(W, H);
+            pictureBox_dragon.Size = new Size(W, H);
+            pictureBox_dragon4.Size = new Size(W, H);
+            pictureBox5.Size = new Size(W, H);
+            pictureBox_Chrysanthemum2.Size = new Size(W, H);
+            pictureBox8.Size = new Size(W, H);
+            pictureBox_snowflake.Size = new Size(W, H);
+            pictureBox_snowflake2.Size = new Size(W, H);
+
+            x_st = 10;
+            y_st = 10;
+            dx = W + 30;
+            dy = H + 20;
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox_snowflake.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox_snowflake2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            pictureBox_dragon.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox_dragon4.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            pictureBox8.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+
+            richTextBox_ransom_note.Size = new Size(W, H + 40);
+            richTextBox_ransom_note_result.Size = new Size(W, H + 40);
+            pictureBox_ransom_note.Size = new Size(W, H + 40);
+
+            pictureBox_Chrysanthemum.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            richTextBox_ransom_note.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox_ransom_note.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            richTextBox_ransom_note_result.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            ClientSize = new Size(button2.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
+            ClientSize = new Size(button0.Right + 10, richTextBox1.Bottom + 100);    //自動表單邊界
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -252,6 +309,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             Draw_SnowFlake1();
             Draw_SnowFlake2();
+            Draw_SnowFlake3();
         }
 
         void Draw_SnowFlake1()
@@ -459,78 +517,512 @@ namespace vcs_Draw9_Example7_vcsh
 
         private void button2_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(W * 2, H * 2);
+
+            // Brushes used to fill pie slices.
+            Brush[] SliceBrushes =
+            {
+                Brushes.Red,
+                Brushes.LightGreen,
+                Brushes.Blue,
+                Brushes.LightBlue,
+                Brushes.Green,
+                Brushes.Lime,
+                Brushes.Orange,
+                Brushes.Fuchsia,
+                Brushes.Yellow,
+                Brushes.Cyan,
+            };
+            // Pens used to outline pie slices.
+            Pen[] SlicePens = { Pens.Black };
+
+            // The data values to chart.
+            float[] Values = new float[10];
+
+            // Make some random data.
+            Random rand = new Random();
+            for (int i = 0; i < Values.Length; i++)
+            {
+                // Pick a random value between 5 and 40.
+                Values[i] = (float)(5 + 35 * rand.NextDouble());
+            }
+
+            //ResizeRedraw = true;
+
+            // Draw the pie chart.
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.Clear(BackColor);
+            if ((pictureBox1.Size.Width < 20) || (pictureBox1.Size.Height < 20)) return;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Rectangle rect = new Rectangle(10, 10, pictureBox1.Size.Width - 20, pictureBox1.Size.Height - 20);
+
+            richTextBox1.Text += "W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
+            DrawLabeledPieChart(g, rect, -90, SliceBrushes, SlicePens, Values, "0.0", Font, Brushes.Black);
+
+            //pictureBox1.Image = 
+
+
         }
+
+        // Draw a pie chart.
+        private static void DrawLabeledPieChart(Graphics gr, Rectangle rect, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string label_format, Font label_font, Brush label_brush)
+        {
+            // Get the total of all angles.
+            float total = values.Sum();
+
+            gr.DrawRectangle(new Pen(Color.Red, 3), rect);
+
+            // Draw the slices.
+            float start_angle = initial_angle;
+            for (int i = 0; i < values.Length; i++)
+            {
+                float sweep_angle = values[i] * 360f / total;
+
+                // Fill and outline the pie slice.
+                gr.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
+                gr.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
+
+                start_angle += sweep_angle;
+            }
+
+            // Label the slices.
+            // We label the slices after drawing them all so one
+            // slice doesn't cover the label on another very thin slice.
+            using (StringFormat string_format = new StringFormat())
+            {
+                // Center text.
+                string_format.Alignment = StringAlignment.Center;
+                string_format.LineAlignment = StringAlignment.Center;
+
+                // Find the center of the rectangle.
+                float cx = (rect.Left + rect.Right) / 2f;
+                float cy = (rect.Top + rect.Bottom) / 2f;
+
+                // Place the label about 2/3 of the way out to the edge.
+                float radius = (rect.Width + rect.Height) / 2f * 0.33f;
+
+                start_angle = initial_angle;
+                for (int i = 0; i < values.Length; i++)
+                {
+                    float sweep_angle = values[i] * 360f / total;
+
+                    // Label the slice.
+                    double label_angle = Math.PI * (start_angle + sweep_angle / 2f) / 180f;
+                    float x = cx + (float)(radius * Math.Cos(label_angle));
+                    float y = cy + (float)(radius * Math.Sin(label_angle));
+                    gr.DrawString(values[i].ToString(label_format),
+                        label_font, label_brush, x, y, string_format);
+
+                    start_angle += sweep_angle;
+                }
+            }
+        }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(W * 2, H * 5 / 4);
+
+            // Brushes used to fill pie slices.
+            Brush[] SliceBrushes =
+            {
+                Brushes.Red,
+                Brushes.LightGreen,
+                Brushes.Blue,
+                Brushes.LightBlue,
+                Brushes.Green,
+                Brushes.Lime,
+                Brushes.Orange,
+                Brushes.Fuchsia,
+                Brushes.Yellow,
+                Brushes.Cyan,
+            };
+
+            // Pens used to outline pie slices.
+            Pen[] SlicePens = { Pens.Black };
+
+            // Top 10 languages on September 13, 2012 according to:
+            //      http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html
+            // The data values to chart.
+            float[] Values = 
+            {
+                19.295f,
+                16.267f,
+                9.770f,
+                9.147f,
+                6.596f,
+                5.614f,
+                5.528f,
+                3.861f,
+                2.267f,
+                1.724f,
+            };
+
+            // The values' annotations.
+            string[] Annotations = new string[]
+            {
+                "C",
+                "Java",
+                "Objective-C",
+                "C++",
+                "C#",
+                "PHP",
+                "(Visual) Basic",
+                "Python",
+                "Perl",
+                "Ruby",
+            };
+
+            // Draw the pie chart.
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            const int top_margin = 30;
+            const int left_margin = 15;
+            g.Clear(BackColor);
+            if ((pictureBox1.Size.Width < 2 * top_margin) || (pictureBox1.Size.Height < 2 * top_margin))
+                return;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int circle_width = pictureBox1.Size.Height - 2 * top_margin;
+            int annotation_width = (pictureBox1.Size.Width - circle_width) / 2 - 2 * left_margin;
+            int annotation_height = pictureBox1.Size.Height - 2 * left_margin;
+            Rectangle left_rect = new Rectangle(
+                left_margin, left_margin, annotation_width, annotation_height);
+            Rectangle ellipse_rect = new Rectangle(
+                left_rect.Right + left_margin, top_margin, circle_width, circle_width);
+            Rectangle right_rect = new Rectangle(
+                ellipse_rect.Right + left_margin, left_rect.Top,
+                left_rect.Width, left_rect.Height);
+            using (Font annotation_font = new Font("Times New Roman", 12))
+            {
+                DrawAnnotatedPieChart(g,
+                    ellipse_rect, left_rect, right_rect, 1.1f, 0,
+                    SliceBrushes, SlicePens,
+                    Values, Annotations, "0.0", Font, Brushes.Black,
+                    annotation_font, Pens.Blue, Brushes.Green,
+                    Brushes.LightBlue, null);
+            }
+
+
+
+
+
+
+
+        }
+
+        // Draw a pie chart.
+        private static void DrawAnnotatedPieChart(Graphics gr, Rectangle ellipse_rect, Rectangle left_rect, Rectangle right_rect, float annotation_radius_scale, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string[] annotations, string label_format, Font label_font, Brush label_brush, Font annotation_font, Pen annotation_pen, Brush annotation_brush, Brush rectangle_brush, Pen rectangle_pen)
+        {
+            // Get the total of all angles.
+            float total = values.Sum();
+
+            // Draw the slices.
+            float start_angle = initial_angle;
+            for (int i = 0; i < values.Length; i++)
+            {
+                float sweep_angle = values[i] * 360f / total;
+
+                // Fill and outline the pie slice.
+                gr.FillPie(brushes[i % brushes.Length], ellipse_rect, start_angle, sweep_angle);
+                gr.DrawPie(pens[i % pens.Length], ellipse_rect, start_angle, sweep_angle);
+
+                start_angle += sweep_angle;
+            }
+
+            // Draw the rectangles if desired.
+            if (rectangle_brush != null)
+            {
+                gr.FillRectangle(rectangle_brush, left_rect);
+                gr.FillRectangle(rectangle_brush, right_rect);
+            }
+            if (rectangle_pen != null)
+            {
+                gr.DrawRectangle(rectangle_pen, left_rect);
+                gr.DrawRectangle(rectangle_pen, right_rect);
+            }
+
+            // Label and annotate the slices.
+            // We label the slices after drawing them all so one
+            // slice doesn't cover the label on another very thin slice.
+            using (StringFormat string_format = new StringFormat())
+            {
+                // Find the center of the rectangle.
+                float cx = (ellipse_rect.Left + ellipse_rect.Right) / 2;
+                float cy = (ellipse_rect.Top + ellipse_rect.Bottom) / 2;
+
+                // Place the label about 2/3 of the way out to the edge.
+                float radius = (ellipse_rect.Width + ellipse_rect.Height) / 2f * 0.33f;
+
+                // Distances for annotation lines.
+                float annotation_rx1 = ellipse_rect.Width / 2;
+                float annotation_ry1 = ellipse_rect.Height / 2;
+                float annotation_rx2 = annotation_rx1 * annotation_radius_scale;
+                float annotation_ry2 = annotation_ry1 * annotation_radius_scale;
+
+                start_angle = start_angle = initial_angle;
+                for (int i = 0; i < values.Length; i++)
+                {
+                    float sweep_angle = values[i] * 360f / total;
+
+                    // Label the slice.
+                    string_format.Alignment = StringAlignment.Center;
+                    string_format.LineAlignment = StringAlignment.Center;
+                    double label_angle = Math.PI * (start_angle + sweep_angle / 2) / 180;
+                    float x = cx + (float)(radius * Math.Cos(label_angle));
+                    float y = cy + (float)(radius * Math.Sin(label_angle));
+                    gr.DrawString(values[i].ToString(label_format),
+                        label_font, label_brush, x, y, string_format);
+
+                    // Draw a radial line to connect to the annotation.
+                    float x1 = cx + (float)(annotation_rx1 * Math.Cos(label_angle));
+                    float y1 = cy + (float)(annotation_rx1 * Math.Sin(label_angle));
+                    float x2 = cx + (float)(annotation_rx2 * Math.Cos(label_angle));
+                    float y2 = cy + (float)(annotation_rx2 * Math.Sin(label_angle));
+                    gr.DrawLine(annotation_pen, x1, y1, x2, y2);
+
+                    // Draw a horizontal line to the annotation.
+                    if (x2 < x1)
+                    {
+                        // Draw to the left.
+                        gr.DrawLine(annotation_pen, x2, y2, left_rect.Right, y2);
+
+                        // Draw the annotation right justified.
+                        string_format.Alignment = StringAlignment.Far;
+                        gr.DrawString(annotations[i], annotation_font, annotation_brush,
+                            left_rect.Right, y2, string_format);
+                    }
+                    else
+                    {
+                        // Draw to the right.
+                        gr.DrawLine(annotation_pen, x2, y2, right_rect.Left, y2);
+
+                        // Draw the annotation left justified.
+                        string_format.Alignment = StringAlignment.Near;
+                        gr.DrawString(annotations[i], annotation_font, annotation_brush,
+                            right_rect.Left, y2, string_format);
+                    }
+
+                    start_angle += sweep_angle;
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(W * 2, H * 2);
+
+            // Brushes used to fill pie slices.
+            Brush[] SliceBrushes =
+            {
+                Brushes.Red,
+                Brushes.LightGreen,
+                Brushes.Blue,
+                Brushes.LightBlue,
+                Brushes.Green,
+                Brushes.Lime,
+                Brushes.Orange,
+                Brushes.Fuchsia,
+                Brushes.Yellow,
+                Brushes.Cyan,
+            };
+
+            // Pens used to outline pie slices.
+            Pen[] SlicePens = { Pens.Black };
+
+            // The data values to chart.
+            float[] Values = new float[10];
+
+            // Make some random data.
+            Random rand = new Random();
+            for (int i = 0; i < Values.Length; i++)
+            {
+                Values[i] = rand.Next(10, 40);
+            }
+
+            // Draw the pie chart.
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(BackColor);
+            if ((pictureBox1.Size.Width < 20) || (pictureBox1.Size.Height < 20))
+                return;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            Rectangle rect = new Rectangle(10, 10, pictureBox1.Size.Width - 20, pictureBox1.Size.Height - 20);
+            DrawPieChart(g, rect, SliceBrushes, SlicePens, Values);
         }
+
+        // Draw a pie chart.
+        private static void DrawPieChart(Graphics gr, Rectangle rect, Brush[] brushes, Pen[] pens, float[] values)
+        {
+            // Get the total of all angles.
+            float total = values.Sum();
+
+            // Draw the slices.
+            float start_angle = 0;
+            for (int i = 0; i < values.Length; i++)
+            {
+                float sweep_angle = values[i] * 360f / total;
+                gr.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
+                gr.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
+                start_angle += sweep_angle;
+            }
+        }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(W * 2, H * 2);
+
+            // Draw pie slices.
+
+            Graphics g = pictureBox1.CreateGraphics();
+            g.Clear(BackColor);
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            const int margin = 10;
+            const int width = 100;
+            Pen outline_pen = Pens.Red;
+            Brush fill_brush = Brushes.LightGreen;
+
+            using (Pen ellipse_pen = new Pen(Color.Blue))
+            {
+                ellipse_pen.DashPattern = new float[] { 5, 5 };
+
+                // Northeast wedge.
+                Rectangle rect = new Rectangle(margin + 30, 10, width, width);
+                g.DrawEllipse(ellipse_pen, rect);
+                g.FillPie(fill_brush, rect, 300, 30);
+                g.DrawPie(outline_pen, rect, 300, 30);
+
+                // Everything else.
+                rect.X += width + margin;
+                g.DrawEllipse(ellipse_pen, rect);
+                g.FillPie(fill_brush, rect, 300, -330);
+                g.DrawPie(outline_pen, rect, 300, -330);
+
+                // East wedge.
+                rect.Y += width + margin;
+                rect.X = margin + 30;
+                g.DrawEllipse(ellipse_pen, rect);
+                g.FillPie(fill_brush, rect, 315, 90);
+                g.DrawPie(outline_pen, rect, 315, 90);
+
+                // Everything else.
+                rect.X += width + margin;
+                g.DrawEllipse(ellipse_pen, rect);
+                g.FillPie(fill_brush, rect, 315, -270);
+                g.DrawPie(outline_pen, rect, 315, -270);
+
+                // Northwest quadrant.
+                rect.Y += width + margin;
+                rect.X = margin + 30;
+                g.DrawEllipse(ellipse_pen, rect);
+                g.FillPie(fill_brush, rect, 180, 90);
+                g.DrawPie(outline_pen, rect, 180, 90);
+
+                // Everything else.
+                rect.X += width + margin;
+                g.DrawEllipse(ellipse_pen, rect);
+                g.FillPie(fill_brush, rect, 180, -270);
+                g.DrawPie(outline_pen, rect, 180, -270);
+            }
+
+
+
+
+
+
+
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        void Draw_SnowFlake3()
         {
+            // Define an initiator and generator.
+            Initiator = new List<PointF>();
+            float height = Math.Min(
+                pictureBox2.ClientSize.Width,
+                pictureBox2.ClientSize.Height) - 100;
+            float x1 = (pictureBox2.ClientSize.Width - height) / 2;
+            float x2 = x1 + height;
+            float y1 = (pictureBox2.ClientSize.Height - height) / 2;
+            float y2 = y1 + height;
+            Initiator.Add(new PointF(x1, y1));
+            Initiator.Add(new PointF(x2, y1));
+            Initiator.Add(new PointF(x2, y2));
+            Initiator.Add(new PointF(x1, y2));
+            Initiator.Add(new PointF(x1, y1));
+
+            ScaleFactor = (float)(1.0 / Math.Sqrt(5.0));
+
+            GeneratorDTheta = new List<float>();
+            GeneratorDTheta.Add((float)-Math.Atan(1.0 / 2.0));
+            float pi_over_2 = (float)(Math.PI / 2);
+            GeneratorDTheta.Add(pi_over_2);
+            GeneratorDTheta.Add(-pi_over_2);
+
+            // Get the parameters.
+            int depth = (int)numericUpDown1.Value;
+
+            Bitmap bm = new Bitmap(pictureBox2.ClientSize.Width, pictureBox2.ClientSize.Height);
+            pictureBox2.Image = bm;
+
+            // Draw the snowflake.
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                DrawSnowflake3(gr, depth);
+            }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        // Draw the complete snowflake.
+        private void DrawSnowflake3(Graphics gr, int depth)
         {
+            gr.Clear(pictureBox2.BackColor);
+
+            // Draw the snowflake.
+            for (int i = 1; i < Initiator.Count; i++)
+            {
+                PointF p1 = Initiator[i - 1];
+                PointF p2 = Initiator[i];
+
+                float dx = p2.X - p1.X;
+                float dy = p2.Y - p1.Y;
+                float length = (float)Math.Sqrt(dx * dx + dy * dy);
+                float theta = (float)Math.Atan2(dy, dx);
+                DrawSnowflakeEdge3(gr, depth, ref p1, theta, length);
+            }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        // Recursively draw a snowflake edge starting at
+        // (x1, y1) in direction theta and distance dist.
+        // Leave the coordinates of the endpoint in
+        // (x1, y1).
+        private void DrawSnowflakeEdge3(Graphics gr, int depth, ref PointF p1, float theta, float dist)
         {
-        }
+            if (depth == 0)
+            {
+                PointF p2 = new PointF(
+                    (float)(p1.X + dist * Math.Cos(theta)),
+                    (float)(p1.Y + dist * Math.Sin(theta)));
+                gr.DrawLine(Pens.Blue, p1, p2);
+                p1 = p2;
+                return;
+            }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
+            // Recursively draw the edge.
+            dist *= ScaleFactor;
+            for (int i = 0; i < GeneratorDTheta.Count; i++)
+            {
+                theta += GeneratorDTheta[i];
+                DrawSnowflakeEdge3(gr, depth - 1, ref p1, theta, dist);
+            }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -766,6 +1258,516 @@ namespace vcs_Draw9_Example7_vcsh
 
             Root8.Draw(e.Graphics);
         }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+        // http://en.wikipedia.org/wiki/Dragon_curve
+        // http://en.wikipedia.org/wiki/Heighway_dragon
+        // http://ecademy.agnesscott.edu/~lriddle/ifs/heighway/heighway.htm
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            pictureBox_dragon.Refresh();
+
+
+
+        }
+
+        // The direction the curve should turn next.
+        private enum Direction
+        {
+            Left,
+            Right
+        }
+
+        // Draw the dragon.
+        private void pictureBox_dragon_Paint(object sender, PaintEventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            e.Graphics.Clear(pictureBox_dragon.BackColor);
+
+            // Find the first control points.
+            const int margin = 5;
+            float dx = Math.Min(
+                (pictureBox_dragon.ClientSize.Width - 2 * margin) / 1.5f,
+                (pictureBox_dragon.ClientSize.Height - 2 * margin));
+
+            // Center it.
+            float x0 = (pictureBox_dragon.ClientSize.Width - dx * 1.5f) / 2f + dx / 3f;
+            float y0 = (pictureBox_dragon.ClientSize.Height - dx) / 2f + dx / 3f;
+
+            // Recursively draw the lines.
+            int depth = (int)numericUpDown1.Value;
+            DrawDragonLine(e.Graphics, depth, Direction.Right, x0, y0, dx, 0);
+            Cursor = Cursors.Default;
+
+            // Draw a box around it and some other lines to show size.
+            e.Graphics.DrawRectangle(Pens.Green,
+                x0 - dx / 3, y0 - dx / 3,
+                1.5f * dx, dx);
+            e.Graphics.DrawLine(Pens.Blue, x0, y0, x0 + dx, y0 + 0);
+            e.Graphics.FillEllipse(Brushes.Blue, x0 - 2, y0 - 2, 5, 5);
+
+
+        }
+
+        // Recursively draw the dragon curve between the two points.
+        private void DrawDragonLine(Graphics gr, int level, Direction turn_towards, float x1, float y1, float dx, float dy)
+        {
+            if (level <= 0)
+            {
+                gr.DrawLine(Pens.Red, x1, y1, x1 + dx, y1 + dy);
+
+#if DRAW_POINTS
+                gr.DrawEllipse(Pens.Blue, x1 - 2, y1 - 2, 4, 4);
+                gr.DrawEllipse(Pens.Blue, x1 + dx - 2, y1 + dy - 2, 4, 4);
+#endif
+            }
+            else
+            {
+#if DRAW_LEVEL_MINUS_1
+                if (level == 1)
+                {
+                    gr.DrawLine(Pens.Silver, x1, y1, x1 + dx, y1 + dy);
+                }
+#endif
+                float nx = (float)(dx / 2);
+                float ny = (float)(dy / 2);
+                float dx2 = -ny + nx;
+                float dy2 = nx + ny;
+                if (turn_towards == Direction.Right)
+                {
+                    // Turn to the right.
+                    DrawDragonLine(gr, level - 1, Direction.Right, x1, y1, dx2, dy2);
+                    float x2 = x1 + dx2;
+                    float y2 = y1 + dy2;
+                    DrawDragonLine(gr, level - 1, Direction.Left, x2, y2, dy2, -dx2);
+                }
+                else
+                {
+                    // Turn to the left.
+                    DrawDragonLine(gr, level - 1, Direction.Right, x1, y1, dy2, -dx2);
+                    float x2 = x1 + dy2;
+                    float y2 = y1 - dx2;
+                    DrawDragonLine(gr, level - 1, Direction.Left, x2, y2, dx2, dy2);
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // Draw some text along a line segment.
+            Graphics g = pictureBox1.CreateGraphics();
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.High;
+
+            // Draw some text along some line segments.
+            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text above a line segment.", true);
+            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text below a line segment.", false);
+
+            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text above a line segment.", true);
+            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text below a line segment.", false);
+        }
+
+        // Draw some text.
+        private void DrawOnSegment(Graphics gr, PointF start_point, PointF end_point, string txt, bool text_above_segment)
+        {
+            int start_ch = 0;
+
+            gr.DrawLine(Pens.Green, start_point, end_point);
+            DrawTextOnSegment(gr, Brushes.Blue, this.Font, txt,
+                ref start_ch, ref start_point, end_point, text_above_segment);
+        }
+
+        // Draw some text along a line segment.
+        // Leave char_num pointing to the next character to be drawn.
+        // Leave start_point holding the last point used.
+        private void DrawTextOnSegment(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
+        {
+            float dx = end_point.X - start_point.X;
+            float dy = end_point.Y - start_point.Y;
+            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
+            dx /= dist;
+            dy /= dist;
+
+            // See how many characters will fit.
+            int last_ch = first_ch;
+            while (last_ch < txt.Length)
+            {
+                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
+                if (gr.MeasureString(test_string, font).Width > dist)
+                {
+                    // This is one too many characters.
+                    last_ch--;
+                    break;
+                }
+                last_ch++;
+            }
+            if (last_ch < first_ch) return;
+            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
+            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
+
+            // Rotate and translate to position the characters.
+            GraphicsState state = gr.Save();
+            if (text_above_segment)
+            {
+                gr.TranslateTransform(0, -gr.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
+            }
+            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
+            gr.RotateTransform(angle, MatrixOrder.Append);
+            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
+
+            // Draw the characters that fit.
+            gr.DrawString(chars_that_fit, font, brush, 0, 0);
+
+            // Restore the saved state.
+            gr.Restore(state);
+
+            // Update first_ch and start_point.
+            first_ch = last_ch + 1;
+            float text_width = gr.MeasureString(chars_that_fit, font).Width;
+            start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.High;
+
+            // Draw some text along some paths.
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(new RectangleF(40, 40, 320, 220), 180, 180);
+            g.DrawPath(Pens.Green, path);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
+
+            path = new GraphicsPath();
+            path.AddArc(new RectangleF(40, 50, 320, 220), 0, 180);
+            g.DrawPath(Pens.Red, path);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
+        }
+
+        // Draw some text along a GraphicsPath.
+        private void DrawTextOnPath(Graphics gr, Brush brush, Font font, string txt, GraphicsPath path, bool text_above_path)
+        {
+            // Make a copy so we don't mess up the original.
+            path = (GraphicsPath)path.Clone();
+
+            // Flatten the path into segments.
+            path.Flatten();
+
+            // Draw characters.
+            int start_ch = 0;
+            PointF start_point = path.PathPoints[0];
+            for (int i = 1; i < path.PointCount; i++)
+            {
+                PointF end_point = path.PathPoints[i];
+                DrawTextOnSegment2(gr, brush, font, txt, ref start_ch,
+                    ref start_point, end_point, text_above_path);
+                if (start_ch >= txt.Length) break;
+            }
+        }
+
+        // Draw some text along a line segment.
+        // Leave char_num pointing to the next character to be drawn.
+        // Leave start_point holding the coordinates of the last point used.
+        private void DrawTextOnSegment2(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
+        {
+            float dx = end_point.X - start_point.X;
+            float dy = end_point.Y - start_point.Y;
+            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
+            dx /= dist;
+            dy /= dist;
+
+            // See how many characters will fit.
+            int last_ch = first_ch;
+            while (last_ch < txt.Length)
+            {
+                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
+                if (gr.MeasureString(test_string, font).Width > dist)
+                {
+                    // This is one too many characters.
+                    last_ch--;
+                    break;
+                }
+                last_ch++;
+            }
+            if (last_ch < first_ch) return;
+            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
+            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
+
+            // Rotate and translate to position the characters.
+            GraphicsState state = gr.Save();
+            if (text_above_segment)
+            {
+                gr.TranslateTransform(0,
+                    -gr.MeasureString(chars_that_fit, font).Height,
+                    MatrixOrder.Append);
+            }
+            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
+            gr.RotateTransform(angle, MatrixOrder.Append);
+            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
+
+            // Draw the characters that fit.
+            gr.DrawString(chars_that_fit, font, brush, 0, 0);
+
+            // Restore the saved state.
+            gr.Restore(state);
+
+            // Update first_ch and start_point.
+            first_ch = last_ch + 1;
+            float text_width = gr.MeasureString(chars_that_fit, font).Width;
+            start_point = new PointF(
+                start_point.X + dx * text_width,
+                start_point.Y + dy * text_width);
+        }
+
+
+        private void pictureBox_Chrysanthemum_Paint(object sender, PaintEventArgs e)
+        {
+            pictureBox_Chrysanthemum.BackColor = Color.Black;
+            // Draw the curve.
+
+            // Scale and translate.
+            const float ymax = -11;
+            const float ymin = 11;
+            const float hgt = ymin - ymax;
+            const float wid = hgt;
+            float scale = Math.Min(
+                pictureBox_Chrysanthemum.Size.Width / wid,
+                pictureBox_Chrysanthemum.Size.Height / hgt);
+            e.Graphics.ScaleTransform(scale, scale);
+            e.Graphics.TranslateTransform(
+                pictureBox_Chrysanthemum.Size.Width / 2,
+                pictureBox_Chrysanthemum.Size.Height / 2,
+                System.Drawing.Drawing2D.MatrixOrder.Append);
+
+            // Draw the curve.
+            const long num_lines = 5000;
+
+            // Generate the points.
+            double t = 0;
+            double r = 5 * (1 + Math.Sin(11 * t / 5))
+                - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
+                * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+            PointF pt1 = new PointF((float)(r * Math.Sin(t)), (float)(-r * Math.Cos(t)));
+
+            using (Pen the_pen = new Pen(Color.Blue, 0))
+            {
+                for (int i = 0; i <= num_lines; i++)
+                {
+                    t = i * Period * Math.PI / num_lines;
+                    r = 5 * (1 + Math.Sin(11 * t / 5))
+                        - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
+                        * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+                    PointF pt0 = pt1;
+                    pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
+                    the_pen.Color = GetColor(t);
+                    e.Graphics.DrawLine(the_pen, pt0, pt1);
+                }
+            }
+
+
+
+        }
+
+        // Return a color from the Colors array.
+        private Color GetColor(double t)
+        {
+            int index = (int)(t / Math.PI);
+            return Colors[index % Colors.Length];
+        }
+
+        private void pictureBox_Chrysanthemum2_Paint(object sender, PaintEventArgs e)
+        {
+            pictureBox_Chrysanthemum2.BackColor = Color.Black;
+            // Draw the curve.
+
+            // Scale and translate.
+            const float ymax = -11;
+            const float ymin = 11;
+            const float hgt = ymin - ymax;
+            const float wid = hgt;
+            float scale = Math.Min(
+                pictureBox_Chrysanthemum2.Size.Width / wid,
+                pictureBox_Chrysanthemum2.Size.Height / hgt);
+            e.Graphics.ScaleTransform(scale, scale);
+            e.Graphics.TranslateTransform(
+                pictureBox_Chrysanthemum2.Size.Width / 2,
+                pictureBox_Chrysanthemum2.Size.Height / 2,
+                System.Drawing.Drawing2D.MatrixOrder.Append);
+
+            // Draw the curve.
+            const long num_lines = 5000;
+
+            // Generate the points.
+            double t = 0;
+            double r = 5 * (1 + Math.Sin(11 * t / 5))
+                - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
+                * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+            PointF pt1 = new PointF((float)(r * Math.Sin(t)), (float)(-r * Math.Cos(t)));
+
+            using (Pen the_pen = new Pen(Color.Blue, 0))
+            {
+                using (SolidBrush the_brush = new SolidBrush(Color.Blue))
+                {
+                    for (int i = 0; i <= num_lines; i++)
+                    {
+                        t = i * Period * Math.PI / num_lines;
+                        r = 5 * (1 + Math.Sin(11 * t / 5))
+                            - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
+                            * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
+                        PointF pt0 = pt1;
+                        pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
+                        Color the_color = GetColor(t);
+
+                        // Fill the triangle from this edge to the origin.
+                        the_brush.Color = Color.FromArgb(64,
+                            the_color.R, the_color.G, the_color.B);
+                        PointF[] pts = { pt0, pt1, new PointF(0, 0) };
+                        e.Graphics.FillPolygon(the_brush, pts);
+
+                        // Draw the curve's outer edge.
+                        the_pen.Color = the_color;
+                        e.Graphics.DrawLine(the_pen, pt0, pt1);
+                    }
+                }
+            }
+
+        }
+
+        private void pictureBox_dragon4_Paint(object sender, PaintEventArgs e)
+        {
+            MakeDragon4Image();
+
+        }
+
+        // Select the clicked color as the one to draw last.
+        private Color DrawLastColor = Color.Black;
+
+        // Draw the dragon.
+        private void MakeDragon4Image()
+        {
+            richTextBox1.Text += "\n\nW = " + pictureBox_dragon4.Size.Width.ToString() + ", H = " + pictureBox_dragon4.Size.Height.ToString() + "\n";
+
+            //Bitmap bm = new Bitmap(pictureBox_dragon4.Size.Width, pictureBox_dragon4.Size.Height);
+
+
+            Bitmap bm = new Bitmap(pictureBox_dragon.ClientSize.Width, pictureBox_dragon.ClientSize.Height);
+            pictureBox_dragon.Image = bm;
+
+            /*
+            Bitmap bm4 = new Bitmap(pictureBox_dragon4.ClientSize.Width, pictureBox_dragon4.ClientSize.Height);
+            pictureBox_dragon4.Image = bm4;
+            */
+            //using (Graphics gr = Graphics.FromImage(bm))
+            {
+                //gr.Clear(pictureBox_dragon4.BackColor);
+                /*
+                // Find the first control point.
+                const int margin = 5;
+                float dx = Math.Min(
+                    (pictureBox_dragon4.ClientSize.Width - 2 * margin) / (14 / 6f),
+                    (pictureBox_dragon4.ClientSize.Height - 2 * margin) / (14 / 6f));
+
+                // Center it.
+                float x0 = pictureBox_dragon4.ClientSize.Width / 2;
+                float y0 = pictureBox_dragon4.ClientSize.Height / 2;
+
+                // Recursively draw the lines.
+                //int level = (int)nudLevel.Value;
+                int level = (int)numericUpDown1.Value;
+                */
+
+                /*
+                if (DrawLastColor != Color.Red)
+                    DrawDragonLine(gr, Pens.Red, level, Direction.Right, x0, y0, dx, 0);
+                if (DrawLastColor != Color.Green)
+                    DrawDragonLine(gr, Pens.Green, level, Direction.Right, x0, y0, 0, dx);
+                if (DrawLastColor != Color.Blue)
+                    DrawDragonLine(gr, Pens.Blue, level, Direction.Right, x0, y0, -dx, 0);
+                if (DrawLastColor != Color.Black)
+                    DrawDragonLine(gr, Pens.Black, level, Direction.Right, x0, y0, 0, -dx);
+                */
+                /*
+                // Redraw the one we should draw last.
+                if (DrawLastColor == Color.Red)
+                    DrawDragonLine(gr, Pens.Red, level, Direction.Right, x0, y0, dx, 0);
+                else if (DrawLastColor == Color.Green)
+                    DrawDragonLine(gr, Pens.Green, level, Direction.Right, x0, y0, 0, dx);
+                else if (DrawLastColor == Color.Blue)
+                    DrawDragonLine(gr, Pens.Blue, level, Direction.Right, x0, y0, -dx, 0);
+                else if (DrawLastColor == Color.Black)
+                    DrawDragonLine(gr, Pens.Black, level, Direction.Right, x0, y0, 0, -dx);
+                */
+            }
+            // Display the result.
+            //pictureBox_dragon4.Image = bm;
+        }
+
+        // Recursively draw the dragon curve between the two points.
+        private void DrawDragonLine(Graphics gr, Pen pen, int level, Direction turn_towards, float x1, float y1, float dx, float dy)
+        {
+            if (level <= 0)
+            {
+                gr.DrawLine(pen, x1, y1, x1 + dx, y1 + dy);
+
+#if DRAW_POINTS
+                gr.DrawEllipse(Pens.Blue, x1 - 2, y1 - 2, 4, 4);
+                gr.DrawEllipse(Pens.Blue, x1 + dx - 2, y1 + dy - 2, 4, 4);
+#endif
+            }
+            else
+            {
+#if DRAW_LEVEL_MINUS_1
+                if (level == 1)
+                {
+                    gr.DrawLine(Pens.Silver, x1, y1, x1 + dx, y1 + dy);
+                }
+#endif
+                float nx = (float)(dx / 2);
+                float ny = (float)(dy / 2);
+                float dx2 = -ny + nx;
+                float dy2 = nx + ny;
+                if (turn_towards == Direction.Right)
+                {
+                    // Turn to the right.
+                    DrawDragonLine(gr, pen, level - 1, Direction.Right, x1, y1, dx2, dy2);
+                    float x2 = x1 + dx2;
+                    float y2 = y1 + dy2;
+                    DrawDragonLine(gr, pen, level - 1, Direction.Left, x2, y2, dy2, -dx2);
+                }
+                else
+                {
+                    // Turn to the left.
+                    DrawDragonLine(gr, pen, level - 1, Direction.Right, x1, y1, dy2, -dx2);
+                    float x2 = x1 + dy2;
+                    float y2 = y1 - dx2;
+                    DrawDragonLine(gr, pen, level - 1, Direction.Left, x2, y2, dx2, dy2);
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

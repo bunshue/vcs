@@ -90,7 +90,7 @@ namespace vcs_test_all_25_GeoCoordinate
         {
             double x_diff;
             double y_diff;
-            double distance;
+            //double distance;
 
             x_diff = x_sp - x_st;
             y_diff = y_sp - y_st;
@@ -152,6 +152,126 @@ namespace vcs_test_all_25_GeoCoordinate
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // Get the entered latitudes and longitudes.
+            double lat_from = 25.0;
+            if (lat_from < 0) lat_from += 360;
+
+            double lon_from = 240.0;
+            if (lon_from < 0) lon_from += 360;
+
+            double lat_to = 26.0;
+            if (lat_to < 0) lat_to += 360;
+
+            double lon_to = 241.0;
+            if (lon_to < 0) lon_to += 360;
+
+            // Calculate the differences in latitude and longitude.
+            double dlat = Math.Abs(lat_from - lat_to);
+            if (dlat > 180) dlat = 360 - dlat;
+
+            double dlon = Math.Abs(lon_from - lon_to);
+            if (dlon > 180) dlon = 360 - dlon;
+
+            // Flat Earth.
+            //txtMethod1.Text = FlatEarth(lat_from, lon_from, lat_to, lon_to).ToString("0.0000");
+            FlatEarth(lat_from, lon_from, lat_to, lon_to);
+
+            // Haversine.
+            //txtMethod2.Text = Haversine(lat_from, lon_from, lat_to, lon_to).ToString("0.0000");
+            Haversine(lat_from, lon_from, lat_to, lon_to);
+
+
+            //台北車站	25.047778, 121.517033 
+            //新竹車站	24.801604, 120.971655
+            lat_from = 25.047778;
+            if (lat_from < 0) lat_from += 360;
+
+            lon_from = 121.517033;
+            if (lon_from < 0) lon_from += 360;
+            lat_to = 24.801604;
+            if (lat_to < 0) lat_to += 360;
+            lon_to = 120.971655;
+            if (lon_to < 0) lon_to += 360;
+
+            // Calculate the differences in latitude and longitude.
+            dlat = Math.Abs(lat_from - lat_to);
+            if (dlat > 180) dlat = 360 - dlat;
+
+            dlon = Math.Abs(lon_from - lon_to);
+            if (dlon > 180) dlon = 360 - dlon;
+
+            // Flat Earth.
+            //txtMethod1.Text = FlatEarth(lat_from, lon_from, lat_to, lon_to).ToString("0.0000");
+            FlatEarth(lat_from, lon_from, lat_to, lon_to);
+
+            // Haversine.
+            //txtMethod2.Text = Haversine(lat_from, lon_from, lat_to, lon_to).ToString("0.0000");
+            Haversine(lat_from, lon_from, lat_to, lon_to);
+
+        }
+
+        // Methods for calculating distances.
+        private const double EarthRadius = 3958.756;  //mi
+        //private const double EarthRadius = 6367.5;  //KM    //R表示地球的平均半徑，為6371km
+
+        private double FlatEarth(double lat1, double lon1, double lat2, double lon2)
+        {
+            richTextBox1.Text += "量測距離\tFlatEarth\n";
+            richTextBox1.Text += "從 東經 " + lon1.ToString() + " 度, 北緯 " + lat1.ToString() + " 度\n";
+            richTextBox1.Text += "到 東經 " + lon2.ToString() + " 度, 北緯 " + lat2.ToString() + " 度\n";
+
+            //                              緯度          經度
+            // Calculate the differences in latitude and longitude.
+            double dlat = Math.Abs(lat1 - lat2);
+            if (dlat > 180) dlat = 360 - dlat;
+
+            double dlon = Math.Abs(lon1 - lon2);
+            if (dlon > 180) dlon = 360 - dlon;
+
+            double x = 69.1 * dlat;     //緯度差 一度球心角所對應的子午線弧長為111.2km
+            double y = 53.0 * dlon;     //經度差   同一緯度約等於111km乘緯度的餘弦
+            double distance = Math.Sqrt(x * x + y * y);
+            richTextBox1.Text += "距離\t" + distance.ToString() + " 公里\n";
+            return distance;
+        }
+
+        private double Haversine(double lat1, double lon1, double lat2, double lon2)
+        {
+            richTextBox1.Text += "量測距離\tHaversine\n";
+            richTextBox1.Text += "從 東經 " + lon1.ToString() + " 度, 北緯 " + lat1.ToString() + " 度\n";
+            richTextBox1.Text += "到 東經 " + lon2.ToString() + " 度, 北緯 " + lat2.ToString() + " 度\n";
+
+            double dlat = DegreesToRadians(lat2 - lat1);
+            double dlon = DegreesToRadians(lon2 - lon1);
+            double a = Math.Sin(dlat / 2) * Math.Sin(dlat / 2) + Math.Cos(DegreesToRadians(lat1)) * Math.Cos(DegreesToRadians(lat2)) * Math.Sin(dlon / 2) * Math.Sin(dlon / 2);
+            double distance = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a)) * EarthRadius;
+            richTextBox1.Text += "距離\t" + distance.ToString() + " 公里\n";
+            return distance;
+        }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        // Convert degrees into radians.
+        private double DegreesToRadians(double d)
+        {
+            return d / 180 * Math.PI;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
             //南投縣魚池鄉東光村
             double e0 = 120.969543;
             double n0 = 23.861058;
@@ -192,10 +312,6 @@ namespace vcs_test_all_25_GeoCoordinate
             find_angle(121.028837, 24.839819, 121.030778, 24.839649);
 
             find_angle(120.971655, 24.801604, 121.517033, 25.047778);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
         }
 
         private void button4_Click(object sender, EventArgs e)

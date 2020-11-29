@@ -70,7 +70,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(217, 42);
             this.button2.TabIndex = 2;
-            this.button2.Text = "算方位 與 距離";
+            this.button2.Text = "計算兩點距離3";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -81,7 +81,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(217, 42);
             this.button3.TabIndex = 3;
-            this.button3.Text = "xxx";
+            this.button3.Text = "算方位 與 距離";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
