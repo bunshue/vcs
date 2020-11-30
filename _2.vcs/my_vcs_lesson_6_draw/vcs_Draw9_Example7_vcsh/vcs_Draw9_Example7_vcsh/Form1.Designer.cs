@@ -349,7 +349,7 @@
             // 
             // pictureBox_dragon4
             // 
-            this.pictureBox_dragon4.Location = new System.Drawing.Point(555, 230);
+            this.pictureBox_dragon4.Location = new System.Drawing.Point(568, 233);
             this.pictureBox_dragon4.Name = "pictureBox_dragon4";
             this.pictureBox_dragon4.Size = new System.Drawing.Size(200, 200);
             this.pictureBox_dragon4.TabIndex = 73;

@@ -27,7 +27,6 @@ namespace vcs_Draw3
         Bitmap bitmap2;
         Bitmap bitmap3;
 
-
         //for gear
         // The frame images.
         private Bitmap[] Frames;
@@ -63,6 +62,11 @@ namespace vcs_Draw3
         private Font TextFont;
         private float[] CharacterWidths;
         private float TotalCharacterWidth;
+
+        Graphics gc;
+        Bitmap bitmap_card;
+        Graphics gc2;
+        Bitmap bitmap_card2;
 
         public Form1()
         {
@@ -188,6 +192,20 @@ namespace vcs_Draw3
             pictureBox_stretching.Size = new Size((int)StartWidth, pictureBox_stretching.Size.Height);
             pictureBox_stretching.Refresh();
             TicksToGo = TotalTicks;
+
+            //指定畫布大小
+            pictureBox_card.Width = 200;
+            pictureBox_card.Height = 200;
+            bitmap_card = new Bitmap(pictureBox_card.Width, pictureBox_card.Height);
+            gc = Graphics.FromImage(bitmap_card);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            pictureBox_card.Image = bitmap_card;
+
+            pictureBox_card2.Width = 200;
+            pictureBox_card2.Height = 200;
+            bitmap_card2 = new Bitmap(pictureBox_card2.Width, pictureBox_card2.Height);
+            gc2 = Graphics.FromImage(bitmap_card2);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            pictureBox_card2.Image = bitmap_card2;
+
 
         }
 
@@ -1338,6 +1356,126 @@ namespace vcs_Draw3
                     point.X += CharacterWidths[i] + space;
                 }
             }
+        }
+
+        int card_no = 0;
+        int card_no2 = 0;
+        private void timer_card_Tick(object sender, EventArgs e)
+        {
+            show_card(card_no);
+            card_no++;
+            if (card_no > (13 * 4 + 7))
+                card_no = 0;
+
+            show_card2(card_no2);
+            card_no2++;
+            if (card_no2 >= 13 * 4)
+                card_no2 = 0;
+        }
+
+        void show_card(int card_no)
+        {
+            Image img = Image.FromFile("c:\\______test_files\\_material\\cards1.png");
+            int W = img.Width;
+            int H = img.Height;
+            int w = W / 13;
+            int h = H / 5;
+
+            int index_x = card_no % 13;
+            int index_y = card_no / 13;
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            //來源矩形的大小會決定要將未縮放原始影像的哪個部分繪製到螢幕上。
+
+            int sx;
+            int sy;
+            int sw;
+            int sh;
+            int dx;
+            int dy;
+            int dw;
+            int dh;
+
+            //使用兩個Rectangle結構
+            //source
+            sx = w * index_x;
+            sy = h * index_y;
+            sw = w;
+            sh = h;
+            //destination
+            dx = 0;
+            dy = 0;
+            dw = w;
+            dh = h;
+
+            // Create rectangle for displaying image.
+            Rectangle destRect = new Rectangle(dx, dy, dw, dh);
+
+            // Create rectangle for source image.
+            Rectangle srcRect3 = new Rectangle(sx, sy, sw, sh);
+
+            // Draw image to screen.
+            gc.DrawImage(img, destRect, srcRect3, units);
+
+            pictureBox_card.Image = bitmap_card;
+            pictureBox_card.Size = new Size(w, h);
+        }
+
+        //int card_no2 = 0;
+        private void timer_card2_Tick(object sender, EventArgs e)
+        {
+            show_card2(card_no2);
+            card_no2++;
+            if (card_no2 > 13 * 4)
+                card_no2 = 0;
+        }
+
+        void show_card2(int card_no)
+        {
+            Image img = Image.FromFile("c:\\______test_files\\_material\\cards2.png");
+            int W = img.Width;
+            int H = img.Height;
+            int w = W / 13;
+            int h = H / 4;
+
+            int index_x = card_no % 13;
+            int index_y = card_no / 13;
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            //來源矩形的大小會決定要將未縮放原始影像的哪個部分繪製到螢幕上。
+
+            int sx;
+            int sy;
+            int sw;
+            int sh;
+            int dx;
+            int dy;
+            int dw;
+            int dh;
+
+            //使用兩個Rectangle結構
+            //source
+            sx = w * index_x;
+            sy = h * index_y;
+            sw = w;
+            sh = h;
+            //destination
+            dx = 0;
+            dy = 0;
+            dw = w;
+            dh = h;
+
+            // Create rectangle for displaying image.
+            Rectangle destRect = new Rectangle(dx, dy, dw, dh);
+
+            // Create rectangle for source image.
+            Rectangle srcRect3 = new Rectangle(sx, sy, sw, sh);
+
+            // Draw image to screen.
+            gc2.DrawImage(img, destRect, srcRect3, units);
+
+            pictureBox_card2.Image = bitmap_card;
+            pictureBox_card2.Size = new Size(w, h);
         }
 
 

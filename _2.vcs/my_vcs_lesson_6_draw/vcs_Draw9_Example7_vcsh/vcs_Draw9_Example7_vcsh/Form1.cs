@@ -87,6 +87,7 @@ namespace vcs_Draw9_Example7_vcsh
                 Color.Blue,
                 Color.Violet
             };
+            MakeDragon4Image();
         }
 
         void show_item_location()
@@ -1273,8 +1274,7 @@ namespace vcs_Draw9_Example7_vcsh
         {
             pictureBox_dragon.Refresh();
 
-
-
+            MakeDragon4Image();
         }
 
         // The direction the curve should turn next.
@@ -1287,14 +1287,16 @@ namespace vcs_Draw9_Example7_vcsh
         // Draw the dragon.
         private void pictureBox_dragon_Paint(object sender, PaintEventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
+            MakeDragonImage(e);
+        }
+
+        void MakeDragonImage(PaintEventArgs e)
+        {
             e.Graphics.Clear(pictureBox_dragon.BackColor);
 
             // Find the first control points.
             const int margin = 5;
-            float dx = Math.Min(
-                (pictureBox_dragon.ClientSize.Width - 2 * margin) / 1.5f,
-                (pictureBox_dragon.ClientSize.Height - 2 * margin));
+            float dx = Math.Min((pictureBox_dragon.ClientSize.Width - 2 * margin) / 1.5f, (pictureBox_dragon.ClientSize.Height - 2 * margin));
 
             // Center it.
             float x0 = (pictureBox_dragon.ClientSize.Width - dx * 1.5f) / 2f + dx / 3f;
@@ -1303,16 +1305,11 @@ namespace vcs_Draw9_Example7_vcsh
             // Recursively draw the lines.
             int depth = (int)numericUpDown1.Value;
             DrawDragonLine(e.Graphics, depth, Direction.Right, x0, y0, dx, 0);
-            Cursor = Cursors.Default;
 
             // Draw a box around it and some other lines to show size.
-            e.Graphics.DrawRectangle(Pens.Green,
-                x0 - dx / 3, y0 - dx / 3,
-                1.5f * dx, dx);
+            e.Graphics.DrawRectangle(Pens.Green, x0 - dx / 3, y0 - dx / 3, 1.5f * dx, dx);
             e.Graphics.DrawLine(Pens.Blue, x0, y0, x0 + dx, y0 + 0);
             e.Graphics.FillEllipse(Brushes.Blue, x0 - 2, y0 - 2, 5, 5);
-
-
         }
 
         // Recursively draw the dragon curve between the two points.
@@ -1647,32 +1644,20 @@ namespace vcs_Draw9_Example7_vcsh
 
         private void pictureBox_dragon4_Paint(object sender, PaintEventArgs e)
         {
-            MakeDragon4Image();
-
+            //MakeDragon4Image(e);
         }
 
         // Select the clicked color as the one to draw last.
         private Color DrawLastColor = Color.Black;
 
         // Draw the dragon.
-        private void MakeDragon4Image()
+        void MakeDragon4Image()
         {
-            richTextBox1.Text += "\n\nW = " + pictureBox_dragon4.Size.Width.ToString() + ", H = " + pictureBox_dragon4.Size.Height.ToString() + "\n";
-
-            //Bitmap bm = new Bitmap(pictureBox_dragon4.Size.Width, pictureBox_dragon4.Size.Height);
-
-
-            Bitmap bm = new Bitmap(pictureBox_dragon.ClientSize.Width, pictureBox_dragon.ClientSize.Height);
-            pictureBox_dragon.Image = bm;
-
-            /*
-            Bitmap bm4 = new Bitmap(pictureBox_dragon4.ClientSize.Width, pictureBox_dragon4.ClientSize.Height);
-            pictureBox_dragon4.Image = bm4;
-            */
-            //using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bm = new Bitmap(pictureBox_dragon4.ClientSize.Width, pictureBox_dragon4.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
             {
-                //gr.Clear(pictureBox_dragon4.BackColor);
-                /*
+                gr.Clear(pictureBox_dragon4.BackColor);
+
                 // Find the first control point.
                 const int margin = 5;
                 float dx = Math.Min(
@@ -1686,9 +1671,6 @@ namespace vcs_Draw9_Example7_vcsh
                 // Recursively draw the lines.
                 //int level = (int)nudLevel.Value;
                 int level = (int)numericUpDown1.Value;
-                */
-
-                /*
                 if (DrawLastColor != Color.Red)
                     DrawDragonLine(gr, Pens.Red, level, Direction.Right, x0, y0, dx, 0);
                 if (DrawLastColor != Color.Green)
@@ -1697,8 +1679,7 @@ namespace vcs_Draw9_Example7_vcsh
                     DrawDragonLine(gr, Pens.Blue, level, Direction.Right, x0, y0, -dx, 0);
                 if (DrawLastColor != Color.Black)
                     DrawDragonLine(gr, Pens.Black, level, Direction.Right, x0, y0, 0, -dx);
-                */
-                /*
+
                 // Redraw the one we should draw last.
                 if (DrawLastColor == Color.Red)
                     DrawDragonLine(gr, Pens.Red, level, Direction.Right, x0, y0, dx, 0);
@@ -1708,10 +1689,11 @@ namespace vcs_Draw9_Example7_vcsh
                     DrawDragonLine(gr, Pens.Blue, level, Direction.Right, x0, y0, -dx, 0);
                 else if (DrawLastColor == Color.Black)
                     DrawDragonLine(gr, Pens.Black, level, Direction.Right, x0, y0, 0, -dx);
-                */
             }
+
             // Display the result.
-            //pictureBox_dragon4.Image = bm;
+            pictureBox_dragon4.Image = bm;
+
         }
 
         // Recursively draw the dragon curve between the two points.
@@ -1756,15 +1738,6 @@ namespace vcs_Draw9_Example7_vcsh
                 }
             }
         }
-
-
-
-
-
-
-
-
-
 
 
 

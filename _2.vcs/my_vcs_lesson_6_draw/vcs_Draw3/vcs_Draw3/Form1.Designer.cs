@@ -89,6 +89,10 @@
             this.timer_atom = new System.Windows.Forms.Timer(this.components);
             this.label_size = new System.Windows.Forms.Label();
             this.pictureBox_stretching = new System.Windows.Forms.PictureBox();
+            this.timer_card = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_card = new System.Windows.Forms.PictureBox();
+            this.timer_card2 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_card2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -98,6 +102,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -623,11 +629,41 @@
             this.pictureBox_stretching.TabStop = false;
             this.pictureBox_stretching.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_stretching_Paint);
             // 
+            // timer_card
+            // 
+            this.timer_card.Enabled = true;
+            this.timer_card.Interval = 1000;
+            this.timer_card.Tick += new System.EventHandler(this.timer_card_Tick);
+            // 
+            // pictureBox_card
+            // 
+            this.pictureBox_card.Location = new System.Drawing.Point(338, 241);
+            this.pictureBox_card.Name = "pictureBox_card";
+            this.pictureBox_card.Size = new System.Drawing.Size(102, 128);
+            this.pictureBox_card.TabIndex = 63;
+            this.pictureBox_card.TabStop = false;
+            // 
+            // timer_card2
+            // 
+            this.timer_card2.Enabled = true;
+            this.timer_card2.Interval = 1000;
+            this.timer_card2.Tick += new System.EventHandler(this.timer_card2_Tick);
+            // 
+            // pictureBox_card2
+            // 
+            this.pictureBox_card2.Location = new System.Drawing.Point(446, 241);
+            this.pictureBox_card2.Name = "pictureBox_card2";
+            this.pictureBox_card2.Size = new System.Drawing.Size(102, 128);
+            this.pictureBox_card2.TabIndex = 64;
+            this.pictureBox_card2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_card2);
+            this.Controls.Add(this.pictureBox_card);
             this.Controls.Add(this.pictureBox_stretching);
             this.Controls.Add(this.label_size);
             this.Controls.Add(this.pictureBox_atom);
@@ -688,6 +724,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -755,6 +793,10 @@
         private System.Windows.Forms.Timer timer_atom;
         private System.Windows.Forms.Label label_size;
         private System.Windows.Forms.PictureBox pictureBox_stretching;
+        private System.Windows.Forms.Timer timer_card;
+        private System.Windows.Forms.PictureBox pictureBox_card;
+        private System.Windows.Forms.Timer timer_card2;
+        private System.Windows.Forms.PictureBox pictureBox_card2;
     }
 }
 
