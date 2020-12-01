@@ -213,7 +213,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(195, 40);
             this.button13.TabIndex = 12;
-            this.button13.Text = "xxx";
+            this.button13.Text = "關此表單, 開新表單";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

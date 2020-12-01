@@ -13,10 +13,24 @@ namespace vcs_test_all_09_Form
 {
     public partial class Form1 : Form
     {
+        private Form2 F2;   // A variable that refers to the instance of Form2.
+
         public Form1()
         {
             InitializeComponent();
             show_item_location();
+
+            // Initialize the form variables.
+            // Make the Form2.
+            F2 = new Form2();
+
+            // Initialize the Form2's variable.
+            //F2.TheForm1 = this;
+            F2.F1 = this;
+
+            // Make both forms stay on top.
+            this.TopMost = true;
+            F2.TopMost = true;
         }
 
         // Load the picture from the startup directory.
@@ -214,7 +228,10 @@ namespace vcs_test_all_09_Form
 
         private void button13_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "xxx\n";
+            richTextBox1.Text += "關此表單, 開新表單\n";
+            // Switch to the Form2.
+            this.Hide();
+            F2.Show();
         }
 
         private void button14_Click(object sender, EventArgs e)

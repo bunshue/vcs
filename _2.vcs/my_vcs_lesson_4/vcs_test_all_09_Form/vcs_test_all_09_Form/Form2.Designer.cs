@@ -33,11 +33,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(108, 216);
+            this.button1.Location = new System.Drawing.Point(71, 168);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(148, 75);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Exit";
+            this.button1.Text = "關此表單, 回原表單";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -49,6 +49,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form2";
             this.Text = "Form2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.ResumeLayout(false);
 
         }
