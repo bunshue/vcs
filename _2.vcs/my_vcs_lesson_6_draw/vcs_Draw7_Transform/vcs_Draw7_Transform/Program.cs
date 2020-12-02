@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_my_transform
+namespace vcs_Draw7_Transform
 {
     static class Program
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace test_my_transform
+namespace vcs_Draw7_Transform
 {
     public partial class Form1 : Form
     {
@@ -30,6 +30,11 @@ namespace test_my_transform
         int H;
 
         bool flag_draw_axis = true;
+        bool flag_draw_title = true;
+        //bool flag_draw_xylabel = true;
+        //bool flag_draw_xytick = true;
+
+        string title = "My VCS Test";
 
         public Form1()
         {
@@ -49,19 +54,21 @@ namespace test_my_transform
             ymax = 0;
             ymin = 0;
 
-            xmin = -20;
-            xmax = 20;
+            xmin = -180;
+            xmax = 180;
             float i;
             //原始x y資料
             double yy;
-            for (i = xmin; i <= xmax; i += 0.1f)
+            for (i = xmin; i <= xmax; i += 5f)
             {
                 x.Add(i);
-                //yy = sind(i);
+                yy = sind(i)+0.6;
+                /*
                 if (i == 0)
                     yy = 1;
                 else
                     yy = (float)(Math.Sin(i) / i);
+                */
                 if (Math.Abs(yy) < 0.0001)
                     yy = 0;
                 y.Add(yy);     //y = sind(x)   x=-180:1:180
@@ -75,7 +82,7 @@ namespace test_my_transform
             xmargin = pictureBox1.Size.Width * xmargin_perncent / 100;
             ymargin = pictureBox1.Size.Height * ymargin_perncent / 100;
 
-            //找出最大和最小的y
+            //找出最大與最小的y
             ymax = (float)y[0];
             ymin = (float)y[0];
             for (i = 0; i < x.Count; i++)
@@ -97,7 +104,7 @@ namespace test_my_transform
             richTextBox1.Text += "原始x y資料\n";
             for (i = 0; i < x.Count; i++)
             {
-                //richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
+                richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
             }
             richTextBox1.Text += "\n";
 
@@ -168,14 +175,51 @@ namespace test_my_transform
             richTextBox1.Text += "\n";
             */
 
-            /*
             if (flag_draw_axis == true)
             {
-                g.DrawLine(new Pen(Color.Black, 3), xmin, H - (0 - ymin * yratio), (xmax - xmin) * xratio, H - (0 - ymin * yratio));
-                g.DrawLine(new Pen(Color.Black, 3), (0 - xmin) * xratio, 0, (0 - xmin) * xratio, H);
+                // Create pen.
+                Pen p = new Pen(Color.Black, 3);
+
+                float x1;
+                float y1;
+                float x2;
+                float y2;
+                PointF p1;
+                PointF p2;
+
+                //x軸
+                x1 = xmargin;
+                y1 = H - (0 - ymin * yratio) - ymargin;
+                x2 = W - xmargin;
+                y2 = H - (0 - ymin * yratio) - ymargin;
+                p1 = new PointF(x1, y1);
+                p2 = new PointF(x2, y2);
+
+                g.DrawLine(p, p1, p2);
+
+                //y軸
+                x1 = (0 - xmin) * xratio + xmargin;
+                y1 = ymargin;
+                x2 = (0 - xmin) * xratio + xmargin;
+                y2 = H - ymargin;
+                p1 = new PointF(x1, y1);
+                p2 = new PointF(x2, y2);
+
+                g.DrawLine(p, p1, p2);
+
+                /*  輔助線 正中間
+                g.DrawLine(new Pen(Color.Pink, 1), 0, H / 2, W, H / 2);
+                g.DrawLine(new Pen(Color.Pink, 1), W / 2, 0, W / 2, H);
+                */
 
             }
-            */
+
+            if (flag_draw_title == true)
+            {
+                float x_st = W / 2 - 80;
+                float y_st = ymargin / 5;
+                g.DrawString(title, new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st, y_st));
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

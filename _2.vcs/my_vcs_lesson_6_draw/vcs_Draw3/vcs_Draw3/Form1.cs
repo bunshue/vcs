@@ -1478,6 +1478,108 @@ namespace vcs_Draw3
             pictureBox_card2.Size = new Size(w, h);
         }
 
+        private float GradientStart = 0;
+        private float Delta = 5f;
+
+        // Make the PictureBox redraw.
+        private void timer_moving_Tick(object sender, EventArgs e)
+        {
+            pictureBox_gradient.Refresh();
+            pictureBox_text.Refresh();
+        }
+
+        // Draw the background with text on top.
+        private void pictureBox_gradient_Paint(object sender, PaintEventArgs e)
+        {
+            // Shade the background.
+            int wid = pictureBox_gradient.ClientSize.Width;
+            ShadeRect(e.Graphics, GradientStart, GradientStart + wid);
+
+            // Increase the start position.
+            GradientStart += Delta;
+            if (GradientStart >= wid) GradientStart = 0;
+
+            // Draw some text.
+            using (Font font = new Font("Times New Roman", 18, FontStyle.Bold))
+            {
+                using (StringFormat string_format = new StringFormat())
+                {
+                    string_format.Alignment = StringAlignment.Center;
+                    string_format.LineAlignment = StringAlignment.Center;
+                    e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
+                        font, Brushes.Black,
+                        pictureBox_gradient.ClientSize.Width / 2,
+                        pictureBox_gradient.ClientSize.Height / 2,
+                        string_format);
+                }
+            }
+        }
+
+        // Fill the rectangle with a gradient that
+        // shades from red to white to red.
+        private void ShadeRect(Graphics gr, float xmin, float xmax)
+        {
+            using (LinearGradientBrush br = new LinearGradientBrush(
+                new PointF(xmin, 0), new PointF(xmax, 0),
+                Color.Red, Color.Red))
+            {
+                br.WrapMode = WrapMode.Tile;
+                ColorBlend color_blend = new ColorBlend();
+                color_blend.Colors = new Color[] { Color.Red, Color.White, Color.Red };
+                color_blend.Positions = new float[] { 0, 0.5f, 1 };
+
+                br.InterpolationColors = color_blend;
+                gr.FillRectangle(br, pictureBox_gradient.ClientRectangle);
+            }
+        }
+
+        // Draw the background with text on top.
+        private void pictureBox_text_Paint(object sender, PaintEventArgs e)
+        {
+            // Clear the background.
+            int wid = pictureBox_text.ClientSize.Width;
+            e.Graphics.Clear(Color.White);
+
+            // Make the gradient brush.
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                new PointF(GradientStart, 0),
+                new PointF(GradientStart + wid, 0),
+                Color.Red, Color.Red))
+            {
+                brush.WrapMode = WrapMode.Tile;
+                ColorBlend color_blend = new ColorBlend();
+                color_blend.Colors = new Color[]
+                {
+                    Color.Blue, Color.Blue,
+                    Color.White, Color.Blue, Color.Blue
+                };
+                color_blend.Positions =
+                    new float[] { 0, 0.4f, 0.5f, 0.6f, 1 };
+                brush.InterpolationColors = color_blend;
+
+                // Use the brush to draw some text.
+                using (Font font = new Font("Times New Roman", 18, FontStyle.Bold))
+                {
+                    using (StringFormat string_format = new StringFormat())
+                    {
+                        string_format.Alignment = StringAlignment.Center;
+                        string_format.LineAlignment = StringAlignment.Center;
+                        e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
+                            font, brush,
+                            pictureBox_text.ClientSize.Width / 2,
+                            pictureBox_text.ClientSize.Height / 2,
+                            string_format);
+                    }
+                }
+            }
+
+            // Increase the start position.
+            GradientStart += Delta;
+            if (GradientStart >= wid) GradientStart = 0;
+
+
+        }
+
 
     }
 }

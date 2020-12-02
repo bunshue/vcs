@@ -1,4 +1,4 @@
-﻿namespace test_my_transform
+﻿namespace vcs_Draw7_Transform
 {
     partial class Form1
     {

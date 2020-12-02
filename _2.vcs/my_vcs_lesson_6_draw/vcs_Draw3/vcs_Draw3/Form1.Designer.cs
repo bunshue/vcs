@@ -93,6 +93,9 @@
             this.pictureBox_card = new System.Windows.Forms.PictureBox();
             this.timer_card2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_card2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_gradient = new System.Windows.Forms.PictureBox();
+            this.timer_moving = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_text = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -104,6 +107,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -521,11 +526,9 @@
             // 
             // picRainbow
             // 
-            this.picRainbow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.picRainbow.Location = new System.Drawing.Point(318, 8);
             this.picRainbow.Name = "picRainbow";
-            this.picRainbow.Size = new System.Drawing.Size(422, 27);
+            this.picRainbow.Size = new System.Drawing.Size(579, 27);
             this.picRainbow.TabIndex = 53;
             this.picRainbow.TabStop = false;
             this.picRainbow.Paint += new System.Windows.Forms.PaintEventHandler(this.picRainbow_Paint);
@@ -657,11 +660,37 @@
             this.pictureBox_card2.TabIndex = 64;
             this.pictureBox_card2.TabStop = false;
             // 
+            // pictureBox_gradient
+            // 
+            this.pictureBox_gradient.Location = new System.Drawing.Point(405, 356);
+            this.pictureBox_gradient.Name = "pictureBox_gradient";
+            this.pictureBox_gradient.Size = new System.Drawing.Size(478, 43);
+            this.pictureBox_gradient.TabIndex = 65;
+            this.pictureBox_gradient.TabStop = false;
+            this.pictureBox_gradient.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_gradient_Paint);
+            // 
+            // timer_moving
+            // 
+            this.timer_moving.Enabled = true;
+            this.timer_moving.Interval = 10;
+            this.timer_moving.Tick += new System.EventHandler(this.timer_moving_Tick);
+            // 
+            // pictureBox_text
+            // 
+            this.pictureBox_text.Location = new System.Drawing.Point(405, 403);
+            this.pictureBox_text.Name = "pictureBox_text";
+            this.pictureBox_text.Size = new System.Drawing.Size(478, 43);
+            this.pictureBox_text.TabIndex = 66;
+            this.pictureBox_text.TabStop = false;
+            this.pictureBox_text.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_text_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_text);
+            this.Controls.Add(this.pictureBox_gradient);
             this.Controls.Add(this.pictureBox_card2);
             this.Controls.Add(this.pictureBox_card);
             this.Controls.Add(this.pictureBox_stretching);
@@ -673,7 +702,6 @@
             this.Controls.Add(this.pictureBox_battery);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.picSample);
-            this.Controls.Add(this.picRainbow);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.checkBox1);
@@ -711,6 +739,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button3);
+            this.Controls.Add(this.picRainbow);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -726,6 +755,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -797,6 +828,9 @@
         private System.Windows.Forms.PictureBox pictureBox_card;
         private System.Windows.Forms.Timer timer_card2;
         private System.Windows.Forms.PictureBox pictureBox_card2;
+        private System.Windows.Forms.PictureBox pictureBox_gradient;
+        private System.Windows.Forms.Timer timer_moving;
+        private System.Windows.Forms.PictureBox pictureBox_text;
     }
 }
 
