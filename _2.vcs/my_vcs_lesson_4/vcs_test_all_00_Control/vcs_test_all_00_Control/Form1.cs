@@ -11,6 +11,10 @@ namespace vcs_test_all_00_Control
 {
     public partial class Form1 : Form
     {
+        // The small and large button sizes.
+        private Size SmallSize, LargeSize;
+        private Font SmallFont, LargeFont;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +23,23 @@ namespace vcs_test_all_00_Control
             button8.Click += new System.EventHandler(button6_Click);//按下button8觸發button1_Click
             button9.Click += new System.EventHandler(button6_Click);//按下button9觸發button1_Click
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Set the small and large sizes.
+            SmallSize = flp1.Size;
+            LargeSize = new Size(
+                (int)(1.5 * flp1.Size.Width),
+                (int)(1.5 * flp1.Size.Height));
+
+            SmallFont = flp1.Font;
+            LargeFont = new Font(
+                SmallFont.FontFamily,
+                SmallFont.Size * 1.5f,
+                FontStyle.Bold);
+
+            lb_checkbox_CheckState.Text = "";
         }
 
         int i = 0;
@@ -272,6 +293,74 @@ namespace vcs_test_all_00_Control
         {
             richTextBox1.Clear();
         }
+
+        // Enlarge the button.
+        private void flp_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Size = LargeSize;
+            btn.Font = LargeFont;
+        }
+
+        // Shrink the button.
+        private void flp_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Size = SmallSize;
+            btn.Font = SmallFont;
+        }
+
+        // Display the CheckBox's current state.
+        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = sender as CheckBox;
+            lb_checkbox_CheckState.Text = "CheckState :    " + chk.CheckState.ToString();
+
+        }
+
+
+        // True if we should ignore check change events.
+        private bool IgnoreCheckChangeEvents = false;
+
+        // Select or deselect all CheckBoxes.
+        private void chkMeals_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (IgnoreCheckChangeEvents) return;
+
+            if (chkMeals.CheckState == CheckState.Indeterminate)
+                chkMeals.CheckState = CheckState.Unchecked;
+
+            CheckBox[] meal_boxes = { chkBreakfast, chkLunch, chkDinner };
+            IgnoreCheckChangeEvents = true;
+            foreach (CheckBox chk in meal_boxes)
+                chk.Checked = chkMeals.Checked;
+            IgnoreCheckChangeEvents = false;
+        }
+
+        // The user changed a meal type selection.
+        // Update the chkMeals CheckBox.
+        private void chkMealType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IgnoreCheckChangeEvents) return;
+
+            // See how many meals are selected.
+            int num_selected = 0;
+            CheckBox[] meal_boxes = { chkBreakfast, chkLunch, chkDinner };
+            foreach (CheckBox chk in meal_boxes)
+                if (chk.Checked) num_selected++;
+
+            // Set the chkMeals CheckBox appropriately.
+            IgnoreCheckChangeEvents = true;
+            if (num_selected == 3)
+                chkMeals.CheckState = CheckState.Checked;
+            else if (num_selected == 0)
+                chkMeals.CheckState = CheckState.Unchecked;
+            else
+                chkMeals.CheckState = CheckState.Indeterminate;
+            IgnoreCheckChangeEvents = false;
+
+        }
+
     }
 
 

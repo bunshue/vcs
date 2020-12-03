@@ -96,6 +96,8 @@
             this.pictureBox_gradient = new System.Windows.Forms.PictureBox();
             this.timer_moving = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_text = new System.Windows.Forms.PictureBox();
+            this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
+            this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -109,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -600,7 +603,7 @@
             // pictureBox_atom
             // 
             this.pictureBox_atom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_atom.Location = new System.Drawing.Point(321, 460);
+            this.pictureBox_atom.Location = new System.Drawing.Point(321, 495);
             this.pictureBox_atom.Name = "pictureBox_atom";
             this.pictureBox_atom.Size = new System.Drawing.Size(320, 240);
             this.pictureBox_atom.TabIndex = 60;
@@ -684,11 +687,26 @@
             this.pictureBox_text.TabStop = false;
             this.pictureBox_text.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_text_Paint);
             // 
+            // pictureBox_progressbar
+            // 
+            this.pictureBox_progressbar.Location = new System.Drawing.Point(405, 449);
+            this.pictureBox_progressbar.Name = "pictureBox_progressbar";
+            this.pictureBox_progressbar.Size = new System.Drawing.Size(478, 43);
+            this.pictureBox_progressbar.TabIndex = 67;
+            this.pictureBox_progressbar.TabStop = false;
+            this.pictureBox_progressbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_progressbar_Paint);
+            // 
+            // timer_progressbar
+            // 
+            this.timer_progressbar.Enabled = true;
+            this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_progressbar);
             this.Controls.Add(this.pictureBox_text);
             this.Controls.Add(this.pictureBox_gradient);
             this.Controls.Add(this.pictureBox_card2);
@@ -757,6 +775,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -831,6 +850,8 @@
         private System.Windows.Forms.PictureBox pictureBox_gradient;
         private System.Windows.Forms.Timer timer_moving;
         private System.Windows.Forms.PictureBox pictureBox_text;
+        private System.Windows.Forms.PictureBox pictureBox_progressbar;
+        private System.Windows.Forms.Timer timer_progressbar;
     }
 }
 

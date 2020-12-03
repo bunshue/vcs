@@ -266,12 +266,12 @@ namespace vcs_Draw3
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox_gear.Size = new Size(280, 280);
-            pictureBox_gear.Location = new Point(richTextBox1.Location.X - 300, richTextBox1.Location.Y);
-            trackBar1.Location = new Point(richTextBox1.Location.X - 300 - 20, richTextBox1.Location.Y - 50);
-            lb_fps.Location = new Point(richTextBox1.Location.X - 40, richTextBox1.Location.Y - 45);
+            pictureBox_gear.Location = new Point(richTextBox1.Location.X - 300, richTextBox1.Location.Y + 100);
+            trackBar1.Location = new Point(richTextBox1.Location.X - 300 - 20, richTextBox1.Location.Y - 50 + 100);
+            lb_fps.Location = new Point(richTextBox1.Location.X - 40, richTextBox1.Location.Y - 45 + 100);
 
             pictureBox_atom.Size = new Size(300, 300);
-            pictureBox_atom.Location = new Point(pictureBox_gear.Location.X - 340, pictureBox_gear.Location.Y - 50);
+            pictureBox_atom.Location = new Point(pictureBox_gear.Location.X - 340, pictureBox_gear.Location.Y - 50 + 50);
         }
 
         bool isRunning1 = false;
@@ -1576,6 +1576,45 @@ namespace vcs_Draw3
             // Increase the start position.
             GradientStart += Delta;
             if (GradientStart >= wid) GradientStart = 0;
+
+
+        }
+
+        private int ProgressMinimum = 0;
+        private int ProgressMaximum = 100;
+        private int ProgressValue = 0;
+
+        private void timer_progressbar_Tick(object sender, EventArgs e)
+        {
+            ProgressValue += 1;
+            if (ProgressValue > ProgressMaximum)
+            {
+                ProgressValue = 0;
+                //tmrWork.Enabled = false;
+            }
+            pictureBox_progressbar.Refresh();
+        }
+
+        // Show the progress.
+        private void pictureBox_progressbar_Paint(object sender, PaintEventArgs e)
+        {
+            // Clear the background.
+            e.Graphics.Clear(pictureBox_progressbar.BackColor);
+
+            // Draw the progress bar.
+            float fraction = (float)(ProgressValue - ProgressMinimum) / (ProgressMaximum - ProgressMinimum);
+            int wid = (int)(fraction * pictureBox_progressbar.ClientSize.Width);
+            e.Graphics.FillRectangle(Brushes.LightGreen, 0, 0, wid, pictureBox_progressbar.ClientSize.Height);
+
+            // Draw the text.
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+                int percent = (int)(fraction * 100);
+                e.Graphics.DrawString(percent.ToString() + "%", this.Font, Brushes.Black, pictureBox_progressbar.ClientRectangle, sf);
+            }
 
 
         }

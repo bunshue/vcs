@@ -19,6 +19,8 @@ using System.Collections;   //for DictionaryEntry
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
 
+using Microsoft.Win32;      //for Registry
+
 namespace vcs_test_all_06_System
 {
     public partial class Form1 : Form
@@ -285,7 +287,35 @@ namespace vcs_test_all_06_System
 
         private void button12_Click(object sender, EventArgs e)
         {
+            object owner_string = "", company_string = "";
+            OperatingSystem os_info = System.Environment.OSVersion;
+            if (os_info.Platform == PlatformID.Win32Windows)
+            {
+                // Windows 98?
+                owner_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\",
+                    "RegisteredOwner", "Unknown");
+                company_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\",
+                    "RegisteredOrganization", "Unknown");
+            }
+            else if (os_info.Platform == PlatformID.Win32NT)
+            {
+                // Windows NT.
+                owner_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\",
+                    "RegisteredOwner", "Unknown");
+                company_string = RegistryTools.GetRegistryValue(
+                    Registry.LocalMachine,
+                    @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\",
+                    "RegisteredOrganization", "Unknown");
+            }
 
+            richTextBox1.Text += "Owner :\t" + owner_string.ToString() + "\n";
+            richTextBox1.Text += "Company :\t" + company_string.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)

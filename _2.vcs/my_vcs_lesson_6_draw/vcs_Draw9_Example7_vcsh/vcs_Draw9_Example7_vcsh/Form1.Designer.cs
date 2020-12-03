@@ -57,6 +57,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.pictureBox_dragon4 = new System.Windows.Forms.PictureBox();
             this.pictureBox_hex = new System.Windows.Forms.PictureBox();
+            this.pictureBox_polar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -70,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dragon4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -371,11 +373,21 @@
             this.pictureBox_hex.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hex_MouseMove);
             this.pictureBox_hex.Resize += new System.EventHandler(this.pictureBox_hex_Resize);
             // 
+            // pictureBox_polar
+            // 
+            this.pictureBox_polar.Location = new System.Drawing.Point(409, 271);
+            this.pictureBox_polar.Name = "pictureBox_polar";
+            this.pictureBox_polar.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_polar.TabIndex = 75;
+            this.pictureBox_polar.TabStop = false;
+            this.pictureBox_polar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_polar_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1294, 688);
+            this.Controls.Add(this.pictureBox_polar);
             this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.pictureBox_dragon4);
             this.Controls.Add(this.button8);
@@ -422,6 +434,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dragon4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,6 +471,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.PictureBox pictureBox_dragon4;
         private System.Windows.Forms.PictureBox pictureBox_hex;
+        private System.Windows.Forms.PictureBox pictureBox_polar;
     }
 }
 

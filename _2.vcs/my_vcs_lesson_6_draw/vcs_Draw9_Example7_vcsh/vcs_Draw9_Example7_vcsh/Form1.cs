@@ -137,6 +137,7 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_dragon4.Size = new Size(W, H);
             pictureBox5.Size = new Size(W, H);
             pictureBox_Chrysanthemum2.Size = new Size(W, H);
+            pictureBox_polar.Size = new Size(W, H);
             pictureBox8.Size = new Size(W, H);
             pictureBox_snowflake.Size = new Size(W, H);
             pictureBox_snowflake2.Size = new Size(W, H);
@@ -162,6 +163,7 @@ namespace vcs_Draw9_Example7_vcsh
 
             pictureBox_Chrysanthemum.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox_polar.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
             richTextBox_ransom_note.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox_ransom_note.Location = new Point(x_st + dx * 4, y_st + dy * 2);
@@ -1958,6 +1960,71 @@ namespace vcs_Draw9_Example7_vcsh
                     new PointF(x + width * 0.75f, y + height / 2),
                     new PointF(x + width * 0.25f, y + height / 2),
                 };
+        }
+
+        // Draw the graph.
+        private void pictureBox_polar_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(Color.White);
+
+            // Set up a transformation to map the region
+            // -2.1 <= X <= 2.1, -2.1 <= Y <= 2.1 onto the  Bitmap.
+            RectangleF rect = new RectangleF(-2.1f, -2.1f, 4.2f, 4.2f);
+            PointF[] pts =
+                    {
+                        new PointF(0, H),
+                        new PointF(W, H),
+                        new PointF(0, 0),
+                    };
+            //e.Graphics
+            e.Graphics.Transform = new Matrix(rect, pts);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            using (Pen thin_pen = new Pen(Color.Blue, 0))
+            {
+                // Draw the X and Y axes.
+                thin_pen.Color = Color.Blue;
+                e.Graphics.DrawLine(thin_pen, -2.1f, 0, 2.1f, 0);
+                const float big_tick = 0.1f;
+                const float small_tick = 0.05f;
+                for (float x = (int)-2.1f; x <= 2.1f; x += 1)
+                    e.Graphics.DrawLine(thin_pen, x, -small_tick, x, small_tick);
+                for (float x = (int)-2.1f + 0.5f; x <= 2.1f; x += 1)
+                    e.Graphics.DrawLine(thin_pen, x, -big_tick, x, big_tick);
+
+                e.Graphics.DrawLine(thin_pen, 0, -2.1f, 0, 2.1f);
+                for (float y = (int)-2.1f; y <= 2.1f; y += 1)
+                    e.Graphics.DrawLine(thin_pen, -small_tick, y, small_tick, y);
+                for (float y = (int)-2.1f + 0.5f; y <= 2.1f; y += 1)
+                    e.Graphics.DrawLine(thin_pen, -big_tick, y, big_tick, y);
+
+                // Draw the graph.
+                DrawGraph(e.Graphics);
+            }
+        }
+
+        // Draw the graph on a Bitmap.
+        private void DrawGraph(Graphics gr)
+        {
+            // Generate the points.
+            double t = 0;
+            const double dt = Math.PI / 100.0;
+            const double two_pi = 2 * Math.PI;
+            List<PointF> points = new List<PointF>();
+            while (t <= two_pi)
+            {
+                double r = 2 * Math.Sin(5 * t);
+                float x = (float)(r * Math.Cos(t));
+                float y = (float)(r * Math.Sin(t));
+                points.Add(new PointF(x, y));
+                t += dt;
+            }
+
+            // Draw the curve.
+            using (Pen thin_pen = new Pen(Color.Red, 0))
+            {
+                gr.DrawPolygon(thin_pen, points.ToArray());
+            }
         }
 
 
