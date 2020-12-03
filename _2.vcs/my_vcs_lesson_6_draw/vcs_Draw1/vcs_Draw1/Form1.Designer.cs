@@ -69,7 +69,9 @@
             this.button29 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
+            this.pictureBox_uac = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -475,12 +477,14 @@
             // 
             // button28
             // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button28.Location = new System.Drawing.Point(756, 345);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(120, 42);
             this.button28.TabIndex = 53;
+            this.button28.Text = "畫出Windows內建的系統圖示";
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // button29
             // 
@@ -489,6 +493,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(120, 42);
             this.button29.TabIndex = 54;
+            this.button29.Text = "UAC圖示";
             this.button29.UseVisualStyleBackColor = true;
             // 
             // button30
@@ -509,11 +514,20 @@
             this.button31.TabIndex = 56;
             this.button31.UseVisualStyleBackColor = true;
             // 
+            // pictureBox_uac
+            // 
+            this.pictureBox_uac.Location = new System.Drawing.Point(659, 12);
+            this.pictureBox_uac.Name = "pictureBox_uac";
+            this.pictureBox_uac.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox_uac.TabIndex = 57;
+            this.pictureBox_uac.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1517, 718);
+            this.Controls.Add(this.pictureBox_uac);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
@@ -563,6 +577,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,6 +626,7 @@
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.PictureBox pictureBox_uac;
     }
 }
 

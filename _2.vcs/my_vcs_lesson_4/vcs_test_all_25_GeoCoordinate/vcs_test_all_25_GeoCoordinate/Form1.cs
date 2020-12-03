@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Device.Location;
 
 namespace vcs_test_all_25_GeoCoordinate
@@ -316,7 +317,44 @@ namespace vcs_test_all_25_GeoCoordinate
 
         private void button4_Click(object sender, EventArgs e)
         {
+            // The coordinate watcher.
+            GeoCoordinateWatcher Watcher = null;
 
+            // Create and start the watcher.
+            // Create the watcher.
+            Watcher = new GeoCoordinateWatcher();
+
+            // Catch the StatusChanged event.
+            //Watcher.StatusChanged += Watcher_StatusChanged;
+
+            // Start the watcher.
+            Watcher.Start();
+
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                //richTextBox1.Text += "IsUnknown\t" + Watcher.Position.Location.IsUnknown.ToString() + "\n";
+                delay(5);
+                if (Watcher.Position.Location.IsUnknown == false)
+                    break;
+            }
+            richTextBox1.Text += "Latitude\t" + Watcher.Position.Location.Latitude.ToString() + "\n";
+            richTextBox1.Text += "Longitude\t" + Watcher.Position.Location.Longitude.ToString() + "\n";
+            richTextBox1.Text += "Altitude\t" + Watcher.Position.Location.Altitude.ToString() + "\n";
+            richTextBox1.Text += "Course\t" + Watcher.Position.Location.Course.ToString() + "\n";
+            richTextBox1.Text += "Speed\t" + Watcher.Position.Location.Speed.ToString() + "\n";
+        }
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

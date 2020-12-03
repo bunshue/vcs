@@ -56,6 +56,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.pictureBox_dragon4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_hex = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -68,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dragon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dragon4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -290,7 +292,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(553, 24);
+            this.pictureBox2.Location = new System.Drawing.Point(606, 24);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(200, 200);
             this.pictureBox2.TabIndex = 67;
@@ -349,18 +351,32 @@
             // 
             // pictureBox_dragon4
             // 
-            this.pictureBox_dragon4.Location = new System.Drawing.Point(568, 233);
+            this.pictureBox_dragon4.Location = new System.Drawing.Point(606, 230);
             this.pictureBox_dragon4.Name = "pictureBox_dragon4";
             this.pictureBox_dragon4.Size = new System.Drawing.Size(200, 200);
             this.pictureBox_dragon4.TabIndex = 73;
             this.pictureBox_dragon4.TabStop = false;
             this.pictureBox_dragon4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_dragon4_Paint);
             // 
+            // pictureBox_hex
+            // 
+            this.pictureBox_hex.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_hex.Location = new System.Drawing.Point(400, 24);
+            this.pictureBox_hex.Name = "pictureBox_hex";
+            this.pictureBox_hex.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_hex.TabIndex = 74;
+            this.pictureBox_hex.TabStop = false;
+            this.pictureBox_hex.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_hex_Paint);
+            this.pictureBox_hex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hex_MouseClick);
+            this.pictureBox_hex.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hex_MouseMove);
+            this.pictureBox_hex.Resize += new System.EventHandler(this.pictureBox_hex_Resize);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1294, 688);
+            this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.pictureBox_dragon4);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -405,6 +421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dragon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dragon4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,6 +457,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.PictureBox pictureBox_dragon4;
+        private System.Windows.Forms.PictureBox pictureBox_hex;
     }
 }
 

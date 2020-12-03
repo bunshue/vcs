@@ -33,6 +33,10 @@ namespace vcs_Draw1
         private void Form1_Load(object sender, EventArgs e)
         {
             this.ResizeRedraw = true;
+
+            pictureBox_uac.Image = UacStuff.GetUacShieldImage();
+            // Add the shield to a button.
+            UacStuff.AddShieldToButton(button29);
         }
 
         void show_item_location()
@@ -48,6 +52,7 @@ namespace vcs_Draw1
             dx = 130;
             dy = 50;
 
+            pictureBox_uac.Location = new Point(x_st + dx * 0-100, y_st + dy * 0);
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -1429,6 +1434,42 @@ namespace vcs_Draw1
             }
             //表單底部畫字 SP
 
+        }
+
+        // Draw samples.
+        private const int column_width = 150;
+        private const int row_height = 50;
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            Graphics g = this.CreateGraphics();
+            int x = 520;
+            int y = 50;
+            DrawIconSample(g, ref x, y, SystemIcons.Application, "Application");
+            DrawIconSample(g, ref x, y, SystemIcons.Asterisk, "Asterisk");
+            DrawIconSample(g, ref x, y, SystemIcons.Error, "Error");
+            x = 520;
+            y += 40;
+            DrawIconSample(g, ref x, y, SystemIcons.Exclamation, "Exclamation");
+            DrawIconSample(g, ref x, y, SystemIcons.Hand, "Hand");
+            DrawIconSample(g, ref x, y, SystemIcons.Information, "Information");
+            x = 520;
+            y += row_height;
+            DrawIconSample(g, ref x, y, SystemIcons.Question, "Question");
+            DrawIconSample(g, ref x, y, SystemIcons.Shield, "Shield");
+            DrawIconSample(g, ref x, y, SystemIcons.Warning, "Warning");
+            x = 520;
+            y += 40;
+            DrawIconSample(g, ref x, y, SystemIcons.WinLogo, "WinLogo");
+        }
+
+        // Draw a sample and its name.
+        private void DrawIconSample(Graphics gr, ref int x, int y, Icon ico, string ico_name)
+        {
+            gr.DrawIconUnstretched(ico, new Rectangle(x, y, ico.Width, ico.Height));
+            int text_y = y + (int)(ico.Height - gr.MeasureString(ico_name, this.Font).Height) / 2;
+            gr.DrawString(ico_name, this.Font, Brushes.Black, x + ico.Width + 5, text_y);
+            x += column_width;
         }
 
     }
