@@ -20,6 +20,12 @@ namespace vcs_Draw9_Example8_vcsh
         SolidBrush sb;
         Bitmap bitmap1;
 
+        // True if it is X's turn.
+        private bool XsTurn = true;
+
+        // A 2-D array holding the squares.
+        private Label[,] Squares;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,13 +33,16 @@ namespace vcs_Draw9_Example8_vcsh
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            g = pictureBox1.CreateGraphics();
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-            g.Clear(Color.Red);             //useless??
-            pictureBox1.BackColor = Color.Pink;
             show_item_location();
+            DrawHistogram();
+
+            // Initialize the 2-D array holding the squares.
+            Squares = new Label[,]
+            {
+                { lblSquare00, lblSquare01, lblSquare02},
+                { lblSquare10, lblSquare11, lblSquare12},
+                { lblSquare20, lblSquare21, lblSquare22},
+            };
         }
 
         void show_item_location()
@@ -85,12 +94,80 @@ namespace vcs_Draw9_Example8_vcsh
             bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y-25);
 
-            //pictureBox1.Location = new Point(10, 10);
+            int W = 250;
+            int H = 250;
+            x_st = 10;
+            y_st = 10;
+            dx = W + 10;
+            dy = H + 10;
+
+            pictureBox1.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox3.Size = new Size(W, H);
+            pictureBox4.Size = new Size(W, H);
+            pictureBox5.Size = new Size(W, H);
+            pictureBox6.Size = new Size(W, H);
+            pictureBox7.Size = new Size(W, H);
+            pictureBox8.Size = new Size(W, H);
+            pictureBox9.Size = new Size(W, H);
+
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
+            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+
+            pictureBox7.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            ClientSize = new Size(button2.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
+            ClientSize = new Size(button2.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
+        }
+
+        void DrawHistogram()
+        {
+            // Make some data.
+            // Make an array to hold counts for values
+            // between 2 and 12 with indexes between 0 and 10.
+            int[] counts = new int[11];
+
+            // Make the values.
+            Random rand = new Random();
+            for (int i = 0; i < 1000; i++)
+            {
+                // Roll two 6-sided dice.
+                int new_value = rand.Next(1, 7) + rand.Next(1, 7);
+                int index = new_value - 2;
+                counts[index]++;
+            }
+
+            // Make a simple histogram.
+            Label[] labels = { lbl2, lbl3, lbl4, lbl5, lbl6,
+                lbl7, lbl8, lbl9, lbl10, lbl11, lbl12 };
+            MakeHistogram(labels, counts);
+        }
+
+        // Display the values.
+        private void MakeHistogram(Label[] labels, int[] values)
+        {
+            // Calculate a scale so the largest
+            // value fits nicely on the form.
+            int available_height = labels[0].Bottom - 5;
+            int max = values.Max();
+            float scale = available_height / (float)max;
+
+            for (int i = 0; i < labels.Length; i++)
+            {
+                int height = (int)(scale * values[i]);
+                labels[i].Top = labels[i].Bottom - height;
+                labels[i].Height = height;
+            }
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -193,7 +270,6 @@ namespace vcs_Draw9_Example8_vcsh
         private void bt_clear_Click(object sender, EventArgs e)
         {
             bitmap1 = null;
-            pictureBox1.Image = null;
             richTextBox1.Clear();
         }
 
@@ -238,6 +314,34 @@ namespace vcs_Draw9_Example8_vcsh
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        // A square was clicked.
+        private void lblSquare_Click(object sender, EventArgs e)
+        {
+            // Get the label clicked.
+            Label lbl = sender as Label;
+
+            // If the square is already taken, do nothing.
+            if (lbl.Text != "") return;
+
+            // Take it for the current player.
+            if (XsTurn)
+            {
+                lbl.Text = "X";
+            }
+            else
+            {
+                lbl.Text = "O";
+            }
+            XsTurn = !XsTurn;
+        }
+
+        // Clear all squares.
+        private void bt_ox_clear_Click(object sender, EventArgs e)
+        {
+            foreach (Label label in Squares)
+                label.Text = "";
         }
 
 

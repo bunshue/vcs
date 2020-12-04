@@ -586,6 +586,7 @@ namespace vcs_test_all_03_Syntax
 
         private void button15_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Dictionary字典用法1\n";
             //Dictionary的用法
             Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
             { "mouse", "Mickey" },
@@ -867,6 +868,32 @@ namespace vcs_test_all_03_Syntax
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        // The dictionary of digit names.
+        private Dictionary<int, string> Numbers = new Dictionary<int, string>()
+        {
+            {0, "Zero"},
+            {1, "One"},
+            {2, "Two"},
+            {3, "Three"},
+            {4, "Four"},
+            {5, "Five"},
+            {6, "Six"},
+            {7, "Seven"},
+            {8, "Eight"},
+            {9, "Nine"}
+        };
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Dictionary字典用法2\n";
+            // Display values from the dictionary.
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += i.ToString() + '\t' + Numbers[i] + "\n";
+            }
+
         }
 
     }

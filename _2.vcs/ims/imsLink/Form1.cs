@@ -22,7 +22,7 @@ namespace imsLink
 {
     public partial class Form1 : Form
     {
-        String compile_time = "6/23/2020 01:35下午";
+        String compile_time = "11/27/2020 01:35下午";
         String software_version = "A04";
 
         int flag_operation_mode = MODE_RELEASE_STAGE0;  //不允許第四, 第七, 第八
@@ -1821,9 +1821,9 @@ namespace imsLink
                                 }
                             }
 
-                            for (i = 16; i < (16 + 11); i++)
+                            for (i = 16; i < (16 + 12); i++)
                             {
-                                if (((int)input[i] < '0') || ((int)input[i] > '9'))
+                                if ((i > 16) && (((int)input[i] < '0') || ((int)input[i] > '9')))
                                 {
                                     flag_no_camera_serial2 = true;
                                     break;
@@ -1884,7 +1884,7 @@ namespace imsLink
                                 }
                                 if (flag_same_serial == 1)
                                 {
-                                    for (i = 16; i < (16 + 11); i++)
+                                    for (i = 16; i < (16 + 12); i++)
                                     {
                                         if (tb_sn2.Text[i - 16] != input[i])
                                         {
@@ -3814,11 +3814,13 @@ namespace imsLink
 
             show_item_location();
 
+            /* no need barcode scanner trigger
             if (flag_operation_mode == MODE_RELEASE_STAGE2)
             {
                 bt_awb_test.Enabled = false;
                 bt_awb_test.BackColor = Color.Pink;
             }
+            */
 
             if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2) 
                 || (flag_operation_mode == MODE_RELEASE_STAGE1A) || (flag_operation_mode == MODE_RELEASE_STAGE1B) || (flag_operation_mode == MODE_RELEASE_STAGE3))
@@ -5194,6 +5196,7 @@ namespace imsLink
 
                     show_awb_item_visible(false);   //222
                 }
+                groupBox_quick.Location = new Point(613 - 60, 0);
             }
             else if (tabControl1.SelectedTab == tp_Product)
             {
@@ -6797,9 +6800,21 @@ namespace imsLink
                         flag_ok_camera_serial1 = true;
                     }
                 }
-                else if (tb_wait_camera_data.Text.Length == 11)
+                else if ((tb_wait_camera_data.Text.Length == 11) || (tb_wait_camera_data.Text.Length == 12))
                 {
-                    for (i = 0; i < 11; i++)
+                    if (tb_wait_camera_data.Text.Length == 12)
+                    {
+                        if (((tb_wait_camera_data.Text[0] >= 'A') && (tb_wait_camera_data.Text[0] <= 'Z')) || ((tb_wait_camera_data.Text[0] >= 'a') && (tb_wait_camera_data.Text[0] <= 'z')))
+                        {
+                            flag_incorrect_data = false;
+                        }
+                        else
+                        {
+                            flag_incorrect_data = true;
+                        }
+                    }
+
+                    for (i = (tb_wait_camera_data.Text.Length - 11); i < tb_wait_camera_data.Text.Length; i++)
                     {
                         if ((tb_wait_camera_data.Text[i] < '0') || (tb_wait_camera_data.Text[i] > '9'))
                         {
@@ -7290,6 +7305,7 @@ namespace imsLink
                 bt_zoom.BackgroundImage = imsLink.Properties.Resources.normal_screen;
                 //this.TopMost = true;
 
+                //最大化螢幕
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.WindowState = FormWindowState.Maximized;
                 //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
@@ -8445,15 +8461,15 @@ namespace imsLink
             if ((tb_sn1.Text.Length != 9) && (tb_sn1.Text.Length != 10))
             {
                 richTextBox1.Text += "相機序號1長度錯誤, 長度 : " + tb_sn1.Text.Length.ToString() + "\n";
-                lb_write_camera_serial2.Text = "相機型號1長度錯誤";
+                lb_write_camera_serial2.Text = "相機序號1長度錯誤";
                 playSound(S_FALSE);
                 flag_doing_writing_data = false;
                 return;
             }
-            if (tb_sn2.Text.Length != 11)
+            if ((tb_sn2.Text.Length != 11) && (tb_sn2.Text.Length != 12))
             {
                 richTextBox1.Text += "相機序號2長度錯誤, 長度 : " + tb_sn2.Text.Length.ToString() + "\n";
-                lb_write_camera_serial2.Text = "相機型號2長度錯誤";
+                lb_write_camera_serial2.Text = "相機序號2長度錯誤";
                 playSound(S_FALSE);
                 flag_doing_writing_data = false;
                 return;
@@ -8510,7 +8526,7 @@ namespace imsLink
 
                 int i;
 
-                byte[] sn_data_tmp = new byte[21];
+                byte[] sn_data_tmp = new byte[22];
                 for (i = 0; i < tb_sn1.Text.Length; i++)
                 {
                     sn_data_tmp[i] = (byte)tb_sn1.Text[i];
@@ -8525,14 +8541,14 @@ namespace imsLink
                 for (i = 10; i < (10 + tb_sn2.Text.Length); i++)
                 {
                     sn_data_tmp[i] = (byte)tb_sn2.Text[i - 10];
-                    //richTextBox1.Text += "\ni = " + i.ToString() + " tmp data : " + tb_sn2.Text[i - tb_sn1.Text.Length].ToString();
+                    //richTextBox1.Text += "i = " + i.ToString() + " tmp data : " + tb_sn2.Text[i - 10].ToString() + "\n";
                 }
 
                 //richTextBox1.Text += "\n";
 
                 Send_IMS_Data(0xC0, 0x12, 0x34, 0x56);   //camera serial write
 
-                serialPort1.Write(sn_data_tmp, 0, 21);
+                serialPort1.Write(sn_data_tmp, 0, 22);
 
                 flag_camera_already_have_serial = 1;
                 cnt = 0;
@@ -9120,6 +9136,7 @@ namespace imsLink
                 if (flag_network_disk_status == true)
                 {
                     ccc++;
+                    /* no need barcode scanner trigger
                     if (flag_operation_mode == MODE_RELEASE_STAGE2)
                     {
                         if (flag_doing_awb == true)
@@ -9139,6 +9156,7 @@ namespace imsLink
                         }
                     }
                     else   //mode0
+                    */
                     {
                         if ((ccc % 4) == 0)
                             lb_main_mesg2.Text = "等待輸入資料 \\";
@@ -9190,12 +9208,13 @@ namespace imsLink
 
                     tb_sn_opal.Text = "";
 
+                    /* no need barcode scanner trigger
                     if (flag_operation_mode == MODE_RELEASE_STAGE2)
                     {
                         bt_awb_test.Enabled = false;
                         bt_awb_test.BackColor = Color.Pink;
                     }
-
+                    */
 
                 }
 
@@ -13566,6 +13585,11 @@ namespace imsLink
 
         void exportCSV()
         {
+            /* no save csv file
+            if (flag_operation_mode == MODE_RELEASE_STAGE0)
+                return;
+            */
+
             if (camera_serials.Count > 0)
                 richTextBox1.Text += "共有 " + camera_serials.Count.ToString() + " 筆資料要存\n";
             else
@@ -16154,14 +16178,29 @@ namespace imsLink
                         check_export_data();
                     }
                 }
-                else if ((tb_wait_product_data.Text.Length == 38) || (tb_wait_product_data.Text.Length == 39))
+                else if ((tb_wait_product_data.Text.Length == 38) || (tb_wait_product_data.Text.Length == 39) || (tb_wait_product_data.Text.Length == 40))
                 {
                     for (i = 0; i < tb_wait_product_data.Text.Length; i++)
                     {
-                        if ((tb_wait_product_data.Text[i] < '0') || (tb_wait_product_data.Text[i] > '9'))
+                        if ((tb_wait_product_data.Text.Length == 40) && (i == 26))
+                        {
+                            if (((tb_wait_product_data.Text[i] >= 'A') && (tb_wait_product_data.Text[i] <= 'Z')) || ((tb_wait_product_data.Text[i] >= 'a') && (tb_wait_product_data.Text[i] <= 'z')))
+                            {
+                                flag_incorrect_data = false;
+                            }
+                            else
+                            {
+                                flag_incorrect_data = true;
+                                richTextBox1.Text += "資料p2格式不正確a1\n";
+                                tb_wait_product_data.Text = "";
+                                tb_product2.Clear();
+                                tb_product2.BackColor = Color.Pink;
+                            }
+                        }
+                        else if ((tb_wait_product_data.Text[i] < '0') || (tb_wait_product_data.Text[i] > '9'))
                         {
                             flag_incorrect_data = true;
-                            richTextBox1.Text += "資料p2格式不正確\n";
+                            richTextBox1.Text += "資料p2格式不正確a2\n";
                             tb_wait_product_data.Text = "";
                             tb_product2.Clear();
                             tb_product2.BackColor = Color.Pink;
@@ -16592,14 +16631,29 @@ namespace imsLink
                 richTextBox1.Text += "無資料p2\n";
                 tb_product2.BackColor = Color.Pink;
             }
-            else if ((tb_product2.Text.Length == 38) || (tb_product2.Text.Length == 39))
+            else if ((tb_product2.Text.Length == 38) || (tb_product2.Text.Length == 39) || (tb_product2.Text.Length == 40))
             {
                 for (i = 0; i < tb_product2.Text.Length; i++)
                 {
-                    if ((tb_product2.Text[i] < '0') || (tb_product2.Text[i] > '9'))
+                    if ((tb_product2.Text.Length == 40) && (i == 26))
+                    {
+                        if (((tb_product2.Text[i] >= 'A') && (tb_product2.Text[i] <= 'Z')) || ((tb_product2.Text[i] >= 'a') && (tb_product2.Text[i] <= 'z')))
+                        {
+                            flag_incorrect_data = false;
+                        }
+                        else
+                        {
+                            flag_incorrect_data = true;
+                            richTextBox1.Text += "資料p2格式不正確b1\n";
+                            tb_wait_product_data.Text = "";
+                            tb_product2.Clear();
+                            tb_product2.BackColor = Color.Pink;
+                        }
+                    }
+                    else if ((tb_product2.Text[i] < '0') || (tb_product2.Text[i] > '9'))
                     {
                         flag_incorrect_data = true;
-                        richTextBox1.Text += "資料p2格式不正確\n";
+                        richTextBox1.Text += "資料p2格式不正確b2\n";
                         tb_wait_product_data.Text = "";
                         tb_product2.Clear();
                         tb_product2.BackColor = Color.Pink;
@@ -19118,12 +19172,14 @@ namespace imsLink
                 tb_awb_mesg.Font = new Font("標楷體", 24);
                 tb_awb_mesg.BackColor = Color.White;
 
+                /* no need barcode scanner trigger
                 if ((flag_operation_mode == MODE_RELEASE_STAGE0) || (flag_operation_mode == MODE_RELEASE_STAGE2))
                 {
                     bt_awb_test.Enabled = false;
                     bt_awb_test.BackColor = Color.Pink;
                     flag_wait_for_confirm = false;
                 }
+                */
                 flag_awb_break = false;
                 flag_awb_timeout = false;
                 flag_awb_manually_interrupt = false;
@@ -20688,7 +20744,7 @@ namespace imsLink
             var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var chars2 = "0123456789";
             var stringChars1 = new char[10];
-            var stringChars2 = new char[11];
+            var stringChars2 = new char[12];
             var random = new Random();
             for (int i = 0; i < stringChars1.Length; i++)
             {
@@ -20704,7 +20760,8 @@ namespace imsLink
             var finalString1 = new String(stringChars1);
             richTextBox1.Text += "相機序號1：" + finalString1 + "\n";
 
-            for (int i = 0; i < stringChars2.Length; i++)
+            stringChars2[0] = chars1[random.Next(chars1.Length)];
+            for (int i = 1; i < stringChars2.Length; i++)
             {
                 stringChars2[i] = chars2[random.Next(chars2.Length)];
             }

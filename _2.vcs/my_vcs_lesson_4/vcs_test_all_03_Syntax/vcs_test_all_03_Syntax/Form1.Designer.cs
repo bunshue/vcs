@@ -259,12 +259,12 @@
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button15.Location = new System.Drawing.Point(12, 146);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(180, 40);
             this.button15.TabIndex = 16;
-            this.button15.Text = "Dictionary字典用法";
+            this.button15.Text = "Dictionary字典用法1";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -313,13 +313,14 @@
             // 
             // button20
             // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button20.Location = new System.Drawing.Point(12, 196);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(180, 40);
             this.button20.TabIndex = 21;
-            this.button20.Text = "xxx";
+            this.button20.Text = "Dictionary字典用法2";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // button22
             // 

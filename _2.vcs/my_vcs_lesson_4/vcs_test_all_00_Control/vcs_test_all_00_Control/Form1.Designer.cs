@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -119,6 +120,8 @@
             this.chkLunch = new System.Windows.Forms.CheckBox();
             this.chkBreakfast = new System.Windows.Forms.CheckBox();
             this.chkMeals = new System.Windows.Forms.CheckBox();
+            this.button15 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -402,7 +405,7 @@
             this.toolStripSeparator2,
             this.結束XToolStripMenuItem});
             this.檔案FToolStripMenuItem.Name = "檔案FToolStripMenuItem";
-            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.檔案FToolStripMenuItem.Text = "檔案(&F)";
             // 
             // 新增NToolStripMenuItem
@@ -411,7 +414,7 @@
             this.新增NToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.新增NToolStripMenuItem.Name = "新增NToolStripMenuItem";
             this.新增NToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.新增NToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.新增NToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.新增NToolStripMenuItem.Text = "新增(&N)";
             // 
             // 開啟OToolStripMenuItem
@@ -420,13 +423,13 @@
             this.開啟OToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.開啟OToolStripMenuItem.Name = "開啟OToolStripMenuItem";
             this.開啟OToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.開啟OToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.開啟OToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.開啟OToolStripMenuItem.Text = "開啟(&O)";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(158, 6);
             // 
             // 儲存SToolStripMenuItem
             // 
@@ -434,19 +437,19 @@
             this.儲存SToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.儲存SToolStripMenuItem.Name = "儲存SToolStripMenuItem";
             this.儲存SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.儲存SToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.儲存SToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.儲存SToolStripMenuItem.Text = "儲存(&S)";
             // 
             // 另存新檔AToolStripMenuItem
             // 
             this.另存新檔AToolStripMenuItem.Name = "另存新檔AToolStripMenuItem";
-            this.另存新檔AToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.另存新檔AToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.另存新檔AToolStripMenuItem.Text = "另存新檔(&A)";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // 列印PToolStripMenuItem
             // 
@@ -454,7 +457,7 @@
             this.列印PToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.列印PToolStripMenuItem.Name = "列印PToolStripMenuItem";
             this.列印PToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.列印PToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.列印PToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.列印PToolStripMenuItem.Text = "列印(&P)";
             // 
             // 預覽列印VToolStripMenuItem
@@ -462,18 +465,18 @@
             this.預覽列印VToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("預覽列印VToolStripMenuItem.Image")));
             this.預覽列印VToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.預覽列印VToolStripMenuItem.Name = "預覽列印VToolStripMenuItem";
-            this.預覽列印VToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.預覽列印VToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.預覽列印VToolStripMenuItem.Text = "預覽列印(&V)";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
             // 
             // 結束XToolStripMenuItem
             // 
             this.結束XToolStripMenuItem.Name = "結束XToolStripMenuItem";
-            this.結束XToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.結束XToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.結束XToolStripMenuItem.Text = "結束(&X)";
             // 
             // 編輯EToolStripMenuItem
@@ -488,27 +491,27 @@
             this.toolStripSeparator4,
             this.全選AToolStripMenuItem});
             this.編輯EToolStripMenuItem.Name = "編輯EToolStripMenuItem";
-            this.編輯EToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.編輯EToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.編輯EToolStripMenuItem.Text = "編輯(&E)";
             // 
             // 復原UToolStripMenuItem
             // 
             this.復原UToolStripMenuItem.Name = "復原UToolStripMenuItem";
             this.復原UToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.復原UToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.復原UToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.復原UToolStripMenuItem.Text = "復原(&U)";
             // 
             // 取消復原RToolStripMenuItem
             // 
             this.取消復原RToolStripMenuItem.Name = "取消復原RToolStripMenuItem";
             this.取消復原RToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.取消復原RToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.取消復原RToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.取消復原RToolStripMenuItem.Text = "取消復原(&R)";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // 剪下TToolStripMenuItem
             // 
@@ -516,7 +519,7 @@
             this.剪下TToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.剪下TToolStripMenuItem.Name = "剪下TToolStripMenuItem";
             this.剪下TToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.剪下TToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.剪下TToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.剪下TToolStripMenuItem.Text = "剪下(&T)";
             // 
             // 複製CToolStripMenuItem
@@ -525,7 +528,7 @@
             this.複製CToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.複製CToolStripMenuItem.Name = "複製CToolStripMenuItem";
             this.複製CToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.複製CToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.複製CToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.複製CToolStripMenuItem.Text = "複製(&C)";
             // 
             // 貼上PToolStripMenuItem
@@ -534,18 +537,18 @@
             this.貼上PToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.貼上PToolStripMenuItem.Name = "貼上PToolStripMenuItem";
             this.貼上PToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.貼上PToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.貼上PToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.貼上PToolStripMenuItem.Text = "貼上(&P)";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(180, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // 全選AToolStripMenuItem
             // 
             this.全選AToolStripMenuItem.Name = "全選AToolStripMenuItem";
-            this.全選AToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.全選AToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.全選AToolStripMenuItem.Text = "全選(&A)";
             // 
             // 工具TToolStripMenuItem
@@ -554,19 +557,19 @@
             this.自訂CToolStripMenuItem,
             this.選項OToolStripMenuItem});
             this.工具TToolStripMenuItem.Name = "工具TToolStripMenuItem";
-            this.工具TToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.工具TToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.工具TToolStripMenuItem.Text = "工具(&T)";
             // 
             // 自訂CToolStripMenuItem
             // 
             this.自訂CToolStripMenuItem.Name = "自訂CToolStripMenuItem";
-            this.自訂CToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.自訂CToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.自訂CToolStripMenuItem.Text = "自訂(&C)";
             // 
             // 選項OToolStripMenuItem
             // 
             this.選項OToolStripMenuItem.Name = "選項OToolStripMenuItem";
-            this.選項OToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.選項OToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.選項OToolStripMenuItem.Text = "選項(&O)";
             // 
             // 說明HToolStripMenuItem
@@ -578,36 +581,36 @@
             this.toolStripSeparator5,
             this.關於AToolStripMenuItem});
             this.說明HToolStripMenuItem.Name = "說明HToolStripMenuItem";
-            this.說明HToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.說明HToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.說明HToolStripMenuItem.Text = "說明(&H)";
             // 
             // 內容CToolStripMenuItem
             // 
             this.內容CToolStripMenuItem.Name = "內容CToolStripMenuItem";
-            this.內容CToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.內容CToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.內容CToolStripMenuItem.Text = "內容(&C)";
             // 
             // 索引IToolStripMenuItem
             // 
             this.索引IToolStripMenuItem.Name = "索引IToolStripMenuItem";
-            this.索引IToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.索引IToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.索引IToolStripMenuItem.Text = "索引(&I)";
             // 
             // 搜尋SToolStripMenuItem
             // 
             this.搜尋SToolStripMenuItem.Name = "搜尋SToolStripMenuItem";
-            this.搜尋SToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.搜尋SToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.搜尋SToolStripMenuItem.Text = "搜尋(&S)";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(120, 6);
             // 
             // 關於AToolStripMenuItem
             // 
             this.關於AToolStripMenuItem.Name = "關於AToolStripMenuItem";
-            this.關於AToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.關於AToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.關於AToolStripMenuItem.Text = "關於(&A)...";
             // 
             // tableLayoutPanel1
@@ -616,7 +619,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.50746F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.49254F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.tableLayoutPanel1.Controls.Add(this.button32, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.button31, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.button30, 1, 3);
@@ -646,7 +649,7 @@
             // button32
             // 
             this.button32.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button32.Location = new System.Drawing.Point(214, 164);
+            this.button32.Location = new System.Drawing.Point(212, 164);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(55, 30);
             this.button32.TabIndex = 35;
@@ -656,7 +659,7 @@
             // button31
             // 
             this.button31.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button31.Location = new System.Drawing.Point(134, 164);
+            this.button31.Location = new System.Drawing.Point(131, 164);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(55, 30);
             this.button31.TabIndex = 34;
@@ -666,7 +669,7 @@
             // button30
             // 
             this.button30.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button30.Location = new System.Drawing.Point(64, 164);
+            this.button30.Location = new System.Drawing.Point(62, 164);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(55, 30);
             this.button30.TabIndex = 33;
@@ -678,7 +681,7 @@
             this.button29.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button29.Location = new System.Drawing.Point(3, 164);
             this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(54, 30);
+            this.button29.Size = new System.Drawing.Size(53, 30);
             this.button29.TabIndex = 32;
             this.button29.Text = "tlp12";
             this.button29.UseVisualStyleBackColor = true;
@@ -686,7 +689,7 @@
             // button28
             // 
             this.button28.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button28.Location = new System.Drawing.Point(214, 117);
+            this.button28.Location = new System.Drawing.Point(212, 117);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(55, 30);
             this.button28.TabIndex = 31;
@@ -696,7 +699,7 @@
             // button27
             // 
             this.button27.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button27.Location = new System.Drawing.Point(134, 117);
+            this.button27.Location = new System.Drawing.Point(131, 117);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(55, 30);
             this.button27.TabIndex = 30;
@@ -706,7 +709,7 @@
             // button26
             // 
             this.button26.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button26.Location = new System.Drawing.Point(64, 117);
+            this.button26.Location = new System.Drawing.Point(62, 117);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(55, 30);
             this.button26.TabIndex = 29;
@@ -718,7 +721,7 @@
             this.button25.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button25.Location = new System.Drawing.Point(3, 117);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(54, 30);
+            this.button25.Size = new System.Drawing.Size(53, 30);
             this.button25.TabIndex = 28;
             this.button25.Text = "tlp8";
             this.button25.UseVisualStyleBackColor = true;
@@ -726,7 +729,7 @@
             // button24
             // 
             this.button24.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button24.Location = new System.Drawing.Point(214, 66);
+            this.button24.Location = new System.Drawing.Point(212, 66);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(55, 30);
             this.button24.TabIndex = 27;
@@ -736,7 +739,7 @@
             // button23
             // 
             this.button23.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button23.Location = new System.Drawing.Point(134, 66);
+            this.button23.Location = new System.Drawing.Point(131, 66);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(55, 30);
             this.button23.TabIndex = 26;
@@ -746,7 +749,7 @@
             // button22
             // 
             this.button22.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button22.Location = new System.Drawing.Point(64, 66);
+            this.button22.Location = new System.Drawing.Point(62, 66);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(55, 30);
             this.button22.TabIndex = 25;
@@ -758,7 +761,7 @@
             this.button21.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button21.Location = new System.Drawing.Point(3, 66);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(54, 30);
+            this.button21.Size = new System.Drawing.Size(53, 30);
             this.button21.TabIndex = 24;
             this.button21.Text = "tlp4";
             this.button21.UseVisualStyleBackColor = true;
@@ -766,7 +769,7 @@
             // button20
             // 
             this.button20.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button20.Location = new System.Drawing.Point(214, 12);
+            this.button20.Location = new System.Drawing.Point(212, 12);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(55, 30);
             this.button20.TabIndex = 23;
@@ -776,7 +779,7 @@
             // button19
             // 
             this.button19.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button19.Location = new System.Drawing.Point(134, 12);
+            this.button19.Location = new System.Drawing.Point(131, 12);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(55, 30);
             this.button19.TabIndex = 22;
@@ -788,7 +791,7 @@
             this.tlp0.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tlp0.Location = new System.Drawing.Point(3, 12);
             this.tlp0.Name = "tlp0";
-            this.tlp0.Size = new System.Drawing.Size(54, 30);
+            this.tlp0.Size = new System.Drawing.Size(53, 30);
             this.tlp0.TabIndex = 20;
             this.tlp0.Text = "tlp0";
             this.tlp0.UseVisualStyleBackColor = true;
@@ -796,7 +799,7 @@
             // tlp1
             // 
             this.tlp1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tlp1.Location = new System.Drawing.Point(64, 12);
+            this.tlp1.Location = new System.Drawing.Point(62, 12);
             this.tlp1.Name = "tlp1";
             this.tlp1.Size = new System.Drawing.Size(55, 30);
             this.tlp1.TabIndex = 21;
@@ -1018,11 +1021,27 @@
             this.chkMeals.UseVisualStyleBackColor = true;
             this.chkMeals.CheckStateChanged += new System.EventHandler(this.chkMeals_CheckStateChanged);
             // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(274, 606);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(173, 50);
+            this.button15.TabIndex = 10;
+            this.button15.Text = "關閉程式時 表單慢慢消失";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1098, 676);
+            this.Controls.Add(this.button15);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -1048,6 +1067,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -1159,6 +1179,8 @@
         private System.Windows.Forms.CheckBox chkLunch;
         private System.Windows.Forms.CheckBox chkBreakfast;
         private System.Windows.Forms.CheckBox chkMeals;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

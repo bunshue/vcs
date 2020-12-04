@@ -57,9 +57,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(395, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(603, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(629, 540);
+            this.richTextBox1.Size = new System.Drawing.Size(421, 540);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -189,7 +189,9 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(172, 53);
             this.button14.TabIndex = 13;
+            this.button14.Text = "把這個檔案的註解抓出來";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // Form1
             // 

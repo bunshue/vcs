@@ -361,6 +361,30 @@ namespace vcs_test_all_00_Control
 
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        // Decrease the form's Opacity.
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Opacity -= 0.10;
+            if (Opacity <= 0)
+                Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Start the fade out Timer.
+            timer1.Enabled = true;
+
+            // Only allow close after fading is done.
+            e.Cancel = (Opacity > 0);
+        }
+
+
+
     }
 
 
