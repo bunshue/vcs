@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Text.RegularExpressions;
+
 namespace vcs_test_all_00_Control
 {
     public partial class Form1 : Form
@@ -381,6 +383,141 @@ namespace vcs_test_all_00_Control
 
             // Only allow close after fading is done.
             e.Cancel = (Opacity > 0);
+        }
+
+        // Validate a required field. Return true if the field is valid.
+        private bool RequiredFieldIsBlank(ErrorProvider err, TextBox txt)
+        {
+            if (txt.Text.Length > 0)
+            {
+                // Clear the error.
+                err.SetError(txt, "");
+                return false;
+            }
+            else
+            {
+                // Set the error.
+                err.SetError(txt, CamelCaseToWords(txt.Name) + " must not be blank.");
+                return true;
+            }
+        }
+
+        // Split a string in camelCase, removing the prefix.
+        private string CamelCaseToWords(string input)
+        {
+            // Insert a space in front of each capital letter.
+            string result = "";
+            foreach (char ch in input.ToCharArray())
+            {
+                if (char.IsUpper(ch)) result += " ";
+                result += ch;
+            }
+
+            // Find the first space and remove everything before it.
+            return result.Substring(result.IndexOf(" ") + 1);
+        }
+
+        // Validate the ID code.
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            // Check for missing value.
+            if (RequiredFieldIsBlank(errorProvider1, textBox1))
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            // Check for correct format.
+
+            //Regex regex = new Regex(@"^(\d{5}|\d{5}-\d{4})$");    //5數 或 5數-4數
+            Regex regex = new Regex(@"^[A-Z]{1}[0-9]{9}$");         //1英9數
+
+            if (regex.IsMatch(textBox1.Text))
+            {
+                // Clear the error.
+                errorProvider1.SetError(textBox1, "OK");
+            }
+            else
+            {
+                // Set the error.
+                errorProvider1.SetError(textBox1, "台灣身份證字號格式 1英9數");
+                e.Cancel = true;
+            }
+
+        }
+
+        // Validate fields.
+        private void textBox2_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+            e.Cancel = RequiredFieldIsBlank(errorProvider1, txt);
+        }
+
+        // Validate a required field. Return true if the field is valid.
+
+        //RequiredFieldIsBlank   same
+        private bool ValidateRequiredField(ErrorProvider err, TextBox txt)
+        {
+            if (txt.Text.Length > 0)
+            {
+                // Clear the error.
+                err.SetError(txt, "");
+                return false;
+            }
+            else
+            {
+                // Set the error.
+                err.SetError(txt, CamelCaseToWords(txt.Name) + " must not be blank.");
+                return true;
+            }
+        }
+
+        // Validate the ID code
+        private void ValidateIDCode(ErrorProvider err, TextBox txt)
+        {
+            // Check for missing value.
+            if (ValidateRequiredField(err, txt)) return;
+
+            // Check for correct format.
+
+            //Regex regex = new Regex(@"^(\d{5}|\d{5}-\d{4})$");    //5數 或 5數-4數
+            Regex regex = new Regex(@"^[A-Z]{1}[0-9]{9}$");         //1英9數
+            if (regex.IsMatch(txt.Text))
+            {
+                // Clear the error.
+                errorProvider1.SetError(txt, "");
+            }
+            else
+            {
+                // Set the error.
+                errorProvider1.SetError(txt, "ZIP code must have format ##### or #####-####.");
+            }
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "你按了OK\n";
+            // Validate all fields.
+            ValidateIDCode(errorProvider1, textBox1);
+            ValidateRequiredField(errorProvider1, textBox2);
+
+            // See if any field has an error message.
+            foreach (Control ctl in Controls)
+            {
+                if (errorProvider1.GetError(ctl) != "")
+                {
+                    MessageBox.Show(errorProvider1.GetError(ctl));
+                    return;
+                }
+            }
+
+            richTextBox1.Text += "資料正確\nID:\t" + textBox1.Text + "\nName:\t" + textBox2.Text + "\n";
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 
