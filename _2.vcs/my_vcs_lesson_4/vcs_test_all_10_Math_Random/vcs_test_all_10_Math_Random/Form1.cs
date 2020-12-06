@@ -55,6 +55,11 @@ namespace vcs_test_all_10_Math_Random
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 11+10);
+            label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 11+10);
+            textBox_A.Location = new Point(x_st + dx * 0 + 20, y_st + dy * 11+10);
+            textBox_B.Location = new Point(x_st + dx * 1 / 2 + 20, y_st + dy * 11+10);
 
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -66,6 +71,8 @@ namespace vcs_test_all_10_Math_Random
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
             bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -819,9 +826,97 @@ namespace vcs_test_all_10_Math_Random
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap(@"C:\______test_files\_material\sddev.png");
+            Bitmap bitmap1 = new Bitmap(@"C:\______test_files\_material\sddev1.png");
             e.Graphics.DrawImage(bitmap1, 8, this.ClientSize.Height - bitmap1.Height - 8);
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //埃及分數
+
+            // Calculate the Eqgyptian fraction representation
+            // for the original fraction.
+
+            // Get the fraction (and make it positive).
+            Fraction frac = new Fraction(textBox1.Text);
+            if (frac < 0) frac = -frac;
+
+            // Get the Egyptian fraction.
+            List<Fraction> fractions = GetEgyptianFraction(frac);
+
+            // Display the result as a string
+            string result = "";
+            foreach (Fraction unit_fraction in fractions)
+            {
+                result = result + unit_fraction.ToString() + " + ";
+            }
+            if (result.Length > 0) result = result.Substring(0, result.Length - 3);
+
+            //txtResult.Text = result;
+            richTextBox1.Text += result + "\n";
+
+
+        }
+
+        // Return a string representation of the Egyptian fraction.
+        private List<Fraction> GetEgyptianFraction(Fraction frac)
+        {
+            List<Fraction> result = new List<Fraction>();
+
+            // Remove any whole number part.
+            int whole_part = (int)(frac.Numerator / frac.Denominator);
+            if (whole_part > 0)
+            {
+                result.Add(whole_part);
+                frac = frac - whole_part;
+            }
+
+            // Pull out unit fractions.
+            long denom = 2;
+            while (frac > 0)
+            {
+                // Make the unit fraction smaller until it fits.
+                Fraction unit_fraction = new Fraction(1, denom);
+                while (unit_fraction > frac)
+                {
+                    denom++;
+                    unit_fraction = new Fraction(1, denom);
+                }
+
+                // Remove the unit fraction.
+                result.Add(unit_fraction);
+                frac -= unit_fraction;
+                denom++;
+            }
+
+            return result;
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Fraction a = new Fraction(textBox_A.Text);
+                Fraction b = new Fraction(textBox_B.Text);
+
+                richTextBox1.Text += "A加B\t" + (a + b).ToString() + "\n";
+                richTextBox1.Text += "A減B\t" + (a - b).ToString() + "\n";
+                richTextBox1.Text += "A乘B\t" + (a * b).ToString() + "\n";
+                richTextBox1.Text += "A除B\t" + (a / b).ToString() + "\n";
+                richTextBox1.Text += "A反相\t" + (-a).ToString() + "\n";
+                richTextBox1.Text += "A轉小數\t" + ((double)a).ToString() + "\n";
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
 
     }
 }

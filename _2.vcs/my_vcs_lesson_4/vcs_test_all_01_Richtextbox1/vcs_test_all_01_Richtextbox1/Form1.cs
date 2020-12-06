@@ -15,9 +15,49 @@ namespace vcs_test_all_01_Richtextbox1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
             label4.Text = "字數 : " + richTextBox1.TextLength.ToString();
             label6.Text = "";
+
+            // Format RichTextBox1.
+            richTextBox_format_1.Select(4, 5);
+            richTextBox_format_1.SelectionColor = Color.Red;
+            richTextBox_format_1.Select(16, 3);
+            richTextBox_format_1.SelectionFont = new Font(richTextBox_format_1.Font, FontStyle.Italic);
+            richTextBox_format_1.Select(35, 4);
+            richTextBox_format_1.SelectionBackColor = Color.Yellow;
+            richTextBox_format_1.SelectionColor = Color.Brown;
+            richTextBox_format_1.Select(0, 0);
+
+            // Format RichTextBox2.
+            SelectRichText(richTextBox_format_2, "quick");
+            richTextBox_format_2.SelectionColor = Color.Red;
+            SelectRichText(richTextBox_format_2, "fox");
+            richTextBox_format_2.SelectionFont = new Font(richTextBox_format_2.Font, FontStyle.Italic);
+            SelectRichText(richTextBox_format_2, "lazy");
+            richTextBox_format_2.SelectionBackColor = Color.Yellow;
+            richTextBox_format_2.SelectionColor = Color.Brown;
+            richTextBox_format_2.Select(0, 0);
+        }
+
+        // Select the indicated text.
+        private void SelectRichText(RichTextBox rch, string target)
+        {
+            int pos = rch.Text.IndexOf(target);
+            if (pos < 0)
+            {
+                // Not found. Select nothing.
+                rch.Select(0, 0);
+            }
+            else
+            {
+                // Found the text. Select it.
+                rch.Select(pos, target.Length);
+            }
         }
 
         void show_item_location()

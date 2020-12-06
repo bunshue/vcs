@@ -19,6 +19,8 @@ namespace vcs_Draw9_Example8_vcsh
         Pen p;
         SolidBrush sb;
         Bitmap bitmap1;
+        int W = 250;
+        int H = 250;
 
         // True if it is X's turn.
         private bool XsTurn = true;
@@ -43,6 +45,10 @@ namespace vcs_Draw9_Example8_vcsh
                 { lblSquare10, lblSquare11, lblSquare12},
                 { lblSquare20, lblSquare21, lblSquare22},
             };
+
+
+            DrawHeart();
+            DrawRose();
         }
 
         void show_item_location()
@@ -57,10 +63,10 @@ namespace vcs_Draw9_Example8_vcsh
             int dy;
 
             //button
-            x_st = 850;
+            x_st = 800;
             y_st = 10;
-            dx = 110;
-            dy = 45;
+            dx = 140;
+            dy = 55;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -94,10 +100,8 @@ namespace vcs_Draw9_Example8_vcsh
             bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y-25);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 25);
 
-            int W = 250;
-            int H = 250;
             x_st = 10;
             y_st = 10;
             dx = W + 10;
@@ -110,20 +114,18 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox5.Size = new Size(W, H);
             pictureBox6.Size = new Size(W, H);
             pictureBox7.Size = new Size(W, H);
-            pictureBox8.Size = new Size(W, H);
-            pictureBox9.Size = new Size(W, H);
+            pictureBox8.Size = new Size(W * 2 + 10, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            pictureBox7.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox7.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -344,6 +346,259 @@ namespace vcs_Draw9_Example8_vcsh
                 label.Text = "";
         }
 
+        void DrawHeart()
+        {
+            // Plot the equations.
+            // Make the Bitmap.
+            Bitmap bm = new Bitmap(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                // Clear.
+                gr.Clear(Color.White);
+
+                Rectangle rect = new Rectangle(-2, -2, 4, 4);
+                Point[] pts = new Point[] 
+                { 
+                    new Point(0, pictureBox4.ClientSize.Height),
+                    new Point(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height), 
+                    new Point(0, 0)
+                };
+                gr.Transform = new Matrix(rect, pts);
+
+                // Draw axes.
+                using (Pen axis_pen = new Pen(Color.Gray, 0))
+                {
+                    gr.DrawLine(axis_pen, -2, 0, 2, 0);
+                    gr.DrawLine(axis_pen, 0, -2, 0, 2);
+                    for (int i = -2; i <= 2; i++)
+                    {
+                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+                    }
+                }
+
+                // Graph the equations.
+                float dx = 2f / bm.Width;
+                float dy = 2f / bm.Height;
+                PlotFunction(gr, HeartFunc, dx, dy);
+            } // using gr.
+
+            // Display the result.
+            pictureBox4.Image = bm;
+        }
+
+        private delegate float FofXY(float x, float y);
+
+        // Plot a function.
+        private void PlotFunction(Graphics gr, FofXY func, float dx, float dy)
+        {
+            // Plot the function.
+            using (Pen thin_pen = new Pen(Color.Black, 0))
+            {
+                // Horizontal comparisons.
+                for (float x = -2f; x <= 2f; x += dx)
+                {
+                    float last_y = func(x, -2f);
+                    for (float y = -2f + dy; y <= 2f; y += dy)
+                    {
+                        float next_y = func(x, y);
+                        if (
+                            ((last_y <= 0f) && (next_y >= 0f)) ||
+                            ((last_y >= 0f) && (next_y <= 0f))
+                           )
+                        {
+                            // Plot this point.
+                            gr.DrawLine(thin_pen, x, y - dy, x, y);
+                        }
+                        last_y = next_y;
+                    }
+                } // Horizontal comparisons.
+
+                // Vertical comparisons.
+                for (float y = -2f + dy; y <= 2f; y += dy)
+                {
+                    float last_x = func(-2f, y);
+                    for (float x = -2f; x <= 2f; x += dx)
+                    {
+                        float next_x = func(x, y);
+                        if (
+                            ((last_x <= 0f) && (next_x >= 0f)) ||
+                            ((last_x >= 0f) && (next_x <= 0f))
+                           )
+                        {
+                            // Plot this point.
+                            gr.DrawLine(thin_pen, x - dx, y, x, y);
+                        }
+                        last_x = next_x;
+                    }
+                } // Vertical comparisons.
+            } // using thin_pen.
+        }
+
+        // The function.
+        private float HeartFunc(float x, float y)
+        {
+            /*
+            //Heart type 1
+            double a = x * x;
+            double b = y - Math.Pow(x * x, (double)1 / 3);
+            return (float)(a + b * b - 1);
+            */
+
+            //Heart type 2
+            double a = x * x;
+            double b = 5.0 * y / 4.0 - Math.Sqrt(Math.Abs(x));
+            return (float)(a * a + b * b - 1);
+        }
+
+
+        void DrawRose()
+        {
+            float A = 2.0f;
+            int n = 3;
+            int d = 4;
+
+            // Make the Bitmap and associated Graphics object.
+            Bitmap bm = new Bitmap(W, H);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Set up a transformation to map the region
+                // x/y = A +/- 0.1 onto the Bitmap.
+                RectangleF rect = new RectangleF(
+                    -A - 0.1f, -A - 0.1f, 2 * A + 0.2f, 2 * A + 0.2f);
+                PointF[] pts =
+                {
+                    new PointF(0, bm.Height),
+                    new PointF(bm.Width, bm.Height),
+                    new PointF(0, 0),
+                };
+                gr.Transform = new Matrix(rect, pts);
+
+                // Draw the curve.
+                DrawCurve(gr, A, n, d);
+
+                // Draw the axes.
+                DrawAxes(gr, rect.Right);
+
+                // Display the result and size the form to fit.
+                pictureBox5.Image = bm;
+                pictureBox5.SizeMode = PictureBoxSizeMode.AutoSize;
+            }
+
+        }
+
+        private void DrawAxes(Graphics gr, float wxmax)
+        {
+            int xmax = (int)wxmax;
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                // Draw the X and Y axes.
+                gr.DrawLine(pen, -wxmax, 0, wxmax, 0);
+                gr.DrawLine(pen, 0, -wxmax, 0, wxmax);
+
+                float tic = 0.1f;
+                for (int x = -xmax; x <= xmax; x++)
+                {
+                    gr.DrawLine(pen, x, -tic, x, tic);
+                    gr.DrawLine(pen, -tic, x, tic, x);
+                }
+            }
+        }
+
+        // Draw the curve.
+        // n and d should be relatively prime.
+        private void DrawCurve(Graphics gr, float A, int n, int d)
+        {
+            const int num_points = 1000;
+
+            // Period is Pi * d if n and d are both odd. 2 * Pi * d otherwise.
+            double period = Math.PI * d;
+            if ((n % 2 == 0) || (d % 2 == 0)) period *= 2;
+
+            double dtheta = period / num_points;
+            List<PointF> points = new List<PointF>();
+            double k = (double)n / d;
+            for (int i = 0; i < num_points; i++)
+            {
+                double theta = i * dtheta;
+                double r = A * Math.Cos(k * theta);
+                float x = (float)(r * Math.Cos(theta));
+                float y = (float)(r * Math.Sin(theta));
+
+                points.Add(new PointF(x, y));
+            }
+
+            gr.FillPolygon(Brushes.LightBlue, points.ToArray());
+
+            // Draw the curve.
+            using (Pen pen = new Pen(Color.Red, 0))
+            {
+                gr.DrawLines(pen, points.ToArray());
+            }
+        }
+
+        private void pictureBox8_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            using (Font the_font = new Font("Comic Sans MS", 20))
+            {
+
+                int x_st = 10;
+                int y_st = 220;
+                int dx;
+
+                dx = 40;
+                DrawRotatedTextAt(e.Graphics, -90, "January", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "February", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "March", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "April", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "May", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "June", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "July", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "August", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "September", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "October", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "November", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "December", x_st, y_st, the_font, Brushes.Red);
+            }
+
+        }
+
+        // Draw a rotated string at a particular position.
+        private void DrawRotatedTextAt(Graphics gr, float angle, string txt, int x, int y, Font the_font, Brush the_brush)
+        {
+            // Save the graphics state.
+            GraphicsState state = gr.Save();
+            gr.ResetTransform();
+
+            // Rotate.
+            gr.RotateTransform(angle);
+
+            // Translate to desired position. Be sure to append
+            // the rotation so it occurs after the rotation.
+            gr.TranslateTransform(x, y, MatrixOrder.Append);
+
+            // Draw the text at the origin.
+            gr.DrawString(txt, the_font, the_brush, 0, 0);
+
+            // Restore the graphics state.
+            gr.Restore(state);
+        }
 
 
     }

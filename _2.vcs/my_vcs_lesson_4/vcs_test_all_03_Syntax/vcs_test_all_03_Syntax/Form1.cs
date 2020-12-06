@@ -647,6 +647,24 @@ namespace vcs_test_all_03_Syntax
 
         private void button16_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "測試Dictionary與Class語法\n";
+
+
+            // Make a dictionary.
+            DictionaryWithDefault<string, string> dict = new DictionaryWithDefault<string, string>("<Missing>");
+
+
+            // Add some items to the dictionary.
+            dict["Ann"] = "Archer";
+            dict["Chuck"] = "Cider";
+            dict["Dora"] = "Deevers";
+
+            // Display some values.
+            richTextBox1.Text += "Ann" + "\t" + dict["Ann"] + "\n";
+            richTextBox1.Text += "Ben" + "\t" + dict["Ben"] + "\n";
+            richTextBox1.Text += "Chuck" + "\t" + dict["Chuck"] + "\n";
+            richTextBox1.Text += "Dora" + "\t" + dict["Dora"] + "\n";
+            richTextBox1.Text += "Ed" + "\t" + dict["Ed"] + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
