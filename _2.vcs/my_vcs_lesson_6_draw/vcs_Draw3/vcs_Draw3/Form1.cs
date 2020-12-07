@@ -207,6 +207,10 @@ namespace vcs_Draw3
             pictureBox_card2.Image = bitmap_card2;
 
 
+            //for atom2
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer | ControlStyles.ResizeRedraw, true);
+            this.UpdateStyles();
+
         }
 
 
@@ -1619,6 +1623,59 @@ namespace vcs_Draw3
 
         }
 
+        private double Theta = 0;
+        private const double Dtheta = Math.PI / 5;
+
+        // Draw the atom.
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            Theta += Dtheta;
+
+            const int radius = 3;
+            int cx = 50, cy = 400, rx = 45, ry = 15;
+            Rectangle rect = new Rectangle(-rx, -ry, 2 * rx, 2 * ry);
+            double x, y;
+            e.Graphics.RotateTransform(60, MatrixOrder.Append);
+            e.Graphics.TranslateTransform(cx, cy, MatrixOrder.Append);
+            e.Graphics.DrawEllipse(Pens.Red, rect);
+            x = rx * Math.Cos(Theta);
+            y = ry * Math.Sin(Theta);
+            e.Graphics.FillEllipse(Brushes.Red,
+                (int)(x - radius), (int)(y - radius),
+                2 * radius, 2 * radius);
+
+            e.Graphics.ResetTransform();
+            e.Graphics.RotateTransform(-60, MatrixOrder.Append);
+            e.Graphics.TranslateTransform(cx, cy, MatrixOrder.Append);
+            e.Graphics.DrawEllipse(Pens.Red, rect);
+            x = rx * Math.Cos(-Theta * 0.9);
+            y = ry * Math.Sin(-Theta * 0.9);
+            e.Graphics.FillEllipse(Brushes.Green,
+                (int)(x - radius), (int)(y - radius),
+                2 * radius, 2 * radius);
+
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(cx, cy, MatrixOrder.Append);
+            e.Graphics.DrawEllipse(Pens.Red, rect);
+            x = rx * Math.Cos(Theta * 0.8);
+            y = ry * Math.Sin(Theta * 0.8);
+            e.Graphics.FillEllipse(Brushes.Blue,
+                (int)(x - radius), (int)(y - radius),
+                2 * radius, 2 * radius);
+
+            e.Graphics.ResetTransform();
+            e.Graphics.FillEllipse(Brushes.Black,
+                cx - radius, cy - radius,
+                2 * radius, 2 * radius);
+        }
+
+        private void timer_atom2_Tick(object sender, EventArgs e)
+        {
+            //for atom2
+            Refresh();
+        }
 
     }
 }

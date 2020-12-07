@@ -21,6 +21,12 @@ using System.Drawing.Printing;  //for PrinterSettings
 
 using Microsoft.Win32;      //for Registry
 
+/*
+讀取/寫入程式預設值
+到
+方案總管/Properties/Settings.settings裏, 加入變數
+*/
+
 namespace vcs_test_all_06_System
 {
     public partial class Form1 : Form
@@ -764,6 +770,8 @@ namespace vcs_test_all_06_System
 
         private void button35_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "讀取程式預設值\n";
+            ReadSettings();
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -935,6 +943,8 @@ namespace vcs_test_all_06_System
 
         private void button39_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "寫入程式預設值\n";
+            SaveSettings();
         }
 
         private void button44_Click(object sender, EventArgs e)
@@ -951,7 +961,6 @@ namespace vcs_test_all_06_System
                 GetInfo(mobj, "TotalVirtualMemorySize");
                 GetInfo(mobj, "TotalVisibleMemorySize");
             }
-
         }
 
         // Add information about the property to the ListView.
@@ -1000,6 +1009,29 @@ namespace vcs_test_all_06_System
 
 
         }
+
+        // Save the current settings.
+        private void SaveSettings()
+        {
+            string dir_name = @"C:\______test_files\peony";
+
+            Properties.Settings.Default.PictureDirectory = dir_name;
+            Properties.Settings.Default.UpdateRegistry = true;
+            Properties.Settings.Default.Location = Location;
+            Properties.Settings.Default.Size = Size;
+            Properties.Settings.Default.Delay = 123;
+            Properties.Settings.Default.Save();
+        }
+
+        private void ReadSettings()
+        {
+            richTextBox1.Text += "Default.PictureDirectory" + "\t" + Properties.Settings.Default.PictureDirectory + "\n";
+            richTextBox1.Text += "Default.UpdateRegistry" + "\t" + Properties.Settings.Default.UpdateRegistry + "\n";
+            richTextBox1.Text += "Default.Location" + "\t" + Properties.Settings.Default.Location + "\n";
+            richTextBox1.Text += "Default.Size" + "\t" + Properties.Settings.Default.Size.ToString() + "\n";
+            richTextBox1.Text += "Default.Delay" + "\t" + Properties.Settings.Default.Delay.ToString() + "\n";
+        }
+
 
 
 

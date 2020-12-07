@@ -130,6 +130,10 @@
             this.button34 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.bt_cancel_button = new System.Windows.Forms.Button();
+            this.bt_accept_button = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -141,6 +145,7 @@
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -629,7 +634,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.50746F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.49254F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel1.Controls.Add(this.button32, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.button31, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.button30, 1, 3);
@@ -659,7 +664,7 @@
             // button32
             // 
             this.button32.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button32.Location = new System.Drawing.Point(210, 164);
+            this.button32.Location = new System.Drawing.Point(208, 164);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(55, 30);
             this.button32.TabIndex = 35;
@@ -669,7 +674,7 @@
             // button31
             // 
             this.button31.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button31.Location = new System.Drawing.Point(126, 164);
+            this.button31.Location = new System.Drawing.Point(122, 164);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(55, 30);
             this.button31.TabIndex = 34;
@@ -679,9 +684,9 @@
             // button30
             // 
             this.button30.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button30.Location = new System.Drawing.Point(59, 164);
+            this.button30.Location = new System.Drawing.Point(57, 164);
             this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(54, 30);
+            this.button30.Size = new System.Drawing.Size(52, 30);
             this.button30.TabIndex = 33;
             this.button30.Text = "tlp13";
             this.button30.UseVisualStyleBackColor = true;
@@ -691,7 +696,7 @@
             this.button29.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button29.Location = new System.Drawing.Point(3, 164);
             this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(50, 30);
+            this.button29.Size = new System.Drawing.Size(48, 30);
             this.button29.TabIndex = 32;
             this.button29.Text = "tlp12";
             this.button29.UseVisualStyleBackColor = true;
@@ -699,7 +704,7 @@
             // button28
             // 
             this.button28.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button28.Location = new System.Drawing.Point(210, 117);
+            this.button28.Location = new System.Drawing.Point(208, 117);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(55, 30);
             this.button28.TabIndex = 31;
@@ -709,7 +714,7 @@
             // button27
             // 
             this.button27.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button27.Location = new System.Drawing.Point(126, 117);
+            this.button27.Location = new System.Drawing.Point(122, 117);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(55, 30);
             this.button27.TabIndex = 30;
@@ -719,9 +724,9 @@
             // button26
             // 
             this.button26.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button26.Location = new System.Drawing.Point(59, 117);
+            this.button26.Location = new System.Drawing.Point(57, 117);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(54, 30);
+            this.button26.Size = new System.Drawing.Size(52, 30);
             this.button26.TabIndex = 29;
             this.button26.Text = "tlp9";
             this.button26.UseVisualStyleBackColor = true;
@@ -731,7 +736,7 @@
             this.button25.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button25.Location = new System.Drawing.Point(3, 117);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(50, 30);
+            this.button25.Size = new System.Drawing.Size(48, 30);
             this.button25.TabIndex = 28;
             this.button25.Text = "tlp8";
             this.button25.UseVisualStyleBackColor = true;
@@ -739,7 +744,7 @@
             // button24
             // 
             this.button24.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button24.Location = new System.Drawing.Point(210, 66);
+            this.button24.Location = new System.Drawing.Point(208, 66);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(55, 30);
             this.button24.TabIndex = 27;
@@ -749,7 +754,7 @@
             // button23
             // 
             this.button23.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button23.Location = new System.Drawing.Point(126, 66);
+            this.button23.Location = new System.Drawing.Point(122, 66);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(55, 30);
             this.button23.TabIndex = 26;
@@ -759,9 +764,9 @@
             // button22
             // 
             this.button22.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button22.Location = new System.Drawing.Point(59, 66);
+            this.button22.Location = new System.Drawing.Point(57, 66);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(54, 30);
+            this.button22.Size = new System.Drawing.Size(52, 30);
             this.button22.TabIndex = 25;
             this.button22.Text = "tlp5";
             this.button22.UseVisualStyleBackColor = true;
@@ -771,7 +776,7 @@
             this.button21.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button21.Location = new System.Drawing.Point(3, 66);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(50, 30);
+            this.button21.Size = new System.Drawing.Size(48, 30);
             this.button21.TabIndex = 24;
             this.button21.Text = "tlp4";
             this.button21.UseVisualStyleBackColor = true;
@@ -779,7 +784,7 @@
             // button20
             // 
             this.button20.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button20.Location = new System.Drawing.Point(210, 12);
+            this.button20.Location = new System.Drawing.Point(208, 12);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(55, 30);
             this.button20.TabIndex = 23;
@@ -789,7 +794,7 @@
             // button19
             // 
             this.button19.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button19.Location = new System.Drawing.Point(126, 12);
+            this.button19.Location = new System.Drawing.Point(122, 12);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(55, 30);
             this.button19.TabIndex = 22;
@@ -801,7 +806,7 @@
             this.tlp0.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tlp0.Location = new System.Drawing.Point(3, 12);
             this.tlp0.Name = "tlp0";
-            this.tlp0.Size = new System.Drawing.Size(50, 30);
+            this.tlp0.Size = new System.Drawing.Size(48, 30);
             this.tlp0.TabIndex = 20;
             this.tlp0.Text = "tlp0";
             this.tlp0.UseVisualStyleBackColor = true;
@@ -809,9 +814,9 @@
             // tlp1
             // 
             this.tlp1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tlp1.Location = new System.Drawing.Point(59, 12);
+            this.tlp1.Location = new System.Drawing.Point(57, 12);
             this.tlp1.Name = "tlp1";
-            this.tlp1.Size = new System.Drawing.Size(54, 30);
+            this.tlp1.Size = new System.Drawing.Size(52, 30);
             this.tlp1.TabIndex = 21;
             this.tlp1.Text = "tlp1";
             this.tlp1.UseVisualStyleBackColor = true;
@@ -1126,11 +1131,59 @@
             this.label8.Text = "姓名";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // bt_cancel_button
+            // 
+            this.bt_cancel_button.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_cancel_button.Location = new System.Drawing.Point(112, 30);
+            this.bt_cancel_button.Name = "bt_cancel_button";
+            this.bt_cancel_button.Size = new System.Drawing.Size(100, 50);
+            this.bt_cancel_button.TabIndex = 34;
+            this.bt_cancel_button.Text = "Cancel Button";
+            this.bt_cancel_button.UseVisualStyleBackColor = true;
+            this.bt_cancel_button.Click += new System.EventHandler(this.bt_cancel_button_Click);
+            // 
+            // bt_accept_button
+            // 
+            this.bt_accept_button.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_accept_button.Location = new System.Drawing.Point(6, 29);
+            this.bt_accept_button.Name = "bt_accept_button";
+            this.bt_accept_button.Size = new System.Drawing.Size(100, 50);
+            this.bt_accept_button.TabIndex = 33;
+            this.bt_accept_button.Text = "Accept Button";
+            this.bt_accept_button.UseVisualStyleBackColor = true;
+            this.bt_accept_button.Click += new System.EventHandler(this.bt_accept_button_Click);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.label9);
+            this.groupBox8.Controls.Add(this.bt_accept_button);
+            this.groupBox8.Controls.Add(this.bt_cancel_button);
+            this.groupBox8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox8.Location = new System.Drawing.Point(473, 310);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(218, 141);
+            this.groupBox8.TabIndex = 12;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Form1屬性";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(6, 98);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(210, 21);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "Form1屬性設定兩按鍵";
+            // 
             // Form1
             // 
+            this.AcceptButton = this.bt_accept_button;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.bt_cancel_button;
             this.ClientSize = new System.Drawing.Size(1333, 676);
+            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.groupBox6);
@@ -1176,6 +1229,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1283,6 +1338,10 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button34;
+        private System.Windows.Forms.Button bt_cancel_button;
+        private System.Windows.Forms.Button bt_accept_button;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Label label9;
     }
 }
 

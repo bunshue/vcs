@@ -525,6 +525,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(200, 40);
             this.button35.TabIndex = 55;
+            this.button35.Text = "讀取程式預設值";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -546,6 +547,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 40);
             this.button39.TabIndex = 57;
+            this.button39.Text = "寫入程式預設值";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 

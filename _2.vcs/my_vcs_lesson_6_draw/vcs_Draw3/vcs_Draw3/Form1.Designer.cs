@@ -98,6 +98,7 @@
             this.pictureBox_text = new System.Windows.Forms.PictureBox();
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
+            this.timer_atom2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -701,6 +702,11 @@
             this.timer_progressbar.Enabled = true;
             this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
             // 
+            // timer_atom2
+            // 
+            this.timer_atom2.Enabled = true;
+            this.timer_atom2.Tick += new System.EventHandler(this.timer_atom2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -762,6 +768,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
@@ -852,6 +859,7 @@
         private System.Windows.Forms.PictureBox pictureBox_text;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
         private System.Windows.Forms.Timer timer_progressbar;
+        internal System.Windows.Forms.Timer timer_atom2;
     }
 }
 

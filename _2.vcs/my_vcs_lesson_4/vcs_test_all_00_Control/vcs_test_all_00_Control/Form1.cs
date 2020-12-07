@@ -520,7 +520,15 @@ namespace vcs_test_all_00_Control
             this.Close();
         }
 
+        private void bt_accept_button_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了\tAccept Button\n";
+        }
 
+        private void bt_cancel_button_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了\tCancel Button\n";
+        }
 
     }
 
