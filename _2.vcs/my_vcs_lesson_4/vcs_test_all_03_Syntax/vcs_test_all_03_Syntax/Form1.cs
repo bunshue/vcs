@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Globalization;//for CultureInfo
 using System.Threading;
+using System.Diagnostics;//for StackTrace
 
 namespace vcs_test_all_03_Syntax
 {
@@ -426,7 +427,13 @@ namespace vcs_test_all_03_Syntax
 
         private void button11_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "此Method的Name是\t" + GetMethodName() + "\n";
+        }
 
+        // Return the name of the method that called this one.
+        private string GetMethodName()
+        {
+            return new StackTrace(1).GetFrame(0).GetMethod().Name;
         }
 
         private void button2_Click(object sender, EventArgs e)
