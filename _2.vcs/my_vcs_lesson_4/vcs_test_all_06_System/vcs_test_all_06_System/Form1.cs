@@ -982,6 +982,10 @@ namespace vcs_test_all_06_System
 
         private void button45_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "WorkingArea X = " + Screen.PrimaryScreen.WorkingArea.X.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea Y = " + Screen.PrimaryScreen.WorkingArea.Y.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea Width = " + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea Height = " + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
 
         }
 

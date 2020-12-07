@@ -695,5 +695,35 @@ namespace vcs_test_all_14_Array_Sorting
 
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //Array.Copy.
+
+            int i;
+            int[] array1 = new int[1000];
+            int[] array2 = new int[1000];
+
+            for (i = 0; i < array1.Length; i++)
+                array1[i] = i;
+            
+            Array.Copy(array1, array2, array1.Length);  //從前array1拷貝長度陣列到後array2，長度array1.Length，會快得多，約7倍快
+
+            richTextBox1.Text += "Array1\t";
+            for (i = 0; i < array1.Length; i += 60)
+            {
+                richTextBox1.Text += array1[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "Array2\t";
+            for (i = 0; i < array2.Length; i += 60)
+            {
+                richTextBox1.Text += array2[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+
+        }
+
     }
 }

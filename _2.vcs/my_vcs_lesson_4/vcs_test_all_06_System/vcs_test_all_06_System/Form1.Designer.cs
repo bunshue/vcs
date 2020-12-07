@@ -617,6 +617,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(200, 40);
             this.button45.TabIndex = 63;
+            this.button45.Text = "WorkingArea";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 

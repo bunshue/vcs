@@ -431,6 +431,19 @@ namespace vcs_test_all_03_Syntax
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "搜尋所有控件 符合種類 符合條件 的 做處理\n";
+            foreach (Control ctl in Controls)
+            {
+                richTextBox1.Text += "找到控件\t" + ctl.Name;
+
+                if ((ctl is Button) && (ctl == button2))
+                {
+                    richTextBox1.Text += "\t是button2, 清除其文字\n";
+                    ctl.Text = "";
+                }
+                else
+                    richTextBox1.Text += "\n";
+            }
 
         }
 

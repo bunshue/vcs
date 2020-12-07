@@ -42,6 +42,19 @@ namespace vcs_test_all_00_Control
                 FontStyle.Bold);
 
             lb_checkbox_CheckState.Text = "";
+
+            // Give the ellipsis button's image a transparent background.
+            MakeButtonTransparent(button35);
+        }
+
+        // 做出 去背景 的效果
+        // Give the button a transparent background.
+        private void MakeButtonTransparent(Button btn)
+        {
+            //richTextBox1.Text += "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
+            Bitmap bm = (Bitmap)btn.Image;
+            bm.MakeTransparent(bm.GetPixel(0, 0));
+            btn.Image = bm;
         }
 
         int i = 0;
