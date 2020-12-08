@@ -17,12 +17,24 @@ namespace vcs_Remove_Bin_Obj
         List<string> filename_backup = new List<string>();   //宣告string型態的List
         string search_path = string.Empty;
 
+        bool flag_use_my_vcs = false;            //刪除 my_vcs test
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
+            if (flag_use_my_vcs == true)
+            {
+                currentPath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\..\..\"));
+                richTextBox1.Text += "currentPath = " + currentPath + "\n";
+            }
+
             label1.Text = "目前位置 : " + currentPath;
             //richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
             search_path = currentPath;
@@ -133,6 +145,67 @@ namespace vcs_Remove_Bin_Obj
             for (i = 0; i < len; i++)
             {
                 //richTextBox1.Text += "資料夾 : " + folder_name[i] + "\n";
+
+                if (folder_name[i].Contains("bin"))
+                {
+                    if (folder_name[i].Contains("imsLink"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_Remove_Bin_Obj"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_DrAP"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_JSON"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_ColorTemperature"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_SlideShowString"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_AnalysisArticle"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("__非AForge"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_test_all_08_MediaInfo"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("vcs_ReadWrite_QR_code"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("WindowsFormsApplication1"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("qqqq"))
+                    {
+                        continue;
+                    }
+                }
+
+                if (folder_name[i].Contains("ExifLibrary"))
+                {
+                    continue;
+                }
+                else if (folder_name[i].Contains("vcs_Remove_Bin_Obj"))
+                {
+                    continue;
+                }
 
                 if (Directory.Exists(folder_name[i]))     //確認資料夾是否存在
                 {
@@ -308,8 +381,6 @@ namespace vcs_Remove_Bin_Obj
         {
             richTextBox1.Clear();
         }
-
-
 
 
 
