@@ -51,7 +51,6 @@ namespace vcs_test_all_00_Control
         // Give the button a transparent background.
         private void MakeButtonTransparent(Button btn)
         {
-            //richTextBox1.Text += "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
             Bitmap bm = (Bitmap)btn.Image;
             bm.MakeTransparent(bm.GetPixel(0, 0));
             btn.Image = bm;
