@@ -489,6 +489,25 @@ namespace vcs_test_all_10_Math_Random
 
         private void button13_Click(object sender, EventArgs e)
         {
+            double number;
+            double root;
+            double result;
+            double check;
+
+            number = 125;
+            root = 3;
+            result = Math.Pow(number, 1 / root);
+            richTextBox1.Text += "計算 :\t" + number.ToString() + " 的 " + root.ToString() + " 次方根 :\t" + result.ToString() + "\n";
+            check = Math.Pow(result, root);
+            richTextBox1.Text += "驗算 :\t" + result.ToString() + " 的 " + root.ToString() + " 次方 :\t" + check.ToString() + "\n";
+
+            number = 123;
+            root = 2.34;
+            result = Math.Pow(number, 1 / root);
+            richTextBox1.Text += "計算 :\t" + number.ToString() + " 的 " + root.ToString() + " 次方根 :\t" + result.ToString() + "\n";
+            check = Math.Pow(result, root);
+            richTextBox1.Text += "驗算 :\t" + result.ToString() + " 的 " + root.ToString() + " 次方 :\t" + check.ToString() + "\n";
+
         }
 
         public static string GetRandomString2(int length)

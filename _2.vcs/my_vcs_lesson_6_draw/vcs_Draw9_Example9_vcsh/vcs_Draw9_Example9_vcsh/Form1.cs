@@ -111,9 +111,146 @@ namespace vcs_Draw9_Example9_vcsh
             ClientSize = new Size(button2.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
         }
 
+        #region sierpinski
+
         private void button0_Click(object sender, EventArgs e)
         {
+            DrawGasket1();  //sierpinski_carpet
+
+            DrawGasket2();  //sierpinski_triangle
         }
+
+        // Draw the carpet.
+        private void DrawGasket1()
+        {
+            int Level = (int)numericUpDown1.Value;
+
+            Bitmap bm = new Bitmap(
+                pictureBox2.ClientSize.Width,
+                pictureBox2.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Draw the top-level carpet.
+                const float margin = 10;
+                RectangleF rect = new RectangleF(
+                    margin, margin,
+                    pictureBox2.ClientSize.Width - 2 * margin,
+                    pictureBox2.ClientSize.Height - 2 * margin);
+                DrawRectangle(gr, Level, rect);
+            }
+
+            // Display the result.
+            pictureBox2.Image = bm;
+
+            // Save the bitmap into a file.
+            bm.Save("Carpet " + Level + ".bmp");
+        }
+
+        // Draw a carpet in the rectangle.
+        private void DrawRectangle(Graphics gr, int level, RectangleF rect)
+        {
+            // See if we should stop.
+            if (level == 0)
+            {
+                // Fill the rectangle.
+                gr.FillRectangle(Brushes.Blue, rect);
+            }
+            else
+            {
+                // Divide the rectangle into 9 pieces.
+                float wid = rect.Width / 3f;
+                float x0 = rect.Left;
+                float x1 = x0 + wid;
+                float x2 = x0 + wid * 2f;
+
+                float hgt = rect.Height / 3f;
+                float y0 = rect.Top;
+                float y1 = y0 + hgt;
+                float y2 = y0 + hgt * 2f;
+
+                // Recursively draw smaller carpets.
+                DrawRectangle(gr, level - 1, new RectangleF(x0, y0, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x1, y0, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x2, y0, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x0, y1, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x2, y1, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x0, y2, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x1, y2, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x2, y2, wid, hgt));
+            }
+        }
+
+        // Draw the triangle.
+        private void DrawGasket2()
+        {
+            int Level = (int)numericUpDown1.Value;
+
+            Bitmap bm = new Bitmap(
+                pictureBox3.ClientSize.Width,
+                pictureBox3.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Draw the top-level triangle.
+                const float margin = 10;
+                PointF top_point = new PointF(
+                    pictureBox3.ClientSize.Width / 2f,
+                    margin);
+                PointF left_point = new PointF(
+                    margin,
+                    pictureBox3.ClientSize.Height - margin);
+                PointF right_point = new PointF(
+                    pictureBox3.ClientRectangle.Right - margin,
+                    pictureBox3.ClientRectangle.Bottom - margin);
+                DrawTriangle(gr, Level, top_point, left_point, right_point);
+            }
+
+            // Display the result.
+            pictureBox3.Image = bm;
+
+            // Save the bitmap into a file.
+            bm.Save("Triangle " + Level + ".bmp");
+        }
+
+        // Draw a triangle between the points.
+        private void DrawTriangle(Graphics gr, int level,
+            PointF top_point, PointF left_point, PointF right_point)
+        {
+            // See if we should stop.
+            if (level == 0)
+            {
+                // Fill the triangle.
+                PointF[] points =
+                {
+                    top_point, right_point, left_point
+                };
+                gr.FillPolygon(Brushes.Red, points);
+            }
+            else
+            {
+                // Find the edge midpoints.
+                PointF left_mid = new PointF(
+                    (top_point.X + left_point.X) / 2f,
+                    (top_point.Y + left_point.Y) / 2f);
+                PointF right_mid = new PointF(
+                    (top_point.X + right_point.X) / 2f,
+                    (top_point.Y + right_point.Y) / 2f);
+                PointF bottom_mid = new PointF(
+                    (left_point.X + right_point.X) / 2f,
+                    (left_point.Y + right_point.Y) / 2f);
+
+                // Recursively draw smaller triangles.
+                DrawTriangle(gr, level - 1, top_point, left_mid, right_mid);
+                DrawTriangle(gr, level - 1, left_mid, left_point, bottom_mid);
+                DrawTriangle(gr, level - 1, right_mid, bottom_mid, right_point);
+            }
+        }
+        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {

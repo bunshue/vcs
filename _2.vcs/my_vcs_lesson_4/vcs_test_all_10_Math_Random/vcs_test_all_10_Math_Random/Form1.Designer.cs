@@ -231,6 +231,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(207, 50);
             this.button13.TabIndex = 13;
+            this.button13.Text = "N次方根";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

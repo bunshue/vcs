@@ -17,8 +17,6 @@ namespace vcs_Remove_Bin_Obj
         List<string> filename_backup = new List<string>();   //宣告string型態的List
         string search_path = string.Empty;
 
-        bool flag_use_my_vcs = false;            //刪除 my_vcs test
-
         public Form1()
         {
             InitializeComponent();
@@ -29,11 +27,6 @@ namespace vcs_Remove_Bin_Obj
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
-            if (flag_use_my_vcs == true)
-            {
-                currentPath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\..\..\..\"));
-                richTextBox1.Text += "currentPath = " + currentPath + "\n";
-            }
 
             label1.Text = "目前位置 : " + currentPath;
             //richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
@@ -152,10 +145,6 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("vcs_Remove_Bin_Obj"))
-                    {
-                        continue;
-                    }
                     else if (folder_name[i].Contains("vcs_DrAP"))
                     {
                         continue;
@@ -199,10 +188,6 @@ namespace vcs_Remove_Bin_Obj
                 }
 
                 if (folder_name[i].Contains("ExifLibrary"))
-                {
-                    continue;
-                }
-                else if (folder_name[i].Contains("vcs_Remove_Bin_Obj"))
                 {
                     continue;
                 }

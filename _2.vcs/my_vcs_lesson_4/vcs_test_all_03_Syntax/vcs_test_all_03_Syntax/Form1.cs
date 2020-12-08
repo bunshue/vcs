@@ -21,6 +21,10 @@ namespace vcs_test_all_03_Syntax
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
             textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
@@ -28,6 +32,17 @@ namespace vcs_test_all_03_Syntax
             txtInput.MaxLength = 10;//設定字元數最大值
             //txtInput.Focus();//程式啟動就把焦點移到txtInput
             this.AcceptButton = button36;//按下enter就觸發button click事件
+
+            //顯示特殊符號
+            lb_symbols_2.Text = "\u0460♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
+            tb_symbols_2.Text = "\u0460♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
+
+            string txt = "";
+            for (int i = 0x460; i < 0x470; i++)
+            {
+                txt += (char)i;
+            }
+            lb_symbols_3.Text = txt;
         }
 
         void show_item_location()

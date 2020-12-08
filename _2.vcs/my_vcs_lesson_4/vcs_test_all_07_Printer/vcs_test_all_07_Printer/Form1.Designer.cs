@@ -51,7 +51,21 @@
             this.printPreviewDialog_Calendar = new System.Windows.Forms.PrintPreviewDialog();
             this.printPreviewDialog_grid = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument_grid = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_star = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument_star = new System.Drawing.Printing.PrintDocument();
+            this.txtRadius = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nudSkip = new System.Windows.Forms.NumericUpDown();
+            this.nudPoints = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox_star = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             this.SuspendLayout();
             // 
             // button0
@@ -69,7 +83,7 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(16, 538);
+            this.button9.Location = new System.Drawing.Point(16, 685);
             this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(259, 50);
@@ -104,18 +118,19 @@
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(16, 410);
+            this.button7.Location = new System.Drawing.Point(54, 119);
             this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(259, 50);
+            this.button7.Size = new System.Drawing.Size(159, 45);
             this.button7.TabIndex = 31;
+            this.button7.Text = "預覽列印 Star";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(16, 468);
+            this.button8.Location = new System.Drawing.Point(16, 615);
             this.button8.Margin = new System.Windows.Forms.Padding(4);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(259, 50);
@@ -268,11 +283,138 @@
             // 
             this.printDocument_grid.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_grid_PrintPage);
             // 
+            // printPreviewDialog_star
+            // 
+            this.printPreviewDialog_star.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_star.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_star.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_star.Document = this.printDocument_star;
+            this.printPreviewDialog_star.Enabled = true;
+            this.printPreviewDialog_star.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_star.Icon")));
+            this.printPreviewDialog_star.Name = "printPreviewDialog_star";
+            this.printPreviewDialog_star.Visible = false;
+            // 
+            // printDocument_star
+            // 
+            this.printDocument_star.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_star_PrintPage);
+            // 
+            // txtRadius
+            // 
+            this.txtRadius.Location = new System.Drawing.Point(134, 84);
+            this.txtRadius.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtRadius.Name = "txtRadius";
+            this.txtRadius.Size = new System.Drawing.Size(79, 25);
+            this.txtRadius.TabIndex = 54;
+            this.txtRadius.Text = "100";
+            this.txtRadius.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(57, 87);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 15);
+            this.label3.TabIndex = 53;
+            this.label3.Text = "Diameter:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(57, 57);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 15);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "Skip:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(57, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 15);
+            this.label1.TabIndex = 51;
+            this.label1.Text = "# Points:";
+            // 
+            // nudSkip
+            // 
+            this.nudSkip.Location = new System.Drawing.Point(134, 55);
+            this.nudSkip.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.nudSkip.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudSkip.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSkip.Name = "nudSkip";
+            this.nudSkip.Size = new System.Drawing.Size(80, 25);
+            this.nudSkip.TabIndex = 50;
+            this.nudSkip.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudSkip.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudSkip.ValueChanged += new System.EventHandler(this.nudSkip_ValueChanged);
+            // 
+            // nudPoints
+            // 
+            this.nudPoints.Location = new System.Drawing.Point(134, 25);
+            this.nudPoints.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.nudPoints.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudPoints.Name = "nudPoints";
+            this.nudPoints.Size = new System.Drawing.Size(80, 25);
+            this.nudPoints.TabIndex = 49;
+            this.nudPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudPoints.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.nudPoints.ValueChanged += new System.EventHandler(this.nudPoints_ValueChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtRadius);
+            this.groupBox1.Controls.Add(this.nudPoints);
+            this.groupBox1.Controls.Add(this.nudSkip);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Location = new System.Drawing.Point(16, 409);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(259, 178);
+            this.groupBox1.TabIndex = 55;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "預覽列印 Star";
+            // 
+            // pictureBox_star
+            // 
+            this.pictureBox_star.Location = new System.Drawing.Point(301, 513);
+            this.pictureBox_star.Name = "pictureBox_star";
+            this.pictureBox_star.Size = new System.Drawing.Size(299, 265);
+            this.pictureBox_star.TabIndex = 56;
+            this.pictureBox_star.TabStop = false;
+            this.pictureBox_star.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_star_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1372, 790);
+            this.Controls.Add(this.pictureBox_star);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -280,7 +422,6 @@
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -291,6 +432,11 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -319,6 +465,16 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_Calendar;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid;
         private System.Drawing.Printing.PrintDocument printDocument_grid;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_star;
+        private System.Drawing.Printing.PrintDocument printDocument_star;
+        private System.Windows.Forms.TextBox txtRadius;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nudSkip;
+        private System.Windows.Forms.NumericUpDown nudPoints;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox_star;
     }
 }
 
