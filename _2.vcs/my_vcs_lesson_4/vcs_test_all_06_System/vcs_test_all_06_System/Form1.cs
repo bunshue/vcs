@@ -129,13 +129,10 @@ namespace vcs_test_all_06_System
             label5.Text = "";
 
             bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13);
-
             bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 13);
-
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -986,7 +983,6 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "WorkingArea Y = " + Screen.PrimaryScreen.WorkingArea.Y.ToString() + "\n";
             richTextBox1.Text += "WorkingArea Width = " + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
             richTextBox1.Text += "WorkingArea Height = " + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
-
         }
 
         private void button46_Click(object sender, EventArgs e)
@@ -1036,8 +1032,56 @@ namespace vcs_test_all_06_System
             richTextBox1.Text += "Default.Delay" + "\t" + Properties.Settings.Default.Delay.ToString() + "\n";
         }
 
+        #region Windows 開關機
+        [DllImport("user32")]
+        public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
 
+        [DllImport("user32")]
+        public static extern void LockWorkStation();
 
+        // Shutdown.
+        private void btnShutdown_Click(object sender, EventArgs e)
+        {
+            var psi = new ProcessStartInfo("shutdown", "/s /t 0");
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+            Process.Start(psi);
+        }
+
+        // Reboot.
+        private void btnReboot_Click(object sender, EventArgs e)
+        {
+            var psi = new ProcessStartInfo("shutdown", "/r /t 0");
+            psi.CreateNoWindow = true;
+            psi.UseShellExecute = false;
+            Process.Start(psi);
+        }
+
+        // Log off.
+        private void btnLogOff_Click(object sender, EventArgs e)
+        {
+            ExitWindowsEx(0, 0);
+        }
+
+        // Lock.
+        private void btnLock_Click(object sender, EventArgs e)
+        {
+            LockWorkStation();
+        }
+
+        // Hibernate.
+        private void btnHibernate_Click(object sender, EventArgs e)
+        {
+            Application.SetSuspendState(PowerState.Hibernate, true, true);
+        }
+
+        // Sleep.
+        private void btnSleep_Click(object sender, EventArgs e)
+        {
+            Application.SetSuspendState(PowerState.Suspend, true, true);
+        }
+
+        #endregion
 
 
     }

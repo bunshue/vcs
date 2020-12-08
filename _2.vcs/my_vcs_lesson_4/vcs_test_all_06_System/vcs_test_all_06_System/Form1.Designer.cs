@@ -90,15 +90,23 @@
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lb_cursor = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSleep = new System.Windows.Forms.Button();
+            this.btnHibernate = new System.Windows.Forms.Button();
+            this.btnLock = new System.Windows.Forms.Button();
+            this.btnLogOff = new System.Windows.Forms.Button();
+            this.btnReboot = new System.Windows.Forms.Button();
+            this.btnShutdown = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(845, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1121, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(450, 590);
+            this.richTextBox1.Size = new System.Drawing.Size(174, 590);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -635,7 +643,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1072, 427);
+            this.bt_clear.Location = new System.Drawing.Point(1206, 461);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(73, 40);
             this.bt_clear.TabIndex = 65;
@@ -750,11 +758,87 @@
             this.lb_cursor.TabIndex = 74;
             this.lb_cursor.Text = "改變鼠標";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSleep);
+            this.groupBox1.Controls.Add(this.btnHibernate);
+            this.groupBox1.Controls.Add(this.btnLock);
+            this.groupBox1.Controls.Add(this.btnLogOff);
+            this.groupBox1.Controls.Add(this.btnReboot);
+            this.groupBox1.Controls.Add(this.btnShutdown);
+            this.groupBox1.Location = new System.Drawing.Point(849, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(191, 151);
+            this.groupBox1.TabIndex = 75;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Windows 開關機";
+            // 
+            // btnSleep
+            // 
+            this.btnSleep.Location = new System.Drawing.Point(98, 103);
+            this.btnSleep.Name = "btnSleep";
+            this.btnSleep.Size = new System.Drawing.Size(80, 35);
+            this.btnSleep.TabIndex = 11;
+            this.btnSleep.Text = "Sleep";
+            this.btnSleep.UseVisualStyleBackColor = true;
+            this.btnSleep.Click += new System.EventHandler(this.btnSleep_Click);
+            // 
+            // btnHibernate
+            // 
+            this.btnHibernate.Location = new System.Drawing.Point(12, 103);
+            this.btnHibernate.Name = "btnHibernate";
+            this.btnHibernate.Size = new System.Drawing.Size(80, 35);
+            this.btnHibernate.TabIndex = 10;
+            this.btnHibernate.Text = "Hibernate";
+            this.btnHibernate.UseVisualStyleBackColor = true;
+            this.btnHibernate.Click += new System.EventHandler(this.btnHibernate_Click);
+            // 
+            // btnLock
+            // 
+            this.btnLock.Location = new System.Drawing.Point(98, 62);
+            this.btnLock.Name = "btnLock";
+            this.btnLock.Size = new System.Drawing.Size(80, 35);
+            this.btnLock.TabIndex = 9;
+            this.btnLock.Text = "Lock";
+            this.btnLock.UseVisualStyleBackColor = true;
+            this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
+            // 
+            // btnLogOff
+            // 
+            this.btnLogOff.Location = new System.Drawing.Point(12, 62);
+            this.btnLogOff.Name = "btnLogOff";
+            this.btnLogOff.Size = new System.Drawing.Size(80, 35);
+            this.btnLogOff.TabIndex = 8;
+            this.btnLogOff.Text = "Log Off";
+            this.btnLogOff.UseVisualStyleBackColor = true;
+            this.btnLogOff.Click += new System.EventHandler(this.btnLogOff_Click);
+            // 
+            // btnReboot
+            // 
+            this.btnReboot.Location = new System.Drawing.Point(98, 21);
+            this.btnReboot.Name = "btnReboot";
+            this.btnReboot.Size = new System.Drawing.Size(80, 35);
+            this.btnReboot.TabIndex = 7;
+            this.btnReboot.Text = "Reboot";
+            this.btnReboot.UseVisualStyleBackColor = true;
+            this.btnReboot.Click += new System.EventHandler(this.btnReboot_Click);
+            // 
+            // btnShutdown
+            // 
+            this.btnShutdown.Location = new System.Drawing.Point(12, 21);
+            this.btnShutdown.Name = "btnShutdown";
+            this.btnShutdown.Size = new System.Drawing.Size(80, 35);
+            this.btnShutdown.TabIndex = 6;
+            this.btnShutdown.Text = "Shutdown";
+            this.btnShutdown.UseVisualStyleBackColor = true;
+            this.btnShutdown.Click += new System.EventHandler(this.btnShutdown_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1307, 614);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lb_cursor);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);
@@ -817,6 +901,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -885,6 +970,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label lb_cursor;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnSleep;
+        private System.Windows.Forms.Button btnHibernate;
+        private System.Windows.Forms.Button btnLock;
+        private System.Windows.Forms.Button btnLogOff;
+        private System.Windows.Forms.Button btnReboot;
+        private System.Windows.Forms.Button btnShutdown;
     }
 }
 

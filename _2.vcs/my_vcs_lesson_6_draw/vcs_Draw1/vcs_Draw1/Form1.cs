@@ -37,6 +37,8 @@ namespace vcs_Draw1
             pictureBox_uac.Image = UacStuff.GetUacShieldImage();
             // Add the shield to a button.
             UacStuff.AddShieldToButton(button29);
+
+            DrawPictureBoxText();
         }
 
         void show_item_location()
@@ -111,6 +113,9 @@ namespace vcs_Draw1
             panel2.Size = new Size(750, 100);
             panel2.Location = new Point(50, 570);
             panel2.BackColor = Color.Pink;
+
+
+            pictureBox_text.Location = new Point(50, 570 + 120);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1463,6 +1468,36 @@ namespace vcs_Draw1
             DrawIconSample(g, ref x, y, SystemIcons.WinLogo, "WinLogo");
         }
 
+        #region pictureBox_text
+        // Draw the text.
+        void DrawPictureBoxText()
+        {
+            // Make a Bitmap to hold the text.
+            Bitmap bm = new Bitmap(
+                pictureBox_text.ClientSize.Width,
+                pictureBox_text.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+
+                // Don't use TextRenderingHint.AntiAliasGridFit.
+                gr.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                // Make a font to use.
+                using (Font font = new Font("Times New Roman", 16, FontStyle.Regular))
+                {
+                    // Draw the text.
+                    DrawTextInBoxes(gr, font, 4, 4,
+                        "When in the course of human events it " +
+                        "becomes necessary for the quick brown " +
+                        "fox to jump over the lazy dog...");
+                }
+            }
+
+            // Display the result.
+            pictureBox_text.Image = bm;
+        }
+
         // Draw a sample and its name.
         private void DrawIconSample(Graphics gr, ref int x, int y, Icon ico, string ico_name)
         {
@@ -1471,6 +1506,104 @@ namespace vcs_Draw1
             gr.DrawString(ico_name, this.Font, Brushes.Black, x + ico.Width + 5, text_y);
             x += column_width;
         }
+
+        // Draw a long string with boxes around each character.
+        private void DrawTextInBoxes(Graphics gr, Font font,
+            float start_x, float start_y, string text)
+        {
+            // Measure the characters.
+            List<RectangleF> rects = MeasureCharacters(gr, font, text);
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                gr.DrawRectangle(Pens.Red,
+                    start_x + rects[i].Left, start_y + rects[i].Top,
+                    rects[i].Width, rects[i].Height);
+            }
+            gr.DrawString(text, font, Brushes.Blue, start_x, start_y);
+        }
+
+        // Measure the characters in the string.
+        private List<RectangleF> MeasureCharacters(Graphics gr, Font font, string text)
+        {
+            List<RectangleF> results = new List<RectangleF>();
+
+            // The X location for the next character.
+            float x = 0;
+
+            // Get the character sizes 31 characters at a time.
+            for (int start = 0; start < text.Length; start += 32)
+            {
+                // Get the substring.
+                int len = 32;
+                if (start + len >= text.Length) len = text.Length - start;
+                string substring = text.Substring(start, len);
+
+                // For debugging.
+                // Console.WriteLine(substring);
+
+                // Measure the characters.
+                List<RectangleF> rects = MeasureCharactersInWord(gr, font, substring);
+
+                // Remove lead-in for the first character.
+                if (start == 0) x += rects[0].Left;
+
+                // For debugging.
+                // Console.WriteLine(rects[0].Left);
+
+                // Save all but the last rectangle.
+                for (int i = 0; i < rects.Count + 1 - 1; i++)
+                {
+                    RectangleF new_rect = new RectangleF(
+                        x, rects[i].Top,
+                        rects[i].Width, rects[i].Height);
+                    results.Add(new_rect);
+
+                    // Move to the next character's X position.
+                    x += rects[i].Width;
+                }
+            }
+
+            // Return the results.
+            return results;
+        }
+
+        // Measure the characters in a string with
+        // no more than 32 characters.
+        private List<RectangleF> MeasureCharactersInWord(
+            Graphics gr, Font font, string text)
+        {
+            List<RectangleF> result = new List<RectangleF>();
+
+            using (StringFormat string_format = new StringFormat())
+            {
+                string_format.Alignment = StringAlignment.Near;
+                string_format.LineAlignment = StringAlignment.Near;
+                string_format.Trimming = StringTrimming.None;
+                string_format.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
+
+                CharacterRange[] ranges = new CharacterRange[text.Length];
+                for (int i = 0; i < text.Length; i++)
+                {
+                    ranges[i] = new CharacterRange(i, 1);
+                }
+                string_format.SetMeasurableCharacterRanges(ranges);
+
+                // Find the character ranges.
+                RectangleF rect = new RectangleF(0, 0, 10000, 100);
+                Region[] regions =
+                    gr.MeasureCharacterRanges(
+                        text, font, this.ClientRectangle,
+                        string_format);
+
+                // Convert the regions into rectangles.
+                foreach (Region region in regions)
+                    result.Add(region.GetBounds(gr));
+            }
+            return result;
+        }
+        #endregion
+
 
     }
 }

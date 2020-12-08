@@ -70,8 +70,10 @@
             this.button30 = new System.Windows.Forms.Button();
             this.button31 = new System.Windows.Forms.Button();
             this.pictureBox_uac = new System.Windows.Forms.PictureBox();
+            this.pictureBox_text = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -522,11 +524,22 @@
             this.pictureBox_uac.TabIndex = 57;
             this.pictureBox_uac.TabStop = false;
             // 
+            // pictureBox_text
+            // 
+            this.pictureBox_text.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_text.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_text.Location = new System.Drawing.Point(11, 721);
+            this.pictureBox_text.Name = "pictureBox_text";
+            this.pictureBox_text.Size = new System.Drawing.Size(882, 50);
+            this.pictureBox_text.TabIndex = 58;
+            this.pictureBox_text.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1517, 718);
+            this.ClientSize = new System.Drawing.Size(1517, 789);
+            this.Controls.Add(this.pictureBox_text);
             this.Controls.Add(this.pictureBox_uac);
             this.Controls.Add(this.button31);
             this.Controls.Add(this.button30);
@@ -578,6 +591,7 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -627,6 +641,7 @@
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.PictureBox pictureBox_uac;
+        private System.Windows.Forms.PictureBox pictureBox_text;
     }
 }
 

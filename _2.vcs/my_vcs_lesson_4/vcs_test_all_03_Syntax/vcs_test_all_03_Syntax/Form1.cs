@@ -1,4 +1,7 @@
-﻿using System;
+﻿#define TYPE1
+//#define TYPE2
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -931,7 +934,23 @@ namespace vcs_test_all_03_Syntax
             {
                 richTextBox1.Text += i.ToString() + '\t' + Numbers[i] + "\n";
             }
+        }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //三元運算子
+            richTextBox1.Text += (DateTime.Now.Hour < 12) ? "Good morning\n" : "Good afternoon\n";
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+#if TYPE1
+            richTextBox1.Text += "你使用了 #define TYPE1\n";
+#elif TYPE2
+            richTextBox1.Text += "你使用了 #define TYPE2\n";
+#else
+            richTextBox1.Text += "你沒有使用 #define\n";
+#endif
         }
 
     }

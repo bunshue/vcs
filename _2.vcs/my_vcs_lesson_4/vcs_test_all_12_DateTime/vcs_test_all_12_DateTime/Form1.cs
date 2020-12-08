@@ -517,6 +517,8 @@ namespace vcs_test_all_12_DateTime
             timer1.Interval = 1000;
             timer1.Enabled = true;
 
+            // Start with a sample date.
+            txtDate.Text = "11 March 2006, 9:15";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1057,9 +1059,9 @@ namespace vcs_test_all_12_DateTime
 
         private void button45_Click(object sender, EventArgs e)
         {
-
-
-
+            //一段時間以後的寫法
+            DateTime EventDate = DateTime.Now + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
+            richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + EventDate.ToString() + "\n";
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -1164,10 +1166,38 @@ new System.Globalization.ChineseLunisolarCalendar();
                 if (name.Length > 0)
                 {
                     richTextBox1.Text += name + "\n";
-
                 }
             }
 
+            for (int i = 0; i < 7; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + CultureInfo.CurrentCulture.DateTimeFormat.DayNames[i] + "\n";
+            }
+        }
+
+        // If the text is a date, display
+        // the elapsed time between then and now.
+        private void txtDate_TextChanged(object sender, EventArgs e)
+        {
+            DateTime date;
+            if (DateTime.TryParse(txtDate.Text, out date))
+            {
+                txtParsed.Text = date.ToString();
+
+                TimeSpan elapsed = DateTime.Now - date;
+                txtDays.Text = elapsed.TotalDays.ToString();
+                txtHours.Text = elapsed.TotalHours.ToString();
+                txtMinutes.Text = elapsed.TotalMinutes.ToString();
+                txtSeconds.Text = elapsed.TotalSeconds.ToString();
+            }
+            else
+            {
+                txtParsed.Clear();
+                txtDays.Clear();
+                txtHours.Clear();
+                txtMinutes.Clear();
+                txtSeconds.Clear();
+            }
         }
     }
 }

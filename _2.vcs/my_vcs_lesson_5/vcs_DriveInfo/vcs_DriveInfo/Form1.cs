@@ -32,6 +32,13 @@ namespace vcs_DriveInfo
                 comboBox_drive.Items.Add(d.Name);
             }
 
+            /*  same
+            foreach (DriveInfo d in DriveInfo.GetDrives())
+            {
+                comboBox_drive.Items.Add(d.Name);
+            }
+            */
+
             /*   same
             if (comboBox_drive.Items.Count > 0)
                 comboBox_drive.Text = comboBox_drive.Items[0].ToString();
@@ -65,8 +72,13 @@ namespace vcs_DriveInfo
                 comboBox_drive.Items.Add(disk["Name"].ToString());
             }
 
+            //same
             if (comboBox_drive.Items.Count > 0)
+            {
                 comboBox_drive.Text = comboBox_drive.Items[0].ToString();
+            }
+            //same
+            comboBox_drive.SelectedIndex = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -118,6 +130,36 @@ namespace vcs_DriveInfo
             {
                 richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒\n";
             }
+
+            //another
+            // Display information about the selected drive.
+            string drive_letter = comboBox_drive.Text.Substring(0, 1);
+            richTextBox1.Text += "drive_letter\t" + drive_letter + "\n";
+
+            DriveInfo di = new DriveInfo(drive_letter);
+
+            richTextBox1.Text += "IsReady\t" + di.IsReady + "\n";
+            richTextBox1.Text += "DriveType\t" + di.DriveType + "\n";
+            richTextBox1.Text += "Name\t" + di.Name + "\n";
+            richTextBox1.Text += "RootDirectory\t" + di.RootDirectory.Name + "\n";
+
+            if (di.IsReady)
+            {
+                richTextBox1.Text += "DriveFormat\t" + di.DriveFormat + "\n";
+                richTextBox1.Text += "AvailableFreeSpace\t" + di.AvailableFreeSpace.ToString() + "\n";
+                richTextBox1.Text += "TotalFreeSize\t" + di.TotalFreeSpace.ToString() + "\n";
+                richTextBox1.Text += "TotalSize\t" + di.TotalSize.ToString() + "\n";
+                richTextBox1.Text += "VolumeLabel\t" + di.VolumeLabel + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "磁碟未Ready\n";
+            }
+
+
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
