@@ -50,6 +50,7 @@
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_random9 = new System.Windows.Forms.Button();
             this.bt_random8 = new System.Windows.Forms.Button();
             this.bt_random7 = new System.Windows.Forms.Button();
             this.bt_random2 = new System.Windows.Forms.Button();
@@ -243,6 +244,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(207, 50);
             this.button14.TabIndex = 14;
+            this.button14.Text = "數字拆成立方和";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -316,6 +318,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_random9);
             this.groupBox1.Controls.Add(this.bt_random8);
             this.groupBox1.Controls.Add(this.bt_random7);
             this.groupBox1.Controls.Add(this.bt_random2);
@@ -328,10 +331,22 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(237, 592);
+            this.groupBox1.Size = new System.Drawing.Size(237, 616);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "亂數";
+            // 
+            // bt_random9
+            // 
+            this.bt_random9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random9.Location = new System.Drawing.Point(22, 540);
+            this.bt_random9.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_random9.Name = "bt_random9";
+            this.bt_random9.Size = new System.Drawing.Size(207, 50);
+            this.bt_random9.TabIndex = 30;
+            this.bt_random9.Text = "整個array都變成亂數陣列";
+            this.bt_random9.UseVisualStyleBackColor = true;
+            this.bt_random9.Click += new System.EventHandler(this.bt_random9_Click);
             // 
             // bt_random8
             // 
@@ -601,6 +616,7 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bt_random9;
     }
 }
 

@@ -1604,6 +1604,44 @@ namespace vcs_Draw1
         }
         #endregion
 
+        private void button30_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "尚未開啟檔案\n";
+                return;
+            }
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Point[] pts =
+            {
+                new Point(W / 2, 0),    //上
+                new Point(W, H / 2),    //右
+                new Point(W / 2, H),    //下
+                new Point(0, H / 2),    //左
+            };
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.DrawPolygon(Pens.Blue, pts);
+
+            Point[] pts2 =
+            {
+                new Point(W / 2, H/6),
+                new Point(W, H / 2),
+                new Point(W / 2, H*5/6),
+                new Point(0, H / 2),
+            };
+            g.FillPolygon(new SolidBrush(Color.Red), pts2);
+
+            sb = new SolidBrush(Color.Purple);
+            g.FillPolygon(sb, pts2);
+
+            p = new Pen(Color.Red, 5);
+            g.DrawPolygon(p, pts2);
+
+            pictureBox1.Image = bitmap1;
+        }
+
 
     }
 }

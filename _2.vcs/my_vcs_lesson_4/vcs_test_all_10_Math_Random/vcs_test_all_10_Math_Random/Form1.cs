@@ -82,6 +82,7 @@ namespace vcs_test_all_10_Math_Random
             bt_random6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             bt_random7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            bt_random9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
 
 
@@ -556,6 +557,52 @@ namespace vcs_test_all_10_Math_Random
 
         private void button14_Click(object sender, EventArgs e)
         {
+            long A;
+            long max_B;
+            long remainder;
+            long C;
+
+            A = 96679683;
+            richTextBox1.Text += "數字 " + A.ToString() + " 拆成立方和\n";
+            max_B = (long)Math.Pow(A / 2.0, 1.0 / 3.0);
+            if (2 * max_B * max_B * max_B < A)
+                max_B++;
+
+            // Try numbers up to the cube root of A.
+            for (int B = 0; B <= max_B; B++)
+            {
+                remainder = A - (B * B * B);
+                C = (long)Math.Round(Math.Pow(remainder, 1.0 / 3.0));
+                if (C * C * C == remainder)
+                {
+                    richTextBox1.Text +=
+                        B + "^3 + " +
+                        C + "^3 = " +
+                        (B * B * B) + " + " + (C * C * C) + "\n";
+                }
+            }
+
+            A = 87539319;
+            richTextBox1.Text += "數字 " + A.ToString() + " 拆成立方和\n";
+            max_B = (long)Math.Pow(A / 2.0, 1.0 / 3.0);
+            if (2 * max_B * max_B * max_B < A)
+                max_B++;
+
+            // Try numbers up to the cube root of A.
+            for (int B = 0; B <= max_B; B++)
+            {
+                remainder = A - (B * B * B);
+                C = (long)Math.Round(Math.Pow(remainder, 1.0 / 3.0));
+                if (C * C * C == remainder)
+                {
+                    richTextBox1.Text +=
+                        B + "^3 + " +
+                        C + "^3 = " +
+                        (B * B * B) + " + " + (C * C * C) + "\n";
+                }
+            }
+
+
         }
 
 
@@ -839,8 +886,6 @@ namespace vcs_test_all_10_Math_Random
                 }
             }
             richTextBox1.Text += "\n";
-
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -933,6 +978,45 @@ namespace vcs_test_all_10_Math_Random
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void bt_random9_Click(object sender, EventArgs e)
+        {
+            int i;
+            int N = 30;
+            // Make an array to hold the assignment.
+            int[] aa = new int[N];
+            for (i = 0; i < N; i++)
+                aa[i] = i;
+            richTextBox1.Text += "原陣列\n";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += aa[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            //Randomize the array
+            RandomizeArray(aa);
+            richTextBox1.Text += "新陣列\n";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += aa[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+        }
+
+        //Randomize the array
+        void RandomizeArray(int[] items)
+        {
+            Random Rand = new Random();
+            for (int i = 0; i < items.Length - 1; i++)
+            {
+                int j = Rand.Next(i, items.Length);
+                int temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
         }
 
 
