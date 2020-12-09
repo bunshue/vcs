@@ -74,7 +74,11 @@ namespace vcs_Draw3
 
             show_item_location();
             //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            this.DoubleBuffered = true;
+
+            //for atom
+            // Enable double buffering.
+            // Reduce flicker.
+            DoubleBuffered = true;
 
             //for gear
             // Load the frames.
@@ -87,10 +91,6 @@ namespace vcs_Draw3
             pictureBox_gear.Image = Frames[FrameNum];
             // Size the form to fit.
             ClientSize = new Size(pictureBox_gear.Right + pictureBox_gear.Left, pictureBox_gear.Bottom + pictureBox_gear.Left);
-
-            //for atom
-            // Enable double buffering.
-            this.DoubleBuffered = true;
 
             // Make the Bitmap and associated Graphics object.
             Background = new Bitmap(300, 300);
@@ -153,7 +153,6 @@ namespace vcs_Draw3
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MinimizeBox = false;
             MaximizeBox = false;
-            DoubleBuffered = true;
             StartPosition = FormStartPosition.CenterScreen;
 
 

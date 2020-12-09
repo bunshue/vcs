@@ -1,4 +1,5 @@
-﻿using System;
+﻿// #define SAVE_FRAMES
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +29,29 @@ namespace vcs_Draw9_Example8_vcsh
         // A 2-D array holding the squares.
         private Label[,] Squares;
 
+        //for histogram
+        private const int MIN_VALUE = 0;
+        private const int MAX_VALUE = 100;
+        private float[] DataValues = new float[10];
+        private Matrix Transformation;
+
+
+        //for age
+        // The mean and standard deviation data.
+        private const int MinAge = 6;
+        private float[] Means = { 62, 56, 43, 42, 39, 36, 32, 31, };
+        private float[] StdDevs = { 15, 9, 8, 8, 7, 5, 5, 6, };
+
+        // Some test points.
+        private PointF[] TestPoints =
+        {
+            new PointF(6, 58),
+            new PointF(7, 63),
+            new PointF(9, 55),
+            new PointF(11, 39),
+            new PointF(13, 29),
+        };
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +59,9 @@ namespace vcs_Draw9_Example8_vcsh
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Reduce flicker.
+            DoubleBuffered = true;
+
             show_item_location();
             DrawHistogram();
 
@@ -49,6 +76,13 @@ namespace vcs_Draw9_Example8_vcsh
 
             DrawHeart();
             DrawRose();
+            DrawGraph(MinAge, Means, StdDevs);  //age
+
+            //for histogram
+            Random rnd = new Random();
+            // Create data.
+            for (int i = 0; i < DataValues.Length; i++)
+                DataValues[i] = rnd.Next(MIN_VALUE + 5, MAX_VALUE - 5);
         }
 
         void show_item_location()
@@ -68,39 +102,10 @@ namespace vcs_Draw9_Example8_vcsh
             dx = 140;
             dy = 55;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 25);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             x_st = 10;
             y_st = 10;
@@ -112,8 +117,8 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox3.Size = new Size(W, H);
             pictureBox4.Size = new Size(W, H);
             pictureBox5.Size = new Size(W, H);
-            pictureBox6.Size = new Size(W, H);
-            pictureBox7.Size = new Size(W, H);
+            pictureBox_histogram.Size = new Size(W, H);
+            pictureBox_age.Size = new Size(W, H);
             pictureBox8.Size = new Size(W * 2 + 10, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -122,14 +127,15 @@ namespace vcs_Draw9_Example8_vcsh
 
             pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox_histogram.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            pictureBox7.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_age.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
 
+            richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            ClientSize = new Size(button2.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
+            ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
         }
 
         void DrawHistogram()
@@ -170,90 +176,6 @@ namespace vcs_Draw9_Example8_vcsh
                 labels[i].Top = labels[i].Bottom - height;
                 labels[i].Height = height;
             }
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -599,6 +521,396 @@ namespace vcs_Draw9_Example8_vcsh
             // Restore the graphics state.
             gr.Restore(state);
         }
+
+
+        #region pictureBox3齒輪運轉圖
+
+        // The angle used as the gears' origins.
+        private float StartAngle = 0;
+#if SAVE_FRAMES
+        private float dStartAngle = (float)(Math.PI / 45);
+#else
+        private float dStartAngle = (float)(Math.PI / 180);
+#endif
+
+        // Draw the gear.
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            // Draw smoothly.
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            const float radius = 50;
+            const float tooth_length = 10;
+            float x = pictureBox3.ClientSize.Width / 2 - radius - tooth_length - 1;
+            float y = pictureBox3.ClientSize.Height / 3;
+            DrawGear(StartAngle, e.Graphics, Brushes.Black, Brushes.LightBlue, Pens.Blue, new PointF(x, y),
+                radius, tooth_length, 10, 5, true);
+
+            x += 2 * radius + tooth_length + 2;
+            DrawGear(-StartAngle, e.Graphics, Brushes.Black, Brushes.LightGreen, Pens.Green, new PointF(x, y),
+                radius, tooth_length, 10, 5, false);
+
+            y += 2f * radius + tooth_length + 2;
+            DrawGear(StartAngle, e.Graphics, Brushes.Black, Brushes.Pink, Pens.Red, new PointF(x, y),
+                radius, tooth_length, 10, 5, true);
+        }
+
+        // Draw a gear.
+        private void DrawGear(float start_angle, Graphics gr, Brush axle_brush, Brush gear_brush, Pen gear_pen, PointF center, float radius, float tooth_length, int num_teeth, float axle_radius, bool start_with_tooth)
+        {
+            float dtheta = (float)(Math.PI / num_teeth);
+            float dtheta_degrees = (float)(dtheta * 180 / Math.PI);     // dtheta in degrees.
+
+            const float chamfer = 2;
+            float tooth_width = radius * dtheta - chamfer;
+            float alpha = tooth_width / (radius + tooth_length);
+            float alpha_degrees = (float)(alpha * 180 / Math.PI);
+            float phi = (dtheta - alpha) / 2;
+
+            // Set theta for the beginning of the first tooth.
+            float theta = start_angle;
+            if (start_with_tooth) theta += dtheta / 2;
+            else theta -= dtheta / 2;
+
+            // Make rectangles to represent the gear's inner and outer arcs.
+            RectangleF inner_rect = new RectangleF(
+                center.X - radius, center.Y - radius,
+                2 * radius, 2 * radius);
+            RectangleF outer_rect = new RectangleF(
+                center.X - radius - tooth_length, center.Y - radius - tooth_length,
+                2 * (radius + tooth_length), 2 * (radius + tooth_length));
+
+            // Make a path representing the gear.
+            GraphicsPath path = new GraphicsPath();
+            for (int i = 0; i < num_teeth; i++)
+            {
+                // Move across the gap between teeth.
+                float degrees = (float)(theta * 180 / Math.PI);
+                path.AddArc(inner_rect, degrees, dtheta_degrees);
+                theta += dtheta;
+
+                // Move across the tooth's outer edge.
+                degrees = (float)((theta + phi) * 180 / Math.PI);
+                path.AddArc(outer_rect, degrees, alpha_degrees);
+                theta += dtheta;
+            }
+
+            path.CloseFigure();
+
+            // Draw the gear.
+            gr.FillPath(gear_brush, path);
+            gr.DrawPath(gear_pen, path);
+            gr.FillEllipse(axle_brush,
+                center.X - axle_radius, center.Y - axle_radius,
+                2 * axle_radius, 2 * axle_radius);
+        }
+
+        // Increment the gears' start angle and redraw.
+        private void timer_gear_Tick(object sender, EventArgs e)
+        {
+            StartAngle += dStartAngle;
+            pictureBox3.Refresh();
+
+#if SAVE_FRAMES
+            if (frame_num < 9)
+            {
+                Bitmap bm = GetControlImage(this);
+                bm.Save("Frame" + frame_num.ToString() + ".png",
+                    System.Drawing.Imaging.ImageFormat.Png);
+                frame_num++;
+            }
+#endif
+        }
+
+#if SAVE_FRAMES
+        private int frame_num = 0;
+
+        // Return a Bitmap holding an image of the control.
+        private Bitmap GetControlImage(Control ctl)
+        {
+            Bitmap bm = new Bitmap(ctl.Width, ctl.Height);
+            ctl.DrawToBitmap(bm, new Rectangle(0, 0, ctl.Width, ctl.Height));
+            return bm;
+        }
+#endif
+        #endregion
+
+        #region pictureBox_histogram 柱狀圖
+
+        // Draw the histogram.
+        private void pictureBox_histogram_Paint(object sender, PaintEventArgs e)
+        {
+            DrawHistogram(e.Graphics, pictureBox_histogram.BackColor, DataValues, pictureBox_histogram.ClientSize.Width, pictureBox_histogram.ClientSize.Height);
+
+            Font f = new Font("Comic Sans MS", 15);
+            e.Graphics.DrawString("點選柱狀圖", f, new SolidBrush(Color.Red), 5, 5);
+        }
+
+        // Redraw.
+        private void pictureBox_histogram_Resize(object sender, EventArgs e)
+        {
+            pictureBox_histogram.Refresh();
+        }
+
+        // Draw a histogram.
+        private void DrawHistogram(Graphics gr, Color back_color, float[] values, int width, int height)
+        {
+            Color[] Colors = new Color[] {
+                Color.Red, Color.LightGreen, Color.Blue,
+                Color.Pink, Color.Green, Color.LightBlue,
+                Color.Orange, Color.Yellow, Color.Purple
+            };
+
+            gr.Clear(back_color);
+
+            // Make a transformation to the PictureBox.
+            RectangleF data_bounds = new RectangleF(0, 0, values.Length, MAX_VALUE);
+            PointF[] points =
+            {
+                new PointF(0, height),
+                new PointF(width, height),
+                new PointF(0, 0)
+            };
+            Transformation = new Matrix(data_bounds, points);
+            gr.Transform = Transformation;
+
+            // Draw the histogram.
+            using (Pen thin_pen = new Pen(Color.Black, 0))
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    RectangleF rect = new RectangleF(i, 0, 1, values[i]);
+                    using (Brush the_brush = new SolidBrush(Colors[i % Colors.Length]))
+                    {
+                        gr.FillRectangle(the_brush, rect);
+                        gr.DrawRectangle(thin_pen, rect.X, rect.Y, rect.Width, rect.Height);
+                    }
+                }
+            }
+
+            gr.ResetTransform();
+            gr.DrawRectangle(Pens.Black, 0, 0, width - 1, height - 1);
+        }
+
+        // Display the value clicked.
+        private void pictureBox_histogram_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Determine which data value was clicked.
+            float bar_wid = pictureBox_histogram.ClientSize.Width / (int)DataValues.Length;
+            int i = (int)(e.X / bar_wid);
+            richTextBox1.Text += "點選第 " + (i + 1).ToString() + " 項, 數值: " + DataValues[i] + "\n";
+        }
+
+        // Record the mouse position.
+        private string TipText;
+        private void pictureBox_histogram_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Transformation == null)
+            {
+                richTextBox1.Text += "XXXXXXXXXXXX\n";  //Transformationg尚未初始化
+                return;
+            }
+            // Determine which data value is under the mouse.
+            float bar_wid = pictureBox_histogram.ClientSize.Width / (int)DataValues.Length;
+            int bar_number = (int)(e.X / bar_wid);
+            if (bar_number >= DataValues.Length) return;
+
+            // Get the coordinates of the top of the bar.
+            PointF[] points = { new PointF(0, DataValues[bar_number]) };
+            Transformation.TransformPoints(points);
+
+            // See if the mouse is over the bar and not the space above it.
+            string tip = "";
+            if (e.Y >= points[0].Y)
+            {
+                tip = "點選第 " + (bar_number + 1).ToString() + " 項, 數值: " + DataValues[bar_number];
+            }
+
+            // Update the tooltip if it has changed.
+            if (TipText != tip)
+            {
+                TipText = tip;
+                toolTip_histogram.SetToolTip(pictureBox_histogram, tip);
+            }
+        }
+
+        #endregion
+
+        #region pictureBox_age
+
+        // Draw the graph.
+        private void DrawGraph(int min_age, float[] means, float[] stddevs)
+        {
+            int max_age = min_age + means.Length - 1;
+
+            // Get the minimum and maximum values.
+            const float max_dev = 2.5f;
+            float min_value = means[0] - max_dev * stddevs[0];
+            float max_value = means[0] + max_dev * stddevs[0];
+            for (int i = 0; i < means.Length; i++)
+            {
+                if (min_value > means[i] - max_dev * stddevs[i])
+                    min_value = means[i] - max_dev * stddevs[i];
+                if (max_value < means[i] + max_dev * stddevs[i])
+                    max_value = means[i] + max_dev * stddevs[i];
+            }
+            if (min_value > 0) min_value = 0;
+
+            float hgt = 1.2f * (max_value - min_value);
+            float middle = (max_value + min_value) / 2f;
+            min_value = middle - hgt / 2f;
+            max_value = middle + hgt / 2f;
+
+            // Make a transformation for drawing.
+            RectangleF world = new RectangleF(
+                min_age - 1f, min_value,
+                max_age - min_age + 1.5f, max_value - min_value);
+            PointF[] device_points =
+            {
+                new PointF(0, pictureBox_age.ClientSize.Height),
+                new PointF(pictureBox_age.ClientSize.Width, pictureBox_age.ClientSize.Height),
+                new PointF(0, 0),
+            };
+            Matrix transform = new Matrix(world, device_points);
+
+            Bitmap bm = new Bitmap(
+                pictureBox_age.ClientSize.Width,
+                pictureBox_age.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                using (Pen pen = new Pen(Color.Red, 0))
+                {
+                    gr.SmoothingMode = SmoothingMode.AntiAlias;
+                    gr.Transform = transform;
+
+                    // Draw the standard deviation envelopes.
+                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 128, 128)))
+                    {
+                        pen.Color = brush.Color;
+                        DrawEnvelope(gr, min_age, means, stddevs,
+                            2.5f, brush, pen);
+                    }
+                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 128)))
+                    {
+                        pen.Color = brush.Color;
+                        DrawEnvelope(gr, min_age, means, stddevs,
+                            1.5f, brush, pen);
+                    }
+                    using (SolidBrush brush = new SolidBrush(Color.FromArgb(128, 255, 128)))
+                    {
+                        pen.Color = brush.Color;
+                        DrawEnvelope(gr, min_age, means, stddevs,
+                            0.5f, brush, pen);
+                    }
+
+                    // Draw the curve.
+                    List<PointF> points = new List<PointF>();
+                    for (int i = 0; i < means.Length; i++)
+                        points.Add(new PointF(i + min_age, means[i]));
+                    pen.Color = Color.Black;
+                    gr.DrawLines(pen, points.ToArray());
+
+                    // Draw and label the axes.
+                    pen.Color = Color.Black;
+                    using (Font font = new Font("Arial", 8))
+                    {
+                        gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                        using (StringFormat sf = new StringFormat())
+                        {
+                            sf.Alignment = StringAlignment.Center;
+                            sf.LineAlignment = StringAlignment.Near;
+
+                            // Draw the X axis.
+                            // Draw the axis.
+                            gr.DrawLine(pen, min_age, 0, max_age, 0);
+
+                            // Draw the tick marks.
+                            for (int x = min_age; x <= max_age; x++)
+                                gr.DrawLine(pen, x, 0, x, max_value);
+
+                            // Label the ages.
+                            List<PointF> tick_points = new List<PointF>();
+                            List<string> tick_labels = new List<string>();
+                            PointF[] label_points_array;
+                            for (int x = min_age; x <= max_age; x++)
+                            {
+                                tick_points.Add(new PointF(x, 0));
+                                tick_labels.Add(x.ToString());
+                            }
+                            label_points_array = tick_points.ToArray();
+                            transform.TransformPoints(label_points_array);
+                            gr.Transform = new Matrix();
+                            for (int i = 0; i < label_points_array.Length; i++)
+                            {
+                                gr.DrawString(tick_labels[i], font,
+                                    Brushes.Black, label_points_array[i], sf);
+                            }
+
+                            // Draw the Y axis.
+                            // Draw the axis.
+                            gr.Transform = transform;
+                            gr.DrawLine(pen, 0, min_value, 0, max_value);
+
+                            // Draw the tick marks.
+                            int start_y = 10;
+                            int stop_y = 10 * (int)(max_value / 10f);
+                            int num_y = stop_y - start_y + 1;
+                            for (int y = start_y; y <= stop_y; y += 10)
+                                gr.DrawLine(pen, min_age - 0.15f, y, min_age + 0.15f, y);
+
+                            // Label the Y axis.
+                            sf.Alignment = StringAlignment.Far;
+                            sf.LineAlignment = StringAlignment.Center;
+
+                            tick_points.Clear();
+                            tick_labels.Clear();
+                            for (int y = start_y; y <= stop_y; y += 10)
+                            {
+                                tick_points.Add(new PointF(min_age - 0.2f, y));
+                                tick_labels.Add(y.ToString());
+                            }
+                            label_points_array = tick_points.ToArray();
+                            transform.TransformPoints(label_points_array);
+
+                            gr.Transform = new Matrix();
+                            for (int y = 0; y < label_points_array.Length; y++)
+                            {
+                                gr.DrawString(tick_labels[y], font,
+                                    Brushes.Black, label_points_array[y], sf);
+                            }
+                        } // StringFormat
+                    } // Font
+
+                    // Plot test points.
+                    transform.TransformPoints(TestPoints);
+                    gr.Transform = new Matrix();
+                    foreach (PointF point in TestPoints)
+                    {
+                        gr.FillRectangle(Brushes.Red,
+                            point.X - 3, point.Y - 3, 6, 6);
+                    }
+                } // Pen
+            } // Graphics
+
+            pictureBox_age.Image = bm;
+        }
+
+        // Draw an envelope for dev_mult times the standard deviations.
+        private void DrawEnvelope(Graphics gr, int min_age,
+            float[] means, float[] stddevs,
+            float dev_mult, Brush brush, Pen pen)
+        {
+            List<PointF> points = new List<PointF>();
+            for (int i = 0; i < means.Length; i++)
+                points.Add(new PointF(i + min_age, means[i] + dev_mult * stddevs[i]));
+            for (int i = means.Length - 1; i >= 0; i--)
+                points.Add(new PointF(i + min_age, means[i] - dev_mult * stddevs[i]));
+
+            gr.FillPolygon(brush, points.ToArray());
+            gr.DrawPolygon(pen, points.ToArray());
+        }
+
+        #endregion
 
 
     }

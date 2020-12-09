@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw9_Example4
+﻿namespace vcs_Draw9_Example4_vcsh
 {
     partial class Form1
     {

@@ -13,7 +13,7 @@ using System.Drawing.Imaging;   //for ImageFormat
 
 using System.Drawing.Text;      //for TextRenderingHint
 
-namespace vcs_Draw9_Example4
+namespace vcs_Draw9_Example4_vcsh
 {
     public partial class Form1 : Form
     {

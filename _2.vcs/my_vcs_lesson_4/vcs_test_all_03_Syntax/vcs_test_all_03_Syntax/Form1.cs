@@ -968,5 +968,33 @@ namespace vcs_test_all_03_Syntax
 #endif
         }
 
+        // The enumerated type.
+        private enum MealType
+        {
+            Breakfast,
+            Brunch,
+            Lunch,
+            Luncheon = Lunch,
+            Tiffin = Lunch,
+            Tea,
+            Nuncheon = Tea,
+            Dinner,
+            Supper
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //把ENUM的字串印出來
+            // Convert values to and from strings.
+            foreach (string value in Enum.GetNames(typeof(MealType)))
+            {
+                // Get the enumeration's value.
+                MealType meal = (MealType)Enum.Parse(typeof(MealType), value);
+
+                // Display the values.
+                richTextBox1.Text += ((int)meal).ToString() + "\t" + value + "\n";
+            }
+        }
+
     }
 }

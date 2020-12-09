@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Net;   //for IPAddress
+using System.Globalization; //for NumberStyles
 
 namespace vcs_ParseData
 {
@@ -130,6 +132,13 @@ namespace vcs_ParseData
             string birthstr = "6/10/1989 3:50:59 AM";
             timeBirth = DateTime.Parse(birthstr);
             richTextBox1.Text += "日期變數 : " + timeBirth + "\n";
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //long num_trials = long.Parse(txtNumTrials.Text, NumberStyles.Any);
+            long number = long.Parse(textBox6.Text, NumberStyles.Any);
+            richTextBox1.Text += "取得數字:\t" + number.ToString() + "\n";
         }
     }
 }
