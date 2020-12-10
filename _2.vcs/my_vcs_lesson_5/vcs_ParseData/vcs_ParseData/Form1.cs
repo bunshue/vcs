@@ -26,6 +26,15 @@ namespace vcs_ParseData
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                int value = int.Parse(textBox1.Text);
+                richTextBox1.Text += value.ToString() + "\n";
+            }
+            catch
+            {
+                richTextBox1.Text += "Error\n";
+            }
             richTextBox1.Text += "得到int數字： " + int.Parse(textBox1.Text) + "\n";
         }
         private void button2_Click(object sender, EventArgs e)
@@ -139,6 +148,44 @@ namespace vcs_ParseData
             //long num_trials = long.Parse(txtNumTrials.Text, NumberStyles.Any);
             long number = long.Parse(textBox6.Text, NumberStyles.Any);
             richTextBox1.Text += "取得數字:\t" + number.ToString() + "\n";
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            // Default parsing behavior.
+            try
+            {
+                decimal value = decimal.Parse(textBox7.Text);
+                richTextBox1.Text += value.ToString("C") + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+            // Parse with Any format.
+            try
+            {
+                decimal value = decimal.Parse(textBox7.Text, NumberStyles.Any);
+                richTextBox1.Text += value.ToString("C") + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+            double value2;
+            if (!double.TryParse(textBox7.Text, out value2))
+                value2 = -1;
+
+            decimal currency;
+            if (!decimal.TryParse(textBox7.Text, NumberStyles.Any, null, out currency))
+                currency = -1;
+
+            richTextBox1.Text += "Value: " + value2.ToString() + "\n";
+            richTextBox1.Text += "Currency: " + currency.ToString() + "\n";
+
+
         }
     }
 }

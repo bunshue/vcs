@@ -966,6 +966,12 @@ namespace vcs_test_all_03_Syntax
 #else
             richTextBox1.Text += "你沒有使用 #define\n";
 #endif
+
+#if ZZ01
+            //在 方案總管/屬性/建置條件式編譯的符號/定義DEBUG常數/寫入ZZ01
+            richTextBox1.Text += "你使用了 #define ZZ01\n";
+#endif
+
         }
 
         // The enumerated type.
