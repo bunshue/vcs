@@ -100,7 +100,23 @@ namespace my_vcs_21_ListBox_CheckedListBox
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int i;
+            int len = listBox1.Items.Count;
+            string[] items = new string[len];
+            listBox1.Items.CopyTo(items, 0);    //listBox內容 拷貝 成 字串陣列
 
+            richTextBox1.Text += "共 " + len.ToString() + " 項\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 項\t" + items[i] + "\n";
+            }
+        }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
     }
 }

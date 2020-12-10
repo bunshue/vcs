@@ -83,6 +83,7 @@ namespace vcs_test_all_10_Math_Random
             bt_random7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             bt_random9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_random10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
 
 
@@ -1016,6 +1017,51 @@ namespace vcs_test_all_10_Math_Random
                 int temp = items[i];
                 items[i] = items[j];
                 items[j] = temp;
+            }
+        }
+
+        private void bt_random10_Click(object sender, EventArgs e)
+        {
+            int i;
+            int N = 10;
+
+            string[] names = new string[N];
+            names[0] = "AAA";
+            names[1] = "BBB";
+            names[2] = "CCC";
+            names[3] = "DDD";
+            names[4] = "EEE";
+            names[5] = "FFF";
+            names[6] = "GGG";
+            names[7] = "HHH";
+            names[8] = "III";
+            names[9] = "JJJ";
+
+            richTextBox1.Text += "原陣列\t";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += names[i] + " ";
+            }
+            richTextBox1.Text += "\n";
+
+
+            // Randomize.
+            Randomizer.Randomize<string>(names);
+
+            richTextBox1.Text += "新陣列\t";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += names[i] + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            int groups = 4;
+            richTextBox1.Text += "分成 " + groups.ToString() + " 組\n";
+            int groupNum = 0;
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += "第 " + groupNum.ToString() + " 組\t" + names[i] + "\n";
+                groupNum = ++groupNum % groups;
             }
         }
 
