@@ -18,14 +18,14 @@ namespace vcs_SlideShowString
         bool flag_debug_message = true;    //print some message, font size, timer cnt, index.....
         bool flag_debug_richtextbox = false;    //use richtextbox in release mode
 
-        string filepath_setup = "poetry.setup.txt";
-        string filepath_poetry = "poetry.txt";
-        string filepath_poetry_normal = "poetry.txt";
-        string filepath_poetry_long = "poetry_long.txt";    //長篇
-        string filepath_poetry_pipa = "pipa.txt";           //琵琶行
-        string filepath_poetry_chang = "long.txt";          //長恨歌
-        //string filepath_poetry = "poetry_debug.txt";
-        //string filepath_poetry = "poetry_new.txt";
+        string filepath_setup = "setup\\poetry.setup.txt";
+        string filepath_poetry = "data\\poetry.txt";
+        string filepath_poetry_normal = "data\\poetry.txt";
+        string filepath_poetry_long = "data\\poetry_long.txt";    //長篇
+        string filepath_poetry_pipa = "data\\pipa.txt";           //琵琶行
+        string filepath_poetry_chang = "data\\long.txt";          //長恨歌
+        //string filepath_poetry = "data\\poetry_debug.txt";
+        //string filepath_poetry = "data\\poetry_new.txt";
 
         Graphics g;
         Font f;
@@ -506,9 +506,9 @@ namespace vcs_SlideShowString
             bool flag_skip_comment = false;
 
 
-            //string filepath_poetry = "poetry.txt";
-            //string filepath_poetry_pipa = "pipa.txt";
-            //string filepath_poetry_chang = "long.txt";
+            //string filepath_poetry = "data\\poetry.txt";
+            //string filepath_poetry_pipa = "data\\pipa.txt";
+            //string filepath_poetry_chang = "data\\long.txt";
             if (item == 1)
                 filepath_poetry = filepath_poetry_pipa;
             else if (item == 2)
@@ -1131,6 +1131,27 @@ namespace vcs_SlideShowString
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string Path;
+            //檢查存data的資料夾
+            Path = Application.StartupPath + "\\data";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+
+            //檢查存setup的資料夾
+            Path = Application.StartupPath + "\\setup";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+
             bool result;
 
             result = loadTextSetup();
@@ -1160,7 +1181,11 @@ namespace vcs_SlideShowString
             result = loadTextData();
 
             if (result == false)
+            {
+                MessageBox.Show("資料檔案 " + filepath_poetry + " 不存在, 離開", "小朋友讀唐詩", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
                 return;
+            }
 
             Random r = new Random();
             int tmp;
@@ -2433,7 +2458,10 @@ namespace vcs_SlideShowString
             result = loadTextData_long_poem(item);
 
             if (result == false)
+            {
+                MessageBox.Show("資料檔案 " + filepath_poetry + " 不存在, 離開", "小朋友讀唐詩", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
 
             slide_show_string();
             //reload_slide_show_string();

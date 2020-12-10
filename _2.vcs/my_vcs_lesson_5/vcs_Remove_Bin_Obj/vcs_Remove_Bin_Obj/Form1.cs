@@ -149,22 +149,6 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("vcs_JSON"))
-                    {
-                        continue;
-                    }
-                    else if (folder_name[i].Contains("vcs_ColorTemperature"))
-                    {
-                        continue;
-                    }
-                    else if (folder_name[i].Contains("vcs_SlideShowString"))
-                    {
-                        continue;
-                    }
-                    else if (folder_name[i].Contains("vcs_AnalysisArticle"))
-                    {
-                        continue;
-                    }
                     else if (folder_name[i].Contains("__非AForge"))
                     {
                         continue;
@@ -173,15 +157,11 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("vcs_ReadWrite_QR_code"))
-                    {
-                        continue;
-                    }
                     else if (folder_name[i].Contains("WindowsFormsApplication1"))
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("qqqq"))
+                    else if (folder_name[i].Contains("tmptmptmptmp"))
                     {
                         continue;
                     }
