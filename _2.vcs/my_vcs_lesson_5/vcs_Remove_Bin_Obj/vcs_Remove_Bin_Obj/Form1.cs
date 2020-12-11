@@ -145,15 +145,7 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("vcs_DrAP"))
-                    {
-                        continue;
-                    }
                     else if (folder_name[i].Contains("__非AForge"))
-                    {
-                        continue;
-                    }
-                    else if (folder_name[i].Contains("vcs_test_all_08_MediaInfo"))
                     {
                         continue;
                     }
@@ -167,7 +159,7 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                if (folder_name[i].Contains("ExifLibrary"))
+                if (folder_name[i].Contains("tmptmptmptmp"))
                 {
                     continue;
                 }

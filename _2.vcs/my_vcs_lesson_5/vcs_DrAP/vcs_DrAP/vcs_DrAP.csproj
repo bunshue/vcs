@@ -107,6 +107,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="MediaInfo.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="img\matlab.png" />
     <None Include="img\ultraedit.jpg" />
     <None Include="img\python.bmp" />
