@@ -28,8 +28,8 @@ namespace vcs_test_all_24_DllImport_GetMediaLength
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = (GetMediaLen(@"C:\______test_files\WindowsShutdown.wav").ToString() + " 秒");
-            //label1.Text = (GetMediaLen(@"C:\______test_files\aaaa.mp3").ToString() + " 秒");
+            label1.Text = (GetMediaLen(@"C:\______test_files\_wav\WindowsShutdown.wav").ToString() + " 秒");
+            //label1.Text = (GetMediaLen(@"C:\______test_files\_mp3\aaaa.mp3").ToString() + " 秒");
             //label1.Text = (GetMediaLen(@"C:\______test_files\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
         }
 

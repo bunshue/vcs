@@ -730,7 +730,11 @@ namespace vcs_DrAP
                 fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
             }
 
-            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
+            if (fileinfos.Count == 0)
+                richTextBox2.Text += "找不到資料a\n";
+            else
+                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+
             for (int i = 0; i < fileinfos.Count; i++)
             {
                 //ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
@@ -914,7 +918,11 @@ namespace vcs_DrAP
                 fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
             }
 
-            richTextBox2.Text += "cnt = " + fileinfos.Count.ToString() + "\n";
+            if (fileinfos.Count == 0)
+                richTextBox2.Text += "找不到資料b\n";
+            else
+                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
+
             for (int i = 0; i < fileinfos.Count; i++)
             {
                 ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
@@ -963,7 +971,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
+            if (fileinfos.Count == 0)
+                richTextBox2.Text += "找不到資料c\n";
+            else
+                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料c\n";
+
             for (int i = 0; i < fileinfos.Count; i++)
             {
                 ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
@@ -1612,7 +1624,7 @@ namespace vcs_DrAP
                 }
                 if (flag_pattern_match == 1)
                 {
-                    richTextBox2.Text += fi.FullName + "\n";
+                    richTextBox2.Text += "上面搜尋到的資料在檔案\t" + fi.FullName + "\n\n";
                     fileinfos.Add(new MyFileInfo(fi.Name, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
                 }
 
@@ -1628,6 +1640,12 @@ namespace vcs_DrAP
 
         private void button13_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            removeDrawDiskSpace();
+            richTextBox1.Text += "搜尋開始\n";
+            richTextBox2.Text += "搜尋開始\n\n";
+
             button13.BackgroundImage = null;
             button13.BackColor = Color.Red;
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
@@ -1711,7 +1729,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
+            if (fileinfos.Count == 0)
+                richTextBox2.Text += "找不到資料d\n";
+            else
+                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料d\n";
+
             for (int i = 0; i < (fileinfos.Count - 1); i++)
             {
                 for (int j = i + 1; j < fileinfos.Count; j++)
@@ -1856,7 +1878,11 @@ namespace vcs_DrAP
             listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
             listView1.Visible = true;
 
-            richTextBox2.Text += "fileinfos.Count = " + fileinfos.Count.ToString() + "\n";
+            if (fileinfos.Count == 0)
+                richTextBox2.Text += "找不到資料e\n";
+            else
+                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料e\n";
+
             for (int i = 0; i < (fileinfos.Count - 1); i++)
             {
                 string filename1 = fileinfos[i].filename;
@@ -2558,7 +2584,6 @@ namespace vcs_DrAP
             button24.BackColor = System.Drawing.SystemColors.ControlLight;
             button24.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
             return;
-
         }
 
         //delay 10000 約 10秒

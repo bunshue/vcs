@@ -155,7 +155,7 @@ namespace vcs_test_all_08_MediaInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
             richTextBox1.Text += "檔案名稱: " + filename + "\n";
             get_MediaInfo(filename);
         }
@@ -176,7 +176,7 @@ namespace vcs_test_all_08_MediaInfo
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = "c:\\______test_files_mp3";  //預設開啟的路徑
+            //openFileDialog1.InitialDirectory = "c:\\______test_files\\_mp3";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -191,9 +191,6 @@ namespace vcs_test_all_08_MediaInfo
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
-
         }
-
-
     }
 }

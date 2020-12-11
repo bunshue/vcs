@@ -554,7 +554,7 @@ namespace vcs_ReadWrite_BIN
             fs.Close();
 
             richTextBox1.Text += "\n讀一個mp3檔的末128拜\n";
-            string filename2 = "C:\\______test_files\\aaaa.mp3";
+            string filename2 = "C:\\______test_files\\_mp3\\aaaa.mp3";
             len = 128;
             //隨機binary讀取
             fs = new FileStream(filename2, FileMode.Open, FileAccess.Read);
@@ -607,7 +607,7 @@ namespace vcs_ReadWrite_BIN
 
         private void button7_Click(object sender, EventArgs e)
         {
-            filename = "C:\\______test_files\\aaaa.mp3";
+            filename = "C:\\______test_files\\_mp3\\aaaa.mp3";
 
             //讀取資料
             byte[] data = File.ReadAllBytes(filename);

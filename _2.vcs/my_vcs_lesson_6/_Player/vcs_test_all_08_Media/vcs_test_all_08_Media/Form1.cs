@@ -138,7 +138,7 @@ namespace vcs_test_all_08_Media
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_wav\WindowsShutdown.wav").ToString() + " 秒\n");
-            //richTextBox1.Text += (GetMediaLen(@"C:\aaaa.mp3").ToString() + " 秒");
+            //richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_mp3\aaaa.mp3").ToString() + " 秒");
             //richTextBox1.Text += (GetMediaLen(@"F:\_______VIDEO_ALL_all1\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
         }
 
@@ -273,7 +273,7 @@ namespace vcs_test_all_08_Media
         //using WMPLib;
         private void mp3_player_play_Click(object sender, EventArgs e)
         {
-            wplayer.URL = @"C:\______test_files\aaaa.mp3";
+            wplayer.URL = @"C:\______test_files\_mp3\aaaa.mp3";
             wplayer.settings.setMode("loop", true);
             wplayer.controls.play();
             timer1.Enabled = true;
