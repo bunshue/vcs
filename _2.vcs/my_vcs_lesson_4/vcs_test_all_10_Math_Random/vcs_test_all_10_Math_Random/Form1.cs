@@ -84,6 +84,7 @@ namespace vcs_test_all_10_Math_Random
             bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             bt_random9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             bt_random10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            bt_random11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
 
 
@@ -1063,6 +1064,43 @@ namespace vcs_test_all_10_Math_Random
                 richTextBox1.Text += "第 " + groupNum.ToString() + " 組\t" + names[i] + "\n";
                 groupNum = ++groupNum % groups;
             }
+        }
+
+        private void bt_random11_Click(object sender, EventArgs e)
+        {
+            // Make the random words.
+            // Get the number of words and letters per word.
+            int num_letters = 10;
+            int num_words = 6;
+            richTextBox1.Text += "產生任意字串，每字串 " + num_letters.ToString() + " 字, 共 " + num_words.ToString() + " 個字串\n";
+
+            // Make an array of the letters we will use.
+            char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+            // Make a random number generator.
+            Random rand = new Random();
+
+            // Make the words.
+            for (int i = 1; i <= num_words; i++)
+            {
+                // Make a word.
+                string word = "";
+                for (int j = 1; j <= num_letters; j++)
+                {
+                    // Pick a random number between 0 and 25
+                    // to select a letter from the letters array.
+                    int letter_num = rand.Next(0, letters.Length - 1);
+
+                    // Append the letter.
+                    word += letters[letter_num];
+                }
+
+                // Add the word to the list.
+                //lstWords.Items.Add(word);
+                richTextBox1.Text += word + "\n";
+            }
+
+
         }
 
 
