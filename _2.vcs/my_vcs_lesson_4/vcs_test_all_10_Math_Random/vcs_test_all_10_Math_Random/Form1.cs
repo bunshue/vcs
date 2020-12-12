@@ -610,6 +610,51 @@ namespace vcs_test_all_10_Math_Random
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //因數分解
+            long number;
+
+            number = 1234567890;
+            // Get the factors.
+            List<long> factors = FindFactors(number);
+            List<string> strings = factors.ConvertAll<string>(x => x.ToString());
+
+            richTextBox1.Text += "數字: " + number.ToString() + ", 因數分解\n";
+            richTextBox1.Text += string.Join(" x ", strings.ToArray()) + "\n";
+        }
+
+        // Return the number's prime factors.
+        private List<long> FindFactors(long num)
+        {
+            List<long> result = new List<long>();
+
+            // Take out the 2s.
+            while (num % 2 == 0)
+            {
+                result.Add(2);
+                num /= 2;
+            }
+
+            // Take out other primes.
+            long factor = 3;
+            while (factor * factor <= num)
+            {
+                if (num % factor == 0)
+                {
+                    // This is a factor.
+                    result.Add(factor);
+                    num /= factor;
+                }
+                else
+                {
+                    // Go to the next odd number.
+                    factor += 2;
+                }
+            }
+
+            // If num is not 1, then whatever is left is prime.
+            if (num > 1) result.Add(num);
+
+            return result;
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1023,6 +1068,7 @@ namespace vcs_test_all_10_Math_Random
 
         private void bt_random10_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "整個string array都變成亂數陣列\n";
             int i;
             int N = 10;
 
@@ -1045,9 +1091,9 @@ namespace vcs_test_all_10_Math_Random
             }
             richTextBox1.Text += "\n";
 
-
             // Randomize.
-            Randomizer.Randomize<string>(names);
+            //Randomizer.Randomize<string>(names);  //same
+            Randomizer.Randomize(names);
 
             richTextBox1.Text += "新陣列\t";
             for (i = 0; i < N; i++)

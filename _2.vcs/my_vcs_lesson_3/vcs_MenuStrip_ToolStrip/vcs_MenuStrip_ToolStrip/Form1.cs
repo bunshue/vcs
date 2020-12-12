@@ -118,5 +118,62 @@ DropDownItems/打開(集合)
             richTextBox1.Text += "\n";
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += @"
+
+menuStrip加入檢視欄，加入
+
+menuStrip1的屬性/Items/打開(集合)/
+MenuItem加一個新項目 檢視VToolStripMenuItem，修改Text，調整位置
+
+
+<檢視VToolStripMenuItem> 的屬性/DropDownItems/打開(集合)/
+MenuItem加幾個新項目，修改Name、Text。
+
+Thumbnails	F9
+Large icons	F10
+Small icons	F11
+Details		F12
+-------------------
+Refresh		F5
+Show hidden files	Ctrl+H
+
+預設勾選：選一項的Checked為True
+
+這些項目共用一個Click事件	toolStripMenuItem_view_Click";
+            richTextBox1.Text += "\n";
+        }
+
+        // Check this menu item and uncheck the others.
+        private void toolStripMenuItem_view_Click(object sender, EventArgs e)
+        {
+            // Check the menu item.
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            CheckMenuItem(檢視VToolStripMenuItem, item);
+
+            // Do something with the menu selection.
+            // You could use a switch statement here.
+            // This example just displays the menu item's text.
+            richTextBox1.Text += "你按了\t" + item.Text + "\n";
+            //MessageBox.Show(item.Text);
+        }
+
+        // Uncheck all menu items in this menu except checked_item.
+        private void CheckMenuItem(ToolStripMenuItem mnu, ToolStripMenuItem checked_item)
+        {
+            // Uncheck the menu items except checked_item.
+            foreach (ToolStripItem item in mnu.DropDownItems)
+            {
+                if (item is ToolStripMenuItem)
+                {
+                    ToolStripMenuItem menu_item = item as ToolStripMenuItem;
+                    menu_item.Checked = (menu_item == checked_item);
+                }
+            }
+        }
+
+
     }
 }

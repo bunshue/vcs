@@ -20,6 +20,7 @@ using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Printing;  //for PrinterSettings
 
 using Microsoft.Win32;      //for Registry
+using System.Globalization;
 
 /*
 讀取/寫入程式預設值
@@ -1006,8 +1007,13 @@ namespace vcs_test_all_06_System
 
         private void button43_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "共有 " + CultureInfo.GetCultures(CultureTypes.AllCultures).Length.ToString() + " 筆Locale\n";
 
-
+            // Add the locale information.
+            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.AllCultures))
+            {
+                richTextBox1.Text += info.EnglishName + '\t' + info.NativeName + "\n";
+            }
         }
 
         // Save the current settings.

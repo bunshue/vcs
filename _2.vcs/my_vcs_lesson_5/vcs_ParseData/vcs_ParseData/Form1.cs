@@ -145,7 +145,7 @@ namespace vcs_ParseData
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //long num_trials = long.Parse(txtNumTrials.Text, NumberStyles.Any);
+            //long number = long.Parse(textBox6.Text);    //無法解讀逗號
             long number = long.Parse(textBox6.Text, NumberStyles.Any);
             richTextBox1.Text += "取得數字:\t" + number.ToString() + "\n";
         }
@@ -186,6 +186,18 @@ namespace vcs_ParseData
             richTextBox1.Text += "Currency: " + currency.ToString() + "\n";
 
 
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            textBox6.Text = "123456";
+
+            long number;
+            bool conversionSuccessful = long.TryParse(textBox6.Text, out number);   //out為必須
+            if (conversionSuccessful == true)
+                richTextBox1.Text += "得到int數字： " + number + "\n";
+            else
+                richTextBox1.Text += "long.TryParse 失敗\n";
         }
     }
 }

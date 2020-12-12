@@ -134,7 +134,11 @@ namespace vcs_test_all_02
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            // Load the timezone information.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                richTextBox1.Text += info + "\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
