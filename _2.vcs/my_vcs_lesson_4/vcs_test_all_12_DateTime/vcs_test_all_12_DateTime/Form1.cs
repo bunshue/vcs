@@ -519,6 +519,8 @@ namespace vcs_test_all_12_DateTime
 
             // Start with a sample date.
             txtDate.Text = "11 March 2006, 9:15";
+
+            calculate_time_difference();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1199,6 +1201,91 @@ new System.Globalization.ChineseLunisolarCalendar();
                 txtSeconds.Clear();
             }
         }
+
+        void calculate_time_difference()
+        {
+            DateTime date1, date2;
+            if (!DateTime.TryParse(textBox8.Text, out date1))
+                return;
+            textBox3.Text = date1.ToString();
+
+            if (!DateTime.TryParse(textBox10.Text, out date2))
+                return;
+            textBox9.Text = date1.ToString();
+
+            int years, months, days, hours, minutes, seconds, milliseconds;
+
+            GetElapsedTime(date1, date2, out years, out months,
+                out days, out hours, out minutes, out seconds, out milliseconds);
+
+            // Display the result.
+            string txt = "";
+            if (years != 0) txt += ", " + years.ToString() + " years";
+            if (months != 0) txt += ", " + months.ToString() + " months";
+            if (days != 0) txt += ", " + days.ToString() + " days";
+            if (hours != 0) txt += ", " + hours.ToString() + " hours";
+            if (minutes != 0) txt += ", " + minutes.ToString() + " minutes";
+            if (seconds != 0) txt += ", " + seconds.ToString() + " seconds";
+            if (milliseconds != 0) txt += ", " + milliseconds.ToString() + " milliseconds";
+            if (txt.Length > 0) txt = txt.Substring(2);
+            if (txt.Length == 0) txt = "Same";
+            textBox7.Text = txt;
+        }
+
+        // Return the number of years, months, days, hours, minutes, seconds,
+        // and milliseconds you need to add to from_date to get to_date.
+        private void GetElapsedTime(DateTime from_date, DateTime to_date,
+            out int years, out int months, out int days, out int hours,
+            out int minutes, out int seconds, out int milliseconds)
+        {
+            // If from_date > to_date, switch them around.
+            if (from_date > to_date)
+            {
+                GetElapsedTime(to_date, from_date,
+                    out years, out months, out days, out hours,
+                    out minutes, out seconds, out milliseconds);
+                years = -years;
+                months = -months;
+                days = -days;
+                hours = -hours;
+                minutes = -minutes;
+                seconds = -seconds;
+                milliseconds = -milliseconds;
+            }
+            else
+            {
+                // Handle the years.
+                years = to_date.Year - from_date.Year;
+
+                // See if we went too far.
+                DateTime test_date = from_date.AddMonths(12 * years);
+                if (test_date > to_date)
+                {
+                    years--;
+                    test_date = from_date.AddMonths(12 * years);
+                }
+
+                // Add months until we go too far.
+                months = 0;
+                while (test_date <= to_date)
+                {
+                    months++;
+                    test_date = from_date.AddMonths(12 * years + months);
+                }
+                months--;
+
+                // Subtract to see how many more days,
+                // hours, minutes, etc. we need.
+                from_date = from_date.AddMonths(12 * years + months);
+                TimeSpan remainder = to_date - from_date;
+                days = remainder.Days;
+                hours = remainder.Hours;
+                minutes = remainder.Minutes;
+                seconds = remainder.Seconds;
+                milliseconds = remainder.Milliseconds;
+            }
+        }
+
     }
 }
 

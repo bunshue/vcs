@@ -253,6 +253,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(155, 40);
             this.button16.TabIndex = 16;
+            this.button16.Text = "排列";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -263,6 +264,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(155, 40);
             this.button17.TabIndex = 17;
+            this.button17.Text = "M項中取N項";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -454,7 +456,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox1.Location = new System.Drawing.Point(12, 479);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(156, 36);
             this.textBox1.TabIndex = 26;
@@ -476,7 +478,7 @@
             // 
             this.textBox_A.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox_A.Location = new System.Drawing.Point(34, 532);
-            this.textBox_A.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_A.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_A.Name = "textBox_A";
             this.textBox_A.Size = new System.Drawing.Size(50, 27);
             this.textBox_A.TabIndex = 28;
@@ -487,7 +489,7 @@
             // 
             this.textBox_B.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox_B.Location = new System.Drawing.Point(115, 530);
-            this.textBox_B.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_B.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_B.Name = "textBox_B";
             this.textBox_B.Size = new System.Drawing.Size(50, 27);
             this.textBox_B.TabIndex = 29;

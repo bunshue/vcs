@@ -43,7 +43,7 @@ namespace vcs_test_all_00_Control
 
             lb_checkbox_CheckState.Text = "";
 
-            // Give the ellipsis button's image a transparent background.
+            // Give this button's image a transparent background.
             MakeButtonTransparent(button35);
         }
 
@@ -53,7 +53,7 @@ namespace vcs_test_all_00_Control
         {
             Bitmap bm = (Bitmap)btn.Image;
             bm.MakeTransparent(bm.GetPixel(0, 0));
-            btn.Image = bm;
+            //btn.Image = bm;   comment also OK
         }
 
         int i = 0;
@@ -274,11 +274,53 @@ namespace vcs_test_all_00_Control
                 richTextBox1.Text += mdc.control_data[i].Height.ToString() + "\t";
                 richTextBox1.Text += mdc.control_data[i].enable.ToString() + "\t";
                 richTextBox1.Text += mdc.control_data[i].visible.ToString() + "\n";
-
-
-
             }
 
+            richTextBox1.Text += "找出特定的控件\n";
+
+            string pattern = "記住所有控件";
+            // Find the control.
+            Control ctl = FindControl(this, pattern);
+            if (ctl == null)
+            {
+                richTextBox1.Text += "找不到控件\t" + pattern + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "找到控件\t" + pattern + "\n";
+            }
+
+            richTextBox1.Text += "找出所有控件\n";
+            FindAllControls();
+        }
+
+        // Recursively find the named control.
+        private Control FindControl(Control parent, string name)
+        {
+            // Check the parent.
+            if (parent.Text == name) return parent;
+
+            // Recursively search the parent's children.
+            foreach (Control ctl in parent.Controls)
+            {
+                richTextBox1.Text += "檢查\t" + ctl.Name + "\t" + ctl.Text + "\n";
+                Control found = FindControl(ctl, name);
+                if (found != null)
+                    return found;
+            }
+
+            // If we still haven't found it, it's not here.
+            return null;
+        }
+
+        void FindAllControls()
+        {
+            int i = 1;
+            foreach (Control ctl in this.Controls)
+            {
+                richTextBox1.Text += "找到控件\t" + i.ToString() + "\t" + ctl.Name + "\t" + ctl.Text + "\n";
+                i++;
+            }
         }
 
         private void groupBox1_Paint(object sender, PaintEventArgs e)
@@ -542,9 +584,16 @@ namespace vcs_test_all_00_Control
             richTextBox1.Text += "你按了\tCancel Button\n";
         }
 
+        private void button35_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "此按鈕之圖片  有  去背景效果\n";
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "此按鈕之圖片  無  去背景效果\n";
+        }
     }
-
-
 
     class MyRecordControlClass
     {

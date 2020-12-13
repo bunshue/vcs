@@ -18,7 +18,7 @@ namespace vcs_LED_Text
             InitializeComponent();
         }
 
-        private void picCanvas_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
 //            TestLeds(e.Graphics);
 //            TestColorful(e.Graphics);
@@ -133,7 +133,7 @@ namespace vcs_LED_Text
 
         private void TestLeds(Graphics gr)
         {
-            gr.Clear(picCanvas.BackColor);
+            gr.Clear(pictureBox1.BackColor);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
             //gr.DrawRectangle(Pens.Green,
             //    margin, margin, cell_width, cell_height);

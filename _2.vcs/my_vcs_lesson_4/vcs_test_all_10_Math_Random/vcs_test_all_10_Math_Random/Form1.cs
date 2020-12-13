@@ -659,16 +659,198 @@ namespace vcs_test_all_10_Math_Random
 
         private void button16_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "排列\n";
+            string pattern = "apple banana cat dog";
 
+            // Get the items.
+            string[] items = pattern.Split(' ');
+
+            int i;
+            int len = items.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += items[i] + "\n";
+            }
+
+            // Generate the permutations.
+            List<List<string>> results = GeneratePermutations<string>(items.ToList());
+
+            // Display the results.
+            foreach (List<string> combination in results)
+            {
+                richTextBox1.Text += string.Join(" ", combination.ToArray()) + "\n";
+            }
+
+            // Calculate the number of permutations.
+            long num_permutations = Factorial(items.Length);
+            richTextBox1.Text += "共有 " + num_permutations.ToString() + " 種排列\n";
         }
 
+        // Generate permutations.
+        private List<List<T>> GeneratePermutations<T>(List<T> items)
+        {
+            // Make an array to hold the
+            // permutation we are building.
+            T[] current_permutation = new T[items.Count];
+
+            // Make an array to tell whether
+            // an item is in the current selection.
+            bool[] in_selection = new bool[items.Count];
+
+            // Make a result list.
+            List<List<T>> results = new List<List<T>>();
+
+            // Build the combinations recursively.
+            PermuteItems<T>(items, in_selection,
+                current_permutation, results, 0);
+
+            // Return the results.
+            return results;
+        }
+
+        // Recursively permute the items that are
+        // not yet in the current selection.
+        private void PermuteItems<T>(List<T> items, bool[] in_selection,
+            T[] current_permutation, List<List<T>> results, int next_position)
+        {
+            // See if all of the positions are filled.
+            if (next_position == items.Count)
+            {
+                // All of the positioned are filled.
+                // Save this permutation.
+                results.Add(current_permutation.ToList());
+            }
+            else
+            {
+                // Try options for the next position.
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (!in_selection[i])
+                    {
+                        // Add this item to the current permutation.
+                        in_selection[i] = true;
+                        current_permutation[next_position] = items[i];
+
+                        // Recursively fill the remaining positions.
+                        PermuteItems<T>(items, in_selection,
+                            current_permutation, results, next_position + 1);
+
+                        // Remove the item from the current permutation.
+                        in_selection[i] = false;
+                    }
+                }
+            }
+        }
+
+        // Return n!
+        private long Factorial(long n)
+        {
+            long result = 1;
+            for (int i = 2; i <= n; i++) result *= i;
+            return result;
+        }
         
         private void button17_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "M項中取N項\n";
+            string pattern = "apple banana cat dog elephant";
 
+            // Get the items.
+            string[] items = pattern.Split(' ');
+
+            int i;
+            int len = items.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += items[i] + "\n";
+            }
+
+            int M = len;
+            int N = 3;
+
+            // Generate the selections.
+            List<List<string>> results = GenerateSelections<string>(items.ToList(), N);
+
+            richTextBox1.Text += M.ToString() + " 項中取 " + N.ToString() + " 項：\n";
+
+            // Display the results.
+            foreach (List<string> combination in results)
+            {
+                richTextBox1.Text += string.Join(" ", combination.ToArray()) + "\n";
+            }
+
+            // Calculate the number of items.
+            decimal num_combinations = MChooseK(M, N);
+            richTextBox1.Text += "共有 " + num_combinations.ToString() + " 種組合\n";
         }
 
+        // Generate selections of n items.
+        private List<List<T>> GenerateSelections<T>(List<T> items, int n)
+        {
+            // Make an array to tell whether
+            // an item is in the current selection.
+            bool[] in_selection = new bool[items.Count];
 
+            // Make a result list.
+            List<List<T>> results = new List<List<T>>();
+
+            // Build the combinations recursively.
+            SelectItems<T>(items, in_selection, results, n, 0);
+
+            // Return the results.
+            return results;
+        }
+
+        // Recursively select n additional items with indexes >= first_item.
+        // If n == 0, add the current combination to the results.
+        private void SelectItems<T>(List<T> items, bool[] in_selection,
+            List<List<T>> results, int n, int first_item)
+        {
+            if (n == 0)
+            {
+                // Add the current selection to the results.
+                List<T> selection = new List<T>();
+                for (int i = 0; i < items.Count; i++)
+                {
+                    // If this item is selected, add it to the selection.
+                    if (in_selection[i]) selection.Add(items[i]);
+                }
+                results.Add(selection);
+            }
+            else
+            {
+                // Try adding each of the remaining items.
+                for (int i = first_item; i < items.Count; i++)
+                {
+                    // Try adding this item.
+                    in_selection[i] = true;
+
+                    // Recursively add the rest of the required items.
+                    SelectItems(items, in_selection, results, n - 1, i + 1);
+
+                    // Remove this item from the selection.
+                    in_selection[i] = false;
+                }
+            }
+        }
+
+        // Return M choose N calculated directly.
+        // For a description of the algorithm, see:
+        //      http://csharphelper.com/blog/2014/08/calculate-the-binomial-coefficient-n-choose-k-efficiently-in-c/
+        private decimal MChooseK(decimal M, decimal N)
+        {
+            //Debug.Assert(M >= 0);
+            //Debug.Assert(N >= 0);
+            //Debug.Assert(M >= N);
+
+            decimal result = 1;
+            for (int i = 1; i <= N; i++)
+            {
+                result *= M - (N - i);
+                result /= i;
+            }
+            return result;
+        }
 
         private void button18_Click(object sender, EventArgs e)
         {

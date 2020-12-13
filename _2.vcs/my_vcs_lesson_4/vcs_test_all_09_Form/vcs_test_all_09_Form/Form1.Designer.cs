@@ -72,6 +72,9 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -555,12 +558,48 @@
             this.bt_exit.UseVisualStyleBackColor = true;
             this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.LightGreen;
+            this.label2.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.label2.Font = new System.Drawing.Font("新細明體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(629, 317);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 35);
+            this.label2.TabIndex = 44;
+            this.label2.Text = " ͏ ";
+            this.label2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label2_MouseDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(665, 312);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 19);
+            this.label3.TabIndex = 45;
+            this.label3.Text = "拉我移動表單";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(665, 333);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(159, 38);
+            this.label4.TabIndex = 46;
+            this.label4.Text = "label2屬性的Cursor\r\n改成SizeAll";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button29;
             this.ClientSize = new System.Drawing.Size(1055, 661);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.bt_clear);
@@ -662,6 +701,9 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button bt_exit;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

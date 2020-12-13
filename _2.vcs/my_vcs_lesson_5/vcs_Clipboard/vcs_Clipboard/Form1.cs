@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
 
 namespace vcs_Clipboard
@@ -19,8 +20,23 @@ namespace vcs_Clipboard
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             label1.Text = "";
             show_item_location();
+
+            string Path;
+            //檢查存d10d的資料夾
+            Path = "C:\\dddddddddd";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
         }
 
         void show_item_location()

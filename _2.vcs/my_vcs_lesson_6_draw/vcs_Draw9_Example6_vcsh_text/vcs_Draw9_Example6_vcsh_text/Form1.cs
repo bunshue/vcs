@@ -29,6 +29,16 @@ namespace vcs_Draw9_Example6_vcsh_text
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Make the labels display only borders.
+            //label1.Text = "";
+            label2.Text = "";
+            label1.BackColor = Color.Transparent;
+            label2.BackColor = Color.Transparent;
+
+            // (Alternatively just hide them.)
+            label1.Visible = true;  //畫label的框
+            label2.Visible = true;  //畫label的框
+
             show_item_location();
         }
 
@@ -235,8 +245,33 @@ namespace vcs_Draw9_Example6_vcsh_text
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            using (StringFormat string_format = new StringFormat())
+            {
+                string_format.Alignment = StringAlignment.Center;
+                string_format.LineAlignment = StringAlignment.Center;
+
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, label2.Bounds, string_format, "利用label所在位置畫字，把字畫成直的");
+            }
         }
 
+        // Draw sideways text in the indicated rectangle.
+        private void DrawSidewaysText(Graphics gr, Font font, Brush brush, Rectangle bounds, StringFormat string_format, string txt)
+        {
+            // Make a rotated rectangle at the origin.
+            Rectangle rotated_bounds = new Rectangle(0, 0, bounds.Height, bounds.Width);
+
+            // Rotate.
+            gr.ResetTransform();
+            gr.RotateTransform(-90);
+
+            // Translate to move the rectangle to the correct position.
+            gr.TranslateTransform(bounds.Left, bounds.Bottom, System.Drawing.Drawing2D.MatrixOrder.Append);
+
+            // Draw the text.
+            gr.DrawString(txt, font, brush, rotated_bounds, string_format);
+        }
 
 
     }
