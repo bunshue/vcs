@@ -11,14 +11,11 @@ using System.Windows.Forms;
 
 using System.Management;
 
-using System.Runtime.InteropServices;
-
 using System.Net.NetworkInformation;
 
 using System.IO;    //for Stream
 using System.Net;   //for WebClient
 
-using System.Diagnostics;   //for Process
 namespace vcs_test_all_01
 {
     public partial class Form1 : Form
@@ -26,6 +23,148 @@ namespace vcs_test_all_01
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 140;
+            dx = 180;
+            dy = 60;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //用WMI取出作業系統資訊
+            get_wmi_os_info();
+        }
+
+        void get_wmi_os_info()
+        {
+            // Get and display OS properties.
+            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+
+            foreach (ManagementObject mobj in os_searcher.Get())
+            {
+                GetValue(mobj, "BootDevice");
+                GetValue(mobj, "BuildNumber");
+                GetValue(mobj, "BuildType");
+                GetValue(mobj, "Caption");
+                GetValue(mobj, "CodeSet");
+                GetValue(mobj, "CountryCode");
+                GetValue(mobj, "CreationClassName");
+                GetValue(mobj, "CSCreationClassName");
+                GetValue(mobj, "CSDVersion");
+                GetValue(mobj, "CSName");
+                GetValue(mobj, "CurrentTimeZone");
+                GetValue(mobj, "DataExecutionPrevention_Available");
+                GetValue(mobj, "DataExecutionPrevention_32BitApplications");
+                GetValue(mobj, "DataExecutionPrevention_Drivers");
+                GetValue(mobj, "DataExecutionPrevention_SupportPolicy");
+                GetValue(mobj, "Debug");
+                GetValue(mobj, "Description");
+                GetValue(mobj, "Distributed");
+                GetValue(mobj, "EncryptionLevel");
+                GetValue(mobj, "ForegroundApplicationBoost");
+                GetValue(mobj, "FreePhysicalMemory");
+                GetValue(mobj, "FreeSpaceInPagingFiles");
+                GetValue(mobj, "FreeVirtualMemory");
+                GetValue(mobj, "InstallDate");
+                GetValue(mobj, "LargeSystemCache");
+                GetValue(mobj, "LastBootUpTime");
+                GetValue(mobj, "LocalDateTime");
+                GetValue(mobj, "Locale");
+                GetValue(mobj, "Manufacturer");
+                GetValue(mobj, "MaxNumberOfProcesses");
+                GetValue(mobj, "MaxProcessMemorySize");
+                GetValue(mobj, "MUILanguages[]");
+                GetValue(mobj, "Name");
+                GetValue(mobj, "NumberOfLicensedUsers");
+                GetValue(mobj, "NumberOfProcesses");
+                GetValue(mobj, "NumberOfUsers");
+                GetValue(mobj, "OperatingSystemSKU");
+                GetValue(mobj, "Organization");
+                GetValue(mobj, "OSArchitecture");
+                GetValue(mobj, "OSLanguage");
+                GetValue(mobj, "OSProductSuite");
+                GetValue(mobj, "OSType");
+                GetValue(mobj, "OtherTypeDescription");
+                GetValue(mobj, "PAEEnabled");
+                GetValue(mobj, "PlusProductID");
+                GetValue(mobj, "PlusVersionNumber");
+                GetValue(mobj, "Primary");
+                GetValue(mobj, "ProductType");
+                GetValue(mobj, "QuantumLength");
+                GetValue(mobj, "QuantumType");
+                GetValue(mobj, "RegisteredUser");
+                GetValue(mobj, "SerialNumber");
+                GetValue(mobj, "ServicePackMajorVersion");
+                GetValue(mobj, "ServicePackMinorVersion");
+                GetValue(mobj, "SizeStoredInPagingFiles");
+                GetValue(mobj, "Status");
+                GetValue(mobj, "SuiteMask");
+                GetValue(mobj, "SystemDevice");
+                GetValue(mobj, "SystemDirectory");
+                GetValue(mobj, "SystemDrive");
+                GetValue(mobj, "TotalSwapSpaceSize");
+                GetValue(mobj, "TotalVirtualMemorySize");
+                GetValue(mobj, "TotalVisibleMemorySize");
+                GetValue(mobj, "Version");
+                GetValue(mobj, "WindowsDirectory");
+            }
+        }
+
+        // Get a value from the ManagementObject.
+        private void GetValue(ManagementObject mobj, string property_name)
+        {
+            string value;
+            try
+            {
+                value = mobj[property_name].ToString();
+            }
+            catch (Exception ex)
+            {
+                value = "*** Error: " + ex.Message;
+            }
+            richTextBox1.Text += property_name + "\t" + value + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,92 +185,34 @@ namespace vcs_test_all_01
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OperatingSystem os_info = System.Environment.OSVersion;
-            richTextBox1.Text += os_info.VersionString + "\n\nWindows " + GetOsName(os_info) + "\n";
+            //測試防火牆
+            // Create the firewall type.
+            Type FWManagerType = Type.GetTypeFromProgID("HNetCfg.FwMgr");
 
-        }
-        // Return the OS name.
-        private string GetOsName(OperatingSystem os_info)
-        {
-            string version =
-                os_info.Version.Major.ToString() + "." +
-                os_info.Version.Minor.ToString();
-            switch (version)
-            {
-                case "10.0": return "10/Server 2016";
-                case "6.3": return "8.1/Server 2012 R2";
-                case "6.2": return "8/Server 2012";
-                case "6.1": return "7/Server 2008 R2";
-                case "6.0": return "Server 2008/Vista";
-                case "5.2": return "Server 2003 R2/Server 2003/XP 64-Bit Edition";
-                case "5.1": return "XP";
-                case "5.0": return "2000";
-            }
-            return "Unknown";
-        }
+            // Use the firewall type to create a firewall manager object.
+            dynamic FWManager = Activator.CreateInstance(FWManagerType);
 
-        [DllImport("kernel32.dll")]
-        private static extern long GetVolumeInformation(
-            string PathName,
-            StringBuilder VolumeNameBuffer,
-            UInt32 VolumeNameSize,
-            ref UInt32 VolumeSerialNumber,
-            ref UInt32 MaximumComponentLength,
-            ref UInt32 FileSystemFlags,
-            StringBuilder FileSystemNameBuffer,
-            UInt32 FileSystemNameSize);
+            // Check the status of the firewall.
+
+            if (FWManager.LocalPolicy.CurrentProfile.FirewallEnabled == true)
+                richTextBox1.Text += "防火牆已開啟\n";
+            else
+                richTextBox1.Text += "防火牆未開啟\n";
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string drive_letter = drive_letter = "c:\\";
-
-            uint serial_number = 0;
-            uint max_component_length = 0;
-            StringBuilder sb_volume_name = new StringBuilder(256);
-            UInt32 file_system_flags = new UInt32();
-            StringBuilder sb_file_system_name = new StringBuilder(256);
-
-            if (GetVolumeInformation(drive_letter, sb_volume_name,
-                (UInt32)sb_volume_name.Capacity, ref serial_number,
-                ref max_component_length, ref file_system_flags,
-                sb_file_system_name,
-                (UInt32)sb_file_system_name.Capacity) == 0)
+            // Load the timezone information.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
             {
-                MessageBox.Show("Error getting volume information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                richTextBox1.Text += info + "\n";
             }
-            else
-            {
-
-
-                //richTextBox1.Text +=
-                richTextBox1.Text += "Volume Name\t" + sb_volume_name.ToString() + "\n";
-                richTextBox1.Text += "Serial Number\t" + serial_number.ToString() + "\n";
-                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
-                richTextBox1.Text += "File System\t" + sb_file_system_name.ToString() + "\n";
-                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
-
-
-            }
-
         }
 
-        // List the folder types.
+
         private void button4_Click(object sender, EventArgs e)
         {
-            foreach (Environment.SpecialFolder folder_type
-                in Enum.GetValues(typeof(Environment.SpecialFolder)))
-            {
-                DescribeFolder(folder_type);
-            }
-            richTextBox1.Select(0, 0);
-        }
 
-        // Add a folder's information to the txtFolders TextBox.
-        private void DescribeFolder(Environment.SpecialFolder folder_type)
-        {
-            richTextBox1.AppendText(
-                String.Format("{0,-25}", folder_type.ToString()) +
-                Environment.GetFolderPath(folder_type) + "\r\n");
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -447,21 +528,6 @@ namespace vcs_test_all_01
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //取得記憶體使用狀態
-
-            richTextBox1.Text += "Property\t\t\tValue\n";
-            Process proc = Process.GetCurrentProcess();
-
-            richTextBox1.Text += "Min Working Set" + "\t" + ((double)proc.MinWorkingSet).ToFileSize() + "\n";
-            richTextBox1.Text += "Max Working Set" + "\t" + ((double)proc.MaxWorkingSet).ToFileSize() + "\n";
-            richTextBox1.Text += "Non-paged Memory Size" + "\t" + ((double)proc.NonpagedSystemMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Paged Memory Size" + "\t" + ((double)proc.PagedMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Paged System Memory Size" + "\t" + ((double)proc.PagedSystemMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Paged Memory Size" + "\t" + ((double)proc.PeakPagedMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Virtual Memory Size" + "\t" + ((double)proc.PeakVirtualMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Peak Working Set" + "\t" + ((double)proc.PeakWorkingSet64).ToFileSize() + "\n";
-            richTextBox1.Text += "Virtual Memory Size" + "\t" + ((double)proc.VirtualMemorySize64).ToFileSize() + "\n";
-            richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
 
 
         }
@@ -561,6 +627,7 @@ namespace vcs_test_all_01
             }
             return comments;
         }
+
 
     }
 }

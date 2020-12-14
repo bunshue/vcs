@@ -1,0 +1,434 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.Runtime.InteropServices;   //for DllImport
+using System.Diagnostics;   //for Process
+
+namespace vcs_test_all_06_System2
+{
+    public partial class Form1 : Form
+    {
+
+        public Form1()
+        {
+            InitializeComponent();
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 210;
+            dy = 42;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button15.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button19.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+
+            button36.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button38.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+
+            button40.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button41.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button43.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+
+            button44.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button45.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+
+            label1.Location = new Point(x_st + dx * 4, y_st + dy * 1 / 2 + 5);
+            label1.Text = "";
+
+            bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 13);
+            richTextBox1.Location = new Point(x_st + dx * 4 + dx / 2, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            OperatingSystem os_info = System.Environment.OSVersion;
+            richTextBox1.Text += os_info.VersionString + "\n\nWindows " + GetOsName(os_info) + "\n";
+        }
+
+        // Return the OS name.
+        private string GetOsName(OperatingSystem os_info)
+        {
+            string version =
+                os_info.Version.Major.ToString() + "." +
+                os_info.Version.Minor.ToString();
+            switch (version)
+            {
+                case "10.0": return "10/Server 2016";
+                case "6.3": return "8.1/Server 2012 R2";
+                case "6.2": return "8/Server 2012";
+                case "6.1": return "7/Server 2008 R2";
+                case "6.0": return "Server 2008/Vista";
+                case "5.2": return "Server 2003 R2/Server 2003/XP 64-Bit Edition";
+                case "5.1": return "XP";
+                case "5.0": return "2000";
+            }
+            return "Unknown";
+        }
+
+        [DllImport("kernel32.dll")]
+        private static extern long GetVolumeInformation(
+            string PathName,
+            StringBuilder VolumeNameBuffer,
+            UInt32 VolumeNameSize,
+            ref UInt32 VolumeSerialNumber,
+            ref UInt32 MaximumComponentLength,
+            ref UInt32 FileSystemFlags,
+            StringBuilder FileSystemNameBuffer,
+            UInt32 FileSystemNameSize
+        );
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string drive_letter = drive_letter = "c:\\";
+
+            uint serial_number = 0;
+            uint max_component_length = 0;
+            StringBuilder sb_volume_name = new StringBuilder(256);
+            UInt32 file_system_flags = new UInt32();
+            StringBuilder sb_file_system_name = new StringBuilder(256);
+
+            if (GetVolumeInformation(drive_letter, sb_volume_name,
+                (UInt32)sb_volume_name.Capacity, ref serial_number,
+                ref max_component_length, ref file_system_flags,
+                sb_file_system_name,
+                (UInt32)sb_file_system_name.Capacity) == 0)
+            {
+                MessageBox.Show("Error getting volume information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+
+
+                //richTextBox1.Text +=
+                richTextBox1.Text += "Volume Name\t" + sb_volume_name.ToString() + "\n";
+                richTextBox1.Text += "Serial Number\t" + serial_number.ToString() + "\n";
+                richTextBox1.Text += "Max Component Length\t" + max_component_length.ToString() + "\n";
+                richTextBox1.Text += "File System\t" + sb_file_system_name.ToString() + "\n";
+                richTextBox1.Text += "Flags\t" + "&&H" + file_system_flags.ToString("x") + "\n";
+            }
+        }
+
+        // List the folder types.
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (Environment.SpecialFolder folder_type in Enum.GetValues(typeof(Environment.SpecialFolder)))
+            {
+                DescribeFolder(folder_type);
+            }
+            richTextBox1.Select(0, 0);
+        }
+
+        // Add a folder's information to the txtFolders TextBox.
+        private void DescribeFolder(Environment.SpecialFolder folder_type)
+        {
+            richTextBox1.AppendText(String.Format("{0,-25}", folder_type.ToString()) + Environment.GetFolderPath(folder_type) + "\r\n");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int i;
+            for (i = 0; i <= 7777; i++)
+            {
+                label1.Text = i.ToString();
+                Application.DoEvents();//實時響應文本框中的值
+                //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
+                //加Application.DoEvents可以防止界面停止响应
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //取得記憶體使用狀態
+
+            richTextBox1.Text += "Property\t\t\tValue\n";
+            Process proc = Process.GetCurrentProcess();
+
+            richTextBox1.Text += "Min Working Set" + "\t" + ((double)proc.MinWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Max Working Set" + "\t" + ((double)proc.MaxWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Non-paged Memory Size" + "\t" + ((double)proc.NonpagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged Memory Size" + "\t" + ((double)proc.PagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged System Memory Size" + "\t" + ((double)proc.PagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Paged Memory Size" + "\t" + ((double)proc.PeakPagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Virtual Memory Size" + "\t" + ((double)proc.PeakVirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Working Set" + "\t" + ((double)proc.PeakWorkingSet64).ToFileSize() + "\n";
+            richTextBox1.Text += "Virtual Memory Size" + "\t" + ((double)proc.VirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            int i;
+            for (i = 0; i <= 7777; i++)
+            {
+                label1.Text = i.ToString();
+                //Application.DoEvents();//實時響應文本框中的值
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button23_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void button24_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void button32_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            //離開
+            Application.Exit();
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+        }
+
+
+
+    }
+}

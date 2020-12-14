@@ -176,6 +176,7 @@
             this.bt_file12.Name = "bt_file12";
             this.bt_file12.Size = new System.Drawing.Size(185, 40);
             this.bt_file12.TabIndex = 59;
+            this.bt_file12.Text = "讀取設定檔案時間";
             this.bt_file12.UseVisualStyleBackColor = true;
             this.bt_file12.Click += new System.EventHandler(this.bt_file12_Click);
             // 

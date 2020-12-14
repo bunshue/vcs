@@ -590,7 +590,26 @@ namespace vcs_test_all_06_DirectoryFile
 
         private void bt_file12_Click(object sender, EventArgs e)
         {
+            //讀取設定檔案時間
+            string filename = @"C:\______test_files\mega.txt";
 
+            richTextBox1.Text += "檔案: " + filename + "\t原讀寫時間\n";
+            richTextBox1.Text += "CreationTime\t" + File.GetCreationTime(filename).ToString() + "\n";
+            richTextBox1.Text += "ModifiedTime\t" + File.GetLastWriteTime(filename).ToString() + "\n";
+            richTextBox1.Text += "AccessTime\t" + File.GetLastAccessTime(filename).ToString() + "\n";
+
+            //一段時間以後的寫法
+            DateTime dt_new1 = File.GetCreationTime(filename) + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
+            DateTime dt_new2 = File.GetLastWriteTime(filename) + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
+            DateTime dt_new3 = File.GetLastAccessTime(filename) + new TimeSpan(1, 13, 42, 59);    //現在時間 + 1天13時42分59秒
+
+            File.SetCreationTime(filename, dt_new1);
+            File.SetLastWriteTime(filename, dt_new2);
+            File.SetLastAccessTime(filename, dt_new3);
+            richTextBox1.Text += "檔案: " + filename + "\t設定讀寫時間\n";
+            richTextBox1.Text += "SetCreationTime\t" + dt_new1 + "\n";
+            richTextBox1.Text += "SetLastWriteTime\t" + dt_new2 + "\n";
+            richTextBox1.Text += "SetLastAccessTime\t" + dt_new3 + "\n";
         }
 
         private void bt_dir00_Click(object sender, EventArgs e)

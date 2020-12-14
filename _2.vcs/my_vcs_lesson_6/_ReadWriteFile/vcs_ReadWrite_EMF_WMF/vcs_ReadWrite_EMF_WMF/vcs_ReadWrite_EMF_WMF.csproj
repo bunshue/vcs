@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9DD22FB1-B0E1-4403-ABAD-7AD326C7C611}</ProjectGuid>
+    <ProjectGuid>{437C807F-0E4B-4BDC-85F6-12C9717F1057}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_01</RootNamespace>
-    <AssemblyName>vcs_test_all_01</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_EMF_WMF</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_EMF_WMF</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -36,7 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
