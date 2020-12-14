@@ -2,20 +2,23 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CBF1E24D-C222-43C4-80BD-91A35EF62F52}</ProjectGuid>
+    <ProjectGuid>{8F39AADD-325E-4346-B62D-FAEFCE1E868A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_test_all_10_Math_Random</RootNamespace>
-    <AssemblyName>vcs_test_all_10_Math_Random</AssemblyName>
+    <RootNamespace>vcs_DrawE_FamilyTree</RootNamespace>
+    <AssemblyName>vcs_DrawE_FamilyTree</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,8 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,10 +37,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -52,13 +59,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fraction.cs" />
-    <Compile Include="MathStuff.cs" />
-    <Compile Include="PairsTools.cs" />
+    <Compile Include="IDrawable.cs" />
+    <Compile Include="PictureNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Randomizer.cs" />
-    <Compile Include="StatsStuff.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -81,6 +85,46 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TreeNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G0.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G1A.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G1B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G1C.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G1D.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G2A1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G2D1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G2D2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G2D3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G2D4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G3D2A.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G3D2B.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="G3D2C.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -854,6 +854,47 @@ namespace vcs_test_all_10_Math_Random
 
         private void button18_Click(object sender, EventArgs e)
         {
+            show_all_cases();
+        }
+
+        void show_all_cases()
+        {
+            int i;
+            // Display the original values.
+            string[] value_array =
+            {
+                //"Ankylosaurus", "Brachiosaurus", "Caenagnathus",
+                //"Diplodocus", "Enigmosaurus","Fabrosaurus",
+                "A", "B", "C",
+                "D", "E","F",
+            };
+            int len = value_array.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += value_array[i] + "\n";
+            }
+
+            richTextBox1.Text += "From Array\n";
+            // Display pairs from the array.
+            foreach (PairsTools.Pair<string> pair in value_array.Pairs())
+            {
+                richTextBox1.Text += pair + "\n";
+            }
+
+            // Make a list holding the values.
+            List<string> value_list = new List<string>();
+            foreach (string value in value_array)
+            {
+                value_list.Add(value);
+            }
+
+            richTextBox1.Text += "From IEnumerable\n";
+
+            // Display pairs from the list.
+            foreach (PairsTools.Pair<string> pair in value_list.Pairs())
+            {
+                richTextBox1.Text += pair + "\n";
+            }
         }
 
         private const int SEARCH_NUMBER = 10;
