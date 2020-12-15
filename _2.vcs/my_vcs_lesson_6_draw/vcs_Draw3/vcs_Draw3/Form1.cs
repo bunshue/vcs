@@ -46,23 +46,6 @@ namespace vcs_Draw3
         // The current point number where the atom is.
         private int AtomPoint = 0;
 
-        int label_size_w_old = 0;
-        int label_size_h_old = 0;
-
-        // The PictureBox's current size.
-        private float StartWidth;
-        private int StartHeight;
-        private float EndWidth = 260;
-        private float Dx, CurrentWidth;
-        private int TicksToGo, TotalTicks;
-
-        // Information about the string to draw.
-        private const string LabelText = "群曜醫電股份有限公司";
-        //private const string LabelText = "C# Programming";
-        private Font TextFont;
-        private float[] CharacterWidths;
-        private float TotalCharacterWidth;
-
         Graphics gc;
         Bitmap bitmap_card;
         Graphics gc2;
@@ -159,38 +142,6 @@ namespace vcs_Draw3
             timer_rainbow.Interval = Interval;
             SelectedColor = Color.Red;
             SelectedRainbowNumber = 0;
-
-
-            label_size_w_old = label_size.Size.Width;
-            label_size_h_old = label_size.Size.Height;
-
-
-            // Set the initial size.
-            StartWidth = pictureBox_stretching.Size.Width;
-            StartHeight = pictureBox_stretching.Size.Height;
-            CurrentWidth = StartWidth;
-
-            // Stretch for 2 seconds.
-            TotalTicks = 2 * 1000 / timer1.Interval;
-            Dx = (EndWidth - StartWidth) / TotalTicks;
-
-            // Make the font and measure the characters.
-            CharacterWidths = new float[LabelText.Length];
-            TextFont = new Font("Times New Roman", 16);
-            using (Graphics gr = this.CreateGraphics())
-            {
-                for (int i = 0; i < LabelText.Length; i++)
-                {
-                    SizeF ch_size = gr.MeasureString(LabelText.Substring(i, 1), TextFont);
-                    CharacterWidths[i] = ch_size.Width;
-                }
-            }
-            TotalCharacterWidth = CharacterWidths.Sum();
-
-            CurrentWidth = StartWidth;
-            pictureBox_stretching.Size = new Size((int)StartWidth, pictureBox_stretching.Size.Height);
-            pictureBox_stretching.Refresh();
-            TicksToGo = TotalTicks;
 
             //指定畫布大小
             pictureBox_card.Width = 200;
@@ -631,8 +582,6 @@ namespace vcs_Draw3
         }
 
 
-        int dw = 0;
-        int dh = 0;
         double degree = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -648,34 +597,6 @@ namespace vcs_Draw3
             Point point1a = new Point(r, r);
             Point point2a = new Point(x, y);
             g1.DrawLine(p, point1a, point2a);     // Draw line to screen.
-
-            /*
-             * 可以變大變小的Label
-             * 屬性
-             * BackColor
-             * BorderStype 改 FixedSingle
-             * AutoSize 改 False
-             * 改 Size
-            */
-            dw++;
-            dh++;
-            if (dw > 50)
-                dw = 0;
-            if (dh > 50)
-                dh = 0;
-            label_size.Size = new Size(label_size_w_old + dw, label_size_h_old + dh);
-
-            CurrentWidth += Dx;
-            pictureBox_stretching.Size = new Size((int)CurrentWidth, StartHeight);
-            pictureBox_stretching.Refresh();
-
-            // If we're done moving, disable the Timer.
-            if (--TicksToGo <= 0)
-            {
-                timer1.Enabled = false;
-                //TicksToGo = TotalTicks;
-            }
-
         }
 
         int cnt = 0;
@@ -1327,40 +1248,6 @@ namespace vcs_Draw3
             }
         }
 
-        // Draw the text on the control.
-        private void pictureBox_stretching_Paint(object sender, PaintEventArgs e)
-        {
-            // Use AntiAlias for the best result.
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            e.Graphics.Clear(pictureBox_stretching.BackColor);
-
-            SpaceTextToFit(e.Graphics, pictureBox_stretching.ClientRectangle,
-                TextFont, Brushes.Red, LabelText);
-
-        }
-
-        // Draw text inserting space between characters
-        // to make it fill the indicated width.
-        private void SpaceTextToFit(Graphics gr, Rectangle rect, Font font, Brush brush, string text)
-        {
-            using (StringFormat string_format = new StringFormat())
-            {
-                string_format.Alignment = StringAlignment.Near;
-                string_format.LineAlignment = StringAlignment.Near;
-
-                // Calculate the spacing.
-                float space = (rect.Width - TotalCharacterWidth) / (text.Length - 1);
-
-                // Draw the characters.
-                PointF point = new PointF(rect.X, rect.Y);
-                for (int i = 0; i < text.Length; i++)
-                {
-                    gr.DrawString(text[i].ToString(), font, brush, point);
-                    point.X += CharacterWidths[i] + space;
-                }
-            }
-        }
-
         int card_no = 0;
         int card_no2 = 0;
         private void timer_card_Tick(object sender, EventArgs e)
@@ -1479,147 +1366,6 @@ namespace vcs_Draw3
 
             pictureBox_card2.Image = bitmap_card;
             pictureBox_card2.Size = new Size(w, h);
-        }
-
-        private float GradientStart = 0;
-        private float Delta = 5f;
-
-        // Make the PictureBox redraw.
-        private void timer_moving_Tick(object sender, EventArgs e)
-        {
-            pictureBox_gradient.Refresh();
-            pictureBox_text.Refresh();
-        }
-
-        // Draw the background with text on top.
-        private void pictureBox_gradient_Paint(object sender, PaintEventArgs e)
-        {
-            // Shade the background.
-            int wid = pictureBox_gradient.ClientSize.Width;
-            ShadeRect(e.Graphics, GradientStart, GradientStart + wid);
-
-            // Increase the start position.
-            GradientStart += Delta;
-            if (GradientStart >= wid) GradientStart = 0;
-
-            // Draw some text.
-            using (Font font = new Font("Times New Roman", 18, FontStyle.Bold))
-            {
-                using (StringFormat string_format = new StringFormat())
-                {
-                    string_format.Alignment = StringAlignment.Center;
-                    string_format.LineAlignment = StringAlignment.Center;
-                    e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
-                        font, Brushes.Black,
-                        pictureBox_gradient.ClientSize.Width / 2,
-                        pictureBox_gradient.ClientSize.Height / 2,
-                        string_format);
-                }
-            }
-        }
-
-        // Fill the rectangle with a gradient that
-        // shades from red to white to red.
-        private void ShadeRect(Graphics gr, float xmin, float xmax)
-        {
-            using (LinearGradientBrush br = new LinearGradientBrush(
-                new PointF(xmin, 0), new PointF(xmax, 0),
-                Color.Red, Color.Red))
-            {
-                br.WrapMode = WrapMode.Tile;
-                ColorBlend color_blend = new ColorBlend();
-                color_blend.Colors = new Color[] { Color.Red, Color.White, Color.Red };
-                color_blend.Positions = new float[] { 0, 0.5f, 1 };
-
-                br.InterpolationColors = color_blend;
-                gr.FillRectangle(br, pictureBox_gradient.ClientRectangle);
-            }
-        }
-
-        // Draw the background with text on top.
-        private void pictureBox_text_Paint(object sender, PaintEventArgs e)
-        {
-            // Clear the background.
-            int wid = pictureBox_text.ClientSize.Width;
-            e.Graphics.Clear(Color.White);
-
-            // Make the gradient brush.
-            using (LinearGradientBrush brush = new LinearGradientBrush(
-                new PointF(GradientStart, 0),
-                new PointF(GradientStart + wid, 0),
-                Color.Red, Color.Red))
-            {
-                brush.WrapMode = WrapMode.Tile;
-                ColorBlend color_blend = new ColorBlend();
-                color_blend.Colors = new Color[]
-                {
-                    Color.Blue, Color.Blue,
-                    Color.White, Color.Blue, Color.Blue
-                };
-                color_blend.Positions =
-                    new float[] { 0, 0.4f, 0.5f, 0.6f, 1 };
-                brush.InterpolationColors = color_blend;
-
-                // Use the brush to draw some text.
-                using (Font font = new Font("Times New Roman", 18, FontStyle.Bold))
-                {
-                    using (StringFormat string_format = new StringFormat())
-                    {
-                        string_format.Alignment = StringAlignment.Center;
-                        string_format.LineAlignment = StringAlignment.Center;
-                        e.Graphics.DrawString("群曜醫電 Insight Medical Solutions Inc.",
-                            font, brush,
-                            pictureBox_text.ClientSize.Width / 2,
-                            pictureBox_text.ClientSize.Height / 2,
-                            string_format);
-                    }
-                }
-            }
-
-            // Increase the start position.
-            GradientStart += Delta;
-            if (GradientStart >= wid) GradientStart = 0;
-
-
-        }
-
-        private int ProgressMinimum = 0;
-        private int ProgressMaximum = 100;
-        private int ProgressValue = 0;
-
-        private void timer_progressbar_Tick(object sender, EventArgs e)
-        {
-            ProgressValue += 1;
-            if (ProgressValue > ProgressMaximum)
-            {
-                ProgressValue = 0;
-                //tmrWork.Enabled = false;
-            }
-            pictureBox_progressbar.Refresh();
-        }
-
-        // Show the progress.
-        private void pictureBox_progressbar_Paint(object sender, PaintEventArgs e)
-        {
-            // Clear the background.
-            e.Graphics.Clear(pictureBox_progressbar.BackColor);
-
-            // Draw the progress bar.
-            float fraction = (float)(ProgressValue - ProgressMinimum) / (ProgressMaximum - ProgressMinimum);
-            int wid = (int)(fraction * pictureBox_progressbar.ClientSize.Width);
-            e.Graphics.FillRectangle(Brushes.LightGreen, 0, 0, wid, pictureBox_progressbar.ClientSize.Height);
-
-            // Draw the text.
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            using (StringFormat sf = new StringFormat())
-            {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-                int percent = (int)(fraction * 100);
-                e.Graphics.DrawString(percent.ToString() + "%", this.Font, Brushes.Black, pictureBox_progressbar.ClientRectangle, sf);
-            }
-
-
         }
 
         private double Theta = 0;

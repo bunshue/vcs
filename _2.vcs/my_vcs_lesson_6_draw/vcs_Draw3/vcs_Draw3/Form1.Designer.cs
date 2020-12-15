@@ -87,17 +87,10 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.pictureBox_atom = new System.Windows.Forms.PictureBox();
             this.timer_atom = new System.Windows.Forms.Timer(this.components);
-            this.label_size = new System.Windows.Forms.Label();
-            this.pictureBox_stretching = new System.Windows.Forms.PictureBox();
             this.timer_card = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_card = new System.Windows.Forms.PictureBox();
             this.timer_card2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_card2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_gradient = new System.Windows.Forms.PictureBox();
-            this.timer_moving = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_text = new System.Windows.Forms.PictureBox();
-            this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
-            this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             this.timer_atom2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -107,12 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -615,27 +604,6 @@
             this.timer_atom.Interval = 20;
             this.timer_atom.Tick += new System.EventHandler(this.timer_atom_Tick);
             // 
-            // label_size
-            // 
-            this.label_size.BackColor = System.Drawing.Color.LightGreen;
-            this.label_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_size.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_size.Location = new System.Drawing.Point(547, 164);
-            this.label_size.Name = "label_size";
-            this.label_size.Size = new System.Drawing.Size(160, 25);
-            this.label_size.TabIndex = 61;
-            this.label_size.Text = "可以變大變小的Label";
-            // 
-            // pictureBox_stretching
-            // 
-            this.pictureBox_stretching.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox_stretching.Location = new System.Drawing.Point(484, 280);
-            this.pictureBox_stretching.Name = "pictureBox_stretching";
-            this.pictureBox_stretching.Size = new System.Drawing.Size(171, 27);
-            this.pictureBox_stretching.TabIndex = 62;
-            this.pictureBox_stretching.TabStop = false;
-            this.pictureBox_stretching.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_stretching_Paint);
-            // 
             // timer_card
             // 
             this.timer_card.Enabled = true;
@@ -644,7 +612,7 @@
             // 
             // pictureBox_card
             // 
-            this.pictureBox_card.Location = new System.Drawing.Point(338, 241);
+            this.pictureBox_card.Location = new System.Drawing.Point(327, 241);
             this.pictureBox_card.Name = "pictureBox_card";
             this.pictureBox_card.Size = new System.Drawing.Size(102, 128);
             this.pictureBox_card.TabIndex = 63;
@@ -658,49 +626,11 @@
             // 
             // pictureBox_card2
             // 
-            this.pictureBox_card2.Location = new System.Drawing.Point(446, 241);
+            this.pictureBox_card2.Location = new System.Drawing.Point(434, 241);
             this.pictureBox_card2.Name = "pictureBox_card2";
             this.pictureBox_card2.Size = new System.Drawing.Size(102, 128);
             this.pictureBox_card2.TabIndex = 64;
             this.pictureBox_card2.TabStop = false;
-            // 
-            // pictureBox_gradient
-            // 
-            this.pictureBox_gradient.Location = new System.Drawing.Point(405, 356);
-            this.pictureBox_gradient.Name = "pictureBox_gradient";
-            this.pictureBox_gradient.Size = new System.Drawing.Size(478, 43);
-            this.pictureBox_gradient.TabIndex = 65;
-            this.pictureBox_gradient.TabStop = false;
-            this.pictureBox_gradient.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_gradient_Paint);
-            // 
-            // timer_moving
-            // 
-            this.timer_moving.Enabled = true;
-            this.timer_moving.Interval = 10;
-            this.timer_moving.Tick += new System.EventHandler(this.timer_moving_Tick);
-            // 
-            // pictureBox_text
-            // 
-            this.pictureBox_text.Location = new System.Drawing.Point(405, 403);
-            this.pictureBox_text.Name = "pictureBox_text";
-            this.pictureBox_text.Size = new System.Drawing.Size(478, 43);
-            this.pictureBox_text.TabIndex = 66;
-            this.pictureBox_text.TabStop = false;
-            this.pictureBox_text.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_text_Paint);
-            // 
-            // pictureBox_progressbar
-            // 
-            this.pictureBox_progressbar.Location = new System.Drawing.Point(405, 449);
-            this.pictureBox_progressbar.Name = "pictureBox_progressbar";
-            this.pictureBox_progressbar.Size = new System.Drawing.Size(478, 43);
-            this.pictureBox_progressbar.TabIndex = 67;
-            this.pictureBox_progressbar.TabStop = false;
-            this.pictureBox_progressbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_progressbar_Paint);
-            // 
-            // timer_progressbar
-            // 
-            this.timer_progressbar.Enabled = true;
-            this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
             // 
             // timer_atom2
             // 
@@ -712,13 +642,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
-            this.Controls.Add(this.pictureBox_progressbar);
-            this.Controls.Add(this.pictureBox_text);
-            this.Controls.Add(this.pictureBox_gradient);
             this.Controls.Add(this.pictureBox_card2);
             this.Controls.Add(this.pictureBox_card);
-            this.Controls.Add(this.pictureBox_stretching);
-            this.Controls.Add(this.label_size);
             this.Controls.Add(this.pictureBox_atom);
             this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.trackBar1);
@@ -777,12 +702,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -848,17 +769,10 @@
         private System.Windows.Forms.Label lb_fps;
         private System.Windows.Forms.PictureBox pictureBox_atom;
         private System.Windows.Forms.Timer timer_atom;
-        private System.Windows.Forms.Label label_size;
-        private System.Windows.Forms.PictureBox pictureBox_stretching;
         private System.Windows.Forms.Timer timer_card;
         private System.Windows.Forms.PictureBox pictureBox_card;
         private System.Windows.Forms.Timer timer_card2;
         private System.Windows.Forms.PictureBox pictureBox_card2;
-        private System.Windows.Forms.PictureBox pictureBox_gradient;
-        private System.Windows.Forms.Timer timer_moving;
-        private System.Windows.Forms.PictureBox pictureBox_text;
-        private System.Windows.Forms.PictureBox pictureBox_progressbar;
-        private System.Windows.Forms.Timer timer_progressbar;
         internal System.Windows.Forms.Timer timer_atom2;
     }
 }
