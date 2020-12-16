@@ -36,7 +36,7 @@ namespace vcs_test_all_07_Printer
             //button
             x_st = 12;
             y_st = 12;
-            dx = 170;
+            dx = 200;
             dy = 50;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -50,6 +50,15 @@ namespace vcs_test_all_07_Printer
             //button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }

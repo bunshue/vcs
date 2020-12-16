@@ -13,7 +13,13 @@ namespace vcs_Clock7_LED
 {
     public partial class Form1 : Form
     {
-        int flag_mode = 0;
+        int flag_operation_mode = MODE_0;
+
+        private const int MODE_0 = 0x00;   //時鐘模式
+        private const int MODE_1 = 0x01;   //倒數模式
+        private const int MODE_2 = 0x02;   //碼表模式
+        private const int MODE_3 = 0x03;   //
+        private const int MODE_4 = 0x04;   //
 
         //一段時間以後的寫法
         DateTime EventDate;// = DateTime.Now + new TimeSpan(0, 0, 0, 0);    //現在時間 + 1天13時42分59秒
@@ -108,7 +114,7 @@ namespace vcs_Clock7_LED
             float led_thickness = 70 * 6 / 10;
             float gap = 1.5f;
 
-            if (flag_mode == 0)
+            if (flag_operation_mode == 0)
             {
                 cell_width = cell_width * 6 / 10;
                 cell_height = cell_height * 6 / 10;
@@ -127,7 +133,7 @@ namespace vcs_Clock7_LED
             PointF position = new PointF(margin, margin);
 
 
-            if (flag_mode == 0)
+            if (flag_operation_mode == MODE_0)  //時鐘模式
             {
                 cell_width = cell_width / 2;
                 cell_height = cell_height / 2;
@@ -141,10 +147,8 @@ namespace vcs_Clock7_LED
                         unused_brush, unused_pen, position,
                         1.2f, dt.Hour.ToString("D2") + " " + dt.Minute.ToString("D2") + " " + dt.Second.ToString("D2"));
             }
-            else if (flag_mode == 0)
+            else if (flag_operation_mode == MODE_1) //倒數模式
             {
-
-
                 TimeSpan span;
                 span = EventDate - DateTime.Now;
 
@@ -156,6 +160,14 @@ namespace vcs_Clock7_LED
                             unused_brush, unused_pen, position,
                             1.2f, span.Minutes.ToString("D2") + " " + span.Seconds.ToString("D2"));
                 }
+            }
+            else if (flag_operation_mode == MODE_2) //碼表模式
+            {
+
+            }
+            else
+            {
+                //其他模式
             }
         }
 
