@@ -74,6 +74,17 @@ namespace vcs_test_all_10_Math_Random
             button20.Location = new Point(x_st + dx * 1, y_st + dy * 10);
             button21.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
+            txtNumber.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 7);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
             bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_random3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -1370,6 +1381,14 @@ namespace vcs_test_all_10_Math_Random
             }
 
 
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //把數字讀出來
+            double num = double.Parse(txtNumber.Text);
+            richTextBox1.Text += "原數字:\t" + num.ToString() + "\n";
+            richTextBox1.Text += "讀出來:\t" + num.ToWords() + "\n";
         }
 
 

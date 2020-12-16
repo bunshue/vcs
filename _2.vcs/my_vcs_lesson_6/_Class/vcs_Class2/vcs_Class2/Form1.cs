@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace vcs_Class2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i;
+
+            Person[] people = new Person[3];
+            people[0] = new Person("Jethro", "Tull");
+            people[1] = new Person("Pink", "Floyd");
+            people[2] = new Person("Lynyrd", "Skynyrd");
+
+            for (i = 0; i < 3; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + people[i].ToString() + "\n";
+            }
+
+            Person2[] people2 = 
+            {
+                new Person2() { FirstName="Simon", LastName="Green" },
+                new Person2() { FirstName="Terry", LastName="Pratchett" },
+                new Person2() { FirstName="Eowin", LastName="Colfer" },
+            };
+            for (i = 0; i < 3; i++)
+            {
+                richTextBox1.Text += i.ToString() + "\t" + people2[i].ToString() + "\n";
+            }
+
+        }
+    }
+
+
+    // A simple Person class.
+    public class Person
+    {
+        private string _FirstName;
+        public string FirstName
+        {
+            get { return _FirstName; }
+            set { _FirstName = value; }
+        }
+
+        public string LastName { get; set; }
+
+        public Person(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
+    }
+
+    // A simple Person class.
+    public class Person2
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
+    }
+
+}

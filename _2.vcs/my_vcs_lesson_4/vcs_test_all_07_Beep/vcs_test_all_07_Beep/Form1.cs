@@ -17,11 +17,12 @@ namespace vcs_test_all_07_Beep
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-        }
 
+
+        }
+        
         private void button1_Click(object sender, EventArgs e)
         {
             Console.Beep(); //蜂鳴器發聲 262Hz, 500ms
@@ -134,7 +135,45 @@ namespace vcs_test_all_07_Beep
             // Play the song
             Play(DoReMi);
         }
-    
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Asterisk.Play();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Beep.Play();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Exclamation.Play();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Hand.Play();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Question.Play();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            int freq = int.Parse(txtFrequency.Text);
+            int duration = int.Parse(txtDuration.Text);
+
+            System.Console.Beep(freq, duration);
+        }
+
     
     
     }

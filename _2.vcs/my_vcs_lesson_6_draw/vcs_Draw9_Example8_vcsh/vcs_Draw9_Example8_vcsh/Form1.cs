@@ -1,4 +1,5 @@
 ﻿// #define SAVE_FRAMES
+#define USE_CASE1
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -533,6 +534,8 @@ namespace vcs_Draw9_Example8_vcsh
         private float dStartAngle = (float)(Math.PI / 180);
 #endif
 
+
+#if USE_CASE1
         // Draw the gear.
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
@@ -554,7 +557,44 @@ namespace vcs_Draw9_Example8_vcsh
             DrawGear(StartAngle, e.Graphics, Brushes.Black, Brushes.Pink, Pens.Red, new PointF(x, y),
                 radius, tooth_length, 10, 5, true);
         }
+#else
+        // Draw the gears.
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            // Draw smoothly.
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
+            const float axel_radius = 5;
+            const float radius = 50;
+            const float tooth_length = 10;
+            const int num_teeth = 10;
+            const float green_ratio = 1.5f;
+            const int num_green_teeth = (int)(num_teeth * green_ratio);
+            float x = pictureBox3.ClientSize.Width / 2 - radius - tooth_length - 1;
+            float y = pictureBox3.ClientSize.Height / 3;
+            DrawGear(StartAngle, e.Graphics,
+                Brushes.Black, Brushes.LightBlue,
+                Pens.Blue, new PointF(x, y), radius,
+                tooth_length, num_teeth, axel_radius, true);
+
+            // Make the green gear 1.5 times as big (so it has 15 teeth).
+            const float green_radius = (int)(radius * 1.5f);
+            float green_angle = -StartAngle / 1.5f;
+            x += radius + green_radius + tooth_length + 2;
+            DrawGear(green_angle, e.Graphics,
+                Brushes.Black, Brushes.LightGreen,
+                Pens.Green, new PointF(x, y), green_radius,
+                tooth_length, num_green_teeth, axel_radius, true);
+
+            // Offset pink gear by half of one tooth.
+            float pink_angle = (float)(StartAngle - 360 / num_teeth);
+            y += radius + green_radius + tooth_length + 2;
+            DrawGear(pink_angle, e.Graphics,
+                Brushes.Black, Brushes.Pink,
+                Pens.Red, new PointF(x, y), radius,
+                tooth_length, num_teeth, axel_radius, true);
+        }
+#endif
         // Draw a gear.
         private void DrawGear(float start_angle, Graphics gr, Brush axle_brush, Brush gear_brush, Pen gear_pen, PointF center, float radius, float tooth_length, int num_teeth, float axle_radius, bool start_with_tooth)
         {

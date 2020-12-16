@@ -16,6 +16,8 @@ using System.Net.NetworkInformation;
 using System.IO;    //for Stream
 using System.Net;   //for WebClient
 
+using System.Collections;   //for IEnumerable
+
 namespace vcs_test_all_01
 {
     public partial class Form1 : Form
@@ -69,6 +71,9 @@ namespace vcs_test_all_01
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+
+            comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * (-1));
+
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -626,6 +631,44 @@ namespace vcs_test_all_01
                 }
             }
             return comments;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            get_system_time_zone();
+        }
+
+        void get_system_time_zone()
+        {
+            // Initialize the time zone lists.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                comboBox1.Items.Add(info);
+                richTextBox1.Text += info + "\n";
+            }
+
+            // Select a default value
+            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
+
+            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
+            string name1 = zone1.DisplayName;
+            richTextBox1.Text += "name1 = " + name1 + "\n";
+
+
+        }
+
+        // Select an item containing the target string.
+        private object FindItemContaining(IEnumerable items, string target)
+        {
+            foreach (object item in items)
+            {
+                if (item.ToString().Contains(target))
+                {
+                    return item;
+                }
+            }
+            // Return null;
+            return null;
         }
 
 

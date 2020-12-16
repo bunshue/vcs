@@ -10,9 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Globalization;//for CultureInfo
+using System.Globalization; //for CultureInfo
 using System.Threading;
-using System.Diagnostics;//for StackTrace
+using System.Diagnostics;   //for StackTrace
+using System.Reflection;    //for MethodInfo
 
 namespace vcs_test_all_03_Syntax
 {
@@ -1001,6 +1002,32 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += ((int)meal).ToString() + "\t" + value + "\n";
             }
         }
+
+        // Invoke the method.
+        private void button39_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Type this_type = this.GetType();
+                MethodInfo method_info = this_type.GetMethod(textBox1.Text);
+                method_info.Invoke(this, null);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "無法執行" + textBox1.Text + "\t原因\t" + ex.Message + "\n";
+            }
+        }
+
+        // The public methods to invoke.
+        public void Function1()
+        {
+            richTextBox1.Text += "執行了 Function1";
+        }
+        public void Function2()
+        {
+            richTextBox1.Text += "執行了 Function2";
+        }
+
 
     }
 }

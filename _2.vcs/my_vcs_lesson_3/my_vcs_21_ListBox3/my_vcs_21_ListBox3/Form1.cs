@@ -13,6 +13,12 @@ namespace my_vcs_21_ListBox3
     {
         string[] animal_array = { "ape", "bear", "cat", "dolphin", "eagle", "fox", "giraffe" };
         List<string> animal_list;
+        List<string> cookies = new List<string>() 
+            { 
+                "Chocolate Chip", 
+                "Snickerdoodle", 
+                "Peanut Butter" 
+            };
 
         public Form1()
         {
@@ -21,7 +27,7 @@ namespace my_vcs_21_ListBox3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            animal_list = new List<string>(animal_array);
+            animal_list = new List<string>(animal_array);       //string 轉 List
 
 
         }
@@ -29,18 +35,42 @@ namespace my_vcs_21_ListBox3
         private void button1_Click(object sender, EventArgs e)
         {
             listBox1.DataSource = animal_array;
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             listBox1.DataSource = animal_list;
 
+            listBox1.DataSource = cookies;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Person[] people = 
+            {
+                new Person() { FirstName="Simon", LastName="Green" },
+                new Person() { FirstName="Terry", LastName="Pratchett" },
+                new Person() { FirstName="Eowin", LastName="Colfer" },
+            };
+            listBox1.DataSource = people;
+        }
     }
+
+    // A simple Person class.
+    public class Person
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
+    }
+
 }

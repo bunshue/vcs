@@ -293,6 +293,43 @@ namespace vcs_Draw9_Example6_vcsh_text
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            // Draw a string with character bounds.
+            int x_st = 100;
+            int y_st = 570;
+            int w = 450;
+            int h = 120;
+            int dy = h + 10;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            Rectangle rect = new Rectangle(x_st, y_st, w, h);
+            e.Graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
+            using (Font font = new Font("Times New Roman", 60, FontStyle.Italic))
+            {
+                DrawStringWithCharacterBounds(e.Graphics, "Lion-mouse", font, rect);
+            }
+
+            w = 250;
+            y_st += dy;
+            rect = new Rectangle(x_st, y_st, w, h);
+            e.Graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
+            using (Font font = new Font("Times New Roman", 60, FontStyle.Regular))
+            {
+                DrawStringWithCharacterBounds(e.Graphics, "Lion", font, rect);
+            }
+
+            w = 250;
+            x_st += 260;
+            rect = new Rectangle(x_st, y_st, w, h);
+            e.Graphics.DrawRectangle(new Pen(Color.Gray, 1), rect);
+            using (Font font = new Font("Times New Roman", 60, FontStyle.Italic))
+            {
+                DrawStringWithCharacterBounds(e.Graphics, "Mouse", font, rect);
+            }
+
+
+
+            //利用label所在位置畫字，把字畫成直的
             using (StringFormat string_format = new StringFormat())
             {
                 string_format.Alignment = StringAlignment.Center;
@@ -321,6 +358,37 @@ namespace vcs_Draw9_Example6_vcsh_text
             gr.DrawString(txt, font, brush, rotated_bounds, string_format);
         }
 
+        // Draw the string and the bounds for its characters.
+        private void DrawStringWithCharacterBounds(Graphics gr, string text, Font font, Rectangle rect)
+        {
+            using (StringFormat string_format = new StringFormat())
+            {
+                string_format.Alignment = StringAlignment.Center;
+                string_format.LineAlignment = StringAlignment.Center;
+
+                // Draw the string.
+                gr.DrawString(text, font, Brushes.Blue, rect, string_format);
+
+                // Make a CharacterRange for the string's characters.
+                List<CharacterRange> range_list = new List<CharacterRange>();
+                for (int i = 0; i < text.Length; i++)
+                {
+                    range_list.Add(new CharacterRange(i, 1));
+                }
+                string_format.SetMeasurableCharacterRanges(range_list.ToArray());
+
+                // Measure the string's character ranges.
+                Region[] regions = gr.MeasureCharacterRanges(
+                    text, font, rect, string_format);
+
+                // Draw the character bounds.
+                for (int i = 0; i < text.Length; i++)
+                {
+                    Rectangle char_rect = Rectangle.Round(regions[i].GetBounds(gr));
+                    gr.DrawRectangle(Pens.Red, char_rect);
+                }
+            }
+        }
 
         private float GradientStart = 0;
         private float Delta = 5f;

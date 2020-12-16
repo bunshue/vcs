@@ -95,8 +95,12 @@
             this.lb_symbols_2 = new System.Windows.Forms.Label();
             this.tb_symbols_1 = new System.Windows.Forms.TextBox();
             this.lb_symbols_1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button39 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -462,7 +466,7 @@
             this.groupBox1.Controls.Add(this.btn_check2);
             this.groupBox1.Controls.Add(this.txtInput);
             this.groupBox1.Controls.Add(this.btn_check1);
-            this.groupBox1.Location = new System.Drawing.Point(1061, 12);
+            this.groupBox1.Location = new System.Drawing.Point(1060, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(154, 232);
             this.groupBox1.TabIndex = 47;
@@ -803,15 +807,48 @@
             this.lb_symbols_1.Location = new System.Drawing.Point(163, 364);
             this.lb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_1.Name = "lb_symbols_1";
-            this.lb_symbols_1.Size = new System.Drawing.Size(227, 12);
+            this.lb_symbols_1.Size = new System.Drawing.Size(235, 12);
             this.lb_symbols_1.TabIndex = 65;
             this.lb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox1);
+            this.groupBox3.Controls.Add(this.button39);
+            this.groupBox3.Location = new System.Drawing.Point(1220, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(154, 130);
+            this.groupBox3.TabIndex = 60;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "依名稱呼叫函數";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox1.Location = new System.Drawing.Point(6, 25);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(142, 30);
+            this.textBox1.TabIndex = 46;
+            this.textBox1.Text = "Function1";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button39
+            // 
+            this.button39.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button39.Location = new System.Drawing.Point(6, 70);
+            this.button39.Name = "button39";
+            this.button39.Size = new System.Drawing.Size(142, 42);
+            this.button39.TabIndex = 57;
+            this.button39.Text = "依名稱呼叫函數";
+            this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.ClientSize = new System.Drawing.Size(1392, 644);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lb_symbols_3);
             this.Controls.Add(this.tb_symbols_2);
             this.Controls.Add(this.lb_symbols_2);
@@ -876,6 +913,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -950,6 +989,9 @@
         internal System.Windows.Forms.Label lb_symbols_2;
         internal System.Windows.Forms.TextBox tb_symbols_1;
         internal System.Windows.Forms.Label lb_symbols_1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button39;
     }
 }
 
