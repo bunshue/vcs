@@ -11,7 +11,7 @@ using Microsoft.Win32;  //for Registry
 
 using System.Runtime.InteropServices;   //for DllImport
 
-namespace vcs_test_all_08_Registry
+namespace vcs_Registry2
 {
     public partial class Form1 : Form
     {

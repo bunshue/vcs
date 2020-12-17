@@ -23,6 +23,7 @@ namespace vcs_TreeView3
         {
             treeView1.Nodes.Clear();
             SearchDir(treeView1.Nodes, dir_name);
+            treeView1.ExpandAll();  //展開所有項目
         }
 
         // List the files and subdirectories of this directory.

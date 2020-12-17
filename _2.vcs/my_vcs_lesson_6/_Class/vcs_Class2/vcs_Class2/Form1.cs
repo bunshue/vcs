@@ -42,6 +42,50 @@ namespace vcs_Class2
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<Product> Products = new List<Product>();
+            // Load the data.
+            // Cake slices.
+            string[] cakes =
+            {
+                "Black Forest Cake",
+                "Strawberry Chocolate Mousse Cake",
+                "Chocolate Mousse Cake",
+                "Carrot Cake",
+                "Raspberry Mousse Cake",
+                "Chestnut Cream Cake",
+                "Strawberry Vanilla Cake",
+                "Coconut Mango Cake",
+                "Chocolate Ganache Cake",
+                "German Chocolate Cake",
+                "Tres Leches Cake",
+                "Jiggly Cheesecake",
+                "Tiramisu",
+                "Matcha Tiramisu",
+            };
+            foreach (string cake in cakes)
+            {
+                Products.Add(new Product(cake, 5.49m));
+            }
+
+            int len = Products.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                //使用Override的ToString
+                richTextBox1.Text += i.ToString() + "\t" + Products[i].ToString() + "\n";
+            }
+            for (i = 0; i < len; i++)
+            {
+                //使用Class內的參數
+                richTextBox1.Text += i.ToString() + "\t" + Products[i].Name + "\t" + Products[i].Price.ToString("c") + "\n";
+            }
+
+
+        }
     }
 
 
@@ -80,5 +124,22 @@ namespace vcs_Class2
             return FirstName + " " + LastName;
         }
     }
+
+    public class Product
+    {
+        public string Name;
+        public decimal Price;
+        public Product(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+
+        public override string ToString()
+        {
+            return "Product : " + Name + "\tPrice : " + Price.ToString("c");
+        }
+    }
+
 
 }

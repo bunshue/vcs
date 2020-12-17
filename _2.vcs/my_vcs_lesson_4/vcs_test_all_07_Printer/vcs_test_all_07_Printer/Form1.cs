@@ -1207,6 +1207,7 @@ namespace vcs_test_all_07_Printer
         // Display a print preview.
         private void button10_Click(object sender, EventArgs e)
         {
+            printPreviewDialog_pages.ClientSize = new Size(1920 / 2, 1080 / 2);
             printPreviewDialog_pages.ShowDialog();
         }
 

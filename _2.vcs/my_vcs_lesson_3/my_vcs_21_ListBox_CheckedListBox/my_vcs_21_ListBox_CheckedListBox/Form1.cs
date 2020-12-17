@@ -118,5 +118,24 @@ namespace my_vcs_21_ListBox_CheckedListBox
         {
             richTextBox1.Clear();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            CheckUncheckAll(true);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            CheckUncheckAll(false);
+        }
+
+        private void CheckUncheckAll(bool check)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, check);
+            }
+        }
+
     }
 }

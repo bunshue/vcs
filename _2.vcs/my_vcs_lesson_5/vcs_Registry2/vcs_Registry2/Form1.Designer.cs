@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_08_Registry
+﻿namespace vcs_Registry2
 {
     partial class Form1
     {
