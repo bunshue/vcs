@@ -1088,5 +1088,225 @@ namespace vcs_test_all_07_Printer
             }
         }
 
+        #region 多頁預覽列印 多頁列印
+        // Print the document's pages.
+        private int NextPageNum = 0;
+        private void printDocument_pages_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            // Draw a shape depending on the page we are printing.
+            switch (NextPageNum)
+            {
+                case 0: // Draw an ellipse.
+                    using (Pen the_pen = new Pen(Color.Red, 10))
+                    {
+                        e.Graphics.DrawEllipse(the_pen, e.MarginBounds);
+                    }
+                    break;
+                case 1: // Draw a triangle.
+                    using (Pen the_pen = new Pen(Color.Green, 10))
+                    {
+                        int xmid = (int)(e.MarginBounds.X + e.MarginBounds.Width / 2);
+                        Point[] pts = 
+                        {
+                            new Point(xmid, e.MarginBounds.Top),
+                            new Point(e.MarginBounds.Right, e.MarginBounds.Bottom),
+                            new Point(e.MarginBounds.Left, e.MarginBounds.Bottom),
+                        };
+                        e.Graphics.DrawPolygon(the_pen, pts);
+                    }
+                    break;
+                case 2: // Draw a rectangle.
+                    using (Pen the_pen = new Pen(Color.Blue, 10))
+                    {
+                        e.Graphics.DrawRectangle(the_pen, e.MarginBounds);
+                    }
+                    break;
+                case 3: // Draw a diamond.
+                    using (Pen the_pen = new Pen(Color.Orange, 10))
+                    {
+                        int xmid = (int)(e.MarginBounds.X + e.MarginBounds.Width / 2);
+                        int ymid = (int)(e.MarginBounds.Y + e.MarginBounds.Height / 2);
+                        Point[] pts = 
+                        {
+                            new Point(xmid, e.MarginBounds.Top),
+                            new Point(e.MarginBounds.Right, ymid),
+                            new Point(xmid, e.MarginBounds.Bottom),
+                            new Point(e.MarginBounds.Left, ymid),
+                        };
+                        e.Graphics.DrawPolygon(the_pen, pts);
+                    }
+                    break;
+            }
+
+            // Draw the margins.
+            using (Pen dashed_pen = new Pen(Color.Red, 5))
+            {
+                dashed_pen.DashPattern = new float[] { 10, 10 };
+                e.Graphics.DrawRectangle(dashed_pen, e.MarginBounds);
+            }
+
+            // Draw the page number centered.
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+
+                using (Font the_font = new Font("Times New Roman", 200, FontStyle.Bold))
+                {
+                    using (Brush the_brush = new SolidBrush(Color.Black))
+                    {
+                        e.Graphics.DrawString(String.Format("{0}", NextPageNum + 1),
+                            the_font, the_brush, e.MarginBounds, sf);
+                    }
+                }
+            }
+
+            // Next time print the next page.
+            NextPageNum += 1;
+
+            // We have more pages if we have not yet printed page 3.
+            e.HasMorePages = (NextPageNum <= 3);
+
+            // If we have no more pages, reset for the next time we print.
+            if (NextPageNum > 3) NextPageNum = 0;
+        }
+
+        // Get ready to print.
+        private void printDocument_pages_BeginPrint(object sender, PrintEventArgs e)
+        {
+            // Start with page 0.
+            NextPageNum = 0;
+        }
+
+        // Prepare to print the next page.
+        private void printDocument_pages_QueryPageSettings(object sender, QueryPageSettingsEventArgs e)
+        {
+            const int GUTTER = 100;
+            // Even numbered pages have a big margin on the left.
+            if (NextPageNum == 0)
+            {
+                // The first page. Increase the left margin.
+                e.PageSettings.Margins.Left += GUTTER;
+            }
+            else if (NextPageNum % 2 == 0)
+            {
+                // An even page. Increase the left margin
+                // and decrease the right margin.
+                e.PageSettings.Margins.Left += GUTTER;
+                e.PageSettings.Margins.Right -= GUTTER;
+            }
+            else
+            {
+                // An odd page. Decrease the left margin
+                // and increase the right margin.
+                e.PageSettings.Margins.Left -= GUTTER;
+                e.PageSettings.Margins.Right += GUTTER;
+            }
+        }
+
+        // Display a print preview.
+        private void button10_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog_pages.ShowDialog();
+        }
+
+        // Print.
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //printDocument_pages.Print();  //comment for safety
+        }
+        #endregion
+
+        #region 格式化表單預覽列印
+        // The sample data.
+        private string[] Headers = { "Name", "Street", "City", "State", "Zip" };
+        private string[,] Data =
+            {
+                {"Alice Archer", "1276 Ash Ave", "Ann Arbor", "MI", "12893"},
+                {"Bill Blaze", "26157 Beach Blvd", "Boron", "CA", "23617"},
+                {"Cindy Carruthers", "352 Cherry Ct", "Chicago", "IL", "35271"},
+                {"Dean Dent", "4526 Deerfield Dr", "Denver", "CO", "47848"},
+            };
+        
+        // Print the document's page.
+        // Note that this version doesn't handle multiple pages.
+        private void printDocument_grid2_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            // Use this font.
+            using (Font header_font = new Font("Times New Roman", 16, FontStyle.Bold))
+            {
+                using (Font body_font = new Font("Times New Roman", 12))
+                {
+                    // We'll skip this much space between rows.
+                    int line_spacing = 20;
+
+                    // See how wide the columns must be.
+                    int[] column_widths = FindColumnWidths(
+                        e.Graphics, header_font, body_font, Headers, Data);
+
+                    // Start at the left margin.
+                    int x = e.MarginBounds.Left;
+
+                    // Print by columns.
+                    for (int col = 0; col < Headers.Length; col++)
+                    {
+                        // Print the header.
+                        int y = e.MarginBounds.Top;
+                        e.Graphics.DrawString(Headers[col],
+                            header_font, Brushes.Blue, x, y);
+                        y += (int)(line_spacing * 1.5);
+
+                        // Print the items in the column.
+                        for (int row = 0; row <= Data.GetUpperBound(0); row++)
+                        {
+                            e.Graphics.DrawString(Data[row, col],
+                                body_font, Brushes.Black, x, y);
+                            y += line_spacing;
+                        }
+
+                        // Move to the next column.
+                        x += column_widths[col];
+                    } // Looping over columns
+                } // using body_font
+            } // using header_font
+
+            //DrawGrid(e, y)
+            e.HasMorePages = false;
+        }
+
+        // Figure out how wide each column should be.
+        private int[] FindColumnWidths(Graphics gr, Font header_font, Font body_font, string[] headers, string[,] values)
+        {
+            // Make room for the widths.
+            int[] widths = new int[headers.Length];
+
+            // Find the width for each column.
+            for (int col = 0; col < widths.Length; col++)
+            {
+                // Check the column header.
+                widths[col] = (int)gr.MeasureString(headers[col], header_font).Width;
+
+                // Check the items.
+                for (int row = 0; row <= values.GetUpperBound(0); row++)
+                {
+                    int value_width = (int)gr.MeasureString(values[row, col], body_font).Width;
+                    if (widths[col] < value_width) widths[col] = value_width;
+                }
+
+                // Add some extra space.
+                widths[col] += 20;
+            }
+
+            return widths;
+        }
+
+
+        // Display a print preview.
+        private void button12_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog_grid2.ShowDialog();
+        }
+        #endregion
+
     }
 }

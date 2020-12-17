@@ -15,27 +15,69 @@ namespace vcs_Clock7_LED
     {
         int flag_operation_mode = MODE_0;
 
-        private const int MODE_0 = 0x00;   //時鐘模式
-        private const int MODE_1 = 0x01;   //倒數模式
-        private const int MODE_2 = 0x02;   //碼表模式
-        private const int MODE_3 = 0x03;   //
+        private const int MODE_0 = 0x00;   //測試模式
+        private const int MODE_1 = 0x01;   //時鐘模式
+        private const int MODE_2 = 0x02;   //倒數模式
+        private const int MODE_3 = 0x03;   //碼表模式
         private const int MODE_4 = 0x04;   //
 
-        //一段時間以後的寫法
-        DateTime EventDate;// = DateTime.Now + new TimeSpan(0, 0, 0, 0);    //現在時間 + 1天13時42分59秒
-        //richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + EventDate.ToString() + "\n";
+        DateTime EventDate;
 
         public Form1()
         {
             InitializeComponent();
-            EventDate = DateTime.Now + new TimeSpan(0, 0, 10, 0);    //現在時間 + 1天13時42分59秒
+
+            if (flag_operation_mode == MODE_2) //倒數模式
+            {
+                //一段時間以後的寫法
+                EventDate = DateTime.Now + new TimeSpan(0, 0, 10, 0);    //現在時間 + 1天13時42分59秒
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (flag_operation_mode == MODE_0)  //測試模式
+            {
+                //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
+                //this.StartPosition = FormStartPosition.Manual;
+                //this.Location = new Point(50, 100);
+            }
+            else
+            {
+                //最大化螢幕
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+                pictureBox1.Location = new Point(0, 0);
+                pictureBox1.Size = new Size(1920, 1080);
+            }
+
+            if (flag_operation_mode == MODE_0)
+            {
+                this.Text = "測試模式";
+            }
+            else if (flag_operation_mode == MODE_1)
+            {
+                this.Text = "時鐘模式";
+            }
+            else if (flag_operation_mode == MODE_2)
+            {
+                this.Text = "倒數模式";
+            }
+            else if (flag_operation_mode == MODE_3)
+            {
+                this.Text = "碼表模式";
+            }
+            else
+            {
+                this.Text = "其他模式";
+            }
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-//            TestLeds(e.Graphics);
-//            TestColorful(e.Graphics);
-//            TestSplat(e.Graphics);
+            //TestLeds(e.Graphics);
+            //TestColorful(e.Graphics);
+            //TestSplat(e.Graphics);
             TestLetters(e.Graphics);
         }
         private void TestSplat(Graphics gr)
@@ -114,7 +156,13 @@ namespace vcs_Clock7_LED
             float led_thickness = 70 * 6 / 10;
             float gap = 1.5f;
 
-            if (flag_operation_mode == 0)
+            if (flag_operation_mode == MODE_0)
+            {
+                cell_width = cell_width * 1 / 7;
+                cell_height = cell_height * 1 / 7;
+                led_thickness = led_thickness * 1 / 7;
+            }
+            else if (flag_operation_mode == MODE_1)
             {
                 cell_width = cell_width * 6 / 10;
                 cell_height = cell_height * 6 / 10;
@@ -132,8 +180,21 @@ namespace vcs_Clock7_LED
 
             PointF position = new PointF(margin, margin);
 
+            if (flag_operation_mode == MODE_0)  //測試模式
+            {
+                cell_width = cell_width / 2;
+                cell_height = cell_height / 2;
+                led_thickness = led_thickness / 2;
 
-            if (flag_operation_mode == MODE_0)  //時鐘模式
+                position.X = 50;
+                position.Y = 50;
+
+                DateTime dt = DateTime.Now;
+                letter.DrawText(gr, bg_brush, used_brush, used_pen,
+                        unused_brush, unused_pen, position,
+                        1.2f, dt.Hour.ToString("D2") + " " + dt.Minute.ToString("D2") + " " + dt.Second.ToString("D2"));
+            }
+            else if (flag_operation_mode == MODE_1)  //時鐘模式
             {
                 cell_width = cell_width / 2;
                 cell_height = cell_height / 2;
@@ -147,7 +208,7 @@ namespace vcs_Clock7_LED
                         unused_brush, unused_pen, position,
                         1.2f, dt.Hour.ToString("D2") + " " + dt.Minute.ToString("D2") + " " + dt.Second.ToString("D2"));
             }
-            else if (flag_operation_mode == MODE_1) //倒數模式
+            else if (flag_operation_mode == MODE_2) //倒數模式
             {
                 TimeSpan span;
                 span = EventDate - DateTime.Now;
@@ -161,7 +222,7 @@ namespace vcs_Clock7_LED
                             1.2f, span.Minutes.ToString("D2") + " " + span.Seconds.ToString("D2"));
                 }
             }
-            else if (flag_operation_mode == MODE_2) //碼表模式
+            else if (flag_operation_mode == MODE_3) //碼表模式
             {
 
             }
@@ -241,19 +302,5 @@ namespace vcs_Clock7_LED
             pictureBox1.Refresh();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(50, 100);
-            
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            //this.Size = new Size(1570, 520);
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Size = new Size(1920, 1080);
-
-        }
     }
 }

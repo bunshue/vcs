@@ -14,7 +14,7 @@ namespace vcs_Clipboard
 {
     public partial class Form1 : Form
     {
-        bool flag_my_PicPick = false;
+        bool flag_my_PicPick = true;
         int clear_label_count = 0;
 
         public Form1()
@@ -214,7 +214,11 @@ namespace vcs_Clipboard
         {
             if (flag_my_PicPick == true)
             {
-                //全螢幕截圖
+                this.Hide();    // Hide this form.
+                delay(100);
+
+                /*
+                //全螢幕截圖 法一
                 //建立空白畫布
                 Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
                 //取得畫布的繪圖物件用以繪圖
@@ -236,8 +240,48 @@ namespace vcs_Clipboard
                 {
                     richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
+                */
+
+                //全螢幕截圖 法二
+                // Get the screen's image.
+                using (Bitmap bitmap1 = GetScreenImage())
+                {
+                    //存成bmp檔
+                    string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                    bitmap1.Save(filename, ImageFormat.Jpeg);
+                    //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                    label1.Text = "存檔成功";
+                    timer1.Enabled = true;
+                }
+                this.Show();    // Show this form again.
             }
         }
+
+        // Get the screen's image.
+        private Bitmap GetScreenImage()
+        {
+            // Make a bitmap to hold the result.
+            Bitmap bitmap1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format24bppRgb);
+
+            // Copy the image into the bitmap.
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+            }
+
+            // Return the result.
+            return bitmap1;
+        }
+
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        } 
 
         private void button3_Click(object sender, EventArgs e)
         {

@@ -42,6 +42,8 @@ namespace vcs_test_all_01_Richtextbox1
             richTextBox_format_2.SelectionBackColor = Color.Yellow;
             richTextBox_format_2.SelectionColor = Color.Brown;
             richTextBox_format_2.Select(0, 0);
+
+            show_richtextbox_tabs();
         }
 
         // Select the indicated text.
@@ -58,6 +60,21 @@ namespace vcs_test_all_01_Richtextbox1
                 // Found the text. Select it.
                 rch.Select(pos, target.Length);
             }
+        }
+
+        void show_richtextbox_tabs()
+        {
+            // Set the tabs and enter some text.
+            richTextBox2.SelectionTabs = new int[] { 80, 160, 240 };
+            richTextBox2.AcceptsTab = true;
+
+            richTextBox2.Text += "顯示RichTextBox中的Tab功能\n\n";
+            richTextBox2.Text +=
+                "Breakfast\tLunch\tDinner\n" +
+                "Coffee\tSoda\tWine\n" +
+                "Bagel\tSandwich\tSalad\n" +
+                "Fruit\tChips\tTofuburger\n" +
+                "\tCookie\tVeggies";
         }
 
         void show_item_location()

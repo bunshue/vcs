@@ -104,18 +104,27 @@
             this.txtDate = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblGmtTime = new System.Windows.Forms.Label();
+            this.lblGmtDate = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblLocalTime = new System.Windows.Forms.Label();
+            this.lblLocalDate = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -132,9 +141,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1123, 22);
+            this.richTextBox1.Location = new System.Drawing.Point(1123, 197);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(313, 516);
+            this.richTextBox1.Size = new System.Drawing.Size(313, 548);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -926,6 +935,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "相距時間";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label20.Location = new System.Drawing.Point(7, 99);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 16);
+            this.label20.TabIndex = 36;
+            this.label20.Text = "Parsed:";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox9.Location = new System.Drawing.Point(74, 96);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.Size = new System.Drawing.Size(170, 27);
+            this.textBox9.TabIndex = 35;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox10.Location = new System.Drawing.Point(74, 72);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(170, 23);
+            this.textBox10.TabIndex = 34;
+            this.textBox10.Text = "14 December 1972, 19:54:57";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label21.Location = new System.Drawing.Point(6, 75);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(57, 16);
+            this.label21.TabIndex = 33;
+            this.label21.Text = "Date 2 :";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -985,49 +1032,97 @@
             this.label19.TabIndex = 20;
             this.label19.Text = "Date 1 :";
             // 
-            // label20
+            // groupBox3
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label20.Location = new System.Drawing.Point(7, 99);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(53, 16);
-            this.label20.TabIndex = 36;
-            this.label20.Text = "Parsed:";
+            this.groupBox3.Controls.Add(this.lblGmtTime);
+            this.groupBox3.Controls.Add(this.lblGmtDate);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox3.Location = new System.Drawing.Point(1123, 104);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(260, 87);
+            this.groupBox3.TabIndex = 64;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "GMT";
             // 
-            // textBox9
+            // lblGmtTime
             // 
-            this.textBox9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox9.Location = new System.Drawing.Point(74, 96);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(170, 27);
-            this.textBox9.TabIndex = 35;
+            this.lblGmtTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblGmtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGmtTime.ForeColor = System.Drawing.Color.Black;
+            this.lblGmtTime.Location = new System.Drawing.Point(17, 20);
+            this.lblGmtTime.Name = "lblGmtTime";
+            this.lblGmtTime.Size = new System.Drawing.Size(237, 34);
+            this.lblGmtTime.TabIndex = 5;
+            this.lblGmtTime.Text = "00:00:00 AM";
+            this.lblGmtTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox10
+            // lblGmtDate
             // 
-            this.textBox10.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox10.Location = new System.Drawing.Point(74, 72);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(170, 23);
-            this.textBox10.TabIndex = 34;
-            this.textBox10.Text = "14 December 1972, 19:54:57";
+            this.lblGmtDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblGmtDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGmtDate.ForeColor = System.Drawing.Color.Black;
+            this.lblGmtDate.Location = new System.Drawing.Point(17, 54);
+            this.lblGmtDate.Name = "lblGmtDate";
+            this.lblGmtDate.Size = new System.Drawing.Size(237, 27);
+            this.lblGmtDate.TabIndex = 9;
+            this.lblGmtDate.Text = "12/25/20";
+            this.lblGmtDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label21
+            // groupBox4
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label21.Location = new System.Drawing.Point(6, 75);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(57, 16);
-            this.label21.TabIndex = 33;
-            this.label21.Text = "Date 2 :";
+            this.groupBox4.Controls.Add(this.lblLocalTime);
+            this.groupBox4.Controls.Add(this.lblLocalDate);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox4.Location = new System.Drawing.Point(1123, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(260, 87);
+            this.groupBox4.TabIndex = 63;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Local";
+            // 
+            // lblLocalTime
+            // 
+            this.lblLocalTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLocalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLocalTime.ForeColor = System.Drawing.Color.Black;
+            this.lblLocalTime.Location = new System.Drawing.Point(17, 20);
+            this.lblLocalTime.Name = "lblLocalTime";
+            this.lblLocalTime.Size = new System.Drawing.Size(237, 34);
+            this.lblLocalTime.TabIndex = 5;
+            this.lblLocalTime.Text = "00:00:00 AM";
+            this.lblLocalTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblLocalDate
+            // 
+            this.lblLocalDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLocalDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLocalDate.ForeColor = System.Drawing.Color.Black;
+            this.lblLocalDate.Location = new System.Drawing.Point(17, 54);
+            this.lblLocalDate.Name = "lblLocalDate";
+            this.lblLocalDate.Size = new System.Drawing.Size(237, 27);
+            this.lblLocalDate.TabIndex = 9;
+            this.lblLocalDate.Text = "12/25/20";
+            this.lblLocalDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 500;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1446, 612);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button50);
@@ -1096,6 +1191,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1188,6 +1285,13 @@
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label19;
+        internal System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lblGmtTime;
+        private System.Windows.Forms.Label lblGmtDate;
+        internal System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lblLocalTime;
+        private System.Windows.Forms.Label lblLocalDate;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

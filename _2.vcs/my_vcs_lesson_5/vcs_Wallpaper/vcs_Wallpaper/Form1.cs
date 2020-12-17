@@ -99,6 +99,7 @@ namespace vcs_Wallpaper
                 // Try to use that image.
                 try
                 {
+                    // Set the desktop picture.
                     DisplayPicture(FileNames[file_num], checkBox1.Checked);
                     break;
                 }
@@ -120,17 +121,27 @@ namespace vcs_Wallpaper
         // Display the file on the desktop.
         private void DisplayPicture(string file_name, bool update_registry)
         {
-            // If we should update the registry,
-            // set the appropriate flags.
-            uint flags = 0;
-            if (update_registry)
-                flags = SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE;
-
-            // Set the desktop background to this file.
-            if (!SystemParametersInfo(SPI_SETDESKWALLPAPER,
-                0, file_name, flags))
+            try
             {
-                MessageBox.Show("SystemParametersInfo failed.",
+                // If we should update the registry,
+                // set the appropriate flags.
+                uint flags = 0;
+                if (update_registry)
+                    flags = SPIF_UPDATEINIFILE | SPIF_SENDWININICHANGE;
+
+                // Set the desktop background to this file.
+                if (!SystemParametersInfo(SPI_SETDESKWALLPAPER,
+                    0, file_name, flags))
+                {
+                    MessageBox.Show("SystemParametersInfo failed.",
+                        "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error displaying picture " +
+                    file_name + ".\n" + ex.Message,
                     "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
             }

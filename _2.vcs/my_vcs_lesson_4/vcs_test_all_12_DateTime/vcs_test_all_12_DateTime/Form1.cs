@@ -1286,6 +1286,21 @@ new System.Globalization.ChineseLunisolarCalendar();
             }
         }
 
+        // Update the clocks.
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            // Display the local time.
+            DateTime now = DateTime.Now;
+            lblLocalTime.Text = now.ToLongTimeString();
+            lblLocalDate.Text = now.ToShortDateString();
+
+            // Display the GMT time.
+            DateTimeOffset local_offset = new DateTimeOffset(now);
+            DateTimeOffset utc_offset = local_offset.ToUniversalTime();
+            lblGmtTime.Text = utc_offset.DateTime.ToLongTimeString();
+            lblGmtDate.Text = utc_offset.DateTime.ToShortDateString();
+        }
+
     }
 }
 

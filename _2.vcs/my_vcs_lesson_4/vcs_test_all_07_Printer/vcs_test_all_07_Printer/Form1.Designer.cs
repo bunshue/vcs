@@ -68,6 +68,10 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
+            this.printDocument_pages = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_pages = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument_grid2 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_grid2 = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
@@ -384,9 +388,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Location = new System.Drawing.Point(12, 327);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(194, 142);
             this.groupBox1.TabIndex = 55;
             this.groupBox1.TabStop = false;
@@ -395,7 +399,7 @@
             // pictureBox_star
             // 
             this.pictureBox_star.Location = new System.Drawing.Point(415, 423);
-            this.pictureBox_star.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox_star.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_star.Name = "pictureBox_star";
             this.pictureBox_star.Size = new System.Drawing.Size(224, 212);
             this.pictureBox_star.TabIndex = 56;
@@ -409,7 +413,9 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(194, 45);
             this.button10.TabIndex = 57;
+            this.button10.Text = "多頁預覽列印";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -418,7 +424,9 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(194, 45);
             this.button11.TabIndex = 58;
+            this.button11.Text = "多頁列印";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -427,7 +435,9 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(194, 45);
             this.button12.TabIndex = 59;
+            this.button12.Text = "格式化表單預覽列印";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -464,6 +474,38 @@
             this.button16.Size = new System.Drawing.Size(194, 45);
             this.button16.TabIndex = 63;
             this.button16.UseVisualStyleBackColor = true;
+            // 
+            // printDocument_pages
+            // 
+            this.printDocument_pages.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument_pages_BeginPrint);
+            this.printDocument_pages.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_pages_PrintPage);
+            this.printDocument_pages.QueryPageSettings += new System.Drawing.Printing.QueryPageSettingsEventHandler(this.printDocument_pages_QueryPageSettings);
+            // 
+            // printPreviewDialog_pages
+            // 
+            this.printPreviewDialog_pages.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_pages.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_pages.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_pages.Document = this.printDocument_pages;
+            this.printPreviewDialog_pages.Enabled = true;
+            this.printPreviewDialog_pages.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_pages.Icon")));
+            this.printPreviewDialog_pages.Name = "printPreviewDialog_grid";
+            this.printPreviewDialog_pages.Visible = false;
+            // 
+            // printDocument_grid2
+            // 
+            this.printDocument_grid2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_grid2_PrintPage);
+            // 
+            // printPreviewDialog_grid2
+            // 
+            this.printPreviewDialog_grid2.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_grid2.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_grid2.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_grid2.Document = this.printDocument_grid2;
+            this.printPreviewDialog_grid2.Enabled = true;
+            this.printPreviewDialog_grid2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_grid2.Icon")));
+            this.printPreviewDialog_grid2.Name = "printPreviewDialog_grid2";
+            this.printPreviewDialog_grid2.Visible = false;
             // 
             // Form1
             // 
@@ -545,6 +587,10 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
+        private System.Drawing.Printing.PrintDocument printDocument_pages;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pages;
+        private System.Drawing.Printing.PrintDocument printDocument_grid2;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid2;
     }
 }
 
