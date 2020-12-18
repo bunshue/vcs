@@ -671,6 +671,51 @@ namespace vcs_test_all_01
             return null;
         }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            // Display the operating system's name.
+            // Get the OS information.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394239.aspx
+            string os_query = "SELECT * FROM Win32_OperatingSystem";
+            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher(os_query);
+            foreach (ManagementObject info in os_searcher.Get())
+            {
+                //lblCaption.Text = info.Properties["Caption"].Value.ToString().Trim();
+                //lblVersion.Text = "Version " + info.Properties["Version"].Value.ToString() + " SP " + info.Properties["ServicePackMajorVersion"].Value.ToString() + "." + info.Properties["ServicePackMinorVersion"].Value.ToString();
+
+                richTextBox1.Text += info.Properties["Caption"].Value.ToString().Trim() + "\n";
+                richTextBox1.Text += "Version " + info.Properties["Version"].Value.ToString() + " SP " + info.Properties["ServicePackMajorVersion"].Value.ToString() + "." + info.Properties["ServicePackMinorVersion"].Value.ToString() + "\n";
+            }
+
+            // Get number of processors.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394373.aspx
+            string cpus_query = "SELECT * FROM Win32_ComputerSystem";
+            ManagementObjectSearcher cpus_searcher = new ManagementObjectSearcher(cpus_query);
+            foreach (ManagementObject info in cpus_searcher.Get())
+            {
+                //lblCpus.Text = info.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors";
+
+                richTextBox1.Text += info.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors" + "\n";
+
+            }
+
+            // Get 32- versus 64-bit.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394373.aspx
+            string proc_query = "SELECT * FROM Win32_Processor";
+            ManagementObjectSearcher proc_searcher = new ManagementObjectSearcher(proc_query);
+            foreach (ManagementObject info in proc_searcher.Get())
+            {
+                //lblBits.Text = info.Properties["AddressWidth"].Value.ToString() + "-bit";
+
+                richTextBox1.Text += info.Properties["AddressWidth"].Value.ToString() + "-bit" + "\n";
+            }
+
+
+        }
+
 
     }
 }

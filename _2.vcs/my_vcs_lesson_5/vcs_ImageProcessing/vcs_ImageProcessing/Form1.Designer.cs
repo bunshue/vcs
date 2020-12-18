@@ -48,17 +48,14 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_R)).BeginInit();
@@ -260,16 +257,6 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(949, 230);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(72, 37);
-            this.button12.TabIndex = 20;
-            this.button12.Text = "SetPixel 彩色轉灰階";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
             // button13
             // 
             this.button13.Location = new System.Drawing.Point(825, 445);
@@ -282,23 +269,13 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(902, 392);
+            this.button14.Location = new System.Drawing.Point(825, 392);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(71, 37);
             this.button14.TabIndex = 22;
             this.button14.Text = "轉成藍色系";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(902, 445);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(71, 37);
-            this.button15.TabIndex = 23;
-            this.button15.Text = "灰度處理";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button16
             // 
@@ -312,7 +289,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(988, 459);
+            this.button17.Location = new System.Drawing.Point(919, 457);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(75, 23);
             this.button17.TabIndex = 27;
@@ -322,7 +299,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(988, 421);
+            this.button18.Location = new System.Drawing.Point(919, 419);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(75, 23);
             this.button18.TabIndex = 26;
@@ -332,7 +309,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(988, 392);
+            this.button19.Location = new System.Drawing.Point(919, 390);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(75, 23);
             this.button19.TabIndex = 25;
@@ -342,7 +319,7 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(1069, 435);
+            this.button20.Location = new System.Drawing.Point(1000, 433);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(48, 23);
             this.button20.TabIndex = 28;
@@ -360,32 +337,19 @@
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
-            // button22
-            // 
-            this.button22.Location = new System.Drawing.Point(949, 283);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(72, 37);
-            this.button22.TabIndex = 30;
-            this.button22.Text = "Marshal 彩色轉灰階";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1192, 987);
-            this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button16);
-            this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
@@ -441,17 +405,14 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
     }
 }
 

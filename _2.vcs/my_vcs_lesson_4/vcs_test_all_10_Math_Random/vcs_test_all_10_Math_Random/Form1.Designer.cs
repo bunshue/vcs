@@ -553,12 +553,14 @@
             // 
             // button23
             // 
-            this.button23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button23.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button23.Location = new System.Drawing.Point(353, 96);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(155, 40);
             this.button23.TabIndex = 34;
+            this.button23.Text = "使用 Euler\'s Sieve 計算質數";
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button24
             // 

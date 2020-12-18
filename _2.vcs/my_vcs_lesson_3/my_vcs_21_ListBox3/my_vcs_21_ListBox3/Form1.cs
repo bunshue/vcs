@@ -59,6 +59,17 @@ namespace my_vcs_21_ListBox3
             };
             listBox1.DataSource = people;
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            listBox1.MultiColumn = true;    //多欄
+            listBox1.ColumnWidth = 50;      //欄寬
+            int i;
+            for (i = 0; i < 100; i++)
+            {
+                listBox1.Items.Add(i);
+            }
+        }
     }
 
     // A simple Person class.

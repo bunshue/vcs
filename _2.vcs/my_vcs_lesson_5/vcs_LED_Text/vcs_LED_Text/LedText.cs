@@ -73,6 +73,22 @@ namespace vcs_LED_Text
             LetterLeds.Add('Y', StringToBool("00101000001000"));
             LetterLeds.Add('Z', StringToBool("10001000010001"));
             LetterLeds.Add(' ', StringToBool("00000000000000"));
+            LetterLeds.Add('#', StringToBool("11111111111111"));
+            LetterLeds.Add('$', StringToBool("11010011001011"));
+            LetterLeds.Add('+', StringToBool("00010011001000"));
+            LetterLeds.Add('-', StringToBool("00000011000000"));
+            LetterLeds.Add('*', StringToBool("00111011011100"));
+            LetterLeds.Add('/', StringToBool("00001000010000"));
+            LetterLeds.Add('\\', StringToBool("00100000000100"));
+            LetterLeds.Add('[', StringToBool("11000000100001"));
+            LetterLeds.Add(']', StringToBool("10000100000011"));
+            LetterLeds.Add('(', StringToBool("11000000100001"));
+            LetterLeds.Add(')', StringToBool("10000100000011"));
+            LetterLeds.Add('<', StringToBool("00001000000100"));
+            LetterLeds.Add('>', StringToBool("00100000010000"));
+            LetterLeds.Add('^', StringToBool("00000000010100"));
+            LetterLeds.Add('_', StringToBool("00000000000001"));
+            LetterLeds.Add('=', StringToBool("00000011000001"));
             //                                -|\|/|--|/|\|-
         }
 

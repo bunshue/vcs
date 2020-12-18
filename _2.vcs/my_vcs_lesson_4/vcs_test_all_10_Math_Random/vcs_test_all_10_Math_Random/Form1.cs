@@ -1391,6 +1391,69 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "讀出來:\t" + num.ToWords() + "\n";
         }
 
+        private void button23_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "使用 Euler's Sieve 計算質數\n";
+
+            // Make the sieve.
+            int max = 5000;
+            richTextBox1.Text += "數字 " + max.ToString() + " 以下的質數\n";
+            bool[] is_prime = MakeSieve(max);
+
+            // Display the primes.
+            int num_primes = 0;
+            for (int i = 2; i <= max; i++)
+            {
+                if (is_prime[i])
+                {
+                    if (num_primes <= 10000)
+                    {
+                        richTextBox1.Text += i.ToString() + " ";
+                    }
+                    num_primes++;
+                }
+            }
+            if (num_primes > 10000)
+            {
+                richTextBox1.Text += "...";
+            }
+            richTextBox1.Text += "\n";
+
+            // Display the estimated and actual number of primes.
+            // Display a Legendre estimate ?(n) = n/(log(n) - 1.08366).
+            // See http://mathworld.wolfram.com/PrimeCountingFunction.html.
+            double est = (max / (Math.Log(max) - 1.08366));
+            richTextBox1.Text += "預估質數 : " + est.ToString("0") + " 個\n";
+            richTextBox1.Text += "實際質數 : " + num_primes.ToString() + " 個\n";
+        }
+
+        // Build Euler's Sieve.
+        private bool[] MakeSieve(int max)
+        {
+            // Make an array indicating whether numbers are prime.
+            bool[] is_prime = new bool[max + 1];
+            is_prime[2] = true;
+            for (int i = 3; i <= max; i += 2) is_prime[i] = true;
+
+            // Cross out multiples of odd primes.
+            for (int p = 3; p <= max; p += 2)
+            {
+                // See if i is prime.
+                if (is_prime[p])
+                {
+                    // Knock out multiples of p.
+                    int max_q = max / p;
+                    if (max_q % 2 == 0) max_q--;    // Make it odd.
+                    for (int q = max_q; q >= p; q -= 2)
+                    {
+                        // Only use q if it is prime.
+                        if (is_prime[q]) is_prime[p * q] = false;
+                    }
+                }
+            }
+            return is_prime;
+        }
+
 
 
     }

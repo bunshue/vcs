@@ -482,6 +482,9 @@ namespace vcs_test_all_09_Form
         {
             //在退出程序前彈出確認退出程序的對話框
 
+            // Tell the user why the form is closing.
+            MessageBox.Show(e.CloseReason.ToString(), "關閉程式原因");
+
             if (e.CloseReason != CloseReason.WindowsShutDown)
             {
                 if (MessageBox.Show("是否確定要關閉程式", "關閉程式", MessageBoxButtons.YesNo) == DialogResult.No)
