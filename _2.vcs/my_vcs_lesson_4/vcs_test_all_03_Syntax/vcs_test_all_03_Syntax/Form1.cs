@@ -1028,6 +1028,17 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "執行了 Function2";
         }
 
+        #region 使用相同的函數用Tag區分
+        // Use the selected color for the form's background.
+        private void button_color(object sender, EventArgs e)
+        {
+            // Get the sender as a button.
+            Button btn = sender as Button;
+
+            // Convert its Tag value into a color.
+            this.BackColor = Color.FromName(btn.Tag.ToString());
+        }
+        #endregion
 
     }
 }

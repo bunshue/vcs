@@ -521,6 +521,8 @@ namespace vcs_test_all_12_DateTime
             txtDate.Text = "11 March 2006, 9:15";
 
             calculate_time_difference();
+
+            load_listview_data();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1301,6 +1303,30 @@ new System.Globalization.ChineseLunisolarCalendar();
             lblGmtDate.Text = utc_offset.DateTime.ToShortDateString();
         }
 
+        void load_listview_data()
+        {
+            DateTime now = DateTime.Now;
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", now.ToLongDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", now.ToLongTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", now.ToShortDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", now.ToShortTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", now.ToString() }));
+
+
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                for (int j = 0; j < listView1.Items[i].SubItems.Count; j++)
+                {
+                    //richTextBox1.Text += "c2 = " + listView1.Items[i].SubItems.Count.ToString() + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
+                }
+            }
+        }
     }
 }
 

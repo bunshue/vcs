@@ -51,6 +51,12 @@ namespace vcs_Draw3
         Graphics gc2;
         Bitmap bitmap_card2;
 
+        #region 畫random曲線
+        private int Ymid;
+        private int YValue;
+        private const int GridStep = 40;
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -121,9 +127,30 @@ namespace vcs_Draw3
             pictureBox_atom.Image = Background;
             timer_atom.Enabled = true;
 
+            #region 畫random曲線
+            Ymid = pictureBox_random.ClientSize.Height / 2;
+            YValue = Ymid;
 
+            // Make the Bitmap and Graphics objects.
+            int wid = pictureBox_random.ClientSize.Width;
+            int hgt = pictureBox_random.ClientSize.Height;
+            Bitmap bm = new Bitmap(wid, hgt);
+            Graphics grnd = Graphics.FromImage(bm);
+
+            // Draw guide lines.
+            grnd.Clear(Color.Blue);
+            for (int i = Ymid; i <= pictureBox_random.ClientSize.Height; i += GridStep)
+            {
+                grnd.DrawLine(Pens.LightBlue, 0, i, wid - 1, i);
+            }
+            for (int i = Ymid; i >= 0; i -= GridStep)
+            {
+                grnd.DrawLine(Pens.LightBlue, 0, i, wid - 1, i);
+            }
+
+            pictureBox_random.Image = bm;
+            #endregion
         }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -172,7 +199,7 @@ namespace vcs_Draw3
             int dy;
 
             //button
-            x_st = 900;
+            x_st = 1100;
             y_st = 10;
             dx = 120;
             dy = 50;
@@ -219,13 +246,22 @@ namespace vcs_Draw3
             //pictureBox1.Location = new Point(10, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            pictureBox_gear.Size = new Size(280, 280);
-            pictureBox_gear.Location = new Point(richTextBox1.Location.X - 300, richTextBox1.Location.Y + 100);
-            trackBar1.Location = new Point(richTextBox1.Location.X - 300 - 20, richTextBox1.Location.Y - 50 + 100);
-            lb_fps.Location = new Point(richTextBox1.Location.X - 40, richTextBox1.Location.Y - 45 + 100);
+            int W = 300;
+            int H = 300;
+            x_st = 10;
+            y_st = 610;
+            dx = 350;
 
-            pictureBox_atom.Size = new Size(300, 300);
-            pictureBox_atom.Location = new Point(pictureBox_gear.Location.X - 340, pictureBox_gear.Location.Y - 50 + 50);
+            pictureBox_random.Size = new Size(W, H);
+            pictureBox_random.Location = new Point(x_st + dx * 0, y_st);
+
+            pictureBox_atom.Size = new Size(W, H);
+            pictureBox_atom.Location = new Point(x_st + dx * 1, y_st);
+
+            pictureBox_gear.Size = new Size(W, H);
+            pictureBox_gear.Location = new Point(x_st + dx * 2, y_st);
+            trackBar1.Location = new Point(x_st + dx * 2, y_st - 50);
+            lb_fps.Location = new Point(x_st + dx * 2 + 280, y_st - 50);
         }
 
         bool isRunning1 = false;
@@ -1422,5 +1458,78 @@ namespace vcs_Draw3
             Refresh();
         }
 
+        #region 畫random曲線
+        private void timer_random_Tick(object sender, EventArgs e)
+        {
+            DrawGraph();
+        }
+
+        private void DrawGraph()
+        {
+            try
+            {
+                int y = YValue;
+                // Generate the next value.
+                NewValue();
+
+                // Plot the new value.
+                PlotValue(y, YValue);
+                y = YValue;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error : " + ex.Message + "\n";
+            }
+        }
+
+        // Generate the next value.
+        private Random Rnd = new Random();
+        private void NewValue()
+        {
+            // Delay a bit before calculating the value.
+            DateTime stop_time = DateTime.Now.AddMilliseconds(1);
+            while (DateTime.Now < stop_time) { };
+
+            // Calculate the next value.
+            YValue += Rnd.Next(-4, 5);
+            if (YValue < 0) YValue = 0;
+            if (YValue >= pictureBox_random.ClientSize.Height - 1)
+                YValue = pictureBox_random.ClientSize.Height - 1;
+        }
+
+        // Plot a new value.
+        private void PlotValue(int old_y, int new_y)
+        {
+            // Invoke not required. Go ahead and plot.
+            // Make the Bitmap and Graphics objects.
+            int wid = pictureBox_random.ClientSize.Width;
+            int hgt = pictureBox_random.ClientSize.Height;
+            Bitmap bm = new Bitmap(wid, hgt);
+            Graphics grnd = Graphics.FromImage(bm);
+
+            // Move the old data one pixel to the left.
+            grnd.DrawImage(pictureBox_random.Image, -1, 0);
+
+            // Erase the right edge and draw guide lines.
+            grnd.DrawLine(Pens.Blue, wid - 1, 0, wid - 1, hgt - 1);
+            for (int i = Ymid; i <= pictureBox_random.ClientSize.Height; i += GridStep)
+            {
+                grnd.DrawLine(Pens.LightBlue, wid - 2, i, wid - 1, i);
+            }
+            for (int i = Ymid; i >= 0; i -= GridStep)
+            {
+                grnd.DrawLine(Pens.LightBlue, wid - 2, i, wid - 1, i);
+            }
+
+            // Plot a new pixel.
+            grnd.DrawLine(Pens.White, wid - 2, old_y, wid - 1, new_y);
+
+            // Display the result.
+            pictureBox_random.Image = bm;
+            pictureBox_random.Refresh();
+
+            grnd.Dispose();
+        }
+        #endregion
     }
 }

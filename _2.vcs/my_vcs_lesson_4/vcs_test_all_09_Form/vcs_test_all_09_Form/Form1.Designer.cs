@@ -538,12 +538,12 @@
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button14.Location = new System.Drawing.Point(212, 105);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(195, 40);
             this.button14.TabIndex = 42;
-            this.button14.Text = "xxx";
+            this.button14.Text = "建立一個不規則的表單";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

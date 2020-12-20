@@ -92,6 +92,8 @@
             this.timer_card2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_card2 = new System.Windows.Forms.PictureBox();
             this.timer_atom2 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_random = new System.Windows.Forms.PictureBox();
+            this.timer_random = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -102,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -637,11 +640,27 @@
             this.timer_atom2.Enabled = true;
             this.timer_atom2.Tick += new System.EventHandler(this.timer_atom2_Tick);
             // 
+            // pictureBox_random
+            // 
+            this.pictureBox_random.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_random.Location = new System.Drawing.Point(12, 495);
+            this.pictureBox_random.Name = "pictureBox_random";
+            this.pictureBox_random.Size = new System.Drawing.Size(320, 240);
+            this.pictureBox_random.TabIndex = 65;
+            this.pictureBox_random.TabStop = false;
+            // 
+            // timer_random
+            // 
+            this.timer_random.Enabled = true;
+            this.timer_random.Interval = 5;
+            this.timer_random.Tick += new System.EventHandler(this.timer_random_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_random);
             this.Controls.Add(this.pictureBox_card2);
             this.Controls.Add(this.pictureBox_card);
             this.Controls.Add(this.pictureBox_atom);
@@ -704,6 +723,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_atom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -774,6 +794,8 @@
         private System.Windows.Forms.Timer timer_card2;
         private System.Windows.Forms.PictureBox pictureBox_card2;
         internal System.Windows.Forms.Timer timer_atom2;
+        private System.Windows.Forms.PictureBox pictureBox_random;
+        private System.Windows.Forms.Timer timer_random;
     }
 }
 

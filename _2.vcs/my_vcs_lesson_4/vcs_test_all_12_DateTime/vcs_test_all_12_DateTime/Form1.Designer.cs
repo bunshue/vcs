@@ -121,6 +121,11 @@
             this.lblLocalTime = new System.Windows.Forms.Label();
             this.lblLocalDate = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button51 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -141,9 +146,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1123, 197);
+            this.richTextBox1.Location = new System.Drawing.Point(1390, 197);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(313, 548);
+            this.richTextBox1.Size = new System.Drawing.Size(261, 548);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -785,7 +790,7 @@
             this.groupBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox1.Location = new System.Drawing.Point(863, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 211);
+            this.groupBox1.Size = new System.Drawing.Size(254, 241);
             this.groupBox1.TabIndex = 61;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "距今時間";
@@ -813,7 +818,7 @@
             // 
             this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.label9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label9.Location = new System.Drawing.Point(9, 74);
+            this.label9.Location = new System.Drawing.Point(9, 91);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(235, 17);
             this.label9.TabIndex = 30;
@@ -823,7 +828,7 @@
             // txtSeconds
             // 
             this.txtSeconds.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtSeconds.Location = new System.Drawing.Point(74, 170);
+            this.txtSeconds.Location = new System.Drawing.Point(74, 199);
             this.txtSeconds.Name = "txtSeconds";
             this.txtSeconds.ReadOnly = true;
             this.txtSeconds.Size = new System.Drawing.Size(170, 27);
@@ -833,7 +838,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label7.Location = new System.Drawing.Point(6, 173);
+            this.label7.Location = new System.Drawing.Point(6, 202);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 16);
             this.label7.TabIndex = 28;
@@ -842,7 +847,7 @@
             // txtMinutes
             // 
             this.txtMinutes.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtMinutes.Location = new System.Drawing.Point(74, 146);
+            this.txtMinutes.Location = new System.Drawing.Point(74, 175);
             this.txtMinutes.Name = "txtMinutes";
             this.txtMinutes.ReadOnly = true;
             this.txtMinutes.Size = new System.Drawing.Size(170, 27);
@@ -852,7 +857,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(6, 149);
+            this.label8.Location = new System.Drawing.Point(6, 178);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 16);
             this.label8.TabIndex = 26;
@@ -861,7 +866,7 @@
             // txtHours
             // 
             this.txtHours.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtHours.Location = new System.Drawing.Point(74, 122);
+            this.txtHours.Location = new System.Drawing.Point(74, 151);
             this.txtHours.Name = "txtHours";
             this.txtHours.ReadOnly = true;
             this.txtHours.Size = new System.Drawing.Size(170, 27);
@@ -871,7 +876,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label10.Location = new System.Drawing.Point(6, 125);
+            this.label10.Location = new System.Drawing.Point(6, 154);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 16);
             this.label10.TabIndex = 24;
@@ -880,7 +885,7 @@
             // txtDays
             // 
             this.txtDays.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtDays.Location = new System.Drawing.Point(74, 98);
+            this.txtDays.Location = new System.Drawing.Point(74, 127);
             this.txtDays.Name = "txtDays";
             this.txtDays.ReadOnly = true;
             this.txtDays.Size = new System.Drawing.Size(170, 27);
@@ -890,7 +895,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label11.Location = new System.Drawing.Point(6, 101);
+            this.label11.Location = new System.Drawing.Point(6, 130);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(44, 16);
             this.label11.TabIndex = 22;
@@ -928,9 +933,9 @@
             this.groupBox2.Controls.Add(this.textBox8);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox2.Location = new System.Drawing.Point(863, 239);
+            this.groupBox2.Location = new System.Drawing.Point(1130, 22);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(254, 256);
+            this.groupBox2.Size = new System.Drawing.Size(254, 241);
             this.groupBox2.TabIndex = 62;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "相距時間";
@@ -1010,7 +1015,7 @@
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(232, 74);
+            this.textBox7.Size = new System.Drawing.Size(232, 62);
             this.textBox7.TabIndex = 23;
             // 
             // textBox8
@@ -1038,7 +1043,7 @@
             this.groupBox3.Controls.Add(this.lblGmtDate);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox3.Location = new System.Drawing.Point(1123, 104);
+            this.groupBox3.Location = new System.Drawing.Point(1392, 104);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(260, 87);
             this.groupBox3.TabIndex = 64;
@@ -1077,7 +1082,7 @@
             this.groupBox4.Controls.Add(this.lblLocalDate);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox4.Location = new System.Drawing.Point(1123, 12);
+            this.groupBox4.Location = new System.Drawing.Point(1392, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(260, 87);
             this.groupBox4.TabIndex = 63;
@@ -1116,11 +1121,52 @@
             this.timer2.Interval = 500;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listView1.Location = new System.Drawing.Point(863, 269);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(419, 165);
+            this.listView1.TabIndex = 65;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Method";
+            this.columnHeader1.Width = 110;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Equivalent";
+            this.columnHeader2.Width = 80;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Result";
+            this.columnHeader3.Width = 160;
+            // 
+            // button51
+            // 
+            this.button51.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button51.Location = new System.Drawing.Point(1226, 396);
+            this.button51.Name = "button51";
+            this.button51.Size = new System.Drawing.Size(56, 39);
+            this.button51.TabIndex = 66;
+            this.button51.Text = "info";
+            this.button51.UseVisualStyleBackColor = true;
+            this.button51.Click += new System.EventHandler(this.button51_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1446, 612);
+            this.ClientSize = new System.Drawing.Size(1660, 612);
+            this.Controls.Add(this.button51);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
@@ -1292,6 +1338,11 @@
         private System.Windows.Forms.Label lblLocalTime;
         private System.Windows.Forms.Label lblLocalDate;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Button button51;
     }
 }
 

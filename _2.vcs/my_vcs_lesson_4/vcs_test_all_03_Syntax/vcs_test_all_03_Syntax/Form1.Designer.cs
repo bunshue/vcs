@@ -98,9 +98,14 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button39 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnGreen = new System.Windows.Forms.Button();
+            this.btnBlue = new System.Windows.Forms.Button();
+            this.btnPink = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -843,11 +848,60 @@
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnGreen);
+            this.groupBox4.Controls.Add(this.btnBlue);
+            this.groupBox4.Controls.Add(this.btnPink);
+            this.groupBox4.Location = new System.Drawing.Point(1220, 150);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(154, 153);
+            this.groupBox4.TabIndex = 61;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "使用相同的函數用Tag區分";
+            // 
+            // btnGreen
+            // 
+            this.btnGreen.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnGreen.Location = new System.Drawing.Point(35, 68);
+            this.btnGreen.Name = "btnGreen";
+            this.btnGreen.Size = new System.Drawing.Size(90, 30);
+            this.btnGreen.TabIndex = 5;
+            this.btnGreen.Tag = "LightGreen";
+            this.btnGreen.Text = "Green";
+            this.btnGreen.UseVisualStyleBackColor = true;
+            this.btnGreen.Click += new System.EventHandler(this.button_color);
+            // 
+            // btnBlue
+            // 
+            this.btnBlue.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnBlue.Location = new System.Drawing.Point(35, 108);
+            this.btnBlue.Name = "btnBlue";
+            this.btnBlue.Size = new System.Drawing.Size(90, 30);
+            this.btnBlue.TabIndex = 4;
+            this.btnBlue.Tag = "LightBlue";
+            this.btnBlue.Text = "Blue";
+            this.btnBlue.UseVisualStyleBackColor = true;
+            this.btnBlue.Click += new System.EventHandler(this.button_color);
+            // 
+            // btnPink
+            // 
+            this.btnPink.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnPink.Location = new System.Drawing.Point(35, 28);
+            this.btnPink.Name = "btnPink";
+            this.btnPink.Size = new System.Drawing.Size(90, 30);
+            this.btnPink.TabIndex = 3;
+            this.btnPink.Tag = "Pink";
+            this.btnPink.Text = "Pink";
+            this.btnPink.UseVisualStyleBackColor = true;
+            this.btnPink.Click += new System.EventHandler(this.button_color);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1392, 644);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lb_symbols_3);
             this.Controls.Add(this.tb_symbols_2);
@@ -915,6 +969,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -992,6 +1047,10 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button39;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnGreen;
+        private System.Windows.Forms.Button btnBlue;
+        private System.Windows.Forms.Button btnPink;
     }
 }
 

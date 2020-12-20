@@ -79,7 +79,17 @@
             this.button29 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.txtNumber = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtBinary = new System.Windows.Forms.TextBox();
+            this.txtOctal = new System.Windows.Forms.TextBox();
+            this.txtHexadecimal = new System.Windows.Forms.TextBox();
+            this.txtDecimal = new System.Windows.Forms.TextBox();
+            this._Label1_3 = new System.Windows.Forms.Label();
+            this._Label1_2 = new System.Windows.Forms.Label();
+            this._Label1_1 = new System.Windows.Forms.Label();
+            this._Label1_0 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -326,7 +336,7 @@
             this.groupBox1.Controls.Add(this.bt_random1);
             this.groupBox1.Location = new System.Drawing.Point(514, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(178, 647);
+            this.groupBox1.Size = new System.Drawing.Size(178, 581);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "亂數";
@@ -637,11 +647,141 @@
             this.txtNumber.Text = "12,345,678,901,234";
             this.txtNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtBinary);
+            this.groupBox2.Controls.Add(this.txtOctal);
+            this.groupBox2.Controls.Add(this.txtHexadecimal);
+            this.groupBox2.Controls.Add(this.txtDecimal);
+            this.groupBox2.Controls.Add(this._Label1_3);
+            this.groupBox2.Controls.Add(this._Label1_2);
+            this.groupBox2.Controls.Add(this._Label1_1);
+            this.groupBox2.Controls.Add(this._Label1_0);
+            this.groupBox2.Location = new System.Drawing.Point(353, 591);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(270, 122);
+            this.groupBox2.TabIndex = 43;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "各種進位轉換";
+            // 
+            // txtBinary
+            // 
+            this.txtBinary.AcceptsReturn = true;
+            this.txtBinary.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBinary.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBinary.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBinary.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtBinary.Location = new System.Drawing.Point(84, 87);
+            this.txtBinary.MaxLength = 0;
+            this.txtBinary.Name = "txtBinary";
+            this.txtBinary.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBinary.Size = new System.Drawing.Size(171, 20);
+            this.txtBinary.TabIndex = 31;
+            this.txtBinary.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // txtOctal
+            // 
+            this.txtOctal.AcceptsReturn = true;
+            this.txtOctal.BackColor = System.Drawing.SystemColors.Window;
+            this.txtOctal.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtOctal.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOctal.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtOctal.Location = new System.Drawing.Point(84, 63);
+            this.txtOctal.MaxLength = 0;
+            this.txtOctal.Name = "txtOctal";
+            this.txtOctal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtOctal.Size = new System.Drawing.Size(171, 20);
+            this.txtOctal.TabIndex = 30;
+            this.txtOctal.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // txtHexadecimal
+            // 
+            this.txtHexadecimal.AcceptsReturn = true;
+            this.txtHexadecimal.BackColor = System.Drawing.SystemColors.Window;
+            this.txtHexadecimal.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtHexadecimal.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHexadecimal.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtHexadecimal.Location = new System.Drawing.Point(84, 39);
+            this.txtHexadecimal.MaxLength = 0;
+            this.txtHexadecimal.Name = "txtHexadecimal";
+            this.txtHexadecimal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtHexadecimal.Size = new System.Drawing.Size(171, 20);
+            this.txtHexadecimal.TabIndex = 29;
+            this.txtHexadecimal.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // txtDecimal
+            // 
+            this.txtDecimal.AcceptsReturn = true;
+            this.txtDecimal.BackColor = System.Drawing.SystemColors.Window;
+            this.txtDecimal.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtDecimal.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDecimal.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtDecimal.Location = new System.Drawing.Point(84, 15);
+            this.txtDecimal.MaxLength = 0;
+            this.txtDecimal.Name = "txtDecimal";
+            this.txtDecimal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtDecimal.Size = new System.Drawing.Size(171, 20);
+            this.txtDecimal.TabIndex = 28;
+            this.txtDecimal.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // _Label1_3
+            // 
+            this._Label1_3.BackColor = System.Drawing.SystemColors.Control;
+            this._Label1_3.Cursor = System.Windows.Forms.Cursors.Default;
+            this._Label1_3.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._Label1_3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._Label1_3.Location = new System.Drawing.Point(6, 90);
+            this._Label1_3.Name = "_Label1_3";
+            this._Label1_3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._Label1_3.Size = new System.Drawing.Size(65, 16);
+            this._Label1_3.TabIndex = 27;
+            this._Label1_3.Text = "Binary";
+            // 
+            // _Label1_2
+            // 
+            this._Label1_2.BackColor = System.Drawing.SystemColors.Control;
+            this._Label1_2.Cursor = System.Windows.Forms.Cursors.Default;
+            this._Label1_2.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._Label1_2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._Label1_2.Location = new System.Drawing.Point(6, 66);
+            this._Label1_2.Name = "_Label1_2";
+            this._Label1_2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._Label1_2.Size = new System.Drawing.Size(65, 16);
+            this._Label1_2.TabIndex = 26;
+            this._Label1_2.Text = "Octal";
+            // 
+            // _Label1_1
+            // 
+            this._Label1_1.BackColor = System.Drawing.SystemColors.Control;
+            this._Label1_1.Cursor = System.Windows.Forms.Cursors.Default;
+            this._Label1_1.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._Label1_1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._Label1_1.Location = new System.Drawing.Point(6, 42);
+            this._Label1_1.Name = "_Label1_1";
+            this._Label1_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._Label1_1.Size = new System.Drawing.Size(72, 16);
+            this._Label1_1.TabIndex = 25;
+            this._Label1_1.Text = "Hexadecimal";
+            // 
+            // _Label1_0
+            // 
+            this._Label1_0.BackColor = System.Drawing.SystemColors.Control;
+            this._Label1_0.Cursor = System.Windows.Forms.Cursors.Default;
+            this._Label1_0.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._Label1_0.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._Label1_0.Location = new System.Drawing.Point(6, 18);
+            this._Label1_0.Name = "_Label1_0";
+            this._Label1_0.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._Label1_0.Size = new System.Drawing.Size(65, 16);
+            this._Label1_0.TabIndex = 24;
+            this._Label1_0.Text = "Decimal";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1107, 764);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.button30);
             this.Controls.Add(this.button29);
@@ -687,6 +827,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -745,6 +887,15 @@
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button30;
         internal System.Windows.Forms.TextBox txtNumber;
+        private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.TextBox txtBinary;
+        public System.Windows.Forms.TextBox txtOctal;
+        public System.Windows.Forms.TextBox txtHexadecimal;
+        public System.Windows.Forms.TextBox txtDecimal;
+        public System.Windows.Forms.Label _Label1_3;
+        public System.Windows.Forms.Label _Label1_2;
+        public System.Windows.Forms.Label _Label1_1;
+        public System.Windows.Forms.Label _Label1_0;
     }
 }
 

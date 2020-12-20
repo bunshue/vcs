@@ -137,6 +137,7 @@
             this.button35 = new System.Windows.Forms.Button();
             this.button36 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -1184,7 +1185,7 @@
             // 
             this.button35.BackColor = System.Drawing.Color.Yellow;
             this.button35.Image = global::vcs_test_all_00_Control.Properties.Resources.purple_bacground;
-            this.button35.Location = new System.Drawing.Point(603, 540);
+            this.button35.Location = new System.Drawing.Point(603, 571);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(135, 120);
             this.button35.TabIndex = 27;
@@ -1195,7 +1196,7 @@
             // 
             this.button36.BackColor = System.Drawing.Color.Yellow;
             this.button36.Image = global::vcs_test_all_00_Control.Properties.Resources.purple_bacground;
-            this.button36.Location = new System.Drawing.Point(465, 540);
+            this.button36.Location = new System.Drawing.Point(465, 571);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(135, 120);
             this.button36.TabIndex = 28;
@@ -1206,11 +1207,23 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label10.Location = new System.Drawing.Point(474, 513);
+            this.label10.Location = new System.Drawing.Point(474, 544);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(226, 24);
             this.label10.TabIndex = 29;
             this.label10.Text = "按鈕圖片去背景效果";
+            // 
+            // label11
+            // 
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label11.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.Image = ((System.Drawing.Image)(resources.GetObject("label11.Image")));
+            this.label11.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label11.Location = new System.Drawing.Point(473, 464);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(218, 60);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Label";
             // 
             // Form1
             // 
@@ -1219,6 +1232,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bt_cancel_button;
             this.ClientSize = new System.Drawing.Size(1333, 697);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.button36);
             this.Controls.Add(this.button35);
@@ -1384,6 +1398,7 @@
         private System.Windows.Forms.Button button35;
         private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }
 

@@ -22,7 +22,80 @@ namespace vcs_PictureGray
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 850;
+            y_st = 12;
+            dx = 190;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //將圖片轉為 Sepia 效果
+            // Display the image converted to sepia tone.
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Bitmap.FromFile(filename);
+            pictureBox2.Image = ToSepiaTone(pictureBox1.Image);
+        }
+
+        // Convert an image to sepia tone.
+        private Bitmap ToSepiaTone(Image image)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
+                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
+                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            //ColorMatrix cm = new ColorMatrix(new float[][]
+            //{
+            //    new float[] {0.300f, 0.066f, 0.300f, 0, 0},
+            //    new float[] {0.500f, 0.350f, 0.600f, 0, 0},
+            //    new float[] {0.100f, 0.000f, 0.200f, 0, 0},
+            //    new float[] { 0, 0, 0, 1, 0},
+            //    new float[] { 0, 0, 0, 0, 1}
+            //});
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -286,15 +359,22 @@ namespace vcs_PictureGray
 
             richTextBox1.Text += "filename new = " + filename2 + "\n";
 
-            // Load the file.
-            using (Bitmap bm = LoadBitmapWithoutLocking(filename))
-            {
-                // Convert the image.
-                ConvertBitmapToGrayscale(bm, use_average);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = Bitmap.FromFile(filename);
 
-                // Save the file.
-                SaveBitmapUsingExtension(bm, filename2);
-            }
+            // Convert to grayscale.
+            //Bitmap bmp = new Bitmap(pictureBox1.Image);       same
+            Bitmap bmp = LoadBitmapWithoutLocking(filename);
+
+            // Convert the image.
+            ConvertBitmapToGrayscale(bmp, use_average);
+
+            // Show the converted bitmap
+            pictureBox2.Image = bmp;
+
+            // Save the file.
+            SaveBitmapUsingExtension(bmp, filename2);
         }
 
         // Convert the Bitmap to grayscale.

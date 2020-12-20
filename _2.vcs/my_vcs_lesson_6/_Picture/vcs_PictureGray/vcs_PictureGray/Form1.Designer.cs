@@ -37,13 +37,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(846, 12);
+            this.button1.Location = new System.Drawing.Point(846, 73);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 48);
             this.button1.TabIndex = 0;
@@ -61,15 +62,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(769, 299);
+            this.richTextBox1.Location = new System.Drawing.Point(769, 343);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(212, 313);
+            this.richTextBox1.Size = new System.Drawing.Size(212, 269);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(846, 66);
+            this.button2.Location = new System.Drawing.Point(846, 127);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(135, 48);
             this.button2.TabIndex = 3;
@@ -79,7 +80,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(846, 120);
+            this.button3.Location = new System.Drawing.Point(846, 181);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(135, 48);
             this.button3.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(846, 174);
+            this.button4.Location = new System.Drawing.Point(846, 235);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(135, 48);
             this.button4.TabIndex = 5;
@@ -118,7 +119,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(846, 228);
+            this.button5.Location = new System.Drawing.Point(846, 289);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(135, 48);
             this.button5.TabIndex = 8;
@@ -126,11 +127,22 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // button0
+            // 
+            this.button0.Location = new System.Drawing.Point(846, 19);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(135, 48);
+            this.button0.TabIndex = 9;
+            this.button0.Text = "將圖片轉為 Sepia 效果";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 681);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox2);
@@ -160,6 +172,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button0;
     }
 }
 

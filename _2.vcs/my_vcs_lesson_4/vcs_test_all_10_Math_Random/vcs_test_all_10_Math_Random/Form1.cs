@@ -1454,6 +1454,73 @@ namespace vcs_test_all_10_Math_Random
             return is_prime;
         }
 
+        #region 各種進位轉換
+        // Get the value from the sender and
+        // display it in the other TextBoxes.
+        private bool ignore_events = false;
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            // Don't recurse.
+            if (ignore_events) return;
+            ignore_events = true;
+
+            // Get the sender as a TextBox.
+            TextBox source = sender as TextBox;
+
+            // Get the value.
+            long value = 0;
+            try
+            {
+                switch (source.Name)
+                {
+                    case "txtDecimal":
+                        // Parse a decimal value.
+                        value = long.Parse(source.Text);
+                        break;
+                    case "txtHexadecimal":
+                        // Parse a hexadecimal value.
+                        value = Convert.ToInt64(source.Text, 16);
+                        break;
+                    case "txtOctal":
+                        // Parse an octal value.
+                        value = Convert.ToInt64(source.Text, 8);
+                        break;
+                    case "txtBinary":
+                        // Parse a binary value.
+                        value = Convert.ToInt64(source.Text, 2);
+                        break;
+                    default:
+                        throw new Exception("Unknown control " + source.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error parsing input\n\n" + ex.Message,
+                    "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            // Display the value in different formats.
+            if (source.Name != "txtDecimal")
+            {
+                txtDecimal.Text = value.ToString();
+            }
+            if (source.Name != "txtHexadecimal")
+            {
+                txtHexadecimal.Text = Convert.ToString(value, 16);
+            }
+            if (source.Name != "txtOctal")
+            {
+                txtOctal.Text = Convert.ToString(value, 8);
+            }
+            if (source.Name != "txtBinary")
+            {
+                txtBinary.Text = Convert.ToString(value, 2);
+            }
+
+            ignore_events = false;
+        }
+        #endregion
+
 
 
     }
