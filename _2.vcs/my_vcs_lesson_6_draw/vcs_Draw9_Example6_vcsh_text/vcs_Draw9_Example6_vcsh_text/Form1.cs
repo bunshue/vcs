@@ -38,6 +38,20 @@ namespace vcs_Draw9_Example6_vcsh_text
         private float[] CharacterWidths;
         private float TotalCharacterWidth;
 
+        #region rotate_brush
+        // The polygon's points.
+        private PointF[] PolygonPoints;
+
+        // The path.
+        private GraphicsPath Path;
+
+        // The rectangle where we will draw.
+        private Rectangle DrawingArea;
+
+        // Offset when assigning colors.
+        private int ColorOffset = 0;
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -89,6 +103,25 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox_stretching.Refresh();
             TicksToGo = TotalTicks;
 
+            #region rotate_brush
+            // Make points that define a polygon.
+            // Double buffer to prevent flicker.
+            this.DoubleBuffered = true;
+
+            // Make the drawing area rectangle.
+            const int margin = 10;
+            DrawingArea = new Rectangle(
+                margin, margin,
+                pictureBox_rotate_brush.ClientSize.Width - 2 * margin,
+                pictureBox_rotate_brush.ClientSize.Height - 2 * margin);
+
+            // Make the polygon's points.
+            PolygonPoints = MakePolygon(22, DrawingArea);
+
+            // Make the brush's path.
+            Path = new GraphicsPath();
+            Path.AddPolygon(DoublePoints(PolygonPoints));
+            #endregion
         }
 
         void show_item_location()
@@ -149,15 +182,13 @@ namespace vcs_Draw9_Example6_vcsh_text
 
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(W, H);
-            pictureBox4.Size = new Size(W, H);
+            pictureBox_rotate_brush.Size = new Size(W * 2, H);
             pictureBox5.Size = new Size(W, H);
             pictureBox6.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox_rotate_brush.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox6.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
@@ -591,9 +622,101 @@ namespace vcs_Draw9_Example6_vcsh_text
                 timer_text.Enabled = false;
                 //TicksToGo = TotalTicks;
             }
-
         }
 
+        #region rotate_brush
+        // Return PointFs to define a polygon.
+        private PointF[] MakePolygon(int num_points, Rectangle bounds)
+        {
+            // Make room for the points.
+            PointF[] pts = new PointF[num_points];
+
+            float sqrt2 = (float)Math.Sqrt(2.0);
+            float rx = bounds.Width / 2f * sqrt2;
+            float ry = bounds.Height / 2f * sqrt2;
+            float cx = bounds.X + bounds.Width / 2f;
+            float cy = bounds.Y + bounds.Height / 2f;
+
+            // Start at the top.
+            float theta = (float)(-Math.PI / 2.0);
+            float dtheta = (float)(2.0 * Math.PI / num_points);
+            for (int i = 0; i < num_points; i++)
+            {
+                pts[i] = new PointF((float)(cx + rx * Math.Cos(theta)), (float)(cy + ry * Math.Sin(theta)));
+                theta += dtheta;
+            }
+            return pts;
+        }
+
+        // Insert a point between each of the polygon's points.
+        private PointF[] DoublePoints(PointF[] points)
+        {
+            List<PointF> new_points = new List<PointF>();
+            for (int i = 0; i < points.Length - 1; i++)
+            {
+                new_points.Add(points[i]);
+                new_points.Add(PointBetween(points[i], points[i + 1]));
+            }
+            new_points.Add(points[points.Length - 1]);
+            new_points.Add(PointBetween(points[0], points[points.Length - 1]));
+
+            // Return the new points.
+            return new_points.ToArray();
+        }
+
+        // Return a point between two points.
+        private PointF PointBetween(PointF point1, PointF point2)
+        {
+            return new PointF(
+                (point1.X + point2.X) / 2,
+                (point1.Y + point2.Y) / 2);
+        }
+
+        // Draw the polygon.
+        private void pictureBox_rotate_brush_Paint(object sender, PaintEventArgs e)
+        {
+            // Make a path gradient brush.
+            using (PathGradientBrush br = new PathGradientBrush(Path))
+            {
+                // Define edge colors.
+                Color[] edge_colors = new Color[PolygonPoints.Length * 2];
+                Color[] color_series = new Color[]
+                {
+                    Color.Green,
+                    Color.LightGreen,
+                    Color.White,
+                    Color.LightGreen,
+                };
+                for (int i = 0; i < edge_colors.Length; i++)
+                {
+                    edge_colors[i] = color_series[(i + ColorOffset) % color_series.Length];
+                }
+                br.SurroundColors = edge_colors;
+                br.CenterColor = Color.White;
+                ColorOffset++;
+
+                // Fill the polygon.
+                //e.Graphics.FillPolygon(br, PolygonPoints);
+                e.Graphics.FillRectangle(br, DrawingArea);
+
+                // Draw text over the background.
+                using (Font font = new Font("Times New Roman", 30, FontStyle.Bold))
+                {
+                    using (StringFormat sf = new StringFormat())
+                    {
+                        sf.Alignment = StringAlignment.Center;
+                        sf.LineAlignment = StringAlignment.Center;
+                        e.Graphics.DrawString(LabelText, font, Brushes.Blue, DrawingArea, sf);
+                    }
+                }
+            }
+        }
+
+        private void timer_rotate_brush_Tick(object sender, EventArgs e)
+        {
+            pictureBox_rotate_brush.Refresh();
+        }
+        #endregion
 
 
 

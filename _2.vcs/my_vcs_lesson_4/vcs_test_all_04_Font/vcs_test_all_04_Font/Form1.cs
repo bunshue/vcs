@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Text;  //for InstalledFontCollection
+
 namespace vcs_test_all_04_Font
 {
     public partial class Form1 : Form
@@ -238,6 +240,29 @@ namespace vcs_test_all_04_Font
             for (int i = 0; i < FontFamily.Families.Length; i++)
             {
                 richTextBox1.Text += (i + 1).ToString() + "\t" + FontFamily.Families[i].Name + "\n";
+            }
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            //C#專案中常常要獲取系統字型
+            InstalledFontCollection fontCol = new InstalledFontCollection();
+            foreach (FontFamily temp in fontCol.Families)
+            {
+                comboBox_font.Items.Add(temp.Name);
+            }
+            comboBox_font.SelectedIndex = 0;
+            //在Visual Studio 2012下編譯執行後就會在comboBox中顯示目前安裝的所有字體。
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            InstalledFontCollection myFonts = new InstalledFontCollection();
+            foreach (FontFamily family in myFonts.Families)
+            {
+                richTextBox1.AppendText(family.Name + "\n");
             }
 
         }

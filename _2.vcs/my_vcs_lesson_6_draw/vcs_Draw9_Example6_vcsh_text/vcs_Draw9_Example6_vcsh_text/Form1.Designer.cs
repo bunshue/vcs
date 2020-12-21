@@ -56,8 +56,7 @@
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_rotate_brush = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,10 +70,10 @@
             this.pictureBox_stretching = new System.Windows.Forms.PictureBox();
             this.label_size = new System.Windows.Forms.Label();
             this.timer_text = new System.Windows.Forms.Timer(this.components);
+            this.timer_rotate_brush = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
@@ -351,23 +350,15 @@
             this.pictureBox2.TabIndex = 58;
             this.pictureBox2.TabStop = false;
             // 
-            // pictureBox3
+            // pictureBox_rotate_brush
             // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox3.Location = new System.Drawing.Point(721, 12);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(165, 159);
-            this.pictureBox3.TabIndex = 59;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox4.Location = new System.Drawing.Point(534, 141);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(165, 159);
-            this.pictureBox4.TabIndex = 60;
-            this.pictureBox4.TabStop = false;
+            this.pictureBox_rotate_brush.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_rotate_brush.Location = new System.Drawing.Point(721, 12);
+            this.pictureBox_rotate_brush.Name = "pictureBox_rotate_brush";
+            this.pictureBox_rotate_brush.Size = new System.Drawing.Size(165, 159);
+            this.pictureBox_rotate_brush.TabIndex = 59;
+            this.pictureBox_rotate_brush.TabStop = false;
+            this.pictureBox_rotate_brush.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_rotate_brush_Paint);
             // 
             // pictureBox5
             // 
@@ -484,6 +475,11 @@
             this.timer_text.Interval = 20;
             this.timer_text.Tick += new System.EventHandler(this.timer_text_Tick);
             // 
+            // timer_rotate_brush
+            // 
+            this.timer_rotate_brush.Enabled = true;
+            this.timer_rotate_brush.Tick += new System.EventHandler(this.timer_rotate_brush_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -499,8 +495,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox_rotate_brush);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_exit);
@@ -534,8 +529,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
@@ -576,8 +570,7 @@
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox_rotate_brush;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label1;
@@ -591,6 +584,7 @@
         private System.Windows.Forms.PictureBox pictureBox_stretching;
         private System.Windows.Forms.Label label_size;
         private System.Windows.Forms.Timer timer_text;
+        private System.Windows.Forms.Timer timer_rotate_brush;
     }
 }
 
