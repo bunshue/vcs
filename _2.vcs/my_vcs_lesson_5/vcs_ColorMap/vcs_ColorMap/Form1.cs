@@ -198,5 +198,35 @@ namespace vcs_ColorMap
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            g.Clear(Color.White);
+
+            //Draw System Color
+            //// List the system colors.
+            int y = 10;
+
+            // Enumerate the SystemColors class's static Color properties.
+            Type type = typeof(SystemColors);
+            foreach (PropertyInfo field_info in type.GetProperties())
+            {
+                DrawColorSample(g, ref y,
+                    (Color)field_info.GetValue(null, null),
+                    field_info.Name);
+            }
+        }
+
+        // Display a color sample.
+        private void DrawColorSample(Graphics gr, ref int y, Color clr, string clr_name)
+        {
+            using (SolidBrush br = new SolidBrush(clr))
+            {
+                gr.FillRectangle(br, 10, y, 90, 10);
+            }
+            gr.DrawRectangle(Pens.Black, 10, y, 90, 10);
+            gr.DrawString(clr_name, this.Font, Brushes.Black, 110, y);
+            y += 20;
+        }
+
     }
 }
