@@ -22,6 +22,11 @@ namespace vcs_Draw9_Example9_vcsh
         int W = 250;
         int H = 250;
 
+        #region pictureBox4 butterfly
+        private const int period = 24;
+        private Color[] Colors;
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +35,36 @@ namespace vcs_Draw9_Example9_vcsh
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            #region pictureBox4 butterfly
+            Colors = new Color[] 
+            {
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet,
+                Color.Pink,
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Lime,
+                Color.Cyan,
+                Color.Blue,
+                Color.Violet
+            };
+            #endregion
         }
 
         void show_item_location()
@@ -559,6 +594,70 @@ namespace vcs_Draw9_Example9_vcsh
             result.RotateAt(angle, center);
             return result;
         }
+
+        #region pictureBox4 butterfly
+        // Return an appropriate color for this segment.
+        private Color GetColor(double t)
+        {
+            return Colors[(int)(t / Math.PI)];
+        }
+
+        // Draw the butterfly.
+        private void pictureBox4_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(this.pictureBox4.BackColor);
+
+            // Scale and translate.
+            RectangleF world_rect =
+                new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            float cx = (world_rect.Left + world_rect.Right) / 2;
+            float cy = (world_rect.Top + world_rect.Bottom) / 2;
+
+            // Center the world coordinates at origin.
+            e.Graphics.TranslateTransform(-cx, -cy);
+
+            // Scale to fill the form.
+            float scale = Math.Min(
+                this.pictureBox4.ClientSize.Width / world_rect.Width,
+                this.pictureBox4.ClientSize.Height / world_rect.Height);
+            e.Graphics.ScaleTransform(scale, scale, MatrixOrder.Append);
+
+            // Move the result to center on the form.
+            e.Graphics.TranslateTransform(
+                this.pictureBox4.ClientSize.Width / 2,
+                this.pictureBox4.ClientSize.Height / 2, MatrixOrder.Append);
+
+            // Generate the points.
+            PointF pt0, pt1;
+            double t = 0;
+            double expr =
+                Math.Exp(Math.Cos(t))
+                - 2 * Math.Cos(4 * t)
+                - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF(
+                (float)(Math.Sin(t) * expr),
+                (float)(-Math.Cos(t) * expr));
+            using (Pen the_pen = new Pen(Color.Blue, 0))
+            {
+                const long num_lines = 5000;
+                for (long i = 0; i < num_lines; i++)
+                {
+                    t = i * period * Math.PI / num_lines;
+                    expr =
+                        Math.Exp(Math.Cos(t))
+                        - 2 * Math.Cos(4 * t)
+                        - Math.Pow(Math.Sin(t / 12), 5);
+                    pt0 = pt1;
+                    pt1 = new PointF(
+                        (float)(Math.Sin(t) * expr),
+                        (float)(-Math.Cos(t) * expr));
+                    the_pen.Color = GetColor(t);
+                    e.Graphics.DrawLine(the_pen, pt0, pt1);
+                }
+            }
+        }
+        #endregion
 
 
 
