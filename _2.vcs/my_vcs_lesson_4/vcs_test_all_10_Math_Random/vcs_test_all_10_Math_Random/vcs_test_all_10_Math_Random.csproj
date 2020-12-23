@@ -58,8 +58,11 @@
     <Compile Include="PairsTools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomizationExtensions.cs" />
     <Compile Include="Randomizer.cs" />
+    <Compile Include="RandomTools.cs" />
     <Compile Include="StatsStuff.cs" />
+    <Compile Include="StringStuff.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -50,6 +50,17 @@
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnRandomize = new System.Windows.Forms.Button();
+            this.lstArray = new System.Windows.Forms.ListBox();
+            this.lstList = new System.Windows.Forms.ListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button31 = new System.Windows.Forms.Button();
+            this.txtResult = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnPick = new System.Windows.Forms.Button();
+            this.txtNames = new System.Windows.Forms.TextBox();
             this.bt_random11 = new System.Windows.Forms.Button();
             this.bt_random10 = new System.Windows.Forms.Button();
             this.bt_random9 = new System.Windows.Forms.Button();
@@ -88,7 +99,11 @@
             this._Label1_2 = new System.Windows.Forms.Label();
             this._Label1_1 = new System.Windows.Forms.Label();
             this._Label1_0 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.lb_ordinal = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,9 +121,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(698, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(874, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(397, 740);
+            this.richTextBox1.Size = new System.Drawing.Size(221, 740);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -323,6 +338,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.bt_random11);
             this.groupBox1.Controls.Add(this.bt_random10);
             this.groupBox1.Controls.Add(this.bt_random9);
@@ -336,15 +353,134 @@
             this.groupBox1.Controls.Add(this.bt_random1);
             this.groupBox1.Location = new System.Drawing.Point(514, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(178, 581);
+            this.groupBox1.Size = new System.Drawing.Size(344, 688);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "亂數";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.btnRandomize);
+            this.groupBox4.Controls.Add(this.lstArray);
+            this.groupBox4.Controls.Add(this.lstList);
+            this.groupBox4.Location = new System.Drawing.Point(17, 322);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(321, 182);
+            this.groupBox4.TabIndex = 34;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "任意陣列";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(74, 12);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(155, 16);
+            this.label4.TabIndex = 44;
+            this.label4.Text = "Array                      List";
+            // 
+            // btnRandomize
+            // 
+            this.btnRandomize.Location = new System.Drawing.Point(115, 154);
+            this.btnRandomize.Name = "btnRandomize";
+            this.btnRandomize.Size = new System.Drawing.Size(75, 21);
+            this.btnRandomize.TabIndex = 7;
+            this.btnRandomize.Text = "Randomize";
+            this.btnRandomize.UseVisualStyleBackColor = true;
+            this.btnRandomize.Click += new System.EventHandler(this.btnRandomize_Click);
+            // 
+            // lstArray
+            // 
+            this.lstArray.FormattingEnabled = true;
+            this.lstArray.IntegralHeight = false;
+            this.lstArray.ItemHeight = 12;
+            this.lstArray.Location = new System.Drawing.Point(14, 30);
+            this.lstArray.Name = "lstArray";
+            this.lstArray.Size = new System.Drawing.Size(140, 120);
+            this.lstArray.TabIndex = 5;
+            // 
+            // lstList
+            // 
+            this.lstList.FormattingEnabled = true;
+            this.lstList.IntegralHeight = false;
+            this.lstList.ItemHeight = 12;
+            this.lstList.Location = new System.Drawing.Point(162, 30);
+            this.lstList.Name = "lstList";
+            this.lstList.Size = new System.Drawing.Size(140, 120);
+            this.lstList.TabIndex = 6;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button31);
+            this.groupBox3.Controls.Add(this.txtResult);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.btnPick);
+            this.groupBox3.Controls.Add(this.txtNames);
+            this.groupBox3.Location = new System.Drawing.Point(45, 510);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(258, 170);
+            this.groupBox3.TabIndex = 33;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "選幾個";
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(165, 54);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(75, 21);
+            this.button31.TabIndex = 8;
+            this.button31.Text = "選5個";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // txtResult
+            // 
+            this.txtResult.Location = new System.Drawing.Point(160, 81);
+            this.txtResult.Multiline = true;
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(92, 80);
+            this.txtResult.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(122, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Result:";
+            // 
+            // btnPick
+            // 
+            this.btnPick.Location = new System.Drawing.Point(165, 27);
+            this.btnPick.Name = "btnPick";
+            this.btnPick.Size = new System.Drawing.Size(75, 21);
+            this.btnPick.TabIndex = 5;
+            this.btnPick.Text = "選一個";
+            this.btnPick.UseVisualStyleBackColor = true;
+            this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
+            // 
+            // txtNames
+            // 
+            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNames.Location = new System.Drawing.Point(16, 27);
+            this.txtNames.Multiline = true;
+            this.txtNames.Name = "txtNames";
+            this.txtNames.Size = new System.Drawing.Size(100, 124);
+            this.txtNames.TabIndex = 4;
+            this.txtNames.Text = "Ann\r\nBob\r\nCindy\r\nDan\r\nEdwina\r\nFrank\r\nGina\r\nHarry\r\nIvy\r\nJack\r\nKlaudia\r\nLeonard\r\nMa" +
+                "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
+                "\r\nYoko\r\nZack";
+            // 
             // bt_random11
             // 
             this.bt_random11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random11.Location = new System.Drawing.Point(16, 525);
+            this.bt_random11.Location = new System.Drawing.Point(183, 250);
             this.bt_random11.Name = "bt_random11";
             this.bt_random11.Size = new System.Drawing.Size(155, 40);
             this.bt_random11.TabIndex = 32;
@@ -355,7 +491,7 @@
             // bt_random10
             // 
             this.bt_random10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random10.Location = new System.Drawing.Point(17, 478);
+            this.bt_random10.Location = new System.Drawing.Point(184, 203);
             this.bt_random10.Name = "bt_random10";
             this.bt_random10.Size = new System.Drawing.Size(155, 40);
             this.bt_random10.TabIndex = 31;
@@ -366,7 +502,7 @@
             // bt_random9
             // 
             this.bt_random9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random9.Location = new System.Drawing.Point(16, 432);
+            this.bt_random9.Location = new System.Drawing.Point(183, 157);
             this.bt_random9.Name = "bt_random9";
             this.bt_random9.Size = new System.Drawing.Size(155, 40);
             this.bt_random9.TabIndex = 30;
@@ -377,7 +513,7 @@
             // bt_random8
             // 
             this.bt_random8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random8.Location = new System.Drawing.Point(17, 386);
+            this.bt_random8.Location = new System.Drawing.Point(184, 111);
             this.bt_random8.Name = "bt_random8";
             this.bt_random8.Size = new System.Drawing.Size(155, 40);
             this.bt_random8.TabIndex = 29;
@@ -388,7 +524,7 @@
             // bt_random7
             // 
             this.bt_random7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random7.Location = new System.Drawing.Point(17, 296);
+            this.bt_random7.Location = new System.Drawing.Point(184, 21);
             this.bt_random7.Name = "bt_random7";
             this.bt_random7.Size = new System.Drawing.Size(155, 84);
             this.bt_random7.TabIndex = 28;
@@ -657,7 +793,7 @@
             this.groupBox2.Controls.Add(this._Label1_2);
             this.groupBox2.Controls.Add(this._Label1_1);
             this.groupBox2.Controls.Add(this._Label1_0);
-            this.groupBox2.Location = new System.Drawing.Point(353, 591);
+            this.groupBox2.Location = new System.Drawing.Point(353, 698);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(270, 122);
             this.groupBox2.TabIndex = 43;
@@ -776,11 +912,36 @@
             this._Label1_0.TabIndex = 24;
             this._Label1_0.Text = "Decimal";
             // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox2.Location = new System.Drawing.Point(352, 469);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(156, 36);
+            this.textBox2.TabIndex = 44;
+            this.textBox2.Text = "0";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // lb_ordinal
+            // 
+            this.lb_ordinal.AutoSize = true;
+            this.lb_ordinal.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_ordinal.Location = new System.Drawing.Point(375, 532);
+            this.lb_ordinal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lb_ordinal.Name = "lb_ordinal";
+            this.lb_ordinal.Size = new System.Drawing.Size(40, 16);
+            this.lb_ordinal.TabIndex = 45;
+            this.lb_ordinal.Text = "序數";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1107, 764);
+            this.ClientSize = new System.Drawing.Size(1107, 826);
+            this.Controls.Add(this.lb_ordinal);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.txtNumber);
             this.Controls.Add(this.button30);
@@ -827,6 +988,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -896,6 +1061,19 @@
         public System.Windows.Forms.Label _Label1_2;
         public System.Windows.Forms.Label _Label1_1;
         public System.Windows.Forms.Label _Label1_0;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtResult;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnPick;
+        private System.Windows.Forms.TextBox txtNames;
+        private System.Windows.Forms.Button button31;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnRandomize;
+        private System.Windows.Forms.ListBox lstArray;
+        private System.Windows.Forms.ListBox lstList;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label lb_ordinal;
     }
 }
 

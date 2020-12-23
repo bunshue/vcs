@@ -22,6 +22,11 @@ namespace vcs_test_all_10_Math_Random
 
         int[] sd_num = new int[] { 16, 19, 14, 17, 4, 4, 11, 27, 9, 8, 8, 12, 29, 28, 5, 18, 13, 7, 8, 4, 26, 25, 15, 6, 8, 12, 26, 13, 13, 27, 12, 3, 1, 8, 4, 22, 28, 23, 23, 19, 29, 17, 12, 17, 28, 19, 25, 16, 12, 7, 23, 1, 19, 24, 1, 21, 4, 8, 9, 22, 8, 27, 15, 12, 25, 6, 11, 22, 25, 13 };
 
+        #region 任意陣列
+        private string[] ItemArray;
+        private List<string> ItemList;
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +35,18 @@ namespace vcs_test_all_10_Math_Random
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            textBox2.Text = "123";
+
+            #region 任意陣列
+            // Initialize the array and list.
+            ItemArray = new string[] { "Apple", "Banana", "Cherry", "Date", "Eagle", "Fish", "Golf", "Harp", "Ibex", "Jackel", "Kangaroo" };
+            ItemList = new List<string>(ItemArray);
+
+            // Display the array and list in ListBoxes.
+            lstArray.DataSource = ItemArray;
+            lstList.DataSource = ItemList;
+            #endregion
         }
 
         void show_item_location()
@@ -84,6 +101,8 @@ namespace vcs_test_all_10_Math_Random
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button30.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            textBox2.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            lb_ordinal.Location = new Point(x_st + dx * 2 + dx / 6, y_st + dy * 11);
 
             bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -91,18 +110,15 @@ namespace vcs_test_all_10_Math_Random
             bt_random4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_random5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_random6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_random7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_random8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            bt_random9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            bt_random10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            bt_random11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-
-
+            bt_random7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_random8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_random9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_random10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
-
-
+        
         private void button0_Click(object sender, EventArgs e)
         {
             int r = 5;
@@ -1520,6 +1536,54 @@ namespace vcs_test_all_10_Math_Random
             ignore_events = false;
         }
         #endregion
+
+        private void btnPick_Click(object sender, EventArgs e)
+        {
+            // Pick a random line from the TextBox.
+            txtResult.Text = txtNames.Lines.PickRandom();
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            // Pick some items.
+            int num_values = 5;
+            txtResult.Lines = txtNames.Lines.PickRandom(num_values).ToArray();
+        }
+
+        #region 任意陣列
+        // Randomize the array and list.
+        private void btnRandomize_Click(object sender, EventArgs e)
+        {
+            RandomizeLists();
+        }
+        private void RandomizeLists()
+        {
+            ItemArray.Randomize();
+            ItemList.Randomize();
+
+            // Redisplay the values.
+            lstArray.DataSource = null;
+            lstArray.DataSource = ItemArray;
+            lstList.DataSource = null;
+            lstList.DataSource = ItemList;
+        }
+        #endregion
+
+        // Display the ordinal version of the number.
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            // Parse the value and display its ordinal extension.
+            try
+            {
+                int value = int.Parse(textBox2.Text, System.Globalization.NumberStyles.Any);
+                lb_ordinal.Text = "序數 : " + value.ToString("#,##0 ") + value.ToOrdinal();
+            }
+            catch
+            {
+                textBox2.Clear();
+            }
+        }
+
 
 
 

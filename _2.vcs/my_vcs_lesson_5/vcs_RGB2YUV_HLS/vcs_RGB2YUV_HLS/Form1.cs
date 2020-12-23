@@ -85,6 +85,11 @@ namespace vcs_RGB2YUV_HLS
             }
         }
 
+        #region RGB <-> HLS
+        // The selected color.
+        private Color SelectedColor;
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -95,6 +100,18 @@ namespace vcs_RGB2YUV_HLS
             lb_r.Text = "R";
             lb_g.Text = "G";
             lb_b.Text = "B";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            #region RGB <-> HLS
+            // Select the first color from the RGB controls.
+            SelectRGBColor();
+            #endregion
+
+            #region RGB scroll HLS
+            scrRGB_Scroll(null, null);
+            #endregion
         }
 
         public static YUV RGBToYUV(RGB rgb)
@@ -212,5 +229,141 @@ namespace vcs_RGB2YUV_HLS
             lb_b.Text = "B = " + rrr.B.ToString();
 
         }
+
+        #region RGB <-> HLS
+        // True while we're setting the color.
+        private bool IgnoreEvents = false;
+
+        // Set a new RGB value.
+        private void nudRGB_ValueChanged(object sender, EventArgs e)
+        {
+            SelectRGBColor();
+        }
+
+        // Happens when the user presses a key.
+        private void nudRGB_KeyUp(object sender, KeyEventArgs e)
+        {
+            SelectRGBColor();
+        }
+
+        // Select a color from the RGB values.
+        private void SelectRGBColor()
+        {
+            if (IgnoreEvents) return;
+            IgnoreEvents = true;
+
+            // Save the selected color and display a sample.
+            int R = (int)nudR.Value;
+            int G = (int)nudG.Value;
+            int B = (int)nudB.Value;
+            SelectedColor = Color.FromArgb(R, G, B);
+            picSample.BackColor = SelectedColor;
+
+            // Convert to HLS.
+            double H, L, S;
+            ColorStuff.RgbToHls(R, G, B, out H, out L, out S);
+
+            // Display HLS values.
+            txtH.Text = H.ToString("0.00");
+            txtL.Text = L.ToString("0.00");
+            txtS.Text = S.ToString("0.00");
+
+            IgnoreEvents = false;
+        }
+
+        // Set a new HLS value.
+        private void txtHLS_TextChanged(object sender, EventArgs e)
+        {
+            SelectHLSColor();
+        }
+
+        // Select a color from the HLS values.
+        private void SelectHLSColor()
+        {
+            if (IgnoreEvents) return;
+            IgnoreEvents = true;
+
+            try
+            {
+                // Convert into RGB.
+                double H = double.Parse(txtH.Text);
+                double L = double.Parse(txtL.Text);
+                double S = double.Parse(txtS.Text);
+                int R, G, B;
+                ColorStuff.HlsToRgb(H, L, S, out R, out G, out B);
+
+                // Display RGB values.
+                nudR.Value = (decimal)R;
+                nudG.Value = (decimal)G;
+                nudB.Value = (decimal)B;
+
+                // Save the selected color and display a sample.
+                SelectedColor = Color.FromArgb(
+                    (int)nudR.Value,
+                    (int)nudG.Value,
+                    (int)nudB.Value);
+                picSample.BackColor = SelectedColor;
+            }
+            catch
+            {
+            }
+            IgnoreEvents = false;
+        }
+        #endregion
+
+        #region RGB scroll HLS
+        // Select a new RGB color.
+        private void scrRGB_Scroll(object sender, ScrollEventArgs e)
+        {
+            // Save the selected color and display a sample.
+            int R = scrR.Value;
+            int G = scrG.Value;
+            int B = scrB.Value;
+            pictureBox2.BackColor = Color.FromArgb(R, G, B);
+
+            // Convert to HLS.
+            double H, L, S;
+            ColorStuff.RgbToHls(R, G, B, out H, out L, out S);
+
+            // Display HLS values.
+            scrH.Value = (int)H;
+            scrL.Value = (int)(L * 1000);
+            scrS.Value = (int)(S * 1000);
+
+            ShowNumericValues(R, G, B, H, L, S);
+        }
+
+        // Select a new HLS color.
+        private void scrHLS_Scroll(object sender, ScrollEventArgs e)
+        {
+
+            // Convert into RGB.
+            double H = scrH.Value;
+            double L = scrL.Value / 1000.0;
+            double S = scrS.Value / 1000.0;
+            int R, G, B;
+            ColorStuff.HlsToRgb(H, L, S, out R, out G, out B);
+
+            // Display RGB values.
+            scrR.Value = R;
+            scrG.Value = G;
+            scrB.Value = B;
+
+            // Save the selected color and display a sample.
+            pictureBox2.BackColor = Color.FromArgb(R, G, B);
+
+            ShowNumericValues(R, G, B, H, L, S);
+        }
+
+        private void ShowNumericValues(int R, int G, int B, double H, double L, double S)
+        {
+            txtR.Text = R.ToString();
+            txtG.Text = G.ToString();
+            txtB.Text = B.ToString();
+            txtH.Text = H.ToString("0");
+            txtL.Text = L.ToString("0.00");
+            txtS.Text = S.ToString("0.00");
+        }
+        #endregion
     }
 }
