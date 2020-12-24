@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO;    //for File, FileStream
 using System.Drawing.Imaging;   //for PixelFormat
 
+using System.Net;   //for SecurityProtocolType
+
 namespace vcs_LoadPicture
 {
     public partial class Form1 : Form
@@ -39,6 +41,13 @@ namespace vcs_LoadPicture
             pictureBox2.Visible = false;
 
             reset_picturebox_setting();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //.Net 4.0 要強迫使用 TLS 1.2 抓資料
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
         }
 
         void reset_picturebox_setting()
@@ -143,7 +152,7 @@ namespace vcs_LoadPicture
             for (i = 0; i < 5; i++)
             {
                 Minute = (dt.Minute / 10) * 10;
-                string mapURL = string.Format("https://www.cwb.gov.tw/V7/observe/satellite/Data/s1p/s1p-{0}-{1}-{2}-{3}-{4}.jpg",
+                string mapURL = string.Format("https://www.cwb.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750-{0}-{1}-{2}-{3}-{4}.jpg",
                     dt.Year,
                     dt.Month.ToString("00"),
                     dt.Day.ToString("00"),
@@ -609,8 +618,6 @@ namespace vcs_LoadPicture
             else if (flag_zoom_operation_mode == MODE_RELEASE_STAGE3)
             {
                 //TBD
-
-
             }
             else
             {
@@ -620,11 +627,9 @@ namespace vcs_LoadPicture
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Clear();
-            richTextBox1.Text += "btn_down_up_cnt = " + btn_down_up_cnt.ToString() + "\n";
-            richTextBox1.Text += "btn_right_left_cnt = " + btn_right_left_cnt.ToString() + "\n";
-
-
+            richTextBox1.Clear();
+            //richTextBox1.Text += "btn_down_up_cnt = " + btn_down_up_cnt.ToString() + "\n";
+            //richTextBox1.Text += "btn_right_left_cnt = " + btn_right_left_cnt.ToString() + "\n";
         }
 
         private void picture_mode_CheckedChanged(object sender, EventArgs e)
@@ -669,7 +674,5 @@ namespace vcs_LoadPicture
                 richTextBox1.Text += "unknown mode\n";
             }
         }
-
-
     }
 }

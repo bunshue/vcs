@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;   //for SecurityProtocolType
+
 namespace vcs_SatelliteImages
 {
     public partial class Form1 : Form
@@ -30,6 +32,10 @@ namespace vcs_SatelliteImages
 
             richTextBox1.Text += "ccccc 1\n";
             Load_SatelliteImages();
+
+            //.Net 4.0 要強迫使用 TLS 1.2 抓資料
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
         }
 
         void Load_SatelliteImages()
