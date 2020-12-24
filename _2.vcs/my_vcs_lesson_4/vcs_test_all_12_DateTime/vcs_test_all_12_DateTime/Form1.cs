@@ -24,6 +24,19 @@ namespace vcs_test_all_12_DateTime
             label5.Text = "";
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            timer1.Interval = 1000;
+            timer1.Enabled = true;
+
+            // Start with a sample date.
+            txtDate.Text = "11 March 2006, 9:15";
+
+            calculate_time_difference();
+
+            load_listview_data();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //DateTime dt = new DateTime(年, 月, 日);
@@ -510,19 +523,6 @@ namespace vcs_test_all_12_DateTime
             TimeSpan ts = sDate - eDate;
             double days = ts.TotalDays;
             richTextBox1.Text = "差距 " + Convert.ToInt32(days).ToString() + "天";
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            timer1.Interval = 1000;
-            timer1.Enabled = true;
-
-            // Start with a sample date.
-            txtDate.Text = "11 March 2006, 9:15";
-
-            calculate_time_difference();
-
-            load_listview_data();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

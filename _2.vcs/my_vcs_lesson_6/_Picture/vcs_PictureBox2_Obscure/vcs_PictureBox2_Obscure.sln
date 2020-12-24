@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureBox2_Obscure", "vcs_PictureBox2_Obscure\vcs_PictureBox2_Obscure.csproj", "{0FD79D71-5F1E-4DBD-80E8-188453D9E94F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FD79D71-5F1E-4DBD-80E8-188453D9E94F}.Debug|x86.ActiveCfg = Debug|x86
+		{0FD79D71-5F1E-4DBD-80E8-188453D9E94F}.Debug|x86.Build.0 = Debug|x86
+		{0FD79D71-5F1E-4DBD-80E8-188453D9E94F}.Release|x86.ActiveCfg = Release|x86
+		{0FD79D71-5F1E-4DBD-80E8-188453D9E94F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
