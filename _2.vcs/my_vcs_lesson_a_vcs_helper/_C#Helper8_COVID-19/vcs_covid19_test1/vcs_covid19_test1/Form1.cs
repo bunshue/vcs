@@ -23,12 +23,14 @@ namespace vcs_covid19_test1
         private void Form1_Load(object sender, EventArgs e)
         {
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
-            //for Sugar
+            //for Sugar     3840
             //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
 
-            //for Romeo
+            //for Romeo and Sugar    3072
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)

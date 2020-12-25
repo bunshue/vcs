@@ -387,7 +387,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(180, 40);
             this.button26.TabIndex = 26;
-            this.button26.Text = "xxx";
+            this.button26.Text = "Dictionary字典用法3";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -812,7 +812,7 @@
             this.lb_symbols_1.Location = new System.Drawing.Point(163, 364);
             this.lb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_1.Name = "lb_symbols_1";
-            this.lb_symbols_1.Size = new System.Drawing.Size(235, 12);
+            this.lb_symbols_1.Size = new System.Drawing.Size(227, 12);
             this.lb_symbols_1.TabIndex = 65;
             this.lb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             // 
