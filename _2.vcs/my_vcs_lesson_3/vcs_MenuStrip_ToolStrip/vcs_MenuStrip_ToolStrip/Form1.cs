@@ -174,6 +174,24 @@ Show hidden files	Ctrl+H
             }
         }
 
+        /*
+        //相同
+        // Uncheck all menu items in this menu except checked_item.
+        private void CheckMenuItem(ToolStripMenuItem mnu, ToolStripMenuItem checked_item)
+        {
+            // Uncheck all of the menu items.   先全反選
+            foreach (ToolStripItem item in mnu.DropDownItems)
+            {
+                if (item is ToolStripMenuItem)
+                {
+                    ToolStripMenuItem menu_item = item as ToolStripMenuItem;
+                    menu_item.Checked = false;
+                }
+            }
+            // Check the one that should be checked.    再選取
+            checked_item.Checked = true;
+        }
+        */
 
     }
 }

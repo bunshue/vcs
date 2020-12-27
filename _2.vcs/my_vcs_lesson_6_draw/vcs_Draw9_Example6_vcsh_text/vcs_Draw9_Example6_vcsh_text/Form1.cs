@@ -122,6 +122,8 @@ namespace vcs_Draw9_Example6_vcsh_text
             Path = new GraphicsPath();
             Path.AddPolygon(DoublePoints(PolygonPoints));
             #endregion
+            ShowSample1();
+            ShowSample2();
         }
 
         void show_item_location()
@@ -719,6 +721,103 @@ namespace vcs_Draw9_Example6_vcsh_text
         #endregion
 
 
+        #region 自動字型大小
+        private void txtSample_TextChanged(object sender, EventArgs e)
+        {
+            ShowSample1();
+            ShowSample2();
+        }
+
+        // Display the sample text as large as possible.
+        private void ShowSample1()
+        {
+            string text = txtSample.Text;
+            if (text.Length == 0) return;
+
+            float font_size = GetFontSize(
+                lblSample1, text, 10, 1, 1000);
+            lblFontSize1.Text = font_size.ToString("0.0");
+            lblSample1.Font = new Font(lblSample1.Font.FontFamily, font_size);
+            lblSample1.Text = text;
+        }
+
+        // Return the largest font size that lets the text fit in the Label.
+        private float GetFontSize(Label label, string text,
+            int margin, float min_size, float max_size)
+        {
+            // Only bother if there's text.
+            if (text.Length == 0) return min_size;
+
+            // See how much room we have, allowing a bit
+            // for the Label's internal margin.
+            int wid = label.DisplayRectangle.Width - margin;
+            int hgt = label.DisplayRectangle.Height - margin;
+
+            // Make a Graphics object to measure the text.
+            using (Graphics gr = label.CreateGraphics())
+            {
+                while (max_size - min_size > 0.1f)
+                {
+                    float pt = (min_size + max_size) / 2f;
+                    using (Font test_font = new Font(label.Font.FontFamily, pt))
+                    {
+                        // See if this font is too big.
+                        SizeF text_size = gr.MeasureString(text, test_font);
+                        if ((text_size.Width > wid) || (text_size.Height > hgt))
+                            max_size = pt;
+                        else
+                            min_size = pt;
+                    }
+                }
+                return min_size;
+            }
+        }
+
+        // Display the sample text as large as possible.
+        private void ShowSample2()
+        {
+            string text = txtSample.Text;
+            if (text.Length == 0) return;
+
+            float font_size = GetFontSize2(
+                lblSample2, text, 10, 1, 1000);
+            lblFontSize2.Text = font_size.ToString("0.0");
+            lblSample2.Font = new Font(lblSample2.Font.FontFamily, font_size);
+            lblSample2.Text = text;
+        }
+
+        // Return the largest font size that lets the text fit in the Label.
+        private float GetFontSize2(Label label, string text,
+            int margin, float min_size, float max_size)
+        {
+            // Only bother if there's text.
+            if (text.Length == 0) return min_size;
+
+            // See how much room we have, allowing a bit
+            // for the Label's internal margin.
+            int wid = label.DisplayRectangle.Width - margin;
+            int hgt = label.DisplayRectangle.Height - margin;
+
+            // Make a Graphics object to measure the text.
+            using (Graphics gr = label.CreateGraphics())
+            {
+                while (max_size - min_size > 0.1f)
+                {
+                    float pt = (min_size + max_size) / 2f;
+                    using (Font test_font = new Font(label.Font.FontFamily, pt))
+                    {
+                        // See if this font is too big.
+                        SizeF text_size = gr.MeasureString(text, test_font, wid);
+                        if ((text_size.Width > wid) || (text_size.Height > hgt))
+                            max_size = pt;
+                        else
+                            min_size = pt;
+                    }
+                }
+                return min_size;
+            }
+        }
+        #endregion
 
     }
 }

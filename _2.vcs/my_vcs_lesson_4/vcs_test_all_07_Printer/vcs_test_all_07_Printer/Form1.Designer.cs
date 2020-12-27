@@ -72,6 +72,8 @@
             this.printPreviewDialog_pages = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument_grid2 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog_grid2 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printPreviewDialog_pascal = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument_pascal = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
@@ -441,12 +443,14 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(212, 144);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(194, 45);
             this.button13.TabIndex = 60;
+            this.button13.Text = "預覽列印巴斯卡三角形";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -506,6 +510,21 @@
             this.printPreviewDialog_grid2.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_grid2.Icon")));
             this.printPreviewDialog_grid2.Name = "printPreviewDialog_grid2";
             this.printPreviewDialog_grid2.Visible = false;
+            // 
+            // printPreviewDialog_pascal
+            // 
+            this.printPreviewDialog_pascal.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_pascal.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_pascal.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_pascal.Document = this.printDocument_pascal;
+            this.printPreviewDialog_pascal.Enabled = true;
+            this.printPreviewDialog_pascal.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_pascal.Icon")));
+            this.printPreviewDialog_pascal.Name = "printPreviewDialog_pascal";
+            this.printPreviewDialog_pascal.Visible = false;
+            // 
+            // printDocument_pascal
+            // 
+            this.printDocument_pascal.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_pascal_PrintPage);
             // 
             // Form1
             // 
@@ -591,6 +610,8 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pages;
         private System.Drawing.Printing.PrintDocument printDocument_grid2;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid2;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pascal;
+        private System.Drawing.Printing.PrintDocument printDocument_pascal;
     }
 }
 

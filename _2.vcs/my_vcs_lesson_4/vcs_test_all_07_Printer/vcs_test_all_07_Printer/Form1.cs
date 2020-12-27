@@ -1309,5 +1309,68 @@ namespace vcs_test_all_07_Printer
         }
         #endregion
 
+        //預覽列印巴斯卡三角形
+
+        // Display the print preview.
+        private void button13_Click(object sender, EventArgs e)
+        {
+            // printDocument_pascal.PrinterSettings.PrinterName = "Dell Photo AIO Printer 926";
+
+            printDocument_pascal.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
+            printDocument_pascal.DefaultPageSettings.Landscape = true;
+            printPreviewDialog_pascal.ShowDialog();
+        }
+
+        // Draw the triangle.
+        private void printDocument_pascal_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            using (Font font = new Font("Courier New", 4))
+            {
+                using (StringFormat format = new StringFormat())
+                {
+                    // Center each line.
+                    format.Alignment = StringAlignment.Center;
+
+                    const float width_factor = 6.5f;
+                    int num_wid = (int)(width_factor * e.Graphics.MeasureString("0", font).Width);
+                    int num_hgt = (int)e.Graphics.MeasureString("0", font).Height;
+                    int y = e.MarginBounds.Top;
+                    int xmid = (e.MarginBounds.Left + e.MarginBounds.Right) / 2;
+
+                    // Make the first row.
+                    List<int> numbers = new List<int>();
+                    numbers.Add(1);
+
+                    // Display rows.
+                    while (y < e.MarginBounds.Height)
+                    {
+                        int x = xmid - (num_wid * numbers.Count) / 2;
+                        if (x < e.MarginBounds.Left) break;
+
+                        // Display the current list of numbers.
+                        foreach (int num in numbers)
+                        {
+                            e.Graphics.DrawString(num.ToString(),
+                                font, Brushes.Black, x, y, format);
+                            x += num_wid;
+                        }
+
+                        // Add the next number to the list.
+                        List<int> new_numbers = new List<int>();
+                        new_numbers.Add(1);
+                        for (int i = 1; i < numbers.Count; i++)
+                        {
+                            new_numbers.Add(numbers[i - 1] + numbers[i]);
+                        }
+                        new_numbers.Add(1);
+                        numbers = new_numbers;
+
+                        y += num_hgt;
+                    }
+                }
+            }
+
+        }
+
     }
 }

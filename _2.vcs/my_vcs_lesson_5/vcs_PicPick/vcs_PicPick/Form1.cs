@@ -15,7 +15,13 @@ namespace vcs_PicPick
     public partial class Form1 : Form
     {
         int clear_label_count = 0;
-        
+
+        // The image of the whole screen.
+        private Bitmap ScreenBm, VisibleBm;
+
+        // The area we are selecting.
+        private int X0, Y0, X1, Y1;
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +29,11 @@ namespace vcs_PicPick
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.BackColor = Color.LightPink;
+
+
             richTextBox1.Visible = false;
             label1.Text = "";
             //show_item_location();
@@ -40,16 +51,24 @@ namespace vcs_PicPick
 
             button1.Text = "截圖存檔";
             button1.Location = new Point(10, 10);
-            button1.Size = new Size(60, 50);
+            button1.Size = new Size(60, 60);
+            button1.Visible = true;
 
             button2.Font = new Font(button2.Font.Name, 14);
             button2.Text = "全螢幕截圖";
             button2.Location = new Point(button1.Location.X + button1.Size.Width + 2, 10);
             button2.Size = new Size(115, 25);
+            button2.Visible = true;
 
-            label1.Location = new Point(75, 40);
+            button3.Font = new Font(button2.Font.Name, 14);
+            button3.Text = "自選截圖";
+            button3.Location = new Point(button2.Location.X, button2.Location.Y + button2.Size.Height + 9);
+            button3.Size = new Size(115, 25);
+            button3.Visible = true;
 
-            this.Size = new Size(205, 110);
+            label1.Location = new Point(10, button2.Location.Y + button2.Size.Height + button3.Size.Height + 15);
+
+            this.Size = new Size(205 + 30, 110 + 35);
 
             //設定執行後的表單起始位置, 在螢幕的最右下方
             const int margin = 0;
@@ -191,7 +210,111 @@ namespace vcs_PicPick
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
             Application.Exit();
-        } 
+        }
 
+        // Let the user select a part of the screen.
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Get the whole screen's image.
+            ScreenBm = GetScreenImage();
+
+            // Display a copy.
+            VisibleBm = (Bitmap)ScreenBm.Clone();
+
+            // Display it.
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            this.BackgroundImage = VisibleBm;
+            this.Location = new Point(0, 0);
+            this.ClientSize = VisibleBm.Size;
+            this.MouseDown += Form1_MouseDown;
+            this.Show();
+        }
+
+        // Start selecting an area.
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //richTextBox1.Text += "Down\n";
+            X0 = e.X;
+            Y0 = e.Y;
+            X1 = e.X;
+            Y1 = e.Y;
+
+            this.MouseDown -= Form1_MouseDown;
+            this.MouseMove += Form1_MouseMove;
+            this.MouseUp += Form1_MouseUp;
+        }
+
+        // Continue selecting an area.
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            X1 = e.X;
+            Y1 = e.Y;
+
+            using (Graphics gr = Graphics.FromImage(VisibleBm))
+            {
+                // Copy the original image.
+                gr.DrawImage(ScreenBm, 0, 0);
+
+                // Draw the selected area.
+                Rectangle rect = new Rectangle(
+                    Math.Min(X0, X1),
+                    Math.Min(Y0, Y1),
+                    Math.Abs(X1 - X0),
+                    Math.Abs(Y1 - Y0));
+                gr.DrawRectangle(Pens.Yellow, rect);
+            }
+            this.Refresh();
+        }
+
+        // Finish selecting an area.
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            //richTextBox1.Text += "Up\n";
+            this.Visible = false;
+            this.MouseMove -= Form1_MouseMove;
+            this.MouseUp -= Form1_MouseUp;
+
+            // Save the selected part of the image.
+            int wid = Math.Abs(X1 - X0);
+            int hgt = Math.Abs(Y1 - Y0);
+            Rectangle dest_rect = new Rectangle(0, 0, wid, hgt);
+            Rectangle source_rect = new Rectangle(
+                Math.Min(X0, X1),
+                Math.Min(Y0, Y1),
+                Math.Abs(X1 - X0),
+                Math.Abs(Y1 - Y0));
+
+            using (Bitmap selection = new Bitmap(wid, hgt))
+            {
+                // Copy the selected area.
+                using (Graphics gr = Graphics.FromImage(selection))
+                {
+                    gr.DrawImage(ScreenBm, dest_rect, source_rect, GraphicsUnit.Pixel);
+                }
+
+                // Save the selected area.
+                //存成bmp檔
+                string filename = "C:\\dddddddddd\\Image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                selection.Save(filename, ImageFormat.Jpeg);
+                //richTextBox1.Text += "全螢幕截圖1，存檔檔名：" + filename + "\n";
+                Form1_Load(sender, e);
+                label1.Text = "存檔成功";
+                timer1.Enabled = true;
+                this.Show();    // Show this form again.
+            }
+
+            // Dispose of the other bitmaps.
+            this.BackgroundImage = null;
+            ScreenBm.Dispose();
+            VisibleBm.Dispose();
+            ScreenBm = null;
+            VisibleBm = null;
+
+        }
+
+
+ 
     }
 }

@@ -1535,11 +1535,9 @@ namespace vcs_Draw9_Example7_vcsh
                 start_point.Y + dy * text_width);
         }
 
-
         private void pictureBox_Chrysanthemum_Paint(object sender, PaintEventArgs e)
         {
             pictureBox_Chrysanthemum.BackColor = Color.Black;
-            // Draw the curve.
 
             // Scale and translate.
             const float ymax = -11;
@@ -1579,9 +1577,6 @@ namespace vcs_Draw9_Example7_vcsh
                     e.Graphics.DrawLine(the_pen, pt0, pt1);
                 }
             }
-
-
-
         }
 
         // Return a color from the Colors array.
@@ -1594,7 +1589,6 @@ namespace vcs_Draw9_Example7_vcsh
         private void pictureBox_Chrysanthemum2_Paint(object sender, PaintEventArgs e)
         {
             pictureBox_Chrysanthemum2.BackColor = Color.Black;
-            // Draw the curve.
 
             // Scale and translate.
             const float ymax = -11;

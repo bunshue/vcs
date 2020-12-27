@@ -71,6 +71,13 @@
             this.label_size = new System.Windows.Forms.Label();
             this.timer_text = new System.Windows.Forms.Timer(this.components);
             this.timer_rotate_brush = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblFontSize2 = new System.Windows.Forms.Label();
+            this.lblFontSize1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSample = new System.Windows.Forms.TextBox();
+            this.lblSample1 = new System.Windows.Forms.Label();
+            this.lblSample2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).BeginInit();
@@ -80,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -480,11 +488,82 @@
             this.timer_rotate_brush.Enabled = true;
             this.timer_rotate_brush.Tick += new System.EventHandler(this.timer_rotate_brush_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblSample2);
+            this.groupBox1.Controls.Add(this.lblFontSize2);
+            this.groupBox1.Controls.Add(this.lblFontSize1);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.txtSample);
+            this.groupBox1.Controls.Add(this.lblSample1);
+            this.groupBox1.Location = new System.Drawing.Point(652, 546);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(350, 339);
+            this.groupBox1.TabIndex = 73;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "自動字型大小";
+            // 
+            // lblFontSize2
+            // 
+            this.lblFontSize2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFontSize2.Location = new System.Drawing.Point(287, 306);
+            this.lblFontSize2.Name = "lblFontSize2";
+            this.lblFontSize2.Size = new System.Drawing.Size(47, 18);
+            this.lblFontSize2.TabIndex = 14;
+            this.lblFontSize2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblFontSize1
+            // 
+            this.lblFontSize1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFontSize1.Location = new System.Drawing.Point(287, 277);
+            this.lblFontSize1.Name = "lblFontSize1";
+            this.lblFontSize1.Size = new System.Drawing.Size(47, 18);
+            this.lblFontSize1.TabIndex = 13;
+            this.lblFontSize1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(227, 295);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 12);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Font Size:";
+            // 
+            // txtSample
+            // 
+            this.txtSample.Location = new System.Drawing.Point(15, 290);
+            this.txtSample.Name = "txtSample";
+            this.txtSample.Size = new System.Drawing.Size(206, 22);
+            this.txtSample.TabIndex = 11;
+            this.txtSample.Text = "自動字型大小";
+            this.txtSample.TextChanged += new System.EventHandler(this.txtSample_TextChanged);
+            // 
+            // lblSample1
+            // 
+            this.lblSample1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSample1.Location = new System.Drawing.Point(15, 18);
+            this.lblSample1.Name = "lblSample1";
+            this.lblSample1.Size = new System.Drawing.Size(312, 114);
+            this.lblSample1.TabIndex = 10;
+            // 
+            // lblSample2
+            // 
+            this.lblSample2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSample2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSample2.Location = new System.Drawing.Point(15, 147);
+            this.lblSample2.Name = "lblSample2";
+            this.lblSample2.Size = new System.Drawing.Size(312, 114);
+            this.lblSample2.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 769);
+            this.ClientSize = new System.Drawing.Size(1264, 897);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_stretching);
             this.Controls.Add(this.label_size);
             this.Controls.Add(this.pictureBox_progressbar);
@@ -536,6 +615,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -585,6 +666,13 @@
         private System.Windows.Forms.Label label_size;
         private System.Windows.Forms.Timer timer_text;
         private System.Windows.Forms.Timer timer_rotate_brush;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblFontSize1;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.TextBox txtSample;
+        internal System.Windows.Forms.Label lblSample1;
+        private System.Windows.Forms.Label lblFontSize2;
+        internal System.Windows.Forms.Label lblSample2;
     }
 }
 
