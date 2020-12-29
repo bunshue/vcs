@@ -142,10 +142,8 @@ namespace vcs_test_all_06_DirectoryFile
             gb4_writefile.Size = new Size(gw, gh);
             gb5_files.Size = new Size(gw, gh);
             gb6_new.Size = new Size(gw, gh);
-
         }
 
-        //public static bool DeleteDirectory(string target_dir)
         public bool DeleteDirectory(string target_dir)
         {
             bool result = false;
@@ -370,7 +368,6 @@ namespace vcs_test_all_06_DirectoryFile
             else
                 richTextBox1.Text += "找不到檔案\n";
 
-
             string destFileName = @"c:\______test_files\picture1a.jpg";
             string destFileName2 = @"c:\______test_files\picture1b.jpg";
 
@@ -409,7 +406,6 @@ namespace vcs_test_all_06_DirectoryFile
             }
             else
                 richTextBox1.Text += "未選取檔案\n";
-
         }
 
         private void bt_file05_Click(object sender, EventArgs e)
@@ -661,8 +657,6 @@ namespace vcs_test_all_06_DirectoryFile
             {
                 richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
             }
-
-
         }
 
         private void bt_dir03_Click(object sender, EventArgs e)
@@ -671,7 +665,6 @@ namespace vcs_test_all_06_DirectoryFile
             string destDirName2 = @"c:\______test_files\folder22";
             DeleteDirectory(destDirName, true);
             DeleteDirectory(destDirName2, true);
-
         }
 
         private void bt_dir04_Click(object sender, EventArgs e)
@@ -769,7 +762,6 @@ namespace vcs_test_all_06_DirectoryFile
             {
                 richTextBox1.Text += "資料夾: " + target_dir + " 不存在，不能刪除\n";
             }
-
         }
 
         private void bt_read00_Click(object sender, EventArgs e)
@@ -1765,12 +1757,11 @@ namespace vcs_test_all_06_DirectoryFile
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
-            string target_dir = "C:\\______test_files_file_name1";
+            string target_dir = "C:\\______test_files";
             richTextBox1.Text += "資料夾: " + target_dir + "\n";
             ShowDirectory(target_dir);
         }
 
-        //public static bool DeleteDirectory(string target_dir)
         public bool ShowDirectory(string target_dir)
         {
             bool result = false;
@@ -2009,7 +2000,6 @@ namespace vcs_test_all_06_DirectoryFile
             {
                 richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
             }
-
         }
 
         private void bt_new08_Click(object sender, EventArgs e)
@@ -2026,7 +2016,6 @@ namespace vcs_test_all_06_DirectoryFile
             {
                 richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
             }
-
         }
 
         private void bt_new09_Click(object sender, EventArgs e)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureBox8_DragList
+namespace vcs_PictureListDrag
 {
     static class Program
     {

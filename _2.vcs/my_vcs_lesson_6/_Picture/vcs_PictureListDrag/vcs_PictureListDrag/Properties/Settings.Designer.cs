@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_PictureBox8_DragList.Properties {
+namespace vcs_PictureListDrag.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

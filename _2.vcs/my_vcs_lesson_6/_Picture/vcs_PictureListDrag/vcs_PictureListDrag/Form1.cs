@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 
-namespace vcs_PictureBox8_DragList
+namespace vcs_PictureListDrag
 {
     public partial class Form1 : Form
     {
@@ -43,6 +43,8 @@ namespace vcs_PictureBox8_DragList
             Placeholder.Size = new Size(0, 0);
             Placeholder.Visible = true;
             panPictures.Controls.Add(Placeholder);
+
+            show_pictures();
         }
 
         // Arrange the PictureBoxes.
@@ -239,7 +241,7 @@ namespace vcs_PictureBox8_DragList
             ctxPictures.Show(panPictures, location);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void show_pictures()
         {
             int i = 0;
 

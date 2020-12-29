@@ -426,5 +426,29 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "\n製作TXT檔\t" + filename + "\n";
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+            // Read the whole file to a string array
+            string[] input_lines = File.ReadAllLines(filename, Encoding.Default);
+            List<string> output_lines = new List<string>();
+
+            int len = input_lines.Length;
+            richTextBox1.Text += "共有 " + len.ToString() + " 行\n";
+            int n = 0;
+            foreach (string line in input_lines)
+            {
+                n++;
+                richTextBox1.Text += n.ToString() + "\t" + line + "\n";
+
+                output_lines.Add("取得資料\t" + line);
+            }
+
+
+            // Save the result.
+            File.WriteAllLines("aaaaa.txt", output_lines.ToArray());
+
+        }
+
     }
 }

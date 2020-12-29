@@ -192,5 +192,40 @@ namespace vcs_Clipboard
         {
             richTextBox1.Clear();
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // Copy a Person to the Clipboard.
+            Person person = new Person() { FirstName = textBox1.Text, LastName = textBox2.Text };
+            Clipboard.SetDataObject(person);
+            richTextBox1.Text += "已複製類別到剪貼簿\n";
+        }
+
+        // Paste the person from the Clipboard.
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "貼上類別\t";
+            IDataObject data_object = Clipboard.GetDataObject();
+            if (data_object.GetDataPresent("vcs_Clipboard.Person"))
+            {
+                Person person = (Person)data_object.GetData("vcs_Clipboard.Person");
+                //txtDropFirstName.Text = person.FirstName;
+                //txtDropLastName.Text = person.LastName;
+                richTextBox1.Text += "取得類別資料 First Name = " + person.FirstName + ", Last Name = " + person.LastName + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "類別資料不存在\n";
+            }
+
+        }
     }
+
+    [Serializable()]    //必要的一行
+    class Person
+    {
+        public string FirstName;
+        public string LastName;
+    }
+
 }
