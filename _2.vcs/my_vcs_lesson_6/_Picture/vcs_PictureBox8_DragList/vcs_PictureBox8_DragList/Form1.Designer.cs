@@ -36,18 +36,19 @@
             this.mnuDeletePicture = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuInsertPicture = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdPicture = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.panPictures.SuspendLayout();
             this.ctxPictures.SuspendLayout();
             this.SuspendLayout();
             // 
             // panPictures
             // 
-            this.panPictures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panPictures.AutoScroll = true;
             this.panPictures.BackColor = System.Drawing.Color.White;
             this.panPictures.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panPictures.ContextMenuStrip = this.ctxPictures;
+            this.panPictures.Controls.Add(this.button1);
             this.panPictures.Location = new System.Drawing.Point(12, 11);
             this.panPictures.Name = "panPictures";
             this.panPictures.Size = new System.Drawing.Size(755, 409);
@@ -62,33 +63,33 @@
             this.mnuDeletePicture,
             this.mnuInsertPicture});
             this.ctxPictures.Name = "ctxPictures";
-            this.ctxPictures.Size = new System.Drawing.Size(164, 92);
+            this.ctxPictures.Size = new System.Drawing.Size(162, 92);
             // 
             // mnuMoveLeft
             // 
             this.mnuMoveLeft.Name = "mnuMoveLeft";
-            this.mnuMoveLeft.Size = new System.Drawing.Size(163, 22);
+            this.mnuMoveLeft.Size = new System.Drawing.Size(161, 22);
             this.mnuMoveLeft.Text = "Move &Left";
             this.mnuMoveLeft.Click += new System.EventHandler(this.mnuMoveLeft_Click);
             // 
             // mnuMoveRight
             // 
             this.mnuMoveRight.Name = "mnuMoveRight";
-            this.mnuMoveRight.Size = new System.Drawing.Size(163, 22);
+            this.mnuMoveRight.Size = new System.Drawing.Size(161, 22);
             this.mnuMoveRight.Text = "Move &Right";
             this.mnuMoveRight.Click += new System.EventHandler(this.mnuMoveRight_Click);
             // 
             // mnuDeletePicture
             // 
             this.mnuDeletePicture.Name = "mnuDeletePicture";
-            this.mnuDeletePicture.Size = new System.Drawing.Size(163, 22);
+            this.mnuDeletePicture.Size = new System.Drawing.Size(161, 22);
             this.mnuDeletePicture.Text = "&Delete Picture...";
             this.mnuDeletePicture.Click += new System.EventHandler(this.mnuDeletePicture_Click);
             // 
             // mnuInsertPicture
             // 
             this.mnuInsertPicture.Name = "mnuInsertPicture";
-            this.mnuInsertPicture.Size = new System.Drawing.Size(163, 22);
+            this.mnuInsertPicture.Size = new System.Drawing.Size(161, 22);
             this.mnuInsertPicture.Text = "&Insert Picture...";
             this.mnuInsertPicture.Click += new System.EventHandler(this.mnuInsertPicture_Click);
             // 
@@ -98,15 +99,35 @@
             this.ofdPicture.Filter = "Image files|*.bmp;*.jpg;*.gif;*.png;*.tif|All FIles|*.*";
             this.ofdPicture.Multiselect = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(673, 295);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(773, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(393, 418);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 431);
+            this.ClientSize = new System.Drawing.Size(1178, 442);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panPictures);
             this.Name = "Form1";
             this.Text = "vcs_PictureBox8_DragList";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panPictures.ResumeLayout(false);
             this.ctxPictures.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -121,6 +142,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuMoveRight;
         private System.Windows.Forms.ToolStripMenuItem mnuDeletePicture;
         private System.Windows.Forms.ToolStripMenuItem mnuInsertPicture;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

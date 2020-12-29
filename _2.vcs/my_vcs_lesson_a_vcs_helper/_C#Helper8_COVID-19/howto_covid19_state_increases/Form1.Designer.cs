@@ -401,6 +401,8 @@
             // chkTotalPositive
             // 
             this.chkTotalPositive.AutoSize = true;
+            this.chkTotalPositive.Checked = true;
+            this.chkTotalPositive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTotalPositive.Location = new System.Drawing.Point(20, 60);
             this.chkTotalPositive.Name = "chkTotalPositive";
             this.chkTotalPositive.Size = new System.Drawing.Size(87, 16);

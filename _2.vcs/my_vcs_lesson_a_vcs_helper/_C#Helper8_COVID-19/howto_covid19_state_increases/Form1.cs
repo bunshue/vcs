@@ -175,7 +175,7 @@ namespace howto_covid19_state_increases
 
             for (int i = fields.GetLowerBound(1); i <= fields.GetUpperBound(1); i++)
             {
-                richTextBox1.Text += "ІД " +i.ToString() + " Дж : " + fields[1, i].ToString() + "\n";
+                //richTextBox1.Text += "ІД " +i.ToString() + " Дж : " + fields[1, i].ToString() + "\n";
                 /*
                 if (fields[1, i].ToString().ToLower() == header.ToLower())
                     return i;
@@ -431,6 +431,8 @@ namespace howto_covid19_state_increases
 
             // Redisplay the tooltip if appropriate.
             SetTooltip(ClosePoint);
+
+            RedrawGraph();
         }
 
         // Get the list of checked items,

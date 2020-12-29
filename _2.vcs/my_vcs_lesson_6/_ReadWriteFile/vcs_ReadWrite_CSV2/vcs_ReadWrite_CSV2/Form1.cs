@@ -25,6 +25,8 @@ namespace vcs_ReadWrite_CSV2
 
         }
 
+        object[,] csv_data;
+
         private int colDate = 1;
         private int colState = 2;
         private int colPositive = 3;
@@ -73,48 +75,11 @@ namespace vcs_ReadWrite_CSV2
             throw new Exception("Cannot find column " + header);
         }
 
-        private void LoadData()
+        private object[,] LoadData(string filename)
         {
-            string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_state_data.csv";
-            
-            //filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_成績檔.csv";
-
-            richTextBox1.Text += "filename = " + filename + "\n";
-
             // Read the file.
             object[,] fields = LoadCsv(filename);
-
-            int column_st = fields.GetLowerBound(1);
-            int column_sp = fields.GetUpperBound(1);
-            int num_column = column_sp - column_st + 1;
-            int num_row = fields.GetUpperBound(0);
-
-            richTextBox1.Text += "共有 " + num_column.ToString() + " 欄(column)資料\n";
-            richTextBox1.Text += "共有 " + num_row.ToString() + " 列(row)資料\n";
-
-            /*  debug
-            int i;
-            for (i = fields.GetLowerBound(1); i <= fields.GetUpperBound(1); i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 欄 : " + fields[1, i].ToString() + "\n";
-            }
-            */
-            /*
-            int i;
-            int j;
-            for (i = 1; i <= num_row; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t";
-                for (j = column_st; j <= column_sp; j++)
-                {
-                    richTextBox1.Text += fields[i, j].ToString();
-                    if (j < column_sp)
-                        richTextBox1.Text += "\t";
-                }
-                richTextBox1.Text += "\n";
-            }
-            */
-            //FindColumns(fields);
+            return fields;
         }
 
         // Return a value from the CSV file.
@@ -123,7 +88,8 @@ namespace vcs_ReadWrite_CSV2
             if (value == null) return 0;
  
             int result;
-            if (int.TryParse(value.ToString(), out result)) return result;
+            if (int.TryParse(value.ToString(), out result))
+                return result;
             return 0;
         }
 
@@ -170,7 +136,65 @@ namespace vcs_ReadWrite_CSV2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            LoadData();
+            string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_state_data.csv";
+
+            //filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_成績檔.csv";
+
+            richTextBox1.Text += "filename = " + filename + "\n";
+
+            csv_data = LoadData(filename);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowData(csv_data);
+        }
+
+        void ShowData(object[,] fields)
+        {
+            if (fields == null)
+            {
+                richTextBox1.Text += "無資料\n";
+                return;
+            }
+            else
+                richTextBox1.Text += "資料OK\n";
+
+            int i;
+            int j;
+            int column_st = fields.GetLowerBound(1);
+            int column_sp = fields.GetUpperBound(1);
+            int num_column = column_sp - column_st + 1;
+            int num_row = fields.GetUpperBound(0);
+
+            richTextBox1.Text += "共有 " + num_column.ToString() + " 欄(column)資料\n";
+            richTextBox1.Text += "共有 " + num_row.ToString() + " 列(row)資料\n";
+
+            for (i = fields.GetLowerBound(1); i <= fields.GetUpperBound(1); i++)
+            {
+                richTextBox1.Text += "第一列 第 " + i.ToString() + " 欄 : " + fields[1, i].ToString() + "\n";
+            }
+
+            if (num_row > 10)
+                num_row = 10;
+            for (i = 1; i <= num_row; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t";
+                for (j = column_st; j <= column_sp; j++)
+                {
+                    if (fields[i, j] == null)
+                        richTextBox1.Text += "N.A.";
+                    else
+                        richTextBox1.Text += fields[i, j].ToString();
+                    if (j < column_sp)
+                        richTextBox1.Text += "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            //FindColumns(fields);
+
+
+
         }
     }
 }

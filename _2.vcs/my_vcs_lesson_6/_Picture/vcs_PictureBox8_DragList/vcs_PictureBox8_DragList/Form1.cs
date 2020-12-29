@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 namespace vcs_PictureBox8_DragList
 {
     public partial class Form1 : Form
@@ -235,6 +237,79 @@ namespace vcs_PictureBox8_DragList
 
             // Display the context menu.
             ctxPictures.Show(panPictures, location);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+
+            //撈出資料夾內所有png檔
+            string folder_name = @"C:\______test_files\_books2";
+
+            List<String> filenames = find_all_files(folder_name);
+
+            // 取出單一個List 裡的值，如同陣列(Array)用法
+            for (i = 0; i < filenames.Count; i++)
+            {
+                //richTextBox1.Text += filenames[i] + "\n";
+            }
+
+            i = 0;
+            try
+            {
+                foreach (string filename in filenames)
+                {
+                    Bitmap bm = new Bitmap(filename);
+
+                    PictureBox pic = new PictureBox();
+                    pic.SizeMode = PictureBoxSizeMode.AutoSize;
+                    pic.Image = bm;
+                    pic.Visible = true;
+                    pic.BorderStyle = BorderStyle.Fixed3D;
+                    pic.MouseDown += pic_MouseDown;
+                    panPictures.Controls.Add(pic);
+
+                    PictureBoxes.Insert(i, pic);
+                    i++;
+                }
+                ArrangePictureBoxes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        List<String> find_all_files(string folder_name)
+        {
+            List<String> filenames = new List<String>();
+
+            var dirnames = Directory.GetDirectories(folder_name);
+            try
+            {
+                foreach (var dir in dirnames)
+                {
+                    var fnames = Directory.GetFiles(dir);
+                    foreach (var f in fnames)
+                    {
+                        //richTextBox1.Text += f + "\n";
+                        if (f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".png"))
+                            filenames.Add(f);
+                    }
+                }
+                var fnames2 = Directory.GetFiles(folder_name);
+                foreach (var f in fnames2)
+                {
+                    //richTextBox1.Text += f + "\n";
+                    if (f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".png"))
+                        filenames.Add(f);
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+            return filenames;
         }
     }
 }
