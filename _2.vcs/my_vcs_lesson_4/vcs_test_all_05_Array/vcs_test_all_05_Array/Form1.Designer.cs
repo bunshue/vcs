@@ -1,4 +1,4 @@
-﻿namespace vcs_test_all_14_Array_Sorting
+﻿namespace vcs_test_all_05_Array
 {
     partial class Form1
     {

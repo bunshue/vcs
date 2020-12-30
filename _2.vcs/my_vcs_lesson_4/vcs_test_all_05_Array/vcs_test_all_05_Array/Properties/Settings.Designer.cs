@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_test_all_14_Array_Sorting.Properties {
+namespace vcs_test_all_05_Array.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

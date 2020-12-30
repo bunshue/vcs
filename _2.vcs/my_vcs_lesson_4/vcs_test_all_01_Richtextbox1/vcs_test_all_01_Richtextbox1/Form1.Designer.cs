@@ -440,11 +440,12 @@
             // 
             // button28
             // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button28.Location = new System.Drawing.Point(257, 611);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(220, 40);
             this.button28.TabIndex = 50;
+            this.button28.Text = "RichTextBox字型不一樣";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -733,7 +734,7 @@
             // 
             this.richTextBox_format_1.Font = new System.Drawing.Font("新細明體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox_format_1.Location = new System.Drawing.Point(12, 706);
-            this.richTextBox_format_1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox_format_1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox_format_1.Name = "richTextBox_format_1";
             this.richTextBox_format_1.Size = new System.Drawing.Size(466, 55);
             this.richTextBox_format_1.TabIndex = 87;
@@ -743,7 +744,7 @@
             // 
             this.richTextBox_format_2.Font = new System.Drawing.Font("新細明體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox_format_2.Location = new System.Drawing.Point(12, 766);
-            this.richTextBox_format_2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox_format_2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox_format_2.Name = "richTextBox_format_2";
             this.richTextBox_format_2.Size = new System.Drawing.Size(466, 55);
             this.richTextBox_format_2.TabIndex = 88;

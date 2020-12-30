@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_14_Array_Sorting", "vcs_test_all_14_Array_Sorting\vcs_test_all_14_Array_Sorting.csproj", "{41B824E2-7788-42CC-A010-6E6FD9FE42A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_05_Array", "vcs_test_all_05_Array\vcs_test_all_05_Array.csproj", "{41B824E2-7788-42CC-A010-6E6FD9FE42A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -562,6 +562,31 @@ namespace vcs_test_all_01_Richtextbox1
 
         private void button28_Click(object sender, EventArgs e)
         {
+            string txt = "\n\nThe quick brown fox jumps over the lazy dog.";
+            richTextBox1.Text = txt;
+
+            richTextBox1.Select(txt.IndexOf("quick"), "quick".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Italic);
+
+            richTextBox1.Select(txt.IndexOf("brown"), "brown".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Brown;
+
+            richTextBox1.Select(txt.IndexOf("fox"), "fox".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Red;
+
+            richTextBox1.Select(txt.IndexOf("jumps over"), "jumps over".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Underline);
+
+            richTextBox1.Select(txt.IndexOf("lazy"), "lazy".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+
+            richTextBox1.Select(txt.IndexOf("dog"), "dog".Length);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont, FontStyle.Bold);
+            richTextBox1.SelectionColor = Color.Blue;
+
+            richTextBox1.Select(0, 0);
         }
 
         private void button29_Click(object sender, EventArgs e)
