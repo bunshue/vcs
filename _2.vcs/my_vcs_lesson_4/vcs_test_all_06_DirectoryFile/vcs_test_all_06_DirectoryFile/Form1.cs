@@ -1852,8 +1852,69 @@ namespace vcs_test_all_06_DirectoryFile
 
         private void bt_files12_Click(object sender, EventArgs e)
         {
+            //撈出資料夾內特定類型的檔案
+
+            string searchDirectory = @"C:\______test_files";
+            string searchPattern = "*.cs;*.csv;*.ico";
+            bool recurrsive = false;
+
+            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
+            // Search for the files.
+            List<string> filenames = FindFiles(searchDirectory, searchPattern, recurrsive);
+            foreach (string filename in filenames)
+            {
+                richTextBox1.Text += filename + "\n";
+            }
+
+            recurrsive = true;
+            richTextBox1.Text += "撈出資料夾內特定類型的檔案\t多層\tPattern : " + searchPattern + "\n";
+            // Search for the files.
+            filenames.Clear();
+            filenames = FindFiles(searchDirectory, searchPattern, recurrsive);
+            foreach (string filename in filenames)
+            {
+                richTextBox1.Text += filename + "\n";
+            }
 
         }
+
+        // Search for files matching the patterns.
+        private List<string> FindFiles(string dir_name, string patterns, bool recurrsive)
+        {
+            // Make the result list.
+            List<string> files = new List<string>();
+
+            // Get the patterns.
+            string[] pattern_array = patterns.Split(';');
+
+            // Search.
+            System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;
+            if (recurrsive)
+            {
+                search_option = System.IO.SearchOption.AllDirectories;
+            }
+            foreach (string pattern in pattern_array)
+            {
+                foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
+                {
+                    if (!files.Contains(filename))
+                        files.Add(filename);
+                }
+            }
+
+            // Sort.
+            files.Sort();
+
+            // Return the result.
+            return files;
+        }
+
+
+
+
+
+
+
 
         private void bt_new00_Click(object sender, EventArgs e)
         {

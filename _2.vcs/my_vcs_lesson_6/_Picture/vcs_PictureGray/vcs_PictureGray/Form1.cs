@@ -22,7 +22,19 @@ namespace vcs_PictureGray
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //原圖
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
+
             show_item_location();
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Bitmap.FromFile(filename);
         }
 
         void show_item_location()
@@ -33,7 +45,7 @@ namespace vcs_PictureGray
             int dy;
 
             //button
-            x_st = 850;
+            x_st = 1500;
             y_st = 12;
             dx = 190;
             dy = 50;
@@ -44,14 +56,73 @@ namespace vcs_PictureGray
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            int W = 250;
+            int H = 250;
+            x_st = 12;
+            y_st = 50;
+            dx = 270;
+            dy = 300;
+            pictureBox1.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox3.Size = new Size(W, H);
+            pictureBox4.Size = new Size(W, H);
+            pictureBox5.Size = new Size(W, H);
+            pictureBox6.Size = new Size(W, H);
+            pictureBox7.Size = new Size(W, H);
+            pictureBox8.Size = new Size(W, H);
+            pictureBox9.Size = new Size(W, H);
+            pictureBox10.Size = new Size(W, H);
+            pictureBox11.Size = new Size(W, H);
+            pictureBox12.Size = new Size(W, H);
+            pictureBox13.Size = new Size(W, H);
+            pictureBox14.Size = new Size(W, H);
+            pictureBox15.Size = new Size(W, H);
+
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox9.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            pictureBox11.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox15.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
+            label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
+            label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
+            label4.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
+            label5.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
+
+            label6.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
+            label7.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 25);
+            label8.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 25);
+            label9.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 25);
+            label10.Location = new Point(x_st + dx * 4, y_st + dy * 1 - 25);
+
+            label11.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 25);
+            label12.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 25);
+            label13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 25);
+            label14.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 25);
+            label15.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 25);
+
+            label1.Text = "原圖";
+            label2.Text = "原圖";
+
+            pictureBox15.BackColor = Color.Pink;
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
             //將圖片轉為 Sepia 效果
             // Display the image converted to sepia tone.
-            string filename = @"C:\______test_files\picture1.jpg";
-            pictureBox1.Image = Bitmap.FromFile(filename);
             pictureBox2.Image = ToSepiaTone(pictureBox1.Image);
         }
 
@@ -116,9 +187,6 @@ namespace vcs_PictureGray
         {
             richTextBox1.Text += "SetPixel 彩色轉灰階\n";
 
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-
             Bitmap bmp0 = new Bitmap(filename);
             Bitmap bmp = new Bitmap(filename);
             pictureBox1.Image = bmp0;
@@ -146,9 +214,6 @@ namespace vcs_PictureGray
         void color_to_gray_2(string filename)
         {
             richTextBox1.Text += "Marshal 彩色轉灰階\n";
-
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 
             //int data_offset = 0;
             // Create a new bitmap.
@@ -359,8 +424,6 @@ namespace vcs_PictureGray
 
             richTextBox1.Text += "filename new = " + filename2 + "\n";
 
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = Bitmap.FromFile(filename);
 
             // Convert to grayscale.

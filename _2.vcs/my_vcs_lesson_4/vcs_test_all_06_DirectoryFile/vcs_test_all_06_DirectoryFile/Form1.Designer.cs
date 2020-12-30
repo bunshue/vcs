@@ -813,11 +813,12 @@
             // 
             // bt_files12
             // 
-            this.bt_files12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files12.Location = new System.Drawing.Point(9, 543);
             this.bt_files12.Name = "bt_files12";
             this.bt_files12.Size = new System.Drawing.Size(185, 40);
             this.bt_files12.TabIndex = 57;
+            this.bt_files12.Text = "撈出資料夾內特定類型的檔案";
             this.bt_files12.UseVisualStyleBackColor = true;
             this.bt_files12.Click += new System.EventHandler(this.bt_files12_Click);
             // 
