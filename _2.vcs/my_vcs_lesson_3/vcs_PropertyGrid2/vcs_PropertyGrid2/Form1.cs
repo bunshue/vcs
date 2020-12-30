@@ -39,7 +39,7 @@ namespace howto_use_property_grid_descriptions
             lstPeople.DisplayMember = null;
 
             // Display the selected Person in the PropertyGrid.
-            pgdPeople.SelectedObject = lstPeople.SelectedItem;
+            propertyGrid1.SelectedObject = lstPeople.SelectedItem;
         }
     }
 }

@@ -431,6 +431,7 @@ namespace vcs_ReadWrite_TXT
             string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
             // Read the whole file to a string array
             string[] input_lines = File.ReadAllLines(filename, Encoding.Default);
+
             List<string> output_lines = new List<string>();
 
             int len = input_lines.Length;
@@ -440,15 +441,13 @@ namespace vcs_ReadWrite_TXT
             {
                 n++;
                 richTextBox1.Text += n.ToString() + "\t" + line + "\n";
-
                 output_lines.Add("取得資料\t" + line);
             }
 
-
+            string filename2 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             // Save the result.
-            File.WriteAllLines("aaaaa.txt", output_lines.ToArray());
-
+            File.WriteAllLines(filename2, output_lines.ToArray());
+            richTextBox1.Text += "\n製作TXT檔\t" + filename2 + "\n";
         }
-
     }
 }

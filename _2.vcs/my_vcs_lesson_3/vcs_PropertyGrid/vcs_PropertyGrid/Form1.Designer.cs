@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.lstPeople = new System.Windows.Forms.ListBox();
-            this.pgdPeople = new System.Windows.Forms.PropertyGrid();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.SuspendLayout();
             // 
             // lstPeople
@@ -43,20 +43,20 @@
             this.lstPeople.TabIndex = 0;
             this.lstPeople.SelectedIndexChanged += new System.EventHandler(this.lstPeople_SelectedIndexChanged);
             // 
-            // pgdPeople
+            // propertyGrid1
             // 
-            this.pgdPeople.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgdPeople.Location = new System.Drawing.Point(136, 0);
-            this.pgdPeople.Name = "pgdPeople";
-            this.pgdPeople.Size = new System.Drawing.Size(348, 307);
-            this.pgdPeople.TabIndex = 1;
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(136, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(348, 307);
+            this.propertyGrid1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 307);
-            this.Controls.Add(this.pgdPeople);
+            this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.lstPeople);
             this.Name = "Form1";
             this.Text = "howto_use_property_grid";
@@ -68,7 +68,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox lstPeople;
-        private System.Windows.Forms.PropertyGrid pgdPeople;
+        private System.Windows.Forms.PropertyGrid propertyGrid1;
     }
 }
 

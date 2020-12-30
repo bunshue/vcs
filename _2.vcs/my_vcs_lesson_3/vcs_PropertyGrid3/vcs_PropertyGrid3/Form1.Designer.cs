@@ -1,4 +1,4 @@
-﻿namespace howto_use_property_grid_descriptions
+﻿namespace vcs_PropertyGrid3
 {
     partial class Form1
     {
@@ -37,8 +37,8 @@
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGrid1.Location = new System.Drawing.Point(136, 0);
             this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(538, 466);
-            this.propertyGrid1.TabIndex = 3;
+            this.propertyGrid1.Size = new System.Drawing.Size(488, 445);
+            this.propertyGrid1.TabIndex = 5;
             // 
             // lstPeople
             // 
@@ -47,19 +47,19 @@
             this.lstPeople.ItemHeight = 12;
             this.lstPeople.Location = new System.Drawing.Point(0, 0);
             this.lstPeople.Name = "lstPeople";
-            this.lstPeople.Size = new System.Drawing.Size(136, 466);
-            this.lstPeople.TabIndex = 2;
+            this.lstPeople.Size = new System.Drawing.Size(136, 445);
+            this.lstPeople.TabIndex = 4;
             this.lstPeople.SelectedIndexChanged += new System.EventHandler(this.lstPeople_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 466);
+            this.ClientSize = new System.Drawing.Size(624, 445);
             this.Controls.Add(this.propertyGrid1);
             this.Controls.Add(this.lstPeople);
             this.Name = "Form1";
-            this.Text = "howto_use_property_grid_descriptions";
+            this.Text = "hwoto_make_type_converter";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

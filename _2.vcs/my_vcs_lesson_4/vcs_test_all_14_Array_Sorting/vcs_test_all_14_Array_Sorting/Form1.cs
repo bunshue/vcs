@@ -500,7 +500,46 @@ namespace vcs_test_all_14_Array_Sorting
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //製作data
+            int NumValues = 10;
+            int[] Values = new int[NumValues];
+            // Generate random values.
+            Random rand = new Random();
+            //Values = new int[NumValues];
+            for (int i = 0; i < NumValues; i++)
+            {
+                Values[i] = rand.Next(0, 100);
+            }
+            // Sort the values.
+            Array.Sort(Values);
 
+            richTextBox1.Text += "原陣列\t";
+            PrintArray(Values);
+
+            int target = 30;
+
+            richTextBox1.Text += "Binary Search\ttarget = " + target.ToString() + "\n";
+
+            // Try to find it.
+            int index = Array.BinarySearch(Values, target);
+
+            // Select the value.
+            if (index >= 0)
+            {
+                // We found the target. Select it.
+                //lstValues.SelectedIndex = index;
+                richTextBox1.Text += "Found target, index = " + index.ToString() + "\tvalue = " + Values[index].ToString() + "\n";
+
+            }
+            else
+            {
+                // We didn't find the target. Select a nearby value.
+                index = -index;
+                if (index >= NumValues)
+                    index = NumValues - 1;
+                //lstValues.SelectedIndex = index;
+                richTextBox1.Text += "No found target, index = " + index.ToString() + "\tvalue = " + Values[index].ToString() + "\n";
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)

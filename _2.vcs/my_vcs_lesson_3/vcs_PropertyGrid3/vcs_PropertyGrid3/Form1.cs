@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace howto_use_property_grid
+namespace vcs_PropertyGrid3
 {
     public partial class Form1 : Form
     {
@@ -21,9 +21,18 @@ namespace howto_use_property_grid
             // Make some people.
             Person[] people =
             {
-                new Person() {FirstName="Ann", LastName="Archer", Street="101 Ash Ave", City="Ann Arbor", State="MI", Zip="12345", Email="Ann@anywhere.com", Phone="703-287-3798"}, 
-                new Person() {FirstName="Ben", LastName="Best", Street="231 Beach Blvd", City="Boulder", State="CO", Zip="24361", Email="Ben@bestplace.com", Phone="209-783-2918"}, 
-                new Person() {FirstName="Cindy", LastName="Carter", Street="3783 Cherry Ct", City="Cedar Rapids", State="IA", Zip="36268", Email="CindyCarter@TheCarters.com", Phone="404-329-0182"}, 
+                new Person() {
+                    FirstName="Ann", LastName="Archer", 
+                    Address=new StreetAddress(){Street="101 Ash Ave", City="Ann Arbor", State="MI", Zip="12345"},
+                    Email="Ann@anywhere.com", Phone="703-287-3798"}, 
+                new Person() {
+                    FirstName="Ben", LastName="Best", 
+                    Address=new StreetAddress() {Street="231 Beach Blvd", City="Boulder", State="CO", Zip="24361"},
+                    Email="Ben@bestplace.com", Phone="209-783-2918"}, 
+                new Person() {
+                    FirstName="Cindy", LastName="Carter", 
+                    Address=new StreetAddress() {Street="3783 Cherry Ct", City="Cedar Rapids", State="IA", Zip="36268"},
+                    Email="CindyCarter@TheCarters.com", Phone="404-329-0182"}, 
             };
 
             // Display them in a ListBox.

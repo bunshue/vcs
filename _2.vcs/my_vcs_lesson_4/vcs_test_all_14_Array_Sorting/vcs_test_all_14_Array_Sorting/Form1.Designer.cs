@@ -252,7 +252,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 42);
             this.button16.TabIndex = 17;
-            this.button16.Text = "xxx";
+            this.button16.Text = "Binary Search";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
