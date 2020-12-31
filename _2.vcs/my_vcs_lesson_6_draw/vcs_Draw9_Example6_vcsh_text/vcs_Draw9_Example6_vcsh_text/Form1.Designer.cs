@@ -57,8 +57,6 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox_rotate_brush = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -72,22 +70,26 @@
             this.timer_text = new System.Windows.Forms.Timer(this.components);
             this.timer_rotate_brush = new System.Windows.Forms.Timer(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblSample2 = new System.Windows.Forms.Label();
             this.lblFontSize2 = new System.Windows.Forms.Label();
             this.lblFontSize1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSample = new System.Windows.Forms.TextBox();
             this.lblSample1 = new System.Windows.Forms.Label();
-            this.lblSample2 = new System.Windows.Forms.Label();
+            this.pictureBox_random_color = new System.Windows.Forms.PictureBox();
+            this.pictureBox_image_string = new System.Windows.Forms.PictureBox();
+            this.pictureBox_filled_text = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_image_string)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_filled_text)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -368,24 +370,6 @@
             this.pictureBox_rotate_brush.TabStop = false;
             this.pictureBox_rotate_brush.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_rotate_brush_Paint);
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox5.Location = new System.Drawing.Point(609, 140);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(165, 159);
-            this.pictureBox5.TabIndex = 61;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox6.Location = new System.Drawing.Point(721, 141);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(165, 159);
-            this.pictureBox6.TabIndex = 62;
-            this.pictureBox6.TabStop = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -503,6 +487,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "自動字型大小";
             // 
+            // lblSample2
+            // 
+            this.lblSample2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSample2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSample2.Location = new System.Drawing.Point(15, 147);
+            this.lblSample2.Name = "lblSample2";
+            this.lblSample2.Size = new System.Drawing.Size(312, 114);
+            this.lblSample2.TabIndex = 15;
+            // 
             // lblFontSize2
             // 
             this.lblFontSize2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -547,22 +542,43 @@
             this.lblSample1.Size = new System.Drawing.Size(312, 114);
             this.lblSample1.TabIndex = 10;
             // 
-            // lblSample2
+            // pictureBox_random_color
             // 
-            this.lblSample2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSample2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblSample2.Location = new System.Drawing.Point(15, 147);
-            this.lblSample2.Name = "lblSample2";
-            this.lblSample2.Size = new System.Drawing.Size(312, 114);
-            this.lblSample2.TabIndex = 15;
+            this.pictureBox_random_color.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_random_color.Location = new System.Drawing.Point(12, 836);
+            this.pictureBox_random_color.Name = "pictureBox_random_color";
+            this.pictureBox_random_color.Size = new System.Drawing.Size(565, 93);
+            this.pictureBox_random_color.TabIndex = 74;
+            this.pictureBox_random_color.TabStop = false;
+            this.pictureBox_random_color.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_random_color_Paint);
+            // 
+            // pictureBox_image_string
+            // 
+            this.pictureBox_image_string.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_image_string.Location = new System.Drawing.Point(570, 354);
+            this.pictureBox_image_string.Name = "pictureBox_image_string";
+            this.pictureBox_image_string.Size = new System.Drawing.Size(460, 157);
+            this.pictureBox_image_string.TabIndex = 75;
+            this.pictureBox_image_string.TabStop = false;
+            this.pictureBox_image_string.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_image_string_Paint);
+            // 
+            // pictureBox_filled_text
+            // 
+            this.pictureBox_filled_text.Location = new System.Drawing.Point(570, 224);
+            this.pictureBox_filled_text.Name = "pictureBox_filled_text";
+            this.pictureBox_filled_text.Size = new System.Drawing.Size(485, 147);
+            this.pictureBox_filled_text.TabIndex = 76;
+            this.pictureBox_filled_text.TabStop = false;
+            this.pictureBox_filled_text.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_filled_text_Paint);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 897);
+            this.ClientSize = new System.Drawing.Size(1264, 933);
+            this.Controls.Add(this.pictureBox_filled_text);
+            this.Controls.Add(this.pictureBox_image_string);
+            this.Controls.Add(this.pictureBox_random_color);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_stretching);
             this.Controls.Add(this.label_size);
@@ -572,8 +588,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox_rotate_brush);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -609,14 +623,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stretching)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_image_string)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_filled_text)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -652,8 +667,6 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox_rotate_brush;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -673,6 +686,9 @@
         internal System.Windows.Forms.Label lblSample1;
         private System.Windows.Forms.Label lblFontSize2;
         internal System.Windows.Forms.Label lblSample2;
+        private System.Windows.Forms.PictureBox pictureBox_random_color;
+        private System.Windows.Forms.PictureBox pictureBox_image_string;
+        private System.Windows.Forms.PictureBox pictureBox_filled_text;
     }
 }
 

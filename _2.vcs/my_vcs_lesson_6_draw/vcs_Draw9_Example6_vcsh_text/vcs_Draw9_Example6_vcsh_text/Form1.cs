@@ -185,14 +185,12 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox_rotate_brush.Size = new Size(W * 2, H);
-            pictureBox5.Size = new Size(W, H);
-            pictureBox6.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_rotate_brush.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox6.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox_image_string.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox_filled_text.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 150);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -816,6 +814,164 @@ namespace vcs_Draw9_Example6_vcsh_text
                 }
                 return min_size;
             }
+        }
+        #endregion
+
+
+        #region 字串任意顏色
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] colors =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+        };
+        private Color RandomColor()
+        {
+            return colors[rand.Next(0, colors.Length)];
+        }
+
+        // Draw some text with each letter in a random color.
+        private void pictureBox_random_color_Paint(object sender, PaintEventArgs e)
+        {
+            const string txt = "群曜醫電股份有限公司";
+
+            // Make the font.
+            using (Font the_font = new Font("Times New Roman", 30,
+                FontStyle.Bold | FontStyle.Italic))
+            {
+                // Make a StringFormat object to use for text layout.
+                using (StringFormat string_format = new StringFormat())
+                {
+                    // Center the text.
+                    string_format.Alignment = StringAlignment.Center;
+                    string_format.LineAlignment = StringAlignment.Center;
+                    string_format.FormatFlags = StringFormatFlags.NoClip;
+
+                    // Make CharacterRanges to indicate which
+                    // ranges we want to measure.
+                    CharacterRange[] ranges = new CharacterRange[txt.Length];
+                    for (int i = 0; i < txt.Length; i++)
+                    {
+                        ranges[i] = new CharacterRange(i, 1);
+                    }
+                    string_format.SetMeasurableCharacterRanges(ranges);
+
+                    // Measure the text to see where each character range goes.
+                    Region[] regions =
+                        e.Graphics.MeasureCharacterRanges(
+                            txt, the_font, this.pictureBox_random_color.ClientRectangle,
+                            string_format);
+
+                    // Draw the characters one at a time.
+                    for (int i = 0; i < txt.Length; i++)
+                    {
+                        // See where this character would be drawn.
+                        RectangleF rectf = regions[i].GetBounds(e.Graphics);
+                        Rectangle rect = new Rectangle(
+                            (int)rectf.X, (int)rectf.Y,
+                            (int)rectf.Width, (int)rectf.Height);
+
+                        // Make a brush with a random color.
+                        using (Brush the_brush = new SolidBrush(RandomColor()))
+                        {
+                            // Draw the character.
+                            e.Graphics.DrawString(txt.Substring(i, 1),
+                                the_font, the_brush, rectf, string_format);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+
+        #region 用圖片寫文字
+        private void pictureBox_image_string_Paint(object sender, PaintEventArgs e)
+        {
+            // Make text filled with a single big image.
+            // Make a brush containing the picture.
+            using (TextureBrush the_brush = new TextureBrush(Properties.Resources.ColoradoFlowers))
+            {
+                // Draw the text.
+                using (Font the_font = new Font("Times New Roman", 60, FontStyle.Bold))
+                {
+                    e.Graphics.DrawString("群曜醫電", the_font, the_brush, 0, 0);
+                }
+            }
+
+            // Make text filled with a tiled image.
+            // Make a brush containing the picture.
+            using (TextureBrush the_brush = new TextureBrush(Properties.Resources.Smiley))
+            {
+                // Draw the text.
+                using (Font the_font = new Font("Times New Roman", 40, FontStyle.Bold))
+                {
+                    e.Graphics.DrawString("股份有限公司", the_font, the_brush, 60, 90);
+                }
+            }
+        }
+        #endregion
+
+        #region 文字內填滿文字
+        private void pictureBox_filled_text_Paint(object sender, PaintEventArgs e)
+        {
+            // Make things smoother.
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Create the text path.
+            GraphicsPath path = new GraphicsPath(FillMode.Alternate);
+
+            // Draw text using a StringFormat to center it on the form.
+            using (FontFamily font_family = new FontFamily("Times New Roman"))
+            {
+                using (StringFormat sf = new StringFormat())
+                {
+                    sf.Alignment = StringAlignment.Center;
+                    sf.LineAlignment = StringAlignment.Center;
+                    path.AddString("群曜醫電", font_family,
+                        (int)FontStyle.Bold, 80,
+                        this.pictureBox_filled_text.ClientRectangle, sf);
+                }
+            }
+
+            // Make a bitmap containing the small brush's text.
+            using (Font small_font = new Font("Times New Roman", 8))
+            {
+                // See how big the text will be.
+                SizeF text_size = e.Graphics.MeasureString("Text", small_font);
+
+                // Make a Bitmap to hold the text.
+                Bitmap bm = new Bitmap(
+                    (int)(2 * text_size.Width),
+                    (int)(2 * text_size.Height));
+                using (Graphics gr = Graphics.FromImage(bm))
+                {
+                    gr.Clear(Color.LightBlue);
+                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Red, 0, 0);
+                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Green, text_size.Width, 0);
+                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Blue, -text_size.Width / 2, text_size.Height);
+                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.DarkOrange, text_size.Width / 2, text_size.Height);
+                    gr.DrawString("Insight Medical Solutions Inc.", small_font, Brushes.Blue, 1.5f * text_size.Width, text_size.Height);
+                }
+
+                // Fill the path.
+                using (TextureBrush br = new TextureBrush(bm))
+                {
+                    e.Graphics.FillPath(br, path);
+                }
+            }
+
+            // Outline the path.
+            using (Pen pen = new Pen(Color.Black, 3))
+            {
+                e.Graphics.DrawPath(pen, path);
+            }
+
         }
         #endregion
 

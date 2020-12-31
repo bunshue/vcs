@@ -114,10 +114,14 @@ namespace vcs_Clipboard
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //複製純文字
+            Clipboard.SetText(richTextBox1.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //貼上純文字
+            richTextBox1.Text += Clipboard.GetText();
         }
 
         private void button4_Click(object sender, EventArgs e)
