@@ -85,11 +85,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1448, 65);
+            this.button1.Location = new System.Drawing.Point(1448, 64);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 48);
             this.button1.TabIndex = 0;
-            this.button1.Text = "將圖片轉為灰階 SetPixel";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -115,7 +114,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(135, 48);
             this.button2.TabIndex = 3;
-            this.button2.Text = "將圖片轉為灰階 Marshal";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -125,7 +123,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(135, 48);
             this.button3.TabIndex = 4;
-            this.button3.Text = "灰度處理";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -135,7 +132,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(135, 48);
             this.button4.TabIndex = 5;
-            this.button4.Text = "將圖片改為灰階 Grayscale";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -164,7 +160,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(135, 48);
             this.button5.TabIndex = 8;
-            this.button5.Text = "將圖片改為灰階 Average";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -174,7 +169,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(135, 48);
             this.button0.TabIndex = 9;
-            this.button0.Text = "將圖片轉為 Sepia 效果";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

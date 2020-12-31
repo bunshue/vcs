@@ -30,11 +30,25 @@ namespace vcs_PictureGray
             pictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox8.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
 
             show_item_location();
 
             string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = Bitmap.FromFile(filename);
+            //PictureToSepia();
+            PictureToGray1();
+            PictureToGray2();
+            PictureToGray3();
+            PictureToGray4();
+            PictureToGray5();
+
         }
 
         void show_item_location()
@@ -114,12 +128,30 @@ namespace vcs_PictureGray
             label15.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 25);
 
             label1.Text = "原圖";
-            label2.Text = "原圖";
+            label2.Text = "Sepia";
+            label3.Text = "灰階SetPixel";
+            label4.Text = "灰階Marshal";
+            label5.Text = "灰度處理";
+            label6.Text = "";
+            label7.Text = "";
+            label8.Text = "";
+            label9.Text = "";
+            label10.Text = "";
+            label11.Text = "原圖";
+            label12.Text = "灰階 Grayscale";
+            label13.Text = "灰階 Average";
+            label14.Text = "";
+            label15.Text = "";
 
-            pictureBox15.BackColor = Color.Pink;
+
         }
 
         private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PictureToSepia()
         {
             //將圖片轉為 Sepia 效果
             // Display the image converted to sepia tone.
@@ -171,12 +203,20 @@ namespace vcs_PictureGray
 
         private void button1_Click(object sender, EventArgs e)
         {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void PictureToGray1()
+        {
             //SetPixel 彩色轉灰階
             string filename = @"C:\______test_files\picture1.jpg";
             color_to_gray_1(filename);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void PictureToGray2()
         {
             //Marshal 彩色轉灰階
             string filename = @"C:\______test_files\picture1.jpg";
@@ -208,7 +248,7 @@ namespace vcs_PictureGray
                     bmp.SetPixel(xx, yy, zz);
                 }
             }
-            pictureBox2.Image = bmp;
+            pictureBox3.Image = bmp;
         }
 
         void color_to_gray_2(string filename)
@@ -305,17 +345,19 @@ namespace vcs_PictureGray
             bmp.UnlockBits(bmpData);
 
             // Draw the modified image.
-            pictureBox2.Image = bmp;
+            pictureBox4.Image = bmp;
         }
 
         #region 灰度處理
-        private void button3_Click(object sender, EventArgs e)
+
+        private void PictureToGray3()
         {
+            //灰度處理
             string filename = @"C:\______test_files\picture1.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
             Bitmap bitmap2 = 灰度處理(bitmap1);
-            pictureBox2.Image = bitmap2;
+            pictureBox5.Image = bitmap2;
         }
 
         /// <summary>  
@@ -392,14 +434,15 @@ namespace vcs_PictureGray
         #endregion
 
         #region 將圖片改為灰階 Grayscale Average
-        private void button4_Click(object sender, EventArgs e)
+
+        private void PictureToGray4()
         {
             //將圖片改為灰階 Grayscale
             string filename = @"C:\______test_files\bear.jpg";
             ConvertFile(filename, false);
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void PictureToGray5()
         {
             //將圖片改為灰階 Average
             string filename = @"C:\______test_files\bear.jpg";
@@ -424,7 +467,7 @@ namespace vcs_PictureGray
 
             richTextBox1.Text += "filename new = " + filename2 + "\n";
 
-            pictureBox1.Image = Bitmap.FromFile(filename);
+            pictureBox11.Image = Bitmap.FromFile(filename);
 
             // Convert to grayscale.
             //Bitmap bmp = new Bitmap(pictureBox1.Image);       same
@@ -434,7 +477,10 @@ namespace vcs_PictureGray
             ConvertBitmapToGrayscale(bmp, use_average);
 
             // Show the converted bitmap
-            pictureBox2.Image = bmp;
+            if (use_average == true)
+                pictureBox13.Image = bmp;
+            else
+                pictureBox12.Image = bmp;
 
             // Save the file.
             SaveBitmapUsingExtension(bmp, filename2);
@@ -535,6 +581,21 @@ namespace vcs_PictureGray
             pictureBox1.Image = null;
             pictureBox2.Image = null;
             richTextBox1.Clear();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
 
 

@@ -74,8 +74,6 @@ namespace vcs_Draw9_Example8_vcsh
                 { lblSquare20, lblSquare21, lblSquare22},
             };
 
-
-            DrawHeart();
             DrawRose();
             DrawGraph(MinAge, Means, StdDevs);  //age
 
@@ -268,112 +266,6 @@ namespace vcs_Draw9_Example8_vcsh
             foreach (Label label in Squares)
                 label.Text = "";
         }
-
-        void DrawHeart()
-        {
-            // Plot the equations.
-            // Make the Bitmap.
-            Bitmap bm = new Bitmap(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                // Clear.
-                gr.Clear(Color.White);
-
-                Rectangle rect = new Rectangle(-2, -2, 4, 4);
-                Point[] pts = new Point[] 
-                { 
-                    new Point(0, pictureBox4.ClientSize.Height),
-                    new Point(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height), 
-                    new Point(0, 0)
-                };
-                gr.Transform = new Matrix(rect, pts);
-
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.Gray, 0))
-                {
-                    gr.DrawLine(axis_pen, -2, 0, 2, 0);
-                    gr.DrawLine(axis_pen, 0, -2, 0, 2);
-                    for (int i = -2; i <= 2; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
-
-                // Graph the equations.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                PlotFunction(gr, HeartFunc, dx, dy);
-            } // using gr.
-
-            // Display the result.
-            pictureBox4.Image = bm;
-        }
-
-        private delegate float FofXY(float x, float y);
-
-        // Plot a function.
-        private void PlotFunction(Graphics gr, FofXY func, float dx, float dy)
-        {
-            // Plot the function.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
-            {
-                // Horizontal comparisons.
-                for (float x = -2f; x <= 2f; x += dx)
-                {
-                    float last_y = func(x, -2f);
-                    for (float y = -2f + dy; y <= 2f; y += dy)
-                    {
-                        float next_y = func(x, y);
-                        if (
-                            ((last_y <= 0f) && (next_y >= 0f)) ||
-                            ((last_y >= 0f) && (next_y <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                        last_y = next_y;
-                    }
-                } // Horizontal comparisons.
-
-                // Vertical comparisons.
-                for (float y = -2f + dy; y <= 2f; y += dy)
-                {
-                    float last_x = func(-2f, y);
-                    for (float x = -2f; x <= 2f; x += dx)
-                    {
-                        float next_x = func(x, y);
-                        if (
-                            ((last_x <= 0f) && (next_x >= 0f)) ||
-                            ((last_x >= 0f) && (next_x <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                        last_x = next_x;
-                    }
-                } // Vertical comparisons.
-            } // using thin_pen.
-        }
-
-        // The function.
-        private float HeartFunc(float x, float y)
-        {
-            /*
-            //Heart type 1
-            double a = x * x;
-            double b = y - Math.Pow(x * x, (double)1 / 3);
-            return (float)(a + b * b - 1);
-            */
-
-            //Heart type 2
-            double a = x * x;
-            double b = 5.0 * y / 4.0 - Math.Sqrt(Math.Abs(x));
-            return (float)(a * a + b * b - 1);
-        }
-
 
         void DrawRose()
         {
