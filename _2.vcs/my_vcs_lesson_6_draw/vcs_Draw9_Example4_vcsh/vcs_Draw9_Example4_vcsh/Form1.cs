@@ -80,12 +80,10 @@ namespace vcs_Draw9_Example4_vcsh
             {
                 ColorPoints[i] = new Point(
                     i * 15,
-                    rand.Next(5, 196));
+                    rand.Next(5, 110));
             }
 
-
             //for unique progressbar ST
-
 
             // Initialize the control arrays.
             Labels = new Control[] { label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
@@ -528,6 +526,7 @@ namespace vcs_Draw9_Example4_vcsh
             RectangleF device_rect = new RectangleF(5, 5,
                 pictureBox_color_curve.ClientSize.Width - 10,
                 pictureBox_color_curve.ClientSize.Height - 10);
+            SetTransformation(e.Graphics, world_rect, device_rect, false, true);
 
             // Draw the axes.
             using (Pen pen = new Pen(Color.Black, 0))
@@ -582,11 +581,35 @@ namespace vcs_Draw9_Example4_vcsh
                     //e.Graphics.DrawLine(pen, 100, 0, 100, 100);
                 }
             }
+        }
 
+        // Map from world coordinates to device coordinates.
+        private void SetTransformation(Graphics gr, RectangleF world_rect, RectangleF device_rect, bool invert_x, bool invert_y)
+        {
+            PointF[] device_points =
+            {
+                new PointF(device_rect.Left, device_rect.Top),      // Upper left.
+                new PointF(device_rect.Right, device_rect.Top),     // Upper right.
+                new PointF(device_rect.Left, device_rect.Bottom),   // Lower left.
+            };
+
+            if (invert_x)
+            {
+                device_points[0].X = device_rect.Right;
+                device_points[1].X = device_rect.Left;
+                device_points[2].X = device_rect.Right;
+            }
+            if (invert_y)
+            {
+                device_points[0].Y = device_rect.Bottom;
+                device_points[1].Y = device_rect.Bottom;
+                device_points[2].Y = device_rect.Top;
+            }
+
+            gr.Transform = new Matrix(world_rect, device_points);
         }
 
         //for unique progressbar ST
-
 
         // Start or stop the timer.
         private void btnGo_Click(object sender, EventArgs e)
