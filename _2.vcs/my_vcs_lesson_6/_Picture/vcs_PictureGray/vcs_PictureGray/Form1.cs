@@ -42,13 +42,18 @@ namespace vcs_PictureGray
 
             string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = Bitmap.FromFile(filename);
-            //PictureToSepia();
+            PictureToSepia();
             PictureToGray1();
             PictureToGray2();
             PictureToGray3();
             PictureToGray4();
             PictureToGray5();
+            PictureToMonochrome();
 
+            // Convert the image into red, green, and blue monochrome.
+            pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
+            pictureBox8.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
+            pictureBox9.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
         }
 
         void show_item_location()
@@ -132,10 +137,10 @@ namespace vcs_PictureGray
             label3.Text = "灰階SetPixel";
             label4.Text = "灰階Marshal";
             label5.Text = "灰度處理";
-            label6.Text = "";
-            label7.Text = "";
-            label8.Text = "";
-            label9.Text = "";
+            label6.Text = "單色處理";
+            label7.Text = "單色 R";
+            label8.Text = "單色 G";
+            label9.Text = "單色 B";
             label10.Text = "";
             label11.Text = "原圖";
             label12.Text = "灰階 Grayscale";
@@ -565,15 +570,84 @@ namespace vcs_PictureGray
             return result;
         }
 
-
-
-
-
-
         #endregion
 
+        private void PictureToMonochrome()
+        {
+            richTextBox1.Text += "PictureToMonochrome\n";
+            pictureBox6.Image = ToMonochrome(pictureBox1.Image);
+        }
+
+        // Convert an image to monochrome.
+        private Bitmap ToMonochrome(Image image)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
+        }
 
 
+        // Scale an image's color components.
+        private Bitmap ScaleColorComponents(Image image, float r, float g, float b, float a)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+                {
+                    new float[] {r, 0, 0, 0, 0},
+                    new float[] {0, g, 0, 0, 0},
+                    new float[] {0, 0, b, 0, 0},
+                    new float[] {0, 0, 0, a, 0},
+                    new float[] {0, 0, 0, 0, 1},
+                });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
+        }
 
 
         private void bt_clear_Click(object sender, EventArgs e)

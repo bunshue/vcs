@@ -8,17 +8,19 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D;
+using System.IO;
 
 namespace vcs_PictureCrop3
 {
     public partial class Form1 : Form
     {
-        private Bitmap bitmap1 = null;
-        private Bitmap bitmap2 = null;
-        private int X0, Y0, X1, Y1;
-        private bool SelectingArea = false;
-        private Graphics SelectedGraphics = null;
-        private Rectangle SelectedRect;
+        // For selecting an area.
+        private List<Point> Points = null;
+        private bool Selecting = false;
+
+        // A bitmap holding the selected area.
+        private Bitmap SelectedArea = null;
 
         public Form1()
         {
@@ -27,94 +29,124 @@ namespace vcs_PictureCrop3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bitmap1 = new Bitmap(pictureBox1.Image);
 
-            this.KeyPreview = true;
         }
 
         // Start selecting an area.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            Points = new List<Point>();
+            Selecting = true;
         }
 
         // Continue selecting an area.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!Selecting)
+                return;
+            Points.Add(new Point(e.X, e.Y));
+            pictureBox1.Invalidate();
         }
 
         // Finish selecting the area.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            Selecting = false;
+
+            // Create a DataObject to hold data
+            // in different formats.
+            IDataObject data_object = new DataObject();
+
+            // Add a BMP with a white background to the DataObject.
+            Bitmap bm_white = GetSelectedArea(
+                pictureBox1.Image, Color.White, Points);
+            data_object.SetData(DataFormats.Bitmap, bm_white);
+
+            // Add a PNG with a transparent background to the DataObject.
+            Bitmap bm_transparent = GetSelectedArea(
+                pictureBox1.Image, Color.Transparent, Points);
+            MemoryStream ms = new MemoryStream();
+            bm_transparent.Save(ms, ImageFormat.Png);
+            data_object.SetData("PNG", false, ms);
+
+            // Place the data on the clipboard.
+            Clipboard.Clear();
+            Clipboard.SetDataObject(data_object, true);
+            richTextBox1.Text += "已選擇區域複製至剪貼簿\n";
+
+            // Copy the selected area.
+            SelectedArea = GetSelectedArea(pictureBox1.Image, Color.Transparent, Points);
         }
 
+        // Draw the current selection if there is one.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "SelectedRect X = " + SelectedRect.X.ToString() + " Y = " + SelectedRect.Y.ToString() + "\n";
-            richTextBox1.Text += "SelectedRect W = " + SelectedRect.Width.ToString() + " H = " + SelectedRect.Height.ToString() + "\n";
-        }
-
-        // Copy the selected area to the clipboard.
-        private void CopyToClipboard(Rectangle src_rect)
-        {
-            // Make a bitmap for the selected area's image.
-            Bitmap bm = new Bitmap(src_rect.Width, src_rect.Height);
-
-            // Copy the selected area into the bitmap.
-            using (Graphics gr = Graphics.FromImage(bm))
+            if ((Points != null) && (Points.Count > 1))
             {
-                Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
-                gr.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
-            }
-
-            // Copy the selection image to the clipboard.
-            Clipboard.SetImage(bm);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if ((SelectedRect.Width <= 0) || (SelectedRect.Height <= 0))
-            {
-                richTextBox1.Text += "未選定區域，無法複製圖片\n";
-                return;
-            }
-
-            // Copy the selected area to the clipboard.
-            CopyToClipboard(SelectedRect);
-            richTextBox1.Text += "已複製圖片\n";
-        }
-
-
-        // Copy the selected area to the clipboard
-        // and blank that area.
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if ((SelectedRect.Width <= 0) || (SelectedRect.Height <= 0))
-            {
-                richTextBox1.Text += "未選定區域，無法剪下圖片\n";
-                return;
-            }
-
-            // Copy the selection to the clipboard.
-            CopyToClipboard(SelectedRect);
-
-            // Blank the selected area in the original image.
-            using (Graphics gr = Graphics.FromImage(bitmap1))
-            {
-                using (SolidBrush br = new SolidBrush(pictureBox1.BackColor))
+                using (Pen dashed_pen = new Pen(Color.Black))
                 {
-                    gr.FillRectangle(br, SelectedRect);
+                    dashed_pen.DashPattern = new float[] { 5, 5 };
+                    e.Graphics.DrawLines(Pens.White, Points.ToArray());
+                    e.Graphics.DrawLines(dashed_pen, Points.ToArray());
                 }
             }
+        }
 
-            // Display the result.
-            bitmap2 = new Bitmap(bitmap1);
-            pictureBox1.Image = bitmap2;
+        // Return the bounds of the list of points.
+        private Rectangle GetPointListBounds(List<Point> points)
+        {
+            int xmin = points[0].X;
+            int xmax = xmin;
+            int ymin = points[0].Y;
+            int ymax = ymin;
 
+            for (int i = 1; i < points.Count; i++)
+            {
+                if (xmin > points[i].X) xmin = points[i].X;
+                if (xmax < points[i].X) xmax = points[i].X;
+                if (ymin > points[i].Y) ymin = points[i].Y;
+                if (ymax < points[i].Y) ymax = points[i].Y;
+            }
+
+            return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
+        }
+
+        // Copy the selected piece of the image into a new bitmap.
+        private Bitmap GetSelectedArea(Image source, Color bg_color, List<Point> points)
+        {
+            // Make a new bitmap that has the background
+            // color except in the selected area.
+            Bitmap big_bm = new Bitmap(source);
+            using (Graphics gr = Graphics.FromImage(big_bm))
+            {
+                // Set the background color.
+                gr.Clear(bg_color);
+
+                // Make a brush out of the original image.
+                using (Brush br = new TextureBrush(source))
+                {
+                    // Fill the selected area with the brush.
+                    gr.FillPolygon(br, points.ToArray());
+
+                    // Find the bounds of the selected area.
+                    Rectangle source_rect = GetPointListBounds(points);
+
+                    // Make a bitmap that only holds the selected area.
+                    Bitmap result = new Bitmap(source_rect.Width, source_rect.Height);
+
+                    // Copy the selected area to the result bitmap.
+                    using (Graphics result_gr = Graphics.FromImage(result))
+                    {
+                        Rectangle dest_rect = new Rectangle(0, 0,
+                            source_rect.Width, source_rect.Height);
+                        result_gr.DrawImage(big_bm, dest_rect, source_rect,
+                            GraphicsUnit.Pixel);
+                    }
+
+                    // Return the result.
+                    return result;
+                }
+            }
         }
 
         private void bt_save_Click(object sender, EventArgs e)
@@ -124,6 +156,7 @@ namespace vcs_PictureCrop3
 
         void save_image_to_drive()
         {
+            /*
             if (bitmap1 != null)
             {
                 string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
@@ -149,69 +182,35 @@ namespace vcs_PictureCrop3
             }
             else
                 richTextBox1.Text += "無圖可存\n";
+            */
         }
 
         //貼上 定點
         private void button4_Click(object sender, EventArgs e)
         {
-            // Paste the image on the clipboard, centering it on the selected area.
-            // Do nothing if the clipboard doesn't hold an image.
-            if (!Clipboard.ContainsImage()) return;
+            richTextBox1.Text += "把已選擇區域貼在圖的(100, 100)處\n";
 
-            // Get the clipboard's image.
-            Image clipboard_image = Clipboard.GetImage();
+            // Copy the selected area centered at the point clicked.
+            // Do nothing if we haven't selected an area.
+            if (SelectedArea == null) return;
 
-            // Figure out where to put it.
-            int cx = SelectedRect.X + (SelectedRect.Width - clipboard_image.Width) / 2;
-            int cy = SelectedRect.Y + (SelectedRect.Height - clipboard_image.Height) / 2;
-            Rectangle dest_rect = new Rectangle(
-                cx, cy,
-                clipboard_image.Width,
-                clipboard_image.Height);
+            // See where to put it.
+            //int x = e.X - SelectedArea.Width / 2;
+            //int y = e.Y - SelectedArea.Height / 2;
+            int x = 100;
+            int y = 100;
 
-            // Copy the new image into position.
-            using (Graphics gr = Graphics.FromImage(bitmap1))
+            using (Graphics gr = Graphics.FromImage(pictureBox1.Image))
             {
-                gr.DrawImage(clipboard_image, dest_rect);
+                Rectangle source_rect = new Rectangle(0, 0,
+                    SelectedArea.Width, SelectedArea.Height);
+                Rectangle dest_rect = new Rectangle(x, y,
+                    SelectedArea.Width, SelectedArea.Height);
+                gr.DrawImage(SelectedArea, dest_rect, source_rect,
+                    GraphicsUnit.Pixel);
             }
 
-            // Display the result.
-            pictureBox1.Image = bitmap1;
             pictureBox1.Refresh();
-
-            bitmap2 = null;
-            SelectedGraphics = null;
-        }
-
-        //貼上 伸展
-        private void button5_Click(object sender, EventArgs e)
-        {
-            // Paste the image on the clipboard, stretching it to fit the selected area.
-            // Do nothing if the clipboard doesn't hold an image.
-            if (!Clipboard.ContainsImage()) return;
-
-            // Get the clipboard's image.
-            Image clipboard_image = Clipboard.GetImage();
-
-            // Get the image's bounding Rectangle.
-            Rectangle src_rect = new Rectangle(
-                0, 0,
-                clipboard_image.Width,
-                clipboard_image.Height);
-
-            // Copy the new image into position.
-            using (Graphics gr = Graphics.FromImage(bitmap1))
-            {
-                gr.DrawImage(clipboard_image, SelectedRect,
-                    src_rect, GraphicsUnit.Pixel);
-            }
-
-            // Display the result.
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Refresh();
-
-            bitmap2 = null;
-            SelectedGraphics = null;
         }
 
         // If the user presses Escape, cancel.
@@ -219,14 +218,7 @@ namespace vcs_PictureCrop3
         {
             if (e.KeyChar == 27)
             {
-                if (!SelectingArea) return;
-                SelectingArea = false;
 
-                // Stop selecting.
-                bitmap2 = null;
-                SelectedGraphics = null;
-                pictureBox1.Image = bitmap1;
-                pictureBox1.Refresh();
             }
         }
 
