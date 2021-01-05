@@ -47,6 +47,10 @@ namespace vcs_test_all_10_Math_Random
             lstArray.DataSource = ItemArray;
             lstList.DataSource = ItemList;
             #endregion
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location()
@@ -414,12 +418,7 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "Average\t" + values.Average().ToString("0.00000000") + "\n";
             richTextBox1.Text += "StdDev(true)\t" + values.StdDev(true).ToString("0.00000000") + "\tsame as Matlab\n";
             richTextBox1.Text += "StdDev(false)\t" + values.StdDev(false).ToString("0.00000000") + "\n";
-
-
         }
-
-
-
 
         int GCD(int a, int b)
         {

@@ -74,11 +74,32 @@
             this.printPreviewDialog_grid2 = new System.Windows.Forms.PrintPreviewDialog();
             this.printPreviewDialog_pascal = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument_pascal = new System.Drawing.Printing.PrintDocument();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lstPaperSizes = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtVertRes = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtHorRes = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtDefault = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtState = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cboPrinters = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button0
@@ -192,7 +213,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(851, 550);
+            this.bt_clear.Location = new System.Drawing.Point(901, 550);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(54, 35);
             this.bt_clear.TabIndex = 47;
@@ -202,9 +223,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(723, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(773, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(266, 646);
+            this.richTextBox1.Size = new System.Drawing.Size(280, 775);
             this.richTextBox1.TabIndex = 46;
             this.richTextBox1.Text = "";
             // 
@@ -226,7 +247,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(412, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(462, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(305, 400);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -400,7 +421,7 @@
             // 
             // pictureBox_star
             // 
-            this.pictureBox_star.Location = new System.Drawing.Point(415, 423);
+            this.pictureBox_star.Location = new System.Drawing.Point(543, 422);
             this.pictureBox_star.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_star.Name = "pictureBox_star";
             this.pictureBox_star.Size = new System.Drawing.Size(224, 212);
@@ -526,11 +547,196 @@
             // 
             this.printDocument_pascal.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_pascal_PrintPage);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lstPaperSizes);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.txtPort);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.txtVertRes);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txtHorRes);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.txtDefault);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txtDescription);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtStatus);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.txtState);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.txtName);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.cboPrinters);
+            this.groupBox2.Location = new System.Drawing.Point(222, 422);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(307, 353);
+            this.groupBox2.TabIndex = 64;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "列出印表機資訊";
+            // 
+            // lstPaperSizes
+            // 
+            this.lstPaperSizes.FormattingEnabled = true;
+            this.lstPaperSizes.ItemHeight = 12;
+            this.lstPaperSizes.Location = new System.Drawing.Point(95, 251);
+            this.lstPaperSizes.Name = "lstPaperSizes";
+            this.lstPaperSizes.Size = new System.Drawing.Size(188, 88);
+            this.lstPaperSizes.TabIndex = 39;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(23, 254);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(60, 12);
+            this.label9.TabIndex = 38;
+            this.label9.Text = "Paper Sizes:";
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(95, 227);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(188, 22);
+            this.txtPort.TabIndex = 37;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(23, 230);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(27, 12);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Port:";
+            // 
+            // txtVertRes
+            // 
+            this.txtVertRes.Location = new System.Drawing.Point(95, 203);
+            this.txtVertRes.Name = "txtVertRes";
+            this.txtVertRes.Size = new System.Drawing.Size(188, 22);
+            this.txtVertRes.TabIndex = 35;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(23, 206);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 12);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "Vert Res:";
+            // 
+            // txtHorRes
+            // 
+            this.txtHorRes.Location = new System.Drawing.Point(95, 179);
+            this.txtHorRes.Name = "txtHorRes";
+            this.txtHorRes.Size = new System.Drawing.Size(188, 22);
+            this.txtHorRes.TabIndex = 33;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(23, 182);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(46, 12);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "Hor Res:";
+            // 
+            // txtDefault
+            // 
+            this.txtDefault.Location = new System.Drawing.Point(95, 155);
+            this.txtDefault.Name = "txtDefault";
+            this.txtDefault.Size = new System.Drawing.Size(188, 22);
+            this.txtDefault.TabIndex = 31;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(23, 158);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 12);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "Default:";
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Location = new System.Drawing.Point(95, 131);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(188, 22);
+            this.txtDescription.TabIndex = 29;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 134);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 12);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Description:";
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(95, 107);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(188, 22);
+            this.txtStatus.TabIndex = 27;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(23, 110);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 12);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Status:";
+            // 
+            // txtState
+            // 
+            this.txtState.Location = new System.Drawing.Point(95, 83);
+            this.txtState.Name = "txtState";
+            this.txtState.Size = new System.Drawing.Size(188, 22);
+            this.txtState.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(23, 86);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(30, 12);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "State:";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(95, 59);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(188, 22);
+            this.txtName.TabIndex = 23;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(23, 62);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(35, 12);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Name:";
+            // 
+            // cboPrinters
+            // 
+            this.cboPrinters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPrinters.FormattingEnabled = true;
+            this.cboPrinters.Location = new System.Drawing.Point(23, 25);
+            this.cboPrinters.Name = "cboPrinters";
+            this.cboPrinters.Size = new System.Drawing.Size(260, 20);
+            this.cboPrinters.TabIndex = 21;
+            this.cboPrinters.SelectedIndexChanged += new System.EventHandler(this.cboPrinters_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1029, 668);
+            this.ClientSize = new System.Drawing.Size(1065, 799);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
@@ -561,6 +767,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -612,6 +820,26 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_grid2;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_pascal;
         private System.Drawing.Printing.PrintDocument printDocument_pascal;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ListBox lstPaperSizes;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtVertRes;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtHorRes;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtDefault;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtState;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cboPrinters;
     }
 }
 

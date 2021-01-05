@@ -54,6 +54,10 @@ namespace vcs_PictureGray
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
             pictureBox8.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
             pictureBox9.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location()
@@ -64,7 +68,7 @@ namespace vcs_PictureGray
             int dy;
 
             //button
-            x_st = 1500;
+            x_st = 1700;
             y_st = 12;
             dx = 190;
             dy = 50;
@@ -75,6 +79,9 @@ namespace vcs_PictureGray
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int W = 250;
             int H = 250;

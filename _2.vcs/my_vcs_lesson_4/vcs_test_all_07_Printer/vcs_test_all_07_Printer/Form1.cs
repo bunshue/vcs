@@ -12,6 +12,8 @@ using System.Drawing.Printing;  //for PrinterSettings
 using System.Globalization;     //for CultureInfo
 using System.Drawing.Drawing2D; //for SmoothingMode
 
+using System.Management;        //參考/加入參考/.NET/System Management
+
 namespace vcs_test_all_07_Printer
 {
     public partial class Form1 : Form
@@ -24,6 +26,17 @@ namespace vcs_test_all_07_Printer
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //列出印表機資訊
+            // List the installed printers.
+            // Find all of the installed printers.
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                cboPrinters.Items.Add(printer);
+            }
+
+            // Select the first printer.
+            cboPrinters.SelectedIndex = 0;
         }
 
         void show_item_location()
@@ -1371,6 +1384,77 @@ namespace vcs_test_all_07_Printer
             }
 
         }
+
+        // Display information about the selected printer.
+        private void cboPrinters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Lookup arrays.
+            string[] PrinterStatuses = 
+            {
+                "Other", "Unknown", "Idle", "Printing", "WarmUp",
+                "Stopped Printing", "Offline"
+            };
+            string[] PrinterStates = 
+            {
+                "Paused", "Error", "Pending Deletion", "Paper Jam",
+                "Paper Out", "Manual Feed", "Paper Problem",
+                "Offline", "IO Active", "Busy", "Printing",
+                "Output Bin Full", "Not Available", "Waiting",
+                "Processing", "Initialization", "Warming Up", 
+                "Toner Low", "No Toner", "Page Punt",
+                "User Intervention Required", "Out of Memory",
+                "Door Open", "Server_Unknown", "Power Save"};
+
+            // Get a ManagementObjectSearcher for the printer.
+            string query = "SELECT * FROM Win32_Printer WHERE Name='" +
+                cboPrinters.SelectedItem.ToString() + "'";
+            ManagementObjectSearcher searcher =
+                new ManagementObjectSearcher(query);
+
+            // Get the ManagementObjectCollection representing
+            // the result of the WMI query. Loop through its
+            // single item. Display some of that item's properties.
+            foreach (ManagementObject service in searcher.Get())
+            {
+                txtName.Text = service.Properties["Name"].Value.ToString();
+
+                UInt32 state = (UInt32)service.Properties["PrinterState"].Value;
+                txtState.Text = PrinterStates[state];
+
+                UInt16 status = (UInt16)service.Properties["PrinterStatus"].Value;
+                txtStatus.Text = PrinterStatuses[status];
+
+                txtDescription.Text = GetPropertyValue(service.Properties["Description"]);
+                txtDefault.Text = GetPropertyValue(service.Properties["Default"]);
+                txtHorRes.Text = GetPropertyValue(service.Properties["HorizontalResolution"]);
+                txtVertRes.Text = GetPropertyValue(service.Properties["VerticalResolution"]);
+                txtPort.Text = GetPropertyValue(service.Properties["PortName"]);
+
+                lstPaperSizes.Items.Clear();
+                string[] paper_sizes = (string[])service.Properties["PrinterPaperNames"].Value;
+                foreach (string paper_size in paper_sizes)
+                {
+                    lstPaperSizes.Items.Add(paper_size);
+                }
+
+                // List the available properties.
+                foreach (PropertyData data in service.Properties)
+                {
+                    string txt = data.Name;
+                    if (data.Value != null)
+                        txt += ": " + data.Value.ToString();
+                    Console.WriteLine(txt);
+                }
+            }
+        }
+
+        // If the data is not null and has a value, return it.
+        private string GetPropertyValue(PropertyData data)
+        {
+            if ((data == null) || (data.Value == null)) return "";
+            return data.Value.ToString();
+        }
+
 
     }
 }
