@@ -57,6 +57,14 @@ namespace vcs_Draw9_Example8_vcsh
         // Select the ellipse's center point.
         private PointF CenterPoint;
 
+
+        //pictureBox10 眼睛
+        // A thick pen.
+        private Pen ThickPen = new Pen(Color.Black, 3);
+
+        // The previous mouse location.
+        private Point OldMousePos = new Point(-1, -1);
+
         public Form1()
         {
             InitializeComponent();
@@ -94,6 +102,10 @@ namespace vcs_Draw9_Example8_vcsh
             CenterPoint = new PointF(
                 this.pictureBox4.ClientSize.Width / 2,
                 this.pictureBox4.ClientSize.Height / 2);
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location()
@@ -107,21 +119,10 @@ namespace vcs_Draw9_Example8_vcsh
             int dx;
             int dy;
 
-            //button
-            x_st = 800;
-            y_st = 10;
-            dx = 140;
-            dy = 55;
-
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
             x_st = 10;
             y_st = 10;
-            dx = W + 10;
-            dy = H + 10;
+            dx = W + 30;
+            dy = H + 30;
 
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -131,23 +132,37 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_histogram.Size = new Size(W, H);
             pictureBox_age.Size = new Size(W, H);
             pictureBox8.Size = new Size(W * 2 + 10, H);
+            pictureBox10.Size = new Size(W, H * 9 / 10);
+            pictureBox11.Size = new Size(W, H);
+            pictureBox12.Size = new Size(W, H);
+            pictureBox13.Size = new Size(W, H);
+            pictureBox14.Size = new Size(W, H);
+            pictureBox15.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            checkBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + H - 30);
+            pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox_histogram.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox_age.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            pictureBox11.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox15.Location = new Point(x_st + dx * 4, y_st + dy * 2);
 
-            pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            checkBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + H - 30);
-            pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox_histogram.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-
-            pictureBox_age.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_save.Location = new Point(x_st + dx * 5+150, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 5+300, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
 
             richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
+            ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 80);    //自動表單邊界
         }
 
         void DrawHistogram()
@@ -886,6 +901,78 @@ namespace vcs_Draw9_Example8_vcsh
                 e.Graphics.FillEllipse(br, rect);
             }
         }
+
+        // See if the mouse has moved.
+        private void timer_eyes_Tick(object sender, EventArgs e)
+        {
+            // See if the cursor has moved.
+            Point new_pos = Control.MousePosition;
+            if (new_pos.Equals(OldMousePos)) return;
+            OldMousePos = new_pos;
+
+            // Redraw.
+            //this.pictureBox10.Invalidate(); //with flicker
+            this.pictureBox10.Refresh();  //no flicker
+        }
+
+        private void pictureBox10_Paint(object sender, PaintEventArgs e)
+        {
+            DrawEyes(e.Graphics);
+        }
+
+        // Draw the eyes.
+        private void DrawEyes(Graphics gr)
+        {
+            // Convert the cursor position into form units.
+            Point local_pos = this.pictureBox10.PointToClient(OldMousePos);
+
+            // Calculate the size of the eye.
+            int hgt = (int)(this.pictureBox10.ClientSize.Height * 0.9);
+            int wid = (int)(this.pictureBox10.ClientSize.Width * 0.45);
+
+            // Find the positions of the eyes.
+            int y = (this.pictureBox10.ClientSize.Height - hgt) / 2;
+            int x1 = (int)((this.pictureBox10.ClientSize.Width - wid * 2) / 3);
+            int x2 = wid + 2 * x1;
+
+            // Create a Bitmap on which to draw.
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            gr.Clear(this.pictureBox10.BackColor);
+
+            // Draw the eyes.
+            DrawEye(gr, local_pos, x1, y, wid, hgt);
+            DrawEye(gr, local_pos, x2, y, wid, hgt);
+        }
+
+        // Draw an eye here.
+        private void DrawEye(Graphics gr, Point local_pos, int x1, int y1, int wid, int hgt)
+        {
+            // Draw the outside.
+            gr.FillEllipse(Brushes.White, x1, y1, wid, hgt);
+            gr.DrawEllipse(ThickPen, x1, y1, wid, hgt);
+
+            // Find the center of the eye.
+            int cx = x1 + wid / 2;
+            int cy = y1 + hgt / 2;
+
+            // Get the unit vector pointing towards the mouse position.
+            double dx = local_pos.X - cx;
+            double dy = local_pos.Y - cy;
+            double dist = Math.Sqrt(dx * dx + dy * dy);
+            dx /= dist;
+            dy /= dist;
+
+            // This point is 1/4 of the way
+            // from the center to the edge of the eye.
+            double px = cx + dx * wid / 4;
+            double py = cy + dy * hgt / 4;
+
+            // Draw an ellipse 1/2 the size of the eye
+            // centered at (px, py).
+            gr.FillEllipse(Brushes.Blue, (int)(px - wid / 4),
+                (int)(py - hgt / 4), wid / 2, hgt / 2);
+        }
+
 
 
 

@@ -86,9 +86,9 @@
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label2.Location = new System.Drawing.Point(395, 437);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 24);
+            this.label2.Size = new System.Drawing.Size(85, 24);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Gamma";
+            this.label2.Text = "Obscure";
             // 
             // Form1
             // 

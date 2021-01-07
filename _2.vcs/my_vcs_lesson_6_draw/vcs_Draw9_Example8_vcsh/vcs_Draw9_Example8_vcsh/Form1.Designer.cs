@@ -76,6 +76,13 @@
             this.timer_gear = new System.Windows.Forms.Timer(this.components);
             this.toolTip_histogram = new System.Windows.Forms.ToolTip(this.components);
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox15 = new System.Windows.Forms.PictureBox();
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.timer_eyes = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -84,6 +91,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_age)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -97,7 +110,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(11, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(250, 250);
             this.pictureBox1.TabIndex = 15;
@@ -131,7 +144,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1006, 540);
+            this.bt_clear.Location = new System.Drawing.Point(969, 67);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(63, 40);
             this.bt_clear.TabIndex = 55;
@@ -153,7 +166,7 @@
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pictureBox3.Location = new System.Drawing.Point(512, 0);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox3.Size = new System.Drawing.Size(110, 107);
             this.pictureBox3.TabIndex = 59;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox3_Paint);
@@ -161,9 +174,9 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.LightGreen;
-            this.pictureBox4.Location = new System.Drawing.Point(0, 256);
+            this.pictureBox4.Location = new System.Drawing.Point(628, 0);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(250, 180);
+            this.pictureBox4.Size = new System.Drawing.Size(134, 121);
             this.pictureBox4.TabIndex = 60;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox4_Paint);
@@ -172,16 +185,16 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox5.Location = new System.Drawing.Point(256, 256);
+            this.pictureBox5.Location = new System.Drawing.Point(759, -11);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox5.Size = new System.Drawing.Size(166, 173);
             this.pictureBox5.TabIndex = 61;
             this.pictureBox5.TabStop = false;
             // 
             // pictureBox_histogram
             // 
             this.pictureBox_histogram.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox_histogram.Location = new System.Drawing.Point(512, 256);
+            this.pictureBox_histogram.Location = new System.Drawing.Point(11, 256);
             this.pictureBox_histogram.Name = "pictureBox_histogram";
             this.pictureBox_histogram.Size = new System.Drawing.Size(250, 250);
             this.pictureBox_histogram.TabIndex = 62;
@@ -194,7 +207,7 @@
             // pictureBox_age
             // 
             this.pictureBox_age.BackColor = System.Drawing.Color.White;
-            this.pictureBox_age.Location = new System.Drawing.Point(0, 512);
+            this.pictureBox_age.Location = new System.Drawing.Point(267, 245);
             this.pictureBox_age.Name = "pictureBox_age";
             this.pictureBox_age.Size = new System.Drawing.Size(250, 250);
             this.pictureBox_age.TabIndex = 63;
@@ -203,7 +216,7 @@
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox8.Location = new System.Drawing.Point(256, 512);
+            this.pictureBox8.Location = new System.Drawing.Point(534, 256);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(250, 250);
             this.pictureBox8.TabIndex = 64;
@@ -212,7 +225,6 @@
             // 
             // label18
             // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label18.Location = new System.Drawing.Point(215, 218);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(20, 21);
@@ -222,7 +234,6 @@
             // 
             // lbl12
             // 
-            this.lbl12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl12.BackColor = System.Drawing.Color.LightGreen;
             this.lbl12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl12.Location = new System.Drawing.Point(215, 197);
@@ -232,7 +243,6 @@
             // 
             // label20
             // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label20.Location = new System.Drawing.Point(195, 218);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(20, 21);
@@ -242,7 +252,6 @@
             // 
             // lbl11
             // 
-            this.lbl11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl11.BackColor = System.Drawing.Color.LightGreen;
             this.lbl11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl11.Location = new System.Drawing.Point(195, 197);
@@ -252,7 +261,6 @@
             // 
             // label22
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label22.Location = new System.Drawing.Point(175, 218);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(20, 21);
@@ -262,7 +270,6 @@
             // 
             // lbl10
             // 
-            this.lbl10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl10.BackColor = System.Drawing.Color.LightGreen;
             this.lbl10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl10.Location = new System.Drawing.Point(175, 197);
@@ -272,7 +279,6 @@
             // 
             // label24
             // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label24.Location = new System.Drawing.Point(155, 218);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(20, 21);
@@ -282,7 +288,6 @@
             // 
             // lbl9
             // 
-            this.lbl9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl9.BackColor = System.Drawing.Color.LightGreen;
             this.lbl9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl9.Location = new System.Drawing.Point(155, 197);
@@ -292,7 +297,6 @@
             // 
             // label26
             // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label26.Location = new System.Drawing.Point(135, 218);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(20, 21);
@@ -302,7 +306,6 @@
             // 
             // lbl8
             // 
-            this.lbl8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl8.BackColor = System.Drawing.Color.LightGreen;
             this.lbl8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl8.Location = new System.Drawing.Point(135, 197);
@@ -312,7 +315,6 @@
             // 
             // label10
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.Location = new System.Drawing.Point(115, 218);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(20, 21);
@@ -322,7 +324,6 @@
             // 
             // lbl7
             // 
-            this.lbl7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl7.BackColor = System.Drawing.Color.LightGreen;
             this.lbl7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl7.Location = new System.Drawing.Point(115, 197);
@@ -332,7 +333,6 @@
             // 
             // label12
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.Location = new System.Drawing.Point(95, 218);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(20, 21);
@@ -342,7 +342,6 @@
             // 
             // lbl6
             // 
-            this.lbl6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl6.BackColor = System.Drawing.Color.LightGreen;
             this.lbl6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl6.Location = new System.Drawing.Point(95, 197);
@@ -352,7 +351,6 @@
             // 
             // label14
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label14.Location = new System.Drawing.Point(75, 218);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(20, 21);
@@ -362,7 +360,6 @@
             // 
             // lbl5
             // 
-            this.lbl5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl5.BackColor = System.Drawing.Color.LightGreen;
             this.lbl5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl5.Location = new System.Drawing.Point(75, 197);
@@ -372,7 +369,6 @@
             // 
             // label8
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.Location = new System.Drawing.Point(55, 218);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(20, 21);
@@ -382,7 +378,6 @@
             // 
             // lbl4
             // 
-            this.lbl4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl4.BackColor = System.Drawing.Color.LightGreen;
             this.lbl4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl4.Location = new System.Drawing.Point(55, 197);
@@ -392,7 +387,6 @@
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.Location = new System.Drawing.Point(35, 218);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(20, 21);
@@ -402,7 +396,6 @@
             // 
             // lbl3
             // 
-            this.lbl3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl3.BackColor = System.Drawing.Color.LightGreen;
             this.lbl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl3.Location = new System.Drawing.Point(35, 197);
@@ -412,7 +405,6 @@
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.Location = new System.Drawing.Point(15, 218);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 21);
@@ -422,7 +414,6 @@
             // 
             // lbl2
             // 
-            this.lbl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl2.BackColor = System.Drawing.Color.LightGreen;
             this.lbl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl2.Location = new System.Drawing.Point(15, 197);
@@ -559,18 +550,84 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(57, 468);
+            this.checkBox1.Location = new System.Drawing.Point(628, 127);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 98;
             this.checkBox1.Text = "追蹤鼠標";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // pictureBox10
+            // 
+            this.pictureBox10.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox10.Location = new System.Drawing.Point(790, 256);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox10.TabIndex = 99;
+            this.pictureBox10.TabStop = false;
+            this.pictureBox10.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox10_Paint);
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox11.Location = new System.Drawing.Point(11, 540);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(155, 168);
+            this.pictureBox11.TabIndex = 100;
+            this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox12.Location = new System.Drawing.Point(177, 540);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(155, 168);
+            this.pictureBox12.TabIndex = 101;
+            this.pictureBox12.TabStop = false;
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox13.Location = new System.Drawing.Point(351, 540);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(155, 168);
+            this.pictureBox13.TabIndex = 102;
+            this.pictureBox13.TabStop = false;
+            // 
+            // pictureBox15
+            // 
+            this.pictureBox15.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox15.Location = new System.Drawing.Point(664, 540);
+            this.pictureBox15.Name = "pictureBox15";
+            this.pictureBox15.Size = new System.Drawing.Size(155, 168);
+            this.pictureBox15.TabIndex = 103;
+            this.pictureBox15.TabStop = false;
+            // 
+            // pictureBox14
+            // 
+            this.pictureBox14.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox14.Location = new System.Drawing.Point(512, 540);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(155, 168);
+            this.pictureBox14.TabIndex = 103;
+            this.pictureBox14.TabStop = false;
+            // 
+            // timer_eyes
+            // 
+            this.timer_eyes.Enabled = true;
+            this.timer_eyes.Tick += new System.EventHandler(this.timer_eyes_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 769);
+            this.Controls.Add(this.pictureBox14);
+            this.Controls.Add(this.pictureBox15);
+            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.pictureBox12);
+            this.Controls.Add(this.pictureBox11);
+            this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_ox_clear);
             this.Controls.Add(this.lblSquare22);
@@ -628,6 +685,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_age)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -682,6 +745,13 @@
         private System.Windows.Forms.Timer timer_gear;
         private System.Windows.Forms.ToolTip toolTip_histogram;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.PictureBox pictureBox13;
+        private System.Windows.Forms.PictureBox pictureBox15;
+        private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.Timer timer_eyes;
     }
 }
 
