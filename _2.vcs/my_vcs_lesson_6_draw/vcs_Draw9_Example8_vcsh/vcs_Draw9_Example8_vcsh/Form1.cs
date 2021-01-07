@@ -53,6 +53,10 @@ namespace vcs_Draw9_Example8_vcsh
             new PointF(13, 29),
         };
 
+        //pictureBox4 的中心
+        // Select the ellipse's center point.
+        private PointF CenterPoint;
+
         public Form1()
         {
             InitializeComponent();
@@ -60,6 +64,9 @@ namespace vcs_Draw9_Example8_vcsh
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ResizeRedraw = true;
+            DoubleBuffered = true;
+
             // Reduce flicker.
             DoubleBuffered = true;
 
@@ -82,6 +89,11 @@ namespace vcs_Draw9_Example8_vcsh
             // Create data.
             for (int i = 0; i < DataValues.Length; i++)
                 DataValues[i] = rnd.Next(MIN_VALUE + 5, MAX_VALUE - 5);
+
+            //pictureBox4 的中心
+            CenterPoint = new PointF(
+                this.pictureBox4.ClientSize.Width / 2,
+                this.pictureBox4.ClientSize.Height / 2);
         }
 
         void show_item_location()
@@ -114,7 +126,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(W, H);
-            pictureBox4.Size = new Size(W, H);
+            pictureBox4.Size = new Size(W, H - 40);
             pictureBox5.Size = new Size(W, H);
             pictureBox_histogram.Size = new Size(W, H);
             pictureBox_age.Size = new Size(W, H);
@@ -125,6 +137,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             pictureBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            checkBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + H - 30);
             pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox_histogram.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
@@ -843,6 +856,37 @@ namespace vcs_Draw9_Example8_vcsh
         }
 
         #endregion
+
+        private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
+        {
+            CenterPoint = e.Location;
+            this.pictureBox4.Refresh();
+        }
+
+        // Draw the elliptical gradient background.
+        private void pictureBox4_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Make a GraphicsPath to represent the ellipse.
+            Rectangle rect = new Rectangle(
+                10, 10,
+                this.pictureBox4.ClientSize.Width - 20,
+                this.pictureBox4.ClientSize.Height - 20);
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(rect);
+
+            // Make a PathGradientBrush from the path.
+            using (PathGradientBrush br = new PathGradientBrush(path))
+            {
+                if (checkBox1.Checked == true)
+                    br.CenterPoint = CenterPoint;
+                br.CenterColor = Color.Blue;
+                br.SurroundColors = new Color[] { this.pictureBox4.BackColor };
+                e.Graphics.FillEllipse(br, rect);
+            }
+        }
+
 
 
     }

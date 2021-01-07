@@ -75,6 +75,7 @@
             this.bt_ox_clear = new System.Windows.Forms.Button();
             this.timer_gear = new System.Windows.Forms.Timer(this.components);
             this.toolTip_histogram = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -159,12 +160,14 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox4.BackColor = System.Drawing.Color.LightGreen;
             this.pictureBox4.Location = new System.Drawing.Point(0, 256);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox4.Size = new System.Drawing.Size(250, 180);
             this.pictureBox4.TabIndex = 60;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox4_Paint);
+            this.pictureBox4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseMove);
             // 
             // pictureBox5
             // 
@@ -553,11 +556,22 @@
             this.timer_gear.Interval = 10;
             this.timer_gear.Tick += new System.EventHandler(this.timer_gear_Tick);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(57, 468);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 98;
+            this.checkBox1.Text = "追蹤鼠標";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 769);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_ox_clear);
             this.Controls.Add(this.lblSquare22);
             this.Controls.Add(this.lblSquare21);
@@ -615,6 +629,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_age)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -666,6 +681,7 @@
         private System.Windows.Forms.Button bt_ox_clear;
         private System.Windows.Forms.Timer timer_gear;
         private System.Windows.Forms.ToolTip toolTip_histogram;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
