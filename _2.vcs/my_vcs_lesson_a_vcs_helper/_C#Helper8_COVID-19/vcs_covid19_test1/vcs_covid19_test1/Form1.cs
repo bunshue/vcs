@@ -38,9 +38,8 @@ namespace vcs_covid19_test1
             // Compose the local data file name.
             string filename = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
 
-
             // Download today's data.
-            const string url = "https://covidtracking.com/api/v1/states/daily.csv";
+            string url = "https://covidtracking.com/api/v1/states/daily.csv";
 
             richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename + "\n";
 
@@ -53,6 +52,40 @@ namespace vcs_covid19_test1
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString() + " 秒\n";
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalMilliseconds.ToString() + " 毫秒\n";
+
+
+            richTextBox1.Text += "Loading case data...\n";
+
+            // Compose the local data file name.
+            filename = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
+            DownloadFile(url, filename);
+
+
+            richTextBox1.Text += "Loading death data...\n";
+
+            // Compose the local data file name.
+            filename = "deaths" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_deaths_global.csv&filename=time_series_covid19_deaths_global.csv";
+            DownloadFile(url, filename);
+
+            richTextBox1.Text += "Loading recovery data...\n";
+
+
+            // Compose the local data file name.
+            filename = "recoveries" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_recovered_global.csv&filename=time_series_covid19_recovered_global.csv";
+            DownloadFile(url, filename);
+
+
+
+
         }
 
         // Download today's data.

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_corona_diagnoser", "howto_corona_diagnoser.csproj", "{722B9F8D-6DBB-447A-A007-A49E7D2CCDFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{722B9F8D-6DBB-447A-A007-A49E7D2CCDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{722B9F8D-6DBB-447A-A007-A49E7D2CCDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{722B9F8D-6DBB-447A-A007-A49E7D2CCDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{722B9F8D-6DBB-447A-A007-A49E7D2CCDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

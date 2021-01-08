@@ -19,6 +19,15 @@ namespace vcs_SatelliteImages
             InitializeComponent();
             //this.FormBorderStyle = FormBorderStyle.None;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //圖片Zoom的方法
+
+            //.Net 4.0 要強迫使用 TLS 1.2 抓資料
+            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
+            //for Sugar     3840 Romeo也可用
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,13 +38,7 @@ namespace vcs_SatelliteImages
 
             //表單不顯示在 Windows 工作列中
             //this.ShowInTaskbar = false;
-
-            richTextBox1.Text += "ccccc 1\n";
             Load_SatelliteImages();
-
-            //.Net 4.0 要強迫使用 TLS 1.2 抓資料
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
         }
 
         void Load_SatelliteImages()
@@ -227,4 +230,15 @@ namespace vcs_SatelliteImages
 
 
     }
+
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+
 }
