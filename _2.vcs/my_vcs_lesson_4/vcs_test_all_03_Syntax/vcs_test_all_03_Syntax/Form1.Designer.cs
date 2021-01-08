@@ -355,8 +355,9 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(180, 40);
             this.button23.TabIndex = 23;
-            this.button23.Text = "xxx";
+            this.button23.Text = "函數中out語法";
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button24
             // 

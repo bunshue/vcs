@@ -23,6 +23,7 @@ namespace vcs_ColorDialog
 
         private void button1_Click(object sender, EventArgs e)
         {
+            colorDialog1.Color = richTextBox1.BackColor;    //顏色對話框的預設顏色
             colorDialog1.AllowFullOpen = true;
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {

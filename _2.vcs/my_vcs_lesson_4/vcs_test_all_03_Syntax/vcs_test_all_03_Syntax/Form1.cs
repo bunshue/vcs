@@ -1140,5 +1140,23 @@ namespace vcs_test_all_03_Syntax
         }
         #endregion
 
+        private void button23_Click(object sender, EventArgs e)
+        {
+            int a = 3;
+            int b = 5;
+            int c = 6;
+            float avg;
+            int prod;
+            GetAverageProduct(a, b, c, out avg, out prod);
+            richTextBox1.Text += "average = \t" + avg.ToString() + "\n";
+            richTextBox1.Text += "product = \t" + prod.ToString() + "\n";
+        }
+
+        private void GetAverageProduct(int a, int b, int c, out float average, out int product)
+        {
+            average = (a + b + c) / (float)3;
+            product = a * b * c;
+        }
+
     }
 }

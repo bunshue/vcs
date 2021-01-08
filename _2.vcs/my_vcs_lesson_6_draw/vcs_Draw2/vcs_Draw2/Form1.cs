@@ -1351,7 +1351,7 @@ namespace vcs_Draw2
             Application.Exit();
         }
 
-        private void DrawPoint(int cx, int cy, int size, Color c)
+        private void DrawPoint(int cx, int cy, Color c_out, Color c_in, int radius)
         {
             // Create a new pen.
             //顏色、線寬分開寫
@@ -1360,12 +1360,22 @@ namespace vcs_Draw2
             //p.Width = linewidth;
 
             //顏色、線寬寫在一起
-            Pen p = new Pen(c, size);
+            Pen p = new Pen(c_out, 1);
+            SolidBrush b = new SolidBrush(c_in);
+            //Brush b = new Brush(c_in);
 
             // Draw the circle
-            g.DrawEllipse(p, new Rectangle(cx, cy, size, size));
+            g.FillEllipse(b, new Rectangle(cx - radius, cy - radius, radius * 2, radius * 2));
+            g.DrawEllipse(p, new Rectangle(cx - radius, cy - radius, radius * 2, radius * 2));
             //Dispose of the pen.
             p.Dispose();
+        }
+
+        // Draw a point.
+        private void DrawPoint2(Graphics gr, PointF pt, Brush brush, Pen pen, int radius)
+        {
+            gr.FillEllipse(brush, pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
+            gr.DrawEllipse(pen, pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
         }
 
         private void DrawCircle(int center_x, int center_y, int radius, int linewidth, Color c)
@@ -1504,11 +1514,17 @@ namespace vcs_Draw2
         {
             Font f = new Font("標楷體", 16);
             SolidBrush sb = new SolidBrush(Color.Blue);
+            Point pt = new Point();
 
             for (int size = 1; size <= 10; size++)
             {
-                DrawPoint(200, 50 + 50 * size, size, Color.Red);
                 g.DrawString(size.ToString(), f, sb, 100, 50 + 50 * size);
+                //         cx        cy          
+                DrawPoint(200, 50 + 50 * size, Color.Red, Color.Pink, size);
+
+                pt = new Point(220, 50 + 50 * size);
+                DrawPoint2(g, pt, Brushes.HotPink, Pens.Red, size);
+
             }
 
         }

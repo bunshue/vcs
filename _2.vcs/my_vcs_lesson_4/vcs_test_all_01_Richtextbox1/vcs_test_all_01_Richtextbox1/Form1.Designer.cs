@@ -90,6 +90,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBox_format_1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox_format_2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_rtf = new System.Windows.Forms.RichTextBox();
+            this.button30 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -750,11 +752,35 @@
             this.richTextBox_format_2.TabIndex = 88;
             this.richTextBox_format_2.Text = "The quick brown fox jumps over the lazy dog.";
             // 
+            // richTextBox_rtf
+            // 
+            this.richTextBox_rtf.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox_rtf.Location = new System.Drawing.Point(483, 706);
+            this.richTextBox_rtf.Name = "richTextBox_rtf";
+            this.richTextBox_rtf.Size = new System.Drawing.Size(639, 115);
+            this.richTextBox_rtf.TabIndex = 89;
+            this.richTextBox_rtf.Text = "";
+            // 
+            // button30
+            // 
+            this.button30.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button30.Location = new System.Drawing.Point(910, 781);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(170, 40);
+            this.button30.TabIndex = 90;
+            this.button30.Text = "用WordPad編輯";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1395, 837);
+            this.Controls.Add(this.button30);
+            this.Controls.Add(this.richTextBox_rtf);
             this.Controls.Add(this.richTextBox_format_2);
             this.Controls.Add(this.richTextBox_format_1);
             this.Controls.Add(this.label6);
@@ -816,6 +842,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -886,6 +913,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox richTextBox_format_1;
         private System.Windows.Forms.RichTextBox richTextBox_format_2;
+        private System.Windows.Forms.RichTextBox richTextBox_rtf;
+        private System.Windows.Forms.Button button30;
     }
 }
 

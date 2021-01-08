@@ -367,7 +367,9 @@ namespace howto_print_full_scale
         private void mnuFilePrint_Click(object sender, EventArgs e)
         {
             // Print directly to the printer.
-            printDocument1.Print();
+
+            //david: do not really print
+            //printDocument1.Print();
         }
 
         // Print the lines.

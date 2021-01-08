@@ -28,8 +28,8 @@ namespace vcs_FontDialog
             fontDialog1.ShowEffects = true;
             fontDialog1.ShowHelp = true;
 
-            fontDialog1.Font = richTextBox1.Font;
-            fontDialog1.Color = richTextBox1.ForeColor;
+            fontDialog1.Font = richTextBox1.Font;           //字型對話框的預設字型
+            fontDialog1.Color = richTextBox1.ForeColor;     //字型對話框的預設顏色
 
             if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
             {

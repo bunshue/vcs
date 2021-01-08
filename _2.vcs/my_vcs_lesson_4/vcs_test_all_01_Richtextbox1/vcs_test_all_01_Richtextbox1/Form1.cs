@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization;//for CultureInfo
 
+using System.IO;    //for FILE
+using System.Diagnostics;   //for Process
+
 namespace vcs_test_all_01_Richtextbox1
 {
     public partial class Form1 : Form
@@ -16,6 +19,8 @@ namespace vcs_test_all_01_Richtextbox1
         {
             InitializeComponent();
         }
+
+        string rtf_filename = @"C:\______test_files\__RW\_rtf\text.rtf";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -44,6 +49,11 @@ namespace vcs_test_all_01_Richtextbox1
             richTextBox_format_2.Select(0, 0);
 
             show_richtextbox_tabs();
+
+            // Load the previously saved file.
+            // If the file exists, load it.
+            if (File.Exists(rtf_filename))
+                richTextBox_rtf.LoadFile(rtf_filename);
         }
 
         // Select the indicated text.
@@ -862,6 +872,43 @@ namespace vcs_test_all_01_Richtextbox1
             return txt.Substring(start_pos, end_pos - start_pos + 1);
         }
 
+        //用WordPad編輯
+        // Allow the user to edit the file with WordPad.
+        private void button30_Click(object sender, EventArgs e)
+        {
+            // Hide.
+            this.ShowInTaskbar = false;
+            this.Hide();
+
+            // Save the current text into the file.
+            richTextBox_rtf.SaveFile(rtf_filename);
+
+            // We will open rtf_filename with wordpad.exe.
+            ProcessStartInfo start_info =
+                new ProcessStartInfo("wordpad.exe", rtf_filename);
+            start_info.WindowStyle = ProcessWindowStyle.Maximized;
+
+            // Open wordpad.
+            Process proc = new Process();
+            proc.StartInfo = start_info;
+            proc.Start();
+
+            // Wait for wordpad to finish.
+            proc.WaitForExit();
+
+            // Reload the file.
+            richTextBox_rtf.LoadFile(rtf_filename);
+
+            // Unhide.
+            this.ShowInTaskbar = true;
+            this.Show();
+        }
+
+        // Save the current text into the file.
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            richTextBox_rtf.SaveFile(rtf_filename);
+        }
 
     }
 }

@@ -854,11 +854,72 @@ namespace vcs_test_all_05_Array
 
         private void button29_Click(object sender, EventArgs e)
         {
+            Person[] people =
+            {
+                new Person() { FirstName="Ben", LastName="Holbrook"},
+                new Person() { FirstName="Fred", LastName="Gill"},
+                new Person() { FirstName="Ginny", LastName="Franklin"},
+                new Person() { FirstName="Cindy", LastName="Carter"},
+                new Person() { FirstName="Ann", LastName="Baker"},
+                new Person() { FirstName="Jeff", LastName="Ivanova"},
+                new Person() { FirstName="Irma", LastName="Archer"},
+                new Person() { FirstName="Dan", LastName="Jerico"},
+                new Person() { FirstName="Hal", LastName="Evans"},
+                new Person() { FirstName="Edwina", LastName="Dolf"},
+            };
+
+            richTextBox1.Text += "原陣列\n";
+            // Display the people unsorted.
+            for (int i = 0; i < people.Length; i++)
+            {
+                //lstPeople.Items.Add(people[i]);
+                richTextBox1.Text += people[i] + "\n";
+            }
+
+            richTextBox1.Text += "依名排序\n";
+            // Sort the people.
+            Array.Sort(people);
+            for (int i = 0; i < people.Length; i++)
+            {
+                //lstSortedPeople.Items.Add(people[i]);
+                richTextBox1.Text += people[i] + "\n";
+            }
 
         }
 
         private void button30_Click(object sender, EventArgs e)
         {
+            Person[] people =
+            {
+                new Person() { FirstName="Ben", LastName="Holbrook"},
+                new Person() { FirstName="Fred", LastName="Gill"},
+                new Person() { FirstName="Ginny", LastName="Franklin"},
+                new Person() { FirstName="Cindy", LastName="Carter"},
+                new Person() { FirstName="Ann", LastName="Baker"},
+                new Person() { FirstName="Jeff", LastName="Ivanova"},
+                new Person() { FirstName="Irma", LastName="Archer"},
+                new Person() { FirstName="Dan", LastName="Jerico"},
+                new Person() { FirstName="Hal", LastName="Evans"},
+                new Person() { FirstName="Edwina", LastName="Dolf"},
+            };
+
+            richTextBox1.Text += "原陣列\n";
+            // Display the people unsorted.
+            for (int i = 0; i < people.Length; i++)
+            {
+                //lstLastNameFirst.Items.Add(people[i]);
+                richTextBox1.Text += people[i] + "\n";
+            }
+
+            richTextBox1.Text += "依姓排序\n";
+            // Sort the people.
+            PersonComparer comparer = new PersonComparer();
+            Array.Sort(people, comparer);
+            for (int i = 0; i < people.Length; i++)
+            {
+                //lstSortedLastNameFirst.Items.Add(people[i]);
+                richTextBox1.Text += people[i] + "\n";
+            }
 
         }
 
@@ -1010,4 +1071,34 @@ namespace vcs_test_all_05_Array
 
         }
     }
+
+    class Person : IComparable<Person>
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
+
+        // Compare two Person's names.
+        public int CompareTo(Person person)
+        {
+            return ToString().CompareTo(person.ToString());
+        }
+    }
+
+    class PersonComparer : IComparer<Person>
+    {
+        // Compare two Persons.
+        public int Compare(Person person1, Person person2)
+        {
+            string name1 = person1.LastName + "," + person1.FirstName;
+            string name2 = person2.LastName + "," + person2.FirstName;
+            return name1.CompareTo(name2);
+        }
+    }
+
+
 }

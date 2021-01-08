@@ -318,7 +318,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 42);
             this.button29.TabIndex = 28;
-            this.button29.Text = "xxx";
+            this.button29.Text = "姓名依名排序";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -438,6 +438,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 42);
             this.button30.TabIndex = 54;
+            this.button30.Text = "姓名依姓排序";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
