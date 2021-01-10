@@ -113,6 +113,14 @@ namespace vcs_covid19_test1
                 }
                 finally
                 {
+                    if (!File.Exists(filename))
+                    {
+                        richTextBox1.Text += "下載 : " + filename + " 失敗\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "下載 : " + filename + " 成功\n";
+                    }
                     this.Cursor = Cursors.Default;
                 }
             }
