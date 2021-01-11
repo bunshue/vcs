@@ -41,7 +41,7 @@
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 11);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(137, 44);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -52,7 +52,7 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(12, 62);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 57);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(137, 44);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -70,27 +70,31 @@
             "2",
             "4",
             "8",
-            "16"});
-            this.cboScale.Location = new System.Drawing.Point(196, 12);
+            "16",
+            "32",
+            "48",
+            "96",
+            "128"});
+            this.cboScale.Location = new System.Drawing.Point(196, 11);
             this.cboScale.Name = "cboScale";
-            this.cboScale.Size = new System.Drawing.Size(45, 21);
+            this.cboScale.Size = new System.Drawing.Size(45, 20);
             this.cboScale.TabIndex = 2;
             this.cboScale.SelectedIndexChanged += new System.EventHandler(this.cboScale_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(153, 15);
+            this.label1.Location = new System.Drawing.Point(153, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(32, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "Scale:";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 261);
+            this.ClientSize = new System.Drawing.Size(387, 241);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cboScale);
             this.Controls.Add(this.pictureBox2);

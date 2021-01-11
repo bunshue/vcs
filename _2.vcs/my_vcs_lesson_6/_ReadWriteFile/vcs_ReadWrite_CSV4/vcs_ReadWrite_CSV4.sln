@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_graph_dji_history", "howto_graph_dji_history.csproj", "{3AFD2AED-D223-45CB-8661-49E2DF64DC5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_CSV4", "vcs_ReadWrite_CSV4\vcs_ReadWrite_CSV4.csproj", "{3AFD2AED-D223-45CB-8661-49E2DF64DC5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

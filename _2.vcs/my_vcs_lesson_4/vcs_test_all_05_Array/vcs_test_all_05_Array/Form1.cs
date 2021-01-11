@@ -160,7 +160,70 @@ namespace vcs_test_all_05_Array
         private void button7_Click(object sender, EventArgs e)
         {
             //三維陣列宣告：
-            int[, ,] Score = { { { 65, 85, 78, 75, 69 }, { 66, 55, 52, 92, 47 }, { 75, 99, 63, 73, 86 }, { 77, 88, 99, 91, 99 } }, { { 77, 88, 66, 77, 66 }, { 65, 66, 88, 55, 77 }, { 70, 88, 56, 88, 88 }, { 80, 90, 95, 99, 99 } }, { { 55, 67, 56, 98, 67 }, { 66, 69, 76, 66, 78 }, { 77, 89, 88, 77, 77 }, { 88, 89, 99, 97, 88 } } };
+            //int[, ,] Score = { { { 65, 85, 78, 75, 69 }, { 66, 55, 52, 92, 47 }, { 75, 99, 63, 73, 86 }, { 77, 88, 99, 91, 99 } }, { { 77, 88, 66, 77, 66 }, { 65, 66, 88, 55, 77 }, { 70, 88, 56, 88, 88 }, { 80, 90, 95, 99, 99 } }, { { 55, 67, 56, 98, 67 }, { 66, 69, 76, 66, 78 }, { 77, 89, 88, 77, 77 }, { 88, 89, 99, 97, 88 } } };
+
+            //三維陣列宣告：  3Layer X 4Row X 5Column
+            int[, ,] Score = {
+                              { { 65, 85, 78, 75, 69 },
+                                { 66, 55, 52, 92, 47 },
+                                { 75, 99, 63, 73, 86 },
+                                { 77, 88, 99, 91, 99 } },
+                              { { 77, 88, 66, 77, 66 },
+                                { 65, 66, 88, 55, 77 },
+                                { 70, 88, 56, 88, 88 },
+                                { 80, 90, 95, 99, 99 } },
+                              { { 55, 67, 56, 98, 67 },
+                                { 66, 69, 76, 66, 78 },
+                                { 77, 89, 88, 77, 77 },
+                                { 88, 89, 99, 97, 88 } }
+                              };
+
+            int i, j, k;
+            int rank = Score.Rank; //獲取維度
+            int rows = Score.GetUpperBound(0) + 1; //獲取指定維度的上限，第0項就是行數 row
+            int cols = Score.GetUpperBound(1) + 1; //獲取指定維度的上限，第1項就是列數 columns
+            int tttt = Score.GetUpperBound(2) + 1; //獲取指定維度的上限，第1項就是列數 columns
+            int len = Score.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+            richTextBox1.Text += "維度 rank = " + rank.ToString() + "\n";
+            for (i = 0; i < rank; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 維\t長度 " + (Score.GetUpperBound(i) + 1).ToString() + "\n";
+            }
+
+            int xx = Score.GetUpperBound(0) + 1;
+            int yy = Score.GetUpperBound(1) + 1;
+            int zz = Score.GetUpperBound(2) + 1;
+            for (i = 0; i < xx; i++)
+            {
+                for (j = 0; j < yy; j++)
+                {
+                    for (k = 0; k < zz; k++)
+                    {
+                        richTextBox1.Text += "第(" + i.ToString() + ", " + j.ToString() + ", " + k.ToString() + ")項 " + Score[i, j, k] + "\t";
+
+                    }
+                    richTextBox1.Text += "\n";
+                }
+                richTextBox1.Text += "\n";
+            }
+
+
+            richTextBox1.Text += "行 rows = " + rows.ToString() + "\n";
+            richTextBox1.Text += "列 cols = " + cols.ToString() + "\n";
+            richTextBox1.Text += "列 cols = " + tttt.ToString() + "\n";
+            richTextBox1.Text += "總長度 len  = " + len.ToString() + "\n";
+
+            int col2 = Score.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";    //3
+
+            int len0 = Score.GetLength(0);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int len1 = Score.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            richTextBox1.Text += "len0 = " + len0.ToString() + "\n";    //3
+            richTextBox1.Text += "len1 = " + len1.ToString() + "\n";    //6
+
+
         }
 
         private void button8_Click(object sender, EventArgs e)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_dji_investment_schemes
+namespace vcs_ReadWrite_CSV4
 {
     static class Program
     {

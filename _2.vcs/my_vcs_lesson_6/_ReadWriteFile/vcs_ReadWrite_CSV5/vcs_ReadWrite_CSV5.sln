@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_dji_investment_schemes", "howto_dji_investment_schemes.csproj", "{1313D3FF-AF63-4D67-9EBF-B6992E1B12C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_CSV5", "vcs_ReadWrite_CSV5\vcs_ReadWrite_CSV5.csproj", "{1313D3FF-AF63-4D67-9EBF-B6992E1B12C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

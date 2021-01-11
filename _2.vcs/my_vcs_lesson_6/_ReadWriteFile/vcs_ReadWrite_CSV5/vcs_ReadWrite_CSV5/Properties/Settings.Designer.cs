@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_graph_dji_history.Properties {
+namespace vcs_ReadWrite_CSV5.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

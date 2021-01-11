@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
 
-namespace howto_dji_investment_schemes
+namespace vcs_ReadWrite_CSV5
 {
     public partial class Form1 : Form
     {

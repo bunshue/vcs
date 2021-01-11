@@ -1,4 +1,4 @@
-﻿namespace howto_dji_investment_schemes
+﻿namespace vcs_ReadWrite_CSV5
 {
     partial class Form1
     {
@@ -38,7 +38,7 @@
             // 
             this.picRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picRefresh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picRefresh.Image = global::howto_dji_investment_schemes.Properties.Resources.ResetButton;
+            this.picRefresh.Image = global::vcs_ReadWrite_CSV5.Properties.Resources.ResetButton;
             this.picRefresh.Location = new System.Drawing.Point(716, 6);
             this.picRefresh.Name = "picRefresh";
             this.picRefresh.Size = new System.Drawing.Size(17, 14);
@@ -67,7 +67,7 @@
             this.Controls.Add(this.picRefresh);
             this.Controls.Add(this.picGraph);
             this.Name = "Form1";
-            this.Text = "howto_dji_investment_schemes";
+            this.Text = "vcs_ReadWrite_CSV5";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();

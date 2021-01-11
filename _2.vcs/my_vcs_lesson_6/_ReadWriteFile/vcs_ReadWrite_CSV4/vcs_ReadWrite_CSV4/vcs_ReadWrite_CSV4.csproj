@@ -8,8 +8,8 @@
     <ProjectGuid>{3AFD2AED-D223-45CB-8661-49E2DF64DC5E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>howto_graph_dji_history</RootNamespace>
-    <AssemblyName>howto_graph_dji_history</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_CSV4</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_CSV4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

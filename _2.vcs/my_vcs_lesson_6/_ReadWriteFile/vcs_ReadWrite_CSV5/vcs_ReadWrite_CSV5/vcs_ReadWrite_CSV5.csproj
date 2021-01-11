@@ -8,8 +8,8 @@
     <ProjectGuid>{1313D3FF-AF63-4D67-9EBF-B6992E1B12C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>howto_dji_investment_schemes</RootNamespace>
-    <AssemblyName>howto_dji_investment_schemes</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_CSV5</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_CSV5</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
