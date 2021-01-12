@@ -186,5 +186,24 @@ namespace vcs_MyDateTime
             richTextBox1.Text += "年齡：" + av1.Age.ToString() + "\n";
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string txt = "2006/3/11";
+
+            DateTime dt = DateTime.Now;
+            bool conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
+            if (conversionSuccessful == true)
+                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
+            else
+                richTextBox1.Text += "DateTime.TryParse 失敗\n";
+
+            txt = "123年3月11";
+            conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
+            if (conversionSuccessful == true)
+                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
+            else
+                richTextBox1.Text += "DateTime.TryParse 失敗\n";
+        }
     }
 }

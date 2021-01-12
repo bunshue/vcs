@@ -37,6 +37,7 @@ namespace vcs_Remove_Bin_Obj
         private void button1_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "開始刪除檔案";
+            this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
@@ -304,6 +305,7 @@ namespace vcs_Remove_Bin_Obj
         private void button3_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "開始改名檔案";
+            this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
