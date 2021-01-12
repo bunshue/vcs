@@ -22,7 +22,11 @@ namespace vcs_test_all_99_tmp1
             InitializeComponent();
             show_item_location();
             toolTip1.SetToolTip(button6, "顯示提示訊息");
-       }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
 
         void show_item_location()
         {
@@ -65,7 +69,9 @@ namespace vcs_test_all_99_tmp1
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
 
-            bt_clear.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
         }
 
         private void richTextBox1_MouseDown(object sender, MouseEventArgs e)
@@ -95,10 +101,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string pdf_path = "C:\\______test_files\\note_Linux_workstation.pdf";
-            Process myProcess;
-            myProcess = Process.Start(pdf_path);
-            myProcess.WaitForExit();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -370,10 +372,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //從FTP下載檔案
-            System.Net.WebClient webClient = new System.Net.WebClient();
-            //下載FTP檔案到指定位置
-            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -467,5 +465,6 @@ namespace vcs_test_all_99_tmp1
         {
             richTextBox1.Clear();
         }
+
     }
 }

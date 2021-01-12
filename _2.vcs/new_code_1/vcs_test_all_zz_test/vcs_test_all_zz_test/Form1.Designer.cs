@@ -56,7 +56,7 @@
             this.btn_test3.Name = "btn_test3";
             this.btn_test3.Size = new System.Drawing.Size(222, 36);
             this.btn_test3.TabIndex = 2;
-            this.btn_test3.Text = "個人資料";
+            this.btn_test3.Text = "xxx";
             this.btn_test3.UseVisualStyleBackColor = true;
             this.btn_test3.Click += new System.EventHandler(this.btn_test3_Click);
             // 

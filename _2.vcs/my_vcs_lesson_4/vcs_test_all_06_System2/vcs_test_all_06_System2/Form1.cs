@@ -238,6 +238,19 @@ namespace vcs_test_all_06_System2
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //測試防火牆
+            // Create the firewall type.
+            Type FWManagerType = Type.GetTypeFromProgID("HNetCfg.FwMgr");
+
+            // Use the firewall type to create a firewall manager object.
+            dynamic FWManager = Activator.CreateInstance(FWManagerType);
+
+            // Check the status of the firewall.
+
+            if (FWManager.LocalPolicy.CurrentProfile.FirewallEnabled == true)
+                richTextBox1.Text += "防火牆已開啟\n";
+            else
+                richTextBox1.Text += "防火牆未開啟\n";
         }
 
         private void button9_Click(object sender, EventArgs e)

@@ -106,6 +106,8 @@ namespace vcs_Draw9_Example8_vcsh
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
+
+            draw_random_pixel_image();
         }
 
         void show_item_location()
@@ -133,7 +135,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_age.Size = new Size(W, H);
             pictureBox8.Size = new Size(W * 2 + 10, H);
             pictureBox10.Size = new Size(W, H * 9 / 10);
-            pictureBox11.Size = new Size(W, H);
+            pictureBox_random_pixel_image.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
             pictureBox14.Size = new Size(W, H);
@@ -149,7 +151,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_age.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox11.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_random_pixel_image.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
@@ -971,6 +973,37 @@ namespace vcs_Draw9_Example8_vcsh
             // centered at (px, py).
             gr.FillEllipse(Brushes.Blue, (int)(px - wid / 4),
                 (int)(py - hgt / 4), wid / 2, hgt / 2);
+        }
+
+        void draw_random_pixel_image()
+        {
+            int width = pictureBox_random_pixel_image.ClientSize.Width;
+            int height = pictureBox_random_pixel_image.ClientSize.Height;
+
+            //bitmap
+            Bitmap bmp = new Bitmap(width, height);
+
+            //random number
+            Random rand = new Random();
+
+            //create random pixels
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //generate random ARGB value
+                    int a = rand.Next(256);
+                    int r = rand.Next(256);
+                    int g = rand.Next(256);
+                    int b = rand.Next(256);
+
+                    //set ARGB value
+                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                }
+            }
+
+            //load bmp in pictureBox_random_pixel_image
+            pictureBox_random_pixel_image.Image = bmp;
         }
 
 

@@ -84,10 +84,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(646, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(812, 619);
+            this.richTextBox1.Size = new System.Drawing.Size(879, 619);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -518,7 +518,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1470, 643);
+            this.ClientSize = new System.Drawing.Size(1537, 643);
             this.Controls.Add(this.button38);
             this.Controls.Add(this.button37);
             this.Controls.Add(this.button35);

@@ -80,7 +80,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(172, 53);
             this.button2.TabIndex = 2;
-            this.button2.Text = "測試防火牆";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -129,7 +128,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(172, 53);
             this.button7.TabIndex = 7;
-            this.button7.Text = "檢查網路連線";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -149,7 +147,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(172, 53);
             this.button9.TabIndex = 9;
-            this.button9.Text = "取得網頁資料並存成檔案";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -179,7 +176,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(172, 53);
             this.button12.TabIndex = 12;
-            this.button12.Text = "取得網頁純文字檔";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

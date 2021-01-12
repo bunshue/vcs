@@ -58,7 +58,6 @@
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -80,7 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -348,14 +346,6 @@
             this.pictureBox14.TabIndex = 27;
             this.pictureBox14.TabStop = false;
             // 
-            // pictureBox15
-            // 
-            this.pictureBox15.Location = new System.Drawing.Point(1042, 576);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(250, 250);
-            this.pictureBox15.TabIndex = 28;
-            this.pictureBox15.TabStop = false;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -438,7 +428,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox9);
@@ -486,7 +475,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,7 +512,6 @@
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;

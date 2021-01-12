@@ -77,7 +77,7 @@
             this.toolTip_histogram = new System.Windows.Forms.ToolTip(this.components);
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_random_pixel_image = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
@@ -92,7 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_age)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
@@ -567,14 +567,14 @@
             this.pictureBox10.TabStop = false;
             this.pictureBox10.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox10_Paint);
             // 
-            // pictureBox11
+            // pictureBox_random_pixel_image
             // 
-            this.pictureBox11.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox11.Location = new System.Drawing.Point(11, 540);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(155, 168);
-            this.pictureBox11.TabIndex = 100;
-            this.pictureBox11.TabStop = false;
+            this.pictureBox_random_pixel_image.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_random_pixel_image.Location = new System.Drawing.Point(11, 540);
+            this.pictureBox_random_pixel_image.Name = "pictureBox_random_pixel_image";
+            this.pictureBox_random_pixel_image.Size = new System.Drawing.Size(155, 168);
+            this.pictureBox_random_pixel_image.TabIndex = 100;
+            this.pictureBox_random_pixel_image.TabStop = false;
             // 
             // pictureBox12
             // 
@@ -626,7 +626,7 @@
             this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pictureBox11);
+            this.Controls.Add(this.pictureBox_random_pixel_image);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_ox_clear);
@@ -686,7 +686,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_age)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
@@ -746,7 +746,7 @@
         private System.Windows.Forms.ToolTip toolTip_histogram;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox_random_pixel_image;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox15;

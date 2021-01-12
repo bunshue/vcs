@@ -217,7 +217,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(150, 40);
             this.button10.TabIndex = 67;
-            this.button10.Text = "從FTP下載檔案";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -287,7 +286,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(150, 40);
             this.button0.TabIndex = 73;
-            this.button0.Text = "用adobe 打開PDF檔";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -305,9 +303,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(345, 494);
+            this.bt_clear.Location = new System.Drawing.Point(1036, 486);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(150, 40);
+            this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 75;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -343,6 +341,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);

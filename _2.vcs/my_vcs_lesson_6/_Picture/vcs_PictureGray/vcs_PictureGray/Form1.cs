@@ -36,24 +36,29 @@ namespace vcs_PictureGray
             pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
 
             show_item_location();
 
             string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = Bitmap.FromFile(filename);
-            PictureToSepia();
+            PictureToSepia1();  //To Sepia 方法一
+            //PictureToSepia2();  //To Sepia 方法二
             PictureToGray1();
             PictureToGray2();
             PictureToGray3();
             PictureToGray4();
             PictureToGray5();
             PictureToMonochrome();
+            PictureToNegative();
+            PictureToMirror();
 
             // Convert the image into red, green, and blue monochrome.
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
             pictureBox8.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
             pictureBox9.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
+
+            //另外的方法製作單色圖片
+            //show_mono_color_picture();
 
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;
@@ -102,8 +107,7 @@ namespace vcs_PictureGray
             pictureBox11.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
-            pictureBox14.Size = new Size(W, H);
-            pictureBox15.Size = new Size(W, H);
+            pictureBox14.Size = new Size(W * 2, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -119,7 +123,6 @@ namespace vcs_PictureGray
             pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            pictureBox15.Location = new Point(x_st + dx * 4, y_st + dy * 2);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
@@ -148,11 +151,11 @@ namespace vcs_PictureGray
             label7.Text = "單色 R";
             label8.Text = "單色 G";
             label9.Text = "單色 B";
-            label10.Text = "";
+            label10.Text = "負片";
             label11.Text = "原圖";
             label12.Text = "灰階 Grayscale";
             label13.Text = "灰階 Average";
-            label14.Text = "";
+            label14.Text = "鏡像圖片";
             label15.Text = "";
 
 
@@ -163,15 +166,15 @@ namespace vcs_PictureGray
 
         }
 
-        private void PictureToSepia()
+        private void PictureToSepia1()
         {
             //將圖片轉為 Sepia 效果
             // Display the image converted to sepia tone.
-            pictureBox2.Image = ToSepiaTone(pictureBox1.Image);
+            pictureBox2.Image = ToSepiaTone1(pictureBox1.Image);
         }
 
         // Convert an image to sepia tone.
-        private Bitmap ToSepiaTone(Image image)
+        private Bitmap ToSepiaTone1(Image image)
         {
             // Make the ColorMatrix.
             ColorMatrix cm = new ColorMatrix(new float[][]
@@ -203,15 +206,91 @@ namespace vcs_PictureGray
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
 
             // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bmp = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bmp))
             {
                 gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
             }
 
             // Return the result.
-            return bm;
+            return bmp;
         }
+
+        private void PictureToSepia2()
+        {
+            //將圖片轉為 Sepia 效果
+            // Display the image converted to sepia tone.
+            pictureBox2.Image = ToSepiaTone2(pictureBox1.Image);
+        }
+
+        // Convert an image to sepia tone.
+        private Bitmap ToSepiaTone2(Image image)
+        {
+            //將圖片轉為 Sepia 效果
+            //read image
+            Bitmap bmp = new Bitmap(image);
+
+            //get image dimension
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            //color of pixel
+            Color p;
+
+            //sepia
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //get pixel value
+                    p = bmp.GetPixel(x, y);
+
+                    //extract pixel component ARGB
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    //calculate temp value
+                    int tr = (int)(0.393 * r + 0.769 * g + 0.189 * b);
+                    int tg = (int)(0.349 * r + 0.686 * g + 0.168 * b);
+                    int tb = (int)(0.272 * r + 0.534 * g + 0.131 * b);
+
+                    //set new RGB value
+                    if (tr > 255)
+                    {
+                        r = 255;
+                    }
+                    else
+                    {
+                        r = tr;
+                    }
+
+                    if (tg > 255)
+                    {
+                        g = 255;
+                    }
+                    else
+                    {
+                        g = tg;
+                    }
+
+                    if (tb > 255)
+                    {
+                        b = 255;
+                    }
+                    else
+                    {
+                        b = tb;
+                    }
+
+                    //set the new RGB value in image pixel
+                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                }
+            }
+            return bmp;
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -620,7 +699,6 @@ namespace vcs_PictureGray
             return bm;
         }
 
-
         // Scale an image's color components.
         private Bitmap ScaleColorComponents(Image image, float r, float g, float b, float a)
         {
@@ -679,6 +757,137 @@ namespace vcs_PictureGray
 
         }
 
+        private void PictureToNegative()
+        {
+            richTextBox1.Text += "PictureToNegative\n";
+            pictureBox10.Image = ToNegative(pictureBox1.Image);
+        }
+
+        private Bitmap ToNegative(Image image)
+        {
+            // Make the result bitmap.
+            Bitmap bmp = new Bitmap(image);
+
+            //get image dimension
+            int width = image.Width;
+            int height = image.Height;
+
+            //negative
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //get pixel value
+                    Color p = bmp.GetPixel(x, y);
+
+                    //extract ARGB value from p
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    //find negative value
+                    r = 255 - r;
+                    g = 255 - g;
+                    b = 255 - b;
+
+                    //set new ARGB value in pixel
+                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                }
+            }
+            // Return the result.
+            return bmp;
+
+        }
+
+        private void PictureToMirror()
+        {
+            richTextBox1.Text += "PictureToMirror\n";
+            pictureBox14.Image = ToMirror(pictureBox1.Image);
+        }
+
+        private Bitmap ToMirror(Image image)
+        {
+            // Make the result bitmap.
+            Bitmap bmp = new Bitmap(image);
+
+            //get image dimension
+            int width = image.Width;
+            int height = image.Height;
+
+            //mirror image
+            Bitmap mimg = new Bitmap(width * 2, height);
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
+                {
+                    //get source pixel value
+                    Color p = bmp.GetPixel(lx, y);
+
+                    //set mirror pixel value
+                    mimg.SetPixel(lx, y, p);
+                    mimg.SetPixel(rx, y, p);
+                }
+            }
+            // Return the result.
+            return mimg;
+        }
+
+        private void show_mono_color_picture()
+        {
+            //image path
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            //read image
+            Bitmap bmp = new Bitmap(filename);
+
+            //load original image in picturebox1
+            //pictureBox1.Image = Image.FromFile(filename);
+
+            //get image dimension
+            int width = bmp.Width;
+            int height = bmp.Height;
+
+            //3 bitmap for red green blue image
+            Bitmap rbmp = new Bitmap(bmp);
+            Bitmap gbmp = new Bitmap(bmp);
+            Bitmap bbmp = new Bitmap(bmp);
+
+            //red green blue image
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    //get pixel value
+                    Color p = bmp.GetPixel(x, y);
+
+                    //extract ARGB value from p
+                    int a = p.A;
+                    int r = p.R;
+                    int g = p.G;
+                    int b = p.B;
+
+                    //set red image pixel
+                    rbmp.SetPixel(x, y, Color.FromArgb(a, r, 0, 0));
+
+                    //set green image pixel
+                    gbmp.SetPixel(x, y, Color.FromArgb(a, 0, g, 0));
+
+                    //set blue image pixel
+                    bbmp.SetPixel(x, y, Color.FromArgb(a, 0, 0, b));
+                }
+            }
+
+            //load red image in picturebox7
+            pictureBox7.Image = rbmp;
+
+            //load green image in picturebox8
+            pictureBox8.Image = gbmp;
+
+            //load blue image in picturebox9
+            pictureBox9.Image = bbmp;
+        }
 
     }
 }

@@ -190,19 +190,6 @@ namespace vcs_test_all_01
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //測試防火牆
-            // Create the firewall type.
-            Type FWManagerType = Type.GetTypeFromProgID("HNetCfg.FwMgr");
-
-            // Use the firewall type to create a firewall manager object.
-            dynamic FWManager = Activator.CreateInstance(FWManagerType);
-
-            // Check the status of the firewall.
-
-            if (FWManager.LocalPolicy.CurrentProfile.FirewallEnabled == true)
-                richTextBox1.Text += "防火牆已開啟\n";
-            else
-                richTextBox1.Text += "防火牆未開啟\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -272,40 +259,6 @@ namespace vcs_test_all_01
 
         private void button7_Click(object sender, EventArgs e)
         {
-            String host;
-
-            host = "www.google.com";
-
-            if (IsInternetConnected(host))
-                richTextBox1.Text += host + "\t連線OK\n";
-            else
-                richTextBox1.Text += host+ "\t無法連線\n";
-
-            host = "http://csharphelper.com/";
-
-            if (IsInternetConnected(host))
-                richTextBox1.Text += host + "\t連線OK\n";
-            else
-                richTextBox1.Text += host + "\t無法連線\n";
-        }
-
-        // Return true if a ping to Google works.
-        private bool IsInternetConnected(String host)
-        {
-            return IsInternetConnected(host, 1000);
-        }
-        private bool IsInternetConnected(String host, int timeout)
-        {
-            try
-            {
-                Ping ping = new Ping();
-                PingReply reply = ping.Send(host, timeout);
-                return (reply.Status == IPStatus.Success);
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -330,52 +283,8 @@ namespace vcs_test_all_01
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string url = "file:///C:/_git/vcs/_1.data/_html/My_Link.html";
-            // Get the response.
-            try
-            {
-                // Get the web response.
-                string result = GetWebResponse(url);
-                //Console.WriteLine(result.Replace("\\r\\n", "\r\n"));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Read Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+
         }
-
-        // Get a web response.
-        private string GetWebResponse(string url)
-        {
-            // Make a WebClient.
-            WebClient web_client = new WebClient();
-
-            // Get the indicated URL.
-            Stream response = web_client.OpenRead(url);
-
-            // Read the result.
-            using (StreamReader stream_reader = new StreamReader(response))
-            {
-                // Get the results.
-                string result = stream_reader.ReadToEnd();
-
-                // Close the stream reader and its underlying stream.
-                stream_reader.Close();
-
-                // Return the result.
-
-                richTextBox1.Text += result + "\n";
-
-                string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
-                StreamWriter sw = File.CreateText(filename);
-                sw.Write(result);
-                sw.Close();
-
-                return result;
-            }
-        }
-
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -497,39 +406,8 @@ namespace vcs_test_all_01
 
         private void button12_Click(object sender, EventArgs e)
         {
-            // Download and display the text file.
-            richTextBox1.Clear();
-            richTextBox1.Text += "取得網頁純文字檔...\n";
-
-            const string url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
-            richTextBox1.Text += GetTextFile(url);
-            //richTextBox1.Select(0, 500);  //useless
         }
 
-        // Get the text file at a given URL.
-        private string GetTextFile(string url)
-        {
-            try
-            {
-                url = url.Trim();
-                if (!url.ToLower().StartsWith("http")) url = "http://" + url;
-                WebClient web_client = new WebClient();
-                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
-                StreamReader reader = new StreamReader(image_stream);
-                string result = reader.ReadToEnd();
-                reader.Close();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error downloading file " +
-                    url + '\n' + ex.Message,
-                    "Download Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            return "";
-        }
 
         private void button13_Click(object sender, EventArgs e)
         {
