@@ -325,7 +325,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(100, 40);
             this.button26.TabIndex = 42;
-            this.button26.Text = "建立8位灰度影像";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -336,7 +335,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(100, 40);
             this.button25.TabIndex = 41;
-            this.button25.Text = "二值化圖片";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

@@ -58,6 +58,8 @@ namespace vcs_PictureGray
             PictureToNegative();
             PictureToMirror();
             PictureToRainbow();
+            PictureToBinary();
+            PictureTo8BitGrayScale();
 
             // Convert the image into red, green, and blue monochrome.
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
@@ -176,8 +178,8 @@ namespace vcs_PictureGray
             label15.Text = "鏡像圖片";
             label16.Text = "";
             label17.Text = "彩虹化圖片";
-            label18.Text = "";
-            label19.Text = "";
+            label18.Text = "二值化圖片";
+            label19.Text = "8位灰度影像";
             label20.Text = "";
         }
 
@@ -883,7 +885,7 @@ namespace vcs_PictureGray
         private void PictureToRainbow()
         {
             richTextBox1.Text += "PictureToRainbow\n";
-            pictureBox17.Image = ToRainbow(pictureBox1.Image);
+            pictureBox17.Image = ToRainbow(pictureBox11.Image);
         }
 
         private Bitmap ToRainbow(Image image)
@@ -937,5 +939,275 @@ namespace vcs_PictureGray
             }
             return bmp;
         }
+
+        //二值化圖片 ST
+        private void PictureToBinary()
+        {
+            //二值化圖片
+            richTextBox1.Text += "PictureToBinary\n";
+            pictureBox18.Image = OtsuThreshold(new Bitmap("c:\\______test_files\\picture1.jpg"));
+        }
+
+        #region 二值化
+        #region Otsu閾值法二值化模組
+        /// <summary>   
+        /// Otsu閾值   
+        /// </summary>   
+        /// <param name="b">點陣圖流</param>   
+        /// <returns></returns>   
+        public Bitmap OtsuThreshold(Bitmap bitmap)
+        {
+
+            // 影象灰度化   
+            // b = Gray(b);   
+            int width = bitmap.Width;
+            int height = bitmap.Height;
+            byte threshold = 0;
+            int[] hist = new int[256];
+
+            int AllPixelNumber = 0, PixelNumberSmall = 0, PixelNumberBig = 0;
+
+            double MaxValue, AllSum = 0, SumSmall = 0, SumBig, ProbabilitySmall, ProbabilityBig, Probability;
+            BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+
+            unsafe
+            {
+                byte* p = (byte*)bmpData.Scan0;
+                int offset = bmpData.Stride - width * 4;
+                for (int j = 0; j < height; j++)
+                {
+                    for (int i = 0; i < width; i++)
+                    {
+                        hist[p[0]]++;
+                        p += 4;
+                    }
+                    p += offset;
+                }
+                bitmap.UnlockBits(bmpData);
+            }
+            //計算灰度為I的畫素出現的概率   
+            for (int i = 0; i < 256; i++)
+            {
+                AllSum += i * hist[i];     //   質量矩   
+                AllPixelNumber += hist[i];  //  質量       
+            }
+            MaxValue = -1.0;
+            for (int i = 0; i < 256; i++)
+            {
+                PixelNumberSmall += hist[i];
+                PixelNumberBig = AllPixelNumber - PixelNumberSmall;
+                if (PixelNumberBig == 0)
+                {
+                    break;
+                }
+
+                SumSmall += i * hist[i];
+                SumBig = AllSum - SumSmall;
+                ProbabilitySmall = SumSmall / PixelNumberSmall;
+                ProbabilityBig = SumBig / PixelNumberBig;
+                Probability = PixelNumberSmall * ProbabilitySmall * ProbabilitySmall + PixelNumberBig * ProbabilityBig * ProbabilityBig;
+                if (Probability > MaxValue)
+                {
+                    MaxValue = Probability;
+                    threshold = (byte)i;
+                }
+            }
+            this.Threshoding(bitmap, threshold);
+            bitmap = twoBit(bitmap);
+            return bitmap;
+
+        }
+        #endregion
+
+        #region      固定閾值法二值化模組
+        public Bitmap Threshoding(Bitmap b, byte threshold)
+        {
+            int width = b.Width;
+            int height = b.Height;
+            BitmapData data = b.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            unsafe
+            {
+                byte* p = (byte*)data.Scan0;
+                int offset = data.Stride - width * 4;
+                byte R, G, B, gray;
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        R = p[2];
+                        G = p[1];
+                        B = p[0];
+                        gray = (byte)((R * 19595 + G * 38469 + B * 7472) >> 16);
+                        if (gray >= threshold)
+                        {
+                            p[0] = p[1] = p[2] = 255;
+                        }
+                        else
+                        {
+                            p[0] = p[1] = p[2] = 0;
+                        }
+                        p += 4;
+                    }
+                    p += offset;
+                }
+                b.UnlockBits(data);
+                return b;
+
+            }
+
+        }
+        #endregion
+
+
+        #region 建立1點陣圖像
+
+        /// <summary>
+        /// 建立1點陣圖像
+        /// </summary>
+        /// <param name="srcBitmap"></param>
+        /// <returns></returns>
+        public Bitmap twoBit(Bitmap srcBitmap)
+        {
+            int midrgb = System.Drawing.Color.FromArgb(128, 128, 128).ToArgb();
+            int stride;//簡單公式((width/8)+3)&(~3)
+            stride = (srcBitmap.Width % 8) == 0 ? (srcBitmap.Width / 8) : (srcBitmap.Width / 8) + 1;
+            stride = (stride % 4) == 0 ? stride : ((stride / 4) + 1) * 4;
+            int k = srcBitmap.Height * stride;
+            byte[] buf = new byte[k];
+            int x = 0, ab = 0;
+            for (int j = 0; j < srcBitmap.Height; j++)
+            {
+                k = j * stride;//因影象寬度不同、有的可能有填充位元組需要跳越
+                x = 0;
+                ab = 0;
+                for (int i = 0; i < srcBitmap.Width; i++)
+                {
+                    //從灰度變單色（下法如果直接從彩色變單色效果不太好，不過反相也可以在這裡控制）
+                    if ((srcBitmap.GetPixel(i, j)).ToArgb() > midrgb)
+                    {
+                        ab = ab * 2 + 1;
+                    }
+                    else
+                    {
+                        ab = ab * 2;
+                    }
+                    x++;
+                    if (x == 8)
+                    {
+                        buf[k++] = (byte)ab;//每位元組賦值一次，陣列buf中儲存的是十進位制。
+                        ab = 0;
+                        x = 0;
+                    }
+                }
+                if (x > 0)
+                {
+                    //迴圈實現：剩餘有效資料不滿1位元組的情況下須把它們移往位元組的高位部分
+                    for (int t = x; t < 8; t++) ab = ab * 2;
+                    buf[k++] = (byte)ab;
+                }
+            }
+            int width = srcBitmap.Width;
+            int height = srcBitmap.Height;
+            Bitmap dstBitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format1bppIndexed);
+            BitmapData dt = dstBitmap.LockBits(new Rectangle(0, 0, dstBitmap.Width, dstBitmap.Height), ImageLockMode.ReadWrite, dstBitmap.PixelFormat);
+            Marshal.Copy(buf, 0, dt.Scan0, buf.Length);
+            dstBitmap.UnlockBits(dt);
+            return dstBitmap;
+        }
+
+        #endregion
+
+        #endregion
+        //二值化圖片 SP
+
+
+        //建立8位灰度影像 ST
+        private void PictureTo8BitGrayScale()
+        {
+            richTextBox1.Text += "PictureTo8BitGrayScale\n";
+            pictureBox19.Image = RGB2Gray(new Bitmap("c:\\______test_files\\picture1.jpg"));
+        }
+
+        /// 建立8位灰度影像
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public static Bitmap CreateGrayscaleImage(int width, int height)
+        {
+            // create new image
+            Bitmap bmp = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+            // set palette to grayscale
+            SetGrayscalePalette(bmp);
+            // return new image
+            return bmp;
+        }
+
+        ///<summary>
+        /// Set pallete of the image to grayscale
+        ///</summary>
+        public static void SetGrayscalePalette(Bitmap srcImg)
+        {
+            // check pixel format
+            if (srcImg.PixelFormat != System.Drawing.Imaging.PixelFormat.Format8bppIndexed)
+                throw new ArgumentException();
+            // get palette
+            ColorPalette cp = srcImg.Palette;
+            // init palette
+            for (int i = 0; i < 256; i++)
+            {
+                cp.Entries[i] = System.Drawing.Color.FromArgb(i, i, i);
+            }
+            srcImg.Palette = cp;
+        }
+
+        /// <summary>
+        /// 轉為灰度影象，位深度也改變
+        /// </summary>
+        /// <param name="srcBitmap"></param>
+        /// <returns></returns>
+        public static Bitmap RGB2Gray(Bitmap srcBitmap)
+        {
+            int wide = srcBitmap.Width;
+            int height = srcBitmap.Height;
+            Rectangle rect = new Rectangle(0, 0, wide, height);
+            //將Bitmap鎖定到系統記憶體中,獲得BitmapData
+            BitmapData srcBmData = srcBitmap.LockBits(rect, ImageLockMode.ReadWrite, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            //建立Bitmap
+            Bitmap dstBitmap = CreateGrayscaleImage(wide, height);//這個函式在後面有定義
+            BitmapData dstBmData = dstBitmap.LockBits(rect, ImageLockMode.ReadWrite, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
+            //點陣圖中第一個畫素資料的地址。它也可以看成是點陣圖中的第一個掃描行
+            System.IntPtr srcPtr = srcBmData.Scan0;
+            System.IntPtr dstPtr = dstBmData.Scan0;
+            //將Bitmap物件的資訊存放到byte陣列中
+            int src_bytes = srcBmData.Stride * height;
+            byte[] srcValues = new byte[src_bytes];
+            int dst_bytes = dstBmData.Stride * height;
+            byte[] dstValues = new byte[dst_bytes];
+            //複製GRB資訊到byte陣列
+            System.Runtime.InteropServices.Marshal.Copy(srcPtr, srcValues, 0, src_bytes);
+            System.Runtime.InteropServices.Marshal.Copy(dstPtr, dstValues, 0, dst_bytes);
+            //根據Y=0.299*R+0.114*G+0.587B,Y為亮度
+            for (int i = 0; i < height; i++)
+                for (int j = 0; j < wide; j++)
+                {
+                    //只處理每行中影象畫素資料,捨棄未用空間
+                    //注意點陣圖結構中RGB按BGR的順序儲存
+                    int k = 3 * j;
+                    byte temp = (byte)(srcValues[i * srcBmData.Stride + k + 2] * .299 + srcValues[i * srcBmData.Stride + k + 1] * .587 + srcValues[i * srcBmData.Stride + k] * .114);
+                    dstValues[i * dstBmData.Stride + j] = temp;
+                }
+            System.Runtime.InteropServices.Marshal.Copy(dstValues, 0, dstPtr, dst_bytes);
+            //解鎖點陣圖
+            srcBitmap.UnlockBits(srcBmData);
+            dstBitmap.UnlockBits(dstBmData);
+            return dstBitmap;
+        }
+
+
+
+        //建立8位灰度影像 SP
+
     }
 }
