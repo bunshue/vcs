@@ -36,6 +36,12 @@ namespace vcs_PictureGray
             pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
+            //pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox18.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox19.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox20.SizeMode = PictureBoxSizeMode.Zoom;
 
             show_item_location();
 
@@ -51,6 +57,7 @@ namespace vcs_PictureGray
             PictureToMonochrome();
             PictureToNegative();
             PictureToMirror();
+            PictureToRainbow();
 
             // Convert the image into red, green, and blue monochrome.
             pictureBox7.Image = ScaleColorComponents(pictureBox1.Image, 1, 0, 0, 1);
@@ -78,14 +85,7 @@ namespace vcs_PictureGray
             dx = 190;
             dy = 50;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int W = 250;
@@ -107,40 +107,57 @@ namespace vcs_PictureGray
             pictureBox11.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
-            pictureBox14.Size = new Size(W * 2, H);
+            pictureBox15.Size = new Size(W * 2, H);
+            pictureBox17.Size = new Size(W, H);
+            pictureBox18.Size = new Size(W, H);
+            pictureBox19.Size = new Size(W, H);
+            pictureBox20.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox9.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            pictureBox10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox11.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox6.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            pictureBox7.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+
+            pictureBox8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox10.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox11.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox12.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            pictureBox13.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            pictureBox14.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+
+            pictureBox15.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            //pictureBox16.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox18.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox19.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            pictureBox20.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
             label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
             label4.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
             label5.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
+            label6.Location = new Point(x_st + dx * 5, y_st + dy * 0 - 25);
+            label7.Location = new Point(x_st + dx * 6, y_st + dy * 0 - 25);
 
-            label6.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
-            label7.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 25);
-            label8.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 25);
-            label9.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 25);
-            label10.Location = new Point(x_st + dx * 4, y_st + dy * 1 - 25);
+            label8.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
+            label9.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 25);
+            label10.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 25);
+            label11.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 25);
+            label12.Location = new Point(x_st + dx * 4, y_st + dy * 1 - 25);
+            label13.Location = new Point(x_st + dx * 5, y_st + dy * 1 - 25);
+            label14.Location = new Point(x_st + dx * 6, y_st + dy * 1 - 25);
 
-            label11.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 25);
-            label12.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 25);
-            label13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 25);
-            label14.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 25);
-            label15.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 25);
+            label15.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 25);
+            label16.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 25);
+            label17.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 25);
+            label18.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 25);
+            label19.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 25);
+            label20.Location = new Point(x_st + dx * 5, y_st + dy * 2 - 25);
 
             label1.Text = "原圖";
             label2.Text = "Sepia";
@@ -155,15 +172,13 @@ namespace vcs_PictureGray
             label11.Text = "原圖";
             label12.Text = "灰階 Grayscale";
             label13.Text = "灰階 Average";
-            label14.Text = "鏡像圖片";
-            label15.Text = "";
-
-
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-
+            label14.Text = "";
+            label15.Text = "鏡像圖片";
+            label16.Text = "";
+            label17.Text = "彩虹化圖片";
+            label18.Text = "";
+            label19.Text = "";
+            label20.Text = "";
         }
 
         private void PictureToSepia1()
@@ -289,15 +304,6 @@ namespace vcs_PictureGray
                 }
             }
             return bmp;
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
         }
 
         private void PictureToGray1()
@@ -742,21 +748,6 @@ namespace vcs_PictureGray
             richTextBox1.Clear();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void PictureToNegative()
         {
             richTextBox1.Text += "PictureToNegative\n";
@@ -803,7 +794,7 @@ namespace vcs_PictureGray
         private void PictureToMirror()
         {
             richTextBox1.Text += "PictureToMirror\n";
-            pictureBox14.Image = ToMirror(pictureBox1.Image);
+            pictureBox15.Image = ToMirror(pictureBox1.Image);
         }
 
         private Bitmap ToMirror(Image image)
@@ -889,5 +880,62 @@ namespace vcs_PictureGray
             pictureBox9.Image = bbmp;
         }
 
+        private void PictureToRainbow()
+        {
+            richTextBox1.Text += "PictureToRainbow\n";
+            pictureBox17.Image = ToRainbow(pictureBox1.Image);
+        }
+
+        private Bitmap ToRainbow(Image image)
+        {
+            //get image dimension
+            int width = image.Width;
+            int height = image.Height;
+
+            Bitmap bmp = new Bitmap(width, height);
+            using (Graphics gr = Graphics.FromImage(bmp))
+            {
+                // Define target colors.
+                Color[] color =
+                {
+                    //Color.Red, Color.Orange, Color.Yellow,
+                    //Color.Green, Color.Blue, Color.Indigo,
+                    //Color.Violet,
+
+                    Color.Red, Color.OrangeRed, Color.Yellow,
+                    Color.Green, Color.Blue, Color.Indigo,
+                    Color.Fuchsia,
+                };
+                const float scale = 2.0f;
+
+                // Draw.
+                for (int i = 0; i < color.Length; i++)
+                {
+                    // Create the ColorMatrix.
+                    ColorMatrix cm = new ColorMatrix(new float[][]
+                    {
+                        new float[] {color[i].R / 255f * scale, 0, 0, 0, 0},
+                        new float[] {0, color[i].G / 255f * scale, 0, 0, 0},
+                        new float[] {0, 0, color[i].B / 255f * scale, 0, 0},
+                        new float[] {0, 0, 0, 1, 0},
+                        new float[] {0, 0, 0, 0, 1},
+                    });
+                    ImageAttributes attr = new ImageAttributes();
+                    attr.SetColorMatrix(cm);
+
+                    // Draw the next part of the image.
+                    int x = (int)(i * image.Width / color.Length);
+                    Point[] points =
+                    {
+                        new Point(x, 0),
+                        new Point(width, 0),
+                        new Point(x, height),
+                    };
+                    Rectangle rect = new Rectangle(x, 0, width - x, height);
+                    gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attr);
+                }
+            }
+            return bmp;
+        }
     }
 }
