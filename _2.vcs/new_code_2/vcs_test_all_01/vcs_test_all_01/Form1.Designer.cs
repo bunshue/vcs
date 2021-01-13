@@ -53,7 +53,6 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -62,7 +61,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(172, 53);
             this.button1.TabIndex = 0;
-            this.button1.Text = "get hdd serial";
+            this.button1.Text = "WMI get hdd serial";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -89,7 +88,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(172, 53);
             this.button3.TabIndex = 3;
-            this.button3.Text = "列出全球時區";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -108,7 +106,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(172, 53);
             this.button5.TabIndex = 5;
-            this.button5.Text = "尋找13號星期五";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -118,7 +115,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(172, 53);
             this.button6.TabIndex = 6;
-            this.button6.Text = "一段時間以後";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -137,7 +133,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(172, 53);
             this.button8.TabIndex = 8;
-            this.button8.Text = "2021年距今還有多久";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -156,7 +151,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(172, 53);
             this.button10.TabIndex = 10;
-            this.button10.Text = "計算字數";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -166,7 +160,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(172, 53);
             this.button11.TabIndex = 11;
-            this.button11.Text = "分析文章";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -194,7 +187,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(172, 53);
             this.button14.TabIndex = 13;
-            this.button14.Text = "把這個檔案的註解抓出來";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -222,7 +214,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(172, 53);
             this.button16.TabIndex = 16;
-            this.button16.Text = "取得系統的時區資訊";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -284,21 +275,11 @@
             this.button23.TabIndex = 23;
             this.button23.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(382, 89);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(172, 27);
-            this.comboBox1.TabIndex = 24;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 678);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
@@ -359,7 +340,6 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
