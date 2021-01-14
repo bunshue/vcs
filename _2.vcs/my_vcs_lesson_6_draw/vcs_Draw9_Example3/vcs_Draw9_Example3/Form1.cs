@@ -281,6 +281,42 @@ namespace vcs_Draw9_Example3
 
         private void button2_Click(object sender, EventArgs e)
         {
+            DrawTranslucentText();
+        }
+
+        void DrawTranslucentText()
+        {
+            string filename = "C:\\______test_files\\picture1.jpg";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            Bitmap bm = new Bitmap(filename);
+
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                using (StringFormat string_format = new StringFormat())
+                {
+                    string_format.Alignment = StringAlignment.Center;
+
+                    int dy = (int)(gr.MeasureString("X", this.Font).Height * 1.5);
+                    int x = bm.Width / 2;
+                    int y = 30;
+
+                    for (int opacity = 20; opacity <= 80; opacity += 10)
+                    {
+                        string txt = "透明度 " + opacity.ToString();
+                        using (Brush brush = new SolidBrush(Color.FromArgb(opacity, 0, 0, 0)))
+                        {
+                            gr.DrawString(txt, this.Font, brush, x, y, string_format);
+                        }
+                        using (Brush brush = new SolidBrush(Color.FromArgb(opacity, 255, 255, 255)))
+                        {
+                            gr.DrawString(txt, this.Font, brush, x - 2, y - 2, string_format);
+                        }
+                        y += dy;
+                    }
+                }
+                pictureBox1.Image = bm;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

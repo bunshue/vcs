@@ -100,5 +100,38 @@ namespace my_vcs_14_comport_try_catch_finally
         {
             MessageBox.Show("從my_vcs_03改來，try-catch-finally範例，測試comport連接錯誤狀況");
         }
+
+        // Perform the calculation.
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            // Clear the result (in case the calculation fails).
+            txtResult.Clear();
+
+            try
+            {
+                // Perform the operations that might fail.
+                int x = int.Parse(txtX.Text);
+                int y = int.Parse(txtY.Text);
+                float result = x / y;
+                txtResult.Text = result.ToString();
+            }
+            catch (FormatException)
+            {
+                // A formatting error occurred.
+                // Report the error to the user.
+                richTextBox2.Text += "數值錯誤\n";
+            }
+            catch (Exception ex)
+            {
+                // Some other error occurred.
+                // Report the error to the user.
+                richTextBox2.Text += "計算錯誤\t原因 : " + ex + "\n";
+                richTextBox2.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
+            }
+            finally
+            {
+                richTextBox2.Text += "計算結束\n";
+            }
+        }
     }
 }

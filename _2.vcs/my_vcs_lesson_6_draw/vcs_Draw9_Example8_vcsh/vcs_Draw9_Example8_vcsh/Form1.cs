@@ -385,6 +385,7 @@ namespace vcs_Draw9_Example8_vcsh
             }
         }
 
+        //把字體旋轉90度 ST
         private void pictureBox8_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
@@ -444,7 +445,7 @@ namespace vcs_Draw9_Example8_vcsh
             // Restore the graphics state.
             gr.Restore(state);
         }
-
+        //把字體旋轉90度 SP
 
         #region pictureBox3齒輪運轉圖
 

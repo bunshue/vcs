@@ -138,38 +138,19 @@ namespace vcs_Draw9_Example6_vcsh_text
             int dy;
 
             //button
-            x_st = 1050;
+            x_st = 1400;
             y_st = 10;
             dx = 130;
             dy = 55;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
             bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
             bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
@@ -191,6 +172,7 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox_rotate_brush.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox_image_string.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_filled_text.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 150);
+            pictureBox_rainbow_text.Location = new Point(x_st + dx * 2 + 450, y_st + dy * 1 + 150);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -974,6 +956,73 @@ namespace vcs_Draw9_Example6_vcsh_text
 
         }
         #endregion
+
+
+        //彩色文字 ST
+        private void pictureBox_rainbow_text_Paint(object sender, PaintEventArgs e)
+        {
+            const string Txt = "群曜醫電";
+
+            // Make the result smoother.
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            // Make a font.
+            using (Font the_font = new Font("Times New Roman", 80, FontStyle.Bold, GraphicsUnit.Pixel))
+            {
+                // Get the font's metrics.
+                FontInfo font_info = new FontInfo(e.Graphics, the_font);
+
+                // See how big the text is.
+                SizeF text_size = e.Graphics.MeasureString(Txt, the_font);
+                int x0 = (int)((this.pictureBox_rainbow_text.ClientSize.Width - text_size.Width) / 2);
+                int y0 = (int)((this.pictureBox_rainbow_text.ClientSize.Height - text_size.Height) / 2);
+
+                // Get the Y coordinates that the brush should span.
+                int brush_y0 = (int)(y0 + font_info.InternalLeadingPixels);
+                int brush_y1 = (int)(y0 + font_info.AscentPixels);
+
+                // Fudge the brush down a smidgen.
+                brush_y0 += (int)(font_info.InternalLeadingPixels);
+                brush_y1 += 5;
+
+                // Make a brush to color the area.
+                using (LinearGradientBrush the_brush = new LinearGradientBrush(
+                    new Point(x0, brush_y0),
+                    new Point(x0, brush_y1),
+                    Color.Red, Color.Violet))
+                {
+                    Color[] colors = new Color[]
+                    {
+                        Color.FromArgb(255, 0, 0),
+                        Color.FromArgb(255, 0, 0),
+                        Color.FromArgb(255, 128, 0),
+                        Color.FromArgb(255, 255, 0),
+                        Color.FromArgb(0, 255, 0),
+                        Color.FromArgb(0, 255, 128),
+                        Color.FromArgb(0, 255, 255),
+                        Color.FromArgb(0, 128, 255),
+                        Color.FromArgb(0, 0, 255),
+                        Color.FromArgb(0, 0, 255),
+                    };
+                    int num_colors = colors.Length;
+                    float[] blend_positions = new float[num_colors];
+                    for (int i = 0; i < num_colors; i++)
+                    {
+                        blend_positions[i] = i / (num_colors - 1f);
+                    }
+
+                    ColorBlend color_blend = new ColorBlend();
+                    color_blend.Colors = colors;
+                    color_blend.Positions = blend_positions;
+                    the_brush.InterpolationColors = color_blend;
+
+                    // Draw the text.
+                    e.Graphics.DrawString(Txt, the_font, the_brush, x0, y0);
+                }
+            }
+        }
+
+        //彩色文字 SP
 
     }
 }

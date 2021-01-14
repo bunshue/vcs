@@ -40,6 +40,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtResult = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtY = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnCalculate = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -66,7 +76,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(37, 97);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(637, 535);
+            this.richTextBox1.Size = new System.Drawing.Size(637, 250);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
@@ -135,11 +145,101 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.richTextBox2);
+            this.groupBox1.Controls.Add(this.txtResult);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txtY);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.txtX);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.btnCalculate);
+            this.groupBox1.Location = new System.Drawing.Point(37, 364);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(637, 281);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "try-catch-finally";
+            // 
+            // txtResult
+            // 
+            this.txtResult.Location = new System.Drawing.Point(94, 156);
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(124, 22);
+            this.txtResult.TabIndex = 13;
+            this.txtResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(59, 159);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 12);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "X/Y:";
+            // 
+            // txtY
+            // 
+            this.txtY.Location = new System.Drawing.Point(187, 83);
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(62, 22);
+            this.txtY.TabIndex = 11;
+            this.txtY.Text = "0";
+            this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(164, 86);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 12);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Y:";
+            // 
+            // txtX
+            // 
+            this.txtX.Location = new System.Drawing.Point(50, 83);
+            this.txtX.Name = "txtX";
+            this.txtX.Size = new System.Drawing.Size(62, 22);
+            this.txtX.TabIndex = 9;
+            this.txtX.Text = "ten";
+            this.txtX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "X:";
+            // 
+            // btnCalculate
+            // 
+            this.btnCalculate.Location = new System.Drawing.Point(101, 117);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(75, 21);
+            this.btnCalculate.TabIndex = 7;
+            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.UseVisualStyleBackColor = true;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(280, 21);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(342, 254);
+            this.richTextBox2.TabIndex = 14;
+            this.richTextBox2.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 657);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -152,6 +252,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "my_vcs_14_comport_try_catch_finally";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +271,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TextBox txtResult;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtY;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtX;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnCalculate;
     }
 }
 
