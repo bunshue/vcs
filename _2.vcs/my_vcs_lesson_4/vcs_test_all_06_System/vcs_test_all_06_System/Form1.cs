@@ -40,6 +40,17 @@ namespace vcs_test_all_06_System
             show_item_location();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int i = 0;
+            richTextBox1.Text += "啟動程式, 參數:\n";
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 項 : " + arg + "\n";
+                i++;
+            }
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -111,6 +122,7 @@ namespace vcs_test_all_06_System
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             button45.Location = new Point(x_st + dx * 1, y_st + dy * 11);
             button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            label6.Location = new Point(x_st + dx * 3, y_st + dy * 11 + 10);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);

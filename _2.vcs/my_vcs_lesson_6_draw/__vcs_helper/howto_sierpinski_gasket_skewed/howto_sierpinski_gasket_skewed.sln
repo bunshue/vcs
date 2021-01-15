@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_sierpinski_gasket_skewed", "howto_sierpinski_gasket_skewed.csproj", "{433B3817-4BC9-4C4F-925F-AF8BE00CBFAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{433B3817-4BC9-4C4F-925F-AF8BE00CBFAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433B3817-4BC9-4C4F-925F-AF8BE00CBFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433B3817-4BC9-4C4F-925F-AF8BE00CBFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433B3817-4BC9-4C4F-925F-AF8BE00CBFAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

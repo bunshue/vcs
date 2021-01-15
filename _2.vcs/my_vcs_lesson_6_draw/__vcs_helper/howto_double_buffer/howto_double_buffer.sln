@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_double_buffer", "howto_double_buffer.csproj", "{B7555A6D-23AF-41D5-B6F2-E482B760BE9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7555A6D-23AF-41D5-B6F2-E482B760BE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7555A6D-23AF-41D5-B6F2-E482B760BE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7555A6D-23AF-41D5-B6F2-E482B760BE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7555A6D-23AF-41D5-B6F2-E482B760BE9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -94,6 +94,7 @@
             this.btnLogOff = new System.Windows.Forms.Button();
             this.btnReboot = new System.Windows.Forms.Button();
             this.btnShutdown = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -788,11 +789,22 @@
             this.btnShutdown.UseVisualStyleBackColor = true;
             this.btnShutdown.Click += new System.EventHandler(this.btnShutdown_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(635, 484);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(282, 24);
+            this.label6.TabIndex = 76;
+            this.label6.Text = "可以輸入command line參數";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1307, 614);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.bt_memory);
@@ -852,6 +864,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -925,6 +938,7 @@
         private System.Windows.Forms.Button btnLogOff;
         private System.Windows.Forms.Button btnReboot;
         private System.Windows.Forms.Button btnShutdown;
+        private System.Windows.Forms.Label label6;
     }
 }
 

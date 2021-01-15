@@ -59,10 +59,12 @@ namespace vcs_test_all_07_Printer
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            //button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            groupBox_control.Location = new Point(x_st + dx * 0, y_st + dy * 13);
 
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -578,7 +580,8 @@ namespace vcs_test_all_07_Printer
 
 
         #region 預覽列印 Star
-        private void button7_Click(object sender, EventArgs e)
+
+        private void bt_print_star_Click(object sender, EventArgs e)
         {
             //預覽列印 Star
             printPreviewDialog_star.ShowDialog();
@@ -832,6 +835,11 @@ namespace vcs_test_all_07_Printer
         }
 
         #endregion
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -1454,6 +1462,103 @@ namespace vcs_test_all_07_Printer
             if ((data == null) || (data.Value == null)) return "";
             return data.Value.ToString();
         }
+
+
+        // At design time set:
+        //      printPreviewDialog_control.Document = printDocument_control
+
+        // Display a print preview.
+        private void bt_print_control_Click(object sender, EventArgs e)
+        {
+            // Set the size.
+            Form frm = printPreviewDialog_control as Form;
+            if (chkMaximized.Checked)
+            {
+                // Display maximized.
+                frm.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                // Make the client area 400 x 400.
+                frm.WindowState = FormWindowState.Normal;
+                frm.StartPosition = FormStartPosition.CenterScreen;
+                printPreviewDialog_control.ClientSize = new Size(400, 400);
+            }
+
+            // Set the dialog's title.
+            frm.Text = "Numbers";
+
+            // Set the zoom level.
+            if (chkZoom100.Checked)
+            {
+                // 100%.
+                printPreviewDialog_control.PrintPreviewControl.Zoom = 1.0;
+            }
+            else
+            {
+                // Auto.
+                printPreviewDialog_control.PrintPreviewControl.AutoZoom = true;
+            }
+
+            // Set anti-aliasing.
+            printPreviewDialog_control.PrintPreviewControl.UseAntiAlias = chkAntiAlias.Checked;
+
+            // Set other properties.
+            printPreviewDialog_control.PrintPreviewControl.Columns = 3;
+            printPreviewDialog_control.PrintPreviewControl.Rows = 3;
+            printPreviewDialog_control.PrintPreviewControl.BackColor = Color.Orange; // Background color.
+            printPreviewDialog_control.PrintPreviewControl.ForeColor = Color.Yellow; // Paper color.
+            printPreviewDialog_control.PrintPreviewControl.StartPage = 3;            // Page 3 in the upper left.
+
+            // Display the dialog.
+            printPreviewDialog_control.ShowDialog();
+
+        }
+
+
+        // Print the document's pages.
+        private int m_NextPage = 0;
+        private void printDocument_control_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            // Draw the margins.
+            using (Pen dashed_pen = new Pen(Color.Red, 5))
+            {
+                dashed_pen.DashPattern = new float[] { 10, 10 };
+                e.Graphics.DrawRectangle(dashed_pen, e.MarginBounds);
+            }
+
+            // Draw an ellipse.
+            e.Graphics.DrawEllipse(Pens.Blue, e.MarginBounds);
+
+            // Draw the page number.
+            // Center it inside the margins.
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+
+            using (Font the_font = new Font("Times New Roman", 200, FontStyle.Bold))
+            {
+                using (Brush the_brush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(String.Format("{0}", m_NextPage + 1),
+                        the_font, the_brush, e.MarginBounds, sf);
+                }
+            }
+
+            // Next time print the next page.
+            m_NextPage += 1;
+
+            // We have more pages if wee have not yet printed page 10.
+            e.HasMorePages = (m_NextPage <= 10);
+        }
+
+        // Get ready to print.
+        private void printDocument_control_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            // Start with page 0.
+            m_NextPage = 0;
+        }
+
 
 
     }

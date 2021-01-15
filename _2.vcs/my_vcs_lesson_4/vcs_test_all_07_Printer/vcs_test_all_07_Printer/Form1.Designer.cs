@@ -33,7 +33,6 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -94,12 +93,22 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cboPrinters = new System.Windows.Forms.ComboBox();
+            this.bt_print_star = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.printDocument_control = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog_control = new System.Windows.Forms.PrintPreviewDialog();
+            this.groupBox_control = new System.Windows.Forms.GroupBox();
+            this.bt_print_control = new System.Windows.Forms.Button();
+            this.chkAntiAlias = new System.Windows.Forms.CheckBox();
+            this.chkZoom100 = new System.Windows.Forms.CheckBox();
+            this.chkMaximized = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox_control.SuspendLayout();
             this.SuspendLayout();
             // 
             // button0
@@ -116,7 +125,7 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(12, 548);
+            this.button9.Location = new System.Drawing.Point(12, 439);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(194, 45);
             this.button9.TabIndex = 35;
@@ -145,21 +154,10 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(40, 95);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(119, 36);
-            this.button7.TabIndex = 31;
-            this.button7.Text = "預覽列印 Star";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(12, 492);
+            this.button8.Location = new System.Drawing.Point(12, 388);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(194, 45);
             this.button8.TabIndex = 30;
@@ -403,14 +401,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_print_star);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtRadius);
             this.groupBox1.Controls.Add(this.nudPoints);
             this.groupBox1.Controls.Add(this.nudSkip);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Location = new System.Drawing.Point(12, 327);
+            this.groupBox1.Location = new System.Drawing.Point(12, 485);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -421,7 +419,7 @@
             // 
             // pictureBox_star
             // 
-            this.pictureBox_star.Location = new System.Drawing.Point(543, 422);
+            this.pictureBox_star.Location = new System.Drawing.Point(543, 476);
             this.pictureBox_star.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox_star.Name = "pictureBox_star";
             this.pictureBox_star.Size = new System.Drawing.Size(224, 212);
@@ -568,7 +566,7 @@
             this.groupBox2.Controls.Add(this.txtName);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.cboPrinters);
-            this.groupBox2.Location = new System.Drawing.Point(222, 422);
+            this.groupBox2.Location = new System.Drawing.Point(222, 470);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(307, 353);
             this.groupBox2.TabIndex = 64;
@@ -731,11 +729,104 @@
             this.cboPrinters.TabIndex = 21;
             this.cboPrinters.SelectedIndexChanged += new System.EventHandler(this.cboPrinters_SelectedIndexChanged);
             // 
+            // bt_print_star
+            // 
+            this.bt_print_star.Location = new System.Drawing.Point(35, 95);
+            this.bt_print_star.Name = "bt_print_star";
+            this.bt_print_star.Size = new System.Drawing.Size(104, 36);
+            this.bt_print_star.TabIndex = 55;
+            this.bt_print_star.Text = "預覽列印 star";
+            this.bt_print_star.UseVisualStyleBackColor = true;
+            this.bt_print_star.Click += new System.EventHandler(this.bt_print_star_Click);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(12, 333);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(194, 45);
+            this.button7.TabIndex = 65;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // printDocument_control
+            // 
+            this.printDocument_control.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument_control_BeginPrint);
+            this.printDocument_control.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_control_PrintPage);
+            // 
+            // printPreviewDialog_control
+            // 
+            this.printPreviewDialog_control.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_control.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog_control.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog_control.Document = this.printDocument_control;
+            this.printPreviewDialog_control.Enabled = true;
+            this.printPreviewDialog_control.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog_control.Icon")));
+            this.printPreviewDialog_control.Name = "printPreviewDialog_control";
+            this.printPreviewDialog_control.Visible = false;
+            // 
+            // groupBox_control
+            // 
+            this.groupBox_control.Controls.Add(this.chkAntiAlias);
+            this.groupBox_control.Controls.Add(this.chkZoom100);
+            this.groupBox_control.Controls.Add(this.chkMaximized);
+            this.groupBox_control.Controls.Add(this.bt_print_control);
+            this.groupBox_control.Location = new System.Drawing.Point(12, 645);
+            this.groupBox_control.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox_control.Name = "groupBox_control";
+            this.groupBox_control.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox_control.Size = new System.Drawing.Size(194, 142);
+            this.groupBox_control.TabIndex = 56;
+            this.groupBox_control.TabStop = false;
+            this.groupBox_control.Text = "control";
+            // 
+            // bt_print_control
+            // 
+            this.bt_print_control.Location = new System.Drawing.Point(35, 95);
+            this.bt_print_control.Name = "bt_print_control";
+            this.bt_print_control.Size = new System.Drawing.Size(104, 36);
+            this.bt_print_control.TabIndex = 55;
+            this.bt_print_control.Text = "預覽列印 control";
+            this.bt_print_control.UseVisualStyleBackColor = true;
+            this.bt_print_control.Click += new System.EventHandler(this.bt_print_control_Click);
+            // 
+            // chkAntiAlias
+            // 
+            this.chkAntiAlias.AutoSize = true;
+            this.chkAntiAlias.Location = new System.Drawing.Point(39, 73);
+            this.chkAntiAlias.Name = "chkAntiAlias";
+            this.chkAntiAlias.Size = new System.Drawing.Size(71, 16);
+            this.chkAntiAlias.TabIndex = 58;
+            this.chkAntiAlias.Text = "Anti-Alias";
+            this.chkAntiAlias.UseVisualStyleBackColor = true;
+            // 
+            // chkZoom100
+            // 
+            this.chkZoom100.AutoSize = true;
+            this.chkZoom100.Location = new System.Drawing.Point(39, 46);
+            this.chkZoom100.Name = "chkZoom100";
+            this.chkZoom100.Size = new System.Drawing.Size(82, 16);
+            this.chkZoom100.TabIndex = 57;
+            this.chkZoom100.Text = "Zoom 100%";
+            this.chkZoom100.UseVisualStyleBackColor = true;
+            // 
+            // chkMaximized
+            // 
+            this.chkMaximized.AutoSize = true;
+            this.chkMaximized.Location = new System.Drawing.Point(39, 21);
+            this.chkMaximized.Name = "chkMaximized";
+            this.chkMaximized.Size = new System.Drawing.Size(76, 16);
+            this.chkMaximized.TabIndex = 56;
+            this.chkMaximized.Text = "Maximized";
+            this.chkMaximized.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 799);
+            this.ClientSize = new System.Drawing.Size(1065, 878);
+            this.Controls.Add(this.groupBox_control);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -769,6 +860,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox_control.ResumeLayout(false);
+            this.groupBox_control.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -779,7 +872,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
@@ -840,6 +932,15 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cboPrinters;
+        private System.Windows.Forms.Button bt_print_star;
+        private System.Windows.Forms.Button button7;
+        private System.Drawing.Printing.PrintDocument printDocument_control;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog_control;
+        private System.Windows.Forms.GroupBox groupBox_control;
+        private System.Windows.Forms.Button bt_print_control;
+        private System.Windows.Forms.CheckBox chkAntiAlias;
+        private System.Windows.Forms.CheckBox chkZoom100;
+        private System.Windows.Forms.CheckBox chkMaximized;
     }
 }
 
