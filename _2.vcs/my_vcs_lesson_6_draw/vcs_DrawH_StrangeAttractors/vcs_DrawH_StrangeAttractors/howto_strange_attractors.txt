@@ -1,0 +1,93 @@
+Title:	Draw a variety of fractal strange attractors in C#
+Category:	graphics, fractals, algorithms
+Keywords:	fractals, graphics, algorithms, iteration, C#, C# programming, example, example program, Windows Forms programming
+
+<img src="http://www.csharphelper.com/howto_strange_attractors.png" align="right" hspace="5">
+
+
+If you plot a sequence of points (x<sub>1</sub>, y<sub>1</sub>), (x<sub>2</sub>, y<sub>2</sub>), ..., the points can settle into one of several patterns. For example, they can converge on a fixed value, enter a repeating cycle, tend towards infinity, or look chaotic. They can also follow a strange attractor. In that case, the points clearly follow some pattern but not an obvious repeating cycle.
+<br clear="right">
+
+This example plots points given by the equations:
+<p></p>
+
+<pre>    X' = A<sub>0</sub> + A<sub>1</sub> * x + A<sub>2</sub> * x<sup>2</sup> + A<sub>3</sub> * x * y + A<sub>4</sub> * y + A<sub>5</sub> * y<sup>2</sup>
+    Y' = A<sub>6</sub> + A<sub>7</sub> * x + A<sub>8</sub> * x<sup>2</sup> + A<sub>9</sub> * x * y + A<sub>10</sub> * y + A<sub>11</sub> * y<sup>2</sup></pre>
+
+<p></p>
+For various values of A<sub>0</sub>, A<sub>1</sub>, ... A<sub>11</sub>. Different values of these coefficients produce different results.
+<p></p>
+The program uses a Timer to plot points. The following code shows the Tick event handler that draws the curve. It plots 1,000 points at a time to improve performance and reduce flicker. For each iteration, the routine generates the next (X, Y) point and draws it on the Bitmap named m_Bitmap. After it has finished its 1,000 points, it refreshes picCanvas so you can see the result. 
+<p></p>
+
+<pre><tt>// Draw 1000 points.
+private double X, Y;
+private void tmrDrawPoint_Tick(object sender, EventArgs e)
+{
+    for (int i = 1; i <= 1000; i++)
+    {
+        double new_x = A[0] + A[1] * X + A[2] * X * X + A[3] * X * Y + A[4] * Y + A[5] * Y * Y;
+        double new_y = A[6] + A[7] * X + A[8] * X * X + A[9] * X * Y + A[10] * Y + A[11] * Y * Y;
+        X = new_x;
+        Y = new_y;
+
+        int pix_x = (int)((X - Wxmin) / Wwid * m_Wid);
+        int pix_y = (int)(m_Hgt - (Y - Wymin) / Whgt * m_Hgt - 1);
+        if ((pix_x >= 0) && (pix_x < m_Wid) &&
+            (pix_y >= 0) && (pix_y < m_Hgt))
+        {
+            Bm.SetPixel(pix_x, pix_y, Color.Blue);
+        }
+    }
+
+    // Display the result.
+    picCanvas.Refresh();
+}</tt></pre>
+<p></p>
+The calculations that convert X and Y into pix_x and pix_y translate and scale the points so they fill the bitmap nicely.
+<p></p>
+See the code for further details.
+<p></p>
+For more information on this kind of strange attractor, see the article <a href="http://mathworld.wolfram.com/StrangeAttractor.html">Strange Attractor</a> by Eric W. Weisstein from Wolfram MathWorld.
+<p></p>
+
+<a href="http://www.csharphelper.com/howto_strange_attractors1.png"><img src="http://www.csharphelper.com/howto_strange_attractors1s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors2.png"><img src="http://www.csharphelper.com/howto_strange_attractors2s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors3.png"><img src="http://www.csharphelper.com/howto_strange_attractors3s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors4.png"><img src="http://www.csharphelper.com/howto_strange_attractors4s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors5.png"><img src="http://www.csharphelper.com/howto_strange_attractors5s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors6.png"><img src="http://www.csharphelper.com/howto_strange_attractors6s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors7.png"><img src="http://www.csharphelper.com/howto_strange_attractors7s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors8.png"><img src="http://www.csharphelper.com/howto_strange_attractors8s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors9.png"><img src="http://www.csharphelper.com/howto_strange_attractors9s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors10.png"><img src="http://www.csharphelper.com/howto_strange_attractors10s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors11.png"><img src="http://www.csharphelper.com/howto_strange_attractors11s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors12.png"><img src="http://www.csharphelper.com/howto_strange_attractors12s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors13.png"><img src="http://www.csharphelper.com/howto_strange_attractors13s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors14.png"><img src="http://www.csharphelper.com/howto_strange_attractors14s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors15.png"><img src="http://www.csharphelper.com/howto_strange_attractors15s.png" hspace="5" vspace="5"></a>
+<a href="http://www.csharphelper.com/howto_strange_attractors16.png"><img src="http://www.csharphelper.com/howto_strange_attractors16s.png" hspace="5" vspace="5"></a>
+
+
+<p></p>
+<a href="http://www.csharphelper.com/examples/howto_strange_attractors.zip">Download example</a>
+<p></p>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4cb625876572a8be"></script>
+<!-- AddThis Button END -->
+
+<p></p>
+
+<!-- Start AdSense -->
+<script type="text/javascript"><!--google_ad_client = "pub-6627515316741006";/* 468x60, created 9/15/10 */google_ad_slot = "3196383502";google_ad_width = 468;google_ad_height = 60;//--></script>
+<script type="text/javascript"src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<!-- End AdSense -->
+<!--<br><br><div><img id="googleAdPlaceHolder" orientation="1" pubId="pub-6627515316741006" src="App_Themes/pl.gen/images/googlead468.gif" /> </div><br>-->
