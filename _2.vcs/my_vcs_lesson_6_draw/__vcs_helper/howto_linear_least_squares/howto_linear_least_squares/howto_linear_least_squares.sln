@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_linear_least_squares", "howto_linear_least_squares.csproj", "{54187851-10D9-4C77-8D85-51A37B8B2320}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54187851-10D9-4C77-8D85-51A37B8B2320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54187851-10D9-4C77-8D85-51A37B8B2320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54187851-10D9-4C77-8D85-51A37B8B2320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54187851-10D9-4C77-8D85-51A37B8B2320}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
