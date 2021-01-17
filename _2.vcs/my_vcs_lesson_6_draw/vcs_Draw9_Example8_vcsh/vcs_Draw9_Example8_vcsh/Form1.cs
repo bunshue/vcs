@@ -13,6 +13,8 @@ using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Text;      //for TextRenderingHint
 
+using System.Diagnostics;       //for Debug
+
 namespace vcs_Draw9_Example8_vcsh
 {
     public partial class Form1 : Form
@@ -65,6 +67,30 @@ namespace vcs_Draw9_Example8_vcsh
         // The previous mouse location.
         private Point OldMousePos = new Point(-1, -1);
 
+        // 畫派圖，可以偵測位置 ST    pictureBox17
+        // The pie chart's center.
+        private Point EllipseCenter;
+
+        // The pie chart's drawing area.
+        private Rectangle EllipseRect;
+
+        // The ellipse's X and Y radii.
+        private float EllipseRx, EllipseRy;
+
+        // The slices' ending angles in degrees.
+        // The first angle is 0 and marks the start of the first slice.
+        private float[] Angles = { 0, 45, 80, 110, 130, 170, 220, 245, 300, 360 };
+
+        // The slices' colors.
+        private Brush[] ChartBrushes =
+        {
+            Brushes.Red, Brushes.LightGreen, Brushes.LightBlue,
+            Brushes.Yellow, Brushes.Orange, Brushes.White,
+            Brushes.Cyan, Brushes.Pink, Brushes.Black,
+        };
+        // 畫派圖，可以偵測位置 SP
+
+
         public Form1()
         {
             InitializeComponent();
@@ -103,11 +129,26 @@ namespace vcs_Draw9_Example8_vcsh
                 this.pictureBox4.ClientSize.Width / 2,
                 this.pictureBox4.ClientSize.Height / 2);
 
+            draw_random_pixel_image();
+            draw_random_circles();          //pictureBox13
+            draw_Apollonian_Gasket();       //pictureBox14
+            draw_smiley();                  //pictureBox15
+            draw_polygon_pathgradientbrush();   //pictureBox18
+
+            // 畫派圖，可以偵測位置 ST    pictureBox17
+            // Initialize the pie chart data.
+            const int margin = 10;
+            int wid = pictureBox17.ClientSize.Width - 2 * margin;
+            int hgt = pictureBox17.ClientSize.Height - 2 * margin;
+            EllipseRect = new Rectangle(margin, margin, wid, hgt);
+            EllipseRx = wid / 2;
+            EllipseRy = hgt / 2;
+            EllipseCenter = new Point(pictureBox17.ClientSize.Width / 2, pictureBox17.ClientSize.Height / 2);
+            // 畫派圖，可以偵測位置 SP
+
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-
-            draw_random_pixel_image();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location()
@@ -140,6 +181,9 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox13.Size = new Size(W, H);
             pictureBox14.Size = new Size(W, H);
             pictureBox15.Size = new Size(W, H);
+            pictureBox16.Size = new Size(W, H);
+            pictureBox17.Size = new Size(W, H);
+            pictureBox18.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -147,19 +191,27 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             checkBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + H - 30);
             pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox_histogram.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox_age.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox_random_pixel_image.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            pictureBox15.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            pictureBox_histogram.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
-            bt_save.Location = new Point(x_st + dx * 5+150, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 5+300, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
+            pictureBox_age.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox10.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox_random_pixel_image.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            pictureBox12.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+
+            pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            groupBox1.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 3 - 30);
+            pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox16.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox17.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            label1.Location = new Point(x_st + dx * 4+10, y_st + dy * 2+10);
+            label1.Text = "";
+            pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+
+            bt_save.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_exit.Location = new Point(x_st + dx * 6 + 120, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 50);
 
             richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -1007,8 +1059,600 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_random_pixel_image.Image = bmp;
         }
 
+        void draw_random_circles()
+        {
+            Bitmap bm = new Bitmap(pictureBox13.ClientSize.Width, pictureBox13.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.Silver);
+
+                Random rnd = new Random();
+                int max_r = Math.Min(pictureBox13.ClientRectangle.Width, pictureBox13.ClientRectangle.Height) / 3;
+                int min_r = max_r / 4;
+                for (int i = 0; i < 15; i++)
+                {
+                    int r = rnd.Next(min_r, max_r);
+                    int x = rnd.Next(min_r, pictureBox13.ClientRectangle.Width - min_r);
+                    int y = rnd.Next(min_r, pictureBox13.ClientRectangle.Height - min_r);
+                    gr.DrawEllipse(Pens.Black, x - r, y - r, 2 * r, 2 * r);
+                }
+            }
+            pictureBox13.Image = bm;
+        }
+
+        // Apollonian Gasket ST
+        void draw_Apollonian_Gasket()
+        {
+            int width = Math.Min(pictureBox14.ClientSize.Width, pictureBox14.ClientSize.Height);
+            pictureBox14.Image = FindApollonianPacking(width);
+        }
+
+        // Find the Apollonian packing.
+        private Bitmap FindApollonianPacking(int width)
+        {
+            Bitmap bm = new Bitmap(width, width);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                if (rb1.Checked == true)
+                    gr.Clear(Color.LightGreen);
+                else
+                    gr.Clear(Color.Black);
+
+                // Create the three central tangent circles.
+                float radius = width * 0.225f;
+                float x = width / 2;
+                float gasket_height = 2 * (float)(radius + 2 * radius / Math.Sqrt(3));
+                float y = (width - gasket_height) / 2 + radius;
+                Circle circle0 = new Circle(x, y, radius);
+
+                // Draw a box around the gasket. (For debugging.)
+                //gr.DrawRectangle(Pens.Orange,
+                //    x - gasket_height / 2,
+                //    y - radius,
+                //    gasket_height,
+                //    gasket_height);
+
+                x -= radius;
+                y += (float)(radius * Math.Sqrt(3));
+                Circle circle1 = new Circle(x, y, radius);
+                x += 2 * radius;
+                Circle circle2 = new Circle(x, y, radius);
+
+                if (rb1.Checked == true)
+                {
+                    // Draw the three central circles.
+                    circle0.Draw(gr, Pens.Blue);
+                    circle1.Draw(gr, Pens.Blue);
+                    circle2.Draw(gr, Pens.Blue);
+                }
+
+                // Find the circle that contains them all.
+                Circle big_circle = FindApollonianCircle(circle0, circle1, circle2, -1, -1, -1);
+                if (rb1.Checked == true)
+                {
+                    big_circle.Draw(gr, Pens.Blue);
+                }
+                else
+                {
+                    // Draw the big circle.
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        big_circle.Draw(gr, the_brush);
+                    }
+
+                    // Draw the three central circles.
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        circle0.Draw(gr, the_brush);
+                    }
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        circle1.Draw(gr, the_brush);
+                    }
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        circle2.Draw(gr, the_brush);
+                    }
+                }
+
+                // Set level to smaller values such as 3 to see partially drawn gaskets.
+                int level = 10000;
+
+                // Find the central circle.
+                FindCircleOutsideAll(level, gr, circle0, circle1, circle2);
+
+                // Find circles tangent to the big circle.
+                FindCircleOutsideTwo(level, gr, circle0, circle1, big_circle);
+                FindCircleOutsideTwo(level, gr, circle1, circle2, big_circle);
+                FindCircleOutsideTwo(level, gr, circle2, circle0, big_circle);
+            }
+            return bm;
+        }
+
+        // Draw a circle tangent to these three circles and that is outside all three.
+        private void FindCircleOutsideAll(int level, Graphics gr, Circle circle0, Circle circle1, Circle circle2)
+        {
+            Circle new_circle = FindApollonianCircle(circle0, circle1, circle2, 1, 1, 1);
+            if (new_circle == null) return;
+            if (new_circle.Radius < 0.1) return;
+
+            if (rb1.Checked == true)
+            {
+                new_circle.Draw(gr, Pens.Blue);
+            }
+            else
+            {
+                using (Brush the_brush = new SolidBrush(RandomColor()))
+                {
+                    new_circle.Draw(gr, the_brush);
+                }
+            }
+
+            if (--level > 0)
+            {
+                FindCircleOutsideAll(level, gr, circle0, circle1, new_circle);
+                FindCircleOutsideAll(level, gr, circle0, circle2, new_circle);
+                FindCircleOutsideAll(level, gr, circle1, circle2, new_circle);
+            }
+        }
+
+        // Draw a circle tangent to these three circles and that is outside two of them.
+        private void FindCircleOutsideTwo(int level, Graphics gr, Circle circle0, Circle circle1, Circle circle_contains)
+        {
+            Circle new_circle = FindApollonianCircle(circle0, circle1, circle_contains, 1, 1, -1);
+            if (new_circle == null) return;
+            if (new_circle.Radius < 0.1) return;
+
+            if (rb1.Checked == true)
+            {
+                new_circle.Draw(gr, Pens.Blue);
+            }
+            else
+            {
+                using (Brush the_brush = new SolidBrush(RandomColor()))
+                {
+                    new_circle.Draw(gr, the_brush);
+                }
+            }
+
+            if (--level > 0)
+            {
+                FindCircleOutsideTwo(level, gr, new_circle, circle0, circle_contains);
+                FindCircleOutsideTwo(level, gr, new_circle, circle1, circle_contains);
+                FindCircleOutsideAll(level, gr, circle0, circle1, new_circle);
+            }
+        }
+
+        // Find the circles that touch each of the three input circles.
+        private Circle[] FindApollonianCircles(Circle[] given_circles)
+        {
+            // Make a list for results.
+            List<Circle> solution_circles = new List<Circle>();
+
+            // Loop over all of the signs.
+            foreach (int s0 in new int[] { -1, 1 })
+            {
+                foreach (int s1 in new int[] { -1, 1 })
+                {
+                    foreach (int s2 in new int[] { -1, 1 })
+                    {
+                        Circle new_circle = FindApollonianCircle(
+                            given_circles[0], given_circles[1], given_circles[2],
+                            s0, s1, s2);
+                        if (new_circle != null) solution_circles.Add(new_circle);
+                    }
+                }
+            }
+
+            // Return the results.
+            return solution_circles.ToArray();
+        }
+
+        // Find a solution to Apollonius' problem.
+        // For discussion and method, see:
+        //    http://mathworld.wolfram.com/ApolloniusProblem.html
+        //    http://en.wikipedia.org/wiki/Problem_of_Apollonius#Algebraic_solutions
+        // For most of a Java code implementation, see:
+        //    http://www.diku.dk/hjemmesider/ansatte/rfonseca/implementations/apollonius.html
+        private Circle FindApollonianCircle(Circle c1, Circle c2, Circle c3, int s1, int s2, int s3)
+        {
+            // Make sure c2 doesn't have the same X or Y coordinate as the others.
+            const float tiny = 0.0001f;
+            if ((Math.Abs(c2.Center.X - c1.Center.X) < tiny) ||
+                (Math.Abs(c2.Center.Y - c1.Center.Y) < tiny))
+            {
+                Circle temp_circle = c2;
+                c2 = c3;
+                c3 = temp_circle;
+                int temp_s = s2;
+                s2 = s3;
+                s3 = temp_s;
+            }
+            if ((Math.Abs(c2.Center.X - c3.Center.X) < tiny) ||
+                (Math.Abs(c2.Center.Y - c3.Center.Y) < tiny))
+            {
+                Circle temp_circle = c2;
+                c2 = c1;
+                c1 = temp_circle;
+                int temp_s = s2;
+                s2 = s1;
+                s1 = temp_s;
+            }
+
+            Debug.Assert(
+                (c2.Center.X != c1.Center.X) && (c2.Center.Y != c1.Center.Y) &&
+                (c2.Center.X != c3.Center.X) && (c2.Center.Y != c3.Center.Y),
+                "Cannot find points without matching coordinates.");
+
+            float x1 = c1.Center.X;
+            float y1 = c1.Center.Y;
+            float r1 = c1.Radius;
+            float x2 = c2.Center.X;
+            float y2 = c2.Center.Y;
+            float r2 = c2.Radius;
+            float x3 = c3.Center.X;
+            float y3 = c3.Center.Y;
+            float r3 = c3.Radius;
+
+            float v11 = 2 * x2 - 2 * x1;
+            float v12 = 2 * y2 - 2 * y1;
+            float v13 = x1 * x1 - x2 * x2 + y1 * y1 - y2 * y2 - r1 * r1 + r2 * r2;
+            float v14 = 2 * s2 * r2 - 2 * s1 * r1;
+
+            float v21 = 2 * x3 - 2 * x2;
+            float v22 = 2 * y3 - 2 * y2;
+            float v23 = x2 * x2 - x3 * x3 + y2 * y2 - y3 * y3 - r2 * r2 + r3 * r3;
+            float v24 = 2 * s3 * r3 - 2 * s2 * r2;
+
+            float w12 = v12 / v11;
+            float w13 = v13 / v11;
+            float w14 = v14 / v11;
+
+            float w22 = v22 / v21 - w12;
+            float w23 = v23 / v21 - w13;
+            float w24 = v24 / v21 - w14;
+
+            float P = -w23 / w22;
+            float Q = w24 / w22;
+            float M = -w12 * P - w13;
+            float N = w14 - w12 * Q;
+
+            float a = N * N + Q * Q - 1;
+            float b = 2 * M * N - 2 * N * x1 + 2 * P * Q - 2 * Q * y1 + 2 * s1 * r1;
+            float c = x1 * x1 + M * M - 2 * M * x1 + P * P + y1 * y1 - 2 * P * y1 - r1 * r1;
+
+            // Find roots of a quadratic equation
+            double[] solutions = QuadraticSolutions(a, b, c);
+            if (solutions.Length < 1) return null;
+            float rs = (float)solutions[0];
+            float xs = M + N * rs;
+            float ys = P + Q * rs;
+
+            Debug.Assert(!float.IsNaN(rs) && !float.IsNaN(xs) && !float.IsNaN(ys),
+                "Error finding Apollonian circle.");
+
+            if (rb1.Checked == false)
+            {
+                if (float.IsInfinity(xs) || float.IsInfinity(ys) || float.IsInfinity(rs)) return null;
+            }
+            if ((Math.Abs(xs) < tiny) || (Math.Abs(ys) < tiny) || (Math.Abs(rs) < tiny)) return null;
+            return new Circle(xs, ys, rs);
+        }
+
+        // Return solutions to a quadratic equation.
+        private double[] QuadraticSolutions(double a, double b, double c)
+        {
+            const double tiny = 0.000001;
+            double discriminant = b * b - 4 * a * c;
+
+            // See if there are no real solutions.
+            if (discriminant < 0)
+            {
+                return new double[] { };
+            }
+
+            // See if there is one solution.
+            if (discriminant < tiny)
+            {
+                return new double[] { -b / (2 * a) };
+            }
+
+            // There are two solutions.
+            return new double[]
+            {
+                (-b + Math.Sqrt(discriminant)) / (2 * a),
+                (-b - Math.Sqrt(discriminant)) / (2 * a),
+            };
+        }
+
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] Colors =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+            Color.Yellow,
+            Color.LightGreen,
+            Color.LightBlue,
+            Color.Cyan,
+        };
+
+        private Color RandomColor()
+        {
+            return Colors[rand.Next(0, Colors.Length)];
+        }
+
+        // Apollonian Gasket SP
+
+        // 畫Smiley ST
+
+        private delegate float FofXY(float x, float y);
+
+        // Plot the equations.
+        void draw_smiley()
+        {
+            // Make the Bitmap.
+            Bitmap bm = new Bitmap(pictureBox15.ClientSize.Width, pictureBox15.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                // Clear.
+                gr.Clear(Color.White);
+                gr.ScaleTransform(24f, -24f, System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
+                    System.Drawing.Drawing2D.MatrixOrder.Append);
+
+                // Draw axes.
+                using (Pen axis_pen = new Pen(Color.Blue, 0))
+                {
+                    gr.DrawLine(axis_pen, -6, 0, 6, 0);
+                    gr.DrawLine(axis_pen, 0, -6, 0, 6);
+                    for (int i = -6; i <= 6; i++)
+                    {
+                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+                    }
+                }
+
+                // Graph the equations.
+                float dx = 2f / bm.Width;
+                float dy = 2f / bm.Height;
+                PlotFunction(gr, F1, -6, -6, 6, 6, dx, dy);
+                PlotFunction(gr, F2, -6, -6, 6, 6, dx, dy);
+            } // using gr.
+
+            // Display the result.
+            pictureBox15.Image = bm;
+        }
+
+        // Plot a function.
+        private void PlotFunction(Graphics gr, FofXY func,
+            float xmin, float ymin, float xmax, float ymax,
+            float dx, float dy)
+        {
+            // Plot the function.
+            using (Pen thin_pen = new Pen(Color.Black, 0))
+            {
+                // Horizontal comparisons.
+                for (float x = xmin; x <= xmax; x += dx)
+                {
+                    float last_y = func(x, ymin);
+                    for (float y = ymin + dy; y <= ymax; y += dy)
+                    {
+                        float next_y = func(x, y);
+                        if (
+                            ((last_y <= 0f) && (next_y >= 0f)) ||
+                            ((last_y >= 0f) && (next_y <= 0f))
+                           )
+                        {
+                            // Plot this point.
+                            gr.DrawLine(thin_pen, x, y - dy, x, y);
+                        }
+                        last_y = next_y;
+                    }
+                } // Horizontal comparisons.
+
+                // Vertical comparisons.
+                for (float y = ymin + dy; y <= ymax; y += dy)
+                {
+                    float last_x = func(xmin, y);
+                    for (float x = xmin + dx; x <= xmax; x += dx)
+                    {
+                        float next_x = func(x, y);
+                        if (
+                            ((last_x <= 0f) && (next_x >= 0f)) ||
+                            ((last_x >= 0f) && (next_x <= 0f))
+                           )
+                        {
+                            // Plot this point.
+                            gr.DrawLine(thin_pen, x - dx, y, x, y);
+                        }
+                        last_x = next_x;
+                    }
+                } // Vertical comparisons.
+            } // using thin_pen.
+        }
+
+        // Calculate:
+        //   [x^2 + y^2 - 225] *
+        //   [x^2 + y^2 - 10000] *
+        //   [(x - 45)^2 + (y - 35)^2 - 225] *
+        //   [(x + 45)^2 + (y - 35)^2 - 225]
+        private float F1(float x, float y)
+        {
+            // Flip y to make the image appear right side up.
+            return
+                (x * x + y * y - 25f) *
+                (x * x + y * y - 1f) *
+                ((x - 2.5f) * (x - 2.5f) + (y - 2.0f) * (y - 2.0f) - 1f) *
+                ((x + 2.5f) * (x + 2.5f) + (y - 2.0f) * (y - 2.0f) - 1f);
+        }
+
+        // Calculate:
+        //   y + Sqrt(16 - x^2)
+        private float F2(float x, float y)
+        {
+            return (float)(y + Math.Sqrt(12.25f - x * x));
+        }
+        // 畫Smiley SP
+
+        // 畫星形，可以偵測位置 ST
+        // The polygon's points.
+        Point[] Points = 
+        {
+            new Point(133,  14),
+            new Point( 44, 228),
+            new Point(255,  83),
+            new Point( 16,  74),
+            new Point(214, 246),
+        };
+
+        // Draw the polygon.
+        private void pictureBox16_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.FillPolygon(Brushes.Yellow, Points);
+            e.Graphics.DrawPolygon(Pens.Red, Points);
+            Font f = new Font("Comic Sans MS", 12);
+            e.Graphics.DrawString("偵測滑鼠位置", f, new SolidBrush(Color.Red), 5, 5);
+        }
+
+        // Set the cursor depending on whether the mouse is over the polygon.
+        private void pictureBox16_MouseMove(object sender, MouseEventArgs e)
+        {
+            Cursor new_cursor;
+            if (PointIsInPolygon(Points, e.Location))
+                new_cursor = Cursors.Cross;
+            else new_cursor = Cursors.Default;
+
+            // Update the cursor.
+            if (this.Cursor != new_cursor) this.Cursor = new_cursor;
+        }
+
+        // Return true if the point is inside the polygon.
+        private bool PointIsInPolygon(Point[] polygon, Point target_point)
+        {
+            // Make a GraphicsPath containing the polygon.
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(polygon);
+
+            // See if the point is inside the path.
+            return path.IsVisible(target_point);
+        }
+        // 畫星形，可以偵測位置 SP
+
+        // 畫派圖，可以偵測位置 ST    pictureBox17
+        // Draw the pie slices.
+        private void pictureBox17_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            e.Graphics.FillEllipse(Brushes.Blue, EllipseRect);
+            for (int i = 1; i < Angles.Length; i++)
+            {
+                e.Graphics.FillPie(ChartBrushes[i - 1],
+                    EllipseRect, Angles[i], Angles[i - 1] - Angles[i]);
+            }
+            e.Graphics.DrawEllipse(Pens.Blue, EllipseRect);
+        }
+
+        // Display the number of the slice under the mouse.
+        private void pictureBox17_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Get the slice number.
+            int slice_number = GetSliceNumber(EllipseRect, Angles, e.Location);
+
+            // Display the slice number.
+            if (slice_number == -1)
+                label1.Text = "";
+            else
+                label1.Text = slice_number.ToString() + "\n";
+        }
+
+        // Return the slice number or -1 if the 
+        // mouse isn't over a slice.
+        private int GetSliceNumber(Rectangle rect, float[] angles, Point point)
+        {
+            // Get the position relative to the ellipse's center.
+            float rx = rect.Width / 2;
+            float ry = rect.Height / 2;
+            float cx = rect.X + rx;
+            float cy = rect.Y + ry;
+            float dx = point.X - cx;
+            float dy = point.Y - cy;
+            float value =
+                dx * dx / rx / rx +
+                dy * dy / ry / ry;
+
+            // See if the mouse is at the center.
+            if (value < 0.0001) return -1;
+
+            // See if the point is outside of the ellipse.
+            if (value > 1) return -1;
+
+            // The point is inside the ellipse.
+            // Get the angle.
+            double angle = Math.Atan2(dy, dx);
+            if (angle < 0) angle += 2 * Math.PI;
+
+            // Convert the angle into degrees.
+            angle = angle * 180 / Math.PI;
+
+            // Get the slice number.
+            for (int i = 0; i < Angles.Length - 1; i++)
+                if (angle <= Angles[i + 1]) return i;
+
+            throw new Exception("Cannot find angle " + angle);
+        }
+        // 畫派圖，可以偵測位置 SP
 
 
+        void draw_polygon_pathgradientbrush()
+        {
+            pictureBox18.Refresh();
 
+
+        }
+
+
+        private void timer_change_draw_figure_Tick(object sender, EventArgs e)
+        {
+            draw_random_circles();          //pictureBox13
+            draw_Apollonian_Gasket();       //pictureBox14
+        }
+
+        // Fill a polygon with a PathGradientBrush.
+        private void pictureBox18_Paint(object sender, PaintEventArgs e)
+        {
+            // Make the points for a hexagon.
+            PointF[] pts = new PointF[6];
+            int cx = (int)(this.pictureBox18.ClientSize.Width / 2);
+            int cy = (int)(this.pictureBox18.ClientSize.Height / 2);
+            double theta = 0;
+            double dtheta = 2 * Math.PI / 6;
+            for (int i = 0; i < pts.Length; i++)
+            {
+                pts[i].X = (int)(cx + cx * Math.Cos(theta));
+                pts[i].Y = (int)(cy + cy * Math.Sin(theta));
+                theta += dtheta;
+            }
+
+            // Make a path gradient brush.
+            using (PathGradientBrush path_brush = new PathGradientBrush(pts))
+            {
+                // Define the center and surround colors.
+                path_brush.CenterColor = Color.White;
+                path_brush.SurroundColors = new Color[] { Color.Red, Color.Yellow, Color.Lime, Color.Cyan, Color.Blue, Color.Magenta };
+
+                // Fill the hexagon.
+                e.Graphics.FillPolygon(path_brush, pts);
+            }
+            // Outline the hexagon.
+            e.Graphics.DrawPolygon(Pens.Black, pts);
+        }
     }
 }

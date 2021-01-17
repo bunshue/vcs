@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for Debug
+
 namespace vcs_test_all_10_Math_Random
 {
     public partial class Form1 : Form
@@ -173,6 +175,15 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "exp(1) = \t" + Math.Exp(1).ToString() + "\n";
             richTextBox1.Text += "exp(2) = \t" + Math.Exp(2).ToString() + "\n";
 
+
+            richTextBox1.Text += "求log以a為底的b\n";
+            double b = 1024;
+            double a = 2;
+            double c = Math.Log(b) / Math.Log(a);
+            richTextBox1.Text += "a = " + a.ToString() + "\n";
+            richTextBox1.Text += "b = " + b.ToString() + "\n";
+            richTextBox1.Text += "結果\tc = " + c.ToString() + "\n";
+            richTextBox1.Text += "驗算\ta^c = " + Math.Pow(a, c).ToString() + "\n";
         }
 
 
@@ -1583,7 +1594,33 @@ namespace vcs_test_all_10_Math_Random
             }
         }
 
+        //N階乘 ST
+        private void button24_Click(object sender, EventArgs e)
+        {
+            decimal N = 10;
+            try
+            {
+                richTextBox1.Text += N.ToString() + " 階乘 = " + Factorial(N).ToString() + "\n";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+        }
 
+        // Calculate N!
+        private decimal Factorial(decimal N)
+        {
+            Debug.Assert(N >= 0);
+
+            decimal result = 1;
+            for (decimal i = 2; i <= N; i++)
+                result *= i;
+            return result;
+        }
+        //N階乘 SP
 
 
     }

@@ -52,15 +52,12 @@
             this.button26 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
-            this.cb_manual = new System.Windows.Forms.CheckBox();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
-            this.cb_snake = new System.Windows.Forms.CheckBox();
             this.button22 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.cb_magnifying = new System.Windows.Forms.CheckBox();
             this.button23 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
@@ -87,9 +84,12 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb2 = new System.Windows.Forms.RadioButton();
+            this.cb_magnifying = new System.Windows.Forms.CheckBox();
+            this.cb_snake = new System.Windows.Forms.CheckBox();
+            this.cb_manual = new System.Windows.Forms.CheckBox();
             this.rb1 = new System.Windows.Forms.RadioButton();
+            this.rb2 = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -349,16 +349,6 @@
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
-            // cb_manual
-            // 
-            this.cb_manual.AutoSize = true;
-            this.cb_manual.Location = new System.Drawing.Point(887, 406);
-            this.cb_manual.Name = "cb_manual";
-            this.cb_manual.Size = new System.Drawing.Size(58, 16);
-            this.cb_manual.TabIndex = 44;
-            this.cb_manual.Text = "manual";
-            this.cb_manual.UseVisualStyleBackColor = true;
-            // 
             // button18
             // 
             this.button18.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -403,17 +393,6 @@
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
-            // cb_snake
-            // 
-            this.cb_snake.AutoSize = true;
-            this.cb_snake.Location = new System.Drawing.Point(993, 406);
-            this.cb_snake.Name = "cb_snake";
-            this.cb_snake.Size = new System.Drawing.Size(48, 16);
-            this.cb_snake.TabIndex = 49;
-            this.cb_snake.Text = "手繪";
-            this.cb_snake.UseVisualStyleBackColor = true;
-            this.cb_snake.CheckedChanged += new System.EventHandler(this.cb_snake_CheckedChanged);
-            // 
             // button22
             // 
             this.button22.Font = new System.Drawing.Font("新細明體", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -432,17 +411,6 @@
             this.pictureBox2.Size = new System.Drawing.Size(200, 200);
             this.pictureBox2.TabIndex = 51;
             this.pictureBox2.TabStop = false;
-            // 
-            // cb_magnifying
-            // 
-            this.cb_magnifying.AutoSize = true;
-            this.cb_magnifying.Location = new System.Drawing.Point(1107, 406);
-            this.cb_magnifying.Name = "cb_magnifying";
-            this.cb_magnifying.Size = new System.Drawing.Size(60, 16);
-            this.cb_magnifying.TabIndex = 52;
-            this.cb_magnifying.Text = "放大鏡";
-            this.cb_magnifying.UseVisualStyleBackColor = true;
-            this.cb_magnifying.CheckedChanged += new System.EventHandler(this.cb_magnifying_CheckedChanged);
             // 
             // button23
             // 
@@ -660,7 +628,6 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(100, 40);
             this.button42.TabIndex = 72;
-            this.button42.Text = "Apollonian Gasket";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -729,25 +696,37 @@
             this.pictureBox5.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox5_Paint);
             this.pictureBox5.Resize += new System.EventHandler(this.pictureBox5_Resize);
             // 
-            // groupBox1
+            // cb_magnifying
             // 
-            this.groupBox1.Controls.Add(this.rb2);
-            this.groupBox1.Controls.Add(this.rb1);
-            this.groupBox1.Location = new System.Drawing.Point(756, 398);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(71, 70);
-            this.groupBox1.TabIndex = 78;
-            this.groupBox1.TabStop = false;
+            this.cb_magnifying.AutoSize = true;
+            this.cb_magnifying.Location = new System.Drawing.Point(1107, 406);
+            this.cb_magnifying.Name = "cb_magnifying";
+            this.cb_magnifying.Size = new System.Drawing.Size(60, 16);
+            this.cb_magnifying.TabIndex = 52;
+            this.cb_magnifying.Text = "放大鏡";
+            this.cb_magnifying.UseVisualStyleBackColor = true;
+            this.cb_magnifying.CheckedChanged += new System.EventHandler(this.cb_magnifying_CheckedChanged);
             // 
-            // rb2
+            // cb_snake
             // 
-            this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(11, 41);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(52, 16);
-            this.rb2.TabIndex = 1;
-            this.rb2.Text = "type 2";
-            this.rb2.UseVisualStyleBackColor = true;
+            this.cb_snake.AutoSize = true;
+            this.cb_snake.Location = new System.Drawing.Point(993, 406);
+            this.cb_snake.Name = "cb_snake";
+            this.cb_snake.Size = new System.Drawing.Size(48, 16);
+            this.cb_snake.TabIndex = 49;
+            this.cb_snake.Text = "手繪";
+            this.cb_snake.UseVisualStyleBackColor = true;
+            this.cb_snake.CheckedChanged += new System.EventHandler(this.cb_snake_CheckedChanged);
+            // 
+            // cb_manual
+            // 
+            this.cb_manual.AutoSize = true;
+            this.cb_manual.Location = new System.Drawing.Point(887, 406);
+            this.cb_manual.Name = "cb_manual";
+            this.cb_manual.Size = new System.Drawing.Size(58, 16);
+            this.cb_manual.TabIndex = 44;
+            this.cb_manual.Text = "manual";
+            this.cb_manual.UseVisualStyleBackColor = true;
             // 
             // rb1
             // 
@@ -760,6 +739,26 @@
             this.rb1.TabStop = true;
             this.rb1.Text = "type 1";
             this.rb1.UseVisualStyleBackColor = true;
+            // 
+            // rb2
+            // 
+            this.rb2.AutoSize = true;
+            this.rb2.Location = new System.Drawing.Point(11, 41);
+            this.rb2.Name = "rb2";
+            this.rb2.Size = new System.Drawing.Size(52, 16);
+            this.rb2.TabIndex = 1;
+            this.rb2.Text = "type 2";
+            this.rb2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rb2);
+            this.groupBox1.Controls.Add(this.rb1);
+            this.groupBox1.Location = new System.Drawing.Point(756, 398);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(71, 70);
+            this.groupBox1.TabIndex = 78;
+            this.groupBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -864,15 +863,12 @@
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.CheckBox cb_manual;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.CheckBox cb_snake;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.CheckBox cb_magnifying;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button bt_exit;
@@ -899,9 +895,12 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rb2;
+        private System.Windows.Forms.CheckBox cb_magnifying;
+        private System.Windows.Forms.CheckBox cb_snake;
+        private System.Windows.Forms.CheckBox cb_manual;
         private System.Windows.Forms.RadioButton rb1;
+        private System.Windows.Forms.RadioButton rb2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

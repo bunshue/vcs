@@ -57,8 +57,7 @@ namespace howto_double_buffer
         // Draw the butterfly.
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode =
-                System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.Clear(this.BackColor);
 
             // Scale and translate.
@@ -129,6 +128,13 @@ namespace howto_double_buffer
         // Redraw.
         private void btnRedraw_Click(object sender, EventArgs e)
         {
+            if (chkDoubleBuffer.Checked == true)
+                label1.Text = "使用 Double Buffer 重畫";
+            else
+                label1.Text = "不使用 Double Buffer 重畫";
+
+            Application.DoEvents();
+
             this.Invalidate();
         }
     }
