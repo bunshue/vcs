@@ -439,22 +439,51 @@ namespace vcs_test_all_10_Math_Random
                 return GCD(b, a % b);
         }
 
+        // Use Euclid's algorithm to calculate the
+        // greatest common divisor (GCD) of two numbers.
+        private long GCD2(long a, long b)
+        {
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+
+            // Pull out remainders.
+            for (; ; )
+            {
+                long remainder = a % b;
+                if (remainder == 0) return b;
+                a = b;
+                b = remainder;
+            };
+        }
+
+        // Return the least common multiple
+        // (LCM) of two numbers.
+        private long LCM2(long a, long b)
+        {
+            return a * b / GCD2(a, b);
+        }
+
         private void button9_Click(object sender, EventArgs e)
         {
             //最大公因數
             int w = 1920;
             int h = 1080;
             int gcd = GCD(w, h);
-            richTextBox1.Text += "gcd = " + gcd.ToString() + "\n";
+            richTextBox1.Text += "最大公因數 = " + gcd.ToString() + "\n";
             richTextBox1.Text += "ratio = " + (w / gcd).ToString() + " : " + (h / gcd).ToString() + "\n";
 
             w = 1280;
             h = 720;
             gcd = GCD(w, h);
-            richTextBox1.Text += "gcd = " + gcd.ToString() + "\n";
+            richTextBox1.Text += "最大公因數 = " + gcd.ToString() + "\n";
             richTextBox1.Text += "ratio = " + (w / gcd).ToString() + " : " + (h / gcd).ToString() + "\n";
 
 
+            richTextBox1.Text += "最大公因數 另法\n";
+            long A = 36;
+            long B = 84;
+            richTextBox1.Text += A.ToString() + " 和 " + B.ToString() + " 的最大公因數 = " + GCD2(A, B).ToString() + "\n";
+            richTextBox1.Text += A.ToString() + " 和 " + B.ToString() + " 的最小公倍數 = " + LCM2(A, B).ToString() + "\n";
         }
 
         private void nudgeWindow()
