@@ -134,6 +134,7 @@ namespace vcs_Draw9_Example8_vcsh
             draw_Apollonian_Gasket();       //pictureBox14
             draw_smiley();                  //pictureBox15
             draw_polygon_pathgradientbrush();   //pictureBox18
+            load_move_ball();               //pictureBox19
 
             // 畫派圖，可以偵測位置 ST    pictureBox17
             // Initialize the pie chart data.
@@ -147,7 +148,7 @@ namespace vcs_Draw9_Example8_vcsh
             // 畫派圖，可以偵測位置 SP
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -164,8 +165,8 @@ namespace vcs_Draw9_Example8_vcsh
 
             x_st = 10;
             y_st = 10;
-            dx = W + 30;
-            dy = H + 30;
+            dx = W + 20;
+            dy = H + 20;
 
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -184,6 +185,12 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox16.Size = new Size(W, H);
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
+            pictureBox19.Size = new Size(W, H);
+            pictureBox20.Size = new Size(W, H);
+            pictureBox21.Size = new Size(W, H);
+            pictureBox22.Size = new Size(W, H);
+            pictureBox23.Size = new Size(W, H);
+            pictureBox24.Size = new Size(W, H);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -208,6 +215,13 @@ namespace vcs_Draw9_Example8_vcsh
             label1.Location = new Point(x_st + dx * 4+10, y_st + dy * 2+10);
             label1.Text = "";
             pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+
+            pictureBox19.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            pictureBox20.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox21.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            pictureBox24.Location = new Point(x_st + dx * 5, y_st + dy * 3);
 
             bt_save.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_exit.Location = new Point(x_st + dx * 6 + 120, y_st + dy * 0);
@@ -1654,5 +1668,57 @@ namespace vcs_Draw9_Example8_vcsh
             // Outline the hexagon.
             e.Graphics.DrawPolygon(Pens.Black, pts);
         }
+
+
+        // Some drawing parameters.
+        private BallSprite[] Sprites;
+
+        void load_move_ball()
+        {
+            // Make random balls.
+            Random rand = new Random();
+            const int num_balls = 10;
+            Sprites = new BallSprite[num_balls];
+            for (int i = 0; i < num_balls; i++)
+            {
+                Sprites[i] = new BallSprite(10, 40, pictureBox19.ClientSize.Width, pictureBox19.ClientSize.Height, 2, 10);
+            }
+
+            // Save the form's size.
+            //FormSize = ClientSize;
+
+            // Use double buffering to reduce flicker.
+            this.SetStyle(
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.UserPaint |
+                ControlStyles.DoubleBuffer,
+                true);
+            this.UpdateStyles();
+        }
+
+        // Move the balls and refresh.
+        private void timer_move_ball_Tick(object sender, EventArgs e)
+        {
+            foreach (BallSprite sprite in Sprites)
+                sprite.Move();
+            Refresh();
+        }
+
+        // Redraw.
+        private void pictureBox19_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(BackColor);
+            foreach (BallSprite sprite in Sprites)
+                sprite.Draw(e.Graphics);
+
+        }
+
+        // Force all threads to end.
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
     }
 }

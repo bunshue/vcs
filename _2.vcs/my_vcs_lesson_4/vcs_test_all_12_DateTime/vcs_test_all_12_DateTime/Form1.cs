@@ -35,7 +35,35 @@ namespace vcs_test_all_12_DateTime
             calculate_time_difference();
 
             load_listview_data();
+
+            show_item_location();
+
         }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 1700;
+            y_st = 12;
+            dx = 190;
+            dy = 50;
+
+            //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+        }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -136,7 +164,6 @@ namespace vcs_test_all_12_DateTime
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1326,6 +1353,11 @@ new System.Globalization.ChineseLunisolarCalendar();
                     richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
                 }
             }
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }

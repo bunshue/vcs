@@ -59,5 +59,14 @@ namespace vcs_Draw9_Example8_vcsh.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream boing {
+            get {
+                return ResourceManager.GetStream("boing", resourceCulture);
+            }
+        }
     }
 }
