@@ -81,7 +81,7 @@ namespace vcs_Remove_Bin_Obj
                     Array.Sort(fileEntries);
                     foreach (string fileName in fileEntries)
                     {
-                        if (fileName.EndsWith(".suo"))
+                        if ((fileName.EndsWith(".suo")) || (fileName.EndsWith(".csproj.user")))
                         {
                             if (checkBox4.Checked == true)
                                 richTextBox1.Text += fileName + "\n";
