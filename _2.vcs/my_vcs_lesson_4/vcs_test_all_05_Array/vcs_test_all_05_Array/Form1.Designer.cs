@@ -51,7 +51,6 @@
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
@@ -67,8 +66,7 @@
             this.button33 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.button35 = new System.Windows.Forms.Button();
-            this.button37 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
+            this.tb_matrix = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -322,16 +320,6 @@
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
-            // button36
-            // 
-            this.button36.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button36.Location = new System.Drawing.Point(440, 480);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(200, 42);
-            this.button36.TabIndex = 44;
-            this.button36.UseVisualStyleBackColor = true;
-            this.button36.Click += new System.EventHandler(this.button36_Click);
-            // 
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -486,41 +474,31 @@
             // 
             // button35
             // 
-            this.button35.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button35.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button35.Location = new System.Drawing.Point(440, 432);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(200, 42);
             this.button35.TabIndex = 59;
+            this.button35.Text = "解讀一個在TextBox的矩陣";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
-            // button37
+            // tb_matrix
             // 
-            this.button37.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button37.Location = new System.Drawing.Point(440, 523);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(200, 42);
-            this.button37.TabIndex = 60;
-            this.button37.UseVisualStyleBackColor = true;
-            this.button37.Click += new System.EventHandler(this.button37_Click);
-            // 
-            // button38
-            // 
-            this.button38.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button38.Location = new System.Drawing.Point(440, 571);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(200, 42);
-            this.button38.TabIndex = 61;
-            this.button38.UseVisualStyleBackColor = true;
-            this.button38.Click += new System.EventHandler(this.button38_Click);
+            this.tb_matrix.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_matrix.Location = new System.Drawing.Point(440, 480);
+            this.tb_matrix.Multiline = true;
+            this.tb_matrix.Name = "tb_matrix";
+            this.tb_matrix.Size = new System.Drawing.Size(153, 138);
+            this.tb_matrix.TabIndex = 60;
+            this.tb_matrix.Text = "0 1 2 3 4 5\r\n1 2 3 4 5 6\r\n2 3 4 5 6 7\r\n3 4 5 6 7 8\r\n4 5 6 7 8 9\r\n5 6 7 8 9 10";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1537, 643);
-            this.Controls.Add(this.button38);
-            this.Controls.Add(this.button37);
+            this.Controls.Add(this.tb_matrix);
             this.Controls.Add(this.button35);
             this.Controls.Add(this.button34);
             this.Controls.Add(this.button33);
@@ -536,7 +514,6 @@
             this.Controls.Add(this.button19);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button21);
-            this.Controls.Add(this.button36);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
@@ -564,6 +541,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -592,7 +570,6 @@
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button19;
@@ -608,8 +585,7 @@
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button34;
         private System.Windows.Forms.Button button35;
-        private System.Windows.Forms.Button button37;
-        private System.Windows.Forms.Button button38;
+        private System.Windows.Forms.TextBox tb_matrix;
     }
 }
 
