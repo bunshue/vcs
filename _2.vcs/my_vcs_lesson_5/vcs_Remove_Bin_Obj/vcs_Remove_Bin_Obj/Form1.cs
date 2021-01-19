@@ -84,9 +84,24 @@ namespace vcs_Remove_Bin_Obj
                         if ((fileName.EndsWith(".suo")) || (fileName.EndsWith(".csproj.user")))
                         {
                             if (checkBox4.Checked == true)
-                                richTextBox1.Text += fileName + "\n";
+                            {
+                                richTextBox1.Text += fileName + "\n";   //僅顯示
+                            }
                             if (checkBox2.Checked == true)
-                                folder_name.Add(fileName);
+                            {
+                                folder_name.Add(fileName);              //加入刪除準備
+                            }
+                        }
+                        if ((fileName.EndsWith("UpgradeLog.XML")) || (fileName.EndsWith("UpgradeLog.XML")))
+                        {
+                            if (checkBox7.Checked == true)
+                            {
+                                richTextBox1.Text += fileName + "\n";   //僅顯示
+                            }
+                            if (checkBox8.Checked == true)
+                            {
+                                folder_name.Add(fileName);              //加入刪除準備
+                            }
                         }
                     }
 
@@ -110,6 +125,13 @@ namespace vcs_Remove_Bin_Obj
                                 richTextBox1.Text += subdirectory + "\n";
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
+                        }
+                        else if (subdirectory.EndsWith("\\_UpgradeReport_Files"))
+                        {
+                            if (checkBox7.Checked == true)
+                                richTextBox1.Text += subdirectory + "\n";   //僅顯示
+                            if (checkBox8.Checked == true)
+                                folder_name.Add(subdirectory);              //加入刪除準備
                         }
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
                         ProcessDirectory(subdirectory);

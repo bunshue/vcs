@@ -93,11 +93,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
-            this.pictureBox24 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_rainbow = new System.Windows.Forms.PictureBox();
             this.pictureBox23 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.timer_move_ball = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nudSkip = new System.Windows.Forms.NumericUpDown();
+            this.nudPoints = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -118,10 +124,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -743,14 +753,15 @@
             this.pictureBox20.TabIndex = 113;
             this.pictureBox20.TabStop = false;
             // 
-            // pictureBox24
+            // pictureBox_rainbow
             // 
-            this.pictureBox24.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox24.Location = new System.Drawing.Point(542, 610);
-            this.pictureBox24.Name = "pictureBox24";
-            this.pictureBox24.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox24.TabIndex = 117;
-            this.pictureBox24.TabStop = false;
+            this.pictureBox_rainbow.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_rainbow.Location = new System.Drawing.Point(542, 610);
+            this.pictureBox_rainbow.Name = "pictureBox_rainbow";
+            this.pictureBox_rainbow.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_rainbow.TabIndex = 117;
+            this.pictureBox_rainbow.TabStop = false;
+            this.pictureBox_rainbow.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_rainbow_Paint);
             // 
             // pictureBox23
             // 
@@ -760,6 +771,7 @@
             this.pictureBox23.Size = new System.Drawing.Size(100, 100);
             this.pictureBox23.TabIndex = 116;
             this.pictureBox23.TabStop = false;
+            this.pictureBox23.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox23_Paint);
             // 
             // pictureBox22
             // 
@@ -769,6 +781,7 @@
             this.pictureBox22.Size = new System.Drawing.Size(100, 100);
             this.pictureBox22.TabIndex = 115;
             this.pictureBox22.TabStop = false;
+            this.pictureBox22.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox22_Paint);
             // 
             // pictureBox21
             // 
@@ -785,12 +798,89 @@
             this.timer_move_ball.Interval = 50;
             this.timer_move_ball.Tick += new System.EventHandler(this.timer_move_ball_Tick);
             // 
+            // pictureBox9
+            // 
+            this.pictureBox9.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox9.Location = new System.Drawing.Point(215, 398);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox9.TabIndex = 118;
+            this.pictureBox9.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.nudSkip);
+            this.groupBox2.Controls.Add(this.nudPoints);
+            this.groupBox2.Location = new System.Drawing.Point(654, 641);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(127, 69);
+            this.groupBox2.TabIndex = 108;
+            this.groupBox2.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Skip:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "# Points:";
+            // 
+            // nudSkip
+            // 
+            this.nudSkip.Location = new System.Drawing.Point(70, 40);
+            this.nudSkip.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudSkip.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSkip.Name = "nudSkip";
+            this.nudSkip.Size = new System.Drawing.Size(42, 22);
+            this.nudSkip.TabIndex = 5;
+            this.nudSkip.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudSkip.ValueChanged += new System.EventHandler(this.nudSkip_ValueChanged);
+            // 
+            // nudPoints
+            // 
+            this.nudPoints.Location = new System.Drawing.Point(70, 16);
+            this.nudPoints.Name = "nudPoints";
+            this.nudPoints.Size = new System.Drawing.Size(42, 22);
+            this.nudPoints.TabIndex = 4;
+            this.nudPoints.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.nudPoints.ValueChanged += new System.EventHandler(this.nudPoints_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 863);
-            this.Controls.Add(this.pictureBox24);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.pictureBox_rainbow);
             this.Controls.Add(this.pictureBox23);
             this.Controls.Add(this.pictureBox22);
             this.Controls.Add(this.pictureBox21);
@@ -878,10 +968,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -953,11 +1048,17 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox19;
         private System.Windows.Forms.PictureBox pictureBox20;
-        private System.Windows.Forms.PictureBox pictureBox24;
+        private System.Windows.Forms.PictureBox pictureBox_rainbow;
         private System.Windows.Forms.PictureBox pictureBox23;
         private System.Windows.Forms.PictureBox pictureBox22;
         private System.Windows.Forms.PictureBox pictureBox21;
         private System.Windows.Forms.Timer timer_move_ball;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudSkip;
+        private System.Windows.Forms.NumericUpDown nudPoints;
     }
 }
 

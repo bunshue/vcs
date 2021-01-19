@@ -175,7 +175,8 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox5.Size = new Size(W, H);
             pictureBox_histogram.Size = new Size(W, H);
             pictureBox_age.Size = new Size(W, H);
-            pictureBox8.Size = new Size(W * 2 + 10, H);
+            pictureBox8.Size = new Size(W, H);
+            pictureBox9.Size = new Size(W, H);
             pictureBox10.Size = new Size(W, H * 9 / 10);
             pictureBox_random_pixel_image.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
@@ -190,7 +191,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox21.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
             pictureBox23.Size = new Size(W, H);
-            pictureBox24.Size = new Size(W, H);
+            pictureBox_rainbow.Size = new Size(W, H * 2 / 3);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -202,6 +203,7 @@ namespace vcs_Draw9_Example8_vcsh
 
             pictureBox_age.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox9.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox10.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             pictureBox_random_pixel_image.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             pictureBox12.Location = new Point(x_st + dx * 5, y_st + dy * 1);
@@ -221,7 +223,8 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox21.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             pictureBox23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            pictureBox24.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            pictureBox_rainbow.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 3 + 180);
 
             bt_save.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_exit.Location = new Point(x_st + dx * 6 + 120, y_st + dy * 0);
@@ -230,7 +233,7 @@ namespace vcs_Draw9_Example8_vcsh
             richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 80);    //自動表單邊界
+            //ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 80);    //自動表單邊界
         }
 
         void DrawHistogram()
@@ -451,67 +454,10 @@ namespace vcs_Draw9_Example8_vcsh
             }
         }
 
-        //把字體旋轉90度 ST
         private void pictureBox8_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-            using (Font the_font = new Font("Comic Sans MS", 20))
-            {
-
-                int x_st = 10;
-                int y_st = 220;
-                int dx;
-
-                dx = 40;
-                DrawRotatedTextAt(e.Graphics, -90, "January", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "February", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "March", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "April", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "May", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "June", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "July", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "August", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "September", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "October", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "November", x_st, y_st, the_font, Brushes.Red);
-                x_st += dx;
-                DrawRotatedTextAt(e.Graphics, -90, "December", x_st, y_st, the_font, Brushes.Red);
-            }
 
         }
-
-        // Draw a rotated string at a particular position.
-        private void DrawRotatedTextAt(Graphics gr, float angle, string txt, int x, int y, Font the_font, Brush the_brush)
-        {
-            // Save the graphics state.
-            GraphicsState state = gr.Save();
-            gr.ResetTransform();
-
-            // Rotate.
-            gr.RotateTransform(angle);
-
-            // Translate to desired position. Be sure to append
-            // the rotation so it occurs after the rotation.
-            gr.TranslateTransform(x, y, MatrixOrder.Append);
-
-            // Draw the text at the origin.
-            gr.DrawString(txt, the_font, the_brush, 0, 0);
-
-            // Restore the graphics state.
-            gr.Restore(state);
-        }
-        //把字體旋轉90度 SP
 
         #region pictureBox3齒輪運轉圖
 
@@ -1719,6 +1665,291 @@ namespace vcs_Draw9_Example8_vcsh
         {
             Environment.Exit(0);
         }
+
+
+
+        // Draw rainbow colors on the form.
+        private void pictureBox_rainbow_Paint(object sender, PaintEventArgs e)
+        {
+            int wid = this.pictureBox_rainbow.ClientSize.Width;
+            int hgt = this.pictureBox_rainbow.ClientSize.Height;
+            int hgt2 = (int)(hgt / 2);
+            for (int x = 0; x < wid; x++)
+            {
+                using (Pen the_pen = new Pen(MapRainbowColor(x, 0, wid)))
+                {
+                    e.Graphics.DrawLine(the_pen, x, 0, x, hgt2);
+                }
+                using (Pen the_pen = new Pen(MapRainbowColor(x, wid, 0)))
+                {
+                    e.Graphics.DrawLine(the_pen, x, hgt2, x, hgt);
+                }
+            }
+
+        }
+
+
+        // Map a value to a rainbow color.
+        private Color MapRainbowColor(float value, float red_value, float blue_value)
+        {
+            // Convert into a value between 0 and 1023.
+            int int_value = (int)(1023 * (value - red_value) / (blue_value - red_value));
+
+            // Map different color bands.
+            if (int_value < 256)
+            {
+                // Red to yellow. (255, 0, 0) to (255, 255, 0).
+                return Color.FromArgb(255, int_value, 0);
+            }
+            else if (int_value < 512)
+            {
+                // Yellow to green. (255, 255, 0) to (0, 255, 0).
+                int_value -= 256;
+                return Color.FromArgb(255 - int_value, 255, 0);
+            }
+            else if (int_value < 768)
+            {
+                // Green to aqua. (0, 255, 0) to (0, 255, 255).
+                int_value -= 512;
+                return Color.FromArgb(0, 255, int_value);
+            }
+            else
+            {
+                // Aqua to blue. (0, 255, 255) to (0, 0, 255).
+                int_value -= 768;
+                return Color.FromArgb(0, 255 - int_value, 255);
+            }
+        }
+
+        
+        // 畫星形 ST
+        private void pictureBox22_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            PointF[] pts = StarPoints(5, this.pictureBox22.ClientRectangle);
+            e.Graphics.DrawPolygon(Pens.Blue, pts);
+        }
+
+
+        // Return PointFs to define a star.
+        private PointF[] StarPoints(int num_points, Rectangle bounds)
+        {
+            // Make room for the points.
+            PointF[] pts = new PointF[num_points];
+
+            double rx = bounds.Width / 2;
+            double ry = bounds.Height / 2;
+            double cx = bounds.X + rx;
+            double cy = bounds.Y + ry;
+
+            // Start at the top.
+            double theta = -Math.PI / 2;
+            double dtheta = 4 * Math.PI / num_points;
+            for (int i = 0; i < num_points; i++)
+            {
+                pts[i] = new PointF(
+                    (float)(cx + rx * Math.Cos(theta)),
+                    (float)(cy + ry * Math.Sin(theta)));
+                theta += dtheta;
+            }
+            return pts;
+        }
+
+        // 畫星形 SP
+
+        // 畫星形2 ST
+        // For information on star polygons, see:
+        // http://en.wikipedia.org/wiki/Star_polygon
+        // Redraw the star with the new parameters.
+        private void nudPoints_ValueChanged(object sender, EventArgs e)
+        {
+            nudSkip.Maximum = (int)(((int)nudPoints.Value - 1) / 2.0);
+            pictureBox23.Refresh();
+        }
+        private void nudSkip_ValueChanged(object sender, EventArgs e)
+        {
+            pictureBox23.Refresh();
+        }
+
+        // Draw the star.
+        private void pictureBox23_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the star.
+            DrawStar(e.Graphics, Pens.Red, Brushes.Yellow,
+                (int)nudPoints.Value, (int)nudSkip.Value, pictureBox23.ClientRectangle);
+        }
+
+        // Draw the indicated star in the rectangle.
+        private void DrawStar(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, Rectangle rect)
+        {
+            // Get the star's points.
+            PointF[] star_points = MakeStarPoints(-Math.PI / 2, num_points, skip, rect);
+
+            // Draw the star.
+            gr.FillPolygon(the_brush, star_points);
+            gr.DrawPolygon(the_pen, star_points);
+        }
+
+        // Generate the points for a star.
+        private PointF[] MakeStarPoints(double start_theta, int num_points, int skip, Rectangle rect)
+        {
+            double theta, dtheta;
+            PointF[] result;
+            float rx = rect.Width / 2f;
+            float ry = rect.Height / 2f;
+            float cx = rect.X + rx;
+            float cy = rect.Y + ry;
+
+            // If this is a polygon, don't bother with concave points.
+            if (skip == 1)
+            {
+                result = new PointF[num_points];
+                theta = start_theta;
+                dtheta = 2 * Math.PI / num_points;
+                for (int i = 0; i < num_points; i++)
+                {
+                    result[i] = new PointF(
+                        (float)(cx + rx * Math.Cos(theta)),
+                        (float)(cy + ry * Math.Sin(theta)));
+                    theta += dtheta;
+                }
+                return result;
+            }
+
+            // Find the radius for the concave vertices.
+            double concave_radius = CalculateConcaveRadius(num_points, skip);
+
+            // Make the points.
+            result = new PointF[2 * num_points];
+            theta = start_theta;
+            dtheta = Math.PI / num_points;
+            for (int i = 0; i < num_points; i++)
+            {
+                result[2 * i] = new PointF(
+                    (float)(cx + rx * Math.Cos(theta)),
+                    (float)(cy + ry * Math.Sin(theta)));
+                theta += dtheta;
+                result[2 * i + 1] = new PointF(
+                    (float)(cx + rx * Math.Cos(theta) * concave_radius),
+                    (float)(cy + ry * Math.Sin(theta) * concave_radius));
+                theta += dtheta;
+            }
+            return result;
+        }
+
+        // Calculate the inner star radius.
+        private double CalculateConcaveRadius(int num_points, int skip)
+        {
+            // For really small numbers of points.
+            if (num_points < 5) return 0.33f;
+
+            // Calculate angles to key points.
+            double dtheta = 2 * Math.PI / num_points;
+            double theta00 = -Math.PI / 2;
+            double theta01 = theta00 + dtheta * skip;
+            double theta10 = theta00 + dtheta;
+            double theta11 = theta10 - dtheta * skip;
+
+            // Find the key points.
+            PointF pt00 = new PointF(
+                (float)Math.Cos(theta00),
+                (float)Math.Sin(theta00));
+            PointF pt01 = new PointF(
+                (float)Math.Cos(theta01),
+                (float)Math.Sin(theta01));
+            PointF pt10 = new PointF(
+                (float)Math.Cos(theta10),
+                (float)Math.Sin(theta10));
+            PointF pt11 = new PointF(
+                (float)Math.Cos(theta11),
+                (float)Math.Sin(theta11));
+
+            // See where the segments connecting the points intersect.
+            bool lines_intersect, segments_intersect;
+            PointF intersection, close_p1, close_p2;
+            FindIntersection(pt00, pt01, pt10, pt11,
+                out lines_intersect, out segments_intersect,
+                out intersection, out close_p1, out close_p2);
+
+            // Calculate the distance between the
+            // point of intersection and the center.
+            return Math.Sqrt(
+                intersection.X * intersection.X +
+                intersection.Y * intersection.Y);
+        }
+
+        // Find the point of intersection between
+        // the lines p1 --> p2 and p3 --> p4.
+        private void FindIntersection(
+            PointF p1, PointF p2, PointF p3, PointF p4,
+            out bool lines_intersect, out bool segments_intersect,
+            out PointF intersection,
+            out PointF close_p1, out PointF close_p2)
+        {
+            // Get the segments' parameters.
+            float dx12 = p2.X - p1.X;
+            float dy12 = p2.Y - p1.Y;
+            float dx34 = p4.X - p3.X;
+            float dy34 = p4.Y - p3.Y;
+
+            // Solve for t1 and t2
+            float denominator = (dy12 * dx34 - dx12 * dy34);
+
+            float t1 =
+                ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34)
+                    / denominator;
+            if (float.IsInfinity(t1))
+            {
+                // The lines are parallel (or close enough to it).
+                lines_intersect = false;
+                segments_intersect = false;
+                intersection = new PointF(float.NaN, float.NaN);
+                close_p1 = new PointF(float.NaN, float.NaN);
+                close_p2 = new PointF(float.NaN, float.NaN);
+                return;
+            }
+            lines_intersect = true;
+
+            float t2 =
+                ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12)
+                    / -denominator;
+
+            // Find the point of intersection.
+            intersection = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
+
+            // The segments intersect if t1 and t2 are between 0 and 1.
+            segments_intersect =
+                ((t1 >= 0) && (t1 <= 1) &&
+                 (t2 >= 0) && (t2 <= 1));
+
+            // Find the closest points on the segments.
+            if (t1 < 0)
+            {
+                t1 = 0;
+            }
+            else if (t1 > 1)
+            {
+                t1 = 1;
+            }
+
+            if (t2 < 0)
+            {
+                t2 = 0;
+            }
+            else if (t2 > 1)
+            {
+                t2 = 1;
+            }
+
+            close_p1 = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
+            close_p2 = new PointF(p3.X + dx34 * t2, p3.Y + dy34 * t2);
+        }
+
+        // 畫星形2 SP
+
 
     }
 }

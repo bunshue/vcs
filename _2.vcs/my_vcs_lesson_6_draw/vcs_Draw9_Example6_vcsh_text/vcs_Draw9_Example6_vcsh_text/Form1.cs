@@ -138,7 +138,7 @@ namespace vcs_Draw9_Example6_vcsh_text
             int dy;
 
             //button
-            x_st = 1400;
+            x_st = 1530;
             y_st = 10;
             dx = 130;
             dy = 55;
@@ -165,10 +165,16 @@ namespace vcs_Draw9_Example6_vcsh_text
 
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
+            pictureBox3.Size = new Size(W, H);
+            pictureBox4.Size = new Size(W * 7 / 4, H);
+
             pictureBox_rotate_brush.Size = new Size(W * 2, H);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox3.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
             pictureBox_rotate_brush.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox_image_string.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_filled_text.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 150);
@@ -176,7 +182,12 @@ namespace vcs_Draw9_Example6_vcsh_text
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            ClientSize = new Size(button2.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
+            //ClientSize = new Size(button2.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1021,8 +1032,70 @@ namespace vcs_Draw9_Example6_vcsh_text
                 }
             }
         }
-
         //彩色文字 SP
 
+        //把字體旋轉90度 ST
+        private void pictureBox4_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            using (Font the_font = new Font("Comic Sans MS", 20))
+            {
+
+                int x_st = 5;
+                int y_st = 220;
+                int dx;
+
+                dx = 35;
+                DrawRotatedTextAt(e.Graphics, -90, "January", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "February", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "March", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "April", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "May", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "June", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "July", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "August", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "September", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "October", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "November", x_st, y_st, the_font, Brushes.Red);
+                x_st += dx;
+                DrawRotatedTextAt(e.Graphics, -90, "December", x_st, y_st, the_font, Brushes.Red);
+            }
+
+        }
+
+        // Draw a rotated string at a particular position.
+        private void DrawRotatedTextAt(Graphics gr, float angle, string txt, int x, int y, Font the_font, Brush the_brush)
+        {
+            // Save the graphics state.
+            GraphicsState state = gr.Save();
+            gr.ResetTransform();
+
+            // Rotate.
+            gr.RotateTransform(angle);
+
+            // Translate to desired position. Be sure to append
+            // the rotation so it occurs after the rotation.
+            gr.TranslateTransform(x, y, MatrixOrder.Append);
+
+            // Draw the text at the origin.
+            gr.DrawString(txt, the_font, the_brush, 0, 0);
+
+            // Restore the graphics state.
+            gr.Restore(state);
+        }
+        //把字體旋轉90度 SP
+
+    
     }
 }

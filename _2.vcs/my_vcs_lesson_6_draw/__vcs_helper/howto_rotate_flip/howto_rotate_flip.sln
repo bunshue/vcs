@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_rotate_flip", "howto_rotate_flip.csproj", "{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

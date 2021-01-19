@@ -67,6 +67,8 @@
             this.pictureBox_image_string = new System.Windows.Forms.PictureBox();
             this.pictureBox_filled_text = new System.Windows.Forms.PictureBox();
             this.pictureBox_rainbow_text = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).BeginInit();
@@ -79,6 +81,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_image_string)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_filled_text)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow_text)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -104,7 +108,7 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pictureBox1.Location = new System.Drawing.Point(534, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(165, 159);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
@@ -213,18 +217,18 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox2.Location = new System.Drawing.Point(609, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(640, 14);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(165, 159);
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 58;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox_rotate_brush
             // 
             this.pictureBox_rotate_brush.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox_rotate_brush.Location = new System.Drawing.Point(721, 12);
+            this.pictureBox_rotate_brush.Location = new System.Drawing.Point(746, 14);
             this.pictureBox_rotate_brush.Name = "pictureBox_rotate_brush";
-            this.pictureBox_rotate_brush.Size = new System.Drawing.Size(165, 159);
+            this.pictureBox_rotate_brush.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_rotate_brush.TabIndex = 59;
             this.pictureBox_rotate_brush.TabStop = false;
             this.pictureBox_rotate_brush.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_rotate_brush_Paint);
@@ -439,11 +443,32 @@
             this.pictureBox_rainbow_text.TabStop = false;
             this.pictureBox_rainbow_text.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_rainbow_text_Paint);
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox3.Location = new System.Drawing.Point(534, 118);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox3.TabIndex = 78;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox4.Location = new System.Drawing.Point(640, 118);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox4.TabIndex = 79;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox4_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 933);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox_rainbow_text);
             this.Controls.Add(this.pictureBox_filled_text);
             this.Controls.Add(this.pictureBox_image_string);
@@ -489,6 +514,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_image_string)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_filled_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow_text)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,6 +561,8 @@
         private System.Windows.Forms.PictureBox pictureBox_image_string;
         private System.Windows.Forms.PictureBox pictureBox_filled_text;
         private System.Windows.Forms.PictureBox pictureBox_rainbow_text;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }
 
