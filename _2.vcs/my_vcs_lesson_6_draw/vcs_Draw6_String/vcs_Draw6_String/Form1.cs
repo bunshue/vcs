@@ -163,16 +163,160 @@ namespace vcs_Draw6_String
 
         private void button2_Click(object sender, EventArgs e)
         {
-        }
+            if (bitmap1 != null)
+            {
+                // A Mark Twain quote:
+                const string quote = "The trouble ain't that there is too many fools, but that the lightning ain't distributed right.";
+                const int margin = 20;
+                StringFormatFlags[] flags =
+                {
+                    StringFormatFlags.FitBlackBox,
+                    StringFormatFlags.LineLimit,
+                    StringFormatFlags.NoClip,
+                    StringFormatFlags.NoWrap
+                };
+                int height = (this.pictureBox1.ClientSize.Height - (flags.Length + 1) * margin) / flags.Length;
+                int width = this.pictureBox1.ClientSize.Width - 2 * margin;
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+                using (Font font = new Font("Times New Roman", 20))
+                {
+                    using (StringFormat string_format = new StringFormat())
+                    {
+                        int y = margin;
+                        foreach (StringFormatFlags flag in flags)
+                        {
+                            Rectangle rect = new Rectangle(margin, y, width, height);
+                            g.DrawRectangle(Pens.Black, rect);
+                            string_format.FormatFlags = flag;
+                            g.DrawString(flag.ToString() + "  :  " + quote, font, Brushes.Blue, rect, string_format);
+                            y += height + margin;
+                            richTextBox1.Text += "flag : " + flag.ToString() + "\n";
+                        }
+                    }
+                }
 
+                pictureBox1.Image = bitmap1;
+            }
+            else
+            {
+                richTextBox1.Text += "未開啟檔案\n";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (bitmap1 != null)
+            {
+                // A Mark Twain quote:
+                const string quote =
+                    "The trouble ain't that there is too many fools, " +
+                    "but that the lightning ain't distributed right.";
+                const int margin = 5;
+                StringTrimming[] values =
+                    (StringTrimming[])Enum.GetValues(typeof(StringTrimming));
+                int height = (this.pictureBox1.ClientSize.Height - (values.Length + 1) * margin) / values.Length;
+                int width = this.pictureBox1.ClientSize.Width - 2 * margin;
 
+                using (Font font = new Font("Times New Roman", 16))
+                {
+                    using (StringFormat string_format = new StringFormat())
+                    {
+                        int y = margin;
+                        foreach (StringTrimming trimmming in values)
+                        {
+                            Rectangle rect = new Rectangle(margin, y, width, height);
+                            g.DrawRectangle(Pens.Black, rect);
+                            string_format.Trimming = trimmming;
+                            g.DrawString(trimmming.ToString() + "  :  " + quote, font, Brushes.Blue, rect, string_format);
+                            y += height + margin;
+                            richTextBox1.Text += "trimmming : " + trimmming.ToString() + "\n";
+                        }
+                    }
+                }
+                pictureBox1.Image = bitmap1;
+            }
+            else
+            {
+                richTextBox1.Text += "未開啟檔案\n";
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 != null)
+            {
+                // Draw some text aligned in columns.
+
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+                string headings = "Title\tPrice\t# Pages\tYear";
+                string[] lines =
+                {
+                "WPF 3d\t$34.95\t430\t2018",
+                "The C# Helper Top 100\t$24.95\t380\t2017",
+                "Interview Puzzles Dissected\t$15.95\t300\t2016",
+                "C# 24-Hour Trainer, Second Edition\t$45.00\t600\t2015",
+                "Beginning Software Engineering\t$45.00\t480\t2015",
+                "Essential Algorithms\t$60.00\t624\t2013",
+                "Beginning Database Design Solutions\t$44.99\t552\t2008",
+                "Powers of Two\t$2.04\t8\t16",
+                };
+
+                // Prepare a StringFormat to use the tabs.
+                using (StringFormat string_format = new StringFormat())
+                {
+                    // Define the columns' X coordinates.
+                    float[] xpos = { 10, 310, 400, 475 };
+
+                    // Define the column alignments.
+                    StringAlignment[] alignments =
+                    {
+                    StringAlignment.Near,
+                    StringAlignment.Far,
+                    StringAlignment.Far,
+                    StringAlignment.Far,
+                    };
+
+                    // Draw the headings.
+                    float margin = 10;
+                    float y = 10;
+                    using (Font font = new Font("Times New Roman", 13, FontStyle.Bold))
+                    {
+                        string[] strings = headings.Split('\t');
+                        for (int i = 0; i < strings.Length; i++)
+                        {
+                            string_format.Alignment = alignments[i];
+                            g.DrawString(strings[i], font, Brushes.Blue, xpos[i], y, string_format);
+                        }
+                    }
+
+                    // Draw a horizontal line.
+                    y += 1.4f * Font.Height;
+                    float width = xpos[xpos.Length - 1] + 5;
+                    g.DrawLine(Pens.Blue, margin, y, width, y);
+                    y += 5;
+
+                    // Draw the book entries.
+                    using (Font font = new Font("Times New Roman", 11))
+                    {
+                        foreach (string line in lines)
+                        {
+                            string[] strings = line.Split('\t');
+                            for (int i = 0; i < strings.Length; i++)
+                            {
+                                string_format.Alignment = alignments[i];
+                                g.DrawString(strings[i], font, Brushes.Black, xpos[i], y, string_format);
+                            }
+                            y += 1.2f * this.Font.Height;
+                        }
+                    }
+                }
+                pictureBox1.Image = bitmap1;
+            }
+            else
+            {
+                richTextBox1.Text += "未開啟檔案\n";
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)

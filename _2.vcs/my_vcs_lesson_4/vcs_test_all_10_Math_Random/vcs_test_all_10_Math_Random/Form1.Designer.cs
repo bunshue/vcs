@@ -726,7 +726,9 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(155, 40);
             this.button25.TabIndex = 36;
+            this.button25.Text = "找質數個數";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // button26
             // 

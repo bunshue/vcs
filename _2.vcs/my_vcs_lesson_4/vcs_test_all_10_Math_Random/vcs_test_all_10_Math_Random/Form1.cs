@@ -1652,5 +1652,63 @@ namespace vcs_test_all_10_Math_Random
         //N階乘 SP
 
 
+        //找質數個數 ST
+        private void button25_Click(object sender, EventArgs e)
+        {
+            // Make the sieve.
+            int max = 10000;
+
+            richTextBox1.Text += "尋找從 2 到 " + max.ToString() + " 之間的質數\n";
+
+            // Display a Legendre estimate ?(n) = n/(log(n) - 1.08366).
+            // See http://mathworld.wolfram.com/PrimeCountingFunction.html.
+            double est = (max / (Math.Log(max) - 1.08366));
+            richTextBox1.Text += "預估的質數有 " + est.ToString("0") + " 個\n";
+
+            richTextBox1.Text += "前100個\n";
+            bool[] is_prime = MakeSieve2(max);
+            // Display the primes.
+            int num_primes = 0;
+            for (int i = 2; i <= max; i++)
+                if (is_prime[i])
+                {
+                    if (num_primes <= 100)
+                    {
+                        richTextBox1.Text += i.ToString() + "   ";
+                    }
+                    num_primes++;
+                }
+
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "總共找到 " + num_primes.ToString() + " 個質數\n";
+
+        }
+
+
+        // Build a Sieve of Eratosthenes.
+        private bool[] MakeSieve2(int max)
+        {
+            // Make an array indicating whether numbers are prime.
+            bool[] is_prime = new bool[max + 1];
+            is_prime[2] = true;
+            for (int i = 3; i <= max; i += 2) is_prime[i] = true;
+
+            // Cross out multiples of odd primes.
+            for (int i = 3; i <= max; i += 2)
+            {
+                // See if i is prime.
+                if (is_prime[i])
+                {
+                    // Knock out multiples of i.
+                    for (int j = i * 3; j <= max; j += i)
+                        is_prime[j] = false;
+                }
+            }
+            return is_prime;
+        }
+
+        //找質數個數 SP
+
+
     }
 }

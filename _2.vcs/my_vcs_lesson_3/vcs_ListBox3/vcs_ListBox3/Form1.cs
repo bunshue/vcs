@@ -62,8 +62,9 @@ namespace vcs_ListBox3
 
         private void button5_Click(object sender, EventArgs e)
         {
+            listBox1.Items.Clear();
             listBox1.MultiColumn = true;    //多欄
-            listBox1.ColumnWidth = 50;      //欄寬
+            listBox1.ColumnWidth = 60;      //欄寬
             int i;
             for (i = 0; i < 100; i++)
             {

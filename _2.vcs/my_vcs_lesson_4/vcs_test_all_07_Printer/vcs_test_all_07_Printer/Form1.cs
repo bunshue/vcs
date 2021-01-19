@@ -1330,7 +1330,7 @@ namespace vcs_test_all_07_Printer
         }
         #endregion
 
-        //預覽列印巴斯卡三角形
+        //預覽列印巴斯卡三角形 ST
 
         // Display the print preview.
         private void button13_Click(object sender, EventArgs e)
@@ -1392,6 +1392,8 @@ namespace vcs_test_all_07_Printer
             }
 
         }
+
+        //預覽列印巴斯卡三角形 SP
 
         // Display information about the selected printer.
         private void cboPrinters_SelectedIndexChanged(object sender, EventArgs e)
