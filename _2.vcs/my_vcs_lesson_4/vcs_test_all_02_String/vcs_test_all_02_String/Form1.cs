@@ -16,6 +16,12 @@ namespace vcs_test_all_02_String
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "\n\n";
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string str = "Alice is a good student!!";
@@ -95,7 +101,7 @@ namespace vcs_test_all_02_String
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -195,9 +201,29 @@ namespace vcs_test_all_02_String
                 richTextBox1.Text += c.ToString() + " ";
             }
             richTextBox1.Text += "\n";
-
-
         }
+
+        //字串的 Split & Join
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string ols_string = "This is a book.";
+
+            // Split the values at spaces, removing duplicates.
+            string[] values = ols_string.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            int len = values.Length;
+            richTextBox1.Text += "原字串 : " + ols_string + "\t依空白可拆分為 " + len.ToString() + " 個, 分別是：\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 項 : " + values[i] + "\n";
+            }
+
+            // Rejoin them.
+            string result = String.Join("*", values);
+            richTextBox1.Text += "用星號連結組合起來 : " + result + "\n";
+        }
+
 
 
     }

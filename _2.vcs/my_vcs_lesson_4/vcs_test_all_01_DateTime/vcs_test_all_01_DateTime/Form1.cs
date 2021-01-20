@@ -42,6 +42,7 @@ namespace vcs_test_all_01_DateTime
 
         void show_item_location()
         {
+            /*
             int x_st;
             int y_st;
             int dx;
@@ -52,18 +53,113 @@ namespace vcs_test_all_01_DateTime
             y_st = 12;
             dx = 190;
             dy = 50;
+            */
+
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 170;
+            dy = 55;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button24.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button27.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 13);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 14);
+
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button41.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            button43.Location = new Point(x_st + dx * 2, y_st + dy * 13);
+            button44.Location = new Point(x_st + dx * 2, y_st + dy * 14);
+
+            button45.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button46.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button47.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button48.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button49.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button50.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button51.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            /*
+            button52.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button53.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button54.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button55.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button56.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button57.Location = new Point(x_st + dx * 3, y_st + dy * 12);
+            button58.Location = new Point(x_st + dx * 3, y_st + dy * 13);
+            button59.Location = new Point(x_st + dx * 3, y_st + dy * 14);
+            */
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 170;
+            dy = 55;
+
+            textBox2.Location = new Point(x_st + dx * 4, y_st + dy * 9);
+            bt1.Location = new Point(x_st + dx * 5, y_st + dy * 9);
+            textBox1.Location = new Point(x_st + dx * 4, y_st + dy * 10);
+            bt0.Location = new Point(x_st + dx * 5, y_st + dy * 10);
+            dateTimePicker1.Location = new Point(x_st + dx * 4, y_st + dy * 11);
+            bt2.Location = new Point(x_st + dx * 5, y_st + dy * 11);
+            bt4.Location = new Point(x_st + dx * 5, y_st + dy * 12);
+
+            label1.Location = new Point(x_st + dx * 4, y_st + dy * 15);
+            label2.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 15);
+            label5.Location = new Point(x_st + dx * 6 + 200, y_st + dy * 15);
+
+            label3.Location = new Point(x_st + dx * 4, y_st + dy * 16);
+            label4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 16);
 
             //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-
         }
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -620,10 +716,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //dateTimePicker1.Value = new DateTime(2006, 3, 11);                //特定日期
-            //dateTimePicker1.Value = Convert.ToDateTime("2006/3/11 9:15:30");  //特定日期與時間
-            //this.dateTimePicker1.Value = DateTime.Today;                      //今天日期
-            this.dateTimePicker1.Value = DateTime.Now;                          //現在時刻
 
         }
 
@@ -722,25 +814,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button29_Click(object sender, EventArgs e)
         {
-            try
-            {   //可能會產生錯誤的程式區段
-                DateTime dt = DateTime.Parse(textBox1.Text);
-                richTextBox1.Text += dt.ToString() + "\n";
-                Age myAge = CalculateAge(dt, DateTime.Now);
-                richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
-                richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
-                richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
-
-            }
-            catch (Exception ex)
-            {   //定義產生錯誤時的例外處理程式碼
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                //一定會被執行的程式區段
-                richTextBox1.Text += "DateTime.Parse完成\n";
-            }
 
         }
 
@@ -802,23 +875,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button34_Click(object sender, EventArgs e)
         {
-            this.TopMost = false;
-            if (flag_timer_counter_down_enable == 1)
-            {
-                flag_timer_counter_down_enable = 0;
-                button34.Text = "倒數";
-            }
-            else
-            {
-                flag_timer_counter_down_enable = 1;
-                button34.Text = "停止";
-
-                dt_timer_st = System.DateTime.Now;
-                wait_seconds = int.Parse(textBox2.Text) * 60;
-                richTextBox1.Text += "等待時間： " + wait_seconds.ToString() + Environment.NewLine;
-            }
-
-
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -1338,11 +1394,67 @@ new System.Globalization.ChineseLunisolarCalendar();
             listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", now.ToShortDateString() }));
             listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", now.ToShortTimeString() }));
             listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", now.ToString() }));
-
-
         }
 
         private void button51_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt0_Click(object sender, EventArgs e)
+        {
+            try
+            {   //可能會產生錯誤的程式區段
+                DateTime dt = DateTime.Parse(textBox1.Text);
+                richTextBox1.Text += dt.ToString() + "\n";
+                Age myAge = CalculateAge(dt, DateTime.Now);
+                richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
+                richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
+                richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+                richTextBox1.Text += "DateTime.Parse完成\n";
+            }
+        }
+
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+            if (flag_timer_counter_down_enable == 1)
+            {
+                flag_timer_counter_down_enable = 0;
+                bt1.Text = "倒數";
+            }
+            else
+            {
+                flag_timer_counter_down_enable = 1;
+                bt1.Text = "停止";
+
+                dt_timer_st = System.DateTime.Now;
+                wait_seconds = int.Parse(textBox2.Text) * 60;
+                richTextBox1.Text += "等待時間： " + wait_seconds.ToString() + Environment.NewLine;
+            }
+        }
+
+        private void bt2_Click(object sender, EventArgs e)
+        {
+            //dateTimePicker1.Value = new DateTime(2006, 3, 11);                //特定日期
+            //dateTimePicker1.Value = Convert.ToDateTime("2006/3/11 9:15:30");  //特定日期與時間
+            //this.dateTimePicker1.Value = DateTime.Today;                      //今天日期
+            this.dateTimePicker1.Value = DateTime.Now;                          //現在時刻
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
             for (int i = 0; i < listView1.Items.Count; i++)
@@ -1355,9 +1467,28 @@ new System.Globalization.ChineseLunisolarCalendar();
             }
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void bt4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            DateTime value;
+            richTextBox1.Text += "日期 : " + textBox1.Text + "\n";
+            try    // Parse the date and display it in ordinal format.
+            {
+                value = DateTime.Parse(textBox1.Text);
+                richTextBox1.Text += "日期轉序數 : " + value.ToOrdinal() + "\n";
+            }
+            catch
+            {
+            }
+
+            richTextBox1.Text += "日期 : " + dateTimePicker1.Text + "\n";
+            try    // Parse the date and display it in ordinal format.
+            {
+                value = DateTime.Parse(dateTimePicker1.Text);
+                richTextBox1.Text += "日期轉序數 : " + value.ToOrdinal() + "\n";
+            }
+            catch
+            {
+            }
         }
     }
 }

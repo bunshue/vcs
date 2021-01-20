@@ -20,6 +20,8 @@ namespace vcs_ListViewC
         {
             LoadStandardDateFormats();
             LoadStandardNumberFormats();
+            LoadCustomDateFormats();
+            LoadCustomNumberFormats();
         }
 
         void LoadStandardDateFormats()
@@ -161,5 +163,92 @@ namespace vcs_ListViewC
             txt += "</tr>\n";
             return txt;
         }
+
+        void LoadCustomDateFormats()
+        {
+            DateTime now = DateTime.Now;
+            listView3.Items.Add(new ListViewItem(new String[] { "Day of month (1 - 31)", "d", now.ToString("%d") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Day of month (01 - 31)", "dd", now.ToString("dd") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Abbreviated day of week", "ddd", now.ToString("ddd") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Full day of week", "dddd", now.ToString("ddd") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Month (1 - 12)", "M", now.ToString("%M") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Month (01 - 12)", "MM", now.ToString("MM") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Month abbreviation", "MMM", now.ToString("MMM") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Month name", "MMMM", now.ToString("MMMM") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Year (0 - 99)", "y", now.ToString("%y") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Year (01 - 99)", "yy", now.ToString("yy") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Year (minimum 3 digits)", "yyy", now.ToString("yyy") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Year (4 digits)", "yyyy", now.ToString("yyyy") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Year (5 digits)", "yyyyy", now.ToString("yyyyy") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Era", "g", now.ToString("%g") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Era", "gg", now.ToString("gg") }, listView3.Groups[0]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Date separator", "/", now.ToString("%/") }, listView3.Groups[0]));
+
+            listView3.Items.Add(new ListViewItem(new String[] { "Hour (1 - 12)", "h", now.ToString("%h") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Hour (01 - 12)", "hh", now.ToString("hh") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Hour (1 - 23)", "H", now.ToString("%H") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Hour (01 - 23)", "HH", now.ToString("HH") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Minute (0 - 59)", "m", now.ToString("%m") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Minute (00 - 59)", "mm", now.ToString("mm") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Second (0 - 59)", "s", now.ToString("%s") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Second (00 - 59)", "ss", now.ToString("ss") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Tenths of seconds", "f", now.ToString("%f") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Hundredths of seconds", "ff", now.ToString("ff") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Milliseconds", "fff", now.ToString("fff") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Ten thousandths of seconds", "ffff", now.ToString("ffff") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Hundred thousandths of seconds", "fffff", now.ToString("fffff") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Millionths of seconds", "ffffff", now.ToString("ffffff") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Ten millionths of seconds", "fffffff", now.ToString("fffffff") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "A/P", "t", now.ToString("%t") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "AM/PM", "tt", now.ToString("tt") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, tenths of seconds", "F", now.ToString("%F") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, hundredths of seconds", "FF", now.ToString("FF") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, milliseconds", "FFF", now.ToString("FFF") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, ten thousandths of seconds", "FFFF", now.ToString("FFFF") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, hundred thousandths of seconds", "FFFFF", now.ToString("FFFFF") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, millionths of seconds", "FFFFFF", now.ToString("FFFFFF") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "If non-zero, ten millionths of seconds", "FFFFFFF", now.ToString("FFFFFFF") }, listView3.Groups[1]));
+
+            listView3.Items.Add(new ListViewItem(new String[] { "UTC hour offset", "z", now.ToString("%z") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "UTC hour offset with leading 0", "zz", now.ToString("zz") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "UTC hour and minute offset", "zzz", now.ToString("zzz") }, listView3.Groups[1]));
+            listView3.Items.Add(new ListViewItem(new String[] { "Time separator", ":", now.ToString("%:") }, listView3.Groups[1]));
+
+            // Generate code for an HTML table.
+            Console.WriteLine(ListViewToHtmlTable(listView3, 1, 0, 5));
+        }
+
+        void LoadCustomNumberFormats()
+        {
+            listView4.Items.Add(new ListViewItem(new String[] { "Zero placeholder", "0", "A digit or 0 if no digit is present" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Digit placeholder", "#", "A digit or nothing if no digit is present" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Decimal separator", ".", "The decimal separator" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Thousands separator", ",", "Thousands separator" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Scaling", ",", "When placed at the end of the format string, divides by 1000" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Percent placeholder", "%", "Multiplies by 100 and inserts a percent symbol" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Per mille placeholder", "‰", "Multiplies by 100 and inserts a per mille symbol" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Exponentiation", "E+0", "Exponentiation." }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Escape character", "\\", "The following character is not interpreted as a formatting character" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Literal string", "'...'", "The characters in single or double quotes are displayed literally" }));
+            listView4.Items.Add(new ListViewItem(new String[] { "Section separator", ";", "Creates up to three sections for values > 0, < 0, or = 0." }));
+
+            listView5.Items.Add(new ListViewItem(new String[] { "123(\"00000\")", 123.ToString("00000") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "123(\"#####\")", 123.ToString("#####") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "123.4567(\"0.00\")", 123.4567.ToString("0.00") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "1234567890(\"#,#\")", 1234567890.ToString("#,#") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "1234567890(\"#,#,,\")", 1234567890.ToString("#,#,,") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "0.1234(\"#.#%\")", 0.1234.ToString("#.#%") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "1234567890(\"#E000\")", 1234567890.ToString("#E000") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "1234567890(\"#E+000\")", 1234567890.ToString("#E+000") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "0.00001234(\"#E000\")", 0.00001234.ToString("#E000") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "1.234(\"+0.00;<0.00>;-zero-\")", 1.234.ToString("+0.00;<0.00>;-zero-") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "-1.234(\"+0.00;<0.00>;-zero-\")", (-1.234).ToString("+0.00;<0.00>;-zero-") }));
+            listView5.Items.Add(new ListViewItem(new String[] { "0(\"+0.00;<0.00>;-zero-\")", 0.ToString("+0.00;<0.00>;-zero-") }));
+
+            // Generate code for an HTML tables.
+            Console.WriteLine(ListViewToHtmlTable(listView4, 1, 0, 5));
+            Console.WriteLine(ListViewToHtmlTable(listView5, 1, 0, 5));
+        }
+
     }
 }

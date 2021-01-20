@@ -66,6 +66,7 @@
             this.button31 = new System.Windows.Forms.Button();
             this.button36 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -93,9 +94,9 @@
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(12, 588);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 42);
+            this.button2.Size = new System.Drawing.Size(217, 42);
             this.button2.TabIndex = 2;
-            this.button2.Text = "clear";
+            this.button2.Text = "xxx";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -183,8 +184,9 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(217, 42);
             this.button10.TabIndex = 11;
-            this.button10.Text = "xxx";
+            this.button10.Text = "字串的 Split && Join";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -456,11 +458,22 @@
             this.button21.Text = "xxx";
             this.button21.UseVisualStyleBackColor = true;
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1138, 561);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(77, 42);
+            this.bt_clear.TabIndex = 46;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button36);
             this.Controls.Add(this.button31);
@@ -501,6 +514,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -545,6 +559,7 @@
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

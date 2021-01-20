@@ -460,7 +460,15 @@ namespace vcs_test_all_05_Array
 
         private void button12_Click(object sender, EventArgs e)
         {
+            string[,] person = null;
+            person = new string[,] {
+                { "1", "隋文帝", "541年7月21日", "604年8月13日", "581年3月4日", "604年8月13日"},
+                { "2", "隋煬帝", "569年", "618年4月11日", "604年8月21日", "618年4月11日"},
+                { "3", "隋恭帝", "605年", "619年9月14日", "617年12月18日", "618年6月18日"},
+                };
 
+            richTextBox1.Text += "二維陣列內容\n";
+            PrintArray(person);
         }
 
         private const int COLUMNS = 10;
@@ -1162,6 +1170,23 @@ namespace vcs_test_all_05_Array
                 else
                     richTextBox1.Text += array_data[i].ToString() + " ";
             }
+            richTextBox1.Text += "\n";
+        }
+
+        // Display the array's values in the Console window.
+        private void PrintArray<T>(T[,] arr)
+        {
+            for (int r = arr.GetLowerBound(0); r <= arr.GetUpperBound(0); r++)
+            {
+                for (int c = arr.GetLowerBound(1); c <= arr.GetUpperBound(1); c++)
+                {
+                    //Console.Write(arr[r, c] + "\t");
+                    richTextBox1.Text += arr[r, c].ToString() + "\t";
+                }
+                //Console.WriteLine("");
+                richTextBox1.Text += "\n";
+            }
+            //Console.WriteLine("");
             richTextBox1.Text += "\n";
         }
 

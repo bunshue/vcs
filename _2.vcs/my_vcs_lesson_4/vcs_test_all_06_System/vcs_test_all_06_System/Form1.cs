@@ -140,6 +140,11 @@ namespace vcs_test_all_06_System
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void button0_Click(object sender, EventArgs e)
