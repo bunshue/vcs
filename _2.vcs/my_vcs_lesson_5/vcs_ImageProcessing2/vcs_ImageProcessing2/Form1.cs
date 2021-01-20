@@ -66,6 +66,11 @@ namespace vcs_ImageProcessing2
             pictureBox8.Image = ScaleColorComponents(pictureBox1.Image, 0, 1, 0, 1);
             pictureBox9.Image = ScaleColorComponents(pictureBox1.Image, 0, 0, 1, 1);
 
+            //二值化對比
+            hScrollBar1.Value = 128;
+            label20.Text = "二值化對比 " + hScrollBar1.Value.ToString();
+            PerformContrastEnhancement();
+
             //另外的方法製作單色圖片
             //show_mono_color_picture();
 
@@ -160,6 +165,7 @@ namespace vcs_ImageProcessing2
             label18.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 25);
             label19.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 25);
             label20.Location = new Point(x_st + dx * 5, y_st + dy * 2 - 25);
+            hScrollBar1.Location = new Point(x_st + dx * 5 + 180, y_st + dy * 2 - 25);
 
             label1.Text = "原圖";
             label2.Text = "Sepia";
@@ -180,7 +186,7 @@ namespace vcs_ImageProcessing2
             label17.Text = "彩虹化圖片";
             label18.Text = "二值化圖片";
             label19.Text = "8位灰度影像";
-            label20.Text = "";
+            label20.Text = "二值化對比";
         }
 
         private void PictureToSepia1()
@@ -1204,10 +1210,53 @@ namespace vcs_ImageProcessing2
             dstBitmap.UnlockBits(dstBmData);
             return dstBitmap;
         }
-
-
-
         //建立8位灰度影像 SP
+
+        //二值化對比 ST
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            label20.Text = "二值化對比 " + hScrollBar1.Value.ToString();
+            PerformContrastEnhancement();
+        }
+
+        // Perform binary contrast enhancement.
+        private void PerformContrastEnhancement()
+        {
+            if (pictureBox1.Image == null)
+                return;
+
+            // Perform contrast enhancement.
+            Bitmap bm = new Bitmap(pictureBox1.Image);
+
+            BinaryContrast(bm, 3 * hScrollBar1.Value);
+
+            // Display the result.
+            pictureBox1.Visible = true;
+
+            if (pictureBox20.Image != null) pictureBox20.Image.Dispose();
+            pictureBox20.Image = bm;
+            //pictureBox20.Left = pictureBox1.Right + 4;
+            pictureBox20.Visible = true;
+        }
+
+        // Perform binary contrast enhancement on the bitmap.
+        private void BinaryContrast(Bitmap bm, int cutoff)
+        {
+            for (int y = 0; y < bm.Height; y++)
+            {
+                for (int x = 0; x < bm.Width; x++)
+                {
+                    Color clr = bm.GetPixel(x, y);
+                    if (clr.R + clr.G + clr.B > cutoff)
+                        bm.SetPixel(x, y, Color.White);
+                    else
+                        bm.SetPixel(x, y, Color.Black);
+                }
+            }
+        }
+        //二值化對比 SP
+
+
 
     }
 }

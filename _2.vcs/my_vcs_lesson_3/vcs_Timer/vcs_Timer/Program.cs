@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_22_LOG
+namespace vcs_Timer
 {
     static class Program
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{30CF4DA7-01C9-458B-84A0-20511EC19EC8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>my_vcs_24_PID</RootNamespace>
-    <AssemblyName>my_vcs_24_PID</AssemblyName>
+    <RootNamespace>vcs_PID</RootNamespace>
+    <AssemblyName>vcs_PID</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

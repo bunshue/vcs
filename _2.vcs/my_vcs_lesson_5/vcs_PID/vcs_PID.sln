@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "my_vcs_22_LOG", "my_vcs_22_LOG\my_vcs_22_LOG.csproj", "{30CF4DA7-01C9-458B-84A0-20511EC19EC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PID", "vcs_PID\vcs_PID.csproj", "{30CF4DA7-01C9-458B-84A0-20511EC19EC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

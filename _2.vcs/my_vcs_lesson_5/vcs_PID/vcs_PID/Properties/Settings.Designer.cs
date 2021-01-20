@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace my_vcs_22_LOG.Properties {
+namespace vcs_PID.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

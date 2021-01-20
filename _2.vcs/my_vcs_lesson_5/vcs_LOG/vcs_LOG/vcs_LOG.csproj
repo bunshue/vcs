@@ -8,8 +8,8 @@
     <ProjectGuid>{30CF4DA7-01C9-458B-84A0-20511EC19EC8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>my_vcs_22_LOG</RootNamespace>
-    <AssemblyName>my_vcs_22_LOG</AssemblyName>
+    <RootNamespace>vcs_LOG</RootNamespace>
+    <AssemblyName>vcs_LOG</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

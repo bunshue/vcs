@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;        //for Directory, File
 
-namespace my_vcs_22_LOG
+namespace vcs_LOG
 {
     public partial class Form1 : Form
     {
@@ -20,32 +20,15 @@ namespace my_vcs_22_LOG
             InitializeComponent();
         }
 
-        public static class EventLog
+        private void Form1_Load(object sender, EventArgs e)
         {
-            public static string FilePath { get; set; }
-            public static void Write(string format, params object[] arg)
-            {
-                Write(string.Format(format, arg));
-            }
+            LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            richTextBox1.Text += "用Timer1自動存Log中.....\n";
+        }
 
-            public static void Write(string message)
-            {
-                if (string.IsNullOrEmpty(FilePath))
-                {
-                    FilePath = Directory.GetCurrentDirectory();
-                }
-
-                string filename = FilePath + string.Format("\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
-                FileInfo finfo = new FileInfo(filename);
-                if (finfo.Directory.Exists == false)
-                {
-                    finfo.Directory.Create();
-                }
-                string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}",
-                    DateTime.Now, message) + Environment.NewLine;
-
-                File.AppendAllText(filename, writeString, Encoding.Unicode);
-            }
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         int aa = 0;
@@ -55,17 +38,6 @@ namespace my_vcs_22_LOG
             string str = "加入LOG aa = " + aa.ToString();
             EventLog.Write(str);
             richTextBox1.Text += str + "\n";
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
-            richTextBox1.Text += "自動存Log中.....\n";
         }
 
         // If the file exceeds max_size bytes, move it to a new file
@@ -96,7 +68,6 @@ namespace my_vcs_22_LOG
                         //richTextBox1.Text += "i = " + i.ToString() + " rename\told = " + file_name + "." + i.ToString() + "\tnew = " + file_name + "." + (i + 1).ToString() + "\n";
                     }
                 }
-
                 // Move the main log file.
                 File.Move(file_name, file_name + ".0001");
             }
@@ -113,5 +84,32 @@ namespace my_vcs_22_LOG
             WriteToLog(ttt, LogFileName, 100, 300);
         }
 
+        public static class EventLog
+        {
+            public static string FilePath { get; set; }
+            public static void Write(string format, params object[] arg)
+            {
+                Write(string.Format(format, arg));
+            }
+
+            public static void Write(string message)
+            {
+                if (string.IsNullOrEmpty(FilePath))
+                {
+                    FilePath = Directory.GetCurrentDirectory();
+                }
+
+                string filename = FilePath + string.Format("\\{0:yyyy}-{0:MM}\\LOG_{0:yyyy-MM-dd}.txt", DateTime.Now);
+                FileInfo finfo = new FileInfo(filename);
+                if (finfo.Directory.Exists == false)
+                {
+                    finfo.Directory.Create();
+                }
+                string writeString = string.Format("{0:yyyy/MM/dd HH:mm:ss} {1}",
+                    DateTime.Now, message) + Environment.NewLine;
+
+                File.AppendAllText(filename, writeString, Encoding.Unicode);
+            }
+        }
     }
 }

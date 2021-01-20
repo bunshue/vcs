@@ -1,4 +1,4 @@
-﻿namespace my_vcs_24_PID
+﻿namespace vcs_PID
 {
     partial class Form1
     {

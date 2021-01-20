@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace my_vcs_24_PID
+namespace vcs_PID
 {
     static class Program
     {

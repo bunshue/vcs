@@ -1,4 +1,4 @@
-﻿namespace my_vcs_22_LOG
+﻿namespace vcs_LOG
 {
     partial class Form1
     {
