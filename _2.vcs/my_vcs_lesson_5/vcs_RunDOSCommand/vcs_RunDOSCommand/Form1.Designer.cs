@@ -59,7 +59,7 @@
             this.txtStderr.Multiline = true;
             this.txtStderr.Name = "txtStderr";
             this.txtStderr.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStderr.Size = new System.Drawing.Size(481, 170);
+            this.txtStderr.Size = new System.Drawing.Size(785, 170);
             this.txtStderr.TabIndex = 12;
             // 
             // Label2
@@ -79,13 +79,13 @@
             this.txtStdout.Multiline = true;
             this.txtStdout.Name = "txtStdout";
             this.txtStdout.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStdout.Size = new System.Drawing.Size(481, 267);
+            this.txtStdout.Size = new System.Drawing.Size(785, 267);
             this.txtStdout.TabIndex = 10;
             // 
             // btnRun
             // 
             this.btnRun.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnRun.Location = new System.Drawing.Point(226, 38);
+            this.btnRun.Location = new System.Drawing.Point(378, 38);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(56, 21);
             this.btnRun.TabIndex = 9;
@@ -99,7 +99,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtProgram.Location = new System.Drawing.Point(60, 8);
             this.txtProgram.Name = "txtProgram";
-            this.txtProgram.Size = new System.Drawing.Size(436, 22);
+            this.txtProgram.Size = new System.Drawing.Size(740, 22);
             this.txtProgram.TabIndex = 8;
             // 
             // Label1
@@ -129,7 +129,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtStderr);
             this.splitContainer1.Panel2.Controls.Add(this.Label3);
-            this.splitContainer1.Size = new System.Drawing.Size(481, 465);
+            this.splitContainer1.Size = new System.Drawing.Size(785, 465);
             this.splitContainer1.SplitterDistance = 279;
             this.splitContainer1.TabIndex = 14;
             // 
@@ -138,7 +138,7 @@
             this.AcceptButton = this.btnRun;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 541);
+            this.ClientSize = new System.Drawing.Size(812, 541);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.txtProgram);

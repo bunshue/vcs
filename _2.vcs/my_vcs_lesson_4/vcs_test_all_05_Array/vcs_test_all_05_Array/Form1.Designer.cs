@@ -67,6 +67,7 @@
             this.button34 = new System.Windows.Forms.Button();
             this.button35 = new System.Windows.Forms.Button();
             this.tb_matrix = new System.Windows.Forms.TextBox();
+            this.rtb_matrix = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -83,9 +84,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(646, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(735, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(879, 619);
+            this.richTextBox1.Size = new System.Drawing.Size(790, 619);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -464,11 +465,12 @@
             // 
             // button34
             // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(440, 390);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(200, 42);
             this.button34.TabIndex = 58;
+            this.button34.Text = "解讀一個在TextBox的矩陣";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -479,7 +481,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(200, 42);
             this.button35.TabIndex = 59;
-            this.button35.Text = "解讀一個在TextBox的矩陣";
+            this.button35.Text = "解讀一個在RichTextBox的矩陣";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -489,15 +491,25 @@
             this.tb_matrix.Location = new System.Drawing.Point(440, 480);
             this.tb_matrix.Multiline = true;
             this.tb_matrix.Name = "tb_matrix";
-            this.tb_matrix.Size = new System.Drawing.Size(153, 138);
+            this.tb_matrix.Size = new System.Drawing.Size(130, 130);
             this.tb_matrix.TabIndex = 60;
             this.tb_matrix.Text = "0 1 2 3 4 5\r\n1 2 3 4 5 6\r\n2 3 4 5 6 7\r\n3 4 5 6 7 8\r\n4 5 6 7 8 9\r\n5 6 7 8 9 10";
+            // 
+            // rtb_matrix
+            // 
+            this.rtb_matrix.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rtb_matrix.Location = new System.Drawing.Point(599, 480);
+            this.rtb_matrix.Name = "rtb_matrix";
+            this.rtb_matrix.Size = new System.Drawing.Size(130, 130);
+            this.rtb_matrix.TabIndex = 61;
+            this.rtb_matrix.Text = "0 1 2 3 4 5\n1 2 3 4 5 6\n2 3 4 5 6 7\n3 4 5 6 7 8\n4 5 6 7 8 9\n5 6 7 8 9 10";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1537, 643);
+            this.Controls.Add(this.rtb_matrix);
             this.Controls.Add(this.tb_matrix);
             this.Controls.Add(this.button35);
             this.Controls.Add(this.button34);
@@ -586,6 +598,7 @@
         private System.Windows.Forms.Button button34;
         private System.Windows.Forms.Button button35;
         private System.Windows.Forms.TextBox tb_matrix;
+        private System.Windows.Forms.RichTextBox rtb_matrix;
     }
 }
 

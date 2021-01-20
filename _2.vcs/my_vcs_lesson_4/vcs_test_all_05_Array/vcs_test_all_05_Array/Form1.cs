@@ -75,6 +75,7 @@ namespace vcs_test_all_05_Array
             button34.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button35.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             tb_matrix.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            rtb_matrix.Location = new Point(x_st + dx * 2 + 140, y_st + dy * 10);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -1164,17 +1165,22 @@ namespace vcs_test_all_05_Array
             richTextBox1.Text += "\n";
         }
 
-        private void button34_Click(object sender, EventArgs e)
-        {
-
-        }
-
         //解讀一個在TextBox的矩陣 ST
-        private void button35_Click(object sender, EventArgs e)
+        private void button34_Click(object sender, EventArgs e)
         {
             int num_rows, num_cols;
             richTextBox1.Text += "call LoadArray for arr\n";
             double[,] arr = LoadArray(out num_rows, out num_cols);
+            // Display the initial arrays.
+            richTextBox1.Text += "PrintArray for arr\n";
+            PrintArray(arr);
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            int num_rows, num_cols;
+            richTextBox1.Text += "call LoadArray for arr\n";
+            double[,] arr = LoadArray2(out num_rows, out num_cols);
             // Display the initial arrays.
             richTextBox1.Text += "PrintArray for arr\n";
             PrintArray(arr);
@@ -1220,6 +1226,53 @@ namespace vcs_test_all_05_Array
                 for (int c = 0; c < (num_cols + 1); c++)
                 {
                     arr[r, c] = double.Parse(one_row[c]);
+                }
+                //arr[r, num_cols] = double.Parse(value_rows[r]);
+            }
+
+            return arr;
+        }
+
+        // Load the augmented array.
+        // Column num_cols holds the result values.
+        // Column num_cols + 1 will hold the variables' final values after backsolving.
+        private double[,] LoadArray2(out int num_rows, out int num_cols)
+        {
+            richTextBox1.Text += "LoadArray ST\n";
+            // Build the augmented matrix.
+            //string[] value_rows = txtValues.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            string[] coef_rows = rtb_matrix.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            //string[] coef_rows = tb_matrix.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            string[] one_row = coef_rows[0].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            /*
+            richTextBox1.Text += "value_rows\t";
+            foreach (string s in value_rows)
+                richTextBox1.Text += s + " ";
+            richTextBox1.Text += "\n";
+            */
+            richTextBox1.Text += "coef_rows\t";
+            foreach (string s in coef_rows)
+                richTextBox1.Text += s + " ";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "one_row\t";
+            foreach (string s in one_row)
+                richTextBox1.Text += s + " ";
+            richTextBox1.Text += "\n";
+
+            num_rows = coef_rows.GetUpperBound(0);
+            num_cols = one_row.GetUpperBound(0);
+            richTextBox1.Text += "num_rows = " + num_rows.ToString() + "\n";
+            richTextBox1.Text += "num_cols = " + num_cols.ToString() + "\n";
+
+            double[,] arr = new double[num_rows + 1, num_cols + 1];
+            for (int r = 0; r < (num_rows + 1); r++)
+            {
+                one_row = coef_rows[r].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int c = 0; c < (num_cols + 1); c++)
+                {
+                    //arr[r, c] = double.Parse(one_row[c]);
                 }
                 //arr[r, num_cols] = double.Parse(value_rows[r]);
             }
