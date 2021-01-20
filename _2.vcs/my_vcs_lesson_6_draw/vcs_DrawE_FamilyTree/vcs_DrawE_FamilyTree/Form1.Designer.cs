@@ -39,9 +39,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblNodeText});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 627);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 865);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1064, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1394, 22);
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -55,7 +55,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1019, 551);
+            this.pictureBox1.Size = new System.Drawing.Size(1358, 836);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -66,7 +66,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 649);
+            this.ClientSize = new System.Drawing.Size(1394, 887);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";

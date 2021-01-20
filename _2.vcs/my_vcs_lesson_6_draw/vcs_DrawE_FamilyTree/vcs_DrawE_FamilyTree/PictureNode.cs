@@ -24,7 +24,7 @@ namespace vcs_DrawE_FamilyTree
         }
 
         // The size of the drawn rectangles.
-        public SizeF NodeSize = new SizeF(100, 100);
+        public SizeF NodeSize = new SizeF(120, 150);    //每張圖片大小
 
         // For testing.
         //private static Random Rand = new Random();

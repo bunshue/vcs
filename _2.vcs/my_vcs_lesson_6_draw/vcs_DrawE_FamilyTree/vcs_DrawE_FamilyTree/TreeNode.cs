@@ -17,8 +17,8 @@ namespace vcs_DrawE_FamilyTree
 
         // Space to skip horizontally between siblings
         // and vertically between generations.
-        private const float Hoffset = 5;
-        private const float Voffset = 30;
+        private const float Hoffset = 20;   //橫向距離
+        private const float Voffset = 60;   //縱向距離
 
         // The node's center after arranging.
         private PointF Center;
