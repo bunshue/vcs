@@ -32,8 +32,8 @@ namespace vcs_Draw9_Example7_vcsh
         // The root of the Octagon object hierarchy.
         private Octagon Root8 = null;
 
-        int W = 200;
-        int H = 200;
+        int W = 220;
+        int H = 220;
 
         private const int Period = 21;
         private Color[] Colors;
@@ -109,7 +109,7 @@ namespace vcs_Draw9_Example7_vcsh
             int dy;
 
             //button
-            x_st = 1150 + 220;
+            x_st = 1700;
             y_st = 40;
             dx = 110;
             dy = 38;
@@ -145,11 +145,17 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox8.Size = new Size(W, H);
             pictureBox_snowflake.Size = new Size(W, H);
             pictureBox_snowflake2.Size = new Size(W, H);
+            pictureBox9.Size = new Size(W, H);
+            pictureBox10.Size = new Size(W, H);
+            pictureBox11.Size = new Size(W, H);
+            pictureBox12.Size = new Size(W, H);
+            pictureBox13.Size = new Size(W, H);
+            pictureBox14.Size = new Size(W, H);
 
             x_st = 10;
             y_st = 10;
             dx = W + 30;
-            dy = H + 20;
+            dy = H + 40;
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_hex.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -168,10 +174,16 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_Chrysanthemum.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox_polar.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-
             richTextBox_ransom_note.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox_ransom_note.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             richTextBox_ransom_note_result.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+
+            pictureBox9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            pictureBox10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox12.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox13.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            pictureBox14.Location = new Point(x_st + dx * 5, y_st + dy * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 

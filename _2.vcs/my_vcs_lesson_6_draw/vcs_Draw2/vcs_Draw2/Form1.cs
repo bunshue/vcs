@@ -24,7 +24,10 @@ namespace vcs_Draw2
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
@@ -71,6 +74,9 @@ namespace vcs_Draw2
                 richTextBox1.Text += "LinearGradientBrush\n";
             }
 
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location()
@@ -142,162 +148,22 @@ namespace vcs_Draw2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            Font f = new Font("標楷體", 18, FontStyle.Bold);
-            SolidBrush sb = new SolidBrush(Color.Black);
-            g.DrawString("生日快樂!", f, sb, 10, 10);
-            pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DrawVerticalString();
-        }
-
-        int dd = 0;
-        public void DrawVerticalString()
-        {
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            string str = "imsLink每次影像重抓 像是會慢一陣子";
-            Font f = new Font("Arial", 16);
-            SolidBrush sb = new SolidBrush(Color.Black);
-            StringFormat drawFormat = new StringFormat();
-
-            dd++;
-            float x = 150.0F + dd;
-            float y = 50.0F + dd;
-
-
-            //richTextBox1.Text += "111\t" + drawFormat.FormatFlags.ToString() + "\n";
-            //drawFormat.FormatFlags = StringFormatFlags.
-            g.DrawString(str, f, sb, x, y, drawFormat);
-
-            //richTextBox1.Text += "222\t" + drawFormat.FormatFlags.ToString() + "\n";
-            //drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-            g.DrawString(str, f, sb, x, y + 100, drawFormat);
-
-            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-
-            //richTextBox1.Text += "333\t" + drawFormat.FormatFlags.ToString() + "\n";
-            g.DrawString(str, f, sb, x, y, drawFormat);
-
-            f.Dispose();
-            sb.Dispose();
-            g.Dispose();
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            // Construct a new Rectangle.
-            Rectangle r = new Rectangle(new Point(50, 50), new Size(300, 300));
-            Font f = new Font("標楷體", 12, FontStyle.Bold);
-            SolidBrush sb = new SolidBrush(Color.Black);
-
-            StringFormat fmt = new StringFormat(StringFormatFlags.NoClip);
-
-            // Draw the bounding rectangle
-            g.DrawRectangle(Pens.Black, r);
-
-            fmt.LineAlignment = StringAlignment.Near;    //向上對齊
-            fmt.Alignment = StringAlignment.Near;      //水平靠左
-            g.DrawString("對齊上左方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Near;    //向上對齊
-            fmt.Alignment = StringAlignment.Center;      //水平置中
-            g.DrawString("對齊上中方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Near;    //向上對齊
-            fmt.Alignment = StringAlignment.Far;      //水平靠右
-            g.DrawString("對齊上右方", f, sb, (RectangleF)r, fmt);
-
-
-            fmt.LineAlignment = StringAlignment.Center;    //向中對齊
-            fmt.Alignment = StringAlignment.Near;      //水平靠左
-            g.DrawString("對齊中左方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Center;    //向中對齊
-            fmt.Alignment = StringAlignment.Center;      //水平置中
-            g.DrawString("對齊中中方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Center;  //向中對齊
-            fmt.Alignment = StringAlignment.Far;         //水平靠右
-            g.DrawString("對齊中右方", f, sb, (RectangleF)r, fmt);
-
-
-            fmt.LineAlignment = StringAlignment.Far;    //向下對齊
-            fmt.Alignment = StringAlignment.Near;      //水平靠左
-            g.DrawString("對齊下左方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Far;    //向下對齊
-            fmt.Alignment = StringAlignment.Center;      //水平置中
-            g.DrawString("對齊下中方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Far;  //向下對齊
-            fmt.Alignment = StringAlignment.Far;         //水平靠右
-            g.DrawString("對齊下右方", f, sb, (RectangleF)r, fmt);
-
-            fmt.LineAlignment = StringAlignment.Center;  //向中對齊
-            fmt.Alignment = StringAlignment.Far;         //水平靠右
-            fmt.FormatFlags = StringFormatFlags.DirectionVertical;  //直書
-            g.DrawString("向中對齊+水平靠右+直書", f, Brushes.Red, (RectangleF)r, fmt);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //使用StringFormat與適當DrawString方法來指定置中對齊的文字。
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            string text1 = "Use StringFormat and Rectangle objects to center text in a rectangle.";
-            using (Font font1 = new Font("Arial", 22, FontStyle.Bold, GraphicsUnit.Point))
-            {
-                Rectangle rect1 = new Rectangle(10, 10, 130, 140);
-
-                // Create a StringFormat object with the each line of text, and the block
-                // of text centered on the page.
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Center;
-                stringFormat.LineAlignment = StringAlignment.Center;
-
-                // Draw the text and the surrounding rectangle.
-                g.DrawString(text1, font1, Brushes.Blue, rect1, stringFormat);
-                g.DrawRectangle(Pens.Black, rect1);
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //使用TextFormatFlags列舉型別換行，以及以垂直和水平置中與適當的文字DrawText方法。
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            string text2 = "Use TextFormatFlags and Rectangle objects to center text in a rectangle.";
-
-            using (Font font2 = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point))
-            {
-                Rectangle rect2 = new Rectangle(150, 10, 130, 140);
-
-                // Create a TextFormatFlags with word wrapping, horizontal center and
-                // vertical center specified.
-                TextFormatFlags flags = TextFormatFlags.HorizontalCenter |
-                    TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak;
-
-                // Draw the text and the surrounding rectangle.
-                TextRenderer.DrawText(g, text2, font2, rect2, Color.Blue, flags);
-                g.DrawRectangle(Pens.Black, rect2);
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)

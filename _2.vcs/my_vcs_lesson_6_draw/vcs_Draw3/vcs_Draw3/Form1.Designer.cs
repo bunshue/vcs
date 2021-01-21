@@ -94,6 +94,8 @@
             this.timer_atom2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_random = new System.Windows.Forms.PictureBox();
             this.timer_random = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_spin = new System.Windows.Forms.PictureBox();
+            this.timer_spin = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -105,6 +107,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -655,11 +658,27 @@
             this.timer_random.Interval = 5;
             this.timer_random.Tick += new System.EventHandler(this.timer_random_Tick);
             // 
+            // pictureBox_spin
+            // 
+            this.pictureBox_spin.Location = new System.Drawing.Point(12, 352);
+            this.pictureBox_spin.Name = "pictureBox_spin";
+            this.pictureBox_spin.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_spin.TabIndex = 66;
+            this.pictureBox_spin.TabStop = false;
+            this.pictureBox_spin.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_spin_Paint);
+            // 
+            // timer_spin
+            // 
+            this.timer_spin.Enabled = true;
+            this.timer_spin.Interval = 50;
+            this.timer_spin.Tick += new System.EventHandler(this.timer_spin_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1251, 750);
+            this.Controls.Add(this.pictureBox_spin);
             this.Controls.Add(this.pictureBox_random);
             this.Controls.Add(this.pictureBox_card2);
             this.Controls.Add(this.pictureBox_card);
@@ -724,6 +743,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -796,6 +816,8 @@
         internal System.Windows.Forms.Timer timer_atom2;
         private System.Windows.Forms.PictureBox pictureBox_random;
         private System.Windows.Forms.Timer timer_random;
+        private System.Windows.Forms.PictureBox pictureBox_spin;
+        private System.Windows.Forms.Timer timer_spin;
     }
 }
 

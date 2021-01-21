@@ -183,13 +183,14 @@ namespace vcs_Draw3
             gc2 = Graphics.FromImage(bitmap_card2);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             pictureBox_card2.Image = bitmap_card2;
 
-
             //for atom2
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer | ControlStyles.ResizeRedraw, true);
             this.UpdateStyles();
 
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
-
 
         void show_item_location()
         {
@@ -199,7 +200,7 @@ namespace vcs_Draw3
             int dy;
 
             //button
-            x_st = 1100;
+            x_st = 1550;
             y_st = 10;
             dx = 120;
             dy = 50;
@@ -257,6 +258,9 @@ namespace vcs_Draw3
 
             pictureBox_atom.Size = new Size(W, H);
             pictureBox_atom.Location = new Point(x_st + dx * 1, y_st);
+
+            pictureBox_spin.Location = new Point(130, 360);
+            pictureBox_spin.BackColor = Color.LightGray;
 
             pictureBox_gear.Size = new Size(W, H);
             pictureBox_gear.Location = new Point(x_st + dx * 2, y_st);
@@ -1531,5 +1535,39 @@ namespace vcs_Draw3
             grnd.Dispose();
         }
         #endregion
+
+        private void timer_spin_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox_spin.Refresh();
+        }
+
+        float spin = 0;
+        private void pictureBox_spin_Paint(object sender, PaintEventArgs e)
+        {
+            int w = pictureBox_spin.Width;
+            int h = pictureBox_spin.Height;
+            int cx = w / 2;
+            int cy = h / 2;
+            int r = Math.Min((w / 2) * 4 / 5, (h / 2) * 4 / 5);
+            int px = cx + (int)(r * Math.Cos(spin));
+            int py = cy + (int)(r * Math.Sin(spin));
+            spin += 0.30f;
+
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                e.Graphics.DrawLine(pen, cx, cy, px, py);
+            }
+
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                const float radius = 10;
+                //e.Graphics.DrawLine(pen, cx, cy, px, py);
+                e.Graphics.DrawEllipse(Pens.Blue, px - radius, py - radius, 2 * radius, 2 * radius);
+                e.Graphics.FillEllipse(new SolidBrush(Color.Blue), px - radius, py - radius, 2 * radius, 2 * radius);
+            }
+        }
+
+
+
     }
 }
