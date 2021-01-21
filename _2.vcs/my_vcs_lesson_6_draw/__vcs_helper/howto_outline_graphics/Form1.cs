@@ -92,6 +92,7 @@ namespace howto_outline_graphics
             return new_bm;
         }
 
+        //找出半徑內非白色點的最近距離
         // Return the distance to the nearest non-white pixel within the radius.
         private float DistToNonWhite(Bitmap32 bm32, int x, int y, int radius)
         {

@@ -8,8 +8,8 @@
     <ProjectGuid>{FB11A382-BE7F-4AAD-8449-A1C9547F507E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ImageProcessing</RootNamespace>
-    <AssemblyName>vcs_ImageProcessing</AssemblyName>
+    <RootNamespace>vcs_ImageProcessing1</RootNamespace>
+    <AssemblyName>vcs_ImageProcessing1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

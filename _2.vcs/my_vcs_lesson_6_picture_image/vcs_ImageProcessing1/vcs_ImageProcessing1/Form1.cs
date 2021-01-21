@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;   //for ImageLockMode
 using System.Runtime.InteropServices;   //for Marshal
 
-namespace vcs_ImageProcessing
+namespace vcs_ImageProcessing1
 {
     public partial class Form1 : Form
     {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ImageProcessing", "vcs_ImageProcessing\vcs_ImageProcessing.csproj", "{FB11A382-BE7F-4AAD-8449-A1C9547F507E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ImageProcessing1", "vcs_ImageProcessing1\vcs_ImageProcessing1.csproj", "{FB11A382-BE7F-4AAD-8449-A1C9547F507E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
