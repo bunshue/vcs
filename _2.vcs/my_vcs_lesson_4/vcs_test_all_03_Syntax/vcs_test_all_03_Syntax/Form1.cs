@@ -44,6 +44,13 @@ namespace vcs_test_all_03_Syntax
                 txt += (char)i;
             }
             lb_symbols_3.Text = txt;
+
+
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
         }
 
         void show_item_location()

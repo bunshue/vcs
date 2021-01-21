@@ -91,6 +91,10 @@ namespace vcs_Draw9_Example7_vcsh
                 Color.Violet
             };
             MakeDragon4Image();
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location()

@@ -771,37 +771,41 @@
             // lb_symbols_3
             // 
             this.lb_symbols_3.AutoSize = true;
+            this.lb_symbols_3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_symbols_3.Location = new System.Drawing.Point(163, 494);
             this.lb_symbols_3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_3.Name = "lb_symbols_3";
-            this.lb_symbols_3.Size = new System.Drawing.Size(70, 12);
+            this.lb_symbols_3.Size = new System.Drawing.Size(110, 19);
             this.lb_symbols_3.TabIndex = 69;
             this.lb_symbols_3.Text = "lb_symbols_3";
             // 
             // tb_symbols_2
             // 
+            this.tb_symbols_2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_symbols_2.Location = new System.Drawing.Point(166, 457);
             this.tb_symbols_2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_symbols_2.Name = "tb_symbols_2";
-            this.tb_symbols_2.Size = new System.Drawing.Size(330, 22);
+            this.tb_symbols_2.Size = new System.Drawing.Size(330, 30);
             this.tb_symbols_2.TabIndex = 68;
             // 
             // lb_symbols_2
             // 
             this.lb_symbols_2.AutoSize = true;
+            this.lb_symbols_2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_symbols_2.Location = new System.Drawing.Point(163, 394);
             this.lb_symbols_2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_2.Name = "lb_symbols_2";
-            this.lb_symbols_2.Size = new System.Drawing.Size(70, 12);
+            this.lb_symbols_2.Size = new System.Drawing.Size(110, 19);
             this.lb_symbols_2.TabIndex = 67;
             this.lb_symbols_2.Text = "lb_symbols_2";
             // 
             // tb_symbols_1
             // 
+            this.tb_symbols_1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_symbols_1.Location = new System.Drawing.Point(166, 423);
             this.tb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tb_symbols_1.Name = "tb_symbols_1";
-            this.tb_symbols_1.Size = new System.Drawing.Size(330, 22);
+            this.tb_symbols_1.Size = new System.Drawing.Size(330, 30);
             this.tb_symbols_1.TabIndex = 66;
             this.tb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             // 
@@ -810,10 +814,11 @@
             this.lb_symbols_1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_symbols_1.AutoSize = true;
+            this.lb_symbols_1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_symbols_1.Location = new System.Drawing.Point(163, 364);
             this.lb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_1.Name = "lb_symbols_1";
-            this.lb_symbols_1.Size = new System.Drawing.Size(227, 12);
+            this.lb_symbols_1.Size = new System.Drawing.Size(357, 19);
             this.lb_symbols_1.TabIndex = 65;
             this.lb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             // 

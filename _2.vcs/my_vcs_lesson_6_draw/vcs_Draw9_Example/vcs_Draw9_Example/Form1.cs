@@ -42,6 +42,10 @@ namespace vcs_Draw9_Example
 
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.BackColor = Color.Pink;
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         void show_item_location(int form_position_x_st)
