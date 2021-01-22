@@ -474,7 +474,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(100, 40);
             this.button28.TabIndex = 58;
-            this.button28.Text = "格式化列印文字";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

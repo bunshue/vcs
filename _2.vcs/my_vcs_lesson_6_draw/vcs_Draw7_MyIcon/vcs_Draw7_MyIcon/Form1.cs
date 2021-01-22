@@ -207,12 +207,40 @@ namespace vcs_Draw7_MyIcon
             g.DrawString("2", f, sb, new PointF(10, 0));
             
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-      
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 128;
+            height = 128;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            Font f;
+
+            sb = new SolidBrush(Color.Red);
+            f = new Font("Arial", 42);
+
+            g.DrawString("VCS", f, sb, new PointF(0, 32));
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -2004,7 +2032,6 @@ namespace vcs_Draw7_MyIcon
                 background_color = colorDialog1.Color;
                 button19.BackColor = background_color;
             }
-
         }
 
         private void bt6_Click(object sender, EventArgs e)
@@ -2014,9 +2041,8 @@ namespace vcs_Draw7_MyIcon
 
         private void bt7_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {

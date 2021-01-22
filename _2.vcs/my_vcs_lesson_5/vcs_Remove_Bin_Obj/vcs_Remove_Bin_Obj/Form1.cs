@@ -126,7 +126,7 @@ namespace vcs_Remove_Bin_Obj
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
-                        else if (subdirectory.EndsWith("\\_UpgradeReport_Files"))
+                        else if ((subdirectory.EndsWith("\\_UpgradeReport_Files")) || (subdirectory.EndsWith("Backup")))
                         {
                             if (checkBox7.Checked == true)
                                 richTextBox1.Text += subdirectory + "\n";   //僅顯示

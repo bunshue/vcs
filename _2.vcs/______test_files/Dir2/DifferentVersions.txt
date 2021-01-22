@@ -1,0 +1,3 @@
+This text file has different versions in Dir1 and Dir1.
+
+This is the Dir2 version.
