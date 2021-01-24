@@ -175,11 +175,11 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox5.Size = new Size(W, H);
             pictureBox_histogram.Size = new Size(W, H);
             pictureBox_age.Size = new Size(W, H);
-            pictureBox8.Size = new Size(W, H);
-            pictureBox9.Size = new Size(W, H);
+            pictureBox_color_wheel1.Size = new Size(W, H);
+            pictureBox_color_wheel2.Size = new Size(W, H);
             pictureBox10.Size = new Size(W, H * 9 / 10);
             pictureBox_random_pixel_image.Size = new Size(W, H);
-            pictureBox12.Size = new Size(W, H);
+            pictureBox_arrow.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
             pictureBox14.Size = new Size(W, H);
             pictureBox15.Size = new Size(W, H);
@@ -188,7 +188,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
             pictureBox20.Size = new Size(W, H);
-            pictureBox21.Size = new Size(W, H);
+            pictureBox_star.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
             pictureBox23.Size = new Size(W, H);
             pictureBox_rainbow.Size = new Size(W, H * 2 / 3);
@@ -202,11 +202,11 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_histogram.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
             pictureBox_age.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox9.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox_color_wheel1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox_color_wheel2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox10.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             pictureBox_random_pixel_image.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox12.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            pictureBox_arrow.Location = new Point(x_st + dx * 5, y_st + dy * 1);
 
             pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -220,7 +220,7 @@ namespace vcs_Draw9_Example8_vcsh
 
             pictureBox19.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             pictureBox20.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox21.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox_star.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             pictureBox23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
             pictureBox_rainbow.Location = new Point(x_st + dx * 5, y_st + dy * 3);
@@ -234,6 +234,9 @@ namespace vcs_Draw9_Example8_vcsh
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 80);    //自動表單邊界
+
+            pictureBox_color_wheel1.BackColor = Color.Red;
+            pictureBox_color_wheel2.BackColor = Color.Green;
         }
 
         void DrawHistogram()
@@ -452,11 +455,6 @@ namespace vcs_Draw9_Example8_vcsh
             {
                 gr.DrawLines(pen, points.ToArray());
             }
-        }
-
-        private void pictureBox8_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         #region pictureBox3齒輪運轉圖
@@ -1949,6 +1947,293 @@ namespace vcs_Draw9_Example8_vcsh
         }
 
         // 畫星形2 SP
+
+
+        // 兩種 Color Wheel ST
+        // Draw a color wheel in the indicated area.
+        private void DrawColorWheel1(Graphics gr, Color outline_color, int xmin, int ymin, int wid, int hgt)
+        {
+            Rectangle rect = new Rectangle(xmin, ymin, wid, hgt);
+            GraphicsPath wheel_path = new GraphicsPath();
+            wheel_path.AddEllipse(rect);
+            wheel_path.Flatten();
+
+            int num_pts = (wheel_path.PointCount - 1) / 3;
+            Color[] surround_colors = new Color[wheel_path.PointCount];
+            float r = 255, g = 0, b = 0;
+            float dr, dg, db;
+            dr = -255 / num_pts;
+            db = 255 / num_pts;
+            for (int i = 0; i < num_pts; i++)
+            {
+                surround_colors[i] = Color.FromArgb(255, (int)r, (int)g, (int)b);
+                r += dr;
+                b += db;
+            }
+
+            r = 0; g = 0; b = 255;
+            dg = 255 / num_pts;
+            db = -255 / num_pts;
+            for (int i = num_pts; i < 2 * num_pts; i++)
+            {
+                surround_colors[i] = Color.FromArgb(255, (int)r, (int)g, (int)b);
+                g += dg;
+                b += db;
+            }
+
+            r = 0; g = 255; b = 0;
+            dr = 255 / (wheel_path.PointCount - 2 * num_pts);
+            dg = -255 / (wheel_path.PointCount - 2 * num_pts);
+            for (int i = 2 * num_pts; i < wheel_path.PointCount; i++)
+            {
+                surround_colors[i] = Color.FromArgb(255, (int)r, (int)g, (int)b);
+                r += dr;
+                g += dg;
+            }
+
+            using (PathGradientBrush path_brush = new PathGradientBrush(wheel_path))
+            {
+                path_brush.CenterColor = Color.White;
+                path_brush.SurroundColors = surround_colors;
+
+                gr.FillPath(path_brush, wheel_path);
+
+                // It looks better if we outline the wheel.
+                using (Pen thick_pen = new Pen(outline_color, 2))
+                {
+                    gr.DrawPath(thick_pen, wheel_path);
+                }
+            }
+
+            //// Uncomment the following to draw the path's points.
+            //for (int i = 0; i < wheel_path.PointCount; i++)
+            //{
+            //    gr.FillEllipse(Brushes.Black,
+            //        wheel_path.PathPoints[i].X - 2,
+            //        wheel_path.PathPoints[i].Y - 2,
+            //        4, 4);
+            //}
+        }
+
+        // Draw a color wheel.
+        private void pictureBox_color_wheel1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            DrawColorWheel1(e.Graphics, this.pictureBox_color_wheel1.BackColor, 10, 10, this.pictureBox_color_wheel1.ClientSize.Width - 20, this.pictureBox_color_wheel1.ClientSize.Height - 20);
+        }
+
+
+        // Draw a color wheel in the indicated area.
+        private void DrawColorWheel2(Graphics gr, Color outline_color,
+            int xmin, int ymin, int wid, int hgt)
+        {
+            Rectangle rect = new Rectangle(xmin, ymin, wid, hgt);
+            GraphicsPath wheel_path = new GraphicsPath();
+            wheel_path.AddEllipse(rect);
+            wheel_path.Flatten();
+
+            float num_pts = (wheel_path.PointCount - 1) / 6;
+            Color[] surround_colors = new Color[wheel_path.PointCount];
+
+            int index = 0;
+            InterpolateColors(surround_colors, ref index,
+                1 * num_pts, 255, 255, 0, 0, 255, 255, 0, 255);
+            InterpolateColors(surround_colors, ref index,
+                2 * num_pts, 255, 255, 0, 255, 255, 0, 0, 255);
+            InterpolateColors(surround_colors, ref index,
+                3 * num_pts, 255, 0, 0, 255, 255, 0, 255, 255);
+            InterpolateColors(surround_colors, ref index,
+                4 * num_pts, 255, 0, 255, 255, 255, 0, 255, 0);
+            InterpolateColors(surround_colors, ref index,
+                5 * num_pts, 255, 0, 255, 0, 255, 255, 255, 0);
+            InterpolateColors(surround_colors, ref index,
+                wheel_path.PointCount, 255, 255, 255, 0, 255, 255, 0, 0);
+
+            using (PathGradientBrush path_brush =
+                new PathGradientBrush(wheel_path))
+            {
+                path_brush.CenterColor = Color.White;
+                path_brush.SurroundColors = surround_colors;
+
+                gr.FillPath(path_brush, wheel_path);
+
+                // It looks better if we outline the wheel.
+                using (Pen thick_pen = new Pen(outline_color, 2))
+                {
+                    gr.DrawPath(thick_pen, wheel_path);
+                }
+            }
+
+            //// Uncomment the following to draw the path's points.
+            //for (int i = 0; i < wheel_path.PointCount; i++)
+            //{
+            //    gr.FillEllipse(Brushes.Black,
+            //        wheel_path.PathPoints[i].X - 2,
+            //        wheel_path.PathPoints[i].Y - 2,
+            //        4, 4);
+            //}
+        }
+
+        // Fill in colors interpolating between the from and to values.
+        private void InterpolateColors(Color[] surround_colors,
+            ref int index, float stop_pt,
+            int from_a, int from_r, int from_g, int from_b,
+            int to_a, int to_r, int to_g, int to_b)
+        {
+            int num_pts = (int)stop_pt - index;
+            float a = from_a, r = from_r, g = from_g, b = from_b;
+            float da = (to_a - from_a) / (num_pts - 1);
+            float dr = (to_r - from_r) / (num_pts - 1);
+            float dg = (to_g - from_g) / (num_pts - 1);
+            float db = (to_b - from_b) / (num_pts - 1);
+
+            for (int i = 0; i < num_pts; i++)
+            {
+                surround_colors[index++] =
+                    Color.FromArgb((int)a, (int)r, (int)g, (int)b);
+                a += da;
+                r += dr;
+                g += dg;
+                b += db;
+            }
+        }
+
+
+
+        // Draw a color wheel.
+        private void pictureBox_color_wheel2_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            DrawColorWheel2(e.Graphics, this.pictureBox_color_wheel2.BackColor, 10, 10, this.pictureBox_color_wheel2.ClientSize.Width - 20, this.pictureBox_color_wheel2.ClientSize.Height - 20);
+        }
+
+        // 兩種 Color Wheel SP
+
+        //畫各種箭頭 ST
+
+        // The end point style.
+        private enum EndpointStyle
+        {
+            None,
+            ArrowHead,
+            Fletching
+        }
+
+        // Draw arrow heads or tails for the
+        // segment from p1 to p2.
+        private void DrawArrow(Graphics gr, Pen pen, PointF p1, PointF p2,
+            float length, EndpointStyle style1, EndpointStyle style2)
+        {
+            // Draw the shaft.
+            gr.DrawLine(pen, p1, p2);
+
+            // Find the arrow shaft unit vector.
+            float vx = p2.X - p1.X;
+            float vy = p2.Y - p1.Y;
+            float dist = (float)Math.Sqrt(vx * vx + vy * vy);
+            vx /= dist;
+            vy /= dist;
+
+            // Draw the start.
+            if (style1 == EndpointStyle.ArrowHead)
+            {
+                DrawArrowhead(gr, pen, p1, -vx, -vy, length);
+            }
+            else if (style1 == EndpointStyle.Fletching)
+            {
+                DrawArrowhead(gr, pen, p1, vx, vy, length);
+            }
+
+            // Draw the end.
+            if (style2 == EndpointStyle.ArrowHead)
+            {
+                DrawArrowhead(gr, pen, p2, vx, vy, length);
+            }
+            else if (style2 == EndpointStyle.Fletching)
+            {
+                DrawArrowhead(gr, pen, p2, -vx, -vy, length);
+            }
+        }
+
+        // Draw an arrowhead at the given point
+        // in the normalized direction <nx, ny>.
+        private void DrawArrowhead(Graphics gr, Pen pen,
+            PointF p, float nx, float ny, float length)
+        {
+            float ax = length * (-ny - nx);
+            float ay = length * (nx - ny);
+            PointF[] points =
+            {
+                new PointF(p.X + ax, p.Y + ay),
+                p,
+                new PointF(p.X - ay, p.Y + ax)
+            };
+            gr.DrawLines(pen, points);
+        }
+
+        // Draw some arrows.
+        private void pictureBox_arrow_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            int x1 = 20;
+            int x2 = 200;
+
+            using (Pen thick_pen = new Pen(Color.Blue, 3))
+            {
+                int y = 20;
+                DrawArrow(e.Graphics, thick_pen,
+                    new PointF(x1, y), new PointF(x2, y), 10,
+                    EndpointStyle.Fletching,
+                    EndpointStyle.ArrowHead);
+                y += 30;
+                DrawArrow(e.Graphics, thick_pen,
+                    new PointF(x1, y), new PointF(x2, y), 10,
+                    EndpointStyle.ArrowHead,
+                    EndpointStyle.ArrowHead);
+                y += 30;
+                DrawArrow(e.Graphics, thick_pen,
+                    new PointF(x1, y), new PointF(x2, y), 10,
+                    EndpointStyle.ArrowHead,
+                    EndpointStyle.Fletching);
+                y += 30;
+                DrawArrow(e.Graphics, thick_pen,
+                    new PointF(x1, y), new PointF(x2, y), 10,
+                    EndpointStyle.Fletching,
+                    EndpointStyle.Fletching);
+            }
+        }
+
+        //畫各種箭頭 SP
+
+        // Draw the indicated star in the rectangle.
+        private void DrawStar2(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, Rectangle rect)
+        {
+            // Get the star's points.
+            PointF[] star_points = MakeStarPoints(-Math.PI / 2, num_points, skip, rect);
+
+            // Draw the star.
+            gr.FillPolygon(the_brush, star_points);
+            gr.DrawPolygon(the_pen, star_points);
+        }
+
+        // Draw with a compound pen.
+        private void pictureBox_star_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            using (Pen the_pen = new Pen(Color.Blue, 20))
+            {
+                the_pen.CompoundArray = new float[] { 0.0f, 0.1f, 0.2f, 0.8f, 0.9f, 1.0f };
+
+                // Draw the star.
+                Rectangle rect = new Rectangle(35, 40, this.pictureBox_star.ClientSize.Width - 70, this.pictureBox_star.ClientSize.Height - 50);
+                DrawStar2(e.Graphics, the_pen, Brushes.White, 5, 2, rect);
+            }
+
+        }
+
+
+
 
 
     }
