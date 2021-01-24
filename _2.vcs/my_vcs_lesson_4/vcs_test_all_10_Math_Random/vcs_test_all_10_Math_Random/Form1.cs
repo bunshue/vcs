@@ -808,7 +808,7 @@ namespace vcs_test_all_10_Math_Random
             }
         }
 
-        // Return n!
+        // Calculate N!
         private long Factorial(long n)
         {
             long result = 1;
@@ -1642,15 +1642,12 @@ namespace vcs_test_all_10_Math_Random
         // Calculate N!
         private decimal Factorial(decimal N)
         {
-            Debug.Assert(N >= 0);
-
             decimal result = 1;
             for (decimal i = 2; i <= N; i++)
                 result *= i;
             return result;
         }
         //N階乘 SP
-
 
         //找質數個數 ST
         private void button25_Click(object sender, EventArgs e)
@@ -1708,6 +1705,97 @@ namespace vcs_test_all_10_Math_Random
         }
 
         //找質數個數 SP
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            // Get N and K.
+            decimal M = 10;
+            decimal N = 3;
+            decimal result;
+
+            richTextBox1.Text += "C(M, N) = C(" + M.ToString() + ", " + N.ToString() + "), 使用方法1\n";
+            // Calculate using factorials.
+            try
+            {
+                result = MChooseNFactorial(M, N);
+                richTextBox1.Text += "結果 = " + result.ToString() + "\n";
+            }
+            catch
+            {
+                richTextBox1.Text += "錯誤.....1\n";
+            }
+
+            richTextBox1.Text += "C(M, N) = C(" + M.ToString() + ", " + N.ToString() + "), 使用方法2\n";
+            // Calculate using the more direct method.
+            try
+            {
+                result = NChooseK(M, N);
+                richTextBox1.Text += "結果 = " + result.ToString() + "\n";
+            }
+            catch
+            {
+                richTextBox1.Text += "錯誤.....2\n";
+            }
+
+
+            M = 26;
+            N = 3;
+
+            richTextBox1.Text += "C(M, N) = C(" + M.ToString() + ", " + N.ToString() + "), 使用方法1\n";
+            // Calculate using factorials.
+            try
+            {
+                result = MChooseNFactorial(M, N);
+                richTextBox1.Text += "結果 = " + result.ToString() + "\n";
+            }
+            catch
+            {
+                richTextBox1.Text += "錯誤.....1\n";
+            }
+
+            richTextBox1.Text += "C(M, N) = C(" + M.ToString() + ", " + N.ToString() + "), 使用方法2\n";
+            // Calculate using the more direct method.
+            try
+            {
+                result = NChooseK(M, N);
+                richTextBox1.Text += "結果 = " + result.ToString() + "\n";
+            }
+            catch
+            {
+                richTextBox1.Text += "錯誤.....2\n";
+            }
+        }
+
+        // Return N choose K calculated directly.
+        // For a description of the algorithm, see:
+        //      http://csharphelper.com/blog/2014/08/calculate-the-binomial-coefficient-n-choose-k-efficiently-in-c/
+        private decimal NChooseK(decimal N, decimal K)
+        {
+            Debug.Assert(N >= 0);
+            Debug.Assert(K >= 0);
+            Debug.Assert(N >= K);
+
+            decimal result = 1;
+            for (int i = 1; i <= K; i++)
+            {
+                result *= N - (K - i);
+                result /= i;
+            }
+            return result;
+        }
+
+        // Use the Factorial function to calculate M choose N.
+        private decimal MChooseNFactorial(decimal M, decimal N)
+        {
+            Debug.Assert(M >= 0);
+            Debug.Assert(N >= 0);
+            Debug.Assert(M >= N);
+            richTextBox1.Text += "MChooseNFactorial M = " + M.ToString() + "\tN = " + N.ToString() + "\n";
+
+            return Factorial(M) / Factorial(N) / Factorial(M - N);
+        }
+
+
 
 
     }
