@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_hangman", "howto_hangman.csproj", "{DB7984C4-B93D-466B-AFC3-E6514836213D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB7984C4-B93D-466B-AFC3-E6514836213D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7984C4-B93D-466B-AFC3-E6514836213D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7984C4-B93D-466B-AFC3-E6514836213D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7984C4-B93D-466B-AFC3-E6514836213D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
