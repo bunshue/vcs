@@ -36,6 +36,9 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -50,15 +53,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(154, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(341, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1004, 631);
+            this.richTextBox1.Size = new System.Drawing.Size(817, 631);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 103);
+            this.button2.Location = new System.Drawing.Point(12, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(116, 45);
             this.button2.TabIndex = 2;
@@ -68,7 +71,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 186);
+            this.button3.Location = new System.Drawing.Point(12, 114);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(116, 68);
             this.button3.TabIndex = 3;
@@ -79,7 +82,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 433);
+            this.comboBox1.Location = new System.Drawing.Point(12, 345);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 4;
@@ -87,17 +90,17 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(18, 598);
+            this.button4.Location = new System.Drawing.Point(146, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(116, 45);
             this.button4.TabIndex = 5;
-            this.button4.Text = "clear";
+            this.button4.Text = "用WMI取出作業系統資訊";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 276);
+            this.button5.Location = new System.Drawing.Point(12, 188);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(116, 68);
             this.button5.TabIndex = 6;
@@ -107,7 +110,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 350);
+            this.button6.Location = new System.Drawing.Point(12, 262);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(116, 68);
             this.button6.TabIndex = 7;
@@ -115,11 +118,44 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1084, 603);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(63, 34);
+            this.bt_clear.TabIndex = 8;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(146, 63);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(116, 45);
+            this.button7.TabIndex = 9;
+            this.button7.Text = "WMI get hdd serial";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(146, 114);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(116, 68);
+            this.button8.TabIndex = 10;
+            this.button8.Text = "用WMI取出作業系統資訊2";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1170, 655);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -130,6 +166,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -144,6 +181,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

@@ -294,7 +294,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(102, 42);
             this.button26.TabIndex = 42;
-            this.button26.Text = "FillStar";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -305,7 +304,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(102, 42);
             this.button25.TabIndex = 41;
-            this.button25.Text = "FillCircle";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -471,7 +469,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(102, 42);
             this.button20.TabIndex = 49;
-            this.button20.Text = "DrawCircle";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -482,7 +479,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(102, 42);
             this.button21.TabIndex = 50;
-            this.button21.Text = "DrawStar";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -544,7 +540,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(102, 42);
             this.button30.TabIndex = 56;
-            this.button30.Text = "DrawPoint";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 

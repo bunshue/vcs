@@ -31,6 +31,16 @@ namespace vcs_WMI_tmp1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         static List<USBDeviceInfo> GetUSBDevices()
         {
             List<USBDeviceInfo> devices = new List<USBDeviceInfo>();
@@ -234,7 +244,98 @@ namespace vcs_WMI_tmp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //用WMI取出作業系統資訊
+            get_wmi_os_info();
+        }
+
+        void get_wmi_os_info()
+        {
+            // Get and display OS properties.
+            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+
+            foreach (ManagementObject mobj in os_searcher.Get())
+            {
+                GetValue(mobj, "BootDevice");
+                GetValue(mobj, "BuildNumber");
+                GetValue(mobj, "BuildType");
+                GetValue(mobj, "Caption");
+                GetValue(mobj, "CodeSet");
+                GetValue(mobj, "CountryCode");
+                GetValue(mobj, "CreationClassName");
+                GetValue(mobj, "CSCreationClassName");
+                GetValue(mobj, "CSDVersion");
+                GetValue(mobj, "CSName");
+                GetValue(mobj, "CurrentTimeZone");
+                GetValue(mobj, "DataExecutionPrevention_Available");
+                GetValue(mobj, "DataExecutionPrevention_32BitApplications");
+                GetValue(mobj, "DataExecutionPrevention_Drivers");
+                GetValue(mobj, "DataExecutionPrevention_SupportPolicy");
+                GetValue(mobj, "Debug");
+                GetValue(mobj, "Description");
+                GetValue(mobj, "Distributed");
+                GetValue(mobj, "EncryptionLevel");
+                GetValue(mobj, "ForegroundApplicationBoost");
+                GetValue(mobj, "FreePhysicalMemory");
+                GetValue(mobj, "FreeSpaceInPagingFiles");
+                GetValue(mobj, "FreeVirtualMemory");
+                GetValue(mobj, "InstallDate");
+                GetValue(mobj, "LargeSystemCache");
+                GetValue(mobj, "LastBootUpTime");
+                GetValue(mobj, "LocalDateTime");
+                GetValue(mobj, "Locale");
+                GetValue(mobj, "Manufacturer");
+                GetValue(mobj, "MaxNumberOfProcesses");
+                GetValue(mobj, "MaxProcessMemorySize");
+                GetValue(mobj, "MUILanguages[]");
+                GetValue(mobj, "Name");
+                GetValue(mobj, "NumberOfLicensedUsers");
+                GetValue(mobj, "NumberOfProcesses");
+                GetValue(mobj, "NumberOfUsers");
+                GetValue(mobj, "OperatingSystemSKU");
+                GetValue(mobj, "Organization");
+                GetValue(mobj, "OSArchitecture");
+                GetValue(mobj, "OSLanguage");
+                GetValue(mobj, "OSProductSuite");
+                GetValue(mobj, "OSType");
+                GetValue(mobj, "OtherTypeDescription");
+                GetValue(mobj, "PAEEnabled");
+                GetValue(mobj, "PlusProductID");
+                GetValue(mobj, "PlusVersionNumber");
+                GetValue(mobj, "Primary");
+                GetValue(mobj, "ProductType");
+                GetValue(mobj, "QuantumLength");
+                GetValue(mobj, "QuantumType");
+                GetValue(mobj, "RegisteredUser");
+                GetValue(mobj, "SerialNumber");
+                GetValue(mobj, "ServicePackMajorVersion");
+                GetValue(mobj, "ServicePackMinorVersion");
+                GetValue(mobj, "SizeStoredInPagingFiles");
+                GetValue(mobj, "Status");
+                GetValue(mobj, "SuiteMask");
+                GetValue(mobj, "SystemDevice");
+                GetValue(mobj, "SystemDirectory");
+                GetValue(mobj, "SystemDrive");
+                GetValue(mobj, "TotalSwapSpaceSize");
+                GetValue(mobj, "TotalVirtualMemorySize");
+                GetValue(mobj, "TotalVisibleMemorySize");
+                GetValue(mobj, "Version");
+                GetValue(mobj, "WindowsDirectory");
+            }
+        }
+
+        // Get a value from the ManagementObject.
+        private void GetValue(ManagementObject mobj, string property_name)
+        {
+            string value;
+            try
+            {
+                value = mobj[property_name].ToString();
+            }
+            catch (Exception ex)
+            {
+                value = "*** Error: " + ex.Message;
+            }
+            richTextBox1.Text += property_name + "\t" + value + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -273,6 +374,65 @@ namespace vcs_WMI_tmp1
                     u.id, u.name, u.status, u.system, u.caption, u.pnp, u.description, Environment.NewLine);
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Get HDD serial\n";
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+
+            foreach (ManagementObject info in searcher.Get())
+            {
+                richTextBox1.Text += info["DeviceID"].ToString() + "\t";
+                richTextBox1.Text += "Model: " + info["Model"].ToString() + "\t";
+                richTextBox1.Text += "Interface: " + info["InterfaceType"].ToString() + "\t";
+                richTextBox1.Text += "Serial#: " + info["SerialNumber"].ToString() + "\n";
+
+            }
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // Display the operating system's name.
+            // Get the OS information.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394239.aspx
+            string os_query = "SELECT * FROM Win32_OperatingSystem";
+            ManagementObjectSearcher os_searcher = new ManagementObjectSearcher(os_query);
+            foreach (ManagementObject info in os_searcher.Get())
+            {
+                //lblCaption.Text = info.Properties["Caption"].Value.ToString().Trim();
+                //lblVersion.Text = "Version " + info.Properties["Version"].Value.ToString() + " SP " + info.Properties["ServicePackMajorVersion"].Value.ToString() + "." + info.Properties["ServicePackMinorVersion"].Value.ToString();
+
+                richTextBox1.Text += info.Properties["Caption"].Value.ToString().Trim() + "\n";
+                richTextBox1.Text += "Version " + info.Properties["Version"].Value.ToString() + " SP " + info.Properties["ServicePackMajorVersion"].Value.ToString() + "." + info.Properties["ServicePackMinorVersion"].Value.ToString() + "\n";
+            }
+
+            // Get number of processors.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394373.aspx
+            string cpus_query = "SELECT * FROM Win32_ComputerSystem";
+            ManagementObjectSearcher cpus_searcher = new ManagementObjectSearcher(cpus_query);
+            foreach (ManagementObject info in cpus_searcher.Get())
+            {
+                //lblCpus.Text = info.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors";
+
+                richTextBox1.Text += info.Properties["NumberOfLogicalProcessors"].Value.ToString() + " processors" + "\n";
+
+            }
+
+            // Get 32- versus 64-bit.
+            // For more information from this query, see:
+            //      http://msdn.microsoft.com/library/aa394373.aspx
+            string proc_query = "SELECT * FROM Win32_Processor";
+            ManagementObjectSearcher proc_searcher = new ManagementObjectSearcher(proc_query);
+            foreach (ManagementObject info in proc_searcher.Get())
+            {
+                //lblBits.Text = info.Properties["AddressWidth"].Value.ToString() + "-bit";
+
+                richTextBox1.Text += info.Properties["AddressWidth"].Value.ToString() + "-bit" + "\n";
+            }
+
+        }
 
 
     }

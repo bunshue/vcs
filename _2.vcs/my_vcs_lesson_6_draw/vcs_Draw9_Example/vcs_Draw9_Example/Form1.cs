@@ -3448,6 +3448,20 @@ namespace vcs_Draw9_Example
             Application.Exit();
         }
 
+        void open_new_file()
+        {
+            richTextBox1.Text += "開啟一個 640 X 480 的空畫布\n";
+            //指定畫布大小
+            pictureBox1.Width = 640;
+            pictureBox1.Height = 480;
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            pictureBox1.Image = bitmap1;
+            return;
+        }
+
         private void button27_Click(object sender, EventArgs e)
         {
             show_item_location(150);

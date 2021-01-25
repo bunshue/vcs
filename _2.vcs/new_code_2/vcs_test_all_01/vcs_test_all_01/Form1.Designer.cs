@@ -61,7 +61,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(172, 53);
             this.button1.TabIndex = 0;
-            this.button1.Text = "WMI get hdd serial";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -196,7 +195,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(172, 53);
             this.button0.TabIndex = 14;
-            this.button0.Text = "用WMI取出作業系統資訊";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -223,7 +221,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(172, 53);
             this.button17.TabIndex = 17;
-            this.button17.Text = "用WMI取出作業系統資訊2";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

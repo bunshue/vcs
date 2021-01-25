@@ -945,34 +945,10 @@ namespace vcs_Draw2
 
         private void button20_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "畫一些圓\n";
-
-            int center_x;
-            int center_y;
-            int radius = 100;
-            int linewidth = 10;
-
-            center_x = 100;
-            center_y = 100;
-            DrawCircle(center_x, center_y, radius, linewidth, Color.Red);
-
-            center_x += 200;
-            center_y += 200;
-            DrawCircle(center_x, center_y, radius, linewidth, Color.Green);
-
-            center_x += 200;
-            center_y += 200;
-            DrawCircle(center_x, center_y, radius, linewidth, Color.Blue);
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            g.Clear(Color.White);
-
-            //DrawStar(100, 100, 10, 1, Color.Red);
-            //DrawStar(100, 100, 30, 3, Color.Red);
-            //DrawStar(100, 100, 50, 5, Color.Red);
-            DrawStar(100, 100, 100, 1, Color.Red);
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1039,28 +1015,10 @@ namespace vcs_Draw2
 
         private void button25_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "畫一些實心圓\n";
-
-            int center_x;
-            int center_y;
-            int radius = 100;
-
-            center_x = 200;
-            center_y = 100;
-            DrawFillCircle(center_x, center_y, radius, Color.Red);
-
-            center_x += 200;
-            center_y += 200;
-            DrawFillCircle(center_x, center_y, radius, Color.Green);
-
-            center_x += 200;
-            center_y += 200;
-            DrawFillCircle(center_x, center_y, radius, Color.Blue);
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            FillStar(100, 100, 100, Color.Red);
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1217,182 +1175,36 @@ namespace vcs_Draw2
             Application.Exit();
         }
 
-        private void DrawPoint(int cx, int cy, Color c_out, Color c_in, int radius)
+        void open_new_file()
         {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
+            //指定畫布大小
+            pictureBox1.Width = 640;
+            pictureBox1.Height = 480;
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c_out, 1);
-            SolidBrush b = new SolidBrush(c_in);
-            //Brush b = new Brush(c_in);
-
-            // Draw the circle
-            g.FillEllipse(b, new Rectangle(cx - radius, cy - radius, radius * 2, radius * 2));
-            g.DrawEllipse(p, new Rectangle(cx - radius, cy - radius, radius * 2, radius * 2));
-            //Dispose of the pen.
-            p.Dispose();
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            pictureBox1.Image = bitmap1;
+            return;
         }
 
-        // Draw a point.
-        private void DrawPoint2(Graphics gr, PointF pt, Brush brush, Pen pen, int radius)
-        {
-            gr.FillEllipse(brush, pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
-            gr.DrawEllipse(pen, pt.X - radius, pt.Y - radius, radius * 2, radius * 2);
-        }
 
-        private void DrawCircle(int center_x, int center_y, int radius, int linewidth, Color c)
-        {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c, linewidth);
-
-            // Draw the circle
-            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
-            //Dispose of the pen.
-            p.Dispose();
-        }
-
-        private void DrawFillCircle(int center_x, int center_y, int radius, Color c)
-        {
-            SolidBrush newBrush = new SolidBrush(c);
-
-            // Fill the circle
-            g.FillEllipse(newBrush, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
-
-            //Dispose of the brush
-            newBrush.Dispose();
-        }
-
-        private void DrawStar(int center_x, int center_y, int radius, int linewidth, Color c)
-        {
-            //DrawStar
-
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c, linewidth);
-
-            Point[] pt = new Point[6];    //一維陣列內有6個Point
-            int angle;
-
-            int i;
-            for (i = 0; i < 6; i++)
-            {
-                angle = -90 + 144 * i;
-                pt[i].X = (int)(radius * Math.Cos(angle * Math.PI / 180));
-                pt[i].Y = (int)(radius * Math.Sin(angle * Math.PI / 180));
-
-                //richTextBox1.Text += "pt[" + i.ToString() + "].X " + pt[i].X.ToString() + "\t" + "pt[" + i.ToString() + "].Y " + pt[i].Y.ToString() + "\n";
-                pt[i].X += center_x;
-                pt[i].Y += center_y;
-            }
-            g.DrawLines(new Pen(Brushes.Red, linewidth), pt);
-
-            //Dispose of the pen.
-            p.Dispose();
-        }
-
-        private void FillStar(int center_x, int center_y, int radius, Color c)
-        {
-            //FillStar
-
-            Point[] pt1 = new Point[5];    //一維陣列內有5個Point, 外圈
-            Point[] pt2 = new Point[5];    //一維陣列內有5個Point, 內圈
-            int angle;
-
-            int i;
-            for (i = 0; i < 5; i++)
-            {
-                angle = -90 + 72 * i;
-                pt1[i].X = (int)(radius * Math.Cos(angle * Math.PI / 180));
-                pt1[i].Y = (int)(radius * Math.Sin(angle * Math.PI / 180));
-
-                //richTextBox1.Text += "pt1[" + i.ToString() + "].X " + pt1[i].X.ToString() + "\t" + "pt1[" + i.ToString() + "].Y " + pt1[i].Y.ToString() + "\n";
-                pt1[i].X += center_x;
-                pt1[i].Y += center_y;
-            }
-
-            double radius2;
-            radius2 = (double)radius * Math.Sin(18 * Math.PI / 180) / Math.Sin(54 * Math.PI / 180);
-            for (i = 0; i < 5; i++)
-            {
-                angle = 72 * i - 54;
-                pt2[i].X = (int)(radius2 * Math.Cos(angle * Math.PI / 180));
-                pt2[i].Y = (int)(radius2 * Math.Sin(angle * Math.PI / 180));
-
-                //richTextBox1.Text += "pt2[" + i.ToString() + "].X " + pt2[i].X.ToString() + "\t" + "pt2[" + i.ToString() + "].Y " + pt2[i].Y.ToString() + "\n";
-                pt2[i].X += center_x;
-                pt2[i].Y += center_y;
-            }
-            sb = new SolidBrush(c);
-
-            Point[] pt3 = new Point[3];    //一維陣列內有3個Point
-            pt3[0] = pt1[0];
-            pt3[1] = pt2[1];
-            pt3[2] = pt2[3];
-            g.FillPolygon(sb, pt3);
-            pt3[0] = pt1[1];
-            pt3[1] = pt2[2];
-            pt3[2] = pt2[4];
-            g.FillPolygon(sb, pt3);
-            pt3[0] = pt1[2];
-            pt3[1] = pt2[3];
-            pt3[2] = pt2[0];
-            g.FillPolygon(sb, pt3);
-            pt3[0] = pt1[3];
-            pt3[1] = pt2[4];
-            pt3[2] = pt2[1];
-            g.FillPolygon(sb, pt3);
-            pt3[0] = pt1[4];
-            pt3[1] = pt2[0];
-            pt3[2] = pt2[2];
-            g.FillPolygon(sb, pt3);
-        }
-
-        private void DrawGrid()
-        {
-            int i;
-            p = new Pen(Color.Navy, 1);
-            for (i = 0; i < 7; i++)
-            {
-                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
-            }
-            for (i = 0; i < 7; i++)
-            {
-                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
-            }
-        }
+                                                                                        private void DrawGrid()
+                                                                                        {
+                                                                                            int i;
+                                                                                            p = new Pen(Color.Navy, 1);
+                                                                                            for (i = 0; i < 7; i++)
+                                                                                            {
+                                                                                                g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
+                                                                                            }
+                                                                                            for (i = 0; i < 7; i++)
+                                                                                            {
+                                                                                                g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
+                                                                                            }
+                                                                                        }
 
         private void button30_Click(object sender, EventArgs e)
         {
-            Font f = new Font("標楷體", 16);
-            SolidBrush sb = new SolidBrush(Color.Blue);
-            Point pt = new Point();
-
-            for (int size = 1; size <= 10; size++)
-            {
-                g.DrawString(size.ToString(), f, sb, 100, 50 + 50 * size);
-                //         cx        cy          
-                DrawPoint(200, 50 + 50 * size, Color.Red, Color.Pink, size);
-
-                pt = new Point(220, 50 + 50 * size);
-                DrawPoint2(g, pt, Brushes.HotPink, Pens.Red, size);
-
-            }
-
         }
 
 
