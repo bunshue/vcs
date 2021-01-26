@@ -988,6 +988,7 @@ namespace vcs_Draw9_Example8_vcsh
 
         void draw_random_pixel_image()
         {
+            pictureBox_random_pixel_image.BackColor = Color.Pink;
             int width = pictureBox_random_pixel_image.ClientSize.Width;
             int height = pictureBox_random_pixel_image.ClientSize.Height;
 
@@ -1009,7 +1010,12 @@ namespace vcs_Draw9_Example8_vcsh
                     int b = rand.Next(256);
 
                     //set ARGB value
-                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                    if (y < height * 1 / 3)
+                        bmp.SetPixel(x, y, Color.FromArgb(50, r, g, b));    //上
+                    else if (y < height * 2 / 3)
+                        bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));     //中
+                    else
+                        bmp.SetPixel(x, y, Color.FromArgb(255, r, g, b));   //下
                 }
             }
 

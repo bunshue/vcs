@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -64,6 +65,7 @@
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.timer_change = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -109,7 +111,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(382, 386);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -124,7 +126,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 35);
             this.button1.TabIndex = 19;
-            this.button1.Text = "SnowFlake";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -168,7 +169,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 35);
             this.button6.TabIndex = 22;
-            this.button6.Text = "Heighway Dragon";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -179,7 +179,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 35);
             this.button0.TabIndex = 30;
-            this.button0.Text = "Sierpinski";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -218,9 +217,9 @@
             // 
             // richTextBox_ransom_note
             // 
-            this.richTextBox_ransom_note.Location = new System.Drawing.Point(442, 456);
+            this.richTextBox_ransom_note.Location = new System.Drawing.Point(236, 189);
             this.richTextBox_ransom_note.Name = "richTextBox_ransom_note";
-            this.richTextBox_ransom_note.Size = new System.Drawing.Size(184, 151);
+            this.richTextBox_ransom_note.Size = new System.Drawing.Size(50, 50);
             this.richTextBox_ransom_note.TabIndex = 58;
             this.richTextBox_ransom_note.Text = "Ransom Note以前綁匪要贖金的信件，為避免筆跡被視破，多由報紙上剪下文字拼成，因而字體混亂，大小不同，排列不整。現在人為求廣告效果或故意玩酷，將文字故意歪" +
                 "七扭八，選用各樣字體，色彩，大小，各不相同混合，形成特殊效果稱為ransom note effect.";
@@ -228,34 +227,34 @@
             // 
             // pictureBox_ransom_note
             // 
-            this.pictureBox_ransom_note.Location = new System.Drawing.Point(632, 450);
+            this.pictureBox_ransom_note.Location = new System.Drawing.Point(301, 189);
             this.pictureBox_ransom_note.Name = "pictureBox_ransom_note";
-            this.pictureBox_ransom_note.Size = new System.Drawing.Size(171, 164);
+            this.pictureBox_ransom_note.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_ransom_note.TabIndex = 59;
             this.pictureBox_ransom_note.TabStop = false;
             // 
             // richTextBox_ransom_note_result
             // 
-            this.richTextBox_ransom_note_result.Location = new System.Drawing.Point(822, 456);
+            this.richTextBox_ransom_note_result.Location = new System.Drawing.Point(357, 189);
             this.richTextBox_ransom_note_result.Name = "richTextBox_ransom_note_result";
-            this.richTextBox_ransom_note_result.Size = new System.Drawing.Size(169, 164);
+            this.richTextBox_ransom_note_result.Size = new System.Drawing.Size(50, 50);
             this.richTextBox_ransom_note_result.TabIndex = 60;
             this.richTextBox_ransom_note_result.Text = "";
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(761, 226);
+            this.pictureBox5.Location = new System.Drawing.Point(260, 65);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox5.Size = new System.Drawing.Size(50, 50);
             this.pictureBox5.TabIndex = 61;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox5_Paint);
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Location = new System.Drawing.Point(986, 226);
+            this.pictureBox8.Location = new System.Drawing.Point(332, 65);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox8.Size = new System.Drawing.Size(50, 50);
             this.pictureBox8.TabIndex = 62;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox8_Paint);
@@ -290,32 +289,32 @@
             // 
             // pictureBox_snowflake
             // 
-            this.pictureBox_snowflake.Location = new System.Drawing.Point(761, 27);
+            this.pictureBox_snowflake.Location = new System.Drawing.Point(260, 9);
             this.pictureBox_snowflake.Name = "pictureBox_snowflake";
-            this.pictureBox_snowflake.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_snowflake.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_snowflake.TabIndex = 65;
             this.pictureBox_snowflake.TabStop = false;
             // 
             // pictureBox_snowflake2
             // 
-            this.pictureBox_snowflake2.Location = new System.Drawing.Point(967, 27);
+            this.pictureBox_snowflake2.Location = new System.Drawing.Point(332, 9);
             this.pictureBox_snowflake2.Name = "pictureBox_snowflake2";
-            this.pictureBox_snowflake2.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_snowflake2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_snowflake2.TabIndex = 66;
             this.pictureBox_snowflake2.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(606, 24);
+            this.pictureBox2.Location = new System.Drawing.Point(192, 10);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox2.TabIndex = 67;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox_Chrysanthemum
             // 
             this.pictureBox_Chrysanthemum.BackColor = System.Drawing.Color.Black;
-            this.pictureBox_Chrysanthemum.Location = new System.Drawing.Point(12, 421);
+            this.pictureBox_Chrysanthemum.Location = new System.Drawing.Point(12, 232);
             this.pictureBox_Chrysanthemum.Name = "pictureBox_Chrysanthemum";
             this.pictureBox_Chrysanthemum.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_Chrysanthemum.TabIndex = 68;
@@ -324,9 +323,9 @@
             // 
             // pictureBox_dragon
             // 
-            this.pictureBox_dragon.Location = new System.Drawing.Point(400, 231);
+            this.pictureBox_dragon.Location = new System.Drawing.Point(124, 66);
             this.pictureBox_dragon.Name = "pictureBox_dragon";
-            this.pictureBox_dragon.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_dragon.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_dragon.TabIndex = 69;
             this.pictureBox_dragon.TabStop = false;
             this.pictureBox_dragon.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_dragon_Paint);
@@ -334,7 +333,7 @@
             // pictureBox_Chrysanthemum2
             // 
             this.pictureBox_Chrysanthemum2.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.pictureBox_Chrysanthemum2.Location = new System.Drawing.Point(68, 421);
+            this.pictureBox_Chrysanthemum2.Location = new System.Drawing.Point(68, 232);
             this.pictureBox_Chrysanthemum2.Name = "pictureBox_Chrysanthemum2";
             this.pictureBox_Chrysanthemum2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_Chrysanthemum2.TabIndex = 70;
@@ -365,9 +364,10 @@
             // 
             // pictureBox_dragon4
             // 
-            this.pictureBox_dragon4.Location = new System.Drawing.Point(606, 230);
+            this.pictureBox_dragon4.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_dragon4.Location = new System.Drawing.Point(192, 66);
             this.pictureBox_dragon4.Name = "pictureBox_dragon4";
-            this.pictureBox_dragon4.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_dragon4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_dragon4.TabIndex = 73;
             this.pictureBox_dragon4.TabStop = false;
             this.pictureBox_dragon4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_dragon4_Paint);
@@ -375,9 +375,9 @@
             // pictureBox_hex
             // 
             this.pictureBox_hex.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_hex.Location = new System.Drawing.Point(400, 24);
+            this.pictureBox_hex.Location = new System.Drawing.Point(124, 10);
             this.pictureBox_hex.Name = "pictureBox_hex";
-            this.pictureBox_hex.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_hex.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_hex.TabIndex = 74;
             this.pictureBox_hex.TabStop = false;
             this.pictureBox_hex.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_hex_Paint);
@@ -387,9 +387,9 @@
             // 
             // pictureBox_polar
             // 
-            this.pictureBox_polar.Location = new System.Drawing.Point(409, 271);
+            this.pictureBox_polar.Location = new System.Drawing.Point(124, 122);
             this.pictureBox_polar.Name = "pictureBox_polar";
-            this.pictureBox_polar.Size = new System.Drawing.Size(200, 200);
+            this.pictureBox_polar.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_polar.TabIndex = 75;
             this.pictureBox_polar.TabStop = false;
             this.pictureBox_polar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_polar_Paint);
@@ -397,7 +397,7 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox9.Location = new System.Drawing.Point(12, 486);
+            this.pictureBox9.Location = new System.Drawing.Point(12, 297);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(50, 50);
             this.pictureBox9.TabIndex = 76;
@@ -406,7 +406,7 @@
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox10.Location = new System.Drawing.Point(68, 486);
+            this.pictureBox10.Location = new System.Drawing.Point(68, 297);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(50, 50);
             this.pictureBox10.TabIndex = 77;
@@ -415,7 +415,7 @@
             // pictureBox11
             // 
             this.pictureBox11.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox11.Location = new System.Drawing.Point(124, 486);
+            this.pictureBox11.Location = new System.Drawing.Point(124, 297);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(50, 50);
             this.pictureBox11.TabIndex = 78;
@@ -424,7 +424,7 @@
             // pictureBox12
             // 
             this.pictureBox12.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox12.Location = new System.Drawing.Point(180, 486);
+            this.pictureBox12.Location = new System.Drawing.Point(180, 297);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(50, 50);
             this.pictureBox12.TabIndex = 79;
@@ -433,7 +433,7 @@
             // pictureBox13
             // 
             this.pictureBox13.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox13.Location = new System.Drawing.Point(236, 486);
+            this.pictureBox13.Location = new System.Drawing.Point(236, 297);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(50, 50);
             this.pictureBox13.TabIndex = 80;
@@ -442,11 +442,17 @@
             // pictureBox14
             // 
             this.pictureBox14.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox14.Location = new System.Drawing.Point(292, 486);
+            this.pictureBox14.Location = new System.Drawing.Point(292, 297);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(50, 50);
             this.pictureBox14.TabIndex = 81;
             this.pictureBox14.TabStop = false;
+            // 
+            // timer_change
+            // 
+            this.timer_change.Enabled = true;
+            this.timer_change.Interval = 1000;
+            this.timer_change.Tick += new System.EventHandler(this.timer_change_Tick);
             // 
             // Form1
             // 
@@ -556,6 +562,7 @@
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.Timer timer_change;
     }
 }
 

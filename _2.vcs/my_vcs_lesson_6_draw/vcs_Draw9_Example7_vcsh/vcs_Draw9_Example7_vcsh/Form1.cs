@@ -32,8 +32,8 @@ namespace vcs_Draw9_Example7_vcsh
         // The root of the Octagon object hierarchy.
         private Octagon Root8 = null;
 
-        int W = 220;
-        int H = 220;
+        int W = 230;
+        int H = 230;
 
         private const int Period = 21;
         private Color[] Colors;
@@ -52,13 +52,6 @@ namespace vcs_Draw9_Example7_vcsh
             g.Clear(Color.Red);             //useless??
             pictureBox1.BackColor = Color.Pink;
             show_item_location();
-            DrawRansomNoteText();
-            DrawRansomNoteText2();
-
-            MakePentagons();
-            MakeOctagons();
-
-            button1_Click(sender, e);
 
             richTextBox1.Text += "picturebox1 W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
             richTextBox1.Text += "picturebox1 client W = " + pictureBox1.ClientSize.Width.ToString() + ", H = " + pictureBox1.ClientSize.Height.ToString() + "\n";
@@ -90,7 +83,8 @@ namespace vcs_Draw9_Example7_vcsh
                 Color.Blue,
                 Color.Violet
             };
-            MakeDragon4Image();
+
+            redraw_all();
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -109,13 +103,14 @@ namespace vcs_Draw9_Example7_vcsh
             int dy;
 
             //button
-            x_st = 1700;
+            x_st = 1800;
             y_st = 40;
             dx = 110;
             dy = 38;
 
             label1.Location = new Point(x_st + dx * 0 - 20, y_st + dy * 0 - 30);
             numericUpDown1.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 0 - 30);
+            numericUpDown1.Value = 0;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -130,8 +125,8 @@ namespace vcs_Draw9_Example7_vcsh
             bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             bt_exit.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width - 70, this.Height - richTextBox1.Size.Height - 20);
 
             pictureBox1.Size = new Size(W * 2, H * 2);
             pictureBox_hex.Size = new Size(W, H);
@@ -154,8 +149,8 @@ namespace vcs_Draw9_Example7_vcsh
 
             x_st = 10;
             y_st = 10;
-            dx = W + 30;
-            dy = H + 40;
+            dx = W + 70;
+            dy = H + 45;
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_hex.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -192,8 +187,6 @@ namespace vcs_Draw9_Example7_vcsh
 
         private void button0_Click(object sender, EventArgs e)
         {
-            MakePentagons();
-            MakeOctagons();
         }
 
         // Make the Pentagon objects and redraw.
@@ -331,9 +324,6 @@ namespace vcs_Draw9_Example7_vcsh
         */
         private void button1_Click(object sender, EventArgs e)
         {
-            Draw_SnowFlake1();
-            Draw_SnowFlake2();
-            Draw_SnowFlake3();
         }
 
         void Draw_SnowFlake1()
@@ -1112,6 +1102,9 @@ namespace vcs_Draw9_Example7_vcsh
         {
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
 
         // Font names we may use.
         private string[] FontNames =
@@ -1292,13 +1285,6 @@ namespace vcs_Draw9_Example7_vcsh
         // http://en.wikipedia.org/wiki/Dragon_curve
         // http://en.wikipedia.org/wiki/Heighway_dragon
         // http://ecademy.agnesscott.edu/~lriddle/ifs/heighway/heighway.htm
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            pictureBox_dragon.Refresh();
-
-            MakeDragon4Image();
-        }
 
         // The direction the curve should turn next.
         private enum Direction
@@ -2037,11 +2023,29 @@ namespace vcs_Draw9_Example7_vcsh
             }
         }
 
+        private void timer_change_Tick(object sender, EventArgs e)
+        {
+            numericUpDown1.Value++;
+            if (numericUpDown1.Value == 5)
+                numericUpDown1.Value = 0;
+            redraw_all();
+        }
 
+        void redraw_all()
+        {
+            MakePentagons();    //Sierpinski 1
+            MakeOctagons();     //Sierpinski 2
 
+            DrawRansomNoteText();
+            DrawRansomNoteText2();
 
+            pictureBox_dragon.Refresh();    //Heighway Dragon 1
+            MakeDragon4Image();             //Heighway Dragon 2
 
-
+            Draw_SnowFlake1();
+            Draw_SnowFlake2();
+            Draw_SnowFlake3();
+        }
 
 
     }

@@ -1527,38 +1527,6 @@ namespace vcs_Draw9_Example
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
-            int width;
-            int height;
-            int xx;
-            int yy;
-
-            int r;
-            int g;
-            int b;
-
-            r = rnd.Next(256);
-            g = rnd.Next(256);
-            b = rnd.Next(256);
-
-            width = 300;
-            height = 300;
-            bitmap1 = new Bitmap(width, height);
-
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    r = rnd.Next(256);
-                    g = rnd.Next(256);
-                    b = rnd.Next(256);
-
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(255, r, g, b));
-                }
-            }
-
-            pictureBox1.Image = bitmap1;
-
         }
 
         private void button12_Click(object sender, EventArgs e)

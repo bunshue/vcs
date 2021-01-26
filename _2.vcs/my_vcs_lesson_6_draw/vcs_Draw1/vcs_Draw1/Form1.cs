@@ -1211,21 +1211,6 @@ namespace vcs_Draw1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            //用漸變色填充
-            //LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
-            Rectangle rect = new Rectangle(0, 0, 500, 100);//定義矩形,參數為起點橫縱坐標以及其長和寬
-            rect.Location = new Point(100, 100);
-            LinearGradientBrush b = new LinearGradientBrush(rect, Color.Red, Color.Black, LinearGradientMode.Horizontal);
-            g.FillRectangle(b, rect);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1965,6 +1950,74 @@ namespace vcs_Draw1
             pt = new Point(100, 100);
             FillStar(g, pt, radius, Color.Red);
             pictureBox1.Image = bitmap1;
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            // Define a brush with two points and their colors.
+            using (LinearGradientBrush br = new LinearGradientBrush(new Point(10, 10), new Point(140, 50), Color.Red, Color.White))
+            {
+                g.FillRectangle(br, 10, 10, 125, 50);
+                g.DrawRectangle(Pens.Black, 10, 10, 125, 50);
+            }
+
+            // Define a brush with a Rectangle, colors, and gradient mode.
+            Rectangle rect = new Rectangle(145, 10, 125, 50);
+            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Blue, Color.White, LinearGradientMode.ForwardDiagonal))
+            {
+                g.FillRectangle(br, rect);
+                g.DrawRectangle(Pens.Black, rect);
+            }
+
+            // Define a gradient with more than 2 colors.
+            rect = new Rectangle(10, 70, 260, 50);
+            using (LinearGradientBrush br = new LinearGradientBrush(rect, Color.Blue, Color.White, 0f))
+            {
+                // Create a ColorBlend object. Note that you
+                // must initialize it before you save it in the
+                // brush's InterpolationColors property.
+                ColorBlend colorBlend = new ColorBlend();
+                colorBlend.Colors = new Color[] 
+                {
+                    Color.Red,
+                    Color.Orange,
+                    Color.Yellow,
+                    Color.Lime,
+                    Color.Blue,
+                    Color.Indigo,
+                    Color.Violet,
+                };
+                colorBlend.Positions = new float[]
+                {
+                    0f, 1/6f, 2/6f, 3/6f, 4/6f, 5/6f, 1f
+                };
+                br.InterpolationColors = colorBlend;
+
+                g.FillRectangle(br, rect);
+                g.DrawRectangle(Pens.Black, rect);
+            }
+
+
+            //用漸變色填充
+            //LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
+            rect = new Rectangle(0, 0, 500, 100);//定義矩形,參數為起點橫縱坐標以及其長和寬
+            rect.Location = new Point(50, 300);
+            LinearGradientBrush b = new LinearGradientBrush(rect, Color.Red, Color.Black, LinearGradientMode.Horizontal);
+            g.FillRectangle(b, rect);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
         }
 
 

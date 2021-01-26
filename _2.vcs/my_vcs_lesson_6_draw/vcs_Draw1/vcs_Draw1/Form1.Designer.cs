@@ -398,7 +398,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(120, 42);
             this.button26.TabIndex = 42;
-            this.button26.Text = "漸層色";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -590,7 +589,9 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(120, 42);
             this.button35.TabIndex = 62;
+            this.button35.Text = "漸層色";
             this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
             // button36
             // 
@@ -600,6 +601,7 @@
             this.button36.Size = new System.Drawing.Size(120, 42);
             this.button36.TabIndex = 63;
             this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // button37
             // 
