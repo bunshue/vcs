@@ -1795,6 +1795,31 @@ namespace vcs_test_all_10_Math_Random
             return Factorial(M) / Factorial(N) / Factorial(M - N);
         }
 
+        private void button27_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "有Debug.Assert的Average\n";
+            richTextBox1.Text += "Average: " + Average(new float[] { 1, 2, 3, 4, 5 }) + "\n";
+
+            //richTextBox1.Text += "Average: " + Average(null) + "\n";
+        }
+
+        // Return the average of the numbers.
+        private float Average(float[] values)
+        {
+            //richTextBox1.Text += "Average, count = " + values.Length.ToString() + "\n";
+
+            Debug.Assert(values != null, "Values array cannot be null");
+            Debug.Assert(values.Length > 0, "Values array cannot be empty");
+            Debug.Assert(values.Length < 100, "Values array should not contain more than 100 items");
+
+            // If there are no values, return NaN.
+            if (values == null || values.Length < 1) return float.NaN;
+
+            // Calculate the average.
+            return values.Average();
+        }
+
+
 
 
 

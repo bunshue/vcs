@@ -484,7 +484,9 @@ namespace vcs_RichTextBox1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            richTextBox1.SaveFile("C:\\______test_files\\MyDocument.rtf", RichTextBoxStreamType.RichText);
+            string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
+            richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -492,7 +494,9 @@ namespace vcs_RichTextBox1
             richTextBox1.Clear();
             try
             {
-                richTextBox1.LoadFile("C:\\______test_files\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf");
+                string filename = "C:\\______test_files\\__RW\\_rtf\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
+
+                richTextBox1.LoadFile(filename);
             }
             catch (System.IO.FileNotFoundException)
             {

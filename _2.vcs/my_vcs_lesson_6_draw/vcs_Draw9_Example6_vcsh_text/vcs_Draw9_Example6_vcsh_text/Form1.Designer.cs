@@ -87,9 +87,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(932, 540);
+            this.richTextBox1.Location = new System.Drawing.Point(1064, 584);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(310, 140);
+            this.richTextBox1.Size = new System.Drawing.Size(178, 140);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
@@ -206,7 +206,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1089, 540);
+            this.bt_clear.Location = new System.Drawing.Point(1156, 608);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(63, 40);
             this.bt_clear.TabIndex = 55;
@@ -238,7 +238,7 @@
             this.label1.AutoSize = true;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(12, 544);
+            this.label1.Location = new System.Drawing.Point(12, 568);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(280, 18);
             this.label1.TabIndex = 63;
@@ -248,7 +248,7 @@
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(12, 568);
+            this.label2.Location = new System.Drawing.Point(12, 612);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 192);
             this.label2.TabIndex = 64;
@@ -259,7 +259,7 @@
             this.label3.AutoSize = true;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(299, 544);
+            this.label3.Location = new System.Drawing.Point(299, 568);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(341, 18);
             this.label3.TabIndex = 65;
@@ -343,7 +343,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtSample);
             this.groupBox1.Controls.Add(this.lblSample1);
-            this.groupBox1.Location = new System.Drawing.Point(652, 546);
+            this.groupBox1.Location = new System.Drawing.Point(631, 603);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(350, 339);
             this.groupBox1.TabIndex = 73;
@@ -408,7 +408,7 @@
             // pictureBox_random_color
             // 
             this.pictureBox_random_color.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_random_color.Location = new System.Drawing.Point(12, 836);
+            this.pictureBox_random_color.Location = new System.Drawing.Point(12, 880);
             this.pictureBox_random_color.Name = "pictureBox_random_color";
             this.pictureBox_random_color.Size = new System.Drawing.Size(565, 93);
             this.pictureBox_random_color.TabIndex = 74;

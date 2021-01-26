@@ -748,7 +748,9 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(155, 40);
             this.button27.TabIndex = 38;
+            this.button27.Text = "Average";
             this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // button28
             // 

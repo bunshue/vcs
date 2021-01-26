@@ -152,10 +152,10 @@ namespace vcs_Draw9_Example6_vcsh_text
             button6.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            bt_save.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            richTextBox1.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 11);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 25);
 
             x_st = 10;
@@ -175,10 +175,21 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox3.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
+
+            int W2 = 450;
+            int H2 = 140;
+
+            //360,120
+
+            pictureBox_filled_text.Size = new Size(W2, H2);
+            pictureBox_image_string.Size = new Size(W2, H2);
+            pictureBox_rainbow_text.Size = new Size(W2, H2);
+
             pictureBox_rotate_brush.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox_image_string.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox_filled_text.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 150);
-            pictureBox_rainbow_text.Location = new Point(x_st + dx * 2 + 450, y_st + dy * 1 + 150);
+
+            pictureBox_image_string.Location = new Point(x_st + dx * 2, y_st + dy * 1);         //左上
+            pictureBox_filled_text.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 150);    //左下
+            pictureBox_rainbow_text.Location = new Point(x_st + dx * 2 + 460, y_st + dy * 1);   //右上
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -319,7 +330,7 @@ namespace vcs_Draw9_Example6_vcsh_text
         {
             // Draw a string with character bounds.
             int x_st = 100;
-            int y_st = 570;
+            int y_st = 600;
             int w = 450;
             int h = 120;
             int dy = h + 10;
@@ -891,7 +902,7 @@ namespace vcs_Draw9_Example6_vcsh_text
             using (TextureBrush the_brush = new TextureBrush(Properties.Resources.ColoradoFlowers))
             {
                 // Draw the text.
-                using (Font the_font = new Font("Times New Roman", 60, FontStyle.Bold))
+                using (Font the_font = new Font("Times New Roman", 50, FontStyle.Bold))
                 {
                     e.Graphics.DrawString("群曜醫電", the_font, the_brush, 0, 0);
                 }
@@ -904,7 +915,7 @@ namespace vcs_Draw9_Example6_vcsh_text
                 // Draw the text.
                 using (Font the_font = new Font("Times New Roman", 40, FontStyle.Bold))
                 {
-                    e.Graphics.DrawString("股份有限公司", the_font, the_brush, 60, 90);
+                    e.Graphics.DrawString("股份有限公司", the_font, the_brush, 60, 75);
                 }
             }
         }
@@ -913,8 +924,11 @@ namespace vcs_Draw9_Example6_vcsh_text
         #region 文字內填滿文字
         private void pictureBox_filled_text_Paint(object sender, PaintEventArgs e)
         {
+            pictureBox_filled_text.BackColor = Color.Pink;
+
             // Make things smoother.
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
 
             // Create the text path.
             GraphicsPath path = new GraphicsPath(FillMode.Alternate);
@@ -972,6 +986,8 @@ namespace vcs_Draw9_Example6_vcsh_text
         //彩色文字 ST
         private void pictureBox_rainbow_text_Paint(object sender, PaintEventArgs e)
         {
+            pictureBox_rainbow_text.BackColor = Color.Pink;
+
             const string Txt = "群曜醫電";
 
             // Make the result smoother.

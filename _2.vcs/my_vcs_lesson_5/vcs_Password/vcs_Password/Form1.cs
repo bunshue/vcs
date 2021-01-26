@@ -95,13 +95,15 @@ namespace vcs_Password
 
             try
             {
-                richTextBox1.LoadFile("C:\\______test_files\\VS2013Express.rtf");
+                richTextBox1.LoadFile("C:\\______test_files\\__RW\\_rtf\\VS2013Express.rtf");
                 richTextBox1.Find("Text", RichTextBoxFinds.MatchCase);
 
                 richTextBox1.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
                 richTextBox1.SelectionColor = Color.Red;
 
-                richTextBox1.SaveFile("C:\\______test_files\\MyDocument.rtf", RichTextBoxStreamType.RichText);
+                string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
+                richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
 
                 this.Controls.Add(richTextBox1);
             }
