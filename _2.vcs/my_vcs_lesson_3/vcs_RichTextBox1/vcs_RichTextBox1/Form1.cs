@@ -54,6 +54,10 @@ namespace vcs_RichTextBox1
             // If the file exists, load it.
             if (File.Exists(rtf_filename))
                 richTextBox_rtf.LoadFile(rtf_filename);
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // Select the indicated text.
@@ -389,6 +393,39 @@ namespace vcs_RichTextBox1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            // Display some sample values.
+            double value = 12.345;
+            long long_size;
+            for (int i = 1; i < 11; i++)
+            {
+                richTextBox1.Text += "數值 : " + value.ToString() + "\t";
+                richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
+
+                if (value <= long.MaxValue)
+                {
+                    long_size = (long)value;
+                    richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+                value *= 1000;
+            }
+
+            richTextBox1.Text += "\n";
+
+            value = 1023;
+            richTextBox1.Text += "數值 : " + value.ToString() + "\t";
+            richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
+            long_size = (long)value;
+            richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
+
+            value = 1024;
+            richTextBox1.Text += "數值 : " + value.ToString() + "\t";
+            richTextBox1.Text += "科學記號 : " + value.ToString("E") + "\t" + "檔案大小 : " + value.ToFileSize() + "\t";
+            long_size = (long)value;
+            richTextBox1.Text += "檔案大小 : " + long_size.ToFileSizeApi() + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)

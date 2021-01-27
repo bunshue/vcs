@@ -42,6 +42,7 @@ namespace vcs_Console_2_sort
             foreach (var stu in students)
                 Console.WriteLine("Name: {0}, Score: {1} ", stu.Name, stu.Score);
 
+            Console.WriteLine("Press any key");
             Console.ReadKey();
         }
 

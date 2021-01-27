@@ -285,7 +285,6 @@ namespace vcs_Draw3
             pictureBox2.Size = bitmap3.Size;
             pictureBox2.Image = bitmap3;
             pictureBox2.Location = new Point(570, 10);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -308,7 +307,6 @@ namespace vcs_Draw3
                 timer4.Enabled = false;
                 richTextBox1.Text += "SP\n";
             }
-
         }
 
         int tt = 0;

@@ -31,8 +31,29 @@ namespace vcs_Console_1
             {
                 Console.WriteLine("{0} is not a valid file or directory.", path);
             }
+            
+            //C# 二進位轉十進位
+            Console.WriteLine(Convert.ToInt32("1111", 2).ToString("D"));//Binary To Decimal
+            //> Output: 15
 
-            Console.WriteLine("Press any key");
+            //C# 二進位轉十六進位
+            Console.WriteLine(Convert.ToInt32("1111", 2).ToString("X"));//Binary To Hexadecimal
+            //> Output: F
+
+            //C# 十進位轉二進位
+            Console.WriteLine(Convert.ToString(15, 2));//Decimal To Binary
+            //> Output: 1111
+
+            //C# 十進位轉十六進位
+            Console.WriteLine(Convert.ToString(15, 16));//Decimal To Hexadecimal
+            //> Output: f
+
+            Console.WriteLine("目前時間 : " + DateTime.Now.ToString());
+            Console.Write("Press any key to continue"); //無換行
+            Console.Write("Press any key to continue");//無換行
+            Console.WriteLine("Press any key");//有換行
+            Console.WriteLine("Press any key");//有換行
+            Console.ReadLine();
             Console.ReadKey();
         }
 

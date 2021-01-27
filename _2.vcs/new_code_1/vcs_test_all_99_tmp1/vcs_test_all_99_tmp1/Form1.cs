@@ -497,46 +497,10 @@ namespace vcs_test_all_99_tmp1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //2022年距今還有多久
-            DateTime EventDate = new DateTime(2022, 1, 1, 0, 0, 0);
-            TimeSpan remaining = EventDate - DateTime.Now;
-
-            if (remaining.TotalSeconds < 0)
-            {
-                richTextBox1.Text += "時間 " + EventDate + " 早就過了\n";
-            }
-            else
-            {
-                richTextBox1.Text += "時間 " + EventDate + " 距今:\n";
-                richTextBox1.Text += remaining.Days + "  天\n";
-                richTextBox1.Text += remaining.Hours + "  時\n";
-                richTextBox1.Text += remaining.Minutes + "  分\n";
-                richTextBox1.Text += remaining.Seconds + "  秒\n";
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //尋找13號星期五
-            int year_st = 2020;
-            int year_sp = 2030;
-
-            // Loop over the selected years.
-            for (int year = year_st; year <= year_sp; year++)
-            {
-                // Loop over the months in the year.
-                for (int month = 1; month <= 12; month++)
-                {
-                    // See if this month's 13th is a Friday.
-                    DateTime dt = new DateTime(year, month, 13);
-
-                    // See if this is a Friday.
-                    if (dt.DayOfWeek == DayOfWeek.Friday)
-                    {
-                        richTextBox1.Text += dt.ToShortDateString() + "\n";
-                    }
-                }
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -566,15 +530,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //一段時間以後
-            DateTime dt = DateTime.Now;
-
-            //?日?時?分?秒 後
-            DateTime dt_new = dt + new TimeSpan(365 * 10, 12, 34, 56);
-
-
-            richTextBox1.Text += "現在時間 : " + dt.ToString() + "\n";
-            richTextBox1.Text += "一段時間以後 : " + dt_new.ToString() + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)

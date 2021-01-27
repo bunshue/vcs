@@ -194,7 +194,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(150, 50);
             this.button11.TabIndex = 50;
-            this.button11.Text = "尋找13號星期五";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -227,7 +226,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(150, 50);
             this.button10.TabIndex = 67;
-            this.button10.Text = "2022年距今還有多久";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -275,7 +273,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(150, 50);
             this.button13.TabIndex = 71;
-            this.button13.Text = "一段時間以後";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

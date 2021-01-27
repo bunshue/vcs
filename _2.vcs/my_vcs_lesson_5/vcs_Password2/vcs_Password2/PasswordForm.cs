@@ -22,7 +22,7 @@ namespace vcs_Password2
         // Validate the password.
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "Secret")
+            if (txtPassword.Text == "iloveims")
             {
                 // The password is ok.
                 this.DialogResult = DialogResult.OK;

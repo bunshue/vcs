@@ -255,11 +255,12 @@
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button14.Location = new System.Drawing.Point(12, 661);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(220, 40);
             this.button14.TabIndex = 15;
+            this.button14.Text = "用科學記號與檔案大小表示數值";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

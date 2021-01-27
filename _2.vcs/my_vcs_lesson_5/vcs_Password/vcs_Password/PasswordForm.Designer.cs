@@ -66,6 +66,7 @@
             // 
             // button2
             // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(418, 99);
             this.button2.Name = "button2";
@@ -76,8 +77,10 @@
             // 
             // PasswordForm
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(601, 179);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -85,6 +88,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "PasswordForm";
             this.Text = "Password";
+            this.Load += new System.EventHandler(this.PasswordForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

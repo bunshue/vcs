@@ -15,5 +15,10 @@ namespace vcs_Password
         {
             InitializeComponent();
         }
+
+        private void PasswordForm_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+        }
     }
 }

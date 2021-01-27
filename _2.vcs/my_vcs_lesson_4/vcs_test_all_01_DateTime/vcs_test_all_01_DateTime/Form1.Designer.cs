@@ -472,7 +472,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(164, 46);
             this.button30.TabIndex = 31;
-            this.button30.Text = "xxx";
+            this.button30.Text = "尋找13號星期五";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -538,7 +538,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(164, 46);
             this.button29.TabIndex = 38;
-            this.button29.Text = "xxx";
+            this.button29.Text = "2022年距今還有多久";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -722,7 +722,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(164, 46);
             this.button45.TabIndex = 55;
-            this.button45.Text = "一段時間以後的寫法";
+            this.button45.Text = "xxx";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
@@ -766,18 +766,20 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(164, 46);
             this.button49.TabIndex = 57;
-            this.button49.Text = "xxx";
+            this.button49.Text = "一段時間以後";
             this.button49.UseVisualStyleBackColor = true;
+            this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
             // button50
             // 
-            this.button50.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button50.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button50.Location = new System.Drawing.Point(457, 217);
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(164, 46);
             this.button50.TabIndex = 60;
-            this.button50.Text = "xxx";
+            this.button50.Text = "一段時間以後的寫法";
             this.button50.UseVisualStyleBackColor = true;
+            this.button50.Click += new System.EventHandler(this.button50_Click);
             // 
             // groupBox1
             // 
