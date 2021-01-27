@@ -33,7 +33,6 @@ namespace vcs_Draw9_Example6_vcsh_text
         private int TicksToGo, TotalTicks;
         // Information about the string to draw.
         private const string LabelText = "群曜醫電股份有限公司";
-        //private const string LabelText = "C# Programming";
         private Font TextFont;
         private float[] CharacterWidths;
         private float TotalCharacterWidth;
@@ -568,15 +567,12 @@ namespace vcs_Draw9_Example6_vcsh_text
             // Use AntiAlias for the best result.
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
             e.Graphics.Clear(pictureBox_stretching.BackColor);
-
-            SpaceTextToFit(e.Graphics, pictureBox_stretching.ClientRectangle,
-                TextFont, Brushes.Red, LabelText);
-
+            SpaceTextToFit(e.Graphics, pictureBox_stretching.ClientRectangle, TextFont, Brushes.Red, LabelText);
         }
 
         // Draw text inserting space between characters
         // to make it fill the indicated width.
-        private void SpaceTextToFit(Graphics gr, Rectangle rect, Font font, Brush brush, string text)
+        private void SpaceTextToFit(Graphics g, Rectangle rect, Font font, Brush brush, string text)
         {
             using (StringFormat string_format = new StringFormat())
             {
@@ -586,11 +582,13 @@ namespace vcs_Draw9_Example6_vcsh_text
                 // Calculate the spacing.
                 float space = (rect.Width - TotalCharacterWidth) / (text.Length - 1);
 
+                g.DrawRectangle(new Pen(Color.Red, 1), rect);
+
                 // Draw the characters.
                 PointF point = new PointF(rect.X, rect.Y);
                 for (int i = 0; i < text.Length; i++)
                 {
-                    gr.DrawString(text[i].ToString(), font, brush, point);
+                    g.DrawString(text[i].ToString(), font, brush, point);
                     point.X += CharacterWidths[i] + space;
                 }
             }

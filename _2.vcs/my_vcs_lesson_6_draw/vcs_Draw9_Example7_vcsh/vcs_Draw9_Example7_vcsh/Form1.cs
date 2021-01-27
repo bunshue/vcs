@@ -38,6 +38,10 @@ namespace vcs_Draw9_Example7_vcsh
         private const int Period = 21;
         private Color[] Colors;
 
+        #region pictureBox_butterfly butterfly
+        private const int period = 24;
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
@@ -57,7 +61,8 @@ namespace vcs_Draw9_Example7_vcsh
             richTextBox1.Text += "picturebox1 client W = " + pictureBox1.ClientSize.Width.ToString() + ", H = " + pictureBox1.ClientSize.Height.ToString() + "\n";
 
             // Initialize the colors.
-            Colors = new Color[] {
+            Colors = new Color[]
+            {
                 Color.Pink,
                 Color.Red,
                 Color.Orange,
@@ -140,12 +145,13 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox8.Size = new Size(W, H);
             pictureBox_snowflake.Size = new Size(W, H);
             pictureBox_snowflake2.Size = new Size(W, H);
-            pictureBox9.Size = new Size(W, H);
-            pictureBox10.Size = new Size(W, H);
-            pictureBox11.Size = new Size(W, H);
-            pictureBox12.Size = new Size(W, H);
-            pictureBox13.Size = new Size(W, H);
-            pictureBox14.Size = new Size(W, H);
+            pictureBox_fractal1.Size = new Size(W, H);
+            pictureBox_fractal2.Size = new Size(W, H);
+            pictureBox_fractal3.Size = new Size(W, H);
+            pictureBox_butterfly.Size = new Size(W, H);
+            pictureBox_butterfly.BackColor = Color.Black;
+            pictureBox_sierpinski1.Size = new Size(W, H);
+            pictureBox_sierpinski2.Size = new Size(W, H);
 
             x_st = 10;
             y_st = 10;
@@ -173,12 +179,12 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_ransom_note.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             richTextBox_ransom_note_result.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
-            pictureBox9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            pictureBox10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            pictureBox12.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            pictureBox13.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            pictureBox14.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            pictureBox_fractal1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            pictureBox_fractal2.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox_fractal3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox_butterfly.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox_sierpinski1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            pictureBox_sierpinski2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -2045,7 +2051,219 @@ namespace vcs_Draw9_Example7_vcsh
             Draw_SnowFlake1();
             Draw_SnowFlake2();
             Draw_SnowFlake3();
+
+            DrawGasket1();  //sierpinski_carpet
+            DrawGasket2();  //sierpinski_triangle
         }
+
+        private void pictureBox_fractal1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox_fractal2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox_fractal3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+        #region sierpinski
+
+        // Draw the carpet.
+        private void DrawGasket1()
+        {
+            int Level = (int)numericUpDown1.Value;
+
+            Bitmap bm = new Bitmap(
+                pictureBox_sierpinski1.ClientSize.Width,
+                pictureBox_sierpinski1.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Draw the top-level carpet.
+                const float margin = 10;
+                RectangleF rect = new RectangleF(
+                    margin, margin,
+                    pictureBox_sierpinski1.ClientSize.Width - 2 * margin,
+                    pictureBox_sierpinski1.ClientSize.Height - 2 * margin);
+                DrawRectangle(gr, Level, rect);
+            }
+
+            // Display the result.
+            pictureBox_sierpinski1.Image = bm;
+
+            // Save the bitmap into a file.
+            bm.Save("Carpet " + Level + ".bmp");
+        }
+
+        // Draw a carpet in the rectangle.
+        private void DrawRectangle(Graphics gr, int level, RectangleF rect)
+        {
+            // See if we should stop.
+            if (level == 0)
+            {
+                // Fill the rectangle.
+                gr.FillRectangle(Brushes.Blue, rect);
+            }
+            else
+            {
+                // Divide the rectangle into 9 pieces.
+                float wid = rect.Width / 3f;
+                float x0 = rect.Left;
+                float x1 = x0 + wid;
+                float x2 = x0 + wid * 2f;
+
+                float hgt = rect.Height / 3f;
+                float y0 = rect.Top;
+                float y1 = y0 + hgt;
+                float y2 = y0 + hgt * 2f;
+
+                // Recursively draw smaller carpets.
+                DrawRectangle(gr, level - 1, new RectangleF(x0, y0, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x1, y0, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x2, y0, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x0, y1, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x2, y1, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x0, y2, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x1, y2, wid, hgt));
+                DrawRectangle(gr, level - 1, new RectangleF(x2, y2, wid, hgt));
+            }
+        }
+
+        // Draw the triangle.
+        private void DrawGasket2()
+        {
+            int Level = (int)numericUpDown1.Value;
+
+            Bitmap bm = new Bitmap(
+                pictureBox_sierpinski2.ClientSize.Width,
+                pictureBox_sierpinski2.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Draw the top-level triangle.
+                const float margin = 10;
+                PointF top_point = new PointF(
+                    pictureBox_sierpinski2.ClientSize.Width / 2f,
+                    margin);
+                PointF left_point = new PointF(
+                    margin,
+                    pictureBox_sierpinski2.ClientSize.Height - margin);
+                PointF right_point = new PointF(
+                    pictureBox_sierpinski2.ClientRectangle.Right - margin,
+                    pictureBox_sierpinski2.ClientRectangle.Bottom - margin);
+                DrawTriangle(gr, Level, top_point, left_point, right_point);
+            }
+
+            // Display the result.
+            pictureBox_sierpinski2.Image = bm;
+
+            // Save the bitmap into a file.
+            bm.Save("Triangle " + Level + ".bmp");
+        }
+
+        // Draw a triangle between the points.
+        private void DrawTriangle(Graphics gr, int level,
+            PointF top_point, PointF left_point, PointF right_point)
+        {
+            // See if we should stop.
+            if (level == 0)
+            {
+                // Fill the triangle.
+                PointF[] points =
+                {
+                    top_point, right_point, left_point
+                };
+                gr.FillPolygon(Brushes.Red, points);
+            }
+            else
+            {
+                // Find the edge midpoints.
+                PointF left_mid = new PointF(
+                    (top_point.X + left_point.X) / 2f,
+                    (top_point.Y + left_point.Y) / 2f);
+                PointF right_mid = new PointF(
+                    (top_point.X + right_point.X) / 2f,
+                    (top_point.Y + right_point.Y) / 2f);
+                PointF bottom_mid = new PointF(
+                    (left_point.X + right_point.X) / 2f,
+                    (left_point.Y + right_point.Y) / 2f);
+
+                // Recursively draw smaller triangles.
+                DrawTriangle(gr, level - 1, top_point, left_mid, right_mid);
+                DrawTriangle(gr, level - 1, left_mid, left_point, bottom_mid);
+                DrawTriangle(gr, level - 1, right_mid, bottom_mid, right_point);
+            }
+        }
+        #endregion
+
+        #region pictureBox_butterfly butterfly
+
+        // Draw the butterfly.
+        private void pictureBox_butterfly_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(this.pictureBox_butterfly.BackColor);
+
+            // Scale and translate.
+            RectangleF world_rect =
+                new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            float cx = (world_rect.Left + world_rect.Right) / 2;
+            float cy = (world_rect.Top + world_rect.Bottom) / 2;
+
+            // Center the world coordinates at origin.
+            e.Graphics.TranslateTransform(-cx, -cy);
+
+            // Scale to fill the form.
+            float scale = Math.Min(
+                this.pictureBox_butterfly.ClientSize.Width / world_rect.Width,
+                this.pictureBox_butterfly.ClientSize.Height / world_rect.Height);
+            e.Graphics.ScaleTransform(scale, scale, MatrixOrder.Append);
+
+            // Move the result to center on the form.
+            e.Graphics.TranslateTransform(
+                this.pictureBox_butterfly.ClientSize.Width / 2,
+                this.pictureBox_butterfly.ClientSize.Height / 2, MatrixOrder.Append);
+
+            // Generate the points.
+            PointF pt0, pt1;
+            double t = 0;
+            double expr =
+                Math.Exp(Math.Cos(t))
+                - 2 * Math.Cos(4 * t)
+                - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF(
+                (float)(Math.Sin(t) * expr),
+                (float)(-Math.Cos(t) * expr));
+            using (Pen the_pen = new Pen(Color.Blue, 0))
+            {
+                const long num_lines = 5000;
+                for (long i = 0; i < num_lines; i++)
+                {
+                    t = i * period * Math.PI / num_lines;
+                    expr =
+                        Math.Exp(Math.Cos(t))
+                        - 2 * Math.Cos(4 * t)
+                        - Math.Pow(Math.Sin(t / 12), 5);
+                    pt0 = pt1;
+                    pt1 = new PointF(
+                        (float)(Math.Sin(t) * expr),
+                        (float)(-Math.Cos(t) * expr));
+                    the_pen.Color = GetColor(t);
+                    e.Graphics.DrawLine(the_pen, pt0, pt1);
+                }
+            }
+        }
+        #endregion
 
 
     }

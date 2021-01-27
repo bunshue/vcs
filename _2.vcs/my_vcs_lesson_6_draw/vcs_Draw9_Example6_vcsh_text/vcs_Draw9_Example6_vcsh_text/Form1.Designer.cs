@@ -318,7 +318,7 @@
             this.label_size.BackColor = System.Drawing.Color.LightGreen;
             this.label_size.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_size.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_size.Location = new System.Drawing.Point(12, 170);
+            this.label_size.Location = new System.Drawing.Point(12, 156);
             this.label_size.Name = "label_size";
             this.label_size.Size = new System.Drawing.Size(160, 25);
             this.label_size.TabIndex = 71;
