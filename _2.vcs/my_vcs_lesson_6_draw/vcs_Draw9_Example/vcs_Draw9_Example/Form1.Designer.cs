@@ -81,9 +81,6 @@
             this.button43 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.cb_magnifying = new System.Windows.Forms.CheckBox();
             this.cb_snake = new System.Windows.Forms.CheckBox();
             this.cb_manual = new System.Windows.Forms.CheckBox();
@@ -92,9 +89,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -656,36 +650,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(0, 506);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(700, 6);
-            this.pictureBox3.TabIndex = 75;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox3_Paint);
-            this.pictureBox3.Resize += new System.EventHandler(this.pictureBox3_Resize);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(0, 623);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(700, 6);
-            this.pictureBox4.TabIndex = 76;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox4_Paint);
-            this.pictureBox4.Resize += new System.EventHandler(this.pictureBox4_Resize);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(0, 739);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(700, 6);
-            this.pictureBox5.TabIndex = 77;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox5_Paint);
-            this.pictureBox5.Resize += new System.EventHandler(this.pictureBox5_Resize);
-            // 
             // cb_magnifying
             // 
             this.cb_magnifying.AutoSize = true;
@@ -756,9 +720,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1325, 750);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.button40);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.button42);
@@ -818,9 +779,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -882,9 +840,6 @@
         private System.Windows.Forms.Button button43;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.CheckBox cb_magnifying;
         private System.Windows.Forms.CheckBox cb_snake;
         private System.Windows.Forms.CheckBox cb_manual;

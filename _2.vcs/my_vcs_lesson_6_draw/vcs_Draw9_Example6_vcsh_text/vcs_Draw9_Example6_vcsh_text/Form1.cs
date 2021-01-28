@@ -190,6 +190,18 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox_filled_text.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 150);    //左下
             pictureBox_rainbow_text.Location = new Point(x_st + dx * 2 + 460, y_st + dy * 1);   //右上
 
+            //三個寫字範例 ST
+            pictureBox5.Location = new Point(1000, 700);
+            pictureBox6.Location = new Point(1000, 700 + 120);
+            pictureBox7.Location = new Point(1000, 700 + 240);
+            pictureBox5.Size = new Size(720, 100);
+            pictureBox6.Size = new Size(720, 100);
+            pictureBox7.Size = new Size(720, 100);
+            pictureBox5.BackColor = Color.LightPink;
+            pictureBox6.BackColor = Color.LightGreen;
+            pictureBox7.BackColor = Color.LightBlue;
+            //三個寫字範例 SP
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //ClientSize = new Size(button2.Right + 10, richTextBox1.Bottom + 10);    //自動表單邊界
@@ -1108,8 +1120,227 @@ namespace vcs_Draw9_Example6_vcsh_text
             // Restore the graphics state.
             gr.Restore(state);
         }
+
         //把字體旋轉90度 SP
 
-    
+        //三個寫字範例 ST
+
+        // Draw the split text.
+        private void pictureBox5_Paint(object sender, PaintEventArgs e)
+        {
+            using (Font font = new Font("Times New Roman", 28, FontStyle.Bold))
+            {
+                Color top_bg_color = Color.LightGreen;
+                Color top_fg_color = Color.Fuchsia;
+                Color bottom_bg_color = Color.FromArgb(255, 128, 255);
+                Color bottom_fg_color = Color.FromArgb(0, 128, 0);
+
+                SolidBrush top_bg_brush = new SolidBrush(top_bg_color);
+                SolidBrush top_fg_brush = new SolidBrush(top_fg_color);
+                SolidBrush bottom_bg_brush = new SolidBrush(bottom_bg_color);
+                SolidBrush bottom_fg_brush = new SolidBrush(bottom_fg_color);
+
+                DrawSineSplitText(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.",
+                    font, pictureBox5.ClientRectangle,
+                    top_bg_brush, top_fg_brush,
+                    bottom_bg_brush, bottom_fg_brush,
+                    2.5f, 0.25f);
+
+                top_bg_brush.Dispose();
+                top_fg_brush.Dispose();
+                bottom_bg_brush.Dispose();
+                bottom_fg_brush.Dispose();
+            }
+        }
+
+        // Draw sine split text centered in the indicated rectangle.
+        private void DrawSineSplitText(Graphics gr,
+            string text, Font font, Rectangle rect,
+            Brush top_bg_brush, Brush top_fg_brush,
+            Brush bottom_bg_brush, Brush bottom_fg_brush,
+            float num_waves, float y_scale)
+        {
+            // Make bitmaps holding the text in different colors.
+            Bitmap bm_top = new Bitmap(rect.Width, rect.Height);
+            Bitmap bm_bottom = new Bitmap(rect.Width, rect.Height);
+
+            // Make a StringFormat to center text.
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+
+                using (Graphics gr_top = Graphics.FromImage(bm_top))
+                {
+                    gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr_top.FillRectangle(top_bg_brush, rect);
+                    gr_top.DrawString(text, font, top_fg_brush, rect, sf);
+                }
+
+                using (Graphics gr_bottom = Graphics.FromImage(bm_bottom))
+                {
+                    gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr_bottom.FillRectangle(bottom_bg_brush, rect);
+                    gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
+                }
+            }
+
+            // Fill the rectangle with the top bitmap.
+            using (TextureBrush brush = new TextureBrush(bm_top))
+            {
+                gr.FillRectangle(brush, rect);
+            }
+
+            // Make a polygon to fill the bottom half.
+            List<PointF> points = new List<PointF>();
+            float mag = (font.Size * 96f / 72f) / 2 * y_scale;
+            float y_offset = rect.Height / 2f;
+            points.Add(new PointF(0, rect.Height));
+            float x_scale = (float)(num_waves * 2 * Math.PI / rect.Width);
+            for (int x = 0; x < rect.Width; x++)
+            {
+                float y = (float)(y_offset + mag * Math.Sin(x * x_scale));
+                points.Add(new PointF(x, y));
+            }
+            points.Add(new PointF(rect.Width - 1, rect.Height));
+
+            // Fill the polygon.
+            using (TextureBrush brush = new TextureBrush(bm_bottom))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                gr.FillPolygon(brush, points.ToArray());
+            }
+
+            bm_top.Dispose();
+            bm_bottom.Dispose();
+        }
+
+        // Draw the split text.
+        private void pictureBox6_Paint(object sender, PaintEventArgs e)
+        {
+            using (Font font = new Font("Times New Roman", 28, FontStyle.Bold))
+            {
+                DrawSplitText(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.",
+                    font, pictureBox6.ClientRectangle,
+                    Brushes.Black, Brushes.White);
+            }
+        }
+
+        // Draw split text centered in the indicated rectangle.
+        private void DrawSplitText(Graphics gr,
+            string text, Font font, Rectangle rect,
+            Brush top_fg_brush, Brush bottom_fg_brush)
+        {
+            // Make bitmaps holding the text in different colors.
+            Bitmap bm_top = new Bitmap(rect.Width, rect.Height);
+            Bitmap bm_bottom = new Bitmap(rect.Width, rect.Height);
+
+            // Make a StringFormat to center text.
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+
+                using (Graphics gr_top = Graphics.FromImage(bm_top))
+                {
+                    gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr_top.FillRectangle(bottom_fg_brush, rect);
+                    gr_top.DrawString(text, font, top_fg_brush, rect, sf);
+                }
+
+                using (Graphics gr_bottom = Graphics.FromImage(bm_bottom))
+                {
+                    gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr_bottom.FillRectangle(top_fg_brush, rect);
+                    gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
+                }
+            }
+
+            // Fill the entire rectangle with the top version.
+            using (TextureBrush brush = new TextureBrush(bm_top))
+            {
+                gr.FillRectangle(brush, rect);
+            }
+
+            // Fill the lower left corner with the bottom version.
+            Point[] points = 
+            {
+                new Point(rect.X, rect.Y),
+                new Point(rect.X, rect.Bottom),
+                new Point(rect.Right, rect.Bottom),
+                //new Point(rect.X, rect.Bottom),
+                //new Point(rect.Right, rect.Bottom),
+                //new Point(rect.Right, rect.Y),
+            };
+            using (TextureBrush brush = new TextureBrush(bm_bottom))
+            {
+                gr.FillPolygon(brush, points);
+            }
+
+            bm_top.Dispose();
+            bm_bottom.Dispose();
+        }
+
+        // Draw the split text.
+        private void pictureBox7_Paint(object sender, PaintEventArgs e)
+        {
+            using (Font font = new Font("Times New Roman", 28, FontStyle.Bold))
+            {
+                DrawSplitText2(e.Graphics, "群曜醫電 Insight Medical Solutions Inc.",
+                    font, pictureBox7.ClientRectangle,
+                    Brushes.Black, Brushes.White);
+            }
+        }
+
+        // Draw split text centered in the indicated rectangle.
+        private void DrawSplitText2(Graphics gr,
+            string text, Font font, Rectangle rect,
+            Brush top_fg_brush, Brush bottom_fg_brush)
+        {
+            // Make bitmaps holding the text in different colors.
+            Bitmap bm_top = new Bitmap(rect.Width, rect.Height);
+            Bitmap bm_bottom = new Bitmap(rect.Width, rect.Height);
+
+            // Make a StringFormat to center text.
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+
+                using (Graphics gr_top = Graphics.FromImage(bm_top))
+                {
+                    gr_top.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr_top.FillRectangle(bottom_fg_brush, rect);
+                    gr_top.DrawString(text, font, top_fg_brush, rect, sf);
+                }
+
+                using (Graphics gr_bottom = Graphics.FromImage(bm_bottom))
+                {
+                    gr_bottom.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                    gr_bottom.FillRectangle(top_fg_brush, rect);
+                    gr_bottom.DrawString(text, font, bottom_fg_brush, rect, sf);
+                }
+            }
+
+            // Fill the top and bottom halves of the rectangle.
+            RectangleF top_rect = new RectangleF(
+                rect.X, rect.Y, rect.Width, rect.Height / 2f);
+            using (TextureBrush brush = new TextureBrush(bm_top))
+            {
+                gr.FillRectangle(brush, top_rect);
+            }
+
+            RectangleF bottom_rect = new RectangleF(
+                rect.X, top_rect.Bottom, rect.Width, rect.Height / 2f);
+            using (TextureBrush brush = new TextureBrush(bm_bottom))
+            {
+                gr.FillRectangle(brush, bottom_rect);
+            }
+
+            bm_top.Dispose();
+            bm_bottom.Dispose();
+        }
+
+        //三個寫字範例 SP
     }
 }

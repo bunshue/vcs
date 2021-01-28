@@ -69,6 +69,9 @@
             this.pictureBox_rainbow_text = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate_brush)).BeginInit();
@@ -83,6 +86,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow_text)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -462,14 +468,44 @@
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox4_Paint);
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Location = new System.Drawing.Point(1044, 750);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(175, 10);
+            this.pictureBox5.TabIndex = 82;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox5_Paint);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Location = new System.Drawing.Point(1044, 786);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(175, 10);
+            this.pictureBox6.TabIndex = 81;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox6_Paint);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Location = new System.Drawing.Point(1044, 824);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(175, 10);
+            this.pictureBox7.TabIndex = 80;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox7_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 933);
+            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox_rainbow_text);
+            this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox_filled_text);
             this.Controls.Add(this.pictureBox_image_string);
             this.Controls.Add(this.pictureBox_random_color);
@@ -516,6 +552,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,6 +602,9 @@
         private System.Windows.Forms.PictureBox pictureBox_rainbow_text;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox7;
     }
 }
 
