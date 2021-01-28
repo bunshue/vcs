@@ -38,31 +38,30 @@ namespace vcs_Draw9_Example
             sb = new SolidBrush(Color.Blue);
             g.Clear(Color.Red);             //useless??
             pictureBox1.BackColor = Color.Pink;
-            show_item_location(0);
+            show_item_location();
 
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.BackColor = Color.Pink;
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
-        void show_item_location(int form_position_x_st)
+        void show_item_location()
         {
             pictureBox2.Visible = false;
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 
-            this.Size = new Size(1460 + form_position_x_st, 900);
             int x_st;
             int y_st;
             int dx;
             int dy;
 
             //button
-            x_st = 850 + form_position_x_st;
+            x_st = 1350;
             y_st = 10;
             dx = 110;
             dy = 45;
@@ -121,17 +120,26 @@ namespace vcs_Draw9_Example
             button43.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button44.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
 
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 10);
+            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 15);
+            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 15);
 
-            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 9 + dy / 2);
+            cb_manual.Location = new Point(x_st + dx * 1, y_st + dy * 14);
+            cb_snake.Location = new Point(x_st + dx * 2, y_st + dy * 14);
+            cb_magnifying.Location = new Point(x_st + dx * 2, y_st + dy * 14 + dy / 2);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 16);
+            richTextBox1.Size = new Size(richTextBox1.Size.Width, 300);
+
+            pictureBox1.Location = new Point(20, 20);
+            pictureBox1.Size = new Size(640, 480);
+            pictureBox3.Location = new Point(20, 700);
+            pictureBox4.Location = new Point(20, 700 + 120);
+            pictureBox5.Location = new Point(20, 700 + 240);
+            pictureBox3.Size = new Size(830, 100);
+            pictureBox4.Size = new Size(830, 100);
+            pictureBox5.Size = new Size(830, 100);
 
             //pictureBox1.Location = new Point(10, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -1515,8 +1523,6 @@ namespace vcs_Draw9_Example
 
         private void button11_Click(object sender, EventArgs e)
         {
-            show_item_location(150);
-
             pictureBox1.Location = new Point(50, 50);
             pictureBox1.Size = new Size(887, 636);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
@@ -5076,8 +5082,6 @@ namespace vcs_Draw9_Example
 
         private void button21_Click(object sender, EventArgs e)
         {
-            show_item_location(150);
-
             pictureBox1.Location = new Point(50, 50);
             pictureBox1.Size = new Size(887, 636);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;

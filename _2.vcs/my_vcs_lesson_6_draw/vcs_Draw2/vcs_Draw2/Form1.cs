@@ -75,7 +75,7 @@ namespace vcs_Draw2
             }
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -87,7 +87,7 @@ namespace vcs_Draw2
             int dy;
 
             //button
-            x_st = 820;
+            x_st = 1300;
             y_st = 10;
             dx = 120;
             dy = 50;
