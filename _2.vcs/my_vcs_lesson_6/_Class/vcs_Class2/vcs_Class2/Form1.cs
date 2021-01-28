@@ -86,6 +86,21 @@ namespace vcs_Class2
 
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "使用Person.cs裡面的class Person3, 看輸出畫面的log\n";
+
+            // Create a Person.
+            richTextBox1.Text += "建立\n";
+            Person3 person = new Person3();
+
+
+
+            richTextBox1.Text += "銷毀\n";
+            // Force garbage collection.
+            GC.Collect();
+        }
     }
 
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_random_color = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnRandomize = new System.Windows.Forms.Button();
@@ -101,6 +103,7 @@
             this._Label1_0 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lb_ordinal = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -121,7 +124,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(874, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1163, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(221, 740);
             this.richTextBox1.TabIndex = 1;
@@ -328,7 +331,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(874, 550);
+            this.bt_clear.Location = new System.Drawing.Point(1163, 550);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(54, 35);
             this.bt_clear.TabIndex = 23;
@@ -338,6 +341,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_random_color);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.bt_random11);
@@ -353,10 +357,21 @@
             this.groupBox1.Controls.Add(this.bt_random1);
             this.groupBox1.Location = new System.Drawing.Point(514, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(344, 688);
+            this.groupBox1.Size = new System.Drawing.Size(344, 771);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "亂數";
+            // 
+            // bt_random_color
+            // 
+            this.bt_random_color.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random_color.Location = new System.Drawing.Point(17, 296);
+            this.bt_random_color.Name = "bt_random_color";
+            this.bt_random_color.Size = new System.Drawing.Size(155, 40);
+            this.bt_random_color.TabIndex = 35;
+            this.bt_random_color.Text = "隨機顏色";
+            this.bt_random_color.UseVisualStyleBackColor = true;
+            this.bt_random_color.Click += new System.EventHandler(this.bt_random_color_Click);
             // 
             // groupBox4
             // 
@@ -364,7 +379,7 @@
             this.groupBox4.Controls.Add(this.btnRandomize);
             this.groupBox4.Controls.Add(this.lstArray);
             this.groupBox4.Controls.Add(this.lstList);
-            this.groupBox4.Location = new System.Drawing.Point(17, 322);
+            this.groupBox4.Location = new System.Drawing.Point(17, 398);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(321, 182);
             this.groupBox4.TabIndex = 34;
@@ -419,7 +434,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btnPick);
             this.groupBox3.Controls.Add(this.txtNames);
-            this.groupBox3.Location = new System.Drawing.Point(45, 510);
+            this.groupBox3.Location = new System.Drawing.Point(45, 586);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(258, 170);
             this.groupBox3.TabIndex = 33;
@@ -799,7 +814,7 @@
             this.groupBox2.Controls.Add(this._Label1_2);
             this.groupBox2.Controls.Add(this._Label1_1);
             this.groupBox2.Controls.Add(this._Label1_0);
-            this.groupBox2.Location = new System.Drawing.Point(353, 698);
+            this.groupBox2.Location = new System.Drawing.Point(353, 781);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(270, 122);
             this.groupBox2.TabIndex = 43;
@@ -941,11 +956,17 @@
             this.lb_ordinal.TabIndex = 45;
             this.lb_ordinal.Text = "序數";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1107, 826);
+            this.ClientSize = new System.Drawing.Size(1399, 957);
             this.Controls.Add(this.lb_ordinal);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.groupBox2);
@@ -1080,6 +1101,8 @@
         private System.Windows.Forms.ListBox lstList;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lb_ordinal;
+        private System.Windows.Forms.Button bt_random_color;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -44,8 +44,8 @@ namespace howto_covid19_graph
             LoadData();
 
             // Display the countries in the checked list box.
-            clbCountries.DataSource = CountryList;
-            clbCountries.CheckOnClick = true;
+            checkedListBox1.DataSource = CountryList;
+            checkedListBox1.CheckOnClick = true;
         }
 
         // Load and prepare the data.
@@ -200,14 +200,17 @@ namespace howto_covid19_graph
         }
 
         // An item has been checked or unchecked.
-        private void clbCountries_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            richTextBox1.Text += "you have clicked \t" + checkedListBox1.Items[e.Index] + "\n";
             // Do nothing if the user clicked All or None.
-            if (IgnoreItemCheck) return;
+            if (IgnoreItemCheck)
+            {
+                return;
+            }
 
             // Get the current list of checked items.
-            CountryData checked_country =
-                clbCountries.Items[e.Index] as CountryData;
+            CountryData checked_country = checkedListBox1.Items[e.Index] as CountryData;
             SelectedCountries = GetCountryList(checked_country, e.NewValue);
 
             // Graph the results.
@@ -224,7 +227,7 @@ namespace howto_covid19_graph
         {
             // Get the current list of checked items.
             List<CountryData> country_list;
-            if (clbCountries.CheckedItems.Count == 0)
+            if (checkedListBox1.CheckedItems.Count == 0)
             {
                 // Create a new list.
                 country_list = new List<CountryData>();
@@ -233,7 +236,7 @@ namespace howto_covid19_graph
             {
                 // Convert the selected objects into CountryData objects.
                 country_list =
-                    clbCountries.CheckedItems.Cast<CountryData>().ToList();
+                    checkedListBox1.CheckedItems.Cast<CountryData>().ToList();
             }
 
             if (checked_country != null)
@@ -260,7 +263,7 @@ namespace howto_covid19_graph
             ClosePoint = new PointF(-1, -1);
             if (SelectedCountries.Count == 0)
             {
-                picGraph.Image = null;
+                pictureBox1.Image = null;
                 return;
             }
 
@@ -272,9 +275,7 @@ namespace howto_covid19_graph
             DefineTransform(SelectedCountries, y_max);
 
             // Create a bitmap.
-            Bitmap bm = new Bitmap(
-                picGraph.ClientSize.Width,
-                picGraph.ClientSize.Height);
+            Bitmap bm = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
@@ -302,15 +303,15 @@ namespace howto_covid19_graph
             }
 
             // Display the result.
-            picGraph.Image = bm;
+            pictureBox1.Image = bm;
         }
 
         private void DefineTransform(List<CountryData> country_list, float y_max)
         {
             int num_cases = country_list[0].Cases.Length;
             WorldBounds = new RectangleF(0, 0, num_cases, y_max);
-            int wid = picGraph.ClientSize.Width;
-            int hgt = picGraph.ClientSize.Height - 1;
+            int wid = pictureBox1.ClientSize.Width;
+            int hgt = pictureBox1.ClientSize.Height - 1;
             const int margin = 4;
             PointF[] dest_points =
             {
@@ -381,8 +382,8 @@ namespace howto_covid19_graph
         private void btnAll_Click(object sender, EventArgs e)
         {
             IgnoreItemCheck = true;
-            for (int i = 0; i < clbCountries.Items.Count; i++)
-                clbCountries.SetItemChecked(i, true);
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, true);
             IgnoreItemCheck = false;
             RedrawGraph();
         }
@@ -390,8 +391,8 @@ namespace howto_covid19_graph
         private void btnNone_Click(object sender, EventArgs e)
         {
             IgnoreItemCheck = true;
-            for (int i = 0; i < clbCountries.Items.Count; i++)
-                clbCountries.SetItemChecked(i, false);
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, false);
             IgnoreItemCheck = false;
             RedrawGraph();
         }
@@ -408,14 +409,14 @@ namespace howto_covid19_graph
             SetTooltip(ClosePoint);
         }
 
-        private void picGraph_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             SetTooltip(e.Location);
         }
 
         private void SetTooltip(PointF point)
         {
-            if (picGraph.Image == null) return;
+            if (pictureBox1.Image == null) return;
             if (SelectedCountries == null) return;
 
             string new_tip = "";
@@ -433,12 +434,12 @@ namespace howto_covid19_graph
                 }
             }
 
-            if (tipGraph.GetToolTip(picGraph) != new_tip)
-                tipGraph.SetToolTip(picGraph, new_tip);
-            picGraph.Refresh();
+            if (tipGraph.GetToolTip(pictureBox1) != new_tip)
+                tipGraph.SetToolTip(pictureBox1, new_tip);
+            pictureBox1.Refresh();
         }
 
-        private void picGraph_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (ClosePoint.X < 0) return;
 
@@ -448,15 +449,16 @@ namespace howto_covid19_graph
             float y = ClosePoint.Y - radius;
             e.Graphics.FillEllipse(Brushes.White, x, y, 2 * radius, 2 * radius);
             e.Graphics.DrawEllipse(Pens.Red, x, y, 2 * radius, 2 * radius);
+            //richTextBox1.Text += "(" + ClosePoint.X.ToString() + ", " + ClosePoint.Y.ToString() + ") ";
         }
 
         private void radSortByName_Click(object sender, EventArgs e)
         {
             if (CountryList == null) return;
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByName);
-            clbCountries.DataSource = null;
+            checkedListBox1.DataSource = null;
             CountryList.Sort(Comparer);
-            clbCountries.DataSource = CountryList;
+            checkedListBox1.DataSource = CountryList;
             RedrawGraph();
         }
 
@@ -464,10 +466,44 @@ namespace howto_covid19_graph
         {
             if (CountryList == null) return;
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
-            clbCountries.DataSource = null;
+            checkedListBox1.DataSource = null;
             CountryList.Sort(Comparer);
-            clbCountries.DataSource = CountryList;
+            checkedListBox1.DataSource = CountryList;
             RedrawGraph();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i;
+            int len;
+            len = checkedListBox1.Items.Count;
+            richTextBox1.Text += "checkedListBox1 len = " + len.ToString() + "\n";
+            len = 5;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + checkedListBox1.Items[i] + "\n";
+            }
+
+            if (CountryList != null)
+            {
+                len = CountryList.Count;
+                richTextBox1.Text += "CountryList len = " + len.ToString() + "\n";
+                len = 5;
+                for (i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + CountryList[i].Name + "\n";
+                }
+            }
+
+            if (SelectedCountries != null)
+            {
+                len = SelectedCountries.Count;
+                richTextBox1.Text += "Selected countries len = " + len.ToString() + "\n";
+                for (i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + SelectedCountries[i].Name + "\n";
+                }
+            }
         }
     }
 }

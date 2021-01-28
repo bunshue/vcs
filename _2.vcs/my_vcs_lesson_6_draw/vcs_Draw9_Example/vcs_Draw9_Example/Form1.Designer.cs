@@ -124,7 +124,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 17;
-            this.button3.Text = "漸層色";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -237,6 +236,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(100, 40);
             this.button11.TabIndex = 26;
+            this.button11.Text = "OV亮度";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -324,6 +324,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(100, 40);
             this.button26.TabIndex = 42;
+            this.button26.Text = "Pie Chart 2";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -334,6 +335,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(100, 40);
             this.button25.TabIndex = 41;
+            this.button25.Text = "Pie Chart 1";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -429,7 +431,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(100, 40);
             this.button27.TabIndex = 54;
-            this.button27.Text = "OV亮度";
+            this.button27.Text = "Pie Chart 3";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -473,6 +475,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(100, 40);
             this.button28.TabIndex = 58;
+            this.button28.Text = "Pie Chart 4";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -483,7 +486,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(100, 40);
             this.button29.TabIndex = 59;
-            this.button29.Text = "畫愛心";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -626,6 +628,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(100, 40);
             this.button42.TabIndex = 72;
+            this.button42.Text = "畫愛心";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 

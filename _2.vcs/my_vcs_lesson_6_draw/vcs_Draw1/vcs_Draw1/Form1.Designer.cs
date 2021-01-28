@@ -562,7 +562,9 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(120, 42);
             this.button32.TabIndex = 59;
+            this.button32.Text = "在線的上下畫字";
             this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
             // button33
             // 
@@ -571,7 +573,9 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(120, 42);
             this.button33.TabIndex = 60;
+            this.button33.Text = "在曲線的上下畫字";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
             // button34
             // 
@@ -589,7 +593,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(120, 42);
             this.button35.TabIndex = 62;
-            this.button35.Text = "漸層色";
+            this.button35.Text = "漸層色 3種";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 

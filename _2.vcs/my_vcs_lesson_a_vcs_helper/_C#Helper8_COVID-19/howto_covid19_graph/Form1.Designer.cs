@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.picGraph = new System.Windows.Forms.PictureBox();
-            this.clbCountries = new System.Windows.Forms.CheckedListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnNone = new System.Windows.Forms.Button();
             this.tipGraph = new System.Windows.Forms.ToolTip(this.components);
@@ -38,35 +38,36 @@
             this.radSortByName = new System.Windows.Forms.RadioButton();
             this.radSortByMaxCases = new System.Windows.Forms.RadioButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picGraph)).BeginInit();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // picGraph
+            // pictureBox1
             // 
-            this.picGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picGraph.BackColor = System.Drawing.SystemColors.Control;
-            this.picGraph.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picGraph.Location = new System.Drawing.Point(184, 32);
-            this.picGraph.Name = "picGraph";
-            this.picGraph.Size = new System.Drawing.Size(650, 613);
-            this.picGraph.TabIndex = 3;
-            this.picGraph.TabStop = false;
-            this.picGraph.Paint += new System.Windows.Forms.PaintEventHandler(this.picGraph_Paint);
-            this.picGraph.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picGraph_MouseMove);
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(184, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(650, 613);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
-            // clbCountries
+            // checkedListBox1
             // 
-            this.clbCountries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.clbCountries.FormattingEnabled = true;
-            this.clbCountries.IntegralHeight = false;
-            this.clbCountries.Location = new System.Drawing.Point(12, 32);
-            this.clbCountries.Name = "clbCountries";
-            this.clbCountries.Size = new System.Drawing.Size(166, 586);
-            this.clbCountries.TabIndex = 4;
-            this.clbCountries.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbCountries_ItemCheck);
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.IntegralHeight = false;
+            this.checkedListBox1.Location = new System.Drawing.Point(12, 32);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(166, 586);
+            this.checkedListBox1.TabIndex = 4;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             // 
             // btnAll
             // 
@@ -126,29 +127,40 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(840, 13);
+            this.richTextBox1.Location = new System.Drawing.Point(840, 112);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(270, 632);
+            this.richTextBox1.Size = new System.Drawing.Size(270, 533);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(860, 32);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 656);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.radSortByMaxCases);
             this.Controls.Add(this.radSortByName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnNone);
             this.Controls.Add(this.btnAll);
-            this.Controls.Add(this.clbCountries);
-            this.Controls.Add(this.picGraph);
+            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "howto_covid19_graph";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,8 +168,8 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picGraph;
-        private System.Windows.Forms.CheckedListBox clbCountries;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button btnAll;
         private System.Windows.Forms.Button btnNone;
         private System.Windows.Forms.ToolTip tipGraph;
@@ -165,6 +177,7 @@
         private System.Windows.Forms.RadioButton radSortByName;
         private System.Windows.Forms.RadioButton radSortByMaxCases;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

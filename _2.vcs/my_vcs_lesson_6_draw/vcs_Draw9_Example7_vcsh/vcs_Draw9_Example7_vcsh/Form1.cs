@@ -36,33 +36,9 @@ namespace vcs_Draw9_Example7_vcsh
         int H = 230;
 
         private const int Period = 21;
-        private Color[] Colors;
-
-        #region pictureBox_butterfly butterfly
-        private const int period = 24;
-        #endregion
-
-        public Form1()
+        // Initialize the colors.
+        private Color[] Colors = new Color[]
         {
-            InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            g = pictureBox1.CreateGraphics();
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-            g.Clear(Color.Red);             //useless??
-            pictureBox1.BackColor = Color.Pink;
-            show_item_location();
-
-            richTextBox1.Text += "picturebox1 W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
-            richTextBox1.Text += "picturebox1 client W = " + pictureBox1.ClientSize.Width.ToString() + ", H = " + pictureBox1.ClientSize.Height.ToString() + "\n";
-
-            // Initialize the colors.
-            Colors = new Color[]
-            {
                 Color.Pink,
                 Color.Red,
                 Color.Orange,
@@ -87,7 +63,29 @@ namespace vcs_Draw9_Example7_vcsh
                 Color.Cyan,
                 Color.Blue,
                 Color.Violet
-            };
+        };
+
+        #region pictureBox_butterfly butterfly
+        private const int period = 24;
+        #endregion
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            g = pictureBox1.CreateGraphics();
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+            g.Clear(Color.Red);             //useless??
+            pictureBox1.BackColor = Color.Pink;
+            show_item_location();
+
+            richTextBox1.Text += "picturebox1 W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
+            richTextBox1.Text += "picturebox1 client W = " + pictureBox1.ClientSize.Width.ToString() + ", H = " + pictureBox1.ClientSize.Height.ToString() + "\n";
 
             redraw_all();
 
@@ -117,23 +115,13 @@ namespace vcs_Draw9_Example7_vcsh
             numericUpDown1.Location = new Point(x_st + dx * 0 + 40, y_st + dy * 0 - 30);
             numericUpDown1.Value = 0;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-
             bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             bt_exit.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             richTextBox1.Size = new Size(richTextBox1.Size.Width - 70, this.Height - richTextBox1.Size.Height - 20);
 
-            pictureBox1.Size = new Size(W * 2, H * 2);
+            pictureBox1.Size = new Size(W, H);
             pictureBox_hex.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox_Chrysanthemum.Size = new Size(W, H);
@@ -187,12 +175,6 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_sierpinski2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            ClientSize = new Size(button0.Right + 10, richTextBox1.Bottom + 100);    //自動表單邊界
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
         }
 
         // Make the Pentagon objects and redraw.
@@ -328,9 +310,6 @@ namespace vcs_Draw9_Example7_vcsh
         private float ScaleFactor;
         private List<float> GeneratorDTheta;
         */
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
 
         void Draw_SnowFlake1()
         {
@@ -532,436 +511,6 @@ namespace vcs_Draw9_Example7_vcsh
             }
         }
 
-
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Size = new Size(W * 2, H * 2);
-
-            // Brushes used to fill pie slices.
-            Brush[] SliceBrushes =
-            {
-                Brushes.Red,
-                Brushes.LightGreen,
-                Brushes.Blue,
-                Brushes.LightBlue,
-                Brushes.Green,
-                Brushes.Lime,
-                Brushes.Orange,
-                Brushes.Fuchsia,
-                Brushes.Yellow,
-                Brushes.Cyan,
-            };
-            // Pens used to outline pie slices.
-            Pen[] SlicePens = { Pens.Black };
-
-            // The data values to chart.
-            float[] Values = new float[10];
-
-            // Make some random data.
-            Random rand = new Random();
-            for (int i = 0; i < Values.Length; i++)
-            {
-                // Pick a random value between 5 and 40.
-                Values[i] = (float)(5 + 35 * rand.NextDouble());
-            }
-
-            //ResizeRedraw = true;
-
-            // Draw the pie chart.
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            g.Clear(BackColor);
-            if ((pictureBox1.Size.Width < 20) || (pictureBox1.Size.Height < 20)) return;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Rectangle rect = new Rectangle(10, 10, pictureBox1.Size.Width - 20, pictureBox1.Size.Height - 20);
-
-            richTextBox1.Text += "W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
-            DrawLabeledPieChart(g, rect, -90, SliceBrushes, SlicePens, Values, "0.0", Font, Brushes.Black);
-
-            //pictureBox1.Image = 
-
-
-        }
-
-        // Draw a pie chart.
-        private static void DrawLabeledPieChart(Graphics gr, Rectangle rect, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string label_format, Font label_font, Brush label_brush)
-        {
-            // Get the total of all angles.
-            float total = values.Sum();
-
-            gr.DrawRectangle(new Pen(Color.Red, 3), rect);
-
-            // Draw the slices.
-            float start_angle = initial_angle;
-            for (int i = 0; i < values.Length; i++)
-            {
-                float sweep_angle = values[i] * 360f / total;
-
-                // Fill and outline the pie slice.
-                gr.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
-                gr.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
-
-                start_angle += sweep_angle;
-            }
-
-            // Label the slices.
-            // We label the slices after drawing them all so one
-            // slice doesn't cover the label on another very thin slice.
-            using (StringFormat string_format = new StringFormat())
-            {
-                // Center text.
-                string_format.Alignment = StringAlignment.Center;
-                string_format.LineAlignment = StringAlignment.Center;
-
-                // Find the center of the rectangle.
-                float cx = (rect.Left + rect.Right) / 2f;
-                float cy = (rect.Top + rect.Bottom) / 2f;
-
-                // Place the label about 2/3 of the way out to the edge.
-                float radius = (rect.Width + rect.Height) / 2f * 0.33f;
-
-                start_angle = initial_angle;
-                for (int i = 0; i < values.Length; i++)
-                {
-                    float sweep_angle = values[i] * 360f / total;
-
-                    // Label the slice.
-                    double label_angle = Math.PI * (start_angle + sweep_angle / 2f) / 180f;
-                    float x = cx + (float)(radius * Math.Cos(label_angle));
-                    float y = cy + (float)(radius * Math.Sin(label_angle));
-                    gr.DrawString(values[i].ToString(label_format),
-                        label_font, label_brush, x, y, string_format);
-
-                    start_angle += sweep_angle;
-                }
-            }
-        }
-
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Size = new Size(W * 2, H * 5 / 4);
-
-            // Brushes used to fill pie slices.
-            Brush[] SliceBrushes =
-            {
-                Brushes.Red,
-                Brushes.LightGreen,
-                Brushes.Blue,
-                Brushes.LightBlue,
-                Brushes.Green,
-                Brushes.Lime,
-                Brushes.Orange,
-                Brushes.Fuchsia,
-                Brushes.Yellow,
-                Brushes.Cyan,
-            };
-
-            // Pens used to outline pie slices.
-            Pen[] SlicePens = { Pens.Black };
-
-            // Top 10 languages on September 13, 2012 according to:
-            //      http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html
-            // The data values to chart.
-            float[] Values = 
-            {
-                19.295f,
-                16.267f,
-                9.770f,
-                9.147f,
-                6.596f,
-                5.614f,
-                5.528f,
-                3.861f,
-                2.267f,
-                1.724f,
-            };
-
-            // The values' annotations.
-            string[] Annotations = new string[]
-            {
-                "C",
-                "Java",
-                "Objective-C",
-                "C++",
-                "C#",
-                "PHP",
-                "(Visual) Basic",
-                "Python",
-                "Perl",
-                "Ruby",
-            };
-
-            // Draw the pie chart.
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            const int top_margin = 30;
-            const int left_margin = 15;
-            g.Clear(BackColor);
-            if ((pictureBox1.Size.Width < 2 * top_margin) || (pictureBox1.Size.Height < 2 * top_margin))
-                return;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            int circle_width = pictureBox1.Size.Height - 2 * top_margin;
-            int annotation_width = (pictureBox1.Size.Width - circle_width) / 2 - 2 * left_margin;
-            int annotation_height = pictureBox1.Size.Height - 2 * left_margin;
-            Rectangle left_rect = new Rectangle(
-                left_margin, left_margin, annotation_width, annotation_height);
-            Rectangle ellipse_rect = new Rectangle(
-                left_rect.Right + left_margin, top_margin, circle_width, circle_width);
-            Rectangle right_rect = new Rectangle(
-                ellipse_rect.Right + left_margin, left_rect.Top,
-                left_rect.Width, left_rect.Height);
-            using (Font annotation_font = new Font("Times New Roman", 12))
-            {
-                DrawAnnotatedPieChart(g,
-                    ellipse_rect, left_rect, right_rect, 1.1f, 0,
-                    SliceBrushes, SlicePens,
-                    Values, Annotations, "0.0", Font, Brushes.Black,
-                    annotation_font, Pens.Blue, Brushes.Green,
-                    Brushes.LightBlue, null);
-            }
-
-
-
-
-
-
-
-        }
-
-        // Draw a pie chart.
-        private static void DrawAnnotatedPieChart(Graphics gr, Rectangle ellipse_rect, Rectangle left_rect, Rectangle right_rect, float annotation_radius_scale, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string[] annotations, string label_format, Font label_font, Brush label_brush, Font annotation_font, Pen annotation_pen, Brush annotation_brush, Brush rectangle_brush, Pen rectangle_pen)
-        {
-            // Get the total of all angles.
-            float total = values.Sum();
-
-            // Draw the slices.
-            float start_angle = initial_angle;
-            for (int i = 0; i < values.Length; i++)
-            {
-                float sweep_angle = values[i] * 360f / total;
-
-                // Fill and outline the pie slice.
-                gr.FillPie(brushes[i % brushes.Length], ellipse_rect, start_angle, sweep_angle);
-                gr.DrawPie(pens[i % pens.Length], ellipse_rect, start_angle, sweep_angle);
-
-                start_angle += sweep_angle;
-            }
-
-            // Draw the rectangles if desired.
-            if (rectangle_brush != null)
-            {
-                gr.FillRectangle(rectangle_brush, left_rect);
-                gr.FillRectangle(rectangle_brush, right_rect);
-            }
-            if (rectangle_pen != null)
-            {
-                gr.DrawRectangle(rectangle_pen, left_rect);
-                gr.DrawRectangle(rectangle_pen, right_rect);
-            }
-
-            // Label and annotate the slices.
-            // We label the slices after drawing them all so one
-            // slice doesn't cover the label on another very thin slice.
-            using (StringFormat string_format = new StringFormat())
-            {
-                // Find the center of the rectangle.
-                float cx = (ellipse_rect.Left + ellipse_rect.Right) / 2;
-                float cy = (ellipse_rect.Top + ellipse_rect.Bottom) / 2;
-
-                // Place the label about 2/3 of the way out to the edge.
-                float radius = (ellipse_rect.Width + ellipse_rect.Height) / 2f * 0.33f;
-
-                // Distances for annotation lines.
-                float annotation_rx1 = ellipse_rect.Width / 2;
-                float annotation_ry1 = ellipse_rect.Height / 2;
-                float annotation_rx2 = annotation_rx1 * annotation_radius_scale;
-                float annotation_ry2 = annotation_ry1 * annotation_radius_scale;
-
-                start_angle = start_angle = initial_angle;
-                for (int i = 0; i < values.Length; i++)
-                {
-                    float sweep_angle = values[i] * 360f / total;
-
-                    // Label the slice.
-                    string_format.Alignment = StringAlignment.Center;
-                    string_format.LineAlignment = StringAlignment.Center;
-                    double label_angle = Math.PI * (start_angle + sweep_angle / 2) / 180;
-                    float x = cx + (float)(radius * Math.Cos(label_angle));
-                    float y = cy + (float)(radius * Math.Sin(label_angle));
-                    gr.DrawString(values[i].ToString(label_format),
-                        label_font, label_brush, x, y, string_format);
-
-                    // Draw a radial line to connect to the annotation.
-                    float x1 = cx + (float)(annotation_rx1 * Math.Cos(label_angle));
-                    float y1 = cy + (float)(annotation_rx1 * Math.Sin(label_angle));
-                    float x2 = cx + (float)(annotation_rx2 * Math.Cos(label_angle));
-                    float y2 = cy + (float)(annotation_rx2 * Math.Sin(label_angle));
-                    gr.DrawLine(annotation_pen, x1, y1, x2, y2);
-
-                    // Draw a horizontal line to the annotation.
-                    if (x2 < x1)
-                    {
-                        // Draw to the left.
-                        gr.DrawLine(annotation_pen, x2, y2, left_rect.Right, y2);
-
-                        // Draw the annotation right justified.
-                        string_format.Alignment = StringAlignment.Far;
-                        gr.DrawString(annotations[i], annotation_font, annotation_brush,
-                            left_rect.Right, y2, string_format);
-                    }
-                    else
-                    {
-                        // Draw to the right.
-                        gr.DrawLine(annotation_pen, x2, y2, right_rect.Left, y2);
-
-                        // Draw the annotation left justified.
-                        string_format.Alignment = StringAlignment.Near;
-                        gr.DrawString(annotations[i], annotation_font, annotation_brush,
-                            right_rect.Left, y2, string_format);
-                    }
-
-                    start_angle += sweep_angle;
-                }
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Size = new Size(W * 2, H * 2);
-
-            // Brushes used to fill pie slices.
-            Brush[] SliceBrushes =
-            {
-                Brushes.Red,
-                Brushes.LightGreen,
-                Brushes.Blue,
-                Brushes.LightBlue,
-                Brushes.Green,
-                Brushes.Lime,
-                Brushes.Orange,
-                Brushes.Fuchsia,
-                Brushes.Yellow,
-                Brushes.Cyan,
-            };
-
-            // Pens used to outline pie slices.
-            Pen[] SlicePens = { Pens.Black };
-
-            // The data values to chart.
-            float[] Values = new float[10];
-
-            // Make some random data.
-            Random rand = new Random();
-            for (int i = 0; i < Values.Length; i++)
-            {
-                Values[i] = rand.Next(10, 40);
-            }
-
-            // Draw the pie chart.
-            Graphics g = pictureBox1.CreateGraphics();
-            g.Clear(BackColor);
-            if ((pictureBox1.Size.Width < 20) || (pictureBox1.Size.Height < 20))
-                return;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Rectangle rect = new Rectangle(10, 10, pictureBox1.Size.Width - 20, pictureBox1.Size.Height - 20);
-            DrawPieChart(g, rect, SliceBrushes, SlicePens, Values);
-        }
-
-        // Draw a pie chart.
-        private static void DrawPieChart(Graphics gr, Rectangle rect, Brush[] brushes, Pen[] pens, float[] values)
-        {
-            // Get the total of all angles.
-            float total = values.Sum();
-
-            // Draw the slices.
-            float start_angle = 0;
-            for (int i = 0; i < values.Length; i++)
-            {
-                float sweep_angle = values[i] * 360f / total;
-                gr.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
-                gr.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
-                start_angle += sweep_angle;
-            }
-        }
-
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Size = new Size(W * 2, H * 2);
-
-            // Draw pie slices.
-
-            Graphics g = pictureBox1.CreateGraphics();
-            g.Clear(BackColor);
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            const int margin = 10;
-            const int width = 100;
-            Pen outline_pen = Pens.Red;
-            Brush fill_brush = Brushes.LightGreen;
-
-            using (Pen ellipse_pen = new Pen(Color.Blue))
-            {
-                ellipse_pen.DashPattern = new float[] { 5, 5 };
-
-                // Northeast wedge.
-                Rectangle rect = new Rectangle(margin + 30, 10, width, width);
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 300, 30);
-                g.DrawPie(outline_pen, rect, 300, 30);
-
-                // Everything else.
-                rect.X += width + margin;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 300, -330);
-                g.DrawPie(outline_pen, rect, 300, -330);
-
-                // East wedge.
-                rect.Y += width + margin;
-                rect.X = margin + 30;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 315, 90);
-                g.DrawPie(outline_pen, rect, 315, 90);
-
-                // Everything else.
-                rect.X += width + margin;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 315, -270);
-                g.DrawPie(outline_pen, rect, 315, -270);
-
-                // Northwest quadrant.
-                rect.Y += width + margin;
-                rect.X = margin + 30;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 180, 90);
-                g.DrawPie(outline_pen, rect, 180, 90);
-
-                // Everything else.
-                rect.X += width + margin;
-                g.DrawEllipse(ellipse_pen, rect);
-                g.FillPie(fill_brush, rect, 180, -270);
-                g.DrawPie(outline_pen, rect, 180, -270);
-            }
-
-
-
-
-
-
-
-        }
-
         void Draw_SnowFlake3()
         {
             // Define an initiator and generator.
@@ -1105,10 +654,6 @@ namespace vcs_Draw9_Example7_vcsh
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
         {
         }
 
@@ -1284,9 +829,7 @@ namespace vcs_Draw9_Example7_vcsh
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-
         }
-
 
         // http://en.wikipedia.org/wiki/Dragon_curve
         // http://en.wikipedia.org/wiki/Heighway_dragon
@@ -1368,179 +911,6 @@ namespace vcs_Draw9_Example7_vcsh
                     DrawDragonLine(gr, level - 1, Direction.Left, x2, y2, dx2, dy2);
                 }
             }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            // Draw some text along a line segment.
-            Graphics g = pictureBox1.CreateGraphics();
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.InterpolationMode = InterpolationMode.High;
-
-            // Draw some text along some line segments.
-            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text above a line segment.", true);
-            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text below a line segment.", false);
-
-            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text above a line segment.", true);
-            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text below a line segment.", false);
-        }
-
-        // Draw some text.
-        private void DrawOnSegment(Graphics gr, PointF start_point, PointF end_point, string txt, bool text_above_segment)
-        {
-            int start_ch = 0;
-
-            gr.DrawLine(Pens.Green, start_point, end_point);
-            DrawTextOnSegment(gr, Brushes.Blue, this.Font, txt,
-                ref start_ch, ref start_point, end_point, text_above_segment);
-        }
-
-        // Draw some text along a line segment.
-        // Leave char_num pointing to the next character to be drawn.
-        // Leave start_point holding the last point used.
-        private void DrawTextOnSegment(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
-        {
-            float dx = end_point.X - start_point.X;
-            float dy = end_point.Y - start_point.Y;
-            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
-            dx /= dist;
-            dy /= dist;
-
-            // See how many characters will fit.
-            int last_ch = first_ch;
-            while (last_ch < txt.Length)
-            {
-                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
-                if (gr.MeasureString(test_string, font).Width > dist)
-                {
-                    // This is one too many characters.
-                    last_ch--;
-                    break;
-                }
-                last_ch++;
-            }
-            if (last_ch < first_ch) return;
-            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
-            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
-
-            // Rotate and translate to position the characters.
-            GraphicsState state = gr.Save();
-            if (text_above_segment)
-            {
-                gr.TranslateTransform(0, -gr.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
-            }
-            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
-            gr.RotateTransform(angle, MatrixOrder.Append);
-            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
-
-            // Draw the characters that fit.
-            gr.DrawString(chars_that_fit, font, brush, 0, 0);
-
-            // Restore the saved state.
-            gr.Restore(state);
-
-            // Update first_ch and start_point.
-            first_ch = last_ch + 1;
-            float text_width = gr.MeasureString(chars_that_fit, font).Width;
-            start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            Graphics g = pictureBox1.CreateGraphics();
-
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.InterpolationMode = InterpolationMode.High;
-
-            // Draw some text along some paths.
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(new RectangleF(40, 40, 320, 220), 180, 180);
-            g.DrawPath(Pens.Green, path);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
-
-            path = new GraphicsPath();
-            path.AddArc(new RectangleF(40, 50, 320, 220), 0, 180);
-            g.DrawPath(Pens.Red, path);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
-            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
-        }
-
-        // Draw some text along a GraphicsPath.
-        private void DrawTextOnPath(Graphics gr, Brush brush, Font font, string txt, GraphicsPath path, bool text_above_path)
-        {
-            // Make a copy so we don't mess up the original.
-            path = (GraphicsPath)path.Clone();
-
-            // Flatten the path into segments.
-            path.Flatten();
-
-            // Draw characters.
-            int start_ch = 0;
-            PointF start_point = path.PathPoints[0];
-            for (int i = 1; i < path.PointCount; i++)
-            {
-                PointF end_point = path.PathPoints[i];
-                DrawTextOnSegment2(gr, brush, font, txt, ref start_ch,
-                    ref start_point, end_point, text_above_path);
-                if (start_ch >= txt.Length) break;
-            }
-        }
-
-        // Draw some text along a line segment.
-        // Leave char_num pointing to the next character to be drawn.
-        // Leave start_point holding the coordinates of the last point used.
-        private void DrawTextOnSegment2(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
-        {
-            float dx = end_point.X - start_point.X;
-            float dy = end_point.Y - start_point.Y;
-            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
-            dx /= dist;
-            dy /= dist;
-
-            // See how many characters will fit.
-            int last_ch = first_ch;
-            while (last_ch < txt.Length)
-            {
-                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
-                if (gr.MeasureString(test_string, font).Width > dist)
-                {
-                    // This is one too many characters.
-                    last_ch--;
-                    break;
-                }
-                last_ch++;
-            }
-            if (last_ch < first_ch) return;
-            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
-            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
-
-            // Rotate and translate to position the characters.
-            GraphicsState state = gr.Save();
-            if (text_above_segment)
-            {
-                gr.TranslateTransform(0,
-                    -gr.MeasureString(chars_that_fit, font).Height,
-                    MatrixOrder.Append);
-            }
-            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
-            gr.RotateTransform(angle, MatrixOrder.Append);
-            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
-
-            // Draw the characters that fit.
-            gr.DrawString(chars_that_fit, font, brush, 0, 0);
-
-            // Restore the saved state.
-            gr.Restore(state);
-
-            // Update first_ch and start_point.
-            first_ch = last_ch + 1;
-            float text_width = gr.MeasureString(chars_that_fit, font).Width;
-            start_point = new PointF(
-                start_point.X + dx * text_width,
-                start_point.Y + dy * text_width);
         }
 
         private void pictureBox_Chrysanthemum_Paint(object sender, PaintEventArgs e)

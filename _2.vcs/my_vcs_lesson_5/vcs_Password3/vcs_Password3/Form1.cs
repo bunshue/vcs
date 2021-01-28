@@ -21,7 +21,7 @@ namespace vcs_Password3
         // Get the password from the user.
         private void Form1_Load(object sender, EventArgs e)
         {
-            const string real_password = "lion-mouse";
+            const string real_password = "iloveims";
 
             // Get the password from the user.
             PasswordForm frm = new PasswordForm();

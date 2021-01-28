@@ -1961,6 +1961,7 @@ namespace vcs_Draw1
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
 
+            //漸層色1
             // Define a brush with two points and their colors.
             using (LinearGradientBrush br = new LinearGradientBrush(new Point(10, 10), new Point(140, 50), Color.Red, Color.White))
             {
@@ -2004,7 +2005,7 @@ namespace vcs_Draw1
                 g.DrawRectangle(Pens.Black, rect);
             }
 
-
+            //漸層色2
             //用漸變色填充
             //LinearGradientBrush：使用沿漸變混合的兩種顏色進行繪制
             rect = new Rectangle(0, 0, 500, 100);//定義矩形,參數為起點橫縱坐標以及其長和寬
@@ -2012,11 +2013,201 @@ namespace vcs_Draw1
             LinearGradientBrush b = new LinearGradientBrush(rect, Color.Red, Color.Black, LinearGradientMode.Horizontal);
             g.FillRectangle(b, rect);
 
+            //漸層色3
+            int intLocation, intHeight;//定义两个int型的变量intLocation、intHeight 
+            intLocation = this.ClientRectangle.Location.Y;//为变量intLocation赋值
+            intHeight = this.ClientRectangle.Height / 200;//为变量intHeight赋值
+
+            for (int i = 255; i >= 0; i--)
+            {
+                Color color = new Color();
+                color = Color.FromArgb(1, i, 100);
+                SolidBrush SBrush = new SolidBrush(color);
+                Pen p = new Pen(SBrush, 1);
+                g.DrawLine(p, 400, 30 + i, 500, 30 + i);
+            }
+
             pictureBox1.Image = bitmap1;
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
+
+        }
+
+        //在線的上下畫字
+        private void button32_Click(object sender, EventArgs e)
+        {
+            // Draw some text along a line segment.
+            Graphics g = pictureBox1.CreateGraphics();
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.High;
+
+            // Draw some text along some line segments.
+            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text above a line segment.", true);
+            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text below a line segment.", false);
+
+            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text above a line segment.", true);
+            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text below a line segment.", false);
+        }
+
+        // Draw some text.
+        private void DrawOnSegment(Graphics gr, PointF start_point, PointF end_point, string txt, bool text_above_segment)
+        {
+            int start_ch = 0;
+
+            gr.DrawLine(Pens.Green, start_point, end_point);
+            DrawTextOnSegment(gr, Brushes.Blue, this.Font, txt,
+                ref start_ch, ref start_point, end_point, text_above_segment);
+        }
+
+        // Draw some text along a line segment.
+        // Leave char_num pointing to the next character to be drawn.
+        // Leave start_point holding the last point used.
+        private void DrawTextOnSegment(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
+        {
+            float dx = end_point.X - start_point.X;
+            float dy = end_point.Y - start_point.Y;
+            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
+            dx /= dist;
+            dy /= dist;
+
+            // See how many characters will fit.
+            int last_ch = first_ch;
+            while (last_ch < txt.Length)
+            {
+                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
+                if (gr.MeasureString(test_string, font).Width > dist)
+                {
+                    // This is one too many characters.
+                    last_ch--;
+                    break;
+                }
+                last_ch++;
+            }
+            if (last_ch < first_ch) return;
+            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
+            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
+
+            // Rotate and translate to position the characters.
+            GraphicsState state = gr.Save();
+            if (text_above_segment)
+            {
+                gr.TranslateTransform(0, -gr.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
+            }
+            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
+            gr.RotateTransform(angle, MatrixOrder.Append);
+            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
+
+            // Draw the characters that fit.
+            gr.DrawString(chars_that_fit, font, brush, 0, 0);
+
+            // Restore the saved state.
+            gr.Restore(state);
+
+            // Update first_ch and start_point.
+            first_ch = last_ch + 1;
+            float text_width = gr.MeasureString(chars_that_fit, font).Width;
+            start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
+        }
+
+        //在曲線的上下畫字
+        private void button33_Click(object sender, EventArgs e)
+        {
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.High;
+
+            // Draw some text along some paths.
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(new RectangleF(40, 40, 320, 220), 180, 180);
+            g.DrawPath(Pens.Green, path);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
+
+            path = new GraphicsPath();
+            path.AddArc(new RectangleF(40, 50, 320, 220), 0, 180);
+            g.DrawPath(Pens.Red, path);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, true);
+            DrawTextOnPath(g, Brushes.Blue, this.Font, "This is some text drawn along a path", path, false);
+        }
+
+        // Draw some text along a GraphicsPath.
+        private void DrawTextOnPath(Graphics gr, Brush brush, Font font, string txt, GraphicsPath path, bool text_above_path)
+        {
+            // Make a copy so we don't mess up the original.
+            path = (GraphicsPath)path.Clone();
+
+            // Flatten the path into segments.
+            path.Flatten();
+
+            // Draw characters.
+            int start_ch = 0;
+            PointF start_point = path.PathPoints[0];
+            for (int i = 1; i < path.PointCount; i++)
+            {
+                PointF end_point = path.PathPoints[i];
+                DrawTextOnSegment2(gr, brush, font, txt, ref start_ch,
+                    ref start_point, end_point, text_above_path);
+                if (start_ch >= txt.Length) break;
+            }
+        }
+
+        // Draw some text along a line segment.
+        // Leave char_num pointing to the next character to be drawn.
+        // Leave start_point holding the coordinates of the last point used.
+        private void DrawTextOnSegment2(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
+        {
+            float dx = end_point.X - start_point.X;
+            float dy = end_point.Y - start_point.Y;
+            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
+            dx /= dist;
+            dy /= dist;
+
+            // See how many characters will fit.
+            int last_ch = first_ch;
+            while (last_ch < txt.Length)
+            {
+                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
+                if (gr.MeasureString(test_string, font).Width > dist)
+                {
+                    // This is one too many characters.
+                    last_ch--;
+                    break;
+                }
+                last_ch++;
+            }
+            if (last_ch < first_ch) return;
+            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
+            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
+
+            // Rotate and translate to position the characters.
+            GraphicsState state = gr.Save();
+            if (text_above_segment)
+            {
+                gr.TranslateTransform(0,
+                    -gr.MeasureString(chars_that_fit, font).Height,
+                    MatrixOrder.Append);
+            }
+            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
+            gr.RotateTransform(angle, MatrixOrder.Append);
+            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
+
+            // Draw the characters that fit.
+            gr.DrawString(chars_that_fit, font, brush, 0, 0);
+
+            // Restore the saved state.
+            gr.Restore(state);
+
+            // Update first_ch and start_point.
+            first_ch = last_ch + 1;
+            float text_width = gr.MeasureString(chars_that_fit, font).Width;
+            start_point = new PointF(
+                start_point.X + dx * text_width,
+                start_point.Y + dy * text_width);
 
         }
 
