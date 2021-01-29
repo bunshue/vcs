@@ -32,8 +32,7 @@ namespace howto_covid19_graph
         private Matrix InverseTransform = null;
         private RectangleF WorldBounds;
         private PointF ClosePoint = new PointF(-1, -1);
-        private CountryDataComparer Comparer =
-            new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
+        private CountryDataComparer Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
 
         // Used to prevent redraws while checking or unchecking all countries.
         private bool IgnoreItemCheck = false;
@@ -46,6 +45,9 @@ namespace howto_covid19_graph
             // Display the countries in the checked list box.
             checkedListBox1.DataSource = CountryList;
             checkedListBox1.CheckOnClick = true;
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            pictureBox2.Visible = false;
         }
 
         // Load and prepare the data.
@@ -54,9 +56,11 @@ namespace howto_covid19_graph
             // Compose the local data file name.
             string filename = "data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
 
+            richTextBox1.Text += "下載檔案: " + filename + "\n";
             // Download today's data.
             DownloadFile(filename);
 
+            richTextBox1.Text += "讀取檔案: " + filename + "\n";
             // Read the file.
             object[,] fields = LoadCsv(filename);
 
@@ -119,11 +123,20 @@ namespace howto_covid19_graph
             // Set MaxCases values.
             foreach (CountryData country in CountryList)
             {
+                //設定每個國家的總數
                 country.SetMax();
+                //richTextBox1.Text += country.Name + " " + country.MaxCases.ToString() + "  ";
             }
 
             // Sort.
+            richTextBox1.Text += "\n依 預設(總數) 排序\n\n";
             CountryList.Sort(Comparer);
+
+            // Set MaxCases values.
+            foreach (CountryData country in CountryList)
+            {
+                //richTextBox1.Text += country.Name + " " + country.MaxCases.ToString() + "  ";
+            }
 
             // Number the countries and set MaxCases values.
             for (int i = 0; i < CountryList.Count; i++)
@@ -202,7 +215,7 @@ namespace howto_covid19_graph
         // An item has been checked or unchecked.
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            richTextBox1.Text += "you have clicked \t" + checkedListBox1.Items[e.Index] + "\n";
+            richTextBox1.Text += "點選\t" + checkedListBox1.Items[e.Index] + "\n";
             // Do nothing if the user clicked All or None.
             if (IgnoreItemCheck)
             {
@@ -260,16 +273,25 @@ namespace howto_covid19_graph
         // Draw the graph.
         private void GraphCountries()
         {
+            richTextBox1.Text += "重畫資料";
             ClosePoint = new PointF(-1, -1);
             if (SelectedCountries.Count == 0)
             {
                 pictureBox1.Image = null;
+                richTextBox1.Text += "\t無資料\n";
                 return;
+            }
+            else
+            {
+                richTextBox1.Text += "\n";
             }
 
             // Get the maximum value.
             float y_max = SelectedCountries.Max(country => country.Cases.Max());
-            if (y_max < 10) y_max = 10;
+            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
+            if (y_max < 10)
+                y_max = 10;
+            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
 
             // Create a transformation to make the data fit the PictureBox.
             DefineTransform(SelectedCountries, y_max);
@@ -345,6 +367,7 @@ namespace howto_covid19_graph
                 for (int y = y_step; y < y_max; y += y_step)
                 {
                     gr.DrawLine(pen, 0, y, num_cases, y);
+                    richTextBox1.Text += "draw y = " + y.ToString() + "\n";
                 }
 
                 GraphicsState state = gr.Save();
@@ -357,6 +380,7 @@ namespace howto_covid19_graph
                         Transform.TransformPoints(p);
 
                         gr.DrawString(y.ToString("n0"), font, Brushes.Black, p[0]);
+                        richTextBox1.Text += "draw string = " + y.ToString("n0") + "\n";
                     }
                 }
                 gr.Restore(state);
@@ -381,15 +405,19 @@ namespace howto_covid19_graph
 
         private void btnAll_Click(object sender, EventArgs e)
         {
+            //按了 全選
             IgnoreItemCheck = true;
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
                 checkedListBox1.SetItemChecked(i, true);
+            }
             IgnoreItemCheck = false;
             RedrawGraph();
         }
 
         private void btnNone_Click(object sender, EventArgs e)
         {
+            //按了 全不選
             IgnoreItemCheck = true;
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
                 checkedListBox1.SetItemChecked(i, false);
@@ -411,6 +439,7 @@ namespace howto_covid19_graph
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            this.Text = e.Location.ToString();
             SetTooltip(e.Location);
         }
 
@@ -424,12 +453,16 @@ namespace howto_covid19_graph
             int num_cases;
             foreach (CountryData country in SelectedCountries)
             {
-                if (country.PointIsAt(point, out day_num,
-                    out num_cases, out ClosePoint))
+                if (country.PointIsAt(point, out day_num, out num_cases, out ClosePoint))
                 {
+                    //由 point 找到第幾天 再對應到日期 找到當時的總數
+                    //richTextBox1.Text += point.ToString() + " " + day_num.ToString() + " " + CountryData.Dates[day_num].ToShortDateString() + " " + num_cases.ToString() + " ";
+
                     new_tip = country.Name + "\n" +
                         CountryData.Dates[day_num].ToShortDateString() + "\n" +
-                        num_cases.ToString("n0") + " cases";
+                        num_cases.ToString("n0") + " 例";
+
+                    richTextBox1.Text += country.Name + "\t" + CountryData.Dates[day_num].ToShortDateString() + "\t總數: " +num_cases.ToString("n0") + "\n";
                     break;
                 }
             }
@@ -454,9 +487,12 @@ namespace howto_covid19_graph
 
         private void radSortByName_Click(object sender, EventArgs e)
         {
-            if (CountryList == null) return;
+            //按了依國名排序
+            if (CountryList == null)
+                return;
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByName);
             checkedListBox1.DataSource = null;
+            richTextBox1.Text += "\n依 國名 排序\n\n";
             CountryList.Sort(Comparer);
             checkedListBox1.DataSource = CountryList;
             RedrawGraph();
@@ -464,9 +500,12 @@ namespace howto_covid19_graph
 
         private void radSortByMaxCases_Click(object sender, EventArgs e)
         {
-            if (CountryList == null) return;
+            //按了依總數排序
+            if (CountryList == null)
+                return;
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
             checkedListBox1.DataSource = null;
+            richTextBox1.Text += "\n依 總數 排序\n\n";
             CountryList.Sort(Comparer);
             checkedListBox1.DataSource = CountryList;
             RedrawGraph();
@@ -475,8 +514,12 @@ namespace howto_covid19_graph
         private void button1_Click(object sender, EventArgs e)
         {
             int i;
+            int j;
             int len;
+            int len2;
             len = checkedListBox1.Items.Count;
+
+            richTextBox1.Text += "分析資料\n";
             richTextBox1.Text += "checkedListBox1 len = " + len.ToString() + "\n";
             len = 5;
             for (i = 0; i < len; i++)
@@ -495,15 +538,69 @@ namespace howto_covid19_graph
                 }
             }
 
+            int day_num;
+            for (day_num = 0; day_num < 5; day_num++)
+            {
+                richTextBox1.Text += "第　" + day_num.ToString() + " 天, 日期: " + CountryData.Dates[day_num].ToShortDateString() + "\n";
+            }
+
             if (SelectedCountries != null)
             {
                 len = SelectedCountries.Count;
                 richTextBox1.Text += "Selected countries len = " + len.ToString() + "\n";
                 for (i = 0; i < len; i++)
                 {
-                    richTextBox1.Text += "i = " + i.ToString() + "\t" + SelectedCountries[i].Name + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + "\tNumber: " + SelectedCountries[i].CountryNumber.ToString() + "\t";
+                    richTextBox1.Text += "Name: " + SelectedCountries[i].Name + "\t";
+
+                    richTextBox1.Text += "MaxCases:\t" + SelectedCountries[i].MaxCases.ToString() + "\n";
+
+                    len2 = SelectedCountries[i].Cases.Length;
+                    len2 = 10;
+                    richTextBox1.Text += "case len:\t"+len2.ToString() + "\n";
+                    for (j = 0; j < len2; j++)
+                    {
+                        richTextBox1.Text += SelectedCountries[i].Cases[j].ToString() + "\t";
+                    }
+                    richTextBox1.Text += "\n";
+
+                    len2 = SelectedCountries[i].DeviceCoords.Length;
+                    //len2 = 10;
+                    richTextBox1.Text += "DeviceCoords len:\t" + len2.ToString() + "\n";
+                    for (j = 0; j < len2; j++)
+                    {
+                        richTextBox1.Text += SelectedCountries[i].DeviceCoords[j].ToString() + "\t";
+                    }
+                    richTextBox1.Text += "\n";
+
+                    Graphics g = this.pictureBox2.CreateGraphics();
+                    Pen p = new Pen(Color.Red, 2);
+                    g.DrawRectangle(p, 100, 100, 200, 200);
+                    if (len2 > 1)
+                    {
+                        g.DrawLines(p, SelectedCountries[i].DeviceCoords.ToArray());
+
+                    }
+
+                    pictureBox2.Visible = true;
+
+
+
                 }
+                float y_max = SelectedCountries.Max(country => country.Cases.Max());
+                richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
+
+
+                float y_min = SelectedCountries.Min(country => country.Cases.Min());
+                richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
             }
+
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }
