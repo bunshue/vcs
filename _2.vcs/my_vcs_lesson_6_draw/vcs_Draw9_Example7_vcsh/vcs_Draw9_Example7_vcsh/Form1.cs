@@ -35,6 +35,8 @@ namespace vcs_Draw9_Example7_vcsh
         int W = 230;
         int H = 230;
 
+        float rotating_angle = 0;
+
         private const int Period = 21;
         // Initialize the colors.
         private Color[] Colors = new Color[]
@@ -76,16 +78,7 @@ namespace vcs_Draw9_Example7_vcsh
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            g = pictureBox1.CreateGraphics();
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-            g.Clear(Color.Red);             //useless??
-            pictureBox1.BackColor = Color.Pink;
             show_item_location();
-
-            richTextBox1.Text += "picturebox1 W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
-            richTextBox1.Text += "picturebox1 client W = " + pictureBox1.ClientSize.Width.ToString() + ", H = " + pictureBox1.ClientSize.Height.ToString() + "\n";
 
             redraw_all();
 
@@ -121,7 +114,6 @@ namespace vcs_Draw9_Example7_vcsh
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             richTextBox1.Size = new Size(richTextBox1.Size.Width - 70, this.Height - richTextBox1.Size.Height - 20);
 
-            pictureBox1.Size = new Size(W, H);
             pictureBox_hex.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox_Chrysanthemum.Size = new Size(W, H);
@@ -131,11 +123,16 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_Chrysanthemum2.Size = new Size(W, H);
             pictureBox_polar.Size = new Size(W, H);
             pictureBox8.Size = new Size(W, H);
+            pictureBox13.Size = new Size(W, H);
+            pictureBox13.BackColor = Color.LightSalmon;
+            pictureBox14.Size = new Size(W, H);
+            pictureBox15.Size = new Size(W, H);
             pictureBox_snowflake.Size = new Size(W, H);
             pictureBox_snowflake2.Size = new Size(W, H);
             pictureBox_fractal1.Size = new Size(W, H);
             pictureBox_fractal2.Size = new Size(W, H);
             pictureBox_fractal3.Size = new Size(W, H);
+            pictureBox22.Size = new Size(W, H);
             pictureBox_butterfly.Size = new Size(W, H);
             pictureBox_butterfly.BackColor = Color.Black;
             pictureBox_sierpinski1.Size = new Size(W, H);
@@ -145,11 +142,16 @@ namespace vcs_Draw9_Example7_vcsh
             y_st = 10;
             dx = W + 70;
             dy = H + 45;
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            pictureBox_Chrysanthemum.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_hex.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_snowflake.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             pictureBox_snowflake2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            pictureBox_butterfly.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox_polar.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             pictureBox_dragon.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_dragon4.Location = new Point(x_st + dx * 3, y_st + dy * 1);
@@ -160,9 +162,10 @@ namespace vcs_Draw9_Example7_vcsh
             richTextBox_ransom_note_result.Size = new Size(W, H + 40);
             pictureBox_ransom_note.Size = new Size(W, H + 40);
 
-            pictureBox_Chrysanthemum.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            pictureBox_polar.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox1.Location = new Point(x_st + dx * 2+40, y_st + dy * 3 - 45);
             richTextBox_ransom_note.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox_ransom_note.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             richTextBox_ransom_note_result.Location = new Point(x_st + dx * 5, y_st + dy * 2);
@@ -170,7 +173,7 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_fractal1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             pictureBox_fractal2.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             pictureBox_fractal3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            pictureBox_butterfly.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             pictureBox_sierpinski1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
             pictureBox_sierpinski2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
 
@@ -594,23 +597,9 @@ namespace vcs_Draw9_Example7_vcsh
             }
         }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-        }
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             bitmap1 = null;
-            pictureBox1.Image = null;
             richTextBox1.Clear();
         }
 
@@ -825,10 +814,6 @@ namespace vcs_Draw9_Example7_vcsh
             if (Root8 == null) return;
 
             Root8.Draw(e.Graphics);
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
         }
 
         // http://en.wikipedia.org/wiki/Dragon_curve
@@ -1422,8 +1407,13 @@ namespace vcs_Draw9_Example7_vcsh
             Draw_SnowFlake2();
             Draw_SnowFlake3();
 
+            draw_random_circles();          //pictureBox14
+            draw_Apollonian_Gasket();       //pictureBox15
+
             DrawGasket1();  //sierpinski_carpet
             DrawGasket2();  //sierpinski_triangle
+
+            pictureBox22.Refresh();
         }
 
         private void pictureBox_fractal1_Paint(object sender, PaintEventArgs e)
@@ -1635,6 +1625,398 @@ namespace vcs_Draw9_Example7_vcsh
         }
         #endregion
 
+        //彩色圓圖 ST
 
+
+
+
+        //彩色圓圖 SP
+
+        //任意圈圈圖 ST
+        void draw_random_circles()
+        {
+            Bitmap bm = new Bitmap(pictureBox14.ClientSize.Width, pictureBox14.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.Silver);
+
+                Random rnd = new Random();
+                int max_r = Math.Min(pictureBox14.ClientRectangle.Width, pictureBox14.ClientRectangle.Height) / 3;
+                int min_r = max_r / 4;
+                for (int i = 0; i < 15; i++)
+                {
+                    int r = rnd.Next(min_r, max_r);
+                    int x = rnd.Next(min_r, pictureBox14.ClientRectangle.Width - min_r);
+                    int y = rnd.Next(min_r, pictureBox14.ClientRectangle.Height - min_r);
+                    gr.DrawEllipse(Pens.Black, x - r, y - r, 2 * r, 2 * r);
+                }
+            }
+            pictureBox14.Image = bm;
+        }
+        //任意圈圈圖 SP
+
+        // Apollonian Gasket ST
+        void draw_Apollonian_Gasket()
+        {
+            int width = Math.Min(pictureBox15.ClientSize.Width, pictureBox15.ClientSize.Height);
+            pictureBox15.Image = FindApollonianPacking(width);
+        }
+
+        // Find the Apollonian packing.
+        private Bitmap FindApollonianPacking(int width)
+        {
+            Bitmap bm = new Bitmap(width, width);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                if (rb1.Checked == true)
+                    gr.Clear(Color.LightGreen);
+                else
+                    gr.Clear(Color.Black);
+
+                // Create the three central tangent circles.
+                float radius = width * 0.225f;
+                float x = width / 2;
+                float gasket_height = 2 * (float)(radius + 2 * radius / Math.Sqrt(3));
+                float y = (width - gasket_height) / 2 + radius;
+                Circle circle0 = new Circle(x, y, radius);
+
+                // Draw a box around the gasket. (For debugging.)
+                //gr.DrawRectangle(Pens.Orange,
+                //    x - gasket_height / 2,
+                //    y - radius,
+                //    gasket_height,
+                //    gasket_height);
+
+                x -= radius;
+                y += (float)(radius * Math.Sqrt(3));
+                Circle circle1 = new Circle(x, y, radius);
+                x += 2 * radius;
+                Circle circle2 = new Circle(x, y, radius);
+
+                if (rb1.Checked == true)
+                {
+                    // Draw the three central circles.
+                    circle0.Draw(gr, Pens.Blue);
+                    circle1.Draw(gr, Pens.Blue);
+                    circle2.Draw(gr, Pens.Blue);
+                }
+
+                // Find the circle that contains them all.
+                Circle big_circle = FindApollonianCircle(circle0, circle1, circle2, -1, -1, -1);
+                if (rb1.Checked == true)
+                {
+                    big_circle.Draw(gr, Pens.Blue);
+                }
+                else
+                {
+                    // Draw the big circle.
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        big_circle.Draw(gr, the_brush);
+                    }
+
+                    // Draw the three central circles.
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        circle0.Draw(gr, the_brush);
+                    }
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        circle1.Draw(gr, the_brush);
+                    }
+                    using (Brush the_brush = new SolidBrush(RandomColor()))
+                    {
+                        circle2.Draw(gr, the_brush);
+                    }
+                }
+
+                // Set level to smaller values such as 3 to see partially drawn gaskets.
+                int level = 10000;
+
+                // Find the central circle.
+                FindCircleOutsideAll(level, gr, circle0, circle1, circle2);
+
+                // Find circles tangent to the big circle.
+                FindCircleOutsideTwo(level, gr, circle0, circle1, big_circle);
+                FindCircleOutsideTwo(level, gr, circle1, circle2, big_circle);
+                FindCircleOutsideTwo(level, gr, circle2, circle0, big_circle);
+            }
+            return bm;
+        }
+
+        // Draw a circle tangent to these three circles and that is outside all three.
+        private void FindCircleOutsideAll(int level, Graphics gr, Circle circle0, Circle circle1, Circle circle2)
+        {
+            Circle new_circle = FindApollonianCircle(circle0, circle1, circle2, 1, 1, 1);
+            if (new_circle == null) return;
+            if (new_circle.Radius < 0.1) return;
+
+            if (rb1.Checked == true)
+            {
+                new_circle.Draw(gr, Pens.Blue);
+            }
+            else
+            {
+                using (Brush the_brush = new SolidBrush(RandomColor()))
+                {
+                    new_circle.Draw(gr, the_brush);
+                }
+            }
+
+            if (--level > 0)
+            {
+                FindCircleOutsideAll(level, gr, circle0, circle1, new_circle);
+                FindCircleOutsideAll(level, gr, circle0, circle2, new_circle);
+                FindCircleOutsideAll(level, gr, circle1, circle2, new_circle);
+            }
+        }
+
+        // Draw a circle tangent to these three circles and that is outside two of them.
+        private void FindCircleOutsideTwo(int level, Graphics gr, Circle circle0, Circle circle1, Circle circle_contains)
+        {
+            Circle new_circle = FindApollonianCircle(circle0, circle1, circle_contains, 1, 1, -1);
+            if (new_circle == null) return;
+            if (new_circle.Radius < 0.1) return;
+
+            if (rb1.Checked == true)
+            {
+                new_circle.Draw(gr, Pens.Blue);
+            }
+            else
+            {
+                using (Brush the_brush = new SolidBrush(RandomColor()))
+                {
+                    new_circle.Draw(gr, the_brush);
+                }
+            }
+
+            if (--level > 0)
+            {
+                FindCircleOutsideTwo(level, gr, new_circle, circle0, circle_contains);
+                FindCircleOutsideTwo(level, gr, new_circle, circle1, circle_contains);
+                FindCircleOutsideAll(level, gr, circle0, circle1, new_circle);
+            }
+        }
+
+        // Find the circles that touch each of the three input circles.
+        private Circle[] FindApollonianCircles(Circle[] given_circles)
+        {
+            // Make a list for results.
+            List<Circle> solution_circles = new List<Circle>();
+
+            // Loop over all of the signs.
+            foreach (int s0 in new int[] { -1, 1 })
+            {
+                foreach (int s1 in new int[] { -1, 1 })
+                {
+                    foreach (int s2 in new int[] { -1, 1 })
+                    {
+                        Circle new_circle = FindApollonianCircle(
+                            given_circles[0], given_circles[1], given_circles[2],
+                            s0, s1, s2);
+                        if (new_circle != null) solution_circles.Add(new_circle);
+                    }
+                }
+            }
+
+            // Return the results.
+            return solution_circles.ToArray();
+        }
+
+        // Find a solution to Apollonius' problem.
+        // For discussion and method, see:
+        //    http://mathworld.wolfram.com/ApolloniusProblem.html
+        //    http://en.wikipedia.org/wiki/Problem_of_Apollonius#Algebraic_solutions
+        // For most of a Java code implementation, see:
+        //    http://www.diku.dk/hjemmesider/ansatte/rfonseca/implementations/apollonius.html
+        private Circle FindApollonianCircle(Circle c1, Circle c2, Circle c3, int s1, int s2, int s3)
+        {
+            // Make sure c2 doesn't have the same X or Y coordinate as the others.
+            const float tiny = 0.0001f;
+            if ((Math.Abs(c2.Center.X - c1.Center.X) < tiny) ||
+                (Math.Abs(c2.Center.Y - c1.Center.Y) < tiny))
+            {
+                Circle temp_circle = c2;
+                c2 = c3;
+                c3 = temp_circle;
+                int temp_s = s2;
+                s2 = s3;
+                s3 = temp_s;
+            }
+            if ((Math.Abs(c2.Center.X - c3.Center.X) < tiny) ||
+                (Math.Abs(c2.Center.Y - c3.Center.Y) < tiny))
+            {
+                Circle temp_circle = c2;
+                c2 = c1;
+                c1 = temp_circle;
+                int temp_s = s2;
+                s2 = s1;
+                s1 = temp_s;
+            }
+
+            /*
+            Debug.Assert(
+                (c2.Center.X != c1.Center.X) && (c2.Center.Y != c1.Center.Y) &&
+                (c2.Center.X != c3.Center.X) && (c2.Center.Y != c3.Center.Y),
+                "Cannot find points without matching coordinates.");
+            */
+            float x1 = c1.Center.X;
+            float y1 = c1.Center.Y;
+            float r1 = c1.Radius;
+            float x2 = c2.Center.X;
+            float y2 = c2.Center.Y;
+            float r2 = c2.Radius;
+            float x3 = c3.Center.X;
+            float y3 = c3.Center.Y;
+            float r3 = c3.Radius;
+
+            float v11 = 2 * x2 - 2 * x1;
+            float v12 = 2 * y2 - 2 * y1;
+            float v13 = x1 * x1 - x2 * x2 + y1 * y1 - y2 * y2 - r1 * r1 + r2 * r2;
+            float v14 = 2 * s2 * r2 - 2 * s1 * r1;
+
+            float v21 = 2 * x3 - 2 * x2;
+            float v22 = 2 * y3 - 2 * y2;
+            float v23 = x2 * x2 - x3 * x3 + y2 * y2 - y3 * y3 - r2 * r2 + r3 * r3;
+            float v24 = 2 * s3 * r3 - 2 * s2 * r2;
+
+            float w12 = v12 / v11;
+            float w13 = v13 / v11;
+            float w14 = v14 / v11;
+
+            float w22 = v22 / v21 - w12;
+            float w23 = v23 / v21 - w13;
+            float w24 = v24 / v21 - w14;
+
+            float P = -w23 / w22;
+            float Q = w24 / w22;
+            float M = -w12 * P - w13;
+            float N = w14 - w12 * Q;
+
+            float a = N * N + Q * Q - 1;
+            float b = 2 * M * N - 2 * N * x1 + 2 * P * Q - 2 * Q * y1 + 2 * s1 * r1;
+            float c = x1 * x1 + M * M - 2 * M * x1 + P * P + y1 * y1 - 2 * P * y1 - r1 * r1;
+
+            // Find roots of a quadratic equation
+            double[] solutions = QuadraticSolutions(a, b, c);
+            if (solutions.Length < 1) return null;
+            float rs = (float)solutions[0];
+            float xs = M + N * rs;
+            float ys = P + Q * rs;
+
+            /*
+            Debug.Assert(!float.IsNaN(rs) && !float.IsNaN(xs) && !float.IsNaN(ys),
+                "Error finding Apollonian circle.");
+            */
+
+            if (rb1.Checked == false)
+            {
+                if (float.IsInfinity(xs) || float.IsInfinity(ys) || float.IsInfinity(rs)) return null;
+            }
+            if ((Math.Abs(xs) < tiny) || (Math.Abs(ys) < tiny) || (Math.Abs(rs) < tiny)) return null;
+            return new Circle(xs, ys, rs);
+        }
+
+        // Return solutions to a quadratic equation.
+        private double[] QuadraticSolutions(double a, double b, double c)
+        {
+            const double tiny = 0.000001;
+            double discriminant = b * b - 4 * a * c;
+
+            // See if there are no real solutions.
+            if (discriminant < 0)
+            {
+                return new double[] { };
+            }
+
+            // See if there is one solution.
+            if (discriminant < tiny)
+            {
+                return new double[] { -b / (2 * a) };
+            }
+
+            // There are two solutions.
+            return new double[]
+            {
+                (-b + Math.Sqrt(discriminant)) / (2 * a),
+                (-b - Math.Sqrt(discriminant)) / (2 * a),
+            };
+        }
+
+
+        // Return a random color.
+        private Random rand = new Random();
+        private Color[] Colors15 =
+        {
+            Color.Red,
+            Color.Green,
+            Color.Blue,
+            Color.Lime,
+            Color.Orange,
+            Color.Fuchsia,
+            Color.Yellow,
+            Color.LightGreen,
+            Color.LightBlue,
+            Color.Cyan,
+        };
+
+        private Color RandomColor()
+        {
+            return Colors15[rand.Next(0, Colors15.Length)];
+        }
+
+        // Apollonian Gasket SP
+
+
+        // 畫箭頭 ST
+
+        // Draw an arrow normally and rotated around a point.
+        private void pictureBox22_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the basic arrow.
+            DrawArrow(Pens.Blue, e.Graphics);
+
+            // Draw the point of rotation.
+            Point center = new Point(50, 70);
+            e.Graphics.FillEllipse(Brushes.Red, center.X - 3, center.Y - 3, 6, 6);
+
+            // Rotate 30 degrees around the point.
+            e.Graphics.Transform = RotateAroundPoint(rotating_angle, center);
+            rotating_angle += 5;
+
+            // Draw the arrow rotated.
+            DrawArrow(Pens.Green, e.Graphics);
+        }
+
+        // Draw an arrow.
+        private void DrawArrow(Pen pen, Graphics gr)
+        {
+            Point[] pts = 
+            {
+                new Point( 50,  50),
+                new Point(150,  50),
+                new Point(150,  20),
+                new Point(200,  70),
+                new Point(150, 120),
+                new Point(150,  90),
+                new Point( 50,  90)
+            };
+            gr.DrawPolygon(pen, pts);
+        }
+
+        // Return a rotation matrix to rotate around a point.
+        private Matrix RotateAroundPoint(float angle, Point center)
+        {
+            // Translate the point to the origin.
+            Matrix result = new Matrix();
+            result.RotateAt(angle, center);
+            return result;
+        }
+
+        // 畫箭頭 SP
+    
     }
 }

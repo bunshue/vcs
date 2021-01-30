@@ -84,9 +84,6 @@
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.timer_eyes = new System.Windows.Forms.Timer(this.components);
             this.timer_change_draw_figure = new System.Windows.Forms.Timer(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb2 = new System.Windows.Forms.RadioButton();
-            this.rb1 = new System.Windows.Forms.RadioButton();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
@@ -118,7 +115,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
@@ -661,38 +657,6 @@
             this.timer_change_draw_figure.Interval = 1000;
             this.timer_change_draw_figure.Tick += new System.EventHandler(this.timer_change_draw_figure_Tick);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rb2);
-            this.groupBox1.Controls.Add(this.rb1);
-            this.groupBox1.Location = new System.Drawing.Point(931, 713);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(126, 40);
-            this.groupBox1.TabIndex = 107;
-            this.groupBox1.TabStop = false;
-            // 
-            // rb2
-            // 
-            this.rb2.AutoSize = true;
-            this.rb2.Checked = true;
-            this.rb2.Location = new System.Drawing.Point(69, 15);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(52, 16);
-            this.rb2.TabIndex = 1;
-            this.rb2.TabStop = true;
-            this.rb2.Text = "type 2";
-            this.rb2.UseVisualStyleBackColor = true;
-            // 
-            // rb1
-            // 
-            this.rb1.AutoSize = true;
-            this.rb1.Location = new System.Drawing.Point(11, 15);
-            this.rb1.Name = "rb1";
-            this.rb1.Size = new System.Drawing.Size(52, 16);
-            this.rb1.TabIndex = 0;
-            this.rb1.Text = "type 1";
-            this.rb1.UseVisualStyleBackColor = true;
-            // 
             // pictureBox16
             // 
             this.pictureBox16.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -893,7 +857,6 @@
             this.Controls.Add(this.pictureBox18);
             this.Controls.Add(this.pictureBox17);
             this.Controls.Add(this.pictureBox16);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.pictureBox13);
@@ -964,8 +927,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
@@ -1042,9 +1003,6 @@
         private System.Windows.Forms.PictureBox pictureBox14;
         private System.Windows.Forms.Timer timer_eyes;
         private System.Windows.Forms.Timer timer_change_draw_figure;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rb2;
-        private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.PictureBox pictureBox16;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.PictureBox pictureBox18;

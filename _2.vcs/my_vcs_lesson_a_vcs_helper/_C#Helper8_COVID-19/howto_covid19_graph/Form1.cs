@@ -37,6 +37,10 @@ namespace howto_covid19_graph
         // Used to prevent redraws while checking or unchecking all countries.
         private bool IgnoreItemCheck = false;
 
+        float[] data_in = new float[252];
+        float[] data_out = new float[252];
+        PointF[] curvePoints = new PointF[252];    //一維陣列內有 N 個Point
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Load the data.
@@ -47,7 +51,12 @@ namespace howto_covid19_graph
             checkedListBox1.CheckOnClick = true;
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            pictureBox2.Visible = false;
+
+            pictureBox2.Image = null;
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // Load and prepare the data.
@@ -215,7 +224,7 @@ namespace howto_covid19_graph
         // An item has been checked or unchecked.
         private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            richTextBox1.Text += "點選\t" + checkedListBox1.Items[e.Index] + "\n";
+            richTextBox1.Text += "點選\t" + checkedListBox1.Items[e.Index] + "\t" + checkedListBox1.SelectedIndex.ToString() + "\n";
             // Do nothing if the user clicked All or None.
             if (IgnoreItemCheck)
             {
@@ -298,14 +307,14 @@ namespace howto_covid19_graph
 
             // Create a bitmap.
             Bitmap bm = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.TextRenderingHint = TextRenderingHint.AntiAlias;
-                gr.Transform = Transform;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
+                g.Transform = Transform;
 
                 // Draw the axes.
-                DrawAxes(gr);
+                DrawAxes(g);
 
                 // Draw the curves.
                 Color[] colors =
@@ -319,7 +328,7 @@ namespace howto_covid19_graph
                     foreach (CountryData country in SelectedCountries)
                     {
                         pen.Color = colors[country.CountryNumber % num_colors];
-                        country.Draw(gr, pen, Transform);
+                        country.Draw(g, pen, Transform);
                     }
                 }
             }
@@ -445,8 +454,10 @@ namespace howto_covid19_graph
 
         private void SetTooltip(PointF point)
         {
-            if (pictureBox1.Image == null) return;
-            if (SelectedCountries == null) return;
+            if (pictureBox1.Image == null)
+                return;
+            if (SelectedCountries == null)
+                return;
 
             string new_tip = "";
             int day_num;
@@ -468,12 +479,15 @@ namespace howto_covid19_graph
             }
 
             if (tipGraph.GetToolTip(pictureBox1) != new_tip)
+            {
                 tipGraph.SetToolTip(pictureBox1, new_tip);
+            }
             pictureBox1.Refresh();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            richTextBox1.Text += "pictureBox1_Paint\n";
             if (ClosePoint.X < 0) return;
 
             const int radius = 3;
@@ -513,6 +527,8 @@ namespace howto_covid19_graph
 
         private void button1_Click(object sender, EventArgs e)
         {
+            checkedListBox1.SetItemChecked(162, true);  //直接選取台灣
+
             int i;
             int j;
             int len;
@@ -557,7 +573,7 @@ namespace howto_covid19_graph
 
                     len2 = SelectedCountries[i].Cases.Length;
                     len2 = 10;
-                    richTextBox1.Text += "case len:\t"+len2.ToString() + "\n";
+                    richTextBox1.Text += "case len:\t" + len2.ToString() + "\n";
                     for (j = 0; j < len2; j++)
                     {
                         richTextBox1.Text += SelectedCountries[i].Cases[j].ToString() + "\t";
@@ -573,23 +589,31 @@ namespace howto_covid19_graph
                     }
                     richTextBox1.Text += "\n";
 
-                    Graphics g = this.pictureBox2.CreateGraphics();
-                    Pen p = new Pen(Color.Red, 2);
-                    g.DrawRectangle(p, 100, 100, 200, 200);
-                    if (len2 > 1)
+                    // Create a bitmap.
+                    Bitmap bm = new Bitmap(pictureBox2.ClientSize.Width, pictureBox2.ClientSize.Height);
+                    using (Graphics g = Graphics.FromImage(bm))
                     {
-                        g.DrawLines(p, SelectedCountries[i].DeviceCoords.ToArray());
+                        Pen p = new Pen(Color.Red, 1);
+
+                        g.SmoothingMode = SmoothingMode.AntiAlias;
+                        if (len2 > 1)
+                        {
+                            g.DrawLines(p, SelectedCountries[i].DeviceCoords.ToArray());
+                        }
 
                     }
+                    // Display the result.
+                    pictureBox2.Image = bm;
 
-                    pictureBox2.Visible = true;
-
-
-
+                    //copy data
+                    for (j = 0; j < 252; j++)
+                    {
+                        data_in[j] = SelectedCountries[i].DeviceCoords[j].X;
+                        data_out[j] = SelectedCountries[i].DeviceCoords[j].Y;
+                    }
                 }
                 float y_max = SelectedCountries.Max(country => country.Cases.Max());
                 richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
-
 
                 float y_min = SelectedCountries.Min(country => country.Cases.Min());
                 richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
@@ -598,9 +622,44 @@ namespace howto_covid19_graph
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int i;
+            int j;
+
+            pictureBox2.Image = null;
+            richTextBox1.Clear();
+            richTextBox1.Text += "pictureBox2, W = " + pictureBox2.Width.ToString() + ", H = " + pictureBox2.Height.ToString() + "\n";
+            for (i = 0; i < 252; i++)
+            {
+                //curvePoints[i].X = data_in[i] * 3;
+                //curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+
+                curvePoints[i].X = data_in[i];
+                if (i < 252 / 2)
+                    curvePoints[i].Y = data_out[i];
+                else
+                    curvePoints[i].Y = data_out[252 / 2];
+            }
+
+            // Create a bitmap.
+            Bitmap bm = new Bitmap(pictureBox2.ClientSize.Width, pictureBox2.ClientSize.Height);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                Pen p = new Pen(Color.Green, 2);
+
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.DrawLines(p, curvePoints.ToArray());
+                //g.DrawLines(p, curvePoints);
+            }
+            // Display the result.
+            pictureBox2.Image = bm;
+        }
+
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
     }
 }

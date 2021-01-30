@@ -210,9 +210,9 @@ namespace vcs_Draw9_Example
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int center_x = 300;
-            int center_y = 300;
-            int radius = 200;
+            int center_x = 200;
+            int center_y = 200;
+            int radius = 180;
             DrawPacman(center_x, center_y, radius);
         }
 
