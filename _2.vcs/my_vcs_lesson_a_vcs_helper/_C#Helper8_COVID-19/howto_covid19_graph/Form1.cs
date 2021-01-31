@@ -81,19 +81,23 @@ namespace howto_covid19_graph
         private void CreateCountryData(object[,] fields)
         {
             // Load the dates.
-            Dictionary<string, CountryData> country_dict =
-                new Dictionary<string, CountryData>();
-            const int first_date_col = 5;
+            Dictionary<string, CountryData> country_dict = new Dictionary<string, CountryData>();
+            const int first_date_col = 5;       //CSV檔的第一筆日期資料，從1起數
             int max_row = fields.GetUpperBound(0);
             int max_col = fields.GetUpperBound(1);
-            int num_dates = max_col - first_date_col + 1;
+            int num_dates = max_col - first_date_col + 1;   //此CSV檔的所有日期資料 行數(Column)
+
+            richTextBox1.Text += "CreateCountryData csv資料大小\n";
+            richTextBox1.Text += "共有 " + max_row.ToString() + " 列(Row)\n";
+            richTextBox1.Text += "共有 " + max_col.ToString() + " 欄(Column)\n";
+            richTextBox1.Text += "此CSV檔的資料欄數 " + num_dates.ToString() + " 欄(Column)\n";
+
             CountryData.Dates = new DateTime[num_dates];
             for (int col = 1; col <= num_dates; col++)
             {
                 // Convert the date into a double and then into a date.
                 double double_value = (double)fields[1, col + first_date_col - 1];
-                CountryData.Dates[col - 1] =
-                    DateTime.FromOADate(double_value);
+                CountryData.Dates[col - 1] = DateTime.FromOADate(double_value);
             }
 
             // Load the country data.
@@ -102,6 +106,10 @@ namespace howto_covid19_graph
             {
                 // Get the country's name.
                 string country_name = fields[country_num, country_col].ToString();
+
+                //debug
+                if (country_name == "Taiwan*")
+                    richTextBox1.Text += "get country name : " + country_name + "\n";
 
                 // Get or create the country's CountryData object.
                 CountryData country_data;
@@ -117,13 +125,18 @@ namespace howto_covid19_graph
                     country_dict.Add(country_name, country_data);
                 }
 
+                if (country_name == "Taiwan*")
+                    richTextBox1.Text += "取得案例數\n";
                 // Add to the country's data.
                 for (int col = 1; col <= num_dates; col++)
                 {
                     // Add the value to the country's total.
-                    country_data.Cases[col - 1] +=
-                        (int)(double)fields[country_num, col + first_date_col - 1];
+                    country_data.Cases[col - 1] += (int)(double)fields[country_num, col + first_date_col - 1];
+                    if (country_name == "Taiwan*")
+                        richTextBox1.Text += country_data.Cases[col - 1].ToString() + "\t";
                 }
+                if (country_name == "Taiwan*")
+                    richTextBox1.Text += "\n";
             }
 
             // Convert CountryDict into CountryList.
@@ -585,7 +598,7 @@ namespace howto_covid19_graph
                     richTextBox1.Text += "DeviceCoords len:\t" + len2.ToString() + "\n";
                     for (j = 0; j < len2; j++)
                     {
-                        richTextBox1.Text += SelectedCountries[i].DeviceCoords[j].ToString() + "\t";
+                        //richTextBox1.Text += SelectedCountries[i].DeviceCoords[j].ToString() + "\t";
                     }
                     richTextBox1.Text += "\n";
 

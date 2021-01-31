@@ -106,6 +106,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 42);
             this.button3.TabIndex = 17;
+            this.button3.Text = "BrushStyle";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -119,11 +120,12 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(874, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 42);
             this.button1.TabIndex = 19;
+            this.button1.Text = "LineCap線條屬性2";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -134,6 +136,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 42);
             this.button2.TabIndex = 20;
+            this.button2.Text = "DashStyle虛線樣式";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -219,17 +222,17 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(102, 42);
             this.button12.TabIndex = 28;
-            this.button12.Text = "LineCap線條屬性";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button0
             // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button0.Location = new System.Drawing.Point(755, 8);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(102, 42);
             this.button0.TabIndex = 30;
+            this.button0.Text = "LineCap線條屬性1";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -240,7 +243,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(102, 42);
             this.button13.TabIndex = 31;
-            this.button13.Text = "DashStyle虛線樣式";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -251,7 +253,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(102, 42);
             this.button14.TabIndex = 32;
-            this.button14.Text = "BrushStyle";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

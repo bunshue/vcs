@@ -148,18 +148,292 @@ namespace vcs_Draw2
 
         private void button0_Click(object sender, EventArgs e)
         {
+            int width = 780;
+            int height = 600;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            g.Clear(Color.Pink);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int x_st = 50;
+            int y_st = 50;
+            int w = 200;
+            int dx = w + 50;
+            int dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 11);
+
+            Font f = new Font("標楷體", 13, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            //LineCap線條屬性
+            Pen p = new Pen(Color.Red, 20);
+
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("------ (預設)", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.AnchorMask;
+            p.EndCap = LineCap.AnchorMask;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("AnchorMask 指定遮罩，用來檢查線條端點是否為錨點端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.ArrowAnchor;
+            p.EndCap = LineCap.ArrowAnchor;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("ArrowAnchor 指定箭頭形狀的錨點端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.Custom;
+            p.EndCap = LineCap.Custom;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Custom 指定自訂的線條端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.DiamondAnchor;
+            p.EndCap = LineCap.DiamondAnchor;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("DiamondAnchor 指定鑽石形錨點端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.Flat;
+            p.EndCap = LineCap.Flat;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Flat 指定扁平線條端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.NoAnchor;
+            p.EndCap = LineCap.NoAnchor;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("NoAnchor 不指定錨點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.Round;
+            p.EndCap = LineCap.Round;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Round 指定圓形線條端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.RoundAnchor;
+            p.EndCap = LineCap.RoundAnchor;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("RoundAnchor 指定圓形錨點端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.Square;
+            p.EndCap = LineCap.Square;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Square 指定方形線條端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.SquareAnchor;
+            p.EndCap = LineCap.SquareAnchor;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("SquareAnchor 指定方形錨點線條端點", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.StartCap = LineCap.Triangle;
+            p.EndCap = LineCap.Triangle;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Triangle 指定三角形線條端點", f, sb, new PointF(x_st + dx, y_st));
+
+
+            x_st = 50;
+            y_st = 50;
+            //w = 200;
+            //dx = w + 50;
+            dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, w, dy * 11);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int width = 780;
+            int height = 600;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            g.Clear(Color.Pink);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int x_st = 50;
+            int y_st = 50;
+            int w = 200;
+            int dx = w + 50;
+            int dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 11);
+
+            Font f = new Font("標楷體", 13, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            //LineCap線條屬性
+
+            using (Pen p = new Pen(Color.Blue, 20))
+            {
+                LineCap[] caps = (LineCap[])Enum.GetValues(typeof(LineCap));
+                foreach (LineCap cap in caps)
+                {
+                    p.StartCap = cap;
+                    p.EndCap = cap;
+                    g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+
+                    g.DrawString(cap.ToString(), Font, Brushes.Black, new PointF(x_st + dx, y_st));
+                    y_st += dy;
+                }
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int width = 780;
+            int height = 600;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            g.Clear(Color.Pink);
+
+            int x_st = 50;
+            int y_st = 50;
+            int w = 200;
+            int dx = w + 50;
+            int dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 6);
+
+            Font f = new Font("標楷體", 13, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            //LineCap線條屬性
+            Pen p = new Pen(Color.Red, 10);
+
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("------ (預設)", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.DashStyle = DashStyle.Solid;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Solid 指定實線", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.DashStyle = DashStyle.Dash;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Dash 指定含有虛線的線條", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.DashStyle = DashStyle.Dot;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Dot 指定含有點的線條", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.DashStyle = DashStyle.DashDot;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("DashDot 指定含有「虛線-點」之重複花紋的線條", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.DashStyle = DashStyle.DashDotDot;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("DashDotDot 指定含有「虛線-點-點」之重複花紋的線條", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            p.DashStyle = DashStyle.Custom;
+            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
+            g.DrawString("Custom 指定使用者定義的自訂虛線樣式", f, sb, new PointF(x_st + dx, y_st));
+
+            y_st += dy;
+            float[] dashValues = { 5, 2, 15, 4 };
+            Pen p2 = new Pen(Color.Black, 5);
+            p2.DashPattern = dashValues;
+            g.DrawLine(p2, x_st, y_st, x_st + w * 3, y_st);
+            g.DrawString("指定使用者定義的DashPattern", f, sb, new PointF(x_st + dx, y_st + 10));
+
+            Bitmap bmp = new Bitmap(vcs_Draw2.Properties.Resources.DashPattern);
+            int ww = bmp.Width;
+            int hh = bmp.Height;
+
+            //richTextBox1.Text += "pic w = " + ww.ToString() + "\n";
+            //richTextBox1.Text += "pic h = " + hh.ToString() + "\n";
+
+            Rectangle srcRect = new Rectangle(0, 0, ww, hh);
+            Rectangle destRect = new Rectangle(50, y_st + 50, ww / 2, hh / 2);
+            GraphicsUnit units = GraphicsUnit.Pixel;
+
+            g.DrawImage(bmp, destRect, srcRect, units);
+
+            x_st = 50;
+            y_st = 50;
+            //w = 200;
+            //dx = w + 50;
+            dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, w, dy * 6);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //純色筆刷
+            SolidBrush sb = new SolidBrush(Color.LightGreen);
+            g.FillEllipse(sb, 50, 50, 300, 100);
+
+            //規劃筆刷
+            HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 50, 150, 200, 100);
+
+            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 250, 150, 200, 100);
+
+            hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
+            g.FillEllipse(hb, 450, 150, 200, 100);
+
+            //紋理筆刷
+            Image myImage = Image.FromFile(@"C:\______test_files\bear.jpg");
+            TextureBrush tb = new TextureBrush(myImage);
+            g.FillEllipse(tb, 50, 250, 300, 100);
+
+
+            //漸層筆刷
+            Rectangle r;
+            LinearGradientBrush lgb;
+
+            r = new Rectangle(50, 350, 300, 100);
+            lgb = new LinearGradientBrush(
+               r,
+               Color.Blue,
+               Color.Green,
+               LinearGradientMode.Horizontal);
+            g.FillEllipse(lgb, r);
+
+
+            r = new Rectangle(50, 450, 300, 100);
+            lgb = new LinearGradientBrush(
+               r,
+               Color.Blue,
+               Color.Green,
+               LinearGradientMode.BackwardDiagonal);
+            g.FillEllipse(lgb, r);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -757,250 +1031,16 @@ namespace vcs_Draw2
 
         private void button12_Click(object sender, EventArgs e)
         {
-            int width = 780;
-            int height = 600;
-
-            pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
-
-            bitmap1 = new Bitmap(width, height);
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            g.Clear(Color.Pink);
-
-            int x_st = 50;
-            int y_st = 50;
-            int w = 200;
-            int dx = w + 50;
-            int dy = 45;
-
-            g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 11);
-
-            Font f = new Font("標楷體", 13, FontStyle.Bold);
-            SolidBrush sb = new SolidBrush(Color.Blue);
-
-            //LineCap線條屬性
-            Pen p = new Pen(Color.Red, 20);
-
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("------ (預設)", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.AnchorMask;
-            p.EndCap = LineCap.AnchorMask;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("AnchorMask 指定遮罩，用來檢查線條端點是否為錨點端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.ArrowAnchor;
-            p.EndCap = LineCap.ArrowAnchor;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("ArrowAnchor 指定箭頭形狀的錨點端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.Custom;
-            p.EndCap = LineCap.Custom;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Custom 指定自訂的線條端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.DiamondAnchor;
-            p.EndCap = LineCap.DiamondAnchor;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("DiamondAnchor 指定鑽石形錨點端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.Flat;
-            p.EndCap = LineCap.Flat;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Flat 指定扁平線條端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.NoAnchor;
-            p.EndCap = LineCap.NoAnchor;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("NoAnchor 不指定錨點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.Round;
-            p.EndCap = LineCap.Round;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Round 指定圓形線條端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.RoundAnchor;
-            p.EndCap = LineCap.RoundAnchor;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("RoundAnchor 指定圓形錨點端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.Square;
-            p.EndCap = LineCap.Square;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Square 指定方形線條端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.SquareAnchor;
-            p.EndCap = LineCap.SquareAnchor;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("SquareAnchor 指定方形錨點線條端點", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.StartCap = LineCap.Triangle;
-            p.EndCap = LineCap.Triangle;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Triangle 指定三角形線條端點", f, sb, new PointF(x_st + dx, y_st));
-
-
-            x_st = 50;
-            y_st = 50;
-            //w = 200;
-            //dx = w + 50;
-            dy = 45;
-
-            g.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, w, dy * 11);
-
-            pictureBox1.Image = bitmap1;
 
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            int width = 780;
-            int height = 600;
-
-            pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
-
-            bitmap1 = new Bitmap(width, height);
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            g.Clear(Color.Pink);
-
-            int x_st = 50;
-            int y_st = 50;
-            int w = 200;
-            int dx = w + 50;
-            int dy = 45;
-
-            g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 6);
-
-            Font f = new Font("標楷體", 13, FontStyle.Bold);
-            SolidBrush sb = new SolidBrush(Color.Blue);
-
-            //LineCap線條屬性
-            Pen p = new Pen(Color.Red, 10);
-
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("------ (預設)", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.DashStyle = DashStyle.Solid;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Solid 指定實線", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.DashStyle = DashStyle.Dash;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Dash 指定含有虛線的線條", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.DashStyle = DashStyle.Dot;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Dot 指定含有點的線條", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.DashStyle = DashStyle.DashDot;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("DashDot 指定含有「虛線-點」之重複花紋的線條", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.DashStyle = DashStyle.DashDotDot;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("DashDotDot 指定含有「虛線-點-點」之重複花紋的線條", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            p.DashStyle = DashStyle.Custom;
-            g.DrawLine(p, x_st, y_st, x_st + w, y_st);
-            g.DrawString("Custom 指定使用者定義的自訂虛線樣式", f, sb, new PointF(x_st + dx, y_st));
-
-            y_st += dy;
-            float[] dashValues = { 5, 2, 15, 4 };
-            Pen p2 = new Pen(Color.Black, 5);
-            p2.DashPattern = dashValues;
-            g.DrawLine(p2, x_st, y_st, x_st + w * 3, y_st);
-            g.DrawString("指定使用者定義的DashPattern", f, sb, new PointF(x_st + dx, y_st + 10));
-            
-            Bitmap bmp = new Bitmap(vcs_Draw2.Properties.Resources.DashPattern);
-            int ww = bmp.Width;
-            int hh = bmp.Height;
-
-            //richTextBox1.Text += "pic w = " + ww.ToString() + "\n";
-            //richTextBox1.Text += "pic h = " + hh.ToString() + "\n";
-
-            Rectangle srcRect = new Rectangle(0, 0, ww, hh);
-            Rectangle destRect = new Rectangle(50, y_st + 50, ww / 2, hh / 2);
-            GraphicsUnit units = GraphicsUnit.Pixel;
-
-            g.DrawImage(bmp, destRect, srcRect, units);
-
-            x_st = 50;
-            y_st = 50;
-            //w = 200;
-            //dx = w + 50;
-            dy = 45;
-
-            g.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, w, dy * 6);
-
-            pictureBox1.Image = bitmap1;
 
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //純色筆刷
-            SolidBrush sb = new SolidBrush(Color.LightGreen);
-            g.FillEllipse(sb, 50, 50, 300, 100);
-
-            //規劃筆刷
-            HatchBrush hb = new HatchBrush(HatchStyle.Vertical, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 50, 150, 200, 100);
-
-            hb = new HatchBrush(HatchStyle.Cross, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 250, 150, 200, 100);
-
-            hb = new HatchBrush(HatchStyle.Wave, Color.Blue, Color.Green);
-            g.FillEllipse(hb, 450, 150, 200, 100);
-
-            //紋理筆刷
-            Image myImage = Image.FromFile(@"C:\______test_files\bear.jpg");
-            TextureBrush tb = new TextureBrush(myImage);
-            g.FillEllipse(tb, 50, 250, 300, 100);
-
-
-            //漸層筆刷
-            Rectangle r;
-            LinearGradientBrush lgb;
-
-            r = new Rectangle(50, 350, 300, 100);
-            lgb = new LinearGradientBrush(
-               r,
-               Color.Blue,
-               Color.Green,
-               LinearGradientMode.Horizontal);
-            g.FillEllipse(lgb, r);
-
-
-            r = new Rectangle(50, 450, 300, 100);
-            lgb = new LinearGradientBrush(
-               r,
-               Color.Blue,
-               Color.Green,
-               LinearGradientMode.BackwardDiagonal);
-            g.FillEllipse(lgb, r);
-
 
         }
 

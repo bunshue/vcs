@@ -1407,6 +1407,7 @@ namespace vcs_Draw9_Example7_vcsh
             Draw_SnowFlake2();
             Draw_SnowFlake3();
 
+            draw_connection_balls();        //pictureBox13
             draw_random_circles();          //pictureBox14
             draw_Apollonian_Gasket();       //pictureBox15
 
@@ -1625,12 +1626,143 @@ namespace vcs_Draw9_Example7_vcsh
         }
         #endregion
 
-        //彩色圓圖 ST
+        //連接球 ST
+        void draw_connection_balls()
+        {
+            Graphics g;
+            Pen p;
+            SolidBrush sb;
+            Bitmap bitmap1;
+
+            bitmap1 = new Bitmap(pictureBox13.Width, pictureBox13.Height);
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(Color.Red, 2);
+            sb = new SolidBrush(Color.Navy);
+
+            int i;
+            var random = new Random();
+
+            /*
+            //[C#] 產生一組亂數
+            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+            var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var chars2 = "0123456789";
+            var stringChars1 = new char[10];
+            var stringChars2 = new char[11];
+            for (int i = 0; i < stringChars1.Length; i++)
+            {
+                if (i < 2)
+                {
+                    stringChars1[i] = chars1[random.Next(chars1.Length)];
+                }
+                else
+                {
+                    stringChars1[i] = chars2[random.Next(chars2.Length)];
+                }
+            }
+            var finalString1 = new String(stringChars1);
+            richTextBox1.Text += "相機序號1：" + finalString1 + "\n";
+
+            for (int i = 0; i < stringChars2.Length; i++)
+            {
+                stringChars2[i] = chars2[random.Next(chars2.Length)];
+            }
+            var finalString2 = new String(stringChars2);
+            richTextBox1.Text += "相機序號2：" + finalString2 + "\n";
+            */
+
+            int N = 10;
+            int[] x = new int[N];
+            int[] y = new int[N];
+
+            int[,] position = new int[N, 2];	//建立一個二維陣列
+
+            int w = pictureBox13.Width;
+            int h = pictureBox13.Height;
+
+            int cx = 100;
+            int cy = 100;
+            int r = 15;
+
+            for (i = 0; i < N; i++)
+            {
+                position[i, 0] = random.Next(w - 2 * r) + r;  //x1, x2, x3.....
+                position[i, 1] = random.Next(h - 2 * r) + r;  //y1, y2, y3.....
+            }
+            richTextBox1.Text += "每個點的位置\n";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += position[i, 0].ToString() + "\t" + position[i, 1].ToString() + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            for (i = 0; i < N; i++)
+            {
+                x[i] = i;
+                y[i] = random.Next(N);
+                /*
+                do
+                {
+                    y[i] = random.Next(N);
+                }
+                while (x[i] == y[i]);
+                */
+            }
+            richTextBox1.Text += "\n";
 
 
+            richTextBox1.Text += "x array\n";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += x[i].ToString() + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "y array\n";
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += y[i].ToString() + "\n";
+            }
+            richTextBox1.Text += "\n";
 
 
-        //彩色圓圖 SP
+            Point pointa;
+            Point pointb;
+            for (i = 0; i < N; i++)
+            {
+                pointa = new Point(position[x[i], 0], position[x[i], 1]);
+                pointb = new Point(position[y[i], 0], position[y[i], 1]);
+                g.DrawLine(p, pointa, pointb);     // Draw line to screen.
+            }
+
+            for (i = 0; i < N; i++)
+            {
+                cx = position[i, 0];
+                cy = position[i, 1];
+
+                //richTextBox1.Text += position[i, 0].ToString() + "\t" + position[i, 1].ToString() + "\n";
+                //richTextBox1.Text += "(" + (cx - r).ToString() + ", " + (cy - r).ToString() + ") - (" + (cx + r).ToString() + ", " + (cy + r).ToString() + ")\n";
+                //g.FillEllipse(sb, cx - r, cy - r, r * 2, r * 2);
+                FillCircle(g, sb, cx, cy, r);
+
+                //g.DrawEllipse(new Pen(Color.Red, 3), cx - r, cy - r, r * 2, r * 2);
+                DrawCircle(g, p, cx, cy, r);
+            }
+            pictureBox13.Image = bitmap1;
+        }
+
+        void DrawCircle(Graphics g, Pen p, int cx, int cy, int r)
+        {
+            g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
+        }
+
+        void FillCircle(Graphics g, SolidBrush sb, int cx, int cy, int r)
+        {
+            g.FillEllipse(sb, cx - r, cy - r, r * 2, r * 2);
+        }
+
+        //連接球 SP
 
         //任意圈圈圖 ST
         void draw_random_circles()
