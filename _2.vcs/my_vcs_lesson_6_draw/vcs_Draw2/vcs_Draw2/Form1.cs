@@ -303,7 +303,7 @@ namespace vcs_Draw2
         private void button2_Click(object sender, EventArgs e)
         {
             int width = 780;
-            int height = 600;
+            int height = 950;
 
             pictureBox1.Size = new Size(width, height);
             pictureBox1.Location = new Point(0, 0);
@@ -388,6 +388,63 @@ namespace vcs_Draw2
             dy = 45;
 
             g.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, w, dy * 6);
+
+
+
+            int y = 650;
+            int x1 = 65;
+            int x2 = 600;
+            using (Pen dashed_pen = new Pen(Brushes.Red, 5))
+            {
+                dashed_pen.DashStyle = DashStyle.Custom;
+
+                dashed_pen.DashPattern = new float[] { 3, 1 };
+                g.DrawString("3, 1", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, x1, y, x2, y);
+                y += 20;
+
+                dashed_pen.DashPattern = new float[] { 5, 1, 5, 5 };
+                g.DrawString("5, 1, 5, 5", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, x1, y, x2, y);
+                y += 20;
+
+                dashed_pen.DashPattern = new float[] { 5, 1 };
+                g.DrawString("5, 1", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, x1, y, x2, y);
+                y += 20;
+
+                dashed_pen.DashPattern = new float[] { 1, 3 };
+                g.DrawString("1, 3", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, x1, y, x2, y);
+                y += 20;
+
+                dashed_pen.DashPattern = new float[] { 3, 1, 1, 1 };
+                g.DrawString("3, 1, 1, 1", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, x1, y, x2, y);
+                y += 20;
+            }
+
+
+            y = 800;
+            using (Pen dashed_pen = new Pen(Color.Green, 15))
+            {
+                dashed_pen.DashStyle = DashStyle.Dash;
+
+                dashed_pen.DashCap = DashCap.Flat;
+                g.DrawString("Flat", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, 100, y, 600, y);
+                y += 40;
+
+                dashed_pen.DashCap = DashCap.Round;
+                g.DrawString("Round", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, 100, y, 600, y);
+                y += 40;
+
+                dashed_pen.DashCap = DashCap.Triangle;
+                g.DrawString("Triangle", this.Font, Brushes.Black, 10, y - 8);
+                g.DrawLine(dashed_pen, 100, y, 600, y);
+                y += 40;
+            }
 
             pictureBox1.Image = bitmap1;
         }

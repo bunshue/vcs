@@ -180,13 +180,13 @@ namespace vcs_Draw1
 
         private void FillCircle(Graphics g, PointF center, int radius, Color c)
         {
-            SolidBrush newBrush = new SolidBrush(c);
+            SolidBrush sb = new SolidBrush(c);
 
             // Fill the circle
-            g.FillEllipse(newBrush, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
+            g.FillEllipse(sb, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
 
             //Dispose of the brush
-            newBrush.Dispose();
+            sb.Dispose();
         }
 
         private void DrawStar(Graphics g, PointF center, int radius, int linewidth, Color c)

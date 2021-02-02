@@ -165,7 +165,6 @@ namespace vcs_Draw3
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
 
-
             timer_rainbow.Interval = Interval;
             SelectedColor = Color.Red;
             SelectedRainbowNumber = 0;
@@ -188,7 +187,7 @@ namespace vcs_Draw3
             this.UpdateStyles();
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -239,7 +238,7 @@ namespace vcs_Draw3
 
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button25.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 8);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
@@ -266,6 +265,10 @@ namespace vcs_Draw3
             pictureBox_gear.Location = new Point(x_st + dx * 2, y_st);
             trackBar1.Location = new Point(x_st + dx * 2, y_st - 50);
             lb_fps.Location = new Point(x_st + dx * 2 + 280, y_st - 50);
+
+            pictureBox_circle.Size = new Size(W, H);
+            pictureBox_circle.Location = new Point(x_st + dx * 3, y_st);
+            pictureBox_circle.BackColor = Color.Pink;
         }
 
         bool isRunning1 = false;
@@ -608,10 +611,6 @@ namespace vcs_Draw3
 
         }
 
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1564,6 +1563,86 @@ namespace vcs_Draw3
                 e.Graphics.FillEllipse(new SolidBrush(Color.Blue), px - radius, py - radius, 2 * radius, 2 * radius);
             }
         }
+
+        private void timer_circle_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "A";
+            this.pictureBox_circle.Refresh();
+        }
+
+        //float spin = 0;
+        float circle_step = 0;
+        private void pictureBox_circle_Paint(object sender, PaintEventArgs e)
+        {
+            int w = pictureBox_circle.Width;
+            int h = pictureBox_circle.Height;
+            int cx = w / 2;
+            int cy = h / 2;
+            int r = Math.Min((w / 2) * 4 / 5, (h / 2) * 4 / 5);
+            int px = cx + (int)(r * Math.Cos(spin));
+            int py = cy + (int)(r * Math.Sin(spin));
+            spin += 0.30f;
+
+            int radius = 10;
+            Point pt = new Point();
+
+            int i;
+            for (i = 0; i < circle_step; i++)
+            {
+                if (i == 0)
+                {
+                    pt = new Point(cx, cy);
+                }
+                else
+                {
+                    px = cx + (int)(r * Math.Cos(circle_step));
+                    py = cy + (int)(r * Math.Sin(circle_step));
+                    pt = new Point(px, py);
+                }
+
+                FillCircle(e.Graphics, pt, radius, Color.Red);
+
+            }
+
+
+            //pt = new Point(80 + 160, 80);
+            
+
+            /*
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                e.Graphics.DrawLine(pen, cx, cy, px, py);
+            }
+
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                const float radius = 10;
+                //e.Graphics.DrawLine(pen, cx, cy, px, py);
+                e.Graphics.DrawEllipse(Pens.Blue, px - radius, py - radius, 2 * radius, 2 * radius);
+                e.Graphics.FillEllipse(new SolidBrush(Color.Blue), px - radius, py - radius, 2 * radius, 2 * radius);
+            }
+            */
+
+            circle_step += 0.30f;
+        }
+
+        private void FillCircle(Graphics g, PointF center, int radius, Color c)
+        {
+            SolidBrush sb = new SolidBrush(c);
+
+            // Fill the circle
+            g.FillEllipse(sb, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
+
+            //Dispose of the brush
+            sb.Dispose();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
 
 
 

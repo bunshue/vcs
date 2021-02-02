@@ -37,9 +37,7 @@ namespace vcs_RotatePicture2
                 OriginalImage = new Bitmap(bm);
                 //mnuFileSaveAs.Enabled = true;
             }
-
             DisplayImage();
-
         }
 
         // Display the image at the current rotation and scale.

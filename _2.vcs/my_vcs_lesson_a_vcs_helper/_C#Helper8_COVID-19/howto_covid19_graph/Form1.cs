@@ -41,6 +41,8 @@ namespace howto_covid19_graph
         float[] data_out = new float[252];
         PointF[] curvePoints = new PointF[252];    //一維陣列內有 N 個Point
 
+        int selectedIndex = 0;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // Load the data.
@@ -109,7 +111,9 @@ namespace howto_covid19_graph
 
                 //debug
                 if (country_name == "Taiwan*")
+                {
                     richTextBox1.Text += "get country name : " + country_name + "\n";
+                }
 
                 // Get or create the country's CountryData object.
                 CountryData country_data;
@@ -133,7 +137,9 @@ namespace howto_covid19_graph
                     // Add the value to the country's total.
                     country_data.Cases[col - 1] += (int)(double)fields[country_num, col + first_date_col - 1];
                     if (country_name == "Taiwan*")
-                        richTextBox1.Text += country_data.Cases[col - 1].ToString() + "\t";
+                    {
+                        //richTextBox1.Text += country_data.Cases[col - 1].ToString() + "\t";
+                    }
                 }
                 if (country_name == "Taiwan*")
                     richTextBox1.Text += "\n";
@@ -500,8 +506,11 @@ namespace howto_covid19_graph
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            richTextBox1.Text += "pictureBox1_Paint\n";
-            if (ClosePoint.X < 0) return;
+            //richTextBox1.Text += "pictureBox1_Paint\n";
+            if (ClosePoint.X < 0)
+            {
+                return;
+            }
 
             const int radius = 3;
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -516,7 +525,9 @@ namespace howto_covid19_graph
         {
             //按了依國名排序
             if (CountryList == null)
+            {
                 return;
+            }
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByName);
             checkedListBox1.DataSource = null;
             richTextBox1.Text += "\n依 國名 排序\n\n";
@@ -529,7 +540,9 @@ namespace howto_covid19_graph
         {
             //按了依總數排序
             if (CountryList == null)
+            {
                 return;
+            }
             Comparer = new CountryDataComparer(CountryDataComparer.CompareTypes.ByMaxCases);
             checkedListBox1.DataSource = null;
             richTextBox1.Text += "\n依 總數 排序\n\n";
@@ -540,12 +553,26 @@ namespace howto_covid19_graph
 
         private void button1_Click(object sender, EventArgs e)
         {
-            checkedListBox1.SetItemChecked(162, true);  //直接選取台灣
-
             int i;
             int j;
             int len;
             int len2;
+
+            if (CountryList != null)
+            {
+                len = CountryList.Count;
+                richTextBox1.Text += "CountryList len = " + len.ToString() + "\n";
+                for (i = 0; i < len; i++)
+                {
+                    //richTextBox1.Text += "i = " + i.ToString() + "\t" + CountryList[i].Name + "\n";
+                    if (CountryList[i].Name == "Taiwan*")
+                    {
+                        richTextBox1.Text += "台灣的位置在 " + i.ToString() + "\t設定讀取此筆資料\n";
+                        checkedListBox1.SetItemChecked(i, true);  //直接選取台灣
+                    }
+                }
+            }
+
             len = checkedListBox1.Items.Count;
 
             richTextBox1.Text += "分析資料\n";
@@ -631,18 +658,16 @@ namespace howto_covid19_graph
                 float y_min = SelectedCountries.Min(country => country.Cases.Min());
                 richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             int i;
-            int j;
+            //int j;
 
             pictureBox2.Image = null;
             richTextBox1.Clear();
-            richTextBox1.Text += "pictureBox2, W = " + pictureBox2.Width.ToString() + ", H = " + pictureBox2.Height.ToString() + "\n";
+            //richTextBox1.Text += "pictureBox2, W = " + pictureBox2.Width.ToString() + ", H = " + pictureBox2.Height.ToString() + "\n";
             for (i = 0; i < 252; i++)
             {
                 //curvePoints[i].X = data_in[i] * 3;
