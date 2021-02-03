@@ -495,6 +495,66 @@ namespace vcs_Draw2
 
         private void button4_Click(object sender, EventArgs e)
         {
+            int width = 780;
+            int height = 600;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(0, 0);
+
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            g.Clear(Color.Pink);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int x_st = 50;
+            int y_st = 50;
+            int w = 200;
+            int dx = w + 50;
+            int dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Lime, 5), x_st, y_st, w, dy * 10);
+
+            Font f = new Font("標楷體", 13, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            using (Pen dashed_pen = new Pen(Color.Blue, 2))
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    y_st += dy;
+                    dashed_pen.DashStyle = DashStyle.Dash;
+                    g.DrawString("Dash", f, sb, x_st + dx, y_st);
+                    g.DrawLine(dashed_pen, x_st, y_st, x_st + w, y_st);
+
+
+                    y_st += dy;
+                    dashed_pen.DashStyle = DashStyle.DashDot;
+                    g.DrawString("DashDot", f, sb, x_st + dx, y_st);
+                    g.DrawLine(dashed_pen, x_st, y_st, x_st + w, y_st);
+
+                    y_st += dy;
+                    dashed_pen.DashStyle = DashStyle.DashDotDot;
+                    g.DrawString("DashDotDot", f, sb, x_st + dx, y_st);
+                    g.DrawLine(dashed_pen, x_st, y_st, x_st + w, y_st);
+
+                    y_st += dy;
+                    dashed_pen.DashStyle = DashStyle.Dot;
+                    g.DrawString("Dot", f, sb, x_st + dx, y_st);
+                    g.DrawLine(dashed_pen, x_st, y_st, x_st + w, y_st);
+
+                    y_st += dy;
+                    dashed_pen.Width = 10;
+                }
+            }
+
+            x_st = 50;
+            y_st = 50;
+            dy = 45;
+
+            g.DrawRectangle(new Pen(Color.Green, 1), x_st, y_st, w, dy * 10);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)

@@ -611,13 +611,15 @@ namespace vcs_Draw3
 
         }
 
-
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
-
 
         double degree = 0;
         private void timer1_Tick(object sender, EventArgs e)
@@ -1564,30 +1566,44 @@ namespace vcs_Draw3
             }
         }
 
+        double angle = 20;
         private void timer_circle_Tick(object sender, EventArgs e)
         {
             richTextBox1.Text += "A";
-            this.pictureBox_circle.Refresh();
+
+            draw_circles();
+            //this.pictureBox_circle.Refresh();
+            angle++;
         }
 
-        //float spin = 0;
-        float circle_step = 0;
-        private void pictureBox_circle_Paint(object sender, PaintEventArgs e)
+        void draw_circles()
         {
+            richTextBox1.Text += "angle = " + angle.ToString() + " ";
             int w = pictureBox_circle.Width;
             int h = pictureBox_circle.Height;
+
+            Bitmap bitmap1 = new Bitmap(w, h);
+
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.DrawRectangle(Pens.Blue, 100, 100, 100, 100);
+
             int cx = w / 2;
             int cy = h / 2;
-            int r = Math.Min((w / 2) * 4 / 5, (h / 2) * 4 / 5);
-            int px = cx + (int)(r * Math.Cos(spin));
-            int py = cy + (int)(r * Math.Sin(spin));
-            spin += 0.30f;
+            //int r = Math.Min((w / 2) * 4 / 5, (h / 2) * 4 / 5) / 2;
+            int r = 15;
+            int px;
+            int py;
 
             int radius = 10;
             Point pt = new Point();
 
-            int i;
-            for (i = 0; i < circle_step; i++)
+            richTextBox1.Text += "r =" + r.ToString() + " ";
+
+
+            double i;
+            int r2 = r;
+            //richTextBox1.Text += "angle = " + angle.ToString() + " ";
+            for (i = 0; i < angle; i++)
             {
                 if (i == 0)
                 {
@@ -1595,19 +1611,19 @@ namespace vcs_Draw3
                 }
                 else
                 {
-                    px = cx + (int)(r * Math.Cos(circle_step));
-                    py = cy + (int)(r * Math.Sin(circle_step));
+                    //r2 = r + (((int)i - 1) / 12) * 15;
+                    r2 = r + (int)i * 3 / 2;
+                    px = cx + (int)(r2 * cosd(i * 30));
+                    py = cy + (int)(r2 * sind(i * 30));
                     pt = new Point(px, py);
                 }
-
-                FillCircle(e.Graphics, pt, radius, Color.Red);
-
+                //richTextBox1.Text += i.ToString() + "  x = " + pt.X.ToString() + " y = " + pt.Y.ToString() + "  ";
+                FillCircle(g, pt, radius, Color.Red);
             }
-
-
-            //pt = new Point(80 + 160, 80);
-            
-
+            pictureBox_circle.Image = bitmap1;
+            if (angle == 50)
+                timer_circle.Enabled = false;
+            //richTextBox1.Text += "\n";
             /*
             using (Pen pen = new Pen(Color.Black, 0))
             {
@@ -1622,8 +1638,6 @@ namespace vcs_Draw3
                 e.Graphics.FillEllipse(new SolidBrush(Color.Blue), px - radius, py - radius, 2 * radius, 2 * radius);
             }
             */
-
-            circle_step += 0.30f;
         }
 
         private void FillCircle(Graphics g, PointF center, int radius, Color c)
@@ -1637,11 +1651,20 @@ namespace vcs_Draw3
             sb.Dispose();
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
+        private double rad(double d)
         {
-            Application.Exit();
+            return d * Math.PI / 180.0;
         }
 
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
 
 
 

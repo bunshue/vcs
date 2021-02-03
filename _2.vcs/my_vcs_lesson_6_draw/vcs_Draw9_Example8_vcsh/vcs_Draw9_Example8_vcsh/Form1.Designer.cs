@@ -79,9 +79,9 @@
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox_random_pixel_image = new System.Windows.Forms.PictureBox();
             this.pictureBox_arrow = new System.Windows.Forms.PictureBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_hilbert_curve = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_sierpinski_curve = new System.Windows.Forms.PictureBox();
             this.timer_eyes = new System.Windows.Forms.Timer(this.components);
             this.timer_change_draw_figure = new System.Windows.Forms.Timer(this.components);
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
@@ -101,6 +101,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nudSkip = new System.Windows.Forms.NumericUpDown();
             this.nudPoints = new System.Windows.Forms.NumericUpDown();
+            this.timer_change = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -112,9 +113,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_arrow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hilbert_curve)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski_curve)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
@@ -619,14 +620,14 @@
             this.pictureBox_arrow.TabStop = false;
             this.pictureBox_arrow.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_arrow_Paint);
             // 
-            // pictureBox13
+            // pictureBox_hilbert_curve
             // 
-            this.pictureBox13.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox13.Location = new System.Drawing.Point(11, 504);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox13.TabIndex = 102;
-            this.pictureBox13.TabStop = false;
+            this.pictureBox_hilbert_curve.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_hilbert_curve.Location = new System.Drawing.Point(11, 504);
+            this.pictureBox_hilbert_curve.Name = "pictureBox_hilbert_curve";
+            this.pictureBox_hilbert_curve.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_hilbert_curve.TabIndex = 102;
+            this.pictureBox_hilbert_curve.TabStop = false;
             // 
             // pictureBox15
             // 
@@ -637,14 +638,14 @@
             this.pictureBox15.TabIndex = 103;
             this.pictureBox15.TabStop = false;
             // 
-            // pictureBox14
+            // pictureBox_sierpinski_curve
             // 
-            this.pictureBox14.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox14.Location = new System.Drawing.Point(117, 504);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox14.TabIndex = 103;
-            this.pictureBox14.TabStop = false;
+            this.pictureBox_sierpinski_curve.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_sierpinski_curve.Location = new System.Drawing.Point(117, 504);
+            this.pictureBox_sierpinski_curve.Name = "pictureBox_sierpinski_curve";
+            this.pictureBox_sierpinski_curve.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_sierpinski_curve.TabIndex = 103;
+            this.pictureBox_sierpinski_curve.TabStop = false;
             // 
             // timer_eyes
             // 
@@ -840,6 +841,12 @@
             0});
             this.nudPoints.ValueChanged += new System.EventHandler(this.nudPoints_ValueChanged);
             // 
+            // timer_change
+            // 
+            this.timer_change.Enabled = true;
+            this.timer_change.Interval = 1000;
+            this.timer_change.Tick += new System.EventHandler(this.timer_change_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -857,9 +864,9 @@
             this.Controls.Add(this.pictureBox18);
             this.Controls.Add(this.pictureBox17);
             this.Controls.Add(this.pictureBox16);
-            this.Controls.Add(this.pictureBox14);
+            this.Controls.Add(this.pictureBox_sierpinski_curve);
             this.Controls.Add(this.pictureBox15);
-            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.pictureBox_hilbert_curve);
             this.Controls.Add(this.pictureBox_arrow);
             this.Controls.Add(this.pictureBox_random_pixel_image);
             this.Controls.Add(this.pictureBox10);
@@ -924,9 +931,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_arrow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hilbert_curve)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski_curve)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
@@ -998,9 +1005,9 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox_random_pixel_image;
         private System.Windows.Forms.PictureBox pictureBox_arrow;
-        private System.Windows.Forms.PictureBox pictureBox13;
+        private System.Windows.Forms.PictureBox pictureBox_hilbert_curve;
         private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.PictureBox pictureBox_sierpinski_curve;
         private System.Windows.Forms.Timer timer_eyes;
         private System.Windows.Forms.Timer timer_change_draw_figure;
         private System.Windows.Forms.PictureBox pictureBox16;
@@ -1020,6 +1027,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudSkip;
         private System.Windows.Forms.NumericUpDown nudPoints;
+        private System.Windows.Forms.Timer timer_change;
     }
 }
 

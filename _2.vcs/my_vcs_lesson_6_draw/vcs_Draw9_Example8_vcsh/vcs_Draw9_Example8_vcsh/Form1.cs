@@ -178,8 +178,8 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox10.Size = new Size(W, H * 9 / 10);
             pictureBox_random_pixel_image.Size = new Size(W, H);
             pictureBox_arrow.Size = new Size(W, H);
-            pictureBox13.Size = new Size(W, H);
-            pictureBox14.Size = new Size(W, H);
+            pictureBox_hilbert_curve.Size = new Size(W, H);
+            pictureBox_sierpinski_curve.Size = new Size(W, H);
             pictureBox15.Size = new Size(W, H);
             pictureBox16.Size = new Size(W, H);
             pictureBox17.Size = new Size(W, H);
@@ -206,8 +206,9 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_random_pixel_image.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             pictureBox_arrow.Location = new Point(x_st + dx * 5, y_st + dy * 1);
 
-            pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox_hilbert_curve.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_hilbert_curve.BackColor = Color.Pink;
+            pictureBox_sierpinski_curve.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox16.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox17.Location = new Point(x_st + dx * 4, y_st + dy * 2);
@@ -1903,6 +1904,206 @@ namespace vcs_Draw9_Example8_vcsh
 
         }
 
+        int hilbert_curve_depth = 2;
+        int sierpinski_curve_depth = 2;
+
+
+        private void timer_change_Tick(object sender, EventArgs e)
+        {
+            draw_hilbert_curve();
+            hilbert_curve_depth++;
+            if (hilbert_curve_depth > 6)
+                hilbert_curve_depth = 2;
+
+            draw_sierpinski_curve();
+            sierpinski_curve_depth++;
+            if (sierpinski_curve_depth > 6)
+                sierpinski_curve_depth = 2;
+        }
+
+        #region Hilbert Curve
+        private float LastX, LastY;
+        private Bitmap HilbertImage;
+
+        void draw_hilbert_curve()
+        {
+            Application.DoEvents();
+
+            // Get the parameters.
+            float total_length, start_x, start_y, start_length;
+
+            // See how big we can make the curve.
+            if (pictureBox_hilbert_curve.ClientSize.Height < pictureBox_hilbert_curve.ClientSize.Width)
+            {
+                total_length = (float)(0.9 * pictureBox_hilbert_curve.ClientSize.Height);
+            }
+            else
+            {
+                total_length = (float)(0.9 * pictureBox_hilbert_curve.ClientSize.Width);
+            }
+
+            start_x = (pictureBox_hilbert_curve.ClientSize.Width - total_length) / 2;
+            start_y = (pictureBox_hilbert_curve.ClientSize.Height - total_length) / 2;
+
+            // Compute the side length for this level.
+            start_length = (float)(total_length / (Math.Pow(2, hilbert_curve_depth) - 1));
+
+            HilbertImage = new Bitmap(pictureBox_hilbert_curve.ClientSize.Width, pictureBox_hilbert_curve.ClientSize.Height);
+            pictureBox_hilbert_curve.Image = HilbertImage;
+
+            using (Graphics gr = Graphics.FromImage(HilbertImage))
+            {
+                // Draw the curve.
+                gr.Clear(pictureBox_hilbert_curve.BackColor);
+                LastX = (int)start_x;
+                LastY = (int)start_y;
+                Hilbert(gr, hilbert_curve_depth, start_length, 0);
+            }
+        }
+
+        // Draw a Hilbert curve.
+        private void Hilbert(Graphics gr, int depth, float dx, float dy)
+        {
+            if (depth > 1) Hilbert(gr, depth - 1, dy, dx);
+            DrawRelative(gr, dx, dy);
+            if (depth > 1) Hilbert(gr, depth - 1, dx, dy);
+            DrawRelative(gr, dy, dx);
+            if (depth > 1) Hilbert(gr, depth - 1, dx, dy);
+            DrawRelative(gr, -dx, -dy);
+            if (depth > 1) Hilbert(gr, depth - 1, -dy, -dx);
+        }
+
+        // Draw the line (LastX, LastY)-(LastX + dx, LastY + dy) and
+        // update LastX = LastX + dx, LastY = LastY + dy.
+        private void DrawRelative(Graphics gr, float dx, float dy)
+        {
+            gr.DrawLine(Pens.Black, LastX, LastY, LastX + dx, LastY + dy);
+            LastX = LastX + dx;
+            LastY = LastY + dy;
+        }
+
+        #endregion Hilbert Curve
+
+
+
+        #region Sierpinski Curve
+        private Bitmap m_Bm;
+
+        void draw_sierpinski_curve()
+        {
+            Application.DoEvents();
+
+            // See if we should refresh as we draw.
+
+            m_Bm = new Bitmap(pictureBox_sierpinski_curve.ClientSize.Width, pictureBox_sierpinski_curve.ClientSize.Height);
+            pictureBox_sierpinski_curve.Image = m_Bm;
+
+            using (Graphics gr = Graphics.FromImage(m_Bm))
+            {
+                // Draw the curve.
+                gr.Clear(pictureBox_sierpinski_curve.BackColor);
+
+                float dx = (float)(m_Bm.Width / Math.Pow(2, sierpinski_curve_depth - 1) / 8);
+                float dy = (float)(m_Bm.Height / Math.Pow(2, sierpinski_curve_depth - 1) / 8);
+                Sierpinski(gr, sierpinski_curve_depth, dx, dy);
+            }
+
+            // Display the result.
+            pictureBox_sierpinski_curve.Refresh();
+        }
+
+        // Draw a Sierpinski curve.
+        private void Sierpinski(Graphics gr, int depth, float dx, float dy)
+        {
+            float x = 2 * dx;
+            float y = dy;
+
+            SierpA(gr, depth, dx, dy, ref x, ref y);
+            DrawRel(gr, ref x, ref y, dx, dy);
+            SierpB(gr, depth, dx, dy, ref x, ref y);
+            DrawRel(gr, ref x, ref y, -dx, dy);
+            SierpC(gr, depth, dx, dy, ref x, ref y);
+            DrawRel(gr, ref x, ref y, -dx, -dy);
+            SierpD(gr, depth, dx, dy, ref x, ref y);
+            DrawRel(gr, ref x, ref y, dx, -dy);
+
+            pictureBox_sierpinski_curve.Refresh();
+        }
+
+        // Draw right across the top.
+        private void SierpA(Graphics gr, float depth, float dx, float dy, ref float x, ref float y)
+        {
+            if (depth > 0)
+            {
+                depth--;
+
+                SierpA(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, dx, dy);
+                SierpB(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, 2 * dx, 0);
+                SierpD(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, dx, -dy);
+                SierpA(gr, depth, dx, dy, ref x, ref y);
+            }
+        }
+
+        // Draw down on the right.
+        private void SierpB(Graphics gr, float depth, float dx, float dy, ref float x, ref float y)
+        {
+            if (depth > 0)
+            {
+                depth--;
+                SierpB(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, -dx, dy);
+                SierpC(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, 0, 2 * dy);
+                SierpA(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, dx, dy);
+                SierpB(gr, depth, dx, dy, ref x, ref y);
+            }
+        }
+
+        // Draw left across the bottom.
+        private void SierpC(Graphics gr, float depth, float dx, float dy, ref float x, ref float y)
+        {
+            if (depth > 0)
+            {
+                depth--;
+                SierpC(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, -dx, -dy);
+                SierpD(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, -2 * dx, 0);
+                SierpB(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, -dx, dy);
+                SierpC(gr, depth, dx, dy, ref x, ref y);
+            }
+        }
+
+        // Draw up along the left.
+        private void SierpD(Graphics gr, float depth, float dx, float dy, ref float x, ref float y)
+        {
+            if (depth > 0)
+            {
+                depth--;
+                SierpD(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, dx, -dy);
+                SierpA(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, 0, -2 * dy);
+                SierpC(gr, depth, dx, dy, ref x, ref y);
+                DrawRel(gr, ref x, ref y, -dx, -dy);
+                SierpD(gr, depth, dx, dy, ref x, ref y);
+            }
+        }
+
+        // Draw a line between (x, y) and (x + dx, y + dy).
+        // Update x and y.
+        private void DrawRel(Graphics gr, ref float x, ref float y, float dx, float dy)
+        {
+            gr.DrawLine(Pens.Black, x, y, x + dx, y + dy);
+            x += dx;
+            y += dy;
+        }
+        #endregion Sierpinski Curve
 
 
 

@@ -684,12 +684,10 @@
             this.pictureBox_circle.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_circle.TabIndex = 67;
             this.pictureBox_circle.TabStop = false;
-            this.pictureBox_circle.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_circle_Paint);
             // 
             // timer_circle
             // 
             this.timer_circle.Enabled = true;
-            this.timer_circle.Interval = 3000;
             this.timer_circle.Tick += new System.EventHandler(this.timer_circle_Tick);
             // 
             // Form1
