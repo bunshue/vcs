@@ -35,6 +35,8 @@ namespace vcs_Draw9_Example7_vcsh
         int W = 230;
         int H = 230;
 
+        int fractal_num_points = 5000;
+
         float rotating_angle = 0;
 
         private const int Period = 21;
@@ -1389,6 +1391,11 @@ namespace vcs_Draw9_Example7_vcsh
             numericUpDown1.Value++;
             if (numericUpDown1.Value == 5)
                 numericUpDown1.Value = 0;
+
+            fractal_num_points += 1000;
+            if (fractal_num_points > 12000)
+                fractal_num_points = 5000;
+
             redraw_all();
         }
 
@@ -1413,6 +1420,9 @@ namespace vcs_Draw9_Example7_vcsh
 
             DrawGasket1();  //sierpinski_carpet
             DrawGasket2();  //sierpinski_triangle
+
+            draw_fractal1();
+            draw_fractal2();
 
             pictureBox22.Refresh();
         }
@@ -2149,6 +2159,235 @@ namespace vcs_Draw9_Example7_vcsh
         }
 
         // 畫箭頭 SP
-    
+
+
+        // 畫 Fractal 1 ST
+
+        // Draw the fractal.
+        void draw_fractal1()
+        {
+            // Generate the points.
+            int num_points = fractal_num_points;
+            Point[] points = new Point[num_points];
+            Point current_point = new Point(0, 0);
+            int prime = 7;
+            for (long i = 0; i < num_points; i++)
+            {
+                // Find the next prime.
+                while (!IsPrime(prime)) prime += 2;
+
+                // Use this prime.
+                switch (prime % 5)
+                {
+                    case 1:
+                        current_point.Y--;
+                        break;
+                    case 2:
+                        current_point.X++;
+                        break;
+                    case 3:
+                        current_point.Y++;
+                        break;
+                    case 4:
+                        current_point.X--;
+                        break;
+                }
+                points[i] = current_point;
+
+                // Move to the next possible prime.
+                prime += 2;
+            }
+
+            // Draw the points.
+            int width = pictureBox_fractal1.Width;
+            Bitmap bm = new Bitmap(width, width);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.Black);
+
+                // Get the largest and smallest coordinates.
+                var x_query =
+                    from Point point in points
+                    select point.X;
+                int[] xs = x_query.ToArray();
+                int xmin = xs.Min();
+                int xmax = xs.Max();
+                int wid = xmax - xmin;
+
+                var y_query =
+                    from Point point in points
+                    select point.Y;
+                int[] ys = y_query.ToArray();
+                int ymin = ys.Min();
+                int ymax = ys.Max();
+                int hgt = ymax - ymin;
+
+                float scale = width / Math.Max(wid, hgt);
+
+                // Scale and translate.
+                gr.TranslateTransform(-xmin, -ymin);
+                gr.ScaleTransform(scale, scale, MatrixOrder.Append);
+
+                using (Pen thin_pen = new Pen(Color.Red, 0))
+                {
+                    // Draw the lines.
+                    gr.DrawLines(thin_pen, points);
+
+                    // Draw the axes.
+                    thin_pen.Color = Color.Blue;
+                    gr.DrawLine(thin_pen, xmin, 0, xmax, 0);
+                    gr.DrawLine(thin_pen, 0, ymin, 0, ymax);
+                }
+            }
+
+            pictureBox_fractal1.Image = bm;
+        }
+
+        // Return true if the value is prime.
+        // For speed, asssume value > 2 and value is odd.
+        private bool IsPrime(long value)
+        {
+            long stop_at = (long)Math.Sqrt(value);
+            for (long factor = 3; factor <= stop_at; factor += 2)
+            {
+                if (value % factor == 0) return false;
+            }
+            return true;
+        }
+
+
+        // 畫 Fractal 1 SP
+
+
+        // 畫 Fractal 2 ST
+
+        // Draw the fractal.
+        void draw_fractal2()
+        {
+            // Generate the points.
+            int num_points = fractal_num_points;
+            Point[] points = new Point[num_points];
+            Dictionary<Point, int> hits = new Dictionary<Point, int>();
+            Point current_point = new Point(0, 0);
+            int prime = 7;
+            for (long i = 0; i < num_points; i++)
+            {
+                // Find the next prime.
+                while (!IsPrime(prime)) prime += 2;
+
+                // Use this prime.
+                switch (prime % 5)
+                {
+                    case 1:
+                        current_point.Y--;
+                        break;
+                    case 2:
+                        current_point.X++;
+                        break;
+                    case 3:
+                        current_point.Y++;
+                        break;
+                    case 4:
+                        current_point.X--;
+                        break;
+                }
+                points[i] = current_point;
+                int count = 0;
+                if (hits.ContainsKey(current_point))
+                    count = hits[current_point];
+                hits[current_point] = count + 1;
+
+                // Move to the next possible prime.
+                prime += 2;
+            }
+
+            // Draw the points.
+            int width = pictureBox_fractal2.Width;
+            Bitmap bm = new Bitmap(width, width);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.Black);
+
+                // Get the largest and smallest coordinates.
+                var x_query =
+                    from Point point in points
+                    select point.X;
+                int[] xs = x_query.ToArray();
+                int xmin = xs.Min();
+                int xmax = xs.Max();
+                int wid = xmax - xmin;
+
+                var y_query =
+                    from Point point in points
+                    select point.Y;
+                int[] ys = y_query.ToArray();
+                int ymin = ys.Min();
+                int ymax = ys.Max();
+                int hgt = ymax - ymin;
+
+                float scale = width / Math.Max(wid, hgt);
+
+                // Get the largest hit count.
+                int max_hit = hits.Values.ToArray().Max();
+
+                // Scale and translate.
+                gr.TranslateTransform(-xmin, -ymin);
+                gr.ScaleTransform(scale, scale, MatrixOrder.Append);
+
+                using (Pen thin_pen = new Pen(Color.Black, 0))
+                {
+                    // Draw the lines.
+                    for (int i = 1; i < num_points; i++)
+                    {
+                        // Set the pen color.
+                        thin_pen.Color = MapRainbowColor(hits[points[i]], 1, max_hit);
+                        gr.DrawLine(thin_pen, points[i - 1], points[i]);
+                    }
+
+                    // Draw the axes.
+                    thin_pen.Color = Color.Blue;
+                    gr.DrawLine(thin_pen, xmin, 0, xmax, 0);
+                    gr.DrawLine(thin_pen, 0, ymin, 0, ymax);
+                }
+            }
+            pictureBox_fractal2.Image = bm;
+        }
+
+        // Map a value to a rainbow color.
+        private Color MapRainbowColor(float value, float red_value, float blue_value)
+        {
+            // Convert into a value between 0 and 1023.
+            int int_value = (int)(1023 * (value - red_value) / (blue_value - red_value));
+
+            // Map different color bands.
+            if (int_value < 256)
+            {
+                // Red to yellow. (255, 0, 0) to (255, 255, 0).
+                return Color.FromArgb(255, int_value, 0);
+            }
+            else if (int_value < 512)
+            {
+                // Yellow to green. (255, 255, 0) to (0, 255, 0).
+                int_value -= 256;
+                return Color.FromArgb(255 - int_value, 255, 0);
+            }
+            else if (int_value < 768)
+            {
+                // Green to aqua. (0, 255, 0) to (0, 255, 255).
+                int_value -= 512;
+                return Color.FromArgb(0, 255, int_value);
+            }
+            else
+            {
+                // Aqua to blue. (0, 255, 255) to (0, 0, 255).
+                int_value -= 768;
+                return Color.FromArgb(0, 255 - int_value, 255);
+            }
+        }
+        // 畫 Fractal 2 SP
+
+
+
+
     }
 }
