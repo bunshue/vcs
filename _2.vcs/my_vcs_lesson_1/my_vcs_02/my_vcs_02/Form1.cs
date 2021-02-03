@@ -31,7 +31,7 @@ namespace my_vcs_02
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //if (textBox1.Text != 0)   ??
+            if (textBox1.Text.Length > 0)
             {
                 string[] files = Directory.GetFiles(textBox1.Text);
                 //MessageBox.Show("file numbers = " + files.Length);
@@ -40,9 +40,13 @@ namespace my_vcs_02
                 {
                     //MessageBox.Show("i = " + i + ", filename = " + files);
                     //MessageBox.Show("i = " + i);
-                    
+
                     textBox2.Lines = files;
                 }
+            }
+            else
+            {
+                richTextBox1.Text += "沒有路徑資料\n";
             }
         }
 
@@ -60,16 +64,6 @@ namespace my_vcs_02
             {
                 Directory.Delete(textBox3.Text);
             }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "CruuentSystemDir : " + System.Environment.CurrentDirectory + "\n";
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "CurrentDirectory : " + Application.StartupPath + "\n";
         }
 
         [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]

@@ -38,8 +38,6 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.SelectFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -122,26 +120,6 @@
             this.button4.Text = "DeleteFolder";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(565, 153);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(138, 33);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "GetCruuentSystemDir";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(720, 153);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(141, 33);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "GetCurrentDirectory";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -228,8 +206,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SelectFile);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox3);
@@ -257,8 +233,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button SelectFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
