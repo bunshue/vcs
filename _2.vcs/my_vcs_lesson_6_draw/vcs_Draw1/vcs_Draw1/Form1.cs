@@ -1211,6 +1211,40 @@ namespace vcs_Draw1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            DrawSmileImage(g);
+        }
+
+        private void DrawSmileImage(Graphics gr)
+        {
+            Rectangle rect;
+
+            rect = new Rectangle(10, 10, 80, 80);
+            gr.FillEllipse(Brushes.LightGreen, rect);
+            gr.DrawEllipse(Pens.Green, rect);
+
+            rect = new Rectangle(40, 40, 20, 30);
+            gr.FillEllipse(Brushes.LightBlue, rect);
+            gr.DrawEllipse(Pens.Blue, rect);
+
+            rect = new Rectangle(25, 30, 50, 50);
+            gr.DrawArc(Pens.Red, rect, 20, 140);
+
+            rect = new Rectangle(25, 25, 15, 20);
+            gr.FillEllipse(Brushes.White, rect);
+            gr.DrawEllipse(Pens.Black, rect);
+            rect = new Rectangle(30, 30, 10, 10);
+            gr.FillEllipse(Brushes.Black, rect);
+
+            rect = new Rectangle(60, 25, 15, 20);
+            gr.FillEllipse(Brushes.White, rect);
+            gr.DrawEllipse(Pens.Black, rect);
+            rect = new Rectangle(65, 30, 10, 10);
+            gr.FillEllipse(Brushes.Black, rect);
         }
 
         private void button21_Click(object sender, EventArgs e)
