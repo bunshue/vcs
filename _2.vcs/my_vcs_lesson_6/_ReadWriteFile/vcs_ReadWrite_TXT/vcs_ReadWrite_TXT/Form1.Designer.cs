@@ -48,6 +48,7 @@
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -261,11 +262,23 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(234, 304);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(105, 56);
+            this.button19.TabIndex = 20;
+            this.button19.Text = "TextReader開檔ReadLine";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 729);
+            this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
@@ -314,6 +327,7 @@
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }
 

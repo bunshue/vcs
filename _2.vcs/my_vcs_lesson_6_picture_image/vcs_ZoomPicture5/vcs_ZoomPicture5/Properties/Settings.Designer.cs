@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_rotate_flip.Properties {
+namespace vcs_ZoomPicture5.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

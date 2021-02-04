@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_rotate_flip
+namespace vcs_ZoomPicture5
 {
     static class Program
     {

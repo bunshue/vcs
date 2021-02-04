@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_draw_nonintersecting_star.Properties {
+namespace vcs_RotatePicture6.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

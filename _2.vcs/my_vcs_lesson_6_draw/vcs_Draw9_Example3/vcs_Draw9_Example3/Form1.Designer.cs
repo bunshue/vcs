@@ -121,14 +121,12 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 17;
+            this.button3.Text = "畫多角星形";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(704, 418);
@@ -686,9 +684,6 @@
             // 
             // picSamples
             // 
-            this.picSamples.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.picSamples.BackColor = System.Drawing.Color.Pink;
             this.picSamples.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picSamples.Location = new System.Drawing.Point(376, 439);

@@ -449,5 +449,25 @@ namespace vcs_ReadWrite_TXT
             File.WriteAllLines(filename2, output_lines.ToArray());
             richTextBox1.Text += "\n製作TXT檔\t" + filename2 + "\n";
         }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+            int i;
+
+            richTextBox1.Text += "\n檔案 : " + filename + "\t內容\n";
+            using (TextReader reader = new StreamReader(filename, Encoding.Default))
+            {
+                i = 0;
+                string line;
+                line = reader.ReadLine();
+                while (line != null)
+                {
+                    i++;
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + line + "\n";
+                    line = reader.ReadLine();
+                }
+            }
+        }
     }
 }

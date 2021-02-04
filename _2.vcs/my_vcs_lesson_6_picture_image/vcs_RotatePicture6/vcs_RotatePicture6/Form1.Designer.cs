@@ -1,4 +1,4 @@
-﻿namespace howto_rotate_flip
+﻿namespace vcs_RotatePicture6
 {
     partial class Form1
     {
@@ -52,7 +52,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::howto_rotate_flip.Properties.Resources.picture1;
+            this.pictureBox1.Image = global::vcs_RotatePicture6.Properties.Resources.picture1;
             this.pictureBox1.Location = new System.Drawing.Point(143, 11);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(305, 400);
@@ -285,7 +285,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "howto_rotate_flip";
+            this.Text = "vcs_RotatePicture6";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

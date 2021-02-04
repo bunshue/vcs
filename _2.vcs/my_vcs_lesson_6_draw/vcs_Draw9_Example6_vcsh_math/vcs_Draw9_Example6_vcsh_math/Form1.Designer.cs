@@ -45,7 +45,6 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -79,6 +78,12 @@
             this.label24 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDraw = new System.Windows.Forms.Button();
+            this.txtStdDev = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtMean = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -92,11 +97,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -256,15 +261,6 @@
             this.pictureBox13.Size = new System.Drawing.Size(100, 100);
             this.pictureBox13.TabIndex = 71;
             this.pictureBox13.TabStop = false;
-            // 
-            // pictureBox15
-            // 
-            this.pictureBox15.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox15.Location = new System.Drawing.Point(245, 240);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox15.TabIndex = 69;
-            this.pictureBox15.TabStop = false;
             // 
             // label15
             // 
@@ -581,12 +577,12 @@
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.txtYmin);
             this.groupBox1.Controls.Add(this.label20);
-            this.groupBox1.Location = new System.Drawing.Point(566, 423);
+            this.groupBox1.Location = new System.Drawing.Point(409, 387);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(223, 126);
             this.groupBox1.TabIndex = 105;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "三角函數";
             // 
             // button1
             // 
@@ -599,11 +595,72 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnDraw);
+            this.groupBox2.Controls.Add(this.txtStdDev);
+            this.groupBox2.Controls.Add(this.label25);
+            this.groupBox2.Controls.Add(this.txtMean);
+            this.groupBox2.Controls.Add(this.label26);
+            this.groupBox2.Location = new System.Drawing.Point(649, 387);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(223, 81);
+            this.groupBox2.TabIndex = 106;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "常態分佈";
+            // 
+            // btnDraw
+            // 
+            this.btnDraw.Location = new System.Drawing.Point(132, 36);
+            this.btnDraw.Name = "btnDraw";
+            this.btnDraw.Size = new System.Drawing.Size(75, 21);
+            this.btnDraw.TabIndex = 9;
+            this.btnDraw.Text = "Draw";
+            this.btnDraw.UseVisualStyleBackColor = true;
+            this.btnDraw.Click += new System.EventHandler(this.btnDraw_Click);
+            // 
+            // txtStdDev
+            // 
+            this.txtStdDev.Location = new System.Drawing.Point(75, 49);
+            this.txtStdDev.Name = "txtStdDev";
+            this.txtStdDev.Size = new System.Drawing.Size(43, 22);
+            this.txtStdDev.TabIndex = 8;
+            this.txtStdDev.Text = "0.5";
+            this.txtStdDev.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(20, 52);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(45, 12);
+            this.label25.TabIndex = 7;
+            this.label25.Text = "Std Dev:";
+            // 
+            // txtMean
+            // 
+            this.txtMean.Location = new System.Drawing.Point(75, 25);
+            this.txtMean.Name = "txtMean";
+            this.txtMean.Size = new System.Drawing.Size(43, 22);
+            this.txtMean.TabIndex = 6;
+            this.txtMean.Text = "0.0";
+            this.txtMean.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(20, 28);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(34, 12);
+            this.label26.TabIndex = 5;
+            this.label26.Text = "Mean:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 769);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox18);
             this.Controls.Add(this.pictureBox17);
@@ -626,7 +683,6 @@
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.pictureBox13);
-            this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox7);
@@ -657,12 +713,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -687,7 +744,6 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -721,6 +777,12 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnDraw;
+        private System.Windows.Forms.TextBox txtStdDev;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txtMean;
+        private System.Windows.Forms.Label label26;
     }
 }
 

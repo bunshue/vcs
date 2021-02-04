@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_draw_nonintersecting_star.Properties {
+namespace vcs_RotatePicture6.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace howto_draw_nonintersecting_star.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("howto_draw_nonintersecting_star.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_RotatePicture6.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,16 @@ namespace howto_draw_nonintersecting_star.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap picture1 {
+            get {
+                object obj = ResourceManager.GetObject("picture1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

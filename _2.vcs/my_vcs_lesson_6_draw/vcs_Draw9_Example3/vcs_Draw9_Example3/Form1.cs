@@ -51,7 +51,7 @@ namespace vcs_Draw9_Example3
             int dy;
 
             //button
-            x_st = 850;
+            x_st = 1350;
             y_st = 10;
             dx = 110;
             dy = 45;
@@ -120,6 +120,10 @@ namespace vcs_Draw9_Example3
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             ClientSize = new Size(button4.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         // Drawing objects.
@@ -476,9 +480,60 @@ namespace vcs_Draw9_Example3
         }
         #endregion 兩種星型
 
+        #region 畫多角星形
         private void button3_Click(object sender, EventArgs e)
         {
+            Bitmap bmp = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+
+            // Draw the snowflake.
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                Rectangle rect = new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height);
+
+                PointF[] pts = NonIntersectingStarPoints(7, rect);
+                g.DrawPolygon(Pens.Blue, pts);
+            }
+            pictureBox1.Image = bmp;
         }
+
+        // Return PointFs to define a non-intersecting star.
+        private PointF[] NonIntersectingStarPoints(int num_points, Rectangle bounds)
+        {
+            // Make room for the points.
+            PointF[] pts = new PointF[2 * num_points];
+
+            double rx1 = bounds.Width / 2;
+            double ry1 = bounds.Height / 2;
+            double rx2 = rx1 * 0.5;
+            double ry2 = ry1 * 0.5;
+            double cx = bounds.X + rx1;
+            double cy = bounds.Y + ry1;
+
+            // Start at the top.
+            double theta = -Math.PI / 2;
+            double dtheta = Math.PI / num_points;
+            for (int i = 0; i < 2 * num_points; i += 2)
+            {
+                pts[i] = new PointF(
+                    (float)(cx + rx1 * Math.Cos(theta)),
+                    (float)(cy + ry1 * Math.Sin(theta)));
+                theta += dtheta;
+
+                pts[i + 1] = new PointF(
+                    (float)(cx + rx2 * Math.Cos(theta)),
+                    (float)(cy + ry2 * Math.Sin(theta)));
+                theta += dtheta;
+            }
+
+            return pts;
+        }
+
+
+
+
+        #endregion 畫多角星形
 
         private void button4_Click(object sender, EventArgs e)
         {

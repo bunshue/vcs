@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace howto_rotate_flip
+namespace vcs_RotatePicture6
 {
     public partial class Form1 : Form
     {

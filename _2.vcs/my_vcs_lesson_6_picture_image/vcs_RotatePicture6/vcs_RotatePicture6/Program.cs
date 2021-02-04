@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_draw_nonintersecting_star
+namespace vcs_RotatePicture6
 {
     static class Program
     {

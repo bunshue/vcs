@@ -199,57 +199,41 @@ namespace vcs_Draw3
             int dy;
 
             //button
-            x_st = 1550;
+            x_st = 1810;
             y_st = 10;
             dx = 120;
             dy = 50;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_exit.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            richTextBox1.Location = new Point(x_st + dx * 0 - 100, y_st + dy * 12);
+            richTextBox1.Size = new Size(200, 450);
 
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox1.Size = new Size(480, 360);
+            pictureBox1.Location = new Point(1000, 20);
+            pictureBox1.BackColor = Color.LightGreen;
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            pictureBox2.Size = new Size(480, 360);
+            pictureBox2.Location = new Point(1000, 20+360+10);
+            pictureBox2.BackColor = Color.LightBlue;
 
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-
-            button24.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 50);
-
-            //pictureBox1.Location = new Point(10, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int W = 300;
             int H = 300;
             x_st = 10;
-            y_st = 610;
+            y_st = 770;
             dx = 350;
 
             pictureBox_random.Size = new Size(W, H);
@@ -263,8 +247,9 @@ namespace vcs_Draw3
 
             pictureBox_gear.Size = new Size(W, H);
             pictureBox_gear.Location = new Point(x_st + dx * 2, y_st);
-            trackBar1.Location = new Point(x_st + dx * 2, y_st - 50);
-            lb_fps.Location = new Point(x_st + dx * 2 + 280, y_st - 50);
+            trackBar1.Location = new Point(x_st + dx * 2, y_st - 20);
+            lb_fps.Location = new Point(x_st + dx * 2 + 280, y_st - 10);
+            lb_fps.Text = trackBar1.Value.ToString();
 
             pictureBox_circle.Size = new Size(W, H);
             pictureBox_circle.Location = new Point(x_st + dx * 3, y_st);
@@ -339,8 +324,6 @@ namespace vcs_Draw3
                 timer6.Enabled = false;
                 richTextBox1.Text += "SP\n";
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -422,9 +405,9 @@ namespace vcs_Draw3
                 timer7.Enabled = true;
                 richTextBox1.Text += "ST\n";
 
-                pictureBox2.Width = 640;
-                pictureBox2.Height = 480;
-                pictureBox2.Location = new Point(400, 300);
+                //pictureBox2.Width = 480;
+                //pictureBox2.Height = 360;
+                //pictureBox2.Location = new Point(400, 300);
 
                 //create Bitmap
                 bmp = null;
@@ -529,86 +512,6 @@ namespace vcs_Draw3
                 Gr.FillRectangle(brush, x, y, width, height);
             }
             Refresh();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -1566,19 +1469,15 @@ namespace vcs_Draw3
             }
         }
 
-        double angle = 20;
+        double angle = 12;
         private void timer_circle_Tick(object sender, EventArgs e)
         {
-            richTextBox1.Text += "A";
-
             draw_circles();
-            //this.pictureBox_circle.Refresh();
             angle++;
         }
 
         void draw_circles()
         {
-            richTextBox1.Text += "angle = " + angle.ToString() + " ";
             int w = pictureBox_circle.Width;
             int h = pictureBox_circle.Height;
 
@@ -1597,13 +1496,10 @@ namespace vcs_Draw3
             int radius = 10;
             Point pt = new Point();
 
-            richTextBox1.Text += "r =" + r.ToString() + " ";
-
-
             double i;
             int r2 = r;
             //richTextBox1.Text += "angle = " + angle.ToString() + " ";
-            for (i = 0; i < angle; i++)
+            for (i = 12; i < angle; i++)
             {
                 if (i == 0)
                 {
@@ -1621,8 +1517,10 @@ namespace vcs_Draw3
                 FillCircle(g, pt, radius, Color.Red);
             }
             pictureBox_circle.Image = bitmap1;
-            if (angle == 50)
-                timer_circle.Enabled = false;
+            if (angle == 100)
+            {
+                angle = 12;
+            }
             //richTextBox1.Text += "\n";
             /*
             using (Pen pen = new Pen(Color.Black, 0))

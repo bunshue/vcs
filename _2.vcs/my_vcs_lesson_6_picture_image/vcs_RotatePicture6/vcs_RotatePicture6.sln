@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_rotate_flip", "howto_rotate_flip.csproj", "{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_RotatePicture6", "vcs_RotatePicture6\vcs_RotatePicture6.csproj", "{70CF2FB6-30B3-4D8A-A61E-2498D4A11913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
