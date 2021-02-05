@@ -369,7 +369,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(320, 40);
             this.button36.TabIndex = 44;
-            this.button36.Text = "1234.5678小數點後1位";
+            this.button36.Text = "1234.5678小數點後2位";
             this.button36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
