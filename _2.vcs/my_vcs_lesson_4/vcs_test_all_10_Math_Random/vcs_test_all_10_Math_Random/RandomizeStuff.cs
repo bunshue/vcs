@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_DrawB_Matrix
+namespace vcs_test_all_10_Math_Random
 {
     public static class RandomizeStuff
     {
         // Randomize a 2D array.
-        public static void Randomize<T>(this T[,] values)
+        public static void Randomize2<T>(this T[,] values)
         {
             // Get the dimensions.
             int num_rows = values.GetUpperBound(0) + 1;

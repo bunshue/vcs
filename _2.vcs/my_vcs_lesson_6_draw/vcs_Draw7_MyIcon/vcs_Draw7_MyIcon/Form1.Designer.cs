@@ -692,7 +692,6 @@
             this.bt7.Name = "bt7";
             this.bt7.Size = new System.Drawing.Size(60, 60);
             this.bt7.TabIndex = 58;
-            this.bt7.Text = "Exit";
             this.bt7.UseVisualStyleBackColor = true;
             this.bt7.Click += new System.EventHandler(this.bt7_Click);
             // 

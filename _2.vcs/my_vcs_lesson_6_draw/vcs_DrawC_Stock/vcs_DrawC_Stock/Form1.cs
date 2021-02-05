@@ -52,7 +52,7 @@ namespace vcs_DrawC_Stock
             Times.Add(DateTime.Now);
 
             // Redraw.
-            picGraph.Refresh();
+            pictureBox1.Refresh();
         }
 
         // Get the stock price.
@@ -63,19 +63,19 @@ namespace vcs_DrawC_Stock
         }
 
         // Draw the graph.
-        private void picGraph_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(picGraph.BackColor);
+            e.Graphics.Clear(pictureBox1.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            if (Times.Count == 0) return;
+            if (Times.Count == 0)
+                return;
 
             // Define the graph area.
             GraphXmin = 80;
-            GraphXmax = picGraph.ClientSize.Width - 10;
+            GraphXmax = pictureBox1.ClientSize.Width - 10;
             GraphYmin = 40;
-            GraphYmax = picGraph.ClientSize.Height - 80;
-            Rectangle graph_area = new Rectangle(
-                GraphXmin, GraphYmin, GraphXmax - GraphXmin, GraphYmax - GraphYmin);
+            GraphYmax = pictureBox1.ClientSize.Height - 80;
+            Rectangle graph_area = new Rectangle(GraphXmin, GraphYmin, GraphXmax - GraphXmin, GraphYmax - GraphYmin);
 
             // Get bounds.
             GetBounds();
@@ -103,7 +103,8 @@ namespace vcs_DrawC_Stock
             float ymin = Prices.Min(pt => pt.Y);
             float ymax = Prices.Max(pt => pt.Y);
             float ydiff = 1.2f * (ymax - ymin);
-            if (ydiff < 20) ydiff = 20;
+            if (ydiff < 20)
+                ydiff = 20;
             float ymid = (ymin + ymax) / 2f;
             Wymin = ymid - ydiff / 2f;
             Wymax = Wymin + ydiff;
@@ -130,10 +131,8 @@ namespace vcs_DrawC_Stock
                 {
                     string_format.Alignment = StringAlignment.Center;
                     string_format.LineAlignment = StringAlignment.Center;
-                    Point title_center = new Point(picGraph.ClientSize.Width / 2, 20);
-                    gr.DrawString(Symbol,
-                        title_font, Brushes.Blue,
-                        title_center, string_format);
+                    Point title_center = new Point(pictureBox1.ClientSize.Width / 2, 20);
+                    gr.DrawString(Symbol, title_font, Brushes.Blue, title_center, string_format);
                 }
             }
         }
@@ -210,9 +209,7 @@ namespace vcs_DrawC_Stock
                         // Label.
                         PointF[] label_point = { new PointF(0, y) };
                         graph_matrix.TransformPoints(label_point);
-                        gr.DrawString(y.ToString("C3"), label_font,
-                            Brushes.Black, GraphXmin - 10, label_point[0].Y,
-                            label_format);
+                        gr.DrawString(y.ToString("C3"), label_font, Brushes.Black, GraphXmin - 10, label_point[0].Y, label_format);
                     }
                 }
 
@@ -305,7 +302,7 @@ namespace vcs_DrawC_Stock
                     RectangleF xlabel_rect = new RectangleF(
                         GraphXmin, GraphYmax,
                         GraphXmax - GraphXmin,
-                        picGraph.ClientSize.Height - GraphYmax);
+                        pictureBox1.ClientSize.Height - GraphYmax);
                     gr.DrawString("Time", axis_font,
                         Brushes.Green, xlabel_rect, xlabel_format);
                 }
@@ -343,7 +340,7 @@ namespace vcs_DrawC_Stock
 
         // If the mouse is hovering over a data point,
         // set the PictureBox's tooltip.
-        private void picGraph_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (TransformedValues == null) return;
 
@@ -360,9 +357,9 @@ namespace vcs_DrawC_Stock
             }
 
             // Set the new tool tip.
-            if (tipData.GetToolTip(picGraph) != tip)
+            if (tipData.GetToolTip(pictureBox1) != tip)
             {
-                tipData.SetToolTip(picGraph, tip);
+                tipData.SetToolTip(pictureBox1, tip);
             }
         }
 

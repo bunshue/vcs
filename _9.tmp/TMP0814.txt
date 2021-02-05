@@ -1,19 +1,5 @@
 
 
-VCS外國範例
-http://www.java2s.com/Code/CSharp/CatalogCSharp.htm
-
-
-
-        public Form1()
-        {
-            InitializeComponent(); 
-            this.DoubleBuffered = true;//避免闪烁  方法一
-        }
-
-
-
-
 
 YST	BT.709	HLG
 1	19	30
@@ -68,21 +54,6 @@ data_out[i] = YST15 + YSLP15 * (data_in[i] - 208) / 64;
 
 
 Yst15 + Yslp15 × (data - 208) / 64
-
-
-
-
-
-
-
-
-買滷包袋
-
-帶PC電源線
-裝樂高積木的小袋子
-束線帶
-
-
 
 
 

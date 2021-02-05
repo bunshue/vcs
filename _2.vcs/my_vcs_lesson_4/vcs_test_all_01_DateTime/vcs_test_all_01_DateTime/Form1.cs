@@ -153,6 +153,7 @@ namespace vcs_test_all_01_DateTime
             label3.Location = new Point(x_st + dx * 4, y_st + dy * 16);
             label4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 16);
 
+            richTextBox1.Size = new Size(520, 800);
             //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -190,6 +191,32 @@ namespace vcs_test_all_01_DateTime
 
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //時間資料範例
+            //DateTime dt = new DateTime(2006, 3, 11);	//年月日
+            DateTime dt = new DateTime(2006, 3, 11, 9, 15, 10, 20);	//年月日時分秒毫秒
+
+            richTextBox1.Text += "完整日期： " + dt.ToString("D") + "\n";
+            richTextBox1.Text += "簡短日期： " + dt.ToString("d") + "\n";
+            richTextBox1.Text += "完整日期及時間： " + dt.ToString("F") + "\n";
+            richTextBox1.Text += "一般日期： " + dt.ToString("G") + "\n";
+            richTextBox1.Text += "月日格式： " + dt.ToString("M") + "\n";
+            richTextBox1.Text += "完整時間： " + dt.ToString("T") + "\n";
+            richTextBox1.Text += "簡短時間： " + dt.ToString("t") + "\n";
+            richTextBox1.Text += "年月格式： " + dt.ToString("Y") + "\n";
+
+            //時間資料範例
+            richTextBox1.Text += "完整日期： " + DateTime.Now.ToString("D") + "\n";
+            richTextBox1.Text += "簡短日期： " + DateTime.Now.ToString("d") + "\n";
+            richTextBox1.Text += "完整日期及時間： " + DateTime.Now.ToString("F") + "\n";
+            richTextBox1.Text += "一般日期： " + DateTime.Now.ToString("G") + "\n";
+            richTextBox1.Text += "月日格式： " + DateTime.Now.ToString("M") + "\n";
+            richTextBox1.Text += "完整時間： " + DateTime.Now.ToString("T") + "\n";
+            richTextBox1.Text += "簡短時間： " + DateTime.Now.ToString("t") + "\n";
+            richTextBox1.Text += "年月格式： " + DateTime.Now.ToString("Y") + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1573,6 +1600,7 @@ new System.Globalization.ChineseLunisolarCalendar();
             richTextBox1.Text += "現在時間 + 1天13時42分59秒 = " + EventDate.ToString() + "\n";
 
         }
+
     }
 }
 

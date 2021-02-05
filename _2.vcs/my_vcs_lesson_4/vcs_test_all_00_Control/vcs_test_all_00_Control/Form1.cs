@@ -46,6 +46,9 @@ namespace vcs_test_all_00_Control
             // Give this button's image a transparent background.
             MakeButtonTransparent(button35);
 
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
         }
 
