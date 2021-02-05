@@ -21,8 +21,8 @@ namespace vcs_Chart3
         public class RealtimeChart
         {
             private Chart chart1 = null;
-            private int chartWidth = 480;
-            private int chartHeight = 350;
+            private int chartWidth = 640;
+            private int chartHeight = 480;
             private string nameAxisX = "X軸標題";
             private string nameAxisY = "Y軸標題";
 
@@ -40,11 +40,11 @@ namespace vcs_Chart3
                 chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
                 chart1.BorderlineWidth = 2;
                 chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-                chart1.Location = new System.Drawing.Point(10, 10);
+                chart1.Location = new System.Drawing.Point(20, 20);
                 chart1.Name = "chart1";
                 chart1.Size = new System.Drawing.Size(chartWidth, chartHeight);
                 chart1.TabIndex = 1;
-                chart1.Dock = System.Windows.Forms.DockStyle.Fill;
+                chart1.Dock = System.Windows.Forms.DockStyle.None;
 
                 ctArea.Area3DStyle.Inclination = 15;
                 ctArea.Area3DStyle.IsClustered = true;
@@ -105,7 +105,6 @@ namespace vcs_Chart3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Controls.Add(chart1);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -144,6 +143,16 @@ namespace vcs_Chart3
 
             // Redraw chart
             chart1.Invalidate();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Controls.Add(chart1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Controls.Remove(chart1);
         }
 
 

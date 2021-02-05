@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.bt_exit = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox_ransom_note = new System.Windows.Forms.RichTextBox();
@@ -97,23 +96,12 @@
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
-            // bt_exit
-            // 
-            this.bt_exit.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(1189, 432);
-            this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(100, 35);
-            this.bt_exit.TabIndex = 57;
-            this.bt_exit.Text = "Exit";
-            this.bt_exit.UseVisualStyleBackColor = true;
-            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
-            // 
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(1188, 391);
+            this.bt_save.Location = new System.Drawing.Point(1229, 391);
             this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(100, 35);
+            this.bt_save.Size = new System.Drawing.Size(59, 35);
             this.bt_save.TabIndex = 56;
             this.bt_save.Text = "Save";
             this.bt_save.UseVisualStyleBackColor = true;
@@ -178,7 +166,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(1178, 4);
+            this.label1.Location = new System.Drawing.Point(1178, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 21);
             this.label1.TabIndex = 63;
@@ -186,7 +174,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(1229, 4);
+            this.numericUpDown1.Location = new System.Drawing.Point(1229, 9);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             18,
             0,
@@ -449,7 +437,6 @@
             this.Controls.Add(this.richTextBox_ransom_note_result);
             this.Controls.Add(this.pictureBox_ransom_note);
             this.Controls.Add(this.richTextBox_ransom_note);
-            this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -490,7 +477,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox_ransom_note;

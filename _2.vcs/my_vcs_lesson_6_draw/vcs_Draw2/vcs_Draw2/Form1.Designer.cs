@@ -63,7 +63,6 @@
             this.button18 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
-            this.bt_exit = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
@@ -454,17 +453,6 @@
             this.bt_save.UseVisualStyleBackColor = true;
             this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
             // 
-            // bt_exit
-            // 
-            this.bt_exit.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(994, 449);
-            this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(102, 42);
-            this.bt_exit.TabIndex = 48;
-            this.bt_exit.Text = "Exit";
-            this.bt_exit.UseVisualStyleBackColor = true;
-            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
-            // 
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -601,7 +589,6 @@
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
-            this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
@@ -674,7 +661,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_save;
-        private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_draw2;
         private System.Windows.Forms.Button bt_draw1;
         private System.Windows.Forms.Button button20;

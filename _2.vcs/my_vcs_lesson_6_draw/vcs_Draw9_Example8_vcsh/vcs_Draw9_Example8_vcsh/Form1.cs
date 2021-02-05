@@ -90,7 +90,6 @@ namespace vcs_Draw9_Example8_vcsh
         };
         // 畫派圖，可以偵測位置 SP
 
-
         public Form1()
         {
             InitializeComponent();
@@ -148,6 +147,7 @@ namespace vcs_Draw9_Example8_vcsh
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
         }
 
         void show_item_location()
@@ -224,17 +224,52 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_rainbow.Location = new Point(x_st + dx * 5, y_st + dy * 3);
             groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 3 + 180);
 
-            bt_save.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            bt_exit.Location = new Point(x_st + dx * 6 + 120, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 50);
+            bt_save.Location = new Point(x_st + dx * 6 + 225, y_st + dy * 0 + 50);
 
-            richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
+            richTextBox1.Location = new Point(x_st + dx * 6 + 225-100, y_st + dy * 0 + 50+50);
+
+            //richTextBox1.Size = new Size(bt_exit.Right - richTextBox1.Location.X, this.Height - richTextBox1.Location.Y - 25);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //ClientSize = new Size(bt_exit.Right + 10, richTextBox1.Bottom + 80);    //自動表單邊界
 
             pictureBox_color_wheel1.BackColor = Color.Red;
             pictureBox_color_wheel2.BackColor = Color.Green;
+
+            //最大化螢幕
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            //bt_exit_setup();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         void DrawHistogram()
@@ -328,11 +363,6 @@ namespace vcs_Draw9_Example8_vcsh
         private void bt_save_Click(object sender, EventArgs e)
         {
             save_image_to_drive();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
