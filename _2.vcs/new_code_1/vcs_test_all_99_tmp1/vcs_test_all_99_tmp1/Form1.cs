@@ -13,8 +13,6 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 
-using System.Collections;   //for IEnumerable
-
 using System.Net.NetworkInformation;    //for Ping & PingReply
 
 namespace vcs_test_all_99_tmp1
@@ -77,10 +75,8 @@ namespace vcs_test_all_99_tmp1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
         }
 
         private void richTextBox1_MouseDown(object sender, MouseEventArgs e)
@@ -110,12 +106,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //列出全球時區
-            // Load the timezone information.
-            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
-            {
-                richTextBox1.Text += info + "\n";
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -813,41 +803,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button29_Click(object sender, EventArgs e)
         {
-            //取得系統的時區資訊
-            get_system_time_zone();
-        }
 
-        void get_system_time_zone()
-        {
-            // Initialize the time zone lists.
-            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
-            {
-                comboBox1.Items.Add(info);
-                richTextBox1.Text += info + "\n";
-            }
-
-            // Select a default value
-            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
-
-            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
-            string name1 = zone1.DisplayName;
-            richTextBox1.Text += "name1 = " + name1 + "\n";
-
-
-        }
-
-        // Select an item containing the target string.
-        private object FindItemContaining(IEnumerable items, string target)
-        {
-            foreach (object item in items)
-            {
-                if (item.ToString().Contains(target))
-                {
-                    return item;
-                }
-            }
-            // Return null;
-            return null;
         }
 
 

@@ -102,10 +102,20 @@
             this.btnGreen = new System.Windows.Forms.Button();
             this.btnBlue = new System.Windows.Forms.Button();
             this.btnPink = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.txtResult = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtY = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtX = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnCalculate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -902,11 +912,101 @@
             this.btnPink.UseVisualStyleBackColor = true;
             this.btnPink.Click += new System.EventHandler(this.button_color);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.richTextBox2);
+            this.groupBox5.Controls.Add(this.txtResult);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.txtY);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.txtX);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.btnCalculate);
+            this.groupBox5.Location = new System.Drawing.Point(12, 665);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(637, 281);
+            this.groupBox5.TabIndex = 70;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "try-catch-finally";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(280, 21);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(342, 254);
+            this.richTextBox2.TabIndex = 14;
+            this.richTextBox2.Text = "";
+            // 
+            // txtResult
+            // 
+            this.txtResult.Location = new System.Drawing.Point(94, 156);
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.Size = new System.Drawing.Size(124, 22);
+            this.txtResult.TabIndex = 13;
+            this.txtResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(59, 159);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(27, 12);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "X/Y:";
+            // 
+            // txtY
+            // 
+            this.txtY.Location = new System.Drawing.Point(187, 83);
+            this.txtY.Name = "txtY";
+            this.txtY.Size = new System.Drawing.Size(62, 22);
+            this.txtY.TabIndex = 11;
+            this.txtY.Text = "0";
+            this.txtY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(164, 86);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(16, 12);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Y:";
+            // 
+            // txtX
+            // 
+            this.txtX.Location = new System.Drawing.Point(50, 83);
+            this.txtX.Name = "txtX";
+            this.txtX.Size = new System.Drawing.Size(62, 22);
+            this.txtX.TabIndex = 9;
+            this.txtX.Text = "ten";
+            this.txtX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(27, 86);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(16, 12);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "X:";
+            // 
+            // btnCalculate
+            // 
+            this.btnCalculate.Location = new System.Drawing.Point(101, 117);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(75, 21);
+            this.btnCalculate.TabIndex = 7;
+            this.btnCalculate.Text = "Calculate";
+            this.btnCalculate.UseVisualStyleBackColor = true;
+            this.btnCalculate.Click += new System.EventHandler(this.btnCalculate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1392, 644);
+            this.ClientSize = new System.Drawing.Size(1392, 958);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lb_symbols_3);
@@ -976,6 +1076,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1057,6 +1159,15 @@
         private System.Windows.Forms.Button btnGreen;
         private System.Windows.Forms.Button btnBlue;
         private System.Windows.Forms.Button btnPink;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TextBox txtResult;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtY;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtX;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnCalculate;
     }
 }
 

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Globalization; //for CultureInfo   //for 民國記年 農曆
 
+using System.Collections;   //for IEnumerable
+
 namespace vcs_test_all_01_DateTime
 {
     public partial class Form1 : Form
@@ -121,6 +123,7 @@ namespace vcs_test_all_01_DateTime
             button49.Location = new Point(x_st + dx * 3, y_st + dy * 4);
             button50.Location = new Point(x_st + dx * 3, y_st + dy * 5);
             button51.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            comboBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             /*
             button52.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             button53.Location = new Point(x_st + dx * 3, y_st + dy * 8);
@@ -1238,6 +1241,12 @@ namespace vcs_test_all_01_DateTime
 
         private void button45_Click(object sender, EventArgs e)
         {
+            //列出全球時區
+            // Load the timezone information.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                richTextBox1.Text += info + "\n";
+            }
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -1487,6 +1496,39 @@ new System.Globalization.ChineseLunisolarCalendar();
 
         private void button51_Click(object sender, EventArgs e)
         {
+            //取得系統的時區資訊
+            get_system_time_zone();
+        }
+
+        void get_system_time_zone()
+        {
+            // Initialize the time zone lists.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                comboBox1.Items.Add(info);
+                richTextBox1.Text += info + "\n";
+            }
+
+            // Select a default value
+            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
+
+            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
+            string name1 = zone1.DisplayName;
+            richTextBox1.Text += "name1 = " + name1 + "\n";
+        }
+
+        // Select an item containing the target string.
+        private object FindItemContaining(IEnumerable items, string target)
+        {
+            foreach (object item in items)
+            {
+                if (item.ToString().Contains(target))
+                {
+                    return item;
+                }
+            }
+            // Return null;
+            return null;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

@@ -158,6 +158,8 @@ namespace vcs_test_all_03_Syntax
             label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
             label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
 
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12+20);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -1193,6 +1195,40 @@ namespace vcs_test_all_03_Syntax
         {
             average = (a + b + c) / (float)3;
             product = a * b * c;
+        }
+
+
+        // Perform the calculation.
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            // Clear the result (in case the calculation fails).
+            txtResult.Clear();
+
+            try
+            {
+                // Perform the operations that might fail.
+                int x = int.Parse(txtX.Text);
+                int y = int.Parse(txtY.Text);
+                float result = x / y;
+                txtResult.Text = result.ToString();
+            }
+            catch (FormatException)
+            {
+                // A formatting error occurred.
+                // Report the error to the user.
+                richTextBox2.Text += "數值錯誤\n";
+            }
+            catch (Exception ex)
+            {
+                // Some other error occurred.
+                // Report the error to the user.
+                richTextBox2.Text += "計算錯誤\t原因 : " + ex + "\n";
+                richTextBox2.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
+            }
+            finally
+            {
+                richTextBox2.Text += "計算結束\n";
+            }
         }
 
     }

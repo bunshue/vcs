@@ -23,7 +23,30 @@ namespace my_vcs_03_comport
             serialPort1.PortName = textBox1.Text;
             serialPort1.BaudRate = int.Parse(textBox2.Text);
 
+            //法一 : 直接連線
             serialPort1.Open();
+
+            /*
+            //法二 : 使用try-catch-finally連線
+            //serialPort1.Open(); //原本是這一行，改成以下16行。
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort1.Open();
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+                if (serialPort1.IsOpen)
+                    MessageBox.Show("已經連上" + serialPort1.PortName);
+                else
+                    MessageBox.Show("連結Comport失敗");
+            }
+            */
+
             if (serialPort1.IsOpen)
             {
                 button1.Enabled = false;

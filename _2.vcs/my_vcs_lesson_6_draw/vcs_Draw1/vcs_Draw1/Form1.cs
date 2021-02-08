@@ -1611,10 +1611,17 @@ namespace vcs_Draw1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            int x_st = 1000;
+            int y_st = 100;
+
+            Graphics g = e.Graphics; //創建畫板,這裡的畫板是由Form提供的.
+            Pen p = new Pen(Color.Blue, 2);//定義了一個藍色,寬度為的畫筆
+            g.DrawLine(p, x_st + 10, y_st + 10, x_st + 110, y_st + 110);//在畫板上畫直線,起始坐標為(10,10),終點坐標為(110,110)   //平移 (1000,100)
+            g.DrawRectangle(p, x_st + 10, y_st + 10, 100, 100);//在畫板上畫矩形,起始坐標為(10,10),寬為100, 高為100
+            g.DrawEllipse(p, x_st + 10, y_st + 10, 100, 100);//在畫板上畫橢圓,起始坐標為(10,10),外接矩形的寬為100, 高為100
+
             // Make a rectangle.
-            Rectangle rect1 = new Rectangle(20, 20,
-                this.ClientSize.Width - 40,
-                this.ClientSize.Height - 40);
+            Rectangle rect1 = new Rectangle(20, 20, this.ClientSize.Width - 40, this.ClientSize.Height - 40);
 
             // Convert to RectangleF.
             RectangleF rectf = rect1;
@@ -1630,15 +1637,12 @@ namespace vcs_Draw1
 
                 the_pen.Color = Color.Lime;
                 the_pen.Width = 10;
-                e.Graphics.DrawRectangle(the_pen,
-                    rectf.X, rectf.Y, rectf.Width, rectf.Height);
+                e.Graphics.DrawRectangle(the_pen, rectf.X, rectf.Y, rectf.Width, rectf.Height);
 
                 the_pen.Color = Color.Blue;
                 the_pen.Width = 1;
                 e.Graphics.DrawRectangle(the_pen, rect2);
             }
-
-
 
             //表單底部畫字 ST
             // Transform.
@@ -1646,8 +1650,8 @@ namespace vcs_Draw1
             e.Graphics.RotateTransform(25, MatrixOrder.Append);
             e.Graphics.TranslateTransform(80, 30, MatrixOrder.Append);
 
-            int x_st = 260;
-            int y_st = 0;
+            x_st = 260;
+            y_st = 0;
             // Make a font.
             using (Font the_font = new Font("Times New Roman", 40, FontStyle.Regular, GraphicsUnit.Pixel))
             {
@@ -1666,7 +1670,6 @@ namespace vcs_Draw1
                 e.Graphics.DrawString(the_text, the_font, Brushes.Brown, x_st, y_st);
             }
             //表單底部畫字 SP
-
         }
 
         // Draw samples.

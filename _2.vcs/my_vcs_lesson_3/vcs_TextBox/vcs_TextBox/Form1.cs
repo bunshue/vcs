@@ -19,17 +19,74 @@ namespace vcs_TextBox
         // Prepare the TextBox.
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
+
             // Register the TextChanged event handler.
-            textBox1.TextChanged += textBox1_TextChanged;
-            textBox1.Multiline = true;
-            textBox1.ScrollBars = ScrollBars.None;
+            textBox2.TextChanged += textBox2_TextChanged;
+            textBox2.Multiline = true;
+            textBox2.ScrollBars = ScrollBars.None;
 
             // Make the TextBox fit its initial text.
-            AutoSizeTextBox(textBox1);
+            AutoSizeTextBox(textBox2);
         }
 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length <= 0)
+            {
+                label2.Text = "未輸入數字";
+            }
+            else
+            {
+                string input = textBox1.Text; ;
+                double output = 0;
+                byte value = 0;
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if ((input[i] >= (Char)48 && input[i] <= (Char)57))
+                    {
+                        value = (byte)(input[i] - 48);
+
+                    }
+                    else if ((input[i] >= 'A') && (input[i] <= 'F'))
+                    {
+                        value = (byte)(input[i] - 'A' + 10);
+                    }
+                    else if ((input[i] >= 'a') && (input[i] <= 'f'))
+                    {
+                        value = (byte)(input[i] - 'a' + 10);
+                    }
+                    output = output * 16 + value;
+                    //MessageBox.Show("data : " + input[i] + " value : " + value);
+                }
+                label2.Text = "結果：" + output.ToString();
+            }
+        }
+
+
+
+
+
+
+
         // Make the TextBox fit its new contents.
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
             AutoSizeTextBox(sender as TextBox);
         }
@@ -43,5 +100,7 @@ namespace vcs_TextBox
             txt.ClientSize =
                 new Size(size.Width + x_margin, size.Height + y_margin);
         }
+
+
     }
 }

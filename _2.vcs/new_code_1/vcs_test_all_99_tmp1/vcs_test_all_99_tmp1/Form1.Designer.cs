@@ -63,7 +63,6 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -294,7 +293,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(150, 50);
             this.button0.TabIndex = 73;
-            this.button0.Text = "列出全球時區";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -413,25 +411,14 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(150, 50);
             this.button29.TabIndex = 84;
-            this.button29.Text = "取得系統的時區資訊";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(324, 641);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 27);
-            this.comboBox1.TabIndex = 85;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 700);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -510,7 +497,6 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
