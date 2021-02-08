@@ -13,7 +13,7 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 
-using System.Net.NetworkInformation;    //for Ping & PingReply
+//HttpUtility
 
 namespace vcs_test_all_99_tmp1
 {
@@ -106,6 +106,20 @@ namespace vcs_test_all_99_tmp1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            string str1 = "https://ja.wikipedia.org/wiki/和 製 英 語";
+
+            richTextBox1.Text += "原字串(a)\t\t" + str1 + "\n";
+            richTextBox1.Text += "原字串空白轉nbsp(b)\t" + str1.SpaceToNbsp() + "\n";
+
+            string str2 = str1.UrlEncode();
+
+            richTextBox1.Text += "原字串特殊符號編碼(c)\t" + str2 + "\n";
+
+            richTextBox1.Text += "(c)再解碼\t\t" + str2.UrlDecode() + "\n";
+
+            richTextBox1.Text += "(b)目前無法解碼\n";
+            richTextBox1.Text += "\n";
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -152,60 +166,6 @@ namespace vcs_test_all_99_tmp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //利用檔案的MD5碼比對兩個檔案是否相同
-            //第一個檔案
-            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
-            //第二個檔案
-            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
-            //第三個檔案
-            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
-
-            //第一個檔案的MD5碼
-            string FileMD5_1 = string.Empty;
-            //建立MD5的演算法
-            HashAlgorithm algorithm = MD5.Create();
-            //取得第一個檔案MD5演算後的陣列
-            byte[] Hash1 = algorithm.ComputeHash(File.ReadAllBytes(filename1));
-            //建立第一個檔案的MD5碼
-            foreach (byte b in Hash1)
-            {
-                FileMD5_1 += b.ToString("X2");
-            }
-
-            //第二個檔案的MD5碼
-            string FileMD5_2 = string.Empty;
-            //取得第二個檔案MD5演算後的陣列
-            byte[] Hash2 = algorithm.ComputeHash(File.ReadAllBytes(filename2));
-            ///建立第二個檔案的MD5碼
-            foreach (byte b in Hash2)
-            {
-                FileMD5_2 += b.ToString("X2");
-            }
-
-            //第三個檔案的MD5碼
-            string FileMD5_3 = string.Empty;
-            //取得第三個檔案MD5演算後的陣列
-            byte[] Hash3 = algorithm.ComputeHash(File.ReadAllBytes(filename3));
-            ///建立第三個檔案的MD5碼
-            foreach (byte b in Hash3)
-            {
-                FileMD5_3 += b.ToString("X2");
-            }
-
-            if (FileMD5_1.Equals(FileMD5_2))
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
-
-            if (FileMD5_1.Equals(FileMD5_3))
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
-
-            if (FileMD5_2.Equals(FileMD5_3))
-                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -757,38 +717,16 @@ namespace vcs_test_all_99_tmp1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //C# Ping a hostname on the network
-
-            Ping ping = new Ping();
-
-            PingReply reply = ping.Send("www.google.com");
-            if (reply.Status == IPStatus.Success)
-            {
-                MessageBox.Show("ok");
-            } 
 
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //列出所有的Process
-            Process[] all = Process.GetProcesses();
-            int length = all.Length;
-            for (int index = 0; index < length; index++)
-            {
-                richTextBox1.Text += String.Format("{0} \tID:{1}", all[index].ProcessName, all[index].Id) + "\n";
-            }
 
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //列出firefox的Process
-            Process[] ps = Process.GetProcessesByName("firefox");
-            foreach (Process p in ps)
-            {
-                richTextBox1.Text += String.Format("{0} \tID:{1}", p.ProcessName, p.Id) + "\n";
-            } 
         }
 
         private void button27_Click(object sender, EventArgs e)

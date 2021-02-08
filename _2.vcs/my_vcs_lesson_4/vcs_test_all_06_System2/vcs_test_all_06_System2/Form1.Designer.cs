@@ -127,11 +127,12 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button5.Location = new System.Drawing.Point(218, 60);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 40);
             this.button5.TabIndex = 5;
+            this.button5.Text = "C# Ping a hostname on the network";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -204,6 +205,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 40);
             this.button12.TabIndex = 13;
+            this.button12.Text = "列出所有的Process";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -415,6 +417,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 40);
             this.button16.TabIndex = 49;
+            this.button16.Text = "列出firefox的Process";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

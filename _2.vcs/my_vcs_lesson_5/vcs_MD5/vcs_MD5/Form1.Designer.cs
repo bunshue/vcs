@@ -41,6 +41,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label_compare = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -153,11 +155,31 @@
             this.label_compare.TabIndex = 13;
             this.label_compare.Text = "result";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(37, 385);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(115, 47);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "用MD5比對兩個檔案是否相同";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(190, 385);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(473, 117);
+            this.richTextBox1.TabIndex = 15;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 361);
+            this.ClientSize = new System.Drawing.Size(675, 514);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.label_compare);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
@@ -193,6 +215,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label_compare;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

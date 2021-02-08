@@ -64,11 +64,6 @@ namespace vcs_test_all_99_tmp3
         {
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = DateTime.Now.ToString();
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             int i = 0;
@@ -104,55 +99,7 @@ namespace vcs_test_all_99_tmp3
         }
         //開啟關閉thread    SP
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            for(int i=0;i<=100;i++)
-            {
-                label13.Text = "讀取進度： " + i + "%";
-                progressBar1.Value = i;
-                Application.DoEvents();         //執行某一事件，以達到延遲效果。
-                for (int j = 0; j < 100; j++)
-                    System.Threading.Thread.Sleep(1);
-            }
-            label13.Text += "   讀取完成";
-        }
 
-        int progress = 0;
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            timer3.Enabled = true;
-            progress = 0;
-        }
-
-        private void timer3_Tick(object sender, EventArgs e)
-        {
-            progress++;
-            label13.Text = "讀取進度： " + progress + "%";
-            progressBar1.Value = progress;
-            if (progress >= 100)
-            {
-                timer3.Enabled = false;
-                label13.Text += "   讀取完成";
-            }
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            progress = 0;
-            timer3.Enabled = false;
-            progressBar1.Value = progress;
-            label13.Text = "讀取進度： ";
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
     
     }
 }

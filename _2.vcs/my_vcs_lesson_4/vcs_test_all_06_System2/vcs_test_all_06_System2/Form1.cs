@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Runtime.InteropServices;   //for DllImport
 using System.Diagnostics;   //for Process
+using System.Net.NetworkInformation;    //for Ping & PingReply
 
 namespace vcs_test_all_06_System2
 {
@@ -219,6 +220,16 @@ namespace vcs_test_all_06_System2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //C# Ping a hostname on the network
+            //C# Ping a hostname on the network
+
+            Ping ping = new Ping();
+
+            PingReply reply = ping.Send("www.google.com");
+            if (reply.Status == IPStatus.Success)
+            {
+                MessageBox.Show("ok");
+            } 
 
         }
 
@@ -269,6 +280,13 @@ namespace vcs_test_all_06_System2
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //列出所有的Process
+            Process[] all = Process.GetProcesses();
+            int length = all.Length;
+            for (int index = 0; index < length; index++)
+            {
+                richTextBox1.Text += String.Format("{0} \tID:{1}", all[index].ProcessName, all[index].Id) + "\n";
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -286,6 +304,12 @@ namespace vcs_test_all_06_System2
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //列出firefox的Process
+            Process[] ps = Process.GetProcessesByName("firefox");
+            foreach (Process p in ps)
+            {
+                richTextBox1.Text += String.Format("{0} \tID:{1}", p.ProcessName, p.Id) + "\n";
+            } 
         }
 
         private void button17_Click(object sender, EventArgs e)

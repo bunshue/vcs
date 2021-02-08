@@ -94,7 +94,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 50);
             this.button3.TabIndex = 3;
-            this.button3.Text = "用MD5比對兩個檔案是否相同";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -293,6 +292,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(150, 50);
             this.button0.TabIndex = 73;
+            this.button0.Text = "編碼轉換";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -358,7 +358,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(150, 50);
             this.button24.TabIndex = 79;
-            this.button24.Text = "C# Ping a hostname on the network";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -369,7 +368,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(150, 50);
             this.button25.TabIndex = 80;
-            this.button25.Text = "列出所有的Process";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -380,7 +378,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(150, 50);
             this.button26.TabIndex = 81;
-            this.button26.Text = "列出firefox的Process";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 

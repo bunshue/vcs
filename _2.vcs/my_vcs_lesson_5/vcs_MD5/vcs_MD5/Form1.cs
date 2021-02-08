@@ -110,5 +110,64 @@ namespace vcs_MD5
             else
                 label4.Text = "檔案驗證錯誤";
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //利用檔案的MD5碼比對兩個檔案是否相同
+            //第一個檔案
+            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
+            //第二個檔案
+            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
+            //第三個檔案
+            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
+
+            //第一個檔案的MD5碼
+            string FileMD5_1 = string.Empty;
+            //建立MD5的演算法
+            HashAlgorithm algorithm = MD5.Create();
+            //取得第一個檔案MD5演算後的陣列
+            byte[] Hash1 = algorithm.ComputeHash(File.ReadAllBytes(filename1));
+            //建立第一個檔案的MD5碼
+            foreach (byte b in Hash1)
+            {
+                FileMD5_1 += b.ToString("X2");
+            }
+
+            //第二個檔案的MD5碼
+            string FileMD5_2 = string.Empty;
+            //取得第二個檔案MD5演算後的陣列
+            byte[] Hash2 = algorithm.ComputeHash(File.ReadAllBytes(filename2));
+            ///建立第二個檔案的MD5碼
+            foreach (byte b in Hash2)
+            {
+                FileMD5_2 += b.ToString("X2");
+            }
+
+            //第三個檔案的MD5碼
+            string FileMD5_3 = string.Empty;
+            //取得第三個檔案MD5演算後的陣列
+            byte[] Hash3 = algorithm.ComputeHash(File.ReadAllBytes(filename3));
+            ///建立第三個檔案的MD5碼
+            foreach (byte b in Hash3)
+            {
+                FileMD5_3 += b.ToString("X2");
+            }
+
+            if (FileMD5_1.Equals(FileMD5_2))
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
+
+            if (FileMD5_1.Equals(FileMD5_3))
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
+
+            if (FileMD5_2.Equals(FileMD5_3))
+                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
+
+        }
     }
 }
