@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_graph_pi_approximation.Properties {
+namespace vcs_Draw9_Example6_vcsh_math2.Properties
+{
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
