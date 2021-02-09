@@ -23,7 +23,7 @@ namespace howto_list_temperatures
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
-        private const string API_KEY = "e8edf79325ae8948a635efd0e076a8bc";
+        private const string API_KEY = "lion-mouse";
 
         // Query URLs. Replace @LOC@ with the location.
         private const string CurrentUrl =

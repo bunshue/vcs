@@ -469,5 +469,24 @@ namespace vcs_ReadWrite_TXT
                 }
             }
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+
+            try
+            {
+                StreamReader sr = new StreamReader(filename, Encoding.Default);
+                string line = string.Empty;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    richTextBox1.Text += line + "\n";
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

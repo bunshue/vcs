@@ -169,5 +169,31 @@ namespace vcs_MD5
                 richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
 
         }
+
+        //對字串加MD5 ST
+        public string Encrypt(string strPwd)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();//创建MD5对象
+            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//将字符编码为一个字节序列
+            byte[] md5data = md5.ComputeHash(data);//计算data字节数组的哈希值
+            md5.Clear();//清空MD5对象
+            string str = "";//定义一个变量，用来记录加密后的密码
+            for (int i = 0; i < md5data.Length - 1; i++)//遍历字节数组
+            {
+                str += md5data[i].ToString("x").PadLeft(2, '0');//对遍历到的字节进行加密
+            }
+            return str;//返回得到的加密字符串
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string str = textBox4.Text;
+            string md5_result = Encrypt(str);
+            richTextBox1.Text += "使用MD5加密後的結果為 : " + md5_result + "\n";
+        }
+
+        //對字串加MD5 SP
+
+
     }
 }
