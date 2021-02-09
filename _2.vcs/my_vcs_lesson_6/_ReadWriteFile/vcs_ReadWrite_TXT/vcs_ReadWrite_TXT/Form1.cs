@@ -488,5 +488,41 @@ namespace vcs_ReadWrite_TXT
 
             }
         }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //第一個檔案
+            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
+            //第二個檔案
+            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
+            //第三個檔案
+            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
+
+            StreamReader sr1;
+            StreamReader sr2;
+            StreamReader sr3;
+
+            sr1 = new StreamReader(filename1);     //创建StreamReader对象
+            sr2 = new StreamReader(filename2);     //创建StreamReader对象
+
+            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))    //读取文件内容并判断
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
+
+            sr1 = new StreamReader(filename1);     //创建StreamReader对象
+            sr3 = new StreamReader(filename3);     //创建StreamReader对象
+            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))    //读取文件内容并判断
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
+
+            sr2 = new StreamReader(filename2);     //创建StreamReader对象
+            sr3 = new StreamReader(filename3);     //创建StreamReader对象
+            if (object.Equals(sr2.ReadToEnd(), sr3.ReadToEnd()))    //读取文件内容并判断
+                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
+        }
     }
 }
