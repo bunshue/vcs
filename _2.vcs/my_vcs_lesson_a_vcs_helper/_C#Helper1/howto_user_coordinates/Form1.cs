@@ -32,11 +32,11 @@ namespace howto_user_coordinates
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            picCanvas.Refresh();
+            pictureBox1.Refresh();
         }
 
         // Draw.
-        private void picCanvas_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -45,7 +45,8 @@ namespace howto_user_coordinates
             {
                 // Draw the axes.
                 float tic = 0.25f;
-                thin_pen.Width = 2 / DrawingScale;
+                //thin_pen.Width = 2 / DrawingScale;
+                thin_pen.Width = 10;
                 e.Graphics.DrawLine(thin_pen, Wxmin, 0, Wxmax, 0);
                 for (int x = (int)Wxmin; x <= Wxmax; x++)
                     e.Graphics.DrawLine(thin_pen, x, -tic, x, tic);
@@ -74,12 +75,17 @@ namespace howto_user_coordinates
                         Math.Min(StartPoint.Y, EndPoint.Y),
                         Math.Abs(StartPoint.X - EndPoint.X),
                         Math.Abs(StartPoint.Y - EndPoint.Y));
+                    e.Graphics.DrawRectangle(thin_pen,
+                        Math.Min(StartPoint.X, EndPoint.X),
+                        Math.Min(StartPoint.Y, EndPoint.Y),
+                        Math.Abs(StartPoint.X - EndPoint.X),
+                        Math.Abs(StartPoint.Y - EndPoint.Y));
                 }
             }
         }
 
         // Let the user draw a new ellipse.
-        private void picCanvas_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             Drawing = true;
 
@@ -88,16 +94,17 @@ namespace howto_user_coordinates
             EndPoint = StartPoint;
         }
 
-        private void picCanvas_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+                return;
 
             // Get the end point.
             EndPoint = DeviceToWorld(e.Location);
             Refresh();
         }
 
-        private void picCanvas_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (!Drawing) return;
             Drawing = false;
@@ -144,6 +151,12 @@ namespace howto_user_coordinates
         private Color RandomColor()
         {
             return RandomColors[rand.Next(0, RandomColors.Length)];
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Wxmax = this.pictureBox1.Width - 100;
+            Wymax = this.pictureBox1.Height - 100;
         }
     }
 }

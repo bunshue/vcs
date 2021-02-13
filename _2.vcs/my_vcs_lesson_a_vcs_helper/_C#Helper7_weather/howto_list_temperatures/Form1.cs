@@ -44,7 +44,7 @@ namespace howto_list_temperatures
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
-        private const string API_KEY = "lion-mouse";
+        private const string API_KEY = "lionmouse";
 
         // Query URLs. Replace @LOC@ with the location.
         private const string CurrentUrl =
@@ -109,6 +109,8 @@ namespace howto_list_temperatures
         {
             listView1.Items.Clear();
 
+            char degrees = (char)176;
+
             // Loop throuh the time entries.
             string last_day = "";
             foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
@@ -139,8 +141,8 @@ namespace howto_list_temperatures
                     item = listView1.Items.Add(last_day);
                 }
                 item.SubItems.Add(start_time.ToShortTimeString());
-                item.SubItems.Add(temp.ToString("0.00"));
-                item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00"));
+                item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
+                item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
             }
         }
 

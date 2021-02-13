@@ -24,7 +24,7 @@ namespace howto_weather_forecast2
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
-        private const string API_KEY = "lion-mouse";
+        private const string API_KEY = "lionmouse";
 
         // Query URLs. Replace @LOC@ with the location.
         private const string CurrentUrl =
@@ -44,7 +44,10 @@ namespace howto_weather_forecast2
             cboQuery.Items.Add("ZIP");
             cboQuery.Items.Add("ID");
 
-            cboQuery.SelectedIndex = 1;
+            cboQuery.SelectedIndex = 0;
+
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         // Get a forecast.
@@ -76,6 +79,7 @@ namespace howto_weather_forecast2
         // Display the forecast.
         private void DisplayForecast(string xml)
         {
+            //richTextBox1.Text += xml + "\n\n";
             // Load the response into an XML document.
             XmlDocument xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
@@ -83,11 +87,16 @@ namespace howto_weather_forecast2
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
             txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
             txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
+            richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             XmlNode geo_node = loc_node.SelectSingleNode("location");
             txtLat.Text = geo_node.Attributes["latitude"].Value;
+            richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
             txtLong.Text = geo_node.Attributes["longitude"].Value;
+            richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
             txtId.Text = geo_node.Attributes["geobaseid"].Value;
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
             lvwForecast.Items.Clear();
             char degrees = (char)176;
@@ -105,7 +114,14 @@ namespace howto_weather_forecast2
 
                 ListViewItem item = lvwForecast.Items.Add(time.DayOfWeek.ToString());
                 item.SubItems.Add(time.ToShortTimeString());
-                item.SubItems.Add(temp + degrees);
+
+
+                item.SubItems.Add(temp + " " + degrees + "F");
+                richTextBox1.Text += temp + "\n";
+
+                //item.SubItems.Add(temp.ToString("0.00"));
+                item.SubItems.Add(((float.Parse(temp) - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+
             }
         }
 
