@@ -164,13 +164,9 @@ namespace vcs_Remove_Bin_Obj
 
                 if (folder_name[i].Contains("bin"))
                 {
-                    if (folder_name[i].Contains("xxxximsLink"))
+                    if (folder_name[i].Contains("xxxxxxxxxxxxxxxx"))
                     {
                         richTextBox1.Text += "iiiiiiiiiiiiiiiiiiiii\n";
-                        continue;
-                    }
-                    else if (folder_name[i].Contains("__非AForge"))
-                    {
                         continue;
                     }
                     else if (folder_name[i].Contains("WindowsFormsApplication1"))
