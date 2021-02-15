@@ -57,7 +57,7 @@
             this.颜色ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(363, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(739, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,7 +69,7 @@
             this.保存ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.文件ToolStripMenuItem.Name = "文件ToolStripMenuItem";
-            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.文件ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.文件ToolStripMenuItem.Text = "文件";
             // 
             // 打开ToolStripMenuItem
@@ -103,7 +103,7 @@
             // 颜色ToolStripMenuItem
             // 
             this.颜色ToolStripMenuItem.Name = "颜色ToolStripMenuItem";
-            this.颜色ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.颜色ToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.颜色ToolStripMenuItem.Text = "颜色";
             this.颜色ToolStripMenuItem.Click += new System.EventHandler(this.颜色ToolStripMenuItem_Click);
             // 
@@ -117,9 +117,9 @@
             this.ellipse,
             this.text,
             this.rubber});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(363, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(739, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -191,7 +191,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 273);
+            this.ClientSize = new System.Drawing.Size(739, 552);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -199,11 +199,11 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "简单画图程序";
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Frm_Main_MouseUp);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Frm_Main_Paint);
             this.SizeChanged += new System.EventHandler(this.Frm_Main_SizeChanged);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Frm_Main_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_Main_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Frm_Main_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Frm_Main_MouseUp);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

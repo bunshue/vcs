@@ -31,6 +31,8 @@ namespace howto_list_temperatures
 {
     public partial class Form1 : Form
     {
+        List<float> temperature = new List<float>();
+
         public Form1()
         {
             InitializeComponent();
@@ -108,6 +110,7 @@ namespace howto_list_temperatures
         private void ListTemperatures(XmlDocument xml_doc)
         {
             listView1.Items.Clear();
+            temperature.Clear();
 
             char degrees = (char)176;
 
@@ -143,7 +146,10 @@ namespace howto_list_temperatures
                 item.SubItems.Add(start_time.ToShortTimeString());
                 item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
                 item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+                temperature.Add((temp - 32) * 5 / 9);
             }
+
+            richTextBox1.Text += "temperature len = " + temperature.Count.ToString() + "\n";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

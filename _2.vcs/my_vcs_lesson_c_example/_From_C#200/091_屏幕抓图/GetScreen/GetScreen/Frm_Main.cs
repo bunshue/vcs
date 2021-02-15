@@ -164,7 +164,7 @@ namespace GetScreen
                 }
                 if (txtSavaPath.Text == "")
                 {
-                    PicPath = @"D:\";
+                    PicPath = @"C:\dddddddddd";
                 }
                 else
                 {
@@ -178,11 +178,6 @@ namespace GetScreen
             {
                 MessageBox.Show(ex.Message,"警告",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -221,7 +216,7 @@ namespace GetScreen
             if (MyCursor == "" || MyPicPath == "")
             {
                 checkBox1.Checked = true;
-                txtSavaPath.Text = @"D:\";
+                txtSavaPath.Text = @"C:\dddddddddd";
             }
             else
             {
@@ -233,7 +228,7 @@ namespace GetScreen
                 {
                     checkBox1.Checked = false;
                 }
-                txtSavaPath.Text = MyPicPath; 
+                txtSavaPath.Text = @"C:\dddddddddd";
             }
             MyPicPath = @"C:\dddddddddd";
         }

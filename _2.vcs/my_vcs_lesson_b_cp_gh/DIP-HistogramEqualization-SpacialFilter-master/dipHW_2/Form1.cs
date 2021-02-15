@@ -15,7 +15,7 @@ namespace dipHW_2
 {
     public partial class Form1 : Form
     {
-        string path;
+        string filename = @"C:\______test_files\picture1.jpg";
         private Bitmap img;
         byte[] srcData;
         int[] histoData;
@@ -23,6 +23,11 @@ namespace dipHW_2
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadBitmap(filename);
         }
 
         // load and initialize from file
@@ -183,15 +188,6 @@ namespace dipHW_2
             // write the new image
             BuildBitmap(width, height, tempData);
         }
-        // open an image
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                path = openFileDialog1.FileName;
-                LoadBitmap(path);                
-            }
-        }
 
         // histogram equation
         private void button2_Click(object sender, EventArgs e)
@@ -204,17 +200,9 @@ namespace dipHW_2
         // reload the image
         private void button4_Click(object sender, EventArgs e)
         {
-            if (path == "") return;
-            LoadBitmap(path);
-        }
-
-        // save to file
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image == null) return;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
-                img.Save(saveFileDialog1.FileName, ImageFormat.Bmp);
-            }
+            if (filename == "")
+                return;
+            LoadBitmap(filename);
         }
 
         // show histogram
@@ -258,5 +246,6 @@ namespace dipHW_2
             // filter it
             Filter2d(srcData, 3, filter);
         }
+
     }
 }
