@@ -1,4 +1,4 @@
-﻿namespace vcs_ReadWrite_CSV6
+﻿namespace vcs_ReadWrite_WORD5
 {
     partial class Form1
     {
@@ -34,19 +34,19 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(12, 21);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 41);
+            this.button1.Size = new System.Drawing.Size(101, 40);
             this.button1.TabIndex = 0;
-            this.button1.Text = "用Excel開啟.CSV檔";
+            this.button1.Text = "建立一個Word檔案";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(119, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(130, 21);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(486, 348);
+            this.richTextBox1.Size = new System.Drawing.Size(479, 401);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -54,12 +54,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 372);
+            this.ClientSize = new System.Drawing.Size(621, 434);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
