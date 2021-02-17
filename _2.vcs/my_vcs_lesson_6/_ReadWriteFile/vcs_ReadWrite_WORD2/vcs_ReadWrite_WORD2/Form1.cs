@@ -100,9 +100,8 @@ namespace vcs_ReadWrite_WORD2
             shape.Top = (float)Word.WdShapePosition.wdShapeTop;
 
             // Save the document.
-            object filename = Path.GetFullPath(
-                Path.Combine(Application.StartupPath, "..\\..")) +
-                "\\test.doc";
+            object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+
             word_doc.SaveAs(ref filename, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing,
                 ref missing, ref missing, ref missing, ref missing, ref missing,

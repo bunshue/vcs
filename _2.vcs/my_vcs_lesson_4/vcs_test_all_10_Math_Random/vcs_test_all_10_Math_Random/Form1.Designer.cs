@@ -105,6 +105,7 @@
             this.lb_ordinal = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bt_random12 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -343,6 +344,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_random12);
             this.groupBox1.Controls.Add(this.bt_random_color);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox3);
@@ -974,6 +976,17 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
+            // bt_random12
+            // 
+            this.bt_random12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random12.Location = new System.Drawing.Point(183, 296);
+            this.bt_random12.Name = "bt_random12";
+            this.bt_random12.Size = new System.Drawing.Size(155, 40);
+            this.bt_random12.TabIndex = 36;
+            this.bt_random12.Text = "亂數方法比較";
+            this.bt_random12.UseVisualStyleBackColor = true;
+            this.bt_random12.Click += new System.EventHandler(this.bt_random12_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1118,6 +1131,7 @@
         private System.Windows.Forms.Button bt_random_color;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bt_random12;
     }
 }
 

@@ -49,7 +49,8 @@ namespace vcs_GoogleMap2
             string address = "loc:" +
                 latitude.ToString() + "+" +
                 longitude.ToString();
-            string url = GoogleMapUrl(address, "Hybrid", 0);
+            string url = GoogleMapUrl(address, "Map", 0);
+            richTextBox1.Text += "URL : " + url + "\n";
 
             // Display the URL in the WebBrowser control.
             webBrowser1.Navigate(url);
@@ -84,7 +85,9 @@ namespace vcs_GoogleMap2
                 url += "q=" + HttpUtility.UrlEncode(query, Encoding.UTF8);
 
             // Add the type.
+            richTextBox1.Text += "map_type = " + map_type + "\n";
             map_type = GoogleMapTypeCode(map_type);
+            richTextBox1.Text += "map_type = " + map_type + "\n";
             if (map_type != null) url += "&t=" + map_type;
 
             // Add the zoom level.

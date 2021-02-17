@@ -19,6 +19,11 @@ namespace vcs_Draw_Histogram
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
         // Display a histogram.
         private void DrawHistogram(PictureBox pic, Brush brush, Pen pen, int[] values)
         {
@@ -260,6 +265,83 @@ namespace vcs_Draw_Histogram
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Display a histogram.
+            Pen thin_pen = new Pen(Color.Black, 0);
+            thin_pen.Color = Color.LightBlue;
+            int num_numbers = 6;
+            int[] numbers = new int[num_numbers];
+            int i;
+            for (i = 0; i < num_numbers; i++)
+            {
+                numbers[i] = i + 5;
+
+            }
+            DrawHistogram3(pictureBox1, Brushes.Blue, thin_pen, numbers);
+        }
+
+        // Display a histogram.
+        private void DrawHistogram3(PictureBox pic, Brush brush, Pen pen, int[] values)
+        {
+            int i;
+            int max_values = values.Max();
+
+            richTextBox1.Text += "max_count = " + max_values.ToString() + "\n";
+
+            // Make a Bitmap.
+            Bitmap bm = new Bitmap(pic.ClientSize.Width, pic.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Scale to fit the data.
+                RectangleF rect = new RectangleF(0, 0, values.Length, max_values);
+                gr.DrawRectangle(new Pen(Color.Red, 0), 0, 0, values.Length * 1, max_values * 1);
+
+                //gr.DrawString("A", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20));
+
+                PointF[] pts = 
+                {
+                    new PointF(0, pic.ClientSize.Height),
+                    new PointF(pic.ClientSize.Width, pic.ClientSize.Height),
+                    new PointF(0, 0),
+                };
+                //gr.DrawRectangle(new Pen(Color.Green, 10), 0, 0, pic.ClientSize.Width, pic.ClientSize.Height);
+
+                gr.DrawString("A", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(30, 30));
+
+                gr.Transform = new Matrix(rect, pts);
+
+                int kk = 0;
+                // Fill the histogram.
+                for (i = 0; i < values.Length; i++)
+                {
+                    gr.FillRectangle(brush, i, 0, 1, values[i]);
+                    gr.DrawString(i.ToString(), new Font("標楷體", 1), new SolidBrush(Color.Red), new PointF(i * 2, 0));
+                    richTextBox1.Text += "kk = " + kk.ToString() + "\t" + i.ToString() + "\t0\t1\t" + values[i].ToString() + "\n";
+
+                    kk++;
+
+                }
+                richTextBox1.Text += "draw " + kk.ToString() + " fill rectangles\n";
+
+                // Draw the histogram.
+                if (values.Length < 200)
+                {
+                    kk = 0;
+                    for (i = 0; i < values.Length; i++)
+                    {
+                        gr.DrawRectangle(pen, i, 0, 1, values[i]);
+                        kk++;
+                    }
+                    richTextBox1.Text += "draw " + kk.ToString() + " empty rectangles\n";
+                }
+            }
+
+            // Display the histogram.
+            pic.Image = bm;
+        }
 
 
     }

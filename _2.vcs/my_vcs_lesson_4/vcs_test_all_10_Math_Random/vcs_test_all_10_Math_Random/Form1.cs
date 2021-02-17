@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Diagnostics;   //for Debug
 using System.Drawing.Text;  //for TextRenderingHint
+using System.Security.Cryptography;     //for RNGCryptoServiceProvider
 
 namespace vcs_test_all_10_Math_Random
 {
@@ -120,6 +121,7 @@ namespace vcs_test_all_10_Math_Random
             bt_random9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             bt_random10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -1468,9 +1470,65 @@ namespace vcs_test_all_10_Math_Random
                 //lstWords.Items.Add(word);
                 richTextBox1.Text += word + "\n";
             }
-
-
         }
+
+        //亂數方法比較 ST
+        private void bt_random12_Click(object sender, EventArgs e)
+        {
+            int num_numbers;
+            int min;
+            int max;
+
+            num_numbers = 20;
+            min = 1;
+            max = 100;
+
+            richTextBox1.Text += "num_numbers = " + num_numbers.ToString() + "\n";
+            richTextBox1.Text += "min = " + min.ToString() + "\n";
+            richTextBox1.Text += "max = " + max.ToString() + "\n";
+
+            int[] rand_numbers = new int[num_numbers];
+
+            richTextBox1.Text += "使用內建的Random()函數建立亂數資料\n";
+            Random rand = new Random();
+            for (int i = 0; i < num_numbers; i++)
+            {
+                rand_numbers[i] = rand.Next(min, max);
+                richTextBox1.Text += rand_numbers[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n\n";
+
+            richTextBox1.Text += "使用RNGCryptoServiceProvider函數建立亂數資料\n";
+
+            for (int i = 0; i < num_numbers; i++)
+            {
+                rand_numbers[i] = RandomInteger(min, max);
+                richTextBox1.Text += rand_numbers[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        // The random number provider.
+        private RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
+
+        // Return a random integer between a min and max value.
+        private int RandomInteger(int min, int max)
+        {
+            uint scale = uint.MaxValue;
+            while (scale == uint.MaxValue)
+            {
+                // Get four random bytes.
+                byte[] four_bytes = new byte[4];
+                Rand.GetBytes(four_bytes);
+
+                // Convert that into an uint.
+                scale = BitConverter.ToUInt32(four_bytes, 0);
+            }
+
+            // Add min to the scaled difference between max and min.
+            return (int)(min + (max - min) * (scale / (double)uint.MaxValue));
+        }
+        //亂數方法比較 SP
 
         private void button22_Click(object sender, EventArgs e)
         {

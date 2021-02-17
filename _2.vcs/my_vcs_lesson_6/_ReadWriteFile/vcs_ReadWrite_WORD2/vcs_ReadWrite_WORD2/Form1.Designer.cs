@@ -35,39 +35,36 @@
             // 
             // txtPicture
             // 
-            this.txtPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPicture.Location = new System.Drawing.Point(61, 12);
+            this.txtPicture.Location = new System.Drawing.Point(61, 11);
             this.txtPicture.Name = "txtPicture";
-            this.txtPicture.Size = new System.Drawing.Size(444, 20);
+            this.txtPicture.Size = new System.Drawing.Size(555, 22);
             this.txtPicture.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 15);
+            this.label2.Location = new System.Drawing.Point(12, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.Size = new System.Drawing.Size(40, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "Picture:";
             // 
             // btnGo
             // 
-            this.btnGo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnGo.Location = new System.Drawing.Point(221, 48);
+            this.btnGo.Location = new System.Drawing.Point(258, 44);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 23);
+            this.btnGo.Size = new System.Drawing.Size(124, 21);
             this.btnGo.TabIndex = 6;
-            this.btnGo.Text = "Go";
+            this.btnGo.Text = "建立一Word檔案";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // Form1
             // 
             this.AcceptButton = this.btnGo;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 86);
+            this.ClientSize = new System.Drawing.Size(628, 243);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPicture);

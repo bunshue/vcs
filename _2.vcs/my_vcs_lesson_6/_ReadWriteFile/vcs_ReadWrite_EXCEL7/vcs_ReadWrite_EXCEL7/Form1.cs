@@ -26,6 +26,8 @@ namespace vcs_ReadWrite_EXCEL7
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\_git\vcs\_2.vcs\______test_files\__RW\_excel\vcs_ReadWrite_EXCEL7_Items.xlsx";
+
         public Form1()
         {
             InitializeComponent();
@@ -33,9 +35,6 @@ namespace vcs_ReadWrite_EXCEL7
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtFile.Text = Path.GetFullPath(
-                Path.Combine(Application.StartupPath, @"..\..")) +
-                @"\Items.xlsx";
         }
 
         // Write into the Excel workbook.
@@ -48,7 +47,7 @@ namespace vcs_ReadWrite_EXCEL7
             excel_app.Visible = true;
 
             // Open the workbook.
-            Excel.Workbook workbook = excel_app.Workbooks.Open(txtFile.Text,
+            Excel.Workbook workbook = excel_app.Workbooks.Open(filename,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
@@ -97,7 +96,7 @@ namespace vcs_ReadWrite_EXCEL7
             // Close the Excel server.
             excel_app.Quit();
 
-            MessageBox.Show("Done");
+            richTextBox1.Text += "Done\n";
         }
 
         // Return the worksheet with the given name.

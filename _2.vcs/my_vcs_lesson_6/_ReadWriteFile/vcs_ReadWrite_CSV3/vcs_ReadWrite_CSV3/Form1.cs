@@ -13,6 +13,8 @@ namespace vcs_ReadWrite_CSV3
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_data.csv";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,10 +22,6 @@ namespace vcs_ReadWrite_CSV3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtFile.Text = Path.GetFullPath(
-                Path.Combine(Application.StartupPath, "..\\..")) +
-                "\\Data.csv";
-            txtFile.Select(0, 0);
         }
 
         // Read the CSV file.
@@ -32,31 +30,36 @@ namespace vcs_ReadWrite_CSV3
         private void btnGo_Click(object sender, EventArgs e)
         {
             // Get the data.
-            string[,] values = LoadCsv(txtFile.Text);
+            string[,] values = LoadCsv(filename);
             int num_rows = values.GetUpperBound(0) + 1;
             int num_cols = values.GetUpperBound(1) + 1;
+
+            richTextBox1.Text += "共有 " + num_cols.ToString() + " 欄(column)資料\n";
+            richTextBox1.Text += "共有 " + num_rows.ToString() + " 列(row)資料\n";
 
             // Display the data to show we have it.
 
             // Make column headers.
             // For this example, we assume the first row
             // contains the column names.
-            dgvValues.Columns.Clear();
+            dataGridView1.Columns.Clear();
             for (int c = 0; c < num_cols; c++)
-                dgvValues.Columns.Add(values[0, c], values[0, c]);
+            {
+                dataGridView1.Columns.Add(values[0, c], values[0, c]);
+            }
 
             // Add the data.
             for (int r = 1; r < num_rows; r++)
             {
-                dgvValues.Rows.Add();
+                dataGridView1.Rows.Add();
                 for (int c = 0; c < num_cols; c++)
                 {
-                    dgvValues.Rows[r - 1].Cells[c].Value = values[r, c];
+                    dataGridView1.Rows[r - 1].Cells[c].Value = values[r, c];
                 }
             }
 
             //// Make the columns autosize.
-            //foreach (DataGridViewColumn col in dgvValues.Columns)
+            //foreach (DataGridViewColumn col in dataGridView1.Columns)
             //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
