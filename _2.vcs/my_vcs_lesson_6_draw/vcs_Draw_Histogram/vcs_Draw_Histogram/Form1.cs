@@ -309,7 +309,7 @@ namespace vcs_Draw_Histogram
                 };
                 //gr.DrawRectangle(new Pen(Color.Green, 10), 0, 0, pic.ClientSize.Width, pic.ClientSize.Height);
 
-                gr.DrawString("A", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(30, 30));
+                //gr.DrawString("A", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(30, 30));
 
                 gr.Transform = new Matrix(rect, pts);
 
@@ -318,13 +318,14 @@ namespace vcs_Draw_Histogram
                 for (i = 0; i < values.Length; i++)
                 {
                     gr.FillRectangle(brush, i, 0, 1, values[i]);
-                    gr.DrawString(i.ToString(), new Font("標楷體", 1), new SolidBrush(Color.Red), new PointF(i * 2, 0));
+                    //gr.DrawString(i.ToString(), new Font("標楷體", 1), new SolidBrush(Color.Red), new PointF(i * 2, 0));
                     richTextBox1.Text += "kk = " + kk.ToString() + "\t" + i.ToString() + "\t0\t1\t" + values[i].ToString() + "\n";
 
                     kk++;
 
                 }
                 richTextBox1.Text += "draw " + kk.ToString() + " fill rectangles\n";
+
 
                 // Draw the histogram.
                 if (values.Length < 200)
@@ -333,10 +334,21 @@ namespace vcs_Draw_Histogram
                     for (i = 0; i < values.Length; i++)
                     {
                         gr.DrawRectangle(pen, i, 0, 1, values[i]);
+
+                        //Pen p = new Pen(Color.Red, 0);
+                        gr.DrawLine(pen, 0, 0, 6, 10);
+
+
                         kk++;
                     }
                     richTextBox1.Text += "draw " + kk.ToString() + " empty rectangles\n";
                 }
+                //gr.DrawRectangle(new Pen(Color.Red, 0), 0, 0, values.Length * 1, max_values * 1);
+                gr.DrawRectangle(new Pen(Color.Green, 0), 1, 7, 1, 1);
+                gr.DrawRectangle(new Pen(Color.Green, 0), 1, 7, 2, 2);
+                gr.DrawString("A", new Font("標楷體", 2), new SolidBrush(Color.Red), new PointF(1, 7));
+                gr.ResetTransform();
+                gr.DrawString("B", new Font("標楷體", 40), new SolidBrush(Color.Red), new PointF(10, 10));
             }
 
             // Display the histogram.
