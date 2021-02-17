@@ -100,9 +100,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1121, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1046, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(174, 590);
+            this.richTextBox1.Size = new System.Drawing.Size(356, 590);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -212,6 +212,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 40);
             this.button11.TabIndex = 12;
+            this.button11.Text = "系統預設路徑";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

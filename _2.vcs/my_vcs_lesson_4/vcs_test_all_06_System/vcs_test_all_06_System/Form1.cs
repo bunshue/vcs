@@ -320,6 +320,16 @@ namespace vcs_test_all_06_System
 
         private void button11_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "系統預設路徑\n";
+            richTextBox1.Text += "CurrentDirectory :\t" + System.Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";
+            richTextBox1.Text += "Form1.cs所在位置 :\t" + Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\n";
+
+            richTextBox1.Text += "\n取得系統相關資訊\n";
+            richTextBox1.Text += "目前系統目錄為：" + Environment.SystemDirectory + "\n";//顯示系統目錄
+            richTextBox1.Text += "機器名稱為：" + Environment.MachineName + "\n";//顯示機器名稱
+            richTextBox1.Text += "目前程式執行目錄：" + Environment.CurrentDirectory + "\n";//取得目前程式執行目錄
+            richTextBox1.Text += "系統版本號：" + Environment.OSVersion.VersionString + "\n";//顯示系統版本號
         }
 
         private void button12_Click(object sender, EventArgs e)
