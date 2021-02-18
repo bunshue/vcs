@@ -19,15 +19,11 @@ namespace WindowsFormsApplication1
             /* 第 2, 18 章 */
             //Application.Run(new Form1());
 
-            /* 第 2 章 */
-            Application.Run(new frmAdd());
-            //Application.Run(new ch2ex());
-
             /* 第 3 章 */
             //Application.Run(new ch3Test());
 
             /* 第 3, 4 章 */
-            //Application.Run(new ArithmeticOp());
+            Application.Run(new ArithmeticOp());
 
             /* 第 4 章 */
             //Application.Run(new ThreeNumbers());

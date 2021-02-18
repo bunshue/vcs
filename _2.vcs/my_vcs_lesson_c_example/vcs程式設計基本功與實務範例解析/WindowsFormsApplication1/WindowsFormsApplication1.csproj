@@ -99,12 +99,6 @@
     <Compile Include="CallByRef.Designer.cs">
       <DependentUpon>CallByRef.cs</DependentUpon>
     </Compile>
-    <Compile Include="ch2ex.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ch2ex.Designer.cs">
-      <DependentUpon>ch2ex.cs</DependentUpon>
-    </Compile>
     <Compile Include="clock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,12 +232,6 @@
     <Compile Include="ThreeNumbers.designer.cs">
       <DependentUpon>ThreeNumbers.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAdd.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAdd.Designer.cs">
-      <DependentUpon>frmAdd.cs</DependentUpon>
-    </Compile>
     <Compile Include="keyevent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,9 +303,6 @@
     <EmbeddedResource Include="CallByRef.resx">
       <DependentUpon>CallByRef.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ch2ex.resx">
-      <DependentUpon>ch2ex.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="clock.resx">
       <DependentUpon>clock.cs</DependentUpon>
     </EmbeddedResource>
@@ -383,9 +368,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThreeNumbers.resx">
       <DependentUpon>ThreeNumbers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAdd.resx">
-      <DependentUpon>frmAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="keyevent.resx">
       <DependentUpon>keyevent.cs</DependentUpon>
