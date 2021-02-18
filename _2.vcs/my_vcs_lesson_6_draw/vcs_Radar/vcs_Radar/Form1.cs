@@ -34,7 +34,7 @@ namespace vcs_Radar
             bmp = new Bitmap(WIDTH + 1, HEIGHT + 1);
 
             //background color
-            this.BackColor = Color.Black;
+            panel_radar.BackColor = Color.Black;
 
             //center
             cx = WIDTH / 2;
@@ -102,8 +102,8 @@ namespace vcs_Radar
             g.DrawLine(new Pen(Color.Black, 1f), new Point(cx, cy), new Point(tx, ty));
             g.DrawLine(p, new Point(cx, cy), new Point(x, y));
 
-            //load bitmap in picturebox1
-            pictureBox1.Image = bmp;
+            //load bitmap in pictureBox_radar
+            pictureBox_radar.Image = bmp;
 
             //dispose
             p.Dispose();

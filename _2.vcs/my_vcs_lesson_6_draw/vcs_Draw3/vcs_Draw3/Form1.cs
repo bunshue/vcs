@@ -26,6 +26,8 @@ namespace vcs_Draw3
         //Bitmap bitmap1;
         Bitmap bitmap2;
         Bitmap bitmap3;
+        Bitmap bitmap_border1;
+        Bitmap bitmap_border2;
 
         //for gear
         // The frame images.
@@ -80,6 +82,24 @@ namespace vcs_Draw3
         private const float Radius = 4;
 
         //for pictureBox_stock SP
+
+        //畫任意矩形 pictureBox1
+        private Random Rand = new Random();
+        private Bitmap Bm;
+        private Graphics Gr;
+
+        //畫正弦波 ST
+        Bitmap bmp;
+        Graphics g;
+        Pen p4;
+        int t;
+
+        //int WIDTH = 720;
+        int HEIGHT = 300;
+        int AMPLITUDE = 150;
+        //畫正弦波 SP
+
+        string filename = "C:\\______test_files\\picture1.jpg";
 
         public Form1()
         {
@@ -212,6 +232,72 @@ namespace vcs_Draw3
 
             //for pictureBox_stock
             SavePrice();    // Get the first price.
+
+            //for pictureBox_move ST
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+            //pictureBox_move.Image = Image.FromFile(filename);
+            bitmap3 = new Bitmap(filename);
+            richTextBox1.Text += "W = " + bitmap3.Width.ToString() + " H = " + bitmap3.Height.ToString() + "\n";
+            pictureBox_move.Size = bitmap3.Size;
+            pictureBox_move.Image = bitmap3;
+
+            timer_move.Enabled = true;
+            //for pictureBox_move SP
+
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+            //pictureBox_move.Image = Image.FromFile(filename);
+            bitmap_border1 = new Bitmap(filename);
+            pictureBox_border1.Image = bitmap_border1;
+
+            bitmap_border2 = new Bitmap(filename);
+            pictureBox_border2.Image = bitmap_border2;
+
+            //畫任意矩形 ST
+            timer_random_rectangle.Enabled = true;
+            Bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Gr = Graphics.FromImage(Bm);
+            pictureBox1.BackColor = Color.Pink;
+            pictureBox1.Image = Bm;
+            //畫任意矩形 SP
+
+
+            //畫正弦波 ST
+            timer7.Enabled = true;
+            richTextBox1.Text += "ST\n";
+
+            //pictureBox_move.Width = 480;
+            //pictureBox_move.Height = 360;
+            //pictureBox_move.Location = new Point(400, 300);
+
+            //create Bitmap
+            bmp = null;
+            bmp = new Bitmap(pictureBox_sine.Size.Width, pictureBox_sine.Size.Height);
+
+            //background color
+            //this.BackColor = Color.Black;
+
+            //center
+            //cx = WIDTH / 2;
+            //cy = HEIGHT / 2;
+
+            //initial degree of HAND
+            //u = 0;
+
+            //timer1.Enabled = true;
+            pictureBox_sine.Image = null;
+            t = 0;
+            DrawXY();
+            DrawYLine();
+            //畫正弦波 SP
+
+
+            //旋轉邊框 ST
+            //新建圖檔, 初始化畫布
+            bitmap2 = new Bitmap(pictureBox_rotate.Width, pictureBox_rotate.Height);
+            g2 = Graphics.FromImage(bitmap2);
+            g2.Clear(Color.White);
+            pictureBox_rotate.Image = bitmap2;
+            //旋轉邊框 SP
         }
 
         void show_item_location()
@@ -227,31 +313,39 @@ namespace vcs_Draw3
             dx = 120;
             dy = 50;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            richTextBox1.Location = new Point(x_st + dx * 0 - 200, y_st + dy * 12);
+            richTextBox1.Size = new Size(300, 320);
 
-            richTextBox1.Location = new Point(x_st + dx * 0 - 100, y_st + dy * 12);
-            richTextBox1.Size = new Size(200, 450);
-
-            pictureBox1.Size = new Size(480, 360);
-            pictureBox1.Location = new Point(1000, 10);
+            pictureBox1.Size = new Size(480, 300);
+            pictureBox1.Location = new Point(910, 10);
             pictureBox1.BackColor = Color.LightGreen;
 
-            pictureBox2.Size = new Size(480, 360);
-            pictureBox2.Location = new Point(1000, 10+360+10);
-            pictureBox2.BackColor = Color.LightBlue;
+            pictureBox_sine.Size = new Size(400, 300);
+            pictureBox_sine.Location = new Point(910+480+10, 10);
+            pictureBox_sine.BackColor = Color.LightYellow;
+
+
+            pictureBox_border1.Size = new Size(280, 350);
+            pictureBox_border1.Location = new Point(1000 + 310, 10 + 300 + 10);
+            pictureBox_border1.BackColor = Color.LightSkyBlue;
+
+            pictureBox_border2.Size = new Size(280, 350);
+            pictureBox_border2.Location = new Point(1000 + 310 + 300, 10 + 300 + 10);
+            pictureBox_border2.BackColor = Color.LightSkyBlue;
+
+            pictureBox_move.Size = new Size(480, 360);
+            pictureBox_move.Location = new Point(1000, 10 + 300 + 10);
+            pictureBox_move.BackColor = Color.LightBlue;
 
             pictureBox_stock.Size = new Size(680, 360);
             pictureBox_stock.Location = new Point(1000 - 700, 10 + 360 + 10);
             pictureBox_stock.BackColor = Color.LightPink;
+
+            pictureBox_rotate.Size = new Size(200, 180);
+            pictureBox_rotate.Location = new Point(560, 180);
+            pictureBox_rotate.BackColor = Color.Linen;
+
+            //pictureBox_rotate
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -279,6 +373,14 @@ namespace vcs_Draw3
             pictureBox_circle.Size = new Size(W, H);
             pictureBox_circle.Location = new Point(x_st + dx * 3, y_st);
             pictureBox_circle.BackColor = Color.Pink;
+
+            panel_radar.Size = new Size(W-30, H-50);
+            panel_radar.Location = new Point(10, 500);
+            panel_radar.BackColor = Color.Red;
+
+            pictureBox_radar.Size = new Size(W - 30 - 20, H - 50 - 20);
+            pictureBox_radar.Location = new Point(10, 10);
+            pictureBox_radar.BackColor = Color.Green;
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -316,198 +418,15 @@ namespace vcs_Draw3
             Application.Exit();
         }
 
-        bool isRunning1 = false;
-        bool isRunning2 = false;
-        bool isRunning3 = false;
-        bool isRunning4 = false;
-
-        string filename = "C:\\______test_files\\picture1.jpg";
-        private void button0_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            //pictureBox2.Image = Image.FromFile(filename);
-
-            bitmap3 = new Bitmap(filename);
-            richTextBox1.Text += "W = " + bitmap3.Width.ToString() + " H = " + bitmap3.Height.ToString() + "\n";
-            pictureBox2.Size = bitmap3.Size;
-            pictureBox2.Image = bitmap3;
-            pictureBox2.Location = new Point(570, 10);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (bitmap3 == null)
-            {
-                richTextBox1.Text += "未開啟圖片\n";
-                return;
-            }
-
-            if (isRunning1 == false)
-            {
-                isRunning1 = true;
-                timer4.Enabled = true;
-                richTextBox1.Text += "ST\n";
-            }
-            else
-            {
-                isRunning1 = false;
-                timer4.Enabled = false;
-                richTextBox1.Text += "SP\n";
-            }
-        }
-
-        int tt = 0;
-        int xx2 = 0;
-        int yy2 = 0;
-        double gg = 9.8;
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (bitmap3 == null)
-            {
-                richTextBox1.Text += "未開啟圖片\n";
-                return;
-            }
-
-            if (isRunning3 == false)
-            {
-                isRunning3 = true;
-                timer6.Enabled = true;
-                richTextBox1.Text += "ST\n";
-                tt = 0;
-                xx2 = 0;
-                yy2 = 0;
-            }
-            else
-            {
-                isRunning3 = false;
-                timer6.Enabled = false;
-                richTextBox1.Text += "SP\n";
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap_old;
-            bitmap_old = new Bitmap(filename);
-            pictureBox2.Image = bitmap_old;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (bitmap3 == null)
-            {
-                richTextBox1.Text += "未開啟圖片\n";
-                return;
-            }
-
-            if (isRunning2 == false)
-            {
-                isRunning2 = true;
-                timer5.Enabled = true;
-                richTextBox1.Text += "ST\n";
-            }
-            else
-            {
-                isRunning2 = false;
-                timer5.Enabled = false;
-                richTextBox1.Text += "SP\n";
-            }
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (bitmap3 == null)
-            {
-                richTextBox1.Text += "未開啟圖片\n";
-                return;
-            }
-
-            if (isRunning2 == false)
-            {
-                isRunning2 = true;
-                timer8.Enabled = true;
-                richTextBox1.Text += "ST\n";
-                round8 = 0;
-            }
-            else
-            {
-                isRunning2 = false;
-                timer8.Enabled = false;
-                richTextBox1.Text += "SP\n";
-            }
-
-        }
-
-        Bitmap bmp;
-        Graphics g;
-        Pen p4;
-        int t;
-
-        //int WIDTH = 720;
-        int HEIGHT = 300;
-        int AMPLITUDE = 150;
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            /*
-            if (bitmap3 == null)
-            {
-                richTextBox1.Text += "未開啟圖片\n";
-                return;
-            }
-             */
-
-            if (isRunning4 == false)
-            {
-                isRunning4 = true;
-                timer7.Enabled = true;
-                richTextBox1.Text += "ST\n";
-
-                //pictureBox2.Width = 480;
-                //pictureBox2.Height = 360;
-                //pictureBox2.Location = new Point(400, 300);
-
-                //create Bitmap
-                bmp = null;
-                bmp = new Bitmap(pictureBox2.Size.Width, pictureBox2.Size.Height);
-
-                //background color
-                //this.BackColor = Color.Black;
-
-                //center
-                //cx = WIDTH / 2;
-                //cy = HEIGHT / 2;
-
-                //initial degree of HAND
-                //u = 0;
-
-                //timer1.Enabled = true;
-                pictureBox2.Image = null;
-                t = 0;
-                DrawXY();
-                DrawYLine();
-
-                //timer1.Enabled = true;
-            }
-            else
-            {
-                isRunning4 = false;
-                timer7.Enabled = false;
-                richTextBox1.Text += "SP\n";
-            }
-        }
-
         private void DrawXY()//画X轴Y轴
         {
             //graphics
             g = Graphics.FromImage(bmp);
-            System.Drawing.Point px1 = new System.Drawing.Point(this.pictureBox1.Width * 10 / 100, this.pictureBox1.Height * 90 / 100);
-            System.Drawing.Point px2 = new System.Drawing.Point(this.pictureBox1.Width * 90 / 100, this.pictureBox1.Height * 90 / 100);
+            System.Drawing.Point px1 = new System.Drawing.Point(this.pictureBox_sine.Width * 10 / 100, this.pictureBox_sine.Height * 90 / 100);
+            System.Drawing.Point px2 = new System.Drawing.Point(this.pictureBox_sine.Width * 90 / 100, this.pictureBox_sine.Height * 90 / 100);
             g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
-            System.Drawing.Point py1 = new System.Drawing.Point(this.pictureBox1.Width * 10 / 100, this.pictureBox1.Height * 90 / 100);
-            System.Drawing.Point py2 = new System.Drawing.Point(this.pictureBox1.Width * 10 / 100, this.pictureBox1.Height * 10 / 100);
+            System.Drawing.Point py1 = new System.Drawing.Point(this.pictureBox_sine.Width * 10 / 100, this.pictureBox_sine.Height * 90 / 100);
+            System.Drawing.Point py2 = new System.Drawing.Point(this.pictureBox_sine.Width * 10 / 100, this.pictureBox_sine.Height * 10 / 100);
             g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
             g.Dispose();
         }
@@ -518,45 +437,14 @@ namespace vcs_Draw3
             g = Graphics.FromImage(bmp);
             for (int i = 1; i < 9; i++)
             {
-                System.Drawing.Point py1 = new System.Drawing.Point(100 * i, this.pictureBox1.Height - 5);
-                System.Drawing.Point py2 = new System.Drawing.Point(100 * i, this.pictureBox1.Height);
+                System.Drawing.Point py1 = new System.Drawing.Point(100 * i, this.pictureBox_sine.Height - 5);
+                System.Drawing.Point py2 = new System.Drawing.Point(100 * i, this.pictureBox_sine.Height);
                 g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
             }
             g.Dispose();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private Random Rand = new Random();
-        private Bitmap Bm;
-        private Graphics Gr;
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if (button9.Text == "畫任意矩形 ST")
-            {
-                timer_random_rectangle.Enabled = true;
-                button9.Text = "畫任意矩形 SP";
-
-                Bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                Gr = Graphics.FromImage(Bm);
-                pictureBox1.BackColor = Color.Pink;
-                pictureBox1.Image = Bm;
-            }
-            else
-            {
-                timer_random_rectangle.Enabled = false;
-                button9.Text = "畫任意矩形 ST";
-            }
-        }
-
+        //畫任意矩形
         private void timer_random_rectangle_Tick(object sender, EventArgs e)
         {
             int x = Rand.Next(pictureBox1.Width - 10);
@@ -639,10 +527,10 @@ namespace vcs_Draw3
         int step = 60;
         Pen pen = new Pen(Color.Blue, 30);
 
-        private void timer3_Tick(object sender, EventArgs e)
+        private void timer_rotate_Tick(object sender, EventArgs e)
         {
-            int w = pictureBox1.Width;
-            int h = pictureBox1.Height;
+            int w = pictureBox_rotate.Width;
+            int h = pictureBox_rotate.Height;
             //richTextBox1.Text += "w = " + w.ToString() + " h = " + h.ToString() + "\n";
             if ((xx < (w - 1)) && (yy == 0))
             {
@@ -701,37 +589,15 @@ namespace vcs_Draw3
             x_st = xx;
             y_st = yy;
 
-            pictureBox1.Image = bitmap2;
+            pictureBox_rotate.Image = bitmap2;
 
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                //新建圖檔, 初始化畫布
-                bitmap2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                g2 = Graphics.FromImage(bitmap2);
-                g2.Clear(Color.White);
-                pictureBox1.Image = bitmap2;
-
-                timer3.Enabled = true;
-                pictureBox1.Location = new Point(10, 350);
-                pictureBox1.Size = new Size(300, 200);
-            }
-            else
-            {
-                timer3.Enabled = false;
-
-            }
 
         }
 
         int x_st4 = 0;
         int y_st4 = 200;
 
-        private void timer4_Tick(object sender, EventArgs e)
+        private void timer_move_Tick(object sender, EventArgs e)
         {
             bitmap3 = new Bitmap(filename);
 
@@ -757,7 +623,7 @@ namespace vcs_Draw3
             //g.FillEllipse(new Brush(Color.Red), x_st4, y_st4, ww, hh);
             g.FillEllipse(new SolidBrush(Color.Red), x_st4, y_st4, ww, hh);
 
-            pictureBox2.Image = bitmap3;
+            pictureBox_move.Image = bitmap3;
 
 
             //bitmap1 = new Bitmap(filename);
@@ -776,14 +642,13 @@ namespace vcs_Draw3
         int add = 10;
         int round = 0;
 
-        private void timer5_Tick(object sender, EventArgs e)
+        private void timer_border1_Tick(object sender, EventArgs e)
         {
             //bitmap1 = new Bitmap(filename);
+            ww = bitmap_border1.Width;
+            hh = bitmap_border1.Height;
 
-            ww = bitmap3.Width;
-            hh = bitmap3.Height;
-
-            Graphics g = Graphics.FromImage(bitmap3);
+            Graphics g = Graphics.FromImage(bitmap_border1);
 
             if (step3 == 1)
             {
@@ -843,7 +708,7 @@ namespace vcs_Draw3
 
             //g.FillEllipse(new SolidBrush(Color.Red), xx3, yy3, 3, 3);
 
-            pictureBox2.Image = bitmap3;
+            pictureBox_border1.Image = bitmap_border1;
 
 
             //bitmap1 = new Bitmap(filename);
@@ -868,17 +733,18 @@ namespace vcs_Draw3
         int count = 0;
         int count_old = 0;
 
-        private void timer8_Tick(object sender, EventArgs e)
+        private void timer_border2_Tick(object sender, EventArgs e)
         {
-            W = bitmap3.Width;
-            H = bitmap3.Height;
+            //bitmap_border2
+            W = bitmap_border2.Width;
+            H = bitmap_border2.Height;
 
             w = 25;
             h = 25;
 
             //richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + " w = " + w.ToString() + " h = " + h.ToString() + "\n";
-            
-            Graphics g = Graphics.FromImage(bitmap3);
+
+            Graphics g = Graphics.FromImage(bitmap_border2);
 
             g.FillRectangle(new SolidBrush(Color.Red), 0, 0, w, h);
 
@@ -961,7 +827,7 @@ namespace vcs_Draw3
                 {
                     if ((count - count_old) == 1)
                     {
-                        timer8.Enabled = false;
+                        timer_border2.Enabled = false;
                         return;
                     }
                     else
@@ -995,50 +861,7 @@ namespace vcs_Draw3
 
             richTextBox1.Text += "(" + x_st8.ToString() + "," + y_st8.ToString() + ") ";
 
-            pictureBox2.Image = bitmap3;
-
-        }
-
-        private void timer6_Tick(object sender, EventArgs e)
-        {
-            bitmap3 = new Bitmap(filename);
-            Graphics g = Graphics.FromImage(bitmap3);
-            pictureBox2.Image = bitmap3;
-
-            /*
-            xx += 2;
-            yy += 2;
-            //g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
-
-            //g.DrawEllipse(new Pen(Color.Red, 3), xx, yy, 20, 20);
-            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(xx, yy, 20, 20));
-
-            if (xx >= 300)
-                yy -= 4;
-
-            if (xx >= 600)
-                timer1.Enabled = false;
-            */
-
-            tt++;
-            xx2 = tt * 30;
-            yy2 = (int)(gg * tt * tt / 2);
-            //g.DrawLine(new Pen(Color.Red, 1), x_st, y_st + awb_block * i, x_st + search_size - 1, y_st + awb_block * i);
-
-            //g.DrawEllipse(new Pen(Color.Red, 3), xx, yy, 20, 20);
-            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(xx2, yy2, 20, 20));
-
-            if (xx2 >= 200)
-                yy2 -= 4;
-
-            if (xx2 >= 800)
-            {
-                tt = 0;
-                xx2 = 0;
-                yy2 = 0;
-
-            }
-
+            pictureBox_border2.Image = bitmap_border2;
         }
 
         private void timer7_Tick(object sender, EventArgs e)
@@ -1055,24 +878,24 @@ namespace vcs_Draw3
             xx = t;
             yy = HEIGHT - (int)(AMPLITUDE * Math.Sin(Math.PI * t / 180)) - AMPLITUDE;
 
-
             g.DrawEllipse(new Pen(Color.Red, 1f), xx, yy, 1, 1);
 
             //load bitmap in picturebox1
-            pictureBox2.Image = bmp;
+            pictureBox_sine.Image = bmp;
 
+            t += 3;
+            if (t >= 450)
+            {
+                g.Clear(Color.LightYellow);
+                t = 0;
+                DrawXY();
+                DrawYLine();
+            }
 
             //dispose
             p4.Dispose();
             g.Dispose();
-
-            t += 3;
-            if (t >= 720)
-                timer1.Enabled = false;
-
-
         }
-
 
         // The currently selected color and its number.
         private Color SelectedColor;
@@ -1945,8 +1768,15 @@ namespace vcs_Draw3
             // Get the next price.
             SavePrice();
         }
+
         //for pictureBox_stock SP
 
+
+        //雷達掃瞄圖
+        private void timer_radar_Tick(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }

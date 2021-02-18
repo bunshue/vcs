@@ -85,8 +85,10 @@ namespace howto_get_stock_prices
             richTextBox1.Text += "url = " + url + "\n";
             // Make a WebClient.
             WebClient web_client = new WebClient();
+            web_client.Proxy = null;
 
             // Get the indicated URL.
+            web_client.Proxy = null;
             Stream response = web_client.OpenRead(url);
 
             // Read the result.

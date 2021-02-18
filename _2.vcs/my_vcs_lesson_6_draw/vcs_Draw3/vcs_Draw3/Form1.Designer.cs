@@ -30,17 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button0 = new System.Windows.Forms.Button();
             this.p2 = new System.Windows.Forms.Panel();
             this.p1 = new System.Windows.Forms.Panel();
             this.p3 = new System.Windows.Forms.Panel();
@@ -48,14 +38,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.timer4 = new System.Windows.Forms.Timer(this.components);
-            this.timer5 = new System.Windows.Forms.Timer(this.components);
-            this.timer6 = new System.Windows.Forms.Timer(this.components);
+            this.timer_rotate = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_move = new System.Windows.Forms.PictureBox();
+            this.timer_move = new System.Windows.Forms.Timer(this.components);
+            this.timer_border1 = new System.Windows.Forms.Timer(this.components);
             this.timer7 = new System.Windows.Forms.Timer(this.components);
-            this.timer8 = new System.Windows.Forms.Timer(this.components);
+            this.timer_border2 = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer_random_rectangle = new System.Windows.Forms.Timer(this.components);
             this.picSample = new System.Windows.Forms.PictureBox();
@@ -84,8 +72,15 @@
             this.pictureBox_stock = new System.Windows.Forms.PictureBox();
             this.tipData = new System.Windows.Forms.ToolTip(this.components);
             this.timer_stock = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_border1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_sine = new System.Windows.Forms.PictureBox();
+            this.pictureBox_border2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_rotate = new System.Windows.Forms.PictureBox();
+            this.panel_radar = new System.Windows.Forms.Panel();
+            this.pictureBox_radar = new System.Windows.Forms.PictureBox();
+            this.timer_radar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).BeginInit();
@@ -98,6 +93,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).BeginInit();
+            this.panel_radar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -108,122 +109,14 @@
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(1340, 152);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(102, 42);
-            this.button9.TabIndex = 18;
-            this.button9.Text = "畫任意矩形 ST";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(1341, 56);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(102, 42);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "重畫";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGreen;
             this.pictureBox1.Location = new System.Drawing.Point(951, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(103, 102);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(1459, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 42);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "畫動物1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(1578, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(102, 42);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "畫動物2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(1459, 56);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(102, 42);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "畫邊框1";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(1578, 56);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 42);
-            this.button5.TabIndex = 23;
-            this.button5.Text = "畫邊框2";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(1341, 104);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(102, 42);
-            this.button6.TabIndex = 22;
-            this.button6.Text = "畫正弦波";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(1459, 104);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(102, 42);
-            this.button7.TabIndex = 25;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(1578, 104);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(102, 42);
-            this.button8.TabIndex = 24;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button0
-            // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(1340, 8);
-            this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(102, 42);
-            this.button0.TabIndex = 30;
-            this.button0.Text = "開啟圖片";
-            this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // p2
             // 
@@ -272,52 +165,39 @@
             this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // timer3
+            // timer_rotate
             // 
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            this.timer_rotate.Enabled = true;
+            this.timer_rotate.Tick += new System.EventHandler(this.timer_rotate_Tick);
             // 
-            // pictureBox2
+            // pictureBox_move
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.LightBlue;
-            this.pictureBox2.Location = new System.Drawing.Point(951, 116);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(103, 95);
-            this.pictureBox2.TabIndex = 49;
-            this.pictureBox2.TabStop = false;
+            this.pictureBox_move.BackColor = System.Drawing.Color.LightBlue;
+            this.pictureBox_move.Location = new System.Drawing.Point(951, 116);
+            this.pictureBox_move.Name = "pictureBox_move";
+            this.pictureBox_move.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_move.TabIndex = 49;
+            this.pictureBox_move.TabStop = false;
             // 
-            // checkBox1
+            // timer_move
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(43, 321);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 25);
-            this.checkBox1.TabIndex = 51;
-            this.checkBox1.Text = "旋轉邊框";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.timer_move.Interval = 30;
+            this.timer_move.Tick += new System.EventHandler(this.timer_move_Tick);
             // 
-            // timer4
+            // timer_border1
             // 
-            this.timer4.Interval = 30;
-            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
-            // 
-            // timer5
-            // 
-            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
-            // 
-            // timer6
-            // 
-            this.timer6.Tick += new System.EventHandler(this.timer6_Tick);
+            this.timer_border1.Enabled = true;
+            this.timer_border1.Tick += new System.EventHandler(this.timer_border1_Tick);
             // 
             // timer7
             // 
             this.timer7.Interval = 10;
             this.timer7.Tick += new System.EventHandler(this.timer7_Tick);
             // 
-            // timer8
+            // timer_border2
             // 
-            this.timer8.Tick += new System.EventHandler(this.timer8_Tick);
+            this.timer_border2.Enabled = true;
+            this.timer_border2.Tick += new System.EventHandler(this.timer_border2_Tick);
             // 
             // bt_clear
             // 
@@ -513,7 +393,7 @@
             this.pictureBox_stock.BackColor = System.Drawing.Color.LightPink;
             this.pictureBox_stock.Location = new System.Drawing.Point(951, 217);
             this.pictureBox_stock.Name = "pictureBox_stock";
-            this.pictureBox_stock.Size = new System.Drawing.Size(103, 95);
+            this.pictureBox_stock.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_stock.TabIndex = 68;
             this.pictureBox_stock.TabStop = false;
             this.pictureBox_stock.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_stock_Paint);
@@ -525,11 +405,77 @@
             this.timer_stock.Interval = 500;
             this.timer_stock.Tick += new System.EventHandler(this.timer_stock_Tick);
             // 
+            // pictureBox_border1
+            // 
+            this.pictureBox_border1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.pictureBox_border1.Location = new System.Drawing.Point(1060, 8);
+            this.pictureBox_border1.Name = "pictureBox_border1";
+            this.pictureBox_border1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_border1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_border1.TabIndex = 69;
+            this.pictureBox_border1.TabStop = false;
+            // 
+            // pictureBox_sine
+            // 
+            this.pictureBox_sine.BackColor = System.Drawing.Color.LightYellow;
+            this.pictureBox_sine.Location = new System.Drawing.Point(1060, 116);
+            this.pictureBox_sine.Name = "pictureBox_sine";
+            this.pictureBox_sine.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_sine.TabIndex = 70;
+            this.pictureBox_sine.TabStop = false;
+            // 
+            // pictureBox_border2
+            // 
+            this.pictureBox_border2.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.pictureBox_border2.Location = new System.Drawing.Point(1166, 8);
+            this.pictureBox_border2.Name = "pictureBox_border2";
+            this.pictureBox_border2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_border2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_border2.TabIndex = 71;
+            this.pictureBox_border2.TabStop = false;
+            // 
+            // pictureBox_rotate
+            // 
+            this.pictureBox_rotate.BackColor = System.Drawing.Color.Linen;
+            this.pictureBox_rotate.Location = new System.Drawing.Point(1272, 8);
+            this.pictureBox_rotate.Name = "pictureBox_rotate";
+            this.pictureBox_rotate.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_rotate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_rotate.TabIndex = 72;
+            this.pictureBox_rotate.TabStop = false;
+            // 
+            // panel_radar
+            // 
+            this.panel_radar.Controls.Add(this.pictureBox_radar);
+            this.panel_radar.Location = new System.Drawing.Point(567, 189);
+            this.panel_radar.Name = "panel_radar";
+            this.panel_radar.Size = new System.Drawing.Size(183, 192);
+            this.panel_radar.TabIndex = 73;
+            // 
+            // pictureBox_radar
+            // 
+            this.pictureBox_radar.Location = new System.Drawing.Point(17, 17);
+            this.pictureBox_radar.Name = "pictureBox_radar";
+            this.pictureBox_radar.Size = new System.Drawing.Size(154, 148);
+            this.pictureBox_radar.TabIndex = 0;
+            this.pictureBox_radar.TabStop = false;
+            // 
+            // timer_radar
+            // 
+            this.timer_radar.Enabled = true;
+            this.timer_radar.Interval = 5;
+            this.timer_radar.Tick += new System.EventHandler(this.timer_radar_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.Controls.Add(this.panel_radar);
+            this.Controls.Add(this.pictureBox_rotate);
+            this.Controls.Add(this.pictureBox_border2);
+            this.Controls.Add(this.pictureBox_sine);
+            this.Controls.Add(this.pictureBox_border1);
             this.Controls.Add(this.pictureBox_stock);
             this.Controls.Add(this.pictureBox_circle);
             this.Controls.Add(this.pictureBox_spin);
@@ -545,24 +491,13 @@
             this.Controls.Add(this.picSample);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox_move);
             this.Controls.Add(this.p2);
             this.Controls.Add(this.p1);
             this.Controls.Add(this.p3);
             this.Controls.Add(this.p0);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button0);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.picRainbow);
             this.DoubleBuffered = true;
             this.Name = "Form1";
@@ -570,7 +505,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).EndInit();
@@ -583,6 +518,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).EndInit();
+            this.panel_radar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -591,17 +532,7 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Panel p2;
         private System.Windows.Forms.Panel p1;
         private System.Windows.Forms.Panel p3;
@@ -609,14 +540,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Timer timer3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Timer timer4;
-        private System.Windows.Forms.Timer timer5;
-        private System.Windows.Forms.Timer timer6;
+        private System.Windows.Forms.Timer timer_rotate;
+        private System.Windows.Forms.PictureBox pictureBox_move;
+        private System.Windows.Forms.Timer timer_move;
+        private System.Windows.Forms.Timer timer_border1;
         private System.Windows.Forms.Timer timer7;
-        private System.Windows.Forms.Timer timer8;
+        private System.Windows.Forms.Timer timer_border2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer_random_rectangle;
         private System.Windows.Forms.PictureBox picSample;
@@ -645,6 +574,13 @@
         private System.Windows.Forms.PictureBox pictureBox_stock;
         private System.Windows.Forms.ToolTip tipData;
         private System.Windows.Forms.Timer timer_stock;
+        private System.Windows.Forms.PictureBox pictureBox_border1;
+        private System.Windows.Forms.PictureBox pictureBox_sine;
+        private System.Windows.Forms.PictureBox pictureBox_border2;
+        private System.Windows.Forms.PictureBox pictureBox_rotate;
+        private System.Windows.Forms.Panel panel_radar;
+        private System.Windows.Forms.PictureBox pictureBox_radar;
+        private System.Windows.Forms.Timer timer_radar;
     }
 }
 

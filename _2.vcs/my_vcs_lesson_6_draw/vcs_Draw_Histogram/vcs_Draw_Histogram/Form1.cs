@@ -52,6 +52,7 @@ namespace vcs_Draw_Histogram
                     new PointF(pic.ClientSize.Width, pic.ClientSize.Height),
                     new PointF(0, 0),
                 };
+                gr.DrawString("A", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(10, 10));
                 gr.Transform = new Matrix(rect, pts);
 
                 int kk = 0;
@@ -63,6 +64,9 @@ namespace vcs_Draw_Histogram
 
                 }
                 richTextBox1.Text += "draw " + kk.ToString() + " fill rectangles\n";
+
+                gr.DrawString("B", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(10, 10));
+
 
                 // Draw the histogram.
                 if (counts.Length < 200)

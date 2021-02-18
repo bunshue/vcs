@@ -39,6 +39,9 @@ namespace vcs_Draw7_Transform
 
         Point[] Points = new Point[8];    //一維陣列內有 8 個Point
 
+        int N = 360;
+        Point[] data;
+
         public Form1()
         {
             InitializeComponent();
@@ -49,9 +52,51 @@ namespace vcs_Draw7_Transform
             W = pictureBox1.ClientSize.Width;
             H = pictureBox1.ClientSize.Height;
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            data = new Point[N];    //一維陣列內有 N 個Point
+            int i;
+            for (i = 0; i < N; i++)
+            {
+                data[i].X = i;
+                data[i].Y = 100 + (int)(100 * sind(i));
+            }
         }
 
-        void MakeData1()
+        void MakeData1a()
+        {
+            richTextBox1.Text += "製作資料\n";
+            richTextBox1.Text += "x=-180:5:180;\n";
+            richTextBox1.Text += "y=sind(x)+0.6;\n";
+
+            x.Clear();
+            y.Clear();
+            ymax = 0;
+            ymin = 0;
+
+            xmin = -180;
+            xmax = 180;
+            float i;
+            //原始x y資料
+            double yy;
+            for (i = xmin; i <= xmax; i += 5f)
+            {
+                x.Add(i);
+
+                yy = sind(i)+0.6;
+
+                /*
+                if (i == 0)
+                    yy = 1;
+                else
+                    yy = (float)(Math.Sin(i) / i);
+                */
+                if (Math.Abs(yy) < 0.0001)
+                    yy = 0;
+                y.Add(yy);     //y = sind(x)   x=-180:1:180
+            }
+        }
+
+        void MakeData1b()
         {
             richTextBox1.Text += "製作資料\n";
             richTextBox1.Text += "x=-180:5:180;\n";
@@ -339,14 +384,14 @@ namespace vcs_Draw7_Transform
         private void button1_Click(object sender, EventArgs e)
         {
             //不使用Transform畫正弦波
-            MakeData1();
+            MakeData1a();
             DrawData1a();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //使用Transform畫正弦波
-            MakeData1();
+            MakeData1b();
             DrawData1b();
         }
 
@@ -394,12 +439,13 @@ namespace vcs_Draw7_Transform
                 g.Clear(Color.White);
 
                 // Create pens.
-                Pen redPen = new Pen(Color.Red, 0);     //線寬大於0會讓轉換後線變粗
-                Pen bluePen = new Pen(Color.Blue, 0);
+                Pen redPen = new Pen(Color.Red, 2);     //線寬大於0會讓轉換後線變粗
+                Pen bluePen = new Pen(Color.Blue, 2);
 
                 // Draw lines between original points to screen.
-                g.DrawLines(bluePen, Points);   //畫直線
-                g.DrawString("文字", new Font("標楷體", 10), new SolidBrush(Color.Blue), new PointF(30, 20));
+                //g.DrawLines(bluePen, Points);   //畫直線
+                g.DrawCurve(bluePen, Points);   //畫曲線
+                g.DrawString("轉換前10", new Font("標楷體", 10), new SolidBrush(Color.Blue), new PointF(22, 20));
 
                 //準備Transform
                 int w1;
@@ -437,8 +483,12 @@ namespace vcs_Draw7_Transform
 
                 g.Transform = new Matrix(rect, pts);
 
-                g.DrawLines(redPen, Points);   //畫直線
-                g.DrawString("文字", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(30, 20));
+                //g.DrawLines(redPen, Points);   //畫直線
+                g.DrawCurve(redPen, Points);   //畫曲線
+                g.DrawString("轉換後10", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(22, 20));
+
+                g.ResetTransform();
+                g.DrawString("恢復轉換後10", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(100, 20));
 
                 pictureBox1.Image = bitmap1;
             }
@@ -448,6 +498,75 @@ namespace vcs_Draw7_Transform
         {
             MakeData2();
             DrawData2();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //畫sin, 無transform
+            richTextBox1.Text += "畫 y=100+100*sind(x), x=0:1:360 沒有transform\n";
+
+            // Create pens.
+            Pen greenPen = new Pen(Color.Green, 2);
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            // Draw lines between original points to screen.
+            g.DrawLines(greenPen, data);   //畫直線
+
+            // Draw curve to screen.
+            //g.DrawCurve(greenPen, data); //畫曲線
+
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //畫sin, 有transform
+            richTextBox1.Text += "畫 y=sind(x), x=0:1:360 有transform\n";
+            // Create pens.
+            Pen redPen = new Pen(Color.Red, 3);
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+
+            #region 做transform
+            int x_max = 360;
+            int x_min = 0;
+            int y_max = 0;
+            int y_min = 200;
+
+            int i;
+            for (i = 0; i < N; i++)
+            {
+                //data[i].X = i;
+                //data[i].Y = 100 + (int)(100 * sind(i));
+                if (data[i].Y > y_max)
+                    y_max = data[i].Y;
+                if (data[i].Y < y_min)
+                    y_min = data[i].Y;
+            }
+
+            // Scale to fit the data.
+            RectangleF rect = new RectangleF(x_min, y_min, x_max, y_max - y_min);
+
+            g.DrawRectangle(redPen, x_min, y_min, x_max, y_max - y_min);
+
+            richTextBox1.Text += "rect w = " + rect.Width.ToString() + ", h = " + rect.Height.ToString() + "\n";
+            PointF[] pts = 
+                {
+                    new PointF(0, pictureBox1.ClientSize.Height),
+                    new PointF(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height),
+                    new PointF(0, 0),
+                };
+
+            richTextBox1.Text += "pts w = " + pictureBox1.ClientSize.Width.ToString() + ", h = " + pictureBox1.ClientSize.Height.ToString() + "\n";
+
+            g.Transform = new Matrix(rect, pts);
+            #endregion
+
+            // Draw lines between original points to screen.
+            g.DrawLines(redPen, data);   //畫直線
+
+            // Draw curve to screen.
+            //g.DrawCurve(redPen, data); //畫曲線
         }
     }
 }
