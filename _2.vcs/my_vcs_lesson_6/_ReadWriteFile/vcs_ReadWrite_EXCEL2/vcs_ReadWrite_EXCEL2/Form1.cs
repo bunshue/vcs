@@ -25,15 +25,15 @@ namespace vcs_ReadWrite_EXCEL2
             //Excel數據導入到dataGridView
             //http://weisico.com/program/2018/0531/370.html
 
-            string path = "c:\\______test_files\\__RW\\_excel\\vcs_ReadWrite_EXCEL2.xls";
+            string filename = "c:\\______test_files\\__RW\\_excel\\vcs_ReadWrite_EXCEL2.xls";
 
             try
             {
-                string tableName = GetExcelFirstTableName(path);
+                string tableName = GetExcelFirstTableName(filename);
                 //设置T_Sql
                 string TSql = "SELECT  * FROM [" + tableName + "]";
                 //读取数据
-                DataTable table = ExcelToDataSet(path, TSql).Tables[0];
+                DataTable table = ExcelToDataSet(filename, TSql).Tables[0];
                 dataGridView1.DataSource = table;
             }
             catch (Exception ex)

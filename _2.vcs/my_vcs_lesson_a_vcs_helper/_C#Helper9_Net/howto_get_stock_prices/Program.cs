@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DrawC_Stock
+namespace howto_get_stock_prices
 {
     static class Program
     {

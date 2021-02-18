@@ -16,11 +16,6 @@ namespace vcs_ReadWrite_PDF
             InitializeComponent();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             string filename = "C:\\______test_files\\__RW\\_pdf\\Test.pdf";
@@ -31,11 +26,14 @@ namespace vcs_ReadWrite_PDF
         private void button2_Click(object sender, EventArgs e)
         {
 
+
+
+
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
     }
 }

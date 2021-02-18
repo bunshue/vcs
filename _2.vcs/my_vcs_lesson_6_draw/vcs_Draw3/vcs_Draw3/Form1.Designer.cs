@@ -81,6 +81,9 @@
             this.timer_spin = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_circle = new System.Windows.Forms.PictureBox();
             this.timer_circle = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_stock = new System.Windows.Forms.PictureBox();
+            this.tipData = new System.Windows.Forms.ToolTip(this.components);
+            this.timer_stock = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -94,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -504,11 +508,29 @@
             this.timer_circle.Enabled = true;
             this.timer_circle.Tick += new System.EventHandler(this.timer_circle_Tick);
             // 
+            // pictureBox_stock
+            // 
+            this.pictureBox_stock.BackColor = System.Drawing.Color.LightPink;
+            this.pictureBox_stock.Location = new System.Drawing.Point(951, 217);
+            this.pictureBox_stock.Name = "pictureBox_stock";
+            this.pictureBox_stock.Size = new System.Drawing.Size(103, 95);
+            this.pictureBox_stock.TabIndex = 68;
+            this.pictureBox_stock.TabStop = false;
+            this.pictureBox_stock.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_stock_Paint);
+            this.pictureBox_stock.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_stock_MouseMove);
+            // 
+            // timer_stock
+            // 
+            this.timer_stock.Enabled = true;
+            this.timer_stock.Interval = 500;
+            this.timer_stock.Tick += new System.EventHandler(this.timer_stock_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.Controls.Add(this.pictureBox_stock);
             this.Controls.Add(this.pictureBox_circle);
             this.Controls.Add(this.pictureBox_spin);
             this.Controls.Add(this.pictureBox_random);
@@ -560,6 +582,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -619,6 +642,9 @@
         private System.Windows.Forms.Timer timer_spin;
         private System.Windows.Forms.PictureBox pictureBox_circle;
         private System.Windows.Forms.Timer timer_circle;
+        private System.Windows.Forms.PictureBox pictureBox_stock;
+        private System.Windows.Forms.ToolTip tipData;
+        private System.Windows.Forms.Timer timer_stock;
     }
 }
 

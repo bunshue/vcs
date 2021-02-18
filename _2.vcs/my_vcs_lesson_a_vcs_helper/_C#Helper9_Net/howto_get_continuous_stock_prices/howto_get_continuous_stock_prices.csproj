@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F0FD85A6-89EF-45F7-9F97-685C82C0C230}</ProjectGuid>
+    <ProjectGuid>{03AFBEF5-954F-4EA0-9D1A-A9A66CB080A6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DrawC_Stock</RootNamespace>
-    <AssemblyName>vcs_DrawC_Stock</AssemblyName>
+    <RootNamespace>howto_get_continuous_stock_prices</RootNamespace>
+    <AssemblyName>howto_get_continuous_stock_prices</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
