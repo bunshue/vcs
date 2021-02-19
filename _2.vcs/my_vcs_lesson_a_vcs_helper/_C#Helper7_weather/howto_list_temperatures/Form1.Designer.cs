@@ -35,10 +35,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,6 +104,12 @@
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 80;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "溫度(C)";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 80;
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(15, 396);
@@ -126,15 +132,9 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(595, 73);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(527, 526);
+            this.pictureBox1.Size = new System.Drawing.Size(527, 317);
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "溫度(C)";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 80;
             // 
             // Form1
             // 

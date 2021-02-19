@@ -83,28 +83,27 @@ namespace vcs_DrawF_Function
             y_ratio = (int)(H / (ymax - ymin));
             richTextBox1.Text += "y_ratio = " + y_ratio.ToString() + "\n";
 
-            Bitmap bm = new Bitmap(W, H);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bitmap1 = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bitmap1))
             {
-                //gr.Clear(pictureBox1.BackColor);
-                gr.Clear(Color.LightGray);
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                g.Clear(Color.LightGray);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
 
                 // Draw the curves.
                 using (Pen thick_pen = new Pen(Color.Red, 2))
                 {
                     for (int i = 0; i < len; i++)
                     {
-                        points[i] = new PointF((points[i].X + 10) * x_ratio, pictureBox1.ClientSize.Height - (points[i].Y) * y_ratio);
+                        points[i] = new PointF((points[i].X + 10) * x_ratio, H - (points[i].Y) * y_ratio);
                     }
 
                     thick_pen.Color = Color.Red;
                     if (points.Count > 1)
-                        gr.DrawLines(thick_pen, points.ToArray());
+                        g.DrawLines(thick_pen, points.ToArray());
                 }
             }
             // Display the result.
-            pictureBox1.Image = bm;
+            pictureBox1.Image = bitmap1;
         }
 
         // Return true if the number is not infinity or NaN.

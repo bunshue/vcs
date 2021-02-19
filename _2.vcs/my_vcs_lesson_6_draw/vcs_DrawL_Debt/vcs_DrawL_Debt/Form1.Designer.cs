@@ -29,41 +29,41 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.picGraph = new System.Windows.Forms.PictureBox();
+            this.pictureBox_debt = new System.Windows.Forms.PictureBox();
             this.tipData = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.picGraph)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_debt)).BeginInit();
             this.SuspendLayout();
             // 
-            // picGraph
+            // pictureBox_debt
             // 
-            this.picGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.pictureBox_debt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picGraph.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picGraph.Location = new System.Drawing.Point(12, 11);
-            this.picGraph.Name = "picGraph";
-            this.picGraph.Size = new System.Drawing.Size(714, 455);
-            this.picGraph.TabIndex = 0;
-            this.picGraph.TabStop = false;
-            this.picGraph.Paint += new System.Windows.Forms.PaintEventHandler(this.picGraph_Paint);
-            this.picGraph.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picGraph_MouseMove);
+            this.pictureBox_debt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_debt.Location = new System.Drawing.Point(12, 11);
+            this.pictureBox_debt.Name = "pictureBox_debt";
+            this.pictureBox_debt.Size = new System.Drawing.Size(714, 455);
+            this.pictureBox_debt.TabIndex = 0;
+            this.pictureBox_debt.TabStop = false;
+            this.pictureBox_debt.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_debt_Paint);
+            this.pictureBox_debt.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_debt_MouseMove);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 477);
-            this.Controls.Add(this.picGraph);
+            this.Controls.Add(this.pictureBox_debt);
             this.Name = "Form1";
             this.Text = "vcs_DrawL_Debt";
-            ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_debt)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picGraph;
+        private System.Windows.Forms.PictureBox pictureBox_debt;
         private System.Windows.Forms.ToolTip tipData;
     }
 }

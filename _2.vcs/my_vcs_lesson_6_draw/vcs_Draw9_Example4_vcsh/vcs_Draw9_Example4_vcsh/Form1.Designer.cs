@@ -84,6 +84,8 @@
             this.pictureBox_hit_curve = new System.Windows.Forms.PictureBox();
             this.pictureBox_color_curve = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGo = new System.Windows.Forms.Button();
+            this.picHidden = new System.Windows.Forms.PictureBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -126,20 +128,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.picHidden = new System.Windows.Forms.PictureBox();
-            this.btnGo = new System.Windows.Forms.Button();
             this.tmrSmallLabels = new System.Windows.Forms.Timer(this.components);
             this.tmrLabels = new System.Windows.Forms.Timer(this.components);
             this.tmrColoredLabels = new System.Windows.Forms.Timer(this.components);
             this.tmrColorBar = new System.Windows.Forms.Timer(this.components);
             this.tmrPicture = new System.Windows.Forms.Timer(this.components);
+            this.label41 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hit_curve)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_color_curve)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picColors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVisible)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -292,7 +293,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 30;
-            this.button0.Text = "檢查有沒有點在線上 ST";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -740,6 +740,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "unique progressbar";
             // 
+            // btnGo
+            // 
+            this.btnGo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnGo.Location = new System.Drawing.Point(414, 21);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(75, 21);
+            this.btnGo.TabIndex = 87;
+            this.btnGo.Text = "Go";
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
+            // 
+            // picHidden
+            // 
+            this.picHidden.Image = ((System.Drawing.Image)(resources.GetObject("picHidden.Image")));
+            this.picHidden.Location = new System.Drawing.Point(20, 272);
+            this.picHidden.Name = "picHidden";
+            this.picHidden.Size = new System.Drawing.Size(367, 87);
+            this.picHidden.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHidden.TabIndex = 86;
+            this.picHidden.TabStop = false;
+            this.picHidden.Visible = false;
+            // 
             // label21
             // 
             this.label21.BackColor = System.Drawing.Color.Gray;
@@ -1101,28 +1123,6 @@
             this.label1.Size = new System.Drawing.Size(20, 18);
             this.label1.TabIndex = 44;
             // 
-            // picHidden
-            // 
-            this.picHidden.Image = ((System.Drawing.Image)(resources.GetObject("picHidden.Image")));
-            this.picHidden.Location = new System.Drawing.Point(20, 272);
-            this.picHidden.Name = "picHidden";
-            this.picHidden.Size = new System.Drawing.Size(367, 87);
-            this.picHidden.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picHidden.TabIndex = 86;
-            this.picHidden.TabStop = false;
-            this.picHidden.Visible = false;
-            // 
-            // btnGo
-            // 
-            this.btnGo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnGo.Location = new System.Drawing.Point(414, 21);
-            this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 21);
-            this.btnGo.TabIndex = 87;
-            this.btnGo.Text = "Go";
-            this.btnGo.UseVisualStyleBackColor = true;
-            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
-            // 
             // tmrSmallLabels
             // 
             this.tmrSmallLabels.Interval = 150;
@@ -1148,11 +1148,21 @@
             this.tmrPicture.Interval = 150;
             this.tmrPicture.Tick += new System.EventHandler(this.tmrPicture_Tick);
             // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(704, 438);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(113, 12);
+            this.label41.TabIndex = 78;
+            this.label41.Text = "檢查有沒有點在線上";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 688);
+            this.Controls.Add(this.label41);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_color_curve);
             this.Controls.Add(this.pictureBox_hit_curve);
@@ -1214,10 +1224,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_color_curve)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picColors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVisible)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picHidden)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1326,6 +1337,7 @@
         private System.Windows.Forms.Timer tmrColoredLabels;
         private System.Windows.Forms.Timer tmrColorBar;
         private System.Windows.Forms.Timer tmrPicture;
+        private System.Windows.Forms.Label label41;
     }
 }
 

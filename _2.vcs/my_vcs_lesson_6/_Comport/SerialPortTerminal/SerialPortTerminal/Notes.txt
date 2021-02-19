@@ -1,0 +1,31 @@
+﻿Created by Noah Coad
+See blog post: http://msmvps.com/blogs/coad/archive/2005/03/23/39466.aspx
+
+Other common baud rates: 110, 300, 600, 28800, 14400, 33600, 36000, 37600, 56000
+
+
+
+====== Ports Added/Removed Scenarios (on timer tick) ====== 
+
+Assumptions: If a port is opened, it is the currently selected port
+
+1. No Change
+   Do nothing.
+
+2. Port is Open, New Ports Added
+   Refresh port list, but keep the currently selected port selected
+
+3. Port is Open, Existing Ports Removed, One removed was currently selected
+   Refresh port list, but keep the currently selected port selected
+   
+4. Port is Open, Existing Ports Removed, None of removed ones were currently selected
+   Close current port, refresh port list, select a new default port
+   
+5. Port is Closed, New Ports Added
+   Refresh port list, new selected default is the highest of the most recently added ports
+
+6. Port is Closed, Existing Ports Removed, One removed was currently selected
+   Refresh port list, selected default is the highest of the current list of ports
+   
+7. Port is Closed, Existing Ports Removed, None of removed ones were currently selected
+   Refresh port list, selected default is the highest of the current list of ports

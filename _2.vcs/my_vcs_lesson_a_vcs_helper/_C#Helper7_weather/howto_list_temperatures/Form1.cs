@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;     //for SmoothingMode
+
 using System.Net;
 using System.Xml;
 using System.IO;
@@ -32,6 +34,7 @@ namespace howto_list_temperatures
     public partial class Form1 : Form
     {
         List<float> temperature = new List<float>();
+        List<string> date = new List<string>();
 
         public Form1()
         {
@@ -76,7 +79,7 @@ namespace howto_list_temperatures
                     // Get the response string from the URL.
                     string xml = client.DownloadString(url);
 
-                    richTextBox1.Text += "data\n" + xml + "\n";
+                    //richTextBox1.Text += "data\n" + xml + "\n";
 
                     // Load the response into an XML document.
                     xml_doc = new XmlDocument();
@@ -111,6 +114,7 @@ namespace howto_list_temperatures
         {
             listView1.Items.Clear();
             temperature.Clear();
+            date.Clear();
 
             char degrees = (char)176;
 
@@ -133,11 +137,15 @@ namespace howto_list_temperatures
                 XmlAttribute temp_attr = temp_node.Attributes["value"];
                 float temp = 0;
                 if (temp_attr != null)
+                {
                     temp = float.Parse(temp_attr.Value.ToString());
+                }
 
                 ListViewItem item;
                 if (start_time.DayOfWeek.ToString() == last_day)
+                {
                     item = listView1.Items.Add("");
+                }
                 else
                 {
                     last_day = start_time.DayOfWeek.ToString();
@@ -147,9 +155,35 @@ namespace howto_list_temperatures
                 item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
                 item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
                 temperature.Add((temp - 32) * 5 / 9);
+                date.Add(start_time.ToShortTimeString());
             }
 
+            int i;
             richTextBox1.Text += "temperature len = " + temperature.Count.ToString() + "\n";
+            for (i = 0; i < temperature.Count; i++)
+            {
+                richTextBox1.Text += temperature[i].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "date len = " + date.Count.ToString() + "\n";
+            for (i = 0; i < date.Count; i++)
+            {
+                richTextBox1.Text += date[i].ToString() + "\n";
+            }
+
+            Pen thin_pen = new Pen(Color.Black, 0);
+            thin_pen.Color = Color.LightBlue;
+            int num_numbers = 10;
+            float[] numbers = new float[num_numbers];
+            Random rand = new Random();
+            for (i = 0; i < num_numbers; i++)
+            {
+                //result4 += r.NextDouble().ToString() + " ";
+                numbers[i] = (float)rand.NextDouble() * 100;
+                richTextBox1.Text += numbers[i].ToString() + " ";
+            }
+            DrawHistogramF(pictureBox1, Brushes.Blue, thin_pen, temperature.ToArray());
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -157,6 +191,74 @@ namespace howto_list_temperatures
             richTextBox1.Clear();
         }
 
+        // Display a histogram.
+        private void DrawHistogramF(PictureBox pic, Brush brush, Pen pen, float[] values)
+        {
+            int border_x = 4;   //percentage of width
+            int border_y = 12;  //percentage of height
+            int W = pic.ClientSize.Width;
+            int H = pic.ClientSize.Height;
+            int N = values.Length;
+            int w = W * (100 - border_x * 2) / N / 100;
+            //int h = 0;
+
+            float y_max = values.Max();
+            float y_min = values.Min();
+            float y_diff = y_max - y_min;
+            //int ratio_x = 0;
+            float ratio_y = H * (100 - border_y * 2) / (y_diff + 15) / 100;
+
+            int x_st = border_x * W / 100;
+            int y_st = border_y * H / 100;
+            //richTextBox1.Text += "y_st = " + y_st.ToString() + "\n";
+
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "N = " + N.ToString() + "\n";
+            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
+            richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
+            richTextBox1.Text += "y_diff = " + y_diff.ToString() + "\n";
+
+
+            //先考慮滿框狀態
+
+            int i;
+
+            for (i = 0; i < N; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + values[i].ToString() + "\n";
+                
+            }
+
+            // Make a Bitmap.
+            Bitmap bitmap1 = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Fill the histogram.
+                for (i = 0; i < N; i++)
+                {
+                    g.FillRectangle(brush, x_st + i * w, H - values[i] * ratio_y - y_st, w, values[i] * ratio_y);
+
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + (x_st + i * w).ToString() + "\t" + (H - values[i] * ratio_y - y_st).ToString() + " " + w.ToString() + " " + (values[i] * ratio_y).ToString() + "\n";
+                    //g.DrawString(values[i].ToString(), new Font("標楷體", 8), new SolidBrush(Color.Red), new PointF(x_st + i * w + w / 3, H - y_st + 3));
+                    //g.DrawString(date[i].ToString(), new Font("標楷體", 6), new SolidBrush(Color.Red), new PointF(x_st + i * w + w / 3, H - y_st + 3));
+                }
+
+                // Draw the histogram.
+                if (N < 200)
+                {
+                    for (i = 0; i < N; i++)
+                    {
+                        //g.DrawRectangle(pen, i * w, 0, w, values[i] * ratio_y);
+                        g.DrawRectangle(pen, x_st + i * w, H - values[i] * ratio_y - y_st, w, values[i] * ratio_y);
+                    }
+                }
+            }
+
+            // Display the histogram.
+            pic.Image = bitmap1;
+        }
 
     }
 }

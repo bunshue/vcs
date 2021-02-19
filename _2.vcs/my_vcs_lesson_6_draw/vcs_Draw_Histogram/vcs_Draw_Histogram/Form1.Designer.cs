@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -35,7 +36,12 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox_histogram = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -106,11 +112,50 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(760, 219);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "my int";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // pictureBox_histogram
+            // 
+            this.pictureBox_histogram.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_histogram.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_histogram.Location = new System.Drawing.Point(748, 345);
+            this.pictureBox_histogram.Name = "pictureBox_histogram";
+            this.pictureBox_histogram.Size = new System.Drawing.Size(99, 79);
+            this.pictureBox_histogram.TabIndex = 8;
+            this.pictureBox_histogram.TabStop = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 200;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(760, 263);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 9;
+            this.button6.Text = "my float";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 454);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.pictureBox_histogram);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.bt_clear);
@@ -122,6 +167,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -135,6 +181,10 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox pictureBox_histogram;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button6;
     }
 }
 

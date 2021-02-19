@@ -27,8 +27,8 @@ namespace vcs_DrawImage4
             this.UpdateStyles();
             //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
 
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);

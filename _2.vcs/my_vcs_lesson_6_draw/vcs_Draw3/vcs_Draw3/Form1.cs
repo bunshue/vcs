@@ -99,6 +99,22 @@ namespace vcs_Draw3
         int AMPLITUDE = 150;
         //畫正弦波 SP
 
+        //畫雷達掃瞄圖 ST
+        int radar_WIDTH;
+        int radar_HEIGHT;
+        int radar_HAND;
+
+        int u;  //in degree
+        int cx, cy;     //center of the circle
+        int x, y;       //HAND coordinate
+
+        int tx, ty, lim = 20;
+
+        Bitmap radar_bmp;
+        Pen radar_p;
+        Graphics radar_g;
+        //畫雷達掃瞄圖 SP
+
         string filename = "C:\\______test_files\\picture1.jpg";
 
         public Form1()
@@ -238,7 +254,7 @@ namespace vcs_Draw3
             //pictureBox_move.Image = Image.FromFile(filename);
             bitmap3 = new Bitmap(filename);
             richTextBox1.Text += "W = " + bitmap3.Width.ToString() + " H = " + bitmap3.Height.ToString() + "\n";
-            pictureBox_move.Size = bitmap3.Size;
+            //pictureBox_move.Size = bitmap3.Size;
             pictureBox_move.Image = bitmap3;
 
             timer_move.Enabled = true;
@@ -298,6 +314,31 @@ namespace vcs_Draw3
             g2.Clear(Color.White);
             pictureBox_rotate.Image = bitmap2;
             //旋轉邊框 SP
+
+            //畫雷達掃瞄圖 ST
+            radar_WIDTH = 220;
+            radar_HEIGHT = radar_WIDTH;
+            radar_HAND = radar_WIDTH / 2;
+
+            //create Bitmap
+            radar_bmp = new Bitmap(radar_WIDTH + 1, radar_HEIGHT + 1);
+
+            //background color
+            panel_radar.BackColor = Color.Black;
+
+            //center
+            cx = radar_WIDTH / 2;
+            cy = radar_HEIGHT / 2;
+
+            //initial degree of HAND
+            u = 0;
+
+            //timer
+            //t.Interval = 5; //in millisecond
+            //t.Tick += new EventHandler(this.t_Tick);
+            //t.Start();
+
+            //畫雷達掃瞄圖 SP
         }
 
         void show_item_location()
@@ -333,16 +374,16 @@ namespace vcs_Draw3
             pictureBox_border2.Location = new Point(1000 + 310 + 300, 10 + 300 + 10);
             pictureBox_border2.BackColor = Color.LightSkyBlue;
 
-            pictureBox_move.Size = new Size(480, 360);
+            pictureBox_move.Size = new Size(280, 350);
             pictureBox_move.Location = new Point(1000, 10 + 300 + 10);
             pictureBox_move.BackColor = Color.LightBlue;
 
-            pictureBox_stock.Size = new Size(680, 360);
+            pictureBox_stock.Size = new Size(680, 320);
             pictureBox_stock.Location = new Point(1000 - 700, 10 + 360 + 10);
             pictureBox_stock.BackColor = Color.LightPink;
 
-            pictureBox_rotate.Size = new Size(200, 180);
-            pictureBox_rotate.Location = new Point(560, 180);
+            pictureBox_rotate.Size = new Size(220, 110);
+            pictureBox_rotate.Location = new Point(680, 265);
             pictureBox_rotate.BackColor = Color.Linen;
 
             //pictureBox_rotate
@@ -352,7 +393,7 @@ namespace vcs_Draw3
             int W = 300;
             int H = 300;
             x_st = 10;
-            y_st = 770;
+            y_st = 720;
             dx = 350;
 
             pictureBox_random.Size = new Size(W, H);
@@ -365,22 +406,23 @@ namespace vcs_Draw3
             pictureBox_spin.BackColor = Color.LightGray;
 
             pictureBox_gear.Size = new Size(W, H);
-            pictureBox_gear.Location = new Point(x_st + dx * 2, y_st);
-            trackBar1.Location = new Point(x_st + dx * 2, y_st - 20);
-            lb_fps.Location = new Point(x_st + dx * 2 + 280, y_st - 10);
+            pictureBox_gear.Location = new Point(x_st + dx * 2, y_st + 20);
+            trackBar1.Location = new Point(x_st + dx * 2, y_st);
+            lb_fps.Location = new Point(x_st + dx * 2 + 280, y_st + 10);
             lb_fps.Text = trackBar1.Value.ToString();
 
             pictureBox_circle.Size = new Size(W, H);
             pictureBox_circle.Location = new Point(x_st + dx * 3, y_st);
             pictureBox_circle.BackColor = Color.Pink;
 
-            panel_radar.Size = new Size(W-30, H-50);
-            panel_radar.Location = new Point(10, 500);
-            panel_radar.BackColor = Color.Red;
+            panel_radar.Size = new Size(W-50, H-50);
+            panel_radar.Location = new Point(10, 470);
+            panel_radar.BackColor = Color.Black;
 
-            pictureBox_radar.Size = new Size(W - 30 - 20, H - 50 - 20);
+            pictureBox_radar.Size = new Size(W - 50 - 20, H - 50 - 20);
             pictureBox_radar.Location = new Point(10, 10);
-            pictureBox_radar.BackColor = Color.Green;
+
+            richTextBox1.Text += "pictureBox_radar W = " + pictureBox_radar.Width.ToString() + ", H = " + pictureBox_radar.Height.ToString() + "\n";
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -820,9 +862,8 @@ namespace vcs_Draw3
             if (step8_old != step8)
             {
                 step8_old = step8;
-                richTextBox1.Text += "\nstep = " + step8.ToString() + "\t";
-
-                richTextBox1.Text += "count = " + count.ToString() + " ";
+                //richTextBox1.Text += "\nstep = " + step8.ToString() + "\t";
+                //richTextBox1.Text += "count = " + count.ToString() + " ";
                 if (count > 1)
                 {
                     if ((count - count_old) == 1)
@@ -858,8 +899,7 @@ namespace vcs_Draw3
                 g.FillRectangle(new SolidBrush(Color.Cyan), x_st8, y_st8, w, h);
             }
 
-
-            richTextBox1.Text += "(" + x_st8.ToString() + "," + y_st8.ToString() + ") ";
+            //richTextBox1.Text += "(" + x_st8.ToString() + "," + y_st8.ToString() + ") ";
 
             pictureBox_border2.Image = bitmap_border2;
         }
@@ -1772,11 +1812,75 @@ namespace vcs_Draw3
         //for pictureBox_stock SP
 
 
-        //雷達掃瞄圖
+        //畫雷達掃瞄圖 ST
         private void timer_radar_Tick(object sender, EventArgs e)
         {
+            //pen
+            radar_p = new Pen(Color.Green, 1f);
+
+            //graphics
+            radar_g = Graphics.FromImage(radar_bmp);
+
+            //calculate x, y coordinate of HAND
+            int tu = (u - lim) % 360;
+
+            if (u >= 0 && u <= 180)
+            {
+                //right half
+                //u in degree is converted into radian.
+
+                x = cx + (int)(radar_HAND * Math.Sin(Math.PI * u / 180));
+                y = cy - (int)(radar_HAND * Math.Cos(Math.PI * u / 180));
+            }
+            else
+            {
+                x = cx - (int)(radar_HAND * -Math.Sin(Math.PI * u / 180));
+                y = cy - (int)(radar_HAND * Math.Cos(Math.PI * u / 180));
+            }
+
+            if (tu >= 0 && tu <= 180)
+            {
+                //right half
+                //tu in degree is converted into radian.
+
+                tx = cx + (int)(radar_HAND * Math.Sin(Math.PI * tu / 180));
+                ty = cy - (int)(radar_HAND * Math.Cos(Math.PI * tu / 180));
+            }
+            else
+            {
+                tx = cx - (int)(radar_HAND * -Math.Sin(Math.PI * tu / 180));
+                ty = cy - (int)(radar_HAND * Math.Cos(Math.PI * tu / 180));
+            }
+
+            //draw circle
+            radar_g.DrawEllipse(radar_p, 0, 0, radar_WIDTH, radar_HEIGHT);  //bigger circle
+            //radar_g.DrawEllipse(radar_p, 80, 80, radar_WIDTH - 160, radar_HEIGHT - 160);    //smaller circle
+            radar_g.DrawEllipse(radar_p, 60, 60, radar_WIDTH - 120, radar_HEIGHT - 120);    //smaller circle
+
+            //draw perpendicular line
+            radar_g.DrawLine(radar_p, new Point(cx, 0), new Point(cx, radar_HEIGHT)); // UP-DOWN
+            radar_g.DrawLine(radar_p, new Point(0, cy), new Point(radar_WIDTH, cy)); //LEFT-RIGHT
+
+            //draw HAND
+            radar_g.DrawLine(new Pen(Color.Black, 1f), new Point(cx, cy), new Point(tx, ty));
+            radar_g.DrawLine(radar_p, new Point(cx, cy), new Point(x, y));
+
+            //load bitmap in pictureBox_radar
+            pictureBox_radar.Image = radar_bmp;
+
+            //dispose
+            radar_p.Dispose();
+            radar_g.Dispose();
+
+            //update
+            u++;
+            if (u == 360)
+            {
+                u = 0;
+            }
 
         }
+        //畫雷達掃瞄圖 SP
 
     }
 }

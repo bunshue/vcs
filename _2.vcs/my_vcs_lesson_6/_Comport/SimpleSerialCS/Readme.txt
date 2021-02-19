@@ -1,0 +1,1 @@
+Copy the whole SimpleSerial folder to your Visual Studio 2005 Projects folder.

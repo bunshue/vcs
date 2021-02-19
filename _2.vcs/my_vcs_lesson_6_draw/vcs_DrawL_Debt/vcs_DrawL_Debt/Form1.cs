@@ -53,7 +53,7 @@ namespace vcs_DrawL_Debt
         private const float Radius = 4;
 
         // Draw the graph.
-        private void picGraph_Paint(object sender, PaintEventArgs e)
+        private void pictureBox_debt_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -62,11 +62,10 @@ namespace vcs_DrawL_Debt
 
             // Define the graph area.
             GraphXmin = 70;
-            GraphXmax = picGraph.ClientSize.Width - 10;
+            GraphXmax = pictureBox_debt.ClientSize.Width - 10;
             GraphYmin = 40;
-            GraphYmax = picGraph.ClientSize.Height - 70;
-            Rectangle graph_area = new Rectangle(
-                GraphXmin, GraphYmin, GraphXmax - GraphXmin, GraphYmax - GraphYmin);
+            GraphYmax = pictureBox_debt.ClientSize.Height - 70;
+            Rectangle graph_area = new Rectangle(GraphXmin, GraphYmin, GraphXmax - GraphXmin, GraphYmax - GraphYmin);
             e.Graphics.FillRectangle(Brushes.White, graph_area);
 
             // Draw things in the graph's world coordinate space.
@@ -81,7 +80,7 @@ namespace vcs_DrawL_Debt
         }
 
         // Draw things that use the identity transformation.
-        private void DrawWithoutTransformation(Graphics gr)
+        private void DrawWithoutTransformation(Graphics g)
         {
             // Draw the main title centered on the top.
             using (Font title_font = new Font("Times New Roman", 20))
@@ -90,16 +89,14 @@ namespace vcs_DrawL_Debt
                 {
                     string_format.Alignment = StringAlignment.Center;
                     string_format.LineAlignment = StringAlignment.Center;
-                    Point title_center = new Point(picGraph.ClientSize.Width / 2, 20);
-                    gr.DrawString("U.S. Gross National Debt",
-                        title_font, Brushes.Blue,
-                        title_center, string_format);
+                    Point title_center = new Point(pictureBox_debt.ClientSize.Width / 2, 20);
+                    g.DrawString("U.S. Gross National Debt", title_font, Brushes.Blue, title_center, string_format);
                 }
             }
         }
 
         // Draw things in the graph's world coordinate.
-        private void DrawInGraphCoordinates(Graphics gr, int xmin, int xmax, int ymin, int ymax)
+        private void DrawInGraphCoordinates(Graphics g, int xmin, int xmax, int ymin, int ymax)
         {
             // Define the world coordinate rectangle.
             RectangleF world_rect = new RectangleF(Wxmin, Wymin, Wxmax - Wxmin, Wymax - Wymin);
@@ -118,24 +115,24 @@ namespace vcs_DrawL_Debt
             Matrix graph_transformation = new Matrix(world_rect, window_points);
 
             // Apply the transformation.
-            gr.Transform = graph_transformation;
+            g.Transform = graph_transformation;
 
             // Plot the data lines.
             using (Pen green_pen = new Pen(Color.Green, 0))
             {
                 for (int i = 1; i < Values.Length; i++)
                 {
-                    gr.DrawLine(green_pen, Values[i - 1], Values[i]);
+                    g.DrawLine(green_pen, Values[i - 1], Values[i]);
                 }
             }
         }
 
         // Draw things that are positioned using the graph's
         // transformation but that are drawn in pixels.
-        private void DrawWithGraphTransformation(Graphics gr, Matrix graph_matrix)
+        private void DrawWithGraphTransformation(Graphics g, Matrix graph_matrix)
         {
             // Reset to the identity transformation.
-            gr.ResetTransform();
+            g.ResetTransform();
 
             // Plot the data points.
             // Copy the points so we don't mess up the original values.
@@ -147,10 +144,8 @@ namespace vcs_DrawL_Debt
             // Draw the points.
             foreach (PointF pt in TransformedValues)
             {
-                gr.FillEllipse(Brushes.Lime,
-                    pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
-                gr.DrawEllipse(Pens.Black,
-                    pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
+                g.FillEllipse(Brushes.Lime, pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
+                g.DrawEllipse(Pens.Black, pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
             }
 
             // Draw the axes.
@@ -169,7 +164,7 @@ namespace vcs_DrawL_Debt
                         new PointF(Wxmin, Wymax),
                     };
                     graph_matrix.TransformPoints(y_points);
-                    gr.DrawLine(Pens.Black, y_points[0], y_points[1]);
+                    g.DrawLine(Pens.Black, y_points[0], y_points[1]);
 
                     // Draw the tick marks and labels.
                     for (int y = Wymin; y <= Wymax; y += 1000)
@@ -177,16 +172,12 @@ namespace vcs_DrawL_Debt
                         // Tick mark.
                         PointF[] tick_point = { new PointF(Wxmin, y) };
                         graph_matrix.TransformPoints(tick_point);
-                        gr.DrawLine(Pens.Black,
-                            tick_point[0].X, tick_point[0].Y,
-                            tick_point[0].X + 10, tick_point[0].Y);
+                        g.DrawLine(Pens.Black, tick_point[0].X, tick_point[0].Y, tick_point[0].X + 10, tick_point[0].Y);
 
                         // Label.
                         PointF[] label_point = { new PointF(0, y) };
                         graph_matrix.TransformPoints(label_point);
-                        gr.DrawString(y.ToString("0"), label_font,
-                            Brushes.Black, GraphXmin - 10, label_point[0].Y,
-                            label_format);
+                        g.DrawString(y.ToString("0"), label_font, Brushes.Black, GraphXmin - 10, label_point[0].Y, label_format);
                     }
                 }
 
@@ -198,7 +189,7 @@ namespace vcs_DrawL_Debt
                     new PointF(Wxmax, Wymin),
                 };
                 graph_matrix.TransformPoints(x_points);
-                gr.DrawLine(Pens.Black, x_points[0], x_points[1]);
+                g.DrawLine(Pens.Black, x_points[0], x_points[1]);
 
                 // Draw the tick marks and labels.
                 for (int x = Wxmin; x <= Wxmax; x += 10)
@@ -206,13 +197,10 @@ namespace vcs_DrawL_Debt
                     // Tick mark.
                     PointF[] tick_point = { new PointF(x, Wymin) };
                     graph_matrix.TransformPoints(tick_point);
-                    gr.DrawLine(Pens.Black,
-                        tick_point[0].X, tick_point[0].Y,
-                        tick_point[0].X, tick_point[0].Y - 10);
+                    g.DrawLine(Pens.Black, tick_point[0].X, tick_point[0].Y, tick_point[0].X, tick_point[0].Y - 10);
 
                     // Label.
-                    DrawXLabel(gr, x.ToString("0"), label_font,
-                        Brushes.Black, tick_point[0].X, GraphYmax + 10);
+                    DrawXLabel(g, x.ToString("0"), label_font, Brushes.Black, tick_point[0].X, GraphYmax + 10);
                 }
             }
 
@@ -224,14 +212,14 @@ namespace vcs_DrawL_Debt
                 {
                     ylabel_format.Alignment = StringAlignment.Center;
                     ylabel_format.LineAlignment = StringAlignment.Near;
-                    gr.ResetTransform();
-                    gr.RotateTransform(-90);
+                    g.ResetTransform();
+                    g.RotateTransform(-90);
                     float cx = 0;
                     float cy = (GraphYmin + GraphYmax) / 2;
-                    gr.TranslateTransform(cx, cy, MatrixOrder.Append);
-                    gr.DrawString("Debt ($ billions)", axis_font,
+                    g.TranslateTransform(cx, cy, MatrixOrder.Append);
+                    g.DrawString("Debt ($ billions)", axis_font,
                         Brushes.Green, 0, 0, ylabel_format);
-                    gr.ResetTransform();
+                    g.ResetTransform();
                 }
 
                 // Label the X axis.
@@ -239,29 +227,24 @@ namespace vcs_DrawL_Debt
                 {
                     xlabel_format.Alignment = StringAlignment.Center;
                     xlabel_format.LineAlignment = StringAlignment.Far;
-                    RectangleF xlabel_rect = new RectangleF(
-                        GraphXmin, GraphYmax,
-                        GraphXmax - GraphXmin,
-                        picGraph.ClientSize.Height - GraphYmax);
-                    gr.DrawString("Year", axis_font,
-                        Brushes.Green, xlabel_rect, xlabel_format);
+                    RectangleF xlabel_rect = new RectangleF(GraphXmin, GraphYmax, GraphXmax - GraphXmin, pictureBox_debt.ClientSize.Height - GraphYmax);
+                    g.DrawString("Year", axis_font, Brushes.Green, xlabel_rect, xlabel_format);
                 }
             }
         }
 
         // Draw a string rotated 90 degrees at the given position.
-        private void DrawXLabel(Graphics gr, string txt, Font label_font,
-            Brush label_brush, float x, float y)
+        private void DrawXLabel(Graphics g, string txt, Font label_font, Brush label_brush, float x, float y)
         {
             // Transform to center the label's right edge
             // at the origin when we draw at the origin.
-            gr.ResetTransform();
+            g.ResetTransform();
 
             // Rotate the translated text.
-            gr.RotateTransform(90, MatrixOrder.Append);
+            g.RotateTransform(90, MatrixOrder.Append);
 
             // Translate to the final destination.
-            gr.TranslateTransform(x, y, MatrixOrder.Append);
+            g.TranslateTransform(x, y, MatrixOrder.Append);
 
             // Draw the label.
             using (StringFormat label_format = new StringFormat())
@@ -272,15 +255,15 @@ namespace vcs_DrawL_Debt
                 label_format.LineAlignment = StringAlignment.Center;
 
                 // Draw the text at the origin.
-                gr.DrawString(txt, label_font, label_brush, 0, 0, label_format);
+                g.DrawString(txt, label_font, label_brush, 0, 0, label_format);
             }
 
-            gr.ResetTransform();
+            g.ResetTransform();
         }
 
         // If the mouse is hovering over a data point,
         // set the PictureBox's tooltip.
-        private void picGraph_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox_debt_MouseMove(object sender, MouseEventArgs e)
         {
             if (TransformedValues == null) return;
 
@@ -297,9 +280,9 @@ namespace vcs_DrawL_Debt
             }
 
             // Set the new tool tip.
-            if (tipData.GetToolTip(picGraph) != tip)
+            if (tipData.GetToolTip(pictureBox_debt) != tip)
             {
-                tipData.SetToolTip(picGraph, tip);
+                tipData.SetToolTip(pictureBox_debt, tip);
             }
         }
     }

@@ -196,19 +196,8 @@ namespace vcs_Draw9_Example4_vcsh
             ClientSize = new Size(button4.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
         }
 
-        bool flag_check_click_on_curve = false;
         private void button0_Click(object sender, EventArgs e)
         {
-            if (button0.Text == "檢查有沒有點在線上 ST")
-            {
-                flag_check_click_on_curve = true;
-                button0.Text = "檢查有沒有點在線上 SP";
-            }
-            else
-            {
-                flag_check_click_on_curve = false;
-                button0.Text = "檢查有沒有點在線上 ST";
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
