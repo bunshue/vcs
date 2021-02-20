@@ -6,7 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace vcs_Draw3
+namespace vcs_Draw3A
 {
     static class Rainbow
     {

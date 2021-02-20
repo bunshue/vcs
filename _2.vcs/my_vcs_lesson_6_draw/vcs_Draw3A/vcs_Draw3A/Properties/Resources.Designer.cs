@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw3.Properties {
+namespace vcs_Draw3A.Properties {
     using System;
     
     
     /// <summary>
-    ///   用於查詢當地語系化字串等的強類型資源類別。
+    ///   用於查詢當地語系化字串等的強型別資源類別
     /// </summary>
     // 這個類別是自動產生的，是利用 StronglyTypedResourceBuilder
     // 類別透過 ResGen 或 Visual Studio 這類工具。
@@ -39,7 +39,7 @@ namespace vcs_Draw3.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_Draw3.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_Draw3A.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -48,7 +48,7 @@ namespace vcs_Draw3.Properties {
         
         /// <summary>
         ///   覆寫目前執行緒的 CurrentUICulture 屬性，對象是所有
-        ///   使用這個強類型資源類別的資源查閱。
+        ///   使用這個強型別資源類別的資源查閱。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {

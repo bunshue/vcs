@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw3
+﻿namespace vcs_Draw3A
 {
     partial class Form1
     {

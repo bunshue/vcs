@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw3.Properties {
+namespace vcs_Draw3A.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

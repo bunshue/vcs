@@ -12,10 +12,10 @@ using System.Drawing.Drawing2D; //for Matrix
 
 using System.Drawing.Text;      //for TextRenderingHint
 
-//方案總管/加入/現有項目/選取Rainbow.cs, 把 namespace 改成 vcs_Draw3
-//方案總管/加入/現有項目/選取BatteryStuff.cs, 把 namespace 改成 vcs_Draw3
+//方案總管/加入/現有項目/選取Rainbow.cs, 把 namespace 改成 vcs_Draw3A
+//方案總管/加入/現有項目/選取BatteryStuff.cs, 把 namespace 改成 vcs_Draw3A
 
-namespace vcs_Draw3
+namespace vcs_Draw3A
 {
     public partial class Form1 : Form
     {
