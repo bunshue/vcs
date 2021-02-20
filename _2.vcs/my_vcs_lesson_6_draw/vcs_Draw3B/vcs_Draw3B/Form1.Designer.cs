@@ -1,0 +1,115 @@
+﻿namespace vcs_Draw3B
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// 設計工具所需的變數。
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// 清除任何使用中的資源。
+        /// </summary>
+        /// <param name="disposing">如果應該處置 Managed 資源則為 true，否則為 false。</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form 設計工具產生的程式碼
+
+        /// <summary>
+        /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器
+        /// 修改這個方法的內容。
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer_random_color = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_spiral = new System.Windows.Forms.PictureBox();
+            this.pictureBox_ellipse = new System.Windows.Forms.PictureBox();
+            this.timer_draw_ellipse = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1316, 537);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(70, 30);
+            this.bt_clear.TabIndex = 54;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(1047, 356);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(339, 211);
+            this.richTextBox1.TabIndex = 53;
+            this.richTextBox1.Text = "";
+            // 
+            // timer_random_color
+            // 
+            this.timer_random_color.Tick += new System.EventHandler(this.timer_random_color_Tick);
+            // 
+            // pictureBox_spiral
+            // 
+            this.pictureBox_spiral.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox_spiral.Name = "pictureBox_spiral";
+            this.pictureBox_spiral.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox_spiral.TabIndex = 55;
+            this.pictureBox_spiral.TabStop = false;
+            // 
+            // pictureBox_ellipse
+            // 
+            this.pictureBox_ellipse.Location = new System.Drawing.Point(287, 12);
+            this.pictureBox_ellipse.Name = "pictureBox_ellipse";
+            this.pictureBox_ellipse.Size = new System.Drawing.Size(350, 200);
+            this.pictureBox_ellipse.TabIndex = 56;
+            this.pictureBox_ellipse.TabStop = false;
+            // 
+            // timer_draw_ellipse
+            // 
+            this.timer_draw_ellipse.Enabled = true;
+            this.timer_draw_ellipse.Interval = 1000;
+            this.timer_draw_ellipse.Tick += new System.EventHandler(this.timer_draw_ellipse_Tick);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1398, 680);
+            this.Controls.Add(this.pictureBox_ellipse);
+            this.Controls.Add(this.pictureBox_spiral);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.richTextBox1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer_random_color;
+        private System.Windows.Forms.PictureBox pictureBox_spiral;
+        private System.Windows.Forms.PictureBox pictureBox_ellipse;
+        private System.Windows.Forms.Timer timer_draw_ellipse;
+    }
+}
+
