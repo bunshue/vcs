@@ -116,14 +116,16 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 17;
+            this.button3.Text = "n邊扇形";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(19, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(700, 600);
+            this.pictureBox1.Size = new System.Drawing.Size(357, 325);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
@@ -192,7 +194,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 40);
             this.button7.TabIndex = 25;
-            this.button7.Text = "畫2D陣列1";
+            this.button7.Text = "畫2D陣列";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -203,7 +205,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 40);
             this.button8.TabIndex = 24;
-            this.button8.Text = "畫2D陣列2";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -247,7 +248,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 30;
-            this.button0.Text = "XY平面";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -397,7 +397,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox2.Location = new System.Drawing.Point(618, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(382, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(200, 200);
             this.pictureBox2.TabIndex = 51;
@@ -563,7 +563,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(100, 40);
             this.button38.TabIndex = 66;
-            this.button38.Text = "Ex9";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -574,7 +573,6 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(100, 40);
             this.button39.TabIndex = 65;
-            this.button39.Text = "Ex10";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -629,13 +627,8 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(100, 40);
             this.button44.TabIndex = 70;
-            this.button44.Text = "函數";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // cb_magnifying
             // 

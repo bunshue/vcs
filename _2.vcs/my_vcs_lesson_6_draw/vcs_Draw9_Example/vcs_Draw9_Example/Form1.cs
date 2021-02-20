@@ -32,13 +32,20 @@ namespace vcs_Draw9_Example
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            g = pictureBox1.CreateGraphics();
+            show_item_location();
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+
+
             p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
             sb = new SolidBrush(Color.Blue);
             g.Clear(Color.Red);             //useless??
-            pictureBox1.BackColor = Color.Pink;
-            show_item_location();
 
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.BackColor = Color.Pink;
@@ -127,10 +134,10 @@ namespace vcs_Draw9_Example
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 16);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, 300);
 
-            pictureBox1.Location = new Point(20, 20);
-            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Location = new Point(10, 10);
+            pictureBox1.Size = new Size(800, 600);
+            pictureBox1.BackColor = Color.White;
 
-            //pictureBox1.Location = new Point(10, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -171,79 +178,16 @@ namespace vcs_Draw9_Example
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //Bitmap bmp;
-            //SolidBrush brush;
-            //Pen p;
-
-            float ratio_x, ratio_y;
-            float w, h;
-            float x0, x1, y0, y1;
-
-            //----畫筆顏色----
-            p = new Pen(Color.Black);
-            sb = new SolidBrush(p.Color);
-            //----取得picturebox寬度與高度----
-            w = pictureBox1.Width;
-            h = pictureBox1.Height;
-            //----是否有上一次的圖片，如果有就清除----
-            if (pictureBox1.Image != null)
-                pictureBox1.Image = null;
-            //if (bitmap1 != null)
-            //  bitmap1.Dispose();
-            //----轉換使用者輸入的資料----
-            x0 = (float)10;
-            y0 = (float)10;
-            x1 = (float)-5;
-            y1 = (float)-9;
-            //----計算放大倍率----
-            ratio_x = (w - 50) / 20;
-            ratio_y = (h - 50) / 20;
-            //----開新的Bitmap----
-            bitmap1 = new Bitmap((int)w, (int)h);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
-            //----清除Bitmap為某顏色----
-            g.Clear(Color.White);
-            //----更改原點位置----
-            g.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            //----畫坐標軸----
-            g.DrawLine(p, -1000, 0, 1000, 0);//x軸
-            g.DrawLine(p, 0, -1000, 0, 1000);//y軸
-            g.DrawString("X", this.Font, sb, w / 2 - 20, 20);
-            g.DrawString("Y", this.Font, sb, 20, -h / 2);
-            g.DrawLine(p, w / 2, 0, w / 2 - 10, 5);//x軸箭頭
-            g.DrawLine(p, w / 2, 0, w / 2 - 10, -5);
-            g.DrawLine(p, 0, -h / 2, 5, -h / 2 + 10);//y軸箭頭
-            g.DrawLine(p, 0, -h / 2, -5, -h / 2 + 10);
-            for (int i = -10; i <= 10; i++)//畫X Y軸座標位置
-            {
-                g.DrawLine(p, i * ratio_x, -5, i * ratio_x, 5);
-                g.DrawString(i.ToString().PadLeft(2, ' '), this.Font, sb, i * ratio_x - 9, 10);
-                g.DrawLine(p, -5, i * ratio_y, 5, i * ratio_y);
-                if (i != 0)
-                    g.DrawString(i.ToString(), this.Font, sb, 15, i * ratio_y - 8);
-            }
-            //----換顏色----
-            p = new Pen(Color.Red);
-            sb = new SolidBrush(p.Color);
-            //----畫線----
-            g.DrawLine(p, x0 * ratio_x, -y0 * ratio_y, x1 * ratio_x, -y1 * ratio_y);
-            //----畫兩點----
-            g.FillEllipse(sb, new RectangleF(x0 * ratio_x - 2.5f, -y0 * ratio_y - 2.5f, 5, 5));
-            g.FillEllipse(sb, new RectangleF(x1 * ratio_x - 2.5f, -y1 * ratio_y - 2.5f, 5, 5));
-            //----釋放Graphics資源----
-            //g.Dispose();
-            //----將Bitmap顯示在Picture上
-            pictureBox1.Image = bitmap1;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int center_x = 200;
+            g.Clear(Color.White);
+            int center_x = 250;
             int center_y = 200;
             int radius = 180;
             DrawPacman(center_x, center_y, radius);
+            pictureBox1.Image = bitmap1;
         }
 
         private void DrawPacman(int center_x, int center_y, int radius)
@@ -329,22 +273,71 @@ namespace vcs_Draw9_Example
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int dx = 200;
-            int dy = 200;
-            int r = 200;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            int cx = W / 2;
+            int cy = H / 2;
+            int r = Math.Min(W, H) / 2 - 50;
             int n;
 
             n = 7;
-            draw_polygon(dx, dy, r, n);
+            g.Clear(Color.White);
+            draw_polygon(cx, cy, r, n);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
 
+            int cx = W / 2;
+            int cy = H / 2;
+
+            //int radius = 200;
+            int r = Math.Min(W, H) / 2 - 50;
+            int linewidth = 5;
+            int angle = 0;
+
+            g.Clear(Color.White);
+
+            // Create a new pen.
+            Pen p = new Pen(Color.Red);
+
+            // Set the pen's width.
+            p.Width = linewidth;
+
+            // Draw
+
+            g.DrawEllipse(p, new Rectangle(cx - r, cy - r, r * 2, r * 2));
+
+            for (angle = 0; angle < 360; angle += 10)
+            {
+                int xx = 0;
+                int yy = 0;
+                xx = (int)(r * Math.Cos(angle * Math.PI / 180));
+                yy = (int)(r * Math.Sin(angle * Math.PI / 180));
+
+                // Create a new pen.
+                //Pen PenStyle = new Pen(Brushes.DeepSkyBlue);
+
+                // Set the pen's width.
+                p.Width = 8.0F;
+
+                g.DrawLine(new Pen(Brushes.Red, 5), cx, cy, cx + xx, cy - yy);
+
+
+            }
+            //Dispose of the pen.
+            p.Dispose();
+            pictureBox1.Image = bitmap1;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            g.Clear(Color.White);
+
             Pen p = new Pen(Color.Black, 8);
             p.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
 
@@ -368,22 +361,27 @@ namespace vcs_Draw9_Example
             new Point(340,150)
             }
             );
+            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            g.Clear(Color.White);
             draw_grid();
+            pictureBox1.Image = bitmap1;
         }
 
         public void draw_grid()
         {
             int i;
+            int rows = pictureBox1.ClientSize.Height / 100;
+            int cols = pictureBox1.ClientSize.Width / 100;
             p = new Pen(Color.Navy, 1);
-            for (i = 0; i < 7; i++)
+            for (i = 0; i <= rows; i++)
             {
                 g.DrawLine(p, 0, i * 100, pictureBox1.ClientSize.Width - 1, i * 100);
             }
-            for (i = 0; i < 7; i++)
+            for (i = 0; i <= cols; i++)
             {
                 g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
             }
@@ -391,6 +389,8 @@ namespace vcs_Draw9_Example
 
         private void button6_Click(object sender, EventArgs e)
         {
+            g.Clear(Color.White);
+
             Brush bb = new SolidBrush(Color.Orange);
             g.FillRectangle(bb, 70, 70, 200, 100);  //畫出一個填滿的方框
 
@@ -408,10 +408,12 @@ namespace vcs_Draw9_Example
                 g.FillRectangle(db, 70 + (i * 40), 70 + (i * 40), 200, 100);
                 //畫布上畫出方框，每次位置的X及Y值都加70，以實現往右下角移動
             }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            g.Clear(Color.White);
             int[,] gray = new int[31, 23];
 
             gray[0, 0] = 8;
@@ -1139,7 +1141,7 @@ namespace vcs_Draw9_Example
             }
             */
 
-            pictureBox1.Size = new Size(600, 500);
+            //pictureBox1.Size = new Size(600, 500);
             //pictureBox1.Location = new Point(10, 10);
 
             int xx;
@@ -1185,122 +1187,10 @@ namespace vcs_Draw9_Example
                 }
             }
             pictureBox1.Image = bitmap1;
-
-
         }
 
-        private const int COLUMNS = 32;
-        private const int ROWS = 16;
         private void button8_Click(object sender, EventArgs e)
         {
-            int max = 0;
-            int min = 255;
-            int total = 0;
-            int average = 0;
-            int rms = 0;
-
-            int xx;
-            int yy;
-            int width;
-            int height;
-
-            int i;
-            int j;
-
-            //brightness = new int[,] { { 1, 2, 3, 4, 5 }, { 1 + 2, 2 + 2, 3 + 2, 4 + 2, 5 + 2 }, { 1 + 4, 2 + 4, 3 + 4, 4 + 4, 5 + 4 } };
-            //brightness = new int[,] { { 182, 183, 182, 184, 183, 185, 185, 185, 184, 184, 185, 186, 186, 187, 188, 186, 186, 185, 184, 184, 185, 187, 187, 187, 187, 187, 187, 186 }, { 181, 182, 182, 181, 183, 183, 181, 182, 182, 182, 185, 185, 185, 185, 185, 186, 183, 182, 181, 181, 181, 181, 184, 184, 186, 186, 186, 187 }, { 182, 180, 179, 180, 179, 180, 180, 179, 180, 180, 179, 181, 181, 184, 185, 182, 180, 179, 178, 180, 180, 180, 180, 180, 181, 184, 186, 187 }, { 180, 180, 179, 179, 178, 179, 179, 180, 179, 179, 180, 180, 183, 182, 182, 181, 178, 178, 176, 175, 178, 178, 181, 181, 183, 182, 186, 185 }, { 174, 180, 178, 176, 176, 176, 178, 176, 176, 176, 178, 179, 179, 179, 179, 176, 176, 175, 175, 176, 174, 175, 175, 176, 178, 181, 182, 188 }, { 173, 173, 174, 174, 173, 173, 173, 174, 175, 175, 176, 176, 178, 178, 176, 175, 174, 174, 174, 174, 174, 174, 175, 175, 177, 177, 180, 181 }, { 168, 174, 174, 172, 172, 173, 174, 174, 174, 174, 174, 173, 173, 175, 174, 174, 173, 173, 173, 173, 172, 173, 172, 174, 175, 179, 178, 181 }, { 157, 176, 174, 174, 174, 173, 170, 170, 170, 170, 172, 172, 171, 170, 172, 172, 172, 173, 173, 173, 173, 173, 174, 174, 176, 175, 175, 175 }, { 174, 173, 173, 174, 174, 174, 174, 173, 172, 172, 172, 169, 168, 171, 168, 172, 172, 171, 173, 173, 173, 173, 172, 172, 173, 174, 174, 175 }, { 160, 175, 174, 175, 174, 173, 171, 169, 168, 168, 168, 170, 169, 169, 168, 169, 171, 171, 172, 172, 172, 172, 172, 172, 172, 172, 173, 172 }, { 172, 171, 171, 173, 173, 173, 172, 169, 169, 169, 169, 169, 168, 167, 166, 168, 168, 171, 173, 173, 173, 173, 170, 170, 170, 171, 173, 173 }, { 167, 167, 169, 171, 173, 173, 171, 171, 169, 169, 169, 169, 167, 167, 166, 166, 171, 171, 172, 172, 169, 169, 168, 168, 168, 168, 171, 171 }, { 164, 164, 165, 166, 169, 169, 169, 169, 168, 168, 168, 167, 166, 164, 164, 166, 166, 167, 167, 167, 168, 168, 166, 166, 165, 167, 168, 169 }, { 162, 161, 164, 164, 169, 169, 169, 169, 169, 168, 168, 168, 165, 166, 166, 166, 169, 168, 167, 167, 167, 167, 167, 167, 166, 165, 167, 167 }, { 160, 159, 161, 164, 162, 166, 165, 166, 168, 167, 167, 164, 165, 162, 161, 163, 163, 161, 161, 163, 165, 165, 164, 162, 160, 161, 164, 164 }, { 158, 158, 159, 159, 162, 162, 166, 167, 168, 168, 167, 167, 165, 165, 165, 166, 165, 165, 164, 164, 164, 162, 161, 161, 159, 159, 160, 160 }, { 158, 157, 158, 157, 159, 160, 160, 165, 165, 166, 166, 165, 164, 164, 161, 162, 162, 160, 160, 160, 161, 163, 161, 160, 160, 160, 160, 160 }, { 157, 155, 157, 157, 159, 159, 164, 164, 165, 164, 164, 165, 161, 161, 160, 160, 159, 160, 159, 161, 160, 160, 160, 160, 159, 159, 158, 158 }, { 158, 155, 155, 155, 158, 159, 159, 162, 161, 163, 164, 161, 161, 159, 159, 160, 161, 159, 160, 158, 158, 157, 157, 157, 156, 158, 159, 159 }, { 154, 154, 155, 155, 161, 161, 162, 162, 160, 161, 160, 160, 159, 159, 159, 158, 159, 159, 159, 159, 158, 158, 158, 158, 159, 159, 158, 159 }, { 154, 155, 154, 155, 156, 156, 158, 161, 160, 159, 158, 157, 156, 156, 157, 157, 158, 158, 154, 154, 157, 158, 158, 154, 155, 155, 155, 157 }, { 152, 152, 152, 153, 159, 159, 159, 159, 157, 157, 155, 157, 158, 157, 158, 157, 157, 155, 154, 154, 155, 155, 155, 157, 155, 155, 153, 153 }, { 150, 150, 151, 152, 152, 155, 157, 157, 155, 153, 152, 152, 153, 158, 157, 157, 154, 151, 152, 152, 152, 154, 158, 157, 155, 152, 151, 152 }, { 146, 147, 150, 151, 155, 155, 157, 157, 154, 153, 152, 152, 154, 154, 155, 155, 152, 152, 151, 150, 152, 151, 154, 155, 153, 152, 148, 148 }, { 147, 148, 148, 152, 152, 153, 154, 154, 152, 151, 150, 151, 150, 152, 153, 153, 152, 150, 150, 151, 151, 152, 152, 152, 152, 150, 148, 150 }, { 147, 147, 151, 151, 155, 154, 154, 154, 150, 150, 150, 150, 151, 151, 151, 151, 147, 147, 147, 147, 151, 150, 152, 151, 150, 148, 146, 147 }, { 143, 146, 146, 148, 149, 149, 150, 150, 150, 151, 150, 149, 148, 148, 147, 147, 148, 147, 146, 146, 147, 149, 150, 150, 150, 146, 147, 148 }, { 146, 146, 150, 149, 148, 150, 148, 147, 145, 145, 145, 145, 144, 144, 146, 146, 147, 149, 148, 150, 152, 151, 151, 151, 147, 148, 150, 150 } };
-            //brightness = new int[,] { { 178, 179, 179, 185, 185, 190, 191, 196, 199, 203, 208, 215, 215, 225, 229, 236, 238, 244, 248, 251, 252, 254, 255, 255, 255, 255, 255, 255 }, { 179, 179, 182, 182, 188, 187, 193, 193, 199, 201, 207, 208, 216, 223, 231, 232, 241, 243, 250, 251, 253, 253, 255, 255, 255, 255, 255, 255 }, { 176, 176, 179, 181, 182, 187, 189, 194, 195, 200, 203, 211, 213, 223, 228, 235, 237, 243, 247, 249, 251, 253, 255, 255, 255, 255, 255, 255 }, { 176, 178, 181, 180, 183, 185, 190, 190, 197, 199, 203, 204, 212, 217, 225, 230, 237, 239, 249, 249, 253, 253, 255, 255, 255, 255, 255, 255 }, { 173, 174, 177, 180, 182, 186, 187, 190, 192, 196, 199, 207, 210, 218, 222, 230, 232, 238, 241, 248, 249, 251, 253, 255, 255, 255, 255, 255 }, { 174, 174, 179, 179, 183, 183, 188, 188, 193, 194, 199, 201, 209, 215, 222, 226, 233, 236, 244, 244, 250, 250, 255, 255, 255, 255, 255, 255 }, { 171, 174, 174, 179, 180, 182, 186, 188, 188, 193, 192, 200, 206, 214, 218, 225, 228, 234, 238, 246, 247, 250, 251, 255, 255, 255, 255, 255 }, { 173, 173, 176, 178, 182, 182, 186, 185, 188, 189, 195, 194, 203, 205, 216, 218, 229, 231, 241, 244, 248, 249, 252, 255, 255, 255, 255, 255 }, { 171, 173, 173, 175, 175, 180, 182, 187, 187, 189, 190, 195, 198, 205, 209, 217, 222, 230, 233, 239, 242, 248, 250, 253, 255, 255, 255, 255 }, { 171, 171, 174, 174, 179, 180, 186, 185, 187, 187, 192, 193, 201, 201, 209, 209, 218, 223, 233, 235, 245, 245, 252, 253, 255, 255, 255, 255 }, { 170, 170, 173, 174, 172, 177, 180, 185, 186, 188, 190, 194, 194, 201, 202, 208, 213, 222, 227, 234, 238, 244, 247, 249, 252, 253, 255, 255 }, { 170, 171, 175, 174, 178, 179, 181, 182, 186, 187, 189, 191, 195, 196, 201, 201, 212, 214, 226, 230, 238, 240, 248, 248, 252, 252, 255, 255 }, { 172, 172, 174, 174, 174, 179, 180, 183, 185, 187, 188, 193, 194, 199, 199, 206, 207, 216, 220, 229, 231, 239, 243, 246, 247, 249, 253, 255 }, { 171, 171, 173, 174, 173, 174, 178, 180, 181, 184, 189, 189, 193, 194, 199, 199, 207, 209, 214, 221, 232, 233, 243, 244, 250, 251, 255, 255 }, { 169, 172, 171, 174, 174, 177, 178, 180, 180, 182, 184, 189, 191, 195, 197, 202, 203, 208, 211, 217, 222, 230, 235, 240, 243, 248, 251, 253 }, { 168, 168, 172, 171, 173, 173, 175, 177, 181, 181, 187, 186, 193, 194, 200, 201, 203, 204, 213, 215, 223, 225, 235, 236, 244, 244, 252, 252 }, { 164, 166, 166, 170, 170, 172, 173, 175, 177, 180, 181, 187, 188, 193, 193, 198, 199, 203, 206, 213, 216, 222, 225, 233, 237, 244, 246, 249 }, { 166, 165, 168, 168, 171, 171, 175, 176, 180, 180, 186, 186, 193, 193, 196, 197, 199, 200, 209, 210, 218, 219, 228, 229, 238, 239, 248, 248 }, { 164, 164, 164, 166, 166, 171, 171, 173, 174, 178, 179, 185, 183, 190, 189, 194, 196, 200, 201, 208, 210, 217, 221, 228, 230, 236, 238, 243 }, { 163, 163, 166, 166, 168, 168, 173, 173, 175, 175, 180, 180, 185, 185, 187, 190, 192, 193, 202, 203, 212, 212, 220, 221, 230, 231, 237, 241 }, { 159, 160, 161, 165, 165, 169, 169, 171, 174, 175, 176, 181, 182, 185, 186, 189, 190, 195, 196, 201, 203, 210, 214, 222, 224, 230, 230, 236 }, { 162, 162, 166, 165, 167, 166, 170, 170, 173, 173, 176, 175, 180, 180, 186, 185, 189, 189, 196, 197, 203, 206, 213, 216, 223, 224, 233, 232 }, { 160, 161, 161, 164, 162, 167, 167, 169, 172, 173, 174, 177, 179, 182, 182, 186, 186, 189, 189, 193, 195, 202, 204, 213, 216, 222, 223, 227 }, { 161, 163, 162, 164, 166, 165, 168, 167, 171, 171, 173, 174, 177, 177, 182, 181, 187, 188, 194, 194, 199, 199, 204, 207, 214, 215, 219, 219 }, { 165, 163, 163, 161, 164, 165, 165, 167, 169, 171, 171, 174, 174, 179, 179, 182, 182, 186, 187, 190, 192, 196, 196, 202, 207, 214, 215, 220 }, { 164, 164, 161, 161, 164, 163, 166, 166, 168, 168, 172, 171, 175, 175, 179, 179, 183, 183, 188, 187, 192, 192, 196, 198, 206, 207, 212, 214 }, { 161, 161, 161, 161, 164, 166, 166, 167, 167, 169, 168, 174, 174, 176, 178, 179, 179, 182, 183, 186, 188, 190, 193, 196, 197, 202, 203, 210 }, { 161, 160, 161, 161, 164, 164, 166, 166, 168, 167, 172, 172, 176, 176, 178, 178, 181, 181, 184, 185, 186, 188, 191, 192, 198, 199, 205, 205 } };
-
-
-            //brightness = new int[,] { { 255, 255, 255, 222, 209, 214, 212, 209, 195, 218, 231, 244, 246, 239, 242, 245, 247, 241, 239, 224 }, { 254, 255, 255, 222, 210, 221, 214, 215, 211, 222, 231, 237, 242, 246, 249, 249, 249, 236, 237, 239 }, { 255, 255, 252, 228, 229, 221, 209, 214, 207, 222, 228, 240, 243, 248, 249, 252, 252, 236, 231, 238 }, { 253, 253, 246, 235, 230, 238, 222, 218, 221, 223, 233, 246, 249, 253, 253, 255, 253, 253, 253, 253 }, { 253, 252, 248, 236, 236, 229, 226, 220, 220, 226, 231, 243, 249, 252, 252, 254, 253, 254, 254, 253 }, { 252, 254, 248, 239, 234, 231, 227, 227, 225, 227, 234, 240, 250, 252, 252, 253, 252, 254, 254, 255 }, { 252, 255, 249, 235, 235, 228, 228, 225, 224, 229, 229, 241, 246, 255, 253, 255, 255, 255, 255, 254 }, { 250, 251, 240, 240, 232, 233, 230, 232, 232, 234, 232, 219, 225, 240, 239, 242, 247, 252, 253, 252 }, { 251, 249, 240, 235, 235, 232, 232, 223, 231, 227, 229, 226, 222, 238, 238, 241, 235, 246, 251, 250 }, { 252, 249, 234, 241, 236, 236, 236, 240, 247, 242, 253, 221, 213, 236, 236, 238, 245, 248, 251, 251 }, { 252, 248, 230, 235, 234, 236, 238, 241, 244, 246, 249, 239, 237, 250, 242, 245, 246, 250, 250, 250 }, { 252, 248, 229, 238, 240, 240, 241, 240, 245, 247, 250, 241, 239, 252, 250, 252, 251, 251, 251, 251 }, { 254, 246, 236, 235, 236, 238, 239, 241, 240, 246, 249, 244, 242, 248, 249, 250, 250, 251, 251, 250 }, { 248, 245, 239, 238, 236, 234, 234, 234, 238, 239, 245, 247, 247, 248, 249, 249, 251, 250, 249, 251 }, { 245, 240, 239, 236, 236, 233, 233, 231, 234, 238, 241, 247, 247, 247, 249, 249, 249, 250, 253, 250 }, { 228, 234, 235, 236, 235, 233, 230, 229, 233, 236, 246, 248, 248, 246, 244, 246, 248, 249, 249, 250 }, { 230, 237, 237, 236, 236, 230, 229, 229, 227, 239, 241, 247, 248, 246, 246, 246, 246, 244, 239, 236 }, { 230, 231, 235, 235, 234, 233, 229, 230, 227, 243, 253, 252, 252, 250, 246, 244, 237, 237, 229, 234 }, { 233, 236, 236, 236, 235, 232, 230, 231, 228, 242, 247, 249, 249, 249, 247, 241, 241, 237, 236, 235 }, { 237, 239, 236, 236, 235, 234, 230, 226, 224, 255, 255, 255, 255, 252, 231, 236, 240, 238, 235, 236 } };
-            /*
-            brightness = new int[,] { { 166, 169, 174, 173, 173, 172, 171, 173, 176, 178, 179, 177, 177, 179, 179, 179, 178, 179, 181, 181, 183, 184, 182, 184, 186, 187, 185, 187 }, { 172, 174, 173, 173, 173, 168, 171, 173, 174, 181, 181, 182, 181, 179, 179, 178, 179, 180, 180, 183, 185, 186, 186, 187, 186, 187, 186, 187 }, { 166, 166, 168, 166, 168, 171, 171, 174, 176, 176, 178, 177, 178, 178, 175, 176, 176, 178, 180, 180, 182, 183, 186, 187, 188, 188, 185, 184 }, { 168, 168, 167, 169, 169, 173, 173, 175, 177, 179, 179, 180, 179, 177, 177, 175, 177, 177, 178, 180, 179, 181, 182, 186, 185, 186, 185, 187 }, { 167, 166, 166, 166, 172, 174, 178, 181, 179, 177, 175, 174, 175, 177, 175, 176, 179, 180, 180, 180, 181, 181, 183, 183, 185, 185, 186, 186 }, { 171, 170, 171, 171, 171, 173, 174, 179, 176, 176, 176, 176, 175, 176, 178, 178, 178, 181, 180, 182, 181, 185, 183, 185, 185, 185, 185, 186 }, { 167, 168, 169, 172, 174, 175, 178, 179, 179, 176, 176, 174, 174, 174, 174, 174, 176, 178, 180, 180, 181, 182, 181, 182, 180, 179, 180, 180 }, { 169, 172, 172, 172, 173, 173, 173, 173, 173, 174, 174, 174, 175, 178, 179, 181, 181, 183, 183, 183, 183, 186, 186, 185, 185, 183, 183, 185 }, { 163, 167, 172, 174, 173, 172, 172, 171, 171, 172, 172, 173, 174, 174, 176, 175, 174, 174, 180, 180, 182, 181, 181, 181, 183, 181, 182, 185 }, { 165, 169, 169, 172, 173, 171, 171, 169, 169, 172, 171, 175, 175, 176, 176, 179, 179, 182, 182, 181, 181, 180, 180, 178, 180, 180, 180, 183 }, { 160, 166, 172, 173, 174, 171, 168, 166, 167, 171, 173, 174, 175, 176, 178, 174, 175, 175, 176, 179, 178, 178, 176, 175, 179, 180, 185, 184 }, { 164, 168, 168, 170, 171, 169, 168, 168, 167, 169, 168, 172, 173, 175, 175, 175, 175, 178, 178, 179, 179, 178, 178, 178, 179, 178, 178, 181 }, { 161, 161, 168, 168, 171, 167, 164, 164, 165, 166, 168, 170, 172, 173, 173, 173, 173, 175, 174, 174, 171, 172, 171, 171, 174, 173, 178, 177 }, { 165, 167, 167, 166, 167, 164, 165, 166, 166, 167, 166, 167, 168, 172, 172, 173, 172, 173, 173, 173, 174, 174, 174, 179, 180, 179, 178, 178 }, { 154, 155, 160, 161, 164, 164, 162, 163, 160, 163, 164, 161, 168, 171, 171, 172, 169, 168, 168, 171, 171, 170, 172, 172, 175, 174, 173, 173 }, { 155, 159, 159, 159, 160, 159, 160, 164, 164, 165, 162, 164, 163, 170, 168, 168, 168, 168, 169, 167, 167, 172, 171, 175, 175, 175, 175, 174 }, { 154, 154, 158, 159, 159, 159, 162, 162, 166, 167, 165, 166, 166, 165, 164, 164, 166, 167, 168, 171, 169, 171, 173, 172, 172, 173, 172, 171 }, { 152, 155, 158, 159, 159, 159, 158, 161, 160, 164, 164, 164, 164, 168, 168, 168, 169, 166, 167, 169, 168, 170, 170, 167, 168, 170, 170, 171 }, { 159, 160, 160, 158, 156, 154, 159, 160, 162, 163, 160, 161, 159, 160, 164, 166, 169, 172, 171, 171, 168, 168, 171, 168, 171, 170, 168, 171 }, { 157, 161, 162, 160, 161, 154, 157, 158, 157, 161, 159, 165, 165, 167, 165, 165, 164, 168, 166, 170, 168, 168, 168, 164, 165, 167, 166, 171 }, { 160, 160, 159, 160, 159, 157, 158, 158, 158, 159, 160, 160, 161, 163, 166, 167, 168, 168, 168, 168, 167, 168, 169, 169, 169, 167, 168, 170 }, { 158, 161, 161, 161, 163, 157, 159, 157, 154, 158, 157, 165, 165, 167, 166, 161, 161, 166, 165, 166, 166, 170, 170, 168, 169, 167, 168, 171 }, { 154, 157, 153, 155, 161, 161, 161, 158, 158, 161, 162, 163, 159, 159, 163, 163, 163, 165, 164, 164, 167, 170, 170, 171, 169, 168, 168, 168 }, { 151, 154, 154, 160, 160, 161, 161, 158, 157, 159, 159, 165, 164, 162, 162, 160, 161, 164, 164, 166, 165, 170, 171, 172, 174, 171, 171, 171 }, { 149, 152, 152, 152, 155, 152, 156, 156, 159, 161, 160, 160, 158, 157, 162, 161, 164, 166, 162, 164, 164, 165, 166, 168, 165, 167, 167, 167 }, { 147, 150, 150, 157, 157, 157, 156, 159, 158, 160, 160, 160, 160, 158, 159, 160, 161, 165, 162, 166, 165, 167, 168, 171, 171, 167, 167, 170 }, { 148, 151, 153, 157, 153, 154, 155, 157, 159, 158, 158, 157, 159, 160, 162, 160, 162, 162, 165, 166, 165, 165, 162, 161, 160, 161, 164, 164 }, { 147, 151, 150, 154, 156, 151, 152, 157, 159, 163, 161, 155, 155, 156, 158, 161, 163, 167, 167, 167, 167, 166, 167, 169, 169, 171, 169, 171 } };
-            */
-
-            int[,] brightness = new int[COLUMNS, ROWS];
-
-            Random r = new Random();
-
-            for (j = 0; j < ROWS; j++)
-            {
-                for (i = 0; i < COLUMNS; i++)
-                {
-                    brightness[i, j] = r.Next(1, 160);
-                }
-            }
-
-            //brightness = new int[,] { { 166, 158, 154, 151, 150, 150, 152, 145, 143, 136, 131, 131, 131, 129, 128, 124, 123, 118, 119, 119 }, { 159, 159, 153, 153, 152, 153, 146, 146, 137, 146, 129, 116, 115, 114, 117, 116, 122, 122, 122, 122 }, { 159, 153, 152, 147, 148, 145, 143, 134, 132, 127, 123, 114, 116, 117, 117, 122, 123, 130, 132, 130 }, { 153, 153, 150, 148, 145, 144, 136, 133, 127, 127, 124, 121, 115, 115, 115, 115, 121, 123, 125, 125 }, { 138, 140, 140, 143, 143, 139, 137, 129, 126, 121, 122, 118, 118, 118, 121, 121, 118, 124, 125, 124 }, { 140, 142, 145, 144, 144, 142, 131, 129, 123, 123, 123, 123, 123, 123, 118, 117, 116, 116, 117, 118 }, { 139, 140, 139, 140, 139, 133, 130, 128, 126, 129, 130, 129, 126, 119, 118, 116, 115, 114, 114, 114 }, { 144, 144, 140, 142, 139, 139, 132, 131, 128, 128, 124, 125, 123, 123, 118, 117, 115, 115, 114, 114 }, { 145, 140, 139, 136, 135, 130, 128, 126, 128, 130, 130, 127, 123, 118, 117, 116, 117, 116, 112, 109 }, { 148, 147, 137, 124, 128, 128, 130, 130, 131, 132, 129, 130, 122, 121, 118, 118, 107, 122, 116, 121 }, { 153, 146, 139, 132, 129, 125, 124, 126, 128, 131, 131, 128, 125, 123, 123, 116, 125, 132, 148, 166 }, { 152, 152, 142, 129, 128, 128, 130, 130, 134, 135, 136, 136, 132, 129, 126, 126, 136, 147, 151, 154 }, { 152, 150, 150, 140, 136, 130, 129, 130, 132, 135, 138, 132, 137, 136, 136, 137, 136, 142, 139, 139 }, { 149, 150, 145, 144, 137, 137, 138, 138, 143, 144, 146, 145, 142, 143, 139, 142, 141, 141, 143, 143 }, { 145, 144, 147, 142, 144, 139, 138, 140, 144, 150, 152, 153, 153, 150, 147, 142, 138, 142, 139, 138 }, { 140, 139, 140, 142, 145, 145, 145, 146, 152, 152, 156, 154, 157, 156, 154, 154, 147, 147, 143, 142 }, { 144, 140, 140, 142, 145, 147, 147, 151, 153, 159, 160, 164, 163, 160, 158, 158, 158, 152, 143, 136 }, { 137, 136, 138, 138, 146, 145, 150, 150, 156, 157, 164, 162, 161, 160, 160, 160, 161, 159, 151, 151 }, { 124, 129, 144, 148, 150, 152, 151, 152, 154, 159, 158, 163, 161, 159, 158, 158, 161, 162, 166, 179 }, { 141, 144, 151, 151, 151, 151, 154, 154, 158, 158, 161, 160, 158, 157, 155, 153, 168, 165, 167, 169 } };
-
-            richTextBox1.Text += "brightness rank" + brightness.Rank.ToString() + "\n";
-
-            for (i = 0; i < brightness.Rank; i++)
-            {
-                richTextBox1.Text += "aaaa = " + brightness.GetLength(i) + "\n";
-            }
-
-            for (j = 0; j < ROWS; j++)
-            {
-                for (i = 0; i < COLUMNS; i++)
-                {
-                    brightness[i, j] = r.Next(1, 160);
-
-                    //richTextBox1.Text += brightness[j, i].ToString() + " ";
-                    if (max < brightness[i, j])
-                        max = brightness[i, j];
-                    else if (min > brightness[i, j])
-                        min = brightness[i, j];
-                    total += brightness[i, j];
-                }
-                //richTextBox1.Text += "\n";
-            }
-
-            richTextBox1.Text += "max = " + max.ToString() + "\n";
-            richTextBox1.Text += "min = " + min.ToString() + "\n";
-            average = total / (COLUMNS * ROWS);
-            richTextBox1.Text += "average = " + average.ToString() + "\n";
-
-            for (j = 0; j < ROWS; j++)
-            {
-                for (i = 0; i < COLUMNS; i++)
-                {
-                    rms += (brightness[i, j] - average) * (brightness[i, j] - average);
-                }
-            }
-
-            rms /= COLUMNS * ROWS;
-
-            richTextBox1.Text += "rms = " + Math.Sqrt((double)rms).ToString() + "\n";
-
-            pictureBox1.Size = new Size(600, 500);
-            width = 20 * COLUMNS;
-            height = 20 * ROWS;
-
-            pictureBox1.Size = new Size(width, height);
-            bitmap1 = new Bitmap(width, height);
-
-            byte aa = 255;
-            byte rr = 0;
-            byte gg = 0;
-            byte bb = 0;
-            int dd = 20;
-            int diff;
-            if (max == min)
-                diff = 1;
-            else
-                diff = max - min;
-
-            for (yy = 0; yy < height; yy++)
-            {
-                for (xx = 0; xx < width; xx++)
-                {
-                    //設置像素的ＲＧＢ顏色值
-                    rr = (byte)((brightness[xx / dd, yy / dd] - min) * 255 / diff);
-                    gg = (byte)((brightness[xx / dd, yy / dd] - min) * 255 / diff);
-                    bb = (byte)((brightness[xx / dd, yy / dd] - min) * 255 / diff);
-                    bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, rr, gg, bb));
-                }
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1315,16 +1205,17 @@ namespace vcs_Draw9_Example
 
         private void button10_Click(object sender, EventArgs e)
         {
+            g.Clear(Color.White);
             //畫各種編碼的區間
             int xx;
             int yy;
             int dd = 20;
             int allow = 0;
 
-            richTextBox1.Text += "W = " + this.pictureBox1.Width.ToString() + " H = " + this.pictureBox1.Height.ToString() + "\n";
+            //richTextBox1.Text += "W = " + this.pictureBox1.Width.ToString() + " H = " + this.pictureBox1.Height.ToString() + "\n";
 
-            Graphics g = pictureBox1.CreateGraphics();
-            g.Clear(Color.White);
+            //Graphics g = pictureBox1.CreateGraphics();
+            //g.Clear(Color.White);
             //DrawXY();
 
             Point[] pt1 = new Point[656];    //一維陣列內有360個Point
@@ -1414,22 +1305,12 @@ namespace vcs_Draw9_Example
             g.DrawLines(new Pen(Brushes.Yellow, 3), pt4);
             g.DrawString("Unicode", new Font("標楷體", 30), new SolidBrush(Color.Yellow), new PointF(20, yy - 80));
             richTextBox1.Text += "e4 allow = " + allow.ToString() + "\n";
-
+            pictureBox1.Image = bitmap1;
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            pictureBox1.Location = new Point(50, 50);
-            pictureBox1.Size = new Size(887, 636);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-
-            Graphics g;
-
-            //新建圖檔, 初始化畫布
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
 
             int i;
             double gamma;
@@ -5209,36 +5090,30 @@ namespace vcs_Draw9_Example
                 return;
 
             this.Text = e.X.ToString() + ", " + e.Y.ToString();
-            int w = pictureBox1.Width;
-            int h = pictureBox1.Height;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
             int i;
             int j;
             int r;
             //g.Clear(Color.White);
-            for (j = 0; j < h; j++)
+            for (j = 0; j < H; j++)
             {
                 if ((j > (e.Y - region)) && (j < (e.Y + region)))
                 {
-                    for (i = 0; i < w; i++)
+                    for (i = 0; i < W; i++)
                     {
                         if ((i > (e.X - region)) && (i < (e.X + region)))
                         {
                             r = (int)Math.Sqrt((e.X - i) * (e.X - i) + (e.Y - j) * (e.Y - j));
                             if (r < region)
+                            {
                                 bitmap1.SetPixel(i, j, Color.FromArgb(255 - r * (256 / region), 0xff, 0x0, 0x0));
+                            }
                         }
-
-
-
                     }
-
-
                 }
-
             }
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -5273,11 +5148,11 @@ namespace vcs_Draw9_Example
             //把PictureBox/Form上的東西匯出至檔案
             //Control就有一個 DrawToBitmap 的Method可以用
 
-            int width = pictureBox1.Width;
-            int height = pictureBox1.Height;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
 
-            Bitmap bm = new Bitmap(width, height);
-            pictureBox1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));   //匯出全部, 可以在此選擇匯出區域
+            Bitmap bm = new Bitmap(W, H);
+            pictureBox1.DrawToBitmap(bm, new Rectangle(0, 0, W, H));   //匯出全部, 可以在此選擇匯出區域
 
             string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
             string filename1 = filename + ".jpg";
@@ -5507,6 +5382,8 @@ namespace vcs_Draw9_Example
 
         private void button30_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
+            g.Clear(Color.Pink);
             Point[] pt = new Point[360];    //一維陣列內有360個Point
             int angle;
             int amplitude = 100;
@@ -5517,57 +5394,11 @@ namespace vcs_Draw9_Example
 
             }
             g.DrawLines(new Pen(Brushes.Red, 3), pt);
-
-            //螺旋
-            int r = 50;
-            int cx = 100;
-            int cy = 100;
-            int dx;
-            int dy;
-            for (int i = 0; i < 3600; i += 10)
-            {
-                dx = (int)(r * Math.Cos(i * Math.PI / 180));
-                dy = (int)(r * Math.Sin(i * Math.PI / 180));
-                cx = 100 + dx;
-                cy = 100 + dy;
-                DrawPoint(cx, cy, 5, Color.Red);
-                delay(20);
-                if ((i % 100) == 0)
-                    r += 5;
-            }
         }
-
-        private void DrawPoint(int cx, int cy, int size, Color c)
-        {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c, size);
-
-            // Draw the circle
-            g.DrawEllipse(p, new Rectangle(cx, cy, size, size));
-            //Dispose of the pen.
-            p.Dispose();
-        }
-
-        //delay 10000 約 10秒
-        //C# 不lag的延遲時間
-        private void delay(int delay_milliseconds)
-        {
-            delay_milliseconds *= 2;
-            DateTime time_before = DateTime.Now;
-            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
-            {
-                Application.DoEvents();
-            }
-        } 
 
         private void button31_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             double[] xx = new double[20];
             double[] yy = new double[20];
 
@@ -5611,6 +5442,7 @@ namespace vcs_Draw9_Example
 
         private void button32_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             Point[] arrayPoint = new Point[20];
             p = new Pen(Color.Blue, 5);
             double zz;
@@ -5627,6 +5459,7 @@ namespace vcs_Draw9_Example
 
         private void button33_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             // 以紅色繪正弦波
             //Graphics g = this.CreateGraphics();
             //Pen p = new Pen(Color.Red, 2);
@@ -5653,6 +5486,7 @@ namespace vcs_Draw9_Example
 
         private void button34_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             int[] x = new int[10];
             double[] y = new double[10];
             int[] yy = new int[10];
@@ -5690,6 +5524,7 @@ namespace vcs_Draw9_Example
 
         private void button35_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             Point[] pt = new Point[360];    //一維陣列內有360個Point
             int angle;
             int amplitude = 100;
@@ -5705,6 +5540,7 @@ namespace vcs_Draw9_Example
 
         private void button36_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
 
             //畫曲線
             Point[] pts = new Point[5];
@@ -5724,8 +5560,7 @@ namespace vcs_Draw9_Example
 
         private void button37_Click(object sender, EventArgs e)
         {
-
-
+            g = pictureBox1.CreateGraphics();
 
             //畫多個Rectangles
             Rectangle[] R = new Rectangle[25];
@@ -5742,92 +5577,15 @@ namespace vcs_Draw9_Example
 
         private void button38_Click(object sender, EventArgs e)
         {
-            int center_x = 200;
-            int center_y = 200;
-            int radius = 200;
-            int linewidth = 5;
-            int angle = 0;
-
-            // Create a Graphics object for the Control.
-            Graphics g = pictureBox1.CreateGraphics();
-
-            // Create a new pen.
-            Pen p = new Pen(Color.Red);
-
-            // Set the pen's width.
-            p.Width = linewidth;
-
-            // Draw
-
-            g.DrawEllipse(p, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
-
-            for (angle = 0; angle < 360; angle += 10)
-            {
-                int xx = 0;
-                int yy = 0;
-                xx = (int)(radius * Math.Cos(angle * Math.PI / 180));
-                yy = (int)(radius * Math.Sin(angle * Math.PI / 180));
-
-                // Create a new pen.
-                //Pen PenStyle = new Pen(Brushes.DeepSkyBlue);
-
-                // Set the pen's width.
-                p.Width = 8.0F;
-
-                g.DrawLine(new Pen(Brushes.Red, 5), center_x, center_y, center_x + xx, center_y - yy);
-
-
-            }
-            //Dispose of the pen.
-            p.Dispose();
         }
-
-        //Reference : https://home.gamer.com.tw/creationDetail.php?sn=4281924
-        private Label[] lb_color = new Label[101];
-        Random r = new Random(Guid.NewGuid().GetHashCode());
-        private int _R = 0, _G = 0, _B = 0;
-        private int lb_color_x = 0, lb_color_y = 0;
 
         private void button39_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < lb_color.Length; i++)
-            {
-                lb_color[i] = new Label();
-                lb_color[i].Width = 50;
-                lb_color[i].Height = 50;
-                lb_color[i].Text = " ";
-                lb_color[i].Location = new Point(lb_color_x, lb_color_y);
-                _R = r.Next(255);
-                _G = r.Next(255);
-                _B = r.Next(255);
-                lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
-                this.Controls.Add(lb_color[i]);
-                lb_color_x += 50;
-
-                if (i % 10 == 0)
-                {
-                    lb_color_x = 0;
-                    lb_color_y += 50;
-                }
-            }
-
-            timer1.Enabled = true;
-            pictureBox1.Visible = false;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            for (int i = 1; i < lb_color.Length; i++)
-            {
-                _R = r.Next(255);
-                _G = r.Next(255);
-                _B = r.Next(255);
-                lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
-            }
-        }
-        
         private void button40_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             Brush bb = new SolidBrush(Color.Navy);
             g.FillPie(bb, 50, 50, 200, 200, 0, 90);
             //畫個Pie，顏色是Pink,位置的x、y在50，大小為200*200，角度為從0度開始，畫90度
@@ -5913,8 +5671,8 @@ namespace vcs_Draw9_Example
         //畫愛心 ST
         private void button42_Click(object sender, EventArgs e)
         {
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
             pictureBox1.Image = DrawHeart(W, H);
         }
 
@@ -5999,6 +5757,7 @@ namespace vcs_Draw9_Example
 
         private void button43_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             //三個齒輪
             // Draw smoothly.
             g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -6071,113 +5830,6 @@ namespace vcs_Draw9_Example
 
         private void button44_Click(object sender, EventArgs e)
         {
-            MakeGraph();
-        }
-
-        // Make the graph.
-        private void MakeGraph()
-        {
-            // The bounds to draw.
-            float xmin = -20;
-            float xmax = 20;
-            float ymin = -5;
-            float ymax = 12;
-
-            // Make the Bitmap.
-            int wid = pictureBox1.ClientSize.Width;
-            int hgt = pictureBox1.ClientSize.Height;
-            Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-
-                // Transform to map the graph bounds to the Bitmap.
-                RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
-                PointF[] pts = 
-                {
-                    new PointF(0, hgt),
-                    new PointF(wid, hgt),
-                    new PointF(0, 0),
-                };
-                gr.Transform = new Matrix(rect, pts);
-
-                // Draw the graph.
-                using (Pen graph_pen = new Pen(Color.Blue, 0))
-                {
-                    // Draw the axes.
-                    gr.DrawLine(graph_pen, xmin, 0, xmax, 0);
-                    gr.DrawLine(graph_pen, 0, ymin, 0, ymax);
-                    for (int x = (int)xmin; x <= xmax; x++)
-                    {
-                        gr.DrawLine(graph_pen, x, -0.1f, x, 0.1f);
-                    }
-                    for (int y = (int)ymin; y <= ymax; y++)
-                    {
-                        gr.DrawLine(graph_pen, -0.1f, y, 0.1f, y);
-                    }
-                    graph_pen.Color = Color.Red;
-
-                    // See how big 1 pixel is horizontally.
-                    Matrix inverse = gr.Transform;
-                    inverse.Invert();
-                    PointF[] pixel_pts =
-                    {
-                        new PointF(0, 0),
-                        new PointF(1, 0)
-                    };
-                    inverse.TransformPoints(pixel_pts);
-                    float dx = pixel_pts[1].X - pixel_pts[0].X;
-                    dx /= 2;
-
-                    // Loop over x values to generate points.
-                    List<PointF> points = new List<PointF>();
-                    for (float x = xmin; x <= xmax; x += dx)
-                    {
-                        bool valid_point = false;
-                        try
-                        {
-                            // Get the next point.
-                            float y = F(x);
-
-                            // If the slope is reasonable, this is a valid point.
-                            if (points.Count == 0) valid_point = true;
-                            else
-                            {
-                                float dy = y - points[points.Count - 1].Y;
-                                if (Math.Abs(dy / dx) < 1000) valid_point = true;
-                            }
-                            if (valid_point) points.Add(new PointF(x, y));
-                        }
-                        catch
-                        {
-                        }
-
-                        // If the new point is invalid, draw
-                        // the points in the latest batch.
-                        if (!valid_point)
-                        {
-                            if (points.Count > 1) gr.DrawLines(graph_pen, points.ToArray());
-                            points.Clear();
-                        }
-
-                    }
-
-                    // Draw the last batch of points.
-                    if (points.Count > 1) gr.DrawLines(graph_pen, points.ToArray());
-                }
-            }
-
-            // Display the result.
-            pictureBox1.Image = bm;
-        }
-
-        // The function to graph.
-        private float F(float x)
-        {
-            //return (float)((1 / x + 1 / (x + 1) - 2 * x * x) / 10);
-            //return x;
-            //return (float)Math.Sin(x);
-            return (float)(10 * Math.Sin(x) / x);
         }
 
     }

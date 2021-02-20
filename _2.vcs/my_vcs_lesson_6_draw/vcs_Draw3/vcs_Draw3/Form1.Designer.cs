@@ -35,8 +35,6 @@
             this.p1 = new System.Windows.Forms.Panel();
             this.p3 = new System.Windows.Forms.Panel();
             this.p0 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_rotate = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_move = new System.Windows.Forms.PictureBox();
@@ -79,6 +77,8 @@
             this.panel_radar = new System.Windows.Forms.Panel();
             this.pictureBox_radar = new System.Windows.Forms.PictureBox();
             this.timer_radar = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_random_2d_array = new System.Windows.Forms.PictureBox();
+            this.timer_random_2d_array = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -99,6 +99,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).BeginInit();
             this.panel_radar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -145,19 +146,6 @@
             this.p0.Name = "p0";
             this.p0.Size = new System.Drawing.Size(80, 60);
             this.p0.TabIndex = 45;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(300, 300);
-            this.panel1.TabIndex = 44;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 20;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
             // 
@@ -448,7 +436,7 @@
             // panel_radar
             // 
             this.panel_radar.Controls.Add(this.pictureBox_radar);
-            this.panel_radar.Location = new System.Drawing.Point(567, 189);
+            this.panel_radar.Location = new System.Drawing.Point(12, 8);
             this.panel_radar.Name = "panel_radar";
             this.panel_radar.Size = new System.Drawing.Size(183, 192);
             this.panel_radar.TabIndex = 73;
@@ -467,11 +455,26 @@
             this.timer_radar.Interval = 5;
             this.timer_radar.Tick += new System.EventHandler(this.timer_radar_Tick);
             // 
+            // pictureBox_random_2d_array
+            // 
+            this.pictureBox_random_2d_array.Location = new System.Drawing.Point(132, 352);
+            this.pictureBox_random_2d_array.Name = "pictureBox_random_2d_array";
+            this.pictureBox_random_2d_array.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_random_2d_array.TabIndex = 74;
+            this.pictureBox_random_2d_array.TabStop = false;
+            // 
+            // timer_random_2d_array
+            // 
+            this.timer_random_2d_array.Enabled = true;
+            this.timer_random_2d_array.Interval = 500;
+            this.timer_random_2d_array.Tick += new System.EventHandler(this.timer_random_2d_array_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.Controls.Add(this.pictureBox_random_2d_array);
             this.Controls.Add(this.panel_radar);
             this.Controls.Add(this.pictureBox_rotate);
             this.Controls.Add(this.pictureBox_border2);
@@ -497,7 +500,6 @@
             this.Controls.Add(this.p1);
             this.Controls.Add(this.p3);
             this.Controls.Add(this.p0);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.picRainbow);
             this.DoubleBuffered = true;
@@ -525,6 +527,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).EndInit();
             this.panel_radar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,8 +541,6 @@
         private System.Windows.Forms.Panel p1;
         private System.Windows.Forms.Panel p3;
         private System.Windows.Forms.Panel p0;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer_rotate;
         private System.Windows.Forms.PictureBox pictureBox_move;
@@ -582,6 +583,8 @@
         private System.Windows.Forms.Panel panel_radar;
         private System.Windows.Forms.PictureBox pictureBox_radar;
         private System.Windows.Forms.Timer timer_radar;
+        private System.Windows.Forms.PictureBox pictureBox_random_2d_array;
+        private System.Windows.Forms.Timer timer_random_2d_array;
     }
 }
 

@@ -156,58 +156,9 @@ namespace vcs_Draw9_Example3
             Application.Exit();
         }
 
-        // Drawing objects.
-        private const int EllipseMargin = 10;
-        private int EllipseCx, EllipseCy, EllipseWidth, EllipseHeight;
-        private List<PointF> LinePoints = null;
-
         private void button0_Click(object sender, EventArgs e)
         {
-            MakeDrawingObjects();
-
-            if ((EllipseWidth <= 0) || (EllipseHeight <= 0))
-                return;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Fill and outline the ellipse.
-            g.FillEllipse(Brushes.LightBlue, EllipseMargin, EllipseMargin, EllipseWidth, EllipseHeight);
-            g.DrawEllipse(Pens.Blue, EllipseMargin, EllipseMargin, EllipseWidth, EllipseHeight);
-
-            // Draw the lines.
-            g.DrawLines(Pens.Blue, LinePoints.ToArray());
         }
-
-        // Make the drawing objects.
-        private void MakeDrawingObjects()
-        {
-            // Calculate the ellipse parameters.
-            EllipseWidth = this.pictureBox1.ClientSize.Width - 2 * EllipseMargin;
-            EllipseHeight = this.pictureBox1.ClientSize.Height - 2 * EllipseMargin;
-
-            // Make random lines connecting points
-            // on the edge of the ellipse.
-            EllipseCx = this.pictureBox1.ClientSize.Width / 2;
-            EllipseCy = this.pictureBox1.ClientSize.Height / 2;
-            Random rand = new Random();
-            double circumference = 2 * Math.PI * Math.Sqrt(
-                (EllipseWidth * EllipseWidth + EllipseHeight * EllipseHeight) / 2);
-            int num_points = (int)(circumference / 40);
-            LinePoints = new List<PointF>();
-            for (int i = 0; i < num_points; i++)
-            {
-                double theta1 = 2 * Math.PI * rand.NextDouble();
-                float x1 = (float)(EllipseCx + Math.Cos(theta1) * EllipseWidth / 2);
-                float y1 = (float)(EllipseCy + Math.Sin(theta1) * EllipseHeight / 2);
-                LinePoints.Add(new PointF(x1, y1));
-
-                double theta2 = 2 * Math.PI * rand.NextDouble();
-                float x2 = (float)(EllipseCx + Math.Cos(theta2) * EllipseWidth / 2);
-                float y2 = (float)(EllipseCy + Math.Sin(theta2) * EllipseHeight / 2);
-                LinePoints.Add(new PointF(x2, y2));
-            }
-        }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
