@@ -239,6 +239,12 @@ namespace vcs_Draw3B
             }
         }
 
+        // Force all threads to end.
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
 
     }
 }

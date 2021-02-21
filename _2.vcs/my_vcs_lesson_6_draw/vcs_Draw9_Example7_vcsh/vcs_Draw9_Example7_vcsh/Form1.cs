@@ -25,8 +25,15 @@ namespace vcs_Draw9_Example7_vcsh
         SolidBrush sb;
         Bitmap bitmap1;
 
+        //for sierpinski1 ST
+        // Corner information.
+        List<PointF> Corners;
 
-        // Sierpinski
+        // The most recent point.
+        PointF LastPoint;
+        //for sierpinski1 SP
+
+        // Sierpinski 2 & 3
         // The root of the Pentagon object hierarchy.
         private Pentagon Root5 = null;
         // The root of the Octagon object hierarchy.
@@ -39,41 +46,25 @@ namespace vcs_Draw9_Example7_vcsh
 
         float rotating_angle = 0;
 
-        private const int Period = 21;
-        // Initialize the colors.
-        private Color[] Colors = new Color[]
-        {
-                Color.Pink,
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Lime,
-                Color.Cyan,
-                Color.Blue,
-                Color.Violet,
-                Color.Pink,
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Lime,
-                Color.Cyan,
-                Color.Blue,
-                Color.Violet,
-                Color.Pink,
-                Color.Red,
-                Color.Orange,
-                Color.Yellow,
-                Color.Lime,
-                Color.Cyan,
-                Color.Blue,
-                Color.Violet
-        };
-
-        #region pictureBox_butterfly butterfly
-        private const int period = 24;
-        #endregion
-
         private int NumPoints_ngon_stars = 3;
+
+
+        //畫 pickover_popcorn ST
+        // The bitmap.
+        private Bitmap bitmap_pickover1;    //單色
+        private Bitmap bitmap_pickover2;    //彩色
+
+        // Parameters;
+        private float HH = 0.05f;
+        private int IterationsPerPixel = 20;
+        private int dx = 5;
+
+        // Red, green, or blue?
+        private const int RgbRed = 0;
+        private const int RgbGreen = 1;
+        private const int RgbBlue = 2;
+        private int RgbType = RgbRed;
+        //畫 pickover_popcorn SP
 
         public Form1()
         {
@@ -83,6 +74,10 @@ namespace vcs_Draw9_Example7_vcsh
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //for sierpinski1 ST
+            DefineCorners();
+            //for sierpinski1 SP
 
             redraw_all();
 
@@ -117,15 +112,16 @@ namespace vcs_Draw9_Example7_vcsh
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             richTextBox1.Size = new Size(richTextBox1.Size.Width - 70, this.Height - richTextBox1.Size.Height - 20);
 
-            pictureBox_hex.Size = new Size(W, H);
-            pictureBox2.Size = new Size(W, H);
-            pictureBox_Chrysanthemum.Size = new Size(W, H);
+            pictureBox_sierpinski1.Size = new Size(W, H);
+            pictureBox_sierpinski2.Size = new Size(W, H);
+            pictureBox_sierpinski3.Size = new Size(W, H);
+            pictureBox4.Size = new Size(W, H);
+            pictureBox_skyline.Size = new Size(W, H * 4 / 5);
+            pictureBox_ngon_stars.Size = new Size(W, H);
             pictureBox_dragon.Size = new Size(W, H);
             pictureBox_dragon4.Size = new Size(W, H);
             pictureBox5.Size = new Size(W, H);
-            pictureBox_Chrysanthemum2.Size = new Size(W, H);
-            pictureBox_polar.Size = new Size(W, H);
-            pictureBox8.Size = new Size(W, H);
+            pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
             pictureBox13.BackColor = Color.LightSalmon;
             pictureBox14.Size = new Size(W, H);
@@ -134,32 +130,29 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_snowflake2.Size = new Size(W, H);
             pictureBox_fractal1.Size = new Size(W, H);
             pictureBox_fractal2.Size = new Size(W, H);
-            pictureBox_ngon_stars.Size = new Size(W, H);
+            pictureBox_pickover_popcorn1.Size = new Size(W, H);
+            pictureBox_pickover_popcorn2.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
-            pictureBox_butterfly.Size = new Size(W, H);
-            pictureBox_butterfly.BackColor = Color.Black;
-            pictureBox_sierpinski1.Size = new Size(W, H);
-            pictureBox_sierpinski2.Size = new Size(W, H);
 
             x_st = 10;
             y_st = 10;
             dx = W + 70;
             dy = H + 45;
 
-            pictureBox_Chrysanthemum.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            pictureBox_hex.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox_sierpinski1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox_sierpinski2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox_sierpinski3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_snowflake.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             pictureBox_snowflake2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
-            pictureBox_butterfly.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox_polar.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-
+            pictureBox_skyline.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox_ngon_stars.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox_dragon.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_dragon4.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox8.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+
+            pictureBox12.Location = new Point(x_st + dx * 5, y_st + dy * 1);
 
             richTextBox_ransom_note.Size = new Size(W, H + 40);
             richTextBox_ransom_note_result.Size = new Size(W, H + 40);
@@ -175,10 +168,9 @@ namespace vcs_Draw9_Example7_vcsh
 
             pictureBox_fractal1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             pictureBox_fractal2.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox_ngon_stars.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            pictureBox_sierpinski1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            pictureBox_sierpinski2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            pictureBox_pickover_popcorn1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            pictureBox_pickover_popcorn2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -216,6 +208,28 @@ namespace vcs_Draw9_Example7_vcsh
         private void bt_exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        // Force all threads to end.
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        // Define the corners.
+        private void DefineCorners()
+        {
+            int W = this.pictureBox_sierpinski1.ClientSize.Width;
+            int H = this.pictureBox_sierpinski1.ClientSize.Height;
+
+            // Initialize the corners.
+            Corners = new List<PointF>();
+            Corners.Add(new PointF(W / 2, 10));
+            Corners.Add(new PointF(10, H - 10));
+            Corners.Add(new PointF(W - 10, H - 10));
+
+            // Start at the first point.
+            LastPoint = Corners[0];
         }
 
         // Make the Pentagon objects and redraw.
@@ -283,14 +297,14 @@ namespace vcs_Draw9_Example7_vcsh
             int depth = (int)numericUpDown1.Value;
 
             PointF center = new PointF(
-                pictureBox8.ClientSize.Width / 2,
-                pictureBox8.ClientSize.Height / 2);
+                pictureBox12.ClientSize.Width / 2,
+                pictureBox12.ClientSize.Height / 2);
             float radius = (float)Math.Min(center.X, center.Y);
             radius -= 5;
             Root8 = MakeOctagon(depth, center, radius);
 
             // Redraw.
-            pictureBox8.Refresh();
+            pictureBox12.Refresh();
         }
 
         // Scale factor for moving to smaller octagons.
@@ -557,11 +571,11 @@ namespace vcs_Draw9_Example7_vcsh
             // Define an initiator and generator.
             Initiator = new List<PointF>();
             float height = Math.Min(
-                pictureBox2.ClientSize.Width,
-                pictureBox2.ClientSize.Height) - 100;
-            float x1 = (pictureBox2.ClientSize.Width - height) / 2;
+                pictureBox4.ClientSize.Width,
+                pictureBox4.ClientSize.Height) - 100;
+            float x1 = (pictureBox4.ClientSize.Width - height) / 2;
             float x2 = x1 + height;
-            float y1 = (pictureBox2.ClientSize.Height - height) / 2;
+            float y1 = (pictureBox4.ClientSize.Height - height) / 2;
             float y2 = y1 + height;
             Initiator.Add(new PointF(x1, y1));
             Initiator.Add(new PointF(x2, y1));
@@ -580,8 +594,8 @@ namespace vcs_Draw9_Example7_vcsh
             // Get the parameters.
             int depth = (int)numericUpDown1.Value;
 
-            Bitmap bm = new Bitmap(pictureBox2.ClientSize.Width, pictureBox2.ClientSize.Height);
-            pictureBox2.Image = bm;
+            Bitmap bm = new Bitmap(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height);
+            pictureBox4.Image = bm;
 
             // Draw the snowflake.
             using (Graphics gr = Graphics.FromImage(bm))
@@ -594,7 +608,7 @@ namespace vcs_Draw9_Example7_vcsh
         // Draw the complete snowflake.
         private void DrawSnowflake3(Graphics gr, int depth)
         {
-            gr.Clear(pictureBox2.BackColor);
+            gr.Clear(pictureBox4.BackColor);
 
             // Draw the snowflake.
             for (int i = 1; i < Initiator.Count; i++)
@@ -840,9 +854,9 @@ namespace vcs_Draw9_Example7_vcsh
             Root5.Draw(e.Graphics);
         }
 
-        private void pictureBox8_Paint(object sender, PaintEventArgs e)
+        private void pictureBox12_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(pictureBox8.BackColor);
+            e.Graphics.Clear(pictureBox12.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             if (Root8 == null) return;
 
@@ -929,114 +943,6 @@ namespace vcs_Draw9_Example7_vcsh
                     DrawDragonLine(gr, level - 1, Direction.Left, x2, y2, dx2, dy2);
                 }
             }
-        }
-
-        private void pictureBox_Chrysanthemum_Paint(object sender, PaintEventArgs e)
-        {
-            pictureBox_Chrysanthemum.BackColor = Color.Black;
-
-            // Scale and translate.
-            const float ymax = -11;
-            const float ymin = 11;
-            const float hgt = ymin - ymax;
-            const float wid = hgt;
-            float scale = Math.Min(
-                pictureBox_Chrysanthemum.Size.Width / wid,
-                pictureBox_Chrysanthemum.Size.Height / hgt);
-            e.Graphics.ScaleTransform(scale, scale);
-            e.Graphics.TranslateTransform(
-                pictureBox_Chrysanthemum.Size.Width / 2,
-                pictureBox_Chrysanthemum.Size.Height / 2,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
-
-            // Draw the curve.
-            const long num_lines = 5000;
-
-            // Generate the points.
-            double t = 0;
-            double r = 5 * (1 + Math.Sin(11 * t / 5))
-                - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
-            PointF pt1 = new PointF((float)(r * Math.Sin(t)), (float)(-r * Math.Cos(t)));
-
-            using (Pen the_pen = new Pen(Color.Blue, 0))
-            {
-                for (int i = 0; i <= num_lines; i++)
-                {
-                    t = i * Period * Math.PI / num_lines;
-                    r = 5 * (1 + Math.Sin(11 * t / 5))
-                        - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                        * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
-                    PointF pt0 = pt1;
-                    pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
-                    the_pen.Color = GetColor(t);
-                    e.Graphics.DrawLine(the_pen, pt0, pt1);
-                }
-            }
-        }
-
-        // Return a color from the Colors array.
-        private Color GetColor(double t)
-        {
-            int index = (int)(t / Math.PI);
-            return Colors[index % Colors.Length];
-        }
-
-        private void pictureBox_Chrysanthemum2_Paint(object sender, PaintEventArgs e)
-        {
-            pictureBox_Chrysanthemum2.BackColor = Color.Black;
-
-            // Scale and translate.
-            const float ymax = -11;
-            const float ymin = 11;
-            const float hgt = ymin - ymax;
-            const float wid = hgt;
-            float scale = Math.Min(
-                pictureBox_Chrysanthemum2.Size.Width / wid,
-                pictureBox_Chrysanthemum2.Size.Height / hgt);
-            e.Graphics.ScaleTransform(scale, scale);
-            e.Graphics.TranslateTransform(
-                pictureBox_Chrysanthemum2.Size.Width / 2,
-                pictureBox_Chrysanthemum2.Size.Height / 2,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
-
-            // Draw the curve.
-            const long num_lines = 5000;
-
-            // Generate the points.
-            double t = 0;
-            double r = 5 * (1 + Math.Sin(11 * t / 5))
-                - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
-            PointF pt1 = new PointF((float)(r * Math.Sin(t)), (float)(-r * Math.Cos(t)));
-
-            using (Pen the_pen = new Pen(Color.Blue, 0))
-            {
-                using (SolidBrush the_brush = new SolidBrush(Color.Blue))
-                {
-                    for (int i = 0; i <= num_lines; i++)
-                    {
-                        t = i * Period * Math.PI / num_lines;
-                        r = 5 * (1 + Math.Sin(11 * t / 5))
-                            - 4 * Math.Pow(Math.Sin(17 * t / 3), 4)
-                            * Math.Pow(Math.Sin(2 * Math.Cos(3 * t) - 28 * t), 8);
-                        PointF pt0 = pt1;
-                        pt1 = new PointF((float)(r * Math.Sin(t)), (float)(r * Math.Cos(t)));
-                        Color the_color = GetColor(t);
-
-                        // Fill the triangle from this edge to the origin.
-                        the_brush.Color = Color.FromArgb(64,
-                            the_color.R, the_color.G, the_color.B);
-                        PointF[] pts = { pt0, pt1, new PointF(0, 0) };
-                        e.Graphics.FillPolygon(the_brush, pts);
-
-                        // Draw the curve's outer edge.
-                        the_pen.Color = the_color;
-                        e.Graphics.DrawLine(the_pen, pt0, pt1);
-                    }
-                }
-            }
-
         }
 
         private void pictureBox_dragon4_Paint(object sender, PaintEventArgs e)
@@ -1136,287 +1042,6 @@ namespace vcs_Draw9_Example7_vcsh
             }
         }
 
-        // The height of a hexagon.
-        private const float HexHeight = 50;
-
-        // Selected hexagons.
-        private List<PointF> Hexagons = new List<PointF>();
-
-#if FIG34
-        // The selected search rectangle.
-        // Used to draw Figures 3 and 4.
-        private List<RectangleF> TestRects = new List<RectangleF>();
-#endif
-
-        // Redraw the grid.
-        private void pictureBox_hex_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Draw the selected hexagons.
-            foreach (PointF point in Hexagons)
-            {
-                e.Graphics.FillPolygon(Brushes.LightBlue,
-                    HexToPoints(HexHeight, point.X, point.Y));
-            }
-
-            // Draw the grid.
-            DrawHexGrid(e.Graphics, Pens.Black,
-                0, pictureBox_hex.ClientSize.Width,
-                0, pictureBox_hex.ClientSize.Height,
-                HexHeight);
-
-#if FIG34
-            // Draw the selected rectangles for Figures 3 and 4.
-            using (Pen pen = new Pen(Color.Red, 3))
-            {
-                pen.DashStyle = DashStyle.Dash;
-                foreach (RectangleF rect in TestRects)
-                {
-                    e.Graphics.DrawRectangle(pen, Rectangle.Round(rect));
-                }
-            }
-#endif
-        }
-
-        // Draw a hexagonal grid for the indicated area.
-        // (You might be able to draw the hexagons without
-        // drawing any duplicate edges, but this is a lot easier.)
-        private void DrawHexGrid(Graphics gr, Pen pen,
-            float xmin, float xmax, float ymin, float ymax,
-            float height)
-        {
-            // Loop until a hexagon won't fit.
-            for (int row = 0; ; row++)
-            {
-                // Get the points for the row's first hexagon.
-                PointF[] points = HexToPoints(height, row, 0);
-
-                // If it doesn't fit, we're done.
-                if (points[4].Y > ymax) break;
-
-                // Draw the row.
-                for (int col = 0; ; col++)
-                {
-                    // Get the points for the row's next hexagon.
-                    points = HexToPoints(height, row, col);
-
-                    // If it doesn't fit horizontally,
-                    // we're done with this row.
-                    if (points[3].X > xmax) break;
-
-                    // If it fits vertically, draw it.
-                    if (points[4].Y <= ymax)
-                    {
-                        gr.DrawPolygon(pen, points);
-
-#if FIG1
-                        // Label the hexagon (for Figure 1).
-                        using (StringFormat sf = new StringFormat())
-                        {
-                            sf.Alignment = StringAlignment.Center;
-                            sf.LineAlignment = StringAlignment.Center;
-                            float x = (points[0].X + points[3].X) / 2;
-                            float y = (points[1].Y + points[4].Y) / 2;
-                            string label = "(" + row.ToString() + ", " +
-                                col.ToString() + ")";
-                            gr.DrawString(label, this.Font,
-                                Brushes.Black, x, y, sf);
-                        }
-#endif
-                    }
-                }
-            }
-        }
-
-        private void pictureBox_hex_Resize(object sender, EventArgs e)
-        {
-            pictureBox_hex.Refresh();
-        }
-
-        // Display the row and column under the mouse.
-        private void pictureBox_hex_MouseMove(object sender, MouseEventArgs e)
-        {
-            int row, col;
-            PointToHex(e.X, e.Y, HexHeight, out row, out col);
-            this.Text = "(" + row + ", " + col + ")";
-        }
-
-        // Add the clicked hexagon to the Hexagons list.
-        private void pictureBox_hex_MouseClick(object sender, MouseEventArgs e)
-        {
-            int row, col;
-            PointToHex(e.X, e.Y, HexHeight, out row, out col);
-            Hexagons.Add(new PointF(row, col));
-
-#if FIG34
-            // Used to draw Figures 3 and 4.
-            PointF[] points = HexToPoints(HexHeight, row, col);
-            TestRects.Add(new RectangleF(
-                points[0].X, points[1].Y,
-                0.75f * (points[3].X - points[0].X),
-                points[4].Y - points[1].Y));
-#endif
-
-            pictureBox_hex.Refresh();
-        }
-
-        // Return the width of a hexagon.
-        private float HexWidth(float height)
-        {
-            return (float)(4 * (height / 2 / Math.Sqrt(3)));
-        }
-
-        // Return the row and column of the hexagon at this point.
-        private void PointToHex(float x, float y, float height,
-            out int row, out int col)
-        {
-            // Find the test rectangle containing the point.
-            float width = HexWidth(height);
-            col = (int)(x / (width * 0.75f));
-
-            if (col % 2 == 0)
-                row = (int)(y / height);
-            else
-                row = (int)((y - height / 2) / height);
-
-            // Find the test area.
-            float testx = col * width * 0.75f;
-            float testy = row * height;
-            if (col % 2 == 1) testy += height / 2;
-
-            // See if the point is above or
-            // below the test hexagon on the left.
-            bool is_above = false, is_below = false;
-            float dx = x - testx;
-            if (dx < width / 4)
-            {
-                float dy = y - (testy + height / 2);
-                if (dx < 0.001)
-                {
-                    // The point is on the left edge of the test rectangle.
-                    if (dy < 0) is_above = true;
-                    if (dy > 0) is_below = true;
-                }
-                else if (dy < 0)
-                {
-                    // See if the point is above the test hexagon.
-                    if (-dy / dx > Math.Sqrt(3)) is_above = true;
-                }
-                else
-                {
-                    // See if the point is below the test hexagon.
-                    if (dy / dx > Math.Sqrt(3)) is_below = true;
-                }
-            }
-
-            // Adjust the row and column if necessary.
-            if (is_above)
-            {
-                if (col % 2 == 0) row--;
-                col--;
-            }
-            else if (is_below)
-            {
-                if (col % 2 == 1) row++;
-                col--;
-            }
-        }
-
-        // Return the points that define the indicated hexagon.
-        private PointF[] HexToPoints(float height, float row, float col)
-        {
-            // Start with the leftmost corner of the upper left hexagon.
-            float width = HexWidth(height);
-            float y = height / 2;
-            float x = 0;
-
-            // Move down the required number of rows.
-            y += row * height;
-
-            // If the column is odd, move down half a hex more.
-            if (col % 2 == 1) y += height / 2;
-
-            // Move over for the column number.
-            x += col * (width * 0.75f);
-
-            // Generate the points.
-            return new PointF[]
-                {
-                    new PointF(x, y),
-                    new PointF(x + width * 0.25f, y - height / 2),
-                    new PointF(x + width * 0.75f, y - height / 2),
-                    new PointF(x + width, y),
-                    new PointF(x + width * 0.75f, y + height / 2),
-                    new PointF(x + width * 0.25f, y + height / 2),
-                };
-        }
-
-        // Draw the graph.
-        private void pictureBox_polar_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(Color.White);
-
-            // Set up a transformation to map the region
-            // -2.1 <= X <= 2.1, -2.1 <= Y <= 2.1 onto the  Bitmap.
-            RectangleF rect = new RectangleF(-2.1f, -2.1f, 4.2f, 4.2f);
-            PointF[] pts =
-                    {
-                        new PointF(0, H),
-                        new PointF(W, H),
-                        new PointF(0, 0),
-                    };
-            //e.Graphics
-            e.Graphics.Transform = new Matrix(rect, pts);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            using (Pen thin_pen = new Pen(Color.Blue, 0))
-            {
-                // Draw the X and Y axes.
-                thin_pen.Color = Color.Blue;
-                e.Graphics.DrawLine(thin_pen, -2.1f, 0, 2.1f, 0);
-                const float big_tick = 0.1f;
-                const float small_tick = 0.05f;
-                for (float x = (int)-2.1f; x <= 2.1f; x += 1)
-                    e.Graphics.DrawLine(thin_pen, x, -small_tick, x, small_tick);
-                for (float x = (int)-2.1f + 0.5f; x <= 2.1f; x += 1)
-                    e.Graphics.DrawLine(thin_pen, x, -big_tick, x, big_tick);
-
-                e.Graphics.DrawLine(thin_pen, 0, -2.1f, 0, 2.1f);
-                for (float y = (int)-2.1f; y <= 2.1f; y += 1)
-                    e.Graphics.DrawLine(thin_pen, -small_tick, y, small_tick, y);
-                for (float y = (int)-2.1f + 0.5f; y <= 2.1f; y += 1)
-                    e.Graphics.DrawLine(thin_pen, -big_tick, y, big_tick, y);
-
-                // Draw the graph.
-                DrawGraph(e.Graphics);
-            }
-        }
-
-        // Draw the graph on a Bitmap.
-        private void DrawGraph(Graphics gr)
-        {
-            // Generate the points.
-            double t = 0;
-            const double dt = Math.PI / 100.0;
-            const double two_pi = 2 * Math.PI;
-            List<PointF> points = new List<PointF>();
-            while (t <= two_pi)
-            {
-                double r = 2 * Math.Sin(5 * t);
-                float x = (float)(r * Math.Cos(t));
-                float y = (float)(r * Math.Sin(t));
-                points.Add(new PointF(x, y));
-                t += dt;
-            }
-
-            // Draw the curve.
-            using (Pen thin_pen = new Pen(Color.Red, 0))
-            {
-                gr.DrawPolygon(thin_pen, points.ToArray());
-            }
-        }
-
         private void timer_change_Tick(object sender, EventArgs e)
         {
             numericUpDown1.Value++;
@@ -1430,6 +1055,20 @@ namespace vcs_Draw9_Example7_vcsh
             NumPoints_ngon_stars++;
             if (NumPoints_ngon_stars > 12)
                 NumPoints_ngon_stars = 3;
+
+            // for pickover popcorn ST
+            HH += 0.01f;
+            if (HH > 0.1)
+                HH = 0.01f;
+
+            IterationsPerPixel += 10;
+            if (IterationsPerPixel > 80)
+                IterationsPerPixel = 10;
+
+            dx++;
+            if (dx > 30)
+                dx = 5;
+            // for pickover popcorn SP
 
             redraw_all();
         }
@@ -1461,6 +1100,11 @@ namespace vcs_Draw9_Example7_vcsh
 
             pictureBox_ngon_stars.Refresh();
             pictureBox22.Refresh();
+
+            draw_pickover_popcorn1();    //for pickover popcorn 單色
+            draw_pickover_popcorn2();    //for pickover popcorn 彩色
+
+
         }
 
         private void pictureBox_fractal1_Paint(object sender, PaintEventArgs e)
@@ -1572,8 +1216,8 @@ namespace vcs_Draw9_Example7_vcsh
             int Level = (int)numericUpDown1.Value;
 
             Bitmap bm = new Bitmap(
-                pictureBox_sierpinski1.ClientSize.Width,
-                pictureBox_sierpinski1.ClientSize.Height);
+                pictureBox_sierpinski3.ClientSize.Width,
+                pictureBox_sierpinski3.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
@@ -1583,13 +1227,13 @@ namespace vcs_Draw9_Example7_vcsh
                 const float margin = 10;
                 RectangleF rect = new RectangleF(
                     margin, margin,
-                    pictureBox_sierpinski1.ClientSize.Width - 2 * margin,
-                    pictureBox_sierpinski1.ClientSize.Height - 2 * margin);
+                    pictureBox_sierpinski3.ClientSize.Width - 2 * margin,
+                    pictureBox_sierpinski3.ClientSize.Height - 2 * margin);
                 DrawRectangle(gr, Level, rect);
             }
 
             // Display the result.
-            pictureBox_sierpinski1.Image = bm;
+            pictureBox_sierpinski3.Image = bm;
 
             // Save the bitmap into a file.
             bm.Save("Carpet " + Level + ".bmp");
@@ -1694,65 +1338,6 @@ namespace vcs_Draw9_Example7_vcsh
                 DrawTriangle(gr, level - 1, top_point, left_mid, right_mid);
                 DrawTriangle(gr, level - 1, left_mid, left_point, bottom_mid);
                 DrawTriangle(gr, level - 1, right_mid, bottom_mid, right_point);
-            }
-        }
-        #endregion
-
-        #region pictureBox_butterfly butterfly
-
-        // Draw the butterfly.
-        private void pictureBox_butterfly_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.Clear(this.pictureBox_butterfly.BackColor);
-
-            // Scale and translate.
-            RectangleF world_rect =
-                new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
-            float cx = (world_rect.Left + world_rect.Right) / 2;
-            float cy = (world_rect.Top + world_rect.Bottom) / 2;
-
-            // Center the world coordinates at origin.
-            e.Graphics.TranslateTransform(-cx, -cy);
-
-            // Scale to fill the form.
-            float scale = Math.Min(
-                this.pictureBox_butterfly.ClientSize.Width / world_rect.Width,
-                this.pictureBox_butterfly.ClientSize.Height / world_rect.Height);
-            e.Graphics.ScaleTransform(scale, scale, MatrixOrder.Append);
-
-            // Move the result to center on the form.
-            e.Graphics.TranslateTransform(
-                this.pictureBox_butterfly.ClientSize.Width / 2,
-                this.pictureBox_butterfly.ClientSize.Height / 2, MatrixOrder.Append);
-
-            // Generate the points.
-            PointF pt0, pt1;
-            double t = 0;
-            double expr =
-                Math.Exp(Math.Cos(t))
-                - 2 * Math.Cos(4 * t)
-                - Math.Pow(Math.Sin(t / 12), 5);
-            pt1 = new PointF(
-                (float)(Math.Sin(t) * expr),
-                (float)(-Math.Cos(t) * expr));
-            using (Pen the_pen = new Pen(Color.Blue, 0))
-            {
-                const long num_lines = 5000;
-                for (long i = 0; i < num_lines; i++)
-                {
-                    t = i * period * Math.PI / num_lines;
-                    expr =
-                        Math.Exp(Math.Cos(t))
-                        - 2 * Math.Cos(4 * t)
-                        - Math.Pow(Math.Sin(t / 12), 5);
-                    pt0 = pt1;
-                    pt1 = new PointF(
-                        (float)(Math.Sin(t) * expr),
-                        (float)(-Math.Cos(t) * expr));
-                    the_pen.Color = GetColor(t);
-                    e.Graphics.DrawLine(the_pen, pt0, pt1);
-                }
             }
         }
         #endregion
@@ -2505,10 +2090,388 @@ namespace vcs_Draw9_Example7_vcsh
                 return Color.FromArgb(0, 255 - int_value, 255);
             }
         }
+
         // 畫 Fractal 2 SP
 
+        //for sierpinski1 ST
+        int aa = 0;
+        // Add 1000 points to the gasket.
+        private void timer_sierpinski1_Tick(object sender, EventArgs e)
+        {
+            aa++;
+            if (aa > 20)
+            {
+                // Clear.
+                using (Graphics gr = this.pictureBox_sierpinski1.CreateGraphics())
+                {
+                    gr.Clear(this.BackColor);
+                }
+                aa = 0;
+            }
+
+            // Draw points.
+            Random rand = new Random();
+            using (Graphics gr = this.pictureBox_sierpinski1.CreateGraphics())
+            {
+                // Draw the corners.
+                foreach (PointF pt in Corners)
+                {
+                    gr.FillEllipse(Brushes.White, pt.X - 2, pt.Y - 2, 4, 4);
+                    gr.DrawEllipse(Pens.Blue, pt.X - 2, pt.Y - 2, 4, 4);
+                }
+
+                // Draw 1000 points.
+                for (int i = 1; i <= 400; i++)
+                {
+                    int j = rand.Next(0, 3);
+                    LastPoint = new PointF((LastPoint.X + Corners[j].X) / 2, (LastPoint.Y + Corners[j].Y) / 2);
+                    gr.DrawLine(Pens.Red, LastPoint.X, LastPoint.Y, LastPoint.X + 1, LastPoint.Y + 1);
+                }
+            }
+        }
+        //for sierpinski1 SP
 
 
+
+
+        int NumBuildings = 5;
+        private Rectangle[] Buildings = null;
+        private Point[] Skyline = null;
+
+        void drawBuildings()
+        {
+            // Create random buildings.
+            const int margin = 10;
+            int wid = pictureBox_skyline.ClientSize.Width;
+            int hgt = pictureBox_skyline.ClientSize.Height;
+            int xmin = margin;
+            int xmax = wid - margin;
+            int basey = hgt - margin;
+            int min_hgt = margin;
+            int max_hgt = hgt - 2 * margin;
+            int min_wid = margin;
+            int max_wid = (wid - 2 * margin) / 4;
+
+            int num_buildings = NumBuildings;
+            Buildings = new Rectangle[num_buildings];
+            Random rand = new Random();
+            for (int i = 0; i < num_buildings; i++)
+            {
+                const int block_size = 10;
+                int width = rand.Next(min_wid, max_wid + 1);
+                width = block_size * (int)(width / block_size);
+                if (width < block_size) width = block_size;
+
+                int height = rand.Next(min_hgt, max_hgt + 1);
+                height = block_size * (int)(height / block_size);
+                if (height < block_size) height = block_size;
+
+                int x = rand.Next(xmin, xmax - width + 1);
+                int y = basey - height;
+
+                Buildings[i] = new Rectangle(x, y, width, height);
+            }
+
+            // Find the skyline.
+            Skyline = FindSkyline(Buildings).ToArray();
+
+            // Redraw.
+            pictureBox_skyline.Refresh();
+        }
+
+        // Draw the buildings and skyline.
+        private void pictureBox_skyline_Paint(object sender, PaintEventArgs e)
+        {
+            if (Buildings == null) return;
+            e.Graphics.Clear(pictureBox_skyline.BackColor);
+
+            // Draw the skyline.
+            using (Pen pen = new Pen(Color.Black, 5))
+            {
+                e.Graphics.DrawLines(pen, Skyline);
+            }
+
+            // Draw the buildings.
+            using (Brush brush = new SolidBrush(Color.FromArgb(128, Color.LightBlue)))
+            {
+                foreach (Rectangle building in Buildings)
+                {
+                    e.Graphics.FillRectangle(brush, building);
+                    e.Graphics.DrawRectangle(Pens.Blue, building);
+                }
+            }
+        }
+
+        // Return a skyline point list for the rectangles.
+        private List<Point> FindSkyline(Rectangle[] buildings)
+        {
+            // Create building start and end events.
+            int num_buildings = buildings.Length;
+            List<BuildingEvent> building_events = new List<BuildingEvent>();
+            for (int i = 0; i < num_buildings; i++)
+            {
+                building_events.Add(new BuildingEvent(
+                    buildings[i].X,
+                    BuildingEvent.EventTypes.Start, i));
+                building_events.Add(new BuildingEvent(
+                    buildings[i].Right,
+                    BuildingEvent.EventTypes.End, i));
+            }
+
+            // Sort the events.
+            building_events.Sort();
+
+            // Make a list for the currently active buildings.
+            List<Rectangle> active_buildings = new List<Rectangle>();
+
+            // Initially ymin is the building baseline.
+            int ground = buildings[0].Bottom;
+            int ymin = ground;
+
+            // Make the result list.
+            List<Point> results = new List<Point>();
+            results.Add(new Point(0, ymin));
+
+            // Process the events.
+            int num_events = 2 * num_buildings;
+            foreach (BuildingEvent building_event in building_events)
+            {
+                // Get the building index;
+                int building_index = building_event.BuildingIndex;
+
+                // Get the event's X coordinate.
+                int event_x = building_event.X;
+
+                // See if it's a start or stop.
+                if (building_event.EventType == BuildingEvent.EventTypes.Start)
+                {
+                    // It's a start.
+                    // See if this building is taller
+                    // than the currently active one.
+                    if (buildings[building_index].Top < ymin)
+                    {
+                        results.Add(new Point(event_x, ymin));
+                        ymin = buildings[building_index].Y;
+                        results.Add(new Point(event_x, ymin));
+                    }
+
+                    // Add the building to the active list.
+                    active_buildings.Add(buildings[building_index]);
+                }
+                else
+                {
+                    // It's a stop.
+                    // Remove the building from the active list.
+                    active_buildings.Remove(buildings[building_index]);
+
+                    // See if this building was the tallest.
+                    if (buildings[building_index].Top <= ymin)
+                    {
+                        // This building was tallest.
+                        // Mark this point.
+                        results.Add(new Point(event_x, ymin));
+
+                        // Find the new tallest active building.
+                        if (active_buildings.Count == 0) ymin = ground;
+                        else
+                        {
+                            ymin = active_buildings[0].Top;
+                            for (int j = 1; j < active_buildings.Count; j++)
+                            {
+                                if (ymin > active_buildings[j].Top)
+                                    ymin = active_buildings[j].Top;
+                            }
+                        }
+
+                        // Mark this point.
+                        results.Add(new Point(event_x, ymin));
+                    }
+                }
+            }
+
+            // Add a final point off to the right.
+            results.Add(new Point(10000, ground));
+
+            return results;
+        }
+
+        private void timer_skyline_Tick(object sender, EventArgs e)
+        {
+            NumBuildings++;
+            if (NumBuildings > 15)
+                NumBuildings = 5;
+            drawBuildings();
+
+        }
+
+        //畫 pickover_popcorn ST
+        // Plot a bunch of points.
+        void draw_pickover_popcorn1()
+        {
+            this.Text = "h = " + HH.ToString() + " \tInterations = " + IterationsPerPixel.ToString() + " \tdx = " + dx.ToString();
+
+            // Make a new bitmap.
+            bitmap_pickover1 = new Bitmap(pictureBox_pickover_popcorn1.ClientSize.Width, pictureBox_pickover_popcorn1.ClientSize.Height);
+            pictureBox_pickover_popcorn1.Image = bitmap_pickover1;
+
+            // Plot a series for each point.
+            for (int x = 0; x < bitmap_pickover1.Width; x += dx)
+            {
+                for (int y = 0; y < bitmap_pickover1.Height; y += dx)
+                {
+                    PlotPoints1(bitmap_pickover1, HH, x, y, IterationsPerPixel);
+                }
+                pictureBox_pickover_popcorn1.Refresh();
+            }
+            pictureBox_pickover_popcorn1.Refresh();
+        }
+
+        // Plot points for the clicked pixel.
+        private void pictureBox_pickover_popcorn1_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Plot the point's series.
+            PlotPoints1(bitmap_pickover1, HH, e.X, e.Y, IterationsPerPixel);
+            pictureBox_pickover_popcorn1.Refresh();
+        }
+
+        // Plot points for a pixel using the equations:
+        //      x(n + 1) = x(n) - h * Sin(y(n) + Tan(3 * y(n)))
+        //      y(n + 1) = y(n) - h * Sin(x(n) + Tan(3 * x(n)))
+        private void PlotPoints1(Bitmap bm, float h, int pix_x, int pix_y, int iterations)
+        {
+            // Convert the first point to world coordinates.
+            float wx, wy;
+            DeviceToWorld(pix_x, pix_y, out wx, out wy);
+
+            // Plot points.
+            bm.SetPixel(pix_x, pix_y, Color.Blue);
+            for (int i = 0; i < iterations; i++)
+            {
+                float new_x = (float)(wx - h * Math.Sin(wy + Math.Tan(3 * wy)));
+                float new_y = (float)(wy - h * Math.Sin(wx + Math.Tan(3 * wx)));
+                wx = new_x;
+                wy = new_y;
+
+                WorldToDevice(wx, wy, out pix_x, out pix_y);
+                if (pix_x >= 0 && pix_x < bm.Width &&
+                    pix_y >= 0 && pix_y < bm.Height)
+                {
+                    bm.SetPixel(pix_x, pix_y, Color.Red);
+                }
+            }
+        }
+
+        // Convert between world and device coordinates.
+        private const float Wxmin = -4.0f;
+        private const float Wxmax = 4.0f;
+        private const float Wymin = -3.0f;
+        private const float Wymax = 3.0f;
+        private const float Wwid = (Wxmax - Wxmin);
+        private const float Whgt = (Wymax - Wymin);
+        private const float Dxmin = 0f;
+        private const float Dxmax = 600f;
+        private const float Dymin = 0f;
+        private const float Dymax = 500f;
+        private const float Dwid = (Dxmax - Dxmin);
+        private const float Dhgt = (Dymax - Dymin);
+        private void WorldToDevice(float wx, float wy, out int dx, out int dy)
+        {
+            dx = (int)(Dxmin + Dwid * (wx - Wxmin) / Wwid);
+            dy = (int)(Dymin + Dhgt * (wy - Wymin) / Whgt);
+        }
+        private void DeviceToWorld(int dx, int dy, out float wx, out float wy)
+        {
+            wx = Wxmin + Wwid * (dx - Dxmin) / Dwid;
+            wy = Wymin + Whgt * (dy - Dymin) / Dhgt;
+        }
+
+
+        //彩色
+
+        //畫 pickover_popcorn ST
+        // Plot a bunch of points.
+
+        // Plot a bunch of points.
+        void draw_pickover_popcorn2()
+        {
+            // Make a new bitmap.
+            bitmap_pickover2 = new Bitmap(pictureBox_pickover_popcorn2.ClientSize.Width, pictureBox_pickover_popcorn2.ClientSize.Height);
+            pictureBox_pickover_popcorn2.Image = bitmap_pickover2;
+
+            // Plot a series for each point.
+            RgbType = RgbRed;
+            for (int x = 0; x < bitmap_pickover2.Width; x += dx)
+            {
+                for (int y = 0; y < bitmap_pickover2.Height; y += dx)
+                {
+                    PlotPoints2(bitmap_pickover2, HH, x, y, IterationsPerPixel, RgbType);
+                    RgbType = ++RgbType % 3;
+                }
+                pictureBox_pickover_popcorn2.Refresh();
+            }
+            pictureBox_pickover_popcorn2.Refresh();
+        }
+
+        // Plot points for the clicked pixel.
+        private void pictureBox_pickover_popcorn2_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Plot the point's series.
+            PlotPoints2(bitmap_pickover2, HH, e.X, e.Y, IterationsPerPixel, RgbType);
+            RgbType = ++RgbType % 3;
+            pictureBox_pickover_popcorn2.Refresh();
+        }
+
+        // Plot points for a pixel using the equations:
+        //      x(n + 1) = x(n) - h * Sin(y(n) + Tan(3 * y(n)))
+        //      y(n + 1) = y(n) - h * Sin(x(n) + Tan(3 * x(n)))
+        private void PlotPoints2(Bitmap bm, float h, int pix_x, int pix_y, int iterations, int rgb_type)
+        {
+            // Convert the first point to world coordinates.
+            float wx, wy;
+            DeviceToWorld(pix_x, pix_y, out wx, out wy);
+
+            // Plot points.
+            bm.SetPixel(pix_x, pix_y, Color.Blue);
+            for (int i = 0; i < iterations; i++)
+            {
+                float new_x = (float)(wx - h * Math.Sin(wy + Math.Tan(3 * wy)));
+                float new_y = (float)(wy - h * Math.Sin(wx + Math.Tan(3 * wx)));
+                wx = new_x;
+                wy = new_y;
+
+                WorldToDevice(wx, wy, out pix_x, out pix_y);
+                if (pix_x >= 0 && pix_x < bm.Width &&
+                    pix_y >= 0 && pix_y < bm.Height)
+                {
+                    Color color = bm.GetPixel(pix_x, pix_y);
+                    int new_r = color.R;
+                    int new_g = color.G;
+                    int new_b = color.B;
+                    switch (RgbType)
+                    {
+                        case RgbRed:
+                            new_r = new_r + (255 - new_r) / 2;
+                            break;
+                        case RgbGreen:
+                            new_g = new_g + (255 - new_g) / 2;
+                            break;
+                        case RgbBlue:
+                            new_b = new_b + (255 - new_b) / 2;
+                            break;
+                    }
+
+                    color = Color.FromArgb(255, new_r, new_g, new_b);
+                    bm.SetPixel(pix_x, pix_y, color);
+                }
+            }
+        }
+
+
+
+
+
+
+        //畫 pickover_popcorn SP
 
     }
 }

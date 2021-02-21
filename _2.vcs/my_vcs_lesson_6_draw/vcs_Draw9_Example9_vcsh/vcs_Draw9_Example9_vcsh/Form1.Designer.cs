@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.components = new System.ComponentModel.Container();
+            this.pictureBox_Chrysanthemum1 = new System.Windows.Forms.PictureBox();
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Chrysanthemum2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_butterfly = new System.Windows.Forms.PictureBox();
+            this.pictureBox_polar = new System.Windows.Forms.PictureBox();
+            this.pictureBox_hex = new System.Windows.Forms.PictureBox();
+            this.pictureBox_tri = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
@@ -46,12 +47,13 @@
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.timer_change = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_butterfly)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_tri)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -63,14 +65,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pictureBox_Chrysanthemum1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox_Chrysanthemum1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_Chrysanthemum1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox_Chrysanthemum1.Name = "pictureBox_Chrysanthemum1";
+            this.pictureBox_Chrysanthemum1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_Chrysanthemum1.TabIndex = 16;
+            this.pictureBox_Chrysanthemum1.TabStop = false;
+            this.pictureBox_Chrysanthemum1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Chrysanthemum1_Paint);
             // 
             // bt_save
             // 
@@ -102,50 +105,61 @@
             this.richTextBox1.TabIndex = 59;
             this.richTextBox1.Text = "";
             // 
-            // pictureBox2
+            // pictureBox_Chrysanthemum2
             // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox2.Location = new System.Drawing.Point(133, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.TabIndex = 60;
-            this.pictureBox2.TabStop = false;
+            this.pictureBox_Chrysanthemum2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_Chrysanthemum2.Location = new System.Drawing.Point(133, 12);
+            this.pictureBox_Chrysanthemum2.Name = "pictureBox_Chrysanthemum2";
+            this.pictureBox_Chrysanthemum2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_Chrysanthemum2.TabIndex = 60;
+            this.pictureBox_Chrysanthemum2.TabStop = false;
+            this.pictureBox_Chrysanthemum2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Chrysanthemum2_Paint);
             // 
-            // pictureBox3
+            // pictureBox_butterfly
             // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox3.Location = new System.Drawing.Point(258, 12);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox3.TabIndex = 61;
-            this.pictureBox3.TabStop = false;
+            this.pictureBox_butterfly.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_butterfly.Location = new System.Drawing.Point(258, 12);
+            this.pictureBox_butterfly.Name = "pictureBox_butterfly";
+            this.pictureBox_butterfly.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_butterfly.TabIndex = 61;
+            this.pictureBox_butterfly.TabStop = false;
+            this.pictureBox_butterfly.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_butterfly_Paint);
             // 
-            // pictureBox4
+            // pictureBox_polar
             // 
-            this.pictureBox4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox4.Location = new System.Drawing.Point(380, 12);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox4.TabIndex = 62;
-            this.pictureBox4.TabStop = false;
+            this.pictureBox_polar.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_polar.Location = new System.Drawing.Point(380, 12);
+            this.pictureBox_polar.Name = "pictureBox_polar";
+            this.pictureBox_polar.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_polar.TabIndex = 62;
+            this.pictureBox_polar.TabStop = false;
+            this.pictureBox_polar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_polar_Paint);
             // 
-            // pictureBox5
+            // pictureBox_hex
             // 
-            this.pictureBox5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox5.Location = new System.Drawing.Point(504, 12);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox5.TabIndex = 63;
-            this.pictureBox5.TabStop = false;
+            this.pictureBox_hex.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_hex.Location = new System.Drawing.Point(504, 12);
+            this.pictureBox_hex.Name = "pictureBox_hex";
+            this.pictureBox_hex.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_hex.TabIndex = 63;
+            this.pictureBox_hex.TabStop = false;
+            this.pictureBox_hex.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_hex_Paint);
+            this.pictureBox_hex.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hex_MouseClick);
+            this.pictureBox_hex.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hex_MouseMove);
+            this.pictureBox_hex.Resize += new System.EventHandler(this.pictureBox_hex_Resize);
             // 
-            // pictureBox6
+            // pictureBox_tri
             // 
-            this.pictureBox6.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox6.Location = new System.Drawing.Point(12, 131);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox6.TabIndex = 68;
-            this.pictureBox6.TabStop = false;
+            this.pictureBox_tri.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_tri.Location = new System.Drawing.Point(12, 131);
+            this.pictureBox_tri.Name = "pictureBox_tri";
+            this.pictureBox_tri.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_tri.TabIndex = 68;
+            this.pictureBox_tri.TabStop = false;
+            this.pictureBox_tri.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_tri_Paint);
+            this.pictureBox_tri.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_tri_MouseClick);
+            this.pictureBox_tri.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_tri_MouseMove);
+            this.pictureBox_tri.Resize += new System.EventHandler(this.pictureBox_tri_Resize);
             // 
             // pictureBox7
             // 
@@ -228,6 +242,12 @@
             this.pictureBox15.TabIndex = 69;
             this.pictureBox15.TabStop = false;
             // 
+            // timer_change
+            // 
+            this.timer_change.Enabled = true;
+            this.timer_change.Interval = 1000;
+            this.timer_change.Tick += new System.EventHandler(this.timer_change_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -238,29 +258,29 @@
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox15);
-            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.pictureBox_tri);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox10);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox_hex);
+            this.Controls.Add(this.pictureBox_polar);
+            this.Controls.Add(this.pictureBox_butterfly);
+            this.Controls.Add(this.pictureBox_Chrysanthemum2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox_Chrysanthemum1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_butterfly)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_tri)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
@@ -276,15 +296,15 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox_Chrysanthemum1;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox_Chrysanthemum2;
+        private System.Windows.Forms.PictureBox pictureBox_butterfly;
+        private System.Windows.Forms.PictureBox pictureBox_polar;
+        private System.Windows.Forms.PictureBox pictureBox_hex;
+        private System.Windows.Forms.PictureBox pictureBox_tri;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
@@ -294,6 +314,7 @@
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox14;
         private System.Windows.Forms.PictureBox pictureBox15;
+        private System.Windows.Forms.Timer timer_change;
     }
 }
 
