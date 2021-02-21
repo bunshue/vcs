@@ -443,6 +443,8 @@ namespace vcs_Draw_Histogram
             }
             DrawHistogram4(pictureBox_histogram, Brushes.Blue, thin_pen, numbers);
 
+
+            draw_histogram_old();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -514,6 +516,82 @@ namespace vcs_Draw_Histogram
             // Display the histogram.
             pic.Image = bitmap1;
         }
+
+
+        //原本範例 ST
+        void draw_histogram_old()
+        {
+            using (Pen thin_pen = new Pen(Color.Black, 0))
+            {
+                pictureBox_old.Image = null;
+                Refresh();
+
+                // Generate values with Random.
+                int num_numbers = 1000;
+                int min = 1;
+                int max = 100;
+                Random rand = new Random();
+                int[] rand_numbers = new int[num_numbers];
+                for (int i = 0; i < num_numbers; i++)
+                    rand_numbers[i] = rand.Next(min, max);
+
+                // Display a histogram.
+                thin_pen.Color = Color.LightBlue;
+                DrawHistogram_old(pictureBox_old, Brushes.Blue, thin_pen, rand_numbers);
+            }
+        }
+
+        // Display a histogram.
+        private void DrawHistogram_old(PictureBox pic, Brush brush, Pen pen, int[] values)
+        {
+            // Count the values.
+            int min = values.Min();
+            int max = values.Max();
+            int[] counts = new int[max - min + 1];
+            for (int i = 0; i < values.Length; i++)
+            {
+                counts[values[i] - min]++;
+            }
+            int max_count = counts.Max();
+
+            // Make a Bitmap.
+            Bitmap bm = new Bitmap(pic.ClientSize.Width, pic.ClientSize.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Scale to fit the data.
+                RectangleF rect = new RectangleF(0, 0, counts.Length, max_count);
+                PointF[] pts = 
+                {
+                    new PointF(0, pic.ClientSize.Height),
+                    new PointF(pic.ClientSize.Width, pic.ClientSize.Height),
+                    new PointF(0, 0),
+                };
+                gr.Transform = new Matrix(rect, pts);
+
+                // Fill the histogram.
+                for (int i = 0; i < counts.Length; i++)
+                {
+                    gr.FillRectangle(brush, i, 0, 1, counts[i]);
+                }
+
+                // Draw the histogram.
+                if (counts.Length < 200)
+                {
+                    for (int i = 0; i < counts.Length; i++)
+                    {
+                        gr.DrawRectangle(pen, i, 0, 1, counts[i]);
+                    }
+                }
+            }
+
+            // Display the histogram.
+            pic.Image = bm;
+        }
+        //原本範例 SP
+
+
 
 
     }

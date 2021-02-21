@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_test_all_25_GeoCoordinate2
+namespace vcs_test_all_25_GeoCoordinate
 {
     public class LatLon
     {

@@ -116,15 +116,94 @@ namespace howto_list_temperatures
             temperature.Clear();
             date.Clear();
 
+            /*
+            // 解讀xml資料
+            // Get the city, country, latitude, and longitude.
+            XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
+            richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
+            richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
+
+            XmlNode geo_node = loc_node.SelectSingleNode("location");
+            richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
+            richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
+            richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
+            richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n\n";
+
+            foreach (XmlNode sun_node in xml_doc.SelectNodes("//sun"))
+            {
+                XmlAttribute time_attr1 = sun_node.Attributes["rise"];
+                XmlAttribute time_attr2 = sun_node.Attributes["set"];
+                richTextBox1.Text += "日出 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + "\n";
+                richTextBox1.Text += "日落 : " + DateTime.Parse(time_attr2.Value).ToLocalTime() + "\n";
+            }
+            */
+
             char degrees = (char)176;
 
             // Loop throuh the time entries.
             string last_day = "";
+            int aaa = 0;
             foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
             {
                 // Get the start date and time.
-                XmlAttribute time_attr = time_node.Attributes["from"];
-                DateTime start_time = DateTime.Parse(time_attr.Value);
+                XmlAttribute time_attr1 = time_node.Attributes["from"];
+                XmlAttribute time_attr2 = time_node.Attributes["to"];
+
+                aaa++;
+                /* 解讀xml資料 
+                richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
+
+                richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
+                    + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
+
+                richTextBox1.Text += "symbol" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "precipitation" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "windDirection" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "windSpeed" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "temperature" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "feels_like" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "pressure" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "humidity" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "clouds" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "visibility" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
+                */
+
+                DateTime start_time = DateTime.Parse(time_attr1.Value);
 
                 // Convert from UTC to local time.
                 start_time = start_time.ToLocalTime();

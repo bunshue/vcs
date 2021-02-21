@@ -35,6 +35,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.txtCountry = new System.Windows.Forms.TextBox();
@@ -47,7 +48,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cboQuery = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -64,17 +64,17 @@
             // 
             this.txtLocation.Location = new System.Drawing.Point(91, 8);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(567, 22);
+            this.txtLocation.Size = new System.Drawing.Size(426, 22);
             this.txtLocation.TabIndex = 15;
             this.txtLocation.Text = "yunlin";
             // 
             // btnForecast
             // 
-            this.btnForecast.Location = new System.Drawing.Point(298, 32);
+            this.btnForecast.Location = new System.Drawing.Point(532, 9);
             this.btnForecast.Name = "btnForecast";
-            this.btnForecast.Size = new System.Drawing.Size(75, 21);
+            this.btnForecast.Size = new System.Drawing.Size(90, 21);
             this.btnForecast.TabIndex = 16;
-            this.btnForecast.Text = "Forecast";
+            this.btnForecast.Text = "天氣預測";
             this.btnForecast.UseVisualStyleBackColor = true;
             this.btnForecast.Click += new System.EventHandler(this.btnForecast_Click);
             // 
@@ -106,6 +106,11 @@
             // 
             this.columnHeader3.Text = "溫度(F)";
             this.columnHeader3.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "溫度(C)";
+            this.columnHeader4.Width = 100;
             // 
             // label3
             // 
@@ -208,11 +213,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(267, 411);
             this.richTextBox1.TabIndex = 31;
             this.richTextBox1.Text = "";
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "溫度(C)";
-            this.columnHeader4.Width = 100;
             // 
             // bt_clear
             // 

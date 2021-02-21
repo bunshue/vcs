@@ -40,8 +40,10 @@
             this.pictureBox_histogram = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button6 = new System.Windows.Forms.Button();
+            this.pictureBox_old = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_old)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -126,7 +128,7 @@
             // 
             this.pictureBox_histogram.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox_histogram.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_histogram.Location = new System.Drawing.Point(748, 345);
+            this.pictureBox_histogram.Location = new System.Drawing.Point(751, 493);
             this.pictureBox_histogram.Name = "pictureBox_histogram";
             this.pictureBox_histogram.Size = new System.Drawing.Size(99, 79);
             this.pictureBox_histogram.TabIndex = 8;
@@ -148,11 +150,22 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // pictureBox_old
+            // 
+            this.pictureBox_old.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_old.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_old.Location = new System.Drawing.Point(12, 445);
+            this.pictureBox_old.Name = "pictureBox_old";
+            this.pictureBox_old.Size = new System.Drawing.Size(700, 150);
+            this.pictureBox_old.TabIndex = 10;
+            this.pictureBox_old.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 454);
+            this.ClientSize = new System.Drawing.Size(877, 597);
+            this.Controls.Add(this.pictureBox_old);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox_histogram);
             this.Controls.Add(this.button5);
@@ -168,6 +181,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_histogram)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_old)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,6 +199,7 @@
         private System.Windows.Forms.PictureBox pictureBox_histogram;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.PictureBox pictureBox_old;
     }
 }
 

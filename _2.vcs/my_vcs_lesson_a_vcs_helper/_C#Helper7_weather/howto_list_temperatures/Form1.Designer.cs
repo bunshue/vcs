@@ -59,15 +59,15 @@
             this.txtLocation.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.txtLocation.Location = new System.Drawing.Point(80, 9);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(1042, 30);
+            this.txtLocation.Size = new System.Drawing.Size(378, 30);
             this.txtLocation.TabIndex = 20;
             this.txtLocation.Text = "Hsinchu";
             // 
             // btnForecast
             // 
-            this.btnForecast.Location = new System.Drawing.Point(258, 45);
+            this.btnForecast.Location = new System.Drawing.Point(467, 8);
             this.btnForecast.Name = "btnForecast";
-            this.btnForecast.Size = new System.Drawing.Size(105, 21);
+            this.btnForecast.Size = new System.Drawing.Size(104, 30);
             this.btnForecast.TabIndex = 21;
             this.btnForecast.Text = "天氣預測";
             this.btnForecast.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(15, 73);
+            this.listView1.Location = new System.Drawing.Point(12, 45);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(559, 317);
             this.listView1.TabIndex = 24;
@@ -112,9 +112,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(15, 396);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 368);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(559, 203);
+            this.richTextBox1.Size = new System.Drawing.Size(559, 240);
             this.richTextBox1.TabIndex = 25;
             this.richTextBox1.Text = "";
             // 
@@ -130,7 +130,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(595, 73);
+            this.pictureBox1.Location = new System.Drawing.Point(592, 45);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(527, 317);
             this.pictureBox1.TabIndex = 27;
