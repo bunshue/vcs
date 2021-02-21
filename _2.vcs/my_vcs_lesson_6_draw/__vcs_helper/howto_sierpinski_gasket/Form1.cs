@@ -36,7 +36,7 @@ namespace howto_sierpinski_gasket
             DefineCorners();
 
             // Clear.
-            using (Graphics gr = this.CreateGraphics())
+            using (Graphics gr = this.pictureBox1.CreateGraphics())
             {
                 gr.Clear(this.BackColor);
             }
@@ -45,22 +45,31 @@ namespace howto_sierpinski_gasket
         // Define the corners.
         private void DefineCorners()
         {
+            int W = this.pictureBox1.ClientSize.Width;
+            int H = this.pictureBox1.ClientSize.Height;
+
             // Initialize the corners.
             Corners = new List<PointF>();
-            Corners.Add(new PointF(this.ClientSize.Width / 2, 10));
-            Corners.Add(new PointF(10, this.ClientSize.Height - 10));
-            Corners.Add(new PointF(this.ClientSize.Width - 10, this.ClientSize.Height - 10));
+            Corners.Add(new PointF(W / 2, 10));
+            Corners.Add(new PointF(10, H - 10));
+            Corners.Add(new PointF(W - 10, H - 10));
 
             // Start at the first point.
             LastPoint = Corners[0];
         }
 
+        int aa = 0;
         // Add 1000 points to the gasket.
         private void tmrDraw_Tick(object sender, EventArgs e)
         {
+            aa++;
+            if (aa > 1000)
+                aa = 0;
+            this.Text = aa.ToString();
+
             // Draw points.
             Random rand = new Random();
-            using (Graphics gr = this.CreateGraphics())
+            using (Graphics gr = this.pictureBox1.CreateGraphics())
             {
                 // Draw the corners.
                 foreach (PointF pt in Corners)

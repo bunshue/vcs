@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_scaled_normal_distribution
+namespace vcs_Draw9_Example9_vcsh
 {
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()

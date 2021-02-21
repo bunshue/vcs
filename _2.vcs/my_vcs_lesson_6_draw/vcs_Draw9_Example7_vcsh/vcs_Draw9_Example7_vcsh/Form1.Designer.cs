@@ -50,7 +50,7 @@
             this.pictureBox_polar = new System.Windows.Forms.PictureBox();
             this.pictureBox_fractal1 = new System.Windows.Forms.PictureBox();
             this.pictureBox_fractal2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_fractal3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_ngon_stars = new System.Windows.Forms.PictureBox();
             this.pictureBox_butterfly = new System.Windows.Forms.PictureBox();
             this.pictureBox_sierpinski1 = new System.Windows.Forms.PictureBox();
             this.pictureBox_sierpinski2 = new System.Windows.Forms.PictureBox();
@@ -77,7 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ngon_stars)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_butterfly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski2)).BeginInit();
@@ -295,15 +295,15 @@
             this.pictureBox_fractal2.TabStop = false;
             this.pictureBox_fractal2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_fractal2_Paint);
             // 
-            // pictureBox_fractal3
+            // pictureBox_ngon_stars
             // 
-            this.pictureBox_fractal3.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_fractal3.Location = new System.Drawing.Point(145, 182);
-            this.pictureBox_fractal3.Name = "pictureBox_fractal3";
-            this.pictureBox_fractal3.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_fractal3.TabIndex = 78;
-            this.pictureBox_fractal3.TabStop = false;
-            this.pictureBox_fractal3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_fractal3_Paint);
+            this.pictureBox_ngon_stars.BackColor = System.Drawing.Color.White;
+            this.pictureBox_ngon_stars.Location = new System.Drawing.Point(145, 182);
+            this.pictureBox_ngon_stars.Name = "pictureBox_ngon_stars";
+            this.pictureBox_ngon_stars.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_ngon_stars.TabIndex = 78;
+            this.pictureBox_ngon_stars.TabStop = false;
+            this.pictureBox_ngon_stars.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_ngon_stars_Paint);
             // 
             // pictureBox_butterfly
             // 
@@ -418,7 +418,7 @@
             this.Controls.Add(this.pictureBox_sierpinski2);
             this.Controls.Add(this.pictureBox_sierpinski1);
             this.Controls.Add(this.pictureBox_butterfly);
-            this.Controls.Add(this.pictureBox_fractal3);
+            this.Controls.Add(this.pictureBox_ngon_stars);
             this.Controls.Add(this.pictureBox_fractal2);
             this.Controls.Add(this.pictureBox_fractal1);
             this.Controls.Add(this.pictureBox_polar);
@@ -459,7 +459,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_fractal3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ngon_stars)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_butterfly)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski2)).EndInit();
@@ -497,7 +497,7 @@
         private System.Windows.Forms.PictureBox pictureBox_polar;
         private System.Windows.Forms.PictureBox pictureBox_fractal1;
         private System.Windows.Forms.PictureBox pictureBox_fractal2;
-        private System.Windows.Forms.PictureBox pictureBox_fractal3;
+        private System.Windows.Forms.PictureBox pictureBox_ngon_stars;
         private System.Windows.Forms.PictureBox pictureBox_butterfly;
         private System.Windows.Forms.PictureBox pictureBox_sierpinski1;
         private System.Windows.Forms.PictureBox pictureBox_sierpinski2;

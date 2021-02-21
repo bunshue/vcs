@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.txtRothSurrendered = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.nudYears = new System.Windows.Forms.NumericUpDown();
@@ -50,8 +49,6 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.txtInterestRate = new System.Windows.Forms.TextBox();
             this.Label4 = new System.Windows.Forms.Label();
-            this.GroupBox1 = new System.Windows.Forms.GroupBox();
-            this.Label3 = new System.Windows.Forms.Label();
             this.txtTaxRate = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.txtAnnualContribution = new System.Windows.Forms.TextBox();
@@ -59,38 +56,40 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudYears)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGraph)).BeginInit();
-            this.GroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtRothSurrendered
             // 
-            this.txtRothSurrendered.Location = new System.Drawing.Point(447, 187);
+            this.txtRothSurrendered.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtRothSurrendered.Location = new System.Drawing.Point(466, 133);
             this.txtRothSurrendered.Name = "txtRothSurrendered";
             this.txtRothSurrendered.ReadOnly = true;
-            this.txtRothSurrendered.Size = new System.Drawing.Size(76, 22);
+            this.txtRothSurrendered.Size = new System.Drawing.Size(186, 27);
             this.txtRothSurrendered.TabIndex = 85;
             this.txtRothSurrendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label13.ForeColor = System.Drawing.Color.Green;
-            this.label13.Location = new System.Drawing.Point(339, 187);
+            this.label13.Location = new System.Drawing.Point(323, 133);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(97, 12);
+            this.label13.Size = new System.Drawing.Size(130, 16);
             this.label13.TabIndex = 86;
             this.label13.Text = "Roth (surrendered):";
             // 
             // nudYears
             // 
-            this.nudYears.Location = new System.Drawing.Point(146, 141);
+            this.nudYears.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nudYears.Location = new System.Drawing.Point(130, 87);
             this.nudYears.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
             this.nudYears.Name = "nudYears";
-            this.nudYears.Size = new System.Drawing.Size(76, 22);
+            this.nudYears.Size = new System.Drawing.Size(76, 27);
             this.nudYears.TabIndex = 84;
             this.nudYears.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudYears.Value = new decimal(new int[] {
@@ -101,54 +100,60 @@
             // 
             // txtFinalRoth
             // 
-            this.txtFinalRoth.Location = new System.Drawing.Point(447, 163);
+            this.txtFinalRoth.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtFinalRoth.Location = new System.Drawing.Point(466, 109);
             this.txtFinalRoth.Name = "txtFinalRoth";
             this.txtFinalRoth.ReadOnly = true;
-            this.txtFinalRoth.Size = new System.Drawing.Size(76, 22);
+            this.txtFinalRoth.Size = new System.Drawing.Size(186, 27);
             this.txtFinalRoth.TabIndex = 82;
             this.txtFinalRoth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label12.ForeColor = System.Drawing.Color.Green;
-            this.label12.Location = new System.Drawing.Point(339, 163);
+            this.label12.Location = new System.Drawing.Point(323, 109);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(31, 12);
+            this.label12.Size = new System.Drawing.Size(42, 16);
             this.label12.TabIndex = 83;
             this.label12.Text = "Roth:";
             // 
             // txt401kSurrendered
             // 
-            this.txt401kSurrendered.Location = new System.Drawing.Point(447, 139);
+            this.txt401kSurrendered.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txt401kSurrendered.Location = new System.Drawing.Point(466, 85);
             this.txt401kSurrendered.Name = "txt401kSurrendered";
             this.txt401kSurrendered.ReadOnly = true;
-            this.txt401kSurrendered.Size = new System.Drawing.Size(76, 22);
+            this.txt401kSurrendered.Size = new System.Drawing.Size(186, 27);
             this.txt401kSurrendered.TabIndex = 69;
             this.txt401kSurrendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(339, 139);
+            this.label11.Location = new System.Drawing.Point(323, 85);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(101, 12);
+            this.label11.Size = new System.Drawing.Size(136, 16);
             this.label11.TabIndex = 81;
             this.label11.Text = "401 (k) surrendered:";
             // 
             // txtTaxAtEnd
             // 
-            this.txtTaxAtEnd.Location = new System.Drawing.Point(146, 187);
+            this.txtTaxAtEnd.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtTaxAtEnd.Location = new System.Drawing.Point(130, 133);
             this.txtTaxAtEnd.Name = "txtTaxAtEnd";
-            this.txtTaxAtEnd.Size = new System.Drawing.Size(76, 22);
+            this.txtTaxAtEnd.Size = new System.Drawing.Size(76, 27);
             this.txtTaxAtEnd.TabIndex = 65;
             this.txtTaxAtEnd.Text = "15%";
             this.txtTaxAtEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(26, 187);
+            this.label9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(10, 133);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(104, 15);
             this.label9.TabIndex = 80;
@@ -156,16 +161,18 @@
             // 
             // txtPenalty
             // 
-            this.txtPenalty.Location = new System.Drawing.Point(146, 165);
+            this.txtPenalty.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtPenalty.Location = new System.Drawing.Point(130, 111);
             this.txtPenalty.Name = "txtPenalty";
-            this.txtPenalty.Size = new System.Drawing.Size(76, 22);
+            this.txtPenalty.Size = new System.Drawing.Size(76, 27);
             this.txtPenalty.TabIndex = 64;
             this.txtPenalty.Text = "0%";
             this.txtPenalty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(26, 165);
+            this.label10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label10.Location = new System.Drawing.Point(10, 111);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(104, 15);
             this.label10.TabIndex = 79;
@@ -173,48 +180,53 @@
             // 
             // txtFinal401k
             // 
-            this.txtFinal401k.Location = new System.Drawing.Point(447, 115);
+            this.txtFinal401k.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtFinal401k.Location = new System.Drawing.Point(466, 61);
             this.txtFinal401k.Name = "txtFinal401k";
             this.txtFinal401k.ReadOnly = true;
-            this.txtFinal401k.Size = new System.Drawing.Size(76, 22);
+            this.txtFinal401k.Size = new System.Drawing.Size(186, 27);
             this.txtFinal401k.TabIndex = 68;
             this.txtFinal401k.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label8.ForeColor = System.Drawing.Color.Blue;
-            this.label8.Location = new System.Drawing.Point(339, 115);
+            this.label8.Location = new System.Drawing.Point(323, 61);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 12);
+            this.label8.Size = new System.Drawing.Size(58, 16);
             this.label8.TabIndex = 78;
             this.label8.Text = "401 (k):";
             // 
             // txtFinalSavings
             // 
-            this.txtFinalSavings.Location = new System.Drawing.Point(447, 91);
+            this.txtFinalSavings.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtFinalSavings.Location = new System.Drawing.Point(466, 37);
             this.txtFinalSavings.Name = "txtFinalSavings";
             this.txtFinalSavings.ReadOnly = true;
-            this.txtFinalSavings.Size = new System.Drawing.Size(76, 22);
+            this.txtFinalSavings.Size = new System.Drawing.Size(186, 27);
             this.txtFinalSavings.TabIndex = 67;
             this.txtFinalSavings.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(339, 91);
+            this.label7.Location = new System.Drawing.Point(323, 37);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 12);
+            this.label7.Size = new System.Drawing.Size(61, 16);
             this.label7.TabIndex = 77;
             this.label7.Text = "Savings:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(322, 75);
+            this.label6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(306, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 12);
+            this.label6.Size = new System.Drawing.Size(87, 16);
             this.label6.TabIndex = 76;
             this.label6.Text = "Final results:";
             // 
@@ -225,15 +237,16 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.picGraph.BackColor = System.Drawing.Color.White;
             this.picGraph.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picGraph.Location = new System.Drawing.Point(12, 211);
+            this.picGraph.Location = new System.Drawing.Point(12, 166);
             this.picGraph.Name = "picGraph";
-            this.picGraph.Size = new System.Drawing.Size(511, 425);
+            this.picGraph.Size = new System.Drawing.Size(930, 551);
             this.picGraph.TabIndex = 75;
             this.picGraph.TabStop = false;
             // 
             // Label5
             // 
-            this.Label5.Location = new System.Drawing.Point(26, 141);
+            this.Label5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Label5.Location = new System.Drawing.Point(10, 87);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(104, 15);
             this.Label5.TabIndex = 74;
@@ -241,69 +254,47 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(237, 139);
+            this.btnGo.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnGo.Location = new System.Drawing.Point(221, 85);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 21);
+            this.btnGo.Size = new System.Drawing.Size(80, 29);
             this.btnGo.TabIndex = 66;
             this.btnGo.Text = "Go";
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
             // txtInterestRate
             // 
-            this.txtInterestRate.Location = new System.Drawing.Point(146, 119);
+            this.txtInterestRate.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtInterestRate.Location = new System.Drawing.Point(130, 65);
             this.txtInterestRate.Name = "txtInterestRate";
-            this.txtInterestRate.Size = new System.Drawing.Size(76, 22);
+            this.txtInterestRate.Size = new System.Drawing.Size(76, 27);
             this.txtInterestRate.TabIndex = 63;
             this.txtInterestRate.Text = "9%";
             this.txtInterestRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Label4
             // 
-            this.Label4.Location = new System.Drawing.Point(26, 119);
+            this.Label4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Label4.Location = new System.Drawing.Point(10, 65);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(104, 15);
             this.Label4.TabIndex = 73;
             this.Label4.Text = "Annual interest rate:";
             // 
-            // GroupBox1
-            // 
-            this.GroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.GroupBox1.Controls.Add(this.Label3);
-            this.GroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox1.ForeColor = System.Drawing.Color.Red;
-            this.GroupBox1.Location = new System.Drawing.Point(12, 11);
-            this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(785, 58);
-            this.GroupBox1.TabIndex = 72;
-            this.GroupBox1.TabStop = false;
-            this.GroupBox1.Text = "WARNING";
-            // 
-            // Label3
-            // 
-            this.Label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label3.Location = new System.Drawing.Point(8, 15);
-            this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(769, 36);
-            this.Label3.TabIndex = 0;
-            this.Label3.Text = resources.GetString("Label3.Text");
-            this.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // txtTaxRate
             // 
-            this.txtTaxRate.Location = new System.Drawing.Point(146, 97);
+            this.txtTaxRate.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtTaxRate.Location = new System.Drawing.Point(130, 43);
             this.txtTaxRate.Name = "txtTaxRate";
-            this.txtTaxRate.Size = new System.Drawing.Size(76, 22);
+            this.txtTaxRate.Size = new System.Drawing.Size(76, 27);
             this.txtTaxRate.TabIndex = 62;
             this.txtTaxRate.Text = "20%";
             this.txtTaxRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Label2
             // 
-            this.Label2.Location = new System.Drawing.Point(26, 97);
+            this.Label2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Label2.Location = new System.Drawing.Point(10, 43);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(104, 15);
             this.Label2.TabIndex = 71;
@@ -311,16 +302,18 @@
             // 
             // txtAnnualContribution
             // 
-            this.txtAnnualContribution.Location = new System.Drawing.Point(146, 75);
+            this.txtAnnualContribution.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtAnnualContribution.Location = new System.Drawing.Point(130, 21);
             this.txtAnnualContribution.Name = "txtAnnualContribution";
-            this.txtAnnualContribution.Size = new System.Drawing.Size(76, 22);
+            this.txtAnnualContribution.Size = new System.Drawing.Size(76, 27);
             this.txtAnnualContribution.TabIndex = 61;
             this.txtAnnualContribution.Text = "4000";
             this.txtAnnualContribution.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Label1
             // 
-            this.Label1.Location = new System.Drawing.Point(26, 75);
+            this.Label1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Label1.Location = new System.Drawing.Point(10, 21);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(104, 15);
             this.Label1.TabIndex = 70;
@@ -328,9 +321,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(539, 211);
+            this.richTextBox1.Location = new System.Drawing.Point(948, 166);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(258, 425);
+            this.richTextBox1.Size = new System.Drawing.Size(268, 551);
             this.richTextBox1.TabIndex = 87;
             this.richTextBox1.Text = "";
             // 
@@ -339,7 +332,7 @@
             this.AcceptButton = this.btnGo;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 647);
+            this.ClientSize = new System.Drawing.Size(1228, 728);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtRothSurrendered);
             this.Controls.Add(this.label13);
@@ -362,7 +355,6 @@
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.txtInterestRate);
             this.Controls.Add(this.Label4);
-            this.Controls.Add(this.GroupBox1);
             this.Controls.Add(this.txtTaxRate);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.txtAnnualContribution);
@@ -371,7 +363,6 @@
             this.Text = "howto_401k_graph";
             ((System.ComponentModel.ISupportInitialize)(this.nudYears)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
-            this.GroupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,8 +391,6 @@
         internal System.Windows.Forms.Button btnGo;
         internal System.Windows.Forms.TextBox txtInterestRate;
         internal System.Windows.Forms.Label Label4;
-        internal System.Windows.Forms.GroupBox GroupBox1;
-        internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.TextBox txtTaxRate;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.TextBox txtAnnualContribution;

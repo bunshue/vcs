@@ -73,6 +73,8 @@ namespace vcs_Draw9_Example7_vcsh
         private const int period = 24;
         #endregion
 
+        private int NumPoints_ngon_stars = 3;
+
         public Form1()
         {
             InitializeComponent();
@@ -132,7 +134,7 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_snowflake2.Size = new Size(W, H);
             pictureBox_fractal1.Size = new Size(W, H);
             pictureBox_fractal2.Size = new Size(W, H);
-            pictureBox_fractal3.Size = new Size(W, H);
+            pictureBox_ngon_stars.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
             pictureBox_butterfly.Size = new Size(W, H);
             pictureBox_butterfly.BackColor = Color.Black;
@@ -173,7 +175,7 @@ namespace vcs_Draw9_Example7_vcsh
 
             pictureBox_fractal1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             pictureBox_fractal2.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox_fractal3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox_ngon_stars.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             pictureBox_sierpinski1.Location = new Point(x_st + dx * 4, y_st + dy * 3);
             pictureBox_sierpinski2.Location = new Point(x_st + dx * 5, y_st + dy * 3);
@@ -1425,6 +1427,10 @@ namespace vcs_Draw9_Example7_vcsh
             if (fractal_num_points > 12000)
                 fractal_num_points = 5000;
 
+            NumPoints_ngon_stars++;
+            if (NumPoints_ngon_stars > 12)
+                NumPoints_ngon_stars = 3;
+
             redraw_all();
         }
 
@@ -1453,6 +1459,7 @@ namespace vcs_Draw9_Example7_vcsh
             draw_fractal1();
             draw_fractal2();
 
+            pictureBox_ngon_stars.Refresh();
             pictureBox22.Refresh();
         }
 
@@ -1466,10 +1473,95 @@ namespace vcs_Draw9_Example7_vcsh
 
         }
 
-        private void pictureBox_fractal3_Paint(object sender, PaintEventArgs e)
+        // Draw the stars.
+        private void pictureBox_ngon_stars_Paint(object sender, PaintEventArgs e)
         {
+            if (NumPoints_ngon_stars < 3)
+            {
+                return;
+            }
+            e.Graphics.Clear(pictureBox_ngon_stars.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
+            // Get the radii.
+            int r1, r2, r3;
+            r3 = Math.Min(pictureBox_ngon_stars.ClientSize.Width, pictureBox_ngon_stars.ClientSize.Height) / 2;
+            r1 = r3 / 2;
+            r2 = r3 / 4;
+            r3 = r1 + r2;
+
+            // Position variables.
+            int cx = pictureBox_ngon_stars.ClientSize.Width / 2;
+            int cy = pictureBox_ngon_stars.ClientSize.Height / 2;
+
+            // Position the original points.
+            PointF[] pts1 = new PointF[NumPoints_ngon_stars];
+            PointF[] pts2 = new PointF[NumPoints_ngon_stars];
+            double theta = -Math.PI / 2;
+            double dtheta = 2 * Math.PI / NumPoints_ngon_stars;
+            for (int i = 0; i < NumPoints_ngon_stars; i++)
+            {
+                pts1[i].X = (float)(r1 * Math.Cos(theta));
+                pts1[i].Y = (float)(r1 * Math.Sin(theta));
+                pts2[i].X = (float)(r2 * Math.Cos(theta));
+                pts2[i].Y = (float)(r2 * Math.Sin(theta));
+                theta += dtheta;
+            }
+
+            // Draw stars.
+            int max = NumPoints_ngon_stars - 1;
+            for (int skip = 1; skip <= max; skip++)
+            {
+                // See if they are relatively prime.
+                if (GCD(skip, NumPoints_ngon_stars) == 1)
+                {
+                    // Draw the big version of the star.
+                    DrawStar(e.Graphics, cx, cy, pts1, skip);
+
+                    // Draw the smaller version.
+                    theta = -Math.PI / 2 + skip * 2 * Math.PI / NumPoints_ngon_stars;
+                    int x = (int)(cx + r3 * Math.Cos(theta));
+                    int y = (int)(cy + r3 * Math.Sin(theta));
+
+                    DrawStar(e.Graphics, x, y, pts2, skip);
+                }
+            }
         }
+
+        // Return the greatest common divisor (GCD) of a and b.
+        private long GCD(long a, long b)
+        {
+            long remainder;
+
+            // Pull out remainders.
+            for (; ; )
+            {
+                remainder = a % b;
+                if (remainder == 0) break;
+                a = b;
+                b = remainder;
+            }
+
+            return b;
+        }
+
+        // Draw a star centered at (x, y) using this skip value.
+        private void DrawStar(Graphics gr, int x, int y, PointF[] orig_pts, int skip)
+        {
+            // Make a PointF array with the points in the proper order.
+            PointF[] pts = new PointF[NumPoints_ngon_stars];
+            for (int i = 0; i < NumPoints_ngon_stars; i++)
+            {
+                pts[i] = orig_pts[(i * skip) % NumPoints_ngon_stars];
+            }
+
+            // Draw the star.
+            gr.TranslateTransform(x, y);
+            gr.DrawPolygon(Pens.Blue, pts);
+            gr.ResetTransform();
+        }
+
+
 
 
         #region sierpinski
