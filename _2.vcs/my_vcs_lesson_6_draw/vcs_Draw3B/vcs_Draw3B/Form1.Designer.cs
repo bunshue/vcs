@@ -35,8 +35,11 @@
             this.pictureBox_spiral = new System.Windows.Forms.PictureBox();
             this.pictureBox_ellipse = new System.Windows.Forms.PictureBox();
             this.timer_draw_ellipse = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_star = new System.Windows.Forms.PictureBox();
+            this.timer_draw_star = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -52,9 +55,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1047, 356);
+            this.richTextBox1.Location = new System.Drawing.Point(1063, 356);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(339, 211);
+            this.richTextBox1.Size = new System.Drawing.Size(323, 211);
             this.richTextBox1.TabIndex = 53;
             this.richTextBox1.Text = "";
             // 
@@ -84,11 +87,26 @@
             this.timer_draw_ellipse.Interval = 1000;
             this.timer_draw_ellipse.Tick += new System.EventHandler(this.timer_draw_ellipse_Tick);
             // 
+            // pictureBox_star
+            // 
+            this.pictureBox_star.Location = new System.Drawing.Point(657, 12);
+            this.pictureBox_star.Name = "pictureBox_star";
+            this.pictureBox_star.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox_star.TabIndex = 57;
+            this.pictureBox_star.TabStop = false;
+            // 
+            // timer_draw_star
+            // 
+            this.timer_draw_star.Enabled = true;
+            this.timer_draw_star.Interval = 1000;
+            this.timer_draw_star.Tick += new System.EventHandler(this.timer_draw_star_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 680);
+            this.Controls.Add(this.pictureBox_star);
             this.Controls.Add(this.pictureBox_ellipse);
             this.Controls.Add(this.pictureBox_spiral);
             this.Controls.Add(this.bt_clear);
@@ -99,6 +117,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -111,6 +130,8 @@
         private System.Windows.Forms.PictureBox pictureBox_spiral;
         private System.Windows.Forms.PictureBox pictureBox_ellipse;
         private System.Windows.Forms.Timer timer_draw_ellipse;
+        private System.Windows.Forms.PictureBox pictureBox_star;
+        private System.Windows.Forms.Timer timer_draw_star;
     }
 }
 

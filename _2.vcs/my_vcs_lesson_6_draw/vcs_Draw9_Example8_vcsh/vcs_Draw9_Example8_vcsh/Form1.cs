@@ -121,17 +121,18 @@ namespace vcs_Draw9_Example8_vcsh
             Random rnd = new Random();
             // Create data.
             for (int i = 0; i < DataValues.Length; i++)
+            {
                 DataValues[i] = rnd.Next(MIN_VALUE + 5, MAX_VALUE - 5);
+            }
 
             //pictureBox4 的中心
-            CenterPoint = new PointF(
-                this.pictureBox4.ClientSize.Width / 2,
-                this.pictureBox4.ClientSize.Height / 2);
+            CenterPoint = new PointF(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
 
             draw_random_pixel_image();
             draw_smiley();                  //pictureBox15
             draw_polygon_pathgradientbrush();   //pictureBox18
             load_move_ball();               //pictureBox19
+            draw_circle_connection();       //pictureBox_circle
 
             // 畫派圖，可以偵測位置 ST    pictureBox17
             // Initialize the pie chart data.
@@ -185,7 +186,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
-            pictureBox20.Size = new Size(W, H);
+            pictureBox_circle.Size = new Size(W, H);
             pictureBox_star.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
             pictureBox23.Size = new Size(W, H);
@@ -217,7 +218,7 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
             pictureBox19.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            pictureBox20.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox_circle.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             pictureBox_star.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             pictureBox23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
@@ -2136,6 +2137,71 @@ namespace vcs_Draw9_Example8_vcsh
         #endregion Sierpinski Curve
 
 
+
+
+        void draw_circle_connection()   //pictureBox_circle
+        {
+            pictureBox_circle.Image = DrawPattern(pictureBox_circle.ClientSize.Width, pictureBox_circle.ClientSize.Height);
+        }
+
+        // Draw the pattern.
+        private Bitmap DrawPattern(int wid, int hgt)
+        {
+            Bitmap bm = new Bitmap(wid, hgt);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+                float margin = 10;
+                float diameter1 = (hgt - margin) / 5f;
+                float diameter2 = (wid - margin) / (float)(1 + 2 * Math.Sqrt(3));
+                float diameter = Math.Min(diameter1, diameter2);
+
+                float radius = diameter / 2f;
+                float cx = wid / 2f;
+                float cy = hgt / 2f;
+
+                // Find the center circle's center.
+                List<PointF> centers = new List<PointF>();
+                centers.Add(new PointF(cx, cy));
+
+                // Add the other circles.
+                for (int ring_num = 0; ring_num < 2; ring_num++)
+                {
+                    float ring_radius = diameter * (ring_num + 1);
+                    double theta = Math.PI / 2.0;
+                    double dtheta = Math.PI / 3.0;
+                    for (int i = 0; i < 6; i++)
+                    {
+                        double x = cx + ring_radius * Math.Cos(theta);
+                        double y = cy + ring_radius * Math.Sin(theta);
+                        centers.Add(new PointF((float)x, (float)y));
+                        theta += dtheta;
+                    }
+                }
+
+                // Fill and outline the circles.
+                foreach (PointF center in centers)
+                {
+                    float x = center.X - radius;
+                    float y = center.Y - radius;
+                    gr.FillEllipse(Brushes.LightBlue, x, y, diameter, diameter);
+                    gr.DrawEllipse(Pens.Blue, x, y, diameter, diameter);
+                }
+
+                // Connect the circle centers.
+                int num_circles = centers.Count;
+                for (int i = 0; i < num_circles; i++)
+                {
+                    for (int j = i + 1; j < num_circles; j++)
+                    {
+                        gr.DrawLine(Pens.Blue, centers[i], centers[j]);
+                    }
+                }
+            }
+
+            return bm;
+        }
 
 
     }

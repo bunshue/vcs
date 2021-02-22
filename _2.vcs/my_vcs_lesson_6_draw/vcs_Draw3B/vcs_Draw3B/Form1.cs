@@ -21,8 +21,8 @@ namespace vcs_Draw3B
         private int lb_color_x = 0, lb_color_y = 0;
         //for random color SP
 
-
-        Graphics ge;
+        Graphics ge;    //for draw ellipse
+        Graphics gs;    //for draw star
         private const int EllipseMargin = 10;
         private int EllipseCx, EllipseCy, EllipseWidth, EllipseHeight;
         private List<PointF> LinePoints = null;
@@ -57,6 +57,7 @@ namespace vcs_Draw3B
             bt_exit_setup();
 
             ge = pictureBox_ellipse.CreateGraphics();
+            gs = pictureBox_star.CreateGraphics();
             // Calculate the ellipse parameters.
             EllipseWidth = this.pictureBox_ellipse.ClientSize.Width - 2 * EllipseMargin;
             EllipseHeight = this.pictureBox_ellipse.ClientSize.Height - 2 * EllipseMargin;
@@ -244,6 +245,54 @@ namespace vcs_Draw3B
         {
             Environment.Exit(0);
         }
+
+        int radius = 50;
+        private void timer_draw_star_Tick(object sender, EventArgs e)
+        {
+            int linewidth = 5;
+            Point center = new Point();
+
+            center = new Point(pictureBox_star.Width / 2, pictureBox_star.Height / 2);
+            DrawStar(gs, center, radius, linewidth, Color.Red);
+            radius += 10;
+            if (radius > 100)
+                radius = 50;
+        }
+
+        private void DrawStar(Graphics g, PointF center, int radius, int linewidth, Color c)
+        {
+            //DrawStar
+
+            // Create a new pen.
+            //顏色、線寬分開寫
+            //Pen p = new Pen(c);
+            // Set the pen's width.
+            //p.Width = linewidth;
+
+            //顏色、線寬寫在一起
+            Pen p = new Pen(c, linewidth);
+
+            PointF[] pt = new PointF[6];    //一維陣列內有6個Point
+            int angle;
+
+            int i;
+            for (i = 0; i < 6; i++)
+            {
+                angle = -90 + 144 * i;
+                pt[i].X = (int)(radius * Math.Cos(angle * Math.PI / 180));
+                pt[i].Y = (int)(radius * Math.Sin(angle * Math.PI / 180));
+
+                //richTextBox1.Text += "pt[" + i.ToString() + "].X " + pt[i].X.ToString() + "\t" + "pt[" + i.ToString() + "].Y " + pt[i].Y.ToString() + "\n";
+                pt[i].X += center.X;
+                pt[i].Y += center.Y;
+            }
+            g.DrawLines(new Pen(Brushes.Red, linewidth), pt);
+
+            //Dispose of the pen.
+            p.Dispose();
+        }
+
+
 
 
     }

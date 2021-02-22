@@ -41,8 +41,16 @@ namespace vcs_ScreenRuler
             delta = 100;
             for (i = 0; i < screenWidth; i += delta)
             {
-                g.DrawLine(new Pen(Color.Blue, 1), i, 0, i, screenHeight / 2);
+                g.DrawLine(new Pen(Color.Red, 1), i, 0, i, screenHeight / 2);
                 g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(i - 15, 30));   //畫直線
+            }
+
+            for (i = 0; i < screenWidth; i += 10)
+            {
+                if ((i % 100) != 0)
+                {
+                    g.DrawLine(new Pen(Color.Black, 1), i, 0, i, 100);
+                }
             }
 
             for (i = 0; i < 350; i += delta)

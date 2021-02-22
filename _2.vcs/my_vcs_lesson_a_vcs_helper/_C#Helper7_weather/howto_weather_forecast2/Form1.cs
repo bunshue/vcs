@@ -55,7 +55,9 @@ namespace howto_weather_forecast2
         {
             // Compose the query URL.
             string url = ForecastUrl.Replace("@LOC@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
             url = url.Replace("@QUERY@", QueryCodes[cboQuery.SelectedIndex]);
+            richTextBox1.Text += "url : " + url + "\n";
 
             // Create a web client.
             using (WebClient client = new WebClient())

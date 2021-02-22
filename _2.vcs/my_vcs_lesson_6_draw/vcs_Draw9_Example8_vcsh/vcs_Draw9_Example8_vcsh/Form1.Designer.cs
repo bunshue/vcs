@@ -88,7 +88,7 @@
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
-            this.pictureBox20 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_circle = new System.Windows.Forms.PictureBox();
             this.pictureBox_rainbow = new System.Windows.Forms.PictureBox();
             this.pictureBox23 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
@@ -119,7 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
@@ -698,14 +698,14 @@
             this.pictureBox19.TabStop = false;
             this.pictureBox19.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox19_Paint);
             // 
-            // pictureBox20
+            // pictureBox_circle
             // 
-            this.pictureBox20.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox20.Location = new System.Drawing.Point(117, 610);
-            this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox20.TabIndex = 113;
-            this.pictureBox20.TabStop = false;
+            this.pictureBox_circle.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_circle.Location = new System.Drawing.Point(117, 610);
+            this.pictureBox_circle.Name = "pictureBox_circle";
+            this.pictureBox_circle.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_circle.TabIndex = 113;
+            this.pictureBox_circle.TabStop = false;
             // 
             // pictureBox_rainbow
             // 
@@ -846,7 +846,7 @@
             this.Controls.Add(this.pictureBox23);
             this.Controls.Add(this.pictureBox22);
             this.Controls.Add(this.pictureBox_star);
-            this.Controls.Add(this.pictureBox20);
+            this.Controls.Add(this.pictureBox_circle);
             this.Controls.Add(this.pictureBox19);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox18);
@@ -925,7 +925,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
@@ -1001,7 +1001,7 @@
         private System.Windows.Forms.PictureBox pictureBox18;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox19;
-        private System.Windows.Forms.PictureBox pictureBox20;
+        private System.Windows.Forms.PictureBox pictureBox_circle;
         private System.Windows.Forms.PictureBox pictureBox_rainbow;
         private System.Windows.Forms.PictureBox pictureBox23;
         private System.Windows.Forms.PictureBox pictureBox22;

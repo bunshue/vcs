@@ -169,11 +169,11 @@ namespace vcs_Remove_Bin_Obj
                         richTextBox1.Text += "iiiiiiiiiiiiiiiiiiiii\n";
                         continue;
                     }
-                    else if (folder_name[i].Contains("WindowsFormsApplication1"))
+                    else if (folder_name[i].Contains("vcs_programming"))
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("tmptmptmptmp"))
+                    else if (folder_name[i].Contains("EMGU"))
                     {
                         continue;
                     }

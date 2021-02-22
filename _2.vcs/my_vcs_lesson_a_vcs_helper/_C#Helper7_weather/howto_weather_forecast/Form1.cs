@@ -20,12 +20,6 @@ namespace howto_weather_forecast
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
-
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
@@ -46,6 +40,11 @@ namespace howto_weather_forecast
             string url = CurrentUrl.Replace("@LOC@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
             txtXml.Text = GetFormattedXml(url);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         // Get a forecast.
