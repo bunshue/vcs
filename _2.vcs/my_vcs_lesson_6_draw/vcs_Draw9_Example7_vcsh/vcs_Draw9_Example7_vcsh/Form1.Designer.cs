@@ -63,6 +63,14 @@
             this.timer_skyline = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_pickover_popcorn1 = new System.Windows.Forms.PictureBox();
             this.pictureBox_pickover_popcorn2 = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.picHBattery2 = new System.Windows.Forms.PictureBox();
+            this.picVBattery2 = new System.Windows.Forms.PictureBox();
+            this.picHBattery1 = new System.Windows.Forms.PictureBox();
+            this.picVBattery1 = new System.Windows.Forms.PictureBox();
+            this.timer_battery1 = new System.Windows.Forms.Timer(this.components);
+            this.picSamples = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ransom_note)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
@@ -86,6 +94,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pickover_popcorn1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pickover_popcorn2)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSamples)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -404,11 +418,86 @@
             this.pictureBox_pickover_popcorn2.TabStop = false;
             this.pictureBox_pickover_popcorn2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_pickover_popcorn2_MouseClick);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblStatus);
+            this.groupBox2.Controls.Add(this.picHBattery2);
+            this.groupBox2.Controls.Add(this.picVBattery2);
+            this.groupBox2.Controls.Add(this.picHBattery1);
+            this.groupBox2.Controls.Add(this.picVBattery1);
+            this.groupBox2.Location = new System.Drawing.Point(13, 264);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(288, 100);
+            this.groupBox2.TabIndex = 119;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Battery";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(34, 14);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(99, 37);
+            this.lblStatus.TabIndex = 10;
+            this.lblStatus.Text = "Offline";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picHBattery2
+            // 
+            this.picHBattery2.Location = new System.Drawing.Point(94, 57);
+            this.picHBattery2.Name = "picHBattery2";
+            this.picHBattery2.Size = new System.Drawing.Size(80, 37);
+            this.picHBattery2.TabIndex = 9;
+            this.picHBattery2.TabStop = false;
+            // 
+            // picVBattery2
+            // 
+            this.picVBattery2.Location = new System.Drawing.Point(229, 18);
+            this.picVBattery2.Name = "picVBattery2";
+            this.picVBattery2.Size = new System.Drawing.Size(40, 74);
+            this.picVBattery2.TabIndex = 8;
+            this.picVBattery2.TabStop = false;
+            // 
+            // picHBattery1
+            // 
+            this.picHBattery1.Location = new System.Drawing.Point(8, 57);
+            this.picHBattery1.Name = "picHBattery1";
+            this.picHBattery1.Size = new System.Drawing.Size(80, 37);
+            this.picHBattery1.TabIndex = 7;
+            this.picHBattery1.TabStop = false;
+            // 
+            // picVBattery1
+            // 
+            this.picVBattery1.Location = new System.Drawing.Point(183, 18);
+            this.picVBattery1.Name = "picVBattery1";
+            this.picVBattery1.Size = new System.Drawing.Size(40, 74);
+            this.picVBattery1.TabIndex = 6;
+            this.picVBattery1.TabStop = false;
+            // 
+            // timer_battery1
+            // 
+            this.timer_battery1.Enabled = true;
+            this.timer_battery1.Interval = 500;
+            this.timer_battery1.Tick += new System.EventHandler(this.timer_battery1_Tick);
+            // 
+            // picSamples
+            // 
+            this.picSamples.BackColor = System.Drawing.Color.Pink;
+            this.picSamples.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picSamples.Location = new System.Drawing.Point(12, 376);
+            this.picSamples.Name = "picSamples";
+            this.picSamples.Size = new System.Drawing.Size(243, 127);
+            this.picSamples.TabIndex = 120;
+            this.picSamples.TabStop = false;
+            this.picSamples.Paint += new System.Windows.Forms.PaintEventHandler(this.picSamples_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1294, 688);
+            this.Controls.Add(this.picSamples);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox_pickover_popcorn2);
             this.Controls.Add(this.pictureBox_pickover_popcorn1);
             this.Controls.Add(this.pictureBox_sierpinski1);
@@ -467,6 +556,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sierpinski1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pickover_popcorn1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pickover_popcorn2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picHBattery1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picVBattery1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSamples)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -508,6 +603,14 @@
         private System.Windows.Forms.Timer timer_skyline;
         private System.Windows.Forms.PictureBox pictureBox_pickover_popcorn1;
         private System.Windows.Forms.PictureBox pictureBox_pickover_popcorn2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.PictureBox picHBattery2;
+        private System.Windows.Forms.PictureBox picVBattery2;
+        private System.Windows.Forms.PictureBox picHBattery1;
+        private System.Windows.Forms.PictureBox picVBattery1;
+        private System.Windows.Forms.Timer timer_battery1;
+        private System.Windows.Forms.PictureBox picSamples;
     }
 }
 
