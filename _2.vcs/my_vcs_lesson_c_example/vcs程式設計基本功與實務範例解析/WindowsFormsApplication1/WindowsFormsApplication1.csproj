@@ -69,12 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArithmeticOp.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ArithmeticOp.designer.cs">
-      <DependentUpon>ArithmeticOp.cs</DependentUpon>
-    </Compile>
     <Compile Include="ch3Test.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -288,9 +282,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ArithmeticOp.resx">
-      <DependentUpon>ArithmeticOp.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ch3Test.resx">
       <DependentUpon>ch3Test.cs</DependentUpon>
     </EmbeddedResource>

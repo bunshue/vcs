@@ -430,6 +430,7 @@ namespace vcs_Draw_Histogram
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //右下小圖
             int i;
             Pen thin_pen = new Pen(Color.Black, 0);
             thin_pen.Color = Color.LightBlue;
@@ -443,7 +444,7 @@ namespace vcs_Draw_Histogram
             }
             DrawHistogram4(pictureBox_histogram, Brushes.Blue, thin_pen, numbers);
 
-
+            //原本範例
             draw_histogram_old();
         }
 
@@ -555,10 +556,10 @@ namespace vcs_Draw_Histogram
             int max_count = counts.Max();
 
             // Make a Bitmap.
-            Bitmap bm = new Bitmap(pic.ClientSize.Width, pic.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bitmap1 = new Bitmap(pic.ClientSize.Width, pic.ClientSize.Height);
+            using (Graphics g = Graphics.FromImage(bitmap1))
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
 
                 // Scale to fit the data.
                 RectangleF rect = new RectangleF(0, 0, counts.Length, max_count);
@@ -568,12 +569,12 @@ namespace vcs_Draw_Histogram
                     new PointF(pic.ClientSize.Width, pic.ClientSize.Height),
                     new PointF(0, 0),
                 };
-                gr.Transform = new Matrix(rect, pts);
+                g.Transform = new Matrix(rect, pts);
 
                 // Fill the histogram.
                 for (int i = 0; i < counts.Length; i++)
                 {
-                    gr.FillRectangle(brush, i, 0, 1, counts[i]);
+                    g.FillRectangle(brush, i, 0, 1, counts[i]);
                 }
 
                 // Draw the histogram.
@@ -581,13 +582,13 @@ namespace vcs_Draw_Histogram
                 {
                     for (int i = 0; i < counts.Length; i++)
                     {
-                        gr.DrawRectangle(pen, i, 0, 1, counts[i]);
+                        g.DrawRectangle(pen, i, 0, 1, counts[i]);
                     }
                 }
             }
 
             // Display the histogram.
-            pic.Image = bm;
+            pic.Image = bitmap1;
         }
         //原本範例 SP
 

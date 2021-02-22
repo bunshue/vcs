@@ -328,6 +328,10 @@ namespace vcs_test_all_25_GeoCoordinate
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //Sugar可用
+            //Kilo不可用
+            //Romeo不可用
+
             // The coordinate watcher.
             GeoCoordinateWatcher Watcher = null;
 

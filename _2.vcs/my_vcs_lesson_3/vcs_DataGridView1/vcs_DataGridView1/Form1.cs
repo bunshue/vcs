@@ -153,5 +153,16 @@ namespace vcs_DataGridView1
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ColumnCount = 2;
+            dataGridView1.Columns[0].Name = "品名";
+            dataGridView1.Columns[1].Name = "單價";
+
+            dataGridView1.Rows.Add(new Object[] { "紅茶", 25 });
+            dataGridView1.Rows.Add(new Object[] { "綠茶", 25 });
+
+        }
+
     }
 }

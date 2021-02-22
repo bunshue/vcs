@@ -106,6 +106,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 40);
             this.button9.TabIndex = 18;
+            this.button9.Text = "畫多角星形";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -205,6 +206,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 40);
             this.button8.TabIndex = 24;
+            this.button8.Text = "兩種星型";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -243,11 +245,12 @@
             // 
             // button0
             // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button0.Location = new System.Drawing.Point(755, 8);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 30;
+            this.button0.Text = "製作數字球";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

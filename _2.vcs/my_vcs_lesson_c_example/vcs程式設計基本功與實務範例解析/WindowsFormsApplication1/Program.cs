@@ -22,11 +22,8 @@ namespace WindowsFormsApplication1
             /* 第 3 章 */
             //Application.Run(new ch3Test());
 
-            /* 第 3, 4 章 */
-            Application.Run(new ArithmeticOp());
-
             /* 第 4 章 */
-            //Application.Run(new ThreeNumbers());
+            Application.Run(new ThreeNumbers());
 
             /* 第 5 章 */
             //Application.Run(new clock());
