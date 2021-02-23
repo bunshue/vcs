@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;    //for FILE
 using System.Xml;
 
-namespace vcs_ReadWrite_XML
+namespace vcs_ReadWrite_XML1
 {
     public partial class Form1 : Form
     {
@@ -30,7 +30,7 @@ namespace vcs_ReadWrite_XML
         /// <param name="e"></param>
         private void btnGet_Click(object sender, EventArgs e)
         {
-            lbXmlValue.Items.Clear();
+            listBox1.Items.Clear();
 
             if (File.Exists(filename))
             {
@@ -73,7 +73,7 @@ namespace vcs_ReadWrite_XML
                 richTextBox1.Text += "\t取得 XmlElement";
                 //顯示根元素的名稱
                 richTextBox1.Text += "\n\t根元素 : " + "\"" + aXnNode.Name.PadLeft(aXnNode.Name.Length + aIndent) + "\"" + "\t";
-                lbXmlValue.Items.Add(aXnNode.Name.PadLeft(aXnNode.Name.Length + aIndent));
+                listBox1.Items.Add(aXnNode.Name.PadLeft(aXnNode.Name.Length + aIndent));
                 if (aXnNode.Attributes != null)
                 {
                     richTextBox1.Text += "有 aXnNode.Attributes 共有 " + aXnNode.Attributes.Count.ToString() + " 項屬性";
@@ -85,9 +85,9 @@ namespace vcs_ReadWrite_XML
                         string sText = "";
                         sText = xaAttribute.Name;
                         richTextBox1.Text += "\n\t第 " + i.ToString() + " 項屬性, 屬性名 sText1 = " + "\"" + sText + "\"";
-                        lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent + 2));
+                        listBox1.Items.Add(sText.PadLeft(sText.Length + aIndent + 2));
                         sText = xaAttribute.Value;
-                        lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent + 4));
+                        listBox1.Items.Add(sText.PadLeft(sText.Length + aIndent + 4));
                         richTextBox1.Text += ", 屬性值 sText2 = " + "\"" + sText + "\"";
                     }
                 }
@@ -126,7 +126,7 @@ namespace vcs_ReadWrite_XML
                 richTextBox1.Text += "\t取得 XmlText";
                 //顯示節點中的內容
                 string sText = ((XmlText)aXnNode).Value;
-                lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent));
+                listBox1.Items.Add(sText.PadLeft(sText.Length + aIndent));
                 richTextBox1.Text += "\t文本 sText3 = " + "\"" + sText + "\"" + "\n";
             }
             else if (aXnNode is XmlComment)
@@ -144,7 +144,7 @@ namespace vcs_ReadWrite_XML
 
                 richTextBox1.Text += "\t取得 XmlComment";
                 string sText = aXnNode.Value;
-                lbXmlValue.Items.Add(sText.PadLeft(sText.Length + aIndent));
+                listBox1.Items.Add(sText.PadLeft(sText.Length + aIndent));
                 richTextBox1.Text += "\n註釋 sText4 = " + "\"" + sText + "\"";
                 //如果不加下邊的遍歷，資料只會得出備註中的內容，不會得出子節點內容
 

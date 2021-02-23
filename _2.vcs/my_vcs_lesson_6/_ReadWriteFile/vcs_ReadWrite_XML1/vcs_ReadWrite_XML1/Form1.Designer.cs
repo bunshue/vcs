@@ -32,7 +32,7 @@
             this.btnGet = new System.Windows.Forms.Button();
             this.btnCreateNode = new System.Windows.Forms.Button();
             this.btnDeleteNode = new System.Windows.Forms.Button();
-            this.lbXmlValue = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -77,14 +77,14 @@
             this.btnDeleteNode.UseVisualStyleBackColor = true;
             this.btnDeleteNode.Click += new System.EventHandler(this.btnDeleteNode_Click);
             // 
-            // lbXmlValue
+            // listBox1
             // 
-            this.lbXmlValue.FormattingEnabled = true;
-            this.lbXmlValue.ItemHeight = 12;
-            this.lbXmlValue.Location = new System.Drawing.Point(12, 12);
-            this.lbXmlValue.Name = "lbXmlValue";
-            this.lbXmlValue.Size = new System.Drawing.Size(714, 304);
-            this.lbXmlValue.TabIndex = 4;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(12, 12);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(714, 304);
+            this.listBox1.TabIndex = 4;
             // 
             // button1
             // 
@@ -103,7 +103,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 658);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.lbXmlValue);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnDeleteNode);
             this.Controls.Add(this.btnCreateNode);
             this.Controls.Add(this.btnGet);
@@ -120,7 +120,7 @@
         private System.Windows.Forms.Button btnGet;
         private System.Windows.Forms.Button btnCreateNode;
         private System.Windows.Forms.Button btnDeleteNode;
-        private System.Windows.Forms.ListBox lbXmlValue;
+        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button1;
     }
 }
