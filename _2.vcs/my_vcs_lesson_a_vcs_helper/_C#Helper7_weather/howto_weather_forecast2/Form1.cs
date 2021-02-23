@@ -27,7 +27,9 @@ namespace howto_weather_forecast2
         private const string API_KEY = "lionmouse";
 
         // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
         private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
         private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
         // Query codes.

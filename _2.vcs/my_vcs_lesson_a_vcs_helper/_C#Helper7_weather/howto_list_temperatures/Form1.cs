@@ -52,7 +52,9 @@ namespace howto_list_temperatures
         private const string API_KEY = "lionmouse";
 
         // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
         private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
         private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
         // List the temperature forecast.
@@ -566,6 +568,47 @@ namespace howto_list_temperatures
                 richTextBox1.Text += ((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C" + "\n";
             }
         }
+
+        //即時天氣XML解讀 ST
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Compose the query URL.
+            string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += GetFormattedXml(url) + "\n";
+
+            //待解讀
+
+        }
+
+        // Return the XML result of the URL.
+        private string GetFormattedXml(string url)
+        {
+            // Create a web client.
+            using (WebClient client = new WebClient())
+            {
+                // Get the response string from the URL.
+                string xml = client.DownloadString(url);
+
+                // Load the response into an XML document.
+                XmlDocument xml_document = new XmlDocument();
+                xml_document.LoadXml(xml);
+
+                // Format the XML.
+                using (StringWriter string_writer = new StringWriter())
+                {
+                    XmlTextWriter xml_text_writer = new XmlTextWriter(string_writer);
+                    xml_text_writer.Formatting = Formatting.Indented;
+                    xml_document.WriteTo(xml_text_writer);
+
+                    // Return the result.
+                    return string_writer.ToString();
+                }
+            }
+        }
+
+        //即時天氣XML解讀 SP
+
 
 
     }

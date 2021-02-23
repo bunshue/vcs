@@ -26,7 +26,9 @@ namespace howto_weather_forecast
         private const string API_KEY = "lionmouse";
 
         // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
         private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
         private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
         //只查詢代碼為City(q)之條件
@@ -37,7 +39,7 @@ namespace howto_weather_forecast
             // Compose the query URL.
             string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
-            txtXml.Text = GetFormattedXml(url);
+            //txtXml.Text = GetFormattedXml(url);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -54,31 +56,33 @@ namespace howto_weather_forecast
             txtXml.Text = GetFormattedXml(url);
         }
 
-        // Return the XML result of the URL.
-        private string GetFormattedXml(string url)
-        {
-            // Create a web client.
-            using (WebClient client = new WebClient())
-            {
-                // Get the response string from the URL.
-                string xml = client.DownloadString(url);
+                                        // Return the XML result of the URL.
+                                        private string GetFormattedXml(string url)
+                                        {
+                                            // Create a web client.
+                                            using (WebClient client = new WebClient())
+                                            {
+                                                // Get the response string from the URL.
+                                                string xml = client.DownloadString(url);
 
-                // Load the response into an XML document.
-                XmlDocument xml_document = new XmlDocument();
-                xml_document.LoadXml(xml);
+                                                // Load the response into an XML document.
+                                                XmlDocument xml_document = new XmlDocument();
+                                                xml_document.LoadXml(xml);
 
-                // Format the XML.
-                using (StringWriter string_writer = new StringWriter())
-                {
-                    XmlTextWriter xml_text_writer = new XmlTextWriter(string_writer);
-                    xml_text_writer.Formatting = Formatting.Indented;
-                    xml_document.WriteTo(xml_text_writer);
+                                                // Format the XML.
+                                                using (StringWriter string_writer = new StringWriter())
+                                                {
+                                                    XmlTextWriter xml_text_writer = new XmlTextWriter(string_writer);
+                                                    xml_text_writer.Formatting = Formatting.Indented;
+                                                    xml_document.WriteTo(xml_text_writer);
 
-                    // Return the result.
-                    return string_writer.ToString();
-                }
-            }
-        }
+                                                    // Return the result.
+                                                    return string_writer.ToString();
+                                                }
+                                            }
+                                        }
+
+
 
         private void bt_clear_Click(object sender, EventArgs e)
         {

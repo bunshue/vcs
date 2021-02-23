@@ -45,7 +45,7 @@
             this.btnForecast.Name = "btnForecast";
             this.btnForecast.Size = new System.Drawing.Size(75, 28);
             this.btnForecast.TabIndex = 2;
-            this.btnForecast.Text = "Forecast";
+            this.btnForecast.Text = "天氣預測";
             this.btnForecast.UseVisualStyleBackColor = true;
             this.btnForecast.Click += new System.EventHandler(this.btnForecast_Click);
             // 
@@ -97,7 +97,7 @@
             this.btnConditions.Name = "btnConditions";
             this.btnConditions.Size = new System.Drawing.Size(75, 28);
             this.btnConditions.TabIndex = 1;
-            this.btnConditions.Text = "Conditions";
+            this.btnConditions.Text = "即時天氣";
             this.btnConditions.UseVisualStyleBackColor = true;
             this.btnConditions.Click += new System.EventHandler(this.btnConditions_Click);
             // 

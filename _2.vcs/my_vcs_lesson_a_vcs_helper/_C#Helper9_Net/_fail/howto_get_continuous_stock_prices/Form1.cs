@@ -51,6 +51,8 @@ namespace howto_get_continuous_stock_prices
                 // Get the initial prices.
                 ShowLatestPrices();
 
+                richTextBox1.Text += "done\n";
+
                 // Start the timer.
                 tmrCheckPrices.Enabled = true;
             }
@@ -217,11 +219,12 @@ namespace howto_get_continuous_stock_prices
                 "http://download.finance.yahoo.com/d/quotes.csv?s=" +
                 symbol_text + "&f=sl1d1t1c1";
 
-
             richTextBox1.Text += "url = " + url + "\n";
 
             List<float> pricesa = new List<float>();
-            return pricesa;
+
+            //錯誤在此
+            //return pricesa;
 
             // Get the stock data.
             try
