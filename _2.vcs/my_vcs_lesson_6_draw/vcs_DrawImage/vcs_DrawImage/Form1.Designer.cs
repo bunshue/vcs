@@ -129,7 +129,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(204, 41);
             this.button5.TabIndex = 8;
-            this.button5.Text = "Gamma 4.0";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

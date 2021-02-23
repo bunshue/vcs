@@ -256,7 +256,10 @@ namespace vcs_Draw3B
             DrawStar(gs, center, radius, linewidth, Color.Red);
             radius += 10;
             if (radius > 100)
+            {
+                gs.Clear(Color.White);
                 radius = 50;
+            }
         }
 
         private void DrawStar(Graphics g, PointF center, int radius, int linewidth, Color c)
@@ -291,6 +294,106 @@ namespace vcs_Draw3B
             //Dispose of the pen.
             p.Dispose();
         }
+
+        //畫圓內接正多邊形 ST
+        int polygon_number = 3;
+        private void timer_draw_polygon_Tick(object sender, EventArgs e)
+        {
+            int W = pictureBox_polygon.ClientSize.Width;
+            int H = pictureBox_polygon.ClientSize.Height;
+
+            int cx = W / 2;
+            int cy = H / 2;
+            int r = Math.Min(W, H) / 2 - 50;
+            int n;
+
+            Graphics g;
+            Pen p;
+            SolidBrush sb;
+            Bitmap bitmap1;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+
+            g.Clear(Color.White);
+            draw_polygon(g, p, cx, cy, r, polygon_number);
+            pictureBox_polygon.Image = bitmap1;
+
+            polygon_number++;
+            if (polygon_number > 10)
+                polygon_number = 3;
+        }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        private void draw_polygon(Graphics g, Pen p, int dx, int dy, int r, int n)
+        {
+            Point[] points = new Point[n];
+            int i;
+            int j;
+            int angle = 360 / n;
+            int offset = 360 / n / 2;
+
+            if ((n % 2) == 1)
+            {
+                for (i = 0; i < n; i++)
+                {
+                    points[i].X = dx + (int)(r * cosd(-90 + angle * i));
+                    points[i].Y = dy + (int)(r * sind(-90 + angle * i));
+                }
+            }
+            else
+            {
+                for (i = 0; i < n; i++)
+                {
+                    points[i].X = dx + (int)(r * cosd(offset + angle * i));
+                    points[i].Y = dy + (int)(r * sind(offset + angle * i));
+                }
+
+            }
+
+            p = new Pen(Color.Red, 3);     // 設定畫筆為紅色、粗細為 10 點。
+
+            DrawCircle(g, p, dx, dy, r);
+
+            for (i = 0; i < n; i++)
+            {
+                richTextBox1.Text += "points[" + i.ToString() + "], X = " + points[i].X + ", Y = " + points[i].Y + "\n";
+            }
+
+            for (i = 0; i < n; i++)
+            {
+                for (j = (i + 1); j < n; j++)
+                {
+                    richTextBox1.Text += "draw " + i.ToString() + " - " + j.ToString() + "\n";
+                    g.DrawLine(p, points[i], points[j]);
+                }
+            }
+        }
+
+        void DrawCircle(Graphics g, Pen p, int cx, int cy, int r)
+        {
+            g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
+        }
+
+        //畫圓內接正多邊形 SP
 
 
 

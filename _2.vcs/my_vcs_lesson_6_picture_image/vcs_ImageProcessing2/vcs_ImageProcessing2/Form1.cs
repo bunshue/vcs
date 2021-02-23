@@ -35,7 +35,7 @@ namespace vcs_ImageProcessing2
             pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox_gamma.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
             //pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
@@ -115,6 +115,7 @@ namespace vcs_ImageProcessing2
             pictureBox11.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
+            pictureBox_gamma.Size = new Size(W, H);
             pictureBox15.Size = new Size(W * 2, H);
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
@@ -135,7 +136,7 @@ namespace vcs_ImageProcessing2
             pictureBox11.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             pictureBox12.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             pictureBox13.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            pictureBox14.Location = new Point(x_st + dx * 6, y_st + dy * 1);
+            pictureBox_gamma.Location = new Point(x_st + dx * 6, y_st + dy * 1);
 
             pictureBox15.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             //pictureBox16.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -181,7 +182,7 @@ namespace vcs_ImageProcessing2
             label11.Text = "原圖";
             label12.Text = "灰階 Grayscale";
             label13.Text = "灰階 Average";
-            label14.Text = "";
+            label14.Text = "Gamma";
             label15.Text = "鏡像圖片";
             label16.Text = "";
             label17.Text = "彩虹化圖片";
@@ -1285,7 +1286,53 @@ namespace vcs_ImageProcessing2
                 }
             }
         }
+
         //二值化對比 SP
+
+        //畫 gamma ST
+        float gamma = 0.5F;
+        private void timer_gamma_Tick(object sender, EventArgs e)
+        {
+            int W = pictureBox_gamma.ClientSize.Width;
+            int H = pictureBox_gamma.ClientSize.Height;
+
+            //改變Bitmap大小
+            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg", true);
+            Bitmap bmp_zoom;
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            // Create image attributes and set large gamma.
+            ImageAttributes imageAttr = new ImageAttributes();
+            imageAttr.SetGamma(gamma);
+            bmp_zoom = new Bitmap(bmp, W, H);
+
+            Bitmap bitmap1;
+            bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            //g.DrawImage(bmp_zoom, 0, 0);    //zoom後再貼, 大小正確
+
+            //指名大小後再貼, 大小正確
+            RectangleF srcRect = new RectangleF(0, 0, bmp.Width, bmp.Height); //擷取全圖
+            // 準備放大縮小貼上的位置
+            // Create parallelogram for drawing original image.
+            PointF ulCorner1 = new PointF(0, 0);
+            PointF urCorner1 = new PointF(bmp.Width * 3 / 5, 0);    //把圖縮小一點，6成
+            PointF llCorner1 = new PointF(0, bmp.Height * 3 / 5);   //把圖縮小一點，6成
+            PointF[] destRect = { ulCorner1, urCorner1, llCorner1 };
+
+            //g.DrawImage(bmp, destRect, srcRect, units);             //一般貼上, 指名大小後貼上, 大小正確
+            g.DrawImage(bmp, destRect, srcRect, units, imageAttr);  //Gamma4.0貼上, 指名大小後貼上, 大小正確
+
+            pictureBox_gamma.Image = bitmap1;
+
+            label14.Text = "Gamma " + gamma.ToString();
+
+            gamma += 0.3F;
+            if (gamma > 5.0F)
+                gamma = 0.5F;
+        }
+        //畫 gamma SP
 
 
 

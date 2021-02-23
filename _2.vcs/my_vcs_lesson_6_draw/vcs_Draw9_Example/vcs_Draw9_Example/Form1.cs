@@ -312,80 +312,9 @@ namespace vcs_Draw9_Example
             brush.Dispose();
         }
 
-        private double rad(double d)
-        {
-            return d * Math.PI / 180.0;
-        }
-
-        private double sind(double d)
-        {
-            return Math.Sin(d * Math.PI / 180.0);
-        }
-
-        private double cosd(double d)
-        {
-            return Math.Cos(d * Math.PI / 180.0);
-        }
-
-        private void draw_polygon(int dx, int dy, int r, int n)
-        {
-            Point[] points = new Point[n];
-            int i;
-            int j;
-            int angle = 360 / n;
-            int offset = 360 / n / 2;
-
-            if ((n % 2) == 1)
-            {
-                for (i = 0; i < n; i++)
-                {
-                    points[i].X = dx + (int)(r * cosd(-90 + angle * i));
-                    points[i].Y = dy + (int)(r * sind(-90 + angle * i));
-                }
-            }
-            else
-            {
-                for (i = 0; i < n; i++)
-                {
-                    points[i].X = dx + (int)(r * cosd(offset + angle * i));
-                    points[i].Y = dy + (int)(r * sind(offset + angle * i));
-                }
-
-            }
-
-            p = new Pen(Color.Red, 3);     // 設定畫筆為紅色、粗細為 10 點。
-
-            DrawCircle(g, p, dx, dy, r);
-
-            for (i = 0; i < n; i++)
-            {
-                richTextBox1.Text += "points[" + i.ToString() + "], X = " + points[i].X + ", Y = " + points[i].Y + "\n";
-            }
-
-            for (i = 0; i < n; i++)
-            {
-                for (j = (i+1); j < n; j++)
-                {
-                    richTextBox1.Text += "draw " + i.ToString() + " - " + j.ToString() + "\n";
-                    g.DrawLine(p, points[i], points[j]);
-                }
-            }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
 
-            int cx = W / 2;
-            int cy = H / 2;
-            int r = Math.Min(W, H) / 2 - 50;
-            int n;
-
-            n = 7;
-            g.Clear(Color.White);
-            draw_polygon(cx, cy, r, n);
-            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1649,6 +1578,7 @@ namespace vcs_Draw9_Example
             pictureBox1.Image = bitmap1;
         }
 
+        //畫OV亮度
         private void button11_Click(object sender, EventArgs e)
         {
             g.Clear(Color.White);
@@ -5198,6 +5128,7 @@ namespace vcs_Draw9_Example
         }
         //Pie Chart 2 SP
 
+        //畫Gamma曲線
         private void button21_Click(object sender, EventArgs e)
         {
             pictureBox1.Location = new Point(50, 50);

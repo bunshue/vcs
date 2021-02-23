@@ -126,4 +126,7 @@
   <metadata name="timer_draw_star.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>328, 21</value>
   </metadata>
+  <metadata name="timer_draw_polygon.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>455, 24</value>
+  </metadata>
 </root>

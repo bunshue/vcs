@@ -37,9 +37,12 @@
             this.timer_draw_ellipse = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_star = new System.Windows.Forms.PictureBox();
             this.timer_draw_star = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_polygon = new System.Windows.Forms.PictureBox();
+            this.timer_draw_polygon = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -89,9 +92,10 @@
             // 
             // pictureBox_star
             // 
+            this.pictureBox_star.BackColor = System.Drawing.Color.White;
             this.pictureBox_star.Location = new System.Drawing.Point(657, 12);
             this.pictureBox_star.Name = "pictureBox_star";
-            this.pictureBox_star.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox_star.Size = new System.Drawing.Size(276, 268);
             this.pictureBox_star.TabIndex = 57;
             this.pictureBox_star.TabStop = false;
             // 
@@ -101,11 +105,27 @@
             this.timer_draw_star.Interval = 1000;
             this.timer_draw_star.Tick += new System.EventHandler(this.timer_draw_star_Tick);
             // 
+            // pictureBox_polygon
+            // 
+            this.pictureBox_polygon.BackColor = System.Drawing.Color.White;
+            this.pictureBox_polygon.Location = new System.Drawing.Point(939, 12);
+            this.pictureBox_polygon.Name = "pictureBox_polygon";
+            this.pictureBox_polygon.Size = new System.Drawing.Size(289, 282);
+            this.pictureBox_polygon.TabIndex = 58;
+            this.pictureBox_polygon.TabStop = false;
+            // 
+            // timer_draw_polygon
+            // 
+            this.timer_draw_polygon.Enabled = true;
+            this.timer_draw_polygon.Interval = 1000;
+            this.timer_draw_polygon.Tick += new System.EventHandler(this.timer_draw_polygon_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 680);
+            this.Controls.Add(this.pictureBox_polygon);
             this.Controls.Add(this.pictureBox_star);
             this.Controls.Add(this.pictureBox_ellipse);
             this.Controls.Add(this.pictureBox_spiral);
@@ -118,6 +138,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -132,6 +153,8 @@
         private System.Windows.Forms.Timer timer_draw_ellipse;
         private System.Windows.Forms.PictureBox pictureBox_star;
         private System.Windows.Forms.Timer timer_draw_star;
+        private System.Windows.Forms.PictureBox pictureBox_polygon;
+        private System.Windows.Forms.Timer timer_draw_polygon;
     }
 }
 

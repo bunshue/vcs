@@ -271,34 +271,6 @@ namespace vcs_DrawImage
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //改變Bitmap大小
-            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg", true);
-            Bitmap bmp_zoom;
-
-            GraphicsUnit units = GraphicsUnit.Pixel;
-            // Create image attributes and set large gamma.
-            ImageAttributes imageAttr = new ImageAttributes();
-            imageAttr.SetGamma(4.0F);
-
-            bmp_zoom = new Bitmap(bmp, bmp.Width, bmp.Height);
-
-            g.DrawImage(bmp_zoom, 0, 0);    //zoom後再貼, 大小正確
-
-            //指名大小後再貼, 大小正確
-            RectangleF srcRect = new RectangleF(0, 0, bmp.Width, bmp.Height); //擷取全圖
-            // 準備放大縮小貼上的位置
-            // Create parallelogram for drawing original image.
-            PointF ulCorner1 = new PointF(0, 0);
-            PointF urCorner1 = new PointF(bmp.Width, 0);
-            PointF llCorner1 = new PointF(0, bmp.Height);
-            PointF[] destRect = { ulCorner1, urCorner1, llCorner1 };
-
-            //g.DrawImage(bmp, destRect, srcRect, units);             //一般貼上, 指名大小後貼上, 大小正確
-            g.DrawImage(bmp, destRect, srcRect, units, imageAttr);  //Gamma4.0貼上, 指名大小後貼上, 大小正確
-
-            pictureBox1.Image = bitmap1;
-
-            g.DrawString("Gamma 4.0", new Font("Arial", 50), Brushes.Red, new PointF(100, 450));
         }
 
         private void button6_Click(object sender, EventArgs e)
