@@ -34,22 +34,30 @@ namespace vcs_ReadWrite_XML1
 
             if (File.Exists(filename))
             {
-                //加載XML文件
-                XmlDocument xdDocument = new XmlDocument();
-                richTextBox1.Text += "開啟XML文件 : " + filename + "\n";
-                xdDocument.Load(filename);
-
-                //得到主節點
-                XmlElement xeRoot = xdDocument.DocumentElement;
-                if (xeRoot != null)
-                {
-                    XmlNode xnNodeRoot = (XmlNode)xeRoot;
-                    RecurseXmlDocument(xnNodeRoot, 0);
-                    richTextBox1.Text += "\n讀取XML文件 : " + filename + " 完成\n";
-                }
+                ParseXML(filename);
             }
             else
+            {
                 richTextBox1.Text += "XML文件 : " + filename + " 不存在\n";
+            }
+        }
+
+        // 標準版XML讀取解析程式 ST
+        private void ParseXML(string filename)
+        {
+            //加載XML文件
+            XmlDocument xdDocument = new XmlDocument();
+            richTextBox1.Text += "開啟XML文件 : " + filename + "\n";
+            xdDocument.Load(filename);
+
+            //得到主節點
+            XmlElement xeRoot = xdDocument.DocumentElement;
+            if (xeRoot != null)
+            {
+                XmlNode xnNodeRoot = (XmlNode)xeRoot;
+                RecurseXmlDocument(xnNodeRoot, 0);
+                richTextBox1.Text += "\n讀取XML文件 : " + filename + " 完成\n";
+            }
         }
 
         /// <summary>
@@ -121,6 +129,7 @@ namespace vcs_ReadWrite_XML1
                 }
             }
         }
+        // 標準版XML讀取解析程式 SP
 
         /// <summary>
         /// 創建Node按鈕事件方法

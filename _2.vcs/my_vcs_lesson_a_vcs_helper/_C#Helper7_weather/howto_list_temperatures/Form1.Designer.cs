@@ -150,12 +150,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(592, 9);
+            this.button2.Location = new System.Drawing.Point(592, 8);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 30);
             this.button2.TabIndex = 29;
             this.button2.Text = "解讀XML2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 

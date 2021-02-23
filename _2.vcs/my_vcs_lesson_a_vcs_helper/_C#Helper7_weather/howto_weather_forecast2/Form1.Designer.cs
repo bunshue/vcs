@@ -46,7 +46,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.cboQuery = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 149);
+            this.label1.Location = new System.Drawing.Point(9, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 12);
             this.label1.TabIndex = 18;
@@ -62,11 +62,11 @@
             // 
             // txtLocation
             // 
-            this.txtLocation.Location = new System.Drawing.Point(91, 8);
+            this.txtLocation.Location = new System.Drawing.Point(128, 8);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(426, 22);
+            this.txtLocation.Size = new System.Drawing.Size(389, 22);
             this.txtLocation.TabIndex = 15;
-            this.txtLocation.Text = "yunlin";
+            this.txtLocation.Text = "Hsinchu";
             // 
             // btnForecast
             // 
@@ -85,7 +85,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.lvwForecast.Location = new System.Drawing.Point(12, 163);
+            this.lvwForecast.Location = new System.Drawing.Point(12, 133);
             this.lvwForecast.Name = "lvwForecast";
             this.lvwForecast.Size = new System.Drawing.Size(381, 411);
             this.lvwForecast.TabIndex = 19;
@@ -115,7 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 71);
+            this.label3.Location = new System.Drawing.Point(12, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 20;
@@ -123,7 +123,7 @@
             // 
             // txtCity
             // 
-            this.txtCity.Location = new System.Drawing.Point(56, 68);
+            this.txtCity.Location = new System.Drawing.Point(56, 41);
             this.txtCity.Name = "txtCity";
             this.txtCity.ReadOnly = true;
             this.txtCity.Size = new System.Drawing.Size(100, 22);
@@ -131,7 +131,7 @@
             // 
             // txtCountry
             // 
-            this.txtCountry.Location = new System.Drawing.Point(231, 68);
+            this.txtCountry.Location = new System.Drawing.Point(231, 41);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.ReadOnly = true;
             this.txtCountry.Size = new System.Drawing.Size(100, 22);
@@ -140,7 +140,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(187, 71);
+            this.label4.Location = new System.Drawing.Point(187, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 22;
@@ -148,7 +148,7 @@
             // 
             // txtLong
             // 
-            this.txtLong.Location = new System.Drawing.Point(231, 92);
+            this.txtLong.Location = new System.Drawing.Point(231, 65);
             this.txtLong.Name = "txtLong";
             this.txtLong.ReadOnly = true;
             this.txtLong.Size = new System.Drawing.Size(100, 22);
@@ -157,7 +157,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(187, 95);
+            this.label5.Location = new System.Drawing.Point(187, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 26;
@@ -165,7 +165,7 @@
             // 
             // txtLat
             // 
-            this.txtLat.Location = new System.Drawing.Point(56, 92);
+            this.txtLat.Location = new System.Drawing.Point(56, 65);
             this.txtLat.Name = "txtLat";
             this.txtLat.ReadOnly = true;
             this.txtLat.Size = new System.Drawing.Size(100, 22);
@@ -174,7 +174,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 95);
+            this.label6.Location = new System.Drawing.Point(12, 68);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 24;
@@ -182,7 +182,7 @@
             // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(56, 116);
+            this.txtId.Location = new System.Drawing.Point(56, 89);
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(100, 22);
@@ -191,24 +191,24 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 119);
+            this.label7.Location = new System.Drawing.Point(12, 92);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(20, 12);
             this.label7.TabIndex = 28;
             this.label7.Text = "ID:";
             // 
-            // cboQuery
+            // comboBox1
             // 
-            this.cboQuery.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboQuery.FormattingEnabled = true;
-            this.cboQuery.Location = new System.Drawing.Point(12, 7);
-            this.cboQuery.Name = "cboQuery";
-            this.cboQuery.Size = new System.Drawing.Size(73, 20);
-            this.cboQuery.TabIndex = 30;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 7);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(110, 20);
+            this.comboBox1.TabIndex = 30;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(399, 163);
+            this.richTextBox1.Location = new System.Drawing.Point(399, 133);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(267, 411);
             this.richTextBox1.TabIndex = 31;
@@ -216,7 +216,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(593, 261);
+            this.bt_clear.Location = new System.Drawing.Point(607, 521);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(59, 23);
             this.bt_clear.TabIndex = 32;
@@ -228,10 +228,10 @@
             this.AcceptButton = this.btnForecast;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 586);
+            this.ClientSize = new System.Drawing.Size(670, 556);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.cboQuery);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtLong);
@@ -273,7 +273,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cboQuery;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Button bt_clear;

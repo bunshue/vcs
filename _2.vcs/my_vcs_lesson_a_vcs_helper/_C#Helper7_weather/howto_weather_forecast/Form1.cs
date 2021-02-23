@@ -25,19 +25,17 @@ namespace howto_weather_forecast
         //      http://home.openweathermap.org/users/sign_in
         private const string API_KEY = "lionmouse";
 
-        // Query URLs. Replace @LOC@ with the location.
-        private const string CurrentUrl =
-            "http://api.openweathermap.org/data/2.5/weather?" +
-            "q=@LOC@&mode=xml&units=imperial&APPID=" + API_KEY;
-        private const string ForecastUrl =
-            "http://api.openweathermap.org/data/2.5/forecast?" +
-            "q=@LOC@&mode=xml&units=imperial&APPID=" + API_KEY;
+        // Query URLs. Replace @LOCATION@ with the location.
+        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+
+        //只查詢代碼為City(q)之條件
 
         // Get current conditions.
         private void btnConditions_Click(object sender, EventArgs e)
         {
             // Compose the query URL.
-            string url = CurrentUrl.Replace("@LOC@", txtLocation.Text);
+            string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
             txtXml.Text = GetFormattedXml(url);
         }
@@ -51,7 +49,7 @@ namespace howto_weather_forecast
         private void btnForecast_Click(object sender, EventArgs e)
         {
             // Compose the query URL.
-            string url = ForecastUrl.Replace("@LOC@", txtLocation.Text);
+            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
             txtXml.Text = GetFormattedXml(url);
         }

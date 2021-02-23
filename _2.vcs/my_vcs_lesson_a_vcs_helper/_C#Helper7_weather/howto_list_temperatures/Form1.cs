@@ -51,13 +51,9 @@ namespace howto_list_temperatures
         //      http://home.openweathermap.org/users/sign_in
         private const string API_KEY = "lionmouse";
 
-        // Query URLs. Replace @LOC@ with the location.
-        private const string CurrentUrl =
-            "http://api.openweathermap.org/data/2.5/weather?" +
-            "q=@LOC@&mode=xml&units=imperial&APPID=" + API_KEY;
-        private const string ForecastUrl =
-            "http://api.openweathermap.org/data/2.5/forecast?" +
-            "q=@LOC@&mode=xml&units=imperial&APPID=" + API_KEY;
+        // Query URLs. Replace @LOCATION@ with the location.
+        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
         // List the temperature forecast.
         private void btnForecast_Click(object sender, EventArgs e)
@@ -66,7 +62,7 @@ namespace howto_list_temperatures
             Cursor = Cursors.WaitCursor;
 
             // Compose the query URL.
-            string url = ForecastUrl.Replace("@LOC@", txtLocation.Text);
+            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
 
             richTextBox1.Text += "url : \n" + url + "\n";
 
@@ -252,6 +248,7 @@ namespace howto_list_temperatures
 
             Pen thin_pen = new Pen(Color.Black, 0);
             thin_pen.Color = Color.LightBlue;
+            /* debug
             int num_numbers = 10;
             float[] numbers = new float[num_numbers];
             Random rand = new Random();
@@ -261,8 +258,8 @@ namespace howto_list_temperatures
                 numbers[i] = (float)rand.NextDouble() * 100;
                 richTextBox1.Text += numbers[i].ToString() + " ";
             }
+            */
             DrawHistogramF(pictureBox1, Brushes.Blue, thin_pen, temperature.ToArray());
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -305,7 +302,7 @@ namespace howto_list_temperatures
             for (i = 0; i < N; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + values[i].ToString() + "\n";
-                
+
             }
 
             // Make a Bitmap.
@@ -339,10 +336,10 @@ namespace howto_list_temperatures
             pic.Image = bitmap1;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string filename = "C:\\______test_files\\__RW\\_xml\\weather.xml";
 
+        // 標準版XML讀取解析程式 ST
+        private void ParseXML(string filename)
+        {
             //加載XML文件
             XmlDocument xdDocument = new XmlDocument();
             richTextBox1.Text += "開啟XML文件 : " + filename + "\n";
@@ -356,8 +353,6 @@ namespace howto_list_temperatures
                 RecurseXmlDocument(xnNodeRoot, 0);
                 richTextBox1.Text += "\n讀取XML文件 : " + filename + " 完成\n";
             }
-
-            //string xml_data = 
         }
 
         /// <summary>
@@ -429,9 +424,149 @@ namespace howto_list_temperatures
                 }
             }
         }
+        // 標準版XML讀取解析程式 SP
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // vcs_ReadWrite_XML1 的 標準版XML讀取解析程式
+
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather.xml";
+
+            ParseXML(filename);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // vcsh 的 XML讀取程式
+
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather.xml";
+
+            ParseXML_weather(filename);
+        }
+
+        private void ParseXML_weather(string filename)
+        {
+            string xml = File.ReadAllText(filename, System.Text.Encoding.Default);
+
+            //richTextBox1.Text += "data\n" + xml + "\n";
+
+            // Load the response into an XML document.
+            XmlDocument xml_doc;
+            xml_doc = new XmlDocument();
+            xml_doc.LoadXml(xml);
+
+            ParseXML_weather0(xml_doc);
+        }
+
+        private void ParseXML_weather0(XmlDocument xml_doc)
+        {
+            // 解讀xml資料
+            // Get the city, country, latitude, and longitude.
+            XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
+            richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
+            richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
+
+            XmlNode geo_node = loc_node.SelectSingleNode("location");
+            richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
+            richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
+            richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
+            richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n\n";
+
+            foreach (XmlNode sun_node in xml_doc.SelectNodes("//sun"))
+            {
+                XmlAttribute time_attr1 = sun_node.Attributes["rise"];
+                XmlAttribute time_attr2 = sun_node.Attributes["set"];
+                richTextBox1.Text += "日出 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + "\n";
+                richTextBox1.Text += "日落 : " + DateTime.Parse(time_attr2.Value).ToLocalTime() + "\n";
+            }
+
+            char degrees = (char)176;
+
+            // Loop throuh the time entries.
+            //string last_day = "";
+            int aaa = 0;
+            foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
+            {
+                // Get the start date and time.
+                XmlAttribute time_attr1 = time_node.Attributes["from"];
+                XmlAttribute time_attr2 = time_node.Attributes["to"];
+
+                aaa++;
+                // 解讀xml資料 
+                richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
+
+                richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
+                    + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
+
+                richTextBox1.Text += "symbol" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "precipitation" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "windDirection" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "windSpeed" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "temperature" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "feels_like" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "pressure" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "humidity" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "clouds" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "visibility" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
+
+                DateTime start_time = DateTime.Parse(time_attr1.Value);
+
+                // Convert from UTC to local time.
+                start_time = start_time.ToLocalTime();
+
+                // Add 90 minutes to get to the middle of the interval.
+                start_time += new TimeSpan(1, 30, 0);
+
+                // Get the temperature node.
+                XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                XmlAttribute temp_attr = temp_node.Attributes["value"];
+                float temp = 0;
+                if (temp_attr != null)
+                {
+                    temp = float.Parse(temp_attr.Value.ToString());
+                }
+
+                richTextBox1.Text += "time : \t" + start_time.ToShortTimeString() + "\t";
+                richTextBox1.Text += temp.ToString("0.00") + " " + degrees + "F" + "\t";
+                richTextBox1.Text += ((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C" + "\n";
+            }
+        }
 
 
     }
 }
-

@@ -26,13 +26,9 @@ namespace howto_weather_forecast2
         //      http://home.openweathermap.org/users/sign_in
         private const string API_KEY = "lionmouse";
 
-        // Query URLs. Replace @LOC@ with the location.
-        private const string CurrentUrl =
-            "http://api.openweathermap.org/data/2.5/weather?" +
-            "@QUERY@=@LOC@&mode=xml&units=imperial&APPID=" + API_KEY;
-        private const string ForecastUrl =
-            "http://api.openweathermap.org/data/2.5/forecast?" +
-            "@QUERY@=@LOC@&mode=xml&units=imperial&APPID=" + API_KEY;
+        // Query URLs. Replace @LOCATION@ with the location.
+        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
         // Query codes.
         private string[] QueryCodes = { "q", "zip", "id", };
@@ -40,12 +36,11 @@ namespace howto_weather_forecast2
         // Fill in query types. These should match the QueryCodes.
         private void Form1_Load(object sender, EventArgs e)
         {
-            cboQuery.Items.Add("City");
-            cboQuery.Items.Add("ZIP");
-            cboQuery.Items.Add("ID");
+            comboBox1.Items.Add("City");
+            comboBox1.Items.Add("ZIP");
+            comboBox1.Items.Add("ID");
 
-            cboQuery.SelectedIndex = 0;
-
+            comboBox1.SelectedIndex = 0;
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -53,10 +48,12 @@ namespace howto_weather_forecast2
         // Get a forecast.
         private void btnForecast_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "¬d¸ß«¬ºA : " + comboBox1.Text + "\t¥N½X : " + QueryCodes[comboBox1.SelectedIndex] + "\n";
+
             // Compose the query URL.
-            string url = ForecastUrl.Replace("@LOC@", txtLocation.Text);
+            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
-            url = url.Replace("@QUERY@", QueryCodes[cboQuery.SelectedIndex]);
+            url = url.Replace("@QUERY@", QueryCodes[comboBox1.SelectedIndex]);
             richTextBox1.Text += "url : " + url + "\n";
 
             // Create a web client.

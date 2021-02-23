@@ -41,9 +41,9 @@
             // btnForecast
             // 
             this.btnForecast.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnForecast.Location = new System.Drawing.Point(383, 35);
+            this.btnForecast.Location = new System.Drawing.Point(558, 11);
             this.btnForecast.Name = "btnForecast";
-            this.btnForecast.Size = new System.Drawing.Size(75, 21);
+            this.btnForecast.Size = new System.Drawing.Size(75, 28);
             this.btnForecast.TabIndex = 2;
             this.btnForecast.Text = "Forecast";
             this.btnForecast.UseVisualStyleBackColor = true;
@@ -55,14 +55,14 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLocation.Location = new System.Drawing.Point(69, 11);
             this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(680, 22);
+            this.txtLocation.Size = new System.Drawing.Size(356, 22);
             this.txtLocation.TabIndex = 0;
-            this.txtLocation.Text = "London";
+            this.txtLocation.Text = "Hsinchu";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 73);
+            this.label1.Location = new System.Drawing.Point(14, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 2;
@@ -82,7 +82,7 @@
             this.txtXml.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtXml.Location = new System.Drawing.Point(12, 88);
+            this.txtXml.Location = new System.Drawing.Point(14, 55);
             this.txtXml.Multiline = true;
             this.txtXml.Name = "txtXml";
             this.txtXml.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -93,9 +93,9 @@
             // btnConditions
             // 
             this.btnConditions.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnConditions.Location = new System.Drawing.Point(302, 35);
+            this.btnConditions.Location = new System.Drawing.Point(477, 11);
             this.btnConditions.Name = "btnConditions";
-            this.btnConditions.Size = new System.Drawing.Size(75, 21);
+            this.btnConditions.Size = new System.Drawing.Size(75, 28);
             this.btnConditions.TabIndex = 1;
             this.btnConditions.Text = "Conditions";
             this.btnConditions.UseVisualStyleBackColor = true;
@@ -103,9 +103,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 404);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 371);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(737, 179);
+            this.richTextBox1.Size = new System.Drawing.Size(737, 212);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
