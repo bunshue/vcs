@@ -23,17 +23,132 @@ namespace vcs_Network1
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 225;
+            dy = 50;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button24.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            //button25.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            //button26.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            //button27.Location = new Point(x_st + dx * 1, y_st + dy * 13);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //離開按鈕的寫法
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
         {
             //連線到Google，使用預設的browser
             System.Diagnostics.Process.Start("http://www.google.com/");
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //連線到Google，使用IE
+            System.Diagnostics.Process.Start("IExplore.exe", "http://www.google.com");
+        }
+
+        //檢查網路連線
+        private void button2_Click(object sender, EventArgs e)
+        {
+            String host;
+
+            host = "www.google.com";
+
+            if (IsInternetConnected(host))
+                richTextBox1.Text += host + "\t連線OK\n";
+            else
+                richTextBox1.Text += host + "\t無法連線\n";
+
+            host = "http://csharphelper.com/";
+
+            if (IsInternetConnected(host))
+                richTextBox1.Text += host + "\t連線OK\n";
+            else
+                richTextBox1.Text += host + "\t無法連線\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {            
-            //連線到Google，使用IE
-            System.Diagnostics.Process.Start("IExplore.exe", "http://www.google.com");
+        {
 
         }
 
@@ -110,17 +225,17 @@ namespace vcs_Network1
             //this.pictureBox1.Image = ReadImageFromUrl(pic1);
             //法二
             switch (select)
-            { 
+            {
                 case 1:
-                    pictureBox1.ImageLocation = pic1;   break;
+                    pictureBox1.ImageLocation = pic1; break;
                 case 2:
-                    pictureBox1.ImageLocation = pic2;   break;
+                    pictureBox1.ImageLocation = pic2; break;
                 case 3:
-                    pictureBox1.ImageLocation = pic3;   break;
+                    pictureBox1.ImageLocation = pic3; break;
                 case 4:
-                    pictureBox1.ImageLocation = pic4;   break;
+                    pictureBox1.ImageLocation = pic4; break;
                 default:
-                    pictureBox1.ImageLocation = pic1;   break;
+                    pictureBox1.ImageLocation = pic1; break;
             }
             select++;
             if (select > 4)
@@ -133,7 +248,6 @@ namespace vcs_Network1
             Stream stream = webRequest.GetResponse().GetResponseStream();
             Image res = Image.FromStream(stream);
             return res;
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -152,7 +266,6 @@ namespace vcs_Network1
                 //Response.Write("Error");
                 richTextBox1.Text += "網頁不存在\n";
             }
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -178,7 +291,6 @@ namespace vcs_Network1
             System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(s, "\"(.*?)\"");
             string res = m.Groups[1].Value;
             richTextBox1.Text += res;
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -194,7 +306,6 @@ namespace vcs_Network1
             string pingMsg = (PingResult.Status == System.Net.NetworkInformation.IPStatus.Success) ? "連線成功" : "無法連線";
 
             richTextBox1.Text += pingMsg + "\n";
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -204,37 +315,18 @@ namespace vcs_Network1
             {
                 richTextBox1.Text += "IP : " + ip.ToString() + "\n";
             }
-
         }
 
         IPAddress GetIP()
         {
             foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                    return ip;
-            return null;
-        }
-
-
-        public class MyWebClient : WebClient
-        {
-            protected override WebRequest GetWebRequest(Uri uri)
             {
-                WebRequest WR = base.GetWebRequest(uri);
-                WR.Timeout = 30 * 1000;     //30秒
-                return WR;
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip;
+                }
             }
-        }
-
-        ////.Net C# 讓 WebClient 擁有 Timeout 功能
-        private void button24_Click(object sender, EventArgs e)
-        {
-            MyWebClient MWC = new MyWebClient();
-            string HTML = MWC.DownloadString("http://www.google.com.tw/");
-            richTextBox1.Text += HTML;
-            //Console.WriteLine(HTML);
-
-
+            return null;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -251,15 +343,12 @@ namespace vcs_Network1
 
                 //取得結果
                 string pingMsg = (PingResult.Status == System.Net.NetworkInformation.IPStatus.Success) ? "連線成功" : "無法連線";
-
                 richTextBox1.Text += pingMsg + "\n";
-
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
         }
 
         private WebClient client = new WebClient();
@@ -316,9 +405,7 @@ namespace vcs_Network1
                     reader.Close();
                     outputStream.Close();
                 }
-
                 //Application.Exit();
-
             }
             catch (Exception exp)
             {
@@ -393,6 +480,16 @@ namespace vcs_Network1
             richTextBox1.Text += "下載完成\n";
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button20_Click(object sender, EventArgs e)
         {
             //取得網卡的IPV6位置
@@ -410,90 +507,6 @@ namespace vcs_Network1
                     where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
                     let ipAddress = AddressInfo.Address.ToString()
                     select ipAddress);
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            //從FTP下載檔案
-            System.Net.WebClient webClient = new System.Net.WebClient();
-            //下載FTP檔案到指定位置
-            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
-
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            // Download and display the text file.
-            richTextBox1.Clear();
-            richTextBox1.Text += "取得網頁純文字檔...\n";
-
-            const string url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
-            richTextBox1.Text += GetTextFile(url);
-            //richTextBox1.Select(0, 500);  //useless
-
-        }
-
-        // Get the text file at a given URL.
-        private string GetTextFile(string url)
-        {
-            try
-            {
-                url = url.Trim();
-                if (!url.ToLower().StartsWith("http")) url = "http://" + url;
-                WebClient web_client = new WebClient();
-                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
-                StreamReader reader = new StreamReader(image_stream);
-                string result = reader.ReadToEnd();
-                reader.Close();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error downloading file " +
-                    url + '\n' + ex.Message,
-                    "Download Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-            return "";
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-            String host;
-
-            host = "www.google.com";
-
-            if (IsInternetConnected(host))
-                richTextBox1.Text += host + "\t連線OK\n";
-            else
-                richTextBox1.Text += host + "\t無法連線\n";
-
-            host = "http://csharphelper.com/";
-
-            if (IsInternetConnected(host))
-                richTextBox1.Text += host + "\t連線OK\n";
-            else
-                richTextBox1.Text += host + "\t無法連線\n";
-        }
-
-        // Return true if a ping to Google works.
-        private bool IsInternetConnected(String host)
-        {
-            return IsInternetConnected(host, 1000);
-        }
-        private bool IsInternetConnected(String host, int timeout)
-        {
-            try
-            {
-                Ping ping = new Ping();
-                PingReply reply = ping.Send(host, timeout);
-                return (reply.Status == IPStatus.Success);
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -546,8 +559,87 @@ namespace vcs_Network1
             }
         }
 
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //從FTP下載檔案
+            System.Net.WebClient webClient = new System.Net.WebClient();
+            //下載FTP檔案到指定位置
+            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
+        }
 
+        private void button23_Click(object sender, EventArgs e)
+        {
+            // Download and display the text file.
+            richTextBox1.Clear();
+            richTextBox1.Text += "取得網頁純文字檔...\n";
 
+            const string url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
+            richTextBox1.Text += GetTextFile(url);
+            //richTextBox1.Select(0, 500);  //useless
+        }
 
+        // Get the text file at a given URL.
+        private string GetTextFile(string url)
+        {
+            try
+            {
+                url = url.Trim();
+                if (!url.ToLower().StartsWith("http")) url = "http://" + url;
+                WebClient web_client = new WebClient();
+                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
+                StreamReader reader = new StreamReader(image_stream);
+                string result = reader.ReadToEnd();
+                reader.Close();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error downloading file " +
+                    url + '\n' + ex.Message,
+                    "Download Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            return "";
+        }
+
+        // Return true if a ping to Google works.
+        private bool IsInternetConnected(String host)
+        {
+            return IsInternetConnected(host, 1000);
+        }
+
+        private bool IsInternetConnected(String host, int timeout)
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply reply = ping.Send(host, timeout);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public class MyWebClient : WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri uri)
+            {
+                WebRequest WR = base.GetWebRequest(uri);
+                WR.Timeout = 30 * 1000;     //30秒
+                return WR;
+            }
+        }
+
+        ////.Net C# 讓 WebClient 擁有 Timeout 功能
+        private void button24_Click(object sender, EventArgs e)
+        {
+            MyWebClient MWC = new MyWebClient();
+            string HTML = MWC.DownloadString("http://www.google.com.tw/");
+            richTextBox1.Text += HTML;
+            //Console.WriteLine(HTML);
+        }
     }
 }

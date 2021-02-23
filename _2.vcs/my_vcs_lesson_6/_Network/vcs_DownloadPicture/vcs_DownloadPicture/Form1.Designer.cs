@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureDownload
+﻿namespace vcs_DownloadPicture
 {
     partial class Form1
     {
@@ -60,7 +60,7 @@
             this.Controls.Add(this.wbrApotd);
             this.Controls.Add(this.picApotd);
             this.Name = "Form1";
-            this.Text = "vcs_PictureDownload";
+            this.Text = "vcs_DownloadPicture";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picApotd)).EndInit();
             this.ResumeLayout(false);

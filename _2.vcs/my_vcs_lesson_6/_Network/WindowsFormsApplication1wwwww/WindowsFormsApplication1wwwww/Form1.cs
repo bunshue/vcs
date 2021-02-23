@@ -22,6 +22,12 @@ namespace WindowsFormsApplication1wwwww
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             finished = false;
@@ -90,10 +96,6 @@ namespace WindowsFormsApplication1wwwww
         private void button5_Click(object sender, EventArgs e)
         {
 
-
-
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -104,6 +106,19 @@ namespace WindowsFormsApplication1wwwww
         private void button7_Click(object sender, EventArgs e)
         {
         }
+
+        private void bt_clear1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+
+        }
+
+        private void bt_clear2_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
+
+        }
+
 
     }
 }

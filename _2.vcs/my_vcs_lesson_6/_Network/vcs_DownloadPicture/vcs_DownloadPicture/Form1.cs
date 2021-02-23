@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 
-namespace vcs_PictureDownload
+namespace vcs_DownloadPicture
 {
     public partial class Form1 : Form
     {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureDownload", "vcs_PictureDownload\vcs_PictureDownload.csproj", "{73162C94-F31B-4959-8799-AF33CB1315C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DownloadPicture", "vcs_DownloadPicture\vcs_DownloadPicture.csproj", "{73162C94-F31B-4959-8799-AF33CB1315C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
