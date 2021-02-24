@@ -38,9 +38,9 @@
             // 
             this.btnGo.Location = new System.Drawing.Point(12, 12);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(75, 21);
+            this.btnGo.Size = new System.Drawing.Size(307, 21);
             this.btnGo.TabIndex = 2;
-            this.btnGo.Text = "Go";
+            this.btnGo.Text = "讀取一CSV檔, 並把資料顯示在DataGridView裏";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 

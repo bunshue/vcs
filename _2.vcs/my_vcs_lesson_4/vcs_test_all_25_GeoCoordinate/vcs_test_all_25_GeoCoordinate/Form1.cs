@@ -60,7 +60,7 @@ namespace vcs_test_all_25_GeoCoordinate
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button0_Click(object sender, EventArgs e)

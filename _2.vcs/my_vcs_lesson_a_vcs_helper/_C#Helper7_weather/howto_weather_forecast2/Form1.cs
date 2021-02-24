@@ -35,6 +35,15 @@ namespace howto_weather_forecast2
         // Query codes.
         private string[] QueryCodes = { "q", "zip", "id", };
 
+        /*
+        //若是只查詢代碼為City(q)之條件, 用 q 取代 @QUERY@
+        // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
+        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
+        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        */
+
         // Fill in query types. These should match the QueryCodes.
         private void Form1_Load(object sender, EventArgs e)
         {

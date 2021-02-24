@@ -107,8 +107,8 @@ namespace vcs_ReadWrite_CSV5
         {
             // Make the bitmap.
             Bitmap bm = new Bitmap(
-                picGraph.ClientSize.Width,
-                picGraph.ClientSize.Height);
+                pictureBox1.ClientSize.Width,
+                pictureBox1.ClientSize.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.Clear(Color.White);
@@ -126,12 +126,12 @@ namespace vcs_ReadWrite_CSV5
 
 
                 // Scale and translate the graph.
-                float scale_x = picGraph.ClientSize.Width / (float)price_data.Count;
-                float scale_y = -picGraph.ClientSize.Height / max_price;
+                float scale_x = pictureBox1.ClientSize.Width / (float)price_data.Count;
+                float scale_y = -pictureBox1.ClientSize.Height / max_price;
                 gr.ScaleTransform(scale_x, scale_y);
                 gr.TranslateTransform(
                     0,
-                    picGraph.ClientSize.Height,
+                    pictureBox1.ClientSize.Height,
                     System.Drawing.Drawing2D.MatrixOrder.Append);
 
                 using (Pen thin_pen = new Pen(Color.Gray, 0))
@@ -211,7 +211,7 @@ namespace vcs_ReadWrite_CSV5
             }
 
             // Display the result.
-            picGraph.Image = bm;
+            pictureBox1.Image = bm;
         }
 
         // Draw the text at the specified location.

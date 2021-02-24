@@ -28,58 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picRefresh = new System.Windows.Forms.PictureBox();
-            this.picGraph = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picGraph)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // picRefresh
+            // pictureBox1
             // 
-            this.picRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picRefresh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picRefresh.Image = global::vcs_ReadWrite_CSV5.Properties.Resources.ResetButton;
-            this.picRefresh.Location = new System.Drawing.Point(716, 6);
-            this.picRefresh.Name = "picRefresh";
-            this.picRefresh.Size = new System.Drawing.Size(17, 14);
-            this.picRefresh.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.picRefresh.TabIndex = 7;
-            this.picRefresh.TabStop = false;
-            this.picRefresh.Click += new System.EventHandler(this.picRefresh_Click);
-            // 
-            // picGraph
-            // 
-            this.picGraph.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picGraph.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picGraph.Location = new System.Drawing.Point(12, 12);
-            this.picGraph.Name = "picGraph";
-            this.picGraph.Size = new System.Drawing.Size(715, 358);
-            this.picGraph.TabIndex = 6;
-            this.picGraph.TabStop = false;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 11);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(681, 331);
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 382);
-            this.Controls.Add(this.picRefresh);
-            this.Controls.Add(this.picGraph);
+            this.ClientSize = new System.Drawing.Size(739, 353);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "vcs_ReadWrite_CSV5";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picRefresh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picRefresh;
-        private System.Windows.Forms.PictureBox picGraph;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

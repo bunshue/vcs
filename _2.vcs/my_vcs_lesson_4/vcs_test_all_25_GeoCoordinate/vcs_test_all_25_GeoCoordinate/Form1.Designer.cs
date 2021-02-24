@@ -70,10 +70,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(788, 12);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(721, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(427, 585);
+            this.richTextBox1.Size = new System.Drawing.Size(494, 585);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "1. 加入參考.NET System.Device.dll.\n2. 加 using System.Device.Location;\n\nAssembly:  Sys" +
                 "tem.Device (in System.Device.dll)\nNamespace:   System.Device.Location\n";
@@ -180,9 +180,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(12, 555);
+            this.bt_clear.Location = new System.Drawing.Point(1111, 555);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(217, 42);
+            this.bt_clear.Size = new System.Drawing.Size(74, 42);
             this.bt_clear.TabIndex = 26;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;

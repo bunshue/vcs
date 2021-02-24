@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 
 using System.Xml.Linq;  //for XElement
+// XElement物件預設是以序列的方式處理xml資料，可以直接根據xml資料的階層結構，透過XElement物件建立資料
 
 namespace vcs_ReadWrite_XML7
 {
@@ -19,6 +20,11 @@ namespace vcs_ReadWrite_XML7
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -143,6 +149,94 @@ namespace vcs_ReadWrite_XML7
                 richTextBox1.Text += node.ToString() + "\n";
             }
 
+        }
+
+        //透過XElement建立xml資料
+        private void button4_Click(object sender, EventArgs e)
+        {
+            XElement company =
+new XElement("Company",
+new XElement("Employee",
+new XElement("ID", "001"),
+new XElement("Name", "胖虎")),
+new XElement("Employee",
+new XElement("ID", "002"),
+new XElement("Name", "小夫")
+)
+);
+            richTextBox1.Text += company.ToString();
+
+
+        }
+
+        //建立XML檔案資料
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // Make the XML document.
+            XmlDocument xml_document = new XmlDocument();
+
+            // Make the root element.
+            XmlElement employees_element = xml_document.CreateElement("Employees");
+            xml_document.AppendChild(employees_element);
+
+            // Make some Employee elements.
+            MakeEmployee(employees_element, "Albert", "Anders", 11111);
+            MakeEmployee(employees_element, "Betty", "Beach", 22222);
+            MakeEmployee(employees_element, "Chuck", "Cinder", 33333);
+
+            // Format the XML text.
+            StringWriter string_writer = new StringWriter();
+            XmlTextWriter xml_text_writer = new XmlTextWriter(string_writer);
+            xml_text_writer.Formatting = Formatting.Indented;
+            xml_document.WriteTo(xml_text_writer);
+
+            // Display the result.
+            //txtResult.Text = string_writer.ToString();
+
+            richTextBox1.Text += string_writer.ToString();
+        }
+
+        //開啟XML檔案到TreeView ST
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML6.xml";
+            LoadTreeViewFromXmlFile(filename, treeView1);
+        }
+
+        // Load a TreeView control from an XML file.
+        private void LoadTreeViewFromXmlFile(string filename, TreeView trv)
+        {
+            // Load the XML document.
+            XmlDocument xml_doc = new XmlDocument();
+            xml_doc.Load(filename);
+
+            // Add the root node's children to the TreeView.
+            trv.Nodes.Clear();
+            AddTreeViewChildNodes(trv.Nodes, xml_doc.DocumentElement);
+        }
+
+        // Add the children of this XML node 
+        // to this child nodes collection.
+        private void AddTreeViewChildNodes(TreeNodeCollection parent_nodes, XmlNode xml_node)
+        {
+            foreach (XmlNode child_node in xml_node.ChildNodes)
+            {
+                // Make the new TreeView node.
+                TreeNode new_node = parent_nodes.Add(child_node.Name);
+
+                // Recursively make this node's descendants.
+                AddTreeViewChildNodes(new_node.Nodes, child_node);
+
+                // If this is a leaf node, make sure it's visible.
+                if (new_node.Nodes.Count == 0) new_node.EnsureVisible();
+            }
+        }
+        //開啟XML檔案到TreeView SP
+
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
     }

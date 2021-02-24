@@ -337,7 +337,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(100, 40);
             this.button24.TabIndex = 43;
-            this.button24.Text = "產生驗證圖片";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

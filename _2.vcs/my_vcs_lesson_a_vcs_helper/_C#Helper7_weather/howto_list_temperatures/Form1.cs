@@ -577,10 +577,25 @@ namespace howto_list_temperatures
             richTextBox1.Text += "url : " + url + "\n";
             richTextBox1.Text += GetFormattedXml(url) + "\n";
 
+
             //待解讀
 
         }
 
+        //天氣預測XML解讀
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // Compose the query URL.
+            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
+            richTextBox1.Text += GetFormattedXml(url) + "\n";
+
+
+            //待解讀
+
+        }
+
+        //讀取XML資料 ST
         // Return the XML result of the URL.
         private string GetFormattedXml(string url)
         {
@@ -606,8 +621,7 @@ namespace howto_list_temperatures
                 }
             }
         }
-
-        //即時天氣XML解讀 SP
+        //讀取XML資料 SP
 
 
 
