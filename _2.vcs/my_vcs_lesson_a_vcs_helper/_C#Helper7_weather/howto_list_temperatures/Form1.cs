@@ -12,7 +12,7 @@ using System.Drawing.Drawing2D;     //for SmoothingMode
 using System.Net;
 using System.Xml;
 using System.IO;
-
+using System.Globalization;
 
 /* example
 搜尋城市：Hsinchu
@@ -43,6 +43,12 @@ namespace howto_list_temperatures
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            comboBox1.Items.Add("City");
+            comboBox1.Items.Add("ZIP");
+            comboBox1.Items.Add("ID");
+
+            comboBox1.SelectedIndex = 0;
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -56,6 +62,24 @@ namespace howto_list_temperatures
         private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
         //天氣預測
         private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+
+        // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
+        private const string CurrentUrl2 = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
+        private const string ForecastUrl2 = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+
+        // Query codes.
+        private string[] QueryCodes = { "q", "zip", "id", };
+
+        /*
+        //若是只查詢代碼為City(q)之條件, 用 q 取代 @QUERY@
+        // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
+        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
+        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        */
 
         // List the temperature forecast.
         private void btnForecast_Click(object sender, EventArgs e)
@@ -622,6 +646,103 @@ namespace howto_list_temperatures
             }
         }
         //讀取XML資料 SP
+
+
+        // Get a forecast.
+        private void button5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "查詢型態 : " + comboBox1.Text + "\t代碼 : " + QueryCodes[comboBox1.SelectedIndex] + "\n";
+
+            // Compose the query URL.
+            string url = ForecastUrl2.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
+            url = url.Replace("@QUERY@", QueryCodes[comboBox1.SelectedIndex]);
+            richTextBox1.Text += "url : " + url + "\n";
+
+            // Create a web client.
+            using (WebClient client = new WebClient())
+            {
+                // Get the response string from the URL.
+                try
+                {
+                    DisplayForecast(client.DownloadString(url));
+                }
+                catch (WebException ex)
+                {
+                    DisplayError(ex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\n" + ex.Message);
+                }
+            }
+        }
+
+        // Display the forecast.
+        private void DisplayForecast(string xml)
+        {
+            //richTextBox1.Text += xml + "\n\n";
+            // Load the response into an XML document.
+            XmlDocument xml_doc = new XmlDocument();
+            xml_doc.LoadXml(xml);
+
+            // Get the city, country, latitude, and longitude.
+            XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
+            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
+            richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
+            XmlNode geo_node = loc_node.SelectSingleNode("location");
+            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
+            txtLong.Text = geo_node.Attributes["longitude"].Value;
+            richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
+            txtId.Text = geo_node.Attributes["geobaseid"].Value;
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
+
+            listView1.Items.Clear();
+            char degrees = (char)176;
+
+            foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
+            {
+                // Get the time in UTC.
+                DateTime time =
+                    DateTime.Parse(time_node.Attributes["from"].Value,
+                        null, DateTimeStyles.AssumeUniversal);
+
+                // Get the temperature.
+                XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                string temp = temp_node.Attributes["value"].Value;
+
+                ListViewItem item = listView1.Items.Add(time.DayOfWeek.ToString());
+                item.SubItems.Add(time.ToShortTimeString());
+
+
+                item.SubItems.Add(temp + " " + degrees + "F");
+                richTextBox1.Text += temp + "\n";
+
+                //item.SubItems.Add(temp.ToString("0.00"));
+                item.SubItems.Add(((float.Parse(temp) - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+
+            }
+        }
+
+        // Display an error message.
+        private void DisplayError(WebException exception)
+        {
+            try
+            {
+                StreamReader reader = new StreamReader(exception.Response.GetResponseStream());
+                XmlDocument response_doc = new XmlDocument();
+                response_doc.LoadXml(reader.ReadToEnd());
+                XmlNode message_node = response_doc.SelectSingleNode("//message");
+                MessageBox.Show(message_node.InnerText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unknown error\n" + ex.Message);
+            }
+        }
 
 
 

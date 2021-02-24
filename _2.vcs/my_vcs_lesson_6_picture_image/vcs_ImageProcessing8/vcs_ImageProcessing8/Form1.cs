@@ -37,6 +37,7 @@ namespace vcs_ImageProcessing8
         // Invert the image without Lockbits.
         private void btnNoLockBits_Click(object sender, EventArgs e)
         {
+            const byte BYTE_255 = 255;
             Bitmap bm = new Bitmap(pictureBox0.Image);
             Cursor = Cursors.WaitCursor;
             Stopwatch watch = new Stopwatch();
@@ -44,16 +45,17 @@ namespace vcs_ImageProcessing8
 
             for (int trial = 0; trial < NUM_TRIALS; trial++)
             {
-                for (int Y = 0; Y < bm.Height; Y++)
+                // Invert the pixels.
+                byte red, green, blue, alpha;
+                for (int y = 0; y < bm.Height; y++)
                 {
-                    for (int X = 0; X < bm.Width; X++)
+                    for (int x = 0; x < bm.Width; x++)
                     {
-                        Color clr = bm.GetPixel(X, Y);
-                        clr = Color.FromArgb(
-                            255 - clr.R,
-                            255 - clr.G,
-                            255 - clr.B);
-                        bm.SetPixel(X, Y, clr);
+                        Color clr = bm.GetPixel(x, y);
+                        red = (byte)(BYTE_255 - clr.R);
+                        green = (byte)(BYTE_255 - clr.G);
+                        blue = (byte)(BYTE_255 - clr.B);
+                        bm.SetPixel(x, y, Color.FromArgb(red, green, blue));
                     }
                 }
             }

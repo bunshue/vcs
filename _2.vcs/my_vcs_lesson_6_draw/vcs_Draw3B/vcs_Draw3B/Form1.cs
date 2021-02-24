@@ -48,8 +48,6 @@ namespace vcs_Draw3B
 
             richTextBox1.Location = new Point(x_st + dx * 0 - 200, y_st + dy * 12);
             richTextBox1.Size = new Size(300, 320);
-
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -114,7 +112,7 @@ namespace vcs_Draw3B
             int cy = H / 2;
             int dx;
             int dy;
-            for (int i = 0; i < 360*3; i += 10)
+            for (int i = 0; i < 360 * 3; i += 10)
             {
                 dx = (int)(r * Math.Cos(i * Math.PI / 180));
                 dy = (int)(r * Math.Sin(i * Math.PI / 180));
@@ -123,9 +121,11 @@ namespace vcs_Draw3B
                 DrawPoint(g, cx, cy, 5, Color.Red);
                 delay(20);
                 if ((i % 100) == 0)
+                {
                     r += 5;
+                }
             }
-            g.DrawLine(Pens.Red, 0, 0, 100, 100);
+            //g.DrawLine(Pens.Red, 0, 0, 100, 100);
         }
         private void DrawPoint(Graphics g, int cx, int cy, int size, Color c)
         {
@@ -250,13 +250,14 @@ namespace vcs_Draw3B
         int radius = 50;
         private void timer_draw_star_Tick(object sender, EventArgs e)
         {
+            gs.Clear(Color.White);
             int linewidth = 5;
             Point center = new Point();
 
             center = new Point(pictureBox_star.Width / 2, pictureBox_star.Height / 2);
             DrawStar(gs, center, radius, linewidth, Color.Red);
-            radius += 10;
-            if (radius > 100)
+            radius += 5;
+            if (radius > 120)
             {
                 gs.Clear(Color.White);
                 radius = 50;
@@ -301,7 +302,7 @@ namespace vcs_Draw3B
 
                 //g.DrawEllipse(Pens.Red, pt[i].X, pt[i].Y, 5, 5);
             }
-            g.DrawLines(new Pen(Brushes.Red, linewidth), pt);
+            g.DrawPolygon(new Pen(Brushes.Red, linewidth), pt);
 
             //Dispose of the pen.
             p.Dispose();

@@ -43,6 +43,18 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtLong = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtLat = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCountry = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCity = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -180,12 +192,128 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(697, 391);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(110, 20);
+            this.comboBox1.TabIndex = 32;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(822, 390);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(90, 21);
+            this.button5.TabIndex = 33;
+            this.button5.Text = "天氣預測";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(736, 480);
+            this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = true;
+            this.txtId.Size = new System.Drawing.Size(100, 22);
+            this.txtId.TabIndex = 43;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(692, 483);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(20, 12);
+            this.label7.TabIndex = 42;
+            this.label7.Text = "ID:";
+            // 
+            // txtLong
+            // 
+            this.txtLong.Location = new System.Drawing.Point(911, 456);
+            this.txtLong.Name = "txtLong";
+            this.txtLong.ReadOnly = true;
+            this.txtLong.Size = new System.Drawing.Size(100, 22);
+            this.txtLong.TabIndex = 41;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(867, 459);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 12);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "經度 :";
+            // 
+            // txtLat
+            // 
+            this.txtLat.Location = new System.Drawing.Point(736, 456);
+            this.txtLat.Name = "txtLat";
+            this.txtLat.ReadOnly = true;
+            this.txtLat.Size = new System.Drawing.Size(100, 22);
+            this.txtLat.TabIndex = 39;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(692, 459);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 38;
+            this.label6.Text = "緯度 :";
+            // 
+            // txtCountry
+            // 
+            this.txtCountry.Location = new System.Drawing.Point(911, 432);
+            this.txtCountry.Name = "txtCountry";
+            this.txtCountry.ReadOnly = true;
+            this.txtCountry.Size = new System.Drawing.Size(100, 22);
+            this.txtCountry.TabIndex = 37;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(867, 435);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "國家 :";
+            // 
+            // txtCity
+            // 
+            this.txtCity.Location = new System.Drawing.Point(736, 432);
+            this.txtCity.Name = "txtCity";
+            this.txtCity.ReadOnly = true;
+            this.txtCity.Size = new System.Drawing.Size(100, 22);
+            this.txtCity.TabIndex = 35;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(692, 435);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "城市 :";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnForecast;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 611);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtLong);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtLat);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtCountry);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtCity);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -223,6 +351,18 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtLong;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtLat;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtCountry;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCity;
+        private System.Windows.Forms.Label label3;
     }
 }
 

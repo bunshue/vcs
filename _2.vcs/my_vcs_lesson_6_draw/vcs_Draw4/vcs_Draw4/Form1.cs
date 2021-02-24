@@ -94,7 +94,6 @@ namespace vcs_Draw4
 	            new Rectangle(300, 200, 300, 300)
             };
             g.DrawRectangles(p, walls);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -113,7 +112,6 @@ namespace vcs_Draw4
                 new Point(150, 120),
                 new Point(20, 60) };
             g.DrawPolygon(p, myPointArray);
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -139,7 +137,7 @@ namespace vcs_Draw4
             String drawString = "江山如畫一時多少豪傑";
 
             // Create font and brush.
-            Font drawFont = new Font("標楷體", 36, FontStyle.Italic|FontStyle.Underline|FontStyle.Strikeout);
+            Font drawFont = new Font("標楷體", 36, FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout);
             SolidBrush drawBrush = new SolidBrush(Color.Black);
 
             // Create point for upper-left corner of drawing.
@@ -147,7 +145,6 @@ namespace vcs_Draw4
 
             // Draw string to screen.
             g.DrawString(drawString, drawFont, drawBrush, drawPoint);
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -338,7 +335,7 @@ namespace vcs_Draw4
                 //g.FillEllipse(sb, Control.MousePosition.X, Control.MousePosition.Y, Control.MousePosition.X + 10, Control.MousePosition.Y + 10);
 
 
-        }
+            }
             else
                 label2.Text = "0";
         }
@@ -415,7 +412,5 @@ new Point(50, 30)};
             //Draw the path to the screen.
             g.FillPath(Brushes.Black, myPath);
         }
-
-
     }
 }
