@@ -122,8 +122,24 @@ namespace vcs_WMI_Win32_SerialPort
             }
         }
 
+        // C# 使用win32 API 取得連接埠裝置名稱
         private void button4_Click(object sender, EventArgs e)
         {
+            using (var searcher = new ManagementObjectSearcher("SELECT * FROM WIN32_SerialPort"))
+            {
+                //使用ManagementObjectSearcher來查詢註冊表中的裝置名稱
+                var ports = searcher.Get().Cast<ManagementBaseObject>().ToList();//取得所有ManagementBaseObject並轉成List
+                string[] PortsName = new string[ports.Count];
+                richTextBox1.Text += "len = " + PortsName.Length.ToString() + "\n";
+                richTextBox1.Text += "len = " + ports.Count.ToString() + "\n";
+                for (int i = 0; i < ports.Count; i++)
+                {
+                    PortsName[i] = ports[i]["DeviceID"] as string + "-" + ports[i]["Caption"] as string;    //取得裝置名稱與連接埠
+                }
+
+                richTextBox1.Text += string.Join("\r\n", PortsName) + "\n";
+            }
+
         }
     }
 }

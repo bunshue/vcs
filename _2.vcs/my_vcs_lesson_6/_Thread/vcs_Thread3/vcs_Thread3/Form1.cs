@@ -28,8 +28,7 @@ namespace vcs_Thread3
         {
             // Make a new counter object.
             Counter new_counter = new Counter(this, thread_num);
-            richTextBox1.Text += "create thread " + thread_num.ToString() + "\n";
-
+            richTextBox1.Text += "開啟thread, 編號 " + thread_num.ToString() + "\n";
             thread_num++;
 
             // Make a thread to run the object's Run method.
@@ -109,7 +108,7 @@ namespace vcs_Thread3
                         {
                             // Make an array containing the parameters
                             // to pass to the method.
-                            string[] args = new string[] { "Thread : " + Number + ", Global count : " + MyForm.Value };
+                            string[] args = new string[] { "Thread : " + Number + ", 數字 : " + MyForm.Value };
 
                             // Invoke the delegate.
                             MyForm.Invoke(DisplayValueDelegate, args);
@@ -120,8 +119,7 @@ namespace vcs_Thread3
             catch (Exception ex)
             {
                 // An unexpected error.
-                Console.WriteLine("Unexpected error in thread " +
-                    Number + "\r\n" + ex.Message);
+                Console.WriteLine("Unexpected error in thread " + Number + "\r\n" + ex.Message);
             }
         }
     }

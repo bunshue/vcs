@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>7.10.3077</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{308687AD-3668-4856-A4CB-C31D363F7997}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>Direct3DTest</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Direct3DTest</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>0.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX">
+      <Name>Microsoft.DirectX</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.dll</HintPath>
+      <AssemblyFolderKey>hklm\current managed directx 9.1</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback">
+      <Name>Microsoft.DirectX.AudioVideoPlayback</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3D">
+      <Name>Microsoft.DirectX.Direct3D</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3D.dll</HintPath>
+      <AssemblyFolderKey>hklm\current managed directx 9.1</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.Direct3DX">
+      <Name>Microsoft.DirectX.Direct3DX</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.Direct3DX.dll</HintPath>
+      <AssemblyFolderKey>hklm\current managed directx 9.1</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput">
+      <Name>Microsoft.DirectX.DirectInput</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.DirectInput.dll</HintPath>
+      <AssemblyFolderKey>hklm\current managed directx 9.1</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectPlay">
+      <Name>Microsoft.DirectX.DirectPlay</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.DirectPlay.dll</HintPath>
+      <AssemblyFolderKey>hklm\current managed directx 9.1</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectSound">
+      <Name>Microsoft.DirectX.DirectSound</Name>
+      <HintPath>..\..\..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.1126\Microsoft.DirectX.DirectSound.dll</HintPath>
+      <AssemblyFolderKey>hklm\current managed directx 9.1</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="System">
+      <Name>system</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="audio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="d3dapp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="d3denumeration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="d3dfont.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="D3DMesh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="D3DSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="d3dutil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="dinput.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="dplay.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_AddressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_CreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_JoinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_ServiceProviderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DXUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Content Include="readme.txt" />
+    <EmbeddedResource Include="D3DMesh.resx">
+      <DependentUpon>D3DMesh.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

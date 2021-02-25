@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>7.10.3077</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{747A57B1-88CF-4E87-99FD-021160A7DF35}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>Spacewar2</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Spacewar2</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject />
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>0.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>.\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.DirectX">
+      <Name>Microsoft.DirectX</Name>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback">
+      <Name>Microsoft.DirectX.AudioVideoPlayback</Name>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectDraw">
+      <Name>Microsoft.DirectX.DirectDraw</Name>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.DirectDraw.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput">
+      <Name>Microsoft.DirectX.DirectInput</Name>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.DirectInput.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectPlay">
+      <Name>Microsoft.DirectX.DirectPlay</Name>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.DirectPlay.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectSound">
+      <Name>Microsoft.DirectX.DirectSound</Name>
+      <HintPath>..\..\..\WINDOWS\Microsoft.NET\Managed DirectX\v9.00.0900\Microsoft.DirectX.DirectSound.dll</HintPath>
+      <AssemblyFolderKey>hklm\managed directx 9.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="System">
+      <Name>system</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Constants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="dinput.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="dplay.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_AddressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_CreateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_JoinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DPlayConnect_ServiceProviderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DXUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="font.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FontDraw.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameClass.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameParamUpdateStruct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameStates.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelpScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Letter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LetterVector.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Line.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LocalPlayerStruct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyPointF.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PlayerUpdateStruct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RemotePlayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RotatableShape.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shape.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Ship.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ShipState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Shots.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ShotUpdateStruct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SoundBuffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SoundHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sounds.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Star.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stars.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sun.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Word.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Content Include="Media\dude_quest1.wav" />
+    <Content Include="Media\dude_quest2.wav" />
+    <Content Include="Media\dude_quest3.wav" />
+    <Content Include="Media\dude_quest4.wav" />
+    <Content Include="Media\dude_quest5.wav" />
+    <Content Include="Media\dude_quest6.wav" />
+    <Content Include="Media\engine.wav" />
+    <Content Include="Media\engine_other.wav" />
+    <Content Include="Media\explode.wav" />
+    <Content Include="Media\explode_other.wav" />
+    <Content Include="Media\Haha.wav" />
+    <Content Include="Media\Help.txt" />
+    <Content Include="Media\hypercharge.wav" />
+    <Content Include="Media\laser2.wav" />
+    <Content Include="Media\laser2_other.wav" />
+    <Content Include="Media\sci fi bass.wav" />
+    <EmbeddedResource Include="DPlayConnect_AddressForm.resx">
+      <DependentUpon>DPlayConnect_AddressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DPlayConnect_CreateForm.resx">
+      <DependentUpon>DPlayConnect_CreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DPlayConnect_JoinForm.resx">
+      <DependentUpon>DPlayConnect_JoinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DPlayConnect_ServiceProviderForm.resx">
+      <DependentUpon>DPlayConnect_ServiceProviderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameSettings.resx">
+      <DependentUpon>GameSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpScreen.resx">
+      <DependentUpon>HelpScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Media\splash.png" />
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

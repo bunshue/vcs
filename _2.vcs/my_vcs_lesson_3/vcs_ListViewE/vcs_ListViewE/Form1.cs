@@ -25,7 +25,7 @@ namespace vcs_ListViewE
         {
             // Create a new ListView control.
             ListView listView1 = new ListView();
-            listView1.Bounds = new Rectangle(new Point(50, 50), new Size(600, 400));
+            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(600, 400));
 
             // Set the view to show details.
             listView1.View = View.Details;

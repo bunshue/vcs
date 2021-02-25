@@ -291,6 +291,12 @@ namespace vcs_Network3_Weather
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            listView1.Items.Clear();
+            txtCity.Text = "";
+            txtCountry.Text = "";
+            txtLat.Text = "";
+            txtLong.Text = "";
+            txtId.Text = "";
         }
 
         // Display a histogram.
@@ -599,11 +605,27 @@ namespace vcs_Network3_Weather
             // Compose the query URL.
             string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
-            richTextBox1.Text += GetFormattedXml(url) + "\n";
 
+            richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
-            //待解讀
-
+            // 解讀 fail
+            // Create a web client.
+            using (WebClient client = new WebClient())
+            {
+                // Get the response string from the URL.
+                try
+                {
+                    //DisplayForecast(client.DownloadString(url));    //抓資料 並 解讀 fail
+                }
+                catch (WebException ex)
+                {
+                    DisplayError(ex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\n" + ex.Message);
+                }
+            }
         }
 
         //天氣預測XML解讀
@@ -612,10 +634,27 @@ namespace vcs_Network3_Weather
             // Compose the query URL.
             string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
-            richTextBox1.Text += GetFormattedXml(url) + "\n";
 
+            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
-            //待解讀
+            // Create a web client.
+            using (WebClient client = new WebClient())
+            {
+                // Get the response string from the URL.
+                try
+                {
+                    DisplayForecast(client.DownloadString(url));    //抓資料 並 解讀
+                }
+                catch (WebException ex)
+                {
+                    DisplayError(ex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\n" + ex.Message);
+                }
+            }
+
 
         }
 
@@ -659,13 +698,15 @@ namespace vcs_Network3_Weather
             url = url.Replace("@QUERY@", QueryCodes[comboBox1.SelectedIndex]);
             richTextBox1.Text += "url : " + url + "\n";
 
+            richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
+
             // Create a web client.
             using (WebClient client = new WebClient())
             {
                 // Get the response string from the URL.
                 try
                 {
-                    DisplayForecast(client.DownloadString(url));
+                    DisplayForecast(client.DownloadString(url));    //抓資料 並 解讀
                 }
                 catch (WebException ex)
                 {
