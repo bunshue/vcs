@@ -29,7 +29,7 @@ data
 <time from="2021-02-10T15:00:00" to="2021-02-10T18:00:00"><symbol number="500" name="light rain" var="10n"></symbol><precipitation probability="1" unit="3h" value="1.87" type="rain"></precipitation><windDirection deg="239" code="WSW" name="West-southwest"></windDirection><windSpeed mps="7.23" unit="mph" name="Light breeze"></windSpeed><temperature unit="fahrenheit" value="64.85" min="64.85" max="65.35"></temperature><feels_like value="65.01" unit="fahrenheit"></feels_like><pressure unit="hPa" value="1010"></pressure><humidity value="92" unit="%"></humidity><clouds value="overcast clouds" all="98" 
 */
 
-namespace howto_list_temperatures
+namespace vcs_Network3_Weather
 {
     public partial class Form1 : Form
     {

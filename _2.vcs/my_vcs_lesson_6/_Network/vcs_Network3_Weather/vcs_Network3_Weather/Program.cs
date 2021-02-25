@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace howto_list_temperatures
+namespace vcs_Network3_Weather
 {
     static class Program
     {

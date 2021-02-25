@@ -215,13 +215,13 @@ namespace vcs_Draw9_Example
         {
             // Size the bitmap.
             Bitmap bm = new Bitmap(width, width);
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.TextRenderingHint = TextRenderingHint.AntiAlias;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
                 // Make the background transparent.
-                gr.Clear(Color.Transparent);
+                g.Clear(Color.Transparent);
 
                 // Fill the background.
                 Rectangle rect;
@@ -241,7 +241,7 @@ namespace vcs_Draw9_Example
                 }
                 using (LinearGradientBrush bg_brush = new LinearGradientBrush(rect, Color.White, bg_color, LinearGradientMode.BackwardDiagonal))
                 {
-                    gr.FillEllipse(bg_brush, rect);
+                    g.FillEllipse(bg_brush, rect);
                 }
 
                 if (border_size == 0)
@@ -251,7 +251,7 @@ namespace vcs_Draw9_Example
                     {
                         using (Pen bg_pen = new Pen(bg_color))
                         {
-                            gr.DrawEllipse(bg_pen, rect);
+                            g.DrawEllipse(bg_pen, rect);
                         }
                     }
                 }
@@ -262,7 +262,7 @@ namespace vcs_Draw9_Example
                     Rectangle inner_rect = new Rectangle(margin + border_size, margin + border_size, rect_width, rect_width);
                     using (LinearGradientBrush bg_brush = new LinearGradientBrush(inner_rect, bg_color, Color.White, LinearGradientMode.BackwardDiagonal))
                     {
-                        gr.FillEllipse(bg_brush, inner_rect);
+                        g.FillEllipse(bg_brush, inner_rect);
                     }
                 }
 
@@ -273,7 +273,7 @@ namespace vcs_Draw9_Example
                     string_format.LineAlignment = StringAlignment.Center;
                     using (Brush fg_brush = new SolidBrush(fg_color))
                     {
-                        gr.DrawString(txt, fg_font, fg_brush, rect, string_format);
+                        g.DrawString(txt, fg_font, fg_brush, rect, string_format);
                     }
                 }
             }
@@ -1245,7 +1245,7 @@ namespace vcs_Draw9_Example
         }
 
         // Draw a star.
-        private void DrawStar(Graphics gr, int? point_count,
+        private void DrawStar(Graphics g, int? point_count,
             int? skip_count, Rectangle bounds, Pen pen, Brush brush)
         {
             int num_points = (point_count.HasValue) ? point_count.Value : 5;
@@ -1256,10 +1256,10 @@ namespace vcs_Draw9_Example
                 -Math.PI / 2, num_points, num_skip, bounds);
 
             // Fill the star.
-            if (brush != null) gr.FillPolygon(brush, points);
+            if (brush != null) g.FillPolygon(brush, points);
 
             // Draw the star.
-            if (pen != null) gr.DrawPolygon(pen, points);
+            if (pen != null) g.DrawPolygon(pen, points);
         }
 
         // Generate the points for a star.
@@ -4792,12 +4792,12 @@ namespace vcs_Draw9_Example
         }
 
         // Draw a pie chart.
-        private static void DrawLabeledPieChart(Graphics gr, Rectangle rect, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string label_format, Font label_font, Brush label_brush)
+        private static void DrawLabeledPieChart(Graphics g, Rectangle rect, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string label_format, Font label_font, Brush label_brush)
         {
             // Get the total of all angles.
             float total = values.Sum();
 
-            gr.DrawRectangle(new Pen(Color.Red, 3), rect);
+            g.DrawRectangle(new Pen(Color.Red, 3), rect);
 
             // Draw the slices.
             float start_angle = initial_angle;
@@ -4806,8 +4806,8 @@ namespace vcs_Draw9_Example
                 float sweep_angle = values[i] * 360f / total;
 
                 // Fill and outline the pie slice.
-                gr.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
-                gr.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
+                g.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
+                g.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
 
                 start_angle += sweep_angle;
             }
@@ -4837,7 +4837,7 @@ namespace vcs_Draw9_Example
                     double label_angle = Math.PI * (start_angle + sweep_angle / 2f) / 180f;
                     float x = cx + (float)(radius * Math.Cos(label_angle));
                     float y = cy + (float)(radius * Math.Sin(label_angle));
-                    gr.DrawString(values[i].ToString(label_format),
+                    g.DrawString(values[i].ToString(label_format),
                         label_font, label_brush, x, y, string_format);
 
                     start_angle += sweep_angle;
@@ -4938,7 +4938,7 @@ namespace vcs_Draw9_Example
         }
 
         // Draw a pie chart.
-        private static void DrawAnnotatedPieChart(Graphics gr, Rectangle ellipse_rect, Rectangle left_rect, Rectangle right_rect, float annotation_radius_scale, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string[] annotations, string label_format, Font label_font, Brush label_brush, Font annotation_font, Pen annotation_pen, Brush annotation_brush, Brush rectangle_brush, Pen rectangle_pen)
+        private static void DrawAnnotatedPieChart(Graphics g, Rectangle ellipse_rect, Rectangle left_rect, Rectangle right_rect, float annotation_radius_scale, float initial_angle, Brush[] brushes, Pen[] pens, float[] values, string[] annotations, string label_format, Font label_font, Brush label_brush, Font annotation_font, Pen annotation_pen, Brush annotation_brush, Brush rectangle_brush, Pen rectangle_pen)
         {
             // Get the total of all angles.
             float total = values.Sum();
@@ -4950,8 +4950,8 @@ namespace vcs_Draw9_Example
                 float sweep_angle = values[i] * 360f / total;
 
                 // Fill and outline the pie slice.
-                gr.FillPie(brushes[i % brushes.Length], ellipse_rect, start_angle, sweep_angle);
-                gr.DrawPie(pens[i % pens.Length], ellipse_rect, start_angle, sweep_angle);
+                g.FillPie(brushes[i % brushes.Length], ellipse_rect, start_angle, sweep_angle);
+                g.DrawPie(pens[i % pens.Length], ellipse_rect, start_angle, sweep_angle);
 
                 start_angle += sweep_angle;
             }
@@ -4959,13 +4959,13 @@ namespace vcs_Draw9_Example
             // Draw the rectangles if desired.
             if (rectangle_brush != null)
             {
-                gr.FillRectangle(rectangle_brush, left_rect);
-                gr.FillRectangle(rectangle_brush, right_rect);
+                g.FillRectangle(rectangle_brush, left_rect);
+                g.FillRectangle(rectangle_brush, right_rect);
             }
             if (rectangle_pen != null)
             {
-                gr.DrawRectangle(rectangle_pen, left_rect);
-                gr.DrawRectangle(rectangle_pen, right_rect);
+                g.DrawRectangle(rectangle_pen, left_rect);
+                g.DrawRectangle(rectangle_pen, right_rect);
             }
 
             // Label and annotate the slices.
@@ -4997,7 +4997,7 @@ namespace vcs_Draw9_Example
                     double label_angle = Math.PI * (start_angle + sweep_angle / 2) / 180;
                     float x = cx + (float)(radius * Math.Cos(label_angle));
                     float y = cy + (float)(radius * Math.Sin(label_angle));
-                    gr.DrawString(values[i].ToString(label_format),
+                    g.DrawString(values[i].ToString(label_format),
                         label_font, label_brush, x, y, string_format);
 
                     // Draw a radial line to connect to the annotation.
@@ -5005,27 +5005,27 @@ namespace vcs_Draw9_Example
                     float y1 = cy + (float)(annotation_rx1 * Math.Sin(label_angle));
                     float x2 = cx + (float)(annotation_rx2 * Math.Cos(label_angle));
                     float y2 = cy + (float)(annotation_rx2 * Math.Sin(label_angle));
-                    gr.DrawLine(annotation_pen, x1, y1, x2, y2);
+                    g.DrawLine(annotation_pen, x1, y1, x2, y2);
 
                     // Draw a horizontal line to the annotation.
                     if (x2 < x1)
                     {
                         // Draw to the left.
-                        gr.DrawLine(annotation_pen, x2, y2, left_rect.Right, y2);
+                        g.DrawLine(annotation_pen, x2, y2, left_rect.Right, y2);
 
                         // Draw the annotation right justified.
                         string_format.Alignment = StringAlignment.Far;
-                        gr.DrawString(annotations[i], annotation_font, annotation_brush,
+                        g.DrawString(annotations[i], annotation_font, annotation_brush,
                             left_rect.Right, y2, string_format);
                     }
                     else
                     {
                         // Draw to the right.
-                        gr.DrawLine(annotation_pen, x2, y2, right_rect.Left, y2);
+                        g.DrawLine(annotation_pen, x2, y2, right_rect.Left, y2);
 
                         // Draw the annotation left justified.
                         string_format.Alignment = StringAlignment.Near;
-                        gr.DrawString(annotations[i], annotation_font, annotation_brush,
+                        g.DrawString(annotations[i], annotation_font, annotation_brush,
                             right_rect.Left, y2, string_format);
                     }
 
@@ -5473,7 +5473,7 @@ namespace vcs_Draw9_Example
         }
 
         // Draw a pie chart.
-        private static void DrawPieChart(Graphics gr, Rectangle rect, Brush[] brushes, Pen[] pens, float[] values)
+        private static void DrawPieChart(Graphics g, Rectangle rect, Brush[] brushes, Pen[] pens, float[] values)
         {
             // Get the total of all angles.
             float total = values.Sum();
@@ -5483,8 +5483,8 @@ namespace vcs_Draw9_Example
             for (int i = 0; i < values.Length; i++)
             {
                 float sweep_angle = values[i] * 360f / total;
-                gr.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
-                gr.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
+                g.FillPie(brushes[i % brushes.Length], rect, start_angle, sweep_angle);
+                g.DrawPie(pens[i % pens.Length], rect, start_angle, sweep_angle);
                 start_angle += sweep_angle;
             }
         }
@@ -5800,9 +5800,9 @@ namespace vcs_Draw9_Example
         private Bitmap DrawHeart(int width, int height)
         {
             Bitmap bm = new Bitmap(width, height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
 
                 // Generate the points.
                 const int num_points = 100;
@@ -5840,24 +5840,24 @@ namespace vcs_Draw9_Example
                 //SetTransformationWithoutDisortion(gr, world_rect, device_rect, false, true);
 
                 // Draw the curve.
-                gr.FillPolygon(Brushes.Pink, points.ToArray());
+                g.FillPolygon(Brushes.Pink, points.ToArray());
                 using (Pen pen = new Pen(Color.Red, 0))
                 {
-                    gr.DrawPolygon(pen, points.ToArray());
+                    g.DrawPolygon(pen, points.ToArray());
 
                     // Draw a rectangle around the coordinate bounds.
                     pen.Color = Color.Red;
-                    gr.DrawRectangle(pen, Rectangle.Round(world_rect));
+                    g.DrawRectangle(pen, Rectangle.Round(world_rect));
 
                     int ratio = 20;
                     // Draw the X and Y axes.
                     pen.Color = Color.Green;
-                    gr.DrawLine(pen, -20 * ratio, 0, 20 * ratio, 0);
-                    gr.DrawLine(pen, 0, -20 * ratio, 0, 20 * ratio);
+                    g.DrawLine(pen, -20 * ratio, 0, 20 * ratio, 0);
+                    g.DrawLine(pen, 0, -20 * ratio, 0, 20 * ratio);
                     for (int x = -20; x <= 20; x++)
-                        gr.DrawLine(pen, x * ratio, -0.3f * ratio, x * ratio, 0.3f * ratio);
+                        g.DrawLine(pen, x * ratio, -0.3f * ratio, x * ratio, 0.3f * ratio);
                     for (int y = -20; y <= 20; y++)
-                        gr.DrawLine(pen, -0.3f * ratio, y * ratio, 0.3f * ratio, y * ratio);
+                        g.DrawLine(pen, -0.3f * ratio, y * ratio, 0.3f * ratio, y * ratio);
                 }
             }
             return bm;
@@ -5869,6 +5869,7 @@ namespace vcs_Draw9_Example
             double sin_t = Math.Sin(t);
             return (float)(16 * sin_t * sin_t * sin_t);
         }
+
         private float Y(float t)
         {
             return (float)(13 * Math.Cos(t) - 5 * Math.Cos(2 * t) - 2 * Math.Cos(3 * t) - Math.Cos(4 * t));
@@ -5899,7 +5900,7 @@ namespace vcs_Draw9_Example
         }
 
         // Draw a gear.
-        private void DrawGear(Graphics gr, Brush axle_brush, Brush gear_brush, Pen gear_pen, PointF center, float radius, float tooth_length, int num_teeth, float axle_radius, bool start_with_tooth)
+        private void DrawGear(Graphics g, Brush axle_brush, Brush gear_brush, Pen gear_pen, PointF center, float radius, float tooth_length, int num_teeth, float axle_radius, bool start_with_tooth)
         {
             float dtheta = (float)(Math.PI / num_teeth);
             float dtheta_degrees = (float)(dtheta * 180 / Math.PI);     // dtheta in degrees.
@@ -5941,9 +5942,9 @@ namespace vcs_Draw9_Example
             path.CloseFigure();
 
             // Draw the gear.
-            gr.FillPath(gear_brush, path);
-            gr.DrawPath(gear_pen, path);
-            gr.FillEllipse(axle_brush,
+            g.FillPath(gear_brush, path);
+            g.DrawPath(gear_pen, path);
+            g.FillEllipse(axle_brush,
                 center.X - axle_radius, center.Y - axle_radius,
                 2 * axle_radius, 2 * axle_radius);
         }

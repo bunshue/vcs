@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_list_temperatures.Properties {
+namespace vcs_Network3_Weather.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

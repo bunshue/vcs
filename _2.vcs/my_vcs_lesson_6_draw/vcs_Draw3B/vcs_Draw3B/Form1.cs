@@ -299,10 +299,10 @@ namespace vcs_Draw3B
                 richTextBox1.Text += "pt[" + i.ToString() + "].X " + pt[i].X.ToString() + "\t" + "pt[" + i.ToString() + "].Y " + pt[i].Y.ToString() + "\n";
                 pt[i].X += center.X;
                 pt[i].Y += center.Y;
-
-                //g.DrawEllipse(Pens.Red, pt[i].X, pt[i].Y, 5, 5);
             }
-            g.DrawPolygon(new Pen(Brushes.Red, linewidth), pt);
+
+            g.DrawPolygon(new Pen(Brushes.Red, linewidth), pt);     //空心星形
+            //g.FillPolygon(Brushes.Blue, pt);                      //實心星形
 
             //Dispose of the pen.
             p.Dispose();
@@ -512,12 +512,12 @@ namespace vcs_Draw3B
             int hh = 70;
 
             Bitmap vaildNumImage = new Bitmap(ww, hh);
-            Graphics gg = Graphics.FromImage(vaildNumImage);
+            Graphics g = Graphics.FromImage(vaildNumImage);
 
             //產生背景色
             Color cc = Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256));
             Brush bb = new SolidBrush(cc);
-            gg.FillRectangle(bb, 0, 0, ww, hh);
+            g.FillRectangle(bb, 0, 0, ww, hh);
 
             //產生字色，斥掉背景色
             bb = new SolidBrush(Color.FromArgb(cc.R ^ 255, cc.G ^ 255, cc.B ^ 255));
@@ -527,15 +527,15 @@ namespace vcs_Draw3B
 
             for (int i = 0; i < vaildNumAnswer.Length; i++)
             {
-                gg.DrawString(vaildNumAnswer.Substring(i, 1), ff, bb, i * 20 + 30, 20);
+                g.DrawString(vaildNumAnswer.Substring(i, 1), ff, bb, i * 20 + 30, 20);
             }
 
             //加入雜點
             bb = new SolidBrush(Color.White);
             for (int i = 1; i <= 500; i++)
-                gg.FillRectangle(bb, rr.Next(ww), rr.Next(hh), 2, 2);
-
-
+            {
+                g.FillRectangle(bb, rr.Next(ww), rr.Next(hh), 2, 2);
+            }
             pictureBox_captcha3.Image = vaildNumImage;
         }
         //產生驗證圖片 SP
@@ -547,10 +547,10 @@ namespace vcs_Draw3B
         {
             // Make the bitmap and associated Graphics object.
             Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                gr.SmoothingMode = SmoothingMode.HighQuality;
-                gr.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.Clear(Color.White);
 
                 // See how much room is available for each character.
                 int ch_wid = (int)(wid / txt.Length);
@@ -561,8 +561,7 @@ namespace vcs_Draw3B
                     float font_size = Rand.Next(min_size, max_size);
                     using (Font the_font = new Font("Times New Roman", font_size, FontStyle.Bold))
                     {
-                        DrawCharacter1(txt.Substring(i, 1), gr,
-                            the_font, i * ch_wid, ch_wid, wid, hgt);
+                        DrawCharacter1(txt.Substring(i, 1), g, the_font, i * ch_wid, ch_wid, wid, hgt);
                     }
                 }
             }
@@ -572,8 +571,7 @@ namespace vcs_Draw3B
 
         // Draw a deformed character at this position.
         private int PreviousAngle = 0;
-        private void DrawCharacter1(string txt, Graphics gr,
-            Font the_font, int X, int ch_wid, int wid, int hgt)
+        private void DrawCharacter1(string txt, Graphics g, Font the_font, int X, int ch_wid, int wid, int hgt)
         {
             // Center the text.
             using (StringFormat string_format = new StringFormat())
@@ -615,19 +613,19 @@ namespace vcs_Draw3B
                     // Rotate a bit randomly.
                     float dx = (float)(X + ch_wid / 2);
                     float dy = (float)(hgt / 2);
-                    gr.TranslateTransform(-dx, -dy, MatrixOrder.Append);
+                    g.TranslateTransform(-dx, -dy, MatrixOrder.Append);
                     int angle = PreviousAngle;
                     do
                     {
                         angle = Rand.Next(-30, 30);
                     } while (Math.Abs(angle - PreviousAngle) < 20);
                     PreviousAngle = angle;
-                    gr.RotateTransform(angle, MatrixOrder.Append);
-                    gr.TranslateTransform(dx, dy, MatrixOrder.Append);
+                    g.RotateTransform(angle, MatrixOrder.Append);
+                    g.TranslateTransform(dx, dy, MatrixOrder.Append);
 
                     // Draw the text.
-                    gr.FillPath(Brushes.Blue, graphics_path);
-                    gr.ResetTransform();
+                    g.FillPath(Brushes.Blue, graphics_path);
+                    g.ResetTransform();
                 }
             }
         }
@@ -636,20 +634,19 @@ namespace vcs_Draw3B
         private Bitmap MakeCaptchaImage2(string txt, int wid, int hgt, Font the_font, Brush the_brush)
         {
             Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
                 int x = 0;
                 foreach (char ch in txt.ToCharArray())
                 {
-                    SizeF ch_size = gr.MeasureString(ch.ToString(), the_font);
+                    SizeF ch_size = g.MeasureString(ch.ToString(), the_font);
                     int y = (int)(Rand.NextDouble() * (hgt - ch_size.Height));
-                    gr.DrawString(ch.ToString(), the_font, the_brush, x, y);
+                    g.DrawString(ch.ToString(), the_font, the_brush, x, y);
                     x += (int)(ch_size.Width * 0.35);
                 }
             }
-
             return bm;
         }
 

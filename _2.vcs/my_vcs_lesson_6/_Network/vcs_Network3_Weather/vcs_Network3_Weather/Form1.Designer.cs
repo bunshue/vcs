@@ -1,4 +1,4 @@
-﻿namespace howto_list_temperatures
+﻿namespace vcs_Network3_Weather
 {
     partial class Form1
     {
@@ -326,7 +326,7 @@
             this.Controls.Add(this.btnForecast);
             this.Controls.Add(this.label2);
             this.Name = "Form1";
-            this.Text = "howto_list_temperatures";
+            this.Text = "vcs_Network3_Weather";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

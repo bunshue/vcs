@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_list_temperatures", "howto_list_temperatures.csproj", "{D47A5182-585E-43E1-9642-7EB0877CF1C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Network3_Weather", "vcs_Network3_Weather\vcs_Network3_Weather.csproj", "{D47A5182-585E-43E1-9642-7EB0877CF1C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

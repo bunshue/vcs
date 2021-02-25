@@ -8,8 +8,8 @@
     <ProjectGuid>{D47A5182-585E-43E1-9642-7EB0877CF1C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>howto_list_temperatures</RootNamespace>
-    <AssemblyName>howto_list_temperatures</AssemblyName>
+    <RootNamespace>vcs_Network3_Weather</RootNamespace>
+    <AssemblyName>vcs_Network3_Weather</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>

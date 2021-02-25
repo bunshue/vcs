@@ -1463,7 +1463,6 @@ namespace vcs_Draw1
             Bitmap bmp = new Bitmap(@"C:\______test_files\red-ball-icon.png");
             g.DrawImage(bmp, 180, 20);
 
-
             pictureBox1.Image = bitmap1;
         }
 
