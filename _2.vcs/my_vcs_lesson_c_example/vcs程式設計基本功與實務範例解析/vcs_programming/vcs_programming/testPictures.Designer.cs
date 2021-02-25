@@ -30,23 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(testPictures));
-            this.ptbDisplay = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnChange = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.ptbDisplay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // ptbDisplay
+            // pictureBox1
             // 
-            this.ptbDisplay.Image = ((System.Drawing.Image)(resources.GetObject("ptbDisplay.Image")));
-            this.ptbDisplay.Location = new System.Drawing.Point(12, 12);
-            this.ptbDisplay.Name = "ptbDisplay";
-            this.ptbDisplay.Size = new System.Drawing.Size(200, 150);
-            this.ptbDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ptbDisplay.TabIndex = 0;
-            this.ptbDisplay.TabStop = false;
-            this.ptbDisplay.Click += new System.EventHandler(this.ptbDisplay_Click);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(200, 150);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // btnReset
             // 
@@ -86,23 +86,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 218);
+            this.ClientSize = new System.Drawing.Size(607, 445);
             this.Controls.Add(this.btnChange);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.ptbDisplay);
+            this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "testPictures";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "圖片控制項";
-            ((System.ComponentModel.ISupportInitialize)(this.ptbDisplay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox ptbDisplay;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.ImageList imageList1;

@@ -69,23 +69,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ch3Test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ch3Test.Designer.cs">
-      <DependentUpon>ch3Test.cs</DependentUpon>
-    </Compile>
     <Compile Include="DateForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DateForm.designer.cs">
       <DependentUpon>DateForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="digitsystem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="digitsystem.designer.cs">
-      <DependentUpon>digitsystem.cs</DependentUpon>
     </Compile>
     <Compile Include="CallByRef.cs">
       <SubType>Form</SubType>
@@ -93,29 +81,11 @@
     <Compile Include="CallByRef.Designer.cs">
       <DependentUpon>CallByRef.cs</DependentUpon>
     </Compile>
-    <Compile Include="clock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="clock.designer.cs">
-      <DependentUpon>clock.cs</DependentUpon>
-    </Compile>
-    <Compile Include="double_loop.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="double_loop.Designer.cs">
-      <DependentUpon>double_loop.cs</DependentUpon>
-    </Compile>
     <Compile Include="Ch19Test.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Ch19Test.designer.cs">
       <DependentUpon>Ch19Test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FiveNumbers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FiveNumbers.Designer.cs">
-      <DependentUpon>FiveNumbers.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -123,35 +93,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="addnum.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="addnum.designer.cs">
-      <DependentUpon>addnum.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Function.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Function.Designer.cs">
-      <DependentUpon>Function.cs</DependentUpon>
-    </Compile>
-    <Compile Include="guessNumber.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="guessNumber.designer.cs">
-      <DependentUpon>guessNumber.cs</DependentUpon>
-    </Compile>
     <Compile Include="jaggedArray.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="jaggedArray.designer.cs">
       <DependentUpon>jaggedArray.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LocalVar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LocalVar.Designer.cs">
-      <DependentUpon>LocalVar.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -171,12 +117,6 @@
     </Compile>
     <Compile Include="MyForm.designer.cs">
       <DependentUpon>MyForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="order.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="order.designer.cs">
-      <DependentUpon>order.cs</DependentUpon>
     </Compile>
     <Compile Include="PersonForm.cs">
       <SubType>Form</SubType>
@@ -219,12 +159,6 @@
     </Compile>
     <Compile Include="tForm.designer.cs">
       <DependentUpon>tForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ThreeNumbers.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThreeNumbers.designer.cs">
-      <DependentUpon>ThreeNumbers.cs</DependentUpon>
     </Compile>
     <Compile Include="keyevent.cs">
       <SubType>Form</SubType>
@@ -282,47 +216,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ch3Test.resx">
-      <DependentUpon>ch3Test.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DateForm.resx">
       <DependentUpon>DateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="digitsystem.resx">
-      <DependentUpon>digitsystem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CallByRef.resx">
       <DependentUpon>CallByRef.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="clock.resx">
-      <DependentUpon>clock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="double_loop.resx">
-      <DependentUpon>double_loop.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Ch19Test.resx">
       <DependentUpon>Ch19Test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FiveNumbers.resx">
-      <DependentUpon>FiveNumbers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addnum.resx">
-      <DependentUpon>addnum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Function.resx">
-      <DependentUpon>Function.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="guessNumber.resx">
-      <DependentUpon>guessNumber.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="jaggedArray.resx">
       <DependentUpon>jaggedArray.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LocalVar.resx">
-      <DependentUpon>LocalVar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -332,9 +239,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="order.resx">
-      <DependentUpon>order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PersonForm.resx">
       <DependentUpon>PersonForm.cs</DependentUpon>
@@ -356,9 +260,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="tForm.resx">
       <DependentUpon>tForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThreeNumbers.resx">
-      <DependentUpon>ThreeNumbers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="keyevent.resx">
       <DependentUpon>keyevent.cs</DependentUpon>
@@ -400,15 +301,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="testPictures.resx">
       <DependentUpon>testPictures.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TriangleForm.resx">
       <DependentUpon>TriangleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TwoDArray.resx">
       <DependentUpon>TwoDArray.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InstanceVar.resx">
-      <DependentUpon>InstanceVar.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -454,12 +353,6 @@
     </Compile>
     <Compile Include="TwoDArray.Designer.cs">
       <DependentUpon>TwoDArray.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InstanceVar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InstanceVar.Designer.cs">
-      <DependentUpon>InstanceVar.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

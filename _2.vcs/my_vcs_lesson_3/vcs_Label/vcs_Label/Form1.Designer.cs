@@ -35,6 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label_AutoSizeFalse = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label4
@@ -100,11 +102,35 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Column 1";
             // 
+            // label_AutoSizeFalse
+            // 
+            this.label_AutoSizeFalse.BackColor = System.Drawing.Color.Pink;
+            this.label_AutoSizeFalse.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_AutoSizeFalse.Location = new System.Drawing.Point(12, 458);
+            this.label_AutoSizeFalse.Name = "label_AutoSizeFalse";
+            this.label_AutoSizeFalse.Size = new System.Drawing.Size(500, 100);
+            this.label_AutoSizeFalse.TabIndex = 21;
+            this.label_AutoSizeFalse.Text = "文字在lable內向右下對齊";
+            this.label_AutoSizeFalse.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(14, 403);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(400, 50);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Label Fixed3D + TextAlign置中";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 567);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label_AutoSizeFalse);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblRotated3);
             this.Controls.Add(this.lblRotated2);
@@ -130,6 +156,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_AutoSizeFalse;
+        private System.Windows.Forms.Label label5;
     }
 }
 

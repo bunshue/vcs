@@ -50,8 +50,14 @@
             this.button7 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.webBrowser_clipboard = new System.Windows.Forms.WebBrowser();
+            this.richTextBoxp_clipboard = new System.Windows.Forms.RichTextBox();
+            this.textBox_clipboard = new System.Windows.Forms.TextBox();
+            this.pictureBox_clipboard = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_clipboard)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -68,9 +74,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(414, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(527, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(766, 398);
+            this.richTextBox1.Size = new System.Drawing.Size(409, 398);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "春雁\t王恭\n春风一夜到衡阳，楚水燕山万里长。\n莫道春来便归去，江南虽好是他乡。";
             // 
@@ -120,9 +126,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(414, 416);
+            this.pictureBox1.Location = new System.Drawing.Point(186, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(766, 384);
+            this.pictureBox1.Size = new System.Drawing.Size(335, 269);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
@@ -276,7 +282,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1066, 370);
+            this.bt_clear.Location = new System.Drawing.Point(822, 370);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(96, 40);
             this.bt_clear.TabIndex = 12;
@@ -286,17 +292,65 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(414, 416);
+            this.richTextBox2.Location = new System.Drawing.Point(527, 416);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(766, 384);
+            this.richTextBox2.Size = new System.Drawing.Size(409, 384);
             this.richTextBox2.TabIndex = 13;
             this.richTextBox2.Text = "";
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(964, 12);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(159, 52);
+            this.button14.TabIndex = 14;
+            this.button14.Text = "檢查剪貼簿內的資料內容";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // webBrowser_clipboard
+            // 
+            this.webBrowser_clipboard.Location = new System.Drawing.Point(942, 547);
+            this.webBrowser_clipboard.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser_clipboard.Name = "webBrowser_clipboard";
+            this.webBrowser_clipboard.Size = new System.Drawing.Size(380, 158);
+            this.webBrowser_clipboard.TabIndex = 18;
+            // 
+            // richTextBoxp_clipboard
+            // 
+            this.richTextBoxp_clipboard.Location = new System.Drawing.Point(942, 389);
+            this.richTextBoxp_clipboard.Name = "richTextBoxp_clipboard";
+            this.richTextBoxp_clipboard.Size = new System.Drawing.Size(380, 152);
+            this.richTextBoxp_clipboard.TabIndex = 17;
+            this.richTextBoxp_clipboard.Text = "";
+            // 
+            // textBox_clipboard
+            // 
+            this.textBox_clipboard.Location = new System.Drawing.Point(939, 231);
+            this.textBox_clipboard.Multiline = true;
+            this.textBox_clipboard.Name = "textBox_clipboard";
+            this.textBox_clipboard.Size = new System.Drawing.Size(383, 152);
+            this.textBox_clipboard.TabIndex = 16;
+            // 
+            // pictureBox_clipboard
+            // 
+            this.pictureBox_clipboard.Location = new System.Drawing.Point(942, 70);
+            this.pictureBox_clipboard.Name = "pictureBox_clipboard";
+            this.pictureBox_clipboard.Size = new System.Drawing.Size(380, 155);
+            this.pictureBox_clipboard.TabIndex = 15;
+            this.pictureBox_clipboard.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1183, 812);
+            this.ClientSize = new System.Drawing.Size(1332, 812);
+            this.Controls.Add(this.webBrowser_clipboard);
+            this.Controls.Add(this.richTextBoxp_clipboard);
+            this.Controls.Add(this.textBox_clipboard);
+            this.Controls.Add(this.pictureBox_clipboard);
+            this.Controls.Add(this.button14);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
@@ -312,7 +366,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_clipboard)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -340,6 +396,11 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.WebBrowser webBrowser_clipboard;
+        private System.Windows.Forms.RichTextBox richTextBoxp_clipboard;
+        private System.Windows.Forms.TextBox textBox_clipboard;
+        private System.Windows.Forms.PictureBox pictureBox_clipboard;
     }
 }
 

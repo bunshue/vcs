@@ -22,6 +22,7 @@ namespace vcs_Clipboard
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+            webBrowser_clipboard.Navigate("about:blank");
         }
 
         void show_item_location()
@@ -245,6 +246,64 @@ namespace vcs_Clipboard
             }
 
         }
+
+        //檢查剪貼簿內的資料內容 ST
+        private void button14_Click(object sender, EventArgs e)
+        {
+            // List the available formats.
+            IDataObject data_object = Clipboard.GetDataObject();
+
+            foreach (string format in data_object.GetFormats())
+            {
+                richTextBox1.Text += "取得剪貼簿內的資料格式 : " + format + "\n";
+            }
+            DisplayData();
+        }
+
+        // Display data if possible.
+        private void DisplayData()
+        {
+            pictureBox_clipboard.Image = null;
+            textBox_clipboard.Clear();
+            richTextBoxp_clipboard.Clear();
+            //webBrowser_clipboard.Navigate("about:blank");
+
+            // Image.
+            if (Clipboard.ContainsImage())
+            {
+                pictureBox_clipboard.Image = Clipboard.GetImage();
+            }
+
+            // Text.
+            if (Clipboard.ContainsText(TextDataFormat.UnicodeText))
+            {
+                textBox_clipboard.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
+            }
+
+            // HTML.
+            if (Clipboard.ContainsText(TextDataFormat.Html))
+            {
+                HtmlDocument doc = webBrowser_clipboard.Document;
+                doc.Body.InnerHtml = Clipboard.GetText(TextDataFormat.Html);
+            }
+
+            // Rich Text.
+            if (Clipboard.ContainsText(TextDataFormat.Rtf))
+            {
+                richTextBoxp_clipboard.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
+            }
+        }
+
+
+
+
+
+
+
+
+
+        //檢查剪貼簿內的資料內容 SP
+
     }
 
     [Serializable()]    //必要的一行

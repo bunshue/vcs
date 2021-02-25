@@ -1718,10 +1718,10 @@ namespace vcs_test_all_10_Math_Random
         //N階乘 ST
         private void button24_Click(object sender, EventArgs e)
         {
-            decimal N = 10;
+            decimal M = 10;
             try
             {
-                richTextBox1.Text += N.ToString() + " 階乘 = " + Factorial(N).ToString() + "\n";
+                richTextBox1.Text += M.ToString() + " 階乘 = " + Factorial(M).ToString() + "\n";
             }
             catch (Exception ex)
             {
@@ -1729,6 +1729,18 @@ namespace vcs_test_all_10_Math_Random
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
             }
+
+            int N = 50;
+
+            richTextBox1.Text += "各種型態的N階乘\n";
+
+            richTextBox1.Text += "N = " + N.ToString() + "\n";
+
+            richTextBox1.Text += "Int N階乘 : " + IntFactorial(N) + "\n";
+            richTextBox1.Text += "Long N階乘 : " + LongFactorial(N) + "\n";
+            richTextBox1.Text += "Decimal N階乘 : " + DecimalFactorial(N) + "\n";
+            richTextBox1.Text += "Float N階乘 : " + FloatFactorial(N) + "\n";
+            richTextBox1.Text += "Double N階乘 : " + DoubleFactorial(N) + "\n";
         }
 
         // Calculate N!
@@ -1738,6 +1750,65 @@ namespace vcs_test_all_10_Math_Random
             for (decimal i = 2; i <= N; i++)
                 result *= i;
             return result;
+        }
+
+
+        // Calculate factorials with different data types.
+        private string IntFactorial(int N)
+        {
+            try
+            {
+                int result = 1;
+                for (int i = 2; i <= N; i++) result *= i;
+                return result.ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+        private string LongFactorial(long N)
+        {
+            try
+            {
+                long result = 1;
+                for (long i = 2; i <= N; i++) result *= i;
+                return result.ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
+        private string DecimalFactorial(decimal N)
+        {
+            // and always throws OverflowException.
+            try
+            {
+                decimal result = 1;
+                for (decimal i = 2; i <= N; i++) result *= i;
+                return result.ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
+        private string FloatFactorial(float N)
+        {
+            float result = 1;
+            for (float i = 2; i <= N; i++) result *= i;
+            if (float.IsInfinity(result)) return "Infinity";
+            return result.ToString();
+        }
+        private string DoubleFactorial(double N)
+        {
+            double result = 1;
+            for (double i = 2; i <= N; i++) result *= i;
+            if (double.IsInfinity(result)) return "Infinity";
+            return result.ToString();
         }
         //N階乘 SP
 

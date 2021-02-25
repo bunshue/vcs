@@ -19,7 +19,7 @@ namespace vcs_programming
         private void btnReset_Click(object sender, EventArgs e)
         {
             // 顯示圖片
-            ptbDisplay.Image = /*System.Drawing.*/Image.FromFile(".\\Pictures\\Koala.jpg");
+            pictureBox1.Image = /*System.Drawing.*/Image.FromFile(".\\Pictures\\Koala.jpg");
         }
 
         int i = 0; //必須宣告為實體變數
@@ -60,18 +60,18 @@ namespace vcs_programming
                     break;
             }
 
-            ptbDisplay.Image = Image.FromFile(path);
+            pictureBox1.Image = Image.FromFile(path);
             i++; //依序顯示
             if (i >= 9) i = 0; //循環顯示
             */
 
-            ptbDisplay.Image = imageList1.Images[i];
+            pictureBox1.Image = imageList1.Images[i];
             i++;  //依序顯示
             if (i >= imageList1.Images.Count) i = 0; //循環顯示
             
         }
 
-        private void ptbDisplay_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
