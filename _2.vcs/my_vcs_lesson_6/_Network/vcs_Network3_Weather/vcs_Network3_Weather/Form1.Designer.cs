@@ -55,6 +55,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,7 +175,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(711, 8);
+            this.button3.Location = new System.Drawing.Point(822, 10);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(125, 30);
             this.button3.TabIndex = 30;
@@ -184,7 +185,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(842, 9);
+            this.button4.Location = new System.Drawing.Point(953, 11);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(125, 30);
             this.button4.TabIndex = 31;
@@ -296,12 +297,23 @@
             this.label3.TabIndex = 34;
             this.label3.Text = "城市 :";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(703, 8);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(104, 30);
+            this.button6.TabIndex = 44;
+            this.button6.Text = "解讀XML3";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnForecast;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 611);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtLong);
@@ -363,6 +375,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button6;
     }
 }
 

@@ -41,17 +41,6 @@ namespace vcs_Network3_Weather
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            comboBox1.Items.Add("City");
-            comboBox1.Items.Add("ZIP");
-            comboBox1.Items.Add("ID");
-
-            comboBox1.SelectedIndex = 0;
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
@@ -80,6 +69,17 @@ namespace vcs_Network3_Weather
         //天氣預測
         private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
         */
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.Items.Add("City");
+            comboBox1.Items.Add("ZIP");
+            comboBox1.Items.Add("ID");
+
+            comboBox1.SelectedIndex = 0;
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
 
         // List the temperature forecast.
         private void btnForecast_Click(object sender, EventArgs e)
@@ -462,7 +462,7 @@ namespace vcs_Network3_Weather
         {
             // vcs_ReadWrite_XML1 的 標準版XML讀取解析程式
 
-            string filename = "C:\\______test_files\\__RW\\_xml\\weather.xml";
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
 
             ParseXML(filename);
         }
@@ -470,13 +470,11 @@ namespace vcs_Network3_Weather
         private void button2_Click(object sender, EventArgs e)
         {
             // vcsh 的 XML讀取程式
-
-            string filename = "C:\\______test_files\\__RW\\_xml\\weather.xml";
-
-            ParseXML_weather(filename);
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
+            ParseXML_weather_forecast(filename);
         }
 
-        private void ParseXML_weather(string filename)
+        private void ParseXML_weather_forecast(string filename)
         {
             string xml = File.ReadAllText(filename, System.Text.Encoding.Default);
 
@@ -487,10 +485,10 @@ namespace vcs_Network3_Weather
             xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
 
-            ParseXML_weather0(xml_doc);
+            ParseXML_weather_forecast0(xml_doc);
         }
 
-        private void ParseXML_weather0(XmlDocument xml_doc)
+        private void ParseXML_weather_forecast0(XmlDocument xml_doc)
         {
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
@@ -599,15 +597,119 @@ namespace vcs_Network3_Weather
             }
         }
 
+        private void ParseXML_weather_current(string filename)
+        {
+            string xml = File.ReadAllText(filename, System.Text.Encoding.Default);
+
+            //richTextBox1.Text += "data\n" + xml + "\n";
+
+            // Load the response into an XML document.
+            XmlDocument xml_doc;
+            xml_doc = new XmlDocument();
+            xml_doc.LoadXml(xml);
+
+            ParseXML_weather_current0(xml_doc);
+        }
+
+        private void ParseXML_weather_current0(XmlDocument xml_doc)
+        {
+            foreach (XmlNode current_node in xml_doc.SelectNodes("//current"))
+            {
+                foreach (XmlNode city_node in xml_doc.SelectNodes("//city"))
+                {
+                    XmlAttribute city_attr1 = city_node.Attributes["id"];
+                    XmlAttribute city_attr2 = city_node.Attributes["name"];
+                    richTextBox1.Text += "city id : " + city_attr1.Value + "\n";
+                    richTextBox1.Text += "city name : " + city_attr2.Value + "\n";
+
+                    foreach (XmlNode coord_node in xml_doc.SelectNodes("//coord"))
+                    {
+                        XmlAttribute coord_attr1 = coord_node.Attributes["lon"];
+                        XmlAttribute coord_attr2 = coord_node.Attributes["lat"];
+                        richTextBox1.Text += "東經 : " + coord_attr1.Value + "\n";
+                        richTextBox1.Text += "北緯 : " + coord_attr2.Value + "\n";
+                    }
+
+                    richTextBox1.Text += "國家\t" + city_node.SelectSingleNode("country").InnerText + "\n";
+                    richTextBox1.Text += "時區\t" + city_node.SelectSingleNode("timezone").InnerText + "\n";
+
+                    foreach (XmlNode sun_node in xml_doc.SelectNodes("//sun"))
+                    {
+                        XmlAttribute time_attr1 = sun_node.Attributes["rise"];
+                        XmlAttribute time_attr2 = sun_node.Attributes["set"];
+                        richTextBox1.Text += "日出 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + "\n";
+                        richTextBox1.Text += "日落 : " + DateTime.Parse(time_attr2.Value).ToLocalTime() + "\n";
+                    }
+                }
+
+                richTextBox1.Text += "temperature" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "feels_like" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "humidity" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "pressure" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\n";
+
+                foreach (XmlNode wind_node in xml_doc.SelectNodes("//wind"))
+                {
+                    richTextBox1.Text += "wind" + "\n";
+                    richTextBox1.Text += wind_node.SelectSingleNode("speed").Attributes["value"].Value.ToString() + "\t";
+                    richTextBox1.Text += wind_node.SelectSingleNode("speed").Attributes["unit"].Value.ToString() + "\t";
+                    richTextBox1.Text += wind_node.SelectSingleNode("speed").Attributes["name"].Value.ToString() + "\n";
+                    richTextBox1.Text += wind_node.SelectSingleNode("direction").Attributes["value"].Value.ToString() + "\t";
+                    richTextBox1.Text += wind_node.SelectSingleNode("direction").Attributes["code"].Value.ToString() + "\t";
+                    richTextBox1.Text += wind_node.SelectSingleNode("direction").Attributes["name"].Value.ToString() + "\n";
+                }
+
+                richTextBox1.Text += "clouds" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("clouds").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "visibility" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "precipitation" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("precipitation").Attributes["mode"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "weather" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("weather").Attributes["number"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("weather").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("weather").Attributes["icon"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "lastupdate" + "\t";
+                richTextBox1.Text += current_node.SelectSingleNode("lastupdate").Attributes["value"].Value.ToString() + "\n";
+            }
+        }
+
         //即時天氣XML解讀 ST
         private void button3_Click(object sender, EventArgs e)
         {
+            //TBD
+
             // Compose the query URL.
             string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
 
             richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
+            /*
+            //ddddddd
+            // vcsh 的 XML讀取程式
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather_current.xml";
+            ParseXML_weather_current(filename);
+            */
+
+            /*
             // 解讀 fail
             // Create a web client.
             using (WebClient client = new WebClient())
@@ -626,6 +728,7 @@ namespace vcs_Network3_Weather
                     MessageBox.Show("Unknown error\n" + ex.Message);
                 }
             }
+            */
         }
 
         //天氣預測XML解讀
@@ -783,6 +886,13 @@ namespace vcs_Network3_Weather
             {
                 MessageBox.Show("Unknown error\n" + ex.Message);
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // vcsh 的 XML讀取程式
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather_current.xml";
+            ParseXML_weather_current(filename);
         }
 
 
