@@ -540,7 +540,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(180, 40);
             this.button31.TabIndex = 48;
-            this.button31.Text = "xxx";
+            this.button31.Text = "10進位轉各種進位";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -647,13 +647,14 @@
             // 
             // button32
             // 
-            this.button32.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button32.Location = new System.Drawing.Point(384, 290);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(180, 40);
             this.button32.TabIndex = 58;
-            this.button32.Text = "xxx";
+            this.button32.Text = "函式多載(function overloading)";
             this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
             // label11
             // 

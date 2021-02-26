@@ -119,7 +119,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 42);
             this.button3.TabIndex = 17;
-            this.button3.Text = "畫些東西";
+            this.button3.Text = "開啟圖片";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -139,7 +139,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 42);
             this.button1.TabIndex = 19;
-            this.button1.Text = "清除畫布";
+            this.button1.Text = "開新檔案";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -150,7 +150,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 42);
             this.button2.TabIndex = 20;
-            this.button2.Text = "開啟圖片";
+            this.button2.Text = "清除畫布";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -265,7 +265,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(120, 42);
             this.button0.TabIndex = 30;
-            this.button0.Text = "開新檔案";
+            this.button0.Text = "基本畫圖";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -686,6 +686,7 @@
             this.button45.Size = new System.Drawing.Size(120, 42);
             this.button45.TabIndex = 72;
             this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
             // button46
             // 

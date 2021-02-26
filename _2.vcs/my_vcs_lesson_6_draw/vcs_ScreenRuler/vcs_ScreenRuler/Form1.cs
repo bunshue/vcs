@@ -41,15 +41,19 @@ namespace vcs_ScreenRuler
             delta = 100;
             for (i = 0; i < screenWidth; i += delta)
             {
-                g.DrawLine(new Pen(Color.Red, 1), i, 0, i, screenHeight / 2);
+                g.DrawLine(new Pen(Color.Blue, 1), i, 0, i, screenHeight / 2);
                 g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(i - 15, 30));   //畫直線
             }
 
             for (i = 0; i < screenWidth; i += 10)
             {
-                if ((i % 100) != 0)
+                if ((i % 50) == 0)
                 {
-                    g.DrawLine(new Pen(Color.Black, 1), i, 0, i, 100);
+                    g.DrawLine(new Pen(Color.Red, 1), i, 0, i, 100);
+                }
+                else if ((i % 100) != 0)
+                {
+                    g.DrawLine(new Pen(Color.Black, 1), i, 0, i, 50);
                 }
             }
 
@@ -59,12 +63,26 @@ namespace vcs_ScreenRuler
                 g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(0, i));
             }
 
+            for (i = 0; i <= 350; i += 10)
+            {
+                if ((i % 50) == 0)
+                {
+                    g.DrawLine(new Pen(Color.Red, 1), 0, i, 100, i);
+                }
+                else if ((i % 100) != 0)
+                {
+                    g.DrawLine(new Pen(Color.Black, 1), 0, i, 50, i);
+                }
+            }
+
+            /*    百分比 不好用
             delta = screenWidth * 5 / 100;
             for (i = 0; i < screenWidth; i += delta)
             {
                 g.DrawLine(new Pen(Color.Red, 1), i, 0 + 100, i, screenHeight);
                 g.DrawString((i * 100 / screenWidth).ToString() + " %".ToString(), new Font("標楷體", 12), new SolidBrush(Color.Red), new PointF(i - 20, 220));
             }
+            */
 
             /*
             i = screenHeight * 10 / 100;

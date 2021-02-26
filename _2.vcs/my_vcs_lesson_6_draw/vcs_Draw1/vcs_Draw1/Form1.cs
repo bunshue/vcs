@@ -54,7 +54,7 @@ namespace vcs_Draw1
             dx = 130;
             dy = 50;
 
-            pictureBox_uac.Location = new Point(x_st + dx * 0-100, y_st + dy * 0);
+            pictureBox_uac.Location = new Point(x_st + dx * 0 - 100, y_st + dy * 0);
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -324,17 +324,88 @@ namespace vcs_Draw1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            open_new_file();
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            //基本畫圖
+
+            int x_st = 30;
+            int y_st = 30;
+            int dx = 150;
+            int dy = 0;
+            int w = 100;
+            int h = 50;
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            p = new Pen(Color.Red, 3);
+
+            g.DrawRectangle(p, x_st, y_st, w, h);
+            g.DrawRectangle(Pens.Blue, x_st + dx, y_st, w, h);
+
+            dy = 70;
+            g.DrawEllipse(p, x_st, y_st + dy, w, h);
+            g.DrawEllipse(Pens.Blue, x_st + dx, y_st + dy, w, h);
+
+            g.DrawLine(p, 100, 0, 300, 0);
+            //g.DrawRectangle(Pens.Blue, x_st + dx, y_st, 100, 50);
+
+            PointF[] pt = new PointF[5];    //一維陣列內有5個Point
+            pt[0] = new Point(20, 20);
+            pt[1] = new Point(300, 20);
+            pt[2] = new Point(300, 300);
+            pt[3] = new Point(20, 300);
+            pt[4] = new Point(20, 100);
+
+            g.DrawLines(new Pen(Brushes.Red, 3), pt);
+
+
+            g.DrawLine(new Pen(Brushes.Blue, 5), pt[1], pt[3]);
+            g.DrawLine(new Pen(Brushes.Blue, 5), pt[2], pt[4]);
+
+
+
+
+            //drawpolygon
+            //draw curve
+            //draw curves
+
+
+            //fillrectangle
+            //fillellipse
+            //fillpolygon
+
+            g.DrawString("彩色轉灰階", new Font("標楷體", 100), new SolidBrush(Color.Blue), new PointF(20, 20));
+
+
+
+            //Bitmap bmp = new Bitmap("c:\\______test_files\\bear.bmp");
+            //g.DrawImage(bmp, 10, 10);	//將bmp貼至畫布上
+
+
+            // 剛好等寬畫滿邊框
+            p = new Pen(Color.Green, 10);
+            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
+
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            open_new_file();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             bitmap1 = null;
             pictureBox1.Image = null;
             richTextBox1.Clear();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             string filename = "C:\\______test_files\\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
@@ -363,30 +434,6 @@ namespace vcs_Draw1
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.DrawRectangle(p, 50, 50, 100, 100);
-
-            g.DrawRectangle(p, 130, 110, 100, 130);
-
-            g.DrawEllipse(p, 50, 50, 100, 100);
-
-            p = new Pen(Color.Blue, 5);
-            g.DrawEllipse(p, 200, 30, 60, 60);
-
-            p = new Pen(Color.Green, 10);
-            g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
-
-            pictureBox1.Image = bitmap1;
-
-
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1248,32 +1295,32 @@ namespace vcs_Draw1
             DrawSmileImage(g);
         }
 
-        private void DrawSmileImage(Graphics gr)
+        private void DrawSmileImage(Graphics g)
         {
             Rectangle rect;
 
             rect = new Rectangle(10, 10, 80, 80);
-            gr.FillEllipse(Brushes.LightGreen, rect);
-            gr.DrawEllipse(Pens.Green, rect);
+            g.FillEllipse(Brushes.LightGreen, rect);
+            g.DrawEllipse(Pens.Green, rect);
 
             rect = new Rectangle(40, 40, 20, 30);
-            gr.FillEllipse(Brushes.LightBlue, rect);
-            gr.DrawEllipse(Pens.Blue, rect);
+            g.FillEllipse(Brushes.LightBlue, rect);
+            g.DrawEllipse(Pens.Blue, rect);
 
             rect = new Rectangle(25, 30, 50, 50);
-            gr.DrawArc(Pens.Red, rect, 20, 140);
+            g.DrawArc(Pens.Red, rect, 20, 140);
 
             rect = new Rectangle(25, 25, 15, 20);
-            gr.FillEllipse(Brushes.White, rect);
-            gr.DrawEllipse(Pens.Black, rect);
+            g.FillEllipse(Brushes.White, rect);
+            g.DrawEllipse(Pens.Black, rect);
             rect = new Rectangle(30, 30, 10, 10);
-            gr.FillEllipse(Brushes.Black, rect);
+            g.FillEllipse(Brushes.Black, rect);
 
             rect = new Rectangle(60, 25, 15, 20);
-            gr.FillEllipse(Brushes.White, rect);
-            gr.DrawEllipse(Pens.Black, rect);
+            g.FillEllipse(Brushes.White, rect);
+            g.DrawEllipse(Pens.Black, rect);
             rect = new Rectangle(65, 30, 10, 10);
-            gr.FillEllipse(Brushes.Black, rect);
+            g.FillEllipse(Brushes.Black, rect);
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1729,28 +1776,25 @@ namespace vcs_Draw1
         }
 
         // Draw a sample and its name.
-        private void DrawIconSample(Graphics gr, ref int x, int y, Icon ico, string ico_name)
+        private void DrawIconSample(Graphics g, ref int x, int y, Icon ico, string ico_name)
         {
-            gr.DrawIconUnstretched(ico, new Rectangle(x, y, ico.Width, ico.Height));
-            int text_y = y + (int)(ico.Height - gr.MeasureString(ico_name, this.Font).Height) / 2;
-            gr.DrawString(ico_name, this.Font, Brushes.Black, x + ico.Width + 5, text_y);
+            g.DrawIconUnstretched(ico, new Rectangle(x, y, ico.Width, ico.Height));
+            int text_y = y + (int)(ico.Height - g.MeasureString(ico_name, this.Font).Height) / 2;
+            g.DrawString(ico_name, this.Font, Brushes.Black, x + ico.Width + 5, text_y);
             x += column_width;
         }
 
         // Draw a long string with boxes around each character.
-        private void DrawTextInBoxes(Graphics gr, Font font,
-            float start_x, float start_y, string text)
+        private void DrawTextInBoxes(Graphics g, Font font, float start_x, float start_y, string text)
         {
             // Measure the characters.
-            List<RectangleF> rects = MeasureCharacters(gr, font, text);
+            List<RectangleF> rects = MeasureCharacters(g, font, text);
 
             for (int i = 0; i < text.Length; i++)
             {
-                gr.DrawRectangle(Pens.Red,
-                    start_x + rects[i].Left, start_y + rects[i].Top,
-                    rects[i].Width, rects[i].Height);
+                g.DrawRectangle(Pens.Red, start_x + rects[i].Left, start_y + rects[i].Top, rects[i].Width, rects[i].Height);
             }
-            gr.DrawString(text, font, Brushes.Blue, start_x, start_y);
+            g.DrawString(text, font, Brushes.Blue, start_x, start_y);
         }
 
         // Measure the characters in the string.
@@ -1800,8 +1844,7 @@ namespace vcs_Draw1
 
         // Measure the characters in a string with
         // no more than 32 characters.
-        private List<RectangleF> MeasureCharactersInWord(
-            Graphics gr, Font font, string text)
+        private List<RectangleF> MeasureCharactersInWord(Graphics gr, Font font, string text)
         {
             List<RectangleF> result = new List<RectangleF>();
 
@@ -1821,14 +1864,13 @@ namespace vcs_Draw1
 
                 // Find the character ranges.
                 RectangleF rect = new RectangleF(0, 0, 10000, 100);
-                Region[] regions =
-                    gr.MeasureCharacterRanges(
-                        text, font, this.ClientRectangle,
-                        string_format);
+                Region[] regions = gr.MeasureCharacterRanges(text, font, this.ClientRectangle, string_format);
 
                 // Convert the regions into rectangles.
                 foreach (Region region in regions)
+                {
                     result.Add(region.GetBounds(gr));
+                }
             }
             return result;
         }
@@ -2113,13 +2155,12 @@ namespace vcs_Draw1
         }
 
         // Draw some text.
-        private void DrawOnSegment(Graphics gr, PointF start_point, PointF end_point, string txt, bool text_above_segment)
+        private void DrawOnSegment(Graphics g, PointF start_point, PointF end_point, string txt, bool text_above_segment)
         {
             int start_ch = 0;
 
-            gr.DrawLine(Pens.Green, start_point, end_point);
-            DrawTextOnSegment(gr, Brushes.Blue, this.Font, txt,
-                ref start_ch, ref start_point, end_point, text_above_segment);
+            g.DrawLine(Pens.Green, start_point, end_point);
+            DrawTextOnSegment(g, Brushes.Blue, this.Font, txt, ref start_ch, ref start_point, end_point, text_above_segment);
         }
 
         // Draw some text along a line segment.
@@ -2271,8 +2312,9 @@ namespace vcs_Draw1
 
         }
 
-
-
-
+        private void button45_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
+

@@ -124,6 +124,17 @@ namespace vcs_test_all_06_System
             button46.Location = new Point(x_st + dx * 2, y_st + dy * 11);
             label6.Location = new Point(x_st + dx * 3, y_st + dy * 11 + 10);
 
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+
+            dy = 0;
+
+            bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13+50);
+
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 25);
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 50);
@@ -135,10 +146,7 @@ namespace vcs_test_all_06_System
             label4.Text = "";
             label5.Text = "";
 
-            bt_memory.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 13);
-            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;

@@ -563,7 +563,52 @@ namespace vcs_test_all_03_Syntax
 
         private void button31_Click(object sender, EventArgs e)
         {
+            int a, n, r;
 
+            a = 12345;
+
+            string[] m = {"0", "1", "2", "3",
+                           "4", "5", "6", "7",
+                           "8", "9", "A", "B",
+                           "C", "D", "E", "F"};
+            string s = "";
+
+            richTextBox1.Text = "10進位數字\t" + a.ToString() + "\n";
+
+            n = 2;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "2進位\t" + s + "\n";
+
+            a = 12345;
+            n = 8;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "8進位\t" + s + "\n";
+
+            a = 12345;
+            n = 16;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "16進位\t" + s + "\n";
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -1230,6 +1275,60 @@ namespace vcs_test_all_03_Syntax
                 richTextBox2.Text += "計算結束\n";
             }
         }
+
+
+        //函式多載(function overloading) ST
+
+        int add(int a, int b) { return a + b; }
+        double add(double a, double b) { return a + b; }
+
+        int add(int[] a)
+        {
+            int sum = 0;
+
+            for (int i = 0; i < a.Length; i++)
+                sum += a[i];
+
+            return sum;
+        }
+
+        double add(double[] a)
+        {
+            double sum = 0.0;
+
+            for (int i = 0; i < a.Length; i++)
+                sum += a[i];
+
+            return sum;
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "函式多載(function overloading)\n";
+
+            int int_a = 15;
+            int int_b = 23;
+            int int_sum = add(int_a, int_b);
+            richTextBox1.Text += "int_sum = " + int_sum.ToString() + "\n";
+
+            double double_a = 15.123;
+            double double_b = 23.456;
+            double double_sum = add(double_a, double_b);
+            richTextBox1.Text += "double_sum = " + double_sum.ToString() + "\n";
+
+            int[] intArray = { 1, 2, 3, 4, 5 };
+            int intArray_sum = add(intArray);
+            richTextBox1.Text += "intArray_sum = " + intArray_sum.ToString() + "\n";
+
+            double[] doubleArray = { 10.15, 20.27, 30.31, 40.44, 50.57 };
+            double doubleArray_sum = add(doubleArray);
+            richTextBox1.Text += "doubleArray_sum = " + doubleArray_sum.ToString() + "\n";
+
+        }
+        //函式多載(function overloading) SP
+
+
+
 
     }
 }

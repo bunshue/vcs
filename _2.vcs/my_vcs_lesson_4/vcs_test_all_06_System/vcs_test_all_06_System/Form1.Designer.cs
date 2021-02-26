@@ -94,7 +94,9 @@
             this.btnReboot = new System.Windows.Forms.Button();
             this.btnShutdown = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -641,7 +643,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(16, 518);
+            this.label1.Location = new System.Drawing.Point(6, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 19);
             this.label1.TabIndex = 67;
@@ -651,7 +653,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(69, 518);
+            this.label2.Location = new System.Drawing.Point(59, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 19);
             this.label2.TabIndex = 68;
@@ -661,7 +663,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(118, 518);
+            this.label3.Location = new System.Drawing.Point(108, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 19);
             this.label3.TabIndex = 69;
@@ -671,7 +673,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(157, 518);
+            this.label4.Location = new System.Drawing.Point(147, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 19);
             this.label4.TabIndex = 70;
@@ -685,7 +687,7 @@
             // bt_memory
             // 
             this.bt_memory.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_memory.Location = new System.Drawing.Point(218, 547);
+            this.bt_memory.Location = new System.Drawing.Point(208, 47);
             this.bt_memory.Name = "bt_memory";
             this.bt_memory.Size = new System.Drawing.Size(175, 40);
             this.bt_memory.TabIndex = 71;
@@ -697,7 +699,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(216, 518);
+            this.label5.Location = new System.Drawing.Point(206, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 19);
             this.label5.TabIndex = 72;
@@ -788,19 +790,29 @@
             this.label6.TabIndex = 76;
             this.label6.Text = "可以輸入command line參數";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.bt_memory);
+            this.groupBox2.Location = new System.Drawing.Point(18, 518);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(606, 123);
+            this.groupBox2.TabIndex = 77;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "CPU 記憶體狀態";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1414, 614);
+            this.ClientSize = new System.Drawing.Size(1414, 695);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.bt_memory);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button46);
             this.Controls.Add(this.button45);
@@ -854,6 +866,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -926,6 +940,7 @@
         private System.Windows.Forms.Button btnReboot;
         private System.Windows.Forms.Button btnShutdown;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
