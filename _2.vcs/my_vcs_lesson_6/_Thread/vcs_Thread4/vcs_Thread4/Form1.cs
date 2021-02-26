@@ -21,29 +21,30 @@ namespace vcs_Thread4
         // Start threads with different priorities.
         private void button1_Click(object sender, EventArgs e)
         {
+            int i;
             int num_low = 4;
-            for (int i = 0; i < num_low; i++)
+            for (i = 0; i < num_low; i++)
             {
-                MakeThread("Low" + i.ToString(), ThreadPriority.BelowNormal);
+                MakeThread("低_" + i.ToString(), ThreadPriority.BelowNormal);
             }
 
             int num_normal = 4;
-            for (int i = 0; i < num_normal; i++)
+            for (i = 0; i < num_normal; i++)
             {
-                MakeThread("Normal" + i.ToString(), ThreadPriority.Normal);
+                MakeThread("中_" + i.ToString(), ThreadPriority.Normal);
             }
 
             int num_high = 4;
-            for (int i = 0; i < num_high; i++)
+            for (i = 0; i < num_high; i++)
             {
-                MakeThread("High" + i.ToString(), ThreadPriority.AboveNormal);
+                MakeThread("高_" + i.ToString(), ThreadPriority.AboveNormal);
             }
         }
 
         // Make a thread with the indicated priority.
         private void MakeThread(string thread_name, ThreadPriority thread_priority)
         {
-            richTextBox1.Text += "Make Thread " + thread_name + ", priority " + thread_priority.ToString() + "\n";
+            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + ", 優先序 : " + thread_priority.ToString() + "\n";
             Application.DoEvents();
 
             // Initialize the thread.

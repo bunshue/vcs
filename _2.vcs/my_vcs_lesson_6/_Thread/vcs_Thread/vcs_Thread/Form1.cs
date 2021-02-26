@@ -23,14 +23,19 @@ namespace vcs_Thread
         }
 
         //開啟一個線程
+        int a = 0;
         private void button1_Click(object sender, EventArgs e)
         {
             //將委托的方法和主窗體傳過去
             NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
 
-            Thread TheThreadOne = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
+            a++;
+            string thread_name = "Thread測試_" + a.ToString();
 
-            TheThreadOne.Name = "在 " + DateTime.Now.ToString() + " 創建的線程";//給線程命名，方便調試。這行代碼可以省略。
+            Thread TheThreadOne = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
+            TheThreadOne.Name = thread_name;
+
+            richTextBox1.Text += "開啟thread, 名稱 : " + TheThreadOne.Name + "\n";
 
             //讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
             TheThreadOne.IsBackground = true;
@@ -43,37 +48,13 @@ namespace vcs_Thread
             //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
             lock (obj)
             {
-                richTextBox1.Text += str + "\t到此一遊 @ " + DateTime.Now.ToString() + "\n";
-                //this.txtReturnValue.Text = this.txtReturnValue.Text + str;
+                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
             }
         }
 
-
-        class thread1
-        {
-            private String title;
-            public thread1(String title)
-            {
-                this.title = title;
-            }
-            int aa = 0;
-            public void runMe()
-            {
-                while (true)
-                {
-                    aa++;
-                    System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
-                    System.Threading.Thread.Sleep(1000);
-                }
-            }
-        } 
-
         private void button4_Click(object sender, EventArgs e)
         {
-            //Thread
-            thread1 obj = new thread1("花旗銀行");
-            Thread t = new Thread(obj.runMe);
-            t.Start(); 
+
         }
     }
 

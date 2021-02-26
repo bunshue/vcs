@@ -57,7 +57,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(154, 59);
             this.button4.TabIndex = 11;
-            this.button4.Text = "建立一個Thread 2\r\n到 偵錯/視窗/即時運算 看結果";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

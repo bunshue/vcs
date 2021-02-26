@@ -22,10 +22,14 @@ namespace vcs_Thread5
 
         thread1 obj;
         Thread t;
+
+        //建立一個Thread 到 偵錯/視窗/即時運算 看結果
         private void button1_Click(object sender, EventArgs e)
         {
             a++;
-            obj = new thread1("花旗銀行 " + a.ToString());
+            string thread_name = "Thread測試_" + a.ToString();
+            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + "\n";
+            obj = new thread1(thread_name);
             t = new Thread(obj.runMe);
             t.Start();
         }
@@ -38,10 +42,13 @@ namespace vcs_Thread5
             {
                 this.title = title;
             }
+            int aa = 0;
             public void runMe()
             {
                 while (true)
                 {
+                    aa++;
+                    System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
                     Console.Write(title + "\r\n");
                     System.Threading.Thread.Sleep(1000);
                 }

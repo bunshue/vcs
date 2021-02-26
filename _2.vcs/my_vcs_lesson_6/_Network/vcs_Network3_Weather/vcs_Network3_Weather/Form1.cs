@@ -44,7 +44,7 @@ namespace vcs_Network3_Weather
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
-        private const string API_KEY = "lionmouse";
+        private const string API_KEY = "xxxx";
 
         // Query URLs. Replace @LOCATION@ with the location.
         //即時天氣
@@ -81,16 +81,29 @@ namespace vcs_Network3_Weather
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
-        // List the temperature forecast.
+        void clear_data()
+        {
+            richTextBox1.Clear();
+            listView1.Items.Clear();
+            txtCity.Text = "";
+            txtCountry.Text = "";
+            txtLat.Text = "";
+            txtLong.Text = "";
+            txtId.Text = "";
+        }
+
+        // Get a forecast.
         private void btnForecast_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
+            clear_data();
             Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
 
             // Compose the query URL.
             string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
 
-            richTextBox1.Text += "url : \n" + url + "\n";
+            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
             // Create a web client.
             XmlDocument xml_doc;
@@ -99,7 +112,7 @@ namespace vcs_Network3_Weather
                 try
                 {
                     // Get the response string from the URL.
-                    string xml = client.DownloadString(url);
+                    string xml = client.DownloadString(url);    //抓資料
 
                     //richTextBox1.Text += "data\n" + xml + "\n";
 
@@ -122,10 +135,6 @@ namespace vcs_Network3_Weather
                     // Report the error to the user.
                     richTextBox1.Text += "計算錯誤\t原因 : " + ex + "\n";
                     richTextBox1.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
-                }
-                finally
-                {
-                    //richTextBox1.Text += "計算結束\n";
                 }
             }
             Cursor = Cursors.Default;
@@ -290,13 +299,7 @@ namespace vcs_Network3_Weather
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            listView1.Items.Clear();
-            txtCity.Text = "";
-            txtCountry.Text = "";
-            txtLat.Text = "";
-            txtLong.Text = "";
-            txtId.Text = "";
+            clear_data();
         }
 
         // Display a histogram.
@@ -460,18 +463,29 @@ namespace vcs_Network3_Weather
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // vcs_ReadWrite_XML1 的 標準版XML讀取解析程式
+            clear_data();
+            richTextBox1.Text += "解讀XML檔案\tvcs_ReadWrite_XML1 的 標準版XML讀取解析程式, 讀取天氣預測XML檔案\n";
 
             string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
-
             ParseXML(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // vcsh 的 XML讀取程式
+            clear_data();
+            richTextBox1.Text += "解讀XML檔案\tvcsh 的 XML讀取程式, 讀取天氣預測XML檔案\n";
+
             string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
             ParseXML_weather_forecast(filename);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            clear_data();
+            richTextBox1.Text += "解讀XML檔案\tvcsh 的 XML讀取程式, 讀取即時天氣XML檔案\n";
+
+            string filename = "C:\\______test_files\\__RW\\_xml\\weather_current.xml";
+            ParseXML_weather_current(filename);
         }
 
         private void ParseXML_weather_forecast(string filename)
@@ -694,6 +708,7 @@ namespace vcs_Network3_Weather
         //即時天氣XML解讀 ST
         private void button3_Click(object sender, EventArgs e)
         {
+            clear_data();
             //TBD
 
             // Compose the query URL.
@@ -734,6 +749,7 @@ namespace vcs_Network3_Weather
         //天氣預測XML解讀
         private void button4_Click(object sender, EventArgs e)
         {
+            clear_data();
             // Compose the query URL.
             string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
@@ -789,11 +805,13 @@ namespace vcs_Network3_Weather
         }
         //讀取XML資料 SP
 
-
         // Get a forecast.
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "查詢型態 : " + comboBox1.Text + "\t代碼 : " + QueryCodes[comboBox1.SelectedIndex] + "\n";
+            clear_data();
+            Cursor = Cursors.WaitCursor;
+            //richTextBox1.Text += "查詢型態 : " + comboBox1.Text + "\t代碼 : " + QueryCodes[comboBox1.SelectedIndex] + "\n";
+            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
 
             // Compose the query URL.
             string url = ForecastUrl2.Replace("@LOCATION@", txtLocation.Text);
@@ -801,15 +819,20 @@ namespace vcs_Network3_Weather
             url = url.Replace("@QUERY@", QueryCodes[comboBox1.SelectedIndex]);
             richTextBox1.Text += "url : " + url + "\n";
 
-            richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
+            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
             // Create a web client.
+            XmlDocument xml_doc;
             using (WebClient client = new WebClient())
             {
-                // Get the response string from the URL.
                 try
                 {
-                    DisplayForecast(client.DownloadString(url));    //抓資料 並 解讀
+                    // Get the response string from the URL.
+                    string xml = client.DownloadString(url);        //抓資料
+
+                    //richTextBox1.Text += "data\n" + xml + "\n";
+
+                    DisplayForecast(xml);    //解讀
                 }
                 catch (WebException ex)
                 {
@@ -820,6 +843,7 @@ namespace vcs_Network3_Weather
                     MessageBox.Show("Unknown error\n" + ex.Message);
                 }
             }
+            Cursor = Cursors.Default;
         }
 
         // Display the forecast.
@@ -888,13 +912,10 @@ namespace vcs_Network3_Weather
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
-            // vcsh 的 XML讀取程式
-            string filename = "C:\\______test_files\\__RW\\_xml\\weather_current.xml";
-            ParseXML_weather_current(filename);
+            clear_data();
         }
-
 
 
     }

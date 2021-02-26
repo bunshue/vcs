@@ -45,18 +45,23 @@
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtCity = new System.Windows.Forms.TextBox();
             this.txtLong = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtCountry = new System.Windows.Forms.TextBox();
             this.txtLat = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtCountry = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCity = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -155,7 +160,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(467, 8);
+            this.button1.Location = new System.Drawing.Point(17, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 30);
             this.button1.TabIndex = 28;
@@ -165,7 +170,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(592, 8);
+            this.button2.Location = new System.Drawing.Point(17, 61);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 30);
             this.button2.TabIndex = 29;
@@ -175,7 +180,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(822, 10);
+            this.button3.Location = new System.Drawing.Point(633, 8);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(125, 30);
             this.button3.TabIndex = 30;
@@ -185,7 +190,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(953, 11);
+            this.button4.Location = new System.Drawing.Point(493, 8);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(125, 30);
             this.button4.TabIndex = 31;
@@ -197,14 +202,14 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(697, 391);
+            this.comboBox1.Location = new System.Drawing.Point(12, 19);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(110, 20);
             this.comboBox1.TabIndex = 32;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(822, 390);
+            this.button5.Location = new System.Drawing.Point(137, 18);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(90, 21);
             this.button5.TabIndex = 33;
@@ -212,43 +217,119 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(17, 106);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(104, 30);
+            this.button6.TabIndex = 44;
+            this.button6.Text = "解讀XML3";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.txtId);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.txtCity);
+            this.groupBox1.Controls.Add(this.txtLong);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtCountry);
+            this.groupBox1.Controls.Add(this.txtLat);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(592, 368);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(338, 138);
+            this.groupBox1.TabIndex = 45;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "氣象資料";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(234, 18);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(90, 21);
+            this.button7.TabIndex = 44;
+            this.button7.Text = "即時天氣";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // txtId
             // 
-            this.txtId.Location = new System.Drawing.Point(736, 480);
+            this.txtId.Location = new System.Drawing.Point(50, 103);
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = true;
             this.txtId.Size = new System.Drawing.Size(100, 22);
             this.txtId.TabIndex = 43;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "城市 :";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(692, 483);
+            this.label7.Location = new System.Drawing.Point(6, 108);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(20, 12);
             this.label7.TabIndex = 42;
             this.label7.Text = "ID:";
             // 
+            // txtCity
+            // 
+            this.txtCity.Location = new System.Drawing.Point(50, 55);
+            this.txtCity.Name = "txtCity";
+            this.txtCity.ReadOnly = true;
+            this.txtCity.Size = new System.Drawing.Size(100, 22);
+            this.txtCity.TabIndex = 35;
+            // 
             // txtLong
             // 
-            this.txtLong.Location = new System.Drawing.Point(911, 456);
+            this.txtLong.Location = new System.Drawing.Point(224, 79);
             this.txtLong.Name = "txtLong";
             this.txtLong.ReadOnly = true;
             this.txtLong.Size = new System.Drawing.Size(100, 22);
             this.txtLong.TabIndex = 41;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(180, 58);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.TabIndex = 36;
+            this.label4.Text = "國家 :";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(867, 459);
+            this.label5.Location = new System.Drawing.Point(180, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 40;
             this.label5.Text = "經度 :";
             // 
+            // txtCountry
+            // 
+            this.txtCountry.Location = new System.Drawing.Point(224, 55);
+            this.txtCountry.Name = "txtCountry";
+            this.txtCountry.ReadOnly = true;
+            this.txtCountry.Size = new System.Drawing.Size(100, 22);
+            this.txtCountry.TabIndex = 37;
+            // 
             // txtLat
             // 
-            this.txtLat.Location = new System.Drawing.Point(736, 456);
+            this.txtLat.Location = new System.Drawing.Point(50, 79);
             this.txtLat.Name = "txtLat";
             this.txtLat.ReadOnly = true;
             this.txtLat.Size = new System.Drawing.Size(100, 22);
@@ -257,55 +338,23 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(692, 459);
+            this.label6.Location = new System.Drawing.Point(6, 84);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 38;
             this.label6.Text = "緯度 :";
             // 
-            // txtCountry
+            // groupBox2
             // 
-            this.txtCountry.Location = new System.Drawing.Point(911, 432);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.ReadOnly = true;
-            this.txtCountry.Size = new System.Drawing.Size(100, 22);
-            this.txtCountry.TabIndex = 37;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(867, 435);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 12);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "國家 :";
-            // 
-            // txtCity
-            // 
-            this.txtCity.Location = new System.Drawing.Point(736, 432);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.ReadOnly = true;
-            this.txtCity.Size = new System.Drawing.Size(100, 22);
-            this.txtCity.TabIndex = 35;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(692, 435);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
-            this.label3.TabIndex = 34;
-            this.label3.Text = "城市 :";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(703, 8);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(104, 30);
-            this.button6.TabIndex = 44;
-            this.button6.Text = "解讀XML3";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Location = new System.Drawing.Point(936, 386);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(142, 150);
+            this.groupBox2.TabIndex = 46;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "解讀XML檔案";
             // 
             // Form1
             // 
@@ -313,23 +362,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 611);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.txtId);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtLong);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtLat);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtCountry);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtCity);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -341,6 +377,9 @@
             this.Text = "vcs_Network3_Weather";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,17 +404,20 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.TextBox txtLong;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtLat;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtCountry;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCity;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

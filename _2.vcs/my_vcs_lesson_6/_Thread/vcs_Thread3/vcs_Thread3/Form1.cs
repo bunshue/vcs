@@ -47,8 +47,8 @@ namespace vcs_Thread3
         // thread cannot access the form's controls directly.
         public void DisplayValue(string txt)
         {
-            richTextBox1.Text += txt + "\n";
-            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行   useless
+            richTextBox1.AppendText(txt + "\n");
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
     }
 
