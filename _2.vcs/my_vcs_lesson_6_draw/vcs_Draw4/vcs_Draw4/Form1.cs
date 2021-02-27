@@ -38,17 +38,6 @@ namespace vcs_Draw4
             pictureBox1.BackColor = Color.Pink;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            p = new Pen(Color.Green, 3);
-            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
-
-            g.DrawRectangle(p, new Rectangle(100, 100, 400, 300));
-
-            Rectangle r = new Rectangle(200, 200, 200, 100);
-            g.DrawRectangle(p, r);
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             g.Clear(BackColor);
@@ -73,133 +62,6 @@ namespace vcs_Draw4
             */
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            p = new Pen(Color.Green, 3);
-            g.DrawEllipse(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
-
-            g.DrawEllipse(p, new Rectangle(100, 100, 400, 300));
-
-            Rectangle r = new Rectangle(200, 200, 200, 100);
-            g.DrawEllipse(p, r);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Rectangle[] walls;
-            walls = new Rectangle[4] {
-	            new Rectangle(0, 0, 200, 100),
-	            new Rectangle(200, 100, 200, 200),
-	            new Rectangle(100, 400, 500, 200),
-	            new Rectangle(300, 200, 300, 300)
-            };
-            g.DrawRectangles(p, walls);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            Pen p = new Pen(Color.Black);
-            Point[] points = new Point[3];
-            points[0] = new Point(400, 0);
-            points[1] = new Point(0, 500);
-            points[2] = new Point(400, 500);
-            g.DrawPolygon(p, points);
-
-            Point[] myPointArray = { 
-                new Point(0, 0),
-                new Point(350, 30),
-                new Point(430, 60),
-                new Point(150, 120),
-                new Point(20, 60) };
-            g.DrawPolygon(p, myPointArray);
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            sb = new SolidBrush(Color.Red);
-            g.FillRectangle(sb, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
-
-            sb = new SolidBrush(Color.Green);
-            g.FillRectangle(sb, new Rectangle(100, 100, 400, 300));
-
-            sb = new SolidBrush(Color.Blue);
-            Rectangle r = new Rectangle(200, 200, 200, 100);
-            g.FillRectangle(sb, r);
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            g.DrawString("各種畫圖範例", f, sb, new PointF(150.0F, 150.0F));
-            g.DrawString("各種畫圖範例", f, sb, 50.0F, 50.0F);
-
-
-            // Create string to draw.
-            String drawString = "江山如畫一時多少豪傑";
-
-            // Create font and brush.
-            Font drawFont = new Font("標楷體", 36, FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout);
-            SolidBrush drawBrush = new SolidBrush(Color.Black);
-
-            // Create point for upper-left corner of drawing.
-            PointF drawPoint = new PointF(50.0F, 250.0F);
-
-            // Draw string to screen.
-            g.DrawString(drawString, drawFont, drawBrush, drawPoint);
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            Point[] points = new Point[3];
-            points[0] = new Point(400, 0);
-            points[1] = new Point(0, 500);
-            points[2] = new Point(400, 500);
-            g.FillPolygon(sb, points);
-
-            sb = new SolidBrush(Color.Red);
-            g.FillPolygon(sb, p_Array);
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            sb = new SolidBrush(Color.Red);
-            g.FillEllipse(sb, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
-
-            sb = new SolidBrush(Color.Green);
-            g.FillEllipse(sb, new Rectangle(100, 100, 400, 300));
-
-            sb = new SolidBrush(Color.Blue);
-            Rectangle r = new Rectangle(200, 200, 200, 100);
-            g.FillEllipse(sb, r);
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            g.DrawPie(p, 300, 300, 200, 200, 0, 135);
-
-            float total = 1234;
-            float part1 = 222;
-            float part2 = 345;
-            float part3 = 456;
-            float others;
-            others = total - part1 - part2 - part3;
-            float angle1 = 360 * part1 / total;
-            float angle2 = 360 * part2 / total;
-            float angle3 = 360 * part3 / total;
-            float angle4 = 360 * others / total;
-            richTextBox1.Text += "angle1 = " + angle1.ToString() + "\n";
-            richTextBox1.Text += "angle2 = " + angle2.ToString() + "\n";
-            richTextBox1.Text += "angle3 = " + angle3.ToString() + "\n";
-            richTextBox1.Text += "angle4 = " + angle4.ToString() + "\n";
-
-            p = new Pen(Color.Red, 10);
-            g.DrawPie(p, 100, 50, 250, 250, 0, angle1);
-            g.DrawPie(p, 100, 50, 250, 250, angle1, angle2);
-            g.DrawPie(p, 100, 50, 250, 250, angle1 + angle2, angle3);
-            g.DrawPie(p, 100, 50, 250, 250, angle1 + angle2 + angle3, angle4);
-
-        }
-
         private void button13_Click(object sender, EventArgs e)
         {
             p = new Pen(Color.Red, 5);
@@ -210,40 +72,6 @@ namespace vcs_Draw4
             g.DrawArc(p, 100, 100, 300, 200, 0, 135);
 
             g.DrawArc(p, 300, 300, 100, 100, 0, -135);
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            g.FillPie(sb, 300, 300, 200, 200, 0, 135);
-
-            float total = 1234;
-            float part1 = 222;
-            float part2 = 345;
-            float part3 = 456;
-            float others;
-            others = total - part1 - part2 - part3;
-            float angle1 = 360 * part1 / total;
-            float angle2 = 360 * part2 / total;
-            float angle3 = 360 * part3 / total;
-            float angle4 = 360 * others / total;
-            richTextBox1.Text += "angle1 = " + angle1.ToString() + "\n";
-            richTextBox1.Text += "angle2 = " + angle2.ToString() + "\n";
-            richTextBox1.Text += "angle3 = " + angle3.ToString() + "\n";
-            richTextBox1.Text += "angle4 = " + angle4.ToString() + "\n";
-
-            Brush b1 = new SolidBrush(Color.Red);
-            Brush b2 = new SolidBrush(Color.Green);
-            Brush b3 = new SolidBrush(Color.Blue);
-            Brush b4 = new SolidBrush(Color.Yellow);
-
-            g.FillPie(b1, 100, 50, 250, 250, 0, angle1);
-            g.FillPie(b2, 100, 50, 250, 250, angle1, angle2);
-            g.FillPie(b3, 100, 50, 250, 250, angle1 + angle2, angle3);
-            g.FillPie(b4, 100, 50, 250, 250, angle1 + angle2 + angle3, angle4);
-
-
-
 
         }
 
@@ -325,22 +153,7 @@ namespace vcs_Draw4
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            label1.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePosition.Y.ToString() + ")";
-            if (flag_mouse_down == 1)
-            {
-                label2.Text = "1";
-                sb = new SolidBrush(Color.White);
-                //g.FillEllipse(sb, Control.MousePosition.X, Control.MousePosition.Y, Control.MousePosition.X + 10, Control.MousePosition.Y + 10);
-
-
-            }
-            else
-                label2.Text = "0";
-        }
-
-        int flag_mouse_down = 0;
+        int flag_mouse_down = 0;    //給erase用
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = 1;

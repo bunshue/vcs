@@ -45,30 +45,24 @@ namespace vcs_Network3_Weather
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
         private const string API_KEY = "xxxx";
-
-        // Query URLs. Replace @LOCATION@ with the location.
-        //即時天氣
-        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
-        //天氣預測
-        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
-
-        // Query URLs. Replace @LOCATION@ with the location.
-        //即時天氣
-        private const string CurrentUrl2 = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
-        //天氣預測
-        private const string ForecastUrl2 = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        private char degrees = (char)176;
 
         // Query codes.
+        private string Query = "";
         private string[] QueryCodes = { "q", "zip", "id", };
 
-        /*
+        // Query URLs. Replace @LOCATION@ with the location.
+        //即時天氣
+        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //天氣預測
+        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+
         //若是只查詢代碼為City(q)之條件, 用 q 取代 @QUERY@
         // Query URLs. Replace @LOCATION@ with the location.
         //即時天氣
-        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        //private const string CurrentUrl3 = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
         //天氣預測
-        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
-        */
+        //private const string ForecastUrl3 = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -83,6 +77,8 @@ namespace vcs_Network3_Weather
 
         void clear_data()
         {
+            temperature.Clear();
+            date.Clear();
             richTextBox1.Clear();
             listView1.Items.Clear();
             txtCity.Text = "";
@@ -90,182 +86,128 @@ namespace vcs_Network3_Weather
             txtLat.Text = "";
             txtLong.Text = "";
             txtId.Text = "";
-        }
-
-        // Get a forecast.
-        private void btnForecast_Click(object sender, EventArgs e)
-        {
-            clear_data();
-            Cursor = Cursors.WaitCursor;
-            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
-
-            // Compose the query URL.
-            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
-            richTextBox1.Text += "url : " + url + "\n";
-
-            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
-
-            // Create a web client.
-            XmlDocument xml_doc;
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    // Get the response string from the URL.
-                    string xml = client.DownloadString(url);    //抓資料
-
-                    //richTextBox1.Text += "data\n" + xml + "\n";
-
-                    // Load the response into an XML document.
-                    xml_doc = new XmlDocument();
-                    xml_doc.LoadXml(xml);
-
-                    // List the temperatures.
-                    ListTemperatures(xml_doc);
-                }
-                catch (FormatException)
-                {
-                    // A formatting error occurred.
-                    // Report the error to the user.
-                    richTextBox1.Text += "數值錯誤\n";
-                }
-                catch (Exception ex)
-                {
-                    // Some other error occurred.
-                    // Report the error to the user.
-                    richTextBox1.Text += "計算錯誤\t原因 : " + ex + "\n";
-                    richTextBox1.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
-                }
-            }
-            Cursor = Cursors.Default;
+            pictureBox1.Image = null;
         }
 
         // List the temperatures.
         private void ListTemperatures(XmlDocument xml_doc)
         {
-            listView1.Items.Clear();
-            temperature.Clear();
-            date.Clear();
-
-            /*
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
+            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
-
             XmlNode geo_node = loc_node.SelectSingleNode("location");
+            txtLat.Text = geo_node.Attributes["latitude"].Value;
             richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
+            txtLong.Text = geo_node.Attributes["longitude"].Value;
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
+            txtId.Text = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
-            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n\n";
-
-            foreach (XmlNode sun_node in xml_doc.SelectNodes("//sun"))
-            {
-                XmlAttribute time_attr1 = sun_node.Attributes["rise"];
-                XmlAttribute time_attr2 = sun_node.Attributes["set"];
-                richTextBox1.Text += "日出 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + "\n";
-                richTextBox1.Text += "日落 : " + DateTime.Parse(time_attr2.Value).ToLocalTime() + "\n";
-            }
-            */
-
-            char degrees = (char)176;
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
             // Loop throuh the time entries.
             string last_day = "";
             int aaa = 0;
             foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
             {
-                // Get the start date and time.
-                XmlAttribute time_attr1 = time_node.Attributes["from"];
-                XmlAttribute time_attr2 = time_node.Attributes["to"];
 
-                aaa++;
-                /* 解讀xml資料 
-                richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
 
-                richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
-                    + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
 
-                richTextBox1.Text += "symbol" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
 
-                richTextBox1.Text += "precipitation" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
 
-                richTextBox1.Text += "windDirection" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
+                                                        // Get the start date and time.
+                                                        XmlAttribute time_attr1 = time_node.Attributes["from"];
+                                                        XmlAttribute time_attr2 = time_node.Attributes["to"];
 
-                richTextBox1.Text += "windSpeed" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
+                                                        aaa++;
+                                                        /* 解讀xml資料 
+                                                        richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
 
-                richTextBox1.Text += "temperature" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
+                                                        richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
+                                                            + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
 
-                richTextBox1.Text += "feels_like" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
+                                                        richTextBox1.Text += "symbol" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
 
-                richTextBox1.Text += "pressure" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
+                                                        richTextBox1.Text += "precipitation" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
 
-                richTextBox1.Text += "humidity" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
+                                                        richTextBox1.Text += "windDirection" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
 
-                richTextBox1.Text += "clouds" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
+                                                        richTextBox1.Text += "windSpeed" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
 
-                richTextBox1.Text += "visibility" + "\t";
-                richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
-                */
+                                                        richTextBox1.Text += "temperature" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
 
-                DateTime start_time = DateTime.Parse(time_attr1.Value);
+                                                        richTextBox1.Text += "feels_like" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
 
-                // Convert from UTC to local time.
-                start_time = start_time.ToLocalTime();
+                                                        richTextBox1.Text += "pressure" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
 
-                // Add 90 minutes to get to the middle of the interval.
-                start_time += new TimeSpan(1, 30, 0);
+                                                        richTextBox1.Text += "humidity" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
 
-                // Get the temperature node.
-                XmlNode temp_node = time_node.SelectSingleNode("temperature");
-                XmlAttribute temp_attr = temp_node.Attributes["value"];
-                float temp = 0;
-                if (temp_attr != null)
-                {
-                    temp = float.Parse(temp_attr.Value.ToString());
-                }
+                                                        richTextBox1.Text += "clouds" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
 
-                ListViewItem item;
-                if (start_time.DayOfWeek.ToString() == last_day)
-                {
-                    item = listView1.Items.Add("");
-                }
-                else
-                {
-                    last_day = start_time.DayOfWeek.ToString();
-                    item = listView1.Items.Add(last_day);
-                }
-                item.SubItems.Add(start_time.ToShortTimeString());
-                item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
-                item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
-                temperature.Add((temp - 32) * 5 / 9);
-                date.Add(start_time.ToShortTimeString());
+                                                        richTextBox1.Text += "visibility" + "\t";
+                                                        richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
+                                                        */
+
+                                                        DateTime start_time = DateTime.Parse(time_attr1.Value);
+
+                                                        // Convert from UTC to local time.
+                                                        start_time = start_time.ToLocalTime();
+
+                                                        // Add 90 minutes to get to the middle of the interval.
+                                                        start_time += new TimeSpan(1, 30, 0);
+
+                                                        // Get the temperature node.
+                                                        XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                                                        XmlAttribute temp_attr = temp_node.Attributes["value"];
+                                                        float temp = 0;
+                                                        if (temp_attr != null)
+                                                        {
+                                                            temp = float.Parse(temp_attr.Value.ToString());
+                                                        }
+
+                                                        ListViewItem item;
+                                                        if (start_time.DayOfWeek.ToString() == last_day)
+                                                        {
+                                                            item = listView1.Items.Add("");
+                                                        }
+                                                        else
+                                                        {
+                                                            last_day = start_time.DayOfWeek.ToString();
+                                                            item = listView1.Items.Add(last_day);
+                                                        }
+                                                        item.SubItems.Add(start_time.ToShortTimeString());
+                                                        item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
+                                                        item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+                                                        temperature.Add((temp - 32) * 5 / 9);
+                                                        date.Add(start_time.ToShortTimeString());
             }
 
             int i;
@@ -526,8 +468,6 @@ namespace vcs_Network3_Weather
                 richTextBox1.Text += "日落 : " + DateTime.Parse(time_attr2.Value).ToLocalTime() + "\n";
             }
 
-            char degrees = (char)176;
-
             // Loop throuh the time entries.
             //string last_day = "";
             int aaa = 0;
@@ -712,38 +652,14 @@ namespace vcs_Network3_Weather
             //TBD
 
             // Compose the query URL.
+            Query = "q";
             string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
+            url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
 
             richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
-            /*
-            //ddddddd
-            // vcsh 的 XML讀取程式
-            string filename = "C:\\______test_files\\__RW\\_xml\\weather_current.xml";
-            ParseXML_weather_current(filename);
-            */
-
-            /*
-            // 解讀 fail
-            // Create a web client.
-            using (WebClient client = new WebClient())
-            {
-                // Get the response string from the URL.
-                try
-                {
-                    //DisplayForecast(client.DownloadString(url));    //抓資料 並 解讀 fail
-                }
-                catch (WebException ex)
-                {
-                    DisplayError(ex);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\n" + ex.Message);
-                }
-            }
-            */
         }
 
         //天氣預測XML解讀
@@ -751,7 +667,10 @@ namespace vcs_Network3_Weather
         {
             clear_data();
             // Compose the query URL.
+            Query = "q";
             string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
+            url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
 
             //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
@@ -762,7 +681,12 @@ namespace vcs_Network3_Weather
                 // Get the response string from the URL.
                 try
                 {
-                    DisplayForecast(client.DownloadString(url));    //抓資料 並 解讀
+                    // Get the response string from the URL.
+                    string xml = client.DownloadString(url);        //抓資料
+
+                    //richTextBox1.Text += "data\n" + xml + "\n";
+
+                    ParseXML_Forecast(xml);    //解讀
                 }
                 catch (WebException ex)
                 {
@@ -785,7 +709,12 @@ namespace vcs_Network3_Weather
             using (WebClient client = new WebClient())
             {
                 // Get the response string from the URL.
-                string xml = client.DownloadString(url);
+                string xml = client.DownloadString(url);        //抓資料
+
+                //richTextBox1.Text += "data\n" + xml + "\n";
+
+                //prepare
+                //ParseXML_Forecast(xml);    //解讀
 
                 // Load the response into an XML document.
                 XmlDocument xml_document = new XmlDocument();
@@ -810,19 +739,18 @@ namespace vcs_Network3_Weather
         {
             clear_data();
             Cursor = Cursors.WaitCursor;
-            //richTextBox1.Text += "查詢型態 : " + comboBox1.Text + "\t代碼 : " + QueryCodes[comboBox1.SelectedIndex] + "\n";
             richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
 
             // Compose the query URL.
-            string url = ForecastUrl2.Replace("@LOCATION@", txtLocation.Text);
+            Query = QueryCodes[comboBox1.SelectedIndex];
+            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
-            url = url.Replace("@QUERY@", QueryCodes[comboBox1.SelectedIndex]);
+            url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
 
             //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
             // Create a web client.
-            XmlDocument xml_doc;
             using (WebClient client = new WebClient())
             {
                 try
@@ -832,7 +760,8 @@ namespace vcs_Network3_Weather
 
                     //richTextBox1.Text += "data\n" + xml + "\n";
 
-                    DisplayForecast(xml);    //解讀
+                    ParseXML_Forecast(xml);    //解讀
+                    //ParseXML_Forecast_old(xml);    //解讀
                 }
                 catch (WebException ex)
                 {
@@ -847,36 +776,39 @@ namespace vcs_Network3_Weather
         }
 
         // Display the forecast.
-        private void DisplayForecast(string xml)
+        private void ParseXML_Forecast_old(string xml)
         {
             //richTextBox1.Text += xml + "\n\n";
             // Load the response into an XML document.
             XmlDocument xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
 
+            // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
             txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
             txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
+            richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
             XmlNode geo_node = loc_node.SelectSingleNode("location");
             txtLat.Text = geo_node.Attributes["latitude"].Value;
+            richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
             txtLong.Text = geo_node.Attributes["longitude"].Value;
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
             txtId.Text = geo_node.Attributes["geobaseid"].Value;
+            richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
             richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
-            listView1.Items.Clear();
-            char degrees = (char)176;
-
+            // Loop throuh the time entries.
+            string last_day = "";
+            int aaa = 0;
             foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
             {
+                /*
                 // Get the time in UTC.
-                DateTime time =
-                    DateTime.Parse(time_node.Attributes["from"].Value,
-                        null, DateTimeStyles.AssumeUniversal);
+                DateTime time = DateTime.Parse(time_node.Attributes["from"].Value, null, DateTimeStyles.AssumeUniversal);
 
                 // Get the temperature.
                 XmlNode temp_node = time_node.SelectSingleNode("temperature");
@@ -885,13 +817,173 @@ namespace vcs_Network3_Weather
                 ListViewItem item = listView1.Items.Add(time.DayOfWeek.ToString());
                 item.SubItems.Add(time.ToShortTimeString());
 
+                item.SubItems.Add(temp + " " + degrees + "F");
+                richTextBox1.Text += temp + "\n";
+
+                item.SubItems.Add(((float.Parse(temp) - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+                */
+
+                // Get the start date and time.
+                XmlAttribute time_attr1 = time_node.Attributes["from"];
+                XmlAttribute time_attr2 = time_node.Attributes["to"];
+
+                aaa++;
+                /* 解讀xml資料 
+                richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
+
+                richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
+                    + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
+
+                richTextBox1.Text += "symbol" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "precipitation" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "windDirection" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "windSpeed" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "temperature" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "feels_like" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "pressure" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "humidity" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "clouds" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
+
+                richTextBox1.Text += "visibility" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
+                */
+
+                DateTime start_time = DateTime.Parse(time_attr1.Value);
+
+                // Convert from UTC to local time.
+                start_time = start_time.ToLocalTime();
+
+                // Add 90 minutes to get to the middle of the interval.
+                start_time += new TimeSpan(1, 30, 0);
+
+                // Get the temperature node.
+                XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                XmlAttribute temp_attr = temp_node.Attributes["value"];
+                float temp = 0;
+                if (temp_attr != null)
+                {
+                    temp = float.Parse(temp_attr.Value.ToString());
+                }
+
+                ListViewItem item;
+                if (start_time.DayOfWeek.ToString() == last_day)
+                {
+                    item = listView1.Items.Add("");
+                }
+                else
+                {
+                    last_day = start_time.DayOfWeek.ToString();
+                    item = listView1.Items.Add(last_day);
+                }
+                item.SubItems.Add(start_time.ToShortTimeString());
+                item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
+                item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+                temperature.Add((temp - 32) * 5 / 9);
+                date.Add(start_time.ToShortTimeString());
+            }
+
+            int i;
+            richTextBox1.Text += "temperature len = " + temperature.Count.ToString() + "\n";
+            for (i = 0; i < temperature.Count; i++)
+            {
+                richTextBox1.Text += temperature[i].ToString() + "\n";
+            }
+
+            richTextBox1.Text += "date len = " + date.Count.ToString() + "\n";
+            for (i = 0; i < date.Count; i++)
+            {
+                richTextBox1.Text += date[i].ToString() + "\n";
+            }
+
+            Pen thin_pen = new Pen(Color.Black, 0);
+            thin_pen.Color = Color.LightBlue;
+            /* debug
+            int num_numbers = 10;
+            float[] numbers = new float[num_numbers];
+            Random rand = new Random();
+            for (i = 0; i < num_numbers; i++)
+            {
+                //result4 += r.NextDouble().ToString() + " ";
+                numbers[i] = (float)rand.NextDouble() * 100;
+                richTextBox1.Text += numbers[i].ToString() + " ";
+            }
+            */
+            DrawHistogramF(pictureBox1, Brushes.Blue, thin_pen, temperature.ToArray());
+        }
+
+        // Display the forecast.
+        private void ParseXML_Forecast(string xml)
+        {
+            //richTextBox1.Text += xml + "\n\n";
+            // Load the response into an XML document.
+            XmlDocument xml_doc = new XmlDocument();
+            xml_doc.LoadXml(xml);
+
+            // 解讀xml資料
+            // Get the city, country, latitude, and longitude.
+            XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
+            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
+            richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
+            richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
+            XmlNode geo_node = loc_node.SelectSingleNode("location");
+            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
+            richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
+            txtLong.Text = geo_node.Attributes["longitude"].Value;
+            richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
+            txtId.Text = geo_node.Attributes["geobaseid"].Value;
+            richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
+
+            foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
+            {
+                // Get the time in UTC.
+                DateTime time = DateTime.Parse(time_node.Attributes["from"].Value, null, DateTimeStyles.AssumeUniversal);
+
+                // Get the temperature.
+                XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                string temp = temp_node.Attributes["value"].Value;
+
+                ListViewItem item = listView1.Items.Add(time.DayOfWeek.ToString());
+                item.SubItems.Add(time.ToShortTimeString());
 
                 item.SubItems.Add(temp + " " + degrees + "F");
                 richTextBox1.Text += temp + "\n";
 
-                //item.SubItems.Add(temp.ToString("0.00"));
                 item.SubItems.Add(((float.Parse(temp) - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
-
             }
         }
 
@@ -915,6 +1007,47 @@ namespace vcs_Network3_Weather
         private void button7_Click(object sender, EventArgs e)
         {
             clear_data();
+        }
+
+        // Get a forecast.
+        private void button9_Click(object sender, EventArgs e)
+        {
+            clear_data();
+            Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
+
+            // Compose the query URL.
+            Query = QueryCodes[comboBox1.SelectedIndex];
+            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
+            richTextBox1.Text += "url : " + url + "\n";
+            url = url.Replace("@QUERY@", Query);
+            richTextBox1.Text += "url : " + url + "\n";
+
+            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
+
+            // Create a web client.
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    // Get the response string from the URL.
+                    string xml = client.DownloadString(url);        //抓資料
+
+                    //richTextBox1.Text += "data\n" + xml + "\n";
+
+                    //ParseXML_Forecast(xml);    //解讀
+                    ParseXML_Forecast_old(xml);    //解讀
+                }
+                catch (WebException ex)
+                {
+                    DisplayError(ex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\n" + ex.Message);
+                }
+            }
+            Cursor = Cursors.Default;
         }
 
 

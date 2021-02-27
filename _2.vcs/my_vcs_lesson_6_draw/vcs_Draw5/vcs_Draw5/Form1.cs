@@ -22,90 +22,11 @@ namespace vcs_Draw5
             g.Clear(Color.White);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(100, 100, 100, 100));
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(200, 200, 100, 100));
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(300, 300, 100, 100));
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(400, 400, 239, 79));
-            pictureBox1.Refresh();
-        }
-
         private void button19_Click(object sender, EventArgs e)
         {
             //pictureBox1.Image = null;
             //Graphics g = Graphics.FromImage(pictureBox1.Image);
             g.Clear(Color.White);
-            pictureBox1.Refresh();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            /*
-            // 寫法一
-            // Create a Graphics object for the Control.
-            Graphics g = pictureBox1.CreateGraphics();
-            // Create pen.
-            Pen p = new Pen(Color.Red, 5);
-            // Create location and size of ellipse.
-            //畫圓
-            g.DrawEllipse(p, 0, 0, 200, 200);
-
-            // Clean up the Graphics object.
-            g.Dispose();
-            */
-
-            // 寫法二
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(100, 100, 100, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(200, 200, 100, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(200, 200, 200, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(300, 300, 100, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(300, 300, 300, 100));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(400, 400, 79, 79));
-            g.DrawEllipse(new Pen(Color.Black), new Rectangle(400, 400, 239, 79));
-            pictureBox1.Refresh();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.DrawPie(new Pen(Color.Black), new Rectangle(0, 0, 100, 100), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(100, 100, 100, 100), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(200, 200, 100, 100), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(200, 200, 200, 100), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(300, 300, 100, 100), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(300, 300, 300, 100), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(400, 400, 79, 79), 0, 180);
-            g.DrawPie(new Pen(Color.Black), new Rectangle(400, 400, 239, 79), 0, 180);
-            pictureBox1.Refresh();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            Point[] pts = new Point[5];
-            pts[0].X = 10;
-            pts[0].Y = 10;
-            pts[1].X = 20;
-            pts[1].Y = 10;
-            pts[2].X = 30;
-            pts[2].Y = 20;
-            pts[3].X = 20;
-            pts[3].Y = 20;
-            pts[4].X = 10;
-            pts[4].Y = 30;
-            g.DrawPolygon(new Pen(Color.Black), pts);
             pictureBox1.Refresh();
         }
 
@@ -121,24 +42,6 @@ namespace vcs_Draw5
             gPath.AddLine(new Point(60, 10), new Point(10, 60));
             gPath.AddRectangle(new Rectangle(10, 10, 50, 50));
             g.DrawPath(new Pen(Color.Black), gPath);
-            pictureBox1.Refresh();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawLine(new Pen(Color.Black), 0, 0, 100, 0);
-            g.DrawLine(new Pen(Color.Black), 100, 0, 100, 100);
-            g.DrawLine(new Pen(Color.Black), 100, 100, 200, 100);
-            g.DrawLine(new Pen(Color.Black), 200, 100, 200, 200);
-            g.DrawLine(new Pen(Color.Black), 200, 200, 300, 200);
-            g.DrawLine(new Pen(Color.Black), 300, 200, 300, 300);
-            g.DrawLine(new Pen(Color.Black), 300, 300, 400, 300);
-            g.DrawLine(new Pen(Color.Black), 400, 300, 400, 400);
-            g.DrawLine(new Pen(Color.Black), 400, 400, 479, 400);
-            g.DrawLine(new Pen(Color.Black), 479, 400, 479, 479);
-            g.DrawLine(new Pen(Color.Black), 479, 479, 639, 479);
             pictureBox1.Refresh();
         }
 
@@ -181,79 +84,6 @@ namespace vcs_Draw5
             pts[4].X = 50;
             pts[4].Y = 10;
             g.DrawCurve(new Pen(Color.Black), pts);
-            pictureBox1.Refresh();
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), 0, 0);
-            g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), 100, 100);
-            g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), 200, 200);
-            g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), 300, 300);
-            g.DrawString("畫字串", this.Font, new SolidBrush(Color.Black), 400, 400);
-            pictureBox1.Refresh();
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(0, 0, 100, 100));
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(100, 100, 100, 100));
-            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(200, 200, 100, 100));
-            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(300, 300, 100, 100));
-            g.FillRectangle(new SolidBrush(Color.Lime), new Rectangle(400, 400, 239, 79));
-            pictureBox1.Refresh();
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(0, 0, 100, 100));
-            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(100, 100, 100, 100));
-            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(200, 200, 100, 100));
-            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(300, 300, 100, 100));
-            g.FillEllipse(new SolidBrush(Color.Lime), new Rectangle(400, 400, 239, 79));
-            pictureBox1.Refresh();
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            g.FillPie(new SolidBrush(Color.Lime), new Rectangle(0, 0, 100, 100), 0, 180);
-            g.FillPie(new SolidBrush(Color.Lime), new Rectangle(100, 100, 100, 100), 0, 180);
-            g.FillPie(new SolidBrush(Color.Lime), new Rectangle(200, 200, 100, 100), 0, 180);
-            g.FillPie(new SolidBrush(Color.Lime), new Rectangle(300, 300, 100, 100), 0, 180);
-            g.FillPie(new SolidBrush(Color.Lime), new Rectangle(400, 400, 239, 79), 0, 180);
-
-            pictureBox1.Refresh();
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            //Graphics g = Graphics.FromImage(pictureBox1.Image);
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(0, 0, 100, 100));
-            Point[] pts = new Point[5];
-            pts[0].X = 10;
-            pts[0].Y = 10;
-            pts[1].X = 20;
-            pts[1].Y = 10;
-            pts[2].X = 30;
-            pts[2].Y = 20;
-            pts[3].X = 20;
-            pts[3].Y = 20;
-            pts[4].X = 10;
-            pts[4].Y = 30;
-            g.FillPolygon(new SolidBrush(Color.Lime), pts);
             pictureBox1.Refresh();
         }
 

@@ -157,7 +157,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(1261, 12);
+            this.button4.Location = new System.Drawing.Point(1260, 7);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 42);
             this.button4.TabIndex = 21;
@@ -265,7 +265,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(120, 42);
             this.button0.TabIndex = 30;
-            this.button0.Text = "基本畫圖";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -685,6 +684,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(120, 42);
             this.button45.TabIndex = 72;
+            this.button45.Text = "基本畫圖1";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
@@ -695,7 +695,9 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(120, 42);
             this.button46.TabIndex = 73;
+            this.button46.Text = "基本畫圖2";
             this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // button47
             // 
@@ -704,7 +706,9 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(120, 42);
             this.button47.TabIndex = 74;
+            this.button47.Text = "基本畫圖3";
             this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
             // button48
             // 
@@ -713,7 +717,9 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(120, 42);
             this.button48.TabIndex = 75;
+            this.button48.Text = "基本畫圖4";
             this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
             // button49
             // 
