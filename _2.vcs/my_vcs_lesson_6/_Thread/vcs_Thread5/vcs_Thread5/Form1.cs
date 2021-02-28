@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading;
+using System.Timers;    //for ElapsedEventHandler
 
 namespace vcs_Thread5
 {
@@ -23,6 +24,7 @@ namespace vcs_Thread5
         thread1 obj;
         Thread t;
 
+        //第2種 啟動Thread 方法
         //建立一個Thread 到 偵錯/視窗/即時運算 看結果
         private void button1_Click(object sender, EventArgs e)
         {
@@ -60,6 +62,35 @@ namespace vcs_Thread5
             t.Abort();
 
         }
+
+
+        //第2種 啟動Thread 方法
+        //開啟關閉thread    ST
+        System.Timers.Timer tt = new System.Timers.Timer(1234);
+        int number = 0;
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tt.Elapsed += new ElapsedEventHandler(run);
+            tt.Enabled = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            tt.Enabled = false;
+            number = 0;
+        }
+
+        public void run(object source, System.Timers.ElapsedEventArgs e)
+        {
+            number++;
+            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ " + number.ToString());
+            Console.Write(number.ToString() + "\r\n");
+
+            //MessageBox.Show("number = " + number);
+        }
+        //開啟關閉thread    SP
+
 
     }
 }

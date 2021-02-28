@@ -11,6 +11,9 @@ using System.Threading;
 
 namespace vcs_Thread3
 {
+    //創建SetValue的委托
+    public delegate void SetValueDel(string str, object obj);
+
     public partial class Form1 : Form
     {
         // This value is incremented by the thread.
@@ -22,8 +25,15 @@ namespace vcs_Thread3
         public Form1()
         {
             InitializeComponent();
+            Thread.CurrentThread.Name = "MainThread";
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //第1種Thread使用
         private void button1_Click(object sender, EventArgs e)
         {
             // Make a new counter object.
@@ -50,6 +60,85 @@ namespace vcs_Thread3
             richTextBox1.AppendText(txt + "\n");
             richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
+
+
+
+        //第2種Thread使用
+
+        //開啟一個線程
+        int a = 0;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //將委托的方法和主窗體傳過去
+            NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
+
+            a++;
+            string thread_name = "Thread測試_" + a.ToString();
+
+            Thread TheThreadOne = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
+            TheThreadOne.Name = thread_name;
+
+            richTextBox1.Text += "開啟thread, 名稱 : " + TheThreadOne.Name + "\n";
+
+            //讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
+            TheThreadOne.IsBackground = true;
+            TheThreadOne.Start();
+        }
+
+        //給文本框賦值
+        private void SetValue(string str, object obj)
+        {
+            //lock裡面的代碼同一個時刻，只能被一個線程使用。其它的後面排隊。這樣防止數據混亂。
+            lock (obj)
+            {
+                richTextBox1.Text += "Thread名稱 : " + str + " 做事 " + DateTime.Now.ToString() + "\n";
+            }
+        }
+
+
+        //第3種Thread使用
+
+        // Start threads with different priorities.
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int i;
+            int num_low = 4;
+            for (i = 0; i < num_low; i++)
+            {
+                MakeThread("低_" + i.ToString(), ThreadPriority.BelowNormal);
+            }
+
+            int num_normal = 4;
+            for (i = 0; i < num_normal; i++)
+            {
+                MakeThread("中_" + i.ToString(), ThreadPriority.Normal);
+            }
+
+            int num_high = 4;
+            for (i = 0; i < num_high; i++)
+            {
+                MakeThread("高_" + i.ToString(), ThreadPriority.AboveNormal);
+            }
+        }
+
+        // Make a thread with the indicated priority.
+        private void MakeThread(string thread_name, ThreadPriority thread_priority)
+        {
+            richTextBox1.Text += "開啟thread, 名稱 : " + thread_name + ", 優先序 : " + thread_priority.ToString() + "\n";
+            Application.DoEvents();
+
+            // Initialize the thread.
+            Counter2 new_counter = new Counter2(thread_name);
+            Thread thread = new Thread(new_counter.Run);
+            thread.Priority = thread_priority;
+            thread.IsBackground = true;
+            thread.Name = thread_name;
+
+            // Start the thread.
+            thread.Start();
+        }
+
+
     }
 
     // This class's Run method displays a count in the Output window.
@@ -123,5 +212,80 @@ namespace vcs_Thread3
             }
         }
     }
+
+
+    //建一個類，模擬實際使用情況
+    public class NEWThreadClass
+    {
+        //接收主窗體傳過來的委托方法。
+        public SetValueDel setValueDel;
+
+        //接收主窗體
+        public Form form;
+
+        //用於告訴主線程中鎖，是哪一個線程調用的。
+        static object locker = new object();
+
+        public NEWThreadClass(SetValueDel del, Form fom)
+        {
+            this.setValueDel = del;
+            this.form = fom;
+        }
+        //第一個線程,給主線程創建的控件傳值。
+        public void threadOne()
+        {
+            //這裡獲取線程的名字
+            string threadName = Thread.CurrentThread.Name;
+            try
+            {
+                while (true)
+                {
+                    //告訴主線程，我要更改你的控件了。
+                    this.form.Invoke((EventHandler)(delegate
+                    {
+                        //如果在這裡使用Thread.CurrentThread.Name 獲取到的是主線程的名字。
+                        setValueDel(threadName + " :Hello!", locker);//給文本框傳值，“自己的名字：Hello!”。
+                    }));
+                    Thread.Sleep(3 * 1000);//太累了 ，休息三秒。。。。
+                }
+            }
+            catch (Exception ex)
+            { }
+        }
+    }
+
+    class Counter2
+    {
+        // This counter's number.
+        public string Name;
+
+        // Initializing constructor.
+        public Counter2(string name)
+        {
+            Name = name;
+        }
+
+        // Count off 10 half second intervals in the Output window.
+        public void Run()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                // Display the next message.
+                Console.WriteLine(Name + " " + i);
+
+                // See when we should display the next message.
+                DateTime next_time = DateTime.Now.AddSeconds(0.5);
+
+                // Waste half a second. We don't sleep or call
+                // DoEvents so we don't give up control of the CPU.
+                while (DateTime.Now < next_time)
+                {
+                    // Wait a bit.
+                }
+            }
+        }
+    }
+
+
 
 }

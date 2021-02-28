@@ -88,6 +88,7 @@
             this.button47 = new System.Windows.Forms.Button();
             this.button48 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
+            this.bt_eraser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
@@ -131,6 +132,9 @@
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // button1
             // 
@@ -341,7 +345,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(120, 42);
             this.button19.TabIndex = 36;
-            this.button19.Text = "畫上小圖";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -706,7 +709,6 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(120, 42);
             this.button47.TabIndex = 74;
-            this.button47.Text = "基本畫圖3";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
@@ -717,7 +719,6 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(120, 42);
             this.button48.TabIndex = 75;
-            this.button48.Text = "基本畫圖4";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
@@ -730,11 +731,23 @@
             this.button49.TabIndex = 76;
             this.button49.UseVisualStyleBackColor = true;
             // 
+            // bt_eraser
+            // 
+            this.bt_eraser.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_eraser.Location = new System.Drawing.Point(1008, 502);
+            this.bt_eraser.Name = "bt_eraser";
+            this.bt_eraser.Size = new System.Drawing.Size(120, 42);
+            this.bt_eraser.TabIndex = 77;
+            this.bt_eraser.Text = "Eraser";
+            this.bt_eraser.UseVisualStyleBackColor = true;
+            this.bt_eraser.Click += new System.EventHandler(this.bt_eraser_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 789);
+            this.Controls.Add(this.bt_eraser);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.button48);
             this.Controls.Add(this.button47);
@@ -872,6 +885,7 @@
         private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Button button49;
+        private System.Windows.Forms.Button bt_eraser;
     }
 }
 

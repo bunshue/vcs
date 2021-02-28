@@ -39,8 +39,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button_start_thread = new System.Windows.Forms.Button();
-            this.button_stop_thread = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -152,35 +150,11 @@
             this.textBox3.TabIndex = 25;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button_start_thread
-            // 
-            this.button_start_thread.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button_start_thread.Location = new System.Drawing.Point(585, 115);
-            this.button_start_thread.Name = "button_start_thread";
-            this.button_start_thread.Size = new System.Drawing.Size(127, 45);
-            this.button_start_thread.TabIndex = 26;
-            this.button_start_thread.Text = "開啟thread";
-            this.button_start_thread.UseVisualStyleBackColor = true;
-            this.button_start_thread.Click += new System.EventHandler(this.button_start_thread_Click);
-            // 
-            // button_stop_thread
-            // 
-            this.button_stop_thread.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button_stop_thread.Location = new System.Drawing.Point(727, 115);
-            this.button_stop_thread.Name = "button_stop_thread";
-            this.button_stop_thread.Size = new System.Drawing.Size(129, 45);
-            this.button_stop_thread.TabIndex = 27;
-            this.button_stop_thread.Text = "關閉thread";
-            this.button_stop_thread.UseVisualStyleBackColor = true;
-            this.button_stop_thread.Click += new System.EventHandler(this.button_stop_thread_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1087, 361);
-            this.Controls.Add(this.button_stop_thread);
-            this.Controls.Add(this.button_start_thread);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.label10);
@@ -213,8 +187,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button_start_thread;
-        private System.Windows.Forms.Button button_stop_thread;
     }
 }
 

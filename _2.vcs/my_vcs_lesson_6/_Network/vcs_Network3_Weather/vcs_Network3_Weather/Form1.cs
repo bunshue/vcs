@@ -73,6 +73,13 @@ namespace vcs_Network3_Weather
             comboBox1.SelectedIndex = 0;
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            if (API_KEY.Length != 32)
+            {
+                MessageBox.Show("API_KEY 錯誤, 離開", "vcs_weather", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
         }
 
         void clear_data()

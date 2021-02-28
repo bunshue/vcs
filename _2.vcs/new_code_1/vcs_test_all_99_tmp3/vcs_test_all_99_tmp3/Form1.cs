@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Timers;    //for ElapsedEventHandler
 
 namespace vcs_test_all_99_tmp3
 {
@@ -76,30 +75,5 @@ namespace vcs_test_all_99_tmp3
                 i++;
             }
         }
-
-        //開啟關閉thread    ST
-        System.Timers.Timer t = new System.Timers.Timer(1234);
-        int number = 0;
-
-        private void button_start_thread_Click(object sender, EventArgs e)
-        {
-            t.Elapsed += new ElapsedEventHandler(run);
-            t.Enabled = true;
-        }
-
-        private void button_stop_thread_Click(object sender, EventArgs e)
-        {
-            t.Enabled = false;
-            number = 0;
-        }
-        public void run(object source, System.Timers.ElapsedEventArgs e)
-        {
-            number++;
-            MessageBox.Show("number = " + number);
-        }
-        //開啟關閉thread    SP
-
-
-    
     }
 }
