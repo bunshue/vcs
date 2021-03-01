@@ -46,6 +46,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -58,8 +60,6 @@
             this.txtLat = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -161,7 +161,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(23, 70);
+            this.button2.Location = new System.Drawing.Point(23, 68);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 30);
             this.button2.TabIndex = 29;
@@ -243,6 +243,25 @@
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "氣象資料";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(234, 88);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(90, 21);
+            this.button8.TabIndex = 46;
+            this.button8.Text = "即時天氣";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(137, 88);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(90, 21);
+            this.button9.TabIndex = 45;
+            this.button9.Text = "天氣預測";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button7
             // 
@@ -350,25 +369,6 @@
             this.groupBox2.TabIndex = 46;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "解讀XML檔案";
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(234, 88);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(90, 21);
-            this.button8.TabIndex = 46;
-            this.button8.Text = "即時天氣";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(137, 88);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(90, 21);
-            this.button9.TabIndex = 45;
-            this.button9.Text = "天氣預測";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form1
             // 

@@ -35,7 +35,7 @@
             // btnCreateChart
             // 
             this.btnCreateChart.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCreateChart.Location = new System.Drawing.Point(219, 66);
+            this.btnCreateChart.Location = new System.Drawing.Point(21, 54);
             this.btnCreateChart.Name = "btnCreateChart";
             this.btnCreateChart.Size = new System.Drawing.Size(110, 44);
             this.btnCreateChart.TabIndex = 0;

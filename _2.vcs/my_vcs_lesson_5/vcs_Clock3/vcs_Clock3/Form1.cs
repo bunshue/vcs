@@ -76,9 +76,11 @@ namespace vcs_Clock3
             g.DrawString("9", new Font("Arial", 12), Brushes.Black, new PointF(0 * WIDTH / 150, 68 * HEIGHT / 150));
 
             //second hand
+            //handCoord = msCoord(ss, secHAND); //old
             handCoordf = msCoordf(ss, ms, secHAND);
+            //g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point(handCoord[0], handCoord[1])); //old
             g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point((int)handCoordf[0], (int)handCoordf[1]));
-            richTextBox1.Text += "(" + (handCoordf[0] - cx).ToString() + ", " + (handCoordf[1] - cy).ToString() + ")\n";
+            //richTextBox1.Text += "(" + (handCoordf[0] - cx).ToString() + ", " + (handCoordf[1] - cy).ToString() + ")\n";
 
             //minute hand
             handCoord = msCoord(mm, minHAND);
@@ -93,7 +95,7 @@ namespace vcs_Clock3
 
             //disp time
             //this.Text = "Analog Clock -  " + hh + ":" + mm + ":" + ss;
-            this.Text = "Time - " + hh + ":" + mm + ":" + ss;
+            this.Text = hh + ":" + mm + ":" + ss;
 
             //dispose
             g.Dispose();
@@ -139,7 +141,7 @@ namespace vcs_Clock3
                 coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
                 if (hlen == 70 * WIDTH / 150)
                 {
-                    richTextBox1.Text += "111 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
+                    //richTextBox1.Text += "111 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
                 }
             }
             else
@@ -148,7 +150,7 @@ namespace vcs_Clock3
                 coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
                 if (hlen == 70 * WIDTH / 150)
                 {
-                    richTextBox1.Text += "222 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
+                    //richTextBox1.Text += "222 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
                 }
             }
             return coord;

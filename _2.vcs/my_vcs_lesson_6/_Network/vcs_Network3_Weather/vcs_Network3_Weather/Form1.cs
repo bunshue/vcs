@@ -414,19 +414,21 @@ namespace vcs_Network3_Weather
                 }
             }
         }
-        // 標準版XML讀取解析程式 SP
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //解讀XML1 OK 標準版XML
             clear_data();
             richTextBox1.Text += "解讀XML檔案\tvcs_ReadWrite_XML1 的 標準版XML讀取解析程式, 讀取天氣預測XML檔案\n";
 
             string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
             ParseXML(filename);
         }
+        // 標準版XML讀取解析程式 SP
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //解讀XML2 OK VCSH天氣預測
             clear_data();
             richTextBox1.Text += "解讀XML檔案\tvcsh 的 XML讀取程式, 讀取天氣預測XML檔案\n";
 
@@ -436,6 +438,7 @@ namespace vcs_Network3_Weather
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //解讀XML3 OK VCSH即時天氣
             clear_data();
             richTextBox1.Text += "解讀XML檔案\tvcsh 的 XML讀取程式, 讀取即時天氣XML檔案\n";
 
@@ -443,6 +446,7 @@ namespace vcs_Network3_Weather
             ParseXML_weather_current(filename);
         }
 
+        //vcsh 的 XML讀取程式, 讀取天氣預測XML檔案 ST
         private void ParseXML_weather_forecast(string filename)
         {
             if (File.Exists(filename) == false)
@@ -569,7 +573,9 @@ namespace vcs_Network3_Weather
                 richTextBox1.Text += ((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C" + "\n";
             }
         }
+        //vcsh 的 XML讀取程式, 讀取天氣預測XML檔案 SP
 
+        //vcsh 的 XML讀取程式, 讀取即時天氣XML檔案 ST
         private void ParseXML_weather_current(string filename)
         {
             if (File.Exists(filename) == false)
@@ -669,12 +675,12 @@ namespace vcs_Network3_Weather
                 richTextBox1.Text += current_node.SelectSingleNode("lastupdate").Attributes["value"].Value.ToString() + "\n";
             }
         }
+        //vcsh 的 XML讀取程式, 讀取即時天氣XML檔案 SP
 
         //即時天氣XML解讀 ST
         private void button3_Click(object sender, EventArgs e)
         {
             clear_data();
-            //TBD
 
             // Compose the query URL.
             Query = "q";
@@ -683,20 +689,47 @@ namespace vcs_Network3_Weather
             url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
 
-            richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
+            Application.DoEvents(); //把以上資訊顯示出來
 
+            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
+
+            // Create a web client.
+            using (WebClient client = new WebClient())
+            {
+                // Get the response string from the URL.
+                try
+                {
+                    // Get the response string from the URL.
+                    string xml = client.DownloadString(url);        //抓資料
+
+                    //richTextBox1.Text += "data\n" + xml + "\n";
+
+                    //ParseXML_Current(xml);    //解讀 TBD
+                }
+                catch (WebException ex)
+                {
+                    DisplayError(ex);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\n" + ex.Message);
+                }
+            }
         }
 
         //天氣預測XML解讀
         private void button4_Click(object sender, EventArgs e)
         {
             clear_data();
+
             // Compose the query URL.
             Query = "q";
             string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
             url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
+
+            Application.DoEvents(); //把以上資訊顯示出來
 
             //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
 
@@ -722,8 +755,6 @@ namespace vcs_Network3_Weather
                     MessageBox.Show("Unknown error\n" + ex.Message);
                 }
             }
-
-
         }
 
         //讀取XML資料 ST
@@ -975,6 +1006,65 @@ namespace vcs_Network3_Weather
             XmlDocument xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
 
+            ParseXML_Forecast0(xml_doc);
+        }
+
+        //ParseXML_weather_forecast0
+            //private void ParseXML_weather_forecast0(XmlDocument xml_doc)
+        private void ParseXML_Forecast0(XmlDocument xml_doc)
+        {
+            // 解讀xml資料
+            // Get the city, country, latitude, and longitude.
+            XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
+            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
+            richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
+            richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
+            XmlNode geo_node = loc_node.SelectSingleNode("location");
+            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
+            richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
+            txtLong.Text = geo_node.Attributes["longitude"].Value;
+            richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
+            txtId.Text = geo_node.Attributes["geobaseid"].Value;
+            richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
+            richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
+
+            foreach (XmlNode time_node in xml_doc.SelectNodes("//time"))
+            {
+                // Get the time in UTC.
+                DateTime time = DateTime.Parse(time_node.Attributes["from"].Value, null, DateTimeStyles.AssumeUniversal);
+
+                // Get the temperature.
+                XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                string temp = temp_node.Attributes["value"].Value;
+
+                ListViewItem item = listView1.Items.Add(time.DayOfWeek.ToString());
+                item.SubItems.Add(time.ToShortTimeString());
+
+                item.SubItems.Add(temp + " " + degrees + "F");
+                richTextBox1.Text += temp + "\n";
+
+                item.SubItems.Add(((float.Parse(temp) - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+            }
+        }
+
+        // Display the forecast.
+        private void ParseXML_Current(string xml)
+        {
+            //richTextBox1.Text += xml + "\n\n";
+            // Load the response into an XML document.
+            XmlDocument xml_doc = new XmlDocument();
+            xml_doc.LoadXml(xml);
+
+            ParseXML_Current0(xml_doc);
+        }
+
+        //ParseXML_weather_forecast0
+        //private void ParseXML_weather_forecast0(XmlDocument xml_doc)
+        private void ParseXML_Current0(XmlDocument xml_doc)
+        {
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");

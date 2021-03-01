@@ -222,8 +222,6 @@ namespace vcs_test_all_10_Math_Random
             richTextBox1.Text += "驗算\ta^c = " + Math.Pow(a, c).ToString() + "\n";
         }
 
-
-
         private double rad(double d)
         {
             return d * Math.PI / 180.0;
@@ -254,7 +252,6 @@ namespace vcs_test_all_10_Math_Random
             {
                 richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + 100 * sind(x) + "\n";
             }
-
         }
 
         /// <summary> 
@@ -299,7 +296,6 @@ namespace vcs_test_all_10_Math_Random
             sd = SD(sd_num);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
         }
-
 
         /// <summary> 
         /// 標準差(StandardDifference) 

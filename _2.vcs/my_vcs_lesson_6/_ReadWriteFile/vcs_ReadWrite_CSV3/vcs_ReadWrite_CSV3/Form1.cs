@@ -29,6 +29,12 @@ namespace vcs_ReadWrite_CSV3
         // and no line is blank.
         private void btnGo_Click(object sender, EventArgs e)
         {
+            if (File.Exists(filename) == false)
+            {
+                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
+                return;
+            }
+
             // Get the data.
             string[,] values = LoadCsv(filename);
             int num_rows = values.GetUpperBound(0) + 1;
