@@ -419,26 +419,6 @@ namespace vcs_Draw9_Example
 
         private void button6_Click(object sender, EventArgs e)
         {
-            g.Clear(Color.White);
-
-            Brush bb = new SolidBrush(Color.Orange);
-            g.FillRectangle(bb, 70, 70, 200, 100);  //畫出一個填滿的方框
-
-            Pen p = new Pen(Color.Black, 4);
-            g.DrawRectangle(p, 70, 70, 200, 100);
-            //在同樣起點畫出黑色的長方型線，即實現加外框            
-
-            Random rr = new Random();
-            Brush db;
-            for (int i = 1; i <= 7; i++)
-            {
-                db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
-                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
-
-                g.FillRectangle(db, 70 + (i * 40), 70 + (i * 40), 200, 100);
-                //畫布上畫出方框，每次位置的X及Y值都加70，以實現往右下角移動
-            }
-            pictureBox1.Image = bitmap1;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -5561,197 +5541,34 @@ namespace vcs_Draw9_Example
 
         private void button30_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            g.Clear(Color.Pink);
-            Point[] pt = new Point[360];    //一維陣列內有360個Point
-            int angle;
-            int amplitude = 100;
-            for (angle = 0; angle < 360; angle += 1)
-            {
-                pt[angle].X = angle;
-                pt[angle].Y = 300 - (int)(amplitude * Math.Sin(angle * 3 * Math.PI / 180));
-
-            }
-            g.DrawLines(new Pen(Brushes.Red, 3), pt);
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            double[] xx = new double[20];
-            double[] yy = new double[20];
-
-            for (int i = 0; i < 20; i++)
-            {
-                xx[i] = i * 30;
-                yy[i] = Math.Sin(i) * 200 + 200;
-                //yy[i] = 100;
-            }
-
-            // Create points that define curve.
-            Point point0 = new Point((int)xx[0], pictureBox1.Height - (int)yy[0]);
-            Point point1 = new Point((int)xx[1], pictureBox1.Height - (int)yy[1]);
-            Point point2 = new Point((int)xx[2], pictureBox1.Height - (int)yy[2]);
-            Point point3 = new Point((int)xx[3], pictureBox1.Height - (int)yy[3]);
-            Point point4 = new Point((int)xx[4], pictureBox1.Height - (int)yy[4]);
-            Point point5 = new Point((int)xx[5], pictureBox1.Height - (int)yy[5]);
-            Point point6 = new Point((int)xx[6], pictureBox1.Height - (int)yy[6]);
-            Point point7 = new Point((int)xx[7], pictureBox1.Height - (int)yy[7]);
-            Point point8 = new Point((int)xx[8], pictureBox1.Height - (int)yy[8]);
-            Point point9 = new Point((int)xx[9], pictureBox1.Height - (int)yy[9]);
-            Point point10 = new Point((int)xx[10], pictureBox1.Height - (int)yy[10]);
-            Point point11 = new Point((int)xx[11], pictureBox1.Height - (int)yy[11]);
-            Point point12 = new Point((int)xx[12], pictureBox1.Height - (int)yy[12]);
-            Point point13 = new Point((int)xx[13], pictureBox1.Height - (int)yy[13]);
-            Point point14 = new Point((int)xx[14], pictureBox1.Height - (int)yy[14]);
-            Point point15 = new Point((int)xx[15], pictureBox1.Height - (int)yy[15]);
-            Point point16 = new Point((int)xx[16], pictureBox1.Height - (int)yy[16]);
-            Point point17 = new Point((int)xx[17], pictureBox1.Height - (int)yy[17]);
-            Point point18 = new Point((int)xx[18], pictureBox1.Height - (int)yy[18]);
-            Point point19 = new Point((int)xx[19], pictureBox1.Height - (int)yy[19]);
-
-            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14, point15, point16, point17, point18, point19 };
-
-            Pen redPen = new Pen(Color.Red, 3); // Create pens.
-            g.DrawLines(redPen, curvePoints);   //畫直線
-
-            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
-            g.DrawCurve(greenPen, curvePoints); //畫曲線
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            Point[] arrayPoint = new Point[20];
-            p = new Pen(Color.Blue, 5);
-            double zz;
-
-            for (int i = 0; i < 20; i++)
-            {
-                zz = Math.Sin(Math.PI * i * 30 / 180) * 200 + 200;
-                arrayPoint[i].X = i * 20;
-                arrayPoint[i].Y = (int)zz;
-            }
-            g.DrawLines(p, arrayPoint);
-
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            // 以紅色繪正弦波
-            //Graphics g = this.CreateGraphics();
-            //Pen p = new Pen(Color.Red, 2);
-            int h = 100;
-            int y1 = 100;
-            double angle, y;
-            float tmpy, tmpx;
-            for (double x = 0; x <= 360; x++)
-            {
-                angle = x / 180 * Math.PI;
-                y = Convert.ToDouble(y1) + Math.Sin(angle) * h;
-                tmpx = Convert.ToSingle(x);
-                tmpy = Convert.ToSingle(y);
-                g.DrawEllipse(p, tmpx, tmpy, 1, 1); //繪製紅色圓點
-            }
-
-            g.DrawEllipse(p, 260, 260, 100, 100); //繪製紅色圓點
-
-            SolidBrush sb = new SolidBrush(Color.Green);
-            g.FillEllipse(sb, 360, 360, 100, 100); //繪製紅色圓點
-
-
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            int[] x = new int[10];
-            double[] y = new double[10];
-            int[] yy = new int[10];
-            //int x[10] = 0;
-            //float y[10] = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                x[i] = i * 40;
-                y[i] = Math.Sin(x[i] * Math.PI / 180) * 200 + 200;
-                yy[i] = (int)y[i];
-                richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-
-            Pen greenPen = new Pen(Color.Green, 3); // Create pens.
-
-            // Create points that define curve.
-            Point point0 = new Point(x[0], yy[0]);
-            Point point1 = new Point(x[1], yy[1]);
-            Point point2 = new Point(x[2], yy[2]);
-            Point point3 = new Point(x[3], yy[3]);
-            Point point4 = new Point(x[4], yy[4]);
-            Point point5 = new Point(x[5], yy[5]);
-            Point point6 = new Point(x[6], yy[6]);
-            Point point7 = new Point(x[7], yy[7]);
-            Point point8 = new Point(x[8], yy[8]);
-            Point point9 = new Point(x[9], yy[9]);
-
-            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9 };
-
-            g.DrawCurve(greenPen, curvePoints); //畫曲線
-            g.DrawLines(greenPen, curvePoints);   //畫直線
-
-
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            Point[] pt = new Point[360];    //一維陣列內有360個Point
-            int angle;
-            int amplitude = 100;
-            for (angle = 0; angle < 360; angle += 1)
-            {
-                pt[angle].X = angle;
-                pt[angle].Y = (int)(amplitude * Math.Sin(angle * 3 * Math.PI / 180)) + amplitude;
-
-            }
-            g.DrawLines(new Pen(Brushes.Red, 3), pt);
-
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-
-            //畫曲線
-            Point[] pts = new Point[5];
-            pts[0].X = 10;
-            pts[0].Y = 10;
-            pts[1].X = 20;
-            pts[1].Y = 60;
-            pts[2].X = 30;
-            pts[2].Y = 10;
-            pts[3].X = 40;
-            pts[3].Y = 60;
-            pts[4].X = 50;
-            pts[4].Y = 10;
-            g.DrawCurve(new Pen(Color.Black), pts);
-
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-
-            //畫多個Rectangles
-            Rectangle[] R = new Rectangle[25];
-            int i;
-            for (i = 0; i <= 24; i++)
-            {
-                //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
-                R[i] = new Rectangle(i * 10, i * 5, i * 30, i * 15);
-            }
-            g.DrawRectangles(new Pen(Brushes.Red, 3), R);
-
-
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -5764,23 +5581,6 @@ namespace vcs_Draw9_Example
 
         private void button40_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
-            Brush bb = new SolidBrush(Color.Navy);
-            g.FillPie(bb, 50, 50, 200, 200, 0, 90);
-            //畫個Pie，顏色是Pink,位置的x、y在50，大小為200*200，角度為從0度開始，畫90度
-
-            bb = new SolidBrush(Color.Green);
-            g.FillPie(bb, 50, 50, 200, 200, 90, 135);
-            //畫個Pie，顏色是Green,位置大小同上，角度為接著從90度開始，畫135度
-
-            bb = new SolidBrush(Color.Purple);
-            g.FillPie(bb, 50, 50, 200, 200, 225, 135);
-            //畫個Pie，顏色是Purple,位置大小同上，角度為接著從90+135=225度開始 畫135度
-            //如此，這3個pie就會合成一個圓
-
-            bb = new SolidBrush(Color.Blue);
-            g.DrawString("哭笑不得", new Font("標楷體", 24, FontStyle.Bold | FontStyle.Italic), bb, 20, 20);
-            //畫字就比較簡單了，會產生一個標楷體，24的大小，粗加斜，顏色為bb，位置在(20,20)
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -5788,94 +5588,10 @@ namespace vcs_Draw9_Example
             
         }
 
-        //畫愛心 ST
         private void button42_Click(object sender, EventArgs e)
         {
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-            pictureBox1.Image = DrawHeart(W, H);
+
         }
-
-        // Draw the curve on a bitmap.
-        private Bitmap DrawHeart(int width, int height)
-        {
-            Bitmap bm = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(bm))
-            {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-
-                // Generate the points.
-                const int num_points = 100;
-                List<PointF> points = new List<PointF>();
-                float dt = (float)(2 * Math.PI / num_points);
-                for (float t = 0; t <= 2 * Math.PI; t += dt)
-                    points.Add(new PointF(X(t) * 5 + 200, Y(t) * 5 + 200));
-
-                // Get the coordinate bounds.
-                float wxmin = points[0].X;
-                float wxmax = wxmin;
-                float wymin = points[0].Y;
-                float wymax = wymin;
-                foreach (PointF point in points)
-                {
-                    if (wxmin > point.X) wxmin = point.X;
-                    if (wxmax < point.X) wxmax = point.X;
-                    if (wymin > point.Y) wymin = point.Y;
-                    if (wymax < point.Y) wymax = point.Y;
-                }
-
-                // Make the world coordinate rectangle.
-                RectangleF world_rect = new RectangleF(
-                    wxmin, wymin, wxmax - wxmin, wymax - wymin);
-
-                // Make the device coordinate rectangle with a margin.
-                const int margin = 5;
-                Rectangle device_rect = new Rectangle(
-                    margin, margin,
-                    pictureBox1.ClientSize.Width - 2 * margin,
-                    pictureBox1.ClientSize.Height - 2 * margin);
-
-                // Map world to device coordinates without distortion.
-                // Flip vertically so Y increases downward.
-                //SetTransformationWithoutDisortion(gr, world_rect, device_rect, false, true);
-
-                // Draw the curve.
-                g.FillPolygon(Brushes.Pink, points.ToArray());
-                using (Pen pen = new Pen(Color.Red, 0))
-                {
-                    g.DrawPolygon(pen, points.ToArray());
-
-                    // Draw a rectangle around the coordinate bounds.
-                    pen.Color = Color.Red;
-                    g.DrawRectangle(pen, Rectangle.Round(world_rect));
-
-                    int ratio = 20;
-                    // Draw the X and Y axes.
-                    pen.Color = Color.Green;
-                    g.DrawLine(pen, -20 * ratio, 0, 20 * ratio, 0);
-                    g.DrawLine(pen, 0, -20 * ratio, 0, 20 * ratio);
-                    for (int x = -20; x <= 20; x++)
-                        g.DrawLine(pen, x * ratio, -0.3f * ratio, x * ratio, 0.3f * ratio);
-                    for (int y = -20; y <= 20; y++)
-                        g.DrawLine(pen, -0.3f * ratio, y * ratio, 0.3f * ratio, y * ratio);
-                }
-            }
-            return bm;
-        }
-
-        // The curve's parametric equations.
-        private float X(float t)
-        {
-            double sin_t = Math.Sin(t);
-            return (float)(16 * sin_t * sin_t * sin_t);
-        }
-
-        private float Y(float t)
-        {
-            return (float)(13 * Math.Cos(t) - 5 * Math.Cos(2 * t) - 2 * Math.Cos(3 * t) - Math.Cos(4 * t));
-        }
-        //畫愛心 SP
-
         private void button43_Click(object sender, EventArgs e)
         {
             g = pictureBox1.CreateGraphics();

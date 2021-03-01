@@ -377,7 +377,7 @@ namespace vcs_Draw3A
             pictureBox_move.BackColor = Color.LightBlue;
 
             pictureBox_stock.Size = new Size(680, 320);
-            pictureBox_stock.Location = new Point(1000 - 700, 10 + 360 + 10);
+            pictureBox_stock.Location = new Point(1000 - 700 + 15, 10 + 360 + 10);
             pictureBox_stock.BackColor = Color.LightPink;
 
             pictureBox_rotate.Size = new Size(220, 110);
@@ -400,8 +400,13 @@ namespace vcs_Draw3A
             pictureBox_atom.Size = new Size(W, H);
             pictureBox_atom.Location = new Point(x_st + dx * 1, y_st);
 
-            pictureBox_spin.Location = new Point(130, 360);
+            pictureBox_spin.Size = new Size(100, 100);
+            pictureBox_spin.Location = new Point(100, 360);
             pictureBox_spin.BackColor = Color.LightGray;
+
+            pictureBox_hex.Size = new Size(100, 100);
+            pictureBox_hex.Location = new Point(205, 360);
+            pictureBox_hex.BackColor = Color.LightGray;
 
             pictureBox_gear.Size = new Size(W, H);
             pictureBox_gear.Location = new Point(x_st + dx * 2, y_st + 20);
@@ -1978,7 +1983,6 @@ namespace vcs_Draw3A
                     bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, rr, gg, bb));
                 }
             }
-
             pictureBox_random_2d_array.Image = bitmap1;
         }
 
@@ -1987,6 +1991,50 @@ namespace vcs_Draw3A
             draw_random_2d_array();
         }
         //for pictureBox_random_2d_array SP
+
+        int offset = 0;
+        void draw_hex()
+        {
+            int W = pictureBox_hex.Width;
+            int H = pictureBox_hex.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int cx = W / 2;
+            int cy = H / 2;
+            int r1 = Math.Min(W, H) * 4 / 10;
+            int r2 = Math.Min(W, H) * 3 / 10;
+
+            int x_st = cx;
+            int y_st = cy;
+
+            Point[] points1 = new Point[6];
+            Point[] points2 = new Point[6];
+
+            for (int i = 0; i < 6; i++)
+            {
+                points1[i] = new Point(cx + (int)(r1 * cosd(60 * i + offset * 10)), cy + (int)(r1 * sind(60 * i + offset * 10)));
+                points2[i] = new Point(cx + (int)(r2 * cosd(60 * i - offset * 10)), cy + (int)(r2 * sind(60 * i - offset * 10)));
+            }
+
+            g.DrawPolygon(new Pen(Color.Red, 3), points1);
+            g.DrawPolygon(new Pen(Color.Red, 3), points2);
+
+            pictureBox_hex.Image = bitmap1;
+            offset++;
+            if (offset > 5)
+                offset = 0;
+        }
+
+        private void timer_hex_Tick(object sender, EventArgs e)
+        {
+            draw_hex();
+        }
+
+
+
 
 
     }

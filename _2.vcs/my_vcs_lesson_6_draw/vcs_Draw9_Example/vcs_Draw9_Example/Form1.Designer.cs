@@ -183,7 +183,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 22;
-            this.button6.Text = "繪圖 矩型 ";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -476,7 +475,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(100, 40);
             this.button30.TabIndex = 60;
-            this.button30.Text = "Ex1";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -487,7 +485,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(100, 40);
             this.button31.TabIndex = 61;
-            this.button31.Text = "Ex2";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -498,7 +495,6 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(100, 40);
             this.button32.TabIndex = 62;
-            this.button32.Text = "Ex3";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -509,7 +505,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(100, 40);
             this.button33.TabIndex = 63;
-            this.button33.Text = "Ex4";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -520,7 +515,6 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(100, 40);
             this.button34.TabIndex = 64;
-            this.button34.Text = "Ex5";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -531,7 +525,6 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(100, 40);
             this.button35.TabIndex = 69;
-            this.button35.Text = "Ex6";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -542,7 +535,6 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(100, 40);
             this.button36.TabIndex = 68;
-            this.button36.Text = "Ex7";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -553,7 +545,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(100, 40);
             this.button37.TabIndex = 67;
-            this.button37.Text = "Ex8";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -584,7 +575,6 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(100, 40);
             this.button40.TabIndex = 74;
-            this.button40.Text = "Ex11_派圖";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -605,7 +595,6 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(100, 40);
             this.button42.TabIndex = 72;
-            this.button42.Text = "畫愛心";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 

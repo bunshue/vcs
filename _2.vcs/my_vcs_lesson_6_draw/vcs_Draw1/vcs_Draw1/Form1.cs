@@ -1776,40 +1776,6 @@ namespace vcs_Draw1
 
         private void button30_Click(object sender, EventArgs e)
         {
-            if (bitmap1 == null)
-            {
-                richTextBox1.Text += "尚未開啟檔案\n";
-                return;
-            }
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            Point[] pts =
-            {
-                new Point(W / 2, 0),    //上
-                new Point(W, H / 2),    //右
-                new Point(W / 2, H),    //下
-                new Point(0, H / 2),    //左
-            };
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.DrawPolygon(Pens.Blue, pts);
-
-            Point[] pts2 =
-            {
-                new Point(W / 2, H/6),
-                new Point(W, H / 2),
-                new Point(W / 2, H*5/6),
-                new Point(0, H / 2),
-            };
-            g.FillPolygon(new SolidBrush(Color.Red), pts2);
-
-            sb = new SolidBrush(Color.Purple);
-            g.FillPolygon(sb, pts2);
-
-            p = new Pen(Color.Red, 5);
-            g.DrawPolygon(p, pts2);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -2367,7 +2333,7 @@ namespace vcs_Draw1
                 new Point(x_st+200, y_st+60),
                 new Point(x_st+150, y_st+20),
                 new Point(x_st+20, y_st+60) };
-            g.DrawPolygon(p, points2);
+            g.DrawPolygon(Pens.Red, points2);
 
 
             //填滿多邊形
@@ -2392,7 +2358,7 @@ namespace vcs_Draw1
                 new Point(x_st+200, y_st+60),
                 new Point(x_st+150, y_st+20),
                 new Point(x_st+20, y_st+60) };
-            g.FillPolygon(sb, points4);
+            g.FillPolygon(new SolidBrush(Color.Red), points4);
 
             //空派形
             x_st = 20;
@@ -2430,6 +2396,25 @@ namespace vcs_Draw1
 
             x_st += dx;
             g.FillPie(sb, x_st, y_st - 20, w, w, 40, 280);
+
+
+            //畫分佈餅圖
+            x_st = W - 180;
+            y_st = H - 180;
+            int r = 100;
+            Brush bb = new SolidBrush(Color.Navy);
+            g.FillPie(bb, x_st, y_st, r, r, 0, 90);
+            //畫個Pie，顏色是Pink,位置的x、y在50，大小為r*r，角度為從0度開始，畫90度
+
+            bb = new SolidBrush(Color.Green);
+            g.FillPie(bb, x_st, y_st, r, r, 90, 135);
+            //畫個Pie，顏色是Green,位置大小同上，角度為接著從90度開始，畫135度
+
+            bb = new SolidBrush(Color.Purple);
+            g.FillPie(bb, x_st, y_st, r, r, 225, 135);
+            //畫個Pie，顏色是Purple,位置大小同上，角度為接著從90+135=225度開始 畫135度
+            //如此，這3個pie就會合成一個圓
+
 
             //畫直線
             x_st = 20;
@@ -2479,6 +2464,9 @@ namespace vcs_Draw1
 
             x_st = 670;
             y_st = 530;
+            g.DrawString("Sine", f, new SolidBrush(Color.Red), new PointF(x_st, y_st));
+
+            /*
             Point[] pts = new Point[90];
             double yy;
             int i;
@@ -2491,6 +2479,21 @@ namespace vcs_Draw1
             }
             p = new Pen(Color.Navy, 3);
             g.DrawCurve(p, pts);
+            */
+
+            //畫三角函數
+            int omega = 60;  //angular frequency
+            Point[] pts = new Point[360 / omega + 1];    //一維Point陣列內有100個Point
+            int i;
+            int amplitude = 50;
+            for (i = 0; i <= 360 / omega; i++)
+            {
+                pts[i].X = x_st + i * omega / 3;
+                pts[i].Y = y_st - (int)(amplitude * Math.Sin(i * omega * Math.PI / 180));   //Y反相
+                g.FillEllipse(Brushes.Black, pts[i].X - 3, pts[i].Y - 3, 6, 6); //畫點
+            }
+            g.DrawLines(new Pen(Brushes.Red, 1), pts);      //畫直線, 直接把Point陣列畫出來
+            g.DrawCurve(new Pen(Brushes.Blue, 1), pts);     //畫曲線, 直接把Point陣列畫出來
 
 
             //各種連線
@@ -2559,6 +2562,10 @@ namespace vcs_Draw1
 
             // Draw string to screen.
             g.DrawString(drawString, drawFont, drawBrush, drawPoint);
+
+            drawPoint = new PointF(W - 400, H - 70 - 50);
+            g.DrawString(drawString, new Font("標楷體", 24, FontStyle.Bold | FontStyle.Italic), new SolidBrush(Color.Navy), drawPoint);
+            //畫字就比較簡單了，會產生一個標楷體，24的大小，粗加斜，顏色為bb，位置在drawPoint
 
 
             //貼圖
@@ -2704,6 +2711,23 @@ namespace vcs_Draw1
             gp4.AddLine(new Point(x_st + 60, y_st + 10), new Point(x_st + 10, y_st + 60));
             gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
             g.FillPath(new SolidBrush(Color.Blue), gp4);
+
+
+
+            //畫多個Rectangles
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 4;
+            g.DrawString("畫多個Rectangles", f, sb, new PointF(x_st, y_st - 25));
+
+            Rectangle[] R = new Rectangle[20];
+            for (int i = 0; i < R.Length; i++)
+            {
+                //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
+                R[i] = new Rectangle(x_st + i * 10, y_st + i * 5, i * 30, i * 15);
+            }
+            g.DrawRectangles(new Pen(Brushes.Red, 2), R);
+
 
         }
 

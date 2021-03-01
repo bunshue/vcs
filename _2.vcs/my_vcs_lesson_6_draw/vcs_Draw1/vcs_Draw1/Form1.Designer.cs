@@ -513,7 +513,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(120, 42);
             this.button30.TabIndex = 55;
-            this.button30.Text = "Polygon";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 

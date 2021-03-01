@@ -32,7 +32,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox_histogram = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -71,19 +70,9 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(760, 25);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 35);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "my";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(762, 83);
+            this.button5.Location = new System.Drawing.Point(751, 25);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(90, 35);
             this.button5.TabIndex = 7;
@@ -109,7 +98,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(762, 140);
+            this.button6.Location = new System.Drawing.Point(751, 82);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(90, 35);
             this.button6.TabIndex = 9;
@@ -136,7 +125,6 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox_histogram);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
@@ -155,7 +143,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox pictureBox_histogram;
         private System.Windows.Forms.Timer timer1;

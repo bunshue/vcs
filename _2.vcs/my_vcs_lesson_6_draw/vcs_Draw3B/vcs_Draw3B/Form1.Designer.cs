@@ -43,6 +43,8 @@
             this.pictureBox_captcha2 = new System.Windows.Forms.PictureBox();
             this.pictureBox_captcha1 = new System.Windows.Forms.PictureBox();
             this.timer_draw_captcha = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_rectangle = new System.Windows.Forms.PictureBox();
+            this.timer_draw_rectangle = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -50,6 +52,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -161,11 +164,26 @@
             this.timer_draw_captcha.Interval = 1000;
             this.timer_draw_captcha.Tick += new System.EventHandler(this.timer_draw_captcha_Tick);
             // 
+            // pictureBox_rectangle
+            // 
+            this.pictureBox_rectangle.Location = new System.Drawing.Point(939, 511);
+            this.pictureBox_rectangle.Name = "pictureBox_rectangle";
+            this.pictureBox_rectangle.Size = new System.Drawing.Size(608, 380);
+            this.pictureBox_rectangle.TabIndex = 62;
+            this.pictureBox_rectangle.TabStop = false;
+            // 
+            // timer_draw_rectangle
+            // 
+            this.timer_draw_rectangle.Enabled = true;
+            this.timer_draw_rectangle.Interval = 1000;
+            this.timer_draw_rectangle.Tick += new System.EventHandler(this.timer_draw_rectangle_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 680);
+            this.Controls.Add(this.pictureBox_rectangle);
             this.Controls.Add(this.pictureBox_captcha3);
             this.Controls.Add(this.pictureBox_captcha2);
             this.Controls.Add(this.pictureBox_captcha1);
@@ -186,6 +204,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -206,6 +225,8 @@
         private System.Windows.Forms.PictureBox pictureBox_captcha2;
         private System.Windows.Forms.PictureBox pictureBox_captcha1;
         private System.Windows.Forms.Timer timer_draw_captcha;
+        private System.Windows.Forms.PictureBox pictureBox_rectangle;
+        private System.Windows.Forms.Timer timer_draw_rectangle;
     }
 }
 

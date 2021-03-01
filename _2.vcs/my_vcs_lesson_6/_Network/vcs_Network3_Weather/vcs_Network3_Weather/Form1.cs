@@ -324,6 +324,12 @@ namespace vcs_Network3_Weather
         // 標準版XML讀取解析程式 ST
         private void ParseXML(string filename)
         {
+            if (File.Exists(filename) == false)
+            {
+                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
+                return;
+            }
+
             //加載XML文件
             XmlDocument xdDocument = new XmlDocument();
             richTextBox1.Text += "開啟XML文件 : " + filename + "\n";
@@ -439,6 +445,12 @@ namespace vcs_Network3_Weather
 
         private void ParseXML_weather_forecast(string filename)
         {
+            if (File.Exists(filename) == false)
+            {
+                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
+                return;
+            }
+
             string xml = File.ReadAllText(filename, System.Text.Encoding.Default);
 
             //richTextBox1.Text += "data\n" + xml + "\n";
@@ -560,6 +572,12 @@ namespace vcs_Network3_Weather
 
         private void ParseXML_weather_current(string filename)
         {
+            if (File.Exists(filename) == false)
+            {
+                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
+                return;
+            }
+
             string xml = File.ReadAllText(filename, System.Text.Encoding.Default);
 
             //richTextBox1.Text += "data\n" + xml + "\n";

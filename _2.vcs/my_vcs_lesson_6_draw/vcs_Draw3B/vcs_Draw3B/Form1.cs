@@ -652,8 +652,39 @@ namespace vcs_Draw3B
 
         //3種 Captcha SP
 
+        void draw_color_rectangles()
+        {
+            int W = pictureBox_rectangle.ClientSize.Width;
+            int H = pictureBox_rectangle.ClientSize.Height;
 
+            Graphics g = pictureBox_rectangle.CreateGraphics();
 
+            g.Clear(Color.White);
+            g.DrawRectangle(Pens.Navy, 0, 0, W - 1, H - 1);
+
+            Brush bb = new SolidBrush(Color.Orange);
+            g.FillRectangle(bb, 70, 70, 200, 100);  //畫出一個填滿的方框
+
+            Pen p = new Pen(Color.Black, 4);
+            g.DrawRectangle(p, 70, 70, 200, 100);
+            //在同樣起點畫出黑色的長方型線，即實現加外框            
+
+            Random rr = new Random();
+            Brush db;
+            for (int i = 1; i <= 4; i++)
+            {
+                db = new SolidBrush(Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
+                //Color.FromArgb() 可以設定3原色，這裡3原色的代碼是亂數產生的
+
+                g.FillRectangle(db, 70 + (i * 40), 70 + (i * 40), 200, 100);
+                //畫布上畫出方框，每次位置的X及Y值都加70，以實現往右下角移動
+            }
+        }
+
+        private void timer_draw_rectangle_Tick(object sender, EventArgs e)
+        {
+            draw_color_rectangles();
+        }
 
     }
 }

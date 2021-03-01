@@ -79,6 +79,8 @@
             this.timer_radar = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_random_2d_array = new System.Windows.Forms.PictureBox();
             this.timer_random_2d_array = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_hex = new System.Windows.Forms.PictureBox();
+            this.timer_hex = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
@@ -100,6 +102,7 @@
             this.panel_radar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -351,9 +354,9 @@
             // 
             // pictureBox_spin
             // 
-            this.pictureBox_spin.Location = new System.Drawing.Point(12, 352);
+            this.pictureBox_spin.Location = new System.Drawing.Point(12, 264);
             this.pictureBox_spin.Name = "pictureBox_spin";
-            this.pictureBox_spin.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_spin.Size = new System.Drawing.Size(70, 78);
             this.pictureBox_spin.TabIndex = 66;
             this.pictureBox_spin.TabStop = false;
             this.pictureBox_spin.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_spin_Paint);
@@ -469,11 +472,26 @@
             this.timer_random_2d_array.Interval = 500;
             this.timer_random_2d_array.Tick += new System.EventHandler(this.timer_random_2d_array_Tick);
             // 
+            // pictureBox_hex
+            // 
+            this.pictureBox_hex.Location = new System.Drawing.Point(12, 348);
+            this.pictureBox_hex.Name = "pictureBox_hex";
+            this.pictureBox_hex.Size = new System.Drawing.Size(70, 78);
+            this.pictureBox_hex.TabIndex = 75;
+            this.pictureBox_hex.TabStop = false;
+            // 
+            // timer_hex
+            // 
+            this.timer_hex.Enabled = true;
+            this.timer_hex.Interval = 50;
+            this.timer_hex.Tick += new System.EventHandler(this.timer_hex_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1693, 750);
+            this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.pictureBox_random_2d_array);
             this.Controls.Add(this.panel_radar);
             this.Controls.Add(this.pictureBox_rotate);
@@ -528,6 +546,7 @@
             this.panel_radar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -585,6 +604,8 @@
         private System.Windows.Forms.Timer timer_radar;
         private System.Windows.Forms.PictureBox pictureBox_random_2d_array;
         private System.Windows.Forms.Timer timer_random_2d_array;
+        private System.Windows.Forms.PictureBox pictureBox_hex;
+        private System.Windows.Forms.Timer timer_hex;
     }
 }
 
