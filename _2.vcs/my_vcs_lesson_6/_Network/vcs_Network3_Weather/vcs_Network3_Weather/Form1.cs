@@ -44,25 +44,17 @@ namespace vcs_Network3_Weather
         // Enter your API key here.
         // Get an API key by making a free account at:
         //      http://home.openweathermap.org/users/sign_in
-        private const string API_KEY = "xxxx";
+        string API_KEY;
         private char degrees = (char)176;
 
         // Query codes.
         private string Query = "";
         private string[] QueryCodes = { "q", "zip", "id", };
 
-        // Query URLs. Replace @LOCATION@ with the location.
         //即時天氣
-        private const string CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        string CurrentUrl;
         //天氣預測
-        private const string ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
-
-        //若是只查詢代碼為City(q)之條件, 用 q 取代 @QUERY@
-        // Query URLs. Replace @LOCATION@ with the location.
-        //即時天氣
-        //private const string CurrentUrl3 = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
-        //天氣預測
-        //private const string ForecastUrl3 = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+        string ForecastUrl;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -73,6 +65,44 @@ namespace vcs_Network3_Weather
             comboBox1.SelectedIndex = 0;
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            string filename = "C:\\______test_files\\__RW\\_txt\\api_key.txt";
+
+
+            if (File.Exists(filename) == false)
+            {
+                MessageBox.Show("API_KEY 檔案不存在, 離開", "vcs_weather", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+
+            //讀取檔案
+            string kk = File.ReadAllText(filename, System.Text.Encoding.Default);
+            richTextBox1.Text += "檔案內容 : " + kk + "\n";
+            richTextBox1.Text += "長度：" + kk.Length.ToString() + "\n";
+
+            if (kk.Length == 32)
+            {
+                API_KEY = kk;
+            }
+            else
+            {
+                API_KEY = "xxxx";
+            }
+
+            // Query URLs. Replace @LOCATION@ with the location.
+            //即時天氣
+            CurrentUrl = "http://api.openweathermap.org/data/2.5/weather?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+            //天氣預測
+            ForecastUrl = "http://api.openweathermap.org/data/2.5/forecast?" + "@QUERY@=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+
+            //若是只查詢代碼為City(q)之條件, 用 q 取代 @QUERY@
+            // Query URLs. Replace @LOCATION@ with the location.
+            //即時天氣
+            //private const string CurrentUrl3 = "http://api.openweathermap.org/data/2.5/weather?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
+            //天氣預測
+            //private const string ForecastUrl3 = "http://api.openweathermap.org/data/2.5/forecast?" + "q=@LOCATION@&mode=xml&units=imperial&APPID=" + API_KEY;
 
             if (API_KEY.Length != 32)
             {
@@ -678,7 +708,7 @@ namespace vcs_Network3_Weather
         //vcsh 的 XML讀取程式, 讀取即時天氣XML檔案 SP
 
         //即時天氣XML解讀 ST
-        private void button3_Click(object sender, EventArgs e)
+        void get_Current_data(int type)    //type 0: 簡版    1: 詳版
         {
             clear_data();
 
@@ -702,9 +732,9 @@ namespace vcs_Network3_Weather
                     // Get the response string from the URL.
                     string xml = client.DownloadString(url);        //抓資料
 
-                    //richTextBox1.Text += "data\n" + xml + "\n";
+                    richTextBox1.Text += "data\n" + xml + "\n";
 
-                    //ParseXML_Current(xml);    //解讀 TBD
+                    ParseXML_Current(xml, type);    //解讀
                 }
                 catch (WebException ex)
                 {
@@ -718,12 +748,14 @@ namespace vcs_Network3_Weather
         }
 
         //天氣預測XML解讀
-        private void button4_Click(object sender, EventArgs e)
+        void get_Forecase_data(int type)    //type 0: 簡版    1: 詳版
         {
             clear_data();
+            Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
 
             // Compose the query URL.
-            Query = "q";
+            Query = QueryCodes[comboBox1.SelectedIndex];
             string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
             richTextBox1.Text += "url : " + url + "\n";
             url = url.Replace("@QUERY@", Query);
@@ -744,7 +776,7 @@ namespace vcs_Network3_Weather
 
                     //richTextBox1.Text += "data\n" + xml + "\n";
 
-                    ParseXML_Forecast(xml);    //解讀
+                    ParseXML_Forecast(xml, type);    //解讀
                 }
                 catch (WebException ex)
                 {
@@ -755,8 +787,9 @@ namespace vcs_Network3_Weather
                     MessageBox.Show("Unknown error\n" + ex.Message);
                 }
             }
+            Cursor = Cursors.Default;
         }
-
+        
         //讀取XML資料 ST
         // Return the XML result of the URL.
         private string GetFormattedXml(string url)
@@ -790,49 +823,8 @@ namespace vcs_Network3_Weather
         }
         //讀取XML資料 SP
 
-        // Get a forecast.
-        private void button5_Click(object sender, EventArgs e)
-        {
-            clear_data();
-            Cursor = Cursors.WaitCursor;
-            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
-
-            // Compose the query URL.
-            Query = QueryCodes[comboBox1.SelectedIndex];
-            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
-            richTextBox1.Text += "url : " + url + "\n";
-            url = url.Replace("@QUERY@", Query);
-            richTextBox1.Text += "url : " + url + "\n";
-
-            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
-
-            // Create a web client.
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    // Get the response string from the URL.
-                    string xml = client.DownloadString(url);        //抓資料
-
-                    //richTextBox1.Text += "data\n" + xml + "\n";
-
-                    ParseXML_Forecast(xml);    //解讀
-                    //ParseXML_Forecast_old(xml);    //解讀
-                }
-                catch (WebException ex)
-                {
-                    DisplayError(ex);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\n" + ex.Message);
-                }
-            }
-            Cursor = Cursors.Default;
-        }
-
         // Display the forecast.
-        private void ParseXML_Forecast_old(string xml)
+        private void ParseXML_Forecast_old(string xml)      //舊的解讀資料
         {
             //richTextBox1.Text += xml + "\n\n";
             // Load the response into an XML document.
@@ -999,18 +991,19 @@ namespace vcs_Network3_Weather
         }
 
         // Display the forecast.
-        private void ParseXML_Forecast(string xml)
+        private void ParseXML_Forecast(string xml, int type)
         {
             //richTextBox1.Text += xml + "\n\n";
             // Load the response into an XML document.
             XmlDocument xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
 
-            ParseXML_Forecast0(xml_doc);
+            if(type == 0)
+                ParseXML_Forecast0(xml_doc);            //簡版
+            else if (type == 1)
+                ParseXML_weather_forecast0(xml_doc);    //詳版
         }
 
-        //ParseXML_weather_forecast0
-            //private void ParseXML_weather_forecast0(XmlDocument xml_doc)
         private void ParseXML_Forecast0(XmlDocument xml_doc)
         {
             // 解讀xml資料
@@ -1051,20 +1044,27 @@ namespace vcs_Network3_Weather
         }
 
         // Display the forecast.
-        private void ParseXML_Current(string xml)
+        private void ParseXML_Current(string xml, int type)
         {
             //richTextBox1.Text += xml + "\n\n";
             // Load the response into an XML document.
             XmlDocument xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
 
-            ParseXML_Current0(xml_doc);
+            if (type == 0)
+                ParseXML_Current0(xml_doc);            //簡版  TBD
+            else if (type == 1)
+                ParseXML_weather_current0(xml_doc);    //詳版
         }
 
         //ParseXML_weather_forecast0
         //private void ParseXML_weather_forecast0(XmlDocument xml_doc)
         private void ParseXML_Current0(XmlDocument xml_doc)
         {
+            // TBD
+            return;
+
+
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
@@ -1119,51 +1119,31 @@ namespace vcs_Network3_Weather
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        //天氣預測XML解讀_簡版
+        private void button4_Click(object sender, EventArgs e)
         {
-            clear_data();
+            get_Forecase_data(0);
         }
 
-        // Get a forecast.
-        private void button9_Click(object sender, EventArgs e)
+        //天氣預測XML解讀_詳版
+        private void button10_Click(object sender, EventArgs e)
         {
-            clear_data();
-            Cursor = Cursors.WaitCursor;
-            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
-
-            // Compose the query URL.
-            Query = QueryCodes[comboBox1.SelectedIndex];
-            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
-            richTextBox1.Text += "url : " + url + "\n";
-            url = url.Replace("@QUERY@", Query);
-            richTextBox1.Text += "url : " + url + "\n";
-
-            //richTextBox1.Text += GetFormattedXml(url) + "\n";     //only show data
-
-            // Create a web client.
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    // Get the response string from the URL.
-                    string xml = client.DownloadString(url);        //抓資料
-
-                    //richTextBox1.Text += "data\n" + xml + "\n";
-
-                    //ParseXML_Forecast(xml);    //解讀
-                    ParseXML_Forecast_old(xml);    //解讀
-                }
-                catch (WebException ex)
-                {
-                    DisplayError(ex);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\n" + ex.Message);
-                }
-            }
-            Cursor = Cursors.Default;
+            get_Forecase_data(1);
         }
+
+        //即時天氣XML解讀_簡版
+        private void button3_Click(object sender, EventArgs e)
+        {
+            get_Current_data(0);
+        }
+
+        //即時天氣XML解讀_詳版
+        private void button11_Click(object sender, EventArgs e)
+        {
+            get_Current_data(1);
+        }
+
+
 
 
     }

@@ -45,6 +45,10 @@
             this.timer_draw_captcha = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_rectangle = new System.Windows.Forms.PictureBox();
             this.timer_draw_rectangle = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_random_pixel_image = new System.Windows.Forms.PictureBox();
+            this.timer_random_pixel_image = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
+            this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -53,6 +57,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -178,11 +184,41 @@
             this.timer_draw_rectangle.Interval = 1000;
             this.timer_draw_rectangle.Tick += new System.EventHandler(this.timer_draw_rectangle_Tick);
             // 
+            // pictureBox_random_pixel_image
+            // 
+            this.pictureBox_random_pixel_image.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_random_pixel_image.Location = new System.Drawing.Point(12, 674);
+            this.pictureBox_random_pixel_image.Name = "pictureBox_random_pixel_image";
+            this.pictureBox_random_pixel_image.Size = new System.Drawing.Size(300, 100);
+            this.pictureBox_random_pixel_image.TabIndex = 63;
+            this.pictureBox_random_pixel_image.TabStop = false;
+            // 
+            // timer_random_pixel_image
+            // 
+            this.timer_random_pixel_image.Enabled = true;
+            this.timer_random_pixel_image.Interval = 1000;
+            this.timer_random_pixel_image.Tick += new System.EventHandler(this.timer_random_pixel_image_Tick);
+            // 
+            // pictureBox_progressbar
+            // 
+            this.pictureBox_progressbar.Location = new System.Drawing.Point(369, 322);
+            this.pictureBox_progressbar.Name = "pictureBox_progressbar";
+            this.pictureBox_progressbar.Size = new System.Drawing.Size(543, 86);
+            this.pictureBox_progressbar.TabIndex = 64;
+            this.pictureBox_progressbar.TabStop = false;
+            // 
+            // timer_progressbar
+            // 
+            this.timer_progressbar.Interval = 50;
+            this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1398, 680);
+            this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.pictureBox_progressbar);
+            this.Controls.Add(this.pictureBox_random_pixel_image);
             this.Controls.Add(this.pictureBox_rectangle);
             this.Controls.Add(this.pictureBox_captcha3);
             this.Controls.Add(this.pictureBox_captcha2);
@@ -205,6 +241,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_captcha1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -227,6 +265,10 @@
         private System.Windows.Forms.Timer timer_draw_captcha;
         private System.Windows.Forms.PictureBox pictureBox_rectangle;
         private System.Windows.Forms.Timer timer_draw_rectangle;
+        private System.Windows.Forms.PictureBox pictureBox_random_pixel_image;
+        private System.Windows.Forms.Timer timer_random_pixel_image;
+        private System.Windows.Forms.PictureBox pictureBox_progressbar;
+        private System.Windows.Forms.Timer timer_progressbar;
     }
 }
 

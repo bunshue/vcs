@@ -28,6 +28,14 @@ namespace vcs_Draw3B
         private int EllipseCx, EllipseCy, EllipseWidth, EllipseHeight;
         private List<PointF> LinePoints = null;
 
+
+        double pbUnit;
+        int W_progressbar;
+        int H_progressbar;
+        int Complete_progressbar;
+        Bitmap bmp_progressbar;
+        Graphics g_progressbar;
+
         public Form1()
         {
             InitializeComponent();
@@ -54,6 +62,16 @@ namespace vcs_Draw3B
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+
+            //自製ProgressBar
+            W_progressbar = pictureBox_progressbar.Width;
+            H_progressbar = pictureBox_progressbar.Height;
+            pbUnit = W_progressbar / 100.0;
+            //Complete_progressbar - This is equal to work completed in % [min = 0 max = 100]
+            Complete_progressbar = 0;
+            //create bitmap
+            bmp_progressbar = new Bitmap(W_progressbar, H_progressbar);
+            timer_progressbar.Enabled = true;
 
             ge = pictureBox_ellipse.CreateGraphics();
             gs = pictureBox_star.CreateGraphics();
@@ -684,6 +702,76 @@ namespace vcs_Draw3B
         private void timer_draw_rectangle_Tick(object sender, EventArgs e)
         {
             draw_color_rectangles();
+        }
+
+
+        void draw_random_pixel_image()
+        {
+            int W = pictureBox_random_pixel_image.ClientSize.Width;
+            int H = pictureBox_random_pixel_image.ClientSize.Height;
+
+            //bitmap
+            Bitmap bmp = new Bitmap(W, H);
+
+            //random number
+            Random rand = new Random();
+
+            //create random pixels
+            for (int y = 0; y < H; y++)
+            {
+                for (int x = 0; x < W; x++)
+                {
+                    //generate random ARGB value
+                    int a = rand.Next(256);
+                    int r = rand.Next(256);
+                    int g = rand.Next(256);
+                    int b = rand.Next(256);
+
+                    //set ARGB value
+                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
+                }
+            }
+
+            //load bmp in picturebox1
+            pictureBox_random_pixel_image.Image = bmp;
+        }
+
+        private void timer_random_pixel_image_Tick(object sender, EventArgs e)
+        {
+            draw_random_pixel_image();
+        }
+
+
+
+        private void timer_progressbar_Tick(object sender, EventArgs e)
+        {
+            //graphics
+            g_progressbar = Graphics.FromImage(bmp_progressbar);	// 取得繪圖區物件
+
+            //clear graphics
+            g_progressbar.Clear(Color.LightSkyBlue);
+
+            //draw progressbar
+            g_progressbar.FillRectangle(Brushes.CornflowerBlue, new Rectangle(0, 0, (int)(Complete_progressbar * pbUnit), H_progressbar));
+
+            //draw % complete
+            g_progressbar.DrawString(Complete_progressbar + "%", new Font("Arial", H_progressbar / 2), Brushes.Black, new PointF(W_progressbar / 2 - H_progressbar, H_progressbar / 10));
+
+            //load bitmap in picturebox picboxPB
+            pictureBox_progressbar.Image = bmp_progressbar;
+
+            //update Complete_progressbar
+            //Note!
+            //To keep things simple I am adding +1 to Complete_progressbar every 50ms
+            //You can change this as per your requirement :)
+            Complete_progressbar++;
+            if (Complete_progressbar > 100)
+            {
+                //dispose
+                g_progressbar.Dispose();
+                timer_progressbar.Stop();
+            }
+
         }
 
     }
