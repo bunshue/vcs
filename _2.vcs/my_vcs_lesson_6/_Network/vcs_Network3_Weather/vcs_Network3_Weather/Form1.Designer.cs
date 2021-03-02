@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.txtLocation = new System.Windows.Forms.TextBox();
+            this.tb_location = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,19 +45,21 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtId = new System.Windows.Forms.TextBox();
+            this.tb_id = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtCity = new System.Windows.Forms.TextBox();
-            this.txtLong = new System.Windows.Forms.TextBox();
+            this.tb_city = new System.Windows.Forms.TextBox();
+            this.tb_lon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtCountry = new System.Windows.Forms.TextBox();
-            this.txtLat = new System.Windows.Forms.TextBox();
+            this.tb_country = new System.Windows.Forms.TextBox();
+            this.tb_lat = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -73,16 +75,16 @@
             this.label2.TabIndex = 22;
             this.label2.Text = "城市：";
             // 
-            // txtLocation
+            // tb_location
             // 
-            this.txtLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tb_location.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLocation.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtLocation.Location = new System.Drawing.Point(69, 23);
-            this.txtLocation.Name = "txtLocation";
-            this.txtLocation.Size = new System.Drawing.Size(256, 30);
-            this.txtLocation.TabIndex = 20;
-            this.txtLocation.Text = "Hsinchu";
+            this.tb_location.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_location.Location = new System.Drawing.Point(69, 23);
+            this.tb_location.Name = "tb_location";
+            this.tb_location.Size = new System.Drawing.Size(256, 30);
+            this.tb_location.TabIndex = 20;
+            this.tb_location.Text = "Hsinchu";
             // 
             // listView1
             // 
@@ -93,7 +95,7 @@
             this.columnHeader4});
             this.listView1.Location = new System.Drawing.Point(12, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(559, 317);
+            this.listView1.Size = new System.Drawing.Size(620, 317);
             this.listView1.TabIndex = 24;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -125,13 +127,13 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 335);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(559, 311);
+            this.richTextBox1.Size = new System.Drawing.Size(740, 311);
             this.richTextBox1.TabIndex = 25;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(493, 619);
+            this.bt_clear.Location = new System.Drawing.Point(675, 611);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(53, 21);
             this.bt_clear.TabIndex = 26;
@@ -141,9 +143,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(577, 335);
+            this.pictureBox1.Location = new System.Drawing.Point(758, 427);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(545, 311);
+            this.pictureBox1.Size = new System.Drawing.Size(504, 219);
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
@@ -169,7 +171,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(599, 287);
+            this.button3.Location = new System.Drawing.Point(793, 287);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(149, 30);
             this.button3.TabIndex = 30;
@@ -179,7 +181,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(599, 240);
+            this.button4.Location = new System.Drawing.Point(793, 240);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(149, 30);
             this.button4.TabIndex = 31;
@@ -208,33 +210,34 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.txtId);
+            this.groupBox1.Controls.Add(this.tb_id);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.txtCity);
-            this.groupBox1.Controls.Add(this.txtLong);
-            this.groupBox1.Controls.Add(this.txtLocation);
+            this.groupBox1.Controls.Add(this.tb_city);
+            this.groupBox1.Controls.Add(this.tb_lon);
+            this.groupBox1.Controls.Add(this.tb_location);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txtCountry);
-            this.groupBox1.Controls.Add(this.txtLat);
+            this.groupBox1.Controls.Add(this.tb_country);
+            this.groupBox1.Controls.Add(this.tb_lat);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(587, 12);
+            this.groupBox1.Location = new System.Drawing.Point(781, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(338, 201);
+            this.groupBox1.Size = new System.Drawing.Size(338, 211);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "氣象資料";
             // 
-            // txtId
+            // tb_id
             // 
-            this.txtId.Location = new System.Drawing.Point(50, 169);
-            this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(100, 22);
-            this.txtId.TabIndex = 43;
+            this.tb_id.Location = new System.Drawing.Point(50, 169);
+            this.tb_id.Name = "tb_id";
+            this.tb_id.ReadOnly = true;
+            this.tb_id.Size = new System.Drawing.Size(100, 22);
+            this.tb_id.TabIndex = 43;
             // 
             // label3
             // 
@@ -254,21 +257,21 @@
             this.label7.TabIndex = 42;
             this.label7.Text = "ID:";
             // 
-            // txtCity
+            // tb_city
             // 
-            this.txtCity.Location = new System.Drawing.Point(50, 121);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.ReadOnly = true;
-            this.txtCity.Size = new System.Drawing.Size(100, 22);
-            this.txtCity.TabIndex = 35;
+            this.tb_city.Location = new System.Drawing.Point(50, 121);
+            this.tb_city.Name = "tb_city";
+            this.tb_city.ReadOnly = true;
+            this.tb_city.Size = new System.Drawing.Size(100, 22);
+            this.tb_city.TabIndex = 35;
             // 
-            // txtLong
+            // tb_lon
             // 
-            this.txtLong.Location = new System.Drawing.Point(224, 145);
-            this.txtLong.Name = "txtLong";
-            this.txtLong.ReadOnly = true;
-            this.txtLong.Size = new System.Drawing.Size(100, 22);
-            this.txtLong.TabIndex = 41;
+            this.tb_lon.Location = new System.Drawing.Point(224, 145);
+            this.tb_lon.Name = "tb_lon";
+            this.tb_lon.ReadOnly = true;
+            this.tb_lon.Size = new System.Drawing.Size(100, 22);
+            this.tb_lon.TabIndex = 41;
             // 
             // label4
             // 
@@ -288,21 +291,21 @@
             this.label5.TabIndex = 40;
             this.label5.Text = "經度 :";
             // 
-            // txtCountry
+            // tb_country
             // 
-            this.txtCountry.Location = new System.Drawing.Point(224, 121);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.ReadOnly = true;
-            this.txtCountry.Size = new System.Drawing.Size(100, 22);
-            this.txtCountry.TabIndex = 37;
+            this.tb_country.Location = new System.Drawing.Point(224, 121);
+            this.tb_country.Name = "tb_country";
+            this.tb_country.ReadOnly = true;
+            this.tb_country.Size = new System.Drawing.Size(100, 22);
+            this.tb_country.TabIndex = 37;
             // 
-            // txtLat
+            // tb_lat
             // 
-            this.txtLat.Location = new System.Drawing.Point(50, 145);
-            this.txtLat.Name = "txtLat";
-            this.txtLat.ReadOnly = true;
-            this.txtLat.Size = new System.Drawing.Size(100, 22);
-            this.txtLat.TabIndex = 39;
+            this.tb_lat.Location = new System.Drawing.Point(50, 145);
+            this.tb_lat.Name = "tb_lat";
+            this.tb_lat.ReadOnly = true;
+            this.tb_lat.Size = new System.Drawing.Size(100, 22);
+            this.tb_lat.TabIndex = 39;
             // 
             // label6
             // 
@@ -318,7 +321,7 @@
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Location = new System.Drawing.Point(946, 17);
+            this.groupBox2.Location = new System.Drawing.Point(1128, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(154, 169);
             this.groupBox2.TabIndex = 46;
@@ -327,7 +330,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(769, 240);
+            this.button10.Location = new System.Drawing.Point(963, 240);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(149, 30);
             this.button10.TabIndex = 48;
@@ -337,7 +340,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(769, 287);
+            this.button11.Location = new System.Drawing.Point(963, 287);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(149, 30);
             this.button11.TabIndex = 47;
@@ -345,11 +348,32 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(277, 174);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(47, 31);
+            this.button5.TabIndex = 49;
+            this.button5.Text = "clear";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(1118, 240);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(149, 30);
+            this.button7.TabIndex = 49;
+            this.button7.Text = "天氣預測XML解讀_詳版2";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1134, 661);
+            this.ClientSize = new System.Drawing.Size(1293, 661);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.groupBox2);
@@ -374,7 +398,7 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtLocation;
+        private System.Windows.Forms.TextBox tb_location;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -390,19 +414,21 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox tb_id;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtCity;
-        private System.Windows.Forms.TextBox txtLong;
+        private System.Windows.Forms.TextBox tb_city;
+        private System.Windows.Forms.TextBox tb_lon;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtCountry;
-        private System.Windows.Forms.TextBox txtLat;
+        private System.Windows.Forms.TextBox tb_country;
+        private System.Windows.Forms.TextBox tb_lat;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button7;
     }
 }
 

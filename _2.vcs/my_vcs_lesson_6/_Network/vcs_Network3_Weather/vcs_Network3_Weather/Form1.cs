@@ -56,6 +56,12 @@ namespace vcs_Network3_Weather
         //天氣預測
         string ForecastUrl;
 
+        string data_country = "";
+        string data_city = "";
+        string data_id = "";
+        string data_lat = "";
+        string data_lon = "";
+
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox1.Items.Add("City");
@@ -114,16 +120,32 @@ namespace vcs_Network3_Weather
 
         void clear_data()
         {
+            data_country = "";
+            data_city = "";
+            data_id = "";
+            data_lat = "";
+            data_lon = "";
+
+            tb_country.Text = data_country;
+            tb_city.Text = data_city;
+            tb_id.Text = data_id;
+            tb_lat.Text = data_lat;
+            tb_lon.Text = data_lon;
+
             temperature.Clear();
             date.Clear();
             richTextBox1.Clear();
             listView1.Items.Clear();
-            txtCity.Text = "";
-            txtCountry.Text = "";
-            txtLat.Text = "";
-            txtLong.Text = "";
-            txtId.Text = "";
             pictureBox1.Image = null;
+        }
+
+        void show_data()
+        {
+            tb_country.Text = data_country;
+            tb_city.Text = data_city;
+            tb_id.Text = data_id;
+            tb_lat.Text = data_lat;
+            tb_lon.Text = data_lon;
         }
 
         // List the temperatures.
@@ -132,18 +154,18 @@ namespace vcs_Network3_Weather
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
-            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            data_city = loc_node.SelectSingleNode("name").InnerText;
+            data_country = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
-            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
             XmlNode geo_node = loc_node.SelectSingleNode("location");
-            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            data_lat = geo_node.Attributes["latitude"].Value;
+            data_lon = geo_node.Attributes["longitude"].Value;
+            data_id = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
-            txtLong.Text = geo_node.Attributes["longitude"].Value;
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
-            txtId.Text = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
             richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
@@ -453,6 +475,7 @@ namespace vcs_Network3_Weather
 
             string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
             ParseXML(filename);
+            show_data();
         }
         // 標準版XML讀取解析程式 SP
 
@@ -464,6 +487,7 @@ namespace vcs_Network3_Weather
 
             string filename = "C:\\______test_files\\__RW\\_xml\\weather_forecast.xml";
             ParseXML_weather_forecast(filename);
+            show_data();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -474,6 +498,7 @@ namespace vcs_Network3_Weather
 
             string filename = "C:\\______test_files\\__RW\\_xml\\weather_current.xml";
             ParseXML_weather_current(filename);
+            show_data();
         }
 
         //vcsh 的 XML讀取程式, 讀取天氣預測XML檔案 ST
@@ -502,11 +527,17 @@ namespace vcs_Network3_Weather
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
+            data_city = loc_node.SelectSingleNode("name").InnerText;
+            data_country = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
 
             XmlNode geo_node = loc_node.SelectSingleNode("location");
+            data_lat = geo_node.Attributes["latitude"].Value;
+            data_lon = geo_node.Attributes["longitude"].Value;
+            data_id = geo_node.Attributes["geobaseid"].Value;
+
             richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
@@ -634,6 +665,8 @@ namespace vcs_Network3_Weather
                 {
                     XmlAttribute city_attr1 = city_node.Attributes["id"];
                     XmlAttribute city_attr2 = city_node.Attributes["name"];
+                    data_id = city_attr1.Value;
+                    data_city = city_attr2.Value;
                     richTextBox1.Text += "city id : " + city_attr1.Value + "\n";
                     richTextBox1.Text += "city name : " + city_attr2.Value + "\n";
 
@@ -641,10 +674,12 @@ namespace vcs_Network3_Weather
                     {
                         XmlAttribute coord_attr1 = coord_node.Attributes["lon"];
                         XmlAttribute coord_attr2 = coord_node.Attributes["lat"];
+                        data_lon = coord_attr1.Value;
+                        data_lat = coord_attr2.Value;
                         richTextBox1.Text += "東經 : " + coord_attr1.Value + "\n";
                         richTextBox1.Text += "北緯 : " + coord_attr2.Value + "\n";
                     }
-
+                    data_country = city_node.SelectSingleNode("country").InnerText;
                     richTextBox1.Text += "國家\t" + city_node.SelectSingleNode("country").InnerText + "\n";
                     richTextBox1.Text += "時區\t" + city_node.SelectSingleNode("timezone").InnerText + "\n";
 
@@ -714,7 +749,7 @@ namespace vcs_Network3_Weather
 
             // Compose the query URL.
             Query = "q";
-            string url = CurrentUrl.Replace("@LOCATION@", txtLocation.Text);
+            string url = CurrentUrl.Replace("@LOCATION@", tb_location.Text);
             richTextBox1.Text += "url : " + url + "\n";
             url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
@@ -752,11 +787,11 @@ namespace vcs_Network3_Weather
         {
             clear_data();
             Cursor = Cursors.WaitCursor;
-            richTextBox1.Text += "搜尋城市：" + txtLocation.Text + "\n";
+            richTextBox1.Text += "搜尋城市：" + tb_location.Text + "\n";
 
             // Compose the query URL.
             Query = QueryCodes[comboBox1.SelectedIndex];
-            string url = ForecastUrl.Replace("@LOCATION@", txtLocation.Text);
+            string url = ForecastUrl.Replace("@LOCATION@", tb_location.Text);
             richTextBox1.Text += "url : " + url + "\n";
             url = url.Replace("@QUERY@", Query);
             richTextBox1.Text += "url : " + url + "\n";
@@ -834,18 +869,18 @@ namespace vcs_Network3_Weather
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
-            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            data_city = loc_node.SelectSingleNode("name").InnerText;
+            data_country = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
-            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
             XmlNode geo_node = loc_node.SelectSingleNode("location");
-            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            data_lat = geo_node.Attributes["latitude"].Value;
+            data_lon = geo_node.Attributes["longitude"].Value;
+            data_id = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
-            txtLong.Text = geo_node.Attributes["longitude"].Value;
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
-            txtId.Text = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
             richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
@@ -998,10 +1033,18 @@ namespace vcs_Network3_Weather
             XmlDocument xml_doc = new XmlDocument();
             xml_doc.LoadXml(xml);
 
-            if(type == 0)
+            if (type == 0)
+            {
                 ParseXML_Forecast0(xml_doc);            //簡版
+            }
             else if (type == 1)
-                ParseXML_weather_forecast0(xml_doc);    //詳版
+            {
+                ParseXML_weather_forecast0(xml_doc);    //詳版 1
+            }
+            else if (type == 2)
+            {
+                ListTemperatures(xml_doc);              //詳版 2
+            }
         }
 
         private void ParseXML_Forecast0(XmlDocument xml_doc)
@@ -1009,18 +1052,18 @@ namespace vcs_Network3_Weather
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
-            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            data_city = loc_node.SelectSingleNode("name").InnerText;
+            data_country = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
-            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
             XmlNode geo_node = loc_node.SelectSingleNode("location");
-            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            data_lat = geo_node.Attributes["latitude"].Value;
+            data_lon = geo_node.Attributes["longitude"].Value;
+            data_id = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
-            txtLong.Text = geo_node.Attributes["longitude"].Value;
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
-            txtId.Text = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
             richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
@@ -1068,18 +1111,18 @@ namespace vcs_Network3_Weather
             // 解讀xml資料
             // Get the city, country, latitude, and longitude.
             XmlNode loc_node = xml_doc.SelectSingleNode("weatherdata/location");
-            txtCity.Text = loc_node.SelectSingleNode("name").InnerText;
+            data_city = loc_node.SelectSingleNode("name").InnerText;
+            data_country = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "城市\t" + loc_node.SelectSingleNode("name").InnerText + "\n";
-            txtCountry.Text = loc_node.SelectSingleNode("country").InnerText;
             richTextBox1.Text += "國家\t" + loc_node.SelectSingleNode("country").InnerText + "\n";
             richTextBox1.Text += "時區\t" + loc_node.SelectSingleNode("timezone").InnerText + "\n";
             XmlNode geo_node = loc_node.SelectSingleNode("location");
-            txtLat.Text = geo_node.Attributes["latitude"].Value;
+            data_lat = geo_node.Attributes["latitude"].Value;
+            data_lon = geo_node.Attributes["longitude"].Value;
+            data_id = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "高度\t" + geo_node.Attributes["altitude"].Value + "\n";
             richTextBox1.Text += "緯度\t" + geo_node.Attributes["latitude"].Value + "\n";
-            txtLong.Text = geo_node.Attributes["longitude"].Value;
             richTextBox1.Text += "經度\t" + geo_node.Attributes["longitude"].Value + "\n";
-            txtId.Text = geo_node.Attributes["geobaseid"].Value;
             richTextBox1.Text += "geobase\t" + geo_node.Attributes["geobase"].Value + "\n";
             richTextBox1.Text += "ID\t" + geo_node.Attributes["geobaseid"].Value + "\n";
 
@@ -1123,24 +1166,39 @@ namespace vcs_Network3_Weather
         private void button4_Click(object sender, EventArgs e)
         {
             get_Forecase_data(0);
+            show_data();
         }
 
         //天氣預測XML解讀_詳版
         private void button10_Click(object sender, EventArgs e)
         {
             get_Forecase_data(1);
+            show_data();
         }
 
         //即時天氣XML解讀_簡版
         private void button3_Click(object sender, EventArgs e)
         {
             get_Current_data(0);
+            show_data();
         }
 
         //即時天氣XML解讀_詳版
         private void button11_Click(object sender, EventArgs e)
         {
             get_Current_data(1);
+            show_data();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            clear_data();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            get_Forecase_data(2);
+            show_data();
         }
 
 
