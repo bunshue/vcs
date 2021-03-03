@@ -49,6 +49,8 @@
             this.timer_random_pixel_image = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_word = new System.Windows.Forms.PictureBox();
+            this.timer_word = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -59,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -212,11 +215,26 @@
             this.timer_progressbar.Interval = 50;
             this.timer_progressbar.Tick += new System.EventHandler(this.timer_progressbar_Tick);
             // 
+            // pictureBox_word
+            // 
+            this.pictureBox_word.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_word.Location = new System.Drawing.Point(329, 654);
+            this.pictureBox_word.Name = "pictureBox_word";
+            this.pictureBox_word.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox_word.TabIndex = 65;
+            this.pictureBox_word.TabStop = false;
+            // 
+            // timer_word
+            // 
+            this.timer_word.Interval = 1000;
+            this.timer_word.Tick += new System.EventHandler(this.timer_word_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.pictureBox_word);
             this.Controls.Add(this.pictureBox_progressbar);
             this.Controls.Add(this.pictureBox_random_pixel_image);
             this.Controls.Add(this.pictureBox_rectangle);
@@ -243,6 +261,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,6 +288,8 @@
         private System.Windows.Forms.Timer timer_random_pixel_image;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
         private System.Windows.Forms.Timer timer_progressbar;
+        private System.Windows.Forms.PictureBox pictureBox_word;
+        private System.Windows.Forms.Timer timer_word;
     }
 }
 

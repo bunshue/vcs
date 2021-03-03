@@ -14,6 +14,9 @@ namespace vcs_ScreenRuler
         Graphics g;
         Bitmap bmp;
 
+        int W = 1920;
+        int H = 1080;
+
         public Form1()
         {
             InitializeComponent();
@@ -21,12 +24,12 @@ namespace vcs_ScreenRuler
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
+            W = Screen.PrimaryScreen.Bounds.Width;
+            H = Screen.PrimaryScreen.Bounds.Height;
             this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
             this.WindowState = FormWindowState.Normal;
-            this.Size = new Size(1920, 1080 / 4);
+            this.Size = new Size(W, H / 4);
             this.Location = new Point(W - 150, H - 400);
             this.BackColor = Color.White;
 
@@ -34,6 +37,7 @@ namespace vcs_ScreenRuler
             g = Graphics.FromImage(bmp);
 
             g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, W - 1, H - 1);
+            g.DrawString(W.ToString() + " X " + H.ToString(), new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(W - 290, H - 60));
 
             int i;
             int delta;
@@ -42,7 +46,7 @@ namespace vcs_ScreenRuler
             //畫垂直線
             for (i = 0; i < W; i += delta)
             {
-                g.DrawLine(new Pen(Color.Blue, 1), i, 0, i, H / 2); //每隔100點畫 垂直線 藍線
+                g.DrawLine(new Pen(Color.Blue, 1), i, 0, i, H); //每隔100點畫 垂直線 藍線
                 g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(i - 15, 30));
             }
 
@@ -61,16 +65,17 @@ namespace vcs_ScreenRuler
                 }
             }
 
-            //畫螢幕中心垂直線
-            g.DrawLine(new Pen(Color.Red, 5), W / 2, 0, W / 2, 500);
+            //畫螢幕中心垂直線 與 中心水平線
+            g.DrawLine(new Pen(Color.Red, 5), W / 2, 0, W / 2, H);
+            g.DrawLine(new Pen(Color.Red, 5), 0, H / 2, W, H / 2);
 
-            for (i = 0; i < 350; i += delta)
+            for (i = 0; i < H; i += delta)
             {
                 g.DrawLine(new Pen(Color.Blue, 1), 0, i, W, i);
                 g.DrawString(i.ToString(), new Font("標楷體", 12), new SolidBrush(Color.Blue), new PointF(0, i));
             }
 
-            for (i = 0; i <= 350; i += 10)
+            for (i = 0; i <= H; i += 10)
             {
                 if ((i % 50) == 0)
                 {
@@ -158,9 +163,23 @@ namespace vcs_ScreenRuler
         }
         #endregion
 
+        int flag_screen_ruler_mode = 0;
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
-            Application.Exit();
+            flag_screen_ruler_mode++;
+            if (flag_screen_ruler_mode == 1)
+            {
+                this.Size = new Size(W, H);
+            }
+            else if (flag_screen_ruler_mode == 2)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                flag_screen_ruler_mode = 0;
+
+            }
         }
 
     }

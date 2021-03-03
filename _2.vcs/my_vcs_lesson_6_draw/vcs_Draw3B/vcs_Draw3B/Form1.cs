@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Drawing.Text;      //for TextRenderingHint
+using System.IO;                //for File
 
 namespace vcs_Draw3B
 {
@@ -35,6 +36,14 @@ namespace vcs_Draw3B
         int Complete_progressbar;
         Bitmap bmp_progressbar;
         Graphics g_progressbar;
+
+        #region 畫字
+        string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行s.txt";
+        int word_position = 0;
+        string word_string = "";
+        Bitmap bmp;
+        Graphics gw;
+        #endregion
 
         public Form1()
         {
@@ -72,6 +81,16 @@ namespace vcs_Draw3B
             //create bitmap
             bmp_progressbar = new Bitmap(W_progressbar, H_progressbar);
             timer_progressbar.Enabled = true;
+
+            #region 畫字
+            //讀取檔案
+            word_string = File.ReadAllText(filename, System.Text.Encoding.Default);
+            //richTextBox1.Text += "檔案內容 : " + word_string + "\n";
+            //richTextBox1.Text += "長度：" + word_string.Length.ToString() + "\n";
+            bmp = new Bitmap(pictureBox_word.ClientSize.Width, pictureBox_word.ClientSize.Height);
+            gw = Graphics.FromImage(bmp);
+            timer_word.Enabled = true;
+            #endregion
 
             ge = pictureBox_ellipse.CreateGraphics();
             gs = pictureBox_star.CreateGraphics();
@@ -771,8 +790,43 @@ namespace vcs_Draw3B
                 g_progressbar.Dispose();
                 timer_progressbar.Stop();
             }
-
         }
+
+
+        #region 畫字
+        void draw_word()
+        {
+            //g.DrawRectangle(Pens.Red, 0, 0, 100 - 1, 100 - 1);
+
+            Font f = new Font("標楷體", 60);
+            int tmp_width = 0;
+            int tmp_height = 0;
+            string str = word_string[word_position].ToString();
+
+            tmp_width = gw.MeasureString(str, f).ToSize().Width;
+            tmp_height = gw.MeasureString(str, f).ToSize().Height;
+
+            richTextBox1.Text += tmp_width.ToString() + " " + tmp_height.ToString() + "\n";
+
+            gw.Clear(Color.LightGray);
+            gw.DrawRectangle(Pens.Red, 0, 0, tmp_width - 1, tmp_height - 1);
+
+            gw.DrawString(str, new Font("標楷體", 50), Brushes.Navy, 10, 10);
+
+            word_position++;
+            if (word_position >= word_string.Length)
+                word_position = 0;
+
+            pictureBox_word.Image = bmp;
+        }
+
+        private void timer_word_Tick(object sender, EventArgs e)
+        {
+            draw_word();
+        }
+        #endregion
+
+
 
     }
 }
