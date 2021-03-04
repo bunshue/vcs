@@ -82,6 +82,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -685,11 +686,24 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Checked = true;
+            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox8.Location = new System.Drawing.Point(1730, 77);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(72, 16);
+            this.checkBox8.TabIndex = 51;
+            this.checkBox8.Text = "滿30結束";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1784, 1008);
+            this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.checkBox8);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.cb_file_size);
             this.Controls.Add(this.groupBox_file);
@@ -800,6 +814,7 @@
         private System.Windows.Forms.TextBox tb_file_s;
         private System.Windows.Forms.CheckBox cb_file_size;
         private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.CheckBox checkBox8;
     }
 }
 

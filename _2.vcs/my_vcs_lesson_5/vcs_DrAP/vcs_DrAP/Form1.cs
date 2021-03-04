@@ -1575,6 +1575,14 @@ namespace vcs_DrAP
         // Insert logic for processing found files here.
         public void ProcessFileS(string path)
         {
+            if (checkBox8.Checked == true)
+            {
+                if (fileinfos.Count > 30)
+                {
+                    return;
+                }
+            }
+
             FileInfo fi = new FileInfo(path);
             //richTextBox2.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
             bool res;
@@ -1627,10 +1635,7 @@ namespace vcs_DrAP
                     richTextBox2.Text += "上面搜尋到的資料在檔案\t" + fi.FullName + "\n\n";
                     fileinfos.Add(new MyFileInfo(fi.Name, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
                 }
-
                 sr.Close();
-
-
             }
             else
             {

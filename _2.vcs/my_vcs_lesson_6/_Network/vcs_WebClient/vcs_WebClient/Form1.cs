@@ -19,6 +19,19 @@ namespace vcs_WebClient
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
+            //for Sugar     3840 Romeo也可用
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
+            //for Romeo and Sugar    3072
+            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             /*
@@ -54,7 +67,12 @@ namespace vcs_WebClient
             {
                 try  // Get the response string from the URL.
                 {
-                    string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+                    //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+                    int pos1 = url_file2.LastIndexOf('/');
+                    int pos2 = url_file2.LastIndexOf('.');
+                    string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
+                    richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
+
                     client2.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案
                     richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
                 }
@@ -110,6 +128,32 @@ namespace vcs_WebClient
                 richTextBox1.Text += "*** Download Error" + "\n";
                 richTextBox1.Text += "*** " + ex.Message + "\n";
             }
+            Application.DoEvents();
+
+
+            //下載COVID-19資料
+
+            // Compose the local data file name.
+            string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            string url = "https://covidtracking.com/api/v1/states/daily.csv";
+
+            richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
+            Application.DoEvents();
+
+            DownloadFile(url, filename_covid19a);
+
+
+            richTextBox1.Text += "Loading case data...\n";
+            Application.DoEvents();
+
+            // Compose the local data file name.
+            string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
+            DownloadFile(url, filename_covid19b);
         }
 
         // Download the indicated file.
@@ -120,8 +164,14 @@ namespace vcs_WebClient
             // Make a WebClient.
             WebClient client = new WebClient();
 
+            /*
             int pos = url.LastIndexOf('/');
             string filename = url.Substring(pos + 1);
+            */
+
+            int pos1 = url.LastIndexOf('/');
+            int pos2 = url.LastIndexOf('.');
+            string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
             richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
 
             // Use one of the following.
@@ -156,5 +206,44 @@ namespace vcs_WebClient
                 return null;
             }
         }
+
+        private void DownloadFile(string url, string filename)
+        {
+            try
+            {
+                // Make a WebClient.
+                WebClient client = new WebClient();
+
+                // Download the file.
+                client.DownloadFile(url, filename);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                if (!File.Exists(filename))
+                {
+                    richTextBox1.Text += "下載 : " + filename + "\tNG\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "下載 : " + filename + "\tOK\n";
+                }
+            }
+        }
+
     }
+
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+
 }
