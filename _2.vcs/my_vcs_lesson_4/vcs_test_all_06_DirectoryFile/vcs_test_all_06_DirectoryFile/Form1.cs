@@ -122,7 +122,7 @@ namespace vcs_test_all_06_DirectoryFile
             bt_new11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             bt_new12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
-            bt_clear.Location = new Point(x_st + dx * 5+6, y_st + dy * 13 + 20);
+            bt_clear.Location = new Point(x_st + dx * 5 + 6, y_st + dy * 13 + 20);
 
             x_st = 6;
             y_st = 10;
@@ -512,9 +512,10 @@ namespace vcs_test_all_06_DirectoryFile
                 richTextBox1.Text += "取得檔名(不包含附檔名):\t" + Path.GetFileNameWithoutExtension(filename) + "\n";
                 richTextBox1.Text += "取得副檔名:\t\t" + Path.GetExtension(filename) + "\n";
                 richTextBox1.Text += "資料根目錄:\t\t" + Path.GetPathRoot(filename) + "\n";
+                richTextBox1.Text += "修改成完整時間檔名:\t" + Path.GetDirectoryName(filename) + "\\" + Path.GetFileNameWithoutExtension(filename) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + Path.GetExtension(filename) + "\n";
+                richTextBox1.Text += "修改成時間檔名:\t\t" + Path.GetFileNameWithoutExtension(filename) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + Path.GetExtension(filename) + "\n";
             }
             richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
-
         }
 
         private void bt_file08_Click(object sender, EventArgs e)
@@ -2143,8 +2144,6 @@ namespace vcs_test_all_06_DirectoryFile
         {
             richTextBox1.Clear();
         }
-
-
     }
 }
 

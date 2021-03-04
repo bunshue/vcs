@@ -33,10 +33,10 @@ namespace vcs_DownloadFile
             try
             {
                 // Make a WebClient.
-                WebClient web_client = new WebClient();
+                WebClient client = new WebClient();
 
                 // Download the file.
-                web_client.DownloadFile(filename_remote, filename_local);
+                client.DownloadFile(filename_remote, filename_local);
 
                 richTextBox1.Text += "下載完成\n";
             }

@@ -51,18 +51,18 @@ namespace vcs_DownloadPicture2
             richTextBox1.Text += "NASA 圖片網站主頁下載完畢, 從網頁資料擷取圖片所在網址\n";
             // Get the image's URL.
             HtmlDocument doc = webBrowser1.Document;
-            string img_url = doc.Images[0].GetAttribute("src");
+            string img_src_url = doc.Images[0].GetAttribute("src");
 
-            richTextBox1.Text += "圖片所在網址 : " + img_url + "\n";
+            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
 
             try
             {
                 //圖片下載並存檔
-                DownloadImage(img_url);
+                DownloadImage(img_src_url);
                 richTextBox1.Text += "圖片下載並存檔完成\n";
 
                 //圖片下來並顯示
-                Image img = GetPicture(img_url);
+                Image img = GetPicture(img_src_url);
                 pictureBox1.Image = img;
                 richTextBox1.Text += "圖片下來並顯示完成\n";
             }
@@ -79,7 +79,7 @@ namespace vcs_DownloadPicture2
             //richTextBox1.Text += "下載圖片 : " + url + "\n";
 
             // Make a WebClient.
-            WebClient web_client = new WebClient();
+            WebClient client = new WebClient();
 
             int pos = url.LastIndexOf('/');
             string filename = url.Substring(pos + 1);
@@ -93,7 +93,7 @@ namespace vcs_DownloadPicture2
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
             // Download the file.
-            web_client.DownloadFile(url, filename);
+            client.DownloadFile(url, filename);
         }
 
         // Download a file from the internet.
@@ -102,13 +102,13 @@ namespace vcs_DownloadPicture2
         {
             try
             {
-                WebClient web_client = new WebClient();
+                WebClient client = new WebClient();
 
                 // Use one of the following.
                 //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
+                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
                 return Image.FromStream(image_stream);
             }
             catch (Exception ex)
@@ -117,8 +117,5 @@ namespace vcs_DownloadPicture2
                 return null;
             }
         }
-
-
-
     }
 }

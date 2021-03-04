@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;                        //for StreamReader, SearchOption
 using System.Drawing.Imaging;   //for bmp2jpg
-using System.Net;           //for WebClient
 using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process

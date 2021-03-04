@@ -124,8 +124,8 @@ namespace vcs_Network2_WebPageImage
             {
                 url = url.Trim();
                 if (!url.ToLower().StartsWith("http://")) url = "http://" + url;
-                WebClient web_client = new WebClient();
-                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
+                WebClient client = new WebClient();
+                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
                 return Image.FromStream(image_stream);
             }
             catch (Exception ex)

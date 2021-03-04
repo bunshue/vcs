@@ -273,8 +273,8 @@ namespace vcs_Network1
             try
             {
                 //下載純文字
-                WebClient wc = new WebClient();
-                string somestring = wc.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
+                WebClient client = new WebClient();
+                string somestring = client.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
                 richTextBox1.Text += somestring;
             }
             catch (WebException we)
@@ -429,9 +429,9 @@ namespace vcs_Network1
         {
             try
             {
-                WebClient wc = new WebClient();
-                wc.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
-                byte[] bd = wc.DownloadData(sURL);
+                WebClient client = new WebClient();
+                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
+                byte[] bd = client.DownloadData(sURL);
                 return (Encoding.Default.GetString(bd));
             }
             catch
@@ -475,8 +475,8 @@ namespace vcs_Network1
         private void button17_Click(object sender, EventArgs e)
         {
             //下載檔案的範例 - 使用WebClient
-            WebClient wc = new WebClient();
-            wc.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "C:\\______test_files\\blog.png");
+            WebClient client = new WebClient();
+            client.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "C:\\______test_files\\blog.png");
             richTextBox1.Text += "下載完成\n";
         }
 
@@ -532,10 +532,10 @@ namespace vcs_Network1
         private string GetWebResponse(string url)
         {
             // Make a WebClient.
-            WebClient web_client = new WebClient();
+            WebClient client = new WebClient();
 
             // Get the indicated URL.
-            Stream response = web_client.OpenRead(url);
+            Stream response = client.OpenRead(url);
 
             // Read the result.
             using (StreamReader stream_reader = new StreamReader(response))
@@ -562,9 +562,9 @@ namespace vcs_Network1
         private void button22_Click(object sender, EventArgs e)
         {
             //從FTP下載檔案
-            System.Net.WebClient webClient = new System.Net.WebClient();
+            WebClient client = new WebClient();
             //下載FTP檔案到指定位置
-            webClient.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
+            client.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -585,8 +585,8 @@ namespace vcs_Network1
             {
                 url = url.Trim();
                 if (!url.ToLower().StartsWith("http")) url = "http://" + url;
-                WebClient web_client = new WebClient();
-                MemoryStream image_stream = new MemoryStream(web_client.DownloadData(url));
+                WebClient client = new WebClient();
+                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
                 StreamReader reader = new StreamReader(image_stream);
                 string result = reader.ReadToEnd();
                 reader.Close();

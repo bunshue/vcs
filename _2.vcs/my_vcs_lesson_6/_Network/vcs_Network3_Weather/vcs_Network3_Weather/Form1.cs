@@ -1051,7 +1051,7 @@ namespace vcs_Network3_Weather
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unknown error\n" + ex.Message);
+                MessageBox.Show("Unknown error\t" + ex.Message);
             }
         }
 
@@ -1180,7 +1180,7 @@ namespace vcs_Network3_Weather
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unknown error\n" + ex.Message);
+                    MessageBox.Show("Unknown error\t" + ex.Message);
                 }
             }
         }
