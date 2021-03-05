@@ -26,17 +26,11 @@ namespace vcs_programming
             //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
 
             /* 第 10 章 */
-            Application.Run(new testPictures());
+            //Application.Run(new testPictures());
             //Application.Run(new memory());
-
-            /* 第 11 章 */
-            //Application.Run(new TwoDArray());
 
             /* 第 12 章 */
             //Application.Run(new jaggedArray());     //有點多
-
-            /* 第 13 章 */
-            //Application.Run(new CallByRef());
 
             /* 第 14 章 */
             //Application.Run(new ScoreFile());
@@ -46,8 +40,7 @@ namespace vcs_programming
             //Application.Run(new SimpleEditor());
 
             /* 第 16 章 */
-            //Application.Run(new mouseevent());
-            //Application.Run(new keyevent());
+            Application.Run(new keyevent());
 
             /* 第 18 章 */
             //Application.Run(new Form1());

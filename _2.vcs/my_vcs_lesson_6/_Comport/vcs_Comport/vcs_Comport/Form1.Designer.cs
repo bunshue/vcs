@@ -61,6 +61,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(614, 335);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // bt_clear
             // 
@@ -148,9 +149,12 @@
             this.bt_comport_disconnect.UseVisualStyleBackColor = true;
             this.bt_comport_disconnect.Click += new System.EventHandler(this.bt_comport_disconnect_Click);
             // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
             // SerialPortTimer100ms
             // 
-            this.SerialPortTimer100ms.Enabled = true;
             this.SerialPortTimer100ms.Tick += new System.EventHandler(this.SerialPortTimer100ms_Tick);
             // 
             // Form1

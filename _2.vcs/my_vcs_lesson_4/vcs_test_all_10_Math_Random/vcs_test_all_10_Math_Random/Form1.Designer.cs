@@ -51,6 +51,7 @@
             this.button19 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_random12 = new System.Windows.Forms.Button();
             this.bt_random_color = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -105,7 +106,6 @@
             this.lb_ordinal = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bt_random12 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -365,6 +365,17 @@
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "亂數";
+            // 
+            // bt_random12
+            // 
+            this.bt_random12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random12.Location = new System.Drawing.Point(183, 296);
+            this.bt_random12.Name = "bt_random12";
+            this.bt_random12.Size = new System.Drawing.Size(155, 40);
+            this.bt_random12.TabIndex = 36;
+            this.bt_random12.Text = "亂數方法比較";
+            this.bt_random12.UseVisualStyleBackColor = true;
+            this.bt_random12.Click += new System.EventHandler(this.bt_random12_Click);
             // 
             // bt_random_color
             // 
@@ -787,7 +798,9 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(155, 40);
             this.button29.TabIndex = 40;
+            this.button29.Text = "排序";
             this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // button30
             // 
@@ -796,7 +809,9 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(155, 40);
             this.button30.TabIndex = 41;
+            this.button30.Text = "算音階";
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // txtNumber
             // 
@@ -975,17 +990,6 @@
             this.pictureBox1.TabIndex = 46;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            // 
-            // bt_random12
-            // 
-            this.bt_random12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random12.Location = new System.Drawing.Point(183, 296);
-            this.bt_random12.Name = "bt_random12";
-            this.bt_random12.Size = new System.Drawing.Size(155, 40);
-            this.bt_random12.TabIndex = 36;
-            this.bt_random12.Text = "亂數方法比較";
-            this.bt_random12.UseVisualStyleBackColor = true;
-            this.bt_random12.Click += new System.EventHandler(this.bt_random12_Click);
             // 
             // Form1
             // 

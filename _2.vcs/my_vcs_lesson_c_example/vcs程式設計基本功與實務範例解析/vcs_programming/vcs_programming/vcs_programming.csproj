@@ -75,12 +75,6 @@
     <Compile Include="DateForm.designer.cs">
       <DependentUpon>DateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CallByRef.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CallByRef.Designer.cs">
-      <DependentUpon>CallByRef.cs</DependentUpon>
-    </Compile>
     <Compile Include="Ch19Test.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,12 +196,6 @@
     <Compile Include="Midterm.Designer.cs">
       <DependentUpon>Midterm.cs</DependentUpon>
     </Compile>
-    <Compile Include="mouseevent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="mouseevent.Designer.cs">
-      <DependentUpon>mouseevent.cs</DependentUpon>
-    </Compile>
     <Compile Include="Multi_1DArray.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,9 +206,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DateForm.resx">
       <DependentUpon>DateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CallByRef.resx">
-      <DependentUpon>CallByRef.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ch19Test.resx">
       <DependentUpon>Ch19Test.cs</DependentUpon>
@@ -282,9 +267,6 @@
     <EmbeddedResource Include="Midterm.resx">
       <DependentUpon>Midterm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mouseevent.resx">
-      <DependentUpon>mouseevent.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Multi_1DArray.resx">
       <DependentUpon>Multi_1DArray.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,9 +287,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TriangleForm.resx">
       <DependentUpon>TriangleForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TwoDArray.resx">
-      <DependentUpon>TwoDArray.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -347,12 +326,6 @@
     </Compile>
     <Compile Include="TriangleForm.designer.cs">
       <DependentUpon>TriangleForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TwoDArray.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TwoDArray.Designer.cs">
-      <DependentUpon>TwoDArray.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

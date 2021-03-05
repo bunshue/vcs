@@ -186,7 +186,6 @@ namespace vcs_Network1
                     richTextBox1.Text += "Local IP: " + ipaddress.ToString() + "\n";
                 }
             }
-
         }
 
         //網路連線狀態
@@ -244,26 +243,25 @@ namespace vcs_Network1
         private Image ReadImageFromUrl(string urlImagePath)
         {
             Uri uri = new Uri(urlImagePath);
-            WebRequest webRequest = WebRequest.Create(uri);
-            Stream stream = webRequest.GetResponse().GetResponseStream();
+            WebRequest request = WebRequest.Create(uri);
+            Stream stream = request.GetResponse().GetResponseStream();
             Image res = Image.FromStream(stream);
             return res;
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Uri urlCheck = new Uri("http://tw.yahoo.com");
-            System.Net.WebRequest request = System.Net.WebRequest.Create(urlCheck);
-            System.Net.WebResponse response;
+            Uri uri = new Uri("http://tw.yahoo.com");
+            WebRequest request = WebRequest.Create(uri);
+            WebResponse response;
             try
             {
                 response = request.GetResponse();
-                //Response.Write("OK");
                 richTextBox1.Text += "網頁存在\n";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //Response.Write("Error");
+                richTextBox1.Text += ex.Message + "\n";
                 richTextBox1.Text += "網頁不存在\n";
             }
         }
@@ -451,7 +449,6 @@ namespace vcs_Network1
             int byteRead = 0;
             try
             {
-
                 Uri httpURL = new Uri(txtURL);
                 httpRequest = (HttpWebRequest)WebRequest.Create(httpURL);
                 httpResponse = (HttpWebResponse)httpRequest.GetResponse();
@@ -523,8 +520,7 @@ namespace vcs_Network1
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Read Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, "Read Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -594,11 +590,7 @@ namespace vcs_Network1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error downloading file " +
-                    url + '\n' + ex.Message,
-                    "Download Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Error downloading file " + url + '\n' + ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return "";
         }

@@ -78,10 +78,10 @@ namespace vcs_test_all_10_Math_Random
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 11+10);
-            label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 11+10);
-            textBox_A.Location = new Point(x_st + dx * 0 + 20, y_st + dy * 11+10);
-            textBox_B.Location = new Point(x_st + dx * 1 / 2 + 20, y_st + dy * 11+10);
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 11 + 10);
+            label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 11 + 10);
+            textBox_A.Location = new Point(x_st + dx * 0 + 20, y_st + dy * 11 + 10);
+            textBox_B.Location = new Point(x_st + dx * 1 / 2 + 20, y_st + dy * 11 + 10);
 
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -160,7 +160,7 @@ namespace vcs_test_all_10_Math_Random
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
         }
-        
+
         private void button0_Click(object sender, EventArgs e)
         {
             int r = 5;
@@ -192,7 +192,7 @@ namespace vcs_test_all_10_Math_Random
         {
             richTextBox1.Text += "pi = " + Math.PI.ToString() + "\n";
             richTextBox1.Text += "e = " + Math.E.ToString() + "\n";
-        
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -847,7 +847,7 @@ namespace vcs_test_all_10_Math_Random
             for (int i = 2; i <= n; i++) result *= i;
             return result;
         }
-        
+
         private void button17_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "M項中取N項\n";
@@ -2216,6 +2216,87 @@ namespace vcs_test_all_10_Math_Random
             }
         }
 
+        //算音階
+        private void button30_Click(object sender, EventArgs e)
+        {
+            double pp = 1 / 12f;
+            double rr = Math.Pow(2, pp);
 
+            richTextBox1.Text += rr.ToString() + "\t\t\t\t用vcs算出來的12次根號2\n";
+            richTextBox1.Text += "1.059463094359295264561825" + "\t真正的12次根號2\n\n";
+
+            double[] tone = new double[22];
+
+            int i;
+
+            double aa = Math.Pow(2, pp);
+
+            tone[0] = 261.6255653f;
+            tone[1] = tone[0] * aa * aa;
+            tone[2] = tone[1] * aa * aa;
+            tone[3] = tone[2] * aa;
+            tone[4] = tone[3] * aa * aa;
+            tone[5] = tone[4] * aa * aa;
+            tone[6] = tone[5] * aa * aa;
+
+            tone[7] = tone[6] * aa;
+            tone[8] = tone[7] * aa * aa;
+            tone[9] = tone[8] * aa * aa;
+            tone[10] = tone[9] * aa;
+            tone[11] = tone[10] * aa * aa;
+            tone[12] = tone[11] * aa * aa;
+            tone[13] = tone[12] * aa * aa;
+
+            tone[14] = tone[13] * aa;
+            tone[15] = tone[14] * aa * aa;
+            tone[16] = tone[15] * aa * aa;
+            tone[17] = tone[16] * aa;
+            tone[18] = tone[17] * aa * aa;
+            tone[19] = tone[18] * aa * aa;
+            tone[20] = tone[19] * aa * aa;
+
+            tone[21] = tone[20] * aa;
+
+
+
+
+            for (i = 0; i < tone.Length; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + tone[i].ToString() + "\n";
+                if ((i % 7) == 6)
+                    richTextBox1.Text += "\n";
+            }
+
+
+
+        }
+
+        //排序
+        private void button29_Click(object sender, EventArgs e)
+        {
+            string[] name = { "王一", "李二", "陳三", "趙四", "馬五" };
+            int[] score = { 78, 80, 50, 96, 69 };
+            int[] rank = new int[5];
+            int i;
+            int j;
+            for (i = 0; i < 5; i++)
+            {
+                rank[i] = 1; //先假設名次為1
+
+                // 依序和他人比較，只要有人較高分，其名次即遞增1
+                for (j = 0; j < 5; j++)
+                {
+                    if (score[j] > score[i])
+                    {
+                        rank[i] += 1;
+                    }
+                }
+            }
+
+            for (i = 0; i < 5; i++)
+            {
+                richTextBox1.Text += name[i] + "\t第" + rank[i].ToString() + "名\n";
+            }
+        }
     }
 }

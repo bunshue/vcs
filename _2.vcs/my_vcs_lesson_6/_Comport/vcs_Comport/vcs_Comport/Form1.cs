@@ -14,6 +14,7 @@ namespace vcs_Comport
     public partial class Form1 : Form
     {
         string[] COM_Ports_NameArr;
+        string RxString;
 
         public Form1()
         {
@@ -105,6 +106,7 @@ namespace vcs_Comport
             {   //可能會產生錯誤的程式區段
                 richTextBox1.Text += "try to open " + comport + "\n";
                 serialPort1.Open();
+                //SerialPortTimer100ms.Enabled = true;
             }
             catch (Exception ex)
             {   //定義產生錯誤時的例外處理程式碼
@@ -125,12 +127,81 @@ namespace vcs_Comport
             serialPort1.Close();
             this.BackColor = Color.Yellow;
             //pictureBox_comport.Image = iMS_Link.Properties.Resources.x;
+            //SerialPortTimer100ms.Enabled = false;
 
         }
 
+        public Byte[] receive_buffer = new Byte[2048];		//接收資料緩衝區
+        public Byte[] receive_buffer_tmp = new Byte[20];		//接收資料緩衝區
+        public int BytesToRead = 0;							//緩衝區內可接收資料數
+        string input = "";
         private void SerialPortTimer100ms_Tick(object sender, EventArgs e)
         {
+            //計算serialPort1中有多少位元組 
+            BytesToRead = serialPort1.BytesToRead;
+            if (BytesToRead > 0)
+            {
+                input = "";
+                for (int i = 0; i < BytesToRead; i++)
+                {
+                    if ((i >= 1) && (receive_buffer[i - 1] != 0x0a) && (receive_buffer[i] != 0x0d))
+                    {
+                        //MessageBox.Show("got data : " + receive_buffer[i].ToString());
+                        input += (char)receive_buffer[i];
+                    }
+                    if (i == 0)
+                        input += (char)receive_buffer[i];
+                    /*
+                    if (i >= 1)
+                    {
+                        if ((receive_buffer[i - 1] == 0x0a) && (receive_buffer[i] == 0x0d))
+                        {
+                            receive_buffer[i] = (byte)'~';
+                        }
+                    }
+                    input += (char)receive_buffer[i];
+                    */
+                }
+                input += "\n";
+
+                richTextBox1.AppendText(input);     //打印一般文字訊息
+                richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+
+            }
+
 
         }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // If the port is closed, don't try to send a character.
+            if (!serialPort1.IsOpen) return;
+
+            // If the port is Open, declare a char[] array with one element.
+            char[] buff = new char[1];
+
+            // Load element 0 with the key character.
+            buff[0] = e.KeyChar;
+
+            // Send the one character buffer.
+            serialPort1.Write(buff, 0, 1);
+
+            // Set the KeyPress event as handled so the character won't
+            // display locally. If you want it to display, omit the next line.
+            e.Handled = true;
+        }
+
+        private void DisplayText(object sender, EventArgs e)
+        {
+            richTextBox1.AppendText(RxString);
+            richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+        }
+
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            RxString = serialPort1.ReadExisting();
+            this.Invoke(new EventHandler(DisplayText));
+        }
+
     }
 }

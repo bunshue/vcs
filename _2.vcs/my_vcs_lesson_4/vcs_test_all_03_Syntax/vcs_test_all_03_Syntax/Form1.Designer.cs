@@ -529,7 +529,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(180, 40);
             this.button34.TabIndex = 49;
-            this.button34.Text = "xxx";
+            this.button34.Text = "傳值呼叫 vs 傳址呼叫";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 

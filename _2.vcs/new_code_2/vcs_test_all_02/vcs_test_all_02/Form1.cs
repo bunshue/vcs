@@ -6,16 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using System.IO;
-
-using System.Net;
-
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;       //for Process, Stopwatch
-
-                    using System.Net.NetworkInformation;    //for Ping
-
 
 namespace vcs_test_all_02
 {
@@ -172,9 +165,5 @@ namespace vcs_test_all_02
             richTextBox1.Text += fi.Length.ToString() + " Bytes";
 
         }
-
-
-
-
     }
 }

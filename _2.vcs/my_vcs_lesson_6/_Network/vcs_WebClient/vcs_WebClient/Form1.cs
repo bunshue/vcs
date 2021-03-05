@@ -39,6 +39,9 @@ namespace vcs_WebClient
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             */
 
+
+
+            /*
             string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
@@ -154,6 +157,65 @@ namespace vcs_WebClient
             // Download today's data.
             url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
             DownloadFile(url, filename_covid19b);
+            */
+
+
+
+
+            //取得網頁資料並存成檔案
+
+            string url = "file:///C:/_git/vcs/_1.data/_html/My_Link.html";
+            //string url = "https://www.google.com.tw/";
+
+            // Get the response.
+            try
+            {
+                // Make a WebClient.
+                WebClient client = new WebClient();
+
+
+                try
+                {
+                    Stream response = client.OpenRead(url); // Get the indicated URL.
+                    richTextBox1.Text += "取得網頁資料並存成檔案, len = " + response.Length.ToString() + "\n";
+
+                    richTextBox1.Text += "CanSeek = " + response.CanSeek.ToString() + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                }
+
+
+                return;
+
+                /*
+                // Read the result.
+                using (StreamReader stream_reader = new StreamReader(response))
+                {
+                    // Get the results.
+                    string result = stream_reader.ReadToEnd();
+
+
+                    // Close the stream reader and its underlying stream.
+                    stream_reader.Close();
+
+                    richTextBox1.Text += result + "\n";
+
+
+                    string filename = Application.StartupPath + "\\html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+                    StreamWriter sw = File.CreateText(filename);
+                    sw.Write(result);
+                    sw.Close();
+
+                }
+                 */
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Read Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         // Download the indicated file.
@@ -233,7 +295,6 @@ namespace vcs_WebClient
                 }
             }
         }
-
     }
 
     public class Protocols

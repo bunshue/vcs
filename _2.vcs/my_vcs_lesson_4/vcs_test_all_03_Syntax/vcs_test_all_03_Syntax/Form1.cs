@@ -611,9 +611,37 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "16進位\t" + s + "\n";
         }
 
+        //傳值呼叫 vs 傳址呼叫
         private void button34_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "傳值呼叫 vs 傳址呼叫\n";
 
+            int a = 10;
+            int b = 5;
+
+            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            swap(a, b);
+            richTextBox1.Text += "傳值呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+
+            a = 10;
+            b = 5;
+            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            swap(ref a, ref b);
+            richTextBox1.Text += "傳址呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+        }
+
+        void swap(int a, int b)
+        {
+            int t = a;
+            a = b;
+            b = t;
+        }
+
+        void swap(ref int a, ref int b)
+        {
+            int t = a;
+            a = b;
+            b = t;
         }
 
         private void button24_Click(object sender, EventArgs e)

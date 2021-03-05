@@ -434,7 +434,7 @@ namespace vcs_DrAP
 
             if (path == String.Empty)
                 path = search_path;
-                //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+            //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
 
             FolederName = path;
             richTextBox1.Text += path + "\n\n";
@@ -501,7 +501,7 @@ namespace vcs_DrAP
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案\n";
                 flag_search_done = 0;
-            }     
+            }
 
 
         }
@@ -1130,7 +1130,7 @@ namespace vcs_DrAP
             // Write result
             richTextBox2.Text += "停止計時\t";
             richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds/1000).ToString() + " 秒)";
+            this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1260,7 +1260,7 @@ namespace vcs_DrAP
             }
             else
             {
-                   System.Diagnostics.Process.Start("uedit32.exe", fullname);
+                System.Diagnostics.Process.Start("uedit32.exe", fullname);
             }
         }
 
@@ -1588,7 +1588,7 @@ namespace vcs_DrAP
             bool res;
             string pattern = string.Empty;// = "Form1.cs";
 
-            if(search_mode == SEARCH_MODE_VCS)
+            if (search_mode == SEARCH_MODE_VCS)
                 pattern = ".cs";
             else if (search_mode == SEARCH_MODE_PYTHON)
                 pattern = "py";
@@ -1754,7 +1754,7 @@ namespace vcs_DrAP
                         ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
                         i1.SubItems.Add(fileinfos[i].filepath);
                         sub_i1a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
-						i1.SubItems.Add(sub_i1a);
+                        i1.SubItems.Add(sub_i1a);
                         i1.SubItems.Add(fileinfos[i].fileextension);
                         sub_i1a.ForeColor = System.Drawing.Color.Blue;
                         sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
@@ -1767,7 +1767,7 @@ namespace vcs_DrAP
                         ListViewItem.ListViewSubItem sub_i2a = new ListViewItem.ListViewSubItem();
                         i2.SubItems.Add(fileinfos[j].filepath);
                         sub_i2a.Text = ByteConversionGBMBKB(Convert.ToInt64(fileinfos[j].filesize));
-						i2.SubItems.Add(sub_i2a);
+                        i2.SubItems.Add(sub_i2a);
                         i2.SubItems.Add(fileinfos[j].fileextension);
                         sub_i2a.ForeColor = System.Drawing.Color.Blue;
                         sub_i2a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
@@ -1899,12 +1899,12 @@ namespace vcs_DrAP
                     richTextBox1.Text += "filename2 : " + fileinfos[j].filename + "\n";
 
                     richTextBox1.Text += "str1 = " + filename1.ToLower().Replace(" ", "").Replace("-", "") + "\n";
-                    richTextBox1.Text += "str2 = " + filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0,6) + "\n";
+                    richTextBox1.Text += "str2 = " + filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0, 6) + "\n";
 
 
                     bool ret;
 
-                    ret = filename1.ToLower().Replace(" ", "").Replace("-", "").Contains(filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0,6));
+                    ret = filename1.ToLower().Replace(" ", "").Replace("-", "").Contains(filename2.ToLower().Replace(" ", "").Replace("-", "").Substring(0, 6));
                     if (ret == true)
                     {
                         richTextBox1.Text += "YYYYYYYY\n";
@@ -2601,9 +2601,6 @@ namespace vcs_DrAP
             {
                 Application.DoEvents();
             }
-        } 
-
-
+        }
     }
 }
-
