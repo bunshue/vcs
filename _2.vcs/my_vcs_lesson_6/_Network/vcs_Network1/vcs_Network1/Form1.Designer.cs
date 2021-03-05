@@ -153,7 +153,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(217, 42);
             this.button8.TabIndex = 8;
-            this.button8.Text = "判斷網頁是否存在";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -164,7 +163,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(217, 42);
             this.button9.TabIndex = 9;
-            this.button9.Text = "網路下載純文字檔案";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -219,7 +217,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(219, 42);
             this.button14.TabIndex = 15;
-            this.button14.Text = "下載一個網頁1";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -241,7 +238,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(219, 42);
             this.button16.TabIndex = 17;
-            this.button16.Text = "C# 文字版瀏覽器";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -252,7 +248,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(219, 42);
             this.button17.TabIndex = 18;
-            this.button17.Text = "下載檔案的範例 - 使用WebClient";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -284,7 +279,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(219, 42);
             this.button22.TabIndex = 22;
-            this.button22.Text = "從FTP下載檔案";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -295,7 +289,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(219, 42);
             this.button23.TabIndex = 23;
-            this.button23.Text = "取得網頁純文字檔";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -306,7 +299,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(217, 42);
             this.button24.TabIndex = 24;
-            this.button24.Text = "讓 WebClient 擁有 Timeout 功能";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -317,7 +309,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(219, 42);
             this.button21.TabIndex = 45;
-            this.button21.Text = "取得網頁資料並存成檔案";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 

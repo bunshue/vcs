@@ -21,43 +21,25 @@ namespace vcs_WebRequest
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "判斷網頁是否存在\n";
+
             //統一資源識別碼(Uniform Resource Identifier, URI)
 
-            //Uri uri = new Uri("http://tw.yahoo.com");
-            Uri uri = new Uri("https://apod.nasa.gov/apod/image/2102/SwissAlpsMartianSky.jpg");
+            Uri uri = new Uri("http://tw.yahoo.com");
+            //Uri uri = new Uri("https://apod.nasa.gov/apod/image/2102/SwissAlpsMartianSky.jpg");   //fail
 
-
-            /*
             WebRequest request = WebRequest.Create(uri);
             WebResponse response;
             try
             {
                 response = request.GetResponse();
                 richTextBox1.Text += "網頁存在\n";
-
-                Stream stream = request.GetResponse().GetResponseStream();
-
-                richTextBox1.Text += "len = " + stream.Length.ToString() + "\n";
-
-
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += ex.Message + "\n";
                 richTextBox1.Text += "網頁不存在\n";
             }
-            */
-
-            string str = GetContent("https://www.baidu.com/", Encoding.UTF8);
-
-            richTextBox1.Text += "aaaaa = " + str + "\n";
-
-            /*
-            string str2 = GetContentPost("https://www.baidu.com/", "aaaaaaa", Encoding.UTF8);
-
-            richTextBox1.Text += "bbbbb = " + str2 + "\n";
-            */
-
         }
 
         //GET型別
@@ -113,7 +95,84 @@ namespace vcs_WebRequest
             return result;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
 
+
+            string str = GetContent("https://www.baidu.com/", Encoding.UTF8);
+
+            richTextBox1.Text += "aaaaa = " + str + "\n";
+
+            /*
+            string str2 = GetContentPost("https://www.baidu.com/", "aaaaaaa", Encoding.UTF8);
+
+            richTextBox1.Text += "bbbbb = " + str2 + "\n";
+            */
+
+
+        }
+
+        string pic1 = "http://www.myson.com.tw/images/index/ad01.jpg";
+        string pic2 = "http://www.myson.com.tw/images/index/ad02.jpg";
+        string pic3 = "http://www.myson.com.tw/images/index/ad03.jpg";
+        string pic4 = "http://www.myson.com.tw/images/index/ad04.jpg";
+        string pic5 = "https://apod.nasa.gov/apod/image/2102/SwissAlpsMartianSky.jpg";  //fail
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //取得網路上的圖片並顯示
+
+            pictureBox1.Image = ReadImageFromUrl(pic2);
+
+
+
+
+
+
+
+        }
+
+        private Image ReadImageFromUrl(string urlImagePath)
+        {
+            Uri uri = new Uri(urlImagePath);
+            WebRequest request = WebRequest.Create(uri);
+            Stream stream = request.GetResponse().GetResponseStream();
+            Image res = Image.FromStream(stream);
+            return res;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //C# 文字版瀏覽器
+
+            HttpWebRequest httpRequest = null;
+            HttpWebResponse httpResponse;
+
+            string result = "";
+            String txtURL = "https://www.google.com.tw/";
+            char[] cbuffer = new char[256];
+            int byteRead = 0;
+            try
+            {
+                Uri httpURL = new Uri(txtURL);
+                httpRequest = (HttpWebRequest)WebRequest.Create(httpURL);
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+                System.IO.Stream respStream = httpResponse.GetResponseStream();
+                System.IO.StreamReader respStreamReader = new StreamReader(respStream);
+                byteRead = respStreamReader.Read(cbuffer, 0, 256);
+                while (byteRead != 0)
+                {
+                    string response = new string(cbuffer, 0, byteRead);
+                    result = result + response;
+                    byteRead = respStreamReader.Read(cbuffer, 0, 256);
+                    richTextBox1.Text += response + "\n";
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
 
 
 
