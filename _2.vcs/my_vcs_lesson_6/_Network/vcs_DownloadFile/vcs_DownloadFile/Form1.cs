@@ -19,35 +19,7 @@ namespace vcs_DownloadFile
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string filename_remote = @"http://www.csharphelper.com/examples/howto_download_file.zip";
-            string filename_local = @"aaaa.zip";
-
-            richTextBox1.Text += "遠端檔案: " + filename_remote + "\n";
-            richTextBox1.Text += "本地檔案: " + filename_local + "\n";
-            richTextBox1.Text += "\n開始下載檔案...\n\n";
-
-            Application.DoEvents();
-
-            try
-            {
-                // Make a WebClient.
-                WebClient client = new WebClient();
-
-                // Download the file.
-                client.DownloadFile(filename_remote, filename_local);
-
-                richTextBox1.Text += "下載完成\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "下載失敗，原因: \t" + ex.Message + "\n";
-            }
-        }
-
         //用C#下载http文件 ST
-
         private WebClient client = new WebClient();
         string srcAddress = "http://weisico.com/program/2015/0630/237.html";
         string tarAddress = Application.StartupPath;

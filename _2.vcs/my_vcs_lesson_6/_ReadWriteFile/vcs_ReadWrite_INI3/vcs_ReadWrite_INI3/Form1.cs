@@ -59,11 +59,10 @@ namespace vcs_ReadWrite_INI3
                     richTextBox1.Text += ini.IniReadValue("Language", "lang2", filename) + "\n";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                richTextBox1.Text += ex.Message + "\n";
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)

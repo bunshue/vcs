@@ -123,6 +123,9 @@ namespace vcs_test_all_10_Math_Random
             bt_random11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             bt_random12.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Size = new Size(700, 1000);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕

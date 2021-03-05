@@ -55,21 +55,6 @@ namespace vcs_Network1
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
 
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button24.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            //button25.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            //button26.Location = new Point(x_st + dx * 1, y_st + dy * 12);
-            //button27.Location = new Point(x_st + dx * 1, y_st + dy * 13);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //離開按鈕的寫法
@@ -148,7 +133,21 @@ namespace vcs_Network1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //取得網卡的IPV6位置
+            foreach (var ip in GetLocalIPV6IP())
+            {
+                richTextBox1.Text += "ip = " + ip.ToString() + "\n";
+            }
+        }
 
+        private static IEnumerable<String> GetLocalIPV6IP()
+        {
+            return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
+                    where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
+                    from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
+                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
+                    let ipAddress = AddressInfo.Address.ToString()
+                    select ipAddress);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -313,63 +312,6 @@ namespace vcs_Network1
             }
         }
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-            //取得網卡的IPV6位置
-            foreach (var ip in GetLocalIPV6IP())
-            {
-                richTextBox1.Text += "ip = " + ip.ToString() + "\n";
-            }
-        }
-
-        private static IEnumerable<String> GetLocalIPV6IP()
-        {
-            return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
-                    where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
-                    from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
-                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
-                    let ipAddress = AddressInfo.Address.ToString()
-                    select ipAddress);
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
         // Return true if a ping to Google works.
         private bool IsInternetConnected(String host)
         {
@@ -389,9 +331,6 @@ namespace vcs_Network1
                 return false;
             }
         }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
     }
 }
+

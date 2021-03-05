@@ -158,7 +158,11 @@ namespace vcs_test_all_03_Syntax
             label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
             label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
 
-            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12+20);
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 20);
+
+
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            richTextBox1.Size = new Size(900, 700);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -383,7 +387,7 @@ namespace vcs_test_all_03_Syntax
             //if not default it to "SSSS"
             if (string.IsNullOrEmpty(string_a) || string_a == null)
             {
-                richTextBox1.Text += "字串" + string_a ;
+                richTextBox1.Text += "字串" + string_a;
                 string_a = "SSSS";
                 richTextBox1.Text += "是一個空字串，改成: " + string_a + "\n";
             }
@@ -399,7 +403,7 @@ namespace vcs_test_all_03_Syntax
             }
             else
                 richTextBox1.Text += "不是一個空字串，內容: " + string_b + "\n";
-        
+
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -424,7 +428,7 @@ namespace vcs_test_all_03_Syntax
             myStringLists.Add("cat");
             myStringLists.Add("dog");
 
-            richTextBox1.Text += "\n"; 
+            richTextBox1.Text += "\n";
             richTextBox1.Text += "myIntLists has" + myIntLists.Count.ToString() + " elements\n";
             richTextBox1.Text += "myStringLists has" + myStringLists.Count.ToString() + " elements\n";
 
@@ -434,7 +438,7 @@ namespace vcs_test_all_03_Syntax
             {
                 richTextBox1.Text += "\t" + ii.ToString();
             }
-            richTextBox1.Text += "\n"; 
+            richTextBox1.Text += "\n";
 
             // 可用foreach 取出List 裡的值
             richTextBox1.Text += "取出List內容：";
@@ -442,9 +446,9 @@ namespace vcs_test_all_03_Syntax
             {
                 richTextBox1.Text += "\t" + str;
             }
-            richTextBox1.Text += "\n"; 
+            richTextBox1.Text += "\n";
 
-            richTextBox1.Text += "經過排序：\n"; 
+            richTextBox1.Text += "經過排序：\n";
             myStringLists.Sort();
             // 可用foreach 取出List 裡的值
             richTextBox1.Text += "取出List內容：";
@@ -473,7 +477,7 @@ namespace vcs_test_all_03_Syntax
             {
                 richTextBox1.Text += "\t" + str;
             }
-            richTextBox1.Text += "\n"; 
+            richTextBox1.Text += "\n";
 
         }
 
@@ -522,7 +526,7 @@ namespace vcs_test_all_03_Syntax
             public circle circle1;
             public string usage;
         };
-        
+
         private void button12_Click(object sender, EventArgs e)
         {
             wheel wheel1;
@@ -1354,9 +1358,7 @@ namespace vcs_test_all_03_Syntax
 
         }
         //函式多載(function overloading) SP
-
-
-
-
     }
 }
+
+

@@ -130,11 +130,7 @@ namespace vcs_Network2_WebPageImage
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error downloading picture " +
-                    url + '\n' + ex.Message,
-                    "Download Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Error downloading picture " + url + '\n' + ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return null;
         }
@@ -155,8 +151,7 @@ namespace vcs_Network2_WebPageImage
         // Set the initial save directory.
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtDirectory.Text = Path.Combine(
-                Application.StartupPath, "Images");
+            txtDirectory.Text = Path.Combine(Application.StartupPath, "Images");
         }
 
         // Save the images that have not been removed.
@@ -166,7 +161,10 @@ namespace vcs_Network2_WebPageImage
 
             // Get the directory path and make sure the directory exists.
             string dir_name = txtDirectory.Text;
-            if (!dir_name.EndsWith(@"\")) dir_name += @"\";
+            if (!dir_name.EndsWith(@"\"))
+            {
+                dir_name += @"\";
+            }
             Directory.CreateDirectory(dir_name);
 
             foreach (PictureBox pic in flpPictures.Controls)
@@ -177,7 +175,6 @@ namespace vcs_Network2_WebPageImage
             }
 
             Cursor = Cursors.Default;
-            System.Media.SystemSounds.Beep.Play();
         }
 
         // Save the file with the appropriate format.

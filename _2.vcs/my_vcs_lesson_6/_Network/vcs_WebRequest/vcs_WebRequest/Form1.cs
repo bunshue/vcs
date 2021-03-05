@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Net;       //for WebRequest
 using System.IO;    //for Stream
 
+//統一資源識別碼(Uniform Resource Identifier, URI)
+
 namespace vcs_WebRequest
 {
     public partial class Form1 : Form
@@ -21,18 +23,17 @@ namespace vcs_WebRequest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "判斷網頁是否存在\n";
-
-            //統一資源識別碼(Uniform Resource Identifier, URI)
+            this.Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "判斷網頁是否存在......\n";
 
             Uri uri = new Uri("http://tw.yahoo.com");
             //Uri uri = new Uri("https://apod.nasa.gov/apod/image/2102/SwissAlpsMartianSky.jpg");   //fail
 
             WebRequest request = WebRequest.Create(uri);
-            WebResponse response;
+
             try
             {
-                response = request.GetResponse();
+                WebResponse response = request.GetResponse();
                 richTextBox1.Text += "網頁存在\n";
             }
             catch (Exception ex)
@@ -40,6 +41,7 @@ namespace vcs_WebRequest
                 richTextBox1.Text += ex.Message + "\n";
                 richTextBox1.Text += "網頁不存在\n";
             }
+            this.Cursor = Cursors.Default;
         }
 
         //GET型別
@@ -47,26 +49,33 @@ namespace vcs_WebRequest
         {
 
             WebRequest request = WebRequest.Create(uri);	//Get請求中請求引數等直接拼接在url中
-            WebResponse resp = request.GetResponse();		//返回對Internet請求的響應
 
-            Stream stream = resp.GetResponseStream();		//從網路資源中返回資料流
+            string result = "";
+            try
+            {
+                WebResponse response = request.GetResponse();		//返回對Internet請求的響應
 
-            StreamReader sr = new StreamReader(stream, coding);
+                Stream stream = response.GetResponseStream();		//從網路資源中返回資料流
 
-            string result = sr.ReadToEnd();		//將資料流轉換文字串
+                StreamReader sr = new StreamReader(stream, coding);
 
-            stream.Close();		//關閉流資料
-            sr.Close();			//關閉流資料
+                result = sr.ReadToEnd();		//將資料流轉換文字串
 
-
+                stream.Close();		//關閉流資料
+                sr.Close();			//關閉流資料
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
             return result;
-
         }
 
         //POST型別
         public string GetContentPost(string uri, string data, Encoding coding)
         {
             WebRequest request = WebRequest.Create(uri);
+
             request.ContentType = "application/x-www-form-urlencoded";
             request.Method = "POST";
 
@@ -78,26 +87,33 @@ namespace vcs_WebRequest
             stream.Write(buffer, 0, buffer.Length);
             request.ContentLength = buffer.Length;
 
-            WebResponse response = request.GetResponse();
+            string result = "";
+            try
+            {
+                WebResponse response = request.GetResponse();
 
-            //從網路資源中返回資料流
-            stream = response.GetResponseStream();
+                //從網路資源中返回資料流
+                stream = response.GetResponseStream();
 
-            StreamReader sr = new StreamReader(stream, coding);
+                StreamReader sr = new StreamReader(stream, coding);
 
-            //將資料流轉換文字串
-            string result = sr.ReadToEnd();
+                //將資料流轉換文字串
+                result = sr.ReadToEnd();
 
-            //關閉流資料
-            stream.Close();
-            sr.Close();
-
+                //關閉流資料
+                stream.Close();
+                sr.Close();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
             return result;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            this.Cursor = Cursors.WaitCursor;
 
             string str = GetContent("https://www.baidu.com/", Encoding.UTF8);
 
@@ -109,7 +125,7 @@ namespace vcs_WebRequest
             richTextBox1.Text += "bbbbb = " + str2 + "\n";
             */
 
-
+            this.Cursor = Cursors.Default;
         }
 
         string pic1 = "http://www.myson.com.tw/images/index/ad01.jpg";
@@ -119,42 +135,47 @@ namespace vcs_WebRequest
         string pic5 = "https://apod.nasa.gov/apod/image/2102/SwissAlpsMartianSky.jpg";  //fail
         private void button3_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             //取得網路上的圖片並顯示
-
             pictureBox1.Image = ReadImageFromUrl(pic2);
-
-
-
-
-
-
-
+            this.Cursor = Cursors.Default;
         }
 
-        private Image ReadImageFromUrl(string urlImagePath)
+        private Image ReadImageFromUrl(string url)
         {
-            Uri uri = new Uri(urlImagePath);
+            Uri uri = new Uri(url);
             WebRequest request = WebRequest.Create(uri);
-            Stream stream = request.GetResponse().GetResponseStream();
-            Image res = Image.FromStream(stream);
+            Image res = null;
+
+            try
+            {
+                WebResponse response = request.GetResponse();
+                Stream stream = response.GetResponseStream();
+                res = Image.FromStream(stream);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
             return res;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             //C# 文字版瀏覽器
 
             HttpWebRequest httpRequest = null;
             HttpWebResponse httpResponse;
 
             string result = "";
-            String txtURL = "https://www.google.com.tw/";
+            String url = "https://www.google.com.tw/";
             char[] cbuffer = new char[256];
             int byteRead = 0;
             try
             {
-                Uri httpURL = new Uri(txtURL);
-                httpRequest = (HttpWebRequest)WebRequest.Create(httpURL);
+                Uri uri = new Uri(url);
+                httpRequest = (HttpWebRequest)WebRequest.Create(uri);
                 httpResponse = (HttpWebResponse)httpRequest.GetResponse();
                 System.IO.Stream respStream = httpResponse.GetResponseStream();
                 System.IO.StreamReader respStreamReader = new StreamReader(respStream);
@@ -167,11 +188,60 @@ namespace vcs_WebRequest
                     richTextBox1.Text += response + "\n";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                richTextBox1.Text += ex.Message + "\n";
             }
+            this.Cursor = Cursors.Default;
+        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            string result = null;
+            string Url = "http://easun.org/perl/perl-toc/ch04.html";
+            HttpWebRequest request = HttpWebRequest.Create(Url) as HttpWebRequest;
+            request.Method = "GET";
+
+            using (WebResponse response = request.GetResponse())
+            {
+                StreamReader sr = new StreamReader(response.GetResponseStream());
+                result = sr.ReadToEnd();        //讀取所有文字內容
+                sr.Close();
+            }
+            richTextBox1.Text += result + "\n";
+            this.Cursor = Cursors.Default;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            //要取得的網址
+            Uri uri = new Uri("http://easun.org/perl/perl-toc/ch04.html");
+
+            //建立request
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+
+            //在request Header加入認證字串
+            request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(new ASCIIEncoding().GetBytes("admin:admin")));
+
+            //實際發送請求，並取回回應資訊
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            //建立讀取串流
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+
+            //將串流轉字串
+            string tmp = reader.ReadToEnd();	//讀取所有文字內容
+
+            //關閉連線
+            response.Close();
+
+            //顯示回應資訊
+            richTextBox1.Text += tmp + "\n";
+
+            this.Cursor = Cursors.Default;
         }
 
 
