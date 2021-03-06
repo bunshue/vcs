@@ -51,6 +51,12 @@
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_word = new System.Windows.Forms.PictureBox();
             this.timer_word = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox_compass1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_compass2 = new System.Windows.Forms.PictureBox();
+            this.lblDegrees = new System.Windows.Forms.Label();
+            this.hbarDegrees = new System.Windows.Forms.HScrollBar();
+            this.timer_compass = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -62,6 +68,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -77,7 +86,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1063, 356);
+            this.richTextBox1.Location = new System.Drawing.Point(1063, 394);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(323, 211);
             this.richTextBox1.TabIndex = 53;
@@ -115,7 +124,7 @@
             this.pictureBox_star.BackColor = System.Drawing.Color.White;
             this.pictureBox_star.Location = new System.Drawing.Point(657, 12);
             this.pictureBox_star.Name = "pictureBox_star";
-            this.pictureBox_star.Size = new System.Drawing.Size(276, 268);
+            this.pictureBox_star.Size = new System.Drawing.Size(121, 118);
             this.pictureBox_star.TabIndex = 57;
             this.pictureBox_star.TabStop = false;
             // 
@@ -128,9 +137,9 @@
             // pictureBox_polygon
             // 
             this.pictureBox_polygon.BackColor = System.Drawing.Color.White;
-            this.pictureBox_polygon.Location = new System.Drawing.Point(939, 12);
+            this.pictureBox_polygon.Location = new System.Drawing.Point(784, 12);
             this.pictureBox_polygon.Name = "pictureBox_polygon";
-            this.pictureBox_polygon.Size = new System.Drawing.Size(289, 282);
+            this.pictureBox_polygon.Size = new System.Drawing.Size(112, 118);
             this.pictureBox_polygon.TabIndex = 58;
             this.pictureBox_polygon.TabStop = false;
             // 
@@ -229,11 +238,72 @@
             this.timer_word.Interval = 1000;
             this.timer_word.Tick += new System.EventHandler(this.timer_word_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBox_compass1);
+            this.groupBox1.Controls.Add(this.pictureBox_compass2);
+            this.groupBox1.Controls.Add(this.lblDegrees);
+            this.groupBox1.Controls.Add(this.hbarDegrees);
+            this.groupBox1.Location = new System.Drawing.Point(939, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(274, 365);
+            this.groupBox1.TabIndex = 66;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Compass";
+            // 
+            // pictureBox_compass1
+            // 
+            this.pictureBox_compass1.BackColor = System.Drawing.Color.White;
+            this.pictureBox_compass1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_compass1.Location = new System.Drawing.Point(6, 39);
+            this.pictureBox_compass1.Name = "pictureBox_compass1";
+            this.pictureBox_compass1.Size = new System.Drawing.Size(260, 240);
+            this.pictureBox_compass1.TabIndex = 3;
+            this.pictureBox_compass1.TabStop = false;
+            this.pictureBox_compass1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_compass1_Paint);
+            // 
+            // pictureBox_compass2
+            // 
+            this.pictureBox_compass2.BackColor = System.Drawing.Color.White;
+            this.pictureBox_compass2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_compass2.Location = new System.Drawing.Point(6, 284);
+            this.pictureBox_compass2.Name = "pictureBox_compass2";
+            this.pictureBox_compass2.Size = new System.Drawing.Size(260, 74);
+            this.pictureBox_compass2.TabIndex = 0;
+            this.pictureBox_compass2.TabStop = false;
+            this.pictureBox_compass2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_compass2_Paint);
+            // 
+            // lblDegrees
+            // 
+            this.lblDegrees.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblDegrees.Location = new System.Drawing.Point(223, 20);
+            this.lblDegrees.Name = "lblDegrees";
+            this.lblDegrees.Size = new System.Drawing.Size(43, 16);
+            this.lblDegrees.TabIndex = 2;
+            this.lblDegrees.Text = "0";
+            this.lblDegrees.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // hbarDegrees
+            // 
+            this.hbarDegrees.Location = new System.Drawing.Point(6, 20);
+            this.hbarDegrees.Maximum = 360;
+            this.hbarDegrees.Name = "hbarDegrees";
+            this.hbarDegrees.Size = new System.Drawing.Size(214, 17);
+            this.hbarDegrees.TabIndex = 1;
+            this.hbarDegrees.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hbarDegrees_Scroll);
+            // 
+            // timer_compass
+            // 
+            this.timer_compass.Enabled = true;
+            this.timer_compass.Interval = 250;
+            this.timer_compass.Tick += new System.EventHandler(this.timer_compass_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_word);
             this.Controls.Add(this.pictureBox_progressbar);
             this.Controls.Add(this.pictureBox_random_pixel_image);
@@ -262,6 +332,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,6 +363,12 @@
         private System.Windows.Forms.Timer timer_progressbar;
         private System.Windows.Forms.PictureBox pictureBox_word;
         private System.Windows.Forms.Timer timer_word;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox_compass1;
+        private System.Windows.Forms.PictureBox pictureBox_compass2;
+        private System.Windows.Forms.Label lblDegrees;
+        private System.Windows.Forms.HScrollBar hbarDegrees;
+        private System.Windows.Forms.Timer timer_compass;
     }
 }
 

@@ -31,17 +31,28 @@ namespace vcs_WebClient
             //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
             //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
+            /*
+            // Use one of the following.
+            // For .NET Framework 4.5 and later:
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            // For .NET Framework 4.0 through 4.4:
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            */
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //WebClient DownloadString
             /*
             //加入這段語法忽略憑證
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             */
 
             this.Cursor = Cursors.WaitCursor;
-            richTextBox1.Text += "WebClient測試1\t抓網頁資料到記憶體......\n";
+            richTextBox1.Text += "WebClient DownloadString 1\t抓網頁資料到記憶體......\n";
             Application.DoEvents();
             string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
@@ -56,46 +67,15 @@ namespace vcs_WebClient
                 }
                 catch (WebException ex)
                 {
-                    MessageBox.Show("WebException\t" + ex.Message);
+                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unknown error\t" + ex.Message);
+                    richTextBox1.Text += "Error\t" + ex.Message + "\n";
                 }
             }
 
-            richTextBox1.Text += "\nWebClient測試2\t抓網頁資料到本地檔案......\n";
-            Application.DoEvents();
-            string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-            //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            using (WebClient client2 = new WebClient())     // Create a web client
-            {
-                try  // Get the response string from the URL.
-                {
-                    //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-                    int pos1 = url_file2.LastIndexOf('/');
-                    int pos2 = url_file2.LastIndexOf('.');
-                    if (pos2 > pos1)
-                    {
-                        string filename_local = Application.StartupPath + "\\" + url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
-
-                        richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
-
-                        client2.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案
-                        richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
-                    }
-                }
-                catch (WebException ex)
-                {
-                    MessageBox.Show("WebException\t" + ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\t" + ex.Message);
-                }
-            }
-
-            richTextBox1.Text += "\nWebClient測試3\t抓網頁查詢資料到記憶體......\n";
+            richTextBox1.Text += "\nWebClient DownloadString 2\t抓網頁查詢資料到記憶體......\n";
             Application.DoEvents();
 
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
@@ -110,130 +90,35 @@ namespace vcs_WebClient
                 }
                 catch (WebException ex)
                 {
-                    MessageBox.Show("WebException\t" + ex.Message);
+                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unknown error\t" + ex.Message);
+                    richTextBox1.Text += "Error\t" + ex.Message + "\n";
                 }
             }
 
-            richTextBox1.Text += "\nWebClient測試4\t圖片下載並存檔......\n";
-            Application.DoEvents();
+            richTextBox1.Text += "\nWebClient DownloadString 3\t網路下載純文字檔案......\n";
 
-            string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-            try
-            {
-                //圖片下載並存檔
-                DownloadImage(img_src_url);
-                richTextBox1.Text += "圖片下載並存檔\tOK\n";
-                Application.DoEvents();
-
-                //圖片下來並顯示
-                Image img = GetPicture(img_src_url);
-                pictureBox1.Image = img;
-                richTextBox1.Text += "圖片下來並顯示\tOK\n";
-                Application.DoEvents();
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Download Error" + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
-
-            richTextBox1.Text += "\nWebClient測試5\t下載COVID-19資料a......\n";
-            Application.DoEvents();
-            //下載COVID-19資料
-
-            // Compose the local data file name.
-            string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
-
-            // Download today's data.
-            string url = "https://covidtracking.com/api/v1/states/daily.csv";
-
-            //richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
-            Application.DoEvents();
-
-            DownloadFile(url, filename_covid19a);
-
-
-            richTextBox1.Text += "\nWebClient測試6\t下載COVID-19資料b......\n";
-            //richTextBox1.Text += "Loading case data......\n";
-            Application.DoEvents();
-
-            // Compose the local data file name.
-            string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
-
-            // Download today's data.
-            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
-            DownloadFile(url, filename_covid19b);
-
-            richTextBox1.Text += "\nWebClient測試\t完成\n";
-
-            this.Cursor = Cursors.Default;
-        }
-
-        // Download the indicated file.
-        private void DownloadImage(string url)
-        {
-            //richTextBox1.Text += "下載圖片 : " + url + "\n";
-
-            // Make a WebClient.
             WebClient client = new WebClient();
-
-            /*
-            int pos = url.LastIndexOf('/');
-            string filename = url.Substring(pos + 1);
-            */
-
-
-            int pos1 = url.LastIndexOf('/');
-            int pos2 = url.LastIndexOf('.');
-
-            if (pos2 > pos1)
-            {
-                string filename = Application.StartupPath + "\\" + url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-                richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-
-                // Use one of the following.
-                // For .NET Framework 4.5 and later:
-                //ServicePointManager.SecurityProtocol =
-                //    SecurityProtocolType.Tls12;
-                // For .NET Framework 4.0 through 4.4:
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-                try
-                {
-                    client.DownloadFile(url, filename);     // Download the file.
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "下載失敗，原因: \t" + ex.Message + "\n";
-                }
-            }
-        }
-
-        // Download a file from the internet.
-        // Get the picture at a given URL.
-        private Image GetPicture(string url)
-        {
             try
             {
-                WebClient client = new WebClient();
-
-                // Use one of the following.
-                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
-                return Image.FromStream(image_stream);
+                //下載純文字
+                string result = client.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
+                //richTextBox1.Text += result;  //skip
+                richTextBox1.Text += "網路下載純文字檔案\tOK\n";
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
             }
             catch (Exception ex)
             {
-                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-                return null;
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
+
+            richTextBox1.Text += "\nWebClient DownloadString 測試\t完成\n";
+            this.Cursor = Cursors.Default;
         }
 
         private void DownloadFile(string url, string filename)
@@ -243,10 +128,15 @@ namespace vcs_WebClient
             {
                 client.DownloadFile(url, filename);     // Download the file.
             }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
             catch (Exception ex)
             {
-                richTextBox1.Text += "下載失敗，原因: \t" + ex.Message + "\n";
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
+            /*
             finally
             {
                 if (!File.Exists(filename))
@@ -258,21 +148,42 @@ namespace vcs_WebClient
                     richTextBox1.Text += "下載 : " + filename + "\tOK\n";
                 }
             }
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //下載檔案的範例 - 使用WebClient
-            WebClient client = new WebClient();
-            try
-            {
-                client.DownloadFile("http://s.pimg.tw/qrcode/charleslin74/blog.png", "C:\\______test_files\\blog.png");
-                richTextBox1.Text += "下載完成\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "下載失敗，原因: \t" + ex.Message + "\n";
-            }
+            //WebClient DownloadFile for COVID-19   下載COVID-19資料
+            this.Cursor = Cursors.WaitCursor;
+
+            richTextBox1.Text += "WebClient測試\t下載COVID-19資料a......\n";
+            Application.DoEvents();
+
+            // Compose the local data file name.
+            string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            string url = "https://covidtracking.com/api/v1/states/daily.csv";
+
+            //richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
+            Application.DoEvents();
+            DownloadFile(url, filename_covid19a);
+
+
+            richTextBox1.Text += "\nWebClient測試\t下載COVID-19資料b......\n";
+            //richTextBox1.Text += "Loading case data......\n";
+            Application.DoEvents();
+
+            // Compose the local data file name.
+            string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
+            Application.DoEvents();
+            DownloadFile(url, filename_covid19b);
+            richTextBox1.Text += "\nWebClient測試\t下載COVID-19資料\t完成\n";
+
+            this.Cursor = Cursors.Default;
         }
 
         private WebClient client = new WebClient();
@@ -341,64 +252,129 @@ namespace vcs_WebClient
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //下載一個網頁2
-            string strURL = "http://google.com.tw";
-            //string strURL = "http://www.yahoo.com.tw";
-            string web_data = GetWebPage(strURL);
-            if (web_data == "fail")
-                richTextBox1.Text += "抓取網頁失敗";
-            else
-                richTextBox1.Text += "抓取網頁成功";
-        }
+            //WebClient DownloadData
+            this.Cursor = Cursors.WaitCursor;
 
-        public String GetWebPage(String sURL)
-        {
+            richTextBox1.Text += "WebClient DownloadData 1\t下載一個網頁......\n";
+            string url = "http://google.com.tw";
+            //string url = "http://www.yahoo.com.tw";
+            string web_data = "";
+
+            WebClient client1 = new WebClient();
+            client1.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
             try
             {
-                WebClient client = new WebClient();
-                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
-                byte[] bd = client.DownloadData(sURL);
-                return (Encoding.Default.GetString(bd));
-            }
-            catch
-            {
-                return ("fail");
-            }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //網路下載純文字檔案
-            try
-            {
-                //下載純文字
-                WebClient client = new WebClient();
-                string somestring = client.DownloadString("http://snowball.tartarus.org/otherlangs/english_cpp.txt");
-                richTextBox1.Text += somestring;
+                byte[] bd = client1.DownloadData(url);
+                web_data = (Encoding.Default.GetString(bd));
+                richTextBox1.Text += "抓取網頁成功\n";
             }
             catch (WebException ex)
             {
-                // add some kind of error processing
-                richTextBox1.Text += ex.ToString() + "n";
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
             }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
+
+            richTextBox1.Text += "\nWebClient DownloadData 2\t取得網頁純文字檔......\n";
+            Application.DoEvents();
+
+            url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
+            string result = "";
+            WebClient client2 = new WebClient();
+            try
+            {
+                url = url.Trim();
+                if (!url.ToLower().StartsWith("http"))
+                {
+                    url = "http://" + url;
+                }
+
+                MemoryStream image_stream = new MemoryStream(client2.DownloadData(url));
+                StreamReader reader = new StreamReader(image_stream);
+                result = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
+            if (result != "")
+            {
+                //richTextBox1.Text += result + "\n";
+            }
+
+
+            richTextBox1.Text += "\nWebClient DownloadData 3\t圖片下載並顯示......\n";
+            Application.DoEvents();
+
+            url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+            richTextBox1.Text += "圖片所在網址 : " + url + "\n";
+
+            WebClient client3 = new WebClient();
+            try
+            {
+                //圖片下載並顯示
+                Image img = null;
+
+                try
+                {
+                    MemoryStream image_stream = new MemoryStream(client3.DownloadData(url));
+                    img = Image.FromStream(image_stream);
+                }
+                catch (WebException ex)
+                {
+                    richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "Error\t" + ex.Message + "\n";
+                }
+
+                if (img == null)
+                {
+                    richTextBox1.Text += "圖片下載\t失敗\n";
+
+                }
+                else
+                {
+                    pictureBox1.Image = img;
+                    richTextBox1.Text += "圖片下載並顯示\tOK\n";
+                    Application.DoEvents();
+                }
+            }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
+            richTextBox1.Text += "\nWebClient DownloadData 測試\t完成\n";
+
+            this.Cursor = Cursors.Default;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //取得網頁資料並存成檔案
+            this.Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "WebClient OpenRead\t取得網頁資料並存成檔案......\n";
+            Application.DoEvents();
 
             string url = "file:///C:/_git/vcs/_1.data/_html/My_Link.html";
             //string url = "https://www.google.com.tw/";
 
-            // Get the response.
+            WebClient client = new WebClient();     // Make a WebClient.
             try
             {
-                // Make a WebClient.
-                WebClient client = new WebClient();
-
                 Stream response = client.OpenRead(url); // Get the indicated URL.
                 richTextBox1.Text += "取得網頁資料並存成檔案, len = " + response.Length.ToString() + "\n";
-
                 richTextBox1.Text += "CanSeek = " + response.CanSeek.ToString() + "\n";
 
                 // Read the result.
@@ -406,7 +382,6 @@ namespace vcs_WebClient
                 {
                     // Get the results.
                     string result = stream_reader.ReadToEnd();
-
 
                     // Close the stream reader and its underlying stream.
                     stream_reader.Close();
@@ -427,69 +402,45 @@ namespace vcs_WebClient
                     }
                 }
             }
+            catch (WebException ex)
+            {
+                richTextBox1.Text += "WebException\t" + ex.Message + "\n";
+            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Read Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
+            this.Cursor = Cursors.Default;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //從FTP下載檔案
+            //WebClient DownloadFile
+            this.Cursor = Cursors.WaitCursor;
 
-            string url = "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/31/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-31-1.9.iso";
+            string url = "";
+            string filename = "";
+
+            //url = "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/31/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-31-1.9.iso";    //從FTP下載檔案  ok
+            url = "http://www.csharphelper.com/examples/howto_download_file.zip";    //ok
+            //url = "http://s.pimg.tw/qrcode/charleslin74/blog.png";  //ok
+            //url = "https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";  //ok
+            //url = "http://snowball.tartarus.org/otherlangs/english_cpp.txt";    //ok
+
             int pos1 = url.LastIndexOf('/');
             int pos2 = url.LastIndexOf('.');
 
             if (pos2 > pos1)
             {
-                string filename = Application.StartupPath + "\\" + url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
+                richTextBox1.Text += "遠端檔案: " + url + "\n";
+                filename = Application.StartupPath + "\\" + url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
                 richTextBox1.Text += "存檔檔名 : " + filename + "\n";
-
-                WebClient client = new WebClient();
-                try
-                {
-                    //下載FTP檔案到指定位置
-                    //client.DownloadFile("http://ftp.tku.edu.tw/Linux/Fedora/releases/27/Everything/x86_64/iso/Fedora-Everything-netinst-x86_64-27-1.6.iso", @"C:\______test_files\fedora27.iso");
-                    client.DownloadFile(url, filename);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "下載失敗，原因: \t" + ex.Message + "\n";
-                }
+                richTextBox1.Text += "\n開始下載檔案...\n\n";
+                Application.DoEvents();
+                DownloadFile(url, filename);
+                richTextBox1.Text += "下載完成\n";
             }
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            // Download and display the text file.
-            richTextBox1.Clear();
-            richTextBox1.Text += "取得網頁純文字檔......\n";
-
-            const string url = "http://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP950.TXT";
-            richTextBox1.Text += GetTextFile(url);
-            //richTextBox1.Select(0, 500);  //useless
-        }
-
-        // Get the text file at a given URL.
-        private string GetTextFile(string url)
-        {
-            try
-            {
-                url = url.Trim();
-                if (!url.ToLower().StartsWith("http")) url = "http://" + url;
-                WebClient client = new WebClient();
-                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
-                StreamReader reader = new StreamReader(image_stream);
-                string result = reader.ReadToEnd();
-                reader.Close();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error downloading file " + url + '\n' + ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return "";
+            this.Cursor = Cursors.Default;
         }
 
         //讓 WebClient 擁有 Timeout 功能 ST
@@ -505,38 +456,20 @@ namespace vcs_WebClient
 
         private void button9_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             MyWebClient MWC = new MyWebClient();
             string HTML = MWC.DownloadString("http://www.google.com.tw/");
             richTextBox1.Text += HTML;
             //Console.WriteLine(HTML);
+            this.Cursor = Cursors.Default;
         }
         //讓 WebClient 擁有 Timeout 功能 SP
 
-
-        private void button10_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
-            //下載檔案
-
-            string filename_remote = @"http://www.csharphelper.com/examples/howto_download_file.zip";
-            string filename_local = @"aaaa.zip";
-
-            richTextBox1.Text += "遠端檔案: " + filename_remote + "\n";
-            richTextBox1.Text += "本地檔案: " + filename_local + "\n";
-            richTextBox1.Text += "\n開始下載檔案...\n\n";
-
-            Application.DoEvents();
-
-            WebClient client = new WebClient();     // Make a WebClient.
-            try
-            {
-                client.DownloadFile(filename_remote, filename_local);       // Download the file.
-                richTextBox1.Text += "下載完成\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "下載失敗，原因: \t" + ex.Message + "\n";
-            }
+            richTextBox1.Clear();
         }
+
     }
 
     public class Protocols

@@ -38,31 +38,39 @@
             this.pictureBox_polar = new System.Windows.Forms.PictureBox();
             this.pictureBox_hex = new System.Windows.Forms.PictureBox();
             this.pictureBox_tri = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_circle = new System.Windows.Forms.PictureBox();
+            this.pictureBox_star1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_star2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_star3 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.timer_change = new System.Windows.Forms.Timer(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nudSkip = new System.Windows.Forms.NumericUpDown();
+            this.nudPoints = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Chrysanthemum2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_butterfly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_tri)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox_Chrysanthemum1
@@ -161,41 +169,44 @@
             this.pictureBox_tri.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_tri_MouseMove);
             this.pictureBox_tri.Resize += new System.EventHandler(this.pictureBox_tri_Resize);
             // 
-            // pictureBox7
+            // pictureBox_circle
             // 
-            this.pictureBox7.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox7.Location = new System.Drawing.Point(133, 131);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox7.TabIndex = 67;
-            this.pictureBox7.TabStop = false;
+            this.pictureBox_circle.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_circle.Location = new System.Drawing.Point(133, 131);
+            this.pictureBox_circle.Name = "pictureBox_circle";
+            this.pictureBox_circle.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_circle.TabIndex = 67;
+            this.pictureBox_circle.TabStop = false;
             // 
-            // pictureBox8
+            // pictureBox_star1
             // 
-            this.pictureBox8.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox8.Location = new System.Drawing.Point(258, 131);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox8.TabIndex = 66;
-            this.pictureBox8.TabStop = false;
+            this.pictureBox_star1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_star1.Location = new System.Drawing.Point(258, 131);
+            this.pictureBox_star1.Name = "pictureBox_star1";
+            this.pictureBox_star1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_star1.TabIndex = 66;
+            this.pictureBox_star1.TabStop = false;
+            this.pictureBox_star1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_star1_Paint);
             // 
-            // pictureBox9
+            // pictureBox_star2
             // 
-            this.pictureBox9.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox9.Location = new System.Drawing.Point(380, 131);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox9.TabIndex = 65;
-            this.pictureBox9.TabStop = false;
+            this.pictureBox_star2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_star2.Location = new System.Drawing.Point(380, 131);
+            this.pictureBox_star2.Name = "pictureBox_star2";
+            this.pictureBox_star2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_star2.TabIndex = 65;
+            this.pictureBox_star2.TabStop = false;
+            this.pictureBox_star2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_star2_Paint);
             // 
-            // pictureBox10
+            // pictureBox_star3
             // 
-            this.pictureBox10.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox10.Location = new System.Drawing.Point(504, 131);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox10.TabIndex = 64;
-            this.pictureBox10.TabStop = false;
+            this.pictureBox_star3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_star3.Location = new System.Drawing.Point(504, 131);
+            this.pictureBox_star3.Name = "pictureBox_star3";
+            this.pictureBox_star3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_star3.TabIndex = 64;
+            this.pictureBox_star3.TabStop = false;
+            this.pictureBox_star3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_star3_Paint);
             // 
             // pictureBox11
             // 
@@ -248,21 +259,88 @@
             this.timer_change.Interval = 1000;
             this.timer_change.Tick += new System.EventHandler(this.timer_change_Tick);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.nudSkip);
+            this.groupBox2.Controls.Add(this.nudPoints);
+            this.groupBox2.Location = new System.Drawing.Point(736, 280);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(127, 69);
+            this.groupBox2.TabIndex = 109;
+            this.groupBox2.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Skip:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "# Points:";
+            // 
+            // nudSkip
+            // 
+            this.nudSkip.Location = new System.Drawing.Point(70, 40);
+            this.nudSkip.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.nudSkip.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSkip.Name = "nudSkip";
+            this.nudSkip.Size = new System.Drawing.Size(42, 22);
+            this.nudSkip.TabIndex = 5;
+            this.nudSkip.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudSkip.ValueChanged += new System.EventHandler(this.nudSkip_ValueChanged);
+            // 
+            // nudPoints
+            // 
+            this.nudPoints.Location = new System.Drawing.Point(70, 16);
+            this.nudPoints.Name = "nudPoints";
+            this.nudPoints.Size = new System.Drawing.Size(42, 22);
+            this.nudPoints.TabIndex = 4;
+            this.nudPoints.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.nudPoints.ValueChanged += new System.EventHandler(this.nudPoints_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 594);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox15);
             this.Controls.Add(this.pictureBox_tri);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox10);
+            this.Controls.Add(this.pictureBox_circle);
+            this.Controls.Add(this.pictureBox_star1);
+            this.Controls.Add(this.pictureBox_star2);
+            this.Controls.Add(this.pictureBox_star3);
             this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.pictureBox_polar);
             this.Controls.Add(this.pictureBox_butterfly);
@@ -281,15 +359,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_tri)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -305,16 +387,21 @@
         private System.Windows.Forms.PictureBox pictureBox_polar;
         private System.Windows.Forms.PictureBox pictureBox_hex;
         private System.Windows.Forms.PictureBox pictureBox_tri;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox_circle;
+        private System.Windows.Forms.PictureBox pictureBox_star1;
+        private System.Windows.Forms.PictureBox pictureBox_star2;
+        private System.Windows.Forms.PictureBox pictureBox_star3;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.PictureBox pictureBox13;
         private System.Windows.Forms.PictureBox pictureBox14;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.Timer timer_change;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudSkip;
+        private System.Windows.Forms.NumericUpDown nudPoints;
     }
 }
 

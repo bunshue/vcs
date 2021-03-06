@@ -39,11 +39,11 @@ namespace vcs_DrawA_Radar
             AxisInfos.Add(new AxisInfo("Miles/kWh", "0.00", 0, 5));
         }
 
-        private void picPlot_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
-            e.Graphics.Clear(picPlot.BackColor);
+            e.Graphics.Clear(pictureBox1.BackColor);
 
             // Draw the axes.
             DrawCharts(e.Graphics, chkFillAreas.Checked);
@@ -53,8 +53,8 @@ namespace vcs_DrawA_Radar
         private void DrawCharts(Graphics gr, bool fill_areas)
         {
             // Find the center and radii.
-            float cx = picPlot.ClientSize.Width / 2f;
-            float cy = picPlot.ClientSize.Height / 2f;
+            float cx = pictureBox1.ClientSize.Width / 2f;
+            float cy = pictureBox1.ClientSize.Height / 2f;
             float rx = cx - 20;
             float ry = cy - 20;
 
@@ -181,13 +181,13 @@ namespace vcs_DrawA_Radar
             gr.Restore(state);
         }
 
-        private void picPlot_Resize(object sender, EventArgs e)
+        private void pictureBox1_Resize(object sender, EventArgs e)
         {
-            picPlot.Refresh();
+            pictureBox1.Refresh();
         }
 
         // Display a tooltip if appropriate.
-        private void picPlot_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             string tip_text = "";
             foreach (CarData car in Cars)
@@ -210,8 +210,8 @@ namespace vcs_DrawA_Radar
                 }
             }
 
-            if (tip_text != tipPoint.GetToolTip(picPlot))
-                tipPoint.SetToolTip(picPlot, tip_text);
+            if (tip_text != tipPoint.GetToolTip(pictureBox1))
+                tipPoint.SetToolTip(pictureBox1, tip_text);
         }
 
         private bool PointIsClose(PointF point1, PointF point2, float radius)
@@ -223,7 +223,7 @@ namespace vcs_DrawA_Radar
 
         private void chkFillAreas_CheckedChanged(object sender, EventArgs e)
         {
-            picPlot.Refresh();
+            pictureBox1.Refresh();
         }
     }
 }

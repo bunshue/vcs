@@ -90,6 +90,74 @@ namespace vcs_Draw9_Example8_vcsh
         };
         // 畫派圖，可以偵測位置 SP
 
+        // 畫動態派圖 ST
+        // Represents a pie slice.
+        private struct Slice : IComparable
+        {
+            public Brush TopBrush, SideBrush;
+            public Pen TopPen;
+            public float StartAngle, SweepAngle, ExplodeDistance;
+            public float ZDistance
+            {
+                get
+                {
+                    // Right half of the ellipse.
+                    if (StartAngle <= 90)
+                    {
+                        if (StartAngle + SweepAngle > 90)
+                        {
+                            // It spans the bottom of the
+                            // ellipse so should be last.
+                            return 181;
+                        }
+                        return 90 + StartAngle + SweepAngle;
+                    }
+
+                    // Left half of the ellipse.
+                    return 270 - StartAngle;
+                }
+            }
+
+            #region IComparable Members
+
+            // Compare by ZDistance.
+            public int CompareTo(object obj)
+            {
+                Slice other = (Slice)obj;
+                return ZDistance.CompareTo(other.ZDistance);
+            }
+
+            #endregion
+        }
+
+        // Colors.
+        private Color[] TopColors =
+        {
+            Color.FromArgb(255, 128, 128),
+            Color.FromArgb(128, 255, 128),
+            Color.Red,
+            Color.FromArgb(128, 128, 255),
+            Color.Orange,
+            Color.FromArgb(255, 255, 128),
+            Color.Blue,
+            Color.FromArgb(128, 255, 255),
+            Color.FromArgb(255, 128, 255),
+            Color.Yellow,
+        };
+        private Brush[] TopBrushes;
+        private Pen[] TopPens;
+        private Brush[] SideBrushes;
+
+        // The data values.
+        private float[] Values = new float[10];
+
+        // The slice data.
+        Slice[] Slices;
+
+        int explode_pie1 = 2;
+        int explode_pie2 = 7;
+        // 畫動態派圖 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -132,7 +200,6 @@ namespace vcs_Draw9_Example8_vcsh
             draw_smiley();                  //pictureBox15
             draw_polygon_pathgradientbrush();   //pictureBox18
             load_move_ball();               //pictureBox19
-            draw_circle_connection();       //pictureBox_circle
 
             // 畫派圖，可以偵測位置 ST    pictureBox17
             // Initialize the pie chart data.
@@ -144,6 +211,59 @@ namespace vcs_Draw9_Example8_vcsh
             EllipseRy = hgt / 2;
             EllipseCenter = new Point(pictureBox17.ClientSize.Width / 2, pictureBox17.ClientSize.Height / 2);
             // 畫派圖，可以偵測位置 SP
+
+            // 畫動態派圖 ST
+            // Make some random data.
+            DoubleBuffered = true;
+            ResizeRedraw = true;
+
+            // Make the random data.
+            Random rand = new Random();
+            for (int i = 0; i < Values.Length; i++)
+            {
+                Values[i] = rand.Next(1, 5);
+            }
+
+            // Make the pens and brushes.
+            TopBrushes = new Brush[TopColors.Length];
+            SideBrushes = new Brush[TopColors.Length];
+            TopPens = new Pen[TopColors.Length];
+            for (int i = 0; i < TopColors.Length; i++)
+            {
+                TopBrushes[i] = new SolidBrush(TopColors[i]);
+                TopPens[i] = new Pen(TopColors[i]);
+                Color side_color = Color.FromArgb(
+                    TopColors[i].R / 2,
+                    TopColors[i].G / 2,
+                    TopColors[i].B / 2);
+                SideBrushes[i] = new SolidBrush(side_color);
+            }
+
+            // Calculate slice drawing information.
+            Slices = new Slice[Values.Length];
+            float total = Values.Sum();
+            float start_angle = -90;
+            for (int i = 0; i < Values.Length; i++)
+            {
+                Slices[i].TopBrush = TopBrushes[i % TopBrushes.Length];
+                Slices[i].TopPen = TopPens[i % TopPens.Length];
+                Slices[i].SideBrush = SideBrushes[i % SideBrushes.Length];
+
+                Slices[i].StartAngle = start_angle;
+                Slices[i].SweepAngle = 360f * Values[i] / total;
+
+                start_angle += Slices[i].SweepAngle;
+            }
+
+            // Sort by ZDistance.
+            Array.Sort(Slices);
+
+
+            ExplodeDistance = 0;
+            timer_pie.Enabled = true;   //Start Pie exploding
+
+
+            // 畫動態派圖 SP
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -186,10 +306,10 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
-            pictureBox_circle.Size = new Size(W, H);
-            pictureBox_star.Size = new Size(W, H);
+            pictureBox20.Size = new Size(W, H);
+            pictureBox21.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
-            pictureBox23.Size = new Size(W, H);
+            pictureBox_pie.Size = new Size(W, H);
             pictureBox_rainbow.Size = new Size(W, H * 2 / 3);
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -218,12 +338,11 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
             pictureBox19.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            pictureBox_circle.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox_star.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox20.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox21.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            pictureBox23.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            pictureBox_pie.Location = new Point(x_st + dx * 4, y_st + dy * 3);
             pictureBox_rainbow.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-            groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 3 + 180);
 
             bt_save.Location = new Point(x_st + dx * 6 + 225, y_st + dy * 0 + 50);
 
@@ -1422,236 +1541,6 @@ namespace vcs_Draw9_Example8_vcsh
             }
         }
 
-        
-        // 畫星形 ST
-        private void pictureBox22_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            PointF[] pts = StarPoints(5, this.pictureBox22.ClientRectangle);
-            e.Graphics.DrawPolygon(Pens.Blue, pts);
-        }
-
-
-        // Return PointFs to define a star.
-        private PointF[] StarPoints(int num_points, Rectangle bounds)
-        {
-            // Make room for the points.
-            PointF[] pts = new PointF[num_points];
-
-            double rx = bounds.Width / 2;
-            double ry = bounds.Height / 2;
-            double cx = bounds.X + rx;
-            double cy = bounds.Y + ry;
-
-            // Start at the top.
-            double theta = -Math.PI / 2;
-            double dtheta = 4 * Math.PI / num_points;
-            for (int i = 0; i < num_points; i++)
-            {
-                pts[i] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta)),
-                    (float)(cy + ry * Math.Sin(theta)));
-                theta += dtheta;
-            }
-            return pts;
-        }
-
-        // 畫星形 SP
-
-        // 畫星形2 ST
-        // For information on star polygons, see:
-        // http://en.wikipedia.org/wiki/Star_polygon
-        // Redraw the star with the new parameters.
-        private void nudPoints_ValueChanged(object sender, EventArgs e)
-        {
-            nudSkip.Maximum = (int)(((int)nudPoints.Value - 1) / 2.0);
-            pictureBox23.Refresh();
-        }
-        private void nudSkip_ValueChanged(object sender, EventArgs e)
-        {
-            pictureBox23.Refresh();
-        }
-
-        // Draw the star.
-        private void pictureBox23_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Draw the star.
-            DrawStar(e.Graphics, Pens.Red, Brushes.Yellow,
-                (int)nudPoints.Value, (int)nudSkip.Value, pictureBox23.ClientRectangle);
-        }
-
-        // Draw the indicated star in the rectangle.
-        private void DrawStar(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, Rectangle rect)
-        {
-            // Get the star's points.
-            PointF[] star_points = MakeStarPoints(-Math.PI / 2, num_points, skip, rect);
-
-            // Draw the star.
-            gr.FillPolygon(the_brush, star_points);
-            gr.DrawPolygon(the_pen, star_points);
-        }
-
-        // Generate the points for a star.
-        private PointF[] MakeStarPoints(double start_theta, int num_points, int skip, Rectangle rect)
-        {
-            double theta, dtheta;
-            PointF[] result;
-            float rx = rect.Width / 2f;
-            float ry = rect.Height / 2f;
-            float cx = rect.X + rx;
-            float cy = rect.Y + ry;
-
-            // If this is a polygon, don't bother with concave points.
-            if (skip == 1)
-            {
-                result = new PointF[num_points];
-                theta = start_theta;
-                dtheta = 2 * Math.PI / num_points;
-                for (int i = 0; i < num_points; i++)
-                {
-                    result[i] = new PointF(
-                        (float)(cx + rx * Math.Cos(theta)),
-                        (float)(cy + ry * Math.Sin(theta)));
-                    theta += dtheta;
-                }
-                return result;
-            }
-
-            // Find the radius for the concave vertices.
-            double concave_radius = CalculateConcaveRadius(num_points, skip);
-
-            // Make the points.
-            result = new PointF[2 * num_points];
-            theta = start_theta;
-            dtheta = Math.PI / num_points;
-            for (int i = 0; i < num_points; i++)
-            {
-                result[2 * i] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta)),
-                    (float)(cy + ry * Math.Sin(theta)));
-                theta += dtheta;
-                result[2 * i + 1] = new PointF(
-                    (float)(cx + rx * Math.Cos(theta) * concave_radius),
-                    (float)(cy + ry * Math.Sin(theta) * concave_radius));
-                theta += dtheta;
-            }
-            return result;
-        }
-
-        // Calculate the inner star radius.
-        private double CalculateConcaveRadius(int num_points, int skip)
-        {
-            // For really small numbers of points.
-            if (num_points < 5) return 0.33f;
-
-            // Calculate angles to key points.
-            double dtheta = 2 * Math.PI / num_points;
-            double theta00 = -Math.PI / 2;
-            double theta01 = theta00 + dtheta * skip;
-            double theta10 = theta00 + dtheta;
-            double theta11 = theta10 - dtheta * skip;
-
-            // Find the key points.
-            PointF pt00 = new PointF(
-                (float)Math.Cos(theta00),
-                (float)Math.Sin(theta00));
-            PointF pt01 = new PointF(
-                (float)Math.Cos(theta01),
-                (float)Math.Sin(theta01));
-            PointF pt10 = new PointF(
-                (float)Math.Cos(theta10),
-                (float)Math.Sin(theta10));
-            PointF pt11 = new PointF(
-                (float)Math.Cos(theta11),
-                (float)Math.Sin(theta11));
-
-            // See where the segments connecting the points intersect.
-            bool lines_intersect, segments_intersect;
-            PointF intersection, close_p1, close_p2;
-            FindIntersection(pt00, pt01, pt10, pt11,
-                out lines_intersect, out segments_intersect,
-                out intersection, out close_p1, out close_p2);
-
-            // Calculate the distance between the
-            // point of intersection and the center.
-            return Math.Sqrt(
-                intersection.X * intersection.X +
-                intersection.Y * intersection.Y);
-        }
-
-        // Find the point of intersection between
-        // the lines p1 --> p2 and p3 --> p4.
-        private void FindIntersection(
-            PointF p1, PointF p2, PointF p3, PointF p4,
-            out bool lines_intersect, out bool segments_intersect,
-            out PointF intersection,
-            out PointF close_p1, out PointF close_p2)
-        {
-            // Get the segments' parameters.
-            float dx12 = p2.X - p1.X;
-            float dy12 = p2.Y - p1.Y;
-            float dx34 = p4.X - p3.X;
-            float dy34 = p4.Y - p3.Y;
-
-            // Solve for t1 and t2
-            float denominator = (dy12 * dx34 - dx12 * dy34);
-
-            float t1 =
-                ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34)
-                    / denominator;
-            if (float.IsInfinity(t1))
-            {
-                // The lines are parallel (or close enough to it).
-                lines_intersect = false;
-                segments_intersect = false;
-                intersection = new PointF(float.NaN, float.NaN);
-                close_p1 = new PointF(float.NaN, float.NaN);
-                close_p2 = new PointF(float.NaN, float.NaN);
-                return;
-            }
-            lines_intersect = true;
-
-            float t2 =
-                ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12)
-                    / -denominator;
-
-            // Find the point of intersection.
-            intersection = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
-
-            // The segments intersect if t1 and t2 are between 0 and 1.
-            segments_intersect =
-                ((t1 >= 0) && (t1 <= 1) &&
-                 (t2 >= 0) && (t2 <= 1));
-
-            // Find the closest points on the segments.
-            if (t1 < 0)
-            {
-                t1 = 0;
-            }
-            else if (t1 > 1)
-            {
-                t1 = 1;
-            }
-
-            if (t2 < 0)
-            {
-                t2 = 0;
-            }
-            else if (t2 > 1)
-            {
-                t2 = 1;
-            }
-
-            close_p1 = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
-            close_p2 = new PointF(p3.X + dx34 * t2, p3.Y + dy34 * t2);
-        }
-
-        // 畫星形2 SP
-
-
         // 兩種 Color Wheel ST
         // Draw a color wheel in the indicated area.
         private void DrawColorWheel1(Graphics gr, Color outline_color, int xmin, int ymin, int wid, int hgt)
@@ -1908,32 +1797,6 @@ namespace vcs_Draw9_Example8_vcsh
 
         //畫各種箭頭 SP
 
-        // Draw the indicated star in the rectangle.
-        private void DrawStar2(Graphics gr, Pen the_pen, Brush the_brush, int num_points, int skip, Rectangle rect)
-        {
-            // Get the star's points.
-            PointF[] star_points = MakeStarPoints(-Math.PI / 2, num_points, skip, rect);
-
-            // Draw the star.
-            gr.FillPolygon(the_brush, star_points);
-            gr.DrawPolygon(the_pen, star_points);
-        }
-
-        // Draw with a compound pen.
-        private void pictureBox_star_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            using (Pen the_pen = new Pen(Color.Blue, 20))
-            {
-                the_pen.CompoundArray = new float[] { 0.0f, 0.1f, 0.2f, 0.8f, 0.9f, 1.0f };
-
-                // Draw the star.
-                Rectangle rect = new Rectangle(35, 40, this.pictureBox_star.ClientSize.Width - 70, this.pictureBox_star.ClientSize.Height - 50);
-                DrawStar2(e.Graphics, the_pen, Brushes.White, 5, 2, rect);
-            }
-
-        }
 
         int hilbert_curve_depth = 2;
         int sierpinski_curve_depth = 2;
@@ -2137,71 +2000,113 @@ namespace vcs_Draw9_Example8_vcsh
         #endregion Sierpinski Curve
 
 
-
-
-        void draw_circle_connection()   //pictureBox_circle
+        // 畫動態派圖 ST        
+        private void pictureBox_pie_Paint(object sender, PaintEventArgs e)
         {
-            pictureBox_circle.Image = DrawPattern(pictureBox_circle.ClientSize.Width, pictureBox_circle.ClientSize.Height);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            PointF offset_3d = new PointF(0, 20);
+            RectangleF rect = new RectangleF(40, 30,
+                pictureBox_pie.ClientSize.Width - 80 - offset_3d.X,
+                pictureBox_pie.ClientSize.Height - 60 - offset_3d.Y);
+
+            // Set explode distances for slices 2 and 7.
+            Slices[explode_pie1].ExplodeDistance = ExplodeDistance;
+            Slices[explode_pie2].ExplodeDistance = ExplodeDistance;
+
+            // Draw the pie slices in sorted order.
+            foreach (Slice slice in Slices)
+            {
+                PieSlice3D(e.Graphics,
+                    slice.TopBrush, slice.TopPen, slice.SideBrush,
+                    offset_3d, slice.ExplodeDistance, rect,
+                    slice.StartAngle, slice.SweepAngle);
+            }
         }
 
-        // Draw the pattern.
-        private Bitmap DrawPattern(int wid, int hgt)
+        // Draw a 3-D pie slice.
+        private void PieSlice3D(Graphics gr, Brush top_brush, Pen top_pen, Brush side_brush, PointF offset_3d, float explode_distance, RectangleF rect, float start_angle, float sweep_angle)
         {
-            Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics gr = Graphics.FromImage(bm))
+            // Calculate the explode offset.
+            double explode_angle = (start_angle + sweep_angle / 2f) * Math.PI / 180f;
+            float dx = explode_distance * (float)Math.Cos(explode_angle);
+            float dy = explode_distance * (float)Math.Sin(explode_angle);
+
+            // Create the top of the side.
+            RectangleF top_rect = new RectangleF(
+                rect.X + dx, rect.Y + dy,
+                rect.Width, rect.Height);
+            GraphicsPath path = new GraphicsPath();
+            path.AddPie(top_rect, start_angle, sweep_angle);
+
+            // Create the bottom of the side.
+            RectangleF bottom_rect = new RectangleF(
+                top_rect.X + offset_3d.X,
+                top_rect.Y + offset_3d.Y,
+                rect.Width, rect.Height);
+            path.AddPie(bottom_rect, start_angle, sweep_angle);
+
+            // Convert the GraphicsPath into a list of points.
+            path.Flatten();
+            PointF[] path_points = path.PathPoints;
+            List<PointF> points_list = new List<PointF>(path_points);
+
+            // Make a convex hull.
+            List<PointF> hull_points = Geometry.MakeConvexHull(points_list);
+
+            // Fill the convex hull.
+            gr.FillPolygon(side_brush, hull_points.ToArray());
+
+            // Draw the top.
+            gr.FillPie(top_brush, top_rect, start_angle, sweep_angle);
+            gr.DrawPie(top_pen, top_rect, start_angle, sweep_angle);
+        }
+
+        // The distance we have exploded so far.
+        private float ExplodeDistance = 0;
+
+        // The maximum distance we will explode.
+        private float MaxExplodeDistance = 30;
+
+        // The change in explode distance per tick.
+        private float DeltaExplodeDistance = 2;
+
+        int wait_time = 0;
+        // Continue exploding.
+        private void timer_pie_Tick(object sender, EventArgs e)
+        {
+            if (wait_time == 0)
             {
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
+                pictureBox_pie.Refresh();
 
-                float margin = 10;
-                float diameter1 = (hgt - margin) / 5f;
-                float diameter2 = (wid - margin) / (float)(1 + 2 * Math.Sqrt(3));
-                float diameter = Math.Min(diameter1, diameter2);
+                ExplodeDistance += DeltaExplodeDistance;
+            }
 
-                float radius = diameter / 2f;
-                float cx = wid / 2f;
-                float cy = hgt / 2f;
-
-                // Find the center circle's center.
-                List<PointF> centers = new List<PointF>();
-                centers.Add(new PointF(cx, cy));
-
-                // Add the other circles.
-                for (int ring_num = 0; ring_num < 2; ring_num++)
+            if (ExplodeDistance > MaxExplodeDistance)
+            {
+                wait_time++;
+                if (wait_time > 100)
                 {
-                    float ring_radius = diameter * (ring_num + 1);
-                    double theta = Math.PI / 2.0;
-                    double dtheta = Math.PI / 3.0;
-                    for (int i = 0; i < 6; i++)
+                    wait_time = 0;
+                    ExplodeDistance = 0;
+
+                    pictureBox_pie.Refresh();
+
+                    Random rand = new Random();
+
+                    explode_pie1 = rand.Next(10);
+                    explode_pie2 = rand.Next(10);
+
+                    while (explode_pie2 == explode_pie1)
                     {
-                        double x = cx + ring_radius * Math.Cos(theta);
-                        double y = cy + ring_radius * Math.Sin(theta);
-                        centers.Add(new PointF((float)x, (float)y));
-                        theta += dtheta;
-                    }
-                }
-
-                // Fill and outline the circles.
-                foreach (PointF center in centers)
-                {
-                    float x = center.X - radius;
-                    float y = center.Y - radius;
-                    gr.FillEllipse(Brushes.LightBlue, x, y, diameter, diameter);
-                    gr.DrawEllipse(Pens.Blue, x, y, diameter, diameter);
-                }
-
-                // Connect the circle centers.
-                int num_circles = centers.Count;
-                for (int i = 0; i < num_circles; i++)
-                {
-                    for (int j = i + 1; j < num_circles; j++)
-                    {
-                        gr.DrawLine(Pens.Blue, centers[i], centers[j]);
+                        explode_pie2 = rand.Next(10);
                     }
                 }
             }
-
-            return bm;
         }
+
+        // 畫動態派圖 SP
+
 
 
     }
