@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 using System.Collections.Generic;
 
-namespace howto_floodfill
+namespace vcs_Draw9_Example9_vcsh
 {
     public class Bitmap32
     {

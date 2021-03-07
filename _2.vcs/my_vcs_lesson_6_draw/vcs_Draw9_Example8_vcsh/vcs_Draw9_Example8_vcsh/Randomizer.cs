@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace howto_one_self_avoiding_walk
+namespace vcs_Draw9_Example8_vcsh
 {
     public static class Randomizer
     {

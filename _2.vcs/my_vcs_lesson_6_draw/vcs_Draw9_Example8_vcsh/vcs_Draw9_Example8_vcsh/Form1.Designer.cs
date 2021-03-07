@@ -88,7 +88,7 @@
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
-            this.pictureBox20 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_one_self_avoiding_walk = new System.Windows.Forms.PictureBox();
             this.pictureBox_rainbow = new System.Windows.Forms.PictureBox();
             this.pictureBox_pie = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
@@ -97,6 +97,7 @@
             this.pictureBox_color_wheel2 = new System.Windows.Forms.PictureBox();
             this.timer_change = new System.Windows.Forms.Timer(this.components);
             this.timer_pie = new System.Windows.Forms.Timer(this.components);
+            this.timer_one_self_avoiding_walk = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -115,7 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_one_self_avoiding_walk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
@@ -691,14 +692,14 @@
             this.pictureBox19.TabStop = false;
             this.pictureBox19.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox19_Paint);
             // 
-            // pictureBox20
+            // pictureBox_one_self_avoiding_walk
             // 
-            this.pictureBox20.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox20.Location = new System.Drawing.Point(117, 610);
-            this.pictureBox20.Name = "pictureBox20";
-            this.pictureBox20.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox20.TabIndex = 113;
-            this.pictureBox20.TabStop = false;
+            this.pictureBox_one_self_avoiding_walk.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox_one_self_avoiding_walk.Location = new System.Drawing.Point(117, 610);
+            this.pictureBox_one_self_avoiding_walk.Name = "pictureBox_one_self_avoiding_walk";
+            this.pictureBox_one_self_avoiding_walk.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox_one_self_avoiding_walk.TabIndex = 113;
+            this.pictureBox_one_self_avoiding_walk.TabStop = false;
             // 
             // pictureBox_rainbow
             // 
@@ -765,6 +766,11 @@
             this.timer_pie.Interval = 20;
             this.timer_pie.Tick += new System.EventHandler(this.timer_pie_Tick);
             // 
+            // timer_one_self_avoiding_walk
+            // 
+            this.timer_one_self_avoiding_walk.Interval = 500;
+            this.timer_one_self_avoiding_walk.Tick += new System.EventHandler(this.timer_one_self_avoiding_walk_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -775,7 +781,7 @@
             this.Controls.Add(this.pictureBox_pie);
             this.Controls.Add(this.pictureBox22);
             this.Controls.Add(this.pictureBox21);
-            this.Controls.Add(this.pictureBox20);
+            this.Controls.Add(this.pictureBox_one_self_avoiding_walk);
             this.Controls.Add(this.pictureBox19);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox18);
@@ -854,7 +860,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_one_self_avoiding_walk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rainbow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
@@ -926,7 +932,7 @@
         private System.Windows.Forms.PictureBox pictureBox18;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox19;
-        private System.Windows.Forms.PictureBox pictureBox20;
+        private System.Windows.Forms.PictureBox pictureBox_one_self_avoiding_walk;
         private System.Windows.Forms.PictureBox pictureBox_rainbow;
         private System.Windows.Forms.PictureBox pictureBox_pie;
         private System.Windows.Forms.PictureBox pictureBox22;
@@ -935,6 +941,7 @@
         private System.Windows.Forms.PictureBox pictureBox_color_wheel2;
         private System.Windows.Forms.Timer timer_change;
         private System.Windows.Forms.Timer timer_pie;
+        private System.Windows.Forms.Timer timer_one_self_avoiding_walk;
     }
 }
 

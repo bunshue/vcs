@@ -43,7 +43,7 @@ namespace howto_draw_curve
         }
 
         // Start a new point list.
-        private void mnuCurveNew_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
             Points = new List<Point>();
             Refresh();

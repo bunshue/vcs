@@ -120,11 +120,14 @@ namespace vcs_Network2_WebPageImage
         // Get the picture at a given URL.
         private Image GetPicture(string url)
         {
+            WebClient client = new WebClient();
             try
             {
                 url = url.Trim();
-                if (!url.ToLower().StartsWith("http://")) url = "http://" + url;
-                WebClient client = new WebClient();
+                if (!url.ToLower().StartsWith("http://"))
+                {
+                    url = "http://" + url;
+                }
                 MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
                 return Image.FromStream(image_stream);
             }

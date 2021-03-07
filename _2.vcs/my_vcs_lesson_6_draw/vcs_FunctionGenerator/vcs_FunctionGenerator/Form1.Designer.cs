@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -44,15 +43,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dc)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -94,9 +84,9 @@
             this.groupBox1.Controls.Add(this.rb_3);
             this.groupBox1.Controls.Add(this.rb_2);
             this.groupBox1.Controls.Add(this.rb_1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 55);
+            this.groupBox1.Location = new System.Drawing.Point(16, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(229, 201);
+            this.groupBox1.Size = new System.Drawing.Size(197, 201);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "信號種類";
@@ -104,7 +94,7 @@
             // numericUpDown_dc
             // 
             this.numericUpDown_dc.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown_dc.Location = new System.Drawing.Point(131, 152);
+            this.numericUpDown_dc.Location = new System.Drawing.Point(99, 160);
             this.numericUpDown_dc.Maximum = new decimal(new int[] {
             10,
             0,
@@ -172,9 +162,9 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(293, 42);
+            this.panel1.Location = new System.Drawing.Point(239, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(429, 289);
+            this.panel1.Size = new System.Drawing.Size(503, 320);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -188,7 +178,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -203,7 +192,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox richTextBox1;

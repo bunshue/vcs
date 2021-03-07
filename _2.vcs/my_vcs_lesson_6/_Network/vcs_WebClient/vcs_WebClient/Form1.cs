@@ -189,7 +189,8 @@ namespace vcs_WebClient
         private WebClient client = new WebClient();
         private void button3_Click(object sender, EventArgs e)
         {
-            //下載一個網頁1
+            richTextBox1.Text += "開啟一個Thread, 下載一個網頁......\n";
+            Application.DoEvents();
             Thread th = new Thread(new ThreadStart(StartDownload));
             th.Start();
         }
@@ -209,8 +210,6 @@ namespace vcs_WebClient
 
             try
             {
-                WebRequest myre = WebRequest.Create(url);
-
                 Stream stream = client.OpenRead(url);
                 StreamReader reader = new StreamReader(stream);
 
@@ -228,12 +227,11 @@ namespace vcs_WebClient
                         outputStream.Write(bBuffer, 0, nRealCount);
                         nRealCount = stream.Read(bBuffer, 0, bBuffer.Length);
                     }
-                    MessageBox.Show("下載完成!");
+                    MessageBox.Show("下載完成, 檔案 : " + Path);
                 }
                 catch (WebException ex)
                 {
-                    MessageBox.Show(ex.Message, "Error");
-                    this.Text = "";
+                    MessageBox.Show("下載錯誤, 原因 : " + ex.Message);
                 }
                 finally
                 {

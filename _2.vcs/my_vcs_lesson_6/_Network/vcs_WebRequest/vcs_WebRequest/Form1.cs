@@ -21,6 +21,12 @@ namespace vcs_WebRequest
             InitializeComponent();
         }
 
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label1.Text = "當前下載進度 " + 0.ToString("00.00") + " %";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -243,6 +249,85 @@ namespace vcs_WebRequest
 
             this.Cursor = Cursors.Default;
         }
+
+
+        //下載http文件 並顯示進度條 ST
+        private void button7_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "下載http文件 並顯示進度條\n";
+            Application.DoEvents();
+
+            string url = "http://weisico.com/program/2015/0630/237.html";
+            //string filename = @"C:\______test_files\aaaaaaaa.html";
+            string filename = Application.StartupPath + "\\" + "aaaaaaaa.html";
+
+            DownloadFile_percentage(url, filename);
+
+            richTextBox1.Text += "下載完畢, 檔案 : " + filename + "\n";
+        }
+
+        /// <summary>
+        /// c#,.net 下载文件
+        /// </summary>
+        /// <param name="URL">下载文件地址</param>
+        ///
+        /// <param name="Filename">下载后的存放地址</param>
+        /// <param name="Prog">用于显示的进度条</param>
+        ///
+        public void DownloadFile_percentage(string URL, string filename)
+        {
+            if (URL == "")
+            {
+                MessageBox.Show("URL为空", "消息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            float percent = 0;
+            label1.Text = "當前下載進度 " + percent.ToString("00.00") + " %";
+            Application.DoEvents();
+
+            try
+            {
+                HttpWebRequest Myrq = (HttpWebRequest)HttpWebRequest.Create(URL);
+                HttpWebResponse myrp = (HttpWebResponse)Myrq.GetResponse();
+                long totalBytes = myrp.ContentLength;
+                if (progressBar1 != null)
+                {
+                    progressBar1.Maximum = (int)totalBytes;
+                }
+                Stream st = myrp.GetResponseStream();
+                Stream so = new FileStream(filename, FileMode.Create);
+                long totalDownloadedByte = 0;
+                byte[] by = new byte[1024];
+                int osize = st.Read(by, 0, (int)by.Length);
+                while (osize > 0)
+                {
+                    totalDownloadedByte = osize + totalDownloadedByte;
+                    Application.DoEvents();
+                    so.Write(by, 0, osize);
+                    if (progressBar1 != null)
+                    {
+                        progressBar1.Value = (int)totalDownloadedByte;
+                    }
+                    osize = st.Read(by, 0, (int)by.Length);
+
+                    percent = (float)totalDownloadedByte / (float)totalBytes * 100;
+                    label1.Text = "當前下載進度 " + percent.ToString("00.00") + " %";
+                    Application.DoEvents(); //必须加注这句代码，否则label1将因为循环执行太快而来不及显示信息
+                    if (percent == 100)
+                    {
+                        MessageBox.Show("下载完成", "消息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                so.Close();
+                st.Close();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error\t" + ex.Message + "\n";
+            }
+        }
+        //下載http文件 並顯示進度條 SP
+
 
 
 

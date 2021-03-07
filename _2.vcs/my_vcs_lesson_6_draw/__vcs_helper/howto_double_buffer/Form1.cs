@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace howto_double_buffer
 {
@@ -60,15 +61,15 @@ namespace howto_double_buffer
         // Draw the butterfly.
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            //在Form1上畫蝴蝶，限制蝴蝶大小 400 X 400
             int W = 400;
             int H = 400;
 
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(this.BackColor);
 
             // Scale and translate.
-            RectangleF world_rect = 
-                new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            RectangleF world_rect = new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
             float cx = (world_rect.Left + world_rect.Right) / 2;
             float cy = (world_rect.Top + world_rect.Bottom) / 2;
 
@@ -76,42 +77,26 @@ namespace howto_double_buffer
             e.Graphics.TranslateTransform(-cx, -cy);
 
             // Scale to fill the form.
-            float scale = Math.Min(
-                W / world_rect.Width,
-                H / world_rect.Height);
-            e.Graphics.ScaleTransform(scale, scale,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
+            e.Graphics.ScaleTransform(scale, scale, MatrixOrder.Append);
 
             // Move the result to center on the form.
-            e.Graphics.TranslateTransform(
-                W / 2,
-                H / 2,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            e.Graphics.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
 
             // Generate the points.
             PointF pt0, pt1;
             double t = 0;
-            double expr =
-                Math.Exp(Math.Cos(t))
-                - 2 * Math.Cos(4 * t)
-                - Math.Pow(Math.Sin(t / 12), 5);
-            pt1 = new PointF(
-                (float)(Math.Sin(t) * expr),
-                (float)(-Math.Cos(t) * expr));
+            double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
             using (Pen the_pen = new Pen(Color.Blue, 0))
             {
                 const long num_lines = 5000;
                 for (long i = 0; i < num_lines; i++)
                 {
                     t = i * period * Math.PI / num_lines;
-                    expr =
-                        Math.Exp(Math.Cos(t))
-                        - 2 * Math.Cos(4 * t)
-                        - Math.Pow(Math.Sin(t / 12), 5);
+                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
                     pt0 = pt1;
-                    pt1 = new PointF(
-                        (float)(Math.Sin(t) * expr),
-                        (float)(-Math.Cos(t) * expr));
+                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
                     the_pen.Color = GetColor(t);
                     e.Graphics.DrawLine(the_pen, pt0, pt1);
                 }
@@ -154,77 +139,59 @@ namespace howto_double_buffer
             pictureBox2.Refresh();
             pictureBox1.Refresh();
 
-            int wid = pictureBox2.ClientSize.Width;
-            int hgt = pictureBox2.ClientSize.Height;
+            int W = pictureBox2.ClientSize.Width;
+            int H = pictureBox2.ClientSize.Height;
 
             // Draw with double-buffering.
-            Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Bitmap bm = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bm))
             {
-                DrawButterfly(gr, wid, hgt);
+                DrawButterfly(g, W, H);
             }
             pictureBox1.Image = bm;
             pictureBox1.Refresh();
 
             // Draw without double-buffering.
-            DrawButterfly(pictureBox2.CreateGraphics(), wid, hgt);
+            DrawButterfly(pictureBox2.CreateGraphics(), W, H);
         }
 
         // Draw the butterfly curve on this Graphics object.
-        private void DrawButterfly(Graphics gr, int wid, int hgt)
+        private void DrawButterfly(Graphics g, int W, int H)
         {
-            gr.SmoothingMode =
-                System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            gr.Clear(Color.Black);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.Black);
 
             // Scale and translate.
-            RectangleF world_rect =
-                new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            RectangleF world_rect = new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
             float cx = (world_rect.Left + world_rect.Right) / 2;
             float cy = (world_rect.Top + world_rect.Bottom) / 2;
 
             // Center the world coordinates at origin.
-            gr.TranslateTransform(-cx, -cy);
+            g.TranslateTransform(-cx, -cy);
 
             // Scale to fill the form.
-            float scale = Math.Min(
-                wid / world_rect.Width,
-                hgt / world_rect.Height);
-            gr.ScaleTransform(scale, scale,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
+            g.ScaleTransform(scale, scale, MatrixOrder.Append);
 
             // Move the result to center on the form.
-            gr.TranslateTransform(
-                wid / 2,
-                hgt / 2,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            g.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
 
             // Generate the points.
             PointF pt0, pt1;
             double t = 0;
-            double expr =
-                Math.Exp(Math.Cos(t))
-                - 2 * Math.Cos(4 * t)
-                - Math.Pow(Math.Sin(t / 12), 5);
-            pt1 = new PointF(
-                (float)(Math.Sin(t) * expr),
-                (float)(-Math.Cos(t) * expr));
+            double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
             using (Pen the_pen = new Pen(Color.Blue, 0))
             {
                 const long num_lines = 5000;
                 for (long i = 0; i < num_lines; i++)
                 {
                     t = i * period * Math.PI / num_lines;
-                    expr =
-                        Math.Exp(Math.Cos(t))
-                        - 2 * Math.Cos(4 * t)
-                        - Math.Pow(Math.Sin(t / 12), 5);
+                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
                     pt0 = pt1;
-                    pt1 = new PointF(
-                        (float)(Math.Sin(t) * expr),
-                        (float)(-Math.Cos(t) * expr));
+                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
                     the_pen.Color = GetColor(t);
-                    gr.DrawLine(the_pen, pt0, pt1);
+                    g.DrawLine(the_pen, pt0, pt1);
                 }
             }
         }
@@ -232,7 +199,9 @@ namespace howto_double_buffer
         // Redraw the non-buffered butterfly curve.
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            DrawButterfly(e.Graphics, pictureBox2.ClientSize.Width, pictureBox2.ClientSize.Height);
+            int W = pictureBox2.ClientSize.Width;
+            int H = pictureBox2.ClientSize.Height;
+            DrawButterfly(e.Graphics, W, H);
         }
     }
 }

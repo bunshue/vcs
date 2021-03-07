@@ -22,7 +22,7 @@ namespace vcs_Draw9_Example9_vcsh
         SolidBrush sb;
         Bitmap bitmap1;
         int W = 250;
-        int H = 250;
+        int H = 230;
 
         private const int Period = 21;
         // Initialize the colors.
@@ -59,6 +59,35 @@ namespace vcs_Draw9_Example9_vcsh
         #endregion
 
 
+        //畫triangle_puzzle_solution ST
+        // The points.
+        private PointF[] Points;
+
+        // The solutions.
+        private List<int[]> Solutions;
+
+        // The solution we should display.
+        private int CurrentSolution = 100;
+        //畫triangle_puzzle_solution SP
+
+
+        //畫find_squares_colored ST
+        // The points.
+        private PointF[] Points2;
+
+        // The solutions.
+        private List<int[]> Solutions2;
+
+        // The solutions' side lengths.
+        private List<int> SideLengths;
+
+        // The solution we should display.
+        private int CurrentSolution2 = 100;
+
+        // Colors used to draw the squares.
+        private Color[] Colors2 = { Color.Red, Color.Green, Color.Blue, };
+        //畫find_squares_colored SP
+
         public Form1()
         {
             InitializeComponent();
@@ -69,9 +98,12 @@ namespace vcs_Draw9_Example9_vcsh
             show_item_location();
 
             draw_circle_connection();       //pictureBox_circle
+            draw_some_random_circles();     //pictureBox_floodfill
 
+            draw_triangle_puzzle_solution();
+
+            draw_find_squares_colored();
         }
-
 
         void show_item_location()
         {
@@ -85,9 +117,9 @@ namespace vcs_Draw9_Example9_vcsh
             int dy;
 
             x_st = 10;
-            y_st = 10;
+            y_st = 35;
             dx = W + 20;
-            dy = H + 20;
+            dy = H + 40;
 
             pictureBox_Chrysanthemum1.Size = new Size(W, H);
             pictureBox_Chrysanthemum2.Size = new Size(W, H);
@@ -99,27 +131,53 @@ namespace vcs_Draw9_Example9_vcsh
             pictureBox_star1.Size = new Size(W, H);
             pictureBox_star2.Size = new Size(W, H);
             pictureBox_star3.Size = new Size(W, H);
-            pictureBox11.Size = new Size(W, H);
+            pictureBox_floodfill.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
             pictureBox14.Size = new Size(W, H);
             pictureBox15.Size = new Size(W, H);
+            pictureBox_triangle_puzzle_solution.Size = new Size(W, H);
+            pictureBox_find_squares_colored.Size = new Size(W, H);
+            pictureBox18.Size = new Size(W, H);
+            pictureBox19.Size = new Size(W, H);
+            pictureBox20.Size = new Size(W, H);
 
             pictureBox_Chrysanthemum1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_butterfly.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_polar.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_hex.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            label5.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
+            label5.Text = "點選位置填滿顏色";
             pictureBox_tri.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            label6.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 25);
+            label6.Text = "點選位置填滿顏色";
             pictureBox_circle.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox_star1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_star2.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             pictureBox_star3.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox11.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_floodfill.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            label11.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 25);
+            label11.Text = "點選位置填滿顏色";
+
             pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox15.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            pictureBox_triangle_puzzle_solution.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 25);
+            button2.Location = new Point(x_st + dx * 0 + 90, y_st + dy * 3 - 25);
+            label16.Location = new Point(x_st + dx * 0 + 90 + 90, y_st + dy * 3 - 25);
+            label16.Text = "";
+
+            pictureBox_find_squares_colored.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button3.Location = new Point(x_st + dx * 1, y_st + dy * 3 - 25);
+            button4.Location = new Point(x_st + dx * 1 + 90, y_st + dy * 3 - 25);
+            label17.Location = new Point(x_st + dx * 1 + 90 + 90, y_st + dy * 3 - 25);
+            label17.Text = "";
+            pictureBox18.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox19.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox20.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
             pictureBox_Chrysanthemum1.BackColor = Color.Black;
             pictureBox_Chrysanthemum2.BackColor = Color.Black;
@@ -329,12 +387,14 @@ namespace vcs_Draw9_Example9_vcsh
         // Draw the butterfly.
         private void pictureBox_butterfly_Paint(object sender, PaintEventArgs e)
         {
+            int W = this.pictureBox_butterfly.ClientSize.Width;
+            int H = this.pictureBox_butterfly.ClientSize.Height;
+
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(this.pictureBox_butterfly.BackColor);
 
             // Scale and translate.
-            RectangleF world_rect =
-                new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
+            RectangleF world_rect = new RectangleF(-4.0f, -4.4f, 8.0f, 7.3f);
             float cx = (world_rect.Left + world_rect.Right) / 2;
             float cy = (world_rect.Top + world_rect.Bottom) / 2;
 
@@ -342,40 +402,26 @@ namespace vcs_Draw9_Example9_vcsh
             e.Graphics.TranslateTransform(-cx, -cy);
 
             // Scale to fill the form.
-            float scale = Math.Min(
-                this.pictureBox_butterfly.ClientSize.Width / world_rect.Width,
-                this.pictureBox_butterfly.ClientSize.Height / world_rect.Height);
+            float scale = Math.Min(W / world_rect.Width, H / world_rect.Height);
             e.Graphics.ScaleTransform(scale, scale, MatrixOrder.Append);
 
             // Move the result to center on the form.
-            e.Graphics.TranslateTransform(
-                this.pictureBox_butterfly.ClientSize.Width / 2,
-                this.pictureBox_butterfly.ClientSize.Height / 2, MatrixOrder.Append);
+            e.Graphics.TranslateTransform(W / 2, H / 2, MatrixOrder.Append);
 
             // Generate the points.
             PointF pt0, pt1;
             double t = 0;
-            double expr =
-                Math.Exp(Math.Cos(t))
-                - 2 * Math.Cos(4 * t)
-                - Math.Pow(Math.Sin(t / 12), 5);
-            pt1 = new PointF(
-                (float)(Math.Sin(t) * expr),
-                (float)(-Math.Cos(t) * expr));
+            double expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
+            pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
             using (Pen the_pen = new Pen(Color.Blue, 0))
             {
                 const long num_lines = 5000;
                 for (long i = 0; i < num_lines; i++)
                 {
                     t = i * period * Math.PI / num_lines;
-                    expr =
-                        Math.Exp(Math.Cos(t))
-                        - 2 * Math.Cos(4 * t)
-                        - Math.Pow(Math.Sin(t / 12), 5);
+                    expr = Math.Exp(Math.Cos(t)) - 2 * Math.Cos(4 * t) - Math.Pow(Math.Sin(t / 12), 5);
                     pt0 = pt1;
-                    pt1 = new PointF(
-                        (float)(Math.Sin(t) * expr),
-                        (float)(-Math.Cos(t) * expr));
+                    pt1 = new PointF((float)(Math.Sin(t) * expr), (float)(-Math.Cos(t) * expr));
                     the_pen.Color = GetColor(t);
                     e.Graphics.DrawLine(the_pen, pt0, pt1);
                 }
@@ -1174,6 +1220,485 @@ namespace vcs_Draw9_Example9_vcsh
         }
 
         // 畫星形2 SP
+
+        //畫floodfill ST
+        // The background image.
+        private Bitmap bm_floodfill;
+        private Bitmap32 bm32_floodfill;
+
+        void draw_some_random_circles()     // Make some random circles.
+        {
+            int W = this.pictureBox_floodfill.ClientSize.Width;
+            int H = this.pictureBox_floodfill.ClientSize.Height;
+
+            bm_floodfill = new Bitmap(W, H);
+            using (Graphics gr = Graphics.FromImage(bm_floodfill))
+            {
+                gr.Clear(Color.Silver);
+
+                Random rnd = new Random();
+                int max_r = Math.Min(W, H) / 3;
+                int min_r = max_r / 4;
+                for (int i = 0; i < 15; i++)
+                {
+                    int r = rnd.Next(min_r, max_r);
+                    int x = rnd.Next(min_r, W - min_r);
+                    int y = rnd.Next(min_r, H - min_r);
+                    gr.DrawEllipse(Pens.Black, x - r, y - r, 2 * r, 2 * r);
+                }
+            }
+
+            bm32_floodfill = new Bitmap32(bm_floodfill);
+            this.pictureBox_floodfill.Image = bm_floodfill;
+        }
+
+        // Initialize the colors.
+        private Color[] colors = 
+        {
+            Color.Red,
+            Color.Orange,
+            Color.Yellow,
+            Color.Lime,
+            Color.Cyan,
+            Color.Blue,
+            Color.Green,
+            Color.Blue,
+            Color.LightBlue,
+            Color.LightGreen,
+            Color.White
+        };
+        private Random random = new Random();
+        private Color RandomColor()
+        {
+            return colors[random.Next(0, colors.Length)];
+        }
+
+        // Flood the clicked point with a random color.
+        private void pictureBox_floodfill_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Skip it if it's a black pixel.
+            Color old_color = bm_floodfill.GetPixel(e.X, e.Y);
+            if ((old_color.R == 0) && (old_color.G == 0) && (old_color.B == 0))
+            {
+                return;
+            }
+
+            // Flood at the pixel.
+            bm32_floodfill.LockBitmap();
+            //this.Text = "(" + e.X.ToString() + ", " + e.Y.ToString() + ")";
+            bm32_floodfill.FloodFill(e.X, e.Y, RandomColor());
+            bm32_floodfill.UnlockBitmap();
+            Refresh();
+            this.pictureBox_floodfill.Refresh();
+        }
+
+        //畫floodfill SP
+
+
+        //畫triangle_puzzle_solution ST
+        void draw_triangle_puzzle_solution()
+        {
+            // Define the points and solutions.
+            label16.Text = "";
+
+            DoubleBuffered = true;
+
+            // Define the points.
+            float dy = this.pictureBox_triangle_puzzle_solution.ClientSize.Height / 4;
+            float dx = (float)(dy / Math.Sqrt(3));
+            float top_x = this.pictureBox_triangle_puzzle_solution.ClientSize.Width / 2;
+            float top_y = -dy / 2;
+            Points = new PointF[]
+                {
+                    new PointF(top_x - dx, top_y + dy),
+                    new PointF(top_x + dx, top_y + dy),
+                    new PointF(top_x - 2 * dx, top_y + 2 * dy),
+                    new PointF(top_x - 0 * dx, top_y + 2 * dy),
+                    new PointF(top_x + 2 * dx, top_y + 2 * dy),
+                    new PointF(top_x - 3 * dx, top_y + 3 * dy),
+                    new PointF(top_x - 1 * dx, top_y + 3 * dy),
+                    new PointF(top_x + 1 * dx, top_y + 3 * dy),
+                    new PointF(top_x + 3 * dx, top_y + 3 * dy),
+                    new PointF(top_x - 2 * dx, top_y + 4 * dy),
+                    new PointF(top_x - 0 * dx, top_y + 4 * dy),
+                    new PointF(top_x + 2 * dx, top_y + 4 * dy),
+                };
+
+            // Define the solutions.
+            Solutions = new List<int[]>();
+            Solutions.Add(new int[] { 0, 2, 3 });
+            Solutions.Add(new int[] { 0, 3, 1 });
+            Solutions.Add(new int[] { 1, 3, 4 });
+            Solutions.Add(new int[] { 2, 5, 6 });
+            Solutions.Add(new int[] { 2, 6, 3 });
+            Solutions.Add(new int[] { 3, 6, 7 });
+            Solutions.Add(new int[] { 3, 7, 4 });
+            Solutions.Add(new int[] { 4, 7, 8 });
+            Solutions.Add(new int[] { 5, 9, 6 });
+            Solutions.Add(new int[] { 6, 9, 10 });
+            Solutions.Add(new int[] { 6, 10, 7 });
+            Solutions.Add(new int[] { 7, 10, 11 });
+            Solutions.Add(new int[] { 7, 11, 8 });
+
+            Solutions.Add(new int[] { 0, 5, 7 });
+            Solutions.Add(new int[] { 1, 6, 8 });
+            Solutions.Add(new int[] { 3, 9, 11 });
+            Solutions.Add(new int[] { 10, 2, 4 });
+
+            Solutions.Add(new int[] { 5, 10, 3 });
+            Solutions.Add(new int[] { 2, 7, 1 });
+            Solutions.Add(new int[] { 6, 11, 4 });
+            Solutions.Add(new int[] { 8, 3, 10 });
+            Solutions.Add(new int[] { 4, 6, 0 });
+            Solutions.Add(new int[] { 7, 9, 2 });
+
+            Solutions.Add(new int[] { 0, 9, 8 });
+            Solutions.Add(new int[] { 1, 5, 11 });
+        }
+
+        // Draw a solution.
+        private void DrawSolution(Graphics gr, int solution_num)
+        {
+            if (solution_num >= Solutions.Count)
+            {
+                return;
+            }
+
+            // Get the right color for this solution.
+            Pen the_pen;
+            if (solution_num < 13) the_pen = Pens.Red;
+            else if (solution_num < 17) the_pen = Pens.Green;
+            else if (solution_num < 23) the_pen = Pens.Purple;
+            else the_pen = Pens.Orange;
+
+            // Make a list of the points in this solution.
+            List<PointF> pts = new List<PointF>();
+            foreach (int i in Solutions[solution_num]) pts.Add(Points[i]);
+            gr.DrawPolygon(the_pen, pts.ToArray());
+        }
+
+        // Draw the circles and any triangles currently defined.
+        private void pictureBox_triangle_puzzle_solution_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the points.
+            const float radius = 5;
+            foreach (PointF pt in Points)
+            {
+                e.Graphics.FillEllipse(Brushes.Blue,
+                    pt.X - radius, pt.Y - radius,
+                    2 * radius, 2 * radius);
+            }
+
+            // Draw the current solution.
+            if (CurrentSolution < 0)
+            {
+                // Draw all solutions.
+                for (int i = 0; i < Solutions.Count; i++)
+                {
+                    DrawSolution(e.Graphics, i);
+                }
+                label16.Text = Solutions.Count.ToString();
+            }
+            else
+            {
+                // Draw the current solution.
+                DrawSolution(e.Graphics, CurrentSolution);
+                if (CurrentSolution < Solutions.Count)
+                {
+                    label16.Text = (CurrentSolution + 1).ToString();
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Start showing solutions.
+            // Start at the first solution.
+            CurrentSolution = 0;
+
+            // Start the timer.
+            timer_triangle_puzzle_solution.Enabled = true;
+
+            // Redraw.
+            Refresh();
+            this.pictureBox_triangle_puzzle_solution.Refresh();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Show all of the solutions.
+            CurrentSolution = -1;
+            timer_triangle_puzzle_solution.Enabled = false;
+            //btnShowSolutions.Enabled = true;
+            Refresh();
+            this.pictureBox_triangle_puzzle_solution.Refresh();
+        }
+
+        // Show the next solution.
+        private void timer_triangle_puzzle_solution_Tick(object sender, EventArgs e)
+        {
+            // Increment CurrentSolution. If the result is greater than the
+            // last solution's index, disable the timer.
+            CurrentSolution++;
+            timer_triangle_puzzle_solution.Enabled = (CurrentSolution < Solutions.Count);
+            this.Text = CurrentSolution.ToString() + " " + timer_triangle_puzzle_solution.Enabled.ToString();
+
+            // If we're done drawing, enable the button.
+            //btnShowSolutions.Enabled = (!timer_triangle_puzzle_solution.Enabled);
+
+            // Redraw.
+            Refresh();
+            this.pictureBox_triangle_puzzle_solution.Refresh();
+        }
+
+
+
+        //畫triangle_puzzle_solution SP
+
+
+
+        //畫find_squares_colored ST
+
+        void draw_find_squares_colored()
+        {
+            // Define the points and solutions.
+            DoubleBuffered = true;
+            int W = pictureBox_find_squares_colored.ClientSize.Width;
+            int H = pictureBox_find_squares_colored.ClientSize.Height;
+
+            // Define the points.
+            float dx = Math.Min(W, H) / 4;
+            float dy = dx;
+            float x0 = (W - 3 * dx) / 2;
+            float y0 = (H - 3 * dy) / 2;
+            Points2 = new PointF[]
+            {
+                new PointF(x0 + dx, y0),
+                new PointF(x0 + 2 * dx, y0),
+                new PointF(x0, y0 + dy),
+                new PointF(x0 + dx, y0 + dy),
+                new PointF(x0 + 2 * dx, y0 + dy),
+                new PointF(x0 + 3 * dx, y0 + dy),
+                new PointF(x0, y0 + 2 * dy),
+                new PointF(x0 + dx, y0 + 2 * dy),
+                new PointF(x0 + 2 * dx, y0 + 2 * dy),
+                new PointF(x0 + 3 * dx, y0 + 2 * dy),
+                new PointF(x0 + dx, y0 + 3 * dy),
+                new PointF(x0 + 2 * dx, y0 + 3 * dy),
+            };
+
+            // Define the solutions and side lengths.
+            Solutions2 = new List<int[]>();
+            SideLengths = new List<int>();
+
+            // Find the solutions.
+            FindSolutions();
+        }
+
+        // Find the solutions.
+        private void FindSolutions()
+        {
+            for (int i = 0; i < Points2.Length - 3; i++)
+            {
+                for (int j = i + 1; j < Points2.Length - 2; j++)
+                {
+                    for (int k = j + 1; k < Points2.Length - 1; k++)
+                    {
+                        for (int m = k + 1; m < Points2.Length; m++)
+                        {
+                            // See if these points make a square.
+                            int[] square_points = GetSquarePoints(i, j, k, m);
+                            if (square_points != null)
+                            {
+                                Solutions2.Add(square_points);
+
+                                // Save the side length.
+                                int side_length =
+                                    (int)PointFDistance(Points2[i], Points2[j]);
+                                if (!SideLengths.Contains(side_length))
+                                    SideLengths.Add(side_length);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // If these points make up a square, return an array holding
+        // them in an order that makes a square.
+        // If the points don't make up a square, return null.
+        private int[] GetSquarePoints(int i, int j, int k, int m)
+        {
+            // A small value for equality testing.
+            const double tiny = 0.001;
+
+            // Store all but the first index in an array.
+            int[] indexes = { j, k, m };
+
+            // Get the distances from point i to the others.
+            float[] distances =
+            {
+                PointFDistance(Points2[i], Points2[j]),
+                PointFDistance(Points2[i], Points2[k]),
+                PointFDistance(Points2[i], Points2[m]),
+            };
+
+            // Sort the distances and the corresponding indexes.
+            Array.Sort(distances, indexes);
+
+            // If the two smaller distances are not roughly
+            // the same (the side length), then this isn't a square.
+            if (Math.Abs(distances[0] - distances[1]) > tiny) return null;
+
+            // If the longer distance isn't roughly Sqr(2) times
+            // the side length (the diagonal length), then this isn't a square.
+            float diagonal_length = (float)(Math.Sqrt(2) * distances[0]);
+            if (Math.Abs(distances[2] - diagonal_length) > tiny) return null;
+
+            // See if the distance between the farther point and
+            // the two closer points is roughly the side length.
+            float distance1 = PointFDistance(Points2[indexes[2]], Points2[indexes[0]]);
+            if (Math.Abs(distances[0] - distance1) > tiny) return null;
+            float distance2 = PointFDistance(Points2[indexes[2]], Points2[indexes[1]]);
+            if (Math.Abs(distances[0] - distance2) > tiny) return null;
+
+            // It's a square!
+            return new int[] { i, indexes[0], indexes[2], indexes[1] };
+        }
+
+        // Return the distance between two PointFs.
+        private float PointFDistance(PointF point1, PointF point2)
+        {
+            float dx = point1.X - point2.X;
+            float dy = point1.Y - point2.Y;
+            return (float)Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        // Draw a solution.
+        private void DrawSolution2(Graphics gr, int solution_num)
+        {
+            if (solution_num >= Solutions2.Count)
+            {
+                return;
+            }
+
+            // Make a list of the points in this solution.
+            List<PointF> pts = new List<PointF>();
+            foreach (int i in Solutions2[solution_num])
+            {
+                pts.Add(Points2[i]);
+            }
+
+            // Get the side length.
+            int side_length = (int)PointFDistance(pts[0], pts[1]);
+            int index = SideLengths.IndexOf(side_length);
+
+            // Make an appropriately colored brush and pen.
+            Color fill_color = Color.FromArgb(64,
+                Colors2[index].R,
+                Colors2[index].G,
+                Colors2[index].B);
+            using (Brush brush = new SolidBrush(fill_color))
+            {
+                gr.FillPolygon(brush, pts.ToArray());
+            }
+
+            using (Pen pen = new Pen(Colors2[index], 0))
+            {
+                gr.DrawPolygon(pen, pts.ToArray());
+            }
+        }
+
+
+
+        // Show the next solution.
+        private void timer_find_squares_colored_Tick(object sender, EventArgs e)
+        {
+            // Increment CurrentSolution. If the result is greater than the
+            // last solution's index, disable the timer.
+            CurrentSolution2++;
+            timer_find_squares_colored.Enabled = (CurrentSolution2 < Solutions2.Count);
+
+            // If we're done drawing, enable the button.
+            if (!timer_find_squares_colored.Enabled)
+            {
+                button1.Enabled = true;
+                label17.Text = "";
+            }
+
+            // Redraw.
+            Refresh();
+        }
+
+        // Start showing solutions.
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Start at the first solution.
+            CurrentSolution2 = 0;
+
+            // Start the timer.
+            timer_find_squares_colored.Enabled = true;
+
+            // Redraw.
+            Refresh();
+        }
+
+        // Show all of the solutions.
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CurrentSolution2 = -1;
+            timer_find_squares_colored.Enabled = false;
+
+            // Display the number of solutions.
+            label17.Text = "square " + Solutions2.Count.ToString();
+
+            // Redraw.
+            Refresh();
+        }
+
+        // Draw the circles and any squares currently defined.
+        private void pictureBox_find_squares_colored_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the points.
+            const float radius = 5;
+            foreach (PointF pt in Points2)
+            {
+                e.Graphics.FillEllipse(Brushes.Blue,
+                    pt.X - radius, pt.Y - radius,
+                    2 * radius, 2 * radius);
+            }
+
+            // Draw the current solution.
+            if (CurrentSolution2 < 0)
+            {
+                // Draw all solutions.
+                for (int i = 0; i < Solutions2.Count; i++)
+                {
+                    DrawSolution2(e.Graphics, i);
+                }
+            }
+            else
+            {
+                // Draw the current solution.
+                DrawSolution2(e.Graphics, CurrentSolution2);
+                if (CurrentSolution2 < Solutions2.Count)
+                {
+                    label17.Text = "square " + (CurrentSolution2 + 1).ToString();
+                }
+            }
+        }
+
+
+
+
+        //畫find_squares_colored SP
+
+
 
 
 
