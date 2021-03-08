@@ -26,7 +26,7 @@ namespace vcs_FolderBrowserDialog
             folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                richTextBox1.Text += "取得目錄: " + folderBrowserDialog1.SelectedPath + "\n";
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
                 richTextBox1.Text += "RootFolder: " + folderBrowserDialog1.RootFolder + "\n";
                 richTextBox1.Text += "Container: " + folderBrowserDialog1.Container + "\n";
                 richTextBox1.Text += "Description: " + folderBrowserDialog1.Description + "\n";
@@ -36,20 +36,14 @@ namespace vcs_FolderBrowserDialog
 
             }
             else
-                richTextBox1.Text += "取得目錄失敗\n";
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-            }
+
 
         }
     }

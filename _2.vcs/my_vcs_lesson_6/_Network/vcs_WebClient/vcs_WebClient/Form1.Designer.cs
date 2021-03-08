@@ -39,6 +39,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(514, 310);
             this.webBrowser1.TabIndex = 2;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // pictureBox1
             // 
@@ -148,11 +150,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(228, 283);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(102, 50);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "下載NASA網頁的圖片";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1191, 670);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button7);
@@ -185,6 +198,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button5;
     }
 }
 

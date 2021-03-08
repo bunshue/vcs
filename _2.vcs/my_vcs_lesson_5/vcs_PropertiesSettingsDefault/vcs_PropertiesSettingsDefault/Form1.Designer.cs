@@ -33,7 +33,7 @@
             this.btnPickDirectory = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
-            this.fbdDirectory = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.cboExtension = new System.Windows.Forms.ComboBox();
             this.txtProcessing = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -61,7 +61,7 @@
             // 
             this.btnPickDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPickDirectory.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPickDirectory.Location = new System.Drawing.Point(814, 11);
+            this.btnPickDirectory.Location = new System.Drawing.Point(807, 14);
             this.btnPickDirectory.Name = "btnPickDirectory";
             this.btnPickDirectory.Size = new System.Drawing.Size(32, 22);
             this.btnPickDirectory.TabIndex = 16;
@@ -140,7 +140,7 @@
         internal System.Windows.Forms.Button btnPickDirectory;
         internal System.Windows.Forms.TextBox txtDirectory;
         internal System.Windows.Forms.Label Label1;
-        internal System.Windows.Forms.FolderBrowserDialog fbdDirectory;
+        internal System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ComboBox cboExtension;
         private System.Windows.Forms.TextBox txtProcessing;
     }

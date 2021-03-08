@@ -20,20 +20,48 @@ namespace vcs_PropertiesSettingsDefault
             InitializeComponent();
         }
 
+        // Restore parameters.
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.SetBounds(
+                Properties.Settings.Default.Left,
+                Properties.Settings.Default.Top,
+                Properties.Settings.Default.Width,
+                Properties.Settings.Default.Height);
+
+            txtDirectory.Text = Properties.Settings.Default.Directory;
+            if (txtDirectory.Text.Length == 0) txtDirectory.Text = Application.StartupPath;
+            cboExtension.Text = Properties.Settings.Default.NewExtension;
+        }
+
+        // Save parameters.
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Left = this.Left;
+            Properties.Settings.Default.Top = this.Top;
+            Properties.Settings.Default.Width = this.Width;
+            Properties.Settings.Default.Height = this.Height;
+
+            Properties.Settings.Default.Directory = txtDirectory.Text;
+            Properties.Settings.Default.NewExtension = cboExtension.Text;
+
+            Properties.Settings.Default.Save();
+        }
+
         // Let the user browse for the directory.
         private void btnPickDirectory_Click(object sender, EventArgs e)
         {
             try
             {
-                fbdDirectory.SelectedPath = txtDirectory.Text;
+                folderBrowserDialog1.SelectedPath = txtDirectory.Text;
             }
             catch
             {
             }
 
-            if (fbdDirectory.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                txtDirectory.Text = fbdDirectory.SelectedPath;
+                txtDirectory.Text = folderBrowserDialog1.SelectedPath;
             }
         }
 
@@ -83,7 +111,6 @@ namespace vcs_PropertiesSettingsDefault
             } // foreach file_info
 
             txtProcessing.Clear();
-            this.Text = "howto_2005_change_picture_types";
             this.Cursor = Cursors.Default;
         }
 
@@ -108,32 +135,5 @@ namespace vcs_PropertiesSettingsDefault
             return null;
         }
 
-        // Restore parameters.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.SetBounds(
-                Properties.Settings.Default.Left,
-                Properties.Settings.Default.Top,
-                Properties.Settings.Default.Width,
-                Properties.Settings.Default.Height);
-
-            txtDirectory.Text = Properties.Settings.Default.Directory;
-            if (txtDirectory.Text.Length == 0) txtDirectory.Text = Application.StartupPath;
-            cboExtension.Text = Properties.Settings.Default.NewExtension;
-        }
-
-        // Save parameters.
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.Left = this.Left;
-            Properties.Settings.Default.Top = this.Top;
-            Properties.Settings.Default.Width = this.Width;
-            Properties.Settings.Default.Height = this.Height;
-
-            Properties.Settings.Default.Directory = txtDirectory.Text;
-            Properties.Settings.Default.NewExtension = cboExtension.Text;
-
-            Properties.Settings.Default.Save();
-        }
     }
 }
