@@ -165,8 +165,13 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(W, H);
             pictureBox4.Size = new Size(W * 7 / 4, H);
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox3.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox4.BorderStyle = BorderStyle.Fixed3D;
 
             pictureBox_rotate_brush.Size = new Size(W * 2, H);
+            pictureBox_rotate_brush.BorderStyle = BorderStyle.Fixed3D;
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -182,6 +187,9 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox_filled_text.Size = new Size(W2, H2);
             pictureBox_image_string.Size = new Size(W2, H2);
             pictureBox_rainbow_text.Size = new Size(W2, H2);
+            pictureBox_filled_text.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_image_string.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_rainbow_text.BorderStyle = BorderStyle.Fixed3D;
 
             pictureBox_rotate_brush.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -196,6 +204,9 @@ namespace vcs_Draw9_Example6_vcsh_text
             pictureBox5.Size = new Size(720, 100);
             pictureBox6.Size = new Size(720, 100);
             pictureBox7.Size = new Size(720, 100);
+            pictureBox5.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox6.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox7.BorderStyle = BorderStyle.Fixed3D;
             pictureBox5.BackColor = Color.LightPink;
             pictureBox6.BackColor = Color.LightGreen;
             pictureBox7.BackColor = Color.LightBlue;

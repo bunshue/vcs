@@ -193,9 +193,54 @@ namespace _vcs_DrawTemplate
                 richTextBox1.Text += "無圖可存\n";
         }
 
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        int d = 0;
+
         private void button8_Click(object sender, EventArgs e)
         {
+            //新建圖檔, 初始化畫布
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
 
+            //richTextBox1.Text += "已新建圖檔\n";
+            //richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            button2.Enabled = true;
+            button3.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
+            button7.Enabled = true;
+            button9.Enabled = true;
+            int x_st = 200;
+            int y_st = 200;
+            int cx = 200;
+            int cy = 200;
+            int r = 200;
+            int H = r * 2;
+            //g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+            //g.DrawEllipse(Pens.Red, x_st, y_st, r, r);
+            int dx = (int)(r * cosd(d));
+            int dy = (int)(r * sind(d));
+
+            d += 20;
+
+            g.DrawLine(Pens.Red, cx, H - cy, cx + dx, (H - (cy + dy)));
         }
 
         private void button9_Click(object sender, EventArgs e)

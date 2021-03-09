@@ -142,6 +142,27 @@ namespace vcs_Draw9_Example9_vcsh
             pictureBox19.Size = new Size(W, H);
             pictureBox20.Size = new Size(W, H);
 
+            pictureBox_Chrysanthemum1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_Chrysanthemum2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_butterfly.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_polar.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_hex.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_tri.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_circle.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_star1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_star2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_star3.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_floodfill.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox12.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox13.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox14.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_triangle_puzzle_solution.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_find_squares_colored.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox18.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox19.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox20.BorderStyle = BorderStyle.Fixed3D;
+
             pictureBox_Chrysanthemum1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_Chrysanthemum2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_butterfly.Location = new Point(x_st + dx * 2, y_st + dy * 0);

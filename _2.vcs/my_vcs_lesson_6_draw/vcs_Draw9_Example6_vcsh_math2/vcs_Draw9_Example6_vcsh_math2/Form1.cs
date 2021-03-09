@@ -93,6 +93,21 @@ namespace vcs_Draw9_Example6_vcsh_math2
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
 
+            pictureBox_pi1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_pi2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox4.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_fractal.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox7.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox8.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox9.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox10.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox13.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox14.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox16.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox17.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox18.BorderStyle = BorderStyle.Fixed3D;
+
             pictureBox_pi1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_pi2.Location = new Point(x_st + dx * 1 + dx / 2, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0);

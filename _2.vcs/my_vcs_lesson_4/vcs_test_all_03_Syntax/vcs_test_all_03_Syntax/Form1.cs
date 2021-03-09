@@ -101,50 +101,59 @@ namespace vcs_test_all_03_Syntax
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button11.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+            button13.Location = new Point(x_st + dx * 6, y_st + dy * 1);
 
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button17.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            button20.Location = new Point(x_st + dx * 6, y_st + dy * 2);
 
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button25.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button26.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button27.Location = new Point(x_st + dx * 6, y_st + dy * 3);
 
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button28.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button32.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            button33.Location = new Point(x_st + dx * 5, y_st + dy * 4);
+            button34.Location = new Point(x_st + dx * 6, y_st + dy * 4);
 
-            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button35.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button37.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button39.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            button40.Location = new Point(x_st + dx * 5, y_st + dy * 5);
+            button41.Location = new Point(x_st + dx * 6, y_st + dy * 5);
 
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button34.Location = new Point(x_st + dx * 4, y_st + dy * 6);
-            button35.Location = new Point(x_st + dx * 5, y_st + dy * 6);
-
-            label11.Location = new Point(x_st + dx * 5, y_st + dy * 5 + 5);
-            textBox_hex.Location = new Point(x_st + dx * 5 + 32, y_st + dy * 5);
-            lb_dec.Location = new Point(x_st + dx * 5 + 148, y_st + dy * 5 + 5);
+            label11.Location = new Point(x_st + dx * 7, y_st + dy * 5 + 5);
+            textBox_hex.Location = new Point(x_st + dx * 7 + 32, y_st + dy * 5);
+            lb_dec.Location = new Point(x_st + dx * 7 + 148, y_st + dy * 5 + 5);
             lb_dec.Text = "";
 
-            groupBox2.Location = new Point(x_st + dx * 5 - 5, y_st + dy * 3 - 3);
+            groupBox2.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 9, y_st + dy * 0);
+            groupBox4.Location = new Point(x_st + dx * 9, y_st + dy * 3);
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 20);
 
             label1.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 7);
             label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 7);
@@ -158,11 +167,8 @@ namespace vcs_test_all_03_Syntax
             label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
             label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
 
-            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 20);
-
-
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            richTextBox1.Size = new Size(900, 700);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 7);
+            richTextBox1.Size = new Size(750, 700);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -1032,36 +1038,10 @@ namespace vcs_test_all_03_Syntax
 
         private void button35_Click(object sender, EventArgs e)
         {
-            if (textBox_hex.Text.Length <= 0)
-            {
-                richTextBox1.Text += "未輸入數字";
-            }
-            else
-            {
-                string input = textBox_hex.Text; ;
-                double output = 0;
-                byte value = 0;
-                for (int i = 0; i < input.Length; i++)
-                {
-                    if ((input[i] >= (Char)48 && input[i] <= (Char)57))
-                    {
-                        value = (byte)(input[i] - 48);
+        }
 
-                    }
-                    else if ((input[i] >= 'A') && (input[i] <= 'F'))
-                    {
-                        value = (byte)(input[i] - 'A' + 10);
-                    }
-                    else if ((input[i] >= 'a') && (input[i] <= 'f'))
-                    {
-                        value = (byte)(input[i] - 'a' + 10);
-                    }
-                    output = output * 16 + value;
-                    //MessageBox.Show("data : " + input[i] + " value : " + value);
-                }
-                richTextBox1.Text += "結果：" + output.ToString() + "\n";
-            }
-
+        private void button36_Click(object sender, EventArgs e)
+        {
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -1089,7 +1069,7 @@ namespace vcs_test_all_03_Syntax
 
         }
 
-        private void button36_Click(object sender, EventArgs e)
+        private void btn_check3_Click(object sender, EventArgs e)
         {
             if (txtInput.Text.Trim().Length == 10)//長度達十個字才驗證
             {
@@ -1107,8 +1087,8 @@ namespace vcs_test_all_03_Syntax
             {
                 MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
 
         #region checkID
         public static bool isIdentificationId(string arg_Identify)
@@ -1220,7 +1200,7 @@ namespace vcs_test_all_03_Syntax
         }
 
         // Invoke the method.
-        private void button39_Click(object sender, EventArgs e)
+        private void bt_call_by_name_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1355,9 +1335,65 @@ namespace vcs_test_all_03_Syntax
             double[] doubleArray = { 10.15, 20.27, 30.31, 40.44, 50.57 };
             double doubleArray_sum = add(doubleArray);
             richTextBox1.Text += "doubleArray_sum = " + doubleArray_sum.ToString() + "\n";
-
         }
         //函式多載(function overloading) SP
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            //轉換為十進位
+            if (textBox_hex.Text.Length <= 0)
+            {
+                richTextBox1.Text += "未輸入數字";
+            }
+            else
+            {
+                string input = textBox_hex.Text; ;
+                double output = 0;
+                byte value = 0;
+                for (int i = 0; i < input.Length; i++)
+                {
+                    if ((input[i] >= (Char)48 && input[i] <= (Char)57))
+                    {
+                        value = (byte)(input[i] - 48);
+
+                    }
+                    else if ((input[i] >= 'A') && (input[i] <= 'F'))
+                    {
+                        value = (byte)(input[i] - 'A' + 10);
+                    }
+                    else if ((input[i] >= 'a') && (input[i] <= 'f'))
+                    {
+                        value = (byte)(input[i] - 'a' + 10);
+                    }
+                    output = output * 16 + value;
+                    //MessageBox.Show("data : " + input[i] + " value : " + value);
+                }
+                richTextBox1.Text += "結果：" + output.ToString() + "\n";
+            }
+
+        }
+
+
     }
 }
 

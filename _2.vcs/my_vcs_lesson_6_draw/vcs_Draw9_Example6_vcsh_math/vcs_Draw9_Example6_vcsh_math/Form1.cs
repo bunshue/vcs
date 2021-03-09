@@ -106,6 +106,8 @@ namespace vcs_Draw9_Example6_vcsh_math
             pictureBox11.Size = new Size(W, H);
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
+            pictureBox14.Size = new Size(W, H);
+            pictureBox15.Size = new Size(W, H);
             pictureBox16.Size = new Size(W, H);
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
@@ -123,13 +125,31 @@ namespace vcs_Draw9_Example6_vcsh_math
             pictureBox10.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             pictureBox11.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             pictureBox12.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-
             pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-
+            pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox16.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox17.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             pictureBox18.Location = new Point(x_st + dx * 5, y_st + dy * 2);
 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox3.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox4.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox5.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox6.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox7.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox8.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox9.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox10.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox11.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox12.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox13.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox14.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox16.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox17.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox18.BorderStyle = BorderStyle.Fixed3D;
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);

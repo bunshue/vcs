@@ -136,6 +136,28 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox_pickover_popcorn2.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
 
+            pictureBox_sierpinski1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_sierpinski2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_sierpinski3.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox4.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_skyline.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_ngon_stars.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_dragon.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_dragon4.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox5.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox12.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox13.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox13.BackColor = Color.LightSalmon;
+            pictureBox14.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_snowflake.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_snowflake2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_fractal1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_fractal2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_pickover_popcorn1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_pickover_popcorn2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox22.BorderStyle = BorderStyle.Fixed3D;
+
             x_st = 10;
             y_st = 10;
             dx = W + 70;

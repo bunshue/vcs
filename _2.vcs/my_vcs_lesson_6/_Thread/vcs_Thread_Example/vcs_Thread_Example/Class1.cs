@@ -5,7 +5,7 @@ using System.Text;
 
 namespace vcs_Thread_Example
 {
-    class ChangeTime 
+    class ChangeTime
     {
 
         private Form1 form;
@@ -19,23 +19,20 @@ namespace vcs_Thread_Example
 
         public ChangeTime(Form1 form1)
         {
-            
-
             this.form = form1;
             //設定預設的起始時間
-            DateTime date =  DateTime.Now;
+            DateTime date = DateTime.Now;
             h = date.Hour;
             m = date.Minute;
             s = date.Second;
-
-            
-
         }
+
         //停止thread,在fomr Dispose時要把thread也設定關掉
         public void stop()
         {
             state = false;
         }
+
         public void run()
         {
             while (state)
@@ -66,6 +63,6 @@ namespace vcs_Thread_Example
                 System.Threading.Thread.Sleep(1000);//停一秒
             }
         }
-
     }
 }
+

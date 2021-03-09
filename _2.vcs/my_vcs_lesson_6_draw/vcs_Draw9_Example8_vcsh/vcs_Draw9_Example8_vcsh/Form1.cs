@@ -313,6 +313,31 @@ namespace vcs_Draw9_Example8_vcsh
             pictureBox_pie.Size = new Size(W, H);
             pictureBox_rainbow.Size = new Size(W, H * 2 / 3);
 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox3.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox4.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox5.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_histogram.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_age.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_color_wheel1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_color_wheel2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox10.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_random_pixel_image.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_arrow.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_hilbert_curve.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_sierpinski_curve.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox15.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox16.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox17.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox18.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox19.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_one_self_avoiding_walk.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox21.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox22.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_pie.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox_rainbow.BorderStyle = BorderStyle.Fixed3D;
+
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
