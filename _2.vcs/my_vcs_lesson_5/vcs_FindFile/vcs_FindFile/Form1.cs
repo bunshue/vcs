@@ -25,9 +25,13 @@ namespace vcs_FindFile
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //在Form1_Load時把資料讀出來
+            txtDirectory.Text = Properties.Settings.Default.Directory;
+
             //檢查文字檔所在的資料夾
             //string Path = Application.StartupPath + "\\data";
-            string Path = @"C:\______test_files\__RW\_txt\vcs_FindFile_data";
+            //string Path = @"C:\______test_files\__RW\_txt\vcs_FindFile_data";
+            string Path = txtDirectory.Text;
             if (Directory.Exists(Path) == false)     //確認資料夾是否存在
             {
                 //Directory.CreateDirectory(Path);
@@ -40,6 +44,13 @@ namespace vcs_FindFile
 
             find_files();
             load_data();
+        }
+
+        //在Form1_FormClosing時把資料存起來
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Directory = txtDirectory.Text;
+            Properties.Settings.Default.Save();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -75,7 +86,9 @@ namespace vcs_FindFile
                 foreach (string filename in Directory.GetFiles(dir_name, pattern, search_option))
                 {
                     if (!files.Contains(filename))
+                    {
                         files.Add(filename);
+                    }
                 }
             }
 
@@ -90,7 +103,8 @@ namespace vcs_FindFile
         {
             //撈出資料夾內特定類型的檔案
             //string searchDirectory = Application.StartupPath + "\\data";
-            string searchDirectory = @"C:\______test_files\__RW\_txt\vcs_FindFile_data";
+            //string searchDirectory = @"C:\______test_files\__RW\_txt\vcs_FindFile_data";
+            string searchDirectory = txtDirectory.Text;
             string searchPattern = "*.txt";
             bool recurrsive = false;
 
@@ -126,12 +140,12 @@ namespace vcs_FindFile
 
                 if (File.Exists(filename) == false)
                 {
-                    richTextBox1.Text += "poetry檔案 " + filename + " 不存在，離開。\n";
+                    richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
                     //return false;
                 }
                 else
                 {
-                    richTextBox1.Text += "poetry檔案 " + filename + " 存在, 開啟，並讀入文字資料\n";
+                    richTextBox1.Text += "檔案 " + filename + " 存在, 開啟，並讀入文字資料\n";
 
                     string line;
                     StreamReader sr = new StreamReader(filename, Encoding.Default);
@@ -165,6 +179,9 @@ namespace vcs_FindFile
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (textBox1.Text.Length < 2)
+                return;
+
             richTextBox2.Clear();
             int i;
             string pattern = textBox1.Text;
@@ -175,11 +192,31 @@ namespace vcs_FindFile
                 if (all_strings[i].Contains(pattern) == true)
                 {
                     richTextBox2.Text += "符合條件\t" + all_strings[i] + "\n";
-
-
                 }
             }
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (txtDirectory.Text == "")
+            {
+                folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
+            }
+            else
+            {
+                folderBrowserDialog1.SelectedPath = txtDirectory.Text;  //預設開啟的路徑
+            }
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                txtDirectory.Text = folderBrowserDialog1.SelectedPath;
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
         }
     }
 }
+

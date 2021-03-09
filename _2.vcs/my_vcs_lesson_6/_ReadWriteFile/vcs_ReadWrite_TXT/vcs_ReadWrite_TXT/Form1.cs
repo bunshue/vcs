@@ -22,7 +22,7 @@ namespace vcs_ReadWrite_TXT
         {
             String filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.GetEncoding("big5"));   //指名編碼格式
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
 
             richTextBox2.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
             richTextBox2.Text += "content : \n";
@@ -61,11 +61,11 @@ namespace vcs_ReadWrite_TXT
             string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
             //法一
             // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
-            //richTextBox1.Text = System.IO.File.ReadAllText(filename, System.Text.Encoding.Default);
+            //richTextBox1.Text = System.IO.File.ReadAllText(filename, Encoding.Default);
 
             //法二
             //讀取檔案
-            string y = File.ReadAllText(filename, System.Text.Encoding.Default);
+            string y = File.ReadAllText(filename, Encoding.Default);
             richTextBox1.Text += "檔案內容 : " + y + "\n";
             richTextBox1.Text += "長度：" + y.Length.ToString() + "\n";
         }
@@ -199,7 +199,7 @@ namespace vcs_ReadWrite_TXT
             //都はるみの三度笠
             byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
 
-            string str = System.Text.Encoding.ASCII.GetString(data);
+            string str = Encoding.ASCII.GetString(data);
             richTextBox1.Text += "str = " + str + "\n";
             string filename2 = str + ".txt";
 
@@ -214,7 +214,6 @@ namespace vcs_ReadWrite_TXT
             File.WriteAllBytes(filename, aaaaa);
             //File.WriteAllBytes(filename2, aaaaa);
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
-
         }
 
         private void button10_Click(object sender, EventArgs e)

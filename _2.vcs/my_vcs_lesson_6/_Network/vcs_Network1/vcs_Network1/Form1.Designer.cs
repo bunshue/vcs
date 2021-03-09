@@ -143,6 +143,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(217, 42);
             this.button8.TabIndex = 8;
+            this.button8.Text = "找出本機IP";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

@@ -23,8 +23,6 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //在Form1_Load時把資料讀出來
-            txtDirectory.Text = Properties.Settings.Default.Directory;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,40 +52,13 @@ namespace WindowsFormsApplication1
             //Person p1 = new Person();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (txtDirectory.Text == "")
-            {
-                folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
-            }
-            else
-            {
-                folderBrowserDialog1.SelectedPath = txtDirectory.Text;  //預設開啟的路徑
-            }
 
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
-                txtDirectory.Text = folderBrowserDialog1.SelectedPath;
-            }
-            else
-            {
-                richTextBox1.Text = "未選取資料夾\n";
-            }
-
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "dir = " + Properties.Settings.Default.Directory + "\n";
+
         }
 
-        //在Form1_FormClosing時把資料存起來
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.Directory = txtDirectory.Text;
-            Properties.Settings.Default.Save();
-        }
 
     }
 }

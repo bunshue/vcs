@@ -237,7 +237,25 @@ namespace vcs_Network1
 
         private void button8_Click(object sender, EventArgs e)
         {
+            string my_ip = MyIP();
+            richTextBox1.Text += "My IP : " + my_ip + "\n";
+        }
 
+        //找出本機IP
+        private string MyIP()
+        {
+            string ipv4_addr = "";
+            string hn = Dns.GetHostName();                          //取得本機電腦名稱
+            IPAddress[] ip = Dns.GetHostEntry(hn).AddressList;      //取得本機IP陣列(可能有多個)
+            foreach (IPAddress it in ip)                            //列舉各個IP
+            {
+                richTextBox1.Text += it.ToString() + "\t" + it.AddressFamily + "\n";  //顯示所有IP
+                if (it.AddressFamily == AddressFamily.InterNetwork) //如果是IPv4格式
+                {
+                    ipv4_addr = it.ToString();
+                }
+            }
+            return ipv4_addr;
         }
 
         private void button9_Click(object sender, EventArgs e)

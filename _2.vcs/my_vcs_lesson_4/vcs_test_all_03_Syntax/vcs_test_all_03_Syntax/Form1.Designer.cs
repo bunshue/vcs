@@ -426,7 +426,9 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(180, 40);
             this.button29.TabIndex = 28;
+            this.button29.Text = "切割字串範例";
             this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // button30
             // 
@@ -842,7 +844,7 @@
             this.lb_symbols_1.Location = new System.Drawing.Point(163, 364);
             this.lb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_1.Name = "lb_symbols_1";
-            this.lb_symbols_1.Size = new System.Drawing.Size(357, 19);
+            this.lb_symbols_1.Size = new System.Drawing.Size(373, 19);
             this.lb_symbols_1.TabIndex = 65;
             this.lb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             // 

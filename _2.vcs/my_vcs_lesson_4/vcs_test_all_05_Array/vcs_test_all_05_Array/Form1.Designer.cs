@@ -257,12 +257,12 @@
             // 
             // button17
             // 
-            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button17.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.Location = new System.Drawing.Point(234, 187);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 42);
             this.button17.TabIndex = 18;
-            this.button17.Text = "xxx";
+            this.button17.Text = "一維顏色陣列顯示名稱";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

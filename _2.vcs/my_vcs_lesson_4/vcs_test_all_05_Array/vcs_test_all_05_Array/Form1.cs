@@ -675,7 +675,12 @@ namespace vcs_test_all_05_Array
 
         private void button17_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "一維顏色陣列顯示名稱\n";
+            Color[] colorSet = { Color.Red, Color.Blue, Color.Green, Color.Gray };
+            for (int i = 0; i < 4; i++)
+            {
+                richTextBox1.Text += colorSet[i].Name.ToString() + "\n";
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)

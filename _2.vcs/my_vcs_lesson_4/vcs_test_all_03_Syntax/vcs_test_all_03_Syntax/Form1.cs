@@ -1390,10 +1390,25 @@ namespace vcs_test_all_03_Syntax
                 }
                 richTextBox1.Text += "結果：" + output.ToString() + "\n";
             }
-
         }
 
+        private void button29_Click(object sender, EventArgs e)
+        {
+            //切割字串範例
+            string[] word_S = { };
+            char[] split = { '-', ' ', ',', ':', '/' };     //依各種符號來切割字串
 
+            string compile_time = "3/3/2021 01:35 下午";
+            richTextBox1.Text += "原字串\t" + compile_time + "\n";
+            richTextBox1.Text += "切割字串 :\n";
+
+            word_S = compile_time.Split(split);     //切割字串
+
+            foreach (string str in word_S)
+            {
+                richTextBox1.Text += str + "\n";
+            }
+        }
     }
 }
 

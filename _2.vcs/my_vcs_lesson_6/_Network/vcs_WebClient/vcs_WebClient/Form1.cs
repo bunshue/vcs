@@ -565,8 +565,35 @@ namespace vcs_WebClient
                 return null;
             }
         }
+
         //下載NASA網頁的圖片 SP
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+            //string remoteUri = "https://www.google.com.tw/";
+            string remoteUri = "http://antwrp.gsfc.nasa.gov/apod/";
+
+            // Create a new WebClient instance.
+            WebClient myWebClient = new WebClient();
+            // Download home page data.
+            Console.WriteLine("Downloading " + remoteUri);
+            // Download the Web resource and save it into a data buffer.
+
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            byte[] myDataBuffer = myWebClient.DownloadData(remoteUri);
+
+            // Display the downloaded data.
+            string download = Encoding.ASCII.GetString(myDataBuffer);
+            //Console.WriteLine(download);
+
+            //Console.WriteLine("Download successful.");
+
+            richTextBox1.Text += download + "\n";
+
+        }
 
 
 
