@@ -26,27 +26,25 @@ namespace vcs_programming
             //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
 
             /* 第 10 章 */
-            //Application.Run(new testPictures());
-            //Application.Run(new memory());
+            //Application.Run(new memory());      //配對遊戲
 
             /* 第 12 章 */
             //Application.Run(new jaggedArray());     //有點多
 
             /* 第 14 章 */
-            //Application.Run(new ScoreFile());
+            //Application.Run(new ScoreFile());   //看存成二進位檔 與 讀出二進位檔
 
             /* 第 15 章 */
-            //Application.Run(new ListBoxDemo());
             //Application.Run(new SimpleEditor());
 
             /* 第 16 章 */
-            Application.Run(new keyevent());
+            //Application.Run(new keyevent());
 
             /* 第 18 章 */
-            //Application.Run(new Form1());
+            //Application.Run(new Form1());           //有使用到 MyClass.cs
             //Application.Run(new DateForm());
             //Application.Run(new PersonForm());
-            //Application.Run(new MyForm());
+            Application.Run(new MyForm());
 
             /* 第 19 章 */
             //Application.Run(new Ch19Test());

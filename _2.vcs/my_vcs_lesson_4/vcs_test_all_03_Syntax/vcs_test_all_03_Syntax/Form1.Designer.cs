@@ -338,7 +338,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(180, 40);
             this.button19.TabIndex = 20;
-            this.button19.Text = "byte[] 轉 char[]";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -415,7 +414,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(180, 40);
             this.button28.TabIndex = 29;
-            this.button28.Text = "char[] 轉 二進位碼的文字型態";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -426,7 +424,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(180, 40);
             this.button29.TabIndex = 28;
-            this.button29.Text = "切割字串範例";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -530,11 +527,12 @@
             // 
             // button36
             // 
-            this.button36.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button36.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button36.Location = new System.Drawing.Point(201, 236);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(180, 40);
             this.button36.TabIndex = 59;
+            this.button36.Text = "GetString 和 GetBytes 2";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -706,11 +704,12 @@
             // 
             // button35
             // 
-            this.button35.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button35.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button35.Location = new System.Drawing.Point(12, 238);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(180, 40);
             this.button35.TabIndex = 62;
+            this.button35.Text = "GetString 和 GetBytes 1";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -844,7 +843,7 @@
             this.lb_symbols_1.Location = new System.Drawing.Point(163, 364);
             this.lb_symbols_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_symbols_1.Name = "lb_symbols_1";
-            this.lb_symbols_1.Size = new System.Drawing.Size(373, 19);
+            this.lb_symbols_1.Size = new System.Drawing.Size(357, 19);
             this.lb_symbols_1.TabIndex = 65;
             this.lb_symbols_1.Text = "Ѡ♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
             // 

@@ -57,6 +57,8 @@
             this.lblDegrees = new System.Windows.Forms.Label();
             this.hbarDegrees = new System.Windows.Forms.HScrollBar();
             this.timer_compass = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_brown = new System.Windows.Forms.PictureBox();
+            this.timer_brown = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -71,6 +73,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -298,11 +301,27 @@
             this.timer_compass.Interval = 250;
             this.timer_compass.Tick += new System.EventHandler(this.timer_compass_Tick);
             // 
+            // pictureBox_brown
+            // 
+            this.pictureBox_brown.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_brown.Location = new System.Drawing.Point(479, 654);
+            this.pictureBox_brown.Name = "pictureBox_brown";
+            this.pictureBox_brown.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox_brown.TabIndex = 67;
+            this.pictureBox_brown.TabStop = false;
+            // 
+            // timer_brown
+            // 
+            this.timer_brown.Enabled = true;
+            this.timer_brown.Interval = 1000;
+            this.timer_brown.Tick += new System.EventHandler(this.timer_brown_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.pictureBox_brown);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_word);
             this.Controls.Add(this.pictureBox_progressbar);
@@ -335,6 +354,7 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -369,6 +389,8 @@
         private System.Windows.Forms.Label lblDegrees;
         private System.Windows.Forms.HScrollBar hbarDegrees;
         private System.Windows.Forms.Timer timer_compass;
+        private System.Windows.Forms.PictureBox pictureBox_brown;
+        private System.Windows.Forms.Timer timer_brown;
     }
 }
 

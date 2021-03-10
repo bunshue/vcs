@@ -120,87 +120,20 @@ namespace vcs_test_all_02_String
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string str;
-            //char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
-            str = "中間路線";
-            richTextBox1.Text += "\n原字串:\t" + str + "\n";
-            byte[] byteData = Encoding.Default.GetBytes(str);
-            richTextBox1.Text += "使用GetBytes轉成拜列\t";
-            foreach (byte b in byteData)
+            //分割字串範例
+            string[] word_S = { };
+            char[] split = { '-', ' ', ',', ':', '/' };     //依各種符號來切割字串
+
+            string compile_time = "3/3/2021 01:35 下午";
+            richTextBox1.Text += "原字串\t" + compile_time + "\n";
+            richTextBox1.Text += "切割字串 :\n";
+
+            word_S = compile_time.Split(split);     //切割字串
+
+            foreach (string str in word_S)
             {
-                richTextBox1.Text += b.ToString("X2") + " ";
+                richTextBox1.Text += str + "\n";
             }
-            richTextBox1.Text += "\n";
-
-            string nn = string.Empty;
-            nn = Encoding.Default.GetString(byteData);
-            richTextBox1.Text += "將此拜列使用GetString轉成字串, 新字串:\t" + nn + "\n";
-
-            byteData[1] = (byte)(byteData[1] + 2);
-            nn = Encoding.Default.GetString(byteData);
-            richTextBox1.Text += "修改拜列, 將此拜列使用GetString轉成字串, 新字串:\t" + nn + "\n";
-
-            str = "ABCDE";
-            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
-            byte[] stringConvByte = Encoding.Default.GetBytes(str);
-            // Encoding.GetString方法，將 Byte 序列 轉為 String
-            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
-
-            int i;
-            richTextBox1.Text += "\n原字串:\t" + str + "\t長度:\t" + str.Length.ToString() + "\t內容:\t";
-            for (i = 0; i < str.Length; i++)
-            {
-                richTextBox1.Text += str[i] + " ";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "轉成拜列\t長度:\t" + stringConvByte.Length.ToString() + "\t內容:\t";
-            for (i = 0; i < stringConvByte.Length; i++)
-            {
-                richTextBox1.Text += stringConvByte[i].ToString("X2") + " ";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "轉成字串\t長度:\t" + byteConvStrig.Length.ToString() + "\n";
-
-            byte[] byteArray = new byte[5] { 0x41, 0x42, 0x43, 0x44, 0x45 };
-
-            str = System.Text.Encoding.Default.GetString(byteArray);
-
-            richTextBox1.Text += "使用GetString將拜列轉成字串:\t" + str + "\n";
-
-            str = "this is a lion-mouse";
-            richTextBox1.Text += "\n原字串:\t" + str + "\n";
-
-            byteArray = System.Text.Encoding.Default.GetBytes(str);
-            richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
-            for (i = 0; i < byteArray.Length; i++)
-            {
-                richTextBox1.Text += (char)byteArray[i] + " ";  //多了(char)變成%c
-            }
-            richTextBox1.Text += "\n";
-
-            //Byte型態的陣列轉換為字串
-            int bytes = 0;
-            Byte[] byte_array = new Byte[256];
-            String new_string = "";
-            byte_array[0] = (byte)'A';
-            byte_array[1] = (byte)'B';
-            byte_array[2] = (byte)'C';
-            bytes = 3;
-            // 將Byte型態的陣列轉換為字串
-            new_string = Encoding.ASCII.GetString(byte_array, 0, bytes);
-            richTextBox1.Text += "使用GetString將拜列轉成字串\t" + new_string + "\n";
-
-            //字串轉換為Byte型態的陣列
-            str = "this is a lion-mouse";
-            Byte[] byte_array2 = Encoding.ASCII.GetBytes(str);
-            richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
-            foreach (char c in byte_array2)
-            {
-                richTextBox1.Text += c.ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
         }
 
         //字串的 Split & Join
@@ -222,6 +155,11 @@ namespace vcs_test_all_02_String
             // Rejoin them.
             string result = String.Join("*", values);
             richTextBox1.Text += "用星號連結組合起來 : " + result + "\n";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
 

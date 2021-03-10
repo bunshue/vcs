@@ -28,6 +28,7 @@ namespace vcs_TCPIP
         int try_count = 0;
         public void TCP_Connect()
         {
+            richTextBox1.Text += "TCP 連線...\n";
             tcpClient = new TcpClient();
             IAsyncResult result = tcpClient.BeginConnect("192.168.10.100", 6300, null, null);
             result.AsyncWaitHandle.WaitOne(3000, true);
@@ -36,7 +37,7 @@ namespace vcs_TCPIP
             {
                 if (try_count < 3)
                 {
-                    MessageBox.Show("Ethernet Connection Error, Retry " + try_count.ToString());
+                    richTextBox1.Text += "TCP 連線失敗\t第 " + try_count.ToString() + " 次\n";
                     try_count++;
                     tcpClient.Close();
                     TCP_Connect();
@@ -44,12 +45,10 @@ namespace vcs_TCPIP
                 else
                 {
                     tcpClient.Close();
-                    MessageBox.Show("Missing Connection");
+                    richTextBox1.Text += "TCP 連線失敗\n";
                 }
             }
-
-
         }
-
     }
 }
+

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading;
+using System.Threading;   //匯入多執行緒功能函數
 
 namespace vcs_Thread3
 {
@@ -22,6 +22,8 @@ namespace vcs_Thread3
         // Make and start a new counter object.
         private int thread_num = 0;
 
+        Thread Th;                                  //宣告監聽用執行續
+
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace vcs_Thread3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Control.CheckForIllegalCrossThreadCalls = false; //忽略跨執行緒操作的錯誤
         }
 
         //第1種Thread使用
@@ -138,7 +140,77 @@ namespace vcs_Thread3
             thread.Start();
         }
 
+        //監聽副程式
+        int i;
+        private void Listen()
+        {
+            while (true)
+            {
+                i++;
+                this.Text = i.ToString();
 
+                //一秒執行一次
+                Thread.Sleep(1000); //停一秒
+            }
+        }
+
+        //關閉監聽執行續(如果有的話)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Th.Abort(); //關閉監聽執行續
+                //U.Close();  //關閉監聽器
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行
+            }
+        }
+
+        int cnt = 0;
+        private void bt_th1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "啟動Thread\n";
+            Th = new Thread(Listen); //建立監聽網路訊息的新執行緒
+            //Th.IsBackground = true;  //設定為背景執行緒
+            Th.Name = "my_thread" + cnt.ToString();
+            cnt++;
+
+            Th.Start();             //啟動監聽執行緒
+        }
+
+        private void bt_th2_Click(object sender, EventArgs e)
+        {
+            if (Th != null)
+            {
+                richTextBox1.Text += "關閉Thread\n";
+                Th.Abort();
+            }
+            else
+            {
+                richTextBox1.Text += "無Thread\n";
+            }
+        }
+
+        private void bt_th3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Info\n";
+            if (Th == null)
+            {
+                richTextBox1.Text += "XXXXXX\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Th\t" + Th.ToString() + "\n";
+                richTextBox1.Text += "ThreadState\t" + Th.ThreadState.ToString() + "\n";
+
+                richTextBox1.Text += "Name\t" + Th.Name + "\n";
+                richTextBox1.Text += "IsAlive\t" + Th.IsAlive.ToString() + "\n";
+                if (Th.IsAlive == true)
+                    richTextBox1.Text += "IsBackground\t" + Th.IsBackground.ToString() + "\n";
+            }
+        }
     }
 
     // This class's Run method displays a count in the Output window.
@@ -285,7 +357,5 @@ namespace vcs_Thread3
             }
         }
     }
-
-
-
 }
+

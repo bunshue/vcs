@@ -173,7 +173,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(217, 42);
             this.button9.TabIndex = 9;
-            this.button9.Text = "GetString 和 GetBytes";
+            this.button9.Text = "分割字串範例";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -467,6 +467,7 @@
             this.bt_clear.TabIndex = 46;
             this.bt_clear.Text = "clear";
             this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form1
             // 

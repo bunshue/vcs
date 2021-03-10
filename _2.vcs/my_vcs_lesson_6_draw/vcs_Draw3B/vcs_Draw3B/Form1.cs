@@ -106,6 +106,8 @@ namespace vcs_Draw3B
             pictureBox_polygon.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 9, y_st + dy * 0);
 
+            pictureBox_brown.Size = new Size(250, 250);
+            pictureBox_brown.Location = new Point(x_st + dx * 0, y_st + dy * 16);
 
             x_st = 1810;
             y_st = 80;
@@ -1146,5 +1148,48 @@ namespace vcs_Draw3B
 
         //指南針SP
 
+
+        //布朗運動 ST
+
+        void draw_brown_motion()
+        {
+            int N = 100;
+            Point[] pt;
+
+            int W = pictureBox_brown.ClientSize.Width;
+            int H = pictureBox_brown.ClientSize.Height;
+            int i;
+
+            pt = new Point[N];    //一維陣列內有N個Point
+
+            Random rand = new Random();
+            for (i = 0; i < N; i++)
+            {
+                pt[i] = new Point(rand.Next(W), rand.Next(H));
+
+            }
+
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox_brown.Width, pictureBox_brown.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox_brown.Image = bitmap1;
+
+
+            g.DrawLines(Pens.Red, pt);
+
+            int r = 5;
+            for (i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Red, pt[i].X - r, pt[i].Y - r, r * 2, r * 2);
+            }
+        }
+
+        private void timer_brown_Tick(object sender, EventArgs e)
+        {
+            draw_brown_motion();
+        }
+
+        //布朗運動 SP
     }
 }

@@ -32,7 +32,7 @@ namespace vcs_test_all_03_Syntax
             //For 驗證身份證字號
             txtInput.MaxLength = 10;//設定字元數最大值
             //txtInput.Focus();//程式啟動就把焦點移到txtInput
-            this.AcceptButton = button36;//按下enter就觸發button click事件
+            this.AcceptButton = button36;//按下enter就觸發button click事件     //要改??
 
             //顯示特殊符號
             lb_symbols_2.Text = "\u0460♪♫π∑∂€£∫⊗≥≅∡∞√∜⇒∊∫ℵ↝ℙ‡ЖЊæ÷";
@@ -44,8 +44,6 @@ namespace vcs_test_all_03_Syntax
                 txt += (char)i;
             }
             lb_symbols_3.Text = txt;
-
-
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -173,6 +171,11 @@ namespace vcs_test_all_03_Syntax
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             //用法:  string.Format( “{編號0} {編號1}…{編號N}”, 變數0, 變數1, … 變數N );
@@ -250,7 +253,23 @@ namespace vcs_test_all_03_Syntax
             {
                 MessageBox.Show("取得字串：" + name);
             }
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "搜尋所有控件 符合種類 符合條件 的 做處理\n";
+            foreach (Control ctl in Controls)
+            {
+                richTextBox1.Text += "找到控件\t" + ctl.Name;
+
+                if ((ctl is Button) && (ctl == button2))
+                {
+                    richTextBox1.Text += "\t是button2, 清除其文字\n";
+                    ctl.Text = "";
+                }
+                else
+                    richTextBox1.Text += "\n";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -268,7 +287,6 @@ namespace vcs_test_all_03_Syntax
             {
                 richTextBox1.Text += ss.ToString() + "\n";
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -350,9 +368,6 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += str + " ";
             }
             richTextBox1.Text += "\n";
-
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -361,7 +376,6 @@ namespace vcs_test_all_03_Syntax
             int value2 = 0x12345;
             MessageBox.Show("十進位：" + value1 + "  十六進位： 0x" + Convert.ToString(value1, 16));
             MessageBox.Show("十六進位： 0x" + Convert.ToString(value2, 16) + "  十進位：" + value2);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -380,8 +394,6 @@ namespace vcs_test_all_03_Syntax
             MessageBox.Show("11Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             MessageBox.Show("12Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             MessageBox.Show("13Question圖示", "圖示設定", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -409,7 +421,6 @@ namespace vcs_test_all_03_Syntax
             }
             else
                 richTextBox1.Text += "不是一個空字串，內容: " + string_b + "\n";
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -484,7 +495,6 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += "\t" + str;
             }
             richTextBox1.Text += "\n";
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -502,24 +512,6 @@ namespace vcs_test_all_03_Syntax
         private string GetMethodName()
         {
             return new StackTrace(1).GetFrame(0).GetMethod().Name;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "搜尋所有控件 符合種類 符合條件 的 做處理\n";
-            foreach (Control ctl in Controls)
-            {
-                richTextBox1.Text += "找到控件\t" + ctl.Name;
-
-                if ((ctl is Button) && (ctl == button2))
-                {
-                    richTextBox1.Text += "\t是button2, 清除其文字\n";
-                    ctl.Text = "";
-                }
-                else
-                    richTextBox1.Text += "\n";
-            }
-
         }
 
         struct circle
@@ -542,7 +534,6 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "輪胎半徑：" + wheel1.circle1.cRadius + "\n";
             richTextBox1.Text += "輪胎顏色：" + wheel1.circle1.cColor + "\n";
             richTextBox1.Text += "輪胎用途：" + wheel1.usage + "\n";
-
         }
 
         private class myList
@@ -551,15 +542,12 @@ namespace vcs_test_all_03_Syntax
             public string Name { get; set; }
             public string Level { get; set; }
         }
-
         List<myList> myLists = new List<myList>();
-
         private void button13_Click(object sender, EventArgs e)
         {
             myLists.Add(new myList { ID = "A001", Name = "David", Level = "A" });
             myLists.Add(new myList { ID = "A002", Name = "John" });
             myLists.Add(new myList { ID = "A003", Name = "Tom", Level = "A" });
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -567,91 +555,192 @@ namespace vcs_test_all_03_Syntax
             foreach (var showlist in myLists)
             {
                 richTextBox1.Text += "ID : " + showlist.ID + "\tName : " + showlist.Name + "\tLevel : " + showlist.Level + "\n";
-                //Console.WriteLine(showlist.ID + "->" + showlist.Name + "->" + showlist.Level); //column[0] & column[1]
             }
         }
 
-        private void button31_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
         {
-            int a, n, r;
+            richTextBox1.Text += "Dictionary字典用法1\n";
+            //Dictionary的用法
+            Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
+            { "mouse", "Mickey" },
+            { "bull", "Benny" },
+            { "tiger", "Eric" },
+            { "rabbit", "Cony" }
+            };
+            string animal_type;
+            string animal_name;
 
-            a = 12345;
-
-            string[] m = {"0", "1", "2", "3",
-                           "4", "5", "6", "7",
-                           "8", "9", "A", "B",
-                           "C", "D", "E", "F"};
-            string s = "";
-
-            richTextBox1.Text = "10進位數字\t" + a.ToString() + "\n";
-
-            n = 2;
-            s = "";
-            for (; a > 0; a = a / n)
+            animal_type = "mouse";
+            if (AnimalData.ContainsKey(animal_type))
             {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
             }
+            else
+                richTextBox1.Text += "no matched animal name\n";
 
-            richTextBox1.Text += "2進位\t" + s + "\n";
-
-            a = 12345;
-            n = 8;
-            s = "";
-            for (; a > 0; a = a / n)
+            animal_type = "bull";
+            if (AnimalData.ContainsKey(animal_type))
             {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
             }
+            else
+                richTextBox1.Text += "no matched animal name\n";
 
-            richTextBox1.Text += "8進位\t" + s + "\n";
-
-            a = 12345;
-            n = 16;
-            s = "";
-            for (; a > 0; a = a / n)
+            animal_type = "tiger";
+            if (AnimalData.ContainsKey(animal_type))
             {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
             }
+            else
+                richTextBox1.Text += "no matched animal name\n";
 
-            richTextBox1.Text += "16進位\t" + s + "\n";
+            animal_type = "rabbit";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
+
+            animal_type = "dragon";
+            if (AnimalData.ContainsKey(animal_type))
+            {
+                animal_name = AnimalData[animal_type];
+                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+            }
+            else
+                richTextBox1.Text += "no matched animal name\n";
         }
 
-        //傳值呼叫 vs 傳址呼叫
-        private void button34_Click(object sender, EventArgs e)
+        private void button16_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "傳值呼叫 vs 傳址呼叫\n";
+            richTextBox1.Text += "測試Dictionary與Class語法\n";
 
-            int a = 10;
+            // Make a dictionary.
+            DictionaryWithDefault<string, string> dict = new DictionaryWithDefault<string, string>("<Missing>");
+
+            // Add some items to the dictionary.
+            dict["Ann"] = "Archer";
+            dict["Chuck"] = "Cider";
+            dict["Dora"] = "Deevers";
+
+            // Display some values.
+            richTextBox1.Text += "Ann" + "\t" + dict["Ann"] + "\n";
+            richTextBox1.Text += "Ben" + "\t" + dict["Ben"] + "\n";
+            richTextBox1.Text += "Chuck" + "\t" + dict["Chuck"] + "\n";
+            richTextBox1.Text += "Dora" + "\t" + dict["Dora"] + "\n";
+            richTextBox1.Text += "Ed" + "\t" + dict["Ed"] + "\n";
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                this.Controls["label" + i.ToString()].Text = "這是label" + i.ToString();
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //三元運算子
+            richTextBox1.Text += (DateTime.Now.Hour < 12) ? "Good morning\n" : "Good afternoon\n";
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+        }
+
+        // The dictionary of digit names.
+        private Dictionary<int, string> Numbers = new Dictionary<int, string>()
+        {
+            {0, "Zero"},
+            {1, "One"},
+            {2, "Two"},
+            {3, "Three"},
+            {4, "Four"},
+            {5, "Five"},
+            {6, "Six"},
+            {7, "Seven"},
+            {8, "Eight"},
+            {9, "Nine"}
+        };
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Dictionary字典用法2\n";
+            // Display values from the dictionary.
+            for (int i = 0; i < 10; i++)
+            {
+                richTextBox1.Text += i.ToString() + '\t' + Numbers[i] + "\n";
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+#if TYPE1
+            richTextBox1.Text += "你使用了 #define TYPE1\n";
+#elif TYPE2
+            richTextBox1.Text += "你使用了 #define TYPE2\n";
+#else
+            richTextBox1.Text += "你沒有使用 #define\n";
+#endif
+
+#if ZZ01
+            //在 方案總管/屬性/建置條件式編譯的符號/定義DEBUG常數/寫入ZZ01
+            richTextBox1.Text += "你使用了 #define ZZ01\n";
+#endif
+
+        }
+
+        // The enumerated type.
+        private enum MealType
+        {
+            Breakfast,
+            Brunch,
+            Lunch,
+            Luncheon = Lunch,
+            Tiffin = Lunch,
+            Tea,
+            Nuncheon = Tea,
+            Dinner,
+            Supper
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //把ENUM的字串印出來
+            // Convert values to and from strings.
+            foreach (string value in Enum.GetNames(typeof(MealType)))
+            {
+                // Get the enumeration's value.
+                MealType meal = (MealType)Enum.Parse(typeof(MealType), value);
+
+                // Display the values.
+                richTextBox1.Text += ((int)meal).ToString() + "\t" + value + "\n";
+            }
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            int a = 3;
             int b = 5;
-
-            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
-            swap(a, b);
-            richTextBox1.Text += "傳值呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
-
-            a = 10;
-            b = 5;
-            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
-            swap(ref a, ref b);
-            richTextBox1.Text += "傳址呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            int c = 6;
+            float avg;
+            int prod;
+            GetAverageProduct(a, b, c, out avg, out prod);
+            richTextBox1.Text += "average = \t" + avg.ToString() + "\n";
+            richTextBox1.Text += "product = \t" + prod.ToString() + "\n";
         }
 
-        void swap(int a, int b)
+        private void GetAverageProduct(int a, int b, int c, out float average, out int product)
         {
-            int t = a;
-            a = b;
-            b = t;
-        }
-
-        void swap(ref int a, ref int b)
-        {
-            int t = a;
-            a = b;
-            b = t;
+            average = (a + b + c) / (float)3;
+            product = a * b * c;
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -668,7 +757,13 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += "找到在 " + m.Index.ToString() + "\n";
 
             }
+        }
 
+        private void button25_Click(object sender, EventArgs e)
+        {
+            int dint = 170;
+            string strHex = String.Format("{0:X2}", dint);    //X2的2代表若缺0會自動補0，所以沒有2也沒關係
+            richTextBox1.Text += "result : " + strHex + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -779,23 +874,16 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "全國 :\t人口 : " + population.ToString() + "\n";
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button27_Click(object sender, EventArgs e)
         {
-            byte[] byteData = new byte[5] { 0x01, 0x02, 0x03, 0x04, 0x05 };
-            char[] cChar = Encoding.ASCII.GetChars(byteData);
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
-            byte[] byteData = Encoding.Default.GetBytes(cChar);
         }
 
-        private void button25_Click(object sender, EventArgs e)
+        private void button29_Click(object sender, EventArgs e)
         {
-            int dint = 170;
-            string strHex = String.Format("{0:X2}", dint);    //X2的2代表若缺0會自動補0，所以沒有2也沒關係
-            richTextBox1.Text += "result : " + strHex + "\n";
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -825,472 +913,59 @@ namespace vcs_test_all_03_Syntax
             //Convert.ToInt32("100", 16);
 
             richTextBox1.Text += "result : " + Convert.ToInt32("AB", 16).ToString() + "\n";
-
         }
 
-        private void button33_Click(object sender, EventArgs e)
+        private void button31_Click(object sender, EventArgs e)
         {
-            string hexValues = "48 65 6C 6C 6F 20 57 6F 72 6C 64 21";
-            string[] hexValuesSplit = hexValues.Split(' ');
-            richTextBox1.Text += "hexValues\tvalue\tstringValue\tcharValue\n";
-            foreach (String hex in hexValuesSplit)
+            int a, n, r;
+
+            a = 12345;
+
+            string[] m = {"0", "1", "2", "3",
+                           "4", "5", "6", "7",
+                           "8", "9", "A", "B",
+                           "C", "D", "E", "F"};
+            string s = "";
+
+            richTextBox1.Text = "10進位數字\t" + a.ToString() + "\n";
+
+            n = 2;
+            s = "";
+            for (; a > 0; a = a / n)
             {
-                // Convert the number expressed in base-16 to an integer.
-                int value = Convert.ToInt32(hex, 16);
-                // Get the character corresponding to the integral value.
-                string stringValue = Char.ConvertFromUtf32(value);
-                char charValue = (char)value;
-                richTextBox1.Text += hex + '\t' + value.ToString() + '\t' + stringValue + '\t' + charValue + '\n';
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
             }
 
+            richTextBox1.Text += "2進位\t" + s + "\n";
+
+            a = 12345;
+            n = 8;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "8進位\t" + s + "\n";
+
+            a = 12345;
+            n = 16;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "16進位\t" + s + "\n";
         }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "Dictionary字典用法1\n";
-            //Dictionary的用法
-            Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
-            { "mouse", "Mickey" },
-            { "bull", "Benny" },
-            { "tiger", "Eric" },
-            { "rabbit", "Cony" }
-            };
-            string animal_type;
-            string animal_name;
-
-            animal_type = "mouse";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "bull";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "tiger";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "rabbit";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-            animal_type = "dragon";
-            if (AnimalData.ContainsKey(animal_type))
-            {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
-            }
-            else
-                richTextBox1.Text += "no matched animal name\n";
-
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "測試Dictionary與Class語法\n";
-
-
-            // Make a dictionary.
-            DictionaryWithDefault<string, string> dict = new DictionaryWithDefault<string, string>("<Missing>");
-
-
-            // Add some items to the dictionary.
-            dict["Ann"] = "Archer";
-            dict["Chuck"] = "Cider";
-            dict["Dora"] = "Deevers";
-
-            // Display some values.
-            richTextBox1.Text += "Ann" + "\t" + dict["Ann"] + "\n";
-            richTextBox1.Text += "Ben" + "\t" + dict["Ben"] + "\n";
-            richTextBox1.Text += "Chuck" + "\t" + dict["Chuck"] + "\n";
-            richTextBox1.Text += "Dora" + "\t" + dict["Dora"] + "\n";
-            richTextBox1.Text += "Ed" + "\t" + dict["Ed"] + "\n";
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                this.Controls["label" + i.ToString()].Text = "這是label" + i.ToString();
-
-            }
-
-        }
-
-        private void btn_check1_Click(object sender, EventArgs e)
-        {
-            //使用正則表達式判斷字串是否符合手機號碼格式。
-            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[0-9]{4}-[0-9]{6}$");
-            if (rex.IsMatch(txtInput.Text))
-            {
-                MessageBox.Show("符合");
-            }
-            else
-            {
-                MessageBox.Show("不符合");
-            }
-        }
-
-        private void btn_check2_Click(object sender, EventArgs e)
-        {
-            //使用正則表達式判斷字串是否符合身分證格式。
-            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[A-Z]{1}[0-9]{9}$");
-            if (rex.IsMatch(txtInput.Text))
-            {
-                MessageBox.Show("符合");
-            }
-            else
-            {
-                MessageBox.Show("不符合");
-            }
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        bool check_textbox_hexadecimal(KeyPressEventArgs e)
-        {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                return false;
-            }
-            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
-            {
-                return false;
-            }
-            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private void textBox_hex_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-
-            e.Handled = check_textbox_hexadecimal(e);
-
-            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
-            {
-                button35_Click(sender, e);
-            }
-        }
-
-        private void textBox_hex_TextChanged(object sender, EventArgs e)
-        {
-            int value = 0;
-
-            if (textBox_hex.Text.Length == 0)
-            {
-                value = 0;
-                lb_dec.Text = value.ToString();
-                return;
-            }
-
-            value = Convert.ToInt32(textBox_hex.Text, 16);
-            lb_dec.Text = value.ToString();
-
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btn_Click(object sender, EventArgs e)
-        {
-            if (sender.Equals(btn1))
-            {
-                richTextBox1.Text += "你按了 1\n";
-            }
-            else if (sender.Equals(btn2))
-            {
-                richTextBox1.Text += "你按了 2\n";
-            }
-            else if (sender.Equals(btn3))
-            {
-                richTextBox1.Text += "你按了 3\n";
-            }
-            else if (sender.Equals(btn4))
-            {
-                richTextBox1.Text += "你按了 4\n";
-            }
-            else if (sender.Equals(btn5))
-            {
-                richTextBox1.Text += "你按了 5\n";
-            }
-
-        }
-
-        private void btn_check3_Click(object sender, EventArgs e)
-        {
-            if (txtInput.Text.Trim().Length == 10)//長度達十個字才驗證
-            {
-                if (isIdentificationId(txtInput.Text))//驗證身份證字號,正確回傳true
-                {
-                    txtInput.Text = txtInput.Text.ToUpper();//英文自動轉成大寫
-                    MessageBox.Show(txtInput.Text + "是正確的身份證字號", "", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-                else//驗證身份證字號,不正確回傳false
-                {
-                    MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        #region checkID
-        public static bool isIdentificationId(string arg_Identify)
-        {
-            var d = false;
-            if (arg_Identify.Length == 10)
-            {
-                arg_Identify = arg_Identify.ToUpper();
-                if (arg_Identify[0] >= 0x41 && arg_Identify[0] <= 0x5A)
-                {
-                    var a = new[] { 10, 11, 12, 13, 14, 15, 16, 17, 34, 18, 19, 20, 21, 22, 35, 23, 24, 25, 26, 27, 28, 29, 32, 30, 31, 33 };
-                    var b = new int[11];
-                    b[1] = a[(arg_Identify[0]) - 65] % 10;
-                    var c = b[0] = a[(arg_Identify[0]) - 65] / 10;
-                    for (var i = 1; i <= 9; i++)
-                    {
-                        b[i + 1] = arg_Identify[i] - 48;
-                        c += b[i] * (10 - i);
-                    }
-                    if (((c % 10) + b[10]) % 10 == 0)
-                    {
-                        d = true;
-                    }
-                }
-            }
-            return d;
-        }
-        #endregion
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
-        // The dictionary of digit names.
-        private Dictionary<int, string> Numbers = new Dictionary<int, string>()
-        {
-            {0, "Zero"},
-            {1, "One"},
-            {2, "Two"},
-            {3, "Three"},
-            {4, "Four"},
-            {5, "Five"},
-            {6, "Six"},
-            {7, "Seven"},
-            {8, "Eight"},
-            {9, "Nine"}
-        };
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "Dictionary字典用法2\n";
-            // Display values from the dictionary.
-            for (int i = 0; i < 10; i++)
-            {
-                richTextBox1.Text += i.ToString() + '\t' + Numbers[i] + "\n";
-            }
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            //三元運算子
-            richTextBox1.Text += (DateTime.Now.Hour < 12) ? "Good morning\n" : "Good afternoon\n";
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-#if TYPE1
-            richTextBox1.Text += "你使用了 #define TYPE1\n";
-#elif TYPE2
-            richTextBox1.Text += "你使用了 #define TYPE2\n";
-#else
-            richTextBox1.Text += "你沒有使用 #define\n";
-#endif
-
-#if ZZ01
-            //在 方案總管/屬性/建置條件式編譯的符號/定義DEBUG常數/寫入ZZ01
-            richTextBox1.Text += "你使用了 #define ZZ01\n";
-#endif
-
-        }
-
-        // The enumerated type.
-        private enum MealType
-        {
-            Breakfast,
-            Brunch,
-            Lunch,
-            Luncheon = Lunch,
-            Tiffin = Lunch,
-            Tea,
-            Nuncheon = Tea,
-            Dinner,
-            Supper
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            //把ENUM的字串印出來
-            // Convert values to and from strings.
-            foreach (string value in Enum.GetNames(typeof(MealType)))
-            {
-                // Get the enumeration's value.
-                MealType meal = (MealType)Enum.Parse(typeof(MealType), value);
-
-                // Display the values.
-                richTextBox1.Text += ((int)meal).ToString() + "\t" + value + "\n";
-            }
-        }
-
-        // Invoke the method.
-        private void bt_call_by_name_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Type this_type = this.GetType();
-                MethodInfo method_info = this_type.GetMethod(textBox1.Text);
-                method_info.Invoke(this, null);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "無法執行" + textBox1.Text + "\t原因\t" + ex.Message + "\n";
-            }
-        }
-
-        // The public methods to invoke.
-        public void Function1()
-        {
-            richTextBox1.Text += "執行了 Function1";
-        }
-        public void Function2()
-        {
-            richTextBox1.Text += "執行了 Function2";
-        }
-
-        #region 使用相同的函數用Tag區分
-        // Use the selected color for the form's background.
-        private void button_color(object sender, EventArgs e)
-        {
-            // Get the sender as a button.
-            Button btn = sender as Button;
-
-            // Convert its Tag value into a color.
-            this.BackColor = Color.FromName(btn.Tag.ToString());
-        }
-        #endregion
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            int a = 3;
-            int b = 5;
-            int c = 6;
-            float avg;
-            int prod;
-            GetAverageProduct(a, b, c, out avg, out prod);
-            richTextBox1.Text += "average = \t" + avg.ToString() + "\n";
-            richTextBox1.Text += "product = \t" + prod.ToString() + "\n";
-        }
-
-        private void GetAverageProduct(int a, int b, int c, out float average, out int product)
-        {
-            average = (a + b + c) / (float)3;
-            product = a * b * c;
-        }
-
-
-        // Perform the calculation.
-        private void btnCalculate_Click(object sender, EventArgs e)
-        {
-            // Clear the result (in case the calculation fails).
-            txtResult.Clear();
-
-            try
-            {
-                // Perform the operations that might fail.
-                int x = int.Parse(txtX.Text);
-                int y = int.Parse(txtY.Text);
-                float result = x / y;
-                txtResult.Text = result.ToString();
-            }
-            catch (FormatException)
-            {
-                // A formatting error occurred.
-                // Report the error to the user.
-                richTextBox2.Text += "數值錯誤\n";
-            }
-            catch (Exception ex)
-            {
-                // Some other error occurred.
-                // Report the error to the user.
-                richTextBox2.Text += "計算錯誤\t原因 : " + ex + "\n";
-                richTextBox2.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
-            }
-            finally
-            {
-                richTextBox2.Text += "計算結束\n";
-            }
-        }
-
 
         //函式多載(function overloading) ST
-
         int add(int a, int b) { return a + b; }
         double add(double a, double b) { return a + b; }
 
@@ -1337,6 +1012,195 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "doubleArray_sum = " + doubleArray_sum.ToString() + "\n";
         }
         //函式多載(function overloading) SP
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            string hexValues = "48 65 6C 6C 6F 20 57 6F 72 6C 64 21";
+            string[] hexValuesSplit = hexValues.Split(' ');
+            richTextBox1.Text += "hexValues\tvalue\tstringValue\tcharValue\n";
+            foreach (String hex in hexValuesSplit)
+            {
+                // Convert the number expressed in base-16 to an integer.
+                int value = Convert.ToInt32(hex, 16);
+                // Get the character corresponding to the integral value.
+                string stringValue = Char.ConvertFromUtf32(value);
+                char charValue = (char)value;
+                richTextBox1.Text += hex + '\t' + value.ToString() + '\t' + stringValue + '\t' + charValue + '\n';
+            }
+        }
+
+        //傳值呼叫 vs 傳址呼叫 ST
+        void swap(int a, int b)
+        {
+            int t = a;
+            a = b;
+            b = t;
+        }
+
+        void swap(ref int a, ref int b)
+        {
+            int t = a;
+            a = b;
+            b = t;
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "傳值呼叫 vs 傳址呼叫\n";
+
+            int a = 10;
+            int b = 5;
+
+            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            swap(a, b);
+            richTextBox1.Text += "傳值呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+
+            a = 10;
+            b = 5;
+            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            swap(ref a, ref b);
+            richTextBox1.Text += "傳址呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+        }
+        //傳值呼叫 vs 傳址呼叫 SP
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "GetBytes GetString 使用範例 1\n";
+
+            int len;
+
+            string str = "ABCDE\n";
+
+            richTextBox1.Text += "原字串 : " + str + "\n";
+
+            len = str.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] B = Encoding.Default.GetBytes(str);  //翻譯字串Str為Byte陣列B   //GetBytes : 把字串翻譯成Byte陣列
+            len = B.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            PrintHexBytes(B);
+
+            B[1] += 5;
+            B[3] += 7;
+
+            str = Encoding.Default.GetString(B); //翻譯B陣列為字串A        //接收到的byte轉為文字
+            richTextBox1.Text += "轉回來字串 : " + str + "\n";
+
+            /*
+            richTextBox1.Text += "byte[] 轉 char[]\n";
+
+            byte[] byteData = new byte[5] { 0x01, 0x02, 0x03, 0x04, 0x05 };
+            char[] cChar = Encoding.ASCII.GetChars(byteData);
+
+            richTextBox1.Text += "char[] 轉 二進位碼的文字型態\n";
+            char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
+            byte[] byteData = Encoding.Default.GetBytes(cChar);
+            */
+        }
+
+        public void PrintHexBytes(byte[] bytes)
+        {
+            if ((bytes == null) || (bytes.Length == 0))
+            {
+                richTextBox1.Text += "<none>";
+            }
+            else
+            {
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    richTextBox1.Text += bytes[i].ToString("X2") + "\n";
+                }
+            }
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "GetBytes GetString 使用範例 2\n";
+
+            string str;
+            //char[] cChar = new char[5] { 'a', 'b', 'c', 'd', 'e' };
+            str = "中間路線";
+            richTextBox1.Text += "\n原字串:\t" + str + "\n";
+            byte[] byteData = Encoding.Default.GetBytes(str);
+            richTextBox1.Text += "使用GetBytes轉成拜列\t";
+            foreach (byte b in byteData)
+            {
+                richTextBox1.Text += b.ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            string nn = string.Empty;
+            nn = Encoding.Default.GetString(byteData);
+            richTextBox1.Text += "將此拜列使用GetString轉成字串, 新字串:\t" + nn + "\n";
+
+            byteData[1] = (byte)(byteData[1] + 2);
+            nn = Encoding.Default.GetString(byteData);
+            richTextBox1.Text += "修改拜列, 將此拜列使用GetString轉成字串, 新字串:\t" + nn + "\n";
+
+            str = "ABCDE";
+            // Encoding.GetBytes方法，將 String 轉為 Byte 序列
+            byte[] stringConvByte = Encoding.Default.GetBytes(str);
+            // Encoding.GetString方法，將 Byte 序列 轉為 String
+            string byteConvStrig = Encoding.Default.GetString(stringConvByte);
+
+            int i;
+            richTextBox1.Text += "\n原字串:\t" + str + "\t長度:\t" + str.Length.ToString() + "\t內容:\t";
+            for (i = 0; i < str.Length; i++)
+            {
+                richTextBox1.Text += str[i] + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "轉成拜列\t長度:\t" + stringConvByte.Length.ToString() + "\t內容:\t";
+            for (i = 0; i < stringConvByte.Length; i++)
+            {
+                richTextBox1.Text += stringConvByte[i].ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "轉成字串\t長度:\t" + byteConvStrig.Length.ToString() + "\n";
+
+            byte[] byteArray = new byte[5] { 0x41, 0x42, 0x43, 0x44, 0x45 };
+
+            str = System.Text.Encoding.Default.GetString(byteArray);
+
+            richTextBox1.Text += "使用GetString將拜列轉成字串:\t" + str + "\n";
+
+            str = "this is a lion-mouse";
+            richTextBox1.Text += "\n原字串:\t" + str + "\n";
+
+            byteArray = System.Text.Encoding.Default.GetBytes(str);
+            richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
+            for (i = 0; i < byteArray.Length; i++)
+            {
+                richTextBox1.Text += (char)byteArray[i] + " ";  //多了(char)變成%c
+            }
+            richTextBox1.Text += "\n";
+
+            //Byte型態的陣列轉換為字串
+            int bytes = 0;
+            Byte[] byte_array = new Byte[256];
+            String new_string = "";
+            byte_array[0] = (byte)'A';
+            byte_array[1] = (byte)'B';
+            byte_array[2] = (byte)'C';
+            bytes = 3;
+            // 將Byte型態的陣列轉換為字串
+            new_string = Encoding.ASCII.GetString(byte_array, 0, bytes);
+            richTextBox1.Text += "使用GetString將拜列轉成字串\t" + new_string + "\n";
+
+            //字串轉換為Byte型態的陣列
+            str = "this is a lion-mouse";
+            Byte[] byte_array2 = Encoding.ASCII.GetBytes(str);
+            richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
+            foreach (char c in byte_array2)
+            {
+                richTextBox1.Text += c.ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
 
         private void button37_Click(object sender, EventArgs e)
         {
@@ -1392,21 +1256,236 @@ namespace vcs_test_all_03_Syntax
             }
         }
 
-        private void button29_Click(object sender, EventArgs e)
+        private void btn_check1_Click(object sender, EventArgs e)
         {
-            //切割字串範例
-            string[] word_S = { };
-            char[] split = { '-', ' ', ',', ':', '/' };     //依各種符號來切割字串
-
-            string compile_time = "3/3/2021 01:35 下午";
-            richTextBox1.Text += "原字串\t" + compile_time + "\n";
-            richTextBox1.Text += "切割字串 :\n";
-
-            word_S = compile_time.Split(split);     //切割字串
-
-            foreach (string str in word_S)
+            //使用正則表達式判斷字串是否符合手機號碼格式。
+            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[0-9]{4}-[0-9]{6}$");
+            if (rex.IsMatch(txtInput.Text))
             {
-                richTextBox1.Text += str + "\n";
+                MessageBox.Show("符合");
+            }
+            else
+            {
+                MessageBox.Show("不符合");
+            }
+        }
+
+        private void btn_check2_Click(object sender, EventArgs e)
+        {
+            //使用正則表達式判斷字串是否符合身分證格式。
+            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex("^[A-Z]{1}[0-9]{9}$");
+            if (rex.IsMatch(txtInput.Text))
+            {
+                MessageBox.Show("符合");
+            }
+            else
+            {
+                MessageBox.Show("不符合");
+            }
+        }
+
+        bool check_textbox_hexadecimal(KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'A') && (e.KeyChar <= (Char)'F'))
+            {
+                return false;
+            }
+            else if ((e.KeyChar >= (Char)'a') && (e.KeyChar <= (Char)'f'))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void textBox_hex_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+
+            e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                button41_Click(sender, e);
+            }
+        }
+
+        private void textBox_hex_TextChanged(object sender, EventArgs e)
+        {
+            int value = 0;
+
+            if (textBox_hex.Text.Length == 0)
+            {
+                value = 0;
+                lb_dec.Text = value.ToString();
+                return;
+            }
+
+            value = Convert.ToInt32(textBox_hex.Text, 16);
+            lb_dec.Text = value.ToString();
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            if (sender.Equals(btn1))
+            {
+                richTextBox1.Text += "你按了 1\n";
+            }
+            else if (sender.Equals(btn2))
+            {
+                richTextBox1.Text += "你按了 2\n";
+            }
+            else if (sender.Equals(btn3))
+            {
+                richTextBox1.Text += "你按了 3\n";
+            }
+            else if (sender.Equals(btn4))
+            {
+                richTextBox1.Text += "你按了 4\n";
+            }
+            else if (sender.Equals(btn5))
+            {
+                richTextBox1.Text += "你按了 5\n";
+            }
+        }
+
+        private void btn_check3_Click(object sender, EventArgs e)
+        {
+            if (txtInput.Text.Trim().Length == 10)//長度達十個字才驗證
+            {
+                if (isIdentificationId(txtInput.Text))//驗證身份證字號,正確回傳true
+                {
+                    txtInput.Text = txtInput.Text.ToUpper();//英文自動轉成大寫
+                    MessageBox.Show(txtInput.Text + "是正確的身份證字號", "", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                else//驗證身份證字號,不正確回傳false
+                {
+                    MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("身份證字號有誤", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #region checkID
+        public static bool isIdentificationId(string arg_Identify)
+        {
+            var d = false;
+            if (arg_Identify.Length == 10)
+            {
+                arg_Identify = arg_Identify.ToUpper();
+                if (arg_Identify[0] >= 0x41 && arg_Identify[0] <= 0x5A)
+                {
+                    var a = new[] { 10, 11, 12, 13, 14, 15, 16, 17, 34, 18, 19, 20, 21, 22, 35, 23, 24, 25, 26, 27, 28, 29, 32, 30, 31, 33 };
+                    var b = new int[11];
+                    b[1] = a[(arg_Identify[0]) - 65] % 10;
+                    var c = b[0] = a[(arg_Identify[0]) - 65] / 10;
+                    for (var i = 1; i <= 9; i++)
+                    {
+                        b[i + 1] = arg_Identify[i] - 48;
+                        c += b[i] * (10 - i);
+                    }
+                    if (((c % 10) + b[10]) % 10 == 0)
+                    {
+                        d = true;
+                    }
+                }
+            }
+            return d;
+        }
+        #endregion
+
+        // Invoke the method.
+        private void bt_call_by_name_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Type this_type = this.GetType();
+                MethodInfo method_info = this_type.GetMethod(textBox1.Text);
+                method_info.Invoke(this, null);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "無法執行" + textBox1.Text + "\t原因\t" + ex.Message + "\n";
+            }
+        }
+
+        // The public methods to invoke.
+        public void Function1()
+        {
+            richTextBox1.Text += "執行了 Function1";
+        }
+        public void Function2()
+        {
+            richTextBox1.Text += "執行了 Function2";
+        }
+
+        #region 使用相同的函數用Tag區分
+        // Use the selected color for the form's background.
+        private void button_color(object sender, EventArgs e)
+        {
+            // Get the sender as a button.
+            Button btn = sender as Button;
+
+            // Convert its Tag value into a color.
+            this.BackColor = Color.FromName(btn.Tag.ToString());
+        }
+        #endregion
+
+        // Perform the calculation.
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+            // Clear the result (in case the calculation fails).
+            txtResult.Clear();
+
+            try
+            {
+                // Perform the operations that might fail.
+                int x = int.Parse(txtX.Text);
+                int y = int.Parse(txtY.Text);
+                float result = x / y;
+                txtResult.Text = result.ToString();
+            }
+            catch (FormatException)
+            {
+                // A formatting error occurred.
+                // Report the error to the user.
+                richTextBox2.Text += "數值錯誤\n";
+            }
+            catch (Exception ex)
+            {
+                // Some other error occurred.
+                // Report the error to the user.
+                richTextBox2.Text += "計算錯誤\t原因 : " + ex + "\n";
+                richTextBox2.Text += "計算錯誤\t原因 : " + ex.GetType().Name + "\n";
+            }
+            finally
+            {
+                richTextBox2.Text += "計算結束\n";
             }
         }
     }

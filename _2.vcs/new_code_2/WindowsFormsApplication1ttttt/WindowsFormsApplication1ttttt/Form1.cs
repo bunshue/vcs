@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1ttttt
 {
     public partial class Form1 : Form
     {
-                            TcpClient tcpClient;
+        TcpClient tcpClient;
 
         public Form1()
         {
@@ -39,38 +39,39 @@ namespace WindowsFormsApplication1ttttt
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (WebClient webClient = new WebClient())
-            // 從 url 讀取資訊至 stream
-            using (Stream stream = webClient.OpenRead("http://jsonplaceholder.typicode.com/posts"))
-            // 使用 StreamReader 讀取 stream 內的字元
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                // 將 StreamReader 所讀到的字元轉為 string
-                string request = reader.ReadToEnd();
-                //request.Dump();
+            string url = "http://jsonplaceholder.typicode.com/posts";
 
-                richTextBox1.Text += request + "\n";
+            WebClient client = new WebClient();
+            // 從 url 讀取資訊至 stream
+            using (Stream stream = client.OpenRead(url))
+            {
+                // 使用 StreamReader 讀取 stream 內的字元
+                using (StreamReader sr = new StreamReader(stream))
+                {
+                    string result = sr.ReadToEnd();        // 將 StreamReader 所讀到的字元轉為 string
+                    richTextBox1.Text += result + "\n";
+                }
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // 建立 webclient
-            using (WebClient webClient = new WebClient())
-            {
-                // 指定 WebClient 的編碼
-                webClient.Encoding = Encoding.UTF8;
-                // 指定 WebClient 的 Content-Type header
-                webClient.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                // 從網路 url 上取得資料
-                var body = webClient.DownloadString("http://jsonplaceholder.typicode.com/posts");
-                //body.Dump();
-            }
+            string url = "http://jsonplaceholder.typicode.com/posts";
+
+            WebClient client = new WebClient();     // 建立 webclient
+            // 指定 WebClient 的編碼
+            client.Encoding = Encoding.UTF8;
+            // 指定 WebClient 的 Content-Type header
+            client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            // 從網路 url 上取得資料
+            var result = client.DownloadString(url);
+            richTextBox1.Text += result + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             string url = "http://jsonplaceholder.typicode.com/posts";
+
             WebClient client = new WebClient();
 
             // Add a user agent header in case the
@@ -80,59 +81,50 @@ namespace WindowsFormsApplication1ttttt
 
             Stream data = client.OpenRead(url);
             StreamReader reader = new StreamReader(data);
-            string s = reader.ReadToEnd();
-            //Console.WriteLine(s);
-            richTextBox1.Text += s + "\n";
+            string result = reader.ReadToEnd();
+            richTextBox1.Text += result + "\n";
             data.Close();
             reader.Close();
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string remoteUri = "http://www.kindomhill.com.tw/images/";
-            string fileName = "sec2-pic-06.jpg", myStringWebResource = null;
-            // Create a new WebClient instance.
-            WebClient myWebClient = new WebClient();
-            // Concatenate the domain with the Web resource filename.
-            myStringWebResource = remoteUri + fileName;
-            Console.WriteLine("Downloading File \"{0}\" from \"{1}\" .......\n\n", fileName, myStringWebResource);
-            // Download the Web resource and save it into the current filesystem folder.
-            myWebClient.DownloadFile(myStringWebResource, fileName);
-            Console.WriteLine("Successfully Downloaded File \"{0}\" from \"{1}\"", fileName, myStringWebResource);
-            Console.WriteLine("\nDownloaded file saved in the following file system folder:\n\t" + Application.StartupPath);
+            string url = "http://www.kindomhill.com.tw/images/";
+            string filename = "sec2-pic-06.jpg";
+            string myStringWebResource = null;
 
+            WebClient client = new WebClient();     // Create a new WebClient instance.
+            // Concatenate the domain with the Web resource filename.
+            myStringWebResource = url + filename;
+            Console.WriteLine("Downloading File \"{0}\" from \"{1}\" .......\n\n", filename, myStringWebResource);
+            // Download the Web resource and save it into the current filesystem folder.
+            client.DownloadFile(myStringWebResource, filename);
+            Console.WriteLine("Successfully Downloaded File \"{0}\" from \"{1}\"", filename, myStringWebResource);
+            Console.WriteLine("\nDownloaded file saved in the following file system folder:\n\t" + Application.StartupPath);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //string url = "https://www.google.com.tw/";
+            string url = "http://antwrp.gsfc.nasa.gov/apod/";
 
-            //string remoteUri = "https://www.google.com.tw/";
-            string remoteUri = "http://antwrp.gsfc.nasa.gov/apod/";
-
-            // Create a new WebClient instance.
-            WebClient myWebClient = new WebClient();
+            WebClient client = new WebClient();     // Create a new WebClient instance.
             // Download home page data.
-            Console.WriteLine("Downloading " + remoteUri);
+            Console.WriteLine("Downloading " + url);
             // Download the Web resource and save it into a data buffer.
 
             //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            byte[] myDataBuffer = myWebClient.DownloadData(remoteUri);
+            byte[] myDataBuffer = client.DownloadData(url);
 
             // Display the downloaded data.
-            string download = Encoding.ASCII.GetString(myDataBuffer);
+            string result = Encoding.ASCII.GetString(myDataBuffer);
             //Console.WriteLine(download);
 
             //Console.WriteLine("Download successful.");
 
-            richTextBox1.Text += download + "\n";
-
-
+            richTextBox1.Text += result + "\n";
         }
-
-
-
     }
 }

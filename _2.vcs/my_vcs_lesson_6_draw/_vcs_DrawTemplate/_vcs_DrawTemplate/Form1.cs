@@ -25,7 +25,10 @@ namespace _vcs_DrawTemplate
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             button2.Enabled = false;
             button3.Enabled = false;
             button4.Enabled = false;
@@ -36,6 +39,7 @@ namespace _vcs_DrawTemplate
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             p = new Pen(Color.Red, 3);
             sb = new SolidBrush(Color.Red);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -154,7 +158,7 @@ namespace _vcs_DrawTemplate
             pictureBox1.Image = bitmap1;
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
@@ -303,7 +307,6 @@ namespace _vcs_DrawTemplate
         {
 
         }
-
 
 
 

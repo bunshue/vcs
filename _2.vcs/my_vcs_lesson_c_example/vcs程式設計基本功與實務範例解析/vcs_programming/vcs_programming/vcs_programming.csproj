@@ -160,12 +160,6 @@
     <Compile Include="keyevent.Designer.cs">
       <DependentUpon>keyevent.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListBoxDemo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ListBoxDemo.Designer.cs">
-      <DependentUpon>ListBoxDemo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Local_Instance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,9 +243,6 @@
     <EmbeddedResource Include="keyevent.resx">
       <DependentUpon>keyevent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListBoxDemo.resx">
-      <DependentUpon>ListBoxDemo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Local_Instance.resx">
       <DependentUpon>Local_Instance.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,10 +271,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SimpleEditor.resx">
       <DependentUpon>SimpleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="testPictures.resx">
-      <DependentUpon>testPictures.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TriangleForm.resx">
       <DependentUpon>TriangleForm.cs</DependentUpon>
@@ -314,12 +301,6 @@
     </Compile>
     <Compile Include="SimpleEditor.Designer.cs">
       <DependentUpon>SimpleEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="testPictures.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testPictures.Designer.cs">
-      <DependentUpon>testPictures.cs</DependentUpon>
     </Compile>
     <Compile Include="TriangleForm.cs">
       <SubType>Form</SubType>

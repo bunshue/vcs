@@ -13,8 +13,8 @@ namespace vcs_Remove_Bin_Obj
 {
     public partial class Form1 : Form
     {
-        List<string> folder_name = new List<string>();   //宣告string型態的List
-        List<string> filename_backup = new List<string>();   //宣告string型態的List
+        List<string> folder_name = new List<string>();      //宣告string型態的List
+        List<string> filename_backup = new List<string>();  //宣告string型態的List
         string search_path = string.Empty;
 
         public Form1()
@@ -164,6 +164,7 @@ namespace vcs_Remove_Bin_Obj
 
                 if (folder_name[i].Contains("bin"))
                 {
+                    //需要跳過的資料夾
                     if (folder_name[i].Contains("xxxxxxxxxxxxxxxx"))
                     {
                         richTextBox1.Text += "iiiiiiiiiiiiiiiiiiiii\n";
@@ -174,6 +175,10 @@ namespace vcs_Remove_Bin_Obj
                         continue;
                     }
                     else if (folder_name[i].Contains("EMGU"))
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("MyWebCam"))
                     {
                         continue;
                     }
