@@ -109,6 +109,9 @@ namespace vcs_Draw3B
             pictureBox_brown.Size = new Size(250, 250);
             pictureBox_brown.Location = new Point(x_st + dx * 0, y_st + dy * 16);
 
+            pictureBox_round.Size = new Size(250, 250);
+            pictureBox_round.Location = new Point(x_st + dx * 1+95, y_st + dy * 16);
+
             x_st = 1810;
             y_st = 80;
             dx = 120;
@@ -220,8 +223,8 @@ namespace vcs_Draw3B
         //for random color ST
         void draw_random_color()
         {
-            int x_st = 500;
-            int y_st = 500;
+            int x_st = 530;
+            int y_st = 430;
             int WIDTH = 40;
             for (int i = 1; i < lb_color.Length; i++)
             {
@@ -1148,12 +1151,10 @@ namespace vcs_Draw3B
 
         //指南針SP
 
-
         //布朗運動 ST
-
         void draw_brown_motion()
         {
-            int N = 100;
+            int N = 50;
             Point[] pt;
 
             int W = pictureBox_brown.ClientSize.Width;
@@ -1189,7 +1190,63 @@ namespace vcs_Draw3B
         {
             draw_brown_motion();
         }
-
         //布朗運動 SP
+
+        int cnt = 0;
+        void draw_spin_signal()
+        {
+            int N = 60 + 1;
+            Point[] pt;
+
+            int W = pictureBox_round.ClientSize.Width;
+            int H = pictureBox_round.ClientSize.Height;
+            int i;
+            int cx = W / 2;
+            int cy = H / 2;
+            int r = Math.Min(W, H) / 2 * 9 / 10;
+
+            pt = new Point[N];    //一維陣列內有N個Point
+
+            for (i = 0; i < N; i++)
+            {
+                pt[i] = new Point(cx + (int)(r * cosd(i * 360 / (N - 1))), cy + (int)(r * sind(i * 360 / (N - 1))));
+            }
+
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox_round.Width, pictureBox_round.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox_round.Image = bitmap1;
+
+            g.DrawLines(Pens.Red, pt);
+
+            int rr = 3;
+            for (i = 0; i < N; i++)
+            {
+                if ((i % 5) == 0)
+                {
+                    rr = 5;
+                    g.FillEllipse(Brushes.Red, pt[i].X - rr, pt[i].Y - rr, rr * 2, rr * 2);
+                }
+                else
+                {
+                    rr = 3;
+                    g.FillEllipse(Brushes.Red, pt[i].X - rr, pt[i].Y - rr, rr * 2, rr * 2);
+                }
+            }
+            rr = 6;
+            //g.FillEllipse(Brushes.Blue, pt[cnt].X - rr, pt[cnt].Y - rr, rr * 2, rr * 2);
+            g.DrawEllipse(Pens.Blue, pt[cnt].X - rr, pt[cnt].Y - rr, rr * 2, rr * 2);
+            g.DrawLine(Pens.Blue, cx, cy, pt[cnt].X, pt[cnt].Y);
+            cnt++;
+            if (cnt >= (N - 1))
+                cnt = 0;
+        }
+
+        private void timer_round_Tick(object sender, EventArgs e)
+        {
+            draw_spin_signal();
+        }
+
     }
 }

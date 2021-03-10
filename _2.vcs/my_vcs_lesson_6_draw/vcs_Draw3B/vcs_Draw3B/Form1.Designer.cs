@@ -59,6 +59,8 @@
             this.timer_compass = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_brown = new System.Windows.Forms.PictureBox();
             this.timer_brown = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_round = new System.Windows.Forms.PictureBox();
+            this.timer_round = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -74,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_round)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -316,11 +319,27 @@
             this.timer_brown.Interval = 1000;
             this.timer_brown.Tick += new System.EventHandler(this.timer_brown_Tick);
             // 
+            // pictureBox_round
+            // 
+            this.pictureBox_round.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_round.Location = new System.Drawing.Point(620, 654);
+            this.pictureBox_round.Name = "pictureBox_round";
+            this.pictureBox_round.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox_round.TabIndex = 68;
+            this.pictureBox_round.TabStop = false;
+            // 
+            // timer_round
+            // 
+            this.timer_round.Enabled = true;
+            this.timer_round.Interval = 1000;
+            this.timer_round.Tick += new System.EventHandler(this.timer_round_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1398, 786);
+            this.Controls.Add(this.pictureBox_round);
             this.Controls.Add(this.pictureBox_brown);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_word);
@@ -355,6 +374,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_round)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -391,6 +411,8 @@
         private System.Windows.Forms.Timer timer_compass;
         private System.Windows.Forms.PictureBox pictureBox_brown;
         private System.Windows.Forms.Timer timer_brown;
+        private System.Windows.Forms.PictureBox pictureBox_round;
+        private System.Windows.Forms.Timer timer_round;
     }
 }
 
