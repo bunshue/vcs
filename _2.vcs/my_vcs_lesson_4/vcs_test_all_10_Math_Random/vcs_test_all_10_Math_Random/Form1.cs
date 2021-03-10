@@ -2301,5 +2301,54 @@ namespace vcs_test_all_10_Math_Random
                 richTextBox1.Text += name[i] + "\t第" + rank[i].ToString() + "名\n";
             }
         }
+
+        //MODBUS RTU CRC
+        private void button28_Click(object sender, EventArgs e)
+        {
+            Byte[] _data = new Byte[] { 0x02, 0x03, 0x00, 0x02, 0x00, 0x22 };     //result : 0x20 0x64
+            //Byte[] _data = new Byte[] { 0x00, 0x06, 0x00, 0x02, 0x03, 0x55 };       //result : 0x14 0xE9
+
+            //_data = System.Text.Encoding.Default.GetBytes(input);  
+            UInt16 CRC = ModRTU_CRC(_data, 6);
+            string hexValue = CRC.ToString("X2");
+
+            string loCRC = "";
+            string hiCRC = "";
+            if (hexValue.Length == 3)
+            {
+                loCRC = hexValue.Substring(1, 2); //crc low byte   
+                hiCRC = hexValue.Substring(0, 1); //crc high byte  
+            }
+            else
+            {
+                loCRC = hexValue.Substring(2, 2); //crc low byte   
+                hiCRC = hexValue.Substring(0, 2); //crc high byte  
+            }
+            richTextBox1.Text += "result\thi = 0x" + hiCRC + "\t";
+            richTextBox1.Text += "lo = 0x" + loCRC + "\n";
+        }
+
+        // 計算 MODBUS RTU CRC  
+        UInt16 ModRTU_CRC(byte[] buf, int len)
+        {
+            UInt16 crc = 0xFFFF;
+
+            for (int pos = 0; pos < len; pos++)
+            {
+                crc ^= (UInt16)buf[pos];          // 取出第一個byte與crc XOR
+
+                for (int i = 8; i != 0; i--)
+                {    // 巡檢每個bit  
+                    if ((crc & 0x0001) != 0)
+                    {      // 如果 LSB = 1   
+                        crc >>= 1;                    // 右移1bit 並且 XOR 0xA001  
+                        crc ^= 0xA001;
+                    }
+                    else                            // 如果 LSB != 1  
+                        crc >>= 1;                    // 右移1bit
+                }
+            }
+            return crc;
+        }
     }
 }

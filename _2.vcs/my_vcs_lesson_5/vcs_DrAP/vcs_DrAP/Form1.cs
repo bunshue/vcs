@@ -1447,7 +1447,7 @@ namespace vcs_DrAP
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.potplayer;
             button4.BackColor = Color.Red;
 
-            delay(10);
+            Application.DoEvents();
 
             min_size_mb = 0;
             bool conversionSuccessful = int.TryParse(tb_file_l.Text, out min_size_mb);    //out為必須
@@ -1608,6 +1608,21 @@ namespace vcs_DrAP
                         res = false;
                         return;
                     }
+                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("program.cs"))
+                    {
+                        res = false;
+                        return;
+                    }
+                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("AssemblyInfo.cs"))
+                    {
+                        res = false;
+                        return;
+                    }
+                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("csproj"))
+                    {
+                        res = false;
+                        return;
+                    }
                 }
 
                 //richTextBox2.Text += fi.FullName + "\n";
@@ -1648,8 +1663,8 @@ namespace vcs_DrAP
             richTextBox1.Clear();
             richTextBox2.Clear();
             removeDrawDiskSpace();
-            richTextBox1.Text += "搜尋開始\n";
-            richTextBox2.Text += "搜尋開始\n\n";
+            richTextBox1.Text += "搜尋開始vcs\n";
+            richTextBox2.Text += "搜尋開始vcs\n\n";
 
             button13.BackgroundImage = null;
             button13.BackColor = Color.Red;
@@ -1657,7 +1672,7 @@ namespace vcs_DrAP
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_VCS;
 
-            delay(10);
+            Application.DoEvents();
 
             if (textBox3.Text == "")
             {
@@ -2172,13 +2187,19 @@ namespace vcs_DrAP
 
         private void button22_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            removeDrawDiskSpace();
+            richTextBox1.Text += "搜尋開始python\n";
+            richTextBox2.Text += "搜尋開始python\n\n";
+
             button22.BackgroundImage = null;
             button22.BackColor = Color.Red;
             button9.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_PYTHON;
 
-            delay(10);
+            Application.DoEvents();
 
             if (textBox3.Text == "")
             {
@@ -2386,7 +2407,9 @@ namespace vcs_DrAP
             }
 
             //建立一個檔案
-            StreamWriter sw = System.IO.File.CreateText(filename);
+            //StreamWriter sw = System.IO.File.CreateText(filename);
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("UTF-8"));   //指名編碼格式
             sw.Write(richTextBox1.Text);
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
@@ -2557,7 +2580,7 @@ namespace vcs_DrAP
             flag_function = FUNCTION_SEARCH;
             search_mode = SEARCH_MODE_MATLAB;
 
-            delay(10);
+            Application.DoEvents();
 
             if (textBox3.Text == "")
             {

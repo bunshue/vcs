@@ -784,12 +784,14 @@
             // 
             // button28
             // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button28.Location = new System.Drawing.Point(353, 326);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(155, 40);
             this.button28.TabIndex = 39;
+            this.button28.Text = "MODBUS RTU CRC";
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // button29
             // 

@@ -88,7 +88,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(217, 42);
             this.button3.TabIndex = 3;
-            this.button3.Text = "取得網卡的IPV6位置";
+            this.button3.Text = "網路連線狀態";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -121,7 +121,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(217, 42);
             this.button6.TabIndex = 6;
-            this.button6.Text = "網路連線狀態";
+            this.button6.Text = "取得自己的 IP";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -132,7 +132,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(217, 42);
             this.button7.TabIndex = 7;
-            this.button7.Text = "取得網路上的圖片並顯示";
+            this.button7.Text = "找出本機IP";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -143,17 +143,18 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(217, 42);
             this.button8.TabIndex = 8;
-            this.button8.Text = "找出本機IP";
+            this.button8.Text = "取得網卡的IPV6位置";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button9.Location = new System.Drawing.Point(12, 446);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(217, 42);
             this.button9.TabIndex = 9;
+            this.button9.Text = "取得網路上的圖片並顯示";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -175,7 +176,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(217, 42);
             this.button11.TabIndex = 12;
-            this.button11.Text = "網路連線檢查";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -186,7 +186,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(217, 42);
             this.button12.TabIndex = 13;
-            this.button12.Text = "取得自己的 IP";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -197,7 +196,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(219, 42);
             this.button13.TabIndex = 14;
-            this.button13.Text = "C# 網路連線檢查";
+            this.button13.Text = "網路連線檢查";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

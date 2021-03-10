@@ -131,23 +131,27 @@ namespace vcs_Network1
                 richTextBox1.Text += host + "\t無法連線\n";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        //網路連線狀態
+        [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
+        public extern static bool InternetGetConnectedState(out int conState, int reder);
+        //參數說明 constate 連接說明 ，reder保留值
+        public bool IsConnectedToInternet()
         {
-            //取得網卡的IPV6位置
-            foreach (var ip in GetLocalIPV6IP())
-            {
-                richTextBox1.Text += "ip = " + ip.ToString() + "\n";
-            }
+            int Desc = 0;
+            return InternetGetConnectedState(out  Desc, 0);
         }
 
-        private static IEnumerable<String> GetLocalIPV6IP()
+        private void button3_Click(object sender, EventArgs e)
         {
-            return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
-                    where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
-                    from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
-                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
-                    let ipAddress = AddressInfo.Address.ToString()
-                    select ipAddress);
+            //網路連線狀態
+            if (IsConnectedToInternet())
+            {
+                richTextBox1.Text += "已連接在網上!\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未連接在網上!!\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -186,56 +190,28 @@ namespace vcs_Network1
             }
         }
 
-        //網路連線狀態
-        [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
-        public extern static bool InternetGetConnectedState(out int conState, int reder);
-        //參數說明 constate 連接說明 ，reder保留值
-        public bool IsConnectedToInternet()
-        {
-            int Desc = 0;
-            return InternetGetConnectedState(out  Desc, 0);
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
-            //網路連線狀態
-            if (IsConnectedToInternet())
+            IPAddress ip = GetIP();
+            if (ip != null)
             {
-                richTextBox1.Text += "已連接在網上!\n";
-            }
-            else
-            {
-                richTextBox1.Text += "未連接在網上!!\n";
+                richTextBox1.Text += "IP : " + ip.ToString() + "\n";
             }
         }
 
-        string pic1 = "http://www.myson.com.tw/images/index/ad01.jpg";
-        string pic2 = "http://www.myson.com.tw/images/index/ad02.jpg";
-        string pic3 = "http://www.myson.com.tw/images/index/ad03.jpg";
-        string pic4 = "http://www.myson.com.tw/images/index/ad04.jpg";
-        int select = 1;
+        IPAddress GetIP()
+        {
+            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip;
+                }
+            }
+            return null;
+        }
 
         private void button7_Click(object sender, EventArgs e)
-        {
-            switch (select)
-            {
-                case 1:
-                    pictureBox1.ImageLocation = pic1; break;
-                case 2:
-                    pictureBox1.ImageLocation = pic2; break;
-                case 3:
-                    pictureBox1.ImageLocation = pic3; break;
-                case 4:
-                    pictureBox1.ImageLocation = pic4; break;
-                default:
-                    pictureBox1.ImageLocation = pic1; break;
-            }
-            select++;
-            if (select > 4)
-                select = 1;
-        }
-
-        private void button8_Click(object sender, EventArgs e)
         {
             string my_ip = MyIP();
             richTextBox1.Text += "My IP : " + my_ip + "\n";
@@ -258,9 +234,50 @@ namespace vcs_Network1
             return ipv4_addr;
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //取得網卡的IPV6位置
+            foreach (var ip in GetLocalIPV6IP())
+            {
+                richTextBox1.Text += "ip = " + ip.ToString() + "\n";
+            }
+        }
+
+        private static IEnumerable<String> GetLocalIPV6IP()
+        {
+            return (from adapter in NetworkInterface.GetAllNetworkInterfaces()
+                    where adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet
+                    from AddressInfo in adapter.GetIPProperties().UnicastAddresses.OfType<UnicastIPAddressInformation>()
+                    where AddressInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6
+                    let ipAddress = AddressInfo.Address.ToString()
+                    select ipAddress);
+        }
+
+        string pic1 = "http://www.myson.com.tw/images/index/ad01.jpg";
+        string pic2 = "http://www.myson.com.tw/images/index/ad02.jpg";
+        string pic3 = "http://www.myson.com.tw/images/index/ad03.jpg";
+        string pic4 = "http://www.myson.com.tw/images/index/ad04.jpg";
+        int select = 1;
         private void button9_Click(object sender, EventArgs e)
         {
+            //取得網路上的圖片並顯示
 
+            switch (select)
+            {
+                case 1:
+                    pictureBox1.ImageLocation = pic1; break;
+                case 2:
+                    pictureBox1.ImageLocation = pic2; break;
+                case 3:
+                    pictureBox1.ImageLocation = pic3; break;
+                case 4:
+                    pictureBox1.ImageLocation = pic4; break;
+                default:
+                    pictureBox1.ImageLocation = pic1; break;
+            }
+            select++;
+            if (select > 4)
+                select = 1;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -274,38 +291,10 @@ namespace vcs_Network1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //C# 可以實作 ping 網路連線檢查
-            //INIT PING OBJECT
-            System.Net.NetworkInformation.Ping objPing = new System.Net.NetworkInformation.Ping();
-
-            //設定測試連線及逾時時間
-            System.Net.NetworkInformation.PingReply PingResult = objPing.Send("www.google.com.tw", 5000);
-
-            //取得結果
-            string pingMsg = (PingResult.Status == System.Net.NetworkInformation.IPStatus.Success) ? "連線成功" : "無法連線";
-
-            richTextBox1.Text += pingMsg + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            IPAddress ip = GetIP();
-            if (ip != null)
-            {
-                richTextBox1.Text += "IP : " + ip.ToString() + "\n";
-            }
-        }
-
-        IPAddress GetIP()
-        {
-            foreach (IPAddress ip in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip;
-                }
-            }
-            return null;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -349,6 +338,7 @@ namespace vcs_Network1
                 return false;
             }
         }
+
     }
 }
 

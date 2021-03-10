@@ -28,6 +28,7 @@ namespace vcs_FindFile
             //在Form1_Load時把資料讀出來
             txtDirectory.Text = Properties.Settings.Default.Directory;
 
+            /*
             //檢查文字檔所在的資料夾
             //string Path = Application.StartupPath + "\\data";
             //string Path = @"C:\______test_files\__RW\_txt\vcs_FindFile_data";
@@ -41,6 +42,7 @@ namespace vcs_FindFile
             }
             else
                 richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            */
 
             find_files();
             load_data();

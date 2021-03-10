@@ -37,11 +37,6 @@ namespace WindowsFormsApplication1ttttt
 
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             using (WebClient webClient = new WebClient())
@@ -137,57 +132,6 @@ namespace WindowsFormsApplication1ttttt
 
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            string myip = GetMyIP();
-            richTextBox1.Text += "my ip is " + myip + "\n";
-        }
-
-        private string GetMyIP()
-        {
-            string hn = Dns.GetHostName();
-            IPAddress[] ip = Dns.GetHostEntry(hn).AddressList;
-            foreach (IPAddress it in ip)
-            {
-                return it.ToString();
-
-            }
-            return "";
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            string str = "ABCDE";
-            //GetBytes : 把字串翻譯成Byte陣列
-            byte[] B = Encoding.Default.GetBytes(str);
-            richTextBox1.Text += "len = " + B.Length.ToString() + "\n";
-            PrintHexBytes(B);
-            /*
-            int i;
-            for (i = 0; i < B.Length; i++)
-            {
-                richTextBox1.Text += B[i].ToString("X2") + "\n";
-
-            }
-            */
-        }
-
-
-        public void PrintHexBytes(byte[] bytes)
-        {
-            if ((bytes == null) || (bytes.Length == 0))
-            {
-                richTextBox1.Text += "<none>";
-            }
-            else
-            {
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    richTextBox1.Text += bytes[i].ToString("X2") + "\n";
-                }
-                //Console.WriteLine();
-            }
-        }
 
 
     }
