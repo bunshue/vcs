@@ -229,12 +229,51 @@ namespace vcs_test_all_06_System2
             if (reply.Status == IPStatus.Success)
             {
                 MessageBox.Show("ok");
-            } 
+            }
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Environment 類別使用\n";
+            richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
+            richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "處理序的結束代碼：" + Environment.ExitCode + "\n";
+            richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
+            richTextBox1.Text += "NetBIOS名稱：" + Environment.MachineName + "\n";
+            richTextBox1.Text += "環境定義的新字串：" + Environment.NewLine + "\n";
+            richTextBox1.Text += "作業系統平台：" + Environment.OSVersion.Platform + "\n";
+            richTextBox1.Text += "Service Pack版本：" + Environment.OSVersion.ServicePack + "\n";
+            richTextBox1.Text += "作業系統版本：" + Environment.OSVersion.Version + "\n";
+            richTextBox1.Text += "串連字串表示：" + Environment.OSVersion.VersionString + "\n";
+            richTextBox1.Text += "處理器數目：" + Environment.ProcessorCount + "\n";
+            richTextBox1.Text += "堆疊追蹤資訊：" + Environment.StackTrace + "\n";
+            richTextBox1.Text += "系統目錄完整路徑：" + Environment.SystemDirectory + "\n";
+            richTextBox1.Text += "系統啟動後的毫秒數：" + Environment.TickCount + "\n";
+            richTextBox1.Text += "使用者網域名稱：" + Environment.UserDomainName + "\n";
+            richTextBox1.Text += "處理序是否與使用者互動：" + Environment.UserInteractive + "\n";
+            richTextBox1.Text += "使用者名稱：" + Environment.UserName + "\n";
+            richTextBox1.Text += "Version：" + Environment.Version + "\n";
+            richTextBox1.Text += "組件元件值：" + Environment.Version.Build + "\n";
+            richTextBox1.Text += "主要元件值：" + Environment.Version.Major + "\n";
+            richTextBox1.Text += "修訂編號的高 16 位元：" + Environment.Version.MajorRevision + "\n";
+            richTextBox1.Text += "次要元件值：" + Environment.Version.Minor + "\n";
+            richTextBox1.Text += "修訂編號的低 16 位元：" + Environment.Version.MinorRevision + "\n";
+            richTextBox1.Text += "修訂元件值：" + Environment.Version.Revision + "\n";
+            richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
+
+            string strFinal;
+            string strQuery = "系統磁碟機：%SystemDrive% 與 系統根目錄：%SystemRoot%";
+            strFinal = Environment.ExpandEnvironmentVariables(strQuery);
+            richTextBox1.Text += strFinal + "\n";
+
+            string[] arguments = Environment.GetCommandLineArgs();
+            richTextBox1.Text += string.Format("取得命令列的Args: {0}", string.Join(", ", arguments)) + "\n";
+
+            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System);
+
+            string[] drives = Environment.GetLogicalDrives();
+            richTextBox1.Text += string.Format("系統磁碟機：{0}", string.Join(", ", drives)) + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -309,7 +348,7 @@ namespace vcs_test_all_06_System2
             foreach (Process p in ps)
             {
                 richTextBox1.Text += String.Format("{0} \tID:{1}", p.ProcessName, p.Id) + "\n";
-            } 
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -464,8 +503,5 @@ namespace vcs_test_all_06_System2
         private void button43_Click(object sender, EventArgs e)
         {
         }
-
-
-
     }
 }

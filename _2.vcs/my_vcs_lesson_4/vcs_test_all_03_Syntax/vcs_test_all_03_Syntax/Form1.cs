@@ -153,6 +153,12 @@ namespace vcs_test_all_03_Syntax
             groupBox4.Location = new Point(x_st + dx * 9, y_st + dy * 3);
             groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 20);
 
+
+            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
+            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+
+            /*
             label1.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 7);
             label2.Location = new Point(x_st + dx * 1 / 2, y_st + dy * 7);
             label3.Location = new Point(x_st + dx * 2 / 2, y_st + dy * 7);
@@ -164,6 +170,7 @@ namespace vcs_test_all_03_Syntax
             label8.Location = new Point(x_st + dx * 2 / 2, y_st + dy * 8);
             label9.Location = new Point(x_st + dx * 3 / 2, y_st + dy * 8);
             label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
+            */
 
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 7);
             richTextBox1.Size = new Size(750, 700);

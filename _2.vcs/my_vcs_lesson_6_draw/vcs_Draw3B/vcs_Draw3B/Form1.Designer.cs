@@ -107,15 +107,15 @@
             this.pictureBox_spiral.BackColor = System.Drawing.Color.Pink;
             this.pictureBox_spiral.Location = new System.Drawing.Point(12, 12);
             this.pictureBox_spiral.Name = "pictureBox_spiral";
-            this.pictureBox_spiral.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox_spiral.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_spiral.TabIndex = 55;
             this.pictureBox_spiral.TabStop = false;
             // 
             // pictureBox_ellipse
             // 
-            this.pictureBox_ellipse.Location = new System.Drawing.Point(287, 12);
+            this.pictureBox_ellipse.Location = new System.Drawing.Point(12, 87);
             this.pictureBox_ellipse.Name = "pictureBox_ellipse";
-            this.pictureBox_ellipse.Size = new System.Drawing.Size(350, 200);
+            this.pictureBox_ellipse.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_ellipse.TabIndex = 56;
             this.pictureBox_ellipse.TabStop = false;
             // 
@@ -128,9 +128,9 @@
             // pictureBox_star
             // 
             this.pictureBox_star.BackColor = System.Drawing.Color.White;
-            this.pictureBox_star.Location = new System.Drawing.Point(657, 12);
+            this.pictureBox_star.Location = new System.Drawing.Point(91, 12);
             this.pictureBox_star.Name = "pictureBox_star";
-            this.pictureBox_star.Size = new System.Drawing.Size(121, 118);
+            this.pictureBox_star.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_star.TabIndex = 57;
             this.pictureBox_star.TabStop = false;
             // 
@@ -143,9 +143,9 @@
             // pictureBox_polygon
             // 
             this.pictureBox_polygon.BackColor = System.Drawing.Color.White;
-            this.pictureBox_polygon.Location = new System.Drawing.Point(784, 12);
+            this.pictureBox_polygon.Location = new System.Drawing.Point(166, 12);
             this.pictureBox_polygon.Name = "pictureBox_polygon";
-            this.pictureBox_polygon.Size = new System.Drawing.Size(112, 118);
+            this.pictureBox_polygon.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_polygon.TabIndex = 58;
             this.pictureBox_polygon.TabStop = false;
             // 
@@ -160,25 +160,25 @@
             this.pictureBox_captcha3.BackColor = System.Drawing.Color.Pink;
             this.pictureBox_captcha3.Location = new System.Drawing.Point(12, 568);
             this.pictureBox_captcha3.Name = "pictureBox_captcha3";
-            this.pictureBox_captcha3.Size = new System.Drawing.Size(300, 100);
+            this.pictureBox_captcha3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_captcha3.TabIndex = 61;
             this.pictureBox_captcha3.TabStop = false;
             // 
             // pictureBox_captcha2
             // 
             this.pictureBox_captcha2.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_captcha2.Location = new System.Drawing.Point(12, 462);
+            this.pictureBox_captcha2.Location = new System.Drawing.Point(12, 511);
             this.pictureBox_captcha2.Name = "pictureBox_captcha2";
-            this.pictureBox_captcha2.Size = new System.Drawing.Size(300, 100);
+            this.pictureBox_captcha2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_captcha2.TabIndex = 60;
             this.pictureBox_captcha2.TabStop = false;
             // 
             // pictureBox_captcha1
             // 
             this.pictureBox_captcha1.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_captcha1.Location = new System.Drawing.Point(12, 356);
+            this.pictureBox_captcha1.Location = new System.Drawing.Point(12, 455);
             this.pictureBox_captcha1.Name = "pictureBox_captcha1";
-            this.pictureBox_captcha1.Size = new System.Drawing.Size(300, 100);
+            this.pictureBox_captcha1.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_captcha1.TabIndex = 59;
             this.pictureBox_captcha1.TabStop = false;
             // 
@@ -192,7 +192,7 @@
             // 
             this.pictureBox_rectangle.Location = new System.Drawing.Point(939, 511);
             this.pictureBox_rectangle.Name = "pictureBox_rectangle";
-            this.pictureBox_rectangle.Size = new System.Drawing.Size(608, 380);
+            this.pictureBox_rectangle.Size = new System.Drawing.Size(600, 350);
             this.pictureBox_rectangle.TabIndex = 62;
             this.pictureBox_rectangle.TabStop = false;
             // 
@@ -205,9 +205,9 @@
             // pictureBox_random_pixel_image
             // 
             this.pictureBox_random_pixel_image.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_random_pixel_image.Location = new System.Drawing.Point(12, 674);
+            this.pictureBox_random_pixel_image.Location = new System.Drawing.Point(12, 624);
             this.pictureBox_random_pixel_image.Name = "pictureBox_random_pixel_image";
-            this.pictureBox_random_pixel_image.Size = new System.Drawing.Size(300, 100);
+            this.pictureBox_random_pixel_image.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_random_pixel_image.TabIndex = 63;
             this.pictureBox_random_pixel_image.TabStop = false;
             // 
@@ -219,7 +219,7 @@
             // 
             // pictureBox_progressbar
             // 
-            this.pictureBox_progressbar.Location = new System.Drawing.Point(369, 322);
+            this.pictureBox_progressbar.Location = new System.Drawing.Point(514, 320);
             this.pictureBox_progressbar.Name = "pictureBox_progressbar";
             this.pictureBox_progressbar.Size = new System.Drawing.Size(543, 86);
             this.pictureBox_progressbar.TabIndex = 64;
@@ -233,7 +233,7 @@
             // pictureBox_word
             // 
             this.pictureBox_word.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_word.Location = new System.Drawing.Point(329, 654);
+            this.pictureBox_word.Location = new System.Drawing.Point(91, 624);
             this.pictureBox_word.Name = "pictureBox_word";
             this.pictureBox_word.Size = new System.Drawing.Size(120, 120);
             this.pictureBox_word.TabIndex = 65;
@@ -307,9 +307,9 @@
             // pictureBox_brown
             // 
             this.pictureBox_brown.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_brown.Location = new System.Drawing.Point(479, 654);
+            this.pictureBox_brown.Location = new System.Drawing.Point(244, 12);
             this.pictureBox_brown.Name = "pictureBox_brown";
-            this.pictureBox_brown.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox_brown.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_brown.TabIndex = 67;
             this.pictureBox_brown.TabStop = false;
             // 
@@ -322,9 +322,9 @@
             // pictureBox_round
             // 
             this.pictureBox_round.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_round.Location = new System.Drawing.Point(620, 654);
+            this.pictureBox_round.Location = new System.Drawing.Point(329, 12);
             this.pictureBox_round.Name = "pictureBox_round";
-            this.pictureBox_round.Size = new System.Drawing.Size(120, 120);
+            this.pictureBox_round.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_round.TabIndex = 68;
             this.pictureBox_round.TabStop = false;
             // 

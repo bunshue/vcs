@@ -15,6 +15,9 @@ namespace vcs_Draw3B
 {
     public partial class Form1 : Form
     {
+        int W = 250;
+        int H = 250;
+
         //for random color ST
         //Reference : https://home.gamer.com.tw/creationDetail.php?sn=4281924
         private Label[] lb_color = new Label[101];
@@ -88,37 +91,62 @@ namespace vcs_Draw3B
 
         void show_item_location()
         {
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+
             int x_st;
             int y_st;
             int dx;
             int dy;
 
-            //button
             x_st = 20;
             y_st = 20;
             dx = 160;
             dy = 50;
 
-            pictureBox_star.Size = new Size(250, 250);
-            pictureBox_polygon.Size = new Size(250, 250);
+            pictureBox_spiral.Size = new Size(W, H);
+            pictureBox_star.Size = new Size(W, H);
+            pictureBox_polygon.Size = new Size(W, H);
+            pictureBox_brown.Size = new Size(W, H);
+            pictureBox_round.Size = new Size(W, H);
+            pictureBox_ellipse.Size = new Size(350, 200);
 
-            pictureBox_star.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            pictureBox_polygon.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 9, y_st + dy * 0);
+            pictureBox_captcha1.Size = new Size(W + 50, 110);
+            pictureBox_captcha2.Size = new Size(W + 50, 110);
+            pictureBox_captcha3.Size = new Size(W + 50, 110);
+            pictureBox_random_pixel_image.Size = new Size(W + 50, 110);
+            pictureBox_progressbar.Size = new Size(600, 100);
+            pictureBox_rectangle.Size = new Size(600, 350);
 
-            pictureBox_brown.Size = new Size(250, 250);
-            pictureBox_brown.Location = new Point(x_st + dx * 0, y_st + dy * 16);
+            x_st = 10;
+            y_st = 10;
+            dx = W + 70;
+            dy = H + 45;
 
-            pictureBox_round.Size = new Size(250, 250);
-            pictureBox_round.Location = new Point(x_st + dx * 1+95, y_st + dy * 16);
+            pictureBox_spiral.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox_star.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox_polygon.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox_brown.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox_round.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            pictureBox_ellipse.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox_captcha1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            pictureBox_captcha2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120);
+            pictureBox_captcha3.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120 * 2);
+            pictureBox_random_pixel_image.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120 * 3);
+            pictureBox_word.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 120 * 3);
+
+            pictureBox_progressbar.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 80-100);
+            pictureBox_rectangle.Location = new Point(x_st + dx * 3-80, y_st + dy * 2+100);
 
             x_st = 1810;
             y_st = 80;
             dx = 120;
             dy = 50;
 
-            richTextBox1.Location = new Point(x_st + dx * 0 - 200, y_st + dy * 12);
-            richTextBox1.Size = new Size(300, 320);
+            richTextBox1.Location = new Point(x_st + dx * 0 - 300, y_st + dy * 12);
+            richTextBox1.Size = new Size(400, 380);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -217,14 +245,14 @@ namespace vcs_Draw3B
             {
                 Application.DoEvents();
             }
-        } 
+        }
 
 
         //for random color ST
         void draw_random_color()
         {
-            int x_st = 530;
-            int y_st = 430;
+            int x_st = 470;
+            int y_st = 670;
             int WIDTH = 40;
             for (int i = 1; i < lb_color.Length; i++)
             {
@@ -749,7 +777,6 @@ namespace vcs_Draw3B
             draw_color_rectangles();
         }
 
-
         void draw_random_pixel_image()
         {
             int W = pictureBox_random_pixel_image.ClientSize.Width;
@@ -785,8 +812,6 @@ namespace vcs_Draw3B
         {
             draw_random_pixel_image();
         }
-
-
 
         private void timer_progressbar_Tick(object sender, EventArgs e)
         {
@@ -1246,7 +1271,7 @@ namespace vcs_Draw3B
         private void timer_round_Tick(object sender, EventArgs e)
         {
             draw_spin_signal();
-        }
 
+        }
     }
 }
