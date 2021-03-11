@@ -468,11 +468,14 @@ namespace vcs_WebClient
             richTextBox1.Clear();
         }
 
-
-
         //下載NASA網頁的圖片 ST
         private void button5_Click(object sender, EventArgs e)
         {
+            //目前Kilo不可用
+            //目前Romeo不可用
+
+            //目前Sugar可用
+
             Cursor = Cursors.WaitCursor;
             get_nasa_picture();
             Cursor = Cursors.Default;

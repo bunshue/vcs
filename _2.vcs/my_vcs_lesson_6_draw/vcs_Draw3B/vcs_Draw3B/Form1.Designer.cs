@@ -61,6 +61,7 @@
             this.timer_brown = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_round = new System.Windows.Forms.PictureBox();
             this.timer_round = new System.Windows.Forms.Timer(this.components);
+            this.timer_spiral = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spiral)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ellipse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
@@ -104,7 +105,7 @@
             // 
             // pictureBox_spiral
             // 
-            this.pictureBox_spiral.BackColor = System.Drawing.Color.Pink;
+            this.pictureBox_spiral.BackColor = System.Drawing.Color.White;
             this.pictureBox_spiral.Location = new System.Drawing.Point(12, 12);
             this.pictureBox_spiral.Name = "pictureBox_spiral";
             this.pictureBox_spiral.Size = new System.Drawing.Size(50, 50);
@@ -190,9 +191,9 @@
             // 
             // pictureBox_rectangle
             // 
-            this.pictureBox_rectangle.Location = new System.Drawing.Point(939, 511);
+            this.pictureBox_rectangle.Location = new System.Drawing.Point(68, 511);
             this.pictureBox_rectangle.Name = "pictureBox_rectangle";
-            this.pictureBox_rectangle.Size = new System.Drawing.Size(600, 350);
+            this.pictureBox_rectangle.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_rectangle.TabIndex = 62;
             this.pictureBox_rectangle.TabStop = false;
             // 
@@ -219,9 +220,9 @@
             // 
             // pictureBox_progressbar
             // 
-            this.pictureBox_progressbar.Location = new System.Drawing.Point(514, 320);
+            this.pictureBox_progressbar.Location = new System.Drawing.Point(68, 455);
             this.pictureBox_progressbar.Name = "pictureBox_progressbar";
-            this.pictureBox_progressbar.Size = new System.Drawing.Size(543, 86);
+            this.pictureBox_progressbar.Size = new System.Drawing.Size(50, 50);
             this.pictureBox_progressbar.TabIndex = 64;
             this.pictureBox_progressbar.TabStop = false;
             // 
@@ -334,6 +335,10 @@
             this.timer_round.Interval = 1000;
             this.timer_round.Tick += new System.EventHandler(this.timer_round_Tick);
             // 
+            // timer_spiral
+            // 
+            this.timer_spiral.Tick += new System.EventHandler(this.timer_spiral_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -413,6 +418,7 @@
         private System.Windows.Forms.Timer timer_brown;
         private System.Windows.Forms.PictureBox pictureBox_round;
         private System.Windows.Forms.Timer timer_round;
+        private System.Windows.Forms.Timer timer_spiral;
     }
 }
 

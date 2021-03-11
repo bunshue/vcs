@@ -26,12 +26,12 @@ namespace vcs_Draw3B
         private int lb_color_x = 0, lb_color_y = 0;
         //for random color SP
 
+        Graphics g_spiral;  //for draw spiral
         Graphics ge;    //for draw ellipse
         Graphics gs;    //for draw star
         private const int EllipseMargin = 10;
         private int EllipseCx, EllipseCy, EllipseWidth, EllipseHeight;
         private List<PointF> LinePoints = null;
-
 
         double pbUnit;
         int W_progressbar;
@@ -79,6 +79,10 @@ namespace vcs_Draw3B
             timer_word.Enabled = true;
             #endregion
 
+            g_spiral = pictureBox_spiral.CreateGraphics();
+            draw_spiral();
+            timer_spiral.Enabled = true;
+
             ge = pictureBox_ellipse.CreateGraphics();
             gs = pictureBox_star.CreateGraphics();
             // Calculate the ellipse parameters.
@@ -86,7 +90,6 @@ namespace vcs_Draw3B
             EllipseHeight = this.pictureBox_ellipse.ClientSize.Height - 2 * EllipseMargin;
 
             draw_random_color();
-            draw_spiral();
         }
 
         void show_item_location()
@@ -129,16 +132,16 @@ namespace vcs_Draw3B
             pictureBox_polygon.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_brown.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_round.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            pictureBox_ellipse.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
+            pictureBox_ellipse.Location = new Point(x_st + dx * 4 - 40, y_st + dy * 1);
             pictureBox_captcha1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox_captcha2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120);
             pictureBox_captcha3.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120 * 2);
             pictureBox_random_pixel_image.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120 * 3);
             pictureBox_word.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 120 * 3);
 
-            pictureBox_progressbar.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 80-100);
-            pictureBox_rectangle.Location = new Point(x_st + dx * 3-80, y_st + dy * 2+100);
+            pictureBox_progressbar.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 80 - 100);
+            pictureBox_rectangle.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 100);
 
             x_st = 1810;
             y_st = 80;
@@ -191,33 +194,6 @@ namespace vcs_Draw3B
             richTextBox1.Clear();
         }
 
-        void draw_spiral()
-        {
-            int W = pictureBox_spiral.ClientSize.Width;
-            int H = pictureBox_spiral.ClientSize.Height;
-
-            //螺旋
-            Graphics g = pictureBox_spiral.CreateGraphics();
-            int r = 50;
-            int cx = W / 2;
-            int cy = H / 2;
-            int dx;
-            int dy;
-            for (int i = 0; i < 360 * 3; i += 10)
-            {
-                dx = (int)(r * Math.Cos(i * Math.PI / 180));
-                dy = (int)(r * Math.Sin(i * Math.PI / 180));
-                cx = 100 + dx;
-                cy = 100 + dy;
-                DrawPoint(g, cx, cy, 5, Color.Red);
-                delay(20);
-                if ((i % 100) == 0)
-                {
-                    r += 5;
-                }
-            }
-            //g.DrawLine(Pens.Red, 0, 0, 100, 100);
-        }
         private void DrawPoint(Graphics g, int cx, int cy, int size, Color c)
         {
             // Create a new pen.
@@ -261,9 +237,9 @@ namespace vcs_Draw3B
                 lb_color[i].Height = WIDTH;
                 lb_color[i].Text = " ";
                 lb_color[i].Location = new Point(x_st + lb_color_x, y_st + lb_color_y);
-                _R = r.Next(255);
-                _G = r.Next(255);
-                _B = r.Next(255);
+                _R = r.Next(256);
+                _G = r.Next(256);
+                _B = r.Next(256);
                 lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
                 this.Controls.Add(lb_color[i]);
                 lb_color_x += WIDTH;
@@ -281,9 +257,9 @@ namespace vcs_Draw3B
         {
             for (int i = 1; i < lb_color.Length; i++)
             {
-                _R = r.Next(255);
-                _G = r.Next(255);
-                _B = r.Next(255);
+                _R = r.Next(256);
+                _G = r.Next(256);
+                _B = r.Next(256);
                 lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
             }
         }
@@ -346,7 +322,11 @@ namespace vcs_Draw3B
             Point center = new Point();
 
             center = new Point(pictureBox_star.Width / 2, pictureBox_star.Height / 2);
-            DrawStar(gs, center, radius, linewidth, Color.Red);
+
+            Random rr = new Random();
+
+            DrawStar(gs, center, radius, linewidth, Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256)));
+
             radius += 5;
             if (radius > 120)
             {
@@ -387,13 +367,13 @@ namespace vcs_Draw3B
                 pt[i].X = (int)(r * Math.Cos(angle * Math.PI / 180));
                 pt[i].Y = (int)(r * Math.Sin(angle * Math.PI / 180));
 
-                richTextBox1.Text += "pt[" + i.ToString() + "].X " + pt[i].X.ToString() + "\t" + "pt[" + i.ToString() + "].Y " + pt[i].Y.ToString() + "\n";
+                //richTextBox1.Text += "pt[" + i.ToString() + "].X " + pt[i].X.ToString() + "\t" + "pt[" + i.ToString() + "].Y " + pt[i].Y.ToString() + "\n";
                 pt[i].X += center.X;
                 pt[i].Y += center.Y;
             }
 
-            g.DrawPolygon(new Pen(Brushes.Red, linewidth), pt);     //空心星形
-            //g.FillPolygon(Brushes.Blue, pt);                      //實心星形
+            g.DrawPolygon(p, pt);                       //空心星形
+            //g.FillPolygon(Brushes.Blue, pt);          //實心星形
 
             //Dispose of the pen.
             p.Dispose();
@@ -479,14 +459,14 @@ namespace vcs_Draw3B
 
             for (i = 0; i < n; i++)
             {
-                richTextBox1.Text += "points[" + i.ToString() + "], X = " + points[i].X + ", Y = " + points[i].Y + "\n";
+                //richTextBox1.Text += "points[" + i.ToString() + "], X = " + points[i].X + ", Y = " + points[i].Y + "\n";
             }
 
             for (i = 0; i < n; i++)
             {
                 for (j = (i + 1); j < n; j++)
                 {
-                    richTextBox1.Text += "draw " + i.ToString() + " - " + j.ToString() + "\n";
+                    //richTextBox1.Text += "draw " + i.ToString() + " - " + j.ToString() + "\n";
                     g.DrawLine(p, points[i], points[j]);
                 }
             }
@@ -587,7 +567,7 @@ namespace vcs_Draw3B
                 char c = texts[rr.Next(texts.Length)];
                 vaildNumAnswer += c;
             }
-            richTextBox1.Text += vaildNumAnswer + "\n";
+            //richTextBox1.Text += vaildNumAnswer + "\n";
 
             RenderImage(vaildNumAnswer);
         }
@@ -843,7 +823,6 @@ namespace vcs_Draw3B
             }
         }
 
-
         #region 畫字
         void draw_word()
         {
@@ -857,7 +836,7 @@ namespace vcs_Draw3B
             tmp_width = gw.MeasureString(str, f).ToSize().Width;
             tmp_height = gw.MeasureString(str, f).ToSize().Height;
 
-            richTextBox1.Text += tmp_width.ToString() + " " + tmp_height.ToString() + "\n";
+            //richTextBox1.Text += tmp_width.ToString() + " " + tmp_height.ToString() + "\n";
 
             gw.Clear(Color.LightGray);
             gw.DrawRectangle(Pens.Red, 0, 0, tmp_width - 1, tmp_height - 1);
@@ -1201,7 +1180,6 @@ namespace vcs_Draw3B
             g.Clear(Color.White);
             pictureBox_brown.Image = bitmap1;
 
-
             g.DrawLines(Pens.Red, pt);
 
             int r = 5;
@@ -1271,7 +1249,49 @@ namespace vcs_Draw3B
         private void timer_round_Tick(object sender, EventArgs e)
         {
             draw_spin_signal();
+        }
 
+        int angle = 0;
+        int rr = 30;
+        void draw_spiral()
+        {
+            if (angle == 0)
+            {
+                g_spiral.Clear(Color.White);
+            }
+
+            int W = pictureBox_spiral.ClientSize.Width;
+            int H = pictureBox_spiral.ClientSize.Height;
+
+            //螺旋
+            int cx = W / 2;
+            int cy = H / 2;
+            int dx;
+            int dy;
+            int x_st = 0;
+            int y_st = 0;
+            dx = (int)(rr * Math.Cos(angle * Math.PI / 180));
+            dy = (int)(rr * Math.Sin(angle * Math.PI / 180));
+            x_st = cx + dx;
+            y_st = cy + dy;
+
+            Random rand = new Random();
+            DrawPoint(g_spiral, x_st, y_st, 5, Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)));
+
+            if ((angle % 30) == 0)
+                rr++;
+
+            angle += 10;
+            if (angle >= 3000)
+            {
+                angle = 0;
+                rr = 30;
+            }
+        }
+
+        private void timer_spiral_Tick(object sender, EventArgs e)
+        {
+            draw_spiral();
         }
     }
 }
