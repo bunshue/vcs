@@ -12,7 +12,7 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 
-//HttpUtility
+using System.Globalization; //for CultureInfo
 
 namespace vcs_test_all_99_tmp1
 {
@@ -479,6 +479,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "抓取目前應用程式路徑: \t" + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -605,7 +606,7 @@ namespace vcs_test_all_99_tmp1
 
         private void button18_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "僅顯示上下午幾點幾分幾秒:\t" + DateTime.Now.ToString("T") + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -716,21 +717,71 @@ namespace vcs_test_all_99_tmp1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //特殊的字串解碼
 
+            /*三組字串
+            =?big5?B?W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=?=
+            =?gb2312?B?S0BNUyDpX7Bs7ZjQ8g==?=
+            =?utf-8?b?N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==?=
+            */
+            string str1 = "W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=";
+            string str2 = "S0BNUyDpX7Bs7ZjQ8g==";
+            string str3 = "N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==";
+
+            string strParser1 = Encoding.GetEncoding("big5").GetString(Convert.FromBase64String(str1));
+            string strParser2 = Encoding.GetEncoding("gb2312").GetString(Convert.FromBase64String(str2));
+            string strParser3 = Encoding.GetEncoding("utf-8").GetString(Convert.FromBase64String(str3));
+
+            richTextBox1.Text += "strParser1 = " + strParser1 + "\n";
+            richTextBox1.Text += "strParser2 = " + strParser2 + "\n";
+            richTextBox1.Text += "strParser3 = " + strParser3 + "\n";
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            string str1 = "20091014223600";
+            IFormatProvider ifp = new CultureInfo("zh-TW", true);
+            DateTime dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
+
+            richTextBox1.Text += "原字串:\t" + str1 + "\n";
+            richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
+            //MessageBox.Show(dt1.ToString());
+
+
+            string str2 = "20091014223600";
+            DateTime dt2;
+            DateTime dtNow = DateTime.Now;
+            richTextBox1.Text += "原字串:\t" + str2 + "\n";
+            //IFormatProvider ifp = new CultureInfo("zh-TW", true);
+            if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2))
+            {
+                //MessageBox.Show(dt2.ToString());
+                richTextBox1.Text += "解讀後1:\t" + dt2.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
+                //MessageBox.Show(dtNow.ToString());
+            }
 
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            string animal1 = "Cats";
+            string animal2 = "dogs";
+            string result = string.Format("{0} and {1} are animals.", animal1, animal2);
+            richTextBox1.Text += "string.Format 的用法\n結果 : " + result + "\n";
+
+            string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
+            richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-
+            //表示錢號的方法
+            int n = 12345;
+            richTextBox1.Text += "新台幣 " + n.ToString("C") + " 元\n";
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -740,6 +791,16 @@ namespace vcs_test_all_99_tmp1
 
         private void button29_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            //表單的背景圖案   // Tile the image.
+            using (TextureBrush brush = new TextureBrush(new Bitmap(@"C:\______test_files\vcs_reference2\bg1.png")))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
 
         }
 

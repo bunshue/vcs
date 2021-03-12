@@ -117,6 +117,24 @@ namespace vcs_WebClient
                 richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
 
+
+            richTextBox1.Text += "\nWebClient DownloadString 4\t網路下載純文字檔案......\n";
+
+            string url = "http://jsonplaceholder.typicode.com/posts";
+
+            WebClient client2 = new WebClient();     // 建立 webclient
+            client2.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            client2.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
+
+            // 從網路 url 上取得資料
+            var result2 = client2.DownloadString(url);
+            richTextBox1.Text += result2 + "\n";
+
+
+
+
+
+
             richTextBox1.Text += "\nWebClient DownloadString 測試\t完成\n";
             this.Cursor = Cursors.Default;
         }
@@ -252,8 +270,8 @@ namespace vcs_WebClient
         {
             //WebClient DownloadData
             this.Cursor = Cursors.WaitCursor;
-
             richTextBox1.Text += "WebClient DownloadData 1\t下載一個網頁......\n";
+
             string url = "http://google.com.tw";
             //string url = "http://www.yahoo.com.tw";
             string web_data = "";
@@ -354,6 +372,27 @@ namespace vcs_WebClient
             {
                 richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
+
+            richTextBox1.Text += "\nWebClient DownloadData 4\t網頁資料下載並顯示......\n";
+            Application.DoEvents();
+
+            //string url4 = "https://www.google.com.tw/";
+            string url4 = "http://antwrp.gsfc.nasa.gov/apod/";
+            WebClient client4 = new WebClient();     // 建立 webclient
+
+            // Download home page data.
+            richTextBox1.Text += "Downloading " + url4 + " ...\n";
+
+            // Download the Web resource and save it into a data buffer.
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            byte[] myDataBuffer = client4.DownloadData(url4);
+
+            // Display the downloaded data.
+            string result4 = Encoding.ASCII.GetString(myDataBuffer);
+            richTextBox1.Text += result4 + "\n";
+
             richTextBox1.Text += "\nWebClient DownloadData 測試\t完成\n";
 
             this.Cursor = Cursors.Default;
@@ -408,13 +447,35 @@ namespace vcs_WebClient
             {
                 richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
+
+
+            richTextBox1.Text += "WebClient OpenRead\t取得網頁資料並存成檔案......2\n";
+
+            string url2 = "http://jsonplaceholder.typicode.com/posts";
+
+            WebClient client2 = new WebClient();     // 建立 webclient
+            // Add a user agent header in case the requested URI contains a query.
+            client2.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            using (Stream stream = client2.OpenRead(url2))        // 從 url2 讀取資訊至 stream
+            {
+                using (StreamReader sr = new StreamReader(stream))      // 使用 StreamReader 讀取 stream 內的字元
+                {
+                    string result2 = sr.ReadToEnd();        // 將 StreamReader 所讀到的字元轉為 string
+                    richTextBox1.Text += result2 + "\n";
+                    sr.Close();
+                }
+                stream.Close();
+            }
+
             this.Cursor = Cursors.Default;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //WebClient DownloadFile
             this.Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "WebClient DownloadFile\t取得網頁檔案......\n";
+            Application.DoEvents();
 
             string url = "";
             string filename = "";
@@ -438,6 +499,38 @@ namespace vcs_WebClient
                 DownloadFile(url, filename);
                 richTextBox1.Text += "下載完成\n";
             }
+
+
+            richTextBox1.Text += "WebClient DownloadFile\t取得網頁檔案......2\n";
+
+
+            //https://upload.wikimedia.org/wikipedia/commons/b/be/%E7%90%89%E7%90%83%E5%AE%AB%E5%BB%B7%E9%9F%B3%E4%B9%90.jpg
+            //http://www.csharphelper.com/essential_algs_2e_251_317.jpg
+            string url2 = "https://www.cwb.gov.tw/Data/satellite/";
+            string filename2 = "LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg";
+            string myStringWebResource = null;
+
+            WebClient client = new WebClient();     // 建立 webclient
+
+            //client.Encoding = Encoding.UTF8;        // 指定 WebClient 的編碼
+            client.Headers.Add(HttpRequestHeader.ContentType, "application/json");  // 指定 WebClient 的 Content-Type header
+            //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            // Concatenate the domain with the Web resource filename.
+            myStringWebResource = url2 + filename2;
+            richTextBox1.Text += "Downloading File " + filename2 + " from " + myStringWebResource + "\n";
+            // Download the Web resource and save it into the current filesystem folder.
+            try
+            {
+                client.DownloadFile(myStringWebResource, filename2);
+                richTextBox1.Text += "OK\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+
+            }
+
             this.Cursor = Cursors.Default;
         }
 

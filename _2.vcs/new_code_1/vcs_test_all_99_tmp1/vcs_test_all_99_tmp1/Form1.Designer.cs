@@ -170,7 +170,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(150, 50);
             this.button18.TabIndex = 19;
-            this.button18.Text = "xxx";
+            this.button18.Text = "僅顯示上下午幾點幾分幾秒";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -271,6 +271,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(150, 50);
             this.button13.TabIndex = 71;
+            this.button13.Text = "抓取目前應用程式路徑";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -358,6 +359,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(150, 50);
             this.button24.TabIndex = 79;
+            this.button24.Text = "特殊的字串解碼";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -368,6 +370,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(150, 50);
             this.button25.TabIndex = 80;
+            this.button25.Text = "DateTime Parse";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -378,6 +381,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(150, 50);
             this.button26.TabIndex = 81;
+            this.button26.Text = "string.Format 的用法";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -388,6 +392,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(150, 50);
             this.button27.TabIndex = 82;
+            this.button27.Text = "表示錢號的方法";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -451,6 +456,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);

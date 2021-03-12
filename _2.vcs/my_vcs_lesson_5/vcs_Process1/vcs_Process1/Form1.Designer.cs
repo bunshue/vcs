@@ -273,7 +273,9 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(142, 46);
             this.button19.TabIndex = 21;
+            this.button19.Text = "開啟檔案總管 給定參數";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // Form1
             // 

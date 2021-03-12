@@ -16,14 +16,15 @@ namespace Mosaic
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image img = Image.FromFile(filename);
+            this.BackgroundImage = img;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                Image myImage = System.Drawing.Image.FromFile(openFileDialog1.FileName);
-                this.BackgroundImage = myImage;
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -72,5 +73,6 @@ namespace Mosaic
                 }
             }
         }
+
     }
 }

@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;       //for Process
 using System.Threading;
 using System.IO;    //for File
 using System.Runtime.InteropServices;   //for DllImport
-
 using System.Drawing.Imaging;           //for PixelFormat
 
 namespace vcs_Process1
@@ -69,19 +69,19 @@ namespace vcs_Process1
         private void button0_Click(object sender, EventArgs e)
         {
             string pdf_path = "C:\\______test_files\\note_Linux_workstation.pdf";
-            Process myProcess;
-            myProcess = Process.Start(pdf_path);
-            myProcess.WaitForExit();
+            Process process;
+            process = Process.Start(pdf_path);
+            process.WaitForExit();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            myProcess = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
-            richTextBox1.Text += "ProcessName : " + myProcess.ProcessName + "\n";
-            richTextBox1.Text += "SessionId : " + myProcess.SessionId.ToString() + "\n";
-            richTextBox1.Text += "StartTime : " + myProcess.StartTime + "\n";
-            richTextBox1.Text += "Id : " + myProcess.Id.ToString() + "\n";
-
+            Process process = new Process();
+            process = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
+            richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
+            richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
+            richTextBox1.Text += "Id : " + process.Id.ToString() + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -90,7 +90,6 @@ namespace vcs_Process1
                 myProcess.Kill();
             else
                 richTextBox1.Text += " already killed ";
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -136,19 +135,19 @@ namespace vcs_Process1
 
             try
             {   //可能會產生錯誤的程式區段
-                using (Process myProcess = Process.Start("Notepad.exe"))
+                using (Process process = Process.Start("Notepad.exe"))
                 {
                     // Display physical memory usage 5 times at intervals of 2 seconds.
                     for (int i = 0; i < 10; i++)
                     {
-                        if (!myProcess.HasExited)
+                        if (!process.HasExited)
                         {
                             // Discard cached information about the process.
-                            myProcess.Refresh();
+                            process.Refresh();
                             // Print working set to console.
-                            //Console.WriteLine($"Physical Memory Usage: {myProcess.WorkingSet}");
-                            richTextBox1.Text += "Physical Memory Usage: " + myProcess.WorkingSet64.ToString() + "\n";
-                            //label1.Text = myProcess.WorkingSet64.ToString();
+                            //Console.WriteLine($"Physical Memory Usage: {process.WorkingSet}");
+                            richTextBox1.Text += "Physical Memory Usage: " + process.WorkingSet64.ToString() + "\n";
+                            //label1.Text = process.WorkingSet64.ToString();
                             // Wait 2 seconds.
                             Thread.Sleep(2000);
                         }
@@ -159,9 +158,9 @@ namespace vcs_Process1
                     }
 
                     // Close process by sending a close message to its main window.
-                    myProcess.CloseMainWindow();
+                    process.CloseMainWindow();
                     // Free resources associated with process.
-                    myProcess.Close();
+                    process.Close();
                 }
             }
             catch (Exception ex)
@@ -185,20 +184,19 @@ namespace vcs_Process1
         private void button7_Click(object sender, EventArgs e)
         {
             Process.Start("Firefox.exe");
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             try
             {
-                using (Process myProcess = new Process())
+                using (Process process = new Process())
                 {
-                    myProcess.StartInfo.UseShellExecute = false;
+                    process.StartInfo.UseShellExecute = false;
                     // You can start any process, HelloWorld is a do-nothing example.
-                    myProcess.StartInfo.FileName = @"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe";
-                    myProcess.StartInfo.CreateNoWindow = true;
-                    myProcess.Start();
+                    process.StartInfo.FileName = @"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe";
+                    process.StartInfo.CreateNoWindow = true;
+                    process.Start();
                     // This code assumes the process you are starting will terminate itself. 
                     // Given that is is started without a window so you cannot terminate it 
                     // on the desktop, it must terminate itself or you can do it programmatically
@@ -210,13 +208,12 @@ namespace vcs_Process1
             {
                 Console.WriteLine(ex.Message);
             }
-            
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //呼叫系統內建小鍵盤     fail
-            //System.Diagnostics.Process.Start("" + System.Environment.SystemDirectory + "/osk.exe");
+            //Process.Start("" + Environment.SystemDirectory + "/osk.exe");
 
             //開啟特定程式
             //Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
@@ -225,26 +222,26 @@ namespace vcs_Process1
             //Process.Start(@"C:\WINDOWS\system32\calc.exe");
 
             //開啟檔案 由預設程式開啟
-            //System.Diagnostics.Process.Start("C:\\______test_files\\my_text_file.txt");
+            //Process.Start("C:\\______test_files\\my_text_file.txt");
 
             //開啟記事本程式
-            //System.Diagnostics.Process.Start("notepad.exe");
+            //Process.Start("notepad.exe");
 
             //開啟程式
-            //System.Diagnostics.Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-            System.Diagnostics.Process.Start("winver.exe ");              //--打开Windows版本信息
+            //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
+            Process.Start("winver.exe ");              //--打開Windows版本信息
 
             //開啟imsLink
-            //System.Diagnostics.Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            //Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
 
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo();
-            processStartInfo.FileName = "explorer.exe";  //资源管理器
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            processStartInfo.FileName = "explorer.exe";  //資源管理器
             processStartInfo.Arguments = @"C:\";
-            System.Diagnostics.Process.Start(processStartInfo);
+            Process.Start(processStartInfo);
 
         }
 
@@ -252,11 +249,11 @@ namespace vcs_Process1
         {
             //開啟檔案總管
             String pathname = "C:\\";
-            System.Diagnostics.Process.Start(pathname);
+            Process.Start(pathname);
             /*
             if (Directory.Exists(this.FolderPath))
             {
-                System.Diagnostics.Process.Start(this.FolderPath);
+                Process.Start(this.FolderPath);
                 return true;
             }
             else
@@ -276,18 +273,20 @@ namespace vcs_Process1
                 return;
             }
             else
-                System.Diagnostics.Process.Start(pathname);
+            {
+                Process.Start(pathname);
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
             //列出正在執行的任務
             richTextBox1.Text = string.Empty;
-            Process[] myProcesses = Process.GetProcesses();
-            foreach (Process myProcess in myProcesses)
+            Process[] processes = Process.GetProcesses();
+            foreach (Process process in processes)
             {
-                if (myProcess.MainWindowTitle.Length > 0)
-                    richTextBox1.Text += "任務名： " + myProcess.MainWindowTitle + "\n";
+                if (process.MainWindowTitle.Length > 0)
+                    richTextBox1.Text += "任務名： " + process.MainWindowTitle + "\n";
             }
 
         }
@@ -300,7 +299,7 @@ namespace vcs_Process1
             //Process.GetProcesses 方法 (String) : 為指定電腦上的每個處理序資源建立新的 Process 元件。
             //Process.MainWindowHandle 屬性 : 取得相關處理序主視窗的視窗控制代碼。
             richTextBox1.Text = string.Empty;
-            foreach (Process p in Process.GetProcesses(System.Environment.MachineName))
+            foreach (Process p in Process.GetProcesses(Environment.MachineName))
             {
                 if (p.MainWindowHandle != IntPtr.Zero)  // 判斷 MainWindowHandle 為非零值的應用程式，表示有主視窗
                 {
@@ -308,7 +307,6 @@ namespace vcs_Process1
                     richTextBox1.Text += p.ToString() + "\n";
                 }
             }
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -316,7 +314,7 @@ namespace vcs_Process1
             richTextBox1.Text = string.Empty;
 
             // 列出系統中所有的程序
-            //Process[] processes = Process.GetProcesses(System.Environment.MachineName);   //相同
+            //Process[] processes = Process.GetProcesses(Environment.MachineName);   //相同
             Process[] processes = Process.GetProcesses();
 
             richTextBox1.Text += "系統中共有： " + processes.Length.ToString() + " 個程序\n";
@@ -405,10 +403,6 @@ namespace vcs_Process1
             }
             richTextBox1.Text += "退出碼 : " + p.ExitCode.ToString() + "\n";
             richTextBox1.Text += "退出時間 : " + p.ExitTime + "\n";
-
-
-
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -416,7 +410,7 @@ namespace vcs_Process1
             richTextBox1.Text = string.Empty;
 
             // 列出系統中所有的程序
-            //Process[] processes = Process.GetProcesses(System.Environment.MachineName);   //相同
+            //Process[] processes = Process.GetProcesses(Environment.MachineName);   //相同
             Process[] processes = Process.GetProcesses();
 
             richTextBox1.Text += "系統中共有： " + processes.Length.ToString() + " 個程序\n";
@@ -471,8 +465,6 @@ namespace vcs_Process1
                     bmp.Save(filename, ImageFormat.Jpeg);
                 }
             }
-
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -480,8 +472,19 @@ namespace vcs_Process1
             richTextBox1.Clear();
         }
 
+        private void button19_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "開啟檔案總管 給定參數";
+            richTextBox1.Text += "開啟檔案總管 開啟路徑在D槽";
+            //  C:\Windows\explorer.exe /n,/e,D:\
 
-
-
+            //呼叫外部程式 並帶有參數的用法
+            Process process = new Process();
+            process.StartInfo.FileName = @"C:\Windows\explorer.exe";
+            process.StartInfo.Arguments = @"/n,/e,D:\";
+            process.Start();
+        }
     }
 }
+
+

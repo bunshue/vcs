@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1ttttt
+namespace vcs_PictureBlur
 {
     static class Program
     {

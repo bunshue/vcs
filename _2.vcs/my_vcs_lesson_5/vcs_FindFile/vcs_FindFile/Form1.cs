@@ -48,7 +48,7 @@ namespace vcs_FindFile
             load_data();
         }
 
-        //在Form1_FormClosing時把資料存起來
+        //在Form1_FormClosing時把資料存起來     // Save current settings.
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.Directory = txtDirectory.Text;

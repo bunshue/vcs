@@ -20,10 +20,10 @@ namespace vcs_programming
             //Application.Run(new Form1());   //有Class應用範例
 
             /* 第 8, 9 章 */
-            //Application.Run(new Multi_1DArray());
+            Application.Run(new Multi_1DArray());
 
             /* 第 9 章 */
-            //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
+            Application.Run(new matchNumbers());        //1A1B猜數字遊戲
 
             /* 第 10 章 */
             //Application.Run(new memory());      //配對遊戲
@@ -44,7 +44,7 @@ namespace vcs_programming
             //Application.Run(new Form1());           //有使用到 MyClass.cs
             //Application.Run(new DateForm());
             //Application.Run(new PersonForm());
-            Application.Run(new MyForm());
+            //Application.Run(new MyForm());
 
             /* 第 19 章 */
             //Application.Run(new Ch19Test());
