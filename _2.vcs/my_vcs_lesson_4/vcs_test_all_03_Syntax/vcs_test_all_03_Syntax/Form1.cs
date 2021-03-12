@@ -151,12 +151,10 @@ namespace vcs_test_all_03_Syntax
             groupBox1.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 9, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 9, y_st + dy * 3);
-            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 12 + 20);
 
-
-            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-
-            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 10);
 
             /*
             label1.Location = new Point(x_st + dx * 0 / 2, y_st + dy * 7);
@@ -172,8 +170,8 @@ namespace vcs_test_all_03_Syntax
             label10.Location = new Point(x_st + dx * 4 / 2, y_st + dy * 8);
             */
 
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 7);
-            richTextBox1.Size = new Size(750, 700);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 10);
+            richTextBox1.Size = new Size(750, 550);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -762,7 +760,6 @@ namespace vcs_test_all_03_Syntax
             foreach (System.Text.RegularExpressions.Match m in matches)
             {
                 richTextBox1.Text += "找到在 " + m.Index.ToString() + "\n";
-
             }
         }
 
@@ -1171,14 +1168,14 @@ namespace vcs_test_all_03_Syntax
 
             byte[] byteArray = new byte[5] { 0x41, 0x42, 0x43, 0x44, 0x45 };
 
-            str = System.Text.Encoding.Default.GetString(byteArray);
+            str = Encoding.Default.GetString(byteArray);
 
             richTextBox1.Text += "使用GetString將拜列轉成字串:\t" + str + "\n";
 
             str = "this is a lion-mouse";
             richTextBox1.Text += "\n原字串:\t" + str + "\n";
 
-            byteArray = System.Text.Encoding.Default.GetBytes(str);
+            byteArray = Encoding.Default.GetBytes(str);
             richTextBox1.Text += "使用GetBytes將字串轉成拜列\t內容:\t";
             for (i = 0; i < byteArray.Length; i++)
             {

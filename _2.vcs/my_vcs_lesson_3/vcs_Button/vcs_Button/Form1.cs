@@ -146,6 +146,22 @@ namespace vcs_Button
             OnOffButton.Height = this.Height / 2;
         }
 
+        private void bt1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Button變大\n";
+            bt2.Size = new Size(bt2.Size.Width + 5, bt2.Size.Height + 5);
+        }
 
+        private void bt2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Button變大變小\n";
+            bt2.Size = new Size(bt2.Size.Width + 5, bt2.Size.Height + 5);
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Button變小\n";
+            bt2.Size = new Size(bt2.Size.Width - 5, bt2.Size.Height - 5);
+        }
     }
 }

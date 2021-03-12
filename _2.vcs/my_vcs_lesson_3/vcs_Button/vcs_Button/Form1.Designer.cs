@@ -32,6 +32,9 @@
             this.OnOffButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt3 = new System.Windows.Forms.Button();
+            this.bt1 = new System.Windows.Forms.Button();
+            this.bt2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,17 +70,53 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(588, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(768, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(233, 496);
+            this.richTextBox1.Size = new System.Drawing.Size(233, 592);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
+            // 
+            // bt3
+            // 
+            this.bt3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt3.Location = new System.Drawing.Point(454, 430);
+            this.bt3.Name = "bt3";
+            this.bt3.Size = new System.Drawing.Size(195, 40);
+            this.bt3.TabIndex = 37;
+            this.bt3.Text = "Button變小";
+            this.bt3.UseVisualStyleBackColor = true;
+            this.bt3.Click += new System.EventHandler(this.bt3_Click);
+            // 
+            // bt1
+            // 
+            this.bt1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt1.Location = new System.Drawing.Point(454, 298);
+            this.bt1.Name = "bt1";
+            this.bt1.Size = new System.Drawing.Size(195, 40);
+            this.bt1.TabIndex = 36;
+            this.bt1.Text = "Button變大";
+            this.bt1.UseVisualStyleBackColor = true;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
+            // 
+            // bt2
+            // 
+            this.bt2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt2.Location = new System.Drawing.Point(454, 364);
+            this.bt2.Name = "bt2";
+            this.bt2.Size = new System.Drawing.Size(195, 40);
+            this.bt2.TabIndex = 35;
+            this.bt2.Text = "Button變大變小";
+            this.bt2.UseVisualStyleBackColor = true;
+            this.bt2.Click += new System.EventHandler(this.bt2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 522);
+            this.ClientSize = new System.Drawing.Size(1013, 616);
+            this.Controls.Add(this.bt3);
+            this.Controls.Add(this.bt1);
+            this.Controls.Add(this.bt2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
@@ -96,6 +135,9 @@
         private System.Windows.Forms.Button OnOffButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt3;
+        private System.Windows.Forms.Button bt1;
+        private System.Windows.Forms.Button bt2;
     }
 }
 

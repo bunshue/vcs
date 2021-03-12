@@ -475,20 +475,14 @@ namespace vcs_test_all_09_Form
 
         private void button32_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Button變大\n";
-            button33.Size = new Size(button33.Size.Width + 5, button33.Size.Height + 5);
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Button變大變小\n";
-            button33.Size = new Size(button33.Size.Width + 5, button33.Size.Height + 5);
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Button變小\n";
-            button33.Size = new Size(button33.Size.Width - 5, button33.Size.Height - 5);
         }
 
         private void button35_Click(object sender, EventArgs e)

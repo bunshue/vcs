@@ -434,7 +434,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(195, 40);
             this.button33.TabIndex = 32;
-            this.button33.Text = "Button變大變小";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -445,7 +444,6 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(195, 40);
             this.button32.TabIndex = 33;
-            this.button32.Text = "Button變大";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -456,7 +454,6 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(195, 40);
             this.button34.TabIndex = 34;
-            this.button34.Text = "Button變小";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
