@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "howto_show_picture_thumbnails", "howto_show_picture_thumbnails.csproj", "{C4F437E4-1B08-4016-84B3-CAB1B34A9DCB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureThumbnail", "vcs_PictureThumbnail\vcs_PictureThumbnail.csproj", "{C4F437E4-1B08-4016-84B3-CAB1B34A9DCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

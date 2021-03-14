@@ -38,7 +38,7 @@ namespace vcs_test_all_09_Form
         {
             //方案總管/加入/現有項目/選圖片
             //圖片之屬性 複製到輸出目錄 改成 有更新時才複製
-            BackgroundImage = new Bitmap("picture1.jpg");
+            BackgroundImage = new Bitmap(@"C:\______test_files\vcs_reference2\bg1.png");
             //ClientSize = BackgroundImage.Size;    //表單符合圖片大小
         }
 

@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Diagnostics;
 
-namespace howto_show_picture_thumbnails
+namespace vcs_PictureThumbnail
 {
     public partial class Form1 : Form
     {
@@ -20,6 +20,8 @@ namespace howto_show_picture_thumbnails
             long fileSize,
             [MarshalAs(UnmanagedType.LPTStr)] StringBuilder buffer,
             int bufferSize);
+
+        string foldername = @"C:\______test_files\_pic";
 
         public Form1()
         {
@@ -30,7 +32,7 @@ namespace howto_show_picture_thumbnails
         private void Form1_Load(object sender, EventArgs e)
         {
             string path = Path.Combine(Application.StartupPath, "..\\..");
-            DirectoryInfo dir_info = new DirectoryInfo(path);
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
             txtDirectory.Text = dir_info.FullName;
         }
 
@@ -60,7 +62,7 @@ namespace howto_show_picture_thumbnails
                 pic.DoubleClick -= PictureBox_DoubleClick;
                 pic.Dispose();
             }
-            flpThumbnails.Controls.Clear();
+            flowLayoutPanel1.Controls.Clear();
             PictureBoxes = new List<PictureBox>();
 
             // If the directory doesn't exist, do nothing else.
@@ -101,14 +103,14 @@ namespace howto_show_picture_thumbnails
                 
                 // Add a tooltip.
                 FileInfo file_info = new FileInfo(filename);
-                tipPicture.SetToolTip(pic, file_info.Name +
+                toolTip1.SetToolTip(pic, file_info.Name +
                     "\nCreated: " + file_info.CreationTime.ToShortDateString() +
                     "\n(" + pic.Image.Width + " x " + pic.Image.Height + ") " +
                     ToFileSizeApi(file_info.Length));
                 pic.Tag = file_info;
 
                 // Add the PictureBox to the FlowLayoutPanel.
-                pic.Parent = flpThumbnails;
+                pic.Parent = flowLayoutPanel1;
             }
         }
 

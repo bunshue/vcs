@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.IO;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;   //for Marshal
+
+namespace vcs_ImageProcessing9
+{
+    public partial class Form1 : Form
+    {
+        string filename = @"C:\______test_files\picture1.jpg";
+        private Bitmap bitmap1;
+        byte[] srcData;
+        //int[] histoData;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadBitmap(filename);
+        }
+
+        // load and initialize from file
+        private void LoadBitmap(string filename)
+        {
+            // read from file
+            bitmap1 = (Bitmap)Image.FromFile(filename);
+            pictureBox1.Image = bitmap1;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            // read byte data
+            BitmapData bmpData = bitmap1.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            srcData = new byte[W * H];
+            IntPtr srcPtr = bmpData.Scan0;
+            Marshal.Copy(srcPtr, srcData, 0, W * H);
+            // pay attention: order in byte array: height first
+            bitmap1.UnlockBits(bmpData);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int len = srcData.Length;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+
+
+        }
+
+
+    }
+}

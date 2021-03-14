@@ -1,4 +1,4 @@
-﻿namespace howto_show_picture_thumbnails
+﻿namespace vcs_PictureThumbnail
 {
     partial class Form1
     {
@@ -29,31 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.flpThumbnails = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.fbdDirectory = new System.Windows.Forms.FolderBrowserDialog();
-            this.tipPicture = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnPickDirectory = new System.Windows.Forms.Button();
             this.txtDirectory = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // flpThumbnails
+            // flowLayoutPanel1
             // 
-            this.flpThumbnails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.flpThumbnails.AutoScroll = true;
-            this.flpThumbnails.BackColor = System.Drawing.Color.LightGreen;
-            this.flpThumbnails.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flpThumbnails.Location = new System.Drawing.Point(12, 36);
-            this.flpThumbnails.Name = "flpThumbnails";
-            this.flpThumbnails.Size = new System.Drawing.Size(708, 423);
-            this.flpThumbnails.TabIndex = 7;
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.LightGreen;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 36);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(708, 423);
+            this.flowLayoutPanel1.TabIndex = 7;
             // 
             // btnPickDirectory
             // 
             this.btnPickDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPickDirectory.BackgroundImage = global::howto_show_picture_thumbnails.Properties.Resources.Ellipsis;
+            this.btnPickDirectory.BackgroundImage = global::vcs_PictureThumbnail.Properties.Resources.Ellipsis;
             this.btnPickDirectory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnPickDirectory.Location = new System.Drawing.Point(694, 10);
             this.btnPickDirectory.Name = "btnPickDirectory";
@@ -86,12 +86,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 469);
-            this.Controls.Add(this.flpThumbnails);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnPickDirectory);
             this.Controls.Add(this.txtDirectory);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "howto_show_picture_thumbnails";
+            this.Text = "vcs_PictureThumbnail";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -100,9 +100,9 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flpThumbnails;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FolderBrowserDialog fbdDirectory;
-        private System.Windows.Forms.ToolTip tipPicture;
+        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnPickDirectory;
         private System.Windows.Forms.TextBox txtDirectory;
         private System.Windows.Forms.Label label1;
