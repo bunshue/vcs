@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.IO;                //for file read/write
 
+using System.Collections; //匯入集合物件      for Hashtable
+
 namespace vcs_test_all_05_Array
 {
     public partial class Form1 : Form
@@ -76,6 +78,21 @@ namespace vcs_test_all_05_Array
             button35.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             tb_matrix.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             rtb_matrix.Location = new Point(x_st + dx * 2 + 140, y_st + dy * 10);
+
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            x_st = 15;
+            y_st = 15;
+            dy = 45;
+
+            ht0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            ht1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            ht2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            ht3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            ht4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            ht5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            ht6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -1331,15 +1348,144 @@ namespace vcs_test_all_05_Array
             Console.WriteLine("");
             richTextBox1.Text += "\n";
         }
-
         //解讀一個在TextBox的矩陣 SP
 
 
-    
-    
-    
-    
-    
+        //Hashtable 測試 ST
+
+        Hashtable HT = new Hashtable();         //雜湊表 (key, value)
+
+        void show_hashtable(Hashtable ht)
+        {
+            int len = ht.Count;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            //方法一：遍歷traversal 1:
+            foreach (DictionaryEntry de in ht)
+            {
+                richTextBox1.Text += "key = " + de.Key + "\t" + "value = " + de.Value + "\n";
+            }
+
+            //方法二：遍歷traversal 2:
+            IDictionaryEnumerator d = ht.GetEnumerator();
+            while (d.MoveNext())
+            {
+                //richTextBox1.Text += "key = " + d.Entry.Key + "\t" + "value = " + d.Entry.Value + "\n";
+            }
+        }
+
+        private void ht0_Click(object sender, EventArgs e)
+        {
+            show_hashtable(HT);
+        }
+
+        int cnt = 0;
+        private void ht1_Click(object sender, EventArgs e)
+        {
+            string aaa = "aaaa" + cnt.ToString();
+            string bbb = "bbbb" + cnt.ToString();
+            cnt++;
+
+            HT.Add(aaa, bbb);        //加入雜湊表，Key: aaa, Value: bbb
+            richTextBox1.Text += "加入雜湊表，Key: " + aaa + ", Value: " + bbb + "\n";
+        }
+
+        private void ht2_Click(object sender, EventArgs e)
+        {
+            int len = HT.Count;
+
+            int cnt = 0;
+            foreach (DictionaryEntry de in HT)
+            {
+                richTextBox1.Text += "key = " + de.Key + "\t" + "value = " + de.Value + "\n";
+                if (len > 2)
+                {
+                    if (cnt == (len - 2))
+                    {
+                        richTextBox1.Text += "移除 " + de.Key + " 項";
+                        HT.Remove(de.Key);
+                        return;
+                    }
+                }
+                else if (len > 0)
+                {
+                    if (cnt == (len - 1))
+                    {
+                        richTextBox1.Text += "移除 " + de.Key + " 項";
+                        HT.Remove(de.Key);
+                        return;
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "無資料可移除\n";
+                    return;
+                }
+                cnt++;
+            }
+        }
+
+        private void ht3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "ContainsKey\tContainsValue\n";
+
+            richTextBox1.Text += "把aaaa3項的value改變\n";
+
+            if (HT.ContainsKey("aaaa3"))
+            {
+                richTextBox1.Text += "1111111111111\n";
+                HT["aaaa3"] = "cccccc";
+            }
+
+            richTextBox1.Text += "把bbbb3項的value改變\n";
+
+            if (HT.ContainsValue("bbbb1"))
+            {
+                //不知道怎麼從value找key
+                //HT["aaaa3"] = "xxxxxxxx";
+                //richTextBox1.Text += "2222222222222222222\n";
+            }
+        }
+
+        private void ht4_Click(object sender, EventArgs e)
+        {
+            HT.Clear();
+            richTextBox1.Text += "清除雜湊表\n";
+        }
+
+        private void ht5_Click(object sender, EventArgs e)
+        {
+            if (HT.Count < 5)
+            {
+                richTextBox1.Text += "至少5筆資料\n";
+                return;
+            }
+            richTextBox1.Text += "HashTable排序\n";
+
+            richTextBox1.Text += "排序前\n";
+            show_hashtable(HT);
+
+            richTextBox1.Text += "\n排序後\n";
+            ArrayList akeys = new ArrayList(HT.Keys); //from Hashtable
+            akeys.Sort(); //Sort by leading letter
+
+            foreach (string skey in akeys)
+            {
+                richTextBox1.Text += "key = " + skey + "\t" + "value = " + HT[skey] + "\n";
+            }
+        }
+
+        private void ht6_Click(object sender, EventArgs e)
+        {
+            // 獲取鍵的集合
+            ICollection key = HT.Keys;
+            foreach (string k in key)
+            {
+                richTextBox1.Text += k + "\t" + HT[k] + "\n";
+            }
+        }
+        //Hashtable 測試 SP
     }
 
     class Person : IComparable<Person>

@@ -58,7 +58,29 @@ namespace vcs_ImageProcessing9
             richTextBox1.Text += "len = " + len.ToString() + "\n";
             richTextBox1.Text += "W = " + W.ToString() + "\n";
             richTextBox1.Text += "H = " + H.ToString() + "\n";
+            int i;
+            int j;
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    //richTextBox1.Text += srcData[j * H + i].ToString("X2") + " ";
+                    richTextBox1.Text += srcData[j * H + i].ToString() + " ";
 
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+
+
+            for (i = 0; i < 150; i++)
+            {
+                //richTextBox1.Text += srcData[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\n";
 
 
         }

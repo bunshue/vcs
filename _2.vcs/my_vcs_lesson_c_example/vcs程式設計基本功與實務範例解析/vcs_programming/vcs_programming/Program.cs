@@ -17,13 +17,10 @@ namespace vcs_programming
             Application.SetCompatibleTextRenderingDefault(false);
 
             /* 第 2, 18 章 */
-            //Application.Run(new Form1());   //有Class應用範例
-
-            /* 第 8, 9 章 */
-            Application.Run(new Multi_1DArray());
+            Application.Run(new Form1());   //有Class應用範例
 
             /* 第 9 章 */
-            Application.Run(new matchNumbers());        //1A1B猜數字遊戲
+            //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
 
             /* 第 10 章 */
             //Application.Run(new memory());      //配對遊戲
@@ -42,20 +39,14 @@ namespace vcs_programming
 
             /* 第 18 章 */
             //Application.Run(new Form1());           //有使用到 MyClass.cs
-            //Application.Run(new DateForm());
-            //Application.Run(new PersonForm());
             //Application.Run(new MyForm());
 
             /* 第 19 章 */
-            //Application.Run(new Ch19Test());
-            //Application.Run(new StudentForm());
-            //Application.Run(new TeacherForm());
             //Application.Run(new MainForm());
 
             /* 第 20 章 */
             //Application.Run(new ShapeManagerForm());
 
-            //Application.Run(new MessageBoxForm());
             //Application.Run(new Midterm());
         }
     }

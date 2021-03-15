@@ -122,5 +122,20 @@ namespace vcs_FormSendData
             //frm3.ShowDialog();
             frm3.Show();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //傳送資料到新表單並顯示之
+            //目前只能顯示在新表單的Panel上
+
+            int[] histoData;
+            histoData = new int[256];
+            for (int i = 0; i < 256; ++i)
+                histoData[i] = i;
+
+            Form4 form4 = new Form4(histoData);
+            form4.Show();
+
+        }
     }
 }

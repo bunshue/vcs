@@ -62,7 +62,7 @@
             this.mSetting});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(412, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(713, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -74,32 +74,32 @@
             this.toolStripSeparator2,
             this.mExit});
             this.mFile.Name = "mFile";
-            this.mFile.Size = new System.Drawing.Size(44, 20);
+            this.mFile.Size = new System.Drawing.Size(43, 20);
             this.mFile.Text = "檔案";
             // 
             // mOpen
             // 
             this.mOpen.Name = "mOpen";
-            this.mOpen.Size = new System.Drawing.Size(100, 22);
+            this.mOpen.Size = new System.Drawing.Size(152, 22);
             this.mOpen.Text = "開檔";
             this.mOpen.Click += new System.EventHandler(this.mOpen_Click);
             // 
             // mSave
             // 
             this.mSave.Name = "mSave";
-            this.mSave.Size = new System.Drawing.Size(100, 22);
+            this.mSave.Size = new System.Drawing.Size(152, 22);
             this.mSave.Text = "存檔";
             this.mSave.Click += new System.EventHandler(this.mSave_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // mExit
             // 
             this.mExit.Name = "mExit";
-            this.mExit.Size = new System.Drawing.Size(100, 22);
+            this.mExit.Size = new System.Drawing.Size(152, 22);
             this.mExit.Text = "結束";
             this.mExit.Click += new System.EventHandler(this.mExit_Click);
             // 
@@ -114,51 +114,51 @@
             this.toolStripSeparator4,
             this.mSelectAll});
             this.mEdit.Name = "mEdit";
-            this.mEdit.Size = new System.Drawing.Size(44, 20);
+            this.mEdit.Size = new System.Drawing.Size(43, 20);
             this.mEdit.Text = "編輯";
             // 
             // mUndo
             // 
             this.mUndo.Name = "mUndo";
-            this.mUndo.Size = new System.Drawing.Size(100, 22);
+            this.mUndo.Size = new System.Drawing.Size(98, 22);
             this.mUndo.Text = "復原";
             this.mUndo.Click += new System.EventHandler(this.mUndo_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(95, 6);
             // 
             // mCut
             // 
             this.mCut.Name = "mCut";
-            this.mCut.Size = new System.Drawing.Size(100, 22);
+            this.mCut.Size = new System.Drawing.Size(98, 22);
             this.mCut.Text = "剪下";
             this.mCut.Click += new System.EventHandler(this.mCut_Click);
             // 
             // mCopy
             // 
             this.mCopy.Name = "mCopy";
-            this.mCopy.Size = new System.Drawing.Size(100, 22);
+            this.mCopy.Size = new System.Drawing.Size(98, 22);
             this.mCopy.Text = "複製";
             this.mCopy.Click += new System.EventHandler(this.mCopy_Click);
             // 
             // mPaste
             // 
             this.mPaste.Name = "mPaste";
-            this.mPaste.Size = new System.Drawing.Size(100, 22);
+            this.mPaste.Size = new System.Drawing.Size(98, 22);
             this.mPaste.Text = "貼上";
             this.mPaste.Click += new System.EventHandler(this.mPaste_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(95, 6);
             // 
             // mSelectAll
             // 
             this.mSelectAll.Name = "mSelectAll";
-            this.mSelectAll.Size = new System.Drawing.Size(100, 22);
+            this.mSelectAll.Size = new System.Drawing.Size(98, 22);
             this.mSelectAll.Text = "全選";
             this.mSelectAll.Click += new System.EventHandler(this.mSelectAll_Click);
             // 
@@ -169,26 +169,26 @@
             this.toolStripSeparator1,
             this.mColor});
             this.mSetting.Name = "mSetting";
-            this.mSetting.Size = new System.Drawing.Size(44, 20);
+            this.mSetting.Size = new System.Drawing.Size(43, 20);
             this.mSetting.Text = "設定";
             this.mSetting.Click += new System.EventHandler(this.mSetting_Click);
             // 
             // mFont
             // 
             this.mFont.Name = "mFont";
-            this.mFont.Size = new System.Drawing.Size(100, 22);
+            this.mFont.Size = new System.Drawing.Size(98, 22);
             this.mFont.Text = "字型";
             this.mFont.Click += new System.EventHandler(this.mFont_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(95, 6);
             // 
             // mColor
             // 
             this.mColor.Name = "mColor";
-            this.mColor.Size = new System.Drawing.Size(100, 22);
+            this.mColor.Size = new System.Drawing.Size(98, 22);
             this.mColor.Text = "顏色";
             this.mColor.Click += new System.EventHandler(this.mColor_Click);
             // 
@@ -217,7 +217,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 281);
+            this.ClientSize = new System.Drawing.Size(713, 489);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));

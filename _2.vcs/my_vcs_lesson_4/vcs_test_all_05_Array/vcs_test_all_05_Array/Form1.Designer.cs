@@ -68,6 +68,15 @@
             this.button35 = new System.Windows.Forms.Button();
             this.tb_matrix = new System.Windows.Forms.TextBox();
             this.rtb_matrix = new System.Windows.Forms.RichTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ht0 = new System.Windows.Forms.Button();
+            this.ht1 = new System.Windows.Forms.Button();
+            this.ht2 = new System.Windows.Forms.Button();
+            this.ht3 = new System.Windows.Forms.Button();
+            this.ht4 = new System.Windows.Forms.Button();
+            this.ht5 = new System.Windows.Forms.Button();
+            this.ht6 = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -84,7 +93,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(735, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1243, 21);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(790, 619);
             this.richTextBox1.TabIndex = 1;
@@ -335,7 +344,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1397, 502);
+            this.bt_clear.Location = new System.Drawing.Point(1338, 437);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(61, 32);
             this.bt_clear.TabIndex = 46;
@@ -504,11 +513,105 @@
             this.rtb_matrix.TabIndex = 61;
             this.rtb_matrix.Text = "0 1 2 3 4 5\n1 2 3 4 5 6\n2 3 4 5 6 7\n3 4 5 6 7 8\n4 5 6 7 8 9\n5 6 7 8 9 10";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ht6);
+            this.groupBox1.Controls.Add(this.ht5);
+            this.groupBox1.Controls.Add(this.ht4);
+            this.groupBox1.Controls.Add(this.ht3);
+            this.groupBox1.Controls.Add(this.ht2);
+            this.groupBox1.Controls.Add(this.ht1);
+            this.groupBox1.Controls.Add(this.ht0);
+            this.groupBox1.Location = new System.Drawing.Point(750, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 337);
+            this.groupBox1.TabIndex = 62;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "HashTable";
+            // 
+            // ht0
+            // 
+            this.ht0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht0.Location = new System.Drawing.Point(18, 21);
+            this.ht0.Name = "ht0";
+            this.ht0.Size = new System.Drawing.Size(170, 40);
+            this.ht0.TabIndex = 63;
+            this.ht0.Text = "info";
+            this.ht0.UseVisualStyleBackColor = true;
+            this.ht0.Click += new System.EventHandler(this.ht0_Click);
+            // 
+            // ht1
+            // 
+            this.ht1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht1.Location = new System.Drawing.Point(18, 67);
+            this.ht1.Name = "ht1";
+            this.ht1.Size = new System.Drawing.Size(170, 40);
+            this.ht1.TabIndex = 64;
+            this.ht1.Text = "add";
+            this.ht1.UseVisualStyleBackColor = true;
+            this.ht1.Click += new System.EventHandler(this.ht1_Click);
+            // 
+            // ht2
+            // 
+            this.ht2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht2.Location = new System.Drawing.Point(18, 113);
+            this.ht2.Name = "ht2";
+            this.ht2.Size = new System.Drawing.Size(170, 40);
+            this.ht2.TabIndex = 65;
+            this.ht2.Text = "remove";
+            this.ht2.UseVisualStyleBackColor = true;
+            this.ht2.Click += new System.EventHandler(this.ht2_Click);
+            // 
+            // ht3
+            // 
+            this.ht3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht3.Location = new System.Drawing.Point(18, 159);
+            this.ht3.Name = "ht3";
+            this.ht3.Size = new System.Drawing.Size(170, 40);
+            this.ht3.TabIndex = 66;
+            this.ht3.Text = "modify";
+            this.ht3.UseVisualStyleBackColor = true;
+            this.ht3.Click += new System.EventHandler(this.ht3_Click);
+            // 
+            // ht4
+            // 
+            this.ht4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht4.Location = new System.Drawing.Point(18, 205);
+            this.ht4.Name = "ht4";
+            this.ht4.Size = new System.Drawing.Size(170, 40);
+            this.ht4.TabIndex = 67;
+            this.ht4.Text = "clear";
+            this.ht4.UseVisualStyleBackColor = true;
+            this.ht4.Click += new System.EventHandler(this.ht4_Click);
+            // 
+            // ht5
+            // 
+            this.ht5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht5.Location = new System.Drawing.Point(18, 251);
+            this.ht5.Name = "ht5";
+            this.ht5.Size = new System.Drawing.Size(170, 40);
+            this.ht5.TabIndex = 68;
+            this.ht5.Text = "sort";
+            this.ht5.UseVisualStyleBackColor = true;
+            this.ht5.Click += new System.EventHandler(this.ht5_Click);
+            // 
+            // ht6
+            // 
+            this.ht6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht6.Location = new System.Drawing.Point(18, 297);
+            this.ht6.Name = "ht6";
+            this.ht6.Size = new System.Drawing.Size(170, 40);
+            this.ht6.TabIndex = 69;
+            this.ht6.Text = "獲取鍵的集合";
+            this.ht6.UseVisualStyleBackColor = true;
+            this.ht6.Click += new System.EventHandler(this.ht6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1537, 643);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.rtb_matrix);
             this.Controls.Add(this.tb_matrix);
             this.Controls.Add(this.button35);
@@ -552,6 +655,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -599,6 +703,14 @@
         private System.Windows.Forms.Button button35;
         private System.Windows.Forms.TextBox tb_matrix;
         private System.Windows.Forms.RichTextBox rtb_matrix;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button ht6;
+        private System.Windows.Forms.Button ht5;
+        private System.Windows.Forms.Button ht4;
+        private System.Windows.Forms.Button ht3;
+        private System.Windows.Forms.Button ht2;
+        private System.Windows.Forms.Button ht1;
+        private System.Windows.Forms.Button ht0;
     }
 }
 

@@ -28,21 +28,19 @@ namespace vcs_PictureThumbnail
             InitializeComponent();
         }
 
-        // Start with the startup path selected.
         private void Form1_Load(object sender, EventArgs e)
         {
-            string path = Path.Combine(Application.StartupPath, "..\\..");
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
-            txtDirectory.Text = dir_info.FullName;
+            textBox1.Text = dir_info.FullName;
         }
 
         // Let the user select a folder.
-        private void btnPickDirectory_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            fbdDirectory.SelectedPath = txtDirectory.Text;
-            if (fbdDirectory.ShowDialog() == DialogResult.OK)
+            folderBrowserDialog1.SelectedPath = textBox1.Text;
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                txtDirectory.Text = fbdDirectory.SelectedPath;
+                textBox1.Text = folderBrowserDialog1.SelectedPath;
             }
         }
 
@@ -50,11 +48,11 @@ namespace vcs_PictureThumbnail
         private List<PictureBox> PictureBoxes = new List<PictureBox>();
 
         // Thumbnail sizes.
-        private const int ThumbWidth = 100;
-        private const int ThumbHeight = 100;
+        private const int ThumbWidth = 150;
+        private const int ThumbHeight = 150;
 
         // Display thumbnails for the selected directory.
-        private void txtDirectory_TextChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
             // Delete the old PictureBoxes.
             foreach (PictureBox pic in PictureBoxes)
@@ -66,14 +64,14 @@ namespace vcs_PictureThumbnail
             PictureBoxes = new List<PictureBox>();
 
             // If the directory doesn't exist, do nothing else.
-            if (!Directory.Exists(txtDirectory.Text)) return;
+            if (!Directory.Exists(textBox1.Text)) return;
 
             // Get the names of the files in the directory.
             List<string> filenames = new List<string>();
             string[] patterns = { "*.png", "*.gif", "*.jpg", "*.bmp", "*.tif" };
             foreach (string pattern in patterns)
             {
-                filenames.AddRange(Directory.GetFiles(txtDirectory.Text,
+                filenames.AddRange(Directory.GetFiles(textBox1.Text,
                     pattern, SearchOption.TopDirectoryOnly));
             }
             filenames.Sort();

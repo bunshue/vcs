@@ -44,11 +44,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 281);
+            this.ClientSize = new System.Drawing.Size(696, 355);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(300, 320);
-            this.MinimumSize = new System.Drawing.Size(300, 320);
             this.Name = "Form2";
             this.Text = "直方图信息";
             this.ResumeLayout(false);

@@ -169,10 +169,10 @@ namespace vcs_ReadWrite_BMP
             int h_res;  // = 0x0EC4;
             int v_res;  // = 0x0EC4;
 
-            if ((data[0] != 'B')||(data[1] != 'M'))
+            if ((data[0] != 'B') || (data[1] != 'M'))
             {
                 richTextBox1.Text += "非BMP檔";
-                    return;
+                return;
             }
 
             size = data[2] + data[3] * 256 + data[4] * 256 * 256 + data[5] * 256 * 256 * 256;
@@ -560,16 +560,20 @@ namespace vcs_ReadWrite_BMP
             //???????
             string filename = "c:\\______test_files\\test_ReadAllBytes.bmp";
 
-            byte[] bmp_header = new byte[256];
-            FileStream fs1 = new FileStream(filename, FileMode.Open);
+            byte[] bmp_data = new byte[256];
+            FileStream fs = new FileStream(filename, FileMode.Open);
 
-            richTextBox1.Text += "\nlength = " + fs1.Length.ToString() + "\n";
+            int len = (int)fs.Length;
+            richTextBox1.Text += "\nlength = " + fs.Length.ToString() + "\n";
 
-            fs1.Read(bmp_header, 0, bmp_header.Length);
+            if (len > 256)
+                len = 256;
 
-            for (int i = 0; i < bmp_header.Length; i++)
+            fs.Read(bmp_data, 0, len);
+
+            for (int i = 0; i < len; i++)
             {
-                richTextBox1.Text += bmp_header[i].ToString("X2");
+                richTextBox1.Text += bmp_data[i].ToString("X2");
                 if ((i % 16) == 15)
                 {
                     richTextBox1.Text += "\n";
@@ -578,8 +582,7 @@ namespace vcs_ReadWrite_BMP
                     richTextBox1.Text += " ";
             }
             // 關閉檔案。
-            fs1.Close();
-
+            fs.Close();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -727,7 +730,7 @@ namespace vcs_ReadWrite_BMP
                     }
                 }
             }
-
         }
     }
 }
+

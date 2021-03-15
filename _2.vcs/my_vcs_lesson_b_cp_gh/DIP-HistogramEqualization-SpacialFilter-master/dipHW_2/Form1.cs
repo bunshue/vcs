@@ -31,18 +31,21 @@ namespace dipHW_2
         }
 
         // load and initialize from file
-        private void LoadBitmap(string path) {
+        private void LoadBitmap(string path)
+        {
             // read from file
             img = (Bitmap)Image.FromFile(path);
             pictureBox1.Image = img;
-            label1.Text = img.Width + "*" + img.Height;
+            int W = img.Width;
+            int H = img.Height;
+
+            label1.Text = W.ToString() + "*" + H.ToString();
 
             // read byte data
-            BitmapData bitmapData = img.LockBits(new Rectangle(0, 0, img.Width, img.Height),
-                ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-            srcData = new byte[img.Width * img.Height];
+            BitmapData bitmapData = img.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            srcData = new byte[W * H];
             IntPtr srcPtr = bitmapData.Scan0;
-            Marshal.Copy(srcPtr, srcData, 0, img.Width * img.Height);
+            Marshal.Copy(srcPtr, srcData, 0, W * H);
             // pay attention: order in byte array: height first
             img.UnlockBits(bitmapData);
         }
@@ -52,8 +55,7 @@ namespace dipHW_2
             // pay attention to the PixelFormat
             Bitmap newImg = new Bitmap(width, height, PixelFormat.Format8bppIndexed);
             // write in the byte data
-            BitmapData bitmapData = newImg.LockBits(new Rectangle(0, 0, width, height),
-                ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            BitmapData bitmapData = newImg.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
             IntPtr srcPtr = bitmapData.Scan0;
 
             // width of stride, which sometimes can be different from width
@@ -102,22 +104,26 @@ namespace dipHW_2
 
             // rewrite and show
             img = newImg;
+            int W = img.Width;
+            int H = img.Height;
             srcData = newData;
-            label1.Text = img.Width + "*" + img.Height;
+            label1.Text = W.ToString() + "*" + H.ToString();
             pictureBox1.Image = img;
         }
 
         // calculate the histogram data
         private void Cal_Hist() {
             // width and height of the image
-            int width = img.Width;
-            int height = img.Height;
+            int W = img.Width;
+            int H = img.Height;
             histoData = new int[256];
             for (int i = 0; i < 256; ++i)
                 histoData[i] = 0;
-            for (int i = 0; i < height; ++i) {
-                for (int j = 0; j < width; ++j) {
-                    histoData[srcData[i * width + j]]++;
+            for (int i = 0; i < H; ++i)
+            {
+                for (int j = 0; j < W; ++j)
+                {
+                    histoData[srcData[i * W + j]]++;
                 } 
             }
         }
@@ -125,9 +131,9 @@ namespace dipHW_2
         // histogram equalization
         private void Equalize_Hist(byte[] srcData) {
             // width and height and  pixels of the image
-            int width = img.Width;
-            int height = img.Height;
-            int pixels = width * height;
+            int W = img.Width;
+            int H = img.Height;
+            int pixels = W * H;
             // array to hold the new data
             byte[] tempData = new byte[pixels];
             // calculate histogram data
@@ -135,46 +141,56 @@ namespace dipHW_2
             // calculate the histo-qualization function
             int[] histoChange = new int[256];
             int sum = 0;
-            for (int i = 0; i < 256; ++i) {
+            for (int i = 0; i < 256; ++i)
+            {
                 sum += histoData[i];
                 histoChange[i] = 255 * sum / pixels;
             }
             // change the original image;
-            for (int i = 0; i < height; ++i)
-                for (int j = 0; j < width; ++j) {
-                    tempData[i * width + j] = (byte)histoChange[srcData[i * width + j]];
+            for (int i = 0; i < H; ++i)
+            {
+                for (int j = 0; j < W; ++j)
+                {
+                    tempData[i * W + j] = (byte)histoChange[srcData[i * W + j]];
                 }
-            BuildBitmap(width, height, tempData);
+            }
+            BuildBitmap(W, H, tempData);
         }
 
         // filter
         private void Filter2d(byte[] srcData, int level, double[] filter) {
             // width and height of the image
-            int width = img.Width;
-            int height = img.Height;
+            int W = img.Width;
+            int H = img.Height;
             // array to hold the new data
-            byte[] tempData = new byte[width * height];
+            byte[] tempData = new byte[W * H];
             // generize the offset from current pixel
             int[] offset = new int[level * level];
             int temNum = 0;
-            for (int i = - level / 2; i <= level/2; ++i) {
-                for (int j = -level / 2; j <= level / 2; ++j) {
-                    offset[temNum++] = i * width + j;
+            for (int i = - level / 2; i <= level/2; ++i)
+            {
+                for (int j = -level / 2; j <= level / 2; ++j)
+                {
+                    offset[temNum++] = i * W + j;
                 }
             }
             // generize new imgae data
-            for (int i = 0; i < height; ++i)
-                for (int j = 0; j < width; ++j) {
+            for (int i = 0; i < H; ++i)
+            {
+                for (int j = 0; j < W; ++j)
+                {
                     int temp = 0;
-                    for (int k = 0; k < level * level; ++k) {
+                    for (int k = 0; k < level * level; ++k)
+                    {
                         // zero padding
-                        int pos = i * width + j + offset[k];
+                        int pos = i * W + j + offset[k];
                         double data;
-                        if (pos >= 0 && pos < height * width)
+                        if (pos >= 0 && pos < H * W)
                         {
                             data = srcData[pos];
                         }
-                        else {
+                        else
+                        {
                             data = 0;
                         }
                         // applying filter
@@ -183,16 +199,19 @@ namespace dipHW_2
                     // formatting into byte
                     if (temp < 0) temp = 0;
                     if (temp > 255) temp = 255;
-                    tempData[i * width + j] = (byte)temp;
+                    tempData[i * W + j] = (byte)temp;
                 }
+            }
             // write the new image
-            BuildBitmap(width, height, tempData);
+            BuildBitmap(W, H, tempData);
         }
 
         // histogram equation
         private void button2_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+                return;
+
             // histogram equalization
             Equalize_Hist(srcData);
         }
@@ -208,7 +227,9 @@ namespace dipHW_2
         // show histogram
         private void button6_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+                return;
+
             // calculate the histogram data
             Cal_Hist();
             // show the histogram in a new form
@@ -219,7 +240,9 @@ namespace dipHW_2
         // average filter
         private void button5_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+                return;
+
             int level = Int32.Parse(textBox3.Text);
             // calculate the average 
             double[] filter = new double[level * level];
@@ -234,7 +257,9 @@ namespace dipHW_2
         // customized 3*3 filter
         private void button7_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+                return;
+
             double[] filter = new double[9];
             // get all the customed filter values
             TextBox[] filterBox = new TextBox[9] {

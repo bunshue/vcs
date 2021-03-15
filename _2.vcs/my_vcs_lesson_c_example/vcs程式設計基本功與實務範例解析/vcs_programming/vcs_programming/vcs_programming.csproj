@@ -69,18 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DateForm.designer.cs">
-      <DependentUpon>DateForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Ch19Test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ch19Test.designer.cs">
-      <DependentUpon>Ch19Test.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,12 +100,6 @@
     <Compile Include="MyForm.designer.cs">
       <DependentUpon>MyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PersonForm.designer.cs">
-      <DependentUpon>PersonForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="RectangleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,18 +117,6 @@
     </Compile>
     <Compile Include="ShapeManagerForm.designer.cs">
       <DependentUpon>ShapeManagerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StudentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StudentForm.designer.cs">
-      <DependentUpon>StudentForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TeacherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TeacherForm.designer.cs">
-      <DependentUpon>TeacherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="tForm.cs">
       <SubType>Form</SubType>
@@ -178,32 +148,14 @@
     <Compile Include="memory.Designer.cs">
       <DependentUpon>memory.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageBoxForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MessageBoxForm.Designer.cs">
-      <DependentUpon>MessageBoxForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Midterm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Midterm.Designer.cs">
       <DependentUpon>Midterm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Multi_1DArray.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Multi_1DArray.Designer.cs">
-      <DependentUpon>Multi_1DArray.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DateForm.resx">
-      <DependentUpon>DateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ch19Test.resx">
-      <DependentUpon>Ch19Test.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,9 +171,6 @@
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonForm.resx">
-      <DependentUpon>PersonForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RectangleForm.resx">
       <DependentUpon>RectangleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,12 +179,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ShapeManagerForm.resx">
       <DependentUpon>ShapeManagerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StudentForm.resx">
-      <DependentUpon>StudentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TeacherForm.resx">
-      <DependentUpon>TeacherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tForm.resx">
       <DependentUpon>tForm.cs</DependentUpon>
@@ -252,14 +195,8 @@
     <EmbeddedResource Include="memory.resx">
       <DependentUpon>memory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessageBoxForm.resx">
-      <DependentUpon>MessageBoxForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Midterm.resx">
       <DependentUpon>Midterm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Multi_1DArray.resx">
-      <DependentUpon>Multi_1DArray.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
