@@ -42,7 +42,7 @@ namespace vcs_PictureListDrag
             Placeholder.Location = new Point(PictureMargin, PictureMargin);
             Placeholder.Size = new Size(0, 0);
             Placeholder.Visible = true;
-            panPictures.Controls.Add(Placeholder);
+            panel1.Controls.Add(Placeholder);
 
             show_pictures();
         }
@@ -91,20 +91,20 @@ namespace vcs_PictureListDrag
                 DragOffset = new Point(dx, dy);
 
                 // Move the PictureBox to the top of the
-                // panPictures stacking order.
-                panPictures.Controls.SetChildIndex(pic, 0);
+                // panel1 stacking order.
+                panel1.Controls.SetChildIndex(pic, 0);
 
-                // Let panPictures handle the MouseMove and MouseUp.
+                // Let panel1 handle the MouseMove and MouseUp.
                 DragPic.Capture = false;
-                panPictures.Capture = true;
-                panPictures.MouseMove += panPictures_MouseMove;
-                panPictures.MouseUp += panPictures_MouseUp;
+                panel1.Capture = true;
+                panel1.MouseMove += panel1_MouseMove;
+                panel1.MouseUp += panel1_MouseUp;
             }
             else
             {
-                // Get the mouse's location in panPictures coordinates.
+                // Get the mouse's location in panel1 coordinates.
                 Point screen_point = pic.PointToScreen(e.Location);
-                Point parent_point = panPictures.PointToClient(screen_point);
+                Point parent_point = panel1.PointToClient(screen_point);
 
                 // Display the context menu.
                 ShowContextMenu(new Point(
@@ -114,7 +114,7 @@ namespace vcs_PictureListDrag
         }
 
         // Move a PictureBox.
-        private void panPictures_MouseMove(object sender, MouseEventArgs e)
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             int x = e.Location.X + DragOffset.X;
             int y = e.Location.Y + DragOffset.Y;
@@ -122,16 +122,16 @@ namespace vcs_PictureListDrag
         }
 
         // Stop dragging DragPic.
-        private void panPictures_MouseUp(object sender, MouseEventArgs e)
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             DragPic = null;
-            panPictures.MouseMove -= panPictures_MouseMove;
-            panPictures.MouseUp -= panPictures_MouseUp;
+            panel1.MouseMove -= panel1_MouseMove;
+            panel1.MouseUp -= panel1_MouseUp;
             OrderPictureBoxes();
         }
 
         // Display the context menu.
-        private void panPictures_MouseDown(object sender, MouseEventArgs e)
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             // Ignore left mouse clicks.
             if (e.Button != MouseButtons.Right) return;
@@ -162,7 +162,7 @@ namespace vcs_PictureListDrag
                 "Are you sure you want to delete this picture?",
                 "Delete Picture?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                panPictures.Controls.Remove(PictureBoxes[ClickedIndex]);
+                panel1.Controls.Remove(PictureBoxes[ClickedIndex]);
                 PictureBoxes.RemoveAt(ClickedIndex);
                 ArrangePictureBoxes();
             }
@@ -173,10 +173,10 @@ namespace vcs_PictureListDrag
         {
             try
             {
-                if (ofdPicture.ShowDialog() == DialogResult.OK)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     int i = 0;
-                    foreach (string filename in ofdPicture.FileNames)
+                    foreach (string filename in openFileDialog1.FileNames)
                     {
                         Bitmap bm = new Bitmap(filename);
 
@@ -186,7 +186,7 @@ namespace vcs_PictureListDrag
                         pic.Visible = true;
                         pic.BorderStyle = BorderStyle.Fixed3D;
                         pic.MouseDown += pic_MouseDown;
-                        panPictures.Controls.Add(pic);
+                        panel1.Controls.Add(pic);
 
                         PictureBoxes.Insert(ClickedIndex + i, pic);
                         i++;
@@ -208,7 +208,7 @@ namespace vcs_PictureListDrag
             ClickedIndex = PictureBoxes.Count;
 
             // See if we clicked on or before a picture.
-            int x = location.X + panPictures.HorizontalScroll.Value;
+            int x = location.X + panel1.HorizontalScroll.Value;
             for (int i = 0; i < PictureBoxes.Count; i++)
             {
                 // See if we are before the next picture.
@@ -217,7 +217,7 @@ namespace vcs_PictureListDrag
                 {
                     ClickedIndex = i;
                     break;
-                }   
+                }
 
                 // See if we are on this picture.
                 x -= PictureBoxes[i].Width;
@@ -238,7 +238,7 @@ namespace vcs_PictureListDrag
             mnuInsertPicture.Enabled = !clicked_on_picture;
 
             // Display the context menu.
-            ctxPictures.Show(panPictures, location);
+            contextMenuStrip1.Show(panel1, location);
         }
 
         private void show_pictures()
@@ -269,7 +269,7 @@ namespace vcs_PictureListDrag
                     pic.Visible = true;
                     pic.BorderStyle = BorderStyle.Fixed3D;
                     pic.MouseDown += pic_MouseDown;
-                    panPictures.Controls.Add(pic);
+                    panel1.Controls.Add(pic);
 
                     PictureBoxes.Insert(i, pic);
                     i++;

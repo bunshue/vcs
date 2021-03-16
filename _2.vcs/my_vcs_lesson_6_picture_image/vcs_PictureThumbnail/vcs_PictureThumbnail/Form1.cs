@@ -32,6 +32,7 @@ namespace vcs_PictureThumbnail
         {
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
             textBox1.Text = dir_info.FullName;
+            show_picture_thumbnail(foldername);
         }
 
         // Let the user select a folder.
@@ -41,6 +42,8 @@ namespace vcs_PictureThumbnail
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = folderBrowserDialog1.SelectedPath;
+                foldername = textBox1.Text;
+                show_picture_thumbnail(foldername);
             }
         }
 
@@ -52,7 +55,7 @@ namespace vcs_PictureThumbnail
         private const int ThumbHeight = 150;
 
         // Display thumbnails for the selected directory.
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        void show_picture_thumbnail(string foldername)
         {
             // Delete the old PictureBoxes.
             foreach (PictureBox pic in PictureBoxes)
@@ -64,15 +67,14 @@ namespace vcs_PictureThumbnail
             PictureBoxes = new List<PictureBox>();
 
             // If the directory doesn't exist, do nothing else.
-            if (!Directory.Exists(textBox1.Text)) return;
+            //if (!Directory.Exists(txtDirectory.Text)) return;
 
             // Get the names of the files in the directory.
             List<string> filenames = new List<string>();
             string[] patterns = { "*.png", "*.gif", "*.jpg", "*.bmp", "*.tif" };
             foreach (string pattern in patterns)
             {
-                filenames.AddRange(Directory.GetFiles(textBox1.Text,
-                    pattern, SearchOption.TopDirectoryOnly));
+                filenames.AddRange(Directory.GetFiles(foldername, pattern, SearchOption.TopDirectoryOnly));
             }
             filenames.Sort();
 
@@ -98,7 +100,7 @@ namespace vcs_PictureThumbnail
 
                 // Add the DoubleClick event handler.
                 pic.DoubleClick += PictureBox_DoubleClick;
-                
+
                 // Add a tooltip.
                 FileInfo file_info = new FileInfo(filename);
                 toolTip1.SetToolTip(pic, file_info.Name +

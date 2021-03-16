@@ -33,7 +33,7 @@ namespace vcs_PictureList
 
         private void ArrangePanel()
         {
-            panPictures.Controls.Clear();
+            panel1.Controls.Clear();
             int x = PictureMargin;
             int y = PictureMargin;
             foreach (Bitmap picture in Pictures)
@@ -44,7 +44,7 @@ namespace vcs_PictureList
                 pic.Image = picture;
                 pic.Visible = true;
                 pic.MouseDown += pic_MouseDown;
-                panPictures.Controls.Add(pic);
+                panel1.Controls.Add(pic);
 
                 x += pic.Width + PictureMargin;
             }
@@ -55,7 +55,7 @@ namespace vcs_PictureList
             placeholder.Size = new Size(0, 0);
             placeholder.Visible = true;
             placeholder.MouseDown += pic_MouseDown;
-            panPictures.Controls.Add(placeholder);
+            panel1.Controls.Add(placeholder);
         }
 
         private void pic_MouseDown(object sender, MouseEventArgs e)
@@ -68,7 +68,7 @@ namespace vcs_PictureList
             ShowContextMenu(new Point(pic.Left + e.X, pic.Top + e.Y));
         }
 
-        private void panPictures_MouseDown(object sender, MouseEventArgs e)
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             // Ignore left mouse clicks.
             if (e.Button != MouseButtons.Right) return;
@@ -109,10 +109,10 @@ namespace vcs_PictureList
         {
             try
             {
-                if (ofdPicture.ShowDialog() == DialogResult.OK)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     int i = 0;
-                    foreach (string filename in ofdPicture.FileNames)
+                    foreach (string filename in openFileDialog1.FileNames)
                     {
                         Bitmap bm = new Bitmap(filename);
                         Pictures.Insert(ClickedIndex + i, bm);
@@ -135,7 +135,7 @@ namespace vcs_PictureList
             ClickedIndex = Pictures.Count;
 
             // See if we clicked on or before a picture.
-            int x = location.X + panPictures.HorizontalScroll.Value;
+            int x = location.X + panel1.HorizontalScroll.Value;
             for (int i = 0; i < Pictures.Count; i++)
             {
                 // See if we are before the next picture.
@@ -147,7 +147,7 @@ namespace vcs_PictureList
                 }   
 
                 // See if we are on this picture.
-                x -= panPictures.Controls[i].Width;
+                x -= panel1.Controls[i].Width;
                 if (x < 0)
                 {
                     ClickedIndex = i;
@@ -165,7 +165,7 @@ namespace vcs_PictureList
             mnuInsertPicture.Enabled = !clicked_on_picture;
 
             // Display the context menu.
-            ctxPictures.Show(panPictures, location);
+            contextMenuStrip1.Show(panel1, location);
         }
 
         private void show_pictures()

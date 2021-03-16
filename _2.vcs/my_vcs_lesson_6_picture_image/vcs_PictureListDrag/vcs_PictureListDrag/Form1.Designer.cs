@@ -29,38 +29,38 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panPictures = new System.Windows.Forms.Panel();
-            this.ctxPictures = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuMoveLeft = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMoveRight = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDeletePicture = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuInsertPicture = new System.Windows.Forms.ToolStripMenuItem();
-            this.ofdPicture = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.ctxPictures.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panPictures
+            // panel1
             // 
-            this.panPictures.AutoScroll = true;
-            this.panPictures.BackColor = System.Drawing.Color.White;
-            this.panPictures.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panPictures.ContextMenuStrip = this.ctxPictures;
-            this.panPictures.Location = new System.Drawing.Point(12, 11);
-            this.panPictures.Name = "panPictures";
-            this.panPictures.Size = new System.Drawing.Size(755, 409);
-            this.panPictures.TabIndex = 1;
-            this.panPictures.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panPictures_MouseDown);
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.ContextMenuStrip = this.contextMenuStrip1;
+            this.panel1.Location = new System.Drawing.Point(12, 11);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(755, 409);
+            this.panel1.TabIndex = 1;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
-            // ctxPictures
+            // contextMenuStrip1
             // 
-            this.ctxPictures.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuMoveLeft,
             this.mnuMoveRight,
             this.mnuDeletePicture,
             this.mnuInsertPicture});
-            this.ctxPictures.Name = "ctxPictures";
-            this.ctxPictures.Size = new System.Drawing.Size(164, 92);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 92);
             // 
             // mnuMoveLeft
             // 
@@ -90,11 +90,11 @@
             this.mnuInsertPicture.Text = "&Insert Picture...";
             this.mnuInsertPicture.Click += new System.EventHandler(this.mnuInsertPicture_Click);
             // 
-            // ofdPicture
+            // openFileDialog1
             // 
-            this.ofdPicture.DefaultExt = "png";
-            this.ofdPicture.Filter = "Image files|*.bmp;*.jpg;*.gif;*.png;*.tif|All FIles|*.*";
-            this.ofdPicture.Multiselect = true;
+            this.openFileDialog1.DefaultExt = "png";
+            this.openFileDialog1.Filter = "Image files|*.bmp;*.jpg;*.gif;*.png;*.tif|All FIles|*.*";
+            this.openFileDialog1.Multiselect = true;
             // 
             // richTextBox1
             // 
@@ -110,20 +110,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 442);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.panPictures);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "vcs_PictureListDrag";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.ctxPictures.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panPictures;
-        private System.Windows.Forms.OpenFileDialog ofdPicture;
-        private System.Windows.Forms.ContextMenuStrip ctxPictures;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuMoveLeft;
         private System.Windows.Forms.ToolStripMenuItem mnuMoveRight;
         private System.Windows.Forms.ToolStripMenuItem mnuDeletePicture;
