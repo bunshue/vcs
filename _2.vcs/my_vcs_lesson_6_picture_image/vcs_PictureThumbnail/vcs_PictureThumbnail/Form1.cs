@@ -125,10 +125,25 @@ namespace vcs_PictureThumbnail
         {
             // Get the file's information.
             PictureBox pic = sender as PictureBox;
-            FileInfo file_into = pic.Tag as FileInfo;
+            FileInfo file_info = pic.Tag as FileInfo;
 
             // "Start" the file.
-            Process.Start(file_into.FullName);
+            Process.Start(file_info.FullName);
+
+            /*
+            this.Text = file_info.FullName;
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+            pic.Size = new Size(1920/2, 1080/2);
+            pic.SizeMode = PictureBoxSizeMode.Normal;
+            pic.Image = new Bitmap(file_info.FullName);
+            this.Controls.Add(pic);
+            flowLayoutPanel1.Visible = false;
+            pic.BringToFront();
+            */
         }
     }
 }

@@ -16,11 +16,6 @@ namespace vcs_programming
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         ShapeCollection ShapeManager = new ShapeCollection();
        
         private void ShapeManagerForm_Load(object sender, EventArgs e)

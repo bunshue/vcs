@@ -16,9 +16,6 @@ namespace vcs_programming
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            /* 第 2, 18 章 */
-            Application.Run(new Form1());   //有Class應用範例
-
             /* 第 9 章 */
             //Application.Run(new matchNumbers());        //1A1B猜數字遊戲
 
@@ -47,7 +44,7 @@ namespace vcs_programming
             /* 第 20 章 */
             //Application.Run(new ShapeManagerForm());
 
-            //Application.Run(new Midterm());
+            Application.Run(new Midterm());
         }
     }
 }

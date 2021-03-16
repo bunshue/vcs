@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lblCounter = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnTriangle = new System.Windows.Forms.Button();
             this.btnRectangle = new System.Windows.Forms.Button();
@@ -45,16 +44,6 @@
             this.lblCounter.Size = new System.Drawing.Size(308, 29);
             this.lblCounter.TabIndex = 13;
             this.lblCounter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(326, 168);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(162, 31);
-            this.btnExit.TabIndex = 11;
-            this.btnExit.Text = "結束";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // txtOutput
             // 
@@ -117,7 +106,6 @@
             this.Controls.Add(this.btnRectangle);
             this.Controls.Add(this.btnTriangle);
             this.Controls.Add(this.lblCounter);
-            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtOutput);
             this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -134,7 +122,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblCounter;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Button btnTriangle;
         private System.Windows.Forms.Button btnRectangle;

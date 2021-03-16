@@ -18,27 +18,24 @@ namespace vcs_FormSendData
             InitializeComponent();
 
             data = histData;
-            /* for (int i = 0; i < 256; ++i)
-             {
-                 Console.WriteLine(i + ":" + data[i]);
-             }*/
-            //Draw_Hist(data);
         }
 
         void Draw_Hist(int[] data)
         {
             Graphics g = panel1.CreateGraphics();
-            //Graphics g = pictureBox1.CreateGraphics();
 
             Pen pen = new Pen(Brushes.Black, 1);
+
+            int N = data.Length;
+
             // get the max value
             int max = 0;
-            for (int i = 0; i < 256; ++i)
+            for (int i = 0; i < N; i++)
             {
                 max = Math.Max(max, data[i]);
             }
             // draw
-            for (int i = 0; i < 256; ++i)
+            for (int i = 0; i < N; i += 2)
             {
                 g.DrawLine(pen, i, 260, i, 260 - 256 * data[i] / max);
             }

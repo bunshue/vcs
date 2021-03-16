@@ -16,6 +16,15 @@ namespace vcs_Alphanumeric
         SolidBrush sb;
         Bitmap bitmap1;
 
+        string str_0 =
+            "01110" +
+            "10001" +
+            "10011" +
+            "10101" +
+            "11001" +
+            "10001" +
+            "01110";     //0
+
         public Form1()
         {
             InitializeComponent();
@@ -23,27 +32,22 @@ namespace vcs_Alphanumeric
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
             //新建圖檔, 初始化畫布
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
+            g.Clear(BackColor);
             pictureBox1.Image = bitmap1;
-
             //richTextBox1.Text += "已新建圖檔\n";
             //richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+        }
+
+        void draw_alphanumeric(string str)
+        {
+            g.Clear(BackColor);
 
             bool[,] word = new bool[5, 7];
 
-            //word = StringToBool("01110100010000100110010001000011111");     //2
-            word = StringToBool("01110100011001110101110011000101110");     //0
-
-            //word = StringToBool("01100001000010000100001000010001110");     //1
-
+            word = StringToBool(str);
             //PrintArray(word);
 
             int x_st = 200;
@@ -71,6 +75,7 @@ namespace vcs_Alphanumeric
                 richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
+            pictureBox1.Image = bitmap1;
         }
 
         // Display the array's values in the Console window.
@@ -128,10 +133,26 @@ namespace vcs_Alphanumeric
             return word;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            g.Clear(BackColor);
+            pictureBox1.Image = bitmap1;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            draw_alphanumeric(str_0);
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            draw_alphanumeric("01100001000010000100001000010001110");   //1
+        }
 
-
-
+        private void button4_Click(object sender, EventArgs e)
+        {
+            draw_alphanumeric("01110100010000100110010001000011111");   //2
+        }
     }
 }
+

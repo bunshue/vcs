@@ -123,15 +123,23 @@ namespace vcs_FormSendData
             frm3.Show();
         }
 
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
             //傳送資料到新表單並顯示之
             //目前只能顯示在新表單的Panel上
 
+            int N = 360;
             int[] histoData;
-            histoData = new int[256];
-            for (int i = 0; i < 256; ++i)
-                histoData[i] = i;
+            histoData = new int[N];
+            for (int i = 0; i < N; ++i)
+            {
+                histoData[i] = (int)(100 * sind(i)) + 100;
+            }
 
             Form4 form4 = new Form4(histoData);
             form4.Show();
