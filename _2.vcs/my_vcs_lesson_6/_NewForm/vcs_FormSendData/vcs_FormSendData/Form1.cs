@@ -39,6 +39,16 @@ namespace vcs_FormSendData
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             childForm.SetupForm2Data = "父告訴子一件事~~~~~~~";
@@ -58,7 +68,25 @@ namespace vcs_FormSendData
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            Form5 f5 = new Form5();
+
+            DialogResult result = f5.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                richTextBox1.Text += "你按了 香蕉\n";
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                richTextBox1.Text += "你按了 芭樂\n";
+            }
+            else if (result == DialogResult.Abort)
+            {
+                richTextBox1.Text += "你按了 紅龍果\n";
+            }
+            else
+            {
+                richTextBox1.Text += "你按了 XXXXX\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -143,7 +171,6 @@ namespace vcs_FormSendData
 
             Form4 form4 = new Form4(histoData);
             form4.Show();
-
         }
     }
 }
