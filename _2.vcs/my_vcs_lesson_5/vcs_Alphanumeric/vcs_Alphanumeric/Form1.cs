@@ -26,8 +26,8 @@ namespace vcs_Alphanumeric
             "01110";
 
         string str_1 =
-            "01100" +
             "00100" +
+            "01100" +
             "00100" +
             "00100" +
             "00100" +
@@ -43,6 +43,51 @@ namespace vcs_Alphanumeric
             "10000" +
             "11111";
 
+        string str_3 =
+            "01110" +
+            "10001" +
+            "00001" +
+            "00110" +
+            "00001" +
+            "10001" +
+            "01110";
+
+        string str_4 =
+            "00011" +
+            "00101" +
+            "01001" +
+            "10001" +
+            "11111" +
+            "00001" +
+            "00001";
+
+        string str_5 =
+            "11111" +
+            "10000" +
+            "11110" +
+            "00001" +
+            "00001" +
+            "10001" +
+            "01110";
+
+        string str_6 =
+            "01110" +
+            "10001" +
+            "10000" +
+            "11110" +
+            "10001" +
+            "10001" +
+            "01110";
+
+        string str_7 =
+            "11111" +
+            "00001" +
+            "00010" +
+            "00100" +
+            "01000" +
+            "01000" +
+            "01000";
+
         string str_8 =
             "01110" +
             "10001" +
@@ -52,30 +97,12 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_K =
-            "10001" +
-            "10010" +
-            "10100" +
-            "11000" +
-            "10100" +
-            "10010" +
-            "10001";
-
-        string str_L =
-            "10000" +
-            "10000" +
-            "10000" +
-            "10000" +
-            "10000" +
-            "10000" +
-            "11111";
-
-        string str_O =
+        string str_9 =
             "01110" +
             "10001" +
             "10001" +
-            "10001" +
-            "10001" +
+            "01111" +
+            "00001" +
             "10001" +
             "01110";
 
@@ -115,6 +142,42 @@ namespace vcs_Alphanumeric
             "01001" +
             "11110";
 
+        string str_E =
+            "11111" +
+            "10000" +
+            "10000" +
+            "11110" +
+            "10000" +
+            "10000" +
+            "11111";
+
+        string str_F =
+            "11111" +
+            "10000" +
+            "10000" +
+            "11110" +
+            "10000" +
+            "10000" +
+            "10000";
+
+        string str_G =
+            "01110" +
+            "10001" +
+            "10000" +
+            "10000" +
+            "10011" +
+            "10001" +
+            "01110";
+
+        string str_H =
+            "10001" +
+            "10001" +
+            "10001" +
+            "11111" +
+            "10001" +
+            "10001" +
+            "10001";
+
         string str_I =
             "01110" +
             "00100" +
@@ -125,13 +188,31 @@ namespace vcs_Alphanumeric
             "01110";
 
         string str_J =
-            "01110" +
-            "00100" +
-            "00100" +
-            "00100" +
-            "00100" +
+            "00111" +
+            "00010" +
+            "00010" +
+            "00010" +
+            "10010" +
+            "10010" +
+            "01100";
+
+        string str_K =
+            "10001" +
+            "10010" +
             "10100" +
-            "01000";
+            "11000" +
+            "10100" +
+            "10010" +
+            "10001";
+
+        string str_L =
+            "10000" +
+            "10000" +
+            "10000" +
+            "10000" +
+            "10000" +
+            "10000" +
+            "11111";
 
         string str_M =
             "10001" +
@@ -151,14 +232,113 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_G =
-            "01111" +
-            "10000" +
-            "10000" +
-            "10111" +
+        string str_O =
+            "01110" +
             "10001" +
             "10001" +
-            "01111";
+            "10001" +
+            "10001" +
+            "10001" +
+            "01110";
+
+        string str_P =
+            "11110" +
+            "10001" +
+            "10001" +
+            "11110" +
+            "10000" +
+            "10000" +
+            "10000";
+
+        string str_Q =
+            "01110" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "10101" +
+            "10010" +
+            "01101";
+
+        string str_R =
+            "11110" +
+            "10001" +
+            "10001" +
+            "11110" +
+            "10001" +
+            "10001" +
+            "10001";
+
+        string str_S =
+            "01110" +
+            "10001" +
+            "10000" +
+            "01110" +
+            "00001" +
+            "10001" +
+            "01110";
+
+        string str_T =
+            "11111" +
+            "00100" +
+            "00100" +
+            "00100" +
+            "00100" +
+            "00100" +
+            "00100";
+
+        string str_U =
+            "10001" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "01110";
+
+        string str_V =
+            "10001" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "01010" +
+            "00100";
+
+        string str_W =
+            "10001" +
+            "10001" +
+            "10001" +
+            "10001" +
+            "10101" +
+            "10101" +
+            "01010";
+
+        string str_X =
+            "10001" +
+            "10001" +
+            "01010" +
+            "00100" +
+            "01010" +
+            "10001" +
+            "10001";
+
+        string str_Y =
+            "10001" +
+            "10001" +
+            "01010" +
+            "00100" +
+            "00100" +
+            "00100" +
+            "00100";
+
+        string str_Z =
+            "11111" +
+            "00001" +
+            "00010" +
+            "00100" +
+            "01000" +
+            "10000" +
+            "11111";
 
         public Form1()
         {
@@ -183,8 +363,8 @@ namespace vcs_Alphanumeric
             word = StringToBool(str);
             //PrintArray(word);
 
-            int ddx = w * 3 / 10;
-            int ddy = h * 3 / 10;
+            int ddx = w * 4 / 10;
+            int ddy = h * 4 / 10;
 
             int dx = w + ddx;
             int dy = h + ddy;
@@ -281,42 +461,81 @@ namespace vcs_Alphanumeric
             int x_st = 20;
             int y_st = 20;
 
-            int w = 20;
-            int h = 20;
+            int w = 15;
+            int h = 15;
 
             int dx = w * 7 + 10;
-            int dy = h * 9 + 10;
+            int dy = h * 9 + 20;
 
-            draw_alphanumeric(str_2, x_st + dx * 0, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_1, x_st + dx * 0, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_2, x_st + dx * 1, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_3, x_st + dx * 2, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_4, x_st + dx * 3, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_5, x_st + dx * 4, y_st + dy * 0, w, h);
 
-            draw_alphanumeric(str_0, x_st + dx * 1, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_6, x_st + dx * 0, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_7, x_st + dx * 1, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_8, x_st + dx * 2, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_9, x_st + dx * 3, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_0, x_st + dx * 4, y_st + dy * 1, w, h);
 
-            draw_alphanumeric(str_2, x_st + dx * 2, y_st + dy * 0, w, h);
 
-            draw_alphanumeric(str_1, x_st + dx * 3, y_st + dy * 0, w, h);
+            draw_alphanumeric(str_A, x_st + dx * 0, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_B, x_st + dx * 1, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_C, x_st + dx * 2, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_E, x_st + dx * 4, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_F, x_st + dx * 5, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_G, x_st + dx * 6, y_st + dy * 2, w, h);
 
-            draw_alphanumeric(str_L, x_st + dx * 0, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_H, x_st + dx * 0, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_I, x_st + dx * 1, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_J, x_st + dx * 2, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_K, x_st + dx * 3, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_L, x_st + dx * 4, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_M, x_st + dx * 5, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_N, x_st + dx * 6, y_st + dy * 3, w, h);
 
-            draw_alphanumeric(str_O, x_st + dx * 1, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_O, x_st + dx * 0, y_st + dy * 4, w, h);
+            draw_alphanumeric(str_P, x_st + dx * 1, y_st + dy * 4, w, h);
+            draw_alphanumeric(str_Q, x_st + dx * 2, y_st + dy * 4, w, h);
+            draw_alphanumeric(str_R, x_st + dx * 3, y_st + dy * 4, w, h);
+            draw_alphanumeric(str_S, x_st + dx * 4, y_st + dy * 4, w, h);
+            draw_alphanumeric(str_T, x_st + dx * 5, y_st + dy * 4, w, h);
+            draw_alphanumeric(str_U, x_st + dx * 6, y_st + dy * 4, w, h);
 
-            draw_alphanumeric(str_A, x_st + dx * 2, y_st + dy * 1, w, h);
+            draw_alphanumeric(str_V, x_st + dx * 0, y_st + dy * 5, w, h);
+            draw_alphanumeric(str_W, x_st + dx * 1, y_st + dy * 5, w, h);
+            draw_alphanumeric(str_X, x_st + dx * 2, y_st + dy * 5, w, h);
+            draw_alphanumeric(str_Y, x_st + dx * 3, y_st + dy * 5, w, h);
+            draw_alphanumeric(str_Z, x_st + dx * 4, y_st + dy * 5, w, h);
+            //draw_alphanumeric(str_M, x_st + dx * 5, y_st + dy * 5, w, h);
+            //draw_alphanumeric(str_N, x_st + dx * 6, y_st + dy * 5, w, h);
+            
 
-            draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 1, w, h);
 
-            draw_alphanumeric(str_I, x_st + dx * 0, y_st + dy * 2, w, h);
+            /*
+            draw_alphanumeric(str_O, x_st + dx * 1, y_st + dy * 2, w, h);
 
-            draw_alphanumeric(str_N, x_st + dx * 1, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_A, x_st + dx * 2, y_st + dy * 2, w, h);
 
-            draw_alphanumeric(str_G, x_st + dx * 2, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 2, w, h);
 
-            draw_alphanumeric(str_M, x_st + dx * 3, y_st + dy * 2, w, h);
+            draw_alphanumeric(str_I, x_st + dx * 0, y_st + dy * 3, w, h);
+
+            draw_alphanumeric(str_N, x_st + dx * 1, y_st + dy * 3, w, h);
+
+            draw_alphanumeric(str_G, x_st + dx * 2, y_st + dy * 3, w, h);
+
+            draw_alphanumeric(str_M, x_st + dx * 3, y_st + dy * 3, w, h);
 
             //draw_alphanumeric(str_J, x_st + dx * 0, y_st + dy * 3, w, h);
             //draw_alphanumeric(str_K, x_st + dx * 1, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_A, x_st + dx * 0, y_st + dy * 3, w, h);
+            draw_alphanumeric(str_A, x_st + dx * 0, y_st + dy * 4, w, h);
             draw_alphanumeric(str_B, x_st + dx * 1, y_st + dy * 3, w, h);
             draw_alphanumeric(str_C, x_st + dx * 2, y_st + dy * 3, w, h);
             draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 3, w, h);
+            */
         }
 
 
