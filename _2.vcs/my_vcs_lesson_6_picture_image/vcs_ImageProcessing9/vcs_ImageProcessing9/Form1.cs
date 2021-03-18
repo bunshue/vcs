@@ -65,11 +65,23 @@ namespace vcs_ImageProcessing9
                 for (i = 0; i < W; i++)
                 {
                     //richTextBox1.Text += srcData[j * H + i].ToString("X2") + " ";
-                    richTextBox1.Text += srcData[j * H + i].ToString() + " ";
+                    //richTextBox1.Text += srcData[j * H + i].ToString() + " ";
+
+                    //srcData[j * H + i] = (byte)(255 - srcData[j * H + i]);
 
                 }
-                richTextBox1.Text += "\n";
+                //richTextBox1.Text += "\n";
             }
+
+            //準備修改srcData值  並把 srcData恢復成圖片
+
+
+            for (i = 0; i < 305 * 10; i++)
+            {
+                srcData[i] = 0;
+
+            }
+            
             richTextBox1.Text += "\n";
             richTextBox1.Text += "\n";
             richTextBox1.Text += "\n";

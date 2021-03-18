@@ -17,12 +17,17 @@ namespace vcs_FormSendData
         {
             InitializeComponent();
 
-            data = histData;
+            data = histData;    //表單初始化 接收父表單傳送過來的資料
         }
 
-        void Draw_Hist(int[] data)
+        void Draw_Hist(int[] data)  //直方圖 只顯示正的數值 且 畫好畫滿
         {
+            int W = panel1.ClientSize.Width;
+            int H = panel1.ClientSize.Height;
+
             Graphics g = panel1.CreateGraphics();
+
+            g.DrawRectangle(new Pen(Color.Red, 3), 0, 0, W - 3, H - 3);
 
             Pen pen = new Pen(Brushes.Black, 1);
 
@@ -32,12 +37,14 @@ namespace vcs_FormSendData
             int max = 0;
             for (int i = 0; i < N; i++)
             {
-                max = Math.Max(max, data[i]);
+                max = Math.Max(max, data[i]);   //找出最大值 為了畫好畫滿
             }
+            //richTextBox1.Text += "max = " + max.ToString() + "\n";
+            
             // draw
             for (int i = 0; i < N; i += 2)
             {
-                g.DrawLine(pen, i, 260, i, 260 - 256 * data[i] / max);
+                g.DrawLine(pen, i, H, i, H - H * data[i] / max);    //高度依最大值比例畫出來
             }
         }
 

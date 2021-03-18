@@ -47,9 +47,9 @@ namespace vcs_FormSendData
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 parentForm = (Form1)this.Owner;
-            parentForm.SetupForm1Data = "子告訴父一件事~~~~~~~";
-            parentForm.setForm1Value();
+            Form1 f1 = (Form1)this.Owner;
+            f1.SetupForm1Data = "子告訴父一件事~~~~~~~";
+            f1.setForm1Value();
         }
 
 

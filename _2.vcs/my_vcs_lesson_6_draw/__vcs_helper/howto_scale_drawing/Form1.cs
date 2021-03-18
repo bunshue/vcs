@@ -25,12 +25,14 @@ namespace howto_scale_drawing
         // Draw some smiley faces.
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            int W = 500;
+            int H = 500;
             e.Graphics.SmoothingMode = 
                 System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
-            float wid = (this.ClientSize.Width - 1) / 2;
-            float hgt = (this.ClientSize.Height - 1) / 2;
+            float wid = (W - 1) / 2;
+            float hgt = (H - 1) / 2;
 
             // Draw in the upper left quarter.
             MapDrawing(e.Graphics, smiley_rect, new RectangleF(0, 0, wid, hgt), false);

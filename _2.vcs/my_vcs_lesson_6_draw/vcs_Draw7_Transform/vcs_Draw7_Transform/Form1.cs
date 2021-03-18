@@ -82,7 +82,7 @@ namespace vcs_Draw7_Transform
             {
                 x.Add(i);
 
-                yy = sind(i)+0.6;
+                yy = sind(i) + 0.6;
 
                 /*
                 if (i == 0)
@@ -114,11 +114,11 @@ namespace vcs_Draw7_Transform
             double yy;
             for (i = xmin; i <= xmax; i += 5f)
             {
-//x.Add(i);
-                x.Add(i+180);
+                //x.Add(i);
+                x.Add(i + 180);
                 //yy = sind(i)+0.6;
-//yy = sind(i);
-                yy = sind(i) * 50+50;
+                //yy = sind(i);
+                yy = sind(i) * 50 + 50;
                 /*
                 if (i == 0)
                     yy = 1;
@@ -567,6 +567,119 @@ namespace vcs_Draw7_Transform
 
             // Draw curve to screen.
             //g.DrawCurve(redPen, data); //畫曲線
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Pen redPen = new Pen(Color.Red, 3);
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;      // Draw smoothly.
+
+            richTextBox1.Text += "左: 原圖放大平移\n";
+            //原圖在 (-1,-1) w = 2 h = 2
+            //重置轉換
+            g.ResetTransform();
+
+            //x方向放大200倍 y方向放大100倍, 變成 (-200,-100), w = 400, h = 200
+            g.ScaleTransform(200, 100);
+
+            //平移 水平向右移200 垂直向下移200 
+            g.TranslateTransform(200, 200, MatrixOrder.Append);
+
+            // Draw.
+            DrawChart(g);
+
+
+            richTextBox1.Text += "右上: 原圖放大平移\n";
+            //原圖在 (-1,-1) w = 2 h = 2
+            //轉換到 (300,10) w = 150 h = 100  //放大又平移
+            float x_st = 500f;
+            float y_st = 10f;
+            int w = 150;
+            int h = 100;
+
+            RectangleF from_rect = new RectangleF(-1, -1, 2, 2);
+            PointF[] to_points =
+            {
+                new PointF(x_st, y_st),    // Upper left.
+                new PointF(x_st+w, y_st),    // Upper right.
+                new PointF(x_st, y_st+h),   // Lower left.
+            };
+            Matrix map_matrix = new Matrix(from_rect, to_points);
+            g.Transform = map_matrix;
+            // Draw.
+            DrawChart(g);
+
+
+            richTextBox1.Text += "右中: 原圖放大平移 且歪曲50\n";
+            //原圖在 (-1,-1) w = 2 h = 2
+            //轉換到 (400,120) w = 180 h = 100  //放大又平移 且 歪曲50
+            x_st = 500f;
+            y_st = 120f;
+            w = 180;
+            h = 100;
+
+            from_rect = new RectangleF(-1, -1, 2, 2);
+            to_points = new PointF[]
+            {
+                new PointF(x_st, y_st),    // Upper left.
+                new PointF(x_st+w, y_st),   // Upper right.
+                new PointF(x_st-50, y_st+h),    // Lower left.
+            };
+            map_matrix = new Matrix(from_rect, to_points);
+            g.Transform = map_matrix;
+            // Draw.
+            DrawChart(g);
+
+
+            richTextBox1.Text += "右下: 原圖放大平移 且 Y軸反相\n";
+            //反相畫圖  Y軸反相
+            //原圖在 (-1,-1) w = 2 h = 2
+            //轉換到 (100,450) w = 100 h = 100  //放大又平移 且 Y軸反相
+
+            x_st = 500f;
+            y_st = 330f;
+            w = 100;
+            h = 100;
+
+            from_rect = new RectangleF(-1, -1, 2, 2);
+            to_points = new PointF[]
+            {
+                new PointF(x_st, y_st),   // Upper left.
+                new PointF(x_st+w, y_st),   // Upper right.
+                new PointF(x_st, y_st-h),   // Lower left.
+            };
+            map_matrix = new Matrix(from_rect, to_points);
+            g.Transform = map_matrix;
+            // Draw.
+            DrawChart(g);
+        }
+
+        //把圖畫在(-1,-1) w = 2 h = 2
+        private void DrawChart(Graphics g)
+        {
+            using (Pen black_pen = new Pen(Color.Black, 0))
+            {
+                g.DrawLine(black_pen, -1, 1, 1, 1);     //畫出X軸
+                g.DrawLine(black_pen, -1, 1, -1, -1);   //畫出y軸
+
+                using (Pen p = new Pen(Color.Red, 0))
+                {
+                    p.EndCap = LineCap.ArrowAnchor;
+
+                    g.DrawLines(p, new PointF[]
+                    {
+                    new PointF(-1,1),
+                    new PointF(-0.7f,-0.3f),
+                    new PointF(-0.4f,0.2f),
+                    new PointF(0.1f,0f),
+                    new PointF(0.4f,0.3f),
+                    new PointF(0.7f,-0.8f)
+                    }
+                    );
+                }
+            }
         }
     }
 }

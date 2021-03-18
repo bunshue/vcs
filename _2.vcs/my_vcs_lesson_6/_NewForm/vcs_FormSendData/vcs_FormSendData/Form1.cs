@@ -29,11 +29,13 @@ namespace vcs_FormSendData
 
         public void setForm1Value()
         {
-            this.richTextBox1.Text += "父得到信息 : " + form1_data + "\n";
+            //this.richTextBox1.Text += "父得到信息 : " + form1_data + "\n";
         }
 
         //使用自己建立的Form2表單
-        Form2 childForm = new Form2();      //實體化Form2視窗物件
+        Form2 f2 = new Form2();     //實體化Form2視窗物件
+        Form5 f5 = new Form5();     //實體化Form5視窗物件
+
         public Form1()
         {
             InitializeComponent();
@@ -51,24 +53,24 @@ namespace vcs_FormSendData
 
         private void button1_Click(object sender, EventArgs e)
         {
-            childForm.SetupForm2Data = "父告訴子一件事~~~~~~~";
-            childForm.setForm2Value();
+            f2.SetupForm2Data = "父告訴子一件事~~~~~~~";
+            f2.setForm2Value();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //childForm.StartPosition = FormStartPosition.CenterScreen;      //設定新表單的顯示位置, 居中顯示
-            //childForm.StartPosition = FormStartPosition.CenterParent;
-            childForm.StartPosition = FormStartPosition.Manual;
-            childForm.Location = new Point(this.Location.X + 550, this.Location.Y);
-            childForm.Owner = this;
-            //childForm.ShowDialog();
-            childForm.Show();
+            //f2.StartPosition = FormStartPosition.CenterScreen;      //設定新表單的顯示位置, 居中顯示
+            //f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = new Point(this.Location.X + 550, this.Location.Y);
+            f2.Owner = this;
+            //f2.ShowDialog();
+            f2.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form5 f5 = new Form5();
+            f5.Owner = this;
 
             DialogResult result = f5.ShowDialog();
             if (result == DialogResult.OK)
@@ -83,6 +85,10 @@ namespace vcs_FormSendData
             {
                 richTextBox1.Text += "你按了 紅龍果\n";
             }
+            else if (result == DialogResult.Ignore)
+            {
+                richTextBox1.Text += "你選擇了 " + form1_data + "\n";
+            }
             else
             {
                 richTextBox1.Text += "你按了 XXXXX\n";
@@ -91,24 +97,24 @@ namespace vcs_FormSendData
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form2 childForm = new Form2();//產生Form2的物件，才可以使用它所提供的Method
-            //childForm.Show();         //不等結束
-            //childForm.ShowDialog();   //要等結束
-            childForm.ShowDialog(this); //設定Form2為Form1的上層，並開啟Form2視窗。由於在Form1的程式碼內使用this，所以this為Form1的物件本身
+            Form2 f2 = new Form2();//產生Form2的物件，才可以使用它所提供的Method
+            //f2.Show();         //不等結束
+            //f2.ShowDialog();   //要等結束
+            f2.ShowDialog(this); //設定Form2為Form1的上層，並開啟Form2視窗。由於在Form1的程式碼內使用this，所以this為Form1的物件本身
 
-            if (childForm.DialogResult == System.Windows.Forms.DialogResult.OK)
+            if (f2.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 //若使用者在Form2按下了OK，則進入這個判斷式
-                richTextBox1.Text += "按下了" + childForm.DialogResult.ToString() + "\n";
+                richTextBox1.Text += "按下了" + f2.DialogResult.ToString() + "\n";
             }
-            else if (childForm.DialogResult == System.Windows.Forms.DialogResult.Cancel)
+            else if (f2.DialogResult == System.Windows.Forms.DialogResult.Cancel)
             {
                 //若使用者在Form2按下了Cancel或者直接點選X關閉視窗，都會進入這個判斷式
-                richTextBox1.Text += "按下了" + childForm.DialogResult.ToString() + "\n";
+                richTextBox1.Text += "按下了" + f2.DialogResult.ToString() + "\n";
             }
             else
             {
-                richTextBox1.Text += "按下了" + childForm.DialogResult.ToString() + "\n";
+                richTextBox1.Text += "按下了" + f2.DialogResult.ToString() + "\n";
             }
 
 
@@ -166,10 +172,9 @@ namespace vcs_FormSendData
             histoData = new int[N];
             for (int i = 0; i < N; ++i)
             {
-                histoData[i] = (int)(100 * sind(i)) + 100;
+                histoData[i] = (int)(100 * sind(i)) + 100;      //直方圖 只顯示正的數值
             }
-
-            Form4 form4 = new Form4(histoData);
+            Form4 form4 = new Form4(histoData); //開啟表單 並把資料傳送進去
             form4.Show();
         }
     }

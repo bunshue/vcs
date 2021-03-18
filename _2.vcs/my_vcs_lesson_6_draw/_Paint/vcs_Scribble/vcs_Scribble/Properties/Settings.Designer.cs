@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace howto_map_rectangles.Properties {
+namespace vcs_Scribble.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

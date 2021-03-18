@@ -7,23 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_FormSendData
+namespace vcs_Scribble
 {
-    public partial class Form5 : Form
+    public partial class Form_Close : Form
     {
-        public Form5()
+        public Form_Close()
         {
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Yes;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.No;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -33,10 +33,7 @@ namespace vcs_FormSendData
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form1 f1 = (Form1)this.Owner;
-            f1.SetupForm1Data = textBox1.Text;
-            f1.setForm1Value();
-            this.DialogResult = DialogResult.Ignore;
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }
