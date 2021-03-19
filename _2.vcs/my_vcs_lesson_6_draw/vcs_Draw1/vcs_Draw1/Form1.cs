@@ -21,6 +21,9 @@ namespace vcs_Draw1
         Bitmap bitmap1;
         Font f;
 
+        Color color_st = Color.White;
+        Color color_sp = Color.Green;
+
         public Form1()
         {
             InitializeComponent();
@@ -40,6 +43,9 @@ namespace vcs_Draw1
             UacStuff.AddShieldToButton(button29);
 
             DrawPictureBoxText();
+            color_st = pictureBox_gradient_color_st.BackColor;
+            color_sp = pictureBox_gradient_color_sp.BackColor;
+            draw_gradient_color();
         }
 
         void show_item_location()
@@ -126,6 +132,9 @@ namespace vcs_Draw1
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y + 80);
 
+            groupBox1.Location = new Point(x_st - dx * 4, y_st + dy * 14);
+            groupBox1.Size = new Size(450, 170);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.Location = new Point(20, 20);
@@ -135,7 +144,7 @@ namespace vcs_Draw1
             panel1.Location = new Point(850, y_st);
             //panel1.BackColor = Color.Lime;
 
-            panel2.Size = new Size(750, 100);
+            panel2.Size = new Size(650, 100);
             panel2.Location = new Point(50, y_st);
 
             pictureBox_text.Location = new Point(50, y_st + 150);
@@ -2656,7 +2665,7 @@ namespace vcs_Draw1
             p = new Pen(Color.Red, 3);
             g.DrawPath(new Pen(Color.Red), gp1);
 
-            x_st += dx*2;
+            x_st += dx * 2;
             gp1.Reset();
             gp1.AddLine(x_st + 0, y_st + 0, x_st + 50, y_st + 50);
             gp1.AddEllipse(x_st + 50, y_st + 0, 100, 100);
@@ -2779,5 +2788,56 @@ namespace vcs_Draw1
             flag_mouse_down = 0;
         }
 
+        private void pictureBox_gradient_color_st_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                color_st = colorDialog1.Color;
+                pictureBox_gradient_color_st.BackColor = color_st;
+                draw_gradient_color();
+            }
+        }
+
+        private void pictureBox_gradient_color_sp_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                color_sp = colorDialog1.Color;
+                pictureBox_gradient_color_sp.BackColor = color_sp;
+                draw_gradient_color();
+            }
+        }
+
+        void draw_gradient_color()
+        {
+            int W = pictureBox_gradient_color.ClientSize.Width;
+            int H = pictureBox_gradient_color.ClientSize.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            int i;
+            int j;
+
+            byte r_st = color_st.R;
+            byte g_st = color_st.G;
+            byte b_st = color_st.B;
+
+            byte r_sp = color_sp.R;
+            byte g_sp = color_sp.G;
+            byte b_sp = color_sp.B;
+
+            int r_diff = r_sp - r_st;
+            int g_diff = g_sp - g_st;
+            int b_diff = b_sp - b_st;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    bitmap1.SetPixel(i, j, Color.FromArgb(255, r_st + i * r_diff / W, g_st + i * g_diff / W, b_st + i * b_diff / W));
+                }
+            }
+            pictureBox_gradient_color.Image = bitmap1;
+        }
     }
 }

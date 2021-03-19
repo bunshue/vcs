@@ -16,7 +16,43 @@ namespace vcs_Alphanumeric
         SolidBrush sb;
         Bitmap bitmap1;
 
-        string str_0 =
+        string snull =
+            "00000" +
+            "00000" +
+            "00000" +
+            "00000" +
+            "00000" +
+            "00000" +
+            "00000";
+
+        string scomma =
+            "00000" +
+            "00000" +
+            "00100" +
+            "00000" +
+            "00100" +
+            "00000" +
+            "00000";
+
+        string sslash =
+            "00000" +
+            "00001" +
+            "00010" +
+            "00100" +
+            "01000" +
+            "10000" +
+            "00000";
+
+        string sbackslash =
+            "00000" +
+            "10000" +
+            "01000" +
+            "00100" +
+            "00010" +
+            "00001" +
+            "00000";
+
+        string s0 =
             "01110" +
             "10001" +
             "10011" +
@@ -25,7 +61,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_1 =
+        string s1 =
             "00100" +
             "01100" +
             "00100" +
@@ -34,7 +70,7 @@ namespace vcs_Alphanumeric
             "00100" +
             "01110";
 
-        string str_2 =
+        string s2 =
             "01110" +
             "10001" +
             "00001" +
@@ -43,7 +79,7 @@ namespace vcs_Alphanumeric
             "10000" +
             "11111";
 
-        string str_3 =
+        string s3 =
             "01110" +
             "10001" +
             "00001" +
@@ -52,7 +88,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_4 =
+        string s4 =
             "00011" +
             "00101" +
             "01001" +
@@ -61,7 +97,7 @@ namespace vcs_Alphanumeric
             "00001" +
             "00001";
 
-        string str_5 =
+        string s5 =
             "11111" +
             "10000" +
             "11110" +
@@ -70,7 +106,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_6 =
+        string s6 =
             "01110" +
             "10001" +
             "10000" +
@@ -79,7 +115,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_7 =
+        string s7 =
             "11111" +
             "00001" +
             "00010" +
@@ -88,7 +124,7 @@ namespace vcs_Alphanumeric
             "01000" +
             "01000";
 
-        string str_8 =
+        string s8 =
             "01110" +
             "10001" +
             "10001" +
@@ -97,7 +133,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_9 =
+        string s9 =
             "01110" +
             "10001" +
             "10001" +
@@ -106,7 +142,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_A =
+        string sA =
             "00100" +
             "01010" +
             "10001" +
@@ -115,7 +151,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_B =
+        string sB =
             "11110" +
             "10001" +
             "10001" +
@@ -124,7 +160,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "11110";
 
-        string str_C =
+        string sC =
             "01110" +
             "10001" +
             "10000" +
@@ -133,7 +169,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_D =
+        string sD =
             "11110" +
             "01001" +
             "01001" +
@@ -142,7 +178,7 @@ namespace vcs_Alphanumeric
             "01001" +
             "11110";
 
-        string str_E =
+        string sE =
             "11111" +
             "10000" +
             "10000" +
@@ -151,7 +187,7 @@ namespace vcs_Alphanumeric
             "10000" +
             "11111";
 
-        string str_F =
+        string sF =
             "11111" +
             "10000" +
             "10000" +
@@ -160,7 +196,7 @@ namespace vcs_Alphanumeric
             "10000" +
             "10000";
 
-        string str_G =
+        string sG =
             "01110" +
             "10001" +
             "10000" +
@@ -169,7 +205,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_H =
+        string sH =
             "10001" +
             "10001" +
             "10001" +
@@ -178,7 +214,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_I =
+        string sI =
             "01110" +
             "00100" +
             "00100" +
@@ -187,7 +223,7 @@ namespace vcs_Alphanumeric
             "00100" +
             "01110";
 
-        string str_J =
+        string sJ =
             "00111" +
             "00010" +
             "00010" +
@@ -196,7 +232,7 @@ namespace vcs_Alphanumeric
             "10010" +
             "01100";
 
-        string str_K =
+        string sK =
             "10001" +
             "10010" +
             "10100" +
@@ -205,7 +241,7 @@ namespace vcs_Alphanumeric
             "10010" +
             "10001";
 
-        string str_L =
+        string sL =
             "10000" +
             "10000" +
             "10000" +
@@ -214,7 +250,7 @@ namespace vcs_Alphanumeric
             "10000" +
             "11111";
 
-        string str_M =
+        string sM =
             "10001" +
             "11011" +
             "10101" +
@@ -223,7 +259,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_N =
+        string sN =
             "10001" +
             "10001" +
             "11001" +
@@ -232,7 +268,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_O =
+        string sO =
             "01110" +
             "10001" +
             "10001" +
@@ -241,7 +277,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_P =
+        string sP =
             "11110" +
             "10001" +
             "10001" +
@@ -250,7 +286,7 @@ namespace vcs_Alphanumeric
             "10000" +
             "10000";
 
-        string str_Q =
+        string sQ =
             "01110" +
             "10001" +
             "10001" +
@@ -259,7 +295,7 @@ namespace vcs_Alphanumeric
             "10010" +
             "01101";
 
-        string str_R =
+        string sR =
             "11110" +
             "10001" +
             "10001" +
@@ -268,7 +304,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_S =
+        string sS =
             "01110" +
             "10001" +
             "10000" +
@@ -277,7 +313,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_T =
+        string sT =
             "11111" +
             "00100" +
             "00100" +
@@ -286,7 +322,7 @@ namespace vcs_Alphanumeric
             "00100" +
             "00100";
 
-        string str_U =
+        string sU =
             "10001" +
             "10001" +
             "10001" +
@@ -295,7 +331,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "01110";
 
-        string str_V =
+        string sV =
             "10001" +
             "10001" +
             "10001" +
@@ -304,7 +340,7 @@ namespace vcs_Alphanumeric
             "01010" +
             "00100";
 
-        string str_W =
+        string sW =
             "10001" +
             "10001" +
             "10001" +
@@ -313,7 +349,7 @@ namespace vcs_Alphanumeric
             "10101" +
             "01010";
 
-        string str_X =
+        string sX =
             "10001" +
             "10001" +
             "01010" +
@@ -322,7 +358,7 @@ namespace vcs_Alphanumeric
             "10001" +
             "10001";
 
-        string str_Y =
+        string sY =
             "10001" +
             "10001" +
             "01010" +
@@ -331,7 +367,7 @@ namespace vcs_Alphanumeric
             "00100" +
             "00100";
 
-        string str_Z =
+        string sZ =
             "11111" +
             "00001" +
             "00010" +
@@ -356,12 +392,69 @@ namespace vcs_Alphanumeric
             //richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
         }
 
-        void draw_alphanumeric(string str, int x_st, int y_st, int w, int h)
+        string get_alphanumeric_string(char c)
+        {
+            string result = snull;
+            switch (c)
+            {
+                case ':': result = scomma; break;
+                case '0': result = s0; break;
+                case '1': result = s1; break;
+                case '2': result = s2; break;
+                case '3': result = s3; break;
+                case '4': result = s4; break;
+                case '5': result = s5; break;
+                case '6': result = s6; break;
+                case '7': result = s7; break;
+                case '8': result = s8; break;
+                case '9': result = s9; break;
+                case 'A': result = sA; break;
+                case 'B': result = sB; break;
+                case 'C': result = sC; break;
+                case 'D': result = sD; break;
+                case 'E': result = sE; break;
+                case 'F': result = sF; break;
+                case 'G': result = sG; break;
+                case 'H': result = sH; break;
+                case 'I': result = sI; break;
+                case 'J': result = sJ; break;
+                case 'K': result = sK; break;
+                case 'L': result = sL; break;
+                case 'M': result = sM; break;
+                case 'N': result = sN; break;
+                case 'O': result = sO; break;
+                case 'P': result = sP; break;
+                case 'Q': result = sQ; break;
+                case 'R': result = sR; break;
+                case 'S': result = sS; break;
+                case 'T': result = sT; break;
+                case 'U': result = sU; break;
+                case 'V': result = sV; break;
+                case 'W': result = sW; break;
+                case 'X': result = sX; break;
+                case 'Y': result = sY; break;
+                case 'Z': result = sZ; break;
+
+                default: break;
+            }
+            return result;
+        }
+
+        void draw_alphanumeric(char c, int size, Color forecolor, Color backcolor, int x_st, int y_st)
+        {
+            string str = get_alphanumeric_string(c);
+            draw_alphanumeric0(str, size, forecolor, backcolor, x_st, y_st);
+        }
+
+        void draw_alphanumeric0(string str, int size, Color forecolor, Color backcolor, int x_st, int y_st)
         {
             bool[,] word = new bool[5, 7];
 
             word = StringToBool(str);
             //PrintArray(word);
+
+            int w = size;
+            int h = size;
 
             int ddx = w * 4 / 10;
             int ddy = h * 4 / 10;
@@ -376,11 +469,11 @@ namespace vcs_Alphanumeric
                     //richTextBox1.Text += "word[" + i.ToString() + ", " + j.ToString() + "] = " + word[i, j].ToString() + "\n";
                     //richTextBox1.Text += word[i, j].ToString() + " ";
 
-                    sb = new SolidBrush(Color.Gray);
+                    sb = new SolidBrush(backcolor);
                     g.FillRectangle(sb, x_st + i * dx - 2, y_st + j * dy - 2, w + 4, h + 4);
 
                     if (word[i, j] == true)
-                        sb = new SolidBrush(Color.Red);
+                        sb = new SolidBrush(forecolor);
                     else
                         sb = new SolidBrush(Color.Black);
 
@@ -467,87 +560,101 @@ namespace vcs_Alphanumeric
             int dx = w * 7 + 10;
             int dy = h * 9 + 20;
 
-            draw_alphanumeric(str_1, x_st + dx * 0, y_st + dy * 0, w, h);
-            draw_alphanumeric(str_2, x_st + dx * 1, y_st + dy * 0, w, h);
-            draw_alphanumeric(str_3, x_st + dx * 2, y_st + dy * 0, w, h);
-            draw_alphanumeric(str_4, x_st + dx * 3, y_st + dy * 0, w, h);
-            draw_alphanumeric(str_5, x_st + dx * 4, y_st + dy * 0, w, h);
+            //draw_alphanumeric0(str, size, forecolor, backcolor, x_st, y_st);
 
-            draw_alphanumeric(str_6, x_st + dx * 0, y_st + dy * 1, w, h);
-            draw_alphanumeric(str_7, x_st + dx * 1, y_st + dy * 1, w, h);
-            draw_alphanumeric(str_8, x_st + dx * 2, y_st + dy * 1, w, h);
-            draw_alphanumeric(str_9, x_st + dx * 3, y_st + dy * 1, w, h);
-            draw_alphanumeric(str_0, x_st + dx * 4, y_st + dy * 1, w, h);
+            int size = 15;
+            Color forecolor = Color.Red;
+            Color backcolor = Color.Gray;
 
+            draw_alphanumeric0(s1, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 0);
+            draw_alphanumeric0(s2, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 0);
+            draw_alphanumeric0(s3, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 0);
+            draw_alphanumeric0(s4, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 0);
+            draw_alphanumeric0(s5, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 0);
 
-            draw_alphanumeric(str_A, x_st + dx * 0, y_st + dy * 2, w, h);
-            draw_alphanumeric(str_B, x_st + dx * 1, y_st + dy * 2, w, h);
-            draw_alphanumeric(str_C, x_st + dx * 2, y_st + dy * 2, w, h);
-            draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 2, w, h);
-            draw_alphanumeric(str_E, x_st + dx * 4, y_st + dy * 2, w, h);
-            draw_alphanumeric(str_F, x_st + dx * 5, y_st + dy * 2, w, h);
-            draw_alphanumeric(str_G, x_st + dx * 6, y_st + dy * 2, w, h);
+            draw_alphanumeric0(s6, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 1);
+            draw_alphanumeric0(s7, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 1);
+            draw_alphanumeric0(s8, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 1);
+            draw_alphanumeric0(s9, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 1);
+            draw_alphanumeric0(s0, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 1);
 
-            draw_alphanumeric(str_H, x_st + dx * 0, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_I, x_st + dx * 1, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_J, x_st + dx * 2, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_K, x_st + dx * 3, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_L, x_st + dx * 4, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_M, x_st + dx * 5, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_N, x_st + dx * 6, y_st + dy * 3, w, h);
+            draw_alphanumeric0(sA, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 2);
+            draw_alphanumeric0(sB, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 2);
+            draw_alphanumeric0(sC, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 2);
+            draw_alphanumeric0(sD, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 2);
+            draw_alphanumeric0(sE, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 2);
+            draw_alphanumeric0(sF, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 2);
+            draw_alphanumeric0(sG, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 2);
 
-            draw_alphanumeric(str_O, x_st + dx * 0, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_P, x_st + dx * 1, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_Q, x_st + dx * 2, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_R, x_st + dx * 3, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_S, x_st + dx * 4, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_T, x_st + dx * 5, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_U, x_st + dx * 6, y_st + dy * 4, w, h);
+            draw_alphanumeric0(sH, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 3);
+            draw_alphanumeric0(sI, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 3);
+            draw_alphanumeric0(sJ, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 3);
+            draw_alphanumeric0(sK, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 3);
+            draw_alphanumeric0(sL, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 3);
+            draw_alphanumeric0(sM, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 3);
+            draw_alphanumeric0(sN, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 3);
 
-            draw_alphanumeric(str_V, x_st + dx * 0, y_st + dy * 5, w, h);
-            draw_alphanumeric(str_W, x_st + dx * 1, y_st + dy * 5, w, h);
-            draw_alphanumeric(str_X, x_st + dx * 2, y_st + dy * 5, w, h);
-            draw_alphanumeric(str_Y, x_st + dx * 3, y_st + dy * 5, w, h);
-            draw_alphanumeric(str_Z, x_st + dx * 4, y_st + dy * 5, w, h);
-            //draw_alphanumeric(str_M, x_st + dx * 5, y_st + dy * 5, w, h);
-            //draw_alphanumeric(str_N, x_st + dx * 6, y_st + dy * 5, w, h);
-            
+            draw_alphanumeric0(sO, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 4);
+            draw_alphanumeric0(sP, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 4);
+            draw_alphanumeric0(sQ, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 4);
+            draw_alphanumeric0(sR, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 4);
+            draw_alphanumeric0(sS, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 4);
+            draw_alphanumeric0(sT, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 4);
+            draw_alphanumeric0(sU, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 4);
 
-
-            /*
-            draw_alphanumeric(str_O, x_st + dx * 1, y_st + dy * 2, w, h);
-
-            draw_alphanumeric(str_A, x_st + dx * 2, y_st + dy * 2, w, h);
-
-            draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 2, w, h);
-
-            draw_alphanumeric(str_I, x_st + dx * 0, y_st + dy * 3, w, h);
-
-            draw_alphanumeric(str_N, x_st + dx * 1, y_st + dy * 3, w, h);
-
-            draw_alphanumeric(str_G, x_st + dx * 2, y_st + dy * 3, w, h);
-
-            draw_alphanumeric(str_M, x_st + dx * 3, y_st + dy * 3, w, h);
-
-            //draw_alphanumeric(str_J, x_st + dx * 0, y_st + dy * 3, w, h);
-            //draw_alphanumeric(str_K, x_st + dx * 1, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_A, x_st + dx * 0, y_st + dy * 4, w, h);
-            draw_alphanumeric(str_B, x_st + dx * 1, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_C, x_st + dx * 2, y_st + dy * 3, w, h);
-            draw_alphanumeric(str_D, x_st + dx * 3, y_st + dy * 3, w, h);
-            */
+            draw_alphanumeric0(sV, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 5);
+            draw_alphanumeric0(sW, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 5);
+            draw_alphanumeric0(sX, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 5);
+            draw_alphanumeric0(sY, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 5);
+            draw_alphanumeric0(sZ, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 5);
         }
 
+        void draw_string(string str, int size, Color forecolor, Color backcolor, int x_st, int y_st, int dx)
+        {
+            int len = str.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + str[i] + "\n";
+                draw_alphanumeric(str[i], size, forecolor, backcolor, x_st + dx * i, y_st);
+            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //draw_alphanumeric("01100001000010000100001000010001110");   //1
+            string str = "ABCD";
+            int size = 15;
+            Color forecolor = Color.Red;
+            Color backcolor = Color.Gray;
+            int x_st = 20;
+            int y_st = 20;
+            int dx = size * 7 + 10;
+
+            draw_string(str, size, forecolor, backcolor, x_st, y_st, dx);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //draw_alphanumeric("01110100010000100110010001000011111");   //2
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string current_time = DateTime.Now.ToString("HH:mm:ss");
+
+            richTextBox1.Text += current_time + "\n";
+
+            int size = 10;
+            Color forecolor = Color.Red;
+            Color backcolor = Color.Gray;
+            int x_st = 20;
+            int y_st = 20;
+            int dx = size * 7 + 10;
+
+            g.Clear(BackColor);
+            draw_string(current_time, size, forecolor, backcolor, x_st, y_st, dx);
+
         }
     }
 }
-

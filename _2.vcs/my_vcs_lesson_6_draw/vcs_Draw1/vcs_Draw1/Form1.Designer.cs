@@ -89,9 +89,18 @@
             this.button48 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
             this.bt_eraser = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox_gradient_color = new System.Windows.Forms.PictureBox();
+            this.pictureBox_gradient_color_st = new System.Windows.Forms.PictureBox();
+            this.pictureBox_gradient_color_sp = new System.Windows.Forms.PictureBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -741,11 +750,62 @@
             this.bt_eraser.UseVisualStyleBackColor = true;
             this.bt_eraser.Click += new System.EventHandler(this.bt_eraser_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBox_gradient_color_sp);
+            this.groupBox1.Controls.Add(this.pictureBox_gradient_color_st);
+            this.groupBox1.Controls.Add(this.pictureBox_gradient_color);
+            this.groupBox1.Location = new System.Drawing.Point(363, 248);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(387, 172);
+            this.groupBox1.TabIndex = 78;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "漸層色";
+            // 
+            // pictureBox_gradient_color
+            // 
+            this.pictureBox_gradient_color.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_gradient_color.BackColor = System.Drawing.Color.White;
+            this.pictureBox_gradient_color.Location = new System.Drawing.Point(6, 21);
+            this.pictureBox_gradient_color.Name = "pictureBox_gradient_color";
+            this.pictureBox_gradient_color.Size = new System.Drawing.Size(375, 67);
+            this.pictureBox_gradient_color.TabIndex = 0;
+            this.pictureBox_gradient_color.TabStop = false;
+            // 
+            // pictureBox_gradient_color_st
+            // 
+            this.pictureBox_gradient_color_st.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_gradient_color_st.BackColor = System.Drawing.Color.Red;
+            this.pictureBox_gradient_color_st.Location = new System.Drawing.Point(6, 94);
+            this.pictureBox_gradient_color_st.Name = "pictureBox_gradient_color_st";
+            this.pictureBox_gradient_color_st.Size = new System.Drawing.Size(30, 67);
+            this.pictureBox_gradient_color_st.TabIndex = 1;
+            this.pictureBox_gradient_color_st.TabStop = false;
+            this.pictureBox_gradient_color_st.Click += new System.EventHandler(this.pictureBox_gradient_color_st_Click);
+            // 
+            // pictureBox_gradient_color_sp
+            // 
+            this.pictureBox_gradient_color_sp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox_gradient_color_sp.BackColor = System.Drawing.Color.Lime;
+            this.pictureBox_gradient_color_sp.Location = new System.Drawing.Point(351, 94);
+            this.pictureBox_gradient_color_sp.Name = "pictureBox_gradient_color_sp";
+            this.pictureBox_gradient_color_sp.Size = new System.Drawing.Size(30, 67);
+            this.pictureBox_gradient_color_sp.TabIndex = 2;
+            this.pictureBox_gradient_color_sp.TabStop = false;
+            this.pictureBox_gradient_color_sp.Click += new System.EventHandler(this.pictureBox_gradient_color_sp_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 789);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_eraser);
             this.Controls.Add(this.button49);
             this.Controls.Add(this.button48);
@@ -817,6 +877,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -885,6 +949,11 @@
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Button button49;
         private System.Windows.Forms.Button bt_eraser;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox_gradient_color_sp;
+        private System.Windows.Forms.PictureBox pictureBox_gradient_color_st;
+        private System.Windows.Forms.PictureBox pictureBox_gradient_color;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 
