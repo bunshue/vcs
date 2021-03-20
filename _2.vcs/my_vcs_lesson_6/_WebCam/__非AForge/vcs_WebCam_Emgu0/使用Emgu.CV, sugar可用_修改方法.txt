@@ -1,4 +1,4 @@
-使用Emgu.CV, sugar可用_修該方法
+使用Emgu.CV, sugar可用_修改方法
 
 1. 做一個專案, 先存檔
 2. 把7個dll放在/dll裡
@@ -10,6 +10,9 @@
 5. 專案/加入/現有項目/加入其他3個dll, 並將此dll的屬性 之 複製到輸出目錄 改為 永遠複製
 5. 編輯Form1.cs
 
+4個Emgu.XX.dll
 
-
-
+Emgu.CV.dll
+Emgu.CV.ML.dll
+Emgu.CV.UI.dll
+Emgu.Util.dll
