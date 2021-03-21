@@ -29,7 +29,6 @@ namespace vcs_WebCam_Emgu1
         {
             Image<Bgr, Byte> frame = cap.QueryFrame();
             pictureBox1.Image = frame.ToBitmap();
-        
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,7 +68,6 @@ namespace vcs_WebCam_Emgu1
                     MessageBox.Show(excpt.Message);
                 }
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -125,10 +123,7 @@ namespace vcs_WebCam_Emgu1
             else
             {
                 richTextBox2.Text = "解不出來";
-            
             }
-
-
         }
     }
 }

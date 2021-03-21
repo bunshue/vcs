@@ -16,9 +16,8 @@ namespace vcs_WebCam_Emgu1k
 {
     public partial class Form1 : Form
     {
+        bool flag_webcam_ok = false;
         private Capture cap = null;
-        string _phtoDirectory = @"c:\______test_files\photos\";
-        string _fileName;
 
         public Form1()
         {
@@ -27,28 +26,12 @@ namespace vcs_WebCam_Emgu1k
 
         void Application_Idle(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame = cap.QueryFrame();
-            pictureBox1.Image = frame.ToBitmap();
-        
+            Image<Bgr, Byte> image = cap.QueryFrame();
+            pictureBox1.Image = image.ToBitmap();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cap = new Capture(0);
-            //cap = new Capture("C:\\______test_files\\aaaa.mp4");
-            Application.Idle += new EventHandler(Application_Idle);
-            double width;
-            double height;
-            double frame_count;
-            double fps;
-            width = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-            height = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-            frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-            fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
-
-            richTextBox1.Text += "width = " + width.ToString() + " height = " + height.ToString() + "\n";
-            richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
-            richTextBox1.Text += "fps = " + fps.ToString() + "\n";
         }
 
         /// <summary>
@@ -74,16 +57,45 @@ namespace vcs_WebCam_Emgu1k
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //openWebCam();
+            if (flag_webcam_ok == false)
+            {
+                //openWebCam();
+                richTextBox1.Text += "開啟Webcam ......\n";
+                button1.Text = "關閉Webcam";
+                flag_webcam_ok = true;
 
-            // Query 攝影機的畫面
-            Image<Bgr, Byte> phtoFrame = cap.QueryFrame();
+                cap = new Capture(0);   //預設使用第一台的webcam
+                //cap = new Capture("C:\\______test_files\\aaaa.mp4");
+                Application.Idle += new EventHandler(Application_Idle);
 
-            //儲存路徑
-            _fileName = string.Format("{0}{1}{2}", _phtoDirectory, DateTime.Now.ToString("yyyyMMddHmmss"), ".JPG");
+                /*  information
+                double width;
+                double height;
+                double frame_count;
+                double fps;
+                width = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+                height = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+                frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+                fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
 
-            //儲存影像
-            phtoFrame.Save(_fileName);
+                richTextBox1.Text += "width = " + width.ToString() + " height = " + height.ToString() + "\n";
+                richTextBox1.Text += "frame_count = " + frame_count.ToString() + "\n";
+                richTextBox1.Text += "fps = " + fps.ToString() + "\n";
+                */
+
+
+                timer1.Enabled = true;
+            }
+            else
+            {
+                richTextBox1.Text += "關閉Webcam ......\n";
+                button1.Text = "開啟Webcam";
+                flag_webcam_ok = false;
+
+                timer1.Enabled = false;
+                Application.Idle -= new EventHandler(Application_Idle);
+                cap.Dispose();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -92,10 +104,10 @@ namespace vcs_WebCam_Emgu1k
             Image<Bgr, Byte> phtoFrame = cap.QueryFrame();
 
             //儲存路徑
-            _fileName = string.Format("{0}{1}{2}", _phtoDirectory, DateTime.Now.ToString("yyyyMMddHmmss"), ".JPG");
+            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
 
             //儲存影像
-            phtoFrame.Save(_fileName);
+            phtoFrame.Save(filename);
 
 
             System.Drawing.Bitmap bitmap = null;
@@ -103,7 +115,7 @@ namespace vcs_WebCam_Emgu1k
             ZXing.IBarcodeReader reader = new ZXing.BarcodeReader();
 
             //讀取要解碼的圖片
-            FileStream fs = new FileStream(_fileName, FileMode.Open);
+            FileStream fs = new FileStream(filename, FileMode.Open);
             Byte[] data = new Byte[fs.Length];
             // 把檔案讀取到位元組陣列
             fs.Read(data, 0, data.Length);
@@ -120,11 +132,12 @@ namespace vcs_WebCam_Emgu1k
 
             if (result != null)
             {   //如果有成功解讀，則顯示文字
+                richTextBox2.Text = "OK ";
                 richTextBox2.Text = result.Text;
             }
             else
             {
-                richTextBox2.Text = "解不出來";
+                richTextBox2.Text = "解不出來 ";
             
             }
 

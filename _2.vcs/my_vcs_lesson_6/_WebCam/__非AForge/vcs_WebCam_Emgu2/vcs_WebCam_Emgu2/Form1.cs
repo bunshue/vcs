@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
-
 namespace vcs_WebCam_Emgu2
 {
     public partial class Form1 : Form
@@ -26,15 +25,15 @@ namespace vcs_WebCam_Emgu2
 
         void Application_Idle(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame1 = cap1.QueryFrame(); // 去query該畫面
-            Image<Bgr, Byte> frame2 = cap2.QueryFrame(); // 去query該畫面
-            Image<Bgr, Byte> frame3 = cap3.QueryFrame(); // 去query該畫面
-            Image<Bgr, Byte> frame4 = cap4.QueryFrame(); // 去query該畫面
+            Image<Bgr, Byte> image1 = cap1.QueryFrame(); // 去query該畫面
+            Image<Bgr, Byte> image2 = cap2.QueryFrame(); // 去query該畫面
+            Image<Bgr, Byte> image3 = cap3.QueryFrame(); // 去query該畫面
+            Image<Bgr, Byte> image4 = cap4.QueryFrame(); // 去query該畫面
 
-            pictureBox1.Image = frame1.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
-            pictureBox2.Image = frame2.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
-            pictureBox3.Image = frame3.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
-            pictureBox4.Image = frame4.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
+            pictureBox1.Image = image1.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
+            pictureBox2.Image = image2.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
+            pictureBox3.Image = image3.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
+            pictureBox4.Image = image4.ToBitmap(); // 把畫面轉換成bitmap型態，在餵給pictureBox元件
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,6 +51,5 @@ namespace vcs_WebCam_Emgu2
             richTextBox1.Text += "height = " + cap1.Height.ToString() + "\n";
             Application.Idle += new EventHandler(Application_Idle);
         }
-
     }
 }

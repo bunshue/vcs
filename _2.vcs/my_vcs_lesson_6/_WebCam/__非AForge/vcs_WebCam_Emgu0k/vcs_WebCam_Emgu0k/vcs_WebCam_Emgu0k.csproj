@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8814DE7D-CC42-4B2A-B1F4-FA2E55C74C17}</ProjectGuid>
+    <ProjectGuid>{39AB28F1-3E4E-44F7-BE6A-0F40C1551EF2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WebCam_Emgu2</RootNamespace>
-    <AssemblyName>vcs_WebCam_Emgu2</AssemblyName>
+    <RootNamespace>vcs_WebCam_Emgu0k</RootNamespace>
+    <AssemblyName>vcs_WebCam_Emgu0k</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -35,16 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
-      <HintPath>C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.CV.dll</HintPath>
-    </Reference>
-    <Reference Include="Emgu.CV.ML">
-      <HintPath>C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.CV.ML.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
-      <HintPath>C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.CV.UI.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.Util.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Emgu\emgucv-windows-x86 2.3.0.1416\bin\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,9 +53,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ZedGraph">
-      <HintPath>C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin\ZedGraph.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -71,7 +65,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -81,7 +74,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

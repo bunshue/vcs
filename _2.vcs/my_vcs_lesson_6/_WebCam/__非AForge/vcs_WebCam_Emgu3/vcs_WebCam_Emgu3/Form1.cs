@@ -31,22 +31,19 @@ namespace vcs_WebCam_Emgu3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //預設使用第一台的webcam
-            cap = new Capture(0);
+            cap = new Capture(0);   //預設使用第一台的webcam
             //cap = new Capture("D:\\aaaa.mp4");
             richTextBox1.Text += "Width = " + cap.Width.ToString() + "\n";
             richTextBox1.Text += "Height = " + cap.Height.ToString() + "\n";
             richTextBox1.Text += "FRAME_COUNT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_COUNT).ToString() + "\n";
             richTextBox1.Text += "FPS = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS).ToString() + "\n";
             richTextBox1.Text += "FORMAT = " + cap.GetCaptureProperty(CAP_PROP.CV_CAP_PROP_FORMAT) + "\n";
-
         }
-
 
         void Application_Idle(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame = cap.QueryFrame();
-            pictureBox1.Image = frame.ToBitmap();
+            Image<Bgr, Byte> image = cap.QueryFrame();
+            pictureBox1.Image = image.ToBitmap();
         }
 
         //啟動webcam
@@ -135,22 +132,22 @@ namespace vcs_WebCam_Emgu3
 
         }
 
+        //截圖
         private void button4_Click(object sender, EventArgs e)
         {
-            Image<Bgr, Byte> frame = cap.QueryFrame();
-            //Image<Bgr, Byte> detected = faceDetection(frame);
-            //确定保存路径
-            SaveFileDialog SaveFileDialog1 = new SaveFileDialog();
-            SaveFileDialog1.FileName = DateTime.Now.ToString("yyyyMMddhhmmss");
-            SaveFileDialog1.Filter = "Image Files(*.JPG;*.GIF)|*.JPG;*.GIF|All files (*.*)|*.*";
-            if (SaveFileDialog1.ShowDialog() == DialogResult.OK)
+            Image<Bgr, Byte> image = cap.QueryFrame();
+
+            string filename = Application.StartupPath + "\\image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
             {
-                frame.Save(SaveFileDialog1.FileName); //保存
+                image.Save(filename);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
-
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
-
-
-
     }
 }
