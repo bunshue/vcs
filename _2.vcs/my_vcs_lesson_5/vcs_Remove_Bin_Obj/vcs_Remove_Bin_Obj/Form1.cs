@@ -174,11 +174,11 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("EMGU"))
+                    else if (folder_name[i].Contains("libemgucv"))
                     {
                         continue;
                     }
-                    else if (folder_name[i].Contains("MyWebCam"))
+                    else if (folder_name[i].Contains("XXXXXXXXXXX"))
                     {
                         continue;
                     }

@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 
-namespace vcs_WebCam_Emgu0
+
+namespace vcs_WebCam_Emgu0s
 {
     public partial class Form1 : Form
     {
@@ -173,7 +175,7 @@ namespace vcs_WebCam_Emgu0
             catch (Exception ex)
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
+        }
             */
 
             richTextBox1.Text += "Size = " + image.Size.ToString() + "\n";

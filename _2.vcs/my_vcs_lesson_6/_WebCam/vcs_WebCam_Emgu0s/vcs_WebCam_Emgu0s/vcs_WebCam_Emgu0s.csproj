@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{92504C16-4DAB-4BC1-8B1B-D4336543D463}</ProjectGuid>
+    <ProjectGuid>{CA5E874A-31B3-4438-8F64-6E27BEFDBD64}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_WebCam_Emgu0</RootNamespace>
-    <AssemblyName>vcs_WebCam_Emgu0</AssemblyName>
+    <RootNamespace>vcs_WebCam_Emgu0s</RootNamespace>
+    <AssemblyName>vcs_WebCam_Emgu0s</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -35,16 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
-      <HintPath>dll\Emgu.CV.dll</HintPath>
+      <HintPath>_emgu_dll_x64\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.ML">
-      <HintPath>dll\Emgu.CV.ML.dll</HintPath>
+      <HintPath>_emgu_dll_x64\Emgu.CV.ML.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
-      <HintPath>dll\Emgu.CV.UI.dll</HintPath>
+      <HintPath>_emgu_dll_x64\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>dll\Emgu.Util.dll</HintPath>
+      <HintPath>_emgu_dll_x64\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -90,13 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="opencv_core231.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="opencv_highgui231.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ZedGraph.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
