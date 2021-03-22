@@ -37,6 +37,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,13 +77,13 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(700, 50);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(337, 480);
+            this.richTextBox1.Size = new System.Drawing.Size(337, 500);
             this.richTextBox1.TabIndex = 32;
             this.richTextBox1.Text = "";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(449, 11);
+            this.button4.Location = new System.Drawing.Point(343, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 31;
@@ -90,7 +93,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(264, 11);
+            this.button3.Location = new System.Drawing.Point(207, 12);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 30;
@@ -100,7 +103,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(183, 11);
+            this.button2.Location = new System.Drawing.Point(126, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 29;
@@ -127,11 +130,44 @@
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(978, 507);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(59, 23);
+            this.bt_clear.TabIndex = 36;
+            this.bt_clear.Text = "clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(424, 12);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 37;
+            this.button8.Text = "上下顛倒";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(505, 11);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 38;
+            this.button9.Text = "左右相反";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1132, 777);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -160,6 +196,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

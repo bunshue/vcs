@@ -7,16 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
+
 
 namespace vcs_WebCam_Emgu0s
 {
     public partial class Form1 : Form
     {
-        private Capture cap = null;             // Webcam物件
-        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
+        // Webcam物件
+        private Capture cap = null;
+        //判斷是否啟動webcam的frame旗標
+        private bool _captureInProgress = false;
 
         bool _isRecording = false;
         string _fileName;
@@ -26,11 +30,6 @@ namespace vcs_WebCam_Emgu0s
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //宣告Timer 0.1秒執行一次
             _timer = new Timer();
@@ -38,9 +37,9 @@ namespace vcs_WebCam_Emgu0s
             _timer.Tick += new EventHandler(TimerEventProcessor);
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+
         }
 
         private void TimerEventProcessor(object sender, EventArgs e)
@@ -85,10 +84,10 @@ namespace vcs_WebCam_Emgu0s
             if (cap != null)
             {
                 //frame啟動
-                if (flag_webcam_ok == true)
+                if (_captureInProgress == true)
                 {
                     //stop the capture
-                    flag_webcam_ok = false;
+                    _captureInProgress = false;
                     button1.Text = "開啟";
                     _timer.Stop();
                 }
@@ -96,7 +95,7 @@ namespace vcs_WebCam_Emgu0s
                 else
                 {
                     //start the capture
-                    flag_webcam_ok = true;
+                    _captureInProgress = true;
                     button1.Text = "關閉";
                     _timer.Start();
                 }
@@ -127,13 +126,11 @@ namespace vcs_WebCam_Emgu0s
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (_isRecording == true)
-            {
-                //錄影完需將影像停止不然會出錯
-                _isRecording = false;
-                video.Dispose();
-                richTextBox1.Text += "停止錄影\n";
-            }
+            //錄影完需將影像停止不然會出錯
+            _isRecording = false;
+            video.Dispose();
+
+            richTextBox1.Text += "停止錄影\n";
         }
 
         //拍攝照片
@@ -239,13 +236,13 @@ namespace vcs_WebCam_Emgu0s
             //灰階
             Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
         */
-        /*
-                                //二值化
-                                Image<Gray, Byte> gray1 = gray.ThresholdToZero(new Gray(Settings.ThresholdToZero));
-                                //http://www.cnblogs.com/xrwang/archive/2010/03/03/ImageFeatureDetection.html.
-                                //Canny算子也可以用作边缘检测
-                                Image<Gray, Byte> gray2 = gray1.Canny(new Gray(Settings.LowThresh), new Gray(Settings.HighThresh));
-         */
+            /*
+                                    //二值化
+                                    Image<Gray, Byte> gray1 = gray.ThresholdToZero(new Gray(Settings.ThresholdToZero));
+                                    //http://www.cnblogs.com/xrwang/archive/2010/03/03/ImageFeatureDetection.html.
+                                    //Canny算子也可以用作边缘检测
+                                    Image<Gray, Byte> gray2 = gray1.Canny(new Gray(Settings.LowThresh), new Gray(Settings.HighThresh));
+             */
 
         /*
             Bitmap image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -259,16 +256,16 @@ namespace vcs_WebCam_Emgu0s
                 g.DrawImage(gray.Bitmap, rct2, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
                 g.DrawRectangle(new Pen(Color.Black), rct2);
         */
-        /*
-                       Rectangle rct3 = new Rectangle(new Point(H / 2, 0), new Size(W / 2, H / 2));
-                       g.DrawImage(gray1.Bitmap, rct3, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
-                       g.DrawRectangle(new Pen(Color.Black), rct3);
+                /*
+                               Rectangle rct3 = new Rectangle(new Point(H / 2, 0), new Size(W / 2, H / 2));
+                               g.DrawImage(gray1.Bitmap, rct3, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
+                               g.DrawRectangle(new Pen(Color.Black), rct3);
  
-                       Rectangle rct4 = new Rectangle(new Point(H / 2, W / 2), new Size(W / 2, H / 2));
+                               Rectangle rct4 = new Rectangle(new Point(H / 2, W / 2), new Size(W / 2, H / 2));
  
-                       g.DrawImage(gray2.Bitmap, rct4, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
-                       g.DrawRectangle(new Pen(Color.Black), rct4);
-       */
+                               g.DrawImage(gray2.Bitmap, rct4, new Rectangle(new Point(0, 0), new Size(W, H)), GraphicsUnit.Pixel);
+                               g.DrawRectangle(new Pen(Color.Black), rct4);
+               */
         /*
             }
             pictureBox1.Image = image;
@@ -290,84 +287,9 @@ namespace vcs_WebCam_Emgu0s
             //Image<Gray, int> inputImage = new Image<Gray, byte>(new Size(640, 480));
             //pictureBox1.Image = inputImage.ToBitmap();
 
-
-
-
-            //string filename = @"C:\______test_files\pic_256X100.jpg";
-            string filename = @"C:\______test_files\pic_256X100b.bmp";
-
-            //Load the Image
-            Image<Bgr, Byte> img1 = new Image<Bgr, byte>(filename);
-
-            //Display the Image
-            pictureBox1.Image = img1.ToBitmap();
-
-            int W = img1.Bitmap.Width;
-            int H = img1.Bitmap.Height;
-            int len = img1.Bytes.Length;
-
-
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-            richTextBox1.Text += "Length = " + len.ToString() + "\n";
-            richTextBox1.Text += "W = " + img1.Size.Width.ToString() + ", H = " + img1.Size.Height.ToString() + "\n";
-            richTextBox1.Text += "W = " + img1.Width.ToString() + ", H = " + img1.Height.ToString() + "\n";
-            richTextBox1.Text += "cols = " + img1.Cols.ToString() + ", rows = " + img1.Rows.ToString() + "\n";
-
-            int i;
-            for (i = 0; i < img1.Bytes.Length / 100; i++)
-            {
-                richTextBox1.Text += img1.Bytes[i].ToString() + " ";
-            }
-
-
-            //不能直接修改數值 ?!?!
-            for (i = 0; i < 500; i++)
-            {
-                //img1.Bytes[i] = (byte)(((int)img1.Bytes[i] + (int)img1.Bytes[i + 1] + (int)img1.Bytes[i + 2]) / 3);
-                img1.Bytes[i] = 0;
-            }
-
-
-            pictureBox1.Image = img1.ToBitmap();
-
-            richTextBox1.Text += "\n\n";
-
-            for (i = 0; i < img1.Bytes.Length / 100; i++)
-            {
-                richTextBox1.Text += img1.Bytes[i].ToString() + " ";
-            }
-
-
-
-            /*
-            Image<Bgr, Byte> img2 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL);
-            pictureBox2.Image = img2.ToBitmap();
-
-            Image<Bgr, Byte> img3 = img1.Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
-            pictureBox3.Image = img3.ToBitmap();
-
-            Image<Bgr, Byte> img4 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL).Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
-            pictureBox4.Image = img4.ToBitmap();
-            */
-
         }
+ 
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //上下顛倒
-            if (cap != null)
-            {
-                cap.FlipVertical = !cap.FlipVertical;
-            }
-        }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //左右相反
-            if (cap != null)
-            {
-                cap.FlipHorizontal = !cap.FlipHorizontal;
-            }
-        }
     }
 }
