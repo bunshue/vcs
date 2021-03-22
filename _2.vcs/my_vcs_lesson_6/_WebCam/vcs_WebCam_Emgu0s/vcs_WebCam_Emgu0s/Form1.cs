@@ -103,6 +103,7 @@ namespace vcs_WebCam_Emgu0s
             }
         }
 
+        //錄影
         private void button2_Click(object sender, EventArgs e)
         {
             openWebCam();
@@ -125,6 +126,7 @@ namespace vcs_WebCam_Emgu0s
             richTextBox1.Text += "開始錄影\n";
         }
 
+        //停止錄影
         private void button3_Click(object sender, EventArgs e)
         {
             if (_isRecording == true)
@@ -136,7 +138,7 @@ namespace vcs_WebCam_Emgu0s
             }
         }
 
-        //拍攝照片
+        //截圖
         private void button4_Click(object sender, EventArgs e)
         {
             openWebCam();
@@ -352,18 +354,18 @@ namespace vcs_WebCam_Emgu0s
 
         }
 
+        //上下顛倒
         private void button8_Click(object sender, EventArgs e)
         {
-            //上下顛倒
             if (cap != null)
             {
                 cap.FlipVertical = !cap.FlipVertical;
             }
         }
 
+        //左右相反
         private void button9_Click(object sender, EventArgs e)
         {
-            //左右相反
             if (cap != null)
             {
                 cap.FlipHorizontal = !cap.FlipHorizontal;

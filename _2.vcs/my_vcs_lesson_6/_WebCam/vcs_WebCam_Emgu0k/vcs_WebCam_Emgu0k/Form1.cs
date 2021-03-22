@@ -16,9 +16,14 @@ namespace vcs_WebCam_Emgu0k
 {
     public partial class Form1 : Form
     {
-        bool flag_webcam_ok = false;
-        private Capture cap = null;
+        private Capture cap = null;             // Webcam物件
         private Capture cap2 = null;
+        private bool flag_webcam_ok = false;    //判斷是否啟動webcam的旗標
+
+        bool _isRecording = false;
+        string _fileName;
+        Timer _timer;
+        VideoWriter video;
 
         public Form1()
         {
@@ -39,6 +44,26 @@ namespace vcs_WebCam_Emgu0k
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        /// <summary>
+        /// 開啟攝影機
+        /// </summary>
+        private void openWebCam()
+        {
+            //如果webcam沒啟動
+            if (cap == null)
+            {
+                try
+                {
+                    //打開預設的webcam
+                    cap = new Capture();
+                }
+                catch (NullReferenceException excpt)
+                {
+                    MessageBox.Show(excpt.Message);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,8 +89,43 @@ namespace vcs_WebCam_Emgu0k
             }
         }
 
-        //截圖
+        //錄影
         private void button2_Click(object sender, EventArgs e)
+        {
+            openWebCam();
+
+            _timer.Start();
+
+            _fileName = Application.StartupPath + "\\avi_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".avi";
+
+            richTextBox1.Text += "filename : " + _fileName + "\n";
+            richTextBox1.Text += "Width : " + cap.Width.ToString() + "\n";
+            richTextBox1.Text += "Height : " + cap.Height.ToString() + "\n";
+
+            //cap.Width 取得攝影機可支援的最大寬度
+            //cap.Height 取得攝影機可支援的最大高度
+            video = new VideoWriter(_fileName, 0, 10, cap.Width, cap.Height, true);
+
+            //開啟錄影模式
+            _isRecording = true;
+
+            richTextBox1.Text += "開始錄影\n";
+        }
+
+        //停止錄影
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (_isRecording == true)
+            {
+                //錄影完需將影像停止不然會出錯
+                _isRecording = false;
+                video.Dispose();
+                richTextBox1.Text += "停止錄影\n";
+            }
+        }
+
+        //截圖
+        private void button4_Click(object sender, EventArgs e)
         {
             if (flag_webcam_ok == false)
             {
@@ -89,40 +149,7 @@ namespace vcs_WebCam_Emgu0k
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-        }
 
-        //離開
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "離開 ......\n";
-
-            if (flag_webcam_ok == true)
-            {
-                cap.Dispose();
-            }
-
-            Application.Exit();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (flag_webcam_ok == true)
-            {
-                double W;
-                double H;
-                double frame_count;
-                double fps;
-
-                W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
-                H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
-                frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
-                fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
-
-                richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
-                richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
-                richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
-                richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -176,6 +203,120 @@ namespace vcs_WebCam_Emgu0k
             Image<Bgr, Byte> image = cap2.QueryFrame();
             pictureBox1.Image = image.ToBitmap();
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //string filename = @"C:\______test_files\pic_256X100.jpg";
+            string filename = @"C:\______test_files\pic_256X100b.bmp";
+
+            //Load the Image
+            Image<Bgr, Byte> img1 = new Image<Bgr, byte>(filename);
+
+            //Display the Image
+            pictureBox1.Image = img1.ToBitmap();
+
+            int W = img1.Bitmap.Width;
+            int H = img1.Bitmap.Height;
+            int len = img1.Bytes.Length;
+
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            richTextBox1.Text += "Length = " + len.ToString() + "\n";
+            richTextBox1.Text += "W = " + img1.Size.Width.ToString() + ", H = " + img1.Size.Height.ToString() + "\n";
+            richTextBox1.Text += "W = " + img1.Width.ToString() + ", H = " + img1.Height.ToString() + "\n";
+            richTextBox1.Text += "cols = " + img1.Cols.ToString() + ", rows = " + img1.Rows.ToString() + "\n";
+
+            int i;
+            for (i = 0; i < img1.Bytes.Length / 100; i++)
+            {
+                richTextBox1.Text += img1.Bytes[i].ToString() + " ";
+            }
+
+
+            //不能直接修改數值 ?!?!
+            for (i = 0; i < 500; i++)
+            {
+                //img1.Bytes[i] = (byte)(((int)img1.Bytes[i] + (int)img1.Bytes[i + 1] + (int)img1.Bytes[i + 2]) / 3);
+                img1.Bytes[i] = 0;
+            }
+
+
+            pictureBox1.Image = img1.ToBitmap();
+
+            richTextBox1.Text += "\n\n";
+
+            for (i = 0; i < img1.Bytes.Length / 100; i++)
+            {
+                richTextBox1.Text += img1.Bytes[i].ToString() + " ";
+            }
+
+
+
+            /*
+            Image<Bgr, Byte> img2 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL);
+            pictureBox2.Image = img2.ToBitmap();
+
+            Image<Bgr, Byte> img3 = img1.Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
+            pictureBox3.Image = img3.ToBitmap();
+
+            Image<Bgr, Byte> img4 = img1.Flip(Emgu.CV.CvEnum.FLIP.HORIZONTAL).Flip(Emgu.CV.CvEnum.FLIP.VERTICAL);
+            pictureBox4.Image = img4.ToBitmap();
+            */
+
+        }
+
+        //離開
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "離開 ......\n";
+
+            if (flag_webcam_ok == true)
+            {
+                cap.Dispose();
+            }
+
+            Application.Exit();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (flag_webcam_ok == true)
+            {
+                double W;
+                double H;
+                double frame_count;
+                double fps;
+
+                W = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH);
+                H = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT);
+                frame_count = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_COUNT);
+                fps = cap.GetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS);
+
+                richTextBox1.Text += "FRAME_WIDTH = " + W.ToString() + "\n";
+                richTextBox1.Text += "FRAME_HEIGHT = " + H.ToString() + "\n";
+                richTextBox1.Text += "FRAME_COUNT = " + frame_count.ToString() + "\n";
+                richTextBox1.Text += "FPS = " + fps.ToString() + "\n";
+            }
+
+        }
+
+        //上下顛倒
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (cap != null)
+            {
+                cap.FlipVertical = !cap.FlipVertical;
+            }
+        }
+
+        //左右相反
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (cap != null)
+            {
+                cap.FlipHorizontal = !cap.FlipHorizontal;
+            }
         }
     }
 }
