@@ -1,0 +1,15 @@
+使用Emgu.CV, kilo可用_修改方法
+
+1. 做一個專案, 先存檔
+2. 開啟專案, 參考/加入參考 到C:\Emgu\emgucv-windows-x86 2.3.0.1416\bin 選4個Emgu.XX.dll
+3. 編輯Form1.cs
+
+
+3個Emgu.XX.dll
+
+Emgu.CV.dll
+	(X)Emgu.CV.ML.dll
+Emgu.CV.UI.dll
+Emgu.Util.dll
+
+
