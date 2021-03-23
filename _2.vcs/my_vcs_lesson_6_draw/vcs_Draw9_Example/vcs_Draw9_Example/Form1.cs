@@ -45,7 +45,8 @@ namespace vcs_Draw9_Example
 
             p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
             sb = new SolidBrush(Color.Blue);
-            g.Clear(Color.Red);             //useless??
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
 
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.BackColor = Color.Pink;
